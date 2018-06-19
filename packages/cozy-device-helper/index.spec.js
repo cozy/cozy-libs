@@ -1,7 +1,7 @@
 import {
   isWebApp,
   isMobileApp,
-  isIosApp,
+  isIOSApp,
   isAndroidApp,
   getPlatform
 } from '.'
@@ -18,10 +18,10 @@ describe('platforms', () => {
   })
   it('should identify is an iOS or Android application', () => {
     window.cordova = { platformId: 'ios' }
-    expect(isIosApp()).toBeTruthy()
+    expect(isIOSApp()).toBeTruthy()
     expect(isAndroidApp()).toBeFalsy()
     window.cordova = { platformId: 'android' }
-    expect(isIosApp()).toBeFalsy()
+    expect(isIOSApp()).toBeFalsy()
     expect(isAndroidApp()).toBeTruthy()
   })
   it('should return platform', () => {

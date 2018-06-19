@@ -11,14 +11,14 @@
 ### Platforms
 
 ```
-import { isWebApp, isMobileApp, isIosApp, isAndroidApp } from 'cozy-device-helper'
+import { isWebApp, isMobileApp, isIOSApp, isAndroidApp } from 'cozy-device-helper'
 ```
 
 To know the platform:
 - `getPlatform()`: return `ios`, `android` or `web`
 - `isWebApp()`: return `boolean`
 - `isMobileApp()`: return `boolean`
-- `isIosApp()`: return `boolean`
+- `isIOSApp()`: return `boolean`
 - `isAndroidApp()`: return `boolean`
 
 ### Device Name

@@ -11,7 +11,7 @@ const isCordova = () => window.cordova !== undefined
 // platform
 export const getPlatform = () => isCordova() ? window.cordova.platformId : WEB_PLATFORM
 const isPlatform = platform => getPlatform() === platform
-export const isIosApp = () => isPlatform(IOS_PLATFORM)
+export const isIOSApp = () => isPlatform(IOS_PLATFORM)
 export const isAndroidApp = () => isPlatform(ANDROID_PLATFORM)
 export const isWebApp = () => isPlatform(WEB_PLATFORM)
 export const isMobileApp = () => isCordova()
@@ -42,7 +42,7 @@ export const getDeviceName = () => {
 
   const { manufacturer, model: originalModel } = window.device
 
-  const model = isIosApp() ? getAppleModel(originalModel) : originalModel
+  const model = isIOSApp() ? getAppleModel(originalModel) : originalModel
 
   return `${capitalize(manufacturer)} ${model}`
 }
