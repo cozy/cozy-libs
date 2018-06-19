@@ -1,0 +1,16 @@
+{
+  "name": "cozy-device-helper",
+  "version": "0.1.0",
+  "description": "To know more information about the device platform",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "author": "Cozy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/README.md"
+}
