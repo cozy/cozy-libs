@@ -2,7 +2,10 @@
   "name": "cozy-device-helper",
   "version": "0.2.0",
   "description": "To know more information about the device platform",
-  "main": "index.js",
+  "main": "build.js",
+  "scripts": {
+    "build": "babel index.js -o build.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
@@ -12,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/README.md"
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/README.md",
+  "devDependencies": {
+    "babel-cli": "6.26.0"
+  }
 }
