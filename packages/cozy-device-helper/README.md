@@ -15,10 +15,11 @@ import { isWebApp, isMobileApp, isIosApp, isAndroidApp } from 'cozy-device-help
 ```
 
 To know the platform:
-- `isWebApp()`
-- `isMobileApp()`
-- `isIosApp()`
-- `isAndroidApp()`
+- `getPlatform()`: return `ios`, `android` or `web`
+- `isWebApp()`: return `boolean`
+- `isMobileApp()`: return `boolean`
+- `isIosApp()`: return `boolean`
+- `isAndroidApp()`: return `boolean`
 
 ### Device Name
 

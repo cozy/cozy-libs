@@ -7,7 +7,7 @@ const DEFAULT_DEVICE = 'Device'
 const isCordova = () => window.cordova !== undefined
 
 // platform
-const getPlatform = () => isCordova() ? window.cordova.platformId : WEB_PLATFORM
+export const getPlatform = () => isCordova() ? window.cordova.platformId : WEB_PLATFORM
 const isPlatform = platform => getPlatform() === platform
 export const isIosApp = () => isPlatform(IOS_PLATFORM)
 export const isAndroidApp = () => isPlatform(ANDROID_PLATFORM)
