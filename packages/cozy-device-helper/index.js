@@ -1,3 +1,5 @@
+import capitalize from 'lodash/capitalize'
+
 const WEB_PLATFORM = 'web'
 const IOS_PLATFORM = 'ios'
 const ANDROID_PLATFORM = 'android'

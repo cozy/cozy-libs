@@ -4,7 +4,7 @@
   "description": "To know more information about the device platform",
   "main": "build.js",
   "scripts": {
-    "build": "babel index.js -o build.js"
+    "build": "babel index.js -o build.js --minified"
   },
   "repository": {
     "type": "git",
@@ -18,5 +18,8 @@
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/README.md",
   "devDependencies": {
     "babel-cli": "6.26.0"
+  },
+  "dependencies": {
+    "lodash": "4.17.10"
   }
 }
