@@ -11,7 +11,7 @@
 ### Platforms
 
 ```
-import { isWebApp, isMobileApp, isIOSApp, isAndroidApp } from 'cozy-device-helper'
+import { getPlatform, isWebApp, isMobileApp, isIOSApp, isAndroidApp } from 'cozy-device-helper'
 ```
 
 To know the platform:
@@ -28,3 +28,13 @@ import { getDeviceName } from 'cozy-device-helper'
 ```
 
 To know device name `getDeviceName()`.
+
+### Cordova Plugins
+
+```
+import { hasDevicePlugin, hasInAppBrowserPlugin, hasSafariPlugin } from 'cozy-device-helper'
+```
+
+- `hasDevicePlugin`: return `boolean`
+- `hasInAppBrowserPlugin`: return `boolean`
+- `hasSafariPlugin`: return a promise which resolve by a `boolean`

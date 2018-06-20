@@ -3,8 +3,11 @@ import {
   isMobileApp,
   isIOSApp,
   isAndroidApp,
-  getPlatform
-} from '.'
+  getPlatform,
+  hasDevicePlugin,
+  hasInAppBrowserPlugin,
+  hasSafariPlugin
+} from './index'
 
 describe('platforms', () => {
   it('should identify is a web application', () => {
@@ -31,5 +34,40 @@ describe('platforms', () => {
     expect(getPlatform()).toEqual('ios')
     window.cordova = { platformId: 'android' }
     expect(getPlatform()).toEqual('android')
+  })
+})
+
+describe('cordova plugins', () => {
+  it('should identify has device plugin', () => {
+    window.cordova = true
+    window.device = true
+    expect(hasDevicePlugin()).toBeTruthy()
+    window.cordova = undefined
+    window.device = true
+    expect(hasDevicePlugin()).toBeFalsy()
+    window.cordova = true
+    window.device = undefined
+    expect(hasDevicePlugin()).toBeFalsy()
+  })
+  it('should identify has InAppBrowser plugin', () => {
+    window.cordova = { InAppBrowser: true }
+    expect(hasInAppBrowserPlugin()).toBeTruthy()
+    window.cordova = { }
+    expect(hasInAppBrowserPlugin()).toBeFalsy()
+  })
+  it('should identify has Safari plugin', async () => {
+    let hasSafari
+    window.cordova = true
+    window.SafariViewController = { isAvailable: (f) => f(true) }
+    hasSafari = await hasSafariPlugin()
+    expect(hasSafari).toBeTruthy()
+    window.cordova = undefined
+    window.SafariViewController = { isAvailable: (f) => f(true) }
+    hasSafari = await hasSafariPlugin()
+    expect(hasSafari).toBeFalsy()
+    window.cordova = true
+    window.SafariViewController = undefined
+    hasSafari = await hasSafariPlugin()
+    expect(hasSafari).toBeFalsy()
   })
 })

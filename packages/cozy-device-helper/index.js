@@ -16,10 +16,25 @@ export const isAndroidApp = () => isPlatform(ANDROID_PLATFORM)
 export const isWebApp = () => isPlatform(WEB_PLATFORM)
 export const isMobileApp = () => isCordova()
 
-// device
-export const hasDeviceCordovaPlugin = () =>
-  isCordova() && window.device !== undefined
+// plugin
+export const hasDevicePlugin = () => {
+  return isCordova() && window.device !== undefined
+}
+export const hasInAppBrowserPlugin = () => {
+  return isCordova() && window.cordova.InAppBrowser !== undefined
+}
+export const hasSafariPlugin = () => {
+  return new Promise(resolve => {
+    if (!isCordova() || window.SafariViewController === undefined) {
+      resolve(false)
+      return
+    }
 
+    window.SafariViewController.isAvailable(available => resolve(available))
+  })
+}
+
+// device
 const getAppleModel = identifier => {
   const devices = ['iPhone', 'iPad', 'Watch', 'AppleTV']
 
