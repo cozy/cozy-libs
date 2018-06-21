@@ -1,0 +1,29 @@
+{
+  "name": "cozy-authentication",
+  "version": "1.2.0",
+  "description": "Component providing login to a Cozy",
+  "main": "build/index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "scripts": {
+    "styleguide": "styleguidist server",
+    "styleguide:build": "styleguidist build",
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "build:production": "webpack -p --env.production",
+    "build:analyze": "source-map-explorer build/index.js"
+  },
+  "devDependencies": {
+    "eslint-cli": "^1.1.1",
+    "jest": "22.0.6",
+    "react-styleguidist": "6.5.3",
+    "webpack": "3.11.0",
+    "webpack-node-externals": "1.7.2"
+  },
+  "peerDependencies": {
+    "cozy-ui": "9.3.1"
+  },
+  "dependencies": {
+    "url-polyfill": "1.0.11"
+  }
+}

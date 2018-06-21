@@ -1,0 +1,116 @@
+@require 'settings/breakpoints.styl'
+@require 'components/button.styl'
+@require 'components/forms.styl'
+@require 'settings/palette.styl'
+
+.wizard
+    @extend $form
+    @extend $form-text
+    position fixed
+    top 0
+    left 0
+    height 100%
+    display flex
+    flex-direction column
+    width   85vw
+    padding 0 7.5vw
+    background-color white
+    color            black
+    text-align center
+
+    .wizard-header
+        display         flex
+        flex-direction  row
+        margin-top      2rem
+        justify-content flex-start
+
+        .button-previous
+            width      2rem
+            height     2rem
+            cursor     pointer
+            background-size contain
+            background-position center
+            background-repeat no-repeat
+
+            &.--cross
+                background-image embedurl("./assets/icons/icon-cross-grey.svg")
+
+    .logo-wrapper
+        max-width     3.5rem
+        height        3.5rem
+        margin        .5rem auto 3rem auto
+        padding       1.25rem
+        border-radius 50%
+        box-shadow    0 .0625rem .1875rem rgba(50, 54, 63, .19), 0 .25rem .75rem rgba(50, 54, 63, .12)
+
+        &.error
+            background pomegranate
+
+    .wizard-main
+        margin auto
+        padding 0 .5rem
+        width 100%
+        box-sizing border-box
+
+    .title
+        margin    .25rem auto
+        font-size 1.5rem
+
+    .description
+        text-align center
+        margin     .5rem 0
+        font-size  1.125rem
+        max-width  25rem
+
+        &.error
+            color pomegranate
+            font-size .75rem
+            font-style italic
+
+        &.info
+            color coolGrey
+            font-size .75rem
+            font-style italic
+
+    .coz-form-label
+        text-align left
+
+    .input
+        width 100%
+
+        &::placeholder
+            color   charcoalGrey
+            opacity .5
+
+        &.error
+            color pomegranate
+            border-color pomegranate
+
+
+    .wizard-footer
+        display flex
+        flex-direction column
+        margin-bottom 1.5rem
+
+        > .link
+            margin          1.5rem .5rem 0rem .5rem
+            text-align      left
+            text-decoration none
+            color           dodgerBlue
+
+.select-server
+    .description
+        text-align left
+
+    .description p
+        margin 0
+
+.welcome .logo-wrapper, .select-server .logo-wrapper
+    background dodgerBlue
+
+
+// ASSETS
+.cozy-logo-white
+    height  3.5rem
+    background embedurl("./assets/icons/icon-cozy.svg") center no-repeat
+    background-size contain
