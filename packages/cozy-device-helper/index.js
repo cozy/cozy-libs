@@ -50,7 +50,7 @@ const getAppleModel = identifier => {
 export const getDeviceName = () => {
   if (!hasDevicePlugin()) {
     if (isCordova()) {
-      console.warning('You should install `cordova-plugin-device`.')
+      console.warn('You should install `cordova-plugin-device`.')
     }
     return DEFAULT_DEVICE
   }
