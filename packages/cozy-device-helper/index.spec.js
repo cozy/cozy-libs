@@ -52,17 +52,17 @@ describe('cordova plugins', () => {
   it('should identify has InAppBrowser plugin', () => {
     window.cordova = { InAppBrowser: true }
     expect(hasInAppBrowserPlugin()).toBeTruthy()
-    window.cordova = { }
+    window.cordova = {}
     expect(hasInAppBrowserPlugin()).toBeFalsy()
   })
   it('should identify has Safari plugin', async () => {
     let hasSafari
     window.cordova = true
-    window.SafariViewController = { isAvailable: (f) => f(true) }
+    window.SafariViewController = { isAvailable: f => f(true) }
     hasSafari = await hasSafariPlugin()
     expect(hasSafari).toBeTruthy()
     window.cordova = undefined
-    window.SafariViewController = { isAvailable: (f) => f(true) }
+    window.SafariViewController = { isAvailable: f => f(true) }
     hasSafari = await hasSafariPlugin()
     expect(hasSafari).toBeFalsy()
     window.cordova = true

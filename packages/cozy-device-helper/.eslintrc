@@ -1,0 +1,4 @@
+{
+  "env": { "jasmine": true },
+  "extends": ["cozy-app"]
+}
