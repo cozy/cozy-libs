@@ -29,5 +29,8 @@
   },
   "dependencies": {
     "lodash": "4.17.10"
+  },
+  "jest": {
+    "testURL": "http://localhost"
   }
 }
