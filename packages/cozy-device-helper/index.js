@@ -61,3 +61,5 @@ export const getDeviceName = () => {
 
   return `${capitalize(manufacturer)} ${model}`
 }
+
+export { checkApp, startApp } from './app'
