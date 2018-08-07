@@ -19,6 +19,10 @@
   },
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/README.md",
   "devDependencies": {
+    "babel-core": "6.26.3",
+    "babel-jest": "23.0.1",
+    "babel-preset-cozy-app": "^0.10.1",
+    "babel-preset-env": "1.7.0",
     "babel-cli": "6.26.0",
     "babel-preset-cozy-app": "0.8.0"
   },
