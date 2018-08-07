@@ -2,12 +2,12 @@
   "name": "cozy-device-helper",
   "version": "1.2.1",
   "description": "To know more information about the device platform",
-  "main": "build.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepublishOnly": "yarn run build",
-    "build": "babel index.js -o build.js --minified",
+    "build": "babel src/index.js -o dist/index.js --minified",
     "test": "yarn run jest",
-    "lint": "yarn eslint --fix '*.js'"
+    "lint": "yarn eslint --fix 'src/**/*.js'"
   },
   "repository": {
     "type": "git",
