@@ -4,7 +4,9 @@
   "description": "To know more information about the device platform",
   "main": "build.js",
   "scripts": {
-    "build": "babel index.js -o build.js --minified"
+    "prepublishOnly": "yarn run build",
+    "build": "babel index.js -o build.js --minified",
+    "test": "yarn run jest"
   },
   "repository": {
     "type": "git",
