@@ -4,7 +4,9 @@
   "description": "To know more information about the device platform",
   "main": "build.js",
   "scripts": {
-    "build": "babel index.js -o build.js --minified"
+    "prepublish": "npx build",
+    "build": "babel index.js -o build.js --minified",
+    "test": "npx jest"
   },
   "repository": {
     "type": "git",
