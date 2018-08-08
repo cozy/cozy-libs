@@ -11,10 +11,13 @@ script:
   - yarn lint
   - yarn test
   - yarn build
+before_deploy:
+  - git config --global user.email "npm@cozycloud.cc"
+  - git config --global user.name "Cozy Bot"
 deploy:
   - provider: script
     skip-cleanup: true
-    script: yarn lerna publish --yes
+    script: git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes
     on:
       branch: master
       repo: cozy/cozy-libs
@@ -22,7 +25,7 @@ env:
   global:
     # GITHUB_TOKEN
     # To generate a new key: travis encrypt GITHUB_TOKEN=<token> -r cozy/cozy-libs
-    - secure: SUGyuZhisHUX9aqS6Bj8h8NFvgMseeV1e5rtVJPvXwOxUXt0Qfet0rz9cK1VsmI3hg3YyK7OUqjnMSjuEomVulTBkOpZoFNERNLAfXhd7akoz3JGj+RbYdtTkHPSgBliE17osiR2ECwiXcAl5dql0iolnxz7ux9DpeROMc+EWQY4EP1OZGu0lQiZRcx4v+g+9BZOnzqNze35K7PWlYBi4DEa4V1sqrrWymuVhCIwYvze+lIm7KG0jOkIHkH0MkHW7qUJwMXLI0KArpgRfWwIOCa80xdyPa8XtNztvIHoNoNr8nSjXnMSoCKUNqBIoDiHuqozQJ16oz9eC7DEzySmUiUxgAuSBzYTRQRegQxjfQ/yUJuA0NRCa2HOAwTwSiAYzvVrzhWUlE9z5KOdBAMn1HG72f1lcLLnKzXhAqPXoRKdVvDWIBry7CcgQi1QndYvX0G1Xu6zw9tq1aLJxX3UlQ+4JPdEAYFuIkVVrwDnffT440Y3y2IbtlApcXRsfofXvMSoMR93z+AZ8LJu4i5Ng/gHIRg0yo9zCW4mVVIczOTVwO3t9KTgV/depv/w+XNcl1UrkF1Vng/4BJwuHYCSetKCwpU4X8jLmRDqrCCtCuy/iRxWGbkO4NwAZkkgq5TqCyYLh68MspEb+eoCkaLsuZSAFVAMHV+PxW5Vh38Hq0A=
+    - secure: "Wr3QBHRI8PNhAa10310zQvA5Jm5ATrKmPAHVK3i/CrO/t2mOueLPiSyovjC3ZXN1sgFxU4mN7cWfgUtsKs9kcqFL+7WdSUHYwpZfCeOFnQC6RwVFvnqQ6JTk7xhVTC+gcHBZ9T95YeUfKnJk7B413RT2X3csLWPNzl5cv1gQ1rrkvLuKePARX5zmHh1zP64pzCbiqUc54xVMHxdvQJcro/PkAuWEqMWJuEsf6W8+XYPWBC4S8IbLjeuAqFXimCqzaWHABPMVim7QiH4Jf2F0Vfw45lOy59XI5tS6rLclga+Nfsy9uSGe8eO7NVg4ksEIOyded/sq46oCLRu1udCncFsUSM7hiSZU1FNBKtX1Z7F3Xe86A3ZR0MQxN1tDEPRwEqt7pSF7dSbdyJ1izpz8d6yUCkG/jI3SnSs7iQA5zg/qy4msDqjvWkyVAhoXnrcwWF+6foFEvfgJQl5zJzlEOAGvALDGTBghl7CBL4QejpR698XzkCrjliz6ltvB8DCBA+crq1L5VqlRWIH14ye/f2NUdv/Yfi3adVLtXb/t/gAFip4hYyS644jfOzhBpDhu5OJgAr5ytmu2sE1yU4G/r6+hxVWwBeAYvrVwn+v7zlT9JV2SKCR31XA4ggX598FvoKVHMQBMGA1QZzIqGHcRiEoUqPCxLGHTqQ2DHuOd1cs="
     # NPM_TOKEN
     # To generate a new key: travis encrypt NPM_TOKEN=<token> -r cozy/cozy-libs
     - secure: "VtQfFYCDSd46bmXea3FrjSSalHr635wT95X9q+SGVz0mMKUgfJjW4ZOLb8D6pFOBE0gGt7+USxHROL3GJiH1YFCrwd1jBgvQ4V4a1dAiSfhT1x7ghztan6WwlH2Uigpm/rvbDt9IjPbVyn5TaI7meCO6P8zJLS+Grcosz/b7THdSweT9gUnBPSui+9Nai8JtS5bSMMs6DVleNs9yxvZqioPzSo/gVWVLP6aOm8oUbV3/Sqi1vzAd3HiZCqe9WVSti3xd2WVk87QtHdKpCb3ZFWT0WlGUuBxrcrbtSQpnYoCFOG3QVFCxErxO0sMtzB+LzE9lyffwREQiPTQI3HBssS80rGU/0cmixJgWOXKQseNLDd/raOELsZXFQenGZZbzVwOnAoj7TvtU3/ZKpuxV0APt1YOhtHrDBuSDUUx8ecwc3XvFBOgH9bSzMEXdtSWp9FKGBXY5LuDRudzgha1wcMo8UJuJqJki8cGEjXLi7bLfpgu7zm/6w9841kMwwWOe2zN/yYXLYp8mtBRo6AUh2aA6uaV6P3P/y/m7POZelnWEiXtLIVGhYwWKthNA79WTXZmFiWV3kyREZ3Zca5TQkQ9xXKWMpLYgweIxWQNuyt6QJAqPDPlzO+nedTA/9bp8oy3sUrKBsqruwyHgrYeM+st7YWieNV315bMf6vcPaqo="
