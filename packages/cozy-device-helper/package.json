@@ -10,6 +10,7 @@
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
   },
+  "files": ["dist"],
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
