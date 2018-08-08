@@ -2,7 +2,6 @@
 
 const prefix = 'flag__'
 const getKey = name => prefix + name
-const some = require('lodash/some')
 
 const setFlag = (name, value) => {
   return localStorage.setItem(getKey(name), JSON.stringify(value))
