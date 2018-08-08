@@ -1,6 +1,6 @@
 {
   "name": "cozy-device-helper",
-  "version": "1.4.2",
+  "version": "1.4.3",
   "description": "To know more information about the device platform",
   "main": "dist/index.js",
   "author": "Cozy",

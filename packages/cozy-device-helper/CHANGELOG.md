@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.3"></a>
+## [1.4.3](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.2...cozy-device-helper@1.4.3) (2018-08-08)
+
+
+### Bug Fixes
+
+* do not remove dist from npm ([28a1373](https://github.com/cozy/cozy-libs/commit/28a1373))
+
+
+
+
 <a name="1.4.2"></a>
 ## [1.4.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.1...cozy-device-helper@1.4.2) (2018-08-08)
 
