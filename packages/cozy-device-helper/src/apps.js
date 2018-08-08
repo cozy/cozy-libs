@@ -1,4 +1,3 @@
-/* global startApp */
 import { isAndroidApp } from './platform'
 
 const cordovaPluginIsInstalled = () => global.startApp
