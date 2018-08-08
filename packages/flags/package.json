@@ -3,9 +3,16 @@
   "version": "1.2.0",
   "description": "Flag library used in Cozy",
   "main": "dist/index.js",
-  "repository": "https://github.com/cozy/flags",
   "author": "Cozy",
   "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/flags/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
   "scripts": {
     "lint": "eslint --fix src/**",
     "build": "babel src -d dist",

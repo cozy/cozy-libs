@@ -3,8 +3,16 @@
   "version": "1.1.0",
   "description": "Realtime interactions with cozy-stack using Websocket",
   "main": "dist/index.js",
-  "author": "Cozy Cloud",
+  "author": "Cozy",
   "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/realtime/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
   "scripts": {
     "test": "true",
     "lint": "eslint --fix src/**",
