@@ -1,0 +1,13 @@
+language: node_js
+node_js:
+  - '8'
+env:
+  global:
+cache:
+  yarn: true
+  directories:
+    - node_modules
+script:
+  - yarn lint
+  - yarn test
+  - yarn build

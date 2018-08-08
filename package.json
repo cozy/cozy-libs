@@ -1,23 +1,24 @@
 {
   "name": "cozy-libs",
   "description": "Sharing Helpers for Cozy Application Development",
-  "scripts": {
-    "test": "jest"
-  },
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
   },
-  "author": "Cozy",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
-  "homepage": "https://github.com/cozy/cozy-libs#readme",
+  "scripts": {
+    "postinstall": "lerna bootstrap",
+    "lint": "lerna run --parallel lint",
+    "test": "lerna run --parallel test",
+    "build": "lerna run --parallel build"
+  },
   "devDependencies": {
-    "babel-core": "6.26.3",
-    "babel-jest": "23.0.1",
-    "babel-preset-env": "1.7.0",
-    "jest": "23.1.0"
+    "jest": "23.3.0",
+    "lerna": "2.11.0"
   }
 }
