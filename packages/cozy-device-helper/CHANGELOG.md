@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.1...cozy-device-helper@1.4.2) (2018-08-08)
+
+
+### Bug Fixes
+
+* correctly export functions ([2cc9e2f](https://github.com/cozy/cozy-libs/commit/2cc9e2f))
+* plugin reference ([59fd756](https://github.com/cozy/cozy-libs/commit/59fd756))
+* remove global variable ([7b8120c](https://github.com/cozy/cozy-libs/commit/7b8120c))
+
+
+
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.0...cozy-device-helper@1.4.1) (2018-08-08)
 
