@@ -59,15 +59,18 @@ export default class FlagSwitcher extends React.Component {
       flag('switcher') && (
         <div className="flag-switcher" style={getStyle(this.state)}>
           <FoldButton
-            onClick={() => this.setState(prevState => ({
-              folded: !prevState.folded
-            }))}
+            onClick={() =>
+              this.setState(prevState => ({
+                folded: !prevState.folded
+              }))
+            }
           >
             {this.state.folded ? 'Show' : 'Hide'} flags
           </FoldButton>
           <button onClick={() => this.setState({ date: Date.now() })}>
             refresh
-          </button>&nbsp;
+          </button>
+          &nbsp;
           <button
             onClick={() =>
               flag.reset() && flag('switcher', true) && this.forceUpdate()

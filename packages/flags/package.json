@@ -7,15 +7,14 @@
   "author": "Cozy",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint --fix 'src/**/*.js'",
-    "build": "babel -d dist/ src",
+    "lint": "eslint --fix src/**",
+    "build": "babel src -d dist",
     "test": "true",
     "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-cozy-app": "0.10.0",
-    "eslint-config-cozy-app": "0.10.0",
-    "jest": "23.4.2"
+    "eslint-config-cozy-app": "0.10.0"
   }
 }
