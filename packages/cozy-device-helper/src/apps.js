@@ -1,6 +1,6 @@
 import { isAndroidApp } from './platform'
 
-const cordovaPluginIsInstalled = () => global.startApp
+const cordovaPluginIsInstalled = () => window.startApp
 
 /**
  * Normalize startApp params for Android and iOS

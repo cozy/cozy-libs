@@ -6,8 +6,8 @@ describe('apps helpers', () => {
     const mockStart = jest.fn().mockImplementation(successCb => {
       successCb(ok)
     })
-    global.startApp = {
-      set: () => global.startApp,
+    window.startApp = {
+      set: () => window.startApp,
       start: mockStart
     }
     appHelpers.checkApp = jest.fn().mockImplementation(async () => {
