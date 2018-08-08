@@ -4,6 +4,7 @@
   "author": "Cozy",
   "license": "MIT",
   "homepage": "https://github.com/cozy/cozy-libs#readme",
+  "private": "true",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
@@ -15,10 +16,19 @@
     "postinstall": "lerna bootstrap",
     "lint": "lerna run --parallel lint",
     "test": "lerna run --parallel test",
-    "build": "lerna run --parallel build"
+    "build": "lerna run --parallel build",
+    "commitmsg": "commitlint -e $GIT_PARAMS"
   },
   "devDependencies": {
+    "@commitlint/cli": "7.0.0",
+    "@commitlint/config-conventional": "7.0.1",
+    "husky": "0.14.3",
     "jest": "23.3.0",
     "lerna": "2.11.0"
+  },
+  "commitlint": {
+    "extends": [
+      "@commitlint/config-conventional"
+    ]
   }
 }
