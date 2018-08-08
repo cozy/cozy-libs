@@ -8,6 +8,6 @@ cache:
   directories:
     - node_modules
 script:
-  - lerna run --parallel lint
-  - lerna run --parallel test
-  - lerna run --parallel build
+  - yarn lint
+  - yarn test
+  - yarn build
