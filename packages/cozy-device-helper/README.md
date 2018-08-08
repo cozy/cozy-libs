@@ -8,33 +8,77 @@
 
 ## API
 
-### Platforms
+### Functions
 
-```
-import { getPlatform, isWebApp, isMobileApp, isIOSApp, isAndroidApp } from 'cozy-device-helper'
-```
+<dl>
+<dt><a href="#getDeviceName">getDeviceName()</a> ⇒ <code>string</code></dt>
+<dd></dd>
+<dt><a href="#getPlatform">getPlatform()</a> ⇒ <code>string</code></dt>
+<dd></dd>
+<dt><a href="#isIOSApp">isIOSApp()</a> ⇒ <code>boolean</code></dt>
+<dd></dd>
+<dt><a href="#isAndroidApp">isAndroidApp()</a> ⇒ <code>boolean</code></dt>
+<dd></dd>
+<dt><a href="#isWebApp">isWebApp()</a> ⇒ <code>string</code></dt>
+<dd></dd>
+<dt><a href="#isMobileApp">isMobileApp()</a> ⇒ <code>boolean</code></dt>
+<dd></dd>
+<dt><a href="#hasDevicePlugin">hasDevicePlugin()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check for the Cordova device plugin</p>
+</dd>
+<dt><a href="#hasInAppBrowserPlugin">hasInAppBrowserPlugin()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check for the Cordova plugin InAppBrowser</p>
+</dd>
+<dt><a href="#hasSafariPlugin">hasSafariPlugin()</a> ⇒ <code>boolean</code></dt>
+<dd><p>Check for the Cordova SafariViewController plugin</p>
+</dd>
+</dl>
 
-To know the platform:
-- `getPlatform()`: return `ios`, `android` or `web`
-- `isWebApp()`: return `boolean`
-- `isMobileApp()`: return `boolean`
-- `isIOSApp()`: return `boolean`
-- `isAndroidApp()`: return `boolean`
+<a name="getDeviceName"></a>
 
-### Device Name
+### getDeviceName() ⇒ <code>string</code>
+**Kind**: global function  
+**Returns**: <code>string</code> - - Returns a string representing the name of the device (manufacturer and model)  
+<a name="getPlatform"></a>
 
-```
-import { getDeviceName } from 'cozy-device-helper'
-```
+### getPlatform() ⇒ <code>string</code>
+**Kind**: global function  
+**Returns**: <code>string</code> - - Current platform ("ios", "android", "web")  
+<a name="isIOSApp"></a>
 
-To know device name `getDeviceName()`.
+### isIOSApp() ⇒ <code>boolean</code>
+**Kind**: global function  
+**Returns**: <code>boolean</code> - - Are we on iOS  
+<a name="isAndroidApp"></a>
 
-### Cordova Plugins
+### isAndroidApp() ⇒ <code>boolean</code>
+**Kind**: global function  
+**Returns**: <code>boolean</code> - - Are we on Android  
+<a name="isWebApp"></a>
 
-```
-import { hasDevicePlugin, hasInAppBrowserPlugin, hasSafariPlugin } from 'cozy-device-helper'
-```
+### isWebApp() ⇒ <code>string</code>
+**Kind**: global function  
+**Returns**: <code>string</code> - - Current platform ("ios", "android", "web")  
+<a name="isMobileApp"></a>
 
-- `hasDevicePlugin`: return `boolean`
-- `hasInAppBrowserPlugin`: return `boolean`
-- `hasSafariPlugin`: return a promise which resolve by a `boolean`
+### isMobileApp() ⇒ <code>boolean</code>
+**Kind**: global function  
+**Returns**: <code>boolean</code> - - Are we on mobile, checks for Cordova presence  
+<a name="hasDevicePlugin"></a>
+
+### hasDevicePlugin() ⇒ <code>boolean</code>
+Check for the Cordova device plugin
+
+**Kind**: global function  
+<a name="hasInAppBrowserPlugin"></a>
+
+### hasInAppBrowserPlugin() ⇒ <code>boolean</code>
+Check for the Cordova plugin InAppBrowser
+
+**Kind**: global function  
+<a name="hasSafariPlugin"></a>
+
+### hasSafariPlugin() ⇒ <code>boolean</code>
+Check for the Cordova SafariViewController plugin
+
+**Kind**: global function  

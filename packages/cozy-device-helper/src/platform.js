@@ -4,10 +4,39 @@ const WEB_PLATFORM = 'web'
 const IOS_PLATFORM = 'ios'
 const ANDROID_PLATFORM = 'android'
 
-export const getPlatform = () =>
+/**
+ * @return {string} - Current platform ("ios", "android", "web")
+ */
+export function getPlatform() {
   isCordova() ? window.cordova.platformId : WEB_PLATFORM
+}
+
 const isPlatform = platform => getPlatform() === platform
-export const isIOSApp = () => isPlatform(IOS_PLATFORM)
-export const isAndroidApp = () => isPlatform(ANDROID_PLATFORM)
-export const isWebApp = () => isPlatform(WEB_PLATFORM)
-export const isMobileApp = () => isCordova()
+
+/**
+ * @return {boolean} - Are we on iOS
+ */
+export function isIOSApp() {
+  return isPlatform(IOS_PLATFORM)
+}
+
+/**
+ * @return {boolean} - Are we on Android
+ */
+export function isAndroidApp() {
+  return isPlatform(ANDROID_PLATFORM)
+}
+
+/**
+ * @return {string} - Current platform ("ios", "android", "web")
+ */
+export function isWebApp() {
+  return isPlatform(WEB_PLATFORM)
+}
+
+/**
+ * @return {boolean} - Are we on mobile, checks for Cordova presence
+ */
+export function isMobileApp() {
+  return isCordova()
+}

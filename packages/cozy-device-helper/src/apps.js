@@ -5,6 +5,8 @@ const cordovaPluginIsInstalled = () => global.startApp
 
 /**
  * Normalize startApp params for Android and iOS
+ * @returns {object|string}
+ * @private
  */
 const getParams = ({ appId, uri }) => {
   if (isAndroidApp()) {
@@ -20,8 +22,7 @@ const exported = {}
 
 /**
  * Start an application if it is installed on the phone
- * @returns Promise - False if the application was not able to be started
- */
+ * @returns Promise - False if the application was not able to be started */
 exported.startApp = async appInfo => {
   const isAppInstalled = await exported.checkApp(appInfo)
   if (isAppInstalled) {
@@ -44,7 +45,6 @@ exported.startApp = async appInfo => {
 /**
  * Check that an application is installed on the phone
  * @returns Promise - Promise containing information on the application
- *
  * @example
  * > checkApp({ appId: 'io.cozy.drive.mobile', uri: 'cozydrive://' })
  * Promise.resolve({

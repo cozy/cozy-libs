@@ -19,7 +19,10 @@ const getAppleModel = identifier => {
   return DEFAULT_DEVICE
 }
 
-export const getDeviceName = () => {
+/**
+ * @return {string} - Returns a string representing the name of the device (manufacturer and model)
+ */
+export function getDeviceName() {
   if (!hasDevicePlugin()) {
     if (isCordova()) {
       console.warn('You should install `cordova-plugin-device`.') // eslint-disable-line no-console

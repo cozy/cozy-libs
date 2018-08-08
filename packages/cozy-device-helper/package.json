@@ -7,7 +7,8 @@
     "prepublishOnly": "yarn run build",
     "build": "babel src/ -d dist/",
     "test": "jest",
-    "lint": "eslint --fix 'src/**/*.js'"
+    "lint": "eslint --fix 'src/**/*.js'",
+    "docs": "jsdoc2md --heading-depth 3 --example-lang js --template docs/README.template src/**/*.js > README.md"
   },
   "repository": {
     "type": "git",
@@ -26,7 +27,8 @@
     "babel-preset-cozy-app": "0.8.0",
     "babel-preset-env": "1.7.0",
     "eslint-config-cozy-app": "^0.10.0",
-    "jest": "^23.4.2"
+    "jest": "^23.4.2",
+    "jsdoc-to-markdown": "^4.0.1"
   },
   "dependencies": {
     "lodash": "4.17.10"

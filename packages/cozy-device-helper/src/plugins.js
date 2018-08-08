@@ -1,12 +1,26 @@
 import { isCordova } from './cordova'
 
-export const hasDevicePlugin = () => {
+/**
+ * Check for the Cordova device plugin
+ * @return {boolean}
+ */
+export function hasDevicePlugin() {
   return isCordova() && window.device !== undefined
 }
-export const hasInAppBrowserPlugin = () => {
+
+/**
+ * Check for the Cordova plugin InAppBrowser
+ * @return {boolean}
+ */
+export function hasInAppBrowserPlugin() {
   return isCordova() && window.cordova.InAppBrowser !== undefined
 }
-export const hasSafariPlugin = () => {
+
+/**
+ * Check for the Cordova SafariViewController plugin
+ * @return {boolean}
+ */
+export function hasSafariPlugin() {
   return new Promise(resolve => {
     if (!isCordova() || window.SafariViewController === undefined) {
       resolve(false)
