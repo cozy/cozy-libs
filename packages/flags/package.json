@@ -1,0 +1,21 @@
+{
+  "name": "cozy-flags",
+  "version": "1.1.1",
+  "description": "Flag library used in Cozy",
+  "main": "dist/index.js",
+  "repository": "https://github.com/cozy/flags",
+  "author": "Cozy",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --fix 'src/**/*.js'",
+    "build": "babel -d dist/ src",
+    "test": "true",
+    "prepublishOnly": "yarn build"
+  },
+  "devDependencies": {
+    "babel-cli": "6.26.0",
+    "babel-preset-cozy-app": "0.10.0",
+    "eslint-config-cozy-app": "0.10.0",
+    "jest": "23.4.2"
+  }
+}

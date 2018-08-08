@@ -11,3 +11,18 @@ script:
   - yarn lint
   - yarn test
   - yarn build
+deploy:
+  - provider: script
+    skip-cleanup: true
+    script: yarn lerna publish --yes
+    on:
+      branch: master
+      repo: cozy/cozy-libs
+env:
+  global:
+    # GITHUB_TOKEN
+    # To generate a new key: travis encrypt GITHUB_TOKEN=<token> -r cozy/cozy-libs
+    - secure: SUGyuZhisHUX9aqS6Bj8h8NFvgMseeV1e5rtVJPvXwOxUXt0Qfet0rz9cK1VsmI3hg3YyK7OUqjnMSjuEomVulTBkOpZoFNERNLAfXhd7akoz3JGj+RbYdtTkHPSgBliE17osiR2ECwiXcAl5dql0iolnxz7ux9DpeROMc+EWQY4EP1OZGu0lQiZRcx4v+g+9BZOnzqNze35K7PWlYBi4DEa4V1sqrrWymuVhCIwYvze+lIm7KG0jOkIHkH0MkHW7qUJwMXLI0KArpgRfWwIOCa80xdyPa8XtNztvIHoNoNr8nSjXnMSoCKUNqBIoDiHuqozQJ16oz9eC7DEzySmUiUxgAuSBzYTRQRegQxjfQ/yUJuA0NRCa2HOAwTwSiAYzvVrzhWUlE9z5KOdBAMn1HG72f1lcLLnKzXhAqPXoRKdVvDWIBry7CcgQi1QndYvX0G1Xu6zw9tq1aLJxX3UlQ+4JPdEAYFuIkVVrwDnffT440Y3y2IbtlApcXRsfofXvMSoMR93z+AZ8LJu4i5Ng/gHIRg0yo9zCW4mVVIczOTVwO3t9KTgV/depv/w+XNcl1UrkF1Vng/4BJwuHYCSetKCwpU4X8jLmRDqrCCtCuy/iRxWGbkO4NwAZkkgq5TqCyYLh68MspEb+eoCkaLsuZSAFVAMHV+PxW5Vh38Hq0A=
+    # NPM_TOKEN
+    # To generate a new key: travis encrypt NPM_TOKEN=<token> -r cozy/cozy-libs
+    - secure: "VtQfFYCDSd46bmXea3FrjSSalHr635wT95X9q+SGVz0mMKUgfJjW4ZOLb8D6pFOBE0gGt7+USxHROL3GJiH1YFCrwd1jBgvQ4V4a1dAiSfhT1x7ghztan6WwlH2Uigpm/rvbDt9IjPbVyn5TaI7meCO6P8zJLS+Grcosz/b7THdSweT9gUnBPSui+9Nai8JtS5bSMMs6DVleNs9yxvZqioPzSo/gVWVLP6aOm8oUbV3/Sqi1vzAd3HiZCqe9WVSti3xd2WVk87QtHdKpCb3ZFWT0WlGUuBxrcrbtSQpnYoCFOG3QVFCxErxO0sMtzB+LzE9lyffwREQiPTQI3HBssS80rGU/0cmixJgWOXKQseNLDd/raOELsZXFQenGZZbzVwOnAoj7TvtU3/ZKpuxV0APt1YOhtHrDBuSDUUx8ecwc3XvFBOgH9bSzMEXdtSWp9FKGBXY5LuDRudzgha1wcMo8UJuJqJki8cGEjXLi7bLfpgu7zm/6w9841kMwwWOe2zN/yYXLYp8mtBRo6AUh2aA6uaV6P3P/y/m7POZelnWEiXtLIVGhYwWKthNA79WTXZmFiWV3kyREZ3Zca5TQkQ9xXKWMpLYgweIxWQNuyt6QJAqPDPlzO+nedTA/9bp8oy3sUrKBsqruwyHgrYeM+st7YWieNV315bMf6vcPaqo="
