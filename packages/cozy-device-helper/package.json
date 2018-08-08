@@ -6,8 +6,8 @@
   "scripts": {
     "prepublishOnly": "yarn run build",
     "build": "babel src/ -d dist/",
-    "test": "yarn run jest",
-    "lint": "yarn eslint --fix 'src/**/*.js'"
+    "test": "jest",
+    "lint": "eslint --fix 'src/**/*.js'"
   },
   "repository": {
     "type": "git",
