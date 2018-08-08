@@ -23,6 +23,7 @@ const exported = {}
  * @returns Promise - False if the application was not able to be started
  */
 const startApp = (exported.startApp = async function(appInfo) {
+  const startAppPlugin = window.startApp
   const isAppInstalled = await exported.checkApp(appInfo)
   if (isAppInstalled) {
     const params = getParams(appInfo)
@@ -34,7 +35,7 @@ const startApp = (exported.startApp = async function(appInfo) {
         return
       }
 
-      global.startApp.set(params).start(resolve, reject)
+      startAppPlugin.set(params).start(resolve, reject)
     })
   } else {
     return false
@@ -55,6 +56,7 @@ const startApp = (exported.startApp = async function(appInfo) {
  * })
  */
 const checkApp = (exported.checkApp = async function(appInfo) {
+  const startAppPlugin = window.startApp
   const params = getParams(appInfo)
   return new Promise((resolve, reject) => {
     if (!cordovaPluginIsInstalled()) {
@@ -62,7 +64,7 @@ const checkApp = (exported.checkApp = async function(appInfo) {
       return
     }
 
-    startApp.set(params).check(
+    startAppPlugin.set(params).check(
       infos => {
         resolve(infos === 'OK' ? true : infos)
       },
