@@ -18,11 +18,6 @@ deploy:
     on:
       branch: master
       repo: cozy/cozy-libs
-  - provider: pages
-    skip-cleanup: true
-    target-branch: master
-    keep-history: true
-    github-token: $GITHUB_TOKEN
 env:
   global:
     # GITHUB_TOKEN
