@@ -22,7 +22,7 @@ const exported = {}
  * Start an application if it is installed on the phone
  * @returns Promise - False if the application was not able to be started
  */
-exported.startApp = async appInfo => {
+const startApp = (exported.startApp = async function(appInfo) {
   const isAppInstalled = await exported.checkApp(appInfo)
   if (isAppInstalled) {
     const params = getParams(appInfo)
@@ -39,7 +39,7 @@ exported.startApp = async appInfo => {
   } else {
     return false
   }
-}
+})
 
 /**
  * Check that an application is installed on the phone
@@ -54,7 +54,7 @@ exported.startApp = async appInfo => {
  *  applicationInfo: "ApplicationInfo{70aa0ef io.cozy.drive.mobile}"
  * })
  */
-exported.checkApp = async appInfo => {
+const checkApp = (exported.checkApp = async function(appInfo) {
   const params = getParams(appInfo)
   return new Promise((resolve, reject) => {
     if (!cordovaPluginIsInstalled()) {
@@ -78,6 +78,7 @@ exported.checkApp = async appInfo => {
       }
     )
   })
-}
+})
 
+export { checkApp, startApp }
 export default exported
