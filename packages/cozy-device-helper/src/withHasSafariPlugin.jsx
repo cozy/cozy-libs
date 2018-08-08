@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { isIOSApp, hasSafariPlugin } from '.'
 
-export const withHasSafariPlugin = eventHandlers => {
+export const withHasSafariPlugin = () => {
   return WrappedComponent => {
     return class withHasSafariPluginComponent extends PureComponent {
       state = {

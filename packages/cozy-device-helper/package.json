@@ -3,22 +3,25 @@
   "version": "1.4.0",
   "description": "To know more information about the device platform",
   "main": "dist/index.js",
-  "scripts": {
-    "prepublishOnly": "yarn run build",
-    "build": "babel src/ -d dist/",
-    "test": "jest",
-    "lint": "eslint --fix 'src/**/*.js'"
-  },
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-device-helper/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
   },
-  "author": "Cozy",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/README.md",
+  "scripts": {
+    "prepublishOnly": "yarn run build",
+    "build": "babel src -d dist",
+    "test": "jest",
+    "lint": "eslint --fix src/**"
+  },
+  "dependencies": {
+    "lodash": "4.17.10"
+  },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-core": "6.26.3",
@@ -27,9 +30,6 @@
     "babel-preset-env": "1.7.0",
     "eslint-config-cozy-app": "0.10.0",
     "jest": "23.4.2"
-  },
-  "dependencies": {
-    "lodash": "4.17.10"
   },
   "jest": {
     "testURL": "http://localhost"
