@@ -28,7 +28,7 @@
   },
   "commitlint": {
     "extends": [
-      "commitlint-config-cozy"
+      "./packages/commitlint-config"
     ]
   }
 }
