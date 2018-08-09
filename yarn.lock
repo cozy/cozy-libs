@@ -31,10 +31,6 @@
     lodash.pick "4.4.0"
     meow "^5.0.0"
 
-"@commitlint/config-conventional@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@commitlint/config-conventional/-/config-conventional-7.0.1.tgz#276977f8ee60d8c56d7fdd43296af76dfee9b5f7"
-
 "@commitlint/ensure@^7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@commitlint/ensure/-/ensure-7.0.0.tgz#3d5210bb988416844926895a782a55815731779d"
@@ -788,6 +784,10 @@ combined-stream@1.0.6, combined-stream@~1.0.5:
 command-join@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/command-join/-/command-join-2.0.0.tgz#52e8b984f4872d952ff1bdc8b98397d27c7144cf"
+
+commitlint-config-cozy@0.2.1:
+  version "0.2.1"
+  resolved "https://registry.yarnpkg.com/commitlint-config-cozy/-/commitlint-config-cozy-0.2.1.tgz#98dcfa24198f45af3b7fedd04a35ddaa8d68c486"
 
 compare-func@^1.3.1:
   version "1.3.2"
