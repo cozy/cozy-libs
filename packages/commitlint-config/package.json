@@ -1,5 +1,5 @@
 {
-  "name": "@mycozycloud/commitlint-config",
+  "name": "commitlint-config-cozy",
   "version": "0.2.1",
   "description": "Shareable commitlint config enforcing the cozy commit convention",
   "main": "index.js",
