@@ -9,3 +9,4 @@
 - [Cozy Device Helper](./packages/cozy-device-helper): To know more information about the device platform
 - [Cozy Flags](./packages/flags): Simple client side toggle flags
 - [Cozy Realtime](./packages/realtime): A simple way to have realtime using Websocket with cozy-stack
+- [Cozy Commitlint Config](./packages/commitlint-config): Shareable commitlint config enforcing the cozy commit convention

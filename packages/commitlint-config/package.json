@@ -1,0 +1,33 @@
+{
+  "name": "commitlint-config-cozy",
+  "version": "0.1.0",
+  "description": "Shareable commitlint config enforcing the cozy commit convention",
+  "main": "dist/index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/commitlint-config/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "test": "jest --env node src/**",
+    "lint": "eslint --fix src/**",
+    "build": "babel src -d dist --ignore *.spec.js"
+  },
+  "dependencies": {
+    "@commitlint/config-conventional": "7.0.1",
+    "lodash": "4.17.10"
+  },
+  "devDependencies": {
+    "@commitlint/lint": "7.0.0",
+    "babel-cli": "6.26.0",
+    "babel-jest": "23.4.2",
+    "babel-preset-cozy-app": "0.10.1",
+    "eslint-config-cozy-app": "0.10.0",
+    "jest": "23.4.2"
+  }
+}
