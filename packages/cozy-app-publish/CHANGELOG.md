@@ -1,4 +1,25 @@
 # Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+<a name="0.5.0"></a>
+# 0.5.0 (2018-08-10)
+
+
+### Bug Fixes
+
+* :fire: remove .prettierrc.json from cozy-app-publish ([1cd528c](https://github.com/cozy/cozy-libs/commit/1cd528c))
+
+
+### Features
+
+* import :sparkles: cozy-app-publish as a package ([403d90d](https://github.com/cozy/cozy-libs/commit/403d90d))
+
+
+
+
+# Change Log
 All notable changes to this project will be documented in this file.
 
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
