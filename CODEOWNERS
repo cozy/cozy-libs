@@ -4,3 +4,4 @@ packages/realtime @gregorylegarec @kosssi
 packages/babel-preset-cozy-app @cpatchane
 packages/eslint-config-cozy-app @cpatchane
 packages/commitlint-config @kosssi @enguerran
+packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
