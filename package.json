@@ -13,7 +13,6 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "postinstall": "lerna bootstrap",
     "lint": "lerna run --parallel lint",
     "test": "lerna run --parallel test",
     "build": "lerna run --parallel build",
@@ -30,5 +29,8 @@
     "extends": [
       "./packages/commitlint-config"
     ]
-  }
+  },
+  "workspaces": [
+    "packages/*"
+  ]
 }
