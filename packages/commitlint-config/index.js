@@ -29,7 +29,6 @@ module.exports = {
         'style',
         'test'
       ]
-    ],
-    'body-max-length': [2, 'always', 72]
+    ]
   }
 }
