@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.2"></a>
+## [0.2.2](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.2.1...commitlint-config-cozy@0.2.2) (2018-08-10)
+
+
+### Bug Fixes
+
+* Commitlint extend should start with @ 😢 ([dc9489f](https://github.com/cozy/cozy-libs/commit/dc9489f)), closes [40commitlint/resolve-extends/src/index.js#L71](https://github.com/40commitlint/resolve-extends/src/index.js/issues/L71)
+* Remove 72 chars limit on body description 🔥 ([5d1edd8](https://github.com/cozy/cozy-libs/commit/5d1edd8))
+
+
+
+
 <a name="0.2.1"></a>
 ## [0.2.1](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.2.0...commitlint-config-cozy@0.2.1) (2018-08-09)
 
