@@ -78,7 +78,9 @@ function connectIntentIframe(cozy, iframe, element, intent, data) {
       if (eventType === 'load') {
         // Safari 9.1 (At least) send a MessageEvent when the iframe loads,
         // making the handshake fails.
+        // eslint-disable-next-line no-console
         console.warn &&
+          // eslint-disable-next-line no-console
           console.warn(
             'Cozy Client ignored MessageEvent having data.type `load`.'
           )
@@ -104,7 +106,12 @@ function connectIntentIframe(cozy, iframe, element, intent, data) {
       if (handshaken && eventType === `intent-${intent._id}:compose`) {
         // Let start to name `type` as `doctype`, as `event.data` already have a `type` attribute.
         const { action, doctype, data } = event.data
-        const doc = await compose(cozy, action, doctype, data)
+        const doc = await compose(
+          cozy,
+          action,
+          doctype,
+          data
+        )
         return event.source.postMessage(doc, event.origin)
       }
 
