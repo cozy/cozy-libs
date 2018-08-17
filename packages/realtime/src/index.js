@@ -49,10 +49,12 @@ function getWebsocketProtocol(url) {
 }
 
 function getDomainFromUrl(url) {
-  const domainRegexp = new RegExp(`^https?:/{2}(.*)$`)
-  const m = url.match(domainRegexp)
-  if (m) {
-    return m[1]
+  try {
+    return new URL(url).host
+  } catch (error) {
+    // eslint-disable-next-line no-console
+    console.warn(`Cannot get domain from URL : ${error.message}`)
+    return null
   }
 }
 
@@ -68,6 +70,26 @@ function keepAlive(socket, interval, message) {
   return socket
 }
 
+const isRequired = [attr => !!attr, 'is required']
+const isString = [str => typeof str === 'string', 'should be a string']
+
+const validate = types => obj => {
+  for (const [attr, rules] of Object.entries(types)) {
+    for (const [validator, message] of rules) {
+      if (!validator(obj[attr])) {
+        throw new Error(`${attr} ${message}.`)
+      }
+    }
+  }
+}
+
+const configTypes = {
+  token: [isRequired, isString],
+  url: [isRequired, isString]
+}
+
+const validateConfig = validate(configTypes)
+
 async function connectWebSocket(
   config,
   onmessage,
@@ -75,6 +97,7 @@ async function connectWebSocket(
   numRetries,
   retryDelay
 ) {
+  validateConfig(config)
   return new Promise((resolve, reject) => {
     const protocol = getWebsocketProtocol(config.url)
     const domain = getDomainFromUrl(config.url)
