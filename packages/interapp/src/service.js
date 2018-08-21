@@ -1,4 +1,3 @@
-import { cozyFetchJSON } from '../fetch'
 import { errorSerializer } from './helpers'
 
 function listenClientData(intent, window) {
@@ -27,7 +26,7 @@ function maximize(element) {
   }
 }
 
-export function start(cozy, intentId, serviceWindow) {
+export const start = request => (intentId, serviceWindow) => {
   serviceWindow = serviceWindow || (typeof window !== 'undefined' && window)
   if (!serviceWindow || !serviceWindow.document) {
     return Promise.reject(new Error('Intent service should be used in browser'))
@@ -44,7 +43,7 @@ export function start(cozy, intentId, serviceWindow) {
   if (!intentId)
     return Promise.reject(new Error('Cannot retrieve intent from URL'))
 
-  return cozyFetchJSON(cozy, 'GET', `/intents/${intentId}`).then(intent => {
+  return request.get(intentId).then(intent => {
     let terminated = false
 
     const sendMessage = message => {

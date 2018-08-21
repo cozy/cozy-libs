@@ -1,5 +1,4 @@
 import { errorSerializer, pickService } from './helpers'
-import { create as createIntent } from './'
 
 const intentClass = 'coz-intent'
 
@@ -42,7 +41,7 @@ function injectIntentIframe(intent, element, url, options) {
 }
 
 // inject iframe for service in given element
-function connectIntentIframe(cozy, iframe, element, intent, data) {
+function connectIntentIframe(createIntent, iframe, element, intent, data) {
   const document = element.ownerDocument
   if (!document)
     return Promise.reject(
@@ -58,10 +57,10 @@ function connectIntentIframe(cozy, iframe, element, intent, data) {
   // Keeps only http://domain:port/
   const serviceOrigin = iframe.src.split('/', 3).join('/')
 
-  async function compose(cozy, action, doctype, data) {
-    const intent = await createIntent(cozy, action, doctype, data)
+  async function compose(action, doctype, data) {
+    const intent = await createIntent(action, doctype, data)
     hideIntentIframe(iframe)
-    const doc = await start(cozy, intent, element, {
+    const doc = await start(intent, element, {
       ...data,
       exposeIntentFrameRemoval: false
     })
@@ -107,7 +106,6 @@ function connectIntentIframe(cozy, iframe, element, intent, data) {
         // Let start to name `type` as `doctype`, as `event.data` already have a `type` attribute.
         const { action, doctype, data } = event.data
         const doc = await compose(
-          cozy,
           action,
           doctype,
           data
@@ -160,7 +158,12 @@ function connectIntentIframe(cozy, iframe, element, intent, data) {
   })
 }
 
-export function start(cozy, intent, element, data = {}, options = {}) {
+export const start = createIntent => (
+  intent,
+  element,
+  data = {},
+  options = {}
+) => {
   const service = pickService(intent, options.filterServices)
 
   if (!service) {
@@ -170,7 +173,7 @@ export function start(cozy, intent, element, data = {}, options = {}) {
   const iframe = injectIntentIframe(intent, element, service.href, options)
 
   return connectIntentIframe(
-    cozy,
+    createIntent,
     iframe,
     element,
     intent,
