@@ -116,7 +116,7 @@ async function manualPublish(
       await publish(publishOptions)
     } else {
       const errorMessage =
-        '↳ ❌  Publishing manually cancelled. Pblishing aborted.'
+        '↳ ❌  Publishing manually cancelled. Publishing aborted.'
       if (jest) {
         console.error(errorMessage)
       } else {
