@@ -4,8 +4,8 @@ import Request from './request'
 import { pickService, buildRedirectionURL, removeQueryString } from './helpers'
 
 class Intents {
-  constructor({ client, fetchJSON } = {}) {
-    this.request = new Request(fetchJSON || client.client.fetchJSON)
+  constructor({ client } = {}) {
+    this.request = new Request(client)
   }
 
   create(action, type, data = {}, permissions = []) {

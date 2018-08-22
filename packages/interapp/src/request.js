@@ -1,14 +1,14 @@
 class Request {
-  constructor(cozyFetchJSON) {
-    this.cozyFetchJSON = cozyFetchJSON
+  constructor(cozyClient) {
+    this.client = cozyClient.client
   }
 
   get(id) {
-    return this.cozyFetchJSON('GET', `/intents/${id}`)
+    return this.client.fetchJSON('GET', `/intents/${id}`)
   }
 
   post(action, type, data, permissions) {
-    return this.cozyFetchJSON('POST', '/intents', {
+    return this.client.fetchJSON('POST', '/intents', {
       data: {
         type: 'io.cozy.intents',
         attributes: {
