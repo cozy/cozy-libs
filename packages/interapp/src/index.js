@@ -4,8 +4,8 @@ import Request from './request'
 import { pickService, buildRedirectionURL, removeQueryString } from './helpers'
 
 class Interapp {
-  constructor(cozyFetchJSON) {
-    this.request = new Request(cozyFetchJSON)
+  constructor({ client, fetchJSON } = {}) {
+    this.request = new Request(fetchJSON || client.client.fetchJSON)
   }
 
   create(action, type, data = {}, permissions = []) {
