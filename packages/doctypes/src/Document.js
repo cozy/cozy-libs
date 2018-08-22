@@ -1,4 +1,5 @@
-const { omit, pick } = require('lodash')
+const omit = require('lodash/omit')
+const pick = require('lodash/pick')
 const size = require('lodash/size')
 const omitBy = require('lodash/omitBy')
 const isUndefined = require('lodash/isUndefined')
