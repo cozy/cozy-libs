@@ -1,6 +1,6 @@
 {
   "name": "cozy-interapp",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Cozy Interapp allows applications to interact with each other and not have access to all data",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -20,8 +20,8 @@
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
-    "babel-preset-cozy-app": "1.1.0",
-    "eslint-config-cozy-app": "1.1.0",
+    "babel-preset-cozy-app": "^1.1.1",
+    "eslint-config-cozy-app": "^1.1.1",
     "jest": "23.5.0"
   }
 }
