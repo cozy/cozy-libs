@@ -12,3 +12,4 @@
 - [Cozy Interapp](./packages/interapp): Cozy Interapp allows applications to interact with each other and not have access to all data
 - [Cozy Commitlint Config](./packages/commitlint-config): Shareable commitlint config enforcing the cozy commit convention
 - [ESLint Config Cozy App](./packages/eslint-config-cozy-app): A shareable config for eslint using prettier (for applications and libraries)
+- [Doctypes](./packages/doctypes): Tools for working with particular doctypes
