@@ -196,6 +196,17 @@ class Document {
     return duplicates
   }
 
+  /**
+   * Delete duplicates on the server. Find duplicates according to the
+   * idAttributes.
+   *
+   * @param  {Function} Priority (optional). Among duplicates, which one should be prioritized)
+   * @return {Promise}
+   * @example
+   * ```
+   * deleteDuplicates(doc => -doc.dateImport) // will duplicate documents so that the oldest document is conserved
+   * ```
+   */
   static async deleteDuplicates(priorityFn) {
     let allDocs = this.fetchAll()
     if (priorityFn) {
