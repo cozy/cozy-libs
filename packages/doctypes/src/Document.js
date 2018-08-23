@@ -208,7 +208,7 @@ class Document {
    * ```
    */
   static async deleteDuplicates(priorityFn) {
-    let allDocs = this.fetchAll()
+    let allDocs = await this.fetchAll()
     if (priorityFn) {
       allDocs = sortBy(allDocs, priorityFn)
     }

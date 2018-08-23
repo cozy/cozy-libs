@@ -41,6 +41,10 @@ describe('Document', () => {
   })
 
   describe('duplicates', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
     it('should find duplicates', () => {
       const data = [
         { a: 1, b: 1, c: 4 },
@@ -69,6 +73,25 @@ describe('Document', () => {
       expect(dups).toEqual([
         { a: 1, b: { c: 1 }, d: 5 },
         { a: 3, b: { c: 5 }, d: 7 }
+      ])
+    })
+
+    it('should delete duplicates', async () => {
+      const data = [
+        { a: 1, b: 1, c: 4 },
+        { a: 1, b: 1, c: 5 },
+        { a: 3, b: 4, c: 5 },
+        { a: 3, b: 5, c: 5 },
+        { a: 3, b: 5, c: 7 }
+      ]
+      jest.spyOn(Document, 'fetchAll').mockResolvedValue(data)
+      jest.spyOn(Document, 'deleteAll').mockResolvedValue([])
+      class AB extends Document {}
+      AB.idAttributes = ['a', 'b']
+      await AB.deleteDuplicates()
+      expect(Document.deleteAll).toHaveBeenCalledWith([
+        { a: 1, b: 1, c: 5 },
+        { a: 3, b: 5, c: 7 }
       ])
     })
   })
