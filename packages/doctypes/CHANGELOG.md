@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.1.3...cozy-doctypes@1.2.0) (2018-08-24)
+
+
+### Features
+
+* Better logs ([0990e43](https://github.com/cozy/cozy-libs/commit/0990e43))
+
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.1.2...cozy-doctypes@1.1.3) (2018-08-23)
 
