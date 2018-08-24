@@ -19,6 +19,7 @@ class BankAccount extends Document {
     const vendorIdAttr = this.vendorIdAttr
     const byNumber = keyBy(stackAccounts, numberAttr)
     const byVendorId = keyBy(stackAccounts, vendorIdAttr)
+
     return some(
       fetchedAccounts,
       acc => byNumber[acc[numberAttr]] && !byVendorId[acc[vendorIdAttr]]
