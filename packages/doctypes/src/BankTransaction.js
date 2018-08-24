@@ -52,12 +52,12 @@ class Transaction extends Document {
     let newTransactions = groups.newTransactions || []
     const updatedTransactions = groups.updatedTransactions || []
 
-    log('info', 'Saving data from a new Linxo account')
-    // If saving from a new linxo account, transactions will not have the same linxo ids as the ones in the
+    // If saving from a new banking vendor, transactions will not have the same vendor ids as the ones in the
     // database, we have to filter all transactions that are before our last save transactions
     const splitDate = getSplitDate(remoteTransactions, localTransactions)
     const onlyMostRecent = options.onlyMostRecent
     if (onlyMostRecent && splitDate) {
+      log('info', 'Saving transactions from a new vendor')
       log('info', `Not saving new transactions before: ${splitDate}`)
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
       newTransactions = newTransactions.filter(isAfterSplit)
