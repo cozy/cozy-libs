@@ -142,7 +142,7 @@ In order to upload files to our downcloud server, you will need to generate a ne
 - Generate a new key pair with `ssh-keygen -t rsa -b 4096 -f id_rsa_downcloud_myapp -C downcloud_myapp_deploy`.
 - Communicate the public key to someone who can deposit it on the downcloud server.
 - If you're running things locally, you'll want to run `ssh-add id_rsa_downcloud_myapp` to add it to your ssh-agent.
-- If you're planing to run this `cozy-app-publish` on Travis, you'll want to [encrypt that file first](https://docs.travis-ci.com/user/encrypting-files/#Automated-Encryption). Run `travis encrypt-file id_rsa_downcloud_myapp` and copy the output. This command also generate a `id_rsa_downcloud_myapp.enc`.
+- If you're planing to run this `cozy-app-publish` on Travis, you'll want to [encrypt that file first](https://docs.travis-ci.com/user/encrypting-files/#Automated-Encryption). Run `travis encrypt-file id_rsa_downcloud_myapp` and copy the output. This command also generates a `id_rsa_downcloud_myapp.enc`.
 - To add the key to Travis's ssh-agent, add the following lines in the `before_install` section of your `.travis.yml`, but don't forget to paste the output of `travis encrypt-file` where it's needed.
 
 ```
@@ -154,7 +154,7 @@ In order to upload files to our downcloud server, you will need to generate a ne
   fi
 ```
 
-- We recommend changing the path used for the private key. You can change the `-out` argument of the command output by `travis encrypt-file` and the corresponding path's in the commands above. `/tmp/id_rsa_downcloud_myapp` is a good place to store this key. You mays also change the `-in` argument of the same command, and change the path of the file `id_rsa_downcloud_myapp.enc` to whatever you want. We recomend using `./deploy/id_rsa_downcloud_myapp.enc` (don't forger to move also the file!).
+- We recommend changing the path used for the private key. You can change the `-out` argument of the command output by `travis encrypt-file` and the corresponding path's in the commands above. `/tmp/id_rsa_downcloud_myapp` is a good place to store this key. You mays also change the `-in` argument of the same command, and change the path of the file `id_rsa_downcloud_myapp.enc` to whatever you want. We recomend using `./deploy/id_rsa_downcloud_myapp.enc` (don't forget to move the file as well!).
 - Finally, **secure the private key**. If you're using Travis, the key is now stored by Travis so you should delete your local copy. If you're running things on your machine, make sure the private key doesn't end up in version control.
 
 ##### Rundeck postpublish hook
