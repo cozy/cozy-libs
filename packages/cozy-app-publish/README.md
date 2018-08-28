@@ -148,10 +148,8 @@ In order to upload files to our downcloud server, you will need to generate a ne
 ```
 - if [ "$TRAVIS_SECURE_ENV_VARS" != "false" ]; then PASTE_TRAVIS_ENCRYPT_OUTPUT_HERE; fi
 - if [ "$TRAVIS_SECURE_ENV_VARS" != "false" ]; then eval "$(ssh-agent -s)"; fi
-- if [ "$TRAVIS_SECURE_ENV_VARS" != "false" ]; then chmod 600 id_rsa_downcloud_myapp;
-  fi
-- if [ "$TRAVIS_SECURE_ENV_VARS" != "false" ]; then ssh-add id_rsa_downcloud_myapp;
-  fi
+- if [ "$TRAVIS_SECURE_ENV_VARS" != "false" ]; then chmod 600 id_rsa_downcloud_myapp; fi
+- if [ "$TRAVIS_SECURE_ENV_VARS" != "false" ]; then ssh-add id_rsa_downcloud_myapp; fi
 ```
 
 - We recommend changing the path used for the private key. You can change the `-out` argument of the command output by `travis encrypt-file` and the corresponding path's in the commands above. `/tmp/id_rsa_downcloud_myapp` is a good place to store this key.
