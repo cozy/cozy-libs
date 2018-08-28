@@ -1,6 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Prepublish script check for undefined mandatory options 1`] = `"appSlug cannot be undefined"`;
+exports[`Prepublish script check for bad values in options 1`] = `"appType should be one of the following values: webapp, konnector"`;
+
+exports[`Prepublish script check for undefined mandatory options 1`] = `"Option appVersion is required."`;
+
+exports[`Prepublish script check for undefined manifest mandatory options 1`] = `"Property type must be defined in manifest."`;
 
 exports[`Prepublish script generates sha256 1`] = `
 Object {

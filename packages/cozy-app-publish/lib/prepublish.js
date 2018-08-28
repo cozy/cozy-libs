@@ -30,23 +30,43 @@ const sanitize = options => {
   }
 }
 
+const isRequiredFromManifest = manifestAttribute => [
+  field => typeof field !== 'undefined',
+  () => `Property ${manifestAttribute} must be defined in manifest.`
+]
+
+const isRequired = [
+  field => typeof field !== 'undefined',
+  key => `Option ${key} is required.`
+]
+
+const isOneOf = values => [
+  field => values.includes(field),
+  key => `${key} should be one of the following values: ${values.join(', ')}`
+]
+
+const optionsTypes = {
+  appBuildUrl: [isRequired],
+  appSlug: [isRequiredFromManifest('slug')],
+  appType: [isRequiredFromManifest('type'), isOneOf(['webapp', 'konnector'])],
+  appVersion: [isRequired],
+  registryUrl: [isRequired],
+  registryEditor: [isRequired],
+  registryToken: [isRequired]
+}
+
 /**
  * Check if all expected options are defined
  */
 const check = options => {
-  ;[
-    'appBuildUrl',
-    'appSlug',
-    'appType',
-    'appVersion',
-    'registryUrl',
-    'registryEditor',
-    'registryToken'
-  ].forEach(option => {
-    if (typeof options[option] === 'undefined') {
-      throw new Error(`${option} cannot be undefined`)
-    }
-  })
+  for (const option in optionsTypes) {
+    const validators = optionsTypes[option]
+    validators.forEach(validator => {
+      if (!validator[0](options[option])) {
+        throw new Error(validator[1](option))
+      }
+    })
+  }
 
   return options
 }

@@ -39,6 +39,23 @@ describe('Prepublish script', () => {
     await expect(prepublishLib(options)).rejects.toThrowErrorMatchingSnapshot()
   })
 
+  it('check for undefined manifest mandatory options', async () => {
+    const options = {
+      ...optionsMock,
+      prepublishHook:
+        './test/__mocks__/prepublish-missing-manifest-options-hook'
+    }
+    await expect(prepublishLib(options)).rejects.toThrowErrorMatchingSnapshot()
+  })
+
+  it('check for bad values in options', async () => {
+    const options = {
+      ...optionsMock,
+      prepublishHook: './test/__mocks__/prepublish-bad-value-options-hook'
+    }
+    await expect(prepublishLib(options)).rejects.toThrowErrorMatchingSnapshot()
+  })
+
   it('runs without errors with built-in hook', async () => {
     const options = { ...optionsMock, prepublishHook: 'downcloud' }
     await expect(prepublishLib(options)).resolves.toMatchSnapshot()
