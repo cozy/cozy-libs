@@ -76,17 +76,23 @@ async function travisPublish({
     appBuildUrl = `${githubUrl}/${buildHash}.tar.gz`
   }
 
-  const publishOptions = await prepublish({
-    prepublishHook,
-    registryUrl,
-    registryEditor,
-    registryToken,
-    spaceName,
-    appSlug,
-    appVersion,
-    appBuildUrl,
-    appType
-  })
+  let publishOptions
+  try {
+    publishOptions = await prepublish({
+      prepublishHook,
+      registryUrl,
+      registryEditor,
+      registryToken,
+      spaceName,
+      appSlug,
+      appVersion,
+      appBuildUrl,
+      appType
+    })
+  } catch (error) {
+    console.error(`↳ ❌  Prepublish failed: ${error.message}`)
+    return
+  }
 
   // publish the application on the registry
   console.log(
