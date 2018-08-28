@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.4"></a>
+## [0.5.4](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.5.3...cozy-app-publish@0.5.4) (2018-08-28)
+
+
+### Bug Fixes
+
+* :pencil2: typo in deploy scripts example in readme ([cf3b558](https://github.com/cozy/cozy-libs/commit/cf3b558))
+
+
+
+
 <a name="0.5.3"></a>
 ## [0.5.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.5.2...cozy-app-publish@0.5.3) (2018-08-22)
 
