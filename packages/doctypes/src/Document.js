@@ -107,6 +107,25 @@ async function createOrUpdate(
 
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
+/**
+ * Like a map, executed in parallel via a promise pool
+ *
+ * @param  {Array}    arr          Items to process
+ * @param  {Function} fn           Promise creator (will be passed each item)
+ * @param  {Number}   concurrency  How many promise can be in flight at the same time
+ * @return {Promise}               Resolved with the results of the promise, not necessary in order
+ */
+const parallelMap = (iterable, fn, concurrency) => {
+  concurrency = concurrency || 30
+  const res = []
+  const pool = new PromisePool(function*() {
+    for (let item of iterable) {
+      yield fn(item).then(x => res.push(x))
+    }
+  }, concurrency)
+  return pool.start().then(() => res)
+}
+
 class Document {
   static registerClient(client) {
     cozyClient = client
@@ -126,14 +145,13 @@ class Document {
   }
 
   static bulkSave(documents, concurrency = 30) {
-    const kls = this
-    const res = []
-    const pool = new PromisePool(function*() {
-      for (let doc of documents) {
-        yield kls.createOrUpdate(doc).then(x => res.push(x))
-      }
-    }, concurrency)
-    return pool.start().then(() => res)
+    return parallelMap(
+      documents,
+      doc => {
+        return this.createOrUpdate(doc)
+      },
+      concurrency
+    )
   }
 
   static query(index, options) {
