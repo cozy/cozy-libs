@@ -144,10 +144,14 @@ class Document {
     return cozyClient.data.create(this.doctype, attributes)
   }
 
-  static bulkSave(documents, concurrency = 30) {
+  static bulkSave(documents, concurrency, logProgress) {
+    concurrency = concurrency || 30
     return parallelMap(
       documents,
       doc => {
+        if (logProgress) {
+          logProgress(doc)
+        }
         return this.createOrUpdate(doc)
       },
       concurrency

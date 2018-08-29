@@ -77,7 +77,15 @@ class BankingReconciliator {
     )
 
     log('info', 'Saving transactions...')
-    const savedTransactions = await BankTransaction.bulkSave(transactions)
+    let i = 1
+    const logProgress = doc => {
+      log('debug', `[bulkSave] ${i++} Saving ${doc.date} ${doc.label}`)
+    }
+    const savedTransactions = await BankTransaction.bulkSave(
+      transactions,
+      30,
+      logProgress
+    )
     return {
       accounts: savedAccounts,
       transactions: savedTransactions
