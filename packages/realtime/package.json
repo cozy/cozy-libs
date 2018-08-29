@@ -15,7 +15,7 @@
   },
   "scripts": {
     "test": "true",
-    "lint": "eslint --fix src/**",
+    "lint": "eslint src/**",
     "build": "babel src -d dist",
     "prepublishOnly": "yarn build",
     "watch": "yarn build --watch"

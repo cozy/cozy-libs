@@ -17,7 +17,7 @@
     "jest": "^23.5.0"
   },
   "scripts": {
-    "lint": "eslint --fix src/**",
+    "lint": "eslint src/**",
     "test": "jest src/"
   }
 }

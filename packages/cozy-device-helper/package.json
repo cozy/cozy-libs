@@ -20,7 +20,7 @@
     "prepublishOnly": "yarn run build",
     "build": "babel src -d dist --ignore *.spec.js",
     "test": "jest src/**",
-    "lint": "eslint --fix src/**"
+    "lint": "eslint src/**"
   },
   "dependencies": {
     "lodash": "4.17.10"
