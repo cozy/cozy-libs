@@ -9,7 +9,7 @@ const flatMap = require('lodash/flatMap')
 const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
-const PromisePool = require('es6-promise-pool')
+const { parallelMap } = require('./utils')
 
 let cozyClient
 
@@ -107,6 +107,8 @@ async function createOrUpdate(
 
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
+
+
 class Document {
   static registerClient(client) {
     cozyClient = client
@@ -125,15 +127,18 @@ class Document {
     return cozyClient.data.create(this.doctype, attributes)
   }
 
-  static bulkSave(documents, concurrency = 30) {
-    const kls = this
-    const res = []
-    const pool = new PromisePool(function*() {
-      for (let doc of documents) {
-        yield kls.createOrUpdate(doc).then(x => res.push(x))
-      }
-    }, concurrency)
-    return pool.start().then(() => res)
+  static bulkSave(documents, concurrency, logProgress) {
+    concurrency = concurrency || 30
+    return parallelMap(
+      documents,
+      doc => {
+        if (logProgress) {
+          logProgress(doc)
+        }
+        return this.createOrUpdate(doc)
+      },
+      concurrency
+    )
   }
 
   static query(index, options) {
