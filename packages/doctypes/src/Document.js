@@ -107,8 +107,6 @@ async function createOrUpdate(
 
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
-
-
 class Document {
   static registerClient(client) {
     cozyClient = client

@@ -14,7 +14,7 @@ describe('parallel map', () => {
       10
     )
 
-    const numericalSort = (a, b) => a < b ? -1 : 1
+    const numericalSort = (a, b) => (a < b ? -1 : 1)
     res.sort(numericalSort)
     expect(res).toEqual([2, 4, 6, 8, 10])
   })
