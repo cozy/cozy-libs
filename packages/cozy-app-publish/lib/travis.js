@@ -99,7 +99,11 @@ async function travisPublish({
     )
   )
 
-  publish(publishOptions)
+  try {
+    await publish(publishOptions)
+  } catch (error) {
+    console.error(`↳ ❌  Publish failed: ${error.message}`)
+  }
 
   try {
     await postpublish({ ...publishOptions, postpublishHook })
