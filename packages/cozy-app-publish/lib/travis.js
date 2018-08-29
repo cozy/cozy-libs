@@ -28,6 +28,8 @@ async function travisPublish({
     REGISTRY_TOKEN
   } = getTravisVariables()
 
+  const commit = buildCommit || TRAVIS_COMMIT
+
   // registry editor token (required)
   registryToken = registryToken || REGISTRY_TOKEN
   if (!registryToken) {
@@ -64,7 +66,6 @@ async function travisPublish({
   // for now, the registry needs an external URL
   let appBuildUrl = ''
   const githubUrl = `https://github.com/${TRAVIS_REPO_SLUG}/archive`
-  const buildHash = buildCommit || TRAVIS_COMMIT
   if (buildUrl) {
     appBuildUrl = buildUrl
   } else if (!buildCommit && TRAVIS_TAG) {
@@ -73,10 +74,11 @@ async function travisPublish({
     // if not, we suppose that we are on the build tagged branch here
     appBuildUrl = `${githubUrl}/${TRAVIS_TAG}.tar.gz`
   } else {
-    appBuildUrl = `${githubUrl}/${buildHash}.tar.gz`
+    appBuildUrl = `${githubUrl}/${commit}.tar.gz`
   }
 
   const publishOptions = await prepublish({
+    buildCommit: commit,
     prepublishHook,
     registryUrl,
     registryEditor,
