@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.6.0...cozy-app-publish@0.7.0) (2018-09-04)
+
+
+### Features
+
+* **travis:** Throw error on prepublish fail ✨ ([7a88817](https://github.com/cozy/cozy-libs/commit/7a88817))
+
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.5.5...cozy-app-publish@0.6.0) (2018-08-29)
 
