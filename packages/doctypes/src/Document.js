@@ -13,6 +13,8 @@ const { parallelMap } = require('./utils')
 
 let cozyClient
 
+const DATABASE_DOES_NOT_EXIST = 'Database does not exist.'
+
 /**
  * Tell of two object attributes have any difference
  */
@@ -166,9 +168,29 @@ class Document {
   }
 
   static async updateAll(docs) {
-    return cozyClient.fetchJSON('POST', `/data/${this.doctype}/_bulk_docs`, {
-      docs
-    })
+    try {
+      const update = await cozyClient.fetchJSON(
+        'POST',
+        `/data/${this.doctype}/_bulk_docs`,
+        {
+          docs
+        }
+      )
+      return update
+    } catch (e) {
+      if (
+        e.reason &&
+        e.reason.reason &&
+        e.reason.reason == DATABASE_DOES_NOT_EXIST
+      ) {
+        const firstDoc = await this.create(docs[0])
+        const resp = await this.updateAll(docs.slice(1))
+        resp.unshift({ ok: true, id: firstDoc._id, rev: firstDoc._rev })
+        return resp
+      } else {
+        throw e
+      }
+    }
   }
 
   static async deleteAll(docs) {
