@@ -12,6 +12,10 @@ describe('Document', () => {
     Document.registerClient(cozyClient)
   })
 
+  afterEach(() => {
+    jest.restoreAllMocks()
+  })
+
   afterAll(() => {
     Document.registerClient(null)
   })
@@ -41,10 +45,6 @@ describe('Document', () => {
   })
 
   describe('duplicates', () => {
-    afterEach(() => {
-      jest.restoreAllMocks()
-    })
-
     it('should find duplicates', () => {
       const data = [
         { a: 1, b: 1, c: 4 },
@@ -94,6 +94,38 @@ describe('Document', () => {
         { a: 3, b: 5, c: 7 }
       ])
     })
+  })
+
+  it('should create database when bulk updating', async () => {
+    jest
+      .spyOn(cozyClient.data, 'create')
+      .mockReset()
+      .mockResolvedValue({ _id: 1 })
+    jest
+      .spyOn(cozyClient, 'fetchJSON')
+      .mockReset()
+      .mockRejectedValueOnce({
+        reason: { reason: 'Database does not exist.' }
+      })
+      .mockImplementationOnce((method, doctype, data) =>
+        Promise.resolve(
+          data.docs.map(doc => ({ id: doc._id, _rev: Math.random(), ok: true }))
+        )
+      )
+
+    jest.spyOn(Document, 'updateAll')
+
+    const res = await Simpson.updateAll([
+      { _id: 1, name: 'Marge' },
+      { _id: 2, name: 'Homer' }
+    ])
+
+    expect(cozyClient.data.create).toHaveBeenCalledWith('io.cozy.simpsons', {
+      _id: 1,
+      name: 'Marge'
+    })
+    expect(Simpson.updateAll).toHaveBeenCalledWith([{ _id: 2, name: 'Homer' }])
+    expect(res.map(doc => doc.id)).toEqual([1, 2])
   })
 
   it('should do bulk delete', async () => {
