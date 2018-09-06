@@ -168,6 +168,9 @@ class Document {
   }
 
   static async updateAll(docs) {
+    if (!docs || !docs.length) {
+      return Promise.resolve([])
+    }
     try {
       const update = await cozyClient.fetchJSON(
         'POST',

@@ -96,6 +96,15 @@ describe('Document', () => {
     })
   })
 
+  it('should not do anything if passed empty list', async () => {
+    jest.spyOn(cozyClient.data, 'create').mockReset()
+    jest.spyOn(cozyClient, 'fetchJSON').mockReset()
+    const res = await Simpson.updateAll([])
+    expect(cozyClient.data.create).not.toHaveBeenCalled()
+    expect(cozyClient.fetchJSON).not.toHaveBeenCalled()
+    expect(res).toEqual([])
+  })
+
   it('should create database when bulk updating', async () => {
     jest
       .spyOn(cozyClient.data, 'create')
