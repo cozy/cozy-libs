@@ -22,8 +22,9 @@ esac
 
 while true; do
   case "$1" in
+    -h|--help ) HELP=true; shift;;
     --no-push ) NO_PUSH=true; shift ;;
-    * ) break ;;
+    * ) UNKNOWN_OPTION=$1; shift; break;;
   esac
 done
 
@@ -130,8 +131,8 @@ warn_about_start() {
   remote=$1
   remote_url=`git remote get-url --push $remote` || exit 1
   echo "⚠️  cozy-release start will push a new release branch to $remote ($remote_url) and will commit a version update to $remote/master."
-  echo "You can change the remote repository by running 'cozy-release start <remote>'. "
-  echo "To not push anything to $remote, run 'cozy-release start <remote> --no-push.'"
+  echo "You can change the remote repository by running 'cozy-release start [remote]'. "
+  echo "To not push anything to $remote, run 'cozy-release start [remote] --no-push.'"
   read -p "Are you sure you want to continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
@@ -143,8 +144,8 @@ warn_about_beta() {
   remote=$1
   remote_url=`git remote get-url --push $remote` || exit 1
   echo "⚠️  cozy-release beta will push a new beta tag to $remote ($remote_url), which will trigger continuous integration builds."
-  echo "You can change the remote repository by running 'cozy-release beta <remote>'. "
-  echo "To not push anything to $remote, run 'cozy-release beta <remote> --no-push.'"
+  echo "You can change the remote repository by running 'cozy-release beta [remote]'. "
+  echo "To not push anything to $remote, run 'cozy-release beta [remote] --no-push.'"
   read -p "Are you sure you want to continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
@@ -156,8 +157,8 @@ warn_about_stable() {
   remote=$1
   remote_url=`git remote get-url --push $remote` || exit 1
   echo "⚠️  cozy-release stable will push a new stable tag to $remote ($remote_url), which will trigger continuous integration builds, and publish a new PRODUCTION version to registry."
-  echo "You can change the remote repository by running 'cozy-release stable <remote>'. "
-  echo "To not push anything to $remote, run 'cozy-release stable <remote> --no-push.'"
+  echo "You can change the remote repository by running 'cozy-release stable [remote]'. "
+  echo "To not push anything to $remote, run 'cozy-release stable [remote] --no-push.'"
   read -p "Are you sure you want to continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
@@ -167,9 +168,9 @@ warn_about_stable() {
 
 warn_about_patch() {
   remote_url=`git remote get-url --push $remote` || exit 1
-  echo "⚠️  cozy-release patch <version> will push a new patch branch to $remote ($remote_url)."
-  echo "You can change the remote repository by running 'cozy-release patch <version> <remote>'. "
-  echo "To not push anything to $remote, run 'cozy-release patch <version> <remote> --no-push.'"
+  echo "⚠️  cozy-release patch [version] will push a new patch branch to $remote ($remote_url)."
+  echo "You can change the remote repository by running 'cozy-release patch [version] [remote]'. "
+  echo "To not push anything to $remote, run 'cozy-release patch [version] [remote] --no-push.'"
   read -p "Are you sure you want to continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
@@ -188,6 +189,11 @@ get_existing_release_branch() {
 }
 
 start() {
+  if [ $HELP ]; then
+    show_start_help
+    exit 0
+  fi
+
   remote=$1
   if [ ! $NO_PUSH ]; then
     warn_about_start $remote
@@ -223,6 +229,11 @@ start() {
 }
 
 beta () {
+  if [ $HELP ]; then
+    show_beta_help
+    exit 0
+  fi
+
   assert_release_or_patch
 
   remote=$1
@@ -234,6 +245,11 @@ beta () {
 }
 
 stable () {
+  if [ $HELP ]; then
+    show_stable_help
+    exit 0
+  fi
+
   assert_release_or_patch
 
   remote=$1
@@ -245,10 +261,15 @@ stable () {
 }
 
 patch () {
+  if [ $HELP ]; then
+    show_patch_help
+    exit 0
+  fi
+
   remote=$1
   version=$2
   if [[ -z ${version// } ]]; then
-    echo "❌ cozy-release: cozy-release patch needs a version, please run 'cozy-release patch <version>'."
+    echo "❌ cozy-release: cozy-release patch needs a version, please run 'cozy-release patch [version]'."
     exit 1
   fi
 
@@ -288,9 +309,177 @@ patch () {
   fi
 }
 
+show_help() {
+  echo "$(tput bold)usage:$(tput sgr0) cozy-release command arguments... [options]"
+  echo "  $(tput bold)command:"
+  echo ""
+  echo "    $(tput bold)beta [remote]$(tput sgr0)      Creates a new beta tag in the current release"
+  echo "                       branch or patch branch, and push this tag to"
+  echo "                       \$remote repository."
+  echo ""
+  echo "    $(tput bold)patch version [remote]$(tput sgr0) Starts a new patch from the given \$version."
+  echo "                       \$version must be a stable version and the"
+  echo "                       related tag must exist."
+  echo "                       are both pushed to \$remote repository. Default"
+  echo "                       \$remote is origin."
+  echo ""
+  echo "    $(tput bold)release [remote]$(tput sgr0)   Starts a new release from the current version,"
+  echo "                       tag it as beta and bump master to a new master"
+  echo "                       minor version. Release branch and bump commit"
+  echo "                       are both pushed to \$remote repository. Default"
+  echo "                       \$remote is origin."
+  echo ""
+  echo "    $(tput bold)stable [remote]$(tput sgr0)    Creates a new stable tag in the current release"
+  echo "                       branch or patch branch, and push this tag to"
+  echo "                       \$remote repository. Once a stable version has"
+  echo "                       been tagged, no new beta tag for this version"
+  echo "                       can be made with cozy-release. Default"
+  echo "                       \$remote is origin. cozy-release allows only one"
+  echo "                       release branch at a time."
+  echo "  $(tput bold)options:$(tput sgr0)"
+  echo ""
+  echo "    $(tput bold)--help$(tput sgr0)             Shows help."
+  echo ""
+  echo "    $(tput bold)--no-push$(tput sgr0)          Nothing is pushed to remote repository. Ideal"
+  echo "                       for testing stuff."
+  echo ""
+  echo "$(tput bold)example:$(tput sgr0)"
+  echo "  From master at version 1.0.0"
+  echo "  \$> cozy-release start"
+  echo "    -> Creates a new branch called release-1.0.0"
+  echo "    -> Pushes it to origin"
+  echo "    -> Tags a new 1.0.0-beta.1 version from this branch"
+  echo "    -> Pushes it to origin"
+  echo "    -> Updates the version in manifest.webapp and package.json file to "
+  echo "       1.1.0"
+  echo "    -> Commits this change and push it to origin"
+  echo "  \$> cozy-release beta"
+  echo "    -> Tags a new 1.0.0-beta.2 version from release-1.0.0"
+  echo "    -> Pushes it to origin"
+  echo "  \$> cozy-release stable"
+  echo "    -> Tags a new 1.0.0 version from release-1.0.0"
+  echo "    -> Pushes it to origin"
+  echo "  \$> cozy-release patch 1.0.0"
+  echo "    -> Creates a new branch called patch-1.0.1"
+  echo "    -> Updates the version in manifest.webapp and package.json file to "
+  echo "       1.0.1"
+  echo "    -> Pushes the patch-1.0.1 branch to origin"
+  echo "  \$> cozy-release beta"
+  echo "    -> Tags a new 1.0.1-beta.1 version from branch patch-1.0.1"
+  echo "    -> Pushes it to origin"
+}
+
+show_start_help() {
+  echo "$(tput bold)usage:$(tput sgr0) cozy-release start [remote] [options]"
+  echo ""
+  echo "  Starts a new release by creating a new release branch and pushing it"
+  echo "  to \$remote. Then tags a bew beta version and push it to \$remote."
+  echo "  Eventually it bumps master to new minor version, commit it and guess"
+  echo "  what? Yes! it pushes to \$remote."
+  echo ""
+  echo "  $(tput bold)remote:$(tput sgr0)       The remote repository, default is"
+  echo "                 origin."
+  echo ""
+  echo "  $(tput bold)options:$(tput sgr0)"
+  echo ""
+  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo ""
+  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
+  echo "                       for testing stuff."
+  echo ""
+  echo "$(tput bold)example:$(tput sgr0)"
+  echo "  From master at version 1.0.0"
+  echo "  \$> cozy-release start"
+  echo "    -> Creates a new branch called release-1.0.0"
+  echo "    -> Pushes it to origin"
+  echo "    -> Tags a new 1.0.0-beta.1 version from this branch"
+  echo "    -> Pushes it to origin"
+  echo "    -> Updates the version in manifest.webapp and package.json file to "
+  echo "       1.1.0"
+  echo "    -> Commits this change and push it to origin"
+}
+
+show_beta_help() {
+  echo "$(tput bold)usage:$(tput sgr0) cozy-release beta [remote] [options]"
+  echo ""
+  echo "  Tags a new beta version from the current release branch or the"
+  echo "  current patch branch. And pushes it to \$remote."
+  echo ""
+  echo "  $(tput bold)remote:$(tput sgr0)       The remote repository, default is"
+  echo "                 origin."
+  echo ""
+  echo "  $(tput bold)options:$(tput sgr0)"
+  echo ""
+  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo ""
+  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
+  echo "                       for testing stuff."
+  echo ""
+  echo "$(tput bold)example:$(tput sgr0)"
+  echo "  From branch release-1.0.0, tag 1.0.0-beta.1 already exists"
+  echo "  \$> cozy-release beta"
+  echo "    -> Tags a new 1.0.0-beta.2 version from release-1.0.0"
+  echo "    -> Pushes it to origin"
+}
+
+show_stable_help() {
+  echo "$(tput bold)usage:$(tput sgr0) cozy-release stable [remote] [options]"
+  echo ""
+  echo "  Tags a new stable version from the current release branch or the"
+  echo "  current patch branch. And pushes it to \$remote."
+  echo ""
+  echo "  $(tput bold)remote:$(tput sgr0)       The remote repository, default is"
+  echo "                 origin."
+  echo ""
+  echo "  $(tput bold)options:$(tput sgr0)"
+  echo ""
+  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo ""
+  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
+  echo "                       for testing stuff."
+  echo ""
+  echo "$(tput bold)example:$(tput sgr0)"
+  echo "  From branch release-1.0.0"
+  echo "  \$> cozy-release stable"
+  echo "    -> Tags a new 1.0.0 version from release-1.0.0"
+  echo "    -> Pushes it to origin"
+}
+
+show_patch_help() {
+  echo "$(tput bold)usage:$(tput sgr0) cozy-release patch version [remote] [options]"
+  echo ""
+  echo "  Starts a new patch by creating a new patch branch, bumping the"
+  echo "  current version and push the new branch to \$remote."
+  echo ""
+  echo "  $(tput bold)remote:$(tput sgr0)       The remote repository, default is"
+  echo "                origin."
+  echo ""
+  echo "  $(tput bold)version:$(tput sgr0)      The stable version to patch."
+  echo ""
+  echo "  $(tput bold)options:$(tput sgr0)"
+  echo ""
+  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo ""
+  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
+  echo "                       for testing stuff."
+  echo ""
+  echo "$(tput bold)example:$(tput sgr0)"
+  echo "  From master at version 1.1.0"
+  echo "  \$> cozy-release patch 1.0.0"
+  echo "    -> Creates a new branch called patch-1.0.1"
+  echo "    -> Bumps version to 1.0.1 in this branch."
+  echo "    -> Pushes the branch to origin"
+}
+
+if [[ ! -z "${UNKNOWN_OPTION// }" ]]; then
+  echo "Unknown option $(tput bold)$UNKNOWN_OPTION$(tput sgr0). Run cozy-release --help to list available options."
+  exit 1
+fi
+
 case "$command" in
   start ) start ${remote:-origin} ;;
   beta ) beta ${remote:-origin} ;;
   stable ) stable ${remote:-origin} ;;
   patch ) patch ${remote:-origin} $version;;
+  *) show_help;;
 esac
