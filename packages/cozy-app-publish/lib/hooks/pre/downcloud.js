@@ -36,7 +36,8 @@ const deleteArchive = async filename => {
 const pushArchive = async (archiveFileName, options) => {
   const { appSlug, appVersion, buildCommit } = options
   console.log(`↳ ℹ️  Sending archive to downcloud`)
-  const folder = `www-upload/${appSlug}/${appVersion}-${buildCommit}/`
+  const folder = `www-upload/${appSlug}/${appVersion}${buildCommit &&
+    `-${buildCommit}`}/`
   try {
     await launchCmd('ssh', [
       '-o',
