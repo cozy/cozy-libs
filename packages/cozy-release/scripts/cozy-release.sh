@@ -212,6 +212,16 @@ start() {
     warn_about_start $remote
   fi
 
+  if [ ! -f "package.json" ]; then
+    echo "☁️ cozy-release: Creating package.json"
+    echo "{\"version\":\"0.0.0\"}" > package.json
+  fi
+
+  if [ ! -f "manifest.webapp" ]; then
+    echo "☁️ cozy-release: Creating manifest.webapp"
+    echo "{\"version\":\"0.0.0\"}" > manifest.webapp
+  fi
+
   fetch_remote $remote
 
   get_existing_release_branch
