@@ -265,6 +265,7 @@ beta () {
     warn_about_beta $remote
   fi
 
+  git push $remote HEAD
   tag_beta $remote
 }
 
@@ -282,6 +283,7 @@ stable () {
     warn_about_stable $remote
   fi
 
+  git push $remote HEAD
   tag_stable $remote
 }
 
