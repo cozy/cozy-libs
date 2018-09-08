@@ -28,6 +28,17 @@ while true; do
   esac
 done
 
+assert_command_exists () {
+  if [ ! $(command -v $1) ]; then
+    echo >&2 "cozy-release requires $1 but it's not installed. See $2 to install $1."
+    exit 1
+  fi
+}
+
+assert_jq_exists () {
+  assert_command_exists jq "https://stedolan.github.io/jq/"
+}
+
 read_current_version() {
   current_version=$(cat package.json | jq -rc '.version')
 }
@@ -194,6 +205,8 @@ start() {
     exit 0
   fi
 
+  assert_jq_exists
+
   remote=$1
   if [ ! $NO_PUSH ]; then
     warn_about_start $remote
@@ -234,6 +247,7 @@ beta () {
     exit 0
   fi
 
+  assert_jq_exists
   assert_release_or_patch
 
   remote=$1
@@ -250,6 +264,7 @@ stable () {
     exit 0
   fi
 
+  assert_jq_exists
   assert_release_or_patch
 
   remote=$1
