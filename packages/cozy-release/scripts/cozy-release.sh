@@ -18,6 +18,9 @@ case "$command" in
     if [[ ! $1 == --* ]]; then
       remote=$1; shift;
     fi;;
+  end ) if [[ ! $1 == --* ]]; then
+      remote=$1; shift;
+    fi
 esac
 
 while true; do
@@ -189,6 +192,18 @@ warn_about_patch() {
   fi
 }
 
+warn_about_end() {
+  remote_url=`git remote get-url --push $remote` || exit 1
+  echo "⚠️  cozy-release end [remote] will merge into master and delete permanently the current release or patch branch from $remote ($remote_url)."
+  echo "You can change the remote repository by running 'cozy-release end [remote]'. "
+  echo "To not push anything to $remote, run 'cozy-release end [remote] --no-push.'"
+  read -p "Are you sure you want to continue ? (Y/n): " user_response
+  if [ $user_response != "Y" ]
+  then
+    exit 0
+  fi
+}
+
 fetch_remote () {
   remote=$1
   echo "☁️ cozy-release: Fetching $remote"
@@ -334,6 +349,70 @@ patch () {
   if [ ! $NO_PUSH ]; then
     git push $remote HEAD
   fi
+}
+
+end () {
+  if [ $HELP ]; then
+    show_end_help
+    exit 0
+  fi
+
+  assert_release_or_patch
+
+  remote=$1
+
+  if [ ! $NO_PUSH ]; then
+    warn_about_end $remote
+  fi
+
+  is_release=`git branch | grep "* release-"`
+  is_patch=`git branch | grep "* patch-"`
+
+  git fetch $remote
+
+  read_current_version
+
+  if [[ ! -z ${is_release// } ]]; then
+    branch="release-$current_version"
+  fi
+
+  if [[ -z ${branch// } ]]; then
+    echo "❌ cozy-release: Unexpected branch name."
+    exit 1
+  fi
+
+  get_existing_stable_tag $current_version
+  if [[ -z "${existing_stable_tag// }" ]]; then
+    echo "❌ cozy-release: Version $current_version has not been tagged as stable yet. You can do it by running 'cozy-release stable'."
+    read -p "Continue anyway and end this release ? (Y/n): " user_response
+    if [[ $user_response != "Y" ]]; then
+      exit 0
+    fi
+  fi
+
+  echo "☁️ cozy-release: Pulling $branch"
+  git pull $remote $branch
+
+  echo "☁️ cozy-release: Merging $branch into master"
+  git checkout master
+  if ! git pull $remote master; then
+    echo "❌ cozy-release: Pull failed"
+    exit 1
+  fi
+
+  if ! git merge $branch --no-edit; then
+    echo "❌ cozy-release: Merge failed, fix it manually and then delete branch $branch."
+    exit 1
+  fi
+
+  echo "☁️ cozy-release: Deleting $branch"
+  git branch -D $branch
+
+  if [[ ! $NO_PUSH ]]; then
+    git push $remote :$branch
+  fi
+
+  echo "☁️ cozy-release: Release ended successfully."
 }
 
 show_help() {
@@ -498,6 +577,37 @@ show_patch_help() {
   echo "    -> Pushes the branch to origin"
 }
 
+show_end_help () {
+  echo "$(tput bold)usage:$(tput sgr0) cozy-release end [remote] [options]"
+  echo ""
+  echo "  Ends a release or a patch by merging the branch into master and"
+  echo "  deleting it. Pushes all changes to \$remote."
+  echo ""
+  echo "  $(tput bold)remote:$(tput sgr0)       The remote repository, default is"
+  echo "                origin."
+  echo ""
+  echo "  $(tput bold)options:$(tput sgr0)"
+  echo ""
+  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo ""
+  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
+  echo "                       for testing stuff."
+  echo ""
+  echo "$(tput bold)example:$(tput sgr0)"
+  echo "  From branch release-1.1.0"
+  echo "  \$> cozy-release end"
+  echo "    -> Merges release-1.1.0 into master"
+  echo "    -> Deletes release-1.1.0"
+  echo "    -> Pushes the deletion to origin"
+  echo "  From branch patch-1.1.1"
+  echo "  \$> cozy-release end"
+  echo "    -> Creates an branch merge-1.1.1 with all patch-1.1.1 commits expect the first one (which is a version bump commit)"
+  echo "    -> Merges merge-1.1.1 into master"
+  echo "    -> Deletes patch-1.1.1"
+  echo "    -> Pushes the deletion to origin"
+  echo "    -> Deletes merge-1.1.1"
+}
+
 if [[ ! -z "${UNKNOWN_OPTION// }" ]]; then
   echo "Unknown option $(tput bold)$UNKNOWN_OPTION$(tput sgr0). Run cozy-release --help to list available options."
   exit 1
@@ -508,5 +618,6 @@ case "$command" in
   beta ) beta ${remote:-origin} ;;
   stable ) stable ${remote:-origin} ;;
   patch ) patch ${remote:-origin} $version;;
+  end ) end ${remote:-origin} ;;
   *) show_help;;
 esac
