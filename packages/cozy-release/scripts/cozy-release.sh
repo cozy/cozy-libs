@@ -43,7 +43,7 @@ assert_jq_exists () {
 }
 
 read_current_version() {
-  current_version=$(cat package.json | jq -rc '.version')
+  echo $(cat package.json | jq -rc '.version')
 }
 
 compute_next_version() {
@@ -106,7 +106,7 @@ get_existing_stable_tag() {
 tag_beta() {
   remote=$1
 
-  read_current_version
+  current_version=`read_current_version`
 
   get_existing_stable_tag $current_version
   if [[ ! -z "${existing_stable_tag// }" ]]; then
@@ -134,7 +134,7 @@ tag_beta() {
 tag_stable() {
   remote=$1
 
-  read_current_version
+  current_version=`read_current_version`
 
   get_existing_stable_tag $current_version
   if [[ ! -z "${existing_stable_tag// }" ]]; then
@@ -257,7 +257,7 @@ start() {
   echo "☁️ cozy-release: Checking out master branch"
   git checkout master && git pull
 
-  read_current_version
+  current_version=`read_current_version`
 
   if [ ! $NO_PUSH ]; then
     warn_about_start $remote $current_version
@@ -383,7 +383,7 @@ end () {
 
   git fetch $remote
 
-  read_current_version
+  current_version=`read_current_version`
 
   if [[ ! -z ${is_release// } ]]; then
     end_release $remote $current_version
