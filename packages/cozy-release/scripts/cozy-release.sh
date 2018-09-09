@@ -191,23 +191,42 @@ warn_about_stable() {
 }
 
 warn_about_patch() {
+  remote=$1
+  next_version=$2
   remote_url=`git remote get-url --push $remote` || exit 1
-  echo "⚠️  cozy-release patch [version] will push a new patch branch to $remote ($remote_url)."
-  echo "You can change the remote repository by running 'cozy-release patch [version] [remote]'. "
-  echo "To not push anything to $remote, run 'cozy-release patch [version] [remote] --no-push.'"
-  read -p "Are you sure you want to continue ? (Y/n): " user_response
+  echo "⚠️  cozy-release patch will:"
+  echo "  * Push a new patch branch patch-$next_version to $remote ($remote_url)."
+  read -p "Continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
     exit 0
   fi
 }
 
-warn_about_end() {
+warn_about_end_release() {
+  remote=$1
+  version=$2
   remote_url=`git remote get-url --push $remote` || exit 1
-  echo "⚠️  cozy-release end [remote] will merge into master and delete permanently the current release or patch branch from $remote ($remote_url)."
-  echo "You can change the remote repository by running 'cozy-release end [remote]'. "
-  echo "To not push anything to $remote, run 'cozy-release end [remote] --no-push.'"
-  read -p "Are you sure you want to continue ? (Y/n): " user_response
+  echo "⚠️  cozy-release end will:"
+  echo "  * Merge release-$version into master"
+  echo "  * Delete permanently branch release-$version from $remote ($remote_url)"
+  echo "  * Push master to $remote"
+  read -p "Continue ? (Y/n): " user_response
+  if [ $user_response != "Y" ]
+  then
+    exit 0
+  fi
+}
+
+warn_about_end_patch() {
+  remote=$1
+  version=$2
+  remote_url=`git remote get-url --push $remote` || exit 1
+  echo "⚠️  cozy-release end will:"
+  echo "  * Cherry-pick commits from patch-$version into master"
+  echo "  * Delete permanently branch patch-$version from $remote ($remote_url)"
+  echo "  * Push master to $remote"
+  read -p "Continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
     exit 0
@@ -332,13 +351,14 @@ patch () {
     exit 1
   fi
 
-  if [ ! $NO_PUSH ]; then
-    warn_about_patch $remote
-  fi
-
   fetch_remote $remote
 
   next_version=`compute_next_version $version patch`
+
+  if [ ! $NO_PUSH ]; then
+    warn_about_patch $remote $next_version
+  fi
+
   patch_branch="patch-$next_version"
 
   already_existing_patch_branch=`git branch --all | grep "^remotes/$remote/$patch_branch$"`
@@ -371,10 +391,6 @@ end () {
   assert_release_or_patch
 
   remote=$1
-
-  if [ ! $NO_PUSH ]; then
-    warn_about_end $remote
-  fi
 
   is_release=`git branch | grep "* release-"`
   is_patch=`git branch | grep "* patch-"`
@@ -409,6 +425,10 @@ end_release() {
     if [[ $user_response != "Y" ]]; then
       exit 0
     fi
+  fi
+
+  if [ ! $NO_PUSH ]; then
+    warn_about_end_release $remote $version
   fi
 
   echo "☁️ cozy-release: Pulling $branch"
@@ -448,6 +468,10 @@ end_patch() {
     if [[ $user_response != "Y" ]]; then
       exit 0
     fi
+  fi
+
+  if [ ! $NO_PUSH ]; then
+    warn_about_end_patch $remote $version
   fi
 
   echo "☁️ cozy-release: Pulling $branch"
