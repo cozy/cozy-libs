@@ -59,7 +59,7 @@ compute_next_version() {
     patch ) patch=$(expr $patch + 1);
   esac
 
-  next_version="$major.$minor.$patch"
+  echo "$major.$minor.$patch"
 }
 
 get_patched_version() {
@@ -152,11 +152,14 @@ tag_stable() {
 
 warn_about_start() {
   remote=$1
+  version=$2
+  next_version=`compute_next_version $version`
   remote_url=`git remote get-url --push $remote` || exit 1
-  echo "⚠️  cozy-release start will push a new release branch to $remote ($remote_url) and will commit a version update to $remote/master."
-  echo "You can change the remote repository by running 'cozy-release start [remote]'. "
-  echo "To not push anything to $remote, run 'cozy-release start [remote] --no-push.'"
-  read -p "Are you sure you want to continue ? (Y/n): " user_response
+  echo "⚠️  cozy-release start will:"
+  echo "  * push a new release branch release-$version to $remote ($remote_url)"
+  echo "  * Tag a $version-beta.1 version and push it to $remote"
+  echo "  * Bump master version to $next_version and push it to $remote"
+  read -p "Continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
     exit 0
@@ -232,10 +235,6 @@ start() {
   assert_jq_exists
 
   remote=$1
-  if [ ! $NO_PUSH ]; then
-    warn_about_start $remote
-  fi
-
   if [ ! -f "package.json" ]; then
     echo "☁️ cozy-release: Creating package.json"
     echo "{\"version\":\"0.0.0\"}" > package.json
@@ -259,6 +258,11 @@ start() {
   git checkout master && git pull
 
   read_current_version
+
+  if [ ! $NO_PUSH ]; then
+    warn_about_start $remote $current_version
+  fi
+
   release_branch=release-$current_version
 
   echo "☁️ cozy-release: Creating branch $release_branch"
@@ -267,7 +271,7 @@ start() {
     git push $remote HEAD
   fi
 
-  compute_next_version $current_version
+  next_version=`compute_next_version $current_version`
   git checkout master
   bump_version $remote $next_version
 
@@ -336,7 +340,7 @@ patch () {
 
   fetch_remote $remote
 
-  compute_next_version $version patch
+  next_version=`compute_next_version $version patch`
   patch_branch="patch-$next_version"
 
   already_existing_patch_branch=`git branch --all | grep "^remotes/$remote/$patch_branch$"`
