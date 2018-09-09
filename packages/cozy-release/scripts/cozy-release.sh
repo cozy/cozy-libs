@@ -169,10 +169,9 @@ warn_about_start() {
 warn_about_beta() {
   remote=$1
   remote_url=`git remote get-url --push $remote` || exit 1
-  echo "⚠️  cozy-release beta will push a new beta tag to $remote ($remote_url), which will trigger continuous integration builds."
-  echo "You can change the remote repository by running 'cozy-release beta [remote]'. "
-  echo "To not push anything to $remote, run 'cozy-release beta [remote] --no-push.'"
-  read -p "Are you sure you want to continue ? (Y/n): " user_response
+  echo "⚠️  cozy-release beta will:"
+  echo "  * Push a new beta tag to $remote ($remote_url)"
+  read -p "Continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
     exit 0
@@ -182,10 +181,9 @@ warn_about_beta() {
 warn_about_stable() {
   remote=$1
   remote_url=`git remote get-url --push $remote` || exit 1
-  echo "⚠️  cozy-release stable will push a new stable tag to $remote ($remote_url), which will trigger continuous integration builds, and publish a new PRODUCTION version to registry."
-  echo "You can change the remote repository by running 'cozy-release stable [remote]'. "
-  echo "To not push anything to $remote, run 'cozy-release stable [remote] --no-push.'"
-  read -p "Are you sure you want to continue ? (Y/n): " user_response
+  echo "⚠️  cozy-release stable will:"
+  echo "  * Push a new stable tag to $remote ($remote_url)"
+  read -p "Continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
     exit 0
