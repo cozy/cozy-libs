@@ -1,0 +1,19 @@
+{
+  "name": "cozy-release",
+  "version": "1.0.0",
+  "description": "A tool to manage Cozy application releases",
+  "main": "cozy-release.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "author": "Cozy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-release/README.md",
+  "dependencies": {
+    "exec-sh": "^0.2.2"
+  }
+}

@@ -7,3 +7,4 @@ packages/commitlint-config @kosssi @enguerran
 packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
 packages/interapp @gregorylegarec @kosssi
 packages/cozy-doctypes @ptbrowne @kosssi
+packages/cozy-release @gregorylegarec @cpatchane
