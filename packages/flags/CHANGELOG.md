@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.5"></a>
+## [1.2.5](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.2.4...cozy-flags@1.2.5) (2018-09-11)
+
+
+### Bug Fixes
+
+* **flags:** Return null if flag doesn't exist ([54096a7](https://github.com/cozy/cozy-libs/commit/54096a7))
+
+
+
+
 <a name="1.2.4"></a>
 ## [1.2.4](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.2.3...cozy-flags@1.2.4) (2018-08-30)
 
