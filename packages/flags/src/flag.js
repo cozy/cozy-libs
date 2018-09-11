@@ -14,7 +14,7 @@ const getFlag = name => {
   } else {
     // set the key so that it can be listed
     setFlag(name, null)
-    return JSON.stringify(null)
+    return null
   }
 }
 
