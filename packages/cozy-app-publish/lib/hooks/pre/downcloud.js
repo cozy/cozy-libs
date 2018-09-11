@@ -5,6 +5,7 @@ const tar = require('tar')
 const { spawn } = require('child_process')
 
 const BUILD_FOLDER = './build/'
+const DOWNCLOUD_UPLOAD_DIR = 'www-upload/'
 const DOWNCLOUD_URL = 'downcloud.cozycloud.cc'
 
 const launchCmd = (cmd, params, options) => {
@@ -36,14 +37,15 @@ const deleteArchive = async filename => {
 const pushArchive = async (archiveFileName, options) => {
   const { appSlug, appVersion, buildCommit } = options
   console.log(`↳ ℹ️  Sending archive to downcloud`)
-  const folder = `www-upload/${appSlug}/${appVersion}${buildCommit &&
-    `-${buildCommit}`}/`
+  const folder = `${appSlug}/${appVersion}${
+    buildCommit ? `-${buildCommit}` : ''
+  }/`
   try {
     await launchCmd('ssh', [
       '-o',
       'StrictHostKeyChecking=no',
       'upload@downcloud.cozycloud.cc',
-      `mkdir -p ${folder}`
+      `mkdir -p ${DOWNCLOUD_UPLOAD_DIR}${folder}`
     ])
   } catch (e) {
     throw new Error(
@@ -61,7 +63,7 @@ const pushArchive = async (archiveFileName, options) => {
       'ssh -o StrictHostKeyChecking=no',
       '-a',
       archiveFileName,
-      `upload@${DOWNCLOUD_URL}:${folder}`
+      `upload@${DOWNCLOUD_URL}:${DOWNCLOUD_UPLOAD_DIR}${folder}`
     ],
     { cwd: BUILD_FOLDER }
   )
@@ -70,7 +72,7 @@ const pushArchive = async (archiveFileName, options) => {
 
   return {
     ...options,
-    appBuildUrl: `https://${DOWNCLOUD_URL}/upload/${appSlug}/${appVersion}-${buildCommit}/${archiveFileName}`
+    appBuildUrl: `https://${DOWNCLOUD_URL}/upload/${folder}${archiveFileName}`
   }
 }
 
