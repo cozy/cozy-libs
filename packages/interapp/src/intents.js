@@ -6,6 +6,7 @@ import { pickService, buildRedirectionURL, removeQueryString } from './helpers'
 class Intents {
   constructor({ client } = {}) {
     this.request = new Request(client)
+    this.create = this.create.bind(this)
   }
 
   create(action, type, data = {}, permissions = []) {
@@ -24,9 +25,23 @@ class Intents {
 
       delete data.filteredServices
 
-      return createPromise.then(intent =>
-        client.start(this.create)(intent, element, data, options)
-      )
+      let intentManager
+      const prom = createPromise.then(intent => {
+        intentManager = client.start(
+          this.create,
+          intent,
+          element,
+          data,
+          options
+        )
+        return intentManager
+      })
+
+      prom.stop = () => {
+        intentManager && intentManager.destroy()
+      }
+
+      return prom
     }
 
     return createPromise
@@ -51,7 +66,6 @@ class Intents {
     const intent = await this.create('REDIRECT', type, data)
 
     const service = pickService(intent)
-    if (!service) throw new Error('Unable to find a service')
 
     // Intents cannot be deleted now
     // await deleteIntent(intent)

@@ -1,183 +1,109 @@
 import { errorSerializer, pickService } from './helpers'
+import * as dom from './dom'
+import IntentListener from './listener'
 
-const intentClass = 'coz-intent'
-
-function hideIntentIframe(iframe) {
-  iframe.style.display = 'none'
+/**
+ * Keeps only http://domain:port/
+ */
+const extractOrigin = url => {
+  return url.split('/', 3).join('/')
 }
 
-function showIntentFrame(iframe) {
-  iframe.style.display = 'block'
-}
+/**
+ * Creates the intent iframe and reacts to its messages.
+ *
+ * 1. Converts done/error/cancel/exposeFrameRemoval into Promise resolve/reject
+ * 2. Handles resize to style the DOM element holding the intent
+ * 3. Handles compose to create a child intent
+ * 4. Manages the lifecycle of the iframe. It is inserted into the DOM
+ *    at the beginning and removed when the intent has completed.
+ */
+export function start(createIntent, intent, element, data, options = {}) {
+  let receiver, iframe
 
-function buildIntentIframe(intent, element, url) {
-  const document = element.ownerDocument
-  if (!document)
-    return Promise.reject(
-      new Error('Cannot retrieve document object from given element')
-    )
-
-  const iframe = document.createElement('iframe')
-  // TODO: implement 'title' attribute
-  iframe.setAttribute('id', `intent-${intent._id}`)
-  iframe.setAttribute('src', url)
-  iframe.classList.add(intentClass)
-  return iframe
-}
-
-function injectIntentIframe(intent, element, url, options) {
-  const { onReadyCallback } = options
-  const iframe = buildIntentIframe(
-    intent,
-    element,
-    url,
-    options.onReadyCallback
-  )
-  // if callback provided for when iframe is loaded
-  if (typeof onReadyCallback === 'function') iframe.onload = onReadyCallback
-  element.appendChild(iframe)
-  iframe.focus()
-  return iframe
-}
-
-// inject iframe for service in given element
-function connectIntentIframe(createIntent, iframe, element, intent, data) {
-  const document = element.ownerDocument
-  if (!document)
-    return Promise.reject(
-      new Error('Cannot retrieve document object from given element')
-    )
-
-  const window = document.defaultView
-  if (!window)
-    return Promise.reject(
-      new Error('Cannot retrieve window object from document')
-    )
-
-  // Keeps only http://domain:port/
-  const serviceOrigin = iframe.src.split('/', 3).join('/')
-
-  async function compose(action, doctype, data) {
-    const intent = await createIntent(action, doctype, data)
-    hideIntentIframe(iframe)
-    const doc = await start(intent, element, {
-      ...data,
-      exposeIntentFrameRemoval: false
-    })
-    showIntentFrame(iframe)
-    return doc
+  const destroy = () => {
+    iframe && dom.remove(iframe)
+    receiver && receiver.stopListening()
   }
 
-  return new Promise((resolve, reject) => {
-    let handshaken = false
-    const messageHandler = async event => {
-      if (event.origin !== serviceOrigin) return
+  const onComplete = () => {
+    destroy()
+  }
 
-      const eventType = event.data.type
-      if (eventType === 'load') {
-        // Safari 9.1 (At least) send a MessageEvent when the iframe loads,
-        // making the handshake fails.
-        // eslint-disable-next-line no-console
-        console.warn &&
-          // eslint-disable-next-line no-console
-          console.warn(
-            'Cozy Client ignored MessageEvent having data.type `load`.'
-          )
-        return
-      }
+  let prom = new Promise((resolve, reject) => {
+    const service = pickService(intent, options.filterServices)
+    iframe = dom.insertIntentIframe(
+      intent,
+      element,
+      service.href,
+      options.onReadyCallback
+    )
 
-      if (eventType === `intent-${intent._id}:ready`) {
-        handshaken = true
-        return event.source.postMessage(data, event.origin)
-      }
+    const serviceOrigin = extractOrigin(service.href)
 
-      if (handshaken && eventType === `intent-${intent._id}:resize`) {
-        ;['width', 'height', 'maxWidth', 'maxHeight'].forEach(prop => {
-          if (event.data.transition)
-            element.style.transition = event.data.transition
-          if (event.data.dimensions[prop])
-            element.style[prop] = `${event.data.dimensions[prop]}px`
+    receiver = new IntentListener({
+      intentId: intent.id,
+      origin: serviceOrigin,
+
+      onReady: event => {
+        event.source.postMessage(data, event.origin)
+      },
+
+      onDone: event => {
+        resolve(event.data.document)
+        onComplete()
+      },
+
+      onCancel: () => {
+        resolve(null)
+        onComplete()
+      },
+
+      onError: errorOrEvent => {
+        reject(
+          errorOrEvent instanceof Event
+            ? errorSerializer.deserialize(errorOrEvent.data.error)
+            : errorOrEvent
+        )
+        onComplete()
+      },
+
+      onResize: event => {
+        const { transition, dimensions } = event.data
+        dom.applyStyle(element, {
+          transition: transition,
+          ...dimensions
         })
+      },
 
-        return true
-      }
+      onExposeFrameRemoval: event => {
+        resolve({
+          document: event.document,
+          removeIntentIframe: () => dom.remove(iframe)
+        })
+      },
 
-      if (handshaken && eventType === `intent-${intent._id}:compose`) {
-        // Let start to name `type` as `doctype`, as `event.data` already have a `type` attribute.
+      onCompose: async event => {
         const { action, doctype, data } = event.data
-        const doc = await compose(
-          action,
-          doctype,
-          data
-        )
-        return event.source.postMessage(doc, event.origin)
+        const { source, origin } = event
+        // Let start to name `type` as `doctype`, as `event.data` already have a `type` attribute.
+        const intent = await createIntent(action, doctype, data)
+        dom.hide(iframe)
+        try {
+          const doc = await start(createIntent, intent, element, {
+            ...data,
+            exposeIntentFrameRemoval: false
+          })
+          source.postMessage(doc, origin)
+        } finally {
+          dom.show(iframe)
+        }
       }
+    })
 
-      window.removeEventListener('message', messageHandler)
-      const removeIntentFrame = () => {
-        // check if the parent node has not been already removed from the DOM
-        iframe.parentNode && iframe.parentNode.removeChild(iframe)
-      }
-
-      if (
-        handshaken &&
-        eventType === `intent-${intent._id}:exposeFrameRemoval`
-      ) {
-        return resolve({ removeIntentFrame, doc: event.data.document })
-      }
-
-      removeIntentFrame()
-
-      if (eventType === `intent-${intent._id}:error`) {
-        return reject(errorSerializer.deserialize(event.data.error))
-      }
-
-      if (handshaken && eventType === `intent-${intent._id}:cancel`) {
-        return resolve(null)
-      }
-
-      if (handshaken && eventType === `intent-${intent._id}:done`) {
-        return resolve(event.data.document)
-      }
-
-      if (!handshaken) {
-        return reject(
-          new Error('Unexpected handshake message from intent service')
-        )
-      }
-
-      // We may be in a state where the messageHandler is still attached to then
-      // window, but will not be needed anymore. For example, the service failed
-      // before adding the `unload` listener, so no `intent:cancel` message has
-      // never been sent.
-      // So we simply ignore other messages, and this listener will stay here,
-      // waiting for a message which will never come, forever (almost).
-    }
-
-    window.addEventListener('message', messageHandler)
+    receiver.listen()
   })
-}
 
-export const start = createIntent => (
-  intent,
-  element,
-  data = {},
-  options = {}
-) => {
-  const service = pickService(intent, options.filterServices)
-
-  if (!service) {
-    throw new Error('Unable to find a service')
-  }
-
-  const iframe = injectIntentIframe(intent, element, service.href, options)
-
-  return connectIntentIframe(
-    createIntent,
-    iframe,
-    element,
-    intent,
-    data,
-    options.onReadyCallback
-  )
+  prom.destroy = destroy
+  return prom
 }
