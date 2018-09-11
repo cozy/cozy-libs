@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.7.2"></a>
+## [0.7.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.7.1...cozy-app-publish@0.7.2) (2018-09-11)
+
+
+### Bug Fixes
+
+* Downcloud folder name 🚑 ([c8ac28b](https://github.com/cozy/cozy-libs/commit/c8ac28b))
+
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.7.0...cozy-app-publish@0.7.1) (2018-09-07)
 
