@@ -200,6 +200,16 @@ describe('Interapp', () => {
         )
         await expect(prom).resolves.toEqual({ id: '123' })
       })
+
+      it('handles exposeFrameRemoval message', async () => {
+        window.dispatchEvent(mkMessage('exposeFrameRemoval'))
+        const res = await prom
+        expect(res.removeIntentIframe).not.toBeUndefined()
+        expect(element.querySelector('iframe')).not.toBe(null)
+        res.removeIntentIframe()
+        expect(element.querySelector('iframe')).toBe(null)
+      })
+
     })
   })
 })
