@@ -174,6 +174,21 @@ describe('Interapp', () => {
         window.dispatchEvent(msg)
         await expect(prom).rejects.toThrow('Invalid event id')
       })
+
+      it('handles resize message from service', () => {
+        window.dispatchEvent(
+          mkMessage('resize', {
+            dimensions: {
+              height: 100,
+              width: 200
+            },
+            transition: '1s ease height'
+          })
+        )
+        expect(element.style.width).toBe('200px')
+        expect(element.style.height).toBe('100px')
+        expect(element.style.transition).toBe('1s ease height')
+      })
     })
   })
 })
