@@ -189,6 +189,17 @@ describe('Interapp', () => {
         expect(element.style.height).toBe('100px')
         expect(element.style.transition).toBe('1s ease height')
       })
+
+      it('handles success message', async () => {
+        window.dispatchEvent(
+          mkMessage('done', {
+            document: {
+              id: '123'
+            }
+          })
+        )
+        await expect(prom).resolves.toEqual({ id: '123' })
+      })
     })
   })
 })
