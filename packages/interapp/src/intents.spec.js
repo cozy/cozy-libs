@@ -136,5 +136,44 @@ describe('Interapp', () => {
         'Unexpected handshake message from intent service'
       )
     })
+
+    describe('after handshake', () => {
+      beforeEach(() => {
+        jest.spyOn(window, 'postMessage')
+        window.dispatchEvent(mkMessage('ready', {}))
+      })
+
+      it('handles ready message', () => {
+        expect(window.postMessage).toHaveBeenCalledWith(
+          { id: 'fileId' },
+          serviceOrigin
+        )
+      })
+
+      it('handles error message from service', () => {
+        window.dispatchEvent(
+          mkMessage('error', {
+            error: {
+              message: 'Error from service',
+              type: 'serviceError',
+              status: 409
+            }
+          })
+        )
+        expect(prom).rejects.toMatchObject({
+          message: 'Error from service',
+          type: 'serviceError',
+          status: 409
+        })
+      })
+
+      it('handles error message from handling message', async () => {
+        jest.spyOn(console, 'warn').mockReturnValue(null)
+        const msg = mkMessage('ready', {})
+        msg.data.type = 'intent-fakeid:ready'
+        window.dispatchEvent(msg)
+        await expect(prom).rejects.toThrow('Invalid event id')
+      })
+    })
   })
 })
