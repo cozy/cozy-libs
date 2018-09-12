@@ -22,7 +22,7 @@ describe('Interapp', () => {
   const pickFileIntent = {
     id: 'pickfile-intent-id',
     meta: {
-      _rev: undefined,
+      _rev: undefined
     },
     attributes: {
       action: 'PICK',
@@ -210,6 +210,71 @@ describe('Interapp', () => {
         expect(element.querySelector('iframe')).toBe(null)
       })
 
+      it('handles composition', async () => {
+        api.respond(
+          'POST',
+          '/intents',
+          {
+            data: {
+              id: 'composition-intent-id',
+              meta: {
+                _rev: undefined
+              },
+              attributes: {
+                action: 'INSTALL',
+                type: 'io.cozy.apps',
+                permissions: ['GET'],
+                services: [
+                  {
+                    slug: 'install-apps',
+                    href: 'http://install-apps/index.html'
+                  }
+                ]
+              }
+            }
+          },
+          body => body.data.attributes.action === 'INSTALL'
+        )
+        window.dispatchEvent(
+          mkMessage('compose', {
+            action: 'INSTALL',
+            data: { slug: 'myapp' },
+            doctype: 'io.cozy.apps'
+          })
+        )
+
+        await sleep(1)
+
+        // Now the iframe from the composed intent has been inserted
+        // and the one from the original intent has been hidden
+        const iframes = Array.from(element.querySelectorAll('iframe'))
+        expect(iframes.length).toBe(2)
+        expect(iframe.style.display).toBe('none')
+        expect(iframes[1].style.display).not.toBe('none')
+
+        // Finish the composed intent
+        const mkCompositionMessage = (type, data) => {
+          const msg = mkMessage(type, data, { id: 'composition-intent-id' })
+          msg.origin = 'http://install-apps'
+          return msg
+        }
+
+        window.dispatchEvent(mkCompositionMessage('ready', {}))
+        window.dispatchEvent(
+          mkCompositionMessage('done', {
+            document: { slug: 'io.cozy.apps/myapp' }
+          })
+        )
+
+        await sleep(1)
+
+        // Original iframe is shown
+        expect(iframe.style.display).not.toBe('none')
+        const iframes2 = Array.from(element.querySelectorAll('iframe'))
+
+        // No more composed intent iframe
+        expect(iframes2.length).toBe(1)
+      })
     })
   })
 })
