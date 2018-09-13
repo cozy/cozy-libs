@@ -286,6 +286,7 @@ start() {
   git checkout -b $release_branch
   if [ ! $NO_PUSH ]; then
     git push $remote HEAD
+    git branch --set-upstream-to=$remote/$release_branch $release_branch
   fi
 
   next_version=`compute_next_version $current_version`
@@ -379,6 +380,7 @@ patch () {
 
   if [ ! $NO_PUSH ]; then
     git push $remote HEAD
+    git branch --set-upstream-to=$remote/$patch_branch $patch_branch
   fi
 }
 
