@@ -499,7 +499,11 @@ end_patch() {
           echo "❌ cozy-release: Cherry pick failed. You must end the patch manually by merging all its change into master."
           exit 1
         fi
+      else
+        echo "☁️ cozy-release: Ignoring $sha1 (merge commit)"
       fi
+    else
+      echo "☁️ cozy-release: Ignoring $sha1 (bump version commit)"
     fi
   done
 
