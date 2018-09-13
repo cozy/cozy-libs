@@ -491,9 +491,14 @@ end_patch() {
 
   for sha1 in $(git rev-list $patched_version..$branch --reverse) ; do
     if [[ "$sha1" != "$first_patch_commit_sha1" ]]; then
-      if ! git cherry-pick $sha1; then
-        echo "❌ cozy-release: Cherry pick failed. You must end the patch manually by merging all its change into master."
-        exit 1
+      # avoid merge commit
+      number_of_parents=`git cat-file -p $sha1 | grep '^parent' | wc -l | awk '{$1=$1};1'`
+      if [[ $number_of_parents -eq 1 ]]; then
+        echo "☁️ cozy-release: Cherry-picking $sha1"
+        if ! git cherry-pick $sha1; then
+          echo "❌ cozy-release: Cherry pick failed. You must end the patch manually by merging all its change into master."
+          exit 1
+        fi
       fi
     fi
   done
