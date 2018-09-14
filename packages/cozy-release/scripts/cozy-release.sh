@@ -286,6 +286,7 @@ start() {
   git checkout -b $release_branch
   if [ ! $NO_PUSH ]; then
     git push $remote HEAD
+    git branch --set-upstream-to=$remote/$release_branch $release_branch
   fi
 
   next_version=`compute_next_version $current_version`
@@ -379,6 +380,7 @@ patch () {
 
   if [ ! $NO_PUSH ]; then
     git push $remote HEAD
+    git branch --set-upstream-to=$remote/$patch_branch $patch_branch
   fi
 }
 
@@ -489,10 +491,19 @@ end_patch() {
 
   for sha1 in $(git rev-list $patched_version..$branch --reverse) ; do
     if [[ "$sha1" != "$first_patch_commit_sha1" ]]; then
-      if ! git cherry-pick $sha1; then
-        echo "❌ cozy-release: Cherry pick failed. You must end the patch manually by merging all its change into master."
-        exit 1
+      # avoid merge commit
+      number_of_parents=`git cat-file -p $sha1 | grep '^parent' | wc -l | awk '{$1=$1};1'`
+      if [[ $number_of_parents -eq 1 ]]; then
+        echo "☁️ cozy-release: Cherry-picking $sha1"
+        if ! git cherry-pick $sha1; then
+          echo "❌ cozy-release: Cherry pick failed. You must end the patch manually by merging all its change into master."
+          exit 1
+        fi
+      else
+        echo "☁️ cozy-release: Ignoring $sha1 (merge commit)"
       fi
+    else
+      echo "☁️ cozy-release: Ignoring $sha1 (bump version commit)"
     fi
   done
 
