@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.0"></a>
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.1.0...cozy-release@1.2.0) (2018-09-14)
+
+
+### Features
+
+* **cozy-release:** Avoid cherry-pick merges ✨ ([e987aa8](https://github.com/cozy/cozy-libs/commit/e987aa8))
+* **cozy-release:** More cherry-pick logs 🔊 ([9f4ce9d](https://github.com/cozy/cozy-libs/commit/9f4ce9d))
+* **cozy-release:** Set pushed branches upstream ✨ ([362719a](https://github.com/cozy/cozy-libs/commit/362719a))
+
+
+
+
 <a name="1.1.0"></a>
 # 1.1.0 (2018-09-10)
 
