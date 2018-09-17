@@ -19,8 +19,6 @@
     "commitmsg": "commitlint -e $GIT_PARAMS"
   },
   "devDependencies": {
-    "@commitlint/cli": "7.0.0",
-    "husky": "0.14.3",
     "lerna": "2.11.0"
   },
   "commitlint": {
