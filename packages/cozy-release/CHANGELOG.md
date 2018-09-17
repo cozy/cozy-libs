@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.9"></a>
+## [1.2.9](https://github.com/cozy/cozy-libs/compare/cozy-release@1.2.8...cozy-release@1.2.9) (2018-09-17)
+
+
+### Bug Fixes
+
+* Add execution permission on release binary 🐛 ([42725ca](https://github.com/cozy/cozy-libs/commit/42725ca))
+
+
+
+
 <a name="1.2.8"></a>
 ## [1.2.8](https://github.com/cozy/cozy-libs/compare/cozy-release@1.2.7...cozy-release@1.2.8) (2018-09-17)
 
