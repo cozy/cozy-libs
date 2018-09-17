@@ -1,9 +1,7 @@
 import lint from '@commitlint/lint'
-import cozyConfig from '.'
+import { rules } from '.'
 
-const rules = cozyConfig.rules
-// const TOO_LONG =
-//  'This is an invalid sentence since it has too much character !!!!!!!!!!!!!'
+const TOO_LONG = `It's an example of invalid sentence since it has more than 72 characters!`
 
 describe('Commitlint Config Cozy', () => {
   describe('Header', () => {
@@ -56,7 +54,6 @@ describe('Commitlint Config Cozy', () => {
     })
   })
 
-  /*
   describe('Body', () => {
     it('respect max length', async () => {
       const validBody = [`fix: Bar\n\nWith a small body`]
@@ -64,11 +61,13 @@ describe('Commitlint Config Cozy', () => {
         expect((await lint(body, rules)).valid).toBeTruthy()
       }
 
-      const invalidBody = [`fix: Bar\n\n${TOO_LONG}`]
+      const invalidBody = [
+        `fix: Bar\n\n${TOO_LONG}`,
+        `fix: Bar\n\nWith a small body\n${TOO_LONG}`
+      ]
       for (const body of invalidBody) {
-        expect((await lint(`${body}`, rules)).valid).toBeFalsy()
+        expect((await lint(body, rules)).valid).toBeFalsy()
       }
     })
   })
-  */
 })
