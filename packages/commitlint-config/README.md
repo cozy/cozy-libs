@@ -7,6 +7,24 @@
 - Cozy commit documentation on [Cozy Guideline](https://github.com/cozy/cozy-guidelines#commit-messages)
 - [Commitlint](http://marionebl.github.io/commitlint/)
 
+## How to add it on your project
+
+- Add the library on your dev dependency (`yarn add commitlint-config-cozy --dev --exact`)
+- Add configuration on your `package.json` ([see an example](https://github.com/cozy/cozy-banks/blob/85572b6827cdaa45c1ed44d6922829ba6480b3c9/package.json#L242-L246)):
+```json
+"commitlint": {
+  "extends": [
+    "./packages/commitlint-config"
+  ]
+}
+```
+- Add verification during a commit on your `package.json` ([see an example](https://github.com/cozy/cozy-banks/blob/85572b6827cdaa45c1ed44d6922829ba6480b3c9/package.json#L65)):
+```
+"scripts": {
+  "commitmsg": "commitlint -e $GIT_PARAMS"
+  ...
+}
+```
 
 ## Community
 

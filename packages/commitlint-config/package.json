@@ -18,11 +18,14 @@
     "lint": "eslint ./*.js"
   },
   "devDependencies": {
-    "@commitlint/lint": "7.0.0",
+    "@commitlint/lint": "7.1.2",
     "babel-cli": "6.26.0",
     "babel-jest": "23.4.2",
     "babel-preset-cozy-app": "0.10.1",
     "eslint-config-cozy-app": "0.10.0",
     "jest": "23.4.2"
+  },
+  "dependencies": {
+    "@commitlint/cli": "7.1.2"
   }
 }
