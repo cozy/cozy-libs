@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.2.4...commitlint-config-cozy@0.3.0) (2018-09-17)
+
+
+### Features
+
+* Add commitlint cli on dependency ⚙️ ([8a5652d](https://github.com/cozy/cozy-libs/commit/8a5652d))
+* Add limitation on body 📏 ([dc33f61](https://github.com/cozy/cozy-libs/commit/dc33f61))
+
+
+
+
 <a name="0.2.4"></a>
 ## [0.2.4](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.2.3...commitlint-config-cozy@0.2.4) (2018-08-30)
 
