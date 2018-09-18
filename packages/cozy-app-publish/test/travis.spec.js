@@ -50,6 +50,7 @@ function getOptions(buildUrl = null) {
 describe('Travis publishing script', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    global.console.log = jest.fn()
   })
 
   it('should work correctly if Travis environment variable provided (no TRAVIS_TAG)', async () => {
