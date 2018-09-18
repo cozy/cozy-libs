@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.6"></a>
+## [0.2.6](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.5...cozy-interapp@0.2.6) (2018-09-18)
+
+
+### Bug Fixes
+
+* Doc ([c663668](https://github.com/cozy/cozy-libs/commit/c663668))
+
+
+
+
 <a name="0.2.5"></a>
 ## [0.2.5](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.4...cozy-interapp@0.2.5) (2018-09-18)
 
