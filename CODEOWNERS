@@ -8,3 +8,4 @@ packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
 packages/interapp @gregorylegarec @kosssi
 packages/cozy-doctypes @ptbrowne @kosssi
 packages/cozy-release @gregorylegarec @cpatchane
+packages/renovate-config-cozy-app @y-lohse @doubleface
