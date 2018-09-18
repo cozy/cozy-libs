@@ -1,5 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Travis publishing script should fail on postPublish error 1`] = `[Error: Postpublish hooks failed: Postpublish test error]`;
+
+exports[`Travis publishing script should fail on prePublish error 1`] = `[Error: Prepublish failed: Prepublish test error]`;
+
+exports[`Travis publishing script should fail on publish error 1`] = `[Error: Publish failed: Publish test error]`;
+
 exports[`Travis publishing script should throw an error if the editor is missing 1`] = `"Registry editor is missing in the manifest. Publishing failed."`;
 
 exports[`Travis publishing script should throw an error if the token is missing 1`] = `"Registry token is missing. Publishing failed."`;
