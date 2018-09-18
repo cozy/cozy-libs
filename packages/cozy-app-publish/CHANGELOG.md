@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.7.2...cozy-app-publish@0.8.0) (2018-09-18)
+
+
+### Features
+
+* **cozy-app-publish:** Fail on Travis error ✨ ([0307241](https://github.com/cozy/cozy-libs/commit/0307241))
+* **cozy-app-publish:** Throw publish error ✨ ([08db1c5](https://github.com/cozy/cozy-libs/commit/08db1c5))
+
+
+
+
 <a name="0.7.2"></a>
 ## [0.7.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.7.1...cozy-app-publish@0.7.2) (2018-09-11)
 
