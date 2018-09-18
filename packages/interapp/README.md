@@ -14,7 +14,11 @@ const client = new CozyClient({ uri, token })
 const intents = new Intents({ client })
 intents.create('io.cozy.apps', 'CREATE')
   .start()
-  .then(() => {
+  .then(intent => {
     // do something with the result of the intent
+    // intent = {
+    //    id: '1337',
+    //    attributes: {...}
+    // }
   })
 ```
