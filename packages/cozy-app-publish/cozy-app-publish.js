@@ -99,23 +99,28 @@ function _getPublishMode() {
   }
 }
 
-function publishApp(cliOptions) {
+async function publishApp(cliOptions) {
   const publishMode = _getPublishMode()
   if (publishMode === MODES.TRAVIS) {
     console.log()
     console.log(`${colorize.bold('Travis')} ${colorize.blue('publish mode')}`)
     console.log()
-    scripts.travis({
-      registryToken: cliOptions.token,
-      buildDir: cliOptions.buildDir,
-      buildCommit: cliOptions.buildCommit,
-      buildUrl: cliOptions.buildUrl,
-      prepublishHook: cliOptions.prepublishHook,
-      postpublishHook: cliOptions.postpublishHook,
-      registryUrl: cliOptions.registryUrl,
-      spaceName: cliOptions.space,
-      verbose: cliOptions.verbose
-    })
+    try {
+      await scripts.travis({
+        registryToken: cliOptions.token,
+        buildDir: cliOptions.buildDir,
+        buildCommit: cliOptions.buildCommit,
+        buildUrl: cliOptions.buildUrl,
+        prepublishHook: cliOptions.prepublishHook,
+        postpublishHook: cliOptions.postpublishHook,
+        registryUrl: cliOptions.registryUrl,
+        spaceName: cliOptions.space,
+        verbose: cliOptions.verbose
+      })
+    } catch (error) {
+      console.error(`↳ ❌  ${error.message}`)
+      process.exit(1)
+    }
   } else if (publishMode === MODES.MANUAL) {
     console.log()
     console.log(`${colorize.bold('Manual')} ${colorize.blue('publish mode')}`)

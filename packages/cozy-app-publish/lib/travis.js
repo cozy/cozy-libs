@@ -90,8 +90,7 @@ async function travisPublish({
       appType
     })
   } catch (error) {
-    console.error(`↳ ❌  Prepublish failed: ${error.message}`)
-    return
+    throw new Error(`Prepublish failed: ${error.message}`)
   }
 
   // publish the application on the registry
@@ -105,12 +104,16 @@ async function travisPublish({
     )
   )
 
-  publish(publishOptions)
+  try {
+    await publish(publishOptions)
+  } catch (error) {
+    throw new Error(`Publish failed: ${error.message}`)
+  }
 
   try {
     await postpublish({ ...publishOptions, postpublishHook })
   } catch (error) {
-    console.error(`↳ ❌  Postpublish hooks failed: ${error.message}`)
+    throw new Error(`Postpublish hooks failed: ${error.message}`)
   }
 }
 

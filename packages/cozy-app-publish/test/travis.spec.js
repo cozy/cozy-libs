@@ -50,6 +50,7 @@ function getOptions(buildUrl = null) {
 describe('Travis publishing script', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    global.console.log = jest.fn()
   })
 
   it('should work correctly if Travis environment variable provided (no TRAVIS_TAG)', async () => {
@@ -126,11 +127,30 @@ describe('Travis publishing script', () => {
     expect(postpublish).toHaveBeenCalledTimes(0)
   })
 
-  it('should handle correctly errored postpublish', async () => {
+  it('should fail on prePublish error', async () => {
     const options = getOptions()
-    postpublish.mockRejectedValueOnce(new Error('(TEST) Postpublish error'))
-    await expect(travisScript(options)).resolves
+    prepublish.mockRejectedValueOnce(new Error('Prepublish test error'))
+    await expect(travisScript(options)).rejects.toMatchSnapshot()
     expect(prepublish).toHaveBeenCalledTimes(1)
+    expect(publishLib).toHaveBeenCalledTimes(0)
+    expect(postpublish).toHaveBeenCalledTimes(0)
+  })
+
+  it('should fail on publish error', async () => {
+    const options = getOptions()
+    publishLib.mockRejectedValueOnce(new Error('Publish test error'))
+    await expect(travisScript(options)).rejects.toMatchSnapshot()
+    expect(prepublish).toHaveBeenCalledTimes(1)
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(postpublish).toHaveBeenCalledTimes(0)
+  })
+
+  it('should fail on postPublish error', async () => {
+    const options = getOptions()
+    postpublish.mockRejectedValueOnce(new Error('Postpublish test error'))
+    await expect(travisScript(options)).rejects.toMatchSnapshot()
+    expect(prepublish).toHaveBeenCalledTimes(1)
+    expect(publishLib).toHaveBeenCalledTimes(1)
     expect(postpublish).toHaveBeenCalledTimes(1)
   })
 })
