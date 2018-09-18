@@ -16,17 +16,24 @@ export const errorSerializer = (() => {
   }
 })()
 
-// In a far future, the user will have to pick the desired service from a list.
-// For now it's our job, an easy job as we arbitrary pick the first service of
-// the list.
+/**
+ *
+ * Returns the first service from the services in the intent.
+ * Throws if service not found.
+ *
+ * If filterServices is passed, the first service matching filterServices
+ * is returned.
+ *
+ * In the future, users will have to pick the desired service from a list.
+ *
+ */
 export const pickService = (intent, filterServices) => {
-  const first = arr => arr && arr[0]
-
-  const services = intent.attributes.services
-  const filteredServices = filterServices
-    ? (services || []).filter(filterServices)
-    : services
-  return first(filteredServices)
+  const services = intent.attributes.services || []
+  const service = filterServices ? services.find(filterServices) : services[0]
+  if (!service) {
+    throw new Error('Unable to find a service')
+  }
+  return service
 }
 
 export const buildRedirectionURL = (url, data) => {
