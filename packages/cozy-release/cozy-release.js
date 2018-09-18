@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const execSh = require('exec-sh')
 
 const scriptPath = require.resolve('./scripts/cozy-release.sh')
