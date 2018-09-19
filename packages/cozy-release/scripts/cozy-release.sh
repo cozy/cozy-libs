@@ -1,38 +1,35 @@
 #!/bin/sh
 command=$1
 
-shift_to_next_args_if_exists () {
-  if [ "$#" -gt 0 ]; then shift; fi
-}
-
-shift_to_next_args_if_exists
+# https://superuser.com/questions/897148/shell-cant-shift-that-many-error
+shift $(( $# > 0 ? 1 : 0 ))
 
 case "$command" in
   start ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift_to_next_args_if_exists;
+      remote=$1; shift $(( $# > 0 ? 1 : 0 ));
     fi ;;
   beta ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift_to_next_args_if_exists;
+      remote=$1; shift $(( $# > 0 ? 1 : 0 ));
     fi ;;
   stable ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift_to_next_args_if_exists;
+      remote=$1; shift $(( $# > 0 ? 1 : 0 ));
     fi ;;
   patch ) if [[ ! $1 == --* ]]; then
-      version=$1; shift_to_next_args_if_exists;
+      version=$1; shift $(( $# > 0 ? 1 : 0 ));
     fi
     if [[ ! $1 == --* ]]; then
-      remote=$1; shift_to_next_args_if_exists;
+      remote=$1; shift $(( $# > 0 ? 1 : 0 ));
     fi;;
   end ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift_to_next_args_if_exists;
+      remote=$1; shift $(( $# > 0 ? 1 : 0 ));
     fi
 esac
 
 while true; do
   case "$1" in
-    -h|--help ) HELP=true; shift_to_next_args_if_exists;;
-    --no-push ) NO_PUSH=true; shift_to_next_args_if_exists ;;
-    * ) UNKNOWN_OPTION=$1; shift_to_next_args_if_exists; break;;
+    -h|--help ) HELP=true; shift $(( $# > 0 ? 1 : 0 ));;
+    --no-push ) NO_PUSH=true; shift $(( $# > 0 ? 1 : 0 )) ;;
+    * ) UNKNOWN_OPTION=$1; shift $(( $# > 0 ? 1 : 0 )); break;;
   esac
 done
 
