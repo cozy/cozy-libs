@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.12"></a>
+## [1.2.12](https://github.com/cozy/cozy-libs/compare/cozy-release@1.2.11...cozy-release@1.2.12) (2018-09-19)
+
+
+### Bug Fixes
+
+* **cozy-release:** Shift command 🚑 ([2b0642e](https://github.com/cozy/cozy-libs/commit/2b0642e))
+
+
+
+
 <a name="1.2.11"></a>
 ## [1.2.11](https://github.com/cozy/cozy-libs/compare/cozy-release@1.2.10...cozy-release@1.2.11) (2018-09-19)
 
