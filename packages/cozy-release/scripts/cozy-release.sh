@@ -1,33 +1,38 @@
 #!/bin/sh
 command=$1
-shift
+
+shift_to_next_args_if_exists () {
+  if [ "$#" -gt 0 ]; then shift; fi
+}
+
+shift_to_next_args_if_exists
 
 case "$command" in
   start ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift;
+      remote=$1; shift_to_next_args_if_exists;
     fi ;;
   beta ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift;
+      remote=$1; shift_to_next_args_if_exists;
     fi ;;
   stable ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift;
+      remote=$1; shift_to_next_args_if_exists;
     fi ;;
   patch ) if [[ ! $1 == --* ]]; then
-      version=$1; shift;
+      version=$1; shift_to_next_args_if_exists;
     fi
     if [[ ! $1 == --* ]]; then
-      remote=$1; shift;
+      remote=$1; shift_to_next_args_if_exists;
     fi;;
   end ) if [[ ! $1 == --* ]]; then
-      remote=$1; shift;
+      remote=$1; shift_to_next_args_if_exists;
     fi
 esac
 
 while true; do
   case "$1" in
-    -h|--help ) HELP=true; shift;;
-    --no-push ) NO_PUSH=true; shift ;;
-    * ) UNKNOWN_OPTION=$1; shift; break;;
+    -h|--help ) HELP=true; shift_to_next_args_if_exists;;
+    --no-push ) NO_PUSH=true; shift_to_next_args_if_exists ;;
+    * ) UNKNOWN_OPTION=$1; shift_to_next_args_if_exists; break;;
   esac
 done
 
