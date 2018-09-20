@@ -15,14 +15,12 @@
   },
   "scripts": {
     "test": "true",
-    "lint": "eslint src/**",
     "build": "babel src -d dist",
     "prepublishOnly": "yarn build",
     "watch": "yarn build --watch"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
-    "babel-preset-cozy-app": "0.10.0",
-    "eslint-config-cozy-app": "0.10.0"
+    "babel-preset-cozy-app": "0.10.0"
   }
 }

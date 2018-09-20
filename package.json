@@ -13,7 +13,7 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "lint": "lerna run --parallel lint",
+    "lint": "eslint . --ext js,jsx",
     "test": "lerna run --parallel test",
     "build": "lerna run --parallel build",
     "commitmsg": "commitlint -e $GIT_PARAMS"
