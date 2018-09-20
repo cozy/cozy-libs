@@ -719,11 +719,17 @@ if [[ ! -z "${UNKNOWN_OPTION// }" ]]; then
   exit 1
 fi
 
+cozy_remote=`git remote -v | grep "cozy/"  | tail -1 | awk '{print $1;}'`
+
+if [[ -z ${cozy_remote// } ]]; then
+  cozy_remote="origin"
+fi
+
 case "$command" in
-  start ) start ${remote:-origin} ;;
-  beta ) beta ${remote:-origin} ;;
-  stable ) stable ${remote:-origin} ;;
-  patch ) patch ${remote:-origin} $version;;
-  end ) end ${remote:-origin} ;;
+  start ) start ${remote:-$cozy_remote} ;;
+  beta ) beta ${remote:-$cozy_remote} ;;
+  stable ) stable ${remote:-$cozy_remote} ;;
+  patch ) patch ${remote:-$cozy_remote} $version;;
+  end ) end ${remote:-$cozy_remote} ;;
   *) show_help;;
 esac
