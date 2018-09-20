@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.2.12...cozy-release@1.3.0) (2018-09-20)
+
+
+### Bug Fixes
+
+* update shebang to use bash ([b6a389a](https://github.com/cozy/cozy-libs/commit/b6a389a))
+
+
+### Features
+
+* **cozy-release:** Detect cozy remote ✨ ([bcac383](https://github.com/cozy/cozy-libs/commit/bcac383))
+
+
+
+
 <a name="1.2.12"></a>
 ## [1.2.12](https://github.com/cozy/cozy-libs/compare/cozy-release@1.2.11...cozy-release@1.2.12) (2018-09-19)
 
