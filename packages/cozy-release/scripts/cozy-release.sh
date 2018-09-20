@@ -33,6 +33,15 @@ while true; do
   esac
 done
 
+konnector_manifest="manifest.konnector"
+webapp_manifest="manifest.webapp"
+
+if [ -f $konnector_manifest ]; then
+  MANIFEST=$konnector_manifest
+else
+  MANIFEST=$webapp_manifest
+fi
+
 assert_command_exists () {
   if [ ! $(command -v $1) ]; then
     echo >&2 "cozy-release requires $1 but it's not installed. See $2 to install $1."
@@ -79,10 +88,10 @@ bump_version() {
   echo "☁️ cozy-release: Bumping version to $version"
 
   jq '.version = $version' --arg version $version package.json > package.temp.json && mv package.temp.json package.json
-  jq '.version = $version' --arg version $version manifest.webapp > manifest.temp.webapp && mv manifest.temp.webapp manifest.webapp
+  jq '.version = $version' --arg version $version $MANIFEST > $MANIFEST.temp && mv $MANIFEST.temp $MANIFEST
 
   git add package.json
-  git add manifest.webapp
+  git add $MANIFEST
 
   git commit -m "chore: Bump version $version 🚀"
 
@@ -562,7 +571,7 @@ show_help() {
   echo "    -> Pushes it to origin"
   echo "    -> Tags a new 1.0.0-beta.1 version from this branch"
   echo "    -> Pushes it to origin"
-  echo "    -> Updates the version in manifest.webapp and package.json file to "
+  echo "    -> Updates the version in $MANIFEST and package.json file to "
   echo "       1.1.0"
   echo "    -> Commits this change and push it to origin"
   echo "  \$> cozy-release beta"
@@ -573,7 +582,7 @@ show_help() {
   echo "    -> Pushes it to origin"
   echo "  \$> cozy-release patch 1.0.0"
   echo "    -> Creates a new branch called patch-1.0.1"
-  echo "    -> Updates the version in manifest.webapp and package.json file to "
+  echo "    -> Updates the version in $MANIFEST and package.json file to "
   echo "       1.0.1"
   echo "    -> Pushes the patch-1.0.1 branch to origin"
   echo "  \$> cozy-release beta"
@@ -606,7 +615,7 @@ show_start_help() {
   echo "    -> Pushes it to origin"
   echo "    -> Tags a new 1.0.0-beta.1 version from this branch"
   echo "    -> Pushes it to origin"
-  echo "    -> Updates the version in manifest.webapp and package.json file to "
+  echo "    -> Updates the version in $MANIFEST and package.json file to "
   echo "       1.1.0"
   echo "    -> Commits this change and push it to origin"
 }
