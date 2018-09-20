@@ -1,4 +1,4 @@
-!#/bin/bash
+#!/bin/bash
 command=$1
 
 # https://superuser.com/questions/897148/shell-cant-shift-that-many-error
