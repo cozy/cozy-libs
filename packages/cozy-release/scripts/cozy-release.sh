@@ -255,13 +255,13 @@ start() {
 
   remote=$1
   if [ ! -f "package.json" ]; then
-    echo "☁️ cozy-release: Creating package.json"
-    echo "{\"version\":\"0.0.0\"}" > package.json
+    echo "❌ cozy-release: application needs a package.json"
+    exit 1
   fi
 
-  if [ ! -f "manifest.webapp" ]; then
-    echo "☁️ cozy-release: Creating manifest.webapp"
-    echo "{\"version\":\"0.0.0\"}" > manifest.webapp
+  if [[ ! -f "manifest.webapp" && ! -f "manifest.konnector" ]]; then
+    echo "❌ cozy-release: application needs a manifest.webapp or manifest.konnector"
+    exit 1
   fi
 
   fetch_remote $remote
