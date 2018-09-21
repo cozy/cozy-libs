@@ -25,10 +25,19 @@ case "$command" in
     fi
 esac
 
+PULL_REQUEST_TEMPLATE=".release-pr-template.md"
+
 while true; do
   case "$1" in
     -h|--help ) HELP=true; shift $(( $# > 0 ? 1 : 0 ));;
     --no-push ) NO_PUSH=true; shift $(( $# > 0 ? 1 : 0 )) ;;
+    --release-pr-template ) if [[ $command == "start" ]]; then
+          shift $(( $# > 0 ? 1 : 0 ));
+          PULL_REQUEST_TEMPLATE=$1;
+          shift $(( $# > 0 ? 1 : 0 ));
+        else
+          UNKNOWN_OPTION=$1; break;
+        fi;;
     * ) UNKNOWN_OPTION=$1; shift $(( $# > 0 ? 1 : 0 )); break;;
   esac
 done
@@ -51,6 +60,10 @@ assert_command_exists () {
 
 assert_jq_exists () {
   assert_command_exists jq "https://stedolan.github.io/jq/"
+}
+
+assert_hub_exists () {
+  assert_command_exists hub "https://hub.github.com/"
 }
 
 read_current_version() {
@@ -168,6 +181,9 @@ warn_about_start() {
   echo "  * push a new release branch release-$version to $remote ($remote_url)"
   echo "  * Tag a $version-beta.1 version and push it to $remote"
   echo "  * Bump master version to $next_version and push it to $remote"
+  if [[ -f $PULL_REQUEST_TEMPLATE ]]; then
+    echo "  * Create a new pull request"
+  fi
   read -p "Continue ? (Y/n): " user_response
   if [ $user_response != "Y" ]
   then
@@ -260,6 +276,10 @@ start() {
 
   assert_jq_exists
 
+  if [[ ! -f PULL_REQUEST_TEMPLATE ]]; then
+    assert_hub_exists
+  fi
+
   remote=$1
   if [ ! -f "package.json" ]; then
     echo "❌ cozy-release: application needs a package.json"
@@ -304,6 +324,14 @@ start() {
 
   git checkout $release_branch
   tag_beta $remote
+
+  if [[ ! $NO_PUSH && -f $PULL_REQUEST_TEMPLATE ]]; then
+    echo "☁️ cozy-release: Creating pull request"
+    git commit --allow-empty -m "chore: Starting release $current_version"
+    git push $remote HEAD
+    owner=`git remote get-url --push $remote | cut -d ":" -f 2 | cut -d "/" -f 1`
+    hub pull-request -b $owner:master -o -F $PULL_REQUEST_TEMPLATE
+  fi
 }
 
 beta () {
@@ -594,7 +622,8 @@ show_start_help() {
   echo "  Starts a new release by creating a new release branch and pushing it"
   echo "  to \$remote. Then tags a bew beta version and push it to \$remote."
   echo "  Eventually it bumps master to new minor version, commit it and guess"
-  echo "  what? Yes! it pushes to \$remote."
+  echo "  what? Yes! it pushes to \$remote. If a .release-template.md file"
+  echo "  exists, a pull request is created at the end of the process."
   echo ""
   echo "  $(tput bold)remote:$(tput sgr0)       The remote repository, default is"
   echo "                 origin."
@@ -604,7 +633,10 @@ show_start_help() {
   echo "    $(tput bold)--help$(tput sgr0)       Shows help."
   echo ""
   echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                       for testing stuff."
+  echo "                 for testing stuff."
+  echo ""
+  echo "    $(tput bold)--pr <file>$(tput sgr0)  Make a pull request with the given <file>"
+  echo "                 (text or markdown) as description."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From master at version 1.0.0"
