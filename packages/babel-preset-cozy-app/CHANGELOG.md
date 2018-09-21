@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.3"></a>
+## [1.1.3](https://github.com/CPatchane/create-cozy-app/compare/babel-preset-cozy-app@1.1.2...babel-preset-cozy-app@1.1.3) (2018-09-21)
+
+
+
+
+**Note:** Version bump only for package babel-preset-cozy-app
+
 <a name="1.1.2"></a>
 ## [1.1.2](https://github.com/CPatchane/create-cozy-app/compare/babel-preset-cozy-app@1.1.1...babel-preset-cozy-app@1.1.2) (2018-09-21)
 
