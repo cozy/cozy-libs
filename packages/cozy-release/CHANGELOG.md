@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/cozy/cozy-libs/compare/cozy-release@1.5.0...cozy-release@1.5.1) (2018-09-21)
+
+
+### Bug Fixes
+
+* run cozy-release script using bash ([2ed4239](https://github.com/cozy/cozy-libs/commit/2ed4239))
+* **cozy-release:** Use /bin/bash instead of bash ([c415810](https://github.com/cozy/cozy-libs/commit/c415810))
+
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.4.0...cozy-release@1.5.0) (2018-09-21)
 
