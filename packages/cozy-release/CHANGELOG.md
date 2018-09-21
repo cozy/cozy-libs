@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.4.0...cozy-release@1.5.0) (2018-09-21)
+
+
+### Features
+
+* **cozy:release:** Change semver parsing 🛠 ([8dee252](https://github.com/cozy/cozy-libs/commit/8dee252))
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.3.2...cozy-release@1.4.0) (2018-09-21)
 
