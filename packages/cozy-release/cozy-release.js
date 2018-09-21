@@ -5,7 +5,7 @@ const execSh = require('exec-sh')
 const scriptPath = require.resolve('./scripts/cozy-release.sh')
 const cliArgs = process.argv.slice(2)
 
-execSh(`bash ${scriptPath} ${cliArgs.join(' ')}`, (err, stderr) => {
+execSh(`/bin/bash ${scriptPath} ${cliArgs.join(' ')}`, (err, stderr) => {
   if (err) {
     if (stderr) {
       // eslint-disable-next-line no-console
