@@ -59,10 +59,9 @@ read_current_version() {
 
 compute_next_version() {
   type=${2:-minor}
-  IFS='.' read -r -a array <<< "$1"
-  major=${array[0]}
-  minor=${array[1]}
-  patch=${array[2]}
+  major=`echo $1 | awk -F '.' '{print $1}'`
+  minor=`echo $1 | awk -F '.' '{print $2}'`
+  patch=`echo $1 | awk -F '.' '{print $3}'`
 
   case "$type" in
     major ) major=$(expr $major + 1); minor="0"; patch="0";;
@@ -74,10 +73,9 @@ compute_next_version() {
 }
 
 get_patched_version() {
-  IFS='.' read -r -a array <<< "$1"
-  major=${array[0]}
-  minor=${array[1]}
-  patch=${array[2]}
+  major=`echo $1 | awk -F '.' '{print $1}'`
+  minor=`echo $1 | awk -F '.' '{print $2}'`
+  patch=`echo $1 | awk -F '.' '{print $3}'`
   patch=$(expr $patch - 1);
   echo "$major.$minor.$patch"
 }
