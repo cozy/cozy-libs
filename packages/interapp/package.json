@@ -15,13 +15,11 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel src -d dist --ignore *.spec.js",
-    "lint": "eslint src/**"
+    "build": "babel src -d dist --ignore *.spec.js"
   },
   "devDependencies": {
     "babel-cli": "6.26.0",
     "babel-preset-cozy-app": "^1.1.1",
-    "eslint-config-cozy-app": "^1.1.1",
     "jest": "23.5.0"
   }
 }

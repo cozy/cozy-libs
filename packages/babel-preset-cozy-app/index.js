@@ -21,7 +21,7 @@ const nodeEnv = {
   useBuiltIns: false
 }
 
-module.exports = declare((api, options, dirname) => {
+module.exports = declare((api, options) => {
   // default options
   let presetOptions = {
     node: false,
@@ -33,7 +33,9 @@ module.exports = declare((api, options, dirname) => {
     for (let option in presetOptions) {
       if (options.hasOwnProperty(option)) {
         if (typeof options[option] !== 'boolean') {
-          throw new Error(`Preset cozy-app '${option}' option must be a boolean.`)
+          throw new Error(
+            `Preset cozy-app '${option}' option must be a boolean.`
+          )
         }
         presetOptions[option] = options[option]
       }
@@ -64,18 +66,24 @@ module.exports = declare((api, options, dirname) => {
     // Transform rest properties for object destructuring assignment
     // and spread properties for object literals
     // useBuiltIns to directly use Object.assign instead of using Babel extends
-    [require.resolve('babel-plugin-transform-object-rest-spread'), {
-      useBuiltIns: false
-    }]
+    [
+      require.resolve('babel-plugin-transform-object-rest-spread'),
+      {
+        useBuiltIns: false
+      }
+    ]
   ]
   if (!node && transformRegenerator) {
     plugins.push(
       // Polyfills generator functions (for async/await usage)
-      [require.resolve('babel-plugin-transform-runtime'), {
-        helpers: false,
-        polyfill: false,
-        regenerator: true
-      }]
+      [
+        require.resolve('babel-plugin-transform-runtime'),
+        {
+          helpers: false,
+          polyfill: false,
+          regenerator: true
+        }
+      ]
     )
   }
   config.plugins = plugins

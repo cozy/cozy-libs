@@ -2,10 +2,7 @@
 
 module.exports = {
   plugins: ['prettier'],
-  extends: [
-    'eslint:recommended',
-    'eslint-config-prettier'
-  ],
+  extends: ['eslint:recommended', 'eslint-config-prettier'],
   parser: 'babel-eslint',
   env: {
     browser: true,
@@ -14,9 +11,12 @@ module.exports = {
     es6: true
   },
   rules: {
-    'prettier/prettier': ['error', {
-      singleQuote: true,
-      semi: false
-    }]
+    'prettier/prettier': [
+      'error',
+      {
+        singleQuote: true,
+        semi: false
+      }
+    ]
   }
 }
