@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.5.2...cozy-release@1.6.0) (2018-09-24)
+
+
+### Features
+
+* **cozy-release:** Add pull-request ✨" ([db16fc1](https://github.com/cozy/cozy-libs/commit/db16fc1))
+
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/cozy/cozy-libs/compare/cozy-release@1.5.0...cozy-release@1.5.2) (2018-09-21)
 
