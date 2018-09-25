@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.2.9"></a>
+## [0.2.9](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.8...cozy-interapp@0.2.9) (2018-09-25)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
 <a name="0.2.8"></a>
 ## [0.2.8](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.7...cozy-interapp@0.2.8) (2018-09-21)
 
