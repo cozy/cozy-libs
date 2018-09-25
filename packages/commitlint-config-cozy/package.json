@@ -17,7 +17,7 @@
     "test": "jest --env node ./*.spec.js"
   },
   "devDependencies": {
-    "@babel/core": "7.1.0",
+    "@babel/core": "^7.1.0",
     "@commitlint/lint": "7.1.2",
     "babel-jest": "23.4.2",
     "babel-preset-cozy-app": "1.1.3",
