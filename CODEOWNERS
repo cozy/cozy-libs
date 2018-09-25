@@ -1,11 +1,11 @@
 packages/cozy-device-helper @kosssi @ptbrowne
-packages/flags @ptbrowne
-packages/realtime @gregorylegarec @kosssi
+packages/cozy-flags @ptbrowne
+packages/cozy-realtime @gregorylegarec @kosssi
 packages/babel-preset-cozy-app @cpatchane
 packages/eslint-config-cozy-app @cpatchane
-packages/commitlint-config @kosssi @enguerran
+packages/commitlint-config-cozy @kosssi @enguerran
 packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
-packages/interapp @gregorylegarec @kosssi
+packages/cozy-interapp @gregorylegarec @kosssi
 packages/cozy-doctypes @ptbrowne @kosssi
 packages/cozy-release @gregorylegarec @cpatchane
 packages/renovate-config-cozy-app @y-lohse @doubleface
