@@ -47,7 +47,7 @@ module.exports = declare((api, options) => {
   const config = {}
 
   // Latest ECMAScript features on previous browsers versions
-  let env = [require.resolve('babel-preset-env')]
+  let env = [require.resolve('@babel/preset-env')]
   if (node) {
     env.push(nodeEnv)
   } else {
@@ -56,18 +56,18 @@ module.exports = declare((api, options) => {
 
   let presets = [env]
   // if (P)React app
-  if (!node && react) presets.push(require.resolve('babel-preset-react'))
+  if (!node && react) presets.push(require.resolve('@babel/preset-react'))
   config.presets = presets
 
   const plugins = [
     // transform class attributes and methods with auto-binding
     // to the class instance and no constructor needed
-    require.resolve('babel-plugin-transform-class-properties'),
+    require.resolve('@babel/plugin-proposal-class-properties'),
     // Transform rest properties for object destructuring assignment
     // and spread properties for object literals
     // useBuiltIns to directly use Object.assign instead of using Babel extends
     [
-      require.resolve('babel-plugin-transform-object-rest-spread'),
+      require.resolve('@babel/plugin-proposal-object-rest-spread'),
       {
         useBuiltIns: false
       }
@@ -77,10 +77,9 @@ module.exports = declare((api, options) => {
     plugins.push(
       // Polyfills generator functions (for async/await usage)
       [
-        require.resolve('babel-plugin-transform-runtime'),
+        require.resolve('@babel/plugin-transform-runtime'),
         {
           helpers: false,
-          polyfill: false,
           regenerator: true
         }
       ]
