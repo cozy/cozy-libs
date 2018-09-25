@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.8.2"></a>
+## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.8.1...cozy-app-publish@0.8.2) (2018-09-25)
+
+
+### Bug Fixes
+
+* :bug: add babel-core bridge for v7 ([18665a8](https://github.com/cozy/cozy-libs/commit/18665a8)), closes [/github.com/babel/babel/issues/8206#issuecomment-419705758](https://github.com//github.com/babel/babel/issues/8206/issues/issuecomment-419705758)
+
+
+
+
 <a name="0.8.1"></a>
 ## [0.8.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.8.0...cozy-app-publish@0.8.1) (2018-09-21)
 

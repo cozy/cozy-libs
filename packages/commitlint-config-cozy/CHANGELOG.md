@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.3"></a>
+## [0.3.3](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.2...commitlint-config-cozy@0.3.3) (2018-09-25)
+
+
+### Bug Fixes
+
+* :bug: add babel-core bridge for v7 ([18665a8](https://github.com/cozy/cozy-libs/commit/18665a8)), closes [/github.com/babel/babel/issues/8206#issuecomment-419705758](https://github.com//github.com/babel/babel/issues/8206/issues/issuecomment-419705758)
+* :bug: use ^7.1.0 for babel-jest issue ([34b2d14](https://github.com/cozy/cozy-libs/commit/34b2d14))
+
+
+
+
 <a name="0.3.2"></a>
 ## [0.3.2](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.1...commitlint-config-cozy@0.3.2) (2018-09-25)
 
