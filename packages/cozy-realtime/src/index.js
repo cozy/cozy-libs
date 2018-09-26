@@ -70,7 +70,15 @@ function keepAlive(socket, interval, message) {
   return socket
 }
 
+const isBoolean = [
+  bool => typeof bool === 'undefined' || typeof bool === 'boolean',
+  'should be a boolean'
+]
 const isRequired = [attr => !!attr, 'is required']
+const isRequiredIfNo = keys => [
+  (attr, obj) => keys.find(key => !!obj[key]) || !!attr,
+  `is required if no attribute ${keys.join(' or ')} are provider.`
+]
 const isString = [
   str => typeof str === 'undefined' || typeof str === 'string',
   'should be a string'
@@ -92,7 +100,7 @@ const isURL = [
 const validate = types => obj => {
   for (const [attr, rules] of Object.entries(types)) {
     for (const [validator, message] of rules) {
-      if (!validator(obj[attr])) {
+      if (!validator(obj[attr], obj)) {
         throw new Error(`${attr} ${message}.`)
       }
     }
