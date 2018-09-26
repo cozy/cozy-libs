@@ -108,8 +108,9 @@ const validate = types => obj => {
 }
 
 const configTypes = {
+  domain: [isRequiredIfNo(['url']), isString],
   token: [isRequired, isString],
-  url: [isRequired, isURL]
+  url: [isRequiredIfNo(['domain']), isURL]
 }
 
 const validateConfig = validate(configTypes)
@@ -124,7 +125,7 @@ async function connectWebSocket(
   validateConfig(config)
   return new Promise((resolve, reject) => {
     const protocol = getWebsocketProtocol(config.url)
-    const domain = getDomainFromUrl(config.url)
+    const domain = config.domain || getDomainFromUrl(config.url)
 
     if (!domain) {
       throw new Error('Unable to detect domain')

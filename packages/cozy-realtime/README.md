@@ -44,9 +44,10 @@ or
 
 This method allow you to subscribe to realtime for all documents of a provided doctype. Here are the parameters:
 
-- `config`: a config object with two key :
-  - `url`: the cozy url (ex: https://recette.cozy.works)
+- `config`: a config object with the following keys :
+  - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
   - `token`: the cozy token (ex: the global `cozy.client._token.token`)
+  - `url`: the cozy url (ex: https://recette.cozy.works), must be provided if `domain` is not set
 - `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
 - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
 
@@ -72,9 +73,10 @@ subscription.unsubscribe()
 
 This method is exactly the same working as the previous `subscribeAll()` function but to listen only one document. Here are the parameters:
 
-- `config`: a config object with two key :
-  - `url`: the cozy url (ex: https://recette.cozy.works)
+- `config`: a config object with the following keys :
+  - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
   - `token`: the cozy token (ex: the global `cozy.client._token.token`)
+  - `url`: the cozy url (ex: https://recette.cozy.works)
 - `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
 - `doc`: the document to listen, it must be at least a JS object with the `_id` attribute of the wanted document (only the `_id` will be checked to know if this is the wanted document or not).
 - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
