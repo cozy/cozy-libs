@@ -71,7 +71,10 @@ function keepAlive(socket, interval, message) {
 }
 
 const isRequired = [attr => !!attr, 'is required']
-const isString = [str => typeof str === 'string', 'should be a string']
+const isString = [
+  str => typeof str === 'undefined' || typeof str === 'string',
+  'should be a string'
+]
 const isURL = [
   url => {
     if (typeof url === 'undefined') return true
