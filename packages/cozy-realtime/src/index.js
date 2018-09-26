@@ -72,6 +72,19 @@ function keepAlive(socket, interval, message) {
 
 const isRequired = [attr => !!attr, 'is required']
 const isString = [str => typeof str === 'string', 'should be a string']
+const isURL = [
+  url => {
+    if (typeof url === 'undefined') return true
+    try {
+      new URL(url)
+    } catch (error) {
+      return false
+    }
+
+    return true
+  },
+  'should be an URL'
+]
 
 const validate = types => obj => {
   for (const [attr, rules] of Object.entries(types)) {
@@ -85,7 +98,7 @@ const validate = types => obj => {
 
 const configTypes = {
   token: [isRequired, isString],
-  url: [isRequired, isString]
+  url: [isRequired, isURL]
 }
 
 const validateConfig = validate(configTypes)
