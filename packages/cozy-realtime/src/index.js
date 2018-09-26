@@ -101,6 +101,11 @@ async function connectWebSocket(
   return new Promise((resolve, reject) => {
     const protocol = getWebsocketProtocol(config.url)
     const domain = getDomainFromUrl(config.url)
+
+    if (!domain) {
+      throw new Error('Unable to detect domain')
+    }
+
     const socket = new WebSocket(
       `${protocol}://${domain}/realtime/`,
       'io.cozy.websocket'
