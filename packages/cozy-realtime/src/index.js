@@ -43,9 +43,9 @@ function subscribeWhenReady(doctype, socket) {
   }
 }
 
-function getWebsocketProtocol(url) {
+function isSecureURL(url) {
   const httpsRegexp = new RegExp(`^(https:/{2})`)
-  return url.match(httpsRegexp) ? 'wss' : 'ws'
+  return url.match(httpsRegexp)
 }
 
 function getDomainFromUrl(url) {
@@ -109,6 +109,7 @@ const validate = types => obj => {
 
 const configTypes = {
   domain: [isRequiredIfNo(['url']), isString],
+  secure: [isBoolean],
   token: [isRequired, isString],
   url: [isRequiredIfNo(['domain']), isURL]
 }
@@ -124,15 +125,20 @@ async function connectWebSocket(
 ) {
   validateConfig(config)
   return new Promise((resolve, reject) => {
-    const protocol = getWebsocketProtocol(config.url)
-    const domain = config.domain || getDomainFromUrl(config.url)
+    const options = {
+      secure: config.url ? isSecureURL(config.url) : true,
+      ...config
+    }
+
+    const protocol = options.secure ? 'wss:' : 'ws:'
+    const domain = options.domain || getDomainFromUrl(options.url)
 
     if (!domain) {
       throw new Error('Unable to detect domain')
     }
 
     const socket = new WebSocket(
-      `${protocol}://${domain}/realtime/`,
+      `${protocol}//${domain}/realtime/`,
       'io.cozy.websocket'
     )
 
@@ -141,7 +147,7 @@ async function connectWebSocket(
         socket.send(
           JSON.stringify({
             method: 'AUTH',
-            payload: config.token
+            payload: options.token
           })
         )
       } catch (error) {

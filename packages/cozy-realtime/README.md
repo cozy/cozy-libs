@@ -48,6 +48,7 @@ This method allow you to subscribe to realtime for all documents of a provided d
   - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
   - `token`: the cozy token (ex: the global `cozy.client._token.token`)
   - `url`: the cozy url (ex: https://recette.cozy.works), must be provided if `domain` is not set
+  - `secure`: a boolean indicating if a secure protocol must be used (default `true`). Should not be provided along `url`.
 - `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
 - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
 
@@ -77,6 +78,7 @@ This method is exactly the same working as the previous `subscribeAll()` functio
   - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
   - `token`: the cozy token (ex: the global `cozy.client._token.token`)
   - `url`: the cozy url (ex: https://recette.cozy.works)
+  - `secure`: a boolean indicating if a secure protocol must be used (default `true`). Should not be provided along `url`.
 - `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
 - `doc`: the document to listen, it must be at least a JS object with the `_id` attribute of the wanted document (only the `_id` will be checked to know if this is the wanted document or not).
 - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
