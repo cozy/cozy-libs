@@ -18,9 +18,9 @@
     "build": "babel src -d dist --ignore *.spec.js"
   },
   "devDependencies": {
-    "@babel/cli": "7.1.0",
-    "@babel/core": "7.1.0",
-    "@babel/runtime": "7.0.0",
+    "@babel/cli": "7.1.2",
+    "@babel/core": "7.1.2",
+    "@babel/runtime": "7.1.2",
     "babel-core": "7.0.0-bridge.0",
     "babel-jest": "23.6.0",
     "babel-preset-cozy-app": "^1.2.0",
