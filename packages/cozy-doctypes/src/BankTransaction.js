@@ -93,7 +93,7 @@ class Transaction extends Document {
         sort: [{ date: 'desc' }]
       }
       const transactions = await Document.query(index, options)
-      log('info', transactions.length, 'last transactions length')
+      log('info', 'last transactions length: ' + transactions.length)
 
       return transactions
     } catch (e) {
