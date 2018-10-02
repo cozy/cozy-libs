@@ -55,21 +55,15 @@ class Transaction extends Document {
     let newTransactions = groups.newTransactions || []
     const updatedTransactions = groups.updatedTransactions || []
 
-    // If saving from a new banking vendor, transactions will not have the same vendor ids as the ones in the
-    // database, we have to filter all transactions that are before our last save transactions
     const splitDate = getSplitDate(localTransactions)
-    const onlyMostRecent = options.onlyMostRecent
-    if (onlyMostRecent && splitDate) {
-      log('info', 'Saving transactions from a new vendor')
+
+    if (splitDate) {
       log('info', `Not saving new transactions before: ${splitDate}`)
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
       newTransactions = newTransactions.filter(isAfterSplit)
       log('info', `After split ${newTransactions.length}`)
     } else {
-      log(
-        'info',
-        `onlyMostRecent: ${onlyMostRecent}, saving all new transactions`
-      )
+      log('info', "Can't find a split date, saving all new transactions")
     }
 
     log(

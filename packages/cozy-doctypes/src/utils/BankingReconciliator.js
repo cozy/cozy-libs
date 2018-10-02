@@ -60,10 +60,6 @@ class BankingReconciliator {
       stackTransactions,
       BankTransaction.vendorIdAttr
     )
-    const fromNewKonnectorAccount = BankAccount.isFromNewKonnector(
-      fetchedAccounts,
-      stackAccounts
-    )
     const transactions = BankTransaction.reconciliate(
       fetchedTransactions,
       stackTransactions,
@@ -71,8 +67,7 @@ class BankingReconciliator {
         isNew: transaction => {
           let vendorId = transaction[BankTransaction.vendorIdAttr]
           return !vendorId || !stackTransactionsByVendorId[vendorId]
-        },
-        onlyMostRecent: fromNewKonnectorAccount
+        }
       }
     )
 
