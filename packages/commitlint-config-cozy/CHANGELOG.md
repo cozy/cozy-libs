@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.6"></a>
+## [0.3.6](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.5...commitlint-config-cozy@0.3.6) (2018-10-02)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
 <a name="0.3.5"></a>
 ## [0.3.5](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.4...commitlint-config-cozy@0.3.5) (2018-09-27)
 

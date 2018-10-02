@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.13"></a>
+## [1.4.13](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.12...cozy-device-helper@1.4.13) (2018-10-02)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
 <a name="1.4.12"></a>
 ## [1.4.12](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.11...cozy-device-helper@1.4.12) (2018-09-27)
 

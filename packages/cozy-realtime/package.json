@@ -1,6 +1,6 @@
 {
   "name": "cozy-realtime",
-  "version": "1.1.9",
+  "version": "1.1.10",
   "description": "Realtime interactions with cozy-stack using Websocket",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -20,6 +20,6 @@
   },
   "devDependencies": {
     "@babel/cli": "7.1.2",
-    "babel-preset-cozy-app": "^1.2.0"
+    "babel-preset-cozy-app": "^1.2.1"
   }
 }
