@@ -7,9 +7,12 @@ const log = require('./log')
 
 const getDate = transaction => transaction.date.slice(0, 10)
 
-const getSplitDate = (linxoTransactions, stackTransactions) => {
-  // Find the first date for which we have new linxo transactions
-  // We'll delete transactions after this date and add new ones
+/**
+ * Get the date of the latest transaction in an array
+ * @param {array} stackTransactions
+ * @returns {string} The date of the latest transaction (YYYY-MM-DD)
+ */
+const getSplitDate = stackTransactions => {
   return max(stackTransactions.map(transaction => getDate(transaction)))
 }
 
@@ -54,7 +57,7 @@ class Transaction extends Document {
 
     // If saving from a new banking vendor, transactions will not have the same vendor ids as the ones in the
     // database, we have to filter all transactions that are before our last save transactions
-    const splitDate = getSplitDate(remoteTransactions, localTransactions)
+    const splitDate = getSplitDate(localTransactions)
     const onlyMostRecent = options.onlyMostRecent
     if (onlyMostRecent && splitDate) {
       log('info', 'Saving transactions from a new vendor')
