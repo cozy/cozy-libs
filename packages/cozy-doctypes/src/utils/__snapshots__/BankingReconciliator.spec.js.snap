@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`banking reconciliator should correctly reconciliate when accounts do not exist 1`] = `
+exports[`banking reconciliator should correctly reconciliate when accounts exist 1`] = `
 Array [
   Array [
     Object {
@@ -17,6 +17,15 @@ Array [
       "amount": -100,
       "date": "2018-06-27T00:00",
       "label": "Debit 100",
+      "vendorAccountId": 2,
+    },
+  ],
+  Array [
+    Object {
+      "account": 1,
+      "amount": -200,
+      "date": "2018-06-24T00:00",
+      "label": "Debit 200",
       "vendorAccountId": 2,
     },
   ],

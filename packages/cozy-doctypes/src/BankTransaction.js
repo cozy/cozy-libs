@@ -1,6 +1,7 @@
 const keyBy = require('lodash/keyBy')
 const groupBy = require('lodash/groupBy')
 const max = require('lodash/max')
+const isEqual = require('lodash/isEqual')
 const Document = require('./Document')
 const BankAccount = require('./BankAccount')
 const log = require('./log')
@@ -47,14 +48,84 @@ class Transaction extends Document {
     }
   }
 
+  isBeforeOrSame(maxDate) {
+    if (!maxDate) {
+      return true
+    } else {
+      const day = ensureISOString(this.date).slice(0, 10)
+      if (day !== 'NaN') {
+        return day <= maxDate
+      } else {
+        log(
+          'warn',
+          'transaction date could not be parsed. transaction: ' +
+            JSON.stringify(this)
+        )
+        return false
+      }
+    }
+  }
+
+  /**
+   * Get the descriptive (and almost uniq) identifier of a transaction
+   * @param {object} transaction - The transaction (containing at least amount, label and date)
+   * @returns {object}
+   */
+  getIdentifier() {
+    return `${this.amount}-${this.label}-${this.date}`
+  }
+
+  /**
+   * Tell if a transaction exists in a given array of transactions
+   * @param {object} transactionToCheck
+   * @param {array} existingTransactions
+   * @returns {boolean} whether the searched transaction was found or not
+   */
+  alreadyExists(existingTransactions) {
+    const identifier = Transaction.prototype.getIdentifier.call(this)
+
+    for (const existingTransaction of existingTransactions) {
+      const existingIdentifier = Transaction.prototype.getIdentifier.call(
+        existingTransaction
+      )
+
+      if (identifier === existingIdentifier) {
+        return true
+      }
+    }
+
+    return false
+  }
+
+  /**
+   * Get transactions that should be present in the stack but are not
+   * The transactions are checked using triplet {label, amount, date}
+   * @param {array} transactionsToCheck
+   * @param {array} stackTransactions
+   * @returns {array}
+   */
+  static getMissedTransactions(transactionsToCheck, stackTransactions) {
+    const missedTransactions = transactionsToCheck
+      .map(
+        transaction =>
+          !Transaction.prototype.alreadyExists.call(
+            transaction,
+            stackTransactions
+          ) && transaction
+      )
+      .filter(Boolean)
+
+    return missedTransactions
+  }
+
   static reconciliate(remoteTransactions, localTransactions) {
-    const alreadyExists = transaction =>
+    const findByVendorId = transaction =>
       localTransactions.find(t => t.vendorId === transaction.vendorId)
 
     const groups = groupBy(
       remoteTransactions,
       transaction =>
-        alreadyExists(transaction) ? 'updatedTransactions' : 'newTransactions'
+        findByVendorId(transaction) ? 'updatedTransactions' : 'newTransactions'
     )
 
     let newTransactions = groups.newTransactions || []
@@ -65,7 +136,19 @@ class Transaction extends Document {
     if (splitDate) {
       log('info', `Not saving new transactions before: ${splitDate}`)
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
-      newTransactions = newTransactions.filter(isAfterSplit)
+      const isBeforeSplit = x =>
+        Transaction.prototype.isBeforeOrSame.call(x, splitDate)
+
+      const transactionsAfterSplit = newTransactions.filter(isAfterSplit)
+      const transactionsBeforeSplit = newTransactions.filter(isBeforeSplit)
+
+      const missedTransactions = Transaction.getMissedTransactions(
+        transactionsBeforeSplit,
+        localTransactions
+      )
+
+      newTransactions = [...transactionsAfterSplit, ...missedTransactions]
+
       log('info', `After split ${newTransactions.length}`)
     } else {
       log('info', "Can't find a split date, saving all new transactions")
