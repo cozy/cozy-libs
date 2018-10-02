@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.38"></a>
+## [1.3.38](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.3.37...cozy-doctypes@1.3.38) (2018-10-02)
+
+
+### Bug Fixes
+
+* **doctypes:** Format log properly ([3541cdc](https://github.com/cozy/cozy-libs/commit/3541cdc))
+
+
+
+
 <a name="1.3.37"></a>
 ## [1.3.37](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.3.36...cozy-doctypes@1.3.37) (2018-09-28)
 
