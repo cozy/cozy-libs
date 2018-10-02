@@ -56,19 +56,9 @@ class BankingReconciliator {
       stackAccounts.map(x => x._id)
     )
 
-    const stackTransactionsByVendorId = keyBy(
-      stackTransactions,
-      BankTransaction.vendorIdAttr
-    )
     const transactions = BankTransaction.reconciliate(
       fetchedTransactions,
-      stackTransactions,
-      {
-        isNew: transaction => {
-          let vendorId = transaction[BankTransaction.vendorIdAttr]
-          return !vendorId || !stackTransactionsByVendorId[vendorId]
-        }
-      }
+      stackTransactions
     )
 
     log('info', 'Saving transactions...')

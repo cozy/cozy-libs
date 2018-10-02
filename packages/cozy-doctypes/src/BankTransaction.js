@@ -47,11 +47,16 @@ class Transaction extends Document {
     }
   }
 
-  static reconciliate(remoteTransactions, localTransactions, options) {
+  static reconciliate(remoteTransactions, localTransactions) {
+    const alreadyExists = transaction =>
+      localTransactions.find(t => t.vendorId === transaction.vendorId)
+
     const groups = groupBy(
       remoteTransactions,
-      tr => (options.isNew(tr) ? 'newTransactions' : 'updatedTransactions')
+      transaction =>
+        alreadyExists(transaction) ? 'updatedTransactions' : 'newTransactions'
     )
+
     let newTransactions = groups.newTransactions || []
     const updatedTransactions = groups.updatedTransactions || []
 
