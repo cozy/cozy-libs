@@ -1,7 +1,6 @@
 const keyBy = require('lodash/keyBy')
 const groupBy = require('lodash/groupBy')
 const max = require('lodash/max')
-const isEqual = require('lodash/isEqual')
 const Document = require('./Document')
 const BankAccount = require('./BankAccount')
 const log = require('./log')

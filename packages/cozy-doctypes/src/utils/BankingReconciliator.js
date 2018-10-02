@@ -1,4 +1,3 @@
-const keyBy = require('lodash/keyBy')
 const fromPairs = require('lodash/fromPairs')
 const log = require('cozy-logger').namespace('BankingReconciliator')
 
