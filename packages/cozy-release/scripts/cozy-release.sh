@@ -348,7 +348,10 @@ beta () {
     warn_about_beta $remote
   fi
 
-  if ! git pull; then exit 1
+  if ! git pull; then
+    exit 1
+  fi
+
   git push $remote HEAD
   tag_beta $remote
 }
@@ -367,7 +370,10 @@ stable () {
     warn_about_stable $remote
   fi
 
-  if ! git pull; then exit 1
+  if ! git pull; then
+    exit 1
+  fi
+
   git push $remote HEAD
   tag_stable $remote
 }
