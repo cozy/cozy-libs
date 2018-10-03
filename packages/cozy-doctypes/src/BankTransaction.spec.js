@@ -25,22 +25,10 @@ describe('getIdentifier', () => {
 })
 
 describe('alreadyExists', () => {
-  const existingTransactions = [
-    {
-      amount: -10,
-      originalLabel: 'Test 01',
-      date: '2018-10-02'
-    },
-    {
-      amount: -20,
-      originalLabel: 'Test 02',
-      date: '2018-10-02'
-    },
-    {
-      amount: -30,
-      originalLabel: 'Test 03',
-      date: '2018-10-02'
-    }
+  const existingIdentifiers = [
+    '-10-Test 01-2018-10-02',
+    '-20-Test 02-2018-10-02',
+    '-30-Test 03-2018-10-02'
   ]
 
   it('should return true if the transaction exists', () => {
@@ -52,7 +40,7 @@ describe('alreadyExists', () => {
 
     const exists = BankTransaction.prototype.alreadyExists.call(
       transaction,
-      existingTransactions
+      existingIdentifiers
     )
 
     expect(exists).toBe(true)
@@ -67,7 +55,7 @@ describe('alreadyExists', () => {
 
     const exists = BankTransaction.prototype.alreadyExists.call(
       transaction,
-      existingTransactions
+      existingIdentifiers
     )
 
     expect(exists).toBe(false)

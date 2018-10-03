@@ -75,25 +75,15 @@ class Transaction extends Document {
   }
 
   /**
-   * Tell if a transaction exists in a given array of transactions
+   * Tell if a transaction exists in a given array of transactions identifiers
    * @param {object} transactionToCheck
-   * @param {array} existingTransactions
+   * @param {array} existingIdentifiers - The identifiers of transactions that already exist
    * @returns {boolean} whether the searched transaction was found or not
    */
-  alreadyExists(existingTransactions) {
+  alreadyExists(existingIdentifiers) {
     const identifier = Transaction.prototype.getIdentifier.call(this)
 
-    for (const existingTransaction of existingTransactions) {
-      const existingIdentifier = Transaction.prototype.getIdentifier.call(
-        existingTransaction
-      )
-
-      if (identifier === existingIdentifier) {
-        return true
-      }
-    }
-
-    return false
+    return existingIdentifiers.includes(identifier)
   }
 
   /**
@@ -104,12 +94,16 @@ class Transaction extends Document {
    * @returns {array}
    */
   static getMissedTransactions(transactionsToCheck, stackTransactions) {
+    const existingIdentifiers = stackTransactions.map(transaction =>
+      Transaction.prototype.getIdentifier.call(transaction)
+    )
+
     const missedTransactions = transactionsToCheck
       .map(
         transaction =>
           !Transaction.prototype.alreadyExists.call(
             transaction,
-            stackTransactions
+            existingIdentifiers
           ) && transaction
       )
       .filter(Boolean)
