@@ -67,11 +67,11 @@ class Transaction extends Document {
 
   /**
    * Get the descriptive (and almost uniq) identifier of a transaction
-   * @param {object} transaction - The transaction (containing at least amount, label and date)
+   * @param {object} transaction - The transaction (containing at least amount, originalLabel and date)
    * @returns {object}
    */
   getIdentifier() {
-    return `${this.amount}-${this.label}-${this.date}`
+    return `${this.amount}-${this.originalLabel}-${this.date}`
   }
 
   /**

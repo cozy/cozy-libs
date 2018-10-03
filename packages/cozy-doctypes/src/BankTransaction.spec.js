@@ -13,7 +13,7 @@ describe('getIdentifier', () => {
   it('should return the identifier of a transaction', () => {
     const transaction = {
       amount: -10,
-      label: 'Test getIdentifier',
+      originalLabel: 'Test getIdentifier',
       date: '2018-10-02',
       currency: 'EUR'
     }
@@ -28,17 +28,17 @@ describe('alreadyExists', () => {
   const existingTransactions = [
     {
       amount: -10,
-      label: 'Test 01',
+      originalLabel: 'Test 01',
       date: '2018-10-02'
     },
     {
       amount: -20,
-      label: 'Test 02',
+      originalLabel: 'Test 02',
       date: '2018-10-02'
     },
     {
       amount: -30,
-      label: 'Test 03',
+      originalLabel: 'Test 03',
       date: '2018-10-02'
     }
   ]
@@ -46,7 +46,7 @@ describe('alreadyExists', () => {
   it('should return true if the transaction exists', () => {
     const transaction = {
       amount: -10,
-      label: 'Test 01',
+      originalLabel: 'Test 01',
       date: '2018-10-02'
     }
 
@@ -61,7 +61,7 @@ describe('alreadyExists', () => {
   it('should return false if the transaction does not exist', () => {
     const transaction = {
       amount: -50,
-      label: 'Not existing',
+      originalLabel: 'Not existing',
       date: '2018-10-02'
     }
 
@@ -78,17 +78,17 @@ describe('getMissedTransactions', () => {
   const existingTransactions = [
     {
       amount: -10,
-      label: 'Test 01',
+      originalLabel: 'Test 01',
       date: '2018-10-02'
     },
     {
       amount: -20,
-      label: 'Test 02',
+      originalLabel: 'Test 02',
       date: '2018-10-02'
     },
     {
       amount: -30,
-      label: 'Test 03',
+      originalLabel: 'Test 03',
       date: '2018-10-02'
     }
   ]
@@ -97,12 +97,12 @@ describe('getMissedTransactions', () => {
     const newTransactions = [
       {
         amount: -10,
-        label: 'Test 01',
+        originalLabel: 'Test 01',
         date: '2018-10-02'
       },
       {
         amount: -15,
-        label: 'Test 04',
+        originalLabel: 'Test 04',
         date: '2018-10-01'
       }
     ]
@@ -119,7 +119,7 @@ describe('getMissedTransactions', () => {
     const newTransactions = [
       {
         amount: -10,
-        label: 'Test 01',
+        originalLabel: 'Test 01',
         date: '2018-10-02'
       }
     ]
