@@ -7,9 +7,12 @@ const log = require('./log')
 
 const getDate = transaction => transaction.date.slice(0, 10)
 
-const getSplitDate = (linxoTransactions, stackTransactions) => {
-  // Find the first date for which we have new linxo transactions
-  // We'll delete transactions after this date and add new ones
+/**
+ * Get the date of the latest transaction in an array
+ * @param {array} stackTransactions
+ * @returns {string} The date of the latest transaction (YYYY-MM-DD)
+ */
+const getSplitDate = stackTransactions => {
   return max(stackTransactions.map(transaction => getDate(transaction)))
 }
 
@@ -44,29 +47,120 @@ class Transaction extends Document {
     }
   }
 
-  static reconciliate(remoteTransactions, localTransactions, options) {
+  isBeforeOrSame(maxDate) {
+    if (!maxDate) {
+      return true
+    } else {
+      const day = ensureISOString(this.date).slice(0, 10)
+      if (day !== 'NaN') {
+        return day <= maxDate
+      } else {
+        log(
+          'warn',
+          'transaction date could not be parsed. transaction: ' +
+            JSON.stringify(this)
+        )
+        return false
+      }
+    }
+  }
+
+  /**
+   * Get the descriptive (and almost uniq) identifier of a transaction
+   * @param {object} transaction - The transaction (containing at least amount, originalLabel and date)
+   * @returns {object}
+   */
+  getIdentifier() {
+    return `${this.amount}-${this.originalLabel}-${this.date}`
+  }
+
+  /**
+   * Get transactions that should be present in the stack but are not
+   * The transactions are compared using Transaction.prototype.getIdentifier
+   * @param {array} transactionsToCheck
+   * @param {array} stackTransactions
+   * @returns {array}
+   */
+  static getMissedTransactions(transactionsToCheck, stackTransactions) {
+    const toCheckByIdentifier = groupBy(transactionsToCheck, t =>
+      Transaction.prototype.getIdentifier.call(t)
+    )
+
+    const existingByIdentifier = groupBy(stackTransactions, t =>
+      Transaction.prototype.getIdentifier.call(t)
+    )
+
+    const missedTransactions = []
+
+    for (const [identifier, newTransactions] of Object.entries(
+      toCheckByIdentifier
+    )) {
+      const existingTransactions = existingByIdentifier[identifier]
+
+      if (!existingTransactions) {
+        missedTransactions.push(...newTransactions)
+        continue
+      }
+
+      if (newTransactions.length > existingTransactions.length) {
+        const difference = newTransactions.length - existingTransactions.length
+        missedTransactions.push(...newTransactions.slice(0, difference))
+        continue
+      }
+    }
+
+    return missedTransactions
+  }
+
+  static reconciliate(remoteTransactions, localTransactions) {
+    const findByVendorId = transaction =>
+      localTransactions.find(t => t.vendorId === transaction.vendorId)
+
     const groups = groupBy(
       remoteTransactions,
-      tr => (options.isNew(tr) ? 'newTransactions' : 'updatedTransactions')
+      transaction =>
+        findByVendorId(transaction) ? 'updatedTransactions' : 'newTransactions'
     )
+
     let newTransactions = groups.newTransactions || []
     const updatedTransactions = groups.updatedTransactions || []
 
-    // If saving from a new banking vendor, transactions will not have the same vendor ids as the ones in the
-    // database, we have to filter all transactions that are before our last save transactions
-    const splitDate = getSplitDate(remoteTransactions, localTransactions)
-    const onlyMostRecent = options.onlyMostRecent
-    if (onlyMostRecent && splitDate) {
-      log('info', 'Saving transactions from a new vendor')
-      log('info', `Not saving new transactions before: ${splitDate}`)
+    const splitDate = getSplitDate(localTransactions)
+
+    if (splitDate) {
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
-      newTransactions = newTransactions.filter(isAfterSplit)
-      log('info', `After split ${newTransactions.length}`)
-    } else {
-      log(
-        'info',
-        `onlyMostRecent: ${onlyMostRecent}, saving all new transactions`
+      const isBeforeSplit = x =>
+        Transaction.prototype.isBeforeOrSame.call(x, splitDate)
+
+      const transactionsAfterSplit = newTransactions.filter(isAfterSplit)
+
+      if (transactionsAfterSplit.length > 0) {
+        log(
+          'info',
+          `Saving ${
+            transactionsAfterSplit.length
+          } transaction after ${splitDate}`
+        )
+      } else {
+        log('info', `No transaction after ${splitDate}`)
+      }
+
+      const transactionsBeforeSplit = newTransactions.filter(isBeforeSplit)
+
+      const missedTransactions = Transaction.getMissedTransactions(
+        transactionsBeforeSplit,
+        localTransactions
       )
+
+      if (missedTransactions.length > 0) {
+        log('info', `Saving ${missedTransactions}.length`)
+      } else {
+        log('info', 'No missed transactions to catch-up')
+      }
+
+      newTransactions = [...transactionsAfterSplit, ...missedTransactions]
+    } else {
+      log('info', "Can't find a split date, saving all new transactions")
     }
 
     log(

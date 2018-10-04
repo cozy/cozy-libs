@@ -1,4 +1,3 @@
-const keyBy = require('lodash/keyBy')
 const fromPairs = require('lodash/fromPairs')
 const log = require('cozy-logger').namespace('BankingReconciliator')
 
@@ -56,24 +55,9 @@ class BankingReconciliator {
       stackAccounts.map(x => x._id)
     )
 
-    const stackTransactionsByVendorId = keyBy(
-      stackTransactions,
-      BankTransaction.vendorIdAttr
-    )
-    const fromNewKonnectorAccount = BankAccount.isFromNewKonnector(
-      fetchedAccounts,
-      stackAccounts
-    )
     const transactions = BankTransaction.reconciliate(
       fetchedTransactions,
-      stackTransactions,
-      {
-        isNew: transaction => {
-          let vendorId = transaction[BankTransaction.vendorIdAttr]
-          return !vendorId || !stackTransactionsByVendorId[vendorId]
-        },
-        onlyMostRecent: fromNewKonnectorAccount
-      }
+      stackTransactions
     )
 
     log('info', 'Saving transactions...')

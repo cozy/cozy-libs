@@ -43,7 +43,7 @@ describe('banking reconciliator', () => {
     expect(Document.createOrUpdate).toHaveBeenCalledTimes(2)
   })
 
-  it('should correctly reconciliate when accounts do not exist', async () => {
+  it('should correctly reconciliate when accounts exist', async () => {
     existingAccounts = [
       {
         vendorId: 1,
@@ -76,7 +76,7 @@ describe('banking reconciliator', () => {
           amount: -200,
           label: 'Debit 200',
           vendorAccountId: 2,
-          date: '2018-06-24T00:00' // prior to split date, not saved
+          date: '2018-06-24T00:00' // prior to split date and doesn't exist, saved
         },
         {
           amount: -100,
@@ -86,7 +86,7 @@ describe('banking reconciliator', () => {
         }
       ]
     )
-    expect(Document.createOrUpdate).toHaveBeenCalledTimes(2)
+    expect(Document.createOrUpdate).toHaveBeenCalledTimes(3)
     expect(Document.createOrUpdate.mock.calls).toMatchSnapshot()
   })
 })
