@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.3.38...cozy-doctypes@1.4.0) (2018-10-04)
+
+
+### Features
+
+* **doctypes:** Always use splitDate method ([79c6632](https://github.com/cozy/cozy-libs/commit/79c6632))
+* **doctypes:** Check if transactions exists ([cb6e2e2](https://github.com/cozy/cozy-libs/commit/cb6e2e2))
+* **doctypes:** Compute identifiers only once ([f608d32](https://github.com/cozy/cozy-libs/commit/f608d32))
+* **doctypes:** New Transaction::reconciliate logs ([448f8ff](https://github.com/cozy/cozy-libs/commit/448f8ff))
+* **doctypes:** Save missed transactions ([6c6c5dd](https://github.com/cozy/cozy-libs/commit/6c6c5dd))
+* **doctypes:** Transaction catchup edge case ([4c1c8b7](https://github.com/cozy/cozy-libs/commit/4c1c8b7))
+* **doctypes:** Use originalLabel for identifier ([e86350d](https://github.com/cozy/cozy-libs/commit/e86350d))
+
+
+
+
 <a name="1.3.38"></a>
 ## [1.3.38](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.3.37...cozy-doctypes@1.3.38) (2018-10-02)
 
