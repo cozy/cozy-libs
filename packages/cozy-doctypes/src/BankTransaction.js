@@ -127,12 +127,23 @@ class Transaction extends Document {
     const splitDate = getSplitDate(localTransactions)
 
     if (splitDate) {
-      log('info', `Not saving new transactions before: ${splitDate}`)
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
       const isBeforeSplit = x =>
         Transaction.prototype.isBeforeOrSame.call(x, splitDate)
 
       const transactionsAfterSplit = newTransactions.filter(isAfterSplit)
+
+      if (transactionsAfterSplit.length > 0) {
+        log(
+          'info',
+          `Saving ${
+            transactionsAfterSplit.length
+          } transaction after ${splitDate}`
+        )
+      } else {
+        log('info', `No transaction after ${splitDate}`)
+      }
+
       const transactionsBeforeSplit = newTransactions.filter(isBeforeSplit)
 
       const missedTransactions = Transaction.getMissedTransactions(
@@ -140,9 +151,13 @@ class Transaction extends Document {
         localTransactions
       )
 
-      newTransactions = [...transactionsAfterSplit, ...missedTransactions]
+      if (missedTransactions.length > 0) {
+        log('info', `Saving ${missedTransactions}.length`)
+      } else {
+        log('info', 'No missed transactions to catch-up')
+      }
 
-      log('info', `After split ${newTransactions.length}`)
+      newTransactions = [...transactionsAfterSplit, ...missedTransactions]
     } else {
       log('info', "Can't find a split date, saving all new transactions")
     }
