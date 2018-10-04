@@ -7,8 +7,11 @@
       "extends": [
         "config:base"
       ],
-      "schedule": [
-        "before 5am"
+      "packageRules": [
+        {
+          "excludePackageNames": ["^cozy-"],
+          "schedule": "before 5am"
+        }
       ],
       "timezone": "Europe/Paris",
       "updateNotScheduled": false
