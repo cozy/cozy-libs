@@ -24,44 +24,6 @@ describe('getIdentifier', () => {
   })
 })
 
-describe('alreadyExists', () => {
-  const existingIdentifiers = [
-    '-10-Test 01-2018-10-02',
-    '-20-Test 02-2018-10-02',
-    '-30-Test 03-2018-10-02'
-  ]
-
-  it('should return true if the transaction exists', () => {
-    const transaction = {
-      amount: -10,
-      originalLabel: 'Test 01',
-      date: '2018-10-02'
-    }
-
-    const exists = BankTransaction.prototype.alreadyExists.call(
-      transaction,
-      existingIdentifiers
-    )
-
-    expect(exists).toBe(true)
-  })
-
-  it('should return false if the transaction does not exist', () => {
-    const transaction = {
-      amount: -50,
-      originalLabel: 'Not existing',
-      date: '2018-10-02'
-    }
-
-    const exists = BankTransaction.prototype.alreadyExists.call(
-      transaction,
-      existingIdentifiers
-    )
-
-    expect(exists).toBe(false)
-  })
-})
-
 describe('getMissedTransactions', () => {
   const existingTransactions = [
     {
@@ -92,6 +54,28 @@ describe('getMissedTransactions', () => {
         amount: -15,
         originalLabel: 'Test 04',
         date: '2018-10-01'
+      }
+    ]
+
+    const missedTransactions = BankTransaction.getMissedTransactions(
+      newTransactions,
+      existingTransactions
+    )
+
+    expect(missedTransactions).toEqual([newTransactions[1]])
+  })
+
+  it('should return transactions with an already existing identifier, if there are more new than existing', () => {
+    const newTransactions = [
+      {
+        amount: -10,
+        originalLabel: 'Test 01',
+        date: '2018-10-02'
+      },
+      {
+        amount: -10,
+        originalLabel: 'Test 01',
+        date: '2018-10-02'
       }
     ]
 

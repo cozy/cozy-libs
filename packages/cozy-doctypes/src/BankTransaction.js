@@ -75,38 +75,39 @@ class Transaction extends Document {
   }
 
   /**
-   * Tell if a transaction exists in a given array of transactions identifiers
-   * @param {object} transactionToCheck
-   * @param {array} existingIdentifiers - The identifiers of transactions that already exist
-   * @returns {boolean} whether the searched transaction was found or not
-   */
-  alreadyExists(existingIdentifiers) {
-    const identifier = Transaction.prototype.getIdentifier.call(this)
-
-    return existingIdentifiers.includes(identifier)
-  }
-
-  /**
    * Get transactions that should be present in the stack but are not
-   * The transactions are checked using triplet {label, amount, date}
+   * The transactions are compared using Transaction.prototype.getIdentifier
    * @param {array} transactionsToCheck
    * @param {array} stackTransactions
    * @returns {array}
    */
   static getMissedTransactions(transactionsToCheck, stackTransactions) {
-    const existingIdentifiers = stackTransactions.map(transaction =>
-      Transaction.prototype.getIdentifier.call(transaction)
+    const toCheckByIdentifier = groupBy(transactionsToCheck, t =>
+      Transaction.prototype.getIdentifier.call(t)
     )
 
-    const missedTransactions = transactionsToCheck
-      .map(
-        transaction =>
-          !Transaction.prototype.alreadyExists.call(
-            transaction,
-            existingIdentifiers
-          ) && transaction
-      )
-      .filter(Boolean)
+    const existingByIdentifier = groupBy(stackTransactions, t =>
+      Transaction.prototype.getIdentifier.call(t)
+    )
+
+    const missedTransactions = []
+
+    for (const [identifier, newTransactions] of Object.entries(
+      toCheckByIdentifier
+    )) {
+      const existingTransactions = existingByIdentifier[identifier]
+
+      if (!existingTransactions) {
+        missedTransactions.push(...newTransactions)
+        continue
+      }
+
+      if (newTransactions.length > existingTransactions.length) {
+        const difference = newTransactions.length - existingTransactions.length
+        missedTransactions.push(...newTransactions.slice(0, difference))
+        continue
+      }
+    }
 
     return missedTransactions
   }
