@@ -7,9 +7,9 @@
   "author": "Cozy",
   "license": "MIT",
   "dependencies": {
-    "cozy-logger": "^1.1.8",
-    "es6-promise-pool": "^2.5.0",
-    "lodash": "^4.17.10"
+    "cozy-logger": "1.2.0",
+    "es6-promise-pool": "2.5.0",
+    "lodash": "4.17.11"
   },
   "devDependencies": {
     "btoa": "1.2.1",
