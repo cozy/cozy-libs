@@ -15,6 +15,7 @@ import { getPlatform, isWebApp, isMobileApp, isIOSApp, isAndroidApp } from 'coz
 ```
 
 To know the platform:
+
 - `getPlatform()`: return `ios`, `android` or `web`
 - `isWebApp()`: return `boolean`
 - `isMobileApp()`: return `boolean`
@@ -32,9 +33,11 @@ To know device name `getDeviceName()`.
 ### Cordova Plugins
 
 ```
-import { hasDevicePlugin, hasInAppBrowserPlugin, hasSafariPlugin } from 'cozy-device-helper'
+import { hasDevicePlugin, hasInAppBrowserPlugin, hasSafariPlugin, checkApp, startApp } from 'cozy-device-helper'
 ```
 
 - `hasDevicePlugin`: return `boolean`
 - `hasInAppBrowserPlugin`: return `boolean`
 - `hasSafariPlugin`: return a promise which resolve by a `boolean`
+- `checkApp`: return a `promise` that resolves with informations about the application (if installed) or false (if not installed)
+- `startApp`: Start an Application. Return a `promise` - False if the application was not able to be started
