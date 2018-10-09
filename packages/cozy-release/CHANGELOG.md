@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.2"></a>
+## [1.7.2](https://github.com/cozy/cozy-libs/compare/cozy-release@1.7.1...cozy-release@1.7.2) (2018-10-09)
+
+
+
+
+**Note:** Version bump only for package cozy-release
+
 <a name="1.7.1"></a>
 ## [1.7.1](https://github.com/cozy/cozy-libs/compare/cozy-release@1.7.0...cozy-release@1.7.1) (2018-10-03)
 
