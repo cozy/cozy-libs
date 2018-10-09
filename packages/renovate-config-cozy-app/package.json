@@ -17,6 +17,7 @@
         }
       ],
       "timezone": "Europe/Paris",
+      "schedule": ["after 9pm and before 6am on every weekday", "every weekend"],
       "updateNotScheduled": false
     }
   },
