@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.4.0...cozy-doctypes@1.5.0) (2018-10-09)
+
+
+### Features
+
+* **doctypes:** Add reconciliate options ([d9fd3e4](https://github.com/cozy/cozy-libs/commit/d9fd3e4))
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.3.38...cozy-doctypes@1.4.0) (2018-10-04)
 
