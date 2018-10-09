@@ -112,7 +112,7 @@ class Transaction extends Document {
     return missedTransactions
   }
 
-  static reconciliate(remoteTransactions, localTransactions) {
+  static reconciliate(remoteTransactions, localTransactions, options = {}) {
     const findByVendorId = transaction =>
       localTransactions.find(t => t.vendorId === transaction.vendorId)
 
@@ -128,6 +128,10 @@ class Transaction extends Document {
     const splitDate = getSplitDate(localTransactions)
 
     if (splitDate) {
+      if (options.onSplitDate) {
+        options.onSplitDate()
+      }
+
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
       const isBeforeSplit = x =>
         Transaction.prototype.isBeforeOrSame.call(x, splitDate)

@@ -57,7 +57,8 @@ class BankingReconciliator {
 
     const transactions = BankTransaction.reconciliate(
       fetchedTransactions,
-      stackTransactions
+      stackTransactions,
+      options.transactionsReconciliationOptions
     )
 
     log('info', 'Saving transactions...')
