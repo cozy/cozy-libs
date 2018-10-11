@@ -103,4 +103,24 @@ describe('getMissedTransactions', () => {
 
     expect(missedTransactions).toHaveLength(0)
   })
+
+  it('should call the given onMissedTransactionFound option', () => {
+    const newTransactions = [
+      {
+        amount: -15,
+        originalLabel: 'Test 04',
+        date: '2018-10-01'
+      }
+    ]
+
+    const onMissedTransactionFound = jest.fn()
+    BankTransaction.getMissedTransactions(
+      newTransactions,
+      existingTransactions,
+      { onMissedTransactionFound }
+    )
+
+    expect(onMissedTransactionFound).toHaveBeenCalledTimes(1)
+    expect(onMissedTransactionFound).toHaveBeenCalledWith([], newTransactions)
+  })
 })

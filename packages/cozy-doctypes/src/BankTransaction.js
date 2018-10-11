@@ -81,7 +81,11 @@ class Transaction extends Document {
    * @param {array} stackTransactions
    * @returns {array}
    */
-  static getMissedTransactions(transactionsToCheck, stackTransactions) {
+  static getMissedTransactions(
+    transactionsToCheck,
+    stackTransactions,
+    options = {}
+  ) {
     const toCheckByIdentifier = groupBy(transactionsToCheck, t =>
       Transaction.prototype.getIdentifier.call(t)
     )
@@ -95,16 +99,16 @@ class Transaction extends Document {
     for (const [identifier, newTransactions] of Object.entries(
       toCheckByIdentifier
     )) {
-      const existingTransactions = existingByIdentifier[identifier]
+      const existingTransactions = existingByIdentifier[identifier] || []
 
-      if (!existingTransactions) {
-        missedTransactions.push(...newTransactions)
-        continue
+      if (typeof options.onMissedTransactionFound === 'function') {
+        options.onMissedTransactionFound(existingTransactions, newTransactions)
       }
 
       if (newTransactions.length > existingTransactions.length) {
         const difference = newTransactions.length - existingTransactions.length
         missedTransactions.push(...newTransactions.slice(0, difference))
+
         continue
       }
     }
@@ -153,11 +157,12 @@ class Transaction extends Document {
 
       const missedTransactions = Transaction.getMissedTransactions(
         transactionsBeforeSplit,
-        localTransactions
+        localTransactions,
+        options
       )
 
       if (missedTransactions.length > 0) {
-        log('info', `Saving ${missedTransactions}.length`)
+        log('info', `Saving ${missedTransactions.length}`)
       } else {
         log('info', 'No missed transactions to catch-up')
       }
