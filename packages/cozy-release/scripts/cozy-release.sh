@@ -305,6 +305,20 @@ start() {
 
   current_version=`read_current_version`
 
+  existing_stable_tag=`get_existing_stable_tag $current_version`
+  if [[ ! -z "${existing_stable_tag// }" ]]; then
+    next_version=`compute_next_version $current_version`
+    echo "⚠️  cozy-release: version $current_version has already been released as stable."
+    read -p "Upgrade master to $next_version first ? (Y/n): " user_response
+
+    if [[ $user_response != "Y" ]]; then
+      exit 0
+    fi
+
+    bump_version $remote $next_version
+    current_version=$next_version
+  fi
+
   if [ ! $NO_PUSH ]; then
     warn_about_start $remote $current_version
   fi
