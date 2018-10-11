@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.5.1...cozy-doctypes@1.6.0) (2018-10-11)
+
+
+### Bug Fixes
+
+* **doctypes:** Fix missed transactions log ([e17fa08](https://github.com/cozy/cozy-libs/commit/e17fa08))
+
+
+### Features
+
+* **doctypes:** Add onMissedTransactionFound option ([76bf922](https://github.com/cozy/cozy-libs/commit/76bf922))
+* **doctypes:** Pass options to Transaction reconciliate ([ba3ce50](https://github.com/cozy/cozy-libs/commit/ba3ce50))
+
+
+
+
 <a name="1.5.1"></a>
 ## [1.5.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.5.0...cozy-doctypes@1.5.1) (2018-10-09)
 
