@@ -31,6 +31,12 @@ while true; do
   case "$1" in
     -h|--help ) HELP=true; shift $(( $# > 0 ? 1 : 0 ));;
     --no-push ) NO_PUSH=true; shift $(( $# > 0 ? 1 : 0 )) ;;
+    --auto-bump ) if [[ $command == "start" ]]; then
+          AUTO_BUMP=true;
+          shift $(( $# > 0 ? 1 : 0 ));
+        else
+          UNKNOWN_OPTION=$1; break;
+        fi;;
     --release-pr-template ) if [[ $command == "start" ]]; then
           shift $(( $# > 0 ? 1 : 0 ));
           PULL_REQUEST_TEMPLATE=$1;
@@ -308,11 +314,16 @@ start() {
   existing_stable_tag=`get_existing_stable_tag $current_version`
   if [[ ! -z "${existing_stable_tag// }" ]]; then
     next_version=`compute_next_version $current_version`
-    echo "⚠️  cozy-release: version $current_version has already been released as stable."
-    read -p "Upgrade master to $next_version first ? (Y/n): " user_response
 
-    if [[ $user_response != "Y" ]]; then
-      exit 0
+    if [[ $AUTO_BUMP ]]; then
+      echo "☁️ cozy-release: Automatically bumping master version to $next_version"
+    else
+      echo "⚠️  cozy-release: version $current_version has already been released as stable."
+      read -p "Upgrade master to $next_version first ? (Y/n): " user_response
+
+      if [[ $user_response != "Y" ]]; then
+        exit 0
+      fi
     fi
 
     bump_version $remote $next_version
@@ -652,13 +663,17 @@ show_start_help() {
   echo ""
   echo "  $(tput bold)options:$(tput sgr0)"
   echo ""
-  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo "    $(tput bold)--help$(tput sgr0)            Shows help."
   echo ""
-  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                 for testing stuff."
+  echo "    $(tput bold)--no-push$(tput sgr0)         Nothing is pushed to remote repository. Ideal"
+  echo "                      for testing stuff."
   echo ""
-  echo "    $(tput bold)--pr <file>$(tput sgr0)  Make a pull request with the given <file>"
-  echo "                 (text or markdown) as description."
+  echo "    $(tput bold)--auto-bump$(tput sgr0)       Automatically bump master version before"
+  echo "                      starting a new release, if the current version has already been"
+  echo "                      released (i.e. if a stable tag exists)"
+  echo ""
+  echo "    $(tput bold)--pr <file>$(tput sgr0)       Make a pull request with the given <file>"
+  echo "                      (text or markdown) as description."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From master at version 1.0.0"
