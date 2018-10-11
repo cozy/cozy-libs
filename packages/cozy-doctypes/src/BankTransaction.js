@@ -145,15 +145,21 @@ class Transaction extends Document {
       if (transactionsAfterSplit.length > 0) {
         log(
           'info',
-          `Saving ${
+          `Found ${
             transactionsAfterSplit.length
-          } transaction after ${splitDate}`
+          } transactions after ${splitDate}`
         )
       } else {
         log('info', `No transaction after ${splitDate}`)
       }
 
       const transactionsBeforeSplit = newTransactions.filter(isBeforeSplit)
+      log(
+        'info',
+        `Found ${
+          transactionsBeforeSplit.length
+        } transactions before ${splitDate}`
+      )
 
       const missedTransactions = Transaction.getMissedTransactions(
         transactionsBeforeSplit,
@@ -162,9 +168,14 @@ class Transaction extends Document {
       )
 
       if (missedTransactions.length > 0) {
-        log('info', `Saving ${missedTransactions.length}`)
+        log(
+          'info',
+          `Found ${
+            missedTransactions.length
+          } missed transactions before ${splitDate}`
+        )
       } else {
-        log('info', 'No missed transactions to catch-up')
+        log('info', `No missed transactions before ${splitDate}`)
       }
 
       newTransactions = [...transactionsAfterSplit, ...missedTransactions]
