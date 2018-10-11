@@ -157,7 +157,7 @@ class Transaction extends Document {
       )
 
       if (missedTransactions.length > 0) {
-        log('info', `Saving ${missedTransactions}.length`)
+        log('info', `Saving ${missedTransactions.length}`)
       } else {
         log('info', 'No missed transactions to catch-up')
       }
