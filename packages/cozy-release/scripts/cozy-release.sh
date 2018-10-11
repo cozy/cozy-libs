@@ -276,7 +276,7 @@ start() {
 
   assert_jq_exists
 
-  if [[ ! -f PULL_REQUEST_TEMPLATE ]]; then
+  if [[ -f PULL_REQUEST_TEMPLATE ]]; then
     assert_hub_exists
   fi
 
