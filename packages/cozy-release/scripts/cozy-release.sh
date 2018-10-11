@@ -122,7 +122,7 @@ assert_release_or_patch() {
 
 get_existing_stable_tag() {
   version=$1
-  existing_stable_tag=`git tag --list | grep "^$version\$"`
+  echo `git tag --list | grep "^$version\$"`
 }
 
 tag_beta() {
@@ -130,7 +130,7 @@ tag_beta() {
 
   current_version=`read_current_version`
 
-  get_existing_stable_tag $current_version
+  existing_stable_tag=`get_existing_stable_tag $current_version`
   if [[ ! -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $current_version has already been released as stable. You should not release new beta again. Start a new release or patch the $current_version version."
     exit 1
@@ -158,7 +158,7 @@ tag_stable() {
 
   current_version=`read_current_version`
 
-  get_existing_stable_tag $current_version
+  existing_stable_tag=`get_existing_stable_tag $current_version`
   if [[ ! -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $current_version has already been released as stable. Start a new release or patch the $current_version version."
     exit 1
@@ -391,7 +391,7 @@ patch () {
     exit 1
   fi
 
-  get_existing_stable_tag $version
+  existing_stable_tag=`get_existing_stable_tag $version`
   if [[ -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: No stable version $version has been released. This version cannot be patched."
     exit 1
@@ -465,7 +465,7 @@ end_release() {
   version=$2
   branch="release-$version"
 
-  get_existing_stable_tag $version
+  existing_stable_tag=`get_existing_stable_tag $version`
   if [[ -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $version has not been tagged as stable yet. You can do it by running 'cozy-release stable'."
     read -p "Continue anyway and end this release ? (Y/n): " user_response
@@ -508,7 +508,7 @@ end_patch() {
   version=$2
   branch="patch-$version"
 
-  get_existing_stable_tag $version
+  existing_stable_tag=`get_existing_stable_tag $version`
   if [[ -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $version has not been tagged as stable yet. You can do it by running 'cozy-release stable'."
     read -p "Continue anyway and end this patch ? (Y/n): " user_response
