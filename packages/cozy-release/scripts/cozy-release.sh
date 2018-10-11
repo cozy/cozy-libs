@@ -128,7 +128,7 @@ assert_release_or_patch() {
 
 get_existing_stable_tag() {
   version=$1
-  echo `git tag --list | grep "^$version\$"`
+  echo `git tag --list | grep "^v\?$version\$"`
 }
 
 tag_beta() {
