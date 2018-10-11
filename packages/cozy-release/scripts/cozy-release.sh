@@ -37,6 +37,7 @@ while true; do
         else
           UNKNOWN_OPTION=$1; break;
         fi;;
+    --yes ) YES=true; shift $(( $# > 0 ? 1 : 0 )) ;;
     --release-pr-template ) if [[ $command == "start" ]]; then
           shift $(( $# > 0 ? 1 : 0 ));
           PULL_REQUEST_TEMPLATE=$1;
@@ -330,7 +331,7 @@ start() {
     current_version=$next_version
   fi
 
-  if [ ! $NO_PUSH ]; then
+  if [ ! $NO_PUSH && ! $YES ]; then
     warn_about_start $remote $current_version
   fi
 
@@ -369,7 +370,7 @@ beta () {
   assert_release_or_patch
 
   remote=$1
-  if [ ! $NO_PUSH ]; then
+  if [ ! $NO_PUSH && ! $YES ]; then
     warn_about_beta $remote
   fi
 
@@ -391,7 +392,7 @@ stable () {
   assert_release_or_patch
 
   remote=$1
-  if [ ! $NO_PUSH ]; then
+  if [ ! $NO_PUSH && ! $YES ]; then
     warn_about_stable $remote
   fi
 
@@ -426,7 +427,7 @@ patch () {
 
   next_version=`compute_next_version $version patch`
 
-  if [ ! $NO_PUSH ]; then
+  if [ ! $NO_PUSH && ! $YES ]; then
     warn_about_patch $remote $next_version
   fi
 
@@ -499,7 +500,7 @@ end_release() {
     fi
   fi
 
-  if [ ! $NO_PUSH ]; then
+  if [ ! $NO_PUSH && ! $YES ]; then
     warn_about_end_release $remote $version
   fi
 
@@ -542,7 +543,7 @@ end_patch() {
     fi
   fi
 
-  if [ ! $NO_PUSH ]; then
+  if [ ! $NO_PUSH && ! $YES ]; then
     warn_about_end_patch $remote $version
   fi
 
@@ -618,10 +619,13 @@ show_help() {
   echo "                       release branch at a time."
   echo "  $(tput bold)options:$(tput sgr0)"
   echo ""
-  echo "    $(tput bold)--help$(tput sgr0)             Shows help."
+  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
   echo ""
-  echo "    $(tput bold)--no-push$(tput sgr0)          Nothing is pushed to remote repository. Ideal"
-  echo "                       for testing stuff."
+  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
+  echo "                 for testing stuff."
+  echo ""
+  echo "    $(tput bold)--yes$(tput sgr0)        Do not ask user confirmation before pushing to"
+  echo "                 \$remote. Use with care."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From master at version 1.0.0"
@@ -672,6 +676,9 @@ show_start_help() {
   echo "                      starting a new release, if the current version has already been"
   echo "                      released (i.e. if a stable tag exists)"
   echo ""
+  echo "    $(tput bold)--yes$(tput sgr0)             Do not ask user confirmation before pushing to"
+  echo "                      \$remote. Use with care."
+  echo ""
   echo "    $(tput bold)--pr <file>$(tput sgr0)       Make a pull request with the given <file>"
   echo "                      (text or markdown) as description."
   echo ""
@@ -701,7 +708,10 @@ show_beta_help() {
   echo "    $(tput bold)--help$(tput sgr0)       Shows help."
   echo ""
   echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                       for testing stuff."
+  echo "                 for testing stuff."
+  echo ""
+  echo "    $(tput bold)--yes$(tput sgr0)        Do not ask user confirmation before pushing to"
+  echo "                 \$remote. Use with care."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From branch release-1.0.0, tag 1.0.0-beta.1 already exists"
@@ -724,7 +734,10 @@ show_stable_help() {
   echo "    $(tput bold)--help$(tput sgr0)       Shows help."
   echo ""
   echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                       for testing stuff."
+  echo "                 for testing stuff."
+  echo ""
+  echo "    $(tput bold)--yes$(tput sgr0)        Do not ask user confirmation before pushing to"
+  echo "                 \$remote. Use with care."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From branch release-1.0.0"
@@ -749,7 +762,10 @@ show_patch_help() {
   echo "    $(tput bold)--help$(tput sgr0)       Shows help."
   echo ""
   echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                       for testing stuff."
+  echo "                 for testing stuff."
+  echo ""
+  echo "    $(tput bold)--yes$(tput sgr0)        Do not ask user confirmation before pushing to"
+  echo "                 \$remote. Use with care."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From master at version 1.1.0"
@@ -773,7 +789,10 @@ show_end_help () {
   echo "    $(tput bold)--help$(tput sgr0)       Shows help."
   echo ""
   echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                       for testing stuff."
+  echo "                 for testing stuff."
+  echo ""
+  echo "    $(tput bold)--yes$(tput sgr0)        Do not ask user confirmation before pushing to"
+  echo "                 \$remote. Use with care."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From branch release-1.1.0"
