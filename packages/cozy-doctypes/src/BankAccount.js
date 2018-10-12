@@ -14,17 +14,6 @@ class BankAccount extends Document {
     })
   }
 
-  static isFromNewKonnector(fetchedAccounts, stackAccounts) {
-    const numberAttr = this.numberAttr
-    const vendorIdAttr = this.vendorIdAttr
-    const byNumber = keyBy(stackAccounts, numberAttr)
-    const byVendorId = keyBy(stackAccounts, vendorIdAttr)
-
-    return some(
-      fetchedAccounts,
-      acc => byNumber[acc[numberAttr]] && !byVendorId[acc[vendorIdAttr]]
-    )
-  }
 }
 
 BankAccount.doctype = 'io.cozy.bank.accounts'
