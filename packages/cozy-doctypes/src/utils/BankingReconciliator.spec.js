@@ -69,6 +69,14 @@ describe('banking reconciliator', () => {
           vendorId: 2, // from a new connector account
           balance: 1000,
           label: 'Bank account 1'
+        },
+        {
+          number: 1, // existing account
+          vendorId: 2, // from a new connector account
+          balance: 1000,
+          // Not the same label as the existing one, will be saved too
+          // since the reconciliationKey is based on number AND label
+          label: 'Bank account 1 - Titres'
         }
       ],
       [
@@ -86,7 +94,7 @@ describe('banking reconciliator', () => {
         }
       ]
     )
-    expect(Document.createOrUpdate).toHaveBeenCalledTimes(3)
+    expect(Document.createOrUpdate).toHaveBeenCalledTimes(4)
     expect(Document.createOrUpdate.mock.calls).toMatchSnapshot()
   })
 })

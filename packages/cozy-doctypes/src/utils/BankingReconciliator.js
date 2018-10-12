@@ -9,13 +9,13 @@ class BankingReconciliator {
   async save(fetchedAccounts, fetchedTransactions, options = {}) {
     const { BankAccount, BankTransaction } = this.options
 
-    // Fetch stack accounts corresponding (via numberAttr) to the bank
+    // Fetch stack accounts corresponding (via reconciliationKey) to the bank
     // accounts fetched by the konnector
     const accountNumbers = new Set(
-      fetchedAccounts.map(account => account[BankAccount.numberAttr])
+      fetchedAccounts.map(account => BankAccount.reconciliationKey(account))
     )
     const stackAccounts = (await BankAccount.fetchAll()).filter(acc =>
-      accountNumbers.has(acc[BankAccount.numberAttr])
+      accountNumbers.has(BankAccount.reconciliationKey(acc))
     )
 
     // Reconciliate
