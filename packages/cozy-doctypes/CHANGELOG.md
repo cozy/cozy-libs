@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.7.0...cozy-doctypes@1.8.0) (2018-10-12)
+
+
+### Features
+
+* Use reconciliationKey function to concat two attributes ([c19f0ce](https://github.com/cozy/cozy-libs/commit/c19f0ce))
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.6.0...cozy-doctypes@1.7.0) (2018-10-11)
 
