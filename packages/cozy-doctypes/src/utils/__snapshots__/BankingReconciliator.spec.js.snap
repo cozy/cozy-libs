@@ -13,7 +13,16 @@ Array [
   ],
   Array [
     Object {
-      "account": 1,
+      "_id": undefined,
+      "balance": 1000,
+      "label": "Bank account 1 - Titres",
+      "number": 1,
+      "vendorId": 2,
+    },
+  ],
+  Array [
+    Object {
+      "account": 2,
       "amount": -100,
       "date": "2018-06-27T00:00",
       "label": "Debit 100",
@@ -22,7 +31,7 @@ Array [
   ],
   Array [
     Object {
-      "account": 1,
+      "account": 2,
       "amount": -200,
       "date": "2018-06-24T00:00",
       "label": "Debit 200",
