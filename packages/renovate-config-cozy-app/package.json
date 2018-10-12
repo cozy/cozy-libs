@@ -13,7 +13,9 @@
           "excludePackageNames": [
             "^cozy-"
           ],
-          "schedule": "before 5am"
+          "extends": [
+            "schedule:nonOfficeHours"
+          ]
         }
       ],
       "timezone": "Europe/Paris",
