@@ -155,19 +155,6 @@ In order to upload files to our downcloud server, you will need to generate a ne
 - We recommend changing the path used for the private key. You can change the `-out` argument of the command output by `travis encrypt-file` and the corresponding path's in the commands above. `/tmp/id_rsa_downcloud_myapp` is a good place to store this key. You mays also change the `-in` argument of the same command, and change the path of the file `id_rsa_downcloud_myapp.enc` to whatever you want. We recomend using `./deploy/id_rsa_downcloud_myapp.enc` (don't forget to move the file as well!).
 - Finally, **secure the private key**. If you're using Travis, the key is now stored by Travis so you should delete your local copy. If you're running things on your machine, make sure the private key doesn't end up in version control.
 
-##### Rundeck postpublish hook
-
-```
-cozy-app-publish --postpublish rundeck
-```
-
-Deploys the app on rundeck. This hook requires several variables to be set as environment variables:
-
-- `RUNDECK_TOKEN`:  the token to use to interact with the Rundeck API. To obtain such a token, ask someone that has admin privileges on the rundeck server.
-- `TARGETS_DEV`: a comma-separated list of instances to deploy the app on, on the `dev` channel.
-- `TARGETS_BETA`: a comma-separated list of instances to deploy the app on, on the `beta` channel.
-- `TARGETS_STABLE`: a comma-separated list of instances to deploy the app on, on the `stable` channel.
-
 ##### Mattermost postpublish hook
 
 ```
@@ -196,7 +183,7 @@ To print more logs when using tool (useful for debug).
 #### Day to day
 
 - Development is done on feature branches that are merged into `master`,  once they are complete.
-- Every time someone commits on `master`, a new archive is created and uploaded on Downcloud and it is then deployed on a test instance with Rundeck.
+- Every time someone commits on `master`, a new archive is created and uploaded on Downcloud and then published to Cozy Cloud registry.
 
 #### Release workflow
 
