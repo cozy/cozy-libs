@@ -1,5 +1,4 @@
 const https = require('https')
-const hookHelpers = require('../helpers')
 const url = require('url')
 
 const MATTERMOST_CHANNEL = process.env.MATTERMOST_CHANNEL
@@ -8,16 +7,8 @@ const MATTERMOST_ICON =
   'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
 const MATTERMOST_USERNAME = 'Travis'
 
-const sendMattermostReleaseMessage = (appSlug, appVersion, instances) => {
-  let message = `__${appSlug}__ version \`${appVersion}\` has been published`
-
-  if (instances.length) {
-    message = `${message} and deployed on following instances: ${instances
-      .map(instance => `[${instance}](http://${instance})`)
-      .join(', ')}.`
-  } else {
-    message = `${message}.`
-  }
+const sendMattermostReleaseMessage = (appSlug, appVersion) => {
+  const message = `__${appSlug}__ version \`${appVersion}\` has been published.`
 
   const mattermostHookUrl = url.parse(MATTERMOST_HOOK_URL)
 
@@ -76,11 +67,7 @@ module.exports = async options => {
 
   const { appSlug, appVersion } = options
 
-  const instances = hookHelpers.getEnvInstances(
-    hookHelpers.getChannel(appVersion)
-  )
-
-  sendMattermostReleaseMessage(appSlug, appVersion, instances)
+  sendMattermostReleaseMessage(appSlug, appVersion)
 
   return options
 }
