@@ -31,6 +31,12 @@ while true; do
   case "$1" in
     -h|--help ) HELP=true; shift $(( $# > 0 ? 1 : 0 ));;
     --no-push ) NO_PUSH=true; shift $(( $# > 0 ? 1 : 0 )) ;;
+    --auto-bump ) if [[ $command == "start" ]]; then
+          AUTO_BUMP=true;
+          shift $(( $# > 0 ? 1 : 0 ));
+        else
+          UNKNOWN_OPTION=$1; break;
+        fi;;
     --release-pr-template ) if [[ $command == "start" ]]; then
           shift $(( $# > 0 ? 1 : 0 ));
           PULL_REQUEST_TEMPLATE=$1;
@@ -122,7 +128,7 @@ assert_release_or_patch() {
 
 get_existing_stable_tag() {
   version=$1
-  existing_stable_tag=`git tag --list | grep "^$version\$"`
+  echo `git tag --list | grep "^v\?$version\$"`
 }
 
 tag_beta() {
@@ -130,7 +136,7 @@ tag_beta() {
 
   current_version=`read_current_version`
 
-  get_existing_stable_tag $current_version
+  existing_stable_tag=`get_existing_stable_tag $current_version`
   if [[ ! -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $current_version has already been released as stable. You should not release new beta again. Start a new release or patch the $current_version version."
     exit 1
@@ -158,7 +164,7 @@ tag_stable() {
 
   current_version=`read_current_version`
 
-  get_existing_stable_tag $current_version
+  existing_stable_tag=`get_existing_stable_tag $current_version`
   if [[ ! -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $current_version has already been released as stable. Start a new release or patch the $current_version version."
     exit 1
@@ -305,6 +311,25 @@ start() {
 
   current_version=`read_current_version`
 
+  existing_stable_tag=`get_existing_stable_tag $current_version`
+  if [[ ! -z "${existing_stable_tag// }" ]]; then
+    next_version=`compute_next_version $current_version`
+
+    if [[ $AUTO_BUMP ]]; then
+      echo "☁️ cozy-release: Automatically bumping master version to $next_version"
+    else
+      echo "⚠️  cozy-release: version $current_version has already been released as stable."
+      read -p "Upgrade master to $next_version first ? (Y/n): " user_response
+
+      if [[ $user_response != "Y" ]]; then
+        exit 0
+      fi
+    fi
+
+    bump_version $remote $next_version
+    current_version=$next_version
+  fi
+
   if [ ! $NO_PUSH ]; then
     warn_about_start $remote $current_version
   fi
@@ -391,7 +416,7 @@ patch () {
     exit 1
   fi
 
-  get_existing_stable_tag $version
+  existing_stable_tag=`get_existing_stable_tag $version`
   if [[ -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: No stable version $version has been released. This version cannot be patched."
     exit 1
@@ -465,7 +490,7 @@ end_release() {
   version=$2
   branch="release-$version"
 
-  get_existing_stable_tag $version
+  existing_stable_tag=`get_existing_stable_tag $version`
   if [[ -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $version has not been tagged as stable yet. You can do it by running 'cozy-release stable'."
     read -p "Continue anyway and end this release ? (Y/n): " user_response
@@ -508,7 +533,7 @@ end_patch() {
   version=$2
   branch="patch-$version"
 
-  get_existing_stable_tag $version
+  existing_stable_tag=`get_existing_stable_tag $version`
   if [[ -z "${existing_stable_tag// }" ]]; then
     echo "❌ cozy-release: Version $version has not been tagged as stable yet. You can do it by running 'cozy-release stable'."
     read -p "Continue anyway and end this patch ? (Y/n): " user_response
@@ -638,13 +663,17 @@ show_start_help() {
   echo ""
   echo "  $(tput bold)options:$(tput sgr0)"
   echo ""
-  echo "    $(tput bold)--help$(tput sgr0)       Shows help."
+  echo "    $(tput bold)--help$(tput sgr0)            Shows help."
   echo ""
-  echo "    $(tput bold)--no-push$(tput sgr0)    Nothing is pushed to remote repository. Ideal"
-  echo "                 for testing stuff."
+  echo "    $(tput bold)--no-push$(tput sgr0)         Nothing is pushed to remote repository. Ideal"
+  echo "                      for testing stuff."
   echo ""
-  echo "    $(tput bold)--pr <file>$(tput sgr0)  Make a pull request with the given <file>"
-  echo "                 (text or markdown) as description."
+  echo "    $(tput bold)--auto-bump$(tput sgr0)       Automatically bump master version before"
+  echo "                      starting a new release, if the current version has already been"
+  echo "                      released (i.e. if a stable tag exists)"
+  echo ""
+  echo "    $(tput bold)--pr <file>$(tput sgr0)       Make a pull request with the given <file>"
+  echo "                      (text or markdown) as description."
   echo ""
   echo "$(tput bold)example:$(tput sgr0)"
   echo "  From master at version 1.0.0"
