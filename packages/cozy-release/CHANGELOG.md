@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.7.3...cozy-release@1.8.0) (2018-10-15)
+
+
+### Features
+
+* **release:** Add --auto-bump option ✨ ([1e673b6](https://github.com/cozy/cozy-libs/commit/1e673b6))
+* **release:** Handle tag prefixed with 'v' ✨ ([173c858](https://github.com/cozy/cozy-libs/commit/173c858))
+* **release:** Upgrade master version first ✨ ([2ee89d0](https://github.com/cozy/cozy-libs/commit/2ee89d0))
+
+
+
+
 <a name="1.7.3"></a>
 ## [1.7.3](https://github.com/cozy/cozy-libs/compare/cozy-release@1.7.2...cozy-release@1.7.3) (2018-10-11)
 
