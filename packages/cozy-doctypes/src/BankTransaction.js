@@ -96,21 +96,51 @@ class Transaction extends Document {
 
     const missedTransactions = []
 
+    // Number of identifiers for which Linxo have more transactions than us
+    let moreNewThanExisting = 0
+    // Number of identifiers for which Linxo have less transactions than us
+    let lessNewThanExisting = 0
+
     for (const [identifier, newTransactions] of Object.entries(
       toCheckByIdentifier
     )) {
       const existingTransactions = existingByIdentifier[identifier] || []
 
-      if (typeof options.onMissedTransactionFound === 'function') {
-        options.onMissedTransactionFound(existingTransactions, newTransactions)
-      }
-
       if (newTransactions.length > existingTransactions.length) {
+        log(
+          'warn',
+          `Linxo have ${
+            newTransactions.length
+          } transactions for identifier ${identifier}, but we have only ${
+            existingTransactions.length
+          }`
+        )
+
+        moreNewThanExisting += 1
+
         const difference = newTransactions.length - existingTransactions.length
         missedTransactions.push(...newTransactions.slice(0, difference))
-
-        continue
       }
+
+      if (newTransactions.length < existingTransactions.length) {
+        log(
+          'warn',
+          `Linxo have ${
+            newTransactions.length
+          } transactions for identifier ${identifier}, but we already have ${
+            existingTransactions.length
+          }`
+        )
+
+        lessNewThanExisting += 1
+      }
+    }
+
+    if (typeof options.onMissedTransactionsFound === 'function') {
+      options.onMissedTransactionsFound(
+        moreNewThanExisting,
+        lessNewThanExisting
+      )
     }
 
     return missedTransactions
@@ -174,13 +204,6 @@ class Transaction extends Document {
             missedTransactions.length
           } missed transactions before ${splitDate}`
         )
-
-        for (const missedTransaction of missedTransactions) {
-          log(
-            'debug',
-            `${missedTransaction.date} - ${missedTransaction.originalBankLabel}`
-          )
-        }
       } else {
         log('info', `No missed transactions before ${splitDate}`)
       }
