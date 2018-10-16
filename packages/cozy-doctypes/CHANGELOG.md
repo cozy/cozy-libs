@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.8.1...cozy-doctypes@1.9.0) (2018-10-16)
+
+
+### Features
+
+* **doctypes:** Add logs ([077dcab](https://github.com/cozy/cozy-libs/commit/077dcab))
+
+
+
+
 <a name="1.8.1"></a>
 ## [1.8.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.8.0...cozy-doctypes@1.8.1) (2018-10-16)
 
