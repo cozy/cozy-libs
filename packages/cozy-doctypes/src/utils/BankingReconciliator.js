@@ -35,7 +35,8 @@ class BankingReconciliator {
     const vendorIdToCozyId = fromPairs(
       savedAccounts.map(acc => [acc[BankAccount.vendorIdAttr], acc._id])
     )
-    log('info', vendorIdToCozyId, 'Linking transactions to accounts...')
+    log('info', 'Linking transactions to accounts...')
+    log('info', JSON.stringify(vendorIdToCozyId))
 
     fetchedTransactions.forEach(tr => {
       tr.account = vendorIdToCozyId[tr[BankTransaction.vendorAccountIdAttr]]
