@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.1"></a>
+## [1.8.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.8.0...cozy-doctypes@1.8.1) (2018-10-16)
+
+
+### Bug Fixes
+
+* **doctypes:** Identifier use originalBankLabel ([8f623ce](https://github.com/cozy/cozy-libs/commit/8f623ce))
+
+
+
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.7.0...cozy-doctypes@1.8.0) (2018-10-12)
 
