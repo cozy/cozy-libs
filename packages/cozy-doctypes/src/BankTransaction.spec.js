@@ -13,7 +13,7 @@ describe('getIdentifier', () => {
   it('should return the identifier of a transaction', () => {
     const transaction = {
       amount: -10,
-      originalLabel: 'Test getIdentifier',
+      originalBankLabel: 'Test getIdentifier',
       date: '2018-10-02',
       currency: 'EUR'
     }
@@ -28,17 +28,17 @@ describe('getMissedTransactions', () => {
   const existingTransactions = [
     {
       amount: -10,
-      originalLabel: 'Test 01',
+      originalBankLabel: 'Test 01',
       date: '2018-10-02'
     },
     {
       amount: -20,
-      originalLabel: 'Test 02',
+      originalBankLabel: 'Test 02',
       date: '2018-10-02'
     },
     {
       amount: -30,
-      originalLabel: 'Test 03',
+      originalBankLabel: 'Test 03',
       date: '2018-10-02'
     }
   ]
@@ -47,12 +47,12 @@ describe('getMissedTransactions', () => {
     const newTransactions = [
       {
         amount: -10,
-        originalLabel: 'Test 01',
+        originalBankLabel: 'Test 01',
         date: '2018-10-02'
       },
       {
         amount: -15,
-        originalLabel: 'Test 04',
+        originalBankLabel: 'Test 04',
         date: '2018-10-01'
       }
     ]
@@ -69,12 +69,12 @@ describe('getMissedTransactions', () => {
     const newTransactions = [
       {
         amount: -10,
-        originalLabel: 'Test 01',
+        originalBankLabel: 'Test 01',
         date: '2018-10-02'
       },
       {
         amount: -10,
-        originalLabel: 'Test 01',
+        originalBankLabel: 'Test 01',
         date: '2018-10-02'
       }
     ]
@@ -91,7 +91,7 @@ describe('getMissedTransactions', () => {
     const newTransactions = [
       {
         amount: -10,
-        originalLabel: 'Test 01',
+        originalBankLabel: 'Test 01',
         date: '2018-10-02'
       }
     ]
@@ -108,7 +108,7 @@ describe('getMissedTransactions', () => {
     const newTransactions = [
       {
         amount: -15,
-        originalLabel: 'Test 04',
+        originalBankLabel: 'Test 04',
         date: '2018-10-01'
       }
     ]
