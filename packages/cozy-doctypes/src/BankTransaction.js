@@ -174,6 +174,13 @@ class Transaction extends Document {
             missedTransactions.length
           } missed transactions before ${splitDate}`
         )
+
+        for (const missedTransaction of missedTransactions) {
+          log(
+            'debug',
+            `${missedTransaction.date} - ${missedTransaction.originalBankLabel}`
+          )
+        }
       } else {
         log('info', `No missed transactions before ${splitDate}`)
       }
