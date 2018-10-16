@@ -52,8 +52,9 @@ class BankingReconciliator {
       }
     })
 
-    const stackTransactions = await BankTransaction.getMostRecentForAccounts(
-      stackAccounts.map(x => x._id)
+    const stackAccountsIds = new Set(stackAccounts.map(x => x._id))
+    const stackTransactions = (await BankTransaction.fetchAll()).filter(
+      transaction => stackAccountsIds.has(transaction.account)
     )
 
     const transactions = BankTransaction.reconciliate(

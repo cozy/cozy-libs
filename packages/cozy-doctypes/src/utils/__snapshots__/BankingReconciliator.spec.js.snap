@@ -23,18 +23,18 @@ Array [
   Array [
     Object {
       "account": 2,
-      "amount": -100,
-      "date": "2018-06-27T00:00",
-      "label": "Debit 100",
+      "amount": -200,
+      "date": "2018-06-24T00:00",
+      "label": "Debit 200",
       "vendorAccountId": 2,
     },
   ],
   Array [
     Object {
       "account": 2,
-      "amount": -200,
-      "date": "2018-06-24T00:00",
-      "label": "Debit 200",
+      "amount": -100,
+      "date": "2018-06-27T00:00",
+      "label": "Debit 100",
       "vendorAccountId": 2,
     },
   ],

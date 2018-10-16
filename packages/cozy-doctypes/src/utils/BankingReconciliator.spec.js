@@ -14,7 +14,7 @@ describe('banking reconciliator', () => {
     Document.createOrUpdate = jest
       .fn()
       .mockImplementation(attrs => Promise.resolve({ ...attrs, _id: _id++ }))
-    BankTransaction.getMostRecentForAccounts = jest
+    BankTransaction.fetchAll = jest
       .fn()
       .mockImplementation(() => Promise.resolve(existingTransactions))
     reconciliator = new BankingReconciliator({ BankAccount, BankTransaction })
