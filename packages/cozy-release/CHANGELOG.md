@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.1"></a>
+## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-release@1.9.0...cozy-release@1.9.1) (2018-10-17)
+
+
+### Bug Fixes
+
+* **release:** Add missing push 🚑 ([163f8ba](https://github.com/cozy/cozy-libs/commit/163f8ba))
+
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-release@1.8.0...cozy-release@1.9.0) (2018-10-15)
 
