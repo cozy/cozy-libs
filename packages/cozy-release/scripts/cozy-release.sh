@@ -523,6 +523,7 @@ end_release() {
   git branch -D $branch
 
   if [[ ! $NO_PUSH ]]; then
+    git push $remote HEAD
     git push $remote :$branch
   fi
 
