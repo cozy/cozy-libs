@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.4"></a>
+## [1.1.4](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.3...eslint-config-cozy-app@1.1.4) (2018-10-17)
+
+
+### Bug Fixes
+
+* **eslint-config-cozy-app:** Use latest react version ([69c5b05](https://github.com/CPatchane/create-cozy-app/commit/69c5b05))
+
+
+
+
 <a name="1.1.3"></a>
 ## [1.1.3](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.2...eslint-config-cozy-app@1.1.3) (2018-09-21)
 
