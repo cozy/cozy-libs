@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.10.0...cozy-doctypes@1.11.0) (2018-10-22)
+
+
+### Features
+
+* **doctypes:** Add account to Transaction checkedAttributes ([8ee1819](https://github.com/cozy/cozy-libs/commit/8ee1819))
+* **doctypes:** Log when createOrUpdate didn't update anything ([944e4ba](https://github.com/cozy/cozy-libs/commit/944e4ba))
+
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.9.1...cozy-doctypes@1.10.0) (2018-10-16)
 
