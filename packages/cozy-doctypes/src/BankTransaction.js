@@ -272,7 +272,8 @@ Transaction.idAttributes = ['vendorId']
 Transaction.checkedAttributes = [
   'label',
   'originalBankLabel',
-  'automaticCategoryId'
+  'automaticCategoryId',
+  'account'
 ]
 
 module.exports = Transaction
