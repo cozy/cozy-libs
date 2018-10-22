@@ -10,6 +10,7 @@ const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
 const { parallelMap } = require('./utils')
+const log = require('cozy-logger').namespace('Document')
 
 let cozyClient
 
@@ -95,6 +96,12 @@ async function createOrUpdate(
 
       return cozyClient.data.updateAttributes(doctype, id, update)
     } else {
+      log(
+        'debug',
+        `[bulkSave] Didn't update ${
+          results[0]._id
+        } because its \`checkedAttributes\` (${checkAttributes}) didn't change.`
+      )
       return results[0]
     }
   } else {
