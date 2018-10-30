@@ -1,6 +1,6 @@
 {
   "name": "cozy-flags",
-  "version": "1.2.10",
+  "version": "1.2.11",
   "description": "Flag library used in Cozy",
   "main": "dist/index.js",
   "author": "Cozy",
