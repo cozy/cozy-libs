@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# 0.4.0 (2018-10-30)
+
+
+### Features
+
+* **renovate:** Changed package name ([c475a21](https://github.com/cozy/cozy-libs/commit/c475a21))
+
+
+
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy-app@0.3.0...renovate-config-cozy-app@0.3.1) (2018-10-12)
 
