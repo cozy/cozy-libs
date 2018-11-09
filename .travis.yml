@@ -7,20 +7,24 @@ cache:
   yarn: true
   directories:
     - node_modules
-script:
-  - yarn lint
-  - yarn test
-  - yarn build
-before_deploy:
-  - git config --global user.email "npm@cozycloud.cc"
-  - git config --global user.name "Cozy Bot"
-deploy:
-  - provider: script
-    skip-cleanup: true
-    script: git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes -m "[skip ci] Publish"
-    on:
-      branch: master
-      repo: cozy/cozy-libs
+jobs:
+  include:
+    - stage: lint
+      script: yarn lint
+    - stage: tests
+      script: yarn test
+    - stage: deploy
+      script: yarn build
+      before_deploy:
+        - git config --global user.email "npm@cozycloud.cc"
+        - git config --global user.name "Cozy Bot"
+      deploy:
+        - provider: script
+          skip-cleanup: true
+          script: git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes -m "[skip ci] Publish"
+          on:
+            branch: master
+            repo: cozy/cozy-libs
 env:
   global:
     # GITHUB_TOKEN
