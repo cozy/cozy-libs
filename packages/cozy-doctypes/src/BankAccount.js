@@ -1,4 +1,5 @@
 const keyBy = require('lodash/keyBy')
+const groupBy = require('lodash/groupBy')
 const Document = require('./Document')
 const log = require('cozy-logger').namespace('BankAccount')
 
@@ -14,6 +15,27 @@ class BankAccount extends Document {
         _id: matchedSavedAccount && matchedSavedAccount._id
       })
     })
+  }
+
+  static findDuplicateAccountsWithNoOperations(accounts, operations) {
+    const opsByAccountId = groupBy(operations, op => op.account)
+
+    const duplicateAccountGroups = Object.entries(
+      groupBy(accounts, x => x.label)
+    )
+      .map(([, duplicateGroup]) => duplicateGroup)
+      .filter(duplicateGroup => duplicateGroup.length > 1)
+
+    const res = []
+    for (const duplicateAccounts of duplicateAccountGroups) {
+      for (const account of duplicateAccounts) {
+        const accountOperations = opsByAccountId[account._id] || []
+        if (accountOperations.length === 0) {
+          res.push(account)
+        }
+      }
+    }
+    return res
   }
 
   static reconciliationKey(account) {
