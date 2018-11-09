@@ -21,7 +21,7 @@ class BankAccount extends Document {
     const opsByAccountId = groupBy(operations, op => op.account)
 
     const duplicateAccountGroups = Object.entries(
-      groupBy(accounts, x => x.label)
+      groupBy(accounts, x => x.institutionLabel + ' > ' + x.label)
     )
       .map(([, duplicateGroup]) => duplicateGroup)
       .filter(duplicateGroup => duplicateGroup.length > 1)
