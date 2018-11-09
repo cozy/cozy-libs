@@ -118,7 +118,15 @@ const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
 class Document {
   static registerClient(client) {
-    cozyClient = client
+    if (!cozyClient) {
+      cozyClient = client
+    } else {
+      // eslint-disable-next-line no-console
+      console.warn(
+        'Document already has been registered, this is not possible to re-register as the client is shared globally between all classes. This is to prevent concurrency bugs.'
+      )
+      throw new Error('Document cannot be re-registered to a client.')
+    }
   }
 
   static createOrUpdate(attributes) {
