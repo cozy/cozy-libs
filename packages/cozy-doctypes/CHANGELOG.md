@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.12.0"></a>
+# [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.11.0...cozy-doctypes@1.12.0) (2018-11-09)
+
+
+### Features
+
+* Integrate find duplicates ([4526c7c](https://github.com/cozy/cozy-libs/commit/4526c7c))
+
+
+
+
 <a name="1.11.0"></a>
 # [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.10.0...cozy-doctypes@1.11.0) (2018-10-22)
 
