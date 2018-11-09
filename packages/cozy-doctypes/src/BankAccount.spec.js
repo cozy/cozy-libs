@@ -24,8 +24,16 @@ describe('deleteDuplicateBankAccountsWithNoOperations', () => {
         { _id: 'empty', label: 'Duplicate account' },
         { _id: 'filled', label: 'Duplicate account' },
         { _id: 'filled_not_duplicate', label: 'Account with ops' },
-        { _id: 'duplicate_across_institution', institutionLabel: 'Bank 1', label: 'Duplicate across institution' },
-        { _id: 'duplicate_across_institution', institutionLabel: 'Bank 2', label: 'Duplicate across institution' },
+        {
+          _id: 'duplicate_across_institution',
+          institutionLabel: 'Bank 1',
+          label: 'Duplicate across institution'
+        },
+        {
+          _id: 'duplicate_across_institution',
+          institutionLabel: 'Bank 2',
+          label: 'Duplicate across institution'
+        }
       ],
       [
         { _id: 'op1', account: 'filled' },
