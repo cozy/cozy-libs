@@ -20,6 +20,13 @@ describe('Document', () => {
     Document.registerClient(null)
   })
 
+  it('client cannot be registered twice', () => {
+    expect(() => {
+      const newClient = {}
+      Document.registerClient(newClient)
+    }).toThrow('Document cannot be re-registered to a client.')
+  })
+
   it('should do create or update', async () => {
     const marge = { name: 'Marge' }
     await Simpson.createOrUpdate(marge)
