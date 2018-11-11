@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.13.0"></a>
+# [1.13.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.12.1...cozy-doctypes@1.13.0) (2018-11-11)
+
+
+### Features
+
+* Make it obvious that Document cannot be used concurrently ([2cc653e](https://github.com/cozy/cozy-libs/commit/2cc653e))
+
+
+
+
 <a name="1.12.1"></a>
 ## [1.12.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.12.0...cozy-doctypes@1.12.1) (2018-11-09)
 
