@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.14.0"></a>
+# [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.13.0...cozy-doctypes@1.14.0) (2018-11-13)
+
+
+### Bug Fixes
+
+* **doctypes:** Don't show sensitive data in logs ([0faed67](https://github.com/cozy/cozy-libs/commit/0faed67))
+
+
+### Features
+
+* **doctypes:** Debug on nominal case, warn otherwise ([ab619ca](https://github.com/cozy/cozy-libs/commit/ab619ca))
+
+
+
+
 <a name="1.13.0"></a>
 # [1.13.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.12.1...cozy-doctypes@1.13.0) (2018-11-11)
 
