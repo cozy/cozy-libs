@@ -116,8 +116,10 @@ class Transaction extends Document {
           level,
           `Linxo have ${
             newTransactions.length
-          } transactions for identifier ${identifier}, but we have only ${
+          } transactions, but we have only ${
             existingTransactions.length
+          } with the same identifier as ${this.vendorIdAttr} ${
+            newTransactions[0][this.vendorIdAttr]
           }`
         )
 
@@ -132,8 +134,10 @@ class Transaction extends Document {
           'warn',
           `Linxo have ${
             newTransactions.length
-          } transactions for identifier ${identifier}, but we already have ${
+          } transactions, but we already have ${
             existingTransactions.length
+          } with the same identifier as ${this.vendorIdAttr} ${
+            existingTransactions[0][this.vendorIdAttr]
           }`
         )
 
