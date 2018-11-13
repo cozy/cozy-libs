@@ -107,8 +107,13 @@ class Transaction extends Document {
       const existingTransactions = existingByIdentifier[identifier] || []
 
       if (newTransactions.length > existingTransactions.length) {
+        const level =
+          newTransactions.length === 1 && existingTransactions.length === 0
+            ? 'debug'
+            : 'warn'
+
         log(
-          'warn',
+          level,
           `Linxo have ${
             newTransactions.length
           } transactions for identifier ${identifier}, but we have only ${
