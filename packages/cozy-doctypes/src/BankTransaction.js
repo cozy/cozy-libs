@@ -107,12 +107,19 @@ class Transaction extends Document {
       const existingTransactions = existingByIdentifier[identifier] || []
 
       if (newTransactions.length > existingTransactions.length) {
+        const level =
+          newTransactions.length === 1 && existingTransactions.length === 0
+            ? 'debug'
+            : 'warn'
+
         log(
-          'warn',
+          level,
           `Linxo have ${
             newTransactions.length
-          } transactions for identifier ${identifier}, but we have only ${
+          } transactions, but we have only ${
             existingTransactions.length
+          } with the same identifier as ${this.vendorIdAttr} ${
+            newTransactions[0][this.vendorIdAttr]
           }`
         )
 
@@ -127,8 +134,10 @@ class Transaction extends Document {
           'warn',
           `Linxo have ${
             newTransactions.length
-          } transactions for identifier ${identifier}, but we already have ${
+          } transactions, but we already have ${
             existingTransactions.length
+          } with the same identifier as ${this.vendorIdAttr} ${
+            existingTransactions[0][this.vendorIdAttr]
           }`
         )
 
