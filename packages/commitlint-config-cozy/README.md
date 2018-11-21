@@ -14,15 +14,16 @@
 ```json
 "commitlint": {
   "extends": [
-    "./packages/commitlint-config"
+    "cozy"
   ]
 }
 ```
-- Add verification during a commit on your `package.json` ([see an example](https://github.com/cozy/cozy-banks/blob/85572b6827cdaa45c1ed44d6922829ba6480b3c9/package.json#L65)):
+- Add verification during a commit with husky (> 1.0.0) on your `package.json` ([see an example](https://github.com/cozy/cozy-libs/blob/ea325a4ea2b5bf0067875f625b5ad0a5b320e7e9/package.json#L24-L28)):
 ```
-"scripts": {
-  "commitmsg": "commitlint -e $GIT_PARAMS"
-  ...
+"husky": {
+  "hooks": {
+    "commit-msg": "commitlint -e $GIT_PARAMS"
+  }
 }
 ```
 
