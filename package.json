@@ -15,11 +15,16 @@
   "scripts": {
     "lint": "eslint . --ext js,jsx",
     "test": "lerna run --parallel test",
-    "build": "lerna run --parallel build",
-    "commitmsg": "commitlint -e $GIT_PARAMS"
+    "build": "lerna run --parallel build"
   },
   "devDependencies": {
+    "husky": "1.2.0",
     "lerna": "2.11.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -e $GIT_PARAMS"
+    }
   },
   "commitlint": {
     "extends": [
