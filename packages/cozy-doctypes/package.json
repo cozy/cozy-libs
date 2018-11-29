@@ -13,7 +13,7 @@
   },
   "devDependencies": {
     "btoa": "1.2.1",
-    "cozy-client-js": "0.13.0",
+    "cozy-client-js": "0.14.2",
     "jest": "23.6.0"
   },
   "scripts": {
