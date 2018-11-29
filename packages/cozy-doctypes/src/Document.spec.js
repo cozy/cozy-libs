@@ -220,4 +220,43 @@ describe('Document', () => {
       ).toEqual([0, 1, 2, 3])
     })
   })
+
+  describe('get all', () => {
+    beforeEach(() => {
+      cozyClient.fetchJSON.mockReset()
+    })
+
+    afterEach(() => {
+      cozyClient.fetchJSON.mockReset()
+    })
+
+    it('should work', async () => {
+      cozyClient.fetchJSON.mockResolvedValueOnce({
+        rows: [
+          { doc: { _id: '123abde', name: 'Lisa' } },
+          { doc: { _id: '2123asb', name: 'Bart' } }
+        ]
+      })
+      const docs = await Simpson.getAll(['123abde', '2123asb'])
+      expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/data/io.cozy.simpsons/_all_docs?include_docs=true',
+        {
+          keys: ['123abde', '2123asb']
+        }
+      )
+      expect(docs).toEqual([
+        { _id: '123abde', name: 'Lisa' },
+        { _id: '2123asb', name: 'Bart' }
+      ])
+    })
+
+    it('should return empty list in case of error', async () => {
+      cozyClient.fetchJSON.mockRejectedValueOnce({
+        message: 'not_found'
+      })
+      const docs = await Simpson.getAll(['notexisting'])
+      expect(docs).toEqual([])
+    })
+  })
 })
