@@ -284,6 +284,49 @@ class Document {
 
     return { newLastSeq, documents: docs }
   }
+
+  /**
+   * Fetches all documents for a given doctype exceeding the 100 limit.
+   * It is slower that fetchAll because it fetches the data 100 by 100 but allows to filter the data
+   * with a selector and an index
+   *
+   * Parameters:
+   *
+   * * `selector` (object): the mango query selector
+   * * `index` (object): (optional) the query selector index. If not defined, the function will
+   * create it's own index with the keys specified in the selector
+   *
+   *
+   * ```javascript
+   * const documents = await queryAll(cozyClient, 'io.cozy.bills', {vendor: 'Direct Energie'})
+   * ```
+   *
+   */
+  static async queryAll(selector, index) {
+    if (!selector) {
+      // fetchAll is faster in this case
+      return await this.fetchAll()
+    }
+
+    if (!index) {
+      index = await cozyClient.data.defineIndex(
+        this.doctype,
+        Object.keys(selector)
+      )
+    }
+
+    const result = []
+    let resp = { next: true }
+    while (resp && resp.next) {
+      resp = await cozyClient.data.query(index, {
+        selector,
+        wholeResponse: true,
+        skip: result.length
+      })
+      result.push(...resp.docs)
+    }
+    return result
+  }
 }
 
 module.exports = Document

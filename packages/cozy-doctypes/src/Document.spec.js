@@ -184,4 +184,40 @@ describe('Document', () => {
       documents: [{ _id: '1', name: 'Lisa' }]
     })
   })
+
+  describe('query all', () => {
+    afterEach(() => {
+      cozyClient.data.query.mockReset()
+    })
+    it('should repeatedly call query until all documents have been fetched', async () => {
+      let i = 0
+      cozyClient.data.query.mockImplementation(() => {
+        let docs
+        if (i == 0) {
+          docs = [{ _id: 1, name: 'Lisa' }]
+        } else if (i == 1) {
+          docs = [{ _id: 2, name: 'Bart' }]
+        } else if (i == 2) {
+          docs = [{ _id: 3, name: 'Homer' }]
+        } else if (i == 3) {
+          docs = [{ _id: 4, name: 'Marge' }]
+        }
+        const resp = {
+          docs,
+          next: i !== 3
+        }
+        i++
+        return Promise.resolve(resp)
+      })
+      const docs = await Simpson.queryAll({ name: { $exists: true } })
+      expect(cozyClient.data.defineIndex).toHaveBeenCalledWith(
+        'io.cozy.simpsons',
+        ['name']
+      )
+      expect(docs.length).toBe(4)
+      expect(
+        cozyClient.data.query.mock.calls.slice(-4).map(x => x[1].skip)
+      ).toEqual([0, 1, 2, 3])
+    })
+  })
 })
