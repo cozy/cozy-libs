@@ -12,3 +12,5 @@ export {
   hasInAppBrowserPlugin,
   hasSafariPlugin
 } from './plugins'
+
+export { nativeLinkOpen } from './link'
