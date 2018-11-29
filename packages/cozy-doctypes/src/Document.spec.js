@@ -160,4 +160,28 @@ describe('Document', () => {
       }
     )
   })
+
+  it('should fetch changes', async () => {
+    cozyClient.fetchJSON.mockReturnValueOnce(
+      Promise.resolve({
+        last_seq: 'new-seq',
+        results: [
+          { doc: { _id: '1', name: 'Lisa' } },
+          { doc: null },
+          { doc: { _id: '_design/view' } },
+          { doc: { _id: '2', _deleted: true, name: 'Bart' } }
+        ]
+      })
+    )
+
+    const changes = await Simpson.fetchChanges('my-seq')
+    expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+      'GET',
+      '/data/io.cozy.simpsons/_changes?include_docs=true&since=my-seq'
+    )
+    expect(changes).toEqual({
+      newLastSeq: 'new-seq',
+      documents: [{ _id: '1', name: 'Lisa' }]
+    })
+  })
 })
