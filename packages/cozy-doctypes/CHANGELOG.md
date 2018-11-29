@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.14.1"></a>
+## [1.14.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.14.0...cozy-doctypes@1.14.1) (2018-11-29)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
 <a name="1.14.0"></a>
 # [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.13.0...cozy-doctypes@1.14.0) (2018-11-13)
 
