@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.16.0"></a>
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.15.0...cozy-doctypes@1.16.0) (2018-11-30)
+
+
+### Features
+
+* Get all ([750dfdc](https://github.com/cozy/cozy-libs/commit/750dfdc))
+
+
+
+
 <a name="1.15.0"></a>
 # [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.14.1...cozy-doctypes@1.15.0) (2018-11-30)
 
