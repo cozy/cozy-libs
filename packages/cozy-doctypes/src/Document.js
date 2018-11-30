@@ -327,6 +327,31 @@ class Document {
     }
     return result
   }
+
+  /**
+   * Fetch in one request a batch of documents by id.
+   * @param  {String[]} ids - Ids of documents to fetch
+   * @return {Promise} - Promise resolving to an array of documents, unfound document are filtered
+   */
+  static async getAll(ids) {
+    let resp
+    try {
+      resp = await cozyClient.fetchJSON(
+        'POST',
+        `/data/${this.doctype}/_all_docs?include_docs=true`,
+        {
+          keys: ids
+        }
+      )
+    } catch (error) {
+      if (error.message.match(/not_found/)) {
+        return []
+      }
+      throw error
+    }
+    const rows = resp.rows.filter(row => row.doc)
+    return rows.map(row => row.doc)
+  }
 }
 
 module.exports = Document
