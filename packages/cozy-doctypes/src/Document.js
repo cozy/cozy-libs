@@ -298,7 +298,7 @@ class Document {
    *
    *
    * ```javascript
-   * const documents = await queryAll(cozyClient, 'io.cozy.bills', {vendor: 'Direct Energie'})
+   * const documents = await Bills.queryAll({vendor: 'Direct Energie'})
    * ```
    *
    */
