@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.17.0"></a>
+# [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.16.0...cozy-doctypes@1.17.0) (2018-12-03)
+
+
+### Features
+
+* Support _changes query params ([a671e1f](https://github.com/cozy/cozy-libs/commit/a671e1f))
+
+
+
+
 <a name="1.16.0"></a>
 # [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.15.0...cozy-doctypes@1.16.0) (2018-11-30)
 
