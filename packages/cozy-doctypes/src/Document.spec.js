@@ -161,27 +161,52 @@ describe('Document', () => {
     )
   })
 
-  it('should fetch changes', async () => {
-    cozyClient.fetchJSON.mockReturnValueOnce(
-      Promise.resolve({
-        last_seq: 'new-seq',
-        results: [
-          { doc: { _id: '1', name: 'Lisa' } },
-          { doc: null },
-          { doc: { _id: '_design/view' } },
-          { doc: { _id: '2', _deleted: true, name: 'Bart' } }
-        ]
-      })
-    )
+  describe('fetch changes', () => {
+    beforeEach(() => {
+      cozyClient.fetchJSON.mockReset()
+    })
+    afterEach(() => {
+      cozyClient.fetchJSON.mockReset()
+    })
+    it('should work in simple case', async () => {
+      cozyClient.fetchJSON.mockReturnValueOnce(
+        Promise.resolve({
+          last_seq: 'new-seq',
+          results: [
+            { doc: { _id: '1', name: 'Lisa' } },
+            { doc: null },
+            { doc: { _id: '_design/view' } },
+            { doc: { _id: '2', _deleted: true, name: 'Bart' } }
+          ]
+        })
+      )
 
-    const changes = await Simpson.fetchChanges('my-seq')
-    expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
-      'GET',
-      '/data/io.cozy.simpsons/_changes?include_docs=true&since=my-seq'
-    )
-    expect(changes).toEqual({
-      newLastSeq: 'new-seq',
-      documents: [{ _id: '1', name: 'Lisa' }]
+      const changes = await Simpson.fetchChanges('my-seq')
+      expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true'
+      )
+      expect(changes).toEqual({
+        newLastSeq: 'new-seq',
+        documents: [{ _id: '1', name: 'Lisa' }]
+      })
+    })
+
+    it('should support query options', async () => {
+      cozyClient.fetchJSON.mockReturnValueOnce(
+        Promise.resolve({
+          last_seq: 'new-seq',
+          results: []
+        })
+      )
+
+      await Simpson.fetchChanges('my-seq', {
+        params: { descending: true, limit: 1 }
+      })
+      expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1'
+      )
     })
   })
 
