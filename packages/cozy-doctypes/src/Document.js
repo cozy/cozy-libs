@@ -11,6 +11,7 @@ const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
 const { parallelMap } = require('./utils')
 const log = require('cozy-logger').namespace('Document')
+const querystring = require('querystring')
 
 let cozyClient
 
@@ -266,9 +267,16 @@ class Document {
    * @param  {[type]} options   { includeDesign: false, includeDeleted: false }
    */
   static async fetchChanges(since, options = {}) {
+    const queryParams = {
+      since,
+      include_docs: 'true'
+    }
+    if (options.params) {
+      Object.assign(queryParams, options.params)
+    }
     const result = await cozyClient.fetchJSON(
       'GET',
-      `/data/${this.doctype}/_changes?include_docs=true&since=${since}`
+      `/data/${this.doctype}/_changes?${querystring.stringify(queryParams)}`
     )
 
     const newLastSeq = result.last_seq
