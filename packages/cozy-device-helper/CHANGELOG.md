@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# 1.5.0 (2018-12-04)
+
+
+### Features
+
+* **device-helper:** Add functions to test android or iOS smartphone ([e1553aa](https://github.com/cozy/cozy-libs/commit/e1553aa))
+
+
+
+
 <a name="1.4.14"></a>
 ## [1.4.14](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.4.13...cozy-device-helper@1.4.14) (2018-10-09)
 
