@@ -21,6 +21,9 @@ To know the platform:
 - `isMobileApp()`: return `boolean`
 - `isIOSApp()`: return `boolean`
 - `isAndroidApp()`: return `boolean`
+- `isAndroid()`: return `boolean` (check if the user is on an android smartphone (native & browser))
+- `isOS()`: return `boolean` (check if the user is on an iOS smartphone (native & browser))
+- `isMobile()`: return `boolean` (check if the user is on an android or iOS smartphone (native & browser))
 
 ### Device Name
 
