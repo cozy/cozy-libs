@@ -1,4 +1,4 @@
-import flag from './flag'
-export { default as FlagSwitcher } from './FlagSwitcher'
+import flag from './browser/flag'
+export { default as FlagSwitcher } from './browser/FlagSwitcher'
 
 export default flag
