@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.2.12...cozy-flags@1.3.0) (2018-12-06)
+
+
+### Features
+
+* **flags:** Add node implementation ([a2aeb6c](https://github.com/cozy/cozy-libs/commit/a2aeb6c))
+
+
+
+
 <a name="1.2.12"></a>
 ## [1.2.12](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.2.11...cozy-flags@1.2.12) (2018-12-06)
 
