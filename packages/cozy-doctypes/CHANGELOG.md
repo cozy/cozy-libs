@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.18.0"></a>
+# [1.18.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.17.0...cozy-doctypes@1.18.0) (2018-12-07)
+
+
+### Features
+
+* **doctypes:** Add Application ✨ ([9dcd9f0](https://github.com/cozy/cozy-libs/commit/9dcd9f0))
+
+
+
+
 <a name="1.17.0"></a>
 # [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.16.0...cozy-doctypes@1.17.0) (2018-12-03)
 
