@@ -331,7 +331,7 @@ start() {
     current_version=$next_version
   fi
 
-  if [ ! $NO_PUSH && ! $YES ]; then
+  if [[ ! $NO_PUSH && ! $YES ]]; then
     warn_about_start $remote $current_version
   fi
 
@@ -370,7 +370,7 @@ beta () {
   assert_release_or_patch
 
   remote=$1
-  if [ ! $NO_PUSH && ! $YES ]; then
+  if [[ ! $NO_PUSH && ! $YES ]]; then
     warn_about_beta $remote
   fi
 
@@ -392,7 +392,7 @@ stable () {
   assert_release_or_patch
 
   remote=$1
-  if [ ! $NO_PUSH && ! $YES ]; then
+  if [[ ! $NO_PUSH && ! $YES ]]; then
     warn_about_stable $remote
   fi
 
@@ -427,7 +427,7 @@ patch () {
 
   next_version=`compute_next_version $version patch`
 
-  if [ ! $NO_PUSH && ! $YES ]; then
+  if [[ ! $NO_PUSH && ! $YES ]]; then
     warn_about_patch $remote $next_version
   fi
 
@@ -500,7 +500,7 @@ end_release() {
     fi
   fi
 
-  if [ ! $NO_PUSH && ! $YES ]; then
+  if [[ ! $NO_PUSH && ! $YES ]]; then
     warn_about_end_release $remote $version
   fi
 
@@ -544,7 +544,7 @@ end_patch() {
     fi
   fi
 
-  if [ ! $NO_PUSH && ! $YES ]; then
+  if [[ ! $NO_PUSH && ! $YES ]]; then
     warn_about_end_patch $remote $version
   fi
 
