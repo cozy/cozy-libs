@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.3"></a>
+## [1.3.3](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.2...cozy-flags@1.3.3) (2018-12-10)
+
+
+
+
+**Note:** Version bump only for package cozy-flags
+
 <a name="1.3.2"></a>
 ## [1.3.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.1...cozy-flags@1.3.2) (2018-12-10)
 
