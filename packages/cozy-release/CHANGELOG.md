@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.3"></a>
+## [1.9.3](https://github.com/cozy/cozy-libs/compare/cozy-release@1.9.2...cozy-release@1.9.3) (2018-12-10)
+
+
+### Bug Fixes
+
+* :bug: `[: missing ']'` issue ([e344adb](https://github.com/cozy/cozy-libs/commit/e344adb))
+
+
+
+
 <a name="1.9.2"></a>
 ## [1.9.2](https://github.com/cozy/cozy-libs/compare/cozy-release@1.9.1...cozy-release@1.9.2) (2018-12-10)
 
