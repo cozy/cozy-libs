@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.2"></a>
+## [1.9.2](https://github.com/cozy/cozy-libs/compare/cozy-release@1.9.1...cozy-release@1.9.2) (2018-12-10)
+
+
+### Bug Fixes
+
+* **deps:** update dependency exec-sh to v0.3.2 ([42950de](https://github.com/cozy/cozy-libs/commit/42950de))
+
+
+
+
 <a name="1.9.1"></a>
 ## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-release@1.9.0...cozy-release@1.9.1) (2018-10-17)
 
