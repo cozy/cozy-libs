@@ -19,7 +19,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/cli": "7.1.2",
+    "@babel/cli": "7.2.0",
     "babel-preset-cozy-app": "^1.2.1",
     "jest-localstorage-mock": "^2.3.0"
   },
