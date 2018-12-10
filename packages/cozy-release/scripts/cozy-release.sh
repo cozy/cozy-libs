@@ -308,7 +308,9 @@ start() {
   fi
 
   echo "☁️ cozy-release: Checking out master branch"
-  git checkout master && git pull
+  if ! git checkout master && git pull; then
+    exit 1
+  fi
 
   current_version=`read_current_version`
 
