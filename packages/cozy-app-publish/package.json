@@ -20,7 +20,7 @@
     "fs-extra": "6.0.1",
     "node-fetch": "2.2.0",
     "prompt": "1.0.0",
-    "tar": "4.4.6"
+    "tar": "4.4.8"
   },
   "files": [
     "index.js",
