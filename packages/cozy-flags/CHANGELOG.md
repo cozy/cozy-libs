@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.2"></a>
+## [1.3.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.1...cozy-flags@1.3.2) (2018-12-10)
+
+
+### Bug Fixes
+
+* **flags:** Node and browser detection ([0b3c4d7](https://github.com/cozy/cozy-libs/commit/0b3c4d7))
+
+
+
+
 <a name="1.3.1"></a>
 ## [1.3.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.0...cozy-flags@1.3.1) (2018-12-06)
 
