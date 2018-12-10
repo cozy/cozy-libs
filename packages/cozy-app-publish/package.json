@@ -33,7 +33,7 @@
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
     "jest": "23.6.0",
-    "jest-fetch-mock": "1.6.5"
+    "jest-fetch-mock": "1.7.5"
   },
   "jest": {
     "setupFiles": [
