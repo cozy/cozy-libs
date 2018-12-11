@@ -27,5 +27,8 @@
     "setupFiles": [
       "jest-localstorage-mock"
     ]
+  },
+  "dependencies": {
+    "detect-node": "2.0.4"
   }
 }
