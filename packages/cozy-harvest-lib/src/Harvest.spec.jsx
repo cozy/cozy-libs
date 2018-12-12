@@ -6,7 +6,7 @@ import Adapter from 'enzyme-adapter-react-16'
 configure({ adapter: new Adapter() })
 
 describe('Harvest', () => {
-  it('shoul render a div', () => {
+  it('should render a div', () => {
     const component = shallow(<Harvest />).getElement()
     expect(component).toMatchSnapshot()
   })
