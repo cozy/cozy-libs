@@ -9,6 +9,7 @@
 - [Cozy Flags](./packages/cozy-flags): Client side feature flags
 - [Cozy Interapp](./packages/cozy-interapp): Allows applications to interact with each other
 - [Cozy Realtime](./packages/cozy-realtime): Be notified via websocket when something happens on the Cozy
+- [Cozy URLs](./packages/cozy-urls): Correctly handle URLs used in Cozy applications or libraries
 
 ## Dev tools
 

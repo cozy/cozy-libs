@@ -1,0 +1,28 @@
+{
+  "name": "cozy-urls",
+  "version": "1.0.0",
+  "description": "A lib to rule all URLs used in Cozy applications",
+  "main": "dist/cozy-urls.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "author": "Cozy",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "babel src -d dist",
+    "prepublishOnly": "yarn build",
+    "test": "jest --coverage test"
+  },
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-urls/README.md",
+  "devDependencies": {
+    "@babel/cli": "^7.2.0",
+    "jest-cli": "^23.6.0"
+  },
+  "dependencies": {
+    "babel-preset-cozy-app": "^1.2.3"
+  }
+}
