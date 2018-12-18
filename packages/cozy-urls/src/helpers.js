@@ -1,7 +1,5 @@
 /* global __DEVELOPMENT__ */
 
-/* eslint-disable no-console */
-
 const VALID_PROTOCOLS = ['http:', 'https:']
 
 let APP_NAME = null
@@ -28,6 +26,7 @@ export const getSSL = (cozyURL, ssl) => {
     return parsedURL.protocol === 'https:'
   } catch (error) {
     if (isDevelopment()) {
+      // eslint-disable-next-line no-console
       console.warn(
         `[URLS] cozyURL parameter provided is not a valid URL (${
           error.message
@@ -40,9 +39,11 @@ export const getSSL = (cozyURL, ssl) => {
     return window.location.protocol === 'https:'
   }
 
+  // eslint-disable-next-line no-console
   console.warn(
     `[URLS] ${getAppName()} cannot detect SSL and will use default value (true)`
   )
+
   return true
 }
 
@@ -62,6 +63,7 @@ export const getUrlAndHost = (cozyURL, ssl) => {
     return { host, url }
   } catch (error) {
     if (isDevelopment()) {
+      // eslint-disable-next-line no-console
       console.warn(
         `[URLS] cozyURL parameter provided is not a valid URL (${
           error.message
@@ -76,5 +78,3 @@ export const getUrlAndHost = (cozyURL, ssl) => {
 
   return { url, host }
 }
-
-/* eslint-enable no-console */
