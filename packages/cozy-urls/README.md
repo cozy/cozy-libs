@@ -111,7 +111,7 @@ You can reach the Cozy Community by:
 
 ### Maintainers
 
-The maintainers for Cozy Realtime are [CPatchane](https://github.com/cpatchane)!
+The maintainers for Cozy cozy-urls are [CPatchane](https://github.com/cpatchane) and [kosssi](https://github.com/kosssi)!
 
 ## License
 

@@ -8,5 +8,5 @@ packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
 packages/cozy-interapp @gregorylegarec @kosssi
 packages/cozy-doctypes @ptbrowne @kosssi
 packages/cozy-release @gregorylegarec @cpatchane
-packages/cozy-urls @cpatchane
+packages/cozy-urls @cpatchane @kosssi
 packages/renovate-config-cozy @y-lohse @doubleface @kosssi
