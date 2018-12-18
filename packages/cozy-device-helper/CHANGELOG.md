@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.5.2...cozy-device-helper@1.6.0) (2018-12-18)
+
+
+### Features
+
+* Add an nativeLinkOpen helper ([f894c43](https://github.com/cozy/cozy-libs/commit/f894c43))
+
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.5.0...cozy-device-helper@1.5.2) (2018-12-17)
 
