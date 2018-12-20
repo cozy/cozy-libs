@@ -19,7 +19,7 @@
     "watch": "yarn build --watch"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.0",
+    "@babel/cli": "7.2.3",
     "babel-preset-cozy-app": "^1.2.3"
   }
 }
