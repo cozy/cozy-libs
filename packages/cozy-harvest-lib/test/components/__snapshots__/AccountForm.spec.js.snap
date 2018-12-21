@@ -1,0 +1,92 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountForm AccountField render password 1`] = `
+<div
+  className="o-field"
+>
+  <Label
+    className=""
+    error={false}
+    htmlFor=""
+  >
+    
+  </Label>
+  <Input
+    error={false}
+    fullwidth={false}
+    id=""
+    placeholder=""
+    type="password"
+    value=""
+  />
+</div>
+`;
+
+exports[`AccountForm AccountField should render 1`] = `
+<div
+  className="o-field"
+>
+  <Label
+    className=""
+    error={false}
+    htmlFor=""
+  >
+    
+  </Label>
+  <Input
+    error={false}
+    fullwidth={false}
+    id=""
+    placeholder=""
+    type="text"
+    value=""
+  />
+</div>
+`;
+
+exports[`AccountForm AccountFields should render 1`] = `
+<div>
+  <Field
+    format={[Function]}
+    name="username"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+  <Field
+    format={[Function]}
+    name="passphrase"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+</div>
+`;
+
+exports[`AccountForm should render 1`] = `
+<div>
+  <AccountFields
+    manifestFields={
+      Object {
+        "passphrase": Object {
+          "encrypted": false,
+          "required": true,
+          "type": "password",
+        },
+        "username": Object {
+          "encrypted": false,
+          "required": true,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+  />
+  <DefaultButton
+    extension="full"
+    onclick={[Function]}
+  >
+    Submit
+  </DefaultButton>
+</div>
+`;

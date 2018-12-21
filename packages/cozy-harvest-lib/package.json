@@ -20,7 +20,10 @@
     "watch": "yarn build --watch"
   },
   "dependencies": {
-    "lodash": "^4.17.11"
+    "cozy-ui": "^17.8.0",
+    "final-form": "^4.11.0",
+    "lodash": "^4.17.11",
+    "react-final-form": "^3.7.0"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
@@ -28,6 +31,7 @@
     "babel-preset-cozy-app": "^1.2.4",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
+    "identity-obj-proxy": "^3.0.0",
     "jest": "23.6.0",
     "react": "16.6.1",
     "react-dom": "^16.6.3"
