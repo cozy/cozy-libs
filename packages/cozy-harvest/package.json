@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -22,7 +22,7 @@
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "babel-jest": "23.6.0",
-    "babel-preset-cozy-app": "^1.2.3",
+    "babel-preset-cozy-app": "^1.2.4",
     "enzyme": "^3.7.0",
     "enzyme-adapter-react-16": "^1.7.0",
     "jest": "23.6.0",
