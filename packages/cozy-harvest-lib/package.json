@@ -1,11 +1,11 @@
 {
-  "name": "cozy-harvest",
+  "name": "cozy-harvest-lib",
   "version": "0.2.3",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-harvest/README.md",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-harvest-lib/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
