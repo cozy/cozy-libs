@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.3.0...cozy-harvest-lib@0.4.0) (2018-12-27)
+
+
+### Features
+
+* **harvest:** Remove advancedFields from old manifests ([a998aa5](https://github.com/cozy/cozy-libs/commit/a998aa5))
+* **Harvest:** Add Manifest sanitizer functions ([1f1f87b](https://github.com/cozy/cozy-libs/commit/1f1f87b))
+
+
+
+
 <a name="0.3.0"></a>
 # 0.3.0 (2018-12-27)
 
