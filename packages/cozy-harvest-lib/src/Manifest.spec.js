@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import { Manifest } from './Manifest'
+import Manifest from './Manifest'
 
 describe('Manifest', () => {
   describe('sanitize', () => {
@@ -19,6 +19,43 @@ describe('Manifest', () => {
 
     it('should return empty manifest', () => {
       expect(Manifest.sanitize()).toEqual({})
+    })
+
+    it('should not mutate source manifest', () => {
+      const manifest = {
+        fields: {
+          username: {
+            type: 'text',
+            required: {
+              value: 'true'
+            }
+          },
+          passphrase: {
+            type: 'password'
+          },
+          birthdate: {
+            type: 'date'
+          }
+        }
+      }
+
+      Manifest.sanitize(manifest)
+      expect(manifest).toEqual({
+        fields: {
+          username: {
+            type: 'text',
+            required: {
+              value: 'true'
+            }
+          },
+          passphrase: {
+            type: 'password'
+          },
+          birthdate: {
+            type: 'date'
+          }
+        }
+      })
     })
   })
 

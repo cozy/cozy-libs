@@ -1,13 +1,55 @@
-export const legacyLoginFields = [
-  'login',
-  'identifier',
-  'new_identifier',
-  'email'
-]
+import _flow from 'lodash/flow'
+import _cloneDeep from 'lodash/cloneDeep'
 
-export const roleShouldBeRequired = ['identifier', 'password']
+const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
 
-export const legacyEncryptedFields = [
+/**
+ * Ensures that fields has at least one field with the role 'identifier'
+ * @param  {Object} [fields={}] Manifest fields
+ * @return {Object}             Sanitized manifest fields
+ */
+const sanitizeIdentifier = fields => {
+  const sanitized = _cloneDeep(fields)
+  let hasIdentifier = false
+  for (let fieldName in sanitized)
+    if (sanitized[fieldName].role === 'identifier') {
+      if (hasIdentifier) delete sanitized[fieldName].role
+      else hasIdentifier = true
+    }
+  if (hasIdentifier) return sanitized
+
+  for (let name of legacyLoginFields)
+    if (sanitized[name]) {
+      sanitized[name].role = 'identifier'
+      return sanitized
+    }
+
+  for (let fieldName in sanitized)
+    if (sanitized[fieldName].type !== 'password') {
+      sanitized[fieldName].role = 'identifier'
+      return sanitized
+    }
+
+  return sanitized
+}
+
+/**
+ * Ensures every field not explicitely tagged as not required is required
+ * @param  {Object} [fields={}] Manifest fields
+ * @return {Object}             Sanitized manifest fields
+ */
+const sanitizeRequired = fields => {
+  const sanitized = _cloneDeep(fields)
+  for (let fieldName in sanitized)
+    sanitized[fieldName].required =
+      typeof sanitized[fieldName].required === 'boolean'
+        ? sanitized[fieldName].required
+        : true
+
+  return sanitized
+}
+
+const legacyEncryptedFields = [
   'secret',
   'dob',
   'code',
@@ -17,59 +59,37 @@ export const legacyEncryptedFields = [
   'appSecret'
 ]
 
-export const Manifest = {
-  sanitize: (manifest = {}) => {
-    let sanitized = JSON.parse(JSON.stringify(manifest))
-    if (!sanitized.fields) return sanitized
-
-    sanitized = Manifest.sanitizeIdentifier(sanitized)
-    sanitized = Manifest.sanitizeRequired(sanitized)
-    sanitized = Manifest.sanitizeEncrypted(sanitized)
-
-    return sanitized
-  },
-
-  sanitizeIdentifier: sanitized => {
-    let hasIdentifier = false
-    for (let fieldName in sanitized.fields)
-      if (sanitized.fields[fieldName].role === 'identifier') {
-        if (hasIdentifier) delete sanitized.fields[fieldName].role
-        else hasIdentifier = true
-      }
-    if (hasIdentifier) return sanitized
-
-    for (let name of legacyLoginFields)
-      if (sanitized.fields[name]) {
-        sanitized.fields[name].role = 'identifier'
-        return sanitized
-      }
-
-    for (let fieldName in sanitized.fields)
-      if (sanitized.fields[fieldName].type !== 'password') {
-        sanitized.fields[fieldName].role = 'identifier'
-        return sanitized
-      }
-
-    return sanitized
-  },
-
-  sanitizeRequired: sanitized => {
-    for (let fieldName in sanitized.fields)
-      if (typeof sanitized.fields[fieldName].required !== 'boolean')
-        sanitized.fields[fieldName].required = true
-
-    return sanitized
-  },
-
-  sanitizeEncrypted: sanitized => {
-    for (let fieldName in sanitized.fields)
-      if (typeof sanitized.fields[fieldName].encrypted === 'undefined')
-        sanitized.fields[fieldName].encrypted = legacyEncryptedFields.includes(
-          fieldName
-        )
-
-    return sanitized
-  }
+/**
+ * Ensures:
+ * * any field flagged as encrypted keeps its flag
+ * * any legacy encrypted field is tagged as encrypted
+ * @param  {Object} [fields={}] Manifest fields
+ * @return {Object}             Sanitized Manifest fields
+ */
+const sanitizeEncrypted = fields => {
+  const sanitized = _cloneDeep(fields)
+  for (let fieldName in sanitized)
+    if (typeof sanitized[fieldName].encrypted !== 'boolean')
+      sanitized[fieldName].encrypted = legacyEncryptedFields.includes(fieldName)
+  return sanitized
 }
 
-export default Manifest
+/* flow() is like compose() but not in reverse order */
+const sanitizeFields = _flow([
+  sanitizeIdentifier,
+  sanitizeRequired,
+  sanitizeEncrypted
+])
+
+export const sanitize = (manifest = {}) =>
+  manifest.fields
+    ? {
+        ...manifest,
+        fields: sanitizeFields(manifest.fields)
+      }
+    : manifest
+
+export default {
+  sanitize,
+  sanitizeFields
+}
