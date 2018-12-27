@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Harvest shoul render a div 1`] = `
+exports[`Harvest should render a div 1`] = `
 <div>
   Initial implementation
 </div>

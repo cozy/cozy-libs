@@ -19,6 +19,9 @@
     "prepublishOnly": "yarn build",
     "watch": "yarn build --watch"
   },
+  "dependencies": {
+    "lodash": "^4.17.11"
+  },
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "babel-jest": "23.6.0",
