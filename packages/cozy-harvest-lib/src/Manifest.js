@@ -18,7 +18,7 @@ export const legacyEncryptedFields = [
 ]
 
 export const Manifest = {
-  sanitize: manifest => {
+  sanitize: (manifest = {}) => {
     let sanitized = JSON.parse(JSON.stringify(manifest))
     if (!sanitized.fields) return sanitized
 
@@ -63,8 +63,10 @@ export const Manifest = {
 
   sanitizeEncrypted: sanitized => {
     for (let fieldName in sanitized.fields)
-      if (legacyEncryptedFields.includes(fieldName))
-        sanitized.fields[fieldName].encrypted = true
+      if (typeof sanitized.fields[fieldName].encrypted === 'undefined')
+        sanitized.fields[fieldName].encrypted = legacyEncryptedFields.includes(
+          fieldName
+        )
 
     return sanitized
   }

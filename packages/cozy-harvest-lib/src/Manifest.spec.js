@@ -16,6 +16,10 @@ describe('Manifest', () => {
       const result = Manifest.sanitize(manifest)
       expect(result.fields).toBe(undefined)
     })
+
+    it('should return empty manifest', () => {
+      expect(Manifest.sanitize()).toEqual({})
+    })
   })
 
   describe('sanitizeIdentifier', () => {
@@ -30,7 +34,8 @@ describe('Manifest', () => {
       }
 
       const result = Manifest.sanitize(manifest)
-      expect(result.fields).toEqual(manifest.fields)
+      expect(result.fields.passphrase.role).not.toBe('identifier')
+      expect(Object.keys(result.fields).length).toBe(1)
     })
 
     it('should set role=identifier for login', () => {
@@ -169,16 +174,29 @@ describe('Manifest', () => {
       'appSecret'
     ]
     for (let name of legacyEncryptedFieldsTest) {
-      let inputLegacy = {
+      let legacyManifest = {
         fields: {
+          [name]: { type: 'text' },
           password: { type: 'password' },
           plop: { type: 'text' }
         }
       }
-      inputLegacy.fields[name] = { type: 'text' }
+
       it('should set encrypted=true to ' + name, () => {
-        const result = Manifest.sanitize(inputLegacy)
+        const result = Manifest.sanitize(legacyManifest)
         expect(result.fields[name].encrypted).toBe(true)
+      })
+
+      it('should keep encrypted value', () => {
+        const manifest = {
+          fields: {
+            [name]: { type: 'text', encrypted: false },
+            passphrase: { type: 'password', encrypted: true }
+          }
+        }
+        const result = Manifest.sanitize(manifest)
+        expect(result.fields[name].encrypted).toBe(false)
+        expect(result.fields.passphrase.encrypted).toBe(true)
       })
     }
   })
