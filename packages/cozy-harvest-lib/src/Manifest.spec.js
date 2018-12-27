@@ -59,6 +59,30 @@ describe('Manifest', () => {
     })
   })
 
+  describe('sanitizeFields', () => {
+    it('should remove old property advancedFields', () => {
+      const oldManifest = {
+        fields: {
+          login: {
+            type: 'text'
+          },
+          password: {
+            type: 'password'
+          },
+          advancedFields: {
+            folderPath: {
+              advanced: true,
+              isRequired: false
+            }
+          }
+        }
+      }
+
+      const result = Manifest.sanitize(oldManifest)
+      expect(result.fields.advancedFields).toBeUndefined()
+    })
+  })
+
   describe('sanitizeIdentifier', () => {
     it('should not add any identifier', () => {
       const manifest = {

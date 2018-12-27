@@ -1,6 +1,17 @@
 import _flow from 'lodash/flow'
 import _cloneDeep from 'lodash/cloneDeep'
 
+/**
+ * Ensures old fields are removed
+ * @param  {Object} fields Manifest fields
+ * @return {Object}        Sanitized manifest fields
+ */
+const removeOldFields = fields => {
+  const sanitized = _cloneDeep(fields)
+  delete sanitized.advancedFields
+  return sanitized
+}
+
 const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
 
 /**
@@ -76,6 +87,7 @@ const sanitizeEncrypted = fields => {
 
 /* flow() is like compose() but not in reverse order */
 const sanitizeFields = _flow([
+  removeOldFields,
   sanitizeIdentifier,
   sanitizeRequired,
   sanitizeEncrypted
