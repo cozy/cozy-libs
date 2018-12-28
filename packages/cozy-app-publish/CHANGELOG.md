@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.9.1...cozy-app-publish@0.10.0) (2018-12-28)
+
+
+### Bug Fixes
+
+* **publish:** Catch publishing error ([63bf575](https://github.com/cozy/cozy-libs/commit/63bf575))
+* **publish:** Handle 404 error ([c71f7e6](https://github.com/cozy/cozy-libs/commit/c71f7e6))
+
+
+### Features
+
+* **publish:** Do sha-sum in Node ([de9201d](https://github.com/cozy/cozy-libs/commit/de9201d)), closes [#68](https://github.com/cozy/cozy-libs/issues/68)
+
+
+
+
 <a name="0.9.1"></a>
 ## [0.9.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.9.0...cozy-app-publish@0.9.1) (2018-12-10)
 
