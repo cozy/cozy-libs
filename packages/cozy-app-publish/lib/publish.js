@@ -11,7 +11,9 @@ module.exports = async ({
   sha256Sum,
   appType
 }) => {
-  const url = `${registryUrl}/${spaceName ? spaceName + '/' : ''}registry/${appSlug}`
+  const url = `${registryUrl}/${
+    spaceName ? spaceName + '/' : ''
+  }registry/${appSlug}`
   const response = await fetch(url, {
     method: 'POST',
     headers: {
@@ -33,7 +35,9 @@ module.exports = async ({
   } else if (response.status !== 201) {
     try {
       const body = await response.json()
-      throw new Error(`${response.status} ${response.statusText}: ${body.error}`)
+      throw new Error(
+        `${response.status} ${response.statusText}: ${body.error}`
+      )
     } catch (e) {
       const text = await response.text()
       throw new Error(`${response.status} ${response.statusText}: ${text}`)

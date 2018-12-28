@@ -116,8 +116,7 @@ async function manualPublish(
       try {
         await publish(publishOptions)
       } catch (e) {
-        const errorMessage =
-          '↳ ❌  Publishing failed. Publishing aborted.'
+        const errorMessage = '↳ ❌  Publishing failed. Publishing aborted.'
         console.error(e)
         console.error(errorMessage)
       }
