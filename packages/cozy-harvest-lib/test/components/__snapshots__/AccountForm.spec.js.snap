@@ -9,7 +9,7 @@ exports[`AccountForm AccountField render password 1`] = `
     error={false}
     htmlFor=""
   >
-    
+    fields.passphrase.label
   </Label>
   <Input
     error={false}
@@ -31,7 +31,7 @@ exports[`AccountForm AccountField should render 1`] = `
     error={false}
     htmlFor=""
   >
-    
+    fields.username.label
   </Label>
   <Input
     error={false}
@@ -81,13 +81,27 @@ exports[`AccountForm should render 1`] = `
         },
       }
     }
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
   />
   <DefaultButton
     className="u-mt-2 u-mb-1-half"
     extension="full"
+    label="accountForm.submit.label"
     onclick={[Function]}
-  >
-    Submit
-  </DefaultButton>
+  />
 </div>
 `;

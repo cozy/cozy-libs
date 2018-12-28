@@ -14,10 +14,10 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "test": "jest --verbose --coverage",
-    "build": "babel src -d dist",
+    "build": "babel src -d dist --copy-files",
     "prepublishOnly": "yarn build",
-    "watch": "yarn build --watch"
+    "test": "jest --verbose --coverage",
+    "watch": "babel src -d dist --copy-files --watch"
   },
   "dependencies": {
     "cozy-ui": "^17.8.0",

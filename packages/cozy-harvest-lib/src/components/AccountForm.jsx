@@ -2,29 +2,33 @@ import React, { PureComponent } from 'react'
 import { Form, Field as FinalFormField } from 'react-final-form'
 
 import Button from 'cozy-ui/react/Button'
+import { translate, extend } from 'cozy-ui/react/I18n'
 import Field from 'cozy-ui/react/Field'
 
 import Manifest from '../Manifest'
 
 export class AccountField extends PureComponent {
   render() {
-    const { type } = this.props
+    const { name, t, type } = this.props
+    const label = t(`fields.${name}.label`)
     const fieldProps = {
+      ...this.props,
       className: 'u-m-0', // 0 margin
+      label,
       size: 'medium'
     }
     switch (type) {
       case 'password':
-        return <Field {...this.props} {...fieldProps} />
+        return <Field {...fieldProps} />
       default:
-        return <Field {...this.props} {...fieldProps} type="text" />
+        return <Field {...fieldProps} type="text" />
     }
   }
 }
 
 export class AccountFields extends PureComponent {
   render() {
-    const { manifestFields } = this.props
+    const { manifestFields, t } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(manifestFields).map(fieldName => ({
@@ -37,7 +41,7 @@ export class AccountFields extends PureComponent {
         {namedFields.map((field, index) => (
           <FinalFormField key={index} name={field.name}>
             {({ input }) => (
-              <AccountField label={field.name} {...field} {...input} />
+              <AccountField label={field.name} {...field} {...input} t={t} />
             )}
           </FinalFormField>
         ))}
@@ -47,8 +51,16 @@ export class AccountFields extends PureComponent {
 }
 
 export class AccountForm extends PureComponent {
+  constructor(props, context) {
+    super(props, context)
+    const { lang, locales } = props
+    if (locales && lang) {
+      extend(locales[lang])
+    }
+  }
+
   render() {
-    const { fields } = this.props
+    const { fields, t } = this.props
     const sanitizedFields = Manifest.sanitizeFields(fields)
     return (
       <Form
@@ -56,14 +68,13 @@ export class AccountForm extends PureComponent {
         onSubmit={v => console.log(v)}
         render={({ values }) => (
           <div>
-            <AccountFields manifestFields={sanitizedFields} />
+            <AccountFields manifestFields={sanitizedFields} t={t} />
             <Button
               className="u-mt-2 u-mb-1-half"
-              onclick={() => alert(JSON.stringify(values, 0, 2))}
               extension="full"
-            >
-              Submit
-            </Button>
+              label={t('accountForm.submit.label')}
+              onclick={() => alert(JSON.stringify(values, 0, 2))}
+            />
           </div>
         )}
       />
@@ -71,4 +82,4 @@ export class AccountForm extends PureComponent {
   }
 }
 
-export default AccountForm
+export default translate()(AccountForm)

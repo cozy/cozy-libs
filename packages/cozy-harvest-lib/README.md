@@ -42,6 +42,33 @@ Fields are declared by their name and can have several properties:
 }
 ```
 
+#### `locales`
+
+Object containing the local as specified in konnector's manifest.
+
+##### Example of `locales` object
+```js
+{
+  en: {
+    fields:
+      username: {
+        label: "Username"
+      }
+    }
+  },
+  fr: {
+    fields: {
+      username: {
+        label: "Nom d'utilisateur"
+      }
+    }
+  }
+}
+```
+Cozy-Harvest-Lib provides a defined range of field labels which do not need to be specified in the manifest. Those field labels are: `answer`, `birthdate`, `code`, `date`, `email`, `firstname`, `lastname`, `login`, `password`, `phone`.
+
+Any konnector can provide new locales for this field labels or add new ones. They will be loaded by the AccountForm component.
+
 ### AccountForm usage
 ```js
 <AccountForm fields={konnector.fields} locales={} />
