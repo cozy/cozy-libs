@@ -113,7 +113,13 @@ async function manualPublish(
     console.log()
     if (err) throw new Error(colorize.red(`prompt: ${err}`))
     if (received.confirm.match(/^y(es)?$/i)) {
-      await publish(publishOptions)
+      try {
+        await publish(publishOptions)
+      } catch (e) {
+        const errorMessage = '↳ ❌  Publishing failed. Publishing aborted.'
+        console.error(e)
+        console.error(errorMessage)
+      }
     } else {
       const errorMessage =
         '↳ ❌  Publishing manually cancelled. Publishing aborted.'

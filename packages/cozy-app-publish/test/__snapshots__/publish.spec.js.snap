@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Publish script (helper) should handle error message if the publishing failed with 404 1`] = `"404 (TEST) Not Found: Application slug not found"`;
+exports[`Publish script (helper) should handle error message if the publishing failed with 404 1`] = `"{\\"error\\":\\"Application slug not found\\"}"`;
 
 exports[`Publish script (helper) should handle error message if the publishing failed with an unexpected fetch error 1`] = `"(TEST) Unexpected error"`;
 
