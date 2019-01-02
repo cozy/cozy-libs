@@ -1,0 +1,39 @@
+{
+  "accountForm": {
+    "submit": {
+      "label": "Submit"
+    }
+  },
+  "fields": {
+    "answer": {
+      "label": "Secret answer"
+    },
+    "birthdate": {
+      "label": "Birth date"
+    },
+    "code": {
+      "label": "Confidential code"
+    },
+    "date": {
+      "label": "Date"
+    },
+    "email" : {
+      "label": "Email address"
+    },
+    "firstname": {
+      "label": "First name"
+    },
+    "lastname": {
+      "label": "Last name"
+    },
+    "login": {
+      "label": "Login"
+    },
+    "password": {
+      "label": "Password"
+    },
+    "phone": {
+      "label": "Phone number"
+    }
+  }
+}

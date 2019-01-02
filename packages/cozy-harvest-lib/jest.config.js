@@ -1,4 +1,9 @@
 module.exports = {
+  collectCoverageFrom: [
+    '**/*.{js,jsx}',
+    '!**/node_modules/**',
+    '!**/vendor/**'
+  ],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],

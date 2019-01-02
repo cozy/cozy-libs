@@ -34,9 +34,11 @@ const fixtures = {
   }
 }
 
+const t = jest.fn().mockImplementation(key => key)
+
 describe('AccountForm', () => {
   it('should render', () => {
-    const wrapper = shallow(<AccountForm fields={fixtures.fields} />)
+    const wrapper = shallow(<AccountForm fields={fixtures.fields} t={t} />)
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
@@ -44,7 +46,7 @@ describe('AccountForm', () => {
   describe('AccountFields', () => {
     it('should render', () => {
       const component = shallow(
-        <AccountFields manifestFields={fixtures.fields} />
+        <AccountFields manifestFields={fixtures.fields} t={t} />
       ).getElement()
       expect(component).toMatchSnapshot()
     })
@@ -52,14 +54,20 @@ describe('AccountForm', () => {
 
   describe('AccountField', () => {
     it('should render', () => {
-      const wrapper = shallow(<AccountField {...fixtures.sanitized.username} />)
+      const wrapper = shallow(
+        <AccountField {...fixtures.sanitized.username} name="username" t={t} />
+      )
       const component = wrapper.dive().getElement()
       expect(component).toMatchSnapshot()
     })
 
     it('render password', () => {
       const wrapper = shallow(
-        <AccountField {...fixtures.sanitized.passphrase} />
+        <AccountField
+          {...fixtures.sanitized.passphrase}
+          name="passphrase"
+          t={t}
+        />
       )
       const component = wrapper.dive().getElement()
       expect(component).toMatchSnapshot()
