@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.7.0"></a>
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.6.0...cozy-harvest-lib@0.7.0) (2019-01-02)
+
+
+### Features
+
+* Configure Transifex 🌐 ([ea1d669](https://github.com/cozy/cozy-libs/commit/ea1d669))
+* Handle I18n ([a2ad393](https://github.com/cozy/cozy-libs/commit/a2ad393))
+
+
+
+
 <a name="0.6.0"></a>
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.5.0...cozy-harvest-lib@0.6.0) (2019-01-02)
 

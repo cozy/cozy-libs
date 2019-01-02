@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.19.0"></a>
+# [1.19.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.18.2...cozy-doctypes@1.19.0) (2019-01-02)
+
+
+### Features
+
+* **doctype:** Add Account ✨ ([b0fc850](https://github.com/cozy/cozy-libs/commit/b0fc850))
+* **doctype:** Add Permission class and schema ✨ ([42e5d5f](https://github.com/cozy/cozy-libs/commit/42e5d5f))
+
+
+
+
 <a name="1.18.2"></a>
 ## [1.18.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.18.1...cozy-doctypes@1.18.2) (2018-12-27)
 
