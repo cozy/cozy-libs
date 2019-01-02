@@ -2,7 +2,7 @@
 
 exports[`AccountForm AccountField render password 1`] = `
 <div
-  className="o-field"
+  className="o-field u-m-0"
 >
   <Label
     className=""
@@ -24,7 +24,7 @@ exports[`AccountForm AccountField render password 1`] = `
 
 exports[`AccountForm AccountField should render 1`] = `
 <div
-  className="o-field"
+  className="o-field u-m-0"
 >
   <Label
     className=""
@@ -83,6 +83,7 @@ exports[`AccountForm should render 1`] = `
     }
   />
   <DefaultButton
+    className="u-mt-2 u-mb-1-half"
     extension="full"
     onclick={[Function]}
   >
