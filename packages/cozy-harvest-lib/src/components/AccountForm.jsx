@@ -9,11 +9,15 @@ import Manifest from '../Manifest'
 export class AccountField extends PureComponent {
   render() {
     const { type } = this.props
+    const fieldProps = {
+      className: 'u-m-0', // 0 margin
+      size: 'medium'
+    }
     switch (type) {
       case 'password':
-        return <Field {...this.props} />
+        return <Field {...this.props} {...fieldProps} />
       default:
-        return <Field {...this.props} type="text" />
+        return <Field {...this.props} {...fieldProps} type="text" />
     }
   }
 }
@@ -54,6 +58,7 @@ export class AccountForm extends PureComponent {
           <div>
             <AccountFields manifestFields={sanitizedFields} />
             <Button
+              className="u-mt-2 u-mb-1-half"
               onclick={() => alert(JSON.stringify(values, 0, 2))}
               extension="full"
             >
