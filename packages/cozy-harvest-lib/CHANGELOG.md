@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.5.0...cozy-harvest-lib@0.6.0) (2019-01-02)
+
+
+### Features
+
+* **harvest:** Improve AccountForm UI 💄 ([3e3581d](https://github.com/cozy/cozy-libs/commit/3e3581d))
+
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.4.1...cozy-harvest-lib@0.5.0) (2019-01-02)
 
