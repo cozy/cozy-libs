@@ -15,8 +15,10 @@
   },
   "scripts": {
     "build": "babel src -d dist --copy-files",
+    "prebuild": "yarn tx",
     "prepublishOnly": "yarn build",
     "test": "jest --verbose --coverage",
+    "tx": "tx pull --all || true",
     "watch": "babel src -d dist --copy-files --watch"
   },
   "dependencies": {
