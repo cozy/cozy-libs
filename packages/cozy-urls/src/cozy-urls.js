@@ -6,11 +6,7 @@ const ERROR_DOMAIN_NODE = `[cozy-url] COZY_URL variable isn't defined.`
 const ERROR_PROTOCOL_URL_INVALID = `[cozy-urls] Can't find protocol for`
 const ERROR_DOMAIN_URL_INVALID = `[cozy-urls] Can't find domain for`
 
-let cozyURL
-
 export const getBrowserCozyURL = () => {
-  if (cozyURL) return cozyURL
-
   try {
     const root = document.querySelector('[role=application]')
     const data = root.dataset
