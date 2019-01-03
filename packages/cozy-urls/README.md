@@ -77,6 +77,18 @@ import { getProtocol } from 'cozy-urls'
 const protocol = getProtocol() // http:
 ```
 
+#### `isSecureProtocol`
+
+This function return if secure protocol is used.
+
+Here is an example:
+
+```javascript
+import { isSecureProtocol } from 'cozy-urls'
+
+const isSecure = isSecureProtocol() // false
+```
+
 
 ## Community
 

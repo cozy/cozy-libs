@@ -1,4 +1,5 @@
 import {
+  isSecureProtocol,
   getNodeCozyURL,
   getBrowserCozyURL,
   getCozyDomain,
@@ -52,5 +53,12 @@ describe('cozy-urls', () => {
     expect(getProtocol(prodUrl)).toBe(SECURED_PROTOCOL)
 
     expect(() => getProtocol('not-url')).toThrowErrorMatchingSnapshot()
+  })
+
+  it('should return if secure protocol is used', () => {
+    expect(isSecureProtocol()).toBe(false)
+    expect(isSecureProtocol(fullCozyUrlNoSSL)).toBe(false)
+    expect(isSecureProtocol(fullCozyUrlWithSSL)).toBe(true)
+    expect(isSecureProtocol(prodUrl)).toBe(true)
   })
 })

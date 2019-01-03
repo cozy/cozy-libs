@@ -51,3 +51,9 @@ export const getProtocol = url => {
     throw new Error(ERROR_PROTOCOL_URL_INVALID, `'${url}'.`)
   }
 }
+
+export const isSecureProtocol = url => {
+  const protocol = getProtocol(url)
+
+  return protocol === 'https:'
+}
