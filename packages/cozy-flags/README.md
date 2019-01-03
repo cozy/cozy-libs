@@ -43,3 +43,10 @@ const App = () => {
 }
 
 ```
+
+### Flags enabled at build time
+
+It is possible to handle flags enabled at build time. Your app should just
+provide a global `__ENABLED_FLAGS__` array with flag names that should be
+enabled. If such a global exists, `cozy-flags` will iterate on the array and
+enable all the flags it contains when it is imported.
