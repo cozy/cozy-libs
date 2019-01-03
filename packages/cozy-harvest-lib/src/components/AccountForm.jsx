@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Form, Field as FinalFormField } from 'react-final-form'
+import PropTypes from 'react-proptypes'
 
 import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
@@ -14,6 +15,7 @@ export class AccountField extends PureComponent {
     const fieldProps = {
       ...this.props,
       className: 'u-m-0', // 0 margin
+      fullwidth: true,
       label,
       size: 'medium'
     }
@@ -60,10 +62,12 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { fields, t } = this.props
+    const { account, fields, t } = this.props
     const sanitizedFields = Manifest.sanitizeFields(fields)
+    const initialValues = account ? account.auth : {}
     return (
       <Form
+        initialValues={initialValues}
         // eslint-disable-next-line no-console
         onSubmit={v => console.log(v)}
         render={({ values }) => (
@@ -80,6 +84,12 @@ export class AccountForm extends PureComponent {
       />
     )
   }
+}
+
+AccountForm.propTypes = {
+  account: PropTypes.object,
+  fields: PropTypes.object.isRequired,
+  locales: PropTypes.object
 }
 
 export default translate()(AccountForm)

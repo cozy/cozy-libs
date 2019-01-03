@@ -31,6 +31,13 @@ const fixtures = {
       required: true,
       type: 'password'
     }
+  },
+  account: {
+    auth: {
+      username: 'Toto',
+      credentials_encrypted:
+        'bmFjbGj8JQfzzfTQ2aGKTpI+HI9N8xKAQqPTPD6/84x5GyiHm2hdn7N6rO8cLTCnkdsnd2eFWJRf'
+    }
   }
 }
 
@@ -41,6 +48,13 @@ describe('AccountForm', () => {
     const wrapper = shallow(<AccountForm fields={fixtures.fields} t={t} />)
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
+  })
+
+  it('should inject initial values from account', () => {
+    const wrapper = shallow(
+      <AccountForm account={fixtures.account} fields={fixtures.fields} t={t} />
+    )
+    expect(wrapper.props().initialValues).toEqual(fixtures.account.auth)
   })
 
   describe('AccountFields', () => {
