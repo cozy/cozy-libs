@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import { Form, Field as FinalFormField } from 'react-final-form'
+import PropTypes from 'react-proptypes'
 
 import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
@@ -83,6 +84,12 @@ export class AccountForm extends PureComponent {
       />
     )
   }
+}
+
+AccountForm.propTypes = {
+  account: PropTypes.object,
+  fields: PropTypes.object.isRequired,
+  locales: PropTypes.object
 }
 
 export default translate()(AccountForm)

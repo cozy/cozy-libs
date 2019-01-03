@@ -25,7 +25,8 @@
     "cozy-ui": "^17.8.0",
     "final-form": "^4.11.0",
     "lodash": "^4.17.11",
-    "react-final-form": "^3.7.0"
+    "react-final-form": "^3.7.0",
+    "react-proptypes": "^1.0.0"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
