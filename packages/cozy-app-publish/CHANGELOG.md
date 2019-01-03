@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.1"></a>
+## [0.10.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.10.0...cozy-app-publish@0.10.1) (2019-01-03)
+
+
+### Bug Fixes
+
+* :bug: Don't read publish response stream twice ([a6e7ca7](https://github.com/cozy/cozy-libs/commit/a6e7ca7))
+
+
+
+
 <a name="0.10.0"></a>
 # [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.9.1...cozy-app-publish@0.10.0) (2018-12-28)
 
