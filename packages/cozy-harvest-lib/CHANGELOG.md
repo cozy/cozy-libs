@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.8.0"></a>
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.7.0...cozy-harvest-lib@0.8.0) (2019-01-03)
+
+
+### Features
+
+* **harvest:** Add PropTypes on AccountForm ✅ ([79e775e](https://github.com/cozy/cozy-libs/commit/79e775e))
+* **harvest:** Handle existing account ✨ ([f8caa23](https://github.com/cozy/cozy-libs/commit/f8caa23))
+
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.6.0...cozy-harvest-lib@0.7.0) (2019-01-02)
 
