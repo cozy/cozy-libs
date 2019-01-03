@@ -6,12 +6,17 @@ const ERROR_PROTOCOL_URL_INVALID = `[cozy-urls] Can't find protocol for`
 
 const DOMAIN_REGEX = '(((https?):)?/{2})?(([^.]*.)*[^./:]*)'
 
+let cozyURL
+
 export const getBrowserCozyURL = () => {
+  if (cozyURL) return cozyURL
+
   try {
     const root = document.querySelector('[role=application]')
     const data = root.dataset
+    cozyURL = `${window.location.protocol}//${data.cozyDomain}`
 
-    return `${window.location.protocol}//${data.cozyDomain}`
+    return cozyURL
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn(ERROR_DOMAIN_BROWSER)
@@ -20,8 +25,12 @@ export const getBrowserCozyURL = () => {
 }
 
 export const getNodeCozyURL = () => {
+  if (cozyURL) return cozyURL
+
   try {
-    return process.env.COZY_URL
+    cozyURL = process.env.COZY_URL
+
+    return cozyURL
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn(ERROR_DOMAIN_NODE)
