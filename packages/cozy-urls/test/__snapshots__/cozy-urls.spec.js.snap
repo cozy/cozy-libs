@@ -2,6 +2,4 @@
 
 exports[`cozy-urls should return if use SSL 1`] = `"Invalid URL"`;
 
-exports[`cozy-urls should return is SSL actived 1`] = `"Invalid URL"`;
-
 exports[`cozy-urls should return protocol 1`] = `"Invalid URL"`;
