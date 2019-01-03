@@ -37,11 +37,19 @@ describe('cozy-urls', () => {
 
   it('should return cozy domain', () => {
     expect(getCozyDomain()).toBe(cozyDomain)
-    expect(getCozyDomain(cozyDomain)).toBe(cozyDomain)
-    expect(getCozyDomain(cozyDomainWithSlashes)).toBe(cozyDomain)
     expect(getCozyDomain(fullCozyUrlNoSSL)).toBe(cozyDomain)
     expect(getCozyDomain(fullCozyUrlWithSSL)).toBe(cozyDomain)
     expect(getCozyDomain(prodUrl)).toBe('prod.mycozy.cloud')
+
+    // throw error
+    jest.spyOn(console, 'warn').mockReturnValue(null)
+    expect(() =>
+      getCozyDomain(cozyDomainWithSlashes)
+    ).toThrowErrorMatchingSnapshot()
+    // eslint-disable-next-line no-console
+    expect(console.warn).toHaveBeenCalled()
+    // eslint-disable-next-line no-console
+    console.warn.mockReset()
   })
 
   it('should return protocol', () => {
