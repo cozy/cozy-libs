@@ -19,10 +19,11 @@
   },
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-urls/README.md",
   "devDependencies": {
-    "@babel/cli": "^7.2.0",
-    "jest-cli": "^23.6.0"
+    "@babel/cli": "7.2.0",
+    "jest-cli": "23.6.0"
   },
   "dependencies": {
-    "babel-preset-cozy-app": "^1.2.3"
+    "babel-preset-cozy-app": "1.2.3",
+    "detect-node": "2.0.4"
   }
 }

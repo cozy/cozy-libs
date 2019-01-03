@@ -40,50 +40,53 @@ or
 
 ## API
 
-#### `getProps(cozyURL, sslOption)`
+#### `getCozyURL`
 
-This function will parse the `cozyURL` provided and use the provided `sslOption` to return props in an object with the following properties:
-
-- `url`: the full URL with the protocol
-- `host`: just the host name (no protocol)
-- `ssl`: a boolean, `true` if SSL is used (https) or `false` if not (http)
+This function return the `cozyURL`. On browser this information come from
+[index.ejs](). On node this information comes from `COZY_URL` env variable.
 
 Here is an example:
 
 ```javascript
-import cozyURLs from 'cozy-urls'
+import { getCozyURL } from 'cozy-urls'
 
-const myUrlProps = cozyURLs.getProps('cozy.tools:8080' ,false)
-/*
-{
-  url: 'http://cozy.tools:8080',
-  host: 'cozy.tools:8080',
-  ssl: false
-}
-*/
+const cozyURL = getCozyURL() // http://cozy.tools:8080
 ```
 
-#### `setAppName(name)` (optional but recommended)
+#### `getCozyDomain`
 
-This function allow you to specify a name to display with error or warnig messages for better debugging and issue searching. Many libs can use this library at the same time, it's better to know which one is concerned when working on it.
-
-> The default name will be `The app`.
+This function return the `cozyDomain`.
 
 Here is an example:
 
 ```javascript
-import cozyURLs from 'cozy-urls'
+import { getCozyDomain } from 'cozy-urls'
 
-cozyURLs.setAppName('myapp')
-// nothing change for the rest of usage
-const myUrlProps = cozyURLs.getProps('cozy.tools:8080' ,false)
-/*
-{
-  url: 'http://cozy.tools:8080',
-  host: 'cozy.tools:8080',
-  ssl: false
-}
-*/
+const cozyDomain = getCozyDomain() // cozy.tools:8080
+```
+
+#### `getProtocol`
+
+This function return the `protocol` (`http:` or `https:`).
+
+Here is an example:
+
+```javascript
+import { getProtocol } from 'cozy-urls'
+
+const protocol = getProtocol() // http:
+```
+
+#### `useSSL`
+
+This function return a boolean if the `protocol` is secure.
+
+Here is an example:
+
+```javascript
+import { useSSL } from 'cozy-urls'
+
+const protocolIsSecure = useSSL() // false
 ```
 
 
@@ -111,7 +114,7 @@ You can reach the Cozy Community by:
 
 ### Maintainers
 
-The maintainers for Cozy Realtime are [CPatchane](https://github.com/cpatchane)!
+The maintainers for Cozy cozy-urls are [CPatchane](https://github.com/cpatchane) and [kosssi](https://github.com/kosssi)!
 
 ## License
 
