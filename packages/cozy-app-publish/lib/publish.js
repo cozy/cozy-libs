@@ -33,15 +33,15 @@ module.exports = async ({
     const text = await response.text()
     throw new Error(text)
   } else if (response.status !== 201) {
+    let errorMsg
     try {
       const body = await response.json()
-      throw new Error(
-        `${response.status} ${response.statusText}: ${body.error}`
-      )
+      errorMsg = body.error
     } catch (e) {
       const text = await response.text()
-      throw new Error(`${response.status} ${response.statusText}: ${text}`)
+      errorMsg = text
     }
+    throw new Error(`${response.status} ${response.statusText}: ${errorMsg}`)
   }
 
   return response
