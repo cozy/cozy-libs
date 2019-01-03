@@ -1,0 +1,5 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`cozy-urls should return is SSL actived 1`] = `"Invalid URL"`;
+
+exports[`cozy-urls should return protocol 1`] = `"Invalid URL"`;
