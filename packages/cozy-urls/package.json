@@ -23,6 +23,7 @@
     "jest-cli": "23.6.0"
   },
   "dependencies": {
-    "babel-preset-cozy-app": "1.2.3"
+    "babel-preset-cozy-app": "1.2.3",
+    "detect-node": "2.0.4"
   }
 }
