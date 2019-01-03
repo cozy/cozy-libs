@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.7...cozy-flags@1.4.0) (2019-01-03)
+
+
+### Features
+
+* **flags:** Handle flags enabled at build time ([87de30a](https://github.com/cozy/cozy-libs/commit/87de30a))
+
+
+
+
 <a name="1.3.7"></a>
 ## [1.3.7](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.6...cozy-flags@1.3.7) (2018-12-28)
 
