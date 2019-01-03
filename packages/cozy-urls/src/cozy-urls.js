@@ -56,7 +56,7 @@ export const getProtocol = url => {
   }
 }
 
-export const isSSL = url => {
+export const useSSL = url => {
   const protocol = getProtocol(url)
 
   return protocol === 'https:'

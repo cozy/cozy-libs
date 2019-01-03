@@ -3,7 +3,7 @@ import {
   getBrowserCozyURL,
   getCozyDomain,
   getProtocol,
-  isSSL,
+  useSSL,
   getCozyURL
 } from '../src/cozy-urls'
 
@@ -61,15 +61,15 @@ describe('cozy-urls', () => {
     console.warn.mockReset()
   })
 
-  it('should return is SSL actived', () => {
-    expect(isSSL()).toBe(false)
-    expect(isSSL(fullCozyUrlNoSSL)).toBe(false)
-    expect(isSSL(fullCozyUrlWithSSL)).toBe(true)
-    expect(isSSL(prodUrl)).toBe(true)
+  it('should return if use SSL', () => {
+    expect(useSSL()).toBe(false)
+    expect(useSSL(fullCozyUrlNoSSL)).toBe(false)
+    expect(useSSL(fullCozyUrlWithSSL)).toBe(true)
+    expect(useSSL(prodUrl)).toBe(true)
 
     // throw error
     jest.spyOn(console, 'warn').mockReturnValue(null)
-    expect(() => isSSL(cozyDomainWithSlashes)).toThrowErrorMatchingSnapshot()
+    expect(() => useSSL(cozyDomainWithSlashes)).toThrowErrorMatchingSnapshot()
     // eslint-disable-next-line no-console
     expect(console.warn).toHaveBeenCalled()
     // eslint-disable-next-line no-console
