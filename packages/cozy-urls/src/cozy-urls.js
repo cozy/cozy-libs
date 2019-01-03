@@ -1,11 +1,6 @@
 /* global URL */
 import isNode from 'detect-node'
 
-const ERROR_DOMAIN_BROWSER = `[cozy-url] cozyDomain isn't defined in index.ejs https://git.io/fhmP9`
-const ERROR_DOMAIN_NODE = `[cozy-url] COZY_URL variable isn't defined.`
-const ERROR_PROTOCOL_URL_INVALID = `[cozy-urls] Can't find protocol for`
-const ERROR_DOMAIN_URL_INVALID = `[cozy-urls] Can't find domain for`
-
 export const getBrowserCozyURL = () => {
   try {
     const root = document.querySelector('[role=application]')
@@ -13,7 +8,11 @@ export const getBrowserCozyURL = () => {
 
     return new URL(`${window.location.protocol}//${data.cozyDomain}`)
   } catch (e) {
-    throw new Error(ERROR_DOMAIN_BROWSER)
+    throw new Error(
+      `[cozy-url] cozyDomain isn't defined in index.ejs https://git.io/fhmP9, (${
+        e.message
+      })`
+    )
   }
 }
 
@@ -21,7 +20,9 @@ export const getNodeCozyURL = () => {
   try {
     return new URL(process.env.COZY_URL)
   } catch (e) {
-    throw new Error(ERROR_DOMAIN_NODE)
+    throw new Error(
+      `[cozy-url] COZY_URL variable isn't defined, (${e.message}).`
+    )
   }
 }
 
@@ -34,7 +35,9 @@ export const getCozyDomain = url => {
 
     return parsedURL.host
   } catch (e) {
-    throw new Error(ERROR_DOMAIN_URL_INVALID, `'${url}'.`)
+    throw new Error(
+      `[cozy-urls] Can't find domain for '${url}', (${e.message}).`
+    )
   }
 }
 
@@ -44,7 +47,9 @@ export const getProtocol = url => {
 
     return parsedURL.protocol
   } catch (e) {
-    throw new Error(ERROR_PROTOCOL_URL_INVALID, `'${url}'.`)
+    throw new Error(
+      `[cozy-urls] Can't find protocol for '${url}', (${e.message}).`
+    )
   }
 }
 
