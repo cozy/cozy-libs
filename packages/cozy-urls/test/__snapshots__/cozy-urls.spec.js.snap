@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`cozy-urls should return cozy domain 1`] = `"Invalid URL"`;
+exports[`cozy-urls should return browser cozy url 1`] = `"[cozy-url] cozyDomain isn't defined in index.ejs https://git.io/fhmP9"`;
 
-exports[`cozy-urls should return if use SSL 1`] = `"Invalid URL"`;
+exports[`cozy-urls should return cozy domain 1`] = `"[cozy-urls] Can't find domain for"`;
 
-exports[`cozy-urls should return protocol 1`] = `"Invalid URL"`;
+exports[`cozy-urls should return node cozy url 1`] = `"[cozy-url] COZY_URL variable isn't defined."`;
+
+exports[`cozy-urls should return protocol 1`] = `"[cozy-urls] Can't find protocol for"`;

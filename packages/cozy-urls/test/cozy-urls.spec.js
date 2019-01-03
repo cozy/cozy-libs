@@ -3,12 +3,10 @@ import {
   getBrowserCozyURL,
   getCozyDomain,
   getProtocol,
-  useSSL,
   getCozyURL
 } from '../src/cozy-urls'
 
 const cozyDomain = 'cozy.tools:8080'
-const cozyDomainWithSlashes = '//cozy.tools:8080'
 const fullCozyUrlNoSSL = 'http://cozy.tools:8080'
 const fullCozyUrlWithSSL = 'https://cozy.tools:8080'
 const prodUrl = 'https://prod.mycozy.cloud'
@@ -18,21 +16,24 @@ const UNSECURED_PROTOCOL = 'http:'
 
 describe('cozy-urls', () => {
   it('should return browser cozy url', () => {
+    expect(() => getBrowserCozyURL()).toThrowErrorMatchingSnapshot()
     document.querySelector = jest
       .fn()
       .mockImplementation(() => ({ dataset: { cozyDomain } }))
     window.location.protocol = 'http:'
-    expect(getBrowserCozyURL()).toBe(fullCozyUrlNoSSL)
+    expect(getBrowserCozyURL().origin).toBe(fullCozyUrlNoSSL)
     document.querySelector.mockReset()
   })
 
   it('should return node cozy url', () => {
+    process.env.COZY_URL = undefined
+    expect(() => getNodeCozyURL()).toThrowErrorMatchingSnapshot()
     process.env.COZY_URL = fullCozyUrlNoSSL
-    expect(getNodeCozyURL()).toBe(fullCozyUrlNoSSL)
+    expect(getNodeCozyURL().origin).toBe(fullCozyUrlNoSSL)
   })
 
   it('should return cozy url', () => {
-    expect(getCozyURL()).toBe(fullCozyUrlNoSSL)
+    expect(getCozyURL().origin).toBe(fullCozyUrlNoSSL)
   })
 
   it('should return cozy domain', () => {
@@ -41,15 +42,7 @@ describe('cozy-urls', () => {
     expect(getCozyDomain(fullCozyUrlWithSSL)).toBe(cozyDomain)
     expect(getCozyDomain(prodUrl)).toBe('prod.mycozy.cloud')
 
-    // throw error
-    jest.spyOn(console, 'warn').mockReturnValue(null)
-    expect(() =>
-      getCozyDomain(cozyDomainWithSlashes)
-    ).toThrowErrorMatchingSnapshot()
-    // eslint-disable-next-line no-console
-    expect(console.warn).toHaveBeenCalled()
-    // eslint-disable-next-line no-console
-    console.warn.mockReset()
+    expect(() => getCozyDomain('not-url')).toThrowErrorMatchingSnapshot()
   })
 
   it('should return protocol', () => {
@@ -58,29 +51,6 @@ describe('cozy-urls', () => {
     expect(getProtocol(fullCozyUrlWithSSL)).toBe(SECURED_PROTOCOL)
     expect(getProtocol(prodUrl)).toBe(SECURED_PROTOCOL)
 
-    // throw error
-    jest.spyOn(console, 'warn').mockReturnValue(null)
-    expect(() =>
-      getProtocol(cozyDomainWithSlashes)
-    ).toThrowErrorMatchingSnapshot()
-    // eslint-disable-next-line no-console
-    expect(console.warn).toHaveBeenCalled()
-    // eslint-disable-next-line no-console
-    console.warn.mockReset()
-  })
-
-  it('should return if use SSL', () => {
-    expect(useSSL()).toBe(false)
-    expect(useSSL(fullCozyUrlNoSSL)).toBe(false)
-    expect(useSSL(fullCozyUrlWithSSL)).toBe(true)
-    expect(useSSL(prodUrl)).toBe(true)
-
-    // throw error
-    jest.spyOn(console, 'warn').mockReturnValue(null)
-    expect(() => useSSL(cozyDomainWithSlashes)).toThrowErrorMatchingSnapshot()
-    // eslint-disable-next-line no-console
-    expect(console.warn).toHaveBeenCalled()
-    // eslint-disable-next-line no-console
-    console.warn.mockReset()
+    expect(() => getProtocol('not-url')).toThrowErrorMatchingSnapshot()
   })
 })

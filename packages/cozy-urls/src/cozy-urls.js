@@ -1,3 +1,4 @@
+/* global URL */
 import isNode from 'detect-node'
 
 const ERROR_DOMAIN_BROWSER = `[cozy-url] cozyDomain isn't defined in index.ejs https://git.io/fhmP9`
@@ -13,27 +14,18 @@ export const getBrowserCozyURL = () => {
   try {
     const root = document.querySelector('[role=application]')
     const data = root.dataset
-    cozyURL = `${window.location.protocol}//${data.cozyDomain}`
 
-    return cozyURL
+    return new URL(`${window.location.protocol}//${data.cozyDomain}`)
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(ERROR_DOMAIN_BROWSER)
-    throw e
+    throw new Error(ERROR_DOMAIN_BROWSER)
   }
 }
 
 export const getNodeCozyURL = () => {
-  if (cozyURL) return cozyURL
-
   try {
-    cozyURL = process.env.COZY_URL
-
-    return cozyURL
+    return new URL(process.env.COZY_URL)
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(ERROR_DOMAIN_NODE)
-    throw e
+    throw new Error(ERROR_DOMAIN_NODE)
   }
 }
 
@@ -41,39 +33,21 @@ export const getCozyURL = () =>
   isNode ? getNodeCozyURL() : getBrowserCozyURL()
 
 export const getCozyDomain = url => {
-  if (url === undefined) {
-    url = getCozyURL()
-  }
-
   try {
-    const parsedURL = new URL(url)
+    const parsedURL = url ? new URL(url) : getCozyURL()
 
     return parsedURL.host
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(ERROR_DOMAIN_URL_INVALID, `'${url}'.`)
-    throw e
+    throw new Error(ERROR_DOMAIN_URL_INVALID, `'${url}'.`)
   }
 }
 
 export const getProtocol = url => {
-  if (url === undefined) {
-    url = getCozyURL()
-  }
-
   try {
-    const parsedURL = new URL(url)
+    const parsedURL = url ? new URL(url) : getCozyURL()
 
     return parsedURL.protocol
   } catch (e) {
-    // eslint-disable-next-line no-console
-    console.warn(ERROR_PROTOCOL_URL_INVALID, `'${url}'.`)
-    throw e
+    throw new Error(ERROR_PROTOCOL_URL_INVALID, `'${url}'.`)
   }
-}
-
-export const useSSL = url => {
-  const protocol = getProtocol(url)
-
-  return protocol === 'https:'
 }
