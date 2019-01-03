@@ -14,6 +14,7 @@ export class AccountField extends PureComponent {
     const fieldProps = {
       ...this.props,
       className: 'u-m-0', // 0 margin
+      fullwidth: true,
       label,
       size: 'medium'
     }
@@ -60,10 +61,12 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { fields, t } = this.props
+    const { account, fields, t } = this.props
     const sanitizedFields = Manifest.sanitizeFields(fields)
+    const initialValues = account ? account.auth : {}
     return (
       <Form
+        initialValues={initialValues}
         // eslint-disable-next-line no-console
         onSubmit={v => console.log(v)}
         render={({ values }) => (
