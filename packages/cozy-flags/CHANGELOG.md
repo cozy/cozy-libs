@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.4.0...cozy-flags@1.5.0) (2019-01-04)
+
+
+### Bug Fixes
+
+* **flags:** Handle case where __ENABLED_FLAGS__ is undefined properly ([c771ff8](https://github.com/cozy/cozy-libs/commit/c771ff8))
+
+
+### Features
+
+* **flags:** Export enableFlags under flag namespace ([56a136f](https://github.com/cozy/cozy-libs/commit/56a136f))
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.3.7...cozy-flags@1.4.0) (2019-01-03)
 
