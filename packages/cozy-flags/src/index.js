@@ -23,4 +23,6 @@ if (typeof __ENABLED_FLAGS__ !== 'undefined') {
   enableFlags(__ENABLED_FLAGS__)
 }
 
+flag.enable = enableFlags
+
 export default flag
