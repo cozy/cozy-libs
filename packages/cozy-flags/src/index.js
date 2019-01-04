@@ -7,7 +7,10 @@ const flag = isNode
   ? require('./node/flag').default
   : require('./browser/flag').default
 
-if (__ENABLED_FLAGS__ && Array.isArray(__ENABLED_FLAGS__)) {
+if (
+  typeof __ENABLED_FLAGS__ !== 'undefined' &&
+  Array.isArray(__ENABLED_FLAGS__)
+) {
   __ENABLED_FLAGS__.forEach(enabledFlag => flag(enabledFlag, true))
 }
 
