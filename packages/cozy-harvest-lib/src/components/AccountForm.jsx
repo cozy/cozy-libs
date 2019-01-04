@@ -19,9 +19,13 @@ export class AccountField extends PureComponent {
       label,
       size: 'medium'
     }
+    const passwordLabels = {
+      hideLabel: t('accountForm.password.hide'),
+      showLabel: t('accountForm.password.show')
+    }
     switch (type) {
       case 'password':
-        return <Field {...fieldProps} />
+        return <Field {...fieldProps} secondaryLabels={passwordLabels} />
       default:
         return <Field {...fieldProps} type="text" />
     }
