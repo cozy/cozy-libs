@@ -7,6 +7,7 @@ import { translate, extend } from 'cozy-ui/react/I18n'
 import Field from 'cozy-ui/react/Field'
 
 import Manifest from '../Manifest'
+import OAuthForm from './OAuthForm'
 
 export class AccountField extends PureComponent {
   render() {
@@ -62,7 +63,10 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { account, fields, t } = this.props
+    const { account, fields, oauth, t } = this.props
+
+    if (oauth) return <OAuthForm oauth={oauth} />
+
     const sanitizedFields = Manifest.sanitizeFields(fields)
     const initialValues = account ? account.auth : {}
     return (

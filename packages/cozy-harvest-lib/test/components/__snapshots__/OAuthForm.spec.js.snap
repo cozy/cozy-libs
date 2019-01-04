@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OAuthForm should render 1`] = `
+<DefaultButton
+  className="u-mt-1"
+  extension="full"
+  label="oauth.connect.label"
+/>
+`;

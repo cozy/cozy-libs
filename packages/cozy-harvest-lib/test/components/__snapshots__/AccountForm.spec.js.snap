@@ -63,6 +63,16 @@ exports[`AccountForm AccountFields should render 1`] = `
 </div>
 `;
 
+exports[`AccountForm should redirect to OAuthForm 1`] = `
+<Wrapper
+  oauth={
+    Object {
+      "scope": "test",
+    }
+  }
+/>
+`;
+
 exports[`AccountForm should render 1`] = `
 <div>
   <AccountFields
