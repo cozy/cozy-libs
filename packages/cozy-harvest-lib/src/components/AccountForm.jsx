@@ -9,6 +9,8 @@ import Field from 'cozy-ui/react/Field'
 import Manifest from '../Manifest'
 import OAuthForm from './OAuthForm'
 
+const ENCRYPTED_PLACEHOLDER = '*************'
+
 const predefinedLabels = [
   'answer',
   'birthdate',
@@ -71,7 +73,7 @@ const parse = type => value => {
 
 export class AccountFields extends PureComponent {
   render() {
-    const { manifestFields, t } = this.props
+    const { fillEncrypted, manifestFields, t } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(manifestFields).map(fieldName => ({
@@ -87,7 +89,18 @@ export class AccountFields extends PureComponent {
             name={field.name}
             parse={parse(field.type)}
           >
-            {({ input }) => <AccountField {...field} {...input} t={t} />}
+            {({ input }) => (
+              <AccountField
+                {...field}
+                {...input}
+                placeholder={
+                  field.encrypted && fillEncrypted
+                    ? ENCRYPTED_PLACEHOLDER
+                    : field.placeholder
+                }
+                t={t}
+              />
+            )}
           </FinalFormField>
         ))}
       </div>
@@ -118,7 +131,11 @@ export class AccountForm extends PureComponent {
         onSubmit={v => console.log(v)}
         render={({ values }) => (
           <div>
-            <AccountFields manifestFields={sanitizedFields} t={t} />
+            <AccountFields
+              fillEncrypted={!!account}
+              manifestFields={sanitizedFields}
+              t={t}
+            />
             <Button
               className="u-mt-2 u-mb-1-half"
               extension="full"

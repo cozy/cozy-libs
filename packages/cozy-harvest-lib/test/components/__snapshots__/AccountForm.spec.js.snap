@@ -183,6 +183,25 @@ exports[`AccountForm AccountFields should render 1`] = `
 </div>
 `;
 
+exports[`AccountForm AccountFields should render encrypted fields with placeholder 1`] = `
+<div>
+  <Field
+    format={[Function]}
+    name="username"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+  <Field
+    format={[Function]}
+    name="passphrase"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+</div>
+`;
+
 exports[`AccountForm should redirect to OAuthForm 1`] = `
 <Wrapper
   oauth={
@@ -196,6 +215,7 @@ exports[`AccountForm should redirect to OAuthForm 1`] = `
 exports[`AccountForm should render 1`] = `
 <div>
   <AccountFields
+    fillEncrypted={false}
     manifestFields={
       Object {
         "passphrase": Object {

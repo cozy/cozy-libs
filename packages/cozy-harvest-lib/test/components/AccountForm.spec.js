@@ -74,6 +74,13 @@ describe('AccountForm', () => {
       ).getElement()
       expect(component).toMatchSnapshot()
     })
+
+    it('should render encrypted fields with placeholder', () => {
+      const component = shallow(
+        <AccountFields manifestFields={fixtures.sanitized} t={t} />
+      ).getElement()
+      expect(component).toMatchSnapshot()
+    })
   })
 
   describe('AccountField', () => {
