@@ -2,6 +2,10 @@
   "accountForm": {
     "submit": {
       "label": "Submit"
+    },
+    "password": {
+      "show": "Show",
+      "hide": "Hide"
     }
   },
   "fields": {
