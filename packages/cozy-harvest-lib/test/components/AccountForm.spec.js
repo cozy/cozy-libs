@@ -38,6 +38,9 @@ const fixtures = {
       credentials_encrypted:
         'bmFjbGj8JQfzzfTQ2aGKTpI+HI9N8xKAQqPTPD6/84x5GyiHm2hdn7N6rO8cLTCnkdsnd2eFWJRf'
     }
+  },
+  oauth: {
+    scope: 'test'
   }
 }
 
@@ -55,6 +58,13 @@ describe('AccountForm', () => {
       <AccountForm account={fixtures.account} fields={fixtures.fields} t={t} />
     )
     expect(wrapper.props().initialValues).toEqual(fixtures.account.auth)
+  })
+
+  it('should redirect to OAuthForm', () => {
+    const component = shallow(
+      <AccountForm oauth={fixtures.oauth} t={t} />
+    ).getElement()
+    expect(component).toMatchSnapshot()
   })
 
   describe('AccountFields', () => {

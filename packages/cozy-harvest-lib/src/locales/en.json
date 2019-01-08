@@ -39,5 +39,10 @@
     "phone": {
       "label": "Phone number"
     }
+  },
+  "oauth": {
+    "connect": {
+      "label": "Connect"
+    }
   }
 }

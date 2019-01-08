@@ -73,3 +73,7 @@ Any konnector can provide new locales for this field labels or add new ones. The
 ```js
 <AccountForm fields={konnector.fields} locales={} />
 ```
+
+## OAuthForm
+
+The OAuthForm is used for OAuth konnector and display a single "Connect" button.
