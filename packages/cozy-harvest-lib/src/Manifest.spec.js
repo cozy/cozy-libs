@@ -225,6 +225,18 @@ describe('Manifest', () => {
   })
 
   describe('sanitizeEncrypted', () => {
+    it('should et encrypted for type=password', () => {
+      const manifest = {
+        fields: {
+          username: { type: 'text' },
+          passphrase: { type: 'password' }
+        }
+      }
+
+      const result = Manifest.sanitize(manifest)
+      expect(result.fields.passphrase.encrypted).toBe(true)
+    })
+
     const legacyEncryptedFieldsTest = [
       'secret',
       'dob',
@@ -234,6 +246,7 @@ describe('Manifest', () => {
       'refresh_token',
       'appSecret'
     ]
+
     for (let name of legacyEncryptedFieldsTest) {
       let legacyManifest = {
         fields: {

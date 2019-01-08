@@ -199,7 +199,7 @@ exports[`AccountForm should render 1`] = `
     manifestFields={
       Object {
         "passphrase": Object {
-          "encrypted": false,
+          "encrypted": true,
           "required": true,
           "type": "password",
         },
