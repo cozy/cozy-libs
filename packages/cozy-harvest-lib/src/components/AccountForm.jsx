@@ -8,15 +8,31 @@ import Field from 'cozy-ui/react/Field'
 
 import Manifest from '../Manifest'
 
+const predefinedLabels = [
+  'answer',
+  'birthdate',
+  'code',
+  'date',
+  'email',
+  'firstname',
+  'lastname',
+  'login',
+  'password',
+  'phone'
+]
+
 export class AccountField extends PureComponent {
   render() {
-    const { name, t, type } = this.props
-    const label = t(`fields.${name}.label`)
+    const { label, name, t, type } = this.props
+
+    // Allow manifest to specify predefined label
+    const localeKey = predefinedLabels.includes(label) ? label : name
+
     const fieldProps = {
       ...this.props,
       className: 'u-m-0', // 0 margin
       fullwidth: true,
-      label,
+      label: t(`fields.${localeKey}.label`),
       size: 'medium'
     }
     const passwordLabels = {
@@ -46,9 +62,7 @@ export class AccountFields extends PureComponent {
       <div>
         {namedFields.map((field, index) => (
           <FinalFormField key={index} name={field.name}>
-            {({ input }) => (
-              <AccountField label={field.name} {...field} {...input} t={t} />
-            )}
+            {({ input }) => <AccountField {...field} {...input} t={t} />}
           </FinalFormField>
         ))}
       </div>
