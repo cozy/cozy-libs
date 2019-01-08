@@ -41,12 +41,32 @@ export class AccountField extends PureComponent {
       showLabel: t('accountForm.password.show')
     }
     switch (type) {
+      case 'dropdown':
+        return (
+          <Field
+            {...fieldProps}
+            options={fieldProps.options.map(option => ({
+              ...option,
+              // legacy
+              label: option.name
+            }))}
+            value={fieldProps.options.find(o => o.value === fieldProps.value)}
+            type="select"
+          />
+        )
       case 'password':
         return <Field {...fieldProps} secondaryLabels={passwordLabels} />
       default:
         return <Field {...fieldProps} type="text" />
     }
   }
+}
+
+// As SelectBox component from Cozy-UI, rendering dropdown type, is just giving
+// us the full Option object, we just get its value to facilitate mapping
+// with account
+const parse = type => value => {
+  return type === 'dropdown' ? value.value : value
 }
 
 export class AccountFields extends PureComponent {
@@ -62,7 +82,11 @@ export class AccountFields extends PureComponent {
     return (
       <div>
         {namedFields.map((field, index) => (
-          <FinalFormField key={index} name={field.name}>
+          <FinalFormField
+            key={index}
+            name={field.name}
+            parse={parse(field.type)}
+          >
             {({ input }) => <AccountField {...field} {...input} t={t} />}
           </FinalFormField>
         ))}

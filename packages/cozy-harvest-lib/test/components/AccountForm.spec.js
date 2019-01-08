@@ -97,6 +97,19 @@ describe('AccountForm', () => {
       expect(component).toMatchSnapshot()
     })
 
+    it('render dropdown', () => {
+      const options = [
+        { label: 'Option 1', value: 'option1' },
+        { label: 'Option 2', value: 'option2' }
+      ]
+
+      const wrapper = shallow(
+        <AccountField name="multiple" options={options} t={t} type="dropdown" />
+      )
+      const component = wrapper.dive().getElement()
+      expect(component).toMatchSnapshot()
+    })
+
     it('uses predefined label', () => {
       const wrapper = shallow(
         <AccountField

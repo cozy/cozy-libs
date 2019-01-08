@@ -1,5 +1,122 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`AccountForm AccountField render dropdown 1`] = `
+<div
+  className="o-field u-m-0"
+>
+  <Label
+    className=""
+    error={false}
+    htmlFor=""
+  >
+    fields.multiple.label
+  </Label>
+  <Aware
+    className="u-m-0"
+    error={false}
+    fieldProps={Object {}}
+    fullwidth={true}
+    id=""
+    label="fields.multiple.label"
+    name="multiple"
+    options={
+      Array [
+        Object {
+          "label": undefined,
+          "value": "option1",
+        },
+        Object {
+          "label": undefined,
+          "value": "option2",
+        },
+      ]
+    }
+    placeholder=""
+    secondaryLabels={Object {}}
+    size="medium"
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+          Array [
+            "fields.username.label",
+          ],
+          Array [
+            "accountForm.password.hide",
+          ],
+          Array [
+            "accountForm.password.show",
+          ],
+          Array [
+            "fields.passphrase.label",
+          ],
+          Array [
+            "accountForm.password.hide",
+          ],
+          Array [
+            "accountForm.password.show",
+          ],
+          Array [
+            "fields.multiple.label",
+          ],
+          Array [
+            "accountForm.password.hide",
+          ],
+          Array [
+            "accountForm.password.show",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": "accountForm.submit.label",
+          },
+          Object {
+            "isThrow": false,
+            "value": "fields.username.label",
+          },
+          Object {
+            "isThrow": false,
+            "value": "accountForm.password.hide",
+          },
+          Object {
+            "isThrow": false,
+            "value": "accountForm.password.show",
+          },
+          Object {
+            "isThrow": false,
+            "value": "fields.passphrase.label",
+          },
+          Object {
+            "isThrow": false,
+            "value": "accountForm.password.hide",
+          },
+          Object {
+            "isThrow": false,
+            "value": "accountForm.password.show",
+          },
+          Object {
+            "isThrow": false,
+            "value": "fields.multiple.label",
+          },
+          Object {
+            "isThrow": false,
+            "value": "accountForm.password.hide",
+          },
+          Object {
+            "isThrow": false,
+            "value": "accountForm.password.show",
+          },
+        ],
+      }
+    }
+    type="select"
+  />
+</div>
+`;
+
 exports[`AccountForm AccountField render password 1`] = `
 <div
   className="o-field u-m-0"
