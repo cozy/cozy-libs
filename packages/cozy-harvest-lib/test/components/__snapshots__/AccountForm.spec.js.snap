@@ -11,11 +11,13 @@ exports[`AccountForm AccountField render password 1`] = `
   >
     fields.passphrase.label
   </Label>
-  <Input
+  <InputPassword
     error={false}
-    fullwidth={false}
+    hideLabel="accountForm.password.hide"
     id=""
     placeholder=""
+    showLabel="accountForm.password.show"
+    showVisibilityButton={true}
     type="password"
     value=""
   />
@@ -35,9 +37,10 @@ exports[`AccountForm AccountField should render 1`] = `
   </Label>
   <Input
     error={false}
-    fullwidth={false}
+    fullwidth={true}
     id=""
     placeholder=""
+    size="medium"
     type="text"
     value=""
   />
