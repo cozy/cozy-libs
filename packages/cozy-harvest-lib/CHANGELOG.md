@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.9.0"></a>
+# [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.8.0...cozy-harvest-lib@0.9.0) (2019-01-08)
+
+
+### Features
+
+* **InputPassword:** Add props labels to InputPassword ([a02a39e](https://github.com/cozy/cozy-libs/commit/a02a39e))
+
+
+
+
 <a name="0.8.0"></a>
 # [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.7.0...cozy-harvest-lib@0.8.0) (2019-01-03)
 
