@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.0"></a>
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.9.0...cozy-harvest-lib@0.10.0) (2019-01-08)
+
+
+### Features
+
+* **harvest:** Add OAuthForm ✨ ([c356ae9](https://github.com/cozy/cozy-libs/commit/c356ae9))
+* **harvest:** Predefined labels ✨ ([82bd1a2](https://github.com/cozy/cozy-libs/commit/82bd1a2))
+
+
+
+
 <a name="0.9.0"></a>
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.8.0...cozy-harvest-lib@0.9.0) (2019-01-08)
 
