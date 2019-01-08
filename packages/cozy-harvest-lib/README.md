@@ -27,7 +27,7 @@ Fields are declared by their name and can have several properties:
 |Property|Role|
 |-|-|
 |`encrypted` | Specify if field should be encrypted by stack (default: `true` if `type=password`, `false` otherwise). |
-|`required` | Specify if field is required (default: `true`). |
+|`label` | Predefined label can be used and specified in manifest. They are a common way to provide existing locales. List of predefined labels are `answer`, `birthdate`, `code`, `date`, `email`, `firstname`, `lastname`, `login`, `password`, `phone`. | |`required` | Specify if field is required (default: `true`). |
 |`type` | Can be `date`, `dropdown`, `email`, `text` or `password` (default: `text`). |
 
 ##### Example of `fields` object

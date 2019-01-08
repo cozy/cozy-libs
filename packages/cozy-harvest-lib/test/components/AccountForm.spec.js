@@ -86,5 +86,31 @@ describe('AccountForm', () => {
       const component = wrapper.dive().getElement()
       expect(component).toMatchSnapshot()
     })
+
+    it('uses predefined label', () => {
+      const wrapper = shallow(
+        <AccountField
+          label="login"
+          name="username"
+          required={true}
+          type="text"
+          t={t}
+        />
+      )
+      expect(wrapper.props().label).toBe('fields.login.label')
+    })
+
+    it('ignores invalid predefined label', () => {
+      const wrapper = shallow(
+        <AccountField
+          label="foo"
+          name="username"
+          required={true}
+          type="text"
+          t={t}
+        />
+      )
+      expect(wrapper.props().label).toBe('fields.username.label')
+    })
   })
 })
