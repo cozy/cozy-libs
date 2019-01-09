@@ -43,6 +43,14 @@ describe('Document', () => {
     expect(cozyClient.data.updateAttributes).toHaveBeenCalledTimes(1)
   })
 
+  it('should add cozy metadatas on create or update', async () => {
+    const marge = { name: 'Marge' }
+    const margeWithCozyMetas = Simpson.addCozyMetadata(marge)
+
+    expect(margeWithCozyMetas.cozyMetadata).toBeDefined()
+    expect(margeWithCozyMetas.cozyMetadata.updatedAt).toEqual(expect.any(Date))
+  })
+
   it('should do bulk fetch', async () => {
     await Simpson.fetchAll()
     expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
