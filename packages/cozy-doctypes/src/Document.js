@@ -107,7 +107,7 @@ async function createOrUpdate(
     }
   } else {
     throw new Error(
-      'Linxo cozy: Create or update with selectors that returns more than 1 result\n' +
+      'Create or update with selectors that returns more than 1 result\n' +
         JSON.stringify(selector) +
         '\n' +
         JSON.stringify(results)
