@@ -79,9 +79,12 @@ const legacyEncryptedFields = [
  */
 const sanitizeEncrypted = fields => {
   const sanitized = _cloneDeep(fields)
-  for (let fieldName in sanitized)
-    if (typeof sanitized[fieldName].encrypted !== 'boolean')
-      sanitized[fieldName].encrypted = legacyEncryptedFields.includes(fieldName)
+  for (let fieldName in sanitized) {
+    const field = sanitized[fieldName]
+    if (typeof field.encrypted !== 'boolean')
+      field.encrypted =
+        field.type === 'password' || legacyEncryptedFields.includes(fieldName)
+  }
   return sanitized
 }
 
