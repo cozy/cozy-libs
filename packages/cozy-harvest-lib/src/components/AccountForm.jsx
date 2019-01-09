@@ -115,6 +115,12 @@ export class AccountFields extends PureComponent {
   }
 }
 
+AccountFields.propTypes = {
+  fillEncrypted: PropTypes.bool,
+  manifestFields: PropTypes.object.isRequired,
+  t: PropTypes.func
+}
+
 export class AccountForm extends PureComponent {
   constructor(props, context) {
     super(props, context)
