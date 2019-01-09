@@ -64,6 +64,13 @@ export class AccountField extends PureComponent {
   }
 }
 
+AccountField.propTypes = {
+  label: PropTypes.string,
+  name: PropTypes.string.isRequired,
+  type: PropTypes.oneOf(['date', 'dropdown', 'email', 'password', 'text']),
+  t: PropTypes.func
+}
+
 // As SelectBox component from Cozy-UI, rendering dropdown type, is just giving
 // us the full Option object, we just get its value to facilitate mapping
 // with account
