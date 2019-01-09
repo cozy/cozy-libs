@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.12.0"></a>
+# [0.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.11.0...cozy-harvest-lib@0.12.0) (2019-01-09)
+
+
+### Features
+
+* **harvest:** Encrypted placeholders ✨ ([bb14adb](https://github.com/cozy/cozy-libs/commit/bb14adb))
+* **harvest:** Sanitize passwords as encrypted 📝 ([56eac76](https://github.com/cozy/cozy-libs/commit/56eac76))
+
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.10.1...cozy-harvest-lib@0.11.0) (2019-01-08)
 
