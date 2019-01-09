@@ -55,7 +55,11 @@ describe('AccountForm', () => {
 
   it('should inject initial values from account', () => {
     const wrapper = shallow(
-      <AccountForm account={fixtures.account} fields={fixtures.fields} t={t} />
+      <AccountForm
+        initialValues={fixtures.account.auth}
+        fields={fixtures.fields}
+        t={t}
+      />
     )
     expect(wrapper.props().initialValues).toEqual(fixtures.account.auth)
   })

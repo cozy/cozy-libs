@@ -118,12 +118,11 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { account, fields, oauth, t } = this.props
+    const { fields, initialValues, oauth, t } = this.props
 
     if (oauth) return <OAuthForm oauth={oauth} />
 
     const sanitizedFields = Manifest.sanitizeFields(fields)
-    const initialValues = account ? account.auth : {}
     return (
       <Form
         initialValues={initialValues}
@@ -132,7 +131,7 @@ export class AccountForm extends PureComponent {
         render={({ values }) => (
           <div>
             <AccountFields
-              fillEncrypted={!!account}
+              fillEncrypted={!!initialValues}
               manifestFields={sanitizedFields}
               t={t}
             />
