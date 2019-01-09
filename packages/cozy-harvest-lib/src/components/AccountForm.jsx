@@ -35,7 +35,7 @@ export class AccountField extends PureComponent {
       ...this.props,
       className: 'u-m-0', // 0 margin
       fullwidth: true,
-      label: t(`fields.${localeKey}.label`),
+      label: t(`fields.${localeKey}.label`, { _: name }),
       size: 'medium'
     }
     const passwordLabels = {
