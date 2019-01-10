@@ -31,7 +31,7 @@ exports[`AccountForm AccountField render dropdown 1`] = `
         },
       ]
     }
-    placeholder=""
+    placeholder="fields.multiple.placeholder"
     secondaryLabels={Object {}}
     size="medium"
     t={
@@ -41,6 +41,12 @@ exports[`AccountForm AccountField render dropdown 1`] = `
             "fields.multiple.label",
             Object {
               "_": "multiple",
+            },
+          ],
+          Array [
+            "fields.multiple.placeholder",
+            Object {
+              "_": "",
             },
           ],
           Array [
@@ -54,6 +60,10 @@ exports[`AccountForm AccountField render dropdown 1`] = `
           Object {
             "isThrow": false,
             "value": "fields.multiple.label",
+          },
+          Object {
+            "isThrow": false,
+            "value": "fields.multiple.placeholder",
           },
           Object {
             "isThrow": false,
@@ -86,7 +96,7 @@ exports[`AccountForm AccountField render password 1`] = `
     error={false}
     hideLabel="accountForm.password.hide"
     id=""
-    placeholder=""
+    placeholder="fields.passphrase.placeholder"
     showLabel="accountForm.password.show"
     showVisibilityButton={true}
     type="password"
@@ -110,7 +120,7 @@ exports[`AccountForm AccountField should render 1`] = `
     error={false}
     fullwidth={true}
     id=""
-    placeholder=""
+    placeholder="fields.username.placeholder"
     size="medium"
     type="text"
     value=""

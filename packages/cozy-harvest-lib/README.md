@@ -69,6 +69,28 @@ Cozy-Harvest-Lib provides a defined range of field labels which do not need to b
 
 Any konnector can provide new locales for this field labels or add new ones. They will be loaded by the AccountForm component.
 
+#### `placeholder`
+
+We could defined a localized placeholder in the manifest
+
+They could be defined like this :
+```js
+{
+  ...
+  locales: {
+    [lang]: {
+      fields:
+        [fieldname]: {
+          placeholder: "the placeholder string"
+        }
+      }
+    },
+  },
+  ...
+}
+```
+
+
 ### AccountForm usage
 ```js
 <AccountForm fields={konnector.fields} locales={} />
@@ -77,3 +99,9 @@ Any konnector can provide new locales for this field labels or add new ones. The
 ## OAuthForm
 
 The OAuthForm is used for OAuth konnector and display a single "Connect" button.
+
+
+## Doc and example about manifests
+
+https://docs.cozy.io/en/tutorials/konnector/#the-manifest
+
