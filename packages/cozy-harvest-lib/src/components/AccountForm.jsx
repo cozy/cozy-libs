@@ -163,7 +163,8 @@ export class AccountForm extends PureComponent {
 
 AccountForm.propTypes = {
   account: PropTypes.object,
-  fields: PropTypes.object.isRequired,
+  fields: PropTypes.object,
+  oauth: PropTypes.object,
   locales: PropTypes.object
 }
 
