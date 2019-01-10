@@ -6,6 +6,7 @@ import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
 import Field from 'cozy-ui/react/Field'
 
+import { sanitizeSelectProps } from '../helpers/fields'
 import Manifest from '../Manifest'
 import OAuthForm from './OAuthForm'
 
@@ -44,18 +45,7 @@ export class AccountField extends PureComponent {
     }
     switch (type) {
       case 'dropdown':
-        return (
-          <Field
-            {...fieldProps}
-            options={fieldProps.options.map(option => ({
-              ...option,
-              // legacy
-              label: option.name
-            }))}
-            value={fieldProps.options.find(o => o.value === fieldProps.value)}
-            type="select"
-          />
-        )
+        return <Field {...sanitizeSelectProps(fieldProps)} />
       case 'password':
         return <Field {...fieldProps} secondaryLabels={passwordLabels} />
       default:
