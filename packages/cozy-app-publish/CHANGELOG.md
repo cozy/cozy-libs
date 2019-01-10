@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.10.3"></a>
+## [0.10.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.10.2...cozy-app-publish@0.10.3) (2019-01-10)
+
+
+### Bug Fixes
+
+* Shasum was not following redirects ([94807ae](https://github.com/cozy/cozy-libs/commit/94807ae))
+
+
+
+
 <a name="0.10.2"></a>
 ## [0.10.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.10.1...cozy-app-publish@0.10.2) (2019-01-07)
 
