@@ -74,9 +74,11 @@ const check = options => {
 const shasum256FromURL = url =>
   new Promise((resolve, reject) => {
     const hasher = crypto.createHash('sha256').setEncoding('hex')
-    const req = request(url).pipe(hasher).on('finish', res => {
-      resolve(hasher.read())
-    })
+    const req = request(url)
+      .pipe(hasher)
+      .on('finish', () => {
+        resolve(hasher.read())
+      })
 
     req.on('error', e => {
       reject(e)
