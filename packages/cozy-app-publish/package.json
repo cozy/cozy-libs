@@ -6,9 +6,7 @@
   "license": "MIT",
   "scripts": {
     "test": "jest --verbose --coverage",
-    "test:manual": "jest test/manual.spec.js",
-    "test:publish": "jest test/publish.spec.js",
-    "test:travis": "jest test/travis.spec.js"
+    "test:integration": "env TEST_INTEGRATION=1 jest"
   },
   "bin": {
     "cozy-app-publish": "./cozy-app-publish.js"
@@ -20,6 +18,7 @@
     "fs-extra": "7.0.1",
     "node-fetch": "2.2.0",
     "prompt": "1.0.0",
+    "request": "^2.88.0",
     "tar": "4.4.8"
   },
   "files": [

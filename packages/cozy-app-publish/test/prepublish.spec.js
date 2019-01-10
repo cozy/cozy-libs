@@ -7,11 +7,14 @@ jest.doMock('../lib/hooks/pre/downcloud', () => downcloudSpy)
 describe('Prepublish script', () => {
   beforeEach(() => {
     jest.clearAllMocks()
-    prepublishLib.shasum256FromURL = jest
-      .fn()
+    jest.spyOn(prepublishLib, 'shasum256FromURL')
       .mockResolvedValue(
         'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855'
       )
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
   })
 
   const optionsMock = {
@@ -67,3 +70,13 @@ describe('Prepublish script', () => {
     expect(downcloudSpy).toHaveBeenCalled()
   })
 })
+
+if (process.env.TEST_INTEGRATION) {
+  describe('shasum', () => {
+    it('should do a correct shasum, following redirections', async () => {
+      const url = 'https://github.com/konnectors/rtm/archive/b1e77ca0d9d76b682b87ae4114669b11953083d0.tar.gz'
+      const sha = await prepublishLib.shasum256FromURL(url)
+      expect(sha).toBe('7d9b75938613af486f27a58f5423e52eab566e32de2a77a863facc84c63f41ae')
+    })
+  })
+}

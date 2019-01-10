@@ -1,6 +1,5 @@
 const runHooks = require('../utils/runhooks')
-const http = require('http')
-const https = require('https')
+const request = require('request')
 const crypto = require('crypto')
 /**
  * Returns only expected value, avoid data injection by hook
@@ -74,16 +73,9 @@ const check = options => {
 
 const shasum256FromURL = url =>
   new Promise((resolve, reject) => {
-    const hash = crypto.createHash('sha256')
-    const httpLib = url.indexOf('https://') === 0 ? https : http
-    const req = httpLib.get(url, res => {
-      res.on('data', d => {
-        hash.update(d)
-      })
-
-      res.on('end', () => {
-        resolve(hash.digest('hex'))
-      })
+    const hasher = crypto.createHash('sha256').setEncoding('hex')
+    const req = request(url).pipe(hasher).on('finish', res => {
+      resolve(hasher.read())
     })
 
     req.on('error', e => {
