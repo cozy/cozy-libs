@@ -76,6 +76,19 @@ describe('AccountForm', () => {
     expect(component).toMatchSnapshot()
   })
 
+  it('should provide default values from manifest', () => {
+    const fields = {
+      foo: {
+        default: 'bar',
+        type: 'text'
+      }
+    }
+    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    expect(wrapper.props().initialValues).toEqual({
+      foo: 'bar'
+    })
+  })
+
   describe('AccountFields', () => {
     it('should render', () => {
       const component = shallow(

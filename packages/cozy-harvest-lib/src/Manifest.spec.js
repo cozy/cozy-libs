@@ -2,6 +2,24 @@
 import Manifest from './Manifest'
 
 describe('Manifest', () => {
+  describe('defaultFieldsValues', () => {
+    it('shoud return default values', () => {
+      const fields = {
+        username: {
+          type: 'text'
+        },
+        age: {
+          default: '18',
+          type: 'text'
+        }
+      }
+
+      expect(Manifest.defaultFieldsValues(fields)).toEqual({
+        age: '18'
+      })
+    })
+  })
+
   describe('sanitize', () => {
     it('should remove "fields" if fields is null', () => {
       const manifest = {

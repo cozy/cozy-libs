@@ -136,9 +136,11 @@ export class AccountForm extends PureComponent {
     if (oauth) return <OAuthForm oauth={oauth} />
 
     const sanitizedFields = Manifest.sanitizeFields(fields)
+    const defaultValues = Manifest.defaultFieldsValues(sanitizedFields)
+
     return (
       <Form
-        initialValues={initialValues}
+        initialValues={{ ...defaultValues, ...initialValues }}
         // eslint-disable-next-line no-console
         onSubmit={v => console.log(v)}
         render={({ values }) => (
