@@ -44,9 +44,14 @@ const fixtures = {
   }
 }
 
-const t = jest.fn().mockImplementation(key => key)
+const t = jest.fn()
 
 describe('AccountForm', () => {
+  beforeEach(() => {
+    t.mockClear()
+    t.mockImplementation(key => key)
+  })
+
   it('should render', () => {
     const wrapper = shallow(<AccountForm fields={fixtures.fields} t={t} />)
     const component = wrapper.dive().getElement()

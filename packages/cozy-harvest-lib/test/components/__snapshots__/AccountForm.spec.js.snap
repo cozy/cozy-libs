@@ -38,33 +38,6 @@ exports[`AccountForm AccountField render dropdown 1`] = `
       [MockFunction] {
         "calls": Array [
           Array [
-            "accountForm.submit.label",
-          ],
-          Array [
-            "fields.username.label",
-            Object {
-              "_": "username",
-            },
-          ],
-          Array [
-            "accountForm.password.hide",
-          ],
-          Array [
-            "accountForm.password.show",
-          ],
-          Array [
-            "fields.passphrase.label",
-            Object {
-              "_": "passphrase",
-            },
-          ],
-          Array [
-            "accountForm.password.hide",
-          ],
-          Array [
-            "accountForm.password.show",
-          ],
-          Array [
             "fields.multiple.label",
             Object {
               "_": "multiple",
@@ -78,34 +51,6 @@ exports[`AccountForm AccountField render dropdown 1`] = `
           ],
         ],
         "results": Array [
-          Object {
-            "isThrow": false,
-            "value": "accountForm.submit.label",
-          },
-          Object {
-            "isThrow": false,
-            "value": "fields.username.label",
-          },
-          Object {
-            "isThrow": false,
-            "value": "accountForm.password.hide",
-          },
-          Object {
-            "isThrow": false,
-            "value": "accountForm.password.show",
-          },
-          Object {
-            "isThrow": false,
-            "value": "fields.passphrase.label",
-          },
-          Object {
-            "isThrow": false,
-            "value": "accountForm.password.hide",
-          },
-          Object {
-            "isThrow": false,
-            "value": "accountForm.password.show",
-          },
           Object {
             "isThrow": false,
             "value": "fields.multiple.label",
