@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.2.5...babel-preset-cozy-app@1.3.0) (2019-01-11)
+
+
+### Features
+
+* **babel:** Update supported browsers list for Cozy platform ([8e810e1](https://github.com/cozy/cozy-libs/commit/8e810e1))
+
+
+
+
 <a name="1.2.5"></a>
 ## [1.2.5](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.2.4...babel-preset-cozy-app@1.2.5) (2018-12-28)
 
