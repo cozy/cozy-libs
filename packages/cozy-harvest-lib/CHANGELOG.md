@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.17.0"></a>
+# [0.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.16.0...cozy-harvest-lib@0.17.0) (2019-01-11)
+
+
+### Features
+
+* **harvest:** Sanitize select props ✅ ([7b333f9](https://github.com/cozy/cozy-libs/commit/7b333f9))
+
+
+
+
 <a name="0.16.0"></a>
 # [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.15.0...cozy-harvest-lib@0.16.0) (2019-01-11)
 
