@@ -1,5 +1,40 @@
 import _flow from 'lodash/flow'
 import _cloneDeep from 'lodash/cloneDeep'
+import _mapValues from 'lodash/mapValues'
+import _pickBy from 'lodash/pickBy'
+
+/**
+ * Returns a key/value object with field as key and default, if it exists in
+ * fields parameter.
+ * @example
+ * ```
+ * const fields = {
+ *   username: {
+ *      type: "text"
+ *   },
+ *   favoriteColor: {
+ *      default: "green"
+ *      type: "text"
+ *   }
+ * }
+ * const result = defaultFieldsValues(fields)
+ * ```
+ * `result` here is
+ * ```
+ * {
+ *    favoriteColor: "green"
+ * }
+ * ```
+ * Def
+ * @param  {object} fields Fields object from manifest
+ * @return {object}        key/value pairs of default values
+ */
+const defaultFieldsValues = fields => {
+  return _mapValues(
+    _pickBy(fields, value => !!value.default),
+    value => value.default
+  )
+}
 
 /**
  * Ensures old fields are removed
@@ -105,6 +140,7 @@ export const sanitize = (manifest = {}) =>
     : manifest
 
 export default {
+  defaultFieldsValues,
   sanitize,
   sanitizeFields
 }
