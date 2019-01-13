@@ -79,7 +79,7 @@ async function createOrUpdate(
   }
 
   if (results.length === 0) {
-    return cozyClient.data.create(doctype, attributes)
+    return cozyClient.data.create(doctype, Document.addCozyMetadata(attributes))
   } else if (results.length === 1) {
     const id = results[0]._id
     const update = omit(attributes, userAttributes)
@@ -95,7 +95,11 @@ async function createOrUpdate(
       // do not emit a mail for those attribute updates
       delete update.dateImport
 
-      return cozyClient.data.updateAttributes(doctype, id, update)
+      return cozyClient.data.updateAttributes(
+        doctype,
+        id,
+        Document.addCozyMetadata(update)
+      )
     } else {
       log(
         'debug',
@@ -107,7 +111,7 @@ async function createOrUpdate(
     }
   } else {
     throw new Error(
-      'Linxo cozy: Create or update with selectors that returns more than 1 result\n' +
+      'Create or update with selectors that returns more than 1 result\n' +
         JSON.stringify(selector) +
         '\n' +
         JSON.stringify(results)
@@ -128,6 +132,16 @@ class Document {
       )
       throw new Error('Document cannot be re-registered to a client.')
     }
+  }
+
+  static addCozyMetadata(attributes) {
+    if (!attributes.cozyMetadata) {
+      attributes.cozyMetadata = {}
+    }
+
+    attributes.cozyMetadata.updatedAt = new Date()
+
+    return attributes
   }
 
   static createOrUpdate(attributes) {
