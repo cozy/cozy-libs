@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.20.0"></a>
+# [1.20.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.19.1...cozy-doctypes@1.20.0) (2019-01-13)
+
+
+### Bug Fixes
+
+* **doctypes:** Update too specific error message in Document model ([f5766fc](https://github.com/cozy/cozy-libs/commit/f5766fc))
+
+
+### Features
+
+* **doctypes:** Add addCozyMetadata method on Document ([c0b66b2](https://github.com/cozy/cozy-libs/commit/c0b66b2))
+
+
+
+
 <a name="1.19.1"></a>
 ## [1.19.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.19.0...cozy-doctypes@1.19.1) (2019-01-09)
 
