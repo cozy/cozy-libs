@@ -158,6 +158,127 @@ exports[`AccountForm AccountFields should render encrypted fields with placehold
 </div>
 `;
 
+exports[`AccountForm should have disabled button if there is required field empty 1`] = `
+<div>
+  <AccountFields
+    fillEncrypted={false}
+    manifestFields={
+      Object {
+        "test": Object {
+          "encrypted": false,
+          "required": true,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <DefaultButton
+    className="u-mt-2 u-mb-1-half"
+    disabled={true}
+    extension="full"
+    label="accountForm.submit.label"
+    onclick={[Function]}
+  />
+</div>
+`;
+
+exports[`AccountForm should have enabled button if fields isn't required 1`] = `
+<div>
+  <AccountFields
+    fillEncrypted={false}
+    manifestFields={
+      Object {
+        "test": Object {
+          "encrypted": false,
+          "required": false,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <DefaultButton
+    className="u-mt-2 u-mb-1-half"
+    disabled={false}
+    extension="full"
+    label="accountForm.submit.label"
+    onclick={[Function]}
+  />
+</div>
+`;
+
+exports[`AccountForm should have enabled button if required field isn't empty 1`] = `
+<div>
+  <AccountFields
+    fillEncrypted={false}
+    manifestFields={
+      Object {
+        "test": Object {
+          "default": "test",
+          "encrypted": false,
+          "required": true,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "isThrow": false,
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <DefaultButton
+    className="u-mt-2 u-mb-1-half"
+    disabled={false}
+    extension="full"
+    label="accountForm.submit.label"
+    onclick={[Function]}
+  />
+</div>
+`;
+
 exports[`AccountForm should redirect to OAuthForm 1`] = `
 <Wrapper
   oauth={
@@ -205,6 +326,7 @@ exports[`AccountForm should render 1`] = `
   />
   <DefaultButton
     className="u-mt-2 u-mb-1-half"
+    disabled={true}
     extension="full"
     label="accountForm.submit.label"
     onclick={[Function]}

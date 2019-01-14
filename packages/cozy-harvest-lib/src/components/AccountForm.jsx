@@ -25,6 +25,8 @@ const predefinedLabels = [
   'phone'
 ]
 
+const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
+
 export class AccountField extends PureComponent {
   render() {
     const { label, name, t, type } = this.props
@@ -120,6 +122,14 @@ export class AccountForm extends PureComponent {
     }
   }
 
+  validate = fields => vals => {
+    let errors = {}
+    for (let name in fields)
+      if (fields[name].required && !vals[name])
+        errors[name] = VALIDATION_ERROR_REQUIRED_FIELD
+    return errors
+  }
+
   render() {
     const { fields, initialValues, oauth, t } = this.props
 
@@ -133,7 +143,8 @@ export class AccountForm extends PureComponent {
         initialValues={{ ...defaultValues, ...initialValues }}
         // eslint-disable-next-line no-console
         onSubmit={v => console.log(v)}
-        render={({ values }) => (
+        validate={this.validate(sanitizedFields)}
+        render={({ values, valid }) => (
           <div>
             <AccountFields
               fillEncrypted={!!initialValues}
@@ -142,6 +153,7 @@ export class AccountForm extends PureComponent {
             />
             <Button
               className="u-mt-2 u-mb-1-half"
+              disabled={!valid}
               extension="full"
               label={t('accountForm.submit.label')}
               onclick={() => alert(JSON.stringify(values, 0, 2))}
