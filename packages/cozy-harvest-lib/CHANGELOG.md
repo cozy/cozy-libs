@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.18.0"></a>
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.17.2...cozy-harvest-lib@0.18.0) (2019-01-15)
+
+
+### Features
+
+* **harvest:** Add default I18n placeholder ([7912d57](https://github.com/cozy/cozy-libs/commit/7912d57))
+
+
+
+
 <a name="0.17.2"></a>
 ## [0.17.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.17.1...cozy-harvest-lib@0.17.2) (2019-01-11)
 
