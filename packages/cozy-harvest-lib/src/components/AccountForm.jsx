@@ -27,7 +27,7 @@ const predefinedLabels = [
 
 export class AccountField extends PureComponent {
   render() {
-    const { label, name, t, type } = this.props
+    const { label, placeholder, name, t, type } = this.props
 
     // Allow manifest to specify predefined label
     const localeKey = predefinedLabels.includes(label) ? label : name
@@ -37,6 +37,7 @@ export class AccountField extends PureComponent {
       className: 'u-m-0', // 0 margin
       fullwidth: true,
       label: t(`fields.${localeKey}.label`, { _: name }),
+      placeholder: placeholder || t(`fields.${name}.placeholder`, { _: '' }),
       size: 'medium'
     }
     const passwordLabels = {
@@ -91,9 +92,7 @@ export class AccountFields extends PureComponent {
                 {...field}
                 {...input}
                 placeholder={
-                  field.encrypted && fillEncrypted
-                    ? ENCRYPTED_PLACEHOLDER
-                    : field.placeholder
+                  field.encrypted && fillEncrypted && ENCRYPTED_PLACEHOLDER
                 }
                 t={t}
               />
