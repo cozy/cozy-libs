@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.2.7"></a>
+## [1.2.7](https://github.com/cozy/cozy-libs/compare/cozy-realtime@1.2.6...cozy-realtime@1.2.7) (2019-01-16)
+
+
+### Bug Fixes
+
+* **RealTime:** Right repo URL ([1cdef02](https://github.com/cozy/cozy-libs/commit/1cdef02))
+
+
+
+
 <a name="1.2.6"></a>
 ## [1.2.6](https://github.com/cozy/cozy-realtime/compare/cozy-realtime@1.2.5...cozy-realtime@1.2.6) (2019-01-11)
 
