@@ -59,66 +59,6 @@ function sanitizeKey(key) {
 
 const withoutUndefined = x => omitBy(x, isUndefined)
 
-async function createOrUpdate(
-  doctype,
-  idAttributes,
-  attributes,
-  checkAttributes
-) {
-  const selector = fromPairs(
-    idAttributes.map(idAttribute => [
-      idAttribute,
-      get(attributes, sanitizeKey(idAttribute))
-    ])
-  )
-  let results = []
-  const compactedSelector = withoutUndefined(selector)
-  if (size(compactedSelector) === idAttributes.length) {
-    const index = await getIndex(doctype, idAttributes)
-    results = await cozyClient.data.query(index, { selector })
-  }
-
-  if (results.length === 0) {
-    return cozyClient.data.create(doctype, Document.addCozyMetadata(attributes))
-  } else if (results.length === 1) {
-    const id = results[0]._id
-    const update = omit(attributes, userAttributes)
-
-    // only update if some fields are different
-    if (
-      !checkAttributes ||
-      isDifferent(
-        pick(results[0], checkAttributes),
-        pick(update, checkAttributes)
-      )
-    ) {
-      // do not emit a mail for those attribute updates
-      delete update.dateImport
-
-      return cozyClient.data.updateAttributes(
-        doctype,
-        id,
-        Document.addCozyMetadata(update)
-      )
-    } else {
-      log(
-        'debug',
-        `[bulkSave] Didn't update ${
-          results[0]._id
-        } because its \`checkedAttributes\` (${checkAttributes}) didn't change.`
-      )
-      return results[0]
-    }
-  } else {
-    throw new Error(
-      'Create or update with selectors that returns more than 1 result\n' +
-        JSON.stringify(selector) +
-        '\n' +
-        JSON.stringify(results)
-    )
-  }
-}
-
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
 class Document {
@@ -148,13 +88,64 @@ class Document {
     return attributes
   }
 
-  static createOrUpdate(attributes) {
-    return createOrUpdate(
-      this.doctype,
-      this.idAttributes,
-      attributes,
-      this.checkedAttributes
+  static async createOrUpdate(attributes) {
+    const selector = fromPairs(
+      this.idAttributes.map(idAttribute => [
+        idAttribute,
+        get(attributes, sanitizeKey(idAttribute))
+      ])
     )
+    let results = []
+    const compactedSelector = withoutUndefined(selector)
+    if (size(compactedSelector) === this.idAttributes.length) {
+      const index = await getIndex(this.doctype, this.idAttributes)
+      results = await cozyClient.data.query(index, { selector })
+    }
+
+    if (results.length === 0) {
+      return cozyClient.data.create(
+        this.doctype,
+        this.addCozyMetadata(attributes)
+      )
+    } else if (results.length === 1) {
+      const id = results[0]._id
+      const update = omit(attributes, userAttributes)
+
+      // only update if some fields are different
+      if (
+        !this.checkAttributes ||
+        isDifferent(
+          pick(results[0], this.checkAttributes),
+          pick(update, this.checkAttributes)
+        )
+      ) {
+        // do not emit a mail for those attribute updates
+        delete update.dateImport
+
+        return cozyClient.data.updateAttributes(
+          this.doctype,
+          id,
+          this.addCozyMetadata(update)
+        )
+      } else {
+        log(
+          'debug',
+          `[bulkSave] Didn't update ${
+            results[0]._id
+          } because its \`checkedAttributes\` (${
+            this.checkAttributes
+          }) didn't change.`
+        )
+        return results[0]
+      }
+    } else {
+      throw new Error(
+        'Create or update with selectors that returns more than 1 result\n' +
+          JSON.stringify(selector) +
+          '\n' +
+          JSON.stringify(results)
+      )
+    }
   }
 
   static create(attributes) {
