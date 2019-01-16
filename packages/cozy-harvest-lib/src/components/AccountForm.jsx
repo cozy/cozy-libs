@@ -29,14 +29,17 @@ const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
 export class AccountField extends PureComponent {
   render() {
-    const { label, placeholder, name, t, type } = this.props
+    const { initialValue, label, name, placeholder, role, t, type } = this.props
 
     // Allow manifest to specify predefined label
     const localeKey = predefinedLabels.includes(label) ? label : name
 
+    const isEditable = !(role === 'identifier' && initialValue)
+
     const fieldProps = {
       ...this.props,
       className: 'u-m-0', // 0 margin
+      disabled: !isEditable,
       fullwidth: true,
       label: t(`fields.${localeKey}.label`, { _: name }),
       placeholder: placeholder || t(`fields.${name}.placeholder`, { _: '' }),
@@ -58,8 +61,10 @@ export class AccountField extends PureComponent {
 }
 
 AccountField.propTypes = {
+  initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
+  role: PropTypes.string,
   type: PropTypes.oneOf(['date', 'dropdown', 'email', 'password', 'text']),
   t: PropTypes.func
 }
@@ -73,7 +78,7 @@ const parse = type => value => {
 
 export class AccountFields extends PureComponent {
   render() {
-    const { fillEncrypted, manifestFields, t } = this.props
+    const { fillEncrypted, initialValues, manifestFields, t } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(manifestFields).map(fieldName => ({
@@ -93,6 +98,7 @@ export class AccountFields extends PureComponent {
               <AccountField
                 {...field}
                 {...input}
+                initialValue={initialValues[field.name]}
                 placeholder={
                   field.encrypted && fillEncrypted && ENCRYPTED_PLACEHOLDER
                 }
@@ -137,15 +143,18 @@ export class AccountForm extends PureComponent {
     const sanitizedFields = Manifest.sanitizeFields(fields)
     const defaultValues = Manifest.defaultFieldsValues(sanitizedFields)
 
+    const initialAndDefaultValues = { ...defaultValues, ...initialValues }
+
     return (
       <Form
-        initialValues={{ ...defaultValues, ...initialValues }}
+        initialValues={initialAndDefaultValues}
         // eslint-disable-next-line no-console
         onSubmit={v => console.log(v)}
         validate={this.validate(sanitizedFields)}
         render={({ values, valid }) => (
           <div>
             <AccountFields
+              initialValues={initialAndDefaultValues}
               fillEncrypted={!!initialValues}
               manifestFields={sanitizedFields}
               t={t}
