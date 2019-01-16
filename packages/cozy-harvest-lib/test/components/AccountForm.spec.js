@@ -89,6 +89,41 @@ describe('AccountForm', () => {
     })
   })
 
+  it('should have disabled button if there is required field empty', () => {
+    const fields = {
+      test: {
+        type: 'text'
+      }
+    }
+    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
+  it("should have enabled button if required field isn't empty", () => {
+    const fields = {
+      test: {
+        default: 'test',
+        type: 'text'
+      }
+    }
+    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
+  it("should have enabled button if fields isn't required", () => {
+    const fields = {
+      test: {
+        required: false,
+        type: 'text'
+      }
+    }
+    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
   describe('AccountFields', () => {
     it('should render', () => {
       const component = shallow(
