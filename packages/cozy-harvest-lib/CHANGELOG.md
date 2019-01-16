@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.19.0"></a>
+# [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.18.0...cozy-harvest-lib@0.19.0) (2019-01-16)
+
+
+### Features
+
+* **valid:** Add validation to enable submit button ([2ac4108](https://github.com/cozy/cozy-libs/commit/2ac4108))
+
+
+
+
 <a name="0.18.0"></a>
 # [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.17.2...cozy-harvest-lib@0.18.0) (2019-01-15)
 
