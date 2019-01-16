@@ -141,6 +141,10 @@ class Document {
 
     attributes.cozyMetadata.updatedAt = new Date()
 
+    if (!attributes.cozyMetadata.createdByApp && this.createdByApp) {
+      attributes.cozyMetadata.createdByApp = this.createdByApp
+    }
+
     return attributes
   }
 
