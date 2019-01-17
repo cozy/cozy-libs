@@ -1,7 +1,70 @@
 /* eslint-env jest */
-import { sanitizeSelectProps } from 'helpers/fields'
+import {
+  getEncryptedFieldName,
+  getFieldPlaceholder,
+  sanitizeSelectProps
+} from 'helpers/fields'
 
 describe('Fields Helper', () => {
+  describe('getEncryptedFieldName', () => {
+    it('should return encrypted password property', () => {
+      expect(getEncryptedFieldName('password')).toBe('credentials_encrypted')
+    })
+
+    it('should return encrypted field property', () => {
+      expect(getEncryptedFieldName('foo')).toBe('foo_encrypted')
+    })
+  })
+
+  describe('getFieldPlaceholder', () => {
+    it('shoud return empty string', () => {
+      expect(
+        getFieldPlaceholder({
+          name: 'password',
+          encrypted: true
+        })
+      ).toBe('Fallback placeholder')
+    })
+
+    it('shoud return fallback value', () => {
+      expect(
+        getFieldPlaceholder(
+          {
+            name: 'password',
+            encrypted: true
+          },
+          'Fallback placeholder'
+        )
+      ).toBe('Fallback placeholder')
+    })
+
+    it('shoud return prop `placeholder`', () => {
+      expect(
+        getFieldPlaceholder(
+          {
+            name: 'password',
+            encrypted: true,
+            placeholder: 'Random placeholder'
+          },
+          'Fallback placeholder'
+        )
+      ).toBe('Random placeholder')
+    })
+
+    it('should return placeholder for encrypted fields', () => {
+      expect(
+        getFieldPlaceholder(
+          {
+            encrypted: true,
+            initialValue: 'ezfZEZE435345DSFfd',
+            placeholder: 'Random placeholder'
+          },
+          'Fallback placeholder'
+        )
+      ).toBe('*************')
+    })
+  })
+
   describe('sanitizeSelectProps', () => {
     it('should sanitize legacy options', () => {
       const fieldWithLegacyOptions = {
