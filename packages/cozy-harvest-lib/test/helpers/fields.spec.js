@@ -23,7 +23,7 @@ describe('Fields Helper', () => {
           name: 'password',
           encrypted: true
         })
-      ).toBe('Fallback placeholder')
+      ).toBe('')
     })
 
     it('shoud return fallback value', () => {
