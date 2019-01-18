@@ -3,10 +3,23 @@ node_js:
   - '8'
 env:
   global:
+addons:
+  apt:
+    sources:
+    - ubuntu-toolchain-r-test
+    - deadsnakes
+    packages:
+    - g++-4.8
+    - python3.5
 cache:
   yarn: true
   directories:
     - node_modules
+before_install:
+  - curl -fsSL https://bootstrap.pypa.io/get-pip.py | python3.5 - --user
+  - travis_retry pip3.5 install --user transifex-client==0.12.5
+  - install -m0644 .transifexrc.tpl ~/.transifexrc
+  - echo "password = $TX_PASSWD" >> ~/.transifexrc
 script:
   - yarn lint
   - yarn test
@@ -27,5 +40,6 @@ env:
     # To generate a new key: travis encrypt GITHUB_TOKEN=<token> -r cozy/cozy-libs
     - secure: "Wr3QBHRI8PNhAa10310zQvA5Jm5ATrKmPAHVK3i/CrO/t2mOueLPiSyovjC3ZXN1sgFxU4mN7cWfgUtsKs9kcqFL+7WdSUHYwpZfCeOFnQC6RwVFvnqQ6JTk7xhVTC+gcHBZ9T95YeUfKnJk7B413RT2X3csLWPNzl5cv1gQ1rrkvLuKePARX5zmHh1zP64pzCbiqUc54xVMHxdvQJcro/PkAuWEqMWJuEsf6W8+XYPWBC4S8IbLjeuAqFXimCqzaWHABPMVim7QiH4Jf2F0Vfw45lOy59XI5tS6rLclga+Nfsy9uSGe8eO7NVg4ksEIOyded/sq46oCLRu1udCncFsUSM7hiSZU1FNBKtX1Z7F3Xe86A3ZR0MQxN1tDEPRwEqt7pSF7dSbdyJ1izpz8d6yUCkG/jI3SnSs7iQA5zg/qy4msDqjvWkyVAhoXnrcwWF+6foFEvfgJQl5zJzlEOAGvALDGTBghl7CBL4QejpR698XzkCrjliz6ltvB8DCBA+crq1L5VqlRWIH14ye/f2NUdv/Yfi3adVLtXb/t/gAFip4hYyS644jfOzhBpDhu5OJgAr5ytmu2sE1yU4G/r6+hxVWwBeAYvrVwn+v7zlT9JV2SKCR31XA4ggX598FvoKVHMQBMGA1QZzIqGHcRiEoUqPCxLGHTqQ2DHuOd1cs="
     # NPM_TOKEN
-    # To generate a new key: travis encrypt NPM_TOKEN=<token> -r cozy/cozy-libs
     - secure: "VtQfFYCDSd46bmXea3FrjSSalHr635wT95X9q+SGVz0mMKUgfJjW4ZOLb8D6pFOBE0gGt7+USxHROL3GJiH1YFCrwd1jBgvQ4V4a1dAiSfhT1x7ghztan6WwlH2Uigpm/rvbDt9IjPbVyn5TaI7meCO6P8zJLS+Grcosz/b7THdSweT9gUnBPSui+9Nai8JtS5bSMMs6DVleNs9yxvZqioPzSo/gVWVLP6aOm8oUbV3/Sqi1vzAd3HiZCqe9WVSti3xd2WVk87QtHdKpCb3ZFWT0WlGUuBxrcrbtSQpnYoCFOG3QVFCxErxO0sMtzB+LzE9lyffwREQiPTQI3HBssS80rGU/0cmixJgWOXKQseNLDd/raOELsZXFQenGZZbzVwOnAoj7TvtU3/ZKpuxV0APt1YOhtHrDBuSDUUx8ecwc3XvFBOgH9bSzMEXdtSWp9FKGBXY5LuDRudzgha1wcMo8UJuJqJki8cGEjXLi7bLfpgu7zm/6w9841kMwwWOe2zN/yYXLYp8mtBRo6AUh2aA6uaV6P3P/y/m7POZelnWEiXtLIVGhYwWKthNA79WTXZmFiWV3kyREZ3Zca5TQkQ9xXKWMpLYgweIxWQNuyt6QJAqPDPlzO+nedTA/9bp8oy3sUrKBsqruwyHgrYeM+st7YWieNV315bMf6vcPaqo="
+    # TX_PASSWD
+    - secure:    "YNh/geIbpL38n4R/D3MBDAA6spt0/1s4bsB4XkwMjJ62TNL1K3BdoXOhzlBq+23JGheC3ZQYGxvtKPV/NW+a8ONJnhaKbqMMI2+gxToicVRcNBt+i4PPpaGVltVD0y173o9x5AEVFYd/gRafVd0Szi5GteZkQRI4hRcTlV5LooQS2xmuSrWzJFst9BM4jWUdeUxAiGDXsi0Vp6xHl2a3cn+VzAlVE6d3RJQOkNtZpUf+i/PEYZwiFgsYoSOjeZNZvO0YzVMUKd60DO0ZLR3zJEynfrl/ZlLzMTiLNgj0CrYdQZm+LekiM5px63wDGluXMGPmt6ywfpzC25Z10n1eoQXV8HUEDeVSme5j4gEZYPsj6raPI+Pkid9SD//UpdgVQPB/H9tX/No2mYHMvUcCfcYtFkAHF9oxtCiNnY/+awCyjHCU/mUPyLKpjAMtSRnX5CSrpXz7wvACUNbRF/qGg578AOe9a2zT8FolZ+n7y+XdE2OF+KYIgdDiyN1On+eJX3FLf2bZYR1D9iz7v+mQrAM8DwRdqobH1Tknl5Fh+CcmrsTpxqnRgyljUOwVSQSH2nyvtGjCb4eg5Sp7bLmTrBpE/5NKdTbSPK9zLEEpsQXsxEMEK4l4eWj2cyK3vCZTM3Hj6iy+5Uzsa6g9djj4XrpXywNidgaYDbjkjAP94ZM="
