@@ -195,6 +195,7 @@ exports[`AccountForm AccountFields should render encrypted fields with placehold
 exports[`AccountForm should have disabled button if there is required field empty 1`] = `
 <div>
   <AccountFields
+    container={null}
     initialValues={Object {}}
     manifestFields={
       Object {
@@ -235,6 +236,7 @@ exports[`AccountForm should have disabled button if there is required field empt
 exports[`AccountForm should have enabled button if fields isn't required 1`] = `
 <div>
   <AccountFields
+    container={null}
     initialValues={Object {}}
     manifestFields={
       Object {
@@ -275,6 +277,7 @@ exports[`AccountForm should have enabled button if fields isn't required 1`] = `
 exports[`AccountForm should have enabled button if required field isn't empty 1`] = `
 <div>
   <AccountFields
+    container={null}
     initialValues={
       Object {
         "test": "test",
@@ -330,6 +333,7 @@ exports[`AccountForm should redirect to OAuthForm 1`] = `
 exports[`AccountForm should render 1`] = `
 <div>
   <AccountFields
+    container={null}
     initialValues={Object {}}
     manifestFields={
       Object {

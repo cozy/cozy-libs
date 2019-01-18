@@ -92,7 +92,7 @@ const parse = type => value => {
 
 export class AccountFields extends PureComponent {
   render() {
-    const { initialValues, manifestFields, t } = this.props
+    const { container, initialValues, manifestFields, t } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(manifestFields).map(fieldName => ({
@@ -112,6 +112,7 @@ export class AccountFields extends PureComponent {
               <AccountField
                 {...field}
                 {...input}
+                container={container}
                 initialValue={
                   initialValues[field.name] ||
                   initialValues[getEncryptedFieldName(field.name)]
@@ -159,6 +160,8 @@ export class AccountForm extends PureComponent {
 
     const initialAndDefaultValues = { ...defaultValues, ...initialValues }
 
+    let container = null
+
     return (
       <Form
         initialValues={initialAndDefaultValues}
@@ -166,8 +169,13 @@ export class AccountForm extends PureComponent {
         onSubmit={v => console.log(v)}
         validate={this.validate(sanitizedFields)}
         render={({ values, valid }) => (
-          <div>
+          <div
+            ref={element => {
+              container = element
+            }}
+          >
             <AccountFields
+              container={container}
               initialValues={initialAndDefaultValues}
               manifestFields={sanitizedFields}
               t={t}
