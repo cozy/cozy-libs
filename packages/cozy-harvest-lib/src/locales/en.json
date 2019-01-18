@@ -8,18 +8,23 @@
       "hide": "Hide"
     }
   },
+  "defaults": {
+    "dateFormat": "MM/DD/YYYY"
+  },
   "fields": {
     "answer": {
       "label": "Secret answer"
     },
     "birthdate": {
-      "label": "Birth date"
+      "label": "Birth date",
+      "placeholder": "mm/dd/yyyy"
     },
     "code": {
       "label": "Confidential code"
     },
     "date": {
-      "label": "Date"
+      "label": "Date",
+      "placeholder": "mm/dd/yyyy"
     },
     "email" : {
       "label": "Email address"
