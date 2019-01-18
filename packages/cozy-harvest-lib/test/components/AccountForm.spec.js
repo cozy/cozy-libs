@@ -149,7 +149,13 @@ describe('AccountForm', () => {
       expect(component).toMatchSnapshot()
     })
 
-    it('render password', () => {
+    it('render a date field', () => {
+      const wrapper = shallow(<AccountField type="date" name="date" t={t} />)
+      const component = wrapper.dive().getElement()
+      expect(component).toMatchSnapshot()
+    })
+
+    it('render a password field', () => {
       const wrapper = shallow(
         <AccountField
           {...fixtures.sanitized.passphrase}
@@ -161,7 +167,7 @@ describe('AccountForm', () => {
       expect(component).toMatchSnapshot()
     })
 
-    it('render dropdown', () => {
+    it('render a dropdown field', () => {
       const options = [
         { label: 'Option 1', value: 'option1' },
         { label: 'Option 2', value: 'option2' }

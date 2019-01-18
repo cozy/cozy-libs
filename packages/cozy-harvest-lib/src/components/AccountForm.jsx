@@ -50,6 +50,15 @@ export class AccountField extends PureComponent {
       showLabel: t('accountForm.password.show')
     }
     switch (type) {
+      case 'date':
+        return (
+          <Field
+            {...fieldProps}
+            placeholder={t(`fields.${name}.placeholder`, {
+              _: t(`default.dateFormat`).toLowerCase()
+            })}
+          />
+        )
       case 'dropdown':
         return <Field {...sanitizeSelectProps(fieldProps)} />
       case 'password':
