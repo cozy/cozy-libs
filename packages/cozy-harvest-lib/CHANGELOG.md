@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.22.0"></a>
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.21.0...cozy-harvest-lib@0.22.0) (2019-01-18)
+
+
+### Features
+
+* **Travis:** Install Transifex 🌐 ([1a6ce8b](https://github.com/cozy/cozy-libs/commit/1a6ce8b))
+
+
+
+
 <a name="0.21.0"></a>
 # [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.20.0...cozy-harvest-lib@0.21.0) (2019-01-18)
 
