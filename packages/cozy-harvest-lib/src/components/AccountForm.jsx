@@ -6,11 +6,13 @@ import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
 import Field from 'cozy-ui/react/Field'
 
-import { sanitizeSelectProps } from '../helpers/fields'
+import {
+  getEncryptedFieldName,
+  getFieldPlaceholder,
+  sanitizeSelectProps
+} from '../helpers/fields'
 import Manifest from '../Manifest'
 import OAuthForm from './OAuthForm'
-
-const ENCRYPTED_PLACEHOLDER = '*************'
 
 const predefinedLabels = [
   'answer',
@@ -42,7 +44,10 @@ export class AccountField extends PureComponent {
       disabled: !isEditable,
       fullwidth: true,
       label: t(`fields.${localeKey}.label`, { _: name }),
-      placeholder: placeholder || t(`fields.${name}.placeholder`, { _: '' }),
+      placeholder: getFieldPlaceholder(
+        this.props,
+        t(`fields.${name}.placeholder`, { _: '' })
+      ),
       size: 'medium'
     }
     const passwordLabels = {
@@ -87,7 +92,7 @@ const parse = type => value => {
 
 export class AccountFields extends PureComponent {
   render() {
-    const { fillEncrypted, initialValues, manifestFields, t } = this.props
+    const { initialValues, manifestFields, t } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(manifestFields).map(fieldName => ({
@@ -107,9 +112,9 @@ export class AccountFields extends PureComponent {
               <AccountField
                 {...field}
                 {...input}
-                initialValue={initialValues[field.name]}
-                placeholder={
-                  field.encrypted && fillEncrypted && ENCRYPTED_PLACEHOLDER
+                initialValue={
+                  initialValues[field.name] ||
+                  initialValues[getEncryptedFieldName(field.name)]
                 }
                 t={t}
               />
@@ -164,7 +169,6 @@ export class AccountForm extends PureComponent {
           <div>
             <AccountFields
               initialValues={initialAndDefaultValues}
-              fillEncrypted={!!initialValues}
               manifestFields={sanitizedFields}
               t={t}
             />
