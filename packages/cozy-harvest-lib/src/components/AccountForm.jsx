@@ -31,7 +31,7 @@ const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
 export class AccountField extends PureComponent {
   render() {
-    const { initialValue, label, name, placeholder, role, t, type } = this.props
+    const { initialValue, label, name, role, t, type } = this.props
 
     // Allow manifest to specify predefined label
     const localeKey = predefinedLabels.includes(label) ? label : name
