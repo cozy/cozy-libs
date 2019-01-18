@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.23.0"></a>
+# [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.22.1...cozy-harvest-lib@0.23.0) (2019-01-18)
+
+
+### Features
+
+* **harvest:** Improve placeholder for encrypted fields mechanism 📝 ([e9a6724](https://github.com/cozy/cozy-libs/commit/e9a6724))
+
+
+
+
 <a name="0.22.1"></a>
 ## [0.22.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.22.0...cozy-harvest-lib@0.22.1) (2019-01-18)
 
