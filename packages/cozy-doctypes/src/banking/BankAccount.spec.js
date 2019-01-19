@@ -11,8 +11,8 @@ describe('account reconciliation', () => {
       remoteAccounts,
       localAccounts
     )
-    expect(matchedAccounts[0]._id).toBe('a1')
-    expect(matchedAccounts[1]._id).toBe(undefined)
+    expect(matchedAccounts.find(x => x.number === '1')._id).toBe('a1')
+    expect(matchedAccounts.find(x => x.number !== '1')._id).toBe(undefined)
     expect(matchedAccounts.length).toBe(2)
   })
 })
