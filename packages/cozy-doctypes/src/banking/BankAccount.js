@@ -58,6 +58,7 @@ class BankAccount extends Document {
   }
 }
 
+BankAccount.normalizeAccountNumber = matching.normalizeAccountNumber
 BankAccount.doctype = 'io.cozy.bank.accounts'
 BankAccount.idAttributes = ['_id']
 BankAccount.version = 1
