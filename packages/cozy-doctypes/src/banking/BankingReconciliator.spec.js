@@ -47,7 +47,7 @@ describe('banking reconciliator', () => {
     existingAccounts = [
       {
         vendorId: 1,
-        number: 1,
+        number: '1',
         _id: 123,
         balance: 2000,
         label: 'Bank account 1'
@@ -65,13 +65,13 @@ describe('banking reconciliator', () => {
     await reconciliator.save(
       [
         {
-          number: 1, // existing account
+          number: '1', // existing account
           vendorId: 2, // from a new connector account
           balance: 1000,
           label: 'Bank account 1'
         },
         {
-          number: 1, // existing account
+          number: '1', // existing account
           vendorId: 2, // from a new connector account
           balance: 1000,
           // Not the same label as the existing one, will be saved too
