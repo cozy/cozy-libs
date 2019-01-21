@@ -3,6 +3,9 @@
     "submit": {
       "label": "Submit"
     },
+    "fields":{
+      "optional": "(optional)"
+    },
     "password": {
       "show": "Show",
       "hide": "Hide"
