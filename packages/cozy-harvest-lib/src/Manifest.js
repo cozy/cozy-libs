@@ -86,11 +86,14 @@ const sanitizeIdentifier = fields => {
  */
 const sanitizeRequired = fields => {
   const sanitized = _cloneDeep(fields)
-  for (let fieldName in sanitized)
+  for (let fieldName in sanitized) {
+    const field = sanitized[fieldName]
+    // Ensure legacy for field isRequired
+    const required =
+      typeof field.required === 'undefined' ? field.isRequired : field.required
     sanitized[fieldName].required =
-      typeof sanitized[fieldName].required === 'boolean'
-        ? sanitized[fieldName].required
-        : true
+      typeof required === 'boolean' ? required : true
+  }
 
   return sanitized
 }
