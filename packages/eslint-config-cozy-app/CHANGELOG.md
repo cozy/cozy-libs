@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.8"></a>
+## [1.1.8](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.7...eslint-config-cozy-app@1.1.8) (2019-01-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-config-prettier to v3 ([c146f84](https://github.com/CPatchane/create-cozy-app/commit/c146f84))
+
+
+
+
 <a name="1.1.7"></a>
 ## [1.1.7](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.4...eslint-config-cozy-app@1.1.7) (2019-01-03)
 
