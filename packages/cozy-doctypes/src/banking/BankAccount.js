@@ -1,19 +1,19 @@
-const keyBy = require('lodash/keyBy')
 const groupBy = require('lodash/groupBy')
-const Document = require('./Document')
 const log = require('cozy-logger').namespace('BankAccount')
+const Document = require('../Document')
+const matching = require('./matching')
 
 class BankAccount extends Document {
+  /**
+   * Adds _id of existing accounts to fetched accounts
+   */
   static reconciliate(fetchedAccounts, localAccounts) {
-    const byAccountNumber = keyBy(localAccounts, acc =>
-      BankAccount.reconciliationKey(acc)
-    )
-    return fetchedAccounts.map(fetchedAccount => {
-      const fetchedAccountKey = this.reconciliationKey(fetchedAccount)
-      const matchedSavedAccount = byAccountNumber[fetchedAccountKey]
-      return Object.assign({}, fetchedAccount, {
-        _id: matchedSavedAccount && matchedSavedAccount._id
-      })
+    const matchings = matching.matchAccounts(fetchedAccounts, localAccounts)
+    return matchings.map(matching => {
+      return {
+        ...matching.account,
+        _id: matching.match ? matching.match._id : undefined
+      }
     })
   }
 

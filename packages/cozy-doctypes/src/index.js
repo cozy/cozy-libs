@@ -1,9 +1,9 @@
 const Application = require('./Application')
 const Document = require('./Document')
-const BankAccount = require('./BankAccount')
-const BankTransaction = require('./BankTransaction')
-const BalanceHistory = require('./BalanceHistory')
-const BankingReconciliator = require('./utils/BankingReconciliator')
+const BankAccount = require('./banking/BankAccount')
+const BankTransaction = require('./banking/BankTransaction')
+const BalanceHistory = require('./banking/BalanceHistory')
+const BankingReconciliator = require('./banking/BankingReconciliator')
 
 module.exports = {
   Application,

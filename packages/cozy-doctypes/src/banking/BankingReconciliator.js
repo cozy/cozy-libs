@@ -11,12 +11,7 @@ class BankingReconciliator {
 
     // Fetch stack accounts corresponding (via reconciliationKey) to the bank
     // accounts fetched by the konnector
-    const accountNumbers = new Set(
-      fetchedAccounts.map(account => BankAccount.reconciliationKey(account))
-    )
-    const stackAccounts = (await BankAccount.fetchAll()).filter(acc =>
-      accountNumbers.has(BankAccount.reconciliationKey(acc))
-    )
+    const stackAccounts = await BankAccount.fetchAll()
 
     // Reconciliate
     const matchedAccounts = BankAccount.reconciliate(
