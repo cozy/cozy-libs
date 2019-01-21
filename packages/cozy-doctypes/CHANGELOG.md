@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.23.0"></a>
+# [1.23.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.22.0...cozy-doctypes@1.23.0) (2019-01-21)
+
+
+### Features
+
+* Normalize account number before attempting matching ([c82bf9a](https://github.com/cozy/cozy-libs/commit/c82bf9a))
+
+
+
+
 <a name="1.22.0"></a>
 # [1.22.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.21.0...cozy-doctypes@1.22.0) (2019-01-21)
 
