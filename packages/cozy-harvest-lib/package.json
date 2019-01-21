@@ -36,7 +36,7 @@
     "enzyme-adapter-react-16": "^1.7.0",
     "identity-obj-proxy": "^3.0.0",
     "jest": "23.6.0",
-    "react": "16.6.1",
-    "react-dom": "^16.6.3"
+    "react": "16.7.0",
+    "react-dom": "16.7.0"
   }
 }
