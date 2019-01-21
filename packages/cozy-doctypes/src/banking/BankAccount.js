@@ -1,7 +1,7 @@
 const keyBy = require('lodash/keyBy')
 const groupBy = require('lodash/groupBy')
-const Document = require('./Document')
 const log = require('cozy-logger').namespace('BankAccount')
+const Document = require('../Document')
 
 class BankAccount extends Document {
   static reconciliate(fetchedAccounts, localAccounts) {

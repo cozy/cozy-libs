@@ -1,4 +1,4 @@
-const Document = require('./Document')
+const Document = require('../Document')
 const BankAccount = require('./BankAccount')
 
 class BalanceHistory extends Document {
