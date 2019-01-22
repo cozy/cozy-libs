@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.24.0"></a>
+# [1.24.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.23.0...cozy-doctypes@1.24.0) (2019-01-22)
+
+
+### Features
+
+* Allow {pre,suf}fixed numbers if length == 11 ([5c1201c](https://github.com/cozy/cozy-libs/commit/5c1201c))
+
+
+
+
 <a name="1.23.0"></a>
 # [1.23.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.22.0...cozy-doctypes@1.23.0) (2019-01-21)
 
