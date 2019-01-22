@@ -34,7 +34,11 @@ const normalizeAccountNumber = (number, iban) => {
     // Linxo sends Bank account number that contains
     // the counter number
     return number.substr(5, 11)
-  } else if (number && (match = number.match(untrimmedAccountNumber))) {
+  } else if (
+    number &&
+    number.length > 11 &&
+    (match = number.match(untrimmedAccountNumber))
+  ) {
     // Some account numbers from BI are in the form
     // CC-00300060030 (CC for Compte Courant) or
     // LEO-00300060030
