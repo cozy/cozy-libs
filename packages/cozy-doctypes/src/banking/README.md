@@ -1,5 +1,9 @@
-Encrypted tests
-===============
+## Banking doctypes
+
+This repository contains models used for banking applications. It also contains
+matching/deduplication logic for bank accounts and bank transactions.
+
+### Encrypted tests
 
 Account matching necessitates real world data for its tests. After
 anonymizing the data, it has been encrypted to further increase
