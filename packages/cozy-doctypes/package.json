@@ -17,6 +17,9 @@
     "jest": "23.6.0"
   },
   "scripts": {
-    "test": "jest src/"
+    "test": "jest src/",
+    "encrypt-banking-tests": "cd src/banking/; make encrypted.tar.gz.gpg",
+    "clean-banking-tests": "cd src/banking/; make clean",
+    "decrypt-banking-tests": "cd src/banking; gpg -d encrypted.tar.gz.gpg | tar xz"
   }
 }

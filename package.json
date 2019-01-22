@@ -15,8 +15,7 @@
   "scripts": {
     "lint": "eslint . --ext js,jsx",
     "test": "lerna run --parallel test",
-    "build": "lerna run --parallel build",
-    "decrypt-banking-tests": "cd packages/cozy-doctypes/src/banking; gpg -d encrypted.tar.gz.gpg | tar xz"
+    "build": "lerna run --parallel build"
   },
   "devDependencies": {
     "husky": "1.3.1",
