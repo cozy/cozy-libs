@@ -19,12 +19,17 @@ const eitherInclude = (str1, str2) => {
   return str1 && str2 && (str1.includes(str2) || str2.includes(str1))
 }
 
+const squash = (str, char) => {
+  const rx = new RegExp(String.raw`${char}{2,}`, 'gi')
+  return str.replace(rx, char)
+}
+
 const redactedNumber = /\b[0-9X]+\b/g
 const cleanLabel = label => label.replace(redactedNumber, '')
 const scoreMatching = (newOp, existingOp) => {
   const methods = []
   let labelPoints
-  if (existingOp.originalBankLabel === newOp.originalBankLabel) {
+  if (squash(existingOp.originalBankLabel, ' ') === squash(newOp.originalBankLabel, ' ')) {
     labelPoints = 200
     methods.push('originalBankLabel')
   } else if (existingOp.label === newOp.label) {
