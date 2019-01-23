@@ -25,13 +25,21 @@ const squash = (str, char) => {
 }
 
 const redactedNumber = /\b[0-9X]+\b/g
+const dateRx = /\b\d{2}\/\d{2}\/\d{4}\b/g
+
 const cleanLabel = label => label.replace(redactedNumber, '')
+const withoutDate = str => str.replace(dateRx, '')
 const scoreMatching = (newOp, existingOp) => {
   const methods = []
   let labelPoints
   if (squash(existingOp.originalBankLabel, ' ') === squash(newOp.originalBankLabel, ' ')) {
     labelPoints = 200
     methods.push('originalBankLabel')
+  } else if (withoutDate(existingOp.originalBankLabel) === withoutDate(newOp.originalBankLabel)) {
+    // For some transfers, the date in the originalBankLabel is different between
+    // BudgetInsight and Linxo
+    labelPoints = 150
+    methods.push('originalBankLabelWithoutDate')
   } else if (existingOp.label === newOp.label) {
     labelPoints = 100
     methods.push('label')
@@ -121,5 +129,6 @@ const matchOperations = function*(newOps, existingOps) {
 }
 
 module.exports = {
-  matchOperations
+  matchOperations,
+  scoreMatching
 }

@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const { matchOperations } = require('./matching-operations')
+const { matchOperations, scoreMatching } = require('./matching-operations')
 
 const DOCTYPE_OPERATIONS = 'io.cozy.bank.operations'
 const readOperations = filename => fs.readJSONSync(filename)[DOCTYPE_OPERATIONS]
@@ -34,4 +34,24 @@ fnDescribe('operations matching', () => {
       expect(fmtedResults).toMatchSnapshot()
     })
   }
+})
+
+it('should score', () => {
+  const newOp = {
+    "amount": -85,
+    "date": "2018-09-22T12:00:00.000Z",
+    "label": "Web Sylvain Miserenne G",
+    "originalBankLabel": "Virement Web Sylvain Miserenne Courses G Courses Gard 24/09/2018",
+  }
+  const existingOp = {
+    "amount": -85,
+    "date": "2018-09-22T00:00:00+02:00",
+    "label": "Sylvain Miserenne Courses Gard 22/09/2018",
+    "linxoId": "1209279242",
+    "originalBankLabel": "Virement Web Sylvain Miserenne Courses G Courses Gard 22/09/2018"
+  }
+  const scoreResult = scoreMatching(newOp, existingOp)
+  // Even if both labels and originalBankLabels are different, these
+  // operations are very similar and when scored within the same day, they should be matched
+  expect(scoreResult.points).toBeGreaterThan(0)
 })
