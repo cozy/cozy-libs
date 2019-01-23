@@ -20,6 +20,12 @@ describe('banking reconciliator', () => {
     reconciliator = new BankingReconciliator({ BankAccount, BankTransaction })
   })
 
+
+  const fmtCreateOrUpdateCall = call => {
+    const doc = call[0]
+    return doc.label
+  }
+
   it('should correctly reconciliate when accounts do not exist', async () => {
     existingAccounts = []
     existingTransactions = []
@@ -95,6 +101,7 @@ describe('banking reconciliator', () => {
       ]
     )
     expect(Document.createOrUpdate).toHaveBeenCalledTimes(4)
-    expect(Document.createOrUpdate.mock.calls).toMatchSnapshot()
+    expect(Document.createOrUpdate.mock.calls.map(fmtCreateOrUpdateCall)).toMatchSnapshot()
+  })
   })
 })
