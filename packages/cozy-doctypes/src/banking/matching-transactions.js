@@ -57,12 +57,28 @@ const scoreLabel = (newTr, existingTr) => {
   }
 }
 
+const MAX_DELTA_DATE = 1000 * 60 * 60 * 24 * 3 // 3 days
+
 const scoreMatching = (newTr, existingTr, options={}) => {
   const methods = []
   const res = {
     op: existingTr,
     methods
   }
+
+  if (options.checkDate) {
+    const d1 = new Date(newTr.date.substr(0, 10))
+    const d2 = new Date(existingTr.date.substr(0, 10))
+    const delta = Math.abs(d1 - d2)
+    if (delta > MAX_DELTA_DATE) {
+      // Early exit, transactions are two far off time-wise
+      res.points = -1000
+      return res
+    } else {
+      methods.push('approx-date')
+    }
+  }
+
   const [labelPoints, labelMethod] = scoreLabel(newTr, existingTr)
   methods.push(labelMethod)
   const amountDiff = Math.abs(existingTr.amount - newTr.amount)
@@ -73,7 +89,7 @@ const scoreMatching = (newTr, existingTr, options={}) => {
   return res
 }
 
-const matchTransaction = (newTr, existingTrs) => {
+const matchTransaction = (newTr, existingTrs, options={}) => {
   const exactVendorId = existingTrs.find(
     existingTr => existingTr.vendorId === newTr.vendorId
   )
@@ -86,7 +102,7 @@ const matchTransaction = (newTr, existingTrs) => {
   // with the current transaction.
   // Candidates with score below 0 will be discarded.
   const withPoints = existingTrs.map(existingTr =>
-    scoreMatching(newTr, existingTr)
+    scoreMatching(newTr, existingTr, { checkDate: options.checkDate })
   )
 
   const candidates = sortBy(withPoints, x => -x.points).filter(
@@ -126,15 +142,34 @@ const matchAndRemove = matchingFn => function*(newTrs, existingTrs) {
 }
 
 const matchTransactionsWithinDay =  matchAndRemove(matchTransaction)
+const matchTransactionsApproximateDate = matchAndRemove((newTr, toMatch) => {
+  return matchTransaction(newTr, toMatch, { checkDate: true })
+})
+
 const matchTransactions = function*(newTrs, existingTrs) {
+  const unmatched = []
+  const unmatchedExistingSet = new Set(existingTrs)
   // eslint-disable-next-line no-unused-vars
   for (let [date, [newGroup, existingGroup]] of zipGroup(
     [newTrs, existingTrs],
     getDateTransaction
   )) {
     for (let result of matchTransactionsWithinDay(newGroup, existingGroup)) {
-      yield result
+      if (result.match) {
+        unmatchedExistingSet.delete(result.match)
+        yield result
+      } else {
+        unmatched.push(result.transaction)
+      }
     }
+  }
+
+  const unmatchedExisting = Array.from(unmatchedExistingSet)
+  for (let result of matchTransactionsApproximateDate(
+    unmatched,
+    unmatchedExisting
+  )) {
+    yield result
   }
 }
 
