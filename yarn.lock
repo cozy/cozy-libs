@@ -2343,10 +2343,10 @@ cozy-logger@1.3.1:
   dependencies:
     json-stringify-safe "5.0.1"
 
-cozy-ui@18.8.0:
-  version "18.8.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-18.8.0.tgz#9fde1d356bb0acdb053d039961769601dbafd1f6"
-  integrity sha512-WrYKozgs3wz/BKfYtsmVlXH/8xOlFYLVWp0nTq0p08Kvpnb1WkCDxgYQqkVYmNxbi/NArdhUmaPdj5cQg8T7Cw==
+cozy-ui@18.9.1:
+  version "18.9.1"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-18.9.1.tgz#858493411af4ae2a6a6f86674a66b8ef8a643fa7"
+  integrity sha512-aNOsQRIFVb7hmOCuC9vICBIVnGU1eBaJn4w5TZaPKF4xsFG0SElc/dJC2AfyFNoovGRoBjS+tfbOKAUvruLhwg==
   dependencies:
     body-scroll-lock "^2.5.8"
     classnames "^2.2.5"
