@@ -32,10 +32,16 @@ const withoutDate = str => str.replace(dateRx, '')
 const scoreMatching = (newTr, existingTr) => {
   const methods = []
   let labelPoints
-  if (squash(existingTr.originalBankLabel, ' ') === squash(newTr.originalBankLabel, ' ')) {
+  if (
+    squash(existingTr.originalBankLabel, ' ') ===
+    squash(newTr.originalBankLabel, ' ')
+  ) {
     labelPoints = 200
     methods.push('originalBankLabel')
-  } else if (withoutDate(existingTr.originalBankLabel) === withoutDate(newTr.originalBankLabel)) {
+  } else if (
+    withoutDate(existingTr.originalBankLabel) ===
+    withoutDate(newTr.originalBankLabel)
+  ) {
     // For some transfers, the date in the originalBankLabel is different between
     // BudgetInsight and Linxo
     labelPoints = 150
@@ -81,7 +87,9 @@ const matchTransaction = (newTr, existingTrs) => {
   // We score candidates according to their degree of matching
   // with the current transaction.
   // Candidates with score below 0 will be discarded.
-  const withPoints = existingTrs.map(existingTr => scoreMatching(newTr, existingTr))
+  const withPoints = existingTrs.map(existingTr =>
+    scoreMatching(newTr, existingTr)
+  )
 
   const candidates = sortBy(withPoints, x => -x.points).filter(
     x => x.points > 0
@@ -103,9 +111,7 @@ const matchTransactionsWithinDay = function*(newTrs, existingTrs) {
       transaction: newTr
     }
 
-    const result = toMatch.length > 0
-      ? matchTransaction(newTr, toMatch)
-      : null
+    const result = toMatch.length > 0 ? matchTransaction(newTr, toMatch) : null
     if (result) {
       Object.assign(res, result)
       const matchIdx = toMatch.indexOf(result.match)
@@ -118,6 +124,7 @@ const matchTransactionsWithinDay = function*(newTrs, existingTrs) {
 }
 
 const matchTransactions = function*(newTrs, existingTrs) {
+  // eslint-disable-next-line no-unused-vars
   for (let [date, [newGroup, existingGroup]] of zipGroup(
     [newTrs, existingTrs],
     getDateTransaction

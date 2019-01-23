@@ -8,11 +8,13 @@ const readOperations = filename => fs.readJSONSync(filename)[DOCTYPE_OPERATIONS]
 const fmtMatchResult = result => {
   const date = result.transaction.date.substr(0, 10)
   if (result.match) {
-    return `✅ ${date}: ${result.transaction.label} (${result.transaction.amount}) -> ${result.match.label} (${result.match.amount}) ${
-      result.method
-    }`
+    return `✅ ${date}: ${result.transaction.label} (${
+      result.transaction.amount
+    }) -> ${result.match.label} (${result.match.amount}) ${result.method}`
   } else {
-    return `❌ ${date}: ${result.transaction.label} ${result.transaction.amount}`
+    return `❌ ${date}: ${result.transaction.label} ${
+      result.transaction.amount
+    }`
   }
 }
 const matchFiles = (filename1, filename2) => {
@@ -38,17 +40,19 @@ fnDescribe('transactions matching', () => {
 
 it('should score', () => {
   const newTr = {
-    "amount": -85,
-    "date": "2018-09-22T12:00:00.000Z",
-    "label": "Web Sylvain Miserenne G",
-    "originalBankLabel": "Virement Web Sylvain Miserenne Courses G Courses Gard 24/09/2018",
+    amount: -85,
+    date: '2018-09-22T12:00:00.000Z',
+    label: 'Web Sylvain Miserenne G',
+    originalBankLabel:
+      'Virement Web Sylvain Miserenne Courses G Courses Gard 24/09/2018'
   }
   const existingTr = {
-    "amount": -85,
-    "date": "2018-09-22T00:00:00+02:00",
-    "label": "Sylvain Miserenne Courses Gard 22/09/2018",
-    "linxoId": "1209279242",
-    "originalBankLabel": "Virement Web Sylvain Miserenne Courses G Courses Gard 22/09/2018"
+    amount: -85,
+    date: '2018-09-22T00:00:00+02:00',
+    label: 'Sylvain Miserenne Courses Gard 22/09/2018',
+    linxoId: '1209279242',
+    originalBankLabel:
+      'Virement Web Sylvain Miserenne Courses G Courses Gard 22/09/2018'
   }
   const scoreResult = scoreMatching(newTr, existingTr)
   // Even if both labels and originalBankLabels are different, these

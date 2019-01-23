@@ -82,10 +82,7 @@ class Transaction extends Document {
    * @param {array} stackTransactions
    * @returns {array}
    */
-  static getMissedTransactions(
-    transactionsToCheck,
-    stackTransactions
-  ) {
+  static getMissedTransactions(transactionsToCheck, stackTransactions) {
     const matchingResults = Array.from(
       matchTransactions(transactionsToCheck, stackTransactions)
     )
