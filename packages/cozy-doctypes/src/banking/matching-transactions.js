@@ -10,7 +10,7 @@ const getDateTransaction = op => op.date.substr(0, 10)
 const zipGroup = function*(iterables, grouper) {
   const grouped = iterables.map(items => groupBy(items, grouper))
   for (const key of Object.keys(grouped[0]).sort()) {
-    const groups = grouped.map(keyedGroups => keyedGroups[key])
+    const groups = grouped.map(keyedGroups => keyedGroups[key] || [])
     yield [key, groups]
   }
 }
@@ -118,7 +118,7 @@ const matchTransactionsWithinDay = function*(newTrs, existingTrs) {
 }
 
 const matchTransactions = function*(newTrs, existingTrs) {
-  for (let [, [newGroup, existingGroup]] of zipGroup(
+  for (let [date, [newGroup, existingGroup]] of zipGroup(
     [newTrs, existingTrs],
     getDateTransaction
   )) {
