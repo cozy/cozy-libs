@@ -58,18 +58,19 @@ const scoreLabel = (newTr, existingTr) => {
 }
 
 const scoreMatching = (newTr, existingTr, options={}) => {
+  const methods = []
+  const res = {
+    op: existingTr,
+    methods
+  }
   const [labelPoints, labelMethod] = scoreLabel(newTr, existingTr)
   methods.push(labelMethod)
   const amountDiff = Math.abs(existingTr.amount - newTr.amount)
   const amountPoints = amountDiff === 0 ? methods.push('amount') && 100 : -1000
 
   const points = amountPoints + labelPoints
-  return {
-    op: existingTr,
-    points: points,
-    amountDiff,
-    methods
-  }
+  res.points = points
+  return res
 }
 
 const matchTransaction = (newTr, existingTrs) => {
