@@ -8,7 +8,7 @@ const readOperations = filename => fs.readJSONSync(filename)[DOCTYPE_OPERATIONS]
 const fmtMatchResult = result => {
   const date = result.operation.date.substr(0, 10)
   if (result.match) {
-    return `✅ ${date}: ${result.operation.label} -> ${result.match.label} ${
+    return `✅ ${date}: ${result.operation.label} (${result.operation.amount}) -> ${result.match.label} (${result.match.amount}) ${
       result.method
     }`
   } else {
@@ -24,7 +24,7 @@ const fixturePath = path.join(__dirname, 'fixtures')
 const fnDescribe = fs.existsSync(fixturePath) ? describe : xdescribe
 
 fnDescribe('operations matching', () => {
-  for (let bank of ['banquepostale']) {
+  for (let bank of ['banquepostale', 'creditagricole']) {
     it(`should match snapshots for ${bank}`, () => {
       const results = matchFiles(
         path.join(fixturePath, `${bank}-operations.bi.json`),
