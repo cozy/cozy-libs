@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.25.0"></a>
+# [1.25.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.24.1...cozy-doctypes@1.25.0) (2019-01-23)
+
+
+### Bug Fixes
+
+* **doctypes:** Only pass transactions from konn related account ([1bbb5f9](https://github.com/cozy/cozy-libs/commit/1bbb5f9))
+
+
+### Features
+
+* **doctypes:** Add operation matching ([d1e2bd8](https://github.com/cozy/cozy-libs/commit/d1e2bd8))
+* **doctypes:** More readable snapshots by fmting calls ([dc63569](https://github.com/cozy/cozy-libs/commit/dc63569))
+* **doctypes:** Only consider exact amounts ([9395888](https://github.com/cozy/cozy-libs/commit/9395888))
+* **doctypes:** Remove dates from originalBankLabel ([5dde887](https://github.com/cozy/cozy-libs/commit/5dde887))
+* **doctypes:** Squash spaces in original bank label ([6b5e8f6](https://github.com/cozy/cozy-libs/commit/6b5e8f6))
+* **doctypes:** Test credit agricole operations ([862d6e6](https://github.com/cozy/cozy-libs/commit/862d6e6))
+* **doctypes:** Use new matching to get missed transactions ([2332571](https://github.com/cozy/cozy-libs/commit/2332571))
+* **doctypes:** zipGroup returns empty arrays for non existing groups ([c059f9e](https://github.com/cozy/cozy-libs/commit/c059f9e))
+
+
+
+
 <a name="1.24.1"></a>
 ## [1.24.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.24.0...cozy-doctypes@1.24.1) (2019-01-22)
 
