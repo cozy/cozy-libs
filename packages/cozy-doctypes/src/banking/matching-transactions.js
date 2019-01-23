@@ -91,7 +91,10 @@ const scoreMatching = (newTr, existingTr, options = {}) => {
 
 const matchTransaction = (newTr, existingTrs, options = {}) => {
   const exactVendorId = existingTrs.find(
-    existingTr => existingTr.vendorId === newTr.vendorId
+    existingTr =>
+      existingTr.vendorId &&
+      newTr.vendorId &&
+      existingTr.vendorId === newTr.vendorId
   )
   if (exactVendorId) {
     return { match: exactVendorId, method: 'vendorId' }
