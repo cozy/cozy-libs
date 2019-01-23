@@ -1,7 +1,7 @@
 const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
 
-const getDateOperation = op => op.date.substr(0, 10)
+const getDateTransaction = op => op.date.substr(0, 10)
 
 /**
  * Groups `iterables` via `grouper` and returns an iterator
@@ -29,25 +29,25 @@ const dateRx = /\b\d{2}\/\d{2}\/\d{4}\b/g
 
 const cleanLabel = label => label.replace(redactedNumber, '')
 const withoutDate = str => str.replace(dateRx, '')
-const scoreMatching = (newOp, existingOp) => {
+const scoreMatching = (newTr, existingTr) => {
   const methods = []
   let labelPoints
-  if (squash(existingOp.originalBankLabel, ' ') === squash(newOp.originalBankLabel, ' ')) {
+  if (squash(existingTr.originalBankLabel, ' ') === squash(newTr.originalBankLabel, ' ')) {
     labelPoints = 200
     methods.push('originalBankLabel')
-  } else if (withoutDate(existingOp.originalBankLabel) === withoutDate(newOp.originalBankLabel)) {
+  } else if (withoutDate(existingTr.originalBankLabel) === withoutDate(newTr.originalBankLabel)) {
     // For some transfers, the date in the originalBankLabel is different between
     // BudgetInsight and Linxo
     labelPoints = 150
     methods.push('originalBankLabelWithoutDate')
-  } else if (existingOp.label === newOp.label) {
+  } else if (existingTr.label === newTr.label) {
     labelPoints = 100
     methods.push('label')
-  } else if (eitherInclude(existingOp.label, newOp.label)) {
+  } else if (eitherInclude(existingTr.label, newTr.label)) {
     labelPoints = 70
     methods.push('eitherInclude')
   } else if (
-    eitherInclude(cleanLabel(existingOp.label), cleanLabel(newOp.label))
+    eitherInclude(cleanLabel(existingTr.label), cleanLabel(newTr.label))
   ) {
     labelPoints = 50
     methods.push('fuzzy-eitherInclude')
@@ -56,22 +56,22 @@ const scoreMatching = (newOp, existingOp) => {
     labelPoints = -1000
   }
 
-  const amountDiff = Math.abs(existingOp.amount - newOp.amount)
+  const amountDiff = Math.abs(existingTr.amount - newTr.amount)
   const amountPoints =
     amountDiff === 0 ? methods.push('amount') && 100 : -1000
 
   const points = amountPoints + labelPoints
   return {
-    op: existingOp,
+    op: existingTr,
     points: points,
     amountDiff,
     methods
   }
 }
 
-const matchOperation = (newOp, existingOps) => {
-  const exactVendorId = existingOps.find(
-    existingOp => existingOp.vendorId === newOp.vendorId
+const matchTransaction = (newTr, existingTrs) => {
+  const exactVendorId = existingTrs.find(
+    existingTr => existingTr.vendorId === newTr.vendorId
   )
   if (exactVendorId) {
     return { match: exactVendorId, method: 'vendorId' }
@@ -79,9 +79,9 @@ const matchOperation = (newOp, existingOps) => {
 
   // Now we try to do it based on originalBankLabel, label and amount.
   // We score candidates according to their degree of matching
-  // with the current operation.
+  // with the current transaction.
   // Candidates with score below 0 will be discarded.
-  const withPoints = existingOps.map(existingOp => scoreMatching(newOp, existingOp))
+  const withPoints = existingTrs.map(existingTr => scoreMatching(newTr, existingTr))
 
   const candidates = sortBy(withPoints, x => -x.points).filter(
     x => x.points > 0
@@ -96,15 +96,15 @@ const matchOperation = (newOp, existingOps) => {
       }
 }
 
-const matchOperationsWithinDay = function*(newOps, existingOps) {
-  const toMatch = Array.isArray(existingOps) ? [...existingOps] : []
-  for (let newOp of newOps) {
+const matchTransactionsWithinDay = function*(newTrs, existingTrs) {
+  const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
+  for (let newTr of newTrs) {
     const res = {
-      operation: newOp
+      transaction: newTr
     }
 
     const result = toMatch.length > 0
-      ? matchOperation(newOp, toMatch)
+      ? matchTransaction(newTr, toMatch)
       : null
     if (result) {
       Object.assign(res, result)
@@ -117,18 +117,18 @@ const matchOperationsWithinDay = function*(newOps, existingOps) {
   }
 }
 
-const matchOperations = function*(newOps, existingOps) {
+const matchTransactions = function*(newTrs, existingTrs) {
   for (let [, [newGroup, existingGroup]] of zipGroup(
-    [newOps, existingOps],
-    getDateOperation
+    [newTrs, existingTrs],
+    getDateTransaction
   )) {
-    for (let result of matchOperationsWithinDay(newGroup, existingGroup)) {
+    for (let result of matchTransactionsWithinDay(newGroup, existingGroup)) {
       yield result
     }
   }
 }
 
 module.exports = {
-  matchOperations,
+  matchTransactions,
   scoreMatching
 }
