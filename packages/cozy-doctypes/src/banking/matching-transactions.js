@@ -101,14 +101,18 @@ const matchTransaction = (newTr, existingTrs) => {
       }
 }
 
-const matchTransactionsWithinDay = function*(newTrs, existingTrs) {
+/**
+ * Logic to match a transaction and removing it from the transactions to
+ * match. `matchingFn` is the function used for matching.
+ */
+const matchAndRemove = matchingFn => function*(newTrs, existingTrs) {
   const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
   for (let newTr of newTrs) {
     const res = {
       transaction: newTr
     }
 
-    const result = toMatch.length > 0 ? matchTransaction(newTr, toMatch) : null
+    const result = toMatch.length > 0 ? matchingFn(newTr, toMatch) : null
     if (result) {
       Object.assign(res, result)
       const matchIdx = toMatch.indexOf(result.match)
@@ -120,6 +124,7 @@ const matchTransactionsWithinDay = function*(newTrs, existingTrs) {
   }
 }
 
+const matchTransactionsWithinDay =  matchAndRemove(matchTransaction)
 const matchTransactions = function*(newTrs, existingTrs) {
   // eslint-disable-next-line no-unused-vars
   for (let [date, [newGroup, existingGroup]] of zipGroup(
