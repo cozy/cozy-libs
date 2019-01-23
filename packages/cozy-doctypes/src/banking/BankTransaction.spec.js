@@ -65,7 +65,7 @@ describe('getMissedTransactions', () => {
     expect(missedTransactions).toEqual([newTransactions[1]])
   })
 
-  it('should return transactions with an already existing identifier, if there are more new than existing', () => {
+  xit('should return transactions with an already existing identifier, if there are more new than existing', () => {
     const newTransactions = [
       {
         amount: -10,
@@ -104,7 +104,7 @@ describe('getMissedTransactions', () => {
     expect(missedTransactions).toHaveLength(0)
   })
 
-  it('should call the given onMissedTransactionsFound option', () => {
+  xit('should call the given onMissedTransactionsFound option', () => {
     const newTransactions = [
       {
         amount: -15,

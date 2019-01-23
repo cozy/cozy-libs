@@ -4,6 +4,7 @@ const max = require('lodash/max')
 const Document = require('../Document')
 const log = require('../log')
 const BankAccount = require('./BankAccount')
+const { matchTransactions } = require('./matching-transactions')
 
 const getDate = transaction => transaction.date.slice(0, 10)
 
@@ -75,82 +76,23 @@ class Transaction extends Document {
   }
 
   /**
-   * Get transactions that should be present in the stack but are not
-   * The transactions are compared using Transaction.prototype.getIdentifier
+   * Get transactions that should be present in the stack but are not.
+   *
    * @param {array} transactionsToCheck
    * @param {array} stackTransactions
    * @returns {array}
    */
   static getMissedTransactions(
     transactionsToCheck,
-    stackTransactions,
-    options = {}
+    stackTransactions
   ) {
-    const toCheckByIdentifier = groupBy(transactionsToCheck, t =>
-      Transaction.prototype.getIdentifier.call(t)
+    const matchingResults = Array.from(
+      matchTransactions(transactionsToCheck, stackTransactions)
     )
 
-    const existingByIdentifier = groupBy(stackTransactions, t =>
-      Transaction.prototype.getIdentifier.call(t)
-    )
-
-    const missedTransactions = []
-
-    // Number of identifiers for which Linxo have more transactions than us
-    let moreNewThanExisting = 0
-    // Number of identifiers for which Linxo have less transactions than us
-    let lessNewThanExisting = 0
-
-    for (const [identifier, newTransactions] of Object.entries(
-      toCheckByIdentifier
-    )) {
-      const existingTransactions = existingByIdentifier[identifier] || []
-
-      if (newTransactions.length > existingTransactions.length) {
-        const level =
-          newTransactions.length === 1 && existingTransactions.length === 0
-            ? 'debug'
-            : 'warn'
-
-        log(
-          level,
-          `Linxo have ${
-            newTransactions.length
-          } transactions, but we have only ${
-            existingTransactions.length
-          } with the same identifier as ${this.vendorIdAttr} ${
-            newTransactions[0][this.vendorIdAttr]
-          }`
-        )
-
-        moreNewThanExisting += 1
-
-        const difference = newTransactions.length - existingTransactions.length
-        missedTransactions.push(...newTransactions.slice(0, difference))
-      }
-
-      if (newTransactions.length < existingTransactions.length) {
-        log(
-          'warn',
-          `Linxo have ${
-            newTransactions.length
-          } transactions, but we already have ${
-            existingTransactions.length
-          } with the same identifier as ${this.vendorIdAttr} ${
-            existingTransactions[0][this.vendorIdAttr]
-          }`
-        )
-
-        lessNewThanExisting += 1
-      }
-    }
-
-    if (typeof options.onMissedTransactionsFound === 'function') {
-      options.onMissedTransactionsFound(
-        moreNewThanExisting,
-        lessNewThanExisting
-      )
-    }
+    const missedTransactions = matchingResults
+      .filter(result => !result.match)
+      .map(result => result.transaction)
 
     return missedTransactions
   }
