@@ -63,8 +63,7 @@ const scoreMatching = (newTr, existingTr) => {
   }
 
   const amountDiff = Math.abs(existingTr.amount - newTr.amount)
-  const amountPoints =
-    amountDiff === 0 ? methods.push('amount') && 100 : -1000
+  const amountPoints = amountDiff === 0 ? methods.push('amount') && 100 : -1000
 
   const points = amountPoints + labelPoints
   return {
