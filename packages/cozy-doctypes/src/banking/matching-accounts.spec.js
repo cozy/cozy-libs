@@ -1,6 +1,6 @@
 const fs = require('fs-extra')
 const path = require('path')
-const { matchAccounts, normalizeAccountNumber } = require('./matching')
+const { matchAccounts, normalizeAccountNumber } = require('./matching-accounts')
 
 const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
 const readBankAccounts = filename =>
