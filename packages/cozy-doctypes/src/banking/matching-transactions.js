@@ -59,7 +59,7 @@ const scoreLabel = (newTr, existingTr) => {
 
 const MAX_DELTA_DATE = 1000 * 60 * 60 * 24 * 3 // 3 days
 
-const scoreMatching = (newTr, existingTr, options={}) => {
+const scoreMatching = (newTr, existingTr, options = {}) => {
   const methods = []
   const res = {
     op: existingTr,
@@ -89,7 +89,7 @@ const scoreMatching = (newTr, existingTr, options={}) => {
   return res
 }
 
-const matchTransaction = (newTr, existingTrs, options={}) => {
+const matchTransaction = (newTr, existingTrs, options = {}) => {
   const exactVendorId = existingTrs.find(
     existingTr => existingTr.vendorId === newTr.vendorId
   )
@@ -122,26 +122,27 @@ const matchTransaction = (newTr, existingTrs, options={}) => {
  * Logic to match a transaction and removing it from the transactions to
  * match. `matchingFn` is the function used for matching.
  */
-const matchAndRemove = matchingFn => function*(newTrs, existingTrs) {
-  const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
-  for (let newTr of newTrs) {
-    const res = {
-      transaction: newTr
-    }
-
-    const result = toMatch.length > 0 ? matchingFn(newTr, toMatch) : null
-    if (result) {
-      Object.assign(res, result)
-      const matchIdx = toMatch.indexOf(result.match)
-      if (matchIdx > -1) {
-        toMatch.splice(matchIdx, 1)
+const matchAndRemove = matchingFn =>
+  function*(newTrs, existingTrs) {
+    const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
+    for (let newTr of newTrs) {
+      const res = {
+        transaction: newTr
       }
-    }
-    yield res
-  }
-}
 
-const matchTransactionsWithinDay =  matchAndRemove(matchTransaction)
+      const result = toMatch.length > 0 ? matchingFn(newTr, toMatch) : null
+      if (result) {
+        Object.assign(res, result)
+        const matchIdx = toMatch.indexOf(result.match)
+        if (matchIdx > -1) {
+          toMatch.splice(matchIdx, 1)
+        }
+      }
+      yield res
+    }
+  }
+
+const matchTransactionsWithinDay = matchAndRemove(matchTransaction)
 const matchTransactionsApproximateDate = matchAndRemove((newTr, toMatch) => {
   return matchTransaction(newTr, toMatch, { checkDate: true })
 })
