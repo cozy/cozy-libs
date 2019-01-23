@@ -1,7 +1,7 @@
 const groupBy = require('lodash/groupBy')
 const log = require('cozy-logger').namespace('BankAccount')
 const Document = require('../Document')
-const matching = require('./matching')
+const matching = require('./matching-accounts')
 
 class BankAccount extends Document {
   /**

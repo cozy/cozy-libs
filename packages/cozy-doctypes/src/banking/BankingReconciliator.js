@@ -9,18 +9,16 @@ class BankingReconciliator {
   async save(fetchedAccounts, fetchedTransactions, options = {}) {
     const { BankAccount, BankTransaction } = this.options
 
-    // Fetch stack accounts corresponding (via reconciliationKey) to the bank
-    // accounts fetched by the konnector
     const stackAccounts = await BankAccount.fetchAll()
 
     // Reconciliate
-    const matchedAccounts = BankAccount.reconciliate(
+    const reconciliatedAccounts = BankAccount.reconciliate(
       fetchedAccounts,
       stackAccounts
     )
 
     log('info', 'Saving accounts...')
-    const savedAccounts = await BankAccount.bulkSave(matchedAccounts)
+    const savedAccounts = await BankAccount.bulkSave(reconciliatedAccounts)
     if (options.onAccountsSaved) {
       options.onAccountsSaved(savedAccounts)
     }
@@ -47,9 +45,14 @@ class BankingReconciliator {
       }
     })
 
-    const stackAccountsIds = new Set(stackAccounts.map(x => x._id))
+    const reconciliatedAccountIds = new Set(
+      reconciliatedAccounts.filter(acc => acc._id).map(acc => acc._id)
+    )
+
+    // Pass to transaction reconciliation only transactions that belong
+    // to one of the reconciliated accounts
     const stackTransactions = (await BankTransaction.fetchAll()).filter(
-      transaction => stackAccountsIds.has(transaction.account)
+      transaction => reconciliatedAccountIds.has(transaction.account)
     )
 
     const transactions = BankTransaction.reconciliate(
