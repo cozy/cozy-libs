@@ -53,7 +53,7 @@ describe('getMissedTransactions', () => {
       {
         amount: -15,
         originalBankLabel: 'Test 04',
-        date: '2018-10-01'
+        date: '2018-10-06'
       }
     ]
 
