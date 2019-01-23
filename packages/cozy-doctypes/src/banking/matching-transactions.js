@@ -21,7 +21,7 @@ const eitherInclude = (str1, str2) => {
 
 const squash = (str, char) => {
   const rx = new RegExp(String.raw`${char}{2,}`, 'gi')
-  return str.replace(rx, char)
+  return str && str.replace(rx, char)
 }
 
 const redactedNumber = /\b[0-9X]+\b/g
