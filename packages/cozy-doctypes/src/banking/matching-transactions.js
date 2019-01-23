@@ -29,39 +29,37 @@ const dateRx = /\b\d{2}\/\d{2}\/\d{4}\b/g
 
 const cleanLabel = label => label.replace(redactedNumber, '')
 const withoutDate = str => str.replace(dateRx, '')
-const scoreMatching = (newTr, existingTr) => {
-  const methods = []
-  let labelPoints
+
+const scoreLabel = (newTr, existingTr) => {
   if (
     squash(existingTr.originalBankLabel, ' ') ===
     squash(newTr.originalBankLabel, ' ')
   ) {
-    labelPoints = 200
-    methods.push('originalBankLabel')
+    return [200, 'originalBankLabel']
   } else if (
     withoutDate(existingTr.originalBankLabel) ===
     withoutDate(newTr.originalBankLabel)
   ) {
     // For some transfers, the date in the originalBankLabel is different between
     // BudgetInsight and Linxo
-    labelPoints = 150
-    methods.push('originalBankLabelWithoutDate')
+    return [150, 'originalBankLabelWithoutDate']
   } else if (existingTr.label === newTr.label) {
-    labelPoints = 100
-    methods.push('label')
+    return [100, 'label']
   } else if (eitherInclude(existingTr.label, newTr.label)) {
-    labelPoints = 70
-    methods.push('eitherInclude')
+    return [70, 'eitherInclude']
   } else if (
     eitherInclude(cleanLabel(existingTr.label), cleanLabel(newTr.label))
   ) {
-    labelPoints = 50
-    methods.push('fuzzy-eitherInclude')
+    return [50, 'fuzzy-eitherInclude']
   } else {
     // Nothing matches, we penalize so that the score is below 0
-    labelPoints = -1000
+    return [-1000, 'label-penalty']
   }
+}
 
+const scoreMatching = (newTr, existingTr, options={}) => {
+  const [labelPoints, labelMethod] = scoreLabel(newTr, existingTr)
+  methods.push(labelMethod)
   const amountDiff = Math.abs(existingTr.amount - newTr.amount)
   const amountPoints = amountDiff === 0 ? methods.push('amount') && 100 : -1000
 
