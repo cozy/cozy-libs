@@ -26,7 +26,7 @@ const fixturePath = path.join(__dirname, 'fixtures')
 const fnDescribe = fs.existsSync(fixturePath) ? describe : xdescribe
 
 fnDescribe('transactions matching', () => {
-  for (let bank of ['banquepostale', 'creditagricole']) {
+  for (let bank of ['banquepostale', 'creditagricole', 'banquepopulaire']) {
     it(`should match snapshots for ${bank}`, () => {
       const results = matchFiles(
         path.join(fixturePath, `${bank}-transactions.bi.json`),
