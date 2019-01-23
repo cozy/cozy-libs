@@ -21,6 +21,40 @@ const eitherInclude = (str1, str2) => {
 
 const redactedNumber = /\b[0-9X]+\b/g
 const cleanLabel = label => label.replace(redactedNumber, '')
+const scoreMatching = (newOp, existingOp) => {
+  const methods = []
+  let labelPoints
+  if (existingOp.originalBankLabel === newOp.originalBankLabel) {
+    labelPoints = 200
+    methods.push('originalBankLabel')
+  } else if (existingOp.label === newOp.label) {
+    labelPoints = 100
+    methods.push('label')
+  } else if (eitherInclude(existingOp.label, newOp.label)) {
+    labelPoints = 70
+    methods.push('eitherInclude')
+  } else if (
+    eitherInclude(cleanLabel(existingOp.label), cleanLabel(newOp.label))
+  ) {
+    labelPoints = 50
+    methods.push('fuzzy-eitherInclude')
+  } else {
+    // Nothing matches, we penalize so that the score is below 0
+    labelPoints = -1000
+  }
+
+  const amountDiff = Math.abs(existingOp.amount - newOp.amount)
+  const amountPoints =
+    amountDiff === 0 ? methods.push('amount') && 100 : -1000
+
+  const points = amountPoints + labelPoints
+  return {
+    op: existingOp,
+    points: points,
+    amountDiff,
+    methods
+  }
+}
 
 const matchOperation = (newOp, existingOps) => {
   const exactVendorId = existingOps.find(
@@ -34,38 +68,7 @@ const matchOperation = (newOp, existingOps) => {
   // We score candidates according to their degree of matching
   // with the current operation.
   // Candidates with score below 0 will be discarded.
-  const withPoints = existingOps.map(existingOp => {
-    const methods = []
-    let labelPoints
-    if (existingOp.originalBankLabel === newOp.originalBankLabel) {
-      labelPoints = 200
-      methods.push('originalBankLabel')
-    } else if (existingOp.label === newOp.label) {
-      labelPoints = 100
-      methods.push('label')
-    } else if (eitherInclude(existingOp.label, newOp.label)) {
-      labelPoints = 70
-      methods.push('eitherInclude')
-    } else if (
-      eitherInclude(cleanLabel(existingOp.label), cleanLabel(newOp.label))
-    ) {
-      labelPoints = 50
-      methods.push('fuzzy-eitherInclude')
-    } else {
-      // Nothing matches, we penalize so that the score is below 0
-      labelPoints = -1000
-    }
-
-    const amountDiff = Math.abs(existingOp.amount - newOp.amount)
-    const amountPoints =
-      amountDiff < 0.25 ? methods.push('amount') && 100 : -1000
-    return {
-      op: existingOp,
-      points: amountPoints + labelPoints,
-      amountDiff,
-      methods
-    }
-  })
+  const withPoints = existingOps.map(existingOp => scoreMatching(newOp, existingOp))
 
   const candidates = sortBy(withPoints, x => -x.points).filter(
     x => x.points > 0
