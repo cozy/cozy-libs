@@ -17,9 +17,7 @@ const fixturePath = path.join(__dirname, 'fixtures')
 
 // For these tests to run, you need to decrypt encrypted.tar.gz.gpg
 // `yarn run decrypt-banking-tests` in the workspace root
-const fnDescribe = fs.existsSync(path.join(__dirname, 'fixtures'))
-  ? describe
-  : xdescribe
+const fnDescribe = fs.existsSync(fixturePath) ? describe : xdescribe
 fnDescribe('account matching', () => {
   const banks = [
     'banquepopulaire',
