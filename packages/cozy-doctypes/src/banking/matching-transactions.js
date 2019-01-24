@@ -59,7 +59,14 @@ const DAY = 1000 * 60 * 60 * 24
 const getDeltaDate = (newTr, existingTr) => {
   const nDate1 = new Date(newTr.date.substr(0, 10))
   const eDate1 = new Date(existingTr.date.substr(0, 10))
-  return Math.abs(eDate1 - nDate1)
+  const delta = Math.abs(eDate1 - nDate1)
+  if (newTr.realisationDate) {
+    const nDate2 = new Date(newTr.realisationDate.substr(0, 10))
+    const delta2 = Math.abs(eDate1 - nDate2)
+    return Math.min(delta, delta2)
+  } else {
+    return delta
+  }
 }
 
 const scoreMatching = (newTr, existingTr, options = {}) => {
