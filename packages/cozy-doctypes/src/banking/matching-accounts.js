@@ -1,3 +1,5 @@
+const { eitherIncludes } = require('./matching-tools')
+
 const findExactMatch = (attr, account, existingAccounts) => {
   const sameAttr = existingAccounts.filter(
     existingAccount => existingAccount[attr] === account[attr]
@@ -46,10 +48,6 @@ const normalizeAccountNumber = (number, iban) => {
   } else {
     return number
   }
-}
-
-const eitherIncludes = (str1, str2) => {
-  return str1 && str2 && (str1.includes(str2) || str2.includes(str1))
 }
 
 /**
