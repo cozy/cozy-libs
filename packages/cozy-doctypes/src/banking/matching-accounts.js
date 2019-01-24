@@ -27,7 +27,7 @@ const normalizeAccountNumber = (number, iban) => {
     // Must be an IBAN without the COUNTRY code
     // See support demand #9102 with BI
     // We extract the account number from the IBAN
-    // COUNTRY BANK COUNTER NUMBER KEY
+    // COUNTRY (4) BANK (5) COUNTER (5) NUMBER (11) KEY (2)
     // FRXX 16275 10501 00300060030 00
     return number.substr(10, 11)
   } else if (number && number.length == 16) {
@@ -48,10 +48,35 @@ const normalizeAccountNumber = (number, iban) => {
   }
 }
 
+const eitherIncludes = (str1, str2) => {
+  return str1 && str2 && (str1.includes(str2) || str2.includes(str1))
+}
+
+/**
+ * If either of the account numbers has length 11 and one is contained
+ * in the other, it's a match
+ */
+const findApproxNumberMatch = (account, existingAccounts) => {
+  for (let existingAccount of existingAccounts) {
+    if (
+      existingAccount.number &&
+      account.number &&
+      (existingAccount.number.length === 11 || account.number.length === 11) &&
+      eitherIncludes(existingAccount.number, account.number)
+    ) {
+      return { match: existingAccount, method: 'approx-number' }
+    }
+  }
+}
+
 const normalizeAccount = account => {
+  const normalizedAccountNumber = normalizeAccountNumber(
+    account.number,
+    account.iban
+  )
   return {
     ...account,
-    number: normalizeAccountNumber(account.number, account.iban)
+    number: normalizedAccountNumber
   }
 }
 
@@ -70,6 +95,11 @@ const findMatch = (account, existingAccounts) => {
     // Number easy case
     if (numberMatch && numberMatch.match) {
       return numberMatch
+    }
+
+    const numberApproxMatch = findApproxNumberMatch(account, existingAccounts)
+    if (numberApproxMatch && numberApproxMatch.match) {
+      return numberApproxMatch
     }
   }
 }

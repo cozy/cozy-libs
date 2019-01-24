@@ -20,6 +20,7 @@ const fixturePath = path.join(__dirname, 'fixtures')
 const fnDescribe = fs.existsSync(fixturePath) ? describe : xdescribe
 fnDescribe('account matching', () => {
   const banks = [
+    'axa',
     'banquepopulaire',
     'banquepopulaire2',
     'ing',
