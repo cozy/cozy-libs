@@ -56,6 +56,16 @@ const scoreLabel = (newTr, existingTr) => {
 
 const MAX_DELTA_DATE = 1000 * 60 * 60 * 24 * 3 // 3 days
 
+const withinAcceptableDateRange = (newTr, existingTr) => {
+  const d1 = new Date(newTr.date.substr(0, 10))
+  const d2 = new Date(existingTr.date.substr(0, 10))
+  const delta = Math.abs(d1 - d2)
+  if (delta <= MAX_DELTA_DATE) {
+    return true
+  }
+  return false
+}
+
 const scoreMatching = (newTr, existingTr, options = {}) => {
   const methods = []
   const res = {
@@ -64,10 +74,7 @@ const scoreMatching = (newTr, existingTr, options = {}) => {
   }
 
   if (options.checkDate) {
-    const d1 = new Date(newTr.date.substr(0, 10))
-    const d2 = new Date(existingTr.date.substr(0, 10))
-    const delta = Math.abs(d1 - d2)
-    if (delta > MAX_DELTA_DATE) {
+    if (!withinAcceptableDateRange(newTr, existingTr)) {
       // Early exit, transactions are two far off time-wise
       res.points = -1000
       return res
