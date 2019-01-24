@@ -166,7 +166,7 @@ describe('banking reconciliator', () => {
         amount: -200,
         label: 'Debit 200',
         vendorAccountId: 2,
-        date: '2018-06-24T00:00' // prior to split date and doesn't exist, saved
+        date: '2018-06-01T00:00' // prior to split date and doesn't exist, saved
       },
       {
         amount: -100,
@@ -181,7 +181,6 @@ describe('banking reconciliator', () => {
       [existingTransactions[0], existingTransactions[1]],
       {}
     )
-    expect(Document.createOrUpdate).toHaveBeenCalledTimes(3)
     expect(
       Document.createOrUpdate.mock.calls.map(fmtCreateOrUpdateCall)
     ).toMatchSnapshot()
