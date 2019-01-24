@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.27.0"></a>
+# [1.27.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.26.0...cozy-doctypes@1.27.0) (2019-01-24)
+
+
+### Features
+
+* **doctypes:** Match accounts from AXA ([6c869e8](https://github.com/cozy/cozy-libs/commit/6c869e8))
+* **doctypes:** Score matching for accounts ([033497d](https://github.com/cozy/cozy-libs/commit/033497d))
+
+
+
+
 <a name="1.26.0"></a>
 # [1.26.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.25.0...cozy-doctypes@1.26.0) (2019-01-24)
 
