@@ -64,6 +64,7 @@ const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 class Document {
   static registerClient(client) {
     if (!cozyClient) {
+      Document.cozyClient = client
       cozyClient = client
     } else {
       // eslint-disable-next-line no-console
