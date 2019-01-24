@@ -240,6 +240,22 @@ describe('Manifest', () => {
       expect(result.fields.gender.required).toBe(false)
       expect(result.fields.country.required).toBe(true)
     })
+
+    it('should handle legacy property isRequired', () => {
+      const manifest = {
+        fields: {
+          login: { type: 'text' },
+          password: { type: 'password' },
+          gender: { type: 'text', isRequired: false },
+          country: { type: 'text' }
+        }
+      }
+      const result = Manifest.sanitize(manifest)
+      expect(result.fields.login.required).toBe(true)
+      expect(result.fields.password.required).toBe(true)
+      expect(result.fields.gender.required).toBe(false)
+      expect(result.fields.country.required).toBe(true)
+    })
   })
 
   describe('sanitizeEncrypted', () => {

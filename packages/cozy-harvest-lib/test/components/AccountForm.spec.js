@@ -150,7 +150,9 @@ describe('AccountForm', () => {
     })
 
     it('render a date field', () => {
-      const wrapper = shallow(<AccountField type="date" name="date" t={t} />)
+      const wrapper = shallow(
+        <AccountField required={true} type="date" name="date" t={t} />
+      )
       const component = wrapper.dive().getElement()
       expect(component).toMatchSnapshot()
     })
@@ -174,7 +176,13 @@ describe('AccountForm', () => {
       ]
 
       const wrapper = shallow(
-        <AccountField name="multiple" options={options} t={t} type="dropdown" />
+        <AccountField
+          name="multiple"
+          options={options}
+          required={true}
+          t={t}
+          type="dropdown"
+        />
       )
       const component = wrapper.dive().getElement()
       expect(component).toMatchSnapshot()
