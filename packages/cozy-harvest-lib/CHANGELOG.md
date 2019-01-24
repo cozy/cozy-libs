@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.25.0"></a>
+# [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.24.4...cozy-harvest-lib@0.25.0) (2019-01-24)
+
+
+### Features
+
+* **harvest:** Add "optional" indicator for non required fields ([83beecc](https://github.com/cozy/cozy-libs/commit/83beecc))
+* **harvest:** Handle fields legacy property isRequired 📝 ([1a66ab2](https://github.com/cozy/cozy-libs/commit/1a66ab2))
+
+
+
+
 <a name="0.24.4"></a>
 ## [0.24.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.24.3...cozy-harvest-lib@0.24.4) (2019-01-23)
 
