@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.26.0"></a>
+# [1.26.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.25.0...cozy-doctypes@1.26.0) (2019-01-24)
+
+
+### Bug Fixes
+
+* **doctypes:** Cannot match on undefined vendorId ([eca9fd3](https://github.com/cozy/cozy-libs/commit/eca9fd3))
+* **doctypes:** Checks that str is not undefined ([d4e78da](https://github.com/cozy/cozy-libs/commit/d4e78da))
+* **doctypes:** Typo in fixture cleaning ([e134422](https://github.com/cozy/cozy-libs/commit/e134422))
+
+
+### Features
+
+* **doctypes:** Rematch unmatched with relaxed dates ([abf8f72](https://github.com/cozy/cozy-libs/commit/abf8f72))
+* **doctypes:** Test banque populaire transactions ([1add3b6](https://github.com/cozy/cozy-libs/commit/1add3b6))
+* **doctypes:** Tweak tests not to have false positives ([37d4602](https://github.com/cozy/cozy-libs/commit/37d4602))
+
+
+
+
 <a name="1.25.0"></a>
 # [1.25.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.24.1...cozy-doctypes@1.25.0) (2019-01-23)
 
