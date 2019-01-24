@@ -178,7 +178,7 @@ const matchTransactions = function*(newTrs, existingTrs) {
     }
   }
 
-  const deltas = [3]
+  const deltas = [3, 4, 5]
   for (let delta of deltas) {
     for (let result of matchTransactionToGroup(
       Array.from(unmatchedNew),
