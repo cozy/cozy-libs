@@ -54,16 +54,12 @@ const scoreLabel = (newTr, existingTr) => {
   }
 }
 
-const MAX_DELTA_DATE = 1000 * 60 * 60 * 24 * 3 // 3 days
+const DAY = 1000 * 60 * 60 * 24
 
-const withinAcceptableDateRange = (newTr, existingTr) => {
-  const d1 = new Date(newTr.date.substr(0, 10))
-  const d2 = new Date(existingTr.date.substr(0, 10))
-  const delta = Math.abs(d1 - d2)
-  if (delta <= MAX_DELTA_DATE) {
-    return true
-  }
-  return false
+const getDeltaDate = (newTr, existingTr) => {
+  const nDate1 = new Date(newTr.date.substr(0, 10))
+  const eDate1 = new Date(existingTr.date.substr(0, 10))
+  return Math.abs(eDate1 - nDate1)
 }
 
 const scoreMatching = (newTr, existingTr, options = {}) => {
@@ -73,8 +69,9 @@ const scoreMatching = (newTr, existingTr, options = {}) => {
     methods
   }
 
-  if (options.checkDate) {
-    if (!withinAcceptableDateRange(newTr, existingTr)) {
+  if (options.maxDateDelta) {
+    const delta = getDeltaDate(newTr, existingTr)
+    if (delta > options.maxDateDelta) {
       // Early exit, transactions are two far off time-wise
       res.points = -1000
       return res
@@ -109,7 +106,7 @@ const matchTransaction = (newTr, existingTrs, options = {}) => {
   // with the current transaction.
   // Candidates with score below 0 will be discarded.
   const withPoints = existingTrs.map(existingTr =>
-    scoreMatching(newTr, existingTr, { checkDate: options.checkDate })
+    scoreMatching(newTr, existingTr, options)
   )
 
   const candidates = sortBy(withPoints, x => -x.points).filter(
@@ -129,55 +126,69 @@ const matchTransaction = (newTr, existingTrs, options = {}) => {
  * Logic to match a transaction and removing it from the transactions to
  * match. `matchingFn` is the function used for matching.
  */
-const matchAndRemove = matchingFn =>
-  function*(newTrs, existingTrs) {
-    const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
-    for (let newTr of newTrs) {
-      const res = {
-        transaction: newTr
-      }
-
-      const result = toMatch.length > 0 ? matchingFn(newTr, toMatch) : null
-      if (result) {
-        Object.assign(res, result)
-        const matchIdx = toMatch.indexOf(result.match)
-        if (matchIdx > -1) {
-          toMatch.splice(matchIdx, 1)
-        }
-      }
-      yield res
+const matchTransactionToGroup = function*(newTrs, existingTrs, options={}) {
+  const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
+  for (let newTr of newTrs) {
+    const res = {
+      transaction: newTr
     }
+
+    const result = toMatch.length > 0 ? matchTransaction(newTr, toMatch, options) : null
+    if (result) {
+      Object.assign(res, result)
+      const matchIdx = toMatch.indexOf(result.match)
+      if (matchIdx > -1) {
+        toMatch.splice(matchIdx, 1)
+      }
+    }
+    yield res
   }
+}
 
-const matchTransactionsWithinDay = matchAndRemove(matchTransaction)
-const matchTransactionsApproximateDate = matchAndRemove((newTr, toMatch) => {
-  return matchTransaction(newTr, toMatch, { checkDate: true })
-})
 
+/**
+ * Several logics to match transactions.
+ *
+ * First group transactions per day and match transactions in
+ * intra-day mode.
+ * Then relax the date constraint 1 day per 1 day to reach
+ * a maximum of 5 days of differences
+ */
 const matchTransactions = function*(newTrs, existingTrs) {
-  const unmatched = []
-  const unmatchedExistingSet = new Set(existingTrs)
+  const unmatchedNew = new Set(newTrs)
+  const unmatchedExisting = new Set(existingTrs)
   // eslint-disable-next-line no-unused-vars
   for (let [date, [newGroup, existingGroup]] of zipGroup(
     [newTrs, existingTrs],
     getDateTransaction
   )) {
-    for (let result of matchTransactionsWithinDay(newGroup, existingGroup)) {
+    for (let result of matchTransactionToGroup(newGroup, existingGroup)) {
       if (result.match) {
-        unmatchedExistingSet.delete(result.match)
+        unmatchedExisting.delete(result.match)
+        unmatchedNew.delete(result.transaction)
         yield result
-      } else {
-        unmatched.push(result.transaction)
       }
     }
   }
 
-  const unmatchedExisting = Array.from(unmatchedExistingSet)
-  for (let result of matchTransactionsApproximateDate(
-    unmatched,
-    unmatchedExisting
-  )) {
-    yield result
+  const deltas = [3]
+  for (let delta of deltas) {
+    for (let result of matchTransactionToGroup(
+      Array.from(unmatchedNew),
+      Array.from(unmatchedExisting),
+      {
+        maxDateDelta: delta * DAY
+      }
+    )) {
+      result.method = result.method + `-delta${delta}`
+      if (result.match) {
+        unmatchedExisting.delete(result.match)
+        unmatchedNew.delete(result.transaction)
+      }
+      if (result.match || delta === deltas[deltas.length - 1]) {
+        yield result
+      }
+    }
   }
 }
 
