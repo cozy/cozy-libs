@@ -1,3 +1,6 @@
+const sortBy = require('lodash/sortBy')
+const { eitherIncludes } = require('./matching-tools')
+
 const findExactMatch = (attr, account, existingAccounts) => {
   const sameAttr = existingAccounts.filter(
     existingAccount => existingAccount[attr] === account[attr]
@@ -27,7 +30,7 @@ const normalizeAccountNumber = (number, iban) => {
     // Must be an IBAN without the COUNTRY code
     // See support demand #9102 with BI
     // We extract the account number from the IBAN
-    // COUNTRY BANK COUNTER NUMBER KEY
+    // COUNTRY (4) BANK (5) COUNTER (5) NUMBER (11) KEY (2)
     // FRXX 16275 10501 00300060030 00
     return number.substr(10, 11)
   } else if (number && number.length == 16) {
@@ -48,10 +51,71 @@ const normalizeAccountNumber = (number, iban) => {
   }
 }
 
+/**
+ * If either of the account numbers has length 11 and one is contained
+ * in the other, it's a match
+ */
+const approxNumberMatch = (account, existingAccount) => {
+  return (
+    existingAccount.number &&
+    account.number &&
+    (existingAccount.number.length === 11 || account.number.length === 11) &&
+    eitherIncludes(existingAccount.number, account.number)
+  )
+}
+
+const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
+const creditCardMatch = (account, existingAccount) => {
+  let ccAccount, lastDigits
+  for (let acc of [account, existingAccount]) {
+    const match = acc.number.match(redactedCreditCard)
+    if (match) {
+      ccAccount = acc
+      lastDigits = match[1]
+    }
+  }
+  const other = ccAccount === account ? existingAccount : account
+  if (other.number.slice(-4) === lastDigits) {
+    return true
+  }
+}
+
+const score = (account, existingAccount) => {
+  const methods = []
+  const res = {
+    account: existingAccount,
+    methods
+  }
+  let points = 0
+  if (approxNumberMatch(account, existingAccount)) {
+    points += 50
+    methods.push('approx-number')
+  } else {
+    points -= 50
+  }
+  if (account.type === existingAccount.type) {
+    points += 50
+    methods.push('same-type')
+  }
+  if (
+    (account.type === 'CreditCard' || existingAccount.type === 'CreditCard') &&
+    creditCardMatch(account, existingAccount)
+  ) {
+    points += 150
+    methods.push('credit-card-number')
+  }
+  res.points = points
+  return res
+}
+
 const normalizeAccount = account => {
+  const normalizedAccountNumber = normalizeAccountNumber(
+    account.number,
+    account.iban
+  )
   return {
     ...account,
-    number: normalizeAccountNumber(account.number, account.iban)
+    number: normalizedAccountNumber
   }
 }
 
@@ -70,6 +134,19 @@ const findMatch = (account, existingAccounts) => {
     // Number easy case
     if (numberMatch && numberMatch.match) {
       return numberMatch
+    }
+  }
+
+  // Now we get more fuzzy and score accounts
+  const scored = sortBy(
+    existingAccounts.map(existingAccount => score(account, existingAccount)),
+    x => -x.points
+  )
+  const candidates = scored.filter(x => x.points > 0)
+  if (candidates.length > 0) {
+    return {
+      match: candidates[0].account,
+      method: candidates[0].methods.join('-')
     }
   }
 }

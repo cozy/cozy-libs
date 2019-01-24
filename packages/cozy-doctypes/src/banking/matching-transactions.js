@@ -1,5 +1,6 @@
 const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
+const { eitherIncludes } = require('./matching-tools')
 
 const getDateTransaction = op => op.date.substr(0, 10)
 
@@ -13,10 +14,6 @@ const zipGroup = function*(iterables, grouper) {
     const groups = grouped.map(keyedGroups => keyedGroups[key] || [])
     yield [key, groups]
   }
-}
-
-const eitherInclude = (str1, str2) => {
-  return str1 && str2 && (str1.includes(str2) || str2.includes(str1))
 }
 
 const squash = (str, char) => {
@@ -45,12 +42,12 @@ const scoreLabel = (newTr, existingTr) => {
     return [150, 'originalBankLabelWithoutDate']
   } else if (existingTr.label === newTr.label) {
     return [100, 'label']
-  } else if (eitherInclude(existingTr.label, newTr.label)) {
-    return [70, 'eitherInclude']
+  } else if (eitherIncludes(existingTr.label, newTr.label)) {
+    return [70, 'eitherIncludes']
   } else if (
-    eitherInclude(cleanLabel(existingTr.label), cleanLabel(newTr.label))
+    eitherIncludes(cleanLabel(existingTr.label), cleanLabel(newTr.label))
   ) {
-    return [50, 'fuzzy-eitherInclude']
+    return [50, 'fuzzy-eitherIncludes']
   } else {
     // Nothing matches, we penalize so that the score is below 0
     return [-1000, 'label-penalty']
