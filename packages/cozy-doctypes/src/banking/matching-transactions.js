@@ -133,14 +133,15 @@ const matchTransaction = (newTr, existingTrs, options = {}) => {
  * Logic to match a transaction and removing it from the transactions to
  * match. `matchingFn` is the function used for matching.
  */
-const matchTransactionToGroup = function*(newTrs, existingTrs, options={}) {
+const matchTransactionToGroup = function*(newTrs, existingTrs, options = {}) {
   const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
   for (let newTr of newTrs) {
     const res = {
       transaction: newTr
     }
 
-    const result = toMatch.length > 0 ? matchTransaction(newTr, toMatch, options) : null
+    const result =
+      toMatch.length > 0 ? matchTransaction(newTr, toMatch, options) : null
     if (result) {
       Object.assign(res, result)
       const matchIdx = toMatch.indexOf(result.match)
@@ -151,7 +152,6 @@ const matchTransactionToGroup = function*(newTrs, existingTrs, options={}) {
     yield res
   }
 }
-
 
 /**
  * Several logics to match transactions.
