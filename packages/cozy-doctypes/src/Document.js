@@ -13,8 +13,6 @@ const { parallelMap } = require('./utils')
 const log = require('cozy-logger').namespace('Document')
 const querystring = require('querystring')
 
-let cozyClient
-
 const DATABASE_DOES_NOT_EXIST = 'Database does not exist.'
 
 /**
@@ -33,17 +31,6 @@ function isDifferent(o1, o2) {
 }
 
 const indexes = {}
-function getIndex(doctype, fields) {
-  const key = `${doctype}:${fields.slice().join(',')}`
-  const index = indexes[key]
-  if (!index) {
-    indexes[key] = cozyClient.data.defineIndex(doctype, fields).then(index => {
-      indexes[key] = index
-      return index
-    })
-  }
-  return Promise.resolve(indexes[key])
-}
 
 // Attributes that will not be updated since the
 // user can change them
@@ -63,8 +50,8 @@ const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
 class Document {
   static registerClient(client) {
-    if (!cozyClient) {
-      cozyClient = client
+    if (!this.cozyClient) {
+      this.cozyClient = client
     } else {
       // eslint-disable-next-line no-console
       console.warn(
@@ -72,6 +59,20 @@ class Document {
       )
       throw new Error('Document cannot be re-registered to a client.')
     }
+  }
+
+  static getIndex(doctype, fields) {
+    const key = `${doctype}:${fields.slice().join(',')}`
+    const index = indexes[key]
+    if (!index) {
+      indexes[key] = this.cozyClient.data
+        .defineIndex(doctype, fields)
+        .then(index => {
+          indexes[key] = index
+          return index
+        })
+    }
+    return Promise.resolve(indexes[key])
   }
 
   static addCozyMetadata(attributes) {
@@ -98,12 +99,12 @@ class Document {
     let results = []
     const compactedSelector = withoutUndefined(selector)
     if (size(compactedSelector) === this.idAttributes.length) {
-      const index = await getIndex(this.doctype, this.idAttributes)
-      results = await cozyClient.data.query(index, { selector })
+      const index = await this.getIndex(this.doctype, this.idAttributes)
+      results = await this.cozyClient.data.query(index, { selector })
     }
 
     if (results.length === 0) {
-      return cozyClient.data.create(
+      return this.cozyClient.data.create(
         this.doctype,
         this.addCozyMetadata(attributes)
       )
@@ -122,7 +123,7 @@ class Document {
         // do not emit a mail for those attribute updates
         delete update.dateImport
 
-        return cozyClient.data.updateAttributes(
+        return this.cozyClient.data.updateAttributes(
           this.doctype,
           id,
           this.addCozyMetadata(update)
@@ -149,7 +150,7 @@ class Document {
   }
 
   static create(attributes) {
-    return cozyClient.data.create(this.doctype, attributes)
+    return this.cozyClient.data.create(this.doctype, attributes)
   }
 
   static bulkSave(documents, concurrency, logProgress) {
@@ -167,16 +168,12 @@ class Document {
   }
 
   static query(index, options) {
-    return cozyClient.data.query(index, options)
-  }
-
-  static getIndex(doctype, fields) {
-    return getIndex(doctype, fields)
+    return this.cozyClient.data.query(index, options)
   }
 
   static async fetchAll() {
     try {
-      const result = await cozyClient.fetchJSON(
+      const result = await this.cozyClient.fetchJSON(
         'GET',
         `/data/${this.doctype}/_all_docs?include_docs=true`
       )
@@ -197,7 +194,7 @@ class Document {
       return Promise.resolve([])
     }
     try {
-      const update = await cozyClient.fetchJSON(
+      const update = await this.cozyClient.fetchJSON(
         'POST',
         `/data/${this.doctype}/_bulk_docs`,
         {
@@ -283,7 +280,7 @@ class Document {
     if (options.params) {
       Object.assign(queryParams, options.params)
     }
-    const result = await cozyClient.fetchJSON(
+    const result = await this.cozyClient.fetchJSON(
       'GET',
       `/data/${this.doctype}/_changes?${querystring.stringify(queryParams)}`
     )
@@ -326,7 +323,7 @@ class Document {
     }
 
     if (!index) {
-      index = await cozyClient.data.defineIndex(
+      index = await this.cozyClient.data.defineIndex(
         this.doctype,
         Object.keys(selector)
       )
@@ -335,7 +332,7 @@ class Document {
     const result = []
     let resp = { next: true }
     while (resp && resp.next) {
-      resp = await cozyClient.data.query(index, {
+      resp = await this.cozyClient.data.query(index, {
         selector,
         wholeResponse: true,
         skip: result.length
@@ -353,7 +350,7 @@ class Document {
   static async getAll(ids) {
     let resp
     try {
-      resp = await cozyClient.fetchJSON(
+      resp = await this.cozyClient.fetchJSON(
         'POST',
         `/data/${this.doctype}/_all_docs?include_docs=true`,
         {
