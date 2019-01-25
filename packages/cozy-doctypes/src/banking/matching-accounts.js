@@ -108,6 +108,20 @@ const score = (account, existingAccount) => {
     points += 150
     methods.push('credit-card-number')
   }
+  if (account.currency) {
+    const sameCurrency =
+      (existingAccount.rawNumber &&
+        existingAccount.rawNumber.includes(account.currency)) ||
+      (existingAccount.label &&
+        existingAccount.label.includes(account.currency)) ||
+      (existingAccount.originalBankLabel &&
+        existingAccount.originalBankLabel.includes(account.currency))
+
+    if (sameCurrency) {
+      points += 50
+      methods.push('currency')
+    }
+  }
   res.points = points
   return res
 }
@@ -119,6 +133,7 @@ const normalizeAccount = account => {
   )
   return {
     ...account,
+    rawNumber: account.number,
     number: normalizedAccountNumber
   }
 }
