@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.29.0"></a>
+# [1.29.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.28.0...cozy-doctypes@1.29.0) (2019-01-25)
+
+
+### Features
+
+* **doctypes:** Sort snaps by date of op ([00a1eb1](https://github.com/cozy/cozy-libs/commit/00a1eb1))
+* **doctypes:** Test match creditcard transactions ([ae8bf55](https://github.com/cozy/cozy-libs/commit/ae8bf55))
+* **doctypes:** Use realisation date ([f5c2a86](https://github.com/cozy/cozy-libs/commit/f5c2a86))
+
+
+
+
 <a name="1.28.0"></a>
 # [1.28.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.27.0...cozy-doctypes@1.28.0) (2019-01-25)
 
