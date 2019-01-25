@@ -309,4 +309,19 @@ describe('Document', () => {
       expect(docs).toEqual([])
     })
   })
+
+  it('should be possible for a subclass to access to the registered cozyClient', () => {
+    class SubSimpson extends Simpson {
+      static fetch() {
+        this.cozyClient.fetchJSON('GET', '/data/io.cozy.simpsons/_all_docs')
+      }
+    }
+
+    SubSimpson.fetch()
+
+    expect(cozyClient.fetchJSON).toHaveBeenLastCalledWith(
+      'GET',
+      '/data/io.cozy.simpsons/_all_docs'
+    )
+  })
 })
