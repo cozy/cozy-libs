@@ -15,9 +15,14 @@ const findExactMatch = (attr, account, existingAccounts) => {
 }
 
 const untrimmedAccountNumber = /^(?:[A-Za-z]+)?-?([0-9]+)-?(?:[A-Za-z]+)?$/
+const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
 
 const normalizeAccountNumber = (number, iban) => {
-  iban = iban && iban.replace(' ', '')
+  iban = iban && iban.replace(/\s/g, '')
+  number =
+    number && !number.match(redactedCreditCard)
+      ? number.replace(/\s/g, '')
+      : number
   let match
   if (iban && iban.length == 27) {
     return iban.substr(14, 11)
@@ -64,7 +69,6 @@ const approxNumberMatch = (account, existingAccount) => {
   )
 }
 
-const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
 const creditCardMatch = (account, existingAccount) => {
   let ccAccount, lastDigits
   for (let acc of [account, existingAccount]) {
@@ -104,6 +108,20 @@ const score = (account, existingAccount) => {
     points += 150
     methods.push('credit-card-number')
   }
+  if (account.currency) {
+    const sameCurrency =
+      (existingAccount.rawNumber &&
+        existingAccount.rawNumber.includes(account.currency)) ||
+      (existingAccount.label &&
+        existingAccount.label.includes(account.currency)) ||
+      (existingAccount.originalBankLabel &&
+        existingAccount.originalBankLabel.includes(account.currency))
+
+    if (sameCurrency) {
+      points += 50
+      methods.push('currency')
+    }
+  }
   res.points = points
   return res
 }
@@ -115,6 +133,7 @@ const normalizeAccount = account => {
   )
   return {
     ...account,
+    rawNumber: account.number,
     number: normalizedAccountNumber
   }
 }
