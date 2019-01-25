@@ -15,9 +15,14 @@ const findExactMatch = (attr, account, existingAccounts) => {
 }
 
 const untrimmedAccountNumber = /^(?:[A-Za-z]+)?-?([0-9]+)-?(?:[A-Za-z]+)?$/
+const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
 
 const normalizeAccountNumber = (number, iban) => {
-  iban = iban && iban.replace(' ', '')
+  iban = iban && iban.replace(/\s/g, '')
+  number =
+    number && !number.match(redactedCreditCard)
+      ? number.replace(/\s/g, '')
+      : number
   let match
   if (iban && iban.length == 27) {
     return iban.substr(14, 11)
@@ -64,7 +69,6 @@ const approxNumberMatch = (account, existingAccount) => {
   )
 }
 
-const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
 const creditCardMatch = (account, existingAccount) => {
   let ccAccount, lastDigits
   for (let acc of [account, existingAccount]) {
