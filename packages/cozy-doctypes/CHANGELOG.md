@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.28.0"></a>
+# [1.28.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.27.0...cozy-doctypes@1.28.0) (2019-01-25)
+
+
+### Features
+
+* **doctypes:** Register client statically on Document ([cd284f7](https://github.com/cozy/cozy-libs/commit/cd284f7))
+
+
+
+
 <a name="1.27.0"></a>
 # [1.27.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.26.0...cozy-doctypes@1.27.0) (2019-01-24)
 
