@@ -1,18 +1,24 @@
 const fs = require('fs-extra')
 const path = require('path')
+const sortBy = require('lodash/sortBy')
 const { matchTransactions, scoreMatching } = require('./matching-transactions')
 
 const DOCTYPE_OPERATIONS = 'io.cozy.bank.operations'
 const readOperations = filename => fs.readJSONSync(filename)[DOCTYPE_OPERATIONS]
 
-const fmtMatchResult = result => {
+const getDisplayDate = result => {
   const date = result.transaction.date.substr(0, 10)
+  return date
+}
+
+const fmtMatchResult = result => {
+  const displayDate = getDisplayDate(result)
   if (result.match) {
-    return `✅ ${date}: ${result.transaction.label} (${
+    return `✅ ${displayDate}: ${result.transaction.label} (${
       result.transaction.amount
-    }) -> ${result.match.label} (${result.match.amount}) ${result.method}`
+    }) -> ${result.match.label} (${result.match.amount}) via ${result.method}`
   } else {
-    return `❌ ${date}: ${result.transaction.label} ${
+    return `❌ ${displayDate}: ${result.transaction.label} ${
       result.transaction.amount
     }`
   }
@@ -26,13 +32,20 @@ const fixturePath = path.join(__dirname, 'fixtures')
 const fnDescribe = fs.existsSync(fixturePath) ? describe : xdescribe
 
 fnDescribe('transactions matching', () => {
-  for (let bank of ['banquepostale', 'creditagricole', 'banquepopulaire']) {
+  for (let bank of [
+    'axa',
+    'banquepostale',
+    'creditagricole',
+    'banquepopulaire'
+  ]) {
     it(`should match snapshots for ${bank}`, () => {
       const results = matchFiles(
         path.join(fixturePath, `${bank}-transactions.bi.json`),
         path.join(fixturePath, `${bank}-transactions.linxo.json`)
       )
-      const fmtedResults = Array.from(results).map(fmtMatchResult)
+      const fmtedResults = sortBy(Array.from(results), getDisplayDate).map(
+        fmtMatchResult
+      )
       expect(fmtedResults).toMatchSnapshot()
     })
   }
