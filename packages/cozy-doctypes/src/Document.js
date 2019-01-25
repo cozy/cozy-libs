@@ -100,11 +100,11 @@ class Document {
     const compactedSelector = withoutUndefined(selector)
     if (size(compactedSelector) === this.idAttributes.length) {
       const index = await getIndex(this.doctype, this.idAttributes)
-      results = await cozyClient.data.query(index, { selector })
+      results = await this.cozyClient.data.query(index, { selector })
     }
 
     if (results.length === 0) {
-      return cozyClient.data.create(
+      return this.cozyClient.data.create(
         this.doctype,
         this.addCozyMetadata(attributes)
       )
@@ -123,7 +123,7 @@ class Document {
         // do not emit a mail for those attribute updates
         delete update.dateImport
 
-        return cozyClient.data.updateAttributes(
+        return this.cozyClient.data.updateAttributes(
           this.doctype,
           id,
           this.addCozyMetadata(update)
@@ -150,7 +150,7 @@ class Document {
   }
 
   static create(attributes) {
-    return cozyClient.data.create(this.doctype, attributes)
+    return this.cozyClient.data.create(this.doctype, attributes)
   }
 
   static bulkSave(documents, concurrency, logProgress) {
@@ -168,7 +168,7 @@ class Document {
   }
 
   static query(index, options) {
-    return cozyClient.data.query(index, options)
+    return this.cozyClient.data.query(index, options)
   }
 
   static getIndex(doctype, fields) {
@@ -177,7 +177,7 @@ class Document {
 
   static async fetchAll() {
     try {
-      const result = await cozyClient.fetchJSON(
+      const result = await this.cozyClient.fetchJSON(
         'GET',
         `/data/${this.doctype}/_all_docs?include_docs=true`
       )
@@ -198,7 +198,7 @@ class Document {
       return Promise.resolve([])
     }
     try {
-      const update = await cozyClient.fetchJSON(
+      const update = await this.cozyClient.fetchJSON(
         'POST',
         `/data/${this.doctype}/_bulk_docs`,
         {
@@ -284,7 +284,7 @@ class Document {
     if (options.params) {
       Object.assign(queryParams, options.params)
     }
-    const result = await cozyClient.fetchJSON(
+    const result = await this.cozyClient.fetchJSON(
       'GET',
       `/data/${this.doctype}/_changes?${querystring.stringify(queryParams)}`
     )
@@ -327,7 +327,7 @@ class Document {
     }
 
     if (!index) {
-      index = await cozyClient.data.defineIndex(
+      index = await this.cozyClient.data.defineIndex(
         this.doctype,
         Object.keys(selector)
       )
@@ -336,7 +336,7 @@ class Document {
     const result = []
     let resp = { next: true }
     while (resp && resp.next) {
-      resp = await cozyClient.data.query(index, {
+      resp = await this.cozyClient.data.query(index, {
         selector,
         wholeResponse: true,
         skip: result.length
@@ -354,7 +354,7 @@ class Document {
   static async getAll(ids) {
     let resp
     try {
-      resp = await cozyClient.fetchJSON(
+      resp = await this.cozyClient.fetchJSON(
         'POST',
         `/data/${this.doctype}/_all_docs?include_docs=true`,
         {
