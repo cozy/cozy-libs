@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.30.0"></a>
+# [1.30.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.29.0...cozy-doctypes@1.30.0) (2019-01-25)
+
+
+### Features
+
+* Add currency matching method ([c5c1322](https://github.com/cozy/cozy-libs/commit/c5c1322))
+* Add Milleis account matching ([be2d7e2](https://github.com/cozy/cozy-libs/commit/be2d7e2))
+* Remove spaces from number if not credit card ([4aad37d](https://github.com/cozy/cozy-libs/commit/4aad37d))
+
+
+
+
 <a name="1.29.0"></a>
 # [1.29.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.28.0...cozy-doctypes@1.29.0) (2019-01-25)
 
