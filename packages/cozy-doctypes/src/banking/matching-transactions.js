@@ -42,10 +42,15 @@ const scoreLabel = (newTr, existingTr) => {
     return [150, 'originalBankLabelWithoutDate']
   } else if (existingTr.label === newTr.label) {
     return [100, 'label']
-  } else if (eitherIncludes(existingTr.label, newTr.label)) {
+  } else if (
+    eitherIncludes(existingTr.label.toLowerCase(), newTr.label.toLowerCase())
+  ) {
     return [70, 'eitherIncludes']
   } else if (
-    eitherIncludes(cleanLabel(existingTr.label), cleanLabel(newTr.label))
+    eitherIncludes(
+      cleanLabel(existingTr.label.toLowerCase()),
+      cleanLabel(newTr.label.toLowerCase())
+    )
   ) {
     return [50, 'fuzzy-eitherIncludes']
   } else {

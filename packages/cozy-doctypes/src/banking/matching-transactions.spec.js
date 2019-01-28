@@ -36,7 +36,8 @@ fnDescribe('transactions matching', () => {
     'axa',
     'banquepostale',
     'creditagricole',
-    'banquepopulaire'
+    'banquepopulaire',
+    'fortuneo'
   ]) {
     it(`should match snapshots for ${bank}`, () => {
       const results = matchFiles(
