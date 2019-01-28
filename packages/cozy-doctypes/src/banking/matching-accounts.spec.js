@@ -31,6 +31,7 @@ fnDescribe('account matching', () => {
     'hellobank',
     'bnp',
     'hsbc',
+    'hsbc2',
     'creditmutuel',
     'banquepostale',
     'milleis'
