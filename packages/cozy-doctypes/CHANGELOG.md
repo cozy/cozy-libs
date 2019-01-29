@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.32.0"></a>
+# [1.32.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.31.0...cozy-doctypes@1.32.0) (2019-01-29)
+
+
+### Features
+
+* Bank transaction send its event directly without delegating ([63cf5a8](https://github.com/cozy/cozy-libs/commit/63cf5a8))
+* TrackEvent option is used to send splitDate event ([c242526](https://github.com/cozy/cozy-libs/commit/c242526))
+
+
+
+
 <a name="1.31.0"></a>
 # [1.31.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.30.0...cozy-doctypes@1.31.0) (2019-01-28)
 
