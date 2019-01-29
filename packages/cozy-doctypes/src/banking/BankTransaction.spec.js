@@ -24,7 +24,7 @@ describe('getIdentifier', () => {
   })
 })
 
-describe('getMissedTransactions', () => {
+describe('reconciliation', () => {
   const existingTransactions = [
     {
       amount: -10,
@@ -65,28 +65,6 @@ describe('getMissedTransactions', () => {
     expect(missedTransactions).toEqual([newTransactions[1]])
   })
 
-  xit('should return transactions with an already existing identifier, if there are more new than existing', () => {
-    const newTransactions = [
-      {
-        amount: -10,
-        originalBankLabel: 'Test 01',
-        date: '2018-10-02'
-      },
-      {
-        amount: -10,
-        originalBankLabel: 'Test 01',
-        date: '2018-10-02'
-      }
-    ]
-
-    const missedTransactions = BankTransaction.getMissedTransactions(
-      newTransactions,
-      existingTransactions
-    )
-
-    expect(missedTransactions).toEqual([newTransactions[1]])
-  })
-
   it('should return an empty array when there is no missed transaction', () => {
     const newTransactions = [
       {
@@ -104,7 +82,7 @@ describe('getMissedTransactions', () => {
     expect(missedTransactions).toHaveLength(0)
   })
 
-  xit('should call the given onMissedTransactionsFound option', () => {
+  it('should send events if trackEvent option is set', () => {
     const newTransactions = [
       {
         amount: -15,
@@ -113,14 +91,39 @@ describe('getMissedTransactions', () => {
       }
     ]
 
-    const onMissedTransactionsFound = jest.fn()
+    const trackEvent = jest.fn()
     BankTransaction.getMissedTransactions(
       newTransactions,
       existingTransactions,
-      { onMissedTransactionsFound }
+      { trackEvent }
     )
+    expect(trackEvent).toHaveBeenCalledWith({
+      e_a: 'ReconciliateMissing',
+      e_n: 'MissedTransactionPct',
+      e_v: 0.33
+    })
+    expect(trackEvent).toHaveBeenCalledWith({
+      e_a: 'ReconciliateMissing',
+      e_n: 'MissedTransactionAbs',
+      e_v: 1
+    })
+  })
 
-    expect(onMissedTransactionsFound).toHaveBeenCalledTimes(1)
-    expect(onMissedTransactionsFound).toHaveBeenCalledWith(1, 0)
+  it('should send event for split date', () => {
+    const newTransactions = [
+      {
+        amount: -15,
+        originalBankLabel: 'Test 04',
+        date: '2018-10-01'
+      }
+    ]
+
+    const trackEvent = jest.fn()
+    BankTransaction.reconciliate(newTransactions, existingTransactions, {
+      trackEvent
+    })
+    expect(trackEvent).toHaveBeenCalledWith({
+      e_a: 'ReconciliateSplitDate'
+    })
   })
 })

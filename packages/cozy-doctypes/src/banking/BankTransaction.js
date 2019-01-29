@@ -82,7 +82,11 @@ class Transaction extends Document {
    * @param {array} stackTransactions
    * @returns {array}
    */
-  static getMissedTransactions(transactionsToCheck, stackTransactions) {
+  static getMissedTransactions(
+    transactionsToCheck,
+    stackTransactions,
+    options = {}
+  ) {
     const matchingResults = Array.from(
       matchTransactions(transactionsToCheck, stackTransactions)
     )
@@ -90,6 +94,26 @@ class Transaction extends Document {
     const missedTransactions = matchingResults
       .filter(result => !result.match)
       .map(result => result.transaction)
+
+    const trackEvent = options.trackEvent
+    if (typeof trackEvent === 'function') {
+      try {
+        const nbMissed = missedTransactions.length
+        const nbExisting = stackTransactions.length
+        trackEvent({
+          e_a: 'ReconciliateMissing',
+          e_n: 'MissedTransactionPct',
+          e_v: parseFloat((nbMissed / nbExisting).toFixed(2), 10)
+        })
+        trackEvent({
+          e_a: 'ReconciliateMissing',
+          e_n: 'MissedTransactionAbs',
+          e_v: nbMissed
+        })
+      } catch (e) {
+        log('warn', `Could not send MissedTransaction event: ${e.message}`)
+      }
+    }
 
     return missedTransactions
   }
@@ -110,8 +134,10 @@ class Transaction extends Document {
     const splitDate = getSplitDate(localTransactions)
 
     if (splitDate) {
-      if (options.onSplitDate) {
-        options.onSplitDate()
+      if (typeof options.trackEvent === 'function') {
+        options.trackEvent({
+          e_a: 'ReconciliateSplitDate'
+        })
       }
 
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
