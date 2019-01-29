@@ -109,4 +109,21 @@ describe('reconciliation', () => {
     })
   })
 
+  it('should send event for split date', () => {
+    const newTransactions = [
+      {
+        amount: -15,
+        originalBankLabel: 'Test 04',
+        date: '2018-10-01'
+      }
+    ]
+
+    const trackEvent = jest.fn()
+    BankTransaction.reconciliate(newTransactions, existingTransactions, {
+      trackEvent
+    })
+    expect(trackEvent).toHaveBeenCalledWith({
+      e_a: 'ReconciliateSplitDate'
+    })
+  })
 })

@@ -134,8 +134,10 @@ class Transaction extends Document {
     const splitDate = getSplitDate(localTransactions)
 
     if (splitDate) {
-      if (options.onSplitDate) {
-        options.onSplitDate()
+      if (typeof options.trackEvent === 'function') {
+        options.trackEvent({
+          e_a: 'ReconciliateSplitDate'
+        })
       }
 
       const isAfterSplit = x => Transaction.prototype.isAfter.call(x, splitDate)
