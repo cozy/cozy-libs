@@ -1,8 +1,8 @@
 /* global WebSocket */
 
-// Custom object wrapping logic to websocket and exposing a subscription
-// interface
-let cozySocket
+// cozySocket is a custom object wrapping logic to websocket and exposing a subscription
+// interface, here we store its promise
+let cozySocketPromise
 
 // Important, must match the spec,
 // see https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
@@ -157,8 +157,6 @@ async function connectWebSocket(
 
 function getCozySocket(config) {
   return new Promise(async (resolve, reject) => {
-    if (cozySocket) return resolve(cozySocket)
-
     const listeners = {}
 
     let socket
@@ -229,7 +227,7 @@ function getCozySocket(config) {
       reject(error)
     }
 
-    cozySocket = {
+    resolve({
       subscribe: (doctype, event, listener) => {
         if (typeof listener !== 'function')
           throw new Error('Realtime event listener must be a function')
@@ -254,9 +252,7 @@ function getCozySocket(config) {
           )
         }
       }
-    }
-
-    resolve(cozySocket)
+    })
   })
 }
 
@@ -282,7 +278,8 @@ export function subscribe(config, doctype, doc, parse = doc => doc) {
 
 // Returns the Promise of a subscription to a given doctype (all documents)
 export function subscribeAll(config, doctype, parse = doc => doc) {
-  return getCozySocket(config).then(cozySocket => {
+  if (!cozySocketPromise) cozySocketPromise = getCozySocket(config)
+  return cozySocketPromise.then(cozySocket => {
     // Some document need to have specific parsing, for example, decoding
     // base64 encoded properties
     const parseCurried = listener => {
