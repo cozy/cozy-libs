@@ -21,7 +21,7 @@ const squash = (str, char) => {
   return str && str.replace(rx, char)
 }
 
-const redactedNumber = /\b[0-9X]+\b/g
+const redactedNumber = /\b[0-9X]+\b/gi
 const dateRx = /\b\d{2}\/\d{2}\/\d{4}\b/g
 
 const cleanLabel = label => label.replace(redactedNumber, '')
