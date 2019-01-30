@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.32.1"></a>
+## [1.32.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.0...cozy-doctypes@1.32.1) (2019-01-30)
+
+
+### Bug Fixes
+
+* Ignore case when matching redacted number ([b812be0](https://github.com/cozy/cozy-libs/commit/b812be0))
+
+
+
+
 <a name="1.32.0"></a>
 # [1.32.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.31.0...cozy-doctypes@1.32.0) (2019-01-29)
 
