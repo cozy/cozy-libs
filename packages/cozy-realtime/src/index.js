@@ -257,64 +257,62 @@ function getCozySocket(config) {
 }
 
 // Returns the Promise of a subscription to a given doctype and document
-export function subscribe(config, doctype, doc, parse = doc => doc) {
-  return subscribeAll(config, doctype, parse).then(subscription => {
-    // We will call the listener only for the given document, so let's curry it
-    const docListenerCurried = listener => {
-      return syncedDoc => {
-        if (syncedDoc._id === doc._id) {
-          listener(syncedDoc)
-        }
+export async function subscribe(config, doctype, doc, parse = doc => doc) {
+  const subscription = await subscribeAll(config, doctype, parse)
+  // We will call the listener only for the given document, so let's curry it
+  const docListenerCurried = listener => {
+    return syncedDoc => {
+      if (syncedDoc._id === doc._id) {
+        listener(syncedDoc)
       }
     }
+  }
 
-    return {
-      onUpdate: listener => subscription.onUpdate(docListenerCurried(listener)),
-      onDelete: listener => subscription.onDelete(docListenerCurried(listener)),
-      unsubscribe: () => subscription.unsubscribe()
-    }
-  })
+  return {
+    onUpdate: listener => subscription.onUpdate(docListenerCurried(listener)),
+    onDelete: listener => subscription.onDelete(docListenerCurried(listener)),
+    unsubscribe: () => subscription.unsubscribe()
+  }
 }
 
 // Returns the Promise of a subscription to a given doctype (all documents)
-export function subscribeAll(config, doctype, parse = doc => doc) {
+export async function subscribeAll(config, doctype, parse = doc => doc) {
   if (!cozySocketPromise) cozySocketPromise = getCozySocket(config)
-  return cozySocketPromise.then(cozySocket => {
-    // Some document need to have specific parsing, for example, decoding
-    // base64 encoded properties
-    const parseCurried = listener => {
-      return doc => {
-        listener(parse(doc))
-      }
+  const cozySocket = await cozySocketPromise
+  // Some document need to have specific parsing, for example, decoding
+  // base64 encoded properties
+  const parseCurried = listener => {
+    return doc => {
+      listener(parse(doc))
     }
+  }
 
-    let createListener, updateListener, deleteListener
+  let createListener, updateListener, deleteListener
 
-    const subscription = {
-      onCreate: listener => {
-        createListener = parseCurried(listener)
-        cozySocket.subscribe(doctype, 'created', createListener)
-        return subscription
-      },
-      onUpdate: listener => {
-        updateListener = parseCurried(listener)
-        cozySocket.subscribe(doctype, 'updated', updateListener)
-        return subscription
-      },
-      onDelete: listener => {
-        deleteListener = parseCurried(listener)
-        cozySocket.subscribe(doctype, 'deleted', deleteListener)
-        return subscription
-      },
-      unsubscribe: () => {
-        cozySocket.unsubscribe(doctype, 'created', createListener)
-        cozySocket.unsubscribe(doctype, 'updated', updateListener)
-        cozySocket.unsubscribe(doctype, 'deleted', deleteListener)
-      }
+  const subscription = {
+    onCreate: listener => {
+      createListener = parseCurried(listener)
+      cozySocket.subscribe(doctype, 'created', createListener)
+      return subscription
+    },
+    onUpdate: listener => {
+      updateListener = parseCurried(listener)
+      cozySocket.subscribe(doctype, 'updated', updateListener)
+      return subscription
+    },
+    onDelete: listener => {
+      deleteListener = parseCurried(listener)
+      cozySocket.subscribe(doctype, 'deleted', deleteListener)
+      return subscription
+    },
+    unsubscribe: () => {
+      cozySocket.unsubscribe(doctype, 'created', createListener)
+      cozySocket.unsubscribe(doctype, 'updated', updateListener)
+      cozySocket.unsubscribe(doctype, 'deleted', deleteListener)
     }
+  }
 
-    return subscription
-  })
+  return subscription
 }
 
 export default {
