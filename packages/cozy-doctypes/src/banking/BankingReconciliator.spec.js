@@ -80,11 +80,9 @@ describe('banking reconciliator', () => {
           label: 'Bank account 1'
         },
         {
-          number: '1', // existing account
-          vendorId: 2, // from a new connector account
-          balance: 1000,
-          // Not the same label as the existing one, will be saved too
-          // since the reconciliationKey is based on number AND label
+          number: '1', // Same number as above, but the existing account
+          vendorId: 2, // has already been matched, so this account
+          balance: 1000, // will be saved
           label: 'Bank account 1 - Titres'
         }
       ],
