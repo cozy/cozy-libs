@@ -13,6 +13,10 @@ const WEBSOCKET_STATE = {
 const NUM_RETRIES = 3
 const RETRY_BASE_DELAY = 1000
 
+// stored subscriptions arguments to rerun while a retry
+// stored as a Map { [doctype]: socket }
+let subscriptionsState = new Set()
+
 // Send a subscribe message for the given doctype trough the given websocket, but
 // only if it is in a ready state. If not, retry a few milliseconds later.
 function subscribeWhenReady(doctype, socket) {
@@ -104,7 +108,8 @@ async function connectWebSocket(
   onmessage,
   onclose,
   numRetries,
-  retryDelay
+  retryDelay,
+  isRetry
 ) {
   validateConfig(config)
   return new Promise((resolve, reject) => {
@@ -149,6 +154,12 @@ async function connectWebSocket(
       socket.onerror = error =>
         // eslint-disable-next-line no-console
         console.error(`WebSocket error: ${error.message}`)
+
+      if (isRetry && subscriptionsState.size) {
+        for (let doctype of subscriptionsState) {
+          subscribeWhenReady(doctype, socket)
+        }
+      }
 
       resolve(socket)
     }
@@ -202,7 +213,8 @@ function getCozySocket(config) {
                 onSocketMessage,
                 onSocketClose,
                 --numRetries,
-                retryDelay + 1000
+                retryDelay + 1000,
+                true
               )
             } catch (error) {
               // eslint-disable-next-line no-console
@@ -240,6 +252,10 @@ function getCozySocket(config) {
         listeners[doctype][event] = (listeners[doctype][event] || []).concat([
           listener
         ])
+
+        if (!subscriptionsState.has(doctype)) {
+          subscriptionsState.add(doctype)
+        }
       },
       unsubscribe: (doctype, event, listener) => {
         if (
@@ -250,6 +266,9 @@ function getCozySocket(config) {
           listeners[doctype][event] = listeners[doctype][event].filter(
             l => l !== listener
           )
+        }
+        if (subscriptionsState.has(doctype)) {
+          subscriptionsState.delete(doctype)
         }
       }
     })
