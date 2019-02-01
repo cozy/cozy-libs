@@ -21,7 +21,12 @@ export const getSubscriptionsState = () => subscriptionsState
 
 // Send a subscribe message for the given doctype trough the given websocket, but
 // only if it is in a ready state. If not, retry a few milliseconds later.
-function subscribeWhenReady(doctype, socket) {
+const MAX_SOCKET_POLLS = 500 // to avoid infinite poling
+export function subscribeWhenReady(
+  doctype,
+  socket,
+  remainedTries = MAX_SOCKET_POLLS
+) {
   if (socket.readyState === WEBSOCKET_STATE.OPEN) {
     try {
       socket.send(
@@ -37,9 +42,16 @@ function subscribeWhenReady(doctype, socket) {
       throw error
     }
   } else {
-    setTimeout(() => {
-      subscribeWhenReady(doctype, socket)
-    }, 10)
+    // no retries remaining
+    if (!remainedTries) {
+      const error = new Error('socket failed to connect')
+      console.warn(`Cannot subscribe to doctype ${doctype}: ${error.message}`)
+      throw error
+    } else {
+      setTimeout(() => {
+        subscribeWhenReady(doctype, socket, --remainedTries)
+      }, 10)
+    }
   }
 }
 

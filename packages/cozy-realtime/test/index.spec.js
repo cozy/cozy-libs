@@ -1,4 +1,5 @@
 import cozySocketTests from './cozySocketTests'
+import subscribeTests from './subscribeTests'
 
 describe('cozy-realtime lib: ', () => {
   beforeEach(() => {
@@ -6,4 +7,5 @@ describe('cozy-realtime lib: ', () => {
     jest.resetModules()
   })
   describe('cozySocket handling and getCozySocket: ', cozySocketTests)
+  describe('subscribeWhenReady: ', subscribeTests)
 })

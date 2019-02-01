@@ -40,3 +40,16 @@ Object {
 exports[`cozy-realtime lib:  cozySocket handling and getCozySocket:  onSocketClose provided by getCozySocket to connectWebSocket should handle error from a retry connectWebSocket with an error message 1`] = `"Unable to reconnect to realtime. Error: expected socket retry error"`;
 
 exports[`cozy-realtime lib:  cozySocket handling and getCozySocket:  onSocketMessage provided by getCozySocket to connectWebSocket should throw error if eventType error 1`] = `"expected realtime error"`;
+
+exports[`cozy-realtime lib:  subscribeWhenReady:  subscribeWhenReady should retries a provided max number times and throw error if still not opened 1`] = `"socket failed to connect"`;
+
+exports[`cozy-realtime lib:  subscribeWhenReady:  subscribeWhenReady should send the correct socket message if socket opened 1`] = `
+Object {
+  "method": "SUBSCRIBE",
+  "payload": Object {
+    "type": "io.cozy.mocks",
+  },
+}
+`;
+
+exports[`cozy-realtime lib:  subscribeWhenReady:  subscribeWhenReady should throw error + warn if message sent with error 1`] = `"Cannot subscribe to doctype io.cozy.mocks: expected socket send error"`;
