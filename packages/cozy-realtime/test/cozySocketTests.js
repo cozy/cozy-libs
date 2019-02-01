@@ -213,7 +213,6 @@ export default () => {
     const onSocketClose = mockConnect.mock.calls[0][2]
     // reset the mock state to remove the getCozySocket usage
     mockConnect.mockReset()
-    /* eslint-disable no-console */
     console.warn = jest.fn()
     onSocketClose({
       wasClean: false,
@@ -227,7 +226,6 @@ export default () => {
     expect(console.warn.mock.calls.length).toBe(2)
     expect(mockConnect.mock.calls.length).toBe(0)
     console.warn.mockRestore()
-    /* eslint-enable no-console */
   })
 
   it('onSocketClose provided by getCozySocket to connectWebSocket should retry according to retries provided and !event.wasClean', async () => {
@@ -287,7 +285,6 @@ export default () => {
     })
     __RewireAPI__.__Rewire__('connectWebSocket', mockConnectWithError)
     jest.useFakeTimers()
-    /* eslint-disable no-console */
     console.error = jest.fn()
     expect(() => {
       onSocketClose(
@@ -305,6 +302,5 @@ export default () => {
     expect(console.error.mock.calls.length).toBe(1)
     expect(console.error.mock.calls[0][0]).toMatchSnapshot()
     console.error.mockRestore()
-    /* eslint-enable no-console */
   })
 }

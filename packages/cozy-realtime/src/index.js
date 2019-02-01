@@ -33,7 +33,6 @@ function subscribeWhenReady(doctype, socket) {
         })
       )
     } catch (error) {
-      // eslint-disable-next-line no-console
       console.warn(`Cannot subscribe to doctype ${doctype}: ${error.message}`)
       throw error
     }
@@ -53,7 +52,6 @@ function getDomainFromUrl(url) {
   try {
     return new URL(url).host
   } catch (error) {
-    // eslint-disable-next-line no-console
     console.warn(`Cannot get domain from URL : ${error.message}`)
     return null
   }
@@ -154,7 +152,6 @@ async function connectWebSocket(
           onclose(event, numRetries, retryDelay)
       }
       socket.onerror = error =>
-        // eslint-disable-next-line no-console
         console.error(`WebSocket error: ${error.message}`)
 
       if (isRetry && subscriptionsState.size) {
@@ -198,7 +195,6 @@ export function getCozySocket(config) {
 
     const onSocketClose = async (event, numRetries, retryDelay) => {
       if (!event.wasClean) {
-        // eslint-disable-next-line no-console
         console.warn(
           `WebSocket closed unexpectedly with code ${event.code} and ${
             event.reason ? `reason: '${event.reason}'` : 'no reason'
@@ -206,7 +202,6 @@ export function getCozySocket(config) {
         )
 
         if (numRetries) {
-          // eslint-disable-next-line no-console
           console.warn(`Reconnecting ... ${numRetries} tries left.`)
           setTimeout(async () => {
             try {
@@ -219,7 +214,6 @@ export function getCozySocket(config) {
                 true
               )
             } catch (error) {
-              // eslint-disable-next-line no-console
               console.error(
                 `Unable to reconnect to realtime. Error: ${error.message}`
               )
