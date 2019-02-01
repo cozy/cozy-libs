@@ -17,6 +17,8 @@ const RETRY_BASE_DELAY = 1000
 // stored as a Map { [doctype]: socket }
 let subscriptionsState = new Set()
 
+export const getSubscriptionsState = () => subscriptionsState
+
 // Send a subscribe message for the given doctype trough the given websocket, but
 // only if it is in a ready state. If not, retry a few milliseconds later.
 function subscribeWhenReady(doctype, socket) {
@@ -166,7 +168,7 @@ async function connectWebSocket(
   })
 }
 
-function getCozySocket(config) {
+export function getCozySocket(config) {
   return new Promise(async (resolve, reject) => {
     const listeners = {}
 
