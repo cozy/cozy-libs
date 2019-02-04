@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`(cozy-realtime) API:  subscribe: should return a subscription with correct properties 1`] = `
+Object {
+  "onDelete": [Function],
+  "onUpdate": [Function],
+  "unsubscribe": [Function],
+}
+`;
+
+exports[`(cozy-realtime) API:  subscribe: should unsubscribe all events on unsubscribe call 1`] = `
+Array [
+  Array [
+    "io.cozy.mocks",
+    "created",
+    undefined,
+  ],
+  Array [
+    "io.cozy.mocks",
+    "updated",
+    undefined,
+  ],
+  Array [
+    "io.cozy.mocks",
+    "deleted",
+    undefined,
+  ],
+]
+`;
+
+exports[`(cozy-realtime) API:  subscribeAll: should return a subscription with correct properties 1`] = `
+Object {
+  "onCreate": [Function],
+  "onDelete": [Function],
+  "onUpdate": [Function],
+  "unsubscribe": [Function],
+}
+`;
+
+exports[`(cozy-realtime) API:  subscribeAll: should unsubscribe all events on unsubscribe call 1`] = `
+Array [
+  Array [
+    "io.cozy.mocks",
+    "created",
+    undefined,
+  ],
+  Array [
+    "io.cozy.mocks",
+    "updated",
+    undefined,
+  ],
+  Array [
+    "io.cozy.mocks",
+    "deleted",
+    undefined,
+  ],
+]
+`;
