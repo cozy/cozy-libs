@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TriggerManager handleAccountCreationSuccess should render TriggerSuccessMessage 1`] = `
+<Wrapper
+  onDone={[MockFunction]}
+/>
+`;
+
+exports[`TriggerManager should render AccountCreator 1`] = `
+<WithMutations(AccountCreator)
+  konnector={
+    Object {
+      "slug": "konnectest",
+    }
+  }
+  onBeforeCreate={[Function]}
+  onCreateSuccess={[Function]}
+  submitting={false}
+/>
+`;
+
+exports[`TriggerManager should render AccountEditor 1`] = `
+<WithMutations(AccountEditor)
+  account={
+    Object {
+      "_id": "a87f9a8bd3884479a48811e7b7deec75",
+      "account_type": "konnectest",
+      "auth": Object {
+        "passphrase": "bar",
+        "username": "foo",
+      },
+    }
+  }
+  konnector={
+    Object {
+      "slug": "konnectest",
+    }
+  }
+  onBeforeUpdate={[Function]}
+  onUpdateSuccess={[Function]}
+/>
+`;

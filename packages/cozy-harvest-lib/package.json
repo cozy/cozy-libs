@@ -22,6 +22,8 @@
     "watch": "babel src -d dist --copy-files --watch"
   },
   "dependencies": {
+    "cozy-client": "6.3.0",
+    "cozy-realtime": "1.2.8",
     "cozy-ui": "18.12.0",
     "final-form": "4.11.0",
     "lodash": "4.17.11",
