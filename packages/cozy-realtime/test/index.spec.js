@@ -1,5 +1,6 @@
 import cozySocketTests from './cozySocketTests'
 import subscribeTests from './subscribeTests'
+import connectWebSocketTests from './connectWebSocketTests'
 
 describe('cozy-realtime lib: ', () => {
   beforeEach(() => {
@@ -8,4 +9,5 @@ describe('cozy-realtime lib: ', () => {
   })
   describe('cozySocket handling and getCozySocket: ', cozySocketTests)
   describe('subscribeWhenReady: ', subscribeTests)
+  describe('connectWebSocket: ', connectWebSocketTests)
 })

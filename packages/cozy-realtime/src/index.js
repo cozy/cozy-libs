@@ -60,15 +60,6 @@ function isSecureURL(url) {
   return url.match(httpsRegexp)
 }
 
-function getDomainFromUrl(url) {
-  try {
-    return new URL(url).host
-  } catch (error) {
-    console.warn(`Cannot get domain from URL : ${error.message}`)
-    return null
-  }
-}
-
 const isBoolean = [
   bool => typeof bool === 'undefined' || typeof bool === 'boolean',
   'should be a boolean'
@@ -130,7 +121,7 @@ export function connectWebSocket(
   }
 
   const protocol = options.secure ? 'wss:' : 'ws:'
-  const domain = options.domain || getDomainFromUrl(options.url)
+  const domain = options.domain || new URL(options.url).host
 
   if (!domain) {
     throw new Error('Unable to detect domain')
