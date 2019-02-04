@@ -11,7 +11,7 @@ export default () => {
     __RewireAPI__.__ResetDependency__('subscribeWhenReady')
   })
 
-  it('subscribeWhenReady should retries a provided max number times if socket not opened', async () => {
+  it('subscribeWhenReady should retries a provided max number times if socket not opened', () => {
     const maxRetries = 10
     const mockSocket = {
       readyState: 0, // code CONNECTING !== OPEN (code 0)
@@ -33,7 +33,7 @@ export default () => {
     expect(mockSubscribe.mock.calls.length).toBe(maxRetries + 1)
   })
 
-  it('subscribeWhenReady should retries a provided max number times and throw error if still not opened', async () => {
+  it('subscribeWhenReady should retries a provided max number times and throw error if still not opened', () => {
     const maxRetries = 10
     const mockSocket = {
       readyState: 0, // code CONNECTING !== OPEN (code 0)
@@ -51,7 +51,7 @@ export default () => {
     expect(mockSubscribe.mock.calls.length).toBe(maxRetries + 1)
   })
 
-  it('subscribeWhenReady should send the correct socket message if socket opened', async () => {
+  it('subscribeWhenReady should send the correct socket message if socket opened', () => {
     const maxRetries = 10
     const mockSocket = {
       readyState: 1,
@@ -69,7 +69,7 @@ export default () => {
     expect(JSON.parse(mockSocket.send.mock.calls[0][0])).toMatchSnapshot()
   })
 
-  it('subscribeWhenReady should throw error + warn if message sent with error', async () => {
+  it('subscribeWhenReady should throw error + warn if message sent with error', () => {
     const maxRetries = 10
     const sendError = new Error('expected socket send error')
     const mockSocket = {
