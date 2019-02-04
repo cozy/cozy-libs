@@ -6,14 +6,11 @@ const MOCK_SERVER_DOMAIN = 'localhost:8880'
 
 const REALTIME_URL = `ws://${MOCK_SERVER_DOMAIN}/realtime/`
 
-// const mockServer = new Server(`ws://${MOCK_SERVER_DOMAIN}/realtime/`)
-
-let mockSubscribe
 let server
-export default () => {
+let mockSubscribe = jest.fn()
+describe('(cozy-realtime) connectWebSocket: ', () => {
   beforeEach(() => {
-    jest.resetAllMocks()
-    mockSubscribe = jest.fn()
+    jest.clearAllMocks()
     __RewireAPI__.__Rewire__('subscribeWhenReady', mockSubscribe)
     server = new Server(REALTIME_URL)
     server.on('connection', socket => {
@@ -263,4 +260,4 @@ export default () => {
     connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
     expect(mockSubscribe.mock.calls.length).toBe(0)
   })
-}
+})

@@ -1,0 +1,42 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  cozySocket should not send socket message and add state multiple times if this is the same doctype 1`] = `
+Set {
+  "io.cozy.mocks",
+}
+`;
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  cozySocket should send socket message and add state multiple times if this is the different doctypes 1`] = `
+Set {
+  "io.cozy.mocks",
+  "io.cozy.mocks2",
+  "io.cozy.mocks3",
+}
+`;
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  cozySocket should throw an error if the listener provided is not a function 1`] = `"Realtime event listener must be a function"`;
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  getCozySocket should call connectWebSocket with correct config and arguments 1`] = `
+Array [
+  Object {
+    "domain": "cozy.tools:8080",
+    "secure": false,
+    "token": "blablablatoken",
+  },
+  [Function],
+  [Function],
+  3,
+  1000,
+]
+`;
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  getCozySocket should return a configured cozy socket 1`] = `
+Object {
+  "subscribe": [Function],
+  "unsubscribe": [Function],
+}
+`;
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  onSocketClose provided by getCozySocket to connectWebSocket should handle error from a retry connectWebSocket with an error message 1`] = `"Unable to reconnect to realtime. Error: expected socket retry error"`;
+
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  onSocketMessage provided by getCozySocket to connectWebSocket should throw error if eventType error 1`] = `"expected realtime error"`;

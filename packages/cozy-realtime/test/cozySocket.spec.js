@@ -6,13 +6,12 @@ const mockConfig = {
   token: 'blablablatoken'
 }
 
-export default () => {
+describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   let mockConnect = jest.fn()
   let mockSendSubscribe = jest.fn()
 
   beforeEach(() => {
-    jest.resetAllMocks()
-    jest.resetModules()
+    jest.clearAllMocks()
     // rewire the internal functions usage
     __RewireAPI__.__Rewire__('connectWebSocket', mockConnect)
     __RewireAPI__.__Rewire__('subscribeWhenReady', mockSendSubscribe)
@@ -305,4 +304,4 @@ export default () => {
     expect(console.error.mock.calls[0][0]).toMatchSnapshot()
     console.error.mockRestore()
   })
-}
+})
