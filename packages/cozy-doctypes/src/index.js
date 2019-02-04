@@ -1,16 +1,20 @@
+const Account = require('./Account')
 const Application = require('./Application')
 const Document = require('./Document')
-const BankAccount = require('./banking/BankAccount')
-const BankTransaction = require('./banking/BankTransaction')
 const BalanceHistory = require('./banking/BalanceHistory')
+const BankAccount = require('./banking/BankAccount')
 const BankingReconciliator = require('./banking/BankingReconciliator')
+const BankTransaction = require('./banking/BankTransaction')
+const Permission = require('./Permission')
 
 module.exports = {
+  Account,
   Application,
   Document,
-  BankTransaction,
-  BankAccount,
   BalanceHistory,
+  BankAccount,
   BankingReconciliator,
-  registerClient: Document.registerClient
+  BankTransaction,
+  registerClient: Document.registerClient,
+  Permission
 }
