@@ -12,13 +12,16 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
   })
 
   it('should retries a provided max number times if socket not opened', () => {
+    // decrease the max retries for the test
     const maxRetries = 10
+    __RewireAPI__.__Rewire__('MAX_SOCKET_POLLS', maxRetries)
+
     const mockSocket = {
       readyState: 0, // code CONNECTING !== OPEN (code 0)
       send: jest.fn()
     }
     jest.useFakeTimers()
-    mockSubscribe('io.cozy.mocks', mockSocket, maxRetries)
+    mockSubscribe('io.cozy.mocks', mockSocket)
     // we run pending timers for a number less one
     Array.apply(null, { length: maxRetries - 1 }).forEach(() => {
       jest.runOnlyPendingTimers()
@@ -31,6 +34,8 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
     jest.runOnlyPendingTimers()
     // maxRetries + the first subscribeWhenReady call
     expect(mockSubscribe.mock.calls.length).toBe(maxRetries + 1)
+
+    __RewireAPI__.__ResetDependency__('MAX_SOCKET_POLLS')
   })
 
   it('should retries a provided max number times and throw error if still not opened', () => {
