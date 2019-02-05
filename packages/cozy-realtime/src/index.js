@@ -27,19 +27,20 @@ const getListenerKey = (doctype, docId) =>
 const getTypeAndIdFromListenerKey = listenerKey => {
   const splitResult = listenerKey.split(LISTENER_KEY_SEPARATOR)
   return {
-    doctype: splitResult[0],
-    docId: splitResult.length > 1 ? splitResult[1] : null
+    doctype: splitResult.shift(),
+    // if there still are some lements, this is the doc id
+    docId: splitResult.length ? splitResult.join(LISTENER_KEY_SEPARATOR) : null
   }
 }
 
 // Send a subscribe message for the given doctype trough the given websocket, but
 // only if it is in a ready state. If not, retry a few milliseconds later.
-const MAX_SOCKET_POLLS = 500 // to avoid infinite poling
+const MAX_SOCKET_POLLS = 500 // to avoid infinite polling
 export function subscribeWhenReady(
   doctype,
   socket,
   docId,
-  remainedTries = MAX_SOCKET_POLLS
+  remainingTries = MAX_SOCKET_POLLS
 ) {
   if (socket.readyState === WEBSOCKET_STATE.OPEN) {
     try {
@@ -57,13 +58,13 @@ export function subscribeWhenReady(
     }
   } else {
     // no retries remaining
-    if (!remainedTries) {
+    if (!remainingTries) {
       const error = new Error('socket failed to connect')
       console.warn(`Cannot subscribe to doctype ${doctype}: ${error.message}`)
       throw error
     } else {
       setTimeout(() => {
-        subscribeWhenReady(doctype, socket, docId, --remainedTries)
+        subscribeWhenReady(doctype, socket, docId, --remainingTries)
       }, 10)
     }
   }
@@ -147,16 +148,12 @@ export function connectWebSocket(
   )
 
   socket.onopen = () => {
-    try {
-      socket.send(
-        JSON.stringify({
-          method: 'AUTH',
-          payload: options.token
-        })
-      )
-    } catch (error) {
-      throw error
-    }
+    socket.send(
+      JSON.stringify({
+        method: 'AUTH',
+        payload: options.token
+      })
+    )
   }
 
   const windowUnloadHandler = () => socket.close()
@@ -211,7 +208,7 @@ export function getCozySocket(config) {
 
     if (listenerKey === payload.type) return
 
-    // doctype listner call
+    // doctype listener call
     if (listeners.has(payload.type) && listeners.get(payload.type)[eventType]) {
       listeners.get(payload.type)[eventType].forEach(listener => {
         listener(payload.doc)
@@ -249,17 +246,13 @@ export function getCozySocket(config) {
     }
   }
 
-  try {
-    socket = connectWebSocket(
-      config,
-      onSocketMessage,
-      onSocketClose,
-      NUM_RETRIES,
-      RETRY_BASE_DELAY
-    )
-  } catch (error) {
-    throw error
-  }
+  socket = connectWebSocket(
+    config,
+    onSocketMessage,
+    onSocketClose,
+    NUM_RETRIES,
+    RETRY_BASE_DELAY
+  )
 
   return {
     subscribe: (doctype, event, listener, docId) => {
@@ -301,7 +294,7 @@ export function getCozySocket(config) {
   }
 }
 
-// Returns the Promise of a subscription to a given doctype (all documents)
+// Returns a subscription to a given doctype (all documents)
 export function subscribe(config, doctype, { docId, parse = doc => doc } = {}) {
   if (!cozySocket) cozySocket = getCozySocket(config)
   // Some document need to have specific parsing, for example, decoding
