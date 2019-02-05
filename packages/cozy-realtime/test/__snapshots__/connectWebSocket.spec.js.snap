@@ -221,6 +221,112 @@ MessageEvent {
 }
 `;
 
+exports[`(cozy-realtime) connectWebSocket:  socket should send doctype and docId subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
+Array [
+  Array [
+    "io.cozy.mocks",
+    WebSocket {
+      "binaryType": "blob",
+      "listeners": Object {
+        "close": Array [
+          [Function],
+        ],
+        "error": Array [
+          [Function],
+        ],
+        "message": Array [
+          [MockFunction],
+        ],
+        "open": Array [
+          [Function],
+        ],
+      },
+      "protocol": "io.cozy.websocket",
+      "readyState": 0,
+      "url": "ws://localhost:8880/realtime/",
+    },
+    "id1234",
+  ],
+  Array [
+    "io.cozy.mocks2",
+    WebSocket {
+      "binaryType": "blob",
+      "listeners": Object {
+        "close": Array [
+          [Function],
+        ],
+        "error": Array [
+          [Function],
+        ],
+        "message": Array [
+          [MockFunction],
+        ],
+        "open": Array [
+          [Function],
+        ],
+      },
+      "protocol": "io.cozy.websocket",
+      "readyState": 0,
+      "url": "ws://localhost:8880/realtime/",
+    },
+    null,
+  ],
+]
+`;
+
+exports[`(cozy-realtime) connectWebSocket:  socket should send doctype subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
+Array [
+  Array [
+    "io.cozy.mocks",
+    WebSocket {
+      "binaryType": "blob",
+      "listeners": Object {
+        "close": Array [
+          [Function],
+        ],
+        "error": Array [
+          [Function],
+        ],
+        "message": Array [
+          [MockFunction],
+        ],
+        "open": Array [
+          [Function],
+        ],
+      },
+      "protocol": "io.cozy.websocket",
+      "readyState": 0,
+      "url": "ws://localhost:8880/realtime/",
+    },
+    null,
+  ],
+  Array [
+    "io.cozy.mocks2",
+    WebSocket {
+      "binaryType": "blob",
+      "listeners": Object {
+        "close": Array [
+          [Function],
+        ],
+        "error": Array [
+          [Function],
+        ],
+        "message": Array [
+          [MockFunction],
+        ],
+        "open": Array [
+          [Function],
+        ],
+      },
+      "protocol": "io.cozy.websocket",
+      "readyState": 0,
+      "url": "ws://localhost:8880/realtime/",
+    },
+    null,
+  ],
+]
+`;
+
 exports[`(cozy-realtime) connectWebSocket:  socket should throw error if no url or domain provided 1`] = `"domain is required if no attribute url are provider.."`;
 
 exports[`(cozy-realtime) connectWebSocket:  socket should throw error if wrong url format provided 1`] = `"Unable to detect domain"`;

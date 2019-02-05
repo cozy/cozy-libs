@@ -245,6 +245,28 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
 
     connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
     expect(mockSubscribe.mock.calls.length).toBe(2)
+    expect(mockSubscribe.mock.calls).toMatchSnapshot()
+
+    // reset
+    __RewireAPI__.__ResetDependency__('subscriptionsState')
+  })
+
+  it('socket should send doctype and docId subscriptions again if this is a retry and if there are subscriptionsState', () => {
+    const mockConfig = {
+      domain: MOCK_SERVER_DOMAIN,
+      secure: false,
+      token: 'blablablatoken'
+    }
+
+    // add subscriptions to subscriptionsState
+    __RewireAPI__.__Rewire__(
+      'subscriptionsState',
+      new Set(['io.cozy.mocks/id1234', 'io.cozy.mocks2'])
+    )
+
+    connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
+    expect(mockSubscribe.mock.calls.length).toBe(2)
+    expect(mockSubscribe.mock.calls).toMatchSnapshot()
 
     // reset
     __RewireAPI__.__ResetDependency__('subscriptionsState')

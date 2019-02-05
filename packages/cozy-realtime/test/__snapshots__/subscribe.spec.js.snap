@@ -1,11 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`(cozy-realtime) subscribeWhenReady:  should retries a provided max number times and throw error if still not opened 1`] = `"socket failed to connect"`;
+exports[`(cozy-realtime) subscribeWhenReady:  should retries a provided max number times and throw error + warn if still not opened 1`] = `"socket failed to connect"`;
+
+exports[`(cozy-realtime) subscribeWhenReady:  should retries a provided max number times and throw error + warn if still not opened 2`] = `"Cannot subscribe to doctype io.cozy.mocks: socket failed to connect"`;
 
 exports[`(cozy-realtime) subscribeWhenReady:  should send the correct socket message if socket opened 1`] = `
 Object {
   "method": "SUBSCRIBE",
   "payload": Object {
+    "type": "io.cozy.mocks",
+  },
+}
+`;
+
+exports[`(cozy-realtime) subscribeWhenReady:  should send the correct socket message if socket opened with docId provided 1`] = `
+Object {
+  "method": "SUBSCRIBE",
+  "payload": Object {
+    "id": "id1234",
     "type": "io.cozy.mocks",
   },
 }

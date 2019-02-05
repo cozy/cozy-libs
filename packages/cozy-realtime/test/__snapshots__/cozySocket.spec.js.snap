@@ -6,6 +6,13 @@ Set {
 }
 `;
 
+exports[`(cozy-realtime) cozySocket handling and getCozySocket:  cozySocket should send socket message and add state multiple times if this is different doc ids 1`] = `
+Set {
+  "io.cozy.mocks/id1234",
+  "io.cozy.mocks/id5678",
+}
+`;
+
 exports[`(cozy-realtime) cozySocket handling and getCozySocket:  cozySocket should send socket message and add state multiple times if this is the different doctypes 1`] = `
 Set {
   "io.cozy.mocks",

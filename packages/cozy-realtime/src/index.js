@@ -19,22 +19,36 @@ let subscriptionsState = new Set()
 
 export const getSubscriptionsState = () => subscriptionsState
 
+// listener key computing, according to doctype only or with doc id
+const LISTENER_KEY_SEPARATOR = '/' // safe since we can't have a '/' in a doctype
+const getListenerKey = (doctype, docId) =>
+  docId ? [doctype, docId].join(LISTENER_KEY_SEPARATOR) : doctype
+
+const getTypeAndIdFromListenerKey = listenerKey => {
+  const splitResult = listenerKey.split(LISTENER_KEY_SEPARATOR)
+  return {
+    doctype: splitResult[0],
+    docId: splitResult.length > 1 ? splitResult[1] : null
+  }
+}
+
 // Send a subscribe message for the given doctype trough the given websocket, but
 // only if it is in a ready state. If not, retry a few milliseconds later.
 const MAX_SOCKET_POLLS = 500 // to avoid infinite poling
 export function subscribeWhenReady(
   doctype,
   socket,
+  docId,
   remainedTries = MAX_SOCKET_POLLS
 ) {
   if (socket.readyState === WEBSOCKET_STATE.OPEN) {
     try {
+      const payload = { type: doctype }
+      if (docId) payload.id = docId
       socket.send(
         JSON.stringify({
           method: 'SUBSCRIBE',
-          payload: {
-            type: doctype
-          }
+          payload
         })
       )
     } catch (error) {
@@ -49,7 +63,7 @@ export function subscribeWhenReady(
       throw error
     } else {
       setTimeout(() => {
-        subscribeWhenReady(doctype, socket, --remainedTries)
+        subscribeWhenReady(doctype, socket, docId, --remainedTries)
       }, 10)
     }
   }
@@ -156,8 +170,9 @@ export function connectWebSocket(
   socket.onerror = error => console.error(`WebSocket error: ${error.message}`)
 
   if (isRetry && subscriptionsState.size) {
-    for (let doctype of subscriptionsState) {
-      subscribeWhenReady(doctype, socket)
+    for (let listenerKey of subscriptionsState) {
+      const { doctype, docId } = getTypeAndIdFromListenerKey(listenerKey)
+      subscribeWhenReady(doctype, socket, docId)
     }
   }
 
@@ -165,7 +180,7 @@ export function connectWebSocket(
 }
 
 export function getCozySocket(config) {
-  const listeners = {}
+  const listeners = new Map()
 
   let socket
 
@@ -184,8 +199,21 @@ export function getCozySocket(config) {
       throw realtimeError
     }
 
-    if (listeners[payload.type] && listeners[payload.type][eventType]) {
-      listeners[payload.type][eventType].forEach(listener => {
+    // the payload should always have an id here
+    const listenerKey = getListenerKey(payload.type, payload.id)
+
+    // id listener call
+    if (listeners.has(listenerKey) && listeners.get(listenerKey)[eventType]) {
+      listeners.get(listenerKey)[eventType].forEach(listener => {
+        listener(payload.doc)
+      })
+    }
+
+    if (listenerKey === payload.type) return
+
+    // doctype listner call
+    if (listeners.has(payload.type) && listeners.get(payload.type)[eventType]) {
+      listeners.get(payload.type)[eventType].forEach(listener => {
         listener(payload.doc)
       })
     }
@@ -234,61 +262,47 @@ export function getCozySocket(config) {
   }
 
   return {
-    subscribe: (doctype, event, listener) => {
+    subscribe: (doctype, event, listener, docId) => {
       if (typeof listener !== 'function')
         throw new Error('Realtime event listener must be a function')
 
-      if (!listeners[doctype]) {
-        listeners[doctype] = {}
-        subscribeWhenReady(doctype, socket)
+      const listenerKey = getListenerKey(doctype, docId)
+
+      if (!listeners.has(listenerKey)) {
+        listeners.set(listenerKey, {})
+        subscribeWhenReady(doctype, socket, docId)
       }
 
-      listeners[doctype][event] = (listeners[doctype][event] || []).concat([
-        listener
-      ])
+      listeners.set(listenerKey, {
+        ...listeners.get(listenerKey),
+        [event]: [listener]
+      })
 
-      if (!subscriptionsState.has(doctype)) {
-        subscriptionsState.add(doctype)
+      if (!subscriptionsState.has(listenerKey)) {
+        subscriptionsState.add(listenerKey)
       }
     },
-    unsubscribe: (doctype, event, listener) => {
+    unsubscribe: (doctype, event, listener, docId) => {
+      const listenerKey = getListenerKey(doctype, docId)
       if (
-        listeners[doctype] &&
-        listeners[doctype][event] &&
-        listeners[doctype][event].includes(listener)
+        listeners.has(listenerKey) &&
+        listeners.get(listenerKey)[event] &&
+        listeners.get(listenerKey)[event].includes(listener)
       ) {
-        listeners[doctype][event] = listeners[doctype][event].filter(
-          l => l !== listener
-        )
+        listeners.set(listenerKey, {
+          ...listeners.get(listenerKey),
+          [event]: listeners.get(listenerKey)[event].filter(l => l !== listener)
+        })
       }
-      if (subscriptionsState.has(doctype)) {
-        subscriptionsState.delete(doctype)
-      }
-    }
-  }
-}
-
-// Returns the Promise of a subscription to a given doctype and document
-export function subscribe(config, doctype, doc, parse = doc => doc) {
-  const subscription = subscribeAll(config, doctype, parse)
-  // We will call the listener only for the given document, so let's curry it
-  const docListenerCurried = listener => {
-    return syncedDoc => {
-      if (syncedDoc._id === doc._id) {
-        listener(syncedDoc)
+      if (subscriptionsState.has(listenerKey)) {
+        subscriptionsState.delete(listenerKey)
       }
     }
-  }
-
-  return {
-    onUpdate: listener => subscription.onUpdate(docListenerCurried(listener)),
-    onDelete: listener => subscription.onDelete(docListenerCurried(listener)),
-    unsubscribe: () => subscription.unsubscribe()
   }
 }
 
 // Returns the Promise of a subscription to a given doctype (all documents)
-export function subscribeAll(config, doctype, parse = doc => doc) {
+export function subscribe(config, doctype, { docId, parse = doc => doc } = {}) {
   if (!cozySocket) cozySocket = getCozySocket(config)
   // Some document need to have specific parsing, for example, decoding
   // base64 encoded properties
@@ -298,28 +312,35 @@ export function subscribeAll(config, doctype, parse = doc => doc) {
     }
   }
 
+  const subscribeAllDocs = !docId
+
   let createListener, updateListener, deleteListener
 
   const subscription = {
-    onCreate: listener => {
-      createListener = parseCurried(listener)
-      cozySocket.subscribe(doctype, 'created', createListener)
-      return subscription
-    },
     onUpdate: listener => {
       updateListener = parseCurried(listener)
-      cozySocket.subscribe(doctype, 'updated', updateListener)
+      cozySocket.subscribe(doctype, 'updated', updateListener, docId)
       return subscription
     },
     onDelete: listener => {
       deleteListener = parseCurried(listener)
-      cozySocket.subscribe(doctype, 'deleted', deleteListener)
+      cozySocket.subscribe(doctype, 'deleted', deleteListener, docId)
       return subscription
     },
     unsubscribe: () => {
-      cozySocket.unsubscribe(doctype, 'created', createListener)
-      cozySocket.unsubscribe(doctype, 'updated', updateListener)
-      cozySocket.unsubscribe(doctype, 'deleted', deleteListener)
+      if (subscribeAllDocs) {
+        cozySocket.unsubscribe(doctype, 'created', createListener)
+      }
+      cozySocket.unsubscribe(doctype, 'updated', updateListener, docId)
+      cozySocket.unsubscribe(doctype, 'deleted', deleteListener, docId)
+    }
+  }
+
+  if (subscribeAllDocs) {
+    subscription.onCreate = listener => {
+      createListener = parseCurried(listener)
+      cozySocket.subscribe(doctype, 'created', createListener)
+      return subscription
     }
   }
 
@@ -327,6 +348,5 @@ export function subscribeAll(config, doctype, parse = doc => doc) {
 }
 
 export default {
-  subscribeAll,
   subscribe
 }
