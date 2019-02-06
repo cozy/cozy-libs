@@ -138,21 +138,16 @@ const normalizeAccount = account => {
   }
 }
 
-const findMatch = (account, existingAccounts) => {
-  // IBAN
-  if (account.iban) {
-    const matchIBAN = findExactMatch('iban', account, existingAccounts)
-    if (matchIBAN && matchIBAN.match) {
-      return matchIBAN
-    }
-  }
+const exactMatchAttributes = ['iban', 'number']
 
-  // Number
-  if (account.number) {
-    const numberMatch = findExactMatch('number', account, existingAccounts)
-    // Number easy case
-    if (numberMatch && numberMatch.match) {
-      return numberMatch
+const findMatch = (account, existingAccounts) => {
+  // Start with exact attribute matches
+  for (const exactAttribute of exactMatchAttributes) {
+    if (account[exactAttribute]) {
+      const result = findExactMatch(exactAttribute, account, existingAccounts)
+      if (result && result.match) {
+        return result
+      }
     }
   }
 
