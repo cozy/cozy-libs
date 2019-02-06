@@ -1,6 +1,6 @@
 import { Server } from 'mock-socket'
 
-import __RewireAPI__, { connectWebSocket } from '../src/index'
+import __RewireAPI__, { createWebSocket, getCozySocket } from '../src/index'
 
 const MOCK_SERVER_DOMAIN = 'localhost:8880'
 
@@ -8,7 +8,7 @@ const REALTIME_URL = `ws://${MOCK_SERVER_DOMAIN}/realtime/`
 
 let server
 let mockSubscribe = jest.fn()
-describe('(cozy-realtime) connectWebSocket: ', () => {
+describe('(cozy-realtime) createWebSocket: ', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     __RewireAPI__.__Rewire__('subscribeWhenReady', mockSubscribe)
@@ -32,7 +32,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       token: 'blablablatoken'
     }
 
-    const cozySocket = connectWebSocket(
+    const cozySocket = createWebSocket(
       mockConfig,
       jest.fn(),
       jest.fn(),
@@ -51,14 +51,8 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       token: 'blablablatoken'
     }
 
-    const cozySocket = connectWebSocket(
-      mockConfig,
-      jest.fn(),
-      jest.fn(),
-      10,
-      2000
-    )
-    expect(cozySocket).toMatchSnapshot()
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+    expect(getCozySocket()).toMatchSnapshot()
   })
 
   it('socket should throw error if no url or domain provided', () => {
@@ -68,7 +62,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     }
 
     expect(() => {
-      connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+      createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
     }).toThrowErrorMatchingSnapshot()
   })
 
@@ -80,7 +74,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     }
 
     expect(() => {
-      connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+      createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
     }).toThrowErrorMatchingSnapshot()
   })
 
@@ -92,7 +86,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     }
 
     expect(() => {
-      connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+      createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
     }).toThrowErrorMatchingSnapshot()
   })
 
@@ -103,13 +97,8 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       token: 'blablablatoken'
     }
 
-    const cozySocket = connectWebSocket(
-      mockConfig,
-      jest.fn(),
-      jest.fn(),
-      10,
-      2000
-    )
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+    const cozySocket = getCozySocket()
     cozySocket.send = jest.fn()
     // simulate onopen
     cozySocket.onopen[0]()
@@ -128,13 +117,8 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     }
     const authError = new Error('Expected auth error')
 
-    const cozySocket = connectWebSocket(
-      mockConfig,
-      jest.fn(),
-      jest.fn(),
-      10,
-      2000
-    )
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+    const cozySocket = getCozySocket()
     cozySocket.send = jest.fn(() => {
       throw authError
     })
@@ -156,7 +140,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     }
     console.error = jest.fn()
 
-    connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
     // simulate onerror
     expect(() => {
       server.simulate('error')
@@ -174,7 +158,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     }
     const onMessageMock = jest.fn()
 
-    connectWebSocket(mockConfig, onMessageMock, jest.fn(), 10, 2000)
+    createWebSocket(mockConfig, onMessageMock, jest.fn(), 10, 2000)
     // simulate a message
     server.emit('message', 'a server message to socket')
     expect(onMessageMock.mock.calls.length).toBe(1)
@@ -191,7 +175,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
     const onCloseMock = jest.fn()
     jest.spyOn(window, 'removeEventListener')
 
-    connectWebSocket(mockConfig, jest.fn(), onCloseMock, 10, 2000)
+    createWebSocket(mockConfig, jest.fn(), onCloseMock, 10, 2000)
     server.close()
     expect(onCloseMock.mock.calls.length).toBe(1)
     expect(window.removeEventListener.mock.calls.length).toBe(1)
@@ -206,7 +190,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       token: 'blablablatoken'
     }
 
-    connectWebSocket(mockConfig, jest.fn(), null, 10, 2000)
+    createWebSocket(mockConfig, jest.fn(), null, 10, 2000)
     server.close()
     expect(window.removeEventListener.mock.calls.length).toBe(1)
   })
@@ -218,13 +202,8 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       token: 'blablablatoken'
     }
 
-    const cozySocket = connectWebSocket(
-      mockConfig,
-      jest.fn(),
-      jest.fn(),
-      10,
-      2000
-    )
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000)
+    const cozySocket = getCozySocket()
     cozySocket.close = jest.fn()
     window.dispatchEvent(new Event('beforeunload'))
     expect(cozySocket.close.mock.calls.length).toBe(1)
@@ -243,7 +222,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       new Set(['io.cozy.mocks', 'io.cozy.mocks2'])
     )
 
-    connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
     expect(mockSubscribe.mock.calls.length).toBe(2)
     expect(mockSubscribe.mock.calls).toMatchSnapshot()
 
@@ -264,7 +243,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       new Set(['io.cozy.mocks/id1234', 'io.cozy.mocks2'])
     )
 
-    connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
     expect(mockSubscribe.mock.calls.length).toBe(2)
     expect(mockSubscribe.mock.calls).toMatchSnapshot()
 
@@ -279,7 +258,7 @@ describe('(cozy-realtime) connectWebSocket: ', () => {
       token: 'blablablatoken'
     }
 
-    connectWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
+    createWebSocket(mockConfig, jest.fn(), jest.fn(), 10, 2000, true)
     expect(mockSubscribe.mock.calls.length).toBe(0)
   })
 })

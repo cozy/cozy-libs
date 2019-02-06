@@ -6,37 +6,42 @@ const mockConfig = {
   token: 'blablablatoken'
 }
 
-describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
+describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   let mockConnect = jest.fn()
   let mockSendSubscribe = jest.fn()
 
   beforeEach(() => {
     jest.clearAllMocks()
     // rewire the internal functions usage
-    __RewireAPI__.__Rewire__('connectWebSocket', mockConnect)
+    __RewireAPI__.__Rewire__('createWebSocket', mockConnect)
     __RewireAPI__.__Rewire__('subscribeWhenReady', mockSendSubscribe)
+    __RewireAPI__.__Rewire__('cozySocket', {
+      subscribe: jest.fn(),
+      unsubscribe: jest.fn()
+    })
   })
 
   afterEach(() => {
-    __RewireAPI__.__ResetDependency__('connectWebSocket')
+    __RewireAPI__.__ResetDependency__('createWebSocket')
     __RewireAPI__.__ResetDependency__('subscribeWhenReady')
+    __RewireAPI__.__ResetDependency__('cozySocket')
   })
 
-  it('getCozySocket should call connectWebSocket with correct config and arguments', () => {
-    // rewire the internal connectWebSocket usage
-    cozyRealtime.getCozySocket(mockConfig)
+  it('initCozySocket should call createWebSocket with correct config and arguments', () => {
+    // rewire the internal createWebSocket usage
+    cozyRealtime.initCozySocket(mockConfig)
     expect(mockConnect.mock.calls.length).toBe(1)
     expect(mockSendSubscribe.mock.calls.length).toBe(0)
     expect(mockConnect.mock.calls[0]).toMatchSnapshot()
   })
 
-  it('getCozySocket should return a configured cozy socket', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+  it('initCozySocket should return a configured cozy socket', () => {
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     expect(cozySocket).toMatchSnapshot()
   })
 
   it('cozySocket should not send socket message and add state multiple times if this is the same doctype', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -54,7 +59,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should send socket message and add state multiple times if this is the different doctypes', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -72,7 +77,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should send socket message and add state multiple times if this is different doc ids', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockUpdatedListener = jest.fn()
     const mockUpdatedListener2 = jest.fn()
@@ -107,7 +112,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should remove doctype from subscriptions state on unsubscribe', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -131,7 +136,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should remove doctype from subscriptions state only if there are no more remaining listeners', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -145,7 +150,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should remove doctype from subscriptions state only if it exists', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -163,7 +168,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should not throw any error if we unsubscribe not subscribed doctype', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
@@ -179,7 +184,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
   })
 
   it('cozySocket should throw an error if the listener provided is not a function', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     expect(() => {
       cozySocket.subscribe('io.cozy.mocks', 'updated', 'notAFunction')
     }).toThrowErrorMatchingSnapshot()
@@ -192,16 +197,16 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     const mockConnect = jest.fn(() => {
       throw mockError
     })
-    __RewireAPI__.__Rewire__('connectWebSocket', mockConnect)
+    __RewireAPI__.__Rewire__('createWebSocket', mockConnect)
     expect(() => {
-      cozyRealtime.getCozySocket(mockConfig)
+      cozyRealtime.initCozySocket(mockConfig)
     }).toThrowError(mockError)
     expect(mockSendSubscribe.mock.calls.length).toBe(0)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(0)
   })
 
-  it('onSocketMessage provided by getCozySocket to connectWebSocket should throw error if eventType error', () => {
-    cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketMessage provided by initCozySocket to createWebSocket should throw error if eventType error', () => {
+    cozyRealtime.initCozySocket(mockConfig)
     const onSocketMessage = mockConnect.mock.calls[0][1]
     expect(() => {
       onSocketMessage({
@@ -215,8 +220,8 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     }).toThrowErrorMatchingSnapshot()
   })
 
-  it('onSocketMessage provided by getCozySocket to connectWebSocket should call provided listener if matched event received', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketMessage provided by initCozySocket to createWebSocket should call provided listener if matched event received', () => {
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -241,8 +246,8 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     cozySocket.unsubscribe('io.cozy.mocks', 'created', mockListener)
   })
 
-  it('onSocketMessage provided by getCozySocket to connectWebSocket should not call provided listener if wrong event received', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketMessage provided by initCozySocket to createWebSocket should not call provided listener if wrong event received', () => {
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -266,8 +271,8 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     cozySocket.unsubscribe('io.cozy.mocks', 'created', mockListener)
   })
 
-  it('onSocketMessage provided by getCozySocket to connectWebSocket should not call provided listener if wrong doctype received', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketMessage provided by initCozySocket to createWebSocket should not call provided listener if wrong doctype received', () => {
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -291,8 +296,8 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     cozySocket.unsubscribe('io.cozy.mocks', 'created', mockListener)
   })
 
-  it('onSocketMessage provided by getCozySocket to connectWebSocket should handle payload wihout id', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketMessage provided by initCozySocket to createWebSocket should handle payload wihout id', () => {
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -316,8 +321,8 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     cozySocket.unsubscribe('io.cozy.mocks', 'updated', mockListener)
   })
 
-  it('onSocketMessage provided by getCozySocket to connectWebSocket should call all listeners with correct docId provided', () => {
-    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketMessage provided by initCozySocket to createWebSocket should call all listeners with correct docId provided', () => {
+    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -351,10 +356,10 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     cozySocket.unsubscribe('io.cozy.mocks', 'created', mockListener)
   })
 
-  it('onSocketClose provided by getCozySocket to connectWebSocket should do nothing if event.wasClean', () => {
-    cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketClose provided by initCozySocket to createWebSocket should do nothing if event.wasClean', () => {
+    cozyRealtime.initCozySocket(mockConfig)
     const onSocketClose = mockConnect.mock.calls[0][2]
-    // reset the mock state to remove the getCozySocket usage
+    // reset the mock state to remove the initCozySocket usage
     mockConnect.mockReset()
     onSocketClose({
       wasClean: true
@@ -362,32 +367,76 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     expect(mockConnect.mock.calls.length).toBe(0)
   })
 
-  it('onSocketClose provided by getCozySocket to connectWebSocket should just warn if !event.wasClean without retries provided', () => {
-    cozyRealtime.getCozySocket(mockConfig)
+  it('onSocketClose provided by initCozySocket to createWebSocket should remove the global cozySocket if it exists at the end of retries', () => {
+    cozyRealtime.initCozySocket(mockConfig)
     const onSocketClose = mockConnect.mock.calls[0][2]
-    // reset the mock state to remove the getCozySocket usage
+    // reset the mock state to remove the initCozySocket usage
     mockConnect.mockReset()
     console.warn = jest.fn()
-    onSocketClose({
-      wasClean: false,
-      code: 0
-    })
+    console.error = jest.fn()
+    jest.useFakeTimers()
+    onSocketClose(
+      {
+        wasClean: false,
+        code: 0
+      },
+      1,
+      100
+    )
+    expect(console.warn.mock.calls.length).toBe(2)
+    expect(console.error.mock.calls.length).toBe(0)
+    console.warn.mockClear()
+    console.error.mockClear()
+    expect(cozyRealtime.getCozySocket()).toBeInstanceOf(Object)
+    jest.runAllTimers()
     onSocketClose({
       wasClean: false,
       code: 0,
       reason: 'expected test close reason'
     })
-    expect(console.warn.mock.calls.length).toBe(2)
-    expect(mockConnect.mock.calls.length).toBe(0)
+    jest.runAllTimers()
+    expect(cozyRealtime.getCozySocket()).toBeNull()
+    expect(mockConnect.mock.calls.length).toBe(1)
+    // 2 warns each
+    expect(console.warn.mock.calls.length).toBe(1)
+    expect(console.error.mock.calls.length).toBe(1)
     console.warn.mockRestore()
+    console.error.mockRestore()
   })
 
-  it('onSocketClose provided by getCozySocket to connectWebSocket should retry according to retries provided and !event.wasClean', () => {
+  it('onSocketClose provided by initCozySocket to createWebSocket should just warn if !event.wasClean without retries provided', () => {
+    cozyRealtime.initCozySocket(mockConfig)
+    const onSocketClose = mockConnect.mock.calls[0][2]
+    // reset the mock state to remove the initCozySocket usage
+    mockConnect.mockReset()
+    console.warn = jest.fn()
+    console.error = jest.fn()
+    onSocketClose({
+      wasClean: false,
+      code: 0
+    })
+    expect(console.warn.mock.calls.length).toBe(1)
+    expect(console.error.mock.calls.length).toBe(1)
+    console.warn.mockClear()
+    console.error.mockClear()
+    onSocketClose({
+      wasClean: false,
+      code: 0,
+      reason: 'expected test close reason'
+    })
+    expect(console.warn.mock.calls.length).toBe(1)
+    expect(console.error.mock.calls.length).toBe(1)
+    expect(mockConnect.mock.calls.length).toBe(0)
+    console.warn.mockRestore()
+    console.error.mockRestore()
+  })
+
+  it('onSocketClose provided by initCozySocket to createWebSocket should retry according to retries provided and !event.wasClean', () => {
     const RETRIES = 2
-    cozyRealtime.getCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
     const onSocketClose = mockConnect.mock.calls[0][2]
     let numRetries = RETRIES
-    // reset the mock state to remove the getCozySocket usage
+    // reset the mock state to remove the initCozySocket usage
     mockConnect.mockReset()
     jest.useFakeTimers()
     onSocketClose(
@@ -412,7 +461,7 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
       200
     )
     jest.runAllTimers()
-    // since we have 2 retries here, it shouldn't call connectWebSocket
+    // since we have 2 retries here, it shouldn't call createWebSocket
     // after this next socket closing
     const onSocketClose3 = mockConnect.mock.calls[0][2]
     numRetries--
@@ -429,15 +478,15 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
     expect(mockConnect.mock.calls.length).toBe(RETRIES)
   })
 
-  it('onSocketClose provided by getCozySocket to connectWebSocket should handle error from a retry connectWebSocket with an error message', () => {
+  it('onSocketClose provided by initCozySocket to createWebSocket should handle error from a retry createWebSocket with an error message', () => {
     const mockError = new Error('expected socket retry error')
-    cozyRealtime.getCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
     const onSocketClose = mockConnect.mock.calls[0][2]
-    // reset the mock state to remove the getCozySocket usage
+    // reset the mock state to remove the initCozySocket usage
     const mockConnectWithError = jest.fn(() => {
       throw mockError
     })
-    __RewireAPI__.__Rewire__('connectWebSocket', mockConnectWithError)
+    __RewireAPI__.__Rewire__('createWebSocket', mockConnectWithError)
     jest.useFakeTimers()
     console.error = jest.fn()
     expect(() => {

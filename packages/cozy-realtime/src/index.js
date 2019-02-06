@@ -1,7 +1,7 @@
 /* global WebSocket */
 
 // cozySocket is a custom object wrapping logic to websocket and exposing a subscription
-// interface
+// interface, it's a global variable to avoid creating multiple at a time
 let cozySocket
 
 // Important, must match the spec,
@@ -17,7 +17,9 @@ const RETRY_BASE_DELAY = 1000
 // stored as a Map { [doctype]: socket }
 let subscriptionsState = new Set()
 
+// getters, for testing
 export const getSubscriptionsState = () => subscriptionsState
+export const getCozySocket = () => cozySocket
 
 // listener key computing, according to doctype only or with doc id
 const LISTENER_KEY_SEPARATOR = '/' // safe since we can't have a '/' in a doctype
@@ -44,16 +46,15 @@ const hasListeners = socketListeners => {
 // only if it is in a ready state. If not, retry a few milliseconds later.
 const MAX_SOCKET_POLLS = 500 // to avoid infinite polling
 export function subscribeWhenReady(
-  socket,
   doctype,
   docId,
   remainingTries = MAX_SOCKET_POLLS
 ) {
-  if (socket.readyState === WEBSOCKET_STATE.OPEN) {
+  if (cozySocket.readyState === WEBSOCKET_STATE.OPEN) {
     try {
       const payload = { type: doctype }
       if (docId) payload.id = docId
-      socket.send(
+      cozySocket.send(
         JSON.stringify({
           method: 'SUBSCRIBE',
           payload
@@ -71,7 +72,7 @@ export function subscribeWhenReady(
       throw error
     } else {
       setTimeout(() => {
-        subscribeWhenReady(socket, doctype, docId, --remainingTries)
+        subscribeWhenReady(doctype, docId, --remainingTries)
       }, 10)
     }
   }
@@ -128,7 +129,7 @@ const configTypes = {
 
 const validateConfig = validate(configTypes)
 
-export function connectWebSocket(
+export function createWebSocket(
   config,
   onmessage,
   onclose,
@@ -173,20 +174,18 @@ export function connectWebSocket(
   }
   socket.onerror = error => console.error(`WebSocket error: ${error.message}`)
 
+  cozySocket = socket
+
   if (isRetry && subscriptionsState.size) {
     for (let listenerKey of subscriptionsState) {
       const { doctype, docId } = getTypeAndIdFromListenerKey(listenerKey)
-      subscribeWhenReady(socket, doctype, docId)
+      subscribeWhenReady(doctype, docId)
     }
   }
-
-  return socket
 }
 
-export function getCozySocket(config) {
+export function initCozySocket(config) {
   const listeners = new Map()
-
-  let socket
 
   const onSocketMessage = event => {
     const data = JSON.parse(event.data)
@@ -235,7 +234,7 @@ export function getCozySocket(config) {
         console.warn(`Reconnecting ... ${numRetries} tries left.`)
         setTimeout(() => {
           try {
-            socket = connectWebSocket(
+            createWebSocket(
               config,
               onSocketMessage,
               onSocketClose,
@@ -249,11 +248,15 @@ export function getCozySocket(config) {
             )
           }
         }, retryDelay)
+      } else {
+        console.error(`0 tries left. Stop reconnecting realtime.`)
+        // remove cached socket
+        if (cozySocket) cozySocket = null
       }
     }
   }
 
-  socket = connectWebSocket(
+  createWebSocket(
     config,
     onSocketMessage,
     onSocketClose,
@@ -270,7 +273,7 @@ export function getCozySocket(config) {
 
       if (!listeners.has(listenerKey)) {
         listeners.set(listenerKey, {})
-        subscribeWhenReady(socket, doctype, docId)
+        subscribeWhenReady(doctype, docId)
       }
 
       listeners.set(listenerKey, {
@@ -308,7 +311,7 @@ export function getCozySocket(config) {
 
 // Returns a subscription to a given doctype (all documents)
 export function subscribe(config, doctype, { docId, parse = doc => doc } = {}) {
-  if (!cozySocket) cozySocket = getCozySocket(config)
+  if (!cozySocket) initCozySocket(config)
   // Some document need to have specific parsing, for example, decoding
   // base64 encoded properties
   const parseCurried = listener => {

@@ -1,11 +1,13 @@
-import __RewireAPI__, { subscribe, subscribeAll } from '../src/index'
+import __RewireAPI__, { subscribe } from '../src/index'
 
 const MOCK_SERVER_DOMAIN = 'localhost:8880'
 
-let mockGetSocket = jest.fn(() => ({
-  subscribe: jest.fn(),
-  unsubscribe: jest.fn()
-}))
+let mockInitSocket = jest.fn(() => {
+  __RewireAPI__.__Rewire__('cozySocket', {
+    subscribe: jest.fn(),
+    unsubscribe: jest.fn()
+  })
+})
 
 const mockConfig = {
   domain: MOCK_SERVER_DOMAIN,
@@ -18,28 +20,28 @@ describe('(cozy-realtime) API: ', () => {
     beforeEach(() => {
       jest.clearAllMocks()
       jest.resetModules()
-      __RewireAPI__.__Rewire__('getCozySocket', mockGetSocket)
+      __RewireAPI__.__Rewire__('initCozySocket', mockInitSocket)
       // reset cozySocket global variable
       __RewireAPI__.__Rewire__('cozySocket', null)
     })
 
     afterEach(() => {
-      __RewireAPI__.__ResetDependency__('getCozySocket')
+      __RewireAPI__.__ResetDependency__('initCozySocket')
       __RewireAPI__.__ResetDependency__('cozySocket')
     })
 
-    it('should call only once getCozySocket to avoid duplicating socket', () => {
+    it('should call only once initCozySocket to avoid duplicating socket', () => {
       subscribe(mockConfig, 'io.cozy.mocks')
       subscribe(mockConfig, 'io.cozy.mocks2')
       subscribe(mockConfig, 'io.cozy.mocks3')
-      expect(mockGetSocket.mock.calls[0][0]).toEqual(mockConfig)
-      expect(mockGetSocket.mock.calls.length).toBe(1)
+      expect(mockInitSocket.mock.calls[0][0]).toEqual(mockConfig)
+      expect(mockInitSocket.mock.calls.length).toBe(1)
     })
 
     it('should return a subscription with correct properties', () => {
       const subscription = subscribe(mockConfig, 'io.cozy.mocks')
-      expect(mockGetSocket.mock.calls.length).toBe(1)
-      expect(mockGetSocket.mock.calls[0][0]).toEqual(mockConfig)
+      expect(mockInitSocket.mock.calls.length).toBe(1)
+      expect(mockInitSocket.mock.calls[0][0]).toEqual(mockConfig)
       expect(subscription).toMatchSnapshot()
     })
     //
@@ -131,13 +133,13 @@ describe('(cozy-realtime) API: ', () => {
     beforeEach(() => {
       jest.clearAllMocks()
       jest.resetModules()
-      __RewireAPI__.__Rewire__('getCozySocket', mockGetSocket)
+      __RewireAPI__.__Rewire__('initCozySocket', mockInitSocket)
       // reset cozySocket global variable
       __RewireAPI__.__Rewire__('cozySocket', null)
     })
 
     afterEach(() => {
-      __RewireAPI__.__ResetDependency__('getCozySocket')
+      __RewireAPI__.__ResetDependency__('initCozySocket')
       __RewireAPI__.__ResetDependency__('cozySocket')
     })
 
@@ -147,8 +149,8 @@ describe('(cozy-realtime) API: ', () => {
       const subscription = subscribe(mockConfig, 'io.cozy.mocks', {
         docId: mockDocId
       })
-      expect(mockGetSocket.mock.calls.length).toBe(1)
-      expect(mockGetSocket.mock.calls[0][0]).toEqual(mockConfig)
+      expect(mockInitSocket.mock.calls.length).toBe(1)
+      expect(mockInitSocket.mock.calls[0][0]).toEqual(mockConfig)
       expect(subscription).toMatchSnapshot()
     })
     //

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`(cozy-realtime) connectWebSocket:  socket should create and return a cozySocket handling wss 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should create and return a cozySocket handling wss 1`] = `
 WebSocket {
   "binaryType": "blob",
   "listeners": Object {
@@ -23,14 +23,14 @@ WebSocket {
 }
 `;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should handle authenticating on socket open 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should handle authenticating on socket open 1`] = `
 Object {
   "method": "AUTH",
   "payload": "blablablatoken",
 }
 `;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should handle closing server 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should handle closing server 1`] = `
 CloseEvent {
   "bubbles": false,
   "cancelBubble": false,
@@ -107,7 +107,7 @@ CloseEvent {
 }
 `;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should handle message 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should handle message 1`] = `
 MessageEvent {
   "bubbles": false,
   "cancelable": false,
@@ -221,116 +221,36 @@ MessageEvent {
 }
 `;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should send doctype and docId subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should send doctype and docId subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
 Array [
   Array [
-    WebSocket {
-      "binaryType": "blob",
-      "listeners": Object {
-        "close": Array [
-          [Function],
-        ],
-        "error": Array [
-          [Function],
-        ],
-        "message": Array [
-          [MockFunction],
-        ],
-        "open": Array [
-          [Function],
-        ],
-      },
-      "protocol": "io.cozy.websocket",
-      "readyState": 0,
-      "url": "ws://localhost:8880/realtime/",
-    },
     "io.cozy.mocks",
     "id1234",
   ],
   Array [
-    WebSocket {
-      "binaryType": "blob",
-      "listeners": Object {
-        "close": Array [
-          [Function],
-        ],
-        "error": Array [
-          [Function],
-        ],
-        "message": Array [
-          [MockFunction],
-        ],
-        "open": Array [
-          [Function],
-        ],
-      },
-      "protocol": "io.cozy.websocket",
-      "readyState": 0,
-      "url": "ws://localhost:8880/realtime/",
-    },
     "io.cozy.mocks2",
     null,
   ],
 ]
 `;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should send doctype subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should send doctype subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
 Array [
   Array [
-    WebSocket {
-      "binaryType": "blob",
-      "listeners": Object {
-        "close": Array [
-          [Function],
-        ],
-        "error": Array [
-          [Function],
-        ],
-        "message": Array [
-          [MockFunction],
-        ],
-        "open": Array [
-          [Function],
-        ],
-      },
-      "protocol": "io.cozy.websocket",
-      "readyState": 0,
-      "url": "ws://localhost:8880/realtime/",
-    },
     "io.cozy.mocks",
     null,
   ],
   Array [
-    WebSocket {
-      "binaryType": "blob",
-      "listeners": Object {
-        "close": Array [
-          [Function],
-        ],
-        "error": Array [
-          [Function],
-        ],
-        "message": Array [
-          [MockFunction],
-        ],
-        "open": Array [
-          [Function],
-        ],
-      },
-      "protocol": "io.cozy.websocket",
-      "readyState": 0,
-      "url": "ws://localhost:8880/realtime/",
-    },
     "io.cozy.mocks2",
     null,
   ],
 ]
 `;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should throw error if no url or domain provided 1`] = `"domain is required if no attribute url are provider.."`;
+exports[`(cozy-realtime) createWebSocket:  socket should throw error if no url or domain provided 1`] = `"domain is required if no attribute url are provider.."`;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should throw error if wrong url format provided 1`] = `"Unable to detect domain"`;
+exports[`(cozy-realtime) createWebSocket:  socket should throw error if wrong url format provided 1`] = `"Unable to detect domain"`;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should throw error if wrong url type provided 1`] = `"url should be an URL."`;
+exports[`(cozy-realtime) createWebSocket:  socket should throw error if wrong url type provided 1`] = `"url should be an URL."`;
 
-exports[`(cozy-realtime) connectWebSocket:  socket should warn errors on socket errors 1`] = `"WebSocket error: undefined"`;
+exports[`(cozy-realtime) createWebSocket:  socket should warn errors on socket errors 1`] = `"WebSocket error: undefined"`;

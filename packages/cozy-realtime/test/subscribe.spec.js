@@ -13,6 +13,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
   afterEach(() => {
     __RewireAPI__.__ResetDependency__('subscribeWhenReady')
     __RewireAPI__.__ResetDependency__('MAX_SOCKET_POLLS')
+    __RewireAPI__.__ResetDependency__('cozySocket')
   })
 
   it('should retries a provided max number times if socket not opened', () => {
@@ -21,7 +22,8 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       send: jest.fn()
     }
     jest.useFakeTimers()
-    mockSubscribe(mockSocket, 'io.cozy.mocks')
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
+    mockSubscribe('io.cozy.mocks')
     // we run pending timers for a number less one
     Array.apply(null, { length: MAX_RETRIES - 1 }).forEach(() => {
       jest.runOnlyPendingTimers()
@@ -42,13 +44,15 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       send: jest.fn()
     }
     jest.useFakeTimers()
-    mockSubscribe(mockSocket, 'io.cozy.mocks', 'id1234')
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
+    mockSubscribe('io.cozy.mocks', 'id1234')
     // we run pending timers for a number less one
     Array.apply(null, { length: MAX_RETRIES - 1 }).forEach(() => {
       jest.runOnlyPendingTimers()
     })
     // we change socket state for the last try
     mockSocket.readyState = 1
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
     jest.runOnlyPendingTimers()
     // excessive run to be sure we don't have timeout anymore
     jest.runOnlyPendingTimers()
@@ -63,10 +67,11 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       readyState: 0, // code CONNECTING !== OPEN (code 0)
       send: jest.fn()
     }
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
     jest.useFakeTimers()
     console.warn = jest.fn()
     expect(() => {
-      mockSubscribe(mockSocket, 'io.cozy.mocks', null, maxRetries)
+      mockSubscribe('io.cozy.mocks', null, maxRetries)
       // we run pending timers for all retries
       Array.apply(null, { length: maxRetries }).forEach(() => {
         jest.runOnlyPendingTimers()
@@ -84,9 +89,10 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       readyState: 1,
       send: jest.fn()
     }
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
     jest.useFakeTimers()
     expect(() => {
-      mockSubscribe(mockSocket, 'io.cozy.mocks')
+      mockSubscribe('io.cozy.mocks')
       // we run pending timers for all retries
       Array.apply(null, { length: MAX_RETRIES }).forEach(() => {
         jest.runOnlyPendingTimers()
@@ -101,9 +107,10 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       readyState: 1,
       send: jest.fn()
     }
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
     jest.useFakeTimers()
     expect(() => {
-      mockSubscribe(mockSocket, 'io.cozy.mocks', 'id1234')
+      mockSubscribe('io.cozy.mocks', 'id1234')
       // we run pending timers for all retries
       Array.apply(null, { length: MAX_RETRIES }).forEach(() => {
         jest.runOnlyPendingTimers()
@@ -121,10 +128,11 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
         throw sendError
       })
     }
+    __RewireAPI__.__Rewire__('cozySocket', mockSocket)
     jest.useFakeTimers()
     console.warn = jest.fn()
     expect(() => {
-      mockSubscribe(mockSocket, 'io.cozy.mocks')
+      mockSubscribe('io.cozy.mocks')
       // we run pending timers for all retries
       Array.apply(null, { length: MAX_RETRIES }).forEach(() => {
         jest.runOnlyPendingTimers()
