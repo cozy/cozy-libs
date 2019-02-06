@@ -140,6 +140,10 @@ const normalizeAccount = account => {
 
 const exactMatchAttributes = ['iban', 'number']
 
+const eqNotUndefined = (attr1, attr2) => {
+  return attr1 && attr1 === attr2
+}
+
 const findMatch = (account, existingAccounts) => {
   // Start with exact attribute matches
   for (const exactAttribute of exactMatchAttributes) {
@@ -148,6 +152,18 @@ const findMatch = (account, existingAccounts) => {
       if (result && result.match) {
         return result
       }
+    }
+  }
+
+  const matchOriginalNumber = existingAccounts.find(
+    otherAccount =>
+      eqNotUndefined(account.originalNumber, otherAccount.number) ||
+      eqNotUndefined(account.number, otherAccount.originalNumber)
+  )
+  if (matchOriginalNumber) {
+    return {
+      match: matchOriginalNumber,
+      method: 'originalNumber-exact'
     }
   }
 
