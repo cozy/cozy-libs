@@ -1,19 +1,70 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should not send socket message and add state multiple times if this is the same doctype 1`] = `
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should not send socket message, add doctype listener and state multiple times if this is the same doctype: listeners 1`] = `
+Map {
+  "io.cozy.mocks" => Object {
+    "created": Array [
+      [MockFunction],
+    ],
+    "deleted": Array [
+      [MockFunction],
+    ],
+    "updated": Array [
+      [MockFunction],
+    ],
+  },
+}
+`;
+
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should not send socket message, add doctype listener and state multiple times if this is the same doctype: state 1`] = `
 Set {
   "io.cozy.mocks",
 }
 `;
 
-exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should send socket message and add state multiple times if this is different doc ids 1`] = `
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should send socket message and add state multiple times if this is different doc ids: listeners 1`] = `
+Map {
+  "io.cozy.mocks/id1234" => Object {
+    "updated": Array [
+      [MockFunction],
+    ],
+  },
+  "io.cozy.mocks/id5678" => Object {
+    "updated": Array [
+      [MockFunction],
+    ],
+  },
+}
+`;
+
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should send socket message and add state multiple times if this is different doc ids: state 1`] = `
 Set {
   "io.cozy.mocks/id1234",
   "io.cozy.mocks/id5678",
 }
 `;
 
-exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should send socket message and add state multiple times if this is the different doctypes 1`] = `
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should send socket message and add state multiple times if this is the different doctypes: listeners 1`] = `
+Map {
+  "io.cozy.mocks" => Object {
+    "created": Array [
+      [MockFunction],
+    ],
+  },
+  "io.cozy.mocks2" => Object {
+    "updated": Array [
+      [MockFunction],
+    ],
+  },
+  "io.cozy.mocks3" => Object {
+    "deleted": Array [
+      [MockFunction],
+    ],
+  },
+}
+`;
+
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  cozySocket should send socket message and add state multiple times if this is the different doctypes: state 1`] = `
 Set {
   "io.cozy.mocks",
   "io.cozy.mocks2",
@@ -39,6 +90,7 @@ Array [
 
 exports[`(cozy-realtime) cozySocket handling and initCozySocket:  initCozySocket should return a configured cozy socket 1`] = `
 Object {
+  "_getListeners": [Function],
   "subscribe": [Function],
   "unsubscribe": [Function],
 }

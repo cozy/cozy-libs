@@ -248,6 +248,8 @@ export function initCozySocket(config) {
   )
 
   return {
+    // for testing only
+    _getListeners: () => listeners,
     subscribe: (doctype, event, listener, docId) => {
       if (typeof listener !== 'function')
         throw new Error('Realtime event listener must be a function')
@@ -259,9 +261,11 @@ export function initCozySocket(config) {
         subscribeWhenReady(doctype, docId)
       }
 
+      const eventListeners = listeners.get(listenerKey)[event] || []
+      eventListeners.push(listener)
       listeners.set(listenerKey, {
         ...listeners.get(listenerKey),
-        [event]: [listener]
+        [event]: eventListeners
       })
 
       if (!subscriptionsState.has(listenerKey)) {
