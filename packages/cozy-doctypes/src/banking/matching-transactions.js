@@ -192,7 +192,9 @@ const matchTransactions = function*(newTrs, existingTrs) {
         maxDateDelta: delta * DAY
       }
     )) {
-      result.method = result.method + `-delta${delta}`
+      if (result.method) {
+        result.method += `-delta${delta}`
+      }
       if (result.match) {
         unmatchedExisting.delete(result.match)
         unmatchedNew.delete(result.transaction)
