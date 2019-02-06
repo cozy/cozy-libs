@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`(cozy-realtime) createWebSocket:  socket should create and return a cozySocket handling wss 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should create a global socket handling wss 1`] = `
 WebSocket {
   "binaryType": "blob",
   "listeners": Object {
@@ -18,8 +18,31 @@ WebSocket {
     ],
   },
   "protocol": "io.cozy.websocket",
-  "readyState": 0,
+  "readyState": 1,
   "url": "wss://localhost:8880/realtime/",
+}
+`;
+
+exports[`(cozy-realtime) createWebSocket:  socket should create a global socket with provided domain and secure option 1`] = `
+WebSocket {
+  "binaryType": "blob",
+  "listeners": Object {
+    "close": Array [
+      [Function],
+    ],
+    "error": Array [
+      [Function],
+    ],
+    "message": Array [
+      [MockFunction],
+    ],
+    "open": Array [
+      [Function],
+    ],
+  },
+  "protocol": "io.cozy.websocket",
+  "readyState": 1,
+  "url": "ws://localhost:8880/realtime/",
 }
 `;
 
@@ -141,7 +164,7 @@ MessageEvent {
       ],
     },
     "protocol": "io.cozy.websocket",
-    "readyState": 0,
+    "readyState": 1,
     "url": "ws://localhost:8880/realtime/",
   },
   "data": "a server message to socket",
@@ -181,7 +204,7 @@ MessageEvent {
       ],
     },
     "protocol": "io.cozy.websocket",
-    "readyState": 0,
+    "readyState": 1,
     "url": "ws://localhost:8880/realtime/",
   },
   "target": WebSocket {
@@ -213,7 +236,7 @@ MessageEvent {
       ],
     },
     "protocol": "io.cozy.websocket",
-    "readyState": 0,
+    "readyState": 1,
     "url": "ws://localhost:8880/realtime/",
   },
   "timeStamp": 0,

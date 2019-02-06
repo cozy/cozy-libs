@@ -9,12 +9,19 @@ const mockConfig = {
 describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   let mockConnect = jest.fn()
   let mockSendSubscribe = jest.fn()
+  jest.useFakeTimers()
 
   beforeEach(() => {
     jest.clearAllMocks()
+    // reset timeouts
+    jest.runAllTimers()
     // rewire the internal functions usage
     __RewireAPI__.__Rewire__('createWebSocket', mockConnect)
     __RewireAPI__.__Rewire__('subscribeWhenReady', mockSendSubscribe)
+    __RewireAPI__.__Rewire__(
+      'socketPromise',
+      Promise.resolve(new WebSocket('ws://mock.tools'))
+    )
     __RewireAPI__.__Rewire__('cozySocket', {
       subscribe: jest.fn(),
       unsubscribe: jest.fn()
@@ -24,6 +31,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   afterEach(() => {
     __RewireAPI__.__ResetDependency__('createWebSocket')
     __RewireAPI__.__ResetDependency__('subscribeWhenReady')
+    __RewireAPI__.__ResetDependency__('socketPromise')
     __RewireAPI__.__ResetDependency__('cozySocket')
   })
 
@@ -367,14 +375,13 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
     expect(mockConnect.mock.calls.length).toBe(0)
   })
 
-  it('onSocketClose provided by initCozySocket to createWebSocket should remove the global cozySocket if it exists at the end of retries', () => {
+  it('onSocketClose provided by initCozySocket to createWebSocket should remove the global socket/cozySocket if it exists at the end of retries', async () => {
     cozyRealtime.initCozySocket(mockConfig)
     const onSocketClose = mockConnect.mock.calls[0][2]
     // reset the mock state to remove the initCozySocket usage
     mockConnect.mockReset()
     console.warn = jest.fn()
     console.error = jest.fn()
-    jest.useFakeTimers()
     onSocketClose(
       {
         wasClean: false,
@@ -387,7 +394,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
     expect(console.error.mock.calls.length).toBe(0)
     console.warn.mockClear()
     console.error.mockClear()
-    expect(cozyRealtime.getCozySocket()).toBeInstanceOf(Object)
+    expect(await cozyRealtime.getCozySocket()).toBeInstanceOf(Object)
+    expect(await cozyRealtime.getSocket()).toBeInstanceOf(WebSocket)
     jest.runAllTimers()
     onSocketClose({
       wasClean: false,
@@ -395,7 +403,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
       reason: 'expected test close reason'
     })
     jest.runAllTimers()
-    expect(cozyRealtime.getCozySocket()).toBeNull()
+    expect(await cozyRealtime.getCozySocket()).toBeNull()
+    expect(await cozyRealtime.getSocket()).toBeNull()
     expect(mockConnect.mock.calls.length).toBe(1)
     // 2 warns each
     expect(console.warn.mock.calls.length).toBe(1)
@@ -427,6 +436,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
     expect(console.warn.mock.calls.length).toBe(1)
     expect(console.error.mock.calls.length).toBe(1)
     expect(mockConnect.mock.calls.length).toBe(0)
+    // reset
     console.warn.mockRestore()
     console.error.mockRestore()
   })
@@ -438,7 +448,6 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
     let numRetries = RETRIES
     // reset the mock state to remove the initCozySocket usage
     mockConnect.mockReset()
-    jest.useFakeTimers()
     onSocketClose(
       {
         wasClean: false,
@@ -448,7 +457,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
       numRetries,
       200
     )
-    jest.runAllTimers()
+    jest.runOnlyPendingTimers()
     const onSocketClose2 = mockConnect.mock.calls[0][2]
     numRetries--
     onSocketClose2(
@@ -460,7 +469,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
       numRetries,
       200
     )
-    jest.runAllTimers()
+    jest.runOnlyPendingTimers()
     // since we have 2 retries here, it shouldn't call createWebSocket
     // after this next socket closing
     const onSocketClose3 = mockConnect.mock.calls[0][2]
@@ -474,7 +483,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
       numRetries,
       200
     )
-    jest.runAllTimers()
+    jest.runOnlyPendingTimers()
     expect(mockConnect.mock.calls.length).toBe(RETRIES)
   })
 
@@ -487,7 +496,6 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
       throw mockError
     })
     __RewireAPI__.__Rewire__('createWebSocket', mockConnectWithError)
-    jest.useFakeTimers()
     console.error = jest.fn()
     expect(() => {
       onSocketClose(
@@ -504,6 +512,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
     expect(mockConnect.mock.calls.length).toBe(1)
     expect(console.error.mock.calls.length).toBe(1)
     expect(console.error.mock.calls[0][0]).toMatchSnapshot()
+    // reset
     console.error.mockRestore()
   })
 })

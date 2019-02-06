@@ -4,11 +4,8 @@
 // interface, it's a global variable to avoid creating multiple at a time
 let cozySocket
 
-// Important, must match the spec,
-// see https://developer.mozilla.org/en-US/docs/Web/API/WebSocket
-const WEBSOCKET_STATE = {
-  OPEN: 1
-}
+// Here it is wrapped into a promise to be sure to have it ready on resolved
+let socketPromise
 
 const NUM_RETRIES = 3
 const RETRY_BASE_DELAY = 1000
@@ -17,8 +14,9 @@ const RETRY_BASE_DELAY = 1000
 // stored as a Map { [doctype]: socket }
 let subscriptionsState = new Set()
 
-// getters, for testing
+// getters
 export const getSubscriptionsState = () => subscriptionsState
+export const getSocket = async () => socketPromise && (await socketPromise)
 export const getCozySocket = () => cozySocket
 
 // listener key computing, according to doctype only or with doc id
@@ -42,39 +40,22 @@ const hasListeners = socketListeners => {
   }
   return false
 }
-// Send a subscribe message for the given doctype trough the given websocket, but
-// only if it is in a ready state. If not, retry a few milliseconds later.
-const MAX_SOCKET_POLLS = 500 // to avoid infinite polling
-export function subscribeWhenReady(
-  doctype,
-  docId,
-  remainingTries = MAX_SOCKET_POLLS
-) {
-  if (cozySocket.readyState === WEBSOCKET_STATE.OPEN) {
-    try {
-      const payload = { type: doctype }
-      if (docId) payload.id = docId
-      cozySocket.send(
-        JSON.stringify({
-          method: 'SUBSCRIBE',
-          payload
-        })
-      )
-    } catch (error) {
-      console.warn(`Cannot subscribe to doctype ${doctype}: ${error.message}`)
-      throw error
-    }
-  } else {
-    // no retries remaining
-    if (!remainingTries) {
-      const error = new Error('socket failed to connect')
-      console.warn(`Cannot subscribe to doctype ${doctype}: ${error.message}`)
-      throw error
-    } else {
-      setTimeout(() => {
-        subscribeWhenReady(doctype, docId, --remainingTries)
-      }, 10)
-    }
+
+// Send a subscribe message for the given doctype trough the given websocket
+export async function subscribeWhenReady(doctype, docId) {
+  const socket = await getSocket()
+  try {
+    const payload = { type: doctype }
+    if (docId) payload.id = docId
+    socket.send(
+      JSON.stringify({
+        method: 'SUBSCRIBE',
+        payload
+      })
+    )
+  } catch (error) {
+    console.warn(`Cannot subscribe to doctype ${doctype}: ${error.message}`)
+    throw error
   }
 }
 
@@ -155,15 +136,6 @@ export function createWebSocket(
     'io.cozy.websocket'
   )
 
-  socket.onopen = () => {
-    socket.send(
-      JSON.stringify({
-        method: 'AUTH',
-        payload: options.token
-      })
-    )
-  }
-
   const windowUnloadHandler = () => socket.close()
   window.addEventListener('beforeunload', windowUnloadHandler)
 
@@ -174,7 +146,17 @@ export function createWebSocket(
   }
   socket.onerror = error => console.error(`WebSocket error: ${error.message}`)
 
-  cozySocket = socket
+  socketPromise = new Promise(resolve => {
+    socket.onopen = () => {
+      socket.send(
+        JSON.stringify({
+          method: 'AUTH',
+          payload: options.token
+        })
+      )
+      resolve(socket)
+    }
+  })
 
   if (isRetry && subscriptionsState.size) {
     for (let listenerKey of subscriptionsState) {
@@ -250,7 +232,8 @@ export function initCozySocket(config) {
         }, retryDelay)
       } else {
         console.error(`0 tries left. Stop reconnecting realtime.`)
-        // remove cached socket
+        // remove cached socket and promise
+        if (socketPromise) socketPromise = null
         if (cozySocket) cozySocket = null
       }
     }
