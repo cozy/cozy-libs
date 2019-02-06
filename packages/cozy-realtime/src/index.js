@@ -33,6 +33,13 @@ const getTypeAndIdFromListenerKey = listenerKey => {
   }
 }
 
+// return true if the there is at least one event listener
+const hasListeners = socketListeners => {
+  for (let event of ['created', 'updated', 'deleted']) {
+    if (socketListeners[event] && socketListeners[event].length) return true
+  }
+  return false
+}
 // Send a subscribe message for the given doctype trough the given websocket, but
 // only if it is in a ready state. If not, retry a few milliseconds later.
 const MAX_SOCKET_POLLS = 500 // to avoid infinite polling
@@ -277,18 +284,23 @@ export function getCozySocket(config) {
     },
     unsubscribe: (doctype, event, listener, docId) => {
       const listenerKey = getListenerKey(doctype, docId)
-      if (
-        listeners.has(listenerKey) &&
-        listeners.get(listenerKey)[event] &&
-        listeners.get(listenerKey)[event].includes(listener)
-      ) {
-        listeners.set(listenerKey, {
-          ...listeners.get(listenerKey),
-          [event]: listeners.get(listenerKey)[event].filter(l => l !== listener)
-        })
-      }
-      if (subscriptionsState.has(listenerKey)) {
-        subscriptionsState.delete(listenerKey)
+      if (listeners.has(listenerKey)) {
+        const socketListeners = listeners.get(listenerKey)
+        if (
+          socketListeners[event] &&
+          socketListeners[event].includes(listener)
+        ) {
+          listeners.set(listenerKey, {
+            ...socketListeners,
+            [event]: socketListeners[event].filter(l => l !== listener)
+          })
+        }
+        if (!hasListeners(listeners.get(listenerKey))) {
+          listeners.delete(listenerKey)
+          if (subscriptionsState.has(listenerKey)) {
+            subscriptionsState.delete(listenerKey)
+          }
+        }
       }
     }
   }

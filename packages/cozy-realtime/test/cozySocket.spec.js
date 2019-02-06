@@ -37,67 +37,145 @@ describe('(cozy-realtime) cozySocket handling and getCozySocket: ', () => {
 
   it('cozySocket should not send socket message and add state multiple times if this is the same doctype', () => {
     const cozySocket = cozyRealtime.getCozySocket(mockConfig)
-    cozySocket.subscribe('io.cozy.mocks', 'created', jest.fn())
-    cozySocket.subscribe('io.cozy.mocks', 'updated', jest.fn())
-    cozySocket.subscribe('io.cozy.mocks', 'deleted', jest.fn())
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockCreatedListener = jest.fn()
+    const mockUpdatedListener = jest.fn()
+    const mockDeletedListener = jest.fn()
+    cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.subscribe('io.cozy.mocks', 'updated', mockUpdatedListener)
+    cozySocket.subscribe('io.cozy.mocks', 'deleted', mockDeletedListener)
     expect(mockSendSubscribe.mock.calls.length).toBe(1)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(1)
     expect(cozyRealtime.getSubscriptionsState()).toMatchSnapshot()
     // reset
-    cozySocket.unsubscribe('io.cozy.mocks', 'created', jest.fn())
-    cozySocket.unsubscribe('io.cozy.mocks', 'updated', jest.fn())
-    cozySocket.unsubscribe('io.cozy.mocks', 'deleted', jest.fn())
+    cozySocket.unsubscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.unsubscribe('io.cozy.mocks', 'updated', mockUpdatedListener)
+    cozySocket.unsubscribe('io.cozy.mocks', 'deleted', mockDeletedListener)
   })
 
   it('cozySocket should send socket message and add state multiple times if this is the different doctypes', () => {
     const cozySocket = cozyRealtime.getCozySocket(mockConfig)
-    cozySocket.subscribe('io.cozy.mocks', 'created', jest.fn())
-    cozySocket.subscribe('io.cozy.mocks2', 'updated', jest.fn())
-    cozySocket.subscribe('io.cozy.mocks3', 'deleted', jest.fn())
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockCreatedListener = jest.fn()
+    const mockUpdatedListener = jest.fn()
+    const mockDeletedListener = jest.fn()
+    cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.subscribe('io.cozy.mocks2', 'updated', mockUpdatedListener)
+    cozySocket.subscribe('io.cozy.mocks3', 'deleted', mockDeletedListener)
     expect(mockSendSubscribe.mock.calls.length).toBe(3)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(3)
     expect(cozyRealtime.getSubscriptionsState()).toMatchSnapshot()
     // reset
-    cozySocket.unsubscribe('io.cozy.mocks', 'created', jest.fn())
-    cozySocket.unsubscribe('io.cozy.mocks2', 'updated', jest.fn())
-    cozySocket.unsubscribe('io.cozy.mocks3', 'deleted', jest.fn())
+    cozySocket.unsubscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.unsubscribe('io.cozy.mocks2', 'updated', mockUpdatedListener)
+    cozySocket.unsubscribe('io.cozy.mocks3', 'deleted', mockDeletedListener)
   })
 
   it('cozySocket should send socket message and add state multiple times if this is different doc ids', () => {
     const cozySocket = cozyRealtime.getCozySocket(mockConfig)
-    cozySocket.subscribe('io.cozy.mocks', 'updated', jest.fn(), 'id1234')
-    cozySocket.subscribe('io.cozy.mocks', 'updated', jest.fn(), 'id5678')
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockUpdatedListener = jest.fn()
+    const mockUpdatedListener2 = jest.fn()
+    cozySocket.subscribe(
+      'io.cozy.mocks',
+      'updated',
+      mockUpdatedListener,
+      'id1234'
+    )
+    cozySocket.subscribe(
+      'io.cozy.mocks',
+      'updated',
+      mockUpdatedListener2,
+      'id5678'
+    )
     expect(mockSendSubscribe.mock.calls.length).toBe(2)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(2)
     expect(cozyRealtime.getSubscriptionsState()).toMatchSnapshot()
     // reset
-    cozySocket.unsubscribe('io.cozy.mocks', 'updated', jest.fn(), 'id1234')
-    cozySocket.unsubscribe('io.cozy.mocks', 'updated', jest.fn(), 'id5678')
+    cozySocket.unsubscribe(
+      'io.cozy.mocks',
+      'updated',
+      mockUpdatedListener,
+      'id1234'
+    )
+    cozySocket.unsubscribe(
+      'io.cozy.mocks',
+      'updated',
+      mockUpdatedListener2,
+      'id5678'
+    )
   })
 
   it('cozySocket should remove doctype from subscriptions state on unsubscribe', () => {
     const cozySocket = cozyRealtime.getCozySocket(mockConfig)
-    cozySocket.subscribe('io.cozy.mocks', 'created', jest.fn())
-    cozySocket.subscribe('io.cozy.mocks2', 'updated', jest.fn(), 'id1234')
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockCreatedListener = jest.fn()
+    const mockUpdatedListener = jest.fn()
+    cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.subscribe(
+      'io.cozy.mocks2',
+      'updated',
+      mockUpdatedListener,
+      'id1234'
+    )
     expect(mockSendSubscribe.mock.calls.length).toBe(2)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(2)
-    cozySocket.unsubscribe('io.cozy.mocks', 'created', jest.fn())
-    cozySocket.unsubscribe('io.cozy.mocks2', 'updated', jest.fn(), 'id1234')
+    cozySocket.unsubscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.unsubscribe(
+      'io.cozy.mocks2',
+      'updated',
+      mockUpdatedListener,
+      'id1234'
+    )
     expect(cozyRealtime.getSubscriptionsState().size).toBe(0)
+  })
+
+  it('cozySocket should remove doctype from subscriptions state only if there are no more remaining listeners', () => {
+    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockCreatedListener = jest.fn()
+    const mockUpdatedListener = jest.fn()
+    cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.subscribe('io.cozy.mocks', 'updated', mockUpdatedListener)
+    expect(cozyRealtime.getSubscriptionsState().size).toBe(1)
+    cozySocket.unsubscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    expect(cozyRealtime.getSubscriptionsState().size).toBe(1)
+    cozySocket.unsubscribe('io.cozy.mocks', 'updated', mockUpdatedListener)
+    expect(cozyRealtime.getSubscriptionsState().size).toBe(0)
+  })
+
+  it('cozySocket should remove doctype from subscriptions state only if it exists', () => {
+    const cozySocket = cozyRealtime.getCozySocket(mockConfig)
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockCreatedListener = jest.fn()
+    const mockUpdatedListener = jest.fn()
+    cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
+    cozySocket.subscribe('io.cozy.mocks', 'updated', mockUpdatedListener)
+    __RewireAPI__.__Rewire__('subscriptionsState', new Set())
+    expect(cozyRealtime.getSubscriptionsState().size).toBe(0)
+    expect(() => {
+      cozySocket.unsubscribe('io.cozy.mocks', 'created', mockCreatedListener)
+      cozySocket.unsubscribe('io.cozy.mocks', 'updated', mockUpdatedListener)
+    }).not.toThrowError()
+    expect(cozyRealtime.getSubscriptionsState().size).toBe(0)
+    // reset
+    __RewireAPI__.__ResetDependency__('subscriptionsState')
   })
 
   it('cozySocket should not throw any error if we unsubscribe not subscribed doctype', () => {
     const cozySocket = cozyRealtime.getCozySocket(mockConfig)
-    cozySocket.subscribe('io.cozy.mocks', 'created', jest.fn())
+    // we have to keep a reference for each listener for subscribing/unsubscribing
+    const mockCreatedListener = jest.fn()
+    cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
     expect(mockSendSubscribe.mock.calls.length).toBe(1)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(1)
     expect(() => {
-      cozySocket.unsubscribe('io.cozy.mocks2', 'updated', jest.fn())
+      cozySocket.unsubscribe('io.cozy.mocks2', 'updated', mockCreatedListener)
     }).not.toThrowError()
     expect(mockSendSubscribe.mock.calls.length).toBe(1)
     expect(cozyRealtime.getSubscriptionsState().size).toBe(1)
     // reset
-    cozySocket.unsubscribe('io.cozy.mocks', 'created', jest.fn())
+    cozySocket.unsubscribe('io.cozy.mocks', 'created', mockCreatedListener)
   })
 
   it('cozySocket should throw an error if the listener provided is not a function', () => {
