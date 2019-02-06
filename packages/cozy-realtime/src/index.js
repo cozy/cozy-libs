@@ -37,8 +37,8 @@ const getTypeAndIdFromListenerKey = listenerKey => {
 // only if it is in a ready state. If not, retry a few milliseconds later.
 const MAX_SOCKET_POLLS = 500 // to avoid infinite polling
 export function subscribeWhenReady(
-  doctype,
   socket,
+  doctype,
   docId,
   remainingTries = MAX_SOCKET_POLLS
 ) {
@@ -64,7 +64,7 @@ export function subscribeWhenReady(
       throw error
     } else {
       setTimeout(() => {
-        subscribeWhenReady(doctype, socket, docId, --remainingTries)
+        subscribeWhenReady(socket, doctype, docId, --remainingTries)
       }, 10)
     }
   }
@@ -169,7 +169,7 @@ export function connectWebSocket(
   if (isRetry && subscriptionsState.size) {
     for (let listenerKey of subscriptionsState) {
       const { doctype, docId } = getTypeAndIdFromListenerKey(listenerKey)
-      subscribeWhenReady(doctype, socket, docId)
+      subscribeWhenReady(socket, doctype, docId)
     }
   }
 
@@ -263,7 +263,7 @@ export function getCozySocket(config) {
 
       if (!listeners.has(listenerKey)) {
         listeners.set(listenerKey, {})
-        subscribeWhenReady(doctype, socket, docId)
+        subscribeWhenReady(socket, doctype, docId)
       }
 
       listeners.set(listenerKey, {

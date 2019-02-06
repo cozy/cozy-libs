@@ -21,7 +21,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       send: jest.fn()
     }
     jest.useFakeTimers()
-    mockSubscribe('io.cozy.mocks', mockSocket)
+    mockSubscribe(mockSocket, 'io.cozy.mocks')
     // we run pending timers for a number less one
     Array.apply(null, { length: MAX_RETRIES - 1 }).forEach(() => {
       jest.runOnlyPendingTimers()
@@ -42,7 +42,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
       send: jest.fn()
     }
     jest.useFakeTimers()
-    mockSubscribe('io.cozy.mocks', mockSocket, 'id1234')
+    mockSubscribe(mockSocket, 'io.cozy.mocks', 'id1234')
     // we run pending timers for a number less one
     Array.apply(null, { length: MAX_RETRIES - 1 }).forEach(() => {
       jest.runOnlyPendingTimers()
@@ -66,7 +66,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
     jest.useFakeTimers()
     console.warn = jest.fn()
     expect(() => {
-      mockSubscribe('io.cozy.mocks', mockSocket, null, maxRetries)
+      mockSubscribe(mockSocket, 'io.cozy.mocks', null, maxRetries)
       // we run pending timers for all retries
       Array.apply(null, { length: maxRetries }).forEach(() => {
         jest.runOnlyPendingTimers()
@@ -86,7 +86,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
     }
     jest.useFakeTimers()
     expect(() => {
-      mockSubscribe('io.cozy.mocks', mockSocket)
+      mockSubscribe(mockSocket, 'io.cozy.mocks')
       // we run pending timers for all retries
       Array.apply(null, { length: MAX_RETRIES }).forEach(() => {
         jest.runOnlyPendingTimers()
@@ -103,7 +103,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
     }
     jest.useFakeTimers()
     expect(() => {
-      mockSubscribe('io.cozy.mocks', mockSocket, 'id1234')
+      mockSubscribe(mockSocket, 'io.cozy.mocks', 'id1234')
       // we run pending timers for all retries
       Array.apply(null, { length: MAX_RETRIES }).forEach(() => {
         jest.runOnlyPendingTimers()
@@ -124,7 +124,7 @@ describe('(cozy-realtime) subscribeWhenReady: ', () => {
     jest.useFakeTimers()
     console.warn = jest.fn()
     expect(() => {
-      mockSubscribe('io.cozy.mocks', mockSocket)
+      mockSubscribe(mockSocket, 'io.cozy.mocks')
       // we run pending timers for all retries
       Array.apply(null, { length: MAX_RETRIES }).forEach(() => {
         jest.runOnlyPendingTimers()
