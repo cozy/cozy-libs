@@ -3,7 +3,7 @@
     "submit": {
       "label": "Submit"
     },
-    "fields":{
+    "fields": {
       "optional": "(optional)"
     },
     "password": {
@@ -29,7 +29,7 @@
       "label": "Date",
       "placeholder": "mm/dd/yyyy"
     },
-    "email" : {
+    "email": {
       "label": "Email address"
     },
     "firstname": {
