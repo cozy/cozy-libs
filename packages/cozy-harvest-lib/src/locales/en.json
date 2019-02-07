@@ -52,5 +52,87 @@
     "connect": {
       "label": "Connect"
     }
+  },
+  "legacy": {
+    "fields": {
+      "access_token": {
+        "label": "Access token"
+      },
+      "accessTokenSecret": {
+        "label": "Access token secret"
+      },
+      "accountName": {
+        "label": "Account name"
+      },
+      "agreement": {
+        "label": "I agree"
+      },
+      "apikey": {
+        "label": "Api key"
+      },
+      "appKey": {
+        "label": "Application Key"
+      },
+      "appSecret": {
+        "label": "Application Secret"
+      },
+      "authCode": {
+        "label": "Auth code"
+      },
+      "bank_identifier": {
+        "label": "Bank identifier (optional)"
+      },
+      "branchName": {
+        "label": "Branch"
+      },
+      "cardNumber": {
+        "label": "Card Number"
+      },
+      "consumerKey": {
+        "label": "Consumer Key"
+      },
+      "consumerSecret": {
+        "label": "Consumer Secret"
+      },
+      "dob": {
+        "label": "Date of birth"
+      },
+      "folderPath": {
+        "label": "Folder path"
+      },
+      "identifier": {
+        "label": "Identifier"
+      },
+      "loginUrl": {
+        "label": "Login URL"
+      },
+      "namePath": {
+        "label": "Folder name"
+      },
+      "new_identifier": {
+        "label": "Identifier"
+      },
+      "phoneNumber": {
+        "label": "Phone number"
+      },
+      "profileName": {
+        "label": "Profile Name"
+      },
+      "refreshToken": {
+        "label": "Refresh Token"
+      },
+      "secret": {
+        "label": "Password"
+      },
+      "timeout": {
+        "label": "Delay (ms)"
+      },
+      "token": {
+        "label": "Token"
+      },
+      "tricountUrl": {
+        "label": "Tricount URL"
+      }
+    }
   }
 }

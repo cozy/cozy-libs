@@ -43,7 +43,9 @@ export class AccountField extends PureComponent {
       className: 'u-m-0', // 0 margin
       disabled: !isEditable,
       fullwidth: true,
-      label: t(`fields.${localeKey}.label`, { _: name }),
+      label: t(`fields.${localeKey}.label`, {
+        _: t(`legacy.fields.${localeKey}.label`, { _: name })
+      }),
       placeholder: getFieldPlaceholder(
         this.props,
         t(`fields.${name}.placeholder`, { _: '' })
