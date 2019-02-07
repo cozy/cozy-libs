@@ -23,7 +23,7 @@ WebSocket {
 }
 `;
 
-exports[`(cozy-realtime) createWebSocket:  socket should create a global socket with provided domain and secure option 1`] = `
+exports[`(cozy-realtime) createWebSocket:  socket should create a global socket promise with provided domain and secure option 1`] = `
 WebSocket {
   "binaryType": "blob",
   "listeners": Object {

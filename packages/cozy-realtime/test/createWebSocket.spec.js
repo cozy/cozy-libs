@@ -13,6 +13,7 @@ jest.useFakeTimers() // mock-socket use timers to delay onopen call
 describe('(cozy-realtime) createWebSocket: ', () => {
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.resetModules()
     __RewireAPI__.__Rewire__('subscribeWhenReady', mockSubscribe)
     __RewireAPI__.__Rewire__('socketPromise', null)
     server = new Server(REALTIME_URL)
@@ -25,7 +26,7 @@ describe('(cozy-realtime) createWebSocket: ', () => {
     server.stop()
   })
 
-  it('socket should create a global socket with provided domain and secure option', async () => {
+  it('socket should create a global socket promise with provided domain and secure option', async () => {
     const mockConfig = {
       domain: MOCK_SERVER_DOMAIN,
       secure: false,

@@ -13,6 +13,7 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
 
   beforeEach(() => {
     jest.clearAllMocks()
+    jest.resetModules()
     // reset timeouts
     jest.runAllTimers()
     // rewire the internal functions usage
