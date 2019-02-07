@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="2.0.0"></a>
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@1.4.0...cozy-realtime@2.0.0) (2019-02-07)
+
+
+### Features
+
+* **realtime:** :pencil2: Clean changelog ([887c886](https://github.com/cozy/cozy-libs/commit/887c886))
+
+
+### BREAKING CHANGES
+
+* **realtime:** Force major release (previously failed 1.4.0)
+
 
 
 
