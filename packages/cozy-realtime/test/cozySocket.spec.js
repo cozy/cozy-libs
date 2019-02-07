@@ -43,13 +43,15 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
     expect(mockConnect.mock.calls[0]).toMatchSnapshot()
   })
 
-  it('initCozySocket should return a configured cozy socket', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+  it('initCozySocket should define a global configured cozy socket', () => {
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     expect(cozySocket).toMatchSnapshot()
   })
 
   it('cozySocket should not send socket message, add doctype listener and state multiple times if this is the same doctype', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -67,7 +69,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('cozySocket should send socket message and add state multiple times if this is the different doctypes', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -85,7 +88,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('cozySocket should send socket message and add state multiple times if this is different doc ids', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockUpdatedListener = jest.fn()
     const mockUpdatedListener2 = jest.fn()
@@ -120,7 +124,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('cozySocket should remove doctype listener from listeners on unsubscribe', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -143,7 +148,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('cozySocket should remove doctype listener from listeners only if there are no more remaining listeners', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     const mockUpdatedListener = jest.fn()
@@ -157,7 +163,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('cozySocket should not throw any error if we unsubscribe not subscribed doctype', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     // we have to keep a reference for each listener for subscribing/unsubscribing
     const mockCreatedListener = jest.fn()
     cozySocket.subscribe('io.cozy.mocks', 'created', mockCreatedListener)
@@ -173,7 +180,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('cozySocket should throw an error if the listener provided is not a function', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     expect(() => {
       cozySocket.subscribe('io.cozy.mocks', 'updated', 'notAFunction')
     }).toThrowErrorMatchingSnapshot()
@@ -210,7 +218,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('onSocketMessage provided by initCozySocket to createWebSocket should call provided listener if matched event received', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -236,7 +245,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('onSocketMessage provided by initCozySocket to createWebSocket should not call provided listener if wrong event received', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -261,7 +271,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('onSocketMessage provided by initCozySocket to createWebSocket should not call provided listener if wrong doctype received', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -286,7 +297,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('onSocketMessage provided by initCozySocket to createWebSocket should handle payload wihout id', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',
@@ -311,7 +323,8 @@ describe('(cozy-realtime) cozySocket handling and initCozySocket: ', () => {
   })
 
   it('onSocketMessage provided by initCozySocket to createWebSocket should call all listeners with correct docId provided', () => {
-    const cozySocket = cozyRealtime.initCozySocket(mockConfig)
+    cozyRealtime.initCozySocket(mockConfig)
+    const cozySocket = cozyRealtime.getCozySocket()
     const onSocketMessage = mockConnect.mock.calls[0][1]
     const mockDoc = {
       _id: 'mockId',

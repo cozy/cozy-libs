@@ -67,7 +67,7 @@ Array [
 ]
 `;
 
-exports[`(cozy-realtime) cozySocket handling and initCozySocket:  initCozySocket should return a configured cozy socket 1`] = `
+exports[`(cozy-realtime) cozySocket handling and initCozySocket:  initCozySocket should define a global configured cozy socket 1`] = `
 Object {
   "subscribe": [Function],
   "unsubscribe": [Function],

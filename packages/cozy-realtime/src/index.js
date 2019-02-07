@@ -245,7 +245,7 @@ export function initCozySocket(config) {
     RETRY_BASE_DELAY
   )
 
-  return {
+  cozySocket = {
     subscribe: (doctype, event, listener, docId) => {
       if (typeof listener !== 'function')
         throw new Error('Realtime event listener must be a function')
