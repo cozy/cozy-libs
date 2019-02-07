@@ -9,3 +9,4 @@ packages/cozy-interapp @gregorylegarec @kosssi
 packages/cozy-doctypes @ptbrowne @kosssi
 packages/cozy-release @gregorylegarec @cpatchane
 packages/renovate-config-cozy @y-lohse @doubleface @kosssi
+packages/cozy-authentication @Crash-- @kosssi
