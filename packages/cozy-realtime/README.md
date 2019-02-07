@@ -54,6 +54,8 @@ This method allow you to subscribe to realtime for one document or all documents
   - `docId`: a document `_id` attribute to target in order to get realtime only for this specific document
   - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
 
+It will return a subscription object with `onCreate` (except if subscribing on specific document), `onUpdate` and `onDelete` methods.
+
 Here is an example:
 
 ```javascript
@@ -73,7 +75,7 @@ subscription.onUpdate(doc => doSomethingOnUpdate(doc))
 // your code when a document is deleted
 subscription.onDelete(doc => doSomethingOnDelete(doc))
 
-// Unsubscribe from realtime
+// Unsubscribe all events from realtime
 subscription.unsubscribe()
 
 // for a specific document
@@ -87,8 +89,30 @@ docSubscription.onUpdate(doc => doSomethingOnUpdate(doc))
 // your code when your document is deleted
 docSubscription.onDelete(doc => doSomethingOnDelete(doc))
 
-// Unsubscribe from realtime
+// Unsubscribe all events from realtime
 docSubscription.unsubscribe()
+```
+
+All `onCreate`, `onUpdate` and `onDelete` methods will return the subscription so you can chain the call like below:
+
+```javascript
+import realtime from 'cozy-realtime'
+
+const config = {
+    token: authToken, // app token provided by the stack or the client
+    domain: 'cozy.tools:8080',
+    secure: true // to use wss (with SSL) or not
+  }
+const subscription = realtime.subscribe(config, 'io.mocks.mydocs')
+  // your code when a new document is created
+  .onCreate(doc => doSomethingOnCreate(doc))
+  // your code when a document is updated
+  .onUpdate(doc => doSomethingOnUpdate(doc))
+  // your code when a document is deleted
+  .onDelete(doc => doSomethingOnDelete(doc))
+
+// Unsubscribe all events from realtime
+subscription.unsubscribe()
 ```
 
 ### Maintainers
