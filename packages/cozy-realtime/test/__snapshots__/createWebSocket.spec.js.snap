@@ -244,32 +244,6 @@ MessageEvent {
 }
 `;
 
-exports[`(cozy-realtime) createWebSocket:  socket should send doctype and docId subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
-Array [
-  Array [
-    "io.cozy.mocks",
-    "id1234",
-  ],
-  Array [
-    "io.cozy.mocks2",
-    null,
-  ],
-]
-`;
-
-exports[`(cozy-realtime) createWebSocket:  socket should send doctype subscriptions again if this is a retry and if there are subscriptionsState 1`] = `
-Array [
-  Array [
-    "io.cozy.mocks",
-    null,
-  ],
-  Array [
-    "io.cozy.mocks2",
-    null,
-  ],
-]
-`;
-
 exports[`(cozy-realtime) createWebSocket:  socket should throw error if no url or domain provided 1`] = `"domain is required if no attribute url are provider.."`;
 
 exports[`(cozy-realtime) createWebSocket:  socket should throw error if wrong url format provided 1`] = `"Unable to detect domain"`;

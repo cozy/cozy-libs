@@ -10,12 +10,12 @@ let socketPromise
 const NUM_RETRIES = 3
 const RETRY_BASE_DELAY = 1000
 
-// stored subscriptions arguments to rerun while a retry
-// stored as a Map { [doctype]: socket }
-let subscriptionsState = new Set()
+// stored listeners
+// stored as Map { [doctype]: Object { [event]: listeners } }
+let listeners = new Map()
 
 // getters
-export const getSubscriptionsState = () => subscriptionsState
+export const getListeners = () => listeners
 export const getSocket = async () => socketPromise && (await socketPromise)
 export const getCozySocket = () => cozySocket
 
@@ -115,8 +115,7 @@ export function createWebSocket(
   onmessage,
   onclose,
   numRetries,
-  retryDelay,
-  isRetry
+  retryDelay
 ) {
   validateConfig(config)
   const options = {
@@ -157,18 +156,9 @@ export function createWebSocket(
       resolve(socket)
     }
   })
-
-  if (isRetry && subscriptionsState.size) {
-    for (let listenerKey of subscriptionsState) {
-      const { doctype, docId } = getTypeAndIdFromListenerKey(listenerKey)
-      subscribeWhenReady(doctype, docId)
-    }
-  }
 }
 
 export function initCozySocket(config) {
-  const listeners = new Map()
-
   const onSocketMessage = event => {
     const data = JSON.parse(event.data)
     const eventType = data.event.toLowerCase()
@@ -221,9 +211,17 @@ export function initCozySocket(config) {
               onSocketMessage,
               onSocketClose,
               --numRetries,
-              retryDelay + 1000,
-              true
+              retryDelay + 1000
             )
+            // retry
+            if (listeners.size) {
+              listeners.forEach((value, listenerKey) => {
+                const { doctype, docId } = getTypeAndIdFromListenerKey(
+                  listenerKey
+                )
+                subscribeWhenReady(doctype, docId)
+              })
+            }
           } catch (error) {
             console.error(
               `Unable to reconnect to realtime. Error: ${error.message}`
@@ -248,8 +246,6 @@ export function initCozySocket(config) {
   )
 
   return {
-    // for testing only
-    _getListeners: () => listeners,
     subscribe: (doctype, event, listener, docId) => {
       if (typeof listener !== 'function')
         throw new Error('Realtime event listener must be a function')
@@ -267,10 +263,6 @@ export function initCozySocket(config) {
         ...listeners.get(listenerKey),
         [event]: eventListeners
       })
-
-      if (!subscriptionsState.has(listenerKey)) {
-        subscriptionsState.add(listenerKey)
-      }
     },
     unsubscribe: (doctype, event, listener, docId) => {
       const listenerKey = getListenerKey(doctype, docId)
@@ -287,9 +279,6 @@ export function initCozySocket(config) {
         }
         if (!hasListeners(listeners.get(listenerKey))) {
           listeners.delete(listenerKey)
-          if (subscriptionsState.has(listenerKey)) {
-            subscriptionsState.delete(listenerKey)
-          }
         }
       }
     }
