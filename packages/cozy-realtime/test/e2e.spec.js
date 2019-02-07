@@ -39,7 +39,7 @@ describe('(cozy-realtime) API: ', () => {
       // unsubscribe
       subscription.unsubscribe()
       jest.runAllTimers()
-      expect(getListeners().size).toBe(0) // one doctype listener here
+      expect(getListeners().size).toBe(0)
     })
 
     it('should have a correctly configured socket, cozySocket and listeners on subscribe call and reset listeners on unsubscribe (one doc)', async () => {
@@ -56,7 +56,7 @@ describe('(cozy-realtime) API: ', () => {
       // unsubscribe
       subscription.unsubscribe()
       jest.runAllTimers()
-      expect(getListeners().size).toBe(0) // one doctype listener here
+      expect(getListeners().size).toBe(0)
     })
   })
 })
