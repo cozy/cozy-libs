@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.0"></a>
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@1.2.8...cozy-realtime@1.3.0) (2019-02-07)
+
+
+### Bug Fixes
+
+* :nail_care: Handle correctly websocket retries ([efd26d8](https://github.com/cozy/cozy-libs/commit/efd26d8)), closes [#199](https://github.com/cozy/cozy-libs/issues/199)
+* :wrench: cache the socket promise instead of the socket itself ([f5a6c1d](https://github.com/cozy/cozy-libs/commit/f5a6c1d)), closes [#143](https://github.com/cozy/cozy-libs/issues/143)
+* **realtime:** :bug: Better handling subscriptions state cleaning ([f6bc6fb](https://github.com/cozy/cozy-libs/commit/f6bc6fb))
+* **realtime:** :bug: Func initCozySocket must define global cozySocket ([9d4c8c3](https://github.com/cozy/cozy-libs/commit/9d4c8c3))
+* **realtime:** :nail_care: Remove async ([c426ffa](https://github.com/cozy/cozy-libs/commit/c426ffa))
+* **realtime:** :nail_care: Use only global cozySocket ([d3b62e0](https://github.com/cozy/cozy-libs/commit/d3b62e0))
+* **realtime:** :wrench: Minor review changes ([fbc7dfa](https://github.com/cozy/cozy-libs/commit/fbc7dfa))
+* **realtime:** :wrench: Reorder subscribeWhenReady arguments ([40b81dc](https://github.com/cozy/cozy-libs/commit/40b81dc))
+* **realtime:** 💅  Add max poll tries + tests to subscribeWhenReady ([3849ac6](https://github.com/cozy/cozy-libs/commit/3849ac6))
+
+
+### Code Refactoring
+
+* **realtime:** :sparkles: Remove async + use simpler API ([65e5a16](https://github.com/cozy/cozy-libs/commit/65e5a16)), closes [#145](https://github.com/cozy/cozy-libs/issues/145)
+
+
+### Features
+
+* **realtime:** Use promise instead of polling to handle authenticating ([bdbf440](https://github.com/cozy/cozy-libs/commit/bdbf440))
+
+
+### BREAKING CHANGES
+
+* **realtime:** New and simpler API + no more async usage
+
+
+
+
 <a name="1.2.8"></a>
 ## [1.2.8](https://github.com/cozy/cozy-libs/compare/cozy-realtime@1.2.7...cozy-realtime@1.2.8) (2019-01-28)
 

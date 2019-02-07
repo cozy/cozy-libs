@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.26.0"></a>
+# [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.25.2...cozy-harvest-lib@0.26.0) (2019-02-07)
+
+
+### Features
+
+* **harvest:** Do not show OAuth button in edit form 📝 ([241dbd4](https://github.com/cozy/cozy-libs/commit/241dbd4))
+
+
+
+
 <a name="0.25.2"></a>
 ## [0.25.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.25.1...cozy-harvest-lib@0.25.2) (2019-01-30)
 
