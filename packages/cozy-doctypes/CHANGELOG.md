@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.33.2"></a>
+## [1.33.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.1...cozy-doctypes@1.33.2) (2019-02-08)
+
+
+### Bug Fixes
+
+* Add compacted original bank label method ([560f038](https://github.com/cozy/cozy-libs/commit/560f038))
+
+
+
+
 <a name="1.33.1"></a>
 ## [1.33.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.0...cozy-doctypes@1.33.1) (2019-02-07)
 
