@@ -91,23 +91,23 @@ exports[`AccountForm AccountField render a dropdown field 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "legacy.fields.multiple.label",
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "fields.multiple.label",
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "fields.multiple.placeholder",
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "accountForm.password.hide",
           },
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "accountForm.password.show",
           },
         ],
@@ -231,7 +231,7 @@ exports[`AccountForm should have disabled button if there is required field empt
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "accountForm.submit.label",
           },
         ],
@@ -272,7 +272,7 @@ exports[`AccountForm should have enabled button if fields isn't required 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "accountForm.submit.label",
           },
         ],
@@ -318,7 +318,7 @@ exports[`AccountForm should have enabled button if required field isn't empty 1`
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "accountForm.submit.label",
           },
         ],
@@ -374,7 +374,7 @@ exports[`AccountForm should render 1`] = `
         ],
         "results": Array [
           Object {
-            "isThrow": false,
+            "type": "return",
             "value": "accountForm.submit.label",
           },
         ],

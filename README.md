@@ -13,7 +13,8 @@
 ## Dev tools
 
 - [Babel Preset Cozy App](./packages/babel-preset-cozy-app): Config for babel transpiling (for applications and libraries)
-- [Cozy Commitlint Config](./packages/commitlint-config): Commitlint config enforcing the cozy commit convention
+- [Cozy Commitlint Config](./packages/commitlint-config-cozy): Commitlint config enforcing the cozy commit convention
+- [Cozy Browserslist Config](./packages/browserslist-config-cozy): Browserslist config enforcing the official Cozy supported browsers
 - [ESLint Config Cozy App](./packages/eslint-config-cozy-app): Config for eslint using prettier (for applications and libraries)
 
 ## CLI

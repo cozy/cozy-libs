@@ -4,6 +4,7 @@ packages/cozy-realtime @gregorylegarec @cpatchane
 packages/babel-preset-cozy-app @cpatchane
 packages/eslint-config-cozy-app @cpatchane
 packages/commitlint-config-cozy @kosssi @enguerran
+packages/browserslist-config-cozy @cpatchane @Crash--
 packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
 packages/cozy-interapp @gregorylegarec @kosssi
 packages/cozy-doctypes @ptbrowne @kosssi

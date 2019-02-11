@@ -1,0 +1,26 @@
+{
+  "name": "browserslist-config-cozy",
+  "version": "0.1.0",
+  "description": "Shareable browserslist config enforcing the Cozy official supported browsers list",
+  "main": "index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/browserslist-config-cozy/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "test": "jest --env node ./*.spec.js"
+  },
+  "devDependencies": {
+    "jest-cli": "^24.1.0"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ]
+}

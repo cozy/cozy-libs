@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`browserslist should contain all Cozy supported browsers 1`] = `
+Array [
+  "last 2 Chrome major versions",
+  "last 2 Firefox major versions",
+  "last 2 FirefoxAndroid major versions",
+  "last 2 Safari major versions",
+  "last 3 iOS major versions",
+  "last 2 Edge major versions",
+  "Firefox ESR",
+  "Android 4.4",
+  "> 1% in FR",
+  "not dead",
+  "not ie <= 11",
+]
+`;
