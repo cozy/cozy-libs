@@ -19,6 +19,7 @@
     "jest": "23.6.0"
   },
   "scripts": {
+    "lint": "cd ../../; yarn lint packages/cozy-doctypes",
     "build": "babel src -d dist",
     "test": "jest src/",
     "encrypt-banking-tests": "cd src/banking/; make encrypted.tar.gz.gpg",

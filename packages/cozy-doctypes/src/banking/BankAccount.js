@@ -1,5 +1,4 @@
 const groupBy = require('lodash/groupBy')
-const log = require('cozy-logger').namespace('BankAccount')
 const Document = require('../Document')
 const matching = require('./matching-accounts')
 
@@ -37,25 +36,6 @@ class BankAccount extends Document {
     }
     return res
   }
-
-  static reconciliationKey(account) {
-    if (this.numberAttr) {
-      log(
-        'warn',
-        'numberAttr is deprecated, use reconciliationAttributes instead'
-      )
-      return this[this.numberAttr]
-    } else if (this.reconciliationAttributes) {
-      const key = this.reconciliationAttributes
-        .map(attr => account[attr])
-        .join(' | ')
-      return key
-    } else {
-      throw new Error(
-        'Cannot make reconciliationKey without reconciliationAttributes'
-      )
-    }
-  }
 }
 
 BankAccount.normalizeAccountNumber = matching.normalizeAccountNumber
@@ -63,7 +43,6 @@ BankAccount.doctype = 'io.cozy.bank.accounts'
 BankAccount.idAttributes = ['_id']
 BankAccount.version = 1
 BankAccount.checkedAttributes = null
-BankAccount.reconciliationAttributes = ['number', 'label']
 BankAccount.vendorIdAttr = 'vendorId'
 
 module.exports = BankAccount
