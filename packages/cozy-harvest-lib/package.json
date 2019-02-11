@@ -18,7 +18,7 @@
     "prebuild": "yarn tx",
     "prepublishOnly": "yarn build",
     "test": "jest --verbose --coverage",
-    "tx": "tx pull --all || true",
+    "tx": "tx pull --all",
     "watch": "babel src -d dist --copy-files --watch"
   },
   "dependencies": {
