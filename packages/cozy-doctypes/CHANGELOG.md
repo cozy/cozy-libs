@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.0"></a>
+# [1.34.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.3...cozy-doctypes@1.34.0) (2019-02-11)
+
+
+### Features
+
+* Remove reconciliationKey no longer used by matching algo ([4c3a76a](https://github.com/cozy/cozy-libs/commit/4c3a76a))
+
+
+
+
 <a name="1.33.3"></a>
 ## [1.33.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.2...cozy-doctypes@1.33.3) (2019-02-11)
 

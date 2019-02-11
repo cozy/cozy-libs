@@ -1,6 +1,6 @@
 {
   "name": "cozy-doctypes",
-  "version": "1.33.3",
+  "version": "1.34.0",
   "description": "Definitions for Cozy models",
   "main": "dist/index.js",
   "repository": "git@github.com:cozy/cozy-libs.git",
