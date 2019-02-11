@@ -138,21 +138,32 @@ const normalizeAccount = account => {
   }
 }
 
+const exactMatchAttributes = ['iban', 'number']
+
+const eqNotUndefined = (attr1, attr2) => {
+  return attr1 && attr1 === attr2
+}
+
 const findMatch = (account, existingAccounts) => {
-  // IBAN
-  if (account.iban) {
-    const matchIBAN = findExactMatch('iban', account, existingAccounts)
-    if (matchIBAN && matchIBAN.match) {
-      return matchIBAN
+  // Start with exact attribute matches
+  for (const exactAttribute of exactMatchAttributes) {
+    if (account[exactAttribute]) {
+      const result = findExactMatch(exactAttribute, account, existingAccounts)
+      if (result && result.match) {
+        return result
+      }
     }
   }
 
-  // Number
-  if (account.number) {
-    const numberMatch = findExactMatch('number', account, existingAccounts)
-    // Number easy case
-    if (numberMatch && numberMatch.match) {
-      return numberMatch
+  const matchOriginalNumber = existingAccounts.find(
+    otherAccount =>
+      eqNotUndefined(account.originalNumber, otherAccount.number) ||
+      eqNotUndefined(account.number, otherAccount.originalNumber)
+  )
+  if (matchOriginalNumber) {
+    return {
+      match: matchOriginalNumber,
+      method: 'originalNumber-exact'
     }
   }
 

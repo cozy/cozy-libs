@@ -3,6 +3,68 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.33.3"></a>
+## [1.33.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.2...cozy-doctypes@1.33.3) (2019-02-11)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.33.2"></a>
+## [1.33.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.1...cozy-doctypes@1.33.2) (2019-02-08)
+
+
+### Bug Fixes
+
+* Add compacted original bank label method ([560f038](https://github.com/cozy/cozy-libs/commit/560f038))
+
+
+
+
+<a name="1.33.1"></a>
+## [1.33.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.0...cozy-doctypes@1.33.1) (2019-02-07)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.33.0"></a>
+# [1.33.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.2...cozy-doctypes@1.33.0) (2019-02-06)
+
+
+### Bug Fixes
+
+* Only add delta to method when method exists ([03af23e](https://github.com/cozy/cozy-libs/commit/03af23e))
+
+
+### Features
+
+* Match on originalNumber ([23c2afd](https://github.com/cozy/cozy-libs/commit/23c2afd))
+
+
+
+
+<a name="1.32.2"></a>
+## [1.32.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.1...cozy-doctypes@1.32.2) (2019-02-04)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.32.1"></a>
+## [1.32.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.0...cozy-doctypes@1.32.1) (2019-01-30)
+
+
+### Bug Fixes
+
+* Ignore case when matching redacted number ([b812be0](https://github.com/cozy/cozy-libs/commit/b812be0))
+
+
+
+
 <a name="1.32.0"></a>
 # [1.32.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.31.0...cozy-doctypes@1.32.0) (2019-01-29)
 

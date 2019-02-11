@@ -26,6 +26,7 @@ const dateRx = /\b\d{2}\/\d{2}\/\d{4}\b/g
 
 const cleanLabel = label => label.replace(redactedNumber, '')
 const withoutDate = str => str.replace(dateRx, '')
+const compacted = str => str.replace(/\s/g, '').replace(/-/g, '')
 
 const scoreLabel = (newTr, existingTr) => {
   if (
@@ -33,6 +34,11 @@ const scoreLabel = (newTr, existingTr) => {
     squash(newTr.originalBankLabel, ' ')
   ) {
     return [200, 'originalBankLabel']
+  } else if (
+    compacted(existingTr.originalBankLabel) ===
+    compacted(existingTr.originalBankLabel)
+  ) {
+    return [120, 'originalBankLabelCompacted']
   } else if (
     withoutDate(existingTr.originalBankLabel) ===
     withoutDate(newTr.originalBankLabel)
@@ -192,7 +198,9 @@ const matchTransactions = function*(newTrs, existingTrs) {
         maxDateDelta: delta * DAY
       }
     )) {
-      result.method = result.method + `-delta${delta}`
+      if (result.method) {
+        result.method += `-delta${delta}`
+      }
       if (result.match) {
         unmatchedExisting.delete(result.match)
         unmatchedNew.delete(result.transaction)

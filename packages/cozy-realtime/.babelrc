@@ -1,3 +1,10 @@
 {
-  "presets": ["cozy-app"]
+  "presets": ["cozy-app"],
+  "env": {
+    "test": {
+      "plugins": [
+        ["rewire"]
+      ]
+    }
+  }
 }

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.3.1"></a>
+## [1.3.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.3.0...babel-preset-cozy-app@1.3.1) (2019-02-11)
+
+
+### Bug Fixes
+
+* Add Android 5 and iOS 10 ([#266](https://github.com/cozy/cozy-libs/issues/266)) ([1677d25](https://github.com/cozy/cozy-libs/commit/1677d25))
+
+
+
+
 <a name="1.3.0"></a>
 # [1.3.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.2.5...babel-preset-cozy-app@1.3.0) (2019-01-11)
 

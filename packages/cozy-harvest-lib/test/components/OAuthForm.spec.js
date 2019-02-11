@@ -14,4 +14,11 @@ describe('OAuthForm', () => {
     const component = shallow(<OAuthForm t={t} />).getElement()
     expect(component).toMatchSnapshot()
   })
+
+  it('should not render button when update', () => {
+    const component = shallow(
+      <OAuthForm t={t} oauth={{ token: '1234abcd' }} />
+    ).getElement()
+    expect(component).toBeNull()
+  })
 })
