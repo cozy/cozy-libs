@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.28.0"></a>
+# [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.27.0...cozy-harvest-lib@0.28.0) (2019-02-11)
+
+
+### Features
+
+* **harvest:** Handle legacy locales 🌐 ([c59d517](https://github.com/cozy/cozy-libs/commit/c59d517))
+* Fails on Transifex pull error ❌ ([876205a](https://github.com/cozy/cozy-libs/commit/876205a))
+
+
+
+
 <a name="0.27.0"></a>
 # [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.25.2...cozy-harvest-lib@0.27.0) (2019-02-11)
 
