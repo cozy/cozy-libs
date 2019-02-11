@@ -65,9 +65,15 @@ exports[`AccountForm AccountField render a dropdown field 1`] = `
       [MockFunction] {
         "calls": Array [
           Array [
-            "fields.multiple.label",
+            "legacy.fields.multiple.label",
             Object {
               "_": "multiple",
+            },
+          ],
+          Array [
+            "fields.multiple.label",
+            Object {
+              "_": "legacy.fields.multiple.label",
             },
           ],
           Array [
@@ -84,6 +90,10 @@ exports[`AccountForm AccountField render a dropdown field 1`] = `
           ],
         ],
         "results": Array [
+          Object {
+            "isThrow": false,
+            "value": "legacy.fields.multiple.label",
+          },
           Object {
             "isThrow": false,
             "value": "fields.multiple.label",
