@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.34.2"></a>
+## [1.34.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.1...cozy-doctypes@1.34.2) (2019-02-12)
+
+
+### Bug Fixes
+
+* Defensive programming ([0d97b97](https://github.com/cozy/cozy-libs/commit/0d97b97))
+
+
+
+
 <a name="1.34.1"></a>
 ## [1.34.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.0...cozy-doctypes@1.34.1) (2019-02-12)
 
