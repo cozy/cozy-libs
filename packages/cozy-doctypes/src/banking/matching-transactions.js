@@ -24,9 +24,9 @@ const squash = (str, char) => {
 const redactedNumber = /\b[0-9X]+\b/gi
 const dateRx = /\b\d{2}\/\d{2}\/\d{4}\b/g
 
-const cleanLabel = label => label.replace(redactedNumber, '')
-const withoutDate = str => str.replace(dateRx, '')
-const compacted = str => str.replace(/\s/g, '').replace(/-/g, '')
+const cleanLabel = label => label && label.replace(redactedNumber, '')
+const withoutDate = str => str && str.replace(dateRx, '')
+const compacted = str => str && str.replace(/\s/g, '').replace(/-/g, '')
 
 const scoreLabel = (newTr, existingTr) => {
   if (
@@ -36,7 +36,7 @@ const scoreLabel = (newTr, existingTr) => {
     return [200, 'originalBankLabel']
   } else if (
     compacted(existingTr.originalBankLabel) ===
-    compacted(existingTr.originalBankLabel)
+    compacted(newTr.originalBankLabel)
   ) {
     return [120, 'originalBankLabelCompacted']
   } else if (
