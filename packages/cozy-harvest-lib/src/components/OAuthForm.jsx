@@ -5,8 +5,8 @@ import { translate } from 'cozy-ui/react/I18n'
 
 export class OAuthForm extends PureComponent {
   render() {
-    const { oauth, t } = this.props
-    return oauth ? null : (
+    const { initialValues, t } = this.props
+    return initialValues ? null : (
       <Button
         className="u-mt-1"
         extension="full"

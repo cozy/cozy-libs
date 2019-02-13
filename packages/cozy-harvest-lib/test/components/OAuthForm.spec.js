@@ -17,7 +17,7 @@ describe('OAuthForm', () => {
 
   it('should not render button when update', () => {
     const component = shallow(
-      <OAuthForm t={t} oauth={{ token: '1234abcd' }} />
+      <OAuthForm t={t} initialValues={{ access_token: '1234abcd' }} />
     ).getElement()
     expect(component).toBeNull()
   })
