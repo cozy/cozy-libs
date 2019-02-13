@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.0"></a>
+# [1.35.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.2...cozy-doctypes@1.35.0) (2019-02-13)
+
+
+### Features
+
+* Use transpiled file only in browser context ([ccda834](https://github.com/cozy/cozy-libs/commit/ccda834))
+
+
+
+
 <a name="1.34.2"></a>
 ## [1.34.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.1...cozy-doctypes@1.34.2) (2019-02-12)
 
