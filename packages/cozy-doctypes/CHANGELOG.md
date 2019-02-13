@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.35.1"></a>
+## [1.35.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.35.0...cozy-doctypes@1.35.1) (2019-02-13)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency [@babel](https://github.com/babel)/runtime to 7.3.1 ([b73979d](https://github.com/cozy/cozy-libs/commit/b73979d))
+
+
+
+
 <a name="1.35.0"></a>
 # [1.35.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.2...cozy-doctypes@1.35.0) (2019-02-13)
 
