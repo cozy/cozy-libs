@@ -27,6 +27,12 @@ const predefinedLabels = [
   'phone'
 ]
 
+// Out of scope labels already used, should be transferred directly in manifests
+// in the future.
+const legacyLabels = [
+  'branchName' // Used in banking konnectors
+]
+
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
 export class AccountField extends PureComponent {
@@ -34,7 +40,10 @@ export class AccountField extends PureComponent {
     const { initialValue, label, name, required, role, t, type } = this.props
 
     // Allow manifest to specify predefined label
-    const localeKey = predefinedLabels.includes(label) ? label : name
+    const localeKey =
+      predefinedLabels.includes(label) || legacyLabels.includes(label)
+        ? label
+        : name
 
     const isEditable = !(role === 'identifier' && initialValue)
 
