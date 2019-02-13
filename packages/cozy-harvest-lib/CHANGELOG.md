@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.29.0"></a>
+# [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.28.1...cozy-harvest-lib@0.29.0) (2019-02-13)
+
+
+### Features
+
+* **harvest:** Handle legacy locale label 👴 ([6c64021](https://github.com/cozy/cozy-libs/commit/6c64021))
+
+
+
+
 <a name="0.28.1"></a>
 ## [0.28.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.28.0...cozy-harvest-lib@0.28.1) (2019-02-12)
 
