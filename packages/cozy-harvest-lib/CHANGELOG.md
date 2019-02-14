@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.29.1"></a>
+## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.29.0...cozy-harvest-lib@0.29.1) (2019-02-14)
+
+
+### Bug Fixes
+
+* **harvest:** Oauth form condition 🚑 ([3232c19](https://github.com/cozy/cozy-libs/commit/3232c19))
+
+
+
+
 <a name="0.29.0"></a>
 # [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.28.1...cozy-harvest-lib@0.29.0) (2019-02-13)
 
