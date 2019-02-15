@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = {
-  plugins: ['prettier'],
+  plugins: ['prettier', '@babel/plugin-proposal-optional-chaining'],
   extends: ['eslint:recommended', 'eslint-config-prettier'],
   parser: 'babel-eslint',
   env: {
