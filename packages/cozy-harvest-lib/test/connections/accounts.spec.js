@@ -46,11 +46,12 @@ const fixtures = {
 }
 
 import { accountsMutations } from 'connections/accounts'
-const { createAccount } = accountsMutations(client)
+const { createAccount, updateAccount } = accountsMutations(client)
 
 describe('Account mutations', () => {
   beforeAll(() => {
     client.create.mockResolvedValue({ data: fixtures.simpleAccount })
+    client.save.mockResolvedValue({ data: fixtures.simpleAccount })
   })
 
   afterEach(() => {
@@ -307,6 +308,14 @@ describe('Account mutations', () => {
           )
         ).rejects.toEqual(new Error('Mocked error'))
       })
+    })
+  })
+
+  describe('updateAccount', () => {
+    it('call CozyClient::save and returns account', async () => {
+      const account = await updateAccount(fixtures.simpleAccount)
+      expect(client.save).toHaveBeenCalledWith(fixtures.simpleAccount)
+      expect(account).toEqual(fixtures.simpleAccount)
     })
   })
 })

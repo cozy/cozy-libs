@@ -99,20 +99,24 @@ const createChildAccount = async (client, konnector, attributes) => {
 }
 
 /**
+ * Update existing account
+ * @param  {Object}  client  CozyClient
+ * @param  {Object}  account io.cozy.accounts document to update
+ * @return {Object}          Updated io.cozy.accounts document
+ */
+const updateAccount = async (client, account) => {
+  const { data } = await client.save(account)
+  return data
+}
+
+/**
  * Get accounts mutations
  * @param  {Object} client CozyClient
  * @return {Object}        Object containing accounts mutations
  */
-export const accountsMutations = client => {
-  const updateAccount = async account => {
-    const { data } = await client.save(account)
-    return data
-  }
-
-  return {
-    createAccount: createAccount.bind(null, client),
-    updateAccount
-  }
-}
+export const accountsMutations = client => ({
+  createAccount: createAccount.bind(null, client),
+  updateAccount: updateAccount.bind(null, client)
+})
 
 export default accountsMutations
