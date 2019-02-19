@@ -20,6 +20,12 @@ const fixtures = {
       type: 'password'
     }
   },
+  optionalFields: {
+    test: {
+      required: false,
+      type: 'text'
+    }
+  },
   sanitized: {
     username: {
       encrypted: false,
@@ -44,16 +50,20 @@ const fixtures = {
   }
 }
 
+const onSubmit = jest.fn()
 const t = jest.fn()
 
 describe('AccountForm', () => {
   beforeEach(() => {
     t.mockClear()
     t.mockImplementation(key => key)
+    onSubmit.mockClear()
   })
 
   it('should render', () => {
-    const wrapper = shallow(<AccountForm fields={fixtures.fields} t={t} />)
+    const wrapper = shallow(
+      <AccountForm fields={fixtures.fields} onSubmit={onSubmit} t={t} />
+    )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
@@ -71,7 +81,7 @@ describe('AccountForm', () => {
 
   it('should redirect to OAuthForm', () => {
     const component = shallow(
-      <AccountForm oauth={fixtures.oauth} t={t} />
+      <AccountForm oauth={fixtures.oauth} onSubmit={onSubmit} t={t} />
     ).getElement()
     expect(component).toMatchSnapshot()
   })
@@ -83,7 +93,9 @@ describe('AccountForm', () => {
         type: 'text'
       }
     }
-    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const wrapper = shallow(
+      <AccountForm fields={fields} onSubmit={onSubmit} t={t} />
+    )
     expect(wrapper.props().initialValues).toEqual({
       foo: 'bar'
     })
@@ -95,7 +107,9 @@ describe('AccountForm', () => {
         type: 'text'
       }
     }
-    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const wrapper = shallow(
+      <AccountForm fields={fields} onSubmit={onSubmit} t={t} />
+    )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
@@ -107,21 +121,36 @@ describe('AccountForm', () => {
         type: 'text'
       }
     }
-    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const wrapper = shallow(
+      <AccountForm fields={fields} onSubmit={onSubmit} t={t} />
+    )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
 
   it("should have enabled button if fields isn't required", () => {
-    const fields = {
-      test: {
-        required: false,
-        type: 'text'
-      }
-    }
-    const wrapper = shallow(<AccountForm fields={fields} t={t} />)
+    const wrapper = shallow(
+      <AccountForm fields={fixtures.optionalFields} onSubmit={onSubmit} t={t} />
+    )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
+  })
+
+  it('should call onSubmit on click', () => {
+    const wrapper = shallow(
+      <AccountForm
+        fields={fixtures.optionalFields}
+        initialValues={fixtures.account.auth}
+        onSubmit={onSubmit}
+        t={t}
+      />
+    )
+    wrapper
+      .dive()
+      .find('DefaultButton')
+      .simulate('click')
+
+    expect(onSubmit).toHaveBeenCalled()
   })
 
   describe('AccountFields', () => {
