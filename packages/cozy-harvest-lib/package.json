@@ -22,7 +22,7 @@
     "watch": "babel src -d dist --copy-files --watch"
   },
   "dependencies": {
-    "cozy-ui": "18.12.0",
+    "cozy-ui": "19.0.2",
     "final-form": "4.11.0",
     "lodash": "4.17.11",
     "react-final-form": "3.7.0",
