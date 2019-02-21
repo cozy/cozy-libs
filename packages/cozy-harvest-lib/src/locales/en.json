@@ -1,4 +1,14 @@
 {
+  "triggerSuccessMessage": {
+    "button": {
+      "label": "Close"
+    },
+    "description": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically.",
+    "figure": {
+      "alt": "connected"
+    },
+    "title": "Successful configuration!"
+  },
   "accountForm": {
     "submit": {
       "label": "Submit"

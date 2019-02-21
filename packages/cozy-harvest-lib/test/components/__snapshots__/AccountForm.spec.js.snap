@@ -222,6 +222,7 @@ exports[`AccountForm should have disabled button if there is required field empt
         },
       }
     }
+    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -243,7 +244,7 @@ exports[`AccountForm should have disabled button if there is required field empt
     disabled={true}
     extension="full"
     label="accountForm.submit.label"
-    onclick={[Function]}
+    onClick={[Function]}
   />
 </div>
 `;
@@ -263,6 +264,7 @@ exports[`AccountForm should have enabled button if fields isn't required 1`] = `
         },
       }
     }
+    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -284,7 +286,7 @@ exports[`AccountForm should have enabled button if fields isn't required 1`] = `
     disabled={false}
     extension="full"
     label="accountForm.submit.label"
-    onclick={[Function]}
+    onClick={[Function]}
   />
 </div>
 `;
@@ -309,6 +311,7 @@ exports[`AccountForm should have enabled button if required field isn't empty 1`
         },
       }
     }
+    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -330,7 +333,7 @@ exports[`AccountForm should have enabled button if required field isn't empty 1`
     disabled={false}
     extension="full"
     label="accountForm.submit.label"
-    onclick={[Function]}
+    onClick={[Function]}
   />
 </div>
 `;
@@ -365,6 +368,7 @@ exports[`AccountForm should render 1`] = `
         },
       }
     }
+    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -386,7 +390,7 @@ exports[`AccountForm should render 1`] = `
     disabled={true}
     extension="full"
     label="accountForm.submit.label"
-    onclick={[Function]}
+    onClick={[Function]}
   />
 </div>
 `;

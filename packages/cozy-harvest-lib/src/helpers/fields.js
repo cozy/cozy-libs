@@ -42,6 +42,8 @@ export const getFieldPlaceholder = (props, fallback) => {
 export const sanitizeSelectProps = props => {
   const { options, value } = props
   const sanitized = { ...props }
+  // Disable key up for selects
+  delete sanitized.onKeyUp
 
   sanitized.options = options
     ? options.map(option => ({
