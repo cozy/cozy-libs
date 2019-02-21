@@ -42,6 +42,7 @@ export class AccountField extends PureComponent {
       initialValue,
       label,
       name,
+      onKeyUp,
       required,
       role,
       t,
@@ -64,6 +65,7 @@ export class AccountField extends PureComponent {
       label: t(`fields.${localeKey}.label`, {
         _: t(`legacy.fields.${localeKey}.label`, { _: name })
       }),
+      onKeyUp: onKeyUp,
       placeholder: getFieldPlaceholder(
         this.props,
         t(`fields.${name}.placeholder`, { _: '' })
@@ -99,6 +101,7 @@ AccountField.propTypes = {
   initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
+  onKeyUp: PropTypes.func,
   role: PropTypes.string,
   type: PropTypes.oneOf(['date', 'dropdown', 'email', 'password', 'text']),
   t: PropTypes.func
@@ -113,7 +116,14 @@ const parse = type => value => {
 
 export class AccountFields extends PureComponent {
   render() {
-    const { container, disabled, initialValues, manifestFields, t } = this.props
+    const {
+      container,
+      disabled,
+      initialValues,
+      manifestFields,
+      onKeyUp,
+      t
+    } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(manifestFields).map(fieldName => ({
@@ -139,6 +149,7 @@ export class AccountFields extends PureComponent {
                   initialValues[field.name] ||
                   initialValues[getEncryptedFieldName(field.name)]
                 }
+                onKeyUp={onKeyUp}
                 t={t}
               />
             )}
@@ -153,6 +164,7 @@ AccountFields.propTypes = {
   disabled: PropTypes.bool,
   fillEncrypted: PropTypes.bool,
   manifestFields: PropTypes.object.isRequired,
+  onKeyUp: PropTypes.func,
   t: PropTypes.func
 }
 
@@ -165,7 +177,25 @@ export class AccountForm extends PureComponent {
     }
   }
 
-  submitHandler(values, form) {
+  /**
+   * Indicates if the state of ReactFinalForm implies that data can be submitted
+   * @param  {Object} formState See https://github.com/final-form/final-form#formstate
+   * @return {Boolean}
+   */
+  isSubmittable({ dirty, initialValues, valid }) {
+    return valid && !(initialValues && !dirty)
+  }
+
+  handleKeyUp(event, { dirty, form, initialValues, valid, values }) {
+    if (
+      event.code === 'Enter' &&
+      this.isSubmittable({ dirty, initialValues, valid })
+    ) {
+      this.handleSubmit(values, form)
+    }
+  }
+
+  handleSubmit(values, form) {
     const { onSubmit } = this.props
     // Reset form with new values to set back dirty to false
     form.reset(values)
@@ -213,15 +243,27 @@ export class AccountForm extends PureComponent {
               disabled={submitting}
               initialValues={initialAndDefaultValues}
               manifestFields={sanitizedFields}
+              onKeyUp={event =>
+                this.handleKeyUp(event, {
+                  dirty,
+                  form,
+                  initialValues,
+                  valid,
+                  values
+                })
+              }
               t={t}
             />
             <Button
               busy={submitting}
               className="u-mt-2 u-mb-1-half"
-              disabled={submitting || !valid || (initialValues && !dirty)}
+              disabled={
+                submitting ||
+                !this.isSubmittable({ dirty, initialValues, valid })
+              }
               extension="full"
               label={t('accountForm.submit.label')}
-              onClick={() => this.submitHandler(values, form)}
+              onClick={() => this.handleSubmit(values, form)}
             />
           </div>
         )}
