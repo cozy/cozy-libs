@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.30.0"></a>
+# [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.29.1...cozy-harvest-lib@0.30.0) (2019-02-21)
+
+
+### Features
+
+* **harvest:** Add trigger mutations ✨ ([27650e6](https://github.com/cozy/cozy-libs/commit/27650e6))
+* **harvest:** Add TriggerManager ✨ ([fedaf26](https://github.com/cozy/cozy-libs/commit/fedaf26))
+* **harvest:** Add Triggers helpers ✨ ([b0ba2c2](https://github.com/cozy/cozy-libs/commit/b0ba2c2))
+* **harvest:** Add updateAccount mutation ✨ ([c56b4f2](https://github.com/cozy/cozy-libs/commit/c56b4f2))
+* **harvest:** Disable AccountForm when submitting ✨ ([c7d910e](https://github.com/cozy/cozy-libs/commit/c7d910e))
+* **harvest:** Enable form while editing with empty encrypted value 📝 ([79c9278](https://github.com/cozy/cozy-libs/commit/79c9278))
+* **harvest:** Get Account mutations from Cozy-Home ♻️ ([5ef0ce8](https://github.com/cozy/cozy-libs/commit/5ef0ce8))
+* **harvest:** Get Daytime helper from Cozy-Home ♻️ ([a5e5cdb](https://github.com/cozy/cozy-libs/commit/a5e5cdb))
+* **harvest:** Handle Enter key in AccountForm ✨ ([240f252](https://github.com/cozy/cozy-libs/commit/240f252))
+* **harvest:** Prepare AccountCreator component ✨ ([1af5e8d](https://github.com/cozy/cozy-libs/commit/1af5e8d))
+* **harvest:** Prepare AccountEditor component ✨ ([4f6a3d0](https://github.com/cozy/cozy-libs/commit/4f6a3d0))
+* **harvest:** Prepare TriggerSuccessMessage component ✨ ([1e043dc](https://github.com/cozy/cozy-libs/commit/1e043dc))
+* **harvest:** Set up accounts helper ✨ ([8c6dfb8](https://github.com/cozy/cozy-libs/commit/8c6dfb8))
+
+
+
+
 <a name="0.29.1"></a>
 ## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.29.0...cozy-harvest-lib@0.29.1) (2019-02-14)
 
