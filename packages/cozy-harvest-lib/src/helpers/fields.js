@@ -44,6 +44,8 @@ export const sanitizeSelectProps = props => {
   const sanitized = { ...props }
   // Disable key up for selects
   delete sanitized.onKeyUp
+  // Not applicable on Selects
+  delete sanitized.autoComplete
 
   sanitized.options = options
     ? options.map(option => ({

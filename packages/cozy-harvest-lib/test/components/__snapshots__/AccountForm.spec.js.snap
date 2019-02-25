@@ -12,6 +12,7 @@ exports[`AccountForm AccountField render a date field 1`] = `
     fields.date.label
   </Label>
   <Input
+    autoComplete="off"
     disabled={false}
     error={false}
     fullwidth={true}
@@ -130,6 +131,7 @@ exports[`AccountForm AccountField render a password field 1`] = `
     fields.passphrase.label
   </Label>
   <InputPassword
+    autoComplete="new-password"
     disabled={false}
     error={false}
     fullwidth={true}
@@ -157,6 +159,7 @@ exports[`AccountForm AccountField should render 1`] = `
     fields.username.label
   </Label>
   <Input
+    autoComplete="off"
     disabled={false}
     error={false}
     fullwidth={true}
