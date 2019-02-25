@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.31.0"></a>
+# [0.31.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.30.0...cozy-harvest-lib@0.31.0) (2019-02-25)
+
+
+### Features
+
+* **harvest:** Prevent autocomplete on inputs ✨ ([de6e0dc](https://github.com/cozy/cozy-libs/commit/de6e0dc))
+
+
+
+
 <a name="0.30.0"></a>
 # [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.29.1...cozy-harvest-lib@0.30.0) (2019-02-21)
 
