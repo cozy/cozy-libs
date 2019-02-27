@@ -4,7 +4,7 @@ const path = require('path')
 
 const manualScript = require('../lib/manual').manualPublish
 const publishLib = require('../lib/publish')
-// const prepublishLib = require('../lib/prepublish')
+const tags = require('../lib/tags')
 
 const rootPath = process.cwd()
 const testFolder = '.tmp_test'
@@ -12,6 +12,7 @@ const testPath = path.join(rootPath, testFolder)
 const mockAppDir = path.join(__dirname, 'mockApps/mockApp')
 
 jest.mock('../lib/publish', () => jest.fn())
+jest.mock('../lib/tags', () => ({}))
 jest.mock('../lib/prepublish', () =>
   jest.fn(options =>
     Object.assign({}, options, { sha256Sum: 'fakeshasum5644545' })
@@ -41,6 +42,7 @@ describe('Manual publishing script', () => {
     process.chdir(testPath)
     // copy the app mock content
     fs.copySync(mockAppDir, testPath, { overwrite: true })
+    tags.getAutoVersion = jest.fn().mockReturnValue('2.1.8-dev.12346')
   })
 
   afterAll(() => {
@@ -69,6 +71,15 @@ describe('Manual publishing script', () => {
   it('should work correctly if no space name provided', async () => {
     const options = getOptions(commons.token)
     delete options.spaceName
+
+    await manualScript(options, { confirm: 'yes' })
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it('should work correctly if no version provided', async () => {
+    const options = getOptions(commons.token)
+    delete options.manualVersion
 
     await manualScript(options, { confirm: 'yes' })
     expect(publishLib).toHaveBeenCalledTimes(1)

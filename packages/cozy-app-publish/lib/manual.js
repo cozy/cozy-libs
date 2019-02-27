@@ -7,6 +7,7 @@ const prompt = require('prompt')
 const colorize = require('../utils/colorize')
 const getManifestAsObject = require('../utils/getManifestAsObject')
 const constants = require('./constants')
+const tags = require('./tags')
 
 const { DEFAULT_REGISTRY_URL, DEFAULT_BUILD_DIR } = constants
 
@@ -44,12 +45,11 @@ async function manualPublish(
   }
 
   // get application version to publish
+  let autoVersion
   if (!manualVersion) {
-    throw new Error(
-      'The --manual-version option is required for the manual mode. Publishing failed.'
-    )
+    autoVersion = await tags.getAutoVersion()
   }
-  const appVersion = manualVersion || appManifestObj.version
+  const appVersion = manualVersion || autoVersion || appManifestObj.version
 
   // other variables
   const appSlug = appManifestObj.slug
