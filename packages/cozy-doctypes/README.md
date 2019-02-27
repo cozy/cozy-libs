@@ -16,7 +16,7 @@ directly the `cozy-client` APIs.
 
 ### How to use it
 
-Let's say we have a `io.cozy.simpsons` doctype, because we are developing a konnector that retrieves some Simpsons data. We create a class `Simpson` that inherits from `Document` :
+In the following section, we will see how to deal with a fictitious `io.cozy.simpsons` doctype (we are developing a konnector to retrieve al the Simpson characters). First, let's create a class `Simpson` that inherits from `Document` :
 
 ```js
 const { Document } = require('cozy-doctypes')
