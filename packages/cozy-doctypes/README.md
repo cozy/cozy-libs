@@ -105,7 +105,7 @@ Then it will not be updated, even if we specified a new `children` attribute.
 
 #### `createdByApp`
 
-`createdByApp` is the slug of an application / konnector that creates the document. This information is used for cozy metadatas (see the [metadatas documentation](https://github.com/cozy/cozy-doctypes#document-metadata) to learn more). If we provide this, then the metadata can be automatically added to any created or updated document:
+`createdByApp` is the slug of an application / konnector that creates the document. This information is used for cozy metadatas (see the [metadatas documentation](https://github.com/cozy/cozy-doctypes#document-metadata) to learn more). If we provide this, the metadata is automatically added to any created or updated document:
 
 ```js
 Simpson.createdByApp = 'my-awesome-simpsons-konnector'
