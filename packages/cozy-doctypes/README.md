@@ -9,7 +9,7 @@ This repository is meant to bring together methods and functions for doctypes th
 ## `Document`
 
 The [Document](./src/Document.js) API is useful in NodeJS contexts where you need to have global models, available across files.
-It can be used as a base for other document types (see [BankTransaction](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-doctypes/src/banking/BankTransaction.js) for example.
+It can be used as a base for other document types (see [BankTransaction](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-doctypes/src/banking/BankTransaction.js) for example).
 
 ⚠️ The Document API does not work well in contexts where you need to change the client in flight. For this, prefer to use
 directly the `cozy-client` APIs.
@@ -67,7 +67,7 @@ There are some properties that can be given to `Document` that have a special me
 
 #### `idAttributes`
 
-`idAttributes` is an array of attributes that are seen as ids. When `Document` knows that, it becomes able to determine if a given document must be created or updated. This is used in the `¢reateOrUpdate` method. Let's say that we want the `name` of our `Simpson`s to be an id:
+`idAttributes` is an array of attributes that are seen as ids. When `Document` knows that, it becomes able to determine if a given document must be created or updated. This is used in the `createOrUpdate` method. Let's say that we want the `name` of our `Simpson`s to be an id:
 
 ```js
 Simpson.idAttributes = ['name']
@@ -95,7 +95,7 @@ This document will be created, because no document exists with this `name`.
 Simpson.checkedAttributes = ['description']
 ```
 
-Now, if I try to update a document, without changing its `description`:
+Now, if we try to update a document, without changing its `description`:
 
 ```js
 Simpson.createOrUpdate({ name: 'Marge', children: ['Bart', 'Lisa', 'Maggie'] })
