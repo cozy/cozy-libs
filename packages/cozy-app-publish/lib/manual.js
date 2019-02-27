@@ -138,4 +138,13 @@ async function manualPublish(
   }).output
 }
 
-module.exports = manualPublish
+const manualPublishCLI = function() {
+  return manualPublish.apply(this, arguments).catch(e => {
+    console.error(e.message)
+    process.exit(1)
+  })
+}
+
+manualPublishCLI.manualPublish = manualPublish
+
+module.exports = manualPublishCLI

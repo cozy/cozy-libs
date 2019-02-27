@@ -2,7 +2,7 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const manualScript = require('../lib/manual')
+const manualScript = require('../lib/manual').manualPublish
 const publishLib = require('../lib/publish')
 // const prepublishLib = require('../lib/prepublish')
 
