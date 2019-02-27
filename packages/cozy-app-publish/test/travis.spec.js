@@ -24,17 +24,7 @@ const mockCommons = {
   buildDir: mockAppDir
 }
 
-// simulate TRAVIS CI environment variables
-jest.mock('../utils/getTravisVariables', () =>
-  jest.fn().mockImplementation(() => ({
-    TRAVIS_BUILD_DIR: mockCommons.buildDir,
-    TRAVIS_TAG: '2.1.8',
-    TRAVIS_COMMIT: mockCommons.commitHash,
-    TRAVIS_REPO_SLUG: mockCommons.slug,
-    // encrypted variables
-    REGISTRY_TOKEN: mockCommons.token
-  }))
-)
+jest.mock('../utils/getTravisVariables')
 
 const travisScript = require('../lib/travis')
 
@@ -51,10 +41,23 @@ describe('Travis publishing script', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     global.console.log = jest.fn()
+    // simulate TRAVIS CI environment variables
+    getTravisVariables.mockImplementation(() => ({
+      TRAVIS_BUILD_DIR: mockCommons.buildDir,
+      TRAVIS_TAG: '2.1.8',
+      TRAVIS_COMMIT: mockCommons.commitHash,
+      TRAVIS_REPO_SLUG: mockCommons.slug,
+      // encrypted variables
+      REGISTRY_TOKEN: mockCommons.token
+    }))
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
   })
 
   it('should work correctly if Travis environment variable provided (no TRAVIS_TAG)', async () => {
-    getTravisVariables.mockImplementationOnce(() => ({
+    getTravisVariables.mockImplementation(() => ({
       TRAVIS_BUILD_DIR: mockCommons.buildDir,
       TRAVIS_TAG: null,
       TRAVIS_COMMIT: mockCommons.commitHash,
@@ -62,6 +65,7 @@ describe('Travis publishing script', () => {
       // encrypted variables
       REGISTRY_TOKEN: mockCommons.token
     }))
+    jest.spyOn(Date, 'now').mockReturnValue(1551298916519)
     await travisScript(getOptions())
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
