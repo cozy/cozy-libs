@@ -33,7 +33,7 @@ class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
 ```
 
-Then we attach a `cozy-client-js` instance to it. We are going to use [cozy-konnector-libs](https://github.com/konnectors/libs/tree/master/packages/cozy-konnector-libs) to get this instance. Take a look at the [konnectors documentation](https://docs.cozy.io/en/tutorials/konnector/) to learn more about that.
+Then we provide a `cozy-client-js` instance to our class. We are going to use [cozy-konnector-libs](https://github.com/konnectors/libs/tree/master/packages/cozy-konnector-libs) to get this instance. Take a look at the [konnectors documentation](https://docs.cozy.io/en/tutorials/konnector/) to learn more about that.
 
 ```
 const { Document } = require('cozy-doctypes')
@@ -45,7 +45,7 @@ Simpson.doctype = 'io.cozy.simpsons'
 Simpson.registerClient(cozyClient)
 ```
 
-With this, we can already use our class. For example, we can create a new document:
+With this, the class is already usable. For example, we can create a new document:
 
 ```js
 Simpson.create({
@@ -89,7 +89,7 @@ This document will be created, because no document exists with this `name`.
 
 #### `checkedAttributes`
 
-`checkedAttributes` is also an array of attributes. But it is used to determine if a document should be updated or not. Let's say that we want a document to be updated only if its `description` changed:
+`checkedAttributes` is an array of attributes. But it is used to determine if a document should be updated or not. Let's say that we want a document to be updated only if its `description` changed:
 
 ```js
 Simpson.checkedAttributes = ['description']
