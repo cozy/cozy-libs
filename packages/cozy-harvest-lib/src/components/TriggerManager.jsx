@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 
 import { withMutations } from 'cozy-client'
+import { translate } from 'cozy-ui/react/I18n'
 
 import AccountCreator from './AccountCreator'
 import AccountEditor from './AccountEditor'
 import TriggerSuccessMessage from './TriggerSuccessMessage'
 import { triggersMutations } from '../connections/triggers'
+import filesMutations from '../connections/files'
+import accounts from '../helpers/accounts'
+import konnectors from '../helpers/konnectors'
+import { slugify } from '../helpers/slug'
 import triggers from '../helpers/triggers'
 
 const IDLE = 'IDLE'
@@ -51,17 +56,34 @@ export class TriggerManager extends Component {
    * @return {Object}          io.cozy.jobs document, runned with account data
    */
   async handleAccountCreationSuccess(account) {
-    const { createTrigger, konnector } = this.props
+    const {
+      createDirectoryByPath,
+      createTrigger,
+      statDirectoryByPath,
+      konnector,
+      t
+    } = this.props
 
     this.setState({
       createdAccount: account
     })
 
+    let folder
+    if (konnectors.needsFolder(konnector)) {
+      const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
+        accounts.getLabel(account)
+      )}`
+
+      folder =
+        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
+    }
+
     const trigger = await createTrigger(
       triggers.buildAttributes({
-        konnector,
         account,
-        cron: triggers.buildCron(konnector)
+        cron: triggers.buildCron(konnector),
+        folder,
+        konnector
       })
     )
 
@@ -139,6 +161,8 @@ TriggerManager.propTypes = {
   running: PropTypes.bool,
   // mutations
   createTrigger: PropTypes.func.isRequired,
+  createDirectoryByPath: PropTypes.func,
+  statDirectoryByPath: PropTypes.func,
   launchTrigger: PropTypes.func.isRequired,
   waitForLoginSuccess: PropTypes.func.isRequired,
   // hooks
@@ -146,4 +170,6 @@ TriggerManager.propTypes = {
   onLoginSuccess: PropTypes.func.isRequired
 }
 
-export default withMutations(triggersMutations)(TriggerManager)
+export default translate()(
+  withMutations(filesMutations, triggersMutations)(TriggerManager)
+)

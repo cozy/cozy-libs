@@ -16,6 +16,21 @@ const fixtures = {
   konnector: {
     slug: 'konnectest'
   },
+  konnectorWithFolder: {
+    name: 'myBills',
+    slug: 'mybills',
+    fields: {
+      advancedFields: {
+        folderPath: {
+          advanced: true
+        }
+      }
+    }
+  },
+  folder: {
+    _id: '3f5b288af36041f189ec22063adab706'
+  },
+  folderPath: '/Administrative/myBills/foo',
   triggerAttributes: {
     arguments: '0 0 0 * * 0',
     type: '@cron',
@@ -31,7 +46,8 @@ const fixtures = {
     auth: {
       username: 'foo',
       passphrase: 'bar'
-    }
+    },
+    identifier: 'username'
   },
   updatedAccount: {
     _id: 'a87f9a8bd3884479a48811e7b7deec75',
@@ -96,20 +112,27 @@ const fixtures = {
 }
 
 const createTriggerMock = jest.fn().mockResolvedValue(fixtures.createdTrigger)
+const createDirectoryByPathMock = jest.fn()
+const statDirectoryByPathMock = jest.fn()
 const launchTriggerMock = jest.fn().mockResolvedValue(fixtures.launchedJob)
 const waitForLoginSuccessMock = jest.fn().mockResolvedValue(fixtures.runningJob)
 
 const onDoneSpy = jest.fn()
 const onLoginSuccessSpy = jest.fn()
 
-const shallowAccountCreator = () =>
+const tMock = jest.fn().mockReturnValue('/Administrative')
+
+const shallowAccountCreator = konnector =>
   shallow(
     <TriggerManager
-      konnector={fixtures.konnector}
+      konnector={konnector || fixtures.konnector}
       createTrigger={createTriggerMock}
+      createDirectoryByPath={createDirectoryByPathMock}
+      statDirectoryByPath={statDirectoryByPathMock}
       launchTrigger={launchTriggerMock}
       onDone={onDoneSpy}
       onLoginSuccess={onLoginSuccessSpy}
+      t={tMock}
       waitForLoginSuccess={waitForLoginSuccessMock}
     />
   )
@@ -168,6 +191,10 @@ describe('TriggerManager', () => {
         .mockReturnValue('0 0 0 * * 0')
     })
 
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
     afterAll(() => {
       jest.restoreAllMocks()
     })
@@ -191,6 +218,31 @@ describe('TriggerManager', () => {
       await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
       const component = wrapper.getElement()
       expect(component).toMatchSnapshot()
+    })
+
+    describe('when konnector needs folder', () => {
+      it('should create folder if it does not exist', async () => {
+        statDirectoryByPathMock.mockResolvedValue(null)
+
+        const wrapper = shallowAccountCreator(fixtures.konnectorWithFolder)
+        await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
+
+        expect(statDirectoryByPathMock).toHaveBeenCalledTimes(1)
+        expect(createDirectoryByPathMock).toHaveBeenCalledTimes(1)
+        expect(createDirectoryByPathMock).toHaveBeenCalledWith(
+          fixtures.folderPath
+        )
+      })
+
+      it('should not create folder if it exists', async () => {
+        statDirectoryByPathMock.mockResolvedValue(fixtures.folder)
+
+        const wrapper = shallowAccountCreator(fixtures.konnectorWithFolder)
+        await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
+
+        expect(statDirectoryByPathMock).toHaveBeenCalledTimes(1)
+        expect(createDirectoryByPathMock).toHaveBeenCalledTimes(0)
+      })
     })
   })
 
