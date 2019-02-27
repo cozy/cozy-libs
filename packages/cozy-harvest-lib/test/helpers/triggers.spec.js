@@ -2,17 +2,17 @@
 
 import {
   buildCronFromFrequency,
-  buildKonnectorCron,
-  buildKonnectorTriggerAttributes
+  buildCron,
+  buildAttributes
 } from 'helpers/triggers'
 
 describe('Triggers Helper', () => {
-  describe('buildKonnectorTriggerAttributes', () => {
+  describe('buildAttributes', () => {
     const konnector = { slug: 'konnectest' }
     const account = { _id: '963a51f6cdd34401b0904de32cc5578d' }
 
     it('build attributes', () => {
-      expect(buildKonnectorTriggerAttributes({ konnector, account })).toEqual({
+      expect(buildAttributes({ konnector, account })).toEqual({
         arguments: '0 0 0 * * 0',
         type: '@cron',
         worker: 'konnector',
@@ -26,7 +26,7 @@ describe('Triggers Helper', () => {
     it('build attributes with cron', () => {
       const cron = '0 0 0 * * 2'
       expect(
-        buildKonnectorTriggerAttributes({ konnector, account, cron })
+        buildAttributes({ konnector, account, cron })
       ).toEqual({
         arguments: '0 0 0 * * 2',
         type: '@cron',
@@ -68,7 +68,7 @@ describe('Triggers Helper', () => {
     })
   })
 
-  describe('buildKonnectorCron', () => {
+  describe('buildCron', () => {
     const randomDayTimeMock = jest.fn()
 
     beforeEach(() => {
@@ -85,7 +85,7 @@ describe('Triggers Helper', () => {
     it('returns expected default cron', () => {
       const konnector = {}
       const date = new Date('2019-02-07T14:12:00')
-      expect(buildKonnectorCron(konnector, date, randomDayTimeMock)).toEqual(
+      expect(buildCron(konnector, date, randomDayTimeMock)).toEqual(
         `0 59 4 * * 4`
       )
     })
@@ -95,7 +95,7 @@ describe('Triggers Helper', () => {
         frequency: 'monthly'
       }
       const date = new Date('2019-02-07T14:12:00')
-      expect(buildKonnectorCron(konnector, date, randomDayTimeMock)).toEqual(
+      expect(buildCron(konnector, date, randomDayTimeMock)).toEqual(
         `0 59 4 7 * *`
       )
     })
@@ -105,7 +105,7 @@ describe('Triggers Helper', () => {
         time_interval: [0, 12]
       }
       const date = new Date('2019-02-07T14:12:00')
-      expect(buildKonnectorCron(konnector, date, randomDayTimeMock)).toEqual(
+      expect(buildCron(konnector, date, randomDayTimeMock)).toEqual(
         `0 59 11 * * 4`
       )
     })

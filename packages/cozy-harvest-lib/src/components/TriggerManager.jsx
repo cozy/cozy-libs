@@ -7,10 +7,7 @@ import AccountCreator from './AccountCreator'
 import AccountEditor from './AccountEditor'
 import TriggerSuccessMessage from './TriggerSuccessMessage'
 import { triggersMutations } from '../connections/triggers'
-import {
-  buildKonnectorCron,
-  buildKonnectorTriggerAttributes
-} from '../helpers/triggers'
+import triggers from '../helpers/triggers'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -61,10 +58,10 @@ export class TriggerManager extends Component {
     })
 
     const trigger = await createTrigger(
-      buildKonnectorTriggerAttributes({
+      triggers.buildAttributes({
         konnector,
         account,
-        cron: buildKonnectorCron(konnector)
+        cron: triggers.buildCron(konnector)
       })
     )
 

@@ -40,12 +40,12 @@ export const buildCronFromFrequency = (frequency, options = {}) => {
   }
 }
 
-export const buildKonnectorCron = (
+export const buildCron = (
   konnector,
   startDate = new Date(),
   randomDayTimeFn = randomDayTime
 ) =>
-  buildCronFromFrequency(konnector.frequency, {
+  helpers.buildCronFromFrequency(konnector.frequency, {
     ...randomDayTimeFn.apply(
       null,
       konnector.time_interval || DEFAULT_TIME_INTERVAL
@@ -60,7 +60,7 @@ export const buildKonnectorCron = (
  * @param  {object} account
  * @return {object} created trigger
  */
-export const buildKonnectorTriggerAttributes = ({
+export const buildAttributes = ({
   konnector,
   account,
   cron = DEFAULT_CRON
@@ -73,3 +73,11 @@ export const buildKonnectorTriggerAttributes = ({
     account: account._id
   }
 })
+
+const helpers = {
+  buildAttributes,
+  buildCron,
+  buildCronFromFrequency
+}
+
+export default helpers
