@@ -61,18 +61,27 @@ export const buildCron = (
  * @return {object} created trigger
  */
 export const buildAttributes = ({
-  konnector,
   account,
-  cron = DEFAULT_CRON
-}) => ({
-  type: '@cron',
-  arguments: cron,
-  worker: 'konnector',
-  message: {
-    konnector: konnector.slug,
-    account: account._id
+  cron = DEFAULT_CRON,
+  folder,
+  konnector
+}) => {
+  const message = {
+    account: account._id,
+    konnector: konnector.slug
   }
-})
+
+  if (folder) {
+    message['folder_to_save'] = folder._id
+  }
+
+  return {
+    type: '@cron',
+    arguments: cron,
+    worker: 'konnector',
+    message
+  }
+}
 
 const helpers = {
   buildAttributes,
