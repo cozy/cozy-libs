@@ -24,7 +24,7 @@ const { Document } = require('cozy-doctypes')
 class Simpson extends Document {}
 ```
 
-First, let's specify the doctype:
+Second, let's specify the doctype:
 
 ```js
 const { Document } = require('cozy-doctypes')
