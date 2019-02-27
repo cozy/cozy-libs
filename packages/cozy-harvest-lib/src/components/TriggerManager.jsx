@@ -9,6 +9,7 @@ import AccountEditor from './AccountEditor'
 import TriggerSuccessMessage from './TriggerSuccessMessage'
 import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
+import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
 import konnectors from '../helpers/konnectors'
 import { slugify } from '../helpers/slug'
@@ -57,6 +58,7 @@ export class TriggerManager extends Component {
    */
   async handleAccountCreationSuccess(account) {
     const {
+      addPermission,
       createDirectoryByPath,
       createTrigger,
       statDirectoryByPath,
@@ -76,6 +78,8 @@ export class TriggerManager extends Component {
 
       folder =
         (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
+
+      await addPermission(konnector, konnectors.buildFolderPermission(folder))
     }
 
     const trigger = await createTrigger(
@@ -160,6 +164,7 @@ TriggerManager.propTypes = {
   trigger: PropTypes.object,
   running: PropTypes.bool,
   // mutations
+  addPermission: PropTypes.func,
   createTrigger: PropTypes.func.isRequired,
   createDirectoryByPath: PropTypes.func,
   statDirectoryByPath: PropTypes.func,
@@ -171,5 +176,7 @@ TriggerManager.propTypes = {
 }
 
 export default translate()(
-  withMutations(filesMutations, triggersMutations)(TriggerManager)
+  withMutations(filesMutations, permissionsMutations, triggersMutations)(
+    TriggerManager
+  )
 )

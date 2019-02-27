@@ -31,6 +31,13 @@ const fixtures = {
     _id: '3f5b288af36041f189ec22063adab706'
   },
   folderPath: '/Administrative/myBills/foo',
+  folderPermission: {
+    saveFolder: {
+      type: 'io.cozy.files',
+      values: ['3f5b288af36041f189ec22063adab706'],
+      verbs: ['GET', 'PUT']
+    }
+  },
   triggerAttributes: {
     arguments: '0 0 0 * * 0',
     type: '@cron',
@@ -111,6 +118,7 @@ const fixtures = {
   }
 }
 
+const addPermissionMock = jest.fn()
 const createTriggerMock = jest.fn().mockResolvedValue(fixtures.createdTrigger)
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
@@ -125,6 +133,7 @@ const tMock = jest.fn().mockReturnValue('/Administrative')
 const shallowAccountCreator = konnector =>
   shallow(
     <TriggerManager
+      addPermission={addPermissionMock}
       konnector={konnector || fixtures.konnector}
       createTrigger={createTriggerMock}
       createDirectoryByPath={createDirectoryByPathMock}
@@ -223,6 +232,7 @@ describe('TriggerManager', () => {
     describe('when konnector needs folder', () => {
       it('should create folder if it does not exist', async () => {
         statDirectoryByPathMock.mockResolvedValue(null)
+        createDirectoryByPathMock.mockReturnValue(fixtures.folder)
 
         const wrapper = shallowAccountCreator(fixtures.konnectorWithFolder)
         await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
@@ -231,6 +241,11 @@ describe('TriggerManager', () => {
         expect(createDirectoryByPathMock).toHaveBeenCalledTimes(1)
         expect(createDirectoryByPathMock).toHaveBeenCalledWith(
           fixtures.folderPath
+        )
+        expect(addPermissionMock).toHaveBeenCalledTimes(1)
+        expect(addPermissionMock).toHaveBeenCalledWith(
+          fixtures.konnectorWithFolder,
+          fixtures.folderPermission
         )
       })
 
@@ -242,6 +257,12 @@ describe('TriggerManager', () => {
 
         expect(statDirectoryByPathMock).toHaveBeenCalledTimes(1)
         expect(createDirectoryByPathMock).toHaveBeenCalledTimes(0)
+
+        expect(addPermissionMock).toHaveBeenCalledTimes(1)
+        expect(addPermissionMock).toHaveBeenCalledWith(
+          fixtures.konnectorWithFolder,
+          fixtures.folderPermission
+        )
       })
     })
   })

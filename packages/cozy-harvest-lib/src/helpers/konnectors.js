@@ -9,6 +9,25 @@ import has from 'lodash/has'
 export const needsFolder = konnector =>
   has(konnector, 'fields.advancedFields.folderPath')
 
+/**
+ * Returns a permission ready to be passed to
+ * client.collection('io.cozy.permissions').add().
+ * @param  {Object} konnector The konnector to add permission to
+ * @param  {Object} folder    The folder which the konnector should have access
+ * @return {Object}           Permission object
+ */
+export const buildFolderPermission = folder => {
+  return {
+    // Legacy name
+    saveFolder: {
+      type: 'io.cozy.files',
+      values: [folder._id],
+      verbs: ['GET', 'PUT']
+    }
+  }
+}
+
 export default {
-  needsFolder
+  needsFolder,
+  buildFolderPermission
 }
