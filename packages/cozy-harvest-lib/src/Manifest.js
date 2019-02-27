@@ -1,5 +1,6 @@
 import _flow from 'lodash/flow'
 import _cloneDeep from 'lodash/cloneDeep'
+import findKey from 'lodash/findKey'
 import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
 
@@ -37,6 +38,14 @@ const defaultFieldsValues = fields => {
     value => value.default
   )
 }
+
+/**
+ * Returns the key for the field having the role=identifier attribute
+ * @param  {Object} fields Konnector fields
+ * @return {[type]}        The key for the identifier field, example 'login'
+ */
+const getIdentifier = (fields = {}) =>
+  findKey(sanitizeIdentifier(fields), field => field.role === IDENTIFIER)
 
 /**
  * Ensures old fields are removed
@@ -146,6 +155,7 @@ export const sanitize = (manifest = {}) =>
 
 export default {
   defaultFieldsValues,
+  getIdentifier,
   sanitize,
   sanitizeFields
 }

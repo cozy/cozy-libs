@@ -20,6 +20,34 @@ describe('Manifest', () => {
     })
   })
 
+  describe('getIdentifier', () => {
+    it('should return field having role=identifier', () => {
+      const fields = {
+        username: {
+          type: 'text'
+        },
+        id: {
+          type: 'text',
+          role: 'identifier'
+        }
+      }
+      expect(Manifest.getIdentifier(fields)).toBe('id')
+    })
+
+    it('should return the first field', () => {
+      const fields = {
+        username: {
+          type: 'text'
+        },
+        id: {
+          type: 'text'
+        }
+      }
+
+      expect(Manifest.getIdentifier(fields)).toBe('username')
+    })
+  })
+
   describe('sanitize', () => {
     it('should remove "fields" if fields is null', () => {
       const manifest = {
