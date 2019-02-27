@@ -20,7 +20,7 @@ const DEFAULT_TIME_INTERVAL = [0, 5]
  * `dayOfWeek`, hours`, `minutes`.
  * @return {string}           The cron definition for trigger
  */
-export const buildCron = (frequency, options = {}) => {
+export const buildCronFromFrequency = (frequency, options = {}) => {
   const sanitizedFrequency = VALID_FREQUENCIES.includes(frequency)
     ? frequency
     : DEFAULT_FREQUENCY
@@ -45,7 +45,7 @@ export const buildKonnectorCron = (
   startDate = new Date(),
   randomDayTimeFn = randomDayTime
 ) =>
-  buildCron(konnector.frequency, {
+  buildCronFromFrequency(konnector.frequency, {
     ...randomDayTimeFn.apply(
       null,
       konnector.time_interval || DEFAULT_TIME_INTERVAL

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 
 import {
-  buildCron,
+  buildCronFromFrequency,
   buildKonnectorCron,
   buildKonnectorTriggerAttributes
 } from 'helpers/triggers'
@@ -39,7 +39,7 @@ describe('Triggers Helper', () => {
     })
   })
 
-  describe('buildCron', () => {
+  describe('buildCronFromFrequency', () => {
     const options = {
       dayOfMonth: 25,
       dayOfWeek: 4,
@@ -48,23 +48,23 @@ describe('Triggers Helper', () => {
     }
 
     it('creates default cron (weekly)', () => {
-      expect(buildCron()).toEqual('0 0 0 * * 1')
+      expect(buildCronFromFrequency()).toEqual('0 0 0 * * 1')
     })
 
     it('creates weekly cron', () => {
-      expect(buildCron('weekly', options)).toEqual('0 15 14 * * 4')
+      expect(buildCronFromFrequency('weekly', options)).toEqual('0 15 14 * * 4')
     })
 
     it('creates monthly cron', () => {
-      expect(buildCron('monthly', options)).toEqual('0 15 14 25 * *')
+      expect(buildCronFromFrequency('monthly', options)).toEqual('0 15 14 25 * *')
     })
 
     it('creates daily cron', () => {
-      expect(buildCron('daily', options)).toEqual('0 15 14 * * *')
+      expect(buildCronFromFrequency('daily', options)).toEqual('0 15 14 * * *')
     })
 
     it('creates hourly cron', () => {
-      expect(buildCron('hourly', options)).toEqual('0 15 * * * *')
+      expect(buildCronFromFrequency('hourly', options)).toEqual('0 15 * * * *')
     })
   })
 
