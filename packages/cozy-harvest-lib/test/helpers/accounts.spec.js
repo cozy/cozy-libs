@@ -2,7 +2,15 @@ import { mergeAuth, prepareAccountData } from 'helpers/accounts'
 
 const fixtures = {
   konnector: {
-    slug: 'konnectest'
+    slug: 'konnectest',
+    fields: {
+      username: {
+        type: 'text'
+      },
+      passphrase: {
+        type: 'password'
+      }
+    }
   },
   data: {
     username: 'foo',
@@ -28,7 +36,8 @@ describe('Accounts Helper', () => {
         auth: {
           username: 'foo',
           passphrase: 'bar'
-        }
+        },
+        identifier: 'username'
       })
     })
   })

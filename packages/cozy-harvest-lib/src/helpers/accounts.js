@@ -1,5 +1,7 @@
 import merge from 'lodash/merge'
 
+import Manifest from '../Manifest'
+
 /**
  * Transforms AccountForm data to io.cozy.accounts attributes
  * @param  {object} konnector Konnector related to account
@@ -11,7 +13,8 @@ export const prepareAccountData = (konnector, data) => {
   // For now we are just ensuring legacy
   return {
     auth: data,
-    account_type: konnector.slug
+    account_type: konnector.slug,
+    identifier: Manifest.getIdentifier(konnector.fields)
   }
 }
 
