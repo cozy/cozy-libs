@@ -3,6 +3,8 @@ import _cloneDeep from 'lodash/cloneDeep'
 import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
 
+const IDENTIFIER = 'identifier'
+
 /**
  * Returns a key/value object with field as key and default, if it exists in
  * fields parameter.
@@ -58,7 +60,7 @@ const sanitizeIdentifier = fields => {
   const sanitized = _cloneDeep(fields)
   let hasIdentifier = false
   for (let fieldName in sanitized)
-    if (sanitized[fieldName].role === 'identifier') {
+    if (sanitized[fieldName].role === IDENTIFIER) {
       if (hasIdentifier) delete sanitized[fieldName].role
       else hasIdentifier = true
     }
@@ -66,13 +68,13 @@ const sanitizeIdentifier = fields => {
 
   for (let name of legacyLoginFields)
     if (sanitized[name]) {
-      sanitized[name].role = 'identifier'
+      sanitized[name].role = IDENTIFIER
       return sanitized
     }
 
   for (let fieldName in sanitized)
     if (sanitized[fieldName].type !== 'password') {
-      sanitized[fieldName].role = 'identifier'
+      sanitized[fieldName].role = IDENTIFIER
       return sanitized
     }
 
