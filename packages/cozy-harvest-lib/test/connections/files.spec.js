@@ -6,6 +6,7 @@ import { filesMutations } from 'connections/files'
 
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({
+    addReferencesTo: jest.fn(),
     createDirectoryByPath: jest.fn(),
     statByPath: jest.fn()
   })
@@ -23,13 +24,29 @@ const fixtures = {
     updated_at: '2018-12-18T11:22:41.065070118+01:00',
     tags: [],
     path: '/Administrative/KonnectTest/84595fcbc15242f2a69ac483b37ae999'
+  },
+  references: {
+    data: [
+      {
+        type: 'io.cozy.files',
+        id: '326267e55ff0511c7f7b9ba56e04b334'
+      }
+    ]
   }
 }
 
-const { createDirectoryByPath, statDirectoryByPath } = filesMutations(client)
+const {
+  addReferencesTo,
+  createDirectoryByPath,
+  statDirectoryByPath
+} = filesMutations(client)
 
 describe('Files mutations', () => {
   beforeAll(() => {
+    client
+      .collection()
+      .addReferencesTo.mockResolvedValue({ data: fixtures.references })
+
     client
       .collection()
       .createDirectoryByPath.mockResolvedValue({ data: fixtures.directory })
@@ -45,6 +62,17 @@ describe('Files mutations', () => {
 
   afterAll(() => {
     jest.restoreAllMocks()
+  })
+
+  describe('addReferencesTo', () => {
+    it('calls Cozy Client and return io.cozy.files', async () => {
+      await addReferencesTo(fixtures.konnector, [fixtures.directory])
+
+      expect(client.collection().addReferencesTo).toHaveBeenCalledWith(
+        fixtures.konnector,
+        [fixtures.directory]
+      )
+    })
   })
 
   describe('createDirectoryByPath', () => {

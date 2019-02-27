@@ -119,6 +119,7 @@ const fixtures = {
 }
 
 const addPermissionMock = jest.fn()
+const addReferencesToMock = jest.fn()
 const createTriggerMock = jest.fn().mockResolvedValue(fixtures.createdTrigger)
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
@@ -134,6 +135,7 @@ const shallowAccountCreator = konnector =>
   shallow(
     <TriggerManager
       addPermission={addPermissionMock}
+      addReferencesTo={addReferencesToMock}
       konnector={konnector || fixtures.konnector}
       createTrigger={createTriggerMock}
       createDirectoryByPath={createDirectoryByPathMock}
@@ -247,6 +249,11 @@ describe('TriggerManager', () => {
           fixtures.konnectorWithFolder,
           fixtures.folderPermission
         )
+        expect(addReferencesToMock).toHaveBeenCalledTimes(1)
+        expect(addReferencesToMock).toHaveBeenCalledWith(
+          fixtures.konnectorWithFolder,
+          [fixtures.folder]
+        )
       })
 
       it('should not create folder if it exists', async () => {
@@ -262,6 +269,11 @@ describe('TriggerManager', () => {
         expect(addPermissionMock).toHaveBeenCalledWith(
           fixtures.konnectorWithFolder,
           fixtures.folderPermission
+        )
+        expect(addReferencesToMock).toHaveBeenCalledTimes(1)
+        expect(addReferencesToMock).toHaveBeenCalledWith(
+          fixtures.konnectorWithFolder,
+          [fixtures.folder]
         )
       })
     })

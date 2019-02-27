@@ -59,6 +59,7 @@ export class TriggerManager extends Component {
   async handleAccountCreationSuccess(account) {
     const {
       addPermission,
+      addReferencesTo,
       createDirectoryByPath,
       createTrigger,
       statDirectoryByPath,
@@ -80,6 +81,7 @@ export class TriggerManager extends Component {
         (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
 
       await addPermission(konnector, konnectors.buildFolderPermission(folder))
+      await addReferencesTo(konnector, [folder])
     }
 
     const trigger = await createTrigger(
@@ -165,6 +167,7 @@ TriggerManager.propTypes = {
   running: PropTypes.bool,
   // mutations
   addPermission: PropTypes.func,
+  addReferencesTo: PropTypes.func,
   createTrigger: PropTypes.func.isRequired,
   createDirectoryByPath: PropTypes.func,
   statDirectoryByPath: PropTypes.func,
