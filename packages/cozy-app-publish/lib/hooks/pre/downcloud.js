@@ -18,6 +18,7 @@ const launchCmd = (cmd, params, options) => {
     const process = spawn(cmd, params, cmdOptions)
     process.stdout.on('data', data => result.stdout.push(data.toString()))
     process.stderr.on('data', data => result.stderr.push(data.toString()))
+    process.on('error', err => reject(err))
     process.on('close', code => {
       result.code = code
       if (code === 0) {
