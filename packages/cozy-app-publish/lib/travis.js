@@ -15,7 +15,8 @@ const getAutoTravisVersion = async appManifestObj => {
   if (TRAVIS_TAG) {
     return TRAVIS_TAG
   } else {
-    return await getDevVersion(TRAVIS_COMMIT, appManifestObj.version)
+    const shortCommit = TRAVIS_COMMIT.slice(0, 7)
+    return await getDevVersion(shortCommit, appManifestObj.version)
   }
 }
 
