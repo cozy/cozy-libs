@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.11.1"></a>
+## [0.11.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.11.0...cozy-app-publish@0.11.1) (2019-02-28)
+
+
+### Bug Fixes
+
+* Use short commit for travis version ([dabb28b](https://github.com/cozy/cozy-libs/commit/dabb28b))
+
+
+
+
 <a name="0.11.0"></a>
 # [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.10.5...cozy-app-publish@0.11.0) (2019-02-28)
 
