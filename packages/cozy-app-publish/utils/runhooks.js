@@ -2,8 +2,13 @@ const requireHook = (hook, type) => {
   try {
     return require(`${__dirname}/../lib/hooks/${type}/` + hook + '.js')
   } catch (error) {
-    // Not builtin
-    return require(process.cwd() + '/' + hook)
+    try {
+      // Not builtin
+      return require(process.cwd() + '/' + hook)
+    } catch (err) {
+      console.error(err)
+      throw new Error(`"${hook}" could not be loaded.`)
+    }
   }
 }
 
