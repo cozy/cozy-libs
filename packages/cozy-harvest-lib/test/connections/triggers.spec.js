@@ -88,48 +88,63 @@ describe('Trigger mutations', () => {
     const longLoginResponseTime = 150
     const jobSuccessResponseTime = 100
 
+    // Lets mock a job to pass as waitForLoginSuccess parameter. This job should
+    // be returned after timeout
+    const job = {
+      // Test attribute, not expected in job schema
+      source: 'timeout',
+      state: 'queued'
+    }
+
+    // Mock for job returned by realtime
     const updatedJob = {
+      source: 'realtime',
       state: 'done'
     }
 
     beforeAll(() => {
       // Mock realtime to respond at 100ms
-      realtime.subscribe.mockImplementation(() => ({
+      realtime.subscribe.mockResolvedValue({
         onUpdate: fn => setTimeout(() => fn(updatedJob), jobSuccessResponseTime)
-      }))
+      })
+    })
+
+    afterEach(() => {
+      realtime.subscribe.mockClear()
     })
 
     afterAll(() => {
-      realtime.subscribe.resetMock()
+      realtime.subscribe.mockReset()
     })
 
     it('waits for the given delay', async () => {
-      const startTime = new Date().getTime()
-      await waitForLoginSuccess({}, shortLoginResponseTime)
-      const endTime = new Date().getTime()
-      expect(endTime - startTime).toBeGreaterThanOrEqual(shortLoginResponseTime)
-      expect(endTime - startTime).toBeLessThan(jobSuccessResponseTime)
+      const resultingJob = await waitForLoginSuccess(
+        job,
+        shortLoginResponseTime
+      )
+      expect(resultingJob).toEqual(job)
     })
 
-    it('handle job end before login delay', async () => {
-      const startTime = new Date().getTime()
-      await waitForLoginSuccess({}, longLoginResponseTime)
-      const endTime = new Date().getTime()
-      expect(endTime - startTime).toBeGreaterThanOrEqual(jobSuccessResponseTime)
-      expect(endTime - startTime).toBeLessThan(longLoginResponseTime)
+    it('handles job end before login delay', async () => {
+      const resultingJob = await waitForLoginSuccess(job, longLoginResponseTime)
+      expect(resultingJob).toEqual(updatedJob)
     })
 
-    it('ignore unfinished job', async () => {
+    it('ignores unfinished job', async () => {
       // Mock realtime to respond at 100ms
       realtime.subscribe.mockImplementation(() => ({
         onUpdate: fn =>
-          setTimeout(() => fn({ state: 'queued' }), jobSuccessResponseTime)
+          setTimeout(
+            () => fn({ state: 'queued', source: 'realtime' }),
+            jobSuccessResponseTime
+          )
       }))
-      const startTime = new Date().getTime()
-      await waitForLoginSuccess({}, shortLoginResponseTime)
-      const endTime = new Date().getTime()
-      expect(endTime - startTime).toBeGreaterThanOrEqual(shortLoginResponseTime)
-      expect(endTime - startTime).toBeLessThan(jobSuccessResponseTime)
+
+      const resultingJob = await waitForLoginSuccess(
+        job,
+        shortLoginResponseTime
+      )
+      expect(resultingJob).toEqual(job)
     })
   })
 })
