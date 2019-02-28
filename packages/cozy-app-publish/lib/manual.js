@@ -131,6 +131,7 @@ async function manualPublish(
 
 const manualPublishCLI = function() {
   return manualPublish.apply(this, arguments).catch(e => {
+    console.error(e)
     console.error(e.message)
     process.exit(1)
   })
