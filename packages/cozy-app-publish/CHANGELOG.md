@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.11.0"></a>
+# [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.10.5...cozy-app-publish@0.11.0) (2019-02-28)
+
+
+### Bug Fixes
+
+* Add error handling to CLI main handler ([2f4b105](https://github.com/cozy/cozy-libs/commit/2f4b105))
+* Reject on process/pipe error ([35e13d4](https://github.com/cozy/cozy-libs/commit/35e13d4))
+
+
+### Features
+
+* appBuildURL can be provided by prepublish hooks ([c3f09ee](https://github.com/cozy/cozy-libs/commit/c3f09ee))
+* Auto version in manual mode ([4cf5065](https://github.com/cozy/cozy-libs/commit/4cf5065))
+* Better error message if custom hook cannot be loaded ([0f7ceae](https://github.com/cozy/cozy-libs/commit/0f7ceae))
+* Logs for shasum ([9190c10](https://github.com/cozy/cozy-libs/commit/9190c10))
+* Print stack when erroring ([f17de04](https://github.com/cozy/cozy-libs/commit/f17de04))
+
+
+
+
 <a name="0.10.5"></a>
 ## [0.10.5](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.10.4...cozy-app-publish@0.10.5) (2019-01-29)
 
