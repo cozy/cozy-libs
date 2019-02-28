@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.31.2"></a>
+## [0.31.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.31.1...cozy-harvest-lib@0.31.2) (2019-02-28)
+
+
+### Bug Fixes
+
+* **harvest:** Correct call to get aggregator account 🚑 ([48d00b9](https://github.com/cozy/cozy-libs/commit/48d00b9))
+
+
+
+
 <a name="0.31.1"></a>
 ## [0.31.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.31.0...cozy-harvest-lib@0.31.1) (2019-02-26)
 
