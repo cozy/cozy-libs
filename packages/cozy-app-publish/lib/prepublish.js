@@ -89,8 +89,13 @@ const shasum256FromURL = url =>
 
 const shasum = async options => {
   const { appBuildUrl } = options
-  const shasum = await prepublish.shasum256FromURL(appBuildUrl)
-  options.sha256Sum = shasum
+  try {
+    console.log('Verifying shasum...')
+    const shasum = await prepublish.shasum256FromURL(appBuildUrl)
+    options.sha256Sum = shasum
+  } catch (e) {
+    throw new Error('Cannot shasum ' + appBuildUrl)
+  }
   return options
 }
 
