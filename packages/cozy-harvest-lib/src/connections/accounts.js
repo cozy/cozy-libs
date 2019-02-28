@@ -22,7 +22,7 @@ const createAccount = async (client, konnector, attributes) => {
  */
 const findAccount = async (client, id) => {
   try {
-    const { data } = await client.get(ACCOUNTS_DOCTYPE, id)
+    const { data } = await client.collection(ACCOUNTS_DOCTYPE).get(id)
     return data
   } catch (error) {
     if (error.status === 404) {
