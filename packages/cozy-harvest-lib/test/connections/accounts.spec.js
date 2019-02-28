@@ -4,10 +4,10 @@ import client from 'cozy-client'
 
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({
-    add: jest.fn()
+    add: jest.fn(),
+    get: jest.fn()
   }),
   create: jest.fn(),
-  get: jest.fn(),
   query: jest.fn(),
   save: jest.fn(),
   where: jest.fn()
@@ -89,8 +89,8 @@ describe('Account mutations', () => {
     }
 
     beforeEach(() => {
-      client.get.mockReset()
-      client.get.mockResolvedValue({
+      client.collection().get.mockReset()
+      client.collection().get.mockResolvedValue({
         data: simpleAccountFixtureWithMasterRelation
       })
     })
@@ -111,7 +111,7 @@ describe('Account mutations', () => {
 
     describe('if parent account does not exists', () => {
       beforeEach(() => {
-        client.get = jest.fn().mockRejectedValue({ status: 404 })
+        client.collection().get = jest.fn().mockRejectedValue({ status: 404 })
 
         client.create.mockReset()
         client.create.mockResolvedValue({
@@ -156,8 +156,8 @@ describe('Account mutations', () => {
       })
 
       it('throws error if get fails', async () => {
-        client.get.mockReset()
-        client.get.mockRejectedValue(new Error('Mocked error'))
+        client.collection().get.mockReset()
+        client.collection().get.mockRejectedValue(new Error('Mocked error'))
 
         await expect(
           createAccount(
@@ -282,8 +282,8 @@ describe('Account mutations', () => {
       })
 
       it('throws error if get fails', async () => {
-        client.get.mockReset()
-        client.get.mockRejectedValue(new Error('Mocked error'))
+        client.collection().get.mockReset()
+        client.collection().get.mockRejectedValue(new Error('Mocked error'))
 
         await expect(
           createAccount(
