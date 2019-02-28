@@ -3,6 +3,8 @@ import { subscribe } from 'cozy-realtime'
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
+const JOB_END_STATES = ['done', 'errored']
+
 /**
  * Creates a trigger with given attributes
  * @param  {Object} client CozyClient
@@ -57,7 +59,9 @@ const waitForLoginSuccess = async (
   return new Promise(resolve => {
     const resolveJob = () => resolve(job)
     setTimeout(resolveJob, expectedSuccessDelay)
-    jobSubscription.onUpdate(resolveJob)
+    jobSubscription.onUpdate(
+      job => JOB_END_STATES.includes(job.state) && resolveJob(job)
+    )
   })
 }
 

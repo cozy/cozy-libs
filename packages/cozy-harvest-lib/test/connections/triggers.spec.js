@@ -88,10 +88,14 @@ describe('Trigger mutations', () => {
     const longLoginResponseTime = 150
     const jobSuccessResponseTime = 100
 
+    const updatedJob = {
+      state: 'done'
+    }
+
     beforeAll(() => {
       // Mock realtime to respond at 100ms
       realtime.subscribe.mockImplementation(() => ({
-        onUpdate: fn => setTimeout(() => fn(), jobSuccessResponseTime)
+        onUpdate: fn => setTimeout(() => fn(updatedJob), jobSuccessResponseTime)
       }))
     })
 
@@ -113,6 +117,19 @@ describe('Trigger mutations', () => {
       const endTime = new Date().getTime()
       expect(endTime - startTime).toBeGreaterThanOrEqual(jobSuccessResponseTime)
       expect(endTime - startTime).toBeLessThan(longLoginResponseTime)
+    })
+
+    it('ignore unfinished job', async () => {
+      // Mock realtime to respond at 100ms
+      realtime.subscribe.mockImplementation(() => ({
+        onUpdate: fn =>
+          setTimeout(() => fn({ state: 'queued' }), jobSuccessResponseTime)
+      }))
+      const startTime = new Date().getTime()
+      await waitForLoginSuccess({}, shortLoginResponseTime)
+      const endTime = new Date().getTime()
+      expect(endTime - startTime).toBeGreaterThanOrEqual(shortLoginResponseTime)
+      expect(endTime - startTime).toBeLessThan(jobSuccessResponseTime)
     })
   })
 })
