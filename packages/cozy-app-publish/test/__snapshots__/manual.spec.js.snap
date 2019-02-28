@@ -18,6 +18,22 @@ Object {
 }
 `;
 
+exports[`Manual publishing script should work correctly if no appBuildUrl is provided but prepublish provides it 1`] = `
+Object {
+  "appBuildUrl": "https://mock.getarchive.cc/12345.tar.gz",
+  "appSlug": "mock-app",
+  "appType": "webapp",
+  "appVersion": "2.1.8-dev.12345",
+  "buildCommit": undefined,
+  "prepublishHook": undefined,
+  "registryEditor": "Cozy",
+  "registryToken": "registryTokenForTest123",
+  "registryUrl": "https://mock.registry.cc",
+  "sha256Sum": "fakeshasum5644545",
+  "spaceName": "mock_space",
+}
+`;
+
 exports[`Manual publishing script should work correctly if no space name provided 1`] = `
 Object {
   "appBuildUrl": "https://mock.getarchive.cc/12345.tar.gz",
@@ -31,6 +47,22 @@ Object {
   "registryUrl": "https://mock.registry.cc",
   "sha256Sum": "fakeshasum5644545",
   "spaceName": undefined,
+}
+`;
+
+exports[`Manual publishing script should work correctly if no version provided 1`] = `
+Object {
+  "appBuildUrl": "https://mock.getarchive.cc/12345.tar.gz",
+  "appSlug": "mock-app",
+  "appType": "webapp",
+  "appVersion": "2.1.8-dev.12346",
+  "buildCommit": undefined,
+  "prepublishHook": undefined,
+  "registryEditor": "Cozy",
+  "registryToken": "registryTokenForTest123",
+  "registryUrl": "https://mock.registry.cc",
+  "sha256Sum": "fakeshasum5644545",
+  "spaceName": "mock_space",
 }
 `;
 

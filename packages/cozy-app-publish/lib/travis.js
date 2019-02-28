@@ -6,8 +6,18 @@ const colorize = require('../utils/colorize')
 const getManifestAsObject = require('../utils/getManifestAsObject')
 const getTravisVariables = require('../utils/getTravisVariables')
 const constants = require('./constants')
+const { getDevVersion } = require('./tags')
 
 const { DEFAULT_REGISTRY_URL, DEFAULT_BUILD_DIR } = constants
+
+const getAutoTravisVersion = async appManifestObj => {
+  const { TRAVIS_TAG, TRAVIS_COMMIT } = getTravisVariables()
+  if (TRAVIS_TAG) {
+    return TRAVIS_TAG
+  } else {
+    return await getDevVersion(TRAVIS_COMMIT, appManifestObj.version)
+  }
+}
 
 async function travisPublish({
   postpublishHook,
@@ -52,12 +62,7 @@ async function travisPublish({
   const appType = appManifestObj.type
 
   // get application version to publish
-  let appVersion = ''
-  if (TRAVIS_TAG) {
-    appVersion = TRAVIS_TAG
-  } else {
-    appVersion = `${appManifestObj.version}-dev.${TRAVIS_COMMIT}`
-  }
+  const appVersion = await getAutoTravisVersion(appManifestObj)
 
   // get archive url from github repo
   // FIXME push directly the archive to the registry
