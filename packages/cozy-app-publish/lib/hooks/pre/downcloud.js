@@ -12,10 +12,10 @@ const HOST = 'downcloud.cozycloud.cc'
 const HOST_STRING = `${USER}@${HOST}`
 
 const launchCmd = (cmd, params, options) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
-    const process = await spawn(cmd, params, cmdOptions)
+    const process = spawn(cmd, params, cmdOptions)
     process.stdout.on('data', data => result.stdout.push(data.toString()))
     process.stderr.on('data', data => result.stderr.push(data.toString()))
     process.on('close', code => {
