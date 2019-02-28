@@ -55,15 +55,6 @@ async function manualPublish(
   const appSlug = appManifestObj.slug
   const appType = appManifestObj.type || 'webapp'
 
-  // get archive url
-  // FIXME push directly the archive to the registry
-  // for now, the registry needs an external URL
-  if (!appBuildUrl) {
-    throw new Error(
-      'The --build-url option is required for the manual mode. Publishing failed.'
-    )
-  }
-
   const promptProperties = [
     {
       name: 'confirm',

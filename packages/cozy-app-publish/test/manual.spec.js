@@ -4,6 +4,7 @@ const path = require('path')
 
 const manualScript = require('../lib/manual').manualPublish
 const publishLib = require('../lib/publish')
+const prepublish = require('../lib/prepublish')
 const tags = require('../lib/tags')
 
 const rootPath = process.cwd()
@@ -13,11 +14,11 @@ const mockAppDir = path.join(__dirname, 'mockApps/mockApp')
 
 jest.mock('../lib/publish', () => jest.fn())
 jest.mock('../lib/tags', () => ({}))
-jest.mock('../lib/prepublish', () =>
-  jest.fn(options =>
-    Object.assign({}, options, { sha256Sum: 'fakeshasum5644545' })
-  )
-)
+
+jest.mock('../lib/hooks/pre/downcloud', () => ({
+  appBuildUrl: 'https://mock.getarchive.cc/12345.tar.gz'
+}))
+jest.mock('../lib/prepublish', () => jest.fn())
 
 const commons = {
   token: 'registryTokenForTest123'
@@ -52,8 +53,13 @@ describe('Manual publishing script', () => {
     fs.removeSync(testPath)
   })
 
+  let prepublishResult
   beforeEach(() => {
     jest.clearAllMocks()
+    prepublishResult = { sha256Sum: 'fakeshasum5644545' }
+    prepublish.mockImplementation(options =>
+      Object.assign({}, options, prepublishResult)
+    )
   })
 
   it('should work correctly if expected options provided', async () => {
@@ -80,6 +86,16 @@ describe('Manual publishing script', () => {
   it('should work correctly if no version provided', async () => {
     const options = getOptions(commons.token)
     delete options.manualVersion
+
+    await manualScript(options, { confirm: 'yes' })
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it('should work correctly if no appBuildUrl is provided but prepublish provides it', async () => {
+    const options = getOptions(commons.token)
+    delete options.appBuildUrl
+    prepublishResult.appBuildUrl = 'https://mock.getarchive.cc/12345.tar.gz'
 
     await manualScript(options, { confirm: 'yes' })
     expect(publishLib).toHaveBeenCalledTimes(1)
