@@ -8,6 +8,11 @@ exports[`AccountEditor should render 1`] = `
       "username": "foo",
     }
   }
+  konnector={
+    Object {
+      "slug": "konnectest",
+    }
+  }
   onSubmit={[Function]}
 />
 `;

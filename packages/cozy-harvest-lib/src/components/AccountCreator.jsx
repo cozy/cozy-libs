@@ -36,10 +36,8 @@ export class AccountCreator extends PureComponent {
     const { account, konnector, submitting } = this.props
     return (
       <AccountForm
-        fields={konnector.fields}
+        konnector={konnector}
         initialValues={account && (account.auth || account.oauth)}
-        locales={konnector.locales}
-        oauth={konnector.oauth}
         onSubmit={this.handleSubmit}
         submitting={submitting}
       />

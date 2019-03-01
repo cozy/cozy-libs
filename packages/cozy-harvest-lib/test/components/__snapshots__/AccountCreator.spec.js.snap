@@ -2,6 +2,11 @@
 
 exports[`AccountCreator should render 1`] = `
 <Wrapper
+  konnector={
+    Object {
+      "slug": "konnectest",
+    }
+  }
   onSubmit={[Function]}
 />
 `;

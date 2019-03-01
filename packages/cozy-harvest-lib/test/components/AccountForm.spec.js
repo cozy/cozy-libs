@@ -12,18 +12,22 @@ import {
 configure({ adapter: new Adapter() })
 
 const fixtures = {
-  fields: {
-    username: {
-      type: 'text'
-    },
-    passphrase: {
-      type: 'password'
+  konnector: {
+    fields: {
+      username: {
+        type: 'text'
+      },
+      passphrase: {
+        type: 'password'
+      }
     }
   },
-  optionalFields: {
-    test: {
-      required: false,
-      type: 'text'
+  konnectorWithOptionalFields: {
+    fields: {
+      test: {
+        required: false,
+        type: 'text'
+      }
     }
   },
   sanitized: {
@@ -44,9 +48,6 @@ const fixtures = {
       credentials_encrypted:
         'bmFjbGj8JQfzzfTQ2aGKTpI+HI9N8xKAQqPTPD6/84x5GyiHm2hdn7N6rO8cLTCnkdsnd2eFWJRf'
     }
-  },
-  oauth: {
-    scope: 'test'
   }
 }
 
@@ -62,7 +63,7 @@ describe('AccountForm', () => {
 
   it('should render', () => {
     const wrapper = shallow(
-      <AccountForm fields={fixtures.fields} onSubmit={onSubmit} t={t} />
+      <AccountForm konnector={fixtures.konnector} onSubmit={onSubmit} t={t} />
     )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
@@ -72,7 +73,7 @@ describe('AccountForm', () => {
     const wrapper = shallow(
       <AccountForm
         initialValues={fixtures.account.auth}
-        fields={fixtures.fields}
+        konnector={fixtures.konnector}
         t={t}
       />
     )
@@ -80,21 +81,29 @@ describe('AccountForm', () => {
   })
 
   it('should redirect to OAuthForm', () => {
+    const konnector = {
+      oauth: {
+        scope: 'test'
+      }
+    }
+
     const component = shallow(
-      <AccountForm oauth={fixtures.oauth} onSubmit={onSubmit} t={t} />
+      <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />
     ).getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should provide default values from manifest', () => {
-    const fields = {
-      foo: {
-        default: 'bar',
-        type: 'text'
+    const konnector = {
+      fields: {
+        foo: {
+          default: 'bar',
+          type: 'text'
+        }
       }
     }
     const wrapper = shallow(
-      <AccountForm fields={fields} onSubmit={onSubmit} t={t} />
+      <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />
     )
     expect(wrapper.props().initialValues).toEqual({
       foo: 'bar'
@@ -115,26 +124,30 @@ describe('AccountForm', () => {
       expect(getButtonDisabledValue(wrapper)).toBe(false)
 
     it('should be disabled if there is required field empty', () => {
-      const fields = {
-        test: {
-          type: 'text'
+      const konnector = {
+        fields: {
+          test: {
+            type: 'text'
+          }
         }
       }
 
       assertButtonDisabled(
-        shallow(<AccountForm fields={fields} onSubmit={onSubmit} t={t} />)
+        shallow(<AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />)
       )
     })
 
     it("should be enabled if required field isn't empty", () => {
-      const fields = {
-        test: {
-          default: 'test',
-          type: 'text'
+      const konnector = {
+        fields: {
+          test: {
+            default: 'test',
+            type: 'text'
+          }
         }
       }
       assertButtonEnabled(
-        shallow(<AccountForm fields={fields} onSubmit={onSubmit} t={t} />)
+        shallow(<AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />)
       )
     })
 
@@ -142,7 +155,7 @@ describe('AccountForm', () => {
       assertButtonEnabled(
         shallow(
           <AccountForm
-            fields={fixtures.optionalFields}
+            konnector={fixtures.konnectorWithOptionalFields}
             onSubmit={onSubmit}
             t={t}
           />
@@ -158,7 +171,7 @@ describe('AccountForm', () => {
       assertButtonDisabled(
         shallow(
           <AccountForm
-            fields={fixtures.fields}
+            konnector={fixtures.konnector}
             initialValues={values}
             onSubmit={onSubmit}
             t={t}
@@ -171,7 +184,7 @@ describe('AccountForm', () => {
   it('should call onSubmit on click', () => {
     const wrapper = shallow(
       <AccountForm
-        fields={fixtures.optionalFields}
+        konnector={fixtures.konnectorWithOptionalFields}
         initialValues={fixtures.account.auth}
         onSubmit={onSubmit}
         t={t}
@@ -188,7 +201,7 @@ describe('AccountForm', () => {
   describe('AccountFields', () => {
     it('should render', () => {
       const component = shallow(
-        <AccountFields manifestFields={fixtures.fields} t={t} />
+        <AccountFields manifestFields={fixtures.konnector.fields} t={t} />
       ).getElement()
       expect(component).toMatchSnapshot()
     })

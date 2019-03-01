@@ -181,7 +181,8 @@ AccountFields.propTypes = {
 export class AccountForm extends PureComponent {
   constructor(props, context) {
     super(props, context)
-    const { lang, locales } = props
+    const { konnector, lang } = props
+    const { locales } = konnector
     if (locales && lang) {
       extend(locales[lang])
     }
@@ -226,7 +227,8 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { fields, initialValues, oauth, onSubmit, submitting, t } = this.props
+    const { konnector, initialValues, onSubmit, submitting, t } = this.props
+    const { fields, oauth } = konnector
 
     if (oauth) return <OAuthForm initialValues={initialValues} oauth={oauth} />
 
@@ -284,9 +286,7 @@ export class AccountForm extends PureComponent {
 
 AccountForm.propTypes = {
   account: PropTypes.object,
-  fields: PropTypes.object,
-  oauth: PropTypes.object,
-  locales: PropTypes.object,
+  konnector: PropTypes.object.isRequired,
   submitting: PropTypes.bool
 }
 
