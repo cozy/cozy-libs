@@ -101,39 +101,71 @@ describe('AccountForm', () => {
     })
   })
 
-  it('should have disabled button if there is required field empty', () => {
-    const fields = {
-      test: {
-        type: 'text'
-      }
-    }
-    const wrapper = shallow(
-      <AccountForm fields={fields} onSubmit={onSubmit} t={t} />
-    )
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-  })
+  describe('Submit Button', () => {
+    const getButtonDisabledValue = wrapper =>
+      wrapper
+        .dive()
+        .find('DefaultButton')
+        .props().disabled
 
-  it("should have enabled button if required field isn't empty", () => {
-    const fields = {
-      test: {
-        default: 'test',
-        type: 'text'
-      }
-    }
-    const wrapper = shallow(
-      <AccountForm fields={fields} onSubmit={onSubmit} t={t} />
-    )
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
-  })
+    const assertButtonDisabled = wrapper =>
+      expect(getButtonDisabledValue(wrapper)).toBe(true)
 
-  it("should have enabled button if fields isn't required", () => {
-    const wrapper = shallow(
-      <AccountForm fields={fixtures.optionalFields} onSubmit={onSubmit} t={t} />
-    )
-    const component = wrapper.dive().getElement()
-    expect(component).toMatchSnapshot()
+    const assertButtonEnabled = wrapper =>
+      expect(getButtonDisabledValue(wrapper)).toBe(false)
+
+    it('should be disabled if there is required field empty', () => {
+      const fields = {
+        test: {
+          type: 'text'
+        }
+      }
+
+      assertButtonDisabled(
+        shallow(<AccountForm fields={fields} onSubmit={onSubmit} t={t} />)
+      )
+    })
+
+    it("should be enabled if required field isn't empty", () => {
+      const fields = {
+        test: {
+          default: 'test',
+          type: 'text'
+        }
+      }
+      assertButtonEnabled(
+        shallow(<AccountForm fields={fields} onSubmit={onSubmit} t={t} />)
+      )
+    })
+
+    it("should be enabled if fields isn't required", () => {
+      assertButtonEnabled(
+        shallow(
+          <AccountForm
+            fields={fixtures.optionalFields}
+            onSubmit={onSubmit}
+            t={t}
+          />
+        )
+      )
+    })
+
+    it('should be disabled with initialValues', () => {
+      const values = {
+        username: 'foo',
+        passphrase: 'bar'
+      }
+      assertButtonDisabled(
+        shallow(
+          <AccountForm
+            fields={fixtures.fields}
+            initialValues={values}
+            onSubmit={onSubmit}
+            t={t}
+          />
+        )
+      )
+    })
   })
 
   it('should call onSubmit on click', () => {
