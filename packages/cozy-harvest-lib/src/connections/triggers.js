@@ -57,10 +57,10 @@ const waitForLoginSuccess = async (
   )
 
   return new Promise(resolve => {
-    const resolveJob = () => resolve(job)
-    setTimeout(resolveJob, expectedSuccessDelay)
+    setTimeout(() => resolve(job), expectedSuccessDelay)
     jobSubscription.onUpdate(
-      job => JOB_END_STATES.includes(job.state) && resolveJob(job)
+      realtimeJob =>
+        JOB_END_STATES.includes(realtimeJob.state) && resolve(realtimeJob)
     )
   })
 }
