@@ -1,5 +1,16 @@
 const sortBy = require('lodash/sortBy')
 const { eitherIncludes } = require('./matching-tools')
+const labelSlugs = require('./label-slugs.json')
+
+const institutionLabelsCompiled = Object.entries(labelSlugs).map(
+  ([ilabelRx, slug]) => {
+    if (ilabelRx[0] === '/' && ilabelRx[ilabelRx.length - 1] === '/') {
+      return [new RegExp(ilabelRx.substr(1, ilabelRx.length - 2), 'i'), slug]
+    } else {
+      return [ilabelRx, slug]
+    }
+  }
+)
 
 const findExactMatch = (attr, account, existingAccounts) => {
   const sameAttr = existingAccounts.filter(
@@ -84,13 +95,45 @@ const creditCardMatch = (account, existingAccount) => {
   }
 }
 
+const getSlugFromInstitutionLabel = institutionLabel => {
+  for (let [rx, slug] of institutionLabelsCompiled) {
+    if (rx instanceof RegExp) {
+      const match = institutionLabel.match(rx)
+      if (match) {
+        return slug
+      }
+    } else if (rx.toLowerCase() === institutionLabel.toLowerCase()) {
+      return slug
+    }
+  }
+}
+
+const slugMatch = (account, existingAccount) => {
+  const possibleSlug = getSlugFromInstitutionLabel(account.institutionLabel)
+  const possibleSlugExisting = getSlugFromInstitutionLabel(
+    existingAccount.institutionLabel
+  )
+  return (
+    !possibleSlug ||
+    !possibleSlugExisting ||
+    possibleSlug === possibleSlugExisting
+  )
+}
+
 const score = (account, existingAccount) => {
   const methods = []
   const res = {
     account: existingAccount,
     methods
   }
+
   let points = 0
+
+  /* To avoid accounts from different banks to be considered */
+  if (!slugMatch(account, existingAccount)) {
+    points -= 1000
+  }
+
   if (approxNumberMatch(account, existingAccount)) {
     points += 50
     methods.push('approx-number')
@@ -200,5 +243,7 @@ const matchAccounts = (fetchedAccounts, existingAccounts) => {
 
 module.exports = {
   matchAccounts,
-  normalizeAccountNumber
+  normalizeAccountNumber,
+  score,
+  getSlugFromInstitutionLabel
 }

@@ -1,6 +1,11 @@
 const fs = require('fs-extra')
 const path = require('path')
-const { matchAccounts, normalizeAccountNumber } = require('./matching-accounts')
+const {
+  matchAccounts,
+  normalizeAccountNumber,
+  score,
+  getSlugFromInstitutionLabel
+} = require('./matching-accounts')
 
 const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
 const readBankAccounts = filename =>
@@ -52,6 +57,46 @@ fnDescribe('account matching', () => {
       expect(fmtedResults).toMatchSnapshot()
     })
   }
+})
+
+describe('slug match', () => {
+  const account = {
+    balance: 1337,
+    label: 'Test account',
+    number: '19019019002',
+    type: 'CreditCard',
+    institutionLabel: 'Boursorama'
+  }
+
+  it('should not match an account with a different slug', () => {
+    expect(
+      score(account, {
+        ...account,
+        institutionLabel: 'Bred'
+      }).points
+    ).toBeLessThan(0)
+  })
+
+  it('should match if we cannot determine the slug', () => {
+    expect(
+      score(account, {
+        ...account,
+        // Since we cannot determine the slug, it is not
+        // counted as a mismatch
+        // (does not match with ING since there is a ^ in the regexp)
+        institutionLabel: 'Unexisting bank'
+      }).points
+    ).toBeGreaterThan(0)
+  })
+})
+
+it('should find the slug from the institutionLabel', () => {
+  expect(getSlugFromInstitutionLabel("caisse d'Épargne (particuliers)")).toBe(
+    'caissedepargne1'
+  )
+  expect(
+    getSlugFromInstitutionLabel('Crédit Mutuelle de Montigny Lengrain')
+  ).toBe('cic45')
 })
 
 it('should normalize account number', () => {
