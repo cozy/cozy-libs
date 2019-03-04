@@ -5,7 +5,7 @@ import { withMutations } from 'cozy-client'
 
 import AccountForm from './AccountForm'
 import { accountsMutations } from '../connections/accounts'
-import { mergeAuth } from '../helpers/accounts'
+import accounts from '../helpers/accounts'
 
 /**
  * Encapsulates an AccountForm of an existing account, and allows to update it.
@@ -24,7 +24,9 @@ export class AccountEditor extends PureComponent {
       updateAccount
     } = this.props
     onBeforeUpdate(account)
-    const updatedAccount = await updateAccount(mergeAuth(account, data))
+    const updatedAccount = await updateAccount(
+      accounts.mergeAuth(account, data)
+    )
     onUpdateSuccess(updatedAccount)
   }
 
