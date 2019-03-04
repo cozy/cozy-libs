@@ -10,11 +10,13 @@ import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
 import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
+import { KonnectorJobError } from '../helpers/konnectors'
 import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import { slugify } from '../helpers/slug'
 import triggers from '../helpers/triggers'
 
+const ERRORED = 'ERRORED'
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
@@ -103,6 +105,13 @@ export class TriggerManager extends Component {
     return await this.launch(trigger)
   }
 
+  handleError(error) {
+    this.setState({
+      error,
+      status: ERRORED
+    })
+  }
+
   async handleSubmit(data) {
     const { konnector, saveAccount } = this.props
 
@@ -141,7 +150,13 @@ export class TriggerManager extends Component {
       waitForLoginSuccess
     } = this.props
 
-    const job = await waitForLoginSuccess(await launchTrigger(trigger))
+    let job
+
+    try {
+      job = await waitForLoginSuccess(await launchTrigger(trigger))
+    } catch (error) {
+      return this.handleError(new KonnectorJobError(error.message))
+    }
 
     this.setState({
       status: IDLE
