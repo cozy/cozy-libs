@@ -11,6 +11,7 @@ import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
 import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
+import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import { slugify } from '../helpers/slug'
 import triggers from '../helpers/triggers'
@@ -87,7 +88,7 @@ export class TriggerManager extends Component {
     const trigger = await createTrigger(
       triggers.buildAttributes({
         account,
-        cron: triggers.buildCron(konnector),
+        cron: cron.fromKonnector(konnector),
         folder,
         konnector
       })

@@ -4,7 +4,7 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 
 import { TriggerManager } from 'components/TriggerManager'
-import triggersHelpers from 'helpers/triggers'
+import cronHelpers from 'helpers/cron'
 
 configure({ adapter: new Adapter() })
 
@@ -197,9 +197,7 @@ describe('TriggerManager', () => {
 
   describe('handleAccountCreationSuccess', () => {
     beforeAll(() => {
-      jest
-        .spyOn(triggersHelpers, 'buildCronFromFrequency')
-        .mockReturnValue('0 0 0 * * 0')
+      jest.spyOn(cronHelpers, 'fromFrequency').mockReturnValue('0 0 0 * * 0')
     })
 
     afterEach(() => {
