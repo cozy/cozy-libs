@@ -35,7 +35,7 @@ const fixtures = {
     saveFolder: {
       type: 'io.cozy.files',
       values: ['3f5b288af36041f189ec22063adab706'],
-      verbs: ['GET', 'PUT']
+      verbs: ['GET', 'PATCH', 'POST']
     }
   },
   triggerAttributes: {

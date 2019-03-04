@@ -34,7 +34,7 @@ describe('Konnectors Helpers', () => {
         saveFolder: {
           type: 'io.cozy.files',
           values: [fixtures.folder._id],
-          verbs: ['GET', 'PUT']
+          verbs: ['GET', 'PATCH', 'POST']
         }
       })
     })
