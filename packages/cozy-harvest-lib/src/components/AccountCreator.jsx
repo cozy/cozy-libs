@@ -5,7 +5,7 @@ import { withMutations } from 'cozy-client'
 
 import AccountForm from './AccountForm'
 import { accountsMutations } from '../connections/accounts'
-import { mergeAuth, prepareAccountData } from '../helpers/accounts'
+import accounts from '../helpers/accounts'
 
 /**
  * Encapsulates an AccountForm and create an account with resulting data.
@@ -26,10 +26,10 @@ export class AccountCreator extends PureComponent {
     onBeforeCreate()
     const account = await createAccount(
       konnector,
-      prepareAccountData(konnector, data)
+      accounts.build(konnector, data)
     )
     // Merge auth to keep original values for encrypted fields during creation
-    onCreateSuccess(mergeAuth(account, data))
+    onCreateSuccess(accounts.mergeAuth(account, data))
   }
 
   render() {

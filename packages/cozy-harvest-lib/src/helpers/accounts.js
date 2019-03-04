@@ -15,16 +15,16 @@ export const getLabel = account =>
   get(account, `auth.${account.identifier}`) || account._id
 
 /**
- * Transforms AccountForm data to io.cozy.accounts attributes
+ * Transforms AccountForm data to io.cozy.accounts document
  * @param  {object} konnector Konnector related to account
  * @param  {object} data      Data from AccountForm
  * @return {object}           io.cozy.accounts attributes
  */
-export const prepareAccountData = (konnector, data) => {
+export const build = (konnector, authData) => {
   // We are not at the final target for io.cozy.accounts.
   // For now we are just ensuring legacy
   return {
-    auth: data,
+    auth: authData,
     account_type: konnector.slug,
     identifier: Manifest.getIdentifier(konnector.fields)
   }
@@ -42,7 +42,7 @@ export const mergeAuth = (account, authData) => ({
 })
 
 export default {
+  build,
   getLabel,
-  prepareAccountData,
   mergeAuth
 }

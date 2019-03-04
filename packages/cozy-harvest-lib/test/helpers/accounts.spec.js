@@ -1,4 +1,4 @@
-import { getLabel, mergeAuth, prepareAccountData } from 'helpers/accounts'
+import { build, getLabel, mergeAuth } from 'helpers/accounts'
 
 const fixtures = {
   konnector: {
@@ -44,9 +44,9 @@ describe('Accounts Helper', () => {
     })
   })
 
-  describe('prepareAccountData', () => {
+  describe('build', () => {
     it('should prepare account data', () => {
-      expect(prepareAccountData(fixtures.konnector, fixtures.data)).toEqual({
+      expect(build(fixtures.konnector, fixtures.data)).toEqual({
         account_type: 'konnectest',
         auth: {
           username: 'foo',
