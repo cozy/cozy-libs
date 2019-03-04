@@ -44,6 +44,20 @@ function sanitizeKey(key) {
   return key
 }
 
+function updateCreatedByApp(cozyMetadata, appSlug) {
+  if (!cozyMetadata.updatedByApps) {
+    cozyMetadata.updatedByApps = []
+  }
+  const now = new Date()
+  for (const appInfo of cozyMetadata.updatedByApps) {
+    if (appInfo.slug === appSlug) {
+      appInfo.date = now
+      return
+    }
+  }
+  cozyMetadata.updatedByApps.push({ slug: appSlug, date: now })
+}
+
 const withoutUndefined = x => omitBy(x, isUndefined)
 
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
@@ -84,6 +98,10 @@ class Document {
 
     if (!attributes.cozyMetadata.createdByApp && this.createdByApp) {
       attributes.cozyMetadata.createdByApp = this.createdByApp
+    }
+
+    if (this.createdByApp) {
+      updateCreatedByApp(attributes.cozyMetadata, this.createdByApp)
     }
 
     return attributes
