@@ -22,7 +22,7 @@ export const buildFolderPermission = folder => {
     saveFolder: {
       type: 'io.cozy.files',
       values: [folder._id],
-      verbs: ['GET', 'PUT']
+      verbs: ['GET', 'PATCH', 'POST']
     }
   }
 }
