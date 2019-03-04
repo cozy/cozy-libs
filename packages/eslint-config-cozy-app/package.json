@@ -19,7 +19,7 @@
     "vue.js"
   ],
   "dependencies": {
-    "babel-eslint": "8.2.6",
+    "babel-eslint": "10.0.1",
     "eslint": "5.3.0",
     "eslint-config-prettier": "3.6.0",
     "eslint-plugin-prettier": "3.0.1",
