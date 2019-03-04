@@ -179,6 +179,24 @@ describe('AccountForm', () => {
         )
       )
     })
+
+    it('should be enabled when an error exists', () => {
+      const values = {
+        username: 'foo',
+        passphrase: 'bar'
+      }
+      assertButtonEnabled(
+        shallow(
+          <AccountForm
+            error={new Error('Test error')}
+            konnector={fixtures.konnector}
+            initialValues={values}
+            onSubmit={onSubmit}
+            t={t}
+          />
+        )
+      )
+    })
   })
 
   it('should call onSubmit on click', () => {
