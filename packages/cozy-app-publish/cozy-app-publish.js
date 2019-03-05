@@ -72,6 +72,11 @@ const program = new commander.Command(pkg.name)
   })
   .parse(process.argv)
 
+const handleError = error => {
+  console.log(colorize.red(`Publishing failed: ${error.message}`))
+  process.exit(1)
+}
+
 try {
   publishApp({
     token: program.token,
@@ -84,10 +89,9 @@ try {
     registryUrl: program.registryUrl,
     space: program.space,
     verbose: program.verbose
-  })
+  }).catch(handleError)
 } catch (error) {
-  console.log(colorize.red(`Publishing failed: ${error.message}`))
-  process.exit(1)
+  handleError(error)
 }
 
 function _getPublishMode() {
