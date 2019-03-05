@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.32.2"></a>
+## [0.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.32.1...cozy-harvest-lib@0.32.2) (2019-03-05)
+
+
+### Bug Fixes
+
+* **harvest:** RandomDayTime helper must handle floats 🚑 ([114889c](https://github.com/cozy/cozy-libs/commit/114889c))
+
+
+
+
 <a name="0.32.1"></a>
 ## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.32.0...cozy-harvest-lib@0.32.1) (2019-03-04)
 
