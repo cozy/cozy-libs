@@ -227,14 +227,14 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { konnector, initialValues, onSubmit, submitting, t } = this.props
+    const { account, konnector, onSubmit, submitting, t } = this.props
     const { fields, oauth } = konnector
 
     if (oauth) return <OAuthForm initialValues={initialValues} oauth={oauth} />
 
     const sanitizedFields = Manifest.sanitizeFields(fields)
     const defaultValues = Manifest.defaultFieldsValues(sanitizedFields)
-
+    const initialValues = account && account.auth
     const initialAndDefaultValues = { ...defaultValues, ...initialValues }
 
     let container = null

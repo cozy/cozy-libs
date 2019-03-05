@@ -72,7 +72,7 @@ describe('AccountForm', () => {
   it('should inject initial values from account', () => {
     const wrapper = shallow(
       <AccountForm
-        initialValues={fixtures.account.auth}
+        account={fixtures.account}
         konnector={fixtures.konnector}
         t={t}
       />
@@ -164,15 +164,18 @@ describe('AccountForm', () => {
     })
 
     it('should be disabled with initialValues', () => {
-      const values = {
-        username: 'foo',
-        passphrase: 'bar'
+      const account = {
+        auth: {
+          username: 'foo',
+          passphrase: 'bar'
+        }
       }
+
       assertButtonDisabled(
         shallow(
           <AccountForm
+            account={account}
             konnector={fixtures.konnector}
-            initialValues={values}
             onSubmit={onSubmit}
             t={t}
           />
@@ -184,8 +187,8 @@ describe('AccountForm', () => {
   it('should call onSubmit on click', () => {
     const wrapper = shallow(
       <AccountForm
+        account={fixtures.account}
         konnector={fixtures.konnectorWithOptionalFields}
-        initialValues={fixtures.account.auth}
         onSubmit={onSubmit}
         t={t}
       />

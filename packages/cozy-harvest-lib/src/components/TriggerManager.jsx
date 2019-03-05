@@ -4,9 +4,8 @@ import PropTypes from 'react-proptypes'
 import { withMutations } from 'cozy-client'
 import { translate } from 'cozy-ui/react/I18n'
 
-import AccountCreator from './AccountCreator'
-import AccountEditor from './AccountEditor'
-import TriggerSuccessMessage from './TriggerSuccessMessage'
+import AccountForm from './AccountForm'
+import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
 import permissionsMutations from '../connections/permissions'
@@ -18,8 +17,6 @@ import triggers from '../helpers/triggers'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
-const LOGGED = 'LOGGED'
-const SUCCESS = 'SUCCESS'
 
 /**
  * Deals with konnector configuration, i.e encapsulate account creation or
@@ -28,6 +25,7 @@ const SUCCESS = 'SUCCESS'
  */
 export class TriggerManager extends Component {
   state = {
+    account: null,
     status: IDLE
   }
 
@@ -37,19 +35,13 @@ export class TriggerManager extends Component {
     this.handleAccountCreationSuccess = this.handleAccountCreationSuccess.bind(
       this
     )
-    this.handleAccountMutation = this.handleAccountMutation.bind(this)
     this.handleAccountUpdateSuccess = this.handleAccountUpdateSuccess.bind(this)
-  }
+    this.handleSubmit = this.handleSubmit.bind(this)
 
-  /**
-   * Creation/update start handler
-   * Set the status to RUNNING as soon as an account is being created
-   * or updated.
-   */
-  handleAccountMutation() {
-    this.setState({
-      status: RUNNING
-    })
+    this.state = {
+      account: props.account,
+      status: IDLE
+    }
   }
 
   /**
@@ -69,7 +61,7 @@ export class TriggerManager extends Component {
     } = this.props
 
     this.setState({
-      createdAccount: account
+      account
     })
 
     let folder
@@ -104,11 +96,36 @@ export class TriggerManager extends Component {
    */
   async handleAccountUpdateSuccess(account) {
     this.setState({
-      updatedAccount: account
+      account
     })
 
     const { trigger } = this.props
     return await this.launch(trigger)
+  }
+
+  async handleSubmit(data) {
+    const { konnector, saveAccount } = this.props
+
+    const { account } = this.state
+    const isUpdate = !!account
+
+    this.setState({
+      status: RUNNING
+    })
+
+    const savedAccount = accounts.mergeAuth(
+      await saveAccount(
+        konnector,
+        isUpdate
+          ? accounts.mergeAuth(account, data)
+          : accounts.build(konnector, data)
+      ),
+      data
+    )
+
+    return isUpdate
+      ? this.handleAccountUpdateSuccess(savedAccount)
+      : this.handleAccountCreationSuccess(savedAccount)
   }
 
   /**
@@ -117,44 +134,37 @@ export class TriggerManager extends Component {
    * @return {Promise}         [description]
    */
   async launch(trigger) {
-    const { launchTrigger, onLoginSuccess, waitForLoginSuccess } = this.props
+    const {
+      launchTrigger,
+      onLoginSuccess,
+      onSuccess,
+      waitForLoginSuccess
+    } = this.props
 
     const job = await waitForLoginSuccess(await launchTrigger(trigger))
 
+    this.setState({
+      status: IDLE
+    })
+
     if (['queued', 'running'].includes(job.state)) {
-      onLoginSuccess(trigger)
-      this.setState({
-        status: LOGGED
-      })
+      return onLoginSuccess(trigger)
     }
 
-    this.setState({
-      status: SUCCESS
-    })
+    return onSuccess(trigger)
   }
 
   render() {
-    const { account, konnector, onDone, running } = this.props
-    const { createdAccount, status, updatedAccount } = this.state
-    const succeed = createdAccount && [LOGGED, SUCCESS].includes(status)
-    const editing = account && !createdAccount
-    const submitting = status === RUNNING
-    return succeed ? (
-      <TriggerSuccessMessage onDone={onDone} />
-    ) : editing ? (
-      <AccountEditor
-        account={updatedAccount || account}
+    const { konnector, running } = this.props
+    const { account, error, status } = this.state
+    const submitting = status === RUNNING || running
+
+    return (
+      <AccountForm
+        account={account}
+        error={error}
         konnector={konnector}
-        onBeforeUpdate={this.handleAccountMutation}
-        onUpdateSuccess={this.handleAccountUpdateSuccess}
-        submitting={submitting || running}
-      />
-    ) : (
-      <AccountCreator
-        account={createdAccount}
-        konnector={konnector}
-        onBeforeCreate={this.handleAccountMutation}
-        onCreateSuccess={this.handleAccountCreationSuccess}
+        onSubmit={this.handleSubmit}
         submitting={submitting}
       />
     )
@@ -171,16 +181,20 @@ TriggerManager.propTypes = {
   addReferencesTo: PropTypes.func,
   createTrigger: PropTypes.func.isRequired,
   createDirectoryByPath: PropTypes.func,
-  statDirectoryByPath: PropTypes.func,
   launchTrigger: PropTypes.func.isRequired,
+  saveAccount: PropTypes.func.isRequired,
+  statDirectoryByPath: PropTypes.func,
   waitForLoginSuccess: PropTypes.func.isRequired,
   // hooks
-  onDone: PropTypes.func.isRequired,
-  onLoginSuccess: PropTypes.func.isRequired
+  onLoginSuccess: PropTypes.func.isRequired,
+  onSuccess: PropTypes.func
 }
 
 export default translate()(
-  withMutations(filesMutations, permissionsMutations, triggersMutations)(
-    TriggerManager
-  )
+  withMutations(
+    accountsMutations,
+    filesMutations,
+    permissionsMutations,
+    triggersMutations
+  )(TriggerManager)
 )
