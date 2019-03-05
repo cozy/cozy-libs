@@ -76,5 +76,11 @@ describe('daytime library', () => {
         'randomize function returns invalid hour value'
       )
     })
+
+    it('handles floats', () => {
+      const randomizeStub = jest.fn().mockReturnValueOnce(10.58)
+      randomDayTime(5.5, 6.5, randomizeStub)
+      expect(randomizeStub).toHaveBeenCalledWith(5.5, 6.5)
+    })
   })
 })
