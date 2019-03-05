@@ -1,8 +1,8 @@
-import isInteger from 'lodash/isInteger'
+import isNumber from 'lodash/isNumber'
 /**
  * Returns an hour of the day between two hours given in parameters
- * @type {integer} min minimal start hour
- * @type {integer} max maximal end hour
+ * @type {number} min minimal start hour
+ * @type {number} max maximal end hour
  * @type {function} randomize The function used to generate random values
  * @return {object} Object containing two atributes : hours and minutes
  */
@@ -11,8 +11,8 @@ export const randomDayTime = (
   end = 1,
   randomize = (min, max) => Math.random() * (max - min) + min
 ) => {
-  if (!isInteger(start)) throw new Error('Parameter start must be an integer')
-  if (!isInteger(end)) throw new Error('Parameter end must be an integer')
+  if (!isNumber(start)) throw new Error('Parameter start must be a number')
+  if (!isNumber(end)) throw new Error('Parameter end must be a number')
 
   if (typeof randomize !== 'function')
     throw new Error('Parameter randomize must be a function')
