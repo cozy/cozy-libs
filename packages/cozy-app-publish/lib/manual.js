@@ -11,22 +11,18 @@ const promptConfirm = require('./confirm')
 
 const { DEFAULT_REGISTRY_URL, DEFAULT_BUILD_DIR } = constants
 
-
-
-async function manualPublish(
-  {
-    buildCommit,
-    postpublishHook,
-    prepublishHook,
-    registryToken,
-    buildDir = DEFAULT_BUILD_DIR,
-    manualVersion,
-    registryUrl = DEFAULT_REGISTRY_URL,
-    spaceName,
-    appBuildUrl,
-    yes
-  }
-) {
+async function manualPublish({
+  buildCommit,
+  postpublishHook,
+  prepublishHook,
+  registryToken,
+  buildDir = DEFAULT_BUILD_DIR,
+  manualVersion,
+  registryUrl = DEFAULT_REGISTRY_URL,
+  spaceName,
+  appBuildUrl,
+  yes
+}) {
   // registry editor token (required)
   if (!registryToken) {
     throw new Error('Registry token is missing. Publishing failed.')
@@ -84,7 +80,9 @@ async function manualPublish(
   console.log()
 
   if (!yes) {
-    const goFurther = await promptConfirm('Are you sure you want to publish this application above?')
+    const goFurther = await promptConfirm(
+      'Are you sure you want to publish this application above?'
+    )
     if (!goFurther) {
       console.log('Publishing cancelled')
       return

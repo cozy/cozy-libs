@@ -106,7 +106,7 @@ describe('Manual publishing script', () => {
   })
 
   it('should handle error if the publishing is canceled by the user via the prompt and not publishing', async () => {
-    promptConfirm.mockImplementation(question => Promise.resolve(false))
+    promptConfirm.mockImplementation(() => Promise.resolve(false))
     const options = getOptions(commons.token)
     await manualScript({ ...options, yes: false })
     expect(publishLib).toHaveBeenCalledTimes(0)
