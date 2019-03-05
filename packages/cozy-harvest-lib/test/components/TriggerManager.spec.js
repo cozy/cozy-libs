@@ -9,8 +9,20 @@ import cronHelpers from 'helpers/cron'
 configure({ adapter: new Adapter() })
 
 const fixtures = {
+  data: {
+    username: 'foo',
+    passphrase: 'bar'
+  },
   konnector: {
-    slug: 'konnectest'
+    slug: 'konnectest',
+    fields: {
+      username: {
+        type: 'text'
+      },
+      passphrase: {
+        type: 'password'
+      }
+    }
   },
   konnectorWithFolder: {
     name: 'myBills',
@@ -44,6 +56,14 @@ const fixtures = {
     }
   },
   account: {
+    account_type: 'konnectest',
+    auth: {
+      username: 'foo',
+      passphrase: 'bar'
+    },
+    identifier: 'username'
+  },
+  createdAccount: {
     _id: 'a87f9a8bd3884479a48811e7b7deec75',
     account_type: 'konnectest',
     auth: {
@@ -120,6 +140,7 @@ const createTriggerMock = jest.fn().mockResolvedValue(fixtures.createdTrigger)
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
 const launchTriggerMock = jest.fn().mockResolvedValue(fixtures.launchedJob)
+const saveAccountMock = jest.fn().mockResolvedValue(fixtures.createdAccount)
 const waitForLoginSuccessMock = jest.fn().mockResolvedValue(fixtures.runningJob)
 
 const onSuccessSpy = jest.fn()
@@ -139,6 +160,7 @@ const shallowWithoutAccount = konnector =>
       launchTrigger={launchTriggerMock}
       onSuccess={onSuccessSpy}
       onLoginSuccess={onLoginSuccessSpy}
+      saveAccount={saveAccountMock}
       t={tMock}
       waitForLoginSuccess={waitForLoginSuccessMock}
     />
@@ -147,12 +169,13 @@ const shallowWithoutAccount = konnector =>
 const shallowWithAccount = () =>
   shallow(
     <TriggerManager
-      account={fixtures.account}
+      account={fixtures.createdAccount}
       createTrigger={createTriggerMock}
       konnector={fixtures.konnector}
       launchTrigger={launchTriggerMock}
       onSuccess={onSuccessSpy}
       onLoginSuccess={onLoginSuccessSpy}
+      saveAccount={saveAccountMock}
       trigger={fixtures.createdTrigger}
       waitForLoginSuccess={waitForLoginSuccessMock}
     />
@@ -189,6 +212,52 @@ describe('TriggerManager', () => {
       wrapper.instance().handleSubmit()
       expect(wrapper.props().submitting).toEqual(true)
     })
+
+    it('should call saveAccount without account', () => {
+      const wrapper = shallowWithoutAccount()
+      wrapper.instance().handleSubmit(fixtures.data)
+      expect(saveAccountMock).toHaveBeenCalledWith(
+        fixtures.konnector,
+        fixtures.account
+      )
+    })
+
+    it('should call saveAccount with account', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleSubmit(fixtures.data)
+      expect(saveAccountMock).toHaveBeenCalledWith(
+        fixtures.konnector,
+        fixtures.createdAccount
+      )
+    })
+
+    it('should call handleAccountUpdateSuccess', async () => {
+      const wrapper = shallowWithAccount()
+      const instance = wrapper.instance()
+      jest
+        .spyOn(instance, 'handleAccountUpdateSuccess')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await instance.handleSubmit(fixtures.data)
+
+      expect(instance.handleAccountUpdateSuccess).toHaveBeenCalledWith(
+        fixtures.createdAccount
+      )
+    })
+
+    it('should call handleAccountCreationSuccess', async () => {
+      const wrapper = shallowWithoutAccount()
+      const instance = wrapper.instance()
+      jest
+        .spyOn(instance, 'handleAccountCreationSuccess')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await instance.handleSubmit(fixtures.data)
+
+      expect(instance.handleAccountCreationSuccess).toHaveBeenCalledWith(
+        fixtures.createdAccount
+      )
+    })
   })
 
   describe('handleAccountCreationSuccess', () => {
@@ -206,7 +275,9 @@ describe('TriggerManager', () => {
 
     it('should create trigger', async () => {
       const wrapper = shallowWithoutAccount()
-      await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
+      await wrapper
+        .instance()
+        .handleAccountCreationSuccess(fixtures.createdAccount)
       expect(createTriggerMock).toHaveBeenCalledTimes(1)
       expect(createTriggerMock).toHaveBeenCalledWith(fixtures.triggerAttributes)
     })
