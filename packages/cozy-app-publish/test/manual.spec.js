@@ -11,7 +11,9 @@ const rootPath = process.cwd()
 const testFolder = '.tmp_test'
 const testPath = path.join(rootPath, testFolder)
 const mockAppDir = path.join(__dirname, 'mockApps/mockApp')
+const promptConfirm = require('../lib/confirm')
 
+jest.mock('../lib/confirm')
 jest.mock('../lib/publish', () => jest.fn())
 jest.mock('../lib/tags', () => ({}))
 
@@ -30,7 +32,8 @@ function getOptions(token, buildDir) {
     appBuildUrl: 'https://mock.getarchive.cc/12345.tar.gz',
     manualVersion: '2.1.8-dev.12345',
     registryUrl: 'https://mock.registry.cc',
-    spaceName: 'mock_space'
+    spaceName: 'mock_space',
+    yes: true
   }
   if (buildDir) options.buildDir = buildDir
   return options
@@ -63,13 +66,13 @@ describe('Manual publishing script', () => {
   })
 
   it('should work correctly if expected options provided', async () => {
-    await manualScript(getOptions(commons.token, './build'), { confirm: 'yes' })
+    await manualScript(getOptions(commons.token, './build'))
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
 
   it('should work correctly with default buildDir value "build"', async () => {
-    await manualScript(getOptions(commons.token), { confirm: 'yes' })
+    await manualScript(getOptions(commons.token))
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
@@ -78,7 +81,7 @@ describe('Manual publishing script', () => {
     const options = getOptions(commons.token)
     delete options.spaceName
 
-    await manualScript(options, { confirm: 'yes' })
+    await manualScript(options)
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
@@ -87,7 +90,7 @@ describe('Manual publishing script', () => {
     const options = getOptions(commons.token)
     delete options.manualVersion
 
-    await manualScript(options, { confirm: 'yes' })
+    await manualScript(options)
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
@@ -97,19 +100,21 @@ describe('Manual publishing script', () => {
     delete options.appBuildUrl
     prepublishResult.appBuildUrl = 'https://mock.getarchive.cc/12345.tar.gz'
 
-    await manualScript(options, { confirm: 'yes' })
+    await manualScript(options)
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
 
   it('should handle error if the publishing is canceled by the user via the prompt and not publishing', async () => {
-    await manualScript(getOptions(commons.token), { confirm: 'no' })
+    promptConfirm.mockImplementation(() => Promise.resolve(false))
+    const options = getOptions(commons.token)
+    await manualScript({ ...options, yes: false })
     expect(publishLib).toHaveBeenCalledTimes(0)
   })
 
   it('should throw an error if the token is missing', async () => {
     await expect(
-      manualScript(getOptions(null), { confirm: 'yes' })
+      manualScript(getOptions(null))
     ).rejects.toThrowErrorMatchingSnapshot()
   })
 })

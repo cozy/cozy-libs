@@ -30,7 +30,7 @@ Object {
   "appBuildUrl": "https://github.com/mock-app/archive/f4a98378271c17e91faa9e70a2718c34c04cfc27.tar.gz",
   "appSlug": "mock-app",
   "appType": "webapp",
-  "appVersion": "2.1.8-dev.f4a98378271c17e91faa9e70a2718c34c04cfc271551298916519",
+  "appVersion": "2.1.8-dev.f4a98371551298916519",
   "prepublishHook": undefined,
   "registryEditor": "Cozy",
   "registryToken": "registryTokenForTest123",

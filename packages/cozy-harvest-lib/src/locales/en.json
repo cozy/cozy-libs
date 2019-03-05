@@ -21,8 +21,9 @@
       "hide": "Hide"
     }
   },
-  "defaults": {
-    "dateFormat": "MM/DD/YYYY"
+  "default": {
+    "dateFormat": "MM/DD/YYYY",
+    "baseDir": "/Administrative"
   },
   "fields": {
     "answer": {

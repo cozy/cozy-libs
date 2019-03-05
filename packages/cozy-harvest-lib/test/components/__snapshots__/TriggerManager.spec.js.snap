@@ -29,6 +29,7 @@ exports[`TriggerManager should render AccountEditor 1`] = `
         "passphrase": "bar",
         "username": "foo",
       },
+      "identifier": "username",
     }
   }
   konnector={

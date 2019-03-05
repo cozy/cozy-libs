@@ -30,24 +30,24 @@ const program = new commander.Command(pkg.name)
   .usage(`[options]`)
   .option(
     '--token <editor-token>',
-    'the registry token matching the provided editor (required)'
+    'Registry token matching the provided editor (required)'
   )
   .option(
     '--space <space-name>',
-    'the registry space name to publish the application to (default __default__)'
+    'Registry space name to publish the application to (default __default__)'
   )
   .option(
     '--build-dir <relative-path>',
-    'path fo the build directory relative to the current directory (default ./build)'
+    'Path fo the build directory relative to the current directory (default ./build)'
   )
   .option('--build-url <url>', 'URL of the application archive')
   .option(
     '--build-commit <commit-hash>',
-    'hash of the build commit matching the build archive to publish'
+    'Hash of the build commit matching the build archive to publish'
   )
   .option(
     '--manual-version <version>',
-    'publishing a specific version manually (must not be already published in the registry)'
+    'Specify a version manually (must not be already published in the registry)'
   )
   .option(
     '--prepublish <script-path>',
@@ -57,9 +57,10 @@ const program = new commander.Command(pkg.name)
     '--postpublish <script-path>',
     'Hook to process parameters just after publishing, typically to deploy app'
   )
+  .option('--yes', 'Force confirmation when publishing manually')
   .option(
     '--registry-url <url>',
-    'the registry URL to publish to a different one from the default URL'
+    'Registry URL to publish to a different one from the default URL'
   )
   .option('--verbose', 'print additional logs')
   .on('--help', () => {
@@ -72,6 +73,11 @@ const program = new commander.Command(pkg.name)
   })
   .parse(process.argv)
 
+const handleError = error => {
+  console.log(colorize.red(`Publishing failed: ${error.message}`))
+  process.exit(1)
+}
+
 try {
   publishApp({
     token: program.token,
@@ -81,13 +87,13 @@ try {
     manualVersion: program.manualVersion,
     prepublishHook: program.prepublish,
     postpublishHook: program.postpublish,
+    yes: program.yes,
     registryUrl: program.registryUrl,
     space: program.space,
     verbose: program.verbose
-  })
+  }).catch(handleError)
 } catch (error) {
-  console.log(colorize.red(`Publishing failed: ${error.message}`))
-  process.exit(1)
+  handleError(error)
 }
 
 function _getPublishMode() {
@@ -132,6 +138,7 @@ async function publishApp(cliOptions) {
       manualVersion: cliOptions.manualVersion,
       prepublishHook: cliOptions.prepublishHook,
       postpublishHook: cliOptions.postpublishHook,
+      yes: cliOptions.yes,
       registryUrl: cliOptions.registryUrl,
       spaceName: cliOptions.space,
       verbose: cliOptions.verbose

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.1.9"></a>
+## [1.1.9](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.8...eslint-config-cozy-app@1.1.9) (2019-03-04)
+
+
+
+
+**Note:** Version bump only for package eslint-config-cozy-app
+
 <a name="1.1.8"></a>
 ## [1.1.8](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.7...eslint-config-cozy-app@1.1.8) (2019-01-21)
 

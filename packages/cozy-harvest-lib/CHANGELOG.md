@@ -3,6 +3,60 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.32.2"></a>
+## [0.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.32.1...cozy-harvest-lib@0.32.2) (2019-03-05)
+
+
+### Bug Fixes
+
+* **harvest:** RandomDayTime helper must handle floats 🚑 ([114889c](https://github.com/cozy/cozy-libs/commit/114889c))
+
+
+
+
+<a name="0.32.1"></a>
+## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.32.0...cozy-harvest-lib@0.32.1) (2019-03-04)
+
+
+### Bug Fixes
+
+* **harvest:** Folder permission 🚑 ([e837673](https://github.com/cozy/cozy-libs/commit/e837673))
+
+
+
+
+<a name="0.32.0"></a>
+# [0.32.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.31.4...cozy-harvest-lib@0.32.0) (2019-03-04)
+
+
+### Features
+
+* **harvest:** Add files mutations ✨ ([b61ce9a](https://github.com/cozy/cozy-libs/commit/b61ce9a))
+* **harvest:** Add getIdentifier() 📝 ([e922681](https://github.com/cozy/cozy-libs/commit/e922681))
+* **harvest:** Add konnectors helpers ✨ ([df3c433](https://github.com/cozy/cozy-libs/commit/df3c433))
+* **harvest:** Add permission on folder 📝 ([4ecfc6d](https://github.com/cozy/cozy-libs/commit/4ecfc6d))
+* **harvest:** Add permissions mutations ✨ ([42a7e2c](https://github.com/cozy/cozy-libs/commit/42a7e2c))
+* **harvest:** Add reference to file in konnector 📝 ([74e8932](https://github.com/cozy/cozy-libs/commit/74e8932))
+* **harvest:** Add slug helper ✨ ([22bc11d](https://github.com/cozy/cozy-libs/commit/22bc11d))
+* **harvest:** Build trigger with folder ✨ ([2774f88](https://github.com/cozy/cozy-libs/commit/2774f88))
+* **harvest:** Create folder for konnector ✨ ([3194758](https://github.com/cozy/cozy-libs/commit/3194758))
+* **harvest:** Get label from account 📝 ([567e161](https://github.com/cozy/cozy-libs/commit/567e161))
+* **harvest:** Store the identifier field in account ✨ ([07e8e8e](https://github.com/cozy/cozy-libs/commit/07e8e8e))
+
+
+
+
+<a name="0.31.4"></a>
+## [0.31.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.31.3...cozy-harvest-lib@0.31.4) (2019-03-01)
+
+
+### Bug Fixes
+
+* **harvest:** Job returned on realtime update 🚑 ([0cdc65d](https://github.com/cozy/cozy-libs/commit/0cdc65d))
+
+
+
+
 <a name="0.31.3"></a>
 ## [0.31.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.31.2...cozy-harvest-lib@0.31.3) (2019-02-28)
 

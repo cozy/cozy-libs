@@ -2,15 +2,19 @@ import React, { Component } from 'react'
 import PropTypes from 'react-proptypes'
 
 import { withMutations } from 'cozy-client'
+import { translate } from 'cozy-ui/react/I18n'
 
 import AccountCreator from './AccountCreator'
 import AccountEditor from './AccountEditor'
 import TriggerSuccessMessage from './TriggerSuccessMessage'
 import { triggersMutations } from '../connections/triggers'
-import {
-  buildKonnectorCron,
-  buildKonnectorTriggerAttributes
-} from '../helpers/triggers'
+import filesMutations from '../connections/files'
+import permissionsMutations from '../connections/permissions'
+import accounts from '../helpers/accounts'
+import cron from '../helpers/cron'
+import konnectors from '../helpers/konnectors'
+import { slugify } from '../helpers/slug'
+import triggers from '../helpers/triggers'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -54,17 +58,39 @@ export class TriggerManager extends Component {
    * @return {Object}          io.cozy.jobs document, runned with account data
    */
   async handleAccountCreationSuccess(account) {
-    const { createTrigger, konnector } = this.props
+    const {
+      addPermission,
+      addReferencesTo,
+      createDirectoryByPath,
+      createTrigger,
+      statDirectoryByPath,
+      konnector,
+      t
+    } = this.props
 
     this.setState({
       createdAccount: account
     })
 
+    let folder
+    if (konnectors.needsFolder(konnector)) {
+      const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
+        accounts.getLabel(account)
+      )}`
+
+      folder =
+        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
+
+      await addPermission(konnector, konnectors.buildFolderPermission(folder))
+      await addReferencesTo(konnector, [folder])
+    }
+
     const trigger = await createTrigger(
-      buildKonnectorTriggerAttributes({
-        konnector,
+      triggers.buildAttributes({
         account,
-        cron: buildKonnectorCron(konnector)
+        cron: cron.fromKonnector(konnector),
+        folder,
+        konnector
       })
     )
 
@@ -141,7 +167,11 @@ TriggerManager.propTypes = {
   trigger: PropTypes.object,
   running: PropTypes.bool,
   // mutations
+  addPermission: PropTypes.func,
+  addReferencesTo: PropTypes.func,
   createTrigger: PropTypes.func.isRequired,
+  createDirectoryByPath: PropTypes.func,
+  statDirectoryByPath: PropTypes.func,
   launchTrigger: PropTypes.func.isRequired,
   waitForLoginSuccess: PropTypes.func.isRequired,
   // hooks
@@ -149,4 +179,8 @@ TriggerManager.propTypes = {
   onLoginSuccess: PropTypes.func.isRequired
 }
 
-export default withMutations(triggersMutations)(TriggerManager)
+export default translate()(
+  withMutations(filesMutations, permissionsMutations, triggersMutations)(
+    TriggerManager
+  )
+)
