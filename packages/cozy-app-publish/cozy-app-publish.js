@@ -57,6 +57,7 @@ const program = new commander.Command(pkg.name)
     '--postpublish <script-path>',
     'Hook to process parameters just after publishing, typically to deploy app'
   )
+  .option('--yes', 'Force confirmation when publishing manually')
   .option(
     '--registry-url <url>',
     'Registry URL to publish to a different one from the default URL'
@@ -86,6 +87,7 @@ try {
     manualVersion: program.manualVersion,
     prepublishHook: program.prepublish,
     postpublishHook: program.postpublish,
+    yes: program.yes,
     registryUrl: program.registryUrl,
     space: program.space,
     verbose: program.verbose
@@ -136,6 +138,7 @@ async function publishApp(cliOptions) {
       manualVersion: cliOptions.manualVersion,
       prepublishHook: cliOptions.prepublishHook,
       postpublishHook: cliOptions.postpublishHook,
+      yes: cliOptions.yes,
       registryUrl: cliOptions.registryUrl,
       spaceName: cliOptions.space,
       verbose: cliOptions.verbose

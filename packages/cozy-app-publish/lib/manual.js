@@ -23,9 +23,9 @@ async function manualPublish(
     manualVersion,
     registryUrl = DEFAULT_REGISTRY_URL,
     spaceName,
-    appBuildUrl
-  },
-  override
+    appBuildUrl,
+    yes
+  }
 ) {
   // registry editor token (required)
   if (!registryToken) {
@@ -83,7 +83,7 @@ async function manualPublish(
   )
   console.log()
 
-  if (!override) {
+  if (!yes) {
     const goFurther = await promptConfirm('Are you sure you want to publish this application above?')
     if (!goFurther) {
       console.log('Publishing cancelled')
