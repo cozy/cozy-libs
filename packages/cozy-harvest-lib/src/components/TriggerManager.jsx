@@ -66,29 +66,35 @@ export class TriggerManager extends Component {
       account
     })
 
-    let folder
-    if (konnectors.needsFolder(konnector)) {
-      const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
-        accounts.getLabel(account)
-      )}`
+    try {
+      let folder
 
-      folder =
-        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
+      if (konnectors.needsFolder(konnector)) {
+        const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
+          accounts.getLabel(account)
+        )}`
 
-      await addPermission(konnector, konnectors.buildFolderPermission(folder))
-      await addReferencesTo(konnector, [folder])
+        folder =
+          (await statDirectoryByPath(path)) ||
+          (await createDirectoryByPath(path))
+
+        await addPermission(konnector, konnectors.buildFolderPermission(folder))
+        await addReferencesTo(konnector, [folder])
+      }
+
+      const trigger = await createTrigger(
+        triggers.buildAttributes({
+          account,
+          cron: cron.fromKonnector(konnector),
+          folder,
+          konnector
+        })
+      )
+
+      return await this.launch(trigger)
+    } catch (error) {
+      return this.handleError(error)
     }
-
-    const trigger = await createTrigger(
-      triggers.buildAttributes({
-        account,
-        cron: cron.fromKonnector(konnector),
-        folder,
-        konnector
-      })
-    )
-
-    return await this.launch(trigger)
   }
 
   /**
@@ -119,22 +125,27 @@ export class TriggerManager extends Component {
     const isUpdate = !!account
 
     this.setState({
+      error: null,
       status: RUNNING
     })
 
-    const savedAccount = accounts.mergeAuth(
-      await saveAccount(
-        konnector,
-        isUpdate
-          ? accounts.mergeAuth(account, data)
-          : accounts.build(konnector, data)
-      ),
-      data
-    )
+    try {
+      const savedAccount = accounts.mergeAuth(
+        await saveAccount(
+          konnector,
+          isUpdate
+            ? accounts.mergeAuth(account, data)
+            : accounts.build(konnector, data)
+        ),
+        data
+      )
 
-    return isUpdate
-      ? this.handleAccountUpdateSuccess(savedAccount)
-      : this.handleAccountCreationSuccess(savedAccount)
+      return isUpdate
+        ? this.handleAccountUpdateSuccess(savedAccount)
+        : this.handleAccountCreationSuccess(savedAccount)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
   /**

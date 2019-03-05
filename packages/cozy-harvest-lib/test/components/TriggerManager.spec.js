@@ -133,12 +133,12 @@ const fixtures = {
 
 const addPermissionMock = jest.fn()
 const addReferencesToMock = jest.fn()
-const createTriggerMock = jest.fn().mockResolvedValue(fixtures.createdTrigger)
+const createTriggerMock = jest.fn()
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
-const launchTriggerMock = jest.fn().mockResolvedValue(fixtures.launchedJob)
-const saveAccountMock = jest.fn().mockResolvedValue(fixtures.createdAccount)
-const waitForLoginSuccessMock = jest.fn().mockResolvedValue(fixtures.runningJob)
+const launchTriggerMock = jest.fn()
+const saveAccountMock = jest.fn()
+const waitForLoginSuccessMock = jest.fn()
 
 const onSuccessSpy = jest.fn()
 const onLoginSuccessSpy = jest.fn()
@@ -179,6 +179,13 @@ const shallowWithAccount = () =>
   )
 
 describe('TriggerManager', () => {
+  beforeEach(() => {
+    createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
+    launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
+    saveAccountMock.mockResolvedValue(fixtures.createdAccount)
+    waitForLoginSuccessMock.mockResolvedValue(fixtures.runningJob)
+  })
+
   afterEach(() => {
     createTriggerMock.mockClear()
     launchTriggerMock.mockClear()
@@ -195,6 +202,43 @@ describe('TriggerManager', () => {
   it('should render with account', () => {
     const component = shallowWithAccount().getElement()
     expect(component).toMatchSnapshot()
+  })
+
+  describe('handleError', () => {
+    it('should render error', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleError(new Error('Test error'))
+      expect(wrapper.getElement()).toMatchSnapshot()
+    })
+
+    const clientMutations = {
+      saveAccount: saveAccountMock,
+      statDirectoryByPath: statDirectoryByPathMock,
+      createDirectoryByPath: createDirectoryByPathMock,
+      addPermission: addPermissionMock,
+      addReferencesTo: addReferencesToMock,
+      createTrigger: createTriggerMock,
+      launchTrigger: launchTriggerMock
+    }
+
+    for (var mutation of Object.keys(clientMutations)) {
+      it(`should be called when ${mutation} fails`, async () => {
+        clientMutations[mutation].mockRejectedValue(
+          new Error(`${mutation} error`)
+        )
+
+        const wrapper = shallowWithoutAccount()
+
+        jest
+          .spyOn(wrapper.instance(), 'handleError')
+          .mockImplementation(() => {})
+
+        await wrapper.instance().handleSubmit(fixtures.data)
+        expect(wrapper.instance().handleError).toHaveBeenCalledWith(
+          new Error(`${mutation} error`)
+        )
+      })
+    }
   })
 
   describe('handleSubmit', () => {
