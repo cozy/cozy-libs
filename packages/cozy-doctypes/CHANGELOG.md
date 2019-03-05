@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.36.1"></a>
+## [1.36.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.36.0...cozy-doctypes@1.36.1) (2019-03-05)
+
+
+### Bug Fixes
+
+* Rename label slugs to JS otherwise babel does not copy it ([e026784](https://github.com/cozy/cozy-libs/commit/e026784))
+
+
+
+
 <a name="1.36.0"></a>
 # [1.36.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.35.2...cozy-doctypes@1.36.0) (2019-03-05)
 
