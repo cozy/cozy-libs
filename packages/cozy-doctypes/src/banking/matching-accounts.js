@@ -1,6 +1,6 @@
 const sortBy = require('lodash/sortBy')
 const { eitherIncludes } = require('./matching-tools')
-const labelSlugs = require('./label-slugs.json')
+const labelSlugs = require('./label-slugs')
 
 const institutionLabelsCompiled = Object.entries(labelSlugs).map(
   ([ilabelRx, slug]) => {

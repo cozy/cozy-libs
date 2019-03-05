@@ -1,4 +1,4 @@
-{
+module.exports = {
   "AXA Banque": "axabanque102",
   "/Banque Populaire.*/": "banquepopulaire",
   "BforBank": "bforbank97",
