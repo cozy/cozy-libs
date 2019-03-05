@@ -3,15 +3,16 @@ const fs = require('fs-extra')
 const postpublish = require('./postpublish')
 const prepublish = require('./prepublish')
 const publish = require('./publish')
-const prompt = require('prompt')
 const colorize = require('../utils/colorize')
 const getManifestAsObject = require('../utils/getManifestAsObject')
 const constants = require('./constants')
 const tags = require('./tags')
+const promptConfirm = require('./confirm')
 
 const { DEFAULT_REGISTRY_URL, DEFAULT_BUILD_DIR } = constants
 
-// override is used only for test to skip prompt (cf prompt.override)
+
+
 async function manualPublish(
   {
     buildCommit,
@@ -55,21 +56,6 @@ async function manualPublish(
   const appSlug = appManifestObj.slug
   const appType = appManifestObj.type || 'webapp'
 
-  const promptProperties = [
-    {
-      name: 'confirm',
-      description: colorize.orange(
-        'Are you sure you want to publish this application above?'
-      ),
-      pattern: /^y(es)?$|^n(o)?$/i,
-      message: 'Yes (y) or No (n)',
-      required: true
-    }
-  ]
-
-  // useful for testing
-  if (override) prompt.override = override
-
   const publishOptions = await prepublish({
     buildCommit,
     prepublishHook,
@@ -97,36 +83,27 @@ async function manualPublish(
   )
   console.log()
 
-  prompt.start()
-  prompt.message = colorize.bold('Confirmation:')
-  prompt.delimiter = ' '
-  return prompt.get(promptProperties, async function(err, received) {
-    console.log()
-    if (err) throw new Error(colorize.red(`prompt: ${err}`))
-    if (received.confirm.match(/^y(es)?$/i)) {
-      try {
-        await publish(publishOptions)
-      } catch (e) {
-        const errorMessage = '↳ ❌  Publishing failed. Publishing aborted.'
-        console.error(e)
-        console.error(errorMessage)
-      }
-    } else {
-      const errorMessage =
-        '↳ ❌  Publishing manually cancelled. Publishing aborted.'
-      if (jest) {
-        console.error(errorMessage)
-      } else {
-        throw new Error(errorMessage)
-      }
+  if (!override) {
+    const goFurther = await promptConfirm('Are you sure you want to publish this application above?')
+    if (!goFurther) {
+      console.log('Publishing cancelled')
+      return
     }
+  }
 
-    try {
-      await postpublish({ ...publishOptions, postpublishHook })
-    } catch (error) {
-      console.error(`↳ ⚠️  Postpublish hooks failed: ${error.message}`)
-    }
-  }).output
+  try {
+    await publish(publishOptions)
+  } catch (e) {
+    const errorMessage = '↳ ❌  Publishing failed. Publishing aborted.'
+    console.error(e)
+    console.error(errorMessage)
+  }
+
+  try {
+    await postpublish({ ...publishOptions, postpublishHook })
+  } catch (error) {
+    console.error(`↳ ⚠️  Postpublish hooks failed: ${error.message}`)
+  }
 }
 
 const manualPublishCLI = function() {
