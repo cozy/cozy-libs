@@ -10,7 +10,10 @@ const institutionLabelsCompiled = Object.entries(labelSlugs).map(
   }
 )
 
-export const getSlugFromInstitutionLabel = institutionLabel => {
+const getSlugFromInstitutionLabel = institutionLabel => {
+  if (!institutionLabel) {
+    return
+  }
   for (const [rx, slug] of institutionLabelsCompiled) {
     if (rx instanceof RegExp) {
       const match = institutionLabel.match(rx)
@@ -21,4 +24,8 @@ export const getSlugFromInstitutionLabel = institutionLabel => {
       return slug
     }
   }
+}
+
+module.exports = {
+  getSlugFromInstitutionLabel
 }

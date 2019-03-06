@@ -221,6 +221,5 @@ const matchAccounts = (fetchedAccounts, existingAccounts) => {
 module.exports = {
   matchAccounts,
   normalizeAccountNumber,
-  score,
-  getSlugFromInstitutionLabel
+  score
 }
