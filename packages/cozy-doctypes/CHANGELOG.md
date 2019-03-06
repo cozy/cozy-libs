@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.38.0"></a>
+# [1.38.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.37.0...cozy-doctypes@1.38.0) (2019-03-06)
+
+
+### Features
+
+* Add updatedByApps ([5a68376](https://github.com/cozy/cozy-libs/commit/5a68376))
+
+
+
+
 <a name="1.37.0"></a>
 # [1.37.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.36.1...cozy-doctypes@1.37.0) (2019-03-06)
 
