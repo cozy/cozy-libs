@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.37.0"></a>
+# [1.37.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.36.1...cozy-doctypes@1.37.0) (2019-03-06)
+
+
+### Features
+
+* Bank account can detect incoherences ([f74c7e7](https://github.com/cozy/cozy-libs/commit/f74c7e7))
+
+
+
+
 <a name="1.36.1"></a>
 ## [1.36.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.36.0...cozy-doctypes@1.36.1) (2019-03-05)
 
