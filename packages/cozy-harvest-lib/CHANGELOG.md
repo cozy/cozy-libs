@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.33.0"></a>
+# [0.33.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.32.2...cozy-harvest-lib@0.33.0) (2019-03-06)
+
+
+### Features
+
+* **harvest:** Add AccountFormError ✨ ([d293436](https://github.com/cozy/cozy-libs/commit/d293436))
+* **harvest:** Add KonnectorJobError ✨ ([b71ac13](https://github.com/cozy/cozy-libs/commit/b71ac13))
+* **harvest:** Catch errors from document mutations ✨ ([97c2e9d](https://github.com/cozy/cozy-libs/commit/97c2e9d))
+* **harvest:** Catch errors in TriggerManager ✨ ([a0136c8](https://github.com/cozy/cozy-libs/commit/a0136c8))
+* **harvest:** Handle error in AccountForm 📝 ([a72752e](https://github.com/cozy/cozy-libs/commit/a72752e))
+
+
+
+
 <a name="0.32.2"></a>
 ## [0.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.32.1...cozy-harvest-lib@0.32.2) (2019-03-05)
 
