@@ -40,18 +40,26 @@ const fixtures = {
       password: 'pass'
     }
   },
+  existingAccount: {
+    _id: '561be660ff384ce0846c8f20e829ad62',
+    account_type: 'test',
+    auth: {
+      login: 'login',
+      password: 'pass'
+    }
+  },
   parentAccount: {
     _id: 'kaggregated-aggregator'
   }
 }
 
 import { accountsMutations } from 'connections/accounts'
-const { createAccount, updateAccount } = accountsMutations(client)
+const { createAccount, updateAccount, saveAccount } = accountsMutations(client)
 
 describe('Account mutations', () => {
-  beforeAll(() => {
-    client.create.mockResolvedValue({ data: fixtures.simpleAccount })
-    client.save.mockResolvedValue({ data: fixtures.simpleAccount })
+  beforeEach(() => {
+    client.create.mockResolvedValue({ data: fixtures.existingAccount })
+    client.save.mockResolvedValue({ data: fixtures.existingAccount })
   })
 
   afterEach(() => {
@@ -73,7 +81,7 @@ describe('Account mutations', () => {
         'io.cozy.accounts',
         fixtures.simpleAccount
       )
-      expect(account).toEqual(fixtures.simpleAccount)
+      expect(account).toEqual(fixtures.existingAccount)
     })
 
     const simpleAccountFixtureWithMasterRelation = {
@@ -312,10 +320,34 @@ describe('Account mutations', () => {
   })
 
   describe('updateAccount', () => {
-    it('call CozyClient::save and returns account', async () => {
+    it('calls CozyClient::save and returns account', async () => {
       const account = await updateAccount(fixtures.simpleAccount)
       expect(client.save).toHaveBeenCalledWith(fixtures.simpleAccount)
-      expect(account).toEqual(fixtures.simpleAccount)
+      expect(account).toEqual(fixtures.existingAccount)
+    })
+  })
+
+  describe('saveAccount', () => {
+    it('calls CozyClient::create for new account', async () => {
+      const account = await saveAccount(
+        fixtures.konnector,
+        fixtures.simpleAccount
+      )
+
+      expect(client.create).toHaveBeenCalledWith(
+        'io.cozy.accounts',
+        fixtures.simpleAccount
+      )
+      expect(account).toEqual(fixtures.existingAccount)
+    })
+
+    it('calls CozyClient::save for existing account', async () => {
+      const account = await saveAccount(
+        fixtures.konnector,
+        fixtures.existingAccount
+      )
+      expect(client.save).toHaveBeenCalledWith(fixtures.existingAccount)
+      expect(account).toEqual(fixtures.existingAccount)
     })
   })
 })

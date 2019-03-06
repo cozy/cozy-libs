@@ -6,11 +6,13 @@ import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
 import Field from 'cozy-ui/react/Field'
 
+import AccountFormError from './AccountFormError'
 import {
   getEncryptedFieldName,
   getFieldPlaceholder,
   sanitizeSelectProps
 } from '../helpers/fields'
+import { KonnectorJobError } from '../helpers/konnectors'
 import Manifest from '../Manifest'
 import OAuthForm from './OAuthForm'
 
@@ -39,6 +41,7 @@ export class AccountField extends PureComponent {
   render() {
     const {
       disabled,
+      hasError,
       initialValue,
       label,
       name,
@@ -62,6 +65,7 @@ export class AccountField extends PureComponent {
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
       disabled: disabled || !isEditable,
+      error: hasError,
       fullwidth: true,
       label: t(`fields.${localeKey}.label`, {
         _: t(`legacy.fields.${localeKey}.label`, { _: name })
@@ -108,6 +112,7 @@ export class AccountField extends PureComponent {
 }
 
 AccountField.propTypes = {
+  hasError: PropTypes.bool,
   initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
@@ -129,6 +134,7 @@ export class AccountFields extends PureComponent {
     const {
       container,
       disabled,
+      hasError,
       initialValues,
       manifestFields,
       onKeyUp,
@@ -154,6 +160,7 @@ export class AccountFields extends PureComponent {
                 {...field}
                 {...input}
                 container={container}
+                hasError={hasError}
                 disabled={disabled}
                 initialValue={
                   initialValues[field.name] ||
@@ -172,6 +179,7 @@ export class AccountFields extends PureComponent {
 
 AccountFields.propTypes = {
   disabled: PropTypes.bool,
+  hasError: PropTypes.bool,
   fillEncrypted: PropTypes.bool,
   manifestFields: PropTypes.object.isRequired,
   onKeyUp: PropTypes.func,
@@ -181,7 +189,8 @@ AccountFields.propTypes = {
 export class AccountForm extends PureComponent {
   constructor(props, context) {
     super(props, context)
-    const { lang, locales } = props
+    const { konnector, lang } = props
+    const { locales } = konnector
     if (locales && lang) {
       extend(locales[lang])
     }
@@ -192,8 +201,9 @@ export class AccountForm extends PureComponent {
    * @param  {Object} formState See https://github.com/final-form/final-form#formstate
    * @return {Boolean}
    */
-  isSubmittable({ dirty, initialValues, valid }) {
-    return valid && !(initialValues && !dirty)
+  isSubmittable({ dirty, error, initialValues, valid }) {
+    const untouched = initialValues && !dirty
+    return error || (valid && !untouched)
   }
 
   handleKeyUp(event, { dirty, form, initialValues, valid, values }) {
@@ -226,13 +236,14 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { fields, initialValues, oauth, onSubmit, submitting, t } = this.props
+    const { account, error, konnector, onSubmit, submitting, t } = this.props
+    const { fields, oauth } = konnector
 
     if (oauth) return <OAuthForm initialValues={initialValues} oauth={oauth} />
 
     const sanitizedFields = Manifest.sanitizeFields(fields)
     const defaultValues = Manifest.defaultFieldsValues(sanitizedFields)
-
+    const initialValues = account && account.auth
     const initialAndDefaultValues = { ...defaultValues, ...initialValues }
 
     let container = null
@@ -248,9 +259,17 @@ export class AccountForm extends PureComponent {
               container = element
             }}
           >
+            {error && (
+              <AccountFormError error={error} konnector={konnector} t={t} />
+            )}
             <AccountFields
               container={container}
               disabled={submitting}
+              hasError={
+                error &&
+                error instanceof KonnectorJobError &&
+                error.isLoginError()
+              }
               initialValues={initialAndDefaultValues}
               manifestFields={sanitizedFields}
               onKeyUp={event =>
@@ -269,7 +288,7 @@ export class AccountForm extends PureComponent {
               className="u-mt-2 u-mb-1-half"
               disabled={
                 submitting ||
-                !this.isSubmittable({ dirty, initialValues, valid })
+                !this.isSubmittable({ dirty, error, initialValues, valid })
               }
               extension="full"
               label={t('accountForm.submit.label')}
@@ -284,9 +303,8 @@ export class AccountForm extends PureComponent {
 
 AccountForm.propTypes = {
   account: PropTypes.object,
-  fields: PropTypes.object,
-  oauth: PropTypes.object,
-  locales: PropTypes.object,
+  konnector: PropTypes.object.isRequired,
+  error: PropTypes.object,
   submitting: PropTypes.bool
 }
 

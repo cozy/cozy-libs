@@ -1,12 +1,9 @@
 /* eslint-env jest */
 import React from 'react'
-import { configure, shallow } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
+import { shallow } from 'enzyme'
 
 import { TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
-
-configure({ adapter: new Adapter() })
 
 const fixtures = {
   data: {
@@ -14,7 +11,15 @@ const fixtures = {
     passphrase: 'bar'
   },
   konnector: {
-    slug: 'konnectest'
+    slug: 'konnectest',
+    fields: {
+      username: {
+        type: 'text'
+      },
+      passphrase: {
+        type: 'password'
+      }
+    }
   },
   konnectorWithFolder: {
     name: 'myBills',
@@ -48,6 +53,14 @@ const fixtures = {
     }
   },
   account: {
+    account_type: 'konnectest',
+    auth: {
+      username: 'foo',
+      passphrase: 'bar'
+    },
+    identifier: 'username'
+  },
+  createdAccount: {
     _id: 'a87f9a8bd3884479a48811e7b7deec75',
     account_type: 'konnectest',
     auth: {
@@ -120,18 +133,19 @@ const fixtures = {
 
 const addPermissionMock = jest.fn()
 const addReferencesToMock = jest.fn()
-const createTriggerMock = jest.fn().mockResolvedValue(fixtures.createdTrigger)
+const createTriggerMock = jest.fn()
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
-const launchTriggerMock = jest.fn().mockResolvedValue(fixtures.launchedJob)
-const waitForLoginSuccessMock = jest.fn().mockResolvedValue(fixtures.runningJob)
+const launchTriggerMock = jest.fn()
+const saveAccountMock = jest.fn()
+const waitForLoginSuccessMock = jest.fn()
 
-const onDoneSpy = jest.fn()
+const onSuccessSpy = jest.fn()
 const onLoginSuccessSpy = jest.fn()
 
 const tMock = jest.fn().mockReturnValue('/Administrative')
 
-const shallowAccountCreator = konnector =>
+const shallowWithoutAccount = konnector =>
   shallow(
     <TriggerManager
       addPermission={addPermissionMock}
@@ -141,57 +155,149 @@ const shallowAccountCreator = konnector =>
       createDirectoryByPath={createDirectoryByPathMock}
       statDirectoryByPath={statDirectoryByPathMock}
       launchTrigger={launchTriggerMock}
-      onDone={onDoneSpy}
+      onSuccess={onSuccessSpy}
       onLoginSuccess={onLoginSuccessSpy}
+      saveAccount={saveAccountMock}
       t={tMock}
       waitForLoginSuccess={waitForLoginSuccessMock}
     />
   )
 
-const shallowAccountEditor = () =>
+const shallowWithAccount = () =>
   shallow(
     <TriggerManager
-      account={fixtures.account}
+      account={fixtures.createdAccount}
       createTrigger={createTriggerMock}
       konnector={fixtures.konnector}
       launchTrigger={launchTriggerMock}
-      onDone={onDoneSpy}
+      onSuccess={onSuccessSpy}
       onLoginSuccess={onLoginSuccessSpy}
+      saveAccount={saveAccountMock}
       trigger={fixtures.createdTrigger}
       waitForLoginSuccess={waitForLoginSuccessMock}
     />
   )
 
 describe('TriggerManager', () => {
+  beforeEach(() => {
+    createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
+    launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
+    saveAccountMock.mockResolvedValue(fixtures.createdAccount)
+    waitForLoginSuccessMock.mockResolvedValue(fixtures.runningJob)
+  })
+
   afterEach(() => {
     createTriggerMock.mockClear()
     launchTriggerMock.mockClear()
-    onDoneSpy.mockClear()
+    onSuccessSpy.mockClear()
     onLoginSuccessSpy.mockClear()
     waitForLoginSuccessMock.mockClear()
   })
 
-  it('should render AccountCreator', () => {
-    const component = shallowAccountCreator().getElement()
+  it('should render without account', () => {
+    const component = shallowWithoutAccount().getElement()
     expect(component).toMatchSnapshot()
   })
 
-  it('should render AccountEditor', () => {
-    const component = shallowAccountEditor().getElement()
+  it('should render with account', () => {
+    const component = shallowWithAccount().getElement()
     expect(component).toMatchSnapshot()
   })
 
-  describe('handleAccountMutation', () => {
-    it('should render AccountCreator as submitting', () => {
-      const wrapper = shallowAccountCreator()
-      wrapper.instance().handleAccountMutation()
+  describe('handleError', () => {
+    it('should render error', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleError(new Error('Test error'))
+      expect(wrapper.getElement()).toMatchSnapshot()
+    })
+
+    const clientMutations = {
+      saveAccount: saveAccountMock,
+      statDirectoryByPath: statDirectoryByPathMock,
+      createDirectoryByPath: createDirectoryByPathMock,
+      addPermission: addPermissionMock,
+      addReferencesTo: addReferencesToMock,
+      createTrigger: createTriggerMock,
+      launchTrigger: launchTriggerMock
+    }
+
+    for (var mutation of Object.keys(clientMutations)) {
+      it(`should be called when ${mutation} fails`, async () => {
+        clientMutations[mutation].mockRejectedValue(
+          new Error(`${mutation} error`)
+        )
+
+        const wrapper = shallowWithoutAccount()
+
+        jest
+          .spyOn(wrapper.instance(), 'handleError')
+          .mockImplementation(() => {})
+
+        await wrapper.instance().handleSubmit(fixtures.data)
+        expect(wrapper.instance().handleError).toHaveBeenCalledWith(
+          new Error(`${mutation} error`)
+        )
+      })
+    }
+  })
+
+  describe('handleSubmit', () => {
+    it('should render without account as submitting', () => {
+      const wrapper = shallowWithoutAccount()
+      wrapper.instance().handleSubmit()
       expect(wrapper.props().submitting).toEqual(true)
     })
 
-    it('should render AccountCreator as submitting', () => {
-      const wrapper = shallowAccountEditor()
-      wrapper.instance().handleAccountMutation()
+    it('should render with account as submitting', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleSubmit()
       expect(wrapper.props().submitting).toEqual(true)
+    })
+
+    it('should call saveAccount without account', () => {
+      const wrapper = shallowWithoutAccount()
+      wrapper.instance().handleSubmit(fixtures.data)
+      expect(saveAccountMock).toHaveBeenCalledWith(
+        fixtures.konnector,
+        fixtures.account
+      )
+    })
+
+    it('should call saveAccount with account', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleSubmit(fixtures.data)
+      expect(saveAccountMock).toHaveBeenCalledWith(
+        fixtures.konnector,
+        fixtures.createdAccount
+      )
+    })
+
+    it('should call handleAccountUpdateSuccess', async () => {
+      const wrapper = shallowWithAccount()
+      const instance = wrapper.instance()
+      jest
+        .spyOn(instance, 'handleAccountUpdateSuccess')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await instance.handleSubmit(fixtures.data)
+
+      expect(instance.handleAccountUpdateSuccess).toHaveBeenCalledWith(
+        fixtures.createdAccount
+      )
+    })
+
+    it('should call handleAccountCreationSuccess', async () => {
+      const wrapper = shallowWithoutAccount()
+      const instance = wrapper.instance()
+      jest
+        .spyOn(instance, 'handleAccountCreationSuccess')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await instance.handleSubmit(fixtures.data)
+
+      expect(instance.handleAccountCreationSuccess).toHaveBeenCalledWith(
+        fixtures.createdAccount
+      )
     })
   })
 
@@ -209,24 +315,19 @@ describe('TriggerManager', () => {
     })
 
     it('should create trigger', async () => {
-      const wrapper = shallowAccountCreator()
-      await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
+      const wrapper = shallowWithoutAccount()
+      await wrapper
+        .instance()
+        .handleAccountCreationSuccess(fixtures.createdAccount)
       expect(createTriggerMock).toHaveBeenCalledTimes(1)
       expect(createTriggerMock).toHaveBeenCalledWith(fixtures.triggerAttributes)
     })
 
     it('should launch trigger', async () => {
-      const wrapper = shallowAccountCreator()
+      const wrapper = shallowWithoutAccount()
       await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
       expect(launchTriggerMock).toHaveBeenCalledTimes(1)
       expect(launchTriggerMock).toHaveBeenCalledWith(fixtures.createdTrigger)
-    })
-
-    it('should render TriggerSuccessMessage', async () => {
-      const wrapper = shallowAccountCreator()
-      await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
-      const component = wrapper.getElement()
-      expect(component).toMatchSnapshot()
     })
 
     describe('when konnector needs folder', () => {
@@ -234,7 +335,7 @@ describe('TriggerManager', () => {
         statDirectoryByPathMock.mockResolvedValue(null)
         createDirectoryByPathMock.mockReturnValue(fixtures.folder)
 
-        const wrapper = shallowAccountCreator(fixtures.konnectorWithFolder)
+        const wrapper = shallowWithoutAccount(fixtures.konnectorWithFolder)
         await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
 
         expect(statDirectoryByPathMock).toHaveBeenCalledTimes(1)
@@ -257,7 +358,7 @@ describe('TriggerManager', () => {
       it('should not create folder if it exists', async () => {
         statDirectoryByPathMock.mockResolvedValue(fixtures.folder)
 
-        const wrapper = shallowAccountCreator(fixtures.konnectorWithFolder)
+        const wrapper = shallowWithoutAccount(fixtures.konnectorWithFolder)
         await wrapper.instance().handleAccountCreationSuccess(fixtures.account)
 
         expect(statDirectoryByPathMock).toHaveBeenCalledTimes(1)
@@ -279,7 +380,7 @@ describe('TriggerManager', () => {
 
   describe('handleAccountUpdateSuccess', () => {
     it('should launch trigger', async () => {
-      const wrapper = shallowAccountEditor()
+      const wrapper = shallowWithAccount()
       await wrapper
         .instance()
         .handleAccountUpdateSuccess(fixtures.updatedAccount)
@@ -287,43 +388,45 @@ describe('TriggerManager', () => {
       expect(launchTriggerMock).toHaveBeenCalledWith(fixtures.createdTrigger)
     })
 
-    it('should render AccountEditor with updated account', async () => {
-      const wrapper = shallowAccountEditor()
+    it('should keep update account in state', async () => {
+      const wrapper = shallowWithAccount()
       await wrapper
         .instance()
         .handleAccountUpdateSuccess(fixtures.updatedAccount)
-      expect(wrapper.props().account).toEqual(fixtures.updatedAccount)
+      expect(wrapper.state().account).toEqual(fixtures.updatedAccount)
     })
   })
 
   describe('launch', () => {
     it('should launch trigger', async () => {
-      const wrapper = shallowAccountCreator()
+      const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
       expect(launchTriggerMock).toHaveBeenCalledTimes(1)
       expect(launchTriggerMock).toHaveBeenCalledWith(fixtures.createdTrigger)
     })
 
     it('should wait for successful login', async () => {
-      const wrapper = shallowAccountCreator()
+      const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
       expect(waitForLoginSuccessMock).toHaveBeenCalledTimes(1)
       expect(waitForLoginSuccessMock).toHaveBeenCalledWith(fixtures.launchedJob)
     })
 
     it('should call onLoginSuccess', async () => {
-      const wrapper = shallowAccountCreator()
+      const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
       expect(onLoginSuccessSpy).toHaveBeenCalledTimes(1)
       expect(onLoginSuccessSpy).toHaveBeenCalledWith(fixtures.createdTrigger)
+      expect(onSuccessSpy).not.toHaveBeenCalled()
     })
 
     it('should not call onLoginSucces if job is done', async () => {
       waitForLoginSuccessMock.mockResolvedValue(fixtures.doneJob)
-      const wrapper = shallowAccountCreator()
+      const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
       expect(onLoginSuccessSpy).not.toHaveBeenCalled()
-      waitForLoginSuccessMock.mockResolvedValue(fixtures.runningJob)
+      expect(onSuccessSpy).toHaveBeenCalledTimes(1)
+      expect(onSuccessSpy).toHaveBeenCalledWith(fixtures.createdTrigger)
     })
   })
 })

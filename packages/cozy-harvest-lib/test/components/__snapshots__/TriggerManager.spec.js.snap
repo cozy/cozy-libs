@@ -1,26 +1,38 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TriggerManager handleAccountCreationSuccess should render TriggerSuccessMessage 1`] = `
+exports[`TriggerManager handleError should render error 1`] = `
 <Wrapper
-  onDone={[MockFunction]}
-/>
-`;
-
-exports[`TriggerManager should render AccountCreator 1`] = `
-<WithMutations(AccountCreator)
+  account={
+    Object {
+      "_id": "a87f9a8bd3884479a48811e7b7deec75",
+      "account_type": "konnectest",
+      "auth": Object {
+        "passphrase": "bar",
+        "username": "foo",
+      },
+      "identifier": "username",
+    }
+  }
+  error={[Error: Test error]}
   konnector={
     Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
       "slug": "konnectest",
     }
   }
-  onBeforeCreate={[Function]}
-  onCreateSuccess={[Function]}
-  submitting={false}
+  onSubmit={[Function]}
 />
 `;
 
-exports[`TriggerManager should render AccountEditor 1`] = `
-<WithMutations(AccountEditor)
+exports[`TriggerManager should render with account 1`] = `
+<Wrapper
   account={
     Object {
       "_id": "a87f9a8bd3884479a48811e7b7deec75",
@@ -34,10 +46,36 @@ exports[`TriggerManager should render AccountEditor 1`] = `
   }
   konnector={
     Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
       "slug": "konnectest",
     }
   }
-  onBeforeUpdate={[Function]}
-  onUpdateSuccess={[Function]}
+  onSubmit={[Function]}
+/>
+`;
+
+exports[`TriggerManager should render without account 1`] = `
+<Wrapper
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
+  onSubmit={[Function]}
 />
 `;
