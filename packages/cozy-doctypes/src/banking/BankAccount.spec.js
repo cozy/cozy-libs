@@ -49,3 +49,43 @@ describe('deleteDuplicateBankAccountsWithNoOperations', () => {
     expect(res.map(x => x._id)).toEqual(['empty'])
   })
 })
+
+describe('incoherences', () => {
+  const incoherent = {
+    institutionLabel: "Caisse d'épargne",
+    cozyMetadata: {
+      createdByApp: 'boursorama'
+    }
+  }
+
+  const coherent = {
+    institutionLabel: "Caisse d'épargne",
+    cozyMetadata: {
+      createdByApp: 'caissedepargne1'
+    }
+  }
+
+  const unknown = {
+    institutionLabel: 'Unknown bank',
+    cozyMetadata: {
+      createdByApp: 'unknown1337'
+    }
+  }
+
+  const noMetadata = {
+    institutionLabel: "Caisse d'épargne"
+  }
+
+  const noCreatedByApp = {
+    institutionLabel: "Caisse d'épargne",
+    cozyMetadata: {}
+  }
+
+  it('should detect when slug is not coherent with createdByApp', () => {
+    expect(BankAccount.hasIncoherentCreatedByApp(incoherent)).toBe(true)
+    expect(BankAccount.hasIncoherentCreatedByApp(coherent)).toBe(false)
+    expect(BankAccount.hasIncoherentCreatedByApp(unknown)).toBe(false)
+    expect(BankAccount.hasIncoherentCreatedByApp(noMetadata)).toBe(false)
+    expect(BankAccount.hasIncoherentCreatedByApp(noCreatedByApp)).toBe(false)
+  })
+})
