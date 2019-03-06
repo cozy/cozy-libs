@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.38.1"></a>
+## [1.38.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.0...cozy-doctypes@1.38.1) (2019-03-06)
+
+
+### Bug Fixes
+
+* Support unexisting institutionLabel ([022629b](https://github.com/cozy/cozy-libs/commit/022629b))
+
+
+
+
 <a name="1.38.0"></a>
 # [1.38.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.37.0...cozy-doctypes@1.38.0) (2019-03-06)
 
