@@ -11,7 +11,7 @@ const institutionLabelsCompiled = Object.entries(labelSlugs).map(
 )
 
 export const getSlugFromInstitutionLabel = institutionLabel => {
-  for (let [rx, slug] of institutionLabelsCompiled) {
+  for (const [rx, slug] of institutionLabelsCompiled) {
     if (rx instanceof RegExp) {
       const match = institutionLabel.match(rx)
       if (match) {

@@ -1,6 +1,7 @@
 const groupBy = require('lodash/groupBy')
 const Document = require('../Document')
 const matching = require('./matching-accounts')
+const { getSlugFromInstitutionLabel } = require('./slug-account')
 
 class BankAccount extends Document {
   /**
@@ -35,6 +36,15 @@ class BankAccount extends Document {
       }
     }
     return res
+  }
+
+  static hasIncoherentCreatedByApp(account) {
+    const predictedSlug = getSlugFromInstitutionLabel(account.institutionLabel)
+    const createdByApp =
+      account.cozyMetadata && account.cozyMetadata.createdByApp
+    return Boolean(
+      predictedSlug && createdByApp && predictedSlug !== createdByApp
+    )
   }
 }
 
