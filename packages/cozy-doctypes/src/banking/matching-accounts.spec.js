@@ -3,8 +3,7 @@ const path = require('path')
 const {
   matchAccounts,
   normalizeAccountNumber,
-  score,
-  getSlugFromInstitutionLabel
+  score
 } = require('./matching-accounts')
 
 const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
@@ -88,15 +87,6 @@ describe('slug match', () => {
       }).points
     ).toBeGreaterThan(0)
   })
-})
-
-it('should find the slug from the institutionLabel', () => {
-  expect(getSlugFromInstitutionLabel("caisse d'Épargne (particuliers)")).toBe(
-    'caissedepargne1'
-  )
-  expect(
-    getSlugFromInstitutionLabel('Crédit Mutuelle de Montigny Lengrain')
-  ).toBe('cic45')
 })
 
 it('should normalize account number', () => {
