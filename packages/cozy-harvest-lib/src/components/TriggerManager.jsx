@@ -34,6 +34,7 @@ export class TriggerManager extends Component {
 
     this.state = {
       account: props.account,
+      error: triggers.getError(props.trigger),
       status: IDLE,
       trigger: props.trigger
     }
