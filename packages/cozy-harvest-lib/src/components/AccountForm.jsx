@@ -253,7 +253,15 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { account, error, konnector, onSubmit, submitting, t } = this.props
+    const {
+      account,
+      error,
+      konnector,
+      onSubmit,
+      showError,
+      submitting,
+      t
+    } = this.props
     const { fields, oauth } = konnector
 
     if (oauth) return <OAuthForm initialValues={initialValues} oauth={oauth} />
@@ -264,6 +272,9 @@ export class AccountForm extends PureComponent {
     const initialAndDefaultValues = { ...defaultValues, ...initialValues }
 
     let container = null
+
+    const isLoginError =
+      error instanceof KonnectorJobError && error.isLoginError()
 
     return (
       <Form
@@ -276,7 +287,7 @@ export class AccountForm extends PureComponent {
               container = element
             }}
           >
-            {error && (
+            {error && (showError || isLoginError) && (
               <AccountFormError error={error} konnector={konnector} t={t} />
             )}
             <AccountFields
@@ -322,7 +333,12 @@ AccountForm.propTypes = {
   account: PropTypes.object,
   konnector: PropTypes.object.isRequired,
   error: PropTypes.object,
+  showError: PropTypes.bool,
   submitting: PropTypes.bool
+}
+
+AccountForm.defaultProps = {
+  showError: true
 }
 
 export default translate()(AccountForm)
