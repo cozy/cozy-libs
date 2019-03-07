@@ -43,11 +43,11 @@ export class TriggerManager extends Component {
   }
 
   /**
-   * Account creation success handler
-   * @param  {Object}  account Created io.cozy.accounts document
-   * @return {Object}          io.cozy.jobs document, runned with account data
+   * Ensure that a trigger will exist, with valid destination folder with
+   * permissions and references
+   * @return {Object} Trigger document
    */
-  async handleAccountCreationSuccess(account) {
+  async ensureTrigger() {
     const {
       addPermission,
       addReferencesTo,
@@ -58,39 +58,50 @@ export class TriggerManager extends Component {
       t
     } = this.props
 
+    const { account } = this.state
+
+    let folder
+
+    if (konnectors.needsFolder(konnector)) {
+      const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
+        accounts.getLabel(account)
+      )}`
+
+      folder =
+        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
+
+      await addPermission(konnector, konnectors.buildFolderPermission(folder))
+      await addReferencesTo(konnector, [folder])
+    }
+
+    const trigger = await createTrigger(
+      triggers.buildAttributes({
+        account,
+        cron: cron.fromKonnector(konnector),
+        folder,
+        konnector
+      })
+    )
+
+    this.setState({
+      trigger
+    })
+
+    return trigger
+  }
+
+  /**
+   * Account creation success handler
+   * @param  {Object}  account Created io.cozy.accounts document
+   * @return {Object}          io.cozy.jobs document, runned with account data
+   */
+  async handleAccountCreationSuccess(account) {
     this.setState({
       account
     })
 
     try {
-      let folder
-
-      if (konnectors.needsFolder(konnector)) {
-        const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
-          accounts.getLabel(account)
-        )}`
-
-        folder =
-          (await statDirectoryByPath(path)) ||
-          (await createDirectoryByPath(path))
-
-        await addPermission(konnector, konnectors.buildFolderPermission(folder))
-        await addReferencesTo(konnector, [folder])
-      }
-
-      const trigger = await createTrigger(
-        triggers.buildAttributes({
-          account,
-          cron: cron.fromKonnector(konnector),
-          folder,
-          konnector
-        })
-      )
-
-      this.setState({
-        trigger
-      })
-
+      const trigger = await this.ensureTrigger()
       return await this.launch(trigger)
     } catch (error) {
       return this.handleError(error)
