@@ -29,10 +29,7 @@ export class TriggerManager extends Component {
   constructor(props) {
     super(props)
 
-    this.handleAccountCreationSuccess = this.handleAccountCreationSuccess.bind(
-      this
-    )
-    this.handleAccountUpdateSuccess = this.handleAccountUpdateSuccess.bind(this)
+    this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
     this.state = {
@@ -91,35 +88,13 @@ export class TriggerManager extends Component {
   }
 
   /**
-   * Account creation success handler
+   * Account save success handler
    * @param  {Object}  account Created io.cozy.accounts document
    * @return {Object}          io.cozy.jobs document, runned with account data
    */
-  async handleAccountCreationSuccess(account) {
-    this.setState({
-      account
-    })
-
-    try {
-      const trigger = await this.ensureTrigger()
-      return await this.launch(trigger)
-    } catch (error) {
-      return this.handleError(error)
-    }
-  }
-
-  /**
-   * Account update success handler
-   * @param  {Object}  account Updated io.cozy.accounts document
-   * @return {Object}          io.cozy.jobs document, runned with account data
-   */
-  async handleAccountUpdateSuccess(account) {
-    this.setState({
-      account
-    })
-
+  async handleAccountSaveSuccess(account) {
+    this.setState({ account })
     const trigger = await this.ensureTrigger()
-
     return await this.launch(trigger)
   }
 
@@ -151,10 +126,7 @@ export class TriggerManager extends Component {
         ),
         data
       )
-
-      return isUpdate
-        ? this.handleAccountUpdateSuccess(savedAccount)
-        : this.handleAccountCreationSuccess(savedAccount)
+      return this.handleAccountSaveSuccess(savedAccount)
     } catch (error) {
       return this.handleError(error)
     }
