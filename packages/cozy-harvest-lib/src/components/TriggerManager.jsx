@@ -26,11 +26,6 @@ const RUNNING = 'RUNNING'
  * @type {Component}
  */
 export class TriggerManager extends Component {
-  state = {
-    account: null,
-    status: IDLE
-  }
-
   constructor(props) {
     super(props)
 
@@ -42,7 +37,8 @@ export class TriggerManager extends Component {
 
     this.state = {
       account: props.account,
-      status: IDLE
+      status: IDLE,
+      trigger: props.trigger
     }
   }
 
@@ -91,6 +87,10 @@ export class TriggerManager extends Component {
         })
       )
 
+      this.setState({
+        trigger
+      })
+
       return await this.launch(trigger)
     } catch (error) {
       return this.handleError(error)
@@ -107,7 +107,7 @@ export class TriggerManager extends Component {
       account
     })
 
-    const { trigger } = this.props
+    const { trigger } = this.state
     return await this.launch(trigger)
   }
 
