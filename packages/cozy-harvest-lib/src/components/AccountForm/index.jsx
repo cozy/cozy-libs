@@ -6,15 +6,15 @@ import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
 import Field from 'cozy-ui/react/Field'
 
-import AccountFormError from './AccountFormError'
+import AccountFormError from './Error'
 import {
   getEncryptedFieldName,
   getFieldPlaceholder,
   sanitizeSelectProps
-} from '../helpers/fields'
-import { KonnectorJobError } from '../helpers/konnectors'
-import Manifest from '../Manifest'
-import OAuthForm from './OAuthForm'
+} from 'helpers/fields'
+import { KonnectorJobError } from 'helpers/konnectors'
+import Manifest from 'Manifest'
+import OAuthForm from 'components/OAuthForm'
 
 const IDENTIFIER = 'identifier'
 
