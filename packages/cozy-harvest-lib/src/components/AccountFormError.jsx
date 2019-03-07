@@ -61,9 +61,10 @@ export class AccountFormError extends PureComponent {
   }
 
   render() {
-    const errorDescription = this.getDescription()
+    const { error } = this.props
     /* eslint-disable-next-line no-console */
-    console.error(errorDescription)
+    console.error(error)
+    const errorDescription = this.getDescription()
     return (
       <div className="u-error">
         <Markdown source={errorDescription} />

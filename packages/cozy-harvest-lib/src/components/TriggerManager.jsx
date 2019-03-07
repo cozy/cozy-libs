@@ -26,32 +26,25 @@ const RUNNING = 'RUNNING'
  * @type {Component}
  */
 export class TriggerManager extends Component {
-  state = {
-    account: null,
-    status: IDLE
-  }
-
   constructor(props) {
     super(props)
 
-    this.handleAccountCreationSuccess = this.handleAccountCreationSuccess.bind(
-      this
-    )
-    this.handleAccountUpdateSuccess = this.handleAccountUpdateSuccess.bind(this)
+    this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
 
     this.state = {
       account: props.account,
-      status: IDLE
+      status: IDLE,
+      trigger: props.trigger
     }
   }
 
   /**
-   * Account creation success handler
-   * @param  {Object}  account Created io.cozy.accounts document
-   * @return {Object}          io.cozy.jobs document, runned with account data
+   * Ensure that a trigger will exist, with valid destination folder with
+   * permissions and references
+   * @return {Object} Trigger document
    */
-  async handleAccountCreationSuccess(account) {
+  async ensureTrigger() {
     const {
       addPermission,
       addReferencesTo,
@@ -62,52 +55,46 @@ export class TriggerManager extends Component {
       t
     } = this.props
 
+    const { account } = this.state
+
+    let folder
+
+    if (konnectors.needsFolder(konnector)) {
+      const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
+        accounts.getLabel(account)
+      )}`
+
+      folder =
+        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
+
+      await addPermission(konnector, konnectors.buildFolderPermission(folder))
+      await addReferencesTo(konnector, [folder])
+    }
+
+    const trigger = await createTrigger(
+      triggers.buildAttributes({
+        account,
+        cron: cron.fromKonnector(konnector),
+        folder,
+        konnector
+      })
+    )
+
     this.setState({
-      account
+      trigger
     })
 
-    try {
-      let folder
-
-      if (konnectors.needsFolder(konnector)) {
-        const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
-          accounts.getLabel(account)
-        )}`
-
-        folder =
-          (await statDirectoryByPath(path)) ||
-          (await createDirectoryByPath(path))
-
-        await addPermission(konnector, konnectors.buildFolderPermission(folder))
-        await addReferencesTo(konnector, [folder])
-      }
-
-      const trigger = await createTrigger(
-        triggers.buildAttributes({
-          account,
-          cron: cron.fromKonnector(konnector),
-          folder,
-          konnector
-        })
-      )
-
-      return await this.launch(trigger)
-    } catch (error) {
-      return this.handleError(error)
-    }
+    return trigger
   }
 
   /**
-   * Account update success handler
-   * @param  {Object}  account Updated io.cozy.accounts document
+   * Account save success handler
+   * @param  {Object}  account Created io.cozy.accounts document
    * @return {Object}          io.cozy.jobs document, runned with account data
    */
-  async handleAccountUpdateSuccess(account) {
-    this.setState({
-      account
-    })
-
-    const { trigger } = this.props
+  async handleAccountSaveSuccess(account) {
+    this.setState({ account })
+    const trigger = await this.ensureTrigger()
     return await this.launch(trigger)
   }
 
@@ -139,10 +126,7 @@ export class TriggerManager extends Component {
         ),
         data
       )
-
-      return isUpdate
-        ? this.handleAccountUpdateSuccess(savedAccount)
-        : this.handleAccountCreationSuccess(savedAccount)
+      return this.handleAccountSaveSuccess(savedAccount)
     } catch (error) {
       return this.handleError(error)
     }
