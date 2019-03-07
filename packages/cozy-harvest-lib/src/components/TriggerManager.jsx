@@ -118,7 +118,8 @@ export class TriggerManager extends Component {
       account
     })
 
-    const { trigger } = this.state
+    const trigger = await this.ensureTrigger()
+
     return await this.launch(trigger)
   }
 
