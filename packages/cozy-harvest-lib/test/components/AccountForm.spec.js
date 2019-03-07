@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { AccountForm, AccountFields } from 'components/AccountForm'
+import { AccountForm } from 'components/AccountForm'
 
 import { KonnectorJobError } from 'helpers/konnectors'
 
@@ -23,18 +23,6 @@ const fixtures = {
         required: false,
         type: 'text'
       }
-    }
-  },
-  sanitized: {
-    username: {
-      encrypted: false,
-      required: true,
-      type: 'text'
-    },
-    passphrase: {
-      encrypted: true,
-      required: true,
-      type: 'password'
     }
   },
   account: {
@@ -253,21 +241,5 @@ describe('AccountForm', () => {
       .simulate('click')
 
     expect(onSubmit).toHaveBeenCalled()
-  })
-
-  describe('AccountFields', () => {
-    it('should render', () => {
-      const component = shallow(
-        <AccountFields manifestFields={fixtures.konnector.fields} t={t} />
-      ).getElement()
-      expect(component).toMatchSnapshot()
-    })
-
-    it('should render encrypted fields with placeholder', () => {
-      const component = shallow(
-        <AccountFields manifestFields={fixtures.sanitized} t={t} />
-      ).getElement()
-      expect(component).toMatchSnapshot()
-    })
   })
 })

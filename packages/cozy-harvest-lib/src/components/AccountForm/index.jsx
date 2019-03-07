@@ -1,81 +1,18 @@
 import React, { PureComponent } from 'react'
-import { Form, Field as FinalFormField } from 'react-final-form'
+import { Form } from 'react-final-form'
 import PropTypes from 'react-proptypes'
 
 import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
 
-import AccountField from './AccountField'
+import AccountFields from './AccountFields'
 import AccountFormError from './Error'
 import { getEncryptedFieldName } from '../../helpers/fields'
-import { KonnectorJobError } from 'helpers/konnectors'
-import Manifest from 'Manifest'
-import OAuthForm from 'components/OAuthForm'
+import { KonnectorJobError } from '../../helpers/konnectors'
+import Manifest from '../../Manifest'
+import OAuthForm from '../../components/OAuthForm'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
-
-// As SelectBox component from Cozy-UI, rendering dropdown type, is just giving
-// us the full Option object, we just get its value to facilitate mapping
-// with account
-const parse = type => value => {
-  return type === 'dropdown' ? value.value : value
-}
-
-export class AccountFields extends PureComponent {
-  render() {
-    const {
-      container,
-      disabled,
-      hasError,
-      initialValues,
-      manifestFields,
-      onKeyUp,
-      t
-    } = this.props
-
-    // Ready to use named fields array
-    const namedFields = Object.keys(manifestFields).map(fieldName => ({
-      ...manifestFields[fieldName],
-      name: fieldName
-    }))
-
-    return (
-      <div onKeyUp={onKeyUp}>
-        {namedFields.map((field, index) => (
-          <FinalFormField
-            key={index}
-            name={field.name}
-            parse={parse(field.type)}
-          >
-            {({ input }) => (
-              <AccountField
-                {...field}
-                {...input}
-                container={container}
-                hasError={hasError}
-                disabled={disabled}
-                initialValue={
-                  initialValues[field.name] ||
-                  initialValues[getEncryptedFieldName(field.name)]
-                }
-                t={t}
-              />
-            )}
-          </FinalFormField>
-        ))}
-      </div>
-    )
-  }
-}
-
-AccountFields.propTypes = {
-  disabled: PropTypes.bool,
-  hasError: PropTypes.bool,
-  fillEncrypted: PropTypes.bool,
-  manifestFields: PropTypes.object.isRequired,
-  onKeyUp: PropTypes.func,
-  t: PropTypes.func
-}
 
 export class AccountForm extends PureComponent {
   constructor(props, context) {

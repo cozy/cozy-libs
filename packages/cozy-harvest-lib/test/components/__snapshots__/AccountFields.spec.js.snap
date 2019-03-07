@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountFields should render 1`] = `
+<div>
+  <Field
+    format={[Function]}
+    name="username"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+  <Field
+    format={[Function]}
+    name="passphrase"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+</div>
+`;
+
+exports[`AccountFields should render encrypted fields with placeholder 1`] = `
+<div>
+  <Field
+    format={[Function]}
+    name="fields"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+  <Field
+    format={[Function]}
+    name="sanitized"
+    parse={[Function]}
+  >
+    [Function]
+  </Field>
+</div>
+`;
