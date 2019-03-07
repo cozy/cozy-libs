@@ -32,7 +32,9 @@ const KNOWN_ERRORS = [
 export class KonnectorJobError extends Error {
   constructor(...args) {
     super(...args)
-    Error.captureStackTrace(this, KonnectorJobError)
+    if (typeof Error.captureStackTrace === 'function') {
+      Error.captureStackTrace(this, KonnectorJobError)
+    }
 
     /**
      * Konnector job are throwing error with a message containing the error
