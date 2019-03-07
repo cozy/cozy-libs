@@ -8,6 +8,8 @@ import {
   AccountField
 } from 'components/AccountForm'
 
+import { KonnectorJobError } from 'helpers/konnectors'
+
 const fixtures = {
   konnector: {
     fields: {
@@ -61,6 +63,47 @@ describe('AccountForm', () => {
   it('should render', () => {
     const wrapper = shallow(
       <AccountForm konnector={fixtures.konnector} onSubmit={onSubmit} t={t} />
+    )
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
+  it('should render error', () => {
+    const wrapper = shallow(
+      <AccountForm
+        error={new Error('Test error')}
+        konnector={fixtures.konnector}
+        onSubmit={onSubmit}
+        t={t}
+      />
+    )
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
+  it('should not render error', () => {
+    const wrapper = shallow(
+      <AccountForm
+        error={new Error('Test error')}
+        konnector={fixtures.konnector}
+        onSubmit={onSubmit}
+        showError={false}
+        t={t}
+      />
+    )
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
+  it('should always render login error', () => {
+    const wrapper = shallow(
+      <AccountForm
+        error={new KonnectorJobError('LOGIN_FAILED')}
+        konnector={fixtures.konnector}
+        onSubmit={onSubmit}
+        showError={false}
+        t={t}
+      />
     )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
