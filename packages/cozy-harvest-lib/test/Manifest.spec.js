@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import Manifest from './Manifest'
+import Manifest from 'Manifest'
 
 describe('Manifest', () => {
   describe('defaultFieldsValues', () => {
