@@ -103,13 +103,6 @@ describe('Account mutations', () => {
       })
     })
 
-    it('throws an error when konnector have no aggregator attribute', async () => {
-      const konnector = {}
-      expect(createAccount(konnector, fixtures.simpleAccount)).rejects.toEqual(
-        new Error('Konnector does not provide aggregator account id')
-      )
-    })
-
     it('throws an error when konnector have no aggregator.accountId attribute', async () => {
       const konnector = { aggregator: {} }
       expect(createAccount(konnector, fixtures.simpleAccount)).rejects.toEqual(
