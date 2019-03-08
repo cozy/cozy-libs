@@ -24,6 +24,7 @@ const fixtures = {
 }
 
 let realtime
+let CozyRealtime
 
 describe('(cozy-realtime) API: ', () => {
   beforeEach(() => {
@@ -31,6 +32,7 @@ describe('(cozy-realtime) API: ', () => {
     jest.resetModules()
 
     realtime = require('../src/index').default
+    CozyRealtime = require('../src/index').CozyRealtime
     server = new ServerMock(REALTIME_URL)
   })
 
@@ -272,6 +274,200 @@ describe('(cozy-realtime) API: ', () => {
         server.sendDoc(fixtures.fooDoc, 'deleted')
 
         expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
+    })
+  })
+
+  describe('CozyRealtime', () => {
+    const fooSelector = {
+      type: 'io.cozy.foo'
+    }
+
+    describe('subscribe', () => {
+      it('should send AUTH message', () => {
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'created', jest.fn())
+
+        server.stepForward()
+
+        expect(
+          server.received({
+            method: 'AUTH',
+            payload: mockConfig.token
+          })
+        ).toBe(true)
+      })
+
+      it('should send SUBSCRIBE message', async () => {
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'created', jest.fn())
+
+        server.stepForward()
+        await getSocket()
+        server.stepForward()
+
+        expect(
+          server.received({
+            method: 'SUBSCRIBE',
+            payload: { type: 'io.cozy.foo' }
+          })
+        ).toBe(true)
+      })
+
+      it('should receive created document of given doctype', async () => {
+        const fooCreateHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'created', fooCreateHandler)
+
+        server.sendDoc(fixtures.fooDoc, 'created')
+        server.sendDoc(fixtures.barDoc, 'created')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(1)
+        expect(fooCreateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
+
+      it('should receive updated documents of given doctype', () => {
+        const fooUpdateHandler = jest.fn()
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'updated', fooUpdateHandler)
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+        server.sendDoc(fixtures.barDoc, 'updated')
+
+        expect(fooUpdateHandler).toHaveBeenCalledTimes(1)
+        expect(fooUpdateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
+
+      it('should receive updated document with given id', () => {
+        const fooUpdateHandler = jest.fn()
+        const fooDocumentUpdateHandler = jest.fn()
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'updated', fooUpdateHandler)
+        realtime.subscribe(
+          { ...fooSelector, id: fixtures.anotherFooDoc.id },
+          'updated',
+          fooDocumentUpdateHandler
+        )
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+        server.sendDoc(fixtures.anotherFooDoc, 'updated')
+
+        expect(fooUpdateHandler).toHaveBeenCalledTimes(2)
+        expect(fooUpdateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+        expect(fooUpdateHandler).toHaveBeenCalledWith(fixtures.anotherFooDoc)
+
+        expect(fooDocumentUpdateHandler).toHaveBeenCalledTimes(1)
+        expect(fooDocumentUpdateHandler).toHaveBeenCalledWith(
+          fixtures.anotherFooDoc
+        )
+      })
+
+      it('should receive deleted documents of given doctypes', () => {
+        const fooDeleteHandler = jest.fn()
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'deleted', fooDeleteHandler)
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+        server.sendDoc(fixtures.barDoc, 'deleted')
+
+        expect(fooDeleteHandler).toHaveBeenCalledTimes(1)
+        expect(fooDeleteHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
+
+      it("should receive 'deleted' events on documents", () => {
+        const fooDeleteHandler = jest.fn()
+        const fooDocumentDeleteHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'deleted', fooDeleteHandler)
+        realtime.subscribe(
+          { ...fooSelector, id: fixtures.anotherFooDoc.id },
+          'deleted',
+          fooDocumentDeleteHandler
+        )
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+        server.sendDoc(fixtures.anotherFooDoc, 'deleted')
+
+        expect(fooDeleteHandler).toHaveBeenCalledTimes(2)
+        expect(fooDeleteHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+        expect(fooDeleteHandler).toHaveBeenCalledWith(fixtures.anotherFooDoc)
+
+        expect(fooDocumentDeleteHandler).toHaveBeenCalledTimes(1)
+        expect(fooDocumentDeleteHandler).toHaveBeenCalledWith(
+          fixtures.anotherFooDoc
+        )
+      })
+    })
+
+    describe('unsubscribe', () => {
+      it('should stop receiving created documents with given doctype', () => {
+        const fooCreateHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'created', fooCreateHandler)
+        realtime.unsubscribe(fooSelector)
+
+        server.sendDoc(fixtures.fooDoc, 'created')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should stop receiving updated documents with given doctype', () => {
+        const fooUpdateHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'updated', fooUpdateHandler)
+        realtime.unsubscribe(fooSelector)
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+
+        expect(fooUpdateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should stop receiving updated document with given id', () => {
+        const fooUpdateHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(
+          { ...fooSelector, id: fixtures.fooDoc.id },
+          'updated',
+          fooUpdateHandler
+        )
+        realtime.unsubscribe({ ...fooSelector, id: fixtures.fooDoc.id })
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+
+        expect(fooUpdateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should stop receiving deleted documents with given doctype', () => {
+        const fooDeleteHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(fooSelector, 'deleted', fooDeleteHandler)
+        realtime.unsubscribe(fooSelector)
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+
+        expect(fooDeleteHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should stop receiving deleted document with given id', () => {
+        const fooDeleteHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+        realtime.subscribe(
+          { ...fooSelector, id: fixtures.fooDoc.id },
+          'deleted',
+          fooDeleteHandler
+        )
+        realtime.unsubscribe({ ...fooSelector, id: fixtures.fooDoc.id })
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+
+        expect(fooDeleteHandler).toHaveBeenCalledTimes(0)
       })
     })
   })
