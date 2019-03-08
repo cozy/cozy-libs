@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.34.2"></a>
+## [0.34.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.34.1...cozy-harvest-lib@0.34.2) (2019-03-08)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency react-markdown to 4.0.6 ([#310](https://github.com/cozy/cozy-libs/issues/310)) ([c0b1845](https://github.com/cozy/cozy-libs/commit/c0b1845))
+
+
+
+
 <a name="0.34.1"></a>
 ## [0.34.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.34.0...cozy-harvest-lib@0.34.1) (2019-03-08)
 
