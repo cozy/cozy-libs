@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "cozy-client": "6.3.0",
-    "cozy-realtime": "1.2.8",
+    "cozy-realtime": "2.0.3",
     "cozy-ui": "19.3.0",
     "final-form": "4.11.1",
     "lodash": "4.17.11",
