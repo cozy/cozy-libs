@@ -75,7 +75,7 @@ export class AccountField extends PureComponent {
         this.props,
         t(`fields.${name}.placeholder`, { _: '' })
       ),
-      side: !required && t('accountForm.fields.optional'),
+      side: required ? null : t('accountForm.fields.optional'),
       size: 'medium'
     }
     const passwordLabels = {

@@ -60,7 +60,7 @@ exports[`AccountForm AccountField render a dropdown field 1`] = `
     placeholder="fields.multiple.placeholder"
     required={true}
     secondaryLabels={Object {}}
-    side={false}
+    side={null}
     size="medium"
     t={
       [MockFunction] {
