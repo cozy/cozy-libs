@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.34.1"></a>
+## [0.34.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.34.0...cozy-harvest-lib@0.34.1) (2019-03-08)
+
+
+### Bug Fixes
+
+* **harvest:** Prevent undefined captureStackTrace() 🚑 ([1be3e82](https://github.com/cozy/cozy-libs/commit/1be3e82))
+
+
+
+
 <a name="0.34.0"></a>
 # [0.34.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.33.0...cozy-harvest-lib@0.34.0) (2019-03-07)
 
