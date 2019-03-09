@@ -2,6 +2,8 @@
 
 const { declare } = require('@babel/helper-plugin-utils')
 const browserslist = require('browserslist-config-cozy')
+const { validate, isOfType } = require('./validate')
+const mapValues = require('lodash/mapValues')
 
 const browserEnv = {
   targets: browserslist,
@@ -16,25 +18,35 @@ const nodeEnv = {
   useBuiltIns: false
 }
 
+const optionConfigs = {
+  node: {
+    default: false,
+    validator: isOfType('boolean')
+  },
+  react: {
+    default: true,
+    validator: isOfType('boolean')
+  },
+  transformRegenerator: {
+    default: true,
+    validator: isOfType('boolean')
+  }
+}
+
+const validators = mapValues(optionConfigs, x => x.validator)
+const defaultOptions = mapValues(optionConfigs, x => x.default)
+
 module.exports = declare((api, options) => {
-  // default options
-  let presetOptions = {
-    node: false,
-    react: true,
-    transformRegenerator: true
+  const presetOptions = {
+    ...defaultOptions,
+    ...options
   }
 
-  if (options) {
-    for (let option in presetOptions) {
-      if (options.hasOwnProperty(option)) {
-        if (typeof options[option] !== 'boolean') {
-          throw new Error(
-            `Preset cozy-app '${option}' option must be a boolean.`
-          )
-        }
-        presetOptions[option] = options[option]
-      }
-    }
+  try {
+    validate(presetOptions, validators)
+  } catch (e) {
+    e.message = `babel-preset-cozy-app : Config validation error : ${e.message}`
+    throw e
   }
 
   const { node, react, transformRegenerator } = presetOptions
