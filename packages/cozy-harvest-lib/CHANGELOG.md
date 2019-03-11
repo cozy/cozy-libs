@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.35.0"></a>
+# [0.35.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.34.3...cozy-harvest-lib@0.35.0) (2019-03-11)
+
+
+### Features
+
+* **harvest:** Handle key up on the whole AccountForm 📝 ([5b097db](https://github.com/cozy/cozy-libs/commit/5b097db))
+
+
+
+
 <a name="0.34.3"></a>
 ## [0.34.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.34.2...cozy-harvest-lib@0.34.3) (2019-03-11)
 
