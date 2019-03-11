@@ -45,7 +45,6 @@ export class AccountField extends PureComponent {
       initialValue,
       label,
       name,
-      onKeyUp,
       required,
       role,
       t,
@@ -70,7 +69,6 @@ export class AccountField extends PureComponent {
       label: t(`fields.${localeKey}.label`, {
         _: t(`legacy.fields.${localeKey}.label`, { _: name })
       }),
-      onKeyUp: onKeyUp,
       placeholder: getFieldPlaceholder(
         this.props,
         t(`fields.${name}.placeholder`, { _: '' })
@@ -116,7 +114,6 @@ AccountField.propTypes = {
   initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   label: PropTypes.string,
   name: PropTypes.string.isRequired,
-  onKeyUp: PropTypes.func,
   role: PropTypes.string,
   type: PropTypes.oneOf(['date', 'dropdown', 'email', 'password', 'text']),
   t: PropTypes.func
@@ -148,7 +145,7 @@ export class AccountFields extends PureComponent {
     }))
 
     return (
-      <div>
+      <div onKeyUp={onKeyUp}>
         {namedFields.map((field, index) => (
           <FinalFormField
             key={index}
@@ -166,7 +163,6 @@ export class AccountFields extends PureComponent {
                   initialValues[field.name] ||
                   initialValues[getEncryptedFieldName(field.name)]
                 }
-                onKeyUp={onKeyUp}
                 t={t}
               />
             )}
