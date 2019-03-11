@@ -107,6 +107,7 @@ const mkConfig = (api, options) => {
 module.exports = declare(mkConfig)
 
 if (require.main === module) {
+  const options = process.argv[2] ? JSON.parse(process.argv[2]) : {}
   // eslint-disable-next-line no-console
-  console.log(JSON.stringify(mkConfig(null, {}), null, 2))
+  console.log(JSON.stringify(mkConfig(null, options), null, 2))
 }
