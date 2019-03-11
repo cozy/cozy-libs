@@ -1,5 +1,4 @@
-import { Server } from 'mock-socket'
-import realtime, { getListeners, getSocket, getCozySocket } from '../src/index'
+import ServerMock from './ServerMock.js'
 
 const MOCK_SERVER_DOMAIN = 'localhost:8880'
 const REALTIME_URL = `ws://${MOCK_SERVER_DOMAIN}/realtime/`
@@ -13,19 +12,37 @@ const mockConfig = {
 // mock-socket server
 let server
 jest.useFakeTimers() // mock-socket use timers to delay onopen call
+
+const fixtures = {
+  // Main documents sent by socket server
+  fooDoc: { type: 'io.cozy.foo', id: '8ddb5dd969ac40a8a42abe8511605364' },
+  anotherFooDoc: {
+    type: 'io.cozy.foo',
+    id: 'e14cacd28fd84328bd43a394d627b89a'
+  },
+  barDoc: { type: 'io.cozy.bar', id: 'f6ad50b13d6340759a57497500d75381' }
+}
+
+let realtime
+
 describe('(cozy-realtime) API: ', () => {
+  beforeEach(() => {
+    jest.clearAllMocks()
+    jest.resetModules()
+
+    realtime = require('../src/index').default
+    server = new ServerMock(REALTIME_URL)
+  })
+
+  afterEach(() => {
+    server.stop()
+  })
+
   describe('subscribe all docs:', () => {
-    beforeEach(() => {
-      jest.clearAllMocks()
-      jest.resetModules()
-      server = new Server(REALTIME_URL)
-    })
-
-    afterEach(() => {
-      server.stop()
-    })
-
     it('should have a correctly configured socket, cozySocket and listeners on subscribe call and reset listeners on unsubscribe (all docs)', async () => {
+      const getListeners = require('../src/index').getListeners
+      const getCozySocket = require('../src/index').getCozySocket
+      const getSocket = require('../src/index').getSocket
       const subscription = realtime
         .subscribe(mockConfig, 'io.cozy.mocks')
         .onCreate(jest.fn())
@@ -43,6 +60,9 @@ describe('(cozy-realtime) API: ', () => {
     })
 
     it('should have a correctly configured socket, cozySocket and listeners on subscribe call and reset listeners on unsubscribe (one doc)', async () => {
+      const getListeners = require('../src/index').getListeners
+      const getCozySocket = require('../src/index').getCozySocket
+      const getSocket = require('../src/index').getSocket
       const subscription = realtime
         .subscribe(mockConfig, 'io.cozy.mocks', 'id1234')
         .onCreate(jest.fn())
@@ -57,6 +77,202 @@ describe('(cozy-realtime) API: ', () => {
       subscription.unsubscribe()
       jest.runAllTimers()
       expect(getListeners().size).toBe(0)
+    })
+  })
+
+  describe('subscribe', () => {
+    it('should send AUTH message', () => {
+      realtime.subscribe(mockConfig, 'io.cozy.foo')
+
+      server.stepForward()
+
+      expect(
+        server.received({
+          method: 'AUTH',
+          payload: mockConfig.token
+        })
+      ).toBe(true)
+    })
+
+    describe('onCreate', () => {
+      it('should send SUBSCRIBE message', async () => {
+        const getSocket = require('../src/index').getSocket
+
+        realtime.subscribe(mockConfig, 'io.cozy.foo').onCreate(jest.fn())
+
+        server.stepForward()
+        await getSocket()
+        jest.runAllTimers()
+
+        expect(
+          server.received({
+            method: 'SUBSCRIBE',
+            payload: { type: 'io.cozy.foo' }
+          })
+        ).toBe(true)
+      })
+
+      it("should receive 'created' events on doctypes", () => {
+        const fooCreateHandler = jest.fn()
+        realtime.subscribe(mockConfig, 'io.cozy.foo').onCreate(fooCreateHandler)
+        jest.runAllTimers()
+
+        server.sendDoc(fixtures.fooDoc, 'created')
+        server.sendDoc(fixtures.barDoc, 'created')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(1)
+        expect(fooCreateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
+    })
+
+    describe('onUpdate', () => {
+      it("should receive 'updated' events on doctypes", () => {
+        const fooUpdateHandler = jest.fn()
+        realtime.subscribe(mockConfig, 'io.cozy.foo').onUpdate(fooUpdateHandler)
+        jest.runAllTimers()
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+        server.sendDoc(fixtures.barDoc, 'updated')
+
+        expect(fooUpdateHandler).toHaveBeenCalledTimes(1)
+        expect(fooUpdateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
+
+      it("should receive 'updated' events on documents", () => {
+        const fooUpdateHandler = jest.fn()
+        const fooDocumentUpdateHandler = jest.fn()
+        realtime.subscribe(mockConfig, 'io.cozy.foo').onUpdate(fooUpdateHandler)
+        realtime
+          .subscribe(mockConfig, 'io.cozy.foo', {
+            docId: fixtures.anotherFooDoc.id
+          })
+          .onUpdate(fooDocumentUpdateHandler)
+        jest.runAllTimers()
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+        server.sendDoc(fixtures.anotherFooDoc, 'updated')
+
+        expect(fooUpdateHandler).toHaveBeenCalledTimes(2)
+        expect(fooUpdateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+        expect(fooUpdateHandler).toHaveBeenCalledWith(fixtures.anotherFooDoc)
+
+        expect(fooDocumentUpdateHandler).toHaveBeenCalledTimes(1)
+        expect(fooDocumentUpdateHandler).toHaveBeenCalledWith(
+          fixtures.anotherFooDoc
+        )
+      })
+    })
+
+    describe('onDelete', () => {
+      it("should receive 'deleted' events on doctypes", () => {
+        const fooDeleteHandler = jest.fn()
+        realtime.subscribe(mockConfig, 'io.cozy.foo').onDelete(fooDeleteHandler)
+        jest.runAllTimers()
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+        server.sendDoc(fixtures.barDoc, 'deleted')
+
+        expect(fooDeleteHandler).toHaveBeenCalledTimes(1)
+        expect(fooDeleteHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
+
+      it("should receive 'deleted' events on documents", () => {
+        const fooDeleteHandler = jest.fn()
+        const fooDocumentDeleteHandler = jest.fn()
+
+        realtime.subscribe(mockConfig, 'io.cozy.foo').onDelete(fooDeleteHandler)
+
+        realtime
+          .subscribe(mockConfig, 'io.cozy.foo', {
+            docId: fixtures.anotherFooDoc.id
+          })
+          .onDelete(fooDocumentDeleteHandler)
+        jest.runAllTimers()
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+        server.sendDoc(fixtures.anotherFooDoc, 'deleted')
+
+        expect(fooDeleteHandler).toHaveBeenCalledTimes(2)
+        expect(fooDeleteHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+        expect(fooDeleteHandler).toHaveBeenCalledWith(fixtures.anotherFooDoc)
+
+        expect(fooDocumentDeleteHandler).toHaveBeenCalledTimes(1)
+        expect(fooDocumentDeleteHandler).toHaveBeenCalledWith(
+          fixtures.anotherFooDoc
+        )
+      })
+    })
+
+    describe('unsubscribe', () => {
+      it('should unsubscribe from onCreate ', () => {
+        const fooCreateHandler = jest.fn()
+
+        const subscription = realtime
+          .subscribe(mockConfig, 'io.cozy.foo')
+          .onCreate(fooCreateHandler)
+
+        subscription.unsubscribe()
+
+        server.sendDoc(fixtures.fooDoc, 'created')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should unsubscribe doctype from onUpdate', () => {
+        const fooCreateHandler = jest.fn()
+
+        const subscription = realtime
+          .subscribe(mockConfig, 'io.cozy.foo')
+          .onUpdate(fooCreateHandler)
+
+        subscription.unsubscribe()
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should unsubscribe document from onUpdate', () => {
+        const fooCreateHandler = jest.fn()
+
+        const subscription = realtime
+          .subscribe(mockConfig, 'io.cozy.foo', { docID: fixtures.fooDoc.id })
+          .onUpdate(fooCreateHandler)
+
+        subscription.unsubscribe()
+
+        server.sendDoc(fixtures.fooDoc, 'updated')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should unsubscribe doctype from onDelete', () => {
+        const fooCreateHandler = jest.fn()
+
+        const subscription = realtime
+          .subscribe(mockConfig, 'io.cozy.foo')
+          .onDelete(fooCreateHandler)
+
+        subscription.unsubscribe()
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
+
+      it('should unsubscribe document from onDelete', () => {
+        const fooCreateHandler = jest.fn()
+
+        const subscription = realtime
+          .subscribe(mockConfig, 'io.cozy.foo', { docID: fixtures.fooDoc.id })
+          .onDelete(fooCreateHandler)
+
+        subscription.unsubscribe()
+
+        server.sendDoc(fixtures.fooDoc, 'deleted')
+
+        expect(fooCreateHandler).toHaveBeenCalledTimes(0)
+      })
     })
   })
 })

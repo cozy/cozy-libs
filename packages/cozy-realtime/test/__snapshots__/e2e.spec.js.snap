@@ -39,6 +39,9 @@ WebSocket {
     "open": Array [
       [Function],
     ],
+    "server::message": Array [
+      [Function],
+    ],
   },
   "protocol": "io.cozy.websocket",
   "readyState": 1,
@@ -83,6 +86,9 @@ WebSocket {
       [Function],
     ],
     "open": Array [
+      [Function],
+    ],
+    "server::message": Array [
       [Function],
     ],
   },
