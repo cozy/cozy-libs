@@ -16,6 +16,8 @@ import { KonnectorJobError } from '../helpers/konnectors'
 import Manifest from '../Manifest'
 import OAuthForm from './OAuthForm'
 
+const IDENTIFIER = 'identifier'
+
 const predefinedLabels = [
   'answer',
   'birthdate',
@@ -38,6 +40,24 @@ const legacyLabels = [
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
 export class AccountField extends PureComponent {
+  constructor(props) {
+    super(props)
+    // Ref to identifier input
+    this.inputRef = null
+    this.setInputRef = this.setInputRef.bind(this)
+  }
+
+  componentDidMount() {
+    const { role } = this.props
+    if (role === IDENTIFIER && this.inputRef) {
+      this.inputRef.focus()
+    }
+  }
+
+  setInputRef(element) {
+    this.inputRef = element
+  }
+
   render() {
     const {
       disabled,
@@ -57,7 +77,7 @@ export class AccountField extends PureComponent {
         ? label
         : name
 
-    const isEditable = !(role === 'identifier' && initialValue)
+    const isEditable = !(role === IDENTIFIER && initialValue)
 
     const fieldProps = {
       ...this.props,
@@ -66,6 +86,7 @@ export class AccountField extends PureComponent {
       disabled: disabled || !isEditable,
       error: hasError,
       fullwidth: true,
+      inputRef: this.setInputRef,
       label: t(`fields.${localeKey}.label`, {
         _: t(`legacy.fields.${localeKey}.label`, { _: name })
       }),
