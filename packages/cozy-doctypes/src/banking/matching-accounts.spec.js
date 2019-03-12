@@ -47,11 +47,10 @@ fnDescribe('account matching', () => {
         path.join(fixturePath, `${bank}.bi.anonymized.json`),
         path.join(fixturePath, `${bank}.linxo.anonymized.json`)
       )
-      const fmtedResults = results.map(
-        res =>
-          res.match
-            ? `✅ ${res.account.label} -> ${res.match.label} via ${res.method}`
-            : `⚠️ ${res.account.label} unmatched`
+      const fmtedResults = results.map(res =>
+        res.match
+          ? `✅ ${res.account.label} -> ${res.match.label} via ${res.method}`
+          : `⚠️ ${res.account.label} unmatched`
       )
       expect(fmtedResults).toMatchSnapshot()
     })
