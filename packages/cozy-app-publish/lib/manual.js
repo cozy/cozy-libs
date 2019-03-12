@@ -11,11 +11,21 @@ const getManifestManual = ctx => {
 }
 
 const getAppVersionManual = async ctx => {
-  let autoVersion
+  let tagVersion, devVersion
   if (!ctx.manualVersion) {
-    autoVersion = await tags.getAutoVersion()
+    const versionTags = (await tags.getVersionTags()).filter(tag =>
+      ctx.tagPrefix ? ctx.tagPrefix === tag.prefix : true
+    )
+    tagVersion = versionTags.length > 0 ? versionTags[0].fullVersion : undefined
+    if (tagVersion) {
+      tags.assertOKWithVersion(tagVersion, ctx.appManifestObj.version)
+    } else {
+      devVersion = await tags.getDevVersion(ctx.appManifestObj.version)
+    }
   }
-  return autoVersion || ctx.manualVersion || ctx.appManifestObj.version
+  return (
+    tagVersion || devVersion || ctx.manualVersion || ctx.appManifestObj.version
+  )
 }
 
 const manualPublish = publisher({

@@ -59,6 +59,10 @@ const program = new commander.Command(pkg.name)
     '--postpublish <script-path>',
     'Hook to process parameters just after publishing, typically to deploy app'
   )
+  .option(
+    '--tag-prefix <tag-prefix>',
+    'When publishing from a monorepo, only consider tags with tagPrefix, ex: cozy-banks/1.0.1.'
+  )
   .option('--yes', 'Force confirmation when publishing manually')
   .option(
     '--registry-url <url>',
@@ -92,7 +96,8 @@ try {
     yes: program.yes,
     registryUrl: program.registryUrl,
     space: program.space,
-    verbose: program.verbose
+    verbose: program.verbose,
+    tagPrefix: program.tagPrefix
   }).catch(handleError)
 } catch (error) {
   handleError(error)
@@ -135,6 +140,7 @@ async function publishApp(cliOptions) {
       registryToken: cliOptions.token,
       registryUrl: cliOptions.registryUrl,
       spaceName: cliOptions.space,
+      tagPrefix: cliOptions.tagPrefix,
       verbose: cliOptions.verbose,
       yes: cliOptions.yes
     })

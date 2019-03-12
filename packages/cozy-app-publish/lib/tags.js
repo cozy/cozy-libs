@@ -1,7 +1,7 @@
 const git = require('./git')
-const fs = require('fs')
 
-const getDevVersion = async (shortCommit, pkgVersion) => {
+const getDevVersion = async (pkgVersion, shortCommit_) => {
+  const shortCommit = shortCommit_ || (await git.getShortCommit())
   return `${pkgVersion}-dev.${shortCommit}${Date.now()}`
 }
 
@@ -48,7 +48,7 @@ const parse = tag => {
   }
 }
 
-const assertTagOK = (tagInfo, pkgVersion) => {
+const assertOKWithVersion = (tagInfo, pkgVersion) => {
   if (!tagInfo.dev && tagInfo.version && tagInfo.version !== pkgVersion) {
     throw new Error(
       `The version number is different between package.json (${pkgVersion}) and tag (${
@@ -56,10 +56,6 @@ const assertTagOK = (tagInfo, pkgVersion) => {
       })`
     )
   }
-}
-
-const readPackage = () => {
-  return JSON.parse(fs.readFileSync('package.json'))
 }
 
 /**
@@ -70,24 +66,14 @@ const readPackage = () => {
  * If it is not a dev version, it throws if the tag does not correspond
  * to the `pkgVersion`
  */
-const getAutoVersion = async (shortCommit_, currentTags_) => {
-  const pkg = readPackage()
-  const pkgVersion = pkg.version
-  const shortCommit = shortCommit_ || (await git.getShortCommit())
-  const currentTags = currentTags_ || (await git.getCurrentTags())
-  const tagInfos = currentTags.map(parse)
-  const tagInfo =
-    tagInfos.slice(-1)[0] || parse(await getDevVersion(shortCommit, pkgVersion))
-
-  if (!tagInfo.dev) {
-    assertTagOK(tagInfo, pkgVersion)
-  }
-  return tagInfo.fullVersion
+const getVersionTags = async () => {
+  const currentTags = await git.getCurrentTags()
+  return currentTags.map(parse).filter(Boolean)
 }
 
 const main = async () => {
-  const version = await getAutoVersion()
-  console.log(version)
+  const tags = await getVersionTags()
+  console.log(tags)
 }
 
 if (require.main === module) {
@@ -98,7 +84,8 @@ if (require.main === module) {
 }
 
 module.exports = {
-  getAutoVersion,
+  getVersionTags,
   getDevVersion,
-  parse
+  parse,
+  assertOKWithVersion
 }

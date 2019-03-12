@@ -157,4 +157,25 @@ describe('Travis publishing script', () => {
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(postpublish).toHaveBeenCalledTimes(1)
   })
+
+  it('should support prefix', async () => {
+    const badTag = 'cozy-banks/2.1.8-beta.1'
+    const goodTag = 'cozy-drive/2.1.8-beta.2'
+    jest.spyOn(global.Date, 'now').mockReturnValue(123456)
+    for (const tag of [badTag, goodTag]) {
+      publishLib.mockReset()
+      getTravisVariables.mockImplementation(() => ({
+        TRAVIS_BUILD_DIR: mockCommons.buildDir,
+        TRAVIS_TAG: tag,
+        TRAVIS_COMMIT: mockCommons.commitHash,
+        TRAVIS_REPO_SLUG: mockCommons.slug,
+        // encrypted variables
+        REGISTRY_TOKEN: mockCommons.token
+      }))
+      const options = getOptions()
+      await travisScript({ ...options, tagPrefix: 'cozy-drive' })
+      expect(publishLib).toHaveBeenCalledTimes(1)
+      expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
+    }
+  })
 })
