@@ -122,10 +122,8 @@ class Transaction extends Document {
     const findByVendorId = transaction =>
       localTransactions.find(t => t.vendorId === transaction.vendorId)
 
-    const groups = groupBy(
-      remoteTransactions,
-      transaction =>
-        findByVendorId(transaction) ? 'updatedTransactions' : 'newTransactions'
+    const groups = groupBy(remoteTransactions, transaction =>
+      findByVendorId(transaction) ? 'updatedTransactions' : 'newTransactions'
     )
 
     let newTransactions = groups.newTransactions || []
