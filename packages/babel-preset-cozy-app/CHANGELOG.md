@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.0"></a>
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.3.3...babel-preset-cozy-app@1.4.0) (2019-03-12)
+
+
+### Features
+
+* Ability to configure transformRegenerator ([8f928c3](https://github.com/cozy/cozy-libs/commit/8f928c3))
+* Add presetEnv option ([dbd7e49](https://github.com/cozy/cozy-libs/commit/dbd7e49))
+* Can disable transformRuntime plugin ([37ee490](https://github.com/cozy/cozy-libs/commit/37ee490))
+* Check result when running in CLI ([791a005](https://github.com/cozy/cozy-libs/commit/791a005))
+* Deprecated transformRegenerator option ([011299f](https://github.com/cozy/cozy-libs/commit/011299f))
+
+
+
+
 <a name="1.3.3"></a>
 ## [1.3.3](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.3.1...babel-preset-cozy-app@1.3.3) (2019-03-12)
 
