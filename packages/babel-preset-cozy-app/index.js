@@ -14,6 +14,8 @@ const merge = require('lodash/merge')
 
 const presetEnvBrowserOptions = {
   targets: browserslist,
+  // https://github.com/facebook/create-react-app/pull/5278
+  exclude: ['transform-typeof-symbol'],
   useBuiltIns: false
 }
 
