@@ -5,6 +5,8 @@
 const commander = require('commander')
 const colorize = require('./utils/colorize')
 const scripts = require('./index')
+const pickBy = require('lodash/pickBy')
+const capitalize = require('lodash/capitalize')
 
 const pkg = require('./package.json')
 
@@ -107,45 +109,34 @@ function _getPublishMode() {
 
 async function publishApp(cliOptions) {
   const publishMode = _getPublishMode()
-  if (publishMode === MODES.TRAVIS) {
-    console.log()
-    console.log(`${colorize.bold('Travis')} ${colorize.blue('publish mode')}`)
-    console.log()
-    try {
-      await scripts.travis({
-        registryToken: cliOptions.token,
-        buildDir: cliOptions.buildDir,
-        buildCommit: cliOptions.buildCommit,
-        buildUrl: cliOptions.buildUrl,
-        prepublishHook: cliOptions.prepublishHook,
-        postpublishHook: cliOptions.postpublishHook,
-        registryUrl: cliOptions.registryUrl,
-        spaceName: cliOptions.space,
-        verbose: cliOptions.verbose
-      })
-    } catch (error) {
-      console.error(`↳ ❌  ${error.message}`)
-      process.exit(1)
-    }
-  } else if (publishMode === MODES.MANUAL) {
-    console.log()
-    console.log(`${colorize.bold('Manual')} ${colorize.blue('publish mode')}`)
-    console.log()
-    scripts.manual({
-      registryToken: cliOptions.token,
-      buildDir: cliOptions.buildDir,
+  const acceptedModes = Object.values(MODES).includes(publishMode)
+  if (!acceptedModes.includes(publishMode)) {
+    throw new Error(
+      `Absent or unrecognized mode, you passed ${publishMode}. Accepted modes: ${acceptedModes}.`
+    )
+  }
+
+  const publishFn = scripts[publishMode]
+
+  console.log()
+  console.log(
+    `${colorize.bold(capitalize(publishMode))} ${colorize.blue('publish mode')}`
+  )
+  console.log()
+  return publishFn(
+    pickBy({
       appBuildUrl: cliOptions.buildUrl,
+      buildCommit: cliOptions.buildCommit,
+      buildDir: cliOptions.buildDir,
+      buildUrl: cliOptions.buildUrl,
       manualVersion: cliOptions.manualVersion,
-      prepublishHook: cliOptions.prepublishHook,
       postpublishHook: cliOptions.postpublishHook,
-      yes: cliOptions.yes,
+      prepublishHook: cliOptions.prepublishHook,
+      registryToken: cliOptions.token,
       registryUrl: cliOptions.registryUrl,
       spaceName: cliOptions.space,
-      verbose: cliOptions.verbose
+      verbose: cliOptions.verbose,
+      yes: cliOptions.yes
     })
-  } else {
-    // no modes found or detected (should not happen since we have default mode)
-    console.log()
-    throw new Error('No modes found or detected. Publishing failed.')
-  }
+  )
 }
