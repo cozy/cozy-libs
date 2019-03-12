@@ -2,7 +2,7 @@
 
 const { declare } = require('@babel/helper-plugin-utils')
 const browserslist = require('browserslist-config-cozy')
-const { validate, isOfType } = require('./validate')
+const { validate, isOfType, deprecated } = require('./validate')
 const mapValues = require('lodash/mapValues')
 const merge = require('lodash/merge')
 
@@ -29,8 +29,11 @@ const optionConfigs = {
     validator: isOfType('boolean')
   },
   transformRegenerator: {
-    default: true,
-    validator: isOfType('boolean')
+    default: undefined,
+    validator: deprecated(
+      isOfType('boolean'),
+      'Please use transformRuntime options.'
+    )
   },
   presetEnv: {
     default: {},
@@ -68,6 +71,11 @@ const mkConfig = (api, options) => {
 
   const config = {}
 
+  // transformRegenerator is deprecated, should be removed
+  if (transformRegenerator !== undefined) {
+    transformRuntime.regenerator = transformRegenerator
+  }
+
   // Latest ECMAScript features on previous browsers versions
   const presetEnvOptions = {
     ...(node ? presetEnvNodeOptions : presetEnvBrowserOptions),
@@ -94,7 +102,7 @@ const mkConfig = (api, options) => {
       }
     ]
   ]
-  if (!node && transformRegenerator) {
+  if (!node) {
     plugins.push(
       // Polyfills generator functions (for async/await usage)
       [require.resolve('@babel/plugin-transform-runtime'), transformRuntime]

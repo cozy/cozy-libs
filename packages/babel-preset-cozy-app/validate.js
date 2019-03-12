@@ -13,7 +13,15 @@ const validate = (obj, validators) => {
   }
 }
 
+const deprecated = (fn, msg) => (value, key) => {
+  if (value !== undefined) {
+    // eslint-disable-next-line no-console
+    console.warn(key, 'is deprecated.', msg)
+  }
+}
+
 module.exports = {
   validate,
-  isOfType
+  isOfType,
+  deprecated
 }
