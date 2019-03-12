@@ -1,3 +1,6 @@
+import get from 'lodash/get'
+import { KonnectorJobError } from './konnectors'
+
 const DEFAULT_CRON = '0 0 0 * * 0' // Once a week, sunday at midnight
 
 /**
@@ -29,8 +32,21 @@ export const buildAttributes = ({
   }
 }
 
+/**
+ * Get error for a given trigger document
+ * @param  {Object} trigger io.cozy.trigger as returned by stack
+ * @return {KonnectorJobError}         [description]
+ */
+export const getError = trigger => {
+  const status = get(trigger, 'current_state.status')
+  return status === 'errored'
+    ? new KonnectorJobError(get(trigger, 'current_state.last_error'))
+    : null
+}
+
 const helpers = {
-  buildAttributes
+  buildAttributes,
+  getError
 }
 
 export default helpers

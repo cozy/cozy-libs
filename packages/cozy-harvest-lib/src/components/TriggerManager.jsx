@@ -34,6 +34,7 @@ export class TriggerManager extends Component {
 
     this.state = {
       account: props.account,
+      error: triggers.getError(props.trigger),
       status: IDLE,
       trigger: props.trigger
     }
@@ -165,7 +166,7 @@ export class TriggerManager extends Component {
   }
 
   render() {
-    const { konnector, running } = this.props
+    const { konnector, running, showError } = this.props
     const { account, error, status } = this.state
     const submitting = status === RUNNING || running
 
@@ -175,6 +176,7 @@ export class TriggerManager extends Component {
         error={error}
         konnector={konnector}
         onSubmit={this.handleSubmit}
+        showError={showError}
         submitting={submitting}
       />
     )
@@ -184,6 +186,7 @@ export class TriggerManager extends Component {
 TriggerManager.propTypes = {
   account: PropTypes.object,
   konnector: PropTypes.object.isRequired,
+  showError: PropTypes.bool,
   trigger: PropTypes.object,
   running: PropTypes.bool,
   // mutations

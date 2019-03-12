@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 
 import { TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
+import { KonnectorJobError } from 'helpers/konnectors'
 
 const fixtures = {
   data: {
@@ -145,38 +146,33 @@ const onLoginSuccessSpy = jest.fn()
 
 const tMock = jest.fn().mockReturnValue('/Administrative')
 
+const props = {
+  addPermission: addPermissionMock,
+  addReferencesTo: addReferencesToMock,
+  konnector: fixtures.konnector,
+  createTrigger: createTriggerMock,
+  createDirectoryByPath: createDirectoryByPathMock,
+  statDirectoryByPath: statDirectoryByPathMock,
+  launchTrigger: launchTriggerMock,
+  onSuccess: onSuccessSpy,
+  onLoginSuccess: onLoginSuccessSpy,
+  saveAccount: saveAccountMock,
+  t: tMock,
+  waitForLoginSuccess: waitForLoginSuccessMock
+}
+
+const propsWithAccount = {
+  ...props,
+  account: fixtures.createdAccount
+}
+
 const shallowWithoutAccount = konnector =>
   shallow(
-    <TriggerManager
-      addPermission={addPermissionMock}
-      addReferencesTo={addReferencesToMock}
-      konnector={konnector || fixtures.konnector}
-      createTrigger={createTriggerMock}
-      createDirectoryByPath={createDirectoryByPathMock}
-      statDirectoryByPath={statDirectoryByPathMock}
-      launchTrigger={launchTriggerMock}
-      onSuccess={onSuccessSpy}
-      onLoginSuccess={onLoginSuccessSpy}
-      saveAccount={saveAccountMock}
-      t={tMock}
-      waitForLoginSuccess={waitForLoginSuccessMock}
-    />
+    <TriggerManager {...props} konnector={konnector || fixtures.konnector} />
   )
 
 const shallowWithAccount = () =>
-  shallow(
-    <TriggerManager
-      account={fixtures.createdAccount}
-      createTrigger={createTriggerMock}
-      konnector={fixtures.konnector}
-      launchTrigger={launchTriggerMock}
-      onSuccess={onSuccessSpy}
-      onLoginSuccess={onLoginSuccessSpy}
-      saveAccount={saveAccountMock}
-      trigger={fixtures.createdTrigger}
-      waitForLoginSuccess={waitForLoginSuccessMock}
-    />
-  )
+  shallow(<TriggerManager {...propsWithAccount} />)
 
 describe('TriggerManager', () => {
   beforeEach(() => {
@@ -202,6 +198,21 @@ describe('TriggerManager', () => {
   it('should render with account', () => {
     const component = shallowWithAccount().getElement()
     expect(component).toMatchSnapshot()
+  })
+
+  it('should store trigger error', () => {
+    const erroredTrigger = {
+      current_state: {
+        last_error: 'VENDOR_DOWN',
+        status: 'errored'
+      }
+    }
+
+    const wrapper = shallow(
+      <TriggerManager {...propsWithAccount} trigger={erroredTrigger} />
+    )
+
+    expect(wrapper.state().error).toEqual(new KonnectorJobError('VENDOR_DOWN'))
   })
 
   describe('handleError', () => {

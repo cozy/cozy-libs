@@ -214,6 +214,132 @@ exports[`AccountForm AccountFields should render encrypted fields with placehold
 </div>
 `;
 
+exports[`AccountForm should always render login error 1`] = `
+<div>
+  <Wrapper
+    error={[Error: LOGIN_FAILED]}
+    konnector={
+      Object {
+        "fields": Object {
+          "passphrase": Object {
+            "type": "password",
+          },
+          "username": Object {
+            "type": "text",
+          },
+        },
+      }
+    }
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <AccountFields
+    container={null}
+    hasError={true}
+    initialValues={Object {}}
+    manifestFields={
+      Object {
+        "passphrase": Object {
+          "encrypted": true,
+          "required": true,
+          "type": "password",
+        },
+        "username": Object {
+          "encrypted": false,
+          "required": true,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+    onKeyUp={[Function]}
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <DefaultButton
+    className="u-mt-2 u-mb-1-half"
+    disabled={false}
+    extension="full"
+    label="accountForm.submit.label"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`AccountForm should not render error 1`] = `
+<div>
+  <AccountFields
+    container={null}
+    hasError={false}
+    initialValues={Object {}}
+    manifestFields={
+      Object {
+        "passphrase": Object {
+          "encrypted": true,
+          "required": true,
+          "type": "password",
+        },
+        "username": Object {
+          "encrypted": false,
+          "required": true,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+    onKeyUp={[Function]}
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <DefaultButton
+    className="u-mt-2 u-mb-1-half"
+    disabled={false}
+    extension="full"
+    label="accountForm.submit.label"
+    onClick={[Function]}
+  />
+</div>
+`;
+
 exports[`AccountForm should redirect to OAuthForm 1`] = `
 <Wrapper
   oauth={
@@ -264,6 +390,84 @@ exports[`AccountForm should render 1`] = `
   <DefaultButton
     className="u-mt-2 u-mb-1-half"
     disabled={true}
+    extension="full"
+    label="accountForm.submit.label"
+    onClick={[Function]}
+  />
+</div>
+`;
+
+exports[`AccountForm should render error 1`] = `
+<div>
+  <Wrapper
+    error={[Error: Test error]}
+    konnector={
+      Object {
+        "fields": Object {
+          "passphrase": Object {
+            "type": "password",
+          },
+          "username": Object {
+            "type": "text",
+          },
+        },
+      }
+    }
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <AccountFields
+    container={null}
+    hasError={false}
+    initialValues={Object {}}
+    manifestFields={
+      Object {
+        "passphrase": Object {
+          "encrypted": true,
+          "required": true,
+          "type": "password",
+        },
+        "username": Object {
+          "encrypted": false,
+          "required": true,
+          "role": "identifier",
+          "type": "text",
+        },
+      }
+    }
+    onKeyUp={[Function]}
+    t={
+      [MockFunction] {
+        "calls": Array [
+          Array [
+            "accountForm.submit.label",
+          ],
+        ],
+        "results": Array [
+          Object {
+            "type": "return",
+            "value": "accountForm.submit.label",
+          },
+        ],
+      }
+    }
+  />
+  <DefaultButton
+    className="u-mt-2 u-mb-1-half"
+    disabled={false}
     extension="full"
     label="accountForm.submit.label"
     onClick={[Function]}
