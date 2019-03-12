@@ -33,12 +33,12 @@
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
-    "babel-jest": "23.6.0",
+    "babel-jest": "24.1.0",
     "babel-preset-cozy-app": "^1.4.0",
     "enzyme": "3.8.0",
     "enzyme-adapter-react-16": "1.7.0",
     "identity-obj-proxy": "3.0.0",
-    "jest": "23.6.0",
+    "jest": "24.1.0",
     "react": "16.7.0",
     "react-dom": "16.7.0"
   }
