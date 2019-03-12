@@ -38,7 +38,7 @@ const program = new commander.Command(pkg.name)
   )
   .option(
     '--build-dir <relative-path>',
-    'Path fo the build directory relative to the current directory (default ./build)'
+    'Path of the build directory relative to the current directory (default ./build)'
   )
   .option('--build-url <url>', 'URL of the application archive')
   .option(
