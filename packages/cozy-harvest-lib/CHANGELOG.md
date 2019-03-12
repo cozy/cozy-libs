@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.36.0"></a>
+# [0.36.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.35.0...cozy-harvest-lib@0.36.0) (2019-03-12)
+
+
+### Features
+
+* **harvest:** Give focus to identifier field ✨ ([1122ff4](https://github.com/cozy/cozy-libs/commit/1122ff4))
+
+
+
+
 <a name="0.35.0"></a>
 # [0.35.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.34.3...cozy-harvest-lib@0.35.0) (2019-03-11)
 
