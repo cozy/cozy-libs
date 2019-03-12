@@ -2,7 +2,13 @@
 
 const { declare } = require('@babel/helper-plugin-utils')
 const browserslist = require('browserslist-config-cozy')
-const { validate, isOfType, deprecated } = require('./validate')
+const {
+  validate,
+  isFalse,
+  isOfType,
+  deprecated,
+  either
+} = require('./validate')
 const mapValues = require('lodash/mapValues')
 const merge = require('lodash/merge')
 
@@ -44,7 +50,7 @@ const optionConfigs = {
       helpers: false,
       regenerator: true
     },
-    validator: isOfType('object')
+    validator: either(isOfType('object'), isFalse)
   }
 }
 
@@ -102,7 +108,7 @@ const mkConfig = (api, options) => {
       }
     ]
   ]
-  if (!node) {
+  if (!node && transformRuntime !== false) {
     plugins.push(
       // Polyfills generator functions (for async/await usage)
       [require.resolve('@babel/plugin-transform-runtime'), transformRuntime]
