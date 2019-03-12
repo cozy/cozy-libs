@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.4.0...babel-preset-cozy-app@1.5.0) (2019-03-12)
+
+
+### Features
+
+* Disable a transform that makes React slower ([035bb4f](https://github.com/cozy/cozy-libs/commit/035bb4f))
+
+
+
+
 <a name="1.4.0"></a>
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.3.3...babel-preset-cozy-app@1.4.0) (2019-03-12)
 
