@@ -5,7 +5,7 @@ describe('[Interapp] Request', () => {
 
   beforeEach(() => {
     cozyClient = {
-      client: {
+      stackClient: {
         fetchJSON: jest.fn().mockReturnValue(Promise.resolve({ data: [] }))
       }
     }
@@ -13,16 +13,16 @@ describe('[Interapp] Request', () => {
   })
 
   it('should initialise with cozyFetchJSON function', () => {
-    expect(request.client).toEqual(cozyClient.client)
+    expect(request.stackClient).toEqual(cozyClient.stackClient)
   })
 
   it('should get an intent', () => {
     request.get()
-    expect(cozyClient.client.fetchJSON).toHaveBeenCalledTimes(1)
+    expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledTimes(1)
   })
 
   it('should post an intent', () => {
     request.post()
-    expect(cozyClient.client.fetchJSON).toHaveBeenCalledTimes(1)
+    expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledTimes(1)
   })
 })

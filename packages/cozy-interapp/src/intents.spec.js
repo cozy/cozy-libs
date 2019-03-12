@@ -2,7 +2,7 @@ import Intents from './intents'
 import { mockAPI, sleep } from './testUtils'
 
 describe('Interapp', () => {
-  let client,
+  let cozyClient,
     intents,
     api = mockAPI()
 
@@ -38,17 +38,17 @@ describe('Interapp', () => {
   }
 
   beforeEach(() => {
-    client = {
-      client: {
+    cozyClient = {
+      stackClient: {
         fetchJSON: jest.fn()
       }
     }
-    intents = new Intents({ client })
-    client.client.fetchJSON.mockImplementation(api.fetch)
+    intents = new Intents({ client: cozyClient })
+    cozyClient.stackClient.fetchJSON.mockImplementation(api.fetch)
   })
 
   it('should initialise with cozy client', () => {
-    expect(intents.request.client).toEqual(client.client)
+    expect(intents.request.stackClient).toEqual(cozyClient.stackClient)
   })
 
   describe('creation', () => {
