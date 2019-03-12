@@ -2,11 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import {
-  AccountForm,
-  AccountFields,
-  AccountField
-} from 'components/AccountForm'
+import { AccountForm } from 'components/AccountForm'
 
 import { KonnectorJobError } from 'helpers/konnectors'
 
@@ -27,18 +23,6 @@ const fixtures = {
         required: false,
         type: 'text'
       }
-    }
-  },
-  sanitized: {
-    username: {
-      encrypted: false,
-      required: true,
-      type: 'text'
-    },
-    passphrase: {
-      encrypted: true,
-      required: true,
-      type: 'password'
     }
   },
   account: {
@@ -257,96 +241,5 @@ describe('AccountForm', () => {
       .simulate('click')
 
     expect(onSubmit).toHaveBeenCalled()
-  })
-
-  describe('AccountFields', () => {
-    it('should render', () => {
-      const component = shallow(
-        <AccountFields manifestFields={fixtures.konnector.fields} t={t} />
-      ).getElement()
-      expect(component).toMatchSnapshot()
-    })
-
-    it('should render encrypted fields with placeholder', () => {
-      const component = shallow(
-        <AccountFields manifestFields={fixtures.sanitized} t={t} />
-      ).getElement()
-      expect(component).toMatchSnapshot()
-    })
-  })
-
-  describe('AccountField', () => {
-    it('should render', () => {
-      const wrapper = shallow(
-        <AccountField {...fixtures.sanitized.username} name="username" t={t} />
-      )
-      const component = wrapper.dive().getElement()
-      expect(component).toMatchSnapshot()
-    })
-
-    it('render a date field', () => {
-      const wrapper = shallow(
-        <AccountField required={true} type="date" name="date" t={t} />
-      )
-      const component = wrapper.dive().getElement()
-      expect(component).toMatchSnapshot()
-    })
-
-    it('render a password field', () => {
-      const wrapper = shallow(
-        <AccountField
-          {...fixtures.sanitized.passphrase}
-          name="passphrase"
-          t={t}
-        />
-      )
-      const component = wrapper.dive().getElement()
-      expect(component).toMatchSnapshot()
-    })
-
-    it('render a dropdown field', () => {
-      const options = [
-        { label: 'Option 1', value: 'option1' },
-        { label: 'Option 2', value: 'option2' }
-      ]
-
-      const wrapper = shallow(
-        <AccountField
-          name="multiple"
-          options={options}
-          required={true}
-          t={t}
-          type="dropdown"
-        />
-      )
-      const component = wrapper.dive().getElement()
-      expect(component).toMatchSnapshot()
-    })
-
-    it('uses predefined label', () => {
-      const wrapper = shallow(
-        <AccountField
-          label="login"
-          name="username"
-          required={true}
-          type="text"
-          t={t}
-        />
-      )
-      expect(wrapper.props().label).toBe('fields.login.label')
-    })
-
-    it('ignores invalid predefined label', () => {
-      const wrapper = shallow(
-        <AccountField
-          label="foo"
-          name="username"
-          required={true}
-          type="text"
-          t={t}
-        />
-      )
-      expect(wrapper.props().label).toBe('fields.username.label')
-    })
   })
 })

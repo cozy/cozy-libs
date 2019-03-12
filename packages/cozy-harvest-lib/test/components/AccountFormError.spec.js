@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { AccountFormError } from 'components/AccountFormError'
+import { AccountFormError } from 'components/AccountForm/Error'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 const fixtures = {
