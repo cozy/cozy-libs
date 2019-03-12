@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.37.0"></a>
+# [0.37.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.36.4...cozy-harvest-lib@0.37.0) (2019-03-12)
+
+
+### Features
+
+* **harvest:** Add showError prop to AccountForm ✨ ([7c90738](https://github.com/cozy/cozy-libs/commit/7c90738))
+* **harvest:** Retrieve error from trigger prop 📝 ([7e3150f](https://github.com/cozy/cozy-libs/commit/7e3150f))
+
+
+
+
 <a name="0.36.4"></a>
 ## [0.36.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.36.3...cozy-harvest-lib@0.36.4) (2019-03-12)
 
