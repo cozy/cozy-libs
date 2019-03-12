@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.19...cozy-interapp@0.4.0) (2019-03-12)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([099cc51](https://github.com/cozy/cozy-libs/commit/099cc51))
+
+
+### Features
+
+* Use stackClient to not print deprecated warning ([0e52ea8](https://github.com/cozy/cozy-libs/commit/0e52ea8))
+
+
+
+
 <a name="0.3.0"></a>
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.19...cozy-interapp@0.3.0) (2019-03-12)
 
