@@ -5,24 +5,37 @@ const getDevVersion = async (shortCommit, pkgVersion) => {
   return `${pkgVersion}-dev.${shortCommit}${Date.now()}`
 }
 
+const PREFIX = String.raw`([a-z-]+)/`
 const VERSION = String.raw`(?:v)?(\d+\.\d+\.\d+)`
 const BETA = String.raw`-beta.(\d{1,4})`
 const DEV = String.raw`-dev\.([a-z0-9]+)`
-const COMPLETE = new RegExp(`^${VERSION}(?:${BETA})?(?:${DEV})?$`)
+const COMPLETE = new RegExp(`^(?:${PREFIX})?${VERSION}(?:${BETA})?(?:${DEV})?$`)
 
+/**
+ * Returns a structured version of a git version tag.
+ * If the tag can be parsed, returns an object containing :
+ *   prefix, channel, beta, dev, version, fullVersion
+ *
+ * If the tag cannot be parsed, returns null.
+ */
 const parse = tag => {
+  if (!tag) {
+    return null
+  }
   const match = tag.match(COMPLETE)
   if (!match) {
     return null
   } else {
-    const version = match[1]
-    const beta = match[2]
-    const dev = match[3]
+    const prefix = match[1]
+    const version = match[2]
+    const beta = match[3]
+    const dev = match[4]
     if (beta && dev) {
       throw new Error(`Invalid tag ${tag}, beta and dev are present`)
     }
     const channel = dev ? 'dev' : beta ? 'beta' : 'stable'
     return {
+      prefix,
       channel: channel,
       beta: beta ? parseInt(beta) : null,
       dev: dev || null,
