@@ -116,7 +116,7 @@ describe('Travis publishing script', () => {
   })
 
   it('should throw an error if the editor is missing', async () => {
-    getTravisVariables.mockImplementationOnce(() => ({
+    getTravisVariables.mockImplementation(() => ({
       TRAVIS_BUILD_DIR: mockAppNoEditorDir,
       TRAVIS_TAG: null,
       TRAVIS_COMMIT: mockCommons.commitHash,

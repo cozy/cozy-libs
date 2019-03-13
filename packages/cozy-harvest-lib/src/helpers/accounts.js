@@ -1,7 +1,7 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 
-import Manifest from '../Manifest'
+import manifest from './manifest'
 
 /**
  * Returns the label for the given account.
@@ -26,7 +26,7 @@ export const build = (konnector, authData) => {
   return {
     auth: authData,
     account_type: konnector.slug,
-    identifier: Manifest.getIdentifier(konnector.fields)
+    identifier: manifest.getIdentifier(konnector.fields)
   }
 }
 
