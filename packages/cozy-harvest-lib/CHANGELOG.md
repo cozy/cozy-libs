@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.37.7"></a>
+## [0.37.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.37.6...cozy-harvest-lib@0.37.7) (2019-03-13)
+
+
+### Bug Fixes
+
+* **harvest:** Login Failed message was wrong 🚑 ([69e3ae6](https://github.com/cozy/cozy-libs/commit/69e3ae6))
+
+
+
+
 <a name="0.37.6"></a>
 ## [0.37.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.37.5...cozy-harvest-lib@0.37.6) (2019-03-13)
 
