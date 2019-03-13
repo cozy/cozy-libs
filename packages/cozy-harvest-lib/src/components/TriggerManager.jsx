@@ -158,10 +158,10 @@ export class TriggerManager extends Component {
     })
 
     if (['queued', 'running'].includes(job.state)) {
-      return onLoginSuccess(trigger)
+      return typeof onLoginSuccess === 'function' && onLoginSuccess(trigger)
     }
 
-    return onSuccess(trigger)
+    return typeof onSuccess === 'function' && onSuccess(trigger)
   }
 
   render() {
@@ -198,7 +198,7 @@ TriggerManager.propTypes = {
   statDirectoryByPath: PropTypes.func,
   waitForLoginSuccess: PropTypes.func.isRequired,
   // hooks
-  onLoginSuccess: PropTypes.func.isRequired,
+  onLoginSuccess: PropTypes.func,
   onSuccess: PropTypes.func
 }
 
