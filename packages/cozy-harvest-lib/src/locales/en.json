@@ -37,7 +37,7 @@
       },
       "LOGIN_FAILED": {
         "title": "Bad credentials",
-        "description": "Bad credentials. Check the konnector fields and run the connection again."
+        "description": "Sorry, you entered an incorrect login or password."
       },
       "LOGIN_FAILED.NEEDS_SECRET": {
         "title": "Needs secret",
