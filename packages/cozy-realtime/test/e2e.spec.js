@@ -469,6 +469,22 @@ describe('(cozy-realtime) API: ', () => {
 
         expect(fooDeleteHandler).toHaveBeenCalledTimes(0)
       })
+
+      xit('should stop receiving document for only one handler', () => {
+        const fooCreateHandler = jest.fn()
+        const anotherFooCreateHandler = jest.fn()
+
+        const realtime = CozyRealtime.init(mockConfig)
+
+        realtime.subscribe(fooSelector, 'created', fooCreateHandler)
+        realtime.subscribe(fooSelector, 'created', anotherFooCreateHandler)
+
+        realtime.unsubscribe(fooSelector, 'created', fooCreateHandler)
+
+        server.sendDoc(fixtures.fooDoc, 'created')
+
+        expect(anotherFooCreateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
+      })
     })
   })
 })
