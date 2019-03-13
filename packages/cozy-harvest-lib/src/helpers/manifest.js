@@ -7,6 +7,43 @@ import _pickBy from 'lodash/pickBy'
 export const ROLE_IDENTIFIER = 'identifier'
 
 /**
+ * We defined "predefined labels", as labels wich can be used in manifest, to
+ * refer to existing locales.
+ * @example
+ * This declaration expect that applications resolve automatically the label
+ * of the field "name", without relying on locales declared in konnector
+ * manifest.
+ * ```
+ * "fields": {
+ *   "name": {
+ *     "label": "firsname",
+ *     "type": "text"
+ *   }
+ * }
+ * ```
+ */
+export const predefinedLabels = [
+  'answer',
+  'birthdate',
+  'code',
+  'date',
+  'email',
+  'firstname',
+  'lastname',
+  'login',
+  'password',
+  'phone'
+]
+
+/**
+ * Out of scope labels already used, should be transferred directly in manifests
+ * in the future.
+ */
+export const legacyLabels = [
+  'branchName' // Used in banking konnectors
+]
+
+/**
  * Legacy login fields declared by some konnectors
  */
 const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']

@@ -5,26 +5,11 @@ import PropTypes from 'react-proptypes'
 import { translate } from 'cozy-ui/react/I18n'
 
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
-import { ROLE_IDENTIFIER } from '../../helpers/manifest'
-
-const predefinedLabels = [
-  'answer',
-  'birthdate',
-  'code',
-  'date',
-  'email',
-  'firstname',
-  'lastname',
-  'login',
-  'password',
-  'phone'
-]
-
-// Out of scope labels already used, should be transferred directly in manifests
-// in the future.
-const legacyLabels = [
-  'branchName' // Used in banking konnectors
-]
+import {
+  legacyLabels,
+  predefinedLabels,
+  ROLE_IDENTIFIER
+} from '../../helpers/manifest'
 
 export class AccountField extends PureComponent {
   constructor(props) {
