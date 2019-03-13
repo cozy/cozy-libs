@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.13.0"></a>
+# [0.13.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.12.3...cozy-app-publish@0.13.0) (2019-03-13)
+
+
+### Bug Fixes
+
+* **publish:** Typo in help ([13e6d8b](https://github.com/cozy/cozy-libs/commit/13e6d8b))
+
+
+### Features
+
+* **publish:** Let npm warn when using old engine ([810e9ce](https://github.com/cozy/cozy-libs/commit/810e9ce))
+* **publish:** Tag prefix in travis and manual ([27b99c1](https://github.com/cozy/cozy-libs/commit/27b99c1))
+* **publish:** Tags can contain a prefix ([bf59771](https://github.com/cozy/cozy-libs/commit/bf59771))
+
+
+
+
 <a name="0.12.3"></a>
 ## [0.12.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.12.2...cozy-app-publish@0.12.3) (2019-03-13)
 

@@ -34,4 +34,13 @@ describe('parse', () => {
     expect(tagInfo.beta).toBe(null)
     expect(tagInfo.channel).toBe('dev')
   })
+
+  it('should correctly parse a version with prefix', () => {
+    const tagInfo = tags.parse('cozy-banks/v1.0.0-dev.deadbeef1456')
+    expect(tagInfo.prefix).toBe('cozy-banks')
+    expect(tagInfo.version).toBe('1.0.0')
+    expect(tagInfo.dev).toBe('deadbeef1456')
+    expect(tagInfo.beta).toBe(null)
+    expect(tagInfo.channel).toBe('dev')
+  })
 })

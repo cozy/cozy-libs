@@ -4,7 +4,7 @@ exports[`TriggerManager handleError should render error 1`] = `
 <Wrapper
   account={
     Object {
-      "_id": "a87f9a8bd3884479a48811e7b7deec75",
+      "_id": "61c683295560485db0f34b859197c581",
       "account_type": "konnectest",
       "auth": Object {
         "passphrase": "bar",
@@ -35,7 +35,7 @@ exports[`TriggerManager should render with account 1`] = `
 <Wrapper
   account={
     Object {
-      "_id": "a87f9a8bd3884479a48811e7b7deec75",
+      "_id": "61c683295560485db0f34b859197c581",
       "account_type": "konnectest",
       "auth": Object {
         "passphrase": "bar",
