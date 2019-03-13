@@ -1,4 +1,4 @@
-import __RewireAPI__, { subscribe } from '../src/index'
+import __RewireAPI__, { subscribe } from '../src/legacy'
 
 const MOCK_SERVER_DOMAIN = 'localhost:8880'
 

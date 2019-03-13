@@ -1,6 +1,6 @@
 import { Server } from 'mock-socket'
 
-import __RewireAPI__, { createWebSocket, getSocket } from '../src/index'
+import __RewireAPI__, { createWebSocket, getSocket } from '../src/legacy'
 
 const MOCK_SERVER_DOMAIN = 'localhost:8880'
 

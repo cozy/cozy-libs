@@ -1,4 +1,4 @@
-import __RewireAPI__, * as cozyRealtime from '../src/index'
+import __RewireAPI__, * as cozyRealtime from '../src/legacy'
 
 const mockConfig = {
   domain: 'cozy.tools:8080',
