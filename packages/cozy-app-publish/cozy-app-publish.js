@@ -102,13 +102,6 @@ function _getPublishMode() {
 
 async function publishApp(cliOptions) {
   const publishMode = _getPublishMode()
-  const acceptedModes = Object.values(MODES).includes(publishMode)
-  if (!acceptedModes.includes(publishMode)) {
-    throw new Error(
-      `Absent or unrecognized mode, you passed ${publishMode}. Accepted modes: ${acceptedModes}.`
-    )
-  }
-
   const publishFn = scripts[publishMode]
 
   console.log()
