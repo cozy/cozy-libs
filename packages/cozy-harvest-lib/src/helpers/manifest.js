@@ -7,6 +7,11 @@ import _pickBy from 'lodash/pickBy'
 export const ROLE_IDENTIFIER = 'identifier'
 
 /**
+ * Legacy login fields declared by some konnectors
+ */
+const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
+
+/**
  * Returns a key/value object with field as key and default, if it exists in
  * fields parameter.
  * @example
@@ -57,8 +62,6 @@ const removeOldFields = fields => {
   delete sanitized.advancedFields
   return sanitized
 }
-
-const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
 
 /**
  * Ensures that fields has at least one field with the role 'identifier'
