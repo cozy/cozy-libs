@@ -1,5 +1,5 @@
 /* global WebSocket */
-import { subscribe as subscribeLegacy } from './legacy'
+
 // cozySocket is a custom object wrapping logic to websocket and exposing a subscription
 // interface, it's a global variable to avoid creating multiple at a time
 let cozySocket
@@ -331,77 +331,6 @@ export function subscribe(config, doctype, { docId, parse = doc => doc } = {}) {
   return subscription
 }
 
-export class CozyRealtime {
-  listeners = new Map()
-  socket = null
-
-  constructor({ domain, secure, token, url }) {
-    this.domain = domain
-    this.secure = secure
-    this.token = token
-    this.url = url
-
-    this.subscriptions = {
-      doctypes: {},
-      documents: {}
-    }
-  }
-
-  static init(options) {
-    return new CozyRealtime(options)
-  }
-
-  subscribe({ type, id }, eventName, handler) {
-    const subscription = subscribe(
-      {
-        domain: this.domain,
-        secure: this.secure,
-        token: this.token,
-        url: this.url
-      },
-      type,
-      id ? { docId: id } : {}
-    )
-
-    switch (eventName) {
-      case 'created':
-        subscription.onCreate(handler)
-        break
-      case 'updated':
-        subscription.onUpdate(handler)
-        break
-      case 'deleted':
-        subscription.onDelete(handler)
-        break
-      default:
-        break
-    }
-
-    const target = id ? 'documents' : 'doctypes'
-    const index = id || type
-
-    this.subscriptions[target][index] = subscription
-
-    return this
-  }
-
-  unsubscribe({ type, id }) {
-    const target = id ? 'documents' : 'doctypes'
-    const index = id || type
-    this.subscriptions[target][index].unsubscribe()
-    return this
-  }
-}
-
 export default {
-  // Legacy
-  subscribe: (...args) => {
-    console.warn(
-      'CozyRealtime.subscribe() is deprecated, please create a CozyRealtime instance with CozyRealtime.init()'
-    )
-    return subscribeLegacy(...args)
-  },
-  init: options => {
-    return CozyRealtime.init(options)
-  }
+  subscribe
 }

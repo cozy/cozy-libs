@@ -1,4 +1,4 @@
-import __RewireAPI__, { subscribeWhenReady } from '../src/index'
+import __RewireAPI__, { subscribeWhenReady } from '../src/legacy'
 
 let mockSubscribe = jest.fn(subscribeWhenReady)
 const MAX_RETRIES = 10 // decrease the max retries for the test

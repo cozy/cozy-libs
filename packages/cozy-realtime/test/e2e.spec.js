@@ -31,7 +31,7 @@ describe('(cozy-realtime) API: ', () => {
     jest.clearAllMocks()
     jest.resetModules()
 
-    realtime = require('../src/index').default
+    realtime = require('../src/legacy').default
     CozyRealtime = require('../src/index').CozyRealtime
     server = new ServerMock(REALTIME_URL)
   })
@@ -42,9 +42,9 @@ describe('(cozy-realtime) API: ', () => {
 
   describe('subscribe all docs:', () => {
     it('should have a correctly configured socket, cozySocket and listeners on subscribe call and reset listeners on unsubscribe (all docs)', async () => {
-      const getListeners = require('../src/index').getListeners
-      const getCozySocket = require('../src/index').getCozySocket
-      const getSocket = require('../src/index').getSocket
+      const getListeners = require('../src/legacy').getListeners
+      const getCozySocket = require('../src/legacy').getCozySocket
+      const getSocket = require('../src/legacy').getSocket
       const subscription = realtime
         .subscribe(mockConfig, 'io.cozy.mocks')
         .onCreate(jest.fn())
@@ -62,9 +62,9 @@ describe('(cozy-realtime) API: ', () => {
     })
 
     it('should have a correctly configured socket, cozySocket and listeners on subscribe call and reset listeners on unsubscribe (one doc)', async () => {
-      const getListeners = require('../src/index').getListeners
-      const getCozySocket = require('../src/index').getCozySocket
-      const getSocket = require('../src/index').getSocket
+      const getListeners = require('../src/legacy').getListeners
+      const getCozySocket = require('../src/legacy').getCozySocket
+      const getSocket = require('../src/legacy').getSocket
       const subscription = realtime
         .subscribe(mockConfig, 'io.cozy.mocks', 'id1234')
         .onCreate(jest.fn())
@@ -98,7 +98,7 @@ describe('(cozy-realtime) API: ', () => {
 
     describe('onCreate', () => {
       it('should send SUBSCRIBE message', async () => {
-        const getSocket = require('../src/index').getSocket
+        const getSocket = require('../src/legacy').getSocket
 
         realtime.subscribe(mockConfig, 'io.cozy.foo').onCreate(jest.fn())
 
