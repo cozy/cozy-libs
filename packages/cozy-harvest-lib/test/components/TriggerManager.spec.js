@@ -78,6 +78,28 @@ const fixtures = {
       passphrase: 'fuz'
     }
   },
+  existingAccount: {
+    _id: '61c683295560485db0f34b859197c581',
+    account_type: 'konnectest',
+    auth: {
+      username: 'foo',
+      passphrase: 'bar'
+    },
+    identifier: 'username'
+  },
+  existingTrigger: {
+    id: '4b67e0bedd464704a6a995f5c2070ccf',
+    _type: 'io.cozy.triggers',
+    attributes: {
+      arguments: '0 0 0 * * 0',
+      type: '@cron',
+      worker: 'konnector',
+      message: {
+        account: '61c683295560485db0f34b859197c581',
+        konnector: 'konnectest'
+      }
+    }
+  },
   createdTrigger: {
     id: '669e9a7cc3064a97bc0aa20feef71cb2',
     _type: 'io.cozy.triggers',
@@ -163,7 +185,8 @@ const props = {
 
 const propsWithAccount = {
   ...props,
-  account: fixtures.createdAccount
+  account: fixtures.existingAccount,
+  trigger: fixtures.existingTrigger
 }
 
 const shallowWithoutAccount = konnector =>
@@ -279,7 +302,7 @@ describe('TriggerManager', () => {
       wrapper.instance().handleSubmit(fixtures.data)
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
-        fixtures.createdAccount
+        fixtures.existingAccount
       )
     })
 
@@ -330,6 +353,12 @@ describe('TriggerManager', () => {
       await wrapper.instance().handleAccountSaveSuccess(fixtures.createdAccount)
       expect(createTriggerMock).toHaveBeenCalledTimes(1)
       expect(createTriggerMock).toHaveBeenCalledWith(fixtures.triggerAttributes)
+    })
+
+    it('should not create trigger when one is passed as prop', async () => {
+      const wrapper = shallow(<TriggerManager {...propsWithAccount} />)
+      await wrapper.instance().handleAccountSaveSuccess(fixtures.updatedAccount)
+      expect(createTriggerMock).not.toHaveBeenCalled()
     })
 
     it('should launch trigger without account', async () => {
@@ -390,7 +419,7 @@ describe('TriggerManager', () => {
       const wrapper = shallowWithAccount()
       await wrapper.instance().handleAccountSaveSuccess(fixtures.updatedAccount)
       expect(launchTriggerMock).toHaveBeenCalledTimes(1)
-      expect(launchTriggerMock).toHaveBeenCalledWith(fixtures.createdTrigger)
+      expect(launchTriggerMock).toHaveBeenCalledWith(fixtures.existingTrigger)
     })
 
     it('should keep updated account in state', async () => {

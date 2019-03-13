@@ -56,7 +56,11 @@ export class TriggerManager extends Component {
       t
     } = this.props
 
-    const { account } = this.state
+    const { account, trigger } = this.state
+
+    if (trigger) {
+      return trigger
+    }
 
     let folder
 
@@ -72,7 +76,7 @@ export class TriggerManager extends Component {
       await addReferencesTo(konnector, [folder])
     }
 
-    const trigger = await createTrigger(
+    return await createTrigger(
       triggers.buildAttributes({
         account,
         cron: cron.fromKonnector(konnector),
@@ -80,12 +84,6 @@ export class TriggerManager extends Component {
         konnector
       })
     )
-
-    this.setState({
-      trigger
-    })
-
-    return trigger
   }
 
   /**
@@ -96,6 +94,7 @@ export class TriggerManager extends Component {
   async handleAccountSaveSuccess(account) {
     this.setState({ account })
     const trigger = await this.ensureTrigger()
+    this.setState({ trigger })
     return await this.launch(trigger)
   }
 
