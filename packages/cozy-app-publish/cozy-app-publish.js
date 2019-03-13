@@ -5,7 +5,6 @@
 const commander = require('commander')
 const colorize = require('./utils/colorize')
 const scripts = require('./index')
-const pickBy = require('lodash/pickBy')
 const capitalize = require('lodash/capitalize')
 
 const pkg = require('./package.json')
@@ -96,21 +95,19 @@ async function publishApp(cliOptions) {
     `${colorize.bold(capitalize(publishMode))} ${colorize.blue('publish mode')}`
   )
   console.log()
-  return publishFn(
-    pickBy({
-      appBuildUrl: cliOptions.buildUrl,
-      buildCommit: cliOptions.buildCommit,
-      buildDir: cliOptions.buildDir,
-      buildUrl: cliOptions.buildUrl,
-      manualVersion: cliOptions.manualVersion,
-      postpublishHook: cliOptions.postpublish,
-      prepublishHook: cliOptions.prepublish,
-      registryToken: cliOptions.token,
-      registryUrl: cliOptions.registryUrl,
-      spaceName: cliOptions.space,
-      tagPrefix: cliOptions.tagPrefix,
-      verbose: cliOptions.verbose,
-      yes: cliOptions.yes
-    })
-  )
+  return publishFn({
+    appBuildUrl: cliOptions.buildUrl,
+    buildCommit: cliOptions.buildCommit,
+    buildDir: cliOptions.buildDir,
+    buildUrl: cliOptions.buildUrl,
+    manualVersion: cliOptions.manualVersion,
+    postpublishHook: cliOptions.postpublish,
+    prepublishHook: cliOptions.prepublish,
+    registryToken: cliOptions.token,
+    registryUrl: cliOptions.registryUrl,
+    spaceName: cliOptions.space,
+    tagPrefix: cliOptions.tagPrefix,
+    verbose: cliOptions.verbose,
+    yes: cliOptions.yes
+  })
 }
