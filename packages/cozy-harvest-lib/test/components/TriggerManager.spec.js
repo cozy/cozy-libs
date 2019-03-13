@@ -355,6 +355,12 @@ describe('TriggerManager', () => {
       expect(createTriggerMock).toHaveBeenCalledWith(fixtures.triggerAttributes)
     })
 
+    it('should not create trigger when one is passed as prop', async () => {
+      const wrapper = shallow(<TriggerManager {...propsWithAccount} />)
+      await wrapper.instance().handleAccountSaveSuccess(fixtures.updatedAccount)
+      expect(createTriggerMock).not.toHaveBeenCalled()
+    })
+
     it('should launch trigger without account', async () => {
       const wrapper = shallowWithoutAccount()
       await wrapper.instance().handleAccountSaveSuccess(fixtures.account)
