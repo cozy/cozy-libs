@@ -15,7 +15,6 @@ const promptConfirm = require('../lib/confirm')
 
 jest.mock('../lib/confirm')
 jest.mock('../lib/publish', () => jest.fn())
-jest.mock('../lib/tags', () => ({}))
 
 jest.mock('../lib/hooks/pre/downcloud', () => ({
   appBuildUrl: 'https://mock.getarchive.cc/12345.tar.gz'
@@ -48,7 +47,9 @@ describe('Manual publishing script', () => {
     process.chdir(testPath)
     // copy the app mock content
     fs.copySync(mockAppDir, testPath, { overwrite: true })
-    tags.getAutoVersion = jest.fn().mockReturnValue('2.1.8-dev.12346')
+    tags.getVersionTags = jest
+      .fn()
+      .mockReturnValue(['2.1.8-dev.12346'].map(tags.parse))
   })
 
   afterAll(() => {
@@ -118,5 +119,19 @@ describe('Manual publishing script', () => {
     await expect(
       manualScript(getOptions(null))
     ).rejects.toThrowErrorMatchingSnapshot()
+  })
+
+  it('should support prefix', async () => {
+    const badTag = 'cozy-banks/2.1.8-beta.1'
+    const goodTag = 'cozy-drive/2.1.8-beta.2'
+    const tagVersions = [badTag, goodTag].map(tags.parse)
+    tags.getVersionTags = jest.fn().mockReturnValue(tagVersions)
+    await manualScript({
+      ...getOptions(commons.token),
+      manualVersion: null,
+      tagPrefix: 'cozy-drive'
+    })
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
 })

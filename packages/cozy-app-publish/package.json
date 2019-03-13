@@ -38,5 +38,8 @@
     "setupFiles": [
       "./test/jestLibs/setupJest.js"
     ]
+  },
+  "engines": {
+    "node": ">=6"
   }
 }
