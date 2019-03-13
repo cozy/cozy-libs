@@ -73,20 +73,7 @@ const handleError = error => {
 }
 
 try {
-  publishApp({
-    token: program.token,
-    buildDir: program.buildDir,
-    buildUrl: program.buildUrl,
-    buildCommit: program.buildCommit,
-    manualVersion: program.manualVersion,
-    prepublishHook: program.prepublish,
-    postpublishHook: program.postpublish,
-    yes: program.yes,
-    registryUrl: program.registryUrl,
-    space: program.space,
-    verbose: program.verbose,
-    tagPrefix: program.tagPrefix
-  }).catch(handleError)
+  publishApp(program).catch(handleError)
 } catch (error) {
   handleError(error)
 }
@@ -116,8 +103,8 @@ async function publishApp(cliOptions) {
       buildDir: cliOptions.buildDir,
       buildUrl: cliOptions.buildUrl,
       manualVersion: cliOptions.manualVersion,
-      postpublishHook: cliOptions.postpublishHook,
-      prepublishHook: cliOptions.prepublishHook,
+      postpublishHook: cliOptions.postpublish,
+      prepublishHook: cliOptions.prepublish,
       registryToken: cliOptions.token,
       registryUrl: cliOptions.registryUrl,
       spaceName: cliOptions.space,
