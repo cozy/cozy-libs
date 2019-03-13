@@ -3,8 +3,8 @@ import PropTypes from 'react-proptypes'
 
 import { translate } from 'cozy-ui/react/I18n'
 
-import { KonnectorJobError } from 'helpers/konnectors'
-import Markdown from 'components/Markdown'
+import { KonnectorJobError } from '../../helpers/konnectors'
+import Markdown from '../Markdown'
 
 /**
  * Return the locale key corresponding to error description for a given error
