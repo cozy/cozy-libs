@@ -35,7 +35,9 @@ function getOptions(token, buildDir) {
     spaceName: 'mock_space',
     yes: true
   }
-  if (buildDir) options.buildDir = buildDir
+  if (buildDir) {
+    options.buildDir = buildDir
+  }
   return options
 }
 

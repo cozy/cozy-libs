@@ -1,108 +1,28 @@
 const path = require('path')
 const fs = require('fs-extra')
-const postpublish = require('./postpublish')
-const prepublish = require('./prepublish')
-const publish = require('./publish')
-const colorize = require('../utils/colorize')
 const getManifestAsObject = require('../utils/getManifestAsObject')
-const constants = require('./constants')
 const tags = require('./tags')
-const promptConfirm = require('./confirm')
+const publisher = require('./publisher')
 
-const { DEFAULT_REGISTRY_URL, DEFAULT_BUILD_DIR } = constants
-
-async function manualPublish({
-  buildCommit,
-  postpublishHook,
-  prepublishHook,
-  registryToken,
-  buildDir = DEFAULT_BUILD_DIR,
-  manualVersion,
-  registryUrl = DEFAULT_REGISTRY_URL,
-  spaceName,
-  appBuildUrl,
-  yes
-}) {
-  // registry editor token (required)
-  if (!registryToken) {
-    throw new Error('Registry token is missing. Publishing failed.')
-  }
-
-  // application manifest (required)
-  const appManifestObj = getManifestAsObject(
-    path.join(fs.realpathSync(process.cwd()), buildDir)
+const getManifestManual = ctx => {
+  return getManifestAsObject(
+    path.join(fs.realpathSync(process.cwd()), ctx.buildDir)
   )
+}
 
-  // registry editor (required)
-  const registryEditor = appManifestObj.editor
-  if (!registryEditor) {
-    throw new Error(
-      'Registry editor is missing in the manifest. Publishing failed.'
-    )
-  }
-
-  // get application version to publish
+const getAppVersionManual = async ctx => {
   let autoVersion
-  if (!manualVersion) {
+  if (!ctx.manualVersion) {
     autoVersion = await tags.getAutoVersion()
   }
-  const appVersion = manualVersion || autoVersion || appManifestObj.version
-
-  // other variables
-  const appSlug = appManifestObj.slug
-  const appType = appManifestObj.type || 'webapp'
-
-  const publishOptions = await prepublish({
-    buildCommit,
-    prepublishHook,
-    registryUrl,
-    registryEditor,
-    registryToken,
-    spaceName,
-    appSlug,
-    appVersion,
-    appBuildUrl,
-    appType
-  })
-
-  // ready publish the application on the registry
-  console.log(
-    `Attempting to publish ${colorize.bold(
-      publishOptions.appSlug
-    )} (version ${colorize.bold(
-      publishOptions.appVersion
-    )}) from ${colorize.bold(
-      publishOptions.appBuildUrl
-    )} (sha256 ${colorize.bold(publishOptions.sha256Sum)}) to ${colorize.bold(
-      publishOptions.registryUrl
-    )} (space: ${publishOptions.spaceName || 'default one'})`
-  )
-  console.log()
-
-  if (!yes) {
-    const goFurther = await promptConfirm(
-      'Are you sure you want to publish this application above?'
-    )
-    if (!goFurther) {
-      console.log('Publishing cancelled')
-      return
-    }
-  }
-
-  try {
-    await publish(publishOptions)
-  } catch (e) {
-    const errorMessage = '↳ ❌  Publishing failed. Publishing aborted.'
-    console.error(e)
-    console.error(errorMessage)
-  }
-
-  try {
-    await postpublish({ ...publishOptions, postpublishHook })
-  } catch (error) {
-    console.error(`↳ ⚠️  Postpublish hooks failed: ${error.message}`)
-  }
+  return autoVersion || ctx.manualVersion || ctx.appManifestObj.version
 }
+
+const manualPublish = publisher({
+  getManifest: getManifestManual,
+  getAppVersion: getAppVersionManual,
+  showConfirmation: true
+})
 
 const manualPublishCLI = function() {
   return manualPublish.apply(this, arguments).catch(e => {
