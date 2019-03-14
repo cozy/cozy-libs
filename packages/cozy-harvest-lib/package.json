@@ -15,11 +15,14 @@
   },
   "scripts": {
     "build": "babel src -d dist --copy-files",
+    "build:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn build:doc:react)",
+    "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prebuild": "yarn tx",
     "prepublishOnly": "yarn build",
     "test": "jest --verbose --coverage",
     "tx": "tx pull --all",
-    "watch": "babel src -d dist --copy-files --watch"
+    "watch": "babel src -d dist --copy-files --watch",
+    "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
   "dependencies": {
     "cozy-client": "6.9.0",
