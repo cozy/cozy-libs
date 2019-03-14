@@ -2,8 +2,9 @@ import Field from 'cozy-ui/react/Field'
 import React, { PureComponent } from 'react'
 import PropTypes from 'react-proptypes'
 
-import { getFieldPlaceholder, sanitizeSelectProps } from 'helpers/fields'
 import { translate } from 'cozy-ui/react/I18n'
+
+import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
 
 const IDENTIFIER = 'identifier'
 

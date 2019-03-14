@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.13.1"></a>
+## [0.13.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.13.0...cozy-app-publish@0.13.1) (2019-03-13)
+
+
+### Bug Fixes
+
+* Add lodash as dependency ([a580a78](https://github.com/cozy/cozy-libs/commit/a580a78))
+
+
+
+
 <a name="0.13.0"></a>
 # [0.13.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.12.3...cozy-app-publish@0.13.0) (2019-03-13)
 
