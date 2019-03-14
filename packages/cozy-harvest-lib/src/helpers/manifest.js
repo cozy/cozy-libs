@@ -4,7 +4,49 @@ import findKey from 'lodash/findKey'
 import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
 
-const IDENTIFIER = 'identifier'
+export const ROLE_IDENTIFIER = 'identifier'
+
+/**
+ * We defined "predefined labels", as labels wich can be used in manifest, to
+ * refer to existing locales.
+ * @example
+ * This declaration expect that applications resolve automatically the label
+ * of the field "name", without relying on locales declared in konnector
+ * manifest.
+ * ```
+ * "fields": {
+ *   "name": {
+ *     "label": "firsname",
+ *     "type": "text"
+ *   }
+ * }
+ * ```
+ */
+export const predefinedLabels = [
+  'answer',
+  'birthdate',
+  'code',
+  'date',
+  'email',
+  'firstname',
+  'lastname',
+  'login',
+  'password',
+  'phone'
+]
+
+/**
+ * Out of scope labels already used, should be transferred directly in manifests
+ * in the future.
+ */
+export const legacyLabels = [
+  'branchName' // Used in banking konnectors
+]
+
+/**
+ * Legacy login fields declared by some konnectors
+ */
+const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
 
 /**
  * Returns a key/value object with field as key and default, if it exists in
@@ -45,7 +87,7 @@ const defaultFieldsValues = fields => {
  * @return {[type]}        The key for the identifier field, example 'login'
  */
 const getIdentifier = (fields = {}) =>
-  findKey(sanitizeIdentifier(fields), field => field.role === IDENTIFIER)
+  findKey(sanitizeIdentifier(fields), field => field.role === ROLE_IDENTIFIER)
 
 /**
  * Ensures old fields are removed
@@ -58,8 +100,6 @@ const removeOldFields = fields => {
   return sanitized
 }
 
-const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
-
 /**
  * Ensures that fields has at least one field with the role 'identifier'
  * @param  {Object} [fields={}] Manifest fields
@@ -69,7 +109,7 @@ const sanitizeIdentifier = fields => {
   const sanitized = _cloneDeep(fields)
   let hasIdentifier = false
   for (let fieldName in sanitized)
-    if (sanitized[fieldName].role === IDENTIFIER) {
+    if (sanitized[fieldName].role === ROLE_IDENTIFIER) {
       if (hasIdentifier) delete sanitized[fieldName].role
       else hasIdentifier = true
     }
@@ -77,13 +117,13 @@ const sanitizeIdentifier = fields => {
 
   for (let name of legacyLoginFields)
     if (sanitized[name]) {
-      sanitized[name].role = IDENTIFIER
+      sanitized[name].role = ROLE_IDENTIFIER
       return sanitized
     }
 
   for (let fieldName in sanitized)
     if (sanitized[fieldName].type !== 'password') {
-      sanitized[fieldName].role = IDENTIFIER
+      sanitized[fieldName].role = ROLE_IDENTIFIER
       return sanitized
     }
 
