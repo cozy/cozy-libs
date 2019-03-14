@@ -1,0 +1,10 @@
+{
+  "name": "cozy-ci",
+  "version": "0.2.0",
+  "description": "Utility scripts for Cozy Cloud CI integration",
+  "license": "MIT",
+  "bin": {
+    "cozy-ci-github": "./github-comment.sh",
+    "cozy-ci-transifex": "./transifex.sh"
+  }
+}
