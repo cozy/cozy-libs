@@ -2480,20 +2480,20 @@ cozy-client-js@0.14.2:
     pouchdb-adapter-cordova-sqlite "https://github.com/SnceGroup/pouchdb-adapter-cordova-sqlite.git#f3ee23009b70209c611435d57491aa77fb88802a"
     pouchdb-find "6.4.3"
 
-cozy-client@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.3.0.tgz#bca41eb8021677b40b01ed6f8de7a5a74144f866"
-  integrity sha512-CPJq6jloRtuRGkj7pSSEeX7vA2aSh9LvYaPQ3prTHbsf2g9V3GKx/pHXdFWZQjqeCJEVXJPW5Il+WYs9f4AaBw==
+cozy-client@6.9.0:
+  version "6.9.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.9.0.tgz#e84caf6a541e68792257442e73ad2ac549374236"
+  integrity sha512-H+rEFRXKCpYDMRBccO/TsFUjRkbWOeUZy/71mXv0G+/Zk8jOn1Js2eliRaetSTYTvIleIohT/sKzRLx9xUR7uA==
   dependencies:
     cozy-device-helper "1.6.3"
-    cozy-stack-client "^6.3.0"
+    cozy-stack-client "^6.7.0"
     lodash "4.17.11"
     prop-types "15.6.2"
     react "16.7.0"
     react-redux "5.0.7"
     redux "3.7.2"
     redux-thunk "2.3.0"
-    sift "7.0.1"
+    sift "6.0.0"
 
 cozy-device-helper@1.6.3:
   version "1.6.3"
@@ -2514,13 +2514,14 @@ cozy-realtime@1.2.8:
   resolved "https://registry.yarnpkg.com/cozy-realtime/-/cozy-realtime-1.2.8.tgz#c94c4bd8eb36009a381739062bd41947ddd516fc"
   integrity sha512-G4seWPh7Ys+XApe1p165xKWq2jNKfmR/icUx45YplVZZm5wJk5pPGVrc70Rccr0DYuA8oHh1i/wpG/a5cHhpYQ==
 
-cozy-stack-client@^6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.3.0.tgz#0117bf416e8898e587e21ff58d67ecec91d895af"
-  integrity sha512-QWwoZzxfsW0DczCspFxVIyk5EG820Bh/hEyuT7NY+KSq7aXk6lSXc2Aiz/Nj8l8NY1/JfpIc+7BUtjzMCyE6cQ==
+cozy-stack-client@^6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.7.0.tgz#cf8963b5cdbbaac92abdaeb302f723f9e3cd9612"
+  integrity sha512-OcqIQ5MEqr5vNL3AnGXceehOMLsbCcfF4Wydf39bqk9fA1LODL4dBNaExgd42A/FxwZ5dfBHarhkkfk/6EAyvw==
   dependencies:
     detect-node "2.0.4"
     mime-types "2.1.20"
+    qs "6.6.0"
 
 cozy-ui@19.8.0:
   version "19.8.0"
@@ -7498,6 +7499,11 @@ q@^1.4.1, q@^1.5.1:
   resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
   integrity sha1-fjL3W0E4EpHQRhHxvxQQmsAGUdc=
 
+qs@6.6.0:
+  version "6.6.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
+  integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
+
 qs@~6.5.1, qs@~6.5.2:
   version "6.5.2"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
@@ -8362,10 +8368,10 @@ shellwords@^0.1.1:
   resolved "https://registry.yarnpkg.com/shellwords/-/shellwords-0.1.1.tgz#d6b9181c1a48d397324c84871efbcfc73fc0654b"
   integrity sha512-vFwSUfQvqybiICwZY5+DAWIPLKsWO31Q91JSKl3UYv+K5c2QRPzn0qzec6QPu1Qc9eHYItiP3NdJqNVqetYAww==
 
-sift@7.0.1:
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/sift/-/sift-7.0.1.tgz#47d62c50b159d316f1372f8b53f9c10cd21a4b08"
-  integrity sha512-oqD7PMJ+uO6jV9EQCl0LrRw1OwsiPsiFQR5AR30heR+4Dl7jBBbDLnNvWiak20tzZlSE1H7RB30SX/1j/YYT7g==
+sift@6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/sift/-/sift-6.0.0.tgz#f93a778e5cbf05a5024ebc391e6b32511a6d1f82"
+  integrity sha1-+Tp3jly/BaUCTrw5HmsyURptH4I=
 
 signal-exit@^3.0.0, signal-exit@^3.0.2:
   version "3.0.2"
