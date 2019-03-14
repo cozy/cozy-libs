@@ -1,4 +1,3 @@
-import isEqual from 'lodash/isEqual'
 import { Server } from 'mock-socket'
 
 jest.useFakeTimers()
@@ -7,18 +6,28 @@ export class ServerMock extends Server {
   constructor(...args) {
     super(...args)
 
-    this.messages = []
+    /**
+     * Stores the received messages as key and a counter of
+     * received messages as value
+     * @type {Object}
+     */
+    this.messages = {}
 
     this.on('connection', socket => {
       this.socket = socket
       this.socket.on('message', data => {
-        this.messages.push(JSON.parse(data))
+        this.messages[data] = this.messages[data] || 0
+        this.messages[data]++
       })
     })
   }
 
-  received(messageData) {
-    return !!this.messages.find(message => isEqual(message, messageData))
+  received(messageRawData) {
+    return !!this.messages[messageRawData]
+  }
+
+  receivedTimes(messageRawData) {
+    return this.messages[messageRawData] || 0
   }
 
   stepForward() {

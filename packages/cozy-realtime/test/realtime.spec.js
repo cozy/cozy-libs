@@ -1,4 +1,4 @@
-import { CozyRealtime } from '../src'
+import { CozyRealtime } from '../src/CozyRealtime'
 
 describe('CozyRealtime', () => {
   describe('init', () => {

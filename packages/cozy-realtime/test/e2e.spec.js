@@ -32,7 +32,7 @@ describe('(cozy-realtime) API: ', () => {
     jest.resetModules()
 
     realtime = require('../src/legacy').default
-    CozyRealtime = require('../src/index').CozyRealtime
+    CozyRealtime = require('../src/CozyRealtime').CozyRealtime
     server = new ServerMock(REALTIME_URL)
   })
 
@@ -89,10 +89,12 @@ describe('(cozy-realtime) API: ', () => {
       server.stepForward()
 
       expect(
-        server.received({
-          method: 'AUTH',
-          payload: mockConfig.token
-        })
+        server.received(
+          JSON.stringify({
+            method: 'AUTH',
+            payload: mockConfig.token
+          })
+        )
       ).toBe(true)
     })
 
@@ -107,10 +109,12 @@ describe('(cozy-realtime) API: ', () => {
         jest.runAllTimers()
 
         expect(
-          server.received({
-            method: 'SUBSCRIBE',
-            payload: { type: 'io.cozy.foo' }
-          })
+          server.received(
+            JSON.stringify({
+              method: 'SUBSCRIBE',
+              payload: { type: 'io.cozy.foo' }
+            })
+          )
         ).toBe(true)
       })
 
@@ -291,33 +295,62 @@ describe('(cozy-realtime) API: ', () => {
         server.stepForward()
 
         expect(
-          server.received({
-            method: 'AUTH',
-            payload: mockConfig.token
-          })
+          server.received(
+            JSON.stringify({
+              method: 'AUTH',
+              payload: mockConfig.token
+            })
+          )
         ).toBe(true)
       })
 
       it('should send SUBSCRIBE message', async () => {
         const realtime = CozyRealtime.init(mockConfig)
-        realtime.subscribe(fooSelector, 'created', jest.fn())
 
         server.stepForward()
-        await getSocket()
+
+        realtime.subscribe(fooSelector, 'created', jest.fn())
+
+        await realtime._socketPromise
         server.stepForward()
 
         expect(
-          server.received({
-            method: 'SUBSCRIBE',
-            payload: { type: 'io.cozy.foo' }
-          })
+          server.received(
+            JSON.stringify({
+              method: 'SUBSCRIBE',
+              payload: { type: 'io.cozy.foo' }
+            })
+          )
         ).toBe(true)
       })
 
-      it('should receive created document of given doctype', async () => {
+      it('should no send same SUBSCRIBE message twice', async () => {
+        const realtime = CozyRealtime.init(mockConfig)
+
+        server.stepForward()
+
+        await realtime.subscribe(fooSelector, 'created', jest.fn())
+        await realtime.subscribe(fooSelector, 'created', jest.fn())
+
+        server.stepForward()
+
+        expect(
+          server.receivedTimes(
+            JSON.stringify({
+              method: 'SUBSCRIBE',
+              payload: { type: 'io.cozy.foo' }
+            })
+          )
+        ).toBe(1)
+      })
+
+      it('should receive created document of given doctype', () => {
         const fooCreateHandler = jest.fn()
 
         const realtime = CozyRealtime.init(mockConfig)
+
+        server.stepForward()
+
         realtime.subscribe(fooSelector, 'created', fooCreateHandler)
 
         server.sendDoc(fixtures.fooDoc, 'created')
@@ -407,7 +440,7 @@ describe('(cozy-realtime) API: ', () => {
 
         const realtime = CozyRealtime.init(mockConfig)
         realtime.subscribe(fooSelector, 'created', fooCreateHandler)
-        realtime.unsubscribe(fooSelector)
+        realtime.unsubscribe(fooSelector, 'created', fooCreateHandler)
 
         server.sendDoc(fixtures.fooDoc, 'created')
 
@@ -419,7 +452,7 @@ describe('(cozy-realtime) API: ', () => {
 
         const realtime = CozyRealtime.init(mockConfig)
         realtime.subscribe(fooSelector, 'updated', fooUpdateHandler)
-        realtime.unsubscribe(fooSelector)
+        realtime.unsubscribe(fooSelector, 'updated', fooUpdateHandler)
 
         server.sendDoc(fixtures.fooDoc, 'updated')
 
@@ -435,7 +468,11 @@ describe('(cozy-realtime) API: ', () => {
           'updated',
           fooUpdateHandler
         )
-        realtime.unsubscribe({ ...fooSelector, id: fixtures.fooDoc.id })
+        realtime.unsubscribe(
+          { ...fooSelector, id: fixtures.fooDoc.id },
+          'updated',
+          fooUpdateHandler
+        )
 
         server.sendDoc(fixtures.fooDoc, 'updated')
 
@@ -447,7 +484,7 @@ describe('(cozy-realtime) API: ', () => {
 
         const realtime = CozyRealtime.init(mockConfig)
         realtime.subscribe(fooSelector, 'deleted', fooDeleteHandler)
-        realtime.unsubscribe(fooSelector)
+        realtime.unsubscribe(fooSelector, 'deleted', fooDeleteHandler)
 
         server.sendDoc(fixtures.fooDoc, 'deleted')
 
@@ -463,14 +500,18 @@ describe('(cozy-realtime) API: ', () => {
           'deleted',
           fooDeleteHandler
         )
-        realtime.unsubscribe({ ...fooSelector, id: fixtures.fooDoc.id })
+        realtime.unsubscribe(
+          { ...fooSelector, id: fixtures.fooDoc.id },
+          'deleted',
+          fooDeleteHandler
+        )
 
         server.sendDoc(fixtures.fooDoc, 'deleted')
 
         expect(fooDeleteHandler).toHaveBeenCalledTimes(0)
       })
 
-      xit('should stop receiving document for only one handler', () => {
+      it('should stop receiving document for only one handler', () => {
         const fooCreateHandler = jest.fn()
         const anotherFooCreateHandler = jest.fn()
 
