@@ -1,0 +1,49 @@
+{
+  "mobile": {
+    "onboarding": {
+      "welcome": {
+        "title1": "Bienvenue sur Cozy",
+        "title2": "Votre propre cloud personnel",
+        "button": "Vous connecter à votre Cozy",
+        "no_account_link": "Vous n'avez pas de compte? Demandez-en un ici."
+      },
+      "server_selection": {
+        "description": "Exemple: https://**camillenimbus**.mycozy.cloud\n",
+        "label": "Entrez l'adresse de votre Cozy",
+        "cozy_address_placeholder": "camillenimbus.mycozy.cloud",
+        "button": "Suivant",
+        "wrong_address_with_email": "Vous avez entré une adresse email. Pour vous connecter à votre Cozy vous devez entrer son url, sous la forme https://camillenimbus.mycozy.cloud",
+        "wrong_address_v2": "Vous avez entré l'adresse d'une Cozy v2. Cette application n'est compatible qu'avec la dernière version de Cozy. Rendez-vous sur [notre site](https://blog.cozycloud.cc/post/2016/11/21/On-the-road-to-Cozy-version-3?lang=fr) pour plus d'informations",
+        "wrong_address": "Cette adresse ne semble pas correspondre à un Cozy.",
+        "wrong_address_cosy": "Oups, ce n'est pas la bonne adresse. Essayez d'écrire \"cozy\" avec un \"z\" !"
+      },
+      "files": {
+        "title": "Accéder à vos fichiers",
+        "description": "Pour sauvegarder les fichiers de votre Cozy sur votre périphérique, l'application doit accéder à vos fichiers."
+      },
+      "photos": {
+        "title": "Sauvegarder vos photos et vos vidéos",
+        "description": "Sauvegarder automatiquement les photos prises avec votre téléphone dans votre Cozy, pour ne jamais les perdre."
+      },
+      "contacts": {
+        "title": "Synchronisez vos contacts",
+        "description": "Sauvegardez les contacts de votre appareil sur votre Cozy — cela facilitera le partage de fichiers avec eux."
+      },
+      "step": {
+        "button": "Activer maintenant",
+        "skip": "Plus tard",
+        "next": "Suivant"
+      },
+      "analytics": {
+        "title": "Aidez-nous à améliorer Cozy",
+        "description": "Cette application transmettra automatiquement des données (surtout des erreurs) à notre équipe support. Cela nous permettra de résoudre les problèmes plus vite."
+      }
+    },
+    "revoked": {
+      "title": "Accès révoqué",
+      "description": "Vous semblez avoir révoqué votre périphérique depuis votre Cozy. Si ce n'est pas vous, n'hésitez pas à nous contacter à contact@cozycloud.cc. Toutes les données relatives à Cozy présentes localement vont être supprimées.",
+      "loginagain": "Se réenregistrer",
+      "logout": "Se déconnecter"
+    }
+  }
+}

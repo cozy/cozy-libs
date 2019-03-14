@@ -1,0 +1,55 @@
+{
+  "name": "cozy-authentication",
+  "version": "1.4.0-beta.5",
+  "description": "Component providing login to a Cozy",
+  "main": "dist/index.js",
+  "files": [
+    "dist"
+  ],
+  "author": "Cozy",
+  "license": "MIT",
+  "scripts": {
+    "prepare": "yarn build; yarn copy-files",
+    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "test": "env USE_REACT=true yarn jest src",
+    "copy-files": "cp -r src/locales/ dist/locales/"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "@babel/core": "^7.3.4",
+    "babel-plugin-css-modules-transform": "^1.6.2",
+    "babel-preset-cozy-app": "^1.5.0",
+    "cozy-ui": "^19.12.0",
+    "date-fns": "^1.29.0",
+    "enzyme": "^3.9.0",
+    "enzyme-adapter-react-16": "^1.11.2",
+    "eslint-cli": "1.1.1",
+    "jest": "24.5.0",
+    "parcel": "^1.10.3",
+    "react": "^16.6.3",
+    "react-dom": "^16.6.3",
+    "react-styleguidist": "6.5.3",
+    "stylus": "^0.54.5"
+  },
+  "dependencies": {
+    "cozy-device-helper": "1.6.9",
+    "react-markdown": "4.0.6",
+    "url-polyfill": "1.1.0"
+  },
+  "jest": {
+    "testURL": "http://localhost:8000",
+    "transformIgnorePatterns": [
+      "/node_modules/(?!cozy-ui)"
+    ],
+    "modulePaths": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/../../node_modules/"
+    ],
+    "setupFiles": [
+      "./jest.setup.js"
+    ],
+    "moduleNameMapper": {
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|styl)$": "identity-obj-proxy"
+    }
+  }
+}
