@@ -14,17 +14,11 @@ const parse = type => value => {
 
 export class AccountFields extends PureComponent {
   render() {
-    const {
-      container,
-      disabled,
-      hasError,
-      initialValues,
-      manifestFields
-    } = this.props
+    const { container, disabled, fields, hasError, initialValues } = this.props
 
     // Ready to use named fields array
-    const namedFields = Object.keys(manifestFields).map(fieldName => ({
-      ...manifestFields[fieldName],
+    const namedFields = Object.keys(fields).map(fieldName => ({
+      ...fields[fieldName],
       name: fieldName
     }))
 
@@ -60,7 +54,7 @@ AccountFields.propTypes = {
   container: PropTypes.node,
   disabled: PropTypes.bool,
   hasError: PropTypes.bool,
-  manifestFields: PropTypes.object.isRequired
+  fields: PropTypes.object.isRequired
 }
 
 export default AccountFields

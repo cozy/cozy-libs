@@ -113,13 +113,13 @@ export class AccountForm extends PureComponent {
             <AccountFields
               container={container}
               disabled={submitting}
+              fields={sanitizedFields}
               hasError={
                 error &&
                 error instanceof KonnectorJobError &&
                 error.isLoginError()
               }
               initialValues={initialAndDefaultValues}
-              manifestFields={sanitizedFields}
               t={t}
             />
             <Button

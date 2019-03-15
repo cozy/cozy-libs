@@ -29,14 +29,14 @@ const fixtures = {
 describe('AccountFields', () => {
   it('should render', () => {
     const component = shallow(
-      <AccountFields manifestFields={fixtures.fields} />
+      <AccountFields fields={fixtures.fields} />
     ).getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should render encrypted fields with placeholder', () => {
     const component = shallow(
-      <AccountFields manifestFields={fixtures} />
+      <AccountFields fields={fixtures.sanitized} />
     ).getElement()
     expect(component).toMatchSnapshot()
   })

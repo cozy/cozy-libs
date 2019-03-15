@@ -36,9 +36,7 @@ exports[`AccountForm should always render login error 1`] = `
   />
   <AccountFields
     container={null}
-    hasError={true}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -53,6 +51,8 @@ exports[`AccountForm should always render login error 1`] = `
         },
       }
     }
+    hasError={true}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
@@ -85,9 +85,7 @@ exports[`AccountForm should not render error 1`] = `
 >
   <AccountFields
     container={null}
-    hasError={false}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -102,6 +100,8 @@ exports[`AccountForm should not render error 1`] = `
         },
       }
     }
+    hasError={false}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
@@ -144,8 +144,7 @@ exports[`AccountForm should render 1`] = `
 >
   <AccountFields
     container={null}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -160,6 +159,7 @@ exports[`AccountForm should render 1`] = `
         },
       }
     }
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
@@ -222,9 +222,7 @@ exports[`AccountForm should render error 1`] = `
   />
   <AccountFields
     container={null}
-    hasError={false}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -239,6 +237,8 @@ exports[`AccountForm should render error 1`] = `
         },
       }
     }
+    hasError={false}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
