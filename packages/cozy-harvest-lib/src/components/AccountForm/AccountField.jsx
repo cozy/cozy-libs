@@ -5,27 +5,11 @@ import PropTypes from 'react-proptypes'
 import { translate } from 'cozy-ui/react/I18n'
 
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
-
-const IDENTIFIER = 'identifier'
-
-const predefinedLabels = [
-  'answer',
-  'birthdate',
-  'code',
-  'date',
-  'email',
-  'firstname',
-  'lastname',
-  'login',
-  'password',
-  'phone'
-]
-
-// Out of scope labels already used, should be transferred directly in manifests
-// in the future.
-const legacyLabels = [
-  'branchName' // Used in banking konnectors
-]
+import {
+  legacyLabels,
+  predefinedLabels,
+  ROLE_IDENTIFIER
+} from '../../helpers/manifest'
 
 export class AccountField extends PureComponent {
   constructor(props) {
@@ -37,7 +21,7 @@ export class AccountField extends PureComponent {
 
   componentDidMount() {
     const { role } = this.props
-    if (role === IDENTIFIER && this.inputRef) {
+    if (role === ROLE_IDENTIFIER && this.inputRef) {
       this.inputRef.focus()
     }
   }
@@ -65,8 +49,9 @@ export class AccountField extends PureComponent {
         ? label
         : name
 
-    const isEditable = !(role === IDENTIFIER && initialValue)
+    const isEditable = !(role === ROLE_IDENTIFIER && initialValue)
 
+    // Cozy-UI <Field /> props
     const fieldProps = {
       ...this.props,
       autoComplete: 'off',
