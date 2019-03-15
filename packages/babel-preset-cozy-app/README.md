@@ -90,6 +90,32 @@ By default, this babel preset uses [`babel-plugin-transform-runtime`](https://ba
 }
 ```
 
+#### Preset and plugin options
+
+You can have control on the options passed to `babel-preset-env` and `babel-plugin-transform-runtime`:
+
+* `presetEnv` will be passed to `babel-preset-env`
+* `transformRuntime` will be passed to `babel-plugin-transform-runtime`
+
+```json
+{
+  "presets": [
+    ["cozy-app", {
+      "presetEnv": { "modules": false },
+      "transformRuntime": { "helpers": true }
+    }]
+  ]
+}
+```
+
+In this case, we do not want `preset-env` to touch to `import/export` and want the inlined Babel helpers
+to be replaced by imports from `babel-runtime`.
+
+See the options on the official docs :
+
+https://babeljs.io/docs/en/babel-preset-env#modules
+https://babeljs.io/docs/en/babel-plugin-transform-runtime#helpers 
+
 ## Community
 
 ### What's Cozy?

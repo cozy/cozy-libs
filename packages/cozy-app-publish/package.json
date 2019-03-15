@@ -1,25 +1,25 @@
 {
   "name": "cozy-app-publish",
-  "version": "0.9.1",
+  "version": "0.13.1",
   "main": "index.js",
   "author": "Cozy",
   "license": "MIT",
   "scripts": {
     "test": "jest --verbose --coverage",
-    "test:manual": "jest test/manual.spec.js",
-    "test:publish": "jest test/publish.spec.js",
-    "test:travis": "jest test/travis.spec.js"
+    "test:integration": "env TEST_INTEGRATION=1 jest"
   },
   "bin": {
     "cozy-app-publish": "./cozy-app-publish.js"
   },
   "dependencies": {
-    "chalk": "2.4.1",
+    "chalk": "2.4.2",
     "commander": "2.19.0",
     "cross-spawn": "6.0.5",
     "fs-extra": "7.0.1",
-    "node-fetch": "2.2.0",
+    "lodash": "4.17.11",
+    "node-fetch": "2.3.0",
     "prompt": "1.0.0",
+    "request": "2.88.0",
     "tar": "4.4.8"
   },
   "files": [
@@ -32,12 +32,15 @@
   ],
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
-    "jest": "23.6.0",
-    "jest-fetch-mock": "1.7.5"
+    "jest": "24.1.0",
+    "jest-fetch-mock": "2.1.1"
   },
   "jest": {
     "setupFiles": [
       "./test/jestLibs/setupJest.js"
     ]
+  },
+  "engines": {
+    "node": ">=6"
   }
 }

@@ -43,6 +43,70 @@ describe('Document', () => {
     expect(cozyClient.data.updateAttributes).toHaveBeenCalledTimes(1)
   })
 
+  it('should update updatedAt cozyMetadata on create or update', async () => {
+    const marge = { name: 'Marge' }
+    const margeWithCozyMetas = Simpson.addCozyMetadata(marge)
+
+    expect(margeWithCozyMetas.cozyMetadata).toBeDefined()
+    expect(margeWithCozyMetas.cozyMetadata.updatedAt).toEqual(expect.any(Date))
+  })
+
+  it('should add createdByApp cozyMetadata on create or update if needed and possible', async () => {
+    const marge = { name: 'Marge' }
+    const margeWithCozyMetas = Simpson.addCozyMetadata(marge)
+
+    expect(margeWithCozyMetas.cozyMetadata).toBeDefined()
+    expect(margeWithCozyMetas.cozyMetadata.createdByApp).not.toBeDefined()
+
+    class MetadataSimpson extends Simpson {}
+    MetadataSimpson.createdByApp = 'simpsoncreator'
+    const bart = { name: 'Bart' }
+    const bartWithCozyMetas = MetadataSimpson.addCozyMetadata(bart)
+    expect(bartWithCozyMetas.cozyMetadata).toBeDefined()
+    expect(bartWithCozyMetas.cozyMetadata.createdByApp).toEqual(
+      'simpsoncreator'
+    )
+  })
+
+  describe('updated by apps', () => {
+    const marge = { name: 'Marge' }
+    const bart = { name: 'Bart' }
+
+    class MetadataSimpson extends Simpson {}
+    MetadataSimpson.createdByApp = 'simpsoncreator'
+
+    it('should not add updatedByApps if createdByApp not defined', () => {
+      const margeWithCozyMetas = Simpson.addCozyMetadata(marge)
+      expect(margeWithCozyMetas.cozyMetadata).toBeDefined()
+      expect(margeWithCozyMetas.cozyMetadata.createdByApp).not.toBeDefined()
+      expect(margeWithCozyMetas.cozyMetadata.updatedByApps).not.toBeDefined()
+    })
+
+    it('should add updatedByApps cozyMetadata on create or update', async () => {
+      const bartWithCozyMetas = MetadataSimpson.addCozyMetadata(bart)
+      expect(bartWithCozyMetas.cozyMetadata).toBeDefined()
+      expect(bartWithCozyMetas.cozyMetadata.updatedByApps).toBeDefined()
+
+      const updateInfo = bartWithCozyMetas.cozyMetadata.updatedByApps.find(
+        x => x.slug === 'simpsoncreator'
+      )
+      expect(updateInfo).toMatchObject({
+        date: expect.any(Date)
+      })
+    })
+
+    it('should not add updatedByApps twice', () => {
+      const bartWithCozyMetas2 = MetadataSimpson.addCozyMetadata(
+        MetadataSimpson.addCozyMetadata(bart)
+      )
+      expect(
+        bartWithCozyMetas2.cozyMetadata.updatedByApps.filter(
+          x => x.slug === 'simpsoncreator'
+        ).length
+      ).toBe(1)
+    })
+  })
+
   it('should do bulk fetch', async () => {
     await Simpson.fetchAll()
     expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
@@ -283,5 +347,20 @@ describe('Document', () => {
       const docs = await Simpson.getAll(['notexisting'])
       expect(docs).toEqual([])
     })
+  })
+
+  it('should be possible for a subclass to access to the registered cozyClient', () => {
+    class SubSimpson extends Simpson {
+      static fetch() {
+        this.cozyClient.fetchJSON('GET', '/data/io.cozy.simpsons/_all_docs')
+      }
+    }
+
+    SubSimpson.fetch()
+
+    expect(cozyClient.fetchJSON).toHaveBeenLastCalledWith(
+      'GET',
+      '/data/io.cozy.simpsons/_all_docs'
+    )
   })
 })

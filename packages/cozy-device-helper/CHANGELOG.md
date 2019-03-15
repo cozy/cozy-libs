@@ -3,6 +3,97 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.9"></a>
+## [1.6.9](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.8...cozy-device-helper@1.6.9) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.8"></a>
+## [1.6.8](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.7...cozy-device-helper@1.6.8) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.7"></a>
+## [1.6.7](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.6...cozy-device-helper@1.6.7) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.6"></a>
+## [1.6.6](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.4...cozy-device-helper@1.6.6) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.5"></a>
+## [1.6.5](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.4...cozy-device-helper@1.6.5) (2019-02-12)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.4"></a>
+## [1.6.4](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.3...cozy-device-helper@1.6.4) (2019-02-11)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.3"></a>
+## [1.6.3](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.2...cozy-device-helper@1.6.3) (2019-01-11)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.2"></a>
+## [1.6.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.1...cozy-device-helper@1.6.2) (2018-12-28)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.0...cozy-device-helper@1.6.1) (2018-12-26)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.5.2...cozy-device-helper@1.6.0) (2018-12-18)
+
+
+### Features
+
+* Add an nativeLinkOpen helper ([f894c43](https://github.com/cozy/cozy-libs/commit/f894c43))
+
+
+
+
+<a name="1.5.2"></a>
+## [1.5.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.5.0...cozy-device-helper@1.5.2) (2018-12-17)
+
+
+
+
+**Note:** Version bump only for package cozy-device-helper
+
 <a name="1.5.1"></a>
 ## [1.5.1](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.5.0...cozy-device-helper@1.5.1) (2018-12-10)
 

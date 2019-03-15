@@ -24,7 +24,7 @@
   </a>
 </div>
 
-</br>
+<br />
 
 # What's cozy-realtime?
 
@@ -40,24 +40,33 @@ or
 
 ## API
 
-#### `subscribeAll(config, doctype, parse)`
+#### `subscribe(config, doctype, options)`
 
-This method allow you to subscribe to realtime for all documents of a provided doctype. Here are the parameters:
+This method allow you to subscribe to realtime for one document or all documents of a provided doctype. Here are the parameters:
 
 - `config`: a config object with the following keys :
   - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
   - `token`: the cozy token (ex: the global `cozy.client._token.token`)
-  - `url`: the cozy url (ex: https://recette.cozy.works), must be provided if `domain` is not set
+  - `url`: the cozy url (ex: https://recette.cozy.works)
   - `secure`: a boolean indicating if a secure protocol must be used (default `true`). Should not be provided along `url`.
 - `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
-- `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
+- `options`: an object to use optional parameters:
+  - `docId`: a document `_id` attribute to target in order to get realtime only for this specific document
+  - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
+
+It will return a subscription object with `onCreate` (except if subscribing on specific document), `onUpdate` and `onDelete` methods.
 
 Here is an example:
 
 ```javascript
 import realtime from 'cozy-realtime'
 
-const subscription = await realtime.subscribeAll(cozy.client, 'io.mocks.mydocs')
+const config = {
+    token: authToken, // app token provided by the stack or the client
+    domain: 'cozy.tools:8080',
+    secure: true // to use wss (with SSL) or not
+  }
+const subscription = realtime.subscribe(config, 'io.mocks.mydocs')
 
 // your code when a new document is created
 subscription.onCreate(doc => doSomethingOnCreate(doc))
@@ -66,64 +75,49 @@ subscription.onUpdate(doc => doSomethingOnUpdate(doc))
 // your code when a document is deleted
 subscription.onDelete(doc => doSomethingOnDelete(doc))
 
-// Unsubscribe from realtime
+// Unsubscribe all events from realtime
 subscription.unsubscribe()
+
+// for a specific document
+const docSubscription = realtime.subscribe(config, 'io.mocks.mydocs')
+
+// There is no onCreate here since to have the id,
+// the document is already created
+
+// your code when your document is updated
+docSubscription.onUpdate(doc => doSomethingOnUpdate(doc))
+// your code when your document is deleted
+docSubscription.onDelete(doc => doSomethingOnDelete(doc))
+
+// Unsubscribe all events from realtime
+docSubscription.unsubscribe()
 ```
 
-#### `subscribe(config, doctype, doc, parse)`
-
-This method is exactly the same working as the previous `subscribeAll()` function but to listen only one document. Here are the parameters:
-
-- `config`: a config object with the following keys :
-  - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
-  - `token`: the cozy token (ex: the global `cozy.client._token.token`)
-  - `url`: the cozy url (ex: https://recette.cozy.works)
-  - `secure`: a boolean indicating if a secure protocol must be used (default `true`). Should not be provided along `url`.
-- `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
-- `doc`: the document to listen, it must be at least a JS object with the `_id` attribute of the wanted document (only the `_id` will be checked to know if this is the wanted document or not).
-- `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
-
-Here is an example:
+All `onCreate`, `onUpdate` and `onDelete` methods will return the subscription so you can chain the call like below:
 
 ```javascript
 import realtime from 'cozy-realtime'
 
-const subscription = await realtime.subscribe(cozy.client, 'io.mocks.mydocs', myDoc)
+const config = {
+    token: authToken, // app token provided by the stack or the client
+    domain: 'cozy.tools:8080',
+    secure: true // to use wss (with SSL) or not
+  }
+const subscription = realtime.subscribe(config, 'io.mocks.mydocs')
+  // your code when a new document is created
+  .onCreate(doc => doSomethingOnCreate(doc))
+  // your code when a document is updated
+  .onUpdate(doc => doSomethingOnUpdate(doc))
+  // your code when a document is deleted
+  .onDelete(doc => doSomethingOnDelete(doc))
 
-// your code when your document is updated
-subscription.onUpdate(doc => doSomethingOnUpdate(doc))
-// your code when your document is deleted
-subscription.onDelete(doc => doSomethingOnDelete(doc))
-
-// Unsubscribe from realtime
+// Unsubscribe all events from realtime
 subscription.unsubscribe()
 ```
 
-## Community
-
-### What's Cozy?
-
-<div align="center">
-  <a href="https://cozy.io">
-    <img src="https://cdn.rawgit.com/cozy/cozy-site/master/src/images/cozy-logo-name-horizontal-blue.svg" alt="cozy" height="48" />
-  </a>
- </div>
- </br>
-
-[Cozy] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
-
-### Get in touch
-
-You can reach the Cozy Community by:
-
-- Chatting with us on IRC [#cozycloud on Freenode][freenode]
-- Posting on our [Forum][forum]
-- Posting issues on the [Github repos][github]
-- Say Hi! on [Twitter][twitter]
-
 ### Maintainers
 
-The maintainers for Cozy Realtime are [Greg](https://github.com/gregorylegarec) and [kosssi](https://github.com/kosssi) !
+The maintainers for Cozy Realtime are [Greg](https://github.com/gregorylegarec) and [CPatchane](https://github.com/CPatchane) !
 
 ## License
 

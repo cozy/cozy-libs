@@ -1,0 +1,48 @@
+{
+  "name": "cozy-harvest-lib",
+  "version": "0.37.10",
+  "description": "Provides logic, modules and components for Cozy's harvest applications.",
+  "main": "dist/index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-harvest-lib/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "babel src -d dist --copy-files",
+    "build:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn build:doc:react)",
+    "deploy:doc": "(cd ../.. && yarn deploy:doc)",
+    "prebuild": "yarn tx",
+    "prepublishOnly": "yarn build",
+    "test": "jest --verbose --coverage",
+    "tx": "tx pull --all",
+    "watch": "babel src -d dist --copy-files --watch",
+    "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
+  },
+  "dependencies": {
+    "cozy-client": "6.11.1",
+    "cozy-realtime": "1.2.8",
+    "cozy-ui": "19.8.0",
+    "final-form": "4.11.1",
+    "lodash": "4.17.11",
+    "react-final-form": "3.7.0",
+    "react-markdown": "4.0.6",
+    "react-proptypes": "1.0.0"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.2.3",
+    "babel-jest": "24.1.0",
+    "babel-preset-cozy-app": "^1.5.0",
+    "enzyme": "3.8.0",
+    "enzyme-adapter-react-16": "1.10.0",
+    "identity-obj-proxy": "3.0.0",
+    "jest": "24.1.0",
+    "react": "16.7.0",
+    "react-dom": "16.7.0"
+  }
+}

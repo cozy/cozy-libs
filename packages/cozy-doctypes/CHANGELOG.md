@@ -3,6 +3,448 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.38.6"></a>
+## [1.38.6](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.5...cozy-doctypes@1.38.6) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.38.5"></a>
+## [1.38.5](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.4...cozy-doctypes@1.38.5) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.38.4"></a>
+## [1.38.4](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.3...cozy-doctypes@1.38.4) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.38.3"></a>
+## [1.38.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.2...cozy-doctypes@1.38.3) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.38.2"></a>
+## [1.38.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.1...cozy-doctypes@1.38.2) (2019-03-12)
+
+
+### Bug Fixes
+
+* Linter ([2fc2a60](https://github.com/cozy/cozy-libs/commit/2fc2a60))
+
+
+
+
+<a name="1.38.1"></a>
+## [1.38.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.0...cozy-doctypes@1.38.1) (2019-03-06)
+
+
+### Bug Fixes
+
+* Support unexisting institutionLabel ([022629b](https://github.com/cozy/cozy-libs/commit/022629b))
+
+
+
+
+<a name="1.38.0"></a>
+# [1.38.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.37.0...cozy-doctypes@1.38.0) (2019-03-06)
+
+
+### Features
+
+* Add updatedByApps ([5a68376](https://github.com/cozy/cozy-libs/commit/5a68376))
+
+
+
+
+<a name="1.37.0"></a>
+# [1.37.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.36.1...cozy-doctypes@1.37.0) (2019-03-06)
+
+
+### Features
+
+* Bank account can detect incoherences ([f74c7e7](https://github.com/cozy/cozy-libs/commit/f74c7e7))
+
+
+
+
+<a name="1.36.1"></a>
+## [1.36.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.36.0...cozy-doctypes@1.36.1) (2019-03-05)
+
+
+### Bug Fixes
+
+* Rename label slugs to JS otherwise babel does not copy it ([e026784](https://github.com/cozy/cozy-libs/commit/e026784))
+
+
+
+
+<a name="1.36.0"></a>
+# [1.36.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.35.2...cozy-doctypes@1.36.0) (2019-03-05)
+
+
+### Features
+
+* Cannot match if accounts seem to pertain to different apps ([513d157](https://github.com/cozy/cozy-libs/commit/513d157))
+
+
+
+
+<a name="1.35.2"></a>
+## [1.35.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.35.1...cozy-doctypes@1.35.2) (2019-02-28)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.35.1"></a>
+## [1.35.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.35.0...cozy-doctypes@1.35.1) (2019-02-13)
+
+
+### Bug Fixes
+
+* **deps:** pin dependency [@babel](https://github.com/babel)/runtime to 7.3.1 ([b73979d](https://github.com/cozy/cozy-libs/commit/b73979d))
+
+
+
+
+<a name="1.35.0"></a>
+# [1.35.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.2...cozy-doctypes@1.35.0) (2019-02-13)
+
+
+### Features
+
+* Use transpiled file only in browser context ([ccda834](https://github.com/cozy/cozy-libs/commit/ccda834))
+
+
+
+
+<a name="1.34.2"></a>
+## [1.34.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.1...cozy-doctypes@1.34.2) (2019-02-12)
+
+
+### Bug Fixes
+
+* Defensive programming ([0d97b97](https://github.com/cozy/cozy-libs/commit/0d97b97))
+
+
+
+
+<a name="1.34.1"></a>
+## [1.34.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.34.0...cozy-doctypes@1.34.1) (2019-02-12)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.34.0"></a>
+# [1.34.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.3...cozy-doctypes@1.34.0) (2019-02-11)
+
+
+### Features
+
+* Remove reconciliationKey no longer used by matching algo ([4c3a76a](https://github.com/cozy/cozy-libs/commit/4c3a76a))
+
+
+
+
+<a name="1.33.3"></a>
+## [1.33.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.2...cozy-doctypes@1.33.3) (2019-02-11)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.33.2"></a>
+## [1.33.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.1...cozy-doctypes@1.33.2) (2019-02-08)
+
+
+### Bug Fixes
+
+* Add compacted original bank label method ([560f038](https://github.com/cozy/cozy-libs/commit/560f038))
+
+
+
+
+<a name="1.33.1"></a>
+## [1.33.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.33.0...cozy-doctypes@1.33.1) (2019-02-07)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.33.0"></a>
+# [1.33.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.2...cozy-doctypes@1.33.0) (2019-02-06)
+
+
+### Bug Fixes
+
+* Only add delta to method when method exists ([03af23e](https://github.com/cozy/cozy-libs/commit/03af23e))
+
+
+### Features
+
+* Match on originalNumber ([23c2afd](https://github.com/cozy/cozy-libs/commit/23c2afd))
+
+
+
+
+<a name="1.32.2"></a>
+## [1.32.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.1...cozy-doctypes@1.32.2) (2019-02-04)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.32.1"></a>
+## [1.32.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.32.0...cozy-doctypes@1.32.1) (2019-01-30)
+
+
+### Bug Fixes
+
+* Ignore case when matching redacted number ([b812be0](https://github.com/cozy/cozy-libs/commit/b812be0))
+
+
+
+
+<a name="1.32.0"></a>
+# [1.32.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.31.0...cozy-doctypes@1.32.0) (2019-01-29)
+
+
+### Features
+
+* Bank transaction send its event directly without delegating ([63cf5a8](https://github.com/cozy/cozy-libs/commit/63cf5a8))
+* TrackEvent option is used to send splitDate event ([c242526](https://github.com/cozy/cozy-libs/commit/c242526))
+
+
+
+
+<a name="1.31.0"></a>
+# [1.31.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.30.0...cozy-doctypes@1.31.0) (2019-01-28)
+
+
+### Features
+
+* **doctypes:** Compare lowercase labels ([cd5b4be](https://github.com/cozy/cozy-libs/commit/cd5b4be))
+
+
+
+
+<a name="1.30.0"></a>
+# [1.30.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.29.0...cozy-doctypes@1.30.0) (2019-01-25)
+
+
+### Features
+
+* Add currency matching method ([c5c1322](https://github.com/cozy/cozy-libs/commit/c5c1322))
+* Add Milleis account matching ([be2d7e2](https://github.com/cozy/cozy-libs/commit/be2d7e2))
+* Remove spaces from number if not credit card ([4aad37d](https://github.com/cozy/cozy-libs/commit/4aad37d))
+
+
+
+
+<a name="1.29.0"></a>
+# [1.29.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.28.0...cozy-doctypes@1.29.0) (2019-01-25)
+
+
+### Features
+
+* **doctypes:** Sort snaps by date of op ([00a1eb1](https://github.com/cozy/cozy-libs/commit/00a1eb1))
+* **doctypes:** Test match creditcard transactions ([ae8bf55](https://github.com/cozy/cozy-libs/commit/ae8bf55))
+* **doctypes:** Use realisation date ([f5c2a86](https://github.com/cozy/cozy-libs/commit/f5c2a86))
+
+
+
+
+<a name="1.28.0"></a>
+# [1.28.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.27.0...cozy-doctypes@1.28.0) (2019-01-25)
+
+
+### Features
+
+* **doctypes:** Register client statically on Document ([cd284f7](https://github.com/cozy/cozy-libs/commit/cd284f7))
+
+
+
+
+<a name="1.27.0"></a>
+# [1.27.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.26.0...cozy-doctypes@1.27.0) (2019-01-24)
+
+
+### Features
+
+* **doctypes:** Match accounts from AXA ([6c869e8](https://github.com/cozy/cozy-libs/commit/6c869e8))
+* **doctypes:** Score matching for accounts ([033497d](https://github.com/cozy/cozy-libs/commit/033497d))
+
+
+
+
+<a name="1.26.0"></a>
+# [1.26.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.25.0...cozy-doctypes@1.26.0) (2019-01-24)
+
+
+### Bug Fixes
+
+* **doctypes:** Cannot match on undefined vendorId ([eca9fd3](https://github.com/cozy/cozy-libs/commit/eca9fd3))
+* **doctypes:** Checks that str is not undefined ([d4e78da](https://github.com/cozy/cozy-libs/commit/d4e78da))
+* **doctypes:** Typo in fixture cleaning ([e134422](https://github.com/cozy/cozy-libs/commit/e134422))
+
+
+### Features
+
+* **doctypes:** Rematch unmatched with relaxed dates ([abf8f72](https://github.com/cozy/cozy-libs/commit/abf8f72))
+* **doctypes:** Test banque populaire transactions ([1add3b6](https://github.com/cozy/cozy-libs/commit/1add3b6))
+* **doctypes:** Tweak tests not to have false positives ([37d4602](https://github.com/cozy/cozy-libs/commit/37d4602))
+
+
+
+
+<a name="1.25.0"></a>
+# [1.25.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.24.1...cozy-doctypes@1.25.0) (2019-01-23)
+
+
+### Bug Fixes
+
+* **doctypes:** Only pass transactions from konn related account ([1bbb5f9](https://github.com/cozy/cozy-libs/commit/1bbb5f9))
+
+
+### Features
+
+* **doctypes:** Add operation matching ([d1e2bd8](https://github.com/cozy/cozy-libs/commit/d1e2bd8))
+* **doctypes:** More readable snapshots by fmting calls ([dc63569](https://github.com/cozy/cozy-libs/commit/dc63569))
+* **doctypes:** Only consider exact amounts ([9395888](https://github.com/cozy/cozy-libs/commit/9395888))
+* **doctypes:** Remove dates from originalBankLabel ([5dde887](https://github.com/cozy/cozy-libs/commit/5dde887))
+* **doctypes:** Squash spaces in original bank label ([6b5e8f6](https://github.com/cozy/cozy-libs/commit/6b5e8f6))
+* **doctypes:** Test credit agricole operations ([862d6e6](https://github.com/cozy/cozy-libs/commit/862d6e6))
+* **doctypes:** Use new matching to get missed transactions ([2332571](https://github.com/cozy/cozy-libs/commit/2332571))
+* **doctypes:** zipGroup returns empty arrays for non existing groups ([c059f9e](https://github.com/cozy/cozy-libs/commit/c059f9e))
+
+
+
+
+<a name="1.24.1"></a>
+## [1.24.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.24.0...cozy-doctypes@1.24.1) (2019-01-22)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.24.0"></a>
+# [1.24.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.23.0...cozy-doctypes@1.24.0) (2019-01-22)
+
+
+### Features
+
+* Allow {pre,suf}fixed numbers if length == 11 ([5c1201c](https://github.com/cozy/cozy-libs/commit/5c1201c))
+
+
+
+
+<a name="1.23.0"></a>
+# [1.23.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.22.0...cozy-doctypes@1.23.0) (2019-01-21)
+
+
+### Features
+
+* Normalize account number before attempting matching ([c82bf9a](https://github.com/cozy/cozy-libs/commit/c82bf9a))
+
+
+
+
+<a name="1.22.0"></a>
+# [1.22.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.21.0...cozy-doctypes@1.22.0) (2019-01-21)
+
+
+### Features
+
+* Robust account matching ([b7ca853](https://github.com/cozy/cozy-libs/commit/b7ca853))
+
+
+
+
+<a name="1.21.0"></a>
+# [1.21.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.20.0...cozy-doctypes@1.21.0) (2019-01-16)
+
+
+### Features
+
+* **doctypes:** Automatically add cozyMetadata.createdByApp on ([6b10433](https://github.com/cozy/cozy-libs/commit/6b10433))
+
+
+
+
+<a name="1.20.0"></a>
+# [1.20.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.19.1...cozy-doctypes@1.20.0) (2019-01-13)
+
+
+### Bug Fixes
+
+* **doctypes:** Update too specific error message in Document model ([f5766fc](https://github.com/cozy/cozy-libs/commit/f5766fc))
+
+
+### Features
+
+* **doctypes:** Add addCozyMetadata method on Document ([c0b66b2](https://github.com/cozy/cozy-libs/commit/c0b66b2))
+
+
+
+
+<a name="1.19.1"></a>
+## [1.19.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.19.0...cozy-doctypes@1.19.1) (2019-01-09)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-logger to v1.3.1 ([ca61f03](https://github.com/cozy/cozy-libs/commit/ca61f03))
+
+
+
+
+<a name="1.19.0"></a>
+# [1.19.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.18.2...cozy-doctypes@1.19.0) (2019-01-02)
+
+
+### Features
+
+* **doctype:** Add Account ✨ ([b0fc850](https://github.com/cozy/cozy-libs/commit/b0fc850))
+* **doctype:** Add Permission class and schema ✨ ([42e5d5f](https://github.com/cozy/cozy-libs/commit/42e5d5f))
+
+
+
+
+<a name="1.18.2"></a>
+## [1.18.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.18.1...cozy-doctypes@1.18.2) (2018-12-27)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
+<a name="1.18.1"></a>
+## [1.18.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.18.0...cozy-doctypes@1.18.1) (2018-12-14)
+
+
+
+
+**Note:** Version bump only for package cozy-doctypes
+
 <a name="1.18.0"></a>
 # [1.18.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.17.0...cozy-doctypes@1.18.0) (2018-12-07)
 

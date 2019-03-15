@@ -3,18 +3,22 @@
 const fs = require('fs-extra')
 const tar = require('tar')
 const { spawn } = require('child_process')
+const path = require('path')
 
 const BUILD_FOLDER = './build/'
-const DOWNCLOUD_UPLOAD_DIR = 'www-upload/'
-const DOWNCLOUD_URL = 'downcloud.cozycloud.cc'
+const UPLOAD_DIR = 'www-upload/'
+const USER = 'upload'
+const HOST = 'downcloud.cozycloud.cc'
+const HOST_STRING = `${USER}@${HOST}`
 
 const launchCmd = (cmd, params, options) => {
-  return new Promise(async (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
-    const process = await spawn(cmd, params, cmdOptions)
+    const process = spawn(cmd, params, cmdOptions)
     process.stdout.on('data', data => result.stdout.push(data.toString()))
     process.stderr.on('data', data => result.stderr.push(data.toString()))
+    process.on('error', err => reject(err))
     process.on('close', code => {
       result.code = code
       if (code === 0) {
@@ -28,10 +32,30 @@ const launchCmd = (cmd, params, options) => {
 
 const deleteArchive = async filename => {
   try {
-    await fs.remove(BUILD_FOLDER + filename)
+    await fs.remove(path.join(BUILD_FOLDER, filename))
   } catch (error) {
     console.error(`↳ ⚠️  Unable to delete the previous archive.`)
   }
+}
+
+const sshCommand = async (cmd, hostString) => {
+  console.log('Launching', cmd, 'on', hostString)
+  return launchCmd('ssh', ['-o', 'StrictHostKeyChecking=no', hostString, cmd])
+}
+
+const rsync = async (src, dest) => {
+  return launchCmd(
+    'rsync',
+    [
+      // to remove host validation question on CI
+      '-e',
+      'ssh -o StrictHostKeyChecking=no',
+      '-a',
+      src,
+      `${HOST_STRING}:${dest}`
+    ],
+    { cwd: BUILD_FOLDER }
+  )
 }
 
 const pushArchive = async (archiveFileName, options) => {
@@ -40,13 +64,11 @@ const pushArchive = async (archiveFileName, options) => {
   const folder = `${appSlug}/${appVersion}${
     buildCommit ? `-${buildCommit}` : ''
   }/`
+
+  const uploadDir = path.join(UPLOAD_DIR, folder)
+
   try {
-    await launchCmd('ssh', [
-      '-o',
-      'StrictHostKeyChecking=no',
-      'upload@downcloud.cozycloud.cc',
-      `mkdir -p ${DOWNCLOUD_UPLOAD_DIR}${folder}`
-    ])
+    await sshCommand(`mkdir -p ${uploadDir}`, HOST_STRING)
   } catch (e) {
     throw new Error(
       `Unable to create target directory ${folder} on downcloud server : ${
@@ -55,24 +77,12 @@ const pushArchive = async (archiveFileName, options) => {
     )
   }
 
-  await launchCmd(
-    'rsync',
-    [
-      // to remove host validation question on CI
-      '-e',
-      'ssh -o StrictHostKeyChecking=no',
-      '-a',
-      archiveFileName,
-      `upload@${DOWNCLOUD_URL}:${DOWNCLOUD_UPLOAD_DIR}${folder}`
-    ],
-    { cwd: BUILD_FOLDER }
-  )
+  await rsync(archiveFileName, uploadDir)
 
   console.log(`↳ ℹ️  Upload to downcloud complete.`)
-
   return {
     ...options,
-    appBuildUrl: `https://${DOWNCLOUD_URL}/upload/${folder}${archiveFileName}`
+    appBuildUrl: `https://${HOST}/upload/${folder}${archiveFileName}`
   }
 }
 
@@ -86,7 +96,7 @@ const createArchive = async archiveFileName => {
   const options = {
     gzip: true,
     cwd: BUILD_FOLDER,
-    file: BUILD_FOLDER + archiveFileName
+    file: path.join(BUILD_FOLDER, archiveFileName)
   }
   try {
     await tar.c(options, fileList)

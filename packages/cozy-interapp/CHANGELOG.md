@@ -3,6 +3,105 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.4.3"></a>
+## [0.4.3](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.4.2...cozy-interapp@0.4.3) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.4.2"></a>
+## [0.4.2](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.4.1...cozy-interapp@0.4.2) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.4.1"></a>
+## [0.4.1](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.4.0...cozy-interapp@0.4.1) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.19...cozy-interapp@0.4.0) (2019-03-12)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([099cc51](https://github.com/cozy/cozy-libs/commit/099cc51))
+
+
+### Features
+
+* Use stackClient to not print deprecated warning ([0e52ea8](https://github.com/cozy/cozy-libs/commit/0e52ea8))
+
+
+
+
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.19...cozy-interapp@0.3.0) (2019-03-12)
+
+
+### Features
+
+* Use stackClient to not print deprecated warning ([0e52ea8](https://github.com/cozy/cozy-libs/commit/0e52ea8))
+
+
+
+
+<a name="0.2.20"></a>
+## [0.2.20](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.19...cozy-interapp@0.2.20) (2019-02-12)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.2.19"></a>
+## [0.2.19](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.18...cozy-interapp@0.2.19) (2019-02-11)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.2.18"></a>
+## [0.2.18](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.17...cozy-interapp@0.2.18) (2019-01-11)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.2.17"></a>
+## [0.2.17](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.16...cozy-interapp@0.2.17) (2018-12-28)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.2.16"></a>
+## [0.2.16](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.15...cozy-interapp@0.2.16) (2018-12-26)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
+<a name="0.2.15"></a>
+## [0.2.15](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.13...cozy-interapp@0.2.15) (2018-12-17)
+
+
+
+
+**Note:** Version bump only for package cozy-interapp
+
 <a name="0.2.14"></a>
 ## [0.2.14](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.2.13...cozy-interapp@0.2.14) (2018-12-10)
 

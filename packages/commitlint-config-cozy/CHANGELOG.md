@@ -3,6 +3,102 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.23"></a>
+## [0.3.23](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.22...commitlint-config-cozy@0.3.23) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.22"></a>
+## [0.3.22](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.21...commitlint-config-cozy@0.3.22) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.21"></a>
+## [0.3.21](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.20...commitlint-config-cozy@0.3.21) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.20"></a>
+## [0.3.20](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.19...commitlint-config-cozy@0.3.20) (2019-03-12)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.19"></a>
+## [0.3.19](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.18...commitlint-config-cozy@0.3.19) (2019-02-25)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.18"></a>
+## [0.3.18](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.17...commitlint-config-cozy@0.3.18) (2019-02-12)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.17"></a>
+## [0.3.17](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.16...commitlint-config-cozy@0.3.17) (2019-02-11)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.16"></a>
+## [0.3.16](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.15...commitlint-config-cozy@0.3.16) (2019-01-16)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.15"></a>
+## [0.3.15](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.14...commitlint-config-cozy@0.3.15) (2019-01-11)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.14"></a>
+## [0.3.14](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.13...commitlint-config-cozy@0.3.14) (2018-12-28)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.13"></a>
+## [0.3.13](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.12...commitlint-config-cozy@0.3.13) (2018-12-26)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
+<a name="0.3.12"></a>
+## [0.3.12](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.10...commitlint-config-cozy@0.3.12) (2018-12-17)
+
+
+
+
+**Note:** Version bump only for package commitlint-config-cozy
+
 <a name="0.3.11"></a>
 ## [0.3.11](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.3.10...commitlint-config-cozy@0.3.11) (2018-12-10)
 

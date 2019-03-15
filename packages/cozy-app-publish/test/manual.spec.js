@@ -2,21 +2,24 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const manualScript = require('../lib/manual')
+const manualScript = require('../lib/manual').manualPublish
 const publishLib = require('../lib/publish')
-// const prepublishLib = require('../lib/prepublish')
+const prepublish = require('../lib/prepublish')
+const tags = require('../lib/tags')
 
 const rootPath = process.cwd()
 const testFolder = '.tmp_test'
 const testPath = path.join(rootPath, testFolder)
 const mockAppDir = path.join(__dirname, 'mockApps/mockApp')
+const promptConfirm = require('../lib/confirm')
 
+jest.mock('../lib/confirm')
 jest.mock('../lib/publish', () => jest.fn())
-jest.mock('../lib/prepublish', () =>
-  jest.fn(options =>
-    Object.assign({}, options, { sha256Sum: 'fakeshasum5644545' })
-  )
-)
+
+jest.mock('../lib/hooks/pre/downcloud', () => ({
+  appBuildUrl: 'https://mock.getarchive.cc/12345.tar.gz'
+}))
+jest.mock('../lib/prepublish', () => jest.fn())
 
 const commons = {
   token: 'registryTokenForTest123'
@@ -28,9 +31,12 @@ function getOptions(token, buildDir) {
     appBuildUrl: 'https://mock.getarchive.cc/12345.tar.gz',
     manualVersion: '2.1.8-dev.12345',
     registryUrl: 'https://mock.registry.cc',
-    spaceName: 'mock_space'
+    spaceName: 'mock_space',
+    yes: true
   }
-  if (buildDir) options.buildDir = buildDir
+  if (buildDir) {
+    options.buildDir = buildDir
+  }
   return options
 }
 
@@ -41,6 +47,9 @@ describe('Manual publishing script', () => {
     process.chdir(testPath)
     // copy the app mock content
     fs.copySync(mockAppDir, testPath, { overwrite: true })
+    tags.getVersionTags = jest
+      .fn()
+      .mockReturnValue(['2.1.8-dev.12346'].map(tags.parse))
   })
 
   afterAll(() => {
@@ -50,18 +59,23 @@ describe('Manual publishing script', () => {
     fs.removeSync(testPath)
   })
 
+  let prepublishResult
   beforeEach(() => {
     jest.clearAllMocks()
+    prepublishResult = { sha256Sum: 'fakeshasum5644545' }
+    prepublish.mockImplementation(options =>
+      Object.assign({}, options, prepublishResult)
+    )
   })
 
   it('should work correctly if expected options provided', async () => {
-    await manualScript(getOptions(commons.token, './build'), { confirm: 'yes' })
+    await manualScript(getOptions(commons.token, './build'))
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
 
   it('should work correctly with default buildDir value "build"', async () => {
-    await manualScript(getOptions(commons.token), { confirm: 'yes' })
+    await manualScript(getOptions(commons.token))
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
@@ -70,19 +84,54 @@ describe('Manual publishing script', () => {
     const options = getOptions(commons.token)
     delete options.spaceName
 
-    await manualScript(options, { confirm: 'yes' })
+    await manualScript(options)
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it('should work correctly if no version provided', async () => {
+    const options = getOptions(commons.token)
+    delete options.manualVersion
+
+    await manualScript(options)
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
+  })
+
+  it('should work correctly if no appBuildUrl is provided but prepublish provides it', async () => {
+    const options = getOptions(commons.token)
+    delete options.appBuildUrl
+    prepublishResult.appBuildUrl = 'https://mock.getarchive.cc/12345.tar.gz'
+
+    await manualScript(options)
     expect(publishLib).toHaveBeenCalledTimes(1)
     expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
 
   it('should handle error if the publishing is canceled by the user via the prompt and not publishing', async () => {
-    await manualScript(getOptions(commons.token), { confirm: 'no' })
+    promptConfirm.mockImplementation(() => Promise.resolve(false))
+    const options = getOptions(commons.token)
+    await manualScript({ ...options, yes: false })
     expect(publishLib).toHaveBeenCalledTimes(0)
   })
 
   it('should throw an error if the token is missing', async () => {
     await expect(
-      manualScript(getOptions(null), { confirm: 'yes' })
+      manualScript(getOptions(null))
     ).rejects.toThrowErrorMatchingSnapshot()
+  })
+
+  it('should support prefix', async () => {
+    const badTag = 'cozy-banks/2.1.8-beta.1'
+    const goodTag = 'cozy-drive/2.1.8-beta.2'
+    const tagVersions = [badTag, goodTag].map(tags.parse)
+    tags.getVersionTags = jest.fn().mockReturnValue(tagVersions)
+    await manualScript({
+      ...getOptions(commons.token),
+      manualVersion: null,
+      tagPrefix: 'cozy-drive'
+    })
+    expect(publishLib).toHaveBeenCalledTimes(1)
+    expect(publishLib.mock.calls[0][0]).toMatchSnapshot()
   })
 })
