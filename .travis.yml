@@ -21,9 +21,9 @@ before_install:
   - install -m0644 .transifexrc.tpl ~/.transifexrc
   - echo "password = $TX_PASSWD" >> ~/.transifexrc
 script:
+  - yarn build
   - yarn lint
   - yarn test
-  - yarn build
 before_deploy:
   - git config --global user.email "npm@cozycloud.cc"
   - git config --global user.name "Cozy Bot"
