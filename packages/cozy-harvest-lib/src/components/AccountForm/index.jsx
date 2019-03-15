@@ -94,6 +94,15 @@ export class AccountForm extends PureComponent {
         validate={this.validate(sanitizedFields, initialAndDefaultValues)}
         render={({ dirty, form, values, valid }) => (
           <div
+            onKeyUp={event =>
+              this.handleKeyUp(event, {
+                dirty,
+                form,
+                initialValues,
+                valid,
+                values
+              })
+            }
             ref={element => {
               container = element
             }}
@@ -111,15 +120,6 @@ export class AccountForm extends PureComponent {
               }
               initialValues={initialAndDefaultValues}
               manifestFields={sanitizedFields}
-              onKeyUp={event =>
-                this.handleKeyUp(event, {
-                  dirty,
-                  form,
-                  initialValues,
-                  valid,
-                  values
-                })
-              }
               t={t}
             />
             <Button

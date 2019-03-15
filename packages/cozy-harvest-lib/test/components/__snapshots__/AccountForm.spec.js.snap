@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountForm should always render login error 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <Wrapper
     error={[Error: LOGIN_FAILED]}
     konnector={
@@ -51,7 +53,6 @@ exports[`AccountForm should always render login error 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -79,7 +80,9 @@ exports[`AccountForm should always render login error 1`] = `
 `;
 
 exports[`AccountForm should not render error 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <AccountFields
     container={null}
     hasError={false}
@@ -99,7 +102,6 @@ exports[`AccountForm should not render error 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -137,7 +139,9 @@ exports[`AccountForm should redirect to OAuthForm 1`] = `
 `;
 
 exports[`AccountForm should render 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <AccountFields
     container={null}
     initialValues={Object {}}
@@ -156,7 +160,6 @@ exports[`AccountForm should render 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -184,7 +187,9 @@ exports[`AccountForm should render 1`] = `
 `;
 
 exports[`AccountForm should render error 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <Wrapper
     error={[Error: Test error]}
     konnector={
@@ -234,7 +239,6 @@ exports[`AccountForm should render error 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
     t={
       [MockFunction] {
         "calls": Array [

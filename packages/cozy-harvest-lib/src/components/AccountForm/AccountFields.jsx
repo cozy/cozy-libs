@@ -19,8 +19,7 @@ export class AccountFields extends PureComponent {
       disabled,
       hasError,
       initialValues,
-      manifestFields,
-      onKeyUp
+      manifestFields
     } = this.props
 
     // Ready to use named fields array
@@ -30,7 +29,7 @@ export class AccountFields extends PureComponent {
     }))
 
     return (
-      <div onKeyUp={onKeyUp}>
+      <div>
         {namedFields.map((field, index) => (
           <FinalFormField
             key={index}
@@ -61,8 +60,7 @@ AccountFields.propTypes = {
   container: PropTypes.node,
   disabled: PropTypes.bool,
   hasError: PropTypes.bool,
-  manifestFields: PropTypes.object.isRequired,
-  onKeyUp: PropTypes.func
+  manifestFields: PropTypes.object.isRequired
 }
 
 export default AccountFields
