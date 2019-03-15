@@ -13,7 +13,8 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "files": [
-    "index.js"
+    "index.js",
+    "validate.js"
   ],
   "dependencies": {
     "@babel/core": "7.2.2",
