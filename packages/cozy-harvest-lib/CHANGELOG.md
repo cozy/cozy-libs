@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.37.9"></a>
+## [0.37.9](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.37.8...cozy-harvest-lib@0.37.9) (2019-03-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-client to v6.11.1 ([52ca2f4](https://github.com/cozy/cozy-libs/commit/52ca2f4))
+
+
+
+
 <a name="0.37.8"></a>
 ## [0.37.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.37.7...cozy-harvest-lib@0.37.8) (2019-03-14)
 
