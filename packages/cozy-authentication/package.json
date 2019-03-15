@@ -33,6 +33,7 @@
   },
   "dependencies": {
     "cozy-device-helper": "1.6.9",
+    "cozy-flags": "1.5.8",
     "react-markdown": "4.0.6",
     "url-polyfill": "1.1.0"
   },
