@@ -287,6 +287,8 @@ describe('(cozy-realtime) API: ', () => {
       type: 'io.cozy.foo'
     }
 
+    const events = ['created', 'updated', 'deleted']
+
     describe('subscribe', () => {
       it('should send AUTH message', () => {
         const realtime = CozyRealtime.init(mockConfig)
@@ -344,21 +346,23 @@ describe('(cozy-realtime) API: ', () => {
         ).toBe(1)
       })
 
-      it('should receive created document of given doctype', () => {
-        const fooCreateHandler = jest.fn()
+      for (const event of events) {
+        it(`on '${event}' event, should receive document of given doctype`, () => {
+          const handler = jest.fn()
 
-        const realtime = CozyRealtime.init(mockConfig)
+          const realtime = CozyRealtime.init(mockConfig)
 
-        server.stepForward()
+          server.stepForward()
 
-        realtime.subscribe(fooSelector, 'created', fooCreateHandler)
+          realtime.subscribe(fooSelector, event, handler)
 
-        server.sendDoc(fixtures.fooDoc, 'created')
-        server.sendDoc(fixtures.barDoc, 'created')
+          server.sendDoc(fixtures.fooDoc, event)
+          server.sendDoc(fixtures.barDoc, event)
 
-        expect(fooCreateHandler).toHaveBeenCalledTimes(1)
-        expect(fooCreateHandler).toHaveBeenCalledWith(fixtures.fooDoc)
-      })
+          expect(handler).toHaveBeenCalledTimes(1)
+          expect(handler).toHaveBeenCalledWith(fixtures.fooDoc)
+        })
+      }
 
       it('should receive updated documents of given doctype', () => {
         const fooUpdateHandler = jest.fn()
