@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.1"></a>
+## [1.5.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.5.0...babel-preset-cozy-app@1.5.1) (2019-03-18)
+
+
+### Bug Fixes
+
+* **babel-preset-cozy-app:** Publish validate.js file ([b3c4c5e](https://github.com/cozy/cozy-libs/commit/b3c4c5e))
+
+
+
+
 <a name="1.5.0"></a>
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.4.0...babel-preset-cozy-app@1.5.0) (2019-03-12)
 
