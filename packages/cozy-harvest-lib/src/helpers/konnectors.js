@@ -22,6 +22,14 @@ const KNOWN_ERRORS = [
   VENDOR_DOWN
 ]
 
+const USER_ERRORS = [
+  CHALLENGE_ASKED,
+  DISK_QUOTA_EXCEEDED,
+  LOGIN_FAILED,
+  NOT_EXISTING_DIRECTORY,
+  USER_ACTION_NEEDED
+]
+
 /**
  * Custom error to handle errors returnes by konnector.
  * Konnectors are returning error codes in error messages.
@@ -59,6 +67,14 @@ export class KonnectorJobError extends Error {
    */
   isLoginError() {
     return this.type === LOGIN_FAILED
+  }
+
+  /**
+   * Test if the konnector error is a user error
+   * @return {Boolean} [description]
+   */
+  isUserError() {
+    return USER_ERRORS.includes(this.type)
   }
 }
 

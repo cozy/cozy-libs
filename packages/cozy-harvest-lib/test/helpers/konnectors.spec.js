@@ -53,7 +53,7 @@ describe('Konnectors Helpers', () => {
       expect(error.type).toBe('USER_ACTION_NEEDED')
     })
 
-    for (var message of [
+    for (const message of [
       'DISK_QUOTA_EXCEEDED',
       'CHALLENGE_ASKED',
       'LOGIN_FAILED',
@@ -78,6 +78,21 @@ describe('Konnectors Helpers', () => {
             'LOGIN_FAILED',
             'LOGIN_FAILED.NEEDS_SECRET',
             'LOGIN_FAILED.TOO_MANY_ATTEMPTS'
+          ].includes(message)
+        )
+        expect(error.isUserError()).toBe(
+          [
+            'CHALLENGE_ASKED',
+            'DISK_QUOTA_EXCEEDED',
+            'LOGIN_FAILED',
+            'LOGIN_FAILED.NEEDS_SECRET',
+            'LOGIN_FAILED.TOO_MANY_ATTEMPTS',
+            'NOT_EXISTING_DIRECTORY',
+            'USER_ACTION_NEEDED',
+            'USER_ACTION_NEEDED.OAUTH_OUTDATED',
+            'USER_ACTION_NEEDED.ACCOUNT_REMOVED',
+            'USER_ACTION_NEEDED.CHANGE_PASSWORD',
+            'USER_ACTION_NEEDED.PERMISSIONS_CHANGED'
           ].includes(message)
         )
       })
