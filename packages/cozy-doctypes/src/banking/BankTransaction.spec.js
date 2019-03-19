@@ -34,12 +34,12 @@ describe('reconciliation', () => {
     {
       amount: -20,
       originalBankLabel: 'Test 02',
-      date: '2018-10-02'
+      date: '2018-10-05'
     },
     {
       amount: -30,
       originalBankLabel: 'Test 03',
-      date: '2018-10-02'
+      date: '2018-10-06'
     }
   ]
 
@@ -63,6 +63,28 @@ describe('reconciliation', () => {
     )
 
     expect(missedTransactions).toEqual([newTransactions[1]])
+  })
+
+  it('should not return older missed transactions', () => {
+    const newTransactions = [
+      {
+        amount: -10,
+        originalBankLabel: 'Test 01',
+        date: '2018-10-02'
+      },
+      {
+        amount: -15,
+        originalBankLabel: 'Test 04',
+        date: '2018-09-26'
+      }
+    ]
+
+    const missedTransactions = BankTransaction.getMissedTransactions(
+      newTransactions,
+      existingTransactions
+    )
+
+    expect(missedTransactions).toEqual([])
   })
 
   it('should return an empty array when there is no missed transaction', () => {

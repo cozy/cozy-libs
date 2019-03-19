@@ -1,12 +1,22 @@
 const keyBy = require('lodash/keyBy')
 const groupBy = require('lodash/groupBy')
-const max = require('lodash/max')
+const maxBy = require('lodash/maxBy')
+const addDays = require('date-fns/add_days')
+const isAfter = require('date-fns/is_after')
 const Document = require('../Document')
 const log = require('../log')
 const BankAccount = require('./BankAccount')
 const { matchTransactions } = require('./matching-transactions')
 
-const getDate = transaction => transaction.date.slice(0, 10)
+const maxValue = (iterable, fn) => {
+  const res = maxBy(iterable, fn)
+  return res ? fn(res) : null
+}
+
+const getDate = transaction => {
+  const date = transaction.realisationDate || transaction.date
+  return date.slice(0, 10)
+}
 
 /**
  * Get the date of the latest transaction in an array
@@ -14,7 +24,7 @@ const getDate = transaction => transaction.date.slice(0, 10)
  * @returns {string} The date of the latest transaction (YYYY-MM-DD)
  */
 const getSplitDate = stackTransactions => {
-  return max(stackTransactions.map(transaction => getDate(transaction)))
+  return maxValue(stackTransactions, getDate)
 }
 
 const ensureISOString = date => {
@@ -77,18 +87,25 @@ class Transaction extends Document {
 
   /**
    * Get transactions that should be present in the stack but are not.
+   * Transactions that are older that 1 week before the oldest existing
+   * transaction are ignored.
    *
-   * @param {array} transactionsToCheck
+   * @param {array} newTransactions
    * @param {array} stackTransactions
    * @returns {array}
    */
   static getMissedTransactions(
-    transactionsToCheck,
+    newTransactions,
     stackTransactions,
     options = {}
   ) {
+    const oldestDate = maxValue(stackTransactions, getDate)
+    const frontierDate = addDays(oldestDate, -7)
+    const recentNewTransactions = newTransactions.filter(tr =>
+      isAfter(getDate(tr), frontierDate)
+    )
     const matchingResults = Array.from(
-      matchTransactions(transactionsToCheck, stackTransactions)
+      matchTransactions(recentNewTransactions, stackTransactions)
     )
 
     const missedTransactions = matchingResults

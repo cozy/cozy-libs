@@ -161,10 +161,10 @@ describe('banking reconciliator', () => {
     ]
     const fetchedTransactions = [
       {
-        amount: -200,
-        label: 'Debit 200',
+        amount: -400,
+        label: 'Debit 400',
         vendorAccountId: 2,
-        date: '2018-06-01T00:00' // prior to split date and doesn't exist, saved
+        date: '2018-06-22T00:00' // prior to split date and doesn't exist, saved
       },
       {
         amount: -100,

@@ -13,6 +13,6 @@ exports[`banking reconciliator should pass stack transactions belonging to recon
 Array [
   "Bank account 1",
   "Debit 100",
-  "Debit 200",
+  "Debit 400",
 ]
 `;
