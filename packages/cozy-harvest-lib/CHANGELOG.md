@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.38.0"></a>
+# [0.38.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.37.11...cozy-harvest-lib@0.38.0) (2019-03-19)
+
+
+### Features
+
+* **harvest:** Export KonnectorJobError from module ✨ ([c9c48bd](https://github.com/cozy/cozy-libs/commit/c9c48bd))
+* **harvest:** KonnectorJobError now detects user errors ✨ ([4939b61](https://github.com/cozy/cozy-libs/commit/4939b61))
+
+
+
+
 <a name="0.37.11"></a>
 ## [0.37.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.37.10...cozy-harvest-lib@0.37.11) (2019-03-18)
 
