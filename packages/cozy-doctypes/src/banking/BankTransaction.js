@@ -1,6 +1,8 @@
 const keyBy = require('lodash/keyBy')
 const groupBy = require('lodash/groupBy')
 const max = require('lodash/max')
+const addDays = require('date-fns/add_days')
+const isAfter = require('date-fns/is_after')
 const Document = require('../Document')
 const log = require('../log')
 const BankAccount = require('./BankAccount')
@@ -88,17 +90,17 @@ class Transaction extends Document {
   /**
    * Get transactions that should be present in the stack but are not.
    *
-   * @param {array} transactionsToCheck
+   * @param {array} newTransactions
    * @param {array} stackTransactions
    * @returns {array}
    */
   static getMissedTransactions(
-    transactionsToCheck,
+    newTransactions,
     stackTransactions,
     options = {}
   ) {
     const matchingResults = Array.from(
-      matchTransactions(transactionsToCheck, stackTransactions)
+      matchTransactions(newTransactions, stackTransactions)
     )
 
     const missedTransactions = matchingResults
