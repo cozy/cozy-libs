@@ -6,7 +6,17 @@ const log = require('../log')
 const BankAccount = require('./BankAccount')
 const { matchTransactions } = require('./matching-transactions')
 
-const getDate = transaction => transaction.date.slice(0, 10)
+const maxValue = (iterable, fn) => {
+  const res = maxBy(iterable, fn)
+  return res ? fn(res) : null
+}
+
+const getDate = transaction => {
+  const date = transaction.realisationDate || transaction.date
+  return date.slice(0, 10)
+}
+
+
 
 /**
  * Get the date of the latest transaction in an array
@@ -14,7 +24,7 @@ const getDate = transaction => transaction.date.slice(0, 10)
  * @returns {string} The date of the latest transaction (YYYY-MM-DD)
  */
 const getSplitDate = stackTransactions => {
-  return max(stackTransactions.map(transaction => getDate(transaction)))
+  return maxValue(stackTransactions, getDate)
 }
 
 const ensureISOString = date => {
