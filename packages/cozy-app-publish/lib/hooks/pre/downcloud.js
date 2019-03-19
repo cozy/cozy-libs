@@ -5,7 +5,6 @@ const tar = require('tar')
 const { spawn } = require('child_process')
 const path = require('path')
 
-const BUILD_FOLDER = './build/'
 const UPLOAD_DIR = 'www-upload/'
 const USER = 'upload'
 const HOST = 'downcloud.cozycloud.cc'
@@ -30,9 +29,9 @@ const launchCmd = (cmd, params, options) => {
   })
 }
 
-const deleteArchive = async filename => {
+const deleteArchive = async archivePath => {
   try {
-    await fs.remove(path.join(BUILD_FOLDER, filename))
+    await fs.remove(archivePath)
   } catch (error) {
     console.error(`↳ ⚠️  Unable to delete the previous archive.`)
   }
@@ -43,7 +42,7 @@ const sshCommand = async (cmd, hostString) => {
   return launchCmd('ssh', ['-o', 'StrictHostKeyChecking=no', hostString, cmd])
 }
 
-const rsync = async (src, dest) => {
+const rsync = async (src, dest, opts) => {
   return launchCmd(
     'rsync',
     [
@@ -54,12 +53,12 @@ const rsync = async (src, dest) => {
       src,
       `${HOST_STRING}:${dest}`
     ],
-    { cwd: BUILD_FOLDER }
+    opts
   )
 }
 
 const pushArchive = async (archiveFileName, options) => {
-  const { appSlug, appVersion, buildCommit } = options
+  const { appSlug, appVersion, buildCommit, buildDir } = options
   console.log(`↳ ℹ️  Sending archive to downcloud`)
   const folder = `${appSlug}/${appVersion}${
     buildCommit ? `-${buildCommit}` : ''
@@ -77,7 +76,7 @@ const pushArchive = async (archiveFileName, options) => {
     )
   }
 
-  await rsync(archiveFileName, uploadDir)
+  await rsync(archiveFileName, uploadDir, { cwd: buildDir })
 
   console.log(`↳ ℹ️  Upload to downcloud complete.`)
   return {
@@ -90,13 +89,14 @@ const getArchiveFileName = slug => {
   return `${slug}.tar.gz`
 }
 
-const createArchive = async archiveFileName => {
-  console.log(`↳ ℹ️  Creating archive ${archiveFileName}`)
-  const fileList = await fs.readdir(BUILD_FOLDER)
+const createArchive = async archivePath => {
+  console.log(`↳ ℹ️  Creating archive ${archivePath}`)
+  const cwd = path.resolve(path.dirname(archivePath))
+  const fileList = await fs.readdir(path.dirname(archivePath))
   const options = {
     gzip: true,
-    cwd: BUILD_FOLDER,
-    file: path.join(BUILD_FOLDER, archiveFileName)
+    cwd,
+    file: archivePath
   }
   try {
     await tar.c(options, fileList)
@@ -111,7 +111,7 @@ const createArchive = async archiveFileName => {
 }
 
 module.exports = async options => {
-  if (!fs.existsSync(BUILD_FOLDER)) {
+  if (!fs.existsSync(options.buildDir)) {
     console.error('↳ ❌  Build folder does not exist. Run `yarn build`.')
     throw new Error('Missing build folder')
   }
@@ -119,8 +119,9 @@ module.exports = async options => {
   const { appSlug } = options
 
   const archiveFileName = getArchiveFileName(appSlug)
-  await deleteArchive(archiveFileName)
-  await createArchive(archiveFileName)
+  const archivePath = path.join(options.buildDir, archiveFileName)
+  await deleteArchive(archivePath)
+  await createArchive(archivePath)
 
   let downcloudOptions = options
 

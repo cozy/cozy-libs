@@ -24,6 +24,7 @@ const publisher = ({
   })
 
   const {
+    buildDir,
     buildCommit,
     postpublishHook,
     prepublishHook,
@@ -61,6 +62,7 @@ const publisher = ({
   let publishOptions
   try {
     publishOptions = await prepublish({
+      buildDir,
       buildCommit,
       prepublishHook,
       registryUrl,
