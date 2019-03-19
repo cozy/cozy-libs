@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.39.0"></a>
+# [1.39.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.7...cozy-doctypes@1.39.0) (2019-03-19)
+
+
+### Features
+
+* Do not reconciliate with transactions that are too old ([7aa65fd](https://github.com/cozy/cozy-libs/commit/7aa65fd))
+
+
+
+
 <a name="1.38.7"></a>
 ## [1.38.7](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.6...cozy-doctypes@1.38.7) (2019-03-18)
 
