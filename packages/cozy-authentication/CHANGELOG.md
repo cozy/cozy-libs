@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.2"></a>
+## [1.4.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.4.1...cozy-authentication@1.4.2) (2019-03-19)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Remove lock file ([#349](https://github.com/cozy/cozy-libs/issues/349)) ([ec3a7de](https://github.com/cozy/cozy-libs/commit/ec3a7de))
+
+
+
+
 <a name="1.4.1"></a>
 ## [1.4.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.4.0...cozy-authentication@1.4.1) (2019-03-18)
 
