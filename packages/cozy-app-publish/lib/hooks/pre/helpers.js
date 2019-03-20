@@ -55,20 +55,42 @@ const rsync = async (src, dest, opts) => {
   )
 }
 
-const pushArchive = async (archiveFileName, options) => {
-  const { appSlug, appVersion, buildCommit, buildDir } = options
-  console.log(`↳ ℹ️  Sending archive to downcloud`)
-  const folder = `${appSlug}/${appVersion}${
-    buildCommit ? `-${buildCommit}` : ''
-  }/`
+const getFullAppVersion = options => {
+  const { appVersion, buildCommit } = options
 
-  const uploadDir = path.join(UPLOAD_DIR, folder)
+  if (!buildCommit) {
+    return appVersion
+  }
+
+  return appVersion + '-' + buildCommit
+}
+
+const getRemoteDir = options => {
+  const { appSlug, spaceName } = options
+
+  const components = [spaceName, appSlug, getFullAppVersion(options)].filter(
+    Boolean
+  )
+
+  return path.join(...components)
+}
+
+const getAppBuildUrl = remoteArchivePath => {
+  return `https://${HOST}/upload/${remoteArchivePath}`
+}
+
+const pushArchive = async (archiveFileName, options) => {
+  const { buildDir } = options
+  console.log(`↳ ℹ️  Sending archive to downcloud`)
+
+  const remoteDir = getRemoteDir(options)
+  const uploadDir = path.join(UPLOAD_DIR, remoteDir)
 
   try {
     await sshCommand(`mkdir -p ${uploadDir}`, HOST_STRING)
   } catch (e) {
     throw new Error(
-      `Unable to create target directory ${folder} on downcloud server : ${
+      `Unable to create target directory ${uploadDir} on downcloud server : ${
         e.message
       }`
     )
@@ -79,7 +101,7 @@ const pushArchive = async (archiveFileName, options) => {
   console.log(`↳ ℹ️  Upload to downcloud complete.`)
   return {
     ...options,
-    appBuildUrl: `https://${HOST}/upload/${folder}${archiveFileName}`
+    appBuildUrl: getAppBuildUrl(path.join(remoteDir, archiveFileName))
   }
 }
 
@@ -114,5 +136,8 @@ module.exports = {
   getArchiveFileName,
   pushArchive,
   sshCommand,
-  rsync
+  rsync,
+  getFullAppVersion,
+  getRemoteDir,
+  getAppBuildUrl
 }
