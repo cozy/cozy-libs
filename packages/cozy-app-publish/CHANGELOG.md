@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.15.0"></a>
+# [0.15.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.14.0...cozy-app-publish@0.15.0) (2019-03-20)
+
+
+### Features
+
+* **app-publish/downcloud:** Use space name in remote path ([22e88c5](https://github.com/cozy/cozy-libs/commit/22e88c5))
+
+
+
+
 <a name="0.14.0"></a>
 # [0.14.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.13.1...cozy-app-publish@0.14.0) (2019-03-20)
 
