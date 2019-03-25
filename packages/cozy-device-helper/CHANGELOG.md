@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.10...cozy-device-helper@1.7.0) (2019-03-25)
+
+
+### Features
+
+* Add an utility to open or redirect for a deeplink ([#354](https://github.com/cozy/cozy-libs/issues/354)) ([6e1adfd](https://github.com/cozy/cozy-libs/commit/6e1adfd))
+
+
+
+
 <a name="1.6.10"></a>
 ## [1.6.10](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.9...cozy-device-helper@1.6.10) (2019-03-18)
 
