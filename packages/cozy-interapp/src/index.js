@@ -1,3 +1,3 @@
 import Intents from './intents'
 
-export { Intents }
+export { Intents as default, Intents }
