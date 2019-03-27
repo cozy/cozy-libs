@@ -70,18 +70,6 @@ export class CozyRealtime {
   }
 
   /**
-   * Returns an instance of CozyRealtime. Can be used instead of
-   * `new CozyRealtime`.
-   * @static
-   * @param  {Object} options Object containing domain, secure, token and url
-   * parameters
-   * @return {CozyRealtime}         CozyRealtime instance
-   */
-  static init(options) {
-    return new CozyRealtime(options)
-  }
-
-  /**
    * Remove the given handler from the list of handlers for given
    * doctype/document and event.
    *
