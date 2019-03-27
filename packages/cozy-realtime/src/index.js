@@ -1,6 +1,8 @@
 import { subscribe as subscribeLegacy } from './legacy'
 import CozyRealtime from './CozyRealtime'
 
+export { CozyRealtime }
+
 export default {
   // Legacy
   subscribe: (...args) => {
@@ -10,6 +12,6 @@ export default {
     return subscribeLegacy(...args)
   },
   init: options => {
-    return CozyRealtime.init(options)
+    return new CozyRealtime(options)
   }
 }
