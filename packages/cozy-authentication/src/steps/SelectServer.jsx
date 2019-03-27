@@ -279,7 +279,7 @@ export class SelectServer extends Component {
                 autoCapitalize="none"
                 autoCorrect="off"
                 autoComplete="off"
-                autofocus
+                autoFocus
                 className={classNames(styles['wizard-input'], {
                   [styles['error']]: error
                 })}
