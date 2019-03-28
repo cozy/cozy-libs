@@ -13,13 +13,15 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "devDependencies": {
+    "jest-cli": "24.5.0",
     "mjml": "4.3.1",
     "webpack": "4.29.6",
     "webpack-cli": "3.3.0"
   },
   "scripts": {
     "build": "webpack",
-    "watch": "webpack --watch"
+    "watch": "webpack --watch",
+    "test": "jest --verbose"
   },
   "bin": {
     "mjml": "dist/main.js"
