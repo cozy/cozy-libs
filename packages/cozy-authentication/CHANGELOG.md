@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.4.4"></a>
+## [1.4.4](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.4.3...cozy-authentication@1.4.4) (2019-03-28)
+
+
+### Bug Fixes
+
+* Use correct attribute for autoFocus ([ff5f802](https://github.com/cozy/cozy-libs/commit/ff5f802))
+
+
+
+
 <a name="1.4.3"></a>
 ## [1.4.3](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.4.2...cozy-authentication@1.4.3) (2019-03-25)
 
