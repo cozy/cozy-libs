@@ -3,44 +3,74 @@
 export const prefix = 'flag__'
 export const getKey = name => prefix + name
 
-export const setFlag = (name, value) => {
-  return localStorage.setItem(getKey(name), JSON.stringify(value))
+const listFlagLocalStorage = () => {
+  return Object.keys(localStorage)
+    .filter(x => x.indexOf(prefix) === 0)
+    .map(x => x.replace(prefix, ''))
 }
 
-export const getFlag = name => {
-  const val = localStorage.getItem(getKey(name))
-  if (val) {
-    return JSON.parse(val)
-  } else {
-    // set the key so that it can be listed
-    setFlag(name, null)
-    return null
+/**
+ * In memory key value storage.
+ *  - Saves to localStorage when a key is set
+ *  - When instantiated, will try to fill from localStorage
+ *  - Emits `change` when a key is set (eventEmitter)
+ */
+class FlagStore {
+  constructor() {
+    this.fillFromLocalStorage()
+  }
+
+  fillFromLocalStorage() {
+    const flags = listFlagLocalStorage()
+    this.store = {}
+    for (let flag of flags) {
+      const val = localStorage.getItem(getKey(flag))
+      this.store[flag] = val ? JSON.parse(val) : val
+    }
+  }
+
+  keys() {
+    return Object.keys(this.store)
+  }
+
+  get(name) {
+    if (!this.store.hasOwnProperty(name)) {
+      this.store[name] = null
+    }
+    return this.store[name]
+  }
+
+  set(name, value) {
+    if (window.localStorage) {
+      localStorage.setItem(getKey(name), JSON.stringify(value))
+    }
+    this.store[name] = value
   }
 }
 
+const store = new FlagStore()
 const flag = function() {
   if (!window.localStorage) {
     return
   }
   const args = [].slice.call(arguments)
   if (args.length === 1) {
-    return getFlag(args[0])
+    return store.get(args[0])
   } else {
-    return setFlag(args[0], args[1])
+    store.set(args[0], args[1])
+    return args[1]
   }
 }
 
-const rxPrefix = new RegExp('^' + prefix)
 export const listFlags = () => {
-  return Object.keys(localStorage)
-    .filter(x => x.indexOf(prefix) > -1)
-    .map(x => x.replace(rxPrefix, ''))
+  return store.keys()
 }
 
 export const resetFlags = () => {
-  listFlags().forEach(name => localStorage.removeItem(getKey(name)))
+  listFlags().forEach(name => (store[name] = null))
 }
 
+flag.store = store
 flag.list = listFlags
 flag.reset = resetFlags
 
