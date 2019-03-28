@@ -2,9 +2,8 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Modal from 'cozy-ui/transpiled/react/Modal'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { register, getURL } from './client-compat'
+import Modal from 'cozy-ui/react/Modal'
+import { translate } from 'cozy-ui/react/I18n'
 
 class Revoked extends Component {
   logout() {
@@ -13,21 +12,22 @@ class Revoked extends Component {
 
   async logBackIn() {
     const url =
-      this.props.url || cozy.client._url || getURL(this.context.client)
+      this.props.url || cozy.client._url || this.context.client.options.uri
     if (cozy.client && cozy.client._storage) {
       cozy.client._storage.clear()
     }
     try {
       const cozyClient = this.context.client
-      const registration = await register(cozyClient, url)
+      const { client, token } = await cozyClient.register(url)
       this.props.onLogBackIn({
         url,
-        clientInfo: registration.client,
-        token: registration.token,
+        clientInfo: client,
+        token,
         router: this.props.router
       })
     } catch (e) {
-      console.warn(e) // eslint-disable-line no-console
+      // eslint-disable-next-line no-console
+      console.warn(e)
     }
   }
 
