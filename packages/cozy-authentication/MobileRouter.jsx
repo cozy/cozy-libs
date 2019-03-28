@@ -3,7 +3,6 @@ import { Router, withRouter } from 'react-router'
 import Proptypes from 'prop-types'
 import Authentication from './src/Authentication'
 import Revoked from './src/Revoked'
-import { logException } from 'drive/lib/reporter'
 import {
   readState,
   secretExchange,
@@ -76,7 +75,8 @@ export class MobileRouter extends Component {
       onLogout,
       appIcon,
       onboarding,
-      onboardingInformations
+      onboardingInformations,
+      onException
     } = this.props
 
     if (!isAuthenticated) {
@@ -94,7 +94,7 @@ export class MobileRouter extends Component {
           <Authentication
             router={history}
             onComplete={onAuthenticated}
-            onException={logException}
+            onException={onException}
             appIcon={appIcon}
             onboarding={onboarding}
           />
@@ -113,7 +113,11 @@ export class MobileRouter extends Component {
     }
   }
 }
-
+MobileRouter.defaultProps = {
+  onException: e => {
+    console.warn('exeception', e) //eslint disable-line no-console
+  }
+}
 MobileRouter.propTypes = {
   onboarding: onboardingPropTypes.isRequired,
   onboardingInformations: onboardingInformationsPropTypes.isRequired,
@@ -123,6 +127,7 @@ MobileRouter.propTypes = {
   isRevoked: Proptypes.bool.isRequired,
   onAuthenticated: Proptypes.func.isRequired,
   onLogout: Proptypes.func.isRequired,
-  appIcon: Proptypes.string.isRequired
+  appIcon: Proptypes.string.isRequired,
+  onException: Proptypes.func.isRequired
 }
 export default withRouter(MobileRouter)
