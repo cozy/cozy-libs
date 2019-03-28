@@ -18,7 +18,7 @@ const RETRY_BASE_DELAY = 1000
 
 export class CozyRealtime {
   /**
-   * Log were subcribe messages sent are recored
+   * Log were subscribe messages sent are recored
    * @type {Array}
    */
   _log = []
@@ -164,7 +164,7 @@ export class CozyRealtime {
 
   /**
    * Handle a socket opening, send the authentification message to cozy
-   * stack, and a subribe message for every subscriptions that have been made.
+   * stack, and a subscribe message for every subscriptions that have been made.
    * @param  {WebSocket} socket]
    */
   _handleSocketOpen(socket) {
