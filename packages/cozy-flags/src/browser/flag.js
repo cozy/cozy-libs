@@ -1,5 +1,8 @@
 /* global localStorage */
 
+import MicroEE from 'microee'
+import React from 'react'
+
 export const prefix = 'flag__'
 export const getKey = name => prefix + name
 
@@ -26,6 +29,7 @@ class FlagStore {
     for (let flag of flags) {
       const val = localStorage.getItem(getKey(flag))
       this.store[flag] = val ? JSON.parse(val) : val
+      this.emit('change')
     }
   }
 
@@ -45,10 +49,23 @@ class FlagStore {
       localStorage.setItem(getKey(name), JSON.stringify(value))
     }
     this.store[name] = value
+    this.emit('change')
+  }
+
+  remove(name) {
+    delete this.store[name]
+    localStorage.removeItem(getKey(name))
+    this.emit('change')
   }
 }
 
+MicroEE.mixin(FlagStore)
+
 const store = new FlagStore()
+
+/**
+ * Public API to use flags
+ */
 const flag = function() {
   if (!window.localStorage) {
     return
@@ -67,7 +84,7 @@ export const listFlags = () => {
 }
 
 export const resetFlags = () => {
-  listFlags().forEach(name => (store[name] = null))
+  listFlags().forEach(name => store.remove(name))
 }
 
 flag.store = store
@@ -75,3 +92,30 @@ flag.list = listFlags
 flag.reset = resetFlags
 
 export default flag
+
+/**
+ * Connects a component to the flags. The wrapped component
+ * will be refreshed when a flag changes.
+ */
+flag.connect = Component => {
+  class Wrapped extends React.Component {
+    constructor(props) {
+      super(props)
+      this.handleChange = this.handleChange.bind(this)
+    }
+    componentWillMount() {
+      store.on('change', this.handleChange)
+    }
+    componentWillUnmount() {
+      store.removeListener('change', this.handleChange)
+    }
+    handleChange() {
+      this.forceUpdate()
+    }
+    render() {
+      return <Component {...this.props} />
+    }
+  }
+  Wrapped.displayName = 'flag_' + Component.displayName
+  return Wrapped
+}
