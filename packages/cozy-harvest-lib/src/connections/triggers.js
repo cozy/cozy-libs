@@ -50,8 +50,7 @@ const waitForLoginSuccess = async (
   const jobSubscription = await subscribe(
     {
       token: client.client.token.token,
-      domain: client.client.uri,
-      secure: window.location.protocol === 'https:'
+      url: client.client.uri
     },
     JOBS_DOCTYPE,
     job
