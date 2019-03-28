@@ -6,14 +6,7 @@ import { onboardingPropTypes } from '../OnboardingPropTypes'
 const STEP_WELCOME = 'STEP_WELCOME'
 const STEP_EXISTING_SERVER = 'STEP_EXISTING_SERVER'
 
-/** Supports cozy-client-js and cozy-client */
-const register = (client, url) => {
-  if (client.register) {
-    return client.register(url)
-  } else {
-    return client.getStackClient().register(url)
-  }
-}
+import { register } from './client-compat'
 
 class Authentication extends Component {
   constructor(props) {

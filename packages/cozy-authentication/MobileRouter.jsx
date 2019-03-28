@@ -115,7 +115,7 @@ export class MobileRouter extends Component {
 }
 MobileRouter.defaultProps = {
   onException: e => {
-    console.warn('exeception', e) //eslint disable-line no-console
+    console.warn('exeception', e) //eslint-disable-line no-console
   }
 }
 MobileRouter.propTypes = {
