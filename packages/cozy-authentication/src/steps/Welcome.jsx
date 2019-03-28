@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { translate } from 'cozy-ui/react/I18n'
-import { Button, MainTitle, Icon } from 'cozy-ui/react'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { Button, MainTitle, Icon } from 'cozy-ui/transpiled/react'
 import 'cozy-ui/assets/icons/ui/cozy-negative.svg'
-import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import styles from '../styles.styl'
 import { ButtonLinkRegistration } from './ButtonLinkRegistration'

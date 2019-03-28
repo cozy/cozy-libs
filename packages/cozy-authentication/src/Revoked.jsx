@@ -2,8 +2,8 @@
 
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import Modal from 'cozy-ui/react/Modal'
-import { translate } from 'cozy-ui/react/I18n'
+import Modal from 'cozy-ui/transpiled/react/Modal'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 class Revoked extends Component {
   logout() {

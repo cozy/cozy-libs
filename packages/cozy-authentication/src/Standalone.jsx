@@ -1,5 +1,5 @@
 import React from 'react'
-import { I18n } from 'cozy-ui/react'
+import { I18n } from 'cozy-ui/transpiled/react'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import PropTypes from 'prop-types'
