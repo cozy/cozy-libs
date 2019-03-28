@@ -60,7 +60,12 @@ class Authentication extends Component {
   }
 
   render() {
-    const { onException, appIcon, appTitle } = this.props
+    const {
+      onException,
+      appIcon,
+      appTitle,
+      components: { Welcome, SelectServer }
+    } = this.props
     const { currentStepIndex, generalError, fetching } = this.state
     const currentStep = this.steps[currentStepIndex]
 
@@ -95,11 +100,19 @@ Authentication.propTypes = {
   onComplete: PropTypes.func.isRequired,
   onException: PropTypes.func.isRequired,
   router: PropTypes.object,
+  components: PropTypes.object,
   appIcon: PropTypes.string.isRequired
 }
 
 Authentication.contextTypes = {
   client: PropTypes.object
+}
+
+Authentication.defaultProps = {
+  components: {
+    Welcome,
+    SelectServer
+  }
 }
 
 export default Authentication
