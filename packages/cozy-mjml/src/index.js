@@ -1,10 +1,5 @@
-const fs = require('fs')
-const path = require('path')
-const mjml2html = require('mjml')
+// XXX We need to do the requires in this order if we want to have the default
+// components and our custom ones.
+require('mjml')
 require('./components')
-
-fs.readFile(path.normalize('./example.mjml'), 'utf8', (err, data) => {
-  if (err) throw err
-  const result = mjml2html(data)
-  fs.writeFileSync(path.normalize('./dist/example.html'), result.html)
-})
+require('mjml-cli/lib/client')()

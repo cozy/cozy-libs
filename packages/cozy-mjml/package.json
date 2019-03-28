@@ -20,5 +20,8 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch"
+  },
+  "bin": {
+    "mjml": "dist/main.js"
   }
 }

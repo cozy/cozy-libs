@@ -8,7 +8,7 @@ validator.registerDependencies({
 
 class MJCozyTitle extends core.BodyComponent {
   render() {
-    return `<mj-text mj-class="title content">${this.getContent()}</mj-text>`
+    return this.renderMJML(`<mj-text mj-class="title content">${this.getContent()}</mj-text>`)
   }
 }
 

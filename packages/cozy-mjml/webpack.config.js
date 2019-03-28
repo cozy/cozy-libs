@@ -1,12 +1,27 @@
 const path = require('path')
 const webpack = require('webpack')
+const TerserPlugin = require('terser-webpack-plugin')
 
 module.exports = {
   bail: true,
-  mode: 'development',
   target: 'node',
   node: {
     __dirname: false
+  },
+  mode: 'production',
+  optimization: {
+    minimizer: [
+      new TerserPlugin({
+        cache: true,
+        parallel: true,
+        terserOptions: {
+          // XXX some lines are silently not output by mjml when function names
+          // are mangled!
+          keep_fnames: true,
+          compress: false
+        }
+      }),
+    ],
   },
   plugins: [
     new webpack.NormalModuleReplacementPlugin(
