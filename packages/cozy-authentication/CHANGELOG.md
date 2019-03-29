@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.0"></a>
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.4.4...cozy-authentication@1.5.0) (2019-03-29)
+
+
+### Features
+
+* **auth:** Should render custom components ([d6325a9](https://github.com/cozy/cozy-libs/commit/d6325a9))
+
+
+
+
 <a name="1.4.4"></a>
 ## [1.4.4](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.4.3...cozy-authentication@1.4.4) (2019-03-28)
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.5.9...cozy-flags@1.6.0) (2019-03-29)
+
+
+### Features
+
+* Flag hoc to connect to store ([98130a9](https://github.com/cozy/cozy-libs/commit/98130a9))
+* Store flags in an object to avoid querying localStorage ([1f46ad1](https://github.com/cozy/cozy-libs/commit/1f46ad1))
+
+
+
+
 <a name="1.5.9"></a>
 ## [1.5.9](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.5.8...cozy-flags@1.5.9) (2019-03-18)
 
