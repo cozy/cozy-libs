@@ -1,0 +1,30 @@
+{
+  "name": "cozy-mjml",
+  "version": "0.1.0",
+  "description": "Use MJML custom components for Cozy emails",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mjml/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "devDependencies": {
+    "jest-cli": "24.5.0",
+    "mjml": "4.3.1",
+    "shebang-loader": "0.0.1",
+    "webpack": "4.29.6",
+    "webpack-cli": "3.3.0"
+  },
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "test": "jest --verbose"
+  },
+  "bin": {
+    "mjml": "dist/main.js"
+  }
+}
