@@ -46,15 +46,17 @@ const human = name => {
 }
 
 const FlagList = flag.connect(() => {
-  return <div>{
-    flag.list().map(name => {
-      return (
-        <div key={name}>
-          {human(name)} :{' '} <FlagInput onChange={() => {}} name={name} />
-        </div>
-      )
-    })
-  }</div>
+  return (
+    <div>
+      {flag.list().map(name => {
+        return (
+          <div key={name}>
+            {human(name)} : <FlagInput onChange={() => {}} name={name} />
+          </div>
+        )
+      })}
+    </div>
+  )
 })
 
 export default class FlagSwitcher extends React.Component {
