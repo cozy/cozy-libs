@@ -20,14 +20,13 @@ module.exports = {
           keep_fnames: true,
           compress: false
         }
-      }),
-    ],
+      })
+    ]
+  },
+  module: {
+    rules: [{ test: /node_modules\/datauri\/index.js$/, use: 'shebang-loader' }]
   },
   plugins: [
-    new webpack.NormalModuleReplacementPlugin(
-      /node_modules\/datauri\/index.js$/,
-      path.resolve('./src/hacks/datauri-index.js')
-    ),
     new webpack.NormalModuleReplacementPlugin(
       /node_modules\/uglify-js\/tools\/node.js$/,
       path.resolve('./src/hacks/uglify-node.js')
