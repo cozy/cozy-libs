@@ -1,5 +1,27 @@
 <mjml>
-  <mj-body>
-    <mj-cozy-title>✉️ Confirmation de votre inscription</mj-cozy-title>
+  <mj-head>
+    <mj-defaults />
+  </mj-head>
+  <mj-body background-color="#f5f6f7">
+    <mj-header></mj-header>
+    <mj-header locale="fr" mycozy="true"></mj-header>
+    <mj-wrapper background-color="#fff" border-radius="8px" padding="0">
+      <mj-section>
+        <mj-column>
+          <mj-text mj-class="title content-small">✉️ Main title</mj-text>
+          <mj-text mj-class="title-h2 content-small">Level 2 title</mj-text>
+          <mj-text mj-class="content-small">Content with a small bottom space (8px)</mj-text>
+          <mj-text mj-class="content-medium">Content with a medium bottom space (16px)</mj-text>
+          <mj-text mj-class="content-large">Content with a large bottom space (24px)</mj-text>
+          <mj-text mj-class="content-xlarge">Content with a extra large bottom space (32px)</mj-text>
+          <mj-text mj-class="highlight">Highlighted text</mj-text>
+          <mj-button mj-class="primary-button" href="https://cozy.io">Primary button</mj-button>
+          <mj-button mj-class="primary-link" href="https://cozy.io">Primary link</mj-button>
+          <mj-button mj-class="primary-link" font-size="12px" href="https://cozy.io">Smaller primary link for long links for example</mj-button>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+    <mj-footer></mj-footer>
+    <mj-footer locale="fr" instance="isabelledurand.mycozy.cloud"></mj-footer>
   </mj-body>
 </mjml>

@@ -38,21 +38,58 @@ To run the jest test:
 $ yarn test
 ```
 
+## Our available classes
+
 ## Our custom components
 
-### `<mj-cozy-title>`
+### `<mj-defaults>`
 
-This very simple component that just output a title, a bit like `<h1>` in HTML
-world. Example:
+Put this tag in the head to load the Lato font from Google APIs and make the
+following classes available in your mjml templates:
+
+- `title` to display the main title
+- `title-h2` to display a secondary title
+- `highlight` to display a bold & blue text
+- `primary-link` to display a blue link
+- `primary-button` to display a big blue button (which is in fact a link)
+- `content-small` to get a content block with a small bottom margin (8px)
+- `content-medium` to get a content block with a medium bottom margin (16px)
+- `content-large` to get a content block with a large bottom margin (24px)
+- `content-xlarge` to get a content block with a xlarge bottom margin (32px)
+
+To apply those classes, your must add an attribute `mj-class` to your MJML element.
 
 ```xml
-<mj-cozy-title>✉️ Confirmation de votre inscription</mj-cozy-title>
+<mj-text mj-class="title content-small">✉️ Confirmation de votre inscription</mj-text>
 ```
 
-will be transformed to:
+#### Available props
+There are no props for this component.
 
-```html
-<div style="font-family:Ubuntu, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;">
-✉️ Confirmation de votre inscription
-</div>
+```xml
+<mj-head>
+  <mj-defaults />
+</mj-head>
+```
+
+### `<mj-header>`
+
+#### Available props
+- `mycozy`: bool, default `false` - Displays a header with *MyCozy* logo instead of *CozyCloud* logo
+- `locale`: `en`|`fr`, default `en` - Displays the *MyCozy* logo in english or french
+
+```xml
+<mj-header></mj-header>
+<mj-header mycozy="true" locale="fr"></mj-header>
+```
+
+### `<mj-footer>`
+
+#### Available props
+- `locale`: `en`|`fr`, default `en` - Displays the footer texts & urls in english or french
+- `instance`: `string` - Displays the user's instance text & link instead of Cozy logo
+
+```xml
+<mj-footer></mj-footer>
+<mj-footer instance="isabelledurand.mycozy.cloud" locale="fr"></mj-footer>
 ```
