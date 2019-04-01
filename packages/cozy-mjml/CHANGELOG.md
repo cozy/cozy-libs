@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.2.0...cozy-mjml@0.3.0) (2019-04-01)
+
+
+### Bug Fixes
+
+* **cozy-mjml:** Fix tests ([ba42758](https://github.com/cozy/cozy-libs/commit/ba42758))
+
+
+### Features
+
+* **cozy-mjml:** Add a <mj-default /> component ([f8a28b8](https://github.com/cozy/cozy-libs/commit/f8a28b8))
+* **cozy-mjml:** Run optipng on images to decrease their sizes ([1e87bff](https://github.com/cozy/cozy-libs/commit/1e87bff))
+* **mjml:** Add Cozy styles & custom components ([71cfffd](https://github.com/cozy/cozy-libs/commit/71cfffd))
+
+
+
+
 <a name="0.2.0"></a>
 # 0.2.0 (2019-03-29)
 
