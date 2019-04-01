@@ -7,6 +7,9 @@ export const prefix = 'flag__'
 export const getKey = name => prefix + name
 
 const listFlagLocalStorage = () => {
+  if (typeof localStorage !== 'undefined') {
+    return []
+  }
   return Object.keys(localStorage)
     .filter(x => x.indexOf(prefix) === 0)
     .map(x => x.replace(prefix, ''))
@@ -24,6 +27,9 @@ class FlagStore {
   }
 
   fillFromLocalStorage() {
+    if (typeof localStorage !== 'undefined') {
+      return
+    }
     const flags = listFlagLocalStorage()
     this.store = {}
     for (let flag of flags) {
@@ -45,7 +51,7 @@ class FlagStore {
   }
 
   set(name, value) {
-    if (window.localStorage) {
+    if (typeof localStorage !== 'undefined') {
       localStorage.setItem(getKey(name), JSON.stringify(value))
     }
     this.store[name] = value
@@ -54,7 +60,9 @@ class FlagStore {
 
   remove(name) {
     delete this.store[name]
-    localStorage.removeItem(getKey(name))
+    if (typeof localStorage !== 'undefined') {
+      localStorage.removeItem(getKey(name))
+    }
     this.emit('change')
   }
 }
@@ -67,9 +75,6 @@ const store = new FlagStore()
  * Public API to use flags
  */
 const flag = function() {
-  if (!window.localStorage) {
-    return
-  }
   const args = [].slice.call(arguments)
   if (args.length === 1) {
     return store.get(args[0])
