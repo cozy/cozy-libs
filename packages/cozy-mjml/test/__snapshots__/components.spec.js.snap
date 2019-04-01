@@ -916,7 +916,7 @@ Object {
             <a
                href=\\"https://support.cozy.io\\" style=\\"background:transparent;color:#297ef2;font-family:Lato,Arial;font-size:12px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
-              Help & support
+              Help &amp; support
             </a>
           </td>
         </tr>

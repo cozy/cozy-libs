@@ -8,33 +8,31 @@ validator.registerDependencies({
 
 class MJHeader extends core.BodyComponent {
   render() {
+    let img = 'cozycloud.png'
+    let alt = 'Cozy Cloud'
+    let width = 122
+    let height = 24
     if (this.getAttribute('mycozy')) {
-      if (this.getAttribute('locale') === 'en') {
-        return this.renderMJML(
-          `<mj-section padding="0">
-            <mj-column>
-              <mj-image padding="16px 0" align="left" height="32px" width="129px" src="../src/assets/images/cozy-logo-myCozy.png" alt="My Cozy"></mj-image>
-            </mj-column>
-          </mj-section>`
-        )
-      } else if (this.getAttribute('locale') === 'fr') {
-        return this.renderMJML(
-          `<mj-section padding="0">
-            <mj-column>
-              <mj-image padding="16px 0" align="left" height="32px" width="142px" src="../src/assets/images/cozy-logo-monCozy.png" alt="Mon Cozy"></mj-image>
-            </mj-column>
-          </mj-section>`
-        )
+      // The default locale is 'en'
+      img = 'cozy-logo-myCozy.png'
+      alt = 'My Cozy'
+      width = 129
+      height = 32
+      if (this.getAttribute('locale') == 'fr') {
+        img = 'cozy-logo-monCozy.png'
+        alt = 'Mon Cozy'
+        width = 142
+        height = 32
       }
-    } else {
-      return this.renderMJML(
-        `<mj-section padding="0">
-          <mj-column>
-            <mj-image padding="16px 0" align="left" height="24px" width="122px" src="../src/assets/images/cozycloud.png" alt="Cozy Cloud"></mj-image>
-          </mj-column>
-        </mj-section>`
-      )
     }
+
+    return this.renderMJML(
+      `<mj-section padding="0">
+         <mj-column>
+           <mj-image padding="16px 0" align="left" height="${height}px" width="${width}px" src="../src/assets/images/${img}" alt="${alt}"></mj-image>
+         </mj-column>
+       </mj-section>`
+    )
   }
 }
 
