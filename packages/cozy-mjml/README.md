@@ -38,29 +38,14 @@ To run the jest test:
 $ yarn test
 ```
 
-## Get Cozy styled mails
-
-For starters, you must add those lines to your `<mj-head>` element in your template or simply use our `layout.mjml` file as a base.
-
-```xml
-<mj-font name="Lato" href="https://fonts.googleapis.com/css?family=Lato" />
-<mj-attributes>
-  <mj-class name="content-small" padding="0 24px 8px" />
-  <mj-class name="content-medium" padding="0 24px 16px" />
-  <mj-class name="content-large" padding="0 24px 24px" />
-  <mj-class name="content-xlarge" padding="0 24px 32px" />
-  <mj-class name="highlight" color="#297ef2" font-weight="bold" />
-  <mj-class name="title" color="#95999d" text-transform="uppercase" font-size="12px" font-weight="bold" />
-  <mj-class name="title-h2" font-size="18px" font-weight="bold" />
-  <mj-class name="primary-button" inner-padding="10px 16px" background-color="#297ef2" border-radius="2px" color="#fff" text-transform="uppercase" font-size="14px" font-weight="bold" line-height="1.43" />
-  <mj-class name="primary-link" background-color="transparent" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="10px 8px" />
-  <mj-all font-family="Lato,Arial" color="#32363f" font-size="16px" line-height="1.5" />
-</mj-attributes>
-```
-
-📌 Couldn't find a way to make a component out of this due to some MJML limitations.
-
 ## Our available classes
+
+## Our custom components
+
+### `<mj-defaults>`
+
+Put this tag in the head to load the Lato font from Google APIs and make the
+following classes available in your mjml templates:
 
 - `title` to display the main title
 - `title-h2` to display a secondary title
@@ -78,7 +63,14 @@ To apply those classes, your must add an attribute `mj-class` to your MJML eleme
 <mj-text mj-class="title content-small">✉️ Confirmation de votre inscription</mj-text>
 ```
 
-## Our custom components
+#### Available props
+There are no props for this component.
+
+```xml
+<mj-head>
+  <mj-defaults />
+</mj-head>
+```
 
 ### `<mj-header>`
 
@@ -101,4 +93,3 @@ To apply those classes, your must add an attribute `mj-class` to your MJML eleme
 <mj-footer></mj-footer>
 <mj-footer instance="isabelledurand.mycozy.cloud" locale="fr"></mj-footer>
 ```
-

@@ -1,18 +1,6 @@
 <mjml>
   <mj-head>
-    <mj-font name="Lato" href="https://fonts.googleapis.com/css?family=Lato" />
-    <mj-attributes>
-      <mj-class name="content-small" padding="0 24px 8px" />
-      <mj-class name="content-medium" padding="0 24px 16px" />
-      <mj-class name="content-large" padding="0 24px 24px" />
-      <mj-class name="content-xlarge" padding="0 24px 32px" />
-      <mj-class name="highlight" color="#297ef2" font-weight="bold" />
-      <mj-class name="title" color="#95999d" text-transform="uppercase" font-size="12px" font-weight="bold" />
-      <mj-class name="title-h2" font-size="18px" font-weight="bold" />
-      <mj-class name="primary-button" inner-padding="10px 16px" background-color="#297ef2" border-radius="2px" color="#fff" text-transform="uppercase" font-size="14px" font-weight="bold" line-height="1.43" />
-      <mj-class name="primary-link" background-color="transparent" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="10px 8px" />
-      <mj-all font-family="Lato,Arial" color="#32363f" font-size="16px" line-height="1.5" />
-    </mj-attributes>
+    <mj-defaults />
   </mj-head>
   <mj-body background-color="#f5f6f7">
     <mj-header></mj-header>
