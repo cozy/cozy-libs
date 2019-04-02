@@ -13,7 +13,7 @@ class MJFooter extends core.BodyComponent {
         <mj-section padding="16px 0">
           <mj-column vertical-align="middle">
             <mj-button href="https://${instance}" background-color="#fff" font-size="14px" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="4px 16px" vertical-align="middle" border-radius="16px">
-              <img width="24" height="24" src="../src/assets/images/cozy-logo-round.png" style="vertical-align:middle;" />&nbsp;
+              <img width="24" height="24" src="https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png" style="vertical-align:middle;" />&nbsp;
               ${instance}
             </mj-button>
           </mj-column>
@@ -22,7 +22,7 @@ class MJFooter extends core.BodyComponent {
       return `
         <mj-section padding="16px 0 8px">
           <mj-column align="center">
-            <mj-image padding="0" width="32px" src="../src/assets/images/cozy-logo-round.png"></mj-image>
+            <mj-image padding="0" width="32px" src="https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png"></mj-image>
           </mj-column>
         </mj-section>`
     }
@@ -79,13 +79,13 @@ class MJFooter extends core.BodyComponent {
       <mj-section padding-bottom="5px">
         <mj-group>
           <mj-column width="50%">
-            <mj-image align="right" alt="Appstore" padding="4px" width="130px" src="../src/assets/images/appstore-${locale}.png" href="https://itunes.apple.com/${itunesLang}/developer/cozy-cloud/id1131616091?mt=8"></mj-image>
+            <mj-image align="right" alt="Appstore" padding="4px" width="130px" src="https://files.cozycloud.cc/cozy-mjml/appstore-${locale}.png" href="https://itunes.apple.com/${itunesLang}/developer/cozy-cloud/id1131616091?mt=8"></mj-image>
           </mj-column>
           <mj-column width="50%">
-            <mj-image align="left" alt="Play Store" padding="4px" width="130px" src="../src/assets/images/playstore-${locale}.png" href="https://play.google.com/store/apps/developer?id=Cozy+Cloud${playParams}"></mj-image>
+            <mj-image align="left" alt="Play Store" padding="4px" width="130px" src="https://files.cozycloud.cc/cozy-mjml/playstore-${locale}.png" href="https://play.google.com/store/apps/developer?id=Cozy+Cloud${playParams}"></mj-image>
           </mj-column>
           <mj-column width="100%">
-            <mj-image align="center" alt="Cozy Desktop" padding="4px" width="130px" src="../src/assets/images/desktop-${locale}.png" href="https://cozy.io/${locale}/download/#desktop"></mj-image>
+            <mj-image align="center" alt="Cozy Desktop" padding="4px" width="130px" src="https://files.cozycloud.cc/cozy-mjml/desktop-${locale}.png" href="https://cozy.io/${locale}/download/#desktop"></mj-image>
           </mj-column>
         </mj-group>
       </mj-section>`
