@@ -29,7 +29,7 @@ class MJHeader extends core.BodyComponent {
     return this.renderMJML(
       `<mj-section padding="0">
          <mj-column>
-           <mj-image padding="16px 0" align="left" height="${height}px" width="${width}px" src="../src/assets/images/${img}" alt="${alt}"></mj-image>
+           <mj-image padding="16px 0" align="left" height="${height}px" width="${width}px" src="https://files.cozycloud.cc/cozy-mjml/${img}" alt="${alt}"></mj-image>
          </mj-column>
        </mj-section>`
     )

@@ -137,7 +137,7 @@ Object {
             <td  style=\\"width:122px;\\">
               
       <img
-         alt=\\"Cozy Cloud\\" height=\\"24\\" src=\\"../src/assets/images/cozycloud.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:24px;width:100%;\\" width=\\"122\\"
+         alt=\\"Cozy Cloud\\" height=\\"24\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozycloud.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:24px;width:100%;\\" width=\\"122\\"
       />
     
             </td>
@@ -221,7 +221,7 @@ Object {
             <td  style=\\"width:142px;\\">
               
       <img
-         alt=\\"Mon Cozy\\" height=\\"32\\" src=\\"../src/assets/images/cozy-logo-monCozy.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:32px;width:100%;\\" width=\\"142\\"
+         alt=\\"Mon Cozy\\" height=\\"32\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozy-logo-monCozy.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:32px;width:100%;\\" width=\\"142\\"
       />
     
             </td>
@@ -605,7 +605,7 @@ Object {
             <td  style=\\"width:32px;\\">
               
       <img
-         height=\\"auto\\" src=\\"../src/assets/images/cozy-logo-round.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"32\\"
+         height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"32\\"
       />
     
             </td>
@@ -1035,7 +1035,7 @@ Object {
         >
           
       <img
-         alt=\\"Appstore\\" height=\\"auto\\" src=\\"../src/assets/images/appstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/appstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1085,7 +1085,7 @@ Object {
         >
           
       <img
-         alt=\\"Play Store\\" height=\\"auto\\" src=\\"../src/assets/images/playstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/playstore-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1135,7 +1135,7 @@ Object {
         >
           
       <img
-         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"../src/assets/images/desktop-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/desktop-en.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1357,7 +1357,7 @@ Object {
             <a
                href=\\"https://isabelledurand.mycozy.cloud\\" style=\\"background:#ffffff;color:#297ef2;font-family:Lato,Arial;font-size:14px;font-weight:bold;line-height:1.5;Margin:0;text-decoration:none;text-transform:none;\\" target=\\"_blank\\"
             >
-              <img width=\\"24\\" height=\\"24\\" src=\\"../src/assets/images/cozy-logo-round.png\\" style=\\"vertical-align:middle;\\" />&nbsp;
+              <img width=\\"24\\" height=\\"24\\" src=\\"https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png\\" style=\\"vertical-align:middle;\\" />&nbsp;
               isabelledurand.mycozy.cloud
             </a>
           </td>
@@ -1786,7 +1786,7 @@ Object {
         >
           
       <img
-         alt=\\"Appstore\\" height=\\"auto\\" src=\\"../src/assets/images/appstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Appstore\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/appstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1836,7 +1836,7 @@ Object {
         >
           
       <img
-         alt=\\"Play Store\\" height=\\"auto\\" src=\\"../src/assets/images/playstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Play Store\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/playstore-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
@@ -1886,7 +1886,7 @@ Object {
         >
           
       <img
-         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"../src/assets/images/desktop-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
+         alt=\\"Cozy Desktop\\" height=\\"auto\\" src=\\"https://files.cozycloud.cc/cozy-mjml/desktop-fr.png\\" style=\\"border:0;display:block;outline:none;text-decoration:none;height:auto;width:100%;\\" width=\\"130\\"
       />
     
         </a>
