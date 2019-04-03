@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.4.0...cozy-mjml@0.5.0) (2019-04-03)
+
+
+### Bug Fixes
+
+* **mjml:** Fix CSS classes for HTML in mjml ([08adef3](https://github.com/cozy/cozy-libs/commit/08adef3))
+
+
+### Features
+
+* **mjml:** Add css classes for HTML elements ([07137c5](https://github.com/cozy/cozy-libs/commit/07137c5))
+
+
+
+
 <a name="0.4.0"></a>
 # [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.3.0...cozy-mjml@0.4.0) (2019-04-02)
 
