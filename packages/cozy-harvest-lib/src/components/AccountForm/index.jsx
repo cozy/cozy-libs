@@ -36,7 +36,7 @@ export class AccountForm extends PureComponent {
 
   handleKeyUp(event, { dirty, form, initialValues, valid, values }) {
     if (
-      event.code === 'Enter' &&
+      event.key === 'Enter' &&
       this.isSubmittable({ dirty, initialValues, valid })
     ) {
       this.handleSubmit(values, form)
