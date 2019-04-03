@@ -27,7 +27,7 @@
   "dependencies": {
     "cozy-client": "6.19.0",
     "cozy-realtime": "1.2.8",
-    "cozy-ui": "19.8.0",
+    "cozy-ui": "19.21.0",
     "final-form": "4.11.1",
     "lodash": "4.17.11",
     "react-final-form": "3.7.0",
