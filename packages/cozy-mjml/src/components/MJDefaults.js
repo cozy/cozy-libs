@@ -55,6 +55,17 @@ class MJDefaults extends core.HeadComponent {
       padding: '0',
       'inner-padding': '10px 8px'
     })
+
+    // Create some styles duplication for HTML elements
+    add('style', 'primary-link', {
+      color: '#297ef2',
+      'text-decoration': 'none',
+      'font-weight': 'bold'
+    })
+    add('style', 'highlight', {
+      color: '#297ef2',
+      'font-weight': 'bold'
+    })
   }
 }
 
