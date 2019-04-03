@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.38.5"></a>
+## [0.38.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.38.4...cozy-harvest-lib@0.38.5) (2019-04-03)
+
+
+### Bug Fixes
+
+* **deps:** Update cozy-ui to v19.21.0 ([748ce07](https://github.com/cozy/cozy-libs/commit/748ce07))
+
+
+
+
 <a name="0.38.4"></a>
 ## [0.38.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.38.3...cozy-harvest-lib@0.38.4) (2019-04-01)
 
