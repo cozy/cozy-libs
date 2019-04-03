@@ -76,7 +76,9 @@ Object {
     }
   
         </style>
-        
+        <style type=\\"text/css\\">.primary-link{color:#297ef2;text-decoration:none;font-weight:bold;}
+.highlight{color:#297ef2;font-weight:bold;}
+</style>
         
       </head>
       <body style=\\"background-color:#f5f6f7;\\">
