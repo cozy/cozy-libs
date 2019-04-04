@@ -9,10 +9,12 @@ jest.mock('cozy-client', () => ({
     launch: jest.fn()
   }),
   create: jest.fn(),
-  client: {
+  stackClient: {
     token: {
       token: '1234abcd'
-    },
+    }
+  },
+  options: {
     uri: 'cozy.tools:8080'
   }
 }))

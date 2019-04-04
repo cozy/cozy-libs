@@ -49,8 +49,10 @@ const waitForLoginSuccess = async (
 ) => {
   const jobSubscription = await subscribe(
     {
-      token: client.client.token.token,
-      url: client.client.uri
+      // Token structure differs between web and mobile
+      token:
+        client.stackClient.token.token || client.stackClient.token.accessToken,
+      url: client.options.uri
     },
     JOBS_DOCTYPE,
     job
