@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.6.0"></a>
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.5.0...cozy-mjml@0.6.0) (2019-04-04)
+
+
+### Features
+
+* **cozy-mjml:** Update cozy-mjml integration for cozy-stack ([70680d2](https://github.com/cozy/cozy-libs/commit/70680d2))
+
+
+
+
 <a name="0.5.0"></a>
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.4.0...cozy-mjml@0.5.0) (2019-04-03)
 
