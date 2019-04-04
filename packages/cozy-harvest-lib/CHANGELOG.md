@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.39.0"></a>
+# [0.39.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.38.5...cozy-harvest-lib@0.39.0) (2019-04-04)
+
+
+### Bug Fixes
+
+* **harvest:** Ensure translated TriggerManager has context 📝 ([c074908](https://github.com/cozy/cozy-libs/commit/c074908))
+* **harvest:** Handle keyup event from preact AND React 🚑 ([82da417](https://github.com/cozy/cozy-libs/commit/82da417))
+
+
+### Features
+
+* **harvest:** Stop exposing AccountForm, not used anymore 🔥 ([a32df85](https://github.com/cozy/cozy-libs/commit/a32df85))
+
+
+
+
 <a name="0.38.5"></a>
 ## [0.38.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.38.4...cozy-harvest-lib@0.38.5) (2019-04-03)
 
