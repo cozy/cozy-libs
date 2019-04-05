@@ -55,7 +55,7 @@ const waitForLoginSuccess = async (
       url: client.options.uri
     },
     JOBS_DOCTYPE,
-    job
+    { docId: job._id }
   )
 
   return new Promise((resolve, reject) => {
