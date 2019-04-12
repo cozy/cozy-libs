@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.1"></a>
+## [1.7.1](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.7.0...cozy-device-helper@1.7.1) (2019-04-12)
+
+
+### Bug Fixes
+
+* **cozy-device-helper:** Don't deeplink on iOS 12_2 or 12_3 ([#377](https://github.com/cozy/cozy-libs/issues/377)) ([b93aa2c](https://github.com/cozy/cozy-libs/commit/b93aa2c))
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.6.10...cozy-device-helper@1.7.0) (2019-03-25)
 
