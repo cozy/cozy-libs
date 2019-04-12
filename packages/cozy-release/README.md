@@ -28,19 +28,37 @@
 
 # What's cozy-release?
 
-TODO
+`cozy-release` is a tool that helps you to create new releases and beta of your library.
+Once `cozy-release` successfully created a tag for your release, all you need to do is to go on github and publish it.
 
 ## Setup
 
 ### Install
 
+Dependencies:
+
+- [jq](https://stedolan.github.io/jq/)
+
 `npm install --save cozy-release`
 or
 `yarn add cozy-release`
 
-## API
+## How to use it
 
-TODO
+Existing commands and options are detailed in the help:
+
+```
+cozy-release --help
+```
+
+**Warning:** Note that `cozy-release` uses `x.y.z` format. If your app previously used `vx.y.z` format, you will need to manually create a tag that matches the right format:
+
+```
+git checkout vx.y.z
+git tag -a x.y.z
+```
+
+**Warning:** When you create a patch using `cozy-release patch 1.0.0`, It will create the patch branch from the version you have given. It may be inconvenient if you try to create a release for an app that is still in beta. In this case, you will need to rebase master afterwards.
 
 ## Community
 
@@ -53,7 +71,7 @@ TODO
  </div>
  </br>
 
-[Cozy] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
+[Cozy] is a platform that brings all your web services in the same private space. With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
 
 ### Get in touch
 
