@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.4"></a>
+## 1.9.4 (2019-04-12)
+
+
+
+
+**Note:** Version bump only for package cozy-release
+
 <a name="1.9.3"></a>
 ## [1.9.3](https://github.com/cozy/cozy-libs/compare/cozy-release@1.9.2...cozy-release@1.9.3) (2018-12-10)
 
