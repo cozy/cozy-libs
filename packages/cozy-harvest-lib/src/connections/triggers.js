@@ -1,6 +1,6 @@
 import { subscribe } from 'cozy-realtime'
 
-import { KonnectorJobError } from '../helpers/konnectors'
+import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
@@ -30,66 +30,17 @@ const launchTrigger = async (client, trigger) => {
   return data
 }
 
-/**
- * Waits for successful login. For now we are not able to know in real time
- * if the login was successful or not. We consider that after a sufficient
- * delay, the konnector has successfully logged in and is now in the data
- * fetching phase.
- * The default login delay is 8 seconds.
- * In the future, the realtime login detection will be performed in this
- * method.
- * @param  {Object} client CozyClient
- * @param  {Object}  job               io.cozy.jobs document
- * @param  {Number}  [expectedSuccessDelay=8000] Delay, in ms, until the login is
- * considered as sucessful.
- * @return {Object}                    The executed job
- */
-const waitForLoginSuccess = async (
+const watchKonnectorJob = (
   client,
   job,
-  expectedSuccessDelay = 8000
+  { onError, onLoginSuccess, onSuccess }
 ) => {
-  const jobSubscription = await subscribe(
-    {
-      // Token structure differs between web and mobile
-      token:
-        client.stackClient.token.token || client.stackClient.token.accessToken,
-      url: client.options.uri
-    },
-    JOBS_DOCTYPE,
-    { docId: job._id }
-  )
-
-  return new Promise((resolve, reject) => {
-    setTimeout(() => resolve(job), expectedSuccessDelay)
-    jobSubscription.onUpdate(
-      updatedJob =>
-        (updatedJob.state === JOB_STATE_DONE && resolve(updatedJob)) ||
-        (updatedJob.state === JOB_STATE_ERRORED &&
-          reject(new Error(updatedJob.error)))
-    )
+  new KonnectorJobWatcher(client, job, {
+    expectedSuccessDelay: 8000,
+    onError,
+    onLoginSuccess,
+    onSuccess
   })
-}
-
-const watchKonnectorJob = async (
-  client,
-  job,
-  { onError, onSuccess, onLoginSuccess }
-) => {
-  let updatedJob
-
-  try {
-    updatedJob = await waitForLoginSuccess(job)
-  } catch (error) {
-    typeof onError === 'function' &&
-      onError(new KonnectorJobError(error.message))
-  }
-
-  if (['queued', 'running'].includes(updatedJob.state)) {
-    return typeof onLoginSuccess === 'function' && onLoginSuccess(updatedJob)
-  }
-
-  return typeof onSuccess === 'function' && onSuccess(updatedJob)
 }
 
 /**
