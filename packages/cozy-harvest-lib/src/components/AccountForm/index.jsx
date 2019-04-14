@@ -14,6 +14,16 @@ import OAuthForm from '../../components/OAuthForm'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
+/**
+ * AccountForm is reponsible of generating a form which will allow user to
+ * edit an account for a given konnector.
+ *
+ * This component rely internally on a ReactFinalForm component.
+ *
+ * AccountForm must be passed `onSubmit` callback.
+ * @type {PureComponent}
+ * @see https://github.com/final-form/react-final-form#getting-started
+ */
 export class AccountForm extends PureComponent {
   constructor(props, context) {
     super(props, context)
@@ -34,6 +44,17 @@ export class AccountForm extends PureComponent {
     return error || (valid && !untouched)
   }
 
+  /**
+   * Handle key up and check if `ENTER` key has been pressed. If so, submit the
+   * form if all parmater are ok.
+   * @param  {React.SyntheticEvent} event         Key events
+   * @param  {Boolean} dirty         Indicates if form is dirty, i.e. if values
+   * have changed
+   * @param  {Object} form          The form object injected by ReactFinalForm.
+   * @param  {Object} initialValues Initial data injected into AccountForm
+   * @param  {Boolean} valid        Indicates if the form data is valid
+   * @param  {Object} values        Actual form values data
+   */
   handleKeyUp(event, { dirty, form, initialValues, valid, values }) {
     if (
       event.key === 'Enter' &&
@@ -43,6 +64,11 @@ export class AccountForm extends PureComponent {
     }
   }
 
+  /**
+   * Submit handler
+   * @param  {Object} values        Actual form values data
+   * @param  {Object} form          The form object injected by ReactFinalForm.
+   */
   handleSubmit(values, form) {
     const { onSubmit } = this.props
     // Reset form with new values to set back dirty to false
@@ -88,12 +114,22 @@ export class AccountForm extends PureComponent {
       error instanceof KonnectorJobError && error.isLoginError()
 
     return (
+      // See https://github.com/final-form/react-final-form#getting-started
       <Form
         initialValues={initialAndDefaultValues}
         onSubmit={onSubmit}
         validate={this.validate(sanitizedFields, initialAndDefaultValues)}
         render={({ dirty, form, values, valid }) => (
           <div
+            onKeyUp={event =>
+              this.handleKeyUp(event, {
+                dirty,
+                form,
+                initialValues,
+                valid,
+                values
+              })
+            }
             ref={element => {
               container = element
             }}
@@ -104,22 +140,13 @@ export class AccountForm extends PureComponent {
             <AccountFields
               container={container}
               disabled={submitting}
+              fields={sanitizedFields}
               hasError={
                 error &&
                 error instanceof KonnectorJobError &&
                 error.isLoginError()
               }
               initialValues={initialAndDefaultValues}
-              manifestFields={sanitizedFields}
-              onKeyUp={event =>
-                this.handleKeyUp(event, {
-                  dirty,
-                  form,
-                  initialValues,
-                  valid,
-                  values
-                })
-              }
               t={t}
             />
             <Button
@@ -141,11 +168,45 @@ export class AccountForm extends PureComponent {
 }
 
 AccountForm.propTypes = {
+  /**
+   * Account document. Used to get intial form values.
+   * If no account is passed, AccountForm will use empty initial values.
+   * @type {Object}
+   */
   account: PropTypes.object,
-  konnector: PropTypes.object.isRequired,
+  /**
+   * Existing error
+   * @type {Error,KonnectorJobError}
+   */
   error: PropTypes.object,
+  /**
+   * Konnector document. AccountForm will check the `fields` object to compute
+   * fields.
+   * @type {Object}
+   */
+  konnector: PropTypes.object.isRequired,
+  /**
+   * Submit callback
+   * @type {Function}
+   */
+  onSubmit: PropTypes.func.isRequired,
+  /**
+   * Indicates if the AccountForm has to show errors. Sometimes errors may be
+   * displayed elsewhere. However, a KonnectorJobError corresponding to a login
+   * error is always displayed.
+   * @type {Boolean}
+   */
   showError: PropTypes.bool,
-  submitting: PropTypes.bool
+  /**
+   * Indicates if the form should be rendered as submitting data or busy.
+   * Typically updated after an `onSubmit` call.
+   * @type {Object}
+   */
+  submitting: PropTypes.bool,
+  /**
+   * Translation function
+   */
+  t: PropTypes.func
 }
 
 AccountForm.defaultProps = {

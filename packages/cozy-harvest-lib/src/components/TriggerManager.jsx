@@ -21,8 +21,8 @@ const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 /**
- * Deals with konnector configuration, i.e encapsulate account creation or
- * edition
+ * Manage a trigger for a given konnector, from account edition to trigger
+ * creation and launch.
  * @type {Component}
  */
 export class TriggerManager extends Component {
@@ -183,22 +183,97 @@ export class TriggerManager extends Component {
 }
 
 TriggerManager.propTypes = {
+  /**
+   * Account document. Used to get intial form values.
+   * If no account is passed, AccountForm will use empty initial values.
+   * @type {Object}
+   */
   account: PropTypes.object,
+  /**
+   * Konnector document. AccountForm will check the `fields` object to compute
+   * fields.
+   * @type {Object}
+   */
   konnector: PropTypes.object.isRequired,
+  /**
+   * Indicates if the TriggerManager has to show errors. Sometimes errors may be
+   * displayed elsewhere. However, a KonnectorJobError corresponding to a login
+   * error is always displayed. Transmitted to AccountForm.
+   * @type {Boolean}
+   */
   showError: PropTypes.bool,
+  /**
+   * Existing trigger document to manage.
+   * @type {Object}
+   */
   trigger: PropTypes.object,
+  /**
+   * Indicates if the given trigger is already running, i.e. if it has been
+   * launched and if an associated job with status 'running' exists.
+   * @type {[type]}
+   */
   running: PropTypes.bool,
+  /**
+   * Translation function
+   */
+  t: PropTypes.func,
+  //
   // mutations
+  //
+  /**
+   * Permission mutation
+   * @type {Function}
+   */
   addPermission: PropTypes.func,
+  /**
+   * File mutation
+   * @type {Function}
+   */
   addReferencesTo: PropTypes.func,
+  /**
+   * Trigger mutation
+   * @type {Function}
+   */
   createTrigger: PropTypes.func.isRequired,
+  /**
+   * Trigger mutations
+   * @type {Function}
+   */
   createDirectoryByPath: PropTypes.func,
+  /**
+   * Trigger mutation
+   * @type {Function}
+   */
   launchTrigger: PropTypes.func.isRequired,
+  /**
+   * Account mutation
+   * @type {Func}
+   */
   saveAccount: PropTypes.func.isRequired,
+  /**
+   * Trigger mutations
+   * @type {Function}
+   */
   statDirectoryByPath: PropTypes.func,
+  /**
+   * Job mutations
+   * @type {Function}
+   */
   waitForLoginSuccess: PropTypes.func.isRequired,
-  // hooks
+  //
+  // Callbacks
+  //
+  /**
+   * Callback invoked when the trigger has been launched and the login to the
+   * remote service has succeeded.
+   * @type {Function}
+   */
   onLoginSuccess: PropTypes.func,
+  /**
+   * Callback invoked when the trigger has been launched and the job ended
+   * successfully.
+   * @type {Function}
+   */
   onSuccess: PropTypes.func
 }
 
