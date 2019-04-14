@@ -1,5 +1,7 @@
 import { subscribe } from 'cozy-realtime'
 
+import { KonnectorJobError } from '../helpers/konnectors'
+
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
@@ -69,6 +71,27 @@ const waitForLoginSuccess = async (
   })
 }
 
+const watchKonnectorJob = async (
+  client,
+  job,
+  { onError, onSuccess, onLoginSuccess }
+) => {
+  let updatedJob
+
+  try {
+    updatedJob = await waitForLoginSuccess(job)
+  } catch (error) {
+    typeof onError === 'function' &&
+      onError(new KonnectorJobError(error.message))
+  }
+
+  if (['queued', 'running'].includes(updatedJob.state)) {
+    return typeof onLoginSuccess === 'function' && onLoginSuccess(updatedJob)
+  }
+
+  return typeof onSuccess === 'function' && onSuccess(updatedJob)
+}
+
 /**
  * Return triggers mutations
  * @param  {Object} client CozyClient
@@ -78,7 +101,7 @@ export const triggersMutations = client => {
   return {
     createTrigger: createTrigger.bind(null, client),
     launchTrigger: launchTrigger.bind(null, client),
-    waitForLoginSuccess: waitForLoginSuccess.bind(null, client)
+    watchKonnectorJob: watchKonnectorJob.bind(null, client)
   }
 }
 

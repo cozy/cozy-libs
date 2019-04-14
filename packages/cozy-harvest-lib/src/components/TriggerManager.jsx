@@ -10,7 +10,6 @@ import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
 import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
-import { KonnectorJobError } from '../helpers/konnectors'
 import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import { slugify } from '../helpers/slug'
@@ -31,6 +30,8 @@ export class TriggerManager extends Component {
 
     this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+
+    this.handleSuccess = this.handleSuccess.bind(this)
 
     this.state = {
       account: props.account,
@@ -133,6 +134,16 @@ export class TriggerManager extends Component {
   }
 
   /**
+   * Handle a success, typically job success or login success
+   * @param  {Function} successCallback Typically onLoginSuccess or onSuccess
+   * @param  {Array} args            Callback arguments
+   */
+  handleSuccess(successCallback, args) {
+    this.setState({ status: IDLE })
+    successCallback(...args)
+  }
+
+  /**
    * Launches a trigger
    * @param  {Object}  trigger io.cozy.triggers document
    * @return {Promise}         [description]
@@ -142,26 +153,14 @@ export class TriggerManager extends Component {
       launchTrigger,
       onLoginSuccess,
       onSuccess,
-      waitForLoginSuccess
+      watchKonnectorJob
     } = this.props
 
-    let job
-
-    try {
-      job = await waitForLoginSuccess(await launchTrigger(trigger))
-    } catch (error) {
-      return this.handleError(new KonnectorJobError(error.message))
-    }
-
-    this.setState({
-      status: IDLE
+    watchKonnectorJob(await launchTrigger(trigger), {
+      onError: this.handleError,
+      onLoginSuccess: this.handleSuccess(onLoginSuccess, [trigger]),
+      onSuccess: this.handleSuccess(onSuccess, [trigger])
     })
-
-    if (['queued', 'running'].includes(job.state)) {
-      return typeof onLoginSuccess === 'function' && onLoginSuccess(trigger)
-    }
-
-    return typeof onSuccess === 'function' && onSuccess(trigger)
   }
 
   render() {
@@ -196,7 +195,7 @@ TriggerManager.propTypes = {
   launchTrigger: PropTypes.func.isRequired,
   saveAccount: PropTypes.func.isRequired,
   statDirectoryByPath: PropTypes.func,
-  waitForLoginSuccess: PropTypes.func.isRequired,
+  watchKonnectorJob: PropTypes.func.isRequired,
   // hooks
   onLoginSuccess: PropTypes.func,
   onSuccess: PropTypes.func
