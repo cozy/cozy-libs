@@ -1,7 +1,6 @@
 /* eslint-env jest */
 import { triggersMutations } from 'connections/triggers'
 import client from 'cozy-client'
-import realtime from 'cozy-realtime'
 
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({
@@ -19,13 +18,7 @@ jest.mock('cozy-client', () => ({
   }
 }))
 
-jest.mock('cozy-realtime', () => ({
-  subscribe: jest.fn()
-}))
-
-const { createTrigger, launchTrigger, waitForLoginSuccess } = triggersMutations(
-  client
-)
+const { createTrigger, launchTrigger } = triggersMutations(client)
 
 const fixtures = {
   trigger: {
@@ -82,71 +75,6 @@ describe('Trigger mutations', () => {
       const result = await launchTrigger(fixtures.trigger)
       expect(client.collection().launch).toHaveBeenCalledWith(fixtures.trigger)
       expect(result).toEqual(fixtures.launchedJob)
-    })
-  })
-
-  describe('waitForLoginSuccess', () => {
-    const shortLoginResponseTime = 50
-    const longLoginResponseTime = 150
-    const jobSuccessResponseTime = 100
-
-    // Lets mock a job to pass as waitForLoginSuccess parameter. This job should
-    // be returned after timeout
-    const job = {
-      // Test attribute, not expected in job schema
-      source: 'timeout',
-      state: 'queued'
-    }
-
-    // Mock for job returned by realtime
-    const updatedJob = {
-      source: 'realtime',
-      state: 'done'
-    }
-
-    beforeAll(() => {
-      // Mock realtime to respond at 100ms
-      realtime.subscribe.mockResolvedValue({
-        onUpdate: fn => setTimeout(() => fn(updatedJob), jobSuccessResponseTime)
-      })
-    })
-
-    afterEach(() => {
-      realtime.subscribe.mockClear()
-    })
-
-    afterAll(() => {
-      realtime.subscribe.mockReset()
-    })
-
-    it('waits for the given delay', async () => {
-      const resultingJob = await waitForLoginSuccess(
-        job,
-        shortLoginResponseTime
-      )
-      expect(resultingJob).toEqual(job)
-    })
-
-    it('handles job end before login delay', async () => {
-      const resultingJob = await waitForLoginSuccess(job, longLoginResponseTime)
-      expect(resultingJob).toEqual(updatedJob)
-    })
-
-    it('ignores unfinished job', async () => {
-      // Mock realtime to respond at 100ms
-      realtime.subscribe.mockImplementation(() => ({
-        onUpdate: fn =>
-          setTimeout(
-            () => fn({ state: 'queued', source: 'realtime' }),
-            jobSuccessResponseTime
-          )
-      }))
-
-      const resultingJob = await waitForLoginSuccess(
-        job,
-        shortLoginResponseTime
-      )
-      expect(resultingJob).toEqual(job)
     })
   })
 })
