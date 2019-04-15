@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Button, MainTitle, Icon } from 'cozy-ui/transpiled/react'
 import 'cozy-ui/assets/icons/ui/cozy-negative.svg'
@@ -7,14 +8,15 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import styles from '../styles.styl'
 import { ButtonLinkRegistration } from './ButtonLinkRegistration'
-
+import { onboardingPropTypes } from '../../OnboardingPropTypes'
 export class Welcome extends Component {
   registerRender = () => {
     const {
       t,
       register,
       allowRegistration,
-      breakpoints: { isMobile }
+      breakpoints: { isMobile },
+      onboarding
     } = this.props
 
     if (allowRegistration) {
@@ -31,6 +33,7 @@ export class Welcome extends Component {
       <ButtonLinkRegistration
         label={t('mobile.onboarding.welcome.create_my_cozy')}
         size={isMobile ? 'normal' : 'large'}
+        onboarding={onboarding}
       />
     )
   }
@@ -40,11 +43,10 @@ export class Welcome extends Component {
       t,
       selectServer,
       breakpoints: { isMobile },
-      appIcon,
-      appTitle
+      appIcon
     } = this.props
     return (
-      <div className={classNames(styles['wizard'], styles['wizard--welcome'])}>
+      <div className={classNames(styles['wizard'])}>
         <div
           className={classNames(
             styles['wizard-wrapper'],
@@ -73,10 +75,10 @@ export class Welcome extends Component {
               tag="h1"
               className={classNames(styles['wizard-title'], 'u-mt-0')}
             >
-              {appTitle}
+              {t('mobile.onboarding.welcome.title')}
             </MainTitle>
             <p className={styles['wizard-desc']}>
-              {t('mobile.onboarding.welcome.desc', { appTitle })}
+              {t('mobile.onboarding.welcome.desc')}
             </p>
           </div>
           <footer className={styles['wizard-footer']}>
@@ -94,4 +96,9 @@ export class Welcome extends Component {
   }
 }
 
+Welcome.propTypes = {
+  selectServer: PropTypes.func.isRequired,
+  appIcon: PropTypes.string.isRequired,
+  onboarding: onboardingPropTypes.isRequired
+}
 export default withBreakpoints()(translate()(Welcome))

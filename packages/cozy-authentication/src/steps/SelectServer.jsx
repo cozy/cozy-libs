@@ -11,8 +11,9 @@ import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
 import styles from '../styles.styl'
-
 import { ButtonLinkRegistration } from './ButtonLinkRegistration'
+import { onboardingPropTypes } from '../../OnboardingPropTypes'
+
 require('url-polyfill')
 
 const ERR_WRONG_ADDRESS = 'mobile.onboarding.server_selection.wrong_address'
@@ -227,17 +228,13 @@ export class SelectServer extends Component {
     const {
       t,
       previousStep,
-      breakpoints: { isTiny }
+      breakpoints: { isTiny },
+      onboarding
     } = this.props
     const inputID = 'inputID'
     return (
       <form className={styles['wizard']} onSubmit={this.onSubmit}>
-        <div
-          className={classNames(
-            styles['wizard-wrapper'],
-            styles['wizard-wrapper--center']
-          )}
-        >
+        <div className={styles['wizard-wrapper']}>
           <header className={styles['wizard-header']}>
             <div className={styles['wizard-header-fixed']}>
               <Button
@@ -273,32 +270,32 @@ export class SelectServer extends Component {
                   <span>https://</span>
                 </div>
               )}
-              <Input
-                type="text"
-                id={inputID}
-                autoCapitalize="none"
-                autoCorrect="off"
-                autoComplete="off"
-                autoFocus
-                className={classNames(styles['wizard-input'], {
-                  [styles['error']]: error
-                })}
-                placeholder={t(placeholderValue)}
-                size={isTiny ? 'medium' : undefined}
-                inputRef={input => {
-                  this.input = input
-                }}
-                onChange={({ target: { value } }) => {
-                  this.onChange(value)
-                }}
-                onFocus={() =>
-                  this.setState({
-                    focusClass: styles['wizard-dualfield--focus']
-                  })
-                }
-                onBlur={() => this.setState({ focusClass: undefined })}
-                value={value}
-              />
+              <div className={styles['wizard-dualfield-wrapper']}>
+                <Input
+                  type="text"
+                  id={inputID}
+                  autoCapitalize="none"
+                  autoCorrect="off"
+                  autoComplete="off"
+                  autoFocus
+                  className={classNames(styles['wizard-dualfield-input'])}
+                  placeholder={t(placeholderValue)}
+                  size={isTiny ? 'medium' : undefined}
+                  inputRef={input => {
+                    this.input = input
+                  }}
+                  onChange={({ target: { value } }) => {
+                    this.onChange(value)
+                  }}
+                  onFocus={() =>
+                    this.setState({
+                      focusClass: styles['wizard-dualfield--focus']
+                    })
+                  }
+                  onBlur={() => this.setState({ focusClass: undefined })}
+                  value={value}
+                />
+              </div>
               <select
                 className={classNames(styles['wizard-select'], {
                   [styles['wizard-select--narrow']]: isCustomDomain,
@@ -352,11 +349,13 @@ export class SelectServer extends Component {
               <Icon icon="next" color="white" />
             </Button>
             <ButtonLinkRegistration
-              className={'u-mv-half'}
+              className={classNames('wizard-buttonlink')}
               label={t('mobile.onboarding.welcome.no_account_link')}
               size={isTiny ? 'normal' : 'large'}
               subtle={true}
               type={'button'}
+              theme="text"
+              onboarding={onboarding}
             />
           </footer>
         </div>
@@ -371,7 +370,8 @@ SelectServer.propTypes = {
   nextStep: PropTypes.func.isRequired,
   fetching: PropTypes.bool,
   externalError: PropTypes.object,
-  onException: PropTypes.func.isRequired
+  onException: PropTypes.func.isRequired,
+  onboarding: onboardingPropTypes.isRequired
 }
 
 SelectServer.defaultProps = {

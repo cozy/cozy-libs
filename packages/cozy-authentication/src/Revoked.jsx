@@ -4,8 +4,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { register, getURL } from './client-compat'
 
+import { register, getURL } from './client-compat'
 class Revoked extends Component {
   logout() {
     this.props.onLogout()
@@ -20,6 +20,7 @@ class Revoked extends Component {
     try {
       const cozyClient = this.context.client
       const registration = await register(cozyClient, url)
+
       this.props.onLogBackIn({
         url,
         clientInfo: registration.client,
@@ -27,7 +28,8 @@ class Revoked extends Component {
         router: this.props.router
       })
     } catch (e) {
-      console.warn(e) // eslint-disable-line no-console
+      // eslint-disable-next-line no-console
+      console.warn(e)
     }
   }
 
