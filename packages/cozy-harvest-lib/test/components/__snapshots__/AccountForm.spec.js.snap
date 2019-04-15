@@ -1,7 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountForm should always render login error 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <Wrapper
     error={[Error: LOGIN_FAILED]}
     konnector={
@@ -34,9 +36,7 @@ exports[`AccountForm should always render login error 1`] = `
   />
   <AccountFields
     container={null}
-    hasError={true}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -51,7 +51,8 @@ exports[`AccountForm should always render login error 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
+    hasError={true}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
@@ -79,12 +80,12 @@ exports[`AccountForm should always render login error 1`] = `
 `;
 
 exports[`AccountForm should not render error 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <AccountFields
     container={null}
-    hasError={false}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -99,7 +100,8 @@ exports[`AccountForm should not render error 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
+    hasError={false}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
@@ -137,11 +139,12 @@ exports[`AccountForm should redirect to OAuthForm 1`] = `
 `;
 
 exports[`AccountForm should render 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <AccountFields
     container={null}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -156,7 +159,7 @@ exports[`AccountForm should render 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [
@@ -184,7 +187,9 @@ exports[`AccountForm should render 1`] = `
 `;
 
 exports[`AccountForm should render error 1`] = `
-<div>
+<div
+  onKeyUp={[Function]}
+>
   <Wrapper
     error={[Error: Test error]}
     konnector={
@@ -217,9 +222,7 @@ exports[`AccountForm should render error 1`] = `
   />
   <AccountFields
     container={null}
-    hasError={false}
-    initialValues={Object {}}
-    manifestFields={
+    fields={
       Object {
         "passphrase": Object {
           "encrypted": true,
@@ -234,7 +237,8 @@ exports[`AccountForm should render error 1`] = `
         },
       }
     }
-    onKeyUp={[Function]}
+    hasError={false}
+    initialValues={Object {}}
     t={
       [MockFunction] {
         "calls": Array [

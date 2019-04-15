@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "0.39.3",
+  "version": "0.39.5",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "cozy-client": "6.19.0",
-    "cozy-realtime": "2.0.7",
+    "cozy-realtime": "^2.0.8",
     "cozy-ui": "19.21.2",
     "final-form": "4.11.1",
     "lodash": "4.17.11",

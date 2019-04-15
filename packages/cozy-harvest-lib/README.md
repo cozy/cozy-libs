@@ -1,107 +1,57 @@
-Cozy-Harvest-Lib
-=====
+# Cozy-Harvest-Lib
+
+# Goal
 
 Cozy-Harvest-Lib will bring the logic, modules and components used in harvest applications.
 
 Harvest applications will be apps which will allow to configure konnectors, setup authentification informations and check for synchronized data (And much more in the future).
 Each harvest application will be associated with only one konnector.
 
-This first version is just an "Hello world" version aimed at initializing the lib and make it available in NPM
+# Current version
 
-# Components
+The current version exposes base components to create and edit account and trigger documents.
 
-## AccountForm
+Those components are used for now in [Cozy-Home](https://github.com/cozy/cozy-home).
 
-The AccountForm displays a form generated from the `fields` object of a [konnector manifest](https://docs.cozy.io/en/cozy-apps-registry/README/#1-prepare-your-application).
+# Installation
 
-For now, the form is just the most basic as possible. Next steps are:
-* Handling password fields
-* Handling I18n and custom locales
+Just run
 
-### AccountForm properties
-#### `fields`
-Object containing fields declared in konnector's manifest. Fields are used to create a `io.cozy.accounts` document. This document helps konnector connecting to remote service.
-
-Fields are declared by their name and can have several properties:
-
-|Property|Role|
-|-|-|
-|`encrypted` | Specify if field should be encrypted by stack (default: `true` if `type=password`, `false` otherwise). |
-|`label` | Predefined label can be used and specified in manifest. They are a common way to provide existing locales. List of predefined labels are `answer`, `birthdate`, `code`, `date`, `email`, `firstname`, `lastname`, `login`, `password`, `phone`. | |`required` | Specify if field is required (default: `true`). |
-|`type` | Can be `date`, `dropdown`, `email`, `text` or `password` (default: `text`). |
-
-##### Example of `fields` object
-```js
-{
-  username: {
-    type: 'text'
-  },
-  passphrase: {
-    type: 'password'
-  }
-}
+```
+yarn add cozy-harvest-lib
 ```
 
-#### `locales`
+# Getting Started
 
-Object containing the local as specified in konnector's manifest.
+For now it is possible to instanciate a `<TriggerManager />` which will allow to edit an account and launch the trigger.
 
-##### Example of `locales` object
+As this component uses CozyClient, it must be wrapped at some point into a [`<CozyProvider />`](https://github.com/cozy/cozy-client/blob/master/docs/getting-started.md#wrapping-the-app-in-a-cozyprovider) and a [`<I18n>`](https://github.com/cozy/cozy-ui/tree/master/react#i18n-translate) components.
+
 ```js
-{
-  en: {
-    fields:
-      username: {
-        label: "Username"
-      }
-    }
-  },
-  fr: {
-    fields: {
-      username: {
-        label: "Nom d'utilisateur"
-      }
-    }
-  }
-}
-```
-Cozy-Harvest-Lib provides a defined range of field labels which do not need to be specified in the manifest. Those field labels are: `answer`, `birthdate`, `code`, `date`, `email`, `firstname`, `lastname`, `login`, `password`, `phone`.
+import CozyClient, { CozyProvider } from 'cozy-client'
+import { TriggerManager } from 'cozy-harvest-lib'
+import I18n from 'cozy-ui/react/I18n'
 
-Any konnector can provide new locales for this field labels or add new ones. They will be loaded by the AccountForm component.
+const client = new CozyClient({
+  /*...*/
+})
 
-#### `placeholder`
-
-We could defined a localized placeholder in the manifest
-
-They could be defined like this :
-```js
-{
-  ...
-  locales: {
-    [lang]: {
-      fields:
-        [fieldname]: {
-          placeholder: "the placeholder string"
-        }
-      }
-    },
-  },
-  ...
-}
+ReactDOM.render(
+  <CozyProvider client={client}>
+    <I18n lang="en" dictRequire={lang => require(`../src/locales/${lang}`)}>
+      // Fetch konnector at some point
+      <TriggerManager konnector="konnector" onSuccessLogin={() => alert('logged in')} />
+      // other stuff
+    </I18n>
+  </CozyProvider>,
+  document.getElementById('main')
+)
 ```
 
+# API
 
-### AccountForm usage
-```js
-<AccountForm fields={konnector.fields} locales={} />
-```
+See the [Styleguidist](https://docs.cozy.io/cozy-libs/cozy-harvest-lib/).
 
-## OAuthForm
-
-The OAuthForm is used for OAuth konnector and display a single "Connect" button.
-
-
-## Doc and example about manifests
+# Doc and example about manifests
 
 https://docs.cozy.io/en/tutorials/konnector/#the-manifest
-

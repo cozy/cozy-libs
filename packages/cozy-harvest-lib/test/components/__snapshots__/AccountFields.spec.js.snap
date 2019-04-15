@@ -23,14 +23,14 @@ exports[`AccountFields should render encrypted fields with placeholder 1`] = `
 <div>
   <Field
     format={[Function]}
-    name="fields"
+    name="username"
     parse={[Function]}
   >
     [Function]
   </Field>
   <Field
     format={[Function]}
-    name="sanitized"
+    name="passphrase"
     parse={[Function]}
   >
     [Function]
