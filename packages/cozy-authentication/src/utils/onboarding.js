@@ -117,9 +117,9 @@ export const getAccessToken = async (
       }
     }
   )
-  const token = await getTokenRequest.json()
   if (getTokenRequest.status !== 200) {
     throw new Error('token.error')
   }
+  const token = await getTokenRequest.json()
   return token
 }
