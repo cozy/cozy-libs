@@ -32,12 +32,14 @@ export const readState = () => {
 export const clearState = () => {
   return localforage.removeItem(ONBOARDING_STATE)
 }
+
 const generateState = () => {
   return generateRandomString()
 }
 const generateSecret = () => {
   return generateRandomString()
 }
+
 export const checkIfOnboardingLogin = onboardingInformations => {
   return get(onboardingInformations, 'code')
 }
@@ -86,6 +88,7 @@ export const generateOAuthForUrl = async ({
 export const addProtocolToURL = instanceDomain => {
   return `https://${instanceDomain}`
 }
+
 export const secretExchange = (secret, instanceDomain, client) => {
   const response = client.stackClient.fetchJSON(
     'POST',
