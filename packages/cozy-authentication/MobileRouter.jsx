@@ -17,6 +17,7 @@ import {
   onboardingInformationsPropTypes,
   onboardingPropTypes
 } from './OnboardingPropTypes'
+
 export class MobileRouter extends Component {
   async doOnboardingLogin(receivedState, code, instanceDomain, history) {
     const localState = await readState()
@@ -65,6 +66,7 @@ export class MobileRouter extends Component {
       clearSecret()
     }
   }
+
   render() {
     const {
       history,
@@ -113,11 +115,13 @@ export class MobileRouter extends Component {
     }
   }
 }
+
 MobileRouter.defaultProps = {
   onException: e => {
     console.warn('exeception', e) //eslint-disable-line no-console
   }
 }
+
 MobileRouter.propTypes = {
   onboarding: onboardingPropTypes.isRequired,
   onboardingInformations: onboardingInformationsPropTypes.isRequired,
@@ -130,4 +134,5 @@ MobileRouter.propTypes = {
   appIcon: Proptypes.string.isRequired,
   onException: Proptypes.func.isRequired
 }
+
 export default withRouter(MobileRouter)
