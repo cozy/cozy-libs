@@ -8,7 +8,7 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import styles from '../styles.styl'
 import { ButtonLinkRegistration } from './ButtonLinkRegistration'
-import { onboardingPropTypes } from '../../OnboardingPropTypes'
+import { onboardingPropTypes } from '../OnboardingPropTypes'
 export class Welcome extends Component {
   registerRender = () => {
     const {
