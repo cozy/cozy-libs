@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.5.3"></a>
+## [1.5.3](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.5.2...cozy-authentication@1.5.3) (2019-04-15)
+
+
+### Bug Fixes
+
+* Add localforage as dep ([119f995](https://github.com/cozy/cozy-libs/commit/119f995))
+* Don't use drive lib logger ([480dae6](https://github.com/cozy/cozy-libs/commit/480dae6))
+* Lang loader ([0d84285](https://github.com/cozy/cozy-libs/commit/0d84285))
+* Upgrade Auth ([b1fe87b](https://github.com/cozy/cozy-libs/commit/b1fe87b))
+* Use client-compat ([7a84bb9](https://github.com/cozy/cozy-libs/commit/7a84bb9))
+* Use transpiled version of UI ([ad323ef](https://github.com/cozy/cozy-libs/commit/ad323ef))
+
+
+
+
 <a name="1.5.2"></a>
 ## [1.5.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.5.1...cozy-authentication@1.5.2) (2019-04-12)
 
