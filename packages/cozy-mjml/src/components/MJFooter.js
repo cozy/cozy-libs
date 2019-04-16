@@ -7,14 +7,14 @@ validator.registerDependencies({
 })
 
 class MJFooter extends core.BodyComponent {
-  displayInstance(instance) {
-    if (instance) {
+  displayInstance(fqdn, url) {
+    if (fqdn && url) {
       return `
         <mj-section padding="16px 0">
           <mj-column vertical-align="middle">
-            <mj-button href="https://${instance}" background-color="#fff" font-size="14px" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="4px 16px" vertical-align="middle" border-radius="16px">
+            <mj-button href="${url}" background-color="#fff" font-size="14px" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="4px 16px" vertical-align="middle" border-radius="16px">
               <img width="24" height="24" src="https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png" style="vertical-align:middle;" />&nbsp;
-              ${instance}
+              ${fqdn}
             </mj-button>
           </mj-column>
         </mj-section>`
@@ -110,7 +110,7 @@ class MJFooter extends core.BodyComponent {
     const locale = this.getAttribute('locale')
     return this.renderMJML(
       `<mj-wrapper padding="0">
-        ${this.displayInstance(this.getAttribute('instance'))}
+        ${this.displayInstance(this.getAttribute('fqdn'), this.getAttribute('url'))}
         ${this.cozySignature(locale)}
         ${this.cozyHelp(locale)}
         ${this.appStores(locale)}
@@ -124,7 +124,8 @@ MJFooter.endingTag = true
 
 MJFooter.allowedAttributes = {
   locale: 'enum(fr,en)',
-  instance: 'string'
+  fqdn: 'string',
+  url: 'string'
 }
 
 MJFooter.defaultAttributes = {
