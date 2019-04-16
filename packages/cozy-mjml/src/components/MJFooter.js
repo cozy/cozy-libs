@@ -9,12 +9,13 @@ validator.registerDependencies({
 class MJFooter extends core.BodyComponent {
   displayInstance(instance) {
     if (instance) {
+      const hostname = new URL(instance).hostname
       return `
         <mj-section padding="16px 0">
           <mj-column vertical-align="middle">
-            <mj-button href="https://${instance}" background-color="#fff" font-size="14px" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="4px 16px" vertical-align="middle" border-radius="16px">
+            <mj-button href="${instance}" background-color="#fff" font-size="14px" color="#297ef2" text-decoration="none" font-weight="bold" padding="0" inner-padding="4px 16px" vertical-align="middle" border-radius="16px">
               <img width="24" height="24" src="https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png" style="vertical-align:middle;" />&nbsp;
-              ${instance}
+              ${hostname}
             </mj-button>
           </mj-column>
         </mj-section>`
