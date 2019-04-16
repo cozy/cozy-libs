@@ -32,7 +32,8 @@
       "step": {
         "button": "Activer maintenant",
         "skip": "Plus tard",
-        "next": "Suivant"
+        "next": "Suivant",
+        "previous": "Précédent"
       },
       "analytics": {
         "title": "Aidez-nous à améliorer Cozy",
