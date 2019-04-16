@@ -4,12 +4,10 @@ import Proptypes from 'prop-types'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import {
-  readState,
   secretExchange,
   getAccessToken,
-  readSecret,
-  clearSecret,
-  clearState,
+  readLocalData,
+  clearLocalData,
   checkIfOnboardingLogin,
   addProtocolToURL
 } from './utils/onboarding'
@@ -20,8 +18,7 @@ import {
 
 export class MobileRouter extends Component {
   async doOnboardingLogin(receivedState, code, instanceDomain, history) {
-    const localState = await readState()
-    const localSecret = await readSecret()
+    const { state: localState, secret: localSecret } = await readLocalData()
 
     try {
       if (localState !== receivedState) {
@@ -62,8 +59,7 @@ export class MobileRouter extends Component {
     } catch (error) {
       this.props.onLogout()
     } finally {
-      clearState()
-      clearSecret()
+      await clearLocalData()
     }
   }
 

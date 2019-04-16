@@ -123,3 +123,15 @@ export const getAccessToken = async (
   const token = await getTokenRequest.json()
   return token
 }
+
+export const readLocalData = async () => {
+  return {
+    state: await readState(),
+    secret: await readSecret()
+  }
+}
+
+export const clearLocalData = async () => {
+  await clearState()
+  await clearSecret()
+}
