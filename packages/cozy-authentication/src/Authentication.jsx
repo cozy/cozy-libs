@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Welcome from './steps/Welcome'
 import SelectServer from './steps/SelectServer'
-import { onboardingPropTypes } from './OnboardingPropTypes'
+import { onboardingPropTypes } from '../OnboardingPropTypes'
 const STEP_WELCOME = 'STEP_WELCOME'
 const STEP_EXISTING_SERVER = 'STEP_EXISTING_SERVER'
 
