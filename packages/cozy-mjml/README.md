@@ -91,5 +91,5 @@ There are no props for this component.
 
 ```xml
 <mj-footer></mj-footer>
-<mj-footer instance="isabelledurand.mycozy.cloud" locale="fr"></mj-footer>
+<mj-footer instance="https://isabelledurand.mycozy.cloud" locale="fr"></mj-footer>
 ```

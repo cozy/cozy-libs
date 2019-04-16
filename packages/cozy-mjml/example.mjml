@@ -22,6 +22,6 @@
       </mj-section>
     </mj-wrapper>
     <mj-footer></mj-footer>
-    <mj-footer locale="fr" instance="isabelledurand.mycozy.cloud"></mj-footer>
+    <mj-footer locale="fr" instance="https://isabelledurand.mycozy.cloud"></mj-footer>
   </mj-body>
 </mjml>
