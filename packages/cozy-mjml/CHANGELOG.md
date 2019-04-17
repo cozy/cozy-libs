@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.7.1"></a>
+## [0.7.1](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.7.0...cozy-mjml@0.7.1) (2019-04-17)
+
+
+### Bug Fixes
+
+* Fix compatibility with node 8 ([#390](https://github.com/cozy/cozy-libs/issues/390)) ([85cf525](https://github.com/cozy/cozy-libs/commit/85cf525))
+
+
+
+
 <a name="0.7.0"></a>
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.6.0...cozy-mjml@0.7.0) (2019-04-16)
 
