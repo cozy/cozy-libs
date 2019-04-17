@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.7.2"></a>
+## [0.7.2](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.7.1...cozy-mjml@0.7.2) (2019-04-17)
+
+
+### Bug Fixes
+
+* Fix cozy-mjml with nsjail ([#392](https://github.com/cozy/cozy-libs/issues/392)) ([300a4e6](https://github.com/cozy/cozy-libs/commit/300a4e6))
+
+
+
+
 <a name="0.7.1"></a>
 ## [0.7.1](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.7.0...cozy-mjml@0.7.1) (2019-04-17)
 
