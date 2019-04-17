@@ -25,7 +25,7 @@
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
   "dependencies": {
-    "cozy-client": "6.19.0",
+    "cozy-client": "6.21.0",
     "cozy-realtime": "^2.0.8",
     "cozy-ui": "19.21.2",
     "final-form": "4.11.1",
