@@ -1,5 +1,6 @@
 const validator = require('mjml-validator')
 const core = require('mjml-core')
+const url = require('url')
 
 validator.registerDependencies({
   'mj-body': ['mj-footer'],
@@ -9,7 +10,7 @@ validator.registerDependencies({
 class MJFooter extends core.BodyComponent {
   displayInstance(instance) {
     if (instance) {
-      const hostname = new URL(instance).hostname
+      const hostname = url.parse(instance).hostname
       return `
         <mj-section padding="16px 0">
           <mj-column vertical-align="middle">
