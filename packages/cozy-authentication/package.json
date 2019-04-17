@@ -26,8 +26,8 @@
     "eslint-cli": "1.1.1",
     "jest": "24.5.0",
     "parcel": "^1.10.3",
-    "react": "^16.6.3",
-    "react-dom": "^16.6.3",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
     "react-styleguidist": "6.5.3",
     "stylus": "^0.54.5"
   },
