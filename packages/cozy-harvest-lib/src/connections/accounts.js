@@ -1,3 +1,5 @@
+import KonnectorAccountWatcher from '../models/konnector/KonnectorAccountWatcher'
+
 const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
 
@@ -121,6 +123,13 @@ const saveAccount = (client, konnector, account = {}) => {
     : createAccount(client, konnector, account)
 }
 
+const watchKonnectorAccount = (client, account, options) => {
+  const jobWatcher = new KonnectorAccountWatcher(client, account, options)
+  // no need to await realtime initializing here
+  jobWatcher.watch()
+  return jobWatcher
+}
+
 /**
  * Get accounts mutations
  * @param  {Object} client CozyClient
@@ -132,7 +141,8 @@ export const accountsMutations = client => ({
   // before update it
   findAccount: findAccount.bind(null, client),
   updateAccount: updateAccount.bind(null, client),
-  saveAccount: saveAccount.bind(null, client)
+  saveAccount: saveAccount.bind(null, client),
+  watchKonnectorAccount: watchKonnectorAccount.bind(null, client)
 })
 
 export default accountsMutations

@@ -9,6 +9,22 @@
     },
     "title": "Successful configuration!"
   },
+  "twoFAForm": {
+    "title": {
+      "default": "Enter the code sent to you by e-mail or SMS",
+      "email": "Enter the code sent to you by e-mail",
+      "sms": "Enter the code sent to you by SMS"
+    },
+    "desc": {
+      "default": "A code has been sent to you by e-mail or by SMS to finish your connexion",
+      "email": "A code has been sent to you by e-mail to finish your connexion",
+      "sms": "A code has been sent to you by SMS to finish your connexion"
+    },
+    "code": {
+      "label": "code"
+    },
+    "CTA": "Validate"
+  },
   "accountForm": {
     "submit": {
       "label": "Submit"
@@ -46,6 +62,10 @@
       "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
         "title": "Temporarily blocked",
         "description": "Too many attempts occured. Please update your credentials on [%{name}](%{link}) website and update the konnector later on."
+      },
+      "LOGIN_FAILED.TWOFA_EXPIRED": {
+        "title": "Two Factor code expired",
+        "description": "The two factor code has expired, please start again."
       },
       "MAINTENANCE": {
         "title": "Unavailable website",
@@ -125,6 +145,9 @@
     },
     "phone": {
       "label": "Phone number"
+    },
+    "two_fa_code": {
+      "label": "Two factor code"
     }
   },
   "oauth": {

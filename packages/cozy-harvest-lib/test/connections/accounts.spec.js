@@ -1,5 +1,6 @@
 /* eslint-env jest */
 
+import { accountsMutations } from 'connections/accounts'
 import client from 'cozy-client'
 
 jest.mock('cozy-client', () => ({
@@ -53,8 +54,12 @@ const fixtures = {
   }
 }
 
-import { accountsMutations } from 'connections/accounts'
-const { createAccount, updateAccount, saveAccount } = accountsMutations(client)
+const {
+  createAccount,
+  updateAccount,
+  saveAccount,
+  watchKonnectorAccount
+} = accountsMutations(client)
 
 describe('Account mutations', () => {
   beforeEach(() => {
@@ -343,6 +348,21 @@ describe('Account mutations', () => {
       )
       expect(client.save).toHaveBeenCalledWith(fixtures.existingAccount)
       expect(account).toEqual(fixtures.existingAccount)
+    })
+  })
+
+  describe('watchAccount', () => {
+    it('should return an account watcher with correct properties', async () => {
+      const mockAccount = {
+        accountType: 'dummy',
+        auth: {}
+      }
+      const accountWatcher = await watchKonnectorAccount(mockAccount, {
+        onError: jest.fn(),
+        onLoginSuccess: jest.fn(),
+        onSuccess: jest.fn()
+      })
+      expect(accountWatcher).toMatchSnapshot()
     })
   })
 })

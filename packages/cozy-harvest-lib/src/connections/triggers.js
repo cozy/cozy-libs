@@ -29,7 +29,7 @@ const watchKonnectorJob = (
   job,
   { onError, onLoginSuccess, onSuccess }
 ) => {
-  new KonnectorJobWatcher(client, job, {
+  return new KonnectorJobWatcher(client, job, {
     expectedSuccessDelay: 8000,
     onError,
     onLoginSuccess,

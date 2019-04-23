@@ -162,6 +162,7 @@ const statDirectoryByPathMock = jest.fn()
 const launchTriggerMock = jest.fn()
 const saveAccountMock = jest.fn()
 const watchKonnectorJobMock = jest.fn()
+const watchKonnectorAccountMock = jest.fn()
 
 const onSuccessSpy = jest.fn()
 const onLoginSuccessSpy = jest.fn()
@@ -180,7 +181,8 @@ const props = {
   onLoginSuccess: onLoginSuccessSpy,
   saveAccount: saveAccountMock,
   t: tMock,
-  watchKonnectorJob: watchKonnectorJobMock
+  watchKonnectorJob: watchKonnectorJobMock,
+  watchKonnectorAccount: watchKonnectorAccountMock
 }
 
 const propsWithAccount = {
@@ -285,13 +287,13 @@ describe('TriggerManager', () => {
     it('should render without account as submitting', () => {
       const wrapper = shallowWithoutAccount()
       wrapper.instance().handleSubmit()
-      expect(wrapper.props().submitting).toEqual(true)
+      expect(wrapper.state().status).toEqual('RUNNING')
     })
 
     it('should render with account as submitting', () => {
       const wrapper = shallowWithAccount()
       wrapper.instance().handleSubmit()
-      expect(wrapper.props().submitting).toEqual(true)
+      expect(wrapper.state().status).toEqual('RUNNING')
     })
 
     it('should call saveAccount without account', () => {

@@ -18,6 +18,7 @@ export class KonnectorJobWatcher {
     this.onError = onError
     this.onLoginSuccess = onLoginSuccess
     this.onSuccess = onSuccess
+    this.successTimer = null
 
     this._error = null
     this._succeed = false
@@ -25,6 +26,7 @@ export class KonnectorJobWatcher {
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccessDelay = this.handleSuccessDelay.bind(this)
+    this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
 
     this.watch()
   }
@@ -43,11 +45,28 @@ export class KonnectorJobWatcher {
   }
 
   handleSuccessDelay() {
+    this.disableSuccessTimer()
     if (this._error || this._succeed) return
 
     this._succeed = true
     if (typeof this.onLoginSuccess === 'function') {
       return this.onLoginSuccess(this.job)
+    }
+  }
+
+  disableSuccessTimer() {
+    if (this.successTimer) {
+      clearTimeout(this.successTimer)
+      this.successTimer = null
+    }
+  }
+
+  enableSuccessTimer(time) {
+    if (!this.successTimer) {
+      this.successTimer = setTimeout(
+        this.handleSuccessDelay,
+        time || this.expectedSuccessDelay
+      )
     }
   }
 
@@ -72,7 +91,7 @@ export class KonnectorJobWatcher {
       if (state === JOB_STATE_ERRORED) this.handleError(this.job.error)
     })
 
-    setTimeout(this.handleSuccessDelay, this.expectedSuccessDelay)
+    this.enableSuccessTimer()
   }
 }
 

@@ -5,6 +5,7 @@ import { withMutations } from 'cozy-client'
 import { translate } from 'cozy-ui/react/I18n'
 
 import AccountForm from './AccountForm'
+import TwoFAForm from './TwoFAForm'
 import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
@@ -18,6 +19,9 @@ import triggers from '../helpers/triggers'
 const ERRORED = 'ERRORED'
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
+const RUNNING_TWOFA = 'RUNNING_TWOFA'
+
+const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 /**
  * Manage a trigger for a given konnector, from account edition to trigger
@@ -33,12 +37,16 @@ export class TriggerManager extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
 
     this.handleSuccess = this.handleSuccess.bind(this)
+    this.handleError = this.handleError.bind(this)
+    this.handleTwoFACodeAsked = this.handleTwoFACodeAsked.bind(this)
+    this.handleSubmitTwoFACode = this.handleSubmitTwoFACode.bind(this)
 
     this.state = {
       account,
       error: triggers.getError(trigger),
       status: IDLE,
-      trigger
+      trigger,
+      jobWatcher: null
     }
   }
 
@@ -97,6 +105,9 @@ export class TriggerManager extends Component {
     this.setState({ account })
     const trigger = await this.ensureTrigger()
     this.setState({ trigger })
+    this.props.watchKonnectorAccount(account, {
+      onTwoFACodeAsked: this.handleTwoFACodeAsked
+    })
     return await this.launch(trigger)
   }
 
@@ -105,6 +116,37 @@ export class TriggerManager extends Component {
       error,
       status: ERRORED
     })
+  }
+
+  handleTwoFACodeAsked(statusCode) {
+    const { jobWatcher, status } = this.state
+    if (accounts.isTwoFANeeded(status)) return
+    // disable successTimeout since asked Two FA code
+    if (jobWatcher) jobWatcher.disableSuccessTimer()
+    this.setState({
+      status: statusCode
+    })
+  }
+
+  async handleSubmitTwoFACode(code) {
+    const { findAccount, konnector, saveAccount } = this.props
+    const { account, jobWatcher } = this.state
+    this.setState({
+      error: null,
+      status: RUNNING_TWOFA
+    })
+    try {
+      /* We fetch before to avoid conflicts since the account can be changed
+      in the database by the konnector */
+      const upToDateAccount = findAccount(account._id)
+      await saveAccount(
+        konnector,
+        accounts.updateTwoFaCode(upToDateAccount, code)
+      )
+      if (jobWatcher) jobWatcher.enableSuccessTimer(10000)
+    } catch (error) {
+      return this.handleError(error)
+    }
   }
 
   async handleSubmit(data) {
@@ -156,28 +198,50 @@ export class TriggerManager extends Component {
       onSuccess,
       watchKonnectorJob
     } = this.props
-
-    return await watchKonnectorJob(await launchTrigger(trigger), {
+    const jobWatcher = watchKonnectorJob(await launchTrigger(trigger), {
       onError: this.handleError,
       onLoginSuccess: () => this.handleSuccess(onLoginSuccess, [trigger]),
       onSuccess: () => this.handleSuccess(onSuccess, [trigger])
     })
+    this.setState({
+      jobWatcher
+    })
   }
 
   render() {
-    const { konnector, running, showError } = this.props
+    const {
+      konnector,
+      running,
+      showError,
+      twoFANeeded,
+      modalContainerId
+    } = this.props
     const { account, error, status } = this.state
     const submitting = status === RUNNING || running
-
+    const submittingTwoFA = status === RUNNING_TWOFA
+    const waitForTwoFACode = accounts.isTwoFANeeded(status) || twoFANeeded
+    const modalInto = modalContainerId || MODAL_PLACE_ID
     return (
-      <AccountForm
-        account={account}
-        error={error}
-        konnector={konnector}
-        onSubmit={this.handleSubmit}
-        showError={showError}
-        submitting={submitting}
-      />
+      <div>
+        <div id={modalInto} />
+        <AccountForm
+          account={account}
+          error={error}
+          konnector={konnector}
+          onSubmit={this.handleSubmit}
+          showError={showError}
+          submitting={submitting || submittingTwoFA || waitForTwoFACode}
+        />
+        {(waitForTwoFACode || submittingTwoFA) && (
+          <TwoFAForm
+            account={account}
+            konnector={konnector}
+            handleSubmitTwoFACode={this.handleSubmitTwoFACode}
+            submitting={submittingTwoFA}
+            into={modalInto}
+          />
+        )}
+      </div>
     )
   }
 }
@@ -250,6 +314,16 @@ TriggerManager.propTypes = {
    * @type {Func}
    */
   saveAccount: PropTypes.func.isRequired,
+  /**
+   * Account mutation
+   * @type {Func}
+   */
+  findAccount: PropTypes.func.isRequired,
+  /**
+   * Account mutations
+   * @type {Function}
+   */
+  watchKonnectorAccount: PropTypes.func.isRequired,
   /**
    * Trigger mutations
    * @type {Function}
