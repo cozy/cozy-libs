@@ -3,9 +3,9 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import PropTypes from 'prop-types'
 
-import { DumbAuthentication, DumbRevoked } from '../build'
+import { MobileRouter } from '../dist'
 import 'date-fns/locale/en/index'
-import 'cozy-ui/transpiled/stylesheet.css'
+import 'cozy-ui/transpiled/react/stylesheet.css'
 
 const styles = {
   Container: {
@@ -62,15 +62,9 @@ class App extends React.Component {
             Revoked
           </button>
         </div>
-        <div style={styles.View}>
-          <WithLang lang="en">
-            {this.state.view == 'authentication' ? (
-              <DumbAuthentication lang="en" />
-            ) : (
-              <DumbRevoked lang="en" />
-            )}
-          </WithLang>
-        </div>
+        <MobileRouter>
+          <div>Logged in !</div>
+        </MobileRouter>
       </div>
     )
   }
