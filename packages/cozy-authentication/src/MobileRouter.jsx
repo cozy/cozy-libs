@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Router, withRouter } from 'react-router'
 import Proptypes from 'prop-types'
-import Authentication from './src/Authentication'
-import Revoked from './src/Revoked'
+import Authentication from './Authentication'
+import Revoked from './Revoked'
 import {
   readState,
   secretExchange,
@@ -12,7 +12,7 @@ import {
   clearState,
   checkIfOnboardingLogin,
   addProtocolToURL
-} from './src/utils/onboarding'
+} from './utils/onboarding'
 import {
   onboardingInformationsPropTypes,
   onboardingPropTypes
@@ -113,11 +113,13 @@ export class MobileRouter extends Component {
     }
   }
 }
+
 MobileRouter.defaultProps = {
   onException: e => {
     console.warn('exeception', e) //eslint-disable-line no-console
   }
 }
+
 MobileRouter.propTypes = {
   onboarding: onboardingPropTypes.isRequired,
   onboardingInformations: onboardingInformationsPropTypes.isRequired,
@@ -130,4 +132,5 @@ MobileRouter.propTypes = {
   appIcon: Proptypes.string.isRequired,
   onException: Proptypes.func.isRequired
 }
+
 export default withRouter(MobileRouter)
