@@ -27,6 +27,7 @@ const RUNNING = 'RUNNING'
 export class TriggerManager extends Component {
   constructor(props) {
     super(props)
+    const { account, trigger } = props
 
     this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
@@ -34,10 +35,10 @@ export class TriggerManager extends Component {
     this.handleSuccess = this.handleSuccess.bind(this)
 
     this.state = {
-      account: props.account,
-      error: triggers.getError(props.trigger),
+      account,
+      error: triggers.getError(trigger),
       status: IDLE,
-      trigger: props.trigger
+      trigger
     }
   }
 

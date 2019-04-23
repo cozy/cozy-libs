@@ -1,12 +1,6 @@
-import { subscribe } from 'cozy-realtime'
-
 import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
 
-const JOBS_DOCTYPE = 'io.cozy.jobs'
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
-
-const JOB_STATE_DONE = 'done'
-const JOB_STATE_ERRORED = 'errored'
 
 /**
  * Creates a trigger with given attributes

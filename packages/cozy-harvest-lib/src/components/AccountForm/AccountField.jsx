@@ -98,11 +98,13 @@ export class AccountField extends PureComponent {
         return <Field {...sanitizeSelectProps(fieldProps)} />
       case 'password':
         return (
+          /*
+          Using the `new-password` value is the best way to avoid
+          autocomplete for password.
+          See https://stackoverflow.com/a/17721462/1135990
+           */
           <Field
             {...fieldProps}
-            // Using the `new-password` value is the best way to avoid
-            // autocomplete for password.
-            // See https://stackoverflow.com/a/17721462/1135990
             autoComplete="new-password"
             secondaryLabels={passwordLabels}
           />

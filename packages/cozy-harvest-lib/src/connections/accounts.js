@@ -128,6 +128,9 @@ const saveAccount = (client, konnector, account = {}) => {
  */
 export const accountsMutations = client => ({
   createAccount: createAccount.bind(null, client),
+  // not a mutation but useful to easily get account in the component method
+  // before update it
+  findAccount: findAccount.bind(null, client),
   updateAccount: updateAccount.bind(null, client),
   saveAccount: saveAccount.bind(null, client)
 })
