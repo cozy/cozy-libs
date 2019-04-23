@@ -1,7 +1,8 @@
-import { MobileRouter } from './MobileRouter'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { writeState, writeSecret } from './src/utils/onboarding'
+
+import { MobileRouter } from './MobileRouter'
+import { writeState, writeSecret } from './utils/onboarding'
 
 describe('MobileRouter', () => {
   it('should render the appRoutes when all is well', () => {
