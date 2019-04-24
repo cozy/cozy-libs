@@ -32,6 +32,14 @@ export class AccountForm extends PureComponent {
     if (locales && lang) {
       extend(locales[lang])
     }
+
+    this.inputs = {}
+    this.inputFocused = null
+
+    this.inputRefByName = this.inputRefByName.bind(this)
+    this.handleFocus = this.handleFocus.bind(this)
+    this.handleKeyUp = this.handleKeyUp.bind(this)
+    this.focusNext = this.focusNext.bind(this)
   }
 
   /**
@@ -42,6 +50,39 @@ export class AccountForm extends PureComponent {
   isSubmittable({ dirty, error, initialValues, valid }) {
     const untouched = initialValues && !dirty
     return error || (valid && !untouched)
+  }
+
+  /**
+   * Give focus to next input in the form.
+   * Fallback for mobile devices as we are using a div element instead of a
+   * form.
+   * @return {Element} Focused element or null if no element has been focused
+   */
+  focusNext() {
+    if (!this.inputs) return null
+
+    const inputs = Object.values(this.inputs)
+
+    const currentIndex = inputs.indexOf(this.inputFocused)
+
+    let nextIndex = currentIndex + 1
+    let nextInput = inputs[nextIndex]
+
+    if (nextInput) {
+      nextInput.focus()
+    }
+
+    return nextInput || null
+  }
+
+  /**
+   * Capture input with focus and store the current focused input
+   * @param  {Event} event Focus event
+   */
+  handleFocus(event) {
+    if (Object.values(this.inputs).includes(event.target)) {
+      this.inputFocused = event.target
+    }
   }
 
   /**
@@ -74,6 +115,22 @@ export class AccountForm extends PureComponent {
     // Reset form with new values to set back dirty to false
     form.reset(values)
     onSubmit(values)
+  }
+
+  /**
+   * Callback passed to `<AccountFields />` element. Called with a field name,
+   * it return a callback wich take an input ref as argument. It then stores
+   * the input ref into AccountForm's inner `inputs` property.
+   * With this method we keep a list of inputs existing in the form.
+   * The inputs inner property is indexed with names to avoid duplicates in case
+   * of re-render of input children.
+   * @param  {string} fieldName Field name
+   * @return {function}         Callback which take an input ref as argument.
+   */
+  inputRefByName(fieldName) {
+    return input => {
+      this.inputs[fieldName] = input
+    }
   }
 
   validate = (fields, initialValues) => vals => {
@@ -130,6 +187,7 @@ export class AccountForm extends PureComponent {
                 values
               })
             }
+            onFocusCapture={this.handleFocus}
             ref={element => {
               container = element
             }}
@@ -147,6 +205,7 @@ export class AccountForm extends PureComponent {
                 error.isLoginError()
               }
               initialValues={initialAndDefaultValues}
+              inputRefByName={this.inputRefByName}
               t={t}
             />
             <Button

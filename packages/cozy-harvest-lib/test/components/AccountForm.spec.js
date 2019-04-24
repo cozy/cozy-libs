@@ -157,7 +157,11 @@ describe('AccountForm', () => {
       }
 
       assertButtonDisabled(
-        shallow(<AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />)
+        shallow(
+          <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />,
+          // Avoid componentDidMount
+          { disableLifecycleMethods: true }
+        )
       )
     })
 
@@ -171,7 +175,11 @@ describe('AccountForm', () => {
         }
       }
       assertButtonEnabled(
-        shallow(<AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />)
+        shallow(
+          <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />,
+          // Avoid componentDidMount
+          { disableLifecycleMethods: true }
+        )
       )
     })
 
@@ -182,7 +190,9 @@ describe('AccountForm', () => {
             konnector={fixtures.konnectorWithOptionalFields}
             onSubmit={onSubmit}
             t={t}
-          />
+          />,
+          // Avoid componentDidMount
+          { disableLifecycleMethods: true }
         )
       )
     })
@@ -202,7 +212,9 @@ describe('AccountForm', () => {
             konnector={fixtures.konnector}
             onSubmit={onSubmit}
             t={t}
-          />
+          />,
+          // Avoid componentDidMount
+          { disableLifecycleMethods: true }
         )
       )
     })
@@ -220,7 +232,9 @@ describe('AccountForm', () => {
             initialValues={values}
             onSubmit={onSubmit}
             t={t}
-          />
+          />,
+          // Avoid componentDidMount
+          { disableLifecycleMethods: true }
         )
       )
     })
@@ -241,5 +255,27 @@ describe('AccountForm', () => {
       .simulate('click')
 
     expect(onSubmit).toHaveBeenCalled()
+  })
+
+  describe('focusNext', () => {
+    const loginInput = document.createElement('input')
+    const passwordInput = document.createElement('input')
+
+    it('should focus next input', () => {
+      const wrapper = shallow(
+        <AccountForm konnector={fixtures.konnector} onSubmit={onSubmit} t={t} />
+      )
+
+      wrapper.instance().inputs = { login: loginInput, password: passwordInput }
+      wrapper.instance().inputs.login.focus()
+      wrapper.instance().inputFocused = loginInput
+
+      const firstFocus = wrapper.instance().focusNext()
+      expect(firstFocus).toEqual(passwordInput)
+
+      wrapper.instance().inputFocused = passwordInput
+      const secondFocus = wrapper.instance().focusNext()
+      expect(secondFocus).toBeNull()
+    })
   })
 })

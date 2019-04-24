@@ -2,6 +2,7 @@
 
 exports[`AccountForm should always render login error 1`] = `
 <div
+  onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
   <Wrapper
@@ -53,6 +54,7 @@ exports[`AccountForm should always render login error 1`] = `
     }
     hasError={true}
     initialValues={Object {}}
+    inputRefByName={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -81,6 +83,7 @@ exports[`AccountForm should always render login error 1`] = `
 
 exports[`AccountForm should not render error 1`] = `
 <div
+  onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
   <AccountFields
@@ -102,6 +105,7 @@ exports[`AccountForm should not render error 1`] = `
     }
     hasError={false}
     initialValues={Object {}}
+    inputRefByName={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -140,6 +144,7 @@ exports[`AccountForm should redirect to OAuthForm 1`] = `
 
 exports[`AccountForm should render 1`] = `
 <div
+  onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
   <AccountFields
@@ -160,6 +165,7 @@ exports[`AccountForm should render 1`] = `
       }
     }
     initialValues={Object {}}
+    inputRefByName={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
@@ -188,6 +194,7 @@ exports[`AccountForm should render 1`] = `
 
 exports[`AccountForm should render error 1`] = `
 <div
+  onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
   <Wrapper
@@ -239,6 +246,7 @@ exports[`AccountForm should render error 1`] = `
     }
     hasError={false}
     initialValues={Object {}}
+    inputRefByName={[Function]}
     t={
       [MockFunction] {
         "calls": Array [
