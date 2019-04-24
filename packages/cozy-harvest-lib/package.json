@@ -36,6 +36,7 @@
     "babel-jest": "24.1.0",
     "babel-preset-cozy-app": "^1.5.1",
     "cozy-client": "6.21.0",
+    "cozy-device-helper": "1.7.1",
     "cozy-realtime": "2.0.8",
     "cozy-ui": "19.24.3",
     "enzyme": "3.9.0",
@@ -50,6 +51,7 @@
   },
   "peerDependencies": {
     "cozy-client": "6.21.0",
+    "cozy-device-helper": "1.7.1",
     "cozy-realtime": "2.0.8",
     "cozy-ui": "19.28.0"
   }

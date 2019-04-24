@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 
+import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/react/Button'
 import { translate, extend } from 'cozy-ui/react/I18n'
 
@@ -97,11 +98,14 @@ export class AccountForm extends PureComponent {
    * @param  {Object} values        Actual form values data
    */
   handleKeyUp(event, { dirty, form, initialValues, valid, values }) {
-    if (
-      event.key === 'Enter' &&
-      this.isSubmittable({ dirty, initialValues, valid })
-    ) {
-      this.handleSubmit(values, form)
+    if (event.key === 'Enter') {
+      const changedFocus = isMobile() && !!this.focusNext()
+      if (
+        !changedFocus &&
+        this.isSubmittable({ dirty, initialValues, valid })
+      ) {
+        this.handleSubmit(values, form)
+      }
     }
   }
 
