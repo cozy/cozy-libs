@@ -2,8 +2,9 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { AccountForm } from 'components/AccountForm'
+import { isMobile } from 'cozy-device-helper'
 
+import { AccountForm } from 'components/AccountForm'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 const fixtures = {
@@ -36,6 +37,11 @@ const fixtures = {
 
 const onSubmit = jest.fn()
 const t = jest.fn()
+
+jest.mock('cozy-device-helper', () => ({
+  ...require.requireActual('cozy-device-helper'),
+  isMobile: jest.fn()
+}))
 
 describe('AccountForm', () => {
   beforeEach(() => {
@@ -276,6 +282,126 @@ describe('AccountForm', () => {
       wrapper.instance().inputFocused = passwordInput
       const secondFocus = wrapper.instance().focusNext()
       expect(secondFocus).toBeNull()
+    })
+  })
+
+  describe('handleKeyUp', () => {
+    it('should ignore other keys than ENTER', () => {
+      isMobile.mockReturnValue(false)
+      const wrapper = shallow(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+        />,
+        // Avoid componentDidMount
+        { disableLifecycleMethods: true }
+      )
+
+      wrapper.instance().handleSubmit = jest.fn()
+
+      wrapper.instance().handleKeyUp({ key: 'Space' }, {})
+      expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
+    })
+
+    it('should submit form', () => {
+      isMobile.mockReturnValue(false)
+      const wrapper = shallow(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+        />,
+        // Avoid componentDidMount
+        { disableLifecycleMethods: true }
+      )
+
+      wrapper.instance().handleSubmit = jest.fn()
+      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(true)
+
+      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
+      expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
+    })
+
+    it('should not submit form', () => {
+      isMobile.mockReturnValue(false)
+      const wrapper = shallow(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+        />,
+        // Avoid componentDidMount
+        { disableLifecycleMethods: true }
+      )
+
+      wrapper.instance().handleSubmit = jest.fn()
+      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(false)
+
+      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
+      expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
+    })
+
+    it('should focus next input on mobile', () => {
+      isMobile.mockReturnValue(true)
+      const wrapper = shallow(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+        />,
+        // Avoid componentDidMount
+        { disableLifecycleMethods: true }
+      )
+
+      wrapper.instance().focusNext = jest
+        .fn()
+        .mockReturnValue(document.createElement('input'))
+
+      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
+      expect(wrapper.instance().focusNext).toHaveBeenCalled()
+    })
+
+    it('should submit form on mobile', () => {
+      isMobile.mockReturnValue(true)
+      const wrapper = shallow(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+        />,
+        // Avoid componentDidMount
+        { disableLifecycleMethods: true }
+      )
+
+      wrapper.instance().focusNext = jest.fn().mockReturnValue(null)
+      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(true)
+      wrapper.instance().handleSubmit = jest.fn()
+
+      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
+      expect(wrapper.instance().focusNext).toHaveBeenCalled()
+      expect(wrapper.instance().handleSubmit).toHaveBeenCalled()
+    })
+
+    it('should not submit form on mobile', () => {
+      isMobile.mockReturnValue(true)
+      const wrapper = shallow(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+        />,
+        // Avoid componentDidMount
+        { disableLifecycleMethods: true }
+      )
+
+      wrapper.instance().focusNext = jest.fn().mockReturnValue(null)
+      wrapper.instance().isSubmittable = jest.fn().mockReturnValue(false)
+      wrapper.instance().handleSubmit = jest.fn()
+
+      wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
+      expect(wrapper.instance().focusNext).toHaveBeenCalled()
+      expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
     })
   })
 })
