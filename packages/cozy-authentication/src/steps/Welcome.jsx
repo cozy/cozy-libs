@@ -41,8 +41,10 @@ export class Welcome extends Component {
       t,
       selectServer,
       breakpoints: { isMobile },
-      appIcon
+      appIcon,
+      appTitle
     } = this.props
+
     return (
       <div className={classNames(styles['wizard'])}>
         <div
@@ -73,10 +75,10 @@ export class Welcome extends Component {
               tag="h1"
               className={classNames(styles['wizard-title'], 'u-mt-0')}
             >
-              {t('mobile.onboarding.welcome.title')}
+              {t('mobile.onboarding.welcome.title', { appTitle })}
             </MainTitle>
             <p className={styles['wizard-desc']}>
-              {t('mobile.onboarding.welcome.desc')}
+              {t('mobile.onboarding.welcome.desc', { appTitle })}
             </p>
           </div>
           <footer className={styles['wizard-footer']}>

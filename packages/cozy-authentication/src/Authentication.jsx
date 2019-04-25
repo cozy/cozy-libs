@@ -87,6 +87,7 @@ class Authentication extends Component {
             register={() => this.setupSteps()}
             allowRegistration={false}
             appIcon={appIcon}
+            appTitle={appTitle}
           />
         )
       case STEP_EXISTING_SERVER:
