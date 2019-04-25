@@ -3536,6 +3536,22 @@ cozy-client@6.21.0:
     redux-thunk "2.3.0"
     sift "6.0.0"
 
+cozy-client@6.24.0:
+  version "6.24.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.24.0.tgz#3bbc25c18f279ac8d12bced3ae6df21c5d006bbc"
+  integrity sha512-57SYkytcOfJXLKuz9fQ67hhiyS5CDOlclDPApDWokGd6UDyAuqtjqSiUJ4uuQVlKXKTzcssS8bAMzApQe6JpPw==
+  dependencies:
+    cozy-device-helper "1.6.3"
+    cozy-stack-client "^6.24.0"
+    lodash "4.17.11"
+    microee "0.0.6"
+    prop-types "15.6.2"
+    react "16.7.0"
+    react-redux "5.0.7"
+    redux "3.7.2"
+    redux-thunk "2.3.0"
+    sift "6.0.0"
+
 cozy-device-helper@1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.6.3.tgz#186cf0682921fa3ec7c2343d94fb84f317c992ba"
@@ -3558,6 +3574,15 @@ cozy-stack-client@^6.21.0:
     detect-node "2.0.4"
     mime-types "2.1.20"
     qs "6.6.0"
+
+cozy-stack-client@^6.24.0:
+  version "6.24.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.24.0.tgz#5c263b7c3ee4d26e02e301c80047ca25fad41646"
+  integrity sha512-430pPvJxViGhRP/cr1NYKEX7c34/QQ3m/XJ1mGGAApE0QiMxCzynv/sPIWdL/nyYLCyqhWKhfI0S6/mfraLR4Q==
+  dependencies:
+    detect-node "2.0.4"
+    mime-types "2.1.20"
+    qs "6.7.0"
 
 cozy-ui@19.21.2:
   version "19.21.2"
@@ -8736,7 +8761,7 @@ methods@~1.1.2:
   resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   integrity sha1-VSmk1nZUE07cxSZmVoNbD4Ua/O4=
 
-microee@^0.0.6:
+microee@0.0.6, microee@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/microee/-/microee-0.0.6.tgz#a12bdb0103681e8b126a9b071eba4c467c78fffe"
   integrity sha1-oSvbAQNoHosSapsHHrpMRnx4//4=
@@ -11605,6 +11630,11 @@ qs@6.6.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
+
+qs@6.7.0:
+  version "6.7.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
+  integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
 qss@^2.0.2:
   version "2.0.3"
