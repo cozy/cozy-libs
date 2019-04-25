@@ -139,26 +139,34 @@ export class MobileRouter extends Component {
   }
 
   afterAuthentication = async () => {
-    this.props.history.replace('/')
+    this.props.history.replace(this.props.loginPath)
+    if (this.props.onAuthenticated) {
+      this.props.onAuthenticated()
+    }
   }
 
   afterLogout = async () => {
-    this.props.history.replace('/')
+    this.props.history.replace(this.props.logoutPath)
+    if (this.props.onLogout) {
+      this.props.onLogout()
+    }
   }
 
   handleLogout = async () => {
     const { client } = this.props
     await client.logout()
-    if (this.props.onLogout) {
-      this.props.onLogout()
-    }
   }
 }
 
 MobileRouter.defaultProps = {
   onException: e => {
     console.error('Exception', e) //eslint-disable-line no-console
-  }
+  },
+
+  /** @type {String} - After login, where do we go */
+  loginPath: '/',
+  /** @type {String} - After logout, where do we go */
+  logoutPath: '/'
 }
 
 MobileRouter.propTypes = {
