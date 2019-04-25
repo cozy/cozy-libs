@@ -99,39 +99,26 @@ export class MobileRouter extends Component {
   render() {
     const {
       history,
-      appRoutes,
-      isAuthenticated,
-      isRevoked,
       onAuthenticated,
       onLogout,
       appIcon,
-      onboarding,
-      onboardingInformations,
-      onException
+      appTitle,
+      appRoutes,
+      onException,
+      client,
+      children
     } = this.props
 
-    if (!isAuthenticated) {
-      if (checkIfOnboardingLogin(onboardingInformations)) {
-        /* We need to hide() the ViewController since the ViewController is still active
-        when the application cames from background (specialy on iOS)
-        */
-        if (window.SafariViewController) window.SafariViewController.hide()
-        const { code, state, cozy_url } = onboardingInformations
-        this.doOnboardingLogin(state, code, cozy_url, history)
-        //we return null since the previous method is async
-        return null
-      } else {
-        return (
-          <Authentication
-            router={history}
-            onComplete={onAuthenticated}
-            onException={onException}
-            appIcon={appIcon}
-            onboarding={onboarding}
-          />
-        )
-      }
-    } else if (isRevoked) {
+    if (!client.isLogged) {
+      return (
+        <Authentication
+          onComplete={this.afterAuthentication}
+          onException={onException}
+          appIcon={appIcon}
+          appTitle={appTitle}
+        />
+      )
+    } else if (client.isRevoked) {
       return (
         <Revoked
           onLogBackIn={this.handleLogBackIn}
