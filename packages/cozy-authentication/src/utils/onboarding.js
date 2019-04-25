@@ -32,12 +32,14 @@ export const readState = () => {
 export const clearState = () => {
   return localforage.removeItem(ONBOARDING_STATE)
 }
+
 const generateState = () => {
   return generateRandomString()
 }
 const generateSecret = () => {
   return generateRandomString()
 }
+
 export const checkIfOnboardingLogin = onboardingInformations => {
   return get(onboardingInformations, 'code')
 }
