@@ -54,6 +54,75 @@ class Contact extends Document {
   }
 }
 
+const ContactShape = PropTypes.shape({
+  _id: PropTypes.string.isRequired,
+  _type: PropTypes.string.isRequired,
+  fullname: PropTypes.string,
+  name: PropTypes.shape({
+    givenName: PropTypes.string,
+    familyName: PropTypes.string,
+    additionalName: PropTypes.string,
+    namePrefix: PropTypes.string,
+    nameSuffix: PropTypes.string
+  }),
+  birthday: PropTypes.string,
+  note: PropTypes.string,
+  email: PropTypes.arrayOf(
+    PropTypes.shape({
+      address: PropTypes.string.isRequired,
+      label: PropTypes.string,
+      type: PropTypes.string,
+      primary: PropTypes.bool
+    })
+  ),
+  address: PropTypes.arrayOf(
+    PropTypes.shape({
+      street: PropTypes.string,
+      pobox: PropTypes.string,
+      city: PropTypes.string,
+      region: PropTypes.string,
+      postcode: PropTypes.string,
+      country: PropTypes.string,
+      type: PropTypes.string,
+      primary: PropTypes.bool,
+      label: PropTypes.string,
+      formattedAddress: PropTypes.string
+    })
+  ),
+  phone: PropTypes.arrayOf({
+    number: PropTypes.string.isRequired,
+    type: PropTypes.string,
+    label: PropTypes.string,
+    primary: PropTypes.bool
+  }),
+  cozy: PropTypes.arrayOf(
+    PropTypes.shape({
+      url: PropTypes.string.isRequired,
+      label: PropTypes.string,
+      primary: PropTypes.bool
+    })
+  ),
+  company: PropTypes.string,
+  jobTitle: PropTypes.string,
+  trashed: PropTypes.bool.isRequired,
+  me: PropTypes.bool.isRequired,
+  relationships: PropTypes.shape({
+    accounts: PropTypes.shape({
+      data: PropTypes.arrayOf({
+        _id: PropTypes.string.isRequired,
+        _type: PropTypes.string.isRequired
+      })
+    }),
+    groups: PropTypes.shape({
+      data: PropTypes.arrayOf({
+        _id: PropTypes.string.isRequired,
+        _type: PropTypes.string.isRequired
+      })
+    })
+  })
+})
+
 Contact.doctype = 'io.cozy.contacts'
+Contact.propType = ContactShape
 
 module.exports = Contact
