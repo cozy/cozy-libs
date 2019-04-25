@@ -42,7 +42,7 @@ export const checkIfOnboardingLogin = onboardingInformations => {
   return get(onboardingInformations, 'code')
 }
 
-export const generateOAuthForUrl = async ({
+export const generateOnboardingQueryPart = async ({
   clientName,
   redirectURI,
   softwareID,

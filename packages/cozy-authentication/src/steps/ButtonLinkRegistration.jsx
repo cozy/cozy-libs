@@ -9,7 +9,7 @@ import { withClient } from 'cozy-client'
 import { nativeLinkOpen } from '../LinkManager'
 
 import {
-  generateOAuthForUrl,
+  generateOnboardingQueryPart,
   clearState,
   clearSecret
 } from '../utils/onboarding'
@@ -21,28 +21,9 @@ export class ButtonLinkRegistration extends Component {
   async generateUrl() {
     await clearState()
     await clearSecret()
-    const {
-      clientName,
-      redirectURI,
-      softwareID,
-      softwareVersion,
-      clientURI,
-      logoURI,
-      policyURI,
-      scope
-    } = this.props.onboarding.oauth
-    const onboardingObject = await generateOAuthForUrl({
-      clientName,
-      redirectURI,
-      softwareID,
-      softwareVersion,
-      clientURI,
-      logoURI,
-      policyURI,
-      scope
-    })
+    const oauthOptions = await generateOnboardingQueryPart(this.props.client.options.oauth)
     const url = `https://manager.cozycloud.cc/cozy/create?pk_campaign=drive-${getPlatform() ||
-      'browser'}&onboarding=${onboardingObject}`
+      'browser'}&onboarding=${oauthOptions}`
     this.setState({ url })
     return url
   }
