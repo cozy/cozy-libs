@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Subscriptions should subscribe 1`] = `
+Object {
+  "io.cozy.bank.accounts\\\\created": Array [
+    [MockFunction],
+  ],
+}
+`;
+
+exports[`Subscriptions should unsubscribe 1`] = `
+Object {
+  "io.cozy.bank.accounts\\\\created": Array [
+    [MockFunction],
+    [MockFunction],
+  ],
+}
+`;
+
+exports[`Subscriptions should unsubscribe 2`] = `
+Object {
+  "io.cozy.bank.accounts\\\\created": Array [
+    [MockFunction],
+  ],
+}
+`;
+
+exports[`Subscriptions should unsubscribe 3`] = `
+Object {
+  "io.cozy.bank.accounts\\\\created": Array [],
+}
+`;
