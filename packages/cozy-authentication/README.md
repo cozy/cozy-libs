@@ -18,6 +18,12 @@ Contribute
 
 If you want to work on cozy-authentication itself and submit code modifications, feel free to open pull-requests! See the [contributing guide][contribute] for more information about this repository structure, testing, linting and how to properly open pull-requests.
 
+Docs related to authentication process
+--------------------------------------
+
+https://gitlab.cozycloud.cc/cloudery/backend-cozy/blob/master/doc/onboarding_mobile.mmdc
+
+https://paper.dropbox.com/doc/Connexion-apres-creation--Ab117hm3s4nvwa6eQctXmIWzAg-Sr76PG8FfCNrVNsb19pCf
 
 Community
 ---------
