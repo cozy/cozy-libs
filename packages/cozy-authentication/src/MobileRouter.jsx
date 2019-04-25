@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
 import { Router, withRouter } from 'react-router'
 import Proptypes from 'prop-types'
+
+import { withClient } from 'cozy-client'
+
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
@@ -9,18 +12,41 @@ import deeplink from './utils/deeplink'
 // the deeplink
 window.handleOpenURL = deeplink.save
 
+const clientEvents = ['login', 'logout', 'revoked', 'unrevoked']
+
 export class MobileRouter extends Component {
   constructor(props) {
     super(props)
+    this.update = this.update.bind(this)
     this.handleDeepLink = this.handleDeepLink.bind(this)
   }
 
   componentDidMount () {
+    this.startListeningToClient()
     this.startHandlingDeeplinks()
+  }
+
+  startListeningToClient() {
+    const { client } = this.props
+    for (let ev of clientEvents) {
+      client.on(ev, this.update)
+    }
+  }
+
+  stopListeningToClient() {
+    const { client } = this.props
+    for (let ev of clientEvents) {
+      client.removeListener(ev, this.update)
+    }
   }
 
   componentWillUnmount() {
     this.stopHandlingDeeplinks()
+    this.stopListeningToClient()
+  }
+
+  update() {
+    this.forceUpdate()
   }
 
   startHandlingDeeplinks() {
@@ -133,4 +159,4 @@ MobileRouter.propTypes = {
   onException: Proptypes.func.isRequired
 }
 
-export default withRouter(MobileRouter)
+export default withClient(MobileRouter)
