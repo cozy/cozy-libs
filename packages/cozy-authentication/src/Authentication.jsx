@@ -43,7 +43,7 @@ class Authentication extends Component {
   }
 
   async connectToServer(url) {
-    const { onComplete, onException, router } = this.props
+    const { onComplete, onException } = this.props
     try {
       this.setState({ generalError: null, fetching: true })
       const cozyClient = this.props.client
@@ -58,7 +58,6 @@ class Authentication extends Component {
       await onComplete({
         url,
         token: destructuredToken,
-        router: router
         clientInfo
       })
     } catch (err) {
