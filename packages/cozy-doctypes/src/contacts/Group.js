@@ -8,7 +8,7 @@ const GroupShape = PropTypes.shape({
   _id: PropTypes.string.isRequired,
   _type: PropTypes.string.isRequired,
   name: PropTypes.string.isRequired,
-  trashed: PropTypes.bool.isRequired
+  trashed: PropTypes.bool
 })
 
 Group.doctype = 'io.cozy.contacts.groups'

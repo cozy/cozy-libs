@@ -104,7 +104,7 @@ const ContactShape = PropTypes.shape({
   ),
   company: PropTypes.string,
   jobTitle: PropTypes.string,
-  trashed: PropTypes.bool.isRequired,
+  trashed: PropTypes.bool,
   me: PropTypes.bool.isRequired,
   relationships: PropTypes.shape({
     accounts: PropTypes.shape({
