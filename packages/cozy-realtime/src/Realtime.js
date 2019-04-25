@@ -1,5 +1,9 @@
 import Socket, { getWebSocketUrl, getWebSocketToken } from './Socket'
-import Subscriptions from './Subscriptions'
+import Subscriptions, {
+  EVENT_CREATED,
+  EVENT_UPDATED,
+  EVENT_DELETED
+} from './Subscriptions'
 
 class Realtime {
   /**
@@ -132,4 +136,5 @@ class Realtime {
   }
 }
 
+export { EVENT_CREATED, EVENT_UPDATED, EVENT_DELETED }
 export default Realtime

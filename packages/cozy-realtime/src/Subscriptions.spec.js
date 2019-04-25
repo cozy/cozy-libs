@@ -1,12 +1,12 @@
-import Subscriptions, { getKey } from './Subscriptions'
+import Subscriptions, { getKey, EVENT_CREATED } from './Subscriptions'
 
 describe('getKey', () => {
   it('should return key from options', () => {
-    let options = { type: 'io.cozy.bank.accounts', eventName: 'created' }
+    let options = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
     expect(getKey(options)).toBe('io.cozy.bank.accounts\\created')
     options = {
       type: 'io.cozy.bank.accounts',
-      eventName: 'created',
+      eventName: EVENT_CREATED,
       id: 'dzqezfd'
     }
     expect(getKey(options)).toBe('io.cozy.bank.accounts\\dzqezfd\\created')
@@ -26,7 +26,7 @@ describe('Subscriptions', () => {
   })
 
   it('should subscribe', () => {
-    const options = { type: 'io.cozy.bank.accounts', eventName: 'created' }
+    const options = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
     const handler = jest.fn()
     expect(subscriptions._handlers).toEqual({})
     expect(subscriptions._numberOfHandlers).toEqual(0)
@@ -36,7 +36,7 @@ describe('Subscriptions', () => {
   })
 
   it('should unsubscribe', done => {
-    const options = { type: 'io.cozy.bank.accounts', eventName: 'created' }
+    const options = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
     const handler1 = jest.fn()
     const handler2 = jest.fn()
     subscriptions.subscribe(options, handler1)
@@ -58,9 +58,9 @@ describe('Subscriptions', () => {
     const type = 'io.cozy.bank.accounts'
     const id = 'zvNpzsHILcXpnDBlUfmAqVuEEuyWvPYn'
     const doc = 'doc'
-    const options = { type, eventName: 'created' }
+    const options = { type, eventName: EVENT_CREATED }
     const event = {
-      data: JSON.stringify({ event: 'CREATED', payload: { type, id, doc } })
+      data: JSON.stringify({ event: EVENT_CREATED, payload: { type, id, doc } })
     }
     const handler = jest
       .fn()

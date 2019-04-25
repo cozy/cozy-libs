@@ -2,9 +2,10 @@ import MicroEE from 'microee'
 import compact from 'lodash/compact'
 import pull from 'lodash/pull'
 
-export const CREATED = 'created'
-export const UPDATED = 'updated'
-export const DELETED = 'deleted'
+export const EVENT_CREATED = 'created'
+export const EVENT_UPDATED = 'updated'
+export const EVENT_DELETED = 'deleted'
+
 const INDEX_KEY_SEPARATOR = '\\'
 
 export const getKey = ({ type, id, eventName }) =>
