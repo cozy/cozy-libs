@@ -13,10 +13,6 @@ import {
   checkIfOnboardingLogin,
   addProtocolToURL
 } from './utils/onboarding'
-import {
-  onboardingInformationsPropTypes,
-  onboardingPropTypes
-} from './OnboardingPropTypes'
 export class MobileRouter extends Component {
   async doOnboardingLogin(receivedState, code, instanceDomain, history) {
     const localState = await readState()

@@ -7,16 +7,15 @@ import 'cozy-ui/assets/icons/ui/cozy-negative.svg'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import styles from '../styles.styl'
-import { ButtonLinkRegistration } from './ButtonLinkRegistration'
-import { onboardingPropTypes } from '../../OnboardingPropTypes'
+import ButtonLinkRegistration from './ButtonLinkRegistration'
+
 export class Welcome extends Component {
   registerRender = () => {
     const {
       t,
       register,
       allowRegistration,
-      breakpoints: { isMobile },
-      onboarding
+      breakpoints: { isMobile }
     } = this.props
 
     if (allowRegistration) {
@@ -33,7 +32,6 @@ export class Welcome extends Component {
       <ButtonLinkRegistration
         label={t('mobile.onboarding.welcome.create_my_cozy')}
         size={isMobile ? 'normal' : 'large'}
-        onboarding={onboarding}
       />
     )
   }
@@ -99,6 +97,5 @@ export class Welcome extends Component {
 Welcome.propTypes = {
   selectServer: PropTypes.func.isRequired,
   appIcon: PropTypes.string.isRequired,
-  onboarding: onboardingPropTypes.isRequired
 }
 export default withBreakpoints()(translate()(Welcome))

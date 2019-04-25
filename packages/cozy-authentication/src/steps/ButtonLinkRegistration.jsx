@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import { getPlatform } from 'cozy-device-helper'
 import { Button } from 'cozy-ui/transpiled/react'
+import { withClient } from 'cozy-client'
 //import flag from 'cozy-flags'
 
 import { nativeLinkOpen } from '../LinkManager'
@@ -73,5 +75,7 @@ export class ButtonLinkRegistration extends Component {
 }
 
 ButtonLinkRegistration.propTypes = {
-  onboarding: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired
 }
+
+export default withClient(ButtonLinkRegistration)

@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Welcome from './steps/Welcome'
 import SelectServer from './steps/SelectServer'
-import { onboardingPropTypes } from '../OnboardingPropTypes'
+import { withClient } from 'cozy-client'
+
 const STEP_WELCOME = 'STEP_WELCOME'
 const STEP_EXISTING_SERVER = 'STEP_EXISTING_SERVER'
 
@@ -45,8 +46,8 @@ class Authentication extends Component {
     const { onComplete, onException, router } = this.props
     try {
       this.setState({ generalError: null, fetching: true })
-      const cozyClient = this.context.client
-      const { client, token } = await register(cozyClient, url)
+      const cozyClient = this.props.client
+      const { client: clientInfo, token } = await register(cozyClient, url)
 
       const destructuredToken = {
         accessToken: token.accessToken,
@@ -57,8 +58,8 @@ class Authentication extends Component {
       await onComplete({
         url,
         token: destructuredToken,
-        clientInfo: client,
         router: router
+        clientInfo
       })
     } catch (err) {
       this.setState({ generalError: err })
@@ -74,7 +75,7 @@ class Authentication extends Component {
   }
 
   render() {
-    const { onException, appIcon, onboarding } = this.props
+    const { onException, appIcon, appTitle } = this.props
     const { currentStepIndex, generalError, fetching } = this.state
     const currentStep = this.steps[currentStepIndex]
 
@@ -86,7 +87,6 @@ class Authentication extends Component {
             register={() => this.setupSteps()}
             allowRegistration={false}
             appIcon={appIcon}
-            onboarding={onboarding}
           />
         )
       case STEP_EXISTING_SERVER:
@@ -97,7 +97,6 @@ class Authentication extends Component {
             externalError={generalError}
             fetching={fetching}
             onException={onException}
-            onboarding={onboarding}
           />
         )
       default:
@@ -111,7 +110,7 @@ Authentication.propTypes = {
   onException: PropTypes.func.isRequired,
   router: PropTypes.object,
   appIcon: PropTypes.string.isRequired,
-  onboarding: onboardingPropTypes.isRequired
+  client: PropTypes.object.isRequired
 }
 
 Authentication.contextTypes = {
@@ -125,4 +124,4 @@ Authentication.defaultProps = {
   }
 }
 
-export default Authentication
+export default withClient(Authentication)

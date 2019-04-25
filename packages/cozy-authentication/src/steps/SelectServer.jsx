@@ -11,8 +11,7 @@ import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
 import styles from '../styles.styl'
-import { ButtonLinkRegistration } from './ButtonLinkRegistration'
-import { onboardingPropTypes } from '../../OnboardingPropTypes'
+import ButtonLinkRegistration from './ButtonLinkRegistration'
 
 require('url-polyfill')
 
@@ -370,8 +369,7 @@ SelectServer.propTypes = {
   nextStep: PropTypes.func.isRequired,
   fetching: PropTypes.bool,
   externalError: PropTypes.object,
-  onException: PropTypes.func.isRequired,
-  onboarding: onboardingPropTypes.isRequired
+  onException: PropTypes.func.isRequired
 }
 
 SelectServer.defaultProps = {
