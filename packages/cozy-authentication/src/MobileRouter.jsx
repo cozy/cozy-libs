@@ -3,13 +3,66 @@ import { Router, withRouter } from 'react-router'
 import Proptypes from 'prop-types'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
+import deeplink from './utils/deeplink'
+
+// Even if the component is not yet mounted, we save
+// the deeplink
+window.handleOpenURL = deeplink.save
+
 export class MobileRouter extends Component {
+  constructor(props) {
+    super(props)
+    this.handleDeepLink = this.handleDeepLink.bind(this)
+  }
 
+  componentDidMount () {
+    this.startHandlingDeeplinks()
+  }
 
+  componentWillUnmount() {
+    this.stopHandlingDeeplinks()
+  }
 
+  startHandlingDeeplinks() {
+    // While this component is mounted, it handles deep links
+    this.originalHandleOpenURL = window.handleOpenURL
+    window.handleOpenURL = this.handleDeepLink
+    // If a deep link was opened when this component was not yet mounted
+    const link = deeplink.get()
+    if (link) {
+      this.handleDeepLink(link)
+    }
+  }
 
+  stopHandlingDeeplinks() {
+    window.handleOpenURL = this.originalHandleOpenURL
+  }
 
+  handleDeepLink(url) {
+    url = url || deeplink.get()
+    deeplink.clear()
+    if (!url) {
+      return
+    }
+    const path = url.replace(this.props.protocol, '')
+    this.props.history.replace('/' + path)
+    if (path.startsWith('auth')) {
+      this.handleAuth()
+    }
+  }
+
+  async handleAuth() {
+    const { client, history } = this.props
+    try {
+      const currentLocation = history.getCurrentLocation()
+      const { access_code, state, cozy_url } = currentLocation.query
+      // on iOS, hide() the ViewController since it is still active
+      // when the application comes from background
+      if (window.SafariViewController) window.SafariViewController.hide()
+      await doOnboardingLogin(client, cozy_url, state, access_code)
+      this.afterAuthentication()
     } catch (error) {
+      await client.logout()
     }
   }
   render() {
