@@ -19,6 +19,11 @@ export class MobileRouter extends Component {
     super(props)
     this.update = this.update.bind(this)
     this.handleDeepLink = this.handleDeepLink.bind(this)
+
+    this.handleLogBackIn = this.handleLogBackIn.bind(this)
+    this.afterAuthentication = this.afterAuthentication.bind(this)
+    this.afterLogout = this.afterLogout.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
   }
 
   componentDidMount () {
@@ -132,27 +137,27 @@ export class MobileRouter extends Component {
     }
   }
 
-  async handleLogBackIn = () => {
+  async handleLogBackIn () {
     const { client } = this.props
     await client.stackClient.unregister().catch(() => {})
     await client.stackClient.register(client.uri)
   }
 
-  afterAuthentication = async () => {
+   async afterAuthentication () {
     this.props.history.replace(this.props.loginPath)
     if (this.props.onAuthenticated) {
       this.props.onAuthenticated()
     }
   }
 
-  afterLogout = async () => {
+  async afterLogout () {
     this.props.history.replace(this.props.logoutPath)
     if (this.props.onLogout) {
       this.props.onLogout()
     }
   }
 
-  handleLogout = async () => {
+  async handleLogout () {
     const { client } = this.props
     await client.logout()
   }
