@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.40.0"></a>
+# 1.40.0 (2019-04-25)
+
+
+### Features
+
+* **cozy-doctypes:** Add Contact model ([9f9e45f](https://github.com/cozy/cozy-libs/commit/9f9e45f))
+* **cozy-doctypes:** Add proptypes shapes for Contact and Group models ([bc1b185](https://github.com/cozy/cozy-libs/commit/bc1b185))
+
+
+
+
 <a name="1.39.0"></a>
 # [1.39.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.38.7...cozy-doctypes@1.39.0) (2019-03-19)
 
