@@ -12,7 +12,7 @@ import deeplink from './utils/deeplink'
 // the deeplink
 window.handleOpenURL = deeplink.save
 
-const clientEvents = ['login', 'logout', 'revoked', 'unrevoked']
+const clientUpdateEvents = ['login', 'logout', 'revoked', 'unrevoked']
 
 export class MobileRouter extends Component {
   constructor(props) {
@@ -28,16 +28,20 @@ export class MobileRouter extends Component {
 
   startListeningToClient() {
     const { client } = this.props
-    for (let ev of clientEvents) {
+    for (let ev of clientUpdateEvents) {
       client.on(ev, this.update)
     }
+    client.on('login', this.afterAuthentication)
+    client.on('logout', this.afterLogout)
   }
 
   stopListeningToClient() {
     const { client } = this.props
-    for (let ev of clientEvents) {
+    for (let ev of clientUpdateEvents) {
       client.removeListener(ev, this.update)
     }
+    client.removeListener('login', this.afterAuthentication)
+    client.removeListener('logout', this.afterLogout)
   }
 
   componentWillUnmount() {
@@ -91,6 +95,7 @@ export class MobileRouter extends Component {
       await client.logout()
     }
   }
+
   render() {
     const {
       history,
@@ -129,13 +134,32 @@ export class MobileRouter extends Component {
     } else if (isRevoked) {
       return (
         <Revoked
-          router={history}
-          onLogBackIn={onAuthenticated}
-          onLogout={onLogout}
+          onLogBackIn={this.handleLogBackIn}
+          onLogout={this.handleLogout}
         />
       )
     } else {
       return <Router history={history}>{appRoutes}</Router>
+
+  async handleLogBackIn = () => {
+    const { client } = this.props
+    await client.stackClient.unregister().catch(() => {})
+    await client.stackClient.register(client.uri)
+  }
+
+  afterAuthentication = async () => {
+    this.props.history.replace('/')
+  }
+
+  afterLogout = async () => {
+    this.props.history.replace('/')
+  }
+
+  handleLogout = async () => {
+    const { client } = this.props
+    await client.logout()
+    if (this.props.onLogout) {
+      this.props.onLogout()
     }
   }
 }
