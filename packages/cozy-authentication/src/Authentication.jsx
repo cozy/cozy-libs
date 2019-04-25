@@ -22,6 +22,10 @@ class Authentication extends Component {
     this.connectToServer = this.connectToServer.bind(this)
   }
 
+  componentWillUnmount() {
+    this.unmounted = true
+  }
+
   nextStep() {
     this.setState(prevState => ({
       currentStepIndex: ++prevState.currentStepIndex
@@ -63,7 +67,9 @@ class Authentication extends Component {
         onboardingStep: 'connecting to server'
       })
     } finally {
-      this.setState({ fetching: false })
+      if (!this.unmounted) {
+        this.setState({ fetching: false })
+      }
     }
   }
 
