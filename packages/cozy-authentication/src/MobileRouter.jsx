@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Router, withRouter } from 'react-router'
-import Proptypes from 'prop-types'
+import PropTypes from 'prop-types'
 
 import { withClient } from 'cozy-client'
 
@@ -158,16 +158,17 @@ MobileRouter.defaultProps = {
 }
 
 MobileRouter.propTypes = {
-  onboarding: onboardingPropTypes.isRequired,
-  onboardingInformations: onboardingInformationsPropTypes.isRequired,
-  history: Proptypes.object.isRequired,
-  appRoutes: Proptypes.object.isRequired,
-  isAuthenticated: Proptypes.bool.isRequired,
-  isRevoked: Proptypes.bool.isRequired,
-  onAuthenticated: Proptypes.func.isRequired,
-  onLogout: Proptypes.func.isRequired,
-  appIcon: Proptypes.string.isRequired,
-  onException: Proptypes.func.isRequired
+  history: PropTypes.object.isRequired,
+
+  children: PropTypes.node.isRequired,
+  appTitle: PropTypes.string.isRequired,
+  appIcon: PropTypes.string.isRequired,
+
+  onAuthenticated: PropTypes.func,
+  onLogout: PropTypes.func,
+  onException: PropTypes.func.isRequired,
+
+  client: PropTypes.object.isRequired
 }
 
 export default withClient(MobileRouter)
