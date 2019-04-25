@@ -12,7 +12,8 @@
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
     "test": "env USE_REACT=true yarn jest src",
-    "copy-files": "cp -r src/locales/ dist/locales/"
+    "copy-files": "cp -r src/locales/ dist/locales/",
+    "example": "env USE_REACT=true npx parcel $(pwd)/examples/index.html"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -30,6 +31,7 @@
     "parcel": "^1.12.3",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-redux": "^7.0.2",
     "react-styleguidist": "6.5.3",
     "stylus": "^0.54.5"
   },

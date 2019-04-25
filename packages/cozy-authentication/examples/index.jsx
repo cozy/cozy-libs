@@ -1,73 +1,105 @@
 import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
-import PropTypes from 'prop-types'
+import { Route, hashHistory } from 'react-router'
+import 'date-fns/locale/en/index'
+
+import 'cozy-ui/transpiled/react/stylesheet.css'
+import { I18n, Button } from 'cozy-ui/transpiled/react'
+import CozyClient, { CozyProvider, withClient } from 'cozy-client'
 
 import { MobileRouter } from '../dist'
-import 'date-fns/locale/en/index'
-import 'cozy-ui/transpiled/react/stylesheet.css'
+import icon from './icon.png'
+import enLocale from '../src/locales/en.json'
+
+const client = new CozyClient({
+  scope: ['io.cozy.files'],
+  oauth: {
+    clientName: 'Example App',
+    softwareID: 'io.cozy.example',
+    redirectURI: 'http://localhost:1234/auth'
+  }
+})
 
 const styles = {
-  Container: {
-    display: 'flex'
+  error: {
+    background: 'crimson',
+    color: 'white',
+    padding: '1rem'
   },
 
-  Nav: {
-    flexBasis: '20%'
+  wrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    flexBasis: '100%',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: '100%'
   }
 }
 
-class WithLang extends React.Component {
-  render() {
-    return this.props.children
-  }
+const LoggedIn = withClient(({ client }) => (
+  <div style={styles.wrapper}>
+    Logged In !<br />
+    Client id: {client.stackClient.oauthOptions.clientID}
+    <div>
+      <Button label="Logout" onClick={() => client.logout()} />
+      <Button
+        label="Revoke"
+        onClick={() => client.handleRevocationChange(true)}
+      />
+    </div>
+  </div>
+))
 
-  getChildContext() {
-    return {
-      lang: this.props.lang,
-      t: x => x,
-      store: {
-        getState: () => {},
-        subscribe: () => {}
-      }
-    }
-  }
-}
+const Error = ({ error }) => (
+  <pre style={styles.error}>An error occured {error.stack}</pre>
+)
 
-WithLang.childContextTypes = {
-  lang: PropTypes.string,
-  t: PropTypes.func,
-  store: PropTypes.object
-}
-
-class App extends React.Component {
+class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      view: 'authentication'
-    }
+    this.state = { error: null }
   }
 
-  handleClick(view) {
-    this.setState({ view })
+  componentDidCatch(error) {
+    this.setState({ error })
   }
+
   render() {
-    return (
-      <div style={styles.Container}>
-        <div style={styles.Nav}>
-          <button onClick={this.handleClick.bind(this, 'authentication')}>
-            Authentication
-          </button>
-          <button onClick={this.handleClick.bind(this, 'revoked')}>
-            Revoked
-          </button>
-        </div>
-        <MobileRouter>
-          <div>Logged in !</div>
-        </MobileRouter>
-      </div>
+    return this.state.error ? (
+      <Error error={this.state.error} />
+    ) : (
+      this.props.children
     )
   }
 }
 
-ReactDOM.render(<App />, document.querySelector('#app'))
+class App extends React.Component {
+  render() {
+    const { title, icon } = this.props
+    return (
+      <ErrorBoundary>
+        <CozyProvider client={client}>
+          <I18n lang="en" dictRequire={() => enLocale}>
+            {
+              <MobileRouter
+                history={hashHistory}
+                protocol="cozyexample://"
+                appTitle={title}
+                appIcon={icon}
+              >
+                <Route path="/" component={LoggedIn} />
+              </MobileRouter>
+            }
+          </I18n>
+        </CozyProvider>
+      </ErrorBoundary>
+    )
+  }
+}
+
+ReactDOM.render(
+  <App icon={icon} title="Example app" />,
+  document.querySelector('#app')
+)
