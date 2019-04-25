@@ -86,37 +86,8 @@ export const generateOnboardingQueryPart = async ({
 export const addProtocolToURL = instanceDomain => {
   return `https://${instanceDomain}`
 }
-export const secretExchange = (secret, instanceDomain, client) => {
-  const response = client.stackClient.fetchJSON(
-    'POST',
-    addProtocolToURL(instanceDomain) + '/auth/secret_exchange',
-    {
-      secret
     }
-  )
-  return response
-}
 
-export const getAccessToken = async (
-  { client_id, client_secret },
-  instanceDomain,
-  code,
-  client
-) => {
-  const body = `grant_type=authorization_code&code=${code}&client_id=${client_id}&client_secret=${client_secret}`
-  const getTokenRequest = await client.stackClient.fetch(
-    'POST',
-    addProtocolToURL(instanceDomain) + '/auth/access_token',
-    body,
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
     }
-  )
-  const token = await getTokenRequest.json()
-  if (getTokenRequest.status !== 200) {
-    throw new Error('token.error')
   }
-  return token
 }
