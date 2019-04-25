@@ -117,7 +117,7 @@ subscription.unsubscribe()
 
 ### Maintainers
 
-The maintainers for Cozy Realtime are [Greg](https://github.com/gregorylegarec) and [CPatchane](https://github.com/CPatchane) !
+The maintainers for Cozy Realtime are [Greg](https://github.com/gregorylegarec), [CPatchane](https://github.com/CPatchane) and [kosssi](https://github.com/kosssi) !
 
 ## License
 
