@@ -126,7 +126,11 @@ export class MobileRouter extends Component {
         />
       )
     } else {
-      return <Router history={history}>{appRoutes}</Router>
+      return <Router history={history}>
+        { appRoutes || children }
+      </Router>
+    }
+  }
 
   async handleLogBackIn = () => {
     const { client } = this.props
