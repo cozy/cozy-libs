@@ -83,11 +83,52 @@ export const generateOnboardingQueryPart = async ({
   return encodeURIComponent(JSON.stringify(oauthData))
 }
 
-export const addProtocolToURL = instanceDomain => {
-  return `https://${instanceDomain}`
+const addProtocolToDomain = domain => {
+  const protocol = domain.includes('cozy.tools') ? 'http' : 'https'
+  return `${protocol}://${domain}`
 }
+
+export const doOnboardingLogin = async (client, domain, receivedState, accessCode) => {
+  try {
+    const localState = 'mystate' || await readState()
+    const localSecret = 'mysecret' || await readSecret()
+    if (localState !== receivedState) {
+      throw new Error('States are not equals')
     }
 
+    const url = addProtocolToDomain(domain)
+    const clientInfo = await client.stackClient.exchangeOAuthSecret(
+      url,
+      localSecret
+    )
+
+    const {
+      onboarding_secret,
+      onboarding_state,
+      client_id,
+      client_secret
+    } = clientInfo
+
+    if (
+      !(localSecret === onboarding_secret && localState === onboarding_state)
+    ) {
+      throw new Error('exchanged informations are not good')
     }
+
+    const oauthOptions = {
+      clientID: client_id,
+      clientSecret: client_secret
+    }
+    const token = await client.stackClient.fetchAccessToken(
+      accessCode,
+      oauthOptions,
+      url
+    )
+    await client.login({ url, token })
+  } catch (e) {
+    clearState()
+    clearSecret()
+    throw e
   }
 }
+

@@ -3,62 +3,13 @@ import { Router, withRouter } from 'react-router'
 import Proptypes from 'prop-types'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
-import {
-  readState,
-  secretExchange,
-  getAccessToken,
-  readSecret,
-  clearSecret,
-  clearState,
-  checkIfOnboardingLogin,
-  addProtocolToURL
-} from './utils/onboarding'
 export class MobileRouter extends Component {
-  async doOnboardingLogin(receivedState, code, instanceDomain, history) {
-    const localState = await readState()
-    const localSecret = await readSecret()
 
-    try {
-      if (localState !== receivedState) {
-        throw new Error('States are not equals')
-      }
 
-      const clientInfo = await secretExchange(
-        localSecret,
-        instanceDomain,
-        this.props.client
-      )
 
-      const {
-        onboarding_secret,
-        onboarding_state,
-        client_id,
-        client_secret
-      } = clientInfo
 
-      if (
-        !(localSecret === onboarding_secret && localState === onboarding_state)
-      )
-        throw new Error('exchanged informations are not good')
 
-      const token = await getAccessToken(
-        { client_id, client_secret },
-        instanceDomain,
-        code,
-        this.props.client
-      )
-
-      await this.props.onAuthenticated({
-        url: addProtocolToURL(instanceDomain),
-        token,
-        clientInfo,
-        router: history
-      })
     } catch (error) {
-      this.props.onLogout()
-    } finally {
-      clearState()
-      clearSecret()
     }
   }
   render() {
