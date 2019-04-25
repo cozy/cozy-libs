@@ -5,6 +5,8 @@ const BalanceHistory = require('./banking/BalanceHistory')
 const BankAccount = require('./banking/BankAccount')
 const BankingReconciliator = require('./banking/BankingReconciliator')
 const BankTransaction = require('./banking/BankTransaction')
+const Contact = require('./contacts/Contact')
+const Group = require('./contacts/Group')
 const Permission = require('./Permission')
 
 module.exports = {
@@ -15,6 +17,8 @@ module.exports = {
   BankAccount,
   BankingReconciliator,
   BankTransaction,
+  Contact,
+  Group,
   registerClient: Document.registerClient,
   Permission
 }
