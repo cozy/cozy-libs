@@ -38,81 +38,25 @@ A simple way to have realtime using Websocket with [cozy-stack](https://github.c
 or
 `yarn add cozy-realtime`
 
-## API
+## Example
 
-#### `subscribe(config, doctype, options)`
+```js
+import Realtime, { CREATE_EVENT } from 'cozy-realtime'
 
-This method allow you to subscribe to realtime for one document or all documents of a provided doctype. Here are the parameters:
+// Instanciate Realtime
+const realtime = new Realtime(cozyClient)
 
-- `config`: a config object with the following keys :
-  - `domain`: the instance domain (ex: `cozy.works`, `cozy.tools:8080`), must be provided if `url` is not set
-  - `token`: the cozy token (ex: the global `cozy.client._token.token`)
-  - `url`: the cozy url (ex: https://recette.cozy.works)
-  - `secure`: a boolean indicating if a secure protocol must be used (default `true`). Should not be provided along `url`.
-- `doctype`: the doctype to subscribe (ex: `io.cozy.accounts`)
-- `options`: an object to use optional parameters:
-  - `docId`: a document `_id` attribute to target in order to get realtime only for this specific document
-  - `parse`: a custom function to be use as parser for your resulting documents (default: `doc => doc`)
+const handler = doc => {
+  console.log(`A new 'io.cozy.accounts' is created. '${doc._id}' is own _id.`)
+}
 
-It will return a subscription object with `onCreate` (except if subscribing on specific document), `onUpdate` and `onDelete` methods.
+// To subscribe
+await realtime.subscribe({ type: 'io.cozy.accounts', eventName: CREATE_EVENT }, handler)
 
-Here is an example:
-
-```javascript
-import realtime from 'cozy-realtime'
-
-const config = {
-    token: authToken, // app token provided by the stack or the client
-    domain: 'cozy.tools:8080',
-    secure: true // to use wss (with SSL) or not
-  }
-const subscription = realtime.subscribe(config, 'io.mocks.mydocs')
-
-// your code when a new document is created
-subscription.onCreate(doc => doSomethingOnCreate(doc))
-// your code when a document is updated
-subscription.onUpdate(doc => doSomethingOnUpdate(doc))
-// your code when a document is deleted
-subscription.onDelete(doc => doSomethingOnDelete(doc))
-
-// Unsubscribe all events from realtime
-subscription.unsubscribe()
-
-// for a specific document
-const docSubscription = realtime.subscribe(config, 'io.mocks.mydocs')
-
-// There is no onCreate here since to have the id,
-// the document is already created
-
-// your code when your document is updated
-docSubscription.onUpdate(doc => doSomethingOnUpdate(doc))
-// your code when your document is deleted
-docSubscription.onDelete(doc => doSomethingOnDelete(doc))
-
-// Unsubscribe all events from realtime
-docSubscription.unsubscribe()
-```
-
-All `onCreate`, `onUpdate` and `onDelete` methods will return the subscription so you can chain the call like below:
-
-```javascript
-import realtime from 'cozy-realtime'
-
-const config = {
-    token: authToken, // app token provided by the stack or the client
-    domain: 'cozy.tools:8080',
-    secure: true // to use wss (with SSL) or not
-  }
-const subscription = realtime.subscribe(config, 'io.mocks.mydocs')
-  // your code when a new document is created
-  .onCreate(doc => doSomethingOnCreate(doc))
-  // your code when a document is updated
-  .onUpdate(doc => doSomethingOnUpdate(doc))
-  // your code when a document is deleted
-  .onDelete(doc => doSomethingOnDelete(doc))
-
-// Unsubscribe all events from realtime
-subscription.unsubscribe()
+// To unsubscribe
+await realtime.unsubscribe({ type: 'io.cozy.accounts', eventName: CREATE_EVENT }, handler)
+// or
+await realtime.unsubscribeAll()
 ```
 
 ### Maintainers
