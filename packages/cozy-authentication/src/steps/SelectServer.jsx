@@ -336,12 +336,12 @@ export class SelectServer extends Component {
           >
             <Button
               className={styles['wizard-next']}
-              disabled={
+              disabled={Boolean(
                 error ||
-                fetching ||
-                (isCustomDomain && !isUrl(this.prependProtocol(value))) ||
-                (!isCustomDomain && !this.isValideCozyName(value))
-              }
+                  fetching ||
+                  (isCustomDomain && !isUrl(this.prependProtocol(value))) ||
+                  (!isCustomDomain && !this.isValideCozyName(value))
+              )}
               busy={fetching}
               label={t('mobile.onboarding.server_selection.button')}
               size={isTiny ? 'normal' : 'large'}
