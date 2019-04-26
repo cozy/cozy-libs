@@ -207,18 +207,15 @@ export class TriggerManager extends Component {
   }
 
   render() {
-    const {
-      konnector,
-      running,
-      showError,
-      twoFANeeded,
-      modalContainerId
-    } = this.props
+    const { konnector, running, showError, modalContainerId } = this.props
     const { account, error, status } = this.state
     const submitting = status === RUNNING || running
     const submittingTwoFA = status === RUNNING_TWOFA
-    const waitForTwoFACode = accounts.isTwoFANeeded(status) || twoFANeeded
+    const waitForTwoFACode = accounts.isTwoFANeeded(status)
+    const isTwoFARetryCode = accounts.isTwoFARetry(status)
+    const display2FA = waitForTwoFACode || submittingTwoFA || isTwoFARetryCode
     const modalInto = modalContainerId || MODAL_PLACE_ID
+
     return (
       <div>
         <div id={modalInto} />
@@ -228,9 +225,9 @@ export class TriggerManager extends Component {
           konnector={konnector}
           onSubmit={this.handleSubmit}
           showError={showError}
-          submitting={submitting || submittingTwoFA || waitForTwoFACode}
+          submitting={submitting || display2FA}
         />
-        {(waitForTwoFACode || submittingTwoFA) && (
+        {display2FA && (
           <TwoFAForm
             account={account}
             konnector={konnector}
@@ -238,6 +235,7 @@ export class TriggerManager extends Component {
             handleSubmitTwoFACode={this.handleSubmitTwoFACode}
             submitting={submittingTwoFA}
             into={modalInto}
+            retryAsked={isTwoFARetryCode && !submittingTwoFA}
           />
         )}
       </div>

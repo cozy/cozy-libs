@@ -1,5 +1,4 @@
 import { subscribe } from 'cozy-realtime'
-
 import { KonnectorJobError } from '../../helpers/konnectors'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'

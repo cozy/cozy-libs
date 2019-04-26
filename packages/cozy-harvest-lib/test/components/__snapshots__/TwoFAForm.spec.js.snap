@@ -3,6 +3,7 @@
 exports[`TwoFAForm should have busy button state and disabled if submitting 1`] = `
 <DefaultButton
   busy={true}
+  className="u-mt-1"
   disabled={true}
   extension="full"
   label="twoFAForm.CTA"
@@ -45,7 +46,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
       </Text>
       <Field
         autoComplete="off"
-        className="u-mt-0"
+        className="u-mt-0 u-mb-0"
         error={false}
         fieldProps={Object {}}
         fullwidth={true}
@@ -59,6 +60,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
         value="Cozy2FA"
       />
       <DefaultButton
+        className="u-mt-1"
         disabled={false}
         extension="full"
         label="twoFAForm.CTA"

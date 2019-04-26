@@ -27,7 +27,9 @@ export class KonnectorAccountWatcher {
     accountSubscription.onUpdate(updatedAccount => {
       this.account = updatedAccount
       const { state } = this.account
-      if (accounts.isTwoFANeeded(state)) onTwoFACodeAsked(state)
+      if (accounts.isTwoFANeeded(state) || accounts.isTwoFARetry(state)) {
+        onTwoFACodeAsked(state)
+      }
     })
   }
 }

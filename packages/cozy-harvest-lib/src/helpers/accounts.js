@@ -11,6 +11,8 @@ const TWOFA_NEEDED_STATUSES = {
   sms: 'TWOFA_NEEDED.SMS'
 }
 
+const TWOFA_RETRY_STATUS = 'TWOFA_NEEDED_RETRY'
+
 /**
  * Return a boolean to know if the account is in a two fa code needed
  * status
@@ -24,6 +26,10 @@ export const isTwoFANeeded = status => {
     }
   }
   return false
+}
+
+export const isTwoFARetry = status => {
+  return status === TWOFA_RETRY_STATUS
 }
 
 /**
@@ -95,5 +101,6 @@ export default {
   getTwoFACodeProvider,
   mergeAuth,
   updateTwoFaCode,
-  isTwoFANeeded
+  isTwoFANeeded,
+  isTwoFARetry
 }
