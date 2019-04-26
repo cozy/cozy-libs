@@ -17,6 +17,7 @@
         "domain_cozy": ".mycozy.cloud",
         "domain_custom": "other",
         "button": "Next",
+        "previous": "Previous",
         "wrong_address_with_email": "You typed an email address. To connect on your cozy you must type its url, something like https://camillenimbus.mycozy.cloud",
         "wrong_address_v2": "You have just entered the address of old Cozy version. This application is only compatible with the latest version. [Please refer to our site for more information.](https://blog.cozycloud.cc/post/2016/11/21/On-the-road-to-Cozy-version-3?lang=en)",
         "wrong_address": "This address doesn’t seem to be a cozy. Please check the address you provide.",

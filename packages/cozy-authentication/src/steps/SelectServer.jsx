@@ -244,6 +244,7 @@ export class SelectServer extends Component {
                 className={classNames(styles['wizard-previous'])}
                 onClick={previousStep}
                 type="button"
+                label={t("mobile.onboarding.server_selection.previous")}
               />
             </div>
             <MainTitle tag="h1" className={styles['wizard-title']}>
