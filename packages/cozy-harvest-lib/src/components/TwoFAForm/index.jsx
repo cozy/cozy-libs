@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import Modal, { ModalDescription, ModalHeader } from 'cozy-ui/react/Modal'
-import Text, { SubTitle } from 'cozy-ui/react/Text'
+import Text, { SubTitle, Caption } from 'cozy-ui/react/Text'
 import { translate } from 'cozy-ui/react/I18n'
 import Button from 'cozy-ui/react/Button'
 import Field from 'cozy-ui/react/Field'
@@ -36,7 +36,7 @@ export class TwoFAForm extends PureComponent {
   }
 
   render() {
-    const { account, dismissAction, t, submitting } = this.props
+    const { account, dismissAction, t, submitting, retryAsked } = this.props
     const { twoFACode } = this.state
 
     return (
@@ -60,15 +60,22 @@ export class TwoFAForm extends PureComponent {
               {t(`twoFAForm.desc.${accounts.getTwoFACodeProvider(account)}`)}
             </Text>
             <Field
-              className="u-mt-0"
+              className="u-mt-0 u-mb-0"
               value={twoFACode}
               onChange={this.handleChange}
               autoComplete="off"
               label={t('twoFAForm.code.label')}
               size="medium"
+              error={retryAsked}
               fullwidth
             />
+            {retryAsked && (
+              <Caption className="u-error u-fs-italic u-mt-half">
+                {t('twoFAForm.retry')}
+              </Caption>
+            )}
             <Button
+              className="u-mt-1"
               label={t('twoFAForm.CTA')}
               busy={submitting}
               disabled={submitting || !twoFACode}

@@ -23,6 +23,7 @@
     "code": {
       "label": "code"
     },
+    "retry": "Invalid code, please re-enter",
     "CTA": "Validate"
   },
   "accountForm": {
@@ -63,10 +64,6 @@
         "title": "Temporarily blocked",
         "description": "Too many attempts occured. Please update your credentials on [%{name}](%{link}) website and update the konnector later on."
       },
-      "LOGIN_FAILED.TWOFA_EXPIRED": {
-        "title": "Two Factor code expired",
-        "description": "The two factor code has expired, please start again."
-      },
       "MAINTENANCE": {
         "title": "Unavailable website",
         "description": "It seems that the [%{name}](%{link}) website is unavailable or the konnector must be updated. Please rerun the connector later or visit our online help."
@@ -98,6 +95,14 @@
       "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
         "title": "New permissions validation needed",
         "description": "You connector was updated and the permissions changed. Please validate them before launching the connector again."
+      },
+      "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
+        "title": "Two Factor code expired",
+        "description": "The two factor code has expired, please start again."
+      },
+      "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
+        "title": "Wrong two factore code provided",
+        "description": "The two factor code provided is wrong, please start again."
       },
       "VENDOR_DOWN": {
         "title": "Unavailable service",

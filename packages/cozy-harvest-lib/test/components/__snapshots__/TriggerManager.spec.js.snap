@@ -32,6 +32,7 @@ exports[`TriggerManager handleError should render error 1`] = `
       }
     }
     onSubmit={[Function]}
+    submitting={false}
   />
 </div>
 `;
@@ -68,6 +69,7 @@ exports[`TriggerManager should render with account 1`] = `
       }
     }
     onSubmit={[Function]}
+    submitting={false}
   />
 </div>
 `;
@@ -93,6 +95,7 @@ exports[`TriggerManager should render without account 1`] = `
       }
     }
     onSubmit={[Function]}
+    submitting={false}
   />
 </div>
 `;
