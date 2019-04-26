@@ -55,6 +55,7 @@ class Authentication extends Component {
         scope: token.scope,
         tokenType: token.tokenType
       }
+      await cozyClient.login({ url, token })
       await onComplete({
         url,
         token: destructuredToken,
