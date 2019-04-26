@@ -7,8 +7,6 @@ import { withClient } from 'cozy-client'
 const STEP_WELCOME = 'STEP_WELCOME'
 const STEP_EXISTING_SERVER = 'STEP_EXISTING_SERVER'
 
-import { register } from './client-compat'
-
 class Authentication extends Component {
   constructor(props) {
     super(props)
@@ -46,8 +44,8 @@ class Authentication extends Component {
     const { onComplete, onException } = this.props
     try {
       this.setState({ generalError: null, fetching: true })
-      const cozyClient = this.props.client
-      const { client: clientInfo, token } = await register(cozyClient, url)
+      const { client } = this.props
+      const { client: clientInfo, token } = await cozyClient.stackClient.register(url)
 
       const destructuredToken = {
         accessToken: token.accessToken,
@@ -55,7 +53,7 @@ class Authentication extends Component {
         scope: token.scope,
         tokenType: token.tokenType
       }
-      await cozyClient.login({ url, token })
+      await client.login({ url, token })
       await onComplete({
         url,
         token: destructuredToken,
