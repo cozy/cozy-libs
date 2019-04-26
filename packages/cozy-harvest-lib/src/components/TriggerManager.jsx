@@ -150,7 +150,7 @@ export class TriggerManager extends Component {
     }
   }
 
-  async handleSubmit(data) {
+  async handleSubmit(data = {}) {
     const { konnector, saveAccount } = this.props
 
     const { account } = this.state
@@ -162,13 +162,14 @@ export class TriggerManager extends Component {
     })
 
     try {
+      const accountToSave = isUpdate
+        ? accounts.mergeAuth(
+            accounts.setSessionResetIfNecessary(account, data),
+            data
+          )
+        : accounts.build(konnector, data)
       const savedAccount = accounts.mergeAuth(
-        await saveAccount(
-          konnector,
-          isUpdate
-            ? accounts.mergeAuth(account, data)
-            : accounts.build(konnector, data)
-        ),
+        await saveAccount(konnector, accountToSave),
         data
       )
       return await this.handleAccountSaveSuccess(savedAccount)

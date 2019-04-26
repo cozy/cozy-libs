@@ -305,13 +305,34 @@ describe('TriggerManager', () => {
       )
     })
 
-    it('should call saveAccount with account', () => {
+    it('should call saveAccount with account (no password provided)', () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleSubmit(fixtures.data)
+      wrapper.instance().handleSubmit({ login: 'test' })
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
         fixtures.existingAccount
       )
+    })
+
+    it('should call saveAccount with account with RESET_SESSION state if passphrase changed', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleSubmit(fixtures.data)
+      expect(saveAccountMock).toHaveBeenCalledWith(fixtures.konnector, {
+        ...fixtures.existingAccount,
+        state: 'RESET_SESSION'
+      })
+    })
+
+    it('should call saveAccount with account with RESET_SESSION state if password changed', () => {
+      const wrapper = shallowWithAccount()
+      wrapper.instance().handleSubmit({
+        login: 'foo',
+        password: 'bar'
+      })
+      expect(saveAccountMock).toHaveBeenCalledWith(fixtures.konnector, {
+        ...fixtures.existingAccount,
+        state: 'RESET_SESSION'
+      })
     })
 
     it('should call handleAccountSaveSuccess with account', async () => {
