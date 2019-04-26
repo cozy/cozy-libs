@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import PropTypes from 'react-proptypes'
+import PropTypes from 'prop-types'
 
 import { withMutations } from 'cozy-client'
 import { translate } from 'cozy-ui/react/I18n'
