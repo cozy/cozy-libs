@@ -6,6 +6,7 @@ import { withClient } from 'cozy-client'
 
 const Revoked = ({ t, onLogBackIn, onLogout }) => (
   <Modal
+    into="body"
     title={t('mobile.revoked.title')}
     description={t('mobile.revoked.description')}
     primaryText={t('mobile.revoked.loginagain')}
