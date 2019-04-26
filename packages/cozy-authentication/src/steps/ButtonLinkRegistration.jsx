@@ -21,7 +21,9 @@ export class ButtonLinkRegistration extends Component {
   async generateUrl() {
     await clearState()
     await clearSecret()
-    const oauthOptions = await generateOnboardingQueryPart(this.props.client.options.oauth)
+    const oauthOptions = await generateOnboardingQueryPart(
+      this.props.client.options.oauth
+    )
     const url = `https://manager.cozycloud.cc/cozy/create?pk_campaign=drive-${getPlatform() ||
       'browser'}&onboarding=${oauthOptions}`
     this.setState({ url })

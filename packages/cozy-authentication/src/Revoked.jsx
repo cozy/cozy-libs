@@ -1,6 +1,4 @@
-/* global cozy */
-
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'

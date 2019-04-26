@@ -98,6 +98,6 @@ export class Welcome extends Component {
 
 Welcome.propTypes = {
   selectServer: PropTypes.func.isRequired,
-  appIcon: PropTypes.string.isRequired,
+  appIcon: PropTypes.string.isRequired
 }
 export default withBreakpoints()(translate()(Welcome))

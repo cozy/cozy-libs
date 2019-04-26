@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Router, withRouter } from 'react-router'
+import { Router } from 'react-router'
 import PropTypes from 'prop-types'
 
 import { withClient } from 'cozy-client'
@@ -27,7 +27,7 @@ export class MobileRouter extends Component {
     this.handleLogout = this.handleLogout.bind(this)
   }
 
-  componentDidMount () {
+  componentDidMount() {
     this.startListeningToClient()
     this.startHandlingDeeplinks()
   }
@@ -105,8 +105,6 @@ export class MobileRouter extends Component {
   render() {
     const {
       history,
-      onAuthenticated,
-      onLogout,
       appIcon,
       appTitle,
       appRoutes,
@@ -132,33 +130,31 @@ export class MobileRouter extends Component {
         />
       )
     } else {
-      return <Router history={history}>
-        { appRoutes || children }
-      </Router>
+      return <Router history={history}>{appRoutes || children}</Router>
     }
   }
 
-  async handleLogBackIn () {
+  async handleLogBackIn() {
     const { client } = this.props
     await client.stackClient.unregister().catch(() => {})
     await client.stackClient.register(client.uri)
   }
 
-   async afterAuthentication () {
+  async afterAuthentication() {
     this.props.history.replace(this.props.loginPath)
     if (this.props.onAuthenticated) {
       this.props.onAuthenticated()
     }
   }
 
-  async afterLogout () {
+  async afterLogout() {
     this.props.history.replace(this.props.logoutPath)
     if (this.props.onLogout) {
       this.props.onLogout()
     }
   }
 
-  async handleLogout () {
+  async handleLogout() {
     const { client } = this.props
     await client.logout()
   }

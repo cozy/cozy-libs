@@ -90,10 +90,15 @@ const addProtocolToDomain = domain => {
   return `${protocol}://${domain}`
 }
 
-export const doOnboardingLogin = async (client, domain, receivedState, accessCode) => {
+export const doOnboardingLogin = async (
+  client,
+  domain,
+  receivedState,
+  accessCode
+) => {
   try {
-    const localState = 'mystate' || await readState()
-    const localSecret = 'mysecret' || await readSecret()
+    const localState = 'mystate' || (await readState())
+    const localSecret = 'mysecret' || (await readSecret())
     if (localState !== receivedState) {
       throw new Error('States are not equals')
     }
@@ -133,4 +138,3 @@ export const doOnboardingLogin = async (client, domain, receivedState, accessCod
     throw e
   }
 }
-
