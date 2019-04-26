@@ -1,4 +1,5 @@
 import KonnectorAccountWatcher from '../models/konnector/KonnectorAccountWatcher'
+import merge from 'lodash/merge'
 
 const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
@@ -107,8 +108,21 @@ const createChildAccount = async (client, konnector, attributes) => {
  * @return {Object}          Updated io.cozy.accounts document
  */
 const updateAccount = async (client, account) => {
-  const { data } = await client.save(account)
-  return data
+  try {
+    const { data } = await client.save(account)
+    return data
+  } catch (error) {
+    if (error.status === 409) {
+      /* We fetch before in case of conflicts since the account can be changed
+      in the database by the konnector */
+      const upToDateAccount = await findAccount(client, account._id)
+      delete account._rev
+      const { data } = await client.save(merge(upToDateAccount, account))
+      return data
+    } else {
+      throw error
+    }
+  }
 }
 
 /**
@@ -137,9 +151,6 @@ const watchKonnectorAccount = (client, account, options) => {
  */
 export const accountsMutations = client => ({
   createAccount: createAccount.bind(null, client),
-  // not a mutation but useful to easily get account in the component method
-  // before update it
-  findAccount: findAccount.bind(null, client),
   updateAccount: updateAccount.bind(null, client),
   saveAccount: saveAccount.bind(null, client),
   watchKonnectorAccount: watchKonnectorAccount.bind(null, client)

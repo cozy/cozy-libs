@@ -84,6 +84,8 @@ export const mergeAuth = (account, authData) => ({
  */
 export const updateTwoFaCode = (account, code) => ({
   ...account,
+  // reset the state,
+  state: null,
   twofa_code: code
 })
 

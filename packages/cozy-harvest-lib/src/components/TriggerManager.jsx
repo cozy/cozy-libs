@@ -130,20 +130,14 @@ export class TriggerManager extends Component {
   }
 
   async handleSubmitTwoFACode(code) {
-    const { findAccount, konnector, saveAccount } = this.props
+    const { konnector, saveAccount } = this.props
     const { account } = this.state
     this.setState({
       error: null,
       status: RUNNING_TWOFA
     })
     try {
-      /* We fetch before to avoid conflicts since the account can be changed
-      in the database by the konnector */
-      const upToDateAccount = findAccount(account._id)
-      await saveAccount(
-        konnector,
-        accounts.updateTwoFaCode(upToDateAccount, code)
-      )
+      await saveAccount(konnector, accounts.updateTwoFaCode(account, code))
       if (this.jobWatcher) this.jobWatcher.enableSuccessTimer(10000)
     } catch (error) {
       return this.handleError(error)
@@ -312,11 +306,6 @@ TriggerManager.propTypes = {
    * @type {Func}
    */
   saveAccount: PropTypes.func.isRequired,
-  /**
-   * Account mutation
-   * @type {Func}
-   */
-  findAccount: PropTypes.func.isRequired,
   /**
    * Account mutations
    * @type {Function}
