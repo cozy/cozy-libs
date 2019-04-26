@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.40.1"></a>
+## [1.40.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.40.0...cozy-doctypes@1.40.1) (2019-04-26)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Remove isRequired for trashed props ([4a5da5b](https://github.com/cozy/cozy-libs/commit/4a5da5b))
+
+
+
+
 <a name="1.40.0"></a>
 # 1.40.0 (2019-04-25)
 
