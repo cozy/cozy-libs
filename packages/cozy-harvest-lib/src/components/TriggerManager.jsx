@@ -35,7 +35,7 @@ export class TriggerManager extends Component {
 
     this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-
+    this.closeTwoFAModal = this.closeTwoFAModal.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleTwoFACodeAsked = this.handleTwoFACodeAsked.bind(this)
@@ -49,6 +49,12 @@ export class TriggerManager extends Component {
       status: IDLE,
       trigger
     }
+  }
+
+  closeTwoFAModal() {
+    this.setState({
+      status: RUNNING
+    })
   }
 
   /**
@@ -228,6 +234,7 @@ export class TriggerManager extends Component {
           <TwoFAForm
             account={account}
             konnector={konnector}
+            dismissAction={this.closeTwoFAModal}
             handleSubmitTwoFACode={this.handleSubmitTwoFACode}
             submitting={submittingTwoFA}
             into={modalInto}

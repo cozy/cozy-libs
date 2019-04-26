@@ -36,11 +36,12 @@ export class TwoFAForm extends PureComponent {
   }
 
   render() {
-    const { account, t, submitting } = this.props
+    const { account, dismissAction, t, submitting } = this.props
     const { twoFACode } = this.state
 
     return (
       <Modal
+        dismissAction={dismissAction}
         mobileFullscreen
         closable
         containerClassName="u-pos-absolute"
