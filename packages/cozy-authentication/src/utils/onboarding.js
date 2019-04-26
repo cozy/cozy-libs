@@ -90,6 +90,7 @@ const addProtocolToDomain = domain => {
   return `${protocol}://${domain}`
 }
 
+// Should be in cozy-client
 export const doOnboardingLogin = async (
   client,
   domain,
@@ -137,4 +138,10 @@ export const doOnboardingLogin = async (
     clearSecret()
     throw e
   }
+}
+
+// Should be in cozy-client
+export const registerAndLogin = async (client, url) => {
+  const { token } = await client.register(url)
+  await client.login({ url, token })
 }

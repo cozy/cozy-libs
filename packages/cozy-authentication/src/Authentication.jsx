@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Welcome from './steps/Welcome'
 import SelectServer from './steps/SelectServer'
 import { withClient } from 'cozy-client'
+import { registerAndLogin } from './utils/onboarding'
 
 const STEP_WELCOME = 'STEP_WELCOME'
 const STEP_EXISTING_SERVER = 'STEP_EXISTING_SERVER'
@@ -45,20 +46,8 @@ class Authentication extends Component {
     try {
       this.setState({ generalError: null, fetching: true })
       const { client } = this.props
-      const { client: clientInfo, token } = await cozyClient.stackClient.register(url)
-
-      const destructuredToken = {
-        accessToken: token.accessToken,
-        refreshToken: token.refreshToken,
-        scope: token.scope,
-        tokenType: token.tokenType
-      }
-      await client.login({ url, token })
-      await onComplete({
-        url,
-        token: destructuredToken,
-        clientInfo
-      })
+      await registerAndLogin(client, url)
+      await onComplete()
     } catch (err) {
       this.setState({ generalError: err })
       onException(err, {

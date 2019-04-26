@@ -7,7 +7,7 @@ import { withClient } from 'cozy-client'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
-import { doOnboardingLogin } from './utils/onboarding'
+import { doOnboardingLogin, registerAndLogin } from './utils/onboarding'
 
 // Even if the component is not yet mounted, we save
 // the deeplink
@@ -137,7 +137,7 @@ export class MobileRouter extends Component {
   async handleLogBackIn() {
     const { client } = this.props
     await client.stackClient.unregister().catch(() => {})
-    await client.stackClient.register(client.uri)
+    await registerAndLogin(client, client.stackClient.uri)
   }
 
   async afterAuthentication() {
