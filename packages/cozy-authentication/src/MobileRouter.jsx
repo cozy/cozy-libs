@@ -7,6 +7,7 @@ import { withClient } from 'cozy-client'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
+import { doOnboardingLogin } from './utils/onboarding'
 
 // Even if the component is not yet mounted, we save
 // the deeplink
