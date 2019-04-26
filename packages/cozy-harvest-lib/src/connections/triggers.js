@@ -29,12 +29,15 @@ const watchKonnectorJob = (
   job,
   { onError, onLoginSuccess, onSuccess }
 ) => {
-  return new KonnectorJobWatcher(client, job, {
+  const jobWatcher = new KonnectorJobWatcher(client, job, {
     expectedSuccessDelay: 8000,
     onError,
     onLoginSuccess,
     onSuccess
   })
+  // no need to await realtime initializing here
+  jobWatcher.watch()
+  return jobWatcher
 }
 
 /**

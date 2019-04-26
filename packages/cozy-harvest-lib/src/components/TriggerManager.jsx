@@ -41,12 +41,13 @@ export class TriggerManager extends Component {
     this.handleTwoFACodeAsked = this.handleTwoFACodeAsked.bind(this)
     this.handleSubmitTwoFACode = this.handleSubmitTwoFACode.bind(this)
 
+    this.jobWatcher = null
+
     this.state = {
       account,
       error: triggers.getError(trigger),
       status: IDLE,
-      trigger,
-      jobWatcher: null
+      trigger
     }
   }
 
@@ -119,10 +120,10 @@ export class TriggerManager extends Component {
   }
 
   handleTwoFACodeAsked(statusCode) {
-    const { jobWatcher, status } = this.state
+    const { status } = this.state
     if (accounts.isTwoFANeeded(status)) return
     // disable successTimeout since asked Two FA code
-    if (jobWatcher) jobWatcher.disableSuccessTimer()
+    if (this.jobWatcher) this.jobWatcher.disableSuccessTimer()
     this.setState({
       status: statusCode
     })
@@ -130,7 +131,7 @@ export class TriggerManager extends Component {
 
   async handleSubmitTwoFACode(code) {
     const { findAccount, konnector, saveAccount } = this.props
-    const { account, jobWatcher } = this.state
+    const { account } = this.state
     this.setState({
       error: null,
       status: RUNNING_TWOFA
@@ -143,7 +144,7 @@ export class TriggerManager extends Component {
         konnector,
         accounts.updateTwoFaCode(upToDateAccount, code)
       )
-      if (jobWatcher) jobWatcher.enableSuccessTimer(10000)
+      if (this.jobWatcher) this.jobWatcher.enableSuccessTimer(10000)
     } catch (error) {
       return this.handleError(error)
     }
@@ -198,13 +199,10 @@ export class TriggerManager extends Component {
       onSuccess,
       watchKonnectorJob
     } = this.props
-    const jobWatcher = watchKonnectorJob(await launchTrigger(trigger), {
+    this.jobWatcher = watchKonnectorJob(await launchTrigger(trigger), {
       onError: this.handleError,
       onLoginSuccess: () => this.handleSuccess(onLoginSuccess, [trigger]),
       onSuccess: () => this.handleSuccess(onSuccess, [trigger])
-    })
-    this.setState({
-      jobWatcher
     })
   }
 

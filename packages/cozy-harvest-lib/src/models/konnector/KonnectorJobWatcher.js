@@ -1,47 +1,57 @@
 import { subscribe } from 'cozy-realtime'
 
+import { KonnectorJobError } from '../../helpers/konnectors'
+
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
 const JOB_STATE_DONE = 'done'
 const JOB_STATE_ERRORED = 'errored'
 
+const DEFAULT_TIMER_DELAY = 8000
+
 export class KonnectorJobWatcher {
-  constructor(
-    client,
-    job,
-    { expectedSuccessDelay, onError, onLoginSuccess, onSuccess }
-  ) {
+  constructor(client, job, options) {
     this.client = client
     this.job = job
-
-    this.expectedSuccessDelay = expectedSuccessDelay
-    this.onError = onError
-    this.onLoginSuccess = onLoginSuccess
-    this.onSuccess = onSuccess
+    /**
+     * Options
+     *  onError: callback on errors
+     *  onSuccess: callback on success
+     *  onLoginSuccess: callback on login timer success
+     *  expectedSuccessDelay: delay for login timer in ms
+     */
+    const { expectedSuccessDelay = DEFAULT_TIMER_DELAY } = options
+    this.options = {
+      ...options,
+      expectedSuccessDelay
+    }
     this.successTimer = null
 
     this._error = null
     this._succeed = false
+    this._runOption = this._runOption.bind(this)
 
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccessDelay = this.handleSuccessDelay.bind(this)
     this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
+  }
 
-    this.watch()
+  _runOption(name, ...params) {
+    if (typeof this.options[name] === 'function') this.options[name](...params)
   }
 
   handleError(error) {
+    this.disableSuccessTimer()
     this._error = error
-    this.onError(error)
+    this._runOption('onError', new KonnectorJobError(error))
   }
 
   handleSuccess() {
+    this.disableSuccessTimer()
     if (this._error || this._succeed) return
     this._succeed = true
-    if (typeof this.onSuccess === 'function') {
-      return this.onSuccess(this.job)
-    }
+    this._runOption('onSuccess', this.job)
   }
 
   handleSuccessDelay() {
@@ -49,9 +59,7 @@ export class KonnectorJobWatcher {
     if (this._error || this._succeed) return
 
     this._succeed = true
-    if (typeof this.onLoginSuccess === 'function') {
-      return this.onLoginSuccess(this.job)
-    }
+    this._runOption('onLoginSuccess', this.job)
   }
 
   disableSuccessTimer() {
@@ -65,7 +73,7 @@ export class KonnectorJobWatcher {
     if (!this.successTimer) {
       this.successTimer = setTimeout(
         this.handleSuccessDelay,
-        time || this.expectedSuccessDelay
+        time || this.options.expectedSuccessDelay
       )
     }
   }

@@ -47,8 +47,8 @@ describe('watchKonnectorAccount', () => {
     const options = {
       onTwoFACodeAsked: jest.fn()
     }
-    const jobWatcher = new KonnectorAccountWatcher(client, account, options)
-    await jobWatcher.watch(options)
+    const accountWatcher = new KonnectorAccountWatcher(client, account, options)
+    await accountWatcher.watch(options)
     expect(options.onTwoFACodeAsked).toHaveBeenCalled()
     expect(options.onTwoFACodeAsked).toHaveBeenCalledWith(updatedAccount.state)
   })
@@ -60,8 +60,8 @@ describe('watchKonnectorAccount', () => {
     realtime.subscribe.mockResolvedValue({
       onUpdate: fn => fn({ state: 'NOT_A_TWOFA_NEEDED_STATE' })
     })
-    const jobWatcher = new KonnectorAccountWatcher(client, account, options)
-    await jobWatcher.watch(options)
+    const accountWatcher = new KonnectorAccountWatcher(client, account, options)
+    await accountWatcher.watch(options)
     expect(options.onTwoFACodeAsked).not.toHaveBeenCalled()
   })
 })

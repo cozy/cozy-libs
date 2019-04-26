@@ -124,10 +124,10 @@ const saveAccount = (client, konnector, account = {}) => {
 }
 
 const watchKonnectorAccount = (client, account, options) => {
-  const jobWatcher = new KonnectorAccountWatcher(client, account, options)
+  const accountWatcher = new KonnectorAccountWatcher(client, account, options)
   // no need to await realtime initializing here
-  jobWatcher.watch()
-  return jobWatcher
+  accountWatcher.watch()
+  return accountWatcher
 }
 
 /**

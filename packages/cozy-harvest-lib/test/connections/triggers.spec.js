@@ -18,7 +18,9 @@ jest.mock('cozy-client', () => ({
   }
 }))
 
-const { createTrigger, launchTrigger, watchKonnectorJob } = triggersMutations(client)
+const { createTrigger, launchTrigger, watchKonnectorJob } = triggersMutations(
+  client
+)
 
 const fixtures = {
   trigger: {
