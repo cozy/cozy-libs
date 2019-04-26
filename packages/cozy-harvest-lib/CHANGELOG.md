@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.0"></a>
+# [0.40.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.39.6...cozy-harvest-lib@0.40.0) (2019-04-26)
+
+
+### Bug Fixes
+
+* **harvest:** :art: Minor changes ([dd44448](https://github.com/cozy/cozy-libs/commit/dd44448))
+* **harvest:** :bug: Handle document update conflict ([58d4139](https://github.com/cozy/cozy-libs/commit/58d4139))
+* **harvest:** :nail_care: Handle closing TWOFA modal ([231c4df](https://github.com/cozy/cozy-libs/commit/231c4df))
+
+
+### Features
+
+* **harvest:** :sparkles: Handle 2FA process ([5fbdb60](https://github.com/cozy/cozy-libs/commit/5fbdb60))
+
+
+
+
 <a name="0.39.6"></a>
 ## [0.39.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.39.5...cozy-harvest-lib@0.39.6) (2019-04-17)
 
