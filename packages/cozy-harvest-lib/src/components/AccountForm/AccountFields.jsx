@@ -26,7 +26,7 @@ export class AccountFields extends PureComponent {
       fields,
       hasError,
       initialValues,
-      onInputRef
+      inputRefByName
     } = this.props
 
     // Ready to use named fields array
@@ -54,7 +54,7 @@ export class AccountFields extends PureComponent {
                   initialValues[field.name] ||
                   initialValues[getEncryptedFieldName(field.name)]
                 }
-                onInputRef={onInputRef}
+                inputRef={inputRefByName(field.name)}
               />
             )}
           </FinalFormField>
@@ -89,7 +89,13 @@ AccountFields.propTypes = {
    * Initial data as key/value pairs
    * @type {Object}
    */
-  initialValues: PropTypes.object
+  initialValues: PropTypes.object,
+  /**
+   * A callback, which call with a name should return another callback to handle
+   * react ref to Field input element.
+   * @type {Function}
+   */
+  inputRefByName: PropTypes.func
 }
 
 export default AccountFields
