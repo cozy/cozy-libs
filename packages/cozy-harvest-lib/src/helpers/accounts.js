@@ -12,6 +12,7 @@ const TWOFA_NEEDED_STATUSES = {
 }
 
 const TWOFA_RETRY_STATUS = 'TWOFA_NEEDED_RETRY'
+const RESET_SESSION_STATE = 'RESET_SESSION'
 
 /**
  * Return a boolean to know if the account is in a two fa code needed
@@ -94,13 +95,30 @@ export const updateTwoFaCode = (account, code) => ({
   state: null,
   twofa_code: code
 })
+/**
+ * Set a state to reset the konnector session into io.cozy.accounts document
+ * only if necessary, if password/passphrase have changed
+ * @param  {object} account   io.cozy.accounts document
+ * @return {object}           io.cozy.accounts updated document
+ */
+export const setSessionResetIfNecessary = (account, changedFields) => {
+  const isPasswordChanged =
+    !!account && !!(changedFields.password || changedFields.passphrase)
+  return isPasswordChanged
+    ? {
+        ...account,
+        state: RESET_SESSION_STATE
+      }
+    : account
+}
 
 export default {
   build,
   getLabel,
   getTwoFACodeProvider,
-  mergeAuth,
-  updateTwoFaCode,
   isTwoFANeeded,
-  isTwoFARetry
+  isTwoFARetry,
+  mergeAuth,
+  setSessionResetIfNecessary,
+  updateTwoFaCode
 }
