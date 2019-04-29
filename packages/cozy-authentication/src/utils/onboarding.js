@@ -49,7 +49,10 @@ export const doOnboardingLogin = async (
   accessCode
 ) => {
   try {
-    const { state: localState, secret: localSecret } = await localStateSecret.read()
+    const {
+      state: localState,
+      secret: localSecret
+    } = await localStateSecret.read()
 
     if (localState !== receivedState) {
       throw new Error('Received state different from local state')
@@ -68,9 +71,7 @@ export const doOnboardingLogin = async (
       client_secret: clientSecret
     } = clientInfo
 
-    if (
-      !(localSecret === serverSecret && localState === serverState)
-    ) {
+    if (!(localSecret === serverSecret && localState === serverState)) {
       throw new Error('Local state/secret unequal to server state/secret')
     }
 
@@ -85,6 +86,7 @@ export const doOnboardingLogin = async (
     )
     await client.login({ url, token })
   } catch (e) {
+    // eslint-disable-next-line no-console
     console.error('Could not automatically login', e)
     localStateSecret.clear()
     throw e

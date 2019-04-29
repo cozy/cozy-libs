@@ -20,9 +20,10 @@ describe('Authentication', () => {
     }
     root = shallow(
       <Authentication
-        appIcon='icon.png'
+        appIcon="icon.png"
         onComplete={onComplete}
-        onException={onException} />,
+        onException={onException}
+      />,
       options
     )
     instance = root.dive().instance()

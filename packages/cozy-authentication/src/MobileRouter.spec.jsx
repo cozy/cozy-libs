@@ -5,14 +5,16 @@ import PropTypes from 'prop-types'
 import CozyClient, { CozyProvider } from 'cozy-client'
 
 import Authentication from './Authentication'
-import MobileRouter, { DumbMobileRouter, LoggingInViaOnboarding } from './MobileRouter'
+import MobileRouter, {
+  DumbMobileRouter,
+  LoggingInViaOnboarding
+} from './MobileRouter'
 import Revoked from './Revoked'
 import * as onboarding from './utils/onboarding'
 
 jest.mock('react-router', () => ({
   Router: props => props.children
 }))
-
 
 class I18n extends React.Component {
   static childContextTypes = {
@@ -23,7 +25,7 @@ class I18n extends React.Component {
     return { t: this.props.t }
   }
 
-  render () {
+  render() {
     return this.props.children
   }
 }
@@ -32,8 +34,6 @@ const AppRoutes = () => <div />
 
 describe('MobileRouter', () => {
   let appRoutes,
-    isAuthenticated,
-    isRevoked,
     onAuthenticated,
     onLogout,
     history,
@@ -41,10 +41,9 @@ describe('MobileRouter', () => {
     appTitle,
     app,
     client,
-    instance,
     props
 
-  beforeEach(() => {  
+  beforeEach(() => {
     appRoutes = <AppRoutes />
     onAuthenticated = jest.fn()
     onLogout = jest.fn()
@@ -64,7 +63,11 @@ describe('MobileRouter', () => {
     app = mount(
       <CozyProvider client={client}>
         <I18n t={x => x}>
-          <MobileRouter {...props} loginPath='/afterLogin' logoutPath='/afterLogout' />
+          <MobileRouter
+            {...props}
+            loginPath="/afterLogin"
+            logoutPath="/afterLogout"
+          />
         </I18n>
       </CozyProvider>
     )
@@ -80,14 +83,12 @@ describe('MobileRouter', () => {
 
   it('should go to loginPath after login', () => {
     setup()
-    const instance = app.find(DumbMobileRouter).instance()
     client.emit('login')
     expect(history.replace).toHaveBeenCalledWith('/afterLogin')
   })
 
   it('should go to logoutPath after logout', () => {
     setup()
-    const instance = app.find(DumbMobileRouter).instance()
     client.emit('logout')
     expect(history.replace).toHaveBeenCalledWith('/afterLogout')
   })
