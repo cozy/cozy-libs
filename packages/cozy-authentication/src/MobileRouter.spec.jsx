@@ -1,275 +1,131 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { shallow, mount } from 'enzyme'
+import PropTypes from 'prop-types'
 
-import { MobileRouter } from './MobileRouter'
-import { writeState, writeSecret } from './utils/onboarding'
+import CozyClient, { CozyProvider } from 'cozy-client'
+
+import Authentication from './Authentication'
+import MobileRouter, { DumbMobileRouter, LoggingInViaOnboarding } from './MobileRouter'
+import Revoked from './Revoked'
+import * as onboarding from './utils/onboarding'
+
+jest.mock('react-router', () => ({
+  Router: props => props.children
+}))
+
+
+class I18n extends React.Component {
+  static childContextTypes = {
+    t: PropTypes.func
+  }
+
+  getChildContext() {
+    return { t: this.props.t }
+  }
+
+  render () {
+    return this.props.children
+  }
+}
+
+const AppRoutes = () => <div />
 
 describe('MobileRouter', () => {
-  it('should render the appRoutes when all is well', () => {
-    const app = shallow(
-      <MobileRouter
-        appRoutes={<div />}
-        isAuthenticated={true}
-        isRevoked={false}
-        onboarding={{}}
-        onboardingInformations={{}}
-        history={{}}
-        onAuthenticated={jest.fn()}
-        onLogout={jest.fn()}
-        appIcon={''}
-      />
-    )
-    expect(app).toMatchSnapshot()
+  let appRoutes,
+    isAuthenticated,
+    isRevoked,
+    onAuthenticated,
+    onLogout,
+    history,
+    appIcon,
+    appTitle,
+    app,
+    client,
+    instance,
+    props
+
+  beforeEach(() => {  
+    appRoutes = <AppRoutes />
+    onAuthenticated = jest.fn()
+    onLogout = jest.fn()
+    history = { replace: jest.fn() }
+    appIcon = 'icon.png'
+    appTitle = 'Test App'
+    app = null
+    client = new CozyClient({})
+    props = { appRoutes, onAuthenticated, onLogout, history, appIcon, appTitle }
   })
 
-  it('should render the appRoutes when no onboarding informations are present', () => {
-    const app = shallow(
-      <MobileRouter
-        appRoutes={<div />}
-        isAuthenticated={true}
-        isRevoked={false}
-        onboarding={{}}
-        onboardingInformations={undefined}
-        history={{}}
-        onAuthenticated={jest.fn()}
-        onLogout={jest.fn()}
-        appIcon={''}
-      />
-    )
-    expect(app).toMatchSnapshot()
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
-  it('should render the revoked view', () => {
-    const app = shallow(
-      <MobileRouter
-        isAuthenticated={true}
-        isRevoked={true}
-        history={{}}
-        onAuthenticated={jest.fn()}
-        onLogout={jest.fn()}
-        onboarding={{}}
-        onboardingInformations={{}}
-        appIcon={''}
-        appRoutes={<div />}
-      />
+  const setup = () => {
+    app = mount(
+      <CozyProvider client={client}>
+        <I18n t={x => x}>
+          <MobileRouter {...props} loginPath='/afterLogin' logoutPath='/afterLogout' />
+        </I18n>
+      </CozyProvider>
     )
-    expect(app).toMatchSnapshot()
+  }
+
+  it('should listen to the client', () => {
+    setup()
+    const instance = app.find(DumbMobileRouter).instance()
+    jest.spyOn(instance, 'forceUpdate')
+    client.emit('login')
+    expect(instance.forceUpdate).toHaveBeenCalled()
   })
 
-  it('should render the auth screen when the onboarding has not started', () => {
-    const onboardingInformations = {
-      code: null,
-      state: null,
-      cozy_url: null
-    }
-    const app = shallow(
-      <MobileRouter
-        isAuthenticated={false}
-        isRevoked={false}
-        onboarding={{}}
-        onboardingInformations={onboardingInformations}
-        history={{}}
-        onAuthenticated={jest.fn()}
-        onLogout={jest.fn()}
-        appIcon={''}
-        appRoutes={<div />}
-      />
-    )
-    expect(app).toMatchSnapshot()
+  it('should go to loginPath after login', () => {
+    setup()
+    const instance = app.find(DumbMobileRouter).instance()
+    client.emit('login')
+    expect(history.replace).toHaveBeenCalledWith('/afterLogin')
   })
 
-  it('should render nothing when onboarding', () => {
-    const app = shallow(
-      <MobileRouter
-        client={jest.fn()}
-        history={{}}
-        isAuthenticated={false}
-        isRevoked={false}
-        onAuthenticated={jest.fn()}
-        onLogout={jest.fn()}
-        onboarding={{}}
-        onboardingInformations={{ code: null }}
-        appIcon={''}
-        appRoutes={<div />}
-      />
-    )
-    const instance = app.instance()
-    const loginSpy = jest.spyOn(instance, 'doOnboardingLogin')
-    const onboardingInformations = {
-      code: '123',
-      state: 'abc',
-      cozy_url: 'http://lol.com'
-    }
+  it('should go to logoutPath after logout', () => {
+    setup()
+    const instance = app.find(DumbMobileRouter).instance()
+    client.emit('logout')
+    expect(history.replace).toHaveBeenCalledWith('/afterLogout')
+  })
 
-    app.setProps({
-      onboardingInformations
-    })
+  it('should render the auth screen when client is not logged', () => {
+    client.isLogged = false
+    setup()
+    expect(app.find(Authentication).length).toBe(1)
+  })
 
-    expect(app).toMatchSnapshot()
-    expect(loginSpy).toHaveBeenCalled()
+  it('should render the revoked view when logged and revoked', () => {
+    client.isLogged = true
+    client.isRevoked = true
+    setup()
+    expect(app.find(Revoked).length).toBe(1)
+  })
+
+  it('should render a special view when logging in via onboarding has started', () => {
+    app = shallow(<DumbMobileRouter {...props} client={client} />)
+    app.setState({ isLoggingInViaOnboarding: true })
+    expect(app.find(LoggingInViaOnboarding).length).toBe(1)
+  })
+
+  it('should render the appRoutes when client is logged, not revoked, and not onboarding', () => {
+    client.isLogged = true
+    setup()
+    expect(app.find(AppRoutes).length).toBe(1)
   })
 
   describe('Auto Onboarding', () => {
-    const onLogout = jest.fn()
-    const onAuthenticated = jest.fn()
-    const client = {
-      stackClient: {
-        fetchJSON: jest.fn(),
-        fetch: jest.fn()
-      }
-    }
-    const state = '123'
-    const code = '111222333'
-    const url = 'instance.cozy.test'
-    const history = jest.fn()
-
-    let app, instance
-
-    beforeEach(() => {
-      app = shallow(
-        <MobileRouter
-          client={client}
-          history={{}}
-          isAuthenticated={true}
-          isRevoked={false}
-          onAuthenticated={onAuthenticated}
-          onLogout={onLogout}
-          onboarding={{}}
-          onboardingInformations={{}}
-          appIcon={''}
-          appRoutes={<div />}
-        />
-      )
-      instance = app.instance()
-    })
-
-    afterEach(() => {
-      jest.clearAllMocks()
-    })
-
-    it('should call logout when the local states are different', async () => {
-      await writeState('456')
-
-      await instance.doOnboardingLogin(state, code, url, history)
-      expect(onLogout).toHaveBeenCalled()
-    })
-
-    it('should call logout when the exchanged secrets are different', async () => {
-      await writeSecret('abc')
-      await writeState('123')
-      client.stackClient.fetchJSON.mockResolvedValue({
-        onboarding_secret: 'def',
-        onboarding_state: '456'
-      })
-
-      await instance.doOnboardingLogin(state, code, url, history)
-
-      expect(client.stackClient.fetchJSON).toHaveBeenCalledTimes(1)
-      expect(client.stackClient.fetchJSON.mock.calls[0][0]).toEqual('POST')
-      expect(client.stackClient.fetchJSON.mock.calls[0][1]).toMatch(
-        /\/auth\/secret_exchange$/
-      )
-      expect(onLogout).toHaveBeenCalled()
-    })
-
-    it('should call logout when the exchanged states are different', async () => {
-      await writeSecret('abc')
-      await writeState('123')
-      client.stackClient.fetchJSON.mockResolvedValue({
-        onboarding_secret: 'abc',
-        onboarding_state: '456'
-      })
-
-      await instance.doOnboardingLogin(state, code, url, history)
-
-      expect(client.stackClient.fetchJSON).toHaveBeenCalledTimes(1)
-      expect(client.stackClient.fetchJSON.mock.calls[0][0]).toEqual('POST')
-      expect(client.stackClient.fetchJSON.mock.calls[0][1]).toMatch(
-        /\/auth\/secret_exchange$/
-      )
-      expect(onLogout).toHaveBeenCalled()
-    })
-
-    it('should fail when fetching the token produces an error', async () => {
-      await writeSecret('abc')
-      await writeState('123')
-      client.stackClient.fetchJSON.mockResolvedValue({
-        onboarding_secret: 'abc',
-        onboarding_state: '123'
-      })
-      client.stackClient.fetch.mockRejectedValue({
-        error: 'nope'
-      })
-
-      await instance.doOnboardingLogin(state, code, url, history)
-
-      expect(client.stackClient.fetch).toHaveBeenCalledTimes(1)
-      expect(client.stackClient.fetch.mock.calls[0][0]).toEqual('POST')
-      expect(client.stackClient.fetch.mock.calls[0][1]).toMatch(
-        /\/auth\/access_token/
-      )
-      expect(onLogout).toHaveBeenCalled()
-    })
-
-    it('should fail if the token cant be fetched', async () => {
-      await writeSecret('abc')
-      await writeState('123')
-      client.stackClient.fetchJSON.mockResolvedValue({
-        onboarding_secret: 'abc',
-        onboarding_state: '123'
-      })
-      client.stackClient.fetch.mockResolvedValue({
-        json: async () => {
-          return {
-            error: 'test error'
-          }
-        },
-        status: 500
-      })
-
-      await instance.doOnboardingLogin(state, code, url, history)
-
-      expect(client.stackClient.fetch).toHaveBeenCalledTimes(1)
-      expect(client.stackClient.fetch.mock.calls[0][0]).toEqual('POST')
-      expect(client.stackClient.fetch.mock.calls[0][1]).toMatch(
-        /\/auth\/access_token/
-      )
-      expect(onLogout).toHaveBeenCalled()
-    })
-
-    it('should call onAuthenticated when everything worked', async () => {
-      await writeSecret('abc')
-      await writeState('123')
-      client.stackClient.fetchJSON.mockResolvedValue({
-        onboarding_secret: 'abc',
-        onboarding_state: '123',
-        clientInfo: 'test client'
-      })
-      client.stackClient.fetch.mockResolvedValue({
-        json: async () => {
-          return {
-            error: null,
-            value: 'secret token'
-          }
-        },
-        status: 200
-      })
-
-      await instance.doOnboardingLogin(state, code, url, history)
-      expect(onLogout).not.toHaveBeenCalled()
-      expect(onAuthenticated).toHaveBeenCalledWith({
-        url: 'https://' + url,
-        token: {
-          error: null,
-          value: 'secret token'
-        },
-        clientInfo: {
-          onboarding_secret: 'abc',
-          onboarding_state: '123',
-          clientInfo: 'test client'
-        },
-        router: history
-      })
+    it('should call client.logout if doOnboarding fails', async () => {
+      setup()
+      const mobileRouter = app.find(DumbMobileRouter).instance()
+      jest.spyOn(onboarding, 'doOnboardingLogin').mockRejectedValue({})
+      jest.spyOn(client, 'logout')
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
+      mobileRouter.handleAuth()
+      expect(client.logout).toHaveBeenCalled()
     })
   })
 })

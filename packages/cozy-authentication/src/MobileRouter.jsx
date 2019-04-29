@@ -7,13 +7,15 @@ import { withClient } from 'cozy-client'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
-import { doOnboardingLogin, registerAndLogin } from './utils/onboarding'
+import onboarding from './utils/onboarding'
 
 // Even if the component is not yet mounted, we save
 // the deeplink
 window.handleOpenURL = deeplink.save
 
 const clientUpdateEvents = ['login', 'logout', 'revoked', 'unrevoked']
+
+export const LoggingInViaOnboarding = () => null
 
 export class MobileRouter extends Component {
   constructor(props) {
@@ -25,6 +27,8 @@ export class MobileRouter extends Component {
     this.afterAuthentication = this.afterAuthentication.bind(this)
     this.afterLogout = this.afterLogout.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
+
+    this.state = { isLoggingInViaOnboarding: false }
   }
 
   componentDidMount() {
@@ -53,6 +57,7 @@ export class MobileRouter extends Component {
   componentWillUnmount() {
     this.stopHandlingDeeplinks()
     this.stopListeningToClient()
+    this.unmounted = true
   }
 
   update() {
@@ -95,10 +100,15 @@ export class MobileRouter extends Component {
       // on iOS, hide() the ViewController since it is still active
       // when the application comes from background
       if (window.SafariViewController) window.SafariViewController.hide()
-      await doOnboardingLogin(client, cozy_url, state, access_code)
+      this.setState({ isLoggingInViaOnboarding: true })
+      await onboarding.doOnboardingLogin(client, cozy_url, state, access_code)
       this.afterAuthentication()
     } catch (error) {
       await client.logout()
+    } finally {
+      if (!this.unmounted) {
+        this.setState({ isLoggingInViaOnboarding: false })
+      }
     }
   }
 
@@ -112,6 +122,10 @@ export class MobileRouter extends Component {
       client,
       children
     } = this.props
+
+    if (this.state.isLoggingInViaOnboarding) {
+      return <LoggingInViaOnboarding />
+    }
 
     if (!client.isLogged) {
       return (
@@ -137,7 +151,7 @@ export class MobileRouter extends Component {
   async handleLogBackIn() {
     const { client } = this.props
     await client.stackClient.unregister().catch(() => {})
-    await registerAndLogin(client, client.stackClient.uri)
+    await onboarding.registerAndLogin(client, client.stackClient.uri)
   }
 
   async afterAuthentication() {
@@ -188,5 +202,7 @@ MobileRouter.propTypes = {
   /** After logout, where do we go */
   logoutPath: PropTypes.string
 }
+
+export const DumbMobileRouter = MobileRouter
 
 export default withClient(MobileRouter)
