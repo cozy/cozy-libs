@@ -3,6 +3,52 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.0"></a>
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.5.6...cozy-authentication@1.6.0) (2019-04-29)
+
+
+### Bug Fixes
+
+* Add label to previous button ([9a78499](https://github.com/cozy/cozy-libs/commit/9a78499))
+* After log back in, register AND login ([beceea5](https://github.com/cozy/cozy-libs/commit/beceea5))
+* Authentication needs to call login ([db8c697](https://github.com/cozy/cozy-libs/commit/db8c697))
+* Bad import, better test ([fcfc206](https://github.com/cozy/cozy-libs/commit/fcfc206))
+* Do not setState when component is unmounted ([865fada](https://github.com/cozy/cozy-libs/commit/865fada))
+* Export enhanced MobileRouter ([340e0be](https://github.com/cozy/cozy-libs/commit/340e0be))
+* Make example compile ([c2f6405](https://github.com/cozy/cozy-libs/commit/c2f6405))
+* Missing import ([3e4d712](https://github.com/cozy/cozy-libs/commit/3e4d712))
+* MObileRouter ([27e47d7](https://github.com/cozy/cozy-libs/commit/27e47d7))
+* Remove warning for revoked client ([45daf43](https://github.com/cozy/cozy-libs/commit/45daf43))
+* Repair Authentication test ([0853e16](https://github.com/cozy/cozy-libs/commit/0853e16))
+* Typo ([9e712e0](https://github.com/cozy/cozy-libs/commit/9e712e0))
+* Update propTypes ([8f99437](https://github.com/cozy/cozy-libs/commit/8f99437))
+* Use boolean attribute for disabled ([1a9788c](https://github.com/cozy/cozy-libs/commit/1a9788c))
+
+
+### Features
+
+* Ability to configure login/logout path + onAuthenticated ([ada467a](https://github.com/cozy/cozy-libs/commit/ada467a))
+* Add links to README ([b5355bb](https://github.com/cozy/cozy-libs/commit/b5355bb))
+* Add script to generate URL that will redirect to /auth ([77ca7a7](https://github.com/cozy/cozy-libs/commit/77ca7a7))
+* Allow to use props.children instead of appRoutes ([963f3ab](https://github.com/cozy/cozy-libs/commit/963f3ab))
+* appRoutes or children can be used for Routes ([29c4f8e](https://github.com/cozy/cozy-libs/commit/29c4f8e))
+* Do not destructure oauth options, pass as is ([b326462](https://github.com/cozy/cozy-libs/commit/b326462))
+* Example improvements ([92f3364](https://github.com/cozy/cozy-libs/commit/92f3364))
+* Handling deep links in MobileRouter ([9021faf](https://github.com/cozy/cozy-libs/commit/9021faf))
+* Listen to client events ([c46ed98](https://github.com/cozy/cozy-libs/commit/c46ed98))
+* MobileRouter supports appTitle ([d161abd](https://github.com/cozy/cozy-libs/commit/d161abd))
+* Move MobileRouter ([2da60da](https://github.com/cozy/cozy-libs/commit/2da60da))
+* No more client-compat ([d3e8baf](https://github.com/cozy/cozy-libs/commit/d3e8baf))
+* No prop drill thanks to withClient ([6062470](https://github.com/cozy/cozy-libs/commit/6062470))
+* Rename .babelrc to babel.config.js ([ba00688](https://github.com/cozy/cozy-libs/commit/ba00688)), closes [/github.com/facebook/jest/issues/6053#issuecomment-383632515](https://github.com//github.com/facebook/jest/issues/6053/issues/issuecomment-383632515)
+* Repair tests and display nothing when logging in via onboarding ([b1d2025](https://github.com/cozy/cozy-libs/commit/b1d2025))
+* Spaces ([ebdfed5](https://github.com/cozy/cozy-libs/commit/ebdfed5))
+* Update cozy-client ([cb5f798](https://github.com/cozy/cozy-libs/commit/cb5f798))
+* Use client attributes to show Authentication/Revoked ([5523bee](https://github.com/cozy/cozy-libs/commit/5523bee))
+
+
+
+
 <a name="1.5.6"></a>
 ## [1.5.6](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.5.5...cozy-authentication@1.5.6) (2019-04-17)
 
