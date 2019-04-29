@@ -165,9 +165,7 @@ MobileRouter.defaultProps = {
     console.error('Exception', e) //eslint-disable-line no-console
   },
 
-  /** @type {String} - After login, where do we go */
   loginPath: '/',
-  /** @type {String} - After logout, where do we go */
   logoutPath: '/'
 }
 
@@ -182,7 +180,12 @@ MobileRouter.propTypes = {
   onLogout: PropTypes.func,
   onException: PropTypes.func.isRequired,
 
-  client: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired,
+
+  /** After login, where do we go */
+  loginPath: PropTypes.string,
+  /** After logout, where do we go */
+  logoutPath: PropTypes.string
 }
 
 export default withClient(MobileRouter)
