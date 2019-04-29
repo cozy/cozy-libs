@@ -1,44 +1,5 @@
-import localforage from 'localforage'
 import get from 'lodash/get'
-
-const ONBOARDING_SECRET_KEY = 'onboarding_secret'
-const ONBOARDING_STATE = 'onboarding_state'
-
-const generateRandomString = () => {
-  return Math.random()
-    .toString(36)
-    .substr(2, 11)
-}
-export const writeSecret = secret => {
-  return localforage.setItem(ONBOARDING_SECRET_KEY, secret)
-}
-
-export const readSecret = () => {
-  return localforage.getItem(ONBOARDING_SECRET_KEY)
-}
-
-export const clearSecret = () => {
-  return localforage.removeItem(ONBOARDING_SECRET_KEY)
-}
-
-export const writeState = state => {
-  return localforage.setItem(ONBOARDING_STATE, state)
-}
-
-export const readState = () => {
-  return localforage.getItem(ONBOARDING_STATE)
-}
-
-export const clearState = () => {
-  return localforage.removeItem(ONBOARDING_STATE)
-}
-
-const generateState = () => {
-  return generateRandomString()
-}
-const generateSecret = () => {
-  return generateRandomString()
-}
+import * as localStateSecret from './local'
 
 export const checkIfOnboardingLogin = onboardingInformations => {
   return get(onboardingInformations, 'code')
@@ -54,17 +15,7 @@ export const generateOnboardingQueryPart = async ({
   policyURI,
   scope
 }) => {
-  let secret = await readSecret()
-  if (!secret) {
-    secret = generateSecret()
-    await writeSecret(secret)
-  }
-  let state = await readState()
-
-  if (!state) {
-    state = generateState()
-    await writeState(state)
-  }
+  const { state, secret } = await localStateSecret.ensureExists()
   const oauthData = {
     redirect_uri: redirectURI,
     software_id: softwareID,
@@ -98,10 +49,10 @@ export const doOnboardingLogin = async (
   accessCode
 ) => {
   try {
-    const localState = 'mystate' || (await readState())
-    const localSecret = 'mysecret' || (await readSecret())
+    const { state: localState, secret: localSecret } = await localStateSecret.read()
+
     if (localState !== receivedState) {
-      throw new Error('States are not equals')
+      throw new Error('Received state different from local state')
     }
 
     const url = addProtocolToDomain(domain)
@@ -111,21 +62,21 @@ export const doOnboardingLogin = async (
     )
 
     const {
-      onboarding_secret,
-      onboarding_state,
-      client_id,
-      client_secret
+      onboarding_secret: serverSecret,
+      onboarding_state: serverState,
+      client_id: clientID,
+      client_secret: clientSecret
     } = clientInfo
 
     if (
-      !(localSecret === onboarding_secret && localState === onboarding_state)
+      !(localSecret === serverSecret && localState === serverState)
     ) {
-      throw new Error('exchanged informations are not good')
+      throw new Error('Local state/secret unequal to server state/secret')
     }
 
     const oauthOptions = {
-      clientID: client_id,
-      clientSecret: client_secret
+      clientID,
+      clientSecret
     }
     const token = await client.stackClient.fetchAccessToken(
       accessCode,
@@ -134,8 +85,8 @@ export const doOnboardingLogin = async (
     )
     await client.login({ url, token })
   } catch (e) {
-    clearState()
-    clearSecret()
+    console.error('Could not automatically login', e)
+    localStateSecret.clear()
     throw e
   }
 }
