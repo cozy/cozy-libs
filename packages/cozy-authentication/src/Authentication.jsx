@@ -112,4 +112,6 @@ Authentication.defaultProps = {
   }
 }
 
+export const DumbAuthentication = Authentication
+
 export default withClient(Authentication)
