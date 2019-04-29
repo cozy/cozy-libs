@@ -1,4 +1,4 @@
-import PropTypes from 'react-proptypes'
+import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { Field as FinalFormField } from 'react-final-form'
 

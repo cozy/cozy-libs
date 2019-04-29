@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import PropTypes from 'react-proptypes'
+import PropTypes from 'prop-types'
 
 import { translate } from 'cozy-ui/react/I18n'
 
