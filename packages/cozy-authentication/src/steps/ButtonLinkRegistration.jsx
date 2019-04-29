@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+
 import { getPlatform } from 'cozy-device-helper'
 import { Button } from 'cozy-ui/transpiled/react'
+import { withClient } from 'cozy-client'
 //import flag from 'cozy-flags'
 
 import { nativeLinkOpen } from '../LinkManager'
 
 import {
-  generateOAuthForUrl,
+  generateOnboardingQueryPart,
   clearState,
   clearSecret
 } from '../utils/onboarding'
@@ -19,28 +21,11 @@ export class ButtonLinkRegistration extends Component {
   async generateUrl() {
     await clearState()
     await clearSecret()
-    const {
-      clientName,
-      redirectURI,
-      softwareID,
-      softwareVersion,
-      clientURI,
-      logoURI,
-      policyURI,
-      scope
-    } = this.props.onboarding.oauth
-    const onboardingObject = await generateOAuthForUrl({
-      clientName,
-      redirectURI,
-      softwareID,
-      softwareVersion,
-      clientURI,
-      logoURI,
-      policyURI,
-      scope
-    })
+    const oauthOptions = await generateOnboardingQueryPart(
+      this.props.client.options.oauth
+    )
     const url = `https://manager.cozycloud.cc/cozy/create?pk_campaign=drive-${getPlatform() ||
-      'browser'}&onboarding=${onboardingObject}`
+      'browser'}&onboarding=${oauthOptions}`
     this.setState({ url })
     return url
   }
@@ -73,5 +58,7 @@ export class ButtonLinkRegistration extends Component {
 }
 
 ButtonLinkRegistration.propTypes = {
-  onboarding: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired
 }
+
+export default withClient(ButtonLinkRegistration)

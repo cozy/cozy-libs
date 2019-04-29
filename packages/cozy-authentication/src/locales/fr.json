@@ -12,6 +12,7 @@
         "label": "Entrez l'adresse de votre Cozy",
         "cozy_address_placeholder": "camillenimbus.mycozy.cloud",
         "button": "Suivant",
+        "previous": "Précédent",
         "wrong_address_with_email": "Vous avez entré une adresse email. Pour vous connecter à votre Cozy vous devez entrer son url, sous la forme https://camillenimbus.mycozy.cloud",
         "wrong_address_v2": "Vous avez entré l'adresse d'une Cozy v2. Cette application n'est compatible qu'avec la dernière version de Cozy. Rendez-vous sur [notre site](https://blog.cozycloud.cc/post/2016/11/21/On-the-road-to-Cozy-version-3?lang=fr) pour plus d'informations",
         "wrong_address": "Cette adresse ne semble pas correspondre à un Cozy.",

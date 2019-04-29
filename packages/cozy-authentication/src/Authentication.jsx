@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Welcome from './steps/Welcome'
 import SelectServer from './steps/SelectServer'
-import { onboardingPropTypes } from '../OnboardingPropTypes'
+import { withClient } from 'cozy-client'
+import { registerAndLogin } from './utils/onboarding'
+
 const STEP_WELCOME = 'STEP_WELCOME'
 const STEP_EXISTING_SERVER = 'STEP_EXISTING_SERVER'
-
-import { register } from './client-compat'
 
 class Authentication extends Component {
   constructor(props) {
@@ -20,6 +20,10 @@ class Authentication extends Component {
 
     this.steps = [STEP_WELCOME]
     this.connectToServer = this.connectToServer.bind(this)
+  }
+
+  componentWillUnmount() {
+    this.unmounted = true
   }
 
   nextStep() {
@@ -38,24 +42,12 @@ class Authentication extends Component {
   }
 
   async connectToServer(url) {
-    const { onComplete, onException, router } = this.props
+    const { onComplete, onException } = this.props
     try {
       this.setState({ generalError: null, fetching: true })
-      const cozyClient = this.context.client
-      const { client, token } = await register(cozyClient, url)
-
-      const destructuredToken = {
-        accessToken: token.accessToken,
-        refreshToken: token.refreshToken,
-        scope: token.scope,
-        tokenType: token.tokenType
-      }
-      await onComplete({
-        url,
-        token: destructuredToken,
-        clientInfo: client,
-        router: router
-      })
+      const { client } = this.props
+      await registerAndLogin(client, url)
+      await onComplete()
     } catch (err) {
       this.setState({ generalError: err })
       onException(err, {
@@ -63,12 +55,14 @@ class Authentication extends Component {
         onboardingStep: 'connecting to server'
       })
     } finally {
-      this.setState({ fetching: false })
+      if (!this.unmounted) {
+        this.setState({ fetching: false })
+      }
     }
   }
 
   render() {
-    const { onException, appIcon, onboarding } = this.props
+    const { onException, appIcon, appTitle } = this.props
     const { currentStepIndex, generalError, fetching } = this.state
     const currentStep = this.steps[currentStepIndex]
 
@@ -80,7 +74,7 @@ class Authentication extends Component {
             register={() => this.setupSteps()}
             allowRegistration={false}
             appIcon={appIcon}
-            onboarding={onboarding}
+            appTitle={appTitle}
           />
         )
       case STEP_EXISTING_SERVER:
@@ -91,7 +85,6 @@ class Authentication extends Component {
             externalError={generalError}
             fetching={fetching}
             onException={onException}
-            onboarding={onboarding}
           />
         )
       default:
@@ -105,7 +98,7 @@ Authentication.propTypes = {
   onException: PropTypes.func.isRequired,
   router: PropTypes.object,
   appIcon: PropTypes.string.isRequired,
-  onboarding: onboardingPropTypes.isRequired
+  client: PropTypes.object.isRequired
 }
 
 Authentication.contextTypes = {
@@ -119,4 +112,6 @@ Authentication.defaultProps = {
   }
 }
 
-export default Authentication
+export const DumbAuthentication = Authentication
+
+export default withClient(Authentication)

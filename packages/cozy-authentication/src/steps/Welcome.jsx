@@ -7,16 +7,15 @@ import 'cozy-ui/assets/icons/ui/cozy-negative.svg'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import styles from '../styles.styl'
-import { ButtonLinkRegistration } from './ButtonLinkRegistration'
-import { onboardingPropTypes } from '../../OnboardingPropTypes'
+import ButtonLinkRegistration from './ButtonLinkRegistration'
+
 export class Welcome extends Component {
   registerRender = () => {
     const {
       t,
       register,
       allowRegistration,
-      breakpoints: { isMobile },
-      onboarding
+      breakpoints: { isMobile }
     } = this.props
 
     if (allowRegistration) {
@@ -33,7 +32,6 @@ export class Welcome extends Component {
       <ButtonLinkRegistration
         label={t('mobile.onboarding.welcome.create_my_cozy')}
         size={isMobile ? 'normal' : 'large'}
-        onboarding={onboarding}
       />
     )
   }
@@ -43,8 +41,10 @@ export class Welcome extends Component {
       t,
       selectServer,
       breakpoints: { isMobile },
-      appIcon
+      appIcon,
+      appTitle
     } = this.props
+
     return (
       <div className={classNames(styles['wizard'])}>
         <div
@@ -75,10 +75,10 @@ export class Welcome extends Component {
               tag="h1"
               className={classNames(styles['wizard-title'], 'u-mt-0')}
             >
-              {t('mobile.onboarding.welcome.title')}
+              {t('mobile.onboarding.welcome.title', { appTitle })}
             </MainTitle>
             <p className={styles['wizard-desc']}>
-              {t('mobile.onboarding.welcome.desc')}
+              {t('mobile.onboarding.welcome.desc', { appTitle })}
             </p>
           </div>
           <footer className={styles['wizard-footer']}>
@@ -98,7 +98,6 @@ export class Welcome extends Component {
 
 Welcome.propTypes = {
   selectServer: PropTypes.func.isRequired,
-  appIcon: PropTypes.string.isRequired,
-  onboarding: onboardingPropTypes.isRequired
+  appIcon: PropTypes.string.isRequired
 }
 export default withBreakpoints()(translate()(Welcome))

@@ -12,22 +12,26 @@
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
     "test": "env USE_REACT=true yarn jest src",
-    "copy-files": "cp -r src/locales/ dist/locales/"
+    "copy-files": "cp -r src/locales/ dist/locales/",
+    "example": "env USE_REACT=true npx parcel $(pwd)/examples/index.html"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-preset-cozy-app": "^1.5.1",
-    "cozy-ui": "^19.12.0",
+    "cozy-client": "6.24.0",
+    "cozy-ui": "^19.24.1",
+    "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint-cli": "1.1.1",
     "jest": "24.5.0",
-    "parcel": "^1.10.3",
+    "parcel": "^1.12.3",
     "react": "16.8.6",
     "react-dom": "16.8.6",
+    "react-redux": "^7.0.2",
     "react-styleguidist": "6.5.3",
     "stylus": "^0.54.5"
   },
@@ -35,7 +39,9 @@
     "cozy-device-helper": "1.7.1",
     "cozy-flags": "1.6.0",
     "localforage": "1.7.3",
+    "react": ">=15",
     "react-markdown": "4.0.6",
+    "react-router": "3",
     "url-polyfill": "1.1.0"
   },
   "jest": {
@@ -43,6 +49,7 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!cozy-ui)"
     ],
+    "testPathIgnorePatterns": ["/node_modules/", "dist"],
     "modulePaths": [
       "<rootDir>/node_modules/",
       "<rootDir>/../../node_modules/"

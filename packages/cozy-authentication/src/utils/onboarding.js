@@ -1,48 +1,11 @@
-import localforage from 'localforage'
 import get from 'lodash/get'
+import * as localStateSecret from './local'
 
-const ONBOARDING_SECRET_KEY = 'onboarding_secret'
-const ONBOARDING_STATE = 'onboarding_state'
-
-const generateRandomString = () => {
-  return Math.random()
-    .toString(36)
-    .substr(2, 11)
-}
-export const writeSecret = secret => {
-  return localforage.setItem(ONBOARDING_SECRET_KEY, secret)
-}
-
-export const readSecret = () => {
-  return localforage.getItem(ONBOARDING_SECRET_KEY)
-}
-
-export const clearSecret = () => {
-  return localforage.removeItem(ONBOARDING_SECRET_KEY)
-}
-
-export const writeState = state => {
-  return localforage.setItem(ONBOARDING_STATE, state)
-}
-
-export const readState = () => {
-  return localforage.getItem(ONBOARDING_STATE)
-}
-
-export const clearState = () => {
-  return localforage.removeItem(ONBOARDING_STATE)
-}
-const generateState = () => {
-  return generateRandomString()
-}
-const generateSecret = () => {
-  return generateRandomString()
-}
 export const checkIfOnboardingLogin = onboardingInformations => {
   return get(onboardingInformations, 'code')
 }
 
-export const generateOAuthForUrl = async ({
+export const generateOnboardingQueryPart = async ({
   clientName,
   redirectURI,
   softwareID,
@@ -52,17 +15,7 @@ export const generateOAuthForUrl = async ({
   policyURI,
   scope
 }) => {
-  let secret = await readSecret()
-  if (!secret) {
-    secret = generateSecret()
-    await writeSecret(secret)
-  }
-  let state = await readState()
-
-  if (!state) {
-    state = generateState()
-    await writeState(state)
-  }
+  const { state, secret } = await localStateSecret.ensureExists()
   const oauthData = {
     redirect_uri: redirectURI,
     software_id: softwareID,
@@ -83,40 +36,65 @@ export const generateOAuthForUrl = async ({
   return encodeURIComponent(JSON.stringify(oauthData))
 }
 
-export const addProtocolToURL = instanceDomain => {
-  return `https://${instanceDomain}`
-}
-export const secretExchange = (secret, instanceDomain, client) => {
-  const response = client.stackClient.fetchJSON(
-    'POST',
-    addProtocolToURL(instanceDomain) + '/auth/secret_exchange',
-    {
-      secret
-    }
-  )
-  return response
+const addProtocolToDomain = domain => {
+  const protocol = domain.includes('cozy.tools') ? 'http' : 'https'
+  return `${protocol}://${domain}`
 }
 
-export const getAccessToken = async (
-  { client_id, client_secret },
-  instanceDomain,
-  code,
-  client
+// Should be in cozy-client
+export const doOnboardingLogin = async (
+  client,
+  domain,
+  receivedState,
+  accessCode
 ) => {
-  const body = `grant_type=authorization_code&code=${code}&client_id=${client_id}&client_secret=${client_secret}`
-  const getTokenRequest = await client.stackClient.fetch(
-    'POST',
-    addProtocolToURL(instanceDomain) + '/auth/access_token',
-    body,
-    {
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded'
-      }
+  try {
+    const {
+      state: localState,
+      secret: localSecret
+    } = await localStateSecret.read()
+
+    if (localState !== receivedState) {
+      throw new Error('Received state different from local state')
     }
-  )
-  const token = await getTokenRequest.json()
-  if (getTokenRequest.status !== 200) {
-    throw new Error('token.error')
+
+    const url = addProtocolToDomain(domain)
+    const clientInfo = await client.stackClient.exchangeOAuthSecret(
+      url,
+      localSecret
+    )
+
+    const {
+      onboarding_secret: serverSecret,
+      onboarding_state: serverState,
+      client_id: clientID,
+      client_secret: clientSecret
+    } = clientInfo
+
+    if (!(localSecret === serverSecret && localState === serverState)) {
+      throw new Error('Local state/secret unequal to server state/secret')
+    }
+
+    const oauthOptions = {
+      clientID,
+      clientSecret
+    }
+    const token = await client.stackClient.fetchAccessToken(
+      accessCode,
+      oauthOptions,
+      url
+    )
+    await client.login({ url, token })
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.error('Could not automatically login', e)
+    localStateSecret.clear()
+    throw e
   }
-  return token
+}
+
+// Should be in cozy-client
+export const registerAndLogin = async (client, url) => {
+  const { token } = await client.register(url)
+  await client.login({ url, token })
 }

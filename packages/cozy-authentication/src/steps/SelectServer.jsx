@@ -11,8 +11,7 @@ import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
 import styles from '../styles.styl'
-import { ButtonLinkRegistration } from './ButtonLinkRegistration'
-import { onboardingPropTypes } from '../../OnboardingPropTypes'
+import ButtonLinkRegistration from './ButtonLinkRegistration'
 
 require('url-polyfill')
 
@@ -245,6 +244,7 @@ export class SelectServer extends Component {
                 className={classNames(styles['wizard-previous'])}
                 onClick={previousStep}
                 type="button"
+                label={t('mobile.onboarding.server_selection.previous')}
               />
             </div>
             <MainTitle tag="h1" className={styles['wizard-title']}>
@@ -336,12 +336,12 @@ export class SelectServer extends Component {
           >
             <Button
               className={styles['wizard-next']}
-              disabled={
+              disabled={Boolean(
                 error ||
-                fetching ||
-                (isCustomDomain && !isUrl(this.prependProtocol(value))) ||
-                (!isCustomDomain && !this.isValideCozyName(value))
-              }
+                  fetching ||
+                  (isCustomDomain && !isUrl(this.prependProtocol(value))) ||
+                  (!isCustomDomain && !this.isValideCozyName(value))
+              )}
               busy={fetching}
               label={t('mobile.onboarding.server_selection.button')}
               size={isTiny ? 'normal' : 'large'}
@@ -370,8 +370,7 @@ SelectServer.propTypes = {
   nextStep: PropTypes.func.isRequired,
   fetching: PropTypes.bool,
   externalError: PropTypes.object,
-  onException: PropTypes.func.isRequired,
-  onboarding: onboardingPropTypes.isRequired
+  onException: PropTypes.func.isRequired
 }
 
 SelectServer.defaultProps = {
