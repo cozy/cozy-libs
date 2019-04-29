@@ -49,6 +49,7 @@
     "transformIgnorePatterns": [
       "/node_modules/(?!cozy-ui)"
     ],
+    "testPathIgnorePatterns": ["/node_modules/", "dist"],
     "modulePaths": [
       "<rootDir>/node_modules/",
       "<rootDir>/../../node_modules/"
