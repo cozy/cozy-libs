@@ -172,7 +172,8 @@ MobileRouter.defaultProps = {
 MobileRouter.propTypes = {
   history: PropTypes.object.isRequired,
 
-  children: PropTypes.node.isRequired,
+  appRoutes: PropTypes.node,
+  children: PropTypes.node,
   appTitle: PropTypes.string.isRequired,
   appIcon: PropTypes.string.isRequired,
 
