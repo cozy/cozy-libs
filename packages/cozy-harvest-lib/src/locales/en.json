@@ -9,6 +9,23 @@
     },
     "title": "Successful configuration!"
   },
+  "twoFAForm": {
+    "title": {
+      "default": "Enter the code sent to you by e-mail or SMS",
+      "email": "Enter the code sent to you by e-mail",
+      "sms": "Enter the code sent to you by SMS"
+    },
+    "desc": {
+      "default": "A code has been sent to you by e-mail or by SMS to finish your connexion",
+      "email": "A code has been sent to you by e-mail to finish your connexion",
+      "sms": "A code has been sent to you by SMS to finish your connexion"
+    },
+    "code": {
+      "label": "code"
+    },
+    "retry": "Invalid code, please re-enter",
+    "CTA": "Validate"
+  },
   "accountForm": {
     "submit": {
       "label": "Submit"
@@ -79,6 +96,14 @@
         "title": "New permissions validation needed",
         "description": "You connector was updated and the permissions changed. Please validate them before launching the connector again."
       },
+      "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
+        "title": "Two Factor code expired",
+        "description": "The two factor code has expired, please start again."
+      },
+      "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
+        "title": "Wrong two factore code provided",
+        "description": "The two factor code provided is wrong, please start again."
+      },
       "VENDOR_DOWN": {
         "title": "Unavailable service",
         "description": "It seems that the [%{name}](%{link}) service is unavailable at the moment. Please rerun the connector later."
@@ -125,6 +150,9 @@
     },
     "phone": {
       "label": "Phone number"
+    },
+    "two_fa_code": {
+      "label": "Two factor code"
     }
   },
   "oauth": {

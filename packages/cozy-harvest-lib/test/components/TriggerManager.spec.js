@@ -161,12 +161,13 @@ const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
 const launchTriggerMock = jest.fn()
 const saveAccountMock = jest.fn()
-const waitForLoginSuccessMock = jest.fn()
+const watchKonnectorJobMock = jest.fn()
+const watchKonnectorAccountMock = jest.fn()
 
 const onSuccessSpy = jest.fn()
 const onLoginSuccessSpy = jest.fn()
 
-const tMock = jest.fn().mockReturnValue('/Administrative')
+const tMock = jest.fn()
 
 const props = {
   addPermission: addPermissionMock,
@@ -180,7 +181,8 @@ const props = {
   onLoginSuccess: onLoginSuccessSpy,
   saveAccount: saveAccountMock,
   t: tMock,
-  waitForLoginSuccess: waitForLoginSuccessMock
+  watchKonnectorJob: watchKonnectorJobMock,
+  watchKonnectorAccount: watchKonnectorAccountMock
 }
 
 const propsWithAccount = {
@@ -202,15 +204,11 @@ describe('TriggerManager', () => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
     launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
-    waitForLoginSuccessMock.mockResolvedValue(fixtures.runningJob)
+    watchKonnectorJobMock.mockResolvedValue(fixtures.runningJob)
   })
 
   afterEach(() => {
-    createTriggerMock.mockClear()
-    launchTriggerMock.mockClear()
-    onSuccessSpy.mockClear()
-    onLoginSuccessSpy.mockClear()
-    waitForLoginSuccessMock.mockClear()
+    jest.resetAllMocks()
   })
 
   it('should render without account', () => {
@@ -239,6 +237,11 @@ describe('TriggerManager', () => {
   })
 
   describe('handleError', () => {
+    beforeEach(() => {
+      statDirectoryByPathMock.mockResolvedValue(fixtures.folder)
+      createDirectoryByPathMock.mockResolvedValue(fixtures.folder)
+    })
+
     it('should render error', () => {
       const wrapper = shallowWithAccount()
       wrapper.instance().handleError(new Error('Test error'))
@@ -247,21 +250,26 @@ describe('TriggerManager', () => {
 
     const clientMutations = {
       saveAccount: saveAccountMock,
-      statDirectoryByPath: statDirectoryByPathMock,
       createDirectoryByPath: createDirectoryByPathMock,
       addPermission: addPermissionMock,
       addReferencesTo: addReferencesToMock,
       createTrigger: createTriggerMock,
-      launchTrigger: launchTriggerMock
+      launchTrigger: launchTriggerMock,
+      statDirectoryByPath: statDirectoryByPathMock
     }
 
     for (var mutation of Object.keys(clientMutations)) {
+      const mutationSync = mutation
       it(`should be called when ${mutation} fails`, async () => {
-        clientMutations[mutation].mockRejectedValue(
-          new Error(`${mutation} error`)
+        clientMutations[mutationSync].mockRejectedValue(
+          new Error(`${mutationSync} error`)
         )
 
-        const wrapper = shallowWithoutAccount()
+        if (mutationSync !== 'statDirectoryByPath') {
+          statDirectoryByPathMock.mockResolvedValue(null)
+        }
+
+        const wrapper = shallowWithoutAccount(fixtures.konnectorWithFolder)
 
         jest
           .spyOn(wrapper.instance(), 'handleError')
@@ -269,7 +277,7 @@ describe('TriggerManager', () => {
 
         await wrapper.instance().handleSubmit(fixtures.data)
         expect(wrapper.instance().handleError).toHaveBeenCalledWith(
-          new Error(`${mutation} error`)
+          new Error(`${mutationSync} error`)
         )
       })
     }
@@ -279,13 +287,13 @@ describe('TriggerManager', () => {
     it('should render without account as submitting', () => {
       const wrapper = shallowWithoutAccount()
       wrapper.instance().handleSubmit()
-      expect(wrapper.props().submitting).toEqual(true)
+      expect(wrapper.state().status).toEqual('RUNNING')
     })
 
     it('should render with account as submitting', () => {
       const wrapper = shallowWithAccount()
       wrapper.instance().handleSubmit()
-      expect(wrapper.props().submitting).toEqual(true)
+      expect(wrapper.state().status).toEqual('RUNNING')
     })
 
     it('should call saveAccount without account', () => {
@@ -369,6 +377,14 @@ describe('TriggerManager', () => {
     })
 
     describe('when konnector needs folder', () => {
+      beforeEach(() => {
+        tMock.mockReturnValue('/Administrative')
+      })
+
+      afterEach(() => {
+        tMock.mockReset()
+      })
+
       it('should create folder if it does not exist', async () => {
         statDirectoryByPathMock.mockResolvedValue(null)
         createDirectoryByPathMock.mockReturnValue(fixtures.folder)
@@ -440,22 +456,33 @@ describe('TriggerManager', () => {
     it('should wait for successful login', async () => {
       const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
-      expect(waitForLoginSuccessMock).toHaveBeenCalledTimes(1)
-      expect(waitForLoginSuccessMock).toHaveBeenCalledWith(fixtures.launchedJob)
+      expect(watchKonnectorJobMock).toHaveBeenCalledTimes(1)
+      expect(watchKonnectorJobMock).toHaveBeenCalledWith(
+        fixtures.launchedJob,
+        expect.anything()
+      )
     })
 
     it('should call onLoginSuccess', async () => {
       const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
+
+      const callbacks = watchKonnectorJobMock.mock.calls[0][1]
+      callbacks.onLoginSuccess()
+
       expect(onLoginSuccessSpy).toHaveBeenCalledTimes(1)
       expect(onLoginSuccessSpy).toHaveBeenCalledWith(fixtures.createdTrigger)
       expect(onSuccessSpy).not.toHaveBeenCalled()
     })
 
     it('should not call onLoginSucces if job is done', async () => {
-      waitForLoginSuccessMock.mockResolvedValue(fixtures.doneJob)
+      watchKonnectorJobMock.mockResolvedValue(fixtures.doneJob)
       const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
+
+      const callbacks = watchKonnectorJobMock.mock.calls[0][1]
+      callbacks.onSuccess()
+
       expect(onLoginSuccessSpy).not.toHaveBeenCalled()
       expect(onSuccessSpy).toHaveBeenCalledTimes(1)
       expect(onSuccessSpy).toHaveBeenCalledWith(fixtures.createdTrigger)

@@ -1,83 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TriggerManager handleError should render error 1`] = `
-<Wrapper
-  account={
-    Object {
-      "_id": "61c683295560485db0f34b859197c581",
-      "account_type": "konnectest",
-      "auth": Object {
-        "passphrase": "bar",
-        "username": "foo",
-      },
-      "identifier": "username",
-    }
-  }
-  error={[Error: Test error]}
-  konnector={
-    Object {
-      "fields": Object {
-        "passphrase": Object {
-          "type": "password",
+<div>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <Wrapper
+    account={
+      Object {
+        "_id": "61c683295560485db0f34b859197c581",
+        "account_type": "konnectest",
+        "auth": Object {
+          "passphrase": "bar",
+          "username": "foo",
         },
-        "username": Object {
-          "type": "text",
-        },
-      },
-      "slug": "konnectest",
+        "identifier": "username",
+      }
     }
-  }
-  onSubmit={[Function]}
-/>
+    error={[Error: Test error]}
+    konnector={
+      Object {
+        "fields": Object {
+          "passphrase": Object {
+            "type": "password",
+          },
+          "username": Object {
+            "type": "text",
+          },
+        },
+        "slug": "konnectest",
+      }
+    }
+    onSubmit={[Function]}
+    submitting={false}
+  />
+</div>
 `;
 
 exports[`TriggerManager should render with account 1`] = `
-<Wrapper
-  account={
-    Object {
-      "_id": "61c683295560485db0f34b859197c581",
-      "account_type": "konnectest",
-      "auth": Object {
-        "passphrase": "bar",
-        "username": "foo",
-      },
-      "identifier": "username",
-    }
-  }
-  error={null}
-  konnector={
-    Object {
-      "fields": Object {
-        "passphrase": Object {
-          "type": "password",
+<div>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <Wrapper
+    account={
+      Object {
+        "_id": "61c683295560485db0f34b859197c581",
+        "account_type": "konnectest",
+        "auth": Object {
+          "passphrase": "bar",
+          "username": "foo",
         },
-        "username": Object {
-          "type": "text",
-        },
-      },
-      "slug": "konnectest",
+        "identifier": "username",
+      }
     }
-  }
-  onSubmit={[Function]}
-/>
+    error={null}
+    konnector={
+      Object {
+        "fields": Object {
+          "passphrase": Object {
+            "type": "password",
+          },
+          "username": Object {
+            "type": "text",
+          },
+        },
+        "slug": "konnectest",
+      }
+    }
+    onSubmit={[Function]}
+    submitting={false}
+  />
+</div>
 `;
 
 exports[`TriggerManager should render without account 1`] = `
-<Wrapper
-  error={null}
-  konnector={
-    Object {
-      "fields": Object {
-        "passphrase": Object {
-          "type": "password",
+<div>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <Wrapper
+    error={null}
+    konnector={
+      Object {
+        "fields": Object {
+          "passphrase": Object {
+            "type": "password",
+          },
+          "username": Object {
+            "type": "text",
+          },
         },
-        "username": Object {
-          "type": "text",
-        },
-      },
-      "slug": "konnectest",
+        "slug": "konnectest",
+      }
     }
-  }
-  onSubmit={[Function]}
-/>
+    onSubmit={[Function]}
+    submitting={false}
+  />
+</div>
 `;
