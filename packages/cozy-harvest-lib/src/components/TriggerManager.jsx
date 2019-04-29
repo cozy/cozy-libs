@@ -164,7 +164,10 @@ export class TriggerManager extends Component {
     try {
       const accountToSave = isUpdate
         ? accounts.mergeAuth(
-            accounts.setSessionResetIfNecessary(account, data),
+            accounts.setSessionResetIfNecessary(
+              accounts.resetState(account),
+              data
+            ),
             data
           )
         : accounts.build(konnector, data)

@@ -68,7 +68,8 @@ export const build = (konnector, authData) => {
   return {
     auth: authData,
     account_type: konnector.slug,
-    identifier: manifest.getIdentifier(konnector.fields)
+    identifier: manifest.getIdentifier(konnector.fields),
+    state: null
   }
 }
 
@@ -90,11 +91,21 @@ export const mergeAuth = (account, authData) => ({
  * @return {object}           io.cozy.accounts attributes
  */
 export const updateTwoFaCode = (account, code) => ({
-  ...account,
-  // reset the state,
-  state: null,
+  // reset the state since the konnector is listening it
+  ...resetState(account),
   twofa_code: code
 })
+
+/**
+ * Reset the account state
+ * @param  {Object} account Account document
+ * @return {object}         Changed account document
+ */
+export const resetState = account => ({
+  ...account,
+  state: null
+})
+
 /**
  * Set a state to reset the konnector session into io.cozy.accounts document
  * only if necessary, if password/passphrase have changed
@@ -119,6 +130,7 @@ export default {
   isTwoFANeeded,
   isTwoFARetry,
   mergeAuth,
+  resetState,
   setSessionResetIfNecessary,
   updateTwoFaCode
 }

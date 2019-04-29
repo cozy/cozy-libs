@@ -301,7 +301,7 @@ describe('TriggerManager', () => {
       wrapper.instance().handleSubmit(fixtures.data)
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
-        fixtures.account
+        expect.objectContaining(fixtures.account)
       )
     })
 
@@ -310,7 +310,7 @@ describe('TriggerManager', () => {
       wrapper.instance().handleSubmit({ login: 'test' })
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
-        fixtures.existingAccount
+        expect.objectContaining(fixtures.existingAccount)
       )
     })
 
