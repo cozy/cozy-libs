@@ -7,7 +7,7 @@ import { withClient } from 'cozy-client'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
-import onboarding from './utils/onboarding'
+import * as onboarding from './utils/onboarding'
 
 // Even if the component is not yet mounted, we save
 // the deeplink
@@ -104,6 +104,8 @@ export class MobileRouter extends Component {
       await onboarding.doOnboardingLogin(client, cozy_url, state, access_code)
       this.afterAuthentication()
     } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error('Error while trying to automatically login', error)
       await client.logout()
     } finally {
       if (!this.unmounted) {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { shallow, mount } from 'enzyme'
+import { mount } from 'enzyme'
 import PropTypes from 'prop-types'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
@@ -41,13 +41,17 @@ describe('MobileRouter', () => {
     appTitle,
     app,
     client,
+    currentLocation,
     props
 
   beforeEach(() => {
     appRoutes = <AppRoutes />
     onAuthenticated = jest.fn()
     onLogout = jest.fn()
-    history = { replace: jest.fn() }
+    history = {
+      replace: jest.fn(),
+      getCurrentLocation: jest.fn(() => currentLocation)
+    }
     appIcon = 'icon.png'
     appTitle = 'Test App'
     app = null
@@ -106,12 +110,6 @@ describe('MobileRouter', () => {
     expect(app.find(Revoked).length).toBe(1)
   })
 
-  it('should render a special view when logging in via onboarding has started', () => {
-    app = shallow(<DumbMobileRouter {...props} client={client} />)
-    app.setState({ isLoggingInViaOnboarding: true })
-    expect(app.find(LoggingInViaOnboarding).length).toBe(1)
-  })
-
   it('should render the appRoutes when client is logged, not revoked, and not onboarding', () => {
     client.isLogged = true
     setup()
@@ -119,13 +117,38 @@ describe('MobileRouter', () => {
   })
 
   describe('Auto Onboarding', () => {
+    it('should render a special view when logging in via onboarding has started', async () => {
+      setup()
+      currentLocation = {
+        query: {
+          access_code: 'accessCode',
+          state: 'state-123',
+          cozy_url: 'pbrowne.mycozy.cloud'
+        }
+      }
+      const mobileRouter = app.find(DumbMobileRouter).instance()
+      jest
+        .spyOn(onboarding, 'doOnboardingLogin')
+        .mockImplementation(async () => {
+          // Necessary to call update() since setState is called asynchronously
+          // https://github.com/airbnb/enzyme/issues/450
+          app.update()
+          expect(app.find(LoggingInViaOnboarding).length).toBe(1)
+        })
+      await mobileRouter.handleAuth()
+      app.update()
+      expect(onboarding.doOnboardingLogin).toHaveBeenCalled()
+      expect(app.find(LoggingInViaOnboarding).length).toBe(0)
+    })
+
     it('should call client.logout if doOnboarding fails', async () => {
       setup()
       const mobileRouter = app.find(DumbMobileRouter).instance()
       jest.spyOn(onboarding, 'doOnboardingLogin').mockRejectedValue({})
       jest.spyOn(client, 'logout')
       jest.spyOn(console, 'warn').mockImplementation(() => {})
-      mobileRouter.handleAuth()
+      jest.spyOn(console, 'error').mockImplementation(() => {})
+      await mobileRouter.handleAuth()
       expect(client.logout).toHaveBeenCalled()
     })
   })
