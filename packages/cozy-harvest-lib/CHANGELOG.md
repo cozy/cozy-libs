@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.3"></a>
+## [0.40.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.2...cozy-harvest-lib@0.40.3) (2019-04-29)
+
+
+### Bug Fixes
+
+* **harvest:** Provide account state to reset session ([67cf4e5](https://github.com/cozy/cozy-libs/commit/67cf4e5))
+
+
+
+
 <a name="0.40.2"></a>
 ## [0.40.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.1...cozy-harvest-lib@0.40.2) (2019-04-29)
 
