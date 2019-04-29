@@ -20,7 +20,14 @@ const parse = type => value => {
  */
 export class AccountFields extends PureComponent {
   render() {
-    const { container, disabled, fields, hasError, initialValues } = this.props
+    const {
+      container,
+      disabled,
+      fields,
+      hasError,
+      initialValues,
+      onInputRef
+    } = this.props
 
     // Ready to use named fields array
     const namedFields = Object.keys(fields).map(fieldName => ({
@@ -47,6 +54,7 @@ export class AccountFields extends PureComponent {
                   initialValues[field.name] ||
                   initialValues[getEncryptedFieldName(field.name)]
                 }
+                onInputRef={onInputRef}
               />
             )}
           </FinalFormField>
