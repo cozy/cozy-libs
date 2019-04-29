@@ -5,7 +5,7 @@ import { translate } from 'cozy-ui/react/I18n'
 import Button from 'cozy-ui/react/Button'
 import Field from 'cozy-ui/react/Field'
 import AppIcon from 'cozy-ui/react/AppIcon'
-import PropTypes from 'react-proptypes'
+import PropTypes from 'prop-types'
 
 import accounts from '../../helpers/accounts'
 
