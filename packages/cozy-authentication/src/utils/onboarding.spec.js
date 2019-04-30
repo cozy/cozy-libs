@@ -104,6 +104,12 @@ describe('generateURI', () => {
     jest.restoreAllMocks()
   })
 
+  it('should clear the local secret', async () => {
+    jest.spyOn(localStateSecret, 'clear')
+    await onboarding.generateOnboardingQueryPart(options)
+    expect(localStateSecret.clear).toHaveBeenCalled()
+  })
+
   it('should generate an uri suitable for onboarding', async () => {
     const uri = await onboarding.generateOnboardingQueryPart(options)
     expect(JSON.parse(decodeURIComponent(uri))).toEqual({
@@ -117,7 +123,7 @@ describe('generateURI', () => {
         secret: expect.any(String),
         state: expect.any(String)
       },
-      policiy_uri: 'policyURI',
+      policy_uri: 'policyURI',
       redirect_uri: 'redirectURI',
       software_id: 'softwareID',
       software_version: 'softwareVersion'

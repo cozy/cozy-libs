@@ -15,6 +15,7 @@ export const generateOnboardingQueryPart = async ({
   policyURI,
   scope
 }) => {
+  await localStateSecret.clear()
   const { state, secret } = await localStateSecret.ensureExists()
   const oauthData = {
     redirect_uri: redirectURI,
@@ -24,7 +25,7 @@ export const generateOnboardingQueryPart = async ({
     client_kind: 'mobile',
     client_uri: clientURI,
     logo_uri: logoURI,
-    policiy_uri: policyURI,
+    policy_uri: policyURI,
     onboarding: {
       app: softwareID,
       permissions: scope,
