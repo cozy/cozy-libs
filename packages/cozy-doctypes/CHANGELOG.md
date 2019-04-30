@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.41.0"></a>
+# [1.41.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.40.1...cozy-doctypes@1.41.0) (2019-04-30)
+
+
+### Features
+
+* **cozy-doctypes:** Add getFullname and getDisplayName for contacts ([c7de0fc](https://github.com/cozy/cozy-libs/commit/c7de0fc))
+
+
+
+
 <a name="1.40.1"></a>
 ## [1.40.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.40.0...cozy-doctypes@1.40.1) (2019-04-26)
 
