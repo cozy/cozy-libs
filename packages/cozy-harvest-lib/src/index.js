@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import I18n from 'cozy-ui/react/I18n'
 
 import TranslatedTriggerManager from './components/TriggerManager'
+import TranslatedTriggerLauncher from './components/TriggerLauncher'
 
 export { KonnectorJobError } from './helpers/konnectors'
 
@@ -26,6 +27,9 @@ const withLocales = WrappedComponent =>
 
 export const TriggerManager = withLocales(TranslatedTriggerManager)
 
+export const TriggerLauncher = withLocales(TranslatedTriggerLauncher)
+
 export default {
+  TriggerLauncher,
   TriggerManager
 }
