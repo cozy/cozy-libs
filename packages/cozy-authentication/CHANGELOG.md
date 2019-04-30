@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.8.0"></a>
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.7.0...cozy-authentication@1.8.0) (2019-04-30)
+
+
+### Bug Fixes
+
+* Must unregister client in case of error ([89ca7f5](https://github.com/cozy/cozy-libs/commit/89ca7f5))
+* Setup does not take client in argument ([23e5226](https://github.com/cozy/cozy-libs/commit/23e5226))
+
+
+### Features
+
+* Reconnect client ([bb24df7](https://github.com/cozy/cozy-libs/commit/bb24df7))
+* Show informations ([6f229ff](https://github.com/cozy/cozy-libs/commit/6f229ff))
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.6.1...cozy-authentication@1.7.0) (2019-04-30)
 
