@@ -2,6 +2,8 @@
 import { triggersMutations } from 'connections/triggers'
 import client from 'cozy-client'
 
+import KonnectorJobWatcher from 'models/konnector/KonnectorJobWatcher'
+
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({
     create: jest.fn(),
@@ -81,20 +83,16 @@ describe('Trigger mutations', () => {
   })
 
   describe('watchKonnectorJob', () => {
-    it('should return a job watcher with correct properties', async () => {
+    it('should return a job watcher', async () => {
       // Lets mock a job to pass as watchKonnectorJob parameter. This job should
       // be returned after timeout
       const job = {
         // Test attribute, not expected in job schema
-        source: 'timeout',
         state: 'queued'
       }
-      const jobWatcher = await watchKonnectorJob(job, {
-        onError: jest.fn(),
-        onLoginSuccess: jest.fn(),
-        onSuccess: jest.fn()
-      })
-      expect(jobWatcher).toMatchSnapshot()
+
+      const result = await watchKonnectorJob(job)
+      expect(result instanceof KonnectorJobWatcher).toBe(true)
     })
   })
 })

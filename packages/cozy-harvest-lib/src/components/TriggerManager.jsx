@@ -203,11 +203,14 @@ export class TriggerManager extends Component {
       onSuccess,
       watchKonnectorJob
     } = this.props
-    this.jobWatcher = watchKonnectorJob(await launchTrigger(trigger), {
-      onError: this.handleError,
-      onLoginSuccess: () => this.handleSuccess(onLoginSuccess, [trigger]),
-      onSuccess: () => this.handleSuccess(onSuccess, [trigger])
-    })
+    this.jobWatcher = watchKonnectorJob(await launchTrigger(trigger))
+    this.jobWatcher.on('error', this.handleError)
+    this.jobWatcher.on('loginSuccess', () =>
+      this.handleSuccess(onLoginSuccess, [trigger])
+    )
+    this.jobWatcher.on('success', () =>
+      this.handleSuccess(onSuccess, [trigger])
+    )
   }
 
   render() {

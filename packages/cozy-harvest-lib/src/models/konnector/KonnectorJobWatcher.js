@@ -1,3 +1,5 @@
+import MicroEE from 'microee'
+
 import { subscribe } from 'cozy-realtime'
 import { KonnectorJobError } from '../../helpers/konnectors'
 
@@ -9,14 +11,11 @@ const JOB_STATE_ERRORED = 'errored'
 const DEFAULT_TIMER_DELAY = 8000
 
 export class KonnectorJobWatcher {
-  constructor(client, job, options) {
+  constructor(client, job, options = {}) {
     this.client = client
     this.job = job
     /**
      * Options
-     *  onError: callback on errors
-     *  onSuccess: callback on success
-     *  onLoginSuccess: callback on login timer success
      *  expectedSuccessDelay: delay for login timer in ms
      */
     const { expectedSuccessDelay = DEFAULT_TIMER_DELAY } = options
@@ -28,7 +27,6 @@ export class KonnectorJobWatcher {
 
     this._error = null
     this._succeed = false
-    this._runOption = this._runOption.bind(this)
 
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
@@ -36,21 +34,17 @@ export class KonnectorJobWatcher {
     this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
   }
 
-  _runOption(name, ...params) {
-    if (typeof this.options[name] === 'function') this.options[name](...params)
-  }
-
   handleError(error) {
     this.disableSuccessTimer()
     this._error = error
-    this._runOption('onError', new KonnectorJobError(error))
+    this.emit('error', new KonnectorJobError(error))
   }
 
   handleSuccess() {
     this.disableSuccessTimer()
     if (this._error || this._succeed) return
     this._succeed = true
-    this._runOption('onSuccess', this.job)
+    this.emit('success', this.job)
   }
 
   handleSuccessDelay() {
@@ -58,7 +52,7 @@ export class KonnectorJobWatcher {
     if (this._error || this._succeed) return
 
     this._succeed = true
-    this._runOption('onLoginSuccess', this.job)
+    this.emit('loginSuccess', this.job)
   }
 
   disableSuccessTimer() {
@@ -101,5 +95,7 @@ export class KonnectorJobWatcher {
     this.enableSuccessTimer()
   }
 }
+
+MicroEE.mixin(KonnectorJobWatcher)
 
 export default KonnectorJobWatcher
