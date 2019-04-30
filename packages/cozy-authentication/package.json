@@ -13,6 +13,7 @@
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
     "test": "env USE_REACT=true yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
+    "lint": "cd ..; yarn lint packages/cozy-authentication",
     "example": "env USE_REACT=true npx parcel $(pwd)/examples/index.html"
   },
   "devDependencies": {
