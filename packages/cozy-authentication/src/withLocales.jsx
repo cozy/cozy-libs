@@ -1,4 +1,5 @@
-import { I18n } from 'cozy-ui/transpiled/react/I18n'
+import React from 'react'
+import { I18n, translate } from 'cozy-ui/transpiled/react/I18n'
 
 const locales = {
   en: require(`./locales/en.json`),

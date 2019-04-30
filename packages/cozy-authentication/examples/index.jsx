@@ -7,7 +7,7 @@ import { Route, hashHistory } from 'react-router'
 import 'date-fns/locale/en/index'
 
 import 'cozy-ui/transpiled/react/stylesheet.css'
-import { translate, Button } from 'cozy-ui/transpiled/react'
+import { I18n, translate, Button } from 'cozy-ui/transpiled/react'
 import CozyClient, { CozyProvider, withClient } from 'cozy-client'
 
 import { MobileRouter } from '../dist'
@@ -39,20 +39,32 @@ const styles = {
   }
 }
 
-/** After login, show logout and revok buttons */
-const LoggedIn = withClient(({ client }) => (
+/** After login, show logout and revoke buttons */
+const LoggedIn = translate()(withClient(({ client, t }) => (
   <div style={styles.wrapper}>
-    Logged In !<br />
-    Client id: {client.stackClient.oauthOptions.clientID}
+    {t('logged-in.title')}<br />
+    URL: {client.stackClient.uri}<br/>
+    {t('logged-in.client-id')}: {client.stackClient.oauthOptions.clientID}
     <div>
-      <Button label="Logout" onClick={() => client.logout()} />
+      <Button label={t('logged-in.logout')} onClick={() => client.logout()} />
       <Button
-        label="Revoke"
+        label={t('logged-in.revoke')}
         onClick={() => client.handleRevocationChange(true)}
       />
     </div>
   </div>
-))
+)))
+
+const exampleLocales = {
+  en: {
+    'logged-in': {
+      title: 'Logged in !',
+      'client-id': 'Client ID',
+      logout: 'Logout',
+      revoke: 'Revoke'
+    }
+  }
+}
 
 const Error = ({ error }) => (
   <pre style={styles.error}>An error occured {error.stack}</pre>
@@ -124,16 +136,18 @@ class App extends React.Component {
       <ErrorBoundary>
         <LocaleContext lang={this.state.lang}>
           <LangChooser onChange={this.handleChangeLocale.bind(this)} />
-          <CozyProvider client={client}>
-            <MobileRouter
-              history={hashHistory}
-              protocol="cozyexample://"
-              appTitle={title}
-              appIcon={icon}
-            >
-              <Route path="/" component={LoggedIn} />
-            </MobileRouter>
-          </CozyProvider>
+          <I18n dictRequire={lang => exampleLocales[lang]} lang={this.state.lang}>
+            <CozyProvider client={client}>
+              <MobileRouter
+                history={hashHistory}
+                protocol="cozyexample://"
+                appTitle={title}
+                appIcon={icon}
+              >
+                <Route path="/" component={LoggedIn} />
+              </MobileRouter>
+            </CozyProvider>
+          </I18n>
         </LocaleContext>
       </ErrorBoundary>
     )
