@@ -3,7 +3,6 @@ import { Router } from 'react-router'
 import PropTypes from 'prop-types'
 
 import { withClient } from 'cozy-client'
-import { I18n, translate } from 'cozy-ui/transpiled/react/I18n'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
@@ -205,7 +204,6 @@ MobileRouter.propTypes = {
   /** After logout, where do we go */
   logoutPath: PropTypes.string
 }
-
 
 export const DumbMobileRouter = MobileRouter
 

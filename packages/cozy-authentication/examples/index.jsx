@@ -40,20 +40,24 @@ const styles = {
 }
 
 /** After login, show logout and revoke buttons */
-const LoggedIn = translate()(withClient(({ client, t }) => (
-  <div style={styles.wrapper}>
-    {t('logged-in.title')}<br />
-    URL: {client.stackClient.uri}<br/>
-    {t('logged-in.client-id')}: {client.stackClient.oauthOptions.clientID}
-    <div>
-      <Button label={t('logged-in.logout')} onClick={() => client.logout()} />
-      <Button
-        label={t('logged-in.revoke')}
-        onClick={() => client.handleRevocationChange(true)}
-      />
+const LoggedIn = translate()(
+  withClient(({ client, t }) => (
+    <div style={styles.wrapper}>
+      {t('logged-in.title')}
+      <br />
+      URL: {client.stackClient.uri}
+      <br />
+      {t('logged-in.client-id')}: {client.stackClient.oauthOptions.clientID}
+      <div>
+        <Button label={t('logged-in.logout')} onClick={() => client.logout()} />
+        <Button
+          label={t('logged-in.revoke')}
+          onClick={() => client.handleRevocationChange(true)}
+        />
+      </div>
     </div>
-  </div>
-)))
+  ))
+)
 
 const exampleLocales = {
   en: {
@@ -136,7 +140,10 @@ class App extends React.Component {
       <ErrorBoundary>
         <LocaleContext lang={this.state.lang}>
           <LangChooser onChange={this.handleChangeLocale.bind(this)} />
-          <I18n dictRequire={lang => exampleLocales[lang]} lang={this.state.lang}>
+          <I18n
+            dictRequire={lang => exampleLocales[lang]}
+            lang={this.state.lang}
+          >
             <CozyProvider client={client}>
               <MobileRouter
                 history={hashHistory}
