@@ -26,7 +26,7 @@ describe('Authentication', () => {
   }
 
   it('should connect to server with cozy-client', async () => {
-    setup(client)
+    setup()
     await instance.connectToServer('pbrowne.mycozy.cloud')
     expect(client.register).toHaveBeenCalledWith('pbrowne.mycozy.cloud')
     expect(onException).not.toHaveBeenCalled()
@@ -34,7 +34,7 @@ describe('Authentication', () => {
   })
 
   it('should call on exception if there is a problem', async () => {
-    setup(client)
+    setup()
     client.register.mockImplementation(() => {
       throw new Error('No internet...')
     })
