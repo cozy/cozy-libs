@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.1"></a>
+## [1.6.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.6.0...cozy-authentication@1.6.1) (2019-04-30)
+
+
+### Bug Fixes
+
+* generateOnboardingQueryPart does clear of local state/secret ([d4390dd](https://github.com/cozy/cozy-libs/commit/d4390dd))
+* Typo in policy_uri argument ([c19bf3a](https://github.com/cozy/cozy-libs/commit/c19bf3a))
+
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.5.6...cozy-authentication@1.6.0) (2019-04-29)
 
