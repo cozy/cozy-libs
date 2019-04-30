@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { Router } from 'react-router'
 import PropTypes from 'prop-types'
-
 import { withClient } from 'cozy-client'
+
 import Authentication from './Authentication'
 import Revoked from './Revoked'
-import deeplink from './utils/deeplink'
 import * as onboarding from './utils/onboarding'
 
+import deeplink from './utils/deeplink'
 // Even if the component is not yet mounted, we save
 // the deeplink
 window.handleOpenURL = deeplink.save
