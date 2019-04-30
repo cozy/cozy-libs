@@ -3,7 +3,7 @@ import { Router } from 'react-router'
 import PropTypes from 'prop-types'
 
 import { withClient } from 'cozy-client'
-
+import { I18n, translate } from 'cozy-ui/transpiled/react/I18n'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
@@ -197,6 +197,7 @@ MobileRouter.propTypes = {
   onLogout: PropTypes.func,
   onException: PropTypes.func.isRequired,
 
+  /** CozyClient instance, should be provided via <CozyProvider /> */
   client: PropTypes.object.isRequired,
 
   /** After login, where do we go */
@@ -205,6 +206,17 @@ MobileRouter.propTypes = {
   logoutPath: PropTypes.string
 }
 
+const locales = {
+  en: require(`./locales/en.json`),
+  fr: require(`./locales/fr.json`),
+}
+
+const withLocales = Component => translate()(props => {
+  return <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
+    <Component {...props} />
+  </I18n>
+})
+
 export const DumbMobileRouter = MobileRouter
 
-export default withClient(MobileRouter)
+export default withLocales(withClient(MobileRouter))
