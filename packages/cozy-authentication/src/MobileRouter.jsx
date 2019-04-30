@@ -3,7 +3,6 @@ import { Router } from 'react-router'
 import PropTypes from 'prop-types'
 
 import { withClient } from 'cozy-client'
-
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import deeplink from './utils/deeplink'
@@ -197,6 +196,7 @@ MobileRouter.propTypes = {
   onLogout: PropTypes.func,
   onException: PropTypes.func.isRequired,
 
+  /** CozyClient instance, should be provided via <CozyProvider /> */
   client: PropTypes.object.isRequired,
 
   /** After login, where do we go */

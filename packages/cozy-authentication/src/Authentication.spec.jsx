@@ -1,4 +1,4 @@
-import Authentication from './Authentication'
+import { DumbAuthentication } from './Authentication'
 import React from 'react'
 import { shallow } from 'enzyme'
 
@@ -15,18 +15,15 @@ describe('Authentication', () => {
     }
     onComplete = jest.fn()
     onException = jest.fn()
-    const options = {
-      context: { client }
-    }
     root = shallow(
-      <Authentication
+      <DumbAuthentication
+        client={client}
         appIcon="icon.png"
         onComplete={onComplete}
         onException={onException}
-      />,
-      options
+      />
     )
-    instance = root.dive().instance()
+    instance = root.instance()
   }
 
   it('should connect to server with cozy-client', async () => {

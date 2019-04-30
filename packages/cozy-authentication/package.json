@@ -40,6 +40,7 @@
     "cozy-device-helper": "1.7.1",
     "cozy-flags": "1.6.0",
     "localforage": "1.7.3",
+    "postcss-merge-rules": "4.0.3",
     "react": ">=15",
     "react-markdown": "4.0.6",
     "react-router": "3",

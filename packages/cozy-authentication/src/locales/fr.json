@@ -5,9 +5,13 @@
         "title1": "Bienvenue sur Cozy",
         "title2": "Votre propre cloud personnel",
         "button": "Vous connecter à votre Cozy",
-        "no_account_link": "Vous n'avez pas de compte? Demandez-en un ici."
+        "no_account_link": "Vous n'avez pas de compte? Demandez-en un ici.",
+        "create_my_cozy": "Créer mon Cozy",
+        "desc": "Créer un Cozy ou connectez vous pour accéder à %{appTitle}."
       },
       "server_selection": {
+        "title": "Vous connecter à votre Cozy",
+        "lostpwd": "[J'ai oublié l'adresse de mon Cozy](https://manager.cozycloud.cc/cozy/reminder)",
         "description": "Exemple: https://**camillenimbus**.mycozy.cloud\n",
         "label": "Entrez l'adresse de votre Cozy",
         "cozy_address_placeholder": "camillenimbus.mycozy.cloud",
