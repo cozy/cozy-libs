@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.40.4"></a>
+## [0.40.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.3...cozy-harvest-lib@0.40.4) (2019-04-30)
+
+
+### Bug Fixes
+
+* **harvest:** Reset the account state before running the konnector ([26a123e](https://github.com/cozy/cozy-libs/commit/26a123e))
+
+
+
+
 <a name="0.40.3"></a>
 ## [0.40.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.2...cozy-harvest-lib@0.40.3) (2019-04-29)
 
