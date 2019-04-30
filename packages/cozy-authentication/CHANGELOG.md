@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.6.1...cozy-authentication@1.7.0) (2019-04-30)
+
+
+### Bug Fixes
+
+* Missing dependency ([93493d8](https://github.com/cozy/cozy-libs/commit/93493d8))
+* Missing translation strings ([7ac7f66](https://github.com/cozy/cozy-libs/commit/7ac7f66))
+
+
+### Features
+
+* Add buttons to change lang ([9de8017](https://github.com/cozy/cozy-libs/commit/9de8017))
+* Add second context of translation to mimic real app ([cecdfff](https://github.com/cozy/cozy-libs/commit/cecdfff))
+* MobileRouter brings its own translation context ([c1be7af](https://github.com/cozy/cozy-libs/commit/c1be7af))
+
+
+
+
 <a name="1.6.1"></a>
 ## [1.6.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.6.0...cozy-authentication@1.6.1) (2019-04-30)
 
