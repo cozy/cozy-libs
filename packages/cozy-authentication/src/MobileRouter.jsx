@@ -8,6 +8,8 @@ import Revoked from './Revoked'
 import * as onboarding from './utils/onboarding'
 
 import deeplink from './utils/deeplink'
+import credentials from './utils/credentials'
+
 // Even if the component is not yet mounted, we save
 // the deeplink
 window.handleOpenURL = deeplink.save
@@ -33,6 +35,16 @@ export class MobileRouter extends Component {
   componentDidMount() {
     this.startListeningToClient()
     this.startHandlingDeeplinks()
+    this.tryToReconnect()
+  }
+
+  async tryToReconnect() {
+    const client = this.props.client
+    const saved = await credentials.get()
+    if (saved && saved.oauthOptions) {
+      client.stackClient.setOAuthOptions(saved.oauthOptions)
+      client.login({ uri: saved.uri, token: saved.token })
+    }
   }
 
   startListeningToClient() {
@@ -157,6 +169,7 @@ export class MobileRouter extends Component {
 
   async afterAuthentication() {
     this.props.history.replace(this.props.loginPath)
+    await credentials.saveFromClient(this.props.client)
     if (this.props.onAuthenticated) {
       this.props.onAuthenticated()
     }
@@ -164,6 +177,7 @@ export class MobileRouter extends Component {
 
   async afterLogout() {
     this.props.history.replace(this.props.logoutPath)
+    await credentials.clear()
     if (this.props.onLogout) {
       this.props.onLogout()
     }
