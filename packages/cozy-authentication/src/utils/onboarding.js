@@ -96,6 +96,11 @@ export const doOnboardingLogin = async (
 
 // Should be in cozy-client
 export const registerAndLogin = async (client, url) => {
-  const { token } = await client.register(url)
-  await client.login({ url, token })
+  try {
+    const { token } = await client.register(url)
+    await client.login({ url, token })
+  } catch (registerError) {
+    client.stackClient.unregister().catch(() => {})
+    throw registerError
+  }
 }

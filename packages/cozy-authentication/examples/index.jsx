@@ -39,6 +39,38 @@ const styles = {
   }
 }
 
+/** Shows basic info on the Cozy to which we are connected */
+class DumbInformations extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { infos: null }
+  }
+
+  componentDidMount() {
+    this.fetchInformations()
+  }
+
+  async fetchInformations() {
+    const { client } = this.props
+    try {
+      const infos = await client.stackClient.fetchInformation()
+      this.setState({ infos })
+    } catch (error) {
+      this.setState({ error })
+    }
+  }
+
+  render() {
+    const { error, infos } = this.state
+    if (error) {
+      return <Error error={error} />
+    }
+    return infos ? <pre>{JSON.stringify(infos, null, 2)} </pre> : <div>...</div>
+  }
+}
+
+const Informations = withClient(DumbInformations)
+
 /** After login, show logout and revoke buttons */
 const LoggedIn = translate()(
   withClient(({ client, t }) => (
@@ -48,6 +80,7 @@ const LoggedIn = translate()(
       URL: {client.stackClient.uri}
       <br />
       {t('logged-in.client-id')}: {client.stackClient.oauthOptions.clientID}
+      <Informations />
       <div>
         <Button label={t('logged-in.logout')} onClick={() => client.logout()} />
         <Button
