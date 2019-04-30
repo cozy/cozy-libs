@@ -183,6 +183,7 @@ class App extends React.Component {
                 protocol="cozyexample://"
                 appTitle={title}
                 appIcon={icon}
+                appSlug="example"
               >
                 <Route path="/" component={LoggedIn} />
               </MobileRouter>

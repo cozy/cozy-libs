@@ -37,6 +37,7 @@ export class MobileRouter extends Component {
   componentDidMount() {
     this.startListeningToClient()
     this.startHandlingDeeplinks()
+    this.startListeningToUniversalLinks()
     this.tryToReconnect()
   }
 
@@ -69,14 +70,36 @@ export class MobileRouter extends Component {
     client.removeListener('logout', this.afterLogout)
   }
 
+  startListeningToUniversalLinks() {
+    if (window.universalLinks) {
+      window.universalLinks.subscribe(
+        'openUniversalLink',
+        this.openUniversalLink
+      )
+    }
+  }
+
+  stopListeningToUniverserLinks() {
+    if (window.universalLinks) {
+      window.universalLinks.unsubscribe('openUniversalLink')
+    }
+  }
   componentWillUnmount() {
     this.stopHandlingDeeplinks()
     this.stopListeningToClient()
+    this.stopListeningToUniverserLinks()
     this.unmounted = true
   }
 
   update() {
     this.forceUpdate()
+  }
+  startHandlingUniversalLinks(eventData) {
+    /* 
+   openUniversalLink seems to be called only on iOS.
+   android uses handleOpenURL by default ?!
+   */
+    this.handleDeepLink(eventData.url)
   }
 
   startHandlingDeeplinks() {
@@ -221,6 +244,7 @@ MobileRouter.propTypes = {
   children: PropTypes.node,
   appTitle: PropTypes.string.isRequired,
   appIcon: PropTypes.string.isRequired,
+  appSlug: PropTypes.string.isRequired,
 
   onAuthenticated: PropTypes.func,
   onLogout: PropTypes.func,
