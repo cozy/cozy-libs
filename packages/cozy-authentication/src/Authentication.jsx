@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Welcome from './steps/Welcome'
 import SelectServer from './steps/SelectServer'
 import { withClient } from 'cozy-client'
+import withLocales from './withLocales'
 import { registerAndLogin } from './utils/onboarding'
 
 const STEP_WELCOME = 'STEP_WELCOME'
@@ -114,4 +115,4 @@ Authentication.defaultProps = {
 
 export const DumbAuthentication = Authentication
 
-export default withClient(Authentication)
+export default withLocales(withClient(Authentication))

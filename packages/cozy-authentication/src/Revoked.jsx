@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
+import withLocales from './withLocales'
 
 const Revoked = ({ t, onLogBackIn, onLogout }) => (
   <Modal
@@ -22,4 +23,4 @@ Revoked.propTypes = {
   onLogBackIn: PropTypes.func.isRequired
 }
 
-export default withClient(translate()(Revoked))
+export default withLocales(withClient(translate()(Revoked)))

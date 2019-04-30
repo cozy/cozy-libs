@@ -206,20 +206,7 @@ MobileRouter.propTypes = {
   logoutPath: PropTypes.string
 }
 
-const locales = {
-  en: require(`./locales/en.json`),
-  fr: require(`./locales/fr.json`)
-}
-
-const withLocales = Component =>
-  translate()(props => {
-    return (
-      <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
-        <Component {...props} />
-      </I18n>
-    )
-  })
 
 export const DumbMobileRouter = MobileRouter
 
-export default withLocales(withClient(MobileRouter))
+export default withClient(MobileRouter)
