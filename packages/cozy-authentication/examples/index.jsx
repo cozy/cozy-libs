@@ -39,6 +39,7 @@ const styles = {
   }
 }
 
+/** After login, show logout and revok buttons */
 const LoggedIn = withClient(({ client }) => (
   <div style={styles.wrapper}>
     Logged In !<br />
@@ -57,6 +58,7 @@ const Error = ({ error }) => (
   <pre style={styles.error}>An error occured {error.stack}</pre>
 )
 
+/** Catch error and show it */
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
@@ -76,6 +78,7 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+/** Provides lang passed in props inside context */
 class LocaleContext extends React.Component {
   getChildContext() {
     return {
@@ -92,6 +95,7 @@ LocaleContext.childContextTypes = {
   lang: PropTypes.string
 }
 
+/** Buttons to change language */
 const LangChooser = translate()(({ lang, onChange }) => (
   <div style={{ position: 'fixed', zIndex: 1 }}>
     <button onClick={onChange.bind(null, 'en')}>en</button>
