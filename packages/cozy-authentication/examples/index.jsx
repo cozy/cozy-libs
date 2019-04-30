@@ -7,12 +7,11 @@ import { Route, hashHistory } from 'react-router'
 import 'date-fns/locale/en/index'
 
 import 'cozy-ui/transpiled/react/stylesheet.css'
-import { translate, I18n, Button } from 'cozy-ui/transpiled/react'
+import { translate, Button } from 'cozy-ui/transpiled/react'
 import CozyClient, { CozyProvider, withClient } from 'cozy-client'
 
 import { MobileRouter } from '../dist'
 import icon from './icon.png'
-import enLocale from '../src/locales/en.json'
 
 const client = new CozyClient({
   scope: ['io.cozy.files'],
@@ -97,7 +96,7 @@ const LangChooser = translate()(({ lang, onChange }) => (
   <div style={{ position: 'fixed', zIndex: 1 }}>
     <button onClick={onChange.bind(null, 'en')}>en</button>
     <button onClick={onChange.bind(null, 'fr')}>fr</button>
-    locale: { lang }
+    locale: {lang}
   </div>
 ))
 

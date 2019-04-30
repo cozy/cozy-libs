@@ -208,14 +208,17 @@ MobileRouter.propTypes = {
 
 const locales = {
   en: require(`./locales/en.json`),
-  fr: require(`./locales/fr.json`),
+  fr: require(`./locales/fr.json`)
 }
 
-const withLocales = Component => translate()(props => {
-  return <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
-    <Component {...props} />
-  </I18n>
-})
+const withLocales = Component =>
+  translate()(props => {
+    return (
+      <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
+        <Component {...props} />
+      </I18n>
+    )
+  })
 
 export const DumbMobileRouter = MobileRouter
 
