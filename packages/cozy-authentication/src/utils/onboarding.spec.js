@@ -123,7 +123,7 @@ describe('generateURI', () => {
         secret: expect.any(String),
         state: expect.any(String)
       },
-      policiy_uri: 'policyURI',
+      policy_uri: 'policyURI',
       redirect_uri: 'redirectURI',
       software_id: 'softwareID',
       software_version: 'softwareVersion'
