@@ -52,6 +52,40 @@ class Contact extends Document {
       ? getPrimaryOrFirst('cozy')(contact).url
       : contact.url
   }
+
+  /**
+   * Returns the contact's fullname
+   *
+   * @param {Object} contact - A contact
+   **/
+  static getFullname(contact) {
+    if (contact.fullname) {
+      return contact.fullname
+    } else if (contact.name) {
+      return [
+        'namePrefix',
+        'givenName',
+        'additionalName',
+        'familyName',
+        'nameSuffix'
+      ]
+        .map(part => contact.name[part])
+        .filter(part => part !== undefined)
+        .join(' ')
+        .trim()
+    }
+
+    return undefined
+  }
+
+  /**
+   * Returns a display name for the contact
+   *
+   * @param {Object} contact - A contact
+   **/
+  static getDisplayName(contact) {
+    return Contact.getFullname(contact) || Contact.getPrimaryEmail(contact)
+  }
 }
 
 const ContactShape = PropTypes.shape({
