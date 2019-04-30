@@ -1,11 +1,13 @@
 import 'babel-polyfill'
 import React from 'react'
 import ReactDOM from 'react-dom'
+import PropTypes from 'prop-types'
+
 import { Route, hashHistory } from 'react-router'
 import 'date-fns/locale/en/index'
 
 import 'cozy-ui/transpiled/react/stylesheet.css'
-import { I18n, Button } from 'cozy-ui/transpiled/react'
+import { translate, I18n, Button } from 'cozy-ui/transpiled/react'
 import CozyClient, { CozyProvider, withClient } from 'cozy-client'
 
 import { MobileRouter } from '../dist'
@@ -75,25 +77,61 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+class LocaleContext extends React.Component {
+  getChildContext() {
+    return {
+      lang: this.props.lang
+    }
+  }
+
+  render() {
+    return this.props.children
+  }
+}
+
+LocaleContext.childContextTypes = {
+  lang: PropTypes.string
+}
+
+const LangChooser = translate()(({ lang, onChange }) => (
+  <div style={{ position: 'fixed', zIndex: 1 }}>
+    <button onClick={onChange.bind(null, 'en')}>en</button>
+    <button onClick={onChange.bind(null, 'fr')}>fr</button>
+    locale: { lang }
+  </div>
+))
+
 class App extends React.Component {
+  constructor(props) {
+    super(props)
+    this.handleChangeLocale = this.handleChangeLocale.bind(this)
+    this.state = {
+      lang: localStorage.getItem('lang') || navigator.language.substring(0, 2)
+    }
+  }
+
+  handleChangeLocale(lang) {
+    this.setState({ lang })
+    localStorage.setItem('lang', lang)
+  }
+
   render() {
     const { title, icon } = this.props
     return (
       <ErrorBoundary>
-        <CozyProvider client={client}>
-          <I18n lang="en" dictRequire={() => enLocale}>
-            {
-              <MobileRouter
-                history={hashHistory}
-                protocol="cozyexample://"
-                appTitle={title}
-                appIcon={icon}
-              >
-                <Route path="/" component={LoggedIn} />
-              </MobileRouter>
-            }
-          </I18n>
-        </CozyProvider>
+        <LocaleContext lang={this.state.lang}>
+          <LangChooser onChange={this.handleChangeLocale.bind(this)} />
+          <CozyProvider client={client}>
+            <MobileRouter
+              history={hashHistory}
+              protocol="cozyexample://"
+              appTitle={title}
+              appIcon={icon}
+            >
+              <Route path="/" component={LoggedIn} />
+            </MobileRouter>
+          </CozyProvider>
+        </LocaleContext>
       </ErrorBoundary>
     )
   }
