@@ -22,11 +22,22 @@ class Contact extends Document {
       return contact[0].toUpperCase()
     }
 
-    return ['givenName', 'familyName']
-      .map(part => contact.name[part] || '')
-      .map(name => name[0])
-      .join('')
-      .toUpperCase()
+    if (contact.name) {
+      return ['givenName', 'familyName']
+        .map(part => (contact.name && contact.name[part]) || '')
+        .map(name => name[0])
+        .join('')
+        .toUpperCase()
+    }
+
+    const email = Contact.getPrimaryEmail(contact)
+    if (email) {
+      return email[0].toUpperCase()
+    }
+
+    // eslint-disable-next-line no-console
+    console.error('Contact has no name and no email.')
+    return ''
   }
 
   /**
