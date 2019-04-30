@@ -1,18 +1,17 @@
 import { DumbAuthentication } from './Authentication'
 import React from 'react'
 import { shallow } from 'enzyme'
+import CozyClient from 'cozy-client'
 
 describe('Authentication', () => {
   let root, client, instance, onComplete, onException
 
   const setup = () => {
-    client = {
-      register: jest.fn(() => {
-        return { token: 'registrationToken' }
-      }),
-      login: jest.fn(),
-      getStackClient: () => client.stackClient
-    }
+    client = new CozyClient({ oauth: {} })
+    jest
+      .spyOn(client, 'register')
+      .mockImplementation(() => Promise.resolve({ token: '{}' }))
+    jest.spyOn(client.stackClient, 'unregister').mockImplementation(() => {})
     onComplete = jest.fn()
     onException = jest.fn()
     root = shallow(
@@ -41,5 +40,14 @@ describe('Authentication', () => {
     })
     await instance.connectToServer('pbrowne.mycozy.cloud')
     expect(onException).toHaveBeenCalled()
+  })
+
+  it('should unregister the client in case of a problem', async () => {
+    setup()
+    client.register.mockImplementation(() => {
+      throw new Error('No internet...')
+    })
+    await instance.connectToServer('pbrowne.mycozy.cloud')
+    expect(client.stackClient.unregister).toHaveBeenCalled()
   })
 })
