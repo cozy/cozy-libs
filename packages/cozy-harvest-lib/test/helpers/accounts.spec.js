@@ -1,4 +1,10 @@
-import { build, getLabel, mergeAuth } from 'helpers/accounts'
+import {
+  build,
+  getLabel,
+  mergeAuth,
+  updateTwoFaCode,
+  resetState
+} from 'helpers/accounts'
 
 const fixtures = {
   konnector: {
@@ -45,14 +51,47 @@ describe('Accounts Helper', () => {
   })
 
   describe('build', () => {
-    it('should prepare account data', () => {
+    it('should prepare account data with a reset state', () => {
       expect(build(fixtures.konnector, fixtures.data)).toEqual({
         account_type: 'konnectest',
         auth: {
           username: 'foo',
           passphrase: 'bar'
         },
-        identifier: 'username'
+        identifier: 'username',
+        state: null
+      })
+    })
+  })
+
+  describe('updateTwoFaCode', () => {
+    it('should set the 2FA code and reset the state', () => {
+      expect(
+        updateTwoFaCode(
+          {
+            ...fixtures.account,
+            state: 'TWOFA_NEEDED'
+          },
+          'atwofacode'
+        )
+      ).toEqual({
+        ...fixtures.account,
+        state: null,
+        twofa_code: 'atwofacode'
+      })
+    })
+  })
+
+  describe('resetState', () => {
+    it('should reset the state', () => {
+      expect(
+        resetState({
+          ...fixtures.account,
+          state: 'TWOFA_NEEDED'
+        })
+      ).toEqual({
+        ...fixtures.account,
+        state: null
       })
     })
   })
