@@ -8,19 +8,13 @@ import { withClient } from 'cozy-client'
 
 import { nativeLinkOpen } from '../LinkManager'
 
-import {
-  generateOnboardingQueryPart,
-  clearState,
-  clearSecret
-} from '../utils/onboarding'
+import { generateOnboardingQueryPart } from '../utils/onboarding'
 
 export class ButtonLinkRegistration extends Component {
   state = {
     url: ''
   }
   async generateUrl() {
-    await clearState()
-    await clearSecret()
     const oauthOptions = await generateOnboardingQueryPart(
       this.props.client.options.oauth
     )

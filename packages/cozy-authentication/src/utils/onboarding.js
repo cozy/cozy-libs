@@ -15,6 +15,7 @@ export const generateOnboardingQueryPart = async ({
   policyURI,
   scope
 }) => {
+  await localStateSecret.clear()
   const { state, secret } = await localStateSecret.ensureExists()
   const oauthData = {
     redirect_uri: redirectURI,
