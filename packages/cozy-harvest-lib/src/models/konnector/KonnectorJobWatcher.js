@@ -71,6 +71,8 @@ export class KonnectorJobWatcher {
   }
 
   async watch() {
+    this.enableSuccessTimer()
+
     const jobSubscription = await subscribe(
       {
         // Token structure differs between web and mobile
@@ -90,8 +92,6 @@ export class KonnectorJobWatcher {
       if (state === JOB_STATE_DONE) this.handleSuccess(this.job)
       if (state === JOB_STATE_ERRORED) this.handleError(this.job.error)
     })
-
-    this.enableSuccessTimer()
   }
 }
 
