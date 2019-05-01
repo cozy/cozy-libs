@@ -51,6 +51,6 @@
   "peerDependencies": {
     "cozy-client": "6.21.0",
     "cozy-realtime": "2.0.8",
-    "cozy-ui": "19.24.3"
+    "cozy-ui": "19.28.0"
   }
 }
