@@ -51,7 +51,6 @@ export class KonnectorJobWatcher {
     this.disableSuccessTimer()
     if (this._error || this._succeed) return
 
-    this._succeed = true
     this.emit('loginSuccess', this.job)
   }
 
