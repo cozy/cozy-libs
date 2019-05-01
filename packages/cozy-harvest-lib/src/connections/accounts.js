@@ -151,6 +151,7 @@ const watchKonnectorAccount = (client, account, options) => {
  */
 export const accountsMutations = client => ({
   createAccount: createAccount.bind(null, client),
+  findAccount: findAccount.bind(null, client),
   updateAccount: updateAccount.bind(null, client),
   saveAccount: saveAccount.bind(null, client),
   watchKonnectorAccount: watchKonnectorAccount.bind(null, client)
