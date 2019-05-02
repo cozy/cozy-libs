@@ -67,14 +67,14 @@ describe('Socket', () => {
     await socket.connect()
   })
 
-  it('should emit message with options and doc parameter', async done => {
+  it('should emit message with config and doc parameter', async done => {
     const type = 'io.cozy.accounts'
     const id = 1234
     const doc = 'doc'
     const event = 'created'
 
-    socket.on('message', (options, _doc) => {
-      expect(options).toEqual({ eventName: event, id, type })
+    socket.on('message', (config, _doc) => {
+      expect(config).toEqual({ eventName: event, id, type })
       expect(_doc).toBe(doc)
       done()
     })

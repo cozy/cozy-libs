@@ -23,109 +23,121 @@ const COZY_CLIENT = new CozyClient()
 const pause = time => new Promise(resolve => setTimeout(resolve, time))
 
 describe('Realtime', () => {
-  let server
+  let realtime, cozyStack
 
   beforeEach(() => {
-    server = new Server(WS_URL)
+    realtime = new Realtime(COZY_CLIENT)
+    cozyStack = new Server(WS_URL)
+    cozyStack.emitMessage = (type, doc, event, id) => {
+      cozyStack.emit(
+        'message',
+        JSON.stringify({ payload: { type, doc, id }, event })
+      )
+    }
   })
 
   afterEach(() => {
-    server.stop()
+    realtime.unsubscribeAll()
+    cozyStack.stop()
   })
 
   const type = 'io.cozy.bank.accounts'
-  const options = { type, eventName: 'created' }
-  const doc1 = { title: 'title1' }
-  const doc2 = { title: 'title2' }
-  const fakeMessage1 = { payload: { type, doc: doc1 }, event: 'CREATED' }
-  const fakeMessage2 = { payload: { type, doc: doc2 }, event: 'CREATED' }
+  const id = 'doc_id'
+  const fakeDoc = { _id: id, title: 'title1' }
 
-  it('should launch handler after subscribe', async done => {
-    const realtime = new Realtime(COZY_CLIENT)
-
-    const handler = jest
-      .fn()
-      .mockImplementationOnce(doc => {
-        expect(doc).toEqual(doc1)
-      })
-      .mockImplementationOnce(doc => {
-        expect(doc).toEqual(doc2)
-        expect(handler.mock.calls.length).toBe(2)
-      })
-      .mockImplementationOnce(doc => {
-        expect(doc).toEqual(doc2)
-        expect(realtime._socket.isOpen()).toBe(true)
-        expect(handler.mock.calls.length).toBe(3)
-
-        realtime.unsubscribeAll()
-        expect(realtime._socket.isOpen()).toBe(false)
-        done()
-      })
-
-    await realtime.subscribe(options, handler)
-    server.emit('message', JSON.stringify(fakeMessage1))
-    expect(realtime._socket.isOpen()).toBe(true)
-    expect(handler.mock.calls.length).toBe(1)
-
-    await realtime.unsubscribe(options, handler)
-    server.emit('message', JSON.stringify(fakeMessage2))
-    expect(realtime._socket.isOpen()).toBe(false)
-    expect(handler.mock.calls.length).toBe(1)
-
-    await realtime.subscribe(options, handler)
-    server.emit('message', JSON.stringify(fakeMessage2))
-
-    server.simulate('error')
-    expect(realtime._socket.isOpen()).toBe(false)
-
-    new Promise(resolve => {
-      setTimeout(() => {
-        server.emit('message', JSON.stringify(fakeMessage2))
-        resolve()
-      }, 1100)
+  it('should launch handler when document is created', async done => {
+    await realtime.onCreate({ type }, doc => {
+      expect(doc).toEqual(fakeDoc)
+      done()
     })
+
+    cozyStack.emitMessage(type, fakeDoc, 'CREATED')
+  })
+
+  it('should throw an error when config has id for onCreate', () => {
+    expect(() => realtime.onCreate({ type, id: 'my_id' }, () => {})).toThrow()
+  })
+
+  it('should launch handler when document is updated', async done => {
+    await realtime.onUpdate({ type }, doc => {
+      expect(doc).toEqual(fakeDoc)
+      done()
+    })
+
+    cozyStack.emitMessage(type, fakeDoc, 'UPDATED')
+  })
+
+  it('should launch handler when document with id is updated', async done => {
+    await realtime.onUpdate({ type, id: fakeDoc._id }, doc => {
+      expect(doc).toEqual(fakeDoc)
+      done()
+    })
+
+    cozyStack.emitMessage(type, fakeDoc, 'UPDATED', fakeDoc._id)
+  })
+
+  it('should launch handler when document is deleted', async done => {
+    await realtime.onDelete({ type }, doc => {
+      expect(doc).toEqual(fakeDoc)
+      done()
+    })
+
+    cozyStack.emitMessage(type, fakeDoc, 'DELETED')
+  })
+
+  it('should launch handler when document with id is deleted', async done => {
+    await realtime.onDelete({ type, id: fakeDoc._id }, doc => {
+      expect(doc).toEqual(fakeDoc)
+      done()
+    })
+
+    cozyStack.emitMessage(type, fakeDoc, 'DELETED', fakeDoc._id)
+  })
+
+  it('should unsubscribe event', async () => {
+    const handler = jest.fn()
+    await realtime.onCreate({ type }, handler)
+    expect(realtime._socket.isOpen()).toBe(true)
+    await realtime.unsubscribe({ type }, handler)
+    expect(realtime._socket.isOpen()).toBe(false)
   })
 
   it('should relauch socket subscribe after an error', async () => {
-    const realtime = new Realtime(COZY_CLIENT)
     const handler = jest.fn()
 
-    await realtime.subscribe(options, handler)
+    await realtime.onCreate({ type }, handler)
     realtime._retryDelay = 100
 
     expect(realtime._socket.isOpen()).toBe(true)
-    server.simulate('error')
+    cozyStack.simulate('error')
     expect(realtime._socket.isOpen()).toBe(false)
+    cozyStack.emitMessage(type, fakeDoc, 'CREATED')
+    expect(handler.mock.calls.length).toBe(0)
+
     await pause(200)
     expect(realtime._socket.isOpen()).toBe(true)
-
-    server.emit('message', JSON.stringify(fakeMessage1))
+    cozyStack.emitMessage(type, fakeDoc, 'CREATED')
     expect(handler.mock.calls.length).toBe(1)
   })
 
   it('should emit error when retry limit is exceeded', async done => {
-    const realtime = new Realtime(COZY_CLIENT)
     realtime._retryLimit = 0
 
     realtime.on('error', () => done())
     const handler = jest.fn()
 
-    await realtime.subscribe(options, handler)
+    await realtime.onCreate({ type }, handler)
     expect(realtime._socket.isOpen()).toBe(true)
-    server.simulate('error')
+    cozyStack.simulate('error')
   })
 
   it('should update socket authentication when client login', async () => {
-    const realtime = new Realtime(COZY_CLIENT)
-
     realtime._socket.updateAuthentication = jest.fn()
     COZY_CLIENT.emit('login')
     expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
   })
 
   it('should update socket authentication when client token refreshed ', async () => {
-    const realtime = new Realtime(COZY_CLIENT)
-
     realtime._socket.updateAuthentication = jest.fn()
     COZY_CLIENT.emit('login')
     expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
@@ -133,17 +145,17 @@ describe('Realtime', () => {
 })
 
 describe('generateKey', () => {
-  it('should return key from options', () => {
-    let options = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
-    expect(generateKey(options)).toBe('io.cozy.bank.accounts\\created')
-    options = {
+  it('should return key from config', () => {
+    let config = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
+    expect(generateKey(config)).toBe('io.cozy.bank.accounts\\created')
+    config = {
       type: 'io.cozy.bank.accounts',
       eventName: EVENT_CREATED,
       id: 'dzqezfd'
     }
-    expect(generateKey(options)).toBe('io.cozy.bank.accounts\\created\\dzqezfd')
-    options = { type: 'io.cozy.bank.accounts', id: 'dzqezfd' }
-    expect(generateKey(options)).toBe('io.cozy.bank.accounts\\dzqezfd')
+    expect(generateKey(config)).toBe('io.cozy.bank.accounts\\created\\dzqezfd')
+    config = { type: 'io.cozy.bank.accounts', id: 'dzqezfd' }
+    expect(generateKey(config)).toBe('io.cozy.bank.accounts\\dzqezfd')
   })
 })
 

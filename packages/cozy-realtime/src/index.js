@@ -227,16 +227,41 @@ class CozyRealtime {
    * given type on the given doctype or document is received from stack.
    * @return {Promise}           Promise that the message has been sent.
    */
-  subscribe(options, handler) {
-    const key = generateKey(options)
+  _subscribe(config, handler) {
+    const key = generateKey(config)
 
     return new Promise(resolve => {
       this.on(key, handler)
       this._numberOfHandlers++
 
       this._socket.once('subscribe', resolve)
-      this._socket.subscribe(options.type, options.id)
+      this._socket.subscribe(config.type, config.id)
     })
+  }
+
+  _validateConfig(name, config, authorize) {
+    const notAllowed = Object.keys(config).filter(k => !authorize.includes(k))
+    if (notAllowed.length > 0) {
+      throw new Error(`'${name}' not allow '${notAllowed}' configuration.`)
+    }
+  }
+
+  onCreate(config, handler) {
+    this._validateConfig('onCreate', config, ['type'])
+
+    return this._subscribe({ ...config, eventName: EVENT_CREATED }, handler)
+  }
+
+  onUpdate(config, handler) {
+    this._validateConfig('onUpdate', config, ['type', 'id'])
+
+    return this._subscribe({ ...config, eventName: EVENT_UPDATED }, handler)
+  }
+
+  onDelete(config, handler) {
+    this._validateConfig('onUpdate', config, ['type', 'id'])
+
+    return this._subscribe({ ...config, eventName: EVENT_DELETED }, handler)
   }
 
   /**
@@ -249,8 +274,8 @@ class CozyRealtime {
    * @param {Function}  handler   Function to call when an event of the
    * given type on the given doctype or document is received from stack.
    */
-  unsubscribe(options, handler) {
-    const key = generateKey(options)
+  unsubscribe(config, handler) {
+    const key = generateKey(config)
 
     return new Promise(resolve => {
       this._socket.once('close', resolve)
