@@ -1,6 +1,10 @@
 import MicroEE from 'microee'
 import Socket from './Socket'
 import compact from 'lodash/compact'
+import minilog from 'minilog'
+
+const logger = minilog('cozy-realtime')
+minilog.suggest.deny('cozy-realtime', 'info')
 
 export const EVENT_CREATED = 'created'
 export const EVENT_UPDATED = 'updated'

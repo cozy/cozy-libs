@@ -37,5 +37,8 @@
       "!<rootDir>/node_modules/",
       "!<rootDir>/test/"
     ]
+  },
+  "dependencies": {
+    "minilog": "3.1.0"
   }
 }
