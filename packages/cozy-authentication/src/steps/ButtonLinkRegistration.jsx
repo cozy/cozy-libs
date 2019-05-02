@@ -63,4 +63,5 @@ ButtonLinkRegistration.propTypes = {
   client: PropTypes.object.isRequired
 }
 
+export const DumbButtonRegistration = ButtonLinkRegistration
 export default withClient(ButtonLinkRegistration)
