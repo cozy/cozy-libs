@@ -78,14 +78,15 @@ class CozyRealtime {
   constructor(cozyClient) {
     this._cozyClient = cozyClient
 
+    this._updateSocketAuthentication = this._updateSocketAuthentication.bind(this)
+    this.unsubscribeAll = this.unsubscribeAll.bind(this)
+    this._receiveMessage = this._receiveMessage.bind(this)
+
     this._createSocket()
 
-    this._cozyClient.on('login', this._createSocket.bind(this))
-    this._cozyClient.on(
-      'tokenRefreshed',
-      this._updateSocketAuthentication.bind(this)
-    )
-    this._cozyClient.on('logout', this.unsubscribeAll.bind(this))
+    this._cozyClient.on('login', this._updateSocketAuthentication)
+    this._cozyClient.on('tokenRefreshed', this._updateSocketAuthentication)
+    this._cozyClient.on('logout', this.unsubscribeAll)
   }
 
   /**
@@ -97,7 +98,7 @@ class CozyRealtime {
       const token = getWebSocketToken(this._cozyClient)
 
       this._socket = new Socket(url, token)
-      this._socket.on('message', this._receiveMessage.bind(this))
+      this._socket.on('message', this._receiveMessage)
     }
   }
 
