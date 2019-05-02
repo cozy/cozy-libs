@@ -36,6 +36,11 @@ export class AccountField extends PureComponent {
 
   setInputRef(element) {
     this.inputRef = element
+
+    const { inputRef } = this.props
+    if (typeof inputRef === 'function') {
+      inputRef(element)
+    }
   }
 
   render() {
@@ -129,6 +134,10 @@ AccountField.propTypes = {
    * Initial value of the field
    */
   initialValue: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+  /**
+   * A callback to call on Field input ref.
+   */
+  inputRef: PropTypes.func,
   /**
    * Optionnal predefined label, used as locale key.
    */
