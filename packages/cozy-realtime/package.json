@@ -27,8 +27,13 @@
     "mock-socket": "8.0.5"
   },
   "jest": {
+    "testPathIgnorePatterns": [
+      "<rootDir>/node_modules/",
+      "<rootDir>/dist/",
+      "<rootDir>/coverage/"
+    ],
     "collectCoverageFrom": [
-      "src/**/*.js",
+      "<rootDir>/src/*.js",
       "!<rootDir>/node_modules/",
       "!<rootDir>/test/"
     ]
