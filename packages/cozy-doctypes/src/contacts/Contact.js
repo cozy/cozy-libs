@@ -9,12 +9,17 @@ const getPrimaryOrFirst = property => obj => {
   return obj[property].find(property => property.primary) || obj[property][0]
 }
 
+/**
+ * Class representing the contact model.
+ * @extends Document
+ */
 class Contact extends Document {
   /**
    * Returns true if candidate is a contact
    *
    * @param {Object} candidate
-   **/
+   * @return {boolean} - whether the candidate is a contact
+   */
   static isContact(candidate) {
     return candidate._type === Contact.doctype
   }
@@ -23,7 +28,8 @@ class Contact extends Document {
    * Returns the initials of the contact.
    *
    * @param {Object|string} contact - A contact or a string
-   **/
+   * @return {string} - the contact's initials
+   */
   static getInitials(contact) {
     if (typeof contact === 'string') {
       log(
@@ -53,7 +59,8 @@ class Contact extends Document {
    * Returns the contact's main email
    *
    * @param {Object} contact - A contact
-   **/
+   * @return {string} - The contact's main email
+   */
   // TODO: sadly we have different versions of contacts' doctype to handle...
   // A migration tool on the stack side is needed here
   static getPrimaryEmail(contact) {
@@ -66,7 +73,8 @@ class Contact extends Document {
    * Returns the contact's main cozy
    *
    * @param {Object} contact - A contact
-   **/
+   * @return {string} - The contact's main cozy
+   */
   static getPrimaryCozy(contact) {
     return Array.isArray(contact.cozy)
       ? getPrimaryOrFirst('cozy')(contact).url
@@ -77,7 +85,8 @@ class Contact extends Document {
    * Returns the contact's fullname
    *
    * @param {Object} contact - A contact
-   **/
+   * @return {string} - The contact's fullname
+   */
   static getFullname(contact) {
     if (contact.fullname) {
       return contact.fullname
@@ -102,6 +111,7 @@ class Contact extends Document {
    * Returns a display name for the contact
    *
    * @param {Object} contact - A contact
+   * @return {string} - the contact's display name
    **/
   static getDisplayName(contact) {
     return Contact.getFullname(contact) || Contact.getPrimaryEmail(contact)
