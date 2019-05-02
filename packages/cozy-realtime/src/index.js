@@ -133,7 +133,7 @@ class CozyRealtime {
   _receiveError(error) {
     logger.info(`Receive error: ${error}`)
     setTimeout(this._resubscribe, this._retryDelay)
-    this._closeSocket()
+    this._resetSocket()
   }
 
   /**
@@ -180,16 +180,16 @@ class CozyRealtime {
   /**
    * Launch close socket if no handler
    */
-  _closeSocketIfNoHandler() {
+  _resetSocketIfNoHandler() {
     if (this._numberOfHandlers === 0) {
-      this._closeSocket()
+      this._resetSocket()
     }
   }
 
   /**
-   * Close socket
+   * Reset socket
    */
-  _closeSocket() {
+  _resetSocket() {
     if (this._socket) {
       this._socket.close()
       this._socket = null
@@ -237,7 +237,7 @@ class CozyRealtime {
       this._socket.once('close', resolve)
       this.removeListener(key, handler)
       this._numberOfHandlers--
-      this._closeSocketIfNoHandler()
+      this._resetSocketIfNoHandler()
     })
   }
 
@@ -247,7 +247,7 @@ class CozyRealtime {
   unsubscribeAll() {
     this.removeAllListeners()
     this._numberOfHandlers = 0
-    this._closeSocket()
+    this._resetSocket()
   }
 }
 
