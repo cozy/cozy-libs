@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.12.2"></a>
+## [1.12.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.12.1...cozy-authentication@1.12.2) (2019-05-02)
+
+
+### Bug Fixes
+
+* Do not try to onboarding if required query argument are absent ([244af9d](https://github.com/cozy/cozy-libs/commit/244af9d))
+
+
+
+
 <a name="1.12.1"></a>
 ## [1.12.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.12.0...cozy-authentication@1.12.1) (2019-05-02)
 
