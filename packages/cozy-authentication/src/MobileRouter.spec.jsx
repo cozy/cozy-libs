@@ -1,8 +1,8 @@
 import React from 'react'
 import { mount } from 'enzyme'
-import PropTypes from 'prop-types'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
+import { I18n } from 'cozy-ui/transpiled/react/I18n'
 
 import Authentication from './Authentication'
 import MobileRouter, {
@@ -15,20 +15,6 @@ import * as onboarding from './utils/onboarding'
 jest.mock('react-router', () => ({
   Router: props => props.children
 }))
-
-class I18n extends React.Component {
-  static childContextTypes = {
-    t: PropTypes.func
-  }
-
-  getChildContext() {
-    return { t: this.props.t }
-  }
-
-  render() {
-    return this.props.children
-  }
-}
 
 const AppRoutes = () => <div />
 const LoggingOut = () => <div>Logging out...</div>
@@ -69,7 +55,7 @@ describe('MobileRouter', () => {
   const setup = () => {
     app = mount(
       <CozyProvider client={client}>
-        <I18n t={x => x}>
+        <I18n t={x => x} lang="en" dictRequire={() => ({})}>
           <MobileRouter
             {...props}
             loginPath="/afterLogin"
