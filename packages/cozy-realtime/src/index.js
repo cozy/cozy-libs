@@ -100,7 +100,8 @@ class CozyRealtime {
     this._receiveMessage = this._receiveMessage.bind(this)
     this._receiveError = this._receiveError.bind(this)
     this._resubscribe = this._resubscribe.bind(this)
-    this._windowUnload = this._windowUnload.bind(this)
+    this._beforeUnload = this._beforeUnload.bind(this)
+    this._resetSocket = this._resetSocket.bind(this)
 
     this._createSocket()
 
@@ -108,13 +109,15 @@ class CozyRealtime {
     this._cozyClient.on('tokenRefreshed', this._updateAuthentication)
     this._cozyClient.on('logout', this.unsubscribeAll)
 
-    if (window) {
-      window.addEventListener('beforeunload', this._windowUnload)
+    if (global) {
+      global.addEventListener('beforeunload', this._beforeUnload)
+      global.addEventListener('online', this._resubscribe)
+      global.removeEventListener('offline', this._resetSocket)
     }
   }
 
-  _windowUnload() {
-    window.removeEventListener('beforeunload', this._windowUnload)
+  _beforeUnload() {
+    global.removeEventListener('beforeunload', this._windowUnload)
     this.unsubscribeAll()
   }
 
@@ -146,7 +149,9 @@ class CozyRealtime {
       if (this.retry) {
         clearTimeout(this.retry)
       }
-      this.retry = setTimeout(this._resubscribe, this._retryDelay)
+      if (global.navigator.onLine) {
+        this.retry = setTimeout(this._resubscribe, this._retryDelay)
+      }
     }
   }
 
