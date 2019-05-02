@@ -97,7 +97,10 @@ export const doOnboardingLogin = async (
 export const registerAndLogin = async (client, url) => {
   try {
     const { token } = await client.register(url)
-    await client.login({ url, token })
+    await client.login({
+      uri: url,
+      token
+    })
   } catch (registerError) {
     client.stackClient.unregister().catch(() => {})
     throw registerError
