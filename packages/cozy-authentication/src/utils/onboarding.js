@@ -59,9 +59,9 @@ export const doOnboardingLogin = async (
       throw new Error('Received state different from local state')
     }
 
-    const url = addProtocolToDomain(domain)
+    const uri = addProtocolToDomain(domain)
     const clientInfo = await client.stackClient.exchangeOAuthSecret(
-      url,
+      uri,
       localSecret
     )
 
@@ -83,9 +83,9 @@ export const doOnboardingLogin = async (
     const token = await client.stackClient.fetchAccessToken(
       accessCode,
       oauthOptions,
-      url
+      uri
     )
-    await client.login({ url, token })
+    await client.login({ uri, token })
   } catch (e) {
     // eslint-disable-next-line no-console
     console.error('Could not automatically login', e)
