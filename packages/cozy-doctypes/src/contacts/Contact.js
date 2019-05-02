@@ -11,6 +11,15 @@ const getPrimaryOrFirst = property => obj => {
 
 class Contact extends Document {
   /**
+   * Returns true if candidate is a contact
+   *
+   * @param {Object} candidate
+   **/
+  static isContact(candidate) {
+    return candidate._type === Contact.doctype
+  }
+
+  /**
    * Returns the initials of the contact.
    *
    * @param {Object|string} contact - A contact or a string
