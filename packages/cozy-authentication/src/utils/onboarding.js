@@ -54,7 +54,6 @@ export const doOnboardingLogin = async (
       state: localState,
       secret: localSecret
     } = await localStateSecret.read()
-
     if (localState !== receivedState) {
       throw new Error('Received state different from local state')
     }

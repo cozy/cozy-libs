@@ -26,11 +26,13 @@ describe('MobileRouter', () => {
     history,
     appIcon,
     appTitle,
+    appSlug,
     app,
     client,
     currentLocation,
     props,
-    LogoutComponent
+    LogoutComponent,
+    universalLinkDomain
 
   beforeEach(() => {
     appRoutes = <AppRoutes />
@@ -42,9 +44,20 @@ describe('MobileRouter', () => {
     }
     appIcon = 'icon.png'
     appTitle = 'Test App'
+    appSlug = 'test'
+    universalLinkDomain = 'https://ul.mycozy.cloud'
     app = null
     client = new CozyClient({})
-    props = { appRoutes, onAuthenticated, onLogout, history, appIcon, appTitle }
+    props = {
+      appRoutes,
+      onAuthenticated,
+      onLogout,
+      history,
+      appIcon,
+      appTitle,
+      appSlug,
+      universalLinkDomain
+    }
     LogoutComponent = null
   })
 
