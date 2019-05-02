@@ -23,7 +23,9 @@ export class MobileRouter extends Component {
     super(props)
     this.update = this.update.bind(this)
     this.handleDeepLink = this.handleDeepLink.bind(this)
-
+    this.startHandlingUniversalLinks = this.startHandlingUniversalLinks.bind(
+      this
+    )
     this.handleLogBackIn = this.handleLogBackIn.bind(this)
     this.afterAuthentication = this.afterAuthentication.bind(this)
 
@@ -37,6 +39,7 @@ export class MobileRouter extends Component {
   componentDidMount() {
     this.startListeningToClient()
     this.startHandlingDeeplinks()
+    this.startListeningToUniversalLinks()
     this.tryToReconnect()
   }
 
@@ -69,14 +72,31 @@ export class MobileRouter extends Component {
     client.removeListener('logout', this.afterLogout)
   }
 
+  startListeningToUniversalLinks() {
+    if (window.universalLinks) {
+      window.universalLinks.subscribe(
+        'openUniversalLink',
+        this.startHandlingUniversalLinks
+      )
+    }
+  }
+
   componentWillUnmount() {
     this.stopHandlingDeeplinks()
     this.stopListeningToClient()
+    this.stopListeningToUniversalLinks()
     this.unmounted = true
   }
 
   update() {
     this.forceUpdate()
+  }
+  startHandlingUniversalLinks(eventData) {
+    /* 
+    @TODO: openUniversalLink seems to be called only on iOS.
+    android uses handleOpenURL by default ?!
+   */
+    this.handleDeepLink(eventData.url)
   }
 
   startHandlingDeeplinks() {
@@ -94,13 +114,25 @@ export class MobileRouter extends Component {
     window.handleOpenURL = this.originalHandleOpenURL
   }
 
+  stopListeningToUniversalLinks() {
+    if (window.universalLinks) {
+      window.universalLinks.unsubscribe('openUniversalLink')
+    }
+  }
+
   handleDeepLink(url) {
+    const { protocol, appSlug, universalLinkDomain } = this.props
     url = url || deeplink.get()
     deeplink.clear()
     if (!url) {
       return
     }
-    const path = url.replace(this.props.protocol, '')
+    const appInfos = {
+      protocol,
+      appSlug,
+      universalLinkDomain
+    }
+    const path = deeplink.generateRoute(url, appInfos)
     this.props.history.replace('/' + path)
     if (path.startsWith('auth')) {
       this.handleAuth()
@@ -221,6 +253,9 @@ MobileRouter.propTypes = {
   children: PropTypes.node,
   appTitle: PropTypes.string.isRequired,
   appIcon: PropTypes.string.isRequired,
+  appSlug: PropTypes.string.isRequired,
+
+  universalLinkDomain: PropTypes.string.isRequired,
 
   onAuthenticated: PropTypes.func,
   onLogout: PropTypes.func,

@@ -9,10 +9,6 @@ const generateRandomString = () => {
     .substr(2, 11)
 }
 
-export const writeState = state => {
-  return localforage.setItem(ONBOARDING_STATE, state)
-}
-
 export const read = async () => {
   const state = await localforage.getItem(ONBOARDING_STATE)
   const secret = await localforage.getItem(ONBOARDING_SECRET_KEY)

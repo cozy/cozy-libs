@@ -8,6 +8,8 @@ import 'date-fns/locale/en/index'
 
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import { I18n, translate, Button } from 'cozy-ui/transpiled/react'
+import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
+
 import CozyClient, { CozyProvider, withClient } from 'cozy-client'
 
 import { MobileRouter } from '../dist'
@@ -181,8 +183,10 @@ class App extends React.Component {
               <MobileRouter
                 history={hashHistory}
                 protocol="cozyexample://"
+                universalLinkDomain={getUniversalLinkDomain()}
                 appTitle={title}
                 appIcon={icon}
+                appSlug="example"
               >
                 <Route path="/" component={LoggedIn} />
               </MobileRouter>
