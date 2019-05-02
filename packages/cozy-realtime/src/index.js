@@ -89,7 +89,9 @@ class CozyRealtime {
   constructor(cozyClient) {
     this._cozyClient = cozyClient
 
-    this._updateSocketAuthentication = this._updateSocketAuthentication.bind(this)
+    this._updateSocketAuthentication = this._updateSocketAuthentication.bind(
+      this
+    )
     this.unsubscribeAll = this.unsubscribeAll.bind(this)
     this._receiveMessage = this._receiveMessage.bind(this)
     this._receiveError = this._receiveError.bind(this)
@@ -131,11 +133,13 @@ class CozyRealtime {
   _resubscribe() {
     this._retryDelay = this._retryDelay * 2
 
-    const subscribeList = Object.keys(this._events).map(key => {
-      if (!key.includes(INDEX_KEY_SEPARATOR)) return
-      const [ type, eventName, id ] = key.split(INDEX_KEY_SEPARATOR)
-      return { type, id }
-    }).filter(Boolean)
+    const subscribeList = Object.keys(this._events)
+      .map(key => {
+        if (!key.includes(INDEX_KEY_SEPARATOR)) return
+        const [type, , id] = key.split(INDEX_KEY_SEPARATOR)
+        return { type, id }
+      })
+      .filter(Boolean)
 
     for (const { type, id } of subscribeList) {
       this._socket.subscribe(type, id)
