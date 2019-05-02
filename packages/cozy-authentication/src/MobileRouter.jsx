@@ -23,7 +23,7 @@ export class MobileRouter extends Component {
     super(props)
     this.update = this.update.bind(this)
     this.handleDeepLink = this.handleDeepLink.bind(this)
-    this.startHandlingUniversalLinks = this.startHandlingUniversalLinks.bind(
+    this.handleUniversalLink = this.handleUniversalLink.bind(
       this
     )
     this.handleLogBackIn = this.handleLogBackIn.bind(this)
@@ -76,7 +76,7 @@ export class MobileRouter extends Component {
     if (window.universalLinks) {
       window.universalLinks.subscribe(
         'openUniversalLink',
-        this.startHandlingUniversalLinks
+        this.handleUniversalLink
       )
     }
   }
@@ -91,7 +91,8 @@ export class MobileRouter extends Component {
   update() {
     this.forceUpdate()
   }
-  startHandlingUniversalLinks(eventData) {
+
+  handleUniversalLink(eventData) {
     /* 
     @TODO: openUniversalLink seems to be called only on iOS.
     android uses handleOpenURL by default ?!
