@@ -21,7 +21,7 @@
     "@babel/core": "^7.3.4",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-preset-cozy-app": "^1.5.1",
-    "cozy-client": "6.25.0",
+    "cozy-client": "^6.26.0",
     "cozy-ui": "^19.28.0",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
