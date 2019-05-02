@@ -81,7 +81,7 @@ class CozyRealtime {
    * Constructor of CozyRealtime:
    * - Save cozyClient
    * - create socket
-   * - listen cozyClient event
+   * - listen cozyClient events
    *
    * @constructor
    * @param {CozyClient} cozyClient  A cozy client
