@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.1"></a>
+## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.9.0...cozy-authentication@1.9.1) (2019-05-02)
+
+
+### Bug Fixes
+
+* doOnboardingLogin called client.login with url instead of uri ([a57d59d](https://github.com/cozy/cozy-libs/commit/a57d59d))
+
+
+
+
 <a name="1.9.0"></a>
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.8.0...cozy-authentication@1.9.0) (2019-05-02)
 
