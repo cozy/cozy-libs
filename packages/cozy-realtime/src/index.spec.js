@@ -20,6 +20,7 @@ class CozyClient {
 }
 MicroEE.mixin(CozyClient)
 const COZY_CLIENT = new CozyClient()
+const pause = time => new Promise(resolve => setTimeout(resolve, time))
 
 describe('Realtime', () => {
   let server
@@ -32,14 +33,15 @@ describe('Realtime', () => {
     server.stop()
   })
 
+  const type = 'io.cozy.bank.accounts'
+  const options = { type, eventName: 'created' }
+  const doc1 = { title: 'title1' }
+  const doc2 = { title: 'title2' }
+  const fakeMessage1 = { payload: { type, doc: doc1 }, event: 'CREATED' }
+  const fakeMessage2 = { payload: { type, doc: doc2 }, event: 'CREATED' }
+
   it('should launch handler after subscribe', async done => {
-    const type = 'io.cozy.bank.accounts'
     const realtime = new Realtime(COZY_CLIENT)
-    const options = { type, eventName: 'created' }
-    const doc1 = { title: 'title1' }
-    const doc2 = { title: 'title2' }
-    const fakeMessage1 = { payload: { type, doc: doc1 }, event: 'CREATED' }
-    const fakeMessage2 = { payload: { type, doc: doc2 }, event: 'CREATED' }
 
     const handler = jest
       .fn()
@@ -49,6 +51,11 @@ describe('Realtime', () => {
       .mockImplementationOnce(doc => {
         expect(doc).toEqual(doc2)
         expect(handler.mock.calls.length).toBe(2)
+      })
+      .mockImplementationOnce(doc => {
+        expect(doc).toEqual(doc2)
+        expect(realtime._socket.isOpen()).toBe(true)
+        expect(handler.mock.calls.length).toBe(3)
 
         realtime.unsubscribeAll()
         expect(realtime._socket.isOpen()).toBe(false)
@@ -67,6 +74,65 @@ describe('Realtime', () => {
 
     await realtime.subscribe(options, handler)
     server.emit('message', JSON.stringify(fakeMessage2))
+
+    server.simulate('error')
+    expect(realtime._socket.isOpen()).toBe(false)
+
+    new Promise(resolve => {
+      setTimeout(() => {
+        server.emit('message', JSON.stringify(fakeMessage2))
+        resolve()
+      }, 1100)
+    })
+  })
+
+  it('should relauch socket subscribe after an error', async () => {
+    const realtime = new Realtime(COZY_CLIENT)
+    const handler = jest.fn()
+
+    await realtime.subscribe(options, handler)
+    realtime._retryDelay = 100
+
+    // restart after 100ms
+    server.simulate('error')
+    expect(realtime._socket.isOpen()).toBe(false)
+    await pause(200)
+    expect(realtime._socket.isOpen()).toBe(true)
+
+    // restart after 200ms
+    server.simulate('error')
+    expect(realtime._socket.isOpen()).toBe(false)
+    await pause(200)
+    expect(realtime._socket.isOpen()).toBe(false)
+    await pause(100)
+    expect(realtime._socket.isOpen()).toBe(true)
+
+    // restart after 400ms
+    server.simulate('error')
+    expect(realtime._socket.isOpen()).toBe(false)
+    await pause(400)
+    expect(realtime._socket.isOpen()).toBe(false)
+    await pause(800)
+    expect(realtime._socket.isOpen()).toBe(true)
+
+    server.emit('message', JSON.stringify(fakeMessage1))
+    expect(handler.mock.calls.length).toBe(1)
+  })
+
+  it('should update socket authentication when client login', async () => {
+    const realtime = new Realtime(COZY_CLIENT)
+
+    realtime._socket.updateAuthentication = jest.fn()
+    COZY_CLIENT.emit('login')
+    expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
+  })
+
+  it('should update socket authentication when client token refreshed ', async () => {
+    const realtime = new Realtime(COZY_CLIENT)
+
+    realtime._socket.updateAuthentication = jest.fn()
+    COZY_CLIENT.emit('login')
+    expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
   })
 })
 
@@ -79,7 +145,7 @@ describe('generateKey', () => {
       eventName: EVENT_CREATED,
       id: 'dzqezfd'
     }
-    expect(generateKey(options)).toBe('io.cozy.bank.accounts\\dzqezfd\\created')
+    expect(generateKey(options)).toBe('io.cozy.bank.accounts\\created\\dzqezfd')
     options = { type: 'io.cozy.bank.accounts', id: 'dzqezfd' }
     expect(generateKey(options)).toBe('io.cozy.bank.accounts\\dzqezfd')
   })

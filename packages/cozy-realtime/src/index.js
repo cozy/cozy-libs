@@ -18,7 +18,7 @@ const INDEX_KEY_SEPARATOR = '\\'
  * @return {String}  Event key
  */
 export const generateKey = ({ type, id, eventName }) =>
-  compact([type, id, eventName]).join(INDEX_KEY_SEPARATOR)
+  compact([type, eventName, id]).join(INDEX_KEY_SEPARATOR)
 
 /**
  * Return websocket url from cozyClient
@@ -71,6 +71,13 @@ class CozyRealtime {
   _socket = null
 
   /**
+   * Delay (ms) to retry socket connection
+   *
+   * @type {Interger}
+   */
+  _retryDelay = 1000
+
+  /**
    * Constructor of CozyRealtime:
    * - Save cozyClient
    * - create socket
@@ -85,6 +92,8 @@ class CozyRealtime {
     this._updateSocketAuthentication = this._updateSocketAuthentication.bind(this)
     this.unsubscribeAll = this.unsubscribeAll.bind(this)
     this._receiveMessage = this._receiveMessage.bind(this)
+    this._receiveError = this._receiveError.bind(this)
+    this._resubscribe = this._resubscribe.bind(this)
 
     this._createSocket()
 
@@ -103,6 +112,33 @@ class CozyRealtime {
 
       this._socket = new Socket(url, token)
       this._socket.on('message', this._receiveMessage)
+      this._socket.on('error', this._receiveError)
+    }
+  }
+
+  /**
+   * When socket send error it test to reconnect
+   */
+  _receiveError(error) {
+    logger.info(`Receive error: ${error}`)
+    setTimeout(this._resubscribe, this._retryDelay)
+    this._closeSocket()
+  }
+
+  /**
+   * Re subscribe on server
+   */
+  _resubscribe() {
+    this._retryDelay = this._retryDelay * 2
+
+    const subscribeList = Object.keys(this._events).map(key => {
+      if (!key.includes(INDEX_KEY_SEPARATOR)) return
+      const [ type, eventName, id ] = key.split(INDEX_KEY_SEPARATOR)
+      return { type, id }
+    }).filter(Boolean)
+
+    for (const { type, id } of subscribeList) {
+      this._socket.subscribe(type, id)
     }
   }
 
@@ -123,6 +159,7 @@ class CozyRealtime {
    * Update token on socket
    */
   _updateSocketAuthentication() {
+    logger.info('Update token on socket')
     const token = getWebSocketToken(this._cozyClient)
     this._socket.updateAuthentication(token)
   }
@@ -141,9 +178,7 @@ class CozyRealtime {
    */
   _closeSocket() {
     if (this._socket) {
-      if (this._socket.isOpen()) {
-        this._socket.close()
-      }
+      this._socket.close()
       this._socket = null
     }
     this._createSocket()
