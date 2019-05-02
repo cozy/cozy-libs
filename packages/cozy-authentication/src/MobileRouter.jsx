@@ -143,7 +143,14 @@ export class MobileRouter extends Component {
     const { client, history } = this.props
     try {
       const currentLocation = history.getCurrentLocation()
-      const { access_code, state, cozy_url } = currentLocation.query
+      const { access_code, state, cozy_url, code } = currentLocation.query
+      if (!code || !cozy_url) {
+        // Here it means that were are not in an onboarding login, we are
+        // in a normal login, the register() called in Authentication::selectServer
+        // should have completed
+        return
+      }
+
       // on iOS, hide() the ViewController since it is still active
       // when the application comes from background
       if (window.SafariViewController) window.SafariViewController.hide()

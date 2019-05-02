@@ -142,14 +142,21 @@ describe('MobileRouter', () => {
   })
 
   describe('Auto Onboarding', () => {
+    let query
+
+    beforeEach(() => {
+      query = {
+        access_code: 'accessCode',
+        state: 'state-123',
+        cozy_url: 'pbrowne.mycozy.cloud',
+        code: 'code-that-is-only-in-onboarding'
+      }
+    })
+
     it('should render a special view when logging in via onboarding has started', async () => {
       setup()
       currentLocation = {
-        query: {
-          access_code: 'accessCode',
-          state: 'state-123',
-          cozy_url: 'pbrowne.mycozy.cloud'
-        }
+        query
       }
       const mobileRouter = app.find(DumbMobileRouter).instance()
       jest
@@ -176,5 +183,26 @@ describe('MobileRouter', () => {
       await mobileRouter.handleAuth()
       expect(client.logout).toHaveBeenCalled()
     })
+
+    for (const requiredOnboardingArg of ['cozy_url', 'code']) {
+      it(`should not do an onboarding login if ${requiredOnboardingArg} is not in the URL`, async () => {
+        delete query[requiredOnboardingArg]
+        setup()
+        currentLocation = {
+          query
+        }
+        const mobileRouter = app.find(DumbMobileRouter).instance()
+        jest
+          .spyOn(onboarding, 'doOnboardingLogin')
+          .mockImplementation(async () => {
+            // Necessary to call update() since setState is called asynchronously
+            // https://github.com/airbnb/enzyme/issues/450
+            app.update()
+            expect(app.find(LoggingInViaOnboarding).length).toBe(1)
+          })
+        await mobileRouter.handleAuth()
+        expect(onboarding.doOnboardingLogin).not.toHaveBeenCalled()
+      })
+    }
   })
 })
