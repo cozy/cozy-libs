@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.12.0"></a>
+# [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.11.0...cozy-authentication@1.12.0) (2019-05-02)
+
+
+### Features
+
+* Ability to override components ([2f09fbe](https://github.com/cozy/cozy-libs/commit/2f09fbe))
+* Export ButtonLinkRegistration for overrides ([6d4e6c5](https://github.com/cozy/cozy-libs/commit/6d4e6c5))
+
+
+
+
 <a name="1.11.0"></a>
 # [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.10.0...cozy-authentication@1.11.0) (2019-05-02)
 
