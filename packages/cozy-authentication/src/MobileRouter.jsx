@@ -170,9 +170,13 @@ export class MobileRouter extends Component {
       onException,
       client,
       children,
+
+      // TODO LogoutComponent should come from props.components and have
+      // a default
       LogoutComponent
     } = this.props
 
+    const { Authentication, Revoked } = this.props.components
     const { isLoggingInViaOnboarding, isLoggingOut } = this.state
 
     if (LogoutComponent && isLoggingOut) {
@@ -243,7 +247,12 @@ MobileRouter.defaultProps = {
   },
 
   loginPath: '/',
-  logoutPath: '/'
+  logoutPath: '/',
+
+  components: {
+    Authentication,
+    Revoked
+  }
 }
 
 MobileRouter.propTypes = {

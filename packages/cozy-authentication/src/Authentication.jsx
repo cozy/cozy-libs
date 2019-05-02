@@ -65,6 +65,8 @@ class Authentication extends Component {
   render() {
     const { onException, appIcon, appTitle } = this.props
     const { currentStepIndex, generalError, fetching } = this.state
+    const { Welcome, SelectServer } = this.props.components
+
     const currentStep = this.steps[currentStepIndex]
 
     switch (currentStep) {
