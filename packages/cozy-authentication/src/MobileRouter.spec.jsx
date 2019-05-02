@@ -31,6 +31,7 @@ class I18n extends React.Component {
 }
 
 const AppRoutes = () => <div />
+const LoggingOut = () => <div>Logging out...</div>
 
 describe('MobileRouter', () => {
   let appRoutes,
@@ -42,7 +43,8 @@ describe('MobileRouter', () => {
     app,
     client,
     currentLocation,
-    props
+    props,
+    LogoutComponent
 
   beforeEach(() => {
     appRoutes = <AppRoutes />
@@ -57,6 +59,7 @@ describe('MobileRouter', () => {
     app = null
     client = new CozyClient({})
     props = { appRoutes, onAuthenticated, onLogout, history, appIcon, appTitle }
+    LogoutComponent = null
   })
 
   afterEach(() => {
@@ -71,6 +74,7 @@ describe('MobileRouter', () => {
             {...props}
             loginPath="/afterLogin"
             logoutPath="/afterLogout"
+            LogoutComponent={LogoutComponent}
           />
         </I18n>
       </CozyProvider>
@@ -114,6 +118,28 @@ describe('MobileRouter', () => {
     client.isLogged = true
     setup()
     expect(app.find(AppRoutes).length).toBe(1)
+  })
+
+  describe('Logging out', () => {
+    it('should not error if LogoutComponent not available', () => {
+      setup()
+      client.emit('beforeLogout')
+      app.update()
+      client.emit('logout')
+      app.update()
+      expect(true).toBe(true)
+    })
+
+    it('should show LogoutComponent during logout', () => {
+      LogoutComponent = LoggingOut
+      setup()
+      client.emit('beforeLogout')
+      app.update()
+      expect(app.find(LoggingOut).length).toBe(1)
+      client.emit('logout')
+      app.update()
+      expect(app.find(LoggingOut).length).toBe(0)
+    })
   })
 
   describe('Auto Onboarding', () => {

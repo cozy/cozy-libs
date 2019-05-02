@@ -26,7 +26,9 @@ export class MobileRouter extends Component {
 
     this.handleLogBackIn = this.handleLogBackIn.bind(this)
     this.afterAuthentication = this.afterAuthentication.bind(this)
+
     this.afterLogout = this.afterLogout.bind(this)
+    this.handleBeforeLogout = this.handleBeforeLogout.bind(this)
     this.handleRequestLogout = this.handleRequestLogout.bind(this)
 
     this.state = { isLoggingInViaOnboarding: false }
@@ -53,6 +55,7 @@ export class MobileRouter extends Component {
       client.on(ev, this.update)
     }
     client.on('login', this.afterAuthentication)
+    client.on('beforeLogout', this.handleBeforeLogout)
     client.on('logout', this.afterLogout)
   }
 
@@ -62,6 +65,7 @@ export class MobileRouter extends Component {
       client.removeListener(ev, this.update)
     }
     client.removeListener('login', this.afterAuthentication)
+    client.removeListener('beforeLogout', this.handleBeforeLogout)
     client.removeListener('logout', this.afterLogout)
   }
 
@@ -133,10 +137,17 @@ export class MobileRouter extends Component {
       appRoutes,
       onException,
       client,
-      children
+      children,
+      LogoutComponent
     } = this.props
 
-    if (this.state.isLoggingInViaOnboarding) {
+    const { isLoggingInViaOnboarding, isLoggingOut } = this.state
+
+    if (LogoutComponent && isLoggingOut) {
+      return <LogoutComponent />
+    }
+
+    if (isLoggingInViaOnboarding) {
       return <LoggingInViaOnboarding />
     }
 
@@ -175,7 +186,12 @@ export class MobileRouter extends Component {
     }
   }
 
+  handleBeforeLogout() {
+    this.setState({ isLoggingOut: true })
+  }
+
   async afterLogout() {
+    this.setState({ isLoggingOut: false })
     this.props.history.replace(this.props.logoutPath)
     await credentials.clear()
     if (this.props.onLogout) {
@@ -216,7 +232,10 @@ MobileRouter.propTypes = {
   /** After login, where do we go */
   loginPath: PropTypes.string,
   /** After logout, where do we go */
-  logoutPath: PropTypes.string
+  logoutPath: PropTypes.string,
+
+  /** LogoutComponent is displayed while the client is logging out */
+  LogoutComponent: PropTypes.elementType
 }
 
 export const DumbMobileRouter = MobileRouter
