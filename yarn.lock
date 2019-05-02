@@ -3543,10 +3543,10 @@ cozy-client@6.21.0:
     redux-thunk "2.3.0"
     sift "6.0.0"
 
-cozy-client@6.26.0:
-  version "6.26.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.26.0.tgz#6d8882a190d0dfbed46ed2240bc04f446e408a80"
-  integrity sha512-Zw/bnQ03YxfK9+nHWxGEdPN1gdlmwv1xbLF5DhSOCHDk3oXL5dSnGIqaA+DPIC/vetemIxdm9skMIaOT0k7Q+Q==
+cozy-client@6.25.0:
+  version "6.25.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.25.0.tgz#6d476c52dba9ab2424558ab46fbf89023e408a3b"
+  integrity sha512-KA9cyd5fDIdc6eL849KxFkD+MD6qJdpkzT4miKTwitzcfIg5S5JimAjKicUh1eFyBZLUDpgMU/WU+NZVPmOu0g==
   dependencies:
     cozy-device-helper "1.6.3"
     cozy-stack-client "^6.25.0"
@@ -3606,10 +3606,10 @@ cozy-ui@19.24.3:
     react-hot-loader "^4.3.11"
     react-select "2.2.0"
 
-cozy-ui@^19.24.1:
-  version "19.24.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-19.24.1.tgz#f543eca7e3ac1a589f4e9d13e28772e90d2c8d0d"
-  integrity sha512-xe9byiA1eOu4T4Rr53dvTXTrycS5bD3hM3VbK6orxcHD7zVm+e3A9AfjX8zpXYT5T3quFFpa72h4bmxlsnJ6SA==
+cozy-ui@19.28.0:
+  version "19.28.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-19.28.0.tgz#4976638b0a11d83d200fb58deac423b587238580"
+  integrity sha512-WjcxuBw4F3m5X+ThlLtSvjNTxP+KiXXeQBCD6O12vjDb8ST8uHWe+mrns3Xd8JDuNu8Bm+6pBzoUO43tYn0erg==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
