@@ -1,6 +1,29 @@
 import Contact from './Contact'
 
 describe('Contact model', () => {
+  describe('isContact method', () => {
+    it('should return true if candidate is a contact', () => {
+      const candidate = {
+        _id: '36cd8707-9ab9',
+        _type: 'io.cozy.contacts',
+        name: {
+          givenName: 'Jaime',
+          familyName: 'Lannister'
+        }
+      }
+      const result = Contact.isContact(candidate)
+      expect(result).toBe(true)
+    })
+
+    it('should return false if candidate is not a contact', () => {
+      const candidate = {
+        foo: 'bar'
+      }
+      const result = Contact.isContact(candidate)
+      expect(result).toBe(false)
+    })
+  })
+
   describe('getInitials method', () => {
     it("should return the contact's initials from the name", () => {
       const contact = {
