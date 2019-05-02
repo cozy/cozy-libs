@@ -66,5 +66,8 @@
     "moduleNameMapper": {
       "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|styl)$": "identity-obj-proxy"
     }
+  },
+  "peerDependencies": {
+    "cozy-client": "^6.26.0"
   }
 }
