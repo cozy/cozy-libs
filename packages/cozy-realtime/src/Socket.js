@@ -48,6 +48,9 @@ class Socket {
   constructor(url, token) {
     this._url = url
     this._token = token
+
+    this.removeAllListeners = this.removeAllListeners.bind(this)
+    this.on('close', this.removeAllListeners)
   }
 
   isOpen() {
@@ -136,6 +139,8 @@ class Socket {
   close() {
     if (this.isOpen()) {
       this._socket.close()
+    } else {
+      this.removeAllListeners()
     }
     this._socket = null
   }
