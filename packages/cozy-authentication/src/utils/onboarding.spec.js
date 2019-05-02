@@ -1,5 +1,6 @@
 import * as onboarding from './onboarding'
 import * as localStateSecret from './local'
+import CozyClient from 'cozy-client'
 
 describe('doOnboardingLogin', () => {
   let serverSecret,
@@ -8,28 +9,38 @@ describe('doOnboardingLogin', () => {
     serverAccessToken,
     localState,
     localSecret,
-    client
+    client,
+    fakeExchangeOAuthSecret,
+    fakeFetchAccessToken
   const domain = 'fakedomain.mycozy.cloud'
 
   beforeEach(async () => {
     serverSecret = 'secret-123'
     serverState = 'state-abc'
     receivedState = 'state-abc'
-    serverAccessToken = 'access-token'
+    serverAccessToken = JSON.stringify({
+      accessToken: 'access-token',
+      refreshToken: 'refresh-token',
+      scope: ['io.cozy.files'],
+      tokenType: 'token-type'
+    })
     localState = 'state-abc'
     localSecret = 'secret-123'
-    client = {
-      stackClient: {
-        exchangeOAuthSecret: jest.fn(() =>
-          Promise.resolve({
-            onboarding_secret: serverSecret,
-            onboarding_state: serverState
-          })
-        ),
-        fetchAccessToken: jest.fn(() => Promise.resolve(serverAccessToken))
-      },
-      login: jest.fn()
-    }
+
+    fakeExchangeOAuthSecret = jest.fn(() =>
+      Promise.resolve({
+        onboarding_secret: serverSecret,
+        onboarding_state: serverState
+      })
+    )
+
+    fakeFetchAccessToken = jest.fn(() => Promise.resolve(serverAccessToken))
+
+    client = new CozyClient({ oauth: {} })
+    client.stackClient.exchangeOAuthSecret = fakeExchangeOAuthSecret
+    client.stackClient.fetchAccessToken = fakeFetchAccessToken
+    jest.spyOn(client, 'login')
+
     jest.spyOn(localStateSecret, 'clear')
     await localStateSecret.write({
       state: localState,
@@ -75,12 +86,10 @@ describe('doOnboardingLogin', () => {
     expect(localStateSecret.clear).toHaveBeenCalled()
   })
 
-  it('should call login on client when everything worked', async () => {
+  it('should correctly configure the client after login', async () => {
     await doOnboardingLogin()
-    expect(client.login).toHaveBeenCalledWith({
-      token: 'access-token',
-      url: 'https://fakedomain.mycozy.cloud'
-    })
+    expect(client.stackClient.uri).toBe('https://fakedomain.mycozy.cloud')
+    expect(client.stackClient.token).toEqual(JSON.parse(serverAccessToken))
   })
 })
 
