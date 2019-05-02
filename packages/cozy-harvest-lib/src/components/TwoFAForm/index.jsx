@@ -5,6 +5,7 @@ import { translate } from 'cozy-ui/react/I18n'
 import Button from 'cozy-ui/react/Button'
 import Field from 'cozy-ui/react/Field'
 import AppIcon from 'cozy-ui/react/AppIcon'
+import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 
 import accounts from '../../helpers/accounts'
@@ -36,7 +37,15 @@ export class TwoFAForm extends PureComponent {
   }
 
   render() {
-    const { account, dismissAction, t, submitting, retryAsked } = this.props
+    const {
+      account,
+      dismissAction,
+      t,
+      submitting,
+      retryAsked,
+      breakpoints = {}
+    } = this.props
+    const { isMobile } = breakpoints
     const { twoFACode } = this.state
 
     return (
@@ -45,7 +54,7 @@ export class TwoFAForm extends PureComponent {
         mobileFullscreen
         closable
         containerClassName="u-pos-absolute"
-        className="u-mt-3"
+        className={isMobile ? '' : 'u-mt-3'}
         size="xsmall"
       >
         <ModalHeader>
@@ -92,4 +101,4 @@ TwoFAForm.contextTypes = {
   client: PropTypes.object
 }
 
-export default translate()(TwoFAForm)
+export default translate()(withBreakpoints()(TwoFAForm))
