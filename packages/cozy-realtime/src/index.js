@@ -82,6 +82,7 @@ class CozyRealtime {
    * - Save cozyClient
    * - create socket
    * - listen cozyClient events
+   * - unsubscribeAll if window unload
    *
    * @constructor
    * @param {CozyClient} cozyClient  A cozy client
@@ -94,12 +95,22 @@ class CozyRealtime {
     this._receiveMessage = this._receiveMessage.bind(this)
     this._receiveError = this._receiveError.bind(this)
     this._resubscribe = this._resubscribe.bind(this)
+    this._windowUnload = this._windowUnload.bind(this)
 
     this._createSocket()
 
     this._cozyClient.on('login', this._updateAuthentication)
     this._cozyClient.on('tokenRefreshed', this._updateAuthentication)
     this._cozyClient.on('logout', this.unsubscribeAll)
+
+    if (window) {
+      window.addEventListener('beforeunload', this._windowUnload)
+    }
+  }
+
+  _windowUnload() {
+    window.removeEventListener('beforeunload', this._windowUnload)
+    this.unsubscribeAll()
   }
 
   /**
