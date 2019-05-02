@@ -78,6 +78,11 @@ class CozyRealtime {
   _retryDelay = 1000
 
   /**
+   * Limit of socket connection
+   */
+  _retryLimit = 60
+
+  /**
    * Constructor of CozyRealtime:
    * - Save cozyClient
    * - create socket
@@ -132,15 +137,24 @@ class CozyRealtime {
    */
   _receiveError(error) {
     logger.info(`Receive error: ${error}`)
-    setTimeout(this._resubscribe, this._retryDelay)
+
     this._resetSocket()
+
+    if (this._retryLimit === 0) {
+      this.emit('error', error)
+    } else {
+      if (this.retry) {
+        clearTimeout(this.retry)
+      }
+      this.retry = setTimeout(this._resubscribe, this._retryDelay)
+    }
   }
 
   /**
    * Re subscribe on server
    */
   _resubscribe() {
-    this._retryDelay = this._retryDelay * 2
+    this._retryLimit--
 
     const subscribeList = Object.keys(this._events)
       .map(key => {

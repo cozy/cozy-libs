@@ -93,30 +93,26 @@ describe('Realtime', () => {
     await realtime.subscribe(options, handler)
     realtime._retryDelay = 100
 
-    // restart after 100ms
+    expect(realtime._socket.isOpen()).toBe(true)
     server.simulate('error')
     expect(realtime._socket.isOpen()).toBe(false)
     await pause(200)
-    expect(realtime._socket.isOpen()).toBe(true)
-
-    // restart after 200ms
-    server.simulate('error')
-    expect(realtime._socket.isOpen()).toBe(false)
-    await pause(200)
-    expect(realtime._socket.isOpen()).toBe(false)
-    await pause(100)
-    expect(realtime._socket.isOpen()).toBe(true)
-
-    // restart after 400ms
-    server.simulate('error')
-    expect(realtime._socket.isOpen()).toBe(false)
-    await pause(400)
-    expect(realtime._socket.isOpen()).toBe(false)
-    await pause(800)
     expect(realtime._socket.isOpen()).toBe(true)
 
     server.emit('message', JSON.stringify(fakeMessage1))
     expect(handler.mock.calls.length).toBe(1)
+  })
+
+  it('should emit error when retry limit is exceeded', async done => {
+    const realtime = new Realtime(COZY_CLIENT)
+    realtime._retryLimit = 0
+
+    realtime.on('error', () => done())
+    const handler = jest.fn()
+
+    await realtime.subscribe(options, handler)
+    expect(realtime._socket.isOpen()).toBe(true)
+    server.simulate('error')
   })
 
   it('should update socket authentication when client login', async () => {
