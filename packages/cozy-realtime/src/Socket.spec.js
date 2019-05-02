@@ -22,7 +22,7 @@ describe('Socket', () => {
       expect(socket.isOpen()).toBe(true)
       socket.close()
       expect(socket.isOpen()).toBe(false)
-      expect(socket._socket).toBe(null)
+      expect(socket._webSocket).toBe(null)
       done()
     })
     await socket.connect()

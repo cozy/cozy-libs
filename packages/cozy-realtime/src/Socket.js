@@ -20,7 +20,7 @@ class Socket {
    *
    * @type {WebSocket}
    */
-  _socket = null
+  _webSocket = null
 
   /**
    * Cozy Client url
@@ -54,7 +54,7 @@ class Socket {
   }
 
   isOpen() {
-    return !!(this._socket && this._socket.readyState === WebSocket.OPEN)
+    return !!(this._webSocket && this._webSocket.readyState === WebSocket.OPEN)
   }
 
   updateAuthentication(token) {
@@ -69,9 +69,9 @@ class Socket {
    */
   connect() {
     return new Promise((resolve, reject) => {
-      this._socket = new WebSocket(this._url, this._doctype)
+      this._webSocket = new WebSocket(this._url, this._doctype)
 
-      this._socket.onmessage = event => {
+      this._webSocket.onmessage = event => {
         const data = JSON.parse(event.data)
         const eventName = data.event.toLowerCase()
         const { type, id, doc } = data.payload
@@ -79,15 +79,15 @@ class Socket {
         this.emit('message', { type, id, eventName }, doc)
       }
 
-      this._socket.onclose = event => this.emit('close', event)
+      this._webSocket.onclose = event => this.emit('close', event)
 
-      this._socket.onerror = error => {
-        this._socket = null
+      this._webSocket.onerror = error => {
+        this._webSocket = null
         this.emit('error', error)
         reject(error)
       }
 
-      this._socket.onopen = event => {
+      this._webSocket.onopen = event => {
         this.authentication()
         this.emit('open', event)
         resolve(event)
@@ -102,7 +102,7 @@ class Socket {
    */
   authentication() {
     if (this.isOpen()) {
-      this._socket.send(
+      this._webSocket.send(
         JSON.stringify({ method: 'AUTH', payload: this._token })
       )
     }
@@ -129,7 +129,7 @@ class Socket {
       payload
     })
 
-    this._socket.send(message)
+    this._webSocket.send(message)
     this.emit('subscribe')
   }
 
@@ -138,11 +138,11 @@ class Socket {
    */
   close() {
     if (this.isOpen()) {
-      this._socket.close()
+      this._webSocket.close()
     } else {
       this.removeAllListeners()
     }
-    this._socket = null
+    this._webSocket = null
   }
 }
 
