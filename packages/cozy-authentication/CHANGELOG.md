@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.12.4"></a>
+## [1.12.4](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.12.3...cozy-authentication@1.12.4) (2019-05-02)
+
+
+### Bug Fixes
+
+* HandleOpenURL on universalLink if MobileRouter does not manage it ([b8f5f55](https://github.com/cozy/cozy-libs/commit/b8f5f55))
+
+
+
+
 <a name="1.12.3"></a>
 ## [1.12.3](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.12.2...cozy-authentication@1.12.3) (2019-05-02)
 
