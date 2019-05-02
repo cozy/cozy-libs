@@ -27,7 +27,7 @@ export class MobileRouter extends Component {
     this.handleLogBackIn = this.handleLogBackIn.bind(this)
     this.afterAuthentication = this.afterAuthentication.bind(this)
     this.afterLogout = this.afterLogout.bind(this)
-    this.handleLogout = this.handleLogout.bind(this)
+    this.handleRequestLogout = this.handleRequestLogout.bind(this)
 
     this.state = { isLoggingInViaOnboarding: false }
   }
@@ -153,7 +153,7 @@ export class MobileRouter extends Component {
       return (
         <Revoked
           onLogBackIn={this.handleLogBackIn}
-          onLogout={this.handleLogout}
+          onLogout={this.handleRequestLogout}
         />
       )
     } else {
@@ -183,7 +183,7 @@ export class MobileRouter extends Component {
     }
   }
 
-  async handleLogout() {
+  async handleRequestLogout() {
     const { client } = this.props
     await client.logout()
   }
