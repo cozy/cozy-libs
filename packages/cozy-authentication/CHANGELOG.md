@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.9.0"></a>
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.8.0...cozy-authentication@1.9.0) (2019-05-02)
+
+
+### Bug Fixes
+
+* Use real I18n in test ([ec86c87](https://github.com/cozy/cozy-libs/commit/ec86c87))
+
+
+### Features
+
+* Ability to display a LogoutComponent while logging out ([51e5754](https://github.com/cozy/cozy-libs/commit/51e5754))
+* Add cozy-client as peerDependency ([393956d](https://github.com/cozy/cozy-libs/commit/393956d))
+
+
+
+
 <a name="1.8.0"></a>
 # [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.7.0...cozy-authentication@1.8.0) (2019-04-30)
 
