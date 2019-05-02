@@ -23,9 +23,7 @@ export class MobileRouter extends Component {
     super(props)
     this.update = this.update.bind(this)
     this.handleDeepLink = this.handleDeepLink.bind(this)
-    this.handleUniversalLink = this.handleUniversalLink.bind(
-      this
-    )
+    this.handleUniversalLink = this.handleUniversalLink.bind(this)
     this.handleLogBackIn = this.handleLogBackIn.bind(this)
     this.afterAuthentication = this.afterAuthentication.bind(this)
 

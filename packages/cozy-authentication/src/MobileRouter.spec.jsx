@@ -125,7 +125,9 @@ describe('MobileRouter', () => {
       const instance = app.find(DumbMobileRouter).instance()
       jest.spyOn(instance, 'handleDeepLink')
       instance.handleUniversalLink({ url: 'http://fake.url.com' })
-      expect(instance.handleDeepLink).toHaveBeenCalledWith('http://fake.url.com')
+      expect(instance.handleDeepLink).toHaveBeenCalledWith(
+        'http://fake.url.com'
+      )
     })
 
     it('should not call window.handleOpenURL if it has not been touched by something else', () => {
