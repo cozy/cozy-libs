@@ -89,9 +89,7 @@ class CozyRealtime {
   constructor(cozyClient) {
     this._cozyClient = cozyClient
 
-    this._updateSocketAuthentication = this._updateSocketAuthentication.bind(
-      this
-    )
+    this._updateAuthentication = this._updateAuthentication.bind(this)
     this.unsubscribeAll = this.unsubscribeAll.bind(this)
     this._receiveMessage = this._receiveMessage.bind(this)
     this._receiveError = this._receiveError.bind(this)
@@ -99,8 +97,8 @@ class CozyRealtime {
 
     this._createSocket()
 
-    this._cozyClient.on('login', this._updateSocketAuthentication)
-    this._cozyClient.on('tokenRefreshed', this._updateSocketAuthentication)
+    this._cozyClient.on('login', this._updateAuthentication)
+    this._cozyClient.on('tokenRefreshed', this._updateAuthentication)
     this._cozyClient.on('logout', this.unsubscribeAll)
   }
 
@@ -162,7 +160,7 @@ class CozyRealtime {
   /**
    * Update token on socket
    */
-  _updateSocketAuthentication() {
+  _updateAuthentication() {
     logger.info('Update token on socket')
     const token = getWebSocketToken(this._cozyClient)
     this._socket.updateAuthentication(token)
