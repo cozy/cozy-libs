@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.41.1"></a>
+## [0.41.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.41.0...cozy-harvest-lib@0.41.1) (2019-05-02)
+
+
+### Bug Fixes
+
+* **harvest:** :lipstick: Fix 2FA modal on mobile ([1a7ce84](https://github.com/cozy/cozy-libs/commit/1a7ce84))
+* **harvest:** :pencil2: Better 2FA errors messages ([d3cfc30](https://github.com/cozy/cozy-libs/commit/d3cfc30))
+
+
+
+
 <a name="0.41.0"></a>
 # [0.41.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.4...cozy-harvest-lib@0.41.0) (2019-05-02)
 
