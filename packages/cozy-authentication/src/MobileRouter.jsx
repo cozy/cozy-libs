@@ -98,6 +98,17 @@ export class MobileRouter extends Component {
     android uses handleOpenURL by default ?!
    */
     this.handleDeepLink(eventData.url)
+    if (window.handleOpenURL !== this.handleDeepLink) {
+      // This means that someone else is handling open url, must
+      // be cozy-client that replaced the function during the
+      // normal register. We have to call the function in its place
+      // See cozy-client/src/authentication/mobile
+      //
+      // The handler of open url has the responsibility to replace
+      // window.handleOpenURL back with our handler (which cozy-client
+      // rightfully does).
+      window.handleOpenURL(eventData.url)
+    }
   }
 
   startHandlingDeeplinks() {

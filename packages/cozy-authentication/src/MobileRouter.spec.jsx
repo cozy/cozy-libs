@@ -119,6 +119,39 @@ describe('MobileRouter', () => {
     expect(app.find(AppRoutes).length).toBe(1)
   })
 
+  describe('universal link', () => {
+    it('should call handleDeepLink with the url from the event', () => {
+      setup()
+      const instance = app.find(DumbMobileRouter).instance()
+      jest.spyOn(instance, 'handleDeepLink')
+      instance.handleUniversalLink({ url: 'http://fake.url.com' })
+      expect(instance.handleDeepLink).toHaveBeenCalledWith('http://fake.url.com')
+    })
+
+    it('should not call window.handleOpenURL if it has not been touched by something else', () => {
+      // Here window.handleOpenURL will be replaced by the handler from MobileRouter
+      // We have to use handler since window.handleOpenURL is replaced by something that
+      // is not a spy by MobileRouter
+      const handler = jest.fn()
+      window.handleOpenURL = handler
+      setup()
+      const instance = app.find(DumbMobileRouter).instance()
+      instance.handleUniversalLink({ url: 'http://fake.url.com' })
+      expect(handler).not.toHaveBeenCalled()
+    })
+
+    it('should call window.handleOpenURL if it has been touched by something else', () => {
+      setup()
+      const instance = app.find(DumbMobileRouter).instance()
+      jest.spyOn(instance, 'handleDeepLink')
+      // Here window.handleOpenURL is replaced during the life of MobileRouter; it must be
+      // important. It should be called.
+      window.handleOpenURL = jest.fn()
+      instance.handleUniversalLink({ url: 'http://fake.url.com' })
+      expect(window.handleOpenURL).toHaveBeenCalledWith('http://fake.url.com')
+    })
+  })
+
   describe('Logging out', () => {
     it('should not error if LogoutComponent not available', () => {
       setup()
