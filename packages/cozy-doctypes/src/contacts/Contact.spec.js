@@ -13,6 +13,26 @@ describe('Contact model', () => {
       expect(result).toEqual('AS')
     })
 
+    it("should return the contact's initials if contact has only givenName", () => {
+      const contact = {
+        name: {
+          givenName: 'Arya'
+        }
+      }
+      const result = Contact.getInitials(contact)
+      expect(result).toEqual('A')
+    })
+
+    it("should return the contact's initials if contact has only familyName", () => {
+      const contact = {
+        name: {
+          familyName: 'Stark'
+        }
+      }
+      const result = Contact.getInitials(contact)
+      expect(result).toEqual('S')
+    })
+
     it('should return the first letter of the primary email if contact has no name', () => {
       const contact = {
         name: undefined,
@@ -30,6 +50,11 @@ describe('Contact model', () => {
     it('should return the first letter if input is a string', () => {
       const result = Contact.getInitials('arya.stark@thenorth.westeros')
       expect(result).toEqual('A')
+    })
+
+    it('should return an empty string if contact has no name/email', () => {
+      const result = Contact.getInitials({})
+      expect(result).toEqual('')
     })
   })
 

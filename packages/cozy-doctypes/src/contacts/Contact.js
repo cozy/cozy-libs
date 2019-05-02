@@ -1,5 +1,7 @@
 const PropTypes = require('prop-types')
+const get = require('lodash/get')
 
+const log = require('../log')
 const Document = require('../Document')
 
 const getPrimaryOrFirst = property => obj => {
@@ -15,8 +17,8 @@ class Contact extends Document {
    **/
   static getInitials(contact) {
     if (typeof contact === 'string') {
-      // eslint-disable-next-line no-console
-      console.warn(
+      log(
+        'warn',
         'Passing a string to Contact.getInitials will be deprecated soon.'
       )
       return contact[0].toUpperCase()
@@ -24,8 +26,7 @@ class Contact extends Document {
 
     if (contact.name) {
       return ['givenName', 'familyName']
-        .map(part => (contact.name && contact.name[part]) || '')
-        .map(name => name[0])
+        .map(part => get(contact, ['name', part, 0], ''))
         .join('')
         .toUpperCase()
     }
@@ -35,8 +36,7 @@ class Contact extends Document {
       return email[0].toUpperCase()
     }
 
-    // eslint-disable-next-line no-console
-    console.error('Contact has no name and no email.')
+    log('warn', 'Contact has no name and no email.')
     return ''
   }
 
