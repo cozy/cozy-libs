@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.41.0"></a>
+# [0.41.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.4...cozy-harvest-lib@0.41.0) (2019-05-02)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-ui to v19.28.0 ⬆️ ([d6b8307](https://github.com/cozy/cozy-libs/commit/d6b8307))
+
+
+### Features
+
+* **harvest:** Add focusNext method in AccountForm ✨ ([f88dbf4](https://github.com/cozy/cozy-libs/commit/f88dbf4))
+* **harvest:** Add inputRef prop to AccountField 📝 ([58e7080](https://github.com/cozy/cozy-libs/commit/58e7080))
+* **harvest:** Add inputRefByName prop to AccountFields 📝 ([a8af7f5](https://github.com/cozy/cozy-libs/commit/a8af7f5))
+* **harvest:** Call focusNext on mobile ✨ ([a04f4d4](https://github.com/cozy/cozy-libs/commit/a04f4d4))
+
+
+
+
 <a name="0.40.4"></a>
 ## [0.40.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.40.3...cozy-harvest-lib@0.40.4) (2019-04-30)
 
