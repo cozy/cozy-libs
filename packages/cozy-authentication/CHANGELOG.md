@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.11.0"></a>
+# [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.10.0...cozy-authentication@1.11.0) (2019-05-02)
+
+
+### Features
+
+* Override url manager ([#420](https://github.com/cozy/cozy-libs/issues/420)) ([84dbf3d](https://github.com/cozy/cozy-libs/commit/84dbf3d))
+
+
+
+
 <a name="1.10.0"></a>
 # [1.10.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.9.1...cozy-authentication@1.10.0) (2019-05-02)
 
