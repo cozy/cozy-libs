@@ -153,12 +153,14 @@ const ContactShape = PropTypes.shape({
       formattedAddress: PropTypes.string
     })
   ),
-  phone: PropTypes.arrayOf({
-    number: PropTypes.string.isRequired,
-    type: PropTypes.string,
-    label: PropTypes.string,
-    primary: PropTypes.bool
-  }),
+  phone: PropTypes.arrayOf(
+    PropTypes.shape({
+      number: PropTypes.string.isRequired,
+      type: PropTypes.string,
+      label: PropTypes.string,
+      primary: PropTypes.bool
+    })
+  ),
   cozy: PropTypes.arrayOf(
     PropTypes.shape({
       url: PropTypes.string.isRequired,
@@ -172,16 +174,20 @@ const ContactShape = PropTypes.shape({
   me: PropTypes.bool.isRequired,
   relationships: PropTypes.shape({
     accounts: PropTypes.shape({
-      data: PropTypes.arrayOf({
-        _id: PropTypes.string.isRequired,
-        _type: PropTypes.string.isRequired
-      })
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          _type: PropTypes.string.isRequired
+        })
+      )
     }),
     groups: PropTypes.shape({
-      data: PropTypes.arrayOf({
-        _id: PropTypes.string.isRequired,
-        _type: PropTypes.string.isRequired
-      })
+      data: PropTypes.arrayOf(
+        PropTypes.shape({
+          _id: PropTypes.string.isRequired,
+          _type: PropTypes.string.isRequired
+        })
+      )
     })
   })
 })
