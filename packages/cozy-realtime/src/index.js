@@ -197,15 +197,6 @@ class CozyRealtime {
   }
 
   /**
-   * Launch close socket if no handler
-   */
-  _resetSocketIfNoHandler() {
-    if (this._numberOfHandlers === 0) {
-      this._resetSocket()
-    }
-  }
-
-  /**
    * Reset socket
    */
   _resetSocket() {
@@ -228,15 +219,50 @@ class CozyRealtime {
    * @return {Promise}           Promise that the message has been sent.
    */
   _subscribe(config, handler) {
-    const key = generateKey(config)
-
     return new Promise(resolve => {
+      const key = generateKey(config)
       this.on(key, handler)
       this._numberOfHandlers++
 
       this._socket.once(`subscribe_${config.type}_${config.id}`, resolve)
       this._socket.subscribe(config.type, config.id)
     })
+  }
+
+  /**
+   * Remove the given handler from the list of handlers for given
+   * doctype/document and event.
+   *
+   * @param {String}  type      Document doctype to unsubscribe from
+   * @param {String}  id        Document id to unsubscribe from
+   * @param {String}  eventName Event to unsubscribe from
+   * @param {Function}  handler   Function to call when an event of the
+   * given type on the given doctype or document is received from stack.
+   */
+  unsubscribe(config, handler = undefined) {
+    const keys = [generateKey(config)]
+
+    if (!config.eventName) {
+      keys.push(generateKey({ ...config, eventName: EVENT_CREATED }))
+      keys.push(generateKey({ ...config, eventName: EVENT_UPDATED }))
+      keys.push(generateKey({ ...config, eventName: EVENT_DELETED }))
+    }
+
+    for (const key of keys) {
+      if (this._events[key]) {
+        if (handler) {
+          this._numberOfHandlers--
+          this.removeListener(key, handler)
+        } else {
+          this._numberOfHandlers -= this._events[key].length
+          this.removeAllListeners(key)
+        }
+      }
+    }
+
+    if (this._numberOfHandlers === 0) {
+      this._resetSocket()
+    }
   }
 
   _validateConfig(name, config, authorize) {
@@ -262,27 +288,6 @@ class CozyRealtime {
     this._validateConfig('onUpdate', config, ['type', 'id'])
 
     return this._subscribe({ ...config, eventName: EVENT_DELETED }, handler)
-  }
-
-  /**
-   * Remove the given handler from the list of handlers for given
-   * doctype/document and event.
-   *
-   * @param {String}  type      Document doctype to unsubscribe from
-   * @param {String}  id        Document id to unsubscribe from
-   * @param {String}  eventName Event to unsubscribe from
-   * @param {Function}  handler   Function to call when an event of the
-   * given type on the given doctype or document is received from stack.
-   */
-  unsubscribe(config, handler) {
-    const key = generateKey(config)
-
-    return new Promise(resolve => {
-      this._socket.once('close', resolve)
-      this.removeListener(key, handler)
-      this._numberOfHandlers--
-      this._resetSocketIfNoHandler()
-    })
   }
 
   /**

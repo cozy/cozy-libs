@@ -45,102 +45,149 @@ describe('Realtime', () => {
   const id = 'doc_id'
   const fakeDoc = { _id: id, title: 'title1' }
 
-  it('should launch handler when document is created', async done => {
-    await realtime.onCreate({ type }, doc => {
-      expect(doc).toEqual(fakeDoc)
-      done()
+  describe('subscribe', () => {
+    it('should launch handler when document is created', async done => {
+      await realtime.onCreate({ type }, doc => {
+        expect(doc).toEqual(fakeDoc)
+        done()
+      })
+
+      cozyStack.emitMessage(type, fakeDoc, 'CREATED')
     })
 
-    cozyStack.emitMessage(type, fakeDoc, 'CREATED')
-  })
-
-  it('should throw an error when config has id for onCreate', () => {
-    expect(() => realtime.onCreate({ type, id: 'my_id' }, () => {})).toThrow()
-  })
-
-  it('should launch handler when document is updated', async done => {
-    await realtime.onUpdate({ type }, doc => {
-      expect(doc).toEqual(fakeDoc)
-      done()
+    it('should throw an error when config has id for onCreate', () => {
+      expect(() => realtime.onCreate({ type, id: 'my_id' }, () => {})).toThrow()
     })
 
-    cozyStack.emitMessage(type, fakeDoc, 'UPDATED')
-  })
+    it('should launch handler when document is updated', async done => {
+      await realtime.onUpdate({ type }, doc => {
+        expect(doc).toEqual(fakeDoc)
+        done()
+      })
 
-  it('should launch handler when document with id is updated', async done => {
-    await realtime.onUpdate({ type, id: fakeDoc._id }, doc => {
-      expect(doc).toEqual(fakeDoc)
-      done()
+      cozyStack.emitMessage(type, fakeDoc, 'UPDATED')
     })
 
-    cozyStack.emitMessage(type, fakeDoc, 'UPDATED', fakeDoc._id)
-  })
+    it('should launch handler when document with id is updated', async done => {
+      await realtime.onUpdate({ type, id: fakeDoc._id }, doc => {
+        expect(doc).toEqual(fakeDoc)
+        done()
+      })
 
-  it('should launch handler when document is deleted', async done => {
-    await realtime.onDelete({ type }, doc => {
-      expect(doc).toEqual(fakeDoc)
-      done()
+      cozyStack.emitMessage(type, fakeDoc, 'UPDATED', fakeDoc._id)
     })
 
-    cozyStack.emitMessage(type, fakeDoc, 'DELETED')
-  })
+    it('should launch handler when document is deleted', async done => {
+      await realtime.onDelete({ type }, doc => {
+        expect(doc).toEqual(fakeDoc)
+        done()
+      })
 
-  it('should launch handler when document with id is deleted', async done => {
-    await realtime.onDelete({ type, id: fakeDoc._id }, doc => {
-      expect(doc).toEqual(fakeDoc)
-      done()
+      cozyStack.emitMessage(type, fakeDoc, 'DELETED')
     })
 
-    cozyStack.emitMessage(type, fakeDoc, 'DELETED', fakeDoc._id)
+    it('should launch handler when document with id is deleted', async done => {
+      await realtime.onDelete({ type, id: fakeDoc._id }, doc => {
+        expect(doc).toEqual(fakeDoc)
+        done()
+      })
+
+      cozyStack.emitMessage(type, fakeDoc, 'DELETED', fakeDoc._id)
+    })
+
+    it('should relauch socket subscribe after an error', async () => {
+      const handler = jest.fn()
+      await realtime.onCreate({ type }, handler)
+      realtime._retryDelay = 100
+
+      expect(realtime._socket.isOpen()).toBe(true)
+      cozyStack.simulate('error')
+      expect(realtime._socket.isOpen()).toBe(false)
+      cozyStack.emitMessage(type, fakeDoc, 'CREATED')
+      expect(handler.mock.calls.length).toBe(0)
+
+      await pause(200)
+      expect(realtime._socket.isOpen()).toBe(true)
+      cozyStack.emitMessage(type, fakeDoc, 'CREATED')
+      expect(handler.mock.calls.length).toBe(1)
+    })
   })
 
-  it('should unsubscribe event', async () => {
-    const handler = jest.fn()
-    await realtime.onCreate({ type }, handler)
-    expect(realtime._socket.isOpen()).toBe(true)
-    await realtime.unsubscribe({ type }, handler)
-    expect(realtime._socket.isOpen()).toBe(false)
+  describe('unsubscribe', () => {
+    let handlerCreate, handlerUpdate, handlerDelete
+
+    beforeEach(async () => {
+      handlerCreate = jest.fn()
+      handlerUpdate = jest.fn()
+      handlerDelete = jest.fn()
+      await realtime.onCreate({ type }, handlerCreate)
+      await realtime.onUpdate({ type }, handlerUpdate)
+      await realtime.onDelete({ type }, handlerDelete)
+      await realtime.onCreate({ type: 'io.cozy.accounts' }, handlerCreate)
+    })
+
+    afterEach(() => {
+      realtime.unsubscribeAll()
+    })
+
+    it('should unsubscribe handlerCreate with type, eventName and handler', () => {
+      expect(realtime._socket.isOpen()).toBe(true)
+      expect(realtime._numberOfHandlers).toBe(4)
+      realtime.unsubscribe({ type, eventName: EVENT_CREATED }, handlerCreate)
+      expect(realtime._numberOfHandlers).toBe(3)
+      expect(realtime._socket.isOpen()).toBe(true)
+    })
+
+    it('should unsubscribe handlerCreate with type and eventName', () => {
+      expect(realtime._socket.isOpen()).toBe(true)
+      expect(realtime._numberOfHandlers).toBe(4)
+      realtime.unsubscribe({ type, eventName: EVENT_CREATED })
+      expect(realtime._numberOfHandlers).toBe(3)
+      expect(realtime._socket.isOpen()).toBe(true)
+    })
+
+    it('should unsubscribe handlerCreate with type', () => {
+      expect(realtime._socket.isOpen()).toBe(true)
+      expect(realtime._numberOfHandlers).toBe(4)
+      realtime.unsubscribe({ type })
+      expect(realtime._numberOfHandlers).toBe(1)
+      expect(realtime._socket.isOpen()).toBe(true)
+    })
+
+    it('should unsubscribe all events', () => {
+      expect(realtime._socket.isOpen()).toBe(true)
+      expect(realtime._numberOfHandlers).toBe(4)
+      realtime.unsubscribeAll()
+      expect(realtime._numberOfHandlers).toBe(0)
+      expect(realtime._socket.isOpen()).toBe(false)
+    })
   })
 
-  it('should relauch socket subscribe after an error', async () => {
-    const handler = jest.fn()
+  describe('events', () => {
+    it('should emit error when retry limit is exceeded', async done => {
+      realtime._retryLimit = 0
 
-    await realtime.onCreate({ type }, handler)
-    realtime._retryDelay = 100
+      realtime.on('error', () => done())
+      const handler = jest.fn()
 
-    expect(realtime._socket.isOpen()).toBe(true)
-    cozyStack.simulate('error')
-    expect(realtime._socket.isOpen()).toBe(false)
-    cozyStack.emitMessage(type, fakeDoc, 'CREATED')
-    expect(handler.mock.calls.length).toBe(0)
-
-    await pause(200)
-    expect(realtime._socket.isOpen()).toBe(true)
-    cozyStack.emitMessage(type, fakeDoc, 'CREATED')
-    expect(handler.mock.calls.length).toBe(1)
+      await realtime.onCreate({ type }, handler)
+      expect(realtime._socket.isOpen()).toBe(true)
+      cozyStack.simulate('error')
+    })
   })
 
-  it('should emit error when retry limit is exceeded', async done => {
-    realtime._retryLimit = 0
+  describe('authentication', () => {
+    it('should update socket authentication when client login', async () => {
+      realtime._socket.updateAuthentication = jest.fn()
+      COZY_CLIENT.emit('login')
+      expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
+    })
 
-    realtime.on('error', () => done())
-    const handler = jest.fn()
-
-    await realtime.onCreate({ type }, handler)
-    expect(realtime._socket.isOpen()).toBe(true)
-    cozyStack.simulate('error')
-  })
-
-  it('should update socket authentication when client login', async () => {
-    realtime._socket.updateAuthentication = jest.fn()
-    COZY_CLIENT.emit('login')
-    expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
-  })
-
-  it('should update socket authentication when client token refreshed ', async () => {
-    realtime._socket.updateAuthentication = jest.fn()
-    COZY_CLIENT.emit('login')
-    expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
+    it('should update socket authentication when client token refreshed ', async () => {
+      realtime._socket.updateAuthentication = jest.fn()
+      COZY_CLIENT.emit('login')
+      expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
+    })
   })
 })
 
@@ -181,6 +228,7 @@ describe('getWebSocketToken', () => {
     fakeCozyClient.stackClient.token.token = 'token2'
     expect(getWebSocketToken(fakeCozyClient)).toBe('token2')
   })
+
   it('should return oauth token from cozyClient', () => {
     const fakeCozyClient = { stackClient: { token: {} } }
     fakeCozyClient.stackClient.token.accessToken = COZY_TOKEN
