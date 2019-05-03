@@ -1,24 +1,19 @@
 /* eslint-env jest */
 import { triggersMutations } from 'connections/triggers'
-import client from 'cozy-client'
-
 import KonnectorJobWatcher from 'models/konnector/KonnectorJobWatcher'
+import CozyClient from 'cozy-client'
 
-jest.mock('cozy-client', () => ({
-  collection: jest.fn().mockReturnValue({
-    create: jest.fn(),
-    launch: jest.fn()
-  }),
-  create: jest.fn(),
-  stackClient: {
-    token: {
-      token: '1234abcd'
-    }
-  },
-  options: {
-    uri: 'cozy.tools:8080'
+const stackClient = {
+  uri: 'cozy.tools:8080',
+  token: {
+    token: '1234abcd'
   }
-}))
+}
+const client = new CozyClient({ stackClient })
+client.collection = jest.fn().mockReturnValue({
+  create: jest.fn(),
+  launch: jest.fn()
+})
 
 const { createTrigger, launchTrigger, watchKonnectorJob } = triggersMutations(
   client

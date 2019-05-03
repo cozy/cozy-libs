@@ -6,17 +6,67 @@ KonnectorAccountWatcher {
     "accountType": "dummy",
     "auth": Object {},
   },
-  "client": Object {
-    "collection": [MockFunction],
-    "create": [MockFunction],
-    "query": [MockFunction],
-    "save": [MockFunction],
-    "where": [MockFunction],
-  },
+  "handleAccountUpdated": [Function],
   "options": Object {
     "onError": [MockFunction],
     "onLoginSuccess": [MockFunction],
     "onSuccess": [MockFunction],
+  },
+  "realtime": CozyRealtime {
+    "_beforeUnload": [Function],
+    "_cozyClient": Object {
+      "collection": [MockFunction],
+      "create": [MockFunction],
+      "on": [Function],
+      "options": Object {
+        "uri": "cozy.tools:8080",
+      },
+      "query": [MockFunction],
+      "save": [MockFunction],
+      "stackClient": Object {
+        "token": Object {
+          "token": "1234abcd",
+        },
+        "uri": "cozy.tools:8080",
+      },
+      "where": [MockFunction],
+    },
+    "_events": Object {
+      "updated//io.cozy.accounts//undefined": Array [
+        [Function],
+      ],
+    },
+    "_receiveError": [Function],
+    "_receiveMessage": [Function],
+    "_resetSocket": [Function],
+    "_resubscribe": [Function],
+    "_retryDelay": 1000,
+    "_retryLimit": 60,
+    "_socket": Socket {
+      "_doctype": "io.cozy.websocket",
+      "_events": Object {
+        "close": Array [
+          [Function],
+        ],
+        "error": Array [
+          [Function],
+        ],
+        "message": Array [
+          [Function],
+        ],
+        "subscribe_io.cozy.accounts_undefined": Array [
+          [Function],
+        ],
+      },
+      "_getToken": [Function],
+      "_getUrl": [Function],
+      "_token": null,
+      "_url": null,
+      "_webSocket": WebSocket {},
+      "removeAllListeners": [Function],
+    },
+    "_updateAuthentication": [Function],
+    "unsubscribeAll": [Function],
   },
 }
 `;
