@@ -130,7 +130,7 @@ class Socket {
     })
 
     this._webSocket.send(message)
-    this.emit('subscribe')
+    this.emit(`subscribe_${type}_${id}`)
   }
 
   /**

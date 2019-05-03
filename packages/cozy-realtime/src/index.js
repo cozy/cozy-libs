@@ -234,7 +234,7 @@ class CozyRealtime {
       this.on(key, handler)
       this._numberOfHandlers++
 
-      this._socket.once('subscribe', resolve)
+      this._socket.once(`subscribe_${config.type}_${config.id}`, resolve)
       this._socket.subscribe(config.type, config.id)
     })
   }
