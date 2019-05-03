@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.44.0"></a>
+# [1.44.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.43.0...cozy-doctypes@1.44.0) (2019-05-03)
+
+
+### Features
+
+* **doctypes:** Add getUpdatedAt helper to BankAccount ([5f2cb66](https://github.com/cozy/cozy-libs/commit/5f2cb66))
+
+
+
+
 <a name="1.43.0"></a>
 # [1.43.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.42.0...cozy-doctypes@1.43.0) (2019-05-02)
 
