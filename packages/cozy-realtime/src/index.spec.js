@@ -1,4 +1,4 @@
-import Realtime, {
+import CozyRealtime, {
   generateKey,
   getWebSocketUrl,
   getWebSocketToken,
@@ -19,14 +19,14 @@ class CozyClient {
   }
 }
 MicroEE.mixin(CozyClient)
-const COZY_CLIENT = new CozyClient()
+const cozyClient = new CozyClient()
 const pause = time => new Promise(resolve => setTimeout(resolve, time))
 
-describe('Realtime', () => {
+describe('CozyRealtime', () => {
   let realtime, cozyStack
 
   beforeEach(() => {
-    realtime = new Realtime(COZY_CLIENT)
+    realtime = new CozyRealtime({ cozyClient })
     cozyStack = new Server(WS_URL)
     cozyStack.emitMessage = (type, doc, event, id) => {
       cozyStack.emit(
@@ -179,13 +179,13 @@ describe('Realtime', () => {
   describe('authentication', () => {
     it('should update socket authentication when client login', async () => {
       realtime._socket.updateAuthentication = jest.fn()
-      COZY_CLIENT.emit('login')
+      cozyClient.emit('login')
       expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
     })
 
     it('should update socket authentication when client token refreshed ', async () => {
       realtime._socket.updateAuthentication = jest.fn()
-      COZY_CLIENT.emit('login')
+      cozyClient.emit('login')
       expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
     })
   })

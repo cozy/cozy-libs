@@ -92,7 +92,7 @@ class CozyRealtime {
    * @constructor
    * @param {CozyClient} cozyClient  A cozy client
    */
-  constructor(cozyClient) {
+  constructor({ cozyClient }) {
     this._cozyClient = cozyClient
 
     this._updateAuthentication = this._updateAuthentication.bind(this)
