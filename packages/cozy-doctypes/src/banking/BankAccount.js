@@ -1,4 +1,5 @@
 const groupBy = require('lodash/groupBy')
+const get = require('lodash/get')
 const Document = require('../Document')
 const matching = require('./matching-accounts')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
@@ -45,6 +46,22 @@ class BankAccount extends Document {
     return Boolean(
       predictedSlug && createdByApp && predictedSlug !== createdByApp
     )
+  }
+
+  static getUpdatedAt(account) {
+    const vendorUpdatedAt = get(account, 'metadata.updatedAt')
+
+    if (vendorUpdatedAt) {
+      return vendorUpdatedAt
+    }
+
+    const cozyUpdatedAt = get(account, 'cozyMetadata.updatedAt')
+
+    if (cozyUpdatedAt) {
+      return cozyUpdatedAt
+    }
+
+    return null
   }
 }
 

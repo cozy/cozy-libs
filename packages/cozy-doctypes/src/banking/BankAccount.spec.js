@@ -89,3 +89,32 @@ describe('incoherences', () => {
     expect(BankAccount.hasIncoherentCreatedByApp(noCreatedByApp)).toBe(false)
   })
 })
+
+describe('getUpdatedAt', () => {
+  let account
+
+  beforeEach(() => {
+    account = {
+      metadata: {
+        updatedAt: '2019-05-01T16:09:00'
+      },
+      cozyMetadata: {
+        updatedAt: '2019-05-02T15:36:00'
+      }
+    }
+  })
+
+  it("should return metadata.updatedAt if it's defined", () => {
+    expect(BankAccount.getUpdatedAt(account)).toBe('2019-05-01T16:09:00')
+  })
+
+  it('should return cozyMetadata.updatedAt if metadata.updatedAt is not defined', () => {
+    delete account.metadata
+
+    expect(BankAccount.getUpdatedAt(account)).toBe('2019-05-02T15:36:00')
+  })
+
+  it('should return null if neither cozyMetadata.updatedAt nor metadata.updatedAt is defined', () => {
+    expect(BankAccount.getUpdatedAt({})).toBe(null)
+  })
+})
