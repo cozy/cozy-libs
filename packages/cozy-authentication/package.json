@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "1.12.4",
+  "version": "1.12.5",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
@@ -38,7 +38,7 @@
   },
   "dependencies": {
     "cozy-device-helper": "1.7.1",
-    "cozy-flags": "1.6.0",
+    "cozy-flags": "^1.6.1",
     "localforage": "1.7.3",
     "postcss-merge-rules": "4.0.3",
     "prop-types": "15.7.2",

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.6.1"></a>
+## 1.6.1 (2019-05-03)
+
+
+### Bug Fixes
+
+* Expose FlagSwitcher only in browser context ([f2fafa7](https://github.com/cozy/cozy-libs/commit/f2fafa7)), closes [#402](https://github.com/cozy/cozy-libs/issues/402)
+* Fix cozy-mjml with nsjail ([#392](https://github.com/cozy/cozy-libs/issues/392)) ([300a4e6](https://github.com/cozy/cozy-libs/commit/300a4e6))
+
+
+
+
 <a name="1.6.0"></a>
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.5.9...cozy-flags@1.6.0) (2019-03-29)
 
