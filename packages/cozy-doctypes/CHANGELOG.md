@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.44.1"></a>
+## [1.44.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.44.0...cozy-doctypes@1.44.1) (2019-05-06)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Contact's me propType should not be required ([d1963f3](https://github.com/cozy/cozy-libs/commit/d1963f3))
+* **cozy-doctypes:** Missing shape in arrayOf in Contact propTypes ([1db4414](https://github.com/cozy/cozy-libs/commit/1db4414))
+
+
+
+
 <a name="1.44.0"></a>
 # [1.44.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.43.0...cozy-doctypes@1.44.0) (2019-05-03)
 
