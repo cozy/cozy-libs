@@ -6,6 +6,8 @@ import { withClient } from 'cozy-client'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import * as onboarding from './utils/onboarding'
+import Modal from 'cozy-ui/transpiled/react/Modal'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import deeplink from './utils/deeplink'
 import credentials from './utils/credentials'
@@ -18,6 +20,24 @@ const clientUpdateEvents = ['login', 'logout', 'revoked', 'unrevoked']
 
 export const LoggingInViaOnboarding = () => null
 
+const centeredFullscreen = {
+  justifyContent: 'center',
+  height: '100%',
+  alignItems: 'center',
+  display: 'flex',
+  flexDirection: 'column'
+}
+
+export const LoginInComponent = () => {
+  return (
+    <Modal into="body" mobileFullscreen closable={false}>
+      <div style={centeredFullscreen}>
+        <Spinner size="xxlarge" />
+      </div>
+    </Modal>
+  )
+}
+
 export class MobileRouter extends Component {
   constructor(props) {
     super(props)
@@ -28,6 +48,7 @@ export class MobileRouter extends Component {
     this.afterAuthentication = this.afterAuthentication.bind(this)
 
     this.afterLogout = this.afterLogout.bind(this)
+    this.handleBeforeLogin = this.handleBeforeLogin.bind(this)
     this.handleBeforeLogout = this.handleBeforeLogout.bind(this)
     this.handleRequestLogout = this.handleRequestLogout.bind(this)
 
@@ -55,6 +76,7 @@ export class MobileRouter extends Component {
     for (let ev of clientUpdateEvents) {
       client.on(ev, this.update)
     }
+    client.on('beforeLogin', this.handleBeforeLogin)
     client.on('login', this.afterAuthentication)
     client.on('beforeLogout', this.handleBeforeLogout)
     client.on('logout', this.afterLogout)
@@ -65,6 +87,7 @@ export class MobileRouter extends Component {
     for (let ev of clientUpdateEvents) {
       client.removeListener(ev, this.update)
     }
+    client.removeListener('beforeLogin', this.handleBeforeLogin)
     client.removeListener('login', this.afterAuthentication)
     client.removeListener('beforeLogout', this.handleBeforeLogout)
     client.removeListener('logout', this.afterLogout)
@@ -186,6 +209,7 @@ export class MobileRouter extends Component {
       appRoutes,
       onException,
       client,
+      LoginInComponent,
       children,
 
       // TODO LogoutComponent should come from props.components and have
@@ -194,7 +218,11 @@ export class MobileRouter extends Component {
     } = this.props
 
     const { Authentication, Revoked } = this.props.components
-    const { isLoggingInViaOnboarding, isLoggingOut } = this.state
+    const { isLoggingInViaOnboarding, isLoggingIn, isLoggingOut } = this.state
+
+    if (isLoggingIn) {
+      return <LoginInComponent />
+    }
 
     if (LogoutComponent && isLoggingOut) {
       return <LogoutComponent />
@@ -231,7 +259,12 @@ export class MobileRouter extends Component {
     await onboarding.registerAndLogin(client, client.stackClient.uri)
   }
 
+  handleBeforeLogin() {
+    this.setState({ isLoggingIn: true })
+  }
+
   async afterAuthentication() {
+    this.setState({ isLoggingIn: false })
     this.props.history.replace(this.props.loginPath)
     await credentials.saveFromClient(this.props.client)
     if (this.props.onAuthenticated) {
@@ -269,7 +302,9 @@ MobileRouter.defaultProps = {
   components: {
     Authentication,
     Revoked
-  }
+  },
+
+  LoginInComponent
 }
 
 MobileRouter.propTypes = {
@@ -294,6 +329,9 @@ MobileRouter.propTypes = {
   loginPath: PropTypes.string,
   /** After logout, where do we go */
   logoutPath: PropTypes.string,
+
+  /** LoginInComponent is displayed while the client is logging out */
+  LoginInComponent: PropTypes.elementType,
 
   /** LogoutComponent is displayed while the client is logging out */
   LogoutComponent: PropTypes.elementType

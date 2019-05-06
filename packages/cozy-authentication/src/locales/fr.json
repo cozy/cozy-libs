@@ -12,9 +12,9 @@
       "server_selection": {
         "title": "Vous connecter à votre Cozy",
         "lostpwd": "[J'ai oublié l'adresse de mon Cozy](https://manager.cozycloud.cc/cozy/reminder)",
-        "description": "Exemple: https://**camillenimbus**.mycozy.cloud\n",
+        "description": "Exemple: https://**claude**.mycozy.cloud\n",
         "label": "Entrez l'adresse de votre Cozy",
-        "cozy_address_placeholder": "camillenimbus.mycozy.cloud",
+        "cozy_address_placeholder": "claude.mycozy.cloud",
         "button": "Suivant",
         "previous": "Précédent",
         "wrong_address_with_email": "Vous avez entré une adresse email. Pour vous connecter à votre Cozy vous devez entrer son url, sous la forme https://camillenimbus.mycozy.cloud",

@@ -6,17 +6,27 @@ import PropTypes from 'prop-types'
 import { Route, hashHistory } from 'react-router'
 import 'date-fns/locale/en/index'
 
+import CozyClient, { CozyProvider, withClient } from 'cozy-client'
+import CozyStackClient from 'cozy-stack-client'
 import 'cozy-ui/transpiled/react/stylesheet.css'
+import IconSprite from 'cozy-ui/transpiled/react/Icon/Sprite'
 import { I18n, translate, Button } from 'cozy-ui/transpiled/react'
 import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
-
-import CozyClient, { CozyProvider, withClient } from 'cozy-client'
 
 import { MobileRouter } from '../dist'
 import icon from './icon.png'
 
+const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 const client = new CozyClient({
   scope: ['io.cozy.files'],
+  links: [
+    new CozyStackClient(),
+    {
+      onLogin: async function() {
+        await sleep(2000) // So that we can see the logging in view
+      }
+    }
+  ],
   oauth: {
     clientName: 'Example App',
     softwareID: 'io.cozy.example',
@@ -193,6 +203,7 @@ class App extends React.Component {
             </CozyProvider>
           </I18n>
         </LocaleContext>
+        <IconSprite />
       </ErrorBoundary>
     )
   }
