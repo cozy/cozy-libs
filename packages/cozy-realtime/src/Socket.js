@@ -23,16 +23,16 @@ class Socket {
   _webSocket = null
 
   /**
-   * Cozy Client url
+   * Function to return cozy client url
    *
-   * @type {String}
+   * @type {Function}
    */
   _url = null
 
   /**
-   * Cozy Client token
+   * Function to return cozy client token
    *
-   * @type {String}
+   * @type {Function}
    */
   _token = null
 
@@ -42,12 +42,12 @@ class Socket {
    * @see https://developer.mozilla.org/en-US/docs/Web/API/WebSockets_API/Writing_WebSocket_client_applications#Creating_a_WebSocket_object
    *
    * @constructor
-   * @param {String} url  The cozy client url
-   * @param {String} token  The cozy client token
+   * @param {Function} getUrl  Function to return cozy client url
+   * @param {Function} getToken  Function to return cozy client token
    */
-  constructor(url, token) {
-    this._url = url
-    this._token = token
+  constructor(getUrl, getToken) {
+    this._getUrl = getUrl
+    this._getToken = getToken
 
     this.removeAllListeners = this.removeAllListeners.bind(this)
     this.on('close', this.removeAllListeners)
@@ -57,11 +57,6 @@ class Socket {
     return !!(this._webSocket && this._webSocket.readyState === WebSocket.OPEN)
   }
 
-  updateAuthentication(token) {
-    this._token = token
-    this.authentication()
-  }
-
   /**
    * Establish a realtime connection
    *
@@ -69,7 +64,7 @@ class Socket {
    */
   connect() {
     return new Promise((resolve, reject) => {
-      this._webSocket = new WebSocket(this._url, this._doctype)
+      this._webSocket = new WebSocket(this._getUrl(), this._doctype)
 
       this._webSocket.onmessage = event => {
         const data = JSON.parse(event.data)
@@ -88,7 +83,7 @@ class Socket {
       }
 
       this._webSocket.onopen = event => {
-        this.authentication()
+        this.authenticate()
         this.emit('open', event)
         resolve(event)
       }
@@ -100,10 +95,10 @@ class Socket {
    *
    * @see https://github.com/cozy/cozy-stack/blob/master/docs/realtime.md#auth
    */
-  authentication() {
+  authenticate() {
     if (this.isOpen()) {
       this._webSocket.send(
-        JSON.stringify({ method: 'AUTH', payload: this._token })
+        JSON.stringify({ method: 'AUTH', payload: this._getToken() })
       )
     }
   }

@@ -126,10 +126,10 @@ class CozyRealtime {
    */
   _createSocket() {
     if (!this._socket) {
-      const url = getWebSocketUrl(this._cozyClient)
-      const token = getWebSocketToken(this._cozyClient)
+      const getUrl = () => getWebSocketUrl(this._cozyClient)
+      const getToken = () => getWebSocketToken(this._cozyClient)
 
-      this._socket = new Socket(url, token)
+      this._socket = new Socket(getUrl, getToken)
       this._socket.on('message', this._receiveMessage)
       this._socket.on('error', this._receiveError)
     }
@@ -192,8 +192,7 @@ class CozyRealtime {
    */
   _updateAuthentication() {
     logger.info('Update token on socket')
-    const token = getWebSocketToken(this._cozyClient)
-    this._socket.updateAuthentication(token)
+    this._socket.authenticate()
   }
 
   /**

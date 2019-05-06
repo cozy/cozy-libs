@@ -178,15 +178,15 @@ describe('CozyRealtime', () => {
 
   describe('authentication', () => {
     it('should update socket authentication when client logs in', async () => {
-      realtime._socket.updateAuthentication = jest.fn()
+      realtime._socket.authenticate = jest.fn()
       cozyClient.emit('login')
-      expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
+      expect(realtime._socket.authenticate.mock.calls.length).toBe(1)
     })
 
-    it('should update socket authentication when client token refreshed ', async () => {
-      realtime._socket.updateAuthentication = jest.fn()
-      cozyClient.emit('login')
-      expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
+    it('should update socket authentication when client token is refreshed ', async () => {
+      realtime._socket.authenticate = jest.fn()
+      cozyClient.emit('tokenRefreshed')
+      expect(realtime._socket.authenticate.mock.calls.length).toBe(1)
     })
   })
 })

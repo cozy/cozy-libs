@@ -1,15 +1,17 @@
 import Socket from './Socket'
 import { Server } from 'mock-socket'
 
-const WS_URL = 'ws://cozy.tools:8888/realtime/'
-const COZY_TOKEN = 'zvNpzsHILcXpnDBlUfmAqVuEEuyWvPYn'
+let url = 'ws://cozy.tools:8888/realtime/'
+const getUrl = () => url
+let token = 'zvNpzsHILcXpnDBlUfmAqVuEEuyWvPYn'
+const getToken = () => token
 
 describe('Socket', () => {
   let fakeServer, socket
 
   beforeEach(() => {
-    socket = new Socket(WS_URL, COZY_TOKEN)
-    fakeServer = new Server(WS_URL)
+    socket = new Socket(getUrl, getToken)
+    fakeServer = new Server(getUrl())
   })
 
   afterEach(() => {
@@ -33,7 +35,7 @@ describe('Socket', () => {
       serverSocket.on('message', data => {
         expect(JSON.parse(data)).toEqual({
           method: 'AUTH',
-          payload: COZY_TOKEN
+          payload: getToken()
         })
         done()
       })
@@ -56,7 +58,8 @@ describe('Socket', () => {
       })
     })
     await socket.connect()
-    socket.updateAuthentication(newToken)
+    token = newToken
+    socket.authenticate()
   })
 
   it('should emit open event', async done => {
