@@ -14,7 +14,8 @@
     "test": "env USE_REACT=true yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
     "lint": "cd ..; yarn lint packages/cozy-authentication",
-    "example": "env USE_REACT=true npx parcel $(pwd)/examples/index.html"
+    "example": "nf start",
+    "example-server": "env USE_REACT=true parcel --port 1234 $(pwd)/examples/index.html"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -28,6 +29,7 @@
     "enzyme": "^3.9.0",
     "enzyme-adapter-react-16": "^1.11.2",
     "eslint-cli": "1.1.1",
+    "foreman": "^3.0.1",
     "jest": "24.5.0",
     "parcel": "^1.12.3",
     "postcss-merge-rules": "4.0.3",
