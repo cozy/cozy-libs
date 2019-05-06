@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.13.0"></a>
+# [1.13.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.12.5...cozy-authentication@1.13.0) (2019-05-06)
+
+
+### Features
+
+* Prevent flash of Authentication view ([835ce0b](https://github.com/cozy/cozy-libs/commit/835ce0b))
+* Show view while logging in ([3fef80a](https://github.com/cozy/cozy-libs/commit/3fef80a))
+
+
+
+
 <a name="1.12.5"></a>
 ## [1.12.5](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.12.4...cozy-authentication@1.12.5) (2019-05-03)
 
