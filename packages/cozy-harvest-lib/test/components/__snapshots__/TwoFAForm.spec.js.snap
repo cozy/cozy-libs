@@ -42,7 +42,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
         ellipsis={false}
         tag="div"
       >
-        twoFAForm.desc.default
+        twoFAForm.desc
       </Text>
       <Field
         autoComplete="off"

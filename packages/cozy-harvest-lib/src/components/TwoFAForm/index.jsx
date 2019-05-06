@@ -65,9 +65,7 @@ export class TwoFAForm extends PureComponent {
             <SubTitle className="u-mb-1 u-mt-half u-ta-center">
               {t(`twoFAForm.title.${accounts.getTwoFACodeProvider(account)}`)}
             </SubTitle>
-            <Text>
-              {t(`twoFAForm.desc.${accounts.getTwoFACodeProvider(account)}`)}
-            </Text>
+            <Text>{t('twoFAForm.desc')}</Text>
             <Field
               className="u-mt-0 u-mb-0"
               value={twoFACode}
