@@ -74,6 +74,7 @@ describe('MobileRouter', () => {
             {...props}
             loginPath="/afterLogin"
             logoutPath="/afterLogout"
+            initialTriedToReconnect={true}
             LogoutComponent={LogoutComponent}
           />
         </I18n>

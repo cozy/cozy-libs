@@ -52,7 +52,10 @@ export class MobileRouter extends Component {
     this.handleBeforeLogout = this.handleBeforeLogout.bind(this)
     this.handleRequestLogout = this.handleRequestLogout.bind(this)
 
-    this.state = { isLoggingInViaOnboarding: false }
+    this.state = {
+      isLoggingInViaOnboarding: false,
+      triedToReconnect: props.initialTriedToReconnect || false
+    }
   }
 
   componentDidMount() {
@@ -65,9 +68,13 @@ export class MobileRouter extends Component {
   async tryToReconnect() {
     const client = this.props.client
     const saved = await credentials.get()
-    if (saved && saved.oauthOptions) {
-      client.stackClient.setOAuthOptions(saved.oauthOptions)
-      client.login({ uri: saved.uri, token: saved.token })
+    try {
+      if (saved && saved.oauthOptions) {
+        client.stackClient.setOAuthOptions(saved.oauthOptions)
+        client.login({ uri: saved.uri, token: saved.token })
+      }
+    } finally {
+      this.setState({ triedToReconnect: true })
     }
   }
 
@@ -218,7 +225,16 @@ export class MobileRouter extends Component {
     } = this.props
 
     const { Authentication, Revoked } = this.props.components
-    const { isLoggingInViaOnboarding, isLoggingIn, isLoggingOut } = this.state
+    const {
+      isLoggingInViaOnboarding,
+      isLoggingIn,
+      isLoggingOut,
+      triedToReconnect
+    } = this.state
+
+    if (!triedToReconnect) {
+      return null
+    }
 
     if (isLoggingIn) {
       return <LoginInComponent />
@@ -334,7 +350,12 @@ MobileRouter.propTypes = {
   LoginInComponent: PropTypes.elementType,
 
   /** LogoutComponent is displayed while the client is logging out */
-  LogoutComponent: PropTypes.elementType
+  LogoutComponent: PropTypes.elementType,
+
+  /** Used to set internal state property `triedToReconnect` on instantation.
+   *  Is used by tests.
+   */
+  initialTriedToReconnect: PropTypes.bool
 }
 
 export const DumbMobileRouter = MobileRouter
