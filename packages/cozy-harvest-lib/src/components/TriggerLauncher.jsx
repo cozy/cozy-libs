@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { withMutations } from 'cozy-client'
 
-import TwoFAModal from './TwoFA/Modal'
+import TwoFAForm from './TwoFAForm'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 
@@ -17,6 +17,7 @@ const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 const PENDING = 'PENDING'
 const SUCCESS = 'SUCCESS'
+const RUNNING_TWOFA = 'RUNNING_TWOFA'
 
 /**
  * Trigger Launcher renders its children with following props:
@@ -46,6 +47,7 @@ export class TriggerLauncher extends Component {
 
     this.launch = this.launch.bind(this)
     this.handleTwoFAModalDismiss = this.handleTwoFAModalDismiss.bind(this)
+    this.handle2FACode = this.handle2FACode.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
@@ -77,6 +79,11 @@ export class TriggerLauncher extends Component {
     this.setState({ status: TWO_FA_MISMATCH, showTwoFAModal: true })
   }
 
+  handle2FACode(code) {
+    this.setState({ status: RUNNING_TWOFA })
+    this.konnectorJob.sendTwoFACode(code)
+  }
+
   async launch() {
     const { trigger } = this.props
     const { client } = this.context
@@ -95,7 +102,7 @@ export class TriggerLauncher extends Component {
 
   render() {
     const { showTwoFAModal, status } = this.state
-    const { children, submitting } = this.props
+    const { account, children, konnector, submitting } = this.props
 
     return (
       <div>
@@ -104,10 +111,13 @@ export class TriggerLauncher extends Component {
           running: ![ERRORED, IDLE, SUCCESS].includes(status) || submitting
         })}
         {showTwoFAModal && (
-          <TwoFAModal
+          <TwoFAForm
+            account={account}
+            konnector={konnector}
             dismissAction={this.handleTwoFAModalDismiss}
-            hasError={status === TWO_FA_MISMATCH}
-            onSubmit={this.konnectorJob.sendTwoFACode}
+            handleSubmitTwoFACode={this.handle2FACode}
+            submitting={status === RUNNING_TWOFA}
+            retryAsked={status === TWO_FA_MISMATCH}
             into="coz-harvest-modal-place"
           />
         )}
