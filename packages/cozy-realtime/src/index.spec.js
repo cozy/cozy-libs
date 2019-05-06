@@ -194,15 +194,15 @@ describe('CozyRealtime', () => {
 describe('generateKey', () => {
   it('should return key from config', () => {
     let config = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
-    expect(generateKey(config)).toBe('io.cozy.bank.accounts\\created')
+    expect(generateKey(config)).toBe('io.cozy.bank.accounts//created')
     config = {
       type: 'io.cozy.bank.accounts',
       eventName: EVENT_CREATED,
       id: 'dzqezfd'
     }
-    expect(generateKey(config)).toBe('io.cozy.bank.accounts\\created\\dzqezfd')
+    expect(generateKey(config)).toBe('io.cozy.bank.accounts//created//dzqezfd')
     config = { type: 'io.cozy.bank.accounts', id: 'dzqezfd' }
-    expect(generateKey(config)).toBe('io.cozy.bank.accounts\\dzqezfd')
+    expect(generateKey(config)).toBe('io.cozy.bank.accounts//dzqezfd')
   })
 })
 

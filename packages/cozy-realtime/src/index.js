@@ -10,7 +10,7 @@ export const EVENT_CREATED = 'created'
 export const EVENT_UPDATED = 'updated'
 export const EVENT_DELETED = 'deleted'
 
-const INDEX_KEY_SEPARATOR = '\\'
+const INDEX_KEY_SEPARATOR = '//'
 
 /**
  * Generate a key for an event
