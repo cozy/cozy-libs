@@ -7,7 +7,8 @@ import { I18n } from 'cozy-ui/transpiled/react/I18n'
 import Authentication from './Authentication'
 import MobileRouter, {
   DumbMobileRouter,
-  LoggingInViaOnboarding
+  LoggingInViaOnboarding,
+  LoginInComponent
 } from './MobileRouter'
 import Revoked from './Revoked'
 import * as onboarding from './utils/onboarding'
@@ -73,6 +74,7 @@ describe('MobileRouter', () => {
             {...props}
             loginPath="/afterLogin"
             logoutPath="/afterLogout"
+            initialTriedToReconnect={true}
             LogoutComponent={LogoutComponent}
           />
         </I18n>
@@ -151,6 +153,19 @@ describe('MobileRouter', () => {
       window.handleOpenURL = jest.fn()
       instance.handleUniversalLink({ url: 'http://fake.url.com' })
       expect(window.handleOpenURL).toHaveBeenCalledWith('http://fake.url.com')
+    })
+  })
+
+  describe('Logging in', () => {
+    it('should show LogInComponent during logout', () => {
+      LogoutComponent = LoggingOut
+      setup()
+      client.emit('beforeLogin')
+      app.update()
+      expect(app.find(LoginInComponent).length).toBe(1)
+      client.emit('login')
+      app.update()
+      expect(app.find(LoginInComponent).length).toBe(0)
     })
   })
 
