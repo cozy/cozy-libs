@@ -41,7 +41,7 @@ or
 ## Example
 
 ```js
-import CozyRealtime, { EVENT_CREATED, EVENT_UPDATED } from 'cozy-realtime'
+import CozyRealtime from 'cozy-realtime'
 
 const realtime = new CozyRealtime({ cozyClient })
 const type = 'io.cozy.accounts'
@@ -54,19 +54,15 @@ const handlerUpdate = accounts => {
 }
 
 // To subscribe
-await realtime.onCreate({ type }, handlerCreate)
-await realtime.onUpdate({ type, id }, handlerUpdate)
+await realtime.subscribe('created', type, handlerCreate)
+await realtime.subscribe('updated', type, handlerUpdate)
+await realtime.subscribe('updated', type, id, handlerUpdate)
 
-// To unsubscribe event for a type, an event name and an handler
-await realtime.unsubscribe({ type, eventName: EVENT_CREATED }, handlerCreate)
-// To unsubscribe all events for a type, id and an event name
-await realtime.unsubscribe({ type, eventName: EVENT_UPDATED, id })
-// To unsubscribe all events for a type and an event name
-await realtime.unsubscribe({ type, eventName: EVENT_UPDATED })
-// To unsubscribe all event for a type and id
-await realtime.unsubscribe({ type, id })
-// To unsubscribe all event for a type
-await realtime.unsubscribe({ type })
+// To unsubscribe
+await realtime.unsubscribe('created', type, handlerCreate)
+await realtime.unsubscribe('updated', type, handlerCreate)
+await realtime.unsubscribe('updated', type, id, handlerCreate)
+
 // To unsubscribe all
 await realtime.unsubscribeAll()
 ```

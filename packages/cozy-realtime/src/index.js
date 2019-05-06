@@ -1,14 +1,9 @@
 import MicroEE from 'microee'
 import Socket from './Socket'
-import compact from 'lodash/compact'
 import minilog from 'minilog'
 
 const logger = minilog('cozy-realtime')
 minilog.suggest.deny('cozy-realtime', 'info')
-
-export const EVENT_CREATED = 'created'
-export const EVENT_UPDATED = 'updated'
-export const EVENT_DELETED = 'deleted'
 
 const INDEX_KEY_SEPARATOR = '//'
 
@@ -17,8 +12,53 @@ const INDEX_KEY_SEPARATOR = '//'
  *
  * @return {String}  Event key
  */
-export const generateKey = ({ type, id, eventName }) =>
-  compact([type, eventName, id]).join(INDEX_KEY_SEPARATOR)
+export const generateKey = (eventName, type, id) =>
+  `${eventName}${INDEX_KEY_SEPARATOR}${type}${INDEX_KEY_SEPARATOR}${id}`
+
+const getHandlerAndId = (handlerOrId, handlerOrUndefined) => {
+  if (
+    typeof handlerOrId !== 'function' &&
+    typeof handlerOrUndefined !== 'function'
+  ) {
+    throw new Error('You should call this function with an handler')
+  }
+
+  let id, handler
+  if (!handlerOrUndefined) {
+    id = undefined
+    handler = handlerOrId
+  } else {
+    id = handlerOrId
+    handler = handlerOrUndefined
+  }
+
+  return { id, handler }
+}
+
+const validateParameters = (eventName, type, id, handler) => {
+  let msg
+
+  if (!['created', 'updated', 'deleted'].includes(eventName)) {
+    msg = `'${eventName}' is not a valid event, valid events are 'created', 'updated' or 'deleted'.`
+  }
+
+  if (typeof type !== 'string') {
+    msg = `'${type}' is not a valide type, it should be a string.`
+  }
+
+  if (id && eventName === 'created') {
+    msg = `The 'id' should not be specified for 'created' event.`
+  }
+
+  if (typeof handler !== 'function') {
+    msg = `The handler '${handler}' should be a function.`
+  }
+
+  if (msg) {
+    logger.error(msg)
+    throw new Error(msg)
+  }
+}
 
 /**
  * Return websocket url from cozyClient
@@ -55,13 +95,6 @@ class CozyRealtime {
    * @type {CozyClient}
    */
   _cozyClient = null
-
-  /**
-   * Number of handlers
-   *
-   * @type {Subscriptions}
-   */
-  _numberOfHandlers = 0
 
   /**
    * A Socket class
@@ -164,7 +197,7 @@ class CozyRealtime {
     const subscribeList = Object.keys(this._events)
       .map(key => {
         if (!key.includes(INDEX_KEY_SEPARATOR)) return
-        const [type, , id] = key.split(INDEX_KEY_SEPARATOR)
+        const [, type, id] = key.split(INDEX_KEY_SEPARATOR)
         return { type, id }
       })
       .filter(Boolean)
@@ -178,10 +211,11 @@ class CozyRealtime {
    * Launch handlers
    */
   _receiveMessage({ type, id, eventName }, doc) {
-    const keys = [generateKey({ type, eventName })]
+    const keys = [generateKey(eventName, type)]
     if (id) {
-      keys.push(generateKey({ type, id, eventName }))
+      keys.push(generateKey(eventName, type, id))
     }
+
     for (const key of keys) {
       this.emit(key, doc)
     }
@@ -217,14 +251,16 @@ class CozyRealtime {
    * given type on the given doctype or document is received from stack.
    * @return {Promise}           Promise that the message has been sent.
    */
-  _subscribe(config, handler) {
-    return new Promise(resolve => {
-      const key = generateKey(config)
-      this.on(key, handler)
-      this._numberOfHandlers++
+  subscribe(eventName, type, handlerOrId, handlerOrUndefined) {
+    const { handler, id } = getHandlerAndId(handlerOrId, handlerOrUndefined)
+    validateParameters(eventName, type, id, handler)
 
-      this._socket.once(`subscribe_${config.type}_${config.id}`, resolve)
-      this._socket.subscribe(config.type, config.id)
+    return new Promise(resolve => {
+      const key = generateKey(eventName, type, id)
+      this.on(key, handler)
+
+      this._socket.once(`subscribe_${type}_${id}`, resolve)
+      this._socket.subscribe(type, id)
     })
   }
 
@@ -238,64 +274,44 @@ class CozyRealtime {
    * @param {Function}  handler   Function to call when an event of the
    * given type on the given doctype or document is received from stack.
    */
-  unsubscribe(config, handler = undefined) {
-    const keys = [generateKey(config)]
+  unsubscribe(eventName, type, handlerOrId, handlerOrUndefined) {
+    const { handler, id } = getHandlerAndId(handlerOrId, handlerOrUndefined)
+    validateParameters(eventName, type, id, handler)
+    const key = generateKey(eventName, type, id)
 
-    if (!config.eventName) {
-      keys.push(generateKey({ ...config, eventName: EVENT_CREATED }))
-      keys.push(generateKey({ ...config, eventName: EVENT_UPDATED }))
-      keys.push(generateKey({ ...config, eventName: EVENT_DELETED }))
-    }
+    this.removeListener(key, handler)
 
-    for (const key of keys) {
-      if (this._events[key]) {
-        if (handler) {
-          this._numberOfHandlers--
-          this.removeListener(key, handler)
-        } else {
-          this._numberOfHandlers -= this._events[key].length
-          this.removeAllListeners(key)
-        }
-      }
-    }
-
-    if (this._numberOfHandlers === 0) {
+    if (!this._haveEventHandler()) {
       this._resetSocket()
     }
-  }
-
-  _validateConfig(name, config, authorize) {
-    const notAllowed = Object.keys(config).filter(k => !authorize.includes(k))
-    if (notAllowed.length > 0) {
-      throw new Error(`'${name}' not allow '${notAllowed}' configuration.`)
-    }
-  }
-
-  onCreate(config, handler) {
-    this._validateConfig('onCreate', config, ['type'])
-
-    return this._subscribe({ ...config, eventName: EVENT_CREATED }, handler)
-  }
-
-  onUpdate(config, handler) {
-    this._validateConfig('onUpdate', config, ['type', 'id'])
-
-    return this._subscribe({ ...config, eventName: EVENT_UPDATED }, handler)
-  }
-
-  onDelete(config, handler) {
-    this._validateConfig('onUpdate', config, ['type', 'id'])
-
-    return this._subscribe({ ...config, eventName: EVENT_DELETED }, handler)
   }
 
   /**
    * Unsubscibe all handlers and close socket
    */
   unsubscribeAll() {
-    this.removeAllListeners()
-    this._numberOfHandlers = 0
+    this._getEventKeys()
+      .map(key => this._events[key].length > 0 && key)
+      .filter(Boolean)
+      .forEach(key => (this._events[key] = []))
+
     this._resetSocket()
+  }
+
+  _getEventKeys() {
+    if (!this._events) return []
+
+    return Object.keys(this._events)
+      .map(key => key.includes(INDEX_KEY_SEPARATOR) && key)
+      .filter(Boolean)
+  }
+
+  _haveEventHandler() {
+    return (
+      this._getEventKeys()
+        .map(key => this._events[key].length)
+        .filter(Boolean).length > 0
+    )
   }
 }
 

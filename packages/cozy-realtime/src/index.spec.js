@@ -1,8 +1,7 @@
 import CozyRealtime, {
   generateKey,
   getWebSocketUrl,
-  getWebSocketToken,
-  EVENT_CREATED
+  getWebSocketToken
 } from '.'
 import { Server } from 'mock-socket'
 import MicroEE from 'microee'
@@ -47,7 +46,7 @@ describe('CozyRealtime', () => {
 
   describe('subscribe', () => {
     it('should launch handler when document is created', async done => {
-      await realtime.onCreate({ type }, doc => {
+      await realtime.subscribe('created', type, doc => {
         expect(doc).toEqual(fakeDoc)
         done()
       })
@@ -55,12 +54,14 @@ describe('CozyRealtime', () => {
       cozyStack.emitMessage(type, fakeDoc, 'CREATED')
     })
 
-    it('should throw an error when config has id for onCreate', () => {
-      expect(() => realtime.onCreate({ type, id: 'my_id' }, () => {})).toThrow()
+    it('should throw an error when config has id for created event', () => {
+      expect(() =>
+        realtime.subscribe('created', type, 'my_id', () => {})
+      ).toThrow()
     })
 
     it('should launch handler when document is updated', async done => {
-      await realtime.onUpdate({ type }, doc => {
+      await realtime.subscribe('updated', type, doc => {
         expect(doc).toEqual(fakeDoc)
         done()
       })
@@ -69,7 +70,7 @@ describe('CozyRealtime', () => {
     })
 
     it('should launch handler when document with id is updated', async done => {
-      await realtime.onUpdate({ type, id: fakeDoc._id }, doc => {
+      await realtime.subscribe('updated', type, fakeDoc._id, doc => {
         expect(doc).toEqual(fakeDoc)
         done()
       })
@@ -78,7 +79,7 @@ describe('CozyRealtime', () => {
     })
 
     it('should launch handler when document is deleted', async done => {
-      await realtime.onDelete({ type }, doc => {
+      await realtime.subscribe('deleted', type, doc => {
         expect(doc).toEqual(fakeDoc)
         done()
       })
@@ -87,7 +88,7 @@ describe('CozyRealtime', () => {
     })
 
     it('should launch handler when document with id is deleted', async done => {
-      await realtime.onDelete({ type, id: fakeDoc._id }, doc => {
+      await realtime.subscribe('deleted', type, fakeDoc._id, doc => {
         expect(doc).toEqual(fakeDoc)
         done()
       })
@@ -95,9 +96,9 @@ describe('CozyRealtime', () => {
       cozyStack.emitMessage(type, fakeDoc, 'DELETED', fakeDoc._id)
     })
 
-    it('should relauch socket subscribe after an error', async () => {
+    it('should relaunch socket subscribe after an error', async () => {
       const handler = jest.fn()
-      await realtime.onCreate({ type }, handler)
+      await realtime.subscribe('created', type, handler)
       realtime._retryDelay = 100
 
       expect(realtime._socket.isOpen()).toBe(true)
@@ -113,6 +114,23 @@ describe('CozyRealtime', () => {
     })
   })
 
+  describe('_haveEventHandler', () => {
+    it('should return if have event handler', async () => {
+      const handler = jest.fn()
+      expect(realtime._haveEventHandler()).toBe(false)
+      await realtime.subscribe('created', type, handler)
+      expect(realtime._haveEventHandler()).toBe(true)
+      await realtime.subscribe('updated', type, handler)
+      expect(realtime._haveEventHandler()).toBe(true)
+      await realtime.unsubscribe('created', 'another_type', handler)
+      expect(realtime._haveEventHandler()).toBe(true)
+      await realtime.unsubscribe('created', type, handler)
+      expect(realtime._haveEventHandler()).toBe(true)
+      await realtime.unsubscribe('updated', type, handler)
+      expect(realtime._haveEventHandler()).toBe(false)
+    })
+  })
+
   describe('unsubscribe', () => {
     let handlerCreate, handlerUpdate, handlerDelete
 
@@ -120,46 +138,38 @@ describe('CozyRealtime', () => {
       handlerCreate = jest.fn()
       handlerUpdate = jest.fn()
       handlerDelete = jest.fn()
-      await realtime.onCreate({ type }, handlerCreate)
-      await realtime.onUpdate({ type }, handlerUpdate)
-      await realtime.onDelete({ type }, handlerDelete)
-      await realtime.onCreate({ type: 'io.cozy.accounts' }, handlerCreate)
+      await realtime.subscribe('created', type, handlerCreate)
+      await realtime.subscribe('updated', type, handlerUpdate)
+      await realtime.subscribe('deleted', type, handlerDelete)
+      await realtime.subscribe('created', 'io.cozy.accounts', handlerCreate)
     })
 
     afterEach(() => {
       realtime.unsubscribeAll()
     })
 
-    it('should unsubscribe handlerCreate with type, eventName and handler', () => {
+    it('should unsubscribe a created event', () => {
       expect(realtime._socket.isOpen()).toBe(true)
-      expect(realtime._numberOfHandlers).toBe(4)
-      realtime.unsubscribe({ type, eventName: EVENT_CREATED }, handlerCreate)
-      expect(realtime._numberOfHandlers).toBe(3)
+      realtime.unsubscribe('created', type, handlerCreate)
       expect(realtime._socket.isOpen()).toBe(true)
-    })
-
-    it('should unsubscribe handlerCreate with type and eventName', () => {
+      realtime.unsubscribe('updated', type, handlerUpdate)
       expect(realtime._socket.isOpen()).toBe(true)
-      expect(realtime._numberOfHandlers).toBe(4)
-      realtime.unsubscribe({ type, eventName: EVENT_CREATED })
-      expect(realtime._numberOfHandlers).toBe(3)
+      realtime.unsubscribe('deleted', type, handlerDelete)
       expect(realtime._socket.isOpen()).toBe(true)
-    })
-
-    it('should unsubscribe handlerCreate with type', () => {
-      expect(realtime._socket.isOpen()).toBe(true)
-      expect(realtime._numberOfHandlers).toBe(4)
-      realtime.unsubscribe({ type })
-      expect(realtime._numberOfHandlers).toBe(1)
-      expect(realtime._socket.isOpen()).toBe(true)
-    })
-
-    it('should unsubscribe all events', () => {
-      expect(realtime._socket.isOpen()).toBe(true)
-      expect(realtime._numberOfHandlers).toBe(4)
-      realtime.unsubscribeAll()
-      expect(realtime._numberOfHandlers).toBe(0)
+      realtime.unsubscribe('created', 'io.cozy.accounts', handlerCreate)
       expect(realtime._socket.isOpen()).toBe(false)
+    })
+
+    it('should unsubscribe all events', async () => {
+      expect(realtime._socket.isOpen()).toBe(true)
+      realtime.unsubscribeAll()
+      expect(realtime._socket.isOpen()).toBe(false)
+    })
+
+    it(`should not unsubscribe 'error' event`, async done => {
+      realtime.on('error', () => done())
+      realtime.unsubscribeAll()
+      realtime.emit('error')
     })
   })
 
@@ -170,7 +180,7 @@ describe('CozyRealtime', () => {
       realtime.on('error', () => done())
       const handler = jest.fn()
 
-      await realtime.onCreate({ type }, handler)
+      await realtime.subscribe('created', type, handler)
       expect(realtime._socket.isOpen()).toBe(true)
       cozyStack.simulate('error')
     })
@@ -193,16 +203,12 @@ describe('CozyRealtime', () => {
 
 describe('generateKey', () => {
   it('should return key from config', () => {
-    let config = { type: 'io.cozy.bank.accounts', eventName: EVENT_CREATED }
-    expect(generateKey(config)).toBe('io.cozy.bank.accounts//created')
-    config = {
-      type: 'io.cozy.bank.accounts',
-      eventName: EVENT_CREATED,
-      id: 'dzqezfd'
-    }
-    expect(generateKey(config)).toBe('io.cozy.bank.accounts//created//dzqezfd')
-    config = { type: 'io.cozy.bank.accounts', id: 'dzqezfd' }
-    expect(generateKey(config)).toBe('io.cozy.bank.accounts//dzqezfd')
+    expect(generateKey('created', 'io.cozy.bank.accounts')).toBe(
+      'created//io.cozy.bank.accounts//undefined'
+    )
+    expect(
+      generateKey('created', 'io.cozy.bank.accounts', 'a_document_id')
+    ).toBe('created//io.cozy.bank.accounts//a_document_id')
   })
 })
 
