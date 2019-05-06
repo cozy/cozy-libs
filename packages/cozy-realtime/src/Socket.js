@@ -96,7 +96,7 @@ class Socket {
   }
 
   /**
-   * send the authentication message to cozy stack
+   * Sends the authentication message to cozy stack
    *
    * @see https://github.com/cozy/cozy-stack/blob/master/docs/realtime.md#auth
    */
@@ -109,11 +109,10 @@ class Socket {
   }
 
   /**
-   * Send a SUBSCRIBE message to stack
+   * Sends a SUBSCRIBE message to cozy stack
    *
    * @see https://github.com/cozy/cozy-stack/blob/master/docs/realtime.md#subscribe
    *
-   * @async
    * @param {String} type  Document doctype to subscribe to
    * @param {String} id  Document id to subscribe to (not required)
    */

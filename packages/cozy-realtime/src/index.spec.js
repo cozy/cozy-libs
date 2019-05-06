@@ -177,7 +177,7 @@ describe('CozyRealtime', () => {
   })
 
   describe('authentication', () => {
-    it('should update socket authentication when client login', async () => {
+    it('should update socket authentication when client logs in', async () => {
       realtime._socket.updateAuthentication = jest.fn()
       cozyClient.emit('login')
       expect(realtime._socket.updateAuthentication.mock.calls.length).toBe(1)
