@@ -59,6 +59,12 @@ class Socket {
     return !!(this._webSocket && this._webSocket.readyState === WebSocket.OPEN)
   }
 
+  isConnecting() {
+    return !!(
+      this._webSocket && this._webSocket.readyState === WebSocket.CONNECTING
+    )
+  }
+
   /**
    * Establish a realtime connection
    *

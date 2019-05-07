@@ -255,6 +255,15 @@ class CozyRealtime {
     const { handler, id } = getHandlerAndId(handlerOrId, handlerOrUndefined)
     validateParameters(eventName, type, id, handler)
 
+    if (this._socket.isConnecting()) {
+      return new Promise(resolve => {
+        this._socket.once('open', async () => {
+          await this.subscribe(eventName, type, handlerOrId, handlerOrUndefined)
+          resolve()
+        })
+      })
+    }
+
     return new Promise(resolve => {
       const key = generateKey(eventName, type, id)
       this.on(key, handler)

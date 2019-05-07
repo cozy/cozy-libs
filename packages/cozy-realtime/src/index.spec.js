@@ -122,6 +122,19 @@ describe('CozyRealtime', () => {
       cozyStack.emitMessage(type, fakeDoc, 'CREATED')
       expect(handler.mock.calls.length).toBe(1)
     })
+
+    it('should launch only one connection when multiple subscribe is call', async () => {
+      const handler = jest.fn()
+      const isOpened = jest.fn()
+      realtime._socket.on('open', isOpened)
+      realtime.subscribe('created', type, handler)
+      realtime.subscribe('created', type, handler)
+      await pause(10)
+
+      expect(isOpened.mock.calls.length).toBe(1)
+      cozyStack.emitMessage(type, fakeDoc, 'CREATED')
+      expect(handler.mock.calls.length).toBe(2)
+    })
   })
 
   describe('_haveEventHandler', () => {
