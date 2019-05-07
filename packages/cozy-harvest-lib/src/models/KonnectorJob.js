@@ -150,10 +150,6 @@ export class KonnectorJob {
       this.accountsMutations
     )
 
-    watchKonnectorAccount(this.account, {
-      onTwoFACodeAsked: this.handleTwoFA
-    })
-
     const konnectorJob = watchKonnectorJob(await launchTrigger(this.trigger))
     // Temporary reEmitting until merging of KonnectorJobWatcher and
     // KonnectorAccountWatcher into KonnectorJob
@@ -163,6 +159,11 @@ export class KonnectorJob {
       this.handleLegacyEvent(LOGIN_SUCCESS_EVENT)
     )
     konnectorJob.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
+
+    watchKonnectorAccount(this.account, {
+      onTwoFACodeAsked: this.handleTwoFA,
+      onLoginSuccessHandled: konnectorJob.disableSuccessTimer
+    })
   }
 }
 

@@ -36,6 +36,7 @@ export class TriggerManager extends Component {
     this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.closeTwoFAModal = this.closeTwoFAModal.bind(this)
+    this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleTwoFACodeAsked = this.handleTwoFACodeAsked.bind(this)
@@ -55,6 +56,10 @@ export class TriggerManager extends Component {
     this.setState({
       status: RUNNING
     })
+  }
+
+  disableSuccessTimer() {
+    if (this.jobWatcher) this.jobWatcher.disableSuccessTimer()
   }
 
   /**
@@ -113,7 +118,8 @@ export class TriggerManager extends Component {
     const trigger = await this.ensureTrigger()
     this.setState({ trigger })
     this.props.watchKonnectorAccount(account, {
-      onTwoFACodeAsked: this.handleTwoFACodeAsked
+      onTwoFACodeAsked: this.handleTwoFACodeAsked,
+      onLoginSuccessHandled: this.disableSuccessTimer
     })
     return await this.launch(trigger)
   }
@@ -129,7 +135,7 @@ export class TriggerManager extends Component {
     const { status } = this.state
     if (accounts.isTwoFANeeded(status)) return
     // disable successTimeout since asked Two FA code
-    if (this.jobWatcher) this.jobWatcher.disableSuccessTimer()
+    this.disableSuccessTimer()
     this.setState({
       status: statusCode
     })
