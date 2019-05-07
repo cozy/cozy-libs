@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { withMutations } from 'cozy-client'
 
-import TwoFAForm from './TwoFAForm'
+import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 
@@ -61,13 +61,7 @@ export class TriggerLauncher extends Component {
 
   render() {
     const { showTwoFAModal } = this.state
-    const {
-      account,
-      children,
-      konnector,
-      konnectorJob,
-      submitting
-    } = this.props
+    const { children, konnectorJob, submitting } = this.props
 
     return (
       <div>
@@ -76,13 +70,9 @@ export class TriggerLauncher extends Component {
           running: konnectorJob.isRunning() || submitting
         })}
         {showTwoFAModal && (
-          <TwoFAForm
-            account={account}
-            konnector={konnector}
+          <TwoFAModal
+            konnectorJob={konnectorJob}
             dismissAction={this.dismissTwoFAModal}
-            handleSubmitTwoFACode={konnectorJob.sendTwoFACode}
-            submitting={konnectorJob.isTwoFARunning()}
-            retryAsked={konnectorJob.isTwoFARetry()}
             into="coz-harvest-modal-place"
           />
         )}
@@ -97,13 +87,9 @@ TriggerLauncher.propTypes = {
    */
   children: PropTypes.func.isRequired,
   /**
-   * Account document to use for 2FA
+   * The konnectorJob instance provided by withKonnectorJob
    */
-  account: PropTypes.object.isRequired,
-  /**
-   * Konnector required to fetch app icon
-   */
-  konnector: PropTypes.object.isRequired,
+  konnectorJob: PropTypes.object.isRequired,
   /**
    * Indicates if trigger is already runnning
    */

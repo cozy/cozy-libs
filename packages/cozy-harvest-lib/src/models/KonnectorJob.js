@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import MicroEE from 'microee'
 
+import omit from 'lodash/omit'
 import accounts from '../helpers/accounts'
 import triggers from '../helpers/triggers'
 
@@ -38,15 +39,18 @@ export class KonnectorJob {
   constructor(client, trigger) {
     this.client = client
     this.trigger = trigger
+    this.account = null
 
     this.accountsMutations = accountsMutations(this.client)
     this.triggersMutations = triggersMutations(this.client)
 
     // Bind methods used as callbacks
-    this.handleTwoFA = this.handleTwoFA.bind(this)
-    this.sendTwoFACode = this.sendTwoFACode.bind(this)
+    this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
+    this.getKonnectorSlug = this.getKonnectorSlug.bind(this)
     this.handleLegacyEvent = this.handleLegacyEvent.bind(this)
+    this.handleTwoFA = this.handleTwoFA.bind(this)
     this.launch = this.launch.bind(this)
+    this.sendTwoFACode = this.sendTwoFACode.bind(this)
 
     // status and setter/getters
     this._status = IDLE
@@ -75,6 +79,14 @@ export class KonnectorJob {
 
   isTwoFARetry() {
     return this.getStatus() === TWO_FA_MISMATCH
+  }
+
+  getTwoFACodeProvider() {
+    return accounts.getTwoFACodeProvider(this.account)
+  }
+
+  getKonnectorSlug() {
+    return this.trigger.message.konnector
   }
 
   // TODO: Pass updated account as parameter
@@ -164,11 +176,7 @@ export const KonnectorJobPropTypes = {
   /**
    * The trigger to launch
    */
-  trigger: PropTypes.object.isRequired,
-  /**
-   * The konnectorJob instance provided by withKonnectorJob
-   */
-  konnectorJob: PropTypes.object.isRequired
+  trigger: PropTypes.object.isRequired
 }
 
 export const withKonnectorJob = WrappedComponent => {
@@ -191,7 +199,7 @@ export const withKonnectorJob = WrappedComponent => {
      * KonnectorJob required and provided props
      */
     ...KonnectorJobPropTypes,
-    ...(WrappedComponent.propTypes || {})
+    ...(omit(WrappedComponent.propTypes, 'konnectorJob') || {})
   }
   return ComponentWithKonnectorJob
 }
