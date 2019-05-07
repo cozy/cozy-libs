@@ -24,16 +24,9 @@ const launchTrigger = async (client, trigger) => {
   return data
 }
 
-const watchKonnectorJob = (
-  client,
-  job,
-  { onError, onLoginSuccess, onSuccess }
-) => {
+const watchKonnectorJob = (client, job) => {
   const jobWatcher = new KonnectorJobWatcher(client, job, {
-    expectedSuccessDelay: 8000,
-    onError,
-    onLoginSuccess,
-    onSuccess
+    expectedSuccessDelay: 8000
   })
   // no need to await realtime initializing here
   jobWatcher.watch()

@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 
 import { TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
+import KonnectorJobWatcher from '../../src/models/konnector/KonnectorJobWatcher'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 const fixtures = {
@@ -204,7 +205,9 @@ describe('TriggerManager', () => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
     launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
-    watchKonnectorJobMock.mockResolvedValue(fixtures.runningJob)
+    watchKonnectorJobMock.mockReturnValue(
+      new KonnectorJobWatcher(fixtures.launchedJob)
+    )
   })
 
   afterEach(() => {
@@ -478,35 +481,7 @@ describe('TriggerManager', () => {
       const wrapper = shallowWithoutAccount()
       await wrapper.instance().launch(fixtures.createdTrigger)
       expect(watchKonnectorJobMock).toHaveBeenCalledTimes(1)
-      expect(watchKonnectorJobMock).toHaveBeenCalledWith(
-        fixtures.launchedJob,
-        expect.anything()
-      )
-    })
-
-    it('should call onLoginSuccess', async () => {
-      const wrapper = shallowWithoutAccount()
-      await wrapper.instance().launch(fixtures.createdTrigger)
-
-      const callbacks = watchKonnectorJobMock.mock.calls[0][1]
-      callbacks.onLoginSuccess()
-
-      expect(onLoginSuccessSpy).toHaveBeenCalledTimes(1)
-      expect(onLoginSuccessSpy).toHaveBeenCalledWith(fixtures.createdTrigger)
-      expect(onSuccessSpy).not.toHaveBeenCalled()
-    })
-
-    it('should not call onLoginSucces if job is done', async () => {
-      watchKonnectorJobMock.mockResolvedValue(fixtures.doneJob)
-      const wrapper = shallowWithoutAccount()
-      await wrapper.instance().launch(fixtures.createdTrigger)
-
-      const callbacks = watchKonnectorJobMock.mock.calls[0][1]
-      callbacks.onSuccess()
-
-      expect(onLoginSuccessSpy).not.toHaveBeenCalled()
-      expect(onSuccessSpy).toHaveBeenCalledTimes(1)
-      expect(onSuccessSpy).toHaveBeenCalledWith(fixtures.createdTrigger)
+      expect(watchKonnectorJobMock).toHaveBeenCalledWith(fixtures.launchedJob)
     })
   })
 })

@@ -8,8 +8,6 @@ import AppIcon from 'cozy-ui/react/AppIcon'
 import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 
-import accounts from '../../helpers/accounts'
-
 export class TwoFAForm extends PureComponent {
   constructor(props) {
     super(props)
@@ -24,27 +22,20 @@ export class TwoFAForm extends PureComponent {
   }
 
   handleSubmit() {
-    this.props.handleSubmitTwoFACode(this.state.twoFACode)
+    this.props.konnectorJob.sendTwoFACode(this.state.twoFACode)
   }
 
   fetchIcon() {
     const { client } = this.context
-    const { konnector } = this.props
+    const { konnectorJob } = this.props
     return client.stackClient.getIconURL({
       type: 'konnector',
-      slug: konnector.slug
+      slug: konnectorJob.getKonnectorSlug()
     })
   }
 
   render() {
-    const {
-      account,
-      dismissAction,
-      t,
-      submitting,
-      retryAsked,
-      breakpoints = {}
-    } = this.props
+    const { dismissAction, konnectorJob, t, breakpoints = {} } = this.props
     const { isMobile } = breakpoints
     const { twoFACode } = this.state
 
@@ -63,7 +54,7 @@ export class TwoFAForm extends PureComponent {
         <ModalDescription>
           <form onSubmit={this.handleSubmit}>
             <SubTitle className="u-mb-1 u-mt-half u-ta-center">
-              {t(`twoFAForm.title.${accounts.getTwoFACodeProvider(account)}`)}
+              {t(`twoFAForm.title.${konnectorJob.getTwoFACodeProvider()}`)}
             </SubTitle>
             <Text>{t('twoFAForm.desc')}</Text>
             <Field
@@ -73,10 +64,10 @@ export class TwoFAForm extends PureComponent {
               autoComplete="off"
               label={t('twoFAForm.code.label')}
               size="medium"
-              error={retryAsked}
+              error={konnectorJob.isTwoFARetry()}
               fullwidth
             />
-            {retryAsked && (
+            {konnectorJob.isTwoFARetry() && (
               <Caption className="u-error u-fs-italic u-mt-half">
                 {t('twoFAForm.retry')}
               </Caption>
@@ -84,8 +75,8 @@ export class TwoFAForm extends PureComponent {
             <Button
               className="u-mt-1"
               label={t('twoFAForm.CTA')}
-              busy={submitting}
-              disabled={submitting || !twoFACode}
+              busy={konnectorJob.isTwoFARunning()}
+              disabled={konnectorJob.isTwoFARunning() || !twoFACode}
               extension="full"
             />
           </form>

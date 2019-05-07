@@ -5,13 +5,13 @@ import manifest from './manifest'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
 
-const TWOFA_NEEDED_STATUSES = {
-  [DEFAULT_TWOFA_CODE_PROVIDER_TYPE]: 'TWOFA_NEEDED',
-  email: 'TWOFA_NEEDED.EMAIL',
-  sms: 'TWOFA_NEEDED.SMS'
+const PROVIDERS = {
+  EMAIL: 'email',
+  SMS: 'sms'
 }
 
-const TWOFA_RETRY_STATUS = 'TWOFA_NEEDED_RETRY'
+const TWOFA_NEEDED_STATUS = 'TWOFA_NEEDED'
+const TWOFA_NEEDED_RETRY_STATUS = 'TWOFA_NEEDED_RETRY'
 const RESET_SESSION_STATE = 'RESET_SESSION'
 
 /**
@@ -21,16 +21,13 @@ const RESET_SESSION_STATE = 'RESET_SESSION'
  * @return {Boolean}
  */
 export const isTwoFANeeded = status => {
-  for (let s in TWOFA_NEEDED_STATUSES) {
-    if (TWOFA_NEEDED_STATUSES[s] === status) {
-      return true
-    }
-  }
-  return false
+  if (!status) return false
+  return status.split('.')[0] === TWOFA_NEEDED_STATUS
 }
 
 export const isTwoFARetry = status => {
-  return status === TWOFA_RETRY_STATUS
+  if (!status) return false
+  return status.split('.')[0] === TWOFA_NEEDED_RETRY_STATUS
 }
 
 /**
@@ -40,9 +37,12 @@ export const isTwoFARetry = status => {
  */
 export const getTwoFACodeProvider = account => {
   if (!account || !account.state) return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
-  return Object.keys(TWOFA_NEEDED_STATUSES).find(
-    s => TWOFA_NEEDED_STATUSES[s] === account.state
-  )
+  const codeParts = account.state ? account.state.split('.') : []
+  if (codeParts.length > 1) {
+    return PROVIDERS[codeParts[1]] || DEFAULT_TWOFA_CODE_PROVIDER_TYPE
+  } else {
+    return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
+  }
 }
 
 /**

@@ -15,15 +15,11 @@
       "email": "Enter the code sent to you by e-mail",
       "sms": "Enter the code sent to you by SMS"
     },
-    "desc": {
-      "default": "A code has been sent to you by e-mail or by SMS to finish your connexion",
-      "email": "A code has been sent to you by e-mail to finish your connexion",
-      "sms": "A code has been sent to you by SMS to finish your connexion"
-    },
+    "desc": "This code allows you to finish your connexion.",
     "code": {
       "label": "code"
     },
-    "retry": "Invalid code, please re-enter",
+    "retry": "Invalid code, please re-enter.",
     "CTA": "Validate"
   },
   "accountForm": {

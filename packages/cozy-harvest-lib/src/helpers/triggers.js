@@ -32,6 +32,10 @@ export const buildAttributes = ({
   }
 }
 
+export const getAccountId = trigger => {
+  return get(trigger, 'message.account')
+}
+
 /**
  * Get error for a given trigger document
  * @param  {Object} trigger io.cozy.trigger as returned by stack
@@ -46,6 +50,7 @@ export const getError = trigger => {
 
 const helpers = {
   buildAttributes,
+  getAccountId,
   getError
 }
 
