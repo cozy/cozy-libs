@@ -123,6 +123,24 @@ describe('CozyRealtime', () => {
       expect(handler.mock.calls.length).toBe(1)
     })
 
+    it('should relaunch socket with same parameters', async () => {
+      const handler = jest.fn()
+
+      await realtime.subscribe('created', type, handler)
+      const spy = jest.spyOn(realtime._socket, 'subscribe')
+      await realtime.subscribe('updated', type, handler)
+      await realtime.subscribe('updated', type, id, handler)
+      await realtime.unsubscribe('created', type, handler)
+      await pause(10)
+
+      realtime._resubscribe()
+      expect(spy).toHaveBeenCalledTimes(4)
+      expect(spy.mock.calls[0][0]).toEqual(spy.mock.calls[2][0]) // type
+      expect(spy.mock.calls[0][1]).toEqual(spy.mock.calls[2][1]) // id
+      expect(spy.mock.calls[1][0]).toEqual(spy.mock.calls[3][0]) // type
+      expect(spy.mock.calls[1][1]).toEqual(spy.mock.calls[3][1]) // id
+    })
+
     it('should launch only one connection when multiple subscribe is call', async () => {
       const handler = jest.fn()
       const isOpened = jest.fn()

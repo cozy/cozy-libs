@@ -197,7 +197,9 @@ class CozyRealtime {
     const subscribeList = Object.keys(this._events)
       .map(key => {
         if (!key.includes(INDEX_KEY_SEPARATOR)) return
-        const [, type, id] = key.split(INDEX_KEY_SEPARATOR)
+        if (this._events[key].length === 0) return
+        let [, type, id] = key.split(INDEX_KEY_SEPARATOR)
+        if (id === 'undefined') id = undefined
         return { type, id }
       })
       .filter(Boolean)
