@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.42.0"></a>
+# [0.42.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.41.2...cozy-harvest-lib@0.42.0) (2019-05-07)
+
+
+### Bug Fixes
+
+* **harvest:** :nail_care: Pass KonnectorJob directly to TwoFAModal ([925fed8](https://github.com/cozy/cozy-libs/commit/925fed8))
+* **harvest:** :nail_care: Split withKonnectorJob from the model ([ac75302](https://github.com/cozy/cozy-libs/commit/ac75302))
+* **harvest:** :pencil2: Minor wording change ([48fd910](https://github.com/cozy/cozy-libs/commit/48fd910))
+* **harvest:** Handle Two FA code retries correctly ([db6c561](https://github.com/cozy/cozy-libs/commit/db6c561))
+* **harvest:** Use the same 2FA Modal for Trigger Manager/Launcher ([66646a8](https://github.com/cozy/cozy-libs/commit/66646a8))
+
+
+### Features
+
+* **harvest:** :nail_care: Let KonnectorJob handle statuses ([addbecd](https://github.com/cozy/cozy-libs/commit/addbecd))
+* **harvest:** Add KonnectorJob ✨ ([486b30c](https://github.com/cozy/cozy-libs/commit/486b30c))
+* **harvest:** Add Trigger Launcher ✨ ([9d368a8](https://github.com/cozy/cozy-libs/commit/9d368a8))
+* **harvest:** Better success handling 📝" ([a612edc](https://github.com/cozy/cozy-libs/commit/a612edc))
+* **harvest:** Creates TwoFAModal ✨ ([0f30174](https://github.com/cozy/cozy-libs/commit/0f30174))
+* **harvest:** Enable success timer sooner 📝 ([f4598c2](https://github.com/cozy/cozy-libs/commit/f4598c2))
+* **harvest:** Expose findAccount from accounts connections 📝 ([9a954c0](https://github.com/cozy/cozy-libs/commit/9a954c0))
+* **harvest:** Provide getAccountId from triggers helper 📝 ([833d210](https://github.com/cozy/cozy-libs/commit/833d210))
+
+
+
+
 <a name="0.41.2"></a>
 ## [0.41.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.41.1...cozy-harvest-lib@0.41.2) (2019-05-03)
 
