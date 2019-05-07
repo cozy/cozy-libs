@@ -78,6 +78,16 @@ describe('CozyRealtime', () => {
       cozyStack.emitMessage(type, fakeDoc, 'UPDATED', fakeDoc._id)
     })
 
+    it('should launch all handler when receive updated document', async () => {
+      const handler = jest.fn()
+      await realtime.subscribe('updated', type, handler)
+      await realtime.subscribe('updated', type, fakeDoc._id, handler)
+
+      cozyStack.emitMessage(type, fakeDoc, 'UPDATED', fakeDoc._id)
+      await pause(10)
+      expect(handler.mock.calls.length).toBe(2)
+    })
+
     it('should launch handler when document is deleted', async done => {
       await realtime.subscribe('deleted', type, doc => {
         expect(doc).toEqual(fakeDoc)
@@ -158,6 +168,13 @@ describe('CozyRealtime', () => {
       expect(realtime._socket.isOpen()).toBe(true)
       realtime.unsubscribe('created', 'io.cozy.accounts', handlerCreate)
       expect(realtime._socket.isOpen()).toBe(false)
+    })
+
+    it('should stop receiving created documents with given doctype', () => {
+      expect(handlerCreate.mock.calls.length).toBe(0)
+      realtime.unsubscribe('created', type, handlerCreate)
+      cozyStack.emitMessage(type, fakeDoc, 'CREATED')
+      expect(handlerCreate.mock.calls.length).toBe(0)
     })
 
     it('should unsubscribe all events', async () => {
