@@ -7,17 +7,13 @@ import TwoFAForm from './TwoFAForm'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 
-import KonnectorJob from '../models/KonnectorJob'
-
-// Statuses
-const ERRORED = 'ERRORED'
-const IDLE = 'IDLE'
-const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
-const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
-const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
-const PENDING = 'PENDING'
-const SUCCESS = 'SUCCESS'
-const RUNNING_TWOFA = 'RUNNING_TWOFA'
+import {
+  withKonnectorJob,
+  ERROR_EVENT,
+  SUCCESS_EVENT,
+  TWO_FA_REQUEST_EVENT,
+  TWO_FA_MISMATCH_EVENT
+} from '../models/KonnectorJob'
 
 /**
  * Trigger Launcher renders its children with following props:
@@ -38,86 +34,55 @@ const RUNNING_TWOFA = 'RUNNING_TWOFA'
  * TriggerManager for example
  */
 export class TriggerLauncher extends Component {
-  state = {
-    status: IDLE
-  }
-
   constructor(props, context) {
     super(props, context)
+    this.state = { showTwoFAModal: false }
 
-    this.launch = this.launch.bind(this)
-    this.handleTwoFAModalDismiss = this.handleTwoFAModalDismiss.bind(this)
-    this.handle2FACode = this.handle2FACode.bind(this)
-    this.handleError = this.handleError.bind(this)
-    this.handleSuccess = this.handleSuccess.bind(this)
-    this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
-    this.handleTwoFARequest = this.handleTwoFARequest.bind(this)
+    this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
+    this.displayTwoFAModal = this.displayTwoFAModal.bind(this)
   }
 
-  handleTwoFAModalDismiss() {
-    // TODO: Make the modale not closable, or offer possibility to re-open it.
+  componentDidMount() {
+    this.props.konnectorJob
+      .on(ERROR_EVENT, this.dismissTwoFAModal)
+      .on(SUCCESS_EVENT, this.dismissTwoFAModal)
+      .on(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
+      .on(TWO_FA_MISMATCH_EVENT, this.displayTwoFAModal)
+  }
+
+  dismissTwoFAModal() {
+    // TODO: Make the modal not closable, or offer possibility to re-open it.
     this.setState({ showTwoFAModal: false })
   }
 
-  handleError() {
-    this.setState({ status: ERRORED, showTwoFAModal: false })
-  }
-
-  handleSuccess() {
-    this.setState({ status: SUCCESS, showTwoFAModal: false })
-  }
-
-  handleLoginSuccess() {
-    this.setState({ status: LOGIN_SUCCESS })
-  }
-
-  handleTwoFARequest() {
-    this.setState({ status: TWO_FA_REQUEST, showTwoFAModal: true })
-  }
-
-  handleTwoFAMismatch() {
-    this.setState({ status: TWO_FA_MISMATCH, showTwoFAModal: true })
-  }
-
-  handle2FACode(code) {
-    this.setState({ status: RUNNING_TWOFA })
-    this.konnectorJob.sendTwoFACode(code)
-  }
-
-  async launch() {
-    const { trigger } = this.props
-    const { client } = this.context
-
-    this.setState({ status: PENDING })
-
-    this.konnectorJob = new KonnectorJob(client, trigger)
-    this.konnectorJob
-      .on('error', this.handleError)
-      .on('loginSuccess', this.handleLoginSuccess)
-      .on('success', this.handleSuccess)
-      .on('twoFARequest', this.handleTwoFARequest)
-      .on('twoFAMismatch', this.handleTwoFAMismatch)
-    this.konnectorJob.launch()
+  displayTwoFAModal() {
+    this.setState({ showTwoFAModal: true })
   }
 
   render() {
-    const { showTwoFAModal, status } = this.state
-    const { account, children, konnector, submitting } = this.props
+    const { showTwoFAModal } = this.state
+    const {
+      account,
+      children,
+      konnector,
+      konnectorJob,
+      submitting
+    } = this.props
 
     return (
       <div>
         {children({
-          launch: this.launch,
-          running: ![ERRORED, IDLE, SUCCESS].includes(status) || submitting
+          launch: konnectorJob.launch,
+          running: konnectorJob.isRunning() || submitting
         })}
         {showTwoFAModal && (
           <TwoFAForm
             account={account}
             konnector={konnector}
-            dismissAction={this.handleTwoFAModalDismiss}
-            handleSubmitTwoFACode={this.handle2FACode}
-            submitting={status === RUNNING_TWOFA}
-            retryAsked={status === TWO_FA_MISMATCH}
+            dismissAction={this.dismissTwoFAModal}
+            handleSubmitTwoFACode={konnectorJob.sendTwoFACode}
+            submitting={konnectorJob.isTwoFARunning()}
+            retryAsked={konnectorJob.isTwoFARetry()}
             into="coz-harvest-modal-place"
           />
         )}
@@ -132,19 +97,19 @@ TriggerLauncher.propTypes = {
    */
   children: PropTypes.func.isRequired,
   /**
+   * Account document to use for 2FA
+   */
+  account: PropTypes.object.isRequired,
+  /**
+   * Konnector required to fetch app icon
+   */
+  konnector: PropTypes.object.isRequired,
+  /**
    * Indicates if trigger is already runnning
    */
-  submitting: PropTypes.bool,
-  /**
-   * The trigger to launch
-   */
-  trigger: PropTypes.object.isRequired
+  submitting: PropTypes.bool
 }
 
-TriggerLauncher.contextTypes = {
-  client: PropTypes.object.isRequired
-}
-
-export default withMutations(accountsMutations, triggersMutations)(
-  TriggerLauncher
+export default withKonnectorJob(
+  withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
 )
