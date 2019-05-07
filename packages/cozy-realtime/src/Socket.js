@@ -49,7 +49,9 @@ class Socket {
     this._getUrl = getUrl
     this._getToken = getToken
 
+    // removeAllListeners comes from microee
     this.removeAllListeners = this.removeAllListeners.bind(this)
+
     this.on('close', this.removeAllListeners)
   }
 
