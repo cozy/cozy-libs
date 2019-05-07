@@ -37,6 +37,7 @@ export class TriggerManager extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.closeTwoFAModal = this.closeTwoFAModal.bind(this)
     this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
+    this.handleLoginSuccessState = this.handleLoginSuccessState.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleTwoFACodeAsked = this.handleTwoFACodeAsked.bind(this)
@@ -60,6 +61,10 @@ export class TriggerManager extends Component {
 
   disableSuccessTimer() {
     if (this.jobWatcher) this.jobWatcher.disableSuccessTimer()
+  }
+
+  handleLoginSuccessState() {
+    if (this.jobWatcher) this.jobWatcher.handleSuccess()
   }
 
   /**
@@ -119,6 +124,7 @@ export class TriggerManager extends Component {
     this.setState({ trigger })
     this.props.watchKonnectorAccount(account, {
       onTwoFACodeAsked: this.handleTwoFACodeAsked,
+      onLoginSuccess: this.handleLoginSuccessState,
       onLoginSuccessHandled: this.disableSuccessTimer
     })
     return await this.launch(trigger)

@@ -162,6 +162,7 @@ export class KonnectorJob {
 
     watchKonnectorAccount(this.account, {
       onTwoFACodeAsked: this.handleTwoFA,
+      onLoginSuccess: konnectorJob.handleSuccess,
       onLoginSuccessHandled: konnectorJob.disableSuccessTimer
     })
   }
