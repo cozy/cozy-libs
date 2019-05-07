@@ -111,7 +111,7 @@ class Socket {
    * @param {String} type  Document doctype to subscribe to
    * @param {String} id  Document id to subscribe to (not required)
    */
-  async subscribe(type, id = undefined) {
+  async subscribe(type, id) {
     if (!this.isOpen()) {
       await this.connect()
     }
