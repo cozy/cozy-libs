@@ -6,9 +6,9 @@ import { withMutations } from 'cozy-client'
 import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
+import withKonnectorJob from './HOCs/withKonnectorJob'
 
 import {
-  withKonnectorJob,
   ERROR_EVENT,
   SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT,

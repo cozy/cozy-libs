@@ -1,14 +1,10 @@
-import React, { PureComponent } from 'react'
 import MicroEE from 'microee'
 
-import omit from 'lodash/omit'
 import accounts from '../helpers/accounts'
 import triggers from '../helpers/triggers'
 
 import accountsMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
-
-import PropTypes from 'prop-types'
 
 // events
 export const ERROR_EVENT = 'error'
@@ -171,37 +167,5 @@ export class KonnectorJob {
 }
 
 MicroEE.mixin(KonnectorJob)
-
-export const KonnectorJobPropTypes = {
-  /**
-   * The trigger to launch
-   */
-  trigger: PropTypes.object.isRequired
-}
-
-export const withKonnectorJob = WrappedComponent => {
-  class ComponentWithKonnectorJob extends PureComponent {
-    constructor(props, context) {
-      super(props, context)
-      this.konnectorJob = new KonnectorJob(context.client, props.trigger)
-    }
-    render() {
-      return (
-        <WrappedComponent {...this.props} konnectorJob={this.konnectorJob} />
-      )
-    }
-  }
-  ComponentWithKonnectorJob.contextTypes = {
-    client: PropTypes.object.isRequired
-  }
-  ComponentWithKonnectorJob.propTypes = {
-    /**
-     * KonnectorJob required and provided props
-     */
-    ...KonnectorJobPropTypes,
-    ...(omit(WrappedComponent.propTypes, 'konnectorJob') || {})
-  }
-  return ComponentWithKonnectorJob
-}
 
 export default KonnectorJob
