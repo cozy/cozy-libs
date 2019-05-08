@@ -1,7 +1,8 @@
 import MicroEE from 'microee'
 import Socket from './Socket'
-import minilog from 'minilog'
+import minilog_ from 'minilog'
 
+const minilog = (typeof window !== undefined && window.minilog) || minilog_
 const logger = minilog('cozy-realtime')
 minilog.suggest.deny('cozy-realtime', 'info')
 
@@ -219,6 +220,7 @@ class CozyRealtime {
     }
 
     for (const key of keys) {
+      logger.debug('Emitting', key, doc)
       this.emit(key, doc)
     }
   }
