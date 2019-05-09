@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.8.0"></a>
+# 0.8.0 (2019-05-09)
+
+
+### Features
+
+* **mjml:** Avoid warnings on es,ja,pl... locales ([#435](https://github.com/cozy/cozy-libs/issues/435)) ([9027c7c](https://github.com/cozy/cozy-libs/commit/9027c7c))
+
+
+
+
 <a name="0.7.2"></a>
 ## [0.7.2](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.7.1...cozy-mjml@0.7.2) (2019-04-17)
 
