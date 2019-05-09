@@ -14,9 +14,18 @@ export class KonnectorAccountWatcher {
   handleAccountUpdated(account) {
     this.account = account
     const { state } = this.account
+    const {
+      onTwoFACodeAsked,
+      onLoginSuccess,
+      onLoginSuccessHandled
+    } = this.options
     if (accounts.isTwoFANeeded(state) || accounts.isTwoFARetry(state)) {
-      const { onTwoFACodeAsked } = this.options
       onTwoFACodeAsked(state)
+    }
+    if (accounts.isLoginSuccessHandled(state)) {
+      onLoginSuccessHandled(state)
+    } else if (accounts.isLoginSuccess(state)) {
+      onLoginSuccess(state)
     }
   }
 

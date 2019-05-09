@@ -13,6 +13,8 @@ const PROVIDERS = {
 const TWOFA_NEEDED_STATUS = 'TWOFA_NEEDED'
 const TWOFA_NEEDED_RETRY_STATUS = 'TWOFA_NEEDED_RETRY'
 const RESET_SESSION_STATE = 'RESET_SESSION'
+const HANDLE_LOGIN_SUCCESS_STATE = 'HANDLE_LOGIN_SUCCESS'
+const LOGIN_SUCCESS_STATE = 'LOGIN_SUCCESS'
 
 /**
  * Return a boolean to know if the account is in a two fa code needed
@@ -28,6 +30,14 @@ export const isTwoFANeeded = status => {
 export const isTwoFARetry = status => {
   if (!status) return false
   return status.split('.')[0] === TWOFA_NEEDED_RETRY_STATUS
+}
+
+export const isLoginSuccessHandled = status => {
+  return status === HANDLE_LOGIN_SUCCESS_STATE
+}
+
+export const isLoginSuccess = status => {
+  return status === LOGIN_SUCCESS_STATE
 }
 
 /**
@@ -129,6 +139,8 @@ export default {
   getTwoFACodeProvider,
   isTwoFANeeded,
   isTwoFARetry,
+  isLoginSuccess,
+  isLoginSuccessHandled,
   mergeAuth,
   resetState,
   setSessionResetIfNecessary,
