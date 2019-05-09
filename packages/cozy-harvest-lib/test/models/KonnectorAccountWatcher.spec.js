@@ -1,21 +1,17 @@
-import realtime from 'cozy-realtime'
-import client from 'cozy-client'
 import KonnectorAccountWatcher from 'models/konnector/KonnectorAccountWatcher'
 
-jest.mock('cozy-client', () => ({
+const client = {
   stackClient: {
+    uri: 'cozy.tools:8080',
     token: {
       token: '1234abcd'
     }
   },
   options: {
     uri: 'cozy.tools:8080'
-  }
-}))
-
-jest.mock('cozy-realtime', () => ({
-  subscribe: jest.fn()
-}))
+  },
+  on: () => jest.fn()
+}
 
 describe('watchKonnectorAccount', () => {
   // Lets mock an account to pass as watchKonnectorJob parameter
@@ -28,39 +24,21 @@ describe('watchKonnectorAccount', () => {
     state: 'TWOFA_NEEDED'
   }
 
-  beforeAll(() => {
-    // Mock realtime to respond immediately
-    realtime.subscribe.mockResolvedValue({
-      onUpdate: fn => fn(updatedAccount)
-    })
-  })
-
-  afterEach(() => {
-    realtime.subscribe.mockClear()
-  })
-
-  afterAll(() => {
-    realtime.subscribe.mockReset()
-  })
-
-  it('should call onTwoFACodeAsked on two fa needed statuses', async () => {
-    const options = {
-      onTwoFACodeAsked: jest.fn()
-    }
+  it('should call onTwoFACodeAsked on two fa needing statuses', async () => {
+    const options = { onTwoFACodeAsked: jest.fn() }
     const accountWatcher = new KonnectorAccountWatcher(client, account, options)
+    accountWatcher.realtime.subscribe = (client, type, id, fn) =>
+      fn(updatedAccount)
     await accountWatcher.watch(options)
     expect(options.onTwoFACodeAsked).toHaveBeenCalled()
     expect(options.onTwoFACodeAsked).toHaveBeenCalledWith(updatedAccount.state)
   })
 
   it('should not call onTwoFACodeAsked if no two fa needed statuses', async () => {
-    const options = {
-      onTwoFACodeAsked: jest.fn()
-    }
-    realtime.subscribe.mockResolvedValue({
-      onUpdate: fn => fn({ state: 'NOT_A_TWOFA_NEEDED_STATE' })
-    })
+    const options = { onTwoFACodeAsked: jest.fn() }
     const accountWatcher = new KonnectorAccountWatcher(client, account, options)
+    accountWatcher.realtime.subscribe = (client, type, id, fn) =>
+      fn({ state: 'NOT_A_TWOFA_NEEDED_STATE' })
     await accountWatcher.watch(options)
     expect(options.onTwoFACodeAsked).not.toHaveBeenCalled()
   })

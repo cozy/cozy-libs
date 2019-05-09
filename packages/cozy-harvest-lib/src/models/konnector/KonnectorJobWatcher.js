@@ -1,6 +1,6 @@
 import MicroEE from 'microee'
 
-import { subscribe } from 'cozy-realtime'
+import CozyRealtime from 'cozy-realtime'
 import { KonnectorJobError } from '../../helpers/konnectors'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
@@ -11,8 +11,8 @@ const JOB_STATE_ERRORED = 'errored'
 const DEFAULT_TIMER_DELAY = 8000
 
 export class KonnectorJobWatcher {
-  constructor(client, job, options = {}) {
-    this.client = client
+  constructor(cozyClient, job, options = {}) {
+    this.realtime = new CozyRealtime({ cozyClient })
     this.job = job
     /**
      * Options
@@ -32,6 +32,7 @@ export class KonnectorJobWatcher {
     this.handleError = this.handleError.bind(this)
     this.handleSuccessDelay = this.handleSuccessDelay.bind(this)
     this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
+    this.handleJobUpdated = this.handleJobUpdated.bind(this)
   }
 
   handleError(error) {
@@ -59,6 +60,7 @@ export class KonnectorJobWatcher {
       clearTimeout(this.successTimer)
       this.successTimer = null
     }
+    this.realtime.unsubscribeAll()
   }
 
   enableSuccessTimer(time) {
@@ -70,28 +72,23 @@ export class KonnectorJobWatcher {
     }
   }
 
+  handleJobUpdated(job) {
+    if (this._succeed || this._error) return
+    this.job = job
+    const { state } = this.job
+    if (state === JOB_STATE_DONE) this.handleSuccess(this.job)
+    if (state === JOB_STATE_ERRORED) this.handleError(this.job.error)
+  }
+
   async watch() {
     this.enableSuccessTimer()
 
-    const jobSubscription = await subscribe(
-      {
-        // Token structure differs between web and mobile
-        token:
-          this.client.stackClient.token.token ||
-          this.client.stackClient.token.accessToken,
-        url: this.client.options.uri
-      },
+    this.realtime.subscribe(
+      'updated',
       JOBS_DOCTYPE,
-      { docId: this.job._id }
+      this.job._id,
+      this.handleJobUpdated
     )
-
-    jobSubscription.onUpdate(updatedJob => {
-      if (this._succeed || this._error) return
-      this.job = updatedJob
-      const { state } = this.job
-      if (state === JOB_STATE_DONE) this.handleSuccess(this.job)
-      if (state === JOB_STATE_ERRORED) this.handleError(this.job.error)
-    })
   }
 }
 

@@ -1,9 +1,8 @@
 /* eslint-env jest */
 
 import { accountsMutations } from 'connections/accounts'
-import client from 'cozy-client'
 
-jest.mock('cozy-client', () => ({
+const client = {
   collection: jest.fn().mockReturnValue({
     add: jest.fn(),
     get: jest.fn()
@@ -11,8 +10,18 @@ jest.mock('cozy-client', () => ({
   create: jest.fn(),
   query: jest.fn(),
   save: jest.fn(),
-  where: jest.fn()
-}))
+  where: jest.fn(),
+  stackClient: {
+    uri: 'cozy.tools:8080',
+    token: {
+      token: '1234abcd'
+    }
+  },
+  options: {
+    uri: 'cozy.tools:8080'
+  },
+  on: () => jest.fn()
+}
 
 const fixtures = {
   accountPermissions: {

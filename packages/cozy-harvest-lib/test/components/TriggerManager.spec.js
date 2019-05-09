@@ -206,7 +206,7 @@ describe('TriggerManager', () => {
     launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
     watchKonnectorJobMock.mockReturnValue(
-      new KonnectorJobWatcher(fixtures.launchedJob)
+      new KonnectorJobWatcher({ on: jest.fn() }, fixtures.launchedJob)
     )
   })
 
