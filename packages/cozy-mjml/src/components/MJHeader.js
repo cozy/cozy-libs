@@ -39,7 +39,7 @@ class MJHeader extends core.BodyComponent {
 MJHeader.endingTag = true
 
 MJHeader.allowedAttributes = {
-  locale: 'enum(fr,en)',
+  locale: 'string',
   mycozy: 'boolean'
 }
 

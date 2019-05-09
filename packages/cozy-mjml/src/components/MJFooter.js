@@ -125,7 +125,7 @@ class MJFooter extends core.BodyComponent {
 MJFooter.endingTag = true
 
 MJFooter.allowedAttributes = {
-  locale: 'enum(fr,en)',
+  locale: 'string',
   instance: 'string'
 }
 
