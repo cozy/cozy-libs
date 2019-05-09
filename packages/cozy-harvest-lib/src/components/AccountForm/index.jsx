@@ -196,18 +196,14 @@ export class AccountForm extends PureComponent {
               container = element
             }}
           >
-            {error && (showError || isLoginError) && (
+            {error && showError && (
               <AccountFormError error={error} konnector={konnector} t={t} />
             )}
             <AccountFields
               container={container}
               disabled={submitting}
               fields={sanitizedFields}
-              hasError={
-                error &&
-                error instanceof KonnectorJobError &&
-                error.isLoginError()
-              }
+              hasError={error && isLoginError}
               initialValues={initialAndDefaultValues}
               inputRefByName={this.inputRefByName}
               t={t}
