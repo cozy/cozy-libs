@@ -136,6 +136,8 @@ class CozyRealtime {
     this._resubscribe = this._resubscribe.bind(this)
     this._beforeUnload = this._beforeUnload.bind(this)
     this._resetSocket = this._resetSocket.bind(this)
+    this._addGlobalListener = this._addGlobalListener.bind(this)
+    this._removeGlobalListener = this._removeGlobalListener.bind(this)
 
     this._createSocket()
 
@@ -143,15 +145,20 @@ class CozyRealtime {
     this._cozyClient.on('tokenRefreshed', this._updateAuthentication)
     this._cozyClient.on('logout', this.unsubscribeAll)
 
-    if (global) {
-      global.addEventListener('beforeunload', this._beforeUnload)
+    if (!global.navigator.onLine) {
       global.addEventListener('online', this._resubscribe)
-      global.removeEventListener('offline', this._resetSocket)
     }
   }
 
+  _addGlobalListener() {
+    global.addEventListener('beforeunload', this._beforeUnload)
+  }
+
+  _removeGlobalListener() {
+    global.removeEventListener('beforeunload', this._beforeUnload)
+  }
+
   _beforeUnload() {
-    global.removeEventListener('beforeunload', this._windowUnload)
     this.unsubscribeAll()
   }
 
@@ -166,6 +173,7 @@ class CozyRealtime {
       this._socket = new Socket(getUrl, getToken)
       this._socket.on('message', this._receiveMessage)
       this._socket.on('error', this._receiveError)
+      this._socket.on('open', this._addGlobalListener)
     }
   }
 
@@ -185,6 +193,8 @@ class CozyRealtime {
       }
       if (global.navigator.onLine) {
         this.retry = setTimeout(this._resubscribe, this._retryDelay)
+      } else {
+        global.addEventListener('online', this._resubscribe)
       }
     }
   }
@@ -193,6 +203,7 @@ class CozyRealtime {
    * Re subscribe on server
    */
   _resubscribe() {
+    global.removeEventListener('online', this._resubscribe)
     this._retryLimit--
 
     const subscribeList = Object.keys(this._events)
@@ -241,6 +252,7 @@ class CozyRealtime {
       this._socket.close()
       this._socket = null
     }
+    this._removeGlobalListener()
     this._createSocket()
   }
 
