@@ -1,6 +1,6 @@
 {
   "name": "cozy-realtime",
-  "version": "2.0.8",
+  "version": "2.1.0",
   "description": "Realtime interactions with cozy-stack using Websocket",
   "main": "dist/index.js",
   "author": "Cozy",

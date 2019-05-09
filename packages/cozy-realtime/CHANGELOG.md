@@ -3,7 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-       <a name="2.0.8"></a>
+  <a name="2.1.0"></a>
+# 2.1.0 (2019-05-09)
+
+
+### Bug Fixes
+
+* **Realtime:** Complexifies the emission of the event ([abd545b](https://github.com/cozy/cozy-libs/commit/abd545b))
+* **Realtime:** Launch only one connection ([29fbcb9](https://github.com/cozy/cozy-libs/commit/29fbcb9))
+* **Realtime:** Lint ([1c1a028](https://github.com/cozy/cozy-libs/commit/1c1a028))
+* **Realtime:** Remove all listeners after socket closed ([0563c81](https://github.com/cozy/cozy-libs/commit/0563c81))
+* **Realtime:** Resubscribe with same parameters ([f1aba47](https://github.com/cozy/cozy-libs/commit/f1aba47))
+
+
+### Features
+
+* **realtime:** New version of library ([5a13957](https://github.com/cozy/cozy-libs/commit/5a13957))
+* **Realtime:** Add limit to retry socket connection ([11653a6](https://github.com/cozy/cozy-libs/commit/11653a6))
+* **Realtime:** Add minilog ([bcf98a0](https://github.com/cozy/cozy-libs/commit/bcf98a0))
+* **Realtime:** Add tests ([d5a7573](https://github.com/cozy/cozy-libs/commit/d5a7573))
+* **Realtime:** Allow unsubscibe with not all config ([47c582a](https://github.com/cozy/cozy-libs/commit/47c582a))
+* **Realtime:** New API with same parameters of subscribe and unsubcribe ([eff5ece](https://github.com/cozy/cozy-libs/commit/eff5ece))
+* **Realtime:** Relaunch listerner on new socket ([270fcdb](https://github.com/cozy/cozy-libs/commit/270fcdb))
+* **Realtime:** Remove all subscribe before window is unloaded ([a74fa65](https://github.com/cozy/cozy-libs/commit/a74fa65))
+* **Realtime:** Use object on constructor ([4744a23](https://github.com/cozy/cozy-libs/commit/4744a23))
+* Use minilog from window if available ([1cc390a](https://github.com/cozy/cozy-libs/commit/1cc390a))
+
+
+
+
+  <a name="2.0.8"></a>
 ## [2.0.8](https://github.com/cozy/cozy-libs/compare/cozy-realtime@2.0.7...cozy-realtime@2.0.8) (2019-04-12)
 
 
@@ -14,7 +43,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-       <a name="2.0.7"></a>
+ <a name="2.0.7"></a>
 ## [2.0.7](https://github.com/cozy/cozy-libs/compare/cozy-realtime@2.0.6...cozy-realtime@2.0.7) (2019-03-18)
 
 
@@ -22,7 +51,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 **Note:** Version bump only for package cozy-realtime
 
-      <a name="2.0.6"></a>
+<a name="2.0.6"></a>
 ## [2.0.6](https://github.com/cozy/cozy-libs/compare/cozy-realtime@2.0.5...cozy-realtime@2.0.6) (2019-03-12)
 
 
