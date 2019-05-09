@@ -60,7 +60,6 @@ export class KonnectorJobWatcher {
       clearTimeout(this.successTimer)
       this.successTimer = null
     }
-    this.realtime.unsubscribeAll()
   }
 
   enableSuccessTimer(time) {
