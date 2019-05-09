@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.44.0"></a>
+# [0.44.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.43.0...cozy-harvest-lib@0.44.0) (2019-05-09)
+
+
+### Bug Fixes
+
+* **harvest:** :nail_care: Don't show login error when not asked ([7c9aa61](https://github.com/cozy/cozy-libs/commit/7c9aa61))
+
+
+### Features
+
+* **harvest:** Handle login success state from konnector ([b5ec6d5](https://github.com/cozy/cozy-libs/commit/b5ec6d5))
+* **harvest:** Handle login success to disable login success timeout ([a1dda87](https://github.com/cozy/cozy-libs/commit/a1dda87))
+
+
+
+
 <a name="0.43.0"></a>
 # [0.43.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.42.2...cozy-harvest-lib@0.43.0) (2019-05-09)
 
