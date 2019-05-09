@@ -1,6 +1,6 @@
 packages/cozy-device-helper @kosssi @ptbrowne
 packages/cozy-flags @ptbrowne @cedricmessiant
-packages/cozy-realtime @gregorylegarec @cpatchane
+packages/cozy-realtime @gregorylegarec @cpatchane @kosssi
 packages/babel-preset-cozy-app @cpatchane @cedricmessiant
 packages/eslint-config-cozy-app @cpatchane @cedricmessiant
 packages/commitlint-config-cozy @kosssi @enguerran @cedricmessiant
