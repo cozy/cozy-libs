@@ -89,6 +89,10 @@ export class KonnectorJobWatcher {
       this.handleJobUpdated
     )
   }
+
+  unsubscribeAll() {
+    this.realtime.unsubscribeAll()
+  }
 }
 
 MicroEE.mixin(KonnectorJobWatcher)

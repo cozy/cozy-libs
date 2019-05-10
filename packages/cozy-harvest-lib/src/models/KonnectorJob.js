@@ -36,6 +36,7 @@ export class KonnectorJob {
     this.client = client
     this.trigger = trigger
     this.account = null
+    this.unsubscribeAllRealtime = null
 
     this.accountsMutations = accountsMutations(this.client)
     this.triggersMutations = triggersMutations(this.client)
@@ -47,6 +48,7 @@ export class KonnectorJob {
     this.handleTwoFA = this.handleTwoFA.bind(this)
     this.launch = this.launch.bind(this)
     this.sendTwoFACode = this.sendTwoFACode.bind(this)
+    this.unwatch = this.unwatch.bind(this)
 
     // status and setter/getters
     this._status = IDLE
@@ -150,21 +152,32 @@ export class KonnectorJob {
       this.accountsMutations
     )
 
-    const konnectorJob = watchKonnectorJob(await launchTrigger(this.trigger))
+    const jobWatcher = watchKonnectorJob(await launchTrigger(this.trigger))
     // Temporary reEmitting until merging of KonnectorJobWatcher and
     // KonnectorAccountWatcher into KonnectorJob
-    konnectorJob.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
-    konnectorJob.on(
+    jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
+    jobWatcher.on(
       LOGIN_SUCCESS_EVENT,
       this.handleLegacyEvent(LOGIN_SUCCESS_EVENT)
     )
-    konnectorJob.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
+    jobWatcher.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
 
-    watchKonnectorAccount(this.account, {
+    const accountWatcher = watchKonnectorAccount(this.account, {
       onTwoFACodeAsked: this.handleTwoFA,
-      onLoginSuccess: konnectorJob.handleSuccess,
-      onLoginSuccessHandled: konnectorJob.disableSuccessTimer
+      onLoginSuccess: jobWatcher.handleSuccess,
+      onLoginSuccessHandled: jobWatcher.disableSuccessTimer
     })
+
+    this.unsubscribeAllRealtime = () => {
+      jobWatcher.unsubscribeAll()
+      accountWatcher.unsubscribeAll()
+    }
+  }
+
+  unwatch() {
+    if (typeof this.unsubscribeAllRealtime === 'function') {
+      this.unsubscribeAllRealtime()
+    }
   }
 }
 

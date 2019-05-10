@@ -44,6 +44,7 @@ export class TriggerManager extends Component {
     this.handleSubmitTwoFACode = this.handleSubmitTwoFACode.bind(this)
 
     this.jobWatcher = null
+    this.accountWatcher = null
 
     this.state = {
       account,
@@ -51,6 +52,11 @@ export class TriggerManager extends Component {
       status: IDLE,
       trigger
     }
+  }
+
+  componentWillUnmount() {
+    if (this.jobWatcher) this.jobWatcher.unsubscribeAll()
+    if (this.accountWatcher) this.accountWatcher.unsubscribeAll()
   }
 
   closeTwoFAModal() {
@@ -122,7 +128,7 @@ export class TriggerManager extends Component {
     this.setState({ account })
     const trigger = await this.ensureTrigger()
     this.setState({ trigger })
-    this.props.watchKonnectorAccount(account, {
+    this.accountWatcher = this.props.watchKonnectorAccount(account, {
       onTwoFACodeAsked: this.handleTwoFACodeAsked,
       onLoginSuccess: this.handleLoginSuccessState,
       onLoginSuccessHandled: this.disableSuccessTimer
