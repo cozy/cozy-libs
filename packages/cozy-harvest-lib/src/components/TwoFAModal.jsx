@@ -21,7 +21,10 @@ export class TwoFAForm extends PureComponent {
     this.setState({ twoFACode: e.currentTarget.value })
   }
 
-  handleSubmit() {
+  handleSubmit(e) {
+    // prevent refreshing the page when submitting
+    // (happens not systematically)
+    e.preventDefault()
     this.props.konnectorJob.sendTwoFACode(this.state.twoFACode)
   }
 
