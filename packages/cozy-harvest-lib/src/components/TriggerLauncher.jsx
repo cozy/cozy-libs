@@ -55,7 +55,6 @@ export class TriggerLauncher extends Component {
   }
 
   dismissTwoFAModal() {
-    // TODO: Make the modal not closable, or offer possibility to re-open it.
     this.setState({ showTwoFAModal: false })
   }
 
