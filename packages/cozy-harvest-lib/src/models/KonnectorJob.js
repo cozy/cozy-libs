@@ -32,10 +32,10 @@ export const prepareTriggerAccount = async (trigger, accountsMutations) => {
 }
 
 export class KonnectorJob {
-  constructor(client, trigger) {
+  constructor(client, trigger, account) {
     this.client = client
     this.trigger = trigger
-    this.account = null
+    this.account = account
     this.unsubscribeAllRealtime = null
 
     this.accountsMutations = accountsMutations(this.client)

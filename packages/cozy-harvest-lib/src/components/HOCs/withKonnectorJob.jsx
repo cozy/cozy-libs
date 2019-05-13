@@ -6,16 +6,28 @@ import KonnectorJob from '../../models/KonnectorJob'
 
 export const KonnectorJobPropTypes = {
   /**
-   * The trigger to launch
+   * The trigger to launch, can be create later if we used account form with
+   * prepareConnection
+   * Not provided here means it doesn't exist yet
    */
-  trigger: PropTypes.object.isRequired
+  trigger: PropTypes.object,
+  /**
+   * Related account document, can be create later if we used account form with
+   * prepareConnection
+   * Not provided here means it doesn't exist yet
+   */
+  account: PropTypes.object
 }
 
 export const withKonnectorJob = WrappedComponent => {
   class ComponentWithKonnectorJob extends PureComponent {
     constructor(props, context) {
       super(props, context)
-      this.konnectorJob = new KonnectorJob(context.client, props.trigger)
+      this.konnectorJob = new KonnectorJob(
+        context.client,
+        props.trigger,
+        props.account
+      )
     }
     render() {
       return (
