@@ -1,21 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountFormError should render 1`] = `
-<div
-  className="u-error"
->
-  <Markdown
-    source="error.job.LOGIN_FAILED.description"
-  />
-</div>
+<Infos
+  icon={null}
+  isImportant={true}
+  text={
+    <Markdown
+      source="error.job.LOGIN_FAILED.description"
+    />
+  }
+  title="error.job.LOGIN_FAILED.title"
+/>
 `;
 
 exports[`AccountFormError should render regular Error 1`] = `
-<div
-  className="u-error"
->
-  <Markdown
-    source="error.job.UNKNOWN_ERROR.description (Something is undefined)"
-  />
-</div>
+<Infos
+  icon={null}
+  isImportant={true}
+  text={
+    <Markdown
+      source="error.job.UNKNOWN_ERROR.description (Something is undefined)"
+    />
+  }
+  title="error.job.UNKNOWN_ERROR.title"
+/>
 `;

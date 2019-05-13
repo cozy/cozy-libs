@@ -7,7 +7,9 @@ export const reactMarkdownRendererOptions = {
     <a href={props.href} rel="noopener noreferrer" target="_blank">
       {props.children}
     </a>
-  )
+  ),
+  // eslint-disable-next-line react/display-name
+  paragraph: props => <p className="u-mv-0">{props.children}</p>
 }
 
 export const Markdown = ({ source }) => (
