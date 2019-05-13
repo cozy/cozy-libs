@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.0"></a>
+# [0.45.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.44.2...cozy-harvest-lib@0.45.0) (2019-05-13)
+
+
+### Features
+
+* **harvest:** :nail_care: Use <Infos/> for error messages ([9e98264](https://github.com/cozy/cozy-libs/commit/9e98264))
+
+
+
+
 <a name="0.44.2"></a>
 ## [0.44.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.44.1...cozy-harvest-lib@0.44.2) (2019-05-13)
 
