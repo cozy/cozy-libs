@@ -50,6 +50,10 @@ export class TriggerLauncher extends Component {
       .on(TWO_FA_MISMATCH_EVENT, this.displayTwoFAModal)
   }
 
+  componentWillUnmount() {
+    this.props.konnectorJob.unwatch()
+  }
+
   dismissTwoFAModal() {
     // TODO: Make the modal not closable, or offer possibility to re-open it.
     this.setState({ showTwoFAModal: false })

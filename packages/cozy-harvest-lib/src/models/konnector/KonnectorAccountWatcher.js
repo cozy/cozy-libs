@@ -37,6 +37,10 @@ export class KonnectorAccountWatcher {
       this.handleAccountUpdated
     )
   }
+
+  unsubscribeAll() {
+    this.realtime.unsubscribeAll()
+  }
 }
 
 export default KonnectorAccountWatcher
