@@ -43,7 +43,6 @@ export class TwoFAForm extends PureComponent {
       <Modal
         dismissAction={dismissAction}
         mobileFullscreen
-        closable
         containerClassName="u-pos-absolute"
         className={isMobile ? '' : 'u-mt-3'}
         size="xsmall"
