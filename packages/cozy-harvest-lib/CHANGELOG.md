@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.44.2"></a>
+## [0.44.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.44.1...cozy-harvest-lib@0.44.2) (2019-05-13)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Prevent refresh on 2FA submit with enter ([61a4376](https://github.com/cozy/cozy-libs/commit/61a4376))
+* **harvest:** :bug: Remove unsubscribingAll for realtime ([2a328d7](https://github.com/cozy/cozy-libs/commit/2a328d7))
+* **harvest:** :nail_care: Unsubscribe realtime on unmount ([c76c2d9](https://github.com/cozy/cozy-libs/commit/c76c2d9))
+
+
+
+
 <a name="0.44.1"></a>
 ## [0.44.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.44.0...cozy-harvest-lib@0.44.1) (2019-05-13)
 
