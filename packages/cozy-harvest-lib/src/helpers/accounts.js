@@ -103,7 +103,7 @@ export const mergeAuth = (account, authData) => ({
 export const updateTwoFaCode = (account, code) => ({
   // reset the state since the konnector is listening it
   ...resetState(account),
-  twofa_code: code
+  twoFACode: code
 })
 
 /**

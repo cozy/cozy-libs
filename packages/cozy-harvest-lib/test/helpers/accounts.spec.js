@@ -77,7 +77,7 @@ describe('Accounts Helper', () => {
       ).toEqual({
         ...fixtures.account,
         state: null,
-        twofa_code: 'atwofacode'
+        twoFACode: 'atwofacode'
       })
     })
   })
