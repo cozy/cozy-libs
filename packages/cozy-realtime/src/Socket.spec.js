@@ -1,5 +1,6 @@
 import Socket from './Socket'
 import { Server } from 'mock-socket'
+import logger from './logger'
 
 let url = 'ws://cozy.tools:8888/realtime/'
 const getUrl = () => url
@@ -111,6 +112,10 @@ describe('Socket', () => {
   })
 
   describe('subscribe', () => {
+    afterEach(() => {
+      jest.restoreAllMocks()
+    })
+
     it('should subscribe with only type', async done => {
       fakeServer.on('connection', serverSocket => {
         serverSocket.on('message', event => {
@@ -141,6 +146,25 @@ describe('Socket', () => {
         })
       })
       socket.subscribe('io.cozy.bank.accounts', 'my_id')
+    })
+
+    it('should not throw, but log, if cannot subscribe', async () => {
+      jest
+        .spyOn(socket, 'ensureConnected')
+        .mockRejectedValue(new Error('No internet'))
+      jest.spyOn(logger, 'warn')
+      jest.spyOn(logger, 'error')
+      await expect(
+        socket.subscribe('io.cozy.bank.accounts', 'my_id')
+      ).resolves.toBe(undefined)
+      expect(logger.warn).toHaveBeenCalledWith(
+        'Could not subscribe to io.cozy.bank.accounts:my_id. Could not connect socket. Original error below'
+      )
+      expect(logger.error).toHaveBeenCalledWith(
+        expect.objectContaining({
+          message: 'No internet'
+        })
+      )
     })
   })
 })

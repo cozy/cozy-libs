@@ -1,6 +1,7 @@
 /* global WebSocket */
 import MicroEE from 'microee'
 import pickBy from 'lodash/pickBy'
+import logger from './logger'
 
 /**
  * Socket class
@@ -132,7 +133,15 @@ class Socket {
    * @param {String} id  Document id to subscribe to (not required)
    */
   async subscribe(type, id) {
-    await this.ensureConnected()
+    try {
+      await this.ensureConnected()
+    } catch (e) {
+      logger.warn(
+        `Could not subscribe to ${type}:${id}. Could not connect socket. Original error below`
+      )
+      logger.error(e)
+      return
+    }
 
     const payload = pickBy({ type, id })
 
