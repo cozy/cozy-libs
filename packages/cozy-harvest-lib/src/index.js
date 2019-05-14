@@ -11,7 +11,7 @@ const dictRequire = lang => require(`./locales/${lang}.json`)
 
 const withLocales = WrappedComponent =>
   class ComponentWithLocales extends Component {
-    contextTypes = {
+    static contextTypes = {
       lang: PropTypes.string.isRequired
     }
 
