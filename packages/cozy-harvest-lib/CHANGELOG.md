@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.4"></a>
+## [0.45.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.3...cozy-harvest-lib@0.45.4) (2019-05-14)
+
+
+### Bug Fixes
+
+* :ambulance: Use static attribute for withLocales contextTypes ([dfeb621](https://github.com/cozy/cozy-libs/commit/dfeb621))
+
+
+
+
 <a name="0.45.3"></a>
 ## [0.45.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.2...cozy-harvest-lib@0.45.3) (2019-05-14)
 
