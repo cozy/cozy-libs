@@ -35,7 +35,7 @@ describe('TwoFAForm', () => {
     )
     component.setState({ twoFACode: mockCode })
     const form = component.find('form')
-    form.simulate('submit')
+    form.simulate('submit', { preventDefault: jest.fn() })
     expect(handleSubmitTwoFACodeMock).toHaveBeenCalled()
     expect(handleSubmitTwoFACodeMock).toHaveBeenCalledWith(mockCode)
   })
