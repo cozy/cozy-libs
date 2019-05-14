@@ -112,6 +112,18 @@ class Socket {
   }
 
   /**
+   * If Socket is not connected, connects.
+   * Does nothing if Socket is already connected
+   *
+   * @return {Promise} - Resolves when connected
+   */
+  async ensureConnected() {
+    if (!this.isOpen()) {
+      await this.connect()
+    }
+  }
+
+  /**
    * Sends a SUBSCRIBE message to cozy stack
    *
    * @see https://github.com/cozy/cozy-stack/blob/master/docs/realtime.md#subscribe
@@ -120,9 +132,7 @@ class Socket {
    * @param {String} id  Document id to subscribe to (not required)
    */
   async subscribe(type, id) {
-    if (!this.isOpen()) {
-      await this.connect()
-    }
+    await this.ensureConnected()
 
     const payload = pickBy({ type, id })
 
