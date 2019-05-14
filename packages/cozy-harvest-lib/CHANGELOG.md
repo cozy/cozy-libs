@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.2"></a>
+## [0.45.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.1...cozy-harvest-lib@0.45.2) (2019-05-14)
+
+
+### Bug Fixes
+
+* **harvest:** :ambulance: Add missing preventDefault to TwoFAForm ([7548130](https://github.com/cozy/cozy-libs/commit/7548130))
+
+
+
+
 <a name="0.45.1"></a>
 ## [0.45.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.0...cozy-harvest-lib@0.45.1) (2019-05-14)
 
