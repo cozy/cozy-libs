@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.3"></a>
+## [0.45.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.2...cozy-harvest-lib@0.45.3) (2019-05-14)
+
+
+### Bug Fixes
+
+* **harvest:** :pencil2: s/twofa_code/twoFACode ([477c87c](https://github.com/cozy/cozy-libs/commit/477c87c))
+
+
+
+
 <a name="0.45.2"></a>
 ## [0.45.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.1...cozy-harvest-lib@0.45.2) (2019-05-14)
 
