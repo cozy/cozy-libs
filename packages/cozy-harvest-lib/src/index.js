@@ -16,7 +16,7 @@ const withLocales = WrappedComponent =>
     }
 
     render() {
-      const { lang } = this.props
+      const { lang } = this.context
       return (
         <I18n dictRequire={dictRequire} lang={lang}>
           <WrappedComponent {...this.props} />
