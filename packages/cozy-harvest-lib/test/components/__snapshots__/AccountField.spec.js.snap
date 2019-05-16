@@ -5,6 +5,7 @@ exports[`AccountField render a date field 1`] = `
   className="o-field u-m-0"
 >
   <Label
+    block={true}
     className=""
     error={false}
     htmlFor=""
@@ -32,6 +33,7 @@ exports[`AccountField render a dropdown field 1`] = `
   className="o-field u-m-0"
 >
   <Label
+    block={true}
     className=""
     error={false}
     htmlFor=""
@@ -127,6 +129,7 @@ exports[`AccountField render a password field 1`] = `
   className="o-field u-m-0"
 >
   <Label
+    block={true}
     className=""
     error={false}
     htmlFor=""
@@ -157,6 +160,7 @@ exports[`AccountField should render 1`] = `
   className="o-field u-m-0"
 >
   <Label
+    block={true}
     className=""
     error={false}
     htmlFor=""
