@@ -1,7 +1,9 @@
 import React from 'react'
 
-export default () => (
+const Nav = () => (
   <div>
-    <a href='existing-store.html'>Existing store</a>
+    <a href="existing-store.html">Existing store</a>
   </div>
 )
+
+export default Nav
