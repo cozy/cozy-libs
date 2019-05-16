@@ -1,18 +1,30 @@
 import CozyClient from 'cozy-client'
+import merge from 'lodash/merge'
 
-export default new CozyClient({
-  scope: ['io.cozy.apps', 'io.cozy.konnectors'],
-  schema: {
-    apps: {
-      doctype: 'io.cozy.apps'
-    },
-    konnectors: {
-      doctype: 'io.cozy.konnectors'
-    }
-  },
-  oauth: {
-    clientName: 'Example App',
-    softwareID: 'io.cozy.example',
-    redirectURI: 'http://localhost:1234/auth'
-  }
-})
+/** Use this to quickly get a custom client */
+const getClient = customOptions => {
+  return new CozyClient(
+    merge(
+      {
+        scope: ['io.cozy.apps', 'io.cozy.konnectors'],
+        schema: {
+          apps: {
+            doctype: 'io.cozy.apps'
+          },
+          konnectors: {
+            doctype: 'io.cozy.konnectors'
+          }
+        },
+        oauth: {
+          clientName: 'Example App',
+          softwareID: 'io.cozy.example',
+          redirectURI: 'http://localhost:1234/auth'
+        }
+      },
+      customOptions
+    )
+  )
+}
+
+/** A generic CozyClient meant to be used by all examples  */
+export default getClient()

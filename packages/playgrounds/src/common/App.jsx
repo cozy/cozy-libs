@@ -13,10 +13,6 @@ import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
 import icon from './icon.png'
 import { MobileRouter } from 'cozy-authentication'
 
-const Error = ({ error }) => (
-  <pre style={styles.error}>An error occured {error.stack}</pre>
-)
-
 const styles = {
   error: {
     background: 'crimson',
@@ -34,7 +30,11 @@ const styles = {
   }
 }
 
-/** Catch error and show it */
+const Error = ({ error }) => (
+  <pre style={styles.error}>An error occured {error.stack}</pre>
+)
+
+/** Catches error and show it */
 class ErrorBoundary extends React.Component {
   constructor(props) {
     super(props)
@@ -54,6 +54,7 @@ class ErrorBoundary extends React.Component {
   }
 }
 
+/** A generic App component, meant to be used by all examples  */
 class App extends React.Component {
   render() {
     const { title, icon, client, children, existingStore } = this.props
