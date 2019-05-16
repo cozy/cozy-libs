@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.45.5"></a>
+## [0.45.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.4...cozy-harvest-lib@0.45.5) (2019-05-16)
+
+
+### Bug Fixes
+
+* :wrench: Upgrade cozy-ui ([cdff2d4](https://github.com/cozy/cozy-libs/commit/cdff2d4))
+
+
+
+
 <a name="0.45.4"></a>
 ## [0.45.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.3...cozy-harvest-lib@0.45.4) (2019-05-14)
 
