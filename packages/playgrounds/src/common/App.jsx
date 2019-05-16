@@ -12,6 +12,7 @@ import { I18n } from 'cozy-ui/transpiled/react'
 import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
 import icon from './icon.png'
 import { MobileRouter } from 'cozy-authentication'
+import Nav from './Nav'
 
 const styles = {
   error: {
@@ -60,6 +61,7 @@ class App extends React.Component {
     const { title, icon, client, children, existingStore } = this.props
     return (
       <ErrorBoundary>
+        <Nav />
         <I18n dictRequire={() => ({})} lang="en">
           <CozyProvider store={existingStore} client={client}>
             <MobileRouter
@@ -81,7 +83,7 @@ class App extends React.Component {
 }
 
 App.defaultProps = {
-  title: 'Example App',
+  title: 'Examples',
   icon
 }
 
