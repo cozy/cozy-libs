@@ -145,6 +145,24 @@ const watchKonnectorAccount = (client, account, options) => {
 }
 
 /**
+ * Deletes an account.
+ * @param  {Object}  client  CozyClient
+ * @param  {Object}  account io.cozy.accounts document
+ */
+const deleteAccount = async (client, account) => {
+  try {
+    await client.destroy(account)
+  } catch (error) {
+    if (error.status === 409) {
+      const syncedAccount = await findAccount(client, account._id)
+      await client.destroy(syncedAccount)
+    } else {
+      throw error
+    }
+  }
+}
+
+/**
  * Get accounts mutations
  * @param  {Object} client CozyClient
  * @return {Object}        Object containing accounts mutations
@@ -153,6 +171,7 @@ export const accountsMutations = client => ({
   createAccount: createAccount.bind(null, client),
   findAccount: findAccount.bind(null, client),
   updateAccount: updateAccount.bind(null, client),
+  deleteAccount: deleteAccount.bind(null, client),
   saveAccount: saveAccount.bind(null, client),
   watchKonnectorAccount: watchKonnectorAccount.bind(null, client)
 })
