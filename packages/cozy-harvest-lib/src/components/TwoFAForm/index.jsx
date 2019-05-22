@@ -90,6 +90,7 @@ export class TwoFAForm extends PureComponent {
               busy={submitting}
               disabled={submitting || !twoFACode}
               extension="full"
+              onClick={this.handleSubmit}
             />
           </form>
         </ModalDescription>

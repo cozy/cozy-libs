@@ -7,6 +7,7 @@ exports[`TwoFAForm should have busy button state and disabled if submitting 1`] 
   disabled={true}
   extension="full"
   label="twoFAForm.CTA"
+  onClick={[Function]}
 />
 `;
 
@@ -64,6 +65,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
         disabled={false}
         extension="full"
         label="twoFAForm.CTA"
+        onClick={[Function]}
       />
     </form>
   </ModalContent>
