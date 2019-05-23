@@ -32,6 +32,9 @@
     "password": {
       "show": "Show",
       "hide": "Hide"
+    },
+    "disconnect": {
+      "button": "Disconnect this account"
     }
   },
   "default": {
