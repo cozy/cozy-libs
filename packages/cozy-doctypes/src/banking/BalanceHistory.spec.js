@@ -1,13 +1,13 @@
 const BalanceHistory = require('./BalanceHistory')
 const Document = require('../Document')
-const { cozyClient } = require('../testUtils')
+const { cozyClientJS } = require('../testUtils')
 
 describe('Balance history', () => {
   let queryResult = []
 
   beforeAll(() => {
-    Document.registerClient(cozyClient)
-    cozyClient.data.query.mockImplementation(() => {
+    Document.registerClient(cozyClientJS)
+    cozyClientJS.data.query.mockImplementation(() => {
       return Promise.resolve(queryResult)
     })
   })
@@ -25,13 +25,13 @@ describe('Balance history', () => {
 
   it('should update or create on year + account linked', async () => {
     await BalanceHistory.createOrUpdate(doc)
-    expect(cozyClient.data.query).toHaveBeenCalledWith(expect.anything(), {
+    expect(cozyClientJS.data.query).toHaveBeenCalledWith(expect.anything(), {
       selector: {
         year: 2018,
         'relationships.account.data._id': 3
       }
     })
-    expect(cozyClient.data.create).toHaveBeenCalledTimes(1)
+    expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
 
     queryResult = [
       {
@@ -47,6 +47,6 @@ describe('Balance history', () => {
     ]
 
     await BalanceHistory.createOrUpdate(doc)
-    expect(cozyClient.data.create).toHaveBeenCalledTimes(1)
+    expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
   })
 })
