@@ -1,7 +1,6 @@
 /* global localStorage */
 
 import MicroEE from 'microee'
-import React from 'react'
 
 export const prefix = 'flag__'
 export const getKey = name => prefix + name
@@ -92,30 +91,3 @@ flag.list = listFlags
 flag.reset = resetFlags
 
 export default flag
-
-/**
- * Connects a component to the flags. The wrapped component
- * will be refreshed when a flag changes.
- */
-flag.connect = Component => {
-  class Wrapped extends React.Component {
-    constructor(props) {
-      super(props)
-      this.handleChange = this.handleChange.bind(this)
-    }
-    componentWillMount() {
-      store.on('change', this.handleChange)
-    }
-    componentWillUnmount() {
-      store.removeListener('change', this.handleChange)
-    }
-    handleChange() {
-      this.forceUpdate()
-    }
-    render() {
-      return <Component {...this.props} />
-    }
-  }
-  Wrapped.displayName = 'flag_' + Component.displayName
-  return Wrapped
-}
