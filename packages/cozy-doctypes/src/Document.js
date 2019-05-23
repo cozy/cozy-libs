@@ -10,6 +10,7 @@ const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
 const { parallelMap } = require('./utils')
+const CozyClient = require('cozy-client').default
 const log = require('cozy-logger').namespace('Document')
 const querystring = require('querystring')
 
@@ -63,6 +64,11 @@ const withoutUndefined = x => omitBy(x, isUndefined)
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
 class Document {
+  /**
+   * Registers a client
+   *
+   * @param {Client} client - Cozy client from either cozy-client or cozy-client-js
+   */
   static registerClient(client) {
     if (!this.cozyClient) {
       this.cozyClient = client
@@ -75,7 +81,33 @@ class Document {
     }
   }
 
+  /**
+   * Unregisters a client
+   *
+   * This method is dangerous and is meant to be used only by tests.
+   */
+  static dangerousUnregisterClient() {
+    this.cozyClient = null
+  }
+
+  /**
+   * Returns true if Document uses a CozyClient (from cozy-client package)
+   *
+   * @returns {boolean} true if Document uses a CozyClient
+   **/
+  static usesCozyClient() {
+    return this.cozyClient instanceof CozyClient
+  }
+
   static getIndex(doctype, fields) {
+    if (this.usesCozyClient()) {
+      throw new Error('This method is not implemented yet with CozyClient')
+    }
+
+    return this.getIndexViaOldClient(doctype, fields)
+  }
+
+  static getIndexViaOldClient(doctype, fields) {
     const key = `${doctype}:${fields.slice().join(',')}`
     const index = indexes[key]
     if (!index) {
@@ -108,6 +140,14 @@ class Document {
   }
 
   static async createOrUpdate(attributes) {
+    if (this.usesCozyClient()) {
+      throw new Error('This method is not implemented yet with CozyClient')
+    }
+
+    return this.createOrUpdateViaOldClient(attributes)
+  }
+
+  static async createOrUpdateViaOldClient(attributes) {
     const selector = fromPairs(
       this.idAttributes.map(idAttribute => [
         idAttribute,
@@ -168,6 +208,14 @@ class Document {
   }
 
   static create(attributes) {
+    if (this.usesCozyClient()) {
+      throw new Error('This method is not implemented yet with CozyClient')
+    }
+
+    return this.createViaOldClient(attributes)
+  }
+
+  static createViaOldClient(attributes) {
     return this.cozyClient.data.create(this.doctype, attributes)
   }
 
@@ -186,12 +234,24 @@ class Document {
   }
 
   static query(index, options) {
+    if (this.usesCozyClient()) {
+      throw new Error('This method is not implemented yet with CozyClient')
+    }
+
+    return this.queryViaOldClient(index, options)
+  }
+
+  static queryViaOldClient(index, options) {
     return this.cozyClient.data.query(index, options)
   }
 
   static async fetchAll() {
+    const stackClient = this.usesCozyClient()
+      ? this.cozyClient.stackClient
+      : this.cozyClient
+
     try {
-      const result = await this.cozyClient.fetchJSON(
+      const result = await stackClient.fetchJSON(
         'GET',
         `/data/${this.doctype}/_all_docs?include_docs=true`
       )
@@ -208,11 +268,15 @@ class Document {
   }
 
   static async updateAll(docs) {
+    const stackClient = this.usesCozyClient()
+      ? this.cozyClient.stackClient
+      : this.cozyClient
+
     if (!docs || !docs.length) {
       return Promise.resolve([])
     }
     try {
-      const update = await this.cozyClient.fetchJSON(
+      const update = await stackClient.fetchJSON(
         'POST',
         `/data/${this.doctype}/_bulk_docs`,
         {
@@ -291,6 +355,10 @@ class Document {
    * @param  {[type]} options   { includeDesign: false, includeDeleted: false }
    */
   static async fetchChanges(since, options = {}) {
+    const stackClient = this.usesCozyClient()
+      ? this.cozyClient.stackClient
+      : this.cozyClient
+
     const queryParams = {
       since,
       include_docs: 'true'
@@ -298,7 +366,7 @@ class Document {
     if (options.params) {
       Object.assign(queryParams, options.params)
     }
-    const result = await this.cozyClient.fetchJSON(
+    const result = await stackClient.fetchJSON(
       'GET',
       `/data/${this.doctype}/_changes?${querystring.stringify(queryParams)}`
     )
@@ -335,6 +403,14 @@ class Document {
    *
    */
   static async queryAll(selector, index) {
+    if (this.usesCozyClient()) {
+      throw new Error('This method is not implemented yet with CozyClient')
+    }
+
+    return this.queryAllViaOldClient(selector, index)
+  }
+
+  static async queryAllViaOldClient(selector, index) {
     if (!selector) {
       // fetchAll is faster in this case
       return await this.fetchAll()
@@ -366,9 +442,12 @@ class Document {
    * @return {Promise} - Promise resolving to an array of documents, unfound document are filtered
    */
   static async getAll(ids) {
+    const stackClient = this.usesCozyClient()
+      ? this.cozyClient.stackClient
+      : this.cozyClient
     let resp
     try {
-      resp = await this.cozyClient.fetchJSON(
+      resp = await stackClient.fetchJSON(
         'POST',
         `/data/${this.doctype}/_all_docs?include_docs=true`,
         {

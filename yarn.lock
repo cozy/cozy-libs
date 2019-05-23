@@ -3764,6 +3764,23 @@ cozy-client@^6.27.0:
     redux-thunk "2.3.0"
     sift "6.0.0"
 
+cozy-client@^6.34.0:
+  version "6.34.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.34.0.tgz#fcaac796f9689757c5b1f540e9d3b013f4c60f71"
+  integrity sha512-PmE4xeg9mtCWTlJjnTNO3NYzDbnuZADFA26KuMsihZEjgQZ/AQaVi0z+6julEEo10fTrRqQ+rWjYFMHUox2c0Q==
+  dependencies:
+    cozy-device-helper "1.6.3"
+    cozy-stack-client "^6.33.0"
+    lodash "4.17.11"
+    microee "0.0.6"
+    prop-types "15.6.2"
+    react "16.7.0"
+    react-redux "5.0.7"
+    redux "3.7.2"
+    redux-thunk "2.3.0"
+    sift "6.0.0"
+    url-search-params-polyfill "^6.0.0"
+
 cozy-device-helper@1.6.3:
   version "1.6.3"
   resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.6.3.tgz#186cf0682921fa3ec7c2343d94fb84f317c992ba"
@@ -3789,6 +3806,15 @@ cozy-stack-client@^6.25.0:
   version "6.25.0"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.25.0.tgz#4fc50087d900be4b0976ceca3606c77703cf5f52"
   integrity sha512-SY7450Yg9n9HDcPsMaNgfTcId5rXOR7hpzyCo1OUZoLINOGlG9Crd10p01aiOLSbvw8z1piKJnGyxYSSrmBOXA==
+  dependencies:
+    detect-node "2.0.4"
+    mime-types "2.1.24"
+    qs "6.7.0"
+
+cozy-stack-client@^6.33.0:
+  version "6.33.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.33.0.tgz#62eca6b63f1d7202ae5032b28b47461be5e85199"
+  integrity sha512-7S8xPcd03BoEd/VFhBv/vxB/2P0U2SLK/wgFoLor7lPHJ00Al8q/pFFgDIb8r1eoK247augH/JrcDUGbSIhVQA==
   dependencies:
     detect-node "2.0.4"
     mime-types "2.1.24"
@@ -15206,6 +15232,11 @@ url-polyfill@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/url-polyfill/-/url-polyfill-1.1.0.tgz#d34e1a596d954b864bc8608f84c592820df422db"
   integrity sha512-QAbzqCwd84yA6VyjV30aZXla+lrRmczDurvlsVnK+tFOu677ZNGz8shcFWQRp5BF9/z7qvNiCQLqpWPtVoUEBg==
+
+url-search-params-polyfill@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/url-search-params-polyfill/-/url-search-params-polyfill-6.0.0.tgz#f5e5fc230d56125f5b0ba67d9cbcd6555fa347e3"
+  integrity sha512-69Bl5s3SiEgcHe8SMpzLGOyag27BQeTeSaP/CfVHkKc/VdUHtNjaP2PnhshFVC021221ItueOzuMMGofZ/HDmQ==
 
 url@^0.11.0:
   version "0.11.0"

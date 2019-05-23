@@ -1,5 +1,5 @@
 const Document = require('./Document')
-const { cozyClient } = require('./testUtils')
+const { cozyClientJS, cozyClient } = require('./testUtils')
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
@@ -8,39 +8,49 @@ Simpson.idAttributes = ['name']
 describe('Document', () => {
   let queryResult = []
   beforeAll(() => {
-    cozyClient.data.query.mockImplementation(() => Promise.resolve(queryResult))
-    Document.registerClient(cozyClient)
+    cozyClientJS.data.query.mockImplementation(() =>
+      Promise.resolve(queryResult)
+    )
+  })
+
+  beforeEach(() => {
+    Document.registerClient(cozyClientJS)
   })
 
   afterEach(() => {
     jest.restoreAllMocks()
+    Document.dangerousUnregisterClient()
   })
 
-  afterAll(() => {
-    Document.registerClient(null)
+  describe('registerClient', () => {
+    it('client cannot be registered twice', () => {
+      expect(() => {
+        const newClient = {}
+        Document.registerClient(newClient)
+      }).toThrow('Document cannot be re-registered to a client.')
+    })
   })
 
-  it('client cannot be registered twice', () => {
-    expect(() => {
-      const newClient = {}
-      Document.registerClient(newClient)
-    }).toThrow('Document cannot be re-registered to a client.')
+  describe('usesCozyClient', () => {
+    it('should return false', () => {
+      expect(Document.usesCozyClient()).toBe(false)
+    })
   })
 
   it('should do create or update', async () => {
     const marge = { name: 'Marge' }
     await Simpson.createOrUpdate(marge)
-    expect(cozyClient.data.query).toHaveBeenCalledWith(expect.anything(), {
+    expect(cozyClientJS.data.query).toHaveBeenCalledWith(expect.anything(), {
       selector: {
         name: 'Marge'
       }
     })
-    expect(cozyClient.data.create).toHaveBeenCalledTimes(1)
-    expect(cozyClient.data.updateAttributes).toHaveBeenCalledTimes(0)
+    expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
+    expect(cozyClientJS.data.updateAttributes).toHaveBeenCalledTimes(0)
     queryResult = [{ _id: 5, ...marge }]
     await Simpson.createOrUpdate(marge)
-    expect(cozyClient.data.create).toHaveBeenCalledTimes(1)
-    expect(cozyClient.data.updateAttributes).toHaveBeenCalledTimes(1)
+    expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
+    expect(cozyClientJS.data.updateAttributes).toHaveBeenCalledTimes(1)
   })
 
   it('should update updatedAt cozyMetadata on create or update', async () => {
@@ -109,7 +119,7 @@ describe('Document', () => {
 
   it('should do bulk fetch', async () => {
     await Simpson.fetchAll()
-    expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+    expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
       'GET',
       '/data/io.cozy.simpsons/_all_docs?include_docs=true'
     )
@@ -168,21 +178,21 @@ describe('Document', () => {
   })
 
   it('should not do anything if passed empty list', async () => {
-    jest.spyOn(cozyClient.data, 'create').mockReset()
-    jest.spyOn(cozyClient, 'fetchJSON').mockReset()
+    jest.spyOn(cozyClientJS.data, 'create').mockReset()
+    jest.spyOn(cozyClientJS, 'fetchJSON').mockReset()
     const res = await Simpson.updateAll([])
-    expect(cozyClient.data.create).not.toHaveBeenCalled()
-    expect(cozyClient.fetchJSON).not.toHaveBeenCalled()
+    expect(cozyClientJS.data.create).not.toHaveBeenCalled()
+    expect(cozyClientJS.fetchJSON).not.toHaveBeenCalled()
     expect(res).toEqual([])
   })
 
   it('should create database when bulk updating', async () => {
     jest
-      .spyOn(cozyClient.data, 'create')
+      .spyOn(cozyClientJS.data, 'create')
       .mockReset()
       .mockResolvedValue({ _id: 1 })
     jest
-      .spyOn(cozyClient, 'fetchJSON')
+      .spyOn(cozyClientJS, 'fetchJSON')
       .mockReset()
       .mockRejectedValueOnce({
         reason: { reason: 'Database does not exist.' }
@@ -200,7 +210,7 @@ describe('Document', () => {
       { _id: 2, name: 'Homer' }
     ])
 
-    expect(cozyClient.data.create).toHaveBeenCalledWith('io.cozy.simpsons', {
+    expect(cozyClientJS.data.create).toHaveBeenCalledWith('io.cozy.simpsons', {
       _id: 1,
       name: 'Marge'
     })
@@ -213,7 +223,7 @@ describe('Document', () => {
       { _id: 1, name: 'Marge' },
       { _id: 2, name: 'Homer' }
     ])
-    expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+    expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
       'POST',
       '/data/io.cozy.simpsons/_bulk_docs',
       {
@@ -227,13 +237,13 @@ describe('Document', () => {
 
   describe('fetch changes', () => {
     beforeEach(() => {
-      cozyClient.fetchJSON.mockReset()
+      cozyClientJS.fetchJSON.mockReset()
     })
     afterEach(() => {
-      cozyClient.fetchJSON.mockReset()
+      cozyClientJS.fetchJSON.mockReset()
     })
     it('should work in simple case', async () => {
-      cozyClient.fetchJSON.mockReturnValueOnce(
+      cozyClientJS.fetchJSON.mockReturnValueOnce(
         Promise.resolve({
           last_seq: 'new-seq',
           results: [
@@ -246,7 +256,7 @@ describe('Document', () => {
       )
 
       const changes = await Simpson.fetchChanges('my-seq')
-      expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+      expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
         'GET',
         '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true'
       )
@@ -257,7 +267,7 @@ describe('Document', () => {
     })
 
     it('should support query options', async () => {
-      cozyClient.fetchJSON.mockReturnValueOnce(
+      cozyClientJS.fetchJSON.mockReturnValueOnce(
         Promise.resolve({
           last_seq: 'new-seq',
           results: []
@@ -267,7 +277,7 @@ describe('Document', () => {
       await Simpson.fetchChanges('my-seq', {
         params: { descending: true, limit: 1 }
       })
-      expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+      expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
         'GET',
         '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1'
       )
@@ -276,11 +286,11 @@ describe('Document', () => {
 
   describe('query all', () => {
     afterEach(() => {
-      cozyClient.data.query.mockReset()
+      cozyClientJS.data.query.mockReset()
     })
     it('should repeatedly call query until all documents have been fetched', async () => {
       let i = 0
-      cozyClient.data.query.mockImplementation(() => {
+      cozyClientJS.data.query.mockImplementation(() => {
         let docs
         if (i == 0) {
           docs = [{ _id: 1, name: 'Lisa' }]
@@ -299,35 +309,35 @@ describe('Document', () => {
         return Promise.resolve(resp)
       })
       const docs = await Simpson.queryAll({ name: { $exists: true } })
-      expect(cozyClient.data.defineIndex).toHaveBeenCalledWith(
+      expect(cozyClientJS.data.defineIndex).toHaveBeenCalledWith(
         'io.cozy.simpsons',
         ['name']
       )
       expect(docs.length).toBe(4)
       expect(
-        cozyClient.data.query.mock.calls.slice(-4).map(x => x[1].skip)
+        cozyClientJS.data.query.mock.calls.slice(-4).map(x => x[1].skip)
       ).toEqual([0, 1, 2, 3])
     })
   })
 
   describe('get all', () => {
     beforeEach(() => {
-      cozyClient.fetchJSON.mockReset()
+      cozyClientJS.fetchJSON.mockReset()
     })
 
     afterEach(() => {
-      cozyClient.fetchJSON.mockReset()
+      cozyClientJS.fetchJSON.mockReset()
     })
 
     it('should work', async () => {
-      cozyClient.fetchJSON.mockResolvedValueOnce({
+      cozyClientJS.fetchJSON.mockResolvedValueOnce({
         rows: [
           { doc: { _id: '123abde', name: 'Lisa' } },
           { doc: { _id: '2123asb', name: 'Bart' } }
         ]
       })
       const docs = await Simpson.getAll(['123abde', '2123asb'])
-      expect(cozyClient.fetchJSON).toHaveBeenCalledWith(
+      expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
         'POST',
         '/data/io.cozy.simpsons/_all_docs?include_docs=true',
         {
@@ -341,7 +351,7 @@ describe('Document', () => {
     })
 
     it('should return empty list in case of error', async () => {
-      cozyClient.fetchJSON.mockRejectedValueOnce({
+      cozyClientJS.fetchJSON.mockRejectedValueOnce({
         message: 'not_found'
       })
       const docs = await Simpson.getAll(['notexisting'])
@@ -358,9 +368,186 @@ describe('Document', () => {
 
     SubSimpson.fetch()
 
-    expect(cozyClient.fetchJSON).toHaveBeenLastCalledWith(
+    expect(cozyClientJS.fetchJSON).toHaveBeenLastCalledWith(
       'GET',
       '/data/io.cozy.simpsons/_all_docs'
     )
+  })
+})
+
+describe('Document used with CozyClient', () => {
+  beforeEach(() => {
+    Document.registerClient(cozyClient)
+  })
+
+  afterEach(() => {
+    jest.restoreAllMocks()
+    Document.dangerousUnregisterClient()
+  })
+
+  describe('usesCozyClient', () => {
+    it('should return true', () => {
+      expect(Document.usesCozyClient()).toBe(true)
+    })
+  })
+
+  describe('getIndex', () => {
+    it('should throw an error if used with a CozyClient', () => {
+      expect(() => Document.getIndex('io.cozy.simpsons', ['name'])).toThrow(
+        'This method is not implemented yet with CozyClient'
+      )
+    })
+  })
+
+  describe('createOrUpdate', () => {
+    it('should throw an error if used with a CozyClient', async () => {
+      expect.assertions(1)
+      await expect(Document.createOrUpdate({})).rejects.toEqual(
+        new Error('This method is not implemented yet with CozyClient')
+      )
+    })
+  })
+
+  describe('create', () => {
+    it('should throw an error if used with a CozyClient', () => {
+      expect(() => Document.create({})).toThrow(
+        new Error('This method is not implemented yet with CozyClient')
+      )
+    })
+  })
+
+  describe('query', () => {
+    it('should throw an error if used with a CozyClient', () => {
+      expect(() => Document.query({})).toThrow(
+        new Error('This method is not implemented yet with CozyClient')
+      )
+    })
+  })
+
+  describe('queryAll', () => {
+    it('should throw an error if used with a CozyClient', async () => {
+      expect.assertions(1)
+      await expect(
+        Document.queryAll({ name: { $exists: true } })
+      ).rejects.toEqual(
+        new Error('This method is not implemented yet with CozyClient')
+      )
+    })
+  })
+
+  describe('getAll', () => {
+    beforeEach(() => {
+      cozyClient.stackClient.fetchJSON.mockReset()
+    })
+
+    afterEach(() => {
+      cozyClient.stackClient.fetchJSON.mockReset()
+    })
+
+    it('should work', async () => {
+      cozyClient.stackClient.fetchJSON.mockResolvedValueOnce({
+        rows: [
+          { doc: { _id: '123abde', name: 'Lisa' } },
+          { doc: { _id: '2123asb', name: 'Bart' } }
+        ]
+      })
+      const docs = await Simpson.getAll(['123abde', '2123asb'])
+      expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
+        'POST',
+        '/data/io.cozy.simpsons/_all_docs?include_docs=true',
+        {
+          keys: ['123abde', '2123asb']
+        }
+      )
+      expect(docs).toEqual([
+        { _id: '123abde', name: 'Lisa' },
+        { _id: '2123asb', name: 'Bart' }
+      ])
+    })
+
+    it('should return empty list in case of error', async () => {
+      cozyClient.stackClient.fetchJSON.mockRejectedValueOnce({
+        message: 'not_found'
+      })
+      const docs = await Simpson.getAll(['notexisting'])
+      expect(docs).toEqual([])
+    })
+  })
+
+  describe('fetchChanges', () => {
+    beforeEach(() => {
+      cozyClient.stackClient.fetchJSON.mockReset()
+    })
+
+    afterEach(() => {
+      cozyClient.stackClient.fetchJSON.mockReset()
+    })
+
+    it('should work in simple case', async () => {
+      cozyClient.stackClient.fetchJSON.mockReturnValueOnce(
+        Promise.resolve({
+          last_seq: 'new-seq',
+          results: [
+            { doc: { _id: '1', name: 'Lisa' } },
+            { doc: null },
+            { doc: { _id: '_design/view' } },
+            { doc: { _id: '2', _deleted: true, name: 'Bart' } }
+          ]
+        })
+      )
+
+      const changes = await Simpson.fetchChanges('my-seq')
+      expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true'
+      )
+      expect(changes).toEqual({
+        newLastSeq: 'new-seq',
+        documents: [{ _id: '1', name: 'Lisa' }]
+      })
+    })
+
+    it('should support query options', async () => {
+      cozyClient.stackClient.fetchJSON.mockReturnValueOnce(
+        Promise.resolve({
+          last_seq: 'new-seq',
+          results: []
+        })
+      )
+
+      await Simpson.fetchChanges('my-seq', {
+        params: { descending: true, limit: 1 }
+      })
+      expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1'
+      )
+    })
+  })
+
+  describe('fetchAll', () => {
+    it('should do bulk fetch', async () => {
+      await Simpson.fetchAll()
+      expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
+        'GET',
+        '/data/io.cozy.simpsons/_all_docs?include_docs=true'
+      )
+    })
+  })
+
+  describe('updateAll', () => {
+    beforeEach(() => {
+      cozyClient.stackClient.fetchJSON.mockReset()
+    })
+
+    afterEach(() => {
+      cozyClient.stackClient.fetchJSON.mockReset()
+    })
+
+    it('should not do anything if passed empty list', async () => {
+      const res = await Simpson.updateAll([])
+      expect(cozyClient.stackClient.fetchJSON).not.toHaveBeenCalled()
+      expect(res).toEqual([])
+    })
   })
 })
