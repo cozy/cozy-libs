@@ -1,33 +1,28 @@
-/* global localStorage */
-
 import MicroEE from 'microee'
-
-export const prefix = 'flag__'
-export const getKey = name => prefix + name
-
-const listFlagLocalStorage = () => {
-  return Object.keys(localStorage)
-    .filter(x => x.indexOf(prefix) === 0)
-    .map(x => x.replace(prefix, ''))
-}
+import lsAdapter from './ls-adapter'
 
 /**
  * In memory key value storage.
- *  - Saves to localStorage when a key is set
- *  - When instantiated, will try to fill from localStorage
- *  - Emits `change` when a key is set (eventEmitter)
+ *
+ * Can potentially be backed by localStorage if present
+
+ * Emits `change` when a key is set (eventEmitter)
  */
 class FlagStore {
   constructor() {
-    this.fillFromLocalStorage()
+    this.store = {}
+    if (typeof localStorage !== 'undefined') {
+      this.longtermStore = lsAdapter
+    }
+    this.restore()
   }
 
-  fillFromLocalStorage() {
-    const flags = listFlagLocalStorage()
-    this.store = {}
-    for (let flag of flags) {
-      const val = localStorage.getItem(getKey(flag))
-      this.store[flag] = val ? JSON.parse(val) : val
+  restore() {
+    if (!this.longtermStore) {
+      return
+    }
+    for (const [flag, val] of Object.entries(this.longtermStore.getAll())) {
+      this.store[flag] = val
       this.emit('change')
     }
   }
@@ -44,8 +39,8 @@ class FlagStore {
   }
 
   set(name, value) {
-    if (window.localStorage) {
-      localStorage.setItem(getKey(name), JSON.stringify(value))
+    if (this.longtermStore) {
+      this.longtermStore.setItem(name, value)
     }
     this.store[name] = value
     this.emit('change')
@@ -53,7 +48,9 @@ class FlagStore {
 
   remove(name) {
     delete this.store[name]
-    localStorage.removeItem(getKey(name))
+    if (this.longtermStore) {
+      this.longtermStore.removeItem(name)
+    }
     this.emit('change')
   }
 }
@@ -66,9 +63,6 @@ const store = new FlagStore()
  * Public API to use flags
  */
 const flag = function() {
-  if (!window.localStorage) {
-    return
-  }
   const args = [].slice.call(arguments)
   if (args.length === 1) {
     return store.get(args[0])
