@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.0"></a>
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.6.1...cozy-flags@1.7.0) (2019-05-23)
+
+
+### Features
+
+* Flag automatically backs up to localStorage if present ([24bcd04](https://github.com/cozy/cozy-libs/commit/24bcd04))
+
+
+
+
 <a name="1.6.1"></a>
 ## 1.6.1 (2019-05-03)
 
