@@ -11,7 +11,7 @@ const connect = Component => {
       super(props)
       this.handleChange = this.handleChange.bind(this)
     }
-    componentWillMount() {
+    componentDidMount() {
       flag.store.on('change', this.handleChange)
     }
     componentWillUnmount() {
