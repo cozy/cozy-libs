@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.0"></a>
+# [0.46.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.6...cozy-harvest-lib@0.46.0) (2019-05-23)
+
+
+### Features
+
+* **harvest:** :sparkles: Add AccountLogoutButton component ([ec1d050](https://github.com/cozy/cozy-libs/commit/ec1d050))
+* **harvest:** :sparkles: Add deleteAccount func ([effb70e](https://github.com/cozy/cozy-libs/commit/effb70e))
+
+
+
+
 <a name="0.45.6"></a>
 ## [0.45.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.5...cozy-harvest-lib@0.45.6) (2019-05-17)
 

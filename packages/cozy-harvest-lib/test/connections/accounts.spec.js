@@ -8,6 +8,7 @@ const client = {
     get: jest.fn()
   }),
   create: jest.fn(),
+  destroy: jest.fn(),
   query: jest.fn(),
   save: jest.fn(),
   where: jest.fn(),
@@ -67,6 +68,7 @@ const {
   createAccount,
   updateAccount,
   saveAccount,
+  deleteAccount,
   watchKonnectorAccount
 } = accountsMutations(client)
 
@@ -333,6 +335,13 @@ describe('Account mutations', () => {
       const account = await updateAccount(fixtures.simpleAccount)
       expect(client.save).toHaveBeenCalledWith(fixtures.simpleAccount)
       expect(account).toEqual(fixtures.existingAccount)
+    })
+  })
+
+  describe('deleteAccount', () => {
+    it('calls CozyClient::destroy', async () => {
+      await deleteAccount(fixtures.simpleAccount)
+      expect(client.destroy).toHaveBeenCalledWith(fixtures.simpleAccount)
     })
   })
 
