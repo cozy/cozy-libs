@@ -8,6 +8,7 @@ const BankTransaction = require('./banking/BankTransaction')
 const Contact = require('./contacts/Contact')
 const Group = require('./contacts/Group')
 const Permission = require('./Permission')
+const CozyFile = require('./File')
 
 module.exports = {
   Account,
@@ -20,5 +21,6 @@ module.exports = {
   Contact,
   Group,
   registerClient: Document.registerClient,
-  Permission
+  Permission,
+  CozyFile
 }
