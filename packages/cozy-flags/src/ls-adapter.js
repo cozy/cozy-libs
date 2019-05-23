@@ -16,7 +16,8 @@ const listFlagLocalStorage = () => {
  */
 const getItem = flag => {
   const val = localStorage.getItem(getKey(flag))
-  return val ? JSON.parse(val) : val
+  const parsed = val ? JSON.parse(val) : val
+  return parsed
 }
 
 /**
@@ -26,7 +27,8 @@ const getItem = flag => {
  * @param  {String} value
  */
 const setItem = (flag, value) => {
-  return localStorage.setItem(getKey(flag), JSON.stringify(value))
+  const str = JSON.stringify(value)
+  return localStorage.setItem(getKey(flag), str)
 }
 
 /**
@@ -43,7 +45,7 @@ const removeItem = flag => {
  */
 const getAll = () => {
   const res = {}
-  for (const flag in listFlagLocalStorage()) {
+  for (const flag of listFlagLocalStorage()) {
     res[flag] = getItem(flag)
   }
   return res
@@ -53,7 +55,7 @@ const getAll = () => {
  * Clears all the flags from localstorage
  */
 const clearAll = () => {
-  for (const flag in listFlagLocalStorage()) {
+  for (const flag of listFlagLocalStorage()) {
     removeItem(flag)
   }
 }

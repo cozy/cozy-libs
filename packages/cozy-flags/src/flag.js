@@ -21,7 +21,8 @@ class FlagStore {
     if (!this.longtermStore) {
       return
     }
-    for (const [flag, val] of Object.entries(this.longtermStore.getAll())) {
+    const allValues = this.longtermStore.getAll()
+    for (const [flag, val] of Object.entries(allValues)) {
       this.store[flag] = val
       this.emit('change')
     }

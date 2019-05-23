@@ -29,7 +29,6 @@
     ]
   },
   "dependencies": {
-    "detect-node": "2.0.4",
     "microee": "^0.0.6"
   }
 }
