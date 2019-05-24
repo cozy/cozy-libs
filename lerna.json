@@ -5,6 +5,7 @@
   "useWorkspaces": true,
   "command": {
     "publish": {
+      "ignoreChanges": ["packages/playgrounds/*"],
       "conventionalCommits": true
     }
   }
