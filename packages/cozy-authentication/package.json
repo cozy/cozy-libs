@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
@@ -44,7 +44,7 @@
     "cozy-device-helper": "1.7.1",
     "localforage": "1.7.3",
     "prop-types": "15.7.2",
-    "react-markdown": "4.0.6",
+    "react-markdown": "4.0.8",
     "url-polyfill": "1.1.0"
   },
   "jest": {

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import I18n from 'cozy-ui/react/I18n'
 
+import TranslatedDeleteAccountButton from './components/DeleteAccountButton'
 import TranslatedTriggerManager from './components/TriggerManager'
 import TranslatedTriggerLauncher from './components/TriggerLauncher'
 
@@ -25,11 +26,14 @@ const withLocales = WrappedComponent =>
     }
   }
 
+export const DeleteAccountButton = withLocales(TranslatedDeleteAccountButton)
+
 export const TriggerManager = withLocales(TranslatedTriggerManager)
 
 export const TriggerLauncher = withLocales(TranslatedTriggerLauncher)
 
 export default {
+  DeleteAccountButton,
   TriggerLauncher,
   TriggerManager
 }

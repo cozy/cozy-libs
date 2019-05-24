@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.1"></a>
+## [0.46.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.46.0...cozy-harvest-lib@0.46.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* AccountFields.props.container is an Element ([1df28d4](https://github.com/cozy/cozy-libs/commit/1df28d4))
+
+
+
+
+<a name="0.46.0"></a>
+# [0.46.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.6...cozy-harvest-lib@0.46.0) (2019-05-23)
+
+
+### Features
+
+* **harvest:** :sparkles: Add AccountLogoutButton component ([ec1d050](https://github.com/cozy/cozy-libs/commit/ec1d050))
+* **harvest:** :sparkles: Add deleteAccount func ([effb70e](https://github.com/cozy/cozy-libs/commit/effb70e))
+
+
+
+
+<a name="0.45.6"></a>
+## [0.45.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.5...cozy-harvest-lib@0.45.6) (2019-05-17)
+
+
+
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+<a name="0.45.5"></a>
+## [0.45.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.4...cozy-harvest-lib@0.45.5) (2019-05-16)
+
+
+### Bug Fixes
+
+* :wrench: Upgrade cozy-ui ([cdff2d4](https://github.com/cozy/cozy-libs/commit/cdff2d4))
+
+
+
+
 <a name="0.45.4"></a>
 ## [0.45.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.3...cozy-harvest-lib@0.45.4) (2019-05-14)
 

@@ -1,6 +1,6 @@
 {
   "name": "cozy-mjml",
-  "version": "0.8.0",
+  "version": "0.8.1",
   "description": "Use MJML custom components for Cozy emails",
   "author": "Cozy",
   "license": "MIT",
@@ -17,7 +17,7 @@
     "mjml": "4.3.1",
     "shebang-loader": "0.0.1",
     "webpack": "4.29.6",
-    "webpack-cli": "3.3.0"
+    "webpack-cli": "3.3.2"
   },
   "scripts": {
     "build": "webpack",
