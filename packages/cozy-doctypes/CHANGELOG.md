@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.46.0"></a>
+# [1.46.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.45.0...cozy-doctypes@1.46.0) (2019-05-24)
+
+
+### Features
+
+* **cozy-doctypes:** Add File model ([eec1c87](https://github.com/cozy/cozy-libs/commit/eec1c87))
+* **cozy-doctypes:** Add get method to Document ([4a96bdf](https://github.com/cozy/cozy-libs/commit/4a96bdf))
+
+
+
+
 <a name="1.45.0"></a>
 # [1.45.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.44.1...cozy-doctypes@1.45.0) (2019-05-24)
 
