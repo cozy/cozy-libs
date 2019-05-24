@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.45.0"></a>
+# [1.45.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.44.1...cozy-doctypes@1.45.0) (2019-05-24)
+
+
+### Features
+
+* **cozy-doctypes:** Allow Document to use a CozyClient ([49bce6b](https://github.com/cozy/cozy-libs/commit/49bce6b))
+
+
+
+
 <a name="1.44.1"></a>
 ## [1.44.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.44.0...cozy-doctypes@1.44.1) (2019-05-06)
 
