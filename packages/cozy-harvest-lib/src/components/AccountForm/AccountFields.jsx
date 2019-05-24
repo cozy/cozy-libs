@@ -69,7 +69,7 @@ AccountFields.propTypes = {
    * The element wrapping the <AccountFields /> component.
    * Passed to <Field /> component.
    */
-  container: PropTypes.node,
+  container: PropTypes.instanceOf(Element),
   /**
    * Indicates if all the fields are disabled
    * @type {Boolean}
@@ -77,7 +77,7 @@ AccountFields.propTypes = {
   disabled: PropTypes.bool,
   /**
    * The sanitized konnector.fields object used do define the form fields
-   * @type {[type]}
+   * @type {object}
    */
   fields: PropTypes.object.isRequired,
   /**
