@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.46.1"></a>
+## [0.46.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.46.0...cozy-harvest-lib@0.46.1) (2019-05-24)
+
+
+### Bug Fixes
+
+* AccountFields.props.container is an Element ([1df28d4](https://github.com/cozy/cozy-libs/commit/1df28d4))
+
+
+
+
 <a name="0.46.0"></a>
 # [0.46.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.45.6...cozy-harvest-lib@0.46.0) (2019-05-23)
 
