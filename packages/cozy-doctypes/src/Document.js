@@ -139,6 +139,26 @@ class Document {
     return attributes
   }
 
+  /**
+   * Returns the item that has this id
+   *
+   * @param {string} id - The id of an item in the collection
+   * @returns {object}  - The collection's item that has this id
+   *
+   */
+  static async get(id) {
+    if (!this.usesCozyClient()) {
+      throw new Error('This method is not implemented with cozy-client-js')
+    }
+
+    if (!this.doctype) {
+      throw new Error('doctype is not defined')
+    }
+
+    const resp = await this.cozyClient.collection(this.doctype).get(id)
+    return resp.data
+  }
+
   static async createOrUpdate(attributes) {
     if (this.usesCozyClient()) {
       throw new Error('This method is not implemented yet with CozyClient')

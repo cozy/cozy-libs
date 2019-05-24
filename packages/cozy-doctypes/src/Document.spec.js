@@ -373,6 +373,15 @@ describe('Document', () => {
       '/data/io.cozy.simpsons/_all_docs'
     )
   })
+
+  describe('get', () => {
+    it('should throw an error if used with cozy-client-js', async () => {
+      expect.assertions(1)
+      await expect(Simpson.get('lisa')).rejects.toEqual(
+        new Error('This method is not implemented with cozy-client-js')
+      )
+    })
+  })
 })
 
 describe('Document used with CozyClient', () => {
@@ -548,6 +557,35 @@ describe('Document used with CozyClient', () => {
       const res = await Simpson.updateAll([])
       expect(cozyClient.stackClient.fetchJSON).not.toHaveBeenCalled()
       expect(res).toEqual([])
+    })
+  })
+
+  describe('get', () => {
+    it('should return the item that has given id', async () => {
+      const getSpy = jest.fn().mockResolvedValue({
+        data: {
+          _id: 'marge',
+          _type: 'io.cozy.simpsons',
+          name: 'Marge Simpson'
+        }
+      })
+      cozyClient.stackClient.collection.mockReturnValue({
+        get: getSpy
+      })
+      const result = await Simpson.get('marge')
+      expect(result).toEqual({
+        _id: 'marge',
+        _type: 'io.cozy.simpsons',
+        name: 'Marge Simpson'
+      })
+    })
+
+    it('should throw an error if no doctype is given', async () => {
+      class VanHouten extends Document {}
+      expect.assertions(1)
+      await expect(VanHouten.get('milhouse')).rejects.toEqual(
+        new Error('doctype is not defined')
+      )
     })
   })
 })
