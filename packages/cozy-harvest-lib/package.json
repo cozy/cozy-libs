@@ -19,7 +19,7 @@
     "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prebuild": "yarn tx",
     "prepublishOnly": "yarn build",
-    "test": "jest --verbose --coverage",
+    "test": "jest --verbose",
     "tx": "tx pull --all",
     "watch": "babel src -d dist --copy-files --watch",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
