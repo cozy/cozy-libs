@@ -6,7 +6,7 @@ import { withMutations } from 'cozy-client'
 import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
-import withKonnectorJob from './HOCs/withKonnectorJob'
+import withKonnectorJob from './hoc/withKonnectorJob'
 
 import {
   ERROR_EVENT,
