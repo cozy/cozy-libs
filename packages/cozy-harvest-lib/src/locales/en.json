@@ -1,27 +1,4 @@
 {
-  "triggerSuccessMessage": {
-    "button": {
-      "label": "Close"
-    },
-    "description": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically.",
-    "figure": {
-      "alt": "connected"
-    },
-    "title": "Successful configuration!"
-  },
-  "twoFAForm": {
-    "title": {
-      "default": "Enter the code sent to you by e-mail or SMS",
-      "email": "Enter the code sent to you by e-mail",
-      "sms": "Enter the code sent to you by SMS"
-    },
-    "desc": "This code allows you to finish your connexion.",
-    "code": {
-      "label": "code"
-    },
-    "retry": "Invalid code, please re-enter.",
-    "CTA": "Validate"
-  },
   "accountForm": {
     "submit": {
       "label": "Submit"
@@ -154,11 +131,6 @@
       "label": "Two factor code"
     }
   },
-  "oauth": {
-    "connect": {
-      "label": "Connect"
-    }
-  },
   "legacy": {
     "fields": {
       "access_token": {
@@ -250,5 +222,33 @@
         "button": "Close"
       }
     }
+  },
+  "oauth": {
+    "connect": {
+      "label": "Connect"
+    }
+  },
+  "triggerSuccessMessage": {
+    "button": {
+      "label": "Close"
+    },
+    "description": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically.",
+    "figure": {
+      "alt": "connected"
+    },
+    "title": "Successful configuration!"
+  },
+  "twoFAForm": {
+    "title": {
+      "default": "Enter the code sent to you by e-mail or SMS",
+      "email": "Enter the code sent to you by e-mail",
+      "sms": "Enter the code sent to you by SMS"
+    },
+    "desc": "This code allows you to finish your connexion.",
+    "code": {
+      "label": "code"
+    },
+    "retry": "Invalid code, please re-enter.",
+    "CTA": "Validate"
   }
 }
