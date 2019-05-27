@@ -2,14 +2,14 @@ import MicroEE from 'microee'
 
 import accounts from '../helpers/accounts'
 import triggers from '../helpers/triggers'
-import cron from '../helpers/cron'
-import konnectors from '../helpers/konnectors'
-import { slugify } from '../helpers/slug'
 
 import accountsMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import permissionsMutations from '../connections/permissions'
 import filesMutations from '../connections/files'
+
+import KonnectorTrigger from '../models/KonnectorTrigger'
+import KonnectorAccount from '../models/KonnectorAccount'
 
 // events
 export const ERROR_EVENT = 'error'
@@ -28,24 +28,14 @@ export const RUNNING_TWOFA = 'RUNNING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 
-// helpers
-export const prepareTriggerAccountIfExists = async (
-  trigger,
-  accountsMutations
-) => {
-  if (!trigger) return null
-  const { findAccount, updateAccount } = accountsMutations
-  const account = await findAccount(triggers.getAccountId(trigger))
-  if (!account) return null
-  return await updateAccount(accounts.resetState(account))
-}
-
 export class KonnectorJob {
   constructor(client, trigger, account = null) {
     this.client = client
     this.trigger = trigger
     this.account = account
     this.unsubscribeAllRealtime = null
+    this.konnectorTrigger = new KonnectorTrigger(this.client)
+    this.konnectorAccount = new KonnectorAccount(this.client)
 
     // mutations
     this.accountsMutations = accountsMutations(this.client)
@@ -68,7 +58,6 @@ export class KonnectorJob {
     // account setter/getters
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
     this.getAccount = this.getAccount.bind(this)
-    this.createOrUpdateAccountData = this.createOrUpdateAccountData.bind(this)
 
     // status setter/getters
     this._status = IDLE
@@ -81,7 +70,6 @@ export class KonnectorJob {
     // trigger setter/getters
     this.getTrigger = this.getTrigger.bind(this)
     this.getTriggerError = this.getTriggerError.bind(this)
-    this.ensureTrigger = this.ensureTrigger.bind(this)
   }
 
   /**
@@ -93,56 +81,6 @@ export class KonnectorJob {
 
   getTriggerError() {
     return triggers.getError(this.getTrigger())
-  }
-
-  /**
-   * Ensure that a trigger will exist, with valid destination folder with
-   * permissions and references
-   * @param  {Object}  konnector Konnector related document, required to create
-   *                             a trigger
-   */
-  async ensureTrigger(konnector, baseDir = '') {
-    if (this.trigger) return
-    if (!this.account) {
-      this.handleError(new Error('No account found to create a trigger'))
-    }
-
-    const { addPermission } = this.permissionsMutations
-    const {
-      addReferencesTo,
-      createDirectoryByPath,
-      statDirectoryByPath
-    } = this.permissionsMutations
-    const { createTrigger } = this.triggersMutations
-
-    let folder
-
-    try {
-      if (konnectors.needsFolder(konnector)) {
-        const path = `${baseDir}/${konnector.name}/${slugify(
-          accounts.getLabel(this.account)
-        )}`
-
-        folder =
-          (await statDirectoryByPath(path)) ||
-          (await createDirectoryByPath(path))
-
-        await addPermission(konnector, konnectors.buildFolderPermission(folder))
-        await addReferencesTo(konnector, [folder])
-      }
-
-      const createdTrigger = await createTrigger(
-        triggers.buildAttributes({
-          account: this.account,
-          cron: cron.fromKonnector(konnector),
-          folder,
-          konnector
-        })
-      )
-      this.trigger = createdTrigger
-    } catch (error) {
-      this.handleError(error)
-    }
   }
 
   /**
@@ -180,40 +118,6 @@ export class KonnectorJob {
   }
 
   /**
-   * Create the account document if it not exists or update it
-   * @param  {Object}  konnector Konnector related document
-   * @param  {Object}  data      Data from the account form
-   * @return {Promise}           Saved account document
-   */
-  async createOrUpdateAccountData(konnector, data = {}) {
-    const { saveAccount } = this.accountsMutations
-
-    this.account = await prepareTriggerAccountIfExists(
-      this.trigger,
-      this.accountsMutations
-    )
-
-    try {
-      const accountToSave = this.account
-        ? accounts.mergeAuth(
-            accounts.setSessionResetIfNecessary(
-              accounts.resetState(this.account),
-              data
-            ),
-            data
-          )
-        : accounts.build(konnector, data)
-      const savedAccount = accounts.mergeAuth(
-        await saveAccount(konnector, accountToSave),
-        data
-      )
-      this.account = savedAccount
-    } catch (error) {
-      this.handleError(error)
-    }
-  }
-
-  /**
    * KONNECTOR
    */
   /**
@@ -241,8 +145,22 @@ export class KonnectorJob {
       this.handleError(
         new Error('A konnector must be provided to start a connection')
       )
-    await this.createOrUpdateAccountData(konnector, data)
-    await this.ensureTrigger(konnector, baseDir)
+    try {
+      this.account = await this.konnectorAccount.createOrUpdateData(
+        konnector,
+        this.trigger,
+        data
+      )
+      if (!this.trigger) {
+        this.trigger = await this.konnectorTrigger.create(
+          konnector,
+          this.account,
+          baseDir
+        )
+      }
+    } catch (error) {
+      this.handleError(error)
+    }
   }
 
   /**
@@ -313,7 +231,7 @@ export class KonnectorJob {
     const { watchKonnectorAccount } = this.accountsMutations
     const { launchTrigger, watchKonnectorJob } = this.triggersMutations
 
-    this.account = await prepareTriggerAccountIfExists(
+    this.account = await this.konnectorAccount.prepareTriggerAccountIfExists(
       this.trigger,
       this.accountsMutations
     )
