@@ -6,7 +6,6 @@ import { withMutations } from 'cozy-client'
 import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
-import withKonnectorJob from './HOCs/withKonnectorJob'
 
 import {
   ERROR_EVENT,
@@ -99,6 +98,6 @@ TriggerLauncher.propTypes = {
   submitting: PropTypes.bool
 }
 
-export default withKonnectorJob(
-  withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
+export default withMutations(accountsMutations, triggersMutations)(
+  TriggerLauncher
 )

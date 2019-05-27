@@ -7,6 +7,7 @@ import TranslatedTriggerManager from './components/TriggerManager'
 import TranslatedTriggerLauncher from './components/TriggerLauncher'
 
 export { KonnectorJobError } from './helpers/konnectors'
+import withKonnectorJob from './HOCs/withKonnectorJob'
 
 const dictRequire = lang => require(`./locales/${lang}.json`)
 
@@ -26,11 +27,13 @@ const withLocales = WrappedComponent =>
     }
   }
 
+const augment = component => withLocales(withKonnectorJob(component))
+
 export const DeleteAccountButton = withLocales(TranslatedDeleteAccountButton)
 
-export const TriggerManager = withLocales(TranslatedTriggerManager)
+export const TriggerManager = augment(TranslatedTriggerManager)
 
-export const TriggerLauncher = withLocales(TranslatedTriggerLauncher)
+export const TriggerLauncher = augment(TranslatedTriggerLauncher)
 
 export default {
   DeleteAccountButton,

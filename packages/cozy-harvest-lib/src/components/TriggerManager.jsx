@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 
 import { translate } from 'cozy-ui/react/I18n'
 
-import withKonnectorJob from './HOCs/withKonnectorJob'
 import AccountForm from './AccountForm'
 import TwoFAModal from './TwoFAModal'
 
@@ -169,4 +168,4 @@ TriggerManager.propTypes = {
   onSuccess: PropTypes.func
 }
 
-export default translate()(withKonnectorJob(TriggerManager))
+export default translate()(TriggerManager)
