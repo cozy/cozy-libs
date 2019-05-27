@@ -8,7 +8,7 @@ import AppIcon from 'cozy-ui/react/AppIcon'
 import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 
-export class TwoFAForm extends PureComponent {
+export class TwoFAModal extends PureComponent {
   constructor(props) {
     super(props)
     this.state = { twoFACode: '' }
@@ -88,8 +88,8 @@ export class TwoFAForm extends PureComponent {
   }
 }
 
-TwoFAForm.contextTypes = {
+TwoFAModal.contextTypes = {
   client: PropTypes.object
 }
 
-export default translate()(withBreakpoints()(TwoFAForm))
+export default translate()(withBreakpoints()(TwoFAModal))
