@@ -19,7 +19,7 @@ describe('Document', () => {
 
   afterEach(() => {
     jest.restoreAllMocks()
-    Document.dangerousUnregisterClient()
+    Document.cozyClient = null
   })
 
   describe('registerClient', () => {
@@ -391,7 +391,7 @@ describe('Document used with CozyClient', () => {
 
   afterEach(() => {
     jest.restoreAllMocks()
-    Document.dangerousUnregisterClient()
+    Document.cozyClient = null
   })
 
   describe('usesCozyClient', () => {
