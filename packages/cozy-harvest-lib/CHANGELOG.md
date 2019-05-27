@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.47.1"></a>
+## [0.47.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.47.0...cozy-harvest-lib@0.47.1) (2019-05-27)
+
+
+### Bug Fixes
+
+* **harvest:** Prevent form to not submit 🚑 ([0b0eb6b](https://github.com/cozy/cozy-libs/commit/0b0eb6b))
+
+
+
+
 <a name="0.47.0"></a>
 # [0.47.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.46.1...cozy-harvest-lib@0.47.0) (2019-05-27)
 
