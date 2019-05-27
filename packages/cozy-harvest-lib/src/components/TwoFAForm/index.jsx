@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
-import Modal, { ModalDescription, ModalHeader } from 'cozy-ui/react/Modal'
-import Text, { SubTitle, Caption } from 'cozy-ui/react/Text'
-import { translate } from 'cozy-ui/react/I18n'
+import PropTypes from 'prop-types'
+
+import AppIcon from 'cozy-ui/react/AppIcon'
 import Button from 'cozy-ui/react/Button'
 import Field from 'cozy-ui/react/Field'
-import AppIcon from 'cozy-ui/react/AppIcon'
+import { translate } from 'cozy-ui/react/I18n'
+import Modal, { ModalDescription, ModalHeader } from 'cozy-ui/react/Modal'
+import Text, { SubTitle, Caption } from 'cozy-ui/react/Text'
 import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
-import PropTypes from 'prop-types'
 
 import accounts from '../../helpers/accounts'
 
@@ -89,6 +90,7 @@ export class TwoFAForm extends PureComponent {
               busy={submitting}
               disabled={submitting || !twoFACode}
               extension="full"
+              onClick={this.handleSubmit}
             />
           </form>
         </ModalDescription>
