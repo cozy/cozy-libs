@@ -82,15 +82,6 @@ class Document {
   }
 
   /**
-   * Unregisters a client
-   *
-   * This method is dangerous and is meant to be used only by tests.
-   */
-  static dangerousUnregisterClient() {
-    this.cozyClient = null
-  }
-
-  /**
    * Returns true if Document uses a CozyClient (from cozy-client package)
    *
    * @returns {boolean} true if Document uses a CozyClient
