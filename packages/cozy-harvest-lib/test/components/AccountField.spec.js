@@ -1,5 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import PropTypes from 'prop-types'
 
 import { AccountField } from 'components/AccountForm/AccountField'
 
@@ -81,6 +82,10 @@ describe('AccountField', () => {
   })
 
   it('ignores invalid predefined label', () => {
+    // Avoid warning
+    const originalPropTypes = AccountField.propTypes
+    AccountField.propTypes = { label: PropTypes.oneOf(['foo']) }
+
     const wrapper = shallow(
       <AccountField
         label="foo"
@@ -91,5 +96,7 @@ describe('AccountField', () => {
       />
     )
     expect(wrapper.props().label).toBe('fields.username.label')
+
+    AccountField.propTypes = originalPropTypes
   })
 })
