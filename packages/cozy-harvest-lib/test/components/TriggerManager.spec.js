@@ -162,7 +162,6 @@ class KonnectorJobMock {
     this.account = account
     this.trigger = trigger
   }
-  isRunning = () => false
   getAccount = () => this.account
   getTrigger = () => this.trigger
   getTriggerError = jest.fn()

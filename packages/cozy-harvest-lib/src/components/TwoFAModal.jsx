@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import Modal, { ModalDescription, ModalHeader } from 'cozy-ui/react/Modal'
 import Text, { SubTitle, Caption } from 'cozy-ui/react/Text'
 import { translate } from 'cozy-ui/react/I18n'
@@ -8,13 +8,44 @@ import AppIcon from 'cozy-ui/react/AppIcon'
 import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 
-export class TwoFAModal extends PureComponent {
+import {
+  ERROR_EVENT,
+  SUCCESS_EVENT,
+  LOGIN_SUCCESS_EVENT,
+  TWO_FA_MISMATCH_EVENT
+} from '../models/KonnectorJob'
+
+export class TwoFAModal extends Component {
   constructor(props) {
     super(props)
-    this.state = { twoFACode: '' }
+    this.state = {
+      twoFACode: '',
+      isRunning: false,
+      isTwoFARetry: false
+    }
+
     this.handleChange = this.handleChange.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fetchIcon = this.fetchIcon.bind(this)
+    this.handleEnding = this.handleEnding.bind(this)
+    this.handleTwoFARetry = this.handleTwoFARetry.bind(this)
+  }
+
+  componentDidMount() {
+    const { konnectorJob } = this.props
+    konnectorJob.on(ERROR_EVENT, this.handleEnding)
+    konnectorJob.on(SUCCESS_EVENT, this.handleEnding)
+    konnectorJob.on(LOGIN_SUCCESS_EVENT, this.handleEnding)
+    konnectorJob.on(TWO_FA_MISMATCH_EVENT, this.handleEnding)
+    konnectorJob.on(TWO_FA_MISMATCH_EVENT, this.handleTwoFARetry)
+  }
+
+  handleTwoFARetry() {
+    this.setState({ isTwoFARetry: true })
+  }
+
+  handleEnding() {
+    this.setState({ isRunning: false })
   }
 
   handleChange(e) {
@@ -25,6 +56,7 @@ export class TwoFAModal extends PureComponent {
     // prevent refreshing the page when submitting
     // (happens not systematically)
     e.preventDefault()
+    this.setState({ isRunning: true, isTwoFARetry: false })
     this.props.konnectorJob.sendTwoFACode(this.state.twoFACode)
   }
 
@@ -40,7 +72,7 @@ export class TwoFAModal extends PureComponent {
   render() {
     const { dismissAction, konnectorJob, t, breakpoints = {} } = this.props
     const { isMobile } = breakpoints
-    const { twoFACode } = this.state
+    const { twoFACode, isRunning, isTwoFARetry } = this.state
 
     return (
       <Modal
@@ -66,10 +98,10 @@ export class TwoFAModal extends PureComponent {
               autoComplete="off"
               label={t('twoFAForm.code.label')}
               size="medium"
-              error={konnectorJob.isTwoFARetry()}
+              error={isTwoFARetry}
               fullwidth
             />
-            {konnectorJob.isTwoFARetry() && (
+            {isTwoFARetry && (
               <Caption className="u-error u-fs-italic u-mt-half">
                 {t('twoFAForm.retry')}
               </Caption>
@@ -77,8 +109,8 @@ export class TwoFAModal extends PureComponent {
             <Button
               className="u-mt-1"
               label={t('twoFAForm.CTA')}
-              busy={konnectorJob.isTwoFARunning()}
-              disabled={konnectorJob.isTwoFARunning() || !twoFACode}
+              busy={isRunning}
+              disabled={isRunning || !twoFACode}
               extension="full"
             />
           </form>

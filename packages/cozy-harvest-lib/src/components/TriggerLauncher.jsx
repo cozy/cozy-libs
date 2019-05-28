@@ -35,16 +35,16 @@ import {
 export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
-    this.state = { showTwoFAModal: false }
+    this.state = { showTwoFAModal: false, isTriggerRunning: false }
 
-    this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
+    this.handleEnding = this.handleEnding.bind(this)
     this.displayTwoFAModal = this.displayTwoFAModal.bind(this)
   }
 
   componentDidMount() {
     this.props.konnectorJob
-      .on(ERROR_EVENT, this.dismissTwoFAModal)
-      .on(SUCCESS_EVENT, this.dismissTwoFAModal)
+      .on(ERROR_EVENT, this.handleEnding)
+      .on(SUCCESS_EVENT, this.handleEnding)
       .on(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
       .on(TWO_FA_MISMATCH_EVENT, this.displayTwoFAModal)
   }
@@ -53,8 +53,8 @@ export class TriggerLauncher extends Component {
     this.props.konnectorJob.unwatch()
   }
 
-  dismissTwoFAModal() {
-    this.setState({ showTwoFAModal: false })
+  handleEnding() {
+    this.setState({ showTwoFAModal: false, isTriggerRunning: false })
   }
 
   displayTwoFAModal() {
@@ -62,14 +62,14 @@ export class TriggerLauncher extends Component {
   }
 
   render() {
-    const { showTwoFAModal } = this.state
+    const { showTwoFAModal, isTriggerRunning } = this.state
     const { children, konnectorJob, submitting } = this.props
 
     return (
       <div>
         {children({
           launch: konnectorJob.launch,
-          running: konnectorJob.isRunning() || submitting
+          running: isTriggerRunning || submitting
         })}
         {showTwoFAModal && (
           <TwoFAModal

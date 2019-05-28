@@ -28,9 +28,11 @@ export class TriggerManager extends Component {
     this.displayTwoFAModal = this.displayTwoFAModal.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
+    this.handleError = this.handleError.bind(this)
 
     this.state = {
-      showTwoFAModal: false
+      showTwoFAModal: false,
+      isTriggerRunning: false
     }
   }
 
@@ -43,6 +45,7 @@ export class TriggerManager extends Component {
     const { konnectorJob } = this.props
     konnectorJob
       .on(ERROR_EVENT, this.dismissTwoFAModal)
+      .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.dismissTwoFAModal)
       .on(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
       .on(TWO_FA_MISMATCH_EVENT, this.displayTwoFAModal)
@@ -54,6 +57,7 @@ export class TriggerManager extends Component {
    * @param  {Object}  data [description]
    */
   async handleSubmit(data) {
+    this.setState({ isTriggerRunning: true })
     const { konnector, konnectorJob, onLoginSuccess, onSuccess, t } = this.props
 
     // prepare the connection, create account and trigger if needed
@@ -71,12 +75,17 @@ export class TriggerManager extends Component {
     konnectorJob.launch()
   }
 
+  handleError() {
+    this.setState({ isTriggerRunning: false })
+  }
+
   /**
    * Handle a success, typically job success or login success
    * @param  {Function} successCallback Typically onLoginSuccess or onSuccess
    * @param  {Array} args            Callback arguments
    */
   handleSuccess(successCallback, args) {
+    this.setState({ isTriggerRunning: false })
     successCallback(...args)
   }
 
@@ -96,8 +105,8 @@ export class TriggerManager extends Component {
       showError,
       modalContainerId
     } = this.props
-    const { showTwoFAModal } = this.state
-    const submitting = konnectorJob.isRunning() || running
+    const { showTwoFAModal, isTriggerRunning } = this.state
+    const submitting = isTriggerRunning || running
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
     return (

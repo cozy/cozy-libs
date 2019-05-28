@@ -59,13 +59,9 @@ export class KonnectorJob {
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
     this.getAccount = this.getAccount.bind(this)
 
-    // status setter/getters
+    // status setter
     this._status = IDLE
     this.setStatus = this.setStatus.bind(this)
-    this.getStatus = this.getStatus.bind(this)
-    this.isRunning = this.isRunning.bind(this)
-    this.isTwoFARunning = this.isTwoFARunning.bind(this)
-    this.isTwoFARetry = this.isTwoFARetry.bind(this)
 
     // trigger setter/getters
     this.getTrigger = this.getTrigger.bind(this)
@@ -88,22 +84,6 @@ export class KonnectorJob {
    */
   setStatus(status) {
     this._status = status
-  }
-
-  getStatus() {
-    return this._status
-  }
-
-  isRunning() {
-    return ![ERRORED, IDLE, SUCCESS].includes(this.getStatus())
-  }
-
-  isTwoFARunning() {
-    return this.getStatus() === RUNNING_TWOFA
-  }
-
-  isTwoFARetry() {
-    return this.getStatus() === TWO_FA_MISMATCH
   }
 
   /**
