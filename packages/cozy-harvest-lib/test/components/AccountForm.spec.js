@@ -96,19 +96,6 @@ describe('AccountForm', () => {
     expect(wrapper.props().initialValues).toEqual(fixtures.account.auth)
   })
 
-  it('should redirect to OAuthForm', () => {
-    const konnector = {
-      oauth: {
-        scope: 'test'
-      }
-    }
-
-    const component = shallow(
-      <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />
-    ).getElement()
-    expect(component).toMatchSnapshot()
-  })
-
   it('should provide default values from manifest', () => {
     const konnector = {
       fields: {
