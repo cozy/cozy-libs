@@ -226,6 +226,9 @@
   "oauth": {
     "connect": {
       "label": "Connect"
+    },
+    "window": {
+      "title": "OAuth"
     }
   },
   "triggerSuccessMessage": {
