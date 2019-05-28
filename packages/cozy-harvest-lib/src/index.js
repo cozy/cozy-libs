@@ -5,9 +5,10 @@ import I18n from 'cozy-ui/react/I18n'
 import TranslatedDeleteAccountButton from './components/DeleteAccountButton'
 import TranslatedTriggerManager from './components/TriggerManager'
 import TranslatedTriggerLauncher from './components/TriggerLauncher'
+import TranslatedHarvestModal from './components/HarvestModal'
+import withKonnectorJob from './components/HOCs/withKonnectorJob'
 
 export { KonnectorJobError } from './helpers/konnectors'
-import withKonnectorJob from './HOCs/withKonnectorJob'
 
 const dictRequire = lang => require(`./locales/${lang}.json`)
 
@@ -27,16 +28,22 @@ const withLocales = WrappedComponent =>
     }
   }
 
-const augment = component => withLocales(withKonnectorJob(component))
-
 export const DeleteAccountButton = withLocales(TranslatedDeleteAccountButton)
 
-export const TriggerManager = augment(TranslatedTriggerManager)
+export const TriggerManager = withLocales(
+  withKonnectorJob(TranslatedTriggerManager)
+)
 
-export const TriggerLauncher = augment(TranslatedTriggerLauncher)
+export const TriggerLauncher = withLocales(
+  withKonnectorJob(TranslatedTriggerLauncher)
+)
+
+// more complicated component using other Harvest components
+export const HarvestModal = withLocales(TranslatedHarvestModal)
 
 export default {
   DeleteAccountButton,
+  HarvestModal,
   TriggerLauncher,
   TriggerManager
 }

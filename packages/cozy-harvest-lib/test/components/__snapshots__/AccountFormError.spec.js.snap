@@ -2,6 +2,7 @@
 
 exports[`AccountFormError should render 1`] = `
 <Infos
+  className="u-mt-1"
   icon={null}
   isImportant={true}
   text={
@@ -15,6 +16,7 @@ exports[`AccountFormError should render 1`] = `
 
 exports[`AccountFormError should render regular Error 1`] = `
 <Infos
+  className="u-mt-1"
   icon={null}
   isImportant={true}
   text={

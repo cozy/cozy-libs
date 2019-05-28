@@ -41,6 +41,9 @@
     "dateFormat": "MM/DD/YYYY",
     "baseDir": "/Administrative"
   },
+  "modal": {
+    "title": "Connect your %{name} account"
+  },
   "error": {
     "job": {
       "DISK_QUOTA_EXCEEDED": {

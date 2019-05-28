@@ -73,6 +73,7 @@ export class AccountFormError extends PureComponent {
       <Infos
         title={this.getErrorLocale('title')}
         text={<Markdown source={this.getErrorLocale('description')} />}
+        className="u-mt-1"
         isImportant
       />
     )

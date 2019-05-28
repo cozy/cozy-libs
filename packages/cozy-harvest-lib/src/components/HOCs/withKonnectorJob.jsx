@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 
@@ -20,7 +20,7 @@ export const KonnectorJobPropTypes = {
 }
 
 export const withKonnectorJob = WrappedComponent => {
-  class ComponentWithKonnectorJob extends PureComponent {
+  class ComponentWithKonnectorJob extends Component {
     constructor(props, context) {
       super(props, context)
       this.konnectorJob = new KonnectorJob(
