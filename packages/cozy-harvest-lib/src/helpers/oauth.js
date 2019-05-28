@@ -3,6 +3,30 @@ import uuid from 'uuid/v4'
 import * as konnectors from './konnectors'
 
 /**
+ * Checks that the given data for the given konnector is consistent with the
+ * information stored in localStorage in prepareOAuth method.
+ * @param  {Object} konnector
+ * @return {Object} response.oAuthUrl -  URL of cozy stack OAuth endpoint
+ * @return {Object} response.oAuthStateKey -  Random key saved in localStorage
+ * @return {boolean} `true` if data is consistent and OAuth workflow can
+ * be validated, `false` otherwise
+ */
+export const checkOAuthData = (konnector, data) => {
+  if (!data) return false
+
+  const { key, oAuthStateKey } = data
+  if (!key || !oAuthStateKey) return false
+
+  const accountType = konnectors.getAccountType(konnector)
+
+  const state =
+    localStorage.getItem(oAuthStateKey) &&
+    JSON.parse(localStorage.getItem(oAuthStateKey))
+
+  return state.accountType === accountType
+}
+
+/**
  * Handler to be called at the top level of an application.
  * Aimed to handle an OAuth redirect with data in query string.
  *
@@ -80,6 +104,7 @@ export const prepareOAuth = (client, konnector) => {
 }
 
 export default {
+  checkOAuthData,
   handleOAuthResponse,
   prepareOAuth
 }
