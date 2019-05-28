@@ -103,8 +103,17 @@ export const prepareOAuth = (client, konnector) => {
   return { oAuthStateKey, oAuthUrl }
 }
 
+/**
+ * Terminates the Client OAuth workflow, i.e. clean the localStorage.
+ * @param  {string} oAuthStateKey localStorage key
+ */
+export const terminateOAuth = oAuthStateKey => {
+  localStorage.removeItem(oAuthStateKey)
+}
+
 export default {
   checkOAuthData,
   handleOAuthResponse,
-  prepareOAuth
+  prepareOAuth,
+  terminateOAuth
 }
