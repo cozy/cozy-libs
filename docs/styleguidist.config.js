@@ -1,4 +1,5 @@
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const cozyUIPlugin = require('cozy-ui/stylus')
 const webpack = require('webpack')
 
 const lib = process.env.TARGET
@@ -25,6 +26,13 @@ module.exports = {
               options: {
                 modules: true,
                 localIdentName: '[local]--[hash:base64:5]'
+              }
+            },
+            {
+              loader: 'stylus-loader',
+              options: {
+                preferPathResolver: 'webpack',
+                use: [cozyUIPlugin()]
               }
             }
           ]
