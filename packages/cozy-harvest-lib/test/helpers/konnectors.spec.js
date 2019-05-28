@@ -1,5 +1,6 @@
 import {
   buildFolderPermission,
+  getAccountType,
   KonnectorJobError,
   needsFolder
 } from 'helpers/konnectors'
@@ -11,6 +12,18 @@ const fixtures = {
 }
 
 describe('Konnectors Helpers', () => {
+  describe('getAccountType', () => {
+    it('should return slug', () => {
+      expect(getAccountType({ slug: 'foo' })).toBe('foo')
+    })
+
+    it('should return oauth.account_type', () => {
+      expect(
+        getAccountType({ slug: 'foo', oauth: { account_type: 'bar' } })
+      ).toBe('bar')
+    })
+  })
+
   describe('needsFolder', () => {
     it('should return true', () => {
       expect(

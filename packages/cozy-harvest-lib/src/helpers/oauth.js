@@ -1,3 +1,7 @@
+import uuid from 'uuid/v4'
+
+import * as konnectors from './konnectors'
+
 /**
  * Handler to be called at the top level of an application.
  * Aimed to handle an OAuth redirect with data in query string.
@@ -46,6 +50,36 @@ export const handleOAuthResponse = () => {
   window.close()
 }
 
+/**
+ * Initializes client OAuth workflow by storing the current information about
+ * account type in localStorage. Generates the OAuth URL to stack endpoint,
+ * passing the localStorage key as state in query string.
+ * @param  {string} domain    Cozy domain
+ * @param  {Object} konnector
+ * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack
+ * OAuth endpoint) and `oAuthStateKey` (localStorage key)
+ */
+export const prepareOAuth = (client, konnector) => {
+  const { oauth } = konnector
+  const accountType = konnectors.getAccountType(konnector)
+
+  // We use localStorage to store the account related data
+  // We will later check in localStorage that the received information is
+  // consistent.
+  const oAuthState = { accountType: konnectors.getAccountType(konnector) }
+  const oAuthStateKey = uuid()
+  localStorage.setItem(oAuthStateKey, JSON.stringify(oAuthState))
+
+  const cozyUrl = client.stackClient.uri
+
+  const oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?scope=${
+    oauth.scope
+  }&state=${oAuthStateKey}&nonce=${Date.now()}`
+
+  return { oAuthStateKey, oAuthUrl }
+}
+
 export default {
-  handleOAuthResponse
+  handleOAuthResponse,
+  prepareOAuth
 }
