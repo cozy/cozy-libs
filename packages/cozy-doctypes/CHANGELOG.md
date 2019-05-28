@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.47.0"></a>
+# [1.47.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.46.1...cozy-doctypes@1.47.0) (2019-05-28)
+
+
+### Features
+
+* **cozy-doctypes:** Add move method to File model ([36c7399](https://github.com/cozy/cozy-libs/commit/36c7399))
+
+
+
+
 <a name="1.46.1"></a>
 ## [1.46.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.46.0...cozy-doctypes@1.46.1) (2019-05-27)
 
