@@ -83,11 +83,14 @@ describe('AccountField', () => {
 
   it('ignores invalid predefined label', () => {
     // Avoid warning
-    const originalPropTypes = AccountField.propTypes
-    AccountField.propTypes = { label: PropTypes.oneOf(['foo']) }
+    class AccountFieldWithPermissiveLabel extends AccountField {}
+    AccountFieldWithPermissiveLabel.propTypes = {
+      ...AccountField.propTypes,
+      label: PropTypes.string
+    }
 
     const wrapper = shallow(
-      <AccountField
+      <AccountFieldWithPermissiveLabel
         label="foo"
         name="username"
         required={true}
@@ -96,7 +99,5 @@ describe('AccountField', () => {
       />
     )
     expect(wrapper.props().label).toBe('fields.username.label')
-
-    AccountField.propTypes = originalPropTypes
   })
 })
