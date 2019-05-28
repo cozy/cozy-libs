@@ -89,6 +89,7 @@ describe('AccountForm', () => {
       <AccountForm
         account={fixtures.account}
         konnector={fixtures.konnector}
+        onSubmit={onSubmit}
         t={t}
       />
     )
