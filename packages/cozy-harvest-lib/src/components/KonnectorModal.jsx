@@ -104,16 +104,6 @@ export class KonnectorModal extends PureComponent {
         <ModalHeader>
           <AppIcon fetchIcon={this.fetchIcon} className="u-mah-3 u-ml-1" />
         </ModalHeader>
-        {error && (
-          <Infos
-            actionButton={
-              <Button theme="danger">{t('modal.konector.error.button')}</Button>
-            }
-            title={t('modal.konnector.error.title')}
-            text={t('modal.konnector.error.description', error)}
-            isImportan
-          />
-        )}
         {fetching ? (
           <ModalContent>
             <Spinner
