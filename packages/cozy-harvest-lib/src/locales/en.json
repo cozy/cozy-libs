@@ -240,5 +240,15 @@
         "label": "Tricount URL"
       }
     }
+  },
+  "modal": {
+    "konnector": {
+      "title": "Connect your %{name} account",
+      "error": {
+        "title": "Unable to retrieve your account",
+        "description": "The account cannot be retrieved (%{message}).",
+        "button": "Close"
+      }
+    }
   }
 }
