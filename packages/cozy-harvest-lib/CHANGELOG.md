@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.0"></a>
+# [0.49.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.48.0...cozy-harvest-lib@0.49.0) (2019-05-29)
+
+
+### Features
+
+* **harvest:** Add and expose KonnectorModal ✨ ([8f0dc8d](https://github.com/cozy/cozy-libs/commit/8f0dc8d))
+* **harvest:** Add and expose withKonnectorModal HOC ✨ ([0134e9e](https://github.com/cozy/cozy-libs/commit/0134e9e))
+* **harvest:** Add preact hack on KonnectorModal componentWillUnmount 📝 ([85c9b5c](https://github.com/cozy/cozy-libs/commit/85c9b5c))
+* **harvest:** Handle account fetch error in Konnector Modal 📝 ([a529eca](https://github.com/cozy/cozy-libs/commit/a529eca))
+
+
+
+
 <a name="0.48.0"></a>
 # [0.48.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.47.2...cozy-harvest-lib@0.48.0) (2019-05-29)
 
