@@ -91,14 +91,27 @@ export class KonnectorModal extends PureComponent {
             <SubTitle className="u-mb-1 u-ta-center">
               {t('modal.konnector.title', { name: konnector.name })}
             </SubTitle>
-            <TriggerManager
-              account={account}
-              konnector={konnector}
-              trigger={trigger}
-              running={running}
-              onLoginSuccess={onLoginSuccess}
-              onSuccess={onSuccess}
-            />
+            {error ? (
+              <Infos
+                actionButton={
+                  <Button theme="danger">
+                    {t('modal.konnector.error.button')}
+                  </Button>
+                }
+                title={t('modal.konnector.error.title')}
+                text={t('modal.konnector.error.description', error)}
+                isImportant
+              />
+            ) : (
+              <TriggerManager
+                account={account}
+                konnector={konnector}
+                trigger={trigger}
+                running={running}
+                onLoginSuccess={onLoginSuccess}
+                onSuccess={onSuccess}
+              />
+            )}
           </ModalContent>
         )}
       </Modal>
