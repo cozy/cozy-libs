@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { withMutations } from 'cozy-client'
 import AppIcon from 'cozy-ui/react/AppIcon'
+import Button from 'cozy-ui/react/Button'
+import Infos from 'cozy-ui/react/Infos'
 import Modal, { ModalContent, ModalHeader } from 'cozy-ui/react/Modal'
 import Spinner from 'cozy-ui/react/Spinner'
 import { SubTitle } from 'cozy-ui/react/Text'
@@ -40,11 +42,19 @@ export class KonnectorModal extends PureComponent {
     this.setState({ fetching: true })
     const { konnector } = this.props
     const trigger = konnector.triggers.data[0]
-    const account = await findAccount(triggers.getAccountId(trigger))
-    this.setState({
-      account,
-      fetching: false
-    })
+
+    try {
+      const account = await findAccount(triggers.getAccountId(trigger))
+      this.setState({ account })
+    } catch (error) {
+      this.setState({
+        error
+      })
+    } finally {
+      this.setState({
+        fetching: false
+      })
+    }
   }
 
   fetchIcon() {
@@ -67,7 +77,7 @@ export class KonnectorModal extends PureComponent {
       t
     } = this.props
 
-    const { account, fetching, trigger } = this.state
+    const { account, error, fetching, trigger } = this.state
 
     return (
       <Modal
@@ -79,6 +89,16 @@ export class KonnectorModal extends PureComponent {
         <ModalHeader>
           <AppIcon fetchIcon={this.fetchIcon} className="u-mah-3 u-ml-1" />
         </ModalHeader>
+        {error && (
+          <Infos
+            actionButton={
+              <Button theme="danger">{t('modal.konector.error.button')}</Button>
+            }
+            title={t('modal.konnector.error.title')}
+            text={t('modal.konnector.error.description', error)}
+            isImportan
+          />
+        )}
         {fetching ? (
           <ModalContent>
             <Spinner
