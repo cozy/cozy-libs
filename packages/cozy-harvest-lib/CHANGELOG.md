@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.2"></a>
+## [0.49.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.1...cozy-harvest-lib@0.49.2) (2019-05-29)
+
+
+### Bug Fixes
+
+* **harvest:** Add DeleteAccountButton in KonnectorModal ([db646c2](https://github.com/cozy/cozy-libs/commit/db646c2))
+
+
+
+
 <a name="0.49.1"></a>
 ## [0.49.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.0...cozy-harvest-lib@0.49.1) (2019-05-29)
 
