@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withMutations } from 'cozy-client'
-import { translate } from 'cozy-ui/react/I18n'
 
 import AccountForm from './AccountForm'
 import TwoFAForm from './TwoFAForm'
@@ -15,6 +14,7 @@ import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import { slugify } from '../helpers/slug'
 import triggers from '../helpers/triggers'
+import withLocales from './hoc/withLocales'
 
 const ERRORED = 'ERRORED'
 const IDLE = 'IDLE'
@@ -368,7 +368,7 @@ TriggerManager.propTypes = {
   onSuccess: PropTypes.func
 }
 
-export default translate()(
+export default withLocales(
   withMutations(
     accountsMutations,
     filesMutations,
