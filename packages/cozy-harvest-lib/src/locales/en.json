@@ -240,5 +240,10 @@
         "label": "Tricount URL"
       }
     }
+  },
+  "modal": {
+    "konnector": {
+      "title": "Connect your %{name} account"
+    }
   }
 }

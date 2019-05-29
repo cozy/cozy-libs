@@ -1,6 +1,7 @@
 export {
   default as DeleteAccountButton
 } from './components/DeleteAccountButton'
+export { default as KonnectorModal } from './components/KonnectorModal'
 export { default as TriggerManager } from './components/TriggerManager'
 export { default as TriggerLauncher } from './components/TriggerLauncher'
 
