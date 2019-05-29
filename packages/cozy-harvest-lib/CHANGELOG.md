@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.1"></a>
+## [0.49.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.0...cozy-harvest-lib@0.49.1) (2019-05-29)
+
+
+### Bug Fixes
+
+* **harvest:** Remove duplicated error block 🚑 ([2896f29](https://github.com/cozy/cozy-libs/commit/2896f29))
+
+
+
+
 <a name="0.49.0"></a>
 # [0.49.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.48.0...cozy-harvest-lib@0.49.0) (2019-05-29)
 
