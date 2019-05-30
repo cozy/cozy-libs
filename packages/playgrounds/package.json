@@ -8,9 +8,11 @@
     "start": "parcel src/*.html"
   },
   "devDependencies": {
+    "@babel/runtime": "^7.4.5",
     "babel-polyfill": "^6.26.0",
     "cozy-authentication": "^1.13.0",
     "cozy-client": "*",
+    "cozy-device-helper": "^1.7.1",
     "cozy-ui": "^19.35.3",
     "parcel": "^1.12.3",
     "react": "^16.8.3",
