@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+       <a name="3.1.0"></a>
+# [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.0.1...cozy-realtime@3.1.0) (2019-05-31)
+
+
+### Features
+
+* Deprecate options.cozyClient, use options.client ([ed3f8ad](https://github.com/cozy/cozy-libs/commit/ed3f8ad))
+
+
+
+
        <a name="3.0.1"></a>
 ## [3.0.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@2.1.0...cozy-realtime@3.0.1) (2019-05-09)
 
@@ -14,7 +25,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
-       <a name="2.1.0"></a>
+      <a name="2.1.0"></a>
 # 2.1.0 (2019-05-09)
 
 
@@ -43,7 +54,7 @@ See [Conventional Commits](https://conventionalcommits.org) for commit guideline
 
 
 
- <a name="2.0.8"></a>
+<a name="2.0.8"></a>
 ## [2.0.8](https://github.com/cozy/cozy-libs/compare/cozy-realtime@2.0.7...cozy-realtime@2.0.8) (2019-04-12)
 
 
