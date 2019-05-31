@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.3"></a>
+## [0.49.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.2...cozy-harvest-lib@0.49.3) (2019-05-31)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Prevent undefined success callback ([30f16ea](https://github.com/cozy/cozy-libs/commit/30f16ea))
+
+
+
+
 <a name="0.49.2"></a>
 ## [0.49.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.1...cozy-harvest-lib@0.49.2) (2019-05-29)
 
