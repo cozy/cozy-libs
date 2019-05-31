@@ -206,7 +206,7 @@ export class TriggerManager extends Component {
    */
   handleSuccess(successCallback, args) {
     this.setState({ status: IDLE })
-    successCallback(...args)
+    if (typeof successCallback === 'function') successCallback(...args)
   }
 
   /**
