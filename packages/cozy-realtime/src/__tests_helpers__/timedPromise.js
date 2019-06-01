@@ -50,3 +50,19 @@ export function serverMessagePromise(
     )
   }, duration)
 }
+
+export function subscribePromise(
+  listener,
+  args,
+  givenCallback,
+  memory,
+  duration = eventTimeout
+) {
+  const defaultCallback = (resolve, reject, doc) => resolve(doc)
+  const callback = givenCallback || defaultCallback
+  return timedPromise((resolve, reject) => {
+    const handler = doc => callback(resolve, reject, doc)
+    listener.subscribe(...args, handler)
+    if (memory) memory.handler = handler
+  }, duration)
+}
