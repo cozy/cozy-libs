@@ -61,7 +61,7 @@ export class KonnectorModal extends PureComponent {
 
     try {
       const account = await findAccount(triggers.getAccountId(trigger))
-      this.setState({ account })
+      this.setState({ account, trigger })
     } catch (error) {
       this.setState({
         error
