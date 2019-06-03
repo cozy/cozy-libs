@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="1.7.2"></a>
+## 1.7.2 (2019-06-03)
+
+
+### Bug Fixes
+
+* HandleOpenURL on universalLink if MobileRouter does not manage it ([b8f5f55](https://github.com/cozy/cozy-libs/commit/b8f5f55))
+* **device:** Check if window in the globals ([040347d](https://github.com/cozy/cozy-libs/commit/040347d))
+
+
+
+
 <a name="1.7.1"></a>
 ## [1.7.1](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.7.0...cozy-device-helper@1.7.1) (2019-04-12)
 
