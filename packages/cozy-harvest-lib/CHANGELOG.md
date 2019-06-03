@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.49.4"></a>
+## [0.49.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.3...cozy-harvest-lib@0.49.4) (2019-06-03)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Correctly set fetched trigger in KonnectorModal ([177e167](https://github.com/cozy/cozy-libs/commit/177e167))
+
+
+
+
 <a name="0.49.3"></a>
 ## [0.49.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.2...cozy-harvest-lib@0.49.3) (2019-05-31)
 
