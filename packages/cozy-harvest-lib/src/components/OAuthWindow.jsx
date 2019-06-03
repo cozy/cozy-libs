@@ -24,13 +24,15 @@ const OAUTH_POPUP_WIDTH = 800
 export class OAuthWindow extends PureComponent {
   state = {
     oAuthUrl: null,
-    oAuthStateKey: null
+    oAuthStateKey: null,
+    succeed: false
   }
 
   constructor(props, context) {
     super(props, context)
     this.handleClose = this.handleClose.bind(this)
     this.handleMessage = this.handleMessage.bind(this)
+    this.handleUrlChange = this.handleUrlChange.bind(this)
   }
 
   componentDidMount() {
@@ -52,29 +54,58 @@ export class OAuthWindow extends PureComponent {
     if (typeof onCancel === 'function') onCancel()
   }
 
-  handleMessage(messageEvent) {
+  /**
+   * Handles OAuth data. OAuth data may be provided by different way:
+   * * postMessage from web apps (see handleMessage)
+   * * url changes from mobile apps
+   * @param  {string} data.key `io.cozy.accounts` id The created OAuth account
+   * @param  {string} data.oAuthStateKey key for localStorage
+   */
+  handleOAuthData(data) {
     const { konnector, onSuccess } = this.props
-
-    const { data } = messageEvent
-
     if (!checkOAuthData(konnector, data)) return
     this.setState({ succeed: true })
 
     if (typeof onSuccess !== 'function') return
+    this.setState({ succeed: true })
     onSuccess(data.key)
+  }
+
+  /**
+   * Expects receiving message from web app
+   * @param  {MessageEvent} messageEvent
+   */
+  handleMessage(messageEvent) {
+    this.handleOAuthData(messageEvent.data)
+  }
+
+  /**
+   * Monitor URL changes for mobile apps and in app browsers
+   * @param  {URL} url
+   */
+  handleUrlChange(url) {
+    const account = url.searchParams.get('account')
+    const state = url.searchParams.get('state')
+
+    this.handleOAuthData({
+      key: account,
+      oAuthStateKey: state
+    })
   }
 
   render() {
     const { t } = this.props
-    const { oAuthUrl } = this.state
+    const { oAuthUrl, succeed } = this.state
     return (
-      oAuthUrl && (
+      oAuthUrl &&
+      !succeed && (
         <Popup
           url={oAuthUrl}
           height={OAUTH_POPUP_HEIGHT}
           width={OAUTH_POPUP_WIDTH}
           onMessage={this.handleMessage}
           onClose={this.handleClose}
+          onUrlChange={this.handleUrlChange}
           title={t(`oauth.window.title`)}
         />
       )

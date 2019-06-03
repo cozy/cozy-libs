@@ -69,9 +69,6 @@ export const handleOAuthResponse = () => {
      */
     '*'
   )
-
-  // Close the current popup
-  window.close()
 }
 
 /**

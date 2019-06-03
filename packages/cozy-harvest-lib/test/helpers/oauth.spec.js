@@ -18,13 +18,11 @@ describe('Oauth helper', () => {
       window.opener = {
         postMessage: jest.fn()
       }
-      jest.spyOn(window, 'close')
     })
 
     afterEach(() => {
       window.location = originalLocation
       window.opener = originalOpener
-      jest.restoreAllMocks()
     })
 
     it('should send message with query string data', () => {
@@ -38,11 +36,6 @@ describe('Oauth helper', () => {
         expectedOAuthData,
         '*'
       )
-    })
-
-    it('should close the window', () => {
-      handleOAuthResponse()
-      expect(window.close).toHaveBeenCalled()
     })
   })
 })

@@ -31,8 +31,11 @@ describe('Popup', () => {
 
   it('should open new window', () => {
     shallow(<Popup {...props} />)
-    expect(global.open).toHaveBeenCalled()
-    expect(windowMock.location.href).toBe(props.url)
+    expect(global.open).toHaveBeenCalledWith(
+      props.url,
+      expect.anything(),
+      expect.anything()
+    )
     expect(windowMock.focus).toHaveBeenCalled()
   })
 })
