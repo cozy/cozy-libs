@@ -50,3 +50,20 @@ export const onDoubleSubscriptions = subscription => {
   }
 }
 
+/**
+ * When reconnecting after an error or an unsuccessfull attempt, waits
+ * an amount of time before a new retry. This time will double
+ * at each attempt until one is successfull or the navigator send an
+ * 'online' event.
+ * @type {integer} time to wait in millisecond
+ * @private
+ */
+export const defaultBackoff = 200
+
+/**
+ * If a connection is open for this amount of time with no error
+ * it is marked as successfull and the exponential backoff is reseted
+ * @type {integer} time to wait in millisecond
+ * @private
+ */
+export const timeBeforeSuccessfull = 1200

@@ -7,7 +7,9 @@ import findIndex from 'lodash.findindex'
 import {
   allowDoubleSubscriptions,
   requireDoubleUnsubscriptions,
-  onDoubleSubscriptions
+  onDoubleSubscriptions,
+  defaultBackoff,
+  timeBeforeSuccessfull
 } from './Realtime.config.js'
 
 /**
@@ -35,16 +37,40 @@ class Realtime {
   ready = undefined
 
   /**
+   * Number of connection tentatives after last success
+   * @type {integer}
+   * @private
+   */
+  retries = 0
+
+  /**
+   * Timeout reference which will reset the retries counter when succeeded
+   * @type {Timeout}
+   * @private
+   */
+  previousRetry = undefined
+
+  /**
+   * Base time in ms a new connect will wait after a failure
+   * Will increase exponentialy
+   * @type {integer}
+   * @private
+   */
+  backoff = undefined
+
+  /**
    * @param {object} - arg
    * @param {CozyClient} - arg.client
    */
-  constructor({ cozyClient, client }) {
+  constructor({ cozyClient, client, backoff = defaultBackoff }) {
     this.client = client || cozyClient
+    this.backoff = backoff
 
     this.unload = this.unload.bind(this)
     this.connect = this.connect.bind(this)
     this.disconnect = this.disconnect.bind(this)
     this.reconnect = this.reconnect.bind(this)
+    this.onlineReconnect = this.onlineReconnect.bind(this)
 
     this.onClose = this.onClose.bind(this)
     this.onError = this.onError.bind(this)
@@ -69,6 +95,9 @@ class Realtime {
       // start a promise early so other methods can attache to it
       let resolveReady
       this.ready = new Promise(resolve => (resolveReady = resolve))
+      // wait before reconnect if successive failure
+      await this.waitForRetry()
+      this.newTry()
       // Be sure to clone the subscriptions to use the list as it is now
       // and not as it will be in the future.
       // If a new connection comes between the socket set up
@@ -242,8 +271,8 @@ class Realtime {
     this.disconnect()
     this.unsubscribeAll()
     if (window) {
-      window.removeEventListener('online', this.reconnect)
       window.removeEventListener('unload', this.unload)
+      window.removeEventListener('online', this.onlineReconnect)
     }
     if (this.client) {
       this.client.removeListener('login', this.connectOrAuthenticate)
@@ -259,9 +288,10 @@ class Realtime {
    * @return {Promise<RealtimeSocket>} resolve when connected
    */
   load() {
+    this.clearRetry()
     if (window) {
-      window.addEventListener('online', this.reconnect)
       window.addEventListener('unload', this.unload)
+      window.addEventListener('online', this.onlineReconnect)
       // no need for an offline event, the stack won't receive it
       // and we'll reconnect when online anyways
     }
@@ -304,12 +334,78 @@ class Realtime {
    * @private
    */
   disconnect() {
+    this.previousRetryNotSucceded()
     const oldSocket = this.socket
     this.socket = undefined
     this.ready = undefined
     if (oldSocket) {
       oldSocket.close()
     }
+  }
+
+  /**
+   * Try to reconnect after coming back online
+   * @private
+   * @return {Promise<RealtimeSocket>} resolve when connected
+   */
+  onlineReconnect() {
+    this.clearRetry()
+    this.retries = 1
+    return this.reconnect()
+  }
+
+  /**
+   * This cancel the `previousRetry` timeout so the `retries` counter
+   * is not reset. To be called when a connection fails.
+   * @private
+   */
+  previousRetryNotSucceded() {
+    clearTimeout(this.previousRetry)
+  }
+
+  /**
+   * Reset and restart the `retries` counter
+   * @private
+   */
+  clearRetry() {
+    this.previousRetryNotSucceded()
+    this.retries = 0
+  }
+
+  /**
+   * Wait an increasing time before retrying a new connection
+   * This is used to avoid hammering the stack with retries
+   * and let some time between requests.
+   * First retry is immediate, then 200ms, thendouble each time
+   * @return {Promise|undefined}
+   */
+  waitForRetry() {
+    this.previousRetryNotSucceded()
+    const wait = this.retries
+    const time = this.backoff * Math.floor(Math.pow(2, wait) / 2)
+    if (time > 0) return this.wait(time)
+  }
+
+  /**
+   * Start a new try to connect
+   * Will reset the `retries` counter after some time with no error
+   */
+  newTry() {
+    this.previousRetryNotSucceded()
+    this.retries++
+    this.previousRetry = setTimeout(() => {
+      this.retries = 0
+    }, timeBeforeSuccessfull)
+  }
+
+  /**
+   * Wait a fixed amount of time
+   * @param {integer} number of millisecond to wait
+   */
+  async wait(time) {
+    return await new Promise(resolve =>
+      window.setTimeout(() => resolve(), time)
+    )
   }
 }
 

@@ -36,7 +36,7 @@ describe('Realtime', () => {
       return this
     })
     RealtimeSocket.prototype.isOpen.mockReturnValue(true)
-    realtime = new Realtime({ client })
+    realtime = new Realtime({ client, backoff: 0 })
     await realtime.ready
     socket = RealtimeSocket.mock.instances[0]
   })
