@@ -1,5 +1,7 @@
 /* global WebSocket */
 import MicroEE from 'microee'
+import some from 'lodash.some'
+import forEachRight from 'lodash.foreachright'
 
 /**
  * separator for internal events
@@ -35,6 +37,55 @@ class RealtimeSocket {
    * @private
    */
   ready = null
+
+  /**
+   * If one subscribe multiple times to the exact same event with the exact
+   * same handler, should we call the handler multiple times for each event?
+   * eventWhat to do if someone ask multiple times for the same subscription?
+   * @type {boolean}
+   * @private
+   */
+  allowDoubleSubscriptions = true
+
+  /**
+   * If one subscribe multiple times to the exact same event with the exact
+   * same handler, should we unsubscribe all the corresponding handlers on
+   * the first call to unsubscribe or should we ask for multiple calls
+   * to unsubscribe?
+   * @type {boolean}
+   * @private
+   */
+  requireDoubleUnsubscriptions = true
+
+  /**
+   * If one subscribe multiple times to the exact same event with the exact
+   * same handler, this function is called. You are welcome to add any
+   * log or warning you wish, or even to throw an exception.
+   * This function get a subscription object in parameter. This object has
+   * the form { eventName, type, id, handler } where id is optional.
+   * @type {Function}
+   * @private
+   */
+  onDoubleSubscriptions = () => {}
+
+  /**
+   * List of current subscriptions
+   * @type {Array<object>} each of form `{eventName, type, id, handler}`
+   * @private
+   */
+  subscriptions = []
+
+  /**
+   * @param {object} options
+   * @param {boolean} options.allowDoubleSubscriptions - optional
+   * @param {boolean} options.requireDoubleUnsubscriptions - optional
+   * @param {Function} options.onDoubleSubscriptions - optional
+   */
+  constructor(options = {}) {
+    Object.keys(options).forEach(name => {
+      if (options[name] !== undefined) this[name] = options[name]
+    })
+  }
 
   /**
    * Start the socket and connect
@@ -186,6 +237,23 @@ class RealtimeSocket {
   }
 
   /**
+   * Compare two subscriptions objects, without the internalHandler
+   * (same event, same type, same id, same source handler)
+   * @param {object} a - subscription object
+   * @param {object} b - subscription object
+   * @return {boolean} true if equal
+   * @private
+   */
+  isSameSubscription(a, b) {
+    return (
+      a.eventName === b.eventName &&
+      a.type === b.type &&
+      a.id === b.id &&
+      a.handler === b.handler
+    )
+  }
+
+  /**
    * Subscribe to an event from the stack
    * This class makes no attempt to deduplicate subscriptions.
    * If you send a subscriptions multiple times, your handler *will*
@@ -202,10 +270,31 @@ class RealtimeSocket {
       handlerOrId,
       handlerOrUndefined
     )
+
+    // Create a fake internal handler to allow double subscriptions in MicroEE
+    // which otherwise remove all similar subscriptions at first `unsubscribe`
+    const internalHandler = (...args) => handler(...args)
+    const sub = { eventName, type, id, handler, internalHandler }
     const key = this.generateKey(eventName, type, id)
-    this.on(key, handler)
-    await this.ready
-    this.send('SUBSCRIBE', { type, id })
+
+    const isDouble = some(this.subscriptions, s =>
+      this.isSameSubscription(s, sub)
+    )
+
+    this.subscriptions.push(sub)
+
+    if (!isDouble || this.allowDoubleSubscriptions) {
+      this.on(key, internalHandler)
+    }
+
+    if (isDouble) {
+      if (this.onDoubleSubscriptions) {
+        this.onDoubleSubscriptions({ eventName, type, id, handler })
+      }
+    } else {
+      await this.ready
+      if (this.isOpen()) this.send('SUBSCRIBE', { type, id })
+    }
   }
 
   /**
@@ -223,8 +312,20 @@ class RealtimeSocket {
       handlerOrId,
       handlerOrUndefined
     )
+
+    const sub = { eventName, type, id, handler }
     const key = this.generateKey(eventName, type, id)
-    this.removeListener(key, handler)
+
+    let founds = 0
+    forEachRight(this.subscriptions, (found, i) => {
+      if (this.isSameSubscription(found, sub)) {
+        if (founds === 0 || !this.requireDoubleUnsubscriptions) {
+          this.removeListener(key, found.internalHandler)
+          this.subscriptions.splice(i, 1)
+        }
+        founds++
+      }
+    })
     // no way to unsubscribe from the stack
   }
 
