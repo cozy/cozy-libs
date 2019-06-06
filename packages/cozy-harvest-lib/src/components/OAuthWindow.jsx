@@ -82,15 +82,38 @@ export class OAuthWindow extends PureComponent {
   /**
    * Monitor URL changes for mobile apps and in app browsers
    * @param  {URL} url
+   *
+   * The provider redirect us to something like : oauthcallback.mycozy.cloud/?account=A&state=b
+   * So we listen to the URL change with these informations, and we try to handle it.
+   * It works well on iOS or when we are logged on the same device on the web, but it will
+   * fail on Android if we're ne logged in the browser. Why ?
+   * Our oauthcallback.mycozy.cloud/?account=A&state=b checks if we're logged, if not the server
+   * sends an http redirect.
+   * On Android, the 'loadstart' event is not dispatched by the browser when it get a redirect.
+   * The inAppBrowser follows the URL and arrive on :
+   * https://my.mycozy.cloud/auth?redirect=https://home.cozy.cloud/?account=a&state=b
+   * So if we don't have account & state searchParams we have to check if we've a redirect searchParams
+   * init it and search if we have inside this url an account and state params
    */
   handleUrlChange(url) {
     const account = url.searchParams.get('account')
     const state = url.searchParams.get('state')
-
-    this.handleOAuthData({
-      key: account,
-      oAuthStateKey: state
-    })
+    if (account && state) {
+      return this.handleOAuthData({
+        key: account,
+        oAuthStateKey: state
+      })
+    }
+    const redirect = url.searchParams.get('redirect')
+    if (redirect) {
+      const testedURL = new URL(redirect)
+      const accountInRedirect = testedURL.searchParams.get('account')
+      const stateInRedirect = testedURL.searchParams.get('state')
+      return this.handleOAuthData({
+        key: accountInRedirect,
+        oAuthStateKey: stateInRedirect
+      })
+    }
   }
 
   render() {
