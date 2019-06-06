@@ -59,7 +59,10 @@ export class TriggerManager extends Component {
     if (this.accountWatcher) this.accountWatcher.unsubscribeAll()
   }
 
-  closeTwoFAModal() {
+  closeTwoFAModal(e) {
+    // disable click outside
+    // the click outside doesn't forward event object here
+    if (!e) return
     this.setState({
       status: RUNNING
     })
