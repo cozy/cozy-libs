@@ -20,6 +20,7 @@ before_install:
   - travis_retry pip3.5 install --user transifex-client==0.12.5
   - install -m0644 .transifexrc.tpl ~/.transifexrc
   - echo "password = $TX_PASSWD" >> ~/.transifexrc
+  - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
 script:
   - yarn build
   - yarn lint
