@@ -30,7 +30,8 @@
     "microee": "^0.0.6",
     "preact-portal": "^1.1.3",
     "react-final-form": "3.7.0",
-    "react-markdown": "4.0.8"
+    "react-markdown": "4.0.8",
+    "uuid": "^3.3.2"
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",

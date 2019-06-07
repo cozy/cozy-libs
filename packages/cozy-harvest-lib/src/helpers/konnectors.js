@@ -1,3 +1,4 @@
+import get from 'lodash/get'
 import has from 'lodash/has'
 
 // Type of errors returned by konnector
@@ -79,13 +80,28 @@ export class KonnectorJobError extends Error {
 }
 
 /**
+ * Returns the account type. Based on the information from the oauth attribute,
+ * or the slug.
+ * @param  {Object} konnector
+ * @return {string}           Account type
+ */
+export const getAccountType = konnector => {
+  return get(konnector, 'oauth.account_type', konnector.slug)
+}
+
+/**
  * Indicates if the given konnector requires a folder to work properly.
- * This directly relies on the `fields.advancedFields.folderPath` from manifest.
+ * This directly relies on the `fields.advancedFields.folderPath` from manifest for legacy Konnector.
+ * Relies on `folders` for new Konnector
  * @param  {Object} konnector
  * @return {bool}   `true` if the konnector needs a folder
  */
-export const needsFolder = konnector =>
-  has(konnector, 'fields.advancedFields.folderPath')
+export const needsFolder = konnector => {
+  return (
+    has(konnector, 'fields.advancedFields.folderPath') ||
+    has(konnector, 'folders')
+  )
+}
 
 /**
  * Returns a permission ready to be passed to
@@ -107,6 +123,7 @@ export const buildFolderPermission = folder => {
 
 export default {
   KonnectorJobError,
+  getAccountType,
   needsFolder,
   buildFolderPermission
 }

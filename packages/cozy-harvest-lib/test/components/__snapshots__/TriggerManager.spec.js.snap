@@ -37,6 +37,20 @@ exports[`TriggerManager handleError should render error 1`] = `
 </div>
 `;
 
+exports[`TriggerManager should redirect to OAuthForm 1`] = `
+<Wrapper
+  konnector={
+    Object {
+      "oauth": Object {
+        "scope": "test",
+      },
+    }
+  }
+  onSuccess={[Function]}
+  submitting={false}
+/>
+`;
+
 exports[`TriggerManager should render with account 1`] = `
 <div>
   <div

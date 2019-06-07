@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { withMutations } from 'cozy-client'
 
 import AccountForm from './AccountForm'
+import OAuthForm from './OAuthForm'
 import TwoFAForm from './TwoFAForm'
 import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
@@ -33,7 +34,8 @@ export class TriggerManager extends Component {
     super(props)
     const { account, trigger } = props
 
-    this.handleAccountSaveSuccess = this.handleAccountSaveSuccess.bind(this)
+    this.handleNewAccount = this.handleNewAccount.bind(this)
+    this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.closeTwoFAModal = this.closeTwoFAModal.bind(this)
     this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
@@ -120,12 +122,27 @@ export class TriggerManager extends Component {
   }
 
   /**
-   * Account save success handler
+   * OAuth Form success handler. OAuthForm retrieves an account id created by the
+   * cozy stack
+   * @param  {string}  accountId
+   */
+  async handleOAuthAccountId(accountId) {
+    const { findAccount } = this.props
+    try {
+      const oAuthAccount = await findAccount(accountId)
+      return await this.handleNewAccount(oAuthAccount)
+    } catch (error) {
+      this.handleError(error)
+    }
+  }
+
+  /**
+   * Account creation success handler
    * @param  {Object}  account Created io.cozy.accounts document
    * @return {Object}          io.cozy.jobs document, runned with account data
    */
-  async handleAccountSaveSuccess(account) {
-    this.setState({ account })
+  async handleNewAccount(account) {
+    this.setState({ account, error: null, status: RUNNING })
     const trigger = await this.ensureTrigger()
     this.setState({ trigger })
     this.accountWatcher = this.props.watchKonnectorAccount(account, {
@@ -193,7 +210,7 @@ export class TriggerManager extends Component {
         await saveAccount(konnector, accountToSave),
         data
       )
-      return await this.handleAccountSaveSuccess(savedAccount)
+      return await this.handleNewAccount(savedAccount)
     } catch (error) {
       return this.handleError(error)
     }
@@ -206,7 +223,8 @@ export class TriggerManager extends Component {
    */
   handleSuccess(successCallback, args) {
     this.setState({ status: IDLE })
-    if (typeof successCallback === 'function') successCallback(...args)
+    if (typeof successCallback !== 'function') return
+    successCallback(...args)
   }
 
   /**
@@ -240,6 +258,19 @@ export class TriggerManager extends Component {
     const isTwoFARetryCode = accounts.isTwoFARetry(status)
     const display2FA = waitForTwoFACode || submittingTwoFA || isTwoFARetryCode
     const modalInto = modalContainerId || MODAL_PLACE_ID
+
+    const { oauth } = konnector
+
+    if (oauth) {
+      return (
+        <OAuthForm
+          account={account}
+          konnector={konnector}
+          onSuccess={this.handleOAuthAccountId}
+          submitting={submitting || display2FA}
+        />
+      )
+    }
 
     return (
       <div>
@@ -326,6 +357,11 @@ TriggerManager.propTypes = {
    * @type {Function}
    */
   createDirectoryByPath: PropTypes.func,
+  /**
+   * Account Mutation, used to retrieve OAuth account
+   * @type {Function}
+   */
+  findAccount: PropTypes.func,
   /**
    * Trigger mutation
    * @type {Function}

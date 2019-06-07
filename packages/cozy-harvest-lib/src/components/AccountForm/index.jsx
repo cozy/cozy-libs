@@ -11,7 +11,6 @@ import AccountFormError from './Error'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
-import OAuthForm from '../../components/OAuthForm'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -160,9 +159,7 @@ export class AccountForm extends PureComponent {
       submitting,
       t
     } = this.props
-    const { fields, oauth } = konnector
-
-    if (oauth) return <OAuthForm initialValues={initialValues} oauth={oauth} />
+    const { fields } = konnector
 
     const sanitizedFields = manifest.sanitizeFields(fields)
     const defaultValues = manifest.defaultFieldsValues(sanitizedFields)
