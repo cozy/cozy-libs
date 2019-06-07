@@ -8,16 +8,16 @@
     "start": "parcel src/*.html"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.4.5",
-    "babel-polyfill": "^6.26.0",
-    "cozy-authentication": "^1.13.2",
+    "@babel/runtime": "7.4.5",
+    "babel-polyfill": "6.26.0",
+    "cozy-authentication": "1.13.2",
     "cozy-client": "*",
-    "cozy-device-helper": "^1.7.2",
-    "cozy-ui": "^19.35.3",
-    "parcel": "^1.12.3",
-    "react": "^16.8.3",
-    "react-dom": "^16.5.2",
-    "react-redux": "^7.0.3",
+    "cozy-device-helper": "1.7.2",
+    "cozy-ui": "19.35.3",
+    "parcel": "1.12.3",
+    "react": "16.8.3",
+    "react-dom": "16.5.2",
+    "react-redux": "7.0.3",
     "react-router": "3",
     "redux": "3.7.2"
   }
