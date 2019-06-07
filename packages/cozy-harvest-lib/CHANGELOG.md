@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+<a name="0.50.0"></a>
+# [0.50.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.6...cozy-harvest-lib@0.50.0) (2019-06-07)
+
+
+### Bug Fixes
+
+* **harvest:** LoadStart on Android is not dispatched when redirected ([cde2d10](https://github.com/cozy/cozy-libs/commit/cde2d10))
+* **harvest:** NeedsFolderPath should also check folders attribute 📝 ([3f6275f](https://github.com/cozy/cozy-libs/commit/3f6275f))
+
+
+### Features
+
+* **harvest:** Make OAuthWindow and Popup mobile-compatible ✨ ([98f2664](https://github.com/cozy/cozy-libs/commit/98f2664))
+* **harvest:** Prepare checkOAuth function in helper 📝 ([b8b20f7](https://github.com/cozy/cozy-libs/commit/b8b20f7))
+* **harvest:** Prepare OAuth helper 📝 ([ddbe986](https://github.com/cozy/cozy-libs/commit/ddbe986))
+* **harvest:** Prepare OAuthWindow component 📝 ([8acec47](https://github.com/cozy/cozy-libs/commit/8acec47))
+* **harvest:** Prepare Popup component 📝 ([96a6eeb](https://github.com/cozy/cozy-libs/commit/96a6eeb))
+* **harvest:** Prepare prepareOAuth function in helper 📝 ([7e9c4a6](https://github.com/cozy/cozy-libs/commit/7e9c4a6))
+* **harvest:** Prepare terminateOAuth function in helper 📝 ([b6143fe](https://github.com/cozy/cozy-libs/commit/b6143fe))
+* **harvest:** Update OAuthForm, move it into TriggerManager ✨ ([ac9d402](https://github.com/cozy/cozy-libs/commit/ac9d402))
+
+
+
+
 <a name="0.49.6"></a>
 ## [0.49.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.5...cozy-harvest-lib@0.49.6) (2019-06-07)
 
