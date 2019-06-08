@@ -4,6 +4,10 @@
   "version": "independent",
   "useWorkspaces": true,
   "command": {
+    "version": {
+      "conventionalCommits": true,
+      "githubRelease": true
+    },
     "publish": {
       "ignoreChanges": ["packages/playgrounds/*"],
       "conventionalCommits": true
