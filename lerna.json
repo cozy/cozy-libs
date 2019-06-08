@@ -9,7 +9,7 @@
       "githubRelease": true
     },
     "publish": {
-      "ignoreChanges": ["packages/playgrounds/*"],
+      "ignoreChanges": ["packages/playgrounds/**/*"],
       "conventionalCommits": true
     }
   }
