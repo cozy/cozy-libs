@@ -1,0 +1,61 @@
+{
+  "creditApplication": {
+    "lastname": {
+      "title": "Nom"
+    },
+    "firstname": {
+      "title": "Prénom"
+    },
+    "numberOfKids": {
+      "title": "Nombre d'enfants"
+    },
+    "maritalStatus": {
+      "title": "Statut marital",
+      "single": "Célibataire",
+      "maried": "Marié",
+      "pacs": "Pacsé"
+    },
+    "employmentStatus": {
+      "title": "Statut de travail",
+      "employee": "Employé",
+      "freelance": "Indépendant",
+      "unemployed": "Sans emploi",
+      "retired": "Retraité"
+    },
+    "employmentContract": {
+      "title": "Contrat de travail",
+      "cdd": "CDD",
+      "cdi": "CDI"
+    },
+    "salary": {
+      "title": "Salaire (après prélévement à la source)"
+    },
+    "additionalIncome": {
+      "title": "Revenus supplémentaires"
+    },
+    "propertyStatus": {
+      "title": "Statut immobilier",
+      "owner": "Propriétaire",
+      "tenant": "Locataire"
+    },
+    "propertyLoan": {
+      "title": "Emprunt immobilier"
+    },
+    "creditsTotalAmount": {
+      "title": "Total des crédits"
+    },
+    "address": {
+      "title": "Adresse"
+    },
+    "phone": {
+      "title": "Téléphone"
+    },
+    "email": {
+      "title": "Email"
+    },
+    "units": {
+      "eurosNetPerMonth": "€ net par mois",
+      "eurosPerMonth": "€ par mois"
+    }
+  }
+}
