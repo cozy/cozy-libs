@@ -5,8 +5,8 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import App from './common/App'
 import client from './common/client'
-import { LogoutButton, AppList } from './common/components'
-import Nav from './common/Nav'
+// import Comp from 'cozy-procedures'
+import injectProcedureRoutes from '../../cozy-procedures/dist'
 
 const reducer = combineReducers({
   cozy: client.reducer()
@@ -14,22 +14,15 @@ const reducer = combineReducers({
 
 const store = createStore(reducer)
 
-class LoggedIn extends React.Component {
-  render() {
-    return (
-      <div>
-        <Nav />
-        <AppList />
-        <LogoutButton />
-      </div>
-    )
-  }
+const OtherRouteComponent = () => {
+  return <div>yo</div>
 }
 
 ReactDOM.render(
   <Provider store={store}>
     <App client={client} existingStore={store}>
-      <Route path="/" component={LoggedIn} />
+      <Route path="/whatever" component={OtherRouteComponent} />
+      {injectProcedureRoutes({ root: '/' })}
     </App>
   </Provider>,
   document.querySelector('#app')

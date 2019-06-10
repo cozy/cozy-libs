@@ -1,0 +1,27 @@
+{
+  "name": "cozy-procedures",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "yarn build; yarn copy-files",
+    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "copy-files": "cp -rf src/locales dist/",
+    "test": "jest --verbose",
+    "lint": "cd ..; yarn lint packages/cozy-procedures"
+  },
+  "dependencies": {
+    "babel-preset-cozy-app": "1.5.1",
+    "cozy-ui": "20.14.0",
+    "lodash": "4.17.11",
+    "react-jsonschema-form": "1.6.1",
+    "react-redux": "7.1.0",
+    "react-router": "3",
+    "redux": "4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-starter-kit": "0.5.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "jest": "24.8.0"
+  }
+}
