@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.7.0...cozy-flags@1.8.0) (2019-06-10)
+
+
+### Features
+
+* Add codemod for flags accessible via "cozy-flags apply" ([9327f24](https://github.com/cozy/cozy-libs/commit/9327f24))
+* Remove unused imports after removing flags ([af43da1](https://github.com/cozy/cozy-libs/commit/af43da1))
+
+
+
+
+
 <a name="1.7.0"></a>
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.6.1...cozy-flags@1.7.0) (2019-05-23)
 
