@@ -8,6 +8,35 @@ const isBlockLike = path => {
   return path.value && path.value.length !== undefined && path.name === 'body'
 }
 
+/** Removes unused imports by counting usage */
+const removeUnusedImports = (root, j) => {
+  const importsToRemove = root.find(j.ImportDeclaration)
+  importsToRemove.forEach(path => {
+    const toKeep = []
+    for (let specifier of path.node.specifiers) {
+      const identifierName = specifier.local.name
+      const usages = root.find(j.Identifier, { name: identifierName })
+      const nUsage = usages.size()
+      // import { toto } from 'lib' counts as 2 usages of toto
+      // import toto from 'lib' counts a 1 usage of toto
+      const importUsages =
+        specifier.type === 'ImportSpecifier'
+          ? specifier.imported.name === specifier.local.name
+            ? 2
+            : 1
+          : 1
+      if (nUsage > importUsages) {
+        toKeep.push(specifier)
+      }
+    }
+    if (toKeep.length === 0) {
+      path.replace(null)
+    } else {
+      path.node.specifiers = toKeep
+    }
+  })
+}
+
 /** Replace without keeping blocks, flattening the newNode into path */
 const flatReplace = (path, newNode) => {
   if (
@@ -94,6 +123,7 @@ module.exports = function transformer(file, api) {
   })
 
   simplifyConditions(root, j)
+  removeUnusedImports(root, j)
 
   return root.toSource()
 }
