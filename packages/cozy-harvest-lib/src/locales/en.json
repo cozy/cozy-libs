@@ -14,6 +14,12 @@
       "button": "Disconnect this account"
     }
   },
+  "card": {
+    "deleteAccount": {
+      "title": "Disconnection",
+      "description": "Your will be disconnected from this account, but imported data will be kept"
+    }
+  },
   "default": {
     "dateFormat": "MM/DD/YYYY",
     "baseDir": "/Administrative"

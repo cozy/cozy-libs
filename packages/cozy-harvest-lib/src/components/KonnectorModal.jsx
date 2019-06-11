@@ -12,7 +12,7 @@ import { SubTitle } from 'cozy-ui/react/Text'
 import accountMutations from '../connections/accounts'
 import * as triggers from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
-import DeleteAccountButton from './DeleteAccountButton'
+import DeleteAccountCard from './cards/DeleteAccountCard'
 import withLocales from './hoc/withLocales'
 
 /**
@@ -138,10 +138,9 @@ export class KonnectorModal extends PureComponent {
                   onLoginSuccess={onLoginSuccess}
                   onSuccess={onSuccess}
                 />
-                <DeleteAccountButton
+                <DeleteAccountCard
                   account={account}
                   onSuccess={dismissAction}
-                  extension="full"
                 />
               </div>
             )}
