@@ -106,7 +106,10 @@ export class SelectServer extends Component {
     }
 
     const url = this.getUrl(value)
-    if (url === '' || (/^http:/.test(url) && !__ALLOW_HTTP__)) {
+    if (
+      url === '' ||
+      (/^http:/.test(url) && typeof __ALLOW_HTTP__ === undefined)
+    ) {
       error = ERR_WRONG_ADDRESS
     }
     if (error) {
