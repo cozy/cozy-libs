@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.8.1...cozy-mjml@0.8.2) (2019-06-12)
+
+
+### Bug Fixes
+
+* **cozy-mjml:** Fsevents as an external ([#493](https://github.com/cozy/cozy-libs/issues/493)) ([ce9c152](https://github.com/cozy/cozy-libs/commit/ce9c152))
+
+
+
+
+
 <a name="0.8.1"></a>
 ## [0.8.1](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.8.0...cozy-mjml@0.8.1) (2019-05-17)
 
