@@ -1,7 +1,7 @@
 {
   "name": "cozy-playgrounds",
   "private": true,
-  "version": "1.1.2",
+  "version": "1.1.3",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
   "devDependencies": {
     "@babel/runtime": "^7.4.5",
     "babel-polyfill": "^6.26.0",
-    "cozy-authentication": "^1.13.2",
+    "cozy-authentication": "^1.13.3",
     "cozy-client": "*",
     "cozy-device-helper": "^1.7.2",
     "cozy-ui": "^19.35.3",
