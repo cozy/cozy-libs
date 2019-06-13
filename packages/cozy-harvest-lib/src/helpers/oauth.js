@@ -39,13 +39,14 @@ export const checkOAuthData = (konnector, data) => {
  * ```js
  * document.addEventListener('DOMContentLoaded', handleOAuthResponse)
  * ```
+ * @return {boolean} `true` if an OAuth response has been handled, `false` otherwise
  */
 export const handleOAuthResponse = () => {
   /* global URLSearchParams */
   const queryParams = new URLSearchParams(window.location.search)
 
   const accountId = queryParams.get('account')
-  if (!accountId) return
+  if (!accountId) return false
 
   /** As we are in a popup, get the opener window */
   const opener = window.opener
@@ -55,6 +56,7 @@ export const handleOAuthResponse = () => {
    * that data are the ones we are expecting.
    */
   const oAuthStateKey = queryParams.get('state')
+  if (!oAuthStateKey) return false
 
   opener.postMessage(
     {
@@ -69,6 +71,8 @@ export const handleOAuthResponse = () => {
      */
     '*'
   )
+
+  return true
 }
 
 /**

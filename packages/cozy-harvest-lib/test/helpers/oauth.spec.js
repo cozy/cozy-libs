@@ -37,5 +37,28 @@ describe('Oauth helper', () => {
         '*'
       )
     })
+
+    it('should return true', () => {
+      const result = handleOAuthResponse()
+      expect(result).toBe(true)
+    })
+
+    it('should return false when no account is present in query string', () => {
+      window.location = {
+        search: 'state=70720eb0-6204-484d'
+      }
+
+      const result = handleOAuthResponse()
+      expect(result).toBe(false)
+    })
+
+    it('should return false when no state is present in query string', () => {
+      window.location = {
+        search: 'account=bc2aca6566cf4a72afe6c615aa1e3d31'
+      }
+
+      const result = handleOAuthResponse()
+      expect(result).toBe(false)
+    })
   })
 })
