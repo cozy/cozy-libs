@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.51.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.51.0...cozy-harvest-lib@0.51.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **harvest:** Rely on messageEvent.source for OAuth message 📝 ([8800778](https://github.com/cozy/cozy-libs/commit/8800778))
+
+
+
+
+
 # [0.51.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.50.0...cozy-harvest-lib@0.51.0) (2019-06-11)
 
 
