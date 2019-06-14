@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.53.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.52.0...cozy-harvest-lib@0.53.0) (2019-06-14)
+
+
+### Features
+
+* **harvest:** Import tranpiled Cozy-UI components ⚙ ([8c1f50c](https://github.com/cozy/cozy-libs/commit/8c1f50c))
+
+
+
+
+
 # [0.52.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.51.1...cozy-harvest-lib@0.52.0) (2019-06-14)
 
 
