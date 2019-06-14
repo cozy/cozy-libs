@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 
-import { Button } from 'cozy-ui/react/Button'
+import { Button } from 'cozy-ui/transpiled/react/Button'
 import { withMutations } from 'cozy-client'
 
 import accountsMutations from '../connections/accounts'

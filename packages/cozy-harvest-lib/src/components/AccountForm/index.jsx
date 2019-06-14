@@ -3,8 +3,8 @@ import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 
 import { isMobile } from 'cozy-device-helper'
-import Button from 'cozy-ui/react/Button'
-import { translate, extend } from 'cozy-ui/react/I18n'
+import Button from 'cozy-ui/transpiled/react/Button'
+import { translate, extend } from 'cozy-ui/transpiled/react/I18n'
 
 import AccountFields from './AccountFields'
 import AccountFormError from './Error'

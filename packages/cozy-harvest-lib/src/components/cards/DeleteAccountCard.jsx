@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import Card from 'cozy-ui/react/Card'
-import { translate } from 'cozy-ui/react/I18n'
-import { SubTitle, Text } from 'cozy-ui/react/Text'
+import Card from 'cozy-ui/transpiled/react/Card'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { SubTitle, Text } from 'cozy-ui/transpiled/react/Text'
 
 import DeleteAccountButton from '../DeleteAccountButton'
 
