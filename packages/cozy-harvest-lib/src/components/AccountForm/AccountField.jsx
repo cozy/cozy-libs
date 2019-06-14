@@ -1,8 +1,8 @@
-import Field from 'cozy-ui/react/Field'
+import Field from 'cozy-ui/transpiled/react/Field'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { translate } from 'cozy-ui/react/I18n'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
 import {

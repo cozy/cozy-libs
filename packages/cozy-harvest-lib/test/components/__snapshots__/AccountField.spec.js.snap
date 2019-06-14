@@ -2,7 +2,7 @@
 
 exports[`AccountField render a date field 1`] = `
 <div
-  className="o-field u-m-0"
+  className="styles__o-field___3n5HM u-m-0"
 >
   <Label
     block={true}
@@ -30,7 +30,7 @@ exports[`AccountField render a date field 1`] = `
 
 exports[`AccountField render a dropdown field 1`] = `
 <div
-  className="o-field u-m-0"
+  className="styles__o-field___3n5HM u-m-0"
 >
   <Label
     block={true}
@@ -126,7 +126,7 @@ exports[`AccountField render a dropdown field 1`] = `
 
 exports[`AccountField render a password field 1`] = `
 <div
-  className="o-field u-m-0"
+  className="styles__o-field___3n5HM u-m-0"
 >
   <Label
     block={true}
@@ -157,7 +157,7 @@ exports[`AccountField render a password field 1`] = `
 
 exports[`AccountField should render 1`] = `
 <div
-  className="o-field u-m-0"
+  className="styles__o-field___3n5HM u-m-0"
 >
   <Label
     block={true}

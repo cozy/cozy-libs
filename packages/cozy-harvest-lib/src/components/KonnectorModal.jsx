@@ -2,12 +2,15 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { withMutations } from 'cozy-client'
-import AppIcon from 'cozy-ui/react/AppIcon'
-import Button from 'cozy-ui/react/Button'
-import Infos from 'cozy-ui/react/Infos'
-import Modal, { ModalContent, ModalHeader } from 'cozy-ui/react/Modal'
-import Spinner from 'cozy-ui/react/Spinner'
-import { SubTitle } from 'cozy-ui/react/Text'
+import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
+import Button from 'cozy-ui/transpiled/react/Button'
+import Infos from 'cozy-ui/transpiled/react/Infos'
+import Modal, {
+  ModalContent,
+  ModalHeader
+} from 'cozy-ui/transpiled/react/Modal'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import accountMutations from '../connections/accounts'
 import * as triggers from '../helpers/triggers'

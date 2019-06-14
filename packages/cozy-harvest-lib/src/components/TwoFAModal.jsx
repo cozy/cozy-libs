@@ -1,11 +1,14 @@
 import React, { PureComponent } from 'react'
-import Modal, { ModalDescription, ModalHeader } from 'cozy-ui/react/Modal'
-import Text, { SubTitle, Caption } from 'cozy-ui/react/Text'
-import { translate } from 'cozy-ui/react/I18n'
-import Button from 'cozy-ui/react/Button'
-import Field from 'cozy-ui/react/Field'
-import AppIcon from 'cozy-ui/react/AppIcon'
-import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
+import Modal, {
+  ModalDescription,
+  ModalHeader
+} from 'cozy-ui/transpiled/react/Modal'
+import Text, { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Button from 'cozy-ui/transpiled/react/Button'
+import Field from 'cozy-ui/transpiled/react/Field'
+import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 
 export class TwoFAForm extends PureComponent {

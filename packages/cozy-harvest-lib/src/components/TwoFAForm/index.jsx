@@ -1,13 +1,16 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import AppIcon from 'cozy-ui/react/AppIcon'
-import Button from 'cozy-ui/react/Button'
-import Field from 'cozy-ui/react/Field'
-import { translate } from 'cozy-ui/react/I18n'
-import Modal, { ModalDescription, ModalHeader } from 'cozy-ui/react/Modal'
-import Text, { SubTitle, Caption } from 'cozy-ui/react/Text'
-import withBreakpoints from 'cozy-ui/react/helpers/withBreakpoints'
+import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
+import Button from 'cozy-ui/transpiled/react/Button'
+import Field from 'cozy-ui/transpiled/react/Field'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Modal, {
+  ModalDescription,
+  ModalHeader
+} from 'cozy-ui/transpiled/react/Modal'
+import Text, { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import accounts from '../../helpers/accounts'
 
