@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.55.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.54.1...cozy-harvest-lib@0.55.0) (2019-06-17)
+
+
+### Features
+
+* **harvest:** Make HandleOAuthResponse return boolean value ✨ ([f800811](https://github.com/cozy/cozy-libs/commit/f800811))
+
+
+
+
+
 ## [0.54.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.54.0...cozy-harvest-lib@0.54.1) (2019-06-17)
 
 
