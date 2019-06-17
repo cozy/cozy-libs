@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.54.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.54.0...cozy-harvest-lib@0.54.1) (2019-06-17)
+
+
+### Bug Fixes
+
+* **harvest:** :nail_care: Better delete button proptypes handling ([3b3d122](https://github.com/cozy/cozy-libs/commit/3b3d122))
+* :bug: Correctly wrap TriggerLaunche into withLocales ([73cc510](https://github.com/cozy/cozy-libs/commit/73cc510))
+
+
+
+
+
 # [0.54.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.53.1...cozy-harvest-lib@0.54.0) (2019-06-17)
 
 
