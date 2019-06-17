@@ -387,6 +387,7 @@ describe('Document', () => {
 describe('Document used with CozyClient', () => {
   beforeEach(() => {
     Document.registerClient(cozyClient)
+    cozyClient.stackClient.fetchJSON.mockReset()
   })
 
   afterEach(() => {
@@ -445,14 +446,6 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('getAll', () => {
-    beforeEach(() => {
-      cozyClient.stackClient.fetchJSON.mockReset()
-    })
-
-    afterEach(() => {
-      cozyClient.stackClient.fetchJSON.mockReset()
-    })
-
     it('should work', async () => {
       cozyClient.stackClient.fetchJSON.mockResolvedValueOnce({
         rows: [
@@ -484,14 +477,6 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('fetchChanges', () => {
-    beforeEach(() => {
-      cozyClient.stackClient.fetchJSON.mockReset()
-    })
-
-    afterEach(() => {
-      cozyClient.stackClient.fetchJSON.mockReset()
-    })
-
     it('should work in simple case', async () => {
       cozyClient.stackClient.fetchJSON.mockReturnValueOnce(
         Promise.resolve({
@@ -545,14 +530,6 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('updateAll', () => {
-    beforeEach(() => {
-      cozyClient.stackClient.fetchJSON.mockReset()
-    })
-
-    afterEach(() => {
-      cozyClient.stackClient.fetchJSON.mockReset()
-    })
-
     it('should not do anything if passed empty list', async () => {
       const res = await Simpson.updateAll([])
       expect(cozyClient.stackClient.fetchJSON).not.toHaveBeenCalled()
