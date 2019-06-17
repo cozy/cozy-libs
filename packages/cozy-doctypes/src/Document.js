@@ -291,10 +291,6 @@ class Document {
     }
   }
 
-  static async deleteAll(docs) {
-    return this.updateAll(docs.map(flagForDeletion))
-  }
-
   /**
    * Find duplicates in a list of documents according to the
    * idAttributes of the class. Priority is given to the document
@@ -320,6 +316,23 @@ class Document {
   }
 
   /**
+   * Deletes doc
+   *
+   * @param  {Document} doc - At least { _id, _rev }
+   */
+  static async delete(doc) {
+    const client = this.newClient
+    return client.collection(this.doctype).destroy(doc)
+  }
+
+  /**
+   * Deletes all docs (one HTTP call)
+   *
+   * All docs need { _id, _rev }
+   */
+  static async deleteAll(docs) {
+    return this.updateAll(docs.map(flagForDeletion))
+  }
 
   /**
    * Delete duplicates on the server. Find duplicates according to the
