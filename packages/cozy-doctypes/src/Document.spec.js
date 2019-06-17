@@ -1,5 +1,16 @@
 const Document = require('./Document')
 const { cozyClientJS, cozyClient } = require('./testUtils')
+const DocumentCollection = require('cozy-stack-client/dist/DocumentCollection')
+  .default
+const CozyStackClient = require('cozy-stack-client').default
+
+jest.mock('cozy-stack-client', () => {
+  const OriginalStackClient = jest.requireActual('cozy-stack-client').default
+  OriginalStackClient.prototype.fetchJSON = jest.fn()
+  jest.spyOn(OriginalStackClient.prototype, 'collection')
+  OriginalStackClient.default = OriginalStackClient
+  return OriginalStackClient
+})
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
@@ -14,7 +25,9 @@ describe('Document', () => {
   })
 
   beforeEach(() => {
+    cozyClientJS.data.create.mockReset()
     Document.registerClient(cozyClientJS)
+    CozyStackClient.prototype.fetchJSON.mockReset()
   })
 
   afterEach(() => {
