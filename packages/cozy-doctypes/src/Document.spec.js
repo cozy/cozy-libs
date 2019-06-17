@@ -131,8 +131,11 @@ describe('Document', () => {
   })
 
   it('should do bulk fetch', async () => {
+    CozyStackClient.prototype.fetchJSON.mockReturnValueOnce({
+      rows: []
+    })
     await Simpson.fetchAll()
-    expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
+    expect(CozyStackClient.prototype.fetchJSON).toHaveBeenCalledWith(
       'GET',
       '/data/io.cozy.simpsons/_all_docs?include_docs=true'
     )
@@ -546,6 +549,9 @@ describe('Document used with CozyClient', () => {
 
   describe('fetchAll', () => {
     it('should do bulk fetch', async () => {
+      CozyStackClient.prototype.fetchJSON.mockReturnValueOnce({
+        rows: []
+      })
       await Simpson.fetchAll()
       expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
         'GET',

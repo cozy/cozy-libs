@@ -254,25 +254,10 @@ class Document {
   }
 
   static async fetchAll() {
-    const stackClient = this.usesCozyClient()
-      ? this.cozyClient.stackClient
-      : this.cozyClient
-
-    try {
-      const result = await stackClient.fetchJSON(
-        'GET',
-        `/data/${this.doctype}/_all_docs?include_docs=true`
-      )
-      return result.rows
-        .filter(x => x.id.indexOf('_design') !== 0 && x.doc)
-        .map(x => x.doc)
-    } catch (e) {
-      if (e && e.response && e.response.status && e.response.status === 404) {
-        return []
-      } else {
-        return []
-      }
-    }
+    const { data } = await this.newClient
+      .collection(this.doctype)
+      .all({ limit: null })
+    return data
   }
 
   static async updateAll(docs) {
