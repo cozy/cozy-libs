@@ -387,12 +387,26 @@ describe('Document', () => {
     )
   })
 
-  describe('get', () => {
-    it('should throw an error if used with cozy-client-js', async () => {
-      expect.assertions(1)
-      await expect(Simpson.get('lisa')).rejects.toEqual(
-        new Error('This method is not implemented with cozy-client-js')
+  describe('new client', () => {
+    it('should instantiate a new client from old client', () => {
+      Simpson._newClient = null // reset manually
+      expect(Simpson.newClient.stackClient.uri).toBe(
+        'http://test.cozy.tools:8080'
       )
+      expect(Simpson.newClient.stackClient.token.token).toBe('test-token')
+    })
+  })
+
+  describe('get', () => {
+    beforeEach(() => {
+      jest.spyOn(DocumentCollection.prototype, 'get')
+    })
+    afterEach(() => {
+      DocumentCollection.prototype.get.mockRestore()
+    })
+    it('should work', async () => {
+      await expect(Simpson.get('lisa'))
+      expect(DocumentCollection.prototype.get).toHaveBeenCalledWith('lisa')
     })
   })
 })

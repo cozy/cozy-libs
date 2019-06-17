@@ -134,24 +134,17 @@ class Document {
     return attributes
   }
 
-  /**
-   * Returns the item that has this id
-   *
-   * @param {string} id - The id of an item in the collection
-   * @returns {object}  - The collection's item that has this id
-   *
-   */
-  static async get(id) {
-    if (!this.usesCozyClient()) {
-      throw new Error('This method is not implemented with cozy-client-js')
+  static get newClient() {
+    if (this.usesCozyClient()) {
+      return this.cozyClient
     }
-
-    if (!this.doctype) {
-      throw new Error('doctype is not defined')
+    if (!this._newClient) {
+      this._newClient = new CozyClient({
+        uri: this.cozyClient._uri,
+        token: this.cozyClient._token
+      })
     }
-
-    const resp = await this.cozyClient.collection(this.doctype).get(id)
-    return resp.data
+    return this._newClient
   }
 
   static async createOrUpdate(attributes) {
@@ -344,6 +337,8 @@ class Document {
   }
 
   /**
+
+  /**
    * Delete duplicates on the server. Find duplicates according to the
    * idAttributes.
    *
@@ -449,6 +444,22 @@ class Document {
       result.push(...resp.docs)
     }
     return result
+  }
+
+  /**
+   * Returns the item that has this id
+   *
+   * @param {string} id - The id of an item in the collection
+   * @returns {object}  - The collection's item that has this id
+   *
+   */
+  static async get(id) {
+    if (!this.doctype) {
+      throw new Error('doctype is not defined')
+    }
+
+    const { data } = await this.newClient.collection(this.doctype).get(id)
+    return data
   }
 
   /**

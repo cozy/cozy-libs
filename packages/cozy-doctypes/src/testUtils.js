@@ -5,6 +5,8 @@ jest.mock('cozy-stack-client')
 
 module.exports = {
   cozyClientJS: {
+    _uri: 'http://test.cozy.tools:8080',
+    _token: 'test-token',
     data: {
       defineIndex: jest.fn().mockResolvedValue({ name: 'index' }),
       query: jest.fn().mockResolvedValue([]),
