@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.53.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.53.0...cozy-harvest-lib@0.53.1) (2019-06-17)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Call Delete button callbacks after setState ([53c54e4](https://github.com/cozy/cozy-libs/commit/53c54e4))
+
+
+
+
+
 # [0.53.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.52.0...cozy-harvest-lib@0.53.0) (2019-06-14)
 
 
