@@ -13,7 +13,6 @@ import {
   TextareaAdapter
 } from './form'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
-import withLocales from '../withLocales'
 
 const { schema, uiSchema } = creditApplicationTemplate.personalData
 
@@ -58,4 +57,4 @@ PersonalDataForm.defaultProps = {
   formData: {}
 }
 
-export default withLocales(withRouter(PersonalDataForm))
+export default withRouter(PersonalDataForm)

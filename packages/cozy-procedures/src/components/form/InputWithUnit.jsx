@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Input } from 'cozy-ui/transpiled/react'
+import { Input, translate } from 'cozy-ui/transpiled/react'
 
 import stripInvalidInputProps from './stripInvalidInputProps'
-import withLocales from '../../withLocales'
 
 const InputWithUnit = ({ onChange, t, ...otherProps }) => (
   <div>
@@ -25,4 +24,4 @@ InputWithUnit.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default withLocales(InputWithUnit)
+export default translate()(InputWithUnit)

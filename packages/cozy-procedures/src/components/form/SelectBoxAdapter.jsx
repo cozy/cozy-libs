@@ -1,9 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { SelectBox } from 'cozy-ui/transpiled/react'
+import { SelectBox, translate } from 'cozy-ui/transpiled/react'
 
 import stripInvalidInputProps from './stripInvalidInputProps'
-import withLocales from '../../withLocales'
 
 const SelectBoxAdapter = ({ onChange, options, t, value, ...otherProps }) => {
   const currentValue = options.enumOptions.find(o => o.value === value)
@@ -44,4 +43,4 @@ SelectBoxAdapter.propTypes = {
   value: ValuePropType
 }
 
-export default withLocales(SelectBoxAdapter)
+export default translate()(SelectBoxAdapter)
