@@ -7,6 +7,7 @@ import { withMutations } from 'cozy-client'
 
 import accountsMutations from '../connections/accounts'
 import withLocales from './hoc/withLocales'
+import { getMutationsProptypes } from '../helpers/proptypes'
 
 export class DeleteAccountButton extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ export class DeleteAccountButton extends Component {
         busy={deleting}
         onClick={this.handleDelete}
         label={t('accountForm.disconnect.button')}
-        {...omit(this.props, Object.keys(DeleteAccountButton.propTypes))}
+        {...omit(this.props, Object.keys(excludedButtonProptypes))}
       />
     )
   }
@@ -80,6 +81,11 @@ DeleteAccountButton.propTypes = {
    * Provided by translate HOC
    */
   t: PropTypes.func.isRequired
+}
+
+const excludedButtonProptypes = {
+  ...DeleteAccountButton.propTypes,
+  ...getMutationsProptypes(accountsMutations)
 }
 
 export default withLocales(

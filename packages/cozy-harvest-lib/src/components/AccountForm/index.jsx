@@ -25,8 +25,8 @@ const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
  * @see https://github.com/final-form/react-final-form#getting-started
  */
 export class AccountForm extends PureComponent {
-  constructor(props, context) {
-    super(props, context)
+  constructor(props) {
+    super(props)
     const { konnector, lang } = props
     const { locales } = konnector
     if (locales && lang) {

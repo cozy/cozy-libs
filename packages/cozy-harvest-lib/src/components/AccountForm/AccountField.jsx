@@ -125,7 +125,7 @@ AccountField.propTypes = {
    * The element wrapping the <Field /> component.
    * Passed to <SelectBox /> component.
    */
-  container: PropTypes.node,
+  container: PropTypes.instanceOf(Element),
   /**
    * Indicates if the <Field /> should be rendered with an error style.
    */
