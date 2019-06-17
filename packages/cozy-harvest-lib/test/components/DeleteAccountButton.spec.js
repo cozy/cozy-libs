@@ -44,18 +44,15 @@ describe('DeleteAccountButton', () => {
 
   it('should change state on click and handle onSuccess', done => {
     const component = shallow(
-      <DeleteAccountButton account={fixtures.account} {...props} />
+      <DeleteAccountButton
+        account={fixtures.account}
+        onSuccess={() => done()}
+        {...props}
+      />
     )
     expect(component.state().deleting).toBe(false)
-
-    // async assertions
-    const onSuccessAssert = () => {
-      expect(component.state().deleting).toBe(true)
-      done()
-    }
-    component.setProps({ onSuccess: onSuccessAssert })
-
     component.simulate('click')
+    expect(component.state().deleting).toBe(true)
   })
 
   it('should handle onError if provided', done => {

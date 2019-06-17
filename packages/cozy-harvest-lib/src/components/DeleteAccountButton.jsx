@@ -17,6 +17,14 @@ export class DeleteAccountButton extends Component {
     this.handleDelete = this.handleDelete.bind(this)
   }
 
+  componentDidMount() {
+    this._mounted = true
+  }
+
+  componentWillUnmount() {
+    this._mounted = false
+  }
+
   async handleDelete() {
     this.setState({ deleting: true })
     const { account, deleteAccount, onError, onSuccess } = this.props
@@ -31,7 +39,7 @@ export class DeleteAccountButton extends Component {
         console.error(e)
       }
     } finally {
-      this.setState({ deleting: false })
+      if (this._mounted) this.setState({ deleting: false })
     }
   }
 
