@@ -7,6 +7,7 @@ import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withKonnectorJob from './hoc/withKonnectorJob'
+import withLocales from './hoc/withLocales'
 
 import {
   ERROR_EVENT,
@@ -100,6 +101,8 @@ TriggerLauncher.propTypes = {
   submitting: PropTypes.bool
 }
 
-export default withKonnectorJob(
-  withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
+export default withLocales(
+  withKonnectorJob(
+    withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
+  )
 )

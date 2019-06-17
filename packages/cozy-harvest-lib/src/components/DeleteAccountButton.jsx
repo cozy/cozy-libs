@@ -6,7 +6,7 @@ import { Button } from 'cozy-ui/react/Button'
 import { withMutations } from 'cozy-client'
 
 import accountsMutations from '../connections/accounts'
-import withLocales, { i18nContextTypes } from './hoc/withLocales'
+import withLocales from './hoc/withLocales'
 import { getMutationsProptypes } from '../helpers/proptypes'
 
 export class DeleteAccountButton extends Component {
@@ -39,11 +39,6 @@ export class DeleteAccountButton extends Component {
   render() {
     const { t } = this.props
     const { deleting } = this.state
-    const excludedButtonProptypes = {
-      ...DeleteAccountButton.propTypes,
-      ...getMutationsProptypes(accountsMutations),
-      ...i18nContextTypes
-    }
     return (
       <Button
         theme="danger-outline"
@@ -78,6 +73,11 @@ DeleteAccountButton.propTypes = {
    * Provided by translate HOC
    */
   t: PropTypes.func.isRequired
+}
+
+const excludedButtonProptypes = {
+  ...DeleteAccountButton.propTypes,
+  ...getMutationsProptypes(accountsMutations)
 }
 
 export default withLocales(
