@@ -340,14 +340,14 @@ describe('Document', () => {
     })
 
     it('should work', async () => {
-      cozyClientJS.fetchJSON.mockResolvedValueOnce({
+      CozyStackClient.prototype.fetchJSON.mockResolvedValueOnce({
         rows: [
           { doc: { _id: '123abde', name: 'Lisa' } },
           { doc: { _id: '2123asb', name: 'Bart' } }
         ]
       })
       const docs = await Simpson.getAll(['123abde', '2123asb'])
-      expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
+      expect(CozyStackClient.prototype.fetchJSON).toHaveBeenCalledWith(
         'POST',
         '/data/io.cozy.simpsons/_all_docs?include_docs=true',
         {
@@ -361,7 +361,7 @@ describe('Document', () => {
     })
 
     it('should return empty list in case of error', async () => {
-      cozyClientJS.fetchJSON.mockRejectedValueOnce({
+      CozyStackClient.prototype.fetchJSON.mockRejectedValueOnce({
         message: 'not_found'
       })
       const docs = await Simpson.getAll(['notexisting'])

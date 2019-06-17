@@ -429,26 +429,9 @@ class Document {
    * @return {Promise} - Promise resolving to an array of documents, unfound document are filtered
    */
   static async getAll(ids) {
-    const stackClient = this.usesCozyClient()
-      ? this.cozyClient.stackClient
-      : this.cozyClient
-    let resp
-    try {
-      resp = await stackClient.fetchJSON(
-        'POST',
-        `/data/${this.doctype}/_all_docs?include_docs=true`,
-        {
-          keys: ids
-        }
-      )
-    } catch (error) {
-      if (error.message.match(/not_found/)) {
-        return []
-      }
-      throw error
-    }
-    const rows = resp.rows.filter(row => row.doc)
-    return rows.map(row => row.doc)
+    const stackClient = this.newClient
+    const { data } = await this.newClient.collection(this.doctype).getAll(ids)
+    return data.map(x => omit(x, ['id', '_type']))
   }
 }
 
