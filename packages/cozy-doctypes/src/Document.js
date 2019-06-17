@@ -261,9 +261,7 @@ class Document {
   }
 
   static async updateAll(docs) {
-    const stackClient = this.usesCozyClient()
-      ? this.cozyClient.stackClient
-      : this.cozyClient
+    const stackClient = this.newClient.stackClient
 
     if (!docs || !docs.length) {
       return Promise.resolve([])

@@ -194,11 +194,9 @@ describe('Document', () => {
   })
 
   it('should not do anything if passed empty list', async () => {
-    jest.spyOn(cozyClientJS.data, 'create').mockReset()
-    jest.spyOn(cozyClientJS, 'fetchJSON').mockReset()
     const res = await Simpson.updateAll([])
     expect(cozyClientJS.data.create).not.toHaveBeenCalled()
-    expect(cozyClientJS.fetchJSON).not.toHaveBeenCalled()
+    expect(CozyStackClient.prototype.fetchJSON).not.toHaveBeenCalled()
     expect(res).toEqual([])
   })
 
@@ -208,7 +206,7 @@ describe('Document', () => {
       .mockReset()
       .mockResolvedValue({ _id: 1 })
     jest
-      .spyOn(cozyClientJS, 'fetchJSON')
+      .spyOn(CozyStackClient.prototype, 'fetchJSON')
       .mockReset()
       .mockRejectedValueOnce({
         reason: { reason: 'Database does not exist.' }
@@ -239,7 +237,7 @@ describe('Document', () => {
       { _id: 1, name: 'Marge' },
       { _id: 2, name: 'Homer' }
     ])
-    expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
+    expect(CozyStackClient.prototype.fetchJSON).toHaveBeenCalledWith(
       'POST',
       '/data/io.cozy.simpsons/_bulk_docs',
       {
@@ -577,7 +575,7 @@ describe('Document used with CozyClient', () => {
           name: 'Marge Simpson'
         }
       })
-      cozyClient.stackClient.collection.mockReturnValue({
+      jest.spyOn(CozyStackClient.prototype, 'collection').mockReturnValue({
         get: getSpy
       })
       const result = await Simpson.get('marge')
