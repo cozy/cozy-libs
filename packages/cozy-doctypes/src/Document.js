@@ -63,6 +63,10 @@ const withoutUndefined = x => omitBy(x, isUndefined)
 
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
+const NotImplementedInNewClientError = () => {
+  return new Error('This method is not implemented yet with CozyClient')
+}
+
 class Document {
   /**
    * Registers a client
@@ -92,7 +96,7 @@ class Document {
 
   static getIndex(doctype, fields) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      throw NotImplementedInNewClientError()
     }
 
     return this.getIndexViaOldClient(doctype, fields)
@@ -152,7 +156,7 @@ class Document {
 
   static async createOrUpdate(attributes) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      throw NotImplementedInNewClientError()
     }
 
     return this.createOrUpdateViaOldClient(attributes)
@@ -220,7 +224,7 @@ class Document {
 
   static create(attributes) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      throw NotImplementedInNewClientError()
     }
 
     return this.createViaOldClient(attributes)
@@ -246,7 +250,7 @@ class Document {
 
   static query(index, options) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      throw NotImplementedInNewClientError()
     }
 
     return this.queryViaOldClient(index, options)
@@ -415,7 +419,7 @@ class Document {
    */
   static async queryAll(selector, index) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      throw NotImplementedInNewClientError()
     }
 
     return this.queryAllViaOldClient(selector, index)
