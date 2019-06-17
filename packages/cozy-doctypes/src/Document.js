@@ -365,34 +365,12 @@ class Document {
    * @param  {[type]} options   { includeDesign: false, includeDeleted: false }
    */
   static async fetchChanges(since, options = {}) {
-    const stackClient = this.usesCozyClient()
-      ? this.cozyClient.stackClient
-      : this.cozyClient
-
-    const queryParams = {
+    const col = this.newClient.collection(this.doctype)
+    return col.fetchChanges({
       since,
-      include_docs: 'true'
-    }
-    if (options.params) {
-      Object.assign(queryParams, options.params)
-    }
-    const result = await stackClient.fetchJSON(
-      'GET',
-      `/data/${this.doctype}/_changes?${querystring.stringify(queryParams)}`
-    )
-
-    const newLastSeq = result.last_seq
-    let docs = result.results.map(x => x.doc).filter(Boolean)
-
-    if (!options.includeDesign) {
-      docs = docs.filter(doc => doc._id.indexOf('_design') !== 0)
-    }
-
-    if (!options.includeDeleted) {
-      docs = docs.filter(doc => !doc._deleted)
-    }
-
-    return { newLastSeq, documents: docs }
+      include_docs: true,
+      ...options.params
+    })
   }
 
   /**

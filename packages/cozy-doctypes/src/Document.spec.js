@@ -249,14 +249,8 @@ describe('Document', () => {
   })
 
   describe('fetch changes', () => {
-    beforeEach(() => {
-      cozyClientJS.fetchJSON.mockReset()
-    })
-    afterEach(() => {
-      cozyClientJS.fetchJSON.mockReset()
-    })
     it('should work in simple case', async () => {
-      cozyClientJS.fetchJSON.mockReturnValueOnce(
+      CozyStackClient.prototype.fetchJSON.mockReturnValueOnce(
         Promise.resolve({
           last_seq: 'new-seq',
           results: [
@@ -269,9 +263,10 @@ describe('Document', () => {
       )
 
       const changes = await Simpson.fetchChanges('my-seq')
-      expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
+      expect(CozyStackClient.prototype.fetchJSON).toHaveBeenCalledWith(
         'GET',
-        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true'
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true',
+        undefined
       )
       expect(changes).toEqual({
         newLastSeq: 'new-seq',
@@ -280,7 +275,7 @@ describe('Document', () => {
     })
 
     it('should support query options', async () => {
-      cozyClientJS.fetchJSON.mockReturnValueOnce(
+      CozyStackClient.prototype.fetchJSON.mockReturnValueOnce(
         Promise.resolve({
           last_seq: 'new-seq',
           results: []
@@ -290,9 +285,10 @@ describe('Document', () => {
       await Simpson.fetchChanges('my-seq', {
         params: { descending: true, limit: 1 }
       })
-      expect(cozyClientJS.fetchJSON).toHaveBeenCalledWith(
+      expect(CozyStackClient.prototype.fetchJSON).toHaveBeenCalledWith(
         'GET',
-        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1'
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1',
+        undefined
       )
     })
   })
@@ -520,7 +516,8 @@ describe('Document used with CozyClient', () => {
       const changes = await Simpson.fetchChanges('my-seq')
       expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
         'GET',
-        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true'
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true',
+        undefined
       )
       expect(changes).toEqual({
         newLastSeq: 'new-seq',
@@ -541,7 +538,8 @@ describe('Document used with CozyClient', () => {
       })
       expect(cozyClient.stackClient.fetchJSON).toHaveBeenCalledWith(
         'GET',
-        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1'
+        '/data/io.cozy.simpsons/_changes?since=my-seq&include_docs=true&descending=true&limit=1',
+        undefined
       )
     })
   })
