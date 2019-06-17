@@ -12,7 +12,6 @@ const get = require('lodash/get')
 const { parallelMap } = require('./utils')
 const CozyClient = require('cozy-client').default
 const log = require('cozy-logger').namespace('Document')
-const querystring = require('querystring')
 
 const DATABASE_DOES_NOT_EXIST = 'Database does not exist.'
 
@@ -442,7 +441,6 @@ class Document {
    * @return {Promise} - Promise resolving to an array of documents, unfound document are filtered
    */
   static async getAll(ids) {
-    const stackClient = this.newClient
     const { data } = await this.newClient.collection(this.doctype).getAll(ids)
     return data.map(x => omit(x, ['id', '_type']))
   }
