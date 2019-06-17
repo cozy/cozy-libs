@@ -6,6 +6,7 @@ import store from './redux/store'
 import Context from './redux/context'
 import creditApplicationTemplate from './templates/creditApplicationTemplate'
 import { init as initPersonalData } from './redux/personalDataSlice'
+import withLocales from './withLocales'
 
 class Procedure extends React.Component {
   componentDidMount() {
@@ -23,12 +24,14 @@ const mapDispatchToProps = dispatch => ({
   initPersonalData: template => dispatch(initPersonalData(template))
 })
 
-const ProcedureContainer = connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { context: Context }
-)(Procedure)
+const ProcedureContainer = withLocales(
+  connect(
+    null,
+    mapDispatchToProps,
+    null,
+    { context: Context }
+  )(Procedure)
+)
 
 const ProcedureWithStore = props => (
   <Provider store={store} context={Context}>
