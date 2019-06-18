@@ -12,15 +12,18 @@
     "maritalStatus": {
       "title": "Statut marital",
       "single": "Célibataire",
-      "maried": "Marié",
-      "pacs": "Pacsé"
+      "maried": "Marié.e",
+      "pacs": "Pacsé.e",
+      "divorced": "Divorcé.e",
+      "widowed": "Veu.f.ve",
+      "partner": "Concubin.e"
     },
     "employmentStatus": {
       "title": "Statut de travail",
-      "employee": "Employé",
-      "freelance": "Indépendant",
+      "employee": "Employé.e",
+      "freelance": "Indépendant.e",
       "unemployed": "Sans emploi",
-      "retired": "Retraité"
+      "retired": "Retraité.e"
     },
     "employmentContract": {
       "title": "Contrat de travail",
@@ -36,7 +39,9 @@
     "propertyStatus": {
       "title": "Statut immobilier",
       "owner": "Propriétaire",
-      "tenant": "Locataire"
+      "tenant": "Locataire",
+      "housed": "Logé.e",
+      "homeless": "Sans domicile fixe"
     },
     "propertyLoan": {
       "title": "Emprunt immobilier"
