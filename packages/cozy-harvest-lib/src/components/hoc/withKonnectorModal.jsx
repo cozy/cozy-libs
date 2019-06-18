@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import KonnectorModal from '../KonnectorModal'
+import { getDisplayName } from './utils'
 
 export const withKonnectorModal = WrappedComponent => {
   class WrappedComponentWithPropTypes extends WrappedComponent {
@@ -58,6 +59,10 @@ export const withKonnectorModal = WrappedComponent => {
       )
     }
   }
+
+  ComponentWithKonnectorModal.displayName = `withKonnectorModal(${getDisplayName(
+    WrappedComponent
+  )}`
 
   ComponentWithKonnectorModal.propTypes = {
     ...WrappedComponent.prop
