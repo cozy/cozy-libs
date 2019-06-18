@@ -5,7 +5,7 @@ import BarButton from 'cozy-ui/transpiled/react/BarButton'
 import AppTitle from 'cozy-ui/transpiled/react/AppTitle'
 
 const Topbar = ({ title, router }) => (
-  <div>
+  <div className="u-flex">
     <BarButton icon="back" onClick={router.goBack} />
     <AppTitle>{title}</AppTitle>
   </div>
