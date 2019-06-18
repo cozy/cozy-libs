@@ -8,7 +8,7 @@ class Amount extends React.Component {
     const { t } = this.props
     return (
       <div>
-        <Topbar title={t('sections.amount.title')} />
+        <Topbar title={t('amount.title')} />
         Amount
       </div>
     )

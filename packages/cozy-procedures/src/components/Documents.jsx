@@ -8,7 +8,7 @@ class Documents extends React.Component {
     const { t } = this.props
     return (
       <div>
-        <Topbar title={t('sections.documents.title')} />
+        <Topbar title={t('documents.title')} />
         Documents
       </div>
     )

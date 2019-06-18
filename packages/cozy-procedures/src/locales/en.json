@@ -1,80 +1,86 @@
 {
-  "sections": {
-    "amount": {
-      "title": "Amount"
-    },
-    "duration": {
-      "title": "Duration"
-    },
-    "personalDataForm": {
-      "title": "Personal form"
-    },
-    "documents": {
-      "title": "Documents"
+  "overview": {
+    "subtitle": "Please fill out the following information",
+    "request": "Requested loan",
+    "documents": "Documents",
+    "infos": "Personal information",
+    "notice": "By submitting the request, all informations in this application will be sent to us.",
+    "button": "Send my application"
+  },
+  "amount": {
+    "title": "Amount"
+  },
+  "duration": {
+    "title": "Duration"
+  },
+  "personalDataForm": {
+    "title": "Personal informations",
+    "form": {
+      "lastname": {
+        "title": "Lastname"
+      },
+      "firstname": {
+        "title": "Firstname"
+      },
+      "numberOfKids": {
+        "title": "Number of kids"
+      },
+      "maritalStatus": {
+        "title": "Marital status",
+        "single": "Single",
+        "maried": "Maried",
+        "pacs": "PACS",
+        "divorced": "Divorced",
+        "widowed": "Widowed",
+        "partner": "Partner"
+      },
+      "employmentStatus": {
+        "title": "Employment status",
+        "employee": "Employee",
+        "freelance": "Freelance",
+        "unemployed": "Unemployed",
+        "retired": "Retired"
+      },
+      "employmentContract": {
+        "title": "Employment contract",
+        "cdd": "CDD",
+        "cdi": "CDI"
+      },
+      "salary": {
+        "title": "Salary"
+      },
+      "additionalIncome": {
+        "title": "Additional income"
+      },
+      "propertyStatus": {
+        "title": "Property status",
+        "owner": "Owner",
+        "tenant": "Tenant",
+        "housed": "Housed",
+        "homeless": "Homeless"
+      },
+      "propertyLoan": {
+        "title": "Property loan"
+      },
+      "creditsTotalAmount": {
+        "title": "Credits total amount"
+      },
+      "address": {
+        "title": "Address"
+      },
+      "phone": {
+        "title": "Phone"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "units": {
+        "eurosNetPerMonth": "Net € per month",
+        "eurosPerMonth": "€ per month"
+      }
     }
   },
-  "creditApplication": {
-    "lastname": {
-      "title": "Lastname"
-    },
-    "firstname": {
-      "title": "Firstname"
-    },
-    "numberOfKids": {
-      "title": "Number of kids"
-    },
-    "maritalStatus": {
-      "title": "Marital status",
-      "single": "Single",
-      "maried": "Maried",
-      "pacs": "PACS",
-      "divorced": "Divorced",
-      "widowed": "Widowed",
-      "partner": "Partner"
-    },
-    "employmentStatus": {
-      "title": "Employment status",
-      "employee": "Employee",
-      "freelance": "Freelance",
-      "unemployed": "Unemployed",
-      "retired": "Retired"
-    },
-    "employmentContract": {
-      "title": "Employment contract",
-      "cdd": "CDD",
-      "cdi": "CDI"
-    },
-    "salary": {
-      "title": "Salary"
-    },
-    "additionalIncome": {
-      "title": "Additional income"
-    },
-    "propertyStatus": {
-      "title": "Property status",
-      "owner": "Owner",
-      "tenant": "Tenant",
-      "housed": "Housed",
-      "homeless": "Homeless"
-    },
-    "propertyLoan": {
-      "title": "Property loan"
-    },
-    "creditsTotalAmount": {
-      "title": "Credits total amount"
-    },
-    "address": {
-      "title": "Address"
-    },
-    "phone": {
-      "title": "Phone"
-    },
-    "email": {
-      "title": "Email"
-    },
-    "units": {
-      "eurosNetPerMonth": "Net € per month",
-      "eurosPerMonth": "€ per month"
-    }
+  "documents": {
+    "title": "Documents"
   }
 }

@@ -8,7 +8,7 @@ class Duration extends React.Component {
     const { t } = this.props
     return (
       <div>
-        <Topbar title={t('sections.duration.title')} />
+        <Topbar title={t('duration.title')} />
         Duration
       </div>
     )
