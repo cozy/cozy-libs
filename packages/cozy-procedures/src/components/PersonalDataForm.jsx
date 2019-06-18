@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import Form from 'react-jsonschema-form'
 import { Button } from 'cozy-ui/transpiled/react'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import {
   FieldTemplate,
@@ -25,10 +26,11 @@ const widgets = {
 
 class PersonalDataForm extends React.Component {
   render() {
-    const { formData, updateFormData, router } = this.props
+    const { formData, updateFormData, router, t } = this.props
     return (
       <div className="u-ml-2">
-        <h2 className="u-title-h2">Personal data</h2>
+        <h2 className="u-title-h2">{t('personalData.title')}</h2>
+        <h3 className="u-title-h3">{t('personalData.subtitle')}</h3>
         <Form
           formData={formData}
           schema={schema}
@@ -38,7 +40,11 @@ class PersonalDataForm extends React.Component {
           widgets={widgets}
           onChange={({ formData }) => updateFormData(formData)}
         >
-          <Button label="Go!" className="u-mt-2" onClick={router.goBack} />
+          <Button
+            label={t('validate')}
+            className="u-mt-2"
+            onClick={router.goBack}
+          />
         </Form>
       </div>
     )
@@ -50,11 +56,12 @@ PersonalDataForm.propTypes = {
   updateFormData: PropTypes.func.isRequired,
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
-  })
+  }),
+  t: PropTypes.func.isRequired
 }
 
 PersonalDataForm.defaultProps = {
   formData: {}
 }
 
-export default withRouter(PersonalDataForm)
+export default withRouter(translate()(PersonalDataForm))

@@ -1,4 +1,9 @@
 {
+  "personalData": {
+    "title": "Personal data",
+    "subtitle": "Please complete the following informations to finalise your application"
+  },
+  "validate": "Validate",
   "creditApplication": {
     "lastname": {
       "title": "Lastname"
