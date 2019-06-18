@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import Form from 'react-jsonschema-form'
-import { Button } from 'cozy-ui/transpiled/react'
+import { Button, SubTitle, Title } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import {
@@ -29,8 +29,8 @@ class PersonalDataForm extends React.Component {
     const { formData, updateFormData, router, t } = this.props
     return (
       <div className="u-ml-2">
-        <h2 className="u-title-h2">{t('personalData.title')}</h2>
-        <h3 className="u-title-h3">{t('personalData.subtitle')}</h3>
+        <Title>{t('personalData.title')}</Title>
+        <SubTitle>{t('personalData.subtitle')}</SubTitle>
         <Form
           formData={formData}
           schema={schema}
