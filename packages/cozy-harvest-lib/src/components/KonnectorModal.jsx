@@ -116,7 +116,7 @@ export class KonnectorModal extends PureComponent {
             />
           </ModalContent>
         ) : (
-          <ModalContent>
+          <ModalContent className="u-pb-0">
             <SubTitle className="u-mb-1 u-ta-center">
               {t('modal.konnector.title', { name: konnector.name })}
             </SubTitle>
@@ -132,7 +132,7 @@ export class KonnectorModal extends PureComponent {
                 isImportant
               />
             ) : (
-              <div>
+              <div className="u-mb-2">
                 <TriggerManager
                   account={account}
                   konnector={konnector}
