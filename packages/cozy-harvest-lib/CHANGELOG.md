@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.56.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.55.0...cozy-harvest-lib@0.56.0) (2019-06-18)
+
+
+### Features
+
+* **harvest:** Add display names to HOC 📝 ([5656797](https://github.com/cozy/cozy-libs/commit/5656797))
+
+
+
+
+
 # [0.55.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.54.1...cozy-harvest-lib@0.55.0) (2019-06-17)
 
 
