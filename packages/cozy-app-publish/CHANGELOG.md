@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.16.0 (2019-06-18)
+
+
+### Bug Fixes
+
+* Expose FlagSwitcher only in browser context ([f2fafa7](https://github.com/cozy/cozy-libs/commit/f2fafa7)), closes [#402](https://github.com/cozy/cozy-libs/issues/402)
+
+
+### Features
+
+* Use argparse ([8298c62](https://github.com/cozy/cozy-libs/commit/8298c62))
+
+
+
+
+
 <a name="0.15.0"></a>
 # [0.15.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.14.0...cozy-app-publish@0.15.0) (2019-03-20)
 
