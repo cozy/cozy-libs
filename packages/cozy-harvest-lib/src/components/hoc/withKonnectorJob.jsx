@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 
 import KonnectorJob from '../../models/KonnectorJob'
+import { getDisplayName } from './utils'
 
 export const KonnectorJobPropTypes = {
   /**
@@ -23,6 +24,9 @@ export const withKonnectorJob = WrappedComponent => {
       )
     }
   }
+  ComponentWithKonnectorJob.displayName = `withKonnectorJob(${getDisplayName(
+    WrappedComponent
+  )}`
   ComponentWithKonnectorJob.contextTypes = {
     client: PropTypes.object.isRequired
   }
