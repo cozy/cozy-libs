@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router'
+import Topbar from './Topbar'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 const Overview = ({ personalData, location }) => {
@@ -14,13 +15,17 @@ const Overview = ({ personalData, location }) => {
 
   return (
     <div>
-      <h1>{creditApplicationTemplate.name}</h1>
+      <Topbar title={creditApplicationTemplate.name} />
       <div>
-        <Link to={`${rootPath}other`}>Other</Link>
+        <Link to={`${rootPath}amount`}>Amount</Link>
+        <Link to={`${rootPath}duration`}>Duration</Link>
       </div>
       <div>
         <Link to={`${rootPath}personal`}>Personal infos</Link>
         {personalDataFieldsCompleted}/{personalDataFieldsTotal}
+      </div>
+      <div>
+        <Link to={`${rootPath}documents`}>Documents</Link>
       </div>
     </div>
   )

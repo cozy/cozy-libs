@@ -13,6 +13,7 @@ import {
   SelectBoxAdapter,
   TextareaAdapter
 } from './form'
+import Topbar from './Topbar'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 const { schema, uiSchema } = creditApplicationTemplate.personalData
@@ -29,7 +30,7 @@ class PersonalDataForm extends React.Component {
     const { formData, updateFormData, router, t } = this.props
     return (
       <div className="u-ml-2">
-        <Title>{t('personalData.title')}</Title>
+        <Topbar title={t('sections.personalDataForm.title')} />
         <SubTitle>{t('personalData.subtitle')}</SubTitle>
         <Form
           formData={formData}

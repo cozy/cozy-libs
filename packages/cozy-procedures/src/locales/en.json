@@ -1,9 +1,18 @@
 {
-  "personalData": {
-    "title": "Personal data",
-    "subtitle": "Please complete the following informations to finalise your application"
+  "sections": {
+    "amount": {
+      "title": "Amount"
+    },
+    "duration": {
+      "title": "Duration"
+    },
+    "personalDataForm": {
+      "title": "Personal form"
+    },
+    "documents": {
+      "title": "Documents"
+    }
   },
-  "validate": "Validate",
   "creditApplication": {
     "lastname": {
       "title": "Lastname"
