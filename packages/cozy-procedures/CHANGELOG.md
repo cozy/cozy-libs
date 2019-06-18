@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.2.1...cozy-procedures@0.2.2) (2019-06-18)
+
+
+### Bug Fixes
+
+* **procedures:** Add missing values to employment and property statuses ([62951b1](https://github.com/cozy/cozy-libs/commit/62951b1))
+
+
+
+
+
 ## [0.2.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.2.0...cozy-procedures@0.2.1) (2019-06-18)
 
 
