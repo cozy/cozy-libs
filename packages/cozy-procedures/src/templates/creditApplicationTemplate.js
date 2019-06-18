@@ -126,14 +126,50 @@ const uiSchema = {
   }
 }
 
+const documents = {
+  identity_document: {
+    label: 'identity_document',
+    order: 1,
+    count: 1,
+    rules: {}
+  },
+  tax_notice: {
+    label: 'tax_notice',
+    order: 2,
+    count: 1,
+    rules: {}
+  },
+  payslip: {
+    label: 'payslip',
+    order: 3,
+    count: 3,
+    rules: {}
+  },
+  bank_identity: {
+    label: 'bank_identity',
+    order: 4,
+    count: 1,
+    rules: {}
+  },
+  address_certificate: {
+    label: 'address_certificate',
+    order: 5,
+    count: 1,
+    rules: {}
+  }
+}
+
 export default {
   name: 'Credit Application',
   type: 'credit-application',
   description: '…',
-  amount: 30000,
-  duration: 24,
+  procedureData: {
+    amount: 30000,
+    duration: 24
+  },
   personalData: {
     schema,
     uiSchema
-  }
+  },
+  documents
 }
