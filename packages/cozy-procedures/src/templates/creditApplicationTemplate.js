@@ -2,88 +2,88 @@ const schema = {
   type: 'object',
   properties: {
     lastname: {
-      title: 'creditApplication.lastname.title',
+      title: 'personalDataForm.form.lastname.title',
       type: 'string'
     },
     firstname: {
-      title: 'creditApplication.firstname.title',
+      title: 'personalDataForm.form.firstname.title',
       type: 'string'
     },
     maritalStatus: {
-      title: 'creditApplication.maritalStatus.title',
+      title: 'personalDataForm.form.maritalStatus.title',
       type: 'string',
       enum: ['single', 'divorced', 'widowed', 'partner', 'maried', 'pacs'],
       enumNames: [
-        'creditApplication.maritalStatus.single',
-        'creditApplication.maritalStatus.divorced',
-        'creditApplication.maritalStatus.widowed',
-        'creditApplication.maritalStatus.partner',
-        'creditApplication.maritalStatus.maried',
-        'creditApplication.maritalStatus.pacs'
+        'personalDataForm.form.maritalStatus.single',
+        'personalDataForm.form.maritalStatus.divorced',
+        'personalDataForm.form.maritalStatus.widowed',
+        'personalDataForm.form.maritalStatus.partner',
+        'personalDataForm.form.maritalStatus.maried',
+        'personalDataForm.form.maritalStatus.pacs'
       ]
     },
     numberOfKids: {
-      title: 'creditApplication.numberOfKids.title',
+      title: 'personalDataForm.form.numberOfKids.title',
       type: 'number',
       minimum: 0
     },
     employmentStatus: {
-      title: 'creditApplication.employmentStatus.title',
+      title: 'personalDataForm.form.employmentStatus.title',
       type: 'string',
       enum: ['employee', 'freelance', 'unemployed', 'retired'],
       enumNames: [
-        'creditApplication.employmentStatus.employee',
-        'creditApplication.employmentStatus.freelance',
-        'creditApplication.employmentStatus.unemployed',
-        'creditApplication.employmentStatus.retired'
+        'personalDataForm.form.employmentStatus.employee',
+        'personalDataForm.form.employmentStatus.freelance',
+        'personalDataForm.form.employmentStatus.unemployed',
+        'personalDataForm.form.employmentStatus.retired'
       ]
     },
     employmentContract: {
-      title: 'creditApplication.employmentContract.title',
+      title: 'personalDataForm.form.employmentContract.title',
       type: 'string',
       enum: ['cdd', 'cdi'],
       enumNames: [
-        'creditApplication.employmentContract.cdd',
-        'creditApplication.employmentContract.cdi'
+        'personalDataForm.form.employmentContract.cdd',
+        'personalDataForm.form.employmentContract.cdi'
       ]
     },
     salary: {
-      title: 'creditApplication.salary.title',
+      title: 'personalDataForm.form.salary.title',
       type: 'number'
     },
     additionalIncome: {
-      title: 'creditApplication.additionalIncome.title',
+      title: 'personalDataForm.form.additionalIncome.title',
       type: 'number'
     },
     propertyStatus: {
-      title: 'creditApplication.propertyStatus.title',
+      title: 'personalDataForm.form.propertyStatus.title',
       type: 'string',
       enum: ['owner', 'tenant', 'housed', 'homeless'],
       enumNames: [
-        'creditApplication.propertyStatus.owner',
-        'creditApplication.propertyStatus.tenant',
-        'creditApplication.propertyStatus.housed',
-        'creditApplication.propertyStatus.homeless'
+        'personalDataForm.form.propertyStatus.owner',
+        'personalDataForm.form.propertyStatus.tenant',
+        'personalDataForm.form.propertyStatus.housed',
+        'personalDataForm.form.propertyStatus.homeless'
       ]
     },
     propertyLoan: {
-      title: 'creditApplication.propertyLoan.title',
+      title: 'personalDataForm.form.propertyLoan.title',
       type: 'number'
     },
     creditsTotalAmount: {
-      title: 'creditApplication.creditsTotalAmount.title',
+      title: 'personalDataForm.form.creditsTotalAmount.title',
       type: 'number'
     },
     address: {
-      title: 'creditApplication.address.title',
+      title: 'personalDataForm.form.address.title',
       type: 'string'
     },
     phone: {
-      title: 'creditApplication.phone.title',
+      title: 'personalDataForm.form.phone.title',
       type: 'string'
     },
     email: {
-      title: 'creditApplication.email.title',
+      title: 'personalDataForm.form.email.title',
       type: 'string'
     }
   }
@@ -100,25 +100,25 @@ const uiSchema = {
   salary: {
     'ui:widget': 'InputWithUnit',
     'ui:options': {
-      unit: 'creditApplication.units.eurosNetPerMonth'
+      unit: 'personalDataForm.form.units.eurosNetPerMonth'
     }
   },
   additionalIncome: {
     'ui:widget': 'InputWithUnit',
     'ui:options': {
-      unit: 'creditApplication.units.eurosNetPerMonth'
+      unit: 'personalDataForm.form.units.eurosNetPerMonth'
     }
   },
   propertyLoan: {
     'ui:widget': 'InputWithUnit',
     'ui:options': {
-      unit: 'creditApplication.units.eurosPerMonth'
+      unit: 'personalDataForm.form.units.eurosPerMonth'
     }
   },
   creditsTotalAmount: {
     'ui:widget': 'InputWithUnit',
     'ui:options': {
-      unit: 'creditApplication.units.eurosPerMonth'
+      unit: 'personalDataForm.form.units.eurosPerMonth'
     }
   },
   email: {

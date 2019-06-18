@@ -30,7 +30,7 @@ class PersonalDataForm extends React.Component {
     const { formData, updateFormData, router, t } = this.props
     return (
       <div className="u-ml-2">
-        <Topbar title={t('sections.personalDataForm.title')} />
+        <Topbar title={t('personalDataForm.title')} />
         <SubTitle>{t('personalData.subtitle')}</SubTitle>
         <Form
           formData={formData}

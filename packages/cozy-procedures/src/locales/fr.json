@@ -1,71 +1,82 @@
 {
-  "personalData": {
-    "title": "Informations personnelles",
-    "subtitle": "Complétez les informations suivantes pour finaliser votre dossier"
+  "overview": {
+    "subtitle": "Complétez les informations suivantes pour demander un crédit",
+    "request": "Crédit demandé",
+    "documents": "Pièces justificatives",
+    "infos": "Informations personelles",
+    "notice": "En soumettant votre demande, la totalité des éléménts de ce dossier nous sera envoyé.",
+    "button": "Envoyer mon dossier"
   },
-  "validate": "Valider",
-  "creditApplication": {
-    "lastname": {
-      "title": "Nom"
-    },
-    "firstname": {
-      "title": "Prénom"
-    },
-    "numberOfKids": {
-      "title": "Nombre d'enfants"
-    },
-    "maritalStatus": {
-      "title": "Statut marital",
-      "single": "Célibataire",
-      "maried": "Marié.e",
-      "pacs": "Pacsé.e",
-      "divorced": "Divorcé.e",
-      "widowed": "Veu.f.ve",
-      "partner": "Concubin.e"
-    },
-    "employmentStatus": {
-      "title": "Statut de travail",
-      "employee": "Employé.e",
-      "freelance": "Indépendant.e",
-      "unemployed": "Sans emploi",
-      "retired": "Retraité.e"
-    },
-    "employmentContract": {
-      "title": "Contrat de travail",
-      "cdd": "CDD",
-      "cdi": "CDI"
-    },
-    "salary": {
-      "title": "Salaire (après prélévement à la source)"
-    },
-    "additionalIncome": {
-      "title": "Revenus supplémentaires"
-    },
-    "propertyStatus": {
-      "title": "Statut immobilier",
-      "owner": "Propriétaire",
-      "tenant": "Locataire",
-      "housed": "Logé.e",
-      "homeless": "Sans domicile fixe"
-    },
-    "propertyLoan": {
-      "title": "Emprunt immobilier"
-    },
-    "creditsTotalAmount": {
-      "title": "Total des crédits"
-    },
-    "address": {
-      "title": "Adresse"
-    },
-    "phone": {
-      "title": "Téléphone"
-    },
-    "email": {
-      "title": "Email"
-    },
-    "units": {
-      "eurosNetPerMonth": "€ net par mois",
-      "eurosPerMonth": "€ par mois"
+  "amount": {
+    "title": "Montant du crédit"
+  },
+  "duration": {
+    "title": "Durée du crédit"
+  },
+  "personalDataForm": {
+    "form": {
+      "lastname": {
+        "title": "Nom"
+      },
+      "firstname": {
+        "title": "Prénom"
+      },
+      "numberOfKids": {
+        "title": "Nombre d'enfants"
+      },
+      "maritalStatus": {
+        "title": "Statut marital",
+        "single": "Célibataire",
+        "maried": "Marié.e",
+        "pacs": "Pacsé.e",
+        "divorced": "Divorcé.e",
+        "widowed": "Veu.f.ve",
+        "partner": "Concubin.e"
+      },
+      "employmentStatus": {
+        "title": "Statut de travail",
+        "employee": "Employé.e",
+        "freelance": "Indépendant.e",
+        "unemployed": "Sans emploi",
+        "retired": "Retraité.e"
+      },
+      "employmentContract": {
+        "title": "Contrat de travail",
+        "cdd": "CDD",
+        "cdi": "CDI"
+      },
+      "salary": {
+        "title": "Salaire (après prélévement à la source)"
+      },
+      "additionalIncome": {
+        "title": "Revenus supplémentaires"
+      },
+      "propertyStatus": {
+        "title": "Statut immobilier",
+        "owner": "Propriétaire",
+        "tenant": "Locataire",
+        "housed": "Logé.e",
+        "homeless": "Sans domicile fixe"
+      },
+      "propertyLoan": {
+        "title": "Emprunt immobilier"
+      },
+      "creditsTotalAmount": {
+        "title": "Total des crédits"
+      },
+      "address": {
+        "title": "Adresse"
+      },
+      "phone": {
+        "title": "Téléphone"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "units": {
+        "eurosNetPerMonth": "€ net par mois",
+        "eurosPerMonth": "€ par mois"
+      }
     }
   }
 }
