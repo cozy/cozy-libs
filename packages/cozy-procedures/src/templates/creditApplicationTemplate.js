@@ -12,9 +12,12 @@ const schema = {
     maritalStatus: {
       title: 'creditApplication.maritalStatus.title',
       type: 'string',
-      enum: ['single', 'maried', 'pacs'],
+      enum: ['single', 'divorced', 'widowed', 'partner', 'maried', 'pacs'],
       enumNames: [
         'creditApplication.maritalStatus.single',
+        'creditApplication.maritalStatus.divorced',
+        'creditApplication.maritalStatus.widowed',
+        'creditApplication.maritalStatus.partner',
         'creditApplication.maritalStatus.maried',
         'creditApplication.maritalStatus.pacs'
       ]
@@ -55,10 +58,12 @@ const schema = {
     propertyStatus: {
       title: 'creditApplication.propertyStatus.title',
       type: 'string',
-      enum: ['owner', 'tenant'],
+      enum: ['owner', 'tenant', 'housed', 'homeless'],
       enumNames: [
         'creditApplication.propertyStatus.owner',
-        'creditApplication.propertyStatus.tenant'
+        'creditApplication.propertyStatus.tenant',
+        'creditApplication.propertyStatus.housed',
+        'creditApplication.propertyStatus.homeless'
       ]
     },
     propertyLoan: {

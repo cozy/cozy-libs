@@ -13,7 +13,10 @@
       "title": "Marital status",
       "single": "Single",
       "maried": "Maried",
-      "pacs": "PACS"
+      "pacs": "PACS",
+      "divorced": "Divorced",
+      "widowed": "Widowed",
+      "partner": "Partner"
     },
     "employmentStatus": {
       "title": "Employment status",
@@ -35,8 +38,10 @@
     },
     "propertyStatus": {
       "title": "Property status",
-      "owner": "owner",
-      "tenant": "tenant"
+      "owner": "Owner",
+      "tenant": "Tenant",
+      "housed": "Housed",
+      "homeless": "Homeless"
     },
     "propertyLoan": {
       "title": "Property loan"
