@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.2.2...cozy-procedures@0.3.0) (2019-06-18)
+
+
+### Features
+
+* Update credit application template ([d2aa65f](https://github.com/cozy/cozy-libs/commit/d2aa65f))
+
+
+
+
+
 ## [0.2.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.2.1...cozy-procedures@0.2.2) (2019-06-18)
 
 
