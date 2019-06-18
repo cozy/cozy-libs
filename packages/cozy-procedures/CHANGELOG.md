@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.3.0...cozy-procedures@0.3.1) (2019-06-18)
+
+
+### Bug Fixes
+
+* **procedures:** Translate form title and button, add subtitle ([26fd6be](https://github.com/cozy/cozy-libs/commit/26fd6be))
+* **procedures:** Use Title and SubTitle components ([0223d3d](https://github.com/cozy/cozy-libs/commit/0223d3d))
+
+
+
+
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.2.2...cozy-procedures@0.3.0) (2019-06-18)
 
 
