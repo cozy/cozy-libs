@@ -1,25 +1,42 @@
 import reducer, { init, update } from './personalDataSlice'
 
 describe('Personal data', () => {
-  it('should init fields with undefind values', () => {
+  it('should init fields with undefined values', () => {
     const action = init({
       firstname: {},
       lastname: {}
     })
     expect(reducer(undefined, action)).toEqual({
-      firstname: undefined,
-      lastname: undefined
+      data: {
+        firstname: '',
+        lastname: ''
+      },
+      loading: false,
+      error: ''
     })
   })
 
   it('should update fields with new values', () => {
+    const stateBefore = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe'
+      },
+      error: '',
+      loading: false
+    }
     const action = update({
-      firstname: 'Le',
-      lastname: 'Chiffre'
+      firstname: 'Jane',
+      lastname: 'Doe'
     })
-    expect(reducer(undefined, action)).toEqual({
-      firstname: 'Le',
-      lastname: 'Chiffre'
-    })
+    const expectedState = {
+      data: {
+        firstname: 'Jane',
+        lastname: 'Doe'
+      },
+      error: '',
+      loading: false
+    }
+    expect(reducer(stateBefore, action)).toEqual(expectedState)
   })
 })
