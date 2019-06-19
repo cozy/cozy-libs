@@ -59,7 +59,7 @@ class Overview extends React.Component {
           />
         </section>
         <section className="u-mb-2">
-          <SubTitle className="u-mb-1">{t('overview.infos')}</SubTitle>
+          <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
           <Button
             label={t('overview.complete')}
             extraRight={`${personalDataFieldsCompleted}/${personalDataFieldsTotal}`}
