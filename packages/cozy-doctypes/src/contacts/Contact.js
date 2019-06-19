@@ -80,6 +80,15 @@ class Contact extends Document {
       ? getPrimaryOrFirst('cozy')(contact).url
       : contact.url
   }
+  /**
+   * Returns the contact's main phone number
+   *
+   * @param {Object} contact - A contact
+   * @return {string} - The contact's main phone number
+   */
+  static getPrimaryPhone(contact) {
+    return getPrimaryOrFirst('phone')(contact).number
+  }
 
   /**
    * Returns the contact's fullname
@@ -115,6 +124,44 @@ class Contact extends Document {
    **/
   static getDisplayName(contact) {
     return Contact.getFullname(contact) || Contact.getPrimaryEmail(contact)
+  }
+
+  /**
+   * Returns personal data for the contact
+   *
+   * @param {Object} contact - A contact
+   * @param {Array} fields - The list of fields to retrieve
+   * @return {Object} - the personal data
+   **/
+  static getPersonalData(contact, fields) {
+    const mapping = {
+      firstname: {
+        path: 'name.givenName'
+      },
+      lastname: {
+        path: 'name.familyName'
+      },
+      email: {
+        getter: Contact.getPrimaryEmail
+      },
+      phone: {
+        getter: Contact.getPrimaryPhone
+      }
+    }
+    let personalData = {}
+    fields.forEach(field => {
+      const contactField = get(mapping, field, field)
+      let value
+      if (contactField.getter) {
+        value = contactField.getter(contact)
+      } else {
+        value = get(contact, contactField.path, '')
+      }
+
+      personalData[field] = value
+    })
+
+    return personalData
   }
 }
 
