@@ -1,13 +1,13 @@
 {
-  "valider": "Valider",
+  "confirm": "Valider",
   "overview": {
     "subtitle": "Complétez les informations suivantes pour demander un crédit",
     "request": "Crédit demandé",
     "amount": "Montant",
     "duration": "durée",
     "documents": "Pièces justificatives",
-    "infos": "Informations personelles",
-    "notice": "En soumettant votre demande, la totalité des éléménts de ce dossier nous sera envoyé.",
+    "personalData": "Informations personnelles",
+    "notice": "En soumettant votre demande, la totalité des éléménts de ce dossier nous sera envoyée.",
     "button": "Envoyer mon dossier",
     "complete": "Compléter",
     "over": "sur"
@@ -19,6 +19,8 @@
     "title": "Durée du crédit"
   },
   "personalDataForm": {
+    "title": "Informations personnelles",
+    "subtitle": "Complétez les informations suivantes pour finaliser votre dossier",
     "form": {
       "lastname": {
         "title": "Nom"
