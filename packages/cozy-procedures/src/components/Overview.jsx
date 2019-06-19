@@ -3,7 +3,13 @@ import PropTypes from 'prop-types'
 import { Link, withRouter } from 'react-router'
 import Topbar from './Topbar'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
-import { Title, SubTitle, Caption, Button, translate } from 'cozy-ui/transpiled/react'
+import {
+  Title,
+  SubTitle,
+  Caption,
+  Button,
+  translate
+} from 'cozy-ui/transpiled/react'
 
 const Overview = ({ personalData, location, t }) => {
   const personalDataFieldsTotal = Object.keys(personalData).length
@@ -32,9 +38,7 @@ const Overview = ({ personalData, location, t }) => {
         <Link to={`${rootPath}personal`}>Personal infos</Link>
         {personalDataFieldsCompleted}/{personalDataFieldsTotal}
       </div>
-      <Caption>
-        {t('overview.notice')}
-      </Caption>
+      <Caption>{t('overview.notice')}</Caption>
       <Button label={t('overview.button')} extension="full" />
     </div>
   )
