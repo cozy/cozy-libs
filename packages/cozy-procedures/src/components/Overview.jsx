@@ -22,8 +22,8 @@ class Overview extends React.Component {
   render() {
     const { personalData, t } = this.props
 
-    const personalDataFieldsTotal = Object.keys(personalData).length
-    const personalDataFieldsCompleted = Object.values(personalData).filter(
+    const personalDataFieldsTotal = Object.keys(personalData.data).length
+    const personalDataFieldsCompleted = Object.values(personalData.data).filter(
       Boolean
     ).length
 
@@ -77,7 +77,11 @@ class Overview extends React.Component {
 }
 
 Overview.propTypes = {
-  personalData: PropTypes.object,
+  personalData: PropTypes.shape({
+    data: PropTypes.object,
+    loading: PropTypes.bool,
+    error: PropTypes.string
+  }),
   location: PropTypes.shape({
     pathname: PropTypes.string
   }),
@@ -88,7 +92,9 @@ Overview.propTypes = {
 }
 
 Overview.defaultProps = {
-  personalData: {},
+  personalData: {
+    data: {}
+  },
   location: {
     pathname: '/'
   }

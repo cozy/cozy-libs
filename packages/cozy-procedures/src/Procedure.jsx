@@ -5,14 +5,19 @@ import get from 'lodash/get'
 import store from './redux/store'
 import Context from './redux/context'
 import creditApplicationTemplate from './templates/creditApplicationTemplate'
-import { init as initPersonalData } from './redux/personalDataSlice'
+import {
+  init as initPersonalData,
+  fetchMyself
+} from './redux/personalDataSlice'
 import withLocales from './withLocales'
+import { withClient } from 'cozy-client'
 
 class Procedure extends React.Component {
   componentDidMount() {
     this.props.initPersonalData(
       get(creditApplicationTemplate, 'personalData.schema.properties', {})
     )
+    this.props.fetchMyself(this.props.client)
   }
 
   render() {
@@ -20,9 +25,10 @@ class Procedure extends React.Component {
   }
 }
 
-const mapDispatchToProps = dispatch => ({
-  initPersonalData: template => dispatch(initPersonalData(template))
-})
+const mapDispatchToProps = {
+  initPersonalData,
+  fetchMyself
+}
 
 const ProcedureContainer = withLocales(
   connect(
@@ -39,4 +45,4 @@ const ProcedureWithStore = props => (
   </Provider>
 )
 
-export default ProcedureWithStore
+export default withClient(ProcedureWithStore)

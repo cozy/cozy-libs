@@ -4,7 +4,7 @@ import PersonalDataForm from '../components/PersonalDataForm'
 import { getSlice, update as updateFormData } from '../redux/personalDataSlice'
 
 const mapStateToProps = state => ({
-  formData: getSlice(state)
+  formData: getSlice(state).data
 })
 
 const mapDispatchToProps = dispatch => ({
