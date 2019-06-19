@@ -1,4 +1,5 @@
 {
+  "confirm": "Confirm",
   "overview": {
     "subtitle": "Please fill out the following information",
     "request": "Requested loan",
@@ -81,6 +82,9 @@
     }
   },
   "documents": {
-    "title": "Documents"
+    "title": "Documents",
+    "subtitle": "Collect the following documents to complete your application.",
+    "import": "Import a document",
+    "importing": "Importing",
   }
 }

@@ -1,4 +1,5 @@
 {
+  "valider": "Valider",
   "overview": {
     "subtitle": "Complétez les informations suivantes pour demander un crédit",
     "request": "Crédit demandé",
@@ -78,5 +79,11 @@
         "eurosPerMonth": "€ par mois"
       }
     }
+  },
+  "documents": {
+    "title": "Pièces justificatives",
+    "subtitle": "Rassemblez les documents suivants pour compléter votre dossier.",
+    "import": "Importer un document",
+    "importing": "Importation en cours",
   }
 }
