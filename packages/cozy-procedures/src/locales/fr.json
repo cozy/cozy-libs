@@ -3,10 +3,14 @@
   "overview": {
     "subtitle": "Complétez les informations suivantes pour demander un crédit",
     "request": "Crédit demandé",
+    "amount": "Montant",
+    "duration": "durée",
     "documents": "Pièces justificatives",
     "infos": "Informations personelles",
     "notice": "En soumettant votre demande, la totalité des éléménts de ce dossier nous sera envoyé.",
-    "button": "Envoyer mon dossier"
+    "button": "Envoyer mon dossier",
+    "complete": "Compléter",
+    "over": "sur"
   },
   "amount": {
     "title": "Montant du crédit"

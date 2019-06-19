@@ -3,10 +3,14 @@
   "overview": {
     "subtitle": "Please fill out the following information",
     "request": "Requested loan",
+    "amount": "Amount",
+    "duration": "duration",
     "documents": "Documents",
     "infos": "Personal information",
     "notice": "By submitting the request, all informations in this application will be sent to us.",
-    "button": "Send my application"
+    "button": "Send my application",
+    "complete": "Complete",
+    "over": "over"
   },
   "amount": {
     "title": "Amount"
