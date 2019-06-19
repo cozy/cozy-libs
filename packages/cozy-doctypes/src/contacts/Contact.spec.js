@@ -165,6 +165,20 @@ describe('Contact model', () => {
     })
   })
 
+  describe('getPrimaryPhone', () => {
+    it('should return the main phone number', () => {
+      const contact = {
+        phone: [
+          { number: '0320007788', primary: true },
+          { number: '0666001122', primary: false },
+          { number: '0788996677', primary: false }
+        ]
+      }
+      const result = Contact.getPrimaryPhone(contact)
+      expect(result).toEqual('0320007788')
+    })
+  })
+
   describe('getFullname function', () => {
     it("should return contact's fullname", () => {
       const contact = {
@@ -282,6 +296,71 @@ describe('Contact model', () => {
       }
       const result = Contact.getDisplayName(contact)
       expect(result).toEqual('doran.martell@dorne.westeros')
+    })
+  })
+
+  describe('getPersonalData', () => {
+    it('should return the personal data for the given contact', () => {
+      const dany = {
+        fullname: '',
+        name: {
+          givenName: 'Daenerys',
+          familyName: 'Targaryen'
+        },
+        phone: [
+          {
+            number: '+33 (2)0 90 00 54 04',
+            primary: true
+          },
+          {
+            number: '+33 6 77 11 22 33',
+            primary: false
+          }
+        ],
+        address: [
+          {
+            formattedAddress: '94 Hinton Road 05034 Fresno, Singapore',
+            type: 'Home',
+            primary: true
+          },
+          {
+            street: '426 Runolfsson Knolls',
+            city: 'Port Easter',
+            country: 'Cocos (Keeling) Islands',
+            postcode: '84573',
+            type: 'Work'
+          }
+        ],
+        email: [
+          {
+            address: 'dany@dragons.com',
+            type: 'personal',
+            primary: false
+          },
+          {
+            address: 'daenerys@dragonstone.westeros',
+            primary: true
+          }
+        ]
+      }
+      const fields = [
+        'lastname',
+        'firstname',
+        'salary',
+        'address',
+        'phone',
+        'email'
+      ]
+      const expected = {
+        lastname: 'Targaryen',
+        firstname: 'Daenerys',
+        salary: '',
+        address: '',
+        phone: '+33 (2)0 90 00 54 04',
+        email: 'daenerys@dragonstone.westeros'
+      }
+      const result = Contact.getPersonalData(dany, fields)
+      expect(result).toEqual(expected)
     })
   })
 })
