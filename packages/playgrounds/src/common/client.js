@@ -6,10 +6,13 @@ const getClient = customOptions => {
   return new CozyClient(
     merge(
       {
-        scope: ['io.cozy.apps', 'io.cozy.konnectors'],
+        scope: ['io.cozy.apps', 'io.cozy.contacts', 'io.cozy.konnectors'],
         schema: {
           apps: {
             doctype: 'io.cozy.apps'
+          },
+          contacts: {
+            doctype: 'io.cozy.contacts'
           },
           konnectors: {
             doctype: 'io.cozy.konnectors'
