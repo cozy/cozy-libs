@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LaunchTriggerCard should render 1`] = `
+<LaunchTriggerCard
+  trigger={
+    Object {
+      "_id": "d861818b62204988bf0bb78c182a9149",
+    }
+  }
+/>
+`;
