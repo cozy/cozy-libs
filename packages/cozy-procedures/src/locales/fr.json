@@ -13,7 +13,9 @@
     "over": "sur"
   },
   "amount": {
-    "title": "Montant du crédit"
+    "title": "Montant du crédit",
+    "subtitle": "Quel montant souhaitez-vous  demander ?",
+    "label": "Montant du crédit"
   },
   "duration": {
     "title": "Durée du crédit"
