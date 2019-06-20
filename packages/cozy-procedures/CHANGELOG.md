@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.4.0...cozy-procedures@0.5.0) (2019-06-20)
+
+
+### Bug Fixes
+
+* **procedures:** Confirm button label in personal data form ([2b773c0](https://github.com/cozy/cozy-libs/commit/2b773c0))
+* **procedures:** Use field type to set default value ([be1b25e](https://github.com/cozy/cozy-libs/commit/be1b25e))
+
+
+### Features
+
+* **procedures:** Populate personalData slice with "myself" contact ([0399635](https://github.com/cozy/cozy-libs/commit/0399635))
+
+
+
+
+
 # [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.3.1...cozy-procedures@0.4.0) (2019-06-19)
 
 
