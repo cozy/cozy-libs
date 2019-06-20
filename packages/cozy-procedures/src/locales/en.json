@@ -1,3 +1,4 @@
+
 {
   "confirm": "Confirm",
   "overview": {
@@ -90,6 +91,13 @@
     "title": "Documents",
     "subtitle": "Collect the following documents to complete your application.",
     "import": "Import a document",
-    "importing": "Importing"
+    "importing": "Importing",
+    "labels": {
+      "identity_document": "Proof of identity",
+      "tax_notice": "Last tax notice",
+      "payslip": "Last payslip",
+      "bank_identity": "Bank identity",
+      "address_certificate": "Certificate of address"
+    }
   }
 }
