@@ -3,13 +3,15 @@ import reducer, { init, update, fetchMyself } from './personalDataSlice'
 describe('Personal data', () => {
   it('should init fields with undefined values', () => {
     const action = init({
-      firstname: {},
-      lastname: {}
+      firstname: { type: 'string' },
+      lastname: { type: 'string' },
+      salary: { type: 'number' }
     })
     expect(reducer(undefined, action)).toEqual({
       data: {
         firstname: '',
-        lastname: ''
+        lastname: '',
+        salary: 0
       },
       loading: false,
       error: ''
