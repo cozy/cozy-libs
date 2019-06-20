@@ -48,7 +48,8 @@ const personalDataSlice = createSlice({
 })
 
 const selectors = {
-  getSlice: state => get(state, personalDataSlice.slice)
+  getSlice: state => get(state, personalDataSlice.slice),
+  getData: state => get(state, [personalDataSlice.slice, 'data'], {})
 }
 
 const { actions, reducer } = personalDataSlice
@@ -83,6 +84,6 @@ export function fetchMyself(client) {
   }
 }
 
-export const { getSlice } = selectors
+export const { getData, getSlice } = selectors
 
 export default reducer
