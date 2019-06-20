@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.5.0...cozy-procedures@0.6.0) (2019-06-20)
+
+
+### Bug Fixes
+
+* Accurate document holder colors ([b506337](https://github.com/cozy/cozy-libs/commit/b506337))
+* More accurate empty document button ([7ccc0ed](https://github.com/cozy/cozy-libs/commit/7ccc0ed))
+
+
+### Features
+
+* Documents fields based on template ([2bb3b0a](https://github.com/cozy/cozy-libs/commit/2bb3b0a))
+
+
+
+
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.4.0...cozy-procedures@0.5.0) (2019-06-20)
 
 
