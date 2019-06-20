@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.59.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.58.0...cozy-harvest-lib@0.59.0) (2019-06-20)
+
+
+### Features
+
+* **harvest:** Fetch job right after subscribing realtime 📝 ([25b894d](https://github.com/cozy/cozy-libs/commit/25b894d))
+
+
+
+
+
 # [0.58.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.3...cozy-harvest-lib@0.58.0) (2019-06-20)
 
 
