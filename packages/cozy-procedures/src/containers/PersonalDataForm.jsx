@@ -1,14 +1,14 @@
 import { connect } from 'react-redux'
 import context from '../redux/context'
 import PersonalDataForm from '../components/PersonalDataForm'
-import { getSlice, update as updateFormData } from '../redux/personalDataSlice'
+import { getData, update } from '../redux/personalDataSlice'
 
 const mapStateToProps = state => ({
-  formData: getSlice(state)
+  formData: getData(state)
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateFormData: value => dispatch(updateFormData(value))
+  updateFormData: value => dispatch(update(value))
 })
 
 export default connect(

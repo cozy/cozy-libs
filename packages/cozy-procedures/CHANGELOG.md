@@ -3,6 +3,48 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.4.0...cozy-procedures@0.5.0) (2019-06-20)
+
+
+### Bug Fixes
+
+* **procedures:** Confirm button label in personal data form ([2b773c0](https://github.com/cozy/cozy-libs/commit/2b773c0))
+* **procedures:** Use field type to set default value ([be1b25e](https://github.com/cozy/cozy-libs/commit/be1b25e))
+
+
+### Features
+
+* **procedures:** Populate personalData slice with "myself" contact ([0399635](https://github.com/cozy/cozy-libs/commit/0399635))
+
+
+
+
+
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.3.1...cozy-procedures@0.4.0) (2019-06-19)
+
+
+### Bug Fixes
+
+* Added missing proptypes ([a05aaaf](https://github.com/cozy/cozy-libs/commit/a05aaaf))
+* Better topbar UI ([d3be12d](https://github.com/cozy/cozy-libs/commit/d3be12d))
+* Ghost style for document placeholder ([e671a27](https://github.com/cozy/cozy-libs/commit/e671a27))
+* Linting ([3cb1ddb](https://github.com/cozy/cozy-libs/commit/3cb1ddb))
+* Removed demo component ([2a3bfe9](https://github.com/cozy/cozy-libs/commit/2a3bfe9))
+* Translation issues ([02662ea](https://github.com/cozy/cozy-libs/commit/02662ea))
+
+
+### Features
+
+* All basic routes ([71694a8](https://github.com/cozy/cozy-libs/commit/71694a8))
+* Basic documents view ([1b2948a](https://github.com/cozy/cozy-libs/commit/1b2948a))
+* Better overview screen ([0a08211](https://github.com/cozy/cozy-libs/commit/0a08211))
+* Better overview UI ([20e4589](https://github.com/cozy/cozy-libs/commit/20e4589))
+* Upgrade cozy-ui ([5e7227f](https://github.com/cozy/cozy-libs/commit/5e7227f))
+
+
+
+
+
 ## [0.3.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.3.0...cozy-procedures@0.3.1) (2019-06-18)
 
 

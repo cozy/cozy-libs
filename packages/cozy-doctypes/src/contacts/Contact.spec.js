@@ -165,6 +165,38 @@ describe('Contact model', () => {
     })
   })
 
+  describe('getPrimaryPhone', () => {
+    it('should return the main phone number', () => {
+      const contact = {
+        phone: [
+          { number: '0320007788', primary: true },
+          { number: '0666001122', primary: false },
+          { number: '0788996677', primary: false }
+        ]
+      }
+      const result = Contact.getPrimaryPhone(contact)
+      expect(result).toEqual('0320007788')
+    })
+  })
+
+  describe('getPrimaryAddress', () => {
+    it('should return the main phone number', () => {
+      const contact = {
+        name: {
+          givenName: 'Arya',
+          familyName: 'Stark'
+        },
+        address: [
+          { formattedAddress: 'Winterfell', primary: true },
+          { formattedAddress: 'Braavos', primary: false },
+          { formattedAddress: "The Streets of King's Landing", primary: false }
+        ]
+      }
+      const result = Contact.getPrimaryAddress(contact)
+      expect(result).toEqual('Winterfell')
+    })
+  })
+
   describe('getFullname function', () => {
     it("should return contact's fullname", () => {
       const contact = {

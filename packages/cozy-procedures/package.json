@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.3.1",
+  "version": "0.5.0",
   "main": "dist/index.js",
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
@@ -11,7 +11,6 @@
   },
   "dependencies": {
     "babel-preset-cozy-app": "1.5.1",
-    "cozy-ui": "20.14.0",
     "lodash": "4.17.11",
     "react-jsonschema-form": "1.6.1",
     "react-redux": "7.1.0",
@@ -22,6 +21,10 @@
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",
+    "cozy-ui": "^20.18.0",
     "jest": "24.8.0"
+  },
+  "peerDependencies": {
+    "cozy-ui": "^20.18.0"
   }
 }

@@ -18,6 +18,12 @@
     "deleteAccount": {
       "title": "Disconnection",
       "description": "Your will be disconnected from this account, but imported data will be kept"
+    },
+    "launchTrigger": {
+      "button": {
+        "label": "Run again now"
+      },
+      "error": "An error occured."
     }
   },
   "default": {

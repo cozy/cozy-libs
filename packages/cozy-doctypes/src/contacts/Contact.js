@@ -27,7 +27,7 @@ class Contact extends Document {
   /**
    * Returns the initials of the contact.
    *
-   * @param {Object|string} contact - A contact or a string
+   * @param {Contact|string} contact - A contact or a string
    * @return {string} - the contact's initials
    */
   static getInitials(contact) {
@@ -58,7 +58,7 @@ class Contact extends Document {
   /**
    * Returns the contact's main email
    *
-   * @param {Object} contact - A contact
+   * @param {Contact} contact - A contact
    * @return {string} - The contact's main email
    */
   // TODO: sadly we have different versions of contacts' doctype to handle...
@@ -72,7 +72,7 @@ class Contact extends Document {
   /**
    * Returns the contact's main cozy
    *
-   * @param {Object} contact - A contact
+   * @param {Contact} contact - A contact
    * @return {string} - The contact's main cozy
    */
   static getPrimaryCozy(contact) {
@@ -82,9 +82,29 @@ class Contact extends Document {
   }
 
   /**
+   * Returns the contact's main phone number
+   *
+   * @param {Contact} contact - A contact
+   * @return {string} - The contact's main phone number
+   */
+  static getPrimaryPhone(contact) {
+    return getPrimaryOrFirst('phone')(contact).number
+  }
+
+  /**
+   * Returns the contact's main address
+   *
+   * @param {Contact} contact - A contact
+   * @return {string} - The contact's main address
+   */
+  static getPrimaryAddress(contact) {
+    return getPrimaryOrFirst('address')(contact).formattedAddress
+  }
+
+  /**
    * Returns the contact's fullname
    *
-   * @param {Object} contact - A contact
+   * @param {Contact} contact - A contact
    * @return {string} - The contact's fullname
    */
   static getFullname(contact) {
@@ -110,7 +130,7 @@ class Contact extends Document {
   /**
    * Returns a display name for the contact
    *
-   * @param {Object} contact - A contact
+   * @param {Contact} contact - A contact
    * @return {string} - the contact's display name
    **/
   static getDisplayName(contact) {

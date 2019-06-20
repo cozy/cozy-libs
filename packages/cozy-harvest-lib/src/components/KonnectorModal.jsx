@@ -16,6 +16,7 @@ import accountMutations from '../connections/accounts'
 import * as triggers from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import DeleteAccountCard from './cards/DeleteAccountCard'
+import LaunchTriggerCard from './cards/LaunchTriggerCard'
 import withLocales from './hoc/withLocales'
 
 /**
@@ -133,6 +134,7 @@ export class KonnectorModal extends PureComponent {
               />
             ) : (
               <div className="u-mb-2">
+                <LaunchTriggerCard className="u-mb-1" trigger={trigger} />
                 <TriggerManager
                   account={account}
                   konnector={konnector}

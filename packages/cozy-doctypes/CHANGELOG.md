@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.48.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.47.0...cozy-doctypes@1.48.0) (2019-06-20)
+
+
+### Features
+
+* **doctypes:** Add address to personal data mapping ([e459e54](https://github.com/cozy/cozy-libs/commit/e459e54))
+* **doctypes:** Add AdministrativeProcedure model ([819b157](https://github.com/cozy/cozy-libs/commit/819b157))
+* **doctypes:** Add getPrimaryAddress to Contact model ([f9cdf2e](https://github.com/cozy/cozy-libs/commit/f9cdf2e))
+* **doctypes:** Add getPrimaryPhone and getPersonalData on Contact #WIP ([ffb09a3](https://github.com/cozy/cozy-libs/commit/ffb09a3))
+
+
+
+
+
 <a name="1.47.0"></a>
 # [1.47.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.46.1...cozy-doctypes@1.47.0) (2019-05-28)
 
