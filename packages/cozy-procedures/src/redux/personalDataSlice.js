@@ -1,7 +1,7 @@
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 
-import { Contact } from 'cozy-doctypes'
+import { AdministrativeProcedure } from 'cozy-doctypes'
 
 const personalDataSlice = createSlice({
   initialState: {
@@ -26,7 +26,7 @@ const personalDataSlice = createSlice({
     },
     fetchMyselfSuccess: (state, action) => {
       const fieldsToPopulate = Object.keys(state.data)
-      const personalData = Contact.getPersonalData(
+      const personalData = AdministrativeProcedure.getPersonalData(
         action.payload,
         fieldsToPopulate
       )
