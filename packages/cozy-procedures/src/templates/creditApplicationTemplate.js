@@ -131,7 +131,29 @@ const documents = {
     label: 'identity_document',
     order: 1,
     count: 1,
-    rules: {}
+    rules: {
+      $or: [
+        {
+          mime: 'text/plain'
+        },
+        {
+          mime: 'application/pdf'
+        }
+      ],
+      $and: [
+        {
+          $or: [
+            {
+              classification: 'tax_notice',
+              subject: 'income'
+            },
+            {
+              classification: 'certificate'
+            }
+          ]
+        }
+      ]
+    }
   },
   tax_notice: {
     label: 'tax_notice',

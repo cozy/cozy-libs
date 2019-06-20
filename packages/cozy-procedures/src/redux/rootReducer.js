@@ -1,12 +1,12 @@
 import { combineReducers } from 'redux'
 import personalDataSlice from './personalDataSlice'
-import documentsSlice from './documentsSlice'
+import documentsDataSlice from './documentsDataSlice'
 import amountSlice from './amountSlice'
 import durationSlice from './durationSlice'
 
 const rootReducer = combineReducers({
   personalData: personalDataSlice,
-  documents: documentsSlice,
+  documents: documentsDataSlice,
   amount: amountSlice,
   duration: durationSlice
 })
