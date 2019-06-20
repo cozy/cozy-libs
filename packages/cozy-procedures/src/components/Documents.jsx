@@ -19,18 +19,18 @@ class Documents extends React.Component {
       <div>
         <Topbar title={t('documents.title')} />
         <Title>{t('documents.subtitle')}</Title>
+        <div>
+          <Label>Demo, to remove</Label>
+          <EmptyDocumentHolder />
+          <LoadingDocumentHolder />
+          <DocumentHolder />
+        </div>
         {fields.map((document, index) => (
           <section key={index}>
             <Label>{t(`documents.labels.${document.label}`)}</Label>
             <EmptyDocumentHolder />
           </section>
         ))}
-        <div>
-          <Label>{t('documents.label')}</Label>
-          <EmptyDocumentHolder />
-          <LoadingDocumentHolder />
-          <DocumentHolder />
-        </div>
         <div>
           <Button
             label={t('confirm')}
