@@ -56,7 +56,7 @@ describe('AdministrativeProcedure model', () => {
       const expected = {
         lastname: 'Targaryen',
         firstname: 'Daenerys',
-        address: '',
+        address: '94 Hinton Road 05034 Fresno, Singapore',
         phone: '+33 (2)0 90 00 54 04',
         email: 'daenerys@dragonstone.westeros'
       }

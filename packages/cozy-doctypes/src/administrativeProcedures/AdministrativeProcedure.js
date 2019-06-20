@@ -19,6 +19,9 @@ class AdministrativeProcedure extends Document {
       lastname: {
         path: 'name.familyName'
       },
+      address: {
+        getter: Contact.getPrimaryAddress
+      },
       email: {
         getter: Contact.getPrimaryEmail
       },
