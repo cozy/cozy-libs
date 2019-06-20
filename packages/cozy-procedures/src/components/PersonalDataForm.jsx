@@ -42,7 +42,7 @@ class PersonalDataForm extends React.Component {
           onChange={({ formData }) => updateFormData(formData)}
         >
           <Button
-            label={t('validate')}
+            label={t('confirm')}
             className="u-mt-2"
             onClick={router.goBack}
           />
