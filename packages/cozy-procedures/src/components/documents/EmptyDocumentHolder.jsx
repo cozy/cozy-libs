@@ -1,15 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { translate, Button } from 'cozy-ui/transpiled/react/'
+import { translate, Button, Icon } from 'cozy-ui/transpiled/react/'
 
 const EmptyDocumentHolder = ({ t }) => (
-  <Button
-    label={t('documents.import')}
-    icon="plus"
-    theme="ghost"
-    extension="full"
-    align="left"
-  />
+  <Button theme="ghost" extension="full" align="left">
+    <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
+    <span>{t('documents.import')}</span>
+  </Button>
 )
 
 EmptyDocumentHolder.propTypes = {
