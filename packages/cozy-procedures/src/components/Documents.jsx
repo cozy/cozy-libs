@@ -6,14 +6,25 @@ import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
 import DocumentHolder from './documents/DocumentHolder'
+import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 class Documents extends React.Component {
   render() {
     const { t, router } = this.props
+    const { documents: documentsTemplate } = creditApplicationTemplate
+    const fields = Object.values(documentsTemplate).sort(
+      document => document.order
+    )
     return (
       <div>
         <Topbar title={t('documents.title')} />
         <Title>{t('documents.subtitle')}</Title>
+        {fields.map((document, index) => (
+          <section key={index}>
+            <Label>{t(`documents.labels.${document.label}`)}</Label>
+            <EmptyDocumentHolder />
+          </section>
+        ))}
         <div>
           <Label>{t('documents.label')}</Label>
           <EmptyDocumentHolder />

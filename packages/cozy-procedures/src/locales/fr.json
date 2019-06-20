@@ -90,6 +90,13 @@
     "title": "Pièces justificatives",
     "subtitle": "Rassemblez les documents suivants pour compléter votre dossier.",
     "import": "Importer un document",
-    "importing": "Importation en cours"
+    "importing": "Importation en cours",
+    "labels": {
+      "identity_document": "Pièce d’identité",
+      "tax_notice": "Dernier avis d’imposition",
+      "payslip": "Dernier bulletin de salaire",
+      "bank_identity": "Relevé d’identité Bancaire",
+      "address_certificate": "Justificatif de domicile"
+    }
   }
 }
