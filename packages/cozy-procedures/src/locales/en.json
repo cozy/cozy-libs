@@ -1,71 +1,95 @@
 {
-  "personalData": {
-    "title": "Personal data",
-    "subtitle": "Please complete the following informations to finalise your application"
+  "confirm": "Confirm",
+  "overview": {
+    "subtitle": "Please fill out the following information",
+    "request": "Requested loan",
+    "amount": "Amount",
+    "duration": "duration",
+    "documents": "Documents",
+    "personalData": "Personal information",
+    "notice": "By submitting the request, all informations in this application will be sent to us.",
+    "button": "Send my application",
+    "complete": "Complete",
+    "over": "over"
   },
-  "validate": "Validate",
-  "creditApplication": {
-    "lastname": {
-      "title": "Lastname"
-    },
-    "firstname": {
-      "title": "Firstname"
-    },
-    "numberOfKids": {
-      "title": "Number of kids"
-    },
-    "maritalStatus": {
-      "title": "Marital status",
-      "single": "Single",
-      "maried": "Maried",
-      "pacs": "PACS",
-      "divorced": "Divorced",
-      "widowed": "Widowed",
-      "partner": "Partner"
-    },
-    "employmentStatus": {
-      "title": "Employment status",
-      "employee": "Employee",
-      "freelance": "Freelance",
-      "unemployed": "Unemployed",
-      "retired": "Retired"
-    },
-    "employmentContract": {
-      "title": "Employment contract",
-      "cdd": "CDD",
-      "cdi": "CDI"
-    },
-    "salary": {
-      "title": "Salary"
-    },
-    "additionalIncome": {
-      "title": "Additional income"
-    },
-    "propertyStatus": {
-      "title": "Property status",
-      "owner": "Owner",
-      "tenant": "Tenant",
-      "housed": "Housed",
-      "homeless": "Homeless"
-    },
-    "propertyLoan": {
-      "title": "Property loan"
-    },
-    "creditsTotalAmount": {
-      "title": "Credits total amount"
-    },
-    "address": {
-      "title": "Address"
-    },
-    "phone": {
-      "title": "Phone"
-    },
-    "email": {
-      "title": "Email"
-    },
-    "units": {
-      "eurosNetPerMonth": "Net € per month",
-      "eurosPerMonth": "€ per month"
+  "amount": {
+    "title": "Amount"
+  },
+  "duration": {
+    "title": "Duration"
+  },
+  "personalDataForm": {
+    "title": "Personal informations",
+    "subtitle": "Please fill out the following information to complete your application",
+    "form": {
+      "lastname": {
+        "title": "Lastname"
+      },
+      "firstname": {
+        "title": "Firstname"
+      },
+      "numberOfKids": {
+        "title": "Number of kids"
+      },
+      "maritalStatus": {
+        "title": "Marital status",
+        "single": "Single",
+        "maried": "Maried",
+        "pacs": "PACS",
+        "divorced": "Divorced",
+        "widowed": "Widowed",
+        "partner": "Partner"
+      },
+      "employmentStatus": {
+        "title": "Employment status",
+        "employee": "Employee",
+        "freelance": "Freelance",
+        "unemployed": "Unemployed",
+        "retired": "Retired"
+      },
+      "employmentContract": {
+        "title": "Employment contract",
+        "cdd": "CDD",
+        "cdi": "CDI"
+      },
+      "salary": {
+        "title": "Salary"
+      },
+      "additionalIncome": {
+        "title": "Additional income"
+      },
+      "propertyStatus": {
+        "title": "Property status",
+        "owner": "Owner",
+        "tenant": "Tenant",
+        "housed": "Housed",
+        "homeless": "Homeless"
+      },
+      "propertyLoan": {
+        "title": "Property loan"
+      },
+      "creditsTotalAmount": {
+        "title": "Credits total amount"
+      },
+      "address": {
+        "title": "Address"
+      },
+      "phone": {
+        "title": "Phone"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "units": {
+        "eurosNetPerMonth": "Net € per month",
+        "eurosPerMonth": "€ per month"
+      }
     }
+  },
+  "documents": {
+    "title": "Documents",
+    "subtitle": "Collect the following documents to complete your application.",
+    "import": "Import a document",
+    "importing": "Importing",
   }
 }

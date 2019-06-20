@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import Form from 'react-jsonschema-form'
-import { Button, SubTitle, Title } from 'cozy-ui/transpiled/react'
+import { Button, SubTitle } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import {
@@ -13,6 +13,7 @@ import {
   SelectBoxAdapter,
   TextareaAdapter
 } from './form'
+import Topbar from './Topbar'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 const { schema, uiSchema } = creditApplicationTemplate.personalData
@@ -29,8 +30,8 @@ class PersonalDataForm extends React.Component {
     const { formData, updateFormData, router, t } = this.props
     return (
       <div className="u-ml-2">
-        <Title>{t('personalData.title')}</Title>
-        <SubTitle>{t('personalData.subtitle')}</SubTitle>
+        <Topbar title={t('personalDataForm.title')} />
+        <SubTitle>{t('personalDataForm.subtitle')}</SubTitle>
         <Form
           formData={formData}
           schema={schema}
