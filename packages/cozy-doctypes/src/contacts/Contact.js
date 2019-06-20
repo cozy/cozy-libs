@@ -80,6 +80,7 @@ class Contact extends Document {
       ? getPrimaryOrFirst('cozy')(contact).url
       : contact.url
   }
+
   /**
    * Returns the contact's main phone number
    *
@@ -88,6 +89,16 @@ class Contact extends Document {
    */
   static getPrimaryPhone(contact) {
     return getPrimaryOrFirst('phone')(contact).number
+  }
+
+  /**
+   * Returns the contact's main address
+   *
+   * @param {Contact} contact - A contact
+   * @return {string} - The contact's main address
+   */
+  static getPrimaryAddress(contact) {
+    return getPrimaryOrFirst('address')(contact).formattedAddress
   }
 
   /**
