@@ -1,4 +1,5 @@
 const Account = require('./Account')
+const AdministrativeProcedure = require('./administrativeProcedures/AdministrativeProcedure')
 const Application = require('./Application')
 const Document = require('./Document')
 const BalanceHistory = require('./banking/BalanceHistory')
@@ -12,6 +13,7 @@ const CozyFile = require('./File')
 
 module.exports = {
   Account,
+  AdministrativeProcedure,
   Application,
   Document,
   BalanceHistory,
