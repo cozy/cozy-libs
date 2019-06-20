@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.0...cozy-harvest-lib@0.57.1) (2019-06-20)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Omit also i18n props from withLocales ([5f88752](https://github.com/cozy/cozy-libs/commit/5f88752))
+
+
+
+
+
 # [0.57.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.56.0...cozy-harvest-lib@0.57.0) (2019-06-18)
 
 
