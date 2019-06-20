@@ -86,7 +86,7 @@ DeleteAccountButton.propTypes = {
 const excludedButtonProptypes = {
   ...DeleteAccountButton.propTypes,
   ...getMutationsProptypes(accountsMutations),
-  i18nContextTypes
+  ...i18nContextTypes
 }
 
 export default withLocales(
