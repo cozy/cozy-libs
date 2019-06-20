@@ -58,6 +58,12 @@ class ErrorBoundary extends React.Component {
 class App extends React.Component {
   render() {
     const { title, icon, client, children, existingStore } = this.props
+    /**
+     * We need to pass a loginPath with the current locationHash to be able
+     * to stay on the right page after a refresh since cozy-authentication
+     * redirect to loginPath after the login
+     */
+
     return (
       <ErrorBoundary>
         <I18n dictRequire={() => ({})} lang="fr">
@@ -69,6 +75,7 @@ class App extends React.Component {
               appTitle={title}
               appIcon={icon}
               appSlug="example"
+              loginPath={window.location.hash.replace('#', '')}
             >
               {children}
             </MobileRouter>
