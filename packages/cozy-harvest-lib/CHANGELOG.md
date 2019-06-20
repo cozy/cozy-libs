@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.57.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.2...cozy-harvest-lib@0.57.3) (2019-06-20)
+
+
+### Bug Fixes
+
+* **harvest:** Make TriggerLauncher detects success again 🚑 ([d2487ee](https://github.com/cozy/cozy-libs/commit/d2487ee))
+
+
+
+
+
 ## [0.57.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.1...cozy-harvest-lib@0.57.2) (2019-06-20)
 
 
