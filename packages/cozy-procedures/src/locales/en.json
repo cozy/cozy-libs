@@ -13,7 +13,9 @@
     "over": "over"
   },
   "amount": {
-    "title": "Amount"
+    "title": "Amount",
+    "subtitle": "What amount would you like to request?",
+    "label": "Loan amount"
   },
   "duration": {
     "title": "Duration"
