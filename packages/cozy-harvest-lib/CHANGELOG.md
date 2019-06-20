@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.58.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.3...cozy-harvest-lib@0.58.0) (2019-06-20)
+
+
+### Features
+
+* **harvest:** Add LaunchTriggerCard ✨ ([d9fdf4f](https://github.com/cozy/cozy-libs/commit/d9fdf4f))
+
+
+
+
+
 ## [0.57.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.2...cozy-harvest-lib@0.57.3) (2019-06-20)
 
 
