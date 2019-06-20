@@ -11,8 +11,9 @@ const JOB_STATE_ERRORED = 'errored'
 const DEFAULT_TIMER_DELAY = 8000
 
 export class KonnectorJobWatcher {
-  constructor(cozyClient, job, options = {}) {
-    this.realtime = new CozyRealtime({ cozyClient })
+  constructor(client, job, options = {}) {
+    this.client = client
+    this.realtime = new CozyRealtime({ client })
     this.job = job
     /**
      * Options
@@ -82,12 +83,24 @@ export class KonnectorJobWatcher {
   async watch() {
     this.enableSuccessTimer()
 
-    this.realtime.subscribe(
+    // It's important to wait here because we want to be sure that the realtime
+    // has subscribed to job changes before we fetch the last revision manually.
+    // Otherwise the job could still be updated before the subscribe end and
+    // after the last revision fetch.
+    await this.realtime.subscribe(
       'updated',
       JOBS_DOCTYPE,
       this.job._id,
       this.handleJobUpdated
     )
+
+    // Retrieves the last revision of the job in case we missed an update during
+    // realtime subscription.
+    const jobResponse = await this.client.query(
+      this.client.get('io.cozy.jobs', this.job._id)
+    )
+
+    this.handleJobUpdated(jobResponse.data)
   }
 
   unsubscribeAll() {
