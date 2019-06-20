@@ -179,6 +179,24 @@ describe('Contact model', () => {
     })
   })
 
+  describe('getPrimaryAddress', () => {
+    it('should return the main phone number', () => {
+      const contact = {
+        name: {
+          givenName: 'Arya',
+          familyName: 'Stark'
+        },
+        address: [
+          { formattedAddress: 'Winterfell', primary: true },
+          { formattedAddress: 'Braavos', primary: false },
+          { formattedAddress: "The Streets of King's Landing", primary: false }
+        ]
+      }
+      const result = Contact.getPrimaryAddress(contact)
+      expect(result).toEqual('Winterfell')
+    })
+  })
+
   describe('getFullname function', () => {
     it("should return contact's fullname", () => {
       const contact = {
