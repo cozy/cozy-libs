@@ -3,13 +3,27 @@ import get from 'lodash/get'
 import { withClient } from 'cozy-client'
 
 import creditApplicationTemplate from './templates/creditApplicationTemplate'
-
 class Procedure extends React.Component {
   componentDidMount() {
-    this.props.initPersonalData(
+    const {
+      initPersonalData,
+      initDocuments,
+      fetchMyself,
+      fetchDocument,
+      client
+    } = this.props
+
+    initPersonalData(
       get(creditApplicationTemplate, 'personalData.schema.properties', {})
     )
-    this.props.fetchMyself(this.props.client)
+
+    initDocuments(get(creditApplicationTemplate, 'documents'))
+    fetchMyself(client)
+
+    const { documents: documentsTemplate } = creditApplicationTemplate
+    Object.keys(documentsTemplate).map(document => {
+      fetchDocument(client, document)
+    })
   }
 
   render() {
