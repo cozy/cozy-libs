@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.0...cozy-procedures@0.6.1) (2019-06-21)
+
+
+### Bug Fixes
+
+* Remove custom margins on personnal data form ([#520](https://github.com/cozy/cozy-libs/issues/520)) ([24a1f85](https://github.com/cozy/cozy-libs/commit/24a1f85))
+
+
+
+
+
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.5.0...cozy-procedures@0.6.0) (2019-06-20)
 
 
