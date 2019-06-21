@@ -20,13 +20,11 @@ class Overview extends React.Component {
   }
 
   render() {
-    const { personalData, t } = this.props
-
-    const personalDataFieldsTotal = Object.keys(personalData.data).length
-    const personalDataFieldsCompleted = Object.values(personalData.data).filter(
-      Boolean
-    ).length
-
+    const {
+      personalDataFieldsCompleted,
+      personalDataFieldsTotal,
+      t
+    } = this.props
     return (
       <div>
         <Topbar title={creditApplicationTemplate.name} />
@@ -77,11 +75,8 @@ class Overview extends React.Component {
 }
 
 Overview.propTypes = {
-  personalData: PropTypes.shape({
-    data: PropTypes.object,
-    loading: PropTypes.bool,
-    error: PropTypes.string
-  }),
+  personalDataFieldsCompleted: PropTypes.number,
+  personalDataFieldsTotal: PropTypes.number,
   location: PropTypes.shape({
     pathname: PropTypes.string
   }),
@@ -92,9 +87,8 @@ Overview.propTypes = {
 }
 
 Overview.defaultProps = {
-  personalData: {
-    data: {}
-  },
+  personalDataFieldsCompleted: 0,
+  personalDataFieldsTotal: 0,
   location: {
     pathname: '/'
   }
