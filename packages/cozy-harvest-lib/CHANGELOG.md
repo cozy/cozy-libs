@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.60.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.59.0...cozy-harvest-lib@0.60.0) (2019-06-21)
+
+
+### Features
+
+* **harvest:** Trigger manual release to get last translations 🌐 ([adb6634](https://github.com/cozy/cozy-libs/commit/adb6634))
+
+
+
+
+
 # [0.59.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.58.0...cozy-harvest-lib@0.59.0) (2019-06-20)
 
 
