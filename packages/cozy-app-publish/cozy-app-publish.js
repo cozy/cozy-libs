@@ -6,6 +6,7 @@ const { ArgumentParser } = require('argparse')
 const colorize = require('./utils/colorize')
 const scripts = require('./index')
 const capitalize = require('lodash/capitalize')
+const omitBy = require('lodash/omitBy')
 
 const pkg = require('./package.json')
 
@@ -86,7 +87,9 @@ const handleError = error => {
 }
 
 try {
-  const args = parser.parseArgs()
+  // ignore null value which are defaults to argparse (instead of undefined).
+  // null values break lodash/defaults
+  const args = omitBy(parser.parseArgs(), val => val === null)
   publishApp(args).catch(handleError)
 } catch (error) {
   handleError(error)
