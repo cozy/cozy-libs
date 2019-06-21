@@ -12,14 +12,33 @@ import TriggerLauncher from '../TriggerLauncher'
 
 export class LaunchTriggerCard extends PureComponent {
   render() {
-    const { className, trigger, t, ...rest } = this.props
+    const { className, f, trigger, t, ...rest } = this.props
     return (
       <Card className={className} {...rest}>
         <TriggerLauncher trigger={trigger}>
           {({ error, launch, running }) => {
+            const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
               <div>
                 <ul className="u-nolist u-pl-0">
+                  <li>
+                    <Uppercase
+                      tag="span"
+                      className="u-coolGrey u-mr-half u-fz-tiny"
+                    >
+                      {t('card.launchTrigger.lastSync.label')}
+                    </Uppercase>
+                    <Text className="u-fz-tiny" tag="span">
+                      {running
+                        ? t('card.launchTrigger.lastSync.syncing')
+                        : lastSuccessDate
+                        ? f(
+                            lastSuccessDate,
+                            t('card.launchTrigger.lastSync.format')
+                          )
+                        : t('card.launchTrigger.lastSync.unknown')}
+                    </Text>
+                  </li>
                   <li>
                     <Uppercase
                       className="u-coolGrey u-mr-half u-fz-tiny"
@@ -63,6 +82,7 @@ export class LaunchTriggerCard extends PureComponent {
 LaunchTriggerCard.propTypes = {
   ...Card.propTypes,
   trigger: PropTypes.object.isRequired,
+  f: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
 

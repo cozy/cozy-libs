@@ -31,6 +31,12 @@
         "weekly": "Once a week",
         "monthly": "Once a month",
         "undefined": "Manually"
+      },
+      "lastSync": {
+        "label": "Last synchronisation:",
+        "syncing": "Running…",
+        "unknown": "Unknown",
+        "format": "MMMM D[,] YYYY [at] HH[:]mm"
       }
     }
   },
