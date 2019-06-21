@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.16.0...cozy-app-publish@0.16.1) (2019-06-21)
+
+
+### Bug Fixes
+
+* **cozy-app-publish:** Handle snake case cli options ([5c7da87](https://github.com/cozy/cozy-libs/commit/5c7da87))
+
+
+
+
+
 # 0.16.0 (2019-06-18)
 
 
