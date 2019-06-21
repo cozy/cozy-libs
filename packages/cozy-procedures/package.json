@@ -22,9 +22,39 @@
   "devDependencies": {
     "@babel/cli": "7.4.4",
     "cozy-ui": "^20.18.0",
+    "enzyme-to-json": "3.3.5",
     "jest": "24.8.0"
   },
   "peerDependencies": {
     "cozy-ui": "^20.18.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "./jestSetup.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "styl"
+    ],
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/transpiled/",
+      "/dist/"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)?$": "<rootDir>/babel-transformer.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!cozy-ui)"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
   }
 }
