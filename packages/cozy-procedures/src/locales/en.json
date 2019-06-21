@@ -22,8 +22,9 @@
     "subtitle": "Over what time period would you like to reimburse the loan?",
     "label": "Loan duration",
     "reimbursement": "Reimbursement",
-    "rate": "Global rate",
-    "unit": "€/month"
+    "rate": "Nominal annual interest rate",
+    "unit": "€/month",
+    "month": "months"
   },
   "personalDataForm": {
     "title": "Personal informations",

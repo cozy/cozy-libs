@@ -4,7 +4,7 @@ import { Route, IndexRoute } from 'react-router'
 import App from './App'
 import Overview from './containers/Overview'
 import Amount from './containers/Amount'
-import Duration from './components/Duration'
+import Duration from './containers/Duration'
 import PersonalDataForm from './containers/PersonalDataForm'
 import Documents from './components/Documents'
 

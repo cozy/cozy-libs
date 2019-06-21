@@ -23,7 +23,8 @@
     "label": "Durée de remboursement",
     "reimbursement": "Remboursement",
     "rate": "Taux annuel Effectif Global",
-    "unit": "€/mois"
+    "unit": "€/mois",
+    "month": "mois"
   },
   "personalDataForm": {
     "title": "Informations personnelles",

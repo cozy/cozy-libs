@@ -244,7 +244,11 @@ export default {
   description: '…',
   procedureData: {
     amount: 30000,
-    duration: 24
+    duration: {
+      min: 2,
+      max: 60,
+      default: 24
+    }
   },
   personalData: {
     schema,
