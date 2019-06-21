@@ -13,6 +13,7 @@ import {
   SelectBoxAdapter,
   TextareaAdapter
 } from './form'
+import FormFillingStatus from '../containers/FormFillingStatus'
 import Topbar from './Topbar'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
@@ -32,6 +33,7 @@ class PersonalDataForm extends React.Component {
       <div>
         <Topbar title={t('personalDataForm.title')} />
         <SubTitle>{t('personalDataForm.subtitle')}</SubTitle>
+        <FormFillingStatus />
         <Form
           formData={formData}
           schema={schema}
