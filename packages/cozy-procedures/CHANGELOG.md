@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.2...cozy-procedures@0.6.3) (2019-06-21)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+## [0.6.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.1...cozy-procedures@0.6.2) (2019-06-21)
+
+
+### Bug Fixes
+
+* **procedures:** Change numberOfKids to numberOfDependents ([d7ba96e](https://github.com/cozy/cozy-libs/commit/d7ba96e))
+* **procedures:** Change some French translations ([9b828c7](https://github.com/cozy/cozy-libs/commit/9b828c7))
+
+
+
+
+
+## [0.6.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.0...cozy-procedures@0.6.1) (2019-06-21)
+
+
+### Bug Fixes
+
+* Remove custom margins on personnal data form ([#520](https://github.com/cozy/cozy-libs/issues/520)) ([24a1f85](https://github.com/cozy/cozy-libs/commit/24a1f85))
+
+
+
+
+
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.5.0...cozy-procedures@0.6.0) (2019-06-20)
+
+
+### Bug Fixes
+
+* Accurate document holder colors ([b506337](https://github.com/cozy/cozy-libs/commit/b506337))
+* More accurate empty document button ([7ccc0ed](https://github.com/cozy/cozy-libs/commit/7ccc0ed))
+
+
+### Features
+
+* Documents fields based on template ([2bb3b0a](https://github.com/cozy/cozy-libs/commit/2bb3b0a))
+
+
+
+
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.4.0...cozy-procedures@0.5.0) (2019-06-20)
 
 

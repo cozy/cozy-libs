@@ -1,0 +1,10 @@
+{
+  "extends": ["cozy-app"],
+  "rules": {
+    "no-console": 0
+  },
+  "globals": {
+    "mount": true,
+    "shallow": true
+  }
+}

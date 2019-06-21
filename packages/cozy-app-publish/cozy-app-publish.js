@@ -30,19 +30,23 @@ parser.addArgument('--space', {
 })
 parser.addArgument('--build-dir', {
   metavar: 'relative-path',
+  dest: 'buildDir',
   help:
     'Path of the build directory relative to the current directory (default ./build)'
 })
 parser.addArgument('--build-url', {
   metavar: 'url',
+  dest: 'buildUrl',
   help: 'URL of the application archive'
 })
 parser.addArgument('--build-commit', {
   metavar: 'commit-hash',
+  dest: 'buildCommit',
   help: 'Hash of the build commit matching the build archive to publish'
 })
 parser.addArgument('--manual-version', {
   metavar: 'version',
+  dest: 'manualVersion',
   help:
     'Specify a version manually (must not be already published in the registry)'
 })
@@ -58,11 +62,13 @@ parser.addArgument('--postpublish', {
 })
 parser.addArgument('--tag-prefix', {
   metavar: 'tag-prefix',
+  dest: 'tagPrefix',
   help:
     'When publishing from a monorepo, only consider tags with tagPrefix, ex: cozy-banks/1.0.1.'
 })
 parser.addArgument('--registry-url', {
   metavar: 'url',
+  dest: 'registryUrl',
   help: 'Registry URL to publish to a different one from the default URL'
 })
 parser.addArgument('--yes', {
