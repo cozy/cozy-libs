@@ -1,3 +1,4 @@
+import DateFns from 'date-fns'
 import get from 'lodash/get'
 
 import { KonnectorJobError } from './konnectors'
@@ -51,6 +52,19 @@ export const getError = trigger => {
 }
 
 /**
+ * Get last success date
+ * @param  {Object} trigger io.cozy.trigger as returned by stack
+ * @return {Date}        Last success date or null if the trigger has never been
+ * launched.
+ */
+export const getLastSuccessDate = trigger => {
+  const lastSuccessDate =
+    !!trigger && !!trigger.current_state && trigger.current_state.last_success
+  if (!lastSuccessDate) return null
+  return DateFns.parse(lastSuccessDate)
+}
+
+/**
  * Get frenquency of a cron trigger, based on its arguments.
  * @param  {Object} trigger io.cozy.triggers as returned by stack
  * @return {String}         Frequency value, between 'monthly', 'weekly',
@@ -65,7 +79,8 @@ const helpers = {
   buildAttributes,
   getAccountId,
   getError,
-  getFrequency
+  getFrequency,
+  getLastSuccessDate
 }
 
 export default helpers
