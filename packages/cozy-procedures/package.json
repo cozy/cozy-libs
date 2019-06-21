@@ -38,6 +38,9 @@
       "json",
       "styl"
     ],
+    "moduleNameMapper": {
+      "\\.(png|gif|jpe?g|svg)$": "<rootDir>/test/__mocks__/fileMock.js"
+    },
     "testPathIgnorePatterns": [
       "/node_modules/",
       "/transpiled/",
