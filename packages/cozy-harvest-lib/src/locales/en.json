@@ -23,7 +23,15 @@
       "button": {
         "label": "Run again now"
       },
-      "error": "An error occured."
+      "error": "An error occured.",
+      "frequency": {
+        "label": "Frequency:",
+        "hourly": "Each hour",
+        "daily": "Once a day",
+        "weekly": "Once a week",
+        "monthly": "Once a month",
+        "undefined": "Manually"
+      }
     }
   },
   "default": {

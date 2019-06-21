@@ -2,6 +2,7 @@
 
 exports[`DeleteAccountButton should render without listeners 1`] = `
 <Button
+  align="center"
   busy={false}
   disabled={false}
   label="Mock button label"
