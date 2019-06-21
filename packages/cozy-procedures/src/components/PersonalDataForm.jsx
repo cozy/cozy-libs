@@ -29,7 +29,7 @@ class PersonalDataForm extends React.Component {
   render() {
     const { formData, updateFormData, router, t } = this.props
     return (
-      <div className="u-ml-2">
+      <div>
         <Topbar title={t('personalDataForm.title')} />
         <SubTitle>{t('personalDataForm.subtitle')}</SubTitle>
         <Form
@@ -43,8 +43,8 @@ class PersonalDataForm extends React.Component {
         >
           <Button
             label={t('confirm')}
-            className="u-mt-2"
             onClick={router.goBack}
+            extension="full"
           />
         </Form>
       </div>
