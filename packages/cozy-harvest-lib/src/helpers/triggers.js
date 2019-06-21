@@ -1,5 +1,7 @@
 import get from 'lodash/get'
+
 import { KonnectorJobError } from './konnectors'
+import { toFrequency } from './cron'
 
 const DEFAULT_CRON = '0 0 0 * * 0' // Once a week, sunday at midnight
 
@@ -48,10 +50,22 @@ export const getError = trigger => {
     : null
 }
 
+/**
+ * Get frenquency of a cron trigger, based on its arguments.
+ * @param  {Object} trigger io.cozy.triggers as returned by stack
+ * @return {String}         Frequency value, between 'monthly', 'weekly',
+ * 'daily', 'hourly' or null.
+ */
+export const getFrequency = trigger => {
+  if (!trigger || !trigger.type === '@cron') return null
+  return toFrequency(trigger.arguments)
+}
+
 const helpers = {
   buildAttributes,
   getAccountId,
-  getError
+  getError,
+  getFrequency
 }
 
 export default helpers

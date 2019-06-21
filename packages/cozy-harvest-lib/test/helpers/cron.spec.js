@@ -1,4 +1,4 @@
-import { fromFrequency, fromKonnector } from 'helpers/cron'
+import { fromFrequency, fromKonnector, toFrequency } from 'helpers/cron'
 
 describe('Cron helpers', () => {
   describe('fromFrequency', () => {
@@ -70,6 +70,28 @@ describe('Cron helpers', () => {
       expect(fromKonnector(konnector, date, randomDayTimeMock)).toEqual(
         `0 59 11 * * 4`
       )
+    })
+  })
+
+  describe('toFrequency', () => {
+    it('returns weekly', () => {
+      expect(toFrequency('0 0 0 * * 1')).toEqual('weekly')
+    })
+
+    it('returns monthly', () => {
+      expect(toFrequency('0 15 14 25 * *')).toEqual('monthly')
+    })
+
+    it('returns daily', () => {
+      expect(toFrequency('0 15 14 * * *')).toEqual('daily')
+    })
+
+    it('returns hourly', () => {
+      expect(toFrequency('0 15 * * * *')).toEqual('hourly')
+    })
+
+    it('returns null', () => {
+      expect(toFrequency('0 * * * * *')).toBeNull()
     })
   })
 })
