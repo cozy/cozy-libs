@@ -28,8 +28,8 @@
       "firstname": {
         "title": "Prénom"
       },
-      "numberOfKids": {
-        "title": "Nombre d'enfants"
+      "numberOfDependents": {
+        "title": "Nombre de personnes à charge"
       },
       "maritalStatus": {
         "title": "Statut marital",
