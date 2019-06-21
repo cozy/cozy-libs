@@ -56,11 +56,6 @@ const personalDataSlice = createSlice({
   }
 })
 
-const selectors = {
-  getSlice: state => get(state, personalDataSlice.slice),
-  getData: state => get(state, [personalDataSlice.slice, 'data'], {})
-}
-
 const { actions, reducer } = personalDataSlice
 
 export const {
@@ -93,6 +88,12 @@ export function fetchMyself(client) {
   }
 }
 
-export const { getData, getSlice } = selectors
+const getSlice = state => get(state, personalDataSlice.slice)
+const getData = state => get(state, [personalDataSlice.slice, 'data'], {})
+const getCompletedFields = state =>
+  Object.values(getData(state)).filter(Boolean).length
+const getTotalFields = state => Object.keys(getData(state)).length
+
+export { getData, getSlice, getCompletedFields, getTotalFields }
 
 export default reducer

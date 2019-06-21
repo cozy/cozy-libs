@@ -4,7 +4,11 @@ import reducer, {
   fetchMyself,
   fetchMyselfLoading,
   fetchMyselfSuccess,
-  fetchMyselfError
+  fetchMyselfError,
+  getData,
+  getSlice,
+  getCompletedFields,
+  getTotalFields
 } from './personalDataSlice'
 
 describe('Personal data', () => {
@@ -172,6 +176,65 @@ describe('fetchMyself action', () => {
     expect(dispatchSpy).toHaveBeenNthCalledWith(3, {
       type: 'personalData/fetchMyselfLoading',
       payload: { loading: false }
+    })
+  })
+
+  describe('selectors', () => {
+    const state = {
+      personalData: {
+        data: {
+          firstname: 'John',
+          lastname: 'Doe',
+          email: 'john.doe@me.com',
+          phone: undefined,
+          address: null,
+          salary: ''
+        }
+      }
+    }
+
+    describe('getSlice', () => {
+      it('should return the number of completed fields', () => {
+        const result = getSlice(state)
+        expect(result).toEqual({
+          data: {
+            firstname: 'John',
+            lastname: 'Doe',
+            email: 'john.doe@me.com',
+            phone: undefined,
+            address: null,
+            salary: ''
+          }
+        })
+      })
+    })
+
+    describe('getData', () => {
+      it('should return the number of completed fields', () => {
+        const result = getData(state)
+        expect(result).toEqual({
+          firstname: 'John',
+          lastname: 'Doe',
+          email: 'john.doe@me.com',
+          phone: undefined,
+          address: null,
+          salary: ''
+        })
+      })
+    })
+
+    describe('getCompletedFields', () => {
+      it('should return the number of completed fields', () => {
+        const result = getCompletedFields(state)
+        expect(result).toEqual(3)
+      })
+    })
+
+    describe('getTotalFields', () => {
+      it('should return the number of fields', () => {
+        const result = getTotalFields(state)
+        expect(result).toEqual(6)
+      })
     })
   })
 })

@@ -21,6 +21,10 @@
   "personalDataForm": {
     "title": "Personal informations",
     "subtitle": "Please fill out the following information to complete your application",
+    "completedStatus": {
+      "main": "%{completed}/%{total} info",
+      "rest": "have been completed by the app."
+    },
     "form": {
       "lastname": {
         "title": "Lastname"
