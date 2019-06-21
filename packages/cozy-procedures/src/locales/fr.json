@@ -28,11 +28,11 @@
       "firstname": {
         "title": "Prénom"
       },
-      "numberOfKids": {
-        "title": "Nombre d'enfants"
+      "numberOfDependents": {
+        "title": "Nombre de personnes à charge"
       },
       "maritalStatus": {
-        "title": "Statut marital",
+        "title": "Situation maritale",
         "single": "Célibataire",
         "maried": "Marié.e",
         "pacs": "Pacsé.e",
@@ -41,25 +41,25 @@
         "partner": "Concubin.e"
       },
       "employmentStatus": {
-        "title": "Statut de travail",
+        "title": "Statut professionnel",
         "employee": "Employé.e",
         "freelance": "Indépendant.e",
         "unemployed": "Sans emploi",
         "retired": "Retraité.e"
       },
       "employmentContract": {
-        "title": "Contrat de travail",
+        "title": "Type de contrat",
         "cdd": "CDD",
         "cdi": "CDI"
       },
       "salary": {
-        "title": "Salaire (après prélévement à la source)"
+        "title": "Salaire net mensuel (après prélévement à la source)"
       },
       "additionalIncome": {
-        "title": "Revenus supplémentaires"
+        "title": "Revenus complémentaires"
       },
       "propertyStatus": {
-        "title": "Statut immobilier",
+        "title": "Situation immobilière",
         "owner": "Propriétaire",
         "tenant": "Locataire",
         "housed": "Logé.e",
@@ -72,7 +72,7 @@
         "title": "Total des crédits"
       },
       "address": {
-        "title": "Adresse"
+        "title": "Adresse postale"
       },
       "phone": {
         "title": "Téléphone"
