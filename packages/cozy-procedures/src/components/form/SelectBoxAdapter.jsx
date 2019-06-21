@@ -4,7 +4,13 @@ import { SelectBox, translate } from 'cozy-ui/transpiled/react'
 
 import stripInvalidInputProps from './stripInvalidInputProps'
 
-const SelectBoxAdapter = ({ onChange, options, t, value, ...otherProps }) => {
+export const SelectBoxAdapter = ({
+  onChange,
+  options,
+  t,
+  value,
+  ...otherProps
+}) => {
   const currentValue = options.enumOptions.find(o => o.value === value)
   let translatedCurrentValue
   if (currentValue) {

@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SelectBoxAdapter component should match snapshot 1`] = `
+<Aware
+  onChange={[Function]}
+  options={
+    Array [
+      Object {
+        "label": "Foo ",
+        "value": "foo",
+      },
+      Object {
+        "label": "Bar ",
+        "value": "bar",
+      },
+    ]
+  }
+  value={
+    Object {
+      "label": "Foo ",
+      "value": "foo",
+    }
+  }
+/>
+`;
