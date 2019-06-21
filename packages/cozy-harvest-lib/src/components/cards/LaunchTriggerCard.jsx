@@ -16,7 +16,7 @@ export class LaunchTriggerCard extends PureComponent {
     return (
       <Card className={className} {...rest}>
         <TriggerLauncher trigger={trigger}>
-          {({ error, launch, running }) => {
+          {({ error, launch, running, trigger }) => {
             const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
               <div>

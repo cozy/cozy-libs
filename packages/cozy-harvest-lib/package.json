@@ -39,7 +39,7 @@
     "@babel/cli": "7.2.3",
     "babel-jest": "24.1.0",
     "babel-preset-cozy-app": "^1.5.1",
-    "cozy-client": "6.26.0",
+    "cozy-client": "6.46.0",
     "cozy-device-helper": "^1.7.2",
     "cozy-realtime": "3.0.0",
     "cozy-ui": "21.2.0",
@@ -54,7 +54,7 @@
     "react-dom": "16.8.6"
   },
   "peerDependencies": {
-    "cozy-client": "6.26.0",
+    "cozy-client": "6.46.0",
     "cozy-device-helper": "1.7.1",
     "cozy-realtime": "3.0.0",
     "cozy-ui": "21.2.0"
