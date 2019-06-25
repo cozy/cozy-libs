@@ -17,12 +17,26 @@ import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 class Duration extends React.PureComponent {
   render() {
     const { t, router, duration, amount, updateDuration } = this.props
-    const rate = 3.2 + (duration * 0.2) / 60
-    const actualRate = rate / 100 / duration
-    const installment =
-      (actualRate / (1 - Math.pow(1 + actualRate, -duration))) * amount
+
     const min = get(creditApplicationTemplate, 'procedureData.duration.min')
     const max = get(creditApplicationTemplate, 'procedureData.duration.max')
+    const defaultDuration = get(
+      creditApplicationTemplate,
+      'procedureData.duration.default'
+    )
+    const defaultAmount = get(
+      creditApplicationTemplate,
+      'procedureData.amount.default'
+    )
+
+    const simulationDuration = duration || defaultDuration
+    const simulationAmount = amount || defaultAmount
+
+    const rate = 3.2 + (simulationDuration * 0.2) / 60
+    const actualRate = rate / 100 / simulationDuration
+    const installment =
+      (actualRate / (1 - Math.pow(1 + actualRate, -simulationDuration))) *
+      simulationAmount
     return (
       <div>
         <Topbar title={t('duration.title')} />
@@ -31,7 +45,7 @@ class Duration extends React.PureComponent {
         <Label>{t('duration.label')}</Label>
         <Card>
           <SubTitle>
-            {duration} {t('duration.month')}
+            {simulationDuration} {t('duration.month')}
           </SubTitle>
           <div>
             {t('duration.reimbursement')} : {installment.toFixed(2)}{' '}
@@ -44,7 +58,7 @@ class Duration extends React.PureComponent {
         <Slider
           min={min}
           max={max}
-          value={duration}
+          value={simulationDuration}
           aria-label={t('duration.label')}
           onChange={(event, value) => updateDuration(value)}
         />
@@ -65,8 +79,8 @@ Duration.propTypes = {
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired,
-  duration: PropTypes.number.isRequired,
-  amount: PropTypes.number.isRequired,
+  duration: PropTypes.number,
+  amount: PropTypes.number,
   updateDuration: PropTypes.func.isRequired
 }
 

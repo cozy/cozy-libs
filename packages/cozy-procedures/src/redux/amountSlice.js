@@ -2,7 +2,7 @@ import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 
 const amountSlice = createSlice({
-  initialState: 20000,
+  initialState: null,
   slice: 'amount',
   reducers: {
     update: (state, action) => {
