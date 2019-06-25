@@ -1,4 +1,11 @@
-import reducer, { init, update, fetchMyself } from './personalDataSlice'
+import reducer, {
+  init,
+  update,
+  fetchMyself,
+  fetchMyselfLoading,
+  fetchMyselfSuccess,
+  fetchMyselfError
+} from './personalDataSlice'
 
 describe('Personal data', () => {
   it('should init fields with undefined values', () => {
@@ -40,6 +47,76 @@ describe('Personal data', () => {
       loading: false
     }
     expect(reducer(stateBefore, action)).toEqual(expectedState)
+  })
+
+  it('should handle fetchMyselfLoading action', () => {
+    const stateBefore = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe'
+      },
+      error: '',
+      loading: false
+    }
+    const action = fetchMyselfLoading({ loading: true })
+    const expected = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe'
+      },
+      error: '',
+      loading: true
+    }
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toEqual(expected)
+  })
+
+  it('should handle fetchMyselfSuccess action', () => {
+    const stateBefore = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe',
+        email: ''
+      },
+      error: '',
+      loading: false
+    }
+    const action = fetchMyselfSuccess({ email: 'john.doe@me.com' })
+    const expected = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe',
+        email: 'john.doe@me.com'
+      },
+      error: '',
+      loading: false
+    }
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toEqual(expected)
+  })
+
+  it('should handle fetchMyselfError action', () => {
+    const stateBefore = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe'
+      },
+      error: '',
+      loading: false
+    }
+    const action = fetchMyselfError({
+      error: 'Unable to get the contact'
+    })
+    const expected = {
+      data: {
+        firstname: 'John',
+        lastname: 'Doe'
+      },
+      error: 'Unable to get the contact',
+      loading: false
+    }
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toEqual(expected)
   })
 })
 
