@@ -3,7 +3,7 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Button, MainTitle, Icon } from 'cozy-ui/transpiled/react'
-import 'cozy-ui/assets/icons/ui/cozy-negative.svg'
+import 'cozy-ui/assets/icons/ui/cloud.svg'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import styles from '../styles.styl'
@@ -63,12 +63,7 @@ export class Welcome extends Component {
                 focusable="false"
               />
               <div className={styles['wizard-logo-badge']}>
-                <Icon
-                  icon="cozy-negative"
-                  width="20"
-                  height="20"
-                  color="white"
-                />
+                <Icon icon="cloud" width="20" height="20" color="white" />
               </div>
             </div>
             <MainTitle
