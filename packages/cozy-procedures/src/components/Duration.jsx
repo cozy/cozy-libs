@@ -15,8 +15,13 @@ import { withRouter } from 'react-router'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 class Duration extends React.PureComponent {
+  constructor(props) {
+    super(props)
+    this.confirm = this.confirm.bind(this)
+  }
+
   render() {
-    const { t, router, duration, amount, updateDuration } = this.props
+    const { t, duration, amount, updateDuration } = this.props
 
     const min = get(creditApplicationTemplate, 'procedureData.duration.min')
     const max = get(creditApplicationTemplate, 'procedureData.duration.max')
@@ -66,11 +71,21 @@ class Duration extends React.PureComponent {
           <Button
             label={t('confirm')}
             extension="full"
-            onClick={router.goBack}
+            onClick={this.confirm}
           />
         </div>
       </div>
     )
+  }
+
+  confirm() {
+    const { router, duration, updateDuration } = this.props
+    const defaultDuration = get(
+      creditApplicationTemplate,
+      'procedureData.duration.default'
+    )
+    updateDuration(duration || defaultDuration)
+    router.goBack()
   }
 }
 

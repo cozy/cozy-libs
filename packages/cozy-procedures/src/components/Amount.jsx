@@ -13,8 +13,14 @@ import {
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 class Amount extends React.Component {
+  constructor(props) {
+    super(props)
+    this.confirm = this.confirm.bind(this)
+    this.inputRef = React.createRef()
+  }
+
   render() {
-    const { t, router, amount, updateAmount } = this.props
+    const { t, amount, updateAmount } = this.props
     const min = get(creditApplicationTemplate, 'procedureData.amount.min')
     const max = get(creditApplicationTemplate, 'procedureData.amount.max')
     const defaultValue = get(
@@ -35,6 +41,7 @@ class Amount extends React.Component {
             max={max}
             value={amount || defaultValue}
             onChange={e => updateAmount(parseInt(e.target.value))}
+            inputRef={this.inputRef}
           />
         </div>
 
@@ -42,11 +49,16 @@ class Amount extends React.Component {
           <Button
             label={t('confirm')}
             extension="full"
-            onClick={router.goBack}
+            onClick={this.confirm}
           />
         </div>
       </div>
     )
+  }
+
+  confirm() {
+    this.props.updateAmount(parseInt(this.inputRef.current.value))
+    this.props.router.goBack()
   }
 }
 
