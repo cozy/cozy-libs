@@ -10,10 +10,10 @@ exports[`FormFillingStatus component should display a status if there are some c
     <span
       className="u-weirdGreen"
     >
-      personalDataForm.completedStatus.main {"completed":"5","total":"10"}
+      personalDataForm.completedStatus.main {"smart_count":"5","total":"10"}
     </span>
      
-    personalDataForm.completedStatus.rest undefined
+    personalDataForm.completedStatus.rest {"smart_count":"5"}
   </div>
 </FormFillingStatus>
 `;

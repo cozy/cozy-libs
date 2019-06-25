@@ -22,8 +22,8 @@
     "title": "Informations personnelles",
     "subtitle": "Complétez les informations suivantes pour finaliser votre dossier",
     "completedStatus": {
-      "main": "%{completed} sur %{total} informations",
-      "rest": "ont déjà été complétées."
+      "main": "%{smart_count} information sur %{total} |||| %{smart_count} informations sur %{total}",
+      "rest": "a déjà été complétée. |||| ont déjà été complétées."
     },
     "form": {
       "lastname": {
