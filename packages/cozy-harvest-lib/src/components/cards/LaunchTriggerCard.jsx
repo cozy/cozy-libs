@@ -19,9 +19,9 @@ export class LaunchTriggerCard extends PureComponent {
           {({ error, launch, running, trigger }) => {
             const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
-              <div>
-                <ul className="u-nolist u-pl-0">
-                  <li>
+              <div className="u-flex u-flex-row">
+                <ul className="u-nolist u-m-0 u-mr-1 u-pl-0">
+                  <li className="u-mb-1">
                     <Uppercase
                       tag="span"
                       className="u-coolGrey u-mr-half u-fz-tiny"
@@ -39,7 +39,7 @@ export class LaunchTriggerCard extends PureComponent {
                         : t('card.launchTrigger.lastSync.unknown')}
                     </Text>
                   </li>
-                  <li>
+                  <li className="u-mb-1">
                     <Uppercase
                       className="u-coolGrey u-mr-half u-fz-tiny"
                       tag="span"
@@ -55,7 +55,7 @@ export class LaunchTriggerCard extends PureComponent {
                     </Text>
                   </li>
                 </ul>
-                <div>
+                <div className="u-flex u-flex-justify-end u-flex-items-center u-flex-grow-1">
                   {error && (
                     <Text className="u-error">
                       {t('card.launchTrigger.error')}
