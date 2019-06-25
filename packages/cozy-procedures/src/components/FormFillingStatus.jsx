@@ -9,9 +9,12 @@ export const FormFillingStatus = ({ completed, total, t }) => {
   return (
     <div>
       <span className="u-weirdGreen">
-        {t('personalDataForm.completedStatus.main', { completed, total })}
+        {t('personalDataForm.completedStatus.main', {
+          smart_count: completed,
+          total
+        })}
       </span>{' '}
-      {t('personalDataForm.completedStatus.rest')}
+      {t('personalDataForm.completedStatus.rest', { smart_count: completed })}
     </div>
   )
 }

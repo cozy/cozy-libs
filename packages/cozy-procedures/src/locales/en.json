@@ -22,8 +22,8 @@
     "title": "Personal informations",
     "subtitle": "Please fill out the following information to complete your application",
     "completedStatus": {
-      "main": "%{completed}/%{total} info",
-      "rest": "have been completed by the app."
+      "main": "%{smart_count} information out of %{total} |||| %{smart_count} informations out of %{total}",
+      "rest": "has been completed by the app. |||| have been completed by the app."
     },
     "form": {
       "lastname": {
