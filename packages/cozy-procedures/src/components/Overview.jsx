@@ -10,6 +10,7 @@ import {
   Button,
   translate
 } from 'cozy-ui/transpiled/react'
+import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
 
 class Overview extends React.Component {
   navigateTo = view => {
@@ -23,6 +24,8 @@ class Overview extends React.Component {
     const {
       personalDataFieldsCompleted,
       personalDataFieldsTotal,
+      amount,
+      duration,
       t
     } = this.props
     return (
@@ -32,17 +35,29 @@ class Overview extends React.Component {
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.request')}</SubTitle>
           <div className="u-flex u-flex-items-center">
-            <Button
-              label={t('overview.amount')}
-              theme="ghost"
-              onClick={() => this.navigateTo('amount')}
-            />
-            {t('overview.over')}
-            <Button
-              label={t('overview.duration')}
-              theme="ghost"
-              onClick={() => this.navigateTo('duration')}
-            />
+            {amount !== null ? (
+              <InlineCard>
+                {t('overview.amountUnit', { smart_count: amount })}
+              </InlineCard>
+            ) : (
+              <Button
+                label={t('overview.amount')}
+                theme="ghost"
+                onClick={() => this.navigateTo('amount')}
+              />
+            )}
+            <span className="u-ph-half">{t('overview.over')}</span>
+            {duration !== null ? (
+              <InlineCard>
+                {t('overview.durationUnit', { smart_count: duration })}
+              </InlineCard>
+            ) : (
+              <Button
+                label={t('overview.duration')}
+                theme="ghost"
+                onClick={() => this.navigateTo('duration')}
+              />
+            )}
           </div>
         </section>
         <section className="u-mb-2">
@@ -77,6 +92,8 @@ class Overview extends React.Component {
 Overview.propTypes = {
   personalDataFieldsCompleted: PropTypes.number,
   personalDataFieldsTotal: PropTypes.number,
+  duration: PropTypes.number,
+  amount: PropTypes.number,
   location: PropTypes.shape({
     pathname: PropTypes.string
   }),

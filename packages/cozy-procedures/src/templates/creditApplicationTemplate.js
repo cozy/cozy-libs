@@ -243,7 +243,11 @@ export default {
   type: 'credit-application',
   description: '…',
   procedureData: {
-    amount: 30000,
+    amount: {
+      min: 1000,
+      max: 12000,
+      default: 3000
+    },
     duration: {
       min: 2,
       max: 60,

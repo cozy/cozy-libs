@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
+import get from 'lodash/get'
 import Topbar from './Topbar'
 import {
   Title,
@@ -9,10 +10,17 @@ import {
   Input,
   Button
 } from 'cozy-ui/transpiled/react/'
+import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 
 class Amount extends React.Component {
   render() {
     const { t, router, amount, updateAmount } = this.props
+    const min = get(creditApplicationTemplate, 'procedureData.amount.min')
+    const max = get(creditApplicationTemplate, 'procedureData.amount.max')
+    const defaultValue = get(
+      creditApplicationTemplate,
+      'procedureData.amount.default'
+    )
     return (
       <div>
         <Topbar title={t('amount.title')} />
@@ -23,7 +31,9 @@ class Amount extends React.Component {
           <Input
             type="number"
             id="amount-input"
-            value={amount}
+            min={min}
+            max={max}
+            value={amount || defaultValue}
             onChange={e => updateAmount(parseInt(e.target.value))}
           />
         </div>
@@ -45,7 +55,7 @@ Amount.propTypes = {
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired,
-  amount: PropTypes.number.isRequired,
+  amount: PropTypes.number,
   updateAmount: PropTypes.func.isRequired
 }
 

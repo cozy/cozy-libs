@@ -2,7 +2,7 @@ import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 
 const durationSlice = createSlice({
-  initialState: 24,
+  initialState: null,
   slice: 'duration',
   reducers: {
     update: (state, action) => {
