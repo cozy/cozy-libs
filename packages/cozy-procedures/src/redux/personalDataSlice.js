@@ -31,7 +31,7 @@ const personalDataSlice = createSlice({
       }
     },
     fetchMyselfLoading: (state, action) => {
-      state.loading = action.loading
+      state.loading = action.payload.loading
     },
     fetchMyselfSuccess: (state, action) => {
       const fieldsToPopulate = Object.keys(state.data)
@@ -45,7 +45,7 @@ const personalDataSlice = createSlice({
       }
     },
     fetchMyselfError: (state, action) => {
-      state.error = action.error
+      state.error = action.payload.error
     },
     update: (state, action) => {
       state.data = {
