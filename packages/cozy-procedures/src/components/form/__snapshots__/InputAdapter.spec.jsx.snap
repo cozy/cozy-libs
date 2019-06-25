@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputAdapter component should match snapshot 1`] = `
+<Input
+  error={false}
+  fullwidth={false}
+  onChange={[Function]}
+  size="large"
+  type="text"
+/>
+`;
