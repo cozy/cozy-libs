@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.4...cozy-procedures@0.7.0) (2019-06-25)
+
+
+### Bug Fixes
+
+* **procedures:** Pluralize FormFillingStatus ([a928df3](https://github.com/cozy/cozy-libs/commit/a928df3))
+
+
+### Features
+
+* **procedures:** Add form status to personal data form ([57dab1a](https://github.com/cozy/cozy-libs/commit/57dab1a))
+
+
+
+
+
 ## [0.6.4](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.3...cozy-procedures@0.6.4) (2019-06-25)
 
 
