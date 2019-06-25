@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`InputWithUnit component should match snapshot 1`] = `
+<div>
+  <Input
+    error={false}
+    fullwidth={false}
+    onChange={[Function]}
+    options={
+      Object {
+        "unit": "€",
+      }
+    }
+    size="large"
+    type="text"
+  />
+  <span>
+    € 
+  </span>
+</div>
+`;
