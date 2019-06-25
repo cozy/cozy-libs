@@ -4,7 +4,7 @@ import { Input, translate } from 'cozy-ui/transpiled/react'
 
 import stripInvalidInputProps from './stripInvalidInputProps'
 
-const InputAdapter = props => (
+export const InputAdapter = props => (
   <Input
     {...stripInvalidInputProps(props)}
     onChange={e => {
