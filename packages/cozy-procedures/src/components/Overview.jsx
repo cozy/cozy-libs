@@ -36,7 +36,7 @@ class Overview extends React.Component {
           <SubTitle className="u-mb-1">{t('overview.request')}</SubTitle>
           <div className="u-flex u-flex-items-center">
             {amount !== null ? (
-              <InlineCard>
+              <InlineCard onClick={() => this.navigateTo('amount')}>
                 {t('overview.amountUnit', { smart_count: amount })}
               </InlineCard>
             ) : (
@@ -48,7 +48,7 @@ class Overview extends React.Component {
             )}
             <span className="u-ph-half">{t('overview.over')}</span>
             {duration !== null ? (
-              <InlineCard>
+              <InlineCard onClick={() => this.navigateTo('duration')}>
                 {t('overview.durationUnit', { smart_count: duration })}
               </InlineCard>
             ) : (
