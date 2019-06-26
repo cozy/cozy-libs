@@ -17,6 +17,7 @@ const documentsSlice = createSlice({
         loading: true,
         error: false
       } */
+      initiated: false
     }
   },
   slice: 'documents',
@@ -24,7 +25,9 @@ const documentsSlice = createSlice({
     init: (state, action) => {
       return {
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
-          acc[fieldId] = {}
+          acc[fieldId] = {
+            documents: []
+          }
           return acc
         }, {}),
         ui: Object.keys(action.payload).reduce((acc, fieldId) => {
@@ -49,11 +52,16 @@ const documentsSlice = createSlice({
     fetchDocumentError: (state, action) => {
       const { idDoctemplate, error } = action.payload
       state.ui[idDoctemplate].error = error
+    },
+    setStatusDemarche: (state, action) => {
+      state.ui.initiated = action.payload.initiated
     }
   }
 })
 const selectors = {
-  getDocuments: state => get(state, [documentsSlice.slice, 'data'], {})
+  getDocuments: state => get(state, [documentsSlice.slice, 'data'], {}),
+  getInitiated: state =>
+    get(state, [documentsSlice.slice, 'ui', ['initiated']], {})
 }
 
 const { actions, reducer } = documentsSlice
@@ -62,7 +70,8 @@ export const {
   update,
   fetchDocumentLoading,
   fetchDocumentSuccess,
-  fetchDocumentError
+  fetchDocumentError,
+  setStatusDemarche
 } = actions
 
 export function fetchDocument(client, documentTemplate) {
@@ -105,5 +114,5 @@ export function fetchDocument(client, documentTemplate) {
   }
 }
 
-export const { getDocuments } = selectors
+export const { getDocuments, getInitiated } = selectors
 export default reducer
