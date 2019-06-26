@@ -1,7 +1,7 @@
 import React from 'react'
 import get from 'lodash/get'
 import { withClient } from 'cozy-client'
-
+import { Document } from 'cozy-doctypes'
 import creditApplicationTemplate from './templates/creditApplicationTemplate'
 class Procedure extends React.Component {
   componentDidMount() {
@@ -12,7 +12,9 @@ class Procedure extends React.Component {
       fetchDocument,
       client
     } = this.props
-
+    if (!Document.cozyClient) {
+      Document.registerClient(client)
+    }
     initPersonalData(
       get(creditApplicationTemplate, 'personalData.schema.properties', {})
     )
