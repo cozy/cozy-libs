@@ -9,9 +9,14 @@ const trigger = {
   _id: '65c347d1ef144288a64105702cc36e59'
 }
 
+const triggersMutationsMock = {
+  fetchTrigger: jest.fn().mockResolvedValue(trigger)
+}
+
 const props = {
   client,
-  trigger
+  trigger,
+  ...triggersMutationsMock
 }
 
 class Child extends Component {}
@@ -144,7 +149,7 @@ describe('TriggerLauncher', () => {
   })
 
   describe('handleError', () => {
-    it('should re-render with running being `false`', () => {
+    it('should re-render with running being `false`', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ error, launch, running }) => (
@@ -155,13 +160,13 @@ describe('TriggerLauncher', () => {
 
       wrapper.instance().launch()
       wrapper.update()
-      wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleError(new Error('Test error'))
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().running).toBe(false)
     })
 
-    it('should re-render with error being defined', () => {
+    it('should re-render with error being defined', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ error, launch, running }) => (
@@ -174,13 +179,13 @@ describe('TriggerLauncher', () => {
 
       wrapper.instance().launch()
       wrapper.update()
-      wrapper.instance().handleError(error)
+      await wrapper.instance().handleError(error)
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().error).toEqual(error)
     })
 
-    it('should hide twoFA modal', () => {
+    it('should hide twoFA modal', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
@@ -190,12 +195,12 @@ describe('TriggerLauncher', () => {
       wrapper.instance().launch()
       wrapper.update()
       wrapper.instance().displayTwoFAModal()
-      wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleError(new Error('Test error'))
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
     })
 
-    it('should unsubscribe from KonnectorJob', () => {
+    it('should unsubscribe from KonnectorJob', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
@@ -205,14 +210,14 @@ describe('TriggerLauncher', () => {
       wrapper.instance().launch()
       wrapper.update()
       wrapper.instance().displayTwoFAModal()
-      wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleError(new Error('Test error'))
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
     })
   })
 
   describe('handleSuccess', () => {
-    it('should re-render with running being `false`', () => {
+    it('should re-render with running being `false`', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
@@ -221,13 +226,13 @@ describe('TriggerLauncher', () => {
 
       wrapper.instance().launch()
       wrapper.update()
-      wrapper.instance().handleSuccess()
+      await wrapper.instance().handleSuccess()
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().running).toBe(false)
     })
 
-    it('should hide twoFA modal', () => {
+    it('should hide twoFA modal', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
@@ -236,7 +241,7 @@ describe('TriggerLauncher', () => {
 
       wrapper.instance().launch()
       wrapper.instance().displayTwoFAModal()
-      wrapper.instance().handleSuccess()
+      await wrapper.instance().handleSuccess()
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
     })

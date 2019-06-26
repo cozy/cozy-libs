@@ -53,9 +53,26 @@ export const fromKonnector = (
     dayOfMonth: startDate.getDate()
   })
 
+/**
+ * Transform the given cron string into frequency value
+ * @param  {String} cron cron value
+ * @return {String}      Frequency, could be `daily`,
+ * `hourly`, `monthly`, `weekly`, or null if undetermined
+ */
+export const toFrequency = cron => {
+  const isSet = part => part !== '*'
+  const [, minutes, hours, dayOfMonth, , dayOfWeek] = cron.split(' ')
+  if (isSet(dayOfWeek)) return WEEKLY
+  if (isSet(dayOfMonth)) return MONTHLY
+  if (isSet(hours)) return DAILY
+  if (isSet(minutes)) return HOURLY
+  return null
+}
+
 const cron = {
   fromFrequency,
-  fromKonnector
+  fromKonnector,
+  toFrequency
 }
 
 export default cron
