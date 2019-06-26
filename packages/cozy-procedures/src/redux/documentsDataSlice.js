@@ -3,6 +3,7 @@
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { AdministrativeProcedure } from 'cozy-doctypes'
 
 const documentsSlice = createSlice({
   initialState: {
@@ -44,9 +45,9 @@ const documentsSlice = createSlice({
       state.ui[idDoctemplate].loading = loading
     },
     fetchDocumentSuccess: (state, action) => {
-      const { idDoctemplate, loading, file } = action.payload
+      const { idDoctemplate, loading, files } = action.payload
       state.ui[idDoctemplate].loading = loading
-      state.data[idDoctemplate].document = file
+      state.data[idDoctemplate].documents = files
     },
     fetchDocumentError: (state, action) => {
       const { idDoctemplate, error } = action.payload
@@ -55,7 +56,7 @@ const documentsSlice = createSlice({
   }
 })
 const selectors = {
-  getSlice: state => get(state, documentsSlice.slice)
+  getDocuments: state => get(state, [documentsSlice.slice, 'data'], {})
 }
 
 const { actions, reducer } = documentsSlice
@@ -76,26 +77,20 @@ export function fetchDocument(client, documentTemplate) {
       })
     )
     try {
-      /* const docWithRules =
-          creditApplicationTemplate.documents[documentTemplate]
-        
-        //Ajout du metadata.
-        // Ajout du order by
-        const cozyRules = {
-          trashed: false,
-          type: 'file',
-          ...docWithRules.rules
-        }
-        const files = await client.collection('io.cozy.files').find(cozyRules)
+      const docWithRules = creditApplicationTemplate.documents[documentTemplate]
 
-        console.log('files', files) */
+      /**
+       *TODO : We need to work on the `count`
+       */
 
-      const files = {}
+      const files = await AdministrativeProcedure.getFilesByRules(docWithRules)
+
+      //const files = {}
       if (files.data) {
         dispatch(
           fetchDocumentSuccess({
             loading: false,
-            file: files.data[0],
+            files: files.data,
             idDoctemplate: documentTemplate
           })
         )
@@ -117,5 +112,5 @@ export function fetchDocument(client, documentTemplate) {
   }
 }
 
-export const { getSlice } = selectors
+export const { getDocuments } = selectors
 export default reducer

@@ -140,19 +140,21 @@ const documents = {
           mime: 'application/pdf'
         }
       ],
-      $and: [
-        {
-          $or: [
-            {
-              classification: 'tax_notice',
-              subject: 'income'
-            },
-            {
-              classification: 'certificate'
-            }
-          ]
-        }
-      ]
+      metadata: {
+        $and: [
+          {
+            $or: [
+              {
+                classification: 'tax_notice',
+                subject: 'income'
+              },
+              {
+                classification: 'certificate'
+              }
+            ]
+          }
+        ]
+      }
     }
   },
   tax_notice: {
