@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "parcel src/*.html"
+    "start": "env USE_REACT=true parcel src/*.html"
   },
   "dependencies": {
     "cozy-authentication": "^1.14.0",
