@@ -7,7 +7,7 @@ import { AdministrativeProcedure } from 'cozy-doctypes'
 import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
-import DocumentsHolder from './documents/DocumentsHolder'
+import DocumentsGroups from './documents/DocumentsGroups'
 import DocumentHolder from './documents/DocumentHolder'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 import DocumentsContainer from '../containers/DocumentsDataForm'
@@ -15,7 +15,7 @@ class Documents extends React.Component {
   render() {
     const { t, router, data: docsFromStore } = this.props
     const { documents: documentsTemplate } = creditApplicationTemplate
-    const documents = AdministrativeProcedure.mergeDocsFromStoreAndTemplate(
+    const mergedDocuments = AdministrativeProcedure.mergeDocsFromStoreAndTemplate(
       docsFromStore,
       documentsTemplate
     )
@@ -30,17 +30,14 @@ class Documents extends React.Component {
           <LoadingDocumentHolder />
           <DocumentHolder />
         </div>
-        {Object.values(documents).map((document, index) => {
+        {Object.values(mergedDocuments).map((document, index) => {
           return (
             <section key={index}>
               <Label>{t(`documents.labels.${document.label}`)}</Label>
-              {!document.documents && <EmptyDocumentHolder />}
-              {document.documents && (
-                <DocumentsHolder
-                  documents={document.documents}
-                  templateDoc={document}
-                />
-              )}
+              <DocumentsGroups
+                documents={document.documents}
+                templateDoc={document}
+              />
             </section>
           )
         })}
