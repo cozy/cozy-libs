@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.7.0...cozy-procedures@0.8.0) (2019-06-26)
+
+
+### Bug Fixes
+
+* Better english label ([91ddbfd](https://github.com/cozy/cozy-libs/commit/91ddbfd))
+* General margins ([9f09460](https://github.com/cozy/cozy-libs/commit/9f09460))
+
+
+### Features
+
+* Responsive topbar ([c42cd52](https://github.com/cozy/cozy-libs/commit/c42cd52))
+
+
+
+
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.6.4...cozy-procedures@0.7.0) (2019-06-25)
 
 
