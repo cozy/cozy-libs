@@ -13,7 +13,8 @@
     "notice": "By submitting the request, all informations in this application will be sent to us.",
     "button": "Send my application",
     "complete": "Fill out",
-    "over": "over"
+    "over": "over",
+    "zip_ready": "Your application is available in your files."
   },
   "amount": {
     "title": "Amount",
