@@ -1,4 +1,17 @@
+import MockDate from 'mockdate'
+
 import AdministrativeProcedure from './AdministrativeProcedure'
+
+const MOCKED_DATE = '2018-01-01T12:00:00.210Z'
+
+beforeAll(() => {
+  MockDate.set(MOCKED_DATE)
+})
+
+afterAll(() => {
+  jest.restoreAllMocks()
+  MockDate.reset()
+})
 
 describe('AdministrativeProcedure model', () => {
   describe('getPersonalData', () => {
@@ -62,6 +75,66 @@ describe('AdministrativeProcedure model', () => {
       }
       const result = AdministrativeProcedure.getPersonalData(dany, fields)
       expect(result).toEqual(expected)
+    })
+  })
+
+  describe('create', () => {
+    it('should return an io.cozy.procedures.administratives object', () => {
+      const data = {
+        procedureData: {
+          amount: 5000,
+          duration: 36
+        },
+        personalData: {
+          firstname: 'John',
+          lastname: 'Doe',
+          email: 'john.doe@me.com'
+        },
+        documents: []
+      }
+      const template = {
+        type: 'credit-application',
+        version: 1
+      }
+      const result = AdministrativeProcedure.create(data, template)
+      expect(result).toEqual({
+        procedureData: {
+          amount: 5000,
+          duration: 36
+        },
+        personalData: {
+          firstname: 'John',
+          lastname: 'Doe',
+          email: 'john.doe@me.com'
+        },
+        documents: [],
+        submissionDate: new Date(MOCKED_DATE),
+        templateId: 'credit-application',
+        templateVersion: 1
+      })
+    })
+  })
+
+  describe('createJson', () => {
+    it('should return the json for this procedure', () => {
+      const procedure = {
+        procedureData: {
+          amount: 5000,
+          duration: 36
+        },
+        personalData: {
+          firstname: 'John',
+          lastname: 'Doe',
+          email: 'john.doe@me.com'
+        },
+        documents: [],
+        submissionDate: new Date(MOCKED_DATE),
+        templateId: 'credit-application',
+        templateVersion: 1
+      }
+      const result = AdministrativeProcedure.createJson(procedure)
+      // turn the json back to an object for snapshot readability
+      expect(JSON.parse(result)).toMatchSnapshot()
     })
   })
 })
