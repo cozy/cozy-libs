@@ -1,17 +1,21 @@
 import { connect } from 'react-redux'
 import context from '../redux/context'
-import DocumentsDataForm from '../components/Documents'
-import { fetchDocument } from '../redux/documentsDataSlice'
+import { fetchDocument, getDocuments } from '../redux/documentsDataSlice'
 
-//const mapStateToProps = {}
+const mapStateToProps = state => ({
+  data: getDocuments(state)
+})
 
 const mapDispatchToProps = {
   fetchDocument
 }
 
-export default connect(
-  null,
-  mapDispatchToProps,
-  null,
-  { context }
-)(DocumentsDataForm)
+const DocumentsDataFormContainer = Component =>
+  connect(
+    mapStateToProps,
+    mapDispatchToProps,
+    null,
+    { context }
+  )(Component)
+
+export default DocumentsDataFormContainer

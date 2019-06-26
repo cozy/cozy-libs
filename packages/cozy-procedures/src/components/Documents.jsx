@@ -1,20 +1,45 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
-import Topbar from './Topbar'
 import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
+
+import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
+import DocumentsHolder from './documents/DocumentsHolder'
 import DocumentHolder from './documents/DocumentHolder'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import DocumentsContainer from '../containers/DocumentsDataForm'
 
 class Documents extends React.Component {
+  componentDidMount() {
+    //this.props.documents
+  }
+
+  mergeDocsFromStoreAndTemplate() {
+    const docsFromStore = this.props.data
+    const { documents: documentsTemplate } = creditApplicationTemplate
+
+    let sorted = []
+    Object.keys(documentsTemplate)
+      .sort(function(a, b) {
+        return documentsTemplate[a].order - documentsTemplate[b].order
+      })
+      .forEach(function(key) {
+        sorted[key] = documentsTemplate[key]
+      })
+
+    Object.keys(sorted).map(key => {
+      if (docsFromStore[key] && docsFromStore[key].documents) {
+        sorted[key].documents = docsFromStore[key].documents
+      }
+    })
+    return sorted
+  }
   render() {
     const { t, router } = this.props
-    const { documents: documentsTemplate } = creditApplicationTemplate
-    const fields = Object.values(documentsTemplate).sort(
-      document => document.order
-    )
+    const documents = this.mergeDocsFromStoreAndTemplate()
+
     return (
       <div>
         <Topbar title={t('documents.title')} />
@@ -25,12 +50,20 @@ class Documents extends React.Component {
           <LoadingDocumentHolder />
           <DocumentHolder />
         </div>
-        {fields.map((document, index) => (
-          <section key={index}>
-            <Label>{t(`documents.labels.${document.label}`)}</Label>
-            <EmptyDocumentHolder />
-          </section>
-        ))}
+        {Object.values(documents).map((document, index) => {
+          return (
+            <section key={index}>
+              <Label>{t(`documents.labels.${document.label}`)}</Label>
+              {!document.documents && <EmptyDocumentHolder />}
+              {document.documents && (
+                <DocumentsHolder
+                  documents={document.documents}
+                  templateDoc={document}
+                />
+              )}
+            </section>
+          )
+        })}
         <div>
           <Button
             label={t('confirm')}
@@ -50,4 +83,4 @@ Documents.propTypes = {
   }).isRequired
 }
 
-export default withRouter(translate()(Documents))
+export default withRouter(translate()(DocumentsContainer(Documents)))
