@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.8.0...cozy-procedures@0.8.1) (2019-06-26)
+
+
+### Bug Fixes
+
+* Handle missing ME contact ([8c1ea9c](https://github.com/cozy/cozy-libs/commit/8c1ea9c))
+
+
+
+
+
 # [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.7.0...cozy-procedures@0.8.0) (2019-06-26)
 
 
