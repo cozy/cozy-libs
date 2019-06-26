@@ -9,8 +9,11 @@ const getClient = customOptions => {
         scope: [
           'io.cozy.apps',
           'io.cozy.contacts',
+          'io.cozy.files',
           'io.cozy.konnectors',
-          'io.cozy.files'
+          'io.cozy.procedures.administratives',
+          'io.cozy.jobs:GET',
+          'io.cozy.jobs:POST:zip:worker'
         ],
         schema: {
           apps: {
@@ -19,11 +22,18 @@ const getClient = customOptions => {
           contacts: {
             doctype: 'io.cozy.contacts'
           },
+          files: {
+            doctype: 'io.cozy.files'
+          },
           konnectors: {
             doctype: 'io.cozy.konnectors'
           },
-          files: {
-            doctype: 'io.cozy.files'
+          administrativeProcedures: {
+            doctype: 'io.cozy.procedures.administratives'
+          },
+          // TODO: test without the schema?
+          jobs: {
+            doctype: 'io.cozy.jobs'
           }
         },
         oauth: {

@@ -13,7 +13,8 @@
     "notice": "En soumettant votre demande, la totalité des éléménts de ce dossier nous sera envoyée.",
     "button": "Envoyer mon dossier",
     "complete": "Compléter",
-    "over": "sur"
+    "over": "sur",
+    "zip_ready": "Votre dossier est disponible dans vos documents."
   },
   "amount": {
     "title": "Montant du crédit",
