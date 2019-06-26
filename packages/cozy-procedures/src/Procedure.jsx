@@ -3,6 +3,8 @@ import get from 'lodash/get'
 import { withClient } from 'cozy-client'
 import { Document } from 'cozy-doctypes'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import { Spinner } from 'cozy-ui/transpiled/react/'
+
 class Procedure extends React.Component {
   componentDidMount() {
     const {
@@ -10,7 +12,8 @@ class Procedure extends React.Component {
       initDocuments,
       fetchMyself,
       fetchDocument,
-      client
+      client,
+      setStatusDemarche
     } = this.props
     //We init our Document model here to be able to use CozyFile or AdministrativeProcedure models where we want
     if (!Document.cozyClient) {
@@ -21,6 +24,8 @@ class Procedure extends React.Component {
     )
 
     initDocuments(get(creditApplicationTemplate, 'documents'))
+    //Since init is done, we tell the app we can start to render thing
+    setStatusDemarche({ initiated: true })
     fetchMyself(client)
 
     const { documents: documentsTemplate } = creditApplicationTemplate
@@ -30,7 +35,15 @@ class Procedure extends React.Component {
   }
 
   render() {
-    return <div className="u-p-1 u-maw-6">{this.props.children}</div>
+    return (
+      <div className="u-p-1 u-maw-6">
+        {this.props.initiated === true ? (
+          this.props.children
+        ) : (
+          <Spinner size="xxlarge" />
+        )}
+      </div>
+    )
   }
 }
 
