@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
+import { AdministrativeProcedure } from 'cozy-doctypes'
 
 import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
@@ -11,33 +12,13 @@ import DocumentHolder from './documents/DocumentHolder'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 import DocumentsContainer from '../containers/DocumentsDataForm'
 class Documents extends React.Component {
-  componentDidMount() {
-    //this.props.documents
-  }
-
-  mergeDocsFromStoreAndTemplate() {
-    const docsFromStore = this.props.data
-    const { documents: documentsTemplate } = creditApplicationTemplate
-
-    let sorted = []
-    Object.keys(documentsTemplate)
-      .sort(function(a, b) {
-        return documentsTemplate[a].order - documentsTemplate[b].order
-      })
-      .forEach(function(key) {
-        sorted[key] = documentsTemplate[key]
-      })
-
-    Object.keys(sorted).map(key => {
-      if (docsFromStore[key] && docsFromStore[key].documents) {
-        sorted[key].documents = docsFromStore[key].documents
-      }
-    })
-    return sorted
-  }
   render() {
-    const { t, router } = this.props
-    const documents = this.mergeDocsFromStoreAndTemplate()
+    const { t, router, data: docsFromStore } = this.props
+    const { documents: documentsTemplate } = creditApplicationTemplate
+    const documents = AdministrativeProcedure.mergeDocsFromStoreAndTemplate(
+      docsFromStore,
+      documentsTemplate
+    )
 
     return (
       <div>
