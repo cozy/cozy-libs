@@ -6,7 +6,12 @@ const getClient = customOptions => {
   return new CozyClient(
     merge(
       {
-        scope: ['io.cozy.apps', 'io.cozy.contacts', 'io.cozy.konnectors'],
+        scope: [
+          'io.cozy.apps',
+          'io.cozy.contacts',
+          'io.cozy.konnectors',
+          'io.cozy.files'
+        ],
         schema: {
           apps: {
             doctype: 'io.cozy.apps'
@@ -16,6 +21,9 @@ const getClient = customOptions => {
           },
           konnectors: {
             doctype: 'io.cozy.konnectors'
+          },
+          files: {
+            doctype: 'io.cozy.files'
           }
         },
         oauth: {
