@@ -36,10 +36,7 @@ const documentsSlice = createSlice({
         }, {})
       }
     },
-    update: (state, action) => {
-      console.warn('update documents slice not implemented')
-      return state
-    },
+
     fetchDocumentLoading: (state, action) => {
       const { idDoctemplate, loading } = action.payload
       state.ui[idDoctemplate].loading = loading
