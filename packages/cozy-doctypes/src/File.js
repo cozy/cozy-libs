@@ -72,50 +72,6 @@ class CozyFile extends Document {
       }
     }
   }
-
-  /**
-   * 
-   * @param {object} rules 
-   * 
-      {
-         "$or": [
-              {
-                  "mime": "text/plain"
-              },
-              {
-                  "mime": "application/pdf"
-              }
-            ],
-            "$and": [
-              {
-                  "$or": [
-                    {
-                        "classification": "tax_notice",
-                        "subject": "income"
-                    },
-                    {
-                        "classification": "certificate"
-                    }
-                  ]
-              }
-            ]
-        
-  }
-   */
-  static getDocByRules(rules) {
-    //Ajout du metadata.
-    // Ajout du order by
-    const cozyRules = {
-      selector: {
-        trashed: false,
-        type: 'file',
-        ...rules
-      }
-    }
-    const files = this.cozyClient.collection('io.cozy.files').find(cozyRules)
-    console.log('files', files)
-    return files
-  }
 }
 
 CozyFile.doctype = 'io.cozy.files'

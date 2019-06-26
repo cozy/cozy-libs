@@ -3,16 +3,14 @@ import context from '../redux/context'
 import DocumentsDataForm from '../components/Documents'
 import { fetchDocument } from '../redux/documentsDataSlice'
 
-const mapStateToProps = state => ({
-  //formData: getSlice(state)
-})
+//const mapStateToProps = {}
 
 const mapDispatchToProps = {
   fetchDocument
 }
 
 export default connect(
-  mapStateToProps,
+  null,
   mapDispatchToProps,
   null,
   { context }
