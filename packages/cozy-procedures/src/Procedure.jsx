@@ -13,7 +13,7 @@ class Procedure extends React.Component {
   }
 
   render() {
-    return this.props.children
+    return <div className="u-p-1 u-maw-6">{this.props.children}</div>
   }
 }
 
