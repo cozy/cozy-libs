@@ -179,6 +179,20 @@ describe('fetchMyself action', () => {
     })
   })
 
+  it('should dispatch fetchMyselfSuccess with "myself" contact', async () => {
+    findSpy.mockResolvedValueOnce({ data: [] })
+    await fetchMyself(fakeClient)(dispatchSpy)
+    expect(dispatchSpy).toHaveBeenCalled()
+    expect(dispatchSpy).toHaveBeenNthCalledWith(1, {
+      type: 'personalData/fetchMyselfLoading',
+      payload: { loading: true }
+    })
+    expect(dispatchSpy).toHaveBeenNthCalledWith(2, {
+      type: 'personalData/fetchMyselfLoading',
+      payload: { loading: false }
+    })
+  })
+
   describe('selectors', () => {
     const state = {
       personalData: {
