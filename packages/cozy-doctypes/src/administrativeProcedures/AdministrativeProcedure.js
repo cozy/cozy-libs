@@ -81,6 +81,26 @@ class AdministrativeProcedure extends Document {
 
     return files
   }
+  /**
+   * This function is used to populate an array based on the order
+   * from the documentsTemplate and set the linked document from the store
+   */
+  static mergeDocsFromStoreAndTemplate(docsFromStore, documentsTemplate) {
+    let sorted = {}
+    Object.keys(documentsTemplate)
+      .sort(function(a, b) {
+        return documentsTemplate[a].order - documentsTemplate[b].order
+      })
+      .forEach(key => {
+        sorted[key] = documentsTemplate[key]
+      })
+    Object.keys(sorted).map(key => {
+      if (docsFromStore[key] && docsFromStore[key].documents) {
+        sorted[key].documents = docsFromStore[key].documents
+      }
+    })
+    return sorted
+  }
 }
 
 AdministrativeProcedure.doctype = 'io.cozy.procedures.administratives'
