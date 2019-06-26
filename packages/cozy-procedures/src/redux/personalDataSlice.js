@@ -73,8 +73,9 @@ export function fetchMyself(client) {
       const response = await client.collection('io.cozy.contacts').find({
         me: true
       })
-      if (response.data) {
-        dispatch(fetchMyselfSuccess(response.data[0]))
+      const contactSelf = get(response, 'data[0]')
+      if (contactSelf) {
+        dispatch(fetchMyselfSuccess(contactSelf))
       }
     } catch (error) {
       dispatch(
