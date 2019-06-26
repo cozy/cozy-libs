@@ -1,15 +1,33 @@
+/* global cozy */
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
-import BarButton from 'cozy-ui/transpiled/react/BarButton'
-import AppTitle from 'cozy-ui/transpiled/react/AppTitle'
+import {
+  withBreakpoints,
+  AppTitle,
+  MainTitle,
+  BarButton
+} from 'cozy-ui/transpiled/react'
 
-const Topbar = ({ title, router }) => (
-  <div className="u-flex">
-    <BarButton icon="back" onClick={router.goBack} />
-    <AppTitle>{title}</AppTitle>
-  </div>
-)
+const Topbar = ({ title, router, breakpoints: { isMobile } }) => {
+  const hasCozyBar = !!cozy.bar
+
+  if (isMobile && hasCozyBar) {
+    const { BarLeft, BarCenter } = cozy.bar
+    return (
+      <>
+        <BarLeft>
+          <BarButton icon="back" onClick={router.goBack} />
+        </BarLeft>
+        <BarCenter>
+          <AppTitle>{title}</AppTitle>
+        </BarCenter>
+      </>
+    )
+  } else {
+    return <MainTitle className="u-mb-2">{title}</MainTitle>
+  }
+}
 
 Topbar.propTypes = {
   title: PropTypes.string,
@@ -22,4 +40,4 @@ Topbar.defaultProps = {
   title: ''
 }
 
-export default withRouter(Topbar)
+export default withBreakpoints()(withRouter(Topbar))
