@@ -81,6 +81,33 @@ class AdministrativeProcedure extends Document {
 
     return files
   }
+
+  /**
+   * Returns a io.cozy.procedures.administratives object
+   *
+   * @param {object} data - The data we need for this type of procedure
+   * @param {ProcedureTemplate} template - The procedure's template
+   * @return {AdministrativeProcedure} the administrative procedure
+   */
+  static create(data, template) {
+    return {
+      ...data,
+      submissionDate: new Date(),
+      templateId: template.type,
+      templateVersion: template.version
+    }
+  }
+
+  /**
+   * Returns json that represents the administative procedure
+   *
+   * @param {AdministrativeProcedure}
+   * @return {string} - the json that represents this procedure
+   *
+   */
+  static createJson(administrativeProcedure) {
+    return JSON.stringify(administrativeProcedure)
+  }
 }
 
 AdministrativeProcedure.doctype = 'io.cozy.procedures.administratives'
