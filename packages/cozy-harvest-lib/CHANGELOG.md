@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.61.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.60.0...cozy-harvest-lib@0.61.0) (2019-06-26)
+
+
+### Features
+
+* **harvest:** Add frequency in LaunchTriggerCard ✨ ([0e634fd](https://github.com/cozy/cozy-libs/commit/0e634fd))
+* **harvest:** Add last success date in LaunchTriggerCard ✨ ([9f4dcf7](https://github.com/cozy/cozy-libs/commit/9f4dcf7))
+* **harvest:** Arrange desktop flex layout for LaunchTriggerCard 💄 ([95b53b6](https://github.com/cozy/cozy-libs/commit/95b53b6))
+* **harvest:** Make LaunchTriggerCard responsive 📱 ([3c54292](https://github.com/cozy/cozy-libs/commit/3c54292))
+* **harvest:** Prepare frequency methods 📝 ([34c272f](https://github.com/cozy/cozy-libs/commit/34c272f))
+* **harvest:** Prepare last success date methods 📝 ([110b6c2](https://github.com/cozy/cozy-libs/commit/110b6c2))
+* **harvest:** Refetch trigger after success or error in Launcher 📝 ([0073188](https://github.com/cozy/cozy-libs/commit/0073188))
+
+
+
+
+
 # [0.60.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.59.0...cozy-harvest-lib@0.60.0) (2019-06-21)
 
 

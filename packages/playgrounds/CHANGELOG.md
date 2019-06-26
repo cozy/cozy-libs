@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.1.3...cozy-playgrounds@1.2.0) (2019-06-26)
+
+
+### Bug Fixes
+
+* Better topbar UI ([d3be12d](https://github.com/cozy/cozy-libs/commit/d3be12d))
+* Dont redirect to root after refresh ([#515](https://github.com/cozy/cozy-libs/issues/515)) ([be15502](https://github.com/cozy/cozy-libs/commit/be15502))
+* Playground dependencies ([#519](https://github.com/cozy/cozy-libs/issues/519)) ([3520967](https://github.com/cozy/cozy-libs/commit/3520967))
+
+
+### Features
+
+* Upgrade cozy-ui ([5e7227f](https://github.com/cozy/cozy-libs/commit/5e7227f))
+* **playgrounds:** Add io.cozy.contacts to client's scope ([f4bd462](https://github.com/cozy/cozy-libs/commit/f4bd462))
+
+
+
+
+
 ## [1.1.3](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.1.2...cozy-playgrounds@1.1.3) (2019-06-12)
 
 **Note:** Version bump only for package cozy-playgrounds

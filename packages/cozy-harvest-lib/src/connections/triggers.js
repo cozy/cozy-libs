@@ -13,6 +13,11 @@ const createTrigger = async (client, attributes) => {
   return data
 }
 
+const fetchTrigger = async (client, id) => {
+  const { data } = await client.collection(TRIGGERS_DOCTYPE).get(id)
+  return data
+}
+
 /**
  * Triggers job associated to given trigger
  * @param  {Object} client CozyClient
@@ -41,6 +46,7 @@ const watchKonnectorJob = (client, job) => {
 export const triggersMutations = client => {
   return {
     createTrigger: createTrigger.bind(null, client),
+    fetchTrigger: fetchTrigger.bind(null, client),
     launchTrigger: launchTrigger.bind(null, client),
     watchKonnectorJob: watchKonnectorJob.bind(null, client)
   }

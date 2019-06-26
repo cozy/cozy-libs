@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "1.13.3",
+  "version": "1.14.0",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
@@ -23,7 +23,7 @@
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-preset-cozy-app": "^1.5.1",
     "cozy-client": "^6.27.0",
-    "cozy-ui": "^19.28.0",
+    "cozy-ui": "^21",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
     "enzyme": "^3.9.0",
