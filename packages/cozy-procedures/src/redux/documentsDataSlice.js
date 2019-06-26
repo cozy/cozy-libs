@@ -79,10 +79,6 @@ export function fetchDocument(client, documentTemplate) {
     try {
       const docWithRules = creditApplicationTemplate.documents[documentTemplate]
 
-      /**
-       *TODO : We need to work on the `count`
-       */
-
       const files = await AdministrativeProcedure.getFilesByRules(docWithRules)
 
       //const files = {}
