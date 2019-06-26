@@ -36,7 +36,8 @@ import KonnectorJob, {
 export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
-    this.state = { showTwoFAModal: false }
+    const { trigger } = this.props
+    this.state = { showTwoFAModal: false, trigger }
 
     this.handleTwoFA = this.handleTwoFA.bind(this)
     this.handleError = this.handleError.bind(this)
@@ -72,20 +73,32 @@ export class TriggerLauncher extends Component {
     this.setState({ showTwoFAModal: true })
   }
 
-  handleError(error) {
+  async handleError(error) {
     this.dismissTwoFAModal()
-    this.setState({ error, running: false })
     this.stopWatchingKonnectorJob()
+    const trigger = await this.refetchTrigger()
+    this.setState({ error, running: false, trigger })
   }
 
-  handleSuccess() {
+  async handleSuccess() {
     this.dismissTwoFAModal()
-    this.setState({ running: false })
     this.stopWatchingKonnectorJob()
+    const trigger = await this.refetchTrigger()
+    this.setState({ running: false, trigger })
   }
 
   handleTwoFA() {
     this.displayTwoFAModal()
+  }
+
+  async refetchTrigger() {
+    const { fetchTrigger, trigger } = this.props
+    try {
+      return await fetchTrigger(trigger._id)
+    } catch (error) {
+      this.setState({ error, running: false })
+      throw error
+    }
   }
 
   stopWatchingKonnectorJob() {
@@ -94,14 +107,15 @@ export class TriggerLauncher extends Component {
   }
 
   render() {
-    const { error, running, showTwoFAModal } = this.state
+    const { error, running, showTwoFAModal, trigger } = this.state
     const { children, konnectorJob, submitting } = this.props
     return (
       <div>
         {children({
           error,
           launch: this.launch,
-          running: !!running || !!submitting
+          running: !!running || !!submitting,
+          trigger
         })}
         {showTwoFAModal && (
           <TwoFAModal
