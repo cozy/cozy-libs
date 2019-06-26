@@ -79,7 +79,7 @@ export function fetchMyself(client) {
     } catch (error) {
       dispatch(
         fetchMyselfError({
-          error
+          error: error.message
         })
       )
     }

@@ -171,7 +171,7 @@ describe('fetchMyself action', () => {
     })
     expect(dispatchSpy).toHaveBeenNthCalledWith(2, {
       type: 'personalData/fetchMyselfError',
-      payload: { error: { message: 'Could not fetch myself' } }
+      payload: { error: 'Could not fetch myself' }
     })
     expect(dispatchSpy).toHaveBeenNthCalledWith(3, {
       type: 'personalData/fetchMyselfLoading',
