@@ -37,6 +37,9 @@ export class KonnectorModal extends PureComponent {
   constructor(props) {
     super(props)
     this.fetchIcon = this.fetchIcon.bind(this)
+    this.handleKonnectorJobError = this.handleKonnectorJobError.bind(this)
+    this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
+    this.handleTriggerLaunch = this.handleTriggerLaunch.bind(this)
   }
 
   componentDidMount() {
@@ -87,6 +90,18 @@ export class KonnectorModal extends PureComponent {
     })
   }
 
+  handleKonnectorJobError(trigger) {
+    this.setState({ isJobRunning: false, trigger })
+  }
+
+  handleKonnectorJobSuccess(trigger) {
+    this.setState({ isJobRunning: false, trigger })
+  }
+
+  handleTriggerLaunch() {
+    this.setState({ isJobRunning: true })
+  }
+
   render() {
     const {
       dismissAction,
@@ -98,7 +113,7 @@ export class KonnectorModal extends PureComponent {
       t
     } = this.props
 
-    const { account, error, fetching, trigger } = this.state
+    const { account, error, fetching, isJobRunning, trigger } = this.state
     const triggerError = triggers.getError(trigger)
 
     return (
@@ -136,14 +151,19 @@ export class KonnectorModal extends PureComponent {
               />
             ) : (
               <div className="u-mb-2">
-                {triggerError && (
+                {!isJobRunning && triggerError && (
                   <TriggerErrorInfo
                     className="u-mb-1"
                     error={triggerError}
                     konnector={konnector}
                   />
                 )}
-                <LaunchTriggerCard trigger={trigger} />
+                <LaunchTriggerCard
+                  trigger={trigger}
+                  onError={this.handleKonnectorJobError}
+                  onLaunch={this.handleTriggerLaunch}
+                  onSuccess={this.handleKonnectorJobSuccess}
+                />
                 <TriggerManager
                   account={account}
                   konnector={konnector}
