@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.62.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.4...cozy-harvest-lib@0.62.0) (2019-06-27)
+
+
+### Features
+
+* **harvest:** Do not show error when job running on KonnectorModal ✨ ([355fc37](https://github.com/cozy/cozy-libs/commit/355fc37))
+* **harvest:** Give callbacks to TriggerLauncher ✨ ([9705a42](https://github.com/cozy/cozy-libs/commit/9705a42))
+* **harvest:** Let KonnectorModal display trigger error 📝 ([2591ddd](https://github.com/cozy/cozy-libs/commit/2591ddd))
+* **harvest:** Pass props from LaunchTriggerCard to TriggerLauncher 📝 ([6fd3ce5](https://github.com/cozy/cozy-libs/commit/6fd3ce5))
+
+
+
+
+
 ## [0.61.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.3...cozy-harvest-lib@0.61.4) (2019-06-27)
 
 
