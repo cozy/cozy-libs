@@ -18,7 +18,12 @@
     "label": "Montant du crédit"
   },
   "duration": {
-    "title": "Durée du crédit"
+    "title": "Durée du crédit",
+    "subtitle": "Sur quelle durée souhaitez-vous  rembourser le crédit ?",
+    "label": "Durée de remboursement",
+    "reimbursement": "Remboursement",
+    "rate": "Taux annuel Effectif Global",
+    "unit": "€/mois"
   },
   "personalDataForm": {
     "title": "Informations personnelles",
