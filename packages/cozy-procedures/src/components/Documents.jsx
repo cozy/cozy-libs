@@ -24,11 +24,6 @@ class Documents extends React.Component {
       <div>
         <Topbar title={t('documents.title')} />
         <Title>{t('documents.subtitle')}</Title>
-        <div>
-          <Label>Demo, to remove</Label>
-          <EmptyDocumentHolder />
-          <LoadingDocumentHolder />
-        </div>
         {Object.keys(populatedTemplateDocsWithStore).map((key, index) => {
           const {
             documents: documentsFromStore

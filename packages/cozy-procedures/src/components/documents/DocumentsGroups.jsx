@@ -12,7 +12,7 @@ const DocumentsGroups = ({ documents, templateDoc, keyDoc }) => {
     value ? (
       <DocumentHolder document={value} key={index} keyDoc={keyDoc} />
     ) : (
-      <EmptyDocumentHolder key={index} />
+      <EmptyDocumentHolder key={index} keyDoc={keyDoc} />
     )
   )
 }
