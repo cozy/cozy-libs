@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.1...cozy-harvest-lib@0.61.2) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Konnector modal title 🌐 ([1f672d4](https://github.com/cozy/cozy-libs/commit/1f672d4))
+
+
+
+
+
 ## [0.61.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.0...cozy-harvest-lib@0.61.1) (2019-06-27)
 
 **Note:** Version bump only for package cozy-harvest-lib
