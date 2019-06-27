@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.8.2...cozy-procedures@0.9.0) (2019-06-27)
+
+
+### Features
+
+* Almost a full template ([#540](https://github.com/cozy/cozy-libs/issues/540)) ([d8047d0](https://github.com/cozy/cozy-libs/commit/d8047d0))
+
+
+
+
+
 ## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.8.1...cozy-procedures@0.8.2) (2019-06-27)
 
 
