@@ -7,9 +7,9 @@ import {
   Title,
   SubTitle,
   Label,
-  Button
+  Button,
+  Card
 } from 'cozy-ui/transpiled/react'
-import Card from 'cozy-ui/transpiled/react/Card'
 import Slider from '@material-ui/lab/Slider'
 import { withRouter } from 'react-router'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'

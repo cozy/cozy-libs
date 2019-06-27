@@ -23,14 +23,14 @@
     "@babel/cli": "7.4.4",
     "@material-ui/core": "3.9.3",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "cozy-ui": "^20.18.0",
+    "cozy-ui": "^20.24.0",
     "enzyme-to-json": "3.3.5",
     "jest": "24.8.0"
   },
   "peerDependencies": {
     "@material-ui/core": "3.9.3",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "cozy-ui": "^20.18.0"
+    "cozy-ui": "^20.24.0"
   },
   "jest": {
     "setupFiles": [
