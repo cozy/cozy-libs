@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.9.0...cozy-procedures@0.10.0) (2019-06-27)
+
+
+### Bug Fixes
+
+* Better UX ([e9f8062](https://github.com/cozy/cozy-libs/commit/e9f8062))
+* Upgrade cozy-ui ([252dc9c](https://github.com/cozy/cozy-libs/commit/252dc9c))
+
+
+### Features
+
+* Connect Overview screen ([c0143c2](https://github.com/cozy/cozy-libs/commit/c0143c2))
+* Connected amount view ([a7fdca6](https://github.com/cozy/cozy-libs/commit/a7fdca6))
+* Dumb duration view ([79692b5](https://github.com/cozy/cozy-libs/commit/79692b5))
+* Duration container ([1c15806](https://github.com/cozy/cozy-libs/commit/1c15806))
+* Simple amount view ([744f812](https://github.com/cozy/cozy-libs/commit/744f812))
+
+
+
+
+
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.8.2...cozy-procedures@0.9.0) (2019-06-27)
 
 
