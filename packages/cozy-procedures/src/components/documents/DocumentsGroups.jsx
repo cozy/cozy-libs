@@ -1,7 +1,8 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import DocumentHolder from './DocumentHolder'
 import EmptyDocumentHolder from './EmptyDocumentHolder'
-//TODO Remove default values. Should be called only after initiated
+
 const DocumentsGroups = ({ documents, templateDoc }) => {
   const slots = [
     ...documents,
@@ -11,9 +12,13 @@ const DocumentsGroups = ({ documents, templateDoc }) => {
     value ? (
       <DocumentHolder document={value} key={index} />
     ) : (
-      <EmptyDocumentHolder />
+      <EmptyDocumentHolder key={index} />
     )
   )
 }
 
+DocumentsGroups.propTypes = {
+  documents: PropTypes.array,
+  templateDoc: PropTypes.object
+}
 export default DocumentsGroups

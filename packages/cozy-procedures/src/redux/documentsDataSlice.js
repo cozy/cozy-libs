@@ -9,7 +9,7 @@ const documentsSlice = createSlice({
   initialState: {
     data: {
       /*  payslip: {
-        ...files
+        documents: []
       } */
     },
     ui: {
