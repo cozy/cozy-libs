@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.62.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.0...cozy-harvest-lib@0.62.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Disable button when editing if an error exists 🚑 ([584deb7](https://github.com/cozy/cozy-libs/commit/584deb7))
+
+
+
+
+
 # [0.62.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.4...cozy-harvest-lib@0.62.0) (2019-06-27)
 
 
