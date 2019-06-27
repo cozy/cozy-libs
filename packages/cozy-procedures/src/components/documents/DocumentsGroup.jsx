@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import DocumentHolder from './DocumentHolder'
 import EmptyDocumentHolder from './EmptyDocumentHolder'
 
-const DocumentsGroups = ({ documents, templateDoc }) => {
+const DocumentsGroup = ({ documents, templateDoc }) => {
   const slots = [
     ...documents,
     ...new Array(templateDoc.count - documents.length)
@@ -17,8 +17,8 @@ const DocumentsGroups = ({ documents, templateDoc }) => {
   )
 }
 
-DocumentsGroups.propTypes = {
+DocumentsGroup.propTypes = {
   documents: PropTypes.array,
   templateDoc: PropTypes.object
 }
-export default DocumentsGroups
+export default DocumentsGroup

@@ -59,7 +59,7 @@ class AdministrativeProcedure extends Document {
       type: 'file',
       ...rules
     }
-    //Create an index to be order to query and sort
+    //Create an index in order to query and sort
     await this.cozyClient
       .collection('io.cozy.files')
       .createIndex(['metadata.datetime', 'metadata.classification'])
@@ -95,12 +95,11 @@ class AdministrativeProcedure extends Document {
       })
       .forEach(key => {
         sorted[key] = documentsTemplate[key]
+        if (docsFromStore[key] && docsFromStore[key].documents) {
+          sorted[key].documents = docsFromStore[key].documents
+        }
       })
-    Object.keys(sorted).map(key => {
-      if (docsFromStore[key] && docsFromStore[key].documents) {
-        sorted[key].documents = docsFromStore[key].documents
-      }
-    })
+
     return sorted
   }
 }

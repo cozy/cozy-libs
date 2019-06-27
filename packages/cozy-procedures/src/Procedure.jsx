@@ -14,7 +14,7 @@ class Procedure extends React.Component {
       fetchMyself,
       fetchDocument,
       client,
-      setStatusDemarche
+      setProcedureStatus
     } = this.props
     //We init our Document model here to be able to use CozyFile or AdministrativeProcedure models where we want
     if (!Document.cozyClient) {
@@ -26,7 +26,7 @@ class Procedure extends React.Component {
 
     initDocuments(get(creditApplicationTemplate, 'documents'))
     //Since init is done, we tell the app we can start to render thing
-    setStatusDemarche({ initiated: true })
+    setProcedureStatus({ initiated: true })
     fetchMyself(client)
 
     const { documents: documentsTemplate } = creditApplicationTemplate
@@ -53,7 +53,7 @@ Procedure.propTypes = {
   initDocuments: PropTypes.func.isRequired,
   fetchMyself: PropTypes.func.isRequired,
   fetchDocument: PropTypes.func.isRequired,
-  setStatusDemarche: PropTypes.func.isRequired,
+  setProcedureStatus: PropTypes.func.isRequired,
   initiated: PropTypes.bool.isRequired,
   client: PropTypes.object.isRequired
 }

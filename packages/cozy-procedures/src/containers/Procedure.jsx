@@ -8,7 +8,7 @@ import {
 import {
   init as initDocuments,
   fetchDocument,
-  setStatusDemarche,
+  setProcedureStatus,
   getInitiated
 } from '../redux/documentsDataSlice'
 
@@ -23,7 +23,7 @@ const mapDispatchToProps = {
   fetchMyself,
   initDocuments,
   fetchDocument,
-  setStatusDemarche
+  setProcedureStatus
 }
 
 export default withLocales(

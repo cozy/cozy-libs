@@ -1,5 +1,3 @@
-/*eslint no-unused-vars: off*/
-/*eslint no-console: off*/
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
@@ -53,7 +51,7 @@ const documentsSlice = createSlice({
       const { idDoctemplate, error } = action.payload
       state.ui[idDoctemplate].error = error
     },
-    setStatusDemarche: (state, action) => {
+    setProcedureStatus: (state, action) => {
       state.ui.initiated = action.payload.initiated
     }
   }
@@ -71,7 +69,7 @@ export const {
   fetchDocumentLoading,
   fetchDocumentSuccess,
   fetchDocumentError,
-  setStatusDemarche
+  setProcedureStatus
 } = actions
 
 export function fetchDocument(client, documentTemplate) {

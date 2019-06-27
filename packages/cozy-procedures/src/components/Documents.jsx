@@ -7,7 +7,7 @@ import { AdministrativeProcedure } from 'cozy-doctypes'
 import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
-import DocumentsGroups from './documents/DocumentsGroups'
+import DocumentsGroup from './documents/DocumentsGroup'
 import DocumentHolder from './documents/DocumentHolder'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import DocumentsContainer from '../containers/DocumentsDataForm'
@@ -37,7 +37,7 @@ class Documents extends React.Component {
             return (
               <section key={index}>
                 <Label>{t(`documents.labels.${documentTemplate.label}`)}</Label>
-                <DocumentsGroups
+                <DocumentsGroup
                   documents={documentsFromStore}
                   templateDoc={documentTemplate}
                 />
