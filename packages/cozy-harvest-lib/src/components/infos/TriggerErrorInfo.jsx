@@ -5,6 +5,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 
 import { KonnectorJobError } from '../../helpers/konnectors'
+import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
 
 /**
@@ -22,7 +23,7 @@ const getKonnectorJobKey = code => `error.job.${code}`
  * This component is strongly related with the content of locales files and
  * deals mainly with translation concerns.
  */
-export class AccountFormError extends PureComponent {
+export class TriggerErrorInfo extends PureComponent {
   defaultKey = 'error.job.UNKNOWN_ERROR'
 
   /**
@@ -71,18 +72,18 @@ export class AccountFormError extends PureComponent {
     console.error(error)
     return (
       <Infos
-        title={this.getErrorLocale('title')}
-        text={<Markdown source={this.getErrorLocale('description')} />}
         isImportant
+        text={<Markdown source={this.getErrorLocale('description')} />}
+        title={this.getErrorLocale('title')}
       />
     )
   }
 }
 
-AccountFormError.proptTypes = {
+TriggerErrorInfo.proptTypes = {
   error: PropTypes.object.isRequired,
   konnector: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 }
 
-export default translate()(AccountFormError)
+export default translate()(withKonnectorLocales(TriggerErrorInfo))

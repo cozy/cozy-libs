@@ -120,21 +120,6 @@ exports[`AccountForm should render error 1`] = `
         },
       }
     }
-    t={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            "accountForm.submit.label",
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": "accountForm.submit.label",
-          },
-        ],
-      }
-    }
   />
   <AccountFields
     container={null}

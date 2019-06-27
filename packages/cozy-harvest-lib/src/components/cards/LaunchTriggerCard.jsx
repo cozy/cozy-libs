@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import pick from 'lodash/pick'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -8,14 +9,18 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Uppercase, Text } from 'cozy-ui/transpiled/react/Text'
 
 import * as triggers from '../../helpers/triggers'
-import TriggerLauncher from '../TriggerLauncher'
+import TriggerLauncher, {
+  TriggerLauncher as DumbTriggerLauncher
+} from '../TriggerLauncher'
 
 export class LaunchTriggerCard extends PureComponent {
   render() {
-    const { className, f, trigger, t, ...rest } = this.props
+    const { className, f, t, ...rest } = this.props
     return (
-      <Card className={className} {...rest}>
-        <TriggerLauncher trigger={trigger}>
+      <Card className={className} {...pick(rest, Object.keys(Card.propTypes))}>
+        <TriggerLauncher
+          {...pick(this.props, Object.keys(DumbTriggerLauncher.propTypes))}
+        >
           {({ error, launch, running, trigger }) => {
             const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
@@ -84,7 +89,7 @@ export class LaunchTriggerCard extends PureComponent {
 
 LaunchTriggerCard.propTypes = {
   ...Card.propTypes,
-  trigger: PropTypes.object.isRequired,
+  ...TriggerLauncher.propTypes,
   f: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
