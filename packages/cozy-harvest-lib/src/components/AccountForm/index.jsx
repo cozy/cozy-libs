@@ -4,13 +4,14 @@ import PropTypes from 'prop-types'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
-import { translate, extend } from 'cozy-ui/transpiled/react/I18n'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import AccountFields from './AccountFields'
 import AccountFormError from './Error'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
+import withKonnectorLocales from '../hoc/withKonnectorLocales'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -27,11 +28,6 @@ const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 export class AccountForm extends PureComponent {
   constructor(props) {
     super(props)
-    const { konnector, lang } = props
-    const { locales } = konnector
-    if (locales && lang) {
-      extend(locales[lang])
-    }
 
     this.inputs = {}
     this.inputFocused = null
@@ -269,4 +265,4 @@ AccountForm.defaultProps = {
   showError: true
 }
 
-export default translate()(AccountForm)
+export default translate()(withKonnectorLocales(AccountForm))
