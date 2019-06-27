@@ -48,8 +48,8 @@ export class AccountForm extends PureComponent {
    * @return {Boolean}
    */
   isSubmittable({ dirty, error, initialValues, valid }) {
-    const untouched = initialValues && !dirty
-    return !untouched && (error || valid)
+    const modified = !initialValues || dirty
+    return modified && (error || valid)
   }
 
   /**
