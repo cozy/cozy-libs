@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.8.1...cozy-procedures@0.8.2) (2019-06-27)
+
+
+### Bug Fixes
+
+* **procedures:** Handle errors correctly in personalDataSlice ([d308b30](https://github.com/cozy/cozy-libs/commit/d308b30))
+
+
+
+
+
 ## [0.8.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.8.0...cozy-procedures@0.8.1) (2019-06-26)
 
 
