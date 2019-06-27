@@ -8,7 +8,6 @@ import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
 import DocumentsGroups from './documents/DocumentsGroups'
-import DocumentHolder from './documents/DocumentHolder'
 import creditApplicationTemplate from '../templates/creditApplicationTemplate'
 import DocumentsContainer from '../containers/DocumentsDataForm'
 class Documents extends React.Component {
