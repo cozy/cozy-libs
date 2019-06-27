@@ -13,7 +13,7 @@
     "cozy-authentication": "^1.14.0",
     "cozy-client": "*",
     "cozy-device-helper": "^1.7.2",
-    "cozy-ui": "^20.18.0",
+    "cozy-ui": "20.24.0",
     "react": "^16.8.3",
     "react-dom": "^16.5.2",
     "react-redux": "^7.0.3",
