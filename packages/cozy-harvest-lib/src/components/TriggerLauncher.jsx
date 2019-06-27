@@ -47,7 +47,7 @@ export class TriggerLauncher extends Component {
   }
 
   launch() {
-    const { client, trigger } = this.props
+    const { client, onLaunch, trigger } = this.props
     const konnectorJob = new KonnectorJob(client, trigger)
     konnectorJob
       .on(ERROR_EVENT, this.handleError)
@@ -60,6 +60,8 @@ export class TriggerLauncher extends Component {
       konnectorJob,
       running: true
     })
+
+    if (typeof onLaunch === 'function') onLaunch(trigger)
 
     konnectorJob.launch()
   }
@@ -78,6 +80,8 @@ export class TriggerLauncher extends Component {
     this.stopWatchingKonnectorJob()
     const trigger = await this.refetchTrigger()
     this.setState({ error, running: false, trigger })
+    const { onError } = this.props
+    if (typeof onError === 'function') onError(trigger)
   }
 
   async handleSuccess() {
@@ -85,6 +89,8 @@ export class TriggerLauncher extends Component {
     this.stopWatchingKonnectorJob()
     const trigger = await this.refetchTrigger()
     this.setState({ running: false, trigger })
+    const { onSuccess } = this.props
+    if (typeof onSuccess === 'function') onSuccess(trigger)
   }
 
   handleTwoFA() {
@@ -138,6 +144,18 @@ TriggerLauncher.propTypes = {
    * CozyClient instance
    */
   client: PropTypes.object.isRequired,
+  /**
+   * Callback to call when the trigger is launched
+   */
+  onLaunch: PropTypes.func,
+  /**
+   * Callback to call when the konnector job succeeds
+   */
+  onSuccess: PropTypes.func,
+  /**
+   * Callback to call when the konnector job fails
+   */
+  onError: PropTypes.func,
   /**
    * Indicates if trigger is already runnning
    */
