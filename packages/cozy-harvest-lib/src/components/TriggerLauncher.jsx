@@ -159,7 +159,11 @@ TriggerLauncher.propTypes = {
   /**
    * Indicates if trigger is already runnning
    */
-  submitting: PropTypes.bool
+  submitting: PropTypes.bool,
+  /**
+   * Trigger to launch
+   */
+  trigger: PropTypes.object.isRequired
 }
 
 export default withLocales(
