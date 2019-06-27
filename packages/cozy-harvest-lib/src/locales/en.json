@@ -33,7 +33,7 @@
         "undefined": "Manually"
       },
       "lastSync": {
-        "label": "Last synchronisation:",
+        "label": "Update:",
         "syncing": "Running…",
         "unknown": "Unknown",
         "format": "MMMM D[,] YYYY [at] HH[:]mm"
