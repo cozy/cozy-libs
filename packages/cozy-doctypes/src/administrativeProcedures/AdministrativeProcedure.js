@@ -84,6 +84,8 @@ class AdministrativeProcedure extends Document {
   /**
    * This function is used to populate an array based on the order
    * from the documentsTemplate and set the linked document from the store
+   * @param {Object} docsFromStore
+   * @param {Object} documentsTemplate
    */
   static mergeDocsFromStoreAndTemplate(docsFromStore, documentsTemplate) {
     let sorted = {}
