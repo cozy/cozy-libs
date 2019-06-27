@@ -131,31 +131,110 @@ const documents = {
     label: 'identity_document',
     order: 1,
     count: 1,
-    rules: {}
+    rules: {
+      $or: [
+        {
+          mime: 'text/plain'
+        },
+        {
+          mime: 'application/pdf'
+        },
+        {
+          class: 'image'
+        }
+      ],
+      metadata: {
+        classification: 'identity_document'
+      }
+    }
   },
   tax_notice: {
     label: 'tax_notice',
     order: 2,
     count: 1,
-    rules: {}
+    rules: {
+      $or: [
+        {
+          mime: 'text/plain'
+        },
+        {
+          mime: 'application/pdf'
+        }
+      ],
+      metadata: {
+        classification: 'tax_notice',
+        subject: 'income'
+      }
+    }
   },
   payslip: {
     label: 'payslip',
     order: 3,
     count: 3,
-    rules: {}
+    rules: {
+      $or: [
+        {
+          mime: 'text/plain'
+        },
+        {
+          mime: 'application/pdf'
+        }
+      ],
+      metadata: {
+        classification: 'payslip'
+      }
+    }
   },
   bank_identity: {
     label: 'bank_identity',
     order: 4,
     count: 1,
-    rules: {}
+    rules: {
+      $or: [
+        {
+          mime: 'text/plain'
+        },
+        {
+          mime: 'application/pdf'
+        }
+      ],
+      metadata: {}
+    }
   },
   address_certificate: {
     label: 'address_certificate',
     order: 5,
     count: 1,
-    rules: {}
+    rules: {
+      $or: [
+        {
+          mime: 'text/plain'
+        },
+        {
+          mime: 'application/pdf'
+        }
+      ],
+      metadata: {
+        $or: [
+          {
+            classification: 'certificate',
+            categories: 'energy',
+            subject: 'subscription'
+          },
+          {
+            classification: 'invoicing',
+            isSubsciption: true,
+            categories: {
+              $in: ['internet', 'phone', 'energy']
+            }
+          },
+          {
+            classification: 'tax_notice',
+            $in: ['income', 'residence']
+          }
+        ]
+      }
+    }
   }
 }
 
@@ -171,5 +250,6 @@ export default {
     schema,
     uiSchema
   },
-  documents
+  documents,
+  pathToSave: '/Administratif'
 }
