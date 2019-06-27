@@ -8,6 +8,8 @@
     "start": "env USE_REACT=true parcel src/*.html"
   },
   "dependencies": {
+    "@material-ui/core": "3.9.3",
+    "@material-ui/lab": "^3.0.0-alpha.30",
     "cozy-authentication": "^1.14.0",
     "cozy-client": "*",
     "cozy-device-helper": "^1.7.2",
