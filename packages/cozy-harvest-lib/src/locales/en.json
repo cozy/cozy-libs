@@ -241,7 +241,7 @@
   },
   "modal": {
     "konnector": {
-      "title": "Connect your %{name} account",
+      "title": "Edit your %{name} account",
       "error": {
         "title": "Unable to retrieve your account",
         "description": "The account cannot be retrieved (%{message}).",
