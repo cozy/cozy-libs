@@ -198,6 +198,33 @@ describe('AccountForm', () => {
       )
     })
 
+    /**
+     * This case corresponds to an account edition of a trigger already having
+     * an error. We are not supposed to submit it without modifications.
+     */
+    it('should be disabled with initialValues AND error', () => {
+      const account = {
+        auth: {
+          username: 'foo',
+          passphrase: 'bar'
+        }
+      }
+
+      assertButtonDisabled(
+        shallow(
+          <AccountForm
+            account={account}
+            error={new Error('Existing trigger error')}
+            konnector={fixtures.konnector}
+            onSubmit={onSubmit}
+            t={t}
+          />,
+          // Avoid componentDidMount
+          { disableLifecycleMethods: true }
+        )
+      )
+    })
+
     it('should be enabled when an error exists', () => {
       const values = {
         username: 'foo',

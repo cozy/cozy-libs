@@ -49,7 +49,7 @@ export class AccountForm extends PureComponent {
    */
   isSubmittable({ dirty, error, initialValues, valid }) {
     const untouched = initialValues && !dirty
-    return error || (valid && !untouched)
+    return !untouched && (error || valid)
   }
 
   /**
