@@ -12,7 +12,12 @@ import {
 
 import creditApplicationTemplate from '../../templates/creditApplicationTemplate'
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
-const EmptyDocumentHolder = ({ t, documentId, client, linkDocument }) => (
+const EmptyDocumentHolder = ({
+  t,
+  documentId,
+  client,
+  linkDocumentSuccess
+}) => (
   <FileInput
     onChange={async file => {
       const dirPath = creditApplicationTemplate.pathToSave
@@ -22,7 +27,6 @@ const EmptyDocumentHolder = ({ t, documentId, client, linkDocument }) => (
         creditApplicationTemplate.documents[documentId],
         `rules.metadata.classification`
       )
-      console.log('classification', classification)
       try {
         let metadata = {}
         if (classification) {
@@ -37,9 +41,9 @@ const EmptyDocumentHolder = ({ t, documentId, client, linkDocument }) => (
           .collection('io.cozy.files')
           .createFile(file, { dirId, metadata })
 
-        linkDocument({ document: createdFile.data, documentId })
-      } catch (e) {
-        console.log('errr', e)
+        linkDocumentSuccess({ document: createdFile.data, documentId })
+      } catch (uploadError) {
+        console.log('errr', uploadError)
       }
     }}
     hidden={true}
@@ -54,7 +58,7 @@ const EmptyDocumentHolder = ({ t, documentId, client, linkDocument }) => (
 EmptyDocumentHolder.propTypes = {
   t: PropTypes.func.isRequired,
   documentId: PropTypes.string.isRequired,
-  linkDocument: PropTypes.func.isRequired
+  linkDocumentSuccess: PropTypes.func.isRequired
 }
 
 export default translate()(
