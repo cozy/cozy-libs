@@ -49,6 +49,8 @@ export class AccountForm extends PureComponent {
    */
   isSubmittable({ dirty, error, initialValues, valid }) {
     const modified = !initialValues || dirty
+    // Here error is not a validation error but an instance of a
+    // KonnectorJobError, so submitting again is possible
     return modified && (error || valid)
   }
 
