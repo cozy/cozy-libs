@@ -68,7 +68,9 @@ export class LaunchTriggerCard extends PureComponent {
                     disabled={running}
                     onClick={launch}
                     subtle
-                    style="line-height:1.4"
+                    // TODO: Extract this directly in Cozy-UI
+                    // (either with an utility class or a Button prop)
+                    style={{ lineHeight: '1.4' }}
                   />
                 </div>
               </div>
