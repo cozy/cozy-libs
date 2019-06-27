@@ -7,7 +7,7 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import AccountFields from './AccountFields'
-import AccountFormError from './Error'
+import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
@@ -190,7 +190,7 @@ export class AccountForm extends PureComponent {
             }}
           >
             {error && showError && (
-              <AccountFormError error={error} konnector={konnector} t={t} />
+              <TriggerErrorInfo error={error} konnector={konnector} />
             )}
             <AccountFields
               container={container}

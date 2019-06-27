@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { AccountFormError } from 'components/AccountForm/Error'
+import { TriggerErrorInfo } from 'components/infos/TriggerErrorInfo'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 const fixtures = {
@@ -14,7 +14,7 @@ const fixtures = {
 
 const tMock = jest.fn().mockImplementation(key => key)
 
-describe('AccountFormError', () => {
+describe('TriggerErrorInfo', () => {
   beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
   })
@@ -30,13 +30,13 @@ describe('AccountFormError', () => {
   }
 
   it('should render', () => {
-    const component = shallow(<AccountFormError {...props} />).getElement()
+    const component = shallow(<TriggerErrorInfo {...props} />).getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should render regular Error', () => {
     const component = shallow(
-      <AccountFormError
+      <TriggerErrorInfo
         {...props}
         error={new Error('Something is undefined')}
       />
