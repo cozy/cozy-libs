@@ -4,9 +4,7 @@ import { withRouter } from 'react-router'
 import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
 
 import Topbar from './Topbar'
-import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
-import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
-import DocumentsGroup from './documents/DocumentsGroup'
+import DocumentsGroup from '../components/documents/DocumentsGroup'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import DocumentsContainer from '../containers/DocumentsDataForm'
 
@@ -52,15 +50,9 @@ class Documents extends React.Component {
       <div>
         <Topbar title={t('documents.title')} />
         <Title>{t('documents.subtitle')}</Title>
-        <div>
-          <Label>Demo, to remove</Label>
-          <EmptyDocumentHolder />
-          <LoadingDocumentHolder />
-        </div>
         {Object.keys(populatedTemplateDocsWithFiles).map(
           (documentId, index) => {
             const { files, count } = populatedTemplateDocsWithFiles[documentId]
-
             return (
               <section key={index}>
                 <Label>

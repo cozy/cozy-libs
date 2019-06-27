@@ -9,7 +9,7 @@ const DocumentsGroup = ({ files, templateDocumentsCount, documentId }) => {
     value ? (
       <DocumentHolder document={value} key={index} documentId={documentId} />
     ) : (
-      <EmptyDocumentHolder key={index} />
+      <EmptyDocumentHolder key={index} documentId={documentId} />
     )
   )
 }

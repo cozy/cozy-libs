@@ -60,6 +60,10 @@ const documentsSlice = createSlice({
       state.data[documentId].files = state.data[documentId].files.filter(
         doc => doc._id !== document.id
       )
+    },
+    linkDocument: (state, action) => {
+      const { document, documentId } = action.payload
+      state.data[documentId].files.push(document)
     }
   }
 })
@@ -77,7 +81,8 @@ export const {
   fetchDocumentSuccess,
   fetchDocumentError,
   setProcedureStatus,
-  unlinkDocument
+  unlinkDocument,
+  linkDocument
 } = actions
 
 export function fetchDocument(client, documentTemplate) {
