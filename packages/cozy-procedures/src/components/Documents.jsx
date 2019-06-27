@@ -16,7 +16,7 @@ class Documents extends React.Component {
   render() {
     const { t, router, data: docsFromStore } = this.props
     const { documents: documentsTemplate } = creditApplicationTemplate
-    const mergedDocuments = AdministrativeProcedure.mergeDocsFromStoreAndTemplate(
+    const populatedTemplateDocsWithStore = AdministrativeProcedure.mergeDocsFromStoreAndTemplate(
       docsFromStore,
       documentsTemplate
     )
@@ -31,17 +31,20 @@ class Documents extends React.Component {
           <LoadingDocumentHolder />
           <DocumentHolder />
         </div>
-        {Object.values(mergedDocuments).map((document, index) => {
-          return (
-            <section key={index}>
-              <Label>{t(`documents.labels.${document.label}`)}</Label>
-              <DocumentsGroups
-                documents={document.documents}
-                templateDoc={document}
-              />
-            </section>
-          )
-        })}
+        {Object.values(populatedTemplateDocsWithStore).map(
+          (documentTemplate, index) => {
+            const { documents: documentsFromStore } = documentTemplate
+            return (
+              <section key={index}>
+                <Label>{t(`documents.labels.${documentTemplate.label}`)}</Label>
+                <DocumentsGroups
+                  documents={documentsFromStore}
+                  templateDoc={documentTemplate}
+                />
+              </section>
+            )
+          }
+        )}
         <div>
           <Button
             label={t('confirm')}
@@ -58,7 +61,8 @@ Documents.propTypes = {
   t: PropTypes.func.isRequired,
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  data: PropTypes.object
 }
 
 export default withRouter(translate()(DocumentsContainer(Documents)))

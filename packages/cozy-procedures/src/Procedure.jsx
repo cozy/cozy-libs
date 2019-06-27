@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import { withClient } from 'cozy-client'
 import { Document } from 'cozy-doctypes'
@@ -47,4 +48,13 @@ class Procedure extends React.Component {
   }
 }
 
+Procedure.propTypes = {
+  initPersonalData: PropTypes.func.isRequired,
+  initDocuments: PropTypes.func.isRequired,
+  fetchMyself: PropTypes.func.isRequired,
+  fetchDocument: PropTypes.func.isRequired,
+  setStatusDemarche: PropTypes.func.isRequired,
+  initiated: PropTypes.bool.isRequired,
+  client: PropTypes.object.isRequired
+}
 export default withClient(Procedure)
