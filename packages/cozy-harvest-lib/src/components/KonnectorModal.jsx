@@ -17,6 +17,7 @@ import * as triggers from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import DeleteAccountCard from './cards/DeleteAccountCard'
 import LaunchTriggerCard from './cards/LaunchTriggerCard'
+import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
 
 /**
@@ -98,6 +99,7 @@ export class KonnectorModal extends PureComponent {
     } = this.props
 
     const { account, error, fetching, trigger } = this.state
+    const triggerError = triggers.getError(trigger)
 
     return (
       <Modal
@@ -134,7 +136,14 @@ export class KonnectorModal extends PureComponent {
               />
             ) : (
               <div className="u-mb-2">
-                <LaunchTriggerCard className="u-mb-1" trigger={trigger} />
+                {triggerError && (
+                  <TriggerErrorInfo
+                    className="u-mb-1"
+                    error={triggerError}
+                    konnector={konnector}
+                  />
+                )}
+                <LaunchTriggerCard trigger={trigger} />
                 <TriggerManager
                   account={account}
                   konnector={konnector}
@@ -142,6 +151,7 @@ export class KonnectorModal extends PureComponent {
                   running={running}
                   onLoginSuccess={onLoginSuccess}
                   onSuccess={onSuccess}
+                  showError={false}
                 />
                 <DeleteAccountCard
                   account={account}
