@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.61.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.3...cozy-harvest-lib@0.61.4) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Fix style prop to not make React crash 🚑 ([6599d29](https://github.com/cozy/cozy-libs/commit/6599d29))
+
+
+
+
+
 ## [0.61.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.2...cozy-harvest-lib@0.61.3) (2019-06-27)
 
 
