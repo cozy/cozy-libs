@@ -28,22 +28,28 @@ class Documents extends React.Component {
           <Label>Demo, to remove</Label>
           <EmptyDocumentHolder />
           <LoadingDocumentHolder />
-          <DocumentHolder />
         </div>
-        {Object.values(populatedTemplateDocsWithStore).map(
-          (documentTemplate, index) => {
-            const { documents: documentsFromStore } = documentTemplate
-            return (
-              <section key={index}>
-                <Label>{t(`documents.labels.${documentTemplate.label}`)}</Label>
-                <DocumentsGroups
-                  documents={documentsFromStore}
-                  templateDoc={documentTemplate}
-                />
-              </section>
-            )
-          }
-        )}
+        {Object.keys(populatedTemplateDocsWithStore).map((key, index) => {
+          const {
+            documents: documentsFromStore
+          } = populatedTemplateDocsWithStore[key]
+          return (
+            <section key={index}>
+              <Label>
+                {t(
+                  `documents.labels.${
+                    populatedTemplateDocsWithStore[key].label
+                  }`
+                )}
+              </Label>
+              <DocumentsGroups
+                documents={documentsFromStore}
+                templateDoc={populatedTemplateDocsWithStore[key]}
+                keyDoc={key}
+              />
+            </section>
+          )
+        })}
         <div>
           <Button
             label={t('confirm')}
