@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.4](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.10.3...cozy-procedures@0.10.4) (2019-06-28)
+
+
+### Bug Fixes
+
+* --copy-files instead of yarn run copy-files ([33f337e](https://github.com/cozy/cozy-libs/commit/33f337e))
+
+
+
+
+
 ## [0.10.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.10.2...cozy-procedures@0.10.3) (2019-06-28)
 
 
