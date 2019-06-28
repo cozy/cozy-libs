@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.12.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.12.0...cozy-procedures@0.12.1) (2019-06-28)
+
+
+### Bug Fixes
+
+* Use credit template only in render ([c358ed6](https://github.com/cozy/cozy-libs/commit/c358ed6))
+
+
+
+
+
 # [0.12.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.11.1...cozy-procedures@0.12.0) (2019-06-28)
 
 
