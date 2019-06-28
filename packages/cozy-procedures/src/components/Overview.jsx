@@ -55,8 +55,23 @@ class Overview extends React.Component {
       .ensureDirectoryExists(template.pathToSave)
   }
 
+  getFilesForZip = (jsonFile, documentsData) => {
+    const files = {
+      [jsonFile.name]: jsonFile.id
+    }
+    Object.keys(documentsData).forEach(categoryName => {
+      const documentCategory = documentsData[categoryName]
+      documentCategory.files.forEach(f => {
+        const identifier = `documents/${f.name}`
+        files[identifier] = f.id
+      })
+    })
+
+    return files
+  }
+
   submitProcedure = async () => {
-    const { client } = this.props
+    const { client, data } = this.props
     const template = creditApplicationTemplate
     try {
       const destinationId = await this.getDestinationId(template)
@@ -64,7 +79,7 @@ class Overview extends React.Component {
       const baseFilename = `${template.type}-${datetime}`
       const jsonFilename = `${baseFilename}.json`
       const administrativeProcedure = AdministrativeProcedure.create(
-        this.props.data,
+        data,
         creditApplicationTemplate
       )
       const response = await client.create(
@@ -78,13 +93,14 @@ class Overview extends React.Component {
         .collection('io.cozy.files')
         .createFile(file, { dirId: destinationId })
 
-      const jsonFile = resp.data
+      const jsonFile = {
+        id: resp.data.id,
+        name: jsonFilename
+      }
+
+      const files = this.getFilesForZip(jsonFile, data.documentsData)
       const params = {
-        files: {
-          [jsonFilename]: jsonFile.id
-          // TODO: use real files from redux state
-          // 'documents/some.jpg': 'fd3b80df50114b26a723700b7006deda'
-        },
+        files,
         dir_id: destinationId,
         filename: `${baseFilename}.zip`
       }
@@ -112,6 +128,7 @@ class Overview extends React.Component {
       t
     } = this.props
     const { amount, duration } = data.procedureData
+
     return (
       <div>
         <Topbar title={creditApplicationTemplate.name} />

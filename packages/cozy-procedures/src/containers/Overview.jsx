@@ -8,6 +8,7 @@ import {
 } from '../redux/personalDataSlice'
 import { getSlice as getAmount } from '../redux/amountSlice'
 import { getSlice as getDuration } from '../redux/durationSlice'
+import { getFiles } from '../redux/documentsDataSlice'
 
 export const mapStateToProps = state => ({
   personalDataFieldsCompleted: getCompletedFields(state),
@@ -17,7 +18,8 @@ export const mapStateToProps = state => ({
       amount: getAmount(state),
       duration: getDuration(state)
     },
-    personalData: getPersonalData(state)
+    personalData: getPersonalData(state),
+    documentsData: getFiles(state)
   }
 })
 
