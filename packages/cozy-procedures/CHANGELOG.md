@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.10.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.10.0...cozy-procedures@0.10.1) (2019-06-28)
+
+
+### Bug Fixes
+
+* Remove conditions on mime and class ATM ([#547](https://github.com/cozy/cozy-libs/issues/547)) ([dcdc3bd](https://github.com/cozy/cozy-libs/commit/dcdc3bd))
+
+
+
+
+
 # [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.9.0...cozy-procedures@0.10.0) (2019-06-27)
 
 
