@@ -20,7 +20,7 @@ const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {
     return (
       <>
         <BarLeft>
-          <BarButton onClick={router.goBack} icon="back" label={t('back')} />
+          <BarButton icon="left" onClick={router.goBack} label={t('back')} />
         </BarLeft>
         <BarCenter>
           <AppTitle>{title}</AppTitle>
