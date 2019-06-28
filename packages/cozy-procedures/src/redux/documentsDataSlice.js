@@ -1,6 +1,6 @@
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
-import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 import { AdministrativeProcedure } from 'cozy-doctypes'
 
 const documentsSlice = createSlice({
@@ -60,6 +60,10 @@ const documentsSlice = createSlice({
       state.data[documentId].files = state.data[documentId].files.filter(
         doc => doc._id !== document.id
       )
+    },
+    linkDocumentSuccess: (state, action) => {
+      const { document, documentId } = action.payload
+      state.data[documentId].files.push(document)
     }
   }
 })
@@ -77,7 +81,8 @@ export const {
   fetchDocumentSuccess,
   fetchDocumentError,
   setProcedureStatus,
-  unlinkDocument
+  unlinkDocument,
+  linkDocumentSuccess
 } = actions
 
 export function fetchDocument(client, documentTemplate) {

@@ -3,7 +3,8 @@ import context from '../redux/context'
 import {
   fetchDocument,
   getFiles,
-  unlinkDocument
+  unlinkDocument,
+  linkDocumentSuccess
 } from '../redux/documentsDataSlice'
 
 const mapStateToProps = state => ({
@@ -12,7 +13,8 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = {
   fetchDocument,
-  unlinkDocument
+  unlinkDocument,
+  linkDocumentSuccess
 }
 
 const DocumentsDataFormContainer = Component =>
