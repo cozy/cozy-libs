@@ -107,6 +107,7 @@ exports[`AccountForm should render error 1`] = `
   onKeyUp={[Function]}
 >
   <Wrapper
+    className="u-mb-1"
     error={[Error: Test error]}
     konnector={
       Object {

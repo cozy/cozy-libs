@@ -67,11 +67,12 @@ export class TriggerErrorInfo extends PureComponent {
   }
 
   render() {
-    const { error } = this.props
+    const { className, error } = this.props
     /* eslint-disable-next-line no-console */
     console.error(error)
     return (
       <Infos
+        className={className}
         isImportant
         text={<Markdown source={this.getErrorLocale('description')} />}
         title={this.getErrorLocale('title')}
