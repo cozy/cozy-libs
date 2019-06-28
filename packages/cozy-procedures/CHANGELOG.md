@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.13.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.13.0...cozy-procedures@0.13.1) (2019-06-28)
+
+
+### Bug Fixes
+
+* Adjust margins ([1feb9dc](https://github.com/cozy/cozy-libs/commit/1feb9dc))
+* Upgrade cozy-ui ([71b342f](https://github.com/cozy/cozy-libs/commit/71b342f))
+
+
+
+
+
 # [0.13.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.12.1...cozy-procedures@0.13.0) (2019-06-28)
 
 
