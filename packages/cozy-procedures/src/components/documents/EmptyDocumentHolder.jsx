@@ -32,7 +32,7 @@ const EmptyDocumentHolder = ({
         if (classification) {
           metadata = {
             classification,
-            datetime: new Date().toISOString()
+            datetime: file.lastModifiedDate.toISOString()
           }
         }
         const dirId = await filesCollection.ensureDirectoryExists(dirPath)
