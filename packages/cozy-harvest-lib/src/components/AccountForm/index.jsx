@@ -192,7 +192,11 @@ export class AccountForm extends PureComponent {
             }}
           >
             {error && showError && (
-              <TriggerErrorInfo error={error} konnector={konnector} />
+              <TriggerErrorInfo
+                className="u-mb-1"
+                error={error}
+                konnector={konnector}
+              />
             )}
             <AccountFields
               container={container}
