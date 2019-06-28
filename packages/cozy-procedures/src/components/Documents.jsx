@@ -14,6 +14,11 @@ import DocumentsContainer from '../containers/DocumentsDataForm'
 /**
  * This function is used to populate an array based on the order
  * from the documentsTemplate and set the linked document from the store
+ *
+ * We need to sort the template in order to display it correctly. Once the
+ * template is sorted, we populated it with the files coming from our store
+ *
+ * Since ES6, Object properties seems to be keeped :)
  * @param {Object} docsFromStore
  * @param {Object} documentsTemplate
  */
@@ -28,8 +33,8 @@ export const mergeDocsFromStoreAndTemplate = (
     })
     .forEach(key => {
       sorted[key] = documentsTemplate[key]
-      if (docsFromStore[key] && docsFromStore[key].documents) {
-        sorted[key].documents = docsFromStore[key].documents
+      if (docsFromStore[key] && docsFromStore[key].files) {
+        sorted[key].files = docsFromStore[key].files
       }
     })
 
@@ -37,9 +42,9 @@ export const mergeDocsFromStoreAndTemplate = (
 }
 class Documents extends React.Component {
   render() {
-    const { t, router, data: docsFromStore } = this.props
+    const { t, router, files: docsFromStore } = this.props
     const { documents: documentsTemplate } = creditApplicationTemplate
-    const populatedTemplateDocsWithStore = mergeDocsFromStoreAndTemplate(
+    const populatedTemplateDocsWithFiles = mergeDocsFromStoreAndTemplate(
       docsFromStore,
       documentsTemplate
     )
@@ -54,15 +59,15 @@ class Documents extends React.Component {
           <LoadingDocumentHolder />
           <DocumentHolder />
         </div>
-        {Object.values(populatedTemplateDocsWithStore).map(
-          (documentTemplate, index) => {
-            const { documents: documentsFromStore } = documentTemplate
+        {Object.values(populatedTemplateDocsWithFiles).map(
+          (documentValue, index) => {
+            const { files, count: templateDocumentsCount } = documentValue
             return (
               <section key={index}>
-                <Label>{t(`documents.labels.${documentTemplate.label}`)}</Label>
+                <Label>{t(`documents.labels.${documentValue.label}`)}</Label>
                 <DocumentsGroup
-                  documents={documentsFromStore}
-                  templateDoc={documentTemplate}
+                  files={files}
+                  templateDocumentsCount={templateDocumentsCount}
                 />
               </section>
             )
@@ -85,7 +90,7 @@ Documents.propTypes = {
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired,
-  data: PropTypes.object
+  files: PropTypes.object
 }
 
 export default withRouter(translate()(DocumentsContainer(Documents)))

@@ -1,9 +1,9 @@
 import { connect } from 'react-redux'
 import context from '../redux/context'
-import { fetchDocument, getDocuments } from '../redux/documentsDataSlice'
+import { fetchDocument, getFiles } from '../redux/documentsDataSlice'
 
 const mapStateToProps = state => ({
-  data: getDocuments(state)
+  files: getFiles(state)
 })
 
 const mapDispatchToProps = {

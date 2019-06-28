@@ -7,7 +7,7 @@ const documentsSlice = createSlice({
   initialState: {
     data: {
       /*  payslip: {
-        documents: []
+        files: []
       } */
     },
     ui: {
@@ -24,7 +24,7 @@ const documentsSlice = createSlice({
       return {
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
           acc[fieldId] = {
-            documents: []
+            files: []
           }
           return acc
         }, {}),
@@ -45,7 +45,7 @@ const documentsSlice = createSlice({
     fetchDocumentSuccess: (state, action) => {
       const { idDoctemplate, loading, files } = action.payload
       state.ui[idDoctemplate].loading = loading
-      state.data[idDoctemplate].documents = files
+      state.data[idDoctemplate].files = files
     },
     fetchDocumentError: (state, action) => {
       const { idDoctemplate, error } = action.payload
@@ -57,7 +57,7 @@ const documentsSlice = createSlice({
   }
 })
 const selectors = {
-  getDocuments: state => get(state, [documentsSlice.slice, 'data'], {}),
+  getFiles: state => get(state, [documentsSlice.slice, 'data'], {}),
   getInitiated: state =>
     get(state, [documentsSlice.slice, 'ui', ['initiated']], {})
 }
@@ -112,5 +112,5 @@ export function fetchDocument(client, documentTemplate) {
   }
 }
 
-export const { getDocuments, getInitiated } = selectors
+export const { getFiles, getInitiated } = selectors
 export default reducer
