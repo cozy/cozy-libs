@@ -116,7 +116,6 @@ class Overview extends React.Component {
       <div>
         <Topbar title={creditApplicationTemplate.name} />
         <Title className="u-mb-2">{t('overview.subtitle')}</Title>
-        <Alerter />
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.request')}</SubTitle>
           <div className="u-flex u-flex-items-center">

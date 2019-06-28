@@ -8,7 +8,7 @@ import { CozyProvider } from 'cozy-client'
 
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import IconSprite from 'cozy-ui/transpiled/react/Icon/Sprite'
-import { I18n } from 'cozy-ui/transpiled/react'
+import { Alerter, I18n } from 'cozy-ui/transpiled/react'
 import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
 import icon from './icon.png'
 import { MobileRouter } from 'cozy-authentication'
@@ -66,6 +66,7 @@ class App extends React.Component {
 
     return (
       <ErrorBoundary>
+        <Alerter />
         <I18n dictRequire={() => ({})} lang="fr">
           <CozyProvider store={existingStore} client={client}>
             <MobileRouter
