@@ -4,7 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
-    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
     "copy-files": "cp -rf src/locales dist/",
     "test": "jest --verbose",
     "lint": "cd ..; yarn lint packages/cozy-procedures"
