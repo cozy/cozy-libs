@@ -132,17 +132,6 @@ const documents = {
     order: 1,
     count: 1,
     rules: {
-      $or: [
-        {
-          mime: 'text/plain'
-        },
-        {
-          mime: 'application/pdf'
-        },
-        {
-          class: 'image'
-        }
-      ],
       metadata: {
         classification: 'identity_document'
       }
@@ -153,14 +142,6 @@ const documents = {
     order: 2,
     count: 1,
     rules: {
-      $or: [
-        {
-          mime: 'text/plain'
-        },
-        {
-          mime: 'application/pdf'
-        }
-      ],
       metadata: {
         classification: 'tax_notice',
         subject: 'income'
@@ -172,14 +153,6 @@ const documents = {
     order: 3,
     count: 3,
     rules: {
-      $or: [
-        {
-          mime: 'text/plain'
-        },
-        {
-          mime: 'application/pdf'
-        }
-      ],
       metadata: {
         classification: 'payslip'
       }
@@ -190,14 +163,6 @@ const documents = {
     order: 4,
     count: 1,
     rules: {
-      $or: [
-        {
-          mime: 'text/plain'
-        },
-        {
-          mime: 'application/pdf'
-        }
-      ],
       metadata: {}
     }
   },
@@ -206,14 +171,6 @@ const documents = {
     order: 5,
     count: 1,
     rules: {
-      $or: [
-        {
-          mime: 'text/plain'
-        },
-        {
-          mime: 'application/pdf'
-        }
-      ],
       metadata: {
         $or: [
           {
