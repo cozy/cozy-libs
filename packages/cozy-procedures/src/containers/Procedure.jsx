@@ -5,17 +5,30 @@ import {
   init as initPersonalData,
   fetchMyself
 } from '../redux/personalDataSlice'
+import {
+  init as initDocuments,
+  fetchDocument,
+  setProcedureStatus,
+  getInitiated
+} from '../redux/documentsDataSlice'
+
 import Procedure from '../Procedure'
 import withLocales from '../withLocales'
 
+const mapStateToProps = state => ({
+  initiated: getInitiated(state)
+})
 const mapDispatchToProps = {
   initPersonalData,
-  fetchMyself
+  fetchMyself,
+  initDocuments,
+  fetchDocument,
+  setProcedureStatus
 }
 
 export default withLocales(
   connect(
-    null,
+    mapStateToProps,
     mapDispatchToProps,
     null,
     { context: Context }

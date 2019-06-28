@@ -7,7 +7,7 @@ import Overview from './containers/Overview'
 import Amount from './containers/Amount'
 import Duration from './containers/Duration'
 import PersonalDataForm from './containers/PersonalDataForm'
-import Documents from './components/Documents'
+import DocumentsDataForm from './components/Documents'
 
 const injectProcedureRoutes = ({ root }) => (
   <Route path={root} component={App}>
@@ -15,7 +15,7 @@ const injectProcedureRoutes = ({ root }) => (
     <Route path="amount" component={() => <Amount />} />
     <Route path="duration" component={() => <Duration />} />
     <Route path="personal" component={() => <PersonalDataForm />} />
-    <Route path="documents" component={() => <Documents />} />
+    <Route path="documents" component={() => <DocumentsDataForm />} />
   </Route>
 )
 

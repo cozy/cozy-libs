@@ -72,6 +72,21 @@ class CozyFile extends Document {
       }
     }
   }
+  /**
+   * Method to split both the filename and the extension
+   *
+   * @param {Object} file An io.cozy.files
+   * @return {Object}  return an object with {filename: , extension: }
+   */
+  static splitFilename = file => {
+    if (!file.name) throw new Error('file should have a name property ')
+    return file.type === 'directory'
+      ? { filename: file.name, extension: '' }
+      : {
+          extension: file.name.slice(file.name.lastIndexOf('.')),
+          filename: file.name.slice(0, file.name.lastIndexOf('.'))
+        }
+  }
 }
 
 CozyFile.doctype = 'io.cozy.files'

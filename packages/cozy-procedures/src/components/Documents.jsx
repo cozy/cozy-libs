@@ -1,20 +1,54 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
-import Topbar from './Topbar'
 import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
+
+import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
+import DocumentsGroup from './documents/DocumentsGroup'
 import DocumentHolder from './documents/DocumentHolder'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import DocumentsContainer from '../containers/DocumentsDataForm'
 
+/**
+ * This function is used to populate an array based on the order
+ * from the documentsTemplate and set the linked document from the store
+ *
+ * We need to sort the template in order to display it correctly. Once the
+ * template is sorted, we populated it with the files coming from our store
+ *
+ * Since ES6, Object properties seems to be keeped :)
+ * @param {Object} docsFromStore
+ * @param {Object} documentsTemplate
+ */
+export const mergeDocsFromStoreAndTemplate = (
+  docsFromStore,
+  documentsTemplate
+) => {
+  let sorted = {}
+  Object.keys(documentsTemplate)
+    .sort(function(a, b) {
+      return documentsTemplate[a].order - documentsTemplate[b].order
+    })
+    .forEach(key => {
+      sorted[key] = documentsTemplate[key]
+      if (docsFromStore[key] && docsFromStore[key].files) {
+        sorted[key].files = docsFromStore[key].files
+      }
+    })
+
+  return sorted
+}
 class Documents extends React.Component {
   render() {
-    const { t, router } = this.props
+    const { t, router, files: docsFromStore } = this.props
     const { documents: documentsTemplate } = creditApplicationTemplate
-    const fields = Object.values(documentsTemplate).sort(
-      document => document.order
+    const populatedTemplateDocsWithFiles = mergeDocsFromStoreAndTemplate(
+      docsFromStore,
+      documentsTemplate
     )
+
     return (
       <div>
         <Topbar title={t('documents.title')} />
@@ -25,12 +59,20 @@ class Documents extends React.Component {
           <LoadingDocumentHolder />
           <DocumentHolder />
         </div>
-        {fields.map((document, index) => (
-          <section key={index}>
-            <Label>{t(`documents.labels.${document.label}`)}</Label>
-            <EmptyDocumentHolder />
-          </section>
-        ))}
+        {Object.values(populatedTemplateDocsWithFiles).map(
+          (documentValue, index) => {
+            const { files, count: templateDocumentsCount } = documentValue
+            return (
+              <section key={index}>
+                <Label>{t(`documents.labels.${documentValue.label}`)}</Label>
+                <DocumentsGroup
+                  files={files}
+                  templateDocumentsCount={templateDocumentsCount}
+                />
+              </section>
+            )
+          }
+        )}
         <div>
           <Button
             label={t('confirm')}
@@ -47,7 +89,8 @@ Documents.propTypes = {
   t: PropTypes.func.isRequired,
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
-  }).isRequired
+  }).isRequired,
+  files: PropTypes.object
 }
 
-export default withRouter(translate()(Documents))
+export default withRouter(translate()(DocumentsContainer(Documents)))
