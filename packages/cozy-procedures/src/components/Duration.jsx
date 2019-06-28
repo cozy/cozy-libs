@@ -12,7 +12,7 @@ import {
 } from 'cozy-ui/transpiled/react'
 import Slider from '@material-ui/lab/Slider'
 import { withRouter } from 'react-router'
-import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 
 class Duration extends React.PureComponent {
   constructor(props) {

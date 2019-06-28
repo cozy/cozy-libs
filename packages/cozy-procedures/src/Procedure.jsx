@@ -2,7 +2,7 @@ import React from 'react'
 import get from 'lodash/get'
 import { withClient } from 'cozy-client'
 
-import creditApplicationTemplate from './templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 
 class Procedure extends React.Component {
   componentDidMount() {

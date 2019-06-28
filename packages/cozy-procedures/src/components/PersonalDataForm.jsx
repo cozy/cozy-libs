@@ -15,7 +15,7 @@ import {
 } from './form'
 import FormFillingStatus from '../containers/FormFillingStatus'
 import Topbar from './Topbar'
-import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 
 const { schema, uiSchema } = creditApplicationTemplate.personalData
 
