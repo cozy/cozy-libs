@@ -66,6 +66,7 @@ class Duration extends React.PureComponent {
           value={simulationDuration}
           aria-label={t('duration.label')}
           onChange={(event, value) => updateDuration(value)}
+          className="u-mb-1"
         />
         <div>
           <Button

@@ -32,7 +32,7 @@ class Amount extends React.Component {
         <Topbar title={t('amount.title')} />
         <Title>{t('amount.subtitle')}</Title>
 
-        <div>
+        <div className="u-mb-1">
           <Label htmlFor="amount-input">{t('amount.label')}</Label>
           <Input
             type="number"

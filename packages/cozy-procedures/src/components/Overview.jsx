@@ -159,6 +159,7 @@ class Overview extends React.Component {
               <Button
                 label={t('overview.amount')}
                 theme="ghost"
+                className="u-ml-0"
                 onClick={() => this.navigateTo('amount')}
               />
             )}
