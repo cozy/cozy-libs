@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.10.5...cozy-procedures@0.11.0) (2019-06-28)
+
+
+### Features
+
+* Unlink Docs ([#551](https://github.com/cozy/cozy-libs/issues/551)) ([8c887f5](https://github.com/cozy/cozy-libs/commit/8c887f5))
+
+
+
+
+
 ## [0.10.5](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.10.4...cozy-procedures@0.10.5) (2019-06-28)
 
 
