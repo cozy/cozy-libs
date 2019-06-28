@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import Form from 'react-jsonschema-form'
+import get from 'lodash/get'
 import { Button, SubTitle } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
@@ -17,8 +18,6 @@ import FormFillingStatus from '../containers/FormFillingStatus'
 import Topbar from './Topbar'
 import { creditApplicationTemplate } from 'cozy-procedures'
 
-const { schema, uiSchema } = creditApplicationTemplate.personalData
-
 const widgets = {
   BaseInput: InputAdapter,
   SelectWidget: SelectBoxAdapter,
@@ -29,6 +28,9 @@ const widgets = {
 class PersonalDataForm extends React.Component {
   render() {
     const { formData, updateFormData, router, t } = this.props
+    const schema = get(creditApplicationTemplate, 'personalData.schema')
+    const uiSchema = get(creditApplicationTemplate, 'personalData.uiSchema')
+
     return (
       <div>
         <Topbar title={t('personalDataForm.title')} />
