@@ -6,7 +6,7 @@ import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
 import DocumentHolder from './documents/DocumentHolder'
-import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 
 class Documents extends React.Component {
   render() {

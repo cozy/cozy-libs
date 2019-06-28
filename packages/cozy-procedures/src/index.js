@@ -1,5 +1,6 @@
 import React from 'react'
 import { Route, IndexRoute } from 'react-router'
+import creditApplicationTemplate from './templates/creditApplicationTemplate'
 
 import App from './App'
 import Overview from './containers/Overview'
@@ -18,4 +19,5 @@ const injectProcedureRoutes = ({ root }) => (
   </Route>
 )
 
+export { creditApplicationTemplate }
 export default injectProcedureRoutes

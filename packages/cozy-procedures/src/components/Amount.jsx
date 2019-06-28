@@ -10,7 +10,7 @@ import {
   Input,
   Button
 } from 'cozy-ui/transpiled/react/'
-import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 
 class Amount extends React.Component {
   constructor(props) {
