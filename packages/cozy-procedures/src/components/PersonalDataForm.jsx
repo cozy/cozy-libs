@@ -49,6 +49,7 @@ class PersonalDataForm extends React.Component {
             label={t('confirm')}
             onClick={router.goBack}
             extension="full"
+            className="u-mb-1"
           />
         </Form>
       </div>
