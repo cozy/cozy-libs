@@ -1,13 +1,18 @@
 import { connect } from 'react-redux'
 import context from '../redux/context'
-import { fetchDocument, getFiles } from '../redux/documentsDataSlice'
+import {
+  fetchDocument,
+  getFiles,
+  unlinkDocument
+} from '../redux/documentsDataSlice'
 
 const mapStateToProps = state => ({
   files: getFiles(state)
 })
 
 const mapDispatchToProps = {
-  fetchDocument
+  fetchDocument,
+  unlinkDocument
 }
 
 const DocumentsDataFormContainer = Component =>
