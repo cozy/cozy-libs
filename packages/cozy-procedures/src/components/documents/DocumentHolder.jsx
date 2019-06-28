@@ -1,10 +1,11 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { translate, Chip, Icon } from 'cozy-ui/transpiled/react/'
 import { CozyFile } from 'cozy-doctypes'
 
-const DocumentHolder = ({ document }) => {
-  //!TODO to be removed. No need to check because the component should be mounted only when we have info
-  if (!document) return null
+import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
+
+const DocumentHolder = ({ document, unlinkDocument, documentId }) => {
   const splittedName = CozyFile.splitFilename(document)
   return (
     <Chip variant="dashed" className="u-w-100">
@@ -13,9 +14,20 @@ const DocumentHolder = ({ document }) => {
         {splittedName.filename}
         <span className="u-coolGrey">{splittedName.extension}</span>
       </span>
-      <Icon icon="cross" size={16} className="u-pr-1" />
+      <Icon
+        icon="cross"
+        size={16}
+        className="u-pr-1 u-c-pointer"
+        onClick={() => unlinkDocument({ document, documentId })}
+      />
     </Chip>
   )
 }
 
-export default translate()(DocumentHolder)
+DocumentHolder.propTypes = {
+  unlinkDocument: PropTypes.func.isRequired,
+  documentId: PropTypes.string.isRequired,
+  //io.cozy.files
+  document: PropTypes.object.isRequired
+}
+export default translate()(DocumentsDataFormContainer(DocumentHolder))

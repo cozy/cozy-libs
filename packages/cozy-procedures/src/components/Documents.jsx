@@ -7,7 +7,6 @@ import Topbar from './Topbar'
 import EmptyDocumentHolder from './documents/EmptyDocumentHolder'
 import LoadingDocumentHolder from './documents/LoadingDocumentHolder'
 import DocumentsGroup from './documents/DocumentsGroup'
-import DocumentHolder from './documents/DocumentHolder'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import DocumentsContainer from '../containers/DocumentsDataForm'
 
@@ -57,17 +56,24 @@ class Documents extends React.Component {
           <Label>Demo, to remove</Label>
           <EmptyDocumentHolder />
           <LoadingDocumentHolder />
-          <DocumentHolder />
         </div>
-        {Object.values(populatedTemplateDocsWithFiles).map(
-          (documentValue, index) => {
-            const { files, count: templateDocumentsCount } = documentValue
+        {Object.keys(populatedTemplateDocsWithFiles).map(
+          (documentId, index) => {
+            const { files, count } = populatedTemplateDocsWithFiles[documentId]
+
             return (
               <section key={index}>
-                <Label>{t(`documents.labels.${documentValue.label}`)}</Label>
+                <Label>
+                  {t(
+                    `documents.labels.${
+                      populatedTemplateDocsWithFiles[documentId].label
+                    }`
+                  )}
+                </Label>
                 <DocumentsGroup
                   files={files}
-                  templateDocumentsCount={templateDocumentsCount}
+                  templateDocumentsCount={count}
+                  documentId={documentId}
                 />
               </section>
             )
