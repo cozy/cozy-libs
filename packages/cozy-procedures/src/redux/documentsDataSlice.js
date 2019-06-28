@@ -1,6 +1,6 @@
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
-import creditApplicationTemplate from '../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
 import { AdministrativeProcedure } from 'cozy-doctypes'
 
 const documentsSlice = createSlice({

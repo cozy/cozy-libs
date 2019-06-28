@@ -10,7 +10,8 @@ import {
   FileInput
 } from 'cozy-ui/transpiled/react/'
 
-import creditApplicationTemplate from '../../templates/creditApplicationTemplate'
+import { creditApplicationTemplate } from 'cozy-procedures'
+
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 const EmptyDocumentHolder = ({
   t,
