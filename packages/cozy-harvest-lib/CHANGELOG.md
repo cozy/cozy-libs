@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.62.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.1...cozy-harvest-lib@0.62.2) (2019-06-28)
+
+
+### Bug Fixes
+
+* **harvest:** Fix TriggerErrorInfo bottom margin 🚑 ([9eec92b](https://github.com/cozy/cozy-libs/commit/9eec92b))
+
+
+
+
+
 ## [0.62.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.0...cozy-harvest-lib@0.62.1) (2019-06-27)
 
 
