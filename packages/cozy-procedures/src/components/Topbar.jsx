@@ -2,14 +2,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
+import flow from 'lodash/flow'
 import {
+  translate,
   withBreakpoints,
   AppTitle,
   MainTitle,
-  BarButton
+  BarButton,
+  Button
 } from 'cozy-ui/transpiled/react'
 
-const Topbar = ({ title, router, breakpoints: { isMobile } }) => {
+const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {
   const hasCozyBar = !!cozy.bar
 
   if (isMobile && hasCozyBar) {
@@ -17,7 +20,7 @@ const Topbar = ({ title, router, breakpoints: { isMobile } }) => {
     return (
       <>
         <BarLeft>
-          <BarButton icon="back" onClick={router.goBack} />
+          <BarButton onClick={router.goBack} icon="back" label={t('back')} />
         </BarLeft>
         <BarCenter>
           <AppTitle>{title}</AppTitle>
@@ -25,7 +28,21 @@ const Topbar = ({ title, router, breakpoints: { isMobile } }) => {
       </>
     )
   } else {
-    return <MainTitle className="u-mb-2">{title}</MainTitle>
+    return (
+      <div className="u-flex u-flex-items-center u-mb-2">
+        <Button
+          onClick={router.goBack}
+          className="u-mr-1"
+          theme="secondary"
+          subtle
+          icon="previous"
+          iconOnly
+          label={t('back')}
+          extension="narrow"
+        />
+        <MainTitle>{title}</MainTitle>
+      </div>
+    )
   }
 }
 
@@ -40,4 +57,8 @@ Topbar.defaultProps = {
   title: ''
 }
 
-export default withBreakpoints()(withRouter(Topbar))
+export default flow(
+  translate(),
+  withBreakpoints(),
+  withRouter
+)(Topbar)
