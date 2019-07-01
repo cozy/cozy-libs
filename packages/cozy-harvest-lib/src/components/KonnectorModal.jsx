@@ -161,6 +161,7 @@ export class KonnectorModal extends PureComponent {
                   onError={this.handleKonnectorJobError}
                   onLaunch={this.handleTriggerLaunch}
                   onSuccess={this.handleKonnectorJobSuccess}
+                  submitting={isJobRunning}
                 />
                 <TriggerManager
                   account={account}
