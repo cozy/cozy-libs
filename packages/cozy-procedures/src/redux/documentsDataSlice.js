@@ -67,8 +67,18 @@ const documentsSlice = createSlice({
     }
   }
 })
+
+const getData = state => get(state, [documentsSlice.slice, 'data'], {})
+
+const getCompletedCount = state =>
+  Object.values(getData(state)).reduce(
+    (acc, { files }) => acc + files.length,
+    0
+  )
+
 const selectors = {
-  getFiles: state => get(state, [documentsSlice.slice, 'data'], {}),
+  getFiles: getData,
+  getCompletedDocumentsCount: getCompletedCount,
   getInitiated: state =>
     get(state, [documentsSlice.slice, 'ui', ['initiated']], {})
 }
@@ -98,7 +108,6 @@ export function fetchDocument(client, documentTemplate) {
 
       const files = await AdministrativeProcedure.getFilesByRules(docWithRules)
 
-      //const files = {}
       if (files.data) {
         dispatch(
           fetchDocumentSuccess({
@@ -125,5 +134,5 @@ export function fetchDocument(client, documentTemplate) {
   }
 }
 
-export const { getFiles, getInitiated } = selectors
+export const { getCompletedDocumentsCount, getFiles, getInitiated } = selectors
 export default reducer
