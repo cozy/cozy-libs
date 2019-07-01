@@ -70,7 +70,7 @@ export class AccountField extends PureComponent {
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
       disabled: disabled || !isEditable,
-      error: hasError,
+      error: !disabled && hasError,
       fullwidth: true,
       inputRef: this.setInputRef,
       label: t(`fields.${localeKey}.label`, {
