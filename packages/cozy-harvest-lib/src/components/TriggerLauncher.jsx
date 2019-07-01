@@ -81,7 +81,7 @@ export class TriggerLauncher extends Component {
     const trigger = await this.refetchTrigger()
     this.setState({ error, running: false, trigger })
     const { onError } = this.props
-    if (typeof onError === 'function') onError(trigger)
+    if (typeof onError === 'function') onError(error)
   }
 
   async handleSuccess() {

@@ -13,6 +13,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import accountMutations from '../connections/accounts'
+import triggersMutations from '../connections/triggers'
 import * as triggers from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import DeleteAccountCard from './cards/DeleteAccountCard'
@@ -69,7 +70,11 @@ export class KonnectorModal extends PureComponent {
 
     try {
       const account = await findAccount(triggers.getAccountId(trigger))
-      this.setState({ account, trigger })
+      this.setState({
+        account,
+        trigger,
+        konnectorJobError: triggers.getError(trigger)
+      })
     } catch (error) {
       this.setState({
         error
@@ -90,31 +95,45 @@ export class KonnectorModal extends PureComponent {
     })
   }
 
-  handleKonnectorJobError(trigger) {
-    this.setState({ isJobRunning: false, trigger })
+  handleKonnectorJobError(konnectorJobError) {
+    this.setState({
+      konnectorJobError,
+      isJobRunning: false
+    })
+
+    this.refetchTrigger()
   }
 
   handleKonnectorJobSuccess(trigger) {
     this.setState({ isJobRunning: false, trigger })
+    this.refetchTrigger()
   }
 
   handleTriggerLaunch() {
-    this.setState({ isJobRunning: true })
+    this.setState({ isJobRunning: true, konnectorJobError: null })
+  }
+
+  async refetchTrigger() {
+    const { fetchTrigger } = this.props
+    const { trigger } = this.state
+
+    const upToDateTrigger = await fetchTrigger(trigger._id)
+    this.setState({
+      trigger: upToDateTrigger
+    })
   }
 
   render() {
-    const {
-      dismissAction,
-      konnector,
-      into,
-      onLoginSuccess,
-      onSuccess,
-      running,
-      t
-    } = this.props
+    const { dismissAction, konnector, into, t } = this.props
 
-    const { account, error, fetching, isJobRunning, trigger } = this.state
-    const triggerError = triggers.getError(trigger)
+    const {
+      account,
+      error,
+      fetching,
+      isJobRunning,
+      konnectorJobError,
+      trigger
+    } = this.state
 
     return (
       <Modal
@@ -151,10 +170,10 @@ export class KonnectorModal extends PureComponent {
               />
             ) : (
               <div className="u-mb-2">
-                {!isJobRunning && triggerError && (
+                {!isJobRunning && konnectorJobError && (
                   <TriggerErrorInfo
                     className="u-mb-1"
-                    error={triggerError}
+                    error={konnectorJobError}
                     konnector={konnector}
                   />
                 )}
@@ -163,18 +182,21 @@ export class KonnectorModal extends PureComponent {
                   onError={this.handleKonnectorJobError}
                   onLaunch={this.handleTriggerLaunch}
                   onSuccess={this.handleKonnectorJobSuccess}
+                  submitting={isJobRunning}
                 />
                 <TriggerManager
                   account={account}
                   konnector={konnector}
                   trigger={trigger}
-                  running={running}
-                  onLoginSuccess={onLoginSuccess}
-                  onSuccess={onSuccess}
+                  onError={this.handleKonnectorJobError}
+                  onLaunch={this.handleTriggerLaunch}
+                  onSuccess={this.handleKonnectorJobSuccess}
+                  running={isJobRunning}
                   showError={false}
                 />
                 <DeleteAccountCard
                   account={account}
+                  disabled={isJobRunning}
                   onSuccess={dismissAction}
                 />
               </div>
@@ -190,4 +212,6 @@ KonnectorModal.contextTypes = {
   client: PropTypes.object.isRequired
 }
 
-export default withMutations(accountMutations)(withLocales(KonnectorModal))
+export default withMutations(accountMutations, triggersMutations)(
+  withLocales(KonnectorModal)
+)

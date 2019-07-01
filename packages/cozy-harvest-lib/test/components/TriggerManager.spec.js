@@ -160,6 +160,7 @@ const addReferencesToMock = jest.fn()
 const createTriggerMock = jest.fn()
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
+const fetchTriggerMock = jest.fn()
 const launchTriggerMock = jest.fn()
 const saveAccountMock = jest.fn()
 const watchKonnectorJobMock = jest.fn()
@@ -177,6 +178,7 @@ const props = {
   createTrigger: createTriggerMock,
   createDirectoryByPath: createDirectoryByPathMock,
   statDirectoryByPath: statDirectoryByPathMock,
+  fetchTrigger: fetchTriggerMock,
   launchTrigger: launchTriggerMock,
   onSuccess: onSuccessSpy,
   onLoginSuccess: onLoginSuccessSpy,
@@ -203,6 +205,7 @@ const shallowWithAccount = () =>
 describe('TriggerManager', () => {
   beforeEach(() => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
+    fetchTriggerMock.mockResolvedValue(fixtures.existingTrigger)
     launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
     watchKonnectorJobMock.mockReturnValue(
@@ -257,9 +260,9 @@ describe('TriggerManager', () => {
       createDirectoryByPathMock.mockResolvedValue(fixtures.folder)
     })
 
-    it('should render error', () => {
+    it('should render error', async () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleError(new Error('Test error'))
       expect(wrapper.getElement()).toMatchSnapshot()
     })
 
