@@ -40,10 +40,26 @@ class Overview extends React.Component {
     }
   }
 
-  handleZipChanged = jsonFile => job => {
+  handleZipChanged = jsonFile => async job => {
     const { client, t } = this.props
     if (job.state === 'done') {
       Alerter.success(t('overview.zip_ready'))
+      client.collection('io.cozy.files').destroy(jsonFile)
+    } else if (job.state === 'errored') {
+      Alerter.error(t('overview.zip_errored'))
+      // if an error occured, destroy the zip and the json
+      const resp = await client.collection('io.cozy.files').find(
+        {
+          dir_id: job.message.dir_id,
+          name: job.message.filename
+        },
+        {
+          indexedFields: ['dir_id', 'name']
+        }
+      )
+      resp.data.forEach(zipFile => {
+        client.collection('io.cozy.files').destroy(zipFile)
+      })
       client.collection('io.cozy.files').destroy(jsonFile)
     }
   }

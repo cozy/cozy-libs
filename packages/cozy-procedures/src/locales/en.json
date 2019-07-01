@@ -14,7 +14,8 @@
     "button": "Send my application",
     "complete": "Fill out",
     "over": "over",
-    "zip_ready": "Your application is available in your files."
+    "zip_ready": "Your application is available in your files.",
+    "zip_errored": "An error occurred during the archive creation."
   },
   "amount": {
     "title": "Amount",

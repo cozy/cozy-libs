@@ -14,7 +14,8 @@
     "button": "Envoyer mon dossier",
     "complete": "Compléter",
     "over": "sur",
-    "zip_ready": "Votre dossier est disponible dans vos documents."
+    "zip_ready": "Votre dossier est disponible dans vos documents.",
+    "zip_errored": "Il y a eu une erreur lors de la création de l'archive."
   },
   "amount": {
     "title": "Montant du crédit",
