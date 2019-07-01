@@ -78,7 +78,7 @@ class CozyFile extends Document {
    * @param {Object} file An io.cozy.files
    * @return {Object}  return an object with {filename: , extension: }
    */
-  static splitFilename = file => {
+  static splitFilename(file) {
     if (!file.name) throw new Error('file should have a name property ')
     return file.type === 'directory'
       ? { filename: file.name, extension: '' }
