@@ -15,9 +15,9 @@ import TriggerLauncher, {
 
 export class LaunchTriggerCard extends PureComponent {
   render() {
-    const { className, f, t, ...rest } = this.props
+    const { className, f, t } = this.props
     return (
-      <Card className={className} {...pick(rest, Object.keys(Card.propTypes))}>
+      <Card className={className}>
         <TriggerLauncher
           {...pick(this.props, Object.keys(DumbTriggerLauncher.propTypes))}
         >
