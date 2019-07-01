@@ -1,4 +1,5 @@
 const get = require('lodash/get')
+const flatten = require('lodash/flatten')
 
 const Contact = require('../contacts/Contact')
 const Document = require('../Document')
@@ -90,11 +91,25 @@ class AdministrativeProcedure extends Document {
    * @return {AdministrativeProcedure} the administrative procedure
    */
   static create(data, template) {
+    const { documentsData, personalData, procedureData } = data
+    const files = Object.keys(documentsData).map(identifier => {
+      return documentsData[identifier].files.map(file => ({
+        _id: file.id,
+        _type: 'io.cozy.files',
+        templateDocumentId: identifier
+      }))
+    })
     return {
-      ...data,
+      personalData,
+      procedureData,
       submissionDate: new Date(),
       templateId: template.type,
-      templateVersion: template.version
+      templateVersion: template.version,
+      relationships: {
+        files: {
+          data: flatten(files)
+        }
+      }
     }
   }
 
