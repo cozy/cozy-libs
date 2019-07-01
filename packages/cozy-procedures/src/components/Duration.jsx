@@ -60,15 +60,16 @@ class Duration extends React.PureComponent {
             {t('duration.rate')} : {rate.toFixed(2)}%
           </div>
         </Card>
-        <Slider
-          min={min}
-          max={max}
-          step={1}
-          value={simulationDuration}
-          aria-label={t('duration.label')}
-          onChange={(event, value) => updateDuration(value)}
-          className="u-mb-1"
-        />
+        <div className="u-mb-1 u-pv-1" style={{ overflow: 'hidden' }}>
+          <Slider
+            min={min}
+            max={max}
+            step={1}
+            value={simulationDuration}
+            aria-label={t('duration.label')}
+            onChange={(event, value) => updateDuration(value)}
+          />
+        </div>
         <div>
           <Button
             label={t('confirm')}
