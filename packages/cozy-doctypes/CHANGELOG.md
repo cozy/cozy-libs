@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.1...cozy-doctypes@1.49.2) (2019-07-01)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Don't use class property ([#557](https://github.com/cozy/cozy-libs/issues/557)) ([e979fe1](https://github.com/cozy/cozy-libs/commit/e979fe1)), closes [/node.green/#ESNEXT-candidate--stage-3](https://github.com//node.green//issues/ESNEXT-candidate--stage-3) [/node.green/#ES2015](https://github.com//node.green//issues/ES2015)
+
+
+
+
+
 ## [1.49.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.0...cozy-doctypes@1.49.1) (2019-07-01)
 
 
