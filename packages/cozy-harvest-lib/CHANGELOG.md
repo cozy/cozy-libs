@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.63.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.3...cozy-harvest-lib@0.63.0) (2019-07-01)
+
+
+### Features
+
+* **harvest:** Add a way to disable the DeleteButtonCard ✨ ([226edd9](https://github.com/cozy/cozy-libs/commit/226edd9))
+* **harvest:** Add prop to make LaunchTriggerCard submitting 📝 ([1362a04](https://github.com/cozy/cozy-libs/commit/1362a04))
+* **harvest:** Do not render field as errored when disabled 📝 ([6cdaec6](https://github.com/cozy/cozy-libs/commit/6cdaec6))
+* **harvest:** Give callbacks to TriggerManager 📝 ([15474ec](https://github.com/cozy/cozy-libs/commit/15474ec))
+* **havest:** LaunchTriggerCard is now a component 📝 ([52d7262](https://github.com/cozy/cozy-libs/commit/52d7262))
+
+
+
+
+
 ## [0.62.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.2...cozy-harvest-lib@0.62.3) (2019-07-01)
 
 
