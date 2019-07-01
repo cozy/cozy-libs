@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.14.1...cozy-procedures@0.15.0) (2019-07-01)
+
+
+### Features
+
+* **procedures:** Add counters for completed/total documents in Overview ([4a0bd23](https://github.com/cozy/cozy-libs/commit/4a0bd23))
+
+
+
+
+
 ## [0.14.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.14.0...cozy-procedures@0.14.1) (2019-07-01)
 
 
