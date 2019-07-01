@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.0...cozy-doctypes@1.49.1) (2019-07-01)
+
+
+### Bug Fixes
+
+* **doctypes:** Add relationships to files in AdministrativeProcedure ([be5b003](https://github.com/cozy/cozy-libs/commit/be5b003))
+
+
+
+
+
 # [1.49.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.48.1...cozy-doctypes@1.49.0) (2019-06-28)
 
 
