@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.15.2...cozy-procedures@0.15.3) (2019-07-01)
+
+
+### Bug Fixes
+
+* **procedures:** Display an error and delete files if zip creation fails ([513b2ba](https://github.com/cozy/cozy-libs/commit/513b2ba))
+
+
+
+
+
 ## [0.15.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.15.1...cozy-procedures@0.15.2) (2019-07-01)
 
 
