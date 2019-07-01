@@ -115,7 +115,7 @@
       "address_certificate": "Certificate of address"
     },
     "upload": {
-      "from_other_service": "From other service",
+      "from_other_service": "From another service",
       "from_drive": "From My Drive",
       "from_my_mobile": "From my smartphone",
       "from_my_device_scan": "Scan / Import from my smartphone",
