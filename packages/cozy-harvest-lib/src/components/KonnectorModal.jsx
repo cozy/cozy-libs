@@ -175,6 +175,7 @@ export class KonnectorModal extends PureComponent {
                 />
                 <DeleteAccountCard
                   account={account}
+                  disabled={isJobRunning}
                   onSuccess={dismissAction}
                 />
               </div>
