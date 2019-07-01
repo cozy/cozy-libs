@@ -133,8 +133,22 @@ class Overview extends React.Component {
     }
   }
 
+  /**
+   * Total count of documents required by the template
+   *
+   * @return {number}
+   */
+  getDocumentsTotal = () => {
+    const template = creditApplicationTemplate
+    return Object.values(template.documents).reduce(
+      (acc, { count }) => acc + count,
+      0
+    )
+  }
+
   render() {
     const {
+      documentsCompleted,
       personalDataFieldsCompleted,
       personalDataFieldsTotal,
       data,
@@ -183,7 +197,7 @@ class Overview extends React.Component {
           <SubTitle className="u-mb-1">{t('overview.documents')}</SubTitle>
           <Button
             label={t('overview.complete')}
-            extraRight={'0/0'}
+            extraRight={`${documentsCompleted}/${this.getDocumentsTotal()}`}
             onClick={() => this.navigateTo('documents')}
             theme="ghost"
             extension="full"
