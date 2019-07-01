@@ -63,6 +63,7 @@ class Duration extends React.PureComponent {
         <Slider
           min={min}
           max={max}
+          step={1}
           value={simulationDuration}
           aria-label={t('duration.label')}
           onChange={(event, value) => updateDuration(value)}
