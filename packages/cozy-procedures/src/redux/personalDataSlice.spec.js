@@ -7,6 +7,7 @@ import reducer, {
   fetchMyselfError,
   getData,
   getSlice,
+  getCompletedFromMyself,
   getCompletedFields,
   getTotalFields
 } from './personalDataSlice'
@@ -77,16 +78,21 @@ describe('Personal data', () => {
 
   it('should handle fetchMyselfSuccess action', () => {
     const stateBefore = {
+      completedFromMyself: 0,
       data: {
-        firstname: 'John',
-        lastname: 'Doe',
+        firstname: '',
+        lastname: '',
         email: ''
       },
       error: '',
       loading: false
     }
-    const action = fetchMyselfSuccess({ email: 'john.doe@me.com' })
+    const action = fetchMyselfSuccess({
+      name: { givenName: 'John', familyName: 'Doe' },
+      email: 'john.doe@me.com'
+    })
     const expected = {
+      completedFromMyself: 3,
       data: {
         firstname: 'John',
         lastname: 'Doe',
@@ -196,6 +202,7 @@ describe('fetchMyself action', () => {
   describe('selectors', () => {
     const state = {
       personalData: {
+        completedFromMyself: 2,
         data: {
           firstname: 'John',
           lastname: 'Doe',
@@ -211,6 +218,7 @@ describe('fetchMyself action', () => {
       it('should return the number of completed fields', () => {
         const result = getSlice(state)
         expect(result).toEqual({
+          completedFromMyself: 2,
           data: {
             firstname: 'John',
             lastname: 'Doe',
@@ -234,6 +242,13 @@ describe('fetchMyself action', () => {
           address: null,
           salary: ''
         })
+      })
+    })
+
+    describe('getCompletedFromMyself', () => {
+      it('should return the number of fields that have been completed by the app', () => {
+        const result = getCompletedFromMyself(state)
+        expect(result).toEqual(2)
       })
     })
 

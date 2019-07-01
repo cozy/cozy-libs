@@ -5,6 +5,7 @@ describe('FormFillingStatus container', () => {
     it('should map completed and total to props', () => {
       const state = {
         personalData: {
+          completedFromMyself: 3,
           data: {
             firstname: 'John',
             lastname: 'Doe',

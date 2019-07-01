@@ -2,18 +2,18 @@
 
 exports[`FormFillingStatus component should display a status if there are some completed data 1`] = `
 <FormFillingStatus
-  completed="5"
+  completed={5}
   t={[Function]}
-  total="10"
+  total={10}
 >
   <div>
     <span
       className="u-weirdGreen"
     >
-      personalDataForm.completedStatus.main {"smart_count":"5","total":"10"}
+      personalDataForm.completedStatus.main {"smart_count":5,"total":10}
     </span>
      
-    personalDataForm.completedStatus.rest {"smart_count":"5"}
+    personalDataForm.completedStatus.rest {"smart_count":5}
   </div>
 </FormFillingStatus>
 `;

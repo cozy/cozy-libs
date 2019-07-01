@@ -2,7 +2,7 @@ import React from 'react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 export const FormFillingStatus = ({ completed, total, t }) => {
-  if (completed === '0') {
+  if (completed === 0) {
     return null
   }
 

@@ -14,6 +14,7 @@ function getDefaultValue(field) {
 
 const personalDataSlice = createSlice({
   initialState: {
+    completedFromMyself: 0,
     data: {},
     loading: false,
     error: ''
@@ -39,6 +40,7 @@ const personalDataSlice = createSlice({
         action.payload,
         fieldsToPopulate
       )
+      state.completedFromMyself = countCompletedFields(personalData)
       state.data = {
         ...state.data,
         ...personalData
@@ -89,12 +91,20 @@ export function fetchMyself(client) {
   }
 }
 
+const countCompletedFields = data => Object.values(data).filter(Boolean).length
+
 const getSlice = state => get(state, personalDataSlice.slice)
 const getData = state => get(state, [personalDataSlice.slice, 'data'], {})
-const getCompletedFields = state =>
-  Object.values(getData(state)).filter(Boolean).length
+const getCompletedFromMyself = state => getSlice(state).completedFromMyself
+const getCompletedFields = state => countCompletedFields(getData(state))
 const getTotalFields = state => Object.keys(getData(state)).length
 
-export { getData, getSlice, getCompletedFields, getTotalFields }
+export {
+  getData,
+  getSlice,
+  getCompletedFromMyself,
+  getCompletedFields,
+  getTotalFields
+}
 
 export default reducer
