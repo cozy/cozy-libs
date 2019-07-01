@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 
 import context from '../redux/context'
-import FormFillingStatus from '../components/FormFillingStatus'
+import CompletedFromMyselfStatus from '../components/CompletedFromMyselfStatus'
 import {
   getCompletedFromMyself,
   getTotalFields
@@ -17,4 +17,4 @@ export default connect(
   null,
   null,
   { context }
-)(FormFillingStatus)
+)(CompletedFromMyselfStatus)

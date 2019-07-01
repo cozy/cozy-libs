@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`FormFillingStatus component should display a status if there are some completed data 1`] = `
-<FormFillingStatus
+exports[`CompletedFromMyselfStatus component should display a status if there are some completed data 1`] = `
+<CompletedFromMyselfStatus
   completed={5}
   t={[Function]}
   total={10}
@@ -15,5 +15,5 @@ exports[`FormFillingStatus component should display a status if there are some c
      
     personalDataForm.completedStatus.rest {"smart_count":5}
   </div>
-</FormFillingStatus>
+</CompletedFromMyselfStatus>
 `;

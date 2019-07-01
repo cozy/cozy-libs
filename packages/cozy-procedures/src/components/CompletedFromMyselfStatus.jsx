@@ -1,7 +1,7 @@
 import React from 'react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-export const FormFillingStatus = ({ completed, total, t }) => {
+export const CompletedFromMyselfStatus = ({ completed, total, t }) => {
   if (completed === 0) {
     return null
   }
@@ -19,4 +19,4 @@ export const FormFillingStatus = ({ completed, total, t }) => {
   )
 }
 
-export default translate()(FormFillingStatus)
+export default translate()(CompletedFromMyselfStatus)
