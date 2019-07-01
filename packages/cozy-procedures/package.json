@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
+    "watch": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --watch",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
     "copy-files": "cp -rf src/locales dist/",
     "test": "jest --verbose",
