@@ -1,6 +1,6 @@
-import { mapStateToProps } from './FormFillingStatus'
+import { mapStateToProps } from './CompletedFromMyselfStatus'
 
-describe('FormFillingStatus container', () => {
+describe('CompletedFromMyselfStatus container', () => {
   describe('mapStateToProps', () => {
     it('should map completed and total to props', () => {
       const state = {

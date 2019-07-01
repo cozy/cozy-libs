@@ -14,7 +14,7 @@ import {
   SelectBoxAdapter,
   TextareaAdapter
 } from './form'
-import FormFillingStatus from '../containers/FormFillingStatus'
+import CompletedFromMyselfStatus from '../containers/CompletedFromMyselfStatus'
 import Topbar from './Topbar'
 import { creditApplicationTemplate } from 'cozy-procedures'
 
@@ -35,7 +35,7 @@ class PersonalDataForm extends React.Component {
       <div>
         <Topbar title={t('personalDataForm.title')} />
         <SubTitle>{t('personalDataForm.subtitle')}</SubTitle>
-        <FormFillingStatus />
+        <CompletedFromMyselfStatus />
         <Form
           formData={formData}
           schema={schema}
