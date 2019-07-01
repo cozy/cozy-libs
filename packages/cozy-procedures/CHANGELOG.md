@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.15.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.15.0...cozy-procedures@0.15.1) (2019-07-01)
+
+
+### Bug Fixes
+
+* Stop propagation onClick ([#566](https://github.com/cozy/cozy-libs/issues/566)) ([9c1d623](https://github.com/cozy/cozy-libs/commit/9c1d623))
+
+
+
+
+
 # [0.15.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.14.1...cozy-procedures@0.15.0) (2019-07-01)
 
 
