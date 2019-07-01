@@ -90,7 +90,32 @@ describe('AdministrativeProcedure model', () => {
           lastname: 'Doe',
           email: 'john.doe@me.com'
         },
-        documents: []
+        documentsData: {
+          address_certificate: {
+            files: [
+              {
+                id: 'baac72edf28acadd',
+                name: 'facture_edf.pdf',
+                trashed: false
+              },
+              {
+                id: '94bbda9a86b52c76',
+                name: 'facture_fibre.pdf',
+                trashed: false
+              }
+            ]
+          },
+          bank_identity: { files: [] },
+          identity_document: {
+            files: [
+              {
+                id: '979469aa60434433',
+                name: 'carte_identite.png',
+                trashed: false
+              }
+            ]
+          }
+        }
       }
       const template = {
         type: 'credit-application',
@@ -107,10 +132,30 @@ describe('AdministrativeProcedure model', () => {
           lastname: 'Doe',
           email: 'john.doe@me.com'
         },
-        documents: [],
         submissionDate: new Date(MOCKED_DATE),
         templateId: 'credit-application',
-        templateVersion: 1
+        templateVersion: 1,
+        relationships: {
+          files: {
+            data: [
+              {
+                _id: 'baac72edf28acadd',
+                _type: 'io.cozy.files',
+                templateDocumentId: 'address_certificate'
+              },
+              {
+                _id: '94bbda9a86b52c76',
+                _type: 'io.cozy.files',
+                templateDocumentId: 'address_certificate'
+              },
+              {
+                _id: '979469aa60434433',
+                _type: 'io.cozy.files',
+                templateDocumentId: 'identity_document'
+              }
+            ]
+          }
+        }
       })
     })
   })
