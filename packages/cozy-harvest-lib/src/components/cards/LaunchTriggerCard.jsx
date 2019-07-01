@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import pick from 'lodash/pick'
 
@@ -13,7 +13,7 @@ import TriggerLauncher, {
   TriggerLauncher as DumbTriggerLauncher
 } from '../TriggerLauncher'
 
-export class LaunchTriggerCard extends PureComponent {
+export class LaunchTriggerCard extends Component {
   render() {
     const { className, f, t, ...rest } = this.props
     return (
