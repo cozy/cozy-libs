@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.62.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.2...cozy-harvest-lib@0.62.3) (2019-07-01)
+
+
+### Bug Fixes
+
+* **harvest:** Fix undefined proptypes when transpiled 🚑 ([4cefcfa](https://github.com/cozy/cozy-libs/commit/4cefcfa))
+
+
+
+
+
 ## [0.62.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.1...cozy-harvest-lib@0.62.2) (2019-06-28)
 
 
