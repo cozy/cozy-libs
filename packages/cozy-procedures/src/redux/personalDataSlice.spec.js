@@ -232,7 +232,7 @@ describe('fetchMyself action', () => {
     })
 
     describe('getData', () => {
-      it('should return the number of completed fields', () => {
+      it('should return the data', () => {
         const result = getData(state)
         expect(result).toEqual({
           firstname: 'John',
