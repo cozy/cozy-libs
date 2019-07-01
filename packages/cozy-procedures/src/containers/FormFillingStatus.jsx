@@ -2,10 +2,13 @@ import { connect } from 'react-redux'
 
 import context from '../redux/context'
 import FormFillingStatus from '../components/FormFillingStatus'
-import { getCompletedFields, getTotalFields } from '../redux/personalDataSlice'
+import {
+  getCompletedFromMyself,
+  getTotalFields
+} from '../redux/personalDataSlice'
 
 export const mapStateToProps = state => ({
-  completed: getCompletedFields(state),
+  completed: getCompletedFromMyself(state),
   total: getTotalFields(state)
 })
 
