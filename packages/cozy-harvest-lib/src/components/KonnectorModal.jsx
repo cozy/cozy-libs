@@ -13,6 +13,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import accountMutations from '../connections/accounts'
+import triggersMutations from '../connections/triggers'
 import * as triggers from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import DeleteAccountCard from './cards/DeleteAccountCard'
@@ -90,8 +91,13 @@ export class KonnectorModal extends PureComponent {
     })
   }
 
-  handleKonnectorJobError(trigger) {
-    this.setState({ isJobRunning: false, trigger })
+  async handleKonnectorJobError() {
+    const { fetchTrigger } = this.props
+    const { trigger } = this.state
+    this.setState({
+      isJobRunning: false,
+      trigger: await fetchTrigger(trigger._id)
+    })
   }
 
   handleKonnectorJobSuccess(trigger) {
@@ -103,15 +109,7 @@ export class KonnectorModal extends PureComponent {
   }
 
   render() {
-    const {
-      dismissAction,
-      konnector,
-      into,
-      onLoginSuccess,
-      onSuccess,
-      running,
-      t
-    } = this.props
+    const { dismissAction, konnector, into, t } = this.props
 
     const { account, error, fetching, isJobRunning, trigger } = this.state
     const triggerError = triggers.getError(trigger)
@@ -168,9 +166,10 @@ export class KonnectorModal extends PureComponent {
                   account={account}
                   konnector={konnector}
                   trigger={trigger}
-                  running={running}
-                  onLoginSuccess={onLoginSuccess}
-                  onSuccess={onSuccess}
+                  onError={this.handleKonnectorJobError}
+                  onLaunch={this.handleTriggerLaunch}
+                  onSuccess={this.handleKonnectorJobSuccess}
+                  running={isJobRunning}
                   showError={false}
                 />
                 <DeleteAccountCard
@@ -190,4 +189,6 @@ KonnectorModal.contextTypes = {
   client: PropTypes.object.isRequired
 }
 
-export default withMutations(accountMutations)(withLocales(KonnectorModal))
+export default withMutations(accountMutations, triggersMutations)(
+  withLocales(KonnectorModal)
+)
