@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.13.1...cozy-procedures@0.14.0) (2019-07-01)
+
+
+### Bug Fixes
+
+* **procedures:** Change FormFillingStatus to CompletedFromMyselfStatus ([4a73aee](https://github.com/cozy/cozy-libs/commit/4a73aee))
+* Set the slider step value ([3e6cb62](https://github.com/cozy/cozy-libs/commit/3e6cb62))
+
+
+### Features
+
+* Upload Menu for Mobile ([#558](https://github.com/cozy/cozy-libs/issues/558)) ([cde321d](https://github.com/cozy/cozy-libs/commit/cde321d))
+
+
+
+
+
 ## [0.13.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.13.0...cozy-procedures@0.13.1) (2019-06-28)
 
 
