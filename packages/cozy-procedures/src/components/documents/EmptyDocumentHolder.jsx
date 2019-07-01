@@ -50,7 +50,9 @@ class EmptyDocumentHolder extends Component {
       if (classification) {
         metadata = {
           classification,
-          datetime: file.lastModifiedDate.toISOString()
+          datetime: file.lastModifiedDate
+            ? file.lastModifiedDate.toISOString()
+            : new Date().toISOString()
         }
       }
       const dirId = await filesCollection.ensureDirectoryExists(dirPath)
