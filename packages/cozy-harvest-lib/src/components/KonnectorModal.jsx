@@ -70,7 +70,11 @@ export class KonnectorModal extends PureComponent {
 
     try {
       const account = await findAccount(triggers.getAccountId(trigger))
-      this.setState({ account, trigger })
+      this.setState({
+        account,
+        trigger,
+        konnectorJobError: triggers.getError(trigger)
+      })
     } catch (error) {
       this.setState({
         error
@@ -91,28 +95,45 @@ export class KonnectorModal extends PureComponent {
     })
   }
 
-  async handleKonnectorJobError() {
-    const { fetchTrigger } = this.props
-    const { trigger } = this.state
+  handleKonnectorJobError(konnectorJobError) {
     this.setState({
-      isJobRunning: false,
-      trigger: await fetchTrigger(trigger._id)
+      konnectorJobError,
+      isJobRunning: false
     })
+
+    this.refetchTrigger()
   }
 
   handleKonnectorJobSuccess(trigger) {
     this.setState({ isJobRunning: false, trigger })
+    this.refetchTrigger()
   }
 
   handleTriggerLaunch() {
-    this.setState({ isJobRunning: true })
+    this.setState({ isJobRunning: true, konnectorJobError: null })
+  }
+
+  async refetchTrigger() {
+    const { fetchTrigger } = this.props
+    const { trigger } = this.state
+
+    const upToDateTrigger = await fetchTrigger(trigger._id)
+    this.setState({
+      trigger: upToDateTrigger
+    })
   }
 
   render() {
     const { dismissAction, konnector, into, t } = this.props
 
-    const { account, error, fetching, isJobRunning, trigger } = this.state
-    const triggerError = triggers.getError(trigger)
+    const {
+      account,
+      error,
+      fetching,
+      isJobRunning,
+      konnectorJobError,
+      trigger
+    } = this.state
 
     return (
       <Modal
@@ -149,10 +170,10 @@ export class KonnectorModal extends PureComponent {
               />
             ) : (
               <div className="u-mb-2">
-                {!isJobRunning && triggerError && (
+                {!isJobRunning && konnectorJobError && (
                   <TriggerErrorInfo
                     className="u-mb-1"
-                    error={triggerError}
+                    error={konnectorJobError}
                     konnector={konnector}
                   />
                 )}
