@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.14.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.14.0...cozy-procedures@0.14.1) (2019-07-01)
+
+
+### Bug Fixes
+
+* A file can not have the lastModifiedInformation ([#563](https://github.com/cozy/cozy-libs/issues/563)) ([cc2de0e](https://github.com/cozy/cozy-libs/commit/cc2de0e))
+
+
+
+
+
 # [0.14.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.13.1...cozy-procedures@0.14.0) (2019-07-01)
 
 
