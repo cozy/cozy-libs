@@ -13,13 +13,11 @@ import {
   ActionMenu,
   Button,
   Title,
-  Caption
+  Caption,
+  MenuItem
 } from 'cozy-ui/transpiled/react/'
 
-import {
-  ActionMenuItem,
-  ActionMenuHeader
-} from 'cozy-ui/transpiled/react/ActionMenu'
+import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import { isAndroidApp } from 'cozy-device-helper'
 import UploadInputLabel from './UploadInputLabel'
@@ -40,7 +38,6 @@ class EmptyDocumentHolder extends Component {
     const { documentId, client, linkDocumentSuccess } = this.props
     const dirPath = creditApplicationTemplate.pathToSave
     const filesCollection = client.collection('io.cozy.files')
-
     const classification = get(
       creditApplicationTemplate.documents[documentId],
       `rules.metadata.classification`
@@ -89,31 +86,41 @@ class EmptyDocumentHolder extends Component {
               <ActionMenuHeader>
                 <Title>{t('documents.import')}</Title>
               </ActionMenuHeader>
-              <ActionMenuItem left={<Icon icon="file" />}>
+              <MenuItem icon={<Icon icon="file" />}>
                 <p>
                   <span>{t('documents.upload.from_other_service')}</span>
                   <Caption>{t('documents.upload.soon_available')}</Caption>
                 </p>
-              </ActionMenuItem>
-              <ActionMenuItem left={<Icon icon="forward" />}>
+              </MenuItem>
+              <MenuItem icon={<Icon icon="forward" />}>
                 <p>
                   <span>{t('documents.upload.from_drive')}</span>
                   <Caption>{t('documents.upload.soon_available')}</Caption>
                 </p>
-              </ActionMenuItem>
-              <ActionMenuItem left={<Icon icon="file" />}>
-                <FileInput onChange={this.onChange} hidden={true}>
+              </MenuItem>
+              <MenuItem
+                icon={<Icon icon="file" />}
+                /**
+                 * We need to stop the propagation since when we click on an Item, MenuItem closes the Menu
+                 *
+                 * With a stopPropgration the native file input works, and we can select a file.
+                 * We don't need to handle the close menu action because if the upload works correctly, this
+                 * EmptyDocumentHolder component is unmounted
+                 */
+                onClick={e => e.stopPropagation()}
+              >
+                <FileInput onChange={file => this.onChange(file)} hidden={true}>
                   <UploadInputLabel />
                 </FileInput>
-              </ActionMenuItem>
+              </MenuItem>
 
               {isAndroidApp() && (
-                <ActionMenuItem left={<Icon icon="forward" />}>
+                <MenuItem icon={<Icon icon="forward" />}>
                   <p>
                     <span> {t('documents.upload.from_my_mobile')}</span>
                     <Caption>{t('documents.upload.soon_available')}</Caption>
                   </p>
-                </ActionMenuItem>
+                </MenuItem>
               )}
             </ActionMenu>
           )}
@@ -121,7 +128,7 @@ class EmptyDocumentHolder extends Component {
       )
     }
     return (
-      <FileInput onChange={this.onChange} hidden={true}>
+      <FileInput onChange={file => this.onChange(file)} hidden={true}>
         <ButtonLink theme="ghost" extension="full" align="left">
           <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
           <span>{t('documents.import')}</span>
