@@ -60,7 +60,7 @@ class Duration extends React.PureComponent {
             {t('duration.rate')} : {rate.toFixed(2)}%
           </div>
         </Card>
-        <div className="u-mb-1 u-pv-1" style={{ overflow: 'hidden' }}>
+        <div className="u-mb-1 u-pv-2" style={{ overflow: 'hidden' }}>
           <Slider
             min={min}
             max={max}
