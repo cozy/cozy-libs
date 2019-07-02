@@ -41,7 +41,7 @@ class AdministrativeProcedure extends Document {
         value = get(contact, path)
       }
 
-      if (value) {
+      if (value !== undefined) {
         personalData[field] = value
       }
     })
