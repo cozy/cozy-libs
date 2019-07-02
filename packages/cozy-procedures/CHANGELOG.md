@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.15.5...cozy-procedures@0.16.0) (2019-07-02)
+
+
+### Features
+
+* Menu mobile and web for upload ([#571](https://github.com/cozy/cozy-libs/issues/571)) ([ed618f4](https://github.com/cozy/cozy-libs/commit/ed618f4))
+
+
+
+
+
 ## [0.15.5](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.15.4...cozy-procedures@0.15.5) (2019-07-02)
 
 
