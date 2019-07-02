@@ -7,6 +7,7 @@ import Topbar from './Topbar'
 import DocumentsGroup from '../components/documents/DocumentsGroup'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import DocumentsContainer from '../containers/DocumentsDataForm'
+import CompletedFromDriveStatus from '../containers/CompletedFromDriveStatus'
 
 /**
  * This function is used to populate an array based on the order
@@ -50,6 +51,7 @@ class Documents extends React.Component {
       <div>
         <Topbar title={t('documents.title')} />
         <Title>{t('documents.subtitle')}</Title>
+        <CompletedFromDriveStatus />
         {Object.keys(populatedTemplateDocsWithFiles).map(
           (documentId, index) => {
             const { files, count } = populatedTemplateDocsWithFiles[documentId]

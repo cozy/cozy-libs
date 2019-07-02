@@ -125,6 +125,10 @@
       "from_my_device_scan": "Scan / Import depuis mon téléphone",
       "from_my_computer": "Depuis mon ordinateur",
       "soon_available": "(bientôt disponible)"
+    },
+    "completedStatus": {
+      "main": "%{smart_count} document sur %{total} |||| %{smart_count} documents sur %{total}",
+      "rest": "a déjà été rassemblé par l'application. |||| ont déjà été rassemblés par l'application."
     }
   }
 }
