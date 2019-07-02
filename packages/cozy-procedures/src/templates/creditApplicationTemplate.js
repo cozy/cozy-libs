@@ -153,7 +153,7 @@ const documents = {
   payslip: {
     label: 'payslip',
     order: 3,
-    count: 3,
+    count: 1,
     rules: {
       metadata: {
         classification: 'payslip'
