@@ -44,7 +44,12 @@ class Overview extends React.Component {
     const { client, t } = this.props
     if (job.state === 'done') {
       Alerter.success(t('overview.zip_ready'))
-      client.collection('io.cozy.files').destroy(jsonFile)
+      client
+        .collection('io.cozy.files')
+        .destroy(jsonFile)
+        .catch(err => {
+          console.error('Error while trying to delete the json file: ', err)
+        })
     } else if (job.state === 'errored') {
       Alerter.error(t('overview.zip_errored'))
       // if an error occured, destroy the zip and the json
@@ -58,9 +63,19 @@ class Overview extends React.Component {
         }
       )
       resp.data.forEach(zipFile => {
-        client.collection('io.cozy.files').destroy(zipFile)
+        client
+          .collection('io.cozy.files')
+          .destroy(zipFile)
+          .catch(err => {
+            console.error('Error while trying to delete the zip file: ', err)
+          })
       })
-      client.collection('io.cozy.files').destroy(jsonFile)
+      client
+        .collection('io.cozy.files')
+        .destroy(jsonFile)
+        .catch(err => {
+          console.error('Error while trying to delete the json file: ', err)
+        })
     }
   }
 
