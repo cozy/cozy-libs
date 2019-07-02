@@ -10,12 +10,12 @@
     "durationUnit": "%{smart_count} mois",
     "documents": "Pièces justificatives",
     "personalData": "Informations personnelles",
-    "notice": "En soumettant votre demande, la totalité des éléménts de ce dossier nous sera envoyée.",
+    "notice": "En soumettant votre demande, la totalité des éléments de ce dossier sera transmise.",
     "button": "Envoyer mon dossier",
     "complete": "Compléter",
     "over": "sur",
-    "zip_ready": "Votre dossier est disponible dans vos documents.",
-    "zip_errored": "Il y a eu une erreur lors de la création de l'archive."
+    "zip_ready": "votre dossier a été envoyé. Une copie est disponible dans vos documents",
+    "zip_errored": "Une erreur est survenue lors de la création de l'archive."
   },
   "amount": {
     "title": "Montant du crédit",
