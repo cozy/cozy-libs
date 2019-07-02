@@ -200,7 +200,6 @@ const documents = {
 }
 
 export default {
-  name: 'Credit Application',
   type: 'credit-application',
   description: '…',
   procedureData: {
