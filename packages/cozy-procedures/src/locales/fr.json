@@ -19,12 +19,12 @@
   },
   "amount": {
     "title": "Montant du crédit",
-    "subtitle": "Quel montant souhaitez-vous  demander ?",
+    "subtitle": "Quel montant souhaitez-vous demander ?",
     "label": "Montant du crédit"
   },
   "duration": {
     "title": "Durée du crédit",
-    "subtitle": "Sur quelle durée souhaitez-vous  rembourser le crédit ?",
+    "subtitle": "Sur quelle durée souhaitez-vous rembourser le crédit ?",
     "label": "Durée de remboursement",
     "reimbursement": "Remboursement",
     "rate": "Taux annuel Effectif Global",
