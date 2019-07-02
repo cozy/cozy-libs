@@ -144,7 +144,9 @@ const documents = {
     rules: {
       metadata: {
         classification: 'tax_notice',
-        subject: 'income'
+        subjects: {
+          $in: ['income']
+        }
       }
     }
   },
@@ -176,11 +178,13 @@ const documents = {
           {
             classification: 'certificate',
             categories: 'energy',
-            subject: 'subscription'
+            subjects: {
+              $in: ['subscription']
+            }
           },
           {
             classification: 'invoicing',
-            isSubsciption: true,
+            isSubscription: true,
             categories: {
               $in: ['internet', 'phone', 'energy']
             }
