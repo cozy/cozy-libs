@@ -253,7 +253,8 @@ export class TriggerManager extends Component {
   }
 
   async refetchTrigger() {
-    const { fetchTrigger, trigger } = this.props
+    const { fetchTrigger } = this.props
+    const { trigger } = this.state
     try {
       return await fetchTrigger(trigger._id)
     } catch (error) {
