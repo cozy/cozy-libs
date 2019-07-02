@@ -4,34 +4,17 @@ import get from 'lodash/get'
 import flow from 'lodash/flow'
 
 import { withClient } from 'cozy-client'
-import {
-  translate,
-  ButtonLink,
-  Icon,
-  FileInput,
-  withBreakpoints,
-  ActionMenu,
-  Button,
-  Title,
-  Caption,
-  MenuItem
-} from 'cozy-ui/transpiled/react/'
+import { withBreakpoints } from 'cozy-ui/transpiled/react/'
 
-import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import { creditApplicationTemplate } from 'cozy-procedures'
-import { isAndroidApp } from 'cozy-device-helper'
-import UploadInputLabel from './UploadInputLabel'
+
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
+
+import MenuUploadMobile from './menuUpload/MenuUploadMobile'
+import MenuUploadWeb from './menuUpload/MenuUploadWeb'
 class EmptyDocumentHolder extends Component {
   state = {
     menuDisplayed: false
-  }
-
-  showMenu() {
-    this.setState({ menuDisplayed: true })
-  }
-  hideMenu() {
-    this.setState({ menuDisplayed: false })
   }
 
   async onChange(file) {
@@ -65,87 +48,23 @@ class EmptyDocumentHolder extends Component {
   }
 
   render() {
-    const { t, breakpoints } = this.props
+    const { breakpoints } = this.props
 
     const { isMobile } = breakpoints
-
     if (isMobile) {
-      return (
-        <>
-          <Button
-            theme="ghost"
-            extension="full"
-            align="left"
-            onClick={() => this.showMenu()}
-          >
-            <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
-            <span>{t('documents.import')}</span>
-          </Button>
-          {this.state.menuDisplayed && (
-            <ActionMenu onClose={() => this.hideMenu()}>
-              <ActionMenuHeader>
-                <Title>{t('documents.import')}</Title>
-              </ActionMenuHeader>
-              <MenuItem icon={<Icon icon="file" />}>
-                <p>
-                  <span>{t('documents.upload.from_other_service')}</span>
-                  <Caption>{t('documents.upload.soon_available')}</Caption>
-                </p>
-              </MenuItem>
-              <MenuItem icon={<Icon icon="forward" />}>
-                <p>
-                  <span>{t('documents.upload.from_drive')}</span>
-                  <Caption>{t('documents.upload.soon_available')}</Caption>
-                </p>
-              </MenuItem>
-              <MenuItem
-                icon={<Icon icon="file" />}
-                /**
-                 * We need to stop the propagation since when we click on an Item, MenuItem closes the Menu
-                 *
-                 * With a stopPropgration the native file input works, and we can select a file.
-                 * We don't need to handle the close menu action because if the upload works correctly, this
-                 * EmptyDocumentHolder component is unmounted
-                 */
-                onClick={e => e.stopPropagation()}
-              >
-                <FileInput onChange={file => this.onChange(file)} hidden={true}>
-                  <UploadInputLabel />
-                </FileInput>
-              </MenuItem>
-
-              {isAndroidApp() && (
-                <MenuItem icon={<Icon icon="forward" />}>
-                  <p>
-                    <span> {t('documents.upload.from_my_mobile')}</span>
-                    <Caption>{t('documents.upload.soon_available')}</Caption>
-                  </p>
-                </MenuItem>
-              )}
-            </ActionMenu>
-          )}
-        </>
-      )
+      return <MenuUploadMobile onChange={this.onChange.bind(this)} />
     }
-    return (
-      <FileInput onChange={file => this.onChange(file)} hidden={true}>
-        <ButtonLink theme="ghost" extension="full" align="left">
-          <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
-          <span>{t('documents.import')}</span>
-        </ButtonLink>
-      </FileInput>
-    )
+    return <MenuUploadWeb onChange={this.onChange.bind(this)} />
   }
 }
 
 EmptyDocumentHolder.propTypes = {
-  t: PropTypes.func.isRequired,
   documentId: PropTypes.string.isRequired,
-  linkDocumentSuccess: PropTypes.func.isRequired
+  linkDocumentSuccess: PropTypes.func.isRequired,
+  breakpoints: PropTypes.object.isRequired
 }
 
 export default flow(
-  translate(),
   withBreakpoints(),
   withClient
 )(DocumentsDataFormContainer(EmptyDocumentHolder))
