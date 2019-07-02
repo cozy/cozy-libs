@@ -10,11 +10,13 @@ import { getSlice as getAmount } from '../redux/amountSlice'
 import { getSlice as getDuration } from '../redux/durationSlice'
 import {
   getCompletedDocumentsCount,
+  getDocumentsTotal,
   getFiles
 } from '../redux/documentsDataSlice'
 
 export const mapStateToProps = state => ({
   documentsCompleted: getCompletedDocumentsCount(state),
+  documentsTotal: getDocumentsTotal(state),
   personalDataFieldsCompleted: getCompletedFields(state),
   personalDataFieldsTotal: getTotalFields(state),
   data: {

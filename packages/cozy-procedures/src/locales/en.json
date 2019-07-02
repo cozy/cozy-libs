@@ -125,6 +125,10 @@
       "from_my_device_scan": "Scan / Import from my smartphone",
       "from_my_computer": "From my computer",
       "soon_available": "(available soon)"
+    },
+    "completedStatus": {
+      "main": "%{smart_count} document out of %{total} |||| %{smart_count} documents out of %{total}",
+      "rest": "has been gathered by the application. |||| have been gathered by the application."
     }
   }
 }

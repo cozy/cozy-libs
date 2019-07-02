@@ -5,6 +5,7 @@ import { AdministrativeProcedure } from 'cozy-doctypes'
 
 const documentsSlice = createSlice({
   initialState: {
+    completedFromDrive: 0,
     data: {
       /*  payslip: {
         files: []
@@ -22,6 +23,7 @@ const documentsSlice = createSlice({
   reducers: {
     init: (state, action) => {
       return {
+        completedFromDrive: 0,
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
           acc[fieldId] = {
             files: []
@@ -46,6 +48,7 @@ const documentsSlice = createSlice({
       const { idDoctemplate, loading, files } = action.payload
       state.ui[idDoctemplate].loading = loading
       state.data[idDoctemplate].files = files
+      state.completedFromDrive += files.length
     },
     fetchDocumentError: (state, action) => {
       const { idDoctemplate, error } = action.payload
@@ -78,7 +81,16 @@ const getCompletedCount = state =>
 
 const selectors = {
   getFiles: getData,
+  getCompletedFromDrive: state =>
+    get(state, [documentsSlice.slice, 'completedFromDrive'], 0),
   getCompletedDocumentsCount: getCompletedCount,
+  getDocumentsTotal: () => {
+    // FIXME: don't use the template directly here
+    return Object.values(creditApplicationTemplate.documents).reduce(
+      (acc, { count }) => acc + count,
+      0
+    )
+  },
   getInitiated: state =>
     get(state, [documentsSlice.slice, 'ui', ['initiated']], {})
 }
@@ -134,5 +146,11 @@ export function fetchDocument(client, documentTemplate) {
   }
 }
 
-export const { getCompletedDocumentsCount, getFiles, getInitiated } = selectors
+export const {
+  getCompletedFromDrive,
+  getCompletedDocumentsCount,
+  getDocumentsTotal,
+  getFiles,
+  getInitiated
+} = selectors
 export default reducer
