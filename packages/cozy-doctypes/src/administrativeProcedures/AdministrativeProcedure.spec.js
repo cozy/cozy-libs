@@ -58,7 +58,8 @@ describe('AdministrativeProcedure model', () => {
           }
         ],
         maritalStatus: 'complicated',
-        numberOfDependants: 3
+        numberOfDependants: 3,
+        additionalIncome: 0
       }
       const fields = [
         'lastname',
@@ -78,7 +79,8 @@ describe('AdministrativeProcedure model', () => {
         phone: '+33 (2)0 90 00 54 04',
         email: 'daenerys@dragonstone.westeros',
         maritalStatus: 'complicated',
-        numberOfDependants: 3
+        numberOfDependants: 3,
+        additionalIncome: 0
       }
       const result = AdministrativeProcedure.getPersonalData(dany, fields)
       expect(result).toEqual(expected)
