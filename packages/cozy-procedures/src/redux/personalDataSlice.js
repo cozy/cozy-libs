@@ -6,7 +6,7 @@ import { AdministrativeProcedure } from 'cozy-doctypes'
 function getDefaultValue(field) {
   const typeValueMapping = {
     string: '',
-    number: 0
+    number: ''
   }
 
   return get(typeValueMapping, field.type, undefined)
@@ -91,7 +91,8 @@ export function fetchMyself(client) {
   }
 }
 
-const countCompletedFields = data => Object.values(data).filter(Boolean).length
+const countCompletedFields = data =>
+  Object.values(data).filter(v => v !== '').length
 
 const getSlice = state => get(state, personalDataSlice.slice)
 const getData = state => get(state, [personalDataSlice.slice, 'data'], {})

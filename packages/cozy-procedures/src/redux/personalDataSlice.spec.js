@@ -23,7 +23,7 @@ describe('Personal data', () => {
       data: {
         firstname: '',
         lastname: '',
-        salary: 0
+        salary: ''
       },
       loading: false,
       error: ''
@@ -207,9 +207,9 @@ describe('fetchMyself action', () => {
           firstname: 'John',
           lastname: 'Doe',
           email: 'john.doe@me.com',
-          phone: undefined,
-          address: null,
-          salary: ''
+          phone: '',
+          address: '',
+          salary: 0
         }
       }
     }
@@ -223,9 +223,9 @@ describe('fetchMyself action', () => {
             firstname: 'John',
             lastname: 'Doe',
             email: 'john.doe@me.com',
-            phone: undefined,
-            address: null,
-            salary: ''
+            phone: '',
+            address: '',
+            salary: 0
           }
         })
       })
@@ -238,9 +238,9 @@ describe('fetchMyself action', () => {
           firstname: 'John',
           lastname: 'Doe',
           email: 'john.doe@me.com',
-          phone: undefined,
-          address: null,
-          salary: ''
+          phone: '',
+          address: '',
+          salary: 0
         })
       })
     })
@@ -255,7 +255,7 @@ describe('fetchMyself action', () => {
     describe('getCompletedFields', () => {
       it('should return the number of completed fields', () => {
         const result = getCompletedFields(state)
-        expect(result).toEqual(3)
+        expect(result).toEqual(4)
       })
     })
 
