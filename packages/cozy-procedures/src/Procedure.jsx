@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import { withClient } from 'cozy-client'
 import { Document } from 'cozy-doctypes'
 import { creditApplicationTemplate } from 'cozy-procedures'
-import { Spinner } from 'cozy-ui/transpiled/react/'
+import { Spinner, Alerter } from 'cozy-ui/transpiled/react/'
 
 class Procedure extends React.Component {
   componentDidMount() {
@@ -43,6 +43,7 @@ class Procedure extends React.Component {
         ) : (
           <Spinner size="xxlarge" />
         )}
+        <Alerter />
       </div>
     )
   }
