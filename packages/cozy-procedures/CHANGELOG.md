@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.16.1...cozy-procedures@0.16.2) (2019-07-02)
+
+
+### Bug Fixes
+
+* **procedures:** Allow user to delete amount value ([5cf7cf6](https://github.com/cozy/cozy-libs/commit/5cf7cf6))
+
+
+
+
+
 ## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.16.0...cozy-procedures@0.16.1) (2019-07-02)
 
 
