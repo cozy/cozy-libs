@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.16.0...cozy-procedures@0.16.1) (2019-07-02)
+
+
+### Bug Fixes
+
+* Remove special char ([#577](https://github.com/cozy/cozy-libs/issues/577)) ([7840194](https://github.com/cozy/cozy-libs/commit/7840194))
+* Template we only ask for the latest payslip ([#578](https://github.com/cozy/cozy-libs/issues/578)) ([62ed337](https://github.com/cozy/cozy-libs/commit/62ed337))
+* **procedures:** Catch errors on file delete ([#576](https://github.com/cozy/cozy-libs/issues/576)) ([c9783ab](https://github.com/cozy/cozy-libs/commit/c9783ab))
+
+
+
+
+
 # [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.15.5...cozy-procedures@0.16.0) (2019-07-02)
 
 
