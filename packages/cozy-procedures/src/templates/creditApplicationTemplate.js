@@ -22,7 +22,7 @@ const schema = {
         'personalDataForm.form.maritalStatus.pacs'
       ]
     },
-    numberOfDependents: {
+    numberOfDependants: {
       title: 'personalDataForm.form.numberOfDependents.title',
       type: 'number',
       minimum: 0
