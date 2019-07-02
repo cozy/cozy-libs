@@ -15,7 +15,10 @@
     "complete": "Fill out",
     "over": "over",
     "zip_ready": "Your application hs been sent. A copy is available in your files.",
-    "zip_errored": "An error occurred during the archive creation."
+    "zip_errored": "An error occurred during the archive creation.",
+    "titles": {
+      "credit-application": "Credit application"
+    }
   },
   "amount": {
     "title": "Amount",

@@ -189,7 +189,9 @@ class Overview extends React.Component {
 
     return (
       <div>
-        <Topbar title={creditApplicationTemplate.name} />
+        <Topbar
+          title={t(`overview.titles.${creditApplicationTemplate.type}`)}
+        />
         <Title className="u-mb-2">{t('overview.subtitle')}</Title>
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.request')}</SubTitle>

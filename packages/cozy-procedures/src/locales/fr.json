@@ -15,7 +15,10 @@
     "complete": "Compléter",
     "over": "sur",
     "zip_ready": "votre dossier a été envoyé. Une copie est disponible dans vos documents",
-    "zip_errored": "Une erreur est survenue lors de la création de l'archive."
+    "zip_errored": "Une erreur est survenue lors de la création de l'archive.",
+    "titles": {
+      "credit-application": "Dossier de crédit"
+    }
   },
   "amount": {
     "title": "Montant du crédit",
