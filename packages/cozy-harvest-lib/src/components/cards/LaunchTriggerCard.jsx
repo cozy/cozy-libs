@@ -26,7 +26,7 @@ export class LaunchTriggerCard extends Component {
             return (
               <div className="u-flex u-flex-column-s">
                 <ul className="u-nolist u-m-0 u-mr-1 u-pl-0 u-flex-grow-1">
-                  <li className="u-mb-1">
+                  <li className="u-mb-half">
                     <Uppercase
                       tag="span"
                       className="u-coolGrey u-mr-half u-fz-tiny"
@@ -44,7 +44,7 @@ export class LaunchTriggerCard extends Component {
                         : t('card.launchTrigger.lastSync.unknown')}
                     </Text>
                   </li>
-                  <li className="u-mb-1">
+                  <li className="u-mb-half">
                     <Uppercase
                       className="u-coolGrey u-mr-half u-fz-tiny"
                       tag="span"
