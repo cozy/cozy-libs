@@ -10,11 +10,11 @@
     "durationUnit": "%{smart_count} month",
     "documents": "Documents",
     "personalData": "Personal information",
-    "notice": "By submitting the request, all informations in this application will be sent to us.",
+    "notice": "By submitting the request, all informations in this application will be transfered.",
     "button": "Send my application",
     "complete": "Fill out",
     "over": "over",
-    "zip_ready": "Your application is available in your files.",
+    "zip_ready": "Your application hs been sent. A copy is available in your files.",
     "zip_errored": "An error occurred during the archive creation."
   },
   "amount": {
