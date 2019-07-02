@@ -10,7 +10,7 @@ const DocumentHolder = ({ document, unlinkDocument, documentId }) => {
   return (
     <Chip variant="dashed" className="u-w-100">
       <Icon icon={`file-type-${document.class}`} size={24} className="u-mr-1" />
-      <span className="u-flex-grow-1">
+      <span className="u-flex-grow-1 u-ellipsis">
         {splittedName.filename}
         <span className="u-coolGrey">{splittedName.extension}</span>
       </span>
