@@ -39,7 +39,7 @@ class Amount extends React.Component {
             id="amount-input"
             min={min}
             max={max}
-            value={amount || defaultValue}
+            value={amount === null ? defaultValue : amount}
             onChange={e => updateAmount(parseInt(e.target.value))}
             inputRef={this.inputRef}
           />
