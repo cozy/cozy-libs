@@ -56,7 +56,9 @@ describe('AdministrativeProcedure model', () => {
             address: 'daenerys@dragonstone.westeros',
             primary: true
           }
-        ]
+        ],
+        maritalStatus: 'complicated',
+        numberOfDependants: 3
       }
       const fields = [
         'lastname',
@@ -64,14 +66,19 @@ describe('AdministrativeProcedure model', () => {
         'salary',
         'address',
         'phone',
-        'email'
+        'email',
+        'maritalStatus',
+        'numberOfDependants',
+        'additionalIncome'
       ]
       const expected = {
         lastname: 'Targaryen',
         firstname: 'Daenerys',
         address: '94 Hinton Road 05034 Fresno, Singapore',
         phone: '+33 (2)0 90 00 54 04',
-        email: 'daenerys@dragonstone.westeros'
+        email: 'daenerys@dragonstone.westeros',
+        maritalStatus: 'complicated',
+        numberOfDependants: 3
       }
       const result = AdministrativeProcedure.getPersonalData(dany, fields)
       expect(result).toEqual(expected)

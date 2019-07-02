@@ -37,7 +37,8 @@ class AdministrativeProcedure extends Document {
       if (contactField.getter) {
         value = contactField.getter(contact)
       } else {
-        value = get(contact, contactField.path)
+        const path = get(contactField, 'path', field)
+        value = get(contact, path)
       }
 
       if (value) {
