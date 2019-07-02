@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.16.3...cozy-procedures@0.17.0) (2019-07-02)
+
+
+### Bug Fixes
+
+* **procedures:** Use numberOfDependants instead of numberOfDependents ([d1d3f7f](https://github.com/cozy/cozy-libs/commit/d1d3f7f))
+* Ellipsison filename ([eacf772](https://github.com/cozy/cozy-libs/commit/eacf772))
+* Make sure procedures alerts show up ([3a40337](https://github.com/cozy/cozy-libs/commit/3a40337))
+* Translation modifications ([60cdd13](https://github.com/cozy/cozy-libs/commit/60cdd13))
+* Use now() to set the metadata datetime during upload ([74c9774](https://github.com/cozy/cozy-libs/commit/74c9774))
+* Use same icon everywhere. Also deal with web mobile ([#584](https://github.com/cozy/cozy-libs/issues/584)) ([ad39d92](https://github.com/cozy/cozy-libs/commit/ad39d92))
+
+
+### Features
+
+* Translate procedure title ([e8e9cca](https://github.com/cozy/cozy-libs/commit/e8e9cca))
+
+
+
+
+
 ## [0.16.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.16.2...cozy-procedures@0.16.3) (2019-07-02)
 
 

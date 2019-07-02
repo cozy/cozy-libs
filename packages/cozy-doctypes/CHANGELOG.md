@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.49.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.2...cozy-doctypes@1.49.3) (2019-07-02)
+
+
+### Bug Fixes
+
+* **doctypes:** Default getter in getPersonalData ([795c291](https://github.com/cozy/cozy-libs/commit/795c291))
+* **doctypes:** Zero is a valid value in getPersonalData ([5dab116](https://github.com/cozy/cozy-libs/commit/5dab116))
+
+
+
+
+
 ## [1.49.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.1...cozy-doctypes@1.49.2) (2019-07-01)
 
 
