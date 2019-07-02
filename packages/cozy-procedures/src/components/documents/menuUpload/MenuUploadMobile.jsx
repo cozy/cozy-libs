@@ -51,7 +51,7 @@ class MenuUploadMobile extends Component {
               <span>{t('documents.upload.from_other_service')}</span>
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
-            <MenuItem icon={<Icon icon="forward" />}>
+            <MenuItem icon={<Icon icon="file" />}>
               <span>{t('documents.upload.from_drive')}</span>
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
@@ -72,7 +72,7 @@ class MenuUploadMobile extends Component {
             </MenuItem>
 
             {isAndroidApp() && (
-              <MenuItem icon={<Icon icon="forward" />}>
+              <MenuItem icon={<Icon icon="file" />}>
                 <span> {t('documents.upload.from_my_mobile')}</span>
                 <Caption>{t('documents.upload.soon_available')}</Caption>
               </MenuItem>
