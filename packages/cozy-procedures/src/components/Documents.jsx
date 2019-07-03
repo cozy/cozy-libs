@@ -78,6 +78,7 @@ class Documents extends React.Component {
             label={t('confirm')}
             extension="full"
             onClick={router.goBack}
+            className="u-mt-2 u-mb-1"
           />
         </div>
       </div>
