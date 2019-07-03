@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.5](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.4...cozy-procedures@0.18.5) (2019-07-03)
+
+
+### Bug Fixes
+
+* **procedures:** Initialize completedFromMyself to 0 ([5e8d73a](https://github.com/cozy/cozy-libs/commit/5e8d73a))
+
+
+
+
+
 ## [0.18.4](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.3...cozy-procedures@0.18.4) (2019-07-03)
 
 
