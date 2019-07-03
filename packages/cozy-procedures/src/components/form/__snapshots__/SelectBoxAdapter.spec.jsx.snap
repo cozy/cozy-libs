@@ -2,6 +2,7 @@
 
 exports[`SelectBoxAdapter component should match snapshot 1`] = `
 <Aware
+  fullwidth={true}
   onChange={[Function]}
   options={
     Array [
