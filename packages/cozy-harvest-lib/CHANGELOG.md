@@ -3,6 +3,44 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.65.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.64.0...cozy-harvest-lib@0.65.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Call Delete button callbacks after setState ([53c54e4](https://github.com/cozy/cozy-libs/commit/53c54e4))
+* :bug: Correctly wrap TriggerLaunche into withLocales ([73cc510](https://github.com/cozy/cozy-libs/commit/73cc510))
+* **harvest:** :bug: Omit also i18n props from withLocales ([5f88752](https://github.com/cozy/cozy-libs/commit/5f88752))
+* **harvest:** :nail_care: Better delete button proptypes handling ([3b3d122](https://github.com/cozy/cozy-libs/commit/3b3d122))
+* **harvest:** LoadStart on Android is not dispatched when redirected ([cde2d10](https://github.com/cozy/cozy-libs/commit/cde2d10))
+* **harvest:** NeedsFolderPath should also check folders attribute 📝 ([3f6275f](https://github.com/cozy/cozy-libs/commit/3f6275f))
+* **harvest:** Rely on messageEvent.source for OAuth message 📝 ([8800778](https://github.com/cozy/cozy-libs/commit/8800778))
+* :nail_care: Handle missing password for encrypted placeholder ([84d78bc](https://github.com/cozy/cozy-libs/commit/84d78bc))
+* :pencil2: Missing spread ([7947f43](https://github.com/cozy/cozy-libs/commit/7947f43))
+
+
+### Features
+
+* **harvest:** Add DeleteAccountCard component ✨ ([135c47c](https://github.com/cozy/cozy-libs/commit/135c47c))
+* **harvest:** Add display names to HOC 📝 ([5656797](https://github.com/cozy/cozy-libs/commit/5656797))
+* **harvest:** Import tranpiled Cozy-UI components ⚙ ([8c1f50c](https://github.com/cozy/cozy-libs/commit/8c1f50c))
+* **harvest:** Improve margin bottom in KonnectorModal 📝 ([b20836d](https://github.com/cozy/cozy-libs/commit/b20836d))
+* **harvest:** Make HandleOAuthResponse return boolean value ✨ ([f800811](https://github.com/cozy/cozy-libs/commit/f800811))
+* **harvest:** Make OAuthWindow and Popup mobile-compatible ✨ ([98f2664](https://github.com/cozy/cozy-libs/commit/98f2664))
+* **harvest:** Prepare checkOAuth function in helper 📝 ([b8b20f7](https://github.com/cozy/cozy-libs/commit/b8b20f7))
+* **harvest:** Prepare OAuth helper 📝 ([ddbe986](https://github.com/cozy/cozy-libs/commit/ddbe986))
+* **harvest:** Prepare OAuthWindow component 📝 ([8acec47](https://github.com/cozy/cozy-libs/commit/8acec47))
+* **harvest:** Prepare Popup component 📝 ([96a6eeb](https://github.com/cozy/cozy-libs/commit/96a6eeb))
+* **harvest:** Prepare prepareOAuth function in helper 📝 ([7e9c4a6](https://github.com/cozy/cozy-libs/commit/7e9c4a6))
+* **harvest:** Prepare terminateOAuth function in helper 📝 ([b6143fe](https://github.com/cozy/cozy-libs/commit/b6143fe))
+* **harvest:** Trigger build including recent translations, second try ⚙ ([c803966](https://github.com/cozy/cozy-libs/commit/c803966))
+* **harvest:** Trigger manual release to get last translations 🌐 ([8bc3f30](https://github.com/cozy/cozy-libs/commit/8bc3f30))
+* **harvest:** Update OAuthForm, move it into TriggerManager ✨ ([ac9d402](https://github.com/cozy/cozy-libs/commit/ac9d402))
+
+
+
+
+
 # [0.64.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.63.0...cozy-harvest-lib@0.64.0) (2019-07-03)
 
 
