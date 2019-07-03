@@ -50,7 +50,7 @@ class Documents extends React.Component {
     return (
       <div>
         <Topbar title={t('documents.title')} />
-        <Title>{t('documents.subtitle')}</Title>
+        <Title className="u-ta-center">{t('documents.subtitle')}</Title>
         <CompletedFromDriveStatus />
         {Object.keys(populatedTemplateDocsWithFiles).map(
           (documentId, index) => {
