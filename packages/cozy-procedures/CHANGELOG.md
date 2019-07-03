@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.1...cozy-procedures@0.18.2) (2019-07-03)
+
+
+### Bug Fixes
+
+* **procedures:** Use cursor pointer on amount and duration ([b9109fd](https://github.com/cozy/cozy-libs/commit/b9109fd))
+
+
+
+
+
 ## [0.18.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.0...cozy-procedures@0.18.1) (2019-07-03)
 
 **Note:** Version bump only for package cozy-procedures
