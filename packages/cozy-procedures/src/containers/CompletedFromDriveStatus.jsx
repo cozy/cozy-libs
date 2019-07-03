@@ -1,7 +1,5 @@
-import { connect } from 'react-redux'
-
-import context from '../redux/context'
 import CompletedFromDriveStatus from '../components/CompletedFromDriveStatus'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import {
   getCompletedFromDrive,
   getDocumentsTotal
@@ -12,9 +10,4 @@ export const mapStateToProps = state => ({
   total: getDocumentsTotal(state)
 })
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { context }
-)(CompletedFromDriveStatus)
+export default connectWithProcedures(mapStateToProps)(CompletedFromDriveStatus)

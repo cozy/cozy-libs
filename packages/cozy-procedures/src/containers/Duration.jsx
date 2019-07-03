@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import Duration from '../components/Duration'
 import { getSlice as getDuration, update } from '../redux/durationSlice'
 import { getSlice as getAmount } from '../redux/amountSlice'
@@ -13,9 +12,6 @@ const mapDispatchToProps = dispatch => ({
   updateDuration: value => dispatch(update(value))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { context }
-)(Duration)
+export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
+  Duration
+)

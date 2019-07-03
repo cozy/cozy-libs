@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import Overview from '../components/overview/Overview'
 import {
   getCompletedFields,
@@ -29,9 +28,4 @@ export const mapStateToProps = state => ({
   }
 })
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { context }
-)(Overview)
+export default connectWithProcedures(mapStateToProps)(Overview)
