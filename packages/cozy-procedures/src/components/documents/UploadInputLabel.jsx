@@ -10,7 +10,6 @@ const UploadInputLabel = ({ t, breakpoints }) => {
   if (isIOSApp()) {
     return (
       <span className="needsclick">
-        {' '}
         {t('documents.upload.from_my_device_scan')}
       </span>
     )
