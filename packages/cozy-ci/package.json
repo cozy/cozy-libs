@@ -6,6 +6,7 @@
   "bin": {
     "cozy-ci-github": "./github-comment.sh",
     "cozy-ci-transifex": "./transifex.sh",
-    "cozy_travis_wait": "./travis_wait"
+    "cozy_travis_wait": "./travis_wait",
+    "cozy_push_artifact": "./push_artifact.js"
   }
 }
