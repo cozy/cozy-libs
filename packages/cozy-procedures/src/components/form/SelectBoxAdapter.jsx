@@ -23,6 +23,7 @@ export const SelectBoxAdapter = ({
   return (
     <SelectBox
       {...stripInvalidInputProps(otherProps)}
+      fullwidth
       options={options.enumOptions.map(option => ({
         ...option,
         label: t(option.label)
