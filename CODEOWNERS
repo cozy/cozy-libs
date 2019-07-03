@@ -2,7 +2,7 @@ packages/babel-preset-cozy-app @cpatchane @cedricmessiant
 packages/browserslist-config-cozy @cpatchane @Crash--
 packages/commitlint-config-cozy @kosssi @enguerran @cedricmessiant
 packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
-packages/cozy-ci-utils @y-lohse @cedricmessiant
+packages/cozy-ci @y-lohse @cedricmessiant
 packages/cozy-device-helper @kosssi @ptbrowne
 packages/cozy-doctypes @ptbrowne @kosssi
 packages/cozy-flags @ptbrowne @cedricmessiant
