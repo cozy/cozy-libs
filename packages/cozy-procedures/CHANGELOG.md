@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.17.0...cozy-procedures@0.18.0) (2019-07-03)
+
+
+### Features
+
+* **procedures:** Add status for documents completed from Drive ([5810e8b](https://github.com/cozy/cozy-libs/commit/5810e8b))
+
+
+
+
+
 # [0.17.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.16.3...cozy-procedures@0.17.0) (2019-07-02)
 
 
