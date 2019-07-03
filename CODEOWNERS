@@ -1,14 +1,14 @@
-packages/cozy-device-helper @kosssi @ptbrowne
-packages/cozy-flags @ptbrowne @cedricmessiant
-packages/cozy-realtime @kosssi
 packages/babel-preset-cozy-app @cpatchane @cedricmessiant
-packages/eslint-config-cozy-app @cpatchane @cedricmessiant
-packages/commitlint-config-cozy @kosssi @enguerran @cedricmessiant
 packages/browserslist-config-cozy @cpatchane @Crash--
+packages/commitlint-config-cozy @kosssi @enguerran @cedricmessiant
 packages/cozy-app-publish @cpatchane @gregorylegarec @y-lohse
 packages/cozy-ci-utils @y-lohse @cedricmessiant
+packages/cozy-device-helper @kosssi @ptbrowne
+packages/cozy-doctypes @ptbrowne @kosssi
+packages/cozy-flags @ptbrowne @cedricmessiant
 packages/cozy-harvest-lib @gregorylegarec @cpatchane
 packages/cozy-interapp @gregorylegarec @kosssi
-packages/cozy-doctypes @ptbrowne @kosssi
+packages/cozy-realtime @kosssi
 packages/cozy-release @gregorylegarec @cpatchane @cedricmessiant
+packages/eslint-config-cozy-app @cpatchane @cedricmessiant
 packages/renovate-config-cozy @y-lohse @doubleface @kosssi
