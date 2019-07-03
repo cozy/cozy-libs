@@ -54,11 +54,10 @@
       "maritalStatus": {
         "title": "Situation maritale",
         "single": "Célibataire",
-        "maried": "Marié.e",
+        "married": "Marié.e",
         "pacs": "Pacsé.e",
-        "divorced": "Divorcé.e",
-        "widowed": "Veu.f.ve",
-        "partner": "Concubin.e"
+        "separated": "Séparé.e",
+        "widowed": "Veu.f.ve"
       },
       "employmentStatus": {
         "title": "Statut professionnel",
