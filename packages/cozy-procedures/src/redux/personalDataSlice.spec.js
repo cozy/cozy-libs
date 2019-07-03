@@ -20,6 +20,7 @@ describe('Personal data', () => {
       salary: { type: 'number' }
     })
     expect(reducer(undefined, action)).toEqual({
+      completedFromMyself: 0,
       data: {
         firstname: '',
         lastname: '',

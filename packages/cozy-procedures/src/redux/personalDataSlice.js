@@ -23,6 +23,7 @@ const personalDataSlice = createSlice({
   reducers: {
     init: (state, action) => {
       return {
+        completedFromMyself: 0,
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
           acc[fieldId] = getDefaultValue(action.payload[fieldId])
           return acc
