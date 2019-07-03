@@ -8,7 +8,11 @@ import { translate, withBreakpoints } from 'cozy-ui/transpiled/react'
 const UploadInputLabel = ({ t, breakpoints }) => {
   const { isMobile } = breakpoints
   if (isIOSApp()) {
-    return <span> {t('documents.upload.from_my_device_scan')}</span>
+    return (
+      <span className="needsclick">
+        {t('documents.upload.from_my_device_scan')}
+      </span>
+    )
   } else if (isAndroidApp()) {
     return <span>{t('documents.upload.from_my_mobile')}</span>
   } else {
