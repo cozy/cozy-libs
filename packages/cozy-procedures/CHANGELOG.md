@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.4](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.3...cozy-procedures@0.18.4) (2019-07-03)
+
+
+### Bug Fixes
+
+* **procedures:** Fix maritalStatus values ([65b456a](https://github.com/cozy/cozy-libs/commit/65b456a))
+
+
+
+
+
 ## [0.18.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.2...cozy-procedures@0.18.3) (2019-07-03)
 
 
