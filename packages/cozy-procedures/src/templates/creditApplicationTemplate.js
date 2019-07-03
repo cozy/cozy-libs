@@ -176,7 +176,9 @@ const documents = {
         $or: [
           {
             classification: 'certificate',
-            categories: 'energy',
+            categories: {
+              $in: ['energy']
+            },
             subjects: {
               $in: ['subscription']
             }
@@ -190,7 +192,9 @@ const documents = {
           },
           {
             classification: 'tax_notice',
-            $in: ['income', 'residence']
+            subjects: {
+              $in: ['income', 'residence']
+            }
           }
         ]
       }
