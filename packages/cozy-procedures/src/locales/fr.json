@@ -1,6 +1,7 @@
 {
   "confirm": "Valider",
   "back": "Retour",
+  "cancel": "Annuler",
   "overview": {
     "subtitle": "Complétez les informations suivantes pour demander un crédit",
     "request": "Crédit demandé",
@@ -128,7 +129,12 @@
       "conflict_error": "Un fichier avec le même nom est déjà présent. Veuillez renommer votre fichier avant de recommencer.",
       "error": "Une erreur est survenue durant l'upload du fichier."
     },
-
+    "unlink": {
+      "title": "Détacher du dossier ? ",
+      "subtitle": "Vous allez enlever ce document de votre dossier de crédit.",
+      "text": "Il ne sera pas supprimé de votre espace",
+      "unlink": "Détacher"
+    },
     "completedStatus": {
       "main": "%{smart_count} document sur %{total} |||| %{smart_count} documents sur %{total}",
       "rest": "a déjà été rassemblé par l'application. |||| ont déjà été rassemblés par l'application."

@@ -1,6 +1,7 @@
 {
   "confirm": "Confirm",
   "back": "Back",
+  "cancel": "Cancel",
   "overview": {
     "subtitle": "Please fill out the following information",
     "request": "Requested loan",
@@ -128,7 +129,12 @@
       "conflict_error": "A file with the same name is already uploaded. Please rename your file.",
       "error": "An error occured during upload"
     },
-
+    "unlink": {
+      "title": "Detach from your application?",
+      "subtitle": "You'll detach this file from your application.",
+      "text": "The file will not be deleted from your Document",
+      "unlink": "Detach"
+    },
     "completedStatus": {
       "main": "%{smart_count} document out of %{total} |||| %{smart_count} documents out of %{total}",
       "rest": "has been gathered by the application. |||| have been gathered by the application."
