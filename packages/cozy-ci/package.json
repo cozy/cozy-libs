@@ -5,6 +5,7 @@
   "license": "MIT",
   "bin": {
     "cozy-ci-github": "./github-comment.sh",
-    "cozy-ci-transifex": "./transifex.sh"
+    "cozy-ci-transifex": "./transifex.sh",
+    "cozy_travis_wait": "./travis_wait"
   }
 }
