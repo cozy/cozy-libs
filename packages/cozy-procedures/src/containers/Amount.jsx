@@ -1,14 +1,14 @@
 import connectWithProcedures from '../redux/connectWithProcedures'
 import Amount from '../components/Amount'
-import { getSlice, update } from '../redux/amountSlice'
+import { getAmount, updateAmount } from '../redux/procedureDataSlice'
 
 const mapStateToProps = state => ({
-  amount: getSlice(state)
+  amount: getAmount(state)
 })
 
-const mapDispatchToProps = dispatch => ({
-  updateAmount: value => dispatch(update(value))
-})
+const mapDispatchToProps = {
+  updateAmount
+}
 
 export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
   Amount
