@@ -10,6 +10,14 @@ export const InputAdapter = props => (
     onChange={e => {
       props.onChange(e.target.value)
     }}
+    onBlur={() => {
+      document.querySelector('[role="application"] aside').style.display =
+        'block'
+    }}
+    onFocus={() => {
+      document.querySelector('[role="application"] aside').style.display =
+        'none'
+    }}
   />
 )
 

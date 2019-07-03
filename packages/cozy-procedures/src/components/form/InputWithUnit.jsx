@@ -11,6 +11,14 @@ export const InputWithUnit = ({ onChange, t, ...otherProps }) => (
       onChange={e => {
         onChange(e.target.value)
       }}
+      onBlur={() => {
+        document.querySelector('[role="application"] aside').style.display =
+          'block'
+      }}
+      onFocus={() => {
+        document.querySelector('[role="application"] aside').style.display =
+          'none'
+      }}
     />
     <span>{t(otherProps.options.unit)}</span>
   </div>
