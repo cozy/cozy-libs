@@ -5,8 +5,7 @@ import {
   getTotalFields,
   getData as getPersonalData
 } from '../redux/personalDataSlice'
-import { getSlice as getAmount } from '../redux/amountSlice'
-import { getSlice as getDuration } from '../redux/durationSlice'
+import { getAmount, getDuration } from '../redux/procedureDataSlice'
 import {
   getCompletedDocumentsCount,
   getDocumentsTotal,
