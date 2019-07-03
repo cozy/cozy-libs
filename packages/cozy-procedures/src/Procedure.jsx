@@ -14,7 +14,7 @@ class Procedure extends React.Component {
       fetchMyself,
       fetchDocumentsByCategory,
       client,
-      setProcedureStatus,
+      initializationSuccess,
       fetchBankAccountsStats
     } = this.props
     //We init our Document model here to be able to use CozyFile or AdministrativeProcedure models where we want
@@ -27,7 +27,7 @@ class Procedure extends React.Component {
 
     initDocuments(get(creditApplicationTemplate, 'documents'))
     //Since init is done, we tell the app we can start to render thing
-    setProcedureStatus({ initiated: true })
+    initializationSuccess()
     fetchMyself(client)
 
     fetchBankAccountsStats(client)
@@ -41,7 +41,7 @@ class Procedure extends React.Component {
   render() {
     return (
       <div className="u-ph-1 u-pv-2 u-maw-6" data-procedure>
-        {this.props.initiated === true ? (
+        {this.props.initialized === true ? (
           this.props.children
         ) : (
           <Spinner size="xxlarge" />
@@ -57,8 +57,8 @@ Procedure.propTypes = {
   initDocuments: PropTypes.func.isRequired,
   fetchMyself: PropTypes.func.isRequired,
   fetchDocumentsByCategory: PropTypes.func.isRequired,
-  setProcedureStatus: PropTypes.func.isRequired,
-  initiated: PropTypes.bool.isRequired,
+  initializationSuccess: PropTypes.func.isRequired,
+  initialized: PropTypes.bool.isRequired,
   client: PropTypes.object.isRequired,
   fetchBankAccountsStats: PropTypes.func.isRequired
 }
