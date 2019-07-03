@@ -12,13 +12,12 @@ const schema = {
     maritalStatus: {
       title: 'personalDataForm.form.maritalStatus.title',
       type: 'string',
-      enum: ['single', 'divorced', 'widowed', 'partner', 'maried', 'pacs'],
+      enum: ['single', 'married', 'separated', 'widowed', 'pacs'],
       enumNames: [
         'personalDataForm.form.maritalStatus.single',
-        'personalDataForm.form.maritalStatus.divorced',
+        'personalDataForm.form.maritalStatus.married',
+        'personalDataForm.form.maritalStatus.separated',
         'personalDataForm.form.maritalStatus.widowed',
-        'personalDataForm.form.maritalStatus.partner',
-        'personalDataForm.form.maritalStatus.maried',
         'personalDataForm.form.maritalStatus.pacs'
       ]
     },
