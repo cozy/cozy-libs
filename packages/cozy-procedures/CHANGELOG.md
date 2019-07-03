@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.19.0...cozy-procedures@0.19.1) (2019-07-03)
+
+
+### Bug Fixes
+
+* Template procedure ([#603](https://github.com/cozy/cozy-libs/issues/603)) ([b9fc012](https://github.com/cozy/cozy-libs/commit/b9fc012))
+
+
+
+
+
 # [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.5...cozy-procedures@0.19.0) (2019-07-03)
 
 
