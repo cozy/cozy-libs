@@ -47,6 +47,7 @@ export class AccountField extends PureComponent {
     const {
       disabled,
       hasError,
+      forceEncryptedPlaceholder,
       initialValue,
       label,
       name,
@@ -78,7 +79,8 @@ export class AccountField extends PureComponent {
       }),
       placeholder: getFieldPlaceholder(
         this.props,
-        t(`fields.${name}.placeholder`, { _: '' })
+        t(`fields.${name}.placeholder`, { _: '' }),
+        { forceEncryptedPlaceholder }
       ),
       side: required ? null : t('accountForm.fields.optional'),
       size: 'medium'

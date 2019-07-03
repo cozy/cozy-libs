@@ -63,6 +63,19 @@ describe('Fields Helper', () => {
         )
       ).toBe('*************')
     })
+
+    it('should return placeholder for encrypted fields if no initialValue but forceEncryptedPlaceholder provided', () => {
+      expect(
+        getFieldPlaceholder(
+          {
+            encrypted: true,
+            placeholder: 'Random placeholder'
+          },
+          'Fallback placeholder',
+          { forceEncryptedPlaceholder: true }
+        )
+      ).toBe('*************')
+    })
   })
 
   describe('sanitizeSelectProps', () => {

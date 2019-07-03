@@ -16,17 +16,22 @@ export const getEncryptedFieldName = name => {
 }
 
 /**
- * If the field is encrypted and has an initial value, return a placeholder
- * that indicate that the value exists.
+ * If the field is encrypted and has initial value (or placeholder is forced),
+ * return a placeholder that indicate that the value exists.
  *
  * @param  {object} props AccountField component props
+ * @param  {object} fallback the placeholder to fall back
+ * @param  {object} options Extra options object
  * @return {string}       The encrypted placeholder or en empty string if the
  *                        field does not need encrypted placeholder
  */
-export const getFieldPlaceholder = (props, fallback) => {
+export const getFieldPlaceholder = (props, fallback, options = {}) => {
   const { encrypted, initialValue, placeholder } = props
+  const { forceEncryptedPlaceholder } = options
   return (
-    (encrypted && initialValue && ENCRYPTED_PLACEHOLDER) ||
+    (encrypted &&
+      (initialValue || forceEncryptedPlaceholder) &&
+      ENCRYPTED_PLACEHOLDER) ||
     placeholder ||
     fallback ||
     ''

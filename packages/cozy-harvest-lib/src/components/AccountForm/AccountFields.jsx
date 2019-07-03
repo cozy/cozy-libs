@@ -55,6 +55,7 @@ export class AccountFields extends PureComponent {
                   initialValues[getEncryptedFieldName(field.name)]
                 }
                 inputRef={inputRefByName(field.name)}
+                forceEncryptedPlaceholder={!!initialValues}
               />
             )}
           </FinalFormField>
