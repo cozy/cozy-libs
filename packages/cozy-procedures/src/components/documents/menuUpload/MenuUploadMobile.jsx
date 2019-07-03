@@ -47,11 +47,17 @@ class MenuUploadMobile extends Component {
               <Title>{t('documents.import')}</Title>
             </ActionMenuHeader>
 
-            <MenuItem icon={<Icon icon="file" />}>
+            <MenuItem
+              icon={<Icon icon="file" />}
+              onClick={e => e.stopPropagation()}
+            >
               <span>{t('documents.upload.from_other_service')}</span>
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
-            <MenuItem icon={<Icon icon="file" />}>
+            <MenuItem
+              icon={<Icon icon="file" />}
+              onClick={e => e.stopPropagation()}
+            >
               <span>{t('documents.upload.from_drive')}</span>
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
@@ -72,7 +78,10 @@ class MenuUploadMobile extends Component {
             </MenuItem>
 
             {isAndroidApp() && (
-              <MenuItem icon={<Icon icon="file" />}>
+              <MenuItem
+                icon={<Icon icon="file" />}
+                onClick={e => e.stopPropagation()}
+              >
                 <span> {t('documents.upload.scan_a_doc')}</span>
                 <Caption>{t('documents.upload.soon_available')}</Caption>
               </MenuItem>
