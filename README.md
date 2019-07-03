@@ -19,4 +19,5 @@
 
 ## CLI
 
+- [Cozy CI](.packages/cozy-ci): Utility scripts for Cozy Cloud CI integration
 - [Cozy App Publish](./packages/cozy-app-publish): Publish an application/konnector to the Cozy Cloud registry
