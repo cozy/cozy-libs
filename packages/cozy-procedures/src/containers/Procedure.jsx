@@ -1,6 +1,4 @@
-import { connect } from 'react-redux'
-
-import Context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import {
   init as initPersonalData,
   fetchMyself,
@@ -29,10 +27,5 @@ const mapDispatchToProps = {
 }
 
 export default withLocales(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    null,
-    { context: Context }
-  )(Procedure)
+  connectWithProcedures(mapStateToProps, mapDispatchToProps)(Procedure)
 )

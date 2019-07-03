@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import {
   fetchDocumentsByCategory,
   getFiles,
@@ -24,11 +23,6 @@ const mapDispatchToProps = {
 }
 
 const DocumentsDataFormContainer = Component =>
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    null,
-    { context }
-  )(Component)
+  connectWithProcedures(mapStateToProps, mapDispatchToProps)(Component)
 
 export default DocumentsDataFormContainer

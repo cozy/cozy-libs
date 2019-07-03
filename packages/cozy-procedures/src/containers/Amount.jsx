@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import Amount from '../components/Amount'
 import { getSlice, update } from '../redux/amountSlice'
 
@@ -11,9 +10,6 @@ const mapDispatchToProps = dispatch => ({
   updateAmount: value => dispatch(update(value))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { context }
-)(Amount)
+export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
+  Amount
+)
