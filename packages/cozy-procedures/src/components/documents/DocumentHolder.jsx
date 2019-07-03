@@ -9,17 +9,21 @@ import {
   Text
 } from 'cozy-ui/transpiled/react/'
 import { CozyFile } from 'cozy-doctypes'
-
+import Viewer from 'cozy-ui/transpiled/react/Viewer' // can be grouped with the other imports once the viewer export is fixed — see https://github.com/cozy/cozy-ui/pull/977
+import { Modal } from 'cozy-ui/transpiled/react'
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
+//import { withClient } from 'cozy-client'
+import flow from 'lodash/flow'
 
 class DocumentHolder extends Component {
   state = {
-    isUnlinkConfirmationModalOpened: false
+    isUnlinkConfirmationModalOpened: false,
+    isViewerModalOpened: false
   }
 
   render() {
     const { document, unlinkDocument, documentId, t } = this.props
-    const { isUnlinkConfirmationModalOpened } = this.state
+    const { isUnlinkConfirmationModalOpened, isViewerModalOpened } = this.state
 
     const splittedName = CozyFile.splitFilename(document)
     return (
@@ -40,6 +44,21 @@ class DocumentHolder extends Component {
               </>
             }
           />
+        )}
+        {isViewerModalOpened && (
+          <Modal
+            into="body"
+            mobileFullscreen
+            closable={false}
+            style={{ minHeight: '80vh' }}
+          >
+            <Viewer
+              onCloseRequest={() => {
+                this.setState({ isViewerModalOpened: false })
+              }}
+              files={[document]}
+            />
+          </Modal>
         )}
         <Card className="u-flex u-flex-row u-flex-items-center">
           <Icon
@@ -70,4 +89,4 @@ DocumentHolder.propTypes = {
   document: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
 }
-export default translate()(DocumentsDataFormContainer(DocumentHolder))
+export default flow(translate())(DocumentsDataFormContainer(DocumentHolder))
