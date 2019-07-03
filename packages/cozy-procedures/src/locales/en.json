@@ -124,7 +124,8 @@
       "from_my_mobile": "From my smartphone",
       "from_my_device_scan": "Scan / Import from my smartphone",
       "from_my_computer": "From my computer",
-      "soon_available": "(available soon)"
+      "soon_available": "(available soon)",
+      "scan_a_doc": "Scan a document"
     },
     "completedStatus": {
       "main": "%{smart_count} document out of %{total} |||| %{smart_count} documents out of %{total}",
