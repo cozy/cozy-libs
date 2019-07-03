@@ -73,7 +73,7 @@ class MenuUploadMobile extends Component {
 
             {isAndroidApp() && (
               <MenuItem icon={<Icon icon="file" />}>
-                <span> {t('documents.upload.from_my_mobile')}</span>
+                <span> {t('documents.upload.scan_a_doc')}</span>
                 <Caption>{t('documents.upload.soon_available')}</Caption>
               </MenuItem>
             )}

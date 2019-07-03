@@ -10,7 +10,7 @@ const UploadInputLabel = ({ t, breakpoints }) => {
   if (isIOSApp()) {
     return <span> {t('documents.upload.from_my_device_scan')}</span>
   } else if (isAndroidApp()) {
-    return <span>{t('documents.upload.from_my_device')}</span>
+    return <span>{t('documents.upload.from_my_mobile')}</span>
   } else {
     if (isMobile) {
       return <span> {t('documents.upload.from_my_device_scan')}</span>
