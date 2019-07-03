@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.5...cozy-procedures@0.19.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* Use needclick on the fileinput label ([#601](https://github.com/cozy/cozy-libs/issues/601)) ([10aca27](https://github.com/cozy/cozy-libs/commit/10aca27))
+
+
+### Features
+
+* Hide nav footer bar on focus ([#600](https://github.com/cozy/cozy-libs/issues/600)) ([656e6d4](https://github.com/cozy/cozy-libs/commit/656e6d4))
+
+
+
+
+
 ## [0.18.5](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.4...cozy-procedures@0.18.5) (2019-07-03)
 
 

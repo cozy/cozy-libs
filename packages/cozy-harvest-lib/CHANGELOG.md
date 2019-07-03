@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.65.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.65.0...cozy-harvest-lib@0.65.1) (2019-07-03)
+
+
+### Bug Fixes
+
+* :bug: Correctly check initialValues if exists ([7bd2ac5](https://github.com/cozy/cozy-libs/commit/7bd2ac5))
+
+
+
+
+
 # [0.65.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.64.0...cozy-harvest-lib@0.65.0) (2019-07-03)
 
 
