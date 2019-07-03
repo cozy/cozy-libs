@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.64.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.63.0...cozy-harvest-lib@0.64.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **harvest:** When refetching, trigger must be retrieved from state ([8e0eb4b](https://github.com/cozy/cozy-libs/commit/8e0eb4b))
+
+
+### Features
+
+* **harvest:** Decrease margin between items in LaunchTriggerCard 💄 ([ec117cc](https://github.com/cozy/cozy-libs/commit/ec117cc))
+
+
+
+
+
 # [0.63.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.3...cozy-harvest-lib@0.63.0) (2019-07-01)
 
 
