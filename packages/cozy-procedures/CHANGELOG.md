@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.2...cozy-procedures@0.18.3) (2019-07-03)
+
+
+### Bug Fixes
+
+* Menu again ([#593](https://github.com/cozy/cozy-libs/issues/593)) ([98cfd10](https://github.com/cozy/cozy-libs/commit/98cfd10))
+
+
+
+
+
 ## [0.18.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.18.1...cozy-procedures@0.18.2) (2019-07-03)
 
 
