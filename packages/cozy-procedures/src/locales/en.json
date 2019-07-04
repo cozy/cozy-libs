@@ -127,7 +127,7 @@
       "soon_available": "(available soon)",
       "scan_a_doc": "Scan a document",
       "conflict_error": "A file with the same name is already uploaded. Please rename your file.",
-      "error": "An error occured during upload"
+      "error": "An error occured during the upload"
     },
     "unlink": {
       "title": "Detach from your application?",
