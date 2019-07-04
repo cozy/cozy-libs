@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.19.1...cozy-procedures@0.20.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* Don't close the menu even if we click on a soon item ([#607](https://github.com/cozy/cozy-libs/issues/607)) ([b152f9f](https://github.com/cozy/cozy-libs/commit/b152f9f))
+* Text alignement ([#606](https://github.com/cozy/cozy-libs/issues/606)) ([4768efa](https://github.com/cozy/cozy-libs/commit/4768efa))
+
+
+### Features
+
+* Display error when conflict during upload ([#609](https://github.com/cozy/cozy-libs/issues/609)) ([905c357](https://github.com/cozy/cozy-libs/commit/905c357))
+
+
+
+
+
 ## [0.19.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.19.0...cozy-procedures@0.19.1) (2019-07-03)
 
 
