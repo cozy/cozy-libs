@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.20.0",
+  "version": "0.20.1",
   "main": "dist/index.js",
   "scripts": {
     "prepare": "yarn build; yarn copy-files",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.20.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.20.0...cozy-procedures@0.20.1) (2019-07-04)
+
+
+### Bug Fixes
+
+* Add margin to confirm button on documents view ([#605](https://github.com/cozy/cozy-libs/issues/605)) ([f159310](https://github.com/cozy/cozy-libs/commit/f159310))
+
+
+
+
+
 # [0.20.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.19.1...cozy-procedures@0.20.0) (2019-07-04)
 
 
