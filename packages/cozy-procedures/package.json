@@ -31,7 +31,8 @@
   "peerDependencies": {
     "@material-ui/core": "3.9.3",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "cozy-ui": "^20.24.0"
+    "cozy-ui": "^20.24.0",
+    "cozy-doctypes": "^1.49.3"
   },
   "jest": {
     "setupFiles": [
