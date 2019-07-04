@@ -14,24 +14,24 @@ import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 
 class DocumentHolder extends Component {
   state = {
-    isModalOpened: false
+    isUnlinkConfirmationModalOpened: false
   }
 
   render() {
     const { document, unlinkDocument, documentId, t } = this.props
-    const { isModalOpened } = this.state
+    const { isUnlinkConfirmationModalOpened } = this.state
 
     const splittedName = CozyFile.splitFilename(document)
     return (
       <>
-        {isModalOpened && (
+        {isUnlinkConfirmationModalOpened && (
           <Modal
             primaryText={t('documents.unlink.unlink')}
             primaryAction={() => unlinkDocument({ document, documentId })}
             secondaryText={t('cancel')}
-            secondaryAction={() => this.setState({ isModalOpened: false })}
-            dismissAction={() => this.setState({ isModalOpened: false })}
-            overflowHidden={true}
+            secondaryAction={() =>
+              this.setState({ isUnlinkConfirmationModalOpened: false })
+            }
             title={t('documents.unlink.title')}
             description={
               <>
