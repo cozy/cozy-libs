@@ -49,14 +49,14 @@ class Duration extends React.PureComponent {
 
         <Label>{t('duration.label')}</Label>
         <Card>
-          <SubTitle>
+          <SubTitle className="u-mb-half">
             {simulationDuration} {t('duration.month')}
           </SubTitle>
-          <div>
+          <div className="u-fz-small">
             {t('duration.reimbursement')} : {installment.toFixed(2)}{' '}
             {t('duration.unit')}
           </div>
-          <div>
+          <div className="u-fz-small">
             {t('duration.rate')} : {rate.toFixed(2)}%
           </div>
         </Card>
