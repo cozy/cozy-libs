@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.1...cozy-procedures@0.22.2) (2019-07-04)
+
+
+### Bug Fixes
+
+* **procedures:** Pass schema attributes as props to the UI components ([5ace797](https://github.com/cozy/cozy-libs/commit/5ace797))
+* Add doctypes dependency ([75cee62](https://github.com/cozy/cozy-libs/commit/75cee62))
+* Translation ([dc89b82](https://github.com/cozy/cozy-libs/commit/dc89b82))
+* Use card instead of chip for documents ([50e428a](https://github.com/cozy/cozy-libs/commit/50e428a))
+
+
+
+
+
 ## [0.22.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.0...cozy-procedures@0.22.1) (2019-07-04)
 
 
