@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import { Input, translate } from 'cozy-ui/transpiled/react'
 
 import stripInvalidInputProps from './stripInvalidInputProps'
+import { hideNavBar, showNavBar } from './hiddenFeature'
+import { isMobileApp } from 'cozy-device-helper'
 
 export const InputWithUnit = ({ onChange, t, ...otherProps }) => (
   <div>
@@ -12,12 +14,10 @@ export const InputWithUnit = ({ onChange, t, ...otherProps }) => (
         onChange(e.target.value)
       }}
       onBlur={() => {
-        document.querySelector('[role="application"] aside').style.display =
-          'block'
+        if (isMobileApp()) showNavBar()
       }}
       onFocus={() => {
-        document.querySelector('[role="application"] aside').style.display =
-          'none'
+        if (isMobileApp()) hideNavBar()
       }}
     />
     <span>{t(otherProps.options.unit)}</span>
