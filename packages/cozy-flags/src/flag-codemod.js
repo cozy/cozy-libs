@@ -34,7 +34,7 @@ const removeUnusedImports = (root, j) => {
         toKeep.push(specifier)
       }
     }
-    if (toKeep.length === 0) {
+    if (toKeep.length === 0 && path.node.specifiers.length > 0) {
       path.replace(null)
     } else {
       path.node.specifiers = toKeep
