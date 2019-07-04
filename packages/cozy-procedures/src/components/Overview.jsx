@@ -12,6 +12,7 @@ import {
   SubTitle,
   Caption,
   Button,
+  Chip,
   translate
 } from 'cozy-ui/transpiled/react'
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
@@ -224,10 +225,16 @@ class Overview extends React.Component {
           <SubTitle className="u-mb-1">{t('overview.documents')}</SubTitle>
           <Button
             label={t('overview.complete')}
-            extraRight={`${documentsCompleted}/${documentsTotal}`}
+            extraRight={
+              <Chip
+                theme="primary"
+                size="tiny"
+              >{`${documentsCompleted}/${documentsTotal}`}</Chip>
+            }
             onClick={() => this.navigateTo('documents')}
             theme="ghost"
             extension="full"
+            size="large"
             icon="pen"
           />
         </section>
@@ -235,10 +242,16 @@ class Overview extends React.Component {
           <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
           <Button
             label={t('overview.complete')}
-            extraRight={`${personalDataFieldsCompleted}/${personalDataFieldsTotal}`}
+            extraRight={
+              <Chip
+                theme="primary"
+                size="tiny"
+              >{`${personalDataFieldsCompleted}/${personalDataFieldsTotal}`}</Chip>
+            }
             onClick={() => this.navigateTo('personal')}
             theme="ghost"
             extension="full"
+            size="large"
             icon="pen"
           />
         </section>
