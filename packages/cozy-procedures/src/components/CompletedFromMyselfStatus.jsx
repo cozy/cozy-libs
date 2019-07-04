@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { translate, Bold } from 'cozy-ui/transpiled/react/'
 
 export const CompletedFromMyselfStatus = ({ completed, total, t }) => {
@@ -17,6 +18,12 @@ export const CompletedFromMyselfStatus = ({ completed, total, t }) => {
       {t('personalDataForm.completedStatus.rest', { smart_count: completed })}
     </div>
   )
+}
+
+CompletedFromMyselfStatus.propTypes = {
+  completed: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  t: PropTypes.func.isRequired
 }
 
 export default translate()(CompletedFromMyselfStatus)

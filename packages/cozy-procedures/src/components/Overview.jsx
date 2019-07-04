@@ -254,10 +254,14 @@ class Overview extends React.Component {
 }
 
 Overview.propTypes = {
+  documentsCompleted: PropTypes.number,
+  documentsTotal: PropTypes.number,
   personalDataFieldsCompleted: PropTypes.number,
   personalDataFieldsTotal: PropTypes.number,
-  duration: PropTypes.number,
-  amount: PropTypes.number,
+  procedureData: PropTypes.shape({
+    amount: PropTypes.number,
+    duration: PropTypes.number
+  }),
   location: PropTypes.shape({
     pathname: PropTypes.string
   }),

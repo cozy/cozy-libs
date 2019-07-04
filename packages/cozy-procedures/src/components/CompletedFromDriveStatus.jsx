@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { translate, Bold } from 'cozy-ui/transpiled/react'
 
 export const CompletedFromDriveStatus = ({ completed, total, t }) => {
@@ -17,6 +18,12 @@ export const CompletedFromDriveStatus = ({ completed, total, t }) => {
       {t('documents.completedStatus.rest', { smart_count: completed })}
     </div>
   )
+}
+
+CompletedFromDriveStatus.propTypes = {
+  completed: PropTypes.number.isRequired,
+  total: PropTypes.number.isRequired,
+  t: PropTypes.func.isRequired
 }
 
 export default translate()(CompletedFromDriveStatus)
