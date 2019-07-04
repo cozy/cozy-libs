@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.0...cozy-procedures@0.22.1) (2019-07-04)
+
+
+### Bug Fixes
+
+* Amount placeholder ([7e11e83](https://github.com/cozy/cozy-libs/commit/7e11e83))
+* Duration view typography ([64853af](https://github.com/cozy/cozy-libs/commit/64853af))
+* Overview chips appearance ([e91ea1f](https://github.com/cozy/cozy-libs/commit/e91ea1f))
+* Title typography ([6cdac5a](https://github.com/cozy/cozy-libs/commit/6cdac5a))
+
+
+
+
+
 # [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.21.0...cozy-procedures@0.22.0) (2019-07-04)
 
 
