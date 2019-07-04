@@ -8,6 +8,10 @@ const isBlockLike = path => {
   return path.value && path.value.length !== undefined && path.name === 'body'
 }
 
+const countJSX = (root, j) => {
+  return root.find(j.JSXOpeningElement).length
+}
+
 /** Removes unused imports by counting usage */
 const removeUnusedImports = (root, j) => {
   const importsToRemove = root.find(j.ImportDeclaration)
@@ -16,7 +20,8 @@ const removeUnusedImports = (root, j) => {
     for (let specifier of path.node.specifiers) {
       const identifierName = specifier.local.name
       const usages = root.find(j.Identifier, { name: identifierName })
-      const nUsage = usages.size()
+      const nUsage =
+        usages.size() + (identifierName === 'React' ? countJSX(root, j) : 0)
       // import { toto } from 'lib' counts as 2 usages of toto
       // import toto from 'lib' counts a 1 usage of toto
       const importUsages =
