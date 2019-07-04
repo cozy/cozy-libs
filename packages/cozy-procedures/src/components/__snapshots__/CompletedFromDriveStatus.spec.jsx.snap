@@ -6,12 +6,26 @@ exports[`CompletedFromDriveStatus component should display a status if there are
   t={[Function]}
   total={10}
 >
-  <div>
-    <span
+  <div
+    className="u-mt-1-half u-ml-half u-mr-half u-ta-center"
+  >
+    <Bold
       className="u-weirdGreen"
+      ellipsis={false}
+      tag="span"
     >
-      documents.completedStatus.main {"smart_count":5,"total":10}
-    </span>
+      <BaseText
+        className="styles__u-title-h4___1lGMy u-weirdGreen"
+        ellipsis={false}
+        tag="span"
+      >
+        <span
+          className="styles__u-title-h4___1lGMy u-weirdGreen"
+        >
+          documents.completedStatus.main {"smart_count":5,"total":10}
+        </span>
+      </BaseText>
+    </Bold>
      
     documents.completedStatus.rest {"smart_count":5}
   </div>

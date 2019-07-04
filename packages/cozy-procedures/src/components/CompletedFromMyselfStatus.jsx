@@ -1,5 +1,5 @@
 import React from 'react'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { translate, Bold } from 'cozy-ui/transpiled/react/'
 
 export const CompletedFromMyselfStatus = ({ completed, total, t }) => {
   if (completed === 0) {
@@ -7,13 +7,13 @@ export const CompletedFromMyselfStatus = ({ completed, total, t }) => {
   }
 
   return (
-    <div>
-      <span className="u-weirdGreen">
+    <div className="u-mt-1-half u-ml-half u-mr-half u-ta-center">
+      <Bold tag="span" className="u-weirdGreen">
         {t('personalDataForm.completedStatus.main', {
           smart_count: completed,
           total
         })}
-      </span>{' '}
+      </Bold>{' '}
       {t('personalDataForm.completedStatus.rest', { smart_count: completed })}
     </div>
   )
