@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   translate,
-  Chip,
+  Card,
   Icon,
   Modal,
   SubTitle,
@@ -41,7 +41,7 @@ class DocumentHolder extends Component {
             }
           />
         )}
-        <Chip variant="dashed" className="u-w-100">
+        <Card className="u-flex u-flex-row u-flex-items-center">
           <Icon
             icon={`file-type-${document.class}`}
             size={24}
@@ -57,7 +57,7 @@ class DocumentHolder extends Component {
             className="u-pr-1 u-c-pointer"
             onClick={() => this.setState({ isModalOpened: true })}
           />
-        </Chip>
+        </Card>
       </>
     )
   }
