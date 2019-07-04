@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import flow from 'lodash/flow'
 
 import { withClient } from 'cozy-client'
-import { withBreakpoints } from 'cozy-ui/transpiled/react/'
+import { withBreakpoints, Alerter, translate } from 'cozy-ui/transpiled/react/'
 
 import { creditApplicationTemplate } from 'cozy-procedures'
 
@@ -18,7 +18,7 @@ class EmptyDocumentHolder extends Component {
   }
 
   async onChange(file) {
-    const { documentId, client, linkDocumentSuccess } = this.props
+    const { documentId, client, linkDocumentSuccess, t } = this.props
     const dirPath = creditApplicationTemplate.pathToSave
     const filesCollection = client.collection('io.cozy.files')
     const classification = get(
@@ -41,7 +41,12 @@ class EmptyDocumentHolder extends Component {
 
       linkDocumentSuccess({ document: createdFile.data, documentId })
     } catch (uploadError) {
-      console.log('errr', uploadError)
+      if (uploadError.status === 409) {
+        Alerter.error(t('documents.upload.conflict_error'))
+      } else {
+        Alerter.error(t('documents.upload.error'))
+        console.log('Upload error : ', uploadError)
+      }
     }
   }
 
@@ -59,10 +64,12 @@ class EmptyDocumentHolder extends Component {
 EmptyDocumentHolder.propTypes = {
   documentId: PropTypes.string.isRequired,
   linkDocumentSuccess: PropTypes.func.isRequired,
-  breakpoints: PropTypes.object.isRequired
+  breakpoints: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 }
 
 export default flow(
   withBreakpoints(),
-  withClient
+  withClient,
+  translate()
 )(DocumentsDataFormContainer(EmptyDocumentHolder))
