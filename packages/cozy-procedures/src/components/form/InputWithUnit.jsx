@@ -2,14 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Input, translate } from 'cozy-ui/transpiled/react'
 
-import stripInvalidInputProps from './stripInvalidInputProps'
+import getInputProps from './getInputProps'
 import { hideNavBar, showNavBar } from './hiddenFeature'
 import { isMobileApp } from 'cozy-device-helper'
 
 export const InputWithUnit = ({ onChange, t, ...otherProps }) => (
   <div>
     <Input
-      {...stripInvalidInputProps(otherProps)}
+      {...getInputProps(otherProps)}
       onChange={e => {
         onChange(e.target.value)
       }}

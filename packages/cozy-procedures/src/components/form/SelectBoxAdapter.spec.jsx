@@ -15,7 +15,10 @@ describe('SelectBoxAdapter component', () => {
         ]
       },
       t: tMock,
-      value: 'foo'
+      value: 'foo',
+      schema: {
+        type: 'string'
+      }
     }
     const component = shallow(<SelectBoxAdapter {...props} />)
     expect(component).toMatchSnapshot()

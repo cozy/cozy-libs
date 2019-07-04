@@ -23,7 +23,7 @@ const schema = {
     },
     numberOfDependants: {
       title: 'personalDataForm.form.numberOfDependents.title',
-      type: 'number',
+      type: 'integer',
       minimum: 0
     },
     employmentStatus: {
