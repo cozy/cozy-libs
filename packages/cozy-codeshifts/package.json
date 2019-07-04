@@ -1,0 +1,16 @@
+{
+  "name": "cozy-codeshifts",
+  "version": "1.0.0",
+  "description": "Codeshifts used inside Cozies",
+  "main": "index.js",
+  "repository": "https://github.com/cozy/cozy-libs",
+  "author": "Cozy",
+  "license": "MIT",
+  "scripts": {
+     "docs": "jsdoc2md -f 'src/**/*.js' -t .README.md.template > README.md",
+     "build": "babel src -d dist --verbose"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.0"
+  }
+}
