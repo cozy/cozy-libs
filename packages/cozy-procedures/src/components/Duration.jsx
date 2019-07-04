@@ -45,7 +45,7 @@ class Duration extends React.PureComponent {
     return (
       <div>
         <Topbar title={t('duration.title')} />
-        <Title>{t('duration.subtitle')}</Title>
+        <Title className="u-mb-2 u-ta-center">{t('duration.subtitle')}</Title>
 
         <Label>{t('duration.label')}</Label>
         <Card>

@@ -34,7 +34,9 @@ class PersonalDataForm extends React.Component {
     return (
       <div>
         <Topbar title={t('personalDataForm.title')} />
-        <Title className="u-ta-center">{t('personalDataForm.subtitle')}</Title>
+        <Title className="u-ta-center u-mb-2">
+          {t('personalDataForm.subtitle')}
+        </Title>
         <CompletedFromMyselfStatus />
         <Form
           formData={formData}
