@@ -134,7 +134,11 @@ const run = async () => {
   try {
     const uploadTarget = process.argv[2]
     const packageFile = process.argv[3] ? process.argv[3] : '../../package.json'
-    let { version, name } = require(packageFile)
+    let { version, name, displayName } = require(packageFile)
+    if (name === undefined) {
+      name = displayName
+    }
+    name = name.toLowerCase().replace(' ', '-')
 
     const [uploadDir, uploadFile] = await getUploadTarget(uploadTarget, name)
 
