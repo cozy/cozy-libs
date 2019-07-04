@@ -1,0 +1,12 @@
+{
+  "name": "cozy-codeshifts",
+  "version": "1.0.0",
+  "description": "Codeshifts used inside Cozies",
+  "main": "index.js",
+  "repository": "https://github.com/cozy/cozy-libs",
+  "author": "Cozy",
+  "license": "MIT",
+  "scripts": {
+    "build": "babel src -d dist --verbose"
+  }
+}
