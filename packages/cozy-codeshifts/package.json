@@ -7,6 +7,10 @@
   "author": "Cozy",
   "license": "MIT",
   "scripts": {
-    "build": "babel src -d dist --verbose"
+     "docs": "jsdoc2md -f 'src/**/*.js' -t .README.md.template > README.md",
+     "build": "babel src -d dist --verbose"
+  },
+  "devDependencies": {
+    "jsdoc-to-markdown": "^5.0.0"
   }
 }

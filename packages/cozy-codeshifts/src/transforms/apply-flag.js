@@ -8,7 +8,7 @@ const flagCallFinder = name => ({
   arguments: [{ value: name }]
 })
 
-export default function transformer(file, api) {
+export default function applyFlag(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 

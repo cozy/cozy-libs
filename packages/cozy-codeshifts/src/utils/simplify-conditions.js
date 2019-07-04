@@ -1,9 +1,20 @@
-/** Returns true if path is Program or a Block */
+/**
+ * Returns true if path is Program or a Block
+ *
+ * @param  {PathNode} path
+ * @return {Boolean}
+ */
 const isBlockLike = path => {
   return path.value && path.value.length !== undefined && path.name === 'body'
 }
 
-/** Replace without keeping blocks, flattening the newNode into path */
+/**
+ * Replaces `path.node` with `newNode` without keeping blocks, flattening
+ * `newNode` into `path`. Useful when removing `if`/`else`.
+ *
+ * @param  {PathNode} path
+ * @param  {Node} newNode
+ */
 const flatReplace = (path, newNode) => {
   if (
     newNode &&
@@ -19,6 +30,20 @@ const flatReplace = (path, newNode) => {
   }
 }
 
+/**
+ * Statically evaluates boolean conditions
+ *
+ * @example
+ *
+ * `if (true) { foo } else { bar }` -> `foo`
+ *
+ * `true ? foo : bar` -> `foo`
+ *
+ * `!true ? foo : bar` -> `bar`
+ *
+ * @param  {NodePath} root
+ * @param  {Object} j
+ */
 const simplifyConditions = (root, j) => {
   // Unary expressions with true/false
   for (let v of [true, false]) {

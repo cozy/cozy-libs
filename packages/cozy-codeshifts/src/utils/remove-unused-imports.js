@@ -2,7 +2,13 @@ const countJSX = (root, j) => {
   return root.find(j.JSXOpeningElement).length
 }
 
-/** Removes unused imports by counting usage */
+/**
+ * Removes unused imports by counting usage.
+ * JSX identifiers are counted as React usage.
+ *
+ * @param  {PathNode} root
+ * @param  {Object} j
+ */
 const removeUnusedImports = (root, j) => {
   const importsToRemove = root.find(j.ImportDeclaration)
   importsToRemove.forEach(path => {

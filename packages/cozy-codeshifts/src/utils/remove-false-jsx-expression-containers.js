@@ -1,3 +1,13 @@
+/**
+ * Removes falsy JSX containers
+ * JSX identifiers are counted as React usage.
+ *
+ * @example
+ * <div>{false}</div> -> <div></div>
+ *
+ * @param  {PathNode} root
+ * @param  {Object} j
+ */
 export default (root, j) => {
   // Remove empty declarations
   root
