@@ -3,15 +3,6 @@ import get from 'lodash/get'
 
 import { AdministrativeProcedure } from 'cozy-doctypes'
 
-function getDefaultValue(field) {
-  const typeValueMapping = {
-    string: '',
-    number: ''
-  }
-
-  return get(typeValueMapping, field.type, undefined)
-}
-
 const personalDataSlice = createSlice({
   initialState: {
     completedFromMyself: 0,
@@ -25,7 +16,7 @@ const personalDataSlice = createSlice({
       return {
         completedFromMyself: 0,
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
-          acc[fieldId] = getDefaultValue(action.payload[fieldId])
+          acc[fieldId] = ''
           return acc
         }, {}),
         loading: false,
