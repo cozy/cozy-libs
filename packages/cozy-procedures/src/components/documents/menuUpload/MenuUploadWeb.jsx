@@ -33,11 +33,11 @@ class MenuUploadWeb extends Component {
          */
         onSelect={() => false}
       >
-        <MenuItem icon={<Icon icon="file" />}>
+        <MenuItem icon={<Icon icon="file" />} disabled>
           <span>{t('documents.upload.from_other_service')}</span>
           <Caption>{t('documents.upload.soon_available')}</Caption>
         </MenuItem>
-        <MenuItem icon={<Icon icon="file" />}>
+        <MenuItem icon={<Icon icon="file" />} disabled>
           <span>{t('documents.upload.from_drive')}</span>
           <Caption>{t('documents.upload.soon_available')}</Caption>
         </MenuItem>

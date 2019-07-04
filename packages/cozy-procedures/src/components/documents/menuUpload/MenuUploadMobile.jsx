@@ -50,12 +50,14 @@ class MenuUploadMobile extends Component {
             <MenuItem
               icon={<Icon icon="file" />}
               onClick={e => e.stopPropagation()}
+              disabled
             >
               <span>{t('documents.upload.from_other_service')}</span>
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
             <MenuItem
               icon={<Icon icon="file" />}
+              disabled
               onClick={e => e.stopPropagation()}
             >
               <span>{t('documents.upload.from_drive')}</span>
@@ -81,6 +83,7 @@ class MenuUploadMobile extends Component {
               <MenuItem
                 icon={<Icon icon="file" />}
                 onClick={e => e.stopPropagation()}
+                disabled
               >
                 <span> {t('documents.upload.scan_a_doc')}</span>
                 <Caption>{t('documents.upload.soon_available')}</Caption>
