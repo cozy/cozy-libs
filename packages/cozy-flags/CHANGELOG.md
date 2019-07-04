@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.8.0...cozy-flags@1.9.0) (2019-07-04)
+
+
+### Bug Fixes
+
+* Do not remove import with no specifiers (side-effect imports) ([4d0ad6c](https://github.com/cozy/cozy-libs/commit/4d0ad6c))
+* Topbar back button ([100ffb9](https://github.com/cozy/cozy-libs/commit/100ffb9))
+
+
+### Features
+
+* Count JSX as React identifier ([f573490](https://github.com/cozy/cozy-libs/commit/f573490))
+
+
+
+
+
 # [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.7.0...cozy-flags@1.8.0) (2019-06-10)
 
 
