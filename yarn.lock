@@ -5440,23 +5440,6 @@ cozy-stack-client@^6.47.0:
     mime-types "2.1.24"
     qs "6.7.0"
 
-cozy-ui@21.0.0:
-  version "21.0.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-21.0.0.tgz#3216ce545b97b977576736b91ad963e67a782b90"
-  integrity sha512-+pZF9Wn0TvihFxOHGn611y8OsJ545DOjRgDENp8f19ddC9Y3ENbYRQpyk/OuLrA9FRdHahqAUfi69P48r/C8Pw==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    body-scroll-lock "^2.5.8"
-    classnames "^2.2.5"
-    date-fns "^1.28.5"
-    hammerjs "^2.0.8"
-    node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
-    react-hot-loader "^4.3.11"
-    react-markdown "^4.0.8"
-    react-pdf "^4.0.5"
-    react-select "2.2.0"
-
 cozy-ui@21.2.3, cozy-ui@^21:
   version "21.2.3"
   resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-21.2.3.tgz#c7aa18045b77cb3c42d673015d73812cfeb67e9f"
@@ -5474,10 +5457,10 @@ cozy-ui@21.2.3, cozy-ui@^21:
     react-pdf "^4.0.5"
     react-select "2.2.0"
 
-cozy-ui@^21.0.0:
-  version "21.3.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-21.3.1.tgz#1c58313a8e348398b39d7a4e9ac0f66767a71a45"
-  integrity sha512-F6D996OR7dSRLMnnwKBt+fXaMWvCqzGH8sTnBOrchYvBCUeoe+1f521N3i37NjyxRlRvrIHtgFQEqTYPKSfihQ==
+cozy-ui@21.5.1, cozy-ui@^21.5.1:
+  version "21.5.1"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-21.5.1.tgz#210afa58d93c1e5c8408313facbaaa1ec8e68f73"
+  integrity sha512-bPikeRBjsyOZ0Qi9Oa4kwzoD6AD2V8gS+8xdocs8jUeqjUmoGuBKwbyfNFQdfsngrtNZU8MnHr+h+akMo1oejg==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"

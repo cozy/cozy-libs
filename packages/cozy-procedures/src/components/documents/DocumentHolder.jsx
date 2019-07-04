@@ -5,20 +5,19 @@ import {
   Icon,
   Modal,
   SubTitle,
-  Text
+  Text,
+  Viewer
 } from 'cozy-ui/transpiled/react/'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { CozyFile } from 'cozy-doctypes'
-import Viewer from 'cozy-ui/transpiled/react/Viewer' // can be grouped with the other imports once the viewer export is fixed — see https://github.com/cozy/cozy-ui/pull/977
-import { Modal } from 'cozy-ui/transpiled/react'
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
-//import { withClient } from 'cozy-client'
 import flow from 'lodash/flow'
 
 class DocumentHolder extends Component {
   state = {
     isUnlinkConfirmationModalOpened: false,
-    isViewerModalOpened: false
+    isViewerModalOpened: false,
+    file: false
   }
 
   render() {
@@ -60,7 +59,12 @@ class DocumentHolder extends Component {
             />
           </Modal>
         )}
-        <Card className="u-flex u-flex-row u-flex-items-center">
+        <Card
+          className="u-flex u-flex-row u-flex-items-center"
+          onClick={() => {
+            this.setState({ isViewerModalOpened: true })
+          }}
+        >
           <Icon
             icon={`file-type-${document.class}`}
             size={24}
