@@ -2,6 +2,7 @@ import simplifyConditions from '../utils/simplify-conditions'
 import removeUnusedImports from '../utils/remove-unused-imports'
 import replaceBooleanVars from '../utils/replace-boolean-vars'
 import removeFalseJSXExpressionContainers from '../utils/remove-false-jsx-expression-containers'
+import removeRedundantJSXExpressionContainers from '../utils/remove-redundant-jsx-expression-containers'
 
 const flagCallFinder = name => ({
   callee: { name: 'flag' },
@@ -14,7 +15,7 @@ export default function applyFlag(file, api) {
 
   // Replace flags by true
   const flagName =
-    typeof process !== 'undefined' ? process.env.FLAG : 'reimbursement-tag'
+    process.env.NODE_ENV === 'test' ? 'test-flag' : process.env.FLAG
   const flags = root.find(j.CallExpression, flagCallFinder(flagName))
   flags.forEach(flagCall => {
     flagCall.replace(j.literal(true))
@@ -24,5 +25,6 @@ export default function applyFlag(file, api) {
   simplifyConditions(root, j)
   removeUnusedImports(root, j)
   removeFalseJSXExpressionContainers(root, j)
+  removeRedundantJSXExpressionContainers(root, j)
   return root.toSource()
 }
