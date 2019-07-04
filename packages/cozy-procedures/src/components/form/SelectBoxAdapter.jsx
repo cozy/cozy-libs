@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { SelectBox, translate } from 'cozy-ui/transpiled/react'
 
-import stripInvalidInputProps from './stripInvalidInputProps'
+import getInputProps from './getInputProps'
 
 export const SelectBoxAdapter = ({
   onChange,
@@ -22,7 +22,7 @@ export const SelectBoxAdapter = ({
 
   return (
     <SelectBox
-      {...stripInvalidInputProps(otherProps)}
+      {...getInputProps(otherProps, 'select')}
       fullwidth
       options={options.enumOptions.map(option => ({
         ...option,

@@ -11,7 +11,10 @@ describe('InputWithUnit component', () => {
       options: {
         unit: '€'
       },
-      t: tMock
+      t: tMock,
+      schema: {
+        type: 'integer'
+      }
     }
     const component = shallow(<InputWithUnit {...props} />)
     expect(component).toMatchSnapshot()

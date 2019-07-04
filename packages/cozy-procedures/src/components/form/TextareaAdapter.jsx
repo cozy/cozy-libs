@@ -2,11 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Textarea } from 'cozy-ui/transpiled/react'
 
-import stripInvalidInputProps from './stripInvalidInputProps'
+import getInputProps from './getInputProps'
 
 const TextareaAdapter = props => (
   <Textarea
-    {...stripInvalidInputProps(props)}
+    {...getInputProps(props)}
     onChange={e => {
       props.onChange(e.target.value)
     }}
