@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.21.0...cozy-procedures@0.22.0) (2019-07-04)
+
+
+### Features
+
+* Disable MenuItem ([#611](https://github.com/cozy/cozy-libs/issues/611)) ([85b4f4d](https://github.com/cozy/cozy-libs/commit/85b4f4d))
+
+
+
+
+
 # [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.20.1...cozy-procedures@0.21.0) (2019-07-04)
 
 
