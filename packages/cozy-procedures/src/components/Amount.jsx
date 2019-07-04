@@ -24,7 +24,7 @@ class Amount extends React.Component {
     return (
       <div>
         <Topbar title={t('amount.title')} />
-        <Title>{t('amount.subtitle')}</Title>
+        <Title className="u-mb-2 u-ta-center">{t('amount.subtitle')}</Title>
 
         <div className="u-mb-1">
           <Label htmlFor="amount-input">{t('amount.label')}</Label>
