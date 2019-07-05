@@ -3,6 +3,8 @@
 exports[`SelectBoxAdapter component should match snapshot 1`] = `
 <Aware
   fullwidth={true}
+  isClearable={true}
+  isSearchable={false}
   onChange={[Function]}
   options={
     Array [

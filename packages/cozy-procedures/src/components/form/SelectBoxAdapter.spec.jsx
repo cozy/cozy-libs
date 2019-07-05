@@ -12,7 +12,9 @@ describe('SelectBoxAdapter component', () => {
         enumOptions: [
           { label: 'Foo', value: 'foo' },
           { label: 'Bar', value: 'bar' }
-        ]
+        ],
+        isClearable: true,
+        isSearchable: false
       },
       t: tMock,
       value: 'foo',

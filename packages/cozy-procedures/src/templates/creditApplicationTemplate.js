@@ -122,6 +122,26 @@ const uiSchema = {
   },
   email: {
     'ui:widget': 'email'
+  },
+  maritalStatus: {
+    'ui:options': {
+      isSearchable: false
+    }
+  },
+  employmentStatus: {
+    'ui:options': {
+      isSearchable: false
+    }
+  },
+  employmentContract: {
+    'ui:options': {
+      isSearchable: false
+    }
+  },
+  propertyStatus: {
+    'ui:options': {
+      isSearchable: false
+    }
   }
 }
 

@@ -11,7 +11,8 @@ export const SelectBoxAdapter = ({
   value,
   ...otherProps
 }) => {
-  const currentValue = options.enumOptions.find(o => o.value === value)
+  const { enumOptions, ...otherOptions } = options
+  const currentValue = enumOptions.find(o => o.value === value)
   let translatedCurrentValue
   if (currentValue) {
     translatedCurrentValue = {
@@ -23,8 +24,9 @@ export const SelectBoxAdapter = ({
   return (
     <SelectBox
       {...getInputProps(otherProps, 'select')}
+      {...otherOptions}
       fullwidth
-      options={options.enumOptions.map(option => ({
+      options={enumOptions.map(option => ({
         ...option,
         label: t(option.label)
       }))}
