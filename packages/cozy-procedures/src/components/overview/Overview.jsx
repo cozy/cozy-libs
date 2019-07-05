@@ -60,7 +60,7 @@ class Overview extends React.Component {
       })
       client
         .collection('io.cozy.files')
-        .destroy(jsonFile)
+        .deleteFilePermanently(jsonFile.id)
         .catch(err => {
           console.error('Error while trying to delete the json file: ', err)
         })
@@ -82,14 +82,14 @@ class Overview extends React.Component {
       resp.data.forEach(zipFile => {
         client
           .collection('io.cozy.files')
-          .destroy(zipFile)
+          .deleteFilePermanently(zipFile.id)
           .catch(err => {
             console.error('Error while trying to delete the zip file: ', err)
           })
       })
       client
         .collection('io.cozy.files')
-        .destroy(jsonFile)
+        .deleteFilePermanently(jsonFile)
         .catch(err => {
           console.error('Error while trying to delete the json file: ', err)
         })
