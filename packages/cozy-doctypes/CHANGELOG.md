@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.50.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.3...cozy-doctypes@1.50.0) (2019-07-05)
+
+
+### Features
+
+* **cozy-doctypes:** Implement Document::queryAll with cozy-client ([6d76206](https://github.com/cozy/cozy-libs/commit/6d76206))
+
+
+
+
+
 ## [1.49.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.2...cozy-doctypes@1.49.3) (2019-07-02)
 
 

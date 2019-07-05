@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2019-07-05)
+
+
+### Bug Fixes
+
+* Add doctypes dependency ([75cee62](https://github.com/cozy/cozy-libs/commit/75cee62))
+
+
+### Features
+
+* User Viewer to display document ([5aa2d1d](https://github.com/cozy/cozy-libs/commit/5aa2d1d))
+
+
+
+
+
 # [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.1.3...cozy-playgrounds@1.2.0) (2019-06-26)
 
 
