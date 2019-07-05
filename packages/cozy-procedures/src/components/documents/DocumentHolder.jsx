@@ -60,7 +60,7 @@ class DocumentHolder extends Component {
           </Modal>
         )}
         <Card
-          className="u-flex u-flex-row u-flex-items-center"
+          className="u-flex u-flex-row u-flex-items-center u-c-pointer"
           onClick={() => {
             this.setState({ isViewerModalOpened: true })
           }}
@@ -78,7 +78,10 @@ class DocumentHolder extends Component {
             icon="cross"
             size={16}
             className="u-pr-1 u-c-pointer"
-            onClick={() => this.setState({ isModalOpened: true })}
+            onClick={e => {
+              e.stopPropagation()
+              this.setState({ isUnlinkConfirmationModalOpened: true })
+            }}
           />
         </Card>
       </>
