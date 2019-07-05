@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.2...cozy-procedures@0.22.3) (2019-07-05)
+
+
+### Bug Fixes
+
+* Import card from standalone file ([3d214f9](https://github.com/cozy/cozy-libs/commit/3d214f9))
+
+
+
+
+
 ## [0.22.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.1...cozy-procedures@0.22.2) (2019-07-04)
 
 
