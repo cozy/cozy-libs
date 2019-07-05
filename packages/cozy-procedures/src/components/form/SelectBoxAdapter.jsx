@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { SelectBox, translate } from 'cozy-ui/transpiled/react'
+import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
+import { translate } from 'cozy-ui/transpiled/react'
 
 import getInputProps from './getInputProps'
 
