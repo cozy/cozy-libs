@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-codeshifts@1.1.0...cozy-codeshifts@1.2.0) (2019-07-05)
+
+
+### Features
+
+* Add remove redundant expression containers ([3e7b08a](https://github.com/cozy/cozy-libs/commit/3e7b08a))
+* Remove redundant expression containers. Added test ([ad027a8](https://github.com/cozy/cozy-libs/commit/ad027a8))
+
+
+
+
+
 # 1.1.0 (2019-07-04)
 
 
