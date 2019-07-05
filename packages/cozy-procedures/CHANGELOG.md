@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.3...cozy-procedures@0.23.0) (2019-07-05)
+
+
+### Bug Fixes
+
+* **procedures:** SelectBoxAdapter pass options to SelectBox ([d50e589](https://github.com/cozy/cozy-libs/commit/d50e589))
+* **procedures:** Use direct import for SelectBox ([5629d09](https://github.com/cozy/cozy-libs/commit/5629d09))
+* Unlink action and stop Propagation ([45e66e2](https://github.com/cozy/cozy-libs/commit/45e66e2))
+
+
+### Features
+
+* User Viewer to display document ([5aa2d1d](https://github.com/cozy/cozy-libs/commit/5aa2d1d))
+* Viewer of Doc ([96567a9](https://github.com/cozy/cozy-libs/commit/96567a9))
+
+
+
+
+
 ## [0.22.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.2...cozy-procedures@0.22.3) (2019-07-05)
 
 
