@@ -415,10 +415,27 @@ class Document {
    */
   static async queryAll(selector, index) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      return this.queryAllViaNewClient(selector)
     }
 
     return this.queryAllViaOldClient(selector, index)
+  }
+
+  static async queryAllViaNewClient(selector) {
+    if (!selector) {
+      return this.fetchAll()
+    }
+
+    const result = []
+
+    const query = this.cozyClient.find(this.doctype).where(selector)
+    let resp = { next: true }
+    while (resp && resp.next) {
+      resp = await this.cozyClient.query(query.offset(result.length))
+      result.push(...resp.data)
+    }
+
+    return result
   }
 
   static async queryAllViaOldClient(selector, index) {
