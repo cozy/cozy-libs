@@ -2,12 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import {
   translate,
-  Card,
   Icon,
   Modal,
   SubTitle,
   Text
 } from 'cozy-ui/transpiled/react/'
+import Card from 'cozy-ui/transpiled/react/Card'
 import { CozyFile } from 'cozy-doctypes'
 
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'

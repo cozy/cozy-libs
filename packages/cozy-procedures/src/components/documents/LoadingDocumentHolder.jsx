@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { translate, Card, Icon, Spinner } from 'cozy-ui/transpiled/react/'
+import { translate, Icon, Spinner } from 'cozy-ui/transpiled/react/'
+import Card from 'cozy-ui/transpiled/react/Card'
 
 const LoadingDocumentHolder = ({ t }) => (
   <Card className="u-flex u-flex-row u-flex-items-center">
