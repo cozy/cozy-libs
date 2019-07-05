@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Document used with CozyClient queryAll should return all the documents while there are next documents 1`] = `
+Array [
+  Object {
+    "_id": 1,
+    "_type": "io.cozy.simpsons",
+    "name": "Lisa",
+  },
+  Object {
+    "_id": 2,
+    "_type": "io.cozy.simpsons",
+    "name": "Bart",
+  },
+  Object {
+    "_id": 3,
+    "_type": "io.cozy.simpsons",
+    "name": "Homer",
+  },
+  Object {
+    "_id": 4,
+    "_type": "io.cozy.simpsons",
+    "name": "Marge",
+  },
+]
+`;

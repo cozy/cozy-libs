@@ -434,13 +434,41 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('queryAll', () => {
-    it('should throw an error if used with a CozyClient', async () => {
-      expect.assertions(1)
-      await expect(
-        Document.queryAll({ name: { $exists: true } })
-      ).rejects.toEqual(
-        new Error('This method is not implemented yet with CozyClient')
-      )
+    afterEach(() => {
+      cozyClient.stackClient.collection.mockReset()
+    })
+
+    it('should return all the documents while there are next documents', async () => {
+      let i = 0
+      cozyClient.stackClient.collection.mockReturnValue({
+        find: jest.fn().mockImplementation(() => {
+          let data
+          if (i == 0) {
+            data = [{ _id: 1, _type: 'io.cozy.simpsons', name: 'Lisa' }]
+          } else if (i == 1) {
+            data = [{ _id: 2, _type: 'io.cozy.simpsons', name: 'Bart' }]
+          } else if (i == 2) {
+            data = [{ _id: 3, _type: 'io.cozy.simpsons', name: 'Homer' }]
+          } else if (i == 3) {
+            data = [{ _id: 4, _type: 'io.cozy.simpsons', name: 'Marge' }]
+          }
+          const resp = {
+            data,
+            next: i !== 3
+          }
+          i++
+          return Promise.resolve(resp)
+        })
+      })
+
+      const docs = await Simpson.queryAll({ name: { $exists: true } })
+      expect(docs).toMatchSnapshot()
+    })
+
+    it('should call fetchAll if no selector is given', () => {
+      jest.spyOn(Simpson, 'fetchAll').mockImplementation(() => {})
+      Simpson.queryAll()
+      expect(Simpson.fetchAll).toHaveBeenCalled()
     })
   })
 
