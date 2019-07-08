@@ -35,18 +35,23 @@ const documentsSlice = createSlice({
           }
           return acc
         }, {}),
-        ui: Object.keys(action.payload).reduce((acc, fieldId) => {
-          const count = action.payload[fieldId].count
-          acc[fieldId] = Array.from(Array(count))
-          for (let i = 0; i < count; i++) {
-            acc[fieldId][i] = {
-              loading: false,
-              error: false
+        ui: Object.keys(action.payload).reduce(
+          (acc, fieldId) => {
+            const count = action.payload[fieldId].count
+            acc[fieldId] = Array.from(Array(count))
+            for (let i = 0; i < count; i++) {
+              acc[fieldId][i] = {
+                loading: false,
+                error: false
+              }
             }
-          }
 
-          return acc
-        }, {})
+            return acc
+          },
+          {
+            initiated: false
+          }
+        )
       }
     },
 
@@ -86,10 +91,14 @@ const documentsSlice = createSlice({
 const getData = state => get(state, [documentsSlice.slice, 'data'], {})
 
 const getCompletedCount = state =>
-  Object.values(getData(state)).reduce(
-    (acc, { files }) => acc + files.length,
-    0
-  )
+  Object.values(getData(state)).reduce((acc, { files }) => {
+    files.map(file => {
+      if (file !== undefined) {
+        acc++
+      }
+    })
+    return acc
+  }, 0)
 
 const selectors = {
   getFiles: getData,
@@ -98,10 +107,12 @@ const selectors = {
   getCompletedDocumentsCount: getCompletedCount,
   getDocumentsTotal: () => {
     // FIXME: don't use the template directly here
-    return Object.values(creditApplicationTemplate.documents).reduce(
+    const test = Object.values(creditApplicationTemplate.documents).reduce(
       (acc, { count }) => acc + count,
       0
     )
+    console.log('test', test)
+    return test
   },
   getInitiated: state =>
     get(state, [documentsSlice.slice, 'ui', ['initiated']], {}),
