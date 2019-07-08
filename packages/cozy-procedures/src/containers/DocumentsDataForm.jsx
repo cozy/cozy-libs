@@ -1,20 +1,26 @@
 import { connect } from 'react-redux'
 import context from '../redux/context'
 import {
-  fetchDocument,
+  fetchDocumentsByCategory,
   getFiles,
   unlinkDocument,
-  linkDocumentSuccess
+  linkDocumentSuccess,
+  getFilesStatus,
+  setDocumentLoading,
+  fetchDocumentError
 } from '../redux/documentsDataSlice'
 
 const mapStateToProps = state => ({
-  files: getFiles(state)
+  files: getFiles(state),
+  filesStatus: getFilesStatus(state)
 })
 
 const mapDispatchToProps = {
-  fetchDocument,
+  fetchDocumentsByCategory,
   unlinkDocument,
-  linkDocumentSuccess
+  linkDocumentSuccess,
+  setDocumentLoading,
+  fetchDocumentError
 }
 
 const DocumentsDataFormContainer = Component =>
