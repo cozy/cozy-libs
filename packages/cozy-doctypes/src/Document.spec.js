@@ -1,9 +1,21 @@
+const MockDate = require('mockdate')
 const Document = require('./Document')
 const { cozyClientJS, cozyClient } = require('./testUtils')
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
 Simpson.idAttributes = ['name']
+
+const MOCKED_DATE = '2019-05-14T12:00:00.210Z'
+
+beforeAll(() => {
+  MockDate.set(MOCKED_DATE)
+})
+
+afterAll(() => {
+  jest.restoreAllMocks()
+  MockDate.reset()
+})
 
 describe('Document', () => {
   let queryResult = []
