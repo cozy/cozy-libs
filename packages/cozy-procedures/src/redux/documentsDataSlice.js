@@ -107,12 +107,10 @@ const selectors = {
   getCompletedDocumentsCount: getCompletedCount,
   getDocumentsTotal: () => {
     // FIXME: don't use the template directly here
-    const test = Object.values(creditApplicationTemplate.documents).reduce(
+    return Object.values(creditApplicationTemplate.documents).reduce(
       (acc, { count }) => acc + count,
       0
     )
-    console.log('test', test)
-    return test
   },
   getInitiated: state =>
     get(state, [documentsSlice.slice, 'ui', ['initiated']], {}),
