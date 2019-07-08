@@ -1,3 +1,4 @@
 module.exports = {
-  presets: ['cozy-app']
+  presets: ['cozy-app'],
+  plugins: ['inline-react-svg']
 }
