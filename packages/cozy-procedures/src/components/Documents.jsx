@@ -58,7 +58,7 @@ class Documents extends React.Component {
             const filesStatusByCategory = filesStatus[categoryId]
             return (
               <section key={index}>
-                <Label>
+                <Label htmlFor="">
                   {t(
                     `documents.labels.${
                       populatedTemplateDocsWithFiles[categoryId].label

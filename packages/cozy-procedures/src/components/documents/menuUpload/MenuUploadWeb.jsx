@@ -19,7 +19,13 @@ class MenuUploadWeb extends Component {
     return (
       <Menu
         component={
-          <Button theme="ghost" extension="full" align="left">
+          <Button
+            theme="ghost"
+            extension="full"
+            align="left"
+            label={t('documents.import')}
+            iconOnly
+          >
             <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
             <span>{t('documents.import')}</span>
           </Button>

@@ -37,6 +37,8 @@ class MenuUploadMobile extends Component {
           extension="full"
           align="left"
           onClick={() => this.showMenu()}
+          label={t('documents.import')}
+          iconOnly
         >
           <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
           <span>{t('documents.import')}</span>
