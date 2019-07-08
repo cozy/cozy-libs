@@ -74,12 +74,12 @@ const documentsSlice = createSlice({
       state.ui.initiated = action.payload.initiated
     },
     unlinkDocument: (state, action) => {
-      const { documentId, index } = action.payload
-      state.data[documentId].files[index] = undefined
+      const { categoryId, index } = action.payload
+      state.data[categoryId].files[index] = undefined
     },
     linkDocumentSuccess: (state, action) => {
-      const { document, documentId, index } = action.payload
-      state.data[documentId].files[index] = document
+      const { document, categoryId, index } = action.payload
+      state.data[categoryId].files[index] = document
     },
     setLoadingFalse: (state, action) => {
       const { idDoctemplate, index } = action.payload

@@ -19,7 +19,7 @@ class EmptyDocumentHolder extends Component {
 
   async onChange(file) {
     const {
-      documentId,
+      categoryId,
       client,
       linkDocumentSuccess,
       t,
@@ -27,11 +27,11 @@ class EmptyDocumentHolder extends Component {
       fetchDocumentLoading,
       fetchDocumentError
     } = this.props
-    fetchDocumentLoading({ idDoctemplate: documentId, index })
+    fetchDocumentLoading({ idDoctemplate: categoryId, index })
     const dirPath = creditApplicationTemplate.pathToSave
     const filesCollection = client.collection('io.cozy.files')
     const classification = get(
-      creditApplicationTemplate.documents[documentId],
+      creditApplicationTemplate.documents[categoryId],
       `rules.metadata.classification`
     )
     try {
@@ -48,10 +48,10 @@ class EmptyDocumentHolder extends Component {
         .collection('io.cozy.files')
         .createFile(file, { dirId, metadata })
 
-      linkDocumentSuccess({ document: createdFile.data, documentId, index })
+      linkDocumentSuccess({ document: createdFile.data, categoryId, index })
     } catch (uploadError) {
       fetchDocumentError({
-        idDoctemplate: documentId,
+        idDoctemplate: categoryId,
         index,
         error: uploadError.message
       })
@@ -59,7 +59,6 @@ class EmptyDocumentHolder extends Component {
         Alerter.error(t('documents.upload.conflict_error'))
       } else {
         Alerter.error(t('documents.upload.error'))
-        console.log('Upload error : ', uploadError)
       }
     }
   }
@@ -76,7 +75,7 @@ class EmptyDocumentHolder extends Component {
 }
 
 EmptyDocumentHolder.propTypes = {
-  documentId: PropTypes.string.isRequired,
+  categoryId: PropTypes.string.isRequired,
   linkDocumentSuccess: PropTypes.func.isRequired,
   breakpoints: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,

@@ -6,7 +6,7 @@ import LoadingDocumentHolder from './LoadingDocumentHolder'
 const DocumentsGroup = ({
   files,
   templateDocumentsCount,
-  documentId,
+  categoryId,
   filesStatusByCategory
 }) => {
   const slots = [...files, ...new Array(templateDocumentsCount - files.length)]
@@ -15,13 +15,13 @@ const DocumentsGroup = ({
       <DocumentHolder
         document={value}
         key={index}
-        documentId={documentId}
+        categoryId={categoryId}
         index={index}
       />
     ) : filesStatusByCategory[index].loading ? (
       <LoadingDocumentHolder key={index} />
     ) : (
-      <EmptyDocumentHolder key={index} documentId={documentId} index={index} />
+      <EmptyDocumentHolder key={index} categoryId={categoryId} index={index} />
     )
   )
 }
@@ -29,7 +29,7 @@ const DocumentsGroup = ({
 DocumentsGroup.propTypes = {
   files: PropTypes.array.isRequired,
   templateDocumentsCount: PropTypes.number.isRequired,
-  documentId: PropTypes.string.isRequired,
+  categoryId: PropTypes.string.isRequired,
   filesStatusByCategory: PropTypes.array.isRequired
 }
 export default DocumentsGroup

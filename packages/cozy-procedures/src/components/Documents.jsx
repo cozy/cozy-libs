@@ -53,15 +53,15 @@ class Documents extends React.Component {
         <Title className="u-ta-center u-mb-2">{t('documents.subtitle')}</Title>
         <CompletedFromDriveStatus />
         {Object.keys(populatedTemplateDocsWithFiles).map(
-          (documentId, index) => {
-            const { files, count } = populatedTemplateDocsWithFiles[documentId]
-            const filesStatusByCategory = filesStatus[documentId]
+          (categoryId, index) => {
+            const { files, count } = populatedTemplateDocsWithFiles[categoryId]
+            const filesStatusByCategory = filesStatus[categoryId]
             return (
               <section key={index}>
                 <Label>
                   {t(
                     `documents.labels.${
-                      populatedTemplateDocsWithFiles[documentId].label
+                      populatedTemplateDocsWithFiles[categoryId].label
                     }`
                   )}
                 </Label>
@@ -69,7 +69,7 @@ class Documents extends React.Component {
                   files={files}
                   filesStatusByCategory={filesStatusByCategory}
                   templateDocumentsCount={count}
-                  documentId={documentId}
+                  categoryId={categoryId}
                 />
               </section>
             )
