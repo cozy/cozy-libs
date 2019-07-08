@@ -6,7 +6,8 @@ import {
   unlinkDocument,
   linkDocumentSuccess,
   getFilesStatus,
-  setLoadingForDocument
+  fetchDocumentLoading,
+  fetchDocumentError
 } from '../redux/documentsDataSlice'
 
 const mapStateToProps = state => ({
@@ -18,7 +19,8 @@ const mapDispatchToProps = {
   fetchDocumentsByCategory,
   unlinkDocument,
   linkDocumentSuccess,
-  setLoadingForDocument
+  fetchDocumentLoading,
+  fetchDocumentError
 }
 
 const DocumentsDataFormContainer = Component =>

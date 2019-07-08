@@ -53,7 +53,7 @@ Procedure.propTypes = {
   initPersonalData: PropTypes.func.isRequired,
   initDocuments: PropTypes.func.isRequired,
   fetchMyself: PropTypes.func.isRequired,
-  fetchDocument: PropTypes.func.isRequired,
+  fetchDocumentsByCategory: PropTypes.func.isRequired,
   setProcedureStatus: PropTypes.func.isRequired,
   initiated: PropTypes.bool.isRequired,
   client: PropTypes.object.isRequired

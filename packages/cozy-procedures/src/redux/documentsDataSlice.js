@@ -12,17 +12,20 @@ const documentsSlice = createSlice({
       } */
     },
     ui: {
-      /* payslip: {
-        loading: true,
-        error: false
-      } */
+      /* payslip: [
+        {
+
+        },
+        {
+
+        }
+      ] */
       initiated: false
     }
   },
   slice: 'documents',
   reducers: {
     init: (state, action) => {
-      console.log('action', action)
       return {
         completedFromDrive: 0,
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
@@ -48,18 +51,19 @@ const documentsSlice = createSlice({
     },
 
     fetchDocumentLoading: (state, action) => {
-      const { idDoctemplate, loading, index } = action.payload
-      state.ui[idDoctemplate][index].loading = loading
+      const { idDoctemplate, index } = action.payload
+      state.ui[idDoctemplate][index].loading = true
     },
     fetchDocumentSuccess: (state, action) => {
-      const { idDoctemplate, loading, file, index } = action.payload
-      state.ui[idDoctemplate][index].loading = loading
+      const { idDoctemplate, file, index } = action.payload
+      state.ui[idDoctemplate][index].loading = false
       state.data[idDoctemplate].files[index] = file
       state.completedFromDrive += 1
     },
     fetchDocumentError: (state, action) => {
-      const { idDoctemplate, error } = action.payload
-      state.ui[idDoctemplate].error = error
+      const { idDoctemplate, error, index } = action.payload
+      state.ui[idDoctemplate][index].error = error
+      state.ui[idDoctemplate][index].loading = false
     },
     setProcedureStatus: (state, action) => {
       state.ui.initiated = action.payload.initiated
@@ -73,8 +77,8 @@ const documentsSlice = createSlice({
       state.data[documentId].files[index] = document
     },
     setLoadingFalse: (state, action) => {
-      const { idDoctemplate, loading, index } = action.payload
-      state.ui[idDoctemplate][index].loading = loading
+      const { idDoctemplate, index } = action.payload
+      state.ui[idDoctemplate][index].loading = false
     }
   }
 })
@@ -117,21 +121,6 @@ export const {
   setLoadingFalse
 } = actions
 
-export function setLoadingForDocument(documentTemplate, index) {
-  return dispatch => {
-    try {
-      dispatch(
-        fetchDocumentLoading({
-          loading: true,
-          idDoctemplate: documentTemplate,
-          index: index
-        })
-      )
-    } catch (error) {
-      console.log('error', error)
-    }
-  }
-}
 export function fetchDocumentsByCategory(documentTemplate) {
   return async dispatch => {
     try {
@@ -139,7 +128,6 @@ export function fetchDocumentsByCategory(documentTemplate) {
       for (let i = 0; i < docWithRules.count; i++) {
         dispatch(
           fetchDocumentLoading({
-            loading: true,
             idDoctemplate: documentTemplate,
             index: i
           })
@@ -152,7 +140,6 @@ export function fetchDocumentsByCategory(documentTemplate) {
         files.data.map((file, index) => {
           dispatch(
             fetchDocumentSuccess({
-              loading: false,
               file: file,
               idDoctemplate: documentTemplate,
               index
@@ -165,8 +152,7 @@ export function fetchDocumentsByCategory(documentTemplate) {
         for (let i = files.data.length; i < docWithRules.count; i++) {
           dispatch(
             setLoadingFalse({
-              loading: false,
-              file: {},
+              file: undefined,
               idDoctemplate: documentTemplate,
               index: i
             })
@@ -174,12 +160,16 @@ export function fetchDocumentsByCategory(documentTemplate) {
         }
       }
     } catch (error) {
-      dispatch(
-        fetchDocumentError({
-          error: error.message,
-          idDoctemplate: documentTemplate
-        })
-      )
+      const docWithRules = creditApplicationTemplate.documents[documentTemplate]
+      for (let i = 0; i < docWithRules.count; i++) {
+        dispatch(
+          fetchDocumentError({
+            error: error.message,
+            idDoctemplate: documentTemplate,
+            index: i
+          })
+        )
+      }
     }
   }
 }
