@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.51.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.50.0...cozy-doctypes@1.51.0) (2019-07-08)
+
+
+### Features
+
+* **cozy-doctypes:** Add BankAccountStats model ([4535696](https://github.com/cozy/cozy-libs/commit/4535696))
+
+
+
+
+
 # [1.50.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.3...cozy-doctypes@1.50.0) (2019-07-05)
 
 
