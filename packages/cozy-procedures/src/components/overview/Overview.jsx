@@ -7,7 +7,6 @@ import { withClient } from 'cozy-client'
 import { AdministrativeProcedure } from 'cozy-doctypes'
 import CozyRealtime from 'cozy-realtime'
 import {
-  Alerter,
   Title,
   SubTitle,
   Caption,
@@ -18,10 +17,19 @@ import {
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
 
 import Topbar from '../Topbar'
+import EndModal from './EndModal'
 import DocumentsNotFullyCompleted from './DocumentsNotFullyCompleted'
 import DocumentsFullyCompleted from './DocumentsFullyCompleted'
+
 class Overview extends React.Component {
   realtime = null
+  destinationFolderId = null
+
+  state = {
+    processing: false,
+    success: false,
+    error: false
+  }
 
   componentWillUnmount() {
     if (this.realtime) {
@@ -43,9 +51,12 @@ class Overview extends React.Component {
   }
 
   handleZipChanged = jsonFile => async job => {
-    const { client, t } = this.props
+    const { client } = this.props
     if (job.state === 'done') {
-      Alerter.success(t('overview.zip_ready'))
+      this.setState({
+        processing: false,
+        success: true
+      })
       client
         .collection('io.cozy.files')
         .destroy(jsonFile)
@@ -53,7 +64,10 @@ class Overview extends React.Component {
           console.error('Error while trying to delete the json file: ', err)
         })
     } else if (job.state === 'errored') {
-      Alerter.error(t('overview.zip_errored'))
+      this.setState({
+        processing: false,
+        error: true
+      })
       // if an error occured, destroy the zip and the json
       const resp = await client.collection('io.cozy.files').find(
         {
@@ -126,7 +140,10 @@ class Overview extends React.Component {
     const { client, data } = this.props
     const template = creditApplicationTemplate
     try {
-      const destinationId = await this.getDestinationId(template)
+      this.setState({
+        processing: true
+      })
+      this.destinationFolderId = await this.getDestinationId(template)
       const datetime = new Date().toISOString()
       const baseFilename = `${template.type}-${datetime}`
       const jsonFilename = `${baseFilename}.json`
@@ -141,13 +158,13 @@ class Overview extends React.Component {
 
       const jsonFile = await this.createJsonFile(
         jsonFilename,
-        destinationId,
+        this.destinationFolderId,
         response.data
       )
       const files = this.getFilesForZip(jsonFile, data.documentsData)
       const params = {
         files,
-        dir_id: destinationId,
+        dir_id: this.destinationFolderId,
         filename: `${baseFilename}.zip`
       }
       this.ensureRealtime()
@@ -163,7 +180,19 @@ class Overview extends React.Component {
       )
     } catch (e) {
       console.error(e)
+      this.setState({
+        processing: false,
+        error: true
+      })
     }
+  }
+
+  hideModal = () => {
+    this.setState({
+      processing: false,
+      error: false,
+      success: false
+    })
   }
 
   render() {
@@ -175,10 +204,18 @@ class Overview extends React.Component {
       data,
       t
     } = this.props
+    const { success, error, processing } = this.state
     const { amount, duration } = data.procedureData
 
     return (
       <div>
+        {(success || error) && (
+          <EndModal
+            isSuccessful={success}
+            onClose={this.hideModal}
+            folderId={this.destinationFolderId}
+          />
+        )}
         <Topbar
           title={t(`overview.titles.${creditApplicationTemplate.type}`)}
         />
@@ -260,6 +297,8 @@ class Overview extends React.Component {
           label={t('overview.button')}
           extension="full"
           onClick={this.submitProcedure}
+          busy={processing}
+          disabled={processing}
         />
       </div>
     )

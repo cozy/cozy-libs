@@ -15,8 +15,6 @@
     "button": "Send my application",
     "complete": "Fill out",
     "over": "over",
-    "zip_ready": "Your application hs been sent. A copy is available in your files.",
-    "zip_errored": "An error occurred during the archive creation.",
     "titles": {
       "credit-application": "Credit application"
     }
@@ -139,5 +137,17 @@
       "main": "%{smart_count} document out of %{total} |||| %{smart_count} documents out of %{total}",
       "rest": "has been gathered by the application. |||| have been gathered by the application."
     }
+  },
+  "success": {
+    "title": "[DEMO] Your loan request has been generated",
+    "text": "In a live scenario, the loan request would have been transmitted to your bank. At the moment, an archive containing the request informations has been placed in your documents.",
+    "main_action": "View in my documents",
+    "secondary_action": "Close"
+  },
+  "error": {
+    "title": "Your loan request couldn't be completed",
+    "text": "An error has occured while submittng your loan request.",
+    "main_action": "Try again",
+    "secondary_action": "Give up"
   }
 }

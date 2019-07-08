@@ -15,8 +15,6 @@
     "button": "Envoyer mon dossier",
     "complete": "Compléter",
     "over": "sur",
-    "zip_ready": "votre dossier a été envoyé. Une copie est disponible dans vos documents",
-    "zip_errored": "Une erreur est survenue lors de la création de l'archive.",
     "titles": {
       "credit-application": "Dossier de crédit"
     }
@@ -139,5 +137,17 @@
       "main": "%{smart_count} document sur %{total} |||| %{smart_count} documents sur %{total}",
       "rest": "a déjà été rassemblé par l'application. |||| ont déjà été rassemblés par l'application."
     }
+  },
+  "success": {
+    "title": "[DÉMO]  Votre demande de dossier de crédit a été générée",
+    "text": "Dans un vrai cas d’usage, votre demande de dossier de crédit aurait été envoyée à votre banque. En l’état, une archive ZIP récapitulative a été placée dans vos documents.",
+    "main_action": "Voir dans mes documents",
+    "secondary_action": "Fermer"
+  },
+  "error": {
+    "title": "Votre demande de dossier de crédit a échoué",
+    "text": "Une erreur est survenue lors de votre demande de dossier de crédit.",
+    "main_action": "Essayer à nouveau",
+    "secondary_action": "Abandonner"
   }
 }
