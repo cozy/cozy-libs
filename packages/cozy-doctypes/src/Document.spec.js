@@ -418,10 +418,17 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('create', () => {
-    it('should throw an error if used with a CozyClient', () => {
-      expect(() => Document.create({})).toThrow(
-        new Error('This method is not implemented yet with CozyClient')
-      )
+    afterEach(() => {
+      cozyClient.create.mockReset()
+    })
+
+    it('should create the document with the given attributes', async () => {
+      jest.spyOn(cozyClient, 'create').mockImplementation(() => {})
+
+      const marge = { name: 'Marge' }
+      await Simpson.create(marge)
+
+      expect(cozyClient.create).toHaveBeenCalledWith('io.cozy.simpsons', marge)
     })
   })
 

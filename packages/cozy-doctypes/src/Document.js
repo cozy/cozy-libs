@@ -220,10 +220,14 @@ class Document {
 
   static create(attributes) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      return this.createViaNewClient(attributes)
     }
 
     return this.createViaOldClient(attributes)
+  }
+
+  static createViaNewClient(attributes) {
+    return this.cozyClient.create(this.doctype, attributes)
   }
 
   static createViaOldClient(attributes) {
