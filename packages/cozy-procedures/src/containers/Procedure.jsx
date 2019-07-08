@@ -7,7 +7,7 @@ import {
 } from '../redux/personalDataSlice'
 import {
   init as initDocuments,
-  fetchDocument,
+  fetchDocumentsByCategory,
   setProcedureStatus,
   getInitiated
 } from '../redux/documentsDataSlice'
@@ -22,7 +22,7 @@ const mapDispatchToProps = {
   initPersonalData,
   fetchMyself,
   initDocuments,
-  fetchDocument,
+  fetchDocumentsByCategory,
   setProcedureStatus
 }
 

@@ -40,7 +40,7 @@ export const mergeDocsFromStoreAndTemplate = (
 }
 class Documents extends React.Component {
   render() {
-    const { t, router, files: docsFromStore } = this.props
+    const { t, router, files: docsFromStore, filesStatus } = this.props
     const { documents: documentsTemplate } = creditApplicationTemplate
     const populatedTemplateDocsWithFiles = mergeDocsFromStoreAndTemplate(
       docsFromStore,
@@ -55,6 +55,7 @@ class Documents extends React.Component {
         {Object.keys(populatedTemplateDocsWithFiles).map(
           (documentId, index) => {
             const { files, count } = populatedTemplateDocsWithFiles[documentId]
+            const filesStatusByCategory = filesStatus[documentId]
             return (
               <section key={index}>
                 <Label>
@@ -66,6 +67,7 @@ class Documents extends React.Component {
                 </Label>
                 <DocumentsGroup
                   files={files}
+                  filesStatusByCategory={filesStatusByCategory}
                   templateDocumentsCount={count}
                   documentId={documentId}
                 />
@@ -91,7 +93,8 @@ Documents.propTypes = {
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }).isRequired,
-  files: PropTypes.object
+  files: PropTypes.object,
+  filesStatus: PropTypes.object
 }
 
 export default withRouter(translate()(DocumentsContainer(Documents)))

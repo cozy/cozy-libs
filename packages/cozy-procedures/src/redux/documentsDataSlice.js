@@ -22,33 +22,40 @@ const documentsSlice = createSlice({
   slice: 'documents',
   reducers: {
     init: (state, action) => {
+      console.log('action', action)
       return {
         completedFromDrive: 0,
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
+          //init files with undefined value
           acc[fieldId] = {
-            files: []
+            files: Array.from(Array(action.payload[fieldId].count))
           }
           return acc
         }, {}),
         ui: Object.keys(action.payload).reduce((acc, fieldId) => {
-          acc[fieldId] = {
-            loading: false,
-            error: false
+          const count = action.payload[fieldId].count
+          acc[fieldId] = Array.from(Array(count))
+          for (let i = 0; i < count; i++) {
+            acc[fieldId][i] = {
+              loading: false,
+              error: false
+            }
           }
+
           return acc
         }, {})
       }
     },
 
     fetchDocumentLoading: (state, action) => {
-      const { idDoctemplate, loading } = action.payload
-      state.ui[idDoctemplate].loading = loading
+      const { idDoctemplate, loading, index } = action.payload
+      state.ui[idDoctemplate][index].loading = loading
     },
     fetchDocumentSuccess: (state, action) => {
-      const { idDoctemplate, loading, files } = action.payload
-      state.ui[idDoctemplate].loading = loading
-      state.data[idDoctemplate].files = files
-      state.completedFromDrive += files.length
+      const { idDoctemplate, loading, file, index } = action.payload
+      state.ui[idDoctemplate][index].loading = loading
+      state.data[idDoctemplate].files[index] = file
+      state.completedFromDrive += 1
     },
     fetchDocumentError: (state, action) => {
       const { idDoctemplate, error } = action.payload
@@ -58,15 +65,16 @@ const documentsSlice = createSlice({
       state.ui.initiated = action.payload.initiated
     },
     unlinkDocument: (state, action) => {
-      const { document, documentId } = action.payload
-
-      state.data[documentId].files = state.data[documentId].files.filter(
-        doc => doc._id !== document.id
-      )
+      const { documentId, index } = action.payload
+      state.data[documentId].files[index] = undefined
     },
     linkDocumentSuccess: (state, action) => {
-      const { document, documentId } = action.payload
-      state.data[documentId].files.push(document)
+      const { document, documentId, index } = action.payload
+      state.data[documentId].files[index] = document
+    },
+    setLoadingFalse: (state, action) => {
+      const { idDoctemplate, loading, index } = action.payload
+      state.ui[idDoctemplate][index].loading = loading
     }
   }
 })
@@ -92,7 +100,8 @@ const selectors = {
     )
   },
   getInitiated: state =>
-    get(state, [documentsSlice.slice, 'ui', ['initiated']], {})
+    get(state, [documentsSlice.slice, 'ui', ['initiated']], {}),
+  getFilesStatus: state => get(state, [documentsSlice.slice, 'ui'], {})
 }
 
 const { actions, reducer } = documentsSlice
@@ -104,30 +113,65 @@ export const {
   fetchDocumentError,
   setProcedureStatus,
   unlinkDocument,
-  linkDocumentSuccess
+  linkDocumentSuccess,
+  setLoadingFalse
 } = actions
 
-export function fetchDocument(client, documentTemplate) {
+export function setLoadingForDocument(documentTemplate, index) {
+  return dispatch => {
+    try {
+      dispatch(
+        fetchDocumentLoading({
+          loading: true,
+          idDoctemplate: documentTemplate,
+          index: index
+        })
+      )
+    } catch (error) {
+      console.log('error', error)
+    }
+  }
+}
+export function fetchDocumentsByCategory(documentTemplate) {
   return async dispatch => {
-    dispatch(
-      fetchDocumentLoading({
-        loading: true,
-        idDoctemplate: documentTemplate
-      })
-    )
     try {
       const docWithRules = creditApplicationTemplate.documents[documentTemplate]
+      for (let i = 0; i < docWithRules.count; i++) {
+        dispatch(
+          fetchDocumentLoading({
+            loading: true,
+            idDoctemplate: documentTemplate,
+            index: i
+          })
+        )
+      }
 
       const files = await AdministrativeProcedure.getFilesByRules(docWithRules)
 
       if (files.data) {
-        dispatch(
-          fetchDocumentSuccess({
-            loading: false,
-            files: files.data,
-            idDoctemplate: documentTemplate
-          })
-        )
+        files.data.map((file, index) => {
+          dispatch(
+            fetchDocumentSuccess({
+              loading: false,
+              file: file,
+              idDoctemplate: documentTemplate,
+              index
+            })
+          )
+        })
+      }
+
+      if (files.data.length < docWithRules.count) {
+        for (let i = files.data.length; i < docWithRules.count; i++) {
+          dispatch(
+            setLoadingFalse({
+              loading: false,
+              file: {},
+              idDoctemplate: documentTemplate,
+              index: i
+            })
+          )
+        }
       }
     } catch (error) {
       dispatch(
@@ -137,12 +181,6 @@ export function fetchDocument(client, documentTemplate) {
         })
       )
     }
-    dispatch(
-      fetchDocumentLoading({
-        loading: false,
-        idDoctemplate: documentTemplate
-      })
-    )
   }
 }
 
@@ -151,6 +189,7 @@ export const {
   getCompletedDocumentsCount,
   getDocumentsTotal,
   getFiles,
-  getInitiated
+  getInitiated,
+  getFilesStatus
 } = selectors
 export default reducer

@@ -18,7 +18,15 @@ class EmptyDocumentHolder extends Component {
   }
 
   async onChange(file) {
-    const { documentId, client, linkDocumentSuccess, t } = this.props
+    const {
+      documentId,
+      client,
+      linkDocumentSuccess,
+      t,
+      index,
+      setLoadingForDocument
+    } = this.props
+    setLoadingForDocument(documentId, index)
     const dirPath = creditApplicationTemplate.pathToSave
     const filesCollection = client.collection('io.cozy.files')
     const classification = get(
@@ -39,7 +47,7 @@ class EmptyDocumentHolder extends Component {
         .collection('io.cozy.files')
         .createFile(file, { dirId, metadata })
 
-      linkDocumentSuccess({ document: createdFile.data, documentId })
+      linkDocumentSuccess({ document: createdFile.data, documentId, index })
     } catch (uploadError) {
       if (uploadError.status === 409) {
         Alerter.error(t('documents.upload.conflict_error'))
@@ -65,7 +73,9 @@ EmptyDocumentHolder.propTypes = {
   documentId: PropTypes.string.isRequired,
   linkDocumentSuccess: PropTypes.func.isRequired,
   breakpoints: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
+  setLoadingForDocument: PropTypes.func.isRequired
 }
 
 export default flow(
