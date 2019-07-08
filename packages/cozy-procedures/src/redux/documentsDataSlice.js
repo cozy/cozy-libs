@@ -156,7 +156,10 @@ export function fetchDocumentsByCategory(documentTemplate) {
           )
         })
       }
-
+      /**
+       * If we got less files that required, let's remove the loading state.
+       * It's just because we don't have a file
+       */
       if (files.data.length < docWithRules.count) {
         for (let i = files.data.length; i < docWithRules.count; i++) {
           dispatch(
@@ -170,6 +173,7 @@ export function fetchDocumentsByCategory(documentTemplate) {
       }
     } catch (error) {
       const docWithRules = creditApplicationTemplate.documents[documentTemplate]
+      //If we had a global error for a category, let's set the error everywhere
       for (let i = 0; i < docWithRules.count; i++) {
         dispatch(
           fetchDocumentError({
