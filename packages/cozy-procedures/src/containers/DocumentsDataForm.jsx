@@ -6,7 +6,7 @@ import {
   unlinkDocument,
   linkDocumentSuccess,
   getFilesStatus,
-  fetchDocumentLoading,
+  setDocumentLoading,
   fetchDocumentError
 } from '../redux/documentsDataSlice'
 
@@ -19,7 +19,7 @@ const mapDispatchToProps = {
   fetchDocumentsByCategory,
   unlinkDocument,
   linkDocumentSuccess,
-  fetchDocumentLoading,
+  setDocumentLoading,
   fetchDocumentError
 }
 

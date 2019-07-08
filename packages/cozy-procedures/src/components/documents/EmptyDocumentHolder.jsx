@@ -24,10 +24,10 @@ class EmptyDocumentHolder extends Component {
       linkDocumentSuccess,
       t,
       index,
-      fetchDocumentLoading,
+      setDocumentLoading,
       fetchDocumentError
     } = this.props
-    fetchDocumentLoading({ idDoctemplate: categoryId, index })
+    setDocumentLoading({ idDoctemplate: categoryId, index })
     const dirPath = creditApplicationTemplate.pathToSave
     const filesCollection = client.collection('io.cozy.files')
     const classification = get(
@@ -80,7 +80,7 @@ EmptyDocumentHolder.propTypes = {
   breakpoints: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
-  fetchDocumentLoading: PropTypes.func.isRequired,
+  setDocumentLoading: PropTypes.func.isRequired,
   fetchDocumentError: PropTypes.func.isRequired
 }
 

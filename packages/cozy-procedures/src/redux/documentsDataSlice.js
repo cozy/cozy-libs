@@ -55,7 +55,7 @@ const documentsSlice = createSlice({
       }
     },
 
-    fetchDocumentLoading: (state, action) => {
+    setDocumentLoading: (state, action) => {
       const { idDoctemplate, index } = action.payload
       state.ui[idDoctemplate][index].loading = true
     },
@@ -121,7 +121,7 @@ const { actions, reducer } = documentsSlice
 export const {
   init,
   update,
-  fetchDocumentLoading,
+  setDocumentLoading,
   fetchDocumentSuccess,
   fetchDocumentError,
   setProcedureStatus,
@@ -136,7 +136,7 @@ export function fetchDocumentsByCategory(documentTemplate) {
       const docWithRules = creditApplicationTemplate.documents[documentTemplate]
       for (let i = 0; i < docWithRules.count; i++) {
         dispatch(
-          fetchDocumentLoading({
+          setDocumentLoading({
             idDoctemplate: documentTemplate,
             index: i
           })
