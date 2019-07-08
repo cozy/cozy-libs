@@ -21,7 +21,7 @@ class DocumentHolder extends Component {
   }
 
   render() {
-    const { document, unlinkDocument, documentId, t } = this.props
+    const { document, unlinkDocument, categoryId, t, index } = this.props
     const { isUnlinkConfirmationModalOpened, isViewerModalOpened } = this.state
 
     const splittedName = CozyFile.splitFilename(document)
@@ -30,7 +30,7 @@ class DocumentHolder extends Component {
         {isUnlinkConfirmationModalOpened && (
           <Modal
             primaryText={t('documents.unlink.unlink')}
-            primaryAction={() => unlinkDocument({ document, documentId })}
+            primaryAction={() => unlinkDocument({ categoryId, index })}
             secondaryText={t('cancel')}
             secondaryAction={() =>
               this.setState({ isUnlinkConfirmationModalOpened: false })
@@ -91,9 +91,10 @@ class DocumentHolder extends Component {
 
 DocumentHolder.propTypes = {
   unlinkDocument: PropTypes.func.isRequired,
-  documentId: PropTypes.string.isRequired,
+  categoryId: PropTypes.string.isRequired,
   //io.cozy.files
   document: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
 }
 export default flow(translate())(DocumentsDataFormContainer(DocumentHolder))
