@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.23.0...cozy-procedures@0.24.0) (2019-07-08)
+
+
+### Features
+
+* Loading state ([#624](https://github.com/cozy/cozy-libs/issues/624)) ([e633377](https://github.com/cozy/cozy-libs/commit/e633377))
+
+
+
+
+
 # [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.3...cozy-procedures@0.23.0) (2019-07-05)
 
 

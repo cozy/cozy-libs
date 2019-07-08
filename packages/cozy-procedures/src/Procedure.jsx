@@ -12,7 +12,7 @@ class Procedure extends React.Component {
       initPersonalData,
       initDocuments,
       fetchMyself,
-      fetchDocument,
+      fetchDocumentsByCategory,
       client,
       setProcedureStatus
     } = this.props
@@ -29,9 +29,9 @@ class Procedure extends React.Component {
     setProcedureStatus({ initiated: true })
     fetchMyself(client)
 
-    const { documents: documentsTemplate } = creditApplicationTemplate
-    Object.keys(documentsTemplate).map(document => {
-      fetchDocument(client, document)
+    const { documents: documentsCategory } = creditApplicationTemplate
+    Object.keys(documentsCategory).map(document => {
+      fetchDocumentsByCategory(document)
     })
   }
 
@@ -53,7 +53,7 @@ Procedure.propTypes = {
   initPersonalData: PropTypes.func.isRequired,
   initDocuments: PropTypes.func.isRequired,
   fetchMyself: PropTypes.func.isRequired,
-  fetchDocument: PropTypes.func.isRequired,
+  fetchDocumentsByCategory: PropTypes.func.isRequired,
   setProcedureStatus: PropTypes.func.isRequired,
   initiated: PropTypes.bool.isRequired,
   client: PropTypes.object.isRequired
