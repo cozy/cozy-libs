@@ -3,22 +3,20 @@ import PropTypes from 'prop-types'
 
 import { InlineCard, Icon } from 'cozy-ui/transpiled/react'
 const DocumentsFullyCompleted = ({ documents, navigateTo }) => {
-  const flatenedFiles = []
+  const flatennedFiles = []
   Object.values(documents).map(document => {
     Object.values(document['files']).map(file => {
-      flatenedFiles.push(file)
+      if (file) flatennedFiles.push(file)
     })
   })
   return (
     <InlineCard
-      className="u-c-pointer u-p-1 u-flex u-flex-column"
+      className="u-c-pointer u-ph-1 u-pv-half u-flex u-flex-column"
       onClick={() => navigateTo('documents')}
     >
-      {flatenedFiles.map((file, index) => {
-        let style = 'u-ellipsis u-flex'
-        if (index !== 0) style += ' u-mt-1'
+      {flatennedFiles.map((file, index) => {
         return (
-          <div className={style} key={index}>
+          <div className={'u-ellipsis u-flex u-pv-half'} key={index}>
             <Icon icon="file-type-files" />
             <span className="u-ml-half">{file.name}</span>
           </div>
