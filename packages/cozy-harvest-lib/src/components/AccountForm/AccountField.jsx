@@ -10,6 +10,17 @@ import {
   predefinedLabels,
   ROLE_IDENTIFIER
 } from '../../helpers/manifest'
+import { isIOS } from 'cozy-device-helper'
+
+// On iOS, focusing an input not in the same tick as the user action is buggy.
+// The field is focused but the keyboard does not show up,
+// See https://github.com/apache/cordova-plugin-wkwebview-engine/pull/37/#issuecomment-308321094
+const canAutofocus = () => {
+  if (isIOS()) {
+    return false
+  }
+  return true
+}
 
 /**
  * AccountField encapsulate an unique Cozy-UI Field component.
@@ -29,7 +40,7 @@ export class AccountField extends PureComponent {
 
   componentDidMount() {
     const { role } = this.props
-    if (role === ROLE_IDENTIFIER && this.inputRef) {
+    if (role === ROLE_IDENTIFIER && this.inputRef && canAutofocus()) {
       this.inputRef.focus()
     }
   }
