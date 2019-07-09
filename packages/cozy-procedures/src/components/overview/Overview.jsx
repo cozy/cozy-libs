@@ -17,8 +17,9 @@ import {
 } from 'cozy-ui/transpiled/react'
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
 
-import Topbar from './Topbar'
-
+import Topbar from '../Topbar'
+import DocumentsNotFullyCompleted from './DocumentsNotFullyCompleted'
+import DocumentsFullyCompleted from './DocumentsFullyCompleted'
 class Overview extends React.Component {
   realtime = null
 
@@ -223,20 +224,19 @@ class Overview extends React.Component {
         </section>
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.documents')}</SubTitle>
-          <Button
-            label={t('overview.complete')}
-            extraRight={
-              <Chip
-                theme="primary"
-                size="tiny"
-              >{`${documentsCompleted}/${documentsTotal}`}</Chip>
-            }
-            onClick={() => this.navigateTo('documents')}
-            theme="ghost"
-            extension="full"
-            size="large"
-            icon="pen"
-          />
+          {documentsCompleted !== documentsTotal && (
+            <DocumentsNotFullyCompleted
+              documentsCompleted={documentsCompleted}
+              documentsTotal={documentsTotal}
+              navigateTo={this.navigateTo}
+            />
+          )}
+          {documentsCompleted === documentsTotal && (
+            <DocumentsFullyCompleted
+              documents={data.documentsData}
+              navigateTo={this.navigateTo}
+            />
+          )}
         </section>
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
