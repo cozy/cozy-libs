@@ -225,7 +225,7 @@ class Overview extends React.Component {
           <div className="u-flex u-flex-items-center">
             {amount !== null ? (
               <InlineCard
-                className="u-c-pointer"
+                className="u-c-pointer u-ph-1 u-pv-half u-lh-xlarge"
                 onClick={() => this.navigateTo('amount')}
               >
                 {t('overview.amountUnit', {
@@ -243,7 +243,7 @@ class Overview extends React.Component {
             <span className="u-ph-half">{t('overview.over')}</span>
             {duration !== null ? (
               <InlineCard
-                className="u-c-pointer"
+                className="u-c-pointer u-ph-1 u-pv-half u-lh-xlarge"
                 onClick={() => this.navigateTo('duration')}
               >
                 {t('overview.durationUnit', {
