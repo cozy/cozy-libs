@@ -17,6 +17,12 @@
     "over": "over",
     "titles": {
       "credit-application": "Credit application"
+    },
+    "personalDataCompleted": {
+      "I": "I, **%{firstname}** **%{lastname}**, certify being **%{maritalStatus}** and caring for %{numberOfDependants} dependent children",
+      "work": "I am currently **%{employmentStatus}** with a **%{employmentContract}** and receive a salary of **%{salary}€** per month after tax, and **%{additionalIncome}€** pr month of additional income.",
+      "property": "I am the **%{propertyStatus}** of my housing. The sum of my loans is **%{creditsTotalAmount}€** pr month, out of which **%{propertyLoan}€** per month are for my property loan.",
+      "address": "My address is **%{address}**. My phone number is [**%{phone}**](tel://%{phone}) and my email address is [**%{email}**](mailto:%{email})."
     }
   },
   "amount": {
@@ -67,8 +73,8 @@
       },
       "employmentContract": {
         "title": "Employment contract",
-        "cdd": "CDD",
-        "cdi": "CDI"
+        "cdd": "Fixed term contract",
+        "cdi": "Permanent contract"
       },
       "salary": {
         "title": "Salary"

@@ -18,7 +18,8 @@
     "react-router": "3",
     "redux": "4.0.1",
     "redux-logger": "3.0.6",
-    "redux-starter-kit": "0.5.1"
+    "redux-starter-kit": "0.5.1",
+    "snarkdown": "^1.2.2"
   },
   "devDependencies": {
     "@babel/cli": "7.4.4",
