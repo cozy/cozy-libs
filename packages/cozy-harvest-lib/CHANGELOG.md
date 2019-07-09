@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.67.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.66.1...cozy-harvest-lib@0.67.0) (2019-07-09)
+
+
+### Features
+
+* **harvest:** Do not autofocus identifier field on iPhone ([f6c06c2](https://github.com/cozy/cozy-libs/commit/f6c06c2))
+
+
+
+
+
 ## [0.66.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.66.0...cozy-harvest-lib@0.66.1) (2019-07-09)
 
 
