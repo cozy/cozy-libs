@@ -178,6 +178,7 @@ export class KonnectorModal extends PureComponent {
                   />
                 )}
                 <LaunchTriggerCard
+                  className="u-mb-1"
                   trigger={trigger}
                   onError={this.handleKonnectorJobError}
                   onLaunch={this.handleTriggerLaunch}
