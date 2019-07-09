@@ -152,10 +152,66 @@ class Document {
 
   static async createOrUpdate(attributes) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      return this.createOrUpdateViaNewClient(attributes)
     }
 
     return this.createOrUpdateViaOldClient(attributes)
+  }
+
+  static async createOrUpdateViaNewClient(attributes) {
+    const selector = fromPairs(
+      this.idAttributes.map(idAttribute => [
+        idAttribute,
+        get(attributes, sanitizeKey(idAttribute))
+      ])
+    )
+    let results = []
+    const compactedSelector = withoutUndefined(selector)
+    if (size(compactedSelector) === this.idAttributes.length) {
+      results = await this.queryAll(selector)
+    }
+
+    if (results.length === 0) {
+      return this.create(this.addCozyMetadata(attributes))
+    } else if (results.length === 1) {
+      const update = omit(attributes, userAttributes)
+
+      // only update if some fields are different
+      if (
+        !this.checkAttributes ||
+        isDifferent(
+          pick(results[0], this.checkAttributes),
+          pick(update, this.checkAttributes)
+        )
+      ) {
+        // do not emit a mail for those attribute updates
+        delete update.dateImport
+
+        const updated = this.addCozyMetadata({
+          ...results[0],
+          ...update
+        })
+
+        return this.cozyClient.save(updated)
+      } else {
+        log(
+          'debug',
+          `[createOrUpdate] Didn't update ${
+            results[0]._id
+          } because its \`checkedAttributes\` (${
+            this.checkAttributes
+          }) didn't change.`
+        )
+        return results[0]
+      }
+    } else {
+      throw new Error(
+        'Create or update with selectors that returns more than 1 result\n' +
+          JSON.stringify(selector) +
+          '\n' +
+          JSON.stringify(results)
+      )
+    }
   }
 
   static async createOrUpdateViaOldClient(attributes) {
@@ -220,10 +276,14 @@ class Document {
 
   static create(attributes) {
     if (this.usesCozyClient()) {
-      throw new Error('This method is not implemented yet with CozyClient')
+      return this.createViaNewClient(attributes)
     }
 
     return this.createViaOldClient(attributes)
+  }
+
+  static createViaNewClient(attributes) {
+    return this.cozyClient.create(this.doctype, attributes)
   }
 
   static createViaOldClient(attributes) {

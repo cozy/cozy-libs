@@ -409,19 +409,53 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('createOrUpdate', () => {
-    it('should throw an error if used with a CozyClient', async () => {
-      expect.assertions(1)
-      await expect(Document.createOrUpdate({})).rejects.toEqual(
-        new Error('This method is not implemented yet with CozyClient')
+    afterEach(() => {
+      Simpson.queryAll.mockReset()
+    })
+
+    it('should throw an error if there are more than one corresponding documents', async () => {
+      jest
+        .spyOn(Simpson, 'queryAll')
+        .mockReturnValueOnce([{ name: 'Marge' }, { name: 'Marge' }])
+
+      await expect(Simpson.createOrUpdate({ name: 'Marge' })).rejects.toThrow()
+    })
+
+    it('should create the document if it does not exist', async () => {
+      jest.spyOn(Simpson, 'queryAll').mockReturnValueOnce([])
+      jest.spyOn(Simpson, 'create').mockReturnValueOnce()
+
+      await Simpson.createOrUpdate({ name: 'Marge' })
+
+      expect(Simpson.create).toHaveBeenCalledWith(
+        Simpson.addCozyMetadata({ name: 'Marge' })
+      )
+    })
+
+    it('should update the document if it already exists', async () => {
+      jest.spyOn(Simpson, 'queryAll').mockReturnValueOnce([{ name: 'Marge' }])
+      jest.spyOn(cozyClient, 'save').mockReturnValueOnce()
+
+      await Simpson.createOrUpdate({ name: 'Marge', son: 'Bart' })
+
+      expect(cozyClient.save).toHaveBeenCalledWith(
+        Simpson.addCozyMetadata({ name: 'Marge', son: 'Bart' })
       )
     })
   })
 
   describe('create', () => {
-    it('should throw an error if used with a CozyClient', () => {
-      expect(() => Document.create({})).toThrow(
-        new Error('This method is not implemented yet with CozyClient')
-      )
+    afterEach(() => {
+      cozyClient.create.mockReset()
+    })
+
+    it('should create the document with the given attributes', async () => {
+      jest.spyOn(cozyClient, 'create').mockImplementation(() => {})
+
+      const marge = { name: 'Marge' }
+      await Simpson.create(marge)
+
+      expect(cozyClient.create).toHaveBeenCalledWith('io.cozy.simpsons', marge)
     })
   })
 
