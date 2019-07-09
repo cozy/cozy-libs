@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import context from '../redux/context'
-import Overview from '../components/Overview'
+import Overview from '../components/overview/Overview'
 import {
   getCompletedFields,
   getTotalFields,
