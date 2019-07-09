@@ -278,13 +278,13 @@ class Overview extends React.Component {
         </section>
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
-          {personalDataFieldsCompleted !== personalDataFieldsTotal && (
+          {personalDataFieldsCompleted === personalDataFieldsTotal && (
             <PersonalDataFullyCompleted
               navigateTo={this.navigateTo}
               personalData={data.personalData}
             />
           )}
-          {personalDataFieldsCompleted === personalDataFieldsTotal && (
+          {personalDataFieldsCompleted !== personalDataFieldsTotal && (
             <PersonalDataNotFullyCompleted
               navigateTo={this.navigateTo}
               personalDataFieldsCompleted={personalDataFieldsCompleted}
