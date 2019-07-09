@@ -1,4 +1,5 @@
 import {
+  buildFolderPath,
   buildFolderPermission,
   getAccountType,
   KonnectorJobError,
@@ -6,6 +7,13 @@ import {
 } from 'helpers/konnectors'
 
 const fixtures = {
+  account: {
+    _id: '5f344a5e53034124846dd0816909e27c'
+  },
+  konnector: {
+    name: 'Test Konnector',
+    slug: 'test-konnector'
+  },
   folder: {
     _id: '006704d25afb417b9a279a758a08a964'
   }
@@ -42,6 +50,114 @@ describe('Konnectors Helpers', () => {
 
     it('should return false', () => {
       expect(needsFolder({})).toBe(false)
+    })
+  })
+
+  describe('buildFolderPath', () => {
+    it('should build default path', () => {
+      expect(buildFolderPath(fixtures.konnector, fixtures.account)).toEqual(
+        '/Administrative/Test Konnector/5f344a5e53034124846dd0816909e27c'
+      )
+    })
+
+    it('should build localized default path', () => {
+      expect(
+        buildFolderPath(fixtures.konnector, fixtures.account, {
+          administrative: 'My administrative documents'
+        })
+      ).toEqual(
+        '/My administrative documents/Test Konnector/5f344a5e53034124846dd0816909e27c'
+      )
+    })
+
+    it('should build path from konnector defaultDir', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultDir: '$photos' }]
+      }
+      expect(
+        buildFolderPath(konnector, fixtures.account, { photos: 'Photos' })
+      ).toEqual('/Photos/Test Konnector/5f344a5e53034124846dd0816909e27c')
+    })
+
+    it('should build path from konnector with defaultPath', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultPath: '/Custom folder/$konnector' }]
+      }
+      expect(
+        buildFolderPath(konnector, fixtures.account, { photos: 'Photos' })
+      ).toEqual('/Administrative/Custom folder/Test Konnector')
+    })
+
+    it('should build path from konnector with defaultDir and defaultPath', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [
+          { defaultDir: '$photos', defaultPath: '/Custom folder/$konnector' }
+        ]
+      }
+      expect(
+        buildFolderPath(konnector, fixtures.account, { photos: 'Photos' })
+      ).toEqual('/Photos/Custom folder/Test Konnector')
+    })
+
+    it('should throw error for unexpected defaultDir', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultDir: '$stuff' }]
+      }
+      expect(() => buildFolderPath(konnector, fixtures.account)).toThrow()
+    })
+
+    it('should add leading slash to path', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultPath: 'custom folder' }]
+      }
+      expect(buildFolderPath(konnector, fixtures.account)).toEqual(
+        '/Administrative/custom folder'
+      )
+    })
+
+    it('should remove trailing slash from path', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultPath: 'custom folder/' }]
+      }
+      expect(buildFolderPath(konnector, fixtures.account)).toEqual(
+        '/Administrative/custom folder'
+      )
+    })
+
+    it('should not replace string containing variable name', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultPath: '/$konnectorToNotReplace/custom' }]
+      }
+      expect(buildFolderPath(konnector, fixtures.account)).toEqual(
+        '/Administrative/$konnectorToNotReplace/custom'
+      )
+    })
+
+    it('should handle multiple slash in folder path', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        folders: [{ defaultPath: '///too//much///slashes/////' }]
+      }
+      expect(buildFolderPath(konnector, fixtures.account)).toEqual(
+        '/Administrative/too/much/slashes'
+      )
+    })
+
+    it('should handle multiple slash in folders values', () => {
+      expect(
+        buildFolderPath(fixtures.konnector, fixtures.account, {
+          administrative: '///Administrative/////with//slashes////'
+        })
+      ).toEqual(
+        '/Administrative/with/slashes/Test Konnector/5f344a5e53034124846dd0816909e27c'
+      )
     })
   })
 

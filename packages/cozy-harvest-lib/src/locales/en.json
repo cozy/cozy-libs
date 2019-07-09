@@ -157,6 +157,10 @@
       "label": "Two factor code"
     }
   },
+  "folder": {
+    "administrative": "Administrative",
+    "photos": "Photos"
+  },
   "legacy": {
     "fields": {
       "access_token": {

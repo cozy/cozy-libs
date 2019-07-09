@@ -13,7 +13,6 @@ import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
 import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
-import { slugify } from '../helpers/slug'
 import triggers from '../helpers/triggers'
 import withLocales from './hoc/withLocales'
 
@@ -100,9 +99,12 @@ export class TriggerManager extends Component {
     let folder
 
     if (konnectors.needsFolder(konnector)) {
-      const path = `${t('default.baseDir')}/${konnector.name}/${slugify(
-        accounts.getLabel(account)
-      )}`
+      // TODO: remove previous legacy key `default.baseDir`
+      // https://github.com/cozy/cozy-libs/issues/637
+      const path = konnectors.buildFolderPath(konnector, account, {
+        administrative: t('folder.administrative'),
+        photos: t('folder.photos')
+      })
 
       folder =
         (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
