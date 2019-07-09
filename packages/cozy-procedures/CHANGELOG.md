@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.24.0...cozy-procedures@0.25.0) (2019-07-09)
+
+
+### Bug Fixes
+
+* Remove some proptypes warning ([#628](https://github.com/cozy/cozy-libs/issues/628)) ([a86efd2](https://github.com/cozy/cozy-libs/commit/a86efd2))
+
+
+### Features
+
+* Display fully completed component when docs are ok ([71ddaa7](https://github.com/cozy/cozy-libs/commit/71ddaa7))
+
+
+
+
+
 # [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.23.0...cozy-procedures@0.24.0) (2019-07-08)
 
 
