@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.52.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.51.0...cozy-doctypes@1.52.0) (2019-07-09)
+
+
+### Features
+
+* **cozy-doctypes:** Implement Document::create using cozy-client ([d2614f6](https://github.com/cozy/cozy-libs/commit/d2614f6))
+* **cozy-doctypes:** Implement Document::createOrUpdate with cozy-client ([768ae2c](https://github.com/cozy/cozy-libs/commit/768ae2c))
+
+
+
+
+
 # [1.51.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.50.0...cozy-doctypes@1.51.0) (2019-07-08)
 
 
