@@ -174,7 +174,6 @@ class Document {
     if (results.length === 0) {
       return this.create(this.addCozyMetadata(attributes))
     } else if (results.length === 1) {
-      const id = results[0]._id
       const update = omit(attributes, userAttributes)
 
       // only update if some fields are different
