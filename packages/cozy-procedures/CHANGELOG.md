@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.26.1...cozy-procedures@0.27.0) (2019-07-09)
+
+
+### Features
+
+* Overview completed for personal data ([c86814a](https://github.com/cozy/cozy-libs/commit/c86814a))
+* Support markdown ([9dafc1a](https://github.com/cozy/cozy-libs/commit/9dafc1a))
+
+
+
+
+
 ## [0.26.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.26.0...cozy-procedures@0.26.1) (2019-07-09)
 
 
