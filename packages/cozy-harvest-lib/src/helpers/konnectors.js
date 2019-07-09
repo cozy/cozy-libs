@@ -1,5 +1,11 @@
 import get from 'lodash/get'
 import has from 'lodash/has'
+import trim from 'lodash/trim'
+
+import * as accounts from './accounts'
+
+// Default name for base directory
+const DEFAULT_LOCALIZED_BAR_DIR = 'Administrative'
 
 // Type of errors returned by konnector
 const CHALLENGE_ASKED = 'CHALLENGE_ASKED'
@@ -104,6 +110,109 @@ export const needsFolder = konnector => {
 }
 
 /**
+ * Base directories are directory where konnector may copy their data.
+ * They are expressed as variables which then need to be localized.
+ * Default is `$administrative`.
+ */
+const allowedBaseDirVariables = ['$administrative', '$photos']
+
+/**
+ * Render base directory, based on given folders object.
+ * For example, it will render `$administrative` with the given value passed in
+ * folders object. We expect to find in folders a localized value.
+ * @param  {String} baseDir base directory variable, expects `$administrative`
+ * or `$photos`
+ * @param  {Object} folders Object indexing base directory variable with
+ * corresponding localized name.
+ * @return {String}         Localized directory
+ */
+const renderBaseDir = (baseDir, folders = {}) => {
+  if (!allowedBaseDirVariables.includes(baseDir))
+    throw new Error(
+      `baseDir may only have the following values: ${allowedBaseDirVariables.join(
+        ', '
+      )})`
+    )
+
+  // Look for variable name into folders but without $ prefix
+  const renderedBaseDir = folders[baseDir.slice(1)] || DEFAULT_LOCALIZED_BAR_DIR
+  // Trim `/` and avoid multiple `/` characters with regexp
+  return trim(renderedBaseDir.replace(/(\/+)/g, '/'), '/')
+}
+
+/**
+ * Render the given folder path using the given `variables` object.
+ * Available variable are `$konnector` (konnector name) and `$account`
+ * (account label, i.e. id or name)
+ * @param  {String} path      Path to render
+ * @param  {Object} variables Object mapping variable to actual values
+ * @return {String}           Rendered path
+ */
+const renderFolderPath = (path, variables = {}) => {
+  // Trim `/` and avoid multiple `/` characters with regexp
+  const sanitizedPath = trim(path.replace(/(\/+)/g, '/'), '/')
+
+  // Let's get only full variable name limited by '/'. We want to avoid false
+  // positive like parsing `$variableInString` to `valueInString`
+  const segments = sanitizedPath.split('/')
+  return segments
+    .map(segment => variables[segment.slice(1)] || segment)
+    .join('/')
+}
+
+/**
+ * Build folder path for a given konnector and a given account.
+ *
+ * If konnector.folders[0].defaultDir exists, it is used as default directory.
+ * If konnector.folders[0].defaultPath exists, it is used as default folder path
+ * as well.
+ *
+ * Occurrences of following strings in base directory are replaced by:
+ * * `$administrative`: Administrative folder
+ * * `$photos`: Photos folder
+ *
+ * Occurrences of following strings in path are replaced by:
+ * * `$account: Account label (id or name)`
+ * * `$konnector`: Konnector name
+ *
+ * If no konnectors.folders[0].defaultDir is set, the default base dir used is
+ * `$administrative`.
+ *
+ * If no konnectors.folders[0].defaultPath is set, the default path used is
+ * `/$konnector/$account`.
+ *
+ * @param  {Object} konnector Konnector document
+ * @param  {Object} account   Account document
+ * @param  {Object} folders   Object containing a mapping from folder
+ * identifiers (ex: $administrative) to their localized values (ex:
+ * Administratif).
+ * @return {String}           The result path
+ */
+export const buildFolderPath = (konnector, account, folders = {}) => {
+  const baseDir = get(
+    konnector,
+    // For now konnectors are only defining one folder in their folders array
+    'folders[0].defaultDir',
+    `$administrative`
+  )
+
+  const path = get(konnector, 'folders[0].defaultPath', `/$konnector/$account`)
+
+  // Separate baseDir parsing and path parsing to avoid allowing unexpected
+  // variables in both dir and path : we do not want $konnector in baseDir for
+  // example.
+  const renderedBaseDir = renderBaseDir(baseDir, folders)
+  const renderedPath = renderFolderPath(path, {
+    // When adding a new allowed variable here, please keep documentation
+    // of `renderFolderPath` function up to date.
+    konnector: konnector.name,
+    account: accounts.getLabel(account)
+  })
+
+  return `/${renderedBaseDir}/${renderedPath}`
+}
+
+/**
  * Returns a permission ready to be passed to
  * client.collection('io.cozy.permissions').add().
  * @param  {Object} konnector The konnector to add permission to
@@ -123,7 +232,8 @@ export const buildFolderPermission = folder => {
 
 export default {
   KonnectorJobError,
+  buildFolderPath,
+  buildFolderPermission,
   getAccountType,
-  needsFolder,
-  buildFolderPermission
+  needsFolder
 }
