@@ -11,7 +11,6 @@ import {
   SubTitle,
   Caption,
   Button,
-  Chip,
   translate
 } from 'cozy-ui/transpiled/react'
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
@@ -20,6 +19,8 @@ import Topbar from '../Topbar'
 import EndModal from './EndModal'
 import DocumentsNotFullyCompleted from './DocumentsNotFullyCompleted'
 import DocumentsFullyCompleted from './DocumentsFullyCompleted'
+import PersonalDataFullyCompleted from './PersonalDataFullyCompleted'
+import PersonalDataNotFullyCompleted from './PersonalDataNotFullyCompleted'
 
 class Overview extends React.Component {
   realtime = null
@@ -277,20 +278,19 @@ class Overview extends React.Component {
         </section>
         <section className="u-mb-2">
           <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
-          <Button
-            label={t('overview.complete')}
-            extraRight={
-              <Chip
-                theme="primary"
-                size="tiny"
-              >{`${personalDataFieldsCompleted}/${personalDataFieldsTotal}`}</Chip>
-            }
-            onClick={() => this.navigateTo('personal')}
-            theme="ghost"
-            extension="full"
-            size="large"
-            icon="pen"
-          />
+          {personalDataFieldsCompleted !== personalDataFieldsTotal && (
+            <PersonalDataFullyCompleted
+              navigateTo={this.navigateTo}
+              personalData={data.personalData}
+            />
+          )}
+          {personalDataFieldsCompleted === personalDataFieldsTotal && (
+            <PersonalDataNotFullyCompleted
+              navigateTo={this.navigateTo}
+              personalDataFieldsCompleted={personalDataFieldsCompleted}
+              personalDataFieldsTotal={personalDataFieldsTotal}
+            />
+          )}
         </section>
         <Caption className="u-mb-1">{t('overview.notice')}</Caption>
         <Button
