@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.26.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.26.0...cozy-procedures@0.26.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* Use only one direction ([bc891f0](https://github.com/cozy/cozy-libs/commit/bc891f0))
+* Visual issue on overview ([828e8f7](https://github.com/cozy/cozy-libs/commit/828e8f7))
+
+
+
+
+
 # [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.25.0...cozy-procedures@0.26.0) (2019-07-09)
 
 
