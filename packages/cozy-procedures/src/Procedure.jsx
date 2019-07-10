@@ -40,7 +40,7 @@ class Procedure extends React.Component {
 
   render() {
     return (
-      <div className="u-ph-1 u-pv-2 u-maw-6">
+      <div className="u-ph-1 u-pv-2 u-maw-6" data-procedure>
         {this.props.initiated === true ? (
           this.props.children
         ) : (
