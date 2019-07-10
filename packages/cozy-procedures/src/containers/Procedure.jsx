@@ -3,7 +3,8 @@ import { connect } from 'react-redux'
 import Context from '../redux/context'
 import {
   init as initPersonalData,
-  fetchMyself
+  fetchMyself,
+  fetchBankAccountsStats
 } from '../redux/personalDataSlice'
 import {
   init as initDocuments,
@@ -23,7 +24,8 @@ const mapDispatchToProps = {
   fetchMyself,
   initDocuments,
   fetchDocumentsByCategory,
-  setProcedureStatus
+  setProcedureStatus,
+  fetchBankAccountsStats
 }
 
 export default withLocales(

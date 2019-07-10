@@ -1,13 +1,14 @@
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 
-import { AdministrativeProcedure } from 'cozy-doctypes'
+import { AdministrativeProcedure, BankAccountStats } from 'cozy-doctypes'
 
 const personalDataSlice = createSlice({
   initialState: {
     completedFromMyself: 0,
     data: {},
-    loading: false,
+    myselfLoading: false,
+    bankAccountsStatsLoading: false,
     error: ''
   },
   slice: 'personalData',
@@ -19,12 +20,13 @@ const personalDataSlice = createSlice({
           acc[fieldId] = ''
           return acc
         }, {}),
-        loading: false,
+        myselfLoading: false,
+        bankAccountsStatsLoading: false,
         error: ''
       }
     },
     fetchMyselfLoading: (state, action) => {
-      state.loading = action.payload.loading
+      state.myselfLoading = action.payload.loading
     },
     fetchMyselfSuccess: (state, action) => {
       const fieldsToPopulate = Object.keys(state.data)
@@ -46,6 +48,20 @@ const personalDataSlice = createSlice({
         ...state.data,
         ...action.payload
       }
+    },
+    fetchBankAccountsStatsLoading: (state, action) => {
+      state.bankAccountsStatsLoading = action.payload.loading
+    },
+    fetchBankAccountsStatsSuccess: (state, action) => {
+      const summedStats = BankAccountStats.sum(action.payload)
+
+      state.data = {
+        ...state.data,
+        salary: summedStats.income,
+        additionalIncome: summedStats.additionalIncome,
+        propertyLoan: summedStats.mortgage,
+        creditsTotalAmount: summedStats.loans
+      }
     }
   }
 })
@@ -57,7 +73,9 @@ export const {
   update,
   fetchMyselfLoading,
   fetchMyselfSuccess,
-  fetchMyselfError
+  fetchMyselfError,
+  fetchBankAccountsStatsLoading,
+  fetchBankAccountsStatsSuccess
 } = actions
 
 export function fetchMyself(client) {
@@ -80,6 +98,21 @@ export function fetchMyself(client) {
     }
 
     dispatch(fetchMyselfLoading({ loading: false }))
+  }
+}
+
+export function fetchBankAccountsStats(client) {
+  return async dispatch => {
+    dispatch(fetchBankAccountsStatsLoading({ loading: true }))
+    try {
+      const query = client.all('io.cozy.bank.accounts.stats')
+      const response = await client.query(query)
+      dispatch(fetchBankAccountsStatsSuccess(response.data))
+    } catch (error) {
+      console.warn('Bank accounts stats failed to fetch', error)
+    }
+
+    dispatch(fetchBankAccountsStatsLoading({ loading: false }))
   }
 }
 
