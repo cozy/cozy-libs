@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.0...cozy-procedures@0.28.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* **procedure:** TMP has to be removed later ([516a011](https://github.com/cozy/cozy-libs/commit/516a011))
+* **procedures:** Shrink icon and ellipsis filename ([2d67e7e](https://github.com/cozy/cozy-libs/commit/2d67e7e))
+
+
+
+
+
 # [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.27.0...cozy-procedures@0.28.0) (2019-07-10)
 
 

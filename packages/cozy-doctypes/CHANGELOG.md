@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.53.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.0...cozy-doctypes@1.53.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* **procedure:** TMP has to be removed later ([516a011](https://github.com/cozy/cozy-libs/commit/516a011))
+
+
+
+
+
 # [1.53.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.52.1...cozy-doctypes@1.53.0) (2019-07-10)
 
 
