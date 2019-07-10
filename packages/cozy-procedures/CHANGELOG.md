@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.1...cozy-procedures@0.28.2) (2019-07-10)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Remove special chars ([4a305c5](https://github.com/cozy/cozy-libs/commit/4a305c5))
+* Add a data attribute to ID the procedure nodes ([7155210](https://github.com/cozy/cozy-libs/commit/7155210))
+
+
+
+
+
 ## [0.28.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.0...cozy-procedures@0.28.1) (2019-07-10)
 
 
