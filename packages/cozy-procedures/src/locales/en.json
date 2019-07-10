@@ -145,7 +145,7 @@
     }
   },
   "success": {
-    "title": "[DEMO] Your loan request has been generated",
+    "title": "[DEMO] Your loan request has been generated",
     "text": "In a live scenario, the loan request would have been transmitted to your bank. At the moment, an archive containing the request informations has been placed in your documents.",
     "main_action": "View in my documents",
     "secondary_action": "Close"
