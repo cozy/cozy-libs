@@ -94,11 +94,15 @@ class AdministrativeProcedure extends Document {
   static create(data, template) {
     const { documentsData, personalData, procedureData } = data
     const files = Object.keys(documentsData).map(identifier => {
-      return documentsData[identifier].files.map(file => ({
-        _id: file.id,
-        _type: 'io.cozy.files',
-        templateDocumentId: identifier
-      }))
+      return documentsData[identifier].files.map(file => {
+        //TODO Remove this check. it has to be done before
+        if (file)
+          return {
+            _id: file.id,
+            _type: 'io.cozy.files',
+            templateDocumentId: identifier
+          }
+      })
     })
     return {
       personalData,

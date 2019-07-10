@@ -129,8 +129,11 @@ class Overview extends React.Component {
     Object.keys(documentsData).forEach(categoryName => {
       const documentCategory = documentsData[categoryName]
       documentCategory.files.forEach(f => {
-        const identifier = `documents/${f.name}`
-        files[identifier] = f.id
+        //!TODO Remove this check. We need to clean datas structure before
+        if (f) {
+          const identifier = `documents/${f.name}`
+          files[identifier] = f.id
+        }
       })
     })
 
@@ -148,6 +151,7 @@ class Overview extends React.Component {
       const datetime = new Date().toISOString()
       const baseFilename = `${template.type}-${datetime}`
       const jsonFilename = `${baseFilename}.json`
+
       const administrativeProcedure = AdministrativeProcedure.create(
         data,
         creditApplicationTemplate
