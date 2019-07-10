@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.27.0...cozy-procedures@0.28.0) (2019-07-10)
+
+
+### Features
+
+* **cozy-procedure:** Fill banking data automatically ([a6e7df2](https://github.com/cozy/cozy-libs/commit/a6e7df2))
+
+
+
+
+
 # [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.26.1...cozy-procedures@0.27.0) (2019-07-09)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.3.3...cozy-playgrounds@1.4.0) (2019-07-10)
+
+
+### Features
+
+* **playgrounds:** Add io.cozy.bank.accounts.stats permission ([714730d](https://github.com/cozy/cozy-libs/commit/714730d))
+
+
+
+
+
 ## [1.3.3](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.3.2...cozy-playgrounds@1.3.3) (2019-07-09)
 
 **Note:** Version bump only for package cozy-playgrounds
