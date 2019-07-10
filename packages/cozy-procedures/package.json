@@ -2,6 +2,14 @@
   "name": "cozy-procedures",
   "version": "0.29.0",
   "main": "dist/index.js",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-procedures/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
     "watch": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --watch",
