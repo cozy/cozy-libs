@@ -3,6 +3,8 @@ import get from 'lodash/get'
 
 import { AdministrativeProcedure, BankAccountStats } from 'cozy-doctypes'
 
+import { roundCurrencyAmount } from './currency'
+
 const personalDataSlice = createSlice({
   initialState: {
     completedFromMyself: 0,
@@ -54,13 +56,17 @@ const personalDataSlice = createSlice({
     },
     fetchBankAccountsStatsSuccess: (state, action) => {
       const summedStats = BankAccountStats.sum(action.payload)
+      const { currency } = summedStats
 
       state.data = {
         ...state.data,
-        salary: summedStats.income,
-        additionalIncome: summedStats.additionalIncome,
-        propertyLoan: summedStats.mortgage,
-        creditsTotalAmount: summedStats.loans
+        salary: roundCurrencyAmount(summedStats.income, currency),
+        additionalIncome: roundCurrencyAmount(
+          summedStats.additionalIncome,
+          currency
+        ),
+        propertyLoan: roundCurrencyAmount(summedStats.mortgage, currency),
+        creditsTotalAmount: roundCurrencyAmount(summedStats.loans, currency)
       }
     }
   }
