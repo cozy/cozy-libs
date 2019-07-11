@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import snarkdown from 'snarkdown'
 import capitalize from 'lodash/capitalize'
-import { InlineCard, translate } from 'cozy-ui/transpiled/react'
+import { InlineCard, translate, Text } from 'cozy-ui/transpiled/react'
 
 const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
   const {
@@ -23,10 +23,11 @@ const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
   } = personalData
   return (
     <InlineCard
-      className="u-c-pointer u-p-1 u-flex u-flex-column"
+      className="u-c-pointer u-ph-1 u-pb-half u-pt-1 u-flex u-flex-column"
       onClick={() => navigateTo('personal')}
     >
-      <p
+      <Text
+        className="u-mb-half"
         dangerouslySetInnerHTML={{
           __html: snarkdown(
             t('overview.personalDataCompleted.I', {
@@ -41,7 +42,8 @@ const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
         }}
       />
 
-      <p
+      <Text
+        className="u-mb-half"
         dangerouslySetInnerHTML={{
           __html: snarkdown(
             t('overview.personalDataCompleted.work', {
@@ -58,7 +60,8 @@ const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
         }}
       />
 
-      <p
+      <Text
+        className="u-mb-half"
         dangerouslySetInnerHTML={{
           __html: snarkdown(
             t('overview.personalDataCompleted.property', {
@@ -72,7 +75,8 @@ const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
         }}
       />
 
-      <p
+      <Text
+        className="u-mb-half"
         dangerouslySetInnerHTML={{
           __html: snarkdown(
             t('overview.personalDataCompleted.address', {
