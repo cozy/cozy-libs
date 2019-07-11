@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.54.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.2...cozy-doctypes@1.54.0) (2019-07-11)
+
+
+### Features
+
+* **cozy-doctypes:** BankAccountStats::sum returns the currency ([4d6eab9](https://github.com/cozy/cozy-libs/commit/4d6eab9))
+* **cozy-doctypes:** BankAccountStats::sum throws if multiple currencies ([9f1e98d](https://github.com/cozy/cozy-libs/commit/9f1e98d))
+
+
+
+
+
 ## [1.53.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.1...cozy-doctypes@1.53.2) (2019-07-11)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.5...cozy-procedures@0.29.0) (2019-07-11)
+
+
+### Features
+
+* **cozy-procedures:** Add a warning when default precision is used ([03a2f9f](https://github.com/cozy/cozy-libs/commit/03a2f9f))
+* **cozy-procedures:** Round bank account stats ([9d7b6ad](https://github.com/cozy/cozy-libs/commit/9d7b6ad))
+
+
+
+
+
 ## [0.28.5](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.4...cozy-procedures@0.28.5) (2019-07-11)
 
 
