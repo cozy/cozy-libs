@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.14.1...cozy-authentication@1.15.0) (2019-07-11)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Update cozy-ui to v22.3.0 ([4188303](https://github.com/cozy/cozy-libs/commit/4188303))
+
+
+### Features
+
+* **SelectServer:** Back button is not fixed anymore ([c3ba652](https://github.com/cozy/cozy-libs/commit/c3ba652))
+
+
+
+
+
 ## 1.14.1 (2019-07-11)
 
 **Note:** Version bump only for package cozy-authentication
