@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "0.67.0",
+  "version": "0.67.1",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -26,10 +26,10 @@
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
   "dependencies": {
-    "cozy-realtime": "3.1.0",
+    "cozy-realtime": "^3.1.1",
     "date-fns": "^1.30.1",
     "final-form": "4.11.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "microee": "^0.0.6",
     "preact-portal": "^1.1.3",
     "react-final-form": "3.7.0",
@@ -39,9 +39,9 @@
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "babel-jest": "24.1.0",
-    "babel-preset-cozy-app": "^1.5.1",
+    "babel-preset-cozy-app": "^1.5.2",
     "cozy-client": "6.46.0",
-    "cozy-device-helper": "^1.7.2",
+    "cozy-device-helper": "^1.7.3",
     "cozy-realtime": "3.0.0",
     "cozy-ui": "21.2.3",
     "enzyme": "3.9.0",

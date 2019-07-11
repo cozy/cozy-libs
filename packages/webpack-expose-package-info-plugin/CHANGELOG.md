@@ -1,0 +1,11 @@
+# Change Log
+
+All notable changes to this project will be documented in this file.
+See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+
+# 1.1.0 (2019-07-11)
+
+
+### Features
+
+* Can be used for more than version ([0341948](https://github.com/cozy/cozy-libs/commit/0341948))

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.53.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.1...cozy-doctypes@1.53.2) (2019-07-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lodash to v4.17.13 [SECURITY] ([#648](https://github.com/cozy/cozy-libs/issues/648)) ([1b36dac](https://github.com/cozy/cozy-libs/commit/1b36dac))
+
+
+
+
+
 ## [1.53.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.0...cozy-doctypes@1.53.1) (2019-07-10)
 
 

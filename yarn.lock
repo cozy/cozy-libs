@@ -5468,10 +5468,10 @@ cozy-ui@21.2.3, cozy-ui@^21:
     react-pdf "^4.0.5"
     react-select "2.2.0"
 
-cozy-ui@21.5.1, cozy-ui@^21.5.1:
-  version "21.5.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-21.5.1.tgz#210afa58d93c1e5c8408313facbaaa1ec8e68f73"
-  integrity sha512-bPikeRBjsyOZ0Qi9Oa4kwzoD6AD2V8gS+8xdocs8jUeqjUmoGuBKwbyfNFQdfsngrtNZU8MnHr+h+akMo1oejg==
+cozy-ui@21.7.0, cozy-ui@^21.7.0:
+  version "21.7.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-21.7.0.tgz#fb4c0b9d21504c14ce6a7aafcaf90c8ca74e91d5"
+  integrity sha512-9JQJhGBZZJnI7Z5WpGE/ivVu7rLniIpLIEgVvwWXhJeVq1ocZCoy5IaLx4UtcPdebZdtLAe5pcJdN9alxw7oAA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
@@ -11366,6 +11366,11 @@ lodash@4.17.11, lodash@^4.13.1, lodash@^4.14.2, lodash@^4.15.0, lodash@^4.17.10,
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
   integrity sha512-cQKh8igo5QUhZ7lg38DYWAxMvjSAKG0A8wGSVimP07SIUEK2UO+arSRKbRZWtelMtN5V0Hkwh5ryOto/SshYIg==
+
+lodash@4.17.13:
+  version "4.17.13"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
+  integrity sha512-vm3/XWXfWtRua0FkUyEHBZy8kCPjErNBT9fJx8Zvs+U6zjqPbTUOpkaoum3O5uiA8sm+yNMHXfYkTUHFoMxFNA==
 
 log-symbols@^2.2.0:
   version "2.2.0"
