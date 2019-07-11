@@ -238,18 +238,16 @@ export class SelectServer extends Component {
       <form className={styles['wizard']} onSubmit={this.onSubmit}>
         <div className={styles['wizard-wrapper']}>
           <header className={styles['wizard-header']}>
-            <div className={styles['wizard-header-fixed']}>
-              <Button
-                subtle
-                icon="previous"
-                iconOnly
-                extension="narrow"
-                className={classNames(styles['wizard-previous'])}
-                onClick={previousStep}
-                type="button"
-                label={t('mobile.onboarding.server_selection.previous')}
-              />
-            </div>
+            <Button
+              subtle
+              icon="previous"
+              iconOnly
+              extension="narrow"
+              className={classNames(styles['wizard-previous'])}
+              onClick={previousStep}
+              type="button"
+              label={t('mobile.onboarding.server_selection.previous')}
+            />
             <MainTitle tag="h1" className={styles['wizard-title']}>
               {t('mobile.onboarding.server_selection.title')}
             </MainTitle>

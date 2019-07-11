@@ -11,6 +11,7 @@
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "watch": "yarn build -w",
     "test": "env USE_REACT=true yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
     "lint": "cd ..; yarn lint packages/cozy-authentication",
@@ -23,7 +24,7 @@
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-preset-cozy-app": "^1.5.2",
     "cozy-client": "^6.27.0",
-    "cozy-ui": "^21",
+    "cozy-ui": "^22",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
     "enzyme": "^3.9.0",
