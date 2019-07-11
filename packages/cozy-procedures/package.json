@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "babel-preset-cozy-app": "1.5.1",
-    "lodash": "4.17.11",
+    "lodash": "4.17.13",
     "react-jsonschema-form": "1.6.1",
     "react-redux": "7.1.0",
     "react-router": "3",
