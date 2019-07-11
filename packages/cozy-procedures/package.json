@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.28.3",
+  "version": "0.28.4",
   "main": "dist/index.js",
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
@@ -11,7 +11,7 @@
     "lint": "cd ..; yarn lint packages/cozy-procedures"
   },
   "dependencies": {
-    "babel-preset-cozy-app": "1.5.1",
+    "babel-preset-cozy-app": "^1.5.2",
     "lodash": "4.17.13",
     "react-jsonschema-form": "1.6.1",
     "react-redux": "7.1.0",

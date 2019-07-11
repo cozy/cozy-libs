@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.1.1 (2019-07-11)
+
+**Note:** Version bump only for package cozy-realtime
+
+
+
+
+
        <a name="3.1.0"></a>
 # [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.0.1...cozy-realtime@3.1.0) (2019-05-31)
 

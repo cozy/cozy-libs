@@ -1,6 +1,6 @@
 {
   "name": "cozy-doctypes",
-  "version": "1.53.1",
+  "version": "1.53.2",
   "description": "Definitions for Cozy models",
   "main": "src/index.js",
   "browser": "dist/index.js",
@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
-    "babel-preset-cozy-app": "^1.5.1",
+    "babel-preset-cozy-app": "^1.5.2",
     "btoa": "1.2.1",
     "cozy-client": "6.34.0",
     "cozy-client-js": "0.14.2",
