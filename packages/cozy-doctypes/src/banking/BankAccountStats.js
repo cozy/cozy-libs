@@ -13,6 +13,8 @@ class BankAccountStats extends Document {
       return sums
     }, {})
 
+    summedStats.currency = 'EUR'
+
     return summedStats
   }
 }

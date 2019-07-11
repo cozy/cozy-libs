@@ -21,7 +21,8 @@ describe('BankAccountStats::sum', () => {
       income: 3500,
       additionalIncome: 400,
       mortgage: 650,
-      loans: 800
+      loans: 800,
+      currency: 'EUR'
     })
   })
 })
