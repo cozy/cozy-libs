@@ -5,7 +5,12 @@ export const roundCurrencyAmount = (amount, currency) => {
     EUR: 2
   }
 
-  const precision = currencyToRoundingPrecision[currency] || 2
+  let precision = currencyToRoundingPrecision[currency]
+
+  if (precision === undefined) {
+    console.warn('Default currency rounding precision has been used')
+    precision = 2
+  }
 
   return round(amount, precision)
 }
