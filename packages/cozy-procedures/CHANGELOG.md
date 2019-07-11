@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.28.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.2...cozy-procedures@0.28.3) (2019-07-11)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Put some bold ([cf0ef4a](https://github.com/cozy/cozy-libs/commit/cf0ef4a))
+* **procedures:** Better margin on PersonalOverview ([8997791](https://github.com/cozy/cozy-libs/commit/8997791))
+
+
+
+
+
 ## [0.28.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.1...cozy-procedures@0.28.2) (2019-07-10)
 
 
