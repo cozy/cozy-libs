@@ -23,7 +23,8 @@ class PackageInfoPlugin {
     const resolver = ResolverFactory.createResolver({
       fileSystem: new CachedInputFileSystem(fs, 4000),
       extensions: ['.json'],
-      modules: compiler.options.resolve.modules
+      modules: compiler.options.resolve.modules,
+      alias: compiler.options.resolve.alias
     })
 
     // We need to collect info before the compilation because we will use
