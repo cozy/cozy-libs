@@ -47,7 +47,9 @@
 .wizard-header-fixed
     @extend $wizard-header-fixed
 
-.wizard-previous
+// TODO deduplicate when the cozy-bar bundles its own cozy-ui
+// (see https://github.com/cozy/cozy-bar/pull/608)
+.wizard-previous.wizard-previous
     @extend $wizard-previous
 
 .wizard-brand
