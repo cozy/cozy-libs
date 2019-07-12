@@ -347,7 +347,7 @@ export class SelectServer extends Component {
               label={t('mobile.onboarding.server_selection.button')}
               size={isTiny ? 'normal' : 'large'}
             >
-              <Icon icon="next" color="white" />
+              {!fetching && <Icon icon="next" color="white" />}
             </Button>
             <ButtonLinkRegistration
               className={classNames('wizard-buttonlink')}
