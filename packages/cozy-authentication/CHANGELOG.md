@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.1...cozy-authentication@1.15.2) (2019-07-12)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Don't show icon and spinner at the same time ([cbd3342](https://github.com/cozy/cozy-libs/commit/cbd3342))
+
+
+
+
+
 ## [1.15.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.0...cozy-authentication@1.15.1) (2019-07-12)
 
 
