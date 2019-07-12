@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.0...cozy-authentication@1.15.1) (2019-07-12)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Force apply the back button styles ([a9a2fda](https://github.com/cozy/cozy-libs/commit/a9a2fda))
+
+
+
+
+
 # [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.14.1...cozy-authentication@1.15.0) (2019-07-11)
 
 
