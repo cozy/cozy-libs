@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import Context from '../redux/context'
 import {
   init as initPersonalData,
-  fetchMyself,
+  fetchMyselfSuccess,
   fetchBankAccountsStats
 } from '../redux/personalDataSlice'
 import {
@@ -21,7 +21,7 @@ const mapStateToProps = state => ({
 })
 const mapDispatchToProps = {
   initPersonalData,
-  fetchMyself,
+  fetchMyselfSuccess,
   initDocuments,
   fetchDocumentsByCategory,
   setProcedureStatus,

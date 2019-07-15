@@ -27,9 +27,6 @@ const personalDataSlice = createSlice({
         error: ''
       }
     },
-    fetchMyselfLoading: (state, action) => {
-      state.myselfLoading = action.payload.loading
-    },
     fetchMyselfSuccess: (state, action) => {
       const fieldsToPopulate = Object.keys(state.data)
       const personalData = AdministrativeProcedure.getPersonalData(
@@ -41,9 +38,6 @@ const personalDataSlice = createSlice({
         ...state.data,
         ...personalData
       }
-    },
-    fetchMyselfError: (state, action) => {
-      state.error = action.payload.error
     },
     update: (state, action) => {
       state.data = {
@@ -77,35 +71,10 @@ const { actions, reducer } = personalDataSlice
 export const {
   init,
   update,
-  fetchMyselfLoading,
   fetchMyselfSuccess,
-  fetchMyselfError,
   fetchBankAccountsStatsLoading,
   fetchBankAccountsStatsSuccess
 } = actions
-
-export function fetchMyself(client) {
-  return async dispatch => {
-    dispatch(fetchMyselfLoading({ loading: true }))
-    try {
-      const response = await client.collection('io.cozy.contacts').find({
-        me: true
-      })
-      const contactSelf = get(response, 'data[0]')
-      if (contactSelf) {
-        dispatch(fetchMyselfSuccess(contactSelf))
-      }
-    } catch (error) {
-      dispatch(
-        fetchMyselfError({
-          error: error.message
-        })
-      )
-    }
-
-    dispatch(fetchMyselfLoading({ loading: false }))
-  }
-}
 
 export function fetchBankAccountsStats(client) {
   return async dispatch => {

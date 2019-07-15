@@ -1,17 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import { withClient } from 'cozy-client'
+import { withClient, Query } from 'cozy-client'
 import { Document } from 'cozy-doctypes'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import { Spinner, Alerter } from 'cozy-ui/transpiled/react/'
+
+const DOCTYPE_CONTACTS = 'io.cozy.contacts'
 
 class Procedure extends React.Component {
   componentDidMount() {
     const {
       initPersonalData,
       initDocuments,
-      fetchMyself,
       fetchDocumentsByCategory,
       client,
       setProcedureStatus,
@@ -28,7 +29,6 @@ class Procedure extends React.Component {
     initDocuments(get(creditApplicationTemplate, 'documents'))
     //Since init is done, we tell the app we can start to render thing
     setProcedureStatus({ initiated: true })
-    fetchMyself(client)
 
     fetchBankAccountsStats(client)
 
@@ -39,10 +39,20 @@ class Procedure extends React.Component {
   }
 
   render() {
+    const { fetchMyselfSuccess, initiated, children } = this.props
     return (
       <div className="u-ph-1 u-pv-2 u-maw-6" data-procedure>
-        {this.props.initiated === true ? (
-          this.props.children
+        {initiated === true ? (
+          <Query
+            query={client => client.find(DOCTYPE_CONTACTS).where({ me: true })}
+          >
+            {({ data, fetchStatus: fetchMyselfStatus }) => {
+              if (fetchMyselfStatus === 'loaded' && data && data.length === 1) {
+                fetchMyselfSuccess(data[0])
+              }
+              return children
+            }}
+          </Query>
         ) : (
           <Spinner size="xxlarge" />
         )}
