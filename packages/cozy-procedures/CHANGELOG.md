@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.29.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.1...cozy-procedures@0.29.2) (2019-07-15)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Shrink icons in DocumentHolder ([612ea46](https://github.com/cozy/cozy-libs/commit/612ea46))
+
+
+
+
+
 ## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.0...cozy-procedures@0.29.1) (2019-07-12)
 
 **Note:** Version bump only for package cozy-procedures
