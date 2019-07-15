@@ -71,7 +71,7 @@ export class MobileRouter extends Component {
     try {
       if (saved && saved.oauthOptions) {
         client.stackClient.setOAuthOptions(saved.oauthOptions)
-        client.login({ uri: saved.uri, token: saved.token })
+        await client.login({ uri: saved.uri, token: saved.token })
       }
     } finally {
       this.setState({ triedToReconnect: true })
