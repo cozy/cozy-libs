@@ -87,6 +87,37 @@ class CozyFile extends Document {
           filename: file.name.slice(0, file.name.lastIndexOf('.'))
         }
   }
+  /**
+   *
+   * Method to upload a file even if a file with the same name already exists.
+   *
+   * @param {String} path Fullpath for the file ex: path/to/
+   * @param {Object} file HTML Object file
+   * @param {Object} metadata An object containing the wanted metadata to attach
+   */
+  static async overrideFileForPath(path, file, metadata) {
+    if (!path.endsWith('/')) path = path + '/'
+
+    const filesCollection = this.cozyClient.collection('io.cozy.files')
+    const existingFile = await filesCollection.statByPath(path + file.name)
+
+    if (existingFile.data) {
+      const { id: fileId, dir_id: dirId } = existingFile.data
+      const resp = await filesCollection.updateFile(file, {
+        dirId,
+        fileId,
+        metadata
+      })
+      return resp
+    } else {
+      const dirId = await filesCollection.ensureDirectoryExists(path)
+      const createdFile = await filesCollection.createFile(file, {
+        dirId,
+        metadata
+      })
+      return createdFile
+    }
+  }
 }
 
 CozyFile.doctype = 'io.cozy.files'
