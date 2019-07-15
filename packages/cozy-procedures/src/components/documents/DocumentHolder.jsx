@@ -68,7 +68,7 @@ class DocumentHolder extends Component {
           <Icon
             icon={`file-type-${document.class}`}
             size={24}
-            className="u-mr-1"
+            className="u-mr-1 u-flex-shrink-0"
           />
           <span className="u-flex-grow-1 u-ellipsis">
             {splittedName.filename}
@@ -77,7 +77,7 @@ class DocumentHolder extends Component {
           <Icon
             icon="cross"
             size={16}
-            className="u-pr-1 u-c-pointer"
+            className="u-pr-1 u-c-pointer u-flex-shrink-0"
             onClick={e => {
               e.stopPropagation()
               this.setState({ isUnlinkConfirmationModalOpened: true })
