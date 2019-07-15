@@ -5368,14 +5368,14 @@ cozy-client@6.46.0:
     sift "6.0.0"
     url-search-params-polyfill "^6.0.0"
 
-cozy-client@6.47.1:
-  version "6.47.1"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.47.1.tgz#2699ab7a6bdc5a37e09b258a0d38d2cde80451ba"
-  integrity sha512-pUqE2qFr+l/LFD/MvjHrMjDbofv0CvRhFelAZ7H9xQQEqN8CN8sd5TLMc6lU0FvuIHo8WaYn7AnEf1lEG+SQ5A==
+cozy-client@6.52.0:
+  version "6.52.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.52.0.tgz#44e182d97e00a2c1ddcff4aaefc19c8fb579fc63"
+  integrity sha512-Kw/x1l5l+rGJdi58q9fjlLkncr3LOaa16PJoritSZpoZxzbWaAk7DwtlFkjYxtiYOm9MSy/7S5HNg62L1OE+Ww==
   dependencies:
-    cozy-device-helper "1.6.3"
-    cozy-stack-client "^6.47.0"
-    lodash "4.17.11"
+    cozy-device-helper "1.7.3"
+    cozy-stack-client "^6.52.0"
+    lodash "4.17.14"
     microee "0.0.6"
     prop-types "15.6.2"
     react "16.7.0"
@@ -5442,10 +5442,10 @@ cozy-stack-client@^6.46.0:
     mime-types "2.1.24"
     qs "6.7.0"
 
-cozy-stack-client@^6.47.0:
-  version "6.47.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.47.0.tgz#2ea33334b58a28c4abf27e0ca3fcc839d7b0597a"
-  integrity sha512-luZh7m4FtD9b0UfyiWKpzz+ZbDQSBTeui3i2M3Yzf1MFiPXR/gdo4HHp8/xkuWBzCbuBmP3O8oPrkgBYIxx8+w==
+cozy-stack-client@^6.52.0:
+  version "6.52.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.52.0.tgz#81614f6becdc42501b7ce3b2ede71d7ef7338760"
+  integrity sha512-wo4teKs/fReiGvl3E5fUX0bFownDxmLypRrJi2kket1xwtr3AZTYdntK3XRO0vOTKsWqZkf0OL7TBi1Z2m8epA==
   dependencies:
     detect-node "2.0.4"
     mime-types "2.1.24"
@@ -11388,6 +11388,11 @@ lodash@4.17.13:
   version "4.17.13"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.13.tgz#0bdc3a6adc873d2f4e0c4bac285df91b64fc7b93"
   integrity sha512-vm3/XWXfWtRua0FkUyEHBZy8kCPjErNBT9fJx8Zvs+U6zjqPbTUOpkaoum3O5uiA8sm+yNMHXfYkTUHFoMxFNA==
+
+lodash@4.17.14:
+  version "4.17.14"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.14.tgz#9ce487ae66c96254fe20b599f21b6816028078ba"
+  integrity sha512-mmKYbW3GLuJeX+iGP+Y7Gp1AiGHGbXHCOh/jZmrawMmsE7MS4znI3RL2FsjbqOyMayHInjOeykW7PEajUk1/xw==
 
 log-symbols@^2.2.0:
   version "2.2.0"
