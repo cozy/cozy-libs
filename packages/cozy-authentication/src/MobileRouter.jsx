@@ -281,11 +281,14 @@ export class MobileRouter extends Component {
 
   async afterAuthentication() {
     this.setState({ isLoggingIn: false })
-    this.props.history.replace(this.props.loginPath)
-    await credentials.saveFromClient(this.props.client)
+
     if (this.props.onAuthenticated) {
-      this.props.onAuthenticated()
+      await this.props.onAuthenticated()
     }
+
+    this.props.history.replace(this.props.loginPath)
+
+    await credentials.saveFromClient(this.props.client)
   }
 
   handleBeforeLogout() {
