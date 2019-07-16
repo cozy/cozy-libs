@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.2...cozy-procedures@0.30.0) (2019-07-16)
+
+
+### Features
+
+* **cozy-procedures:** Update salary french title ([846687f](https://github.com/cozy/cozy-libs/commit/846687f))
+* Can override a file with the same name ([ff1d440](https://github.com/cozy/cozy-libs/commit/ff1d440))
+
+
+
+
+
 ## [0.29.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.1...cozy-procedures@0.29.2) (2019-07-15)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.55.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.54.0...cozy-doctypes@1.55.0) (2019-07-16)
+
+
+### Features
+
+* Can override a file with the same name ([ff1d440](https://github.com/cozy/cozy-libs/commit/ff1d440))
+
+
+
+
+
 # [1.54.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.2...cozy-doctypes@1.54.0) (2019-07-11)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.4.7...cozy-playgrounds@1.5.0) (2019-07-16)
+
+
+### Features
+
+* Can override a file with the same name ([ff1d440](https://github.com/cozy/cozy-libs/commit/ff1d440))
+
+
+
+
+
 ## [1.4.7](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.4.6...cozy-playgrounds@1.4.7) (2019-07-16)
 
 **Note:** Version bump only for package cozy-playgrounds
