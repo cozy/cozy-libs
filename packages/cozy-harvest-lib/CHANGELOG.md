@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.67.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.1...cozy-harvest-lib@0.67.2) (2019-07-16)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Remove cozy-realtime from dependencies ([f13f9af](https://github.com/cozy/cozy-libs/commit/f13f9af))
+
+
+
+
+
 ## [0.67.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.0...cozy-harvest-lib@0.67.1) (2019-07-11)
 
 
