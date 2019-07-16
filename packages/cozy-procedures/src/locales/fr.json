@@ -77,7 +77,7 @@
         "cdi": "CDI"
       },
       "salary": {
-        "title": "Salaire net mensuel (après prélévement à la source)"
+        "title": "Revenu principal (après prélévement à la source)"
       },
       "additionalIncome": {
         "title": "Revenus complémentaires"
