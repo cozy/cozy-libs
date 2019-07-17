@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.5.0...cozy-playgrounds@1.6.0) (2019-07-17)
+
+
+### Features
+
+* **cozy-procedures:** Upgrade cozy-ui ([10669a1](https://github.com/cozy/cozy-libs/commit/10669a1))
+
+
+
+
+
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.4.7...cozy-playgrounds@1.5.0) (2019-07-16)
 
 

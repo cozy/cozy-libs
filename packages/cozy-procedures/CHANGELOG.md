@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.31.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.2...cozy-procedures@0.31.0) (2019-07-17)
+
+
+### Features
+
+* **cozy-procedures:** Upgrade cozy-ui ([10669a1](https://github.com/cozy/cozy-libs/commit/10669a1))
+* **procedures:** Delete files permanently after zip success or error ([70f6006](https://github.com/cozy/cozy-libs/commit/70f6006))
+
+
+
+
+
 ## [0.30.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.1...cozy-procedures@0.30.2) (2019-07-17)
 
 **Note:** Version bump only for package cozy-procedures
