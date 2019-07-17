@@ -15,12 +15,12 @@ exports[`CompletedFromMyselfStatus component should display a status if there ar
       tag="span"
     >
       <BaseText
-        className="styles__u-title-h4___1lGMy u-weirdGreen"
+        className="u-title-h4 u-weirdGreen"
         ellipsis={false}
         tag="span"
       >
         <span
-          className="styles__u-title-h4___1lGMy u-weirdGreen"
+          className="u-title-h4 u-weirdGreen"
         >
           personalDataForm.completedStatus.main {"smart_count":5,"total":10}
         </span>
