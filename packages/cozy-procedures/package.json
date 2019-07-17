@@ -19,6 +19,7 @@
     "lint": "cd ..; yarn lint packages/cozy-procedures"
   },
   "dependencies": {
+    "@babel/runtime": "^7.5.4",
     "babel-preset-cozy-app": "^1.5.2",
     "lodash": "4.17.13",
     "react-jsonschema-form": "1.6.1",
