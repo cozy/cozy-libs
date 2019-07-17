@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.0...cozy-procedures@0.30.1) (2019-07-17)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
 # [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.2...cozy-procedures@0.30.0) (2019-07-16)
 
 
