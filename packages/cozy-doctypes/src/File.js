@@ -99,9 +99,9 @@ class CozyFile extends Document {
     if (!path.endsWith('/')) path = path + '/'
 
     const filesCollection = this.cozyClient.collection('io.cozy.files')
-    const existingFile = await filesCollection.statByPath(path + file.name)
+    try {
+      const existingFile = await filesCollection.statByPath(path + file.name)
 
-    if (existingFile.data) {
       const { id: fileId, dir_id: dirId } = existingFile.data
       const resp = await filesCollection.updateFile(file, {
         dirId,
@@ -109,13 +109,16 @@ class CozyFile extends Document {
         metadata
       })
       return resp
-    } else {
-      const dirId = await filesCollection.ensureDirectoryExists(path)
-      const createdFile = await filesCollection.createFile(file, {
-        dirId,
-        metadata
-      })
-      return createdFile
+    } catch (error) {
+      if (/Not Found/.test(error)) {
+        const dirId = await filesCollection.ensureDirectoryExists(path)
+        const createdFile = await filesCollection.createFile(file, {
+          dirId,
+          metadata
+        })
+        return createdFile
+      }
+      throw error
     }
   }
 }
