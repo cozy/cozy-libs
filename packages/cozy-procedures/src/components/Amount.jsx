@@ -8,7 +8,10 @@ import {
   translate,
   Label,
   Input,
-  Button
+  Button,
+  PageLayout,
+  PageFooter,
+  PageContent
 } from 'cozy-ui/transpiled/react/'
 import { creditApplicationTemplate } from 'cozy-procedures'
 
@@ -22,32 +25,33 @@ class Amount extends React.Component {
       'procedureData.amount.default'
     )
     return (
-      <div>
-        <Topbar title={t('amount.title')} />
-        <Title className="u-mb-2 u-ta-center">{t('amount.subtitle')}</Title>
+      <PageLayout>
+        <PageContent>
+          <Topbar title={t('amount.title')} />
+          <Title className="u-mb-2 u-ta-center">{t('amount.subtitle')}</Title>
 
-        <div className="u-mb-1">
-          <Label htmlFor="amount-input">{t('amount.label')}</Label>
-          <Input
-            type="number"
-            id="amount-input"
-            min={min}
-            max={max}
-            placeholder={defaultValue.toString()}
-            value={amount === null ? '' : amount}
-            onChange={e => updateAmount(parseInt(e.target.value))}
-          />
-        </div>
-
-        <div>
+          <div className="u-mb-1">
+            <Label htmlFor="amount-input">{t('amount.label')}</Label>
+            <Input
+              type="number"
+              id="amount-input"
+              min={min}
+              max={max}
+              placeholder={defaultValue.toString()}
+              value={amount === null ? '' : amount}
+              onChange={e => updateAmount(parseInt(e.target.value))}
+            />
+          </div>
+        </PageContent>
+        <PageFooter>
           <Button
             label={t('confirm')}
             extension="full"
             onClick={router.goBack}
             disabled={amount === null}
           />
-        </div>
-      </div>
+        </PageFooter>
+      </PageLayout>
     )
   }
 }

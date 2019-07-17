@@ -11,7 +11,10 @@ import {
   SubTitle,
   Caption,
   Button,
-  translate
+  translate,
+  PageLayout,
+  PageContent,
+  PageFooter
 } from 'cozy-ui/transpiled/react'
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
 
@@ -213,98 +216,102 @@ class Overview extends React.Component {
     const { amount, duration } = data.procedureData
 
     return (
-      <div>
-        {(success || error) && (
-          <EndModal
-            isSuccessful={success}
-            onClose={this.hideModal}
-            folderId={this.destinationFolderId}
+      <PageLayout>
+        <PageContent>
+          {(success || error) && (
+            <EndModal
+              isSuccessful={success}
+              onClose={this.hideModal}
+              folderId={this.destinationFolderId}
+            />
+          )}
+          <Topbar
+            title={t(`overview.titles.${creditApplicationTemplate.type}`)}
           />
-        )}
-        <Topbar
-          title={t(`overview.titles.${creditApplicationTemplate.type}`)}
-        />
-        <Title className="u-mb-2">{t('overview.subtitle')}</Title>
-        <section className="u-mb-2">
-          <SubTitle className="u-mb-1">{t('overview.request')}</SubTitle>
-          <div className="u-flex u-flex-items-center">
-            {amount !== null ? (
-              <InlineCard
-                className="u-c-pointer u-ph-1 u-pv-half u-lh-xlarge"
-                onClick={() => this.navigateTo('amount')}
-              >
-                {t('overview.amountUnit', {
-                  smart_count: amount
-                })}
-              </InlineCard>
-            ) : (
-              <Button
-                label={t('overview.amount')}
-                theme="ghost"
-                className="u-ml-0"
-                onClick={() => this.navigateTo('amount')}
+          <Title className="u-mb-2">{t('overview.subtitle')}</Title>
+          <section className="u-mb-2">
+            <SubTitle className="u-mb-1">{t('overview.request')}</SubTitle>
+            <div className="u-flex u-flex-items-center">
+              {amount !== null ? (
+                <InlineCard
+                  className="u-c-pointer u-ph-1 u-pv-half u-lh-xlarge"
+                  onClick={() => this.navigateTo('amount')}
+                >
+                  {t('overview.amountUnit', {
+                    smart_count: amount
+                  })}
+                </InlineCard>
+              ) : (
+                <Button
+                  label={t('overview.amount')}
+                  theme="ghost"
+                  className="u-ml-0"
+                  onClick={() => this.navigateTo('amount')}
+                />
+              )}
+              <span className="u-ph-half">{t('overview.over')}</span>
+              {duration !== null ? (
+                <InlineCard
+                  className="u-c-pointer u-ph-1 u-pv-half u-lh-xlarge"
+                  onClick={() => this.navigateTo('duration')}
+                >
+                  {t('overview.durationUnit', {
+                    smart_count: duration
+                  })}
+                </InlineCard>
+              ) : (
+                <Button
+                  label={t('overview.duration')}
+                  theme="ghost"
+                  onClick={() => this.navigateTo('duration')}
+                />
+              )}
+            </div>
+          </section>
+          <section className="u-mb-2">
+            <SubTitle className="u-mb-1">{t('overview.documents')}</SubTitle>
+            {documentsCompleted !== documentsTotal && (
+              <DocumentsNotFullyCompleted
+                documentsCompleted={documentsCompleted}
+                documentsTotal={documentsTotal}
+                navigateTo={this.navigateTo}
               />
             )}
-            <span className="u-ph-half">{t('overview.over')}</span>
-            {duration !== null ? (
-              <InlineCard
-                className="u-c-pointer u-ph-1 u-pv-half u-lh-xlarge"
-                onClick={() => this.navigateTo('duration')}
-              >
-                {t('overview.durationUnit', {
-                  smart_count: duration
-                })}
-              </InlineCard>
-            ) : (
-              <Button
-                label={t('overview.duration')}
-                theme="ghost"
-                onClick={() => this.navigateTo('duration')}
+            {documentsCompleted === documentsTotal && (
+              <DocumentsFullyCompleted
+                documents={data.documentsData}
+                navigateTo={this.navigateTo}
               />
             )}
-          </div>
-        </section>
-        <section className="u-mb-2">
-          <SubTitle className="u-mb-1">{t('overview.documents')}</SubTitle>
-          {documentsCompleted !== documentsTotal && (
-            <DocumentsNotFullyCompleted
-              documentsCompleted={documentsCompleted}
-              documentsTotal={documentsTotal}
-              navigateTo={this.navigateTo}
-            />
-          )}
-          {documentsCompleted === documentsTotal && (
-            <DocumentsFullyCompleted
-              documents={data.documentsData}
-              navigateTo={this.navigateTo}
-            />
-          )}
-        </section>
-        <section className="u-mb-2">
-          <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
-          {personalDataFieldsCompleted === personalDataFieldsTotal && (
-            <PersonalDataFullyCompleted
-              navigateTo={this.navigateTo}
-              personalData={data.personalData}
-            />
-          )}
-          {personalDataFieldsCompleted !== personalDataFieldsTotal && (
-            <PersonalDataNotFullyCompleted
-              navigateTo={this.navigateTo}
-              personalDataFieldsCompleted={personalDataFieldsCompleted}
-              personalDataFieldsTotal={personalDataFieldsTotal}
-            />
-          )}
-        </section>
-        <Caption className="u-mb-1">{t('overview.notice')}</Caption>
-        <Button
-          label={t('overview.button')}
-          extension="full"
-          onClick={this.submitProcedure}
-          busy={processing}
-          disabled={processing}
-        />
-      </div>
+          </section>
+          <section className="u-mb-2">
+            <SubTitle className="u-mb-1">{t('overview.personalData')}</SubTitle>
+            {personalDataFieldsCompleted === personalDataFieldsTotal && (
+              <PersonalDataFullyCompleted
+                navigateTo={this.navigateTo}
+                personalData={data.personalData}
+              />
+            )}
+            {personalDataFieldsCompleted !== personalDataFieldsTotal && (
+              <PersonalDataNotFullyCompleted
+                navigateTo={this.navigateTo}
+                personalDataFieldsCompleted={personalDataFieldsCompleted}
+                personalDataFieldsTotal={personalDataFieldsTotal}
+              />
+            )}
+          </section>
+          <Caption className="u-mb-1">{t('overview.notice')}</Caption>
+        </PageContent>
+        <PageFooter>
+          <Button
+            label={t('overview.button')}
+            extension="full"
+            onClick={this.submitProcedure}
+            busy={processing}
+            disabled={processing}
+          />
+        </PageFooter>
+      </PageLayout>
     )
   }
 }

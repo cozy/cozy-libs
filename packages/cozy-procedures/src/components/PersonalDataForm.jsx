@@ -3,7 +3,13 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import Form from 'react-jsonschema-form'
 import get from 'lodash/get'
-import { Button, Title } from 'cozy-ui/transpiled/react'
+import {
+  Button,
+  Title,
+  PageLayout,
+  PageContent,
+  PageFooter
+} from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import {
@@ -32,29 +38,33 @@ class PersonalDataForm extends React.Component {
     const uiSchema = get(creditApplicationTemplate, 'personalData.uiSchema')
 
     return (
-      <div>
-        <Topbar title={t('personalDataForm.title')} />
-        <Title className="u-ta-center u-mb-2">
-          {t('personalDataForm.subtitle')}
-        </Title>
-        <CompletedFromMyselfStatus />
-        <Form
-          formData={formData}
-          schema={schema}
-          uiSchema={uiSchema}
-          FieldTemplate={FieldTemplate}
-          ObjectFieldTemplate={ObjectFieldTemplate}
-          widgets={widgets}
-          onChange={({ formData }) => updateFormData(formData)}
-        >
-          <Button
-            label={t('confirm')}
-            onClick={router.goBack}
-            extension="full"
-            className="u-mt-2 u-mb-1"
-          />
-        </Form>
-      </div>
+      <PageLayout>
+        <PageContent>
+          <Topbar title={t('personalDataForm.title')} />
+          <Title className="u-ta-center u-mb-2">
+            {t('personalDataForm.subtitle')}
+          </Title>
+          <CompletedFromMyselfStatus />
+          <Form
+            formData={formData}
+            schema={schema}
+            uiSchema={uiSchema}
+            FieldTemplate={FieldTemplate}
+            ObjectFieldTemplate={ObjectFieldTemplate}
+            widgets={widgets}
+            onChange={({ formData }) => updateFormData(formData)}
+          >
+            <PageFooter>
+              <Button
+                label={t('confirm')}
+                onClick={router.goBack}
+                extension="full"
+                className="u-mt-2 u-mb-1"
+              />
+            </PageFooter>
+          </Form>
+        </PageContent>
+      </PageLayout>
     )
   }
 }

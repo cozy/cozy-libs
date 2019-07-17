@@ -1,7 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
-import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
+import {
+  Title,
+  translate,
+  Label,
+  Button,
+  PageLayout,
+  PageContent,
+  PageFooter
+} from 'cozy-ui/transpiled/react/'
 
 import Topbar from './Topbar'
 import DocumentsGroup from '../components/documents/DocumentsGroup'
@@ -48,42 +56,47 @@ class Documents extends React.Component {
     )
 
     return (
-      <div>
-        <Topbar title={t('documents.title')} />
-        <Title className="u-ta-center u-mb-2">{t('documents.subtitle')}</Title>
-        <CompletedFromDriveStatus />
-        {Object.keys(populatedTemplateDocsWithFiles).map(
-          (categoryId, index) => {
-            const { files, count } = populatedTemplateDocsWithFiles[categoryId]
-            const filesStatusByCategory = filesStatus[categoryId]
-            return (
-              <section key={index}>
-                <Label htmlFor="">
-                  {t(
-                    `documents.labels.${
-                      populatedTemplateDocsWithFiles[categoryId].label
-                    }`
-                  )}
-                </Label>
-                <DocumentsGroup
-                  files={files}
-                  filesStatusByCategory={filesStatusByCategory}
-                  templateDocumentsCount={count}
-                  categoryId={categoryId}
-                />
-              </section>
-            )
-          }
-        )}
-        <div>
+      <PageLayout>
+        <PageContent>
+          <Topbar title={t('documents.title')} />
+          <Title className="u-ta-center u-mb-2">
+            {t('documents.subtitle')}
+          </Title>
+          <CompletedFromDriveStatus />
+          {Object.keys(populatedTemplateDocsWithFiles).map(
+            (categoryId, index) => {
+              const { files, count } = populatedTemplateDocsWithFiles[
+                categoryId
+              ]
+              const filesStatusByCategory = filesStatus[categoryId]
+              return (
+                <section key={index}>
+                  <Label htmlFor="">
+                    {t(
+                      `documents.labels.${
+                        populatedTemplateDocsWithFiles[categoryId].label
+                      }`
+                    )}
+                  </Label>
+                  <DocumentsGroup
+                    files={files}
+                    filesStatusByCategory={filesStatusByCategory}
+                    templateDocumentsCount={count}
+                    categoryId={categoryId}
+                  />
+                </section>
+              )
+            }
+          )}
+        </PageContent>
+        <PageFooter>
           <Button
             label={t('confirm')}
             extension="full"
             onClick={router.goBack}
-            className="u-mt-2 u-mb-1"
           />
-        </div>
-      </div>
+        </PageFooter>
+      </PageLayout>
     )
   }
 }
