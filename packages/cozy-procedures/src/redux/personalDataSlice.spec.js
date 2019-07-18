@@ -4,6 +4,7 @@ import reducer, {
   fetchMyself,
   fetchMyselfLoading,
   fetchMyselfSuccess,
+  fetchBankAccountsStatsSuccess,
   fetchMyselfError,
   getData,
   getSlice,
@@ -12,6 +13,16 @@ import reducer, {
   getTotalFields,
   fetchBankAccountsStats
 } from './personalDataSlice'
+const stateBefore = {
+  data: {
+    firstname: '',
+    lastname: '',
+    email: ''
+  },
+  error: '',
+  myselfLoading: false,
+  bankAccountsStatsLoading: false
+}
 
 describe('Personal data', () => {
   it('should init fields with undefined values', () => {
@@ -297,6 +308,27 @@ describe('fetchBankAccountsStats action', () => {
 
   afterEach(() => {
     jest.resetAllMocks()
+  })
+
+  it('should handle fetchBankAccountsStatsSuccess action (no stats)', () => {
+    const action = fetchBankAccountsStatsSuccess([])
+    const expected = stateBefore
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toEqual(expected)
+  })
+
+  it('should handle fetchBankAccountsStatsSuccess action (some stats)', () => {
+    const action = fetchBankAccountsStatsSuccess(accountsStats)
+    const expected = {
+      data: {
+        additionalIncome: 400,
+        creditsTotalAmount: 800,
+        propertyLoan: 650,
+        salary: 3500
+      }
+    }
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toMatchObject(expected)
   })
 
   it('should dispatch fetchBankAccountsStatsSuccess with bank accounts stats', async () => {
