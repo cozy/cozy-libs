@@ -8,16 +8,19 @@ import {
   translate,
   Label,
   Input,
-  Button,
-  PageLayout,
-  PageFooter,
-  PageContent
+  Button
 } from 'cozy-ui/transpiled/react/'
 import { creditApplicationTemplate } from 'cozy-procedures'
 
 class Amount extends React.Component {
   render() {
-    const { t, router, amount, updateAmount } = this.props
+    const {
+      t,
+      router,
+      amount,
+      updateAmount,
+      components: { PageLayout, PageContent, PageFooter }
+    } = this.props
     const min = get(creditApplicationTemplate, 'procedureData.amount.min')
     const max = get(creditApplicationTemplate, 'procedureData.amount.max')
     const defaultValue = get(

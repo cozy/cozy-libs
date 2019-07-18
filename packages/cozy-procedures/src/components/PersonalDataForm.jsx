@@ -3,13 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import Form from 'react-jsonschema-form'
 import get from 'lodash/get'
-import {
-  Button,
-  Title,
-  PageLayout,
-  PageContent,
-  PageFooter
-} from 'cozy-ui/transpiled/react'
+import { Button, Title } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import {
@@ -33,7 +27,13 @@ const widgets = {
 
 class PersonalDataForm extends React.Component {
   render() {
-    const { formData, updateFormData, router, t } = this.props
+    const {
+      formData,
+      updateFormData,
+      router,
+      t,
+      components: { PageLayout, PageContent, PageFooter }
+    } = this.props
     const schema = get(creditApplicationTemplate, 'personalData.schema')
     const uiSchema = get(creditApplicationTemplate, 'personalData.uiSchema')
 

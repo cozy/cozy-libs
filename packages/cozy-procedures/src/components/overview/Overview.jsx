@@ -11,10 +11,7 @@ import {
   SubTitle,
   Caption,
   Button,
-  translate,
-  PageLayout,
-  PageContent,
-  PageFooter
+  translate
 } from 'cozy-ui/transpiled/react'
 import InlineCard from 'cozy-ui/transpiled/react/InlineCard'
 
@@ -210,7 +207,8 @@ class Overview extends React.Component {
       personalDataFieldsCompleted,
       personalDataFieldsTotal,
       data,
-      t
+      t,
+      components: { PageLayout, PageContent, PageFooter }
     } = this.props
     const { success, error, processing } = this.state
     const { amount, duration } = data.procedureData

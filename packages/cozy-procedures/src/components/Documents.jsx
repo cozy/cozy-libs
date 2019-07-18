@@ -1,15 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
-import {
-  Title,
-  translate,
-  Label,
-  Button,
-  PageLayout,
-  PageContent,
-  PageFooter
-} from 'cozy-ui/transpiled/react/'
+import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
 
 import Topbar from './Topbar'
 import DocumentsGroup from '../components/documents/DocumentsGroup'
@@ -48,7 +40,13 @@ export const mergeDocsFromStoreAndTemplate = (
 }
 class Documents extends React.Component {
   render() {
-    const { t, router, files: docsFromStore, filesStatus } = this.props
+    const {
+      t,
+      router,
+      files: docsFromStore,
+      filesStatus,
+      components: { PageLayout, PageContent, PageFooter }
+    } = this.props
     const { documents: documentsTemplate } = creditApplicationTemplate
     const populatedTemplateDocsWithFiles = mergeDocsFromStoreAndTemplate(
       docsFromStore,

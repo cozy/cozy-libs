@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import Topbar from './Topbar'
@@ -9,10 +8,7 @@ import {
   SubTitle,
   Label,
   Button,
-  Card,
-  PageLayout,
-  PageContent,
-  PageFooter
+  Card
 } from 'cozy-ui/transpiled/react'
 import Slider from '@material-ui/lab/Slider'
 import { withRouter } from 'react-router'
@@ -25,7 +21,13 @@ class Duration extends React.PureComponent {
   }
 
   render() {
-    const { t, duration, amount, updateDuration } = this.props
+    const {
+      t,
+      duration,
+      amount,
+      updateDuration,
+      components: { PageLayout, PageFooter, PageContent }
+    } = this.props
 
     const min = get(creditApplicationTemplate, 'procedureData.duration.min')
     const max = get(creditApplicationTemplate, 'procedureData.duration.max')
