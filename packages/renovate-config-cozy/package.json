@@ -16,6 +16,23 @@
           "extends": [
             "schedule:nonOfficeHours"
           ]
+        },
+        {
+          "packagePatterns": [
+            "^cozy-"
+          ],
+          "minor": {
+            "automerge": true
+          },
+          "patch": {
+            "automerge": true
+          },
+          "pin": {
+            "automerge": true
+          },
+          "lockFileMaintenance": {
+            "automerge": true
+          }
         }
       ],
       "timezone": "Europe/Paris",
