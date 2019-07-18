@@ -105,22 +105,31 @@ class Overview extends React.Component {
   }
 
   /**
-   * createJsonFile - Create json data for the procedure, upload a json file containing this data
+   * createJsonFile - upload a json file containing the given data
    *
    * @param {string} filename - The json file name
    * @param {string} destinationId - The id of the destination directory
-   * @param {AdministrativeProcedure} administrativeProcedure - The administrative procedure for which we want the json
+   * @param {string} content - The file content
    * @return {object} Information about the jsonFile (id and name)
    */
-  createJsonFile = async (filename, destinationId, administrativeProcedure) => {
+  createJsonFile = async (filename, destinationId, content) => {
     const { client } = this.props
-    const jsonData = AdministrativeProcedure.createJson(administrativeProcedure)
-    const file = new File([jsonData], filename)
+    const file = new File([content], filename)
     const resp = await client
       .collection('io.cozy.files')
       .createFile(file, { dirId: destinationId })
 
     return resp.data
+  }
+
+  createProcedureJsonFile = (
+    filename,
+    destinationId,
+    administrativeProcedure
+  ) => {
+    const jsonData = AdministrativeProcedure.createJson(administrativeProcedure)
+
+    return this.createJsonFile(filename, destinationId, jsonData)
   }
 
   getFilesForZip = (jsonFile, documentsData) => {
@@ -162,7 +171,7 @@ class Overview extends React.Component {
         administrativeProcedure
       )
 
-      const jsonFile = await this.createJsonFile(
+      const jsonFile = await this.createProcedureJsonFile(
         jsonFilename,
         this.destinationFolderId,
         response.data
