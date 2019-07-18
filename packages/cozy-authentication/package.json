@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "cozy-client": "^6.27.0",
-    "cozy-ui": "^19.28.0",
+    "cozy-ui": "^22.4.0",
     "react": ">=15",
     "react-router": "3"
   }
