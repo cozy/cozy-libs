@@ -20,7 +20,6 @@ const documentsSlice = createSlice({
 
         }
       ] */
-      initiated: false
     }
   },
   slice: 'documents',
@@ -70,9 +69,6 @@ const documentsSlice = createSlice({
       state.ui[idDoctemplate][index].error = error
       state.ui[idDoctemplate][index].loading = false
     },
-    setProcedureStatus: (state, action) => {
-      state.ui.initiated = action.payload.initiated
-    },
     unlinkDocument: (state, action) => {
       const { categoryId, index } = action.payload
       state.data[categoryId].files[index] = undefined
@@ -112,8 +108,7 @@ const selectors = {
       0
     )
   },
-  getInitiated: state =>
-    get(state, [documentsSlice.slice, 'ui', ['initiated']], {}),
+
   getFilesStatus: state => get(state, [documentsSlice.slice, 'ui'], {})
 }
 
@@ -124,7 +119,6 @@ export const {
   setDocumentLoading,
   fetchDocumentSuccess,
   fetchDocumentError,
-  setProcedureStatus,
   unlinkDocument,
   linkDocumentSuccess,
   setLoadingFalse
@@ -192,7 +186,6 @@ export const {
   getCompletedDocumentsCount,
   getDocumentsTotal,
   getFiles,
-  getInitiated,
   getFilesStatus
 } = selectors
 export default reducer

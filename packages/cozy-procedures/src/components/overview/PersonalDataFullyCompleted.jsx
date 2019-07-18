@@ -19,7 +19,8 @@ const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
     propertyLoan,
     address,
     phone,
-    email
+    email,
+    fixedCharges
   } = personalData
   return (
     <InlineCard
@@ -69,7 +70,8 @@ const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
                 `personalDataForm.form.propertyStatus.${propertyStatus}`
               ),
               creditsTotalAmount,
-              propertyLoan
+              propertyLoan,
+              fixedCharges
             })
           )
         }}

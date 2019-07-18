@@ -23,7 +23,14 @@ class BankAccountStats extends Document {
       throw new Error('Currency of all stats object must be the same.')
     }
 
-    const properties = ['income', 'additionalIncome', 'mortgage', 'loans']
+    const properties = [
+      'income',
+      'additionalIncome',
+      'mortgage',
+      'loans',
+      'fixedCharges'
+    ]
+
     const summedStats = properties.reduce((sums, property) => {
       sums[property] = sumBy(
         accountsStats,

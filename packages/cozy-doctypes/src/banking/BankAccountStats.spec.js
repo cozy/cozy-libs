@@ -51,6 +51,7 @@ describe('BankAccountStats::sum', () => {
         additionalIncome: 400,
         mortgage: 650,
         loans: 800,
+        fixedCharges: 100,
         currency: 'EUR'
       },
       {
@@ -58,6 +59,7 @@ describe('BankAccountStats::sum', () => {
         additionalIncome: 0,
         mortgage: 0,
         loans: 0,
+        fixedCharges: 100,
         currency: 'EUR'
       }
     ]
@@ -67,6 +69,7 @@ describe('BankAccountStats::sum', () => {
       additionalIncome: 400,
       mortgage: 650,
       loans: 800,
+      fixedCharges: 200,
       currency: 'EUR'
     })
   })

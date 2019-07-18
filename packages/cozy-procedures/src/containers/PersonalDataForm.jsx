@@ -1,5 +1,4 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import PersonalDataForm from '../components/PersonalDataForm'
 import { getData, update } from '../redux/personalDataSlice'
 
@@ -11,9 +10,6 @@ const mapDispatchToProps = dispatch => ({
   updateFormData: value => dispatch(update(value))
 })
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-  null,
-  { context }
-)(PersonalDataForm)
+export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
+  PersonalDataForm
+)

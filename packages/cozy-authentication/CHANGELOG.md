@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.2...cozy-authentication@1.16.0) (2019-07-16)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Await CozyClient::login ([7aa27f5](https://github.com/cozy/cozy-libs/commit/7aa27f5))
+
+
+### Features
+
+* **cozy-authentication:** Call onAuthenticated before redirecting ([ab5e273](https://github.com/cozy/cozy-libs/commit/ab5e273))
+
+
+
+
+
 ## [1.15.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.1...cozy-authentication@1.15.2) (2019-07-12)
 
 

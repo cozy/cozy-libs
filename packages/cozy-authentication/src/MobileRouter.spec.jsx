@@ -90,10 +90,23 @@ describe('MobileRouter', () => {
     expect(instance.forceUpdate).toHaveBeenCalled()
   })
 
-  it('should go to loginPath after login', () => {
+  it('should call onAuthenticated prop if defined', () => {
     setup()
     client.emit('login')
-    expect(history.replace).toHaveBeenCalledWith('/afterLogin')
+    expect(onAuthenticated).toHaveBeenCalled()
+  })
+
+  it('should go to loginPath after login', done => {
+    setup()
+    client.emit('login')
+
+    // Without this setTimeout, history.replace is reported as not called,
+    // but it's because the expectation seems to be executed before the code
+    // itself.
+    setTimeout(() => {
+      expect(history.replace).toHaveBeenCalledWith('/afterLogin')
+      done()
+    }, 0)
   })
 
   it('should go to logoutPath after logout', () => {

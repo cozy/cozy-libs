@@ -21,7 +21,7 @@
     "personalDataCompleted": {
       "I": "Moi, **%{firstname}** **%{lastname}**, atteste être **%{maritalStatus}**, avec **%{numberOfDependants}** enfant(s) à charge.",
       "work": "Je travaille comme **%{employmentStatus}** en **%{employmentContract}** pour un salaire de **%{salary}€** net/mois après prélévement à la source, avec **%{additionalIncome}€** /mois de revenus complémentaires.",
-      "property": "Je suis **%{propertyStatus}** de mon logement. La somme de mes crédits s’élève à **%{creditsTotalAmount}€** /mois, dont un emprunt immobilier de **%{propertyLoan}€** /mois.",
+      "property": "Je suis **%{propertyStatus}** de mon logement. La somme de mes crédits s’élève à **%{creditsTotalAmount}€** /mois, dont un emprunt immobilier de **%{propertyLoan}€** /mois. Mes charges fixes s'élèvent à **%{fixedCharges}€**.",
       "address": "Je réside au **%{address}**. Il est possible de me contacter au [**%{phone}**](tel://%{phone}) ou par mail à [**%{email}**](mailto:%{email})."
     }
   },
@@ -77,7 +77,7 @@
         "cdi": "CDI"
       },
       "salary": {
-        "title": "Salaire net mensuel (après prélévement à la source)"
+        "title": "Revenu principal (après prélévement à la source)"
       },
       "additionalIncome": {
         "title": "Revenus complémentaires"
@@ -94,6 +94,9 @@
       },
       "creditsTotalAmount": {
         "title": "Total des crédits"
+      },
+      "fixedCharges": {
+        "title": "Autres charges fixes"
       },
       "address": {
         "title": "Adresse postale"

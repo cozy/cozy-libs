@@ -1,7 +1,5 @@
-import { connect } from 'react-redux'
-
-import context from '../redux/context'
 import CompletedFromMyselfStatus from '../components/CompletedFromMyselfStatus'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import {
   getCompletedFromMyself,
   getTotalFields
@@ -12,9 +10,4 @@ export const mapStateToProps = state => ({
   total: getTotalFields(state)
 })
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { context }
-)(CompletedFromMyselfStatus)
+export default connectWithProcedures(mapStateToProps)(CompletedFromMyselfStatus)

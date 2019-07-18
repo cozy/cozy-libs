@@ -3,11 +3,10 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
 
-import { withClient } from 'cozy-client'
 import { withBreakpoints, Alerter, translate } from 'cozy-ui/transpiled/react/'
 
 import { creditApplicationTemplate } from 'cozy-procedures'
-
+import { CozyFile } from 'cozy-doctypes'
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 
 import MenuUploadMobile from './menuUpload/MenuUploadMobile'
@@ -20,16 +19,15 @@ class EmptyDocumentHolder extends Component {
   async onChange(file) {
     const {
       categoryId,
-      client,
       linkDocumentSuccess,
       t,
       index,
       setDocumentLoading,
-      fetchDocumentError
+      fetchDocumentError,
+      setLoadingFalse
     } = this.props
     setDocumentLoading({ idDoctemplate: categoryId, index })
     const dirPath = creditApplicationTemplate.pathToSave
-    const filesCollection = client.collection('io.cozy.files')
     const classification = get(
       creditApplicationTemplate.documents[categoryId],
       `rules.metadata.classification`
@@ -42,12 +40,11 @@ class EmptyDocumentHolder extends Component {
           datetime: new Date().toISOString()
         }
       }
-      const dirId = await filesCollection.ensureDirectoryExists(dirPath)
-
-      const createdFile = await client
-        .collection('io.cozy.files')
-        .createFile(file, { dirId, metadata })
-
+      const createdFile = await CozyFile.overrideFileForPath(
+        dirPath,
+        file,
+        metadata
+      )
       linkDocumentSuccess({ document: createdFile.data, categoryId, index })
     } catch (uploadError) {
       fetchDocumentError({
@@ -55,11 +52,10 @@ class EmptyDocumentHolder extends Component {
         index,
         error: uploadError.message
       })
-      if (uploadError.status === 409) {
-        Alerter.error(t('documents.upload.conflict_error'))
-      } else {
-        Alerter.error(t('documents.upload.error'))
-      }
+
+      Alerter.error(t('documents.upload.error'))
+    } finally {
+      setLoadingFalse({ idDoctemplate: categoryId, index })
     }
   }
 
@@ -77,6 +73,7 @@ class EmptyDocumentHolder extends Component {
 EmptyDocumentHolder.propTypes = {
   categoryId: PropTypes.string.isRequired,
   linkDocumentSuccess: PropTypes.func.isRequired,
+  setLoadingFalse: PropTypes.func.isRequired,
   breakpoints: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
@@ -86,6 +83,5 @@ EmptyDocumentHolder.propTypes = {
 
 export default flow(
   withBreakpoints(),
-  withClient,
   translate()
 )(DocumentsDataFormContainer(EmptyDocumentHolder))

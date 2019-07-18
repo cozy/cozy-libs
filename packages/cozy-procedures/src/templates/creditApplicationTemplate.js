@@ -73,6 +73,10 @@ const schema = {
       title: 'personalDataForm.form.creditsTotalAmount.title',
       type: 'number'
     },
+    fixedCharges: {
+      title: 'personalDataForm.form.fixedCharges.title',
+      type: 'number'
+    },
     address: {
       title: 'personalDataForm.form.address.title',
       type: 'string'
@@ -115,6 +119,12 @@ const uiSchema = {
     }
   },
   creditsTotalAmount: {
+    'ui:widget': 'InputWithUnit',
+    'ui:options': {
+      unit: 'personalDataForm.form.units.eurosPerMonth'
+    }
+  },
+  fixedCharges: {
     'ui:widget': 'InputWithUnit',
     'ui:options': {
       unit: 'personalDataForm.form.units.eurosPerMonth'

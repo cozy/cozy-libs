@@ -6,8 +6,8 @@ class BankingReconciliator {
     this.options = options
   }
 
-  async save(fetchedAccounts, fetchedTransactions, options = {}) {
-    const { BankAccount, BankTransaction } = this.options
+  async saveAccounts(fetchedAccounts, options) {
+    const { BankAccount } = this.options
 
     const stackAccounts = await BankAccount.fetchAll()
 
@@ -22,6 +22,17 @@ class BankingReconciliator {
     if (options.onAccountsSaved) {
       options.onAccountsSaved(savedAccounts)
     }
+
+    return { savedAccounts, reconciliatedAccounts }
+  }
+
+  async save(fetchedAccounts, fetchedTransactions, options = {}) {
+    const { BankAccount, BankTransaction } = this.options
+
+    const { reconciliatedAccounts, savedAccounts } = await this.saveAccounts(
+      fetchedAccounts,
+      options
+    )
 
     // Bank accounts saved in Cozy, we can now link transactions to accounts
     // via their cozy id

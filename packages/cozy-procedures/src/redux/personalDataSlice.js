@@ -69,7 +69,8 @@ const personalDataSlice = createSlice({
           currency
         ),
         propertyLoan: roundCurrencyAmount(summedStats.mortgage, currency),
-        creditsTotalAmount: roundCurrencyAmount(summedStats.loans, currency)
+        creditsTotalAmount: roundCurrencyAmount(summedStats.loans, currency),
+        fixedCharges: roundCurrencyAmount(summedStats.fixedCharges, currency)
       }
     }
   }

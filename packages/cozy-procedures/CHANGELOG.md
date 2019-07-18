@@ -3,6 +3,91 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.1...cozy-procedures@0.33.0) (2019-07-18)
+
+
+### Features
+
+* **cozy-procedures:** Add fixed charges to personal data form ([d4cd6fd](https://github.com/cozy/cozy-libs/commit/d4cd6fd))
+* **cozy-procedures:** Show fixed charges in overview ([be88cb0](https://github.com/cozy/cozy-libs/commit/be88cb0))
+
+
+
+
+
+## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.0...cozy-procedures@0.32.1) (2019-07-18)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Set loading to false after linking a document ([ecf329a](https://github.com/cozy/cozy-libs/commit/ecf329a))
+
+
+
+
+
+# [0.32.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.31.0...cozy-procedures@0.32.0) (2019-07-18)
+
+
+### Features
+
+* Use lib options for babel config ([3c11168](https://github.com/cozy/cozy-libs/commit/3c11168))
+
+
+
+
+
+# [0.31.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.2...cozy-procedures@0.31.0) (2019-07-17)
+
+
+### Features
+
+* **cozy-procedures:** Upgrade cozy-ui ([10669a1](https://github.com/cozy/cozy-libs/commit/10669a1))
+* **procedures:** Delete files permanently after zip success or error ([70f6006](https://github.com/cozy/cozy-libs/commit/70f6006))
+
+
+
+
+
+## [0.30.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.1...cozy-procedures@0.30.2) (2019-07-17)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+## [0.30.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.0...cozy-procedures@0.30.1) (2019-07-17)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+# [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.2...cozy-procedures@0.30.0) (2019-07-16)
+
+
+### Features
+
+* **cozy-procedures:** Update salary french title ([846687f](https://github.com/cozy/cozy-libs/commit/846687f))
+* Can override a file with the same name ([ff1d440](https://github.com/cozy/cozy-libs/commit/ff1d440))
+
+
+
+
+
+## [0.29.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.1...cozy-procedures@0.29.2) (2019-07-15)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Shrink icons in DocumentHolder ([612ea46](https://github.com/cozy/cozy-libs/commit/612ea46))
+
+
+
+
+
 ## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.0...cozy-procedures@0.29.1) (2019-07-12)
 
 **Note:** Version bump only for package cozy-procedures
