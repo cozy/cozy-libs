@@ -60,7 +60,6 @@ class PersonalDataForm extends React.Component {
                 label={t('confirm')}
                 onClick={router.goBack}
                 extension="full"
-                className="u-mt-2 u-mb-1"
               />
             </PageFooter>
           </Form>
