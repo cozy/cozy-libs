@@ -11,6 +11,7 @@ import {
   Button
 } from 'cozy-ui/transpiled/react/'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 class Amount extends React.Component {
   render() {
@@ -65,7 +66,8 @@ Amount.propTypes = {
     goBack: PropTypes.func.isRequired
   }).isRequired,
   amount: PropTypes.number,
-  updateAmount: PropTypes.func.isRequired
+  updateAmount: PropTypes.func.isRequired,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 export default withRouter(translate()(Amount))

@@ -8,6 +8,7 @@ import DocumentsGroup from '../components/documents/DocumentsGroup'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import DocumentsContainer from '../containers/DocumentsDataForm'
 import CompletedFromDriveStatus from '../containers/CompletedFromDriveStatus'
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 /**
  * This function is used to populate an array based on the order
@@ -105,7 +106,8 @@ Documents.propTypes = {
     goBack: PropTypes.func.isRequired
   }).isRequired,
   files: PropTypes.object,
-  filesStatus: PropTypes.object
+  filesStatus: PropTypes.object,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 export default withRouter(translate()(DocumentsContainer(Documents)))

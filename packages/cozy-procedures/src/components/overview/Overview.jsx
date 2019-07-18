@@ -21,6 +21,7 @@ import DocumentsNotFullyCompleted from './DocumentsNotFullyCompleted'
 import DocumentsFullyCompleted from './DocumentsFullyCompleted'
 import PersonalDataFullyCompleted from './PersonalDataFullyCompleted'
 import PersonalDataNotFullyCompleted from './PersonalDataNotFullyCompleted'
+import ProcedureComponentsPropType from '../ProcedureComponentsPropType'
 
 class Overview extends React.Component {
   realtime = null
@@ -329,7 +330,8 @@ Overview.propTypes = {
   router: PropTypes.shape({
     push: PropTypes.func.isRequired
   }).isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 Overview.defaultProps = {

@@ -5,6 +5,7 @@ import Form from 'react-jsonschema-form'
 import get from 'lodash/get'
 import { Button, Title } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 import {
   FieldTemplate,
@@ -75,7 +76,8 @@ PersonalDataForm.propTypes = {
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }),
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 PersonalDataForm.defaultProps = {

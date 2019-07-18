@@ -13,6 +13,7 @@ import {
 import Slider from '@material-ui/lab/Slider'
 import { withRouter } from 'react-router'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 class Duration extends React.PureComponent {
   constructor(props) {
@@ -106,7 +107,8 @@ Duration.propTypes = {
   }).isRequired,
   duration: PropTypes.number,
   amount: PropTypes.number,
-  updateDuration: PropTypes.func.isRequired
+  updateDuration: PropTypes.func.isRequired,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 export default withRouter(translate()(Duration))
