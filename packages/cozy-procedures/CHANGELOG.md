@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.1...cozy-procedures@0.33.0) (2019-07-18)
+
+
+### Features
+
+* **cozy-procedures:** Add fixed charges to personal data form ([d4cd6fd](https://github.com/cozy/cozy-libs/commit/d4cd6fd))
+* **cozy-procedures:** Show fixed charges in overview ([be88cb0](https://github.com/cozy/cozy-libs/commit/be88cb0))
+
+
+
+
+
 ## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.0...cozy-procedures@0.32.1) (2019-07-18)
 
 
