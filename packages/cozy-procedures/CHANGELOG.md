@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.0...cozy-procedures@0.32.1) (2019-07-18)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Set loading to false after linking a document ([ecf329a](https://github.com/cozy/cozy-libs/commit/ecf329a))
+
+
+
+
+
 # [0.32.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.31.0...cozy-procedures@0.32.0) (2019-07-18)
 
 
