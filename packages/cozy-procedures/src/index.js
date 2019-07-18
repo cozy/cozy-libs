@@ -1,4 +1,4 @@
-import React, { createContext } from 'react'
+import React from 'react'
 import { Route, IndexRoute } from 'react-router'
 import creditApplicationTemplate from './templates/creditApplicationTemplate'
 
