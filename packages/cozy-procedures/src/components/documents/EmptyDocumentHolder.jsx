@@ -23,7 +23,8 @@ class EmptyDocumentHolder extends Component {
       t,
       index,
       setDocumentLoading,
-      fetchDocumentError
+      fetchDocumentError,
+      setLoadingFalse
     } = this.props
     setDocumentLoading({ idDoctemplate: categoryId, index })
     const dirPath = creditApplicationTemplate.pathToSave
@@ -53,6 +54,8 @@ class EmptyDocumentHolder extends Component {
       })
 
       Alerter.error(t('documents.upload.error'))
+    } finally {
+      setLoadingFalse({ idDoctemplate: categoryId, index })
     }
   }
 
@@ -70,6 +73,7 @@ class EmptyDocumentHolder extends Component {
 EmptyDocumentHolder.propTypes = {
   categoryId: PropTypes.string.isRequired,
   linkDocumentSuccess: PropTypes.func.isRequired,
+  setLoadingFalse: PropTypes.func.isRequired,
   breakpoints: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired,
