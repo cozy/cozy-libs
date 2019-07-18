@@ -55,6 +55,9 @@ const personalDataSlice = createSlice({
       state.bankAccountsStatsLoading = action.payload.loading
     },
     fetchBankAccountsStatsSuccess: (state, action) => {
+      if (action.payload.length === 0) {
+        return
+      }
       const summedStats = BankAccountStats.sum(action.payload)
       const { currency } = summedStats
 

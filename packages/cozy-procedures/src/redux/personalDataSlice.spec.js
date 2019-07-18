@@ -4,6 +4,7 @@ import reducer, {
   fetchMyself,
   fetchMyselfLoading,
   fetchMyselfSuccess,
+  fetchBankAccountsStatsSuccess,
   fetchMyselfError,
   getData,
   getSlice,
@@ -12,6 +13,17 @@ import reducer, {
   getTotalFields,
   fetchBankAccountsStats
 } from './personalDataSlice'
+
+const stateBefore = {
+  data: {
+    firstname: '',
+    lastname: '',
+    email: ''
+  },
+  error: '',
+  myselfLoading: false,
+  bankAccountsStatsLoading: false
+}
 
 describe('Personal data', () => {
   it('should init fields with undefined values', () => {
@@ -34,21 +46,13 @@ describe('Personal data', () => {
   })
 
   it('should update fields with new values', () => {
-    const stateBefore = {
-      data: {
-        firstname: 'John',
-        lastname: 'Doe'
-      },
-      error: '',
-      myselfLoading: false,
-      bankAccountsStatsLoading: false
-    }
     const action = update({
       firstname: 'Jane',
       lastname: 'Doe'
     })
     const expectedState = {
       data: {
+        email: '',
         firstname: 'Jane',
         lastname: 'Doe'
       },
@@ -60,38 +64,15 @@ describe('Personal data', () => {
   })
 
   it('should handle fetchMyselfLoading action', () => {
-    const stateBefore = {
-      data: {
-        firstname: 'John',
-        lastname: 'Doe'
-      },
-      error: '',
-      myselfLoading: false
-    }
     const action = fetchMyselfLoading({ loading: true })
     const expected = {
-      data: {
-        firstname: 'John',
-        lastname: 'Doe'
-      },
-      error: '',
       myselfLoading: true
     }
     const stateAfter = reducer(stateBefore, action)
-    expect(stateAfter).toEqual(expected)
+    expect(stateAfter).toMatchObject(expected)
   })
 
   it('should handle fetchMyselfSuccess action', () => {
-    const stateBefore = {
-      completedFromMyself: 0,
-      data: {
-        firstname: '',
-        lastname: '',
-        email: ''
-      },
-      error: '',
-      myselfLoading: false
-    }
     const action = fetchMyselfSuccess({
       name: { givenName: 'John', familyName: 'Doe' },
       email: 'john.doe@me.com'
@@ -107,31 +88,18 @@ describe('Personal data', () => {
       myselfLoading: false
     }
     const stateAfter = reducer(stateBefore, action)
-    expect(stateAfter).toEqual(expected)
+    expect(stateAfter).toMatchObject(expected)
   })
 
   it('should handle fetchMyselfError action', () => {
-    const stateBefore = {
-      data: {
-        firstname: 'John',
-        lastname: 'Doe'
-      },
-      error: '',
-      myselfLoading: false
-    }
     const action = fetchMyselfError({
       error: 'Unable to get the contact'
     })
     const expected = {
-      data: {
-        firstname: 'John',
-        lastname: 'Doe'
-      },
-      error: 'Unable to get the contact',
-      myselfLoading: false
+      error: 'Unable to get the contact'
     }
     const stateAfter = reducer(stateBefore, action)
-    expect(stateAfter).toEqual(expected)
+    expect(stateAfter).toMatchObject(expected)
   })
 })
 
@@ -297,6 +265,27 @@ describe('fetchBankAccountsStats action', () => {
 
   afterEach(() => {
     jest.resetAllMocks()
+  })
+
+  it('should handle fetchBankAccountsStatsSuccess action (no stats)', () => {
+    const action = fetchBankAccountsStatsSuccess([])
+    const expected = stateBefore
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toEqual(expected)
+  })
+
+  it('should handle fetchBankAccountsStatsSuccess action (some stats)', () => {
+    const action = fetchBankAccountsStatsSuccess(accountsStats)
+    const expected = {
+      data: {
+        additionalIncome: 400,
+        creditsTotalAmount: 800,
+        propertyLoan: 650,
+        salary: 3500
+      }
+    }
+    const stateAfter = reducer(stateBefore, action)
+    expect(stateAfter).toMatchObject(expected)
   })
 
   it('should dispatch fetchBankAccountsStatsSuccess with bank accounts stats', async () => {

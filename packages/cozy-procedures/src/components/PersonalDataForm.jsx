@@ -5,6 +5,7 @@ import Form from 'react-jsonschema-form'
 import get from 'lodash/get'
 import { Button, Title } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 import {
   FieldTemplate,
@@ -27,34 +28,43 @@ const widgets = {
 
 class PersonalDataForm extends React.Component {
   render() {
-    const { formData, updateFormData, router, t } = this.props
+    const {
+      formData,
+      updateFormData,
+      router,
+      t,
+      components: { PageLayout, PageContent, PageFooter }
+    } = this.props
     const schema = get(creditApplicationTemplate, 'personalData.schema')
     const uiSchema = get(creditApplicationTemplate, 'personalData.uiSchema')
 
     return (
-      <div>
-        <Topbar title={t('personalDataForm.title')} />
-        <Title className="u-ta-center u-mb-2">
-          {t('personalDataForm.subtitle')}
-        </Title>
-        <CompletedFromMyselfStatus />
-        <Form
-          formData={formData}
-          schema={schema}
-          uiSchema={uiSchema}
-          FieldTemplate={FieldTemplate}
-          ObjectFieldTemplate={ObjectFieldTemplate}
-          widgets={widgets}
-          onChange={({ formData }) => updateFormData(formData)}
-        >
-          <Button
-            label={t('confirm')}
-            onClick={router.goBack}
-            extension="full"
-            className="u-mt-2 u-mb-1"
-          />
-        </Form>
-      </div>
+      <PageLayout>
+        <PageContent>
+          <Topbar title={t('personalDataForm.title')} />
+          <Title className="u-ta-center u-mb-2">
+            {t('personalDataForm.subtitle')}
+          </Title>
+          <CompletedFromMyselfStatus />
+          <Form
+            formData={formData}
+            schema={schema}
+            uiSchema={uiSchema}
+            FieldTemplate={FieldTemplate}
+            ObjectFieldTemplate={ObjectFieldTemplate}
+            widgets={widgets}
+            onChange={({ formData }) => updateFormData(formData)}
+          >
+            <PageFooter>
+              <Button
+                label={t('confirm')}
+                onClick={router.goBack}
+                extension="full"
+              />
+            </PageFooter>
+          </Form>
+        </PageContent>
+      </PageLayout>
     )
   }
 }
@@ -65,7 +75,8 @@ PersonalDataForm.propTypes = {
   router: PropTypes.shape({
     goBack: PropTypes.func.isRequired
   }),
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 PersonalDataForm.defaultProps = {
