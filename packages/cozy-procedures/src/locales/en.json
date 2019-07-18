@@ -21,7 +21,7 @@
     "personalDataCompleted": {
       "I": "I, **%{firstname}** **%{lastname}**, certify being **%{maritalStatus}** and caring for **%{numberOfDependants}** dependent children",
       "work": "I am currently **%{employmentStatus}** with a **%{employmentContract}** and receive a salary of **%{salary}€** per month after tax, and **%{additionalIncome}€** pr month of additional income.",
-      "property": "I am the **%{propertyStatus}** of my housing. The sum of my loans is **%{creditsTotalAmount}€** pr month, out of which **%{propertyLoan}€** per month are for my property loan.",
+      "property": "I am the **%{propertyStatus}** of my housing. The sum of my loans is **%{creditsTotalAmount}€** pr month, out of which **%{propertyLoan}€** per month are for my property loan. My fixed charges amount to **%{fixedCharges}€**.",
       "address": "My address is **%{address}**. My phone number is [**%{phone}**](tel://%{phone}) and my email address is [**%{email}**](mailto:%{email})."
     }
   },
@@ -94,6 +94,9 @@
       },
       "creditsTotalAmount": {
         "title": "Credits total amount"
+      },
+      "fixedCharges": {
+        "title": "Other fixed charges"
       },
       "address": {
         "title": "Address"
