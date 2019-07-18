@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.6.2...cozy-playgrounds@1.7.0) (2019-07-18)
+
+
+### Features
+
+* Application can pass custom layout components to procedures ([1cf48b1](https://github.com/cozy/cozy-libs/commit/1cf48b1))
+
+
+
+
+
 ## [1.6.2](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.6.1...cozy-playgrounds@1.6.2) (2019-07-18)
 
 **Note:** Version bump only for package cozy-playgrounds

@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.33.0...cozy-procedures@0.34.0) (2019-07-18)
+
+
+### Bug Fixes
+
+* Defensive code since BankAccountStats can only do stats if it has documents ([ecf8500](https://github.com/cozy/cozy-libs/commit/ecf8500))
+* Remove extra margin on Button ([97651b4](https://github.com/cozy/cozy-libs/commit/97651b4))
+
+
+### Features
+
+* Add proptypes ([bbe0613](https://github.com/cozy/cozy-libs/commit/bbe0613))
+* Application can pass custom layout components to procedures ([1cf48b1](https://github.com/cozy/cozy-libs/commit/1cf48b1))
+* Page layout for cozy-procedures ([25a4fa8](https://github.com/cozy/cozy-libs/commit/25a4fa8))
+
+
+
+
+
 # [0.33.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.1...cozy-procedures@0.33.0) (2019-07-18)
 
 
