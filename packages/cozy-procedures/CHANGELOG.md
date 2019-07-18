@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.31.0...cozy-procedures@0.32.0) (2019-07-18)
+
+
+### Features
+
+* Use lib options for babel config ([3c11168](https://github.com/cozy/cozy-libs/commit/3c11168))
+
+
+
+
+
 # [0.31.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.2...cozy-procedures@0.31.0) (2019-07-17)
 
 
