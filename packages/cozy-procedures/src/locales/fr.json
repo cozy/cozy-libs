@@ -95,6 +95,9 @@
       "creditsTotalAmount": {
         "title": "Total des crédits"
       },
+      "fixedCharges": {
+        "title": "Autres charges fixes"
+      },
       "address": {
         "title": "Adresse postale"
       },
