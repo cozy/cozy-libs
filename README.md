@@ -16,6 +16,7 @@
 - [Cozy Commitlint Config](./packages/commitlint-config-cozy): Commitlint config enforcing the cozy commit convention
 - [Cozy Browserslist Config](./packages/browserslist-config-cozy): Browserslist config enforcing the official Cozy supported browsers
 - [ESLint Config Cozy App](./packages/eslint-config-cozy-app): Config for eslint using prettier (for applications and libraries)
+- [Cozy Logger](./packages/cozy-logger): Logs message in a human friendly way while developing and logs in JSON when in production. It can be used by konnectors, services alike, and web apps.
 
 ## CLI
 
