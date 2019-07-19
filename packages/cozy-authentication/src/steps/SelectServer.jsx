@@ -5,7 +5,14 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import isUrl from 'is-url'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Button, Label, Input, MainTitle, Icon } from 'cozy-ui/transpiled/react'
+import {
+  Button,
+  Label,
+  Input,
+  MainTitle,
+  Icon,
+  InputGroup
+} from 'cozy-ui/transpiled/react'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
@@ -22,6 +29,46 @@ const ERR_COSY = 'mobile.onboarding.server_selection.wrong_address_cosy'
 
 const customValue = 'custom'
 const cozyDomain = '.mycozy.cloud'
+
+const WizardHeader = ({ children }) => (
+  <div className={styles['wizard-header']}>{children}</div>
+)
+
+const WizardMain = ({ children }) => (
+  <div className={styles['wizard-main']}>{children}</div>
+)
+
+const WizardFooter = ({ children, className }) => (
+  <div className={classNames(styles['wizard-footer'], className)}>
+    {children}
+  </div>
+)
+
+const DomainSelect = translate()(({ t, onChange, value, narrow, tiny }) => (
+  <select
+    className={classNames(styles['wizard-select'], {
+      [styles['wizard-select--narrow']]: narrow,
+      [styles['wizard-select--medium']]: tiny
+    })}
+    value={value}
+    onChange={onChange}
+  >
+    <option value=".mycozy.cloud">
+      {t('mobile.onboarding.server_selection.domain_cozy')}
+    </option>
+    <option value="custom">
+      {t('mobile.onboarding.server_selection.domain_custom')}
+    </option>
+  </select>
+))
+
+const Protocol = () => (
+  <div className={styles['wizard-protocol']}>
+    <Icon icon="lock" />
+    <span>{'https://'}</span>
+  </div>
+)
+
 export class SelectServer extends Component {
   state = {
     value: '',
@@ -237,7 +284,7 @@ export class SelectServer extends Component {
     return (
       <form className={styles['wizard']} onSubmit={this.onSubmit}>
         <div className={styles['wizard-wrapper']}>
-          <header className={styles['wizard-header']}>
+          <WizardHeader>
             <Button
               subtle
               icon="previous"
@@ -251,90 +298,50 @@ export class SelectServer extends Component {
             <MainTitle tag="h1" className={styles['wizard-title']}>
               {t('mobile.onboarding.server_selection.title')}
             </MainTitle>
-          </header>
-          <div className={styles['wizard-main']}>
+          </WizardHeader>
+          <WizardMain>
             <Label htmlFor={inputID}>
               {t('mobile.onboarding.server_selection.label')}
             </Label>
-            <div
-              className={classNames(
-                styles['wizard-dualfield'],
-                this.state.focusClass,
-                {
-                  [styles['wizard-dualfield--error']]: error
-                }
-              )}
-            >
-              {!isTiny && (
-                <div className={styles['wizard-protocol']}>
-                  <Icon icon="lock" />
-                  <span>https://</span>
-                </div>
-              )}
-              <div className={styles['wizard-dualfield-wrapper']}>
-                <Input
-                  type="text"
-                  id={inputID}
-                  autoCapitalize="none"
-                  autoCorrect="off"
-                  autoComplete="off"
-                  autoFocus
-                  className={classNames(styles['wizard-dualfield-input'])}
-                  placeholder={t(placeholderValue)}
-                  size={isTiny ? 'medium' : undefined}
-                  inputRef={input => {
-                    this.input = input
-                  }}
-                  onChange={({ target: { value } }) => {
-                    this.onChange(value)
-                  }}
-                  onFocus={() =>
-                    this.setState({
-                      focusClass: styles['wizard-dualfield--focus']
-                    })
-                  }
-                  onBlur={() => this.setState({ focusClass: undefined })}
-                  value={value}
+            <InputGroup
+              append={
+                <DomainSelect
+                  error={error}
+                  narrow={isCustomDomain}
+                  tiny={isTiny}
+                  value={this.state.selectValue}
+                  onChange={e => this.selectOnChange(e)}
                 />
-              </div>
-              <select
-                className={classNames(styles['wizard-select'], {
-                  [styles['wizard-select--narrow']]: isCustomDomain,
-                  [styles['wizard-select--medium']]: isTiny
-                })}
-                value={this.state.selectValue}
-                onChange={e => {
-                  this.selectOnChange(e)
+              }
+              prepend={isTiny ? <Protocol /> : null}
+            >
+              <Input
+                type="text"
+                id={inputID}
+                autoCapitalize="none"
+                autoCorrect="off"
+                autoComplete="off"
+                autoFocus
+                className={classNames(styles['wizard-dualfield-input'])}
+                placeholder={t(placeholderValue)}
+                size={isTiny ? 'medium' : undefined}
+                inputRef={input => {
+                  this.input = input
                 }}
-              >
-                <option value=".mycozy.cloud">
-                  {t('mobile.onboarding.server_selection.domain_cozy')}
-                </option>
-                <option value="custom">
-                  {t('mobile.onboarding.server_selection.domain_custom')}
-                </option>
-              </select>
-            </div>
-            <ReactMarkdown
-              className={classNames(
-                styles['wizard-notice'],
-                styles['wizard-notice--lost']
-              )}
-              source={t('mobile.onboarding.server_selection.lostpwd')}
-            />
-            {error && (
-              <ReactMarkdown
-                className={classNames(styles['wizard-errors'], 'u-error')}
-                source={t(error)}
+                onChange={({ target: { value } }) => {
+                  this.onChange(value)
+                }}
+                onFocus={() =>
+                  this.setState({
+                    focusClass: styles['wizard-dualfield--focus']
+                  })
+                }
+                onBlur={() => this.setState({ focusClass: undefined })}
+                value={value}
               />
-            )}
-          </div>
-          <footer
-            className={classNames(
-              styles['wizard-footer'],
-              isTiny ? 'u-mt-auto' : 'u-pb-2'
-            )}
-          >
+            </InputGroup>
+          </WizardMain>
+          <WizardFooter className={isTiny ? 'u-mt-auto' : 'u-pb-2'}>
             <Button
               className={styles['wizard-next']}
               disabled={Boolean(
@@ -358,7 +365,7 @@ export class SelectServer extends Component {
               theme="text"
               onboarding={onboarding}
             />
-          </footer>
+          </WizardFooter>
         </div>
       </form>
     )
