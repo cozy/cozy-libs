@@ -1,7 +1,6 @@
 const prodFormat = require('./prod-format')
 const devFormat = require('./dev-format')
 const { setNoRetry } = require('./')
-const chalk = require('chalk')
 
 describe('dev format', () => {
   it('should log correctly an error', () => {
@@ -11,9 +10,7 @@ describe('dev format', () => {
     const lines = formatted.split('\n')
     expect(lines[0]).toEqual(expect.stringContaining('critical'))
     expect(lines[0]).toEqual(expect.stringContaining('LOGIN_FAILED'))
-    expect(lines[lines.length - 1]).toEqual(
-      expect.stringContaining('no_retry: ' + chalk.yellow('true'))
-    )
+    expect(lines[lines.length - 1]).toEqual(expect.stringContaining('no_retry'))
   })
 })
 
