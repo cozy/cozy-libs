@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.36.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.35.0...cozy-procedures@0.36.0) (2019-07-19)
+
+
+### Features
+
+* **cozy-procedures:** Use input group to display €/mois ([8817a2d](https://github.com/cozy/cozy-libs/commit/8817a2d))
+
+
+
+
+
 # [0.35.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.34.1...cozy-procedures@0.35.0) (2019-07-19)
 
 
