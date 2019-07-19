@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Input, translate } from 'cozy-ui/transpiled/react'
+import { Input, translate, InputGroup, Text } from 'cozy-ui/transpiled/react'
 
 import getInputProps from './getInputProps'
 import { hideNavBar, showNavBar } from './hiddenFeature'
@@ -8,19 +8,22 @@ import { isMobileApp } from 'cozy-device-helper'
 
 export const InputWithUnit = ({ onChange, t, ...otherProps }) => (
   <div>
-    <Input
-      {...getInputProps(otherProps)}
-      onChange={e => {
-        onChange(e.target.value)
-      }}
-      onBlur={() => {
-        if (isMobileApp()) showNavBar()
-      }}
-      onFocus={() => {
-        if (isMobileApp()) hideNavBar()
-      }}
-    />
-    <span>{t(otherProps.options.unit)}</span>
+    <InputGroup
+      append={<Text className="u-pr-1">{t(otherProps.options.unit)}</Text>}
+    >
+      <Input
+        {...getInputProps(otherProps)}
+        onChange={e => {
+          onChange(e.target.value)
+        }}
+        onBlur={() => {
+          if (isMobileApp()) showNavBar()
+        }}
+        onFocus={() => {
+          if (isMobileApp()) hideNavBar()
+        }}
+      />
+    </InputGroup>
   </div>
 )
 
