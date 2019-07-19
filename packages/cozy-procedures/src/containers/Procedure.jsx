@@ -1,36 +1,34 @@
-import { connect } from 'react-redux'
-
-import Context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
+import {
+  getInitialized,
+  initializationSuccess
+} from '../redux/procedureDataSlice'
 import {
   init as initPersonalData,
-  fetchMyself
+  fetchMyself,
+  fetchBankAccountsStats
 } from '../redux/personalDataSlice'
 import {
   init as initDocuments,
-  fetchDocument,
-  setProcedureStatus,
-  getInitiated
+  fetchDocumentsByCategory
 } from '../redux/documentsDataSlice'
 
 import Procedure from '../Procedure'
 import withLocales from '../withLocales'
 
 const mapStateToProps = state => ({
-  initiated: getInitiated(state)
+  initialized: getInitialized(state)
 })
+
 const mapDispatchToProps = {
   initPersonalData,
   fetchMyself,
   initDocuments,
-  fetchDocument,
-  setProcedureStatus
+  fetchDocumentsByCategory,
+  fetchBankAccountsStats,
+  initializationSuccess
 }
 
 export default withLocales(
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    null,
-    { context: Context }
-  )(Procedure)
+  connectWithProcedures(mapStateToProps, mapDispatchToProps)(Procedure)
 )

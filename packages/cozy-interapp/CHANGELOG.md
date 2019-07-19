@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.8](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.4.7...cozy-interapp@0.4.8) (2019-07-19)
+
+**Note:** Version bump only for package cozy-interapp
+
+
+
+
+
+## [0.4.7](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.4.6...cozy-interapp@0.4.7) (2019-07-11)
+
+**Note:** Version bump only for package cozy-interapp
+
+
+
+
+
+## 0.4.6 (2019-07-10)
+
+
+### Bug Fixes
+
+* **interapp:** :bug: Fix missing _id from intent documents ([7cab3e4](https://github.com/cozy/cozy-libs/commit/7cab3e4))
+
+
+
+
+
 <a name="0.4.5"></a>
 ## [0.4.5](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.4.4...cozy-interapp@0.4.5) (2019-03-26)
 

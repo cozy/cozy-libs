@@ -21,7 +21,7 @@ class DocumentHolder extends Component {
   }
 
   render() {
-    const { document, unlinkDocument, documentId, t } = this.props
+    const { document, unlinkDocument, categoryId, t, index } = this.props
     const { isUnlinkConfirmationModalOpened, isViewerModalOpened } = this.state
 
     const splittedName = CozyFile.splitFilename(document)
@@ -30,7 +30,7 @@ class DocumentHolder extends Component {
         {isUnlinkConfirmationModalOpened && (
           <Modal
             primaryText={t('documents.unlink.unlink')}
-            primaryAction={() => unlinkDocument({ document, documentId })}
+            primaryAction={() => unlinkDocument({ categoryId, index })}
             secondaryText={t('cancel')}
             secondaryAction={() =>
               this.setState({ isUnlinkConfirmationModalOpened: false })
@@ -68,7 +68,7 @@ class DocumentHolder extends Component {
           <Icon
             icon={`file-type-${document.class}`}
             size={24}
-            className="u-mr-1"
+            className="u-mr-1 u-flex-shrink-0"
           />
           <span className="u-flex-grow-1 u-ellipsis">
             {splittedName.filename}
@@ -77,7 +77,7 @@ class DocumentHolder extends Component {
           <Icon
             icon="cross"
             size={16}
-            className="u-pr-1 u-c-pointer"
+            className="u-pr-1 u-c-pointer u-flex-shrink-0"
             onClick={e => {
               e.stopPropagation()
               this.setState({ isUnlinkConfirmationModalOpened: true })
@@ -91,9 +91,10 @@ class DocumentHolder extends Component {
 
 DocumentHolder.propTypes = {
   unlinkDocument: PropTypes.func.isRequired,
-  documentId: PropTypes.string.isRequired,
+  categoryId: PropTypes.string.isRequired,
   //io.cozy.files
   document: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired
 }
 export default flow(translate())(DocumentsDataFormContainer(DocumentHolder))

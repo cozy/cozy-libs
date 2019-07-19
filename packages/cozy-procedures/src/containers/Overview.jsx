@@ -1,13 +1,11 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
-import Overview from '../components/Overview'
+import connectWithProcedures from '../redux/connectWithProcedures'
+import Overview from '../components/overview/Overview'
 import {
   getCompletedFields,
   getTotalFields,
   getData as getPersonalData
 } from '../redux/personalDataSlice'
-import { getSlice as getAmount } from '../redux/amountSlice'
-import { getSlice as getDuration } from '../redux/durationSlice'
+import { getAmount, getDuration } from '../redux/procedureDataSlice'
 import {
   getCompletedDocumentsCount,
   getDocumentsTotal,
@@ -29,9 +27,4 @@ export const mapStateToProps = state => ({
   }
 })
 
-export default connect(
-  mapStateToProps,
-  null,
-  null,
-  { context }
-)(Overview)
+export default connectWithProcedures(mapStateToProps)(Overview)

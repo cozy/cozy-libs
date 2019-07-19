@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2019-07-18)
+
+
+### Bug Fixes
+
+* **eslint-config-cozy-app:** Update eslint-plugin-vue to v5.2.3 ([#663](https://github.com/CPatchane/create-cozy-app/issues/663)) ([8049e10](https://github.com/CPatchane/create-cozy-app/commit/8049e10))
+
+
+### Features
+
+* **cozy-doctypes:** Add BankAccountStats model ([4535696](https://github.com/CPatchane/create-cozy-app/commit/4535696))
+
+
+
+
+
 <a name="1.1.12"></a>
 ## [1.1.12](https://github.com/CPatchane/create-cozy-app/compare/eslint-config-cozy-app@1.1.11...eslint-config-cozy-app@1.1.12) (2019-03-12)
 

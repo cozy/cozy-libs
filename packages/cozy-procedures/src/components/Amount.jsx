@@ -11,10 +11,17 @@ import {
   Button
 } from 'cozy-ui/transpiled/react/'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 class Amount extends React.Component {
   render() {
-    const { t, router, amount, updateAmount } = this.props
+    const {
+      t,
+      router,
+      amount,
+      updateAmount,
+      components: { PageLayout, PageContent, PageFooter }
+    } = this.props
     const min = get(creditApplicationTemplate, 'procedureData.amount.min')
     const max = get(creditApplicationTemplate, 'procedureData.amount.max')
     const defaultValue = get(
@@ -22,32 +29,33 @@ class Amount extends React.Component {
       'procedureData.amount.default'
     )
     return (
-      <div>
-        <Topbar title={t('amount.title')} />
-        <Title className="u-mb-2 u-ta-center">{t('amount.subtitle')}</Title>
+      <PageLayout>
+        <PageContent>
+          <Topbar title={t('amount.title')} />
+          <Title className="u-mb-2 u-ta-center">{t('amount.subtitle')}</Title>
 
-        <div className="u-mb-1">
-          <Label htmlFor="amount-input">{t('amount.label')}</Label>
-          <Input
-            type="number"
-            id="amount-input"
-            min={min}
-            max={max}
-            placeholder={defaultValue}
-            value={amount === null ? '' : amount}
-            onChange={e => updateAmount(parseInt(e.target.value))}
-          />
-        </div>
-
-        <div>
+          <div className="u-mb-1">
+            <Label htmlFor="amount-input">{t('amount.label')}</Label>
+            <Input
+              type="number"
+              id="amount-input"
+              min={min}
+              max={max}
+              placeholder={defaultValue.toString()}
+              value={amount === null ? '' : amount}
+              onChange={e => updateAmount(parseInt(e.target.value))}
+            />
+          </div>
+        </PageContent>
+        <PageFooter>
           <Button
             label={t('confirm')}
             extension="full"
             onClick={router.goBack}
             disabled={amount === null}
           />
-        </div>
-      </div>
+        </PageFooter>
+      </PageLayout>
     )
   }
 }
@@ -58,7 +66,8 @@ Amount.propTypes = {
     goBack: PropTypes.func.isRequired
   }).isRequired,
   amount: PropTypes.number,
-  updateAmount: PropTypes.func.isRequired
+  updateAmount: PropTypes.func.isRequired,
+  components: ProcedureComponentsPropType.isRequired
 }
 
 export default withRouter(translate()(Amount))

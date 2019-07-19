@@ -71,7 +71,7 @@ export class MobileRouter extends Component {
     try {
       if (saved && saved.oauthOptions) {
         client.stackClient.setOAuthOptions(saved.oauthOptions)
-        client.login({ uri: saved.uri, token: saved.token })
+        await client.login({ uri: saved.uri, token: saved.token })
       }
     } finally {
       this.setState({ triedToReconnect: true })
@@ -281,11 +281,14 @@ export class MobileRouter extends Component {
 
   async afterAuthentication() {
     this.setState({ isLoggingIn: false })
-    this.props.history.replace(this.props.loginPath)
-    await credentials.saveFromClient(this.props.client)
+
     if (this.props.onAuthenticated) {
-      this.props.onAuthenticated()
+      await this.props.onAuthenticated()
     }
+
+    this.props.history.replace(this.props.loginPath)
+
+    await credentials.saveFromClient(this.props.client)
   }
 
   handleBeforeLogout() {

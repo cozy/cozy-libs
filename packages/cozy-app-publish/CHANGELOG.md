@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.4](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.16.3...cozy-app-publish@0.16.4) (2019-07-19)
+
+**Note:** Version bump only for package cozy-app-publish
+
+
+
+
+
+## 0.16.3 (2019-07-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lodash to v4.17.13 [SECURITY] ([#648](https://github.com/cozy/cozy-libs/issues/648)) ([1b36dac](https://github.com/cozy/cozy-libs/commit/1b36dac))
+
+
+
+
+
 ## [0.16.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.16.1...cozy-app-publish@0.16.2) (2019-06-25)
 
 

@@ -12,9 +12,10 @@ class Procedure extends React.Component {
       initPersonalData,
       initDocuments,
       fetchMyself,
-      fetchDocument,
+      fetchDocumentsByCategory,
       client,
-      setProcedureStatus
+      initializationSuccess,
+      fetchBankAccountsStats
     } = this.props
     //We init our Document model here to be able to use CozyFile or AdministrativeProcedure models where we want
     if (!Document.cozyClient) {
@@ -26,19 +27,21 @@ class Procedure extends React.Component {
 
     initDocuments(get(creditApplicationTemplate, 'documents'))
     //Since init is done, we tell the app we can start to render thing
-    setProcedureStatus({ initiated: true })
+    initializationSuccess()
     fetchMyself(client)
 
-    const { documents: documentsTemplate } = creditApplicationTemplate
-    Object.keys(documentsTemplate).map(document => {
-      fetchDocument(client, document)
+    fetchBankAccountsStats(client)
+
+    const { documents: documentsCategory } = creditApplicationTemplate
+    Object.keys(documentsCategory).map(document => {
+      fetchDocumentsByCategory(document)
     })
   }
 
   render() {
     return (
-      <div className="u-ph-1 u-pv-2 u-maw-6">
-        {this.props.initiated === true ? (
+      <div data-procedure>
+        {this.props.initialized === true ? (
           this.props.children
         ) : (
           <Spinner size="xxlarge" />
@@ -53,9 +56,10 @@ Procedure.propTypes = {
   initPersonalData: PropTypes.func.isRequired,
   initDocuments: PropTypes.func.isRequired,
   fetchMyself: PropTypes.func.isRequired,
-  fetchDocument: PropTypes.func.isRequired,
-  setProcedureStatus: PropTypes.func.isRequired,
-  initiated: PropTypes.bool.isRequired,
-  client: PropTypes.object.isRequired
+  fetchDocumentsByCategory: PropTypes.func.isRequired,
+  initializationSuccess: PropTypes.func.isRequired,
+  initialized: PropTypes.bool.isRequired,
+  client: PropTypes.object.isRequired,
+  fetchBankAccountsStats: PropTypes.func.isRequired
 }
 export default withClient(Procedure)

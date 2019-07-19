@@ -1,28 +1,30 @@
-import { connect } from 'react-redux'
-import context from '../redux/context'
+import connectWithProcedures from '../redux/connectWithProcedures'
 import {
-  fetchDocument,
+  fetchDocumentsByCategory,
   getFiles,
   unlinkDocument,
-  linkDocumentSuccess
+  linkDocumentSuccess,
+  getFilesStatus,
+  setDocumentLoading,
+  fetchDocumentError,
+  setLoadingFalse
 } from '../redux/documentsDataSlice'
 
 const mapStateToProps = state => ({
-  files: getFiles(state)
+  files: getFiles(state),
+  filesStatus: getFilesStatus(state)
 })
 
 const mapDispatchToProps = {
-  fetchDocument,
+  fetchDocumentsByCategory,
   unlinkDocument,
-  linkDocumentSuccess
+  linkDocumentSuccess,
+  setDocumentLoading,
+  fetchDocumentError,
+  setLoadingFalse
 }
 
 const DocumentsDataFormContainer = Component =>
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    null,
-    { context }
-  )(Component)
+  connectWithProcedures(mapStateToProps, mapDispatchToProps)(Component)
 
 export default DocumentsDataFormContainer

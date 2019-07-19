@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "1.14.0",
+  "version": "1.16.2",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
@@ -11,6 +11,7 @@
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "watch": "yarn build -w",
     "test": "env USE_REACT=true yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
     "lint": "cd ..; yarn lint packages/cozy-authentication",
@@ -21,9 +22,9 @@
     "@babel/cli": "^7.2.3",
     "@babel/core": "^7.3.4",
     "babel-plugin-css-modules-transform": "^1.6.2",
-    "babel-preset-cozy-app": "^1.5.1",
+    "babel-preset-cozy-app": "^1.5.3",
     "cozy-client": "^6.27.0",
-    "cozy-ui": "^21",
+    "cozy-ui": "^22",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
     "enzyme": "^3.9.0",
@@ -41,7 +42,7 @@
     "stylus": "^0.54.5"
   },
   "dependencies": {
-    "cozy-device-helper": "^1.7.2",
+    "cozy-device-helper": "^1.7.4",
     "localforage": "1.7.3",
     "prop-types": "15.7.2",
     "react-markdown": "4.0.8",
@@ -69,7 +70,7 @@
   },
   "peerDependencies": {
     "cozy-client": "^6.27.0",
-    "cozy-ui": "^19.28.0",
+    "cozy-ui": "^22.4.0",
     "react": ">=15",
     "react-router": "3"
   }

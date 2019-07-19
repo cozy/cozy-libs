@@ -15,10 +15,14 @@
     "button": "Send my application",
     "complete": "Fill out",
     "over": "over",
-    "zip_ready": "Your application hs been sent. A copy is available in your files.",
-    "zip_errored": "An error occurred during the archive creation.",
     "titles": {
       "credit-application": "Credit application"
+    },
+    "personalDataCompleted": {
+      "I": "I, **%{firstname}** **%{lastname}**, certify being **%{maritalStatus}** and caring for **%{numberOfDependants}** dependent children",
+      "work": "I am currently **%{employmentStatus}** with a **%{employmentContract}** and receive a salary of **%{salary}€** per month after tax, and **%{additionalIncome}€** pr month of additional income.",
+      "property": "I am the **%{propertyStatus}** of my housing. The sum of my loans is **%{creditsTotalAmount}€** pr month, out of which **%{propertyLoan}€** per month are for my property loan. My fixed charges amount to **%{fixedCharges}€**.",
+      "address": "My address is **%{address}**. My phone number is [**%{phone}**](tel://%{phone}) and my email address is [**%{email}**](mailto:%{email})."
     }
   },
   "amount": {
@@ -69,8 +73,8 @@
       },
       "employmentContract": {
         "title": "Employment contract",
-        "cdd": "CDD",
-        "cdi": "CDI"
+        "cdd": "Fixed term contract",
+        "cdi": "Permanent contract"
       },
       "salary": {
         "title": "Salary"
@@ -90,6 +94,9 @@
       },
       "creditsTotalAmount": {
         "title": "Credits total amount"
+      },
+      "fixedCharges": {
+        "title": "Other fixed charges"
       },
       "address": {
         "title": "Address"
@@ -139,5 +146,17 @@
       "main": "%{smart_count} document out of %{total} |||| %{smart_count} documents out of %{total}",
       "rest": "has been gathered by the application. |||| have been gathered by the application."
     }
+  },
+  "success": {
+    "title": "[DEMO] Your loan request has been generated",
+    "text": "In a live scenario, the loan request would have been transmitted to your bank. At the moment, an archive containing the request informations has been placed in your documents.",
+    "main_action": "View in my documents",
+    "secondary_action": "Close"
+  },
+  "error": {
+    "title": "Your loan request couldn't be completed",
+    "text": "An error has occured while submittng your loan request.",
+    "main_action": "Try again",
+    "secondary_action": "Give up"
   }
 }

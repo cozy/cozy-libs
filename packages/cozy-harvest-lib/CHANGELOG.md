@@ -3,6 +3,66 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.67.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.3...cozy-harvest-lib@0.67.4) (2019-07-19)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
+## [0.67.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.2...cozy-harvest-lib@0.67.3) (2019-07-18)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
+## [0.67.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.1...cozy-harvest-lib@0.67.2) (2019-07-16)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Remove cozy-realtime from dependencies ([f13f9af](https://github.com/cozy/cozy-libs/commit/f13f9af))
+
+
+
+
+
+## [0.67.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.0...cozy-harvest-lib@0.67.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lodash to v4.17.13 [SECURITY] ([#648](https://github.com/cozy/cozy-libs/issues/648)) ([1b36dac](https://github.com/cozy/cozy-libs/commit/1b36dac))
+
+
+
+
+
+# [0.67.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.66.1...cozy-harvest-lib@0.67.0) (2019-07-09)
+
+
+### Features
+
+* **harvest:** Do not autofocus identifier field on iPhone ([f6c06c2](https://github.com/cozy/cozy-libs/commit/f6c06c2))
+
+
+
+
+
+## [0.66.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.66.0...cozy-harvest-lib@0.66.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* **harvest:** Manage margin issue ([9bc404f](https://github.com/cozy/cozy-libs/commit/9bc404f))
+
+
+
+
+
 # [0.66.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.65.1...cozy-harvest-lib@0.66.0) (2019-07-03)
 
 

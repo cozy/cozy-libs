@@ -3,6 +3,269 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.34.0...cozy-procedures@0.34.1) (2019-07-19)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+# [0.34.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.33.0...cozy-procedures@0.34.0) (2019-07-18)
+
+
+### Bug Fixes
+
+* Defensive code since BankAccountStats can only do stats if it has documents ([ecf8500](https://github.com/cozy/cozy-libs/commit/ecf8500))
+* Remove extra margin on Button ([97651b4](https://github.com/cozy/cozy-libs/commit/97651b4))
+
+
+### Features
+
+* Add proptypes ([bbe0613](https://github.com/cozy/cozy-libs/commit/bbe0613))
+* Application can pass custom layout components to procedures ([1cf48b1](https://github.com/cozy/cozy-libs/commit/1cf48b1))
+* Page layout for cozy-procedures ([25a4fa8](https://github.com/cozy/cozy-libs/commit/25a4fa8))
+
+
+
+
+
+# [0.33.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.1...cozy-procedures@0.33.0) (2019-07-18)
+
+
+### Features
+
+* **cozy-procedures:** Add fixed charges to personal data form ([d4cd6fd](https://github.com/cozy/cozy-libs/commit/d4cd6fd))
+* **cozy-procedures:** Show fixed charges in overview ([be88cb0](https://github.com/cozy/cozy-libs/commit/be88cb0))
+
+
+
+
+
+## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.32.0...cozy-procedures@0.32.1) (2019-07-18)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Set loading to false after linking a document ([ecf329a](https://github.com/cozy/cozy-libs/commit/ecf329a))
+
+
+
+
+
+# [0.32.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.31.0...cozy-procedures@0.32.0) (2019-07-18)
+
+
+### Features
+
+* Use lib options for babel config ([3c11168](https://github.com/cozy/cozy-libs/commit/3c11168))
+
+
+
+
+
+# [0.31.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.2...cozy-procedures@0.31.0) (2019-07-17)
+
+
+### Features
+
+* **cozy-procedures:** Upgrade cozy-ui ([10669a1](https://github.com/cozy/cozy-libs/commit/10669a1))
+* **procedures:** Delete files permanently after zip success or error ([70f6006](https://github.com/cozy/cozy-libs/commit/70f6006))
+
+
+
+
+
+## [0.30.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.1...cozy-procedures@0.30.2) (2019-07-17)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+## [0.30.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.30.0...cozy-procedures@0.30.1) (2019-07-17)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+# [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.2...cozy-procedures@0.30.0) (2019-07-16)
+
+
+### Features
+
+* **cozy-procedures:** Update salary french title ([846687f](https://github.com/cozy/cozy-libs/commit/846687f))
+* Can override a file with the same name ([ff1d440](https://github.com/cozy/cozy-libs/commit/ff1d440))
+
+
+
+
+
+## [0.29.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.1...cozy-procedures@0.29.2) (2019-07-15)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Shrink icons in DocumentHolder ([612ea46](https://github.com/cozy/cozy-libs/commit/612ea46))
+
+
+
+
+
+## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.29.0...cozy-procedures@0.29.1) (2019-07-12)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
+# [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.5...cozy-procedures@0.29.0) (2019-07-11)
+
+
+### Features
+
+* **cozy-procedures:** Add a warning when default precision is used ([03a2f9f](https://github.com/cozy/cozy-libs/commit/03a2f9f))
+* **cozy-procedures:** Round bank account stats ([9d7b6ad](https://github.com/cozy/cozy-libs/commit/9d7b6ad))
+
+
+
+
+
+## [0.28.5](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.4...cozy-procedures@0.28.5) (2019-07-11)
+
+
+### Bug Fixes
+
+* Overflow scroll through utlity class ([69906c3](https://github.com/cozy/cozy-libs/commit/69906c3))
+
+
+
+
+
+## [0.28.4](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.3...cozy-procedures@0.28.4) (2019-07-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lodash to v4.17.13 [SECURITY] ([#648](https://github.com/cozy/cozy-libs/issues/648)) ([1b36dac](https://github.com/cozy/cozy-libs/commit/1b36dac))
+
+
+
+
+
+## [0.28.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.2...cozy-procedures@0.28.3) (2019-07-11)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Put some bold ([cf0ef4a](https://github.com/cozy/cozy-libs/commit/cf0ef4a))
+* **procedures:** Better margin on PersonalOverview ([8997791](https://github.com/cozy/cozy-libs/commit/8997791))
+
+
+
+
+
+## [0.28.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.1...cozy-procedures@0.28.2) (2019-07-10)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Remove special chars ([4a305c5](https://github.com/cozy/cozy-libs/commit/4a305c5))
+* Add a data attribute to ID the procedure nodes ([7155210](https://github.com/cozy/cozy-libs/commit/7155210))
+
+
+
+
+
+## [0.28.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.28.0...cozy-procedures@0.28.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* **procedure:** TMP has to be removed later ([516a011](https://github.com/cozy/cozy-libs/commit/516a011))
+* **procedures:** Shrink icon and ellipsis filename ([2d67e7e](https://github.com/cozy/cozy-libs/commit/2d67e7e))
+
+
+
+
+
+# [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.27.0...cozy-procedures@0.28.0) (2019-07-10)
+
+
+### Features
+
+* **cozy-procedure:** Fill banking data automatically ([a6e7df2](https://github.com/cozy/cozy-libs/commit/a6e7df2))
+
+
+
+
+
+# [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.26.1...cozy-procedures@0.27.0) (2019-07-09)
+
+
+### Features
+
+* Overview completed for personal data ([c86814a](https://github.com/cozy/cozy-libs/commit/c86814a))
+* Support markdown ([9dafc1a](https://github.com/cozy/cozy-libs/commit/9dafc1a))
+
+
+
+
+
+## [0.26.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.26.0...cozy-procedures@0.26.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* Use only one direction ([bc891f0](https://github.com/cozy/cozy-libs/commit/bc891f0))
+* Visual issue on overview ([828e8f7](https://github.com/cozy/cozy-libs/commit/828e8f7))
+
+
+
+
+
+# [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.25.0...cozy-procedures@0.26.0) (2019-07-09)
+
+
+### Features
+
+* Procedure end screen ([ef25e9f](https://github.com/cozy/cozy-libs/commit/ef25e9f))
+
+
+
+
+
+# [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.24.0...cozy-procedures@0.25.0) (2019-07-09)
+
+
+### Bug Fixes
+
+* Remove some proptypes warning ([#628](https://github.com/cozy/cozy-libs/issues/628)) ([a86efd2](https://github.com/cozy/cozy-libs/commit/a86efd2))
+
+
+### Features
+
+* Display fully completed component when docs are ok ([71ddaa7](https://github.com/cozy/cozy-libs/commit/71ddaa7))
+
+
+
+
+
+# [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.23.0...cozy-procedures@0.24.0) (2019-07-08)
+
+
+### Features
+
+* Loading state ([#624](https://github.com/cozy/cozy-libs/issues/624)) ([e633377](https://github.com/cozy/cozy-libs/commit/e633377))
+
+
+
+
+
 # [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.22.3...cozy-procedures@0.23.0) (2019-07-05)
 
 

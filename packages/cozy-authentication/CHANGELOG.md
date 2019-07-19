@@ -3,6 +3,84 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.16.1...cozy-authentication@1.16.2) (2019-07-19)
+
+**Note:** Version bump only for package cozy-authentication
+
+
+
+
+
+## [1.16.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.16.0...cozy-authentication@1.16.1) (2019-07-18)
+
+**Note:** Version bump only for package cozy-authentication
+
+
+
+
+
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.2...cozy-authentication@1.16.0) (2019-07-16)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Await CozyClient::login ([7aa27f5](https://github.com/cozy/cozy-libs/commit/7aa27f5))
+
+
+### Features
+
+* **cozy-authentication:** Call onAuthenticated before redirecting ([ab5e273](https://github.com/cozy/cozy-libs/commit/ab5e273))
+
+
+
+
+
+## [1.15.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.1...cozy-authentication@1.15.2) (2019-07-12)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Don't show icon and spinner at the same time ([cbd3342](https://github.com/cozy/cozy-libs/commit/cbd3342))
+
+
+
+
+
+## [1.15.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.15.0...cozy-authentication@1.15.1) (2019-07-12)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Force apply the back button styles ([a9a2fda](https://github.com/cozy/cozy-libs/commit/a9a2fda))
+
+
+
+
+
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.14.1...cozy-authentication@1.15.0) (2019-07-11)
+
+
+### Bug Fixes
+
+* **cozy-authentication:** Update cozy-ui to v22.3.0 ([4188303](https://github.com/cozy/cozy-libs/commit/4188303))
+
+
+### Features
+
+* **SelectServer:** Back button is not fixed anymore ([c3ba652](https://github.com/cozy/cozy-libs/commit/c3ba652))
+
+
+
+
+
+## 1.14.1 (2019-07-11)
+
+**Note:** Version bump only for package cozy-authentication
+
+
+
+
+
 # [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.13.3...cozy-authentication@1.14.0) (2019-06-26)
 
 
