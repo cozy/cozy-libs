@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.7.1...cozy-playgrounds@1.7.2) (2019-07-19)
+
+
+### Bug Fixes
+
+* **playgrounds:** Component instance can't be extended ([78ddea4](https://github.com/cozy/cozy-libs/commit/78ddea4))
+
+
+
+
+
 ## [1.7.1](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.7.0...cozy-playgrounds@1.7.1) (2019-07-19)
 
 **Note:** Version bump only for package cozy-playgrounds

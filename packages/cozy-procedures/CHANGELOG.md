@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.34.1...cozy-procedures@0.35.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Default options handling ([7adf765](https://github.com/cozy/cozy-libs/commit/7adf765))
+
+
+### Features
+
+* Add test ([44dd281](https://github.com/cozy/cozy-libs/commit/44dd281))
+
+
+
+
+
 ## [0.34.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.34.0...cozy-procedures@0.34.1) (2019-07-19)
 
 **Note:** Version bump only for package cozy-procedures

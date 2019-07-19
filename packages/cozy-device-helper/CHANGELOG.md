@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.5](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.7.4...cozy-device-helper@1.7.5) (2019-07-19)
+
+**Note:** Version bump only for package cozy-device-helper
+
+
+
+
+
 ## [1.7.4](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.7.3...cozy-device-helper@1.7.4) (2019-07-19)
 
 **Note:** Version bump only for package cozy-device-helper

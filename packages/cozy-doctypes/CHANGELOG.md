@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.56.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.1...cozy-doctypes@1.56.2) (2019-07-19)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Handle missing properties in account stats ([5442915](https://github.com/cozy/cozy-libs/commit/5442915))
+
+
+
+
+
 ## [1.56.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.0...cozy-doctypes@1.56.1) (2019-07-19)
 
 **Note:** Version bump only for package cozy-doctypes
