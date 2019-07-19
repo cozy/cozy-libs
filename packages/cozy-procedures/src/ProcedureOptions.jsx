@@ -11,13 +11,11 @@ const DEFAULT_OPTIONS = {
   }
 }
 
-export const optionsProvider = (
-  Component,
-  procedureOptions = DEFAULT_OPTIONS
-) => {
+export const optionsProvider = (Component, procedureOptions) => {
+  const options = { ...DEFAULT_OPTIONS, ...procedureOptions }
   const Wrapped = props => {
     return (
-      <ProcedureOptionsContext.Provider value={procedureOptions}>
+      <ProcedureOptionsContext.Provider value={options}>
         <Component {...props} />
       </ProcedureOptionsContext.Provider>
     )

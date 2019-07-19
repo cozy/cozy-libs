@@ -37,7 +37,8 @@
     "babel-plugin-inline-react-svg": "^1.1.0",
     "cozy-ui": "22.4.0",
     "enzyme-to-json": "3.3.5",
-    "jest": "24.8.0"
+    "jest": "24.8.0",
+    "react": "^16.8.3"
   },
   "peerDependencies": {
     "@material-ui/core": "3.9.3",
