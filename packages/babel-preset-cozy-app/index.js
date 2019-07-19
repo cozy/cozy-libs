@@ -70,13 +70,19 @@ const mkConfig = (api, options) => {
   }
 
   if (presetOptions.lib) {
-    merge(presetOptions, {
-      presetEnv: {
-        // Libraries are shipped with es6 imports for downstream bundler
-        // to be able to prune unused modules away
-        modules: false
-      }
-    })
+    const libConfigs = []
+
+    // Jest does not understand ES6 import by default
+    if (process.env.BABEL_ENV !== 'test') {
+      libConfigs.push({
+        presetEnv: {
+          // Libraries are shipped with es6 imports for downstream bundler
+          // to be able to prune unused modules away
+          modules: false
+        }
+      })
+    }
+    merge(presetOptions, ...libConfigs)
   }
 
   const {
