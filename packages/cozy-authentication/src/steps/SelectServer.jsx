@@ -11,7 +11,9 @@ import {
   Input,
   MainTitle,
   Icon,
-  InputGroup
+  InputGroup,
+  SelectBox,
+  Media
 } from 'cozy-ui/transpiled/react'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import 'cozy-ui/assets/icons/ui/previous.svg'
@@ -44,29 +46,33 @@ const WizardFooter = ({ children, className }) => (
   </div>
 )
 
+/**
+ * TODO the select options are rendered below the InputGroup and it is hidden
+ * because of a overflow auto
+ */
 const DomainSelect = translate()(({ t, onChange, value, narrow, tiny }) => (
-  <select
-    className={classNames(styles['wizard-select'], {
-      [styles['wizard-select--narrow']]: narrow,
-      [styles['wizard-select--medium']]: tiny
-    })}
+  <SelectBox
+    className="u-w-4"
     value={value}
-    onChange={onChange}
-  >
-    <option value=".mycozy.cloud">
-      {t('mobile.onboarding.server_selection.domain_cozy')}
-    </option>
-    <option value="custom">
-      {t('mobile.onboarding.server_selection.domain_custom')}
-    </option>
-  </select>
+    onChange={value => onChange({ target: { value } })}
+    options={[
+      {
+        value: '.mycozy.cloud',
+        label: t('mobile.onboarding.server_selection.domain_cozy')
+      },
+      {
+        value: 'custom',
+        label: t('mobile.onboarding.server_selection.domain_custom')
+      }
+    ]}
+  />
 ))
 
 const Protocol = () => (
-  <div className={styles['wizard-protocol']}>
+  <Media className={styles['wizard-protocol']}>
     <Icon icon="lock" />
     <span>{'https://'}</span>
-  </div>
+  </Media>
 )
 
 export class SelectServer extends Component {
