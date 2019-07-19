@@ -3,12 +3,7 @@ module.exports = {
   ignore: ['*.spec.js', '*.spec.jsx'],
   env: {
     transpilation: {
-      presets: [
-        [
-          'cozy-app',
-          { presetEnv: { modules: false }, transformRuntime: { helpers: true } }
-        ]
-      ],
+      presets: [['cozy-app', { lib: true }]],
       plugins: ['inline-react-svg']
     }
   }

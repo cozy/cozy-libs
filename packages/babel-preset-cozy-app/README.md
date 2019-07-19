@@ -90,7 +90,12 @@ By default, this babel preset uses [`babel-plugin-transform-runtime`](https://ba
 }
 ```
 
-#### Preset and plugin options
+#### Lib option
+
+When the lib option is activated, `import/export` nodes are not transpiled. This gives the downstream bundler
+the ability to prune unused module away. It works by configuring babel-preset-env with `{"modules": false}`.
+
+### Advanced
 
 You can have control on the options passed to `babel-preset-env` and `babel-plugin-transform-runtime`:
 
@@ -114,7 +119,7 @@ to be replaced by imports from `babel-runtime`.
 See the options on the official docs :
 
 https://babeljs.io/docs/en/babel-preset-env#modules
-https://babeljs.io/docs/en/babel-plugin-transform-runtime#helpers 
+https://babeljs.io/docs/en/babel-plugin-transform-runtime#helpers
 
 ## Community
 

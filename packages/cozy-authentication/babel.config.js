@@ -1,12 +1,7 @@
 module.exports = {
   env: {
     transpilation: {
-      presets: [
-        [
-          'cozy-app',
-          { presetEnv: { modules: false }, transformRuntime: { helpers: true } }
-        ]
-      ],
+      presets: [['cozy-app', { lib: true }]],
       plugins: [
         [
           'css-modules-transform',
@@ -20,7 +15,7 @@ module.exports = {
       ]
     },
     test: {
-      presets: [['cozy-app', { transformRuntime: { helpers: true } }]]
+      presets: ['cozy-app']
     }
   },
   ignore: ['*.spec.js', '*.spec.jsx']
