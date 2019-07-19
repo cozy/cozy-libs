@@ -173,4 +173,33 @@ describe('File model', () => {
       })
     })
   })
+
+  describe('splitFilename', () => {
+    it('should return an extension and a filename from a file', () => {
+      const file = {
+        name: 'foo.bar'
+      }
+      const result = CozyFile.splitFilename(file)
+      expect(result).toEqual({
+        filename: 'foo',
+        extension: '.bar'
+      })
+    })
+    it('should throw an error if the file is not correct', () => {
+      const file = {}
+
+      expect(() => CozyFile.splitFilename(file)).toThrow()
+    })
+    it('should return only the folder name if its a folder', () => {
+      const file = {
+        name: 'foo',
+        type: 'directory'
+      }
+      const result = CozyFile.splitFilename(file)
+      expect(result).toEqual({
+        filename: 'foo',
+        extension: ''
+      })
+    })
+  })
 })

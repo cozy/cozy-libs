@@ -23,6 +23,16 @@ module.exports = {
       })
     ]
   },
+  /**
+   * Needed in order to be able to build cozy-mjml on Mac OS.
+   * cozy-mjml `require(mjml)` and mjml use fsevents > node-pre-gyp.
+   * See this comment for more information : https://github.com/mapbox/node-pre-gyp/issues/238#issuecomment-267889753
+   *
+   * We simply tell webpack that fsevents should be required at runtime and not during the build
+   */
+  externals: {
+    fsevents: 'fsevents'
+  },
   module: {
     rules: [{ test: /node_modules\/datauri\/index.js$/, use: 'shebang-loader' }]
   },

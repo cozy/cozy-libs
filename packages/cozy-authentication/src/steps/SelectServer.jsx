@@ -106,7 +106,10 @@ export class SelectServer extends Component {
     }
 
     const url = this.getUrl(value)
-    if (url === '' || (/^http:/.test(url) && !__ALLOW_HTTP__)) {
+    if (
+      url === '' ||
+      (/^http:/.test(url) && typeof __ALLOW_HTTP__ === undefined)
+    ) {
       error = ERR_WRONG_ADDRESS
     }
     if (error) {
@@ -235,18 +238,16 @@ export class SelectServer extends Component {
       <form className={styles['wizard']} onSubmit={this.onSubmit}>
         <div className={styles['wizard-wrapper']}>
           <header className={styles['wizard-header']}>
-            <div className={styles['wizard-header-fixed']}>
-              <Button
-                subtle
-                icon="previous"
-                iconOnly
-                extension="narrow"
-                className={classNames(styles['wizard-previous'])}
-                onClick={previousStep}
-                type="button"
-                label={t('mobile.onboarding.server_selection.previous')}
-              />
-            </div>
+            <Button
+              subtle
+              icon="previous"
+              iconOnly
+              extension="narrow"
+              className={classNames(styles['wizard-previous'])}
+              onClick={previousStep}
+              type="button"
+              label={t('mobile.onboarding.server_selection.previous')}
+            />
             <MainTitle tag="h1" className={styles['wizard-title']}>
               {t('mobile.onboarding.server_selection.title')}
             </MainTitle>
@@ -346,7 +347,7 @@ export class SelectServer extends Component {
               label={t('mobile.onboarding.server_selection.button')}
               size={isTiny ? 'normal' : 'large'}
             >
-              <Icon icon="next" color="white" />
+              {!fetching && <Icon icon="next" color="white" />}
             </Button>
             <ButtonLinkRegistration
               className={classNames('wizard-buttonlink')}

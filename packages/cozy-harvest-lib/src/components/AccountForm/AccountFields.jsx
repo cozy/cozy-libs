@@ -25,7 +25,7 @@ export class AccountFields extends PureComponent {
       disabled,
       fields,
       hasError,
-      initialValues,
+      initialValues = {},
       inputRefByName
     } = this.props
 
@@ -55,6 +55,7 @@ export class AccountFields extends PureComponent {
                   initialValues[getEncryptedFieldName(field.name)]
                 }
                 inputRef={inputRefByName(field.name)}
+                forceEncryptedPlaceholder={!!Object.keys(initialValues).length}
               />
             )}
           </FinalFormField>

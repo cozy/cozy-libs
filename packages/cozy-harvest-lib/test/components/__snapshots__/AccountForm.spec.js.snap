@@ -4,6 +4,11 @@ exports[`AccountForm should not render error 1`] = `
 <div
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
+  style={
+    Object {
+      "marginTop": "-1rem",
+    }
+  }
 >
   <AccountFields
     container={null}
@@ -55,6 +60,11 @@ exports[`AccountForm should render 1`] = `
 <div
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
+  style={
+    Object {
+      "marginTop": "-1rem",
+    }
+  }
 >
   <AccountFields
     container={null}
@@ -105,8 +115,14 @@ exports[`AccountForm should render error 1`] = `
 <div
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
+  style={
+    Object {
+      "marginTop": "-1rem",
+    }
+  }
 >
   <Wrapper
+    className="u-mb-1"
     error={[Error: Test error]}
     konnector={
       Object {
@@ -118,21 +134,6 @@ exports[`AccountForm should render error 1`] = `
             "type": "text",
           },
         },
-      }
-    }
-    t={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            "accountForm.submit.label",
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": "accountForm.submit.label",
-          },
-        ],
       }
     }
   />

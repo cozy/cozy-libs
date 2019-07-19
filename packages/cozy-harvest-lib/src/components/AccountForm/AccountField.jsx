@@ -1,8 +1,8 @@
-import Field from 'cozy-ui/react/Field'
+import Field from 'cozy-ui/transpiled/react/Field'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { translate } from 'cozy-ui/react/I18n'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
 import {
@@ -10,6 +10,17 @@ import {
   predefinedLabels,
   ROLE_IDENTIFIER
 } from '../../helpers/manifest'
+import { isIOS } from 'cozy-device-helper'
+
+// On iOS, focusing an input not in the same tick as the user action is buggy.
+// The field is focused but the keyboard does not show up,
+// See https://github.com/apache/cordova-plugin-wkwebview-engine/pull/37/#issuecomment-308321094
+const canAutofocus = () => {
+  if (isIOS()) {
+    return false
+  }
+  return true
+}
 
 /**
  * AccountField encapsulate an unique Cozy-UI Field component.
@@ -29,7 +40,7 @@ export class AccountField extends PureComponent {
 
   componentDidMount() {
     const { role } = this.props
-    if (role === ROLE_IDENTIFIER && this.inputRef) {
+    if (role === ROLE_IDENTIFIER && this.inputRef && canAutofocus()) {
       this.inputRef.focus()
     }
   }
@@ -47,6 +58,7 @@ export class AccountField extends PureComponent {
     const {
       disabled,
       hasError,
+      forceEncryptedPlaceholder,
       initialValue,
       label,
       name,
@@ -70,7 +82,7 @@ export class AccountField extends PureComponent {
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
       disabled: disabled || !isEditable,
-      error: hasError,
+      error: !disabled && hasError,
       fullwidth: true,
       inputRef: this.setInputRef,
       label: t(`fields.${localeKey}.label`, {
@@ -78,7 +90,8 @@ export class AccountField extends PureComponent {
       }),
       placeholder: getFieldPlaceholder(
         this.props,
-        t(`fields.${name}.placeholder`, { _: '' })
+        t(`fields.${name}.placeholder`, { _: '' }),
+        { forceEncryptedPlaceholder }
       ),
       side: required ? null : t('accountForm.fields.optional'),
       size: 'medium'
@@ -125,7 +138,7 @@ AccountField.propTypes = {
    * The element wrapping the <Field /> component.
    * Passed to <SelectBox /> component.
    */
-  container: PropTypes.node,
+  container: PropTypes.instanceOf(Element),
   /**
    * Indicates if the <Field /> should be rendered with an error style.
    */

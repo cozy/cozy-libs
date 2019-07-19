@@ -86,7 +86,7 @@ export class Popup extends PureComponent {
   handleMessage(messageEvent) {
     const { popup } = this.state
     const { onMessage } = this.props
-    const isFromPopup = popup.location.origin === messageEvent.origin
+    const isFromPopup = popup === messageEvent.source
     if (isFromPopup && typeof onMessage === 'function') onMessage(messageEvent)
   }
 

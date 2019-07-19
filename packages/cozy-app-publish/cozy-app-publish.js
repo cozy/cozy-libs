@@ -2,10 +2,11 @@
 
 'use strict'
 
-const commander = require('commander')
+const { ArgumentParser } = require('argparse')
 const colorize = require('./utils/colorize')
 const scripts = require('./index')
 const capitalize = require('lodash/capitalize')
+const omitBy = require('lodash/omitBy')
 
 const pkg = require('./package.json')
 
@@ -14,57 +15,71 @@ const MODES = {
   MANUAL: 'manual'
 }
 
-const program = new commander.Command(pkg.name)
-  .version(pkg.version)
-  .usage(`[options]`)
-  .option(
-    '--token <editor-token>',
-    'Registry token matching the provided editor (required)'
-  )
-  .option(
-    '--space <space-name>',
+const parser = new ArgumentParser({
+  version: pkg.version,
+  description:
+    'This tool allows you to publish a Cozy application to the Cozy registry.'
+})
+parser.addArgument('--token', {
+  metavar: 'editor-token',
+  help: 'Registry token matching the provided editor (required)'
+})
+parser.addArgument('--space', {
+  metavar: 'space-name',
+  help:
     'Registry space name to publish the application to (default __default__)'
-  )
-  .option(
-    '--build-dir <relative-path>',
+})
+parser.addArgument('--build-dir', {
+  metavar: 'relative-path',
+  dest: 'buildDir',
+  help:
     'Path of the build directory relative to the current directory (default ./build)'
-  )
-  .option('--build-url <url>', 'URL of the application archive')
-  .option(
-    '--build-commit <commit-hash>',
-    'Hash of the build commit matching the build archive to publish'
-  )
-  .option(
-    '--manual-version <version>',
+})
+parser.addArgument('--build-url', {
+  metavar: 'url',
+  dest: 'buildUrl',
+  help: 'URL of the application archive'
+})
+parser.addArgument('--build-commit', {
+  metavar: 'commit-hash',
+  dest: 'buildCommit',
+  help: 'Hash of the build commit matching the build archive to publish'
+})
+parser.addArgument('--manual-version', {
+  metavar: 'version',
+  dest: 'manualVersion',
+  help:
     'Specify a version manually (must not be already published in the registry)'
-  )
-  .option(
-    '--prepublish <script-path>',
+})
+parser.addArgument('--prepublish', {
+  metavar: 'script-path',
+  help:
     'Hook to process parameters just before publishing, typically to upload archive on custom host'
-  )
-  .option(
-    '--postpublish <script-path>',
+})
+parser.addArgument('--postpublish', {
+  metavar: 'script-path',
+  help:
     'Hook to process parameters just after publishing, typically to deploy app'
-  )
-  .option(
-    '--tag-prefix <tag-prefix>',
+})
+parser.addArgument('--tag-prefix', {
+  metavar: 'tag-prefix',
+  dest: 'tagPrefix',
+  help:
     'When publishing from a monorepo, only consider tags with tagPrefix, ex: cozy-banks/1.0.1.'
-  )
-  .option('--yes', 'Force confirmation when publishing manually')
-  .option(
-    '--registry-url <url>',
-    'Registry URL to publish to a different one from the default URL'
-  )
-  .option('--verbose', 'print additional logs')
-  .on('--help', () => {
-    console.log()
-    console.log(`\t--- ${colorize.bold('USAGE INFORMATIONS')} ---`)
-    console.log()
-    console.log(
-      `\tThis tool allows you to publish a Cozy application to the Cozy registry.`
-    )
-  })
-  .parse(process.argv)
+})
+parser.addArgument('--registry-url', {
+  metavar: 'url',
+  dest: 'registryUrl',
+  help: 'Registry URL to publish to a different one from the default URL'
+})
+parser.addArgument('--yes', {
+  help: 'Force confirmation when publishing manually',
+  action: 'storeTrue'
+})
+parser.addArgument('--verbose', {
+  help: 'print additional logs',
+  action: 'storeTrue'
+})
 
 const handleError = error => {
   console.log(colorize.red(`Publishing failed: ${error.message}`))
@@ -72,7 +87,10 @@ const handleError = error => {
 }
 
 try {
-  publishApp(program).catch(handleError)
+  // ignore null value which are defaults to argparse (instead of undefined).
+  // null values break lodash/defaults
+  const args = omitBy(parser.parseArgs(), val => val === null)
+  publishApp(args).catch(handleError)
 } catch (error) {
   handleError(error)
 }

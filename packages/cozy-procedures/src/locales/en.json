@@ -1,0 +1,162 @@
+{
+  "confirm": "Confirm",
+  "back": "Back",
+  "cancel": "Cancel",
+  "overview": {
+    "subtitle": "Please fill out the following information",
+    "request": "Requested loan",
+    "amount": "Amount",
+    "amountUnit": "%{smart_count} €",
+    "duration": "duration",
+    "durationUnit": "%{smart_count} month",
+    "documents": "Documents",
+    "personalData": "Personal information",
+    "notice": "By submitting the request, all informations in this application will be transfered.",
+    "button": "Send my application",
+    "complete": "Fill out",
+    "over": "over",
+    "titles": {
+      "credit-application": "Credit application"
+    },
+    "personalDataCompleted": {
+      "I": "I, **%{firstname}** **%{lastname}**, certify being **%{maritalStatus}** and caring for **%{numberOfDependants}** dependent children",
+      "work": "I am currently **%{employmentStatus}** with a **%{employmentContract}** and receive a salary of **%{salary}€** per month after tax, and **%{additionalIncome}€** pr month of additional income.",
+      "property": "I am the **%{propertyStatus}** of my housing. The sum of my loans is **%{creditsTotalAmount}€** pr month, out of which **%{propertyLoan}€** per month are for my property loan. My fixed charges amount to **%{fixedCharges}€**.",
+      "address": "My address is **%{address}**. My phone number is [**%{phone}**](tel://%{phone}) and my email address is [**%{email}**](mailto:%{email})."
+    }
+  },
+  "amount": {
+    "title": "Amount",
+    "subtitle": "What amount would you like to request?",
+    "label": "Loan amount"
+  },
+  "duration": {
+    "title": "Duration",
+    "subtitle": "Over what time period would you like to reimburse the loan?",
+    "label": "Loan duration",
+    "reimbursement": "Reimbursement",
+    "rate": "Nominal annual interest rate",
+    "unit": "€/month",
+    "month": "months"
+  },
+  "personalDataForm": {
+    "title": "Personal informations",
+    "subtitle": "Please fill out the following information to complete your application",
+    "completedStatus": {
+      "main": "%{smart_count} information out of %{total} |||| %{smart_count} informations out of %{total}",
+      "rest": "has been completed by the app. |||| have been completed by the app."
+    },
+    "form": {
+      "lastname": {
+        "title": "Lastname"
+      },
+      "firstname": {
+        "title": "Firstname"
+      },
+      "numberOfDependents": {
+        "title": "Number of dependents"
+      },
+      "maritalStatus": {
+        "title": "Marital status",
+        "single": "Single",
+        "married": "Married",
+        "pacs": "PACS",
+        "separated": "Separated",
+        "widowed": "Widowed"
+      },
+      "employmentStatus": {
+        "title": "Employment status",
+        "employee": "Employee",
+        "freelance": "Freelance",
+        "unemployed": "Unemployed",
+        "retired": "Retired"
+      },
+      "employmentContract": {
+        "title": "Employment contract",
+        "cdd": "Fixed term contract",
+        "cdi": "Permanent contract"
+      },
+      "salary": {
+        "title": "Salary"
+      },
+      "additionalIncome": {
+        "title": "Additional income"
+      },
+      "propertyStatus": {
+        "title": "Property status",
+        "owner": "Owner",
+        "tenant": "Tenant",
+        "housed": "Housed",
+        "homeless": "Homeless"
+      },
+      "propertyLoan": {
+        "title": "Property loan"
+      },
+      "creditsTotalAmount": {
+        "title": "Credits total amount"
+      },
+      "fixedCharges": {
+        "title": "Other fixed charges"
+      },
+      "address": {
+        "title": "Address"
+      },
+      "phone": {
+        "title": "Phone"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "units": {
+        "eurosNetPerMonth": "Net € per month",
+        "eurosPerMonth": "€ per month"
+      }
+    }
+  },
+  "documents": {
+    "title": "Documents",
+    "subtitle": "Collect the following documents to complete your application.",
+    "import": "Import a document",
+    "importing": "Importing",
+    "labels": {
+      "identity_document": "Proof of identity",
+      "tax_notice": "Last tax notice",
+      "payslip": "Last payslip",
+      "bank_identity": "Bank identity",
+      "address_certificate": "Certificate of address"
+    },
+    "upload": {
+      "from_other_service": "From another service",
+      "from_drive": "From My Drive",
+      "from_my_mobile": "From my smartphone",
+      "from_my_device_scan": "Scan / Import from my smartphone",
+      "from_my_computer": "From my computer",
+      "soon_available": "(available soon)",
+      "scan_a_doc": "Scan a document",
+      "conflict_error": "A file with the same name is already uploaded. Please rename your file.",
+      "error": "An error occured during the upload"
+    },
+    "unlink": {
+      "title": "Detach from your application?",
+      "subtitle": "You'll detach this file from your application.",
+      "text": "The file will not be deleted from your documents",
+      "unlink": "Detach"
+    },
+    "completedStatus": {
+      "main": "%{smart_count} document out of %{total} |||| %{smart_count} documents out of %{total}",
+      "rest": "has been gathered by the application. |||| have been gathered by the application."
+    }
+  },
+  "success": {
+    "title": "[DEMO] Your loan request has been generated",
+    "text": "In a live scenario, the loan request would have been transmitted to your bank. At the moment, an archive containing the request informations has been placed in your documents.",
+    "main_action": "View in my documents",
+    "secondary_action": "Close"
+  },
+  "error": {
+    "title": "Your loan request couldn't be completed",
+    "text": "An error has occured while submittng your loan request.",
+    "main_action": "Try again",
+    "secondary_action": "Give up"
+  }
+}

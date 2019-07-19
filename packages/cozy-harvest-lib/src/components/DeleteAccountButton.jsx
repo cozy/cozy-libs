@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 
-import { Button } from 'cozy-ui/react/Button'
+import { Button } from 'cozy-ui/transpiled/react/Button'
 import { withMutations } from 'cozy-client'
 
 import accountsMutations from '../connections/accounts'
-import withLocales from './hoc/withLocales'
+import withLocales, { i18nContextTypes } from './hoc/withLocales'
+import { getMutationsProptypes } from '../helpers/proptypes'
 
 export class DeleteAccountButton extends Component {
   constructor(props) {
@@ -15,6 +16,14 @@ export class DeleteAccountButton extends Component {
       deleting: false
     }
     this.handleDelete = this.handleDelete.bind(this)
+  }
+
+  componentDidMount() {
+    this._mounted = true
+  }
+
+  componentWillUnmount() {
+    this._mounted = false
   }
 
   async handleDelete() {
@@ -31,7 +40,7 @@ export class DeleteAccountButton extends Component {
         console.error(e)
       }
     } finally {
-      this.setState({ deleting: false })
+      if (this._mounted) this.setState({ deleting: false })
     }
   }
 
@@ -45,7 +54,7 @@ export class DeleteAccountButton extends Component {
         busy={deleting}
         onClick={this.handleDelete}
         label={t('accountForm.disconnect.button')}
-        {...omit(this.props, Object.keys(DeleteAccountButton.propTypes))}
+        {...omit(this.props, Object.keys(excludedButtonProptypes))}
       />
     )
   }
@@ -72,6 +81,12 @@ DeleteAccountButton.propTypes = {
    * Provided by translate HOC
    */
   t: PropTypes.func.isRequired
+}
+
+const excludedButtonProptypes = {
+  ...DeleteAccountButton.propTypes,
+  ...getMutationsProptypes(accountsMutations),
+  ...i18nContextTypes
 }
 
 export default withLocales(

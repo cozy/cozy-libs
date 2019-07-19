@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccountFormError should render 1`] = `
+exports[`TriggerErrorInfo should render 1`] = `
 <Infos
   icon={null}
   isImportant={true}
@@ -13,7 +13,7 @@ exports[`AccountFormError should render 1`] = `
 />
 `;
 
-exports[`AccountFormError should render regular Error 1`] = `
+exports[`TriggerErrorInfo should render regular Error 1`] = `
 <Infos
   icon={null}
   isImportant={true}

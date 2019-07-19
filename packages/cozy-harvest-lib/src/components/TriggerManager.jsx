@@ -158,6 +158,9 @@ export class TriggerManager extends Component {
       error,
       status: ERRORED
     })
+
+    const { onError } = this.props
+    if (typeof onError === 'function') onError(error)
   }
 
   handleTwoFACodeAsked(statusCode) {
@@ -221,10 +224,11 @@ export class TriggerManager extends Component {
    * @param  {Function} successCallback Typically onLoginSuccess or onSuccess
    * @param  {Array} args            Callback arguments
    */
-  handleSuccess(successCallback, args) {
-    this.setState({ status: IDLE })
+  async handleSuccess(successCallback) {
+    const trigger = await this.refetchTrigger()
+    this.setState({ status: IDLE, trigger })
     if (typeof successCallback !== 'function') return
-    successCallback(...args)
+    successCallback(triggers)
   }
 
   /**
@@ -235,18 +239,28 @@ export class TriggerManager extends Component {
   async launch(trigger) {
     const {
       launchTrigger,
+      onLaunch,
       onLoginSuccess,
       onSuccess,
       watchKonnectorJob
     } = this.props
     this.jobWatcher = watchKonnectorJob(await launchTrigger(trigger))
     this.jobWatcher.on('error', this.handleError)
-    this.jobWatcher.on('loginSuccess', () =>
-      this.handleSuccess(onLoginSuccess, [trigger])
-    )
-    this.jobWatcher.on('success', () =>
-      this.handleSuccess(onSuccess, [trigger])
-    )
+    this.jobWatcher.on('loginSuccess', () => this.handleSuccess(onLoginSuccess))
+    this.jobWatcher.on('success', () => this.handleSuccess(onSuccess))
+
+    if (typeof onLaunch === 'function') onLaunch(trigger)
+  }
+
+  async refetchTrigger() {
+    const { fetchTrigger } = this.props
+    const { trigger } = this.state
+    try {
+      return await fetchTrigger(trigger._id)
+    } catch (error) {
+      this.setState({ error, running: false })
+      throw error
+    }
   }
 
   render() {
@@ -390,6 +404,16 @@ TriggerManager.propTypes = {
   //
   // Callbacks
   //
+  /**
+   * Callback invoke when the konnector job fails
+   * @type {Function}
+   */
+  onError: PropTypes.func,
+  /**
+   * Callback invoked when the trigger is launch
+   * @type {Function}
+   */
+  onLaunch: PropTypes.func,
   /**
    * Callback invoked when the trigger has been launched and the login to the
    * remote service has succeeded.

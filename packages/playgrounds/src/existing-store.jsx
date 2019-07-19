@@ -6,6 +6,7 @@ import { Provider } from 'react-redux'
 import App from './common/App'
 import client from './common/client'
 import { LogoutButton, AppList } from './common/components'
+import Nav from './common/Nav'
 
 const reducer = combineReducers({
   cozy: client.reducer()
@@ -17,6 +18,7 @@ class LoggedIn extends React.Component {
   render() {
     return (
       <div>
+        <Nav />
         <AppList />
         <LogoutButton />
       </div>

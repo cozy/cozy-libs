@@ -4,9 +4,11 @@ class Request {
   }
 
   get(id) {
-    return this.stackClient
-      .fetchJSON('GET', `/intents/${id}`)
-      .then(resp => resp.data)
+    return this.stackClient.fetchJSON('GET', `/intents/${id}`).then(resp => {
+      const data = resp.data
+      if (!data._id) data._id = data.id
+      return data
+    })
   }
 
   post(action, type, data, permissions) {

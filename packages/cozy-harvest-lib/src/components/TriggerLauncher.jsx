@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { withMutations } from 'cozy-client'
+import { withClient, withMutations } from 'cozy-client'
 
 import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
-import withKonnectorJob from './hoc/withKonnectorJob'
+import withLocales from './hoc/withLocales'
 
-import {
+import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT,
@@ -36,22 +36,34 @@ import {
 export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
-    this.state = { showTwoFAModal: false }
+    const { trigger } = this.props
+    this.state = { showTwoFAModal: false, trigger }
 
-    this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
-    this.displayTwoFAModal = this.displayTwoFAModal.bind(this)
+    this.handleTwoFA = this.handleTwoFA.bind(this)
+    this.handleError = this.handleError.bind(this)
+    this.handleSuccess = this.handleSuccess.bind(this)
+
+    this.launch = this.launch.bind(this)
   }
 
-  componentDidMount() {
-    this.props.konnectorJob
-      .on(ERROR_EVENT, this.dismissTwoFAModal)
-      .on(SUCCESS_EVENT, this.dismissTwoFAModal)
-      .on(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
-      .on(TWO_FA_MISMATCH_EVENT, this.displayTwoFAModal)
-  }
+  launch() {
+    const { client, onLaunch, trigger } = this.props
+    const konnectorJob = new KonnectorJob(client, trigger)
+    konnectorJob
+      .on(ERROR_EVENT, this.handleError)
+      .on(SUCCESS_EVENT, this.handleSuccess)
+      .on(TWO_FA_REQUEST_EVENT, this.handleTwoFA)
+      .on(TWO_FA_MISMATCH_EVENT, this.handleTwoFA)
 
-  componentWillUnmount() {
-    this.props.konnectorJob.unwatch()
+    this.setState({
+      error: null,
+      konnectorJob,
+      running: true
+    })
+
+    if (typeof onLaunch === 'function') onLaunch(trigger)
+
+    konnectorJob.launch()
   }
 
   dismissTwoFAModal() {
@@ -63,15 +75,53 @@ export class TriggerLauncher extends Component {
     this.setState({ showTwoFAModal: true })
   }
 
-  render() {
-    const { showTwoFAModal } = this.state
-    const { children, konnectorJob, submitting } = this.props
+  async handleError(error) {
+    this.dismissTwoFAModal()
+    this.stopWatchingKonnectorJob()
+    const trigger = await this.refetchTrigger()
+    this.setState({ error, running: false, trigger })
+    const { onError } = this.props
+    if (typeof onError === 'function') onError(error)
+  }
 
+  async handleSuccess() {
+    this.dismissTwoFAModal()
+    this.stopWatchingKonnectorJob()
+    const trigger = await this.refetchTrigger()
+    this.setState({ running: false, trigger })
+    const { onSuccess } = this.props
+    if (typeof onSuccess === 'function') onSuccess(trigger)
+  }
+
+  handleTwoFA() {
+    this.displayTwoFAModal()
+  }
+
+  async refetchTrigger() {
+    const { fetchTrigger, trigger } = this.props
+    try {
+      return await fetchTrigger(trigger._id)
+    } catch (error) {
+      this.setState({ error, running: false })
+      throw error
+    }
+  }
+
+  stopWatchingKonnectorJob() {
+    const { konnectorJob } = this.state
+    konnectorJob.unwatch()
+  }
+
+  render() {
+    const { error, running, showTwoFAModal, trigger } = this.state
+    const { children, konnectorJob, submitting } = this.props
     return (
       <div>
         {children({
-          launch: konnectorJob.launch,
-          running: konnectorJob.isRunning() || submitting
+          error,
+          launch: this.launch,
+          running: !!running || !!submitting,
+          trigger
         })}
         {showTwoFAModal && (
           <TwoFAModal
@@ -91,15 +141,33 @@ TriggerLauncher.propTypes = {
    */
   children: PropTypes.func.isRequired,
   /**
-   * The konnectorJob instance provided by withKonnectorJob
+   * CozyClient instance
    */
-  konnectorJob: PropTypes.object.isRequired,
+  client: PropTypes.object.isRequired,
+  /**
+   * Callback to call when the trigger is launched
+   */
+  onLaunch: PropTypes.func,
+  /**
+   * Callback to call when the konnector job succeeds
+   */
+  onSuccess: PropTypes.func,
+  /**
+   * Callback to call when the konnector job fails
+   */
+  onError: PropTypes.func,
   /**
    * Indicates if trigger is already runnning
    */
-  submitting: PropTypes.bool
+  submitting: PropTypes.bool,
+  /**
+   * Trigger to launch
+   */
+  trigger: PropTypes.object.isRequired
 }
 
-export default withKonnectorJob(
-  withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
+export default withLocales(
+  withClient(
+    withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
+  )
 )

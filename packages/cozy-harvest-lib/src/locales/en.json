@@ -14,6 +14,32 @@
       "button": "Disconnect this account"
     }
   },
+  "card": {
+    "deleteAccount": {
+      "title": "Disconnection",
+      "description": "Your will be disconnected from this account, but imported data will be kept"
+    },
+    "launchTrigger": {
+      "button": {
+        "label": "Run again now"
+      },
+      "error": "An error occured.",
+      "frequency": {
+        "label": "Frequency:",
+        "hourly": "Each hour",
+        "daily": "Once a day",
+        "weekly": "Once a week",
+        "monthly": "Once a month",
+        "undefined": "Manually"
+      },
+      "lastSync": {
+        "label": "Update:",
+        "syncing": "Running…",
+        "unknown": "Unknown",
+        "format": "MMMM D[,] YYYY [at] HH[:]mm"
+      }
+    }
+  },
   "default": {
     "dateFormat": "MM/DD/YYYY",
     "baseDir": "/Administrative"
@@ -215,7 +241,7 @@
   },
   "modal": {
     "konnector": {
-      "title": "Connect your %{name} account",
+      "title": "Edit your %{name} account",
       "error": {
         "title": "Unable to retrieve your account",
         "description": "The account cannot be retrieved (%{message}).",

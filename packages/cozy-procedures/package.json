@@ -1,0 +1,80 @@
+{
+  "name": "cozy-procedures",
+  "version": "0.34.1",
+  "main": "dist/index.js",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-procedures/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "prepare": "yarn build; yarn copy-files",
+    "watch": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --watch",
+    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
+    "copy-files": "cp -rf src/locales dist/",
+    "test": "jest --verbose",
+    "lint": "cd ..; yarn lint packages/cozy-procedures"
+  },
+  "dependencies": {
+    "@babel/runtime": "^7.5.4",
+    "babel-preset-cozy-app": "^1.5.3",
+    "lodash": "4.17.15",
+    "react-jsonschema-form": "1.6.1",
+    "react-redux": "7.1.0",
+    "react-router": "3",
+    "redux": "4.0.1",
+    "redux-logger": "3.0.6",
+    "redux-starter-kit": "0.5.1",
+    "snarkdown": "^1.2.2"
+  },
+  "devDependencies": {
+    "@babel/cli": "7.4.4",
+    "@material-ui/core": "3.9.3",
+    "@material-ui/lab": "^3.0.0-alpha.30",
+    "babel-plugin-inline-react-svg": "^1.1.0",
+    "cozy-ui": "22.4.0",
+    "enzyme-to-json": "3.3.5",
+    "jest": "24.8.0"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "3.9.3",
+    "@material-ui/lab": "^3.0.0-alpha.30",
+    "cozy-doctypes": "^1.49.3",
+    "cozy-ui": "^22.4.0"
+  },
+  "jest": {
+    "setupFiles": [
+      "./jestSetup.js"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "jsx",
+      "json",
+      "styl"
+    ],
+    "moduleNameMapper": {
+      "\\.(png|gif|jpe?g|svg)$": "<rootDir>/test/__mocks__/fileMock.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/",
+      "/transpiled/",
+      "/dist/"
+    ],
+    "moduleDirectories": [
+      "node_modules",
+      "src"
+    ],
+    "transform": {
+      "^.+\\.(js|jsx)?$": "<rootDir>/babel-transformer.js"
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!cozy-ui)"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
+}

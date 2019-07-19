@@ -3,14 +3,15 @@ import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 
 import { isMobile } from 'cozy-device-helper'
-import Button from 'cozy-ui/react/Button'
-import { translate, extend } from 'cozy-ui/react/I18n'
+import Button from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import AccountFields from './AccountFields'
-import AccountFormError from './Error'
+import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
+import withKonnectorLocales from '../hoc/withKonnectorLocales'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -25,13 +26,8 @@ const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
  * @see https://github.com/final-form/react-final-form#getting-started
  */
 export class AccountForm extends PureComponent {
-  constructor(props, context) {
-    super(props, context)
-    const { konnector, lang } = props
-    const { locales } = konnector
-    if (locales && lang) {
-      extend(locales[lang])
-    }
+  constructor(props) {
+    super(props)
 
     this.inputs = {}
     this.inputFocused = null
@@ -48,8 +44,10 @@ export class AccountForm extends PureComponent {
    * @return {Boolean}
    */
   isSubmittable({ dirty, error, initialValues, valid }) {
-    const untouched = initialValues && !dirty
-    return error || (valid && !untouched)
+    const modified = !initialValues || dirty
+    // Here error is not a validation error but an instance of a
+    // KonnectorJobError, so submitting again is possible
+    return modified && (error || valid)
   }
 
   /**
@@ -192,9 +190,17 @@ export class AccountForm extends PureComponent {
             ref={element => {
               container = element
             }}
+            // Hacking manually the style here, waiting for Cozy-UI to remove
+            // top margin on Field's label elements.
+            // See https://github.com/cozy/cozy-libs/issues/629
+            style={{ marginTop: '-1rem' }}
           >
             {error && showError && (
-              <AccountFormError error={error} konnector={konnector} t={t} />
+              <TriggerErrorInfo
+                className="u-mb-1"
+                error={error}
+                konnector={konnector}
+              />
             )}
             <AccountFields
               container={container}
@@ -269,4 +275,4 @@ AccountForm.defaultProps = {
   showError: true
 }
 
-export default translate()(AccountForm)
+export default translate()(withKonnectorLocales(AccountForm))

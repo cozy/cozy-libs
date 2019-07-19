@@ -72,6 +72,55 @@ class CozyFile extends Document {
       }
     }
   }
+  /**
+   * Method to split both the filename and the extension
+   *
+   * @param {Object} file An io.cozy.files
+   * @return {Object}  return an object with {filename: , extension: }
+   */
+  static splitFilename(file) {
+    if (!file.name) throw new Error('file should have a name property ')
+    return file.type === 'directory'
+      ? { filename: file.name, extension: '' }
+      : {
+          extension: file.name.slice(file.name.lastIndexOf('.')),
+          filename: file.name.slice(0, file.name.lastIndexOf('.'))
+        }
+  }
+  /**
+   *
+   * Method to upload a file even if a file with the same name already exists.
+   *
+   * @param {String} path Fullpath for the file ex: path/to/
+   * @param {Object} file HTML Object file
+   * @param {Object} metadata An object containing the wanted metadata to attach
+   */
+  static async overrideFileForPath(path, file, metadata) {
+    if (!path.endsWith('/')) path = path + '/'
+
+    const filesCollection = this.cozyClient.collection('io.cozy.files')
+    try {
+      const existingFile = await filesCollection.statByPath(path + file.name)
+
+      const { id: fileId, dir_id: dirId } = existingFile.data
+      const resp = await filesCollection.updateFile(file, {
+        dirId,
+        fileId,
+        metadata
+      })
+      return resp
+    } catch (error) {
+      if (/Not Found/.test(error)) {
+        const dirId = await filesCollection.ensureDirectoryExists(path)
+        const createdFile = await filesCollection.createFile(file, {
+          dirId,
+          metadata
+        })
+        return createdFile
+      }
+      throw error
+    }
+  }
 }
 
 CozyFile.doctype = 'io.cozy.files'

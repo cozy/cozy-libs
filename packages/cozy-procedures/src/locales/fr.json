@@ -1,0 +1,162 @@
+{
+  "confirm": "Valider",
+  "back": "Retour",
+  "cancel": "Annuler",
+  "overview": {
+    "subtitle": "Complétez les informations suivantes pour demander un crédit",
+    "request": "Crédit demandé",
+    "amount": "Montant",
+    "amountUnit": "%{smart_count} €",
+    "duration": "durée",
+    "durationUnit": "%{smart_count} mois",
+    "documents": "Pièces justificatives",
+    "personalData": "Informations personnelles",
+    "notice": "En soumettant votre demande, la totalité des éléments de ce dossier sera transmise.",
+    "button": "Envoyer mon dossier",
+    "complete": "Compléter",
+    "over": "sur",
+    "titles": {
+      "credit-application": "Dossier de crédit"
+    },
+    "personalDataCompleted": {
+      "I": "Moi, **%{firstname}** **%{lastname}**, atteste être **%{maritalStatus}**, avec **%{numberOfDependants}** enfant(s) à charge.",
+      "work": "Je travaille comme **%{employmentStatus}** en **%{employmentContract}** pour un salaire de **%{salary}€** net/mois après prélévement à la source, avec **%{additionalIncome}€** /mois de revenus complémentaires.",
+      "property": "Je suis **%{propertyStatus}** de mon logement. La somme de mes crédits s’élève à **%{creditsTotalAmount}€** /mois, dont un emprunt immobilier de **%{propertyLoan}€** /mois. Mes charges fixes s'élèvent à **%{fixedCharges}€**.",
+      "address": "Je réside au **%{address}**. Il est possible de me contacter au [**%{phone}**](tel://%{phone}) ou par mail à [**%{email}**](mailto:%{email})."
+    }
+  },
+  "amount": {
+    "title": "Montant du crédit",
+    "subtitle": "Quel montant souhaitez-vous demander ?",
+    "label": "Montant du crédit"
+  },
+  "duration": {
+    "title": "Durée du crédit",
+    "subtitle": "Sur quelle durée souhaitez-vous rembourser le crédit ?",
+    "label": "Durée de remboursement",
+    "reimbursement": "Remboursement",
+    "rate": "Taux annuel Effectif Global",
+    "unit": "€/mois",
+    "month": "mois"
+  },
+  "personalDataForm": {
+    "title": "Informations personnelles",
+    "subtitle": "Complétez les informations suivantes pour finaliser votre dossier",
+    "completedStatus": {
+      "main": "%{smart_count} information sur %{total} |||| %{smart_count} informations sur %{total}",
+      "rest": "a déjà été complétée par l'application. |||| ont déjà été complétées par l'application."
+    },
+    "form": {
+      "lastname": {
+        "title": "Nom"
+      },
+      "firstname": {
+        "title": "Prénom"
+      },
+      "numberOfDependents": {
+        "title": "Nombre de personnes à charge"
+      },
+      "maritalStatus": {
+        "title": "Situation maritale",
+        "single": "Célibataire",
+        "married": "Marié.e",
+        "pacs": "Pacsé.e",
+        "separated": "Séparé.e",
+        "widowed": "Veu.f.ve"
+      },
+      "employmentStatus": {
+        "title": "Statut professionnel",
+        "employee": "Employé.e",
+        "freelance": "Indépendant.e",
+        "unemployed": "Sans emploi",
+        "retired": "Retraité.e"
+      },
+      "employmentContract": {
+        "title": "Type de contrat",
+        "cdd": "CDD",
+        "cdi": "CDI"
+      },
+      "salary": {
+        "title": "Revenu principal (après prélévement à la source)"
+      },
+      "additionalIncome": {
+        "title": "Revenus complémentaires"
+      },
+      "propertyStatus": {
+        "title": "Situation immobilière",
+        "owner": "Propriétaire",
+        "tenant": "Locataire",
+        "housed": "Logé.e",
+        "homeless": "Sans domicile fixe"
+      },
+      "propertyLoan": {
+        "title": "Emprunt immobilier"
+      },
+      "creditsTotalAmount": {
+        "title": "Total des crédits"
+      },
+      "fixedCharges": {
+        "title": "Autres charges fixes"
+      },
+      "address": {
+        "title": "Adresse postale"
+      },
+      "phone": {
+        "title": "Téléphone"
+      },
+      "email": {
+        "title": "Email"
+      },
+      "units": {
+        "eurosNetPerMonth": "€ net par mois",
+        "eurosPerMonth": "€ par mois"
+      }
+    }
+  },
+  "documents": {
+    "title": "Pièces justificatives",
+    "subtitle": "Rassemblez les documents suivants pour compléter votre dossier.",
+    "import": "Importer un document",
+    "importing": "Importation en cours",
+    "labels": {
+      "identity_document": "Pièce d’identité",
+      "tax_notice": "Dernier avis d’imposition",
+      "payslip": "Dernier bulletin de salaire",
+      "bank_identity": "Relevé d’identité Bancaire",
+      "address_certificate": "Justificatif de domicile"
+    },
+    "upload": {
+      "from_other_service": "Depuis un autre service",
+      "from_drive": "Depuis mon drive",
+      "from_my_mobile": "Depuis mon telephone",
+      "from_my_device_scan": "Scan / Import depuis mon téléphone",
+      "from_my_computer": "Depuis mon ordinateur",
+      "soon_available": "(bientôt disponible)",
+      "scan_a_doc": "Scanner un document",
+      "conflict_error": "Un fichier avec le même nom est déjà présent. Veuillez renommer votre fichier avant de recommencer.",
+      "error": "Une erreur est survenue durant l'upload du fichier."
+    },
+    "unlink": {
+      "title": "Détacher du dossier ?",
+      "subtitle": "Vous allez enlever ce document de votre dossier de crédit.",
+      "text": "Il ne sera pas supprimé de votre espace",
+      "unlink": "Détacher"
+    },
+    "completedStatus": {
+      "main": "%{smart_count} document sur %{total} |||| %{smart_count} documents sur %{total}",
+      "rest": "a déjà été rassemblé par l'application. |||| ont déjà été rassemblés par l'application."
+    }
+  },
+  "success": {
+    "title": "[DÉMO] Votre demande de dossier de crédit a été générée",
+    "text": "Dans un vrai cas d’usage, votre demande de dossier de crédit aurait été envoyée à votre banque. En l’état, une archive ZIP récapitulative a été placée dans vos documents.",
+    "main_action": "Voir dans mes documents",
+    "secondary_action": "Fermer"
+  },
+  "error": {
+    "title": "Votre demande de dossier de crédit a échoué",
+    "text": "Une erreur est survenue lors de votre demande de dossier de crédit.",
+    "main_action": "Essayer à nouveau",
+    "secondary_action": "Abandonner"
+  }
+}

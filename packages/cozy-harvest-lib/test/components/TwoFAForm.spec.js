@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { shallow } from 'enzyme'
-import Button from 'cozy-ui/react/Button'
+import Button from 'cozy-ui/transpiled/react/Button'
 
 import { TwoFAForm } from 'components/TwoFAForm'
 

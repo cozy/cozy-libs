@@ -3,6 +3,209 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.56.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.0...cozy-doctypes@1.56.1) (2019-07-19)
+
+**Note:** Version bump only for package cozy-doctypes
+
+
+
+
+
+# [1.56.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.55.2...cozy-doctypes@1.56.0) (2019-07-18)
+
+
+### Features
+
+* **cozy-doctypes:** Add fixed charges to BankAccountStats::sum ([b37cf33](https://github.com/cozy/cozy-libs/commit/b37cf33))
+
+
+
+
+
+## [1.55.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.55.1...cozy-doctypes@1.55.2) (2019-07-18)
+
+**Note:** Version bump only for package cozy-doctypes
+
+
+
+
+
+## [1.55.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.55.0...cozy-doctypes@1.55.1) (2019-07-17)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Fix CozyFiles overrideFileForPath ([4329c4f](https://github.com/cozy/cozy-libs/commit/4329c4f))
+
+
+
+
+
+# [1.55.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.54.0...cozy-doctypes@1.55.0) (2019-07-16)
+
+
+### Features
+
+* Can override a file with the same name ([ff1d440](https://github.com/cozy/cozy-libs/commit/ff1d440))
+
+
+
+
+
+# [1.54.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.2...cozy-doctypes@1.54.0) (2019-07-11)
+
+
+### Features
+
+* **cozy-doctypes:** BankAccountStats::sum returns the currency ([4d6eab9](https://github.com/cozy/cozy-libs/commit/4d6eab9))
+* **cozy-doctypes:** BankAccountStats::sum throws if multiple currencies ([9f1e98d](https://github.com/cozy/cozy-libs/commit/9f1e98d))
+
+
+
+
+
+## [1.53.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.1...cozy-doctypes@1.53.2) (2019-07-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lodash to v4.17.13 [SECURITY] ([#648](https://github.com/cozy/cozy-libs/issues/648)) ([1b36dac](https://github.com/cozy/cozy-libs/commit/1b36dac))
+
+
+
+
+
+## [1.53.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.53.0...cozy-doctypes@1.53.1) (2019-07-10)
+
+
+### Bug Fixes
+
+* **procedure:** TMP has to be removed later ([516a011](https://github.com/cozy/cozy-libs/commit/516a011))
+
+
+
+
+
+# [1.53.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.52.1...cozy-doctypes@1.53.0) (2019-07-10)
+
+
+### Features
+
+* **cozy-doctypes:** Add BankAccountStats::sum method ([056419a](https://github.com/cozy/cozy-libs/commit/056419a))
+
+
+
+
+
+## [1.52.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.52.0...cozy-doctypes@1.52.1) (2019-07-09)
+
+**Note:** Version bump only for package cozy-doctypes
+
+
+
+
+
+# [1.52.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.51.0...cozy-doctypes@1.52.0) (2019-07-09)
+
+
+### Features
+
+* **cozy-doctypes:** Implement Document::create using cozy-client ([d2614f6](https://github.com/cozy/cozy-libs/commit/d2614f6))
+* **cozy-doctypes:** Implement Document::createOrUpdate with cozy-client ([768ae2c](https://github.com/cozy/cozy-libs/commit/768ae2c))
+
+
+
+
+
+# [1.51.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.50.0...cozy-doctypes@1.51.0) (2019-07-08)
+
+
+### Features
+
+* **cozy-doctypes:** Add BankAccountStats model ([4535696](https://github.com/cozy/cozy-libs/commit/4535696))
+
+
+
+
+
+# [1.50.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.3...cozy-doctypes@1.50.0) (2019-07-05)
+
+
+### Features
+
+* **cozy-doctypes:** Implement Document::queryAll with cozy-client ([6d76206](https://github.com/cozy/cozy-libs/commit/6d76206))
+
+
+
+
+
+## [1.49.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.2...cozy-doctypes@1.49.3) (2019-07-02)
+
+
+### Bug Fixes
+
+* **doctypes:** Default getter in getPersonalData ([795c291](https://github.com/cozy/cozy-libs/commit/795c291))
+* **doctypes:** Zero is a valid value in getPersonalData ([5dab116](https://github.com/cozy/cozy-libs/commit/5dab116))
+
+
+
+
+
+## [1.49.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.1...cozy-doctypes@1.49.2) (2019-07-01)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Don't use class property ([#557](https://github.com/cozy/cozy-libs/issues/557)) ([e979fe1](https://github.com/cozy/cozy-libs/commit/e979fe1)), closes [/node.green/#ESNEXT-candidate--stage-3](https://github.com//node.green//issues/ESNEXT-candidate--stage-3) [/node.green/#ES2015](https://github.com//node.green//issues/ES2015)
+
+
+
+
+
+## [1.49.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.49.0...cozy-doctypes@1.49.1) (2019-07-01)
+
+
+### Bug Fixes
+
+* **doctypes:** Add relationships to files in AdministrativeProcedure ([be5b003](https://github.com/cozy/cozy-libs/commit/be5b003))
+
+
+
+
+
+# [1.49.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.48.1...cozy-doctypes@1.49.0) (2019-06-28)
+
+
+### Features
+
+* **doctypes:** Add create and createJson to AdministrativeProcedure ([23c34f2](https://github.com/cozy/cozy-libs/commit/23c34f2))
+
+
+
+
+
+## 1.48.1 (2019-06-28)
+
+**Note:** Version bump only for package cozy-doctypes
+
+
+
+
+
+# [1.48.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.47.0...cozy-doctypes@1.48.0) (2019-06-20)
+
+
+### Features
+
+* **doctypes:** Add address to personal data mapping ([e459e54](https://github.com/cozy/cozy-libs/commit/e459e54))
+* **doctypes:** Add AdministrativeProcedure model ([819b157](https://github.com/cozy/cozy-libs/commit/819b157))
+* **doctypes:** Add getPrimaryAddress to Contact model ([f9cdf2e](https://github.com/cozy/cozy-libs/commit/f9cdf2e))
+* **doctypes:** Add getPrimaryPhone and getPersonalData on Contact #WIP ([ffb09a3](https://github.com/cozy/cozy-libs/commit/ffb09a3))
+
+
+
+
+
 <a name="1.47.0"></a>
 # [1.47.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.46.1...cozy-doctypes@1.47.0) (2019-05-28)
 

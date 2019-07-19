@@ -3,6 +3,439 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.67.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.3...cozy-harvest-lib@0.67.4) (2019-07-19)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
+## [0.67.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.2...cozy-harvest-lib@0.67.3) (2019-07-18)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
+## [0.67.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.1...cozy-harvest-lib@0.67.2) (2019-07-16)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Remove cozy-realtime from dependencies ([f13f9af](https://github.com/cozy/cozy-libs/commit/f13f9af))
+
+
+
+
+
+## [0.67.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.0...cozy-harvest-lib@0.67.1) (2019-07-11)
+
+
+### Bug Fixes
+
+* **deps:** Update dependency lodash to v4.17.13 [SECURITY] ([#648](https://github.com/cozy/cozy-libs/issues/648)) ([1b36dac](https://github.com/cozy/cozy-libs/commit/1b36dac))
+
+
+
+
+
+# [0.67.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.66.1...cozy-harvest-lib@0.67.0) (2019-07-09)
+
+
+### Features
+
+* **harvest:** Do not autofocus identifier field on iPhone ([f6c06c2](https://github.com/cozy/cozy-libs/commit/f6c06c2))
+
+
+
+
+
+## [0.66.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.66.0...cozy-harvest-lib@0.66.1) (2019-07-09)
+
+
+### Bug Fixes
+
+* **harvest:** Manage margin issue ([9bc404f](https://github.com/cozy/cozy-libs/commit/9bc404f))
+
+
+
+
+
+# [0.66.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.65.1...cozy-harvest-lib@0.66.0) (2019-07-03)
+
+
+### Features
+
+* **harvest:** Add locales check after tx pull ☑ ([228853d](https://github.com/cozy/cozy-libs/commit/228853d))
+
+
+
+
+
+## [0.65.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.65.0...cozy-harvest-lib@0.65.1) (2019-07-03)
+
+
+### Bug Fixes
+
+* :bug: Correctly check initialValues if exists ([7bd2ac5](https://github.com/cozy/cozy-libs/commit/7bd2ac5))
+
+
+
+
+
+# [0.65.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.64.0...cozy-harvest-lib@0.65.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Call Delete button callbacks after setState ([53c54e4](https://github.com/cozy/cozy-libs/commit/53c54e4))
+* :bug: Correctly wrap TriggerLaunche into withLocales ([73cc510](https://github.com/cozy/cozy-libs/commit/73cc510))
+* **harvest:** :bug: Omit also i18n props from withLocales ([5f88752](https://github.com/cozy/cozy-libs/commit/5f88752))
+* **harvest:** :nail_care: Better delete button proptypes handling ([3b3d122](https://github.com/cozy/cozy-libs/commit/3b3d122))
+* **harvest:** LoadStart on Android is not dispatched when redirected ([cde2d10](https://github.com/cozy/cozy-libs/commit/cde2d10))
+* **harvest:** NeedsFolderPath should also check folders attribute 📝 ([3f6275f](https://github.com/cozy/cozy-libs/commit/3f6275f))
+* **harvest:** Rely on messageEvent.source for OAuth message 📝 ([8800778](https://github.com/cozy/cozy-libs/commit/8800778))
+* :nail_care: Handle missing password for encrypted placeholder ([84d78bc](https://github.com/cozy/cozy-libs/commit/84d78bc))
+* :pencil2: Missing spread ([7947f43](https://github.com/cozy/cozy-libs/commit/7947f43))
+
+
+### Features
+
+* **harvest:** Add DeleteAccountCard component ✨ ([135c47c](https://github.com/cozy/cozy-libs/commit/135c47c))
+* **harvest:** Add display names to HOC 📝 ([5656797](https://github.com/cozy/cozy-libs/commit/5656797))
+* **harvest:** Import tranpiled Cozy-UI components ⚙ ([8c1f50c](https://github.com/cozy/cozy-libs/commit/8c1f50c))
+* **harvest:** Improve margin bottom in KonnectorModal 📝 ([b20836d](https://github.com/cozy/cozy-libs/commit/b20836d))
+* **harvest:** Make HandleOAuthResponse return boolean value ✨ ([f800811](https://github.com/cozy/cozy-libs/commit/f800811))
+* **harvest:** Make OAuthWindow and Popup mobile-compatible ✨ ([98f2664](https://github.com/cozy/cozy-libs/commit/98f2664))
+* **harvest:** Prepare checkOAuth function in helper 📝 ([b8b20f7](https://github.com/cozy/cozy-libs/commit/b8b20f7))
+* **harvest:** Prepare OAuth helper 📝 ([ddbe986](https://github.com/cozy/cozy-libs/commit/ddbe986))
+* **harvest:** Prepare OAuthWindow component 📝 ([8acec47](https://github.com/cozy/cozy-libs/commit/8acec47))
+* **harvest:** Prepare Popup component 📝 ([96a6eeb](https://github.com/cozy/cozy-libs/commit/96a6eeb))
+* **harvest:** Prepare prepareOAuth function in helper 📝 ([7e9c4a6](https://github.com/cozy/cozy-libs/commit/7e9c4a6))
+* **harvest:** Prepare terminateOAuth function in helper 📝 ([b6143fe](https://github.com/cozy/cozy-libs/commit/b6143fe))
+* **harvest:** Trigger build including recent translations, second try ⚙ ([c803966](https://github.com/cozy/cozy-libs/commit/c803966))
+* **harvest:** Trigger manual release to get last translations 🌐 ([8bc3f30](https://github.com/cozy/cozy-libs/commit/8bc3f30))
+* **harvest:** Update OAuthForm, move it into TriggerManager ✨ ([ac9d402](https://github.com/cozy/cozy-libs/commit/ac9d402))
+
+
+
+
+
+# [0.64.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.63.0...cozy-harvest-lib@0.64.0) (2019-07-03)
+
+
+### Bug Fixes
+
+* **harvest:** When refetching, trigger must be retrieved from state ([8e0eb4b](https://github.com/cozy/cozy-libs/commit/8e0eb4b))
+
+
+### Features
+
+* **harvest:** Decrease margin between items in LaunchTriggerCard 💄 ([ec117cc](https://github.com/cozy/cozy-libs/commit/ec117cc))
+
+
+
+
+
+# [0.63.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.3...cozy-harvest-lib@0.63.0) (2019-07-01)
+
+
+### Features
+
+* **harvest:** Add a way to disable the DeleteButtonCard ✨ ([226edd9](https://github.com/cozy/cozy-libs/commit/226edd9))
+* **harvest:** Add prop to make LaunchTriggerCard submitting 📝 ([1362a04](https://github.com/cozy/cozy-libs/commit/1362a04))
+* **harvest:** Do not render field as errored when disabled 📝 ([6cdaec6](https://github.com/cozy/cozy-libs/commit/6cdaec6))
+* **harvest:** Give callbacks to TriggerManager 📝 ([15474ec](https://github.com/cozy/cozy-libs/commit/15474ec))
+* **havest:** LaunchTriggerCard is now a component 📝 ([52d7262](https://github.com/cozy/cozy-libs/commit/52d7262))
+
+
+
+
+
+## [0.62.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.2...cozy-harvest-lib@0.62.3) (2019-07-01)
+
+
+### Bug Fixes
+
+* **harvest:** Fix undefined proptypes when transpiled 🚑 ([4cefcfa](https://github.com/cozy/cozy-libs/commit/4cefcfa))
+
+
+
+
+
+## [0.62.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.1...cozy-harvest-lib@0.62.2) (2019-06-28)
+
+
+### Bug Fixes
+
+* **harvest:** Fix TriggerErrorInfo bottom margin 🚑 ([9eec92b](https://github.com/cozy/cozy-libs/commit/9eec92b))
+
+
+
+
+
+## [0.62.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.62.0...cozy-harvest-lib@0.62.1) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Disable button when editing if an error exists 🚑 ([584deb7](https://github.com/cozy/cozy-libs/commit/584deb7))
+
+
+
+
+
+# [0.62.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.4...cozy-harvest-lib@0.62.0) (2019-06-27)
+
+
+### Features
+
+* **harvest:** Do not show error when job running on KonnectorModal ✨ ([355fc37](https://github.com/cozy/cozy-libs/commit/355fc37))
+* **harvest:** Give callbacks to TriggerLauncher ✨ ([9705a42](https://github.com/cozy/cozy-libs/commit/9705a42))
+* **harvest:** Let KonnectorModal display trigger error 📝 ([2591ddd](https://github.com/cozy/cozy-libs/commit/2591ddd))
+* **harvest:** Pass props from LaunchTriggerCard to TriggerLauncher 📝 ([6fd3ce5](https://github.com/cozy/cozy-libs/commit/6fd3ce5))
+
+
+
+
+
+## [0.61.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.3...cozy-harvest-lib@0.61.4) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Fix style prop to not make React crash 🚑 ([6599d29](https://github.com/cozy/cozy-libs/commit/6599d29))
+
+
+
+
+
+## [0.61.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.2...cozy-harvest-lib@0.61.3) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Fix locale 🌐 ([67ef244](https://github.com/cozy/cozy-libs/commit/67ef244))
+
+
+
+
+
+## [0.61.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.1...cozy-harvest-lib@0.61.2) (2019-06-27)
+
+
+### Bug Fixes
+
+* **harvest:** Konnector modal title 🌐 ([1f672d4](https://github.com/cozy/cozy-libs/commit/1f672d4))
+
+
+
+
+
+## [0.61.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.61.0...cozy-harvest-lib@0.61.1) (2019-06-27)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
+# [0.61.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.60.0...cozy-harvest-lib@0.61.0) (2019-06-26)
+
+
+### Features
+
+* **harvest:** Add frequency in LaunchTriggerCard ✨ ([0e634fd](https://github.com/cozy/cozy-libs/commit/0e634fd))
+* **harvest:** Add last success date in LaunchTriggerCard ✨ ([9f4dcf7](https://github.com/cozy/cozy-libs/commit/9f4dcf7))
+* **harvest:** Arrange desktop flex layout for LaunchTriggerCard 💄 ([95b53b6](https://github.com/cozy/cozy-libs/commit/95b53b6))
+* **harvest:** Make LaunchTriggerCard responsive 📱 ([3c54292](https://github.com/cozy/cozy-libs/commit/3c54292))
+* **harvest:** Prepare frequency methods 📝 ([34c272f](https://github.com/cozy/cozy-libs/commit/34c272f))
+* **harvest:** Prepare last success date methods 📝 ([110b6c2](https://github.com/cozy/cozy-libs/commit/110b6c2))
+* **harvest:** Refetch trigger after success or error in Launcher 📝 ([0073188](https://github.com/cozy/cozy-libs/commit/0073188))
+
+
+
+
+
+# [0.60.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.59.0...cozy-harvest-lib@0.60.0) (2019-06-21)
+
+
+### Features
+
+* **harvest:** Trigger manual release to get last translations 🌐 ([adb6634](https://github.com/cozy/cozy-libs/commit/adb6634))
+
+
+
+
+
+# [0.59.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.58.0...cozy-harvest-lib@0.59.0) (2019-06-20)
+
+
+### Features
+
+* **harvest:** Fetch job right after subscribing realtime 📝 ([25b894d](https://github.com/cozy/cozy-libs/commit/25b894d))
+
+
+
+
+
+# [0.58.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.3...cozy-harvest-lib@0.58.0) (2019-06-20)
+
+
+### Features
+
+* **harvest:** Add LaunchTriggerCard ✨ ([d9fdf4f](https://github.com/cozy/cozy-libs/commit/d9fdf4f))
+
+
+
+
+
+## [0.57.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.2...cozy-harvest-lib@0.57.3) (2019-06-20)
+
+
+### Bug Fixes
+
+* **harvest:** Make TriggerLauncher detects success again 🚑 ([d2487ee](https://github.com/cozy/cozy-libs/commit/d2487ee))
+
+
+
+
+
+## [0.57.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.1...cozy-harvest-lib@0.57.2) (2019-06-20)
+
+
+### Bug Fixes
+
+* :pencil2: Missing spread ([7947f43](https://github.com/cozy/cozy-libs/commit/7947f43))
+
+
+
+
+
+## [0.57.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.57.0...cozy-harvest-lib@0.57.1) (2019-06-20)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Omit also i18n props from withLocales ([5f88752](https://github.com/cozy/cozy-libs/commit/5f88752))
+
+
+
+
+
+# [0.57.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.56.0...cozy-harvest-lib@0.57.0) (2019-06-18)
+
+
+### Features
+
+* **harvest:** Improve margin bottom in KonnectorModal 📝 ([b20836d](https://github.com/cozy/cozy-libs/commit/b20836d))
+
+
+
+
+
+# [0.56.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.55.0...cozy-harvest-lib@0.56.0) (2019-06-18)
+
+
+### Features
+
+* **harvest:** Add display names to HOC 📝 ([5656797](https://github.com/cozy/cozy-libs/commit/5656797))
+
+
+
+
+
+# [0.55.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.54.1...cozy-harvest-lib@0.55.0) (2019-06-17)
+
+
+### Features
+
+* **harvest:** Make HandleOAuthResponse return boolean value ✨ ([f800811](https://github.com/cozy/cozy-libs/commit/f800811))
+
+
+
+
+
+## [0.54.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.54.0...cozy-harvest-lib@0.54.1) (2019-06-17)
+
+
+### Bug Fixes
+
+* **harvest:** :nail_care: Better delete button proptypes handling ([3b3d122](https://github.com/cozy/cozy-libs/commit/3b3d122))
+* :bug: Correctly wrap TriggerLaunche into withLocales ([73cc510](https://github.com/cozy/cozy-libs/commit/73cc510))
+
+
+
+
+
+# [0.54.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.53.1...cozy-harvest-lib@0.54.0) (2019-06-17)
+
+
+### Features
+
+* **harvest:** Trigger manual release to get last translations 🌐 ([8bc3f30](https://github.com/cozy/cozy-libs/commit/8bc3f30))
+
+
+
+
+
+## [0.53.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.53.0...cozy-harvest-lib@0.53.1) (2019-06-17)
+
+
+### Bug Fixes
+
+* **harvest:** :bug: Call Delete button callbacks after setState ([53c54e4](https://github.com/cozy/cozy-libs/commit/53c54e4))
+
+
+
+
+
+# [0.53.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.52.0...cozy-harvest-lib@0.53.0) (2019-06-14)
+
+
+### Features
+
+* **harvest:** Import tranpiled Cozy-UI components ⚙ ([8c1f50c](https://github.com/cozy/cozy-libs/commit/8c1f50c))
+
+
+
+
+
+# [0.52.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.51.1...cozy-harvest-lib@0.52.0) (2019-06-14)
+
+
+### Features
+
+* **harvest:** Trigger build including recent translations, second try ⚙ ([c803966](https://github.com/cozy/cozy-libs/commit/c803966))
+
+
+
+
+
+## [0.51.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.51.0...cozy-harvest-lib@0.51.1) (2019-06-14)
+
+
+### Bug Fixes
+
+* **harvest:** Rely on messageEvent.source for OAuth message 📝 ([8800778](https://github.com/cozy/cozy-libs/commit/8800778))
+
+
+
+
+
+# [0.51.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.50.0...cozy-harvest-lib@0.51.0) (2019-06-11)
+
+
+### Features
+
+* **harvest:** Add DeleteAccountCard component ✨ ([135c47c](https://github.com/cozy/cozy-libs/commit/135c47c))
+
+
+
+
+
 <a name="0.50.0"></a>
 # [0.50.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.49.6...cozy-harvest-lib@0.50.0) (2019-06-07)
 
