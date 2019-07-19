@@ -34,7 +34,7 @@ class BankAccountStats extends Document {
     const summedStats = properties.reduce((sums, property) => {
       sums[property] = sumBy(
         accountsStats,
-        accountStats => accountStats[property]
+        accountStats => accountStats[property] || 0
       )
 
       return sums
