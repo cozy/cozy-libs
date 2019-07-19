@@ -11,8 +11,8 @@ import 'cozy-ui/dist/cozy-ui.min.css'
 import injectProcedureRoutes from '../../cozy-procedures/dist'
 import { PageLayout, PageFooter, PageContent } from 'cozy-ui/transpiled/react'
 
-const padded = Component => ({ children }) => {
-  const Wrapped = (
+const padded = Component => {
+  const Wrapped = ({ children }) => (
     <Component>
       <div className="u-m-1">{children}</div>
     </Component>
