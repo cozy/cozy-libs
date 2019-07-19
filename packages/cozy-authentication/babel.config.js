@@ -1,12 +1,7 @@
 module.exports = {
   env: {
     transpilation: {
-      presets: [
-        [
-          'cozy-app',
-          { lib: true }
-        ]
-      ],
+      presets: [['cozy-app', { lib: true }]],
       plugins: [
         [
           'css-modules-transform',
