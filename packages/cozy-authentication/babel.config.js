@@ -20,7 +20,7 @@ module.exports = {
       ]
     },
     test: {
-      presets: [['cozy-app', { transformRuntime: { helpers: true } }]]
+      presets: ['cozy-app']
     }
   },
   ignore: ['*.spec.js', '*.spec.jsx']

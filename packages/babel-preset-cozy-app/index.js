@@ -49,7 +49,7 @@ const optionConfigs = {
   },
   transformRuntime: {
     default: {
-      helpers: false,
+      helpers: true,
       regenerator: true
     },
     validator: either(isOfType('object'), isFalse)
@@ -75,9 +75,6 @@ const mkConfig = (api, options) => {
         // Libraries are shipped with es6 imports for downstream bundler
         // to be able to prune unused modules away
         modules: false
-      },
-      transformRuntime: {
-        helpers: true
       }
     })
   }
