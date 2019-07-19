@@ -69,6 +69,19 @@ const mkConfig = (api, options) => {
     throw e
   }
 
+  if (presetOptions.lib) {
+    merge(presetOptions, {
+      presetEnv: {
+        // Libraries are shipped with es6 imports for downstream bundler
+        // to be able to prune unused modules away
+        modules: false
+      },
+      transformRuntime: {
+        helpers: true
+      }
+    })
+  }
+
   const {
     node,
     react,
