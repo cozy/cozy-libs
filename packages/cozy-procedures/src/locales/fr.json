@@ -108,8 +108,8 @@
         "title": "Email"
       },
       "units": {
-        "eurosNetPerMonth": "€ net par mois",
-        "eurosPerMonth": "€ par mois"
+        "eurosNetPerMonth": "€ net/mois",
+        "eurosPerMonth": "€/mois"
       }
     }
   },
