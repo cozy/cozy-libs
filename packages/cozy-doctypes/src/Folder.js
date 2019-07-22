@@ -27,6 +27,39 @@ class CozyFolder extends CozyFile {
   }
 
   /**
+   * Returns a "Magic Folder", given its id
+   * @param  {String} id Magic Folder id. `CozyFolder.magicFolders` contains the
+   * ids of folders that can be magic folders.
+   * @param {String} path Default path to use if magic folder does not exist
+   * @return {Object} Folder document
+   */
+  static async ensureMagicFolder(id, path) {
+    const magicFolderDocument = {
+      _type: Application.doctype,
+      _id: id
+    }
+    const folders = await CozyFolder.getReferencedFolders(magicFolderDocument)
+    const existingMagicFolder = folders.length ? folders[0] : null
+
+    if (existingMagicFolder) return existingMagicFolder
+
+    const magicFoldersValues = Object.values(CozyFolder.magicFolders)
+    if (!magicFoldersValues.includes(id)) {
+      throw new Error(
+        `Cannot create Magic folder with id ${id}. Allowed values are ${magicFoldersValues.join(
+          ', '
+        )}.`
+      )
+    }
+
+    if (!path) {
+      throw new Error('Magic folder default path must be defined')
+    }
+
+    return CozyFolder.createFolderWithReference(path, magicFolderDocument)
+  }
+
+  /**
    * Returns an array of folder referenced by the given document
    * @param  {Object}  document  Document to get references from
    * @return {Array}             Array of folders referenced with the given
@@ -78,7 +111,7 @@ class CozyFolder extends CozyFile {
 /**
  * References used by the Cozy platform and apps for specific folders.
  */
-CozyFolder.refs = {
+CozyFolder.magicFolders = {
   ADMINISTRATIVE: `${Application.doctype}/administrative`,
   PHOTOS: `${Application.doctype}/photos`,
   PHOTOS_BACKUP: `${Application.doctype}/photos/mobile`,

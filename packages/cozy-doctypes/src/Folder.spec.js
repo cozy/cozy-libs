@@ -11,12 +11,78 @@ describe('Folder model', () => {
     jest.restoreAllMocks()
   })
 
-  it('should expose reference folders', () => {
-    expect(CozyFolder.refs).toBeDefined()
-    expect(CozyFolder.refs.ADMINISTRATIVE).toBeDefined()
-    expect(CozyFolder.refs.PHOTOS).toBeDefined()
-    expect(CozyFolder.refs.PHOTOS_UPLOAD).toBeDefined()
-    expect(CozyFolder.refs.PHOTOS_BACKUP).toBeDefined()
+  it('should expose magic folders', () => {
+    expect(CozyFolder.magicFolders).toBeDefined()
+    expect(CozyFolder.magicFolders.ADMINISTRATIVE).toBeDefined()
+    expect(CozyFolder.magicFolders.PHOTOS).toBeDefined()
+    expect(CozyFolder.magicFolders.PHOTOS_UPLOAD).toBeDefined()
+    expect(CozyFolder.magicFolders.PHOTOS_BACKUP).toBeDefined()
+  })
+
+  describe('ensureMagicFolder', () => {
+    beforeEach(() => {
+      jest.spyOn(CozyFolder, 'getReferencedFolders').mockResolvedValue([])
+    })
+
+    it('should return first existing magic folder', async () => {
+      const existingMagicFolders = [
+        {
+          attributes: {
+            path: '/Administrative'
+          }
+        },
+        {
+          attributes: {
+            path: '/Administrative2'
+          }
+        }
+      ]
+
+      jest
+        .spyOn(CozyFolder, 'getReferencedFolders')
+        .mockResolvedValue(existingMagicFolders)
+
+      const result = await CozyFolder.ensureMagicFolder(
+        CozyFolder.magicFolders.ADMINISTRATIVE
+      )
+      expect(result).toEqual(existingMagicFolders[0])
+    })
+
+    it('should throw if magic folder id is invalid', async () => {
+      await expect(
+        CozyFolder.ensureMagicFolder('io.cozy.apps/unexpected/magic/folder')
+      ).rejects.toThrow()
+    })
+
+    it('should throw if path is missing', async () => {
+      await expect(
+        CozyFolder.ensureMagicFolder(CozyFolder.magicFolders.ADMINISTRATIVE)
+      ).rejects.toThrow()
+    })
+
+    it('should create magic folder', async () => {
+      const expectedCreatedFolder = {
+        attributes: {
+          path: '/Administrative'
+        }
+      }
+
+      jest
+        .spyOn(CozyFolder, 'createFolderWithReference')
+        .mockResolvedValue(expectedCreatedFolder)
+
+      const result = await CozyFolder.ensureMagicFolder(
+        CozyFolder.magicFolders.ADMINISTRATIVE,
+        '/Administrative'
+      )
+
+      expect(CozyFolder.createFolderWithReference).toHaveBeenCalledWith(
+        '/Administrative',
+        { _id: CozyFolder.magicFolders.ADMINISTRATIVE, _type: 'io.cozy.apps' }
+      )
+
+      expect(result).toEqual(expectedCreatedFolder)
+    })
   })
 
   describe('getReferencedFolders', () => {
