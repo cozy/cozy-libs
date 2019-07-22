@@ -22,6 +22,10 @@ import DocumentsFullyCompleted from './DocumentsFullyCompleted'
 import PersonalDataFullyCompleted from './PersonalDataFullyCompleted'
 import PersonalDataNotFullyCompleted from './PersonalDataNotFullyCompleted'
 import ProcedureComponentsPropType from '../ProcedureComponentsPropType'
+import {
+  createFileWithContent,
+  fetchTransactionsHistoryContent
+} from './helpers'
 
 class Overview extends React.Component {
   realtime = null
@@ -52,19 +56,22 @@ class Overview extends React.Component {
     }
   }
 
-  handleZipChanged = jsonFile => async job => {
+  handleZipChanged = jsonFiles => async job => {
     const { client } = this.props
     if (job.state === 'done') {
       this.setState({
         processing: false,
         success: true
       })
-      client
-        .collection('io.cozy.files')
-        .deleteFilePermanently(jsonFile.id)
-        .catch(err => {
-          console.error('Error while trying to delete the json file: ', err)
-        })
+
+      jsonFiles.forEach(jsonFile => {
+        client
+          .collection('io.cozy.files')
+          .deleteFilePermanently(jsonFile.id)
+          .catch(err => {
+            console.error('Error while trying to delete the json file: ', err)
+          })
+      })
     } else if (job.state === 'errored') {
       this.setState({
         processing: false,
@@ -88,12 +95,15 @@ class Overview extends React.Component {
             console.error('Error while trying to delete the zip file: ', err)
           })
       })
-      client
-        .collection('io.cozy.files')
-        .deleteFilePermanently(jsonFile)
-        .catch(err => {
-          console.error('Error while trying to delete the json file: ', err)
-        })
+
+      jsonFiles.forEach(jsonFile => {
+        client
+          .collection('io.cozy.files')
+          .deleteFilePermanently(jsonFile)
+          .catch(err => {
+            console.error('Error while trying to delete the json file: ', err)
+          })
+      })
     }
   }
 
@@ -104,38 +114,31 @@ class Overview extends React.Component {
       .ensureDirectoryExists(template.pathToSave)
   }
 
-  /**
-   * createJsonFile - upload a json file containing the given data
-   *
-   * @param {string} filename - The json file name
-   * @param {string} destinationId - The id of the destination directory
-   * @param {string} content - The file content
-   * @return {object} Information about the jsonFile (id and name)
-   */
-  createJsonFile = async (filename, destinationId, content) => {
-    const { client } = this.props
-    const file = new File([content], filename)
-    const resp = await client
-      .collection('io.cozy.files')
-      .createFile(file, { dirId: destinationId })
-
-    return resp.data
-  }
-
   createProcedureJsonFile = (
     filename,
     destinationId,
     administrativeProcedure
   ) => {
+    const { client } = this.props
     const jsonData = AdministrativeProcedure.createJson(administrativeProcedure)
 
-    return this.createJsonFile(filename, destinationId, jsonData)
+    return createFileWithContent(client, filename, destinationId, jsonData)
   }
 
-  getFilesForZip = (jsonFile, documentsData) => {
-    const files = {
-      [jsonFile.name]: jsonFile.id
-    }
+  createTransactionsHistoryJsonFile = async (filename, destinationId) => {
+    const { client } = this.props
+    const content = await fetchTransactionsHistoryContent(client)
+
+    return createFileWithContent(client, filename, destinationId, content)
+  }
+
+  getFilesForZip = (jsonFiles, documentsData) => {
+    const files = jsonFiles.reduce((acc, file) => {
+      acc[file.name] = file.id
+
+      return acc
+    }, {})
+
     Object.keys(documentsData).forEach(categoryName => {
       const documentCategory = documentsData[categoryName]
       documentCategory.files.forEach(f => {
@@ -160,7 +163,8 @@ class Overview extends React.Component {
       this.destinationFolderId = await this.getDestinationId(template)
       const datetime = new Date().toISOString()
       const baseFilename = `${template.type}-${datetime}`
-      const jsonFilename = `${baseFilename}.json`
+      const procedureJsonFilename = `${baseFilename}.json`
+      const historyJsonFilename = `transactions-history-${datetime}.json`
 
       const administrativeProcedure = AdministrativeProcedure.create(
         data,
@@ -171,12 +175,21 @@ class Overview extends React.Component {
         administrativeProcedure
       )
 
-      const jsonFile = await this.createProcedureJsonFile(
-        jsonFilename,
+      const procedureJsonFile = await this.createProcedureJsonFile(
+        procedureJsonFilename,
         this.destinationFolderId,
         response.data
       )
-      const files = this.getFilesForZip(jsonFile, data.documentsData)
+
+      const historyJsonFile = await this.createTransactionsHistoryJsonFile(
+        historyJsonFilename,
+        this.destinationFolderId
+      )
+
+      const files = this.getFilesForZip(
+        [procedureJsonFile, historyJsonFile],
+        data.documentsData
+      )
       const params = {
         files,
         dir_id: this.destinationFolderId,
@@ -191,7 +204,7 @@ class Overview extends React.Component {
         'updated',
         'io.cozy.jobs',
         zipResp.data.id,
-        this.handleZipChanged(jsonFile)
+        this.handleZipChanged([procedureJsonFile, historyJsonFile])
       )
     } catch (e) {
       console.error(e)
