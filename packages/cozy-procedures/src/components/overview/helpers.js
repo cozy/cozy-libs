@@ -26,40 +26,29 @@ export const createFileWithContent = async (
   return resp.data
 }
 
-// TODO extract this to cozy-client
-const queryAll = async (client, doctype, selector) => {
-  const query = client.find(doctype).where(selector)
-
-  const documents = []
-  let resp = { next: true }
-
-  while (resp && resp.next) {
-    resp = await client.query(query.offset(documents.length))
-    documents.push(...resp.data)
-  }
-
-  return documents
-}
-
-export const fetchCheckingsLikeAccounts = async client => {
-  return queryAll(client, 'io.cozy.bank.accounts', {
+export const fetchCheckingsLikeAccounts = client => {
+  const query = client.find('io.cozy.bank.accounts').where({
     type: {
       $in: ['Checkings', 'Bank', 'Cash', 'Deposit']
     }
   })
+
+  return client.queryAll(query)
 }
 
 export const fetchTransactionsHistory = async (client, accountsIds) => {
   const today = startOfMonth(new Date())
   const threeMonthsBefore = startOfMonth(subMonths(today, 3))
 
-  return queryAll(client, 'io.cozy.bank.operations', {
+  const query = client.find('io.cozy.bank.operations').where({
     account: { $in: accountsIds },
     date: {
       $lt: formatDate(today, 'YYYY-MM-DD'),
       $gt: formatDate(threeMonthsBefore, 'YYYY-MM-DD')
     }
   })
+
+  return client.queryAll(query)
 }
 
 export const fetchTransactionsHistoryContent = async client => {

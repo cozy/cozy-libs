@@ -4,17 +4,24 @@ import {
   fetchTransactionsHistory
 } from './helpers'
 import MockDate from 'mockdate'
+import CozyClient from 'cozy-client'
+
+jest.mock('cozy-client')
+
+let client
+beforeEach(() => {
+  client = new CozyClient()
+})
 
 afterEach(() => {
+  jest.restoreAllMocks()
   MockDate.reset()
 })
 
 describe('createFileWithContent', () => {
   it('should create a file with the good content at the good place', async () => {
     const createFile = jest.fn(() => ({ data: {} }))
-    const client = {
-      collection: jest.fn(() => ({ createFile }))
-    }
+    jest.spyOn(client, 'collection').mockReturnValue({ createFile })
 
     await createFileWithContent(client, 'filename.json', 'dest', 'content')
 
@@ -25,14 +32,9 @@ describe('createFileWithContent', () => {
 describe('fetchCheckingsLikeAccounts', () => {
   it('should return the accounts considered as checkings type', async () => {
     const where = jest.fn(() => ({ offset: jest.fn() }))
-    const query = jest.fn().mockResolvedValue({
-      next: false,
-      data: [{ _id: '1' }, { _id: '2' }]
+    jest.spyOn(client, 'find').mockReturnValue({
+      where
     })
-    const client = {
-      find: jest.fn(() => ({ where })),
-      query
-    }
     const checkingsTypes = ['Checkings', 'Bank', 'Cash', 'Deposit']
 
     await fetchCheckingsLikeAccounts(client)
@@ -50,14 +52,9 @@ describe('fetchTransactionsHistory', () => {
     MockDate.set(new Date(2019, 6, 22))
 
     const where = jest.fn(() => ({ offset: jest.fn() }))
-    const query = jest.fn().mockResolvedValue({
-      next: false,
-      data: [{ _id: '1' }, { _id: '2' }]
+    jest.spyOn(client, 'find').mockReturnValue({
+      where
     })
-    const client = {
-      find: jest.fn(() => ({ where })),
-      query
-    }
     const accountsIds = ['1', '2']
 
     await fetchTransactionsHistory(client, accountsIds)
