@@ -175,16 +175,29 @@ describe('File model', () => {
   })
 
   describe('splitFilename', () => {
-    it('should return an extension and a filename from a file', () => {
-      const file = {
-        name: 'foo.bar'
-      }
-      const result = CozyFile.splitFilename(file)
-      expect(result).toEqual({
-        filename: 'foo',
-        extension: '.bar'
+    const name = ({ filename, extension }) => filename + extension
+    const file = expectation => ({ type: 'file', name: name(expectation) })
+    const { stringify } = JSON
+
+    const scenarios = [
+      { filename: 'file', extension: '.ext' },
+      // FIXME: { filename: 'file', extension: '' },
+      { filename: 'file.html', extension: '.ejs' },
+      { filename: 'file', extension: '.' },
+      { filename: 'file.', extension: '.' },
+      { filename: 'file.', extension: '.ext' },
+      // FIXME: { filename: '.file', extension: '' },
+      { filename: '.file', extension: '.ext' }
+    ]
+
+    for (const expectation of scenarios) {
+      it(`splits ${stringify(name(expectation))} into ${stringify(
+        expectation
+      )}`, () => {
+        expect(CozyFile.splitFilename(file(expectation))).toEqual(expectation)
       })
-    })
+    }
+
     it('should throw an error if the file is not correct', () => {
       const file = {}
 
