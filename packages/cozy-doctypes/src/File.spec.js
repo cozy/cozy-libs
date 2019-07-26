@@ -181,12 +181,12 @@ describe('File model', () => {
 
     const scenarios = [
       { filename: 'file', extension: '.ext' },
-      // FIXME: { filename: 'file', extension: '' },
+      { filename: 'file', extension: '' },
       { filename: 'file.html', extension: '.ejs' },
       { filename: 'file', extension: '.' },
       { filename: 'file.', extension: '.' },
       { filename: 'file.', extension: '.ext' },
-      // FIXME: { filename: '.file', extension: '' },
+      { filename: '.file', extension: '' },
       { filename: '.file', extension: '.ext' }
     ]
 

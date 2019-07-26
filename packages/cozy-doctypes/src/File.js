@@ -2,6 +2,8 @@ const trimEnd = require('lodash/trimEnd')
 
 const Document = require('./Document')
 
+const FILENAME_WITH_EXTENSION_REGEX = /(.+)(\..*)$/
+
 /**
  * Class representing the file model.
  * @extends Document
@@ -80,12 +82,14 @@ class CozyFile extends Document {
    */
   static splitFilename(file) {
     if (!file.name) throw new Error('file should have a name property ')
-    return file.type === 'directory'
-      ? { filename: file.name, extension: '' }
-      : {
-          extension: file.name.slice(file.name.lastIndexOf('.')),
-          filename: file.name.slice(0, file.name.lastIndexOf('.'))
-        }
+
+    if (file.type === 'file') {
+      const match = file.name.match(FILENAME_WITH_EXTENSION_REGEX)
+      if (match) {
+        return { filename: match[1], extension: match[2] }
+      }
+    }
+    return { filename: file.name, extension: '' }
   }
   /**
    *
