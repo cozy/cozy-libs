@@ -83,7 +83,7 @@ describe('Konnectors Helpers', () => {
     it('should build path from konnector with defaultPath', () => {
       const konnector = {
         ...fixtures.konnector,
-        folders: [{ defaultPath: '/Custom folder/$konnector' }]
+        folders: [{ defaultDir: '/Custom folder/$konnector' }]
       }
       expect(
         buildFolderPath(konnector, fixtures.account, { photos: 'Photos' })
@@ -93,27 +93,17 @@ describe('Konnectors Helpers', () => {
     it('should build path from konnector with defaultDir and defaultPath', () => {
       const konnector = {
         ...fixtures.konnector,
-        folders: [
-          { defaultDir: '$photos', defaultPath: '/Custom folder/$konnector' }
-        ]
+        folders: [{ defaultDir: '$photos/Custom folder/$konnector' }]
       }
       expect(
         buildFolderPath(konnector, fixtures.account, { photos: 'Photos' })
       ).toEqual('/Photos/Custom folder/Test Konnector')
     })
 
-    it('should throw error for unexpected defaultDir', () => {
-      const konnector = {
-        ...fixtures.konnector,
-        folders: [{ defaultDir: '$stuff' }]
-      }
-      expect(() => buildFolderPath(konnector, fixtures.account)).toThrow()
-    })
-
     it('should add leading slash to path', () => {
       const konnector = {
         ...fixtures.konnector,
-        folders: [{ defaultPath: 'custom folder' }]
+        folders: [{ defaultDir: 'custom folder' }]
       }
       expect(buildFolderPath(konnector, fixtures.account)).toEqual(
         '/Administrative/custom folder'
@@ -123,7 +113,7 @@ describe('Konnectors Helpers', () => {
     it('should remove trailing slash from path', () => {
       const konnector = {
         ...fixtures.konnector,
-        folders: [{ defaultPath: 'custom folder/' }]
+        folders: [{ defaultDir: 'custom folder/' }]
       }
       expect(buildFolderPath(konnector, fixtures.account)).toEqual(
         '/Administrative/custom folder'
@@ -133,7 +123,7 @@ describe('Konnectors Helpers', () => {
     it('should not replace string containing variable name', () => {
       const konnector = {
         ...fixtures.konnector,
-        folders: [{ defaultPath: '/$konnectorToNotReplace/custom' }]
+        folders: [{ defaultDir: '/$konnectorToNotReplace/custom' }]
       }
       expect(buildFolderPath(konnector, fixtures.account)).toEqual(
         '/Administrative/$konnectorToNotReplace/custom'
@@ -143,7 +133,7 @@ describe('Konnectors Helpers', () => {
     it('should handle multiple slash in folder path', () => {
       const konnector = {
         ...fixtures.konnector,
-        folders: [{ defaultPath: '///too//much///slashes/////' }]
+        folders: [{ defaultDir: '///too//much///slashes/////' }]
       }
       expect(buildFolderPath(konnector, fixtures.account)).toEqual(
         '/Administrative/too/much/slashes'
