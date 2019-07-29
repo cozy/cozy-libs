@@ -8,9 +8,10 @@ const BankingReconciliator = require('./banking/BankingReconciliator')
 const BankTransaction = require('./banking/BankTransaction')
 const BankAccountStats = require('./banking/BankAccountStats')
 const Contact = require('./contacts/Contact')
+const CozyFile = require('./File')
+const CozyFolder = require('./Folder')
 const Group = require('./contacts/Group')
 const Permission = require('./Permission')
-const CozyFile = require('./File')
 
 module.exports = {
   Account,
@@ -23,8 +24,9 @@ module.exports = {
   BankTransaction,
   BankAccountStats,
   Contact,
+  CozyFile,
+  CozyFolder,
   Group,
   registerClient: Document.registerClient,
-  Permission,
-  CozyFile
+  Permission
 }

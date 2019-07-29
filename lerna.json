@@ -6,7 +6,7 @@
   "command": {
     "version": {
       "conventionalCommits": true,
-      "githubRelease": true
+      "createRelease": "github"
     },
     "publish": {
       "ignoreChanges": ["packages/playgrounds/**/*"],

@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.67.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.5...cozy-harvest-lib@0.67.6) (2019-07-29)
+
+
+### Bug Fixes
+
+* **harvest:** Handle folder baseDir declared in manifest ✨ ([296829f](https://github.com/cozy/cozy-libs/commit/296829f))
+* Only use defaultDir in the manifest ([dee6277](https://github.com/cozy/cozy-libs/commit/dee6277))
+
+
+
+
+
+## [0.67.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.4...cozy-harvest-lib@0.67.5) (2019-07-19)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
 ## [0.67.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.3...cozy-harvest-lib@0.67.4) (2019-07-19)
 
 **Note:** Version bump only for package cozy-harvest-lib

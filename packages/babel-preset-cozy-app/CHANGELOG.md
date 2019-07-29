@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.5.3...babel-preset-cozy-app@1.6.0) (2019-07-19)
+
+
+### Features
+
+* Activate babel helpers by default ([ab62bdb](https://github.com/cozy/cozy-libs/commit/ab62bdb))
+* Add lib option ([45469b5](https://github.com/cozy/cozy-libs/commit/45469b5))
+* Do not let lib add modules:false in Jest ([ee4058c](https://github.com/cozy/cozy-libs/commit/ee4058c))
+
+
+
+
+
 ## [1.5.3](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.5.2...babel-preset-cozy-app@1.5.3) (2019-07-19)
 
 **Note:** Version bump only for package babel-preset-cozy-app

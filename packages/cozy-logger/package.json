@@ -1,0 +1,17 @@
+{
+  "name": "cozy-logger",
+  "version": "1.4.0",
+  "description": "Logger for Cozy konnector and services",
+  "main": "src/index.js",
+  "license": "MIT",
+  "dependencies": {
+    "json-stringify-safe": "5.0.1"
+  },
+  "scripts": {
+    "test": "yarn jest"
+  },
+  "prettier": {
+    "semi": false,
+    "singleQuote": true
+  }
+}

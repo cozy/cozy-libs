@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.36.0...cozy-procedures@0.37.0) (2019-07-24)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Add prop-types dep ([851b303](https://github.com/cozy/cozy-libs/commit/851b303))
+
+
+### Features
+
+* **cozy-procedures:** Generate transactions history json file ([e8d62a2](https://github.com/cozy/cozy-libs/commit/e8d62a2))
+
+
+
+
+
+# [0.36.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.35.0...cozy-procedures@0.36.0) (2019-07-19)
+
+
+### Features
+
+* **cozy-procedures:** Use input group to display €/mois ([8817a2d](https://github.com/cozy/cozy-libs/commit/8817a2d))
+
+
+
+
+
+# [0.35.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.34.1...cozy-procedures@0.35.0) (2019-07-19)
+
+
+### Bug Fixes
+
+* **cozy-procedures:** Default options handling ([7adf765](https://github.com/cozy/cozy-libs/commit/7adf765))
+
+
+### Features
+
+* Add test ([44dd281](https://github.com/cozy/cozy-libs/commit/44dd281))
+
+
+
+
+
 ## [0.34.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.34.0...cozy-procedures@0.34.1) (2019-07-19)
 
 **Note:** Version bump only for package cozy-procedures

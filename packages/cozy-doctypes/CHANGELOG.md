@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.57.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.57.0...cozy-doctypes@1.57.1) (2019-07-29)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Fix splitFilename() edge cases ([f950445](https://github.com/cozy/cozy-libs/commit/f950445))
+
+
+
+
+
+# [1.57.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.2...cozy-doctypes@1.57.0) (2019-07-23)
+
+
+### Features
+
+* **doctypes:** Add CozyFolder class ✨ ([efd5a1a](https://github.com/cozy/cozy-libs/commit/efd5a1a))
+* **doctypes:** Add ensureMagicFolder method ✨ ([06a55ec](https://github.com/cozy/cozy-libs/commit/06a55ec))
+* **doctypes:** Exopse Application doctype 📝 ([8b505b0](https://github.com/cozy/cozy-libs/commit/8b505b0))
+
+
+
+
+
+## [1.56.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.1...cozy-doctypes@1.56.2) (2019-07-19)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Handle missing properties in account stats ([5442915](https://github.com/cozy/cozy-libs/commit/5442915))
+
+
+
+
+
 ## [1.56.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.0...cozy-doctypes@1.56.1) (2019-07-19)
 
 **Note:** Version bump only for package cozy-doctypes

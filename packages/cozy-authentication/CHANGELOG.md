@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.16.2...cozy-authentication@1.17.0) (2019-07-19)
+
+
+### Features
+
+* Activate babel helpers by default ([ab62bdb](https://github.com/cozy/cozy-libs/commit/ab62bdb))
+
+
+
+
+
 ## [1.16.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.16.1...cozy-authentication@1.16.2) (2019-07-19)
 
 **Note:** Version bump only for package cozy-authentication
