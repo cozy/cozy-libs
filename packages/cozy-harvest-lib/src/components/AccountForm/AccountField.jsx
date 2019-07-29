@@ -59,11 +59,9 @@ export class AccountField extends PureComponent {
       disabled,
       hasError,
       forceEncryptedPlaceholder,
-      initialValue,
       label,
       name,
       required,
-      role,
       t,
       type
     } = this.props
@@ -74,14 +72,12 @@ export class AccountField extends PureComponent {
         ? label
         : name
 
-    const isEditable = !(role === ROLE_IDENTIFIER && initialValue)
-
     // Cozy-UI <Field /> props
     const fieldProps = {
       ...this.props,
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
-      disabled: disabled || !isEditable,
+      disabled: disabled,
       error: !disabled && hasError,
       fullwidth: true,
       inputRef: this.setInputRef,
