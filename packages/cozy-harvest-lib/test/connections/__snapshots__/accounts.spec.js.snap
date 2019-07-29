@@ -18,6 +18,7 @@ KonnectorAccountWatcher {
       "collection": [MockFunction],
       "create": [MockFunction],
       "destroy": [MockFunction],
+      "find": [MockFunction],
       "on": [Function],
       "options": Object {
         "uri": "cozy.tools:8080",

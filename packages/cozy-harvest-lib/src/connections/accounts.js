@@ -25,8 +25,12 @@ const createAccount = async (client, konnector, attributes) => {
  */
 const findAccount = async (client, id) => {
   try {
-    const { data } = await client.collection(ACCOUNTS_DOCTYPE).get(id)
-    return data
+    const { data } = await client.query(
+      client.find(ACCOUNTS_DOCTYPE).where({
+        _id: id
+      })
+    )
+    return (data && data[0]) || null
   } catch (error) {
     if (error.status === 404) {
       return null
