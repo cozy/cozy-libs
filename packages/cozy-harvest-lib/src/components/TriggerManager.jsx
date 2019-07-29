@@ -91,7 +91,6 @@ export class TriggerManager extends Component {
     } = this.props
 
     const { account, trigger } = this.state
-
     if (trigger) {
       return trigger
     }
@@ -230,7 +229,7 @@ export class TriggerManager extends Component {
     const trigger = await this.refetchTrigger()
     this.setState({ status: IDLE, trigger })
     if (typeof successCallback !== 'function') return
-    successCallback(triggers)
+    successCallback(trigger)
   }
 
   /**
