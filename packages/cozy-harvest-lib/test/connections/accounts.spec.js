@@ -18,6 +18,9 @@ const client = {
       token: '1234abcd'
     }
   },
+  find: jest.fn().mockReturnValue({
+    where: jest.fn()
+  }),
   options: {
     uri: 'cozy.tools:8080'
   },
@@ -113,8 +116,7 @@ describe('Account mutations', () => {
     }
 
     beforeEach(() => {
-      client.collection().get.mockReset()
-      client.collection().get.mockResolvedValue({
+      client.query.mockResolvedValue({
         data: simpleAccountFixtureWithMasterRelation
       })
     })
@@ -175,8 +177,8 @@ describe('Account mutations', () => {
       })
 
       it('throws error if get fails', async () => {
-        client.collection().get.mockReset()
-        client.collection().get.mockRejectedValue(new Error('Mocked error'))
+        client.query.mockReset()
+        client.query.mockRejectedValue(new Error('Mocked error'))
 
         await expect(
           createAccount(
@@ -301,8 +303,8 @@ describe('Account mutations', () => {
       })
 
       it('throws error if get fails', async () => {
-        client.collection().get.mockReset()
-        client.collection().get.mockRejectedValue(new Error('Mocked error'))
+        client.query.mockReset()
+        client.query.mockRejectedValue(new Error('Mocked error'))
 
         await expect(
           createAccount(
