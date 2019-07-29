@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.57.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.57.0...cozy-doctypes@1.57.1) (2019-07-29)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Fix splitFilename() edge cases ([f950445](https://github.com/cozy/cozy-libs/commit/f950445))
+
+
+
+
+
 # [1.57.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.56.2...cozy-doctypes@1.57.0) (2019-07-23)
 
 

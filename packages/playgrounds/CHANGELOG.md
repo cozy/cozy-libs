@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.7.3...cozy-playgrounds@1.8.0) (2019-07-29)
+
+
+### Features
+
+* **cozy-procedures:** Generate transactions history json file ([e8d62a2](https://github.com/cozy/cozy-libs/commit/e8d62a2))
+
+
+
+
+
 ## [1.7.3](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.7.2...cozy-playgrounds@1.7.3) (2019-07-23)
 
 **Note:** Version bump only for package cozy-playgrounds
