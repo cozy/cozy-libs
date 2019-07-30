@@ -206,12 +206,10 @@ export const buildFolderPath = (konnector, account, folders = {}) => {
     konnector,
     // For now konnectors are only defining one folder in their folders array
     'folders[0].defaultDir',
-    `$administrative/$konnector/$account`
+    '$administrative/$konnector/$account'
   )
   // Trim `/` and avoid multiple `/` characters with regexp
   let sanitizedPath = trim(fullPath.replace(/(\/+)/g, '/'), '/')
-  //We remove the first / if needed
-  if (sanitizedPath.startsWith('/')) sanitizedPath = sanitizedPath.substring(1)
   //If the konnector doesn't have any of our base dir, we set it to $administrative
   if (!hasBaseDir(sanitizedPath)) {
     sanitizedPath = '$administrative/' + sanitizedPath
