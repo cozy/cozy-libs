@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.68.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.7...cozy-harvest-lib@0.68.0) (2019-07-30)
+
+
+### Features
+
+* Allow changing the login, always ([30a7088](https://github.com/cozy/cozy-libs/commit/30a7088))
+
+
+
+
+
 ## [0.67.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.6...cozy-harvest-lib@0.67.7) (2019-07-30)
 
 
