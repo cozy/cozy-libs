@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.67.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.6...cozy-harvest-lib@0.67.7) (2019-07-30)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Do not use client.collection ([077ec75](https://github.com/cozy/cozy-libs/commit/077ec75))
+* **cozy-harvest-lib:** Fix oauthcallback success ([03ed080](https://github.com/cozy/cozy-libs/commit/03ed080))
+
+
+
+
+
 ## [0.67.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.67.5...cozy-harvest-lib@0.67.6) (2019-07-29)
 
 
