@@ -7,6 +7,19 @@ import cronHelpers from 'helpers/cron'
 import KonnectorJobWatcher from '../../src/models/konnector/KonnectorJobWatcher'
 import { KonnectorJobError } from 'helpers/konnectors'
 
+jest.mock('cozy-doctypes', () => {
+  return {
+    CozyFolder: {
+      registerClient: () => {},
+      ensureMagicFolder: () => ({ path: '/Administrative' }),
+      magicFolders: {
+        ADMINISTRATIVE: '/adminsitrative',
+        PHOTOS: '/photos'
+      }
+    }
+  }
+})
+
 const fixtures = {
   data: {
     username: 'foo',
