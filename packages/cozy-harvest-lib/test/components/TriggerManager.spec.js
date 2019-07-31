@@ -13,7 +13,7 @@ jest.mock('cozy-doctypes', () => {
       registerClient: () => {},
       ensureMagicFolder: () => ({ path: '/Administrative' }),
       magicFolders: {
-        ADMINISTRATIVE: '/adminsitrative',
+        ADMINISTRATIVE: 'io.cozy.apps/administrative',
         PHOTOS: '/photos'
       }
     }
