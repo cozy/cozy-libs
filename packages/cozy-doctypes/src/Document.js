@@ -82,6 +82,19 @@ class Document {
   }
 
   /**
+   * @static copyWithClient - Returns a new class bound to a client
+   *
+   * @param  {type} client Client instance
+   * @returns {type}        A new class, with the client registered
+   */
+  static copyWithClient(client) {
+    class NewDocument extends Document {}
+    NewDocument.cozyClient = null
+    NewDocument.registerClient(client)
+    return NewDocument
+  }
+
+  /**
    * Returns true if Document uses a CozyClient (from cozy-client package)
    *
    * @returns {boolean} true if Document uses a CozyClient
