@@ -663,3 +663,36 @@ describe('Document used with CozyClient', () => {
     })
   })
 })
+
+describe('copyWithClient', () => {
+  afterEach(() => {
+    Document.cozyClient = null
+  })
+
+  it('should return a class bound to a new client', () => {
+    const newClient = {}
+    const MyDocument = Document.copyWithClient(newClient)
+
+    expect(MyDocument.cozyClient).toBe(newClient)
+    expect(Document.cozyClient).toBe(null)
+  })
+
+  it('should not interfere with an existing Document class', () => {
+    const newClient = {}
+    const MyDocument = Document.copyWithClient(newClient)
+    Document.registerClient(cozyClient)
+
+    expect(MyDocument.cozyClient).toBe(newClient)
+    expect(Document.cozyClient).toBe(cozyClient)
+  })
+
+  it('should work even if Document had a registered client', () => {
+    Document.registerClient(cozyClient)
+
+    const newClient = {}
+    const MyDocument = Document.copyWithClient(newClient)
+
+    expect(MyDocument.cozyClient).toBe(newClient)
+    expect(Document.cozyClient).toBe(cozyClient)
+  })
+})
