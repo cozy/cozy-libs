@@ -108,14 +108,17 @@ export class TriggerManager extends Component {
     let folder
 
     if (konnectors.needsFolder(konnector)) {
-      const adminFolder = await CozyFolder.ensureMagicFolder(
-        CozyFolder.magicFolders.ADMINISTRATIVE,
-        `/${t('folder.administrative')}`
-      )
-      const photosFolder = await CozyFolder.ensureMagicFolder(
-        CozyFolder.magicFolders.PHOTOS,
-        `/${t('folder.photos')}`
-      )
+      const [adminFolder, photosFolder] = await Promise.all([
+        CozyFolder.ensureMagicFolder(
+          CozyFolder.magicFolders.ADMINISTRATIVE,
+          `/${t('folder.administrative')}`
+        ),
+        CozyFolder.ensureMagicFolder(
+          CozyFolder.magicFolders.PHOTOS,
+          `/${t('folder.photos')}`
+        )
+      ])
+
       const path = konnectors.buildFolderPath(konnector, account, {
         administrative: adminFolder.path,
         photos: photosFolder.path
