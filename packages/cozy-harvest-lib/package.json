@@ -21,7 +21,6 @@
     "prepublishOnly": "yarn build",
     "test": "jest --verbose",
     "tx": "tx pull --all",
-    "posttx": "./scripts/check-locales.sh",
     "watch": "yarn build --watch",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
