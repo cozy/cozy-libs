@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.4.0...cozy-logger@1.5.0) (2019-08-01)
+
+
+### Bug Fixes
+
+* Add chalk as dependency ([7be5f33](https://github.com/cozy/cozy-libs/commit/7be5f33))
+
+
+### Features
+
+* Create a browser version ([e88e938](https://github.com/cozy/cozy-libs/commit/e88e938))
+
+
+
+
+
 # 1.4.0 (2019-07-19)
 
 
