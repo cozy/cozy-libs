@@ -10,7 +10,6 @@ import Modal, {
   ModalHeader
 } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -20,8 +19,20 @@ import DeleteAccountCard from './cards/DeleteAccountCard'
 import LaunchTriggerCard from './cards/LaunchTriggerCard'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
-import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
+import SelectBox, {
+  reactSelectControl
+} from 'cozy-ui/transpiled/react/SelectBox'
 
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import { Text } from 'cozy-ui/transpiled/react/Text'
+
+const MyAccountComponent = ({ name }) => {
+  return (
+    <Text className="u-slateGrey u-flex u-flex-items-center u-c-pointer">
+      {name} <Icon icon={'bottom-select'} size="12" className="u-ml-half" />
+    </Text>
+  )
+}
 /**
  * KonnectorModal open a Modal related to a given konnector. It fetches the
  * first account and then include a TriggerManager component.
@@ -156,22 +167,52 @@ export class KonnectorModal extends PureComponent {
         mobileFullscreen
         size="small"
         into={into}
+        closable={false}
       >
-        <ModalHeader>
-          <AppIcon fetchIcon={this.fetchIcon} className="u-mah-3 u-ml-1" />
+        <ModalHeader className="u-pr-2">
+          <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
+            <div className="u-w-3 u-h-3 u-mr-half">
+              <AppIcon fetchIcon={this.fetchIcon} />
+            </div>
+            <div className="u-flex-grow-1 u-mr-half">
+              <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
 
-          {accounts.length === 0 && <SelectBox />}
-          {accounts.length > 0 && (
-            <SelectBox
-              options={accounts}
-              onChange={option => {
-                this.fetchAccount(option.trigger)
-              }}
-              getOptionLabel={option => option.account.auth.login}
-              getOptionValue={option => option.trigger._id}
-              defaultValue={accounts[0]}
-            />
-          )}
+              {accounts.length === 0 && (
+                <Text className="u-slateGrey u-flex u-flex-items-center">
+                  Loading
+                </Text>
+              )}
+              {accounts.length > 0 && (
+                <SelectBox
+                  size="tiny"
+                  options={accounts}
+                  onChange={option => {
+                    this.fetchAccount(option.trigger)
+                  }}
+                  getOptionLabel={option => option.account.auth.login}
+                  getOptionValue={option => option.trigger._id}
+                  defaultValue={accounts[0]}
+                  components={{
+                    Control: reactSelectControl(
+                      <MyAccountComponent
+                        name={this.state.account.auth.login}
+                      />
+                    )
+                  }}
+                />
+              )}
+            </div>
+            <div className="">
+              <Button
+                icon={<Icon icon={'cross'} size={'24'} />}
+                onClick={dismissAction}
+                iconOnly
+                label={'close'}
+                subtle
+                theme={'secondary'}
+              />
+            </div>
+          </div>
         </ModalHeader>
         {fetching ? (
           <ModalContent>
@@ -182,9 +223,6 @@ export class KonnectorModal extends PureComponent {
           </ModalContent>
         ) : (
           <ModalContent className="u-pb-0">
-            <SubTitle className="u-mb-1 u-ta-center">
-              {t('modal.konnector.title', { name: konnector.name })}
-            </SubTitle>
             {error ? (
               <Infos
                 actionButton={
