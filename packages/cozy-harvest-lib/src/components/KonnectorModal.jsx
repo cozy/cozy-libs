@@ -20,17 +20,41 @@ import LaunchTriggerCard from './cards/LaunchTriggerCard'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
 import SelectBox, {
-  reactSelectControl
+  reactSelectControl,
+  components
 } from 'cozy-ui/transpiled/react/SelectBox'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Text } from 'cozy-ui/transpiled/react/Text'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 const MyAccountComponent = ({ name }) => {
   return (
     <Text className="u-slateGrey u-flex u-flex-items-center u-c-pointer">
       {name} <Icon icon={'bottom-select'} size="12" className="u-ml-half" />
     </Text>
+  )
+}
+
+const CreateAccount = translate()(({ createAction, t }) => {
+  return (
+    <Button
+      subtle
+      size={'small'}
+      className={'u-m-half'}
+      onClick={createAction}
+      label={t('modal.konnector.create_account')}
+    />
+  )
+})
+const MenuWithFixedComponent = props => {
+  const { children } = props
+  const { createAction, ...selectProps } = props.selectProps
+  return (
+    <components.Menu {...props} selectProps={selectProps}>
+      {children}
+      <CreateAccount createAction={createAction} />
+    </components.Menu>
   )
 }
 /**
@@ -45,8 +69,7 @@ export class KonnectorModal extends PureComponent {
     account: null,
     fetching: true,
     trigger: null,
-    accounts: [],
-    selectedAccount: null
+    accounts: []
   }
 
   constructor(props) {
@@ -56,7 +79,11 @@ export class KonnectorModal extends PureComponent {
     this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
     this.handleTriggerLaunch = this.handleTriggerLaunch.bind(this)
   }
-
+  /**
+   * TODO We should not fetchAccounts and fetchAccount since we already have the informations
+   * in the props. We kept this sytem for compatibility on the existing override.
+   * Next tasks: remove these methods and rewrite the override
+   */
   componentDidMount() {
     this.fetchAccount(this.props.konnector.triggers.data[0])
     this.fetchAccounts()
@@ -149,7 +176,7 @@ export class KonnectorModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, konnector, into, t } = this.props
+    const { dismissAction, konnector, into, t, createAction } = this.props
 
     const {
       account,
@@ -179,25 +206,25 @@ export class KonnectorModal extends PureComponent {
 
               {accounts.length === 0 && (
                 <Text className="u-slateGrey u-flex u-flex-items-center">
-                  Loading
+                  {t('loading')}
                 </Text>
               )}
-              {accounts.length > 0 && (
+              {accounts.length > 0 && account && (
                 <SelectBox
                   size="tiny"
                   options={accounts}
                   onChange={option => {
                     this.fetchAccount(option.trigger)
                   }}
+                  createAction={createAction}
                   getOptionLabel={option => option.account.auth.login}
                   getOptionValue={option => option.trigger._id}
                   defaultValue={accounts[0]}
                   components={{
                     Control: reactSelectControl(
-                      <MyAccountComponent
-                        name={this.state.account.auth.login}
-                      />
-                    )
+                      <MyAccountComponent name={account.auth.login} />
+                    ),
+                    Menu: MenuWithFixedComponent
                   }}
                 />
               )}
@@ -207,7 +234,7 @@ export class KonnectorModal extends PureComponent {
                 icon={<Icon icon={'cross'} size={'24'} />}
                 onClick={dismissAction}
                 iconOnly
-                label={'close'}
+                label={t('close')}
                 subtle
                 theme={'secondary'}
               />
