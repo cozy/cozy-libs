@@ -1,4 +1,6 @@
 {
+  "loading": "Loading",
+  "close": "Close",
   "accountForm": {
     "submit": {
       "label": "Submit"
@@ -245,12 +247,12 @@
   },
   "modal": {
     "konnector": {
-      "title": "Edit your %{name} account",
       "error": {
         "title": "Unable to retrieve your account",
         "description": "The account cannot be retrieved (%{message}).",
         "button": "Close"
-      }
+      },
+      "create_account": "Create an account"
     }
   },
   "oauth": {
