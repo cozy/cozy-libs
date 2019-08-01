@@ -6,8 +6,8 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { Uppercase, Text } from 'cozy-ui/transpiled/react/Text'
-
+import { Text } from 'cozy-ui/transpiled/react/Text'
+import Uppercase from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
 import TriggerLauncher, {
   TriggerLauncher as DumbTriggerLauncher
