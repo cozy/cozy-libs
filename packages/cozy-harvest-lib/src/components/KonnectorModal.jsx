@@ -14,12 +14,13 @@ import { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
-import * as triggers from '../helpers/triggers'
+import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import DeleteAccountCard from './cards/DeleteAccountCard'
 import LaunchTriggerCard from './cards/LaunchTriggerCard'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
+import SelectBox from 'cozy-ui/transpiled/react/SelectBox'
 
 /**
  * KonnectorModal open a Modal related to a given konnector. It fetches the
@@ -32,7 +33,9 @@ export class KonnectorModal extends PureComponent {
   state = {
     account: null,
     fetching: true,
-    trigger: null
+    trigger: null,
+    accounts: [],
+    selectedAccount: null
   }
 
   constructor(props) {
@@ -44,7 +47,8 @@ export class KonnectorModal extends PureComponent {
   }
 
   componentDidMount() {
-    this.fetchAccount()
+    this.fetchAccount(this.props.konnector.triggers.data[0])
+    this.fetchAccounts()
   }
 
   componentWillUnmount() {
@@ -61,19 +65,29 @@ export class KonnectorModal extends PureComponent {
       } catch (error) {}
     }, 50)
   }
-
-  async fetchAccount() {
+  async fetchAccounts() {
+    const triggers = this.props.konnector.triggers.data
+    const { findAccount } = this.props
+    const accounts = await Promise.all(
+      triggers.map(async trigger => {
+        return {
+          account: await findAccount(triggersModel.getAccountId(trigger)),
+          trigger
+        }
+      })
+    )
+    this.setState({ accounts })
+  }
+  async fetchAccount(trigger) {
     const { findAccount } = this.props
     this.setState({ fetching: true })
-    const { konnector } = this.props
-    const trigger = konnector.triggers.data[0]
 
     try {
-      const account = await findAccount(triggers.getAccountId(trigger))
+      const account = await findAccount(triggersModel.getAccountId(trigger))
       this.setState({
         account,
         trigger,
-        konnectorJobError: triggers.getError(trigger)
+        konnectorJobError: triggersModel.getError(trigger)
       })
     } catch (error) {
       this.setState({
@@ -132,7 +146,8 @@ export class KonnectorModal extends PureComponent {
       fetching,
       isJobRunning,
       konnectorJobError,
-      trigger
+      trigger,
+      accounts
     } = this.state
 
     return (
@@ -144,6 +159,19 @@ export class KonnectorModal extends PureComponent {
       >
         <ModalHeader>
           <AppIcon fetchIcon={this.fetchIcon} className="u-mah-3 u-ml-1" />
+
+          {accounts.length === 0 && <SelectBox />}
+          {accounts.length > 0 && (
+            <SelectBox
+              options={accounts}
+              onChange={option => {
+                this.fetchAccount(option.trigger)
+              }}
+              getOptionLabel={option => option.account.auth.login}
+              getOptionValue={option => option.trigger._id}
+              defaultValue={accounts[0]}
+            />
+          )}
         </ModalHeader>
         {fetching ? (
           <ModalContent>
