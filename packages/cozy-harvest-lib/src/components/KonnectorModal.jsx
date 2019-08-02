@@ -29,7 +29,7 @@ import { Text } from 'cozy-ui/transpiled/react/Text'
 
 import AccountSelectControl from './KonnectorModal/AccountSelectControl'
 import CreateAccountButton from './KonnectorModal/CreateAccountButton'
-
+import { Account } from 'cozy-doctypes'
 const MenuWithFixedComponent = props => {
   const { children } = props
   const { createAction, ...selectProps } = props.selectProps
@@ -68,6 +68,8 @@ export class KonnectorModal extends PureComponent {
    * Next tasks: remove these methods and rewrite the override
    */
   componentDidMount() {
+    const { client } = this.context
+    Account.copyWithClient(client)
     this.fetchAccount(this.props.konnector.triggers.data[0])
     this.fetchAccounts()
   }
@@ -198,12 +200,16 @@ export class KonnectorModal extends PureComponent {
                     this.fetchAccount(option.trigger)
                   }}
                   createAction={createAction}
-                  getOptionLabel={option => option.account.auth.login}
+                  getOptionLabel={option =>
+                    Account.getAccountName(option.account)
+                  }
                   getOptionValue={option => option.trigger._id}
                   defaultValue={accounts[0]}
                   components={{
                     Control: reactSelectControl(
-                      <AccountSelectControl name={account.auth.login} />
+                      <AccountSelectControl
+                        name={Account.getAccountName(account)}
+                      />
                     ),
                     Menu: MenuWithFixedComponent
                   }}
