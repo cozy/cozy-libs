@@ -88,10 +88,11 @@ class Document {
    * @returns {type}        A new class, with the client registered
    */
   static copyWithClient(client) {
-    class NewDocument extends Document {}
-    NewDocument.cozyClient = null
-    NewDocument.registerClient(client)
-    return NewDocument
+    const BaseClass = this
+    class ExtendedClass extends BaseClass {}
+    ExtendedClass.cozyClient = null
+    ExtendedClass.registerClient(client)
+    return ExtendedClass
   }
 
   /**
