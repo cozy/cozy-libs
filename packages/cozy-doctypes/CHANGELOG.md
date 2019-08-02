@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.58.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.57.2...cozy-doctypes@1.58.0) (2019-08-02)
+
+
+### Features
+
+* Allow multiple Document classes ([7d35e88](https://github.com/cozy/cozy-libs/commit/7d35e88))
+
+
+
+
+
 ## [1.57.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.57.1...cozy-doctypes@1.57.2) (2019-08-01)
 
 **Note:** Version bump only for package cozy-doctypes
