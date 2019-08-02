@@ -677,6 +677,18 @@ describe('copyWithClient', () => {
     expect(Document.cozyClient).toBe(null)
   })
 
+  it('should return an extension of the base class', () => {
+    class ExtendedClass extends Document {
+      static myExtendedMethod() {
+        return 'myExtendedMethod called'
+      }
+    }
+    const newClient = {}
+
+    const MyClass = ExtendedClass.copyWithClient(newClient)
+    expect(MyClass.myExtendedMethod()).toEqual('myExtendedMethod called')
+  })
+
   it('should not interfere with an existing Document class', () => {
     const newClient = {}
     const MyDocument = Document.copyWithClient(newClient)
