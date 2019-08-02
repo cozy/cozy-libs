@@ -38,12 +38,12 @@ class CozyFolder extends CozyFile {
       _type: Application.doctype,
       _id: id
     }
-    const folders = await CozyFolder.getReferencedFolders(magicFolderDocument)
+    const folders = await this.getReferencedFolders(magicFolderDocument)
     const existingMagicFolder = folders.length ? folders[0] : null
 
     if (existingMagicFolder) return existingMagicFolder
 
-    const magicFoldersValues = Object.values(CozyFolder.magicFolders)
+    const magicFoldersValues = Object.values(this.magicFolders)
     if (!magicFoldersValues.includes(id)) {
       throw new Error(
         `Cannot create Magic folder with id ${id}. Allowed values are ${magicFoldersValues.join(
@@ -56,7 +56,7 @@ class CozyFolder extends CozyFile {
       throw new Error('Magic folder default path must be defined')
     }
 
-    return CozyFolder.createFolderWithReference(path, magicFolderDocument)
+    return this.createFolderWithReference(path, magicFolderDocument)
   }
 
   /**
@@ -69,7 +69,7 @@ class CozyFolder extends CozyFile {
     const { included } = await this.cozyClient
       .collection(CozyFile.doctype)
       .findReferencedBy(document)
-    return included.filter(folder => !CozyFolder.isTrashed(folder))
+    return included.filter(folder => !this.isTrashed(folder))
   }
 
   /**
@@ -81,7 +81,7 @@ class CozyFolder extends CozyFile {
    * @return {Objet}             Folder referenced with the give reference
    */
   static async ensureFolderWithReference(path, document) {
-    const existingFolders = await CozyFolder.getReferencedFolders(document)
+    const existingFolders = await this.getReferencedFolders(document)
     if (existingFolders.length) return existingFolders[0]
 
     const collection = this.cozyClient.collection(CozyFile.doctype)

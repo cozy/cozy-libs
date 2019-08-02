@@ -187,3 +187,27 @@ describe('Folder model', () => {
     })
   })
 })
+
+describe('Using copyWithClient', () => {
+  let MyCozyFolder
+  beforeEach(() => {
+    const newClient = {}
+    MyCozyFolder = CozyFolder.copyWithClient(newClient)
+  })
+
+  afterEach(() => {
+    CozyFolder.cozyClient = null
+  })
+
+  it('should call subfunctions using the same class', () => {
+    jest
+      .spyOn(MyCozyFolder, 'getReferencedFolders')
+      .mockImplementation(() => [])
+    jest.spyOn(MyCozyFolder, 'createFolderWithReference').mockImplementation()
+    MyCozyFolder.ensureMagicFolder(
+      MyCozyFolder.magicFolders.ADMINISTRATIVE,
+      '/Administrative'
+    )
+    expect(MyCozyFolder.getReferencedFolders).toHaveBeenCalled()
+  })
+})
