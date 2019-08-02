@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.58.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.58.0...cozy-doctypes@1.58.1) (2019-08-02)
+
+
+### Bug Fixes
+
+* CopyWithClient returns the correct class ([eec9bca](https://github.com/cozy/cozy-libs/commit/eec9bca))
+
+
+
+
+
 # [1.58.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.57.2...cozy-doctypes@1.58.0) (2019-08-02)
 
 
