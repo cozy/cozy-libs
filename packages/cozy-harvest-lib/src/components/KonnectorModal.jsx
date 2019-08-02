@@ -26,34 +26,17 @@ import SelectBox, {
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Text } from 'cozy-ui/transpiled/react/Text'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-const MyAccountComponent = ({ name }) => {
-  return (
-    <Text className="u-slateGrey u-flex u-flex-items-center u-c-pointer">
-      {name} <Icon icon={'bottom-select'} size="12" className="u-ml-half" />
-    </Text>
-  )
-}
+import AccountSelectControl from './KonnectorModal/AccountSelectControl'
+import CreateAccountButton from './KonnectorModal/CreateAccountButton'
 
-const CreateAccount = translate()(({ createAction, t }) => {
-  return (
-    <Button
-      subtle
-      size={'small'}
-      className={'u-m-half'}
-      onClick={createAction}
-      label={t('modal.konnector.create_account')}
-    />
-  )
-})
 const MenuWithFixedComponent = props => {
   const { children } = props
   const { createAction, ...selectProps } = props.selectProps
   return (
     <components.Menu {...props} selectProps={selectProps}>
       {children}
-      <CreateAccount createAction={createAction} />
+      <CreateAccountButton createAction={createAction} />
     </components.Menu>
   )
 }
@@ -205,9 +188,7 @@ export class KonnectorModal extends PureComponent {
               <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
 
               {accounts.length === 0 && (
-                <Text className="u-slateGrey u-flex u-flex-items-center">
-                  {t('loading')}
-                </Text>
+                <Text className="u-slateGrey">{t('loading')}</Text>
               )}
               {accounts.length > 0 && account && (
                 <SelectBox
@@ -222,23 +203,21 @@ export class KonnectorModal extends PureComponent {
                   defaultValue={accounts[0]}
                   components={{
                     Control: reactSelectControl(
-                      <MyAccountComponent name={account.auth.login} />
+                      <AccountSelectControl name={account.auth.login} />
                     ),
                     Menu: MenuWithFixedComponent
                   }}
                 />
               )}
             </div>
-            <div className="">
-              <Button
-                icon={<Icon icon={'cross'} size={'24'} />}
-                onClick={dismissAction}
-                iconOnly
-                label={t('close')}
-                subtle
-                theme={'secondary'}
-              />
-            </div>
+            <Button
+              icon={<Icon icon={'cross'} size={'24'} />}
+              onClick={dismissAction}
+              iconOnly
+              label={t('close')}
+              subtle
+              theme={'secondary'}
+            />
           </div>
         </ModalHeader>
         {fetching ? (
