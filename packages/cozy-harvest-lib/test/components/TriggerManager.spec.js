@@ -8,15 +8,16 @@ import KonnectorJobWatcher from '../../src/models/konnector/KonnectorJobWatcher'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 jest.mock('cozy-doctypes', () => {
-  return {
-    CozyFolder: {
-      registerClient: () => {},
-      ensureMagicFolder: () => ({ path: '/Administrative' }),
-      magicFolders: {
-        ADMINISTRATIVE: 'io.cozy.apps/administrative',
-        PHOTOS: '/photos'
-      }
+  const CozyFolder = {
+    copyWithClient: () => CozyFolder,
+    ensureMagicFolder: () => ({ path: '/Administrative' }),
+    magicFolders: {
+      ADMINISTRATIVE: 'io.cozy.apps/administrative',
+      PHOTOS: '/photos'
     }
+  }
+  return {
+    CozyFolder
   }
 })
 

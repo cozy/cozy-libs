@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withMutations, withClient } from 'cozy-client'
-import { CozyFolder } from 'cozy-doctypes'
+import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -57,12 +57,7 @@ export class TriggerManager extends Component {
   }
 
   componentDidMount() {
-    try {
-      CozyFolder.registerClient(this.props.client)
-    } catch (error) {
-      if (error.message !== 'Document cannot be re-registered to a client.')
-        throw error
-    }
+    this.CozyFolder = CozyFolderClass.copyWithClient(this.props.client)
   }
 
   componentWillUnmount() {
@@ -109,12 +104,12 @@ export class TriggerManager extends Component {
 
     if (konnectors.needsFolder(konnector)) {
       const [adminFolder, photosFolder] = await Promise.all([
-        CozyFolder.ensureMagicFolder(
-          CozyFolder.magicFolders.ADMINISTRATIVE,
+        this.CozyFolder.ensureMagicFolder(
+          this.CozyFolder.magicFolders.ADMINISTRATIVE,
           `/${t('folder.administrative')}`
         ),
-        CozyFolder.ensureMagicFolder(
-          CozyFolder.magicFolders.PHOTOS,
+        this.CozyFolder.ensureMagicFolder(
+          this.CozyFolder.magicFolders.PHOTOS,
           `/${t('folder.photos')}`
         )
       ])
