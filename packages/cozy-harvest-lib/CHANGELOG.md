@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.69.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.68.2...cozy-harvest-lib@0.69.0) (2019-08-02)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Do not check language before merge ([60b657c](https://github.com/cozy/cozy-libs/commit/60b657c))
+
+
+### Features
+
+* **cozy-doctypes:** Add Account model ([b5b9b4b](https://github.com/cozy/cozy-libs/commit/b5b9b4b))
+* **cozy-harvest-lib:** Account Switcher style ([7f612f7](https://github.com/cozy/cozy-libs/commit/7f612f7))
+* **cozy-harvest-lib:** Create account from the account switcher ([6e811c4](https://github.com/cozy/cozy-libs/commit/6e811c4))
+* **cozy-harvest-lib:** Konnector Modal with multi-accounts ([87b2881](https://github.com/cozy/cozy-libs/commit/87b2881))
+
+
+
+
+
 ## [0.68.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.68.1...cozy-harvest-lib@0.68.2) (2019-08-02)
 
 **Note:** Version bump only for package cozy-harvest-lib

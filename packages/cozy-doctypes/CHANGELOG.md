@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.59.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.58.1...cozy-doctypes@1.59.0) (2019-08-02)
+
+
+### Features
+
+* **cozy-doctypes:** Add Account model ([b5b9b4b](https://github.com/cozy/cozy-libs/commit/b5b9b4b))
+
+
+
+
+
 ## [1.58.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.58.0...cozy-doctypes@1.58.1) (2019-08-02)
 
 
