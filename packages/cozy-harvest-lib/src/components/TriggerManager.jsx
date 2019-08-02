@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { withMutations } from 'cozy-client'
+import { withMutations, withClient } from 'cozy-client'
+import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -55,6 +56,10 @@ export class TriggerManager extends Component {
     }
   }
 
+  componentDidMount() {
+    this.CozyFolder = CozyFolderClass.copyWithClient(this.props.client)
+  }
+
   componentWillUnmount() {
     if (this.jobWatcher) this.jobWatcher.unsubscribeAll()
     if (this.accountWatcher) this.accountWatcher.unsubscribeAll()
@@ -98,11 +103,20 @@ export class TriggerManager extends Component {
     let folder
 
     if (konnectors.needsFolder(konnector)) {
-      // TODO: remove previous legacy key `default.baseDir`
-      // https://github.com/cozy/cozy-libs/issues/637
+      const [adminFolder, photosFolder] = await Promise.all([
+        this.CozyFolder.ensureMagicFolder(
+          this.CozyFolder.magicFolders.ADMINISTRATIVE,
+          `/${t('folder.administrative')}`
+        ),
+        this.CozyFolder.ensureMagicFolder(
+          this.CozyFolder.magicFolders.PHOTOS,
+          `/${t('folder.photos')}`
+        )
+      ])
+
       const path = konnectors.buildFolderPath(konnector, account, {
-        administrative: t('folder.administrative'),
-        photos: t('folder.photos')
+        administrative: adminFolder.path,
+        photos: photosFolder.path
       })
 
       folder =
@@ -435,5 +449,5 @@ export default withLocales(
     filesMutations,
     permissionsMutations,
     triggersMutations
-  )(TriggerManager)
+  )(withClient(TriggerManager))
 )
