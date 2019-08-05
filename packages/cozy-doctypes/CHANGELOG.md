@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.59.0...cozy-doctypes@1.59.1) (2019-08-05)
+
+
+### Bug Fixes
+
+* Folder doctypes keeps the same class ([9a98684](https://github.com/cozy/cozy-libs/commit/9a98684))
+
+
+
+
+
 # [1.59.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.58.1...cozy-doctypes@1.59.0) (2019-08-02)
 
 
