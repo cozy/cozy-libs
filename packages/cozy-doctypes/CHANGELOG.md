@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.59.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.59.1...cozy-doctypes@1.59.2) (2019-08-05)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Don't use arrow functions in Account model ([25f0e7f](https://github.com/cozy/cozy-libs/commit/25f0e7f))
+
+
+
+
+
 ## [1.59.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.59.0...cozy-doctypes@1.59.1) (2019-08-05)
 
 
