@@ -149,3 +149,86 @@ describe('reconciliation', () => {
     })
   })
 })
+
+describe('BankTransaction.getCategoryId', () => {
+  it("Should return the manualCategoryId if there's one", () => {
+    const transaction = {
+      manualCategoryId: '200110',
+      automaticCategoryId: '200120',
+      localCategoryId: '200130',
+      localCategoryProba: BankTransaction.LOCAL_MODEL_USAGE_THRESHOLD + 0.01
+    }
+
+    const options = { localModelOverride: true }
+
+    expect(BankTransaction.getCategoryId(transaction, options)).toBe(
+      transaction.manualCategoryId
+    )
+  })
+
+  it('Should return the automaticCategoryId if the localCategoryProba is lower than the threshold', () => {
+    const transaction = {
+      automaticCategoryId: '200120',
+      localCategoryId: '200130',
+      localCategoryProba: BankTransaction.LOCAL_MODEL_USAGE_THRESHOLD - 0.01
+    }
+
+    const options = { localModelOverride: true }
+
+    expect(BankTransaction.getCategoryId(transaction, options)).toBe(
+      transaction.automaticCategoryId
+    )
+  })
+
+  it("Should return the automaticCategoryId if there's no manualCategoryId, and localCategory/cozyCategory are not usable", () => {
+    const transaction = {
+      automaticCategoryId: '200120',
+      localCategoryId: '200130',
+      localCategoryPrba: BankTransaction.LOCAL_MODEL_USAGE_THRESHOLD - 0.01,
+      cozyCategoryId: '200140',
+      cozyCategoryProba: BankTransaction.GLOBAL_MODEL_USAGE_THRESHOLD - 0.01
+    }
+
+    const options = { localModelOverride: true }
+
+    expect(BankTransaction.getCategoryId(transaction, options)).toBe(
+      transaction.automaticCategoryId
+    )
+  })
+
+  it('Should use local model properties according to `localModelOverride` option', () => {
+    const transaction = {
+      automaticCategoryId: '200120',
+      localCategoryId: '200130',
+      localCategoryProba: BankTransaction.LOCAL_MODEL_USAGE_THRESHOLD + 0.01
+    }
+
+    expect(
+      BankTransaction.getCategoryId(transaction, { localModelOverride: true })
+    ).toBe(transaction.localCategoryId)
+
+    expect(
+      BankTransaction.getCategoryId(transaction, { localModelOverride: false })
+    ).toBe(transaction.automaticCategoryId)
+  })
+
+  it('should return the cozyCategoryId if there is one with a high probability, but no localCategoryId', () => {
+    const transaction = {
+      automaticCategoryId: '200120',
+      cozyCategoryId: '200130',
+      cozyCategoryProba: BankTransaction.GLOBAL_MODEL_USAGE_THRESHOLD + 0.01
+    }
+
+    expect(BankTransaction.getCategoryId(transaction)).toBe(
+      transaction.cozyCategoryId
+    )
+  })
+
+  it('should return null if there is only automaticCategoryId', () => {
+    const transaction = {
+      automaticCategoryId: '200120'
+    }
+
+    expect(BankTransaction.getCategoryId(transaction)).toBeNull()
+  })
+})

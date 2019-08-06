@@ -3,6 +3,8 @@ import subMonths from 'date-fns/sub_months'
 import startOfMonth from 'date-fns/start_of_month'
 import pick from 'lodash/pick'
 import groupBy from 'lodash/groupBy'
+import get from 'lodash/get'
+import { BankTransaction } from 'cozy-doctypes'
 
 /**
  * createFileWithContent - upload a json file containing the given data
@@ -51,10 +53,24 @@ export const fetchTransactionsHistory = async (client, accountsIds) => {
   return client.queryAll(query)
 }
 
+export const fetchBanksSettings = async client => {
+  const query = client.find('io.cozy.bank.settings')
+  const response = await client.queryAll(query)
+  const settings = response[0]
+
+  return settings
+}
+
 export const fetchTransactionsHistoryContent = async client => {
   const accounts = await fetchCheckingsLikeAccounts(client)
   const accountsIds = accounts.map(account => account._id)
   const transactions = await fetchTransactionsHistory(client, accountsIds)
+  const settings = await fetchBanksSettings(client)
+  const localModelOverride = get(
+    settings,
+    'community.localModelOverride',
+    false
+  )
 
   const transactionsByAccount = groupBy(
     transactions,
@@ -62,11 +78,18 @@ export const fetchTransactionsHistoryContent = async client => {
   )
 
   const rawContent = accounts.map(account => {
+    const transactions = transactionsByAccount[account._id] || []
+
     return {
       ...pick(account, ['balance', 'iban']),
-      transactions: transactionsByAccount[account._id].map(transaction =>
-        pick(transaction, ['amount', 'label', 'date'])
-      )
+      transactions: transactions.map(transaction => {
+        return {
+          ...pick(transaction, ['amount', 'label', 'date']),
+          category: BankTransaction.getCategoryId(transaction, {
+            localModelOverride
+          })
+        }
+      })
     }
   })
 

@@ -16,7 +16,8 @@ const getClient = customOptions => {
           'io.cozy.jobs:POST:zip:worker',
           'io.cozy.bank.accounts.stats',
           'io.cozy.bank.accounts',
-          'io.cozy.bank.operations'
+          'io.cozy.bank.operations',
+          'io.cozy.bank.settings'
         ],
         schema: {
           apps: {
