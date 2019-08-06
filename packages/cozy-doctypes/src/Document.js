@@ -10,7 +10,7 @@ const groupBy = require('lodash/groupBy')
 const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
 const { parallelMap } = require('./utils')
-const CozyClient = require('cozy-client').default
+const CozyClient = require('cozy-client/dist/CozyClient').default
 const log = require('cozy-logger').namespace('Document')
 const querystring = require('querystring')
 

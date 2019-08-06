@@ -1,4 +1,4 @@
-const CozyClient = require('cozy-client').default
+const CozyClient = require('cozy-client/dist/CozyClient').default
 const CozyStackClient = require('cozy-stack-client').default
 
 jest.mock('cozy-stack-client')
