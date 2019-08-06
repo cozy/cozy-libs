@@ -9,9 +9,9 @@ import DeleteAccountButton from '../DeleteAccountButton'
 
 export class DeleteAccountCard extends PureComponent {
   render() {
-    const { account, disabled, onSuccess, t } = this.props
+    const { account, disabled, onSuccess, className, t } = this.props
     return (
-      <Card>
+      <Card className={className}>
         <SubTitle className="u-mb-1">{t('card.deleteAccount.title')}</SubTitle>
         <Text className="u-mb-1">{t('card.deleteAccount.description')}</Text>
         <DeleteAccountButton

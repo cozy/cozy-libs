@@ -284,6 +284,14 @@ export class KonnectorModal extends PureComponent {
                       account={account}
                       disabled={isJobRunning}
                       onSuccess={dismissAction}
+                      className="u-mb-1"
+                    />
+                    <Button
+                      onClick={createAction}
+                      label={t('modal.konnector.create_account')}
+                      extension="full"
+                      theme="secondary"
+                      icon="plus"
                     />
                   </TabPanel>
                 </TabPanels>
