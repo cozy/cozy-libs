@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.8.6...cozy-playgrounds@1.9.0) (2019-08-06)
+
+
+### Features
+
+* **cozy-procedures:** Get transactions category ([45effc6](https://github.com/cozy/cozy-libs/commit/45effc6))
+
+
+
+
+
 ## [1.8.6](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.8.5...cozy-playgrounds@1.8.6) (2019-08-05)
 
 **Note:** Version bump only for package cozy-playgrounds

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.60.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.59.2...cozy-doctypes@1.60.0) (2019-08-06)
+
+
+### Features
+
+* **cozy-doctypes:** Add BankTransaction::getCategoryId method ([5471c8e](https://github.com/cozy/cozy-libs/commit/5471c8e))
+
+
+
+
+
 ## [1.59.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.59.1...cozy-doctypes@1.59.2) (2019-08-05)
 
 

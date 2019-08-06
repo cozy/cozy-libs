@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.37.0...cozy-procedures@0.38.0) (2019-08-06)
+
+
+### Features
+
+* **cozy-procedures:** Get transactions category ([45effc6](https://github.com/cozy/cozy-libs/commit/45effc6))
+
+
+
+
+
 # [0.37.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.36.0...cozy-procedures@0.37.0) (2019-07-24)
 
 
