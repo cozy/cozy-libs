@@ -253,6 +253,10 @@
         "button": "Close"
       },
       "create_account": "Create an account"
+    },
+    "tabs": {
+      "sync": "synchronization",
+      "account": "account"
     }
   },
   "oauth": {

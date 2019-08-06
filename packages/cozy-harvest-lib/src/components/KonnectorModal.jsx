@@ -10,6 +10,13 @@ import Modal, {
   ModalHeader
 } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import {
+  Tab,
+  Tabs,
+  TabList,
+  TabPanels,
+  TabPanel
+} from 'cozy-ui/transpiled/react/Tabs'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -157,6 +164,10 @@ export class KonnectorModal extends PureComponent {
       accounts
     } = this.state
 
+    const shouldDisplayError = !isJobRunning && konnectorJobError
+    const hasLoginError = konnectorJobError && konnectorJobError.isLoginError()
+    const hasErrorExceptLogin = konnectorJobError && !hasLoginError
+
     return (
       <Modal
         dismissAction={dismissAction}
@@ -218,38 +229,65 @@ export class KonnectorModal extends PureComponent {
                 isImportant
               />
             ) : (
-              <div className="u-mb-2">
-                {!isJobRunning && konnectorJobError && (
-                  <TriggerErrorInfo
-                    className="u-mb-1"
-                    error={konnectorJobError}
-                    konnector={konnector}
-                  />
-                )}
-                <LaunchTriggerCard
-                  className="u-mb-1"
-                  trigger={trigger}
-                  onError={this.handleKonnectorJobError}
-                  onLaunch={this.handleTriggerLaunch}
-                  onSuccess={this.handleKonnectorJobSuccess}
-                  submitting={isJobRunning}
-                />
-                <TriggerManager
-                  account={account}
-                  konnector={konnector}
-                  trigger={trigger}
-                  onError={this.handleKonnectorJobError}
-                  onLaunch={this.handleTriggerLaunch}
-                  onSuccess={this.handleKonnectorJobSuccess}
-                  running={isJobRunning}
-                  showError={false}
-                />
-                <DeleteAccountCard
-                  account={account}
-                  disabled={isJobRunning}
-                  onSuccess={dismissAction}
-                />
-              </div>
+              <Tabs initialActiveTab={hasLoginError ? 'account' : 'sync'}>
+                <TabList>
+                  <Tab name="sync">
+                    {t('modal.konnector.tabs.sync')}
+                    {hasErrorExceptLogin && (
+                      <Icon icon="warning" size={13} className="u-ml-half" />
+                    )}
+                  </Tab>
+                  <Tab name="account">
+                    {t('modal.konnector.tabs.account')}
+                    {hasLoginError && (
+                      <Icon icon="warning" size={13} className="u-ml-half" />
+                    )}
+                  </Tab>
+                </TabList>
+
+                <TabPanels>
+                  <TabPanel name="sync" className="u-pv-half">
+                    {shouldDisplayError && hasErrorExceptLogin && (
+                      <TriggerErrorInfo
+                        className="u-mb-1"
+                        error={konnectorJobError}
+                        konnector={konnector}
+                      />
+                    )}
+                    <LaunchTriggerCard
+                      trigger={trigger}
+                      onError={this.handleKonnectorJobError}
+                      onLaunch={this.handleTriggerLaunch}
+                      onSuccess={this.handleKonnectorJobSuccess}
+                      submitting={isJobRunning}
+                    />
+                  </TabPanel>
+                  <TabPanel name="account" className="u-pv-half">
+                    {shouldDisplayError && hasLoginError && (
+                      <TriggerErrorInfo
+                        className="u-mb-1"
+                        error={konnectorJobError}
+                        konnector={konnector}
+                      />
+                    )}
+                    <TriggerManager
+                      account={account}
+                      konnector={konnector}
+                      trigger={trigger}
+                      onError={this.handleKonnectorJobError}
+                      onLaunch={this.handleTriggerLaunch}
+                      onSuccess={this.handleKonnectorJobSuccess}
+                      running={isJobRunning}
+                      showError={false}
+                    />
+                    <DeleteAccountCard
+                      account={account}
+                      disabled={isJobRunning}
+                      onSuccess={dismissAction}
+                    />
+                  </TabPanel>
+                </TabPanels>
+              </Tabs>
             )}
           </ModalContent>
         )}
