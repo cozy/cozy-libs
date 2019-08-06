@@ -252,6 +252,45 @@ class Transaction extends Document {
   getVendorAccountId() {
     return this[this.constructor.vendorAccountIdAttr]
   }
+
+  static getCategoryId(transaction, options) {
+    const opts = {
+      localModelOverride: false,
+      localModelUsageThreshold: this.LOCAL_MODEL_USAGE_THRESHOLD,
+      globalModelUsageThreshold: this.GLOBAL_MODEL_USAGE_THRESHOLD,
+      ...options
+    }
+
+    if (transaction.manualCategoryId) {
+      return transaction.manualCategoryId
+    }
+
+    if (
+      opts.localModelOverride &&
+      transaction.localCategoryId &&
+      transaction.localCategoryProba &&
+      transaction.localCategoryProba > opts.localModelUsageThreshold
+    ) {
+      return transaction.localCategoryId
+    }
+
+    if (
+      transaction.cozyCategoryId &&
+      transaction.cozyCategoryProba &&
+      transaction.cozyCategoryProba > opts.globalModelUsageThreshold
+    ) {
+      return transaction.cozyCategoryId
+    }
+
+    // If the cozy categorization models have not been applied, we return null
+    // so the transaction is considered as « categorization in progress ».
+    // Otherwize we just use the automatic categorization from the vendor
+    if (!transaction.localCategoryId && !transaction.cozyCategoryId) {
+      return null
+    }
+
+    return transaction.automaticCategoryId
+  }
 }
 Transaction.doctype = 'io.cozy.bank.operations'
 Transaction.version = 1
@@ -264,5 +303,7 @@ Transaction.checkedAttributes = [
   'automaticCategoryId',
   'account'
 ]
+Transaction.LOCAL_MODEL_USAGE_THRESHOLD = 0.8
+Transaction.GLOBAL_MODEL_USAGE_THRESHOLD = 0.15
 
 module.exports = Transaction
