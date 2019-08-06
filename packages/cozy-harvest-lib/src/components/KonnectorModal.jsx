@@ -19,27 +19,12 @@ import DeleteAccountCard from './cards/DeleteAccountCard'
 import LaunchTriggerCard from './cards/LaunchTriggerCard'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
-import SelectBox, {
-  reactSelectControl,
-  components
-} from 'cozy-ui/transpiled/react/SelectBox'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Text } from 'cozy-ui/transpiled/react/Text'
 
-import AccountSelectControl from './KonnectorModal/AccountSelectControl'
-import CreateAccountButton from './KonnectorModal/CreateAccountButton'
-import { Account } from 'cozy-doctypes'
-const MenuWithFixedComponent = props => {
-  const { children } = props
-  const { createAction, ...selectProps } = props.selectProps
-  return (
-    <components.Menu {...props} selectProps={selectProps}>
-      {children}
-      <CreateAccountButton createAction={createAction} />
-    </components.Menu>
-  )
-}
+import AccountSelectBox from './KonnectorModal/AccountSelectBox'
+
 /**
  * KonnectorModal open a Modal related to a given konnector. It fetches the
  * first account and then include a TriggerManager component.
@@ -68,8 +53,6 @@ export class KonnectorModal extends PureComponent {
    * Next tasks: remove these methods and rewrite the override
    */
   componentDidMount() {
-    const { client } = this.context
-    Account.copyWithClient(client)
     this.fetchAccount(this.props.konnector.triggers.data[0])
     this.fetchAccounts()
   }
@@ -101,6 +84,7 @@ export class KonnectorModal extends PureComponent {
     )
     this.setState({ accounts })
   }
+
   async fetchAccount(trigger) {
     const { findAccount } = this.props
     this.setState({ fetching: true })
@@ -193,26 +177,13 @@ export class KonnectorModal extends PureComponent {
                 <Text className="u-slateGrey">{t('loading')}</Text>
               )}
               {accounts.length > 0 && account && (
-                <SelectBox
-                  size="tiny"
-                  options={accounts}
+                <AccountSelectBox
+                  selectedAccount={account}
+                  accountList={accounts}
                   onChange={option => {
                     this.fetchAccount(option.trigger)
                   }}
-                  createAction={createAction}
-                  getOptionLabel={option =>
-                    Account.getAccountName(option.account)
-                  }
-                  getOptionValue={option => option.trigger._id}
-                  defaultValue={accounts[0]}
-                  components={{
-                    Control: reactSelectControl(
-                      <AccountSelectControl
-                        name={Account.getAccountName(account)}
-                      />
-                    ),
-                    Menu: MenuWithFixedComponent
-                  }}
+                  onCreate={createAction}
                 />
               )}
             </div>
