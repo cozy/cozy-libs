@@ -20,6 +20,7 @@
     "prebuild": "yarn tx",
     "prepublishOnly": "yarn build",
     "test": "jest --verbose",
+    "lint": "cd .. && yarn lint packages/cozy-harvest-lib",
     "tx": "tx pull --all",
     "watch": "yarn build --watch",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
