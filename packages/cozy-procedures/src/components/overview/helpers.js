@@ -57,41 +57,49 @@ export const fetchBanksSettings = async client => {
   const query = client.find('io.cozy.bank.settings')
   const response = await client.queryAll(query)
   const settings = response[0]
-
   return settings
 }
 
-export const fetchTransactionsHistoryContent = async client => {
-  const accounts = await fetchCheckingsLikeAccounts(client)
-  const accountsIds = accounts.map(account => account._id)
-  const transactions = await fetchTransactionsHistory(client, accountsIds)
+const fetchLocalModelOverride = async client => {
   const settings = await fetchBanksSettings(client)
   const localModelOverride = get(
     settings,
     'community.localModelOverride',
     false
   )
+  return localModelOverride
+}
 
+const fetchTransactionsByAccount = async client => {
+  const accounts = await fetchCheckingsLikeAccounts(client)
+  const accountsIds = accounts.map(account => account._id)
+  const transactions = await fetchTransactionsHistory(client, accountsIds)
   const transactionsByAccount = groupBy(
     transactions,
     transaction => transaction.account
   )
-
-  const rawContent = accounts.map(account => {
-    const transactions = transactionsByAccount[account._id] || []
-
+  return accounts.map(account => {
     return {
-      ...pick(account, ['balance', 'iban']),
-      transactions: transactions.map(transaction => {
-        return {
-          ...pick(transaction, ['amount', 'label', 'date']),
-          category: BankTransaction.getCategoryId(transaction, {
-            localModelOverride
-          })
-        }
-      })
+      account: account,
+      transactions: transactionsByAccount[account._id] || []
     }
   })
+}
 
+export const fetchTransactionsHistoryContent = async client => {
+  const [localModelOverride, transactionsByAccount] = await Promise.all([
+    fetchLocalModelOverride(client),
+    fetchTransactionsByAccount(client)
+  ])
+
+  const rawContent = transactionsByAccount.map(({ account, transactions }) => ({
+    ...pick(account, ['balance', 'iban']),
+    transactions: transactions.map(transaction => ({
+      ...pick(transaction, ['amount', 'label', 'date']),
+      category: BankTransaction.getCategoryId(transaction, {
+        localModelOverride
+      })
+    }))
+  }))
   return JSON.stringify(rawContent)
 }
