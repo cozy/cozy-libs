@@ -20,6 +20,7 @@ import * as triggersModel from '../helpers/triggers'
 import withLocales from './hoc/withLocales'
 
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
+import AccountList from './AccountList/AccountList'
 import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 
 /**
@@ -32,7 +33,7 @@ import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfigurat
 export class KonnectorModal extends PureComponent {
   state = {
     account: null,
-    fetching: true,
+    fetching: false,
     trigger: null,
     accounts: []
   }
@@ -47,7 +48,6 @@ export class KonnectorModal extends PureComponent {
    * Next tasks: remove these methods and rewrite the override
    */
   componentDidMount() {
-    this.fetchAccount(this.props.konnector.triggers.data[0])
     this.fetchAccounts()
   }
 
@@ -171,7 +171,7 @@ export class KonnectorModal extends PureComponent {
 
   renderModalContent() {
     const { dismissAction, konnector, t, createAction } = this.props
-    const { account, error, fetching, trigger } = this.state
+    const { account, accounts, error, fetching, trigger } = this.state
 
     if (fetching) {
       return (
@@ -189,6 +189,17 @@ export class KonnectorModal extends PureComponent {
           title={t('modal.konnector.error.title')}
           text={t('modal.konnector.error.description', error)}
           isImportant
+        />
+      )
+    } else if (!account) {
+      return (
+        <AccountList
+          accounts={accounts}
+          konnector={konnector}
+          onPick={option => {
+            this.fetchAccount(option.trigger)
+          }}
+          addAccount={createAction}
         />
       )
     } else {
@@ -210,6 +221,8 @@ KonnectorModal.propTypes = {
   into: PropTypes.string,
   konnector: PropTypes.shape({
     slug: PropTypes.string,
+    name: PropTypes.string,
+    vendor_link: PropTypes.string,
     triggers: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object)
     })
