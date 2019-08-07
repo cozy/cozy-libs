@@ -17,10 +17,6 @@
     }
   },
   "card": {
-    "deleteAccount": {
-      "title": "Disconnection",
-      "description": "Your will be disconnected from this account, but imported data will be kept"
-    },
     "launchTrigger": {
       "button": {
         "label": "Run again now"
@@ -251,12 +247,22 @@
         "title": "Unable to retrieve your account",
         "description": "The account cannot be retrieved (%{message}).",
         "button": "Close"
-      },
-      "create_account": "Create an account"
+      }
     },
     "tabs": {
       "sync": "synchronization",
       "account": "account"
+    },
+    "addAccount": {
+      "title": "Add a new account",
+      "button": "Add an account"
+    },
+    "deleteAccount": {
+      "title": "Disconnection",
+      "description": "Your will be disconnected from this account, but imported data will be kept"
+    },
+    "updateAccount": {
+      "title": "Update your account information"
     }
   },
   "oauth": {

@@ -22,12 +22,12 @@ exports[`KonnectorModal should show the content 1`] = `
       <Tab
         name="sync"
       >
-        modal.konnector.tabs.sync
+        modal.tabs.sync
       </Tab>
       <Tab
         name="account"
       >
-        modal.konnector.tabs.account
+        modal.tabs.account
       </Tab>
     </TabList>
     <TabPanels>
@@ -46,40 +46,77 @@ exports[`KonnectorModal should show the content 1`] = `
         className="u-pv-half"
         name="account"
       >
-        <Wrapper
-          account={null}
-          konnector={
-            Object {
-              "name": "Mock",
-              "slug": "mock",
-              "triggers": Object {
-                "data": Array [
-                  Object {
-                    "doctype": "io.cozy.triggers",
-                    "id": 784,
-                  },
-                ],
-              },
+        <div
+          className="u-mb-1-half"
+        >
+          <SubTitle
+            className="u-mb-1"
+            ellipsis={false}
+            tag="div"
+          >
+            modal.updateAccount.title
+          </SubTitle>
+          <Wrapper
+            account={null}
+            konnector={
+              Object {
+                "name": "Mock",
+                "slug": "mock",
+                "triggers": Object {
+                  "data": Array [
+                    Object {
+                      "doctype": "io.cozy.triggers",
+                      "id": 784,
+                    },
+                  ],
+                },
+              }
             }
-          }
-          onError={[Function]}
-          onLaunch={[Function]}
-          onSuccess={[Function]}
-          showError={false}
-          trigger={null}
-        />
-        <Wrapper
-          account={null}
-          className="u-mb-1"
-          onSuccess={[MockFunction]}
-        />
-        <DefaultButton
-          extension="full"
-          icon="plus"
-          label="modal.konnector.create_account"
-          onClick={[MockFunction]}
-          theme="secondary"
-        />
+            onError={[Function]}
+            onLaunch={[Function]}
+            onSuccess={[Function]}
+            showError={false}
+            trigger={null}
+          />
+        </div>
+        <div
+          className="u-mb-1-half"
+        >
+          <SubTitle
+            className="u-mb-1"
+            ellipsis={false}
+            tag="div"
+          >
+            modal.deleteAccount.title
+          </SubTitle>
+          <Text
+            className="u-mb-1"
+            ellipsis={false}
+            tag="div"
+          >
+            modal.deleteAccount.description
+          </Text>
+          <Wrapper
+            account={null}
+            extension="full"
+            onSuccess={[MockFunction]}
+          />
+        </div>
+        <div>
+          <SubTitle
+            className="u-mb-1"
+            ellipsis={false}
+            tag="div"
+          >
+            modal.addAccount.title
+          </SubTitle>
+          <DefaultButton
+            extension="full"
+            label="modal.addAccount.button"
+            onClick={[MockFunction]}
+            theme="secondary"
+          />
+        </div>
       </TabPanel>
     </TabPanels>
   </Tabs>
