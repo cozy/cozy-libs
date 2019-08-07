@@ -78,6 +78,7 @@ export class KonnectorModal extends PureComponent {
       } catch (error) {}
     }, 50)
   }
+
   async fetchAccounts() {
     const triggers = this.props.konnector.triggers.data
     const { findAccount } = this.props
