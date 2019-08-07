@@ -16,24 +16,24 @@ exports[`KonnectorModal should show the content 1`] = `
   className="u-pb-0"
 >
   <Tabs
-    initialActiveTab="sync"
+    initialActiveTab="data"
   >
     <TabList>
       <Tab
-        name="sync"
+        name="data"
       >
-        modal.tabs.sync
+        modal.tabs.data
       </Tab>
       <Tab
-        name="account"
+        name="configuration"
       >
-        modal.tabs.account
+        modal.tabs.configuration
       </Tab>
     </TabList>
     <TabPanels>
       <TabPanel
-        className="u-pv-half"
-        name="sync"
+        className="u-pt-1-half u-pb-2"
+        name="data"
       >
         <Wrapper
           onError={[Function]}
@@ -43,14 +43,14 @@ exports[`KonnectorModal should show the content 1`] = `
         />
       </TabPanel>
       <TabPanel
-        className="u-pv-half"
-        name="account"
+        className="u-pt-1-half u-pb-2"
+        name="configuration"
       >
         <div
-          className="u-mb-1-half"
+          className="u-mb-1"
         >
           <SubTitle
-            className="u-mb-1"
+            className="u-mb-half"
             ellipsis={false}
             tag="div"
           >
@@ -80,10 +80,10 @@ exports[`KonnectorModal should show the content 1`] = `
           />
         </div>
         <div
-          className="u-mb-1-half"
+          className="u-mb-2"
         >
           <SubTitle
-            className="u-mb-1"
+            className="u-mb-half"
             ellipsis={false}
             tag="div"
           >
@@ -104,7 +104,7 @@ exports[`KonnectorModal should show the content 1`] = `
         </div>
         <div>
           <SubTitle
-            className="u-mb-1"
+            className="u-mb-half"
             ellipsis={false}
             tag="div"
           >

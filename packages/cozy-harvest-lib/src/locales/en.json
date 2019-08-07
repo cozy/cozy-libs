@@ -250,8 +250,8 @@
       }
     },
     "tabs": {
-      "sync": "synchronization",
-      "account": "account"
+      "data": "Data",
+      "configuration": "Configuration"
     },
     "addAccount": {
       "title": "Add a new account",
