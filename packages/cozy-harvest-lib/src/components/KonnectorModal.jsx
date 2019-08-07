@@ -190,8 +190,8 @@ export class KonnectorModal extends PureComponent {
                 konnector={konnector}
                 trigger={trigger}
                 account={account}
-                dismissAction={dismissAction}
-                createAction={createAction}
+                onAccountDeleted={dismissAction}
+                addAccount={createAction}
                 refetchTrigger={this.refetchTrigger}
               />
             )}

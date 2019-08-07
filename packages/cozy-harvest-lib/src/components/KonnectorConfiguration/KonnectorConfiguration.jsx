@@ -69,8 +69,8 @@ class KonnectorConfiguration extends React.Component {
       konnector,
       trigger,
       account,
-      dismissAction,
-      createAction,
+      onAccountDeleted,
+      addAccount,
       t
     } = this.props
     const { isJobRunning, konnectorJobError } = this.state
@@ -146,7 +146,7 @@ class KonnectorConfiguration extends React.Component {
               <DeleteAccountButton
                 account={account}
                 disabled={isJobRunning}
-                onSuccess={dismissAction}
+                onSuccess={onAccountDeleted}
                 extension="full"
               />
             </div>
@@ -155,7 +155,7 @@ class KonnectorConfiguration extends React.Component {
                 {t('modal.addAccount.title')}
               </SubTitle>
               <Button
-                onClick={createAction}
+                onClick={addAccount}
                 label={t('modal.addAccount.button')}
                 extension="full"
                 theme="secondary"
@@ -173,8 +173,8 @@ KonnectorConfiguration.propTypes = {
   konnectorJobError: PropTypes.object,
   trigger: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
-  dismissAction: PropTypes.func.isRequired,
-  createAction: PropTypes.func.isRequired,
+  onAccountDeleted: PropTypes.func.isRequired,
+  addAccount: PropTypes.func.isRequired,
   refetchTrigger: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
