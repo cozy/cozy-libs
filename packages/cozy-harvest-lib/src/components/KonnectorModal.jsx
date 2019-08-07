@@ -17,18 +17,17 @@ import {
   TabPanels,
   TabPanel
 } from 'cozy-ui/transpiled/react/Tabs'
+import { SubTitle, Text } from 'cozy-ui/transpiled/react/Text'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
-import DeleteAccountCard from './cards/DeleteAccountCard'
 import LaunchTriggerCard from './cards/LaunchTriggerCard'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
-
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import { Text } from 'cozy-ui/transpiled/react/Text'
+import DeleteAccountButton from './DeleteAccountButton'
 
 import AccountSelectBox from './KonnectorModal/AccountSelectBox'
 
@@ -233,13 +232,13 @@ export class KonnectorModal extends PureComponent {
               <Tabs initialActiveTab={hasLoginError ? 'account' : 'sync'}>
                 <TabList>
                   <Tab name="sync">
-                    {t('modal.konnector.tabs.sync')}
+                    {t('modal.tabs.sync')}
                     {hasErrorExceptLogin && (
                       <Icon icon="warning" size={13} className="u-ml-half" />
                     )}
                   </Tab>
                   <Tab name="account">
-                    {t('modal.konnector.tabs.account')}
+                    {t('modal.tabs.account')}
                     {hasLoginError && (
                       <Icon icon="warning" size={13} className="u-ml-half" />
                     )}
@@ -271,29 +270,46 @@ export class KonnectorModal extends PureComponent {
                         konnector={konnector}
                       />
                     )}
-                    <TriggerManager
-                      account={account}
-                      konnector={konnector}
-                      trigger={trigger}
-                      onError={this.handleKonnectorJobError}
-                      onLaunch={this.handleTriggerLaunch}
-                      onSuccess={this.handleKonnectorJobSuccess}
-                      running={isJobRunning}
-                      showError={false}
-                    />
-                    <DeleteAccountCard
-                      account={account}
-                      disabled={isJobRunning}
-                      onSuccess={dismissAction}
-                      className="u-mb-1"
-                    />
-                    <Button
-                      onClick={createAction}
-                      label={t('modal.konnector.create_account')}
-                      extension="full"
-                      theme="secondary"
-                      icon="plus"
-                    />
+                    <div className="u-mb-1-half">
+                      <SubTitle className="u-mb-1">
+                        {t('modal.updateAccount.title')}
+                      </SubTitle>
+                      <TriggerManager
+                        account={account}
+                        konnector={konnector}
+                        trigger={trigger}
+                        onError={this.handleKonnectorJobError}
+                        onLaunch={this.handleTriggerLaunch}
+                        onSuccess={this.handleKonnectorJobSuccess}
+                        running={isJobRunning}
+                        showError={false}
+                      />
+                    </div>
+                    <div className="u-mb-1-half">
+                      <SubTitle className="u-mb-1">
+                        {t('modal.deleteAccount.title')}
+                      </SubTitle>
+                      <Text className="u-mb-1">
+                        {t('modal.deleteAccount.description')}
+                      </Text>
+                      <DeleteAccountButton
+                        account={account}
+                        disabled={isJobRunning}
+                        onSuccess={dismissAction}
+                        extension="full"
+                      />
+                    </div>
+                    <div>
+                      <SubTitle className="u-mb-1">
+                        {t('modal.addAccount.title')}
+                      </SubTitle>
+                      <Button
+                        onClick={createAction}
+                        label={t('modal.addAccount.button')}
+                        extension="full"
+                        theme="secondary"
+                      />
+                    </div>
                   </TabPanel>
                 </TabPanels>
               </Tabs>
