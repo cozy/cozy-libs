@@ -40,9 +40,6 @@ export class KonnectorModal extends PureComponent {
   constructor(props) {
     super(props)
     this.fetchIcon = this.fetchIcon.bind(this)
-    this.handleKonnectorJobError = this.handleKonnectorJobError.bind(this)
-    this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
-    this.handleTriggerLaunch = this.handleTriggerLaunch.bind(this)
   }
   /**
    * TODO We should not fetchAccounts and fetchAccount since we already have the informations
@@ -91,8 +88,7 @@ export class KonnectorModal extends PureComponent {
       const account = await findAccount(triggersModel.getAccountId(trigger))
       this.setState({
         account,
-        trigger,
-        konnectorJobError: triggersModel.getError(trigger)
+        trigger
       })
     } catch (error) {
       this.setState({
@@ -114,24 +110,6 @@ export class KonnectorModal extends PureComponent {
     })
   }
 
-  handleKonnectorJobError(konnectorJobError) {
-    this.setState({
-      konnectorJobError,
-      isJobRunning: false
-    })
-
-    this.refetchTrigger()
-  }
-
-  handleKonnectorJobSuccess(trigger) {
-    this.setState({ isJobRunning: false, trigger })
-    this.refetchTrigger()
-  }
-
-  handleTriggerLaunch() {
-    this.setState({ isJobRunning: true, konnectorJobError: null })
-  }
-
   async refetchTrigger() {
     const { fetchTrigger } = this.props
     const { trigger } = this.state
@@ -145,15 +123,7 @@ export class KonnectorModal extends PureComponent {
   render() {
     const { dismissAction, konnector, into, t, createAction } = this.props
 
-    const {
-      account,
-      error,
-      fetching,
-      isJobRunning,
-      konnectorJobError,
-      trigger,
-      accounts
-    } = this.state
+    const { account, error, fetching, trigger, accounts } = this.state
 
     return (
       <Modal
@@ -218,15 +188,11 @@ export class KonnectorModal extends PureComponent {
             ) : (
               <KonnectorConfiguration
                 konnector={konnector}
-                konnectorJobError={konnectorJobError}
                 trigger={trigger}
                 account={account}
-                isJobRunning={isJobRunning}
                 dismissAction={dismissAction}
                 createAction={createAction}
-                handleTriggerLaunch={this.handleTriggerLaunch}
-                handleKonnectorJobSuccess={this.handleKonnectorJobSuccess}
-                handleKonnectorJobError={this.handleKonnectorJobError}
+                refetchTrigger={this.refetchTrigger}
               />
             )}
           </ModalContent>

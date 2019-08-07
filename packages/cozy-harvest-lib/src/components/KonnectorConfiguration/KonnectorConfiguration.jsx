@@ -69,8 +69,8 @@ class KonnectorConfiguration extends React.Component {
       konnector,
       trigger,
       account,
-      onAccountDeleted,
-      addAccount,
+      dismissAction,
+      createAction,
       t
     } = this.props
     const { isJobRunning, konnectorJobError } = this.state
@@ -107,9 +107,9 @@ class KonnectorConfiguration extends React.Component {
             )}
             <LaunchTriggerCard
               trigger={trigger}
-              onError={this.handleKonnectorJobError}
               onLaunch={this.handleTriggerLaunch}
               onSuccess={this.handleKonnectorJobSuccess}
+              onError={this.handleKonnectorJobError}
               submitting={isJobRunning}
             />
           </TabPanel>
@@ -129,9 +129,9 @@ class KonnectorConfiguration extends React.Component {
                 account={account}
                 konnector={konnector}
                 trigger={trigger}
-                onError={this.handleKonnectorJobError}
                 onLaunch={this.handleTriggerLaunch}
                 onSuccess={this.handleKonnectorJobSuccess}
+                onError={this.handleKonnectorJobError}
                 running={isJobRunning}
                 showError={false}
               />
@@ -173,8 +173,8 @@ KonnectorConfiguration.propTypes = {
   konnectorJobError: PropTypes.object,
   trigger: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
-  onAccountDeleted: PropTypes.func.isRequired,
-  addAccount: PropTypes.func.isRequired,
+  dismissAction: PropTypes.func.isRequired,
+  createAction: PropTypes.func.isRequired,
   refetchTrigger: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
