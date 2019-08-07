@@ -122,8 +122,7 @@ export class KonnectorModal extends PureComponent {
 
   render() {
     const { dismissAction, konnector, into, t, createAction } = this.props
-
-    const { account, error, fetching, trigger, accounts } = this.state
+    const { account, accounts } = this.state
 
     return (
       <Modal
@@ -165,40 +164,45 @@ export class KonnectorModal extends PureComponent {
             />
           </div>
         </ModalHeader>
-        {fetching ? (
-          <ModalContent>
-            <Spinner
-              size="xxlarge"
-              className="u-flex u-flex-justify-center u-pv-3"
-            />
-          </ModalContent>
-        ) : (
-          <ModalContent className="u-pb-0">
-            {error ? (
-              <Infos
-                actionButton={
-                  <Button theme="danger">
-                    {t('modal.konnector.error.button')}
-                  </Button>
-                }
-                title={t('modal.konnector.error.title')}
-                text={t('modal.konnector.error.description', error)}
-                isImportant
-              />
-            ) : (
-              <KonnectorConfiguration
-                konnector={konnector}
-                trigger={trigger}
-                account={account}
-                onAccountDeleted={dismissAction}
-                addAccount={createAction}
-                refetchTrigger={this.refetchTrigger}
-              />
-            )}
-          </ModalContent>
-        )}
+        <ModalContent>{this.renderModalContent()}</ModalContent>
       </Modal>
     )
+  }
+
+  renderModalContent() {
+    const { dismissAction, konnector, t, createAction } = this.props
+    const { account, error, fetching, trigger } = this.state
+
+    if (fetching) {
+      return (
+        <Spinner
+          size="xxlarge"
+          className="u-flex u-flex-justify-center u-pv-3"
+        />
+      )
+    } else if (error) {
+      return (
+        <Infos
+          actionButton={
+            <Button theme="danger">{t('modal.konnector.error.button')}</Button>
+          }
+          title={t('modal.konnector.error.title')}
+          text={t('modal.konnector.error.description', error)}
+          isImportant
+        />
+      )
+    } else {
+      return (
+        <KonnectorConfiguration
+          konnector={konnector}
+          trigger={trigger}
+          account={account}
+          onAccountDeleted={dismissAction}
+          addAccount={createAction}
+          refetchTrigger={this.refetchTrigger}
+        />
+      )
+    }
   }
 }
 
