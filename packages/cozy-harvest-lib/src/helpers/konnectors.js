@@ -86,6 +86,46 @@ export class KonnectorJobError extends Error {
 }
 
 /**
+ * Returns the locale of an error key (description or title or else).
+ * This method first try to get the full error code
+ * (for example LOGIN_FAILED.LOGIN_FAILED.NEEDS_SECRET), then fallback on the
+ * error type, which is the error code first segment (in our example, it's
+ * LOGIN_FAILED). It none of these two tries returns anything, it means
+ * that the error is unknown or not yet handled by harvest, so we fallback
+ * to the default error messages.
+ * @param  {Error} error      The error
+ * @param  {Object} konnector konnector related to this error
+ * @param  {Func} t           Translation function, expected to be Polyglot.t()
+ * @param  {Func} suffixKey   What part of the error message should be returned, title or description
+ * @return {String}           The error locale
+ */
+export const getErrorLocale = (error, konnector, t, suffixKey) => {
+  const defaultKey = 'error.job.UNKNOWN_ERROR'
+  const translationVariables = {
+    name: konnector.name || '',
+    link: konnector.vendor_link || ''
+  }
+
+  // not handled errors
+  if (!(error instanceof KonnectorJobError)) {
+    const locale = t(`${defaultKey}.${suffixKey}`, translationVariables)
+    // since it's not handled errors, we add more details if available
+    if (suffixKey === 'description') {
+      return error.message ? `${locale} (${error.message})` : locale
+    }
+    return t(`${defaultKey}.${suffixKey}`, translationVariables)
+  }
+
+  return t(`error.job.${error.code}.${suffixKey}`, {
+    ...translationVariables,
+    _: t(`error.job.${error.type}.${suffixKey}`, {
+      ...translationVariables,
+      _: t(`${defaultKey}.${suffixKey}`, translationVariables)
+    })
+  })
+}
+
+/**
  * Returns the account type. Based on the information from the oauth attribute,
  * or the slug.
  * @param  {Object} konnector
