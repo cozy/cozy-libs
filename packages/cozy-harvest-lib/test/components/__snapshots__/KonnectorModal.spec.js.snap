@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KonnectorModal should show a spinner while loading 1`] = `
+<Spinner
+  className="u-flex u-flex-justify-center u-pv-3"
+  color="var(--primaryColor)"
+  loadingType=""
+  middle={false}
+  noMargin={false}
+  size="xxlarge"
+/>
+`;
+
+exports[`KonnectorModal should show the content 1`] = `
+<ModalContent
+  className="u-pb-0"
+>
+  <Tabs
+    initialActiveTab="sync"
+  >
+    <TabList>
+      <Tab
+        name="sync"
+      >
+        modal.konnector.tabs.sync
+      </Tab>
+      <Tab
+        name="account"
+      >
+        modal.konnector.tabs.account
+      </Tab>
+    </TabList>
+    <TabPanels>
+      <TabPanel
+        className="u-pv-half"
+        name="sync"
+      >
+        <Wrapper
+          onError={[Function]}
+          onLaunch={[Function]}
+          onSuccess={[Function]}
+          trigger={null}
+        />
+      </TabPanel>
+      <TabPanel
+        className="u-pv-half"
+        name="account"
+      >
+        <Wrapper
+          account={null}
+          konnector={
+            Object {
+              "name": "Mock",
+              "slug": "mock",
+              "triggers": Object {
+                "data": Array [
+                  Object {
+                    "doctype": "io.cozy.triggers",
+                    "id": 784,
+                  },
+                ],
+              },
+            }
+          }
+          onError={[Function]}
+          onLaunch={[Function]}
+          onSuccess={[Function]}
+          showError={false}
+          trigger={null}
+        />
+        <Wrapper
+          account={null}
+          className="u-mb-1"
+          onSuccess={[MockFunction]}
+        />
+        <DefaultButton
+          extension="full"
+          icon="plus"
+          label="modal.konnector.create_account"
+          onClick={[MockFunction]}
+          theme="secondary"
+        />
+      </TabPanel>
+    </TabPanels>
+  </Tabs>
+</ModalContent>
+`;
