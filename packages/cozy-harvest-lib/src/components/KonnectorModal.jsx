@@ -10,26 +10,17 @@ import Modal, {
   ModalHeader
 } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import {
-  Tab,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel
-} from 'cozy-ui/transpiled/react/Tabs'
-import { SubTitle, Text } from 'cozy-ui/transpiled/react/Text'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import { Text } from 'cozy-ui/transpiled/react/Text'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
-import TriggerManager from './TriggerManager'
-import LaunchTriggerCard from './cards/LaunchTriggerCard'
-import TriggerErrorInfo from './infos/TriggerErrorInfo'
+
 import withLocales from './hoc/withLocales'
-import DeleteAccountButton from './DeleteAccountButton'
 
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
+import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 
 /**
  * KonnectorModal open a Modal related to a given konnector. It fetches the
@@ -164,10 +155,6 @@ export class KonnectorModal extends PureComponent {
       accounts
     } = this.state
 
-    const shouldDisplayError = !isJobRunning && konnectorJobError
-    const hasLoginError = konnectorJobError && konnectorJobError.isLoginError()
-    const hasErrorExceptLogin = konnectorJobError && !hasLoginError
-
     return (
       <Modal
         dismissAction={dismissAction}
@@ -229,90 +216,18 @@ export class KonnectorModal extends PureComponent {
                 isImportant
               />
             ) : (
-              <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
-                <TabList>
-                  <Tab name="data">
-                    {t('modal.tabs.data')}
-                    {hasErrorExceptLogin && (
-                      <Icon icon="warning" size={13} className="u-ml-half" />
-                    )}
-                  </Tab>
-                  <Tab name="configuration">
-                    {t('modal.tabs.configuration')}
-                    {hasLoginError && (
-                      <Icon icon="warning" size={13} className="u-ml-half" />
-                    )}
-                  </Tab>
-                </TabList>
-
-                <TabPanels>
-                  <TabPanel name="data" className="u-pt-1-half u-pb-2">
-                    {shouldDisplayError && hasErrorExceptLogin && (
-                      <TriggerErrorInfo
-                        className="u-mb-2"
-                        error={konnectorJobError}
-                        konnector={konnector}
-                      />
-                    )}
-                    <LaunchTriggerCard
-                      trigger={trigger}
-                      onError={this.handleKonnectorJobError}
-                      onLaunch={this.handleTriggerLaunch}
-                      onSuccess={this.handleKonnectorJobSuccess}
-                      submitting={isJobRunning}
-                    />
-                  </TabPanel>
-                  <TabPanel name="configuration" className="u-pt-1-half u-pb-2">
-                    {shouldDisplayError && hasLoginError && (
-                      <TriggerErrorInfo
-                        className="u-mb-2"
-                        error={konnectorJobError}
-                        konnector={konnector}
-                      />
-                    )}
-                    <div className="u-mb-1">
-                      <SubTitle className="u-mb-half">
-                        {t('modal.updateAccount.title')}
-                      </SubTitle>
-                      <TriggerManager
-                        account={account}
-                        konnector={konnector}
-                        trigger={trigger}
-                        onError={this.handleKonnectorJobError}
-                        onLaunch={this.handleTriggerLaunch}
-                        onSuccess={this.handleKonnectorJobSuccess}
-                        running={isJobRunning}
-                        showError={false}
-                      />
-                    </div>
-                    <div className="u-mb-2">
-                      <SubTitle className="u-mb-half">
-                        {t('modal.deleteAccount.title')}
-                      </SubTitle>
-                      <Text className="u-mb-1">
-                        {t('modal.deleteAccount.description')}
-                      </Text>
-                      <DeleteAccountButton
-                        account={account}
-                        disabled={isJobRunning}
-                        onSuccess={dismissAction}
-                        extension="full"
-                      />
-                    </div>
-                    <div>
-                      <SubTitle className="u-mb-half">
-                        {t('modal.addAccount.title')}
-                      </SubTitle>
-                      <Button
-                        onClick={createAction}
-                        label={t('modal.addAccount.button')}
-                        extension="full"
-                        theme="secondary"
-                      />
-                    </div>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
+              <KonnectorConfiguration
+                konnector={konnector}
+                konnectorJobError={konnectorJobError}
+                trigger={trigger}
+                account={account}
+                isJobRunning={isJobRunning}
+                dismissAction={dismissAction}
+                createAction={createAction}
+                handleTriggerLaunch={this.handleTriggerLaunch}
+                handleKonnectorJobSuccess={this.handleKonnectorJobSuccess}
+                handleKonnectorJobError={this.handleKonnectorJobError}
+              />
             )}
           </ModalContent>
         )}
