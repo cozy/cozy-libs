@@ -29,7 +29,7 @@ import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import withLocales from './hoc/withLocales'
 import DeleteAccountButton from './DeleteAccountButton'
 
-import AccountSelectBox from './KonnectorModal/AccountSelectBox'
+import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 
 /**
  * KonnectorModal open a Modal related to a given konnector. It fetches the
