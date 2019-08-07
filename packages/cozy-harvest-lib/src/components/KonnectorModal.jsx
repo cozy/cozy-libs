@@ -321,6 +321,21 @@ export class KonnectorModal extends PureComponent {
   }
 }
 
+KonnectorModal.propTypes = {
+  into: PropTypes.string,
+  konnector: PropTypes.shape({
+    slug: PropTypes.string,
+    triggers: PropTypes.shape({
+      data: PropTypes.arrayOf(PropTypes.object)
+    })
+  }),
+  fetchAccount: PropTypes.func,
+  fetchTrigger: PropTypes.func,
+  dismissAction: PropTypes.func,
+  createAction: PropTypes.func,
+  t: PropTypes.func
+}
+
 KonnectorModal.contextTypes = {
   client: PropTypes.object.isRequired
 }
