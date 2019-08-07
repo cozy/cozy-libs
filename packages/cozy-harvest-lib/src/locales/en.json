@@ -259,7 +259,7 @@
     },
     "deleteAccount": {
       "title": "Disconnection",
-      "description": "Your will be disconnected from this account, but imported data will be kept"
+      "description": "Your account will be disconnected, but imported data will be kept"
     },
     "updateAccount": {
       "title": "Update your account information"
