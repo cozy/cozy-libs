@@ -229,16 +229,16 @@ export class KonnectorModal extends PureComponent {
                 isImportant
               />
             ) : (
-              <Tabs initialActiveTab={hasLoginError ? 'account' : 'sync'}>
+              <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
                 <TabList>
-                  <Tab name="sync">
-                    {t('modal.tabs.sync')}
+                  <Tab name="data">
+                    {t('modal.tabs.data')}
                     {hasErrorExceptLogin && (
                       <Icon icon="warning" size={13} className="u-ml-half" />
                     )}
                   </Tab>
-                  <Tab name="account">
-                    {t('modal.tabs.account')}
+                  <Tab name="configuration">
+                    {t('modal.tabs.configuration')}
                     {hasLoginError && (
                       <Icon icon="warning" size={13} className="u-ml-half" />
                     )}
@@ -246,10 +246,10 @@ export class KonnectorModal extends PureComponent {
                 </TabList>
 
                 <TabPanels>
-                  <TabPanel name="sync" className="u-pv-half">
+                  <TabPanel name="data" className="u-pt-1-half u-pb-2">
                     {shouldDisplayError && hasErrorExceptLogin && (
                       <TriggerErrorInfo
-                        className="u-mb-1"
+                        className="u-mb-2"
                         error={konnectorJobError}
                         konnector={konnector}
                       />
@@ -262,16 +262,16 @@ export class KonnectorModal extends PureComponent {
                       submitting={isJobRunning}
                     />
                   </TabPanel>
-                  <TabPanel name="account" className="u-pv-half">
+                  <TabPanel name="configuration" className="u-pt-1-half u-pb-2">
                     {shouldDisplayError && hasLoginError && (
                       <TriggerErrorInfo
-                        className="u-mb-1"
+                        className="u-mb-2"
                         error={konnectorJobError}
                         konnector={konnector}
                       />
                     )}
-                    <div className="u-mb-1-half">
-                      <SubTitle className="u-mb-1">
+                    <div className="u-mb-1">
+                      <SubTitle className="u-mb-half">
                         {t('modal.updateAccount.title')}
                       </SubTitle>
                       <TriggerManager
@@ -285,8 +285,8 @@ export class KonnectorModal extends PureComponent {
                         showError={false}
                       />
                     </div>
-                    <div className="u-mb-1-half">
-                      <SubTitle className="u-mb-1">
+                    <div className="u-mb-2">
+                      <SubTitle className="u-mb-half">
                         {t('modal.deleteAccount.title')}
                       </SubTitle>
                       <Text className="u-mb-1">
@@ -300,7 +300,7 @@ export class KonnectorModal extends PureComponent {
                       />
                     </div>
                     <div>
-                      <SubTitle className="u-mb-1">
+                      <SubTitle className="u-mb-half">
                         {t('modal.addAccount.title')}
                       </SubTitle>
                       <Button
