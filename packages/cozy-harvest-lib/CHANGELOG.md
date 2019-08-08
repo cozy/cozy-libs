@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.70.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.70.0...cozy-harvest-lib@0.70.1) (2019-08-08)
+
+
+### Bug Fixes
+
+* Delete description ([b70f785](https://github.com/cozy/cozy-libs/commit/b70f785))
+* Tab names and margins ([74e16bc](https://github.com/cozy/cozy-libs/commit/74e16bc))
+
+
+
+
+
 # [0.70.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.69.3...cozy-harvest-lib@0.70.0) (2019-08-07)
 
 
