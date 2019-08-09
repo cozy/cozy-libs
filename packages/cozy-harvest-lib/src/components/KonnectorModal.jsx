@@ -257,7 +257,7 @@ KonnectorModal.propTypes = {
       data: PropTypes.arrayOf(PropTypes.object)
     })
   }),
-  fetchAccount: PropTypes.func,
+  findAccount: PropTypes.func,
   fetchTrigger: PropTypes.func,
   dismissAction: PropTypes.func,
   createAction: PropTypes.func,
