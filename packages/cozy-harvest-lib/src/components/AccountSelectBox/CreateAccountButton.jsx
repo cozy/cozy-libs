@@ -8,7 +8,7 @@ const CreateAccount = translate()(({ createAction, t }) => {
       size={'small'}
       className={'u-m-half'}
       onClick={createAction}
-      label={t('modal.konnector.create_account')}
+      label={t('modal.addAccount.button')}
     />
   )
 })
