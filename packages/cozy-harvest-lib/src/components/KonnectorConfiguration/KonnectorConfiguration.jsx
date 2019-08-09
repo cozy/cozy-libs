@@ -97,7 +97,7 @@ class KonnectorConfiguration extends React.Component {
         </TabList>
 
         <TabPanels>
-          <TabPanel name="data" className="u-pt-1-half u-pb-2">
+          <TabPanel name="data" className="u-pt-1-half u-pb-0">
             {shouldDisplayError && hasErrorExceptLogin && (
               <TriggerErrorInfo
                 className="u-mb-2"
@@ -113,7 +113,7 @@ class KonnectorConfiguration extends React.Component {
               submitting={isJobRunning}
             />
           </TabPanel>
-          <TabPanel name="configuration" className="u-pt-1-half u-pb-2">
+          <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
             {shouldDisplayError && hasLoginError && (
               <TriggerErrorInfo
                 className="u-mb-2"
