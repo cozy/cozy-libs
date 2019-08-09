@@ -22,7 +22,13 @@ const AccountSelectBox = ({
       createAction={onCreate}
       getOptionLabel={option => Account.getAccountName(option.account)}
       getOptionValue={option => option.trigger._id}
-      defaultValue={accountList[0]}
+      defaultValue={
+        selectedAccount
+          ? accountList.find(
+              ({ account }) => account._id === selectedAccount._id
+            )
+          : accountList[0]
+      }
       components={{
         Control: reactSelectControl(
           <AccountSelectControl
