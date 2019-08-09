@@ -12,6 +12,7 @@ import Modal, {
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Text } from 'cozy-ui/transpiled/react/Text'
+import get from 'lodash/get'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -47,8 +48,13 @@ export class KonnectorModal extends PureComponent {
    * in the props. We kept this sytem for compatibility on the existing override.
    * Next tasks: remove these methods and rewrite the override
    */
-  componentDidMount() {
-    this.fetchAccounts()
+  async componentDidMount() {
+    await this.fetchAccounts()
+    const { accounts } = this.state
+
+    if (this.props.accountId) this.loadSelectedAccountId()
+    else if (accounts.length === 1)
+      this.requestAccountChange(accounts[0].account, accounts[0].trigger)
   }
 
   componentWillUnmount() {
@@ -64,6 +70,30 @@ export class KonnectorModal extends PureComponent {
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }, 50)
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.accountId && this.props.accountId !== prevProps.accountId) {
+      this.loadSelectedAccountId()
+    }
+  }
+
+  requestAccountChange(account, trigger) {
+    // This component can either defer the account switching to a parent component through the onAccountChange prop, or handle the change itself if the prop is missing
+    const { onAccountChange } = this.props
+    pickAction ? onAccountChange(account) : this.fetchAccount(trigger)
+  }
+
+  loadSelectedAccountId() {
+    const selectedAccountId = this.props.accountId
+    const { accounts } = this.state
+
+    const matchingTrigger = get(
+      accounts.find(account => account.account._id === selectedAccountId),
+      'trigger'
+    )
+
+    if (matchingTrigger) this.fetchAccount(matchingTrigger)
   }
 
   async fetchAccounts() {
@@ -148,7 +178,7 @@ export class KonnectorModal extends PureComponent {
                   selectedAccount={account}
                   accountList={accounts}
                   onChange={option => {
-                    this.fetchAccount(option.trigger)
+                    this.requestAccountChange(option.account, option.trigger)
                   }}
                   onCreate={createAction}
                 />
@@ -197,7 +227,7 @@ export class KonnectorModal extends PureComponent {
           accounts={accounts}
           konnector={konnector}
           onPick={option => {
-            this.fetchAccount(option.trigger)
+            this.requestAccountChange(option.account, option.trigger)
           }}
           addAccount={createAction}
         />
@@ -231,6 +261,7 @@ KonnectorModal.propTypes = {
   fetchTrigger: PropTypes.func,
   dismissAction: PropTypes.func,
   createAction: PropTypes.func,
+  onAccountChange: PropTypes.func,
   t: PropTypes.func
 }
 
