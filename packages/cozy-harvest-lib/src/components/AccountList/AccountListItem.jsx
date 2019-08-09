@@ -38,7 +38,10 @@ export class AccountListItem extends React.PureComponent {
     const nameAndLoginDiffer = accountName !== accountLogin
     const statusContent = this.getStatusContent()
     return (
-      <Card className="u-flex u-flex-justify-between" onClick={onClick}>
+      <Card
+        className="u-flex u-flex-justify-between u-flex-items-center u-c-pointer"
+        onClick={onClick}
+      >
         <div>
           <div>{accountName}</div>
           {nameAndLoginDiffer && <Caption>{accountLogin}</Caption>}
