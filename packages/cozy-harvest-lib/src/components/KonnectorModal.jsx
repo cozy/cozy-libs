@@ -11,7 +11,6 @@ import Modal, {
 } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { Text } from 'cozy-ui/transpiled/react/Text'
 import get from 'lodash/get'
 
 import accountMutations from '../connections/accounts'
@@ -35,6 +34,7 @@ export class KonnectorModal extends PureComponent {
   state = {
     account: null,
     fetching: false,
+    fetchingAccounts: false,
     trigger: null,
     accounts: []
   }
@@ -99,6 +99,7 @@ export class KonnectorModal extends PureComponent {
   async fetchAccounts() {
     const triggers = this.props.konnector.triggers.data
     const { findAccount } = this.props
+    this.setState({ fetchingAccounts: true })
     const accounts = await Promise.all(
       triggers.map(async trigger => {
         return {
@@ -107,7 +108,7 @@ export class KonnectorModal extends PureComponent {
         }
       })
     )
-    this.setState({ accounts })
+    this.setState({ accounts, fetchingAccounts: false })
   }
 
   async fetchAccount(trigger) {
@@ -170,9 +171,6 @@ export class KonnectorModal extends PureComponent {
             <div className="u-flex-grow-1 u-mr-half">
               <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
 
-              {accounts.length === 0 && (
-                <Text className="u-slateGrey">{t('loading')}</Text>
-              )}
               {accounts.length > 0 && account && (
                 <AccountSelectBox
                   selectedAccount={account}
@@ -201,9 +199,9 @@ export class KonnectorModal extends PureComponent {
 
   renderModalContent() {
     const { dismissAction, konnector, t, createAction } = this.props
-    const { account, accounts, error, fetching, trigger } = this.state
+    const { account, accounts, error, fetching, fetchingAccounts, trigger } = this.state
 
-    if (fetching) {
+    if (fetching || fetchingAccounts) {
       return (
         <Spinner
           size="xxlarge"
