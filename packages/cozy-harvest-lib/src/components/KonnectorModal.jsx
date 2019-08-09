@@ -19,6 +19,7 @@ import * as triggersModel from '../helpers/triggers'
 
 import withLocales from './hoc/withLocales'
 
+import TriggerManager from './TriggerManager'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountList from './AccountList/AccountList'
 import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
@@ -35,6 +36,7 @@ export class KonnectorModal extends PureComponent {
     account: null,
     fetching: false,
     fetchingAccounts: false,
+    addingAccount: false,
     trigger: null,
     accounts: []
   }
@@ -42,6 +44,9 @@ export class KonnectorModal extends PureComponent {
   constructor(props) {
     super(props)
     this.fetchIcon = this.fetchIcon.bind(this)
+    this.requestAccountChange = this.requestAccountChange.bind(this)
+    this.requestAccountCreation = this.requestAccountCreation.bind(this)
+    this.endAccountCreation = this.endAccountCreation.bind(this)
   }
   /**
    * TODO We should not fetchAccounts and fetchAccount since we already have the informations
@@ -96,6 +101,30 @@ export class KonnectorModal extends PureComponent {
     if (matchingTrigger) this.fetchAccount(matchingTrigger)
   }
 
+  requestAccountCreation() {
+    const { createAction } = this.props
+    if (createAction) createAction()
+    else this.setState({ addingAccount: true })
+  }
+
+  async endAccountCreation(trigger) {
+    this.setState({ addingAccount: false })
+    const account = await this.fetchAccount(trigger)
+
+    if (account) {
+      this.setState(prevState => ({
+        ...prevState,
+        accounts: [
+          ...prevState.accounts,
+          {
+            account,
+            trigger
+          }
+        ]
+      }))
+    }
+  }
+
   async fetchAccounts() {
     const triggers = this.props.konnector.triggers.data
     const { findAccount } = this.props
@@ -121,6 +150,7 @@ export class KonnectorModal extends PureComponent {
         account,
         trigger
       })
+      return account
     } catch (error) {
       this.setState({
         error
@@ -152,7 +182,7 @@ export class KonnectorModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, konnector, into, t, createAction } = this.props
+    const { dismissAction, konnector, into, t } = this.props
     const { account, accounts } = this.state
 
     return (
@@ -178,7 +208,7 @@ export class KonnectorModal extends PureComponent {
                   onChange={option => {
                     this.requestAccountChange(option.account, option.trigger)
                   }}
-                  onCreate={createAction}
+                  onCreate={this.requestAccountCreation}
                 />
               )}
             </div>
@@ -198,8 +228,16 @@ export class KonnectorModal extends PureComponent {
   }
 
   renderModalContent() {
-    const { dismissAction, konnector, t, createAction } = this.props
-    const { account, accounts, error, fetching, fetchingAccounts, trigger } = this.state
+    const { dismissAction, konnector, t } = this.props
+    const {
+      account,
+      accounts,
+      error,
+      fetching,
+      fetchingAccounts,
+      trigger,
+      addingAccount
+    } = this.state
 
     if (fetching || fetchingAccounts) {
       return (
@@ -219,6 +257,14 @@ export class KonnectorModal extends PureComponent {
           isImportant
         />
       )
+    } else if (addingAccount) {
+      return (
+        <TriggerManager
+          konnector={konnector}
+          onLoginSuccess={this.endAccountCreation}
+          onSuccess={this.endAccountCreation}
+        />
+      )
     } else if (!account) {
       return (
         <AccountList
@@ -227,7 +273,7 @@ export class KonnectorModal extends PureComponent {
           onPick={option => {
             this.requestAccountChange(option.account, option.trigger)
           }}
-          addAccount={createAction}
+          addAccount={this.requestAccountCreation}
         />
       )
     } else {
@@ -237,7 +283,7 @@ export class KonnectorModal extends PureComponent {
           trigger={trigger}
           account={account}
           onAccountDeleted={dismissAction}
-          addAccount={createAction}
+          addAccount={this.requestAccountCreation}
           refetchTrigger={this.refetchTrigger}
         />
       )
