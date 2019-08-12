@@ -3,7 +3,6 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { KonnectorModal } from 'components/KonnectorModal'
-import TriggerManager from 'components/TriggerManager'
 
 const t = key => key
 
@@ -162,14 +161,5 @@ describe('KonnectorModal', () => {
       const content = component.dive().find('ModalContent')
       expect(content.getElement()).toMatchSnapshot()
     })
-  })
-
-  xit('should pass trigger if konnector has triggers', async () => {
-    const component = await shallow(
-      <KonnectorModal {...props} />,
-      shallowOptions
-    )
-    const manager = component.find(TriggerManager)
-    expect(manager.props().trigger).toBeDefined()
   })
 })
