@@ -45,15 +45,49 @@ describe('KonnectorModal', () => {
     expect(spinner.getElement()).toMatchSnapshot()
   })
 
-  it('should show the content', () => {
-    const component = shallow(<KonnectorModal {...props} />, shallowOptions)
-    component.setState({ fetching: false })
+  it('should show an error view', async () => {
+    const failingProps = {
+      ...props,
+      findAccount: () => {
+        throw new Error('nope')
+      }
+    }
+    const component = shallow(
+      <KonnectorModal {...failingProps} />,
+      shallowOptions
+    )
+    await component.instance().componentDidMount()
+    component.update()
 
     const content = component.dive().find('ModalContent')
     expect(content.getElement()).toMatchSnapshot()
   })
 
-  it('should pass trigger if konnector has triggers', async () => {
+  it('should show the configuration view of a single account', async () => {
+    const component = shallow(<KonnectorModal {...props} />, shallowOptions)
+    await component.instance().componentDidMount()
+    component.update()
+
+    const content = component.dive().find('ModalContent')
+    expect(content.getElement()).toMatchSnapshot()
+  })
+
+  it('should show the list of accounts', async () => {
+    const dataBackup = mockKonnector.triggers.data
+    mockKonnector.triggers.data = [
+      { id: 784, doctype: 'io.cozy.triggers' },
+      { id: 872, doctype: 'io.cozy.triggers' }
+    ]
+    const component = shallow(<KonnectorModal {...props} />, shallowOptions)
+    await component.instance().componentDidMount()
+    component.update()
+
+    const content = component.dive().find('ModalContent')
+    expect(content.getElement()).toMatchSnapshot()
+    mockKonnector.triggers.data = dataBackup
+  })
+
+  xit('should pass trigger if konnector has triggers', async () => {
     const component = await shallow(
       <KonnectorModal {...props} />,
       shallowOptions

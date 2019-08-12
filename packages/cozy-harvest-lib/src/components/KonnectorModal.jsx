@@ -129,15 +129,19 @@ export class KonnectorModal extends PureComponent {
     const triggers = this.props.konnector.triggers.data
     const { findAccount } = this.props
     this.setState({ fetchingAccounts: true })
-    const accounts = await Promise.all(
-      triggers.map(async trigger => {
-        return {
-          account: await findAccount(triggersModel.getAccountId(trigger)),
-          trigger
-        }
-      })
-    )
-    this.setState({ accounts, fetchingAccounts: false })
+    try {
+      const accounts = await Promise.all(
+        triggers.map(async trigger => {
+          return {
+            account: await findAccount(triggersModel.getAccountId(trigger)),
+            trigger
+          }
+        })
+      )
+      this.setState({ accounts, fetchingAccounts: false })
+    } catch (error) {
+      this.setState({ error, fetchingAccounts: false })
+    }
   }
 
   async fetchAccount(trigger) {
