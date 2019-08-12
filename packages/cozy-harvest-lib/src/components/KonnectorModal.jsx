@@ -25,11 +25,7 @@ import AccountsList from './AccountsList/AccountsList'
 import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 
 /**
- * KonnectorModal open a Modal related to a given konnector. It fetches the
- * first account and then include a TriggerManager component.
- *
- * This component is aimed to offer an UI to manage all the konnector related
- * triggers and accounts.
+ * KonnectorModal can be completely standalone and will use it's internal state to switch between views, or it can be controlled by the parents through props (such as accountId) and callbacks (such as createAction and onAccountChange)
  */
 export class KonnectorModal extends PureComponent {
   state = {
