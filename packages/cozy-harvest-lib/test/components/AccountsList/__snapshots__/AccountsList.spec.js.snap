@@ -1,71 +1,39 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountsList should render 1`] = `
-<ul
-  className="u-nolist u-p-0 u-m-0"
+<I18n
+  defaultLang="en"
+  dictRequire={[Function]}
 >
-  <li
-    className="u-mb-half"
-  >
-    <AccountsListItem
-      account={
+  <Wrapper
+    accounts={
+      Array [
         Object {
-          "_id": "account-1",
-        }
-      }
-      konnector={
+          "account": Object {
+            "_id": "account-1",
+          },
+          "trigger": Object {
+            "_id": "trigger-1",
+          },
+        },
         Object {
-          "name": "test-konnector",
-          "vendor_link": "test konnector link",
-        }
+          "account": Object {
+            "_id": "account-2",
+          },
+          "trigger": Object {
+            "_id": "trigger-2",
+          },
+        },
+      ]
+    }
+    addAccount={[MockFunction]}
+    konnector={
+      Object {
+        "name": "test-konnector",
+        "vendor_link": "test konnector link",
       }
-      onClick={[Function]}
-      trigger={
-        Object {
-          "_id": "trigger-1",
-        }
-      }
-    />
-  </li>
-  <li
-    className="u-mb-half"
-  >
-    <AccountsListItem
-      account={
-        Object {
-          "_id": "account-2",
-        }
-      }
-      konnector={
-        Object {
-          "name": "test-konnector",
-          "vendor_link": "test konnector link",
-        }
-      }
-      onClick={[Function]}
-      trigger={
-        Object {
-          "_id": "trigger-2",
-        }
-      }
-    />
-  </li>
-  <li
-    className="u-mb-half"
-  >
-    <Card
-      className="u-p-0"
-      tag="div"
-    >
-      <DefaultButton
-        className="u-bdrs-4"
-        extension="full"
-        icon="plus"
-        label="Add account"
-        onClick={[MockFunction]}
-        theme="text"
-      />
-    </Card>
-  </li>
-</ul>
+    }
+    onPick={[MockFunction]}
+  />
+</I18n>
 `;

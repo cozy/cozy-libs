@@ -130,7 +130,7 @@ exports[`KonnectorModal should show the configuration view of a single account 1
 
 exports[`KonnectorModal should show the list of accounts 1`] = `
 <ModalContent>
-  <AccountsList
+  <Wrapper
     accounts={
       Array [
         Object {
