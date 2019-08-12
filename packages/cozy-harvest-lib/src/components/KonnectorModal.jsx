@@ -208,7 +208,7 @@ export class KonnectorModal extends PureComponent {
               {accounts.length > 0 && account && (
                 <AccountSelectBox
                   selectedAccount={account}
-                  accountList={accounts}
+                  accountsList={accounts}
                   onChange={option => {
                     this.requestAccountChange(option.account, option.trigger)
                   }}

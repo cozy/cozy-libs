@@ -9,7 +9,7 @@ import MenuWithFixedComponent from './MenuWithFixedComponent'
 import AccountSelectControl from './AccountSelectControl'
 
 const AccountSelectBox = ({
-  accountList,
+  accountsList,
   selectedAccount,
   onChange,
   onCreate
@@ -17,17 +17,17 @@ const AccountSelectBox = ({
   return (
     <SelectBox
       size="tiny"
-      options={accountList}
+      options={accountsList}
       onChange={onChange}
       createAction={onCreate}
       getOptionLabel={option => Account.getAccountName(option.account)}
       getOptionValue={option => option.trigger._id}
       defaultValue={
         selectedAccount
-          ? accountList.find(
+          ? accountsList.find(
               ({ account }) => account._id === selectedAccount._id
             )
-          : accountList[0]
+          : accountsList[0]
       }
       components={{
         Control: reactSelectControl(
@@ -42,7 +42,7 @@ const AccountSelectBox = ({
 }
 
 AccountSelectBox.propTypes = {
-  accountList: PropTypes.arrayOf(PropTypes.object).isRequired,
+  accountsList: PropTypes.arrayOf(PropTypes.object).isRequired,
   selectedAccount: PropTypes.object.isRequired,
   onChange: PropTypes.func.isRequired,
   onCreate: PropTypes.func.isRequired
