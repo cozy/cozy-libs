@@ -86,7 +86,9 @@ export class KonnectorModal extends PureComponent {
   requestAccountChange(account, trigger) {
     // This component can either defer the account switching to a parent component through the onAccountChange prop, or handle the change itself if the prop is missing
     const { onAccountChange } = this.props
-    onAccountChange ? onAccountChange(account) : this.fetchAccount(trigger)
+    return onAccountChange
+      ? onAccountChange(account)
+      : this.fetchAccount(trigger)
   }
 
   loadSelectedAccountId() {

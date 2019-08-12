@@ -178,3 +178,38 @@ exports[`KonnectorModal should show the list of accounts 1`] = `
   />
 </ModalContent>
 `;
+
+exports[`KonnectorModal switching account should show the add account view when controlled by state 1`] = `
+<ModalContent>
+  <Wrapper
+    account={
+      Object {
+        "_id": "123",
+        "doctype": "io.cozy.accounts",
+      }
+    }
+    addAccount={[Function]}
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "_id": 784,
+              "doctype": "io.cozy.triggers",
+            },
+          ],
+        },
+      }
+    }
+    onAccountDeleted={[MockFunction]}
+    refetchTrigger={[Function]}
+    trigger={
+      Object {
+        "_id": "abc",
+      }
+    }
+  />
+</ModalContent>
+`;

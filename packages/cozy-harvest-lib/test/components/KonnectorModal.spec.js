@@ -133,6 +133,37 @@ describe('KonnectorModal', () => {
     })
   })
 
+  describe('switching account', () => {
+    it('should call the parent when controlled by props', () => {
+      const onAccountChange = jest.fn()
+      const propsWithSwitch = {
+        ...props,
+        onAccountChange
+      }
+      const component = shallow(
+        <KonnectorModal {...propsWithSwitch} />,
+        shallowOptions
+      )
+      const account = { _id: '456' }
+      const trigger = { _id: 'abc' }
+      component.instance().requestAccountChange(account, trigger)
+      expect(onAccountChange).toHaveBeenCalledWith(account)
+    })
+
+    it('should show the add account view when controlled by state', async () => {
+      const component = shallow(<KonnectorModal {...props} />, shallowOptions)
+      await component.instance().componentDidMount()
+      component.update()
+
+      const account = { _id: '456' }
+      const trigger = { _id: 'abc' }
+      await component.instance().requestAccountChange(account, trigger)
+
+      const content = component.dive().find('ModalContent')
+      expect(content.getElement()).toMatchSnapshot()
+    })
+  })
+
   xit('should pass trigger if konnector has triggers', async () => {
     const component = await shallow(
       <KonnectorModal {...props} />,
