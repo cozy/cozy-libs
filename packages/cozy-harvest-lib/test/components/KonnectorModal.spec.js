@@ -8,7 +8,7 @@ import TriggerManager from 'components/TriggerManager'
 const t = key => key
 
 const findAccountMock = jest.fn().mockImplementation(() => ({
-  id: 123,
+  _id: '123',
   doctype: 'io.cozy.accounts'
 }))
 
@@ -17,7 +17,7 @@ describe('KonnectorModal', () => {
     slug: 'mock',
     name: 'Mock',
     triggers: {
-      data: [{ id: 784, doctype: 'io.cozy.triggers' }]
+      data: [{ _id: 784, doctype: 'io.cozy.triggers' }]
     }
   }
   const props = {
@@ -74,8 +74,8 @@ describe('KonnectorModal', () => {
   it('should show the list of accounts', async () => {
     const dataBackup = mockKonnector.triggers.data
     mockKonnector.triggers.data = [
-      { id: 784, doctype: 'io.cozy.triggers' },
-      { id: 872, doctype: 'io.cozy.triggers' }
+      { _id: '784', doctype: 'io.cozy.triggers' },
+      { _id: '872', doctype: 'io.cozy.triggers' }
     ]
     const component = shallow(<KonnectorModal {...props} />, shallowOptions)
     await component.instance().componentDidMount()

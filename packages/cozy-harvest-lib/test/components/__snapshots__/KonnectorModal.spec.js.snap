@@ -10,8 +10,8 @@ exports[`KonnectorModal adding an account should render the form when controlled
         "triggers": Object {
           "data": Array [
             Object {
+              "_id": 784,
               "doctype": "io.cozy.triggers",
-              "id": 784,
             },
           ],
         },
@@ -57,8 +57,8 @@ exports[`KonnectorModal should show the configuration view of a single account 1
   <Wrapper
     account={
       Object {
+        "_id": "123",
         "doctype": "io.cozy.accounts",
-        "id": 123,
       }
     }
     addAccount={[Function]}
@@ -69,8 +69,8 @@ exports[`KonnectorModal should show the configuration view of a single account 1
         "triggers": Object {
           "data": Array [
             Object {
+              "_id": 784,
               "doctype": "io.cozy.triggers",
-              "id": 784,
             },
           ],
         },
@@ -80,8 +80,8 @@ exports[`KonnectorModal should show the configuration view of a single account 1
     refetchTrigger={[Function]}
     trigger={
       Object {
+        "_id": 784,
         "doctype": "io.cozy.triggers",
-        "id": 784,
       }
     }
   />
@@ -95,22 +95,22 @@ exports[`KonnectorModal should show the list of accounts 1`] = `
       Array [
         Object {
           "account": Object {
+            "_id": "123",
             "doctype": "io.cozy.accounts",
-            "id": 123,
           },
           "trigger": Object {
+            "_id": "784",
             "doctype": "io.cozy.triggers",
-            "id": 784,
           },
         },
         Object {
           "account": Object {
+            "_id": "123",
             "doctype": "io.cozy.accounts",
-            "id": 123,
           },
           "trigger": Object {
+            "_id": "872",
             "doctype": "io.cozy.triggers",
-            "id": 872,
           },
         },
       ]
@@ -123,12 +123,12 @@ exports[`KonnectorModal should show the list of accounts 1`] = `
         "triggers": Object {
           "data": Array [
             Object {
+              "_id": "784",
               "doctype": "io.cozy.triggers",
-              "id": 784,
             },
             Object {
+              "_id": "872",
               "doctype": "io.cozy.triggers",
-              "id": 872,
             },
           ],
         },
