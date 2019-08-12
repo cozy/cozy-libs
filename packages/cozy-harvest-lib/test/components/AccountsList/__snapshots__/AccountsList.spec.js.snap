@@ -7,7 +7,7 @@ exports[`AccountsList should render 1`] = `
   <li
     className="u-mb-half"
   >
-    <Wrapper
+    <AccountsListItem
       account={
         Object {
           "_id": "account-1",
@@ -30,7 +30,7 @@ exports[`AccountsList should render 1`] = `
   <li
     className="u-mb-half"
   >
-    <Wrapper
+    <AccountsListItem
       account={
         Object {
           "_id": "account-2",

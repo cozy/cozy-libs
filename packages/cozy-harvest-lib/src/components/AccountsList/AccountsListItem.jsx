@@ -2,43 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Account } from 'cozy-doctypes'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { Caption } from 'cozy-ui/transpiled/react/Text'
-import palette from 'cozy-ui/transpiled/react/palette'
 
-import { getErrorLocale } from '../../helpers/konnectors'
-
-import withLocales from '../hoc/withLocales'
-import * as triggersModel from '../../helpers/triggers'
+import Status from './Status'
 
 export class AccountsListItem extends React.PureComponent {
-  getStatusContent = () => {
-    const { t, trigger, konnector } = this.props
-    const error = triggersModel.getError(trigger)
-    const errorTitle = getErrorLocale(error, konnector, t, 'title')
-
-    if (error) {
-      return (
-        <div className="u-pomegranate u-flex u-flex-justify-center u-flex-items-center">
-          <span className="u-mr-half u-caption u-pomegranate">
-            {errorTitle}
-          </span>
-          <Icon icon="warning" />
-        </div>
-      )
-    } else {
-      return <Icon icon="check-circleless" color={palette['malachite']} />
-    }
-  }
-
   render() {
-    const { account, onClick } = this.props
+    const { account, onClick, konnector, trigger } = this.props
 
     const accountName = Account.getAccountName(account)
     const accountLogin = Account.getAccountLogin(account)
     const nameAndLoginDiffer = accountName !== accountLogin
-    const statusContent = this.getStatusContent()
     return (
       <Card
         className="u-flex u-flex-justify-between u-flex-items-center u-c-pointer"
@@ -48,7 +23,9 @@ export class AccountsListItem extends React.PureComponent {
           <div>{accountName}</div>
           {nameAndLoginDiffer && <Caption>{accountLogin}</Caption>}
         </div>
-        <div>{statusContent}</div>
+        <div>
+          <Status konnector={konnector} trigger={trigger} />
+        </div>
       </Card>
     )
   }
@@ -61,8 +38,7 @@ AccountsListItem.propTypes = {
     vendor_link: PropTypes.string
   }).isRequired,
   trigger: PropTypes.object.isRequired,
-  onClick: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  onClick: PropTypes.func.isRequired
 }
 
-export default withLocales(AccountsListItem)
+export default AccountsListItem
