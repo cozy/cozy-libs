@@ -5,6 +5,8 @@ import { Account } from 'cozy-doctypes'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { Caption } from 'cozy-ui/transpiled/react/Text'
+import palette from 'cozy-ui/transpiled/react/palette'
+
 import { getErrorLocale } from '../../helpers/konnectors'
 
 import withLocales from '../hoc/withLocales'
@@ -26,7 +28,7 @@ export class AccountsListItem extends React.PureComponent {
         </div>
       )
     } else {
-      return <Icon icon="check-circleless" color="#2BBA40" />
+      return <Icon icon="check-circleless" color={palette['malachite']} />
     }
   }
 
