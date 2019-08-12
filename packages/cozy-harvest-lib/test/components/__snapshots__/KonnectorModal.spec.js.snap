@@ -23,6 +23,46 @@ exports[`KonnectorModal adding an account should render the form when controlled
 </ModalContent>
 `;
 
+exports[`KonnectorModal should render the selected account via a prop 1`] = `
+<ModalContent>
+  <Wrapper
+    account={
+      Object {
+        "_id": "123",
+        "doctype": "io.cozy.accounts",
+      }
+    }
+    addAccount={[Function]}
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "_id": "784",
+              "doctype": "io.cozy.triggers",
+            },
+            Object {
+              "_id": "872",
+              "doctype": "io.cozy.triggers",
+            },
+          ],
+        },
+      }
+    }
+    onAccountDeleted={[MockFunction]}
+    refetchTrigger={[Function]}
+    trigger={
+      Object {
+        "_id": "784",
+        "doctype": "io.cozy.triggers",
+      }
+    }
+  />
+</ModalContent>
+`;
+
 exports[`KonnectorModal should show a spinner while loading 1`] = `
 <Spinner
   className="u-flex u-flex-justify-center u-pv-3"

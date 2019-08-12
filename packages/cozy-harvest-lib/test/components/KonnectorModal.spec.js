@@ -86,6 +86,28 @@ describe('KonnectorModal', () => {
     mockKonnector.triggers.data = dataBackup
   })
 
+  it('should render the selected account via a prop', async () => {
+    const dataBackup = mockKonnector.triggers.data
+    mockKonnector.triggers.data = [
+      { _id: '784', doctype: 'io.cozy.triggers' },
+      { _id: '872', doctype: 'io.cozy.triggers' }
+    ]
+    const propsWithSelectedAccount = {
+      ...props,
+      accountId: '123'
+    }
+    const component = shallow(
+      <KonnectorModal {...propsWithSelectedAccount} />,
+      shallowOptions
+    )
+    await component.instance().componentDidMount()
+    component.update()
+
+    const content = component.dive().find('ModalContent')
+    expect(content.getElement()).toMatchSnapshot()
+    mockKonnector.triggers.data = dataBackup
+  })
+
   describe('adding an account', () => {
     it('should call the parent when controlled by props', () => {
       const createAction = jest.fn()
