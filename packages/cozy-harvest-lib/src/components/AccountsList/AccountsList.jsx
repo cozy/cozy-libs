@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Button from 'cozy-ui/transpiled/react/Button'
 
-import AccountListItem from './AccountListItem'
+import AccountsListItem from './AccountsListItem'
 
-class AccountList extends React.PureComponent {
+class AccountsList extends React.PureComponent {
   render() {
     const { accounts, konnector, addAccount, onPick } = this.props
 
@@ -14,7 +14,7 @@ class AccountList extends React.PureComponent {
       <ul className="u-nolist u-p-0 u-m-0">
         {accounts.map((account, index) => (
           <li key={index} className="u-mb-half">
-            <AccountListItem
+            <AccountsListItem
               account={account.account}
               konnector={konnector}
               trigger={account.trigger}
@@ -39,7 +39,7 @@ class AccountList extends React.PureComponent {
   }
 }
 
-AccountList.propTypes = {
+AccountsList.propTypes = {
   accounts: PropTypes.array.isRequired,
   konnector: PropTypes.shape({
     name: PropTypes.string,
@@ -49,4 +49,4 @@ AccountList.propTypes = {
   onPick: PropTypes.func.isRequired
 }
 
-export default AccountList
+export default AccountsList

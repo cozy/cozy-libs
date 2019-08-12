@@ -21,7 +21,7 @@ import withLocales from './hoc/withLocales'
 
 import TriggerManager from './TriggerManager'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
-import AccountList from './AccountList/AccountList'
+import AccountsList from './AccountsList/AccountsList'
 import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 
 /**
@@ -267,7 +267,7 @@ export class KonnectorModal extends PureComponent {
       )
     } else if (!account) {
       return (
-        <AccountList
+        <AccountsList
           accounts={accounts}
           konnector={konnector}
           onPick={option => {

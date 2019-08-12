@@ -10,7 +10,7 @@ import { getErrorLocale } from '../../helpers/konnectors'
 import withLocales from '../hoc/withLocales'
 import * as triggersModel from '../../helpers/triggers'
 
-export class AccountListItem extends React.PureComponent {
+export class AccountsListItem extends React.PureComponent {
   getStatusContent = () => {
     const { t, trigger, konnector } = this.props
     const error = triggersModel.getError(trigger)
@@ -52,7 +52,7 @@ export class AccountListItem extends React.PureComponent {
   }
 }
 
-AccountListItem.propTypes = {
+AccountsListItem.propTypes = {
   account: PropTypes.object.isRequired,
   konnector: PropTypes.shape({
     name: PropTypes.string,
@@ -63,4 +63,4 @@ AccountListItem.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default withLocales(AccountListItem)
+export default withLocales(AccountsListItem)
