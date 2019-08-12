@@ -23,7 +23,6 @@ describe('KonnectorModal', () => {
   const props = {
     findAccount: findAccountMock,
     dismissAction: jest.fn(),
-    createAction: jest.fn(),
     onSuccess: jest.fn(),
     konnector: mockKonnector,
     t
@@ -85,6 +84,31 @@ describe('KonnectorModal', () => {
     const content = component.dive().find('ModalContent')
     expect(content.getElement()).toMatchSnapshot()
     mockKonnector.triggers.data = dataBackup
+  })
+
+  describe('adding an account', () => {
+    it('should call the parent when controlled by props', () => {
+      const createAction = jest.fn()
+      const propsWithCreation = {
+        ...props,
+        createAction
+      }
+      const component = shallow(
+        <KonnectorModal {...propsWithCreation} />,
+        shallowOptions
+      )
+      component.instance().requestAccountCreation()
+      expect(createAction).toHaveBeenCalled()
+    })
+
+    it('should render the form when controlled by state', async () => {
+      const component = shallow(<KonnectorModal {...props} />, shallowOptions)
+      await component.instance().componentDidMount()
+      component.instance().requestAccountCreation()
+
+      const content = component.dive().find('ModalContent')
+      expect(content.getElement()).toMatchSnapshot()
+    })
   })
 
   xit('should pass trigger if konnector has triggers', async () => {

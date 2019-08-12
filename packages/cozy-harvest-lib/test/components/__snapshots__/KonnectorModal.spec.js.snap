@@ -1,5 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`KonnectorModal adding an account should render the form when controlled by state 1`] = `
+<ModalContent>
+  <Wrapper
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "doctype": "io.cozy.triggers",
+              "id": 784,
+            },
+          ],
+        },
+      }
+    }
+    onLoginSuccess={[Function]}
+    onSuccess={[Function]}
+  />
+</ModalContent>
+`;
+
 exports[`KonnectorModal should show a spinner while loading 1`] = `
 <Spinner
   className="u-flex u-flex-justify-center u-pv-3"
