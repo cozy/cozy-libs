@@ -64,7 +64,7 @@ export class KonnectorModal extends PureComponent {
 
   componentWillUnmount() {
     const { into } = this.props
-    if (!into) return
+    if (!into || into === 'body') return
     // The Modal is never closed after a dismiss on Preact apps, even if it is
     // not rendered anymore. The best hack we found is to explicitly empty the
     // modal portal container.
