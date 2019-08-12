@@ -34,6 +34,7 @@ export class KonnectorModal extends PureComponent {
     fetchingAccounts: false,
     addingAccount: false,
     trigger: null,
+    error: null,
     accounts: []
   }
 
@@ -136,7 +137,7 @@ export class KonnectorModal extends PureComponent {
           }
         })
       )).filter(({ account }) => !!account)
-      this.setState({ accounts, fetchingAccounts: false })
+      this.setState({ accounts, fetchingAccounts: false, error: null })
     } catch (error) {
       this.setState({ error, fetchingAccounts: false })
     }
@@ -159,7 +160,8 @@ export class KonnectorModal extends PureComponent {
       })
     } finally {
       this.setState({
-        fetching: false
+        fetching: false,
+        error: null
       })
     }
   }
