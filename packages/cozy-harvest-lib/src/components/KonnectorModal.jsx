@@ -315,6 +315,10 @@ KonnectorModal.propTypes = {
   t: PropTypes.func
 }
 
+KonnectorModal.defaultProps = {
+  into: 'body'
+}
+
 KonnectorModal.contextTypes = {
   client: PropTypes.object.isRequired
 }
