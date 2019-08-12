@@ -302,13 +302,13 @@ KonnectorModal.propTypes = {
     triggers: PropTypes.shape({
       data: PropTypes.arrayOf(PropTypes.object)
     })
-  }),
-  findAccount: PropTypes.func,
+  }).isRequired,
+  findAccount: PropTypes.func.isRequired,
   fetchTrigger: PropTypes.func,
-  dismissAction: PropTypes.func,
+  dismissAction: PropTypes.func.isRequired,
   createAction: PropTypes.func,
   onAccountChange: PropTypes.func,
-  t: PropTypes.func
+  t: PropTypes.func.isRequired
 }
 
 KonnectorModal.defaultProps = {
