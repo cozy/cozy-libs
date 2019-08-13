@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.17.0 (2019-08-13)
+
+
+### Features
+
+* **cozy-app-publish:** Make mattermost channel optional ([1fce23d](https://github.com/cozy/cozy-libs/commit/1fce23d))
+
+
+
+
+
 ## [0.16.4](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.16.3...cozy-app-publish@0.16.4) (2019-07-19)
 
 **Note:** Version bump only for package cozy-app-publish
