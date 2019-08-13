@@ -164,7 +164,8 @@ cozy-app-publish --postpublish mattermost
 Sends a message to a mattermost channel to notify of the app's deployment. Requires the following options:
 
 - `MATTERMOST_HOOK_URL`: You will need to set up a new [Incoming Hook](https://docs.mattermost.com/developer/webhooks-incoming.html).
-- `MATTERMOST_CHANNEL`: The name of the channel messages will be posted to.
+- `MATTERMOST_CHANNEL`: (optional) The name of the channel messages will be posted to or else the
+  default channel of the hook will be used
 
 #### `--registry-url <url>`
 

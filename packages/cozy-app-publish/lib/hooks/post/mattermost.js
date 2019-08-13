@@ -57,10 +57,6 @@ const sendMattermostReleaseMessage = (appSlug, appVersion) => {
 module.exports = async options => {
   console.log('↳ ℹ️  Sending message to Mattermost')
 
-  if (!MATTERMOST_CHANNEL) {
-    throw new Error('No MATTERMOST_CHANNEL environment variable defined')
-  }
-
   if (!MATTERMOST_HOOK_URL) {
     throw new Error('No MATTERMOST_HOOK_URL environment variable defined')
   }
