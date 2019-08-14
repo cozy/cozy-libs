@@ -10,62 +10,58 @@ import Modal, {
   ModalHeader
 } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import {
-  Tab,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel
-} from 'cozy-ui/transpiled/react/Tabs'
-import { SubTitle, Text } from 'cozy-ui/transpiled/react/Text'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import get from 'lodash/get'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
-import TriggerManager from './TriggerManager'
-import LaunchTriggerCard from './cards/LaunchTriggerCard'
-import TriggerErrorInfo from './infos/TriggerErrorInfo'
-import withLocales from './hoc/withLocales'
-import DeleteAccountButton from './DeleteAccountButton'
 
-import AccountSelectBox from './KonnectorModal/AccountSelectBox'
+import withLocales from './hoc/withLocales'
+
+import TriggerManager from './TriggerManager'
+import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
+import AccountsList from './AccountsList/AccountsList'
+import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 
 /**
- * KonnectorModal open a Modal related to a given konnector. It fetches the
- * first account and then include a TriggerManager component.
- *
- * This component is aimed to offer an UI to manage all the konnector related
- * triggers and accounts.
+ * KonnectorModal can be completely standalone and will use it's internal state to switch between views, or it can be controlled by the parents through props (such as accountId) and callbacks (such as createAction and onAccountChange)
  */
 export class KonnectorModal extends PureComponent {
   state = {
     account: null,
-    fetching: true,
+    fetching: false,
+    fetchingAccounts: false,
+    addingAccount: false,
     trigger: null,
+    error: null,
     accounts: []
   }
 
   constructor(props) {
     super(props)
     this.fetchIcon = this.fetchIcon.bind(this)
-    this.handleKonnectorJobError = this.handleKonnectorJobError.bind(this)
-    this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
-    this.handleTriggerLaunch = this.handleTriggerLaunch.bind(this)
+    this.requestAccountChange = this.requestAccountChange.bind(this)
+    this.requestAccountCreation = this.requestAccountCreation.bind(this)
+    this.endAccountCreation = this.endAccountCreation.bind(this)
   }
   /**
    * TODO We should not fetchAccounts and fetchAccount since we already have the informations
    * in the props. We kept this sytem for compatibility on the existing override.
    * Next tasks: remove these methods and rewrite the override
    */
-  componentDidMount() {
-    this.fetchAccount(this.props.konnector.triggers.data[0])
-    this.fetchAccounts()
+  async componentDidMount() {
+    await this.fetchAccounts()
+    const { accounts } = this.state
+
+    if (this.props.accountId) this.loadSelectedAccountId()
+    else if (accounts.length === 1)
+      this.requestAccountChange(accounts[0].account, accounts[0].trigger)
   }
 
   componentWillUnmount() {
     const { into } = this.props
-    if (!into) return
+    if (!into || into === 'body') return
     // The Modal is never closed after a dismiss on Preact apps, even if it is
     // not rendered anymore. The best hack we found is to explicitly empty the
     // modal portal container.
@@ -78,18 +74,73 @@ export class KonnectorModal extends PureComponent {
     }, 50)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.accountId && this.props.accountId !== prevProps.accountId) {
+      this.loadSelectedAccountId()
+    }
+  }
+
+  requestAccountChange(account, trigger) {
+    // This component can either defer the account switching to a parent component through the onAccountChange prop, or handle the change itself if the prop is missing
+    const { onAccountChange } = this.props
+    return onAccountChange
+      ? onAccountChange(account)
+      : this.fetchAccount(trigger)
+  }
+
+  loadSelectedAccountId() {
+    const selectedAccountId = this.props.accountId
+    const { accounts } = this.state
+
+    const matchingTrigger = get(
+      accounts.find(account => account.account._id === selectedAccountId),
+      'trigger'
+    )
+
+    if (matchingTrigger) this.fetchAccount(matchingTrigger)
+  }
+
+  requestAccountCreation() {
+    const { createAction } = this.props
+    if (createAction) createAction()
+    else this.setState({ addingAccount: true })
+  }
+
+  async endAccountCreation(trigger) {
+    this.setState({ addingAccount: false })
+    const account = await this.fetchAccount(trigger)
+
+    if (account) {
+      this.setState(prevState => ({
+        ...prevState,
+        accounts: [
+          ...prevState.accounts,
+          {
+            account,
+            trigger
+          }
+        ]
+      }))
+    }
+  }
+
   async fetchAccounts() {
     const triggers = this.props.konnector.triggers.data
     const { findAccount } = this.props
-    const accounts = await Promise.all(
-      triggers.map(async trigger => {
-        return {
-          account: await findAccount(triggersModel.getAccountId(trigger)),
-          trigger
-        }
-      })
-    )
-    this.setState({ accounts })
+    this.setState({ fetchingAccounts: true })
+    try {
+      const accounts = (await Promise.all(
+        triggers.map(async trigger => {
+          return {
+            account: await findAccount(triggersModel.getAccountId(trigger)),
+            trigger
+          }
+        })
+      )).filter(({ account }) => !!account)
+      this.setState({ accounts, fetchingAccounts: false, error: null })
+    } catch (error) {
+      this.setState({ error, fetchingAccounts: false })
+    }
   }
 
   async fetchAccount(trigger) {
@@ -100,16 +151,17 @@ export class KonnectorModal extends PureComponent {
       const account = await findAccount(triggersModel.getAccountId(trigger))
       this.setState({
         account,
-        trigger,
-        konnectorJobError: triggersModel.getError(trigger)
+        trigger
       })
+      return account
     } catch (error) {
       this.setState({
         error
       })
     } finally {
       this.setState({
-        fetching: false
+        fetching: false,
+        error: null
       })
     }
   }
@@ -123,24 +175,6 @@ export class KonnectorModal extends PureComponent {
     })
   }
 
-  handleKonnectorJobError(konnectorJobError) {
-    this.setState({
-      konnectorJobError,
-      isJobRunning: false
-    })
-
-    this.refetchTrigger()
-  }
-
-  handleKonnectorJobSuccess(trigger) {
-    this.setState({ isJobRunning: false, trigger })
-    this.refetchTrigger()
-  }
-
-  handleTriggerLaunch() {
-    this.setState({ isJobRunning: true, konnectorJobError: null })
-  }
-
   async refetchTrigger() {
     const { fetchTrigger } = this.props
     const { trigger } = this.state
@@ -152,21 +186,8 @@ export class KonnectorModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, konnector, into, t, createAction } = this.props
-
-    const {
-      account,
-      error,
-      fetching,
-      isJobRunning,
-      konnectorJobError,
-      trigger,
-      accounts
-    } = this.state
-
-    const shouldDisplayError = !isJobRunning && konnectorJobError
-    const hasLoginError = konnectorJobError && konnectorJobError.isLoginError()
-    const hasErrorExceptLogin = konnectorJobError && !hasLoginError
+    const { dismissAction, konnector, into, t } = this.props
+    const { account, accounts, addingAccount } = this.state
 
     return (
       <Modal
@@ -184,17 +205,14 @@ export class KonnectorModal extends PureComponent {
             <div className="u-flex-grow-1 u-mr-half">
               <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
 
-              {accounts.length === 0 && (
-                <Text className="u-slateGrey">{t('loading')}</Text>
-              )}
-              {accounts.length > 0 && account && (
+              {accounts.length > 0 && account && !addingAccount && (
                 <AccountSelectBox
                   selectedAccount={account}
-                  accountList={accounts}
+                  accountsList={accounts}
                   onChange={option => {
-                    this.fetchAccount(option.trigger)
+                    this.requestAccountChange(option.account, option.trigger)
                   }}
-                  onCreate={createAction}
+                  onCreate={this.requestAccountCreation}
                 />
               )}
             </div>
@@ -208,117 +226,97 @@ export class KonnectorModal extends PureComponent {
             />
           </div>
         </ModalHeader>
-        {fetching ? (
-          <ModalContent>
-            <Spinner
-              size="xxlarge"
-              className="u-flex u-flex-justify-center u-pv-3"
-            />
-          </ModalContent>
-        ) : (
-          <ModalContent className="u-pb-0">
-            {error ? (
-              <Infos
-                actionButton={
-                  <Button theme="danger">
-                    {t('modal.konnector.error.button')}
-                  </Button>
-                }
-                title={t('modal.konnector.error.title')}
-                text={t('modal.konnector.error.description', error)}
-                isImportant
-              />
-            ) : (
-              <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
-                <TabList>
-                  <Tab name="data">
-                    {t('modal.tabs.data')}
-                    {hasErrorExceptLogin && (
-                      <Icon icon="warning" size={13} className="u-ml-half" />
-                    )}
-                  </Tab>
-                  <Tab name="configuration">
-                    {t('modal.tabs.configuration')}
-                    {hasLoginError && (
-                      <Icon icon="warning" size={13} className="u-ml-half" />
-                    )}
-                  </Tab>
-                </TabList>
-
-                <TabPanels>
-                  <TabPanel name="data" className="u-pt-1-half u-pb-2">
-                    {shouldDisplayError && hasErrorExceptLogin && (
-                      <TriggerErrorInfo
-                        className="u-mb-2"
-                        error={konnectorJobError}
-                        konnector={konnector}
-                      />
-                    )}
-                    <LaunchTriggerCard
-                      trigger={trigger}
-                      onError={this.handleKonnectorJobError}
-                      onLaunch={this.handleTriggerLaunch}
-                      onSuccess={this.handleKonnectorJobSuccess}
-                      submitting={isJobRunning}
-                    />
-                  </TabPanel>
-                  <TabPanel name="configuration" className="u-pt-1-half u-pb-2">
-                    {shouldDisplayError && hasLoginError && (
-                      <TriggerErrorInfo
-                        className="u-mb-2"
-                        error={konnectorJobError}
-                        konnector={konnector}
-                      />
-                    )}
-                    <div className="u-mb-1">
-                      <SubTitle className="u-mb-half">
-                        {t('modal.updateAccount.title')}
-                      </SubTitle>
-                      <TriggerManager
-                        account={account}
-                        konnector={konnector}
-                        trigger={trigger}
-                        onError={this.handleKonnectorJobError}
-                        onLaunch={this.handleTriggerLaunch}
-                        onSuccess={this.handleKonnectorJobSuccess}
-                        running={isJobRunning}
-                        showError={false}
-                      />
-                    </div>
-                    <div className="u-mb-2">
-                      <SubTitle className="u-mb-half">
-                        {t('modal.deleteAccount.title')}
-                      </SubTitle>
-                      <Text className="u-mb-1">
-                        {t('modal.deleteAccount.description')}
-                      </Text>
-                      <DeleteAccountButton
-                        account={account}
-                        disabled={isJobRunning}
-                        onSuccess={dismissAction}
-                        extension="full"
-                      />
-                    </div>
-                    <div>
-                      <SubTitle className="u-mb-half">
-                        {t('modal.addAccount.title')}
-                      </SubTitle>
-                      <Button
-                        onClick={createAction}
-                        label={t('modal.addAccount.button')}
-                        extension="full"
-                        theme="secondary"
-                      />
-                    </div>
-                  </TabPanel>
-                </TabPanels>
-              </Tabs>
-            )}
-          </ModalContent>
-        )}
+        <ModalContent>{this.renderModalContent()}</ModalContent>
       </Modal>
     )
   }
+
+  renderModalContent() {
+    const { dismissAction, konnector, t } = this.props
+    const {
+      account,
+      accounts,
+      error,
+      fetching,
+      fetchingAccounts,
+      trigger,
+      addingAccount
+    } = this.state
+
+    if (fetching || fetchingAccounts) {
+      return (
+        <Spinner
+          size="xxlarge"
+          className="u-flex u-flex-justify-center u-pv-3"
+        />
+      )
+    } else if (error) {
+      return (
+        <Infos
+          actionButton={
+            <Button theme="danger">{t('modal.konnector.error.button')}</Button>
+          }
+          title={t('modal.konnector.error.title')}
+          text={t('modal.konnector.error.description', error)}
+          isImportant
+        />
+      )
+    } else if (addingAccount) {
+      return (
+        <div className="u-pt-1-half">
+          <TriggerManager
+            konnector={konnector}
+            onLoginSuccess={this.endAccountCreation}
+            onSuccess={this.endAccountCreation}
+          />
+        </div>
+      )
+    } else if (!account) {
+      return (
+        <AccountsList
+          accounts={accounts}
+          konnector={konnector}
+          onPick={option => {
+            this.requestAccountChange(option.account, option.trigger)
+          }}
+          addAccount={this.requestAccountCreation}
+        />
+      )
+    } else {
+      return (
+        <KonnectorConfiguration
+          konnector={konnector}
+          trigger={trigger}
+          account={account}
+          onAccountDeleted={dismissAction}
+          addAccount={this.requestAccountCreation}
+          refetchTrigger={this.refetchTrigger}
+        />
+      )
+    }
+  }
+}
+
+KonnectorModal.propTypes = {
+  into: PropTypes.string,
+  konnector: PropTypes.shape({
+    slug: PropTypes.string,
+    name: PropTypes.string,
+    vendor_link: PropTypes.string,
+    triggers: PropTypes.shape({
+      data: PropTypes.arrayOf(PropTypes.object)
+    })
+  }).isRequired,
+  findAccount: PropTypes.func.isRequired,
+  fetchTrigger: PropTypes.func,
+  dismissAction: PropTypes.func.isRequired,
+  createAction: PropTypes.func,
+  onAccountChange: PropTypes.func,
+  t: PropTypes.func.isRequired
+}
+
+KonnectorModal.defaultProps = {
+  into: 'body'
 }
 
 KonnectorModal.contextTypes = {
