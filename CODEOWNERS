@@ -1,6 +1,6 @@
 packages/babel-preset-cozy-app @edas
 packages/browserslist-config-cozy @Crash--
-packages/commitlint-config-cozy @edas @y-lohse
+packages/commitlint-config-cozy @y-lohse
 packages/cozy-app-publish @y-lohse @doubleface
 packages/cozy-ci @y-lohse
 packages/cozy-device-helper @ptbrowne
