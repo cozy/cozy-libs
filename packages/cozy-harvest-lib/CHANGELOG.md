@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.71.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.70.2...cozy-harvest-lib@0.71.0) (2019-08-14)
+
+
+### Bug Fixes
+
+* Account picker styles ([7e09a02](https://github.com/cozy/cozy-libs/commit/7e09a02))
+* Add padding when adding account ([4169aa8](https://github.com/cozy/cozy-libs/commit/4169aa8))
+* Better error state handling ([c336923](https://github.com/cozy/cozy-libs/commit/c336923))
+* Configuration screen margins ([f17d270](https://github.com/cozy/cozy-libs/commit/f17d270))
+* Default value for into ([b33bc9a](https://github.com/cozy/cozy-libs/commit/b33bc9a))
+* Don't delete the <body>… ([5b9a263](https://github.com/cozy/cozy-libs/commit/5b9a263))
+* Fetching accounts indications ([a0d578f](https://github.com/cozy/cozy-libs/commit/a0d578f))
+* **cozy-harvest-lib:** Fix weird behavior on mobile device ([118aa63](https://github.com/cozy/cozy-libs/commit/118aa63))
+* **cozy-harvest-lib:** Select isSearchable False ([b675270](https://github.com/cozy/cozy-libs/commit/b675270))
+* Filter out accounts that can't be found ([e8620f7](https://github.com/cozy/cozy-libs/commit/e8620f7))
+* Fixup option to nav ([ea7313f](https://github.com/cozy/cozy-libs/commit/ea7313f))
+* Hide select menu when adding account ([9f57c33](https://github.com/cozy/cozy-libs/commit/9f57c33))
+* Select account in dropdown ([2b37edc](https://github.com/cozy/cozy-libs/commit/2b37edc))
+* SelectBox add account label ([8c4c868](https://github.com/cozy/cozy-libs/commit/8c4c868))
+* Translate button ([1c00afb](https://github.com/cozy/cozy-libs/commit/1c00afb))
+* Use color from palette ([6c97983](https://github.com/cozy/cozy-libs/commit/6c97983))
+
+
+### Features
+
+* Added account picker ([ab18318](https://github.com/cozy/cozy-libs/commit/ab18318))
+* Option to add an account without parent component ([b09b103](https://github.com/cozy/cozy-libs/commit/b09b103))
+* Option to navigate accounts via parent component ([499fad2](https://github.com/cozy/cozy-libs/commit/499fad2))
+
+
+
+
+
 ## [0.70.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.70.1...cozy-harvest-lib@0.70.2) (2019-08-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
