@@ -1,5 +1,5 @@
 packages/babel-preset-cozy-app @edas
-packages/browserslist-config-cozy @Crash--
+packages/browserslist-config-cozy @edas @Crash--
 packages/commitlint-config-cozy @y-lohse
 packages/cozy-app-publish @y-lohse @doubleface
 packages/cozy-ci @y-lohse
