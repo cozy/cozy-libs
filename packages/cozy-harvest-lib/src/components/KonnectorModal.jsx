@@ -263,11 +263,13 @@ export class KonnectorModal extends PureComponent {
       )
     } else if (addingAccount) {
       return (
-        <TriggerManager
-          konnector={konnector}
-          onLoginSuccess={this.endAccountCreation}
-          onSuccess={this.endAccountCreation}
-        />
+        <div className="u-pt-1-half">
+          <TriggerManager
+            konnector={konnector}
+            onLoginSuccess={this.endAccountCreation}
+            onSuccess={this.endAccountCreation}
+          />
+        </div>
       )
     } else if (!account) {
       return (

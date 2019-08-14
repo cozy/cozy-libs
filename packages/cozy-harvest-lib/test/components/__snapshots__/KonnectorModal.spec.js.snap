@@ -2,24 +2,28 @@
 
 exports[`KonnectorModal adding an account should render the form when controlled by state 1`] = `
 <ModalContent>
-  <Wrapper
-    konnector={
-      Object {
-        "name": "Mock",
-        "slug": "mock",
-        "triggers": Object {
-          "data": Array [
-            Object {
-              "_id": 784,
-              "doctype": "io.cozy.triggers",
-            },
-          ],
-        },
+  <div
+    className="u-pt-1-half"
+  >
+    <Wrapper
+      konnector={
+        Object {
+          "name": "Mock",
+          "slug": "mock",
+          "triggers": Object {
+            "data": Array [
+              Object {
+                "_id": 784,
+                "doctype": "io.cozy.triggers",
+              },
+            ],
+          },
+        }
       }
-    }
-    onLoginSuccess={[Function]}
-    onSuccess={[Function]}
-  />
+      onLoginSuccess={[Function]}
+      onSuccess={[Function]}
+    />
+  </div>
 </ModalContent>
 `;
 
