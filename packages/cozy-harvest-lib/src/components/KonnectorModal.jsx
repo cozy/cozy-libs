@@ -187,7 +187,7 @@ export class KonnectorModal extends PureComponent {
 
   render() {
     const { dismissAction, konnector, into, t } = this.props
-    const { account, accounts } = this.state
+    const { account, accounts, addingAccount } = this.state
 
     return (
       <Modal
@@ -205,7 +205,7 @@ export class KonnectorModal extends PureComponent {
             <div className="u-flex-grow-1 u-mr-half">
               <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
 
-              {accounts.length > 0 && account && (
+              {accounts.length > 0 && account && !addingAccount && (
                 <AccountSelectBox
                   selectedAccount={account}
                   accountsList={accounts}
