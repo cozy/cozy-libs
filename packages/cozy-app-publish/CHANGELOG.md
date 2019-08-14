@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.17.0...cozy-app-publish@0.18.0) (2019-08-14)
+
+
+### Features
+
+* **cozy-app-publish:** Add space and application type in matter… ([#708](https://github.com/cozy/cozy-libs/issues/708)) ([a85a1aa](https://github.com/cozy/cozy-libs/commit/a85a1aa))
+* **cozy-app-publish:** Add space and application type in mattermost ([c6b443f](https://github.com/cozy/cozy-libs/commit/c6b443f))
+
+
+
+
+
 # 0.17.0 (2019-08-13)
 
 
