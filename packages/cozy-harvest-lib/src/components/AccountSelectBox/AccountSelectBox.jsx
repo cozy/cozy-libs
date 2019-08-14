@@ -22,6 +22,7 @@ const AccountSelectBox = ({
       createAction={onCreate}
       getOptionLabel={option => Account.getAccountName(option.account)}
       getOptionValue={option => option.trigger._id}
+      isSearchable={false}
       defaultValue={
         selectedAccount
           ? accountsList.find(
