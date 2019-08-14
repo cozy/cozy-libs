@@ -7,9 +7,19 @@ const MATTERMOST_ICON =
   'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
 const MATTERMOST_USERNAME = 'Travis'
 
-const sendMattermostReleaseMessage = (appSlug, appVersion) => {
-  const message = `__${appSlug}__ version \`${appVersion}\` has been published.`
-
+const sendMattermostReleaseMessage = (
+  appSlug,
+  appVersion,
+  spaceName,
+  appType
+) => {
+  const spaceMessage = spaceName ? ` on space __${spaceName}__` : ''
+  const appTypeLabelMap = {
+    webapp: 'Application',
+    konnector: 'Connector'
+  }
+  const message = `${appTypeLabelMap[appType] ||
+    ''} __${appSlug}__ version \`${appVersion}\` has been published${spaceMessage}.`
   const mattermostHookUrl = url.parse(MATTERMOST_HOOK_URL)
 
   return new Promise((resolve, reject) => {
@@ -61,9 +71,9 @@ module.exports = async options => {
     throw new Error('No MATTERMOST_HOOK_URL environment variable defined')
   }
 
-  const { appSlug, appVersion } = options
+  const { appSlug, appVersion, spaceName, appType } = options
 
-  sendMattermostReleaseMessage(appSlug, appVersion)
+  sendMattermostReleaseMessage(appSlug, appVersion, spaceName, appType)
 
   return options
 }
