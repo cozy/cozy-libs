@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.62.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.61.1...cozy-doctypes@1.62.0) (2019-08-19)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Avoid es2015 export syntax ([1d46432](https://github.com/cozy/cozy-libs/commit/1d46432))
+* Adapation to new lint rules ([0bf4f5a](https://github.com/cozy/cozy-libs/commit/0bf4f5a))
+
+
+### Features
+
+* No import eslint rule ([8ebd15f](https://github.com/cozy/cozy-libs/commit/8ebd15f))
+
+
+
+
+
 ## [1.61.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.61.0...cozy-doctypes@1.61.1) (2019-08-19)
 
 **Note:** Version bump only for package cozy-doctypes
