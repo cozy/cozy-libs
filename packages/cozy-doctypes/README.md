@@ -8,11 +8,9 @@ This repository is meant to bring together methods and functions for doctypes th
 
 ## `Document`
 
-The [Document](./src/Document.js) API is useful in NodeJS contexts where you need to have global models, available across files.
-It can be used as a base for other document types (see [BankTransaction](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-doctypes/src/banking/BankTransaction.js) for example).
+The [Document](./src/Document.js) API is useful when you need to have global models, available across files.
 
-⚠️ The Document API does not work well in contexts where you need to change the client in flight. For this, prefer to use
-directly the `cozy-client` APIs.
+It can be used as a base for other document types (see [BankTransaction](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-doctypes/src/banking/BankTransaction.js) for example).
 
 ### How to use it
 
@@ -124,3 +122,19 @@ The created document will have a `cozyMetadata` property like this:
   }
 }
 ```
+
+## Environments
+
+The `package.json` has both `main` and `browser` fields. This allows
+
+- a nodeJS runtime to run the non transpiled code (async/await are for example
+supported in nodeJS) which allows for easier to read stacktraces.
+
+- browser runtimes to use transpiled code
+
+The only caveat here is the lack of ES6 module support in nodeJS, we have to use `module.exports` in this lib
+until they are supported.
+
+webpack doc for browser field: https://webpack.js.org/configuration/resolve/#resolvealiasfields
+
+package.json doc for browser field: https://docs.npmjs.com/files/package.json#browser
