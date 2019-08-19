@@ -1,6 +1,6 @@
 /* eslint-env jest */
-import { cozyClient } from './testUtils'
-import Account from './Account'
+const { cozyClient } = require('./testUtils')
+const Account = require('./Account')
 
 beforeAll(() => {
   Account.registerClient(cozyClient)
