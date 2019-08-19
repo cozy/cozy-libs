@@ -1,6 +1,9 @@
 {
   "env": { "jest": true },
-  "extends": ["cozy-app"],
+  "extends": ["cozy-app", "plugin:node/recommended"],
+  "rules": {
+    "node/exports-style": ["error", "module.exports"]
+  },
   "globals": {
     "jest": true
   }

@@ -20,6 +20,7 @@
     "btoa": "1.2.1",
     "cozy-client": "6.34.0",
     "cozy-client-js": "0.14.2",
+    "eslint-plugin-node": "9.1.0",
     "jest": "24.1.0",
     "mockdate": "^2.0.3"
   },
