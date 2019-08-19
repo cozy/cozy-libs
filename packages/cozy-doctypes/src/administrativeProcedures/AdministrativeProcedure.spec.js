@@ -1,6 +1,6 @@
-import MockDate from 'mockdate'
+const MockDate = require('mockdate')
 
-import AdministrativeProcedure from './AdministrativeProcedure'
+const AdministrativeProcedure = require('./AdministrativeProcedure')
 
 const MOCKED_DATE = '2018-01-01T12:00:00.210Z'
 

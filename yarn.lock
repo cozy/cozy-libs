@@ -5566,6 +5566,15 @@ cozy-realtime@3.1.0:
   dependencies:
     minilog "3.1.0"
 
+cozy-stack-client@6.57.0:
+  version "6.57.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.57.0.tgz#dc14a795ae403247e232c60d143ab199a123ff18"
+  integrity sha512-mFELDIAd6Yb11inB0ZjBVd8xCQy1euPWf6qHi5A9qs2HMFmK4fkQgIQq2brZOqxfaCmBq/I1jP3OppKcM83K+A==
+  dependencies:
+    detect-node "2.0.4"
+    mime "2.4.0"
+    qs "6.7.0"
+
 cozy-stack-client@^6.25.0:
   version "6.25.0"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.25.0.tgz#4fc50087d900be4b0976ceca3606c77703cf5f52"
@@ -6132,7 +6141,7 @@ datauri@^1.0.4:
     mimer "^0.3.2"
     semver "^5.5.0"
 
-date-fns@^1.28.5, date-fns@^1.29.0, date-fns@^1.30.1:
+date-fns@1.30.1, date-fns@^1.28.5, date-fns@^1.29.0, date-fns@^1.30.1:
   version "1.30.1"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-1.30.1.tgz#2e71bf0b119153dbb4cc4e88d9ea5acfb50dc05c"
   integrity sha512-hBSVCvSmWC+QypYObzwGOd9wqdDpOt+0wl0KbU+R+uuZBS1jN8VsD1ss3irQDknRj5NvxiTF6oj/nDRnN/UQNw==
@@ -7760,7 +7769,7 @@ fs-extra@7.0.1:
     jsonfile "^4.0.0"
     universalify "^0.1.0"
 
-fs-extra@^8.1.0:
+fs-extra@8.1.0, fs-extra@^8.1.0:
   version "8.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-8.1.0.tgz#49d43c45a88cd9677668cb7be1b46efdb8d2e1c0"
   integrity sha512-yhlQgA6mnOJUKOsRUFsgJdQCvkKhcz8tlZG5HBQfReYZy46OwLcY+Zia0mtdHsOo9y/hP+CxMN0TU9QxoOtG4g==

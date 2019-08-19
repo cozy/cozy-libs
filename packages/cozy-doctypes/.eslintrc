@@ -2,7 +2,10 @@
   "env": { "jest": true },
   "extends": ["cozy-app", "plugin:node/recommended"],
   "rules": {
-    "node/exports-style": ["error", "module.exports"]
+    "node/exports-style": ["error", "module.exports"],
+    "node/no-unpublished-require": ["error", {
+      "allowModules": ["cozy-stack-client", "mockdate", "fs-extra", "cozy-client-js"]
+    }]
   },
   "globals": {
     "jest": true

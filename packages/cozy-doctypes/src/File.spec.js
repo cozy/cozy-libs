@@ -1,6 +1,6 @@
-import { cozyClient } from './testUtils'
+const { cozyClient } = require('./testUtils')
 
-import CozyFile from './File'
+const CozyFile = require('./File')
 
 const destroySpy = jest.fn().mockName('destroy')
 const getSpy = jest.fn().mockName('get')

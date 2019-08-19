@@ -1,6 +1,5 @@
-import { cozyClient } from './testUtils'
-
-import CozyFolder from './Folder'
+const { cozyClient } = require('./testUtils')
+const CozyFolder = require('./Folder')
 
 describe('Folder model', () => {
   beforeAll(() => {
