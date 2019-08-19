@@ -20,7 +20,7 @@ const Status = ({ t, trigger, konnector }) => {
       </div>
     )
   } else {
-    return <Icon icon="check-circleless" color={palette['malachite']} />
+    return <Icon icon="check" color={palette['malachite']} />
   }
 }
 
