@@ -1,4 +1,4 @@
-import Contact from './Contact'
+const Contact = require('./Contact')
 
 describe('Contact model', () => {
   describe('isContact method', () => {

@@ -3,7 +3,7 @@ const Document = require('./Document')
 const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
 // Order matters
-export const probableLoginFieldNames = [
+const probableLoginFieldNames = [
   'login',
   'identifier',
   'new_identifier',
@@ -41,5 +41,7 @@ Account.schema = {
     }
   }
 }
+
+Account.probableLoginFieldNames = probableLoginFieldNames
 
 module.exports = Account

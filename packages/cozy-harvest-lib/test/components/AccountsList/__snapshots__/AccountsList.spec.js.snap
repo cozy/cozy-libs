@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountsList should render 1`] = `
+<I18n
+  defaultLang="en"
+  dictRequire={[Function]}
+>
+  <Wrapper
+    accounts={
+      Array [
+        Object {
+          "account": Object {
+            "_id": "account-1",
+          },
+          "trigger": Object {
+            "_id": "trigger-1",
+          },
+        },
+        Object {
+          "account": Object {
+            "_id": "account-2",
+          },
+          "trigger": Object {
+            "_id": "trigger-2",
+          },
+        },
+      ]
+    }
+    addAccount={[MockFunction]}
+    konnector={
+      Object {
+        "name": "test-konnector",
+        "vendor_link": "test konnector link",
+      }
+    }
+    onPick={[MockFunction]}
+  />
+</I18n>
+`;

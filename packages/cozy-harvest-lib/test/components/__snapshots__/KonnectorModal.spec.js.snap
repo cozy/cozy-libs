@@ -1,5 +1,72 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`KonnectorModal adding an account should render the form when controlled by state 1`] = `
+<ModalContent>
+  <div
+    className="u-pt-1-half"
+  >
+    <Wrapper
+      konnector={
+        Object {
+          "name": "Mock",
+          "slug": "mock",
+          "triggers": Object {
+            "data": Array [
+              Object {
+                "_id": 784,
+                "doctype": "io.cozy.triggers",
+              },
+            ],
+          },
+        }
+      }
+      onLoginSuccess={[Function]}
+      onSuccess={[Function]}
+    />
+  </div>
+</ModalContent>
+`;
+
+exports[`KonnectorModal should render the selected account via a prop 1`] = `
+<ModalContent>
+  <Wrapper
+    account={
+      Object {
+        "_id": "123",
+        "doctype": "io.cozy.accounts",
+      }
+    }
+    addAccount={[Function]}
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "_id": "784",
+              "doctype": "io.cozy.triggers",
+            },
+            Object {
+              "_id": "872",
+              "doctype": "io.cozy.triggers",
+            },
+          ],
+        },
+      }
+    }
+    onAccountDeleted={[MockFunction]}
+    refetchTrigger={[Function]}
+    trigger={
+      Object {
+        "_id": "784",
+        "doctype": "io.cozy.triggers",
+      }
+    }
+  />
+</ModalContent>
+`;
+
 exports[`KonnectorModal should show a spinner while loading 1`] = `
 <Spinner
   className="u-flex u-flex-justify-center u-pv-3"
@@ -11,114 +78,142 @@ exports[`KonnectorModal should show a spinner while loading 1`] = `
 />
 `;
 
-exports[`KonnectorModal should show the content 1`] = `
-<ModalContent
-  className="u-pb-0"
->
-  <Tabs
-    initialActiveTab="data"
-  >
-    <TabList>
-      <Tab
-        name="data"
+exports[`KonnectorModal should show an error view 1`] = `
+<ModalContent>
+  <Infos
+    actionButton={
+      <DefaultButton
+        theme="danger"
       >
-        modal.tabs.data
-      </Tab>
-      <Tab
-        name="configuration"
-      >
-        modal.tabs.configuration
-      </Tab>
-    </TabList>
-    <TabPanels>
-      <TabPanel
-        className="u-pt-1-half u-pb-2"
-        name="data"
-      >
-        <Wrapper
-          onError={[Function]}
-          onLaunch={[Function]}
-          onSuccess={[Function]}
-          trigger={null}
-        />
-      </TabPanel>
-      <TabPanel
-        className="u-pt-1-half u-pb-2"
-        name="configuration"
-      >
-        <div
-          className="u-mb-1"
-        >
-          <SubTitle
-            className="u-mb-half"
-            ellipsis={false}
-            tag="div"
-          >
-            modal.updateAccount.title
-          </SubTitle>
-          <Wrapper
-            account={null}
-            konnector={
-              Object {
-                "name": "Mock",
-                "slug": "mock",
-                "triggers": Object {
-                  "data": Array [
-                    Object {
-                      "doctype": "io.cozy.triggers",
-                      "id": 784,
-                    },
-                  ],
-                },
-              }
-            }
-            onError={[Function]}
-            onLaunch={[Function]}
-            onSuccess={[Function]}
-            showError={false}
-            trigger={null}
-          />
-        </div>
-        <div
-          className="u-mb-2"
-        >
-          <SubTitle
-            className="u-mb-half"
-            ellipsis={false}
-            tag="div"
-          >
-            modal.deleteAccount.title
-          </SubTitle>
-          <Text
-            className="u-mb-1"
-            ellipsis={false}
-            tag="div"
-          >
-            modal.deleteAccount.description
-          </Text>
-          <Wrapper
-            account={null}
-            extension="full"
-            onSuccess={[MockFunction]}
-          />
-        </div>
-        <div>
-          <SubTitle
-            className="u-mb-half"
-            ellipsis={false}
-            tag="div"
-          >
-            modal.addAccount.title
-          </SubTitle>
-          <DefaultButton
-            extension="full"
-            label="modal.addAccount.button"
-            onClick={[MockFunction]}
-            theme="secondary"
-          />
-        </div>
-      </TabPanel>
-    </TabPanels>
-  </Tabs>
+        modal.konnector.error.button
+      </DefaultButton>
+    }
+    icon={null}
+    isImportant={true}
+    text="modal.konnector.error.description"
+    title="modal.konnector.error.title"
+  />
+</ModalContent>
+`;
+
+exports[`KonnectorModal should show the configuration view of a single account 1`] = `
+<ModalContent>
+  <Wrapper
+    account={
+      Object {
+        "_id": "123",
+        "doctype": "io.cozy.accounts",
+      }
+    }
+    addAccount={[Function]}
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "_id": 784,
+              "doctype": "io.cozy.triggers",
+            },
+          ],
+        },
+      }
+    }
+    onAccountDeleted={[MockFunction]}
+    refetchTrigger={[Function]}
+    trigger={
+      Object {
+        "_id": 784,
+        "doctype": "io.cozy.triggers",
+      }
+    }
+  />
+</ModalContent>
+`;
+
+exports[`KonnectorModal should show the list of accounts 1`] = `
+<ModalContent>
+  <Wrapper
+    accounts={
+      Array [
+        Object {
+          "account": Object {
+            "_id": "123",
+            "doctype": "io.cozy.accounts",
+          },
+          "trigger": Object {
+            "_id": "784",
+            "doctype": "io.cozy.triggers",
+          },
+        },
+        Object {
+          "account": Object {
+            "_id": "123",
+            "doctype": "io.cozy.accounts",
+          },
+          "trigger": Object {
+            "_id": "872",
+            "doctype": "io.cozy.triggers",
+          },
+        },
+      ]
+    }
+    addAccount={[Function]}
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "_id": "784",
+              "doctype": "io.cozy.triggers",
+            },
+            Object {
+              "_id": "872",
+              "doctype": "io.cozy.triggers",
+            },
+          ],
+        },
+      }
+    }
+    onPick={[Function]}
+  />
+</ModalContent>
+`;
+
+exports[`KonnectorModal switching account should show the add account view when controlled by state 1`] = `
+<ModalContent>
+  <Wrapper
+    account={
+      Object {
+        "_id": "123",
+        "doctype": "io.cozy.accounts",
+      }
+    }
+    addAccount={[Function]}
+    konnector={
+      Object {
+        "name": "Mock",
+        "slug": "mock",
+        "triggers": Object {
+          "data": Array [
+            Object {
+              "_id": 784,
+              "doctype": "io.cozy.triggers",
+            },
+          ],
+        },
+      }
+    }
+    onAccountDeleted={[MockFunction]}
+    refetchTrigger={[Function]}
+    trigger={
+      Object {
+        "_id": "abc",
+      }
+    }
+  />
 </ModalContent>
 `;
