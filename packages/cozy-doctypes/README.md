@@ -132,8 +132,11 @@ supported in nodeJS) which allows for easier to read stacktraces.
 
 - browser runtimes to use transpiled code
 
-The only caveat here is the lack of ES6 module support in nodeJS, we have to use `module.exports` in this lib
-until they are supported.
+The only caveat here is that we must pay attention to features that we use that are not supported yet
+in nodeJS, for example 
+
+- the lack of ES6 module support in nodeJS, we have to use `module.exports`
+- class properties: must bind the methods in the constructor
 
 webpack doc for browser field: https://webpack.js.org/configuration/resolve/#resolvealiasfields
 
