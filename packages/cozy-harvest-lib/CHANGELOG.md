@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.2...cozy-harvest-lib@0.71.3) (2019-08-19)
+
+
+### Bug Fixes
+
+* Handle long acount names ([f79c567](https://github.com/cozy/cozy-libs/commit/f79c567))
+
+
+
+
+
 ## [0.71.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.1...cozy-harvest-lib@0.71.2) (2019-08-19)
 
 **Note:** Version bump only for package cozy-harvest-lib
