@@ -190,10 +190,6 @@ export class AccountForm extends PureComponent {
             ref={element => {
               container = element
             }}
-            // Hacking manually the style here, waiting for Cozy-UI to remove
-            // top margin on Field's label elements.
-            // See https://github.com/cozy/cozy-libs/issues/629
-            style={{ marginTop: '-1rem' }}
           >
             {error && showError && (
               <TriggerErrorInfo
