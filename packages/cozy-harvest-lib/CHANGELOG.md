@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.3...cozy-harvest-lib@0.71.4) (2019-08-20)
+
+
+### Bug Fixes
+
+* Status icon sizes ([83aa370](https://github.com/cozy/cozy-libs/commit/83aa370))
+
+
+
+
+
 ## [0.71.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.2...cozy-harvest-lib@0.71.3) (2019-08-19)
 
 
