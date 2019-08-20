@@ -8,7 +8,7 @@ packages/cozy-doctypes @ptbrowne @drazik
 packages/cozy-flags @ptbrowne @drazik
 packages/cozy-harvest-lib @Crash-- @y-lohse
 packages/cozy-interapp @Crash-- @y-lohse
-packages/cozy-realtime @edas
+packages/cozy-realtime @edas @ptbrowne
 packages/cozy-release @doubleface
 packages/eslint-config-cozy-app @edas @drazik
 packages/renovate-config-cozy @y-lohse @doubleface
