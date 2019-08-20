@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.2.1 (2019-08-20)
+
+
+### Bug Fixes
+
+* Only use defaultDir in the manifest ([dee6277](https://github.com/cozy/cozy-libs/commit/dee6277))
+
+
+
+
+
 # 1.2.0 (2019-07-18)
 
 
