@@ -1,0 +1,27 @@
+{
+  "name": "renovate-config-cozy-libs",
+  "version": "0.1.0",
+  "description": "Renovate config for Cozy libs",
+  "renovate-config": {
+    "default": {
+      "extends": [
+        "cozy"
+      ],
+      "packageRules": [
+        {
+          "packagePatterns": [
+            "*"
+          ],
+          "rangeStrategy": "replace"
+        },
+        {
+          "depTypeList": [
+            "devDependencies"
+          ],
+          "rangeStrategy": "pin"
+        }
+      ]
+    }
+  },
+  "license": "MIT"
+}
