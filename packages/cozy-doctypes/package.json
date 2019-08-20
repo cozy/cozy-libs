@@ -20,7 +20,7 @@
     "babel-preset-cozy-app": "^1.6.0",
     "btoa": "1.2.1",
     "cozy-client": "6.34.0",
-    "cozy-client-js": "0.14.2",
+    "cozy-client-js": "0.16.4",
     "cozy-stack-client": "6.57.0",
     "eslint-plugin-node": "9.1.0",
     "fs-extra": "8.1.0",
