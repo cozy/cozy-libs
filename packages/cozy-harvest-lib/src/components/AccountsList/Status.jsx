@@ -16,11 +16,18 @@ const Status = ({ t, trigger, konnector }) => {
     return (
       <div className="u-pomegranate u-flex u-flex-justify-center u-flex-items-center">
         <span className="u-mr-half u-caption u-pomegranate">{errorTitle}</span>
-        <Icon icon="warning" />
+        <Icon icon="warning" size={16} className="u-flex-shrink-0" />
       </div>
     )
   } else {
-    return <Icon icon="check" color={palette['malachite']} />
+    return (
+      <Icon
+        icon="check"
+        color={palette['malachite']}
+        size={16}
+        className="u-flex-shrink-0"
+      />
+    )
   }
 }
 
