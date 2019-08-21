@@ -12,3 +12,4 @@ packages/cozy-realtime @edas @ptbrowne
 packages/cozy-release @doubleface
 packages/eslint-config-cozy-app @edas @drazik
 packages/renovate-config-cozy @y-lohse @doubleface
+packages/cozy-logger @doubleface
