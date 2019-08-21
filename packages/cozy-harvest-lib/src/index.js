@@ -10,3 +10,4 @@ export { default as TriggerLauncher } from './components/TriggerLauncher'
 
 export { KonnectorJobError } from './helpers/konnectors'
 export { handleOAuthResponse } from './helpers/oauth'
+export { default as Routes } from './Routes'
