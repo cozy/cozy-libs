@@ -2,6 +2,7 @@ import {
   buildFolderPath,
   buildFolderPermission,
   getAccountType,
+  hasNewVersionAvailable,
   KonnectorJobError,
   needsFolder
 } from 'helpers/konnectors'
@@ -160,6 +161,15 @@ describe('Konnectors Helpers', () => {
           verbs: ['GET', 'PATCH', 'POST']
         }
       })
+    })
+  })
+
+  describe('hasNewVersionAvailable', () => {
+    it('should return true', () => {
+      expect(hasNewVersionAvailable({ available_version: true })).toBe(true)
+    })
+    it('should return false', () => {
+      expect(hasNewVersionAvailable({ available_version: false })).toBe(false)
     })
   })
 

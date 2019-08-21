@@ -145,6 +145,14 @@ export const getAccountType = konnector => {
 }
 
 /**
+ * Returns true if the konnector has a new version available and can be updated
+ * @param  {Object}  konnector
+ * @return {Boolean}
+ */
+export const hasNewVersionAvailable = (konnector = {}) =>
+  !!konnector.available_version
+
+/**
  * Indicates if the given konnector requires a folder to work properly.
  * This directly relies on the `fields.advancedFields.folderPath` from manifest for legacy Konnector.
  * Relies on `folders` for new Konnector
@@ -303,5 +311,6 @@ export default {
   buildFolderPath,
   buildFolderPermission,
   getAccountType,
+  hasNewVersionAvailable,
   needsFolder
 }
