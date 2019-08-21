@@ -305,5 +305,6 @@ Transaction.checkedAttributes = [
 ]
 Transaction.LOCAL_MODEL_USAGE_THRESHOLD = 0.8
 Transaction.GLOBAL_MODEL_USAGE_THRESHOLD = 0.15
+Transaction.getSplitDate = getSplitDate
 
 module.exports = Transaction
