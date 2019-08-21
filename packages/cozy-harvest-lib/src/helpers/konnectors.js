@@ -78,10 +78,19 @@ export class KonnectorJobError extends Error {
 
   /**
    * Test if the konnector error is a user error
-   * @return {Boolean} [description]
+   * @return {Boolean}
    */
   isUserError() {
     return USER_ERRORS.includes(this.type)
+  }
+
+  /**
+   * Test if the konnector error is due to a term version mismatch. Term version
+   * mismatch errors indicates that the konnector must be updated manually
+   * @return {Boolean}
+   */
+  isTermsVersionMismatchError() {
+    return this.type === TERMS_VERSION_MISMATCH
   }
 }
 

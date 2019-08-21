@@ -180,6 +180,7 @@ describe('Konnectors Helpers', () => {
       'LOGIN_FAILED.TOO_MANY_ATTEMPTS',
       'MAINTENANCE',
       'NOT_EXISTING_DIRECTORY',
+      'TERMS_VERSION_MISMATCH',
       'USER_ACTION_NEEDED',
       'USER_ACTION_NEEDED.OAUTH_OUTDATED',
       'USER_ACTION_NEEDED.ACCOUNT_REMOVED',
@@ -213,6 +214,9 @@ describe('Konnectors Helpers', () => {
             'USER_ACTION_NEEDED.CHANGE_PASSWORD',
             'USER_ACTION_NEEDED.PERMISSIONS_CHANGED'
           ].includes(message)
+        )
+        expect(error.isTermsVersionMismatchError()).toBe(
+          message === 'TERMS_VERSION_MISMATCH'
         )
       })
     }
