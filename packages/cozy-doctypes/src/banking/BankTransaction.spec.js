@@ -43,8 +43,23 @@ describe('getIdentifier', () => {
 })
 
 describe('split date', () => {
-  it('should be the oldest date present in the transaction', () => {
+  it('should be the most recent date present in the transaction', () => {
     expect(BankTransaction.getSplitDate(testTransactions)).toBe('2018-10-06')
+  })
+
+  it('should not consider future transactions', () => {
+    // Exceptionally, some transactions can come from the future
+    // For example in the case of planned stock sale
+    // https://trello.com/c/KK9CeQzB/
+    expect(
+      BankTransaction.getSplitDate([
+        ...testTransactions,
+        {
+          ...testTransactions[0],
+          date: '2050-10-06' // Someone planned a transaction in the future
+        }
+      ])
+    ).toBe('2018-10-06')
   })
 })
 
