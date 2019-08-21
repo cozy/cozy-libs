@@ -14,4 +14,6 @@ switch (process.env.NODE_ENV) {
   case 'test':
     module.exports = devFormat
     break
+  default:
+    module.exports = prodFormat
 }
