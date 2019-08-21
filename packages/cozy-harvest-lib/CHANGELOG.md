@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.6...cozy-harvest-lib@0.71.7) (2019-08-21)
+
+
+### Bug Fixes
+
+* Removed outdated style ([f3127b8](https://github.com/cozy/cozy-libs/commit/f3127b8))
+
+
+
+
+
 ## [0.71.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.5...cozy-harvest-lib@0.71.6) (2019-08-21)
 
 **Note:** Version bump only for package cozy-harvest-lib
