@@ -1,5 +1,23 @@
 const BankTransaction = require('./BankTransaction')
 
+const testTransactions = [
+  {
+    amount: -10,
+    originalBankLabel: 'Test 01',
+    date: '2018-10-02'
+  },
+  {
+    amount: -20,
+    originalBankLabel: 'Test 02',
+    date: '2018-10-05'
+  },
+  {
+    amount: -30,
+    originalBankLabel: 'Test 03',
+    date: '2018-10-06'
+  }
+]
+
 describe('transaction reconciliation', () => {
   it('should be able to filter incoming linxo transactions on their date', () => {
     const filter = x => BankTransaction.prototype.isAfter.call(x, '2018-10-04')
@@ -24,24 +42,29 @@ describe('getIdentifier', () => {
   })
 })
 
+describe('split date', () => {
+  it('should be the most recent date present in the transaction', () => {
+    expect(BankTransaction.getSplitDate(testTransactions)).toBe('2018-10-06')
+  })
+
+  it('should not consider future transactions', () => {
+    // Exceptionally, some transactions can come from the future
+    // For example in the case of planned stock sale
+    // https://trello.com/c/KK9CeQzB/
+    expect(
+      BankTransaction.getSplitDate([
+        ...testTransactions,
+        {
+          ...testTransactions[0],
+          date: '2050-10-06' // Someone planned a transaction in the future
+        }
+      ])
+    ).toBe('2018-10-06')
+  })
+})
+
 describe('reconciliation', () => {
-  const existingTransactions = [
-    {
-      amount: -10,
-      originalBankLabel: 'Test 01',
-      date: '2018-10-02'
-    },
-    {
-      amount: -20,
-      originalBankLabel: 'Test 02',
-      date: '2018-10-05'
-    },
-    {
-      amount: -30,
-      originalBankLabel: 'Test 03',
-      date: '2018-10-06'
-    }
-  ]
+  const existingTransactions = testTransactions
 
   it('should return the missed transactions when there are some', () => {
     const newTransactions = [

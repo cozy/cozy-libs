@@ -19,12 +19,20 @@ const getDate = transaction => {
 }
 
 /**
- * Get the date of the latest transaction in an array
+ * Get the date of the latest transaction in an array.
+ * Transactions in the future are ignored.
+ *
  * @param {array} stackTransactions
  * @returns {string} The date of the latest transaction (YYYY-MM-DD)
  */
 const getSplitDate = stackTransactions => {
-  return maxValue(stackTransactions, getDate)
+  const now = new Date()
+  const notFutureTransactions = stackTransactions.filter(transaction => {
+    const date = getDate(transaction)
+    return !isAfter(date, now)
+  })
+
+  return maxValue(notFutureTransactions, getDate)
 }
 
 const ensureISOString = date => {
@@ -305,5 +313,6 @@ Transaction.checkedAttributes = [
 ]
 Transaction.LOCAL_MODEL_USAGE_THRESHOLD = 0.8
 Transaction.GLOBAL_MODEL_USAGE_THRESHOLD = 0.15
+Transaction.getSplitDate = getSplitDate
 
 module.exports = Transaction
