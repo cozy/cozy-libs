@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KonnectorUpdateInfos should render 1`] = `
+<Infos
+  actionButton={
+    <KonnectorUpdateLinker
+      konnector={
+        Object {
+          "slug": "test-konnector",
+        }
+      }
+      label="infos.konnectorUpdate.button.label"
+    />
+  }
+  icon={null}
+  text="infos.konnectorUpdate.body.regular"
+  title="infos.konnectorUpdate.title"
+/>
+`;
+
+exports[`KonnectorUpdateInfos should render as blocking 1`] = `
+<Infos
+  actionButton={
+    <KonnectorUpdateLinker
+      isBlocking={true}
+      konnector={
+        Object {
+          "slug": "test-konnector",
+        }
+      }
+      label="infos.konnectorUpdate.button.label"
+    />
+  }
+  icon={null}
+  isImportant={true}
+  text="infos.konnectorUpdate.body.blocking"
+  title="infos.konnectorUpdate.title"
+/>
+`;
