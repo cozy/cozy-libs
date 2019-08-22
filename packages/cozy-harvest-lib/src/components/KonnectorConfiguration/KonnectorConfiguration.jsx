@@ -12,12 +12,14 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import { SubTitle, Text } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
 
+import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import TriggerManager from '../TriggerManager'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import DeleteAccountButton from '../DeleteAccountButton'
 import withLocales from '../hoc/withLocales'
 import * as triggersModel from '../../helpers/triggers'
+import * as konnectorsModel from '../../helpers/konnectors'
 
 class KonnectorConfiguration extends React.Component {
   constructor(props) {
@@ -78,7 +80,10 @@ class KonnectorConfiguration extends React.Component {
     const hasError = !!konnectorJobError
     const shouldDisplayError = !isJobRunning && konnectorJobError
     const hasLoginError = hasError && konnectorJobError.isLoginError()
-    const hasGenericError = hasError && !hasLoginError
+    const hasTermsVersionMismatchError =
+      hasError && konnectorJobError.isTermsVersionMismatchError()
+    const hasGenericError =
+      hasError && !hasLoginError && !hasTermsVersionMismatchError
 
     return (
       <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
@@ -100,6 +105,13 @@ class KonnectorConfiguration extends React.Component {
 
         <TabPanels>
           <TabPanel name="data" className="u-pt-1-half u-pb-0">
+            {konnectorsModel.hasNewVersionAvailable(konnector) && (
+              <KonnectorUpdateInfos
+                className="u-mb-2"
+                konnector={konnector}
+                isBlocking={hasTermsVersionMismatchError}
+              />
+            )}
             {shouldDisplayError && hasGenericError && (
               <TriggerErrorInfo
                 className="u-mb-2"
