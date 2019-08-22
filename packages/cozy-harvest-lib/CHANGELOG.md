@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.9...cozy-harvest-lib@0.71.10) (2019-08-22)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Check if accountLogin is not undefined ([a18d028](https://github.com/cozy/cozy-libs/commit/a18d028))
+
+
+
+
+
 ## [0.71.9](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.8...cozy-harvest-lib@0.71.9) (2019-08-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
