@@ -75,16 +75,18 @@ class KonnectorConfiguration extends React.Component {
     } = this.props
     const { isJobRunning, konnectorJobError } = this.state
 
+    const hasError = !!konnectorJobError
     const shouldDisplayError = !isJobRunning && konnectorJobError
-    const hasLoginError = konnectorJobError && konnectorJobError.isLoginError()
-    const hasErrorExceptLogin = konnectorJobError && !hasLoginError
+    const hasLoginError = hasError && konnectorJobError.isLoginError()
+    const hasGenericError = hasError && !hasLoginError
 
     return (
       <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
         <TabList>
           <Tab name="data">
             {t('modal.tabs.data')}
-            {hasErrorExceptLogin && (
+            {// Login error should not be mentionned in data tab
+            hasError && !hasLoginError && (
               <Icon icon="warning" size={13} className="u-ml-half" />
             )}
           </Tab>
@@ -98,7 +100,7 @@ class KonnectorConfiguration extends React.Component {
 
         <TabPanels>
           <TabPanel name="data" className="u-pt-1-half u-pb-0">
-            {shouldDisplayError && hasErrorExceptLogin && (
+            {shouldDisplayError && hasGenericError && (
               <TriggerErrorInfo
                 className="u-mb-2"
                 error={konnectorJobError}
