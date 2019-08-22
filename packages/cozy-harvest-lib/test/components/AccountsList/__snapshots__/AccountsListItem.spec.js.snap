@@ -1,0 +1,57 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountsListItem should not render the caption since accountLogin is undefined 1`] = `
+<div
+  className="styles__c-card___YgP7B u-flex u-flex-justify-between u-flex-items-center u-c-pointer u-maw-100"
+  onClick={[MockFunction]}
+>
+  <div
+    className="u-flex-grow-1 u-flex-shrink-1 u-ov-hidden u-mr-1"
+  >
+    <MidEllipsis
+      text="account-1"
+    />
+  </div>
+  <Wrapper
+    konnector={
+      Object {
+        "name": "test-konnector",
+        "vendor_link": "test konnector link",
+      }
+    }
+    trigger={[MockFunction]}
+  />
+</div>
+`;
+
+exports[`AccountsListItem should render the caption since accountName !== login 1`] = `
+<div
+  className="styles__c-card___YgP7B u-flex u-flex-justify-between u-flex-items-center u-c-pointer u-maw-100"
+  onClick={[MockFunction]}
+>
+  <div
+    className="u-flex-grow-1 u-flex-shrink-1 u-ov-hidden u-mr-1"
+  >
+    <MidEllipsis
+      text="myAccountName"
+    />
+    <Caption
+      ellipsis={false}
+      tag="div"
+    >
+      <MidEllipsis
+        text="mylogin"
+      />
+    </Caption>
+  </div>
+  <Wrapper
+    konnector={
+      Object {
+        "name": "test-konnector",
+        "vendor_link": "test konnector link",
+      }
+    }
+    trigger={[MockFunction]}
+  />
+</div>
+`;
