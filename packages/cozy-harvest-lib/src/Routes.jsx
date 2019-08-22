@@ -4,24 +4,7 @@ import trimEnd from 'lodash/trimEnd'
 import KonnectorAccounts from './components/KonnectorAccounts'
 import AccountsListModal from './components/AccountsListModal'
 import AccountModal from './components/AccountModal'
-import KonnectorModal from './components/KonnectorModal'
-
-const Wrapper = ({ konnector }) => {
-  return (
-    <KonnectorModal
-      konnector={konnector}
-      dismissAction={() => {
-        history.push('/connected')
-      }}
-      createAction={() => {
-        history.push(`/connected/${konnector.slug}/new`)
-      }}
-      onAccountChange={account => {
-        history.push(`/connected/${konnector.slug}/accounts/${account._id}`)
-      }}
-    />
-  )
-}
+import NewAccountModal from './components/NewAccountModal'
 
 const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
   <KonnectorAccounts konnector={konnector}>
@@ -30,7 +13,7 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
         <Route
           path={`${konnectorRoot}/`}
           exact
-          component={() => (
+          render={() => (
             <AccountsListModal
               konnector={konnector}
               accounts={accounts}
@@ -41,7 +24,7 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
         <Route
           path={`${konnectorRoot}/accounts/:accountId`}
           exact
-          component={({ match }) => (
+          render={({ match }) => (
             <AccountModal
               konnector={konnector}
               accountId={match.params.accountId}
@@ -53,7 +36,7 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
         <Route
           path={`${konnectorRoot}/new`}
           exact
-          component={() => <Wrapper konnector={konnector} />}
+          render={() => <NewAccountModal konnector={konnector} />}
         />
         {/* TODO redirect render twice the component */}
         <Redirect

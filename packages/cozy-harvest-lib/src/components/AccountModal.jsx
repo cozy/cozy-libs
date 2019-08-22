@@ -6,6 +6,8 @@ import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 import KonnectorIcon from './KonnectorIcon'
+import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
+
 import { withRouter } from 'react-router'
 import Modal, {
   ModalContent,
@@ -65,7 +67,7 @@ class AccountModal extends Component {
   }
 
   render() {
-    const { konnector, onDismiss, history } = this.props
+    const { konnector, onDismiss, history, accounts } = this.props
     const { trigger, account, fetching } = this.state
     if (fetching) return 'loading'
     return (
@@ -77,6 +79,17 @@ class AccountModal extends Component {
             </div>
             <div className="u-flex-grow-1 u-mr-half">
               <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
+              <AccountSelectBox
+                selectedAccount={account}
+                accountsList={accounts}
+                onChange={option => {
+                  //this.requestAccountChange(option.account, option.trigger)
+                  history.push(`../${option.account._id}`)
+                }}
+                onCreate={() => {
+                  history.push(`../../new`)
+                }}
+              />
             </div>
           </div>
         </ModalHeader>
@@ -87,7 +100,7 @@ class AccountModal extends Component {
             account={account}
             onAccountDeleted={onDismiss}
             addAccount={() => history.push('../../new')}
-            refetchTrigger={this.refetchTrigger}
+            refetchTrigger={this.refetchTrigger.bind(this)}
           />
         </ModalContent>
       </Modal>
