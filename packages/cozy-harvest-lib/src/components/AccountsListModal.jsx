@@ -9,10 +9,10 @@ import KonnectorIcon from './KonnectorIcon'
 
 class AccountsListModal extends React.Component {
   render() {
-    const { dismissAction, konnector, accounts, history } = this.props
+    const { onDismiss, konnector, accounts, history } = this.props
 
     return (
-      <Modal dismissAction={dismissAction} mobileFullscreen size="small">
+      <Modal dismissAction={onDismiss} mobileFullscreen size="small">
         <ModalHeader className="u-pr-2">
           <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
             <div className="u-w-3 u-h-3 u-mr-half">
