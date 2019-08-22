@@ -5755,40 +5755,6 @@ cozy-ui@22.12.0:
     react-pdf "^4.0.5"
     react-select "2.2.0"
 
-cozy-ui@22.4.0:
-  version "22.4.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-22.4.0.tgz#358244f6c8ba62598c525c366bf75b7076e05bb0"
-  integrity sha512-bbfE/wBNn48aa6l1g5HpVL5EZ13k1B//9/6fY0g01kQIs3usRtNPvKBY09GF6Uj3OccCOL/sL8mCIiM2dCmUsA==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    body-scroll-lock "^2.5.8"
-    classnames "^2.2.5"
-    date-fns "^1.28.5"
-    hammerjs "^2.0.8"
-    node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
-    react-hot-loader "^4.3.11"
-    react-markdown "^4.0.8"
-    react-pdf "^4.0.5"
-    react-select "2.2.0"
-
-cozy-ui@^22:
-  version "22.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-22.3.0.tgz#e32ffc4a244c6cd8d4fdf6be0b77ab6da221ec02"
-  integrity sha512-ex/VwE1CofM6vEz8DzxsVY+4Y5nXNOtXIc0WMNrp0n7nVrk6hBzR0l/V0SPrOvwnaU06rqfGzf9H7DcHtCmjEw==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    body-scroll-lock "^2.5.8"
-    classnames "^2.2.5"
-    date-fns "^1.28.5"
-    hammerjs "^2.0.8"
-    node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
-    react-hot-loader "^4.3.11"
-    react-markdown "^4.0.8"
-    react-pdf "^4.0.5"
-    react-select "2.2.0"
-
 create-ecdh@^4.0.0:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/create-ecdh/-/create-ecdh-4.0.3.tgz#c9111b6f33045c4697f144787f9254cdc77c45ff"
