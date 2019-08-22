@@ -47,6 +47,7 @@ exports[`AccountField render a dropdown field 1`] = `
     id=""
     inputRef={[Function]}
     label="fields.multiple.label"
+    labelProps={Object {}}
     name="multiple"
     options={
       Array [
