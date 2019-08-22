@@ -44,7 +44,7 @@
     "cozy-client": "6.46.0",
     "cozy-device-helper": "^1.7.5",
     "cozy-realtime": "3.1.0",
-    "cozy-ui": "22.4.0",
+    "cozy-ui": "22.12.0",
     "enzyme": "3.9.0",
     "enzyme-adapter-react-16": "1.11.2",
     "identity-obj-proxy": "3.0.0",
@@ -59,6 +59,6 @@
     "cozy-client": "6.46.0",
     "cozy-device-helper": "1.7.1",
     "cozy-realtime": "^3.1.0",
-    "cozy-ui": "^22.4.0"
+    "cozy-ui": "^22.12.0"
   }
 }

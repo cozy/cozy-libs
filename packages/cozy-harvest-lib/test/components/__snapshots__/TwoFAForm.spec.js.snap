@@ -53,6 +53,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
         fullwidth={true}
         id=""
         label="twoFAForm.code.label"
+        labelProps={Object {}}
         onChange={[Function]}
         placeholder=""
         secondaryLabels={Object {}}
