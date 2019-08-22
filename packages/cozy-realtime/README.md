@@ -67,10 +67,6 @@ await realtime.unsubscribe('updated', type, id, handlerCreate)
 await realtime.unsubscribeAll()
 ```
 
-### Maintainers
-
-The maintainers for Cozy Realtime are [Greg](https://github.com/gregorylegarec), [CPatchane](https://github.com/CPatchane) and [kosssi](https://github.com/kosssi) !
-
 ## License
 
 `cozy-realtime` is distributed under the MIT license.
