@@ -158,6 +158,18 @@
     "administrative": "Administrative",
     "photos": "Photos"
   },
+  "infos": {
+    "konnectorUpdate": {
+      "title": "An update is available for this service.",
+      "body": {
+        "regular": "Perform this update to keep fetching your data and to have the latest features:",
+        "blocking": "Update it to keep fetching your data:"
+      },
+      "button": {
+        "label": "See update"
+      }
+    }
+  },
   "legacy": {
     "fields": {
       "access_token": {
