@@ -1,7 +1,7 @@
 import React from 'react'
 
 import { withMutations } from 'cozy-client'
-
+import { withRouter } from 'react-router'
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
@@ -20,6 +20,18 @@ class KonnectorAccounts extends React.Component {
    */
   async componentDidMount() {
     await this.fetchAccounts()
+  }
+
+  componentDidUpdate(prevProps) {
+    /**
+     * We need to fetchAccounts() based on the pathname since if we don't,
+     * when we create a new account, we can't find it in our array latter.
+     *
+     * ATM we also refetch if we go to /new. We have to change that
+     */
+    if (this.props.location.pathname !== prevProps.location.pathname) {
+      this.fetchAccounts()
+    }
   }
 
   async fetchAccounts() {
@@ -49,5 +61,5 @@ class KonnectorAccounts extends React.Component {
 }
 
 export default withMutations(accountMutations, triggersMutations)(
-  KonnectorAccounts
+  withRouter(KonnectorAccounts)
 )
