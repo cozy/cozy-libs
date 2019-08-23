@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.17.1 (2019-08-23)
+
+
+### Bug Fixes
+
+* Reset yarn lockfile ([24a9993](https://github.com/cozy/cozy-libs/commit/24a9993))
+
+
+
+
+
 # [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.16.2...cozy-authentication@1.17.0) (2019-07-19)
 
 

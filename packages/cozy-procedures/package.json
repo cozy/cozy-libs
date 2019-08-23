@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.38.1",
+  "version": "0.38.2",
   "main": "dist/index.js",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-procedures/README.md",
   "repository": {
