@@ -36,7 +36,7 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
         <Route
           path={`${konnectorRoot}/new`}
           exact
-          render={() => <NewAccountModal konnector={konnector} />}
+          render={() => <NewAccountModal konnector={konnector} onDismiss={onDismiss} />}
         />
         {/* TODO redirect render twice the component */}
         <Redirect
