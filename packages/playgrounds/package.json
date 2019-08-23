@@ -22,8 +22,8 @@
     "redux": "3.7.2"
   },
   "devDependencies": {
-    "@babel/runtime": "^7.4.5",
-    "babel-polyfill": "^6.26.0",
-    "parcel": "^1.12.3"
+    "@babel/runtime": "7.5.5",
+    "babel-polyfill": "6.26.0",
+    "parcel": "1.12.3"
   }
 }

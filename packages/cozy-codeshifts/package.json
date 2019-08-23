@@ -11,8 +11,8 @@
     "build": "babel src -d dist --verbose"
   },
   "devDependencies": {
-    "jest": "^24.8.0",
-    "jscodeshift": "^0.6.4",
-    "jsdoc-to-markdown": "^5.0.0"
+    "jest": "24.8.0",
+    "jscodeshift": "0.6.4",
+    "jsdoc-to-markdown": "5.0.0"
   }
 }
