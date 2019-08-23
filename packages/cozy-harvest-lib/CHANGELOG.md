@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.71.11](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.10...cozy-harvest-lib@0.71.11) (2019-08-23)
+
+
+### Bug Fixes
+
+* Add moduleNameMapper for the new CC version ([9ac4a26](https://github.com/cozy/cozy-libs/commit/9ac4a26))
+
+
+
+
+
 ## [0.71.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.9...cozy-harvest-lib@0.71.10) (2019-08-22)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.17.1...cozy-authentication@1.17.2) (2019-08-23)
+
+
+### Bug Fixes
+
+* Add moduleNameMapper for the new CC version ([9ac4a26](https://github.com/cozy/cozy-libs/commit/9ac4a26))
+
+
+
+
+
 ## 1.17.1 (2019-08-23)
 
 

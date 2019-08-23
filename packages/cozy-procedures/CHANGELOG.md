@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.38.3](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.38.2...cozy-procedures@0.38.3) (2019-08-23)
+
+
+### Bug Fixes
+
+* Add moduleNameMapper for the new CC version ([9ac4a26](https://github.com/cozy/cozy-libs/commit/9ac4a26))
+
+
+
+
+
 ## [0.38.2](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.38.1...cozy-procedures@0.38.2) (2019-08-23)
 
 **Note:** Version bump only for package cozy-procedures
