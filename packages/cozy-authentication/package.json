@@ -65,7 +65,8 @@
       "./jest.setup.js"
     ],
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|styl)$": "identity-obj-proxy"
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|styl)$": "identity-obj-proxy",
+      "^cozy-client$": "cozy-client/dist/index.js"
     }
   },
   "peerDependencies": {

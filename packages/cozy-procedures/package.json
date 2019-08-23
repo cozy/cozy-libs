@@ -61,7 +61,8 @@
       "styl"
     ],
     "moduleNameMapper": {
-      "\\.(png|gif|jpe?g|svg)$": "<rootDir>/test/__mocks__/fileMock.js"
+      "\\.(png|gif|jpe?g|svg)$": "<rootDir>/test/__mocks__/fileMock.js",
+      "^cozy-client$": "cozy-client/dist/index.js"
     },
     "testPathIgnorePatterns": [
       "/node_modules/",
