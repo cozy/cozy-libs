@@ -1,5 +1,3 @@
 {
-  "extends": [
-    "cozy"
-  ]
+  "extends": ["cozy-libs"]
 }
