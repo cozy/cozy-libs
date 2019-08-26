@@ -46,7 +46,7 @@
     "localforage": "1.7.3",
     "prop-types": "15.7.2",
     "react-markdown": "4.0.8",
-    "url-polyfill": "1.1.0"
+    "url-polyfill": "1.1.7"
   },
   "jest": {
     "testURL": "http://localhost:8000",
