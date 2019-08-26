@@ -6,7 +6,6 @@ import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
-import TwoFAForm from './TwoFAForm'
 import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import filesMutations from '../connections/files'
@@ -16,43 +15,31 @@ import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import withLocales from './hoc/withLocales'
+import TriggerLauncher from './TriggerLauncher'
 
-const ERRORED = 'ERRORED'
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
-const RUNNING_TWOFA = 'RUNNING_TWOFA'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 /**
- * Manage a trigger for a given konnector, from account edition to trigger
- * creation and launch.
+ * Displays the login form and on submission will create the account, triggers and folders. After that it calls TriggerLauncher to run the konnector.
  * @type {Component}
  */
 export class TriggerManager extends Component {
   constructor(props) {
     super(props)
-    const { account, trigger } = props
+    const { account } = props
 
     this.handleNewAccount = this.handleNewAccount.bind(this)
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
-    this.closeTwoFAModal = this.closeTwoFAModal.bind(this)
-    this.disableSuccessTimer = this.disableSuccessTimer.bind(this)
-    this.handleLoginSuccessState = this.handleLoginSuccessState.bind(this)
-    this.handleSuccess = this.handleSuccess.bind(this)
     this.handleError = this.handleError.bind(this)
-    this.handleTwoFACodeAsked = this.handleTwoFACodeAsked.bind(this)
-    this.handleSubmitTwoFACode = this.handleSubmitTwoFACode.bind(this)
-
-    this.jobWatcher = null
-    this.accountWatcher = null
 
     this.state = {
       account,
-      error: triggers.getError(trigger),
-      status: IDLE,
-      trigger
+      error: null,
+      status: IDLE
     }
   }
 
@@ -60,31 +47,13 @@ export class TriggerManager extends Component {
     this.CozyFolder = CozyFolderClass.copyWithClient(this.props.client)
   }
 
-  componentWillUnmount() {
-    if (this.jobWatcher) this.jobWatcher.unsubscribeAll()
-    if (this.accountWatcher) this.accountWatcher.unsubscribeAll()
-  }
-
-  closeTwoFAModal() {
-    this.setState({
-      status: RUNNING
-    })
-  }
-
-  disableSuccessTimer() {
-    if (this.jobWatcher) this.jobWatcher.disableSuccessTimer()
-  }
-
-  handleLoginSuccessState() {
-    if (this.jobWatcher) this.jobWatcher.handleSuccess()
-  }
-
   /**
    * Ensure that a trigger will exist, with valid destination folder with
    * permissions and references
+   * @param  {object}  account
    * @return {Object} Trigger document
    */
-  async ensureTrigger() {
+  async ensureTrigger(account) {
     const {
       addPermission,
       addReferencesTo,
@@ -95,7 +64,7 @@ export class TriggerManager extends Component {
       t
     } = this.props
 
-    const { account, trigger } = this.state
+    const { trigger } = this.props
     if (trigger) {
       return trigger
     }
@@ -144,62 +113,11 @@ export class TriggerManager extends Component {
   async handleOAuthAccountId(accountId) {
     const { findAccount } = this.props
     try {
+      this.setState({ error: null, status: RUNNING })
       const oAuthAccount = await findAccount(accountId)
       return await this.handleNewAccount(oAuthAccount)
     } catch (error) {
       this.handleError(error)
-    }
-  }
-
-  /**
-   * Account creation success handler
-   * @param  {Object}  account Created io.cozy.accounts document
-   * @return {Object}          io.cozy.jobs document, runned with account data
-   */
-  async handleNewAccount(account) {
-    this.setState({ account, error: null, status: RUNNING })
-    const trigger = await this.ensureTrigger()
-    this.setState({ trigger })
-    this.accountWatcher = this.props.watchKonnectorAccount(account, {
-      onTwoFACodeAsked: this.handleTwoFACodeAsked,
-      onLoginSuccess: this.handleLoginSuccessState,
-      onLoginSuccessHandled: this.disableSuccessTimer
-    })
-    return await this.launch(trigger)
-  }
-
-  handleError(error) {
-    this.setState({
-      error,
-      status: ERRORED
-    })
-
-    const { onError } = this.props
-    if (typeof onError === 'function') onError(error)
-  }
-
-  handleTwoFACodeAsked(statusCode) {
-    const { status } = this.state
-    if (accounts.isTwoFANeeded(status)) return
-    // disable successTimeout since asked Two FA code
-    this.disableSuccessTimer()
-    this.setState({
-      status: statusCode
-    })
-  }
-
-  async handleSubmitTwoFACode(code) {
-    const { konnector, saveAccount } = this.props
-    const { account } = this.state
-    this.setState({
-      error: null,
-      status: RUNNING_TWOFA
-    })
-    try {
-      await saveAccount(konnector, accounts.updateTwoFaCode(account, code))
-      if (this.jobWatcher) this.jobWatcher.enableSuccessTimer(10000)
-    } catch (error) {
-      return this.handleError(error)
     }
   }
 
@@ -235,57 +153,35 @@ export class TriggerManager extends Component {
   }
 
   /**
-   * Handle a success, typically job success or login success
-   * @param  {Function} successCallback Typically onLoginSuccess or onSuccess
-   * @param  {Array} args            Callback arguments
+   * Account creation success handler
+   * @param  {Object}  account Created io.cozy.accounts document
+   * @return {Object}          io.cozy.jobs document, runned with account data
    */
-  async handleSuccess(successCallback) {
-    const trigger = await this.refetchTrigger()
-    this.setState({ status: IDLE, trigger })
-    if (typeof successCallback !== 'function') return
-    successCallback(trigger)
+  async handleNewAccount(account) {
+    const trigger = await this.ensureTrigger(account)
+    this.setState({ account, status: IDLE })
+    return await this.props.launch(trigger)
   }
 
-  /**
-   * Launches a trigger
-   * @param  {Object}  trigger io.cozy.triggers document
-   * @return {Promise}         [description]
-   */
-  async launch(trigger) {
-    const {
-      launchTrigger,
-      onLaunch,
-      onLoginSuccess,
-      onSuccess,
-      watchKonnectorJob
-    } = this.props
-    this.jobWatcher = watchKonnectorJob(await launchTrigger(trigger))
-    this.jobWatcher.on('error', this.handleError)
-    this.jobWatcher.on('loginSuccess', () => this.handleSuccess(onLoginSuccess))
-    this.jobWatcher.on('success', () => this.handleSuccess(onSuccess))
+  handleError(error) {
+    this.setState({
+      error
+    })
 
-    if (typeof onLaunch === 'function') onLaunch(trigger)
-  }
-
-  async refetchTrigger() {
-    const { fetchTrigger } = this.props
-    const { trigger } = this.state
-    try {
-      return await fetchTrigger(trigger._id)
-    } catch (error) {
-      this.setState({ error, running: false })
-      throw error
-    }
+    const { onError } = this.props
+    if (typeof onError === 'function') onError(error)
   }
 
   render() {
-    const { konnector, running, showError, modalContainerId } = this.props
+    const {
+      error: triggerError,
+      konnector,
+      running: triggerRunning,
+      showError,
+      modalContainerId
+    } = this.props
     const { account, error, status } = this.state
-    const submitting = status === RUNNING || running
-    const submittingTwoFA = status === RUNNING_TWOFA
-    const waitForTwoFACode = accounts.isTwoFANeeded(status)
-    const isTwoFARetryCode = accounts.isTwoFARetry(status)
-    const display2FA = waitForTwoFACode || submittingTwoFA || isTwoFARetryCode
+    const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
     const { oauth } = konnector
@@ -296,7 +192,7 @@ export class TriggerManager extends Component {
           account={account}
           konnector={konnector}
           onSuccess={this.handleOAuthAccountId}
-          submitting={submitting || display2FA}
+          submitting={submitting}
         />
       )
     }
@@ -306,23 +202,12 @@ export class TriggerManager extends Component {
         <div id={modalInto} />
         <AccountForm
           account={account}
-          error={error}
+          error={error || triggerError}
           konnector={konnector}
           onSubmit={this.handleSubmit}
           showError={showError}
-          submitting={submitting || display2FA}
+          submitting={submitting}
         />
-        {display2FA && (
-          <TwoFAForm
-            account={account}
-            konnector={konnector}
-            dismissAction={this.closeTwoFAModal}
-            handleSubmitTwoFACode={this.handleSubmitTwoFACode}
-            submitting={submittingTwoFA}
-            into={modalInto}
-            retryAsked={isTwoFARetryCode && !submittingTwoFA}
-          />
-        )}
       </div>
     )
   }
@@ -360,6 +245,14 @@ TriggerManager.propTypes = {
    */
   running: PropTypes.bool,
   /**
+   * The current error for the job.
+   */
+  error: PropTypes.bool,
+  /**
+   * Function to call to launch the job
+   */
+  launch: PropTypes.func.isRequired,
+  /**
    * Translation function
    */
   t: PropTypes.func,
@@ -392,58 +285,18 @@ TriggerManager.propTypes = {
    */
   findAccount: PropTypes.func,
   /**
-   * Trigger mutation
-   * @type {Function}
-   */
-  launchTrigger: PropTypes.func.isRequired,
-  /**
    * Account mutation
    * @type {Func}
    */
   saveAccount: PropTypes.func.isRequired,
   /**
-   * Account mutations
-   * @type {Function}
-   */
-  watchKonnectorAccount: PropTypes.func.isRequired,
-  /**
    * Trigger mutations
    * @type {Function}
    */
-  statDirectoryByPath: PropTypes.func,
-  /**
-   * Job mutations
-   * @type {Function}
-   */
-  watchKonnectorJob: PropTypes.func.isRequired,
-  //
-  // Callbacks
-  //
-  /**
-   * Callback invoke when the konnector job fails
-   * @type {Function}
-   */
-  onError: PropTypes.func,
-  /**
-   * Callback invoked when the trigger is launch
-   * @type {Function}
-   */
-  onLaunch: PropTypes.func,
-  /**
-   * Callback invoked when the trigger has been launched and the login to the
-   * remote service has succeeded.
-   * @type {Function}
-   */
-  onLoginSuccess: PropTypes.func,
-  /**
-   * Callback invoked when the trigger has been launched and the job ended
-   * successfully.
-   * @type {Function}
-   */
-  onSuccess: PropTypes.func
+  statDirectoryByPath: PropTypes.func
 }
 
-export default withLocales(
+const SmartTriggerManager = withLocales(
   withMutations(
     accountsMutations,
     filesMutations,
@@ -451,3 +304,36 @@ export default withLocales(
     triggersMutations
   )(withClient(TriggerManager))
 )
+
+// TriggerManager is exported wrapped in TriggerLauncher to avoid breaking changes.
+const LegacyTriggerManager = props => {
+  const {
+    onLaunch,
+    onSuccess,
+    onLoginSuccess,
+    onError,
+    initialTrigger,
+    ...otherProps
+  } = props
+  return (
+    <TriggerLauncher
+      onLaunch={onLaunch}
+      onSuccess={onSuccess}
+      onLoginSuccess={onLoginSuccess}
+      onError={onError}
+      initialTrigger={initialTrigger}
+    >
+      {({ error, launch, running, trigger }) => (
+        <SmartTriggerManager
+          {...otherProps}
+          error={error}
+          launch={launch}
+          running={running}
+          trigger={trigger}
+        />
+      )}
+    </TriggerLauncher>
+  )
+}
+
+export default LegacyTriggerManager

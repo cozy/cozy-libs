@@ -18,6 +18,15 @@ exports[`TriggerLauncher handleError should unsubscribe from KonnectorJob 1`] = 
 </div>
 `;
 
+exports[`TriggerLauncher handleLoginSuccess should hide twoFA modal 1`] = `
+<div>
+  <Child
+    launch={[Function]}
+    running={true}
+  />
+</div>
+`;
+
 exports[`TriggerLauncher handleSuccess should hide twoFA modal 1`] = `
 <div>
   <Child

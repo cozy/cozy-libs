@@ -4,8 +4,6 @@ import { shallow } from 'enzyme'
 
 import { TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
-import KonnectorJobWatcher from '../../src/models/konnector/KonnectorJobWatcher'
-import { KonnectorJobError } from 'helpers/konnectors'
 
 jest.mock('cozy-doctypes', () => {
   const CozyFolder = {
@@ -174,14 +172,8 @@ const addReferencesToMock = jest.fn()
 const createTriggerMock = jest.fn()
 const createDirectoryByPathMock = jest.fn()
 const statDirectoryByPathMock = jest.fn()
-const fetchTriggerMock = jest.fn()
 const launchTriggerMock = jest.fn()
 const saveAccountMock = jest.fn()
-const watchKonnectorJobMock = jest.fn()
-const watchKonnectorAccountMock = jest.fn()
-
-const onSuccessSpy = jest.fn()
-const onLoginSuccessSpy = jest.fn()
 
 const tMock = jest.fn()
 
@@ -192,14 +184,9 @@ const props = {
   createTrigger: createTriggerMock,
   createDirectoryByPath: createDirectoryByPathMock,
   statDirectoryByPath: statDirectoryByPathMock,
-  fetchTrigger: fetchTriggerMock,
-  launchTrigger: launchTriggerMock,
-  onSuccess: onSuccessSpy,
-  onLoginSuccess: onLoginSuccessSpy,
   saveAccount: saveAccountMock,
-  t: tMock,
-  watchKonnectorJob: watchKonnectorJobMock,
-  watchKonnectorAccount: watchKonnectorAccountMock
+  launch: launchTriggerMock,
+  t: tMock
 }
 
 const propsWithAccount = {
@@ -219,12 +206,7 @@ const shallowWithAccount = () =>
 describe('TriggerManager', () => {
   beforeEach(() => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
-    fetchTriggerMock.mockResolvedValue(fixtures.existingTrigger)
-    launchTriggerMock.mockResolvedValue(fixtures.launchedJob)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
-    watchKonnectorJobMock.mockReturnValue(
-      new KonnectorJobWatcher({ on: jest.fn() }, fixtures.launchedJob)
-    )
   })
 
   afterEach(() => {
@@ -253,21 +235,6 @@ describe('TriggerManager', () => {
     expect(component).toMatchSnapshot()
   })
 
-  it('should store trigger error', () => {
-    const erroredTrigger = {
-      current_state: {
-        last_error: 'VENDOR_DOWN',
-        status: 'errored'
-      }
-    }
-
-    const wrapper = shallow(
-      <TriggerManager {...propsWithAccount} trigger={erroredTrigger} />
-    )
-
-    expect(wrapper.state().error).toEqual(new KonnectorJobError('VENDOR_DOWN'))
-  })
-
   describe('handleError', () => {
     beforeEach(() => {
       statDirectoryByPathMock.mockResolvedValue(fixtures.folder)
@@ -286,7 +253,6 @@ describe('TriggerManager', () => {
       addPermission: addPermissionMock,
       addReferencesTo: addReferencesToMock,
       createTrigger: createTriggerMock,
-      launchTrigger: launchTriggerMock,
       statDirectoryByPath: statDirectoryByPathMock
     }
 
@@ -316,13 +282,13 @@ describe('TriggerManager', () => {
   })
 
   describe('handleSubmit', () => {
-    it('should render without account as submitting', () => {
+    it('should render as submitting when there is no account', () => {
       const wrapper = shallowWithoutAccount()
       wrapper.instance().handleSubmit()
-      expect(wrapper.state().status).toEqual('RUNNING')
+      expect(wrapper.state().status).toEqual('RUNNING') // TODO: test disabled prop of submit button instead of the internal state
     })
 
-    it('should render with account as submitting', () => {
+    it('should render as submitting when there is an account', () => {
       const wrapper = shallowWithAccount()
       wrapper.instance().handleSubmit()
       expect(wrapper.state().status).toEqual('RUNNING')
@@ -495,22 +461,6 @@ describe('TriggerManager', () => {
       const wrapper = shallowWithAccount()
       await wrapper.instance().handleNewAccount(fixtures.updatedAccount)
       expect(wrapper.state().account).toEqual(fixtures.updatedAccount)
-    })
-  })
-
-  describe('launch', () => {
-    it('should launch trigger', async () => {
-      const wrapper = shallowWithoutAccount()
-      await wrapper.instance().launch(fixtures.createdTrigger)
-      expect(launchTriggerMock).toHaveBeenCalledTimes(1)
-      expect(launchTriggerMock).toHaveBeenCalledWith(fixtures.createdTrigger)
-    })
-
-    it('should wait for successful login', async () => {
-      const wrapper = shallowWithoutAccount()
-      await wrapper.instance().launch(fixtures.createdTrigger)
-      expect(watchKonnectorJobMock).toHaveBeenCalledTimes(1)
-      expect(watchKonnectorJobMock).toHaveBeenCalledWith(fixtures.launchedJob)
     })
   })
 })

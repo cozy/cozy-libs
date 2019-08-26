@@ -7,10 +7,12 @@ import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withLocales from './hoc/withLocales'
+import triggers from '../helpers/triggers'
 
 import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
+  LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT,
   TWO_FA_MISMATCH_EVENT
 } from '../models/KonnectorJob'
@@ -22,9 +24,9 @@ import KonnectorJob, {
  *
  * ### Example
  * ```js
- * <TriggerLauncher trigger={trigger}>
- *   {(launch, running) => (
- *     <Button onClick={launch} disabled={running}
+ * <TriggerLauncher initialTrigger={trigger}>
+ *   {(launch, running, trigger) => (
+ *     <Button onClick={() => launch(trigger)} disabled={running} />
  *    )}
  * </TriggerLauncher>
  * ```
@@ -36,29 +38,36 @@ import KonnectorJob, {
 export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
-    const { trigger } = this.props
-    this.state = { showTwoFAModal: false, trigger }
+    const { initialTrigger } = this.props
+    this.state = {
+      showTwoFAModal: false,
+      trigger: initialTrigger,
+      error: triggers.getError(initialTrigger)
+    }
 
     this.handleTwoFA = this.handleTwoFA.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
+    this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
 
     this.launch = this.launch.bind(this)
   }
 
-  launch() {
-    const { client, onLaunch, trigger } = this.props
+  launch(trigger) {
+    const { client, onLaunch } = this.props
     const konnectorJob = new KonnectorJob(client, trigger)
     konnectorJob
       .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.handleSuccess)
+      .on(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
       .on(TWO_FA_REQUEST_EVENT, this.handleTwoFA)
       .on(TWO_FA_MISMATCH_EVENT, this.handleTwoFA)
 
     this.setState({
       error: null,
       konnectorJob,
-      running: true
+      running: true,
+      trigger
     })
 
     if (typeof onLaunch === 'function') onLaunch(trigger)
@@ -93,12 +102,19 @@ export class TriggerLauncher extends Component {
     if (typeof onSuccess === 'function') onSuccess(trigger)
   }
 
+  async handleLoginSuccess() {
+    this.dismissTwoFAModal()
+    const { onLoginSuccess } = this.props
+    if (typeof onLoginSuccess === 'function') onLoginSuccess()
+  }
+
   handleTwoFA() {
     this.displayTwoFAModal()
   }
 
   async refetchTrigger() {
-    const { fetchTrigger, trigger } = this.props
+    const { fetchTrigger } = this.props
+    const { trigger } = this.state
     try {
       return await fetchTrigger(trigger._id)
     } catch (error) {
@@ -153,17 +169,22 @@ TriggerLauncher.propTypes = {
    */
   onSuccess: PropTypes.func,
   /**
+   * Callback to call when the konnector is logged in
+   */
+  onLoginSuccess: PropTypes.func,
+  /**
    * Callback to call when the konnector job fails
    */
   onError: PropTypes.func,
   /**
-   * Indicates if trigger is already runnning
+   * Indicates if trigger is already runnning.
+   * Useful at the initial render of the page when we know a job is already running.
    */
   submitting: PropTypes.bool,
   /**
-   * Trigger to launch
+   * Optionnal trigger in its initial state
    */
-  trigger: PropTypes.object.isRequired
+  initialTrigger: PropTypes.object
 }
 
 export default withLocales(

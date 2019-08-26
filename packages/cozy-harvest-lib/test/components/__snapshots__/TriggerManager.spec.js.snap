@@ -68,7 +68,6 @@ exports[`TriggerManager should render with account 1`] = `
         "identifier": "username",
       }
     }
-    error={null}
     konnector={
       Object {
         "fields": Object {
@@ -94,7 +93,6 @@ exports[`TriggerManager should render without account 1`] = `
     id="coz-harvest-modal-place"
   />
   <Wrapper
-    error={null}
     konnector={
       Object {
         "fields": Object {

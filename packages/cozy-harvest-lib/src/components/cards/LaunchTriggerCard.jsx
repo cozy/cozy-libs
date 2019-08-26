@@ -70,7 +70,7 @@ export class LaunchTriggerCard extends Component {
                     icon={<Icon focusable="false" icon="sync" spin={running} />}
                     className="u-mh-0 u-mv-0"
                     disabled={running}
-                    onClick={launch}
+                    onClick={() => launch(trigger)}
                     subtle
                     // TODO: Extract this directly in Cozy-UI
                     // (either with an utility class or a Button prop)
