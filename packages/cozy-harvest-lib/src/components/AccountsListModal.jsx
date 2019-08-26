@@ -1,28 +1,16 @@
 import React from 'react'
 import { withRouter } from 'react-router-dom'
-import Modal, {
-  ModalContent,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
+import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import AccountsList from './AccountsList/AccountsList'
-import KonnectorIcon from './KonnectorIcon'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 class AccountsListModal extends React.Component {
   render() {
-    const { onDismiss, konnector, accounts, history } = this.props
+    const { konnector, accounts, history } = this.props
 
     return (
-      <Modal dismissAction={onDismiss} mobileFullscreen size="small">
-        <ModalHeader className="u-pr-2">
-          <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
-            <div className="u-w-3 u-h-3 u-mr-half">
-              <KonnectorIcon konnector={konnector} />
-            </div>
-            <div className="u-flex-grow-1 u-mr-half">
-              <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
-            </div>
-          </div>
-        </ModalHeader>
+      <>
+        <KonnectorModalHeader konnector={konnector} />
         <ModalContent>
           <AccountsList
             accounts={accounts}
@@ -31,7 +19,7 @@ class AccountsListModal extends React.Component {
             addAccount={() => history.push('./new')}
           />
         </ModalContent>
-      </Modal>
+      </>
     )
   }
 }
