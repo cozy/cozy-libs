@@ -2,6 +2,9 @@ import React from 'react'
 
 import { withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
+
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
@@ -23,13 +26,11 @@ class KonnectorAccounts extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    /**
-     * We need to fetchAccounts() based on the pathname since if we don't,
-     * when we create a new account, we can't find it in our array latter.
-     *
-     * ATM we also refetch if we go to /new. We have to change that
-     */
-    if (this.props.location.pathname !== prevProps.location.pathname) {
+    // After leaving the new account screen, we need to refetch accounts in case a new one was created
+    if (
+      this.props.location.pathname !== prevProps.location.pathname &&
+      /\/new\/?$/.test(prevProps.location.pathname)
+    ) {
       this.fetchAccounts()
     }
   }
@@ -56,7 +57,15 @@ class KonnectorAccounts extends React.Component {
   render() {
     // TODO error
     const { accounts, fetchingAccounts, error } = this.state
-    return fetchingAccounts ? 'loading' : this.props.children(accounts)
+    return fetchingAccounts || error ? (
+      <ModalContent>
+        <div className="u-pv-2">
+          {error ? <div>error</div> : <Spinner size="xxlarge" middle />}
+        </div>
+      </ModalContent>
+    ) : (
+      this.props.children(accounts)
+    )
   }
 }
 
