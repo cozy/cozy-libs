@@ -134,52 +134,54 @@ exports[`KonnectorModal should show the configuration view of a single account 1
 
 exports[`KonnectorModal should show the list of accounts 1`] = `
 <ModalContent>
-  <Wrapper
-    accounts={
-      Array [
-        Object {
-          "account": Object {
-            "_id": "123",
-            "doctype": "io.cozy.accounts",
-          },
-          "trigger": Object {
-            "_id": "784",
-            "doctype": "io.cozy.triggers",
-          },
-        },
-        Object {
-          "account": Object {
-            "_id": "123",
-            "doctype": "io.cozy.accounts",
-          },
-          "trigger": Object {
-            "_id": "872",
-            "doctype": "io.cozy.triggers",
-          },
-        },
-      ]
-    }
-    addAccount={[Function]}
-    konnector={
-      Object {
-        "name": "Mock",
-        "slug": "mock",
-        "triggers": Object {
-          "data": Array [
-            Object {
+  <React.Fragment>
+    <Wrapper
+      accounts={
+        Array [
+          Object {
+            "account": Object {
+              "_id": "123",
+              "doctype": "io.cozy.accounts",
+            },
+            "trigger": Object {
               "_id": "784",
               "doctype": "io.cozy.triggers",
             },
-            Object {
+          },
+          Object {
+            "account": Object {
+              "_id": "123",
+              "doctype": "io.cozy.accounts",
+            },
+            "trigger": Object {
               "_id": "872",
               "doctype": "io.cozy.triggers",
             },
-          ],
-        },
+          },
+        ]
       }
-    }
-    onPick={[Function]}
-  />
+      addAccount={[Function]}
+      konnector={
+        Object {
+          "name": "Mock",
+          "slug": "mock",
+          "triggers": Object {
+            "data": Array [
+              Object {
+                "_id": "784",
+                "doctype": "io.cozy.triggers",
+              },
+              Object {
+                "_id": "872",
+                "doctype": "io.cozy.triggers",
+              },
+            ],
+          },
+        }
+      }
+      onPick={[Function]}
+    />
+  </React.Fragment>
 </ModalContent>
 `;
 

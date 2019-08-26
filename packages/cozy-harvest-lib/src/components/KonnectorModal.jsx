@@ -15,6 +15,7 @@ import get from 'lodash/get'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
+import * as konnectorsModel from '../helpers/konnectors'
 import * as triggersModel from '../helpers/triggers'
 
 import withLocales from './hoc/withLocales'
@@ -23,6 +24,7 @@ import TriggerManager from './TriggerManager'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
+import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
 
 /**
  * KonnectorModal can be completely standalone and will use it's internal state to switch between views, or it can be controlled by the parents through props (such as accountId) and callbacks (such as createAction and onAccountChange)
@@ -274,14 +276,19 @@ export class KonnectorModal extends PureComponent {
       )
     } else if (!account) {
       return (
-        <AccountsList
-          accounts={accounts}
-          konnector={konnector}
-          onPick={option => {
-            this.requestAccountChange(option.account, option.trigger)
-          }}
-          addAccount={this.requestAccountCreation}
-        />
+        <>
+          {konnectorsModel.hasNewVersionAvailable(konnector) && (
+            <KonnectorUpdateInfos className="u-mb-1" konnector={konnector} />
+          )}
+          <AccountsList
+            accounts={accounts}
+            konnector={konnector}
+            onPick={option => {
+              this.requestAccountChange(option.account, option.trigger)
+            }}
+            addAccount={this.requestAccountCreation}
+          />
+        </>
       )
     } else {
       return (
