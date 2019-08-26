@@ -1,27 +1,15 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router'
-import Modal, {
-  ModalContent,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
+import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import TriggerManager from '../components/TriggerManager'
-import KonnectorIcon from './KonnectorIcon'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 class NewAccountModal extends Component {
   render() {
-    const { konnector, history, onDismiss } = this.props
+    const { konnector, history } = this.props
     return (
-      <Modal dismissAction={onDismiss} mobileFullscreen size="small">
-        <ModalHeader className="u-pr-2">
-          <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
-            <div className="u-w-3 u-h-3 u-mr-half">
-              <KonnectorIcon konnector={konnector} />
-            </div>
-            <div className="u-flex-grow-1 u-mr-half">
-              <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
-            </div>
-          </div>
-        </ModalHeader>
+      <>
+        <KonnectorModalHeader konnector={konnector} />
         <ModalContent>
           <TriggerManager
             konnector={konnector}
@@ -33,7 +21,7 @@ class NewAccountModal extends Component {
             }
           />
         </ModalContent>
-      </Modal>
+      </>
     )
   }
 }
