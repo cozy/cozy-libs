@@ -23,6 +23,11 @@ class AccountModal extends Component {
     this.loadSelectedAccountId()
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.accountId !== prevProps.accountId)
+      this.loadSelectedAccountId()
+  }
+
   loadSelectedAccountId() {
     const { accountId, accounts } = this.props
     const matchingTrigger = get(
