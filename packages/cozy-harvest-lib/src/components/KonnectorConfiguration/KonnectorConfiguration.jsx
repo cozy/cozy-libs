@@ -9,17 +9,20 @@ import {
   TabPanel
 } from 'cozy-ui/transpiled/react/Tabs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { SubTitle, Text } from 'cozy-ui/transpiled/react/Text'
+import Card from 'cozy-ui/transpiled/react/Card'
+import { Uppercase } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
+import palette from 'cozy-ui/transpiled/react/palette'
+import { withRouter } from 'react-router-dom'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
-import TriggerManager from '../TriggerManager'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import DeleteAccountButton from '../DeleteAccountButton'
 import withLocales from '../hoc/withLocales'
 import * as triggersModel from '../../helpers/triggers'
 import * as konnectorsModel from '../../helpers/konnectors'
+import { Account } from 'cozy-doctypes'
 
 class KonnectorConfiguration extends React.Component {
   constructor(props) {
@@ -28,10 +31,6 @@ class KonnectorConfiguration extends React.Component {
       isJobRunning: false,
       konnectorJobError: triggersModel.getError(props.trigger)
     }
-
-    this.handleKonnectorJobError = this.handleKonnectorJobError.bind(this)
-    this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
-    this.handleTriggerLaunch = this.handleTriggerLaunch.bind(this)
   }
 
   componentDidUpdate(prevProps) {
@@ -48,24 +47,6 @@ class KonnectorConfiguration extends React.Component {
     }
   }
 
-  handleTriggerLaunch() {
-    this.setState({ isJobRunning: true, konnectorJobError: null })
-  }
-
-  handleKonnectorJobSuccess() {
-    this.setState({ isJobRunning: false })
-    this.props.refetchTrigger()
-  }
-
-  handleKonnectorJobError(konnectorJobError) {
-    this.setState({
-      konnectorJobError,
-      isJobRunning: false
-    })
-
-    this.props.refetchTrigger()
-  }
-
   render() {
     const {
       konnector,
@@ -73,6 +54,7 @@ class KonnectorConfiguration extends React.Component {
       account,
       onAccountDeleted,
       addAccount,
+      history,
       t
     } = this.props
     const { isJobRunning, konnectorJobError } = this.state
@@ -143,43 +125,35 @@ class KonnectorConfiguration extends React.Component {
               />
             )}
             <div className="u-mb-1">
-              <SubTitle className="u-mb-half">
+              <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
                 {t('modal.updateAccount.title')}
-              </SubTitle>
-              <TriggerManager
-                account={account}
-                konnector={konnector}
-                initialTrigger={trigger}
-                onLaunch={this.handleTriggerLaunch}
-                onSuccess={this.handleKonnectorJobSuccess}
-                onError={this.handleKonnectorJobError}
-                running={isJobRunning}
-                showError={false}
-              />
+              </Uppercase>
+              <Card
+                className="u-flex u-flex-items-center u-c-pointer"
+                onClick={() => history.push('./edit')}
+              >
+                <div className="u-w-2 u-mr-1">
+                  <Icon icon="lock" color={palette['coolGrey']} size={36} />
+                </div>
+                <div className="u-flex-grow-1">
+                  {konnector.name}
+                  <div className="u-coolGrey u-fz-tiny">
+                    {Account.getAccountName(account)}
+                  </div>
+                </div>
+                <Icon icon="right" color={palette['coolGrey']} />
+              </Card>
             </div>
-            <div className="u-mb-2">
-              <SubTitle className="u-mb-half">
-                {t('modal.deleteAccount.title')}
-              </SubTitle>
-              <Text className="u-mb-1">
-                {t('modal.deleteAccount.description')}
-              </Text>
+            <div>
               <DeleteAccountButton
                 account={account}
                 disabled={isJobRunning}
                 onSuccess={onAccountDeleted}
-                extension="full"
               />
-            </div>
-            <div>
-              <SubTitle className="u-mb-half">
-                {t('modal.addAccount.title')}
-              </SubTitle>
               <Button
                 onClick={addAccount}
                 label={t('modal.addAccount.button')}
-                extension="full"
-                theme="secondary"
+                theme="ghost"
               />
             </div>
           </TabPanel>
@@ -196,8 +170,7 @@ KonnectorConfiguration.propTypes = {
   account: PropTypes.object.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
-  refetchTrigger: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
 
-export default withLocales(KonnectorConfiguration)
+export default withLocales(withRouter(KonnectorConfiguration))
