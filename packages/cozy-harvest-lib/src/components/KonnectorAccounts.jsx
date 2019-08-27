@@ -4,10 +4,14 @@ import { withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Infos from 'cozy-ui/transpiled/react/Infos'
+import Button from 'cozy-ui/transpiled/react/Button'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 class KonnectorAccounts extends React.Component {
   state = {
@@ -53,22 +57,52 @@ class KonnectorAccounts extends React.Component {
       this.setState({ error, fetchingAccounts: false })
     }
   }
+  renderError() {
+    const { t } = this.props
 
+    return (
+      <ModalContent>
+        <div className="u-red">{}</div>
+        <Infos
+          actionButton={
+            <Button
+              theme="danger"
+              onClick={this.fetchAccounts.bind(this)}
+              label={t('modal.accounts.error.retry')}
+            />
+          }
+          title={t('modal.accounts.error.title')}
+          text={t('modal.accounts.error.description')}
+          icon="warning"
+          isImportant
+        />
+      </ModalContent>
+    )
+  }
+  renderLoading() {
+    return (
+      <ModalContent>
+        <div className="u-pv-2 u-ta-center">
+          <Spinner size="xxlarge" />
+        </div>
+      </ModalContent>
+    )
+  }
   render() {
     // TODO error
     const { accounts, fetchingAccounts, error } = this.state
-    return fetchingAccounts || error ? (
-      <ModalContent>
-        <div className="u-pv-2">
-          {error ? <div>error</div> : <Spinner size="xxlarge" middle />}
-        </div>
-      </ModalContent>
-    ) : (
-      this.props.children(accounts)
+    const { konnector } = this.props
+    return (
+      <>
+        <KonnectorModalHeader konnector={konnector} />
+        {error && this.renderError()}
+        {fetchingAccounts && this.renderLoading()}
+        {!error && !fetchingAccounts && this.props.children(accounts)}
+      </>
     )
   }
 }
 
 export default withMutations(accountMutations, triggersMutations)(
-  withRouter(KonnectorAccounts)
+  withRouter(translate()(KonnectorAccounts))
 )

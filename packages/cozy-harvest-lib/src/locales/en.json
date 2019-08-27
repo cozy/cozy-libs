@@ -248,6 +248,13 @@
         "button": "Close"
       }
     },
+    "accounts": {
+      "error": {
+        "title": "Error",
+        "description": "Unable to retrieve your account(s)",
+        "retry": "Retry"
+      }
+    },
     "tabs": {
       "data": "Data",
       "configuration": "Configuration"
