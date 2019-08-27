@@ -71,6 +71,10 @@
         "title": "Missing destination folder",
         "description": "It seems that this account's destination folder has been deleted. Please restore it by disconnecting this account and then reconnect again."
       },
+      "TERMS_VERSION_MISMATCH": {
+        "title": "Unexpected Terms Of Service version",
+        "description": "%{name} seems to have updated its Terms Of Service. Please check that the service is up to date. It this error still occurs, please contact us at <a href=\"mailto:contact@cozycloud.cc\">contact@cozycloud.cc</a>."
+      },
       "UNKNOWN_ERROR": {
         "title": "Connection error",
         "description": "An unknown error has occurred."

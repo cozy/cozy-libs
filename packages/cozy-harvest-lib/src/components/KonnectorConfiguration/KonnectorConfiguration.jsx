@@ -82,8 +82,15 @@ class KonnectorConfiguration extends React.Component {
     const hasLoginError = hasError && konnectorJobError.isLoginError()
     const hasTermsVersionMismatchError =
       hasError && konnectorJobError.isTermsVersionMismatchError()
+
+    const isTermsVersionMismatchErrorWithVersionAvailable =
+      hasTermsVersionMismatchError &&
+      konnectorsModel.hasNewVersionAvailable(konnector)
+
     const hasGenericError =
-      hasError && !hasLoginError && !hasTermsVersionMismatchError
+      hasError &&
+      !hasLoginError &&
+      !isTermsVersionMismatchErrorWithVersionAvailable
 
     return (
       <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
