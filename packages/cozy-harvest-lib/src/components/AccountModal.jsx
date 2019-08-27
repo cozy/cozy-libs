@@ -97,11 +97,12 @@ class AccountModal extends Component {
               isImportant
             />
           )}
-          {fetching ? (
+          {fetching && (
             <div className="u-ta-center">
               <Spinner size="xxlarge" />
             </div>
-          ) : (
+          )}
+          {!error && !fetching && (
             <KonnectorConfiguration
               konnector={konnector}
               trigger={trigger}
