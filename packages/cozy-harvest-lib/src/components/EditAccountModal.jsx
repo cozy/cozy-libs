@@ -16,7 +16,7 @@ import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 
-class AccountModal extends Component {
+class EditAccountModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -143,5 +143,5 @@ class AccountModal extends Component {
 }
 
 export default withMutations(accountMutations, triggersMutations)(
-  withRouter(translate()(AccountModal))
+  withRouter(translate()(EditAccountModal))
 )
