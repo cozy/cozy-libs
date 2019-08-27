@@ -93,7 +93,9 @@ class KonnectorAccounts extends React.Component {
     const { konnector } = this.props
     return (
       <>
-        <KonnectorModalHeader konnector={konnector} />
+        {(error || fetchingAccounts) && (
+          <KonnectorModalHeader konnector={konnector} />
+        )}
         {error && this.renderError()}
         {fetchingAccounts && this.renderLoading()}
         {!error && !fetchingAccounts && this.props.children(accounts)}
