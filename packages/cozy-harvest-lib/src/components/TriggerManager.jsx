@@ -23,7 +23,8 @@ const RUNNING = 'RUNNING'
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 /**
- * Displays the login form and on submission will create the account, triggers and folders. After that it calls TriggerLauncher to run the konnector.
+ * Displays the login form and on submission will create the account, triggers and folders.
+ * After that it calls TriggerLauncher to run the konnector.
  * @type {Component}
  */
 export class TriggerManager extends Component {
