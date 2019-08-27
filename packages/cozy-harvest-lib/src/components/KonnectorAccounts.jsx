@@ -62,7 +62,6 @@ class KonnectorAccounts extends React.Component {
 
     return (
       <ModalContent>
-        <div className="u-red">{}</div>
         <Infos
           actionButton={
             <Button
