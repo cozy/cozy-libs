@@ -4,6 +4,9 @@ import { withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
+import Infos from 'cozy-ui/transpiled/react/Infos'
+import Button from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -60,8 +63,8 @@ class AccountModal extends Component {
   }
 
   render() {
-    const { konnector, onDismiss, history, accounts } = this.props
-    const { trigger, account, fetching } = this.state
+    const { konnector, onDismiss, history, accounts, t } = this.props
+    const { trigger, account, fetching, error } = this.state
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
@@ -79,6 +82,21 @@ class AccountModal extends Component {
           )}
         </KonnectorModalHeader>
         <ModalContent>
+          {error && (
+            <Infos
+              actionButton={
+                <Button
+                  theme="danger"
+                  onClick={this.loadSelectedAccountId.bind(this)}
+                  label={t('modal.konnector.error.button')}
+                />
+              }
+              title={t('modal.konnector.error.title')}
+              text={t('modal.konnector.error.description', error)}
+              icon="warning"
+              isImportant
+            />
+          )}
           {fetching ? (
             <div className="u-ta-center">
               <Spinner size="xxlarge" />
@@ -99,5 +117,5 @@ class AccountModal extends Component {
 }
 
 export default withMutations(accountMutations, triggersMutations)(
-  withRouter(AccountModal)
+  withRouter(translate()(AccountModal))
 )
