@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.12...cozy-harvest-lib@1.0.0) (2019-08-28)
+
+
+* [Harvest] refactor: Deduplicate trigger launch logic (#736) ([ccaf6e3](https://github.com/cozy/cozy-libs/commit/ccaf6e3)), closes [#736](https://github.com/cozy/cozy-libs/issues/736)
+
+
+### BREAKING CHANGES
+
+* TriggerManager now takes an `initialTrigger` prop
+instead of `trigger`
+TriggerLauncher now takes an `initialTrigger` prop instead of `trigger`
+TriggerLauncher passes a `launch` prop to its children — this prop must
+now always be called with a trigger as first parameter
+
+* Update packages/cozy-harvest-lib/src/components/TriggerManager.jsx
+
+Co-Authored-By: Patrick Browne <pt.browne@gmail.com>
+
+
+
+
+
 ## [0.71.12](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@0.71.11...cozy-harvest-lib@0.71.12) (2019-08-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
