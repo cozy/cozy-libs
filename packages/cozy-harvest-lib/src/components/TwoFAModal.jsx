@@ -30,27 +30,21 @@ export class TwoFAModal extends PureComponent {
     // prevent refreshing the page when submitting
     // (happens not systematically)
     e.preventDefault()
-    this.props.onTwoFACodeSubmit(this.state.twoFACode)
+    this.props.konnectorJob.sendTwoFACode(this.state.twoFACode)
+  }
   }
 
   fetchIcon() {
     const { client } = this.context
-    const { konnectorSlug } = this.props
+    const { konnectorJob } = this.props
     return client.stackClient.getIconURL({
       type: 'konnector',
-      slug: konnectorSlug
+      slug: konnectorJob.getKonnectorSlug()
     })
   }
 
   render() {
-    const {
-      dismissAction,
-      hasFailed,
-      isSubmitting,
-      provider,
-      t,
-      breakpoints = {}
-    } = this.props
+    const { dismissAction, konnectorJob, t, breakpoints = {} } = this.props
     const { isMobile } = breakpoints
     const { twoFACode } = this.state
 
@@ -68,7 +62,7 @@ export class TwoFAModal extends PureComponent {
         <ModalDescription>
           <form onSubmit={this.handleSubmit}>
             <SubTitle className="u-mb-1 u-mt-half u-ta-center">
-              {t(`twoFAForm.providers.${provider}`)}
+              {t(`twoFAForm.providers.${konnectorJob.getTwoFACodeProvider()}`)}
             </SubTitle>
             <Text>{t('twoFAForm.desc')}</Text>
             <Field
@@ -78,10 +72,10 @@ export class TwoFAModal extends PureComponent {
               autoComplete="off"
               label={t('twoFAForm.code.label')}
               size="medium"
-              error={hasFailed}
+              error={konnectorJob.isTwoFARetry()}
               fullwidth
             />
-            {hasFailed && (
+            {konnectorJob.isTwoFARetry() && (
               <Caption className="u-error u-fs-italic u-mt-half">
                 {t('twoFAForm.retry')}
               </Caption>
@@ -89,8 +83,8 @@ export class TwoFAModal extends PureComponent {
             <Button
               className="u-mt-1"
               label={t('twoFAForm.CTA')}
-              busy={isSubmitting}
-              disabled={isSubmitting || !twoFACode}
+              busy={konnectorJob.isTwoFARunning()}
+              disabled={konnectorJob.isTwoFARunning() || !twoFACode}
               extension="full"
             />
           </form>
@@ -102,11 +96,7 @@ export class TwoFAModal extends PureComponent {
 
 TwoFAModal.propTypes = {
   client: PropTypes.object,
-  konnectorSlug: PropTypes.string.isRequired,
-  hasFailed: PropTypes.bool,
-  isSubmitting: PropTypes.bool,
-  onTwoFACodeSubmit: PropTypes.func.isRequired,
-  provider: PropTypes.oneOf(['default', 'sms', 'email']).isRequired
+  konnectorJob: PropTypes.object.isRequired
 }
 
 export default withClient(translate()(withBreakpoints()(TwoFAModal)))

@@ -46,7 +46,6 @@ export class TriggerLauncher extends Component {
     }
 
     this.handleTwoFA = this.handleTwoFA.bind(this)
-    this.handleTwoFACode = this.handleTwoFACode.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
@@ -115,12 +114,6 @@ export class TriggerLauncher extends Component {
   handleTwoFA() {
     this.displayTwoFAModal()
   }
-
-  async handleTwoFACode(code) {
-    this.setState({ isSubmittingTwoFA: true })
-    return this.konnectorJob.sendTwoFACode(code)
-  }
-
   async refetchTrigger() {
     const { fetchTrigger } = this.props
     const { trigger } = this.state
@@ -152,11 +145,7 @@ export class TriggerLauncher extends Component {
           <TwoFAModal
             dismissAction={this.dismissTwoFAModal}
             into="coz-harvest-modal-place"
-            konnectorSlug={triggers.getKonnectorSlug(trigger)}
-            hasFailed={this.konnectorJob.isTwoFARetry()}
-            isSubmitting={this.konnectorJob.isTwoFARunning()}
-            onTwoFACodeSubmit={this.handleTwoFACode}
-            provider={this.konnectorJob.getTwoFACodeProvider()}
+            konnectorJob={this.konnectorJob}
           />
         )}
       </div>
