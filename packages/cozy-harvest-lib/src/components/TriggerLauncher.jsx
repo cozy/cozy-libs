@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-
+import get from 'lodash/get'
 import { withClient, withMutations } from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
 
@@ -9,7 +9,7 @@ import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withLocales from './hoc/withLocales'
 import triggers from '../helpers/triggers'
-
+import { KonnectorJobError } from '../helpers/konnectors'
 import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
@@ -43,9 +43,8 @@ export class TriggerLauncher extends Component {
     this.state = {
       showTwoFAModal: false,
       trigger: initialTrigger,
-      error: triggers.getError(initialTrigger)
+      error: get(initialTrigger, 'current_state.last_error')
     }
-
     this.handleTwoFA = this.handleTwoFA.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
@@ -57,14 +56,15 @@ export class TriggerLauncher extends Component {
   }
 
   async handleUpdate(job) {
-    console.log('update', job)
     if (this.state.trigger && this.state.trigger._id === job.trigger_id) {
-      console.log('this.state', this.state)
       const trigger = await this.refetchTrigger()
       this.setState({
         trigger,
-        running: job.state === 'running'
+        running: job.state === 'running', //TODO possible race ?
+        error: job.error
       })
+
+      // TODO handle error and set them in the state
     }
   }
   async componentDidMount() {
@@ -79,7 +79,6 @@ export class TriggerLauncher extends Component {
   }
   launch(trigger) {
     const { client, onLaunch } = this.props
-    console.log({ trigger })
     const konnectorJob = new KonnectorJob(client, trigger)
     konnectorJob
       .on(ERROR_EVENT, this.handleError)
@@ -113,7 +112,6 @@ export class TriggerLauncher extends Component {
     this.dismissTwoFAModal()
     this.stopWatchingKonnectorJob()
 
-    this.setState({ error })
     const { onError } = this.props
     if (typeof onError === 'function') onError(error)
   }
@@ -152,14 +150,13 @@ export class TriggerLauncher extends Component {
   }
 
   render() {
-    console.log('this.State', this.state)
-    console.log('this.props', this.props)
     const { error, running, showTwoFAModal, trigger } = this.state
+    const konnectorError = error ? new KonnectorJobError(error) : undefined
     const { children, konnectorJob, submitting } = this.props
     return (
       <div>
         {children({
-          error,
+          error: konnectorError,
           launch: this.launch,
           running: !!running || !!submitting,
           trigger

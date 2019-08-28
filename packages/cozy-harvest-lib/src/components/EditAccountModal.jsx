@@ -23,9 +23,8 @@ class EditAccountModal extends Component {
       trigger: null,
       account: null,
       fetching: true,
-      error: false,
-      isJobRunning: false,
-      konnectorJobError: triggersModel.getError(props.trigger)
+      error: false
+      //konnectorJobError: triggersModel.getError(props.trigger)
     }
 
     this.handleKonnectorJobError = this.handleKonnectorJobError.bind(this)
@@ -65,22 +64,20 @@ class EditAccountModal extends Component {
   }
 
   handleTriggerLaunch() {
-    this.setState({ isJobRunning: true, konnectorJobError: null })
+    // this.setState({ konnectorJobError: null })
   }
 
   handleKonnectorJobSuccess() {
-    this.setState({ isJobRunning: false })
     this.refetchTrigger()
     this.props.history.push('../')
   }
 
   handleKonnectorJobError(konnectorJobError) {
-    this.setState({
-      konnectorJobError,
-      isJobRunning: false
+    /* this.setState({
+      konnectorJobError
     })
 
-    this.refetchTrigger()
+    this.refetchTrigger() */
   }
 
   async refetchTrigger() {
@@ -95,7 +92,7 @@ class EditAccountModal extends Component {
 
   render() {
     const { konnector, onDismiss, t, history } = this.props
-    const { trigger, account, fetching, isJobRunning } = this.state
+    const { trigger, account, fetching } = this.state
     return (
       <Modal
         dismissAction={onDismiss}
@@ -132,7 +129,7 @@ class EditAccountModal extends Component {
               initialTrigger={trigger}
               onLaunch={this.handleTriggerLaunch}
               onSuccess={this.handleKonnectorJobSuccess}
-              onError={this.handleKonnectorJobError}
+              //onError={this.handleKonnectorJobError}
               showError={true}
             />
           )}
