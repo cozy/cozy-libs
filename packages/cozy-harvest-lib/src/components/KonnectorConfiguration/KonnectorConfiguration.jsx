@@ -14,158 +14,119 @@ import { Uppercase } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { withRouter } from 'react-router-dom'
+import { Account } from 'cozy-doctypes'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import DeleteAccountButton from '../DeleteAccountButton'
 import withLocales from '../hoc/withLocales'
-import * as triggersModel from '../../helpers/triggers'
-import * as konnectorsModel from '../../helpers/konnectors'
-import { Account } from 'cozy-doctypes'
+import TriggerLauncher from '../TriggerLauncher'
 
 class KonnectorConfiguration extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      isJobRunning: false,
-      konnectorJobError: triggersModel.getError(props.trigger)
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const newKonnectorJobError = triggersModel.getError(this.props.trigger)
-    const currentKonnectorJobError = this.state.konnectorJobError
-
-    if (
-      prevProps.trigger !== this.props.trigger &&
-      newKonnectorJobError !== currentKonnectorJobError
-    ) {
-      this.setState({
-        konnectorJobError: newKonnectorJobError
-      })
-    }
-  }
-
   render() {
     const {
       konnector,
-      trigger,
+      trigger: initialTrigger,
       account,
       onAccountDeleted,
       addAccount,
       history,
       t
     } = this.props
-    const { isJobRunning, konnectorJobError } = this.state
-
-    const hasError = !!konnectorJobError
-    const shouldDisplayError = !isJobRunning && konnectorJobError
-    const hasLoginError = hasError && konnectorJobError.isLoginError()
-    const hasTermsVersionMismatchError =
-      hasError && konnectorJobError.isTermsVersionMismatchError()
-
-    const isTermsVersionMismatchErrorWithVersionAvailable =
-      hasTermsVersionMismatchError &&
-      konnectorsModel.hasNewVersionAvailable(konnector)
-
-    const hasGenericError =
-      hasError &&
-      !hasLoginError &&
-      !isTermsVersionMismatchErrorWithVersionAvailable
 
     return (
-      <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
-        <TabList>
-          <Tab name="data">
-            {t('modal.tabs.data')}
-            {// Login error should not be mentionned in data tab
-            hasError && !hasLoginError && (
-              <Icon icon="warning" size={13} className="u-ml-half" />
-            )}
-          </Tab>
-          <Tab name="configuration">
-            {t('modal.tabs.configuration')}
-            {hasLoginError && (
-              <Icon icon="warning" size={13} className="u-ml-half" />
-            )}
-          </Tab>
-        </TabList>
+      <TriggerLauncher initialTrigger={initialTrigger}>
+        {({ error, running }) => {
+          console.log('error Konnecteur Config', error)
+          const shouldDisplayError = !running && error
+          const hasLoginError = error && error.isLoginError()
+          const hasErrorExceptLogin = error && !hasLoginError
 
-        <TabPanels>
-          <TabPanel name="data" className="u-pt-1-half u-pb-0">
-            {konnectorsModel.hasNewVersionAvailable(konnector) && (
-              <KonnectorUpdateInfos
-                className="u-mb-2"
-                konnector={konnector}
-                isBlocking={hasTermsVersionMismatchError}
-              />
-            )}
-            {shouldDisplayError && hasGenericError && (
-              <TriggerErrorInfo
-                className="u-mb-2"
-                error={konnectorJobError}
-                konnector={konnector}
-              />
-            )}
-            <LaunchTriggerCard
-              initialTrigger={trigger}
-              onLaunch={this.handleTriggerLaunch}
-              onSuccess={this.handleKonnectorJobSuccess}
-              onError={this.handleKonnectorJobError}
-              submitting={isJobRunning}
-            />
-          </TabPanel>
-          <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
-            {shouldDisplayError && hasLoginError && (
-              <TriggerErrorInfo
-                className="u-mb-2"
-                error={konnectorJobError}
-                konnector={konnector}
-              />
-            )}
-            <div className="u-mb-1">
-              <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
-                {t('modal.updateAccount.title')}
-              </Uppercase>
-              <Card
-                className="u-flex u-flex-items-center u-c-pointer"
-                onClick={() => history.push('./edit')}
-              >
-                <div className="u-w-2 u-mr-1">
-                  <Icon icon="lock" color={palette['coolGrey']} size={36} />
-                </div>
-                <div className="u-flex-grow-1">
-                  {konnector.name}
-                  <div className="u-coolGrey u-fz-tiny">
-                    {Account.getAccountName(account)}
+          return (
+            <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
+              <TabList>
+                <Tab name="data">
+                  {t('modal.tabs.data')}
+                  {hasErrorExceptLogin && (
+                    <Icon icon="warning" size={13} className="u-ml-half" />
+                  )}
+                </Tab>
+                <Tab name="configuration">
+                  {t('modal.tabs.configuration')}
+                  {shouldDisplayError && hasLoginError && (
+                    <Icon icon="warning" size={13} className="u-ml-half" />
+                  )}
+                </Tab>
+              </TabList>
+
+              <TabPanels>
+                <TabPanel name="data" className="u-pt-1-half u-pb-0">
+                  {shouldDisplayError && hasErrorExceptLogin && (
+                    <TriggerErrorInfo
+                      className="u-mb-2"
+                      error={error}
+                      konnector={konnector}
+                    />
+                  )}
+                  <LaunchTriggerCard initialTrigger={initialTrigger} />
+                </TabPanel>
+                <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
+                  {shouldDisplayError && hasLoginError && (
+                    <TriggerErrorInfo
+                      className="u-mb-2"
+                      error={error}
+                      konnector={konnector}
+                    />
+                  )}
+                  <div className="u-mb-1">
+                    <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
+                      {t('modal.updateAccount.title')}
+                    </Uppercase>
+                    <Card
+                      className="u-flex u-flex-items-center u-c-pointer"
+                      onClick={() => history.push('./edit')}
+                    >
+                      <div className="u-w-2 u-mr-1">
+                        <Icon
+                          icon="lock"
+                          color={palette['coolGrey']}
+                          size={36}
+                        />
+                      </div>
+                      <div className="u-flex-grow-1">
+                        {konnector.name}
+                        <div className="u-coolGrey u-fz-tiny">
+                          {Account.getAccountName(account)}
+                        </div>
+                      </div>
+                      <Icon icon="right" color={palette['coolGrey']} />
+                    </Card>
                   </div>
-                </div>
-                <Icon icon="right" color={palette['coolGrey']} />
-              </Card>
-            </div>
-            <div>
-              <DeleteAccountButton
-                account={account}
-                disabled={isJobRunning}
-                onSuccess={onAccountDeleted}
-              />
-              <Button
-                onClick={addAccount}
-                label={t('modal.addAccount.button')}
-                theme="ghost"
-              />
-            </div>
-          </TabPanel>
-        </TabPanels>
-      </Tabs>
+                  <div>
+                    <DeleteAccountButton
+                      account={account}
+                      disabled={running}
+                      onSuccess={onAccountDeleted}
+                    />
+                    <Button
+                      onClick={addAccount}
+                      label={t('modal.addAccount.button')}
+                      theme="ghost"
+                    />
+                  </div>
+                </TabPanel>
+              </TabPanels>
+            </Tabs>
+          )
+        }}
+      </TriggerLauncher>
     )
   }
 }
 
 KonnectorConfiguration.propTypes = {
   konnector: PropTypes.object.isRequired,
-  konnectorJobError: PropTypes.object,
   trigger: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
