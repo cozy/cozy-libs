@@ -64,6 +64,8 @@ export const getLastSuccessDate = trigger => {
   return DateFns.parse(lastSuccessDate)
 }
 
+export const getKonnectorSlug = trigger => get(trigger, 'message.konnector')
+
 /**
  * Get frenquency of a cron trigger, based on its arguments.
  * @param  {Object} trigger io.cozy.triggers as returned by stack
@@ -80,6 +82,7 @@ const helpers = {
   getAccountId,
   getError,
   getFrequency,
+  getKonnectorSlug,
   getLastSuccessDate
 }
 
