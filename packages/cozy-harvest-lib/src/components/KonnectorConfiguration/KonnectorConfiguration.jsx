@@ -12,6 +12,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { Uppercase } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { withRouter } from 'react-router-dom'
 import { Account } from 'cozy-doctypes'
@@ -98,6 +99,7 @@ class KonnectorConfiguration extends React.Component {
                           {Account.getAccountName(account)}
                         </div>
                       </div>
+                      <div>{running && <Spinner />}</div>
                       <Icon icon="right" color={palette['coolGrey']} />
                     </Card>
                   </div>
