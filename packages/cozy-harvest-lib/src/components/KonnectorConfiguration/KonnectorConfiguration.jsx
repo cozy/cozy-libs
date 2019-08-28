@@ -38,7 +38,6 @@ class KonnectorConfiguration extends React.Component {
     return (
       <TriggerLauncher initialTrigger={initialTrigger}>
         {({ error, running }) => {
-          console.log('error Konnecteur Config', error)
           const shouldDisplayError = !running && error
           const hasLoginError = error && error.isLoginError()
           const hasErrorExceptLogin = error && !hasLoginError

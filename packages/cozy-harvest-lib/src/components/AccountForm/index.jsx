@@ -165,7 +165,6 @@ export class AccountForm extends PureComponent {
     const initialAndDefaultValues = { ...defaultValues, ...initialValues }
 
     let container = null
-    console.log('error AccountFrom', error)
     const isLoginError =
       error instanceof KonnectorJobError && error.isLoginError()
 
