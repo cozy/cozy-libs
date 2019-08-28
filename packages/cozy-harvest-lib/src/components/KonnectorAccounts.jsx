@@ -7,6 +7,7 @@ import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
+import get from 'lodash/get'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -40,7 +41,7 @@ class KonnectorAccounts extends React.Component {
   }
 
   async fetchAccounts() {
-    const triggers = this.props.konnector.triggers.data
+    const triggers = get(this.props, 'konnector.triggers.data', [])
     const { findAccount } = this.props
     this.setState({ fetchingAccounts: true })
     try {
@@ -88,7 +89,6 @@ class KonnectorAccounts extends React.Component {
     )
   }
   render() {
-    // TODO error
     const { accounts, fetchingAccounts, error } = this.state
     const { konnector } = this.props
     return (

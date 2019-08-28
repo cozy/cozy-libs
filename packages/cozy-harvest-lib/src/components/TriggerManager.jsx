@@ -166,15 +166,12 @@ export class TriggerManager extends Component {
   }
 
   handleError(error) {
-    this.setState({
-      error
-    })
-
     const { onError } = this.props
     if (typeof onError === 'function') onError(error)
   }
 
   render() {
+    console.log('this.propsTriggerManager', this.props)
     const {
       error: triggerError,
       konnector,
@@ -183,6 +180,7 @@ export class TriggerManager extends Component {
       modalContainerId
     } = this.props
     const { account, error, status } = this.state
+    console.log('error TriggerManager', error)
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
