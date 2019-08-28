@@ -248,7 +248,7 @@ TriggerManager.propTypes = {
   /**
    * The current error for the job.
    */
-  error: PropTypes.bool,
+  error: PropTypes.object,
   /**
    * Function to call to launch the job
    */
