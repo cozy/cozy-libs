@@ -283,7 +283,7 @@
     "title": "Successful configuration!"
   },
   "twoFAForm": {
-    "title": {
+    "providers": {
       "default": "Enter the code sent to you by e-mail or SMS",
       "email": "Enter the code sent to you by e-mail",
       "sms": "Enter the code sent to you by SMS"

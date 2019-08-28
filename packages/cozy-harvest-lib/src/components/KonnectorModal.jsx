@@ -41,6 +41,7 @@ export class KonnectorModal extends PureComponent {
   constructor(props) {
     super(props)
     this.fetchIcon = this.fetchIcon.bind(this)
+    this.refetchTrigger = this.refetchTrigger.bind(this)
     this.requestAccountChange = this.requestAccountChange.bind(this)
     this.requestAccountCreation = this.requestAccountCreation.bind(this)
     this.endAccountCreation = this.endAccountCreation.bind(this)

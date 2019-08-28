@@ -46,6 +46,7 @@ export class TriggerLauncher extends Component {
     }
 
     this.handleTwoFA = this.handleTwoFA.bind(this)
+    this.handleTwoFACode = this.handleTwoFACode.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
@@ -55,8 +56,8 @@ export class TriggerLauncher extends Component {
 
   launch(trigger) {
     const { client, onLaunch } = this.props
-    const konnectorJob = new KonnectorJob(client, trigger)
-    konnectorJob
+    this.konnectorJob = new KonnectorJob(client, trigger)
+    this.konnectorJob
       .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.handleSuccess)
       .on(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
@@ -65,14 +66,13 @@ export class TriggerLauncher extends Component {
 
     this.setState({
       error: null,
-      konnectorJob,
       running: true,
       trigger
     })
 
     if (typeof onLaunch === 'function') onLaunch(trigger)
 
-    konnectorJob.launch()
+    this.konnectorJob.launch()
   }
 
   dismissTwoFAModal() {
@@ -85,7 +85,9 @@ export class TriggerLauncher extends Component {
   }
 
   async handleError(error) {
-    this.dismissTwoFAModal()
+    if (this.state.showTwoFAModal) {
+      this.dismissTwoFAModal()
+    }
     this.stopWatchingKonnectorJob()
     const trigger = await this.refetchTrigger()
     this.setState({ error, running: false, trigger })
@@ -94,7 +96,9 @@ export class TriggerLauncher extends Component {
   }
 
   async handleSuccess() {
-    this.dismissTwoFAModal()
+    if (this.state.showTwoFAModal) {
+      this.dismissTwoFAModal()
+    }
     this.stopWatchingKonnectorJob()
     const trigger = await this.refetchTrigger()
     this.setState({ running: false, trigger })
@@ -112,6 +116,11 @@ export class TriggerLauncher extends Component {
     this.displayTwoFAModal()
   }
 
+  async handleTwoFACode(code) {
+    this.setState({ isSubmittingTwoFA: true })
+    return this.konnectorJob.sendTwoFACode(code)
+  }
+
   async refetchTrigger() {
     const { fetchTrigger } = this.props
     const { trigger } = this.state
@@ -124,13 +133,13 @@ export class TriggerLauncher extends Component {
   }
 
   stopWatchingKonnectorJob() {
-    const { konnectorJob } = this.state
-    konnectorJob.unwatch()
+    this.konnectorJob.unwatch()
+    delete this.konnectorJob
   }
 
   render() {
     const { error, running, showTwoFAModal, trigger } = this.state
-    const { children, konnectorJob, submitting } = this.props
+    const { children, submitting } = this.props
     return (
       <div>
         {children({
@@ -141,9 +150,13 @@ export class TriggerLauncher extends Component {
         })}
         {showTwoFAModal && (
           <TwoFAModal
-            konnectorJob={konnectorJob}
             dismissAction={this.dismissTwoFAModal}
             into="coz-harvest-modal-place"
+            konnectorSlug={triggers.getKonnectorSlug(trigger)}
+            hasFailed={this.konnectorJob.isTwoFARetry()}
+            isSubmitting={this.konnectorJob.isTwoFARunning()}
+            onTwoFACodeSubmit={this.handleTwoFACode}
+            provider={this.konnectorJob.getTwoFACodeProvider()}
           />
         )}
       </div>
