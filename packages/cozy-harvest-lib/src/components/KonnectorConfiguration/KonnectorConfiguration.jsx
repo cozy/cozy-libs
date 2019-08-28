@@ -109,7 +109,7 @@ class KonnectorConfiguration extends React.Component {
               />
             )}
             <LaunchTriggerCard
-              trigger={trigger}
+              initialTrigger={trigger}
               onLaunch={this.handleTriggerLaunch}
               onSuccess={this.handleKonnectorJobSuccess}
               onError={this.handleKonnectorJobError}
