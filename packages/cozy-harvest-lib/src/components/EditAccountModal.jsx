@@ -129,7 +129,7 @@ class EditAccountModal extends Component {
             <TriggerManager
               account={account}
               konnector={konnector}
-              trigger={trigger}
+              initialTrigger={trigger}
               onLaunch={this.handleTriggerLaunch}
               onSuccess={this.handleKonnectorJobSuccess}
               onError={this.handleKonnectorJobError}
