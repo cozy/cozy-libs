@@ -104,7 +104,9 @@ export class TriggerLauncher extends Component {
   }
 
   async handleLoginSuccess() {
-    this.dismissTwoFAModal()
+    if (this.state.showTwoFAModal) {
+      this.dismissTwoFAModal()
+    }
     const { onLoginSuccess } = this.props
     if (typeof onLoginSuccess === 'function') onLoginSuccess()
   }
