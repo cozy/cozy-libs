@@ -63,8 +63,6 @@ export class TriggerLauncher extends Component {
         running: job.state === 'running', //TODO possible race ?
         error: job.error
       })
-
-      // TODO handle error and set them in the state
     }
   }
   async componentDidMount() {

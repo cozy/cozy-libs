@@ -55,7 +55,6 @@ export class TriggerManager extends Component {
    * @return {Object} Trigger document
    */
   async ensureTrigger(account) {
-    console.log('this.PoprTRigger', this.props)
     const {
       addPermission,
       addReferencesTo,
@@ -171,7 +170,6 @@ export class TriggerManager extends Component {
   }
 
   render() {
-    console.log('this.propsTriggerManager', this.props)
     const {
       error: triggerError,
       konnector,
@@ -180,7 +178,6 @@ export class TriggerManager extends Component {
       modalContainerId
     } = this.props
     const { account, error, status } = this.state
-    console.log('error TriggerManager', error)
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
@@ -247,7 +244,7 @@ TriggerManager.propTypes = {
   /**
    * The current error for the job.
    */
-  error: PropTypes.bool,
+  error: PropTypes.string,
   /**
    * Function to call to launch the job
    */
