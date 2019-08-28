@@ -24,16 +24,18 @@ class EditAccountModal extends Component {
       account: null,
       fetching: true,
       error: false
-      //konnectorJobError: triggersModel.getError(props.trigger)
     }
 
-    this.handleKonnectorJobError = this.handleKonnectorJobError.bind(this)
     this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
-    this.handleTriggerLaunch = this.handleTriggerLaunch.bind(this)
   }
 
   componentDidMount() {
     const { accountId, accounts } = this.props
+    /**
+     * @TODO In theory we can have several trigger for the same account
+     * so this code will not work as excepted.
+     */
+
     const matchingTrigger = get(
       accounts.find(account => account.account._id === accountId),
       'trigger'
@@ -63,21 +65,9 @@ class EditAccountModal extends Component {
     }
   }
 
-  handleTriggerLaunch() {
-    // this.setState({ konnectorJobError: null })
-  }
-
   handleKonnectorJobSuccess() {
-    this.refetchTrigger()
+    //this.refetchTrigger()
     this.props.history.push('../')
-  }
-
-  handleKonnectorJobError(konnectorJobError) {
-    /* this.setState({
-      konnectorJobError
-    })
-
-    this.refetchTrigger() */
   }
 
   async refetchTrigger() {
@@ -127,9 +117,7 @@ class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
-              onLaunch={this.handleTriggerLaunch}
               onSuccess={this.handleKonnectorJobSuccess}
-              //onError={this.handleKonnectorJobError}
               showError={true}
             />
           )}
