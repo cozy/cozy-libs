@@ -131,11 +131,11 @@ describe('TriggerLauncher', () => {
       )
       expect(onMock).toHaveBeenCalledWith(
         'twoFARequest',
-        wrapper.instance().handleTwoFA
+        wrapper.instance().displayTwoFAModal
       )
       expect(onMock).toHaveBeenCalledWith(
         'twoFARequest',
-        wrapper.instance().handleTwoFA
+        wrapper.instance().displayTwoFAModal
       )
     })
 
@@ -296,7 +296,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().handleTwoFA()
+      wrapper.instance().displayTwoFAModal()
       expect(wrapper.getElement()).toMatchSnapshot()
     })
   })

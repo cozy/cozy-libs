@@ -13,13 +13,20 @@ import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 
+import { TWO_FA_MISMATCH_EVENT } from '../models/KonnectorJob'
+
 export class TwoFAModal extends PureComponent {
   constructor(props) {
     super(props)
     this.state = { twoFACode: '' }
     this.handleChange = this.handleChange.bind(this)
+    this.handleTwoFAMismatch = this.handleTwoFAMismatch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.fetchIcon = this.fetchIcon.bind(this)
+  }
+
+  componentDidMount() {
+    this.props.konnectorJob.on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
   }
 
   handleChange(e) {
@@ -32,6 +39,10 @@ export class TwoFAModal extends PureComponent {
     e.preventDefault()
     this.props.konnectorJob.sendTwoFACode(this.state.twoFACode)
   }
+
+  handleTwoFAMismatch() {
+    // force a re-render to get the updated error and running state from konnectorJob
+    this.forceUpdate()
   }
 
   fetchIcon() {

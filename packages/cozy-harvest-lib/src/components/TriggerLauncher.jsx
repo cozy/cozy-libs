@@ -13,8 +13,7 @@ import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
-  TWO_FA_REQUEST_EVENT,
-  TWO_FA_MISMATCH_EVENT
+  TWO_FA_REQUEST_EVENT
 } from '../models/KonnectorJob'
 
 /**
@@ -45,7 +44,8 @@ export class TriggerLauncher extends Component {
       error: triggers.getError(initialTrigger)
     }
 
-    this.handleTwoFA = this.handleTwoFA.bind(this)
+    this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
+    this.displayTwoFAModal = this.displayTwoFAModal.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
@@ -60,8 +60,7 @@ export class TriggerLauncher extends Component {
       .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.handleSuccess)
       .on(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
-      .on(TWO_FA_REQUEST_EVENT, this.handleTwoFA)
-      .on(TWO_FA_MISMATCH_EVENT, this.handleTwoFA)
+      .on(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
 
     this.setState({
       error: null,
@@ -111,9 +110,6 @@ export class TriggerLauncher extends Component {
     if (typeof onLoginSuccess === 'function') onLoginSuccess()
   }
 
-  handleTwoFA() {
-    this.displayTwoFAModal()
-  }
   async refetchTrigger() {
     const { fetchTrigger } = this.props
     const { trigger } = this.state
