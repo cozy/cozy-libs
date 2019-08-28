@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { withClient, withMutations } from 'cozy-client'
+import CozyRealtime from 'cozy-realtime'
 
 import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
@@ -38,7 +39,7 @@ import KonnectorJob, {
 export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
-    const { initialTrigger } = this.props
+    const { initialTrigger, client } = this.props
     this.state = {
       showTwoFAModal: false,
       trigger: initialTrigger,
@@ -51,10 +52,34 @@ export class TriggerLauncher extends Component {
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
 
     this.launch = this.launch.bind(this)
+
+    this.realtime = new CozyRealtime({ cozyClient: client })
   }
 
+  async handleUpdate(job) {
+    console.log('update', job)
+    if (this.state.trigger && this.state.trigger._id === job.trigger_id) {
+      console.log('this.state', this.state)
+      const trigger = await this.refetchTrigger()
+      this.setState({
+        trigger,
+        running: job.state === 'running'
+      })
+    }
+  }
+  async componentDidMount() {
+    await this.realtime.subscribe(
+      'updated',
+      'io.cozy.jobs',
+      this.handleUpdate.bind(this)
+    )
+  }
+  async componentWillUnmount() {
+    await this.realtime.unsubscribeAll()
+  }
   launch(trigger) {
     const { client, onLaunch } = this.props
+    console.log({ trigger })
     const konnectorJob = new KonnectorJob(client, trigger)
     konnectorJob
       .on(ERROR_EVENT, this.handleError)
@@ -87,8 +112,8 @@ export class TriggerLauncher extends Component {
   async handleError(error) {
     this.dismissTwoFAModal()
     this.stopWatchingKonnectorJob()
-    const trigger = await this.refetchTrigger()
-    this.setState({ error, running: false, trigger })
+
+    this.setState({ error })
     const { onError } = this.props
     if (typeof onError === 'function') onError(error)
   }
@@ -96,10 +121,8 @@ export class TriggerLauncher extends Component {
   async handleSuccess() {
     this.dismissTwoFAModal()
     this.stopWatchingKonnectorJob()
-    const trigger = await this.refetchTrigger()
-    this.setState({ running: false, trigger })
     const { onSuccess } = this.props
-    if (typeof onSuccess === 'function') onSuccess(trigger)
+    if (typeof onSuccess === 'function') onSuccess()
   }
 
   async handleLoginSuccess() {
@@ -129,6 +152,8 @@ export class TriggerLauncher extends Component {
   }
 
   render() {
+    console.log('this.State', this.state)
+    console.log('this.props', this.props)
     const { error, running, showTwoFAModal, trigger } = this.state
     const { children, konnectorJob, submitting } = this.props
     return (

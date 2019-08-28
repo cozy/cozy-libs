@@ -55,6 +55,7 @@ export class TriggerManager extends Component {
    * @return {Object} Trigger document
    */
   async ensureTrigger(account) {
+    console.log('this.PoprTRigger', this.props)
     const {
       addPermission,
       addReferencesTo,
