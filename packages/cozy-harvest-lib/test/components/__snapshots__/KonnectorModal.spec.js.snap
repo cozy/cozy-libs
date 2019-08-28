@@ -5,7 +5,7 @@ exports[`KonnectorModal adding an account should render the form when controlled
   <div
     className="u-pt-1-half"
   >
-    <Wrapper
+    <LegacyTriggerManager
       konnector={
         Object {
           "name": "Mock",

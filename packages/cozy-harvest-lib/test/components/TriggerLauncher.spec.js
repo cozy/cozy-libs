@@ -10,7 +10,19 @@ const trigger = {
 }
 
 const triggersMutationsMock = {
-  fetchTrigger: jest.fn().mockResolvedValue(trigger)
+  fetchTrigger: jest.fn().mockResolvedValue(trigger),
+  createTrigger: jest.fn().mockResolvedValue(trigger),
+  createDocument: jest.fn(),
+  saveDocument: jest.fn(),
+  deleteDocument: jest.fn(),
+  createAccount: jest.fn(),
+  updateAccount: jest.fn(),
+  findAccount: jest.fn(),
+  deleteAccount: jest.fn(),
+  saveAccount: jest.fn(),
+  launchTrigger: jest.fn(),
+  watchKonnectorAccount: jest.fn(),
+  watchKonnectorJob: jest.fn()
 }
 
 const props = {
@@ -83,7 +95,7 @@ describe('TriggerLauncher', () => {
 
       const childWrapper = wrapper.find(Child)
       const childProps = childWrapper.props()
-      childProps.launch()
+      childProps.launch(trigger)
       expect(KonnectorJob.prototype.launch).toHaveBeenCalled()
     })
 
@@ -94,7 +106,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().running).toBe(true)
@@ -108,7 +120,7 @@ describe('TriggerLauncher', () => {
       )
 
       let childWrapper = wrapper.find(Child)
-      childWrapper.props().launch()
+      childWrapper.props().launch(trigger)
       expect(onMock).toHaveBeenCalledWith(
         'error',
         wrapper.instance().handleError
@@ -136,12 +148,12 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       wrapper.instance().handleError(new Error('Test error'))
       wrapper.update()
       // Relaunch
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().error).toBe(null)
@@ -158,7 +170,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       await wrapper.instance().handleError(new Error('Test error'))
       wrapper.update()
@@ -177,7 +189,7 @@ describe('TriggerLauncher', () => {
 
       const error = new Error('Test error')
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       await wrapper.instance().handleError(error)
       wrapper.update()
@@ -192,7 +204,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       wrapper.instance().displayTwoFAModal()
       await wrapper.instance().handleError(new Error('Test error'))
@@ -207,7 +219,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       wrapper.instance().displayTwoFAModal()
       await wrapper.instance().handleError(new Error('Test error'))
@@ -224,7 +236,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.update()
       await wrapper.instance().handleSuccess()
       wrapper.update()
@@ -239,11 +251,40 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      wrapper.instance().launch()
+      wrapper.instance().launch(trigger)
       wrapper.instance().displayTwoFAModal()
       await wrapper.instance().handleSuccess()
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
+    })
+  })
+
+  describe('handleLoginSuccess', () => {
+    it('should hide twoFA modal', async () => {
+      const wrapper = shallow(
+        <TriggerLauncher {...props}>
+          {({ launch, running }) => <Child launch={launch} running={running} />}
+        </TriggerLauncher>
+      )
+
+      wrapper.instance().launch(trigger)
+      wrapper.instance().displayTwoFAModal()
+      await wrapper.instance().handleLoginSuccess()
+      wrapper.update()
+      expect(wrapper.getElement()).toMatchSnapshot()
+    })
+
+    it('should call the onLoginSuccess callback', () => {
+      const onLoginSuccess = jest.fn()
+      const wrapper = shallow(
+        <TriggerLauncher {...props} onLoginSuccess={onLoginSuccess}>
+          {({ launch, running }) => <Child launch={launch} running={running} />}
+        </TriggerLauncher>
+      )
+
+      wrapper.instance().launch(trigger)
+      wrapper.instance().handleLoginSuccess()
+      expect(onLoginSuccess).toHaveBeenCalled()
     })
   })
 
