@@ -73,7 +73,7 @@ const approxNumberMatch = (account, existingAccount) => {
 const creditCardMatch = (account, existingAccount) => {
   let ccAccount, lastDigits
   for (let acc of [account, existingAccount]) {
-    const match = acc.number.match(redactedCreditCard)
+    const match = acc.number && acc.number.match(redactedCreditCard)
     if (match) {
       ccAccount = acc
       lastDigits = match[1]
