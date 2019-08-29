@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import withLocales from '../hoc/withLocales'
 
 import AccountFields from './AccountFields'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
@@ -270,4 +270,4 @@ AccountForm.defaultProps = {
   showError: true
 }
 
-export default translate()(withKonnectorLocales(AccountForm))
+export default withLocales(withKonnectorLocales(AccountForm))
