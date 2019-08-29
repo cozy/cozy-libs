@@ -31,8 +31,17 @@ export const prepareTriggerAccount = async (trigger, accountsMutations) => {
   return await updateAccount(accounts.resetState(account))
 }
 /**
- * KonnectorJob goals is to listen the changes in Jobs & Accounts and dispatch the events to Harvest.
- * This should be the go to source of truth for the State of a Konnector Job.
+ * Event hub to launch and follow a konnector job.
+ *
+ * - Creates the job for a trigger
+ * - Listens to changes on
+ *   - the created job
+ *   - the account linked to the trigger
+ *
+ * Transforms low-level events happening on the documents to higher-level events
+ * closer to business logic.
+ *
+ * This should be the go to source of truth for the state of a Konnector Job.
  */
 export class KonnectorJob {
   constructor(client, trigger) {

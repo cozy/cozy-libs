@@ -10,7 +10,25 @@ const JOB_STATE_ERRORED = 'errored'
 
 const DEFAULT_TIMER_DELAY = 8000
 
+/**
+ * Emits high-level events during konnector job lifecycle
+ *
+ * Events:
+ * - error
+ * - success
+ * - loginSuccess
+ */
 export class KonnectorJobWatcher {
+  /**
+
+   *
+   * @param {Object} client CozyClient
+   * @param {Object} job - io.cozy.jobs document
+   * @param {Number} options.expectedSuccessDelay - Time (in ms) before dispatching
+   * a `LOGIN_SUCESS` event if nothing was received before this delay
+   * (error, success or login success). It means that if the login process takes
+   * more than this time, we will have a "success" event if it's not really the case.
+   */
   constructor(client, job, options = {}) {
     this.client = client
     this.realtime = new CozyRealtime({ client })
