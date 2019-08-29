@@ -104,7 +104,7 @@ export class KonnectorJob {
   }
 
   /**
-   * Legacy events use the KonnectorJobWatcher unstil it has been merged into
+   * Legacy events use the KonnectorJobWatcher until it has been merged into
    * KonnectorJob so we need to re-emit the events
    */
   handleLegacyEvent(event) {
