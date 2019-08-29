@@ -61,12 +61,13 @@ export class TwoFAModal extends PureComponent {
 
     const twoFAProvider = accounts.getTwoFACodeProvider(account)
     const hasErrored = konnectorJob.isTwoFARetry()
-
     const needUserInput = TWOFA_USER_INPUT[twoFAProvider]
 
     const konn = {
       slug: konnectorJob.getKonnectorSlug()
     }
+
+    const isJobRunning = konnectorJob.isTwoFARunning()
 
     return (
       <Modal
@@ -108,12 +109,13 @@ export class TwoFAModal extends PureComponent {
                 {t('twoFAForm.retry')}
               </Caption>
             )}
+
             {needUserInput ? (
               <Button
                 className="u-mt-1"
                 label={t('twoFAForm.CTA')}
-                busy={konnectorJob.isTwoFARunning()}
-                disabled={konnectorJob.isTwoFARunning() || !twoFACode}
+                busy={isJobRunning}
+                disabled={isJobRunning || !twoFACode}
                 extension="full"
               />
             ) : null}
