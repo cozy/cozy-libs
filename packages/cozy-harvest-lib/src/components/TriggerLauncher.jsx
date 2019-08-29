@@ -131,7 +131,7 @@ export class TriggerLauncher extends Component {
     const { error, running, showTwoFAModal, trigger } = this.state
     const { children, submitting } = this.props
     return (
-      <div>
+      <>
         {children({
           error,
           launch: this.launch,
@@ -145,7 +145,7 @@ export class TriggerLauncher extends Component {
             konnectorJob={this.konnectorJob}
           />
         )}
-      </div>
+      </>
     )
   }
 }
