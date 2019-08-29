@@ -1,43 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TriggerLauncher handleError should hide twoFA modal if error  1`] = `
-<div>
+<React.Fragment>
   <Child
     launch={[Function]}
     running={false}
   />
-</div>
+</React.Fragment>
 `;
 
 exports[`TriggerLauncher handleError should unsubscribe from KonnectorJob 1`] = `
-<div>
+<React.Fragment>
   <Child
     launch={[Function]}
     running={false}
   />
-</div>
+</React.Fragment>
 `;
 
 exports[`TriggerLauncher handleLoginSuccess should hide twoFA modal 1`] = `
-<div>
+<React.Fragment>
   <Child
     launch={[Function]}
     running={true}
   />
-</div>
+</React.Fragment>
 `;
 
 exports[`TriggerLauncher handleSuccess should hide twoFA modal 1`] = `
-<div>
+<React.Fragment>
   <Child
     launch={[Function]}
     running={false}
   />
-</div>
+</React.Fragment>
 `;
 
 exports[`TriggerLauncher handleTwoFA should display Two FA modal 1`] = `
-<div>
+<React.Fragment>
   <Child
     launch={[Function]}
     running={false}
@@ -46,11 +46,11 @@ exports[`TriggerLauncher handleTwoFA should display Two FA modal 1`] = `
     dismissAction={[Function]}
     into="coz-harvest-modal-place"
   />
-</div>
+</React.Fragment>
 `;
 
 exports[`TriggerLauncher should render 1`] = `
-<div>
+<React.Fragment>
   <Child />
-</div>
+</React.Fragment>
 `;

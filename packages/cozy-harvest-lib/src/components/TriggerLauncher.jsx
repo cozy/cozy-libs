@@ -170,7 +170,7 @@ export class TriggerLauncher extends Component {
 
     const { children, submitting } = this.props
     return (
-      <div>
+      <>
         {children({
           error: error ? error : undefined,
           launch: this.launch,
@@ -185,7 +185,7 @@ export class TriggerLauncher extends Component {
             account={account}
           />
         )}
-      </div>
+      </>
     )
   }
 }
