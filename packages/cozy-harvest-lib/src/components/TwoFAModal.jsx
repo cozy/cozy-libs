@@ -65,6 +65,7 @@ export class TwoFAModal extends PureComponent {
     const { isMobile } = breakpoints
     const { twoFACode } = this.state
 
+    const isJobRunning = konnectorJob.isTwoFARunning()
     return (
       <Modal
         dismissAction={dismissAction}
@@ -100,8 +101,8 @@ export class TwoFAModal extends PureComponent {
             <Button
               className="u-mt-1"
               label={t('twoFAForm.CTA')}
-              busy={konnectorJob.isTwoFARunning()}
-              disabled={konnectorJob.isTwoFARunning() || !twoFACode}
+              busy={isJobRunning}
+              disabled={isJobRunning || !twoFACode}
               extension="full"
             />
           </form>
