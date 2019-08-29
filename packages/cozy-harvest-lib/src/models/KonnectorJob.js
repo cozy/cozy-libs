@@ -1,10 +1,11 @@
 import MicroEE from 'microee'
 
-import accounts from '../helpers/accounts'
-import triggers from '../helpers/triggers'
+import * as accounts from '../helpers/accounts'
+import CozyRealtime from 'cozy-realtime'
 
-import accountsMutations from '../connections/accounts'
-import triggersMutations from '../connections/triggers'
+import { updateAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
+import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
+import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
 
 // events
 export const ERROR_EVENT = 'error'
@@ -23,13 +24,15 @@ export const RUNNING_TWOFA = 'RUNNING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 
-// helpers
-export const prepareTriggerAccount = async (trigger, accountsMutations) => {
-  const { findAccount, updateAccount } = accountsMutations
-  const account = await findAccount(triggers.getAccountId(trigger))
-  if (!account) throw new Error('Trigger has no account')
-  return await updateAccount(accounts.resetState(account))
+export const watchKonnectorJob = (client, job) => {
+  const jobWatcher = new KonnectorJobWatcher(client, job, {
+    expectedSuccessDelay: 80000
+  })
+  // no need to await realtime initializing here
+  jobWatcher.watch()
+  return jobWatcher
 }
+
 /**
  * Event hub to launch and follow a konnector job.
  *
@@ -51,8 +54,6 @@ export class KonnectorJob {
     this.trigger = trigger
     this.account = null
     this.unsubscribeAllRealtime = null
-
-    this.triggersMutations = triggersMutations(this.client)
 
     // Bind methods used as callbacks
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
@@ -145,9 +146,11 @@ export class KonnectorJob {
    */
   async sendTwoFACode(code) {
     this.setStatus(RUNNING_TWOFA)
-    const { updateAccount } = this.accountsMutations
     try {
-      await updateAccount(accounts.updateTwoFaCode(this.account, code))
+      await updateAccount(
+        this.client,
+        accounts.updateTwoFaCode(this.account, code)
+      )
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
@@ -181,22 +184,20 @@ export class KonnectorJob {
    */
   async launch() {
     this.setStatus(PENDING)
-    const { launchTrigger, watchKonnectorJob } = this.triggersMutations
 
-    this.account = await prepareTriggerAccount(
-      this.trigger,
-      this.accountsMutations
+    this.account = await prepareTriggerAccount(this.client, this.trigger)
+
+    this.jobWatcher = watchKonnectorJob(
+      await launchTrigger(this.client, this.trigger)
     )
-
-    const jobWatcher = watchKonnectorJob(await launchTrigger(this.trigger))
     // Temporary reEmitting until merging of KonnectorJobWatcher and
     // KonnectorAccountWatcher into KonnectorJob
-    jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
-    jobWatcher.on(
+    this.jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
+    this.jobWatcher.on(
       LOGIN_SUCCESS_EVENT,
       this.handleLegacyEvent(LOGIN_SUCCESS_EVENT)
     )
-    jobWatcher.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
+    this.jobWatcher.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
 
     this.realtime.subscribe(
       'updated',
@@ -206,7 +207,7 @@ export class KonnectorJob {
     )
 
     this.unsubscribeAllRealtime = () => {
-      jobWatcher.unsubscribeAll()
+      this.jobWatcher.unsubscribeAll()
       this.realtime.unsubscribeAll()
     }
   }

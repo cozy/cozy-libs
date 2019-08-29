@@ -1,4 +1,7 @@
-import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
+import * as triggers from '../helpers/triggers'
+import * as accounts from '../helpers/accounts'
+
+import { findAccount, updateAccount } from './accounts'
 
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
@@ -24,18 +27,15 @@ const fetchTrigger = async (client, id) => {
  * @param  {Object}  Trigger to launch
  * @return {Object}  Job document
  */
-const launchTrigger = async (client, trigger) => {
+export const launchTrigger = async (client, trigger) => {
   const { data } = await client.collection(TRIGGERS_DOCTYPE).launch(trigger)
   return data
 }
 
-const watchKonnectorJob = (client, job) => {
-  const jobWatcher = new KonnectorJobWatcher(client, job, {
-    expectedSuccessDelay: 8000
-  })
-  // no need to await realtime initializing here
-  jobWatcher.watch()
-  return jobWatcher
+export const prepareTriggerAccount = async (client, trigger) => {
+  const account = await findAccount(client, triggers.getAccountId(trigger))
+  if (!account) throw new Error('Trigger has no account')
+  return updateAccount(client, accounts.resetState(account))
 }
 
 /**
@@ -47,8 +47,7 @@ export const triggersMutations = client => {
   return {
     createTrigger: createTrigger.bind(null, client),
     fetchTrigger: fetchTrigger.bind(null, client),
-    launchTrigger: launchTrigger.bind(null, client),
-    watchKonnectorJob: watchKonnectorJob.bind(null, client)
+    launchTrigger: launchTrigger.bind(null, client)
   }
 }
 

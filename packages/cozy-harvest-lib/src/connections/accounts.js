@@ -23,7 +23,7 @@ const createAccount = async (client, konnector, attributes) => {
  * @param  {string}  id     io.cozy.accounts document's id
  * @return {Object}         Retrieved account
  */
-const findAccount = async (client, id) => {
+export const findAccount = async (client, id) => {
   try {
     const { data } = await client.query(
       client.find(ACCOUNTS_DOCTYPE).where({
@@ -109,7 +109,7 @@ const createChildAccount = async (client, konnector, attributes) => {
  * @param  {Object}  account io.cozy.accounts document to update
  * @return {Object}          Updated io.cozy.accounts document
  */
-const updateAccount = async (client, account) => {
+export const updateAccount = async (client, account) => {
   try {
     const { data } = await client.save(account)
     return data
