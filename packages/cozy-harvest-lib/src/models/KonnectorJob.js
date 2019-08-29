@@ -22,6 +22,7 @@ export const SUCCESS = 'SUCCESS'
 export const RUNNING_TWOFA = 'RUNNING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
+export const STATUS_CHANGE = 'STATUS_CHANGE'
 
 // helpers
 export const prepareTriggerAccount = async (trigger, accountsMutations) => {
@@ -61,6 +62,7 @@ export class KonnectorJob {
 
   setStatus(status) {
     this._status = status
+    this.emit(STATUS_CHANGE)
   }
 
   getStatus() {
