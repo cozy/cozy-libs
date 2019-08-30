@@ -242,9 +242,9 @@ TriggerManager.propTypes = {
    */
   running: PropTypes.bool,
   /**
-   * The current error for the job.
+   * The current error for the job (string or ReactMarkdown component)
    */
-  error: PropTypes.string,
+  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * Function to call to launch the job
    */

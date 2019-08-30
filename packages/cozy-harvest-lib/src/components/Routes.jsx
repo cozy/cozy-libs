@@ -41,7 +41,6 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
                 konnector={konnector}
                 accountId={match.params.accountId}
                 accounts={accounts}
-                onDismiss={onDismiss}
               />
             )}
           />
