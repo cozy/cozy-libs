@@ -10,6 +10,8 @@ import Modal, {
 } from 'cozy-ui/transpiled/react/Modal'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { Text } from 'cozy-ui/transpiled/react/Text'
+import { withBreakpoints } from 'cozy-ui/transpiled/react'
+import palette from 'cozy-ui/transpiled/react/palette'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -81,28 +83,44 @@ class EditAccountModal extends Component {
   }
 
   render() {
-    const { konnector, onDismiss, t, history } = this.props
+    /**
+     * We don't use the dismiss action pros that we can have from our
+     * Routes component since this modal has to be on top on the previous one
+     * So when we quit it, we have to go back to the previous one.
+     *
+     * When we are on mobile, we displayed a back button
+     * On desktop we display a cross
+     */
+    const {
+      konnector,
+      t,
+      history,
+      breakpoints: { isMobile }
+    } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <Modal
-        dismissAction={onDismiss}
+        dismissAction={() => history.push('../')}
         mobileFullscreen
         size="small"
-        closable={false}
+        closable={isMobile ? false : true}
+        closeBtnColor={palette.white}
       >
         <ModalHeader className="u-bg-dodgerBlue u-p-0 u-h-3 u-flex u-flex-items-center">
-          <Button
-            onClick={() => history.push('../')}
-            icon="previous"
-            label={t('back')}
-            iconOnly
-            extension="narrow"
-            className="u-m-0 u-p-1 u-pos-absolute u-h-3"
-            style={{
-              left: 0,
-              top: 0
-            }}
-          />
+          {isMobile && (
+            <Button
+              onClick={() => history.push('../')}
+              icon="previous"
+              label={t('back')}
+              iconOnly
+              extension="narrow"
+              className="u-m-0 u-p-1 u-pos-absolute u-h-3"
+              style={{
+                left: 0,
+                top: 0
+              }}
+            />
+          )}
           <div className="u-flex-grow-1 u-ta-center">
             <Text className="u-white">{konnector.name}</Text>
           </div>
@@ -128,5 +146,5 @@ class EditAccountModal extends Component {
 }
 
 export default withMutations(accountMutations, triggersMutations)(
-  withRouter(translate()(EditAccountModal))
+  withBreakpoints()(withRouter(translate()(EditAccountModal)))
 )
