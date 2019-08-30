@@ -53,7 +53,7 @@ export class TriggerLauncher extends Component {
 
     this.launch = this.launch.bind(this)
 
-    this.realtime = new CozyRealtime({ cozyClient: client })
+    this.realtime = new CozyRealtime({ client })
   }
 
   async handleUpdate(job) {

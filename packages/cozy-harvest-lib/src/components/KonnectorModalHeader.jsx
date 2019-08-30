@@ -19,7 +19,7 @@ const KonnectorModalHeader = ({ konnector, children }) => {
   )
 }
 
-KonnectorModalHeader.PropTypes = {
+KonnectorModalHeader.propTypes = {
   konnector: PropTypes.object.isRequired,
   children: PropTypes.node
 }

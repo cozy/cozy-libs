@@ -5,7 +5,7 @@ const ACCOUNT_DOCTYPE = 'io.cozy.accounts'
 
 export class KonnectorAccountWatcher {
   constructor(client, account, options) {
-    this.realtime = new CozyRealtime({ cozyClient: client })
+    this.realtime = new CozyRealtime({ client })
     this.account = account
     this.options = options
     this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
