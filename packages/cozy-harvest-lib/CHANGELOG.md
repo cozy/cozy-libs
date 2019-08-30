@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.0.1...cozy-harvest-lib@1.0.2) (2019-08-30)
+
+
+### Bug Fixes
+
+* **harvest:** Make 2FA work again ([3416901](https://github.com/cozy/cozy-libs/commit/3416901))
+* Pass KonnectorJob instance to TwoFAModal ([ffb921a](https://github.com/cozy/cozy-libs/commit/ffb921a))
+* Prevent unneeded rerender ([b62f405](https://github.com/cozy/cozy-libs/commit/b62f405))
+* Renamed prop to conform to new API ([a3875a6](https://github.com/cozy/cozy-libs/commit/a3875a6))
+* TwoFAModal handles TwoFA code mismatch errors ([531a2b0](https://github.com/cozy/cozy-libs/commit/531a2b0))
+* Wrong prop type ([e34d03b](https://github.com/cozy/cozy-libs/commit/e34d03b))
+
+
+
+
+
 ## [1.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.0.0...cozy-harvest-lib@1.0.1) (2019-08-29)
 
 **Note:** Version bump only for package cozy-harvest-lib
