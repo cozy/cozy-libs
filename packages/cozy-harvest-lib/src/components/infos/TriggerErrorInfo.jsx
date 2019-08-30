@@ -19,8 +19,6 @@ import Markdown from '../Markdown'
 export class TriggerErrorInfo extends PureComponent {
   render() {
     const { className, error, konnector, t } = this.props
-    /* eslint-disable-next-line no-console */
-    console.error(error)
     return (
       <Infos
         className={className}
