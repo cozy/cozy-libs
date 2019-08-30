@@ -166,6 +166,7 @@ export class TriggerManager extends Component {
 
   handleError(error) {
     const { onError } = this.props
+    this.setState({ error })
     if (typeof onError === 'function') onError(error)
   }
 
