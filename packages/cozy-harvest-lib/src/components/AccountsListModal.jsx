@@ -31,6 +31,6 @@ class AccountsListModal extends React.Component {
 AccountsListModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   accounts: PropTypes.array.isRequired,
-  history: PropTypes.func.isRequired
+  history: PropTypes.object.isRequired
 }
 export default withRouter(AccountsListModal)

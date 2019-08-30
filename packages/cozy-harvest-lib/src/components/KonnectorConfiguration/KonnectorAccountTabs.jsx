@@ -155,7 +155,7 @@ KonnectorAccountTabs.propTypes = {
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
-  history: PropTypes.func.isRequired
+  history: PropTypes.object.isRequired
 }
 
 export default withLocales(withRouter(KonnectorAccountTabs))
