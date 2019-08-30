@@ -91,4 +91,7 @@ describe('slug match', () => {
 it('should normalize account number', () => {
   expect(normalizeAccountNumber('LEO-385248377-EUR')).toBe('385248377')
   expect(normalizeAccountNumber('385248377EUR')).toBe('385248377')
+  expect(normalizeAccountNumber('')).toBe('')
+  expect(normalizeAccountNumber(null)).toBe(null)
+  expect(normalizeAccountNumber(undefined)).toBe(undefined)
 })
