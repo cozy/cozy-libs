@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.63.4](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.63.3...cozy-doctypes@1.63.4) (2019-08-30)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** Check that account number exist before matching it ([52dc878](https://github.com/cozy/cozy-libs/commit/52dc878))
+* **cozy-doctypes:** Normalize empty account number correctly ([0b817e9](https://github.com/cozy/cozy-libs/commit/0b817e9))
+
+
+
+
+
 ## [1.63.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.63.2...cozy-doctypes@1.63.3) (2019-08-26)
 
 **Note:** Version bump only for package cozy-doctypes
