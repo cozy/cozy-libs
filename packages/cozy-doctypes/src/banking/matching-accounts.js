@@ -28,23 +28,23 @@ const normalizeAccountNumber = (number, iban) => {
   if (iban && iban.length == 27) {
     return iban.substr(14, 11)
   }
+
   if (!number) {
-    return
+    return number
   }
 
-  if (number && number.length == 23) {
+  if (number.length == 23) {
     // Must be an IBAN without the COUNTRY code
     // See support demand #9102 with BI
     // We extract the account number from the IBAN
     // COUNTRY (4) BANK (5) COUNTER (5) NUMBER (11) KEY (2)
     // FRXX 16275 10501 00300060030 00
     return number.substr(10, 11)
-  } else if (number && number.length == 16) {
+  } else if (number.length == 16) {
     // Linxo sends Bank account number that contains
     // the counter number
     return number.substr(5, 11)
   } else if (
-    number &&
     number.length > 11 &&
     (match = number.match(untrimmedAccountNumber))
   ) {
