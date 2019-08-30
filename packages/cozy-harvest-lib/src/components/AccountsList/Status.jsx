@@ -14,6 +14,7 @@ const Status = ({ t, trigger, konnector }) => {
     <TriggerLauncher initialTrigger={trigger}>
       {({ error, running }) => {
         const errorTitle = getErrorLocale(error, konnector, t, 'title')
+        console.log('error', error)
         if (running) {
           return (
             <div className="u-pomegranate u-flex u-flex-justify-center u-flex-items-center">

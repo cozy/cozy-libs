@@ -7,7 +7,6 @@ import KonnectorModalHeader from './KonnectorModalHeader'
 class AccountsListModal extends React.Component {
   render() {
     const { konnector, accounts, history } = this.props
-
     return (
       <>
         <KonnectorModalHeader konnector={konnector} />
