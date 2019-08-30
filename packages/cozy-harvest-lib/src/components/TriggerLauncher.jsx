@@ -39,6 +39,7 @@ export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
     const { initialTrigger, client } = this.props
+    console.log('initialTrigger', initialTrigger)
     this.state = {
       showTwoFAModal: false,
       trigger: initialTrigger,
@@ -114,13 +115,23 @@ export class TriggerLauncher extends Component {
     if (typeof onError === 'function') onError(error)
   }
 
+  /**
+   * Passing trigger to the callbacks is required for
+   * redirecting to the right route after an account creation.
+   *
+   * We need to do that on both, `handleSuccess` and `handleLoginSuccess`
+   * since we can receive a sucess before a loginSuccess (since only
+   * few konnectors are dealing with loginSuccess)
+   *
+   */
   async handleSuccess() {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
     this.stopWatchingKonnectorJob()
     const { onSuccess } = this.props
-    if (typeof onSuccess === 'function') onSuccess()
+    const { trigger } = this.state
+    if (typeof onSuccess === 'function') onSuccess(trigger)
   }
 
   async handleLoginSuccess() {
@@ -128,7 +139,8 @@ export class TriggerLauncher extends Component {
       this.dismissTwoFAModal()
     }
     const { onLoginSuccess } = this.props
-    if (typeof onLoginSuccess === 'function') onLoginSuccess()
+    const { trigger } = this.state
+    if (typeof onLoginSuccess === 'function') onLoginSuccess(trigger)
   }
 
   async refetchTrigger() {

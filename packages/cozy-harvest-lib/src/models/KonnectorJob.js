@@ -30,7 +30,15 @@ export const prepareTriggerAccount = async (trigger, accountsMutations) => {
   if (!account) throw new Error('Trigger has no account')
   return await updateAccount(accounts.resetState(account))
 }
-
+/**
+ * loginSuccess vient du konnecteur qui met à jour l'account avec status = login_success
+ * Sauf que tous les connecteurs ne peuvent pas gérer ça et donc on peut ne pas avoir de loginSuccess
+ * et donc pas d'event sur ce cas.
+ * Success vient du job en lui même
+ *
+ * Donc konnectorJob mutualise ces sources d'informations afin d'avoir tout de manière centralisée et
+ * c'est luiq ui dispatche les events en fonction des modifs dans jobs & accounts
+ */
 export class KonnectorJob {
   constructor(client, trigger) {
     this.client = client

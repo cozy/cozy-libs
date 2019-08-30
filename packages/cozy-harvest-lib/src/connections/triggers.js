@@ -29,6 +29,20 @@ const launchTrigger = async (client, trigger) => {
   return data
 }
 
+/**
+ * This method is here to listen the jobs.
+ *
+ * expectedSuccessDelay: Is the time (in ms) before dispatching
+ * a `LOGIN_SUCESS` event if nothing was received before this delay
+ * (error, success or login success)
+ *
+ * It means that if the login process takes more than this time, we
+ * will have a `LOGIN_SUCESS` even if it's not the case.
+ *
+ * @param {Object} client CozyClient
+ * @param {Object} job
+ *
+ */
 const watchKonnectorJob = (client, job) => {
   const jobWatcher = new KonnectorJobWatcher(client, job, {
     expectedSuccessDelay: 8000
