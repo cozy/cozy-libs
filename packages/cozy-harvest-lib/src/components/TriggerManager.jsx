@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
+import flow from 'lodash/flow'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
+import { VaultUnlocker, withVaultClient } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -123,7 +126,7 @@ export class TriggerManager extends Component {
   }
 
   async handleSubmit(data = {}) {
-    const { konnector, saveAccount } = this.props
+    const { konnector, saveAccount, vaultClient } = this.props
 
     const { account } = this.state
     const isUpdate = !!account
@@ -134,15 +137,35 @@ export class TriggerManager extends Component {
     })
 
     try {
-      const accountToSave = isUpdate
-        ? accounts.mergeAuth(
-            accounts.setSessionResetIfNecessary(
-              accounts.resetState(account),
-              data
-            ),
-            data
-          )
+      const { login, password } = data
+      const konnectorURI = get(konnector, 'vendor_link')
+      const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
+
+      const cipherData = {
+        id: null,
+        type: 1,
+        name: konnectorName,
+        login: {
+          username: login,
+          password,
+          uris: konnectorURI ? [{ uri: konnectorURI, match: 0 }] : []
+        }
+      }
+
+      const cipher = await vaultClient.createNewCipher(cipherData)
+      await vaultClient.saveCipher(cipher)
+
+      const accountWithNewState = accounts.setSessionResetIfNecessary(
+        accounts.resetState(account),
+        data
+      )
+      const accountDocument = isUpdate
+        ? accounts.mergeAuth(accountWithNewState, data)
         : accounts.build(konnector, data)
+      const accountToSave = accounts.setVaultCipherRelationship(
+        accountDocument,
+        cipher.id
+      )
       const savedAccount = accounts.mergeAuth(
         await saveAccount(konnector, accountToSave),
         data
@@ -196,15 +219,17 @@ export class TriggerManager extends Component {
 
     return (
       <div>
-        <div id={modalInto} />
-        <AccountForm
-          account={account}
-          error={error || triggerError}
-          konnector={konnector}
-          onSubmit={this.handleSubmit}
-          showError={showError}
-          submitting={submitting}
-        />
+        <VaultUnlocker>
+          <div id={modalInto} />
+          <AccountForm
+            account={account}
+            error={error || triggerError}
+            konnector={konnector}
+            onSubmit={this.handleSubmit}
+            showError={showError}
+            submitting={submitting}
+          />
+        </VaultUnlocker>
       </div>
     )
   }
@@ -293,14 +318,17 @@ TriggerManager.propTypes = {
   statDirectoryByPath: PropTypes.func
 }
 
-const SmartTriggerManager = withLocales(
+const SmartTriggerManager = flow(
+  withLocales,
+  withClient,
+  withVaultClient,
   withMutations(
     accountsMutations,
     filesMutations,
     permissionsMutations,
     triggersMutations
-  )(withClient(TriggerManager))
-)
+  )
+)(TriggerManager)
 
 // TriggerManager is exported wrapped in TriggerLauncher to avoid breaking changes.
 const LegacyTriggerManager = props => {
