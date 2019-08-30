@@ -43,7 +43,7 @@ or
 ```js
 import CozyRealtime from 'cozy-realtime'
 
-const realtime = new CozyRealtime({ cozyClient })
+const realtime = new CozyRealtime({ client: cozyClient })
 const type = 'io.cozy.accounts'
 const id = 'document_id'
 const handlerCreate = accounts => {
