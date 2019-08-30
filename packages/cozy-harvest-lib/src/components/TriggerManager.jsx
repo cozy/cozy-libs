@@ -141,18 +141,32 @@ export class TriggerManager extends Component {
       const konnectorURI = get(konnector, 'vendor_link')
       const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
 
-      const cipherData = {
-        id: null,
-        type: 1,
-        name: konnectorName,
-        login: {
-          username: login,
-          password,
-          uris: konnectorURI ? [{ uri: konnectorURI, match: 0 }] : []
+
+      let originalCipher = null
+      if (isUpdate && konnectorURI) {
+        const search = { username: login, password, uri: konnectorURI }
+        originalCipher = await accounts.findCipher(account, vaultClient, search)
+      }
+
+      let cipherData
+      if (originalCipher) {
+        cipherData = vaultClient.getData(originalCipher)
+        cipherData.login.username = login
+        cipherData.login.password = password
+      } else {
+        cipherData = {
+          id: null,
+          type: 1,
+          name: konnectorName,
+          login: {
+            username: login,
+            password,
+            uris: konnectorURI ? [{ uri: konnectorURI, match: 0 }] : []
+          }
         }
       }
 
-      const cipher = await vaultClient.createNewCipher(cipherData)
+      const cipher = await vaultClient.createNewCipher(cipherData, originalCipher || null)
       await vaultClient.saveCipher(cipher)
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
