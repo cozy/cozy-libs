@@ -149,7 +149,7 @@ export class TriggerManager extends Component {
       let originalCipher = null
       if (isUpdate && konnectorURI) {
         const search = { username: login, password, uri: konnectorURI }
-        originalCipher = await accounts.findCipher(account, vaultClient, search)
+        originalCipher = await accounts.getVaultCipher(account, vaultClient, search)
       }
 
       let cipherData
