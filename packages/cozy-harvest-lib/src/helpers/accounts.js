@@ -222,5 +222,5 @@ export default {
   updateTwoFaCode,
   setVaultCipherRelationship,
   getVaultCipherId,
-  findCipher
+  getVaultCipher
 }
