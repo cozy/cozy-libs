@@ -1,6 +1,8 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 
+import { CipherType } from 'cozy-keys-lib'
+
 import manifest from './manifest'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
@@ -135,7 +137,7 @@ export const getVaultCipher = async (account, vaultClient, {username, password, 
   if (login && uri) {
     // there is no link or the link is broken
     // but there may be a existing cipher with the same credentials
-    const type = vaultClient.cipherTypes.Login
+    const type = CipherType.Login
     const search = { type, username, uri }
     const all = vaultClient.getAllDecryptedFor(search)
     if (all.length > 0) {
