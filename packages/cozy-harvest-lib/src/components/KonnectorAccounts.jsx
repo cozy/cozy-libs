@@ -1,5 +1,5 @@
 import React from 'react'
-
+import PropTypes from 'prop-types'
 import { withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -32,6 +32,7 @@ class KonnectorAccounts extends React.Component {
 
   componentDidUpdate(prevProps) {
     // After leaving the new account screen, we need to refetch accounts in case a new one was created
+    // TODO: We should use an AccountsWatcher (realtime)
     if (
       this.props.location.pathname !== prevProps.location.pathname &&
       /\/new\/?$/.test(prevProps.location.pathname)
@@ -53,41 +54,14 @@ class KonnectorAccounts extends React.Component {
           }
         })
       )).filter(({ account }) => !!account)
-      this.setState({ accounts, fetchingAccounts: false, error: null })
+      this.setState({ accounts, error: null })
     } catch (error) {
-      this.setState({ error, fetchingAccounts: false })
+      this.setState({ error })
+    } finally {
+      this.setState({ fetchingAccounts: false })
     }
   }
-  renderError() {
-    const { t } = this.props
 
-    return (
-      <ModalContent>
-        <Infos
-          actionButton={
-            <Button
-              theme="danger"
-              onClick={this.fetchAccounts.bind(this)}
-              label={t('modal.accounts.error.retry')}
-            />
-          }
-          title={t('modal.accounts.error.title')}
-          text={t('modal.accounts.error.description')}
-          icon="warning"
-          isImportant
-        />
-      </ModalContent>
-    )
-  }
-  renderLoading() {
-    return (
-      <ModalContent>
-        <div className="u-pv-2 u-ta-center">
-          <Spinner size="xxlarge" />
-        </div>
-      </ModalContent>
-    )
-  }
   render() {
     const { accounts, fetchingAccounts, error } = this.state
     const { konnector } = this.props
@@ -96,14 +70,41 @@ class KonnectorAccounts extends React.Component {
         {(error || fetchingAccounts) && (
           <KonnectorModalHeader konnector={konnector} />
         )}
-        {error && this.renderError()}
-        {fetchingAccounts && this.renderLoading()}
+        {error && (
+          <ModalContent>
+            <Infos
+              actionButton={
+                <Button
+                  theme="danger"
+                  onClick={this.fetchAccounts.bind(this)}
+                  label={t('modal.accounts.error.retry')}
+                />
+              }
+              title={t('modal.accounts.error.title')}
+              text={t('modal.accounts.error.description')}
+              icon="warning"
+              isImportant
+            />
+          </ModalContent>
+        )}
+        {fetchingAccounts && (
+          <ModalContent>
+            <div className="u-pv-2 u-ta-center">
+              <Spinner size="xxlarge" />
+            </div>
+          </ModalContent>
+        )}
         {!error && !fetchingAccounts && this.props.children(accounts)}
       </>
     )
   }
 }
 
+KonnectorAccounts.propTypes = {
+  konnector: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired,
+  findAccount: PropTypes.func.isRequired
+}
 export default withMutations(accountMutations, triggersMutations)(
   withRouter(translate()(KonnectorAccounts))
 )
