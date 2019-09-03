@@ -41,7 +41,6 @@ export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
     const { initialTrigger, client } = this.props
-    console.log('initialTrigger', initialTrigger)
     this.state = {
       showTwoFAModal: false,
       trigger: initialTrigger,

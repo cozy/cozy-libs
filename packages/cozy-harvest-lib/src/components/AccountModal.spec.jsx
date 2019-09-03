@@ -55,6 +55,4 @@ describe('AccountModal', () => {
     await component.instance().componentDidUpdate({ accountId: accountIdMock })
     expect(component.getElement()).toMatchSnapshot()
   })
-
-  
 })
