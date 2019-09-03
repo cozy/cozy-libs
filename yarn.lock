@@ -5647,7 +5647,23 @@ cozy-client-js@0.16.4:
     pouchdb-browser "7.0.0"
     pouchdb-find "7.0.0"
 
-cozy-client@6.58.1, cozy-client@^6.58.1:
+cozy-client@6.61.0:
+  version "6.61.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.61.0.tgz#80d6f9f09d89aef6a99557edc6ec61d3d8cfde69"
+  integrity sha512-QjzlGKKJizeE0YNgDGymzr9ooWgMpNsnudjANejVVZCVO+6SOxZ6UnygF1tPCaD053j8irdf/97Kkqyxvm4w6g==
+  dependencies:
+    cozy-device-helper "^1.7.3"
+    cozy-stack-client "^6.58.2"
+    lodash "^4.17.13"
+    microee "^0.0.6"
+    prop-types "^15.6.2"
+    react-redux "^5.0.7"
+    redux "^3.7.2"
+    redux-thunk "^2.3.0"
+    sift "^6.0.0"
+    url-search-params-polyfill "^6.0.0"
+
+cozy-client@^6.58.1:
   version "6.58.1"
   resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-6.58.1.tgz#8e0d4e2de5c3ead222ef48a7cd4bfb4c6cbca700"
   integrity sha512-lpvkowxb7Xeu5k00awn0KzGJbShF9MWM40rcW+pqvyNftJDB8Qd8x5qAR3J8rnO3HLR2IsdsRsWgw2zZOqtVqw==
@@ -5677,7 +5693,7 @@ cozy-realtime@3.1.0:
   dependencies:
     minilog "3.1.0"
 
-cozy-stack-client@6.58.2:
+cozy-stack-client@6.58.2, cozy-stack-client@^6.58.2:
   version "6.58.2"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.58.2.tgz#13a34fac0a22bd15c4ada2d1a841cae96e9af369"
   integrity sha512-gIuFz+KxL6eUhzBufSdKbt2UmpcUPnZtDuLBzvXzTGkFgll92QRcuWIBTE7/nqi3vLQVFkAEH6gnTs0wGw2e8w==
@@ -8450,7 +8466,7 @@ hoist-non-react-statics@^2.3.1, hoist-non-react-statics@^2.5.0:
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-2.5.5.tgz#c5903cf409c0dfd908f388e619d86b9c1174cb47"
   integrity sha512-rqcy4pJo55FTTLWt+bU8ukscqHeE/e9KWvsOW2b/a3afxQZhwkQdT1rPPCJ0rYXdj4vNcasY8zHTH+jF/qStxw==
 
-hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
+hoist-non-react-statics@^3.1.0, hoist-non-react-statics@^3.2.1, hoist-non-react-statics@^3.3.0:
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/hoist-non-react-statics/-/hoist-non-react-statics-3.3.0.tgz#b09178f0122184fb95acf525daaecb4d8f45958b"
   integrity sha512-0XsbTXxgiaCDYDIWFcwkmerZPSwywfUqYmwT4jzewKTQSWoE6FCMoUVOeBJWK3E/CrWbxRG3m5GzY4lnIwGRBA==
@@ -15451,6 +15467,11 @@ react-input-autosize@^2.2.1:
   dependencies:
     prop-types "^15.5.8"
 
+react-is@^16.6.0, react-is@^16.9.0:
+  version "16.9.0"
+  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
+  integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
+
 react-is@^16.6.3, react-is@^16.8.6:
   version "16.8.6"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.6.tgz#5bbc1e2d29141c9fbdfed456343fe2bc430a6a16"
@@ -15460,11 +15481,6 @@ react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.4:
   version "16.8.4"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.8.4.tgz#90f336a68c3a29a096a3d648ab80e87ec61482a2"
   integrity sha512-PVadd+WaUDOAciICm/J1waJaSvgq+4rHE/K70j0PFqKhkTBsPv/82UGQJNXAngz1fOQLLxI6z1sEDmJDQhCTAA==
-
-react-is@^16.9.0:
-  version "16.9.0"
-  resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.9.0.tgz#21ca9561399aad0ff1a7701c01683e8ca981edcb"
-  integrity sha512-tJBzzzIgnnRfEm046qRcURvwQnZVXmuCbscxUO5RWrGTXpon2d4c8mI0D8WE6ydVIm29JiLB6+RslkIvym9Rjw==
 
 react-jsonschema-form@1.8.0:
   version "1.8.0"
@@ -15480,7 +15496,7 @@ react-jsonschema-form@1.8.0:
     react-lifecycles-compat "^3.0.4"
     shortid "^2.2.14"
 
-react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
+react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
@@ -15546,6 +15562,19 @@ react-redux@7.1.0:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.8.6"
+
+react-redux@^5.0.7:
+  version "5.1.1"
+  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.1.1.tgz#88e368682c7fa80e34e055cd7ac56f5936b0f52f"
+  integrity sha512-LE7Ned+cv5qe7tMV5BPYkGQ5Lpg8gzgItK07c67yHvJ8t0iaD9kPFPAli/mYkiyJYrs2pJgExR2ZgsGqlrOApg==
+  dependencies:
+    "@babel/runtime" "^7.1.2"
+    hoist-non-react-statics "^3.1.0"
+    invariant "^2.2.4"
+    loose-envify "^1.1.0"
+    prop-types "^15.6.1"
+    react-is "^16.6.0"
+    react-lifecycles-compat "^3.0.0"
 
 react-redux@^7.0.2:
   version "7.0.2"
@@ -16074,12 +16103,12 @@ redux-starter-kit@0.5.1:
     redux-thunk "^2.2.0"
     selectorator "^4.0.3"
 
-redux-thunk@2.3.0, redux-thunk@^2.2.0:
+redux-thunk@2.3.0, redux-thunk@^2.2.0, redux-thunk@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/redux-thunk/-/redux-thunk-2.3.0.tgz#51c2c19a185ed5187aaa9a2d08b666d0d6467622"
   integrity sha512-km6dclyFnmcvxhAcrQV2AkZmPQjzPDjgVlQtR0EQjxZPyJ0BnMf3in1ryuR8A2qU0HldVRfxYXbFSKlI3N7Slw==
 
-redux@3.7.2:
+redux@3.7.2, redux@^3.7.2:
   version "3.7.2"
   resolved "https://registry.yarnpkg.com/redux/-/redux-3.7.2.tgz#06b73123215901d25d065be342eb026bc1c8537b"
   integrity sha512-pNqnf9q1hI5HHZRBkj3bAngGZW/JMCmexDlOxw4XagXY2o1327nHH54LoTjiPJ0gizoqPDRqWyX/00g0hD6w+A==
@@ -16916,7 +16945,7 @@ shortid@^2.2.14:
   dependencies:
     nanoid "^2.0.0"
 
-sift@6.0.0:
+sift@6.0.0, sift@^6.0.0:
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/sift/-/sift-6.0.0.tgz#f93a778e5cbf05a5024ebc391e6b32511a6d1f82"
   integrity sha1-+Tp3jly/BaUCTrw5HmsyURptH4I=
