@@ -1,4 +1,4 @@
-import { AccountModal } from './AccountModal'
+import { AccountModal } from 'components/AccountModal'
 import React from 'react'
 import { shallow } from 'enzyme'
 const accountsMock = [
