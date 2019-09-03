@@ -132,7 +132,8 @@ KonnectorConfiguration.propTypes = {
   account: PropTypes.object.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  history: PropTypes.func.isRequired
 }
 
 export default withLocales(withRouter(KonnectorConfiguration))

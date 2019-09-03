@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import get from 'lodash/get'
 import { withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
@@ -68,7 +70,6 @@ class EditAccountModal extends Component {
   }
 
   handleKonnectorJobSuccess() {
-    //this.refetchTrigger()
     this.props.history.push('../')
   }
 
@@ -143,6 +144,17 @@ class EditAccountModal extends Component {
       </Modal>
     )
   }
+}
+
+EditAccountModal.propTypes = {
+  konnector: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired,
+  history: PropTypes.object.isRequired,
+  breakpoints: PropTypes.object.isRequired,
+  accountId: PropTypes.string.isRequired,
+  accounts: PropTypes.array.isRequired,
+  findAccount: PropTypes.func.isRequired,
+  fetchTrigger: PropTypes.func.isRequired
 }
 
 export default withMutations(accountMutations, triggersMutations)(
