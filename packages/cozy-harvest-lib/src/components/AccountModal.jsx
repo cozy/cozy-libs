@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import get from 'lodash/get'
 import { withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
@@ -15,6 +17,30 @@ import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfigurat
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
 
+/**
+ * AccountModal take an accountId and a list of accounts containing their
+ * respecting triggers and display the selected account and the accounts linked
+ * to this konnector
+ *
+ * You have to pass an array of accounts containing their associated trigger:
+ * ```
+ * accounts: [
+ *  {
+ *    account: {
+ *       _id: '',
+ *    },
+ *    trigger: {
+ *      id: '',
+ *      current_state: {
+ *      }
+ *    }
+ *  }
+ * ]
+ * ```
+ *
+ * from this array and from the passed accountId, we can fetch the account.
+ *
+ */
 class AccountModal extends Component {
   state = {
     trigger: null,
@@ -117,6 +143,15 @@ class AccountModal extends Component {
   }
 }
 
+AccountModal.propTypes = {
+  konnector: PropTypes.object.isRequired,
+  onDismiss: PropTypes.func,
+  history: PropTypes.object.isRequired,
+  accounts: PropTypes.array.isRequired,
+  t: PropTypes.func.isRequired,
+  findAccount: PropTypes.func.isRequired,
+  accountId: PropTypes.string.isRequired
+}
 export default withMutations(accountMutations, triggersMutations)(
   withRouter(translate()(AccountModal))
 )

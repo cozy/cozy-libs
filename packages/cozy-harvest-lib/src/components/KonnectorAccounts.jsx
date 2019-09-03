@@ -64,7 +64,7 @@ class KonnectorAccounts extends React.Component {
 
   render() {
     const { accounts, fetchingAccounts, error } = this.state
-    const { konnector } = this.props
+    const { konnector, t } = this.props
     return (
       <>
         {(error || fetchingAccounts) && (
@@ -103,7 +103,8 @@ class KonnectorAccounts extends React.Component {
 KonnectorAccounts.propTypes = {
   konnector: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
-  findAccount: PropTypes.func.isRequired
+  findAccount: PropTypes.func.isRequired,
+  t: PropTypes.func.isRequired
 }
 export default withMutations(accountMutations, triggersMutations)(
   withRouter(translate()(KonnectorAccounts))

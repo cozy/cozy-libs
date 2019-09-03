@@ -8,7 +8,6 @@ import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withLocales from './hoc/withLocales'
-import triggers from '../helpers/triggers'
 import { KonnectorJobError } from '../helpers/konnectors'
 import KonnectorJob, {
   ERROR_EVENT,
@@ -21,11 +20,13 @@ import KonnectorJob, {
  * Trigger Launcher renders its children with following props:
  * * launch: Callback to launch the trigger
  * * running: Boolean which indicates if the trigger is running
+ * * error: KonenctorError
+ * * trigger: The current Trigger
  *
  * ### Example
  * ```js
  * <TriggerLauncher initialTrigger={trigger}>
- *   {(launch, running, trigger) => (
+ *   {(launch, running, trigger, error) => (
  *     <Button onClick={() => launch(trigger)} disabled={running} />
  *    )}
  * </TriggerLauncher>
@@ -162,7 +163,7 @@ export class TriggerLauncher extends Component {
   render() {
     const { error, running, showTwoFAModal, trigger } = this.state
     const konnectorError = error ? new KonnectorJobError(error) : undefined
-    const { children, konnectorJob, submitting } = this.props
+    const { children, submitting } = this.props
     return (
       <div>
         {children({

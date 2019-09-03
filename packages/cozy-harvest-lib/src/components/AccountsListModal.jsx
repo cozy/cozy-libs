@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import AccountsList from './AccountsList/AccountsList'
@@ -27,4 +28,9 @@ class AccountsListModal extends React.Component {
   }
 }
 
+AccountsListModal.propTypes = {
+  konnector: PropTypes.object.isRequired,
+  accounts: PropTypes.array.isRequired,
+  history: PropTypes.func.isRequired
+}
 export default withRouter(AccountsListModal)

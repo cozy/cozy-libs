@@ -9,6 +9,11 @@ import withLocales from '../hoc/withLocales'
 import { getErrorLocale } from '../../helpers/konnectors'
 import TriggerLauncher from '../TriggerLauncher'
 
+/**
+ *
+ * Display status' trigger.
+ * Get error / runnong from TriggerLauncher (aka realtime)
+ */
 const Status = ({ t, trigger, konnector }) => {
   return (
     <TriggerLauncher initialTrigger={trigger}>
