@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TriggerLauncher handleError should hide twoFA modal 1`] = `
+exports[`TriggerLauncher handleError should hide twoFA modal if error  1`] = `
 <div>
   <Child
     launch={[Function]}

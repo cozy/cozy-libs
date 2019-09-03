@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { shallow } from 'enzyme'
-
 import { TriggerLauncher } from 'components/TriggerLauncher'
 import KonnectorJob from 'models/KonnectorJob'
 
-const client = {}
+const client = { on: jest.fn() }
 const trigger = {
   _id: '65c347d1ef144288a64105702cc36e59'
 }
@@ -156,12 +155,12 @@ describe('TriggerLauncher', () => {
       wrapper.instance().launch(trigger)
       wrapper.update()
       const childWrapper = wrapper.find(Child)
-      expect(childWrapper.props().error).toBe(null)
+      expect(childWrapper.props().error).toBeUndefined()
     })
   })
 
   describe('handleError', () => {
-    it('should re-render with running being `false`', async () => {
+    it('should re-render with running being `false` if handleUpdate is ok', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ error, launch, running }) => (
@@ -172,13 +171,17 @@ describe('TriggerLauncher', () => {
 
       wrapper.instance().launch(trigger)
       wrapper.update()
+
       await wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleUpdate({ trigger_id: trigger._id })
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().running).toBe(false)
     })
 
-    it('should re-render with error being defined', async () => {
+    it('should re-render with error being defined is handleUpdate receive an error', async () => {
+      const error = new Error('Test error')
+
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ error, launch, running }) => (
@@ -186,18 +189,19 @@ describe('TriggerLauncher', () => {
           )}
         </TriggerLauncher>
       )
-
-      const error = new Error('Test error')
-
       wrapper.instance().launch(trigger)
       wrapper.update()
-      await wrapper.instance().handleError(error)
+
+      await wrapper
+        .instance()
+        .handleUpdate({ trigger_id: trigger._id, error: 'Test error' })
+
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().error).toEqual(error)
     })
 
-    it('should hide twoFA modal', async () => {
+    it('should hide twoFA modal if error ', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
@@ -208,6 +212,9 @@ describe('TriggerLauncher', () => {
       wrapper.update()
       wrapper.instance().displayTwoFAModal()
       await wrapper.instance().handleError(new Error('Test error'))
+      await wrapper
+        .instance()
+        .handleUpdate({ trigger_id: trigger._id, error: 'Test error' })
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
     })
@@ -223,13 +230,14 @@ describe('TriggerLauncher', () => {
       wrapper.update()
       wrapper.instance().displayTwoFAModal()
       await wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleUpdate({ trigger_id: trigger._id })
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
     })
   })
 
   describe('handleSuccess', () => {
-    it('should re-render with running being `false`', async () => {
+    it('should re-render with running being `false` if handleUpdate success ', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
@@ -239,6 +247,7 @@ describe('TriggerLauncher', () => {
       wrapper.instance().launch(trigger)
       wrapper.update()
       await wrapper.instance().handleSuccess()
+      await wrapper.instance().handleUpdate({ trigger_id: trigger._id })
       wrapper.update()
       const childWrapper = wrapper.find(Child)
       expect(childWrapper.props().running).toBe(false)
@@ -254,6 +263,7 @@ describe('TriggerLauncher', () => {
       wrapper.instance().launch(trigger)
       wrapper.instance().displayTwoFAModal()
       await wrapper.instance().handleSuccess()
+      await wrapper.instance().handleUpdate({ trigger_id: trigger._id })
       wrapper.update()
       expect(wrapper.getElement()).toMatchSnapshot()
     })
