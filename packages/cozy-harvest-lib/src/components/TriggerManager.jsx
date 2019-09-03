@@ -19,6 +19,7 @@ import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import withLocales from './hoc/withLocales'
 import TriggerLauncher from './TriggerLauncher'
+import VaultCiphersList from './VaultCiphersList'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -250,14 +251,16 @@ export class TriggerManager extends Component {
       <div>
         <VaultUnlocker>
           <div id={modalInto} />
-          <AccountForm
-            account={account}
-            error={error || triggerError}
-            konnector={konnector}
-            onSubmit={this.handleSubmit}
-            showError={showError}
-            submitting={submitting}
-          />
+          <VaultCiphersList konnector={konnector}>
+            <AccountForm
+              account={account}
+              error={error || triggerError}
+              konnector={konnector}
+              onSubmit={this.handleSubmit}
+              showError={showError}
+              submitting={submitting}
+            />
+          </VaultCiphersList>
         </VaultUnlocker>
       </div>
     )
