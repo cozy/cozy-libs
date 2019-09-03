@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.17.5...cozy-authentication@1.18.0) (2019-09-03)
+
+
+### Features
+
+* Use snarkdown instead of react markdown ([9350d12](https://github.com/cozy/cozy-libs/commit/9350d12))
+
+
+
+
+
 ## [1.17.5](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.17.4...cozy-authentication@1.17.5) (2019-09-02)
 
 **Note:** Version bump only for package cozy-authentication
