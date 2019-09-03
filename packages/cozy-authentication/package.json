@@ -45,7 +45,7 @@
     "cozy-device-helper": "^1.7.5",
     "localforage": "1.7.3",
     "prop-types": "15.7.2",
-    "react-markdown": "4.1.0",
+    "snarkdown": "1.2.2",
     "url-polyfill": "1.1.7"
   },
   "jest": {
