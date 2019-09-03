@@ -41,29 +41,30 @@ import KonnectorModalHeader from './KonnectorModalHeader'
  * from this array and from the passed accountId, we can fetch the account.
  *
  */
-class AccountModal extends Component {
+export class AccountModal extends Component {
   state = {
     trigger: null,
     account: null,
     fetching: true,
     error: false
   }
-  componentDidMount() {
-    this.loadSelectedAccountId()
+  async componentDidMount() {
+    await this.loadSelectedAccountId()
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.accountId !== prevProps.accountId)
-      this.loadSelectedAccountId()
+  async componentDidUpdate(prevProps) {
+    if (this.props.accountId !== prevProps.accountId) {
+      return await this.loadSelectedAccountId()
+    }
   }
 
-  loadSelectedAccountId() {
+  async loadSelectedAccountId() {
     const { accountId, accounts } = this.props
     const matchingTrigger = get(
       accounts.find(account => account.account._id === accountId),
       'trigger'
     )
-    if (matchingTrigger) this.fetchAccount(matchingTrigger)
+    if (matchingTrigger) await this.fetchAccount(matchingTrigger)
   }
 
   async fetchAccount(trigger) {
@@ -142,7 +143,9 @@ class AccountModal extends Component {
     )
   }
 }
-
+AccountModal.defaultProps = {
+  accounts: []
+}
 AccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   onDismiss: PropTypes.func,
