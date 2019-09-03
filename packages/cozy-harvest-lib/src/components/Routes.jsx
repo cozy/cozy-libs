@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect, withRouter } from 'react-router-dom'
+import { Route, Redirect, withRouter } from 'react-router'
 import trimEnd from 'lodash/trimEnd'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 
