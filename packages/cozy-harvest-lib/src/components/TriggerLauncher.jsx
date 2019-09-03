@@ -35,6 +35,7 @@ import KonnectorJob, {
  * TODO: inject other props to indicates status (for example: loginSucceed),
  * and use callbacks like `onLoginSuccess` to make this component usable in
  * TriggerManager for example
+ *
  */
 export class TriggerLauncher extends Component {
   constructor(props, context) {
@@ -107,6 +108,10 @@ export class TriggerLauncher extends Component {
   }
 
   async handleError(error) {
+    /**
+     * We don't setState error / running here, since it's the job of `refeshTrigger`
+     * to do it
+     */
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
