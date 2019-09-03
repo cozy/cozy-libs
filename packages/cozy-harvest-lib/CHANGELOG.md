@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.0.4...cozy-harvest-lib@1.1.0) (2019-09-03)
+
+
+### Bug Fixes
+
+* **harvest:** Typo 📝 ([5413dec](https://github.com/cozy/cozy-libs/commit/5413dec))
+
+
+### Features
+
+* **harves:** Deal with inconsistent TERMS_VERSION_MISMATCH 📝 ([717f94a](https://github.com/cozy/cozy-libs/commit/717f94a))
+* **harvest:** Add hasNewVersionAvailable method to konnectors helper 📝 ([2890a17](https://github.com/cozy/cozy-libs/commit/2890a17))
+* **harvest:** Add isTermsVersionMismatchError to KonnectorJobError 📝 ([2fc9cef](https://github.com/cozy/cozy-libs/commit/2fc9cef))
+* **harvest:** Add KonnectorUpdateInfos component ✨ ([f817942](https://github.com/cozy/cozy-libs/commit/f817942))
+* **harvest:** Display KonnectorUpdateInfos in KonnectorConfiguration ✨ ([89ea09b](https://github.com/cozy/cozy-libs/commit/89ea09b))
+* **harvest:** Show KonnectorUpdateInfos above account list 📝 ([0a95ddf](https://github.com/cozy/cozy-libs/commit/0a95ddf))
+
+
+
+
+
 ## [1.0.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.0.3...cozy-harvest-lib@1.0.4) (2019-09-02)
 
 **Note:** Version bump only for package cozy-harvest-lib
