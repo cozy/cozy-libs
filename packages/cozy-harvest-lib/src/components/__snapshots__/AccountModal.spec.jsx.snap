@@ -1,0 +1,129 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountModal should display the AccountSelect & Content if an account is there and we can change the selectedAccount 1`] = `
+<React.Fragment>
+  <KonnectorModalHeader>
+    <AccountSelectBox
+      accountsList={
+        Array [
+          Object {
+            "account": Object {
+              "_id": "123",
+              "name": "account 1",
+            },
+            "trigger": Object {
+              "current_state": Object {},
+              "id": "triggerid",
+            },
+          },
+          Object {
+            "account": Object {
+              "_id": "account_2",
+              "name": "account_2",
+            },
+            "trigger": Object {
+              "id": "trigger_account2",
+            },
+          },
+        ]
+      }
+      onChange={[Function]}
+      onCreate={[Function]}
+      selectedAccount={
+        Object {
+          "_id": "123",
+          "name": "account 1",
+        }
+      }
+    />
+  </KonnectorModalHeader>
+  <ModalContent>
+    <Wrapper
+      account={
+        Object {
+          "_id": "123",
+          "name": "account 1",
+        }
+      }
+      addAccount={[Function]}
+      trigger={
+        Object {
+          "current_state": Object {},
+          "id": "triggerid",
+        }
+      }
+    />
+  </ModalContent>
+</React.Fragment>
+`;
+
+exports[`AccountModal should display the AccountSelect & Content if an account is there and we can change the selectedAccount 2`] = `
+<React.Fragment>
+  <KonnectorModalHeader>
+    <AccountSelectBox
+      accountsList={
+        Array [
+          Object {
+            "account": Object {
+              "_id": "123",
+              "name": "account 1",
+            },
+            "trigger": Object {
+              "current_state": Object {},
+              "id": "triggerid",
+            },
+          },
+          Object {
+            "account": Object {
+              "_id": "account_2",
+              "name": "account_2",
+            },
+            "trigger": Object {
+              "id": "trigger_account2",
+            },
+          },
+        ]
+      }
+      onChange={[Function]}
+      onCreate={[Function]}
+      selectedAccount={
+        Object {
+          "_id": "account_2",
+          "name": "account_2",
+        }
+      }
+    />
+  </KonnectorModalHeader>
+  <ModalContent>
+    <Wrapper
+      account={
+        Object {
+          "_id": "account_2",
+          "name": "account_2",
+        }
+      }
+      addAccount={[Function]}
+      trigger={
+        Object {
+          "id": "trigger_account2",
+        }
+      }
+    />
+  </ModalContent>
+</React.Fragment>
+`;
+
+exports[`AccountModal should display the fetching state by default 1`] = `
+<React.Fragment>
+  <KonnectorModalHeader />
+  <ModalContent>
+    <div
+      className="u-ta-center"
+    >
+      <Wrapper
+        size="xxlarge"
+      />
+    </div>
+  </ModalContent>
+</React.Fragment>
+`;
