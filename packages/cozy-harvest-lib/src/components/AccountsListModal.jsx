@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorModalHeader from './KonnectorModalHeader'

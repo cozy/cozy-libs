@@ -14,7 +14,7 @@ import { Uppercase } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
-import { withRouter } from 'react-router-dom'
+import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
