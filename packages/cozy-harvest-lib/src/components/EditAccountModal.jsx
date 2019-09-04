@@ -30,7 +30,9 @@ export class EditAccountModal extends Component {
       error: false
     }
 
-    this.handleAccountEditJobSuccess = this.handleAccountEditJobSuccess.bind(this)
+    this.handleAccountEditJobSuccess = this.handleAccountEditJobSuccess.bind(
+      this
+    )
   }
 
   componentDidMount() {
@@ -70,7 +72,7 @@ export class EditAccountModal extends Component {
       })
     }
   }
- 
+
   handleAccountEditJobSuccess() {
     this.props.history.push('../')
   }

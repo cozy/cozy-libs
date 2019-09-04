@@ -138,7 +138,7 @@ describe('TriggerLauncher', () => {
       )
     })
 
-    it('should clear Error', () => {
+    it('should clear Error', async () => {
       const wrapper = shallow(
         <TriggerLauncher {...props}>
           {({ error, launch, running }) => (
@@ -149,7 +149,8 @@ describe('TriggerLauncher', () => {
 
       wrapper.instance().launch(trigger)
       wrapper.update()
-      wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleError(new Error('Test error'))
+      await wrapper.instance().handleUpdate({ trigger_id: trigger._id })
       wrapper.update()
       // Relaunch
       wrapper.instance().launch(trigger)
@@ -179,7 +180,7 @@ describe('TriggerLauncher', () => {
       expect(childWrapper.props().running).toBe(false)
     })
 
-    it('should re-render with error being defined is handleUpdate receive an error', async () => {
+    it('should re-render with error being defined if handleUpdate receive an error', async () => {
       const error = new Error('Test error')
 
       const wrapper = shallow(
@@ -192,9 +193,11 @@ describe('TriggerLauncher', () => {
       wrapper.instance().launch(trigger)
       wrapper.update()
 
-      await wrapper
-        .instance()
-        .handleUpdate({ trigger_id: trigger._id, error: 'Test error' })
+      await wrapper.instance().handleUpdate({
+        trigger_id: trigger._id,
+        error: 'Test error',
+        state: 'errored'
+      })
 
       wrapper.update()
       const childWrapper = wrapper.find(Child)

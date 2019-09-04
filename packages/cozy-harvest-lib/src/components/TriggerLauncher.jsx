@@ -64,7 +64,7 @@ export class TriggerLauncher extends Component {
       this.setState({
         trigger,
         running: job.state === 'running', //TODO possible race ?
-        error: jobsModel.getKonnectorJobError(job)
+        error: job.error ? jobsModel.getKonnectorJobError(job) : undefined
       })
     }
   }
@@ -171,7 +171,7 @@ export class TriggerLauncher extends Component {
     return (
       <div>
         {children({
-          error,
+          error: error ? error : undefined,
           launch: this.launch,
           running: !!running || !!submitting,
           trigger
