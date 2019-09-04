@@ -18,6 +18,7 @@ const createAccount = async (client, konnector, attributes) => {
 }
 
 /**
+ * TODO Use get 
  * Performs a query to find the given account
  * @param  {Object}  client CozyClient
  * @param  {string}  id     io.cozy.accounts document's id
