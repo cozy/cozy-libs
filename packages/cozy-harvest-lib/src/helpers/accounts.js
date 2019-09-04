@@ -2,7 +2,7 @@ import get from 'lodash/get'
 import merge from 'lodash/merge'
 
 import manifest from './manifest'
-
+import { saveAccount as saveAccountMutation } from '../connections/accounts'
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
 
 const PROVIDERS = {
@@ -133,6 +133,39 @@ export const setSessionResetIfNecessary = (account, changedFields) => {
     : account
 }
 
+/**
+ * Update an account for a given konnector
+ * TODO: Move to cozy-doctypes
+ */
+export const updateAccount = async ({ konnector, account, data, client }) => {
+  const mergedAccount = mergeAuth(
+    setSessionResetIfNecessary(resetState(account), data),
+    data
+  )
+  return saveAccount(mergedAccount, data, client, konnector)
+}
+
+/**
+ * Create an account for a given konnector
+ * TODO: Move to cozy-doctypes
+ */
+export const createAccount = async ({ konnector, data, client }) => {
+  const accountDocument = build(konnector, data)
+  return saveAccount(accountDocument, data, client, konnector)
+}
+
+/**
+ * Save the account and return a mergeAuth account
+ * TODO: Move to cozy-doctypes
+ */
+const saveAccount = async (account, data, client, konnector) => {
+  const savedAccount = mergeAuth(
+    await saveAccountMutation(client, konnector, account),
+    data
+  )
+  return savedAccount
+}
+
 export default {
   build,
   getLabel,
@@ -144,5 +177,7 @@ export default {
   mergeAuth,
   resetState,
   setSessionResetIfNecessary,
-  updateTwoFaCode
+  updateTwoFaCode,
+  updateAccount,
+  createAccount
 }

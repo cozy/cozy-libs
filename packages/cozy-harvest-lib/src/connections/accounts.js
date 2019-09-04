@@ -18,7 +18,7 @@ const createAccount = async (client, konnector, attributes) => {
 }
 
 /**
- * TODO Use get 
+ * TODO Use get
  * Performs a query to find the given account
  * @param  {Object}  client CozyClient
  * @param  {string}  id     io.cozy.accounts document's id
@@ -136,7 +136,7 @@ const updateAccount = async (client, account) => {
  * @param  {Object}  konnector  io.cozy.konnectors document
  * @param  {Object}  authData   Account auth attribute
  */
-const saveAccount = (client, konnector, account = {}) => {
+export const saveAccount = (client, konnector, account = {}) => {
   return account._id
     ? updateAccount(client, account)
     : createAccount(client, konnector, account)
