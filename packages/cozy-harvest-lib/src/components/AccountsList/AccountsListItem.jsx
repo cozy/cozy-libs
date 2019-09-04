@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 
 import { Account } from 'cozy-doctypes'
 import Card from 'cozy-ui/transpiled/react/Card'
-import MidEllipsis from 'cozy-ui/transpiled/react/MidEllipsis'
-import { Caption } from 'cozy-ui/transpiled/react/Text'
+import { Caption, Text } from 'cozy-ui/transpiled/react/Text'
 
 import Status from './Status'
 
@@ -24,10 +23,10 @@ export class AccountsListItem extends React.PureComponent {
         onClick={onClick}
       >
         <div className="u-flex-grow-1 u-flex-shrink-1 u-ov-hidden u-mr-1">
-          <MidEllipsis text={accountName} />
+          <Text className="u-ellipsis">{accountName}</Text>
           {shouldShowAccountLogin && (
             <Caption>
-              <MidEllipsis text={accountLogin} />
+              <Text className="u-ellipsis">{accountLogin}</Text>
             </Caption>
           )}
         </div>
