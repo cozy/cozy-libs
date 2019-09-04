@@ -9,6 +9,8 @@ import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withLocales from './hoc/withLocales'
 import { KonnectorJobError } from '../helpers/konnectors'
+import * as triggersModel from '../helpers/triggers'
+import * as jobsModel from '../helpers/jobs'
 import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
@@ -20,7 +22,7 @@ import KonnectorJob, {
  * Trigger Launcher renders its children with following props:
  * * launch: Callback to launch the trigger
  * * running: Boolean which indicates if the trigger is running
- * * error: KonenctorError
+ * * error: KonnectorJobError
  * * trigger: The current Trigger
  *
  * ### Example
@@ -44,7 +46,7 @@ export class TriggerLauncher extends Component {
     this.state = {
       showTwoFAModal: false,
       trigger: initialTrigger,
-      error: get(initialTrigger, 'current_state.last_error')
+      error: triggersModel.getKonnectorJobError(initialTrigger)
     }
 
     this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
@@ -64,7 +66,7 @@ export class TriggerLauncher extends Component {
       this.setState({
         trigger,
         running: job.state === 'running', //TODO possible race ?
-        error: job.error
+        error: jobsModel.getKonnectorJobError(job)
       })
     }
   }
@@ -166,12 +168,13 @@ export class TriggerLauncher extends Component {
 
   render() {
     const { error, running, showTwoFAModal, trigger } = this.state
-    const konnectorError = error ? new KonnectorJobError(error) : undefined
+
+    const konnectorError = error 
     const { children, submitting } = this.props
     return (
       <div>
         {children({
-          error: konnectorError,
+          error,
           launch: this.launch,
           running: !!running || !!submitting,
           trigger
