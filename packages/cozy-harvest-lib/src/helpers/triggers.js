@@ -44,7 +44,7 @@ export const getAccountId = trigger => {
  * @param  {Object} trigger io.cozy.trigger as returned by stack
  * @return {KonnectorJobError}         [description]
  */
-export const getError = trigger => {
+export const getKonnectorJobError = trigger => {
   const status = get(trigger, 'current_state.status')
   return status === 'errored'
     ? new KonnectorJobError(get(trigger, 'current_state.last_error'))
@@ -80,7 +80,7 @@ export const getFrequency = trigger => {
 const helpers = {
   buildAttributes,
   getAccountId,
-  getError,
+  getKonnectorJobError,
   getFrequency,
   getKonnectorSlug,
   getLastSuccessDate
