@@ -3,24 +3,17 @@ import PropTypes from 'prop-types'
 
 import { Query } from 'cozy-client'
 import AppLinker from 'cozy-ui/react/AppLinker'
-import Button from 'cozy-ui/react/Button'
+import { ButtonLink } from 'cozy-ui/react/Button'
 
 import { getStoreUrltoUpdateKonnector } from '../helpers/apps'
 
-const KonnectorUpdateButton = ({
-  disabled,
-  isBlocking,
-  href,
-  label,
-  onClick
-}) => (
-  <Button
+const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
+  <ButtonLink
     disabled={disabled}
     className="u-m-0"
     href={href}
     icon="eye"
     label={label}
-    onClick={onClick}
     theme={isBlocking ? 'danger' : 'secondary'}
   />
 )
@@ -40,14 +33,15 @@ export class KonnectorUpdateLinker extends PureComponent {
           if (isReady) {
             return (
               <AppLinker slug="store" href={konnectorUpdateUrl}>
-                {({ href, onClick }) => (
-                  <KonnectorUpdateButton
-                    href={href}
-                    isBlocking={isBlocking}
-                    label={label}
-                    onClick={onClick}
-                  />
-                )}
+                {({ href }) => {
+                  return (
+                    <KonnectorUpdateButton
+                      href={href}
+                      isBlocking={isBlocking}
+                      label={label}
+                    />
+                  )
+                }}
               </AppLinker>
             )
           } else {
