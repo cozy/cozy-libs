@@ -11,8 +11,8 @@ import TriggerLauncher from '../TriggerLauncher'
 
 /**
  *
- * Display status' trigger.
- * Get error / runnong from TriggerLauncher (aka realtime)
+ * Display trigger's status.
+ * Get error / running from TriggerLauncher (aka realtime)
  */
 const Status = ({ t, trigger, konnector }) => {
   return (
@@ -21,14 +21,14 @@ const Status = ({ t, trigger, konnector }) => {
         const errorTitle = getErrorLocale(error, konnector, t, 'title')
         if (running) {
           return (
-            <div className="u-pomegranate u-flex u-flex-justify-center u-flex-items-center">
+            <div className="u-flex u-flex-justify-center u-flex-items-center">
               <Spinner className="u-flex-shrink-0" />
             </div>
           )
         }
         if (error) {
           return (
-            <div className="u-pomegranate u-flex u-flex-justify-center u-flex-items-center">
+            <div className="u-flex u-flex-justify-center u-flex-items-center">
               <span className="u-mr-half u-caption u-pomegranate">
                 {errorTitle}
               </span>
