@@ -1,6 +1,6 @@
 /* eslint-env jest */
 
-import { buildAttributes, getError } from 'helpers/triggers'
+import { buildAttributes, getKonnectorJobError } from 'helpers/triggers'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 describe('Triggers Helper', () => {
@@ -48,7 +48,7 @@ describe('Triggers Helper', () => {
     })
   })
 
-  describe('getError', () => {
+  describe('getKonnectorJobError', () => {
     it('returns known KonnectorJobError', () => {
       const trigger = {
         current_state: {
@@ -56,7 +56,7 @@ describe('Triggers Helper', () => {
           status: 'errored'
         }
       }
-      expect(getError(trigger)).toEqual(
+      expect(getKonnectorJobError(trigger)).toEqual(
         new KonnectorJobError('USER_ACTION_NEEDED.CHANGE_PASSWORD')
       )
     })
@@ -67,7 +67,7 @@ describe('Triggers Helper', () => {
           status: 'done'
         }
       }
-      expect(getError(trigger)).toBeNull()
+      expect(getKonnectorJobError(trigger)).toBeNull()
     })
   })
 })
