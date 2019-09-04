@@ -13,7 +13,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
-import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
+import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
 
@@ -130,7 +130,7 @@ export class AccountModal extends Component {
             </div>
           )}
           {!error && !fetching && (
-            <KonnectorConfiguration
+            <KonnectorAccountTabs
               konnector={konnector}
               trigger={trigger}
               account={account}
