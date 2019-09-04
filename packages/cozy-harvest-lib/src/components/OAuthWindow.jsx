@@ -5,6 +5,7 @@ import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import { prepareOAuth, checkOAuthData, terminateOAuth } from '../helpers/oauth'
+//TODO use PopUp from cozy-ui
 import Popup from './Popup'
 
 const OAUTH_POPUP_HEIGHT = 800

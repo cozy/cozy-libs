@@ -20,7 +20,7 @@ import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 
-class EditAccountModal extends Component {
+export class EditAccountModal extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -36,8 +36,8 @@ class EditAccountModal extends Component {
   componentDidMount() {
     const { accountId, accounts } = this.props
     /**
-     * @TODO In theory we can have several trigger for the same account
-     * so this code will not work as excepted.
+     * @TODO In theory we can have several trigger for the same account.
+     * If so this code will not work as excepted. This case is theoretical
      */
 
     const matchingTrigger = get(
@@ -46,7 +46,9 @@ class EditAccountModal extends Component {
     )
     if (matchingTrigger) this.fetchAccount(matchingTrigger)
   }
-
+  /**
+   * TODO use queryConnect to know if we're fecthing or not
+   */
   async fetchAccount(trigger) {
     const { findAccount } = this.props
     this.setState({ fetching: true })
@@ -68,19 +70,8 @@ class EditAccountModal extends Component {
       })
     }
   }
-
-  handleKonnectorJobSuccess() {
+ 
     this.props.history.push('../')
-  }
-
-  async refetchTrigger() {
-    const { fetchTrigger } = this.props
-    const { trigger } = this.state
-
-    const upToDateTrigger = await fetchTrigger(trigger._id)
-    this.setState({
-      trigger: upToDateTrigger
-    })
   }
 
   render() {
@@ -89,7 +80,7 @@ class EditAccountModal extends Component {
      * Routes component since this modal has to be on top on the previous one
      * So when we quit it, we have to go back to the previous one.
      *
-     * When we are on mobile, we displayed a back button
+     * When we are on mobile, we display a back button
      * On desktop we display a cross
      */
     const {
@@ -107,6 +98,7 @@ class EditAccountModal extends Component {
         closable={isMobile ? false : true}
         closeBtnColor={palette.white}
       >
+        {/** TODO Should be moved to UI when this design is stablized  */}
         <ModalHeader className="u-bg-dodgerBlue u-p-0 u-h-3 u-flex u-flex-items-center">
           {isMobile && (
             <Button
@@ -136,7 +128,6 @@ class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
-              onSuccess={this.handleKonnectorJobSuccess}
               showError={true}
             />
           )}

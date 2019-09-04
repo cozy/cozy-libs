@@ -22,9 +22,7 @@ class KonnectorAccounts extends React.Component {
   }
 
   /**
-   * TODO We should not fetchAccounts and fetchAccount since we already have the informations
-   * in the props. We kept this sytem for compatibility on the existing override.
-   * Next tasks: remove these methods and rewrite the override
+   * TODO Use queryConnect to fetch the accounts
    */
   async componentDidMount() {
     await this.fetchAccounts()
