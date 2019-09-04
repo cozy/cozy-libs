@@ -30,7 +30,7 @@ export class EditAccountModal extends Component {
       error: false
     }
 
-    this.handleKonnectorJobSuccess = this.handleKonnectorJobSuccess.bind(this)
+    this.handleAccountEditJobSuccess = this.handleAccountEditJobSuccess.bind(this)
   }
 
   componentDidMount() {
@@ -71,6 +71,7 @@ export class EditAccountModal extends Component {
     }
   }
  
+  handleAccountEditJobSuccess() {
     this.props.history.push('../')
   }
 
@@ -128,6 +129,7 @@ export class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
+              onSuccess={this.handleAccountEditJobSuccess}
               showError={true}
             />
           )}
