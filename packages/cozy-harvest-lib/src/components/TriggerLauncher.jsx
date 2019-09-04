@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
 import { withClient, withMutations } from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
 
@@ -8,7 +7,6 @@ import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withLocales from './hoc/withLocales'
-import { KonnectorJobError } from '../helpers/konnectors'
 import * as triggersModel from '../helpers/triggers'
 import * as jobsModel from '../helpers/jobs'
 import KonnectorJob, {
@@ -169,7 +167,6 @@ export class TriggerLauncher extends Component {
   render() {
     const { error, running, showTwoFAModal, trigger } = this.state
 
-    const konnectorError = error 
     const { children, submitting } = this.props
     return (
       <div>
