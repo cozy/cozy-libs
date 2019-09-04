@@ -6,14 +6,11 @@ import { KonnectorJobError } from './konnectors'
  * @return {KonnectorJobError}         [description]
  */
 export const getKonnectorJobError = job => {
-    return job.state === 'errored'
-      ? new KonnectorJobError(job.error)
-      : null
-  }
-
+  return job.state === 'errored' ? new KonnectorJobError(job.error) : null
+}
 
 const helpers = {
-    getKonnectorJobError
+  getKonnectorJobError
 }
-  
+
 export default helpers

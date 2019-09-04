@@ -52,7 +52,7 @@ export class TriggerManager extends Component {
    * Ensure that a trigger will exist, with valid destination folder with
    * permissions and references
    * TODO move this to Cozy-Doctypes https://github.com/cozy/cozy-libs/issues/743
-   * 
+   *
    * @param  {object}  account
    * @return {Object} Trigger document
    */
@@ -124,7 +124,7 @@ export class TriggerManager extends Component {
     }
   }
   /**
-   * TODO move to AccountHelper 
+   * TODO move to AccountHelper
    */
   async handleSubmit(data = {}) {
     const { konnector, saveAccount } = this.props
