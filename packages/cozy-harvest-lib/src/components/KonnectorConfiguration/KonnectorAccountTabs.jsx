@@ -18,6 +18,8 @@ import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
+import * as konnectorsModel from '../../helpers/konnectors'
+
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import DeleteAccountButton from '../DeleteAccountButton'
@@ -40,16 +42,27 @@ class KonnectorAccountTabs extends React.Component {
     return (
       <TriggerLauncher initialTrigger={initialTrigger}>
         {({ error, running }) => {
+          const hasError = error
           const shouldDisplayError = !running && error
-          const hasLoginError = error && error.isLoginError()
-          const hasErrorExceptLogin = error && !hasLoginError
+          const hasLoginError = hasError && error.isLoginError()
+          const hasTermsVersionMismatchError =
+            hasError && error.isTermsVersionMismatchError()
 
+          const isTermsVersionMismatchErrorWithVersionAvailable =
+            hasTermsVersionMismatchError &&
+            konnectorsModel.hasNewVersionAvailable(konnector)
+
+          const hasGenericError =
+            hasError &&
+            !hasLoginError &&
+            !isTermsVersionMismatchErrorWithVersionAvailable
           return (
             <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
               <TabList>
                 <Tab name="data">
                   {t('modal.tabs.data')}
-                  {hasErrorExceptLogin && (
+                  {// Login error should not be mentionned in data tab
+                  hasError && !hasLoginError && (
                     <Icon icon="warning" size={13} className="u-ml-half" />
                   )}
                 </Tab>
@@ -63,7 +76,14 @@ class KonnectorAccountTabs extends React.Component {
 
               <TabPanels>
                 <TabPanel name="data" className="u-pt-1-half u-pb-0">
-                  {shouldDisplayError && hasErrorExceptLogin && (
+                  {konnectorsModel.hasNewVersionAvailable(konnector) && (
+                    <KonnectorUpdateInfos
+                      className="u-mb-2"
+                      konnector={konnector}
+                      isBlocking={hasTermsVersionMismatchError}
+                    />
+                  )}
+                  {shouldDisplayError && hasGenericError && (
                     <TriggerErrorInfo
                       className="u-mb-2"
                       error={error}
