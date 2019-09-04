@@ -317,5 +317,11 @@
     },
     "retry": "Invalid code, please re-enter.",
     "CTA": "Validate"
+  },
+  "account": {
+    "success": {
+      "title": "Successful configuration!",
+      "connect": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically."
+    }
   }
 }

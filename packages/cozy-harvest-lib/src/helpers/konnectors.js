@@ -306,11 +306,34 @@ export const buildFolderPermission = folder => {
   }
 }
 
+/**
+ *
+ * @param {Object} konnector The konnector to build messages for
+ * @param {Func} t  Translation function, expected to be Polyglot.t()
+ * @return {Array}
+ */
+export const buildSuccessMessages = (konnector, t) => {
+  const messages = [
+    t('modal.account.success.connect', {
+      name: konnector.name
+    })
+  ]
+
+  if (
+    konnector.additionnalSuccessMessage &&
+    konnector.additionnalSuccessMessage.message
+  ) {
+    messages.push(t(konnector.additionnalSuccessMessage.message))
+  }
+
+  return messages
+}
 export default {
   KonnectorJobError,
   buildFolderPath,
   buildFolderPermission,
   getAccountType,
   hasNewVersionAvailable,
-  needsFolder
+  needsFolder,
+  buildSuccessMessages
 }
