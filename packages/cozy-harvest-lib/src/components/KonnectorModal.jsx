@@ -23,8 +23,8 @@ import withLocales from './hoc/withLocales'
 import TriggerManager from './TriggerManager'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'
-import KonnectorConfiguration from './KonnectorConfiguration/KonnectorConfiguration'
 import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
+import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 
 /**
  * KonnectorModal can be completely standalone and will use it's internal state to switch between views, or it can be controlled by the parents through props (such as accountId) and callbacks (such as createAction and onAccountChange)
@@ -292,7 +292,7 @@ export class KonnectorModal extends PureComponent {
       )
     } else {
       return (
-        <KonnectorConfiguration
+        <KonnectorAccountTabs
           konnector={konnector}
           trigger={trigger}
           account={account}

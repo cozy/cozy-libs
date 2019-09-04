@@ -24,13 +24,14 @@ import DeleteAccountButton from '../DeleteAccountButton'
 import withLocales from '../hoc/withLocales'
 import TriggerLauncher from '../TriggerLauncher'
 
-class KonnectorConfiguration extends React.Component {
+class KonnectorAccountTabs extends React.Component {
   render() {
     const {
       konnector,
       trigger: initialTrigger,
       account,
       onAccountDeleted,
+      //TODO on``
       addAccount,
       history,
       t
@@ -110,6 +111,7 @@ class KonnectorConfiguration extends React.Component {
                       disabled={running}
                       onSuccess={onAccountDeleted}
                     />
+                    {/*TODO Create a CreateAccountButton */}
                     <Button
                       onClick={addAccount}
                       label={t('modal.addAccount.button')}
@@ -126,7 +128,7 @@ class KonnectorConfiguration extends React.Component {
   }
 }
 
-KonnectorConfiguration.propTypes = {
+KonnectorAccountTabs.propTypes = {
   konnector: PropTypes.object.isRequired,
   trigger: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
@@ -136,4 +138,4 @@ KonnectorConfiguration.propTypes = {
   history: PropTypes.func.isRequired
 }
 
-export default withLocales(withRouter(KonnectorConfiguration))
+export default withLocales(withRouter(KonnectorAccountTabs))
