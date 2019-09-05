@@ -8,7 +8,7 @@ exports[`AccountField render a date field 1`] = `
     block={true}
     className=""
     error={false}
-    htmlFor=""
+    htmlFor="harvest-account-date"
   >
     fields.date.label
   </Label>
@@ -16,7 +16,7 @@ exports[`AccountField render a date field 1`] = `
     autoComplete="off"
     error={false}
     fullwidth={true}
-    id=""
+    id="harvest-account-date"
     inputRef={[Function]}
     name="date"
     placeholder="fields.date.placeholder"
@@ -35,7 +35,7 @@ exports[`AccountField render a dropdown field 1`] = `
     block={true}
     className=""
     error={false}
-    htmlFor=""
+    htmlFor="harvest-account-multiple"
   >
     fields.multiple.label
   </Label>
@@ -44,7 +44,7 @@ exports[`AccountField render a dropdown field 1`] = `
     error={false}
     fieldProps={Object {}}
     fullwidth={true}
-    id=""
+    id="harvest-account-multiple"
     inputRef={[Function]}
     label="fields.multiple.label"
     labelProps={Object {}}
@@ -131,7 +131,7 @@ exports[`AccountField render a password field 1`] = `
     block={true}
     className=""
     error={false}
-    htmlFor=""
+    htmlFor="harvest-account-passphrase"
   >
     fields.passphrase.label
   </Label>
@@ -140,7 +140,7 @@ exports[`AccountField render a password field 1`] = `
     error={false}
     fullwidth={true}
     hideLabel="accountForm.password.hide"
-    id=""
+    id="harvest-account-passphrase"
     inputRef={[Function]}
     name="passphrase"
     placeholder="fields.passphrase.placeholder"
@@ -161,7 +161,7 @@ exports[`AccountField should render 1`] = `
     block={true}
     className=""
     error={false}
-    htmlFor=""
+    htmlFor="harvest-account-username"
   >
     fields.username.label
   </Label>
@@ -169,7 +169,7 @@ exports[`AccountField should render 1`] = `
     autoComplete="off"
     error={false}
     fullwidth={true}
-    id=""
+    id="harvest-account-username"
     inputRef={[Function]}
     name="username"
     placeholder="fields.username.placeholder"

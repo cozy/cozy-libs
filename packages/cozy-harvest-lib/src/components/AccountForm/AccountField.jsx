@@ -75,6 +75,7 @@ export class AccountField extends PureComponent {
     // Cozy-UI <Field /> props
     const fieldProps = {
       ...this.props,
+      id: `harvest-account-${name}`,
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
       disabled: disabled,
