@@ -3,39 +3,36 @@
 import React from 'react'
 
 import AppLinker from 'cozy-ui/react/AppLinker'
-import Icon from 'cozy-ui/react/Icon'
 import { translate } from 'cozy-ui/react/I18n'
-import styles from 'styles/konnectorSuccess'
+import { ButtonLink } from 'cozy-ui/react/Button'
 
 const BanksLink = translate()(({ banksUrl, t }) =>
   banksUrl ? (
     <AppLinker slug="banks" href={banksUrl}>
       {({ href, onClick, name }) => (
-        <a
-          className={styles['col-account-success-link']}
-          href={href}
+        <ButtonLink
           target="_top"
+          icon="openwith"
+          href={href}
           onClick={onClick}
-        >
-          <Icon className="u-mr-half" icon="openwith" />
-          {t('account.success.banksLinkText', {
+          label={t('modal.account.success.banksLinkText', {
             appName: name
           })}
-        </a>
+          subtle
+        />
       )}
     </AppLinker>
   ) : (
-    <a
-      className={styles['col-account-success-link']}
+    <ButtonLink
+      icon="openwith"
       onClick={() =>
         cozy.client.intents.redirect('io.cozy.apps', { slug: 'banks' }, url => {
           window.top.location.href = url
         })
       }
-    >
-      <Icon className="u-mr-half" icon="openwith" />
-      {t('account.success.banksLinkText')}
-    </a>
+      label={t('modal.account.success.banksLinkText')}
+      subtle
+    />
   )
 )
 

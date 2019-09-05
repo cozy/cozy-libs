@@ -5,10 +5,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
-import Button from 'cozy-ui/react/Button'
-import { translate } from 'cozy-ui/react/I18n'
+import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 
-import TriggerFolderLink from 'components/TriggerFolderLink'
+import Button from 'cozy-ui/react/Button'
+import withLocales from './hoc/withLocales'
+import TriggerFolderLink from './TriggerFolderLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import connectingIllu from 'assets/images/connecting-data-in-progress.svg'
 import { buildSuccessMessages } from '../helpers/konnectors'
@@ -21,14 +22,14 @@ const SuccessImage = () => (
 
 const SuccessLinks = ({ children }) => <p className={'u-mv-half'}>{children}</p>
 
-const DriveLink = translate()(({ folderId, t }) => (
+const DriveLink = withLocales(({ folderId, t }) => (
   <TriggerFolderLink
     folderId={folderId}
-    label={t('account.success.driveLinkText')}
+    label={t('modal.account.success.driveLinkText')}
   />
 ))
 
-const SuccessFooter = translate()(({ children }) => children)
+const SuccessFooter = withLocales(({ children }) => children)
 
 const DescriptionContent = ({ title, messages, children }) => {
   return (
@@ -72,29 +73,31 @@ export class KonnectorSuccess extends Component {
     const hasLinks = relatedApps.length > 0
 
     return (
-      <div className={'u-ta-center'}>
-        <SuccessImage />
-        <DescriptionContent
-          title={t('modal.account.success.title')}
-          messages={buildSuccessMessages(konnector, t)}
-        >
-          {hasLinks && (
-            <SuccessLinks>
-              {relatedApps.map((app, i) =>
-                // Should always pass context, since it's used for customisation
-                app.successLink(this.state, this.props, this.context, i)
-              )}
-            </SuccessLinks>
-          )}
-        </DescriptionContent>
+      <ModalContent>
+        <div className={'u-ta-center'}>
+          <SuccessImage />
+          <DescriptionContent
+            title={t('modal.account.success.title')}
+            messages={buildSuccessMessages(konnector, t)}
+          >
+            {hasLinks && (
+              <SuccessLinks>
+                {relatedApps.map((app, i) =>
+                  // Should always pass context, since it's used for customisation
+                  app.successLink(this.state, this.props, this.context, i)
+                )}
+              </SuccessLinks>
+            )}
+          </DescriptionContent>
 
-        <SuccessFooter>
-          {relatedApps.length > 0
-            ? // Should always pass context, since it's used for customisation
-              relatedApps[0].footerLink(this.state, this.props, this.context)
-            : null}
-        </SuccessFooter>
-      </div>
+          <SuccessFooter>
+            {relatedApps.length > 0
+              ? // Should always pass context, since it's used for customisation
+                relatedApps[0].footerLink(this.state, this.props, this.context)
+              : null}
+          </SuccessFooter>
+        </div>
+      </ModalContent>
     )
   }
 }
@@ -103,7 +106,7 @@ KonnectorSuccess.apps = {
   drive: {
     priority: 0,
     // eslint-disable-next-line react/display-name
-    predicate: (state, props) => {
+    predicate: state => {
       const trigger = state.trigger
       const res = has(trigger, 'message.folder_to_save')
       return res
@@ -134,7 +137,6 @@ KonnectorSuccess.apps = {
     // eslint-disable-next-line react/display-name
     predicate: (state, props) => {
       const konnector = props.konnector
-      return true
       return (
         Array.isArray(konnector.data_types) &&
         konnector.data_types.includes('bankAccounts')
@@ -163,4 +165,4 @@ KonnectorSuccess.propTypes = {
 
 export { SuccessImage, SuccessLinks, BanksLink, DriveLink }
 
-export default withRouter(translate()(KonnectorSuccess))
+export default withRouter(withLocales(KonnectorSuccess))
