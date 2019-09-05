@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.1](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@1.3.0...eslint-config-cozy-app@1.3.1) (2019-09-05)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-config-prettier to v4.3.0 ([b92900c](https://github.com/cozy/cozy-libs/commit/b92900c))
+
+
+
+
+
 # 1.3.0 (2019-09-05)
 
 
