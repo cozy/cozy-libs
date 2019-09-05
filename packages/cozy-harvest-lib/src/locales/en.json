@@ -323,7 +323,8 @@
       "title": "Successful configuration!",
       "connect": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically.",
       "banksLinkText": "See my accounts in %{appName}",
-      "driveLinkText": "Open the folder in Cozy Drive"
+      "driveLinkText": "Open the folder in Cozy Drive",
+      "button": "Close"
     }
   }
 }

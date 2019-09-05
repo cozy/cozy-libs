@@ -12,8 +12,6 @@ import withLocales from './hoc/withLocales'
 import TriggerFolderLink from './TriggerFolderLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import connectingIllu from 'assets/images/connecting-data-in-progress.svg'
-import { buildSuccessMessages } from '../helpers/konnectors'
-
 import Markdown from './Markdown'
 
 const SuccessImage = () => (
@@ -25,25 +23,17 @@ const SuccessLinks = ({ children }) => <p className={'u-mv-half'}>{children}</p>
 const DriveLink = withLocales(({ folderId, t }) => (
   <TriggerFolderLink
     folderId={folderId}
-    label={t('modal.account.success.driveLinkText')}
+    label={t('account.success.driveLinkText')}
   />
 ))
 
 const SuccessFooter = withLocales(({ children }) => children)
 
-const DescriptionContent = ({ title, messages, children }) => {
+const DescriptionContent = ({ title, message, children }) => {
   return (
     <>
       <h4>{title}</h4>
-      {messages &&
-        messages.length > 0 &&
-        messages.map((message, i) => {
-          return message ? (
-            <div key={i}>
-              <Markdown source={message} />
-            </div>
-          ) : null
-        })}
+      <Markdown source={message} />
       {children}
     </>
   )
@@ -62,7 +52,7 @@ export class KonnectorSuccess extends Component {
     this.setState({ trigger: matchingTrigger })
   }
   render() {
-    const { t, konnector } = this.props
+    const { t } = this.props
     const relatedApps = sortBy(
       Object.values(KonnectorSuccess.apps).filter(app =>
         app.predicate(this.state, this.props)
@@ -77,8 +67,8 @@ export class KonnectorSuccess extends Component {
         <div className={'u-ta-center'}>
           <SuccessImage />
           <DescriptionContent
-            title={t('modal.account.success.title')}
-            messages={buildSuccessMessages(konnector, t)}
+            title={t('account.success.title')}
+            message={t('account.success.connect')}
           >
             {hasLinks && (
               <SuccessLinks>

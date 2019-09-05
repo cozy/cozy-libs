@@ -23,6 +23,9 @@ const BanksLink = translate()(({ banksUrl, t }) =>
       )}
     </AppLinker>
   ) : (
+    /**
+     * TODO AppLinker vers le store
+     */
     <ButtonLink
       icon="openwith"
       onClick={() =>
