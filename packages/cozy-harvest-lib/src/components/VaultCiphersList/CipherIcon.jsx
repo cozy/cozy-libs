@@ -19,7 +19,7 @@ const CipherIcon = props => {
 }
 
 CipherIcon.propTypes = {
-  konnector: PropTypes.string.isRequired
+  konnector: PropTypes.object.isRequired
 }
 
 export default CipherIcon
