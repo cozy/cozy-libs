@@ -4,7 +4,7 @@ import { withVaultClient, CipherType } from 'cozy-keys-lib'
 import { Title } from 'cozy-ui/transpiled/react/Text'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-import List from '@material-ui/core/List'
+import List from 'cozy-ui/transpiled/react/MuiCozyTheme/RaisedList'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
@@ -61,7 +61,7 @@ class VaultCiphersList extends React.Component {
         <Title className="u-ta-center u-mb-2">
           {t('Depuis quel compte souhaitez-vous importer vos données ?')}
         </Title>
-        <List disablePadding>
+        <List>
           {ciphers.map(cipherView => (
             <ListItem key={cipherView.id}>
               <ListItemIcon>
