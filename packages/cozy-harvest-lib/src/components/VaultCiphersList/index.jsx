@@ -62,8 +62,8 @@ class VaultCiphersList extends React.Component {
           {t('Depuis quel compte souhaitez-vous importer vos données ?')}
         </Title>
         <List disablePadding>
-          {ciphers.map((cipherView, index) => (
-            <ListItem key={index}>
+          {ciphers.map(cipherView => (
+            <ListItem key={cipherView.id}>
               <ListItemIcon>
                 <CipherIcon konnector={konnector} />
               </ListItemIcon>
