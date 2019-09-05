@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.10.0 (2019-09-05)
+
+
+### Features
+
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+
+
+
+
+
 ## [1.9.3](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.9.2...cozy-flags@1.9.3) (2019-07-19)
 
 **Note:** Version bump only for package cozy-flags

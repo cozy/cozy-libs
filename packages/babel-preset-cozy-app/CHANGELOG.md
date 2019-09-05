@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.7.0 (2019-09-05)
+
+
+### Features
+
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+
+
+
+
+
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.5.3...babel-preset-cozy-app@1.6.0) (2019-07-19)
 
 

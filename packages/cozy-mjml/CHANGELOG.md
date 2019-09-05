@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.9.0 (2019-09-05)
+
+
+### Features
+
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+
+
+
+
+
 ## [0.8.2](https://github.com/cozy/cozy-libs/compare/cozy-mjml@0.8.1...cozy-mjml@0.8.2) (2019-06-12)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.19.0 (2019-09-05)
+
+
+### Features
+
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+
+
+
+
+
 ## [1.18.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.18.1...cozy-authentication@1.18.2) (2019-09-04)
 
 **Note:** Version bump only for package cozy-authentication

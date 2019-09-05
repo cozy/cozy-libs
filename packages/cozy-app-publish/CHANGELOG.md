@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.19.0 (2019-09-05)
+
+
+### Features
+
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+
+
+
+
+
 ## [0.18.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.18.2...cozy-app-publish@0.18.3) (2019-08-27)
 
 **Note:** Version bump only for package cozy-app-publish

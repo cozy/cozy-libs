@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.3.0 (2019-09-05)
+
+
+### Features
+
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+
+
+
+
+
 ## [1.2.3](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@1.2.2...eslint-config-cozy-app@1.2.3) (2019-09-04)
 
 **Note:** Version bump only for package eslint-config-cozy-app

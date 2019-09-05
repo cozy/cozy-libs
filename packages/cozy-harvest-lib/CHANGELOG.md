@@ -3,6 +3,55 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2019-09-05)
+
+
+### Bug Fixes
+
+* Add a few TODOs ([3e031ae](https://github.com/cozy/cozy-libs/commit/3e031ae))
+* Add ids to fields ([e073420](https://github.com/cozy/cozy-libs/commit/e073420))
+* Bind dismiss action ([22ba24e](https://github.com/cozy/cozy-libs/commit/22ba24e))
+* Clean remove console ([e7bad0c](https://github.com/cozy/cozy-libs/commit/e7bad0c))
+* Display content only if no error ([4abb82b](https://github.com/cozy/cozy-libs/commit/4abb82b))
+* Display KonnectorHeader only if error or loading ([a355dd4](https://github.com/cozy/cozy-libs/commit/a355dd4))
+* Display spinner also on konnectorConfig ([988d0a5](https://github.com/cozy/cozy-libs/commit/988d0a5))
+* Erroneous proptypes ([786e44e](https://github.com/cozy/cozy-libs/commit/786e44e))
+* Few issues ([bad93e0](https://github.com/cozy/cozy-libs/commit/bad93e0))
+* Handle account change and loadSelectedAccount ([800f038](https://github.com/cozy/cozy-libs/commit/800f038))
+* KonnectorUpdate ([94a167b](https://github.com/cozy/cozy-libs/commit/94a167b))
+* Lint ([7baa843](https://github.com/cozy/cozy-libs/commit/7baa843))
+* Missing translations ([8626e34](https://github.com/cozy/cozy-libs/commit/8626e34))
+* Redirection after account creation ([2b37bee](https://github.com/cozy/cozy-libs/commit/2b37bee))
+* Rename component ([acbde7b](https://github.com/cozy/cozy-libs/commit/acbde7b))
+* Rename trigger to initialTrigger ([969a3b3](https://github.com/cozy/cozy-libs/commit/969a3b3))
+* Set error in state ([f0f4c2c](https://github.com/cozy/cozy-libs/commit/f0f4c2c))
+* Test only test/ and move spec to it ([ff0174c](https://github.com/cozy/cozy-libs/commit/ff0174c))
+* TriggerLauncher Test ([9272c95](https://github.com/cozy/cozy-libs/commit/9272c95))
+* Use client instead of cozyclient + rm few logs ([f585245](https://github.com/cozy/cozy-libs/commit/f585245))
+* Use ellipsis instead of MidEllipsis since there is a bug ([cd76f67](https://github.com/cozy/cozy-libs/commit/cd76f67))
+* Wrong import ([0a6506a](https://github.com/cozy/cozy-libs/commit/0a6506a))
+
+
+### Features
+
+* Add a KonnectorModalHeader component ([46f146e](https://github.com/cozy/cozy-libs/commit/46f146e))
+* Add account route ([7986708](https://github.com/cozy/cozy-libs/commit/7986708))
+* Design for EditAccountModal ([95a0fe6](https://github.com/cozy/cozy-libs/commit/95a0fe6))
+* Display erro ([e66fbdc](https://github.com/cozy/cozy-libs/commit/e66fbdc))
+* Display error message on AccountModal ([b66d3bc](https://github.com/cozy/cozy-libs/commit/b66d3bc))
+* Move Routes to component ([61a76a6](https://github.com/cozy/cozy-libs/commit/61a76a6))
+* New account modal ([55bf109](https://github.com/cozy/cozy-libs/commit/55bf109))
+* New design for KonnectorConfiguration with Card ([957a44f](https://github.com/cozy/cozy-libs/commit/957a44f))
+* New Edit Account Modal ([3e2be41](https://github.com/cozy/cozy-libs/commit/3e2be41))
+* RealTime on trigger/job ([9815a53](https://github.com/cozy/cozy-libs/commit/9815a53))
+* Redirect to new if no account ([30b07b5](https://github.com/cozy/cozy-libs/commit/30b07b5))
+* Use realtime everywhere ([9fd0a2f](https://github.com/cozy/cozy-libs/commit/9fd0a2f))
+* **cozy-harvest-lib:** Handle routes ([9f52bca](https://github.com/cozy/cozy-libs/commit/9f52bca))
+
+
+
+
+
 ## [1.1.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.1.2...cozy-harvest-lib@1.1.3) (2019-09-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
