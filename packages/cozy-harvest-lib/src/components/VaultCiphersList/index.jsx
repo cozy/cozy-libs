@@ -1,9 +1,8 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import { withVaultClient, CipherType } from 'cozy-keys-lib'
-import Text, { Title, Caption } from 'cozy-ui/transpiled/react/Text'
-import Icon from 'cozy-ui/transpiled/react/Icon'
+import { Title } from 'cozy-ui/transpiled/react/Text'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
@@ -46,12 +45,19 @@ class VaultCiphersList extends React.Component {
   }
 
   render() {
-    // TODO handle loading
     const { t, konnector } = this.props
-    const { ciphers } = this.state
+    const { ciphers, loading } = this.state
+
+    if (loading) {
+      return (
+        <div className="u-flex u-flex-justify-center">
+          <Spinner size="xxlarge" />
+        </div>
+      )
+    }
 
     return (
-      <div>
+      <>
         <Title>
           {t('Depuis quel compte souhaitez-vous importer vos données ?')}
         </Title>
@@ -73,7 +79,7 @@ class VaultCiphersList extends React.Component {
             <ListItemText primaryText={t('Depuis un autre compte…')} />
           </ListItem>
         </List>
-      </div>
+      </>
     )
   }
 }
