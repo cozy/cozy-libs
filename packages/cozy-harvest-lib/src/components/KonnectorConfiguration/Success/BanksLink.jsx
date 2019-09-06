@@ -1,15 +1,29 @@
 import React, { Component } from 'react'
-
+import PropTypes from 'prop-types'
 import AppLinker from 'cozy-ui/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/react/Button'
 import { queryConnect } from 'cozy-client'
-import { getStoreUrltoInstallAnApp } from '../../../helpers/apps'
+import {
+  getStoreUrltoInstallAnApp,
+  isAppIsInstalled,
+  getUrlForApp
+} from '../../../helpers/apps'
 import withLocales from '../../hoc/withLocales'
+
 class BanksLinkRedirectStore extends Component {
   render() {
     const { apps, t } = this.props
     if (apps.fetchStatus === 'loaded') {
-      const url = getStoreUrltoInstallAnApp(apps.data, { slug: 'banks' })
+      const banksApp = {
+        slug: 'banks'
+      }
+      let url = ''
+      const banksInstalled = isAppIsInstalled(apps.data, banksApp)
+      if (banksInstalled) {
+        url = getUrlForApp(banksInstalled)
+      } else {
+        url = getStoreUrltoInstallAnApp(apps.data, { slug: 'banks' })
+      }
 
       return (
         <AppLinker slug="banks" href={url}>
@@ -26,8 +40,21 @@ class BanksLinkRedirectStore extends Component {
         </AppLinker>
       )
     }
-    return null
+    return (
+      <ButtonLink
+        icon="openwith"
+        label={t('account.success.banksLinkText', {
+          appName: name
+        })}
+        busy
+        subtle
+      />
+    )
   }
+}
+BanksLinkRedirectStore.propTypes = {
+  apps: PropTypes.array.isRequired,
+  t: PropTypes.func.isRequired
 }
 const ConnectedBanksLinkRedirectStore = queryConnect({
   apps: {
@@ -36,28 +63,4 @@ const ConnectedBanksLinkRedirectStore = queryConnect({
   }
 })(withLocales(BanksLinkRedirectStore))
 
-const BanksLink = withLocales(({ banksUrl, t }) =>
-  banksUrl ? (
-    <AppLinker slug="banks" href={banksUrl}>
-      {({ href, onClick, name }) => (
-        <ButtonLink
-          target="_top"
-          icon="openwith"
-          href={href}
-          onClick={onClick}
-          label={t('account.success.banksLinkText', {
-            appName: name
-          })}
-          subtle
-        />
-      )}
-    </AppLinker>
-  ) : (
-    /**
-     * TODO AppLinker vers le store
-     */
-    <ConnectedBanksLinkRedirectStore />
-  )
-)
-
-export default BanksLink
+export default ConnectedBanksLinkRedirectStore
