@@ -1,12 +1,42 @@
-/* global cozy */
-
-import React from 'react'
+import React, { Component } from 'react'
 
 import AppLinker from 'cozy-ui/react/AppLinker'
-import { translate } from 'cozy-ui/react/I18n'
 import { ButtonLink } from 'cozy-ui/react/Button'
+import { queryConnect } from 'cozy-client'
+import { getStoreUrltoInstallAnApp } from '../../../helpers/apps'
+import withLocales from '../../hoc/withLocales'
+class BanksLinkRedirectStore extends Component {
+  render() {
+    const { apps, t } = this.props
+    if (apps.fetchStatus === 'loaded') {
+      const url = getStoreUrltoInstallAnApp(apps.data, { slug: 'banks' })
 
-const BanksLink = translate()(({ banksUrl, t }) =>
+      return (
+        <AppLinker slug="banks" href={url}>
+          {({ href, name }) => (
+            <ButtonLink
+              icon="openwith"
+              href={href}
+              label={t('account.success.banksLinkText', {
+                appName: name
+              })}
+              subtle
+            />
+          )}
+        </AppLinker>
+      )
+    }
+    return null
+  }
+}
+const ConnectedBanksLinkRedirectStore = queryConnect({
+  apps: {
+    query: client => client.all('io.cozy.apps'),
+    as: 'apps'
+  }
+})(withLocales(BanksLinkRedirectStore))
+
+const BanksLink = withLocales(({ banksUrl, t }) =>
   banksUrl ? (
     <AppLinker slug="banks" href={banksUrl}>
       {({ href, onClick, name }) => (
@@ -15,7 +45,7 @@ const BanksLink = translate()(({ banksUrl, t }) =>
           icon="openwith"
           href={href}
           onClick={onClick}
-          label={t('modal.account.success.banksLinkText', {
+          label={t('account.success.banksLinkText', {
             appName: name
           })}
           subtle
@@ -26,16 +56,7 @@ const BanksLink = translate()(({ banksUrl, t }) =>
     /**
      * TODO AppLinker vers le store
      */
-    <ButtonLink
-      icon="openwith"
-      onClick={() =>
-        cozy.client.intents.redirect('io.cozy.apps', { slug: 'banks' }, url => {
-          window.top.location.href = url
-        })
-      }
-      label={t('modal.account.success.banksLinkText')}
-      subtle
-    />
+    <ConnectedBanksLinkRedirectStore />
   )
 )
 

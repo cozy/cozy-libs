@@ -5,7 +5,7 @@ import { Query } from 'cozy-client'
 import AppLinker from 'cozy-ui/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/react/Button'
 
-import { getStoreUrltoUpdateKonnector } from '../helpers/apps'
+import { getStoreUrltoInstallAnApp } from '../helpers/apps'
 
 const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
   <ButtonLink
@@ -25,10 +25,7 @@ export class KonnectorUpdateLinker extends PureComponent {
       <Query query={client => client.all('io.cozy.apps')}>
         {({ data, fetchStatus }) => {
           const isLoaded = fetchStatus === 'loaded'
-          const konnectorUpdateUrl = getStoreUrltoUpdateKonnector(
-            data,
-            konnector
-          )
+          const konnectorUpdateUrl = getStoreUrltoInstallAnApp(data, konnector)
           const isReady = isLoaded && konnectorUpdateUrl
           if (isReady) {
             return (

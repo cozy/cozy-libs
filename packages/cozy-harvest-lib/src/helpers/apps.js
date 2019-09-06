@@ -1,15 +1,15 @@
 const STORE_SLUG = 'store'
 
 /**
- * Return Store URL where a konnector can be updated
+ * Return Store URL where an app/konnector can be installed / updated
  * @param  {Array}  [appData=[]]   Apps data, as returned by endpoint /apps/ or
  * /konnectors/
- * @param  {Object} [konnector={}] KonnectorObject
+ * @param  {Object} [app={}] KonnectorObject
  * @return {String}                URL as string
  */
-export const getStoreUrltoUpdateKonnector = (appData = [], konnector = {}) => {
-  if (!konnector.slug) {
-    throw new Error('Expected Konnector with defined slug')
+export const getStoreUrltoInstallAnApp = (appData = [], app = {}) => {
+  if (!app.slug) {
+    throw new Error('Expected app / konnector with defined slug')
   }
 
   const storeApp = appData.find(
@@ -21,9 +21,9 @@ export const getStoreUrltoUpdateKonnector = (appData = [], konnector = {}) => {
 
   if (!storeUrl) return null
 
-  return `${storeUrl}#/discover/${konnector.slug}/install`
+  return `${storeUrl}#/discover/${app.slug}/install`
 }
 
 export default {
-  getStoreUrltoUpdateKonnector
+  getStoreUrltoInstallAnApp
 }
