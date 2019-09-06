@@ -115,7 +115,7 @@ KonnectorSuccess.apps = {
           label={successButtonLabel || t('account.success.button')}
           onClick={event => {
             event.preventDefault()
-            props.history.push('../')
+            props.onDismiss()
           }}
         />
       )
@@ -148,9 +148,9 @@ KonnectorSuccess.propTypes = {
   accountId: PropTypes.string.isRequired,
   accounts: PropTypes.object.isRequired,
   successButtonLabel: PropTypes.string,
-  trigger: PropTypes.object.isRequired,
   konnector: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  onDismiss: PropTypes.func.isRequired
 }
 
 export { SuccessImage, SuccessLinks, BanksLink, DriveLink }
