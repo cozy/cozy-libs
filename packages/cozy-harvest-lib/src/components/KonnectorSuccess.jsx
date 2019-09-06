@@ -11,7 +11,7 @@ import Button from 'cozy-ui/react/Button'
 import withLocales from './hoc/withLocales'
 import TriggerFolderLink from './TriggerFolderLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
-import connectingIllu from 'assets/images/connecting-data-in-progress.svg'
+import connectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
 
 const SuccessImage = () => (
@@ -142,7 +142,7 @@ KonnectorSuccess.apps = {
 
 KonnectorSuccess.propTypes = {
   accountId: PropTypes.string.isRequired,
-  accounts: PropTypes.object.isRequired,
+  accounts: PropTypes.array.isRequired,
   successButtonLabel: PropTypes.string,
   konnector: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
