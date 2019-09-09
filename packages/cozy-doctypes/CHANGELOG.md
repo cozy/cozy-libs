@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.65.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.64.0...cozy-doctypes@1.65.0) (2019-09-09)
+
+
+### Features
+
+* Add methods to Application Doctype ([eed8f28](https://github.com/cozy/cozy-libs/commit/eed8f28))
+
+
+
+
+
 # 1.64.0 (2019-09-05)
 
 
