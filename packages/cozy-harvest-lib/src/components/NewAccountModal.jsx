@@ -2,11 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import { withClient } from 'cozy-client'
+import cx from 'classnames'
+import compose from 'lodash/flowRight'
 
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
+import { ModalContent, ModalHeader } from 'cozy-ui/transpiled/react/Modal'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import TriggerManager from '../components/TriggerManager'
-import KonnectorModalHeader from './KonnectorModalHeader'
+import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
@@ -17,15 +20,25 @@ import useMaintenanceStatus from './hooks/useMaintenanceStatus'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, history, client }) => {
+const NewAccountModal = ({
+  konnector,
+  history,
+  client,
+  breakpoints: { isMobile }
+}) => {
   const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
   const isInMaintenance = maintenanceStatus.isInMaintenance
   const maintenanceMessages = maintenanceStatus.messages
 
   return (
     <>
-      <KonnectorModalHeader konnector={konnector} />
-      <ModalContent>
+      <ModalHeader className="u-pr-2 u-mb-1">
+        <KonnectorIcon
+          konnector={konnector}
+          className="u-db u-w-3 u-h-3 u-ml-auto u-mr-auto"
+        />
+      </ModalHeader>
+      <ModalContent className={cx({ 'u-ph-1': isMobile })}>
         {isInMaintenance ? (
           <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
         ) : (
@@ -51,4 +64,8 @@ NewAccountModal.propTypes = {
   history: PropTypes.object.isRequired
 }
 
-export default withRouter(withClient(NewAccountModal))
+export default compose(
+  withBreakpoints(),
+  withRouter,
+  withClient
+)(NewAccountModal)
