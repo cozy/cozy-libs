@@ -22,7 +22,6 @@ exports[`AccountField render a date field 1`] = `
     placeholder="fields.date.placeholder"
     size="medium"
     type="date"
-    value=""
   />
 </div>
 `;
@@ -145,10 +144,8 @@ exports[`AccountField render a password field 1`] = `
     name="passphrase"
     placeholder="fields.passphrase.placeholder"
     showLabel="accountForm.password.show"
-    showVisibilityButton={true}
     size="medium"
     type="password"
-    value=""
   />
 </div>
 `;
@@ -175,7 +172,6 @@ exports[`AccountField should render 1`] = `
     placeholder="fields.username.placeholder"
     size="medium"
     type="text"
-    value=""
   />
 </div>
 `;
