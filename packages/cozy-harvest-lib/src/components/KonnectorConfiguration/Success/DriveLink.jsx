@@ -14,12 +14,13 @@ export class DriveLink extends PureComponent {
         hasDrive = true
       }
     }
-    const href =
-      hasDrive && `${driveQuery.data[0].links.related}#/files/${folderId}`
+    const href = hasDrive
+      ? `${driveQuery.data[0].links.related}#/files/${folderId}`
+      : undefined
 
     return (
       <ButtonLink
-        href={href ? href : undefined}
+        href={href}
         target="_parent"
         disabled={!hasDrive}
         subtle

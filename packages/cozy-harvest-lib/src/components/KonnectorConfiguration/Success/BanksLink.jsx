@@ -3,11 +3,9 @@ import PropTypes from 'prop-types'
 import AppLinker from 'cozy-ui/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/react/Button'
 import { queryConnect } from 'cozy-client'
-import {
-  getStoreUrltoInstallAnApp,
-  isAppInstalled,
-  getUrlForApp
-} from '../../../helpers/apps'
+
+import { Application } from 'cozy-doctypes'
+
 import withLocales from '../../hoc/withLocales'
 
 class BanksLinkRedirectStore extends Component {
@@ -18,11 +16,11 @@ class BanksLinkRedirectStore extends Component {
         slug: 'banks'
       }
       let url = ''
-      const banksInstalled = isAppInstalled(apps.data, banksApp)
+      const banksInstalled = Application.isInstalled(apps.data, banksApp)
       if (banksInstalled) {
-        url = getUrlForApp(banksInstalled)
+        url = Application.getUrl(banksInstalled)
       } else {
-        url = getStoreUrltoInstallAnApp(apps.data, banksApp)
+        url = Application.getStoreInstallationURL(apps.data, banksApp)
       }
 
       return (
