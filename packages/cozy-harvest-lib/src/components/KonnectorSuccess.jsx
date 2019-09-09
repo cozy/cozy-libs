@@ -18,10 +18,6 @@ const SuccessImage = () => (
   <img src={connectingIllu} className={'u-w-4 u-h-4'} />
 )
 
-const SuccessLinks = ({ children }) => <p className={'u-mv-half'}>{children}</p>
-
-const SuccessFooter = withLocales(({ children }) => children)
-
 const DescriptionContent = ({ title, message, children }) => {
   return (
     <>
@@ -64,21 +60,21 @@ export class KonnectorSuccess extends Component {
             message={t('account.success.connect')}
           >
             {hasLinks && (
-              <SuccessLinks>
+              <p className={'u-mv-half'}>
                 {relatedApps.map((app, i) =>
                   // Should always pass context, since it's used for customisation
                   app.successLink(this.state, this.props, this.context, i)
                 )}
-              </SuccessLinks>
+              </p>
             )}
           </DescriptionContent>
 
-          <SuccessFooter>
+          <>
             {relatedApps.length > 0
               ? // Should always pass context, since it's used for customisation
                 relatedApps[0].footerLink(this.state, this.props, this.context)
               : null}
-          </SuccessFooter>
+          </>
         </div>
       </ModalContent>
     )
@@ -142,6 +138,6 @@ KonnectorSuccess.propTypes = {
   onDismiss: PropTypes.func.isRequired
 }
 
-export { SuccessImage, SuccessLinks, BanksLink, DriveLink }
+export { SuccessImage, BanksLink, DriveLink }
 
 export default withRouter(withLocales(KonnectorSuccess))
