@@ -5,7 +5,7 @@ import { ButtonLink } from 'cozy-ui/react/Button'
 import { queryConnect } from 'cozy-client'
 import {
   getStoreUrltoInstallAnApp,
-  isAppIsInstalled,
+  isAppInstalled,
   getUrlForApp
 } from '../../../helpers/apps'
 import withLocales from '../../hoc/withLocales'
@@ -18,7 +18,7 @@ class BanksLinkRedirectStore extends Component {
         slug: 'banks'
       }
       let url = ''
-      const banksInstalled = isAppIsInstalled(apps.data, banksApp)
+      const banksInstalled = isAppInstalled(apps.data, banksApp)
       if (banksInstalled) {
         url = getUrlForApp(banksInstalled)
       } else {

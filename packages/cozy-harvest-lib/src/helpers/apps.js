@@ -12,7 +12,7 @@ export const getStoreUrltoInstallAnApp = (appData = [], app = {}) => {
     throw new Error('Expected app / konnector with defined slug')
   }
 
-  const storeApp = isAppIsInstalled(appData, { slug: STORE_SLUG })
+  const storeApp = isAppInstalled(appData, { slug: STORE_SLUG })
   if (!storeApp) return null
 
   const storeUrl = storeApp.links && storeApp.links.related
@@ -28,7 +28,7 @@ export const getStoreUrltoInstallAnApp = (appData = [], app = {}) => {
  * @param {Object} wantedApp io.cozy.app with at least a slug
  * @return {Object} The io.cozy.app is installed or undefined if not
  */
-export const isAppIsInstalled = (apps = [], wantedApp = {}) => {
+export const isAppInstalled = (apps = [], wantedApp = {}) => {
   return apps.find(
     app => app.attributes && app.attributes.slug === wantedApp.slug
   )

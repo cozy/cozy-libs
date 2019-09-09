@@ -14,9 +14,7 @@ import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import connectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
 
-const SuccessImage = () => (
-  <img src={connectingIllu} className={'u-w-4 u-h-4'} />
-)
+const SuccessImage = () => <img src={connectingIllu} className="u-w-4 u-h-4" />
 
 const DescriptionContent = ({ title, message, children }) => {
   return (
@@ -53,14 +51,14 @@ export class KonnectorSuccess extends Component {
 
     return (
       <ModalContent>
-        <div className={'u-ta-center'}>
+        <div className="u-ta-center">
           <SuccessImage />
           <DescriptionContent
             title={t('account.success.title')}
             message={t('account.success.connect')}
           >
             {hasLinks && (
-              <p className={'u-mv-half'}>
+              <p className="u-mv-half">
                 {relatedApps.map((app, i) =>
                   // Should always pass context, since it's used for customisation
                   app.successLink(this.state, this.props, this.context, i)
