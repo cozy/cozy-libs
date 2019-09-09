@@ -8,6 +8,7 @@ import AccountsListModal from './AccountsListModal'
 import AccountModal from './AccountModal'
 import NewAccountModal from './NewAccountModal'
 import EditAccountModal from './EditAccountModal'
+import KonnectorSuccess from './KonnectorSuccess'
 
 const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
   <Modal dismissAction={onDismiss} mobileFullscreen size="small">
@@ -48,6 +49,20 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
             path={`${konnectorRoot}/new`}
             exact
             render={() => <NewAccountModal konnector={konnector} />}
+          />
+          <Route
+            path={`${konnectorRoot}/accounts/:accountId/success`}
+            exact
+            render={({ match }) => {
+              return (
+                <KonnectorSuccess
+                  konnector={konnector}
+                  accountId={match.params.accountId}
+                  accounts={accounts}
+                  onDismiss={onDismiss}
+                />
+              )
+            }}
           />
           {/* TODO redirect render twice the component */}
           <Redirect

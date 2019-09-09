@@ -25,11 +25,11 @@ class NewAccountModal extends Component {
             konnector={konnector}
             onLoginSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
-              history.push(`../accounts/${accountId}`)
+              history.push(`../accounts/${accountId}/success`)
             }}
             onSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
-              history.push(`../accounts/${accountId}`)
+              history.push(`../accounts/${accountId}/success`)
             }}
           />
         </ModalContent>
