@@ -45,7 +45,7 @@ class VaultCiphersList extends React.Component {
   }
 
   render() {
-    const { t, konnector } = this.props
+    const { t, konnector, onSelect } = this.props
     const { ciphers, loading } = this.state
 
     if (loading) {
@@ -75,7 +75,7 @@ class VaultCiphersList extends React.Component {
             </ListItem>
           ))}
 
-          <ListItem>
+          <ListItem onClick={onSelect}>
             <ListItemText primaryText={t('Depuis un autre compte…')} />
           </ListItem>
         </List>
