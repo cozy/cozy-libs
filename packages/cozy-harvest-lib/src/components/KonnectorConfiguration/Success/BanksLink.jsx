@@ -22,7 +22,7 @@ class BanksLinkRedirectStore extends Component {
       if (banksInstalled) {
         url = getUrlForApp(banksInstalled)
       } else {
-        url = getStoreUrltoInstallAnApp(apps.data, { slug: 'banks' })
+        url = getStoreUrltoInstallAnApp(apps.data, banksApp)
       }
 
       return (

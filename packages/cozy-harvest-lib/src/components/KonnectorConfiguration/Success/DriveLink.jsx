@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react'
-
+import PropTypes from 'prop-types'
 import { ButtonLink } from 'cozy-ui/react/Button'
-
 import { queryConnect } from 'cozy-client'
 
-export class TriggerFolderLink extends PureComponent {
+import withLocales from '../../hoc/withLocales'
+
+export class DriveLink extends PureComponent {
   render() {
-    const { label, folderId, driveQuery } = this.props
+    const { folderId, driveQuery, t } = this.props
     let hasDrive = false
     if (driveQuery.fetchStatus === 'loaded') {
       if (driveQuery.data.length > 0) {
@@ -16,29 +17,27 @@ export class TriggerFolderLink extends PureComponent {
     const href =
       hasDrive && `${driveQuery.data[0].links.related}#/files/${folderId}`
 
-    return href ? (
+    return (
       <ButtonLink
-        href={href}
+        href={href ? href : undefined}
         target="_parent"
+        disabled={!hasDrive}
         subtle
         icon="openwith"
-        label={label}
-      />
-    ) : (
-      <ButtonLink
-        subtle
-        disabled
-        className={'u-silver u-c-not-allowed'}
-        icon="openwith"
-        label={label}
+        label={t('account.success.driveLinkText')}
       />
     )
   }
 }
 
+DriveLink.propTypes = {
+  t: PropTypes.func.isRequired,
+  folderId: PropTypes.string.isRequired,
+  driveQuery: PropTypes.object.isRequired
+}
 export default queryConnect({
   driveQuery: {
     query: client => client.all('io.cozy.apps').where({ slug: 'drive' }),
     as: 'driveQuery'
   }
-})(TriggerFolderLink)
+})(withLocales(DriveLink))

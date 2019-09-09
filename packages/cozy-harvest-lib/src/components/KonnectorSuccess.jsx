@@ -9,7 +9,7 @@ import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 
 import Button from 'cozy-ui/react/Button'
 import withLocales from './hoc/withLocales'
-import TriggerFolderLink from './TriggerFolderLink'
+import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import connectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
@@ -19,13 +19,6 @@ const SuccessImage = () => (
 )
 
 const SuccessLinks = ({ children }) => <p className={'u-mv-half'}>{children}</p>
-
-const DriveLink = withLocales(({ folderId, t }) => (
-  <TriggerFolderLink
-    folderId={folderId}
-    label={t('account.success.driveLinkText')}
-  />
-))
 
 const SuccessFooter = withLocales(({ children }) => children)
 
