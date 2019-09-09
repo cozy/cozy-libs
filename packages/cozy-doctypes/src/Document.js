@@ -565,6 +565,38 @@ class Document {
     const rows = resp.rows.filter(row => row.doc)
     return rows.map(row => row.doc)
   }
+
+  /**
+   * Returns the changes or all documents. If we want to fetch all changes, it is
+   * more efficient to fetch all the documents, because we don't have to check the
+   * whole history of each document.
+   *
+   * @param {string} lastSeq - The lastSeq from which you want to fetch the changes. If you give '0', then all documents will be fetched
+   *
+   * @return {Object} an object containing the `documents` and the `newLastSeq`
+   */
+  static async fetchChangesOrAll(lastSeq) {
+    if (lastSeq === '0') {
+      // If we want to fetch all changes, it is more efficient to fetch all the
+      // documents. But we still need to return a `lastSeq` just as if we really
+      // fetched changes. So we fetch only the very last change to have the
+      // lastSeq.
+      // This should be done first to avoid a race condition: if we fetch all
+      // documents then fetch the last change, a document could have been created
+      // between the two, and it will not be part of the documents returned. Since
+      // the lastSeq includes it, it will not be returned next time either.
+      const lastChanges = await this.fetchChanges('', {
+        descending: true,
+        limit: 1
+      })
+
+      const documents = await this.fetchAll()
+
+      return { documents, newLastSeq: lastChanges.newLastSeq }
+    } else {
+      return this.fetchChanges(lastSeq)
+    }
+  }
 }
 
 module.exports = Document

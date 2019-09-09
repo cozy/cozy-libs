@@ -662,6 +662,35 @@ describe('Document used with CozyClient', () => {
       )
     })
   })
+
+  describe('fetchChangesOrAll', () => {
+    class Model extends Document {}
+    Model.fetchChanges = jest.fn().mockResolvedValue({ newLastSeq: '1234' })
+    Model.fetchAll = jest.fn()
+
+    afterEach(() => {
+      Model.fetchChanges.mockClear()
+      Model.fetchAll.mockClear()
+    })
+
+    it('should return all documents if lastSeq is "0"', async () => {
+      await Model.fetchChangesOrAll('0')
+
+      expect(Model.fetchChanges).toHaveBeenCalledWith('', {
+        descending: true,
+        limit: 1
+      })
+
+      expect(Model.fetchAll).toHaveBeenCalled()
+    })
+
+    it('should return changes if lastSeq is not "0"', async () => {
+      await Model.fetchChangesOrAll('abcd')
+
+      expect(Model.fetchChanges).toHaveBeenCalledWith('abcd')
+      expect(Model.fetchAll).not.toHaveBeenCalled()
+    })
+  })
 })
 
 describe('copyWithClient', () => {
