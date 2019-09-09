@@ -10,9 +10,9 @@ import KonnectorSuccess, {
 describe('KonnectorSuccess', () => {
   let root
 
-  const setup = ({ isBanksKonnector, folder_to_save } = {}) => {
+  const setup = ({ isBankingKonnector, folder_to_save } = {}) => {
     const client = new CozyClient({})
-    const konnector = isBanksKonnector
+    const konnector = isBankingKonnector
       ? {
           name: 'test-konnector',
           vendor_link: 'test konnector link',
@@ -61,7 +61,7 @@ describe('KonnectorSuccess', () => {
   })
 
   it('should show banks if connector has datatypes with bankAccounts', () => {
-    setup({ isBanksKonnector: true })
+    setup({ isBankingKonnector: true })
     expect(root.find(DriveLink).length).toBe(0)
     expect(root.find(BanksLink).length).toBe(1)
   })
