@@ -1,11 +1,11 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
+import cx from 'classnames'
+import compose from 'lodash/flowRight'
 
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Stack from 'cozy-ui/transpiled/react/Stack'
-import flow from 'lodash/flow'
+import { ModalContent, ModalHeader } from 'cozy-ui/transpiled/react/Modal'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import TriggerManager from '../components/TriggerManager'
 import KonnectorIcon from './KonnectorIcon'
@@ -20,7 +20,7 @@ import { MountPointContext } from './MountPointContext'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, client, t }) => {
+const NewAccountModal = ({ konnector, client, breakpoints: { isMobile } }) => {
   const { pushHistory } = useContext(MountPointContext)
   const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
   const isInMaintenance = maintenanceStatus.isInMaintenance
@@ -28,15 +28,13 @@ const NewAccountModal = ({ konnector, client, t }) => {
 
   return (
     <>
-      <ModalContent className="u-mh-2">
-        <Stack className="u-mb-3">
-          <div className="u-w-3 u-h-3 u-mh-auto">
-            <KonnectorIcon konnector={konnector} />
-          </div>
-          <h3 className="u-title-h3 u-ta-center">
-            {t('modal.addAccount.title', { name: konnector.name })}
-          </h3>
-        </Stack>
+      <ModalHeader className="u-pr-2 u-mb-1">
+        <KonnectorIcon
+          konnector={konnector}
+          className="u-db u-w-3 u-h-3 u-ml-auto u-mr-auto"
+        />
+      </ModalHeader>
+      <ModalContent className={cx({ 'u-ph-1': isMobile })}>
         {isInMaintenance ? (
           <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
         ) : (
@@ -61,7 +59,7 @@ NewAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired
 }
 
-export default flow(
-  translate(),
+export default compose(
+  withBreakpoints(),
   withClient
 )(NewAccountModal)
