@@ -383,5 +383,9 @@
     "tweet": "Your tweets",
     "videostream": "Your videos",
     "weight": "Your weights"
+  },
+  "vaultCiphersList": {
+    "title": "From which account do you want to import your data?",
+    "otherAccount": "From another account…"
   }
 }
