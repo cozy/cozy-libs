@@ -26,7 +26,6 @@ class VaultCiphersList extends React.Component {
     const konnectorURI = get(konnector, 'vendor_link')
 
     try {
-      await vaultClient.sync()
       const ciphers = await vaultClient.getAllDecrypted({
         type: CipherType.Login,
         uri: konnectorURI
