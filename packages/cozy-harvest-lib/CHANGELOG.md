@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.3.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.3.1...cozy-harvest-lib@1.3.2) (2019-09-10)
+
+
+### Bug Fixes
+
+* Use App doctypes ([7aa69b5](https://github.com/cozy/cozy-libs/commit/7aa69b5))
+
+
+
+
+
 ## [1.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.3.0...cozy-harvest-lib@1.3.1) (2019-09-09)
 
 **Note:** Version bump only for package cozy-harvest-lib
