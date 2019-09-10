@@ -7,6 +7,7 @@ import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import withLocales from './hoc/withLocales'
+
 import * as triggersModel from '../helpers/triggers'
 import * as jobsModel from '../helpers/jobs'
 import KonnectorJob, {
