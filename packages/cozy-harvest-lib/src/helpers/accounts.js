@@ -1,8 +1,6 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 
-import { CipherType } from 'cozy-keys-lib'
-
 import manifest from './manifest'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
@@ -114,42 +112,8 @@ export const mergeAuth = (account, authData) => ({
  * @param  {object} account   io.cozy.accounts document
  * @return {string}           cipher uuid
  */
-export const getVaultCipherId = (account) => account.relationships && account.relationships.vaultCipher && account.relationships.vaultCipher._id
-
-/**
- * Gets the linked cipher in vault
- * If none is linked, search on that match
- * @param account - io.cozy.accounts document
- * @param {WebVaultClient} vaultClient
- * @param {object} search criterias
- * @param {string} search.username
- * @param {string} search.password
- * @param {string} search.uri
- * @return {CipherView|null}
- */
-export const getVaultCipher = async (account, vaultClient, {username, password, uri}={}) => {
-  const id = getVaultCipherId(account)
-  if (id) {
-    // there is an explicit existing link
-    const cipher = await vaultClient.get(id)
-    if (cipher) return cipher
-  }
-  if (login && uri) {
-    // there is no link or the link is broken
-    // but there may be a existing cipher with the same credentials
-    const type = CipherType.Login
-    const search = { type, username, uri }
-    const all = vaultClient.getAllDecryptedFor(search)
-    if (all.length > 0) {
-      const all = all.find(v => v.login.password == password)
-      const first = all[0]
-      const id = (all || first).id
-      const cipher = await vaultClient.get(id)
-      return cipher
-    }
-  }
-  return null
-}
+export const getVaultCipherId = account =>
+  get(account, 'relationships.vaultCipher._id')
 
 /**
  * Adds or updates a vault cipher relationship to an account
@@ -221,6 +185,5 @@ export default {
   setSessionResetIfNecessary,
   updateTwoFaCode,
   setVaultCipherRelationship,
-  getVaultCipherId,
-  getVaultCipher
+  getVaultCipherId
 }
