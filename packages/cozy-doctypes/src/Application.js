@@ -13,7 +13,7 @@ class Application extends Document {
    */
   static getStoreInstallationURL(appData = [], app = {}) {
     if (!app.slug) {
-      throw new Error('Expected app / konnector withe defined slug')
+      throw new Error('Expected app / konnector with the defined slug')
     }
 
     const storeApp = this.isInstalled(appData, { slug: STORE_SLUG })
