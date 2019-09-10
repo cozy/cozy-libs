@@ -20,6 +20,7 @@ import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
+import BackButton from './BackButton'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -41,6 +42,7 @@ export class TriggerManager extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleCipherSelect = this.handleCipherSelect.bind(this)
+    this.showCiphersList = this.showCiphersList.bind(this)
 
     this.state = {
       account,
@@ -230,6 +232,12 @@ export class TriggerManager extends Component {
     })
   }
 
+  showCiphersList() {
+    this.setState({
+      step: 'ciphersList'
+    })
+  }
+
   render() {
     const {
       error: triggerError,
@@ -266,15 +274,17 @@ export class TriggerManager extends Component {
             />
           )}
           {step === 'accountForm' && (
-            // TODO add a back button to go back to ciphers list
-            <AccountForm
-              account={account}
-              error={error || triggerError}
-              konnector={konnector}
-              onSubmit={this.handleSubmit}
-              showError={showError}
-              submitting={submitting}
-            />
+            <>
+              <BackButton onClick={this.showCiphersList} />
+              <AccountForm
+                account={account}
+                error={error || triggerError}
+                konnector={konnector}
+                onSubmit={this.handleSubmit}
+                showError={showError}
+                submitting={submitting}
+              />
+            </>
           )}
         </VaultUnlocker>
       </div>
