@@ -7,7 +7,8 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import withLocales from '../hoc/withLocales'
 
 const OtherAccountListItem = props => {
-  const { t, onClick, className, ...rest } = props
+  // eslint-disable-next-line no-unused-vars
+  const { f, t, onClick, className, ...rest } = props
   return (
     <ListItem
       onClick={onClick}
