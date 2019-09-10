@@ -36,6 +36,7 @@ class VaultCiphersList extends React.Component {
       })
     } catch (error) {
       //TODO: do something
+      // eslint-disable-next-line no-console
       console.warn(error)
     } finally {
       this.setState({ loading: false })
