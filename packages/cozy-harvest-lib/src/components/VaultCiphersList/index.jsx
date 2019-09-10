@@ -5,12 +5,10 @@ import { Title } from 'cozy-ui/transpiled/react/Text'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/RaisedList'
-import ListItem from '@material-ui/core/ListItem'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 import withLocales from '../hoc/withLocales'
-import CipherIcon from './CipherIcon'
+import CiphersListItem from './CiphersListItem'
+import OtherAccountListItem from './OtherAccountListItem'
 
 class VaultCiphersList extends React.Component {
   state = {
@@ -63,21 +61,14 @@ class VaultCiphersList extends React.Component {
         </Title>
         <List>
           {ciphers.map(cipherView => (
-            <ListItem key={cipherView.id}>
-              <ListItemIcon>
-                <CipherIcon konnector={konnector} />
-              </ListItemIcon>
-              <ListItemText
-                // TODO what do we show if there is no URI ?
-                primaryText={get(cipherView, 'login.uris[0]._domain')}
-                secondaryText={get(cipherView, 'login.username')}
-              />
-            </ListItem>
+            <CiphersListItem
+              key={cipherView.id}
+              cipherView={cipherView}
+              konnector={konnector}
+            />
           ))}
 
-          <ListItem onClick={onSelect}>
-            <ListItemText primaryText={t('Depuis un autre compte…')} />
-          </ListItem>
+          <OtherAccountListItem onClick={onSelect} />
         </List>
       </>
     )
