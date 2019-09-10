@@ -5722,10 +5722,10 @@ cozy-device-helper@1.7.3:
   dependencies:
     lodash "4.17.13"
 
-cozy-keys-lib@^1.2.2:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.2.2.tgz#0ac3602cd9e12d0eb79eb7333bc5860fe354209e"
-  integrity sha512-FleZPCeqj66dUn0q0GRjEGbQvuxs5x0nVzP+jKJ4T8G9fMIwOVwUaWu/XjXVBnvFj6j9ddpOhK5g2J3s8hgzog==
+cozy-keys-lib@1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.2.3.tgz#72590a093870c308967d0e624b5ee272f00d5216"
+  integrity sha512-6LgCanDiYI0w7aVqAbXILc2+cr38fsdBfObpTciXb4VW3U3jHU1FIlt34HkHR3/kL8sXqJPgeOVbHzH6+PANoA==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
