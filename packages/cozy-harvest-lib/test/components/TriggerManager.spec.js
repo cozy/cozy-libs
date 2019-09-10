@@ -167,6 +167,11 @@ const fixtures = {
   }
 }
 
+const mockVaultClient = {
+  createNewCipher: jest.fn(),
+  saveCipher: jest.fn()
+}
+
 const addPermissionMock = jest.fn()
 const addReferencesToMock = jest.fn()
 const createTriggerMock = jest.fn()
@@ -186,7 +191,8 @@ const props = {
   statDirectoryByPath: statDirectoryByPathMock,
   saveAccount: saveAccountMock,
   launch: launchTriggerMock,
-  t: tMock
+  t: tMock,
+  vaultClient: mockVaultClient
 }
 
 const propsWithAccount = {
@@ -207,6 +213,7 @@ describe('TriggerManager', () => {
   beforeEach(() => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
+    mockVaultClient.createNewCipher.mockResolvedValue({ id: 'cipher-id-1' })
   })
 
   afterEach(() => {
@@ -294,43 +301,39 @@ describe('TriggerManager', () => {
       expect(wrapper.state().status).toEqual('RUNNING')
     })
 
-    it('should call saveAccount without account', () => {
+    it('should call saveAccount without account', async () => {
       const wrapper = shallowWithoutAccount()
-      wrapper.instance().handleSubmit(fixtures.data)
+      await wrapper.instance().handleSubmit(fixtures.data)
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
         expect.objectContaining(fixtures.account)
       )
     })
 
-    it('should call saveAccount with account (no password provided)', () => {
+    it('should call saveAccount with account (no password provided)', async () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleSubmit({ login: 'test' })
+      await wrapper.instance().handleSubmit({ login: 'test' })
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
         expect.objectContaining(fixtures.existingAccount)
       )
     })
 
-    it('should call saveAccount with account with RESET_SESSION state if passphrase changed', () => {
+    it('should call saveAccount with account with RESET_SESSION state if passphrase changed', async () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleSubmit(fixtures.data)
-      expect(saveAccountMock).toHaveBeenCalledWith(fixtures.konnector, {
-        ...fixtures.existingAccount,
-        state: 'RESET_SESSION'
-      })
+      await wrapper.instance().handleSubmit(fixtures.data)
+      expect(saveAccountMock).toHaveBeenCalled()
+      expect(saveAccountMock.mock.calls[0][1].state).toEqual('RESET_SESSION')
     })
 
-    it('should call saveAccount with account with RESET_SESSION state if password changed', () => {
+    it('should call saveAccount with account with RESET_SESSION state if password changed', async () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleSubmit({
+      await wrapper.instance().handleSubmit({
         login: 'foo',
         password: 'bar'
       })
-      expect(saveAccountMock).toHaveBeenCalledWith(fixtures.konnector, {
-        ...fixtures.existingAccount,
-        state: 'RESET_SESSION'
-      })
+      expect(saveAccountMock).toHaveBeenCalled()
+      expect(saveAccountMock.mock.calls[0][1].state).toEqual('RESET_SESSION')
     })
 
     it('should call handleNewAccount with account', async () => {
