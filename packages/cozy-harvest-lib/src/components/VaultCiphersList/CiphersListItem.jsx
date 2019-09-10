@@ -6,7 +6,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 
-import CipherIcon from './CipherIcon'
+import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
 
 const CiphersListItem = props => {
   const { cipherView, konnector, ...rest } = props
