@@ -24,7 +24,7 @@ const CiphersListItem = props => {
   )
 }
 
-CiphersListItem.PropTypes = {
+CiphersListItem.propTypes = {
   cipherView: PropTypes.object.isRequired,
   konnector: PropTypes.object.isRequired
 }
