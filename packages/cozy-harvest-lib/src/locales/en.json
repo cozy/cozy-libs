@@ -317,5 +317,9 @@
     },
     "retry": "Invalid code, please re-enter.",
     "CTA": "Validate"
+  },
+  "vaultCiphersList": {
+    "title": "From which account do you want to import your data?",
+    "otherAccount": "From another account…"
   }
 }

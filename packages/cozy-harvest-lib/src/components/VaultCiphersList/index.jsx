@@ -58,7 +58,7 @@ class VaultCiphersList extends React.Component {
     return (
       <>
         <Title className="u-ta-center u-mb-2">
-          {t('Depuis quel compte souhaitez-vous importer vos données ?')}
+          {t('vaultCiphersList.title')}
         </Title>
         <List>
           {ciphers.map(cipherView => (
