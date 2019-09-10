@@ -169,7 +169,8 @@ const fixtures = {
 
 const mockVaultClient = {
   createNewCipher: jest.fn(),
-  saveCipher: jest.fn()
+  saveCipher: jest.fn(),
+  getByIdOrSearch: jest.fn()
 }
 
 const addPermissionMock = jest.fn()

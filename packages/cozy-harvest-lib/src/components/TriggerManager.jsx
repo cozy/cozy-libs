@@ -5,7 +5,7 @@ import flow from 'lodash/flow'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
-import { VaultUnlocker, withVaultClient } from 'cozy-keys-lib'
+import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -145,16 +145,21 @@ export class TriggerManager extends Component {
       const konnectorURI = get(konnector, 'vendor_link')
       const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
 
-
       let originalCipher = null
-      if (isUpdate && konnectorURI) {
-        const search = { username: login, password, uri: konnectorURI }
-        originalCipher = await accounts.getVaultCipher(account, vaultClient, search)
+      if (isUpdate) {
+        const id = accounts.getVaultCipherId(account)
+        const search = {
+          username: login,
+          uri: konnectorURI,
+          type: CipherType.Login
+        }
+        const sort = [view => view.login.password === password, 'revisionDate']
+        originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
       }
 
       let cipherData
       if (originalCipher) {
-        cipherData = vaultClient.getData(originalCipher)
+        cipherData = await vaultClient.decrypt(originalCipher)
         cipherData.login.username = login
         cipherData.login.password = password
       } else {
@@ -170,7 +175,10 @@ export class TriggerManager extends Component {
         }
       }
 
-      const cipher = await vaultClient.createNewCipher(cipherData, originalCipher || null)
+      const cipher = await vaultClient.createNewCipher(
+        cipherData,
+        originalCipher || null
+      )
       await vaultClient.saveCipher(cipher)
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
