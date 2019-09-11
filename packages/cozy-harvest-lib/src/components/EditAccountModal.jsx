@@ -30,6 +30,8 @@ export class EditAccountModal extends Component {
       fetching: true,
       error: false
     }
+
+    this.redirectToAccount = this.redirectToAccount.bind(this)
   }
 
   componentDidMount() {
@@ -68,6 +70,10 @@ export class EditAccountModal extends Component {
         fetching: false
       })
     }
+  }
+
+  redirectToAccount() {
+    this.props.pushHistory(`/accounts/${this.state.account._id}`)
   }
 
   render() {
@@ -125,7 +131,8 @@ export class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
-              onSuccess={() => pushHistory(`/accounts/${account._id}`)}
+              onSuccess={this.redirectToAccount}
+              onVaultDismiss={this.redirectToAccount}
               showError={true}
             />
           )}
