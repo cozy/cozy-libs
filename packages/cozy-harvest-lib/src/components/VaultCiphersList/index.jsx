@@ -65,10 +65,11 @@ class VaultCiphersList extends React.Component {
               key={cipherView.id}
               cipherView={cipherView}
               konnector={konnector}
+              onClick={() => onSelect(cipherView)}
             />
           ))}
 
-          <OtherAccountListItem onClick={onSelect} />
+          <OtherAccountListItem onClick={() => onSelect(null)} />
         </List>
       </>
     )
