@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import { Query } from 'cozy-client'
-import AppLinker from 'cozy-ui/react/AppLinker'
-import { ButtonLink } from 'cozy-ui/react/Button'
+import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 
 import { getStoreUrltoUpdateKonnector } from '../helpers/apps'
 
