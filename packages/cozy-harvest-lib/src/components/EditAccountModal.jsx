@@ -30,9 +30,7 @@ export class EditAccountModal extends Component {
       error: false
     }
 
-    this.handleAccountEditJobSuccess = this.handleAccountEditJobSuccess.bind(
-      this
-    )
+    this.redirectToAccount = this.redirectToAccount.bind(this)
   }
 
   componentDidMount() {
@@ -73,7 +71,7 @@ export class EditAccountModal extends Component {
     }
   }
 
-  handleAccountEditJobSuccess() {
+  redirectToAccount() {
     this.props.history.push('../')
   }
 
@@ -131,7 +129,8 @@ export class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
-              onSuccess={this.handleAccountEditJobSuccess}
+              onSuccess={this.redirectToAccount}
+              onVaultDismiss={this.redirectToAccount}
               showError={true}
             />
           )}

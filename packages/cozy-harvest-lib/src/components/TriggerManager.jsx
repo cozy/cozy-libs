@@ -245,7 +245,8 @@ export class TriggerManager extends Component {
       running: triggerRunning,
       showError,
       modalContainerId,
-      t
+      t,
+      onVaultDismiss
     } = this.props
     const { account, error, status, step } = this.state
     const submitting = !!(status === RUNNING || triggerRunning)
@@ -266,7 +267,7 @@ export class TriggerManager extends Component {
 
     return (
       <div>
-        <VaultUnlocker>
+        <VaultUnlocker onDismiss={onVaultDismiss}>
           <div id={modalInto} />
           {step === 'ciphersList' && (
             <VaultCiphersList
@@ -375,7 +376,11 @@ TriggerManager.propTypes = {
    * Trigger mutations
    * @type {Function}
    */
-  statDirectoryByPath: PropTypes.func
+  statDirectoryByPath: PropTypes.func,
+  /**
+   * What to do when the Vault unlock screen is dismissed without password
+   */
+  onVaultDismiss: PropTypes.func.isRequired
 }
 
 const SmartTriggerManager = flow(
