@@ -7,18 +7,6 @@ exports[`TriggerManager handleError should render error 1`] = `
       id="coz-harvest-modal-place"
     />
     <Wrapper
-      account={
-        Object {
-          "_id": "61c683295560485db0f34b859197c581",
-          "account_type": "konnectest",
-          "auth": Object {
-            "passphrase": "bar",
-            "username": "foo",
-          },
-          "identifier": "username",
-        }
-      }
-      error={[Error: Test error]}
       konnector={
         Object {
           "fields": Object {
@@ -32,8 +20,7 @@ exports[`TriggerManager handleError should render error 1`] = `
           "slug": "konnectest",
         }
       }
-      onSubmit={[Function]}
-      submitting={false}
+      onSelect={[Function]}
     />
   </Wrapper>
 </div>
@@ -60,17 +47,6 @@ exports[`TriggerManager should render with account 1`] = `
       id="coz-harvest-modal-place"
     />
     <Wrapper
-      account={
-        Object {
-          "_id": "61c683295560485db0f34b859197c581",
-          "account_type": "konnectest",
-          "auth": Object {
-            "passphrase": "bar",
-            "username": "foo",
-          },
-          "identifier": "username",
-        }
-      }
       konnector={
         Object {
           "fields": Object {
@@ -84,8 +60,7 @@ exports[`TriggerManager should render with account 1`] = `
           "slug": "konnectest",
         }
       }
-      onSubmit={[Function]}
-      submitting={false}
+      onSelect={[Function]}
     />
   </Wrapper>
 </div>
@@ -111,8 +86,7 @@ exports[`TriggerManager should render without account 1`] = `
           "slug": "konnectest",
         }
       }
-      onSubmit={[Function]}
-      submitting={false}
+      onSelect={[Function]}
     />
   </Wrapper>
 </div>
