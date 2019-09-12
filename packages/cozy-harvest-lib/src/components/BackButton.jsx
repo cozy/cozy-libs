@@ -1,10 +1,9 @@
 import React from 'react'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import cx from 'classnames'
-import withLocales from './hoc/withLocales'
 
 const BackButton = props => {
-  const { className, t, ...rest } = props
+  const { className, children, ...rest } = props
 
   return (
     <button
@@ -15,9 +14,9 @@ const BackButton = props => {
       {...rest}
     >
       <Icon icon="left" className="u-mr-half" />
-      {t('Revenir à la liste')}
+      {children}
     </button>
   )
 }
 
-export default withLocales(BackButton)
+export default BackButton
