@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
+import cx from 'classnames'
 
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
+import { ModalContent, ModalHeader } from 'cozy-ui/transpiled/react/Modal'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import TriggerManager from '../components/TriggerManager'
-import KonnectorModalHeader from './KonnectorModalHeader'
+import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 
 /**
@@ -16,11 +18,20 @@ import * as triggersModel from '../helpers/triggers'
  */
 class NewAccountModal extends Component {
   render() {
-    const { konnector, history } = this.props
+    const {
+      konnector,
+      history,
+      breakpoints: { isMobile }
+    } = this.props
     return (
       <>
-        <KonnectorModalHeader konnector={konnector} />
-        <ModalContent>
+        <ModalHeader className="u-pr-2 u-mb-1">
+          <KonnectorIcon
+            konnector={konnector}
+            className="u-db u-w-3 u-h-3 u-ml-auto u-mr-auto"
+          />
+        </ModalHeader>
+        <ModalContent className={cx({ 'u-ph-1': isMobile })}>
           <TriggerManager
             konnector={konnector}
             onLoginSuccess={trigger => {
@@ -43,4 +54,4 @@ NewAccountModal.propTypes = {
   history: PropTypes.object.isRequired
 }
 
-export default withRouter(NewAccountModal)
+export default withBreakpoints()(withRouter(NewAccountModal))

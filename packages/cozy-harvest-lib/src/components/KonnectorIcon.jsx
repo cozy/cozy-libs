@@ -13,7 +13,9 @@ class KonnectorIcon extends PureComponent {
   }
 
   render() {
-    return <AppIcon fetchIcon={this.fetchIcon.bind(this)} />
+    // eslint-disable-next-line no-unused-vars
+    const { konnector, client, ...rest } = this.props
+    return <AppIcon {...rest} fetchIcon={this.fetchIcon.bind(this)} />
   }
 }
 

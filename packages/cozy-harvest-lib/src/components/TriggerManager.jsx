@@ -19,6 +19,8 @@ import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import withLocales from './hoc/withLocales'
 import TriggerLauncher from './TriggerLauncher'
+import VaultCiphersList from './VaultCiphersList'
+import BackButton from './BackButton'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -39,11 +41,14 @@ export class TriggerManager extends Component {
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleError = this.handleError.bind(this)
+    this.handleCipherSelect = this.handleCipherSelect.bind(this)
+    this.showCiphersList = this.showCiphersList.bind(this)
 
     this.state = {
       account,
       error: null,
-      status: IDLE
+      status: IDLE,
+      step: 'ciphersList'
     }
   }
 
@@ -221,15 +226,28 @@ export class TriggerManager extends Component {
     if (typeof onError === 'function') onError(error)
   }
 
+  handleCipherSelect() {
+    this.setState({
+      step: 'accountForm'
+    })
+  }
+
+  showCiphersList() {
+    this.setState({
+      step: 'ciphersList'
+    })
+  }
+
   render() {
     const {
       error: triggerError,
       konnector,
       running: triggerRunning,
       showError,
-      modalContainerId
+      modalContainerId,
+      t
     } = this.props
-    const { account, error, status } = this.state
+    const { account, error, status, step } = this.state
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
@@ -250,14 +268,27 @@ export class TriggerManager extends Component {
       <div>
         <VaultUnlocker>
           <div id={modalInto} />
-          <AccountForm
-            account={account}
-            error={error || triggerError}
-            konnector={konnector}
-            onSubmit={this.handleSubmit}
-            showError={showError}
-            submitting={submitting}
-          />
+          {step === 'ciphersList' && (
+            <VaultCiphersList
+              konnector={konnector}
+              onSelect={this.handleCipherSelect}
+            />
+          )}
+          {step === 'accountForm' && (
+            <>
+              <BackButton onClick={this.showCiphersList}>
+                {t('triggerManager.backToCiphersList')}
+              </BackButton>
+              <AccountForm
+                account={account}
+                error={error || triggerError}
+                konnector={konnector}
+                onSubmit={this.handleSubmit}
+                showError={showError}
+                submitting={submitting}
+              />
+            </>
+          )}
         </VaultUnlocker>
       </div>
     )
