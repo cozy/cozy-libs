@@ -6,22 +6,37 @@ exports[`TriggerManager handleError should render error 1`] = `
     <div
       id="coz-harvest-modal-place"
     />
-    <Wrapper
-      konnector={
-        Object {
-          "fields": Object {
-            "passphrase": Object {
-              "type": "password",
+    <React.Fragment>
+      <Wrapper
+        account={
+          Object {
+            "_id": "61c683295560485db0f34b859197c581",
+            "account_type": "konnectest",
+            "auth": Object {
+              "passphrase": "bar",
+              "username": "foo",
             },
-            "username": Object {
-              "type": "text",
-            },
-          },
-          "slug": "konnectest",
+            "identifier": "username",
+          }
         }
-      }
-      onSelect={[Function]}
-    />
+        error={[Error: Test error]}
+        konnector={
+          Object {
+            "fields": Object {
+              "passphrase": Object {
+                "type": "password",
+              },
+              "username": Object {
+                "type": "text",
+              },
+            },
+            "slug": "konnectest",
+          }
+        }
+        onSubmit={[Function]}
+        submitting={false}
+      />
+    </React.Fragment>
   </Wrapper>
 </div>
 `;
@@ -46,22 +61,36 @@ exports[`TriggerManager should render with account 1`] = `
     <div
       id="coz-harvest-modal-place"
     />
-    <Wrapper
-      konnector={
-        Object {
-          "fields": Object {
-            "passphrase": Object {
-              "type": "password",
+    <React.Fragment>
+      <Wrapper
+        account={
+          Object {
+            "_id": "61c683295560485db0f34b859197c581",
+            "account_type": "konnectest",
+            "auth": Object {
+              "passphrase": "bar",
+              "username": "foo",
             },
-            "username": Object {
-              "type": "text",
-            },
-          },
-          "slug": "konnectest",
+            "identifier": "username",
+          }
         }
-      }
-      onSelect={[Function]}
-    />
+        konnector={
+          Object {
+            "fields": Object {
+              "passphrase": Object {
+                "type": "password",
+              },
+              "username": Object {
+                "type": "text",
+              },
+            },
+            "slug": "konnectest",
+          }
+        }
+        onSubmit={[Function]}
+        submitting={false}
+      />
+    </React.Fragment>
   </Wrapper>
 </div>
 `;
