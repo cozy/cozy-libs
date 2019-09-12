@@ -193,9 +193,20 @@ export const sanitize = (manifest = {}) =>
       }
     : manifest
 
+const getDefaultedValues = (konnector, account) => {
+  const { fields } = konnector
+  const sanitizedFields = sanitizeFields(fields)
+  const defaultValues = defaultFieldsValues(sanitizedFields)
+  const initialValues = account && account.auth
+  const initialAndDefaultValues = { ...defaultValues, ...initialValues }
+
+  return initialAndDefaultValues
+}
+
 export default {
   defaultFieldsValues,
   getIdentifier,
   sanitize,
-  sanitizeFields
+  sanitizeFields,
+  getDefaultedValues
 }
