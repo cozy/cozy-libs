@@ -244,7 +244,8 @@ export class TriggerManager extends Component {
       konnector,
       running: triggerRunning,
       showError,
-      modalContainerId
+      modalContainerId,
+      t
     } = this.props
     const { account, error, status, step } = this.state
     const submitting = !!(status === RUNNING || triggerRunning)
@@ -275,7 +276,9 @@ export class TriggerManager extends Component {
           )}
           {step === 'accountForm' && (
             <>
-              <BackButton onClick={this.showCiphersList} />
+              <BackButton onClick={this.showCiphersList}>
+                {t('triggerManager.backToCiphersList')}
+              </BackButton>
               <AccountForm
                 account={account}
                 error={error || triggerError}
