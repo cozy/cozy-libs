@@ -197,11 +197,22 @@ export const sanitize = (manifest = {}) =>
 export const getDataTypes = (manifest = {}) => _get(manifest, 'data_types')
 export const getKonnectorName = (manifest = {}) => _get(manifest, 'name')
 
+const getDefaultedValues = (konnector, account) => {
+  const { fields } = konnector
+  const sanitizedFields = sanitizeFields(fields)
+  const defaultValues = defaultFieldsValues(sanitizedFields)
+  const initialValues = account && account.auth
+  const initialAndDefaultValues = { ...defaultValues, ...initialValues }
+
+  return initialAndDefaultValues
+}
+
 export default {
   defaultFieldsValues,
   getIdentifier,
   sanitize,
   sanitizeFields,
   getDataTypes,
-  getKonnectorName
+  getKonnectorName,
+  getDefaultedValues
 }
