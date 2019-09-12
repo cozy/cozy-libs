@@ -48,7 +48,7 @@ export class TriggerManager extends Component {
       account,
       error: null,
       status: IDLE,
-      step: 'ciphersList',
+      step: account ? 'accountForm' : 'ciphersList',
       selectedCipher: null
     }
   }
@@ -377,9 +377,11 @@ export class TriggerManager extends Component {
           )}
           {step === 'accountForm' && (
             <>
-              <BackButton onClick={this.showCiphersList}>
-                {t('triggerManager.backToCiphersList')}
-              </BackButton>
+              {!account && (
+                <BackButton onClick={this.showCiphersList}>
+                  {t('triggerManager.backToCiphersList')}
+                </BackButton>
+              )}
               <AccountForm
                 account={account || this.cipherToAccount(selectedCipher)}
                 error={error || triggerError}
