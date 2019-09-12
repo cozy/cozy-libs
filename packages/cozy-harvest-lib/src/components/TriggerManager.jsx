@@ -152,6 +152,7 @@ export class TriggerManager extends Component {
       const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
 
       let originalCipher = null
+      let cipherData
       if (isUpdate) {
         const id = accounts.getVaultCipherId(account)
         const search = {
@@ -161,10 +162,7 @@ export class TriggerManager extends Component {
         }
         const sort = [view => view.login.password === password, 'revisionDate']
         originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
-      }
 
-      let cipherData
-      if (originalCipher) {
         cipherData = await vaultClient.decrypt(originalCipher)
         cipherData.login.username = login
         cipherData.login.password = password
