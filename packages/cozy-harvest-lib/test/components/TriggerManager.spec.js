@@ -170,7 +170,8 @@ const fixtures = {
 const mockVaultClient = {
   createNewCipher: jest.fn(),
   saveCipher: jest.fn(),
-  getByIdOrSearch: jest.fn()
+  getByIdOrSearch: jest.fn(),
+  decrypt: jest.fn()
 }
 
 const addPermissionMock = jest.fn()
@@ -313,6 +314,14 @@ describe('TriggerManager', () => {
 
     it('should call saveAccount with account (no password provided)', async () => {
       const wrapper = shallowWithAccount()
+
+      mockVaultClient.decrypt.mockResolvedValueOnce({
+        login: {
+          username: 'username',
+          password: 'password'
+        }
+      })
+
       await wrapper.instance().handleSubmit({ login: 'test' })
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
@@ -322,6 +331,14 @@ describe('TriggerManager', () => {
 
     it('should call saveAccount with account with RESET_SESSION state if passphrase changed', async () => {
       const wrapper = shallowWithAccount()
+
+      mockVaultClient.decrypt.mockResolvedValueOnce({
+        login: {
+          username: 'username',
+          password: 'password'
+        }
+      })
+
       await wrapper.instance().handleSubmit(fixtures.data)
       expect(saveAccountMock).toHaveBeenCalled()
       expect(saveAccountMock.mock.calls[0][1].state).toEqual('RESET_SESSION')
@@ -329,10 +346,20 @@ describe('TriggerManager', () => {
 
     it('should call saveAccount with account with RESET_SESSION state if password changed', async () => {
       const wrapper = shallowWithAccount()
-      await wrapper.instance().handleSubmit({
+      const instance = wrapper.instance()
+
+      mockVaultClient.decrypt.mockResolvedValueOnce({
+        login: {
+          username: 'username',
+          password: 'password'
+        }
+      })
+
+      await instance.handleSubmit({
         login: 'foo',
         password: 'bar'
       })
+
       expect(saveAccountMock).toHaveBeenCalled()
       expect(saveAccountMock.mock.calls[0][1].state).toEqual('RESET_SESSION')
     })
@@ -343,6 +370,13 @@ describe('TriggerManager', () => {
       jest
         .spyOn(instance, 'handleNewAccount')
         .mockResolvedValue(fixtures.launchedJob)
+
+      mockVaultClient.decrypt.mockResolvedValueOnce({
+        login: {
+          username: 'username',
+          password: 'password'
+        }
+      })
 
       await instance.handleSubmit(fixtures.data)
 
