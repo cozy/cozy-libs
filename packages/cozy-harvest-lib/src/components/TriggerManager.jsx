@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
+import intersection from 'lodash/intersection'
+import pickBy from 'lodash/pickBy'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
@@ -21,6 +23,7 @@ import withLocales from './hoc/withLocales'
 import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
 import BackButton from './BackButton'
+import manifest from '../helpers/manifest'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -306,10 +309,37 @@ export class TriggerManager extends Component {
   }
 
   handleCipherSelect(selectedCipher) {
-    this.setState({
-      step: 'accountForm',
-      selectedCipher
-    })
+    const { konnector } = this.props
+    const { fields } = konnector
+    const sanitizedFields = manifest.sanitizeFields(fields)
+    const account = this.cipherToAccount(selectedCipher)
+    const values = manifest.getDefaultedValues(konnector, account)
+
+    const requiredFields = Object.entries(sanitizedFields)
+      .filter(([, value]) => value.required)
+      .map(([key]) => key)
+
+    const requiredFieldsInValues = intersection(
+      Object.keys(values),
+      requiredFields
+    )
+
+    if (requiredFieldsInValues.length === requiredFields.length) {
+      this.setState(
+        {
+          step: 'accountForm',
+          selectedCipher
+        },
+        () => {
+          this.handleSubmit(values)
+        }
+      )
+    } else {
+      this.setState({
+        step: 'accountForm',
+        selectedCipher
+      })
+    }
   }
 
   showCiphersList() {
@@ -330,11 +360,14 @@ export class TriggerManager extends Component {
     }, {})
 
     return {
-      auth: {
-        ...cipher.login,
-        login: cipher.login.username,
-        ...customFields
-      }
+      auth: pickBy(
+        {
+          login: cipher.login.username,
+          password: cipher.login.password,
+          ...customFields
+        },
+        value => Boolean(value)
+      )
     }
   }
 

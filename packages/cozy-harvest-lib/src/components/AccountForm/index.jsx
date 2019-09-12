@@ -157,12 +157,11 @@ export class AccountForm extends PureComponent {
       submitting,
       t
     } = this.props
-    const { fields } = konnector
 
+    const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
-    const defaultValues = manifest.defaultFieldsValues(sanitizedFields)
     const initialValues = account && account.auth
-    const initialAndDefaultValues = { ...defaultValues, ...initialValues }
+    const values = manifest.getDefaultedValues(konnector, account)
 
     let container = null
     const isLoginError =
@@ -171,9 +170,9 @@ export class AccountForm extends PureComponent {
     return (
       // See https://github.com/final-form/react-final-form#getting-started
       <Form
-        initialValues={initialAndDefaultValues}
+        initialValues={values}
         onSubmit={onSubmit}
-        validate={this.validate(sanitizedFields, initialAndDefaultValues)}
+        validate={this.validate(sanitizedFields, values)}
         render={({ dirty, form, values, valid }) => (
           <div
             onKeyUp={event =>
@@ -202,7 +201,7 @@ export class AccountForm extends PureComponent {
               disabled={submitting}
               fields={sanitizedFields}
               hasError={error && isLoginError}
-              initialValues={initialAndDefaultValues}
+              initialValues={values}
               inputRefByName={this.inputRefByName}
               t={t}
             />
