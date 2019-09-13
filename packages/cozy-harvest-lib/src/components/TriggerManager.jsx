@@ -138,7 +138,7 @@ export class TriggerManager extends Component {
   /**
    * Get the ID of the cipher selected by the user in the list
    *
-   * @returns {string} the cipher ID
+   * @returns {string|null} the cipher ID
    */
   getSelectedCipherId() {
     const { selectedCipher } = this.state
