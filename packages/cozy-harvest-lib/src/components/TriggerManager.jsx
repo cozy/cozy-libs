@@ -319,12 +319,11 @@ export class TriggerManager extends Component {
       .filter(([, value]) => value.required)
       .map(([key]) => key)
 
-    const requiredFieldsInValues = intersection(
-      Object.keys(values),
-      requiredFields
-    )
+    const hasValuesForRequiredFields =
+      intersection(Object.keys(values), requiredFields).length ===
+      requiredFields.length
 
-    if (requiredFieldsInValues.length === requiredFields.length) {
+    if (hasValuesForRequiredFields) {
       this.setState(
         {
           step: 'accountForm',
@@ -384,6 +383,7 @@ export class TriggerManager extends Component {
     const { account, error, status, step, selectedCipher } = this.state
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
+    const isUpdate = !account
 
     const { oauth } = konnector
 
@@ -410,7 +410,7 @@ export class TriggerManager extends Component {
           )}
           {step === 'accountForm' && (
             <>
-              {!account && (
+              {isUpdate && (
                 <BackButton onClick={this.showCiphersList}>
                   {t('triggerManager.backToCiphersList')}
                 </BackButton>
