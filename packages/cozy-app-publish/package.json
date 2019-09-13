@@ -28,7 +28,7 @@
     "node-fetch": "2.6.0",
     "prompt": "1.0.0",
     "request": "2.88.0",
-    "tar": "4.4.8"
+    "tar": "4.4.10"
   },
   "files": [
     "index.js",
