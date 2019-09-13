@@ -136,11 +136,24 @@ export class TriggerManager extends Component {
     }
   }
 
+  /**
+   * Get the ID of the cipher selected by the user in the list
+   *
+   * @returns {string} the cipher ID
+   */
   getSelectedCipherId() {
     const { selectedCipher } = this.state
     return selectedCipher && selectedCipher.id
   }
 
+  /**
+   * Create a new cipher and return its ID
+   *
+   * @param {string} login - the login to register in the new cipher
+   * @param {string} password - the password to register in the new cipher
+   *
+   * @returns {string} the cipher ID
+   */
   async getNewCipherId(login, password) {
     const { vaultClient, konnector } = this.props
 
@@ -164,6 +177,14 @@ export class TriggerManager extends Component {
     return cipher.id
   }
 
+  /**
+   * Find an existing cipher for the account and return its ID
+   *
+   * @param {string} login - the login to set in the cipher
+   * @param {string} password - the password to set in the cipher
+   *
+   * @returns {string} the cipher ID
+   */
   async getExistingCipherIdForAccount(login, password) {
     const { account } = this.state
     const { vaultClient, konnector } = this.props
