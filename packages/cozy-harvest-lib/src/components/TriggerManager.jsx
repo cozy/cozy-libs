@@ -3,10 +3,9 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
 import intersection from 'lodash/intersection'
-import pickBy from 'lodash/pickBy'
 
 import { withMutations, withClient } from 'cozy-client'
-import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
+import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 
@@ -373,22 +372,7 @@ export class TriggerManager extends Component {
       return null
     }
 
-    const customFields = (cipher.fields || []).reduce((fields, field) => {
-      fields[field.name] = field.value
-
-      return fields
-    }, {})
-
-    return {
-      auth: pickBy(
-        {
-          login: cipher.login.username,
-          password: cipher.login.password,
-          ...customFields
-        },
-        value => Boolean(value)
-      )
-    }
+    return Account.fromCipher(cipher)
   }
 
   render() {
