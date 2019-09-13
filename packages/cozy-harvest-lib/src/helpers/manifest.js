@@ -197,7 +197,17 @@ export const sanitize = (manifest = {}) =>
 export const getDataTypes = (manifest = {}) => _get(manifest, 'data_types')
 export const getKonnectorName = (manifest = {}) => _get(manifest, 'name')
 
-const getDefaultedValues = (konnector, account) => {
+/**
+ * Get fields value for a given konnector and account.
+ * Values present in the account are used and merged with default ones from the
+ * konnector's manifest
+ *
+ * @param {Object} konnector - an io.cozy.konnectors document
+ * @param {Object} account - an io.cozy.accounts document
+ *
+ * @returns {Object} An object with values for the fields
+ */
+const getFieldsValues = (konnector, account) => {
   const { fields } = konnector
   const sanitizedFields = sanitizeFields(fields)
   const defaultValues = defaultFieldsValues(sanitizedFields)
@@ -214,5 +224,5 @@ export default {
   sanitizeFields,
   getDataTypes,
   getKonnectorName,
-  getDefaultedValues
+  getFieldsValues
 }

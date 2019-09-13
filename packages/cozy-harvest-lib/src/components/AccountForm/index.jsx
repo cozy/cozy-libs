@@ -161,7 +161,7 @@ export class AccountForm extends PureComponent {
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
     const initialValues = account && account.auth
-    const values = manifest.getDefaultedValues(konnector, account)
+    const values = manifest.getFieldsValues(konnector, account)
 
     let container = null
     const isLoginError =
