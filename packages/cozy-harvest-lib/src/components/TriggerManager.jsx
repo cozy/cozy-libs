@@ -313,7 +313,7 @@ export class TriggerManager extends Component {
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
     const account = this.cipherToAccount(selectedCipher)
-    const values = manifest.getDefaultedValues(konnector, account)
+    const values = manifest.getFieldsValues(konnector, account)
 
     const requiredFields = Object.entries(sanitizedFields)
       .filter(([, value]) => value.required)
