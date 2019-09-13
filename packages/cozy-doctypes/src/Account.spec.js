@@ -50,4 +50,53 @@ describe('helpers library', () => {
       expect(Account.getAccountName(account)).toBe(account.auth.email)
     })
   })
+
+  describe('fromCipher', () => {
+    it('should return an io.cozy.accounts object with auth infos (no custom fields)', () => {
+      const cipher = {
+        login: {
+          username: 'username',
+          password: 'password'
+        }
+      }
+
+      const account = Account.fromCipher(cipher)
+
+      expect(account).toEqual({
+        auth: {
+          login: 'username',
+          password: 'password'
+        }
+      })
+    })
+
+    it('should return an io.cozy.accounts object with auth infos (with custom fields)', () => {
+      const cipher = {
+        login: {
+          username: 'username',
+          password: 'password'
+        },
+        fields: [
+          { name: 'timeout', value: '2000' },
+          { name: 'error', value: 'USER_ACTION_NEEDED' }
+        ]
+      }
+
+      const account = Account.fromCipher(cipher)
+
+      expect(account).toEqual({
+        auth: {
+          login: 'username',
+          password: 'password',
+          timeout: '2000',
+          error: 'USER_ACTION_NEEDED'
+        }
+      })
+    })
+
+    it('should throw if cipher is not passed as argument', () => {
+      expect(() => Account.fromCipher()).toThrow()
+      expect(() => Account.fromCipher(null)).toThrow()
+    })
+  })
 })
