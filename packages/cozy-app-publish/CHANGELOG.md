@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.19.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.19.0...cozy-app-publish@0.19.1) (2019-09-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency tar to v4.4.10 ([5cc8b48](https://github.com/cozy/cozy-libs/commit/5cc8b48))
+
+
+
+
+
 # 0.19.0 (2019-09-05)
 
 
