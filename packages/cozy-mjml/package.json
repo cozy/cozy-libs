@@ -17,7 +17,7 @@
     "mjml": "4.3.1",
     "shebang-loader": "0.0.1",
     "webpack": "4.39.3",
-    "webpack-cli": "3.3.2"
+    "webpack-cli": "3.3.8"
   },
   "scripts": {
     "build": "webpack",
