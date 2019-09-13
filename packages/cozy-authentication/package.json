@@ -38,7 +38,7 @@
     "react-dom": "16.8.6",
     "react-redux": "7.1.1",
     "react-router": "3",
-    "react-styleguidist": "6.5.3",
+    "react-styleguidist": "9.1.16",
     "stylus": "^0.54.5"
   },
   "dependencies": {
