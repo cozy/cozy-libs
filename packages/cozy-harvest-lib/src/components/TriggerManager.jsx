@@ -6,7 +6,12 @@ import intersection from 'lodash/intersection'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
-import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
+import {
+  VaultUnlocker,
+  withVaultClient,
+  CipherType,
+  UriMatchType
+} from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -161,12 +166,14 @@ export class TriggerManager extends Component {
 
     const cipherData = {
       id: null,
-      type: 1,
+      type: CipherType.Login,
       name: konnectorName,
       login: {
         username: login,
         password,
-        uris: konnectorURI ? [{ uri: konnectorURI, match: 0 }] : []
+        uris: konnectorURI
+          ? [{ uri: konnectorURI, match: UriMatchType.Domain }]
+          : []
       }
     }
 

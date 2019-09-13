@@ -4910,10 +4910,10 @@ cozy-client@^6.58.1:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-keys-lib@1.2.3:
-  version "1.2.3"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.2.3.tgz#72590a093870c308967d0e624b5ee272f00d5216"
-  integrity sha512-6LgCanDiYI0w7aVqAbXILc2+cr38fsdBfObpTciXb4VW3U3jHU1FIlt34HkHR3/kL8sXqJPgeOVbHzH6+PANoA==
+cozy-keys-lib@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.4.0.tgz#6684045dd9e5758e5642e9c60608e88675944b9f"
+  integrity sha512-JZgPE0bq+30Nztu87QvlB9g57WP7M1Nuc74JPLZwwTQ4fMk3Edrjyrip6JFtscwtWpnKWO7VRHQQE+en+c5SzA==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
