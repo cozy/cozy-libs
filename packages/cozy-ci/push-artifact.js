@@ -38,9 +38,7 @@ const updateVersion = async folderName => {
     'manifest.webapp'
   )
   const appManifestObj = fs.readJSONSync(pathToManifest)
-  const appVersion = `${
-    appManifestObj.version
-  }-dev.${buildCommit}-${TRAVIS_BUILD_ID}`
+  const appVersion = `${appManifestObj.version}-dev.${buildCommit}-${TRAVIS_BUILD_ID}`
   appManifestObj.version = appVersion
   // eslint-disable-next-line no-console
   console.warn(`↳ ℹ️  Updating manifest version to ${appVersion}`)
@@ -63,9 +61,7 @@ const createArchive = async (folderName, archiveFileName) => {
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error(
-      `↳ ❌ Unable to generate app archive. Is tar installed as a dependency ? Error : ${
-        error.message
-      }`
+      `↳ ❌ Unable to generate app archive. Is tar installed as a dependency ? Error : ${error.message}`
     )
     throw new Error('Unable to generate archive')
   }
@@ -87,9 +83,7 @@ const pushArtifact = async (fileName, parentFolder, options) => {
     ])
   } catch (e) {
     throw new Error(
-      `Unable to create target directory ${folder} on downcloud server : ${
-        e.message
-      }`
+      `Unable to create target directory ${folder} on downcloud server : ${e.message}`
     )
   }
 

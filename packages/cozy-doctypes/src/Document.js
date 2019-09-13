@@ -210,11 +210,7 @@ class Document {
       } else {
         log(
           'debug',
-          `[createOrUpdate] Didn't update ${
-            results[0]._id
-          } because its \`checkedAttributes\` (${
-            this.checkAttributes
-          }) didn't change.`
+          `[createOrUpdate] Didn't update ${results[0]._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
         )
         return results[0]
       }
@@ -270,11 +266,7 @@ class Document {
       } else {
         log(
           'debug',
-          `[bulkSave] Didn't update ${
-            results[0]._id
-          } because its \`checkedAttributes\` (${
-            this.checkAttributes
-          }) didn't change.`
+          `[bulkSave] Didn't update ${results[0]._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
         )
         return results[0]
       }

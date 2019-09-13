@@ -172,9 +172,7 @@ class Transaction extends Document {
       if (transactionsAfterSplit.length > 0) {
         log(
           'info',
-          `Found ${
-            transactionsAfterSplit.length
-          } transactions after ${splitDate}`
+          `Found ${transactionsAfterSplit.length} transactions after ${splitDate}`
         )
       } else {
         log('info', `No transaction after ${splitDate}`)
@@ -183,9 +181,7 @@ class Transaction extends Document {
       const transactionsBeforeSplit = newTransactions.filter(isBeforeSplit)
       log(
         'info',
-        `Found ${
-          transactionsBeforeSplit.length
-        } transactions before ${splitDate}`
+        `Found ${transactionsBeforeSplit.length} transactions before ${splitDate}`
       )
 
       const missedTransactions = Transaction.getMissedTransactions(
@@ -197,9 +193,7 @@ class Transaction extends Document {
       if (missedTransactions.length > 0) {
         log(
           'info',
-          `Found ${
-            missedTransactions.length
-          } missed transactions before ${splitDate}`
+          `Found ${missedTransactions.length} missed transactions before ${splitDate}`
         )
       } else {
         log('info', `No missed transactions before ${splitDate}`)
@@ -212,9 +206,7 @@ class Transaction extends Document {
 
     log(
       'info',
-      `Transaction reconciliation: new ${newTransactions.length}, updated ${
-        updatedTransactions.length
-      }, split date ${splitDate} `
+      `Transaction reconciliation: new ${newTransactions.length}, updated ${updatedTransactions.length}, split date ${splitDate} `
     )
     return [].concat(newTransactions).concat(updatedTransactions)
   }
