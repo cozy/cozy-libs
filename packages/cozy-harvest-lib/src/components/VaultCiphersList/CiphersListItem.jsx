@@ -17,8 +17,8 @@ const CiphersListItem = props => {
         <CipherIcon konnector={konnector} />
       </ListItemIcon>
       <ListItemText
-        primaryText={cipherView.name}
-        secondaryText={get(cipherView, 'login.username')}
+        primaryText={get(cipherView, 'login.username')}
+        secondaryText={cipherView.name}
       />
     </ListItem>
   )
