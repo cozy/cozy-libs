@@ -61,9 +61,7 @@ const createChildAccount = async (client, konnector, attributes) => {
     parentAccount = await findAccount(client, parentAccountId)
   } catch (error) {
     throw new Error(
-      `An error occurred when finding parent account ${parentAccountId} (${
-        error.message
-      })`
+      `An error occurred when finding parent account ${parentAccountId} (${error.message})`
     )
   }
 

@@ -14,13 +14,9 @@ const getDisplayDate = result => {
 const fmtMatchResult = result => {
   const displayDate = getDisplayDate(result)
   if (result.match) {
-    return `✅ ${displayDate}: ${result.transaction.label} (${
-      result.transaction.amount
-    }) -> ${result.match.label} (${result.match.amount}) via ${result.method}`
+    return `✅ ${displayDate}: ${result.transaction.label} (${result.transaction.amount}) -> ${result.match.label} (${result.match.amount}) via ${result.method}`
   } else {
-    return `❌ ${displayDate}: ${result.transaction.label} ${
-      result.transaction.amount
-    }`
+    return `❌ ${displayDate}: ${result.transaction.label} ${result.transaction.amount}`
   }
 }
 const matchFiles = (filename1, filename2) => {

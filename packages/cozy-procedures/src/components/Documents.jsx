@@ -72,9 +72,7 @@ class Documents extends React.Component {
                 <section key={index}>
                   <Label htmlFor="">
                     {t(
-                      `documents.labels.${
-                        populatedTemplateDocsWithFiles[categoryId].label
-                      }`
+                      `documents.labels.${populatedTemplateDocsWithFiles[categoryId].label}`
                     )}
                   </Label>
                   <DocumentsGroup

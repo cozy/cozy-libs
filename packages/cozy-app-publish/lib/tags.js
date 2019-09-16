@@ -51,9 +51,7 @@ const parse = tag => {
 const assertOKWithVersion = (tagInfo, pkgVersion) => {
   if (!tagInfo.dev && tagInfo.version && tagInfo.version !== pkgVersion) {
     throw new Error(
-      `The version number is different between package.json (${pkgVersion}) and tag (${
-        tagInfo.version
-      })`
+      `The version number is different between package.json (${pkgVersion}) and tag (${tagInfo.version})`
     )
   }
 }

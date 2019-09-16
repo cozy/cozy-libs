@@ -49,9 +49,7 @@ const sendMattermostReleaseMessage = (
         } else {
           reject(
             new Error(
-              `Mattermost message sending failed (error status: ${
-                res.statusCode
-              }).`
+              `Mattermost message sending failed (error status: ${res.statusCode}).`
             )
           )
         }

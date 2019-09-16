@@ -25,9 +25,7 @@ module.exports = async (hookNames, type, options) => {
         hookOptions = (await hookScript(hookOptions)) || hookOptions
       } catch (error) {
         console.error(
-          `↳ ❌  An error occured with ${type}publish hook ${hook}: ${
-            error.message
-          }`
+          `↳ ❌  An error occured with ${type}publish hook ${hook}: ${error.message}`
         )
         throw new Error(`${type}publish hooks failed`)
       }

@@ -90,9 +90,7 @@ const pushArchive = async (archiveFileName, options) => {
     await sshCommand(`mkdir -p ${uploadDir}`, HOST_STRING)
   } catch (e) {
     throw new Error(
-      `Unable to create target directory ${uploadDir} on downcloud server : ${
-        e.message
-      }`
+      `Unable to create target directory ${uploadDir} on downcloud server : ${e.message}`
     )
   }
 
@@ -122,9 +120,7 @@ const createArchive = async archivePath => {
     await tar.c(options, fileList)
   } catch (error) {
     console.error(
-      `↳ ❌ Unable to generate app archive. Is tar installed as a dependency ? Error : ${
-        error.message
-      }`
+      `↳ ❌ Unable to generate app archive. Is tar installed as a dependency ? Error : ${error.message}`
     )
     throw new Error('Unable to generate archive')
   }
