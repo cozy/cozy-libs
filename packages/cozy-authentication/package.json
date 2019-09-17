@@ -23,7 +23,7 @@
     "@babel/core": "^7.3.4",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-preset-cozy-app": "^1.7.0",
-    "cozy-client": "6.64.1",
+    "cozy-client": "6.64.6",
     "cozy-ui": "^22",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
@@ -70,7 +70,7 @@
     }
   },
   "peerDependencies": {
-    "cozy-client": "6.64.1",
+    "cozy-client": "6.64.6",
     "cozy-ui": "^22.4.0",
     "react": ">=15",
     "react-router": "3"
