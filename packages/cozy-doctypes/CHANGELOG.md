@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.66.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.65.3...cozy-doctypes@1.66.0) (2019-09-17)
+
+
+### Features
+
+* **cozy-doctypes:** Add a generic filename generation on conflict ([d72c271](https://github.com/cozy/cozy-libs/commit/d72c271))
+
+
+
+
+
 ## [1.65.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.65.2...cozy-doctypes@1.65.3) (2019-09-16)
 
 **Note:** Version bump only for package cozy-doctypes
