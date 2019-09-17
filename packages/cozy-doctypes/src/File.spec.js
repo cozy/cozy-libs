@@ -215,4 +215,17 @@ describe('File model', () => {
       })
     })
   })
+
+  describe('generateNewFileNameOnConflict', () => {
+    it('should generate the right file name with _X', () => {
+      const filename1 = CozyFile.generateNewFileNameOnConflict('test')
+      expect(filename1).toEqual('test_1')
+      const filename2 = CozyFile.generateNewFileNameOnConflict('test_1')
+      expect(filename2).toEqual('test_2')
+      const filename3 = CozyFile.generateNewFileNameOnConflict('test_1_1_test')
+      expect(filename3).toEqual('test_1_1_test_1')
+      const filename4 = CozyFile.generateNewFileNameOnConflict('test_')
+      expect(filename4).toEqual('test__1')
+    })
+  })
 })

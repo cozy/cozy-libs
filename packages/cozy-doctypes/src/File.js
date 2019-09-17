@@ -125,6 +125,29 @@ class CozyFile extends Document {
       throw error
     }
   }
+  /**
+   * Method to generate a new filename if there is a conflict
+   *
+   * @param {String} filenameWithoutExtension A filename without the extension
+   * @return {String} A filename with the right suffix
+   */
+  static generateNewFileNameOnConflict(filenameWithoutExtension) {
+    //Check if the string ends by _1
+    const regex = new RegExp('(_)([0-9]+)$')
+    const matches = filenameWithoutExtension.match(regex)
+    if (matches) {
+      let versionNumber = parseInt(matches[2])
+      //increment versionNumber
+      versionNumber++
+      const newFilenameWithoutExtension = filenameWithoutExtension.replace(
+        new RegExp('(_)([0-9]+)$'),
+        `_${versionNumber}`
+      )
+      return newFilenameWithoutExtension
+    } else {
+      return `${filenameWithoutExtension}_1`
+    }
+  }
 }
 
 CozyFile.doctype = 'io.cozy.files'
