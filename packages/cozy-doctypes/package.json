@@ -21,7 +21,7 @@
     "btoa": "1.2.1",
     "cozy-client": "6.64.6",
     "cozy-client-js": "0.16.4",
-    "cozy-stack-client": "6.64.3",
+    "cozy-stack-client": "6.64.6",
     "eslint-plugin-node": "10.0.0",
     "fs-extra": "8.1.0",
     "jest": "24.9.0",
