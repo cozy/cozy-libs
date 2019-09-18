@@ -180,11 +180,10 @@ export class TriggerManager extends Component {
         }
       }
 
-      const cipher = await vaultClient.createNewCozySharedCipher(
+      const cipher = await vaultClient.createNewCipher(
         cipherData,
         originalCipher || null
       )
-
       await vaultClient.saveCipher(cipher)
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
