@@ -4,6 +4,7 @@ import findKey from 'lodash/findKey'
 import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
 import _get from 'lodash/get'
+import intersection from 'lodash/intersection'
 
 export const ROLE_IDENTIFIER = 'identifier'
 
@@ -217,6 +218,33 @@ const getFieldsValues = (konnector, account) => {
   return initialAndDefaultValues
 }
 
+/**
+ * Get required fields names for a given konnector
+ *
+ * @param {Object} konnector - an io.cozy.konnectors document
+ *
+ * @returns {string[]} An array of all required fields names
+ */
+const getRequiredFields = konnector => {
+  const { fields } = konnector
+  const sanitizedFields = sanitizeFields(fields)
+
+  const requiredFields = Object.entries(sanitizedFields)
+    .filter(([, value]) => value.required)
+    .map(([key]) => key)
+
+  return requiredFields
+}
+
+const hasValuesForRequiredFields = (konnector, values) => {
+  const requiredFields = getRequiredFields(konnector)
+  const hasValuesForRequiredFields =
+    intersection(Object.keys(values), requiredFields).length ===
+    requiredFields.length
+
+  return hasValuesForRequiredFields
+}
+
 export default {
   defaultFieldsValues,
   getIdentifier,
@@ -224,5 +252,7 @@ export default {
   sanitizeFields,
   getDataTypes,
   getKonnectorName,
-  getFieldsValues
+  getFieldsValues,
+  getRequiredFields,
+  hasValuesForRequiredFields
 }
