@@ -148,6 +148,69 @@ class CozyFile extends Document {
       return `${filenameWithoutExtension}_1`
     }
   }
+
+  /**
+   * The goal of this method is to upload a file based on a conflict strategy.
+   * Be careful: We need to check if the file exists by doing a statByPath query
+   * before trying to upload the file since if we post and the stack return a
+   * 409 conflict, we will get a SPDY_ERROR_PROTOCOL on Chrome. This is the only
+   * viable workaround
+   * If there is no conflict, then we upload the file.
+   * If there is a conflict, then we apply the conflict strategy : `erase` or `rename`
+   * @param {String} name File Name
+   * @param {ArrayBuffer} file data
+   * @param {String} dirId dir id where to upload
+   * @param {String} conflictStrategy Actually only 2 hardcoded strategies 'erase' or 'rename'
+   */
+  static async uploadFileWithConflictStrategy(
+    name,
+    file,
+    dirId,
+    conflictStrategy
+  ) {
+    const filesCollection = this.cozyClient.collection('io.cozy.files')
+
+    try {
+      const path = await CozyFile.getFullpath(dirId, name)
+
+      const existingFile = await filesCollection.statByPath(path)
+      const { id: fileId } = existingFile.data
+      if (conflictStrategy === 'erase') {
+        //!TODO Bug Fix. Seems we have to pass a name attribute ?!
+        const resp = await filesCollection.updateFile(file, {
+          dirId,
+          fileId,
+          name
+        })
+        return resp
+      } else {
+        const { filename, extension } = CozyFile.splitFilename({
+          name,
+          type: 'file'
+        })
+        const newFileName =
+          CozyFile.generateNewFileNameOnConflict(filename) + extension
+        //recall itself with the newFilename.
+        return CozyFile.uploadFileWithConflictStrategy(
+          newFileName,
+          file,
+          dirId,
+          conflictStrategy
+        )
+      }
+    } catch (error) {
+      if (/Not found/.test(error)) {
+        return await CozyFile.upload(name, file, dirId)
+      }
+      throw error
+    }
+  }
+
+  static async upload(name, file, dirId) {
+    return this.cozyClient
+      .collection('io.cozy.files')
+      .createFile(file, { name, dirId, contentType: 'image/jpeg' })
+  }
 }
 
 CozyFile.doctype = 'io.cozy.files'
