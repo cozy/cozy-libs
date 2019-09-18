@@ -6,13 +6,17 @@ const destroySpy = jest.fn().mockName('destroy')
 const getSpy = jest.fn().mockName('get')
 const statByPathSpy = jest.fn().mockName('statByPath')
 const updateFileMetadataSpy = jest.fn().mockName('updateFileMetadata')
+const createFileSpy = jest.fn().mockName('createFileSpy')
+const updateFileSpy = jest.fn().mockName('updateFileSpy')
 
 beforeAll(() => {
   cozyClient.stackClient.collection.mockReturnValue({
     destroy: destroySpy,
     get: getSpy,
     statByPath: statByPathSpy,
-    updateFileMetadata: updateFileMetadataSpy
+    updateFileMetadata: updateFileMetadataSpy,
+    createFile: createFileSpy,
+    updateFile: updateFileSpy
   })
 
   CozyFile.registerClient(cozyClient)
@@ -226,6 +230,84 @@ describe('File model', () => {
       expect(filename3).toEqual('test_1_1_test_1')
       const filename4 = CozyFile.generateNewFileNameOnConflict('test_')
       expect(filename4).toEqual('test__1')
+    })
+  })
+
+  describe('uploadFileWithConflictStrategy', () => {
+    beforeEach(() => {
+      getSpy.mockImplementation(() =>
+        Promise.resolve({
+          data: {
+            path: '/GrandParent/Parent'
+          }
+        })
+      )
+    })
+    afterEach(() => {
+      jest.restoreAllMocks()
+      jest.clearAllMocks()
+    })
+
+    it('should call the upload method if no conflict', async () => {
+      statByPathSpy.mockRejectedValueOnce('Not found')
+      createFileSpy.mockResolvedValue({
+        data: {
+          id: 'jj',
+          dir_id: 'jj',
+          _type: 'io.cozy.files'
+        }
+      })
+      try {
+        await CozyFile.uploadFileWithConflictStrategy('test', {}, 'a', 'erase')
+      } catch (e) {
+        expect(createFileSpy).toHaveBeenCalled()
+      }
+    })
+
+    it('should rename the file if there is a conflict', async () => {
+      const dirId = 'toto'
+      //first call we return an existing file => conflict
+      //second call, we reject as not found
+      statByPathSpy
+        .mockReturnValueOnce({
+          data: {
+            id: 'file_id'
+          }
+        })
+        .mockRejectedValueOnce('Not found')
+      await CozyFile.uploadFileWithConflictStrategy(
+        'filename',
+        '',
+        dirId,
+        'rename'
+      )
+      expect(createFileSpy).toHaveBeenCalledWith('', {
+        contentType: 'image/jpeg',
+        dirId,
+        name: 'filename_1'
+      })
+    })
+
+    it('should erase the file if there is a conflict', async () => {
+      const dirId = 'toto'
+      //first call we return an existing file => conflict
+      //second call, we reject as not found
+      statByPathSpy.mockReturnValueOnce({
+        data: {
+          id: 'file_id'
+        }
+      })
+      await CozyFile.uploadFileWithConflictStrategy(
+        'filename',
+        '',
+        dirId,
+        'erase'
+      )
+      expect(updateFileSpy).toHaveBeenCalledWith('', {
+        fileId: 'file_id',
+        dirId,
+        name: 'filename'
+      })
     })
   })
 })
