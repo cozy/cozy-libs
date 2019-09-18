@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
-import intersection from 'lodash/intersection'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
@@ -337,18 +336,13 @@ export class TriggerManager extends Component {
 
   handleCipherSelect(selectedCipher) {
     const { konnector } = this.props
-    const { fields } = konnector
-    const sanitizedFields = manifest.sanitizeFields(fields)
     const account = this.cipherToAccount(selectedCipher)
     const values = manifest.getFieldsValues(konnector, account)
 
-    const requiredFields = Object.entries(sanitizedFields)
-      .filter(([, value]) => value.required)
-      .map(([key]) => key)
-
-    const hasValuesForRequiredFields =
-      intersection(Object.keys(values), requiredFields).length ===
-      requiredFields.length
+    const hasValuesForRequiredFields = manifest.hasValuesForRequiredFields(
+      konnector,
+      values
+    )
 
     if (hasValuesForRequiredFields) {
       this.setState(
