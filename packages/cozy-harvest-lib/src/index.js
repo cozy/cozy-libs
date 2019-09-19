@@ -11,3 +11,6 @@ export { default as Routes } from './components/Routes'
 
 export { KonnectorJobError } from './helpers/konnectors'
 export { handleOAuthResponse } from './helpers/oauth'
+export {
+  default as updateAccountsPassword
+} from './services/updateAccountsPassword'
