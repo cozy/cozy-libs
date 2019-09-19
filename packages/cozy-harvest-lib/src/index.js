@@ -24,3 +24,6 @@ export {
 } from './helpers/konnectors'
 export { handleOAuthResponse } from './helpers/oauth'
 export { withLocales }
+export {
+  default as updateAccountsPassword
+} from './services/updateAccountsPassword'
