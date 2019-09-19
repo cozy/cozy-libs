@@ -57,7 +57,14 @@ class Account extends Document {
           ...customFields
         },
         value => Boolean(value)
-      )
+      ),
+      relationships: {
+        vaultCipher: {
+          _id: cipher.id,
+          _type: 'com.bitwarden.ciphers',
+          _protocol: 'bitwarden'
+        }
+      }
     }
   }
 }
