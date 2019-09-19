@@ -171,7 +171,8 @@ const mockVaultClient = {
   createNewCipher: jest.fn(),
   saveCipher: jest.fn(),
   getByIdOrSearch: jest.fn(),
-  decrypt: jest.fn()
+  decrypt: jest.fn(),
+  createNewCozySharedCipher: jest.fn()
 }
 
 const addPermissionMock = jest.fn()
@@ -215,7 +216,9 @@ describe('TriggerManager', () => {
   beforeEach(() => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
     saveAccountMock.mockResolvedValue(fixtures.createdAccount)
-    mockVaultClient.createNewCipher.mockResolvedValue({ id: 'cipher-id-1' })
+    mockVaultClient.createNewCozySharedCipher.mockResolvedValue({
+      id: 'cipher-id-1'
+    })
   })
 
   afterEach(() => {
