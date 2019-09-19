@@ -52,35 +52,40 @@ describe('helpers library', () => {
   })
 
   describe('fromCipher', () => {
-    it('should return an io.cozy.accounts object with auth infos (no custom fields)', () => {
-      const cipher = {
+    let cipher
+
+    beforeEach(() => {
+      cipher = {
+        id: 'cipher-id',
         login: {
           username: 'username',
           password: 'password'
         }
       }
-
+    })
+    it('should return an io.cozy.accounts object with auth infos (no custom fields)', () => {
       const account = Account.fromCipher(cipher)
 
       expect(account).toEqual({
         auth: {
           login: 'username',
           password: 'password'
+        },
+        relationships: {
+          vaultCipher: {
+            _id: 'cipher-id',
+            _type: 'com.bitwarden.ciphers',
+            _protocol: 'bitwarden'
+          }
         }
       })
     })
 
     it('should return an io.cozy.accounts object with auth infos (with custom fields)', () => {
-      const cipher = {
-        login: {
-          username: 'username',
-          password: 'password'
-        },
-        fields: [
-          { name: 'timeout', value: '2000' },
-          { name: 'error', value: 'USER_ACTION_NEEDED' }
-        ]
-      }
+      cipher.fields = [
+        { name: 'timeout', value: '2000' },
+        { name: 'error', value: 'USER_ACTION_NEEDED' }
+      ]
 
       const account = Account.fromCipher(cipher)
 
@@ -90,6 +95,13 @@ describe('helpers library', () => {
           password: 'password',
           timeout: '2000',
           error: 'USER_ACTION_NEEDED'
+        },
+        relationships: {
+          vaultCipher: {
+            _id: 'cipher-id',
+            _type: 'com.bitwarden.ciphers',
+            _protocol: 'bitwarden'
+          }
         }
       })
     })
