@@ -3,6 +3,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import findKey from 'lodash/findKey'
 import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
+import intersection from 'lodash/intersection'
 
 export const ROLE_IDENTIFIER = 'identifier'
 
@@ -193,9 +194,59 @@ export const sanitize = (manifest = {}) =>
       }
     : manifest
 
+/**
+ * Get fields value for a given konnector and account.
+ * Values present in the account are used and merged with default ones from the
+ * konnector's manifest
+ *
+ * @param {Object} konnector - an io.cozy.konnectors document
+ * @param {Object} account - an io.cozy.accounts document
+ *
+ * @returns {Object} An object with values for the fields
+ */
+const getFieldsValues = (konnector, account) => {
+  const { fields } = konnector
+  const sanitizedFields = sanitizeFields(fields)
+  const defaultValues = defaultFieldsValues(sanitizedFields)
+  const initialValues = account && account.auth
+  const initialAndDefaultValues = { ...defaultValues, ...initialValues }
+
+  return initialAndDefaultValues
+}
+
+/**
+ * Get required fields names for a given konnector
+ *
+ * @param {Object} konnector - an io.cozy.konnectors document
+ *
+ * @returns {string[]} An array of all required fields names
+ */
+const getRequiredFields = konnector => {
+  const { fields } = konnector
+  const sanitizedFields = sanitizeFields(fields)
+
+  const requiredFields = Object.entries(sanitizedFields)
+    .filter(([, value]) => value.required)
+    .map(([key]) => key)
+
+  return requiredFields
+}
+
+const hasValuesForRequiredFields = (konnector, values) => {
+  const requiredFields = getRequiredFields(konnector)
+  const hasValuesForRequiredFields =
+    intersection(Object.keys(values), requiredFields).length ===
+    requiredFields.length
+
+  return hasValuesForRequiredFields
+}
+
 export default {
   defaultFieldsValues,
   getIdentifier,
   sanitize,
-  sanitizeFields
+  sanitizeFields,
+  getFieldsValues,
+  getRequiredFields,
+  hasValuesForRequiredFields
 }
