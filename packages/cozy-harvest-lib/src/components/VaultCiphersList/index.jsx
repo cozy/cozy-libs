@@ -11,9 +11,16 @@ import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
 
 class VaultCiphersList extends React.Component {
-  state = {
-    loading: false,
-    ciphers: []
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      loading: true,
+      ciphers: [],
+      selectedCipher: undefined
+    }
+
+    this.reset = this.reset.bind(this)
   }
 
   componentDidMount() {
@@ -42,9 +49,17 @@ class VaultCiphersList extends React.Component {
     }
   }
 
+  handleSelectCipher(selectedCipher) {
+    this.setState({ selectedCipher })
+  }
+
+  reset() {
+    this.setState({ selectedCipher: undefined })
+  }
+
   render() {
-    const { t, konnector, onSelect } = this.props
-    const { ciphers, loading } = this.state
+    const { t, konnector, children } = this.props
+    const { ciphers, loading, selectedCipher } = this.state
 
     if (loading) {
       return (
@@ -52,6 +67,14 @@ class VaultCiphersList extends React.Component {
           <Spinner size="xxlarge" />
         </div>
       )
+    }
+
+    if (ciphers.length === 0) {
+      return children(undefined, ciphers, this.reset)
+    }
+
+    if (selectedCipher || selectedCipher === null) {
+      return children(selectedCipher, ciphers, this.reset)
     }
 
     return (
@@ -65,11 +88,11 @@ class VaultCiphersList extends React.Component {
               key={cipherView.id}
               cipherView={cipherView}
               konnector={konnector}
-              onClick={() => onSelect(cipherView)}
+              onClick={() => this.handleSelectCipher(cipherView)}
             />
           ))}
 
-          <OtherAccountListItem onClick={() => onSelect(null)} />
+          <OtherAccountListItem onClick={() => this.handleSelectCipher(null)} />
         </List>
       </>
     )

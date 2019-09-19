@@ -38,6 +38,19 @@ export class AccountForm extends PureComponent {
     this.focusNext = this.focusNext.bind(this)
   }
 
+  componentDidMount() {
+    const { konnector, account, onSubmit } = this.props
+    const { fields } = konnector
+    const sanitizedFields = manifest.sanitizeFields(fields)
+    const values = manifest.getFieldsValues(konnector, account)
+
+    if (this.props.autoSubmit && this.validate(sanitizedFields, values)) {
+      // 'submit' is logged twice :/
+      console.log('submit')
+      // onSubmit(values)
+    }
+  }
+
   /**
    * Indicates if the state of ReactFinalForm implies that data can be submitted
    * @param  {Object} formState See https://github.com/final-form/final-form#formstate
