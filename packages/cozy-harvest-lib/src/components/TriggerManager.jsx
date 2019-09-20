@@ -12,6 +12,7 @@ import {
   CipherType,
   UriMatchType
 } from 'cozy-keys-lib'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -361,9 +362,7 @@ export class TriggerManager extends Component {
     if (hasValuesForRequiredFields) {
       this.setState(
         {
-          step: 'accountForm',
-          selectedCipher,
-          showBackButton: true
+          selectedCipher
         },
         () => {
           this.handleSubmit(values)
@@ -430,6 +429,15 @@ export class TriggerManager extends Component {
           onSuccess={this.handleOAuthAccountId}
           submitting={submitting}
         />
+      )
+    }
+
+    if (submitting && selectedCipher && step === 'ciphersList') {
+      return (
+        <div className="u-flex u-flex-column u-flex-items-center">
+          <Spinner size="xxlarge" />
+          <p>{t('triggerManager.connecting')}</p>
+        </div>
       )
     }
 
