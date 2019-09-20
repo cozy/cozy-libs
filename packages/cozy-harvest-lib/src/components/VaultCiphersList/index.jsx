@@ -30,14 +30,21 @@ class VaultCiphersList extends React.Component {
         type: CipherType.Login,
         uri: konnectorURI
       })
-      this.setState({
-        ciphers
-      })
+
+      if (ciphers.length > 0) {
+        this.setState({
+          ciphers,
+          loading: false
+        })
+      } else {
+        if (this.props.onNoCiphers) {
+          this.props.onNoCiphers()
+        }
+      }
     } catch (error) {
       //TODO: do something
       // eslint-disable-next-line no-console
       console.warn(error)
-    } finally {
       this.setState({ loading: false })
     }
   }
