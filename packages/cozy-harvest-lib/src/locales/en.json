@@ -397,6 +397,7 @@
     "otherAccount": "From another account…"
   },
   "triggerManager": {
-    "backToCiphersList": "Go back to accounts list"
+    "backToCiphersList": "Go back to accounts list",
+    "connecting": "Connecting your account..."
   }
 }
