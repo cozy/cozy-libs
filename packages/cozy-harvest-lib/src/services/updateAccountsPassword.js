@@ -3,6 +3,20 @@ import get from 'lodash/get'
 import set from 'lodash/set'
 import unset from 'lodash/unset'
 
+const decryptString = (encryptedString, vaultClient, orgKey) => {
+  const [encTypeAndIv, data, mac] = encryptedString.split('|')
+  const [encTypeString, iv] = encTypeAndIv.split('.')
+  const encType = parseInt(encTypeString, 10)
+
+  return vaultClient.cryptoService.aesDecryptToUtf8(
+    encType,
+    data,
+    iv,
+    mac,
+    orgKey
+  )
+}
+
 const updateAccountsPassword = async (
   cozyClient,
   vaultClient,
@@ -13,22 +27,23 @@ const updateAccountsPassword = async (
     .fetchJSON('GET', '/bitwarden/organizations/cozy')
 
   const encryptedPassword = get(bitwardenCipherDocument, 'login.password')
+  const encryptedUsername = get(bitwardenCipherDocument, 'login.username')
   const bitwardenCipherId = get(bitwardenCipherDocument, '_id')
 
-  const [encTypeAndIv, data, mac] = encryptedPassword.split('|')
-  const [encTypeString, iv] = encTypeAndIv.split('.')
-  const encType = parseInt(encTypeString, 10)
-
+  const orgKeyEncType = 2
   const orgKey = new SymmetricCryptoKey(
     vaultClient.Utils.fromB64ToArray(cozyKeys.organizationKey),
-    encType
+    orgKeyEncType
   )
 
-  const decryptedPassword = await vaultClient.cryptoService.aesDecryptToUtf8(
-    encType,
-    data,
-    iv,
-    mac,
+  const decryptedPassword = await decryptString(
+    encryptedPassword,
+    vaultClient,
+    orgKey
+  )
+  const decryptedUsername = await decryptString(
+    encryptedUsername,
+    vaultClient,
     orgKey
   )
 
@@ -47,6 +62,7 @@ const updateAccountsPassword = async (
   await Promise.all(
     accounts.data.map(account => {
       set(account, 'auth.password', decryptedPassword)
+      set(account, 'auth.login', decryptedUsername)
       unset(account, 'auth.credentials_encrypted')
       const updatedAccount = {
         ...account,
