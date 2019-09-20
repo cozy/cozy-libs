@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import { withVaultClient, CipherType } from 'cozy-keys-lib'
 import { Title } from 'cozy-ui/transpiled/react/Text'
@@ -11,6 +12,14 @@ import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
 
 class VaultCiphersList extends React.Component {
+  static propTypes = {
+    konnector: PropTypes.object.isRequired,
+    onNoCiphers: PropTypes.func,
+    onSelect: PropTypes.func.isRequired,
+    t: PropTypes.func.isRequired,
+    vaultClient: PropTypes.object.isRequired
+  }
+
   state = {
     loading: false,
     ciphers: []
@@ -30,14 +39,21 @@ class VaultCiphersList extends React.Component {
         type: CipherType.Login,
         uri: konnectorURI
       })
-      this.setState({
-        ciphers
-      })
+
+      if (ciphers.length > 0) {
+        this.setState({
+          ciphers,
+          loading: false
+        })
+      } else {
+        if (this.props.onNoCiphers) {
+          this.props.onNoCiphers()
+        }
+      }
     } catch (error) {
       //TODO: do something
       // eslint-disable-next-line no-console
       console.warn(error)
-    } finally {
       this.setState({ loading: false })
     }
   }

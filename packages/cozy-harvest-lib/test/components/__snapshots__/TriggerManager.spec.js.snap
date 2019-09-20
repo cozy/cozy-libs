@@ -115,6 +115,7 @@ exports[`TriggerManager should render without account 1`] = `
           "slug": "konnectest",
         }
       }
+      onNoCiphers={[Function]}
       onSelect={[Function]}
     />
   </Wrapper>
