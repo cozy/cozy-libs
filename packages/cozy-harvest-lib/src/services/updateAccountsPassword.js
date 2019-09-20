@@ -1,4 +1,5 @@
 import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
+import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 import get from 'lodash/get'
 import set from 'lodash/set'
 import unset from 'lodash/unset'
@@ -30,7 +31,7 @@ const updateAccountsPassword = async (
   const encryptedUsername = get(bitwardenCipherDocument, 'login.username')
   const bitwardenCipherId = get(bitwardenCipherDocument, '_id')
 
-  const orgKeyEncType = 2
+  const orgKeyEncType = EncryptionType.AesCbc256_HmacSha256_B64
   const orgKey = new SymmetricCryptoKey(
     vaultClient.Utils.fromB64ToArray(cozyKeys.organizationKey),
     orgKeyEncType
