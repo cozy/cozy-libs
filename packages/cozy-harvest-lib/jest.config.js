@@ -8,6 +8,7 @@ module.exports = {
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],
+  testPathIgnorePatterns: ['dist'],
   moduleNameMapper: {
     '^cozy-logger$': 'cozy-logger/dist/index.js',
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
