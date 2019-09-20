@@ -49,13 +49,15 @@ export class TriggerManager extends Component {
     this.handleError = this.handleError.bind(this)
     this.handleCipherSelect = this.handleCipherSelect.bind(this)
     this.showCiphersList = this.showCiphersList.bind(this)
+    this.handleNoCiphers = this.handleNoCiphers.bind(this)
 
     this.state = {
       account,
       error: null,
       status: IDLE,
       step: account ? 'accountForm' : 'ciphersList',
-      selectedCipher: null
+      selectedCipher: null,
+      showBackButton: false
     }
   }
 
@@ -348,7 +350,8 @@ export class TriggerManager extends Component {
       this.setState(
         {
           step: 'accountForm',
-          selectedCipher
+          selectedCipher,
+          showBackButton: true
         },
         () => {
           this.handleSubmit(values)
@@ -357,7 +360,8 @@ export class TriggerManager extends Component {
     } else {
       this.setState({
         step: 'accountForm',
-        selectedCipher
+        selectedCipher,
+        showBackButton: true
       })
     }
   }
@@ -365,6 +369,13 @@ export class TriggerManager extends Component {
   showCiphersList() {
     this.setState({
       step: 'ciphersList'
+    })
+  }
+
+  handleNoCiphers() {
+    this.setState({
+      step: 'accountForm',
+      showBackButton: false
     })
   }
 
@@ -386,10 +397,16 @@ export class TriggerManager extends Component {
       t,
       onVaultDismiss
     } = this.props
-    const { account, error, status, step, selectedCipher } = this.state
+    const {
+      account,
+      error,
+      status,
+      step,
+      selectedCipher,
+      showBackButton
+    } = this.state
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
-    const isUpdate = !account
 
     const { oauth } = konnector
 
@@ -412,11 +429,12 @@ export class TriggerManager extends Component {
             <VaultCiphersList
               konnector={konnector}
               onSelect={this.handleCipherSelect}
+              onNoCiphers={this.handleNoCiphers}
             />
           )}
           {step === 'accountForm' && (
             <>
-              {isUpdate && (
+              {showBackButton && (
                 <BackButton onClick={this.showCiphersList}>
                   {t('triggerManager.backToCiphersList')}
                 </BackButton>
