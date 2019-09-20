@@ -159,7 +159,7 @@ export class TriggerManager extends Component {
    *
    * @returns {string} the cipher ID
    */
-  async getNewCipherId(login, password) {
+  async createNewCipherId(login, password) {
     const { vaultClient, konnector } = this.props
 
     const konnectorURI = get(konnector, 'vendor_link')
@@ -217,6 +217,17 @@ export class TriggerManager extends Component {
     await vaultClient.saveCipher(cipher)
 
     return cipher.id
+  }
+
+  /**
+   * Share a cipher to the cozy org
+   * @param {string} cipherId - uuid of a cipher
+   */
+  async shareCipherWithCozy(cipherId) {
+    const { vaultClient } = this.props
+    const cipher = await vaultClient.get(cipherId)
+    const cipherView = await vaultClient.decrypt(cipher)
+    await vaultClient.shareWithCozy(cipherView)
   }
 
   async getCipherId(login, password) {
@@ -293,8 +304,9 @@ export class TriggerManager extends Component {
       if (!cipherId && account) {
         cipherId = await this.getExistingCipherIdForAccount(login, password)
       } else if (!cipherId && !account) {
-        cipherId = await this.getNewCipherId(login, password)
+        cipherId = await this.createNewCipherId(login, password)
       }
+      await this.shareCipherWithCozy(cipherId)
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
         accounts.resetState(account),
