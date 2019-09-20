@@ -108,7 +108,6 @@ export class EditAccountModal extends Component {
               konnector={konnector}
               initialTrigger={trigger}
               onSuccess={this.redirectToAccount}
-              onVaultDismiss={this.redirectToAccount}
               showError={true}
             />
           )}
