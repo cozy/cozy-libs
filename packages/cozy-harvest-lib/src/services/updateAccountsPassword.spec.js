@@ -1,11 +1,13 @@
 import updateAccountsPassword from './updateAccountsPassword'
 
 jest.mock('cozy-keys-lib/transpiled/SymmetricCryptoKey', () => {
-  return class {
+  class MockSymmetricCryptoKey {
     constructor(key, encType) {
       return { key, encType }
     }
   }
+
+  return MockSymmetricCryptoKey
 })
 
 describe('update accounts password function', () => {
@@ -45,10 +47,12 @@ describe('update accounts password function', () => {
     const encType = 2
     const iv = 'iv123'
     const mac = 'mac456'
-    const data = 'super_secret'
+    const password = 'iamsuperman'
+    const username = 'Clark Kent'
     const orgKey = '123'
 
-    const encryptedPassword = `${encType}.${iv}|${data}|${mac}`
+    const encryptedPassword = `${encType}.${iv}|${password}|${mac}`
+    const encryptedUsername = `${encType}.${iv}|${username}|${mac}`
     mockCozyClient.fetchJSON.mockResolvedValue({
       organizationKey: orgKey
     })
@@ -57,12 +61,23 @@ describe('update accounts password function', () => {
     })
     await updateAccountsPassword(mockCozyClient, mockVaultClient, {
       login: {
-        password: encryptedPassword
+        password: encryptedPassword,
+        username: encryptedUsername
       }
     })
     expect(mockVaultClient.cryptoService.aesDecryptToUtf8).toHaveBeenCalledWith(
       encType,
-      data,
+      password,
+      iv,
+      mac,
+      {
+        key: orgKey,
+        encType
+      }
+    )
+    expect(mockVaultClient.cryptoService.aesDecryptToUtf8).toHaveBeenCalledWith(
+      encType,
+      username,
       iv,
       mac,
       {
@@ -77,8 +92,11 @@ describe('update accounts password function', () => {
       organizationKey: '123'
     })
     mockCozyClient.save.mockResolvedValue()
-    mockVaultClient.cryptoService.aesDecryptToUtf8.mockResolvedValue(
+    mockVaultClient.cryptoService.aesDecryptToUtf8.mockResolvedValueOnce(
       'new_password'
+    )
+    mockVaultClient.cryptoService.aesDecryptToUtf8.mockResolvedValueOnce(
+      'new_login'
     )
     mockCozyClient.query.mockResolvedValue({
       data: [
@@ -99,7 +117,8 @@ describe('update accounts password function', () => {
     })
     await updateAccountsPassword(mockCozyClient, mockVaultClient, {
       login: {
-        password: 'yolo'
+        password: 'yolo',
+        username: 'yolo'
       }
     })
 
@@ -107,14 +126,14 @@ describe('update accounts password function', () => {
     expect(mockCozyClient.save).toHaveBeenCalledWith({
       _type: 'io.cozy.accounts',
       auth: {
-        login: 'A',
+        login: 'new_login',
         password: 'new_password'
       }
     })
     expect(mockCozyClient.save).toHaveBeenCalledWith({
       _type: 'io.cozy.accounts',
       auth: {
-        login: 'B',
+        login: 'new_login',
         password: 'new_password',
         extra_field: 'stays'
       }
