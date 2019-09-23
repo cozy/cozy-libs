@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.67.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.66.2...cozy-doctypes@1.67.0) (2019-09-23)
+
+
+### Features
+
+* **cozy-doctypes:** Upload file with conflict strategy ([88b3855](https://github.com/cozy/cozy-libs/commit/88b3855))
+
+
+
+
+
 ## [1.66.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.66.1...cozy-doctypes@1.66.2) (2019-09-19)
 
 **Note:** Version bump only for package cozy-doctypes
