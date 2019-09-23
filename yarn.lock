@@ -4933,6 +4933,18 @@ cozy-client@^6.58.1:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
+cozy-doctypes@^1.67.0:
+  version "1.67.0"
+  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.67.0.tgz#2e26cf43556cff298d0eec2f06091d15dc1758da"
+  integrity sha512-+3w6YplviaaYxfwyQOV+FjB7siYvFaPtXuBwlIjCxITrzvKoZTw5tPd4hNW/BgRJjoT5HUCbVMhrsDu27xYr8Q==
+  dependencies:
+    "@babel/runtime" "7.5.5"
+    cozy-logger "^1.6.0"
+    date-fns "1.30.1"
+    es6-promise-pool "2.5.0"
+    lodash "4.17.15"
+    prop-types "^15.7.2"
+
 cozy-keys-lib@1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.6.0.tgz#4e9689da5c3532701a566df8e9f34ad94464de37"
@@ -4954,6 +4966,14 @@ cozy-keys-lib@1.6.0:
     sweetalert "^2.1.2"
     tldjs "^2.3.1"
     zxcvbn "^4.4.2"
+
+cozy-logger@^1.6.0:
+  version "1.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-logger/-/cozy-logger-1.6.0.tgz#51675e081e0a40baae6c38c64718cfaee5ee66ff"
+  integrity sha512-UkPR5lQDY6HldNv3N3c8HaxlfgcgAB/iRBFwJNFL2I17lhcM0u7w27vo1nuFeX6geMeFUjvedq/awawxZ1mTQg==
+  dependencies:
+    chalk "^2.4.2"
+    json-stringify-safe "5.0.1"
 
 cozy-realtime@3.1.0:
   version "3.1.0"
