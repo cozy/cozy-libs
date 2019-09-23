@@ -1,9 +1,9 @@
 import appTemplate from './__tests__/app-layout.hbs'
 import template from './__tests__/email-layout.hbs'
-import emailTemplates from './index'
+import emailTemplates from './templates'
 
 const helpers = {
-  tGlobal: x => x,
+  greeting: name => `Hello ${name} !`,
   t: x => x
 }
 
@@ -47,16 +47,6 @@ describe('template utils', () => {
   })
 
   it('should render parts and full', () => {
-    const template = `
-      {{# extend 'app-layout' }}
-        {{#content "emailTitle" }}
-          Email title !
-        {{/content}}
-        {{#content "content" }}
-          Hello {{ name }} !
-        {{/content}}
-      {{/extend}}
-    `
     const renderer = emailTemplates.renderer({ partials, helpers })
     const data = {
       name: 'Homer',
@@ -68,8 +58,6 @@ describe('template utils', () => {
       data
     })
     expect(compiled.full).toMatchSnapshot()
-    expect(compiled.parts.content.trim()).toBe('Hello Homer !')
+    expect(compiled.parts.emailSubtitle.trim()).toBe('Hello Homer !')
   })
 })
-
-// describe()

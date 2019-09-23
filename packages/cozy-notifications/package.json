@@ -1,11 +1,11 @@
 {
-  "name": "cozy-email-templates",
+  "name": "cozy-notifications",
   "version": "0.0.1",
   "description": "Provides reusable email templates for use in Cozy applications and konnectors.",
   "main": "dist/index.js",
   "author": "Cozy",
   "license": "MIT",
-  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-email-templates/README.md",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-notifications/README.md",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/cozy/cozy-libs.git"
@@ -23,7 +23,8 @@
   "dependencies": {
     "handlebars": "4.1.2",
     "handlebars-layouts": "3.1.4",
-    "lodash": "4.17.15"
+    "lodash": "4.17.15",
+    "mjml": "3.3.5"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",

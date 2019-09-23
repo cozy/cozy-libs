@@ -212,8 +212,7 @@ table {
 `;
 
 exports[`template utils should render parts and full 1`] = `
-"
-<mjml>
+"<mjml>
    <mj-head>
       <mj-font name=\\"Lato\\" href=\\"https://fonts.googleapis.com/css?family=Lato:400,700\\" />
       <mj-style inline=\\"inline\\">
@@ -389,11 +388,12 @@ table {
           <mj-column css-class=\\"emailHeader\\">
             <mj-text padding-top=\\"0\\" padding-bottom=\\"0\\">
                 <div class=\\"header__desc__title txtRight\\">
-                            Email title !
+                      My email title
 
                 </div>
                 <div class=\\"header__desc__subtitle txtRight\\">
-                  
+                      Hello Homer !
+
                 </div>
             </mj-text>
           </mj-column>
@@ -407,7 +407,7 @@ table {
 
 
         <!-- content -->
-                  Hello Homer !
+            My content
 
       </mj-wrapper>
       <mj-section padding-top=\\"0\\">
@@ -428,5 +428,5 @@ table {
 
 
 
-    "
+"
 `;

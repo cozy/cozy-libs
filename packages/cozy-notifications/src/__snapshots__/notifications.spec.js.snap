@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`notifications should send a notification view 1`] = `
+[MockFunction] {
+  "calls": Array [
+    Array [
+      "POST",
+      "/notifications",
+      Object {
+        "data": Object {
+          "attributes": Object {
+            "category": "my-category",
+            "content": "Simple text content",
+            "content_html": "<!doctype html><html xmlns=\\"http://www.w3.org/1999/xhtml\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\"><head>
+  <title></title>
+  <!--[if !mso]><!-- -->
+  <meta http-equiv=\\"X-UA-Compatible\\" content=\\"IE=edge\\">
+  <!--<![endif]-->
+<meta http-equiv=\\"Content-Type\\" content=\\"text/html; charset=UTF-8\\">
+<meta name=\\"viewport\\" content=\\"width=device-width, initial-scale=1.0\\">
+<style type=\\"text/css\\">
+  #outlook a { padding: 0; }
+  .ReadMsgBody { width: 100%; }
+  .ExternalClass { width: 100%; }
+  .ExternalClass * { line-height:100%; }
+  body { margin: 0; padding: 0; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+  table, td { border-collapse:collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+  img { border: 0; height: auto; line-height: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; }
+  p { display: block; margin: 13px 0; }
+</style>
+<!--[if !mso]><!-->
+<style type=\\"text/css\\">
+  @media only screen and (max-width:480px) {
+    @-ms-viewport { width:320px; }
+    @viewport { width:320px; }
+  }
+</style>
+<!--<![endif]-->
+<!--[if mso]>
+<xml>
+  <o:OfficeDocumentSettings>
+    <o:AllowPNG/>
+    <o:PixelsPerInch>96</o:PixelsPerInch>
+  </o:OfficeDocumentSettings>
+</xml>
+<![endif]-->
+<!--[if lte mso 11]>
+<style type=\\"text/css\\">
+  .outlook-group-fix {
+    width:100% !important;
+  }
+</style>
+<![endif]-->
+<style type=\\"text/css\\">
+        @media screen and (max-width: 480px) {
+          .header__desc__title {
+            text-align: center !important;
+          }
+          .header__desc__subtitle {
+            text-align: center !important;
+          }
+          .header__title > td {
+            text-align: center !important;
+          }
+          .header__title > td > table {
+            width: 100px;
+            margin: auto;
+          }
+
+          .footer__settings > td > div {
+            text-align: center !important;
+          }
+
+          .footer__help > td > div,
+          td.footer__help > div,
+          emailHeader {
+            text-align: center !important;
+          }
+          .header__title table {
+            margin: 0 auto;
+            text-align: center;
+          }
+        }
+      </style></head>
+<body style=\\"background: rgb(245, 246, 247);\\">
+  
+  <div class=\\"mj-container\\" style=\\"background-color:#f5f6f7;\\"></div>
+
+</body></html>",
+            "message": "Push content",
+            "preferred_channels": Array [
+              "mail",
+              "mobile",
+            ],
+            "title": "Notification title",
+          },
+          "type": "io.cozy.notifications",
+        },
+      },
+    ],
+  ],
+  "results": Array [
+    Object {
+      "type": "return",
+      "value": undefined,
+    },
+  ],
+}
+`;
