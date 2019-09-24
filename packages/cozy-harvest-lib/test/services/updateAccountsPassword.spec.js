@@ -1,13 +1,13 @@
-import updateAccountsPassword from './updateAccountsPassword'
+import updateAccountsPassword from 'services/updateAccountsPassword'
 
 import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
   updateAccounts
-} from './utils'
+} from 'services/utils'
 
-jest.mock('./utils')
+jest.mock('services/utils')
 
 describe('update accounts password function', () => {
   const mockVaultClient = {
