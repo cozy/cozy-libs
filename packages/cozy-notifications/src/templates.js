@@ -44,7 +44,7 @@ const locales = {
  *
  * @return {PartialTemplateInfo}
  */
-const collectInfo = (templateContent, partials) => {
+export const collectInfo = (templateContent, partials) => {
   const parsedTemplate = Handlebars.parse(templateContent)
 
   let curBody = parsedTemplate.body
@@ -140,7 +140,7 @@ const createContentBlock = name => {
  * {{/content}}
  * ```
  */
-const injectContent = (ast, replacements) => {
+export const injectContent = (ast, replacements) => {
   const root = ast.body.find(isExtendBlock).program
   const contentBlocks = root.body.filter(isContentBlock)
 
@@ -177,7 +177,7 @@ const injectContent = (ast, replacements) => {
  * Returns a function that can render a template
  * Pre-compiles partials and registers helpers
  */
-const renderer = ({ partials: userPartials, helpers: userHelpers }) => {
+export const renderer = ({ partials: userPartials, helpers: userHelpers }) => {
   const allPartials = {
     ...partials,
     ...userPartials
@@ -211,7 +211,12 @@ const renderer = ({ partials: userPartials, helpers: userHelpers }) => {
  * the wrapping inside a built-in template, and the MJML rendering.
  *
  */
-const twoPhaseRender = (Handlebars, templateRaw, templateData, partials) => {
+export const twoPhaseRender = (
+  Handlebars,
+  templateRaw,
+  templateData,
+  partials
+) => {
   const { contentASTByName, ast } = collectInfo(templateRaw, partials)
 
   const renderedContentBlocks = mapValues(contentASTByName, contentAST => {
@@ -250,14 +255,6 @@ const helpers = {
   }
 }
 
-const partials = {
+export const partials = {
   'cozy-layout': cozyLayout
-}
-
-module.exports = {
-  twoPhaseRender,
-  injectContent,
-  collectInfo,
-  partials,
-  renderer
 }

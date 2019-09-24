@@ -1,6 +1,6 @@
 import appTemplate from './__tests__/app-layout.hbs'
 import template from './__tests__/email-layout.hbs'
-import emailTemplates from './templates'
+import { renderer } from './templates'
 
 const helpers = {
   greeting: name => `Hello ${name} !`,
@@ -13,8 +13,8 @@ const partials = {
 
 describe('template utils', () => {
   it('should extract parts and parents from template', () => {
-    const renderer = emailTemplates.renderer({ partials, helpers })
-    const templateInfo = renderer.collectInfo(template)
+    const { collectInfo } = renderer({ partials, helpers })
+    const templateInfo = collectInfo(template)
     expect(templateInfo.parents).toEqual(['app-layout', 'cozy-layout'])
     expect(Object.keys(templateInfo.contentASTByName)).toEqual([
       'emailTitle',
@@ -28,9 +28,12 @@ describe('template utils', () => {
   })
 
   it('should inject content blocks', () => {
-    const renderer = emailTemplates.renderer({ partials, helpers })
-    const { ast } = renderer.collectInfo(template, partials)
-    renderer.injectContent(ast, {
+    const { collectInfo, injectContent, Handlebars } = renderer({
+      partials,
+      helpers
+    })
+    const { ast } = collectInfo(template, partials)
+    injectContent(ast, {
       emailTitle: 'emailTitle',
       emailSubtitle: 'emailSubtitle',
       content: 'content',
@@ -41,19 +44,19 @@ describe('template utils', () => {
       settingsURL: 'settingsUrl',
       footerHelp: 'footerHelp'
     })
-    const compiled = renderer.Handlebars.compile(ast)
+    const compiled = Handlebars.compile(ast)
     const rendered = compiled()
     expect(rendered).toMatchSnapshot()
   })
 
   it('should render parts and full', () => {
-    const renderer = emailTemplates.renderer({ partials, helpers })
+    const { render } = renderer({ partials, helpers })
     const data = {
       name: 'Homer',
       appUrl: 'https://homer-myapp.mycozy.cloud',
       settingsUrl: 'https://homer-settings.mycozy.cloud'
     }
-    const compiled = renderer.render({
+    const compiled = render({
       template,
       data
     })
