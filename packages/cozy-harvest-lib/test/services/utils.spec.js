@@ -3,7 +3,7 @@ import {
   getOrganizationKey,
   fetchAccountsForCipherId,
   updateAccounts
-} from './utils'
+} from 'services/utils'
 import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 
