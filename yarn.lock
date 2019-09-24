@@ -4635,21 +4635,21 @@ cozy-doctypes@1.67.0:
     lodash "4.17.15"
     prop-types "^15.7.2"
 
-cozy-keys-lib@1.6.0:
-  version "1.6.0"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.6.0.tgz#4e9689da5c3532701a566df8e9f34ad94464de37"
-  integrity sha512-tc2xqN3LQhb1WcN7XoWdk42cC3VE5WAvYk4CJVHjWGUl4nc1SKYc2jgNGumpZ/uhnVycoIa6mUJ0g/yiRIfDgQ==
+cozy-keys-lib@1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.9.0.tgz#bf23b658495b6ab9edabd096646ed2f3887c04ef"
+  integrity sha512-XnA7uYNKIaLZiDDhVt83kB6VeRwE7fUEjeXkUnc1/TMuY2iqSt/9CJ2slHM5PrLANDs6c0w5RuTMFfs5/6nT8w==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
     big-integer "^1.6.44"
     classnames "^2.2.6"
     cozy-device-helper "^1.7.5"
-    cozy-ui "^22.12.0"
+    cozy-ui "^24.0.0"
     lodash "^4.17.15"
     lunr "^2.3.6"
     microee "^0.0.6"
-    node-forge "^0.8.5"
+    node-forge "^0.9.0"
     prop-types "^15.7.2"
     react "^16.8.3"
     react-dom "^16.9.0"
@@ -4751,6 +4751,23 @@ cozy-ui@28.4.1, cozy-ui@^28.4.1:
     react-pdf "^4.0.5"
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
+
+cozy-ui@^24.0.0:
+  version "24.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-24.3.0.tgz#fd92c11798c52f573dc614b12f2a0ba550e845ec"
+  integrity sha512-Pab0kzbYAVItJcsdV//a97vGtLzhqY5XD7oc7Gv//2ccGYVeMhCq4kkvsYIoE14AEUaZrPyqNUXC3vK0jZVQYg==
+  dependencies:
+    "@babel/runtime" "^7.3.4"
+    body-scroll-lock "^2.5.8"
+    classnames "^2.2.5"
+    date-fns "^1.28.5"
+    hammerjs "^2.0.8"
+    node-polyglot "^2.2.2"
+    normalize.css "^7.0.0"
+    react-hot-loader "^4.3.11"
+    react-markdown "^4.0.8"
+    react-pdf "^4.0.5"
+    react-select "2.2.0"
 
 create-ecdh@^4.0.0:
   version "4.0.3"
@@ -10463,10 +10480,10 @@ node-forge@^0.7.1:
   version "0.7.6"
   resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.7.6.tgz#fdf3b418aee1f94f0ef642cd63486c77ca9724ac"
 
-node-forge@^0.8.5:
-  version "0.8.5"
-  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.8.5.tgz#57906f07614dc72762c84cef442f427c0e1b86ee"
-  integrity sha512-vFMQIWt+J/7FLNyKouZ9TazT74PRV3wgv9UT4cRjC8BffxFbKXkgIWR42URCPSnHm/QDz6BOlb2Q0U4+VQT67Q==
+node-forge@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/node-forge/-/node-forge-0.9.0.tgz#d624050edbb44874adca12bb9a52ec63cb782579"
+  integrity sha512-7ASaDa3pD+lJ3WvXFsxekJQelBKRpne+GOVbLbtHYdd7pFspyeuJHnWfLplGf3SwKGbfs/aYl5V/JCIaHVUKKQ==
 
 node-gyp@^5.0.2:
   version "5.0.3"
