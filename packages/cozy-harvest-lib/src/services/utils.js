@@ -67,3 +67,46 @@ export const updateAccounts = async (
     })
   )
 }
+
+export const fetchLoginFailedTriggersForAccountsIds = async (
+  cozyClient,
+  accountsIds
+) => {
+  const triggers = await cozyClient.queryAll(
+    cozyClient.find('io.cozy.triggers').where({
+      'message.account': {
+        $in: accountsIds
+      }
+    })
+  )
+
+  const triggersIds = triggers.map(trigger => trigger._id)
+
+  const triggersStates = await Promise.all(
+    triggersIds.map(triggerId => {
+      return cozyClient
+        .getStackClient()
+        .fetchJSON('GET', `/jobs/triggers/${triggerId}/state`)
+    })
+  )
+
+  const triggersToRetry = triggersStates
+    .filter(state => {
+      const { status, last_error: lastError } = state.data.attributes
+
+      return status === 'errored' && lastError === 'LOGIN_FAILED'
+    })
+    .map(state => state.data.id)
+
+  return triggersToRetry
+}
+
+export const launchTriggers = async (cozyClient, triggersIds) => {
+  await Promise.all(
+    triggersIds.map(triggerId => {
+      return cozyClient
+        .getStackClient()
+        .fetchJSON('POST', `/jobs/triggers/${triggerId}/launch`)
+    })
+  )
+}
