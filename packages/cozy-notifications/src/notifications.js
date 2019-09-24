@@ -1,5 +1,14 @@
 import { renderer } from './templates'
 import { renderMJML } from './mjml'
+import { generateUniversalLink, generateWebLink } from './urls'
+import get from 'lodash/get'
+import enLocale from './locales/en.json'
+import frLocale from './locales/fr.json'
+
+const builtInLocales = {
+  en: enLocale,
+  fr: frLocale
+}
 
 const result = (fn, defaultValue, ...args) => {
   if (fn && typeof fn === 'function') {
@@ -9,12 +18,35 @@ const result = (fn, defaultValue, ...args) => {
   }
 }
 
+const getBuiltInHelpersForView = notifView => {
+  const linkHelperOptions = {
+    cozyUrl: notifView.client.stackClient.uri
+  }
+  return {
+    t: (key, hOpts) => notifView.t(key, hOpts.hash),
+    tGlobal: key => {
+      const locale = builtInLocales[notifView.lang]
+      return get(locale, key)
+    },
+    universalLink: hOpts => {
+      return generateUniversalLink({ ...hOpts.hash, ...linkHelperOptions })
+    },
+    webLink: hOpts => {
+      return generateWebLink({ ...hOpts.hash, ...linkHelperOptions })
+    }
+  }
+}
+
 const buildAttributes = async (notifView, options = {}) => {
   const templateData = await notifView.buildData()
   templateData.lang = options.lang
 
   const partials = result(notifView.getPartials, {})
-  const helpers = result(notifView.getHelpers, {})
+
+  const helpers = {
+    ...result(notifView.getHelpers, {}),
+    ...getBuiltInHelpersForView(notifView)
+  }
 
   const { render } = renderer({
     partials,
@@ -25,6 +57,7 @@ const buildAttributes = async (notifView, options = {}) => {
     template: notifView.constructor.template,
     data: templateData
   })
+
   const contentHTML = renderMJML(full)
 
   const pushContent = result(notifView.getPushContent, null, templateData)
@@ -40,6 +73,9 @@ const buildAttributes = async (notifView, options = {}) => {
 }
 
 export const sendNotification = async (cozyClient, notifView) => {
+  if (!cozyClient.stackClient.uri) {
+    throw new Error('stack client without uri')
+  }
   if (notifView.prepare) {
     await notifView.prepare()
   }
@@ -53,7 +89,7 @@ export const sendNotification = async (cozyClient, notifView) => {
     Object.assign(attributes, notifView.getExtraAttributes())
   }
 
-  const res = await cozyClient.fetchJSON('POST', '/notifications', {
+  const res = await cozyClient.stackClient.fetchJSON('POST', '/notifications', {
     data: {
       type: 'io.cozy.notifications',
       attributes

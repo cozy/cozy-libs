@@ -127,8 +127,9 @@ You can now use your template for a notification view.
 ```
 import template from './my-notification.hbs'
 import appTemplate from './app-layout.hbs'
+import { NotificationView } from 'cozy-notifications'
 
-class MyNotificationView {
+class MyNotificationView extends NotificationView {
   getPartials () {
     return { 'app-layout': appTemplate }
   }
@@ -150,4 +151,40 @@ const render = renderer({ partials, helpers })
 const { parts } = render({ template, data })
 // { "emailTitle": "A notification from My App !", ... }
 ```
+
+## Built-in helpers
+
+- `t` will be passed automatically as a helper in your templates, but you must pass
+ the `locales` object yourself when instantiating the NotificationView
+
+```javascript
+const locales = {
+  de: {
+    hello: "Guten Tag %{name} !"
+  }
+}
+
+const myNotifView = new MyNotificationView({
+  ...,
+  locales
+})
+```
+
+```handlebars
+{{ t "hello" name='Homer' }}
+```
+
+- `webLink` is able to build links that go the web version of an app
+
+```handlebars
+{{ webLink slug="home" }}
+```
+
+- `universalLink` is able to build links that use automatically the web or mobile version the app
+
+```handlebars
+{{ universalLink slug="banks" }}
+```
+
+
 

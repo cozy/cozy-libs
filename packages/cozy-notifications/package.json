@@ -32,6 +32,7 @@
     "babel-plugin-inline-import": "^3.0.0"
   },
   "jest": {
+    "testPathIgnorePatterns": ["dist"],
     "transform": {
       "^.+\\.jsx?$": "babel-jest",
       "\\.css$": "<rootDir>/test/readFileESM.js",

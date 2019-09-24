@@ -1,8 +1,9 @@
 import { sendNotification } from './notifications'
 import emailTemplate from './__tests__/email-layout.hbs'
 import appLayout from './__tests__/app-layout.hbs'
+import NotificationView from './view'
 
-class NotificationView {
+class MyNotificationView extends NotificationView {
   async fetchData() {
     this.name = 'patrick'
   }
@@ -44,17 +45,31 @@ class NotificationView {
   }
 }
 
-NotificationView.preferredChannels = ['mail', 'mobile']
-NotificationView.template = emailTemplate
-NotificationView.category = 'my-category'
+MyNotificationView.preferredChannels = ['mail', 'mobile']
+MyNotificationView.template = emailTemplate
+MyNotificationView.category = 'my-category'
 
 describe('notifications', () => {
   it('should send a notification view', async () => {
     const cozyClient = {
-      fetchJSON: jest.fn()
+      stackClient: {
+        fetchJSON: jest.fn(),
+        uri: 'http://cozy.tools:8080'
+      }
     }
-    const nv = new NotificationView()
+    const nv = new MyNotificationView({
+      client: cozyClient,
+      lang: 'en',
+      data: {
+        name: 'Homer'
+      },
+      locales: {
+        en: {
+          hello: 'Hello %{name} !'
+        }
+      }
+    })
     await sendNotification(cozyClient, nv)
-    expect(cozyClient.fetchJSON).toMatchSnapshot()
+    expect(cozyClient.stackClient.fetchJSON).toMatchSnapshot()
   })
 })

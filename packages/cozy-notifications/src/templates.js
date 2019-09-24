@@ -3,10 +3,6 @@ import overEvery from 'lodash/overEvery'
 import fromPairs from 'lodash/fromPairs'
 import layouts from 'handlebars-layouts'
 import mapValues from 'lodash/mapValues'
-import get from 'lodash/get'
-
-import enLocale from './locales/en.json'
-import frLocale from './locales/fr.json'
 
 import styleCSS from './style.css'
 import cozyLayout from './cozy-layout.hbs'
@@ -27,11 +23,6 @@ const isContentBlock = overEvery([
 
 const pushAll = (iter, items) => {
   iter.push.apply(iter, items)
-}
-
-const locales = {
-  en: enLocale,
-  fr: frLocale
 }
 
 /**
@@ -248,10 +239,6 @@ const embeds = {
 const helpers = {
   embedFile: filename => {
     return embeds[filename]
-  },
-  tGlobal: (lang, key) => {
-    const locale = locales[lang]
-    return get(locale, key)
   }
 }
 
