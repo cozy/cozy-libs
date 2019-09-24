@@ -2,7 +2,9 @@ import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
-  updateAccounts
+  updateAccounts,
+  fetchLoginFailedTriggersForAccountsIds,
+  launchTriggers
 } from 'services/utils'
 import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
@@ -17,24 +19,29 @@ jest.mock('cozy-keys-lib/transpiled/SymmetricCryptoKey', () => {
   return MockSymmetricCryptoKey
 })
 
-const mockVaultClient = {
-  Utils: {
-    fromB64ToArray: str => str
-  },
-  cryptoService: {
-    aesDecryptToUtf8: jest.fn(str => str)
-  }
-}
+let mockVaultClient, mockCozyClient
 
-const mockCozyClient = {
-  getStackClient: () => mockCozyClient,
-  find: jest.fn(() => mockCozyClient),
-  where: jest.fn(() => mockCozyClient),
-  indexFields: jest.fn(() => mockCozyClient),
-  query: jest.fn(),
-  save: jest.fn(),
-  fetchJSON: jest.fn()
-}
+beforeEach(() => {
+  mockVaultClient = {
+    Utils: {
+      fromB64ToArray: str => str
+    },
+    cryptoService: {
+      aesDecryptToUtf8: jest.fn(str => str)
+    }
+  }
+
+  mockCozyClient = {
+    getStackClient: () => mockCozyClient,
+    find: jest.fn(() => mockCozyClient),
+    where: jest.fn(() => mockCozyClient),
+    indexFields: jest.fn(() => mockCozyClient),
+    query: jest.fn(),
+    save: jest.fn(),
+    fetchJSON: jest.fn(),
+    queryAll: jest.fn()
+  }
+})
 
 describe('decryptString', () => {
   it('should call cryptoService decrypt function with the good parameters', async () => {
@@ -125,5 +132,57 @@ describe('updateAccounts', () => {
         password: 'newPassword'
       }
     })
+  })
+})
+
+describe('fetchLoginFailedTriggersForAccountsIds', () => {
+  it('should fetch triggers that are in a LOGIN_FAILED errored state for given accounts ids', async () => {
+    mockCozyClient.queryAll.mockResolvedValue([
+      { _id: 'tri1' },
+      { _id: 'tri2' },
+      { _id: 'tri3' }
+    ])
+
+    let i = 0
+    mockCozyClient.fetchJSON.mockImplementation(() => {
+      const triggerState = {
+        data: {
+          id: `tri${i + 1}`,
+          attributes: {
+            status: i < 2 ? 'errored' : 'done',
+            last_error: i < 2 ? 'LOGIN_FAILED' : 'ERROR'
+          }
+        }
+      }
+
+      ++i
+
+      return triggerState
+    })
+
+    const accountsIds = ['acc1', 'acc2']
+    const triggers = await fetchLoginFailedTriggersForAccountsIds(
+      mockCozyClient,
+      accountsIds
+    )
+
+    expect(triggers).toEqual(['tri1', 'tri2'])
+  })
+})
+
+describe('launchTriggers', () => {
+  it('should launch all triggers which ids are passed in arguments', async () => {
+    const triggersIds = ['tri1', 'tri2']
+    await launchTriggers(mockCozyClient, triggersIds)
+
+    expect(mockCozyClient.fetchJSON).toHaveBeenCalledTimes(2)
+    expect(mockCozyClient.fetchJSON).toHaveBeenCalledWith(
+      'POST',
+      '/jobs/triggers/tri1/launch'
+    )
+    expect(mockCozyClient.fetchJSON).toHaveBeenCalledWith(
+      'POST',
+      '/jobs/triggers/tri2/launch'
+    )
   })
 })
