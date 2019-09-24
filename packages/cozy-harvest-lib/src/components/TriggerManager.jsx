@@ -398,6 +398,12 @@ export class TriggerManager extends Component {
     return Account.fromCipher(cipher)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.error && this.props.error !== prevProps.error) {
+      this.setState({ step: 'accountForm' })
+    }
+  }
+
   render() {
     const {
       error: triggerError,
@@ -421,6 +427,10 @@ export class TriggerManager extends Component {
 
     const { oauth } = konnector
 
+    const showSpinner = submitting && selectedCipher && step === 'ciphersList'
+    const showCiphersList = step === 'ciphersList'
+    const showAccountForm = step === 'accountForm'
+
     if (oauth) {
       return (
         <OAuthForm
@@ -432,7 +442,7 @@ export class TriggerManager extends Component {
       )
     }
 
-    if (submitting && selectedCipher && step === 'ciphersList') {
+    if (showSpinner) {
       return (
         <div className="u-flex u-flex-column u-flex-items-center">
           <Spinner size="xxlarge" />
@@ -445,14 +455,14 @@ export class TriggerManager extends Component {
       <div>
         <VaultUnlocker onDismiss={onVaultDismiss}>
           <div id={modalInto} />
-          {step === 'ciphersList' && (
+          {showCiphersList && (
             <VaultCiphersList
               konnector={konnector}
               onSelect={this.handleCipherSelect}
               onNoCiphers={this.handleNoCiphers}
             />
           )}
-          {step === 'accountForm' && (
+          {showAccountForm && (
             <>
               {showBackButton && (
                 <BackButton onClick={this.showCiphersList}>
