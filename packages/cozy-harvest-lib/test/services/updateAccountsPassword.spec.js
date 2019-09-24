@@ -4,10 +4,16 @@ import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
-  updateAccounts
+  updateAccounts,
+  fetchLoginFailedTriggersForAccountsIds,
+  launchTriggers
 } from 'services/utils'
 
 jest.mock('services/utils')
+
+afterEach(() => {
+  jest.clearAllMocks()
+})
 
 describe('update accounts password function', () => {
   const mockVaultClient = {
@@ -115,5 +121,32 @@ describe('update accounts password function', () => {
       'yolo_decrypted',
       'yolo_decrypted'
     )
+  })
+
+  it('should launch triggers in LOGIN_FAILED error state', async () => {
+    const accounts = {
+      data: [{ _id: 'acc1' }, { _id: 'acc2' }]
+    }
+
+    fetchAccountsForCipherId.mockResolvedValue(accounts)
+
+    fetchLoginFailedTriggersForAccountsIds.mockResolvedValue(['tri1', 'tri2'])
+
+    await updateAccountsPassword(mockCozyClient, mockVaultClient, {
+      login: {
+        password: 'yolo',
+        username: 'yolo'
+      }
+    })
+
+    expect(fetchLoginFailedTriggersForAccountsIds).toHaveBeenCalledWith(
+      mockCozyClient,
+      ['acc1', 'acc2']
+    )
+
+    expect(launchTriggers).toHaveBeenCalledWith(mockCozyClient, [
+      'tri1',
+      'tri2'
+    ])
   })
 })
