@@ -1,4 +1,4 @@
-import { mjml2html } from 'mjml'
+import mjml2html from 'mjml'
 
 export const renderMJML = mjmlContent => {
   const obj = mjml2html(mjmlContent)
