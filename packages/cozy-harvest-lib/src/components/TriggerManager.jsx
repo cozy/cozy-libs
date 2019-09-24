@@ -11,6 +11,7 @@ import {
   CipherType,
   UriMatchType
 } from 'cozy-keys-lib'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -361,9 +362,7 @@ export class TriggerManager extends Component {
     if (hasValuesForRequiredFields) {
       this.setState(
         {
-          step: 'accountForm',
-          selectedCipher,
-          showBackButton: true
+          selectedCipher
         },
         () => {
           this.handleSubmit(values)
@@ -399,6 +398,12 @@ export class TriggerManager extends Component {
     return Account.fromCipher(cipher)
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.error && this.props.error !== prevProps.error) {
+      this.setState({ step: 'accountForm' })
+    }
+  }
+
   render() {
     const {
       error: triggerError,
@@ -422,6 +427,10 @@ export class TriggerManager extends Component {
 
     const { oauth } = konnector
 
+    const showSpinner = submitting && selectedCipher && step === 'ciphersList'
+    const showCiphersList = step === 'ciphersList'
+    const showAccountForm = step === 'accountForm'
+
     if (oauth) {
       return (
         <OAuthForm
@@ -433,18 +442,27 @@ export class TriggerManager extends Component {
       )
     }
 
+    if (showSpinner) {
+      return (
+        <div className="u-flex u-flex-column u-flex-items-center">
+          <Spinner size="xxlarge" />
+          <p>{t('triggerManager.connecting')}</p>
+        </div>
+      )
+    }
+
     return (
       <div>
         <VaultUnlocker onDismiss={onVaultDismiss}>
           <div id={modalInto} />
-          {step === 'ciphersList' && (
+          {showCiphersList && (
             <VaultCiphersList
               konnector={konnector}
               onSelect={this.handleCipherSelect}
               onNoCiphers={this.handleNoCiphers}
             />
           )}
-          {step === 'accountForm' && (
+          {showAccountForm && (
             <>
               {showBackButton && (
                 <BackButton onClick={this.showCiphersList}>
