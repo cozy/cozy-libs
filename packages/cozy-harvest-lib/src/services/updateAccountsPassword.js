@@ -4,7 +4,9 @@ import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
-  updateAccounts
+  updateAccounts,
+  fetchLoginFailedTriggersForAccountsIds,
+  launchTriggers
 } from './utils'
 
 const updateAccountsPassword = async (
@@ -37,6 +39,14 @@ const updateAccountsPassword = async (
     decryptedUsername,
     decryptedPassword
   )
+
+  const accountsIds = accounts.data.map(account => account._id)
+  const loginFailedTriggers = await fetchLoginFailedTriggersForAccountsIds(
+    cozyClient,
+    accountsIds
+  )
+
+  await launchTriggers(cozyClient, loginFailedTriggers)
 }
 
 export default updateAccountsPassword
