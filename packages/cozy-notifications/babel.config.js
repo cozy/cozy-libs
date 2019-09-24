@@ -1,10 +1,5 @@
 module.exports = {
-  presets: [
-    [
-      'cozy-app',
-      { presetEnv: { modules: false }, transformRuntime: { helpers: true } }
-    ]
-  ],
+  presets: [['cozy-app', { transformRuntime: { helpers: true } }]],
   plugins: [
     [
       'babel-plugin-inline-import',
