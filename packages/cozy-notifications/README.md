@@ -5,7 +5,7 @@ application or konnector.
 
 The main entrypoint of this library is `sendNotifification(cozyClient, notificationView)`.
 
-Before being able to use it, you must define a notification view class.
+Before being able to use it, we need to define a notification view class.
 
 ## Notification views
 
@@ -36,11 +36,38 @@ class MyNotification {
 MyNotification.template = require('./template.hbs')
 ```
 
+## preferredChannels
+
+We can define one which channels the user will receive the notification.
+
+```
+MyNotification.preferredChannels = ['mail', 'mobile']
+```
+
+### mobile
+
+The mobile channels consists of a push notification. Its title will be
+the result of the `getTitle` method and its content will be the result
+of `getPushContent`.
+
+
+### mail
+
+Emails need more markup and thus will need the `template` class attribute.
+They are written in `mjml`, making it possible to write good looking emails in every major mail client.
+
 ## Templates
 
-Templates used in notification views are based on [`handlebars`](https://handlebarsjs.com/)
-and [`handlebars-layouts`](https://www.npmjs.com/package/handlebars-layouts). This makes
-it   simple to create notifications that are based on built-in templates.
+Templates serve for the HTML content of emails.
+
+Templates used in notification views are based on
+
+- [`handlebars`](https://handlebarsjs.com/) for templating
+- [`handlebars-layouts`](https://www.npmjs.com/package/handlebars-layouts)
+  to be able to extend layouts
+- [`mjml`](https://mjml.io/) to build responsive emails
+
+This makes it simple to create emails that are based on built-in templates.
 
 For now `cozy-notifications` supports only the pre-built `cozy-layout` template.
 
@@ -52,9 +79,9 @@ This template has the following parts to be filled:
 - `footerHelp`
 - `content`
 
-Since `appName`, `topLogo` and `appURL` will mostly never change inside a particular
-application, it is advised to create a template extending `cozy-layout` in your
-application and then refer to it in each of your email templates.
+Since `appName`, `topLogo` and `appURL` will mostly never change inside a
+particular application, it is advised to create a template extending `cozy-layout`
+in your application and then refer to it in each of your email templates.
 
 To provide the content for a particular part, use the following syntax:
 
@@ -95,7 +122,7 @@ bundler and/or test runner to require those files correctly.
 {{/extend}}
 ```
 
-Now that you have provided generic parts, you can code a particular template.
+Now that we have provided generic parts, we can code a particular template.
 
 A sample template for a particular notification:
 
@@ -122,7 +149,7 @@ A sample template for a particular notification:
 {{/extend}}
 ```
 
-You can now use your template for a notification view.
+We can now use our template for a notification view.
 
 ```
 import template from './my-notification.hbs'
@@ -143,7 +170,7 @@ MyNotificationView.template = template
 email will not be sent directly to the stack, but only rendered parts will be
 sent; in other words, only `appURL`, `topLogo`, `content` etc... will be sent,
 instead of the whole content). This is why `cozy-notifications` needs to know
-your *uncompiled* partials. You can destructure `parts` to access rendered parts.
+our *uncompiled* partials. We can destructure `parts` to access rendered parts.
 
 ```
 import { renderer } from 'cozy-notifications'
@@ -154,8 +181,8 @@ const { parts } = render({ template, data })
 
 ## Built-in helpers
 
-- `t` will be passed automatically as a helper in your templates, but you must pass
- the `locales` object yourself when instantiating the NotificationView
+- `t` will be passed automatically as a helper in templates. We must pass
+ the `locales` object when instantiating the NotificationView.
 
 ```javascript
 const locales = {
