@@ -1,5 +1,6 @@
 import Polyglot from 'node-polyglot'
 import { isString, isObject, isArray, validateAgainst } from './validators'
+import { toText } from './text'
 
 const optionsTypes = {
   data: isObject,
@@ -28,6 +29,10 @@ class NotificationView {
 
   async buildData() {
     return this.data
+  }
+
+  toText(html) {
+    return toText(html)
   }
 }
 
