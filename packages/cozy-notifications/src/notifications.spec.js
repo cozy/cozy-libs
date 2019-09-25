@@ -39,10 +39,6 @@ class MyNotificationView extends NotificationView {
       'app-layout': appLayout
     }
   }
-
-  toText() {
-    return 'Simple text content'
-  }
 }
 
 MyNotificationView.preferredChannels = ['mail', 'mobile']

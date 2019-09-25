@@ -1,5 +1,4 @@
-import { sendNotification } from './notifications'
-import { renderer } from './templates'
-import NotificationView from './view'
-
-export { sendNotification, renderer, NotificationView }
+export { sendNotification } from './notifications'
+export { renderer } from './templates'
+export { default as NotificationView } from './view'
+export { toText } from './text'

@@ -10,7 +10,20 @@ exports[`notifications should send a notification view 1`] = `
         "data": Object {
           "attributes": Object {
             "category": "my-category",
-            "content": "Simple text content",
+            "content": "  # Cozy - My app
+
+  ## My email title - Hello patrick!
+
+
+  # Title 1
+
+  ## Title 2
+
+  Paragraph 1
+
+  Paragraph 2
+
+",
             "content_html": "
     <!doctype html>
     <html xmlns=\\"http://www.w3.org/1999/xhtml\\" xmlns:v=\\"urn:schemas-microsoft-com:vml\\" xmlns:o=\\"urn:schemas-microsoft-com:office:office\\">
@@ -303,18 +316,18 @@ exports[`notifications should send a notification view 1`] = `
           
             <tr>
               <td
-                 class=\\"\\" width=\\"600px\\"
+                 class=\\"before-content-outlook\\" width=\\"600px\\"
               >
           
       <table
-         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:598px;\\" width=\\"598\\"
+         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"before-content-outlook\\" style=\\"width:598px;\\" width=\\"598\\"
       >
         <tr>
           <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
       <![endif]-->
     
       
-      <div style=\\"Margin:0px auto;max-width:598px;\\">
+      <div class=\\"before-content\\" style=\\"Margin:0px auto;max-width:598px;\\">
         
         <table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-spacing: 0; width: 100%;\\" width=\\"100%\\">
           <tbody>
@@ -384,8 +397,149 @@ exports[`notifications should send a notification view 1`] = `
             </tr>
           <![endif]-->
         <!-- content -->
+          <!--[if mso | IE]>
+            <tr>
+              <td
+                 class=\\"\\" width=\\"600px\\"
+              >
+          
+      <table
+         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:598px;\\" width=\\"598\\"
+      >
+        <tr>
+          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+      <![endif]-->
     
+      
+      <div style=\\"Margin:0px auto;max-width:598px;\\">
+        
+        <table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-spacing: 0; width: 100%;\\" width=\\"100%\\">
+          <tbody>
+            <tr>
+              <td style=\\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;\\">
                 <!--[if mso | IE]>
+                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                
+        <tr>
+      
+            <td
+               class=\\"\\" style=\\"vertical-align:top;width:598px;\\"
+            >
+          <![endif]-->
+            
+      <div class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\">
+        
+      <table border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-spacing: 0; vertical-align: top;\\" width=\\"100%\\" valign=\\"top\\">
+        
+            <tr>
+              <td align=\\"left\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\">
+                
+      <div style=\\"font-family:Lato, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\\">
+        <h1 style=\\"display: block; margin: 0; padding: 0;\\">Title 1</h1>
+          <h2 style=\\"display: block; margin: 0; padding: 0;\\">Title 2</h2>
+          <p>Paragraph 1</p>
+      </div>
+    
+              </td>
+            </tr>
+          
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]>
+            </td>
+          
+        </tr>
+      
+                  </table>
+                <![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]>
+          </td>
+        </tr>
+      </table>
+      
+              </td>
+            </tr>
+          
+            <tr>
+              <td
+                 class=\\"\\" width=\\"600px\\"
+              >
+          
+      <table
+         align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" class=\\"\\" style=\\"width:598px;\\" width=\\"598\\"
+      >
+        <tr>
+          <td style=\\"line-height:0px;font-size:0px;mso-line-height-rule:exactly;\\">
+      <![endif]-->
+    
+      
+      <div style=\\"Margin:0px auto;max-width:598px;\\">
+        
+        <table align=\\"center\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-spacing: 0; width: 100%;\\" width=\\"100%\\">
+          <tbody>
+            <tr>
+              <td style=\\"direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;\\">
+                <!--[if mso | IE]>
+                  <table role=\\"presentation\\" border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\">
+                
+        <tr>
+      
+            <td
+               class=\\"\\" style=\\"vertical-align:top;width:598px;\\"
+            >
+          <![endif]-->
+            
+      <div class=\\"mj-column-per-100 outlook-group-fix\\" style=\\"font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:top;width:100%;\\">
+        
+      <table border=\\"0\\" cellpadding=\\"0\\" cellspacing=\\"0\\" role=\\"presentation\\" style=\\"border-spacing: 0; vertical-align: top;\\" width=\\"100%\\" valign=\\"top\\">
+        
+            <tr>
+              <td align=\\"left\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\">
+                
+      <div style=\\"font-family:Lato, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\\">
+        <p>Paragraph 2</p>
+      </div>
+    
+              </td>
+            </tr>
+          
+      </table>
+    
+      </div>
+    
+          <!--[if mso | IE]>
+            </td>
+          
+        </tr>
+      
+                  </table>
+                <![endif]-->
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        
+      </div>
+    
+      
+      <!--[if mso | IE]>
+          </td>
+        </tr>
+      </table>
+      
+              </td>
+            </tr>
+          
                   </table>
                 <![endif]-->
               </td>
