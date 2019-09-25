@@ -1,13 +1,18 @@
-import updateAccountsPassword from './updateAccountsPassword'
+import updateAccountsPassword from 'services/updateAccountsPassword'
 
-jest.mock('cozy-keys-lib/transpiled/SymmetricCryptoKey', () => {
-  class MockSymmetricCryptoKey {
-    constructor(key, encType) {
-      return { key, encType }
-    }
-  }
+import {
+  decryptString,
+  getOrganizationKey,
+  fetchAccountsForCipherId,
+  updateAccounts,
+  fetchLoginFailedTriggersForAccountsIds,
+  launchTriggers
+} from 'services/utils'
 
-  return MockSymmetricCryptoKey
+jest.mock('services/utils')
+
+afterEach(() => {
+  jest.clearAllMocks()
 })
 
 describe('update accounts password function', () => {
@@ -30,7 +35,7 @@ describe('update accounts password function', () => {
   }
 
   it('should fail when the stack provides no org key', async () => {
-    mockCozyClient.fetchJSON.mockRejectedValue({
+    getOrganizationKey.mockRejectedValue({
       error: 'No org key'
     })
     expect.assertions(1)
@@ -49,56 +54,42 @@ describe('update accounts password function', () => {
     const mac = 'mac456'
     const password = 'iamsuperman'
     const username = 'Clark Kent'
-    const orgKey = '123'
 
     const encryptedPassword = `${encType}.${iv}|${password}|${mac}`
     const encryptedUsername = `${encType}.${iv}|${username}|${mac}`
-    mockCozyClient.fetchJSON.mockResolvedValue({
-      organizationKey: orgKey
-    })
-    mockCozyClient.query.mockResolvedValue({
-      data: []
-    })
+
+    decryptString.mockImplementation(str => str)
+    const orgKey = {}
+    getOrganizationKey.mockResolvedValue(orgKey)
+    fetchAccountsForCipherId.mockResolvedValue({ data: [] })
+
     await updateAccountsPassword(mockCozyClient, mockVaultClient, {
       login: {
         password: encryptedPassword,
         username: encryptedUsername
       }
     })
-    expect(mockVaultClient.cryptoService.aesDecryptToUtf8).toHaveBeenCalledWith(
-      encType,
-      password,
-      iv,
-      mac,
-      {
-        key: orgKey,
-        encType
-      }
+
+    expect(decryptString).toHaveBeenCalledWith(
+      encryptedPassword,
+      mockVaultClient,
+      orgKey
     )
-    expect(mockVaultClient.cryptoService.aesDecryptToUtf8).toHaveBeenCalledWith(
-      encType,
-      username,
-      iv,
-      mac,
-      {
-        key: orgKey,
-        encType
-      }
+
+    expect(decryptString).toHaveBeenCalledWith(
+      encryptedUsername,
+      mockVaultClient,
+      orgKey
     )
   })
 
   it('should update accounts', async () => {
-    mockCozyClient.fetchJSON.mockResolvedValue({
-      organizationKey: '123'
-    })
-    mockCozyClient.save.mockResolvedValue()
-    mockVaultClient.cryptoService.aesDecryptToUtf8.mockResolvedValueOnce(
-      'new_password'
-    )
-    mockVaultClient.cryptoService.aesDecryptToUtf8.mockResolvedValueOnce(
-      'new_login'
-    )
-    mockCozyClient.query.mockResolvedValue({
+    const orgKey = {}
+    getOrganizationKey.mockResolvedValue(orgKey)
+
+    decryptString.mockImplementation(str => `${str}_decrypted`)
+
+    const accounts = {
       data: [
         {
           auth: {
@@ -114,7 +105,9 @@ describe('update accounts password function', () => {
           }
         }
       ]
-    })
+    }
+    fetchAccountsForCipherId.mockResolvedValue(accounts)
+
     await updateAccountsPassword(mockCozyClient, mockVaultClient, {
       login: {
         password: 'yolo',
@@ -122,21 +115,38 @@ describe('update accounts password function', () => {
       }
     })
 
-    expect(mockCozyClient.save).toHaveBeenCalledTimes(2)
-    expect(mockCozyClient.save).toHaveBeenCalledWith({
-      _type: 'io.cozy.accounts',
-      auth: {
-        login: 'new_login',
-        password: 'new_password'
+    expect(updateAccounts).toHaveBeenCalledWith(
+      mockCozyClient,
+      accounts.data,
+      'yolo_decrypted',
+      'yolo_decrypted'
+    )
+  })
+
+  it('should launch triggers in LOGIN_FAILED error state', async () => {
+    const accounts = {
+      data: [{ _id: 'acc1' }, { _id: 'acc2' }]
+    }
+
+    fetchAccountsForCipherId.mockResolvedValue(accounts)
+
+    fetchLoginFailedTriggersForAccountsIds.mockResolvedValue(['tri1', 'tri2'])
+
+    await updateAccountsPassword(mockCozyClient, mockVaultClient, {
+      login: {
+        password: 'yolo',
+        username: 'yolo'
       }
     })
-    expect(mockCozyClient.save).toHaveBeenCalledWith({
-      _type: 'io.cozy.accounts',
-      auth: {
-        login: 'new_login',
-        password: 'new_password',
-        extra_field: 'stays'
-      }
-    })
+
+    expect(fetchLoginFailedTriggersForAccountsIds).toHaveBeenCalledWith(
+      mockCozyClient,
+      ['acc1', 'acc2']
+    )
+
+    expect(launchTriggers).toHaveBeenCalledWith(mockCozyClient, [
+      'tri1',
+      'tri2'
+    ])
   })
 })
