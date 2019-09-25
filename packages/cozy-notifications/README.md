@@ -212,6 +212,3 @@ const myNotifView = new MyNotificationView({
 ```handlebars
 {{ universalLink slug="banks" }}
 ```
-
-
-
