@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.1.0...cozy-notifications@0.2.0) (2019-09-25)
+
+
+### Features
+
+* Automatic conversion to text email ([4920070](https://github.com/cozy/cozy-libs/commit/4920070))
+* **notifs:** Automatic conversion HTML to text ([5189ce1](https://github.com/cozy/cozy-libs/commit/5189ce1))
+* Automatic toText ([#811](https://github.com/cozy/cozy-libs/issues/811)) ([1826b3b](https://github.com/cozy/cozy-libs/commit/1826b3b))
+
+
+
+
+
 # 0.1.0 (2019-09-25)
 
 
