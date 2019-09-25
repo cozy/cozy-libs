@@ -1,0 +1,45 @@
+{
+  "name": "cozy-notifications",
+  "version": "0.0.3",
+  "description": "Provides reusable email templates for use in Cozy applications and konnectors.",
+  "main": "dist/index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-notifications/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "babel src -d dist --copy-files --verbose",
+    "prepublishOnly": "yarn build",
+    "test": "jest --verbose",
+    "lint": "yarn eslint --fix .",
+    "watch": "yarn build --watch"
+  },
+  "dependencies": {
+    "cozy-ui": "24.3.0",
+    "handlebars": "4.1.2",
+    "handlebars-layouts": "3.1.4",
+    "lodash": "4.17.15",
+    "mjml": "4.3.1"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.2.3",
+    "babel-jest": "^24.1.0",
+    "babel-plugin-inline-import": "^3.0.0"
+  },
+  "jest": {
+    "testPathIgnorePatterns": [
+      "dist"
+    ],
+    "transform": {
+      "^.+\\.jsx?$": "babel-jest",
+      "\\.css$": "<rootDir>/test/readFileESM.js",
+      "\\.hbs$": "<rootDir>/test/readFileESM.js"
+    }
+  }
+}
