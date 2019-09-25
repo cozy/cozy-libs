@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.3.8...cozy-harvest-lib@1.4.0) (2019-09-25)
+
+
+### Features
+
+* Export get error locale ([ac5bf01](https://github.com/cozy/cozy-libs/commit/ac5bf01))
+
+
+
+
+
 ## [1.3.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.3.7...cozy-harvest-lib@1.3.8) (2019-09-23)
 
 **Note:** Version bump only for package cozy-harvest-lib
