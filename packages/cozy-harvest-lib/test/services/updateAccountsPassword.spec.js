@@ -149,4 +149,19 @@ describe('update accounts password function', () => {
       'tri2'
     ])
   })
+
+  it('should throw an error if it can not decrypt username or password', async () => {
+    const orgKey = {}
+    getOrganizationKey.mockResolvedValue(orgKey)
+    decryptString.mockResolvedValue(null)
+
+    expect(
+      updateAccountsPassword(mockCozyClient, mockVaultClient, {
+        login: {
+          password: 'yolo',
+          username: 'yolo'
+        }
+      })
+    ).rejects.toThrow('DECRYPT_FAILED')
+  })
 })
