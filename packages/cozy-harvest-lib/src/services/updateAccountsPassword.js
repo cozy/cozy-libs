@@ -31,6 +31,10 @@ const updateAccountsPassword = async (
     orgKey
   )
 
+  if (decryptedPassword === null || decryptedUsername === null) {
+    throw new Error('DECRYPT_FAILED')
+  }
+
   const accounts = await fetchAccountsForCipherId(cozyClient, bitwardenCipherId)
 
   await updateAccounts(
