@@ -4,7 +4,8 @@ import fromPairs from 'lodash/fromPairs'
 import layouts from 'handlebars-layouts'
 import mapValues from 'lodash/mapValues'
 
-import styleCSS from './style.css'
+import { resolveCSSProperties } from './css'
+import stylesheet from './style.css'
 import cozyLayout from './cozy-layout.hbs'
 
 const isOfType = type => node => {
@@ -232,13 +233,10 @@ export const twoPhaseRender = (
   }
 }
 
-const embeds = {
-  'style.css': styleCSS
-}
-
 const helpers = {
-  embedFile: filename => {
-    return embeds[filename]
+  stylesheet: (cssPropsOrHOpts, hopts) => {
+    const cssProps = hopts === undefined ? {} : cssPropsOrHOpts
+    return resolveCSSProperties(stylesheet, cssProps)
   }
 }
 

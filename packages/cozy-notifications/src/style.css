@@ -4,17 +4,6 @@ h1, h2, h3, h4, h5, h6 {
   padding:0;
 }
 
-.tableRow {
-  border-bottom: 1px #d6d8da solid;
-  padding: 8px 0;
-  line-height: 1.5;
-  letter-spacing: 0.25px;
-}
-
-.tableRow {
-  border-bottom: 0;
-}
-
 /* header */
 .header__title a {
   text-decoration: none;
@@ -27,14 +16,14 @@ h1, h2, h3, h4, h5, h6 {
   text-align: right;
 }
 .header__desc__title {
-  color: #32363f;
+  color: var(--charcoalGrey);
   font-weight: bold;
   font-size: 16px;
   margin-bottom: 4px;
   letter-spacing: 0.5px;
 }
 .header__desc__subtitle {
-  color: #95999d;
+  color: var(--coolGrey);
   font-size: 14px;
   letter-spacing: 0.4px;
 }
@@ -42,14 +31,14 @@ h1, h2, h3, h4, h5, h6 {
 .account h3 {
   font-size: 12px;
   font-weight: bold;
-  color: #95999d;
+  color: var(--coolGrey);
   text-transform: uppercase;
   letter-spacing: 0.6px;
 }
 .account h4 {
   font-size: 12px;
   font-weight: normal;
-  color: #95999d;
+  color: var(--coolGrey);
   text-transform: uppercase;
   letter-spacing: 0.6px;
 }
@@ -59,10 +48,10 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 16px;
 }
 .amountPos {
-  color: #35ce68;
+  color: var(--emerald);
 }
 .amountNeg {
-  color: #f52d2d;
+  color: var(--pomegranate);
 }
 /* footer */
 .footer__settings > td > div,
@@ -72,15 +61,15 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .footer__settings > td > div  {
-  color: #32363f !important;
+  color: var(--charcoalGrey) !important;
 }
 .footer__help > td > div {
-  color: #95999d !important;
+  color: var(--coolGrey) !important;
   text-align: right !important;
 }
 .footer__help a {
   display: inline-block;
-  color: #95999d !important;
+  color: var(--coolGrey) !important;
 }
 
 .footer__help a + a {
@@ -96,7 +85,48 @@ table {
   border-spacing: 0;
 }
 
+.tableRow {
+  border-bottom: 1px var(--silver) solid;
+  padding: 8px 0;
+  line-height: 1.5;
+  letter-spacing: 0.25px;
+}
+
+.tableRow {
+  border-bottom: 0;
+}
+
 .tableRow a, .tableRow a:visited {
   color: inherit;
   text-decoration: none;
+}
+
+@media screen and (max-width: 480px) {
+  .header__desc__title {
+    text-align: center !important;
+  }
+  .header__desc__subtitle {
+    text-align: center !important;
+  }
+  .header__title > td {
+    text-align: center !important;
+  }
+  .header__title > td > table {
+    width: 100px;
+    margin: auto;
+  }
+
+  .footer__settings > td > div {
+    text-align: center !important;
+  }
+
+  .footer__help > td > div,
+  td.footer__help > div,
+  emailHeader {
+    text-align: center !important;
+  }
+  .header__title table {
+    margin: 0 auto;
+    text-align: center;
+  }
 }

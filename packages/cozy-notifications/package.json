@@ -21,6 +21,7 @@
     "watch": "yarn build --watch"
   },
   "dependencies": {
+    "cozy-ui": "24.3.0",
     "handlebars": "4.1.2",
     "handlebars-layouts": "3.1.4",
     "lodash": "4.17.15",
@@ -32,7 +33,9 @@
     "babel-plugin-inline-import": "^3.0.0"
   },
   "jest": {
-    "testPathIgnorePatterns": ["dist"],
+    "testPathIgnorePatterns": [
+      "dist"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest",
       "\\.css$": "<rootDir>/test/readFileESM.js",

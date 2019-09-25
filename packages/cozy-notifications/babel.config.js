@@ -4,7 +4,7 @@ module.exports = {
     [
       'babel-plugin-inline-import',
       {
-        extensions: ['.hbs', '.css']
+        extensions: ['.hbs', '.css', '.styl']
       }
     ]
   ],

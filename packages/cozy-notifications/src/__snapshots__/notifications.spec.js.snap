@@ -82,35 +82,7 @@ exports[`notifications should send a notification view 1`] = `
     }
   
         </style>
-        <style type=\\"text/css\\">@media screen and (max-width: 480px) {
-          .header__desc__title {
-            text-align: center !important;
-          }
-          .header__desc__subtitle {
-            text-align: center !important;
-          }
-          .header__title > td {
-            text-align: center !important;
-          }
-          .header__title > td > table {
-            width: 100px;
-            margin: auto;
-          }
-
-          .footer__settings > td > div {
-            text-align: center !important;
-          }
-
-          .footer__help > td > div,
-          td.footer__help > div,
-          emailHeader {
-            text-align: center !important;
-          }
-          .header__title table {
-            margin: 0 auto;
-            text-align: center;
-          }
-        }</style>
+        
         
       </head>
       <body style=\\"background-color:#f5f6f7;\\">
@@ -289,11 +261,11 @@ exports[`notifications should send a notification view 1`] = `
               <td align=\\"left\\" style=\\"font-size:0px;padding:10px 25px;padding-top:0;padding-bottom:0;word-break:break-word;\\">
                 
       <div style=\\"font-family:Lato, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\\">
-        <div class=\\"header__desc__title txtRight\\" style=\\"color: #32363f; font-weight: bold; font-size: 16px; margin-bottom: 4px; letter-spacing: 0.5px; text-align: right;\\">
+        <div class=\\"header__desc__title txtRight\\" style=\\"color: #32363F; font-weight: bold; font-size: 16px; margin-bottom: 4px; letter-spacing: 0.5px; text-align: right;\\">
                     My email title
 
               </div>
-              <div class=\\"header__desc__subtitle txtRight\\" style=\\"color: #95999d; font-size: 14px; letter-spacing: 0.4px; text-align: right;\\">
+              <div class=\\"header__desc__subtitle txtRight\\" style=\\"color: #95999D; font-size: 14px; letter-spacing: 0.4px; text-align: right;\\">
                     Hello patrick!
 
               </div>
@@ -481,8 +453,8 @@ exports[`notifications should send a notification view 1`] = `
               <td align=\\"right\\" class=\\"footer__help\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\">
                 
       <div style=\\"font-family:Lato, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:right;color:#000000;\\">
-        <a href style=\\"display: inline-block; color: #95999d;\\">Go to app</a> -
-    <a href style=\\"display: inline-block; margin-left: 16px; color: #95999d;\\">Go to settings</a>
+        <a href style=\\"display: inline-block; color: #95999D;\\">Go to app</a> -
+    <a href style=\\"display: inline-block; margin-left: 16px; color: #95999D;\\">Go to settings</a>
       </div>
     
               </td>
