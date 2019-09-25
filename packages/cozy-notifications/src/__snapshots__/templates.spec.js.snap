@@ -180,7 +180,7 @@ table {
         </mj-column>
       </mj-section>
 
-      <mj-section padding-top=\\"8px\\" padding-bottom=\\"8px\\">
+      <mj-section css-class='before-content' padding-top=\\"8px\\" padding-bottom=\\"8px\\">
         <mj-column>
           <mj-divider border-width=\\"1px\\" border-color=\\"#95999d\\" />
         </mj-column>
@@ -396,7 +396,7 @@ table {
         </mj-column>
       </mj-section>
 
-      <mj-section padding-top=\\"8px\\" padding-bottom=\\"8px\\">
+      <mj-section css-class='before-content' padding-top=\\"8px\\" padding-bottom=\\"8px\\">
         <mj-column>
           <mj-divider border-width=\\"1px\\" border-color=\\"#95999d\\" />
         </mj-column>
@@ -404,7 +404,20 @@ table {
 
 
       <!-- content -->
-          My content
+          <mj-section>
+      <mj-column>
+        <mj-text>
+          <h1>Title 1</h1>
+          <h2>Title 2</h2>
+          <p>Paragraph 1</p>
+        </mj-text>
+      </mj-column>
+    </mj-section>
+    <mj-section>
+      <mj-column>
+        <mj-text><p>Paragraph 2</p></mj-text>
+      </mj-column>
+    </mj-section>
 
     </mj-wrapper>
 

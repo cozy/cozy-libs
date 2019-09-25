@@ -10,16 +10,19 @@ exports[`notifications should send a notification view 1`] = `
         "data": Object {
           "attributes": Object {
             "category": "my-category",
-            "content": "
-# Cozy - My app
-## My email title - Hello patrick!
+            "content": "  # Cozy - My app
 
----------
+  ## My email title - Hello patrick!
 
 
-Paragraph 1
+  # Title 1
 
-Paragraph 2
+  ## Title 2
+
+  Paragraph 1
+
+  Paragraph 2
+
 ",
             "content_html": "
     <!doctype html>
@@ -432,7 +435,9 @@ Paragraph 2
               <td align=\\"left\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\">
                 
       <div style=\\"font-family:Lato, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\\">
-        Paragraph 1
+        <h1 style=\\"display: block; margin: 0; padding: 0;\\">Title 1</h1>
+          <h2 style=\\"display: block; margin: 0; padding: 0;\\">Title 2</h2>
+          <p>Paragraph 1</p>
       </div>
     
               </td>
@@ -502,7 +507,7 @@ Paragraph 2
               <td align=\\"left\\" style=\\"font-size:0px;padding:10px 25px;word-break:break-word;\\">
                 
       <div style=\\"font-family:Lato, Helvetica, Arial, sans-serif;font-size:13px;line-height:1;text-align:left;color:#000000;\\">
-        Paragraph 2
+        <p>Paragraph 2</p>
       </div>
     
               </td>

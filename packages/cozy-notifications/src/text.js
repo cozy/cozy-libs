@@ -1,22 +1,41 @@
 const cheerio = require('cheerio')
+const wrap = require('word-wrap')
 
 const getContentDefault = $ => {
-  const beforeContent = $('.before-content').get(0)
-  let sibling = beforeContent.nextSibling
+  const beforeContent = $('.before-content')
+  const txtElements = beforeContent.nextAll().find('h1,h2,h3,h4,h5,p,a')
 
   let content = ''
-  while (sibling) {
-    const text = $(sibling)
+  txtElements.each((index, txtElement) => {
+    const txt = $(txtElement)
       .text()
-      .split('\n')
-      .map(x => x.trim())
-      .filter(Boolean)
-      .join('')
-    if (text) {
-      content = content + '\n\n' + text
+      .trim()
+    switch (txtElement.tagName.toLowerCase()) {
+      case 'h1':
+        content += '# ' + txt + '\n\n'
+        break
+      case 'h2':
+        content += '## ' + txt + '\n\n'
+        break
+      case 'h3':
+        content += '### ' + txt + '\n\n'
+        break
+      case 'h4':
+        content += '#### ' + txt + '\n\n'
+        break
+      case 'h5':
+        content += '##### ' + txt + '\n\n'
+        break
+      case 'p':
+        content += '' + txt + '\n\n'
+        break
+      case 'a':
+        content += '[' + txt + '](' + txtElement.attribs.href + ')\n\n'
+        break
+      default:
+        throw new Error('Unrecognized tagName ' + txtElement.tagName)
     }
-    sibling = sibling.nextSibling
-  }
+  })
 
   return content
 }
@@ -34,11 +53,13 @@ export const toText = (cozyHTMLEmail, getContent) => {
   const descSubtitle = $('.header__desc__subtitle')
     .text()
     .trim()
-  return `
-# Cozy - ${title}
-## ${descTitle} - ${descSubtitle}
+  return wrap(
+    `# Cozy - ${title}${
+      descTitle || descSubtitle ? `\n\n## ${descTitle} - ${descSubtitle}\n` : ''
+    }
 
----------
 ${getContent($)}
-`
+`,
+    { width: 80 }
+  )
 }
