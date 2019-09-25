@@ -4,7 +4,7 @@ import fromPairs from 'lodash/fromPairs'
 import layouts from 'handlebars-layouts'
 import mapValues from 'lodash/mapValues'
 
-import { resolveCSSProperties } from './css'
+import { palette, resolveCSSProperties } from './css'
 import stylesheet from './style.css'
 import cozyLayout from './cozy-layout.hbs'
 
@@ -234,6 +234,18 @@ export const twoPhaseRender = (
 }
 
 const helpers = {
+  palette: varName => {
+    const value = palette[varName]
+    if (value === undefined) {
+      throw new Error(
+        `Cannot find ${varName} in palette. Available vars ${Object.keys(
+          palette
+        ).join(', ')}`
+      )
+    }
+    return value
+  },
+
   stylesheet: (cssPropsOrHOpts, hopts) => {
     const cssProps = hopts === undefined ? {} : cssPropsOrHOpts
     return resolveCSSProperties(stylesheet, cssProps)

@@ -212,3 +212,11 @@ const myNotifView = new MyNotificationView({
 ```handlebars
 {{ universalLink slug="banks" }}
 ```
+
+- `palette` lets you pick a color by giving its --varName.
+
+```handlebars
+<mj-button background-color="{{ palette '--primaryColor' }}" color="{{ palette '--primaryContrastTextColor' }}">
+  A primary button
+ </mj-button>
+```

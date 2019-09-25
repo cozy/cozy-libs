@@ -1,6 +1,6 @@
 import fromPairs from 'lodash/fromPairs'
 import mapValues from 'lodash/mapValues'
-import palette from 'cozy-ui/stylus/settings/palette.styl'
+import uiPalette from 'cozy-ui/stylus/settings/palette.styl'
 
 const resolveCSSPropertiesInMapping = cssMapping => {
   return mapValues(cssMapping, value => {
@@ -28,6 +28,8 @@ export const extractCSSProps = content => {
   )
 }
 
+export const palette = resolveCSSPropertiesInMapping(extractCSSProps(uiPalette))
+
 /**
  * Replaces var(--red) by #f00 in cssContent if props={'--red': '#f00'}
  *
@@ -39,7 +41,7 @@ export const extractCSSProps = content => {
  */
 const resolveCSSProperties = (cssContent, props) => {
   const allProps = {
-    ...extractCSSProps(palette),
+    ...palette,
     ...extractCSSProps(cssContent),
     ...props
   }
