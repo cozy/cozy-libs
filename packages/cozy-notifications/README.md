@@ -107,7 +107,7 @@ bundler and/or test runner to require those files correctly.
     My App
   {{/content}}
 
-  {{#content "topLogo"}}<mj-image width="100px" src="https://downcloud.cozycloud.cc/upload/cozy-banks/email-assets/logo-cozy.png" />{{/content}}
+  {{#content "topLogo"}}<mj-image width="129px" src="https://downcloud.cozycloud.cc/upload/cozy-banks/email-assets/logo-cozy.png" />{{/content}}
 
   {{#content "appURL"}}https://my-app.com{{/content}}
 
