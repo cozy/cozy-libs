@@ -1,3 +1,8 @@
+/**
+ * Tools to (crudly) convert HTML to text, used to build the text version email
+ * from its HTML version.
+ */
+
 const cheerio = require('cheerio')
 const wrap = require('word-wrap')
 
@@ -30,7 +35,12 @@ const getContentDefault = $ => {
         content += '' + txt + '\n\n'
         break
       case 'a':
-        content += '[' + txt + '](' + txtElement.attribs.href + ')\n\n'
+        content +=
+          '[' +
+          txt.replace(/\n/g, '').replace(/\s+/g, ' ') +
+          '](' +
+          txtElement.attribs.href +
+          ')\n\n'
         break
       default:
         throw new Error('Unrecognized tagName ' + txtElement.tagName)

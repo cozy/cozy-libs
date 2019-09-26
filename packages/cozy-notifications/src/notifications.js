@@ -37,9 +37,13 @@ const getBuiltInHelpersForView = notifView => {
   }
 }
 
-const buildAttributes = async (notifView, options = {}) => {
+export const buildAttributes = async (notifView, options = {}) => {
   const templateData = await notifView.buildData()
   templateData.lang = options.lang
+
+  if (notifView.shouldSend && !notifView.shouldSend(templateData)) {
+    return
+  }
 
   const partials = result(notifView.getPartials, {})
 
@@ -60,15 +64,25 @@ const buildAttributes = async (notifView, options = {}) => {
 
   const contentHTML = renderMJML(full)
 
-  const pushContent = result(notifView.getPushContent, null, templateData)
+  const pushContent = result(
+    notifView.getPushContent.bind(notifView),
+    null,
+    templateData
+  )
+
+  let extraAttributes
+  if (notifView.getExtraAttributes) {
+    extraAttributes = notifView.getExtraAttributes()
+  }
 
   return {
     category: notifView.constructor.category,
     title: notifView.getTitle(templateData),
     message: pushContent,
     preferred_channels: notifView.constructor.preferredChannels,
-    content: notifView.toText(contentHTML),
-    content_html: contentHTML
+    content: notifView.constructor.toText(contentHTML),
+    content_html: contentHTML,
+    ...extraAttributes
   }
 }
 
@@ -80,13 +94,10 @@ export const sendNotification = async (cozyClient, notifView) => {
     await notifView.prepare()
   }
 
-  if (notifView.shouldSend && !notifView.shouldSend()) {
-    return
-  }
-
   const attributes = await buildAttributes(notifView)
-  if (notifView.getExtraAttributes) {
-    Object.assign(attributes, notifView.getExtraAttributes())
+
+  if (!attributes) {
+    return
   }
 
   const res = await cozyClient.stackClient.fetchJSON('POST', '/notifications', {

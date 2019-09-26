@@ -1,4 +1,4 @@
-const { resolveCSSProperties, extractCSSProps } = require('./css')
+const { resolveCSSProperties, extractCSSProps } = require('./cssUtils')
 
 test('extractCSSProps', () => {
   expect(
