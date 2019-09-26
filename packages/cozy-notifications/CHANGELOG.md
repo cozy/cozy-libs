@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.2.0...cozy-notifications@0.3.0) (2019-09-26)
+
+
+### Bug Fixes
+
+* Get push content is called with the correct this ([7423d80](https://github.com/cozy/cozy-libs/commit/7423d80))
+* Improve textual representation of links ([25b58aa](https://github.com/cozy/cozy-libs/commit/25b58aa))
+* Rename cssUtils since otherwise css.js can be thought to be a CSS files ([684a9d8](https://github.com/cozy/cozy-libs/commit/684a9d8))
+* Set extra attributes correctly ([d94be21](https://github.com/cozy/cozy-libs/commit/d94be21))
+* Should send needs template data ([a5363c2](https://github.com/cozy/cozy-libs/commit/a5363c2))
+* toText method is on the class ([44763d0](https://github.com/cozy/cozy-libs/commit/44763d0))
+
+
+### Features
+
+* Export build attributes ([775991e](https://github.com/cozy/cozy-libs/commit/775991e))
+
+
+
+
+
 # [0.2.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.1.0...cozy-notifications@0.2.0) (2019-09-25)
 
 
