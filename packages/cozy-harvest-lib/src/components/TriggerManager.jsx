@@ -231,57 +231,25 @@ export class TriggerManager extends Component {
     await vaultClient.shareWithCozy(cipherView)
   }
 
-  async getCipherId(login, password) {
-    const { account, selectedCipher } = this.state
-    const { vaultClient, konnector } = this.props
+  async updateSelectedCipher(login, password) {
+    const { selectedCipher } = this.state
+    const { vaultClient } = this.props
+    const originalCipher = await vaultClient.getByIdOrSearch(selectedCipher.id)
+    const cipherData = await vaultClient.decrypt(originalCipher)
 
-    const konnectorURI = get(konnector, 'vendor_link')
-    const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
-
-    if (selectedCipher) {
-      return selectedCipher.id
-    }
-
-    if (!account) {
-      const cipherData = {
-        id: null,
-        type: 1,
-        name: konnectorName,
-        login: {
-          username: login,
-          password,
-          uris: konnectorURI ? [{ uri: konnectorURI, match: 0 }] : []
-        }
-      }
+    if (
+      cipherData.login.username !== login ||
+      cipherData.login.password !== password
+    ) {
+      cipherData.login.username = login
+      cipherData.login.password = password
 
       const cipher = await vaultClient.createNewCozySharedCipher(
         cipherData,
-        null
+        originalCipher
       )
       await vaultClient.saveCipher(cipher)
-
-      return cipher.id
     }
-
-    const id = accounts.getVaultCipherId(account)
-    const search = {
-      username: login,
-      uri: konnectorURI,
-      type: CipherType.Login
-    }
-    const sort = [view => view.login.password === password, 'revisionDate']
-    const originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
-    const cipherData = await vaultClient.decrypt(originalCipher)
-    cipherData.login.username = login
-    cipherData.login.password = password
-
-    const cipher = await vaultClient.createNewCozySharedCipher(
-      cipherData,
-      originalCipher
-    )
-    await vaultClient.saveCipher(cipher)
-
-    return cipher.id
   }
 
   /**
@@ -302,7 +270,9 @@ export class TriggerManager extends Component {
       const { login, password } = data
       let cipherId = this.getSelectedCipherId()
 
-      if (!cipherId && account) {
+      if (cipherId) {
+        await this.updateSelectedCipher(login, password)
+      } else if (!cipherId && account) {
         cipherId = await this.getExistingCipherIdForAccount(login, password)
       } else if (!cipherId && !account) {
         cipherId = await this.createNewCipherId(login, password)
