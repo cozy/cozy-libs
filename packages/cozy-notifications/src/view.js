@@ -30,10 +30,8 @@ class NotificationView {
   async buildData() {
     return this.data
   }
-
-  toText(html) {
-    return toText(html)
-  }
 }
+
+NotificationView.toText = toText
 
 export default NotificationView

@@ -67,8 +67,8 @@ const buildAttributes = async (notifView, options = {}) => {
     title: notifView.getTitle(templateData),
     message: pushContent,
     preferred_channels: notifView.constructor.preferredChannels,
-    content: notifView.toText(contentHTML),
     content_html: contentHTML
+    content: notifView.constructor.toText(contentHTML),
   }
 }
 
