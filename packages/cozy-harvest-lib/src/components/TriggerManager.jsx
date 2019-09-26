@@ -231,6 +231,27 @@ export class TriggerManager extends Component {
     await vaultClient.shareWithCozy(cipherView)
   }
 
+  async updateSelectedCipher(login, password) {
+    const { selectedCipher } = this.state
+    const { vaultClient } = this.props
+    const originalCipher = await vaultClient.getByIdOrSearch(selectedCipher.id)
+    const cipherData = await vaultClient.decrypt(originalCipher)
+
+    if (
+      cipherData.login.username !== login ||
+      cipherData.login.password !== password
+    ) {
+      cipherData.login.username = login
+      cipherData.login.password = password
+
+      const cipher = await vaultClient.createNewCozySharedCipher(
+        cipherData,
+        originalCipher
+      )
+      await vaultClient.saveCipher(cipher)
+    }
+  }
+
   /**
    * TODO move to AccountHelper
    */
@@ -249,7 +270,9 @@ export class TriggerManager extends Component {
       const { login, password } = data
       let cipherId = this.getSelectedCipherId()
 
-      if (!cipherId && account) {
+      if (cipherId) {
+        await this.updateSelectedCipher(login, password)
+      } else if (!cipherId && account) {
         cipherId = await this.getExistingCipherIdForAccount(login, password)
       } else if (!cipherId && !account) {
         cipherId = await this.createNewCipherId(login, password)
