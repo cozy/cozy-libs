@@ -231,59 +231,6 @@ export class TriggerManager extends Component {
     await vaultClient.shareWithCozy(cipherView)
   }
 
-  async getCipherId(login, password) {
-    const { account, selectedCipher } = this.state
-    const { vaultClient, konnector } = this.props
-
-    const konnectorURI = get(konnector, 'vendor_link')
-    const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
-
-    if (selectedCipher) {
-      return selectedCipher.id
-    }
-
-    if (!account) {
-      const cipherData = {
-        id: null,
-        type: 1,
-        name: konnectorName,
-        login: {
-          username: login,
-          password,
-          uris: konnectorURI ? [{ uri: konnectorURI, match: 0 }] : []
-        }
-      }
-
-      const cipher = await vaultClient.createNewCozySharedCipher(
-        cipherData,
-        null
-      )
-      await vaultClient.saveCipher(cipher)
-
-      return cipher.id
-    }
-
-    const id = accounts.getVaultCipherId(account)
-    const search = {
-      username: login,
-      uri: konnectorURI,
-      type: CipherType.Login
-    }
-    const sort = [view => view.login.password === password, 'revisionDate']
-    const originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
-    const cipherData = await vaultClient.decrypt(originalCipher)
-    cipherData.login.username = login
-    cipherData.login.password = password
-
-    const cipher = await vaultClient.createNewCozySharedCipher(
-      cipherData,
-      originalCipher
-    )
-    await vaultClient.saveCipher(cipher)
-
-    return cipher.id
-  }
-
   /**
    * TODO move to AccountHelper
    */
