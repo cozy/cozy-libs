@@ -83,6 +83,14 @@ describe('notifications', () => {
     expect(notificationView.shouldSend).toHaveBeenCalledWith(data)
     expect(client.stackClient.fetchJSON).not.toHaveBeenCalled()
   })
+
+  it('should call getPushContent with the correct this', async () => {
+    const { notificationView, client } = setup()
+    expect.assertions(1)
+    notificationView.getPushContent = jest.fn().mockImplementation(function() {
+      expect(this).toBe(notificationView)
+    })
+    await sendNotification(client, notificationView)
   })
 
   it('should set extra attributes', async () => {

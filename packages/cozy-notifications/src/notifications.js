@@ -64,7 +64,12 @@ export const buildAttributes = async (notifView, options = {}) => {
 
   const contentHTML = renderMJML(full)
 
-  const pushContent = result(notifView.getPushContent, null, templateData)
+  const pushContent = result(
+    notifView.getPushContent.bind(notifView),
+    null,
+    templateData
+  )
+
   let extraAttributes
   if (notifView.getExtraAttributes) {
     extraAttributes = notifView.getExtraAttributes()
