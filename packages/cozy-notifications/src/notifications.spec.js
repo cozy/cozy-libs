@@ -46,15 +46,15 @@ MyNotificationView.template = emailTemplate
 MyNotificationView.category = 'my-category'
 
 describe('notifications', () => {
-  it('should send a notification view', async () => {
-    const cozyClient = {
+  const setup = () => {
+    const client = {
       stackClient: {
         fetchJSON: jest.fn(),
         uri: 'http://cozy.tools:8080'
       }
     }
-    const nv = new MyNotificationView({
-      client: cozyClient,
+    const notificationView = new MyNotificationView({
+      client: client,
       lang: 'en',
       data: {
         name: 'Homer'
@@ -65,7 +65,23 @@ describe('notifications', () => {
         }
       }
     })
-    await sendNotification(cozyClient, nv)
-    expect(cozyClient.stackClient.fetchJSON).toMatchSnapshot()
+    return { client, notificationView }
+  }
+
+  it('should send a notification view', async () => {
+    const { notificationView, client } = setup()
+    await sendNotification(client, notificationView)
+    expect(client.stackClient.fetchJSON).toMatchSnapshot()
+  })
+
+  it('should not send if shouldSend returns false', async () => {
+    const { notificationView, client } = setup()
+    notificationView.shouldSend = jest.fn().mockReturnValue(false)
+    const data = {}
+    notificationView.buildData = () => data
+    await sendNotification(client, notificationView)
+    expect(notificationView.shouldSend).toHaveBeenCalledWith(data)
+    expect(client.stackClient.fetchJSON).not.toHaveBeenCalled()
+  })
   })
 })

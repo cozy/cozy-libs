@@ -41,6 +41,10 @@ const buildAttributes = async (notifView, options = {}) => {
   const templateData = await notifView.buildData()
   templateData.lang = options.lang
 
+  if (notifView.shouldSend && !notifView.shouldSend(templateData)) {
+    return
+  }
+
   const partials = result(notifView.getPartials, {})
 
   const helpers = {
@@ -78,10 +82,6 @@ export const sendNotification = async (cozyClient, notifView) => {
   }
   if (notifView.prepare) {
     await notifView.prepare()
-  }
-
-  if (notifView.shouldSend && !notifView.shouldSend()) {
-    return
   }
 
   const attributes = await buildAttributes(notifView)
