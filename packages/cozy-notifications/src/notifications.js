@@ -1,5 +1,5 @@
 import { renderer } from './templates'
-import { renderMJML } from './mjml'
+import { renderMJML } from './mjmlUtils'
 import { generateUniversalLink, generateWebLink } from './urls'
 import get from 'lodash/get'
 import enLocale from './locales/en.json'
