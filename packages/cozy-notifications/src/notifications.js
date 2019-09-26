@@ -37,7 +37,7 @@ const getBuiltInHelpersForView = notifView => {
   }
 }
 
-const buildAttributes = async (notifView, options = {}) => {
+export const buildAttributes = async (notifView, options = {}) => {
   const templateData = await notifView.buildData()
   templateData.lang = options.lang
 
