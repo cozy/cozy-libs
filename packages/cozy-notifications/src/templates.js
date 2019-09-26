@@ -4,7 +4,7 @@ import fromPairs from 'lodash/fromPairs'
 import layouts from 'handlebars-layouts'
 import mapValues from 'lodash/mapValues'
 
-import { palette, resolveCSSProperties } from './css'
+import { palette, resolveCSSProperties } from './cssUtils'
 import stylesheet from './style.css'
 import cozyLayout from './cozy-layout.hbs'
 
