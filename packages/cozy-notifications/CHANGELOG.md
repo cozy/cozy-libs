@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.3.0...cozy-notifications@0.3.2) (2019-09-26)
+
+
+### Bug Fixes
+
+* Rename mjml to mjmlUtils to prevent conflicts ([ae3b2d9](https://github.com/cozy/cozy-libs/commit/ae3b2d9))
+
+
+
+
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.2.0...cozy-notifications@0.3.0) (2019-09-26)
 
 
