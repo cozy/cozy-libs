@@ -84,4 +84,24 @@ describe('notifications', () => {
     expect(client.stackClient.fetchJSON).not.toHaveBeenCalled()
   })
   })
+
+  it('should set extra attributes', async () => {
+    const { notificationView, client } = setup()
+    expect.assertions(1)
+    notificationView.getExtraAttributes = () => ({ data: { route: '/route' } })
+    await sendNotification(client, notificationView)
+    expect(client.stackClient.fetchJSON).toHaveBeenCalledWith(
+      'POST',
+      '/notifications',
+      expect.objectContaining({
+        data: expect.objectContaining({
+          attributes: expect.objectContaining({
+            data: {
+              route: '/route'
+            }
+          })
+        })
+      })
+    )
+  })
 })
