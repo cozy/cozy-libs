@@ -342,7 +342,7 @@ export class TriggerManager extends Component {
       this.setState({
         step: 'accountForm',
         selectedCipher,
-        showBackButton: true
+        showBackButton: !selectedCipher
       })
     }
   }
@@ -446,6 +446,7 @@ export class TriggerManager extends Component {
                 onSubmit={this.handleSubmit}
                 showError={showError}
                 submitting={submitting}
+                onBack={this.showCiphersList}
               />
             </>
           )}
