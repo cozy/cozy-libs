@@ -33,6 +33,7 @@ exports[`TriggerManager handleError should render error 1`] = `
             "slug": "konnectest",
           }
         }
+        onBack={[Function]}
         onSubmit={[Function]}
         submitting={false}
       />
@@ -87,6 +88,7 @@ exports[`TriggerManager should render with account 1`] = `
             "slug": "konnectest",
           }
         }
+        onBack={[Function]}
         onSubmit={[Function]}
         submitting={false}
       />

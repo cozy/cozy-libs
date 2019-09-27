@@ -1,9 +1,14 @@
 import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
+import cx from 'classnames'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
+import Card from 'cozy-ui/transpiled/react/Card'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import withLocales from '../hoc/withLocales'
 
 import AccountFields from './AccountFields'
@@ -12,8 +17,31 @@ import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
+import KonnectorIcon from '../KonnectorIcon'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
+
+const ReadOnlyIdentifier = props => {
+  const { className, onClick, konnector, identifier, ...rest } = props
+
+  return (
+    <Card
+      className={cx({ 'u-c-pointer': onClick }, className)}
+      onClick={onClick}
+      {...rest}
+    >
+      <Media>
+        <Img>
+          <KonnectorIcon konnector={konnector} className="u-w-1-half u-mr-1" />
+        </Img>
+        <Bd>{identifier}</Bd>
+        <Img>
+          <Icon icon="bottom-select" />
+        </Img>
+      </Media>
+    </Card>
+  )
+}
 
 /**
  * AccountForm is reponsible of generating a form which will allow user to
@@ -152,6 +180,7 @@ export class AccountForm extends PureComponent {
       account,
       error,
       konnector,
+      onBack,
       onSubmit,
       showError,
       submitting,
@@ -162,6 +191,15 @@ export class AccountForm extends PureComponent {
     const sanitizedFields = manifest.sanitizeFields(fields)
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
+
+    const isReadOnlyIdentifier = Boolean(
+      get(account, 'relationships.vaultCipher')
+    )
+
+    if (isReadOnlyIdentifier) {
+      const identifier = manifest.getIdentifier(fields)
+      sanitizedFields[identifier].type = 'hidden'
+    }
 
     let container = null
     const isLoginError =
@@ -194,6 +232,14 @@ export class AccountForm extends PureComponent {
                 className="u-mb-1"
                 error={error}
                 konnector={konnector}
+              />
+            )}
+            {isReadOnlyIdentifier && (
+              <ReadOnlyIdentifier
+                className="u-mb-1"
+                onClick={onBack}
+                konnector={konnector}
+                identifier={get(account, 'auth.login')}
               />
             )}
             <AccountFields
