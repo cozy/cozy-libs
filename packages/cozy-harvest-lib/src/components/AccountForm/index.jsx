@@ -1,12 +1,14 @@
 import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
 import withLocales from '../hoc/withLocales'
 
 import AccountFields from './AccountFields'
+import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
@@ -152,6 +154,7 @@ export class AccountForm extends PureComponent {
       account,
       error,
       konnector,
+      onBack,
       onSubmit,
       showError,
       submitting,
@@ -162,6 +165,15 @@ export class AccountForm extends PureComponent {
     const sanitizedFields = manifest.sanitizeFields(fields)
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
+
+    const isReadOnlyIdentifier = Boolean(
+      get(account, 'relationships.vaultCipher')
+    )
+
+    if (isReadOnlyIdentifier) {
+      const identifier = manifest.getIdentifier(fields)
+      sanitizedFields[identifier].type = 'hidden'
+    }
 
     let container = null
     const isLoginError =
@@ -194,6 +206,17 @@ export class AccountForm extends PureComponent {
                 className="u-mb-1"
                 error={error}
                 konnector={konnector}
+              />
+            )}
+            {isReadOnlyIdentifier && (
+              <ReadOnlyIdentifier
+                className="u-mb-1"
+                onClick={onBack}
+                konnector={konnector}
+                identifier={get(
+                  account,
+                  `auth.${manifest.getIdentifier(konnector.fields)}`
+                )}
               />
             )}
             <AccountFields

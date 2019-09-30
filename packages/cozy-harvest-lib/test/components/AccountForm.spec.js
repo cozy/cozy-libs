@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
-import { shallow } from 'enzyme'
+import PropTypes from 'prop-types'
+import { shallow, mount } from 'enzyme'
 
 import { isMobile } from 'cozy-device-helper'
 
@@ -41,6 +42,12 @@ jest.mock('cozy-device-helper', () => ({
   ...require.requireActual('cozy-device-helper'),
   isMobile: jest.fn()
 }))
+
+jest.mock('components/KonnectorIcon', () => {
+  const KonnectorIcon = () => <div>KonnectorIcon</div>
+
+  return KonnectorIcon
+})
 
 describe('AccountForm', () => {
   beforeEach(() => {
@@ -402,6 +409,38 @@ describe('AccountForm', () => {
       wrapper.instance().handleKeyUp({ key: 'Enter' }, {})
       expect(wrapper.instance().focusNext).toHaveBeenCalled()
       expect(wrapper.instance().handleSubmit).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('with read-only identifier', () => {
+    it('should render a read-only identifier field if the account has a relationship with a vault cipher', () => {
+      const wrapper = mount(
+        <AccountForm
+          konnector={fixtures.konnector}
+          onSubmit={onSubmit}
+          t={t}
+          account={{
+            ...fixtures.account,
+            relationships: {
+              vaultCipher: {
+                _id: 'fake-cipher-id',
+                _type: 'com.bitwarden.ciphers',
+                _protocol: 'bitwarden'
+              }
+            }
+          }}
+        />,
+        {
+          context: { t },
+          childContextTypes: {
+            t: PropTypes.func
+          }
+        }
+      )
+
+      const hiddenInput = wrapper.find('input[type="hidden"][name="username"]')
+
+      expect(hiddenInput).toHaveLength(1)
     })
   })
 })

@@ -266,16 +266,22 @@ export class TriggerManager extends Component {
       status: RUNNING
     })
 
+    const identifierProperty = manifest.getIdentifier(konnector.fields)
+
     try {
-      const { login, password } = data
+      const identifier = data[identifierProperty]
+      const password = data.password
       let cipherId = this.getSelectedCipherId()
 
       if (cipherId) {
-        await this.updateSelectedCipher(login, password)
+        await this.updateSelectedCipher(identifier, password)
       } else if (!cipherId && account) {
-        cipherId = await this.getExistingCipherIdForAccount(login, password)
+        cipherId = await this.getExistingCipherIdForAccount(
+          identifier,
+          password
+        )
       } else if (!cipherId && !account) {
-        cipherId = await this.createNewCipherId(login, password)
+        cipherId = await this.createNewCipherId(identifier, password)
       }
       await this.shareCipherWithCozy(cipherId)
 
@@ -321,7 +327,10 @@ export class TriggerManager extends Component {
 
   handleCipherSelect(selectedCipher) {
     const { konnector } = this.props
-    const account = this.cipherToAccount(selectedCipher)
+    const account = this.cipherToAccount(
+      selectedCipher,
+      manifest.getIdentifier(konnector.fields)
+    )
     const values = manifest.getFieldsValues(konnector, account)
 
     const hasValuesForRequiredFields = manifest.hasValuesForRequiredFields(
@@ -342,7 +351,7 @@ export class TriggerManager extends Component {
       this.setState({
         step: 'accountForm',
         selectedCipher,
-        showBackButton: true
+        showBackButton: !selectedCipher
       })
     }
   }
@@ -365,7 +374,13 @@ export class TriggerManager extends Component {
       return null
     }
 
-    return Account.fromCipher(cipher)
+    const identifierProperty = manifest.getIdentifier(
+      this.props.konnector.fields
+    )
+
+    return Account.fromCipher(cipher, {
+      identifierProperty
+    })
   }
 
   componentDidUpdate(prevProps) {
@@ -446,6 +461,7 @@ export class TriggerManager extends Component {
                 onSubmit={this.handleSubmit}
                 showError={showError}
                 submitting={submitting}
+                onBack={this.showCiphersList}
               />
             </>
           )}

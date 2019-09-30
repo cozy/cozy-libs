@@ -1,6 +1,7 @@
 import Field from 'cozy-ui/transpiled/react/Field'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import pick from 'lodash/pick'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
@@ -123,6 +124,10 @@ export class AccountField extends PureComponent {
             secondaryLabels={passwordLabels}
           />
         )
+      case 'hidden':
+        return (
+          <input {...pick(fieldProps, ['value', 'type', 'name', 'role'])} />
+        )
       default:
         return <Field {...fieldProps} type="text" />
     }
@@ -171,7 +176,14 @@ AccountField.propTypes = {
    * Field type, passed to <Field /> component. Except for "dropdown" which
    * will be mapped to "select"
    */
-  type: PropTypes.oneOf(['date', 'dropdown', 'email', 'password', 'text']),
+  type: PropTypes.oneOf([
+    'date',
+    'dropdown',
+    'email',
+    'password',
+    'text',
+    'hidden'
+  ]),
   /**
    * Translation function
    */
