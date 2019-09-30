@@ -239,7 +239,10 @@ export class AccountForm extends PureComponent {
                 className="u-mb-1"
                 onClick={onBack}
                 konnector={konnector}
-                identifier={get(account, 'auth.login')}
+                identifier={get(
+                  account,
+                  `auth.${manifest.getIdentifier(konnector.fields)}`
+                )}
               />
             )}
             <AccountFields
