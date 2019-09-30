@@ -35,12 +35,19 @@ class Account extends Document {
    * Create an account document from a vault cipher
    *
    * @param {Object} cipher
+   * @param {Object} [options={}]
+   * @param {string} [options.identifierProperty=login] - The name of the identifier property to use for this account
    *
    * @returns {Object}
    */
-  static fromCipher(cipher) {
+  static fromCipher(cipher, options = {}) {
     if (!cipher) {
       throw new Error('Cipher is required')
+    }
+
+    const opts = {
+      identifierProperty: 'login',
+      ...options
     }
 
     const customFields = (cipher.fields || []).reduce((fields, field) => {
@@ -52,7 +59,7 @@ class Account extends Document {
     return {
       auth: pickBy(
         {
-          login: cipher.login.username,
+          [opts.identifierProperty]: cipher.login.username,
           password: cipher.login.password,
           ...customFields
         },
