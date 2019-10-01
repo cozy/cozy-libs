@@ -1,6 +1,29 @@
 `cozy-notifications` provides tools to send notifications (push or email) from a Cozy
 application or konnector.
 
+## Installation
+
+```
+yarn add cozy-notifications
+```
+
+You will most likely also need a custom webpack config if building for node (for example
+in konnectors, since mjml and its dependents are not built for node-js).
+
+`webpack.config.js`
+
+```
+const webpackMerge = require('webpack-merge')
+const cozyNotificationsWebpackConfig = require('cozy-notifications/dist/webpack/config')
+
+module.exports = webpackMerge({
+  // initialConfig
+}, cozyNotificationsWebpackConfig)
+```
+
+The custom webpack config provided by `cozy-notifications` applies aliases and resolves for
+`cozy-notifications` to be used in a build targetting node.
+
 ## `sendNotification`
 
 The main entrypoint of this library is `sendNotifification(cozyClient, notificationView)`.
