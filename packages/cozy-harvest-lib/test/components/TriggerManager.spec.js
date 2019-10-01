@@ -197,7 +197,8 @@ const props = {
   saveAccount: saveAccountMock,
   launch: launchTriggerMock,
   t: tMock,
-  vaultClient: mockVaultClient
+  vaultClient: mockVaultClient,
+  breakpoints: { isMobile: false }
 }
 
 const propsWithAccount = {
