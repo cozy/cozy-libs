@@ -68,7 +68,7 @@
     "cozy-device-helper": "1.7.1",
     "cozy-keys-lib": "^1.9.0",
     "cozy-realtime": "^3.1.0",
-    "cozy-ui": "^23.2.0"
+    "cozy-ui": "^25.1.0"
   },
   "sideEffects": false
 }
