@@ -26,8 +26,8 @@ import triggers from '../helpers/triggers'
 import withLocales from './hoc/withLocales'
 import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
-import BackButton from './BackButton'
 import manifest from '../helpers/manifest'
+import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -351,7 +351,7 @@ export class TriggerManager extends Component {
       this.setState({
         step: 'accountForm',
         selectedCipher,
-        showBackButton: !selectedCipher
+        showBackButton: true
       })
     }
   }
@@ -450,9 +450,10 @@ export class TriggerManager extends Component {
           {showAccountForm && (
             <>
               {showBackButton && (
-                <BackButton onClick={this.showCiphersList}>
-                  {t('triggerManager.backToCiphersList')}
-                </BackButton>
+                <ModalBackButton
+                  onClick={this.showCiphersList}
+                  label={t('back')}
+                />
               )}
               <AccountForm
                 account={account || this.cipherToAccount(selectedCipher)}
