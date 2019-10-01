@@ -14,7 +14,7 @@
             "^cozy-"
           ],
           "extends": [
-            "schedule:nonOfficeHours"
+            "schedule:monthly"
           ]
         }
       ],
