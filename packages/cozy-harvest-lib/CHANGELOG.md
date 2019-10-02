@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.5.0...cozy-harvest-lib@1.6.0) (2019-10-02)
+
+
+### Features
+
+* Export a bound t ([c959b2a](https://github.com/cozy/cozy-libs/commit/c959b2a))
+
+
+
+
+
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.4.0...cozy-harvest-lib@1.5.0) (2019-09-27)
 
 
