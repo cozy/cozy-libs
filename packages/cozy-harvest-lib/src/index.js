@@ -9,5 +9,9 @@ export { default as TriggerManager } from './components/TriggerManager'
 export { default as TriggerLauncher } from './components/TriggerLauncher'
 export { default as Routes } from './components/Routes'
 
-export { KonnectorJobError, getErrorLocale } from './helpers/konnectors'
+export {
+  KonnectorJobError,
+  getErrorLocale,
+  getErrorLocaleBound
+} from './helpers/konnectors'
 export { handleOAuthResponse } from './helpers/oauth'

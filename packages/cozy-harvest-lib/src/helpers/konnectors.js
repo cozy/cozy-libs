@@ -1,6 +1,7 @@
 import get from 'lodash/get'
 import has from 'lodash/has'
 import trim from 'lodash/trim'
+import { getBoundT } from '../locales'
 
 import * as accounts from './accounts'
 
@@ -132,6 +133,11 @@ export const getErrorLocale = (error, konnector, t, suffixKey) => {
       _: t(`${defaultKey}.${suffixKey}`, translationVariables)
     })
   })
+}
+
+export const getErrorLocaleBound = (error, konnector, lang, suffixKey) => {
+  const t = getBoundT(lang)
+  return getErrorLocale(error, konnector, t, suffixKey)
 }
 
 /**
