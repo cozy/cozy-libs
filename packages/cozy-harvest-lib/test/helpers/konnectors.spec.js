@@ -4,7 +4,9 @@ import {
   getAccountType,
   hasNewVersionAvailable,
   KonnectorJobError,
-  needsFolder
+  needsFolder,
+  getErrorLocale,
+  getErrorLocaleBound
 } from 'helpers/konnectors'
 
 const fixtures = {
@@ -238,5 +240,23 @@ describe('Konnectors Helpers', () => {
       expect(error.code).toBe('NOT_YET_IMPLEMENTED.AT_LEAST_IN_HARVEST')
       expect(error.type).toBe('UNKNOWN_ERROR')
     })
+  })
+})
+
+describe('locales', () => {
+  const error = new KonnectorJobError('DISK_QUOTA_EXCEEDED')
+  const konn = { slug: 'boursorama83', name: 'Boursorama' }
+
+  it('should work with getErrorLocale', () => {
+    const t = jest.fn().mockImplementation(x => x)
+    const desc = getErrorLocale(error, konn, t, 'description')
+    expect(desc).toBe('error.job.DISK_QUOTA_EXCEEDED.description')
+  })
+
+  it('should work with getErrorLocale', () => {
+    const desc = getErrorLocaleBound(error, konn, 'en', 'description')
+    expect(desc).toBe(
+      'This service cannot fetch your documents now. Please remove some files or go to **Settings > Storage** to get more free space.'
+    )
   })
 })
