@@ -10,6 +10,7 @@ module.exports = {
   env: basics.env,
   settings: { react: { version: 'latest' } },
   rules: Object.assign({}, basics.rules, {
-    'react/prop-types': 0
+    'react/prop-types': 0,
+    'react/jsx-curly-brace-presence': 2
   })
 }
