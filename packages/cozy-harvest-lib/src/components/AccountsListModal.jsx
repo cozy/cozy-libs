@@ -8,12 +8,6 @@ import KonnectorModalHeader from './KonnectorModalHeader'
 class AccountsListModal extends React.Component {
   render() {
     const { konnector, accounts, history } = this.props
-    /**
-     * TODO this redirection should be done in Routes component?
-     */
-    if (accounts.length === 0) history.push('./new')
-    else if (accounts.length === 1)
-      history.push(`./accounts/${accounts[0].account._id}`)
     return (
       <>
         <KonnectorModalHeader konnector={konnector} />
