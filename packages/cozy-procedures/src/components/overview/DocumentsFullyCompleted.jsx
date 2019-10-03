@@ -16,8 +16,8 @@ const DocumentsFullyCompleted = ({ documents, navigateTo }) => {
     >
       {flatennedFiles.map((file, index) => {
         return (
-          <div className={'u-flex u-pv-half'} key={index}>
-            <Icon icon="file-type-files" className={'u-flex-shrink-0'} />
+          <div className="u-flex u-pv-half" key={index}>
+            <Icon icon="file-type-files" className="u-flex-shrink-0" />
             <span className="u-ml-half u-ellipsis ">{file.name}</span>
           </div>
         )

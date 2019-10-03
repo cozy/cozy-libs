@@ -354,7 +354,7 @@ export class SelectServer extends Component {
               label={t('mobile.onboarding.welcome.no_account_link')}
               size={isTiny ? 'normal' : 'large'}
               subtle={true}
-              type={'button'}
+              type="button"
               theme="text"
               onboarding={onboarding}
             />

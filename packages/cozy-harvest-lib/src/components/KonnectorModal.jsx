@@ -220,12 +220,12 @@ export class KonnectorModal extends PureComponent {
               )}
             </div>
             <Button
-              icon={<Icon icon={'cross'} size={'24'} />}
+              icon={<Icon icon="cross" size="24" />}
               onClick={dismissAction}
               iconOnly
               label={t('close')}
               subtle
-              theme={'secondary'}
+              theme="secondary"
             />
           </div>
         </ModalHeader>

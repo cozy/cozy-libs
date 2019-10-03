@@ -31,7 +31,7 @@ class MenuUploadWeb extends Component {
           </Button>
         }
         className="u-db"
-        position={'right'}
+        position="right"
         /**
          * We need to specifiy an onSelect props that return false in order
          * to not close the menu when the user clicks on a MenuItem.
