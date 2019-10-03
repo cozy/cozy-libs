@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.6.0...cozy-harvest-lib@1.7.0) (2019-10-03)
+
+
+### Features
+
+* Redirect to only account ([6076f1d](https://github.com/cozy/cozy-libs/commit/6076f1d))
+
+
+
+
+
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.5.0...cozy-harvest-lib@1.6.0) (2019-10-02)
 
 
