@@ -10,7 +10,7 @@ import NewAccountModal from './NewAccountModal'
 import EditAccountModal from './EditAccountModal'
 import KonnectorSuccess from './KonnectorSuccess'
 
-const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
+const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => (
   <Modal dismissAction={onDismiss} mobileFullscreen size="small">
     <KonnectorAccounts konnector={konnector}>
       {accounts => (
@@ -18,9 +18,22 @@ const Routes = ({ konnectorRoot, konnector, location, onDismiss }) => (
           <Route
             path={`${konnectorRoot}/`}
             exact
-            render={() => (
-              <AccountsListModal konnector={konnector} accounts={accounts} />
-            )}
+            render={() => {
+              if (accounts.length === 0) {
+                history.push('./new')
+                return null
+              } else if (accounts.length === 1) {
+                history.push(`./accounts/${accounts[0].account._id}`)
+                return null
+              } else {
+                return (
+                  <AccountsListModal
+                    konnector={konnector}
+                    accounts={accounts}
+                  />
+                )
+              }
+            }}
           />
           <Route
             path={`${konnectorRoot}/accounts/:accountId`}
