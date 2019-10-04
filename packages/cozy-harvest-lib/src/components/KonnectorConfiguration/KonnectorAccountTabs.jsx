@@ -16,12 +16,14 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
+import get from 'lodash/get'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import * as konnectorsModel from '../../helpers/konnectors'
 
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
+import DocumentsLinkCard from '../cards/DocumentsLinkCard'
 import DeleteAccountButton from '../DeleteAccountButton'
 import withLocales from '../hoc/withLocales'
 import TriggerLauncher from '../TriggerLauncher'
@@ -91,6 +93,9 @@ class KonnectorAccountTabs extends React.Component {
                     />
                   )}
                   <LaunchTriggerCard initialTrigger={initialTrigger} />
+                  <DocumentsLinkCard
+                    folderId={get(initialTrigger, 'message.folder_to_save')}
+                  />
                 </TabPanel>
                 <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
                   {shouldDisplayError && hasLoginError && (
