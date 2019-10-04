@@ -35,6 +35,11 @@
         "unknown": "Unknown",
         "format": "MMMM D[,] YYYY [at] HH[:]mm"
       }
+    },
+    "documentsLink": {
+      "title": "Your documents",
+      "description": "This service retrieves your latest documents and keeps a complete back-up for you.",
+      "button": "Open the documents"
     }
   },
   "default": {
