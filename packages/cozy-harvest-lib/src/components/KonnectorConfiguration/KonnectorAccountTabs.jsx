@@ -13,6 +13,7 @@ import Card from 'cozy-ui/transpiled/react/Card'
 import { Uppercase } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Stack from 'cozy-ui/transpiled/react/Stack'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
@@ -78,24 +79,21 @@ class KonnectorAccountTabs extends React.Component {
 
               <TabPanels>
                 <TabPanel name="data" className="u-pt-1-half u-pb-0">
-                  {konnectorsModel.hasNewVersionAvailable(konnector) && (
-                    <KonnectorUpdateInfos
-                      className="u-mb-2"
-                      konnector={konnector}
-                      isBlocking={hasTermsVersionMismatchError}
+                  <Stack>
+                    {konnectorsModel.hasNewVersionAvailable(konnector) && (
+                      <KonnectorUpdateInfos
+                        konnector={konnector}
+                        isBlocking={hasTermsVersionMismatchError}
+                      />
+                    )}
+                    {shouldDisplayError && hasGenericError && (
+                      <TriggerErrorInfo error={error} konnector={konnector} />
+                    )}
+                    <LaunchTriggerCard initialTrigger={initialTrigger} />
+                    <DocumentsLinkCard
+                      folderId={get(initialTrigger, 'message.folder_to_save')}
                     />
-                  )}
-                  {shouldDisplayError && hasGenericError && (
-                    <TriggerErrorInfo
-                      className="u-mb-2"
-                      error={error}
-                      konnector={konnector}
-                    />
-                  )}
-                  <LaunchTriggerCard initialTrigger={initialTrigger} />
-                  <DocumentsLinkCard
-                    folderId={get(initialTrigger, 'message.folder_to_save')}
-                  />
+                  </Stack>
                 </TabPanel>
                 <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
                   {shouldDisplayError && hasLoginError && (
