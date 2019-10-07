@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.7.0...cozy-harvest-lib@1.8.0) (2019-10-07)
+
+
+### Features
+
+* Added a link to connector documents ([e6debdb](https://github.com/cozy/cozy-libs/commit/e6debdb))
+
+
+
+
+
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.6.0...cozy-harvest-lib@1.7.0) (2019-10-03)
 
 
