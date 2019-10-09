@@ -16,7 +16,7 @@ import KonnectorModalHeader from './KonnectorModalHeader'
 
 class KonnectorAccounts extends React.Component {
   state = {
-    fetchingAccounts: false,
+    fetchingAccounts: true,
     error: null,
     accounts: []
   }
