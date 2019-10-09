@@ -46,7 +46,7 @@ export class AccountModal extends Component {
     trigger: null,
     account: null,
     fetching: true,
-    error: false
+    error: null
   }
   async componentDidMount() {
     await this.loadSelectedAccountId()
@@ -65,6 +65,11 @@ export class AccountModal extends Component {
       'trigger'
     )
     if (matchingTrigger) await this.fetchAccount(matchingTrigger)
+    else
+      this.setState({
+        error: new Error('No matching trigger found'),
+        fetching: false
+      })
   }
 
   async fetchAccount(trigger) {
