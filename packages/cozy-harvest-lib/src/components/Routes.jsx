@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, withRouter } from 'react-router'
+import { Switch, Route, Redirect, withRouter } from 'react-router'
 import trimEnd from 'lodash/trimEnd'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 
@@ -21,7 +21,7 @@ const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => {
     <Modal dismissAction={onDismiss} mobileFullscreen size="small">
       <KonnectorAccounts konnector={konnector}>
         {accounts => (
-          <>
+          <Switch>
             <Route
               path={`${konnectorRoot}/`}
               exact
@@ -84,7 +84,8 @@ const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => {
                 )
               }}
             />
-          </>
+            <Redirect from={`${konnectorRoot}/*`} to={`${konnectorRoot}/`} />
+          </Switch>
         )}
       </KonnectorAccounts>
     </Modal>
