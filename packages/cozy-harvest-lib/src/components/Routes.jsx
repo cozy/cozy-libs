@@ -1,6 +1,5 @@
 import React from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router'
-import trimEnd from 'lodash/trimEnd'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 
 import KonnectorAccounts from './KonnectorAccounts'
@@ -12,8 +11,8 @@ import KonnectorSuccess from './KonnectorSuccess'
 
 const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => {
   // we need to make sure the path ends with a / for relative links to work
-  if (/\/$/.test(location.pathname) === false) {
-    history.replace(trimEnd(location.pathname, '/') + '/')
+  if (!location.pathname.endsWith('/')) {
+    history.replace(`${location.pathname}/`)
     return null
   }
 
