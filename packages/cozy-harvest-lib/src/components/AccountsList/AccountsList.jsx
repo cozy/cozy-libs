@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Button from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import withLocales from '../hoc/withLocales'
 import AccountsListItem from './AccountsListItem'
 
-class AccountsList extends React.PureComponent {
+export class AccountsList extends React.PureComponent {
   render() {
     const { accounts, konnector, addAccount, onPick, t } = this.props
 
@@ -51,4 +51,4 @@ AccountsList.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default withLocales(AccountsList)
+export default translate()(AccountsList)

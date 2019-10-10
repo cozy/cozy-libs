@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -14,7 +15,6 @@ import accounts from '../helpers/accounts'
 import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
-import withLocales from './hoc/withLocales'
 import TriggerLauncher from './TriggerLauncher'
 
 const IDLE = 'IDLE'
@@ -300,7 +300,7 @@ TriggerManager.propTypes = {
   statDirectoryByPath: PropTypes.func
 }
 
-const SmartTriggerManager = withLocales(
+const SmartTriggerManager = translate()(
   withMutations(
     accountsMutations,
     filesMutations,

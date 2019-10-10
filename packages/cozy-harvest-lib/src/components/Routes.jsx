@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route, Redirect, withRouter } from 'react-router'
 import Modal from 'cozy-ui/transpiled/react/Modal'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import KonnectorAccounts from './KonnectorAccounts'
 import AccountsListModal from './AccountsListModal'
@@ -91,4 +92,4 @@ const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => {
   )
 }
 
-export default withRouter(Routes)
+export default withRouter(translate()(Routes))

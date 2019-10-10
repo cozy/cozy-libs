@@ -1,6 +1,6 @@
 import React from 'react'
 import { Button } from 'cozy-ui/transpiled/react/'
-import withLocales from '../hoc/withLocales'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 /**
  * onClick is not called when we are on mobile device.
@@ -9,7 +9,7 @@ import withLocales from '../hoc/withLocales'
  *
  * Using touchEnd, seems to fix the issue on mobile device (Android & iOS)
  */
-const CreateAccount = withLocales(({ createAction, t }) => {
+const CreateAccount = translate()(({ createAction, t }) => {
   return (
     <Button
       subtle

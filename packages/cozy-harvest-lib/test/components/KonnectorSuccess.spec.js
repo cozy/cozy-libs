@@ -1,8 +1,9 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { shallow } from 'enzyme'
 
 import CozyClient, { CozyProvider } from 'cozy-client'
-import KonnectorSuccess, {
+import {
+  KonnectorSuccess,
   BanksLink,
   DriveLink
 } from 'components/KonnectorSuccess'
@@ -23,7 +24,7 @@ describe('KonnectorSuccess', () => {
           vendor_link: 'test konnector link'
         }
     const message = folder_to_save ? { folder_to_save: '/path' } : {}
-    root = mount(
+    root = shallow(
       <CozyProvider client={client}>
         <KonnectorSuccess
           accounts={[
@@ -45,6 +46,7 @@ describe('KonnectorSuccess', () => {
           successButtonLabel="Fake label"
           error={null}
           onDone={() => {}}
+          t={jest.fn(str => str)}
         />
       </CozyProvider>
     )
@@ -52,17 +54,37 @@ describe('KonnectorSuccess', () => {
 
   it('should not show drive if trigger has no folder_to_save', () => {
     setup()
-    expect(root.find(DriveLink).length).toBe(0)
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(DriveLink).length
+    ).toBe(0)
   })
 
   it('should show drive if trigger has a folder_to_save', () => {
     setup({ folder_to_save: 'jjj' })
-    expect(root.find(DriveLink).length).toBe(1)
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(DriveLink).length
+    ).toBe(1)
   })
 
   it('should show banks if connector has datatypes with bankAccounts', () => {
     setup({ isBankingKonnector: true })
-    expect(root.find(DriveLink).length).toBe(0)
-    expect(root.find(BanksLink).length).toBe(1)
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(DriveLink).length
+    ).toBe(0)
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(BanksLink).length
+    ).toBe(1)
   })
 })

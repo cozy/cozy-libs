@@ -2,11 +2,11 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withClient, withMutations } from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
 import { accountsMutations } from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
-import withLocales from './hoc/withLocales'
 import * as triggersModel from '../helpers/triggers'
 import * as jobsModel from '../helpers/jobs'
 import KonnectorJob, {
@@ -224,7 +224,7 @@ TriggerLauncher.propTypes = {
   initialTrigger: PropTypes.object
 }
 
-export default withLocales(
+export default translate()(
   withClient(
     withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
   )

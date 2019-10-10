@@ -1,7 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import AccountsList from 'components/AccountsList/AccountsList'
+import { AccountsList } from 'components/AccountsList/AccountsList'
 
 describe('AccountsList', () => {
   it('should render', () => {
@@ -23,6 +23,7 @@ describe('AccountsList', () => {
         }}
         addAccount={jest.fn()}
         onPick={jest.fn()}
+        t={jest.fn(str => str)}
       />
     )
     const component = wrapper.shallow()
