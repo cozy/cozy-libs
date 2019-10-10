@@ -18,6 +18,7 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
 import get from 'lodash/get'
+import has from 'lodash/has'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import * as konnectorsModel from '../../helpers/konnectors'
@@ -90,9 +91,11 @@ class KonnectorAccountTabs extends React.Component {
                       <TriggerErrorInfo error={error} konnector={konnector} />
                     )}
                     <LaunchTriggerCard initialTrigger={initialTrigger} />
-                    <DocumentsLinkCard
-                      folderId={get(initialTrigger, 'message.folder_to_save')}
-                    />
+                    {has(initialTrigger, 'message.folder_to_save') && (
+                      <DocumentsLinkCard
+                        folderId={get(initialTrigger, 'message.folder_to_save')}
+                      />
+                    )}
                   </Stack>
                 </TabPanel>
                 <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
