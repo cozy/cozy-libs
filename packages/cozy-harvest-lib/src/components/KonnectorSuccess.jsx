@@ -6,9 +6,9 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import Button from 'cozy-ui/react/Button'
-import withLocales from './hoc/withLocales'
 import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import connectingIllu from '../assets/connecting-data-in-progress.svg'
@@ -138,4 +138,4 @@ KonnectorSuccess.propTypes = {
 
 export { SuccessImage, BanksLink, DriveLink }
 
-export default withRouter(withLocales(KonnectorSuccess))
+export default withRouter(translate()(KonnectorSuccess))

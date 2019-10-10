@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { ButtonLink } from 'cozy-ui/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { queryConnect } from 'cozy-client'
-
-import withLocales from '../../hoc/withLocales'
 
 export class DriveLink extends PureComponent {
   render() {
@@ -41,4 +40,4 @@ export default queryConnect({
     query: client => client.all('io.cozy.apps').where({ slug: 'drive' }),
     as: 'driveQuery'
   }
-})(withLocales(DriveLink))
+})(translate()(DriveLink))

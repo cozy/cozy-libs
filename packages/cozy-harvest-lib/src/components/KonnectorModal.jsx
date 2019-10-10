@@ -11,14 +11,13 @@ import Modal, {
 } from 'cozy-ui/transpiled/react/Modal'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as konnectorsModel from '../helpers/konnectors'
 import * as triggersModel from '../helpers/triggers'
-
-import withLocales from './hoc/withLocales'
 
 import TriggerManager from './TriggerManager'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
@@ -332,5 +331,5 @@ KonnectorModal.contextTypes = {
 }
 
 export default withMutations(accountMutations, triggersMutations)(
-  withLocales(KonnectorModal)
+  translate()(KonnectorModal)
 )

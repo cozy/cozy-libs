@@ -4,8 +4,8 @@ import PropTypes from 'prop-types'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import withLocales from '../hoc/withLocales'
 import { getErrorLocale } from '../../helpers/konnectors'
 import TriggerLauncher from '../TriggerLauncher'
 
@@ -58,4 +58,4 @@ Status.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default withLocales(Status)
+export default translate()(Status)

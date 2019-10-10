@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import omit from 'lodash/omit'
 
 import { Button } from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withMutations } from 'cozy-client'
 
 import accountsMutations from '../connections/accounts'
-import withLocales, { i18nContextTypes } from './hoc/withLocales'
+import { i18nContextTypes } from './hoc/withLocales'
 import { getMutationsProptypes } from '../helpers/proptypes'
 
 export class DeleteAccountButton extends Component {
@@ -89,6 +90,6 @@ const excludedButtonProptypes = {
   ...i18nContextTypes
 }
 
-export default withLocales(
+export default translate()(
   withMutations(accountsMutations)(DeleteAccountButton)
 )

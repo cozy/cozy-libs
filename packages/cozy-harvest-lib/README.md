@@ -21,16 +21,36 @@ Just run
 yarn add cozy-harvest-lib
 ```
 
+# Importing
+
+Components imported from cozy-harvest-lib **must** be imported from the root of the package, and not from specific files:
+
+```
+// imported from the root of the package 👍
+import { TriggerManager } from 'cozy-harvest-lib'
+
+// imported from another file or folder 👎
+import TriggerManager from 'cozy-harvest-lib/TriggerManager'
+```
+
+This is because all harvest components come with their own translation context. If you really do need to import a component straight from the shipped file, there is a `withLocales` HOC that is available, so something like this would work as a fallback:
+
+```
+import TriggerManager from 'cozy-harvest-lib/TriggerManager'
+import { withLocales } from 'cozy-harvest-lib'
+
+const MyTriggerManager = withLocales(TriggerManager)
+```
+
 # Getting Started
 
 For now it is possible to instanciate a `<TriggerManager />` which will allow to edit an account and launch the trigger.
 
-As this component uses CozyClient, it must be wrapped at some point into a [`<CozyProvider />`](https://github.com/cozy/cozy-client/blob/master/docs/getting-started.md#wrapping-the-app-in-a-cozyprovider) and a [`<I18n>`](https://github.com/cozy/cozy-ui/tree/master/react#i18n-translate) components.
+As this component uses CozyClient, it must be wrapped at some point into a [`<CozyProvider />`](https://github.com/cozy/cozy-client/blob/master/docs/getting-started.md#wrapping-the-app-in-a-cozyprovider).
 
 ```js
 import CozyClient, { CozyProvider } from 'cozy-client'
 import { TriggerManager } from 'cozy-harvest-lib'
-import I18n from 'cozy-ui/react/I18n'
 
 const client = new CozyClient({
   /*...*/
@@ -38,11 +58,15 @@ const client = new CozyClient({
 
 ReactDOM.render(
   <CozyProvider client={client}>
-    <I18n lang="en" dictRequire={lang => require(`../src/locales/${lang}`)}>
-      // Fetch konnector at some point
-      <TriggerManager konnector="konnector" onSuccessLogin={() => alert('logged in')} />
-      // other stuff
-    </I18n>
+    <Query query={client => client.get('io.cozy.apps', 'my-konnector-id')}>
+      {konnector => (
+        <TriggerManager
+          konnector={konnector}
+          onSuccessLogin={() => alert('logged in')}
+        />
+      )}
+    </Query>
+    // other stuff
   </CozyProvider>,
   document.getElementById('main')
 )

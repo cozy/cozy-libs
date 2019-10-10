@@ -15,6 +15,7 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import palette from 'cozy-ui/transpiled/react/palette'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
 import get from 'lodash/get'
@@ -26,7 +27,6 @@ import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import DocumentsLinkCard from '../cards/DocumentsLinkCard'
 import DeleteAccountButton from '../DeleteAccountButton'
-import withLocales from '../hoc/withLocales'
 import TriggerLauncher from '../TriggerLauncher'
 
 class KonnectorAccountTabs extends React.Component {
@@ -161,4 +161,4 @@ KonnectorAccountTabs.propTypes = {
   history: PropTypes.object.isRequired
 }
 
-export default withLocales(withRouter(KonnectorAccountTabs))
+export default translate()(withRouter(KonnectorAccountTabs))

@@ -8,6 +8,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -15,7 +16,6 @@ import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
-import withLocales from './hoc/withLocales'
 
 /**
  * AccountModal take an accountId and a list of accounts containing their
@@ -161,5 +161,5 @@ AccountModal.propTypes = {
   accountId: PropTypes.string.isRequired
 }
 export default withMutations(accountMutations, triggersMutations)(
-  withRouter(withLocales(AccountModal))
+  withRouter(translate()(AccountModal))
 )
