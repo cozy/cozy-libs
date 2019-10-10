@@ -20,7 +20,7 @@ export class LaunchTriggerCard extends Component {
         <TriggerLauncher
           {...pick(this.props, Object.keys(DumbTriggerLauncher.propTypes))}
         >
-          {({ error, launch, running, trigger }) => {
+          {({ launch, running, trigger }) => {
             const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
               <div className="u-flex u-flex-column-s">
@@ -60,11 +60,6 @@ export class LaunchTriggerCard extends Component {
                   </li>
                 </ul>
                 <div>
-                  {error && (
-                    <Text className="u-error u-mb-1">
-                      {t('card.launchTrigger.error')}
-                    </Text>
-                  )}
                   <Button
                     label={t('card.launchTrigger.button.label')}
                     icon={<Icon focusable="false" icon="sync" spin={running} />}
