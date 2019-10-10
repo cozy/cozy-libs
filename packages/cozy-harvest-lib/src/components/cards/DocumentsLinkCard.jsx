@@ -60,7 +60,7 @@ const DocumentsLinkCard = ({
               }
               theme="secondary"
               label={t('card.documentsLink.button')}
-              extension={isMobile ? 'full' : false}
+              className={isMobile ? 'u-w-100' : null}
             />
           )}
         </AppLinker>
