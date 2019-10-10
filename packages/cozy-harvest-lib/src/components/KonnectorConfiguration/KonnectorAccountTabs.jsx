@@ -137,7 +137,6 @@ class KonnectorAccountTabs extends React.Component {
                       disabled={running}
                       onSuccess={onAccountDeleted}
                     />
-                    {/*TODO Create a CreateAccountButton */}
                     <Button
                       onClick={addAccount}
                       label={t('modal.addAccount.button')}
