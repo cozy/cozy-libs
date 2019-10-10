@@ -140,7 +140,7 @@ export class AccountModal extends Component {
               trigger={trigger}
               account={account}
               onAccountDeleted={onDismiss}
-              addAccount={() => history.push('../new')}
+              addAccount={() => history.push('../../new')}
             />
           )}
         </ModalContent>
