@@ -1,0 +1,13 @@
+{
+  "name": "cozy-hocs",
+  "version": "0.0.1",
+  "description": "Provides HoC with some logic in it",
+  "main": "src/index.js",
+  "repository": "https://github.com/cozy/cozy-libs",
+  "author": "Cozy",
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "react": "^16.10.2"
+  }
+}
