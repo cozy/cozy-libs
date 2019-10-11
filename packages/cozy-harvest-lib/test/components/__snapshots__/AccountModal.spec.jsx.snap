@@ -1,6 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`AccountModal should display the AccountSelect & Content if an account is there and we can change the selectedAccount 1`] = `
+exports[`AccountModal should display the fetching state by default 1`] = `
+<React.Fragment>
+  <KonnectorModalHeader />
+  <ModalContent>
+    <div
+      className="u-ta-center"
+    >
+      <Wrapper
+        size="xxlarge"
+      />
+    </div>
+  </ModalContent>
+</React.Fragment>
+`;
+
+exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 1`] = `
 <React.Fragment>
   <KonnectorModalHeader>
     <AccountSelectBox
@@ -57,7 +72,7 @@ exports[`AccountModal should display the AccountSelect & Content if an account i
 </React.Fragment>
 `;
 
-exports[`AccountModal should display the AccountSelect & Content if an account is there and we can change the selectedAccount 2`] = `
+exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 2`] = `
 <React.Fragment>
   <KonnectorModalHeader>
     <AccountSelectBox
@@ -109,21 +124,6 @@ exports[`AccountModal should display the AccountSelect & Content if an account i
         }
       }
     />
-  </ModalContent>
-</React.Fragment>
-`;
-
-exports[`AccountModal should display the fetching state by default 1`] = `
-<React.Fragment>
-  <KonnectorModalHeader />
-  <ModalContent>
-    <div
-      className="u-ta-center"
-    >
-      <Wrapper
-        size="xxlarge"
-      />
-    </div>
   </ModalContent>
 </React.Fragment>
 `;

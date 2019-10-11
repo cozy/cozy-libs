@@ -30,29 +30,54 @@ describe('AccountModal', () => {
     expect(component).toMatchSnapshot()
   })
 
-  it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
+  describe('with an account', () => {
     const findAccount = jest.fn().mockResolvedValue({
       _id: '123',
       name: 'account 1'
     })
+    const mockHistory = {
+      push: jest.fn()
+    }
     const component = shallow(
       <AccountModal
         accountId={accountIdMock}
         accounts={accountsMock}
         findAccount={findAccount}
+        history={mockHistory}
       />
     )
-    await component.instance().componentDidMount()
-    expect(component.getElement()).toMatchSnapshot()
-    component.setProps({
-      accountId: 'account_2',
-      findAccount: jest.fn().mockResolvedValue({
-        _id: 'account_2',
-        name: 'account_2'
+
+    it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
+      await component.instance().componentDidMount()
+      expect(component.getElement()).toMatchSnapshot()
+      component.setProps({
+        accountId: 'account_2',
+        findAccount: jest.fn().mockResolvedValue({
+          _id: 'account_2',
+          name: 'account_2'
+        })
       })
+
+      await component
+        .instance()
+        .componentDidUpdate({ accountId: accountIdMock })
+      expect(component.getElement()).toMatchSnapshot()
     })
 
-    await component.instance().componentDidUpdate({ accountId: accountIdMock })
-    expect(component.getElement()).toMatchSnapshot()
+    it('should redirect toi the correct locations', async () => {
+      await component.instance().componentDidMount()
+
+      component.find('AccountSelectBox').prop('onChange')({
+        account: { _id: '123' }
+      })
+      expect(mockHistory.push).toHaveBeenCalledWith('../123')
+
+      component.find('AccountSelectBox').prop('onCreate')()
+      expect(mockHistory.push).toHaveBeenCalledWith('../../new')
+
+      const ModalContent = component.find('ModalContent').find('Wrapper')
+      ModalContent.prop('addAccount')()
+      expect(mockHistory.push).toHaveBeenCalledWith('../../new')
+    })
   })
 })
