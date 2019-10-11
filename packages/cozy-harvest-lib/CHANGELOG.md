@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.3...cozy-harvest-lib@1.8.4) (2019-10-11)
+
+
+### Bug Fixes
+
+* Add account link ([9745b34](https://github.com/cozy/cozy-libs/commit/9745b34))
+* Remove outdated comment ([238e4a4](https://github.com/cozy/cozy-libs/commit/238e4a4))
+* Removed duplicate error message ([c4e2f73](https://github.com/cozy/cozy-libs/commit/c4e2f73))
+
+
+
+
+
 ## [1.8.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.2...cozy-harvest-lib@1.8.3) (2019-10-11)
 
 
