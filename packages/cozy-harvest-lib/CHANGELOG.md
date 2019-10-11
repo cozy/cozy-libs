@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.1...cozy-harvest-lib@1.8.2) (2019-10-11)
+
+
+### Bug Fixes
+
+* Avoid double-render with Redirect ([c6b5a72](https://github.com/cozy/cozy-libs/commit/c6b5a72))
+* Catch inexisting account error ([ff6ba65](https://github.com/cozy/cozy-libs/commit/ff6ba65))
+* Error translations ([377a730](https://github.com/cozy/cozy-libs/commit/377a730))
+* Initially render spinner ([82123da](https://github.com/cozy/cozy-libs/commit/82123da))
+* Redirect from unmatched routes ([43e644b](https://github.com/cozy/cozy-libs/commit/43e644b))
+
+
+
+
+
 ## [1.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.0...cozy-harvest-lib@1.8.1) (2019-10-07)
 
 
