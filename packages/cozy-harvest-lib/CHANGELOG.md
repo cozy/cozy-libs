@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.2...cozy-harvest-lib@1.8.3) (2019-10-11)
+
+
+### Bug Fixes
+
+* Button margins on mobile ([b4f2bdc](https://github.com/cozy/cozy-libs/commit/b4f2bdc))
+* Only show folder link when the konnector has a folder ([49e317a](https://github.com/cozy/cozy-libs/commit/49e317a))
+
+
+
+
+
 ## [1.8.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.1...cozy-harvest-lib@1.8.2) (2019-10-11)
 
 
