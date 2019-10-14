@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.4...cozy-harvest-lib@1.8.5) (2019-10-14)
+
+
+### Bug Fixes
+
+* Translating components ([1101a66](https://github.com/cozy/cozy-libs/commit/1101a66))
+
+
+
+
+
 ## [1.8.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.3...cozy-harvest-lib@1.8.4) (2019-10-11)
 
 
