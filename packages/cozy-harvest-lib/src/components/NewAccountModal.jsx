@@ -27,7 +27,7 @@ const NewAccountModal = ({ konnector, history, client, t }) => {
 
   return (
     <>
-      <ModalContent>
+      <ModalContent className="u-mh-2">
         <Stack className="u-mb-3">
           <div className="u-w-3 u-h-3 u-mh-auto">
             <KonnectorIcon konnector={konnector} />
