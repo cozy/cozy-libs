@@ -57,7 +57,7 @@ export class TriggerManager extends Component {
       error: null,
       status: IDLE,
       step: account ? 'accountForm' : 'ciphersList',
-      selectedCipher: null,
+      selectedCipher: undefined,
       showBackButton: false
     }
   }
@@ -377,7 +377,7 @@ export class TriggerManager extends Component {
   }
 
   cipherToAccount(cipher) {
-    if (!cipher) {
+    if (cipher === undefined) {
       return null
     }
 
@@ -385,9 +385,11 @@ export class TriggerManager extends Component {
       this.props.konnector.fields
     )
 
-    return Account.fromCipher(cipher, {
+    const account = Account.fromCipher(cipher, {
       identifierProperty
     })
+
+    return account
   }
 
   componentDidUpdate(prevProps) {
@@ -463,7 +465,11 @@ export class TriggerManager extends Component {
                 />
               )}
               <AccountForm
-                account={account || this.cipherToAccount(selectedCipher)}
+                account={
+                  selectedCipher === undefined
+                    ? account
+                    : this.cipherToAccount(selectedCipher)
+                }
                 error={error || triggerError}
                 konnector={konnector}
                 onSubmit={this.handleSubmit}
