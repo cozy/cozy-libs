@@ -191,7 +191,7 @@ export class TriggerManager extends Component {
    * @param {string} login - the login to set in the cipher
    * @param {string} password - the password to set in the cipher
    *
-   * @returns {string} the cipher ID
+   * @returns {string|null} the cipher ID or null if no cipher was found
    */
   async getExistingCipherIdForAccount(login, password) {
     const { account } = this.state
@@ -207,17 +207,12 @@ export class TriggerManager extends Component {
     }
     const sort = [view => view.login.password === password, 'revisionDate']
     const originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
-    const cipherData = await vaultClient.decrypt(originalCipher)
-    cipherData.login.username = login
-    cipherData.login.password = password
 
-    const cipher = await vaultClient.createNewCozySharedCipher(
-      cipherData,
-      originalCipher
-    )
-    await vaultClient.saveCipher(cipher)
-
-    return cipher.id
+    if (originalCipher) {
+      return originalCipher.id
+    } else {
+      return null
+    }
   }
 
   /**
@@ -231,10 +226,16 @@ export class TriggerManager extends Component {
     await vaultClient.shareWithCozy(cipherView)
   }
 
-  async updateSelectedCipher(login, password) {
-    const { selectedCipher } = this.state
+  /**
+   * Update a cipher with provided identifier and password
+   *
+   * @param {string} cipherId - uuid of a cipher
+   * @param {string} login - the new login
+   * @param {string} password - the new password
+   */
+  async updateCipher(cipherId, login, password) {
     const { vaultClient } = this.props
-    const originalCipher = await vaultClient.getByIdOrSearch(selectedCipher.id)
+    const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
     const cipherData = await vaultClient.decrypt(originalCipher)
 
     if (
@@ -274,15 +275,21 @@ export class TriggerManager extends Component {
       let cipherId = this.getSelectedCipherId()
 
       if (cipherId) {
-        await this.updateSelectedCipher(identifier, password)
-      } else if (!cipherId && account) {
-        cipherId = await this.getExistingCipherIdForAccount(
+        await this.updateCipher(cipherId, identifier, password)
+      } else {
+        const existingCipherId = await this.getExistingCipherIdForAccount(
           identifier,
           password
         )
-      } else if (!cipherId && !account) {
-        cipherId = await this.createNewCipherId(identifier, password)
+
+        if (existingCipherId) {
+          cipherId = existingCipherId
+          await this.updateCipher(cipherId, identifier, password)
+        } else {
+          cipherId = await this.createNewCipherId(identifier, password)
+        }
       }
+
       await this.shareCipherWithCozy(cipherId)
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
