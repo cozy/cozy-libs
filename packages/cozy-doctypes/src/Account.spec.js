@@ -106,9 +106,12 @@ describe('helpers library', () => {
       })
     })
 
-    it('should throw if cipher is not passed as argument', () => {
-      expect(() => Account.fromCipher()).toThrow()
-      expect(() => Account.fromCipher(null)).toThrow()
+    it('should handle null cipher', () => {
+      const account = Account.fromCipher(null)
+
+      expect(account).toEqual({
+        auth: {}
+      })
     })
   })
 })
