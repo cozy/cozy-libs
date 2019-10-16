@@ -53,7 +53,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     />
   </KonnectorModalHeader>
   <ModalContent>
-    <Wrapper
+    <withClient(withRouter(Wrapper))
       account={
         Object {
           "_id": "123",
@@ -110,7 +110,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     />
   </KonnectorModalHeader>
   <ModalContent>
-    <Wrapper
+    <withClient(withRouter(Wrapper))
       account={
         Object {
           "_id": "account_2",

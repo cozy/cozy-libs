@@ -20,6 +20,8 @@ import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
 import get from 'lodash/get'
 import has from 'lodash/has'
+import flow from 'lodash/flow'
+import { withClient } from 'cozy-client'
 
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import * as konnectorsModel from '../../helpers/konnectors'
@@ -29,6 +31,8 @@ import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import DocumentsLinkCard from '../cards/DocumentsLinkCard'
 import DeleteAccountButton from '../DeleteAccountButton'
 import TriggerLauncher from '../TriggerLauncher'
+import KonnectorMaintenance from '../Maintenance'
+import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
 const KonnectorAccountTabs = ({
   konnector,
@@ -38,8 +42,11 @@ const KonnectorAccountTabs = ({
   //TODO on``
   addAccount,
   history,
+  client,
   t
 }) => {
+  const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
+
   return (
     <TriggerLauncher initialTrigger={initialTrigger}>
       {({ error, running }) => {
@@ -57,6 +64,10 @@ const KonnectorAccountTabs = ({
           hasError &&
           !hasLoginError &&
           !isTermsVersionMismatchErrorWithVersionAvailable
+
+        const isInMaintenance = maintenanceStatus.isInMaintenance
+        const maintenanceMessages = maintenanceStatus.messages
+
         return (
           <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
             <TabList>
@@ -78,6 +89,13 @@ const KonnectorAccountTabs = ({
             <TabPanels>
               <TabPanel name="data" className="u-pt-1-half u-pb-0">
                 <Stack>
+                  {isInMaintenance && (
+                    <div className="u-bg-paleGrey u-p-1">
+                      <KonnectorMaintenance
+                        maintenanceMessages={maintenanceMessages}
+                      />
+                    </div>
+                  )}
                   {konnectorsModel.hasNewVersionAvailable(konnector) && (
                     <KonnectorUpdateInfos
                       konnector={konnector}
@@ -155,4 +173,8 @@ KonnectorAccountTabs.propTypes = {
   history: PropTypes.object.isRequired
 }
 
-export default translate()(withRouter(KonnectorAccountTabs))
+export default flow(
+  translate(),
+  withRouter,
+  withClient
+)(KonnectorAccountTabs)
