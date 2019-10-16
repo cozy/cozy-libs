@@ -57,7 +57,7 @@ export class TriggerManager extends Component {
       error: null,
       status: IDLE,
       step: account ? 'accountForm' : 'ciphersList',
-      selectedCipher: null,
+      selectedCipher: undefined,
       showBackButton: false
     }
   }
@@ -377,7 +377,7 @@ export class TriggerManager extends Component {
   }
 
   cipherToAccount(cipher) {
-    if (!cipher) {
+    if (!this.hasCipherSelected()) {
       return null
     }
 
@@ -385,15 +385,27 @@ export class TriggerManager extends Component {
       this.props.konnector.fields
     )
 
-    return Account.fromCipher(cipher, {
+    const account = Account.fromCipher(cipher, {
       identifierProperty
     })
+
+    return account
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.error && this.props.error !== prevProps.error) {
       this.setState({ step: 'accountForm' })
     }
+  }
+
+  /**
+   * Tells whether we currently have a cipher selected or not
+   * selectedCipher === undefined means nothing has been selected
+   * selectedCipher === null means « from another account has been selected »
+   * selectedCipher === Object means a cipher has been selected
+   */
+  hasCipherSelected() {
+    return this.state.selectedCipher !== undefined
   }
 
   render() {
@@ -463,7 +475,11 @@ export class TriggerManager extends Component {
                 />
               )}
               <AccountForm
-                account={account || this.cipherToAccount(selectedCipher)}
+                account={
+                  !this.hasCipherSelected()
+                    ? account
+                    : this.cipherToAccount(selectedCipher)
+                }
                 error={error || triggerError}
                 konnector={konnector}
                 onSubmit={this.handleSubmit}
