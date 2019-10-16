@@ -105,7 +105,10 @@ const KonnectorAccountTabs = ({
                   {shouldDisplayError && hasGenericError && (
                     <TriggerErrorInfo error={error} konnector={konnector} />
                   )}
-                  <LaunchTriggerCard initialTrigger={initialTrigger} />
+                  <LaunchTriggerCard
+                    initialTrigger={initialTrigger}
+                    disabled={isInMaintenance}
+                  />
                   {has(initialTrigger, 'message.folder_to_save') && (
                     <DocumentsLinkCard
                       folderId={get(initialTrigger, 'message.folder_to_save')}

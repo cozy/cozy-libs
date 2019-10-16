@@ -14,7 +14,7 @@ import TriggerLauncher, {
 
 export class LaunchTriggerCard extends Component {
   render() {
-    const { className, f, t } = this.props
+    const { className, f, t, disabled } = this.props
     return (
       <Card className={className}>
         <TriggerLauncher
@@ -64,7 +64,7 @@ export class LaunchTriggerCard extends Component {
                     label={t('card.launchTrigger.button.label')}
                     icon={<Icon focusable="false" icon="sync" spin={running} />}
                     className="u-mh-0 u-mv-0"
-                    disabled={running}
+                    disabled={running || disabled}
                     onClick={() => launch(trigger)}
                     subtle
                     // TODO: Extract this directly in Cozy-UI
@@ -91,7 +91,12 @@ LaunchTriggerCard.propTypes = {
    * TODO: rename all running props to hasJobRunning to make its role clearer
    * @type {boolean}
    */
-  submitting: PropTypes.bool
+  submitting: PropTypes.bool,
+
+  /**
+   * Disables the "run trigger" button
+   */
+  disabled: PropTypes.bool
 }
 
 export default translate()(LaunchTriggerCard)
