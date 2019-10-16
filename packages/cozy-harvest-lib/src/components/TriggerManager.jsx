@@ -377,7 +377,7 @@ export class TriggerManager extends Component {
   }
 
   cipherToAccount(cipher) {
-    if (cipher === undefined) {
+    if (!this.hasCipherSelected()) {
       return null
     }
 
@@ -396,6 +396,16 @@ export class TriggerManager extends Component {
     if (this.props.error && this.props.error !== prevProps.error) {
       this.setState({ step: 'accountForm' })
     }
+  }
+
+  /**
+   * Tells whether we currently have a cipher selected or not
+   * selectedCipher === undefined means nothing has been selected
+   * selectedCipher === null means « from another account has been selected »
+   * selectedCipher === Object means a cipher has been selected
+   */
+  hasCipherSelected() {
+    return this.state.selectedCipher !== undefined
   }
 
   render() {
@@ -466,7 +476,7 @@ export class TriggerManager extends Component {
               )}
               <AccountForm
                 account={
-                  selectedCipher === undefined
+                  !this.hasCipherSelected()
                     ? account
                     : this.cipherToAccount(selectedCipher)
                 }
