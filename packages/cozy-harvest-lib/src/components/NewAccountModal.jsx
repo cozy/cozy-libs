@@ -14,28 +14,25 @@ import * as triggersModel from '../helpers/triggers'
  * few konnectors know if the login is success or not.
  *
  */
-class NewAccountModal extends Component {
-  render() {
-    const { konnector, history } = this.props
-    return (
-      <>
-        <KonnectorModalHeader konnector={konnector} />
-        <ModalContent>
-          <TriggerManager
-            konnector={konnector}
-            onLoginSuccess={trigger => {
-              const accountId = triggersModel.getAccountId(trigger)
-              history.push(`../accounts/${accountId}/success`)
-            }}
-            onSuccess={trigger => {
-              const accountId = triggersModel.getAccountId(trigger)
-              history.push(`../accounts/${accountId}/success`)
-            }}
-          />
-        </ModalContent>
-      </>
-    )
-  }
+const NewAccountModal = ({ konnector, history }) => {
+  return (
+    <>
+      <KonnectorModalHeader konnector={konnector} />
+      <ModalContent>
+        <TriggerManager
+          konnector={konnector}
+          onLoginSuccess={trigger => {
+            const accountId = triggersModel.getAccountId(trigger)
+            history.push(`../accounts/${accountId}/success`)
+          }}
+          onSuccess={trigger => {
+            const accountId = triggersModel.getAccountId(trigger)
+            history.push(`../accounts/${accountId}/success`)
+          }}
+        />
+      </ModalContent>
+    </>
+  )
 }
 
 NewAccountModal.propTypes = {
