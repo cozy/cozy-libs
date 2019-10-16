@@ -30,127 +30,119 @@ import DocumentsLinkCard from '../cards/DocumentsLinkCard'
 import DeleteAccountButton from '../DeleteAccountButton'
 import TriggerLauncher from '../TriggerLauncher'
 
-class KonnectorAccountTabs extends React.Component {
-  render() {
-    const {
-      konnector,
-      trigger: initialTrigger,
-      account,
-      onAccountDeleted,
-      //TODO on``
-      addAccount,
-      history,
-      t
-    } = this.props
+const KonnectorAccountTabs = ({
+  konnector,
+  trigger: initialTrigger,
+  account,
+  onAccountDeleted,
+  //TODO on``
+  addAccount,
+  history,
+  t
+}) => {
+  return (
+    <TriggerLauncher initialTrigger={initialTrigger}>
+      {({ error, running }) => {
+        const hasError = error
+        const shouldDisplayError = !running && error
+        const hasLoginError = hasError && error.isLoginError()
+        const hasTermsVersionMismatchError =
+          hasError && error.isTermsVersionMismatchError()
 
-    return (
-      <TriggerLauncher initialTrigger={initialTrigger}>
-        {({ error, running }) => {
-          const hasError = error
-          const shouldDisplayError = !running && error
-          const hasLoginError = hasError && error.isLoginError()
-          const hasTermsVersionMismatchError =
-            hasError && error.isTermsVersionMismatchError()
+        const isTermsVersionMismatchErrorWithVersionAvailable =
+          hasTermsVersionMismatchError &&
+          konnectorsModel.hasNewVersionAvailable(konnector)
 
-          const isTermsVersionMismatchErrorWithVersionAvailable =
-            hasTermsVersionMismatchError &&
-            konnectorsModel.hasNewVersionAvailable(konnector)
+        const hasGenericError =
+          hasError &&
+          !hasLoginError &&
+          !isTermsVersionMismatchErrorWithVersionAvailable
+        return (
+          <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
+            <TabList>
+              <Tab name="data">
+                {t('modal.tabs.data')}
+                {// Login error should not be mentionned in data tab
+                hasError && !hasLoginError && (
+                  <Icon icon="warning" size={13} className="u-ml-half" />
+                )}
+              </Tab>
+              <Tab name="configuration">
+                {t('modal.tabs.configuration')}
+                {shouldDisplayError && hasLoginError && (
+                  <Icon icon="warning" size={13} className="u-ml-half" />
+                )}
+              </Tab>
+            </TabList>
 
-          const hasGenericError =
-            hasError &&
-            !hasLoginError &&
-            !isTermsVersionMismatchErrorWithVersionAvailable
-          return (
-            <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
-              <TabList>
-                <Tab name="data">
-                  {t('modal.tabs.data')}
-                  {// Login error should not be mentionned in data tab
-                  hasError && !hasLoginError && (
-                    <Icon icon="warning" size={13} className="u-ml-half" />
-                  )}
-                </Tab>
-                <Tab name="configuration">
-                  {t('modal.tabs.configuration')}
-                  {shouldDisplayError && hasLoginError && (
-                    <Icon icon="warning" size={13} className="u-ml-half" />
-                  )}
-                </Tab>
-              </TabList>
-
-              <TabPanels>
-                <TabPanel name="data" className="u-pt-1-half u-pb-0">
-                  <Stack>
-                    {konnectorsModel.hasNewVersionAvailable(konnector) && (
-                      <KonnectorUpdateInfos
-                        konnector={konnector}
-                        isBlocking={hasTermsVersionMismatchError}
-                      />
-                    )}
-                    {shouldDisplayError && hasGenericError && (
-                      <TriggerErrorInfo error={error} konnector={konnector} />
-                    )}
-                    <LaunchTriggerCard initialTrigger={initialTrigger} />
-                    {has(initialTrigger, 'message.folder_to_save') && (
-                      <DocumentsLinkCard
-                        folderId={get(initialTrigger, 'message.folder_to_save')}
-                      />
-                    )}
-                  </Stack>
-                </TabPanel>
-                <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
-                  {shouldDisplayError && hasLoginError && (
-                    <TriggerErrorInfo
-                      className="u-mb-2"
-                      error={error}
+            <TabPanels>
+              <TabPanel name="data" className="u-pt-1-half u-pb-0">
+                <Stack>
+                  {konnectorsModel.hasNewVersionAvailable(konnector) && (
+                    <KonnectorUpdateInfos
                       konnector={konnector}
+                      isBlocking={hasTermsVersionMismatchError}
                     />
                   )}
-                  <div className="u-mb-1">
-                    <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
-                      {t('modal.updateAccount.title')}
-                    </Uppercase>
-                    <Card
-                      className="u-flex u-flex-items-center u-c-pointer"
-                      onClick={() => history.push('./edit')}
-                    >
-                      <div className="u-w-2 u-mr-1">
-                        <Icon
-                          icon="lock"
-                          color={palette['coolGrey']}
-                          size={36}
-                        />
-                      </div>
-                      <div className="u-flex-grow-1">
-                        {konnector.name}
-                        <div className="u-coolGrey u-fz-tiny">
-                          {Account.getAccountName(account)}
-                        </div>
-                      </div>
-                      <div>{running && <Spinner />}</div>
-                      <Icon icon="right" color={palette['coolGrey']} />
-                    </Card>
-                  </div>
-                  <div>
-                    <DeleteAccountButton
-                      account={account}
-                      disabled={running}
-                      onSuccess={onAccountDeleted}
+                  {shouldDisplayError && hasGenericError && (
+                    <TriggerErrorInfo error={error} konnector={konnector} />
+                  )}
+                  <LaunchTriggerCard initialTrigger={initialTrigger} />
+                  {has(initialTrigger, 'message.folder_to_save') && (
+                    <DocumentsLinkCard
+                      folderId={get(initialTrigger, 'message.folder_to_save')}
                     />
-                    <Button
-                      onClick={addAccount}
-                      label={t('modal.addAccount.button')}
-                      theme="ghost"
-                    />
-                  </div>
-                </TabPanel>
-              </TabPanels>
-            </Tabs>
-          )
-        }}
-      </TriggerLauncher>
-    )
-  }
+                  )}
+                </Stack>
+              </TabPanel>
+              <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
+                {shouldDisplayError && hasLoginError && (
+                  <TriggerErrorInfo
+                    className="u-mb-2"
+                    error={error}
+                    konnector={konnector}
+                  />
+                )}
+                <div className="u-mb-1">
+                  <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
+                    {t('modal.updateAccount.title')}
+                  </Uppercase>
+                  <Card
+                    className="u-flex u-flex-items-center u-c-pointer"
+                    onClick={() => history.push('./edit')}
+                  >
+                    <div className="u-w-2 u-mr-1">
+                      <Icon icon="lock" color={palette['coolGrey']} size={36} />
+                    </div>
+                    <div className="u-flex-grow-1">
+                      {konnector.name}
+                      <div className="u-coolGrey u-fz-tiny">
+                        {Account.getAccountName(account)}
+                      </div>
+                    </div>
+                    <div>{running && <Spinner />}</div>
+                    <Icon icon="right" color={palette['coolGrey']} />
+                  </Card>
+                </div>
+                <div>
+                  <DeleteAccountButton
+                    account={account}
+                    disabled={running}
+                    onSuccess={onAccountDeleted}
+                  />
+                  <Button
+                    onClick={addAccount}
+                    label={t('modal.addAccount.button')}
+                    theme="ghost"
+                  />
+                </div>
+              </TabPanel>
+            </TabPanels>
+          </Tabs>
+        )
+      }}
+    </TriggerLauncher>
+  )
 }
 
 KonnectorAccountTabs.propTypes = {
