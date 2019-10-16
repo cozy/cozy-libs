@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.5...cozy-harvest-lib@1.9.0) (2019-10-16)
+
+
+### Features
+
+* Disable running a konnector in maintenance ([a4c0e27](https://github.com/cozy/cozy-libs/commit/a4c0e27))
+* Display maitenance informations ([98af8f9](https://github.com/cozy/cozy-libs/commit/98af8f9))
+
+
+
+
+
 ## [1.8.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.4...cozy-harvest-lib@1.8.5) (2019-10-14)
 
 
