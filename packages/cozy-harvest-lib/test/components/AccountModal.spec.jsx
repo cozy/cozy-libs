@@ -75,7 +75,7 @@ describe('AccountModal', () => {
       component.find('AccountSelectBox').prop('onCreate')()
       expect(mockHistory.push).toHaveBeenCalledWith('../../new')
 
-      const ModalContent = component.find('ModalContent').find('Wrapper')
+      const ModalContent = component.find('ModalContent').childAt(0)
       ModalContent.prop('addAccount')()
       expect(mockHistory.push).toHaveBeenCalledWith('../../new')
     })

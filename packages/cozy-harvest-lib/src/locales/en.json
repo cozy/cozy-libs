@@ -331,5 +331,9 @@
       "driveLinkText": "Open the folder in Cozy Drive",
       "button": "Close"
     }
+  },
+  "maintenance": {
+    "noService": "Service interrupted",
+    "explanationTitle": "What is going on?"
   }
 }
