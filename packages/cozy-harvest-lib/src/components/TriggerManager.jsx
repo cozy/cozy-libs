@@ -486,6 +486,7 @@ export class TriggerManager extends Component {
                 showError={showError}
                 submitting={submitting}
                 onBack={this.showCiphersList}
+                readOnlyIdentifier={this.hasCipherSelected()}
               />
             </>
           )}
