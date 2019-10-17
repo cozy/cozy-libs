@@ -166,9 +166,9 @@ export class AccountForm extends PureComponent {
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
 
-    const isReadOnlyIdentifier = Boolean(
-      get(account, 'relationships.vaultCipher')
-    )
+    const isReadOnlyIdentifier =
+      Boolean(get(account, 'relationships.vaultCipher')) &&
+      this.props.readOnlyIdentifier
 
     if (isReadOnlyIdentifier) {
       const identifier = manifest.getIdentifier(fields)
