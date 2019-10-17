@@ -270,6 +270,7 @@
       }
     },
     "accounts": {
+      "title": "Select a %{name} account",
       "error": {
         "title": "Error",
         "description": "Unable to retrieve your account(s)",
@@ -281,7 +282,7 @@
       "configuration": "Configuration"
     },
     "addAccount": {
-      "title": "Add a new account",
+      "title": "Connect to %{name}",
       "button": "Add an account"
     },
     "deleteAccount": {
