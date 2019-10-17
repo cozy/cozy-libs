@@ -413,7 +413,7 @@ describe('AccountForm', () => {
   })
 
   describe('with read-only identifier', () => {
-    it('should render a read-only identifier field if the account has a relationship with a vault cipher', () => {
+    it('should render a read-only identifier field if the account has a relationship with a vault cipher and props.readOnlyIdentifier is true', () => {
       const wrapper = mount(
         <AccountForm
           konnector={fixtures.konnector}
@@ -429,6 +429,7 @@ describe('AccountForm', () => {
               }
             }
           }}
+          readOnlyIdentifier={true}
         />,
         {
           context: { t },
