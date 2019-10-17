@@ -11,10 +11,10 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/react/Button'
 import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
-import connectingIllu from '../assets/connecting-data-in-progress.svg'
+import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
 
-const SuccessImage = () => <img src={connectingIllu} className="u-w-4 u-h-4" />
+const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
 const DescriptionContent = ({ title, message, children }) => {
   return (
