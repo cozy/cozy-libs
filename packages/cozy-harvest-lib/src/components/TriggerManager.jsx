@@ -334,10 +334,7 @@ export class TriggerManager extends Component {
 
   handleCipherSelect(selectedCipher) {
     const { konnector } = this.props
-    const account = this.cipherToAccount(
-      selectedCipher,
-      manifest.getIdentifier(konnector.fields)
-    )
+    const account = this.cipherToAccount(selectedCipher)
     const values = manifest.getFieldsValues(konnector, account)
 
     const hasValuesForRequiredFields = manifest.hasValuesForRequiredFields(
@@ -377,7 +374,7 @@ export class TriggerManager extends Component {
   }
 
   cipherToAccount(cipher) {
-    if (!this.hasCipherSelected()) {
+    if (cipher === undefined) {
       return null
     }
 
