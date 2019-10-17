@@ -5,6 +5,7 @@ import get from 'lodash/get'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
+import Modal from 'cozy-ui/transpiled/react/Modal'
 import withLocales from '../hoc/withLocales'
 
 import AccountFields from './AccountFields'
@@ -31,6 +32,10 @@ export class AccountForm extends PureComponent {
   constructor(props) {
     super(props)
 
+    this.state = {
+      showConfirmationModal: false
+    }
+
     this.inputs = {}
     this.inputFocused = null
 
@@ -38,6 +43,8 @@ export class AccountForm extends PureComponent {
     this.handleFocus = this.handleFocus.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.focusNext = this.focusNext.bind(this)
+    this.showConfirmationModal = this.showConfirmationModal.bind(this)
+    this.hideConfirmationModal = this.hideConfirmationModal.bind(this)
   }
 
   /**
@@ -114,10 +121,28 @@ export class AccountForm extends PureComponent {
    * @param  {Object} form          The form object injected by ReactFinalForm.
    */
   handleSubmit(values, form) {
+    const { account, konnector } = this.props
+
+    const identifier = manifest.getIdentifier(konnector.fields)
+
+    if (
+      account &&
+      account.auth[identifier] &&
+      account.auth[identifier] !== values[identifier]
+    ) {
+      this.showConfirmationModal()
+    } else {
+      this.doSubmit(values, form)
+    }
+  }
+
+  doSubmit(values, form) {
     const { onSubmit } = this.props
+
     // Reset form with new values to set back dirty to false
     form.reset(values)
     onSubmit(values)
+    this.hideConfirmationModal()
   }
 
   /**
@@ -147,6 +172,14 @@ export class AccountForm extends PureComponent {
       )
         errors[name] = VALIDATION_ERROR_REQUIRED_FIELD
     return errors
+  }
+
+  showConfirmationModal() {
+    this.setState({ showConfirmationModal: true })
+  }
+
+  hideConfirmationModal() {
+    this.setState({ showConfirmationModal: false })
   }
 
   render() {
@@ -239,6 +272,20 @@ export class AccountForm extends PureComponent {
               label={t('accountForm.submit.label')}
               onClick={() => this.handleSubmit(values, form)}
             />
+            {this.state.showConfirmationModal && (
+              <Modal
+                title={t('triggerManager.confirmationModal.title')}
+                description={t('triggerManager.confirmationModal.description')}
+                primaryText={t('triggerManager.confirmationModal.primaryText')}
+                primaryType="primary"
+                primaryAction={() => this.doSubmit(values, form)}
+                secondaryText={t(
+                  'triggerManager.confirmationModal.secondaryText'
+                )}
+                secondaryAction={this.hideConfirmationModal}
+                dismissAction={this.hideConfirmationModal}
+              />
+            )}
           </div>
         )}
       />
