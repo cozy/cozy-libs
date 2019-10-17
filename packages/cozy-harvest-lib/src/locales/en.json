@@ -323,6 +323,12 @@
     "otherAccount": "From another account…"
   },
   "triggerManager": {
-    "connecting": "Connecting your account..."
+    "connecting": "Connecting your account...",
+    "confirmationModal": {
+      "title": "Update credentials?",
+      "description": "Your previous credentials will be definitively lost. Add a new account to keep them.",
+      "primaryText": "Update",
+      "secondaryText": "Cancel"
+    }
   }
 }
