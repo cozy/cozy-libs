@@ -2,10 +2,9 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import PropTypes from 'prop-types'
 import { CozyFile } from 'cozy-doctypes'
-
-import ScannerQualification from './ScannerQualification'
 import { Modal } from 'cozy-ui/transpiled/react'
 
+import ScannerQualification from './ScannerQualification'
 import withOffline from './withOffline'
 
 export const SCANNER_IDLE = 'idle'

@@ -2,18 +2,18 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { Icon, Media, Bd, Img, Bold, IconStack } from 'cozy-ui/react'
+import { Icon, Media, Bd, Img, Bold, IconStack } from 'cozy-ui/transpiled/react'
 
 import ActionMenu, {
   ActionMenuItem,
   ActionMenuHeader
-} from 'cozy-ui/react/ActionMenu'
-import palette from 'cozy-ui/react/palette'
+} from 'cozy-ui/transpiled/react/ActionMenu'
+import palette from 'cozy-ui/transpiled/react/palette'
+import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 
 import CategoryGridItem from './CategoryGridItem'
 
 import styles from './styles.styl'
-import GridItem from 'cozy-ui/react/Labs/GridItem'
 
 /**
  * DocumentCategory component
