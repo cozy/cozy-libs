@@ -13,7 +13,8 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "build": "yarn run copy-files && env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "copy-files": "cp -rf src/locales dist/",
     "prepublishOnly": "yarn build",
     "test": "jest test/ --verbose",
     "lint": "cd .. && yarn lint packages/cozy-scanner",
