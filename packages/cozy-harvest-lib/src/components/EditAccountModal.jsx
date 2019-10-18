@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import get from 'lodash/get'
+import flow from 'lodash/flow'
 import { withMutations } from 'cozy-client'
-import { withRouter } from 'react-router'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Modal, {
@@ -19,6 +19,7 @@ import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
+import { withMountPointPushHistory } from './MountPointContext'
 
 export class EditAccountModal extends Component {
   constructor(props) {
@@ -29,10 +30,6 @@ export class EditAccountModal extends Component {
       fetching: true,
       error: false
     }
-
-    this.handleAccountEditJobSuccess = this.handleAccountEditJobSuccess.bind(
-      this
-    )
   }
 
   componentDidMount() {
@@ -73,10 +70,6 @@ export class EditAccountModal extends Component {
     }
   }
 
-  handleAccountEditJobSuccess() {
-    this.props.history.push('../')
-  }
-
   render() {
     /**
      * We don't use the dismiss action pros that we can have from our
@@ -89,13 +82,13 @@ export class EditAccountModal extends Component {
     const {
       konnector,
       t,
-      history,
-      breakpoints: { isMobile }
+      breakpoints: { isMobile },
+      pushHistory
     } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <Modal
-        dismissAction={() => history.push('../')}
+        dismissAction={() => pushHistory(`/accounts/${account._id}`)}
         mobileFullscreen
         size="small"
         closable={isMobile ? false : true}
@@ -105,7 +98,7 @@ export class EditAccountModal extends Component {
         <ModalHeader className="u-bg-dodgerBlue u-p-0 u-h-3 u-flex u-flex-items-center">
           {isMobile && (
             <Button
-              onClick={() => history.push('../')}
+              onClick={() => pushHistory(`/accounts/${account._id}`)}
               icon="previous"
               label={t('back')}
               iconOnly
@@ -131,7 +124,7 @@ export class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
-              onSuccess={this.handleAccountEditJobSuccess}
+              onSuccess={() => pushHistory(`/accounts/${account._id}`)}
               showError={true}
             />
           )}
@@ -144,7 +137,6 @@ export class EditAccountModal extends Component {
 EditAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
   breakpoints: PropTypes.object.isRequired,
   accountId: PropTypes.string.isRequired,
   accounts: PropTypes.array.isRequired,
@@ -152,6 +144,9 @@ EditAccountModal.propTypes = {
   fetchTrigger: PropTypes.func.isRequired
 }
 
-export default withMutations(accountMutations, triggersMutations)(
-  withBreakpoints()(withRouter(translate()(EditAccountModal)))
-)
+export default flow(
+  withMutations(accountMutations, triggersMutations),
+  withBreakpoints(),
+  translate(),
+  withMountPointPushHistory
+)(EditAccountModal)

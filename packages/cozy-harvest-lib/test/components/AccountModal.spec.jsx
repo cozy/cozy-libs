@@ -35,15 +35,13 @@ describe('AccountModal', () => {
       _id: '123',
       name: 'account 1'
     })
-    const mockHistory = {
-      push: jest.fn()
-    }
+    const mockHistoryPush = jest.fn()
     const component = shallow(
       <AccountModal
         accountId={accountIdMock}
         accounts={accountsMock}
         findAccount={findAccount}
-        history={mockHistory}
+        pushHistory={mockHistoryPush}
       />
     )
 
@@ -70,14 +68,14 @@ describe('AccountModal', () => {
       component.find('AccountSelectBox').prop('onChange')({
         account: { _id: '123' }
       })
-      expect(mockHistory.push).toHaveBeenCalledWith('../123')
+      expect(mockHistoryPush).toHaveBeenCalledWith('/accounts/123')
 
       component.find('AccountSelectBox').prop('onCreate')()
-      expect(mockHistory.push).toHaveBeenCalledWith('../../new')
+      expect(mockHistoryPush).toHaveBeenCalledWith('/new')
 
       const ModalContent = component.find('ModalContent').childAt(0)
       ModalContent.prop('addAccount')()
-      expect(mockHistory.push).toHaveBeenCalledWith('../../new')
+      expect(mockHistoryPush).toHaveBeenCalledWith('/new')
     })
   })
 })
