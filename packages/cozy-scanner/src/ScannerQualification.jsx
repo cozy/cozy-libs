@@ -55,7 +55,7 @@ class ScannerQualification extends Component {
             await onSave(qualification, filename)
           } catch (error) {
             console.error('error', error)
-            Alerter.error('Scan.error.generic')
+            Alerter.error(t('Scan.error.generic'))
           }
         }}
         primaryType={'regular'}

@@ -6,7 +6,6 @@ import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
 import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
-//import NewModal from './NewModal'
 import DocumentQualification from './DocumentQualification'
 import { getItemById, getThemeByItem } from './DocumentTypeData'
 
@@ -41,7 +40,7 @@ class EditDocumentQualification extends Component {
         primaryText={t('Scan.apply')}
         primaryAction={async () => {
           if (isOffline) {
-            Alerter.error('Scan.error.offline')
+            Alerter.error(t('Scan.error.offline'))
           } else {
             try {
               const fileCollection = client.collection('io.cozy.files')
@@ -52,10 +51,10 @@ class EditDocumentQualification extends Component {
               pushAnalytics(item)
               if (onQualified) onQualified(updatedFile.data)
               onClose()
-              Alerter.success('Scan.successful.qualified_ok')
+              Alerter.success(t('Scan.successful.qualified_ok'))
             } catch (error) {
               console.error('Scan.error.generic', error)
-              Alerter.error('Scan.error.generic')
+              Alerter.error(t('Scan.error.generic'))
             }
           }
         }}
