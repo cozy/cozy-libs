@@ -24,7 +24,8 @@ const NewAccountModal = ({
   konnector,
   history,
   client,
-  breakpoints: { isMobile }
+  breakpoints: { isMobile },
+  onDismiss
 }) => {
   const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
   const isInMaintenance = maintenanceStatus.isInMaintenance
@@ -52,7 +53,7 @@ const NewAccountModal = ({
               const accountId = triggersModel.getAccountId(trigger)
               history.push(`../accounts/${accountId}/success`)
             }}
-            onVaultDismiss={() => history.push('..')}
+            onVaultDismiss={onDismiss}
           />
         )}
       </ModalContent>

@@ -77,13 +77,11 @@ const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => {
                 <Route
                   path={`${konnectorRoot}/new`}
                   exact
-                  render={({ match }) => (
+                  render={() => (
                     <NewAccountModal
                       konnector={konnector}
                       onDismiss={() =>
-                        history.push(
-                          `${konnectorRoot}/accounts/${match.params.accountId}`
-                        )
+                        history.push(`${konnectorRoot}/accounts`)
                       }
                     />
                   )}
