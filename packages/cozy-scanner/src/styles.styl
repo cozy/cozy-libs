@@ -1,0 +1,35 @@
+@require 'tools/mixins'
+
+.border-selected {
+    border rem(1) solid var(--dodgerBlue)
+    border-radius rem(4)
+}
+
+.border-not-selected {
+    border rem(1) solid var(--silver)
+    border-radius rem(4)
+}
+
+.grid-item {
+    height rem(84)
+    padding-top rem(16)
+    }
+/*This 19 number is pretty magic. it seems that the qualify icon 
+is not well centered. So I can't just rem(16) ... */
+.grid-item-title {
+    margin-top rem(19)
+    }
+.grid-item__selected__without_label {
+    padding-top rem(16)
+    }
+.grid-item__selected {
+    padding-top rem(12)
+    }
+
+.grid-item-theme {
+    font-size rem(12)
+    padding-top rem(4)
+    }
+.grid-item-label {
+    font-size rem(10)
+    }
