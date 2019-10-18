@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.9.0...cozy-harvest-lib@1.10.0) (2019-10-18)
+
+
+### Bug Fixes
+
+* Added extra margins on account form ([cce8d31](https://github.com/cozy/cozy-libs/commit/cce8d31))
+
+
+### Features
+
+* Alternative modal header ([e9149e9](https://github.com/cozy/cozy-libs/commit/e9149e9))
+
+
+
+
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.8.5...cozy-harvest-lib@1.9.0) (2019-10-16)
 
 
