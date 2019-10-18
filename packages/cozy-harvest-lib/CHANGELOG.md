@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.0...cozy-harvest-lib@1.10.1) (2019-10-18)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Prevent credentials update for oauth konnectors ([fc00fe4](https://github.com/cozy/cozy-libs/commit/fc00fe4))
+
+
+
+
+
 # [1.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.9.0...cozy-harvest-lib@1.10.0) (2019-10-18)
 
 
