@@ -21,7 +21,7 @@ import { MountPointContext } from './MountPointContext'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, client, t }) => {
+const NewAccountModal = ({ konnector, client, onDismiss, t }) => {
   const { pushHistory } = useContext(MountPointContext)
   const {
     fetchStatus,
@@ -60,6 +60,7 @@ const NewAccountModal = ({ konnector, client, t }) => {
               const accountId = triggersModel.getAccountId(trigger)
               pushHistory(`/accounts/${accountId}/success`)
             }}
+            onVaultDismiss={onDismiss}
           />
         )}
       </ModalContent>

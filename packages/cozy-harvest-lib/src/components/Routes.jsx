@@ -58,7 +58,12 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                   <Route
                     path={`${konnectorRoot}/new`}
                     exact
-                    render={() => <NewAccountModal konnector={konnector} />}
+                    render={() => (
+                      <NewAccountModal
+                        konnector={konnector}
+                        onDismiss={onDismiss}
+                      />
+                    )}
                   />
                   <Route
                     path={`${konnectorRoot}/accounts/:accountId/success`}
