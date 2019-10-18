@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import palette from 'cozy-ui/react/palette'
-import { Icon, IconStack } from 'cozy-ui/react'
+import palette from 'cozy-ui/transpiled/react/palette'
+import { Icon, IconStack } from 'cozy-ui/transpiled/react'
 
 import styles from './styles.styl'
 

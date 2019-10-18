@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { translate } from 'cozy-ui/react/I18n'
-import Alerter from 'cozy-ui/react/Alerter'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import DocumentQualification from './DocumentQualification'
 
-import { Modal as NewModal } from 'cozy-ui/react'
+import { Modal as NewModal } from 'cozy-ui/transpiled/react'
 
-import { getTracker } from 'cozy-ui/react/helpers/tracker'
+import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 
 const pushAnalytics = qualification => {
   const tracker = getTracker()
