@@ -23,6 +23,10 @@ export class RawMountPointProvider extends React.Component {
       .split('/')
       .concat(route.split('/'))
       .filter(Boolean)
+    console.log({
+      baseRoute,
+      route
+    })
     history.push(`/${segments.join('/')}`)
   }
 
@@ -42,6 +46,7 @@ RawMountPointProvider.propTypes = {
 
 const withMountPointPushHistory = BaseComponent => {
   const Component = props => {
+    console.log(useContext)
     const { pushHistory } = useContext(MountPointContext)
     return <BaseComponent pushHistory={pushHistory} {...props} />
   }

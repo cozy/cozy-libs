@@ -20,7 +20,12 @@ import { MountPointContext } from './MountPointContext'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, client, breakpoints: { isMobile } }) => {
+const NewAccountModal = ({
+  konnector,
+  client,
+  breakpoints: { isMobile },
+  onDismiss
+}) => {
   const { pushHistory } = useContext(MountPointContext)
   const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
   const isInMaintenance = maintenanceStatus.isInMaintenance
@@ -48,6 +53,7 @@ const NewAccountModal = ({ konnector, client, breakpoints: { isMobile } }) => {
               const accountId = triggersModel.getAccountId(trigger)
               pushHistory(`/accounts/${accountId}/success`)
             }}
+            onVaultDismiss={onDismiss}
           />
         )}
       </ModalContent>
