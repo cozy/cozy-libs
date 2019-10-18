@@ -11,3 +11,5 @@ const EditDocumentQualification = withLocales(EditDocumentQualificationDefault)
 import { default as ScannerQualificationDefault } from './ScannerQualification'
 const ScannerQualification = withLocales(ScannerQualificationDefault)
 export { Scanner, EditDocumentQualification, ScannerQualification }
+
+export { getBoundT } from './locales'
