@@ -6,7 +6,7 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import DocumentQualification from './DocumentQualification'
 
-import { Modal as NewModal } from 'cozy-ui/transpiled/react'
+import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
 
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 
@@ -45,7 +45,7 @@ class ScannerQualification extends Component {
     const { onSave, t, dismissAction } = this.props
     const { qualification, filename } = this.state
     return (
-      <NewModal
+      <ExperimentalModal
         title={t('Scan.save_doc')}
         dismissAction={dismissAction}
         primaryText={t('Scan.save')}
