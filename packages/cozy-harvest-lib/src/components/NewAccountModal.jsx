@@ -52,6 +52,7 @@ const NewAccountModal = ({
               const accountId = triggersModel.getAccountId(trigger)
               history.push(`../accounts/${accountId}/success`)
             }}
+            onVaultDismiss={() => history.push('..')}
           />
         )}
       </ModalContent>
