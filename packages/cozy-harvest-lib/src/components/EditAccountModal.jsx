@@ -88,12 +88,13 @@ export class EditAccountModal extends Component {
       konnector,
       t,
       history,
-      breakpoints: { isMobile }
+      breakpoints: { isMobile },
+      onDismiss
     } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <Modal
-        dismissAction={() => history.push('../')}
+        dismissAction={onDismiss}
         mobileFullscreen
         size="small"
         closable={isMobile ? false : true}
@@ -131,6 +132,7 @@ export class EditAccountModal extends Component {
               initialTrigger={trigger}
               onSuccess={this.redirectToAccount}
               showError={true}
+              onVaultDismiss={onDismiss}
             />
           )}
         </ModalContent>
