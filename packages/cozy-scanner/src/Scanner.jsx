@@ -5,8 +5,7 @@ import { CozyFile } from 'cozy-doctypes'
 import { Modal } from 'cozy-ui/transpiled/react'
 
 import ScannerQualification from './ScannerQualification'
-import withOffline from './withOffline'
-
+import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
 export const SCANNER_IDLE = 'idle'
 export const SCANNER_DONE = 'done'
 export const SCANNER_UPLOADING = 'uploading'
