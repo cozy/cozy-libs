@@ -85,7 +85,7 @@ export class EditAccountModal extends Component {
     const { trigger, account, fetching } = this.state
     return (
       <Modal
-        dismissAction={() => pushHistory(`/accounts/${account._id}`)}
+        dismissAction={this.redirectToAccount}
         mobileFullscreen
         size="small"
       >
@@ -109,6 +109,7 @@ export class EditAccountModal extends Component {
               initialTrigger={trigger}
               onSuccess={this.redirectToAccount}
               showError={true}
+              onVaultDismiss={this.redirectToAccount}
             />
           )}
         </ModalContent>
