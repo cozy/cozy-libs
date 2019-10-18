@@ -124,27 +124,33 @@ const KonnectorAccountTabs = ({
                     konnector={konnector}
                   />
                 )}
-                <div className="u-mb-1">
-                  <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
-                    {t('modal.updateAccount.title')}
-                  </Uppercase>
-                  <Card
-                    className="u-flex u-flex-items-center u-c-pointer"
-                    onClick={() => history.push('./edit')}
-                  >
-                    <div className="u-w-2 u-mr-1">
-                      <Icon icon="lock" color={palette['coolGrey']} size={36} />
-                    </div>
-                    <div className="u-flex-grow-1">
-                      {konnector.name}
-                      <div className="u-coolGrey u-fz-tiny">
-                        {Account.getAccountName(account)}
+                {!konnector.oauth ? (
+                  <div className="u-mb-1">
+                    <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
+                      {t('modal.updateAccount.title')}
+                    </Uppercase>
+                    <Card
+                      className="u-flex u-flex-items-center u-c-pointer"
+                      onClick={() => history.push('./edit')}
+                    >
+                      <div className="u-w-2 u-mr-1">
+                        <Icon
+                          icon="lock"
+                          color={palette['coolGrey']}
+                          size={36}
+                        />
                       </div>
-                    </div>
-                    <div>{running && <Spinner />}</div>
-                    <Icon icon="right" color={palette['coolGrey']} />
-                  </Card>
-                </div>
+                      <div className="u-flex-grow-1">
+                        {konnector.name}
+                        <div className="u-coolGrey u-fz-tiny">
+                          {Account.getAccountName(account)}
+                        </div>
+                      </div>
+                      <div>{running && <Spinner />}</div>
+                      <Icon icon="right" color={palette['coolGrey']} />
+                    </Card>
+                  </div>
+                ) : null}
                 <div>
                   <DeleteAccountButton
                     account={account}
