@@ -8,7 +8,7 @@ import { withRouter } from 'react-router'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import Button from 'cozy-ui/react/Button'
+import Button from 'cozy-ui/transpiled/react/Button'
 import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
