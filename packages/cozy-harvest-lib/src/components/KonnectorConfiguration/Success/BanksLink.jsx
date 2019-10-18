@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import AppLinker from 'cozy-ui/react/AppLinker'
-import { ButtonLink } from 'cozy-ui/react/Button'
+import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { queryConnect } from 'cozy-client'
 
 import { Application } from 'cozy-doctypes'
