@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 import {
@@ -16,7 +16,6 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { withRouter } from 'react-router'
 import { Account } from 'cozy-doctypes'
 import get from 'lodash/get'
 import has from 'lodash/has'
@@ -33,6 +32,7 @@ import DeleteAccountButton from '../DeleteAccountButton'
 import TriggerLauncher from '../TriggerLauncher'
 import KonnectorMaintenance from '../Maintenance'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+import { MountPointContext } from '../MountPointContext'
 
 const KonnectorAccountTabs = ({
   konnector,
@@ -41,11 +41,11 @@ const KonnectorAccountTabs = ({
   onAccountDeleted,
   //TODO on``
   addAccount,
-  history,
   client,
   t
 }) => {
   const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
+  const { pushHistory } = useContext(MountPointContext)
 
   return (
     <TriggerLauncher initialTrigger={initialTrigger}>
@@ -131,7 +131,9 @@ const KonnectorAccountTabs = ({
                     </Uppercase>
                     <Card
                       className="u-flex u-flex-items-center u-c-pointer"
-                      onClick={() => history.push('./edit')}
+                      onClick={() =>
+                        pushHistory(`/accounts/${account._id}/edit`)
+                      }
                     >
                       <div className="u-w-2 u-mr-1">
                         <Icon
@@ -178,12 +180,10 @@ KonnectorAccountTabs.propTypes = {
   account: PropTypes.object.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  t: PropTypes.func.isRequired
 }
 
 export default flow(
   translate(),
-  withRouter,
   withClient
 )(KonnectorAccountTabs)

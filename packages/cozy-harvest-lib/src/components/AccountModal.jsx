@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import get from 'lodash/get'
+import flow from 'lodash/flow'
 import { withMutations } from 'cozy-client'
-import { withRouter } from 'react-router'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Infos from 'cozy-ui/transpiled/react/Infos'
@@ -16,6 +16,7 @@ import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
+import { withMountPointPushHistory } from './MountPointContext'
 
 /**
  * AccountModal take an accountId and a list of accounts containing their
@@ -95,7 +96,7 @@ export class AccountModal extends Component {
   }
 
   render() {
-    const { konnector, onDismiss, history, accounts, t } = this.props
+    const { konnector, onDismiss, accounts, t, pushHistory } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
       <>
@@ -105,10 +106,10 @@ export class AccountModal extends Component {
               selectedAccount={account}
               accountsList={accounts}
               onChange={option => {
-                history.push(`../${option.account._id}`)
+                pushHistory(`/accounts/${option.account._id}`)
               }}
               onCreate={() => {
-                history.push(`../../new`)
+                pushHistory('/new')
               }}
             />
           )}
@@ -140,7 +141,7 @@ export class AccountModal extends Component {
               trigger={trigger}
               account={account}
               onAccountDeleted={onDismiss}
-              addAccount={() => history.push('../../new')}
+              addAccount={() => pushHistory('/new')}
             />
           )}
         </ModalContent>
@@ -154,12 +155,15 @@ AccountModal.defaultProps = {
 AccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   onDismiss: PropTypes.func,
-  history: PropTypes.object.isRequired,
   accounts: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired,
   findAccount: PropTypes.func.isRequired,
+  pushHistory: PropTypes.func.isRequired,
   accountId: PropTypes.string.isRequired
 }
-export default withMutations(accountMutations, triggersMutations)(
-  withRouter(translate()(AccountModal))
-)
+
+export default flow(
+  withMutations(accountMutations, triggersMutations),
+  translate(),
+  withMountPointPushHistory
+)(AccountModal)

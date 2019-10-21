@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
 import { withClient } from 'cozy-client'
 
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
@@ -13,6 +12,7 @@ import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
+import { MountPointContext } from './MountPointContext'
 
 /**
  * We need to deal with `onLoginSuccess` and `onSucess` because we
@@ -20,7 +20,8 @@ import useMaintenanceStatus from './hooks/useMaintenanceStatus'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, history, client, t }) => {
+const NewAccountModal = ({ konnector, client, t }) => {
+  const { pushHistory } = useContext(MountPointContext)
   const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
   const isInMaintenance = maintenanceStatus.isInMaintenance
   const maintenanceMessages = maintenanceStatus.messages
@@ -43,11 +44,11 @@ const NewAccountModal = ({ konnector, history, client, t }) => {
             konnector={konnector}
             onLoginSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
-              history.push(`../accounts/${accountId}/success`)
+              pushHistory(`/accounts/${accountId}/success`)
             }}
             onSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
-              history.push(`../accounts/${accountId}/success`)
+              pushHistory(`/accounts/${accountId}/success`)
             }}
           />
         )}
@@ -57,12 +58,10 @@ const NewAccountModal = ({ konnector, history, client, t }) => {
 }
 
 NewAccountModal.propTypes = {
-  konnector: PropTypes.object.isRequired,
-  history: PropTypes.object.isRequired
+  konnector: PropTypes.object.isRequired
 }
 
 export default flow(
-  withRouter,
   translate(),
   withClient
 )(NewAccountModal)
