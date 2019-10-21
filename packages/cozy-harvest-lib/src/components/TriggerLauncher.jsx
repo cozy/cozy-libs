@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
 import { withClient, withMutations } from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -46,7 +45,7 @@ export class TriggerLauncher extends Component {
       showTwoFAModal: false,
       trigger: initialTrigger,
       error: triggersModel.getKonnectorJobError(initialTrigger),
-      running: get(initialTrigger, 'current_state.status') === 'running'
+      running: triggersModel.isKonnectorRunning(initialTrigger)
     }
 
     this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
