@@ -26,7 +26,7 @@ class EditDocumentQualification extends Component {
     qualification: undefined
   }
   render() {
-    const { document, onClose, t, client, onQualified, isOffline } = this.props
+    const { document, onClose, t, client, onDescribed, isOffline } = this.props
     const { qualification } = this.state
     const item = document.metadata.id ? getItemById(document.metadata.id) : null
     const itemId = item ? item.id : null
@@ -49,7 +49,7 @@ class EditDocumentQualification extends Component {
                 qualification
               )
               pushAnalytics(item)
-              if (onQualified) onQualified(updatedFile.data)
+              if (onDescribed) onDescribed(updatedFile.data)
               onClose()
               Alerter.success(t('Scan.successful.qualified_ok'))
             } catch (error) {
@@ -64,7 +64,7 @@ class EditDocumentQualification extends Component {
         secondaryType={'secondary'}
         description={
           <DocumentQualification
-            onQualified={qualification => {
+            onDescribed={qualification => {
               this.setState({ qualification })
             }}
             initialSelected={{
@@ -82,7 +82,7 @@ EditDocumentQualification.propTypes = {
   onClose: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired,
   client: PropTypes.object,
-  onQualified: PropTypes.func,
+  onDescribed: PropTypes.func,
   isOffline: PropTypes.bool.isRequired
 }
 export default translate()(withOffline(withClient(EditDocumentQualification)))
