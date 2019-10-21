@@ -1,0 +1,908 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DocumentQualification Inital render + selection + filename 1`] = `
+<DocumentFragment>
+  <label
+    class="styles__c-label___o4ozG styles__c-label--block___2ZV_7"
+    for="filename_input"
+  >
+    Scan.filename
+  </label>
+  <div
+    class="styles__c-inputgroup___12OVJ styles__c-inputgroup--fullwidth___3nuay u-bdrs-3"
+  >
+    <div
+      class="styles__c-inputgroup-main___1LP4B"
+    >
+      <input
+        class="styles__c-input-text___3TAv1 styles__c-input-text--large___28EaR"
+        id="filename_input"
+        placeholder="Scan.filename"
+        type="text"
+        value="Scan_2019-01-01T00-00-00.000Z"
+      />
+    </div>
+    <div
+      class="styles__c-inputgroup-side___60v0v"
+    >
+      <span
+        class="u-pr-1"
+      >
+        .jpg
+      </span>
+    </div>
+  </div>
+  <div
+    class="u-flex u-flex-items-center u-mt-1-half"
+  >
+    <svg
+      class="styles__icon___23x3R"
+      height="16"
+      width="16"
+    >
+      <use
+        xlink:href="#qualify"
+      />
+    </svg>
+    <div
+      class="u-title-h2 grid-item-title u-pl-half u-mb-1"
+    >
+      Edit
+    </div>
+  </div>
+  <div
+    class="MuiGrid-container-1"
+  >
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-selected grid-item__selected__without_label"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--dodgerBlue);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          />
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.undefined
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#people"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.identity
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#team"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.family
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#company"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.work_study
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#heart"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.health
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#home"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.home
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#car"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.transport
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#bank"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.tax
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#euro"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.invoice
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DocumentQualification Inital render + selection + filename 2`] = `
+<DocumentFragment>
+  <label
+    class="styles__c-label___o4ozG styles__c-label--block___2ZV_7"
+    for="filename_input"
+  >
+    Scan.filename
+  </label>
+  <div
+    class="styles__c-inputgroup___12OVJ styles__c-inputgroup--fullwidth___3nuay u-bdrs-3"
+  >
+    <div
+      class="styles__c-inputgroup-main___1LP4B"
+    >
+      <input
+        class="styles__c-input-text___3TAv1 styles__c-input-text--large___28EaR"
+        id="filename_input"
+        placeholder="Scan.filename"
+        type="text"
+        value="Scan.items.family_record_book_2019-01-01"
+      />
+    </div>
+    <div
+      class="styles__c-inputgroup-side___60v0v"
+    >
+      <span
+        class="u-pr-1"
+      >
+        .jpg
+      </span>
+    </div>
+  </div>
+  <div
+    class="u-flex u-flex-items-center u-mt-1-half"
+  >
+    <svg
+      class="styles__icon___23x3R"
+      height="16"
+      width="16"
+    >
+      <use
+        xlink:href="#qualify"
+      />
+    </svg>
+    <div
+      class="u-title-h2 grid-item-title u-pl-half u-mb-1"
+    >
+      Edit
+    </div>
+  </div>
+  <div
+    class="MuiGrid-container-1"
+  >
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          />
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.undefined
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#people"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.identity
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-selected grid-item__selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--dodgerBlue);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--dodgerBlue);"
+              width="16"
+            >
+              <use
+                xlink:href="#team"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.family
+          </span>
+          <span
+            class="grid-item-label u-ellipsis"
+          >
+            Scan.items.family_record_book
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#company"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.work_study
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#heart"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.health
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#home"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.home
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#car"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.transport
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#bank"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.tax
+          </span>
+        </div>
+      </div>
+    </div>
+    <div
+      class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+    >
+      <div
+        class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-not-selected"
+      >
+        <div
+          class="styles__IconStack-wrapper___10dhG"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="32"
+            style="fill: var(--coolGrey);"
+            width="32"
+          >
+            <use
+              xlink:href="#file-duotone"
+            />
+          </svg>
+          <div
+            class="styles__IconStack-foregroundIcon___ZvY-t"
+          >
+            <svg
+              class="styles__icon___23x3R"
+              height="16"
+              style="fill: var(--coolGrey);"
+              width="16"
+            >
+              <use
+                xlink:href="#euro"
+              />
+            </svg>
+          </div>
+        </div>
+        <div
+          class="u-flex u-flex-column u-ellipsis u-bxz"
+        >
+          <span
+            class="grid-item-theme u-ellipsis"
+          >
+            Scan.themes.invoice
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -1,0 +1,192 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`DocumentCategory should match snapshot if selected and icon 1`] = `
+<DocumentFragment>
+  <div
+    class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+  >
+    <div
+      class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-selected grid-item__selected"
+    >
+      <div
+        class="styles__IconStack-wrapper___10dhG"
+      >
+        <svg
+          class="styles__icon___23x3R"
+          height="32"
+          style="fill: var(--dodgerBlue);"
+          width="32"
+        >
+          <use
+            xlink:href="#file-duotone"
+          />
+        </svg>
+        <div
+          class="styles__IconStack-foregroundIcon___ZvY-t"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="16"
+            style="fill: var(--dodgerBlue);"
+            width="16"
+          >
+            <use
+              xlink:href="#test"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="u-flex u-flex-column u-ellipsis u-bxz"
+      >
+        <span
+          class="grid-item-theme u-ellipsis"
+        >
+          Scan.themes.test
+        </span>
+        <span
+          class="grid-item-label u-ellipsis"
+        >
+          Scan.items.test
+        </span>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
+
+exports[`DocumentCategory should match snapshot if selected and icon 2`] = `
+<DocumentFragment>
+  <div
+    class="MuiGrid-item-2 MuiGrid-grid-xs-3-32 MuiGrid-grid-sm-2-45 styles__gridItem-container___387sO"
+  >
+    <div
+      class="grid-item u-pb-half u-ph-half u-bxz  u-ellipsis u-c-pointer border-selected grid-item__selected"
+    >
+      <div
+        class="styles__IconStack-wrapper___10dhG"
+      >
+        <svg
+          class="styles__icon___23x3R"
+          height="32"
+          style="fill: var(--dodgerBlue);"
+          width="32"
+        >
+          <use
+            xlink:href="#file-duotone"
+          />
+        </svg>
+        <div
+          class="styles__IconStack-foregroundIcon___ZvY-t"
+        >
+          <svg
+            class="styles__icon___23x3R"
+            height="16"
+            style="fill: var(--dodgerBlue);"
+            width="16"
+          >
+            <use
+              xlink:href="#test"
+            />
+          </svg>
+        </div>
+      </div>
+      <div
+        class="u-flex u-flex-column u-ellipsis u-bxz"
+      >
+        <span
+          class="grid-item-theme u-ellipsis"
+        >
+          Scan.themes.test
+        </span>
+        <span
+          class="grid-item-label u-ellipsis"
+        >
+          Scan.items.test
+        </span>
+      </div>
+    </div>
+  </div>
+  <div
+    style="user-select: none; webkit-user-drag: none; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);"
+  >
+    <div
+      class="styles__c-overlay___31iWd"
+      style="opacity: 1;"
+    >
+      <div
+        class="styles__c-actionmenu___22Fp1"
+        style="transform: translateY(100%);"
+      >
+        <div
+          class="styles__c-actionmenu-header___2rcGc"
+        >
+          <div
+            class="styles__media___cSJMp"
+          >
+            <div
+              class="styles__img___3SHpG"
+            >
+              <div
+                class="styles__IconStack-wrapper___10dhG"
+              >
+                <svg
+                  class="styles__icon___23x3R"
+                  height="32"
+                  style="fill: var(--dodgerBlue);"
+                  width="32"
+                >
+                  <use
+                    xlink:href="#file-duotone"
+                  />
+                </svg>
+                <div
+                  class="styles__IconStack-foregroundIcon___ZvY-t"
+                >
+                  <svg
+                    class="icon-absolute-centered styles__icon___23x3R"
+                    height="16"
+                    style="fill: var(--dodgerBlue);"
+                    width="16"
+                  >
+                    <use
+                      xlink:href="#test"
+                    />
+                  </svg>
+                </div>
+              </div>
+            </div>
+            <div
+              class="styles__bd___1Uv-F u-ml-1"
+            >
+              <span
+                class="u-ellipsis u-title-h4"
+              >
+                Scan.themes.test
+              </span>
+            </div>
+          </div>
+        </div>
+        <div
+          class="styles__media___cSJMp styles__c-actionmenu-item___gODqd"
+        >
+          <div
+            class="styles__bd___1Uv-F u-mh-1"
+          >
+            Scan.items.Label1
+          </div>
+        </div>
+        <div
+          class="styles__media___cSJMp styles__c-actionmenu-item___gODqd"
+        >
+          <div
+            class="styles__bd___1Uv-F u-mh-1"
+          >
+            Scan.items.Label2
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

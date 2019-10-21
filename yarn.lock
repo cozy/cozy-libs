@@ -1143,6 +1143,12 @@
   dependencies:
     regenerator-runtime "^0.13.2"
 
+"@babel/runtime@^7.5.1", "@babel/runtime@^7.6.0", "@babel/runtime@^7.6.2":
+  version "7.6.3"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.6.3.tgz#935122c74c73d2240cafd32ddb5fc2a6cd35cf1f"
+  dependencies:
+    regenerator-runtime "^0.13.2"
+
 "@babel/runtime@^7.5.4":
   version "7.5.4"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.5.4.tgz#cb7d1ad7c6d65676e66b47186577930465b5271b"
@@ -2742,6 +2748,43 @@
     "@parcel/utils" "^1.11.0"
     physical-cpu-count "^2.0.0"
 
+"@sheerun/mutationobserver-shim@^0.3.2":
+  version "0.3.2"
+  resolved "https://registry.yarnpkg.com/@sheerun/mutationobserver-shim/-/mutationobserver-shim-0.3.2.tgz#8013f2af54a2b7d735f71560ff360d3a8176a87b"
+
+"@testing-library/dom@^6.3.0":
+  version "6.8.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/dom/-/dom-6.8.1.tgz#47b4e0cc0742302fc9d122ac43010e6fc60bee65"
+  dependencies:
+    "@babel/runtime" "^7.6.2"
+    "@sheerun/mutationobserver-shim" "^0.3.2"
+    "@types/testing-library__dom" "^6.0.0"
+    aria-query "3.0.0"
+    pretty-format "^24.9.0"
+    wait-for-expect "^3.0.0"
+
+"@testing-library/jest-dom@^4.1.2":
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/@testing-library/jest-dom/-/jest-dom-4.1.2.tgz#e523047191379abd67cf0896dfd93cabc7e33eab"
+  dependencies:
+    "@babel/runtime" "^7.5.1"
+    chalk "^2.4.1"
+    css "^2.2.3"
+    css.escape "^1.5.1"
+    jest-diff "^24.0.0"
+    jest-matcher-utils "^24.0.0"
+    lodash "^4.17.11"
+    pretty-format "^24.0.0"
+    redent "^3.0.0"
+
+"@testing-library/react@^9.3.0":
+  version "9.3.0"
+  resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-9.3.0.tgz#1dabf46d1ea018a1c89acecc0e7b86859b34c0f8"
+  dependencies:
+    "@babel/runtime" "^7.6.0"
+    "@testing-library/dom" "^6.3.0"
+    "@types/testing-library__react" "^9.1.0"
+
 "@types/babel__core@^7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@types/babel__core/-/babel__core-7.1.0.tgz#710f2487dda4dcfd010ca6abb2b4dc7394365c51"
@@ -2827,6 +2870,12 @@
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/@types/q/-/q-1.5.2.tgz#690a1475b84f2a884fd07cd797c00f5f31356ea8"
 
+"@types/react-dom@*":
+  version "16.9.2"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.2.tgz#90f9e6c161850be1feb31d2f448121be2a4f3b47"
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^2.0.8":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.9.2.tgz#c48cf2a11977c8b4ff539a1c91d259eaa627028d"
@@ -2843,6 +2892,19 @@
 "@types/stack-utils@^1.0.1":
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/@types/stack-utils/-/stack-utils-1.0.1.tgz#0a851d3bd96498fa25c33ab7278ed3bd65f06c3e"
+
+"@types/testing-library__dom@*", "@types/testing-library__dom@^6.0.0":
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/@types/testing-library__dom/-/testing-library__dom-6.5.3.tgz#4a33e91055994c9f08981253edec44c85f4dd7f0"
+  dependencies:
+    pretty-format "^24.3.0"
+
+"@types/testing-library__react@^9.1.0":
+  version "9.1.2"
+  resolved "https://registry.yarnpkg.com/@types/testing-library__react/-/testing-library__react-9.1.2.tgz#e33af9124c60a010fc03a34eff8f8a34a75c4351"
+  dependencies:
+    "@types/react-dom" "*"
+    "@types/testing-library__dom" "*"
 
 "@types/unist@*", "@types/unist@^2.0.0":
   version "2.0.3"
@@ -3251,6 +3313,13 @@ argsarray@0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/argsarray/-/argsarray-0.0.1.tgz#6e7207b4ecdb39b0af88303fa5ae22bda8df61cb"
 
+aria-query@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/aria-query/-/aria-query-3.0.0.tgz#65b3fcc1ca1155a8c9ae64d6eee297f15d5133cc"
+  dependencies:
+    ast-types-flow "0.0.7"
+    commander "^2.11.0"
+
 arr-diff@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/arr-diff/-/arr-diff-2.0.0.tgz#8f3b827f955a8bd669697e4a4256ac3ceae356cf"
@@ -3400,6 +3469,10 @@ assert@^1.1.1:
 assign-symbols@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/assign-symbols/-/assign-symbols-1.0.0.tgz#59667f41fadd4f20ccbc2bb96b8d4f7f78ec0367"
+
+ast-types-flow@0.0.7:
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/ast-types-flow/-/ast-types-flow-0.0.7.tgz#f70b735c6bca1a5c9c22d982c3e39e7feba3bdad"
 
 ast-types@0.11.5:
   version "0.11.5"
@@ -5431,18 +5504,6 @@ css-vendor@^0.3.8:
 css-what@2.1, css-what@^2.1.2:
   version "2.1.3"
   resolved "https://registry.yarnpkg.com/css-what/-/css-what-2.1.3.tgz#a6d7604573365fe74686c3f311c56513d88285f2"
-<<<<<<< HEAD
-=======
-
-css@^2.0.0:
-  version "2.2.4"
-  resolved "https://registry.yarnpkg.com/css/-/css-2.2.4.tgz#c646755c73971f2bba6a601e2cf2fd71b1298929"
-  dependencies:
-    inherits "^2.0.3"
-    source-map "^0.6.1"
-    source-map-resolve "^0.5.2"
-    urix "^0.1.0"
->>>>>>> feat(Scanner): Add Scanner module
 
 cssesc@^0.1.0:
   version "0.1.0"
@@ -8003,6 +8064,10 @@ indent-string@^3.0.0:
   version "3.2.0"
   resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-3.2.0.tgz#4a5fd6d27cc332f37e5419a504dbb837105c9289"
 
+indent-string@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/indent-string/-/indent-string-4.0.0.tgz#624f8f4497d619b2d9768531d58f4122854d7251"
+
 indexes-of@^1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/indexes-of/-/indexes-of-1.0.1.tgz#f30f716c8e2bd346c7b67d3df3915566a7c05607"
@@ -8882,6 +8947,15 @@ jest-config@^24.9.0:
     pretty-format "^24.9.0"
     realpath-native "^1.1.0"
 
+jest-diff@^24.0.0, jest-diff@^24.9.0:
+  version "24.9.0"
+  resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.9.0.tgz#931b7d0d5778a1baf7452cb816e325e3724055da"
+  dependencies:
+    chalk "^2.0.1"
+    diff-sequences "^24.9.0"
+    jest-get-type "^24.9.0"
+    pretty-format "^24.9.0"
+
 jest-diff@^24.5.0:
   version "24.5.0"
   resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.5.0.tgz#a2d8627964bb06a91893c0fbcb28ab228c257652"
@@ -8909,20 +8983,15 @@ jest-diff@^24.8.0:
     jest-get-type "^24.8.0"
     pretty-format "^24.8.0"
 
-jest-diff@^24.9.0:
-  version "24.9.0"
-  resolved "https://registry.yarnpkg.com/jest-diff/-/jest-diff-24.9.0.tgz#931b7d0d5778a1baf7452cb816e325e3724055da"
-  dependencies:
-    chalk "^2.0.1"
-    diff-sequences "^24.9.0"
-    jest-get-type "^24.9.0"
-    pretty-format "^24.9.0"
-
 jest-docblock@^24.3.0:
   version "24.3.0"
   resolved "https://registry.yarnpkg.com/jest-docblock/-/jest-docblock-24.3.0.tgz#b9c32dac70f72e4464520d2ba4aec02ab14db5dd"
   dependencies:
     detect-newline "^2.1.0"
+
+jest-dom@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-4.0.0.tgz#94eba3cbc6576e7bd6821867c92d176de28920eb"
 
 jest-each@^24.5.0:
   version "24.5.0"
@@ -9248,6 +9317,15 @@ jest-localstorage-mock@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.0.tgz#c6073810735dd3af74020ea6c3885ec1cc6d0d13"
 
+jest-matcher-utils@^24.0.0, jest-matcher-utils@^24.9.0:
+  version "24.9.0"
+  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-24.9.0.tgz#f5b3661d5e628dffe6dd65251dfdae0e87c3a073"
+  dependencies:
+    chalk "^2.0.1"
+    jest-diff "^24.9.0"
+    jest-get-type "^24.9.0"
+    pretty-format "^24.9.0"
+
 jest-matcher-utils@^24.5.0:
   version "24.5.0"
   resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-24.5.0.tgz#5995549dcf09fa94406e89526e877b094dad8770"
@@ -9274,15 +9352,6 @@ jest-matcher-utils@^24.8.0:
     jest-diff "^24.8.0"
     jest-get-type "^24.8.0"
     pretty-format "^24.8.0"
-
-jest-matcher-utils@^24.9.0:
-  version "24.9.0"
-  resolved "https://registry.yarnpkg.com/jest-matcher-utils/-/jest-matcher-utils-24.9.0.tgz#f5b3661d5e628dffe6dd65251dfdae0e87c3a073"
-  dependencies:
-    chalk "^2.0.1"
-    jest-diff "^24.9.0"
-    jest-get-type "^24.9.0"
-    pretty-format "^24.9.0"
 
 jest-message-util@^24.0.0, jest-message-util@^24.5.0:
   version "24.5.0"
@@ -11010,6 +11079,10 @@ min-document@^2.19.0:
   resolved "https://registry.yarnpkg.com/min-document/-/min-document-2.19.0.tgz#7bd282e3f5842ed295bb748cdd9f1ffa2c824685"
   dependencies:
     dom-walk "^0.1.0"
+
+min-indent@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/min-indent/-/min-indent-1.0.0.tgz#cfc45c37e9ec0d8f0a0ec3dd4ef7f7c3abe39256"
 
 mini-create-react-context@^0.3.0:
   version "0.3.2"
@@ -13393,6 +13466,15 @@ pretty-error@^2.0.2:
     renderkid "^2.0.1"
     utila "~0.4"
 
+pretty-format@^24.0.0, pretty-format@^24.3.0, pretty-format@^24.9.0:
+  version "24.9.0"
+  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.9.0.tgz#12fac31b37019a4eea3c11aa9a959eb7628aa7c9"
+  dependencies:
+    "@jest/types" "^24.9.0"
+    ansi-regex "^4.0.0"
+    ansi-styles "^3.2.0"
+    react-is "^16.8.4"
+
 pretty-format@^24.5.0:
   version "24.5.0"
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.5.0.tgz#cc69a0281a62cd7242633fc135d6930cd889822d"
@@ -13416,15 +13498,6 @@ pretty-format@^24.8.0:
   resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.8.0.tgz#8dae7044f58db7cb8be245383b565a963e3c27f2"
   dependencies:
     "@jest/types" "^24.8.0"
-    ansi-regex "^4.0.0"
-    ansi-styles "^3.2.0"
-    react-is "^16.8.4"
-
-pretty-format@^24.9.0:
-  version "24.9.0"
-  resolved "https://registry.yarnpkg.com/pretty-format/-/pretty-format-24.9.0.tgz#12fac31b37019a4eea3c11aa9a959eb7628aa7c9"
-  dependencies:
-    "@jest/types" "^24.9.0"
     ansi-regex "^4.0.0"
     ansi-styles "^3.2.0"
     react-is "^16.8.4"
@@ -14449,6 +14522,13 @@ redent@^2.0.0:
   dependencies:
     indent-string "^3.0.0"
     strip-indent "^2.0.0"
+
+redent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/redent/-/redent-3.0.0.tgz#e557b7998316bb53c9f1f56fa626352c6963059f"
+  dependencies:
+    indent-string "^4.0.0"
+    strip-indent "^3.0.0"
 
 reduce-css-calc@^1.2.6:
   version "1.3.0"
@@ -15827,6 +15907,12 @@ strip-indent@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-2.0.0.tgz#5ef8db295d01e6ed6cbf7aab96998d7822527b68"
 
+strip-indent@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/strip-indent/-/strip-indent-3.0.0.tgz#c32e1cee940b6b3432c771bc2c54bcce73cd3001"
+  dependencies:
+    min-indent "^1.0.0"
+
 strip-json-comments@^2.0.1, strip-json-comments@~2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/strip-json-comments/-/strip-json-comments-2.0.1.tgz#3c531942e908c2697c0ec344858c286c7ca0a60a"
@@ -16773,6 +16859,10 @@ w3c-hr-time@^1.0.1:
   resolved "https://registry.yarnpkg.com/w3c-hr-time/-/w3c-hr-time-1.0.1.tgz#82ac2bff63d950ea9e3189a58a65625fedf19045"
   dependencies:
     browser-process-hrtime "^0.1.2"
+
+wait-for-expect@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/wait-for-expect/-/wait-for-expect-3.0.0.tgz#d6fbf28959e3b8779dc172fb1ea56bf1e833bf7a"
 
 walk-back@^2.0.1:
   version "2.0.1"
