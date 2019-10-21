@@ -199,7 +199,7 @@ class CozyFile extends Document {
         )
       }
     } catch (error) {
-      if (/Not found/.test(error)) {
+      if (/Not Found/.test(error.message)) {
         return await CozyFile.upload(name, file, dirId)
       }
       throw error

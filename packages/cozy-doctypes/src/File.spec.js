@@ -249,7 +249,7 @@ describe('File model', () => {
     })
 
     it('should call the upload method if no conflict', async () => {
-      statByPathSpy.mockRejectedValueOnce('Not found')
+      statByPathSpy.mockRejectedValueOnce(new Error('Not Found'))
       createFileSpy.mockResolvedValue({
         data: {
           id: 'jj',
@@ -274,7 +274,7 @@ describe('File model', () => {
             id: 'file_id'
           }
         })
-        .mockRejectedValueOnce('Not found')
+        .mockRejectedValueOnce(new Error('Not Found'))
       await CozyFile.uploadFileWithConflictStrategy(
         'filename',
         '',
