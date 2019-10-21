@@ -74,6 +74,7 @@ describe('DocumentQualification', () => {
 
     fireEvent.change(inputFileName, { target: { value: 'Manual name' } })
     fireEvent.blur(inputFileName)
+    expect(onFileNameChanged).toBeCalledWith('Manual name.jpg')
 
     fireEvent.click(familyItemNode)
     fireEvent.click(queryByText('Scan.items.birth_certificate'))

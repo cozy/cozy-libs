@@ -5,7 +5,7 @@ import CategoryGridItem from './CategoryGridItem'
 
 describe('CategoryGridItem', () => {
   it('should match snapshot if selected and icon', () => {
-    const comp = render(
+    const { asFragment } = render(
       <CategoryGridItem
         isSelected={true}
         label={'test'}
@@ -13,6 +13,6 @@ describe('CategoryGridItem', () => {
         icon={'car'}
       />
     )
-    expect(comp).toMatchSnapshot()
+    expect(asFragment()).toMatchSnapshot()
   })
 })
