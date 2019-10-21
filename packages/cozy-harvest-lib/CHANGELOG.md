@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.3...cozy-harvest-lib@1.10.4) (2019-10-21)
+
+
+### Bug Fixes
+
+* Use initial trigger running status ([19e9193](https://github.com/cozy/cozy-libs/commit/19e9193))
+
+
+
+
+
 ## [1.10.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.2...cozy-harvest-lib@1.10.3) (2019-10-21)
 
 
