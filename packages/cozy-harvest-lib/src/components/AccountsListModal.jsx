@@ -11,15 +11,15 @@ const AccountsListModal = ({ konnector, accounts, t }) => {
   const { pushHistory } = useContext(MountPointContext)
   return (
     <>
-      <Stack className="u-mb-3">
-        <div className="u-w-3 u-h-3 u-mh-auto">
-          <KonnectorIcon konnector={konnector} />
-        </div>
-        <h3 className="u-title-h3 u-ta-center">
-          {t('modal.accounts.title', { name: konnector.name })}
-        </h3>
-      </Stack>
       <ModalContent>
+        <Stack className="u-mb-3">
+          <div className="u-w-3 u-h-3 u-mh-auto">
+            <KonnectorIcon konnector={konnector} />
+          </div>
+          <h3 className="u-title-h3 u-ta-center">
+            {t('modal.accounts.title', { name: konnector.name })}
+          </h3>
+        </Stack>
         <AccountsList
           accounts={accounts}
           konnector={konnector}
