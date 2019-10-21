@@ -24,13 +24,13 @@ const unMockDate = () => {
 describe('DocumentQualification', () => {
   it('Inital render + selection + filename', () => {
     mockDate()
-    const onQualified = jest.fn()
+    const onDescribed = jest.fn()
     const onFileNameChanged = jest.fn()
     const { queryByText, getByText, asFragment, getByLabelText } = render(
       <MuiCozyTheme>
         <DocumentQualification
           editFileName={true}
-          onQualified={onQualified}
+          onDescribed={onDescribed}
           onFileNameChanged={onFileNameChanged}
           title={'Edit'}
           //initialSelected={{ itemId: 1, categoryLabel: 'Label1' }}
@@ -47,7 +47,7 @@ describe('DocumentQualification', () => {
 
     fireEvent.click(getByText('Scan.themes.family'))
     fireEvent.click(getByText('Scan.items.family_record_book'))
-    expect(onQualified).toBeCalledWith(
+    expect(onDescribed).toBeCalledWith(
       {
         classification: 'identity_document',
         defaultTheme: 'theme2',

@@ -64,7 +64,7 @@ class ScannerQualification extends Component {
         secondaryType={'secondary'}
         description={
           <DocumentQualification
-            onQualified={(qualification, filename) => {
+            onDescribed={(qualification, filename) => {
               this.setState({ qualification, filename })
             }}
             onFileNameChanged={filename => {

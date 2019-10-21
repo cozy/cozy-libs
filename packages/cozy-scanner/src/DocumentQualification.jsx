@@ -64,8 +64,8 @@ export class DocumentQualification extends Component {
     this.setState({ selected: item })
     this.handleFileNameChange(filename)
 
-    const { onQualified } = this.props
-    if (onQualified) {
+    const { onDescribed } = this.props
+    if (onDescribed) {
       const realItem = getItemById(item.itemId)
       /* ATM, we only accept JPG extension from the scanner. So 
       we hardcode the filename extension here. 
@@ -74,12 +74,12 @@ export class DocumentQualification extends Component {
       generated filename 
       */
       if (editFileName) {
-        onQualified(
+        onDescribed(
           realItem ? realItem : undefined,
           filename + filename_extension
         )
       } else {
-        onQualified(realItem ? realItem : undefined)
+        onDescribed(realItem ? realItem : undefined)
       }
     }
   }
@@ -192,7 +192,7 @@ DocumentQualification.propTypes = {
    * This callback is called after a qualification
    *
    */
-  onQualified: PropTypes.func,
+  onDescribed: PropTypes.func,
   onFileNameChanged: PropTypes.func,
   title: PropTypes.string,
   initialSelected: PropTypes.shape({
