@@ -57,7 +57,7 @@ class Scanner extends React.Component {
             //we get the result of the readAsBuffer in the `result` attr
             try {
               if (onBeforeUpload) onBeforeUpload()
-              const newFile = await this.uploadFileWithConflictStrategy(
+              const newFile = await CozyFile.uploadFileWithConflictStrategy(
                 name,
                 reader.result,
                 dirId,
@@ -103,72 +103,7 @@ class Scanner extends React.Component {
 
     window.resolveLocalFileSystemURL(imageURI, onResolvedLocalFS, onError)
   }
-  //TODO Put this in Files Doctypes
-  /**
-   *
-   * @param {String} name File Name
-   * @param {ArrayBuffer} file data
-   * @param {String} dirId dir id when to upload
-   * @param {String} onConflict Actually only 2 hardcoded strategies 'erase' or 'rename'
-   * @param {Object} metadata An object containing the wanted metadata to attach
-   */
-  async uploadFileWithConflictStrategy(
-    name,
-    file,
-    dirId,
-    onConflict,
-    metadata
-  ) {
-    const { client } = this.props
-    const filesCollection = client.collection('io.cozy.files')
 
-    const path = await CozyFile.getFullpath(dirId, name)
-    try {
-      const existingFile = await filesCollection.statByPath(path)
-      const { id: fileId, dir_id: dirId } = existingFile.data
-      if (onConflict === 'erase') {
-        //!TODO Bug Fix. Seems we have to pass a name attribute ?!
-        const resp = await filesCollection.updateFile(file, {
-          dirId,
-          fileId,
-          name,
-          metadata
-        })
-        return resp
-      } else {
-        const { filename, extension } = CozyFile.splitFilename({
-          name,
-          type: 'file'
-        })
-        const newFileName =
-          CozyFile.generateNewFileNameOnConflict(filename) + extension
-        //recall itself with the newFilename.
-        return this.uploadFileWithConflictStrategy(
-          newFileName,
-          file,
-          dirId,
-          onConflict,
-          metadata
-        )
-      }
-    } catch (error) {
-      if (/Not Found/.test(error)) {
-        return await this.upload(name, file, dirId, metadata)
-      }
-      throw error
-    }
-  }
-  async upload(name, file, dirId, metadata) {
-    const { client } = this.props
-
-    return client.collection('io.cozy.files').createFile(file, {
-      name,
-      dirId,
-      contentType: 'image/jpeg',
-      lastModifiedDate: new Date(),
-      metadata
-    })
-  }
   onFail = message => {
     this.setState({ loadingScreen: false })
     console.log('failed', message) //eslint-disable-line no-console
