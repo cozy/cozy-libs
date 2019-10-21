@@ -12,6 +12,11 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 import KonnectorIcon from './KonnectorIcon'
 
+import accounts, {
+  TWOFA_PROVIDERS,
+  TWOFA_USER_INPUT
+} from '../helpers/accounts'
+
 import { TWO_FA_MISMATCH_EVENT } from '../models/KonnectorJob'
 
 export class TwoFAModal extends PureComponent {
@@ -44,9 +49,20 @@ export class TwoFAModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, konnectorJob, t, breakpoints = {} } = this.props
+    const {
+      dismissAction,
+      konnectorJob,
+      t,
+      breakpoints = {},
+      account
+    } = this.props
     const { isMobile } = breakpoints
     const { twoFACode } = this.state
+
+    const twoFAProvider = accounts.getTwoFACodeProvider(account)
+    const hasErrored = konnectorJob.isTwoFARetry()
+
+    const needUserInput = TWOFA_USER_INPUT[twoFAProvider]
 
     const konn = {
       slug: konnectorJob.getKonnectorSlug()
@@ -67,31 +83,40 @@ export class TwoFAModal extends PureComponent {
         <ModalDescription>
           <form onSubmit={this.handleSubmit}>
             <SubTitle className="u-mb-1 u-mt-half u-ta-center">
-              {t(`twoFAForm.providers.${konnectorJob.getTwoFACodeProvider()}`)}
+              {t(`twoFAForm.providers.${twoFAProvider}`)}
             </SubTitle>
-            <Text>{t('twoFAForm.desc')}</Text>
-            <Field
-              className="u-mt-0 u-mb-0"
-              value={twoFACode}
-              onChange={this.handleChange}
-              autoComplete="off"
-              label={t('twoFAForm.code.label')}
-              size="medium"
-              error={konnectorJob.isTwoFARetry()}
-              fullwidth
-            />
-            {konnectorJob.isTwoFARetry() && (
+
+            <Text>
+              {twoFAProvider === TWOFA_PROVIDERS.APP
+                ? t('twoFAForm.desc-2fa')
+                : t('twoFAForm.desc')}
+            </Text>
+            {needUserInput ? (
+              <Field
+                className="u-mt-0 u-mb-0"
+                value={twoFACode}
+                onChange={this.handleChange}
+                autoComplete="off"
+                label={t('twoFAForm.code.label')}
+                size="medium"
+                error={hasErrored}
+                fullwidth
+              />
+            ) : null}
+            {hasErrored && (
               <Caption className="u-error u-fs-italic u-mt-half">
                 {t('twoFAForm.retry')}
               </Caption>
             )}
-            <Button
-              className="u-mt-1"
-              label={t('twoFAForm.CTA')}
-              busy={konnectorJob.isTwoFARunning()}
-              disabled={konnectorJob.isTwoFARunning() || !twoFACode}
-              extension="full"
-            />
+            {needUserInput ? (
+              <Button
+                className="u-mt-1"
+                label={t('twoFAForm.CTA')}
+                busy={konnectorJob.isTwoFARunning()}
+                disabled={konnectorJob.isTwoFARunning() || !twoFACode}
+                extension="full"
+              />
+            ) : null}
           </form>
         </ModalDescription>
       </Modal>
