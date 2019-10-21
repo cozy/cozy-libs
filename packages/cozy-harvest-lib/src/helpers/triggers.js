@@ -66,6 +66,12 @@ export const getLastSuccessDate = trigger => {
 
 export const getKonnectorSlug = trigger => get(trigger, 'message.konnector')
 
+export const getKonnectorStatus = trigger =>
+  get(trigger, 'current_state.status')
+
+export const isKonnectorRunning = trigger =>
+  getKonnectorStatus(trigger) === 'running'
+
 /**
  * Get frenquency of a cron trigger, based on its arguments.
  * @param  {Object} trigger io.cozy.triggers as returned by stack
@@ -79,10 +85,12 @@ export const getFrequency = trigger => {
 
 const helpers = {
   buildAttributes,
+  isKonnectorRunning,
   getAccountId,
   getKonnectorJobError,
   getFrequency,
   getKonnectorSlug,
+  getKonnectorStatus,
   getLastSuccessDate
 }
 

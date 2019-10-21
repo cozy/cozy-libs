@@ -1,6 +1,10 @@
 /* eslint-env jest */
 
-import { buildAttributes, getKonnectorJobError } from 'helpers/triggers'
+import {
+  buildAttributes,
+  getKonnectorJobError,
+  isKonnectorRunning
+} from 'helpers/triggers'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 describe('Triggers Helper', () => {
@@ -68,6 +72,18 @@ describe('Triggers Helper', () => {
         }
       }
       expect(getKonnectorJobError(trigger)).toBeNull()
+    })
+  })
+
+  describe('konnector status', () => {
+    it('should return true or false', () => {
+      expect(isKonnectorRunning({ current_state: {} })).toBe(false)
+      expect(isKonnectorRunning({ current_state: { status: 'running' } })).toBe(
+        true
+      )
+      expect(isKonnectorRunning({ current_state: { status: 'idle' } })).toBe(
+        false
+      )
     })
   })
 })
