@@ -100,9 +100,10 @@ export class EditAccountModal extends Component {
         size="small"
         closable={isMobile ? false : true}
         closeBtnColor={palette.white}
+        className="u-bg-dodgerBlue"
       >
         {/** TODO Should be moved to UI when this design is stablized  */}
-        <ModalHeader className="u-bg-dodgerBlue u-p-0 u-h-3 u-flex u-flex-items-center">
+        <ModalHeader className="u-mb-0 u-p-0 u-h-3 u-flex u-flex-items-center">
           {isMobile && (
             <Button
               onClick={() => history.push('../')}
@@ -121,7 +122,7 @@ export class EditAccountModal extends Component {
             <Text className="u-white">{konnector.name}</Text>
           </div>
         </ModalHeader>
-        <ModalContent>
+        <ModalContent className="u-pt-1-half">
           {fetching ? (
             <div className="u-pv-2 u-ta-center">
               <Spinner size="xxlarge" />
