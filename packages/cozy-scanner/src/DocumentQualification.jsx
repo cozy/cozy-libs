@@ -44,9 +44,8 @@ class DocumentQualification extends Component {
     if (realItem) {
       const name = t(`Scan.items.${realItem.label}`)
       return `${name.replace(/ /g, '-')}_${new Date()
-        .toLocaleDateString()
-        .replace(/:/g, '-')
-        .replace(/\//g, '-')}`
+        .toISOString()
+        .substr(0, 10)}`
     } else {
       return this.defaultFilename
     }
