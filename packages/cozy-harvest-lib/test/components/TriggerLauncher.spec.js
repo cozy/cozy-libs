@@ -68,20 +68,39 @@ describe('TriggerLauncher', () => {
     )
 
     const childWrapper = wrapper.find(Child)
-    const childProps = childWrapper.props()
-    expect(typeof childProps.launch).toBe('function')
+    const launchProp = childWrapper.prop('launch')
+    expect(typeof launchProp).toBe('function')
   })
 
-  it('should inject running prop', () => {
-    const wrapper = shallow(
-      <TriggerLauncher {...props}>
-        {({ running }) => <Child running={running} />}
-      </TriggerLauncher>
-    )
+  describe('running prop', () => {
+    it('should inject running prop', () => {
+      const wrapper = shallow(
+        <TriggerLauncher {...props}>
+          {({ running }) => <Child running={running} />}
+        </TriggerLauncher>
+      )
 
-    const childWrapper = wrapper.find(Child)
-    const childProps = childWrapper.props()
-    expect(typeof childProps.running).toBe('boolean')
+      const childWrapper = wrapper.find(Child)
+      const runningProp = childWrapper.prop('running')
+      expect(typeof runningProp).toBe('boolean')
+      expect(runningProp).toBe(false)
+    })
+
+    it('should get the initial running status', () => {
+      const initialTrigger = {
+        _id: 123,
+        current_state: { status: 'running' }
+      }
+      const wrapper = shallow(
+        <TriggerLauncher {...props} initialTrigger={initialTrigger}>
+          {({ running }) => <Child running={running} />}
+        </TriggerLauncher>
+      )
+
+      const childWrapper = wrapper.find(Child)
+      const runningProp = childWrapper.prop('running')
+      expect(runningProp).toBe(true)
+    })
   })
 
   describe('launch', () => {
