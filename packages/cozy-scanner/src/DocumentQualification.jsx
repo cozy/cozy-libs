@@ -26,7 +26,7 @@ import styles from './styles.styl'
  */
 const filename_extension = '.jpg'
 const id_filename_input = 'filename_input'
-class DocumentQualification extends Component {
+export class DocumentQualification extends Component {
   constructor(props) {
     super(props)
     const { categoryLabel = null, itemId = null } = props.initialSelected || {}
@@ -109,13 +109,16 @@ class DocumentQualification extends Component {
                 placeholder={t('Scan.filename')}
                 value={filename}
                 onChange={event => {
+                  //console.log('event', event)
                   //If the user write something once, we don't want to rename the file automatically anymore
                   if (!hasUserWrittenFileName) {
                     this.setState({ hasUserWrittenFileName: true })
                   }
                   //If we left an empty value, then we reset the behavior
-                  if (event.target.value === '')
+                  if (event.target.value === '') {
                     this.setState({ hasUserWrittenFileName: false })
+                  }
+
                   this.handleFileNameChange(event.target.value)
                 }}
                 onFocus={() => {
