@@ -80,9 +80,9 @@ const Routes = ({ konnectorRoot, konnector, location, history, onDismiss }) => {
                   render={() => (
                     <NewAccountModal
                       konnector={konnector}
-                      onDismiss={() =>
-                        history.push(`${konnectorRoot}/accounts`)
-                      }
+                      onDismiss={() => {
+                        history.push('/')
+                      }}
                     />
                   )}
                 />
