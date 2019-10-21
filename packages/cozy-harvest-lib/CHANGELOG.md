@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.1...cozy-harvest-lib@1.10.2) (2019-10-21)
+
+
+### Bug Fixes
+
+* Make modal top edges round ([24a4258](https://github.com/cozy/cozy-libs/commit/24a4258))
+
+
+
+
+
 ## [1.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.0...cozy-harvest-lib@1.10.1) (2019-10-18)
 
 
