@@ -82,7 +82,8 @@ class Scanner extends React.Component {
         err => {
           this.setState({ error: err })
           this.setState({ status: SCANNER_DONE })
-          console.error('error getting fileentry file!' + err)
+          //Since this module is pretty recent, let's have this info in sentry if needed
+          console.error('error getting fileentry file!' + err) //eslint-disable-line no-console
         }
       )
     }
@@ -170,7 +171,7 @@ class Scanner extends React.Component {
   }
   onFail = message => {
     this.setState({ loadingScreen: false })
-    console.log('failed', message)
+    console.log('failed', message) //eslint-disable-line no-console
   }
   startScanner = () => {
     try {
@@ -187,7 +188,7 @@ class Scanner extends React.Component {
         ...this.props.pluginConfig
       })
     } catch (e) {
-      console.error('You have to install cordova camera plugin', e)
+      console.error('You have to install cordova camera plugin', e) //eslint-disable-line no-console
     }
   }
 

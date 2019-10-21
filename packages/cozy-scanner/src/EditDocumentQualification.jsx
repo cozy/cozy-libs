@@ -53,7 +53,6 @@ class EditDocumentQualification extends Component {
               onClose()
               Alerter.success(t('Scan.successful.qualified_ok'))
             } catch (error) {
-              console.error('Scan.error.generic', error)
               Alerter.error(t('Scan.error.generic'))
             }
           }

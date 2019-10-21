@@ -54,7 +54,6 @@ class ScannerQualification extends Component {
           try {
             await onSave(qualification, filename)
           } catch (error) {
-            console.error('error', error)
             Alerter.error(t('Scan.error.generic'))
           }
         }}
