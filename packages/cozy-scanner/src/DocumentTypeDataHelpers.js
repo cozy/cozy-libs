@@ -28,5 +28,6 @@ const flattenedItemsInThemes = () => {
 const flattened = flattenedItemsInThemes()
 
 export const getItemsByCategory = ({ label }) => {
-  return flattened[label].items
+  if (flattened[label]) return flattened[label].items
+  return null
 }
