@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.2...cozy-harvest-lib@1.10.3) (2019-10-21)
+
+
+### Bug Fixes
+
+* Use custom scoped history object ([#842](https://github.com/cozy/cozy-libs/issues/842)) ([df81196](https://github.com/cozy/cozy-libs/commit/df81196))
+
+
+
+
+
 ## [1.10.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.1...cozy-harvest-lib@1.10.2) (2019-10-21)
 
 
