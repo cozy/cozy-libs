@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 
+// TODO move this to cozy-ui
 class KonnectorIcon extends PureComponent {
   fetchIcon() {
     const { konnector, client } = this.props
@@ -13,7 +14,9 @@ class KonnectorIcon extends PureComponent {
   }
 
   render() {
-    return <AppIcon fetchIcon={this.fetchIcon.bind(this)} />
+    // eslint-disable-next-line no-unused-vars
+    const { client, konnector, ...restProps } = this.props
+    return <AppIcon fetchIcon={this.fetchIcon.bind(this)} {...restProps} />
   }
 }
 
