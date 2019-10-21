@@ -7,7 +7,7 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
 import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
 import DocumentQualification from './DocumentQualification'
-import { getItemById, getThemeByItem } from './DocumentTypeData'
+import { getItemById, getThemeByItem } from './DocumentTypeDataHelpers'
 
 const pushAnalytics = item => {
   const tracker = getTracker()

@@ -1,4 +1,4 @@
-const items = [
+export const items = [
   {
     id: '1',
     classification: 'identity_document',
@@ -268,26 +268,3 @@ export const themes = [
     file_type_ids: ['27', '28', '29', '26', '30']
   }
 ]
-
-export const getItemsByCategory = ({ label }) => {
-  const items = []
-  themes.map(theme => {
-    if (theme.label === label) {
-      theme.file_type_ids.map(itemId => {
-        items.push(getItemById(itemId))
-      })
-    }
-  })
-  return items
-}
-
-export const getItemById = id => {
-  return items.find(item => item.id === id)
-}
-
-export const getThemeByItem = item => {
-  if (item.defaultTheme) {
-    return themes.find(theme => theme.id === item.defaultTheme)
-  }
-  return themes.find(theme => theme.file_type_ids.includes(item.id))
-}
