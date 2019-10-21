@@ -27,7 +27,7 @@ const pushAnalytics = qualification => {
 /**
  * ScannerQualification component
  *
- * This component is used to be displayed just after taking a
+ * Displayed just after taking a
  * photo on a mobile device from the Scanner feature.
  *
  * It displays a modal with the `Qualification` Process.

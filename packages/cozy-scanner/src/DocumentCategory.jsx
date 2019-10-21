@@ -16,7 +16,6 @@ import CategoryGridItem from './CategoryGridItem'
 import styles from './styles.styl'
 
 /**
- * DocumentCategory component
  *
  * The goal of this component is to display a
  * category / type of document and also manage
@@ -24,7 +23,7 @@ import styles from './styles.styl'
  * several associated items.
  *
  * If an item from a category is selected, we display
- * its label instead of the label from the category
+ * its label and the label from the category
  *
  */
 class DocumentCategory extends Component {

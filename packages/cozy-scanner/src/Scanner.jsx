@@ -54,7 +54,7 @@ class Scanner extends React.Component {
         file => {
           const reader = new FileReader()
           reader.onloadend = async () => {
-            //we get the of the readAsBuffer in the `result` attr
+            //we get the result of the readAsBuffer in the `result` attr
             try {
               if (onBeforeUpload) onBeforeUpload()
               const newFile = await this.uploadFileWithConflictStrategy(
@@ -174,7 +174,6 @@ class Scanner extends React.Component {
   }
   startScanner = () => {
     try {
-      //
       this.setState({ loadingScreen: true })
       this.defaultPluginConfig = {
         quality: 80,
@@ -248,9 +247,6 @@ class Scanner extends React.Component {
 Scanner.defaultProps = {
   pluginConfig: {}
 }
-/**
- *
- */
 
 Scanner.propTypes = {
   isOffline: PropTypes.bool.isRequired

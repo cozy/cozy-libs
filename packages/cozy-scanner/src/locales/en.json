@@ -5,15 +5,15 @@
     "filename": "Filename",
     "save": "Save",
     "cancel": "Cancel",
-    "qualify": "Categorize",
+    "qualify": "Describe",
     "apply": "Apply",
     "error": {
-      "offline": "You are currently offline and you can't use this functionnality. Try it later",
-      "uploading": "You are already uploading a file. Wait until the end of this upload and try again.",
+      "offline": "You are currently offline and you can't use this functionality. Please, try again later.",
+      "uploading": "You are already uploading a file. Please wait until the end of this upload and try again.",
       "generic": "Something went wrong. Please try again."
     },
     "successful": {
-      "qualified_ok": "You just have successfully categorized your file! "
+      "qualified_ok": "You just have successfully described your file! "
     },
 
     "items": {

@@ -13,8 +13,11 @@ import DocumentCategory from './DocumentCategory'
 import { themes, getItemById, getItemsByCategory } from './DocumentTypeData'
 import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './styles.styl'
+
+const filename_extension = '.jpg'
+const id_filename_input = 'filename_input'
+
 /**
- * Document Qualification
  *
  * This screen is used to qualify a document ie:
  *  Selecting a metadata category etc
@@ -24,8 +27,6 @@ import styles from './styles.styl'
  * its parent
  *
  */
-const filename_extension = '.jpg'
-const id_filename_input = 'filename_input'
 export class DocumentQualification extends Component {
   constructor(props) {
     super(props)
@@ -188,7 +189,7 @@ DocumentQualification.defaultProps = {
 }
 DocumentQualification.propTypes = {
   /**
-   * This callback is called after a select.
+   * This callback is called after a qualification
    *
    */
   onQualified: PropTypes.func,
