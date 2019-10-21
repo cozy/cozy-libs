@@ -1,7 +1,7 @@
 {
   "name": "cozy-scanner",
   "version": "0.0.1",
-  "description": "Cozy-Scanner is used to access device comera and also provide component to categorize document",
+  "description": "Cozy-Scanner provides a component to take a picture of a document and describe it",
   "main": "dist/index.js",
   "license": "MIT",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-scanner/README.md",
