@@ -4,16 +4,12 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
 import { withMutations } from 'cozy-client'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Modal, {
   ModalContent,
   ModalHeader
 } from 'cozy-ui/transpiled/react/Modal'
-import Button from 'cozy-ui/transpiled/react/Button'
-import { Text } from 'cozy-ui/transpiled/react/Text'
-import { withBreakpoints } from 'cozy-ui/transpiled/react'
-import palette from 'cozy-ui/transpiled/react/palette'
+import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
@@ -79,43 +75,23 @@ export class EditAccountModal extends Component {
      * When we are on mobile, we display a back button
      * On desktop we display a cross
      */
-    const {
-      konnector,
-      t,
-      breakpoints: { isMobile },
-      pushHistory
-    } = this.props
+    const { konnector, pushHistory } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <Modal
         dismissAction={() => pushHistory(`/accounts/${account._id}`)}
         mobileFullscreen
         size="small"
-        closable={isMobile ? false : true}
-        closeBtnColor={palette.white}
-        className="u-bg-dodgerBlue"
       >
-        {/** TODO Should be moved to UI when this design is stablized  */}
-        <ModalHeader className="u-mb-0 u-p-0 u-h-3 u-flex u-flex-items-center">
-          {isMobile && (
-            <Button
-              onClick={() => pushHistory(`/accounts/${account._id}`)}
-              icon="previous"
-              label={t('back')}
-              iconOnly
-              extension="narrow"
-              className="u-m-0 u-p-1 u-pos-absolute u-h-3"
-              style={{
-                left: 0,
-                top: 0
-              }}
-            />
-          )}
-          <div className="u-flex-grow-1 u-ta-center">
-            <Text className="u-white">{konnector.name}</Text>
-          </div>
-        </ModalHeader>
-        <ModalContent className="u-pt-1-half">
+        <ModalHeader
+          title={
+            <div className="u-flex u-flex-items-center">
+              <CipherIcon konnector={konnector.slug} className="u-mr-1" />
+              {konnector.name}
+            </div>
+          }
+        />
+        <ModalContent>
           {fetching ? (
             <div className="u-pv-2 u-ta-center">
               <Spinner size="xxlarge" />
@@ -137,8 +113,6 @@ export class EditAccountModal extends Component {
 
 EditAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired,
-  breakpoints: PropTypes.object.isRequired,
   accountId: PropTypes.string.isRequired,
   accounts: PropTypes.array.isRequired,
   findAccount: PropTypes.func.isRequired,
@@ -147,7 +121,5 @@ EditAccountModal.propTypes = {
 
 export default flow(
   withMutations(accountMutations, triggersMutations),
-  withBreakpoints(),
-  translate(),
   withMountPointPushHistory
 )(EditAccountModal)
