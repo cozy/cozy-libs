@@ -5,9 +5,22 @@ import manifest from './manifest'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
 
-const PROVIDERS = {
+export const TWOFA_PROVIDERS = {
   EMAIL: 'email',
-  SMS: 'sms'
+  SMS: 'sms',
+  APP: 'app'
+}
+
+// For some 2FA modes, we do not need user input, this is for example the
+// case for the "app" two fa where the user will open the website/app of the
+// provider and click on a notification or a button. For those modes, we
+// does not need to show an input field with a submit button. We only have
+// to wait, the konnector should tell us when everything is OK.
+export const TWOFA_USER_INPUT = {
+  default: true,
+  [TWOFA_PROVIDERS.EMAIL]: true,
+  [TWOFA_PROVIDERS.SMS]: true,
+  [TWOFA_PROVIDERS.APP]: false
 }
 
 const TWOFA_NEEDED_STATUS = 'TWOFA_NEEDED'
@@ -49,7 +62,7 @@ export const getTwoFACodeProvider = account => {
   if (!account || !account.state) return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
   const codeParts = account.state ? account.state.split('.') : []
   if (codeParts.length > 1) {
-    return PROVIDERS[codeParts[1]] || DEFAULT_TWOFA_CODE_PROVIDER_TYPE
+    return TWOFA_PROVIDERS[codeParts[1]] || DEFAULT_TWOFA_CODE_PROVIDER_TYPE
   } else {
     return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
   }

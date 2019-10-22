@@ -315,9 +315,11 @@
     "providers": {
       "default": "Enter the code sent to you by e-mail or SMS",
       "email": "Enter the code sent to you by e-mail",
-      "sms": "Enter the code sent to you by SMS"
+      "sms": "Enter the code sent to you by SMS",
+      "app": "Please check your provider app to authenticate"
     },
     "desc": "This code allows you to finish your connexion.",
+    "desc-2fa": "You need to open your provider's app and/or click on a notification to confirm your authentication.",
     "code": {
       "label": "code"
     },

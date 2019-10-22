@@ -19,7 +19,7 @@
     "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prebuild": "yarn tx",
     "prepublishOnly": "yarn build",
-    "test": "jest test/ --verbose",
+    "test": "env USE_REACT=true jest test/ --verbose",
     "lint": "cd .. && yarn lint packages/cozy-harvest-lib",
     "tx": "tx pull --all",
     "watch": "yarn build --watch",

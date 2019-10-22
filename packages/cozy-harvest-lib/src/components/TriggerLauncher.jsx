@@ -99,12 +99,12 @@ export class TriggerLauncher extends Component {
     this.konnectorJob.launch()
   }
 
-  dismissTwoFAModal() {
-    this.setState({ showTwoFAModal: false })
+  dismissTwoFAModal(account) {
+    this.setState({ showTwoFAModal: false, account })
   }
 
-  displayTwoFAModal() {
-    this.setState({ showTwoFAModal: true })
+  displayTwoFAModal(account) {
+    this.setState({ showTwoFAModal: true, account })
   }
 
   async handleError(error) {
@@ -166,7 +166,7 @@ export class TriggerLauncher extends Component {
   }
 
   render() {
-    const { error, running, showTwoFAModal, trigger } = this.state
+    const { error, running, showTwoFAModal, trigger, account } = this.state
 
     const { children, submitting } = this.props
     return (
@@ -182,6 +182,7 @@ export class TriggerLauncher extends Component {
             dismissAction={this.dismissTwoFAModal}
             into="coz-harvest-modal-place"
             konnectorJob={this.konnectorJob}
+            account={account}
           />
         )}
       </div>
