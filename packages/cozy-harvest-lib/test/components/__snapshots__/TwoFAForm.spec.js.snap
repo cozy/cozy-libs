@@ -16,6 +16,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
   className="u-mt-3"
   closable={true}
   containerClassName="u-pos-absolute"
+  into="body"
   mobileFullscreen={true}
   overflowHidden={false}
   primaryType="regular"
