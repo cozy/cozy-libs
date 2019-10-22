@@ -5,6 +5,7 @@ import { withClient } from 'cozy-client'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Stack from 'cozy-ui/transpiled/react/Stack'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import flow from 'lodash/flow'
 
 import TriggerManager from '../components/TriggerManager'
@@ -22,9 +23,11 @@ import { MountPointContext } from './MountPointContext'
  */
 const NewAccountModal = ({ konnector, client, t }) => {
   const { pushHistory } = useContext(MountPointContext)
-  const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
-  const isInMaintenance = maintenanceStatus.isInMaintenance
-  const maintenanceMessages = maintenanceStatus.messages
+  const {
+    isMaintenanceLoaded,
+    isInMaintenance,
+    messages: maintenanceMessages
+  } = useMaintenanceStatus(client, konnector.slug)
 
   return (
     <>
@@ -37,9 +40,15 @@ const NewAccountModal = ({ konnector, client, t }) => {
             {t('modal.addAccount.title', { name: konnector.name })}
           </h3>
         </Stack>
-        {isInMaintenance ? (
+        {!isMaintenanceLoaded && (
+          <div className="u-ta-center">
+            <Spinner size="xxlarge" />
+          </div>
+        )}
+        {isMaintenanceLoaded && isInMaintenance && (
           <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
-        ) : (
+        )}
+        {isMaintenanceLoaded && !isInMaintenance && (
           <TriggerManager
             konnector={konnector}
             onLoginSuccess={trigger => {
