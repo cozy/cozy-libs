@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 
-import { TriggerManager } from 'components/TriggerManager'
+import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
 
 jest.mock('cozy-doctypes', () => {
@@ -18,6 +18,8 @@ jest.mock('cozy-doctypes', () => {
     CozyFolder
   }
 })
+
+jest.mock('cozy-ui/transpiled/react/utils/color')
 
 const fixtures = {
   data: {
