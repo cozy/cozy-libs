@@ -1,46 +1,44 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TriggerManager handleError should render error 1`] = `
-<div>
-  <Wrapper>
-    <div
-      id="coz-harvest-modal-place"
+<Wrapper>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <React.Fragment>
+    <Wrapper
+      account={
+        Object {
+          "_id": "61c683295560485db0f34b859197c581",
+          "account_type": "konnectest",
+          "auth": Object {
+            "passphrase": "bar",
+            "username": "foo",
+          },
+          "identifier": "username",
+        }
+      }
+      error={[Error: Test error]}
+      konnector={
+        Object {
+          "fields": Object {
+            "passphrase": Object {
+              "type": "password",
+            },
+            "username": Object {
+              "type": "text",
+            },
+          },
+          "slug": "konnectest",
+        }
+      }
+      onBack={[Function]}
+      onSubmit={[Function]}
+      readOnlyIdentifier={false}
+      submitting={false}
     />
-    <React.Fragment>
-      <Wrapper
-        account={
-          Object {
-            "_id": "61c683295560485db0f34b859197c581",
-            "account_type": "konnectest",
-            "auth": Object {
-              "passphrase": "bar",
-              "username": "foo",
-            },
-            "identifier": "username",
-          }
-        }
-        error={[Error: Test error]}
-        konnector={
-          Object {
-            "fields": Object {
-              "passphrase": Object {
-                "type": "password",
-              },
-              "username": Object {
-                "type": "text",
-              },
-            },
-            "slug": "konnectest",
-          }
-        }
-        onBack={[Function]}
-        onSubmit={[Function]}
-        readOnlyIdentifier={false}
-        submitting={false}
-      />
-    </React.Fragment>
-  </Wrapper>
-</div>
+  </React.Fragment>
+</Wrapper>
 `;
 
 exports[`TriggerManager should redirect to OAuthForm 1`] = `
@@ -58,54 +56,23 @@ exports[`TriggerManager should redirect to OAuthForm 1`] = `
 `;
 
 exports[`TriggerManager should render with account 1`] = `
-<div>
-  <Wrapper>
-    <div
-      id="coz-harvest-modal-place"
-    />
-    <React.Fragment>
-      <Wrapper
-        account={
-          Object {
-            "_id": "61c683295560485db0f34b859197c581",
-            "account_type": "konnectest",
-            "auth": Object {
-              "passphrase": "bar",
-              "username": "foo",
-            },
-            "identifier": "username",
-          }
-        }
-        konnector={
-          Object {
-            "fields": Object {
-              "passphrase": Object {
-                "type": "password",
-              },
-              "username": Object {
-                "type": "text",
-              },
-            },
-            "slug": "konnectest",
-          }
-        }
-        onBack={[Function]}
-        onSubmit={[Function]}
-        readOnlyIdentifier={false}
-        submitting={false}
-      />
-    </React.Fragment>
-  </Wrapper>
-</div>
-`;
-
-exports[`TriggerManager should render without account 1`] = `
-<div>
-  <Wrapper>
-    <div
-      id="coz-harvest-modal-place"
-    />
+<Wrapper>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <React.Fragment>
     <Wrapper
+      account={
+        Object {
+          "_id": "61c683295560485db0f34b859197c581",
+          "account_type": "konnectest",
+          "auth": Object {
+            "passphrase": "bar",
+            "username": "foo",
+          },
+          "identifier": "username",
+        }
+      }
       konnector={
         Object {
           "fields": Object {
@@ -119,9 +86,36 @@ exports[`TriggerManager should render without account 1`] = `
           "slug": "konnectest",
         }
       }
-      onNoCiphers={[Function]}
-      onSelect={[Function]}
+      onBack={[Function]}
+      onSubmit={[Function]}
+      readOnlyIdentifier={false}
+      submitting={false}
     />
-  </Wrapper>
-</div>
+  </React.Fragment>
+</Wrapper>
+`;
+
+exports[`TriggerManager should render without account 1`] = `
+<Wrapper>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <Wrapper
+    konnector={
+      Object {
+        "fields": Object {
+          "passphrase": Object {
+            "type": "password",
+          },
+          "username": Object {
+            "type": "text",
+          },
+        },
+        "slug": "konnectest",
+      }
+    }
+    onNoCiphers={[Function]}
+    onSelect={[Function]}
+  />
+</Wrapper>
 `;

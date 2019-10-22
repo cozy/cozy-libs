@@ -6,6 +6,7 @@ import flow from 'lodash/flow'
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import {
   VaultUnlocker,
   withVaultClient,
@@ -28,6 +29,7 @@ import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
 import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
+import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -39,7 +41,7 @@ const MODAL_PLACE_ID = 'coz-harvest-modal-place'
  * After that it calls TriggerLauncher to run the konnector.
  * @type {Component}
  */
-export class TriggerManager extends Component {
+export class DumbTriggerManager extends Component {
   constructor(props) {
     super(props)
     const { account } = props
@@ -413,7 +415,8 @@ export class TriggerManager extends Component {
       showError,
       modalContainerId,
       t,
-      onVaultDismiss
+      onVaultDismiss,
+      vaultClosable
     } = this.props
     const {
       account,
@@ -453,47 +456,45 @@ export class TriggerManager extends Component {
     }
 
     return (
-      <div>
-        <VaultUnlocker onDismiss={onVaultDismiss}>
-          <div id={modalInto} />
-          {showCiphersList && (
-            <VaultCiphersList
-              konnector={konnector}
-              onSelect={this.handleCipherSelect}
-              onNoCiphers={this.handleNoCiphers}
-            />
-          )}
-          {showAccountForm && (
-            <>
-              {showBackButton && (
-                <ModalBackButton
-                  onClick={this.showCiphersList}
-                  label={t('back')}
-                />
-              )}
-              <AccountForm
-                account={
-                  !this.hasCipherSelected()
-                    ? account
-                    : this.cipherToAccount(selectedCipher)
-                }
-                error={error || triggerError}
-                konnector={konnector}
-                onSubmit={this.handleSubmit}
-                showError={showError}
-                submitting={submitting}
-                onBack={this.showCiphersList}
-                readOnlyIdentifier={this.hasCipherSelected()}
+      <VaultUnlocker onDismiss={onVaultDismiss} closable={vaultClosable}>
+        <div id={modalInto} />
+        {showCiphersList && (
+          <VaultCiphersList
+            konnector={konnector}
+            onSelect={this.handleCipherSelect}
+            onNoCiphers={this.handleNoCiphers}
+          />
+        )}
+        {showAccountForm && (
+          <>
+            {showBackButton && (
+              <ModalBackButton
+                onClick={this.showCiphersList}
+                label={t('back')}
               />
-            </>
-          )}
-        </VaultUnlocker>
-      </div>
+            )}
+            <AccountForm
+              account={
+                !this.hasCipherSelected()
+                  ? account
+                  : this.cipherToAccount(selectedCipher)
+              }
+              error={error || triggerError}
+              konnector={konnector}
+              onSubmit={this.handleSubmit}
+              showError={showError}
+              submitting={submitting}
+              onBack={this.showCiphersList}
+              readOnlyIdentifier={this.hasCipherSelected()}
+            />
+          </>
+        )}
+      </VaultUnlocker>
     )
   }
 }
 
-TriggerManager.propTypes = {
+DumbTriggerManager.propTypes = {
   /**
    * Account document. Used to get intial form values.
    * If no account is passed, AccountForm will use empty initial values.
@@ -577,7 +578,12 @@ TriggerManager.propTypes = {
   /**
    * What to do when the Vault unlock screen is dismissed without password
    */
-  onVaultDismiss: PropTypes.func.isRequired
+  onVaultDismiss: PropTypes.func.isRequired,
+  /**
+   * Whether the vault will be closable or not.
+   * @type {Boolean}
+   */
+  vaultClosable: PropTypes.bool
 }
 
 const SmartTriggerManager = flow(
@@ -590,7 +596,20 @@ const SmartTriggerManager = flow(
     permissionsMutations,
     triggersMutations
   )
-)(TriggerManager)
+)(DumbTriggerManager)
+
+// The TriggerManager is wrapped in the providers required for it to work by
+// itself instead of receiving it from its parents because it is used as
+// standalone in places like cozy-home intents
+export const TriggerManager = props => {
+  return (
+    <HarvestVaultProvider>
+      <MuiCozyTheme>
+        <SmartTriggerManager {...props} />
+      </MuiCozyTheme>
+    </HarvestVaultProvider>
+  )
+}
 
 // TriggerManager is exported wrapped in TriggerLauncher to avoid breaking changes.
 const LegacyTriggerManager = props => {
@@ -611,7 +630,7 @@ const LegacyTriggerManager = props => {
       initialTrigger={initialTrigger}
     >
       {({ error, launch, running, trigger }) => (
-        <SmartTriggerManager
+        <TriggerManager
           {...otherProps}
           error={error}
           launch={launch}
