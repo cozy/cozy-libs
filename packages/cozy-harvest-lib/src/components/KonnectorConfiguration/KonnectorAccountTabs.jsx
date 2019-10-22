@@ -153,7 +153,7 @@ const KonnectorAccountTabs = ({
                     </Card>
                   </div>
                 ) : null}
-                <div>
+                <div className="u-flex u-flex-row">
                   <DeleteAccountButton
                     account={account}
                     disabled={running}
