@@ -5,6 +5,7 @@ import get from 'lodash/get'
 const useMaintenanceStatus = (client, slug) => {
   const [maintenanceStatus, setMaintenanceStatus] = useState({
     isInMaintenance: false,
+    isMaintenanceLoaded: false,
     messages: {}
   })
   const registry = new Registry({
@@ -16,7 +17,11 @@ const useMaintenanceStatus = (client, slug) => {
       const appStatus = await registry.fetchApp(slug)
       const isInMaintenance = get(appStatus, 'maintenance_activated', false)
       const messages = get(appStatus, 'maintenance_options.messages', {})
-      setMaintenanceStatus({ isInMaintenance, messages })
+      setMaintenanceStatus({
+        isInMaintenance,
+        isMaintenanceLoaded: true,
+        messages
+      })
     }
     fetchData()
   }, [slug])
