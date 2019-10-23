@@ -17,7 +17,7 @@ describe('DocumentQualification', () => {
   afterAll(() => {
     MockDate.reset()
   })
-  it('Inital render + selection + filename', () => {
+  it('Initial render + selection + filename', () => {
     const onDescribed = jest.fn()
     const onFileNameChanged = jest.fn()
     const { queryByText, getByText, asFragment, getByLabelText } = render(
