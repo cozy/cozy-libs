@@ -25,7 +25,7 @@ const pushAnalytics = qualification => {
   }
 }
 /**
- * ScannerQualification component
+ * ModalScannerQualification component
  *
  * Displayed just after taking a
  * photo on a mobile device from the Scanner feature.
@@ -35,7 +35,7 @@ const pushAnalytics = qualification => {
  * right category for a document but soon we'll have rename and
  * one day OCR.
  */
-class ScannerQualification extends Component {
+class ModalScannerQualification extends Component {
   state = {
     qualification: undefined,
     filename: ''
@@ -78,7 +78,7 @@ class ScannerQualification extends Component {
   }
 }
 
-ScannerQualification.propTypes = {
+ModalScannerQualification.propTypes = {
   /**
    * primary action of the modal
    *
@@ -87,4 +87,4 @@ ScannerQualification.propTypes = {
   dismissAction: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
-export default translate()(ScannerQualification)
+export default translate()(ModalScannerQualification)

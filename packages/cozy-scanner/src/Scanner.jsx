@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { CozyFile } from 'cozy-doctypes'
 import { Modal } from 'cozy-ui/transpiled/react'
 
-import ScannerQualification from './ScannerQualification'
+import ModalScannerQualification from './ModalScannerQualification'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
 export const SCANNER_IDLE = 'idle'
 export const SCANNER_DONE = 'done'
@@ -154,7 +154,7 @@ class Scanner extends React.Component {
     }
     if (shouldShowScannerQualification)
       return (
-        <ScannerQualification
+        <ModalScannerQualification
           onSave={async (qualification, filename) => {
             this.setState({ shouldShowScannerQualification: false })
             return await this.onUpload(imageURI, qualification, filename)
