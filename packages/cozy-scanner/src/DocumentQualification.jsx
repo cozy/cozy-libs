@@ -16,8 +16,8 @@ import { getItemsByCategory } from './DocumentTypeDataHelpers'
 import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './styles.styl'
 
-const filename_extension = '.jpg'
-const id_filename_input = 'filename_input'
+const fileExtension = '.jpg'
+const idFileInput = 'filename_input'
 
 /**
  *
@@ -76,10 +76,7 @@ export class DocumentQualification extends Component {
       generated filename 
       */
       if (editFileName) {
-        onDescribed(
-          realItem ? realItem : undefined,
-          filename + filename_extension
-        )
+        onDescribed(realItem ? realItem : undefined, filename + fileExtension)
       } else {
         onDescribed(realItem ? realItem : undefined)
       }
@@ -92,7 +89,7 @@ export class DocumentQualification extends Component {
   handleFileNameChange = filename => {
     const { onFileNameChanged } = this.props
     this.setState({ filename })
-    onFileNameChanged && onFileNameChanged(filename + filename_extension)
+    onFileNameChanged && onFileNameChanged(filename + fileExtension)
   }
 
   render() {
@@ -102,10 +99,10 @@ export class DocumentQualification extends Component {
       <MuiCozyTheme>
         {editFileName && (
           <>
-            <Label htmlFor={id_filename_input}>{t('Scan.filename')}</Label>
+            <Label htmlFor={idFileInput}>{t('Scan.filename')}</Label>
             <InputGroup
               fullwidth
-              append={<span className="u-pr-1">{filename_extension}</span>}
+              append={<span className="u-pr-1">{fileExtension}</span>}
               className="u-bdrs-3"
             >
               <Input
@@ -136,7 +133,7 @@ export class DocumentQualification extends Component {
                   }
                 }}
                 inputRef={this.textInput}
-                id={id_filename_input}
+                id={idFileInput}
               />
             </InputGroup>
           </>
