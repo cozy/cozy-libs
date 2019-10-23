@@ -54,15 +54,15 @@
       },
       "CHALLENGE_ASKED": {
         "title": "Challenge required",
-        "description": "It seems that the website requires a second authentification factor that we don’t support yet. You may try to settle the issue on the [%{name}](%{link}) website before a retry."
+        "description": "The website requires a second authentification factor. You may re-run the connector manually to provide the code and continue to retrieve your data."
       },
       "LOGIN_FAILED": {
-        "title": "Bad credentials",
-        "description": "Sorry, you entered an incorrect login or password."
+        "title": "Incorrect or expired credentials",
+        "description": "Sorry, your login or password are invalid or are expired. You may check your credentials on [%{name}](%{link} website before updating."
       },
       "LOGIN_FAILED.NEEDS_SECRET": {
-        "title": "Needs secret",
-        "description": "An additional field must be filled in before checking your credentials."
+        "title": "Additional information needed",
+        "description": "An additional field must be filled in to connect your service. You may re-run the connector manually to provide the information."
       },
       "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
         "title": "Temporarily blocked",
@@ -77,7 +77,7 @@
         "description": "It seems that this account's destination folder has been deleted. Please restore it by disconnecting this account and then reconnect again."
       },
       "TERMS_VERSION_MISMATCH": {
-        "title": "Unexpected Terms Of Service version",
+        "title": "Latest Terms of Service non accepted",
         "description": "%{name} seems to have updated its Terms Of Service. Please check that the service is up to date. It this error still occurs, please contact us at <a href=\"mailto:contact@cozycloud.cc\">contact@cozycloud.cc</a>."
       },
       "UNKNOWN_ERROR": {
@@ -85,12 +85,12 @@
         "description": "An unknown error has occurred."
       },
       "USER_ACTION_NEEDED": {
-        "title": "Action needed on the provider",
-        "description": "It seems that the [%{name}](%{link}) website requires you to log in and to do a specific action. Please rerun the connector once you have settled the issue on the website."
+        "title": "Action needed on the provider's website",
+        "description": "It seems that the [%{name}](%{link}) website requires you to log in and to complete a specific action. Please re-run the connector once you have settled the issue on the website."
       },
       "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
-        "title": "Access refresh required",
-        "description": "The [%{name}](%{link}) service requires you to allow your access again. Please disconnect and reconnect your account %{name} to this application. No data will be lost."
+        "title": "Access renewal required",
+        "description": "The [%{name}](%{link}) service requires you to renew your authentication. Please disconnect and reconnect your account %{name} to this application. No data will be lost."
       },
       "USER_ACTION_NEEDED.ACCOUNT_REMOVED": {
         "title": "Unavailable account",
@@ -101,23 +101,23 @@
         "description": "It seems that the [%{name}](%{link}) website requires you to log in and update your password. Please rerun the connector once you have settled the issue on the website."
       },
       "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
-        "title": "New permissions validation needed",
+        "title": "New permissions needed",
         "description": "You connector was updated and the permissions changed. Please validate them before launching the connector again."
       },
       "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
-        "title": "Relaunch the connexion to the service to fetch your data",
+        "title": "Authentication renewal required",
         "description": "The last connexion to the service failed; please launch it again. You may have to provide a validation code."
       },
       "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
-        "title": "Wrong two-factore code provided",
-        "description": "The two-factor code provided is wrong, please start again."
+        "title": "Incorrect strong authentication code",
+        "description": "The second-factor code provided is incorrect, please start again."
       },
       "VENDOR_DOWN": {
         "title": "Unavailable service",
         "description": "It seems that the [%{name}](%{link}) service is unavailable at the moment. Please rerun the connector later."
       },
       "VENDOR_DOWN.BANK_DOWN": {
-        "title": "Unavailable website",
+        "title": "Unavailable bank website",
         "description": "It seems that the [%{name}](%{link}) website is unavailable at the moment. Please rerun the connector later."
       },
       "VENDOR_DOWN.LINXO_DOWN": {
@@ -160,7 +160,7 @@
       "label": "Phone number"
     },
     "two_fa_code": {
-      "label": "Two factor code"
+      "label": "Strong authentication code"
     }
   },
   "folder": {
