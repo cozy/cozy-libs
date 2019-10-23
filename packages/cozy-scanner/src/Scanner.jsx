@@ -10,11 +10,20 @@ export const SCANNER_IDLE = 'idle'
 export const SCANNER_DONE = 'done'
 export const SCANNER_UPLOADING = 'uploading'
 /**
- * LoadingScreen is used to create a better transition between
- * the native camera and the Qualification Modale.
  *
- * This Overlay has to be in a Modal since the menu item can be
- * closed
+ * Scanner component provides a render props with mainly a
+ * `startScanner` action that opens the native camera to take
+ * a photo and handle the call to the success or the faillure
+ * of this action.
+ *
+ * If the previous action is successfull then the component will
+ * display our ModalScannerQualification to describre the taken
+ * document
+ *
+ * A LoadingScreen is used to create a better transition between
+ * the native camera and the ModalScannerQualification since we
+ * have a delay caused by the fact the camera is writting the
+ * file on the FS.
  *
  */
 class Scanner extends React.Component {
