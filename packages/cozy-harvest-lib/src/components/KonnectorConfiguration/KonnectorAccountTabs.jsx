@@ -44,7 +44,9 @@ const KonnectorAccountTabs = ({
   client,
   t
 }) => {
-  const maintenanceStatus = useMaintenanceStatus(client, konnector.slug)
+  const {
+    data: { isInMaintenance, messages: maintenanceMessages }
+  } = useMaintenanceStatus(client, konnector.slug)
   const { pushHistory } = useContext(MountPointContext)
 
   return (
@@ -64,9 +66,6 @@ const KonnectorAccountTabs = ({
           hasError &&
           !hasLoginError &&
           !isTermsVersionMismatchErrorWithVersionAvailable
-
-        const isInMaintenance = maintenanceStatus.isInMaintenance
-        const maintenanceMessages = maintenanceStatus.messages
 
         return (
           <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>

@@ -24,10 +24,10 @@ import { MountPointContext } from './MountPointContext'
 const NewAccountModal = ({ konnector, client, t }) => {
   const { pushHistory } = useContext(MountPointContext)
   const {
-    isMaintenanceLoaded,
-    isInMaintenance,
-    messages: maintenanceMessages
+    fetchStatus,
+    data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector.slug)
+  const isMaintenanceLoaded = fetchStatus === 'loaded'
 
   return (
     <>
