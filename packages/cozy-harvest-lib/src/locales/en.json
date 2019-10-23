@@ -58,7 +58,7 @@
       },
       "LOGIN_FAILED": {
         "title": "Incorrect or expired credentials",
-        "description": "Sorry, your login or password are invalid or are expired. You may check your credentials on [%{name}](%{link} website before updating."
+        "description": "Sorry, your login or password are invalid or are expired. You may check your credentials on [%{name}](%{link}) website before updating."
       },
       "LOGIN_FAILED.NEEDS_SECRET": {
         "title": "Additional information needed",
