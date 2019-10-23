@@ -21,12 +21,12 @@ const idFileInput = 'filename_input'
 
 /**
  *
- * This screen is used to qualify a document ie:
- *  Selecting a metadata category etc
- *  Renaming the file
+ * Used to describe a document ie:
+ *  - Selecting a metadata category etc
+ *  - Renaming the file
  *
- * When a selection is done, we call a callback from
- * its parent
+ * When a selection is done,
+ * `props.onDescribed` is called with the selected item
  *
  */
 export class DocumentQualification extends Component {
@@ -55,7 +55,7 @@ export class DocumentQualification extends Component {
   }
 
   onSelect = item => {
-    const { t, editFileName } = this.props
+    const { t, allowEditFileName } = this.props
     const { hasUserWrittenFileName } = this.state
     let filename = null
     if (!hasUserWrittenFileName) {
@@ -72,10 +72,10 @@ export class DocumentQualification extends Component {
       /* ATM, we only accept JPG extension from the scanner. So 
       we hardcode the filename extension here. 
 
-      If we can't editFileName, then we don't need to use the 
+      If we can't edit file name, then we don't need to use the 
       generated filename 
       */
-      if (editFileName) {
+      if (allowEditFileName) {
         onDescribed(realItem ? realItem : undefined, filename + fileExtension)
       } else {
         onDescribed(realItem ? realItem : undefined)
@@ -93,11 +93,11 @@ export class DocumentQualification extends Component {
   }
 
   render() {
-    const { t, title, editFileName } = this.props
+    const { t, title, allowEditFileName } = this.props
     const { selected, filename, hasUserWrittenFileName } = this.state
     return (
       <MuiCozyTheme>
-        {editFileName && (
+        {allowEditFileName && (
           <>
             <Label htmlFor={idFileInput}>{t('Scan.filename')}</Label>
             <InputGroup
@@ -184,12 +184,11 @@ export class DocumentQualification extends Component {
 }
 
 DocumentQualification.defaultProps = {
-  editFileName: false
+  allowEditFileName: false
 }
 DocumentQualification.propTypes = {
-  /**
-   * This callback is called after a qualification
-   *
+  /** This callback is called after a qualification with
+   * the selected item
    */
   onDescribed: PropTypes.func,
   onFileNameChanged: PropTypes.func,
@@ -198,6 +197,7 @@ DocumentQualification.propTypes = {
     itemId: PropTypes.string,
     categoryLabel: PropTypes.string
   }),
-  editFileName: PropTypes.bool
+  /** define is the user can edit the filename */
+  allowEditFileName: PropTypes.bool
 }
 export default translate()(DocumentQualification)

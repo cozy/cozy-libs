@@ -23,7 +23,7 @@ describe('DocumentQualification', () => {
     const { queryByText, getByText, asFragment, getByLabelText } = render(
       <MuiCozyTheme>
         <DocumentQualification
-          editFileName={true}
+          allowEditFileName={true}
           onDescribed={onDescribed}
           onFileNameChanged={onFileNameChanged}
           title={'Edit'}

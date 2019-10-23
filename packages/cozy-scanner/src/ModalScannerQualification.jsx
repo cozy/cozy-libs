@@ -69,7 +69,7 @@ class ModalScannerQualification extends Component {
             onFileNameChanged={filename => {
               this.setState({ filename })
             }}
-            editFileName={true}
+            allowEditFileName={true}
             title={t('Scan.qualify')}
           />
         }
