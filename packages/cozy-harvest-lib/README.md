@@ -2,10 +2,14 @@
 
 # Goal
 
-Cozy-Harvest-Lib is responsible for the logic and components used in harvest applications.
+Cozy-Harvest-Lib is responsible for the logic and components used in Cozy applications dealing with konnector accounts configuration.
 
-Harvest applications will be apps which will allow to configure konnectors, setup authentification informations and check for synchronized data (And much more in the future).
-Each harvest application will be associated with only one konnector.
+With Harvest components, an app is able to:
+
+- configure konnectors
+- setup authentification informations
+- check for synchronized data
+- ..and much more in the future
 
 # Current version
 
