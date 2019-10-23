@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.11.0...cozy-harvest-lib@1.12.0) (2019-10-23)
+
+
+### Bug Fixes
+
+* Faulty element structure (messed up conflict resolution) ([2f44724](https://github.com/cozy/cozy-libs/commit/2f44724))
+* Properly align buttons ([1dc04f8](https://github.com/cozy/cozy-libs/commit/1dc04f8))
+* Switch back to normal modal style ([eae13b5](https://github.com/cozy/cozy-libs/commit/eae13b5))
+
+
+### Features
+
+* Upgrade cozy-ui ([5d6545f](https://github.com/cozy/cozy-libs/commit/5d6545f))
+
+
+
+
+
 # [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.10.5...cozy-harvest-lib@1.11.0) (2019-10-22)
 
 

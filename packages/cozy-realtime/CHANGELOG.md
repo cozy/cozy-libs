@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.2.2 (2019-10-23)
+
+
+### Bug Fixes
+
+* Make account selection control larger ([74abddc](https://github.com/cozy/cozy-libs/commit/74abddc))
+* Use cozy-minilog to fix octal ([8ac3248](https://github.com/cozy/cozy-libs/commit/8ac3248))
+
+
+
+
+
 ## [3.2.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.2.0...cozy-realtime@3.2.1) (2019-09-13)
 
 **Note:** Version bump only for package cozy-realtime

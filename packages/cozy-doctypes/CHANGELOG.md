@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.67.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.66.1...cozy-doctypes@1.67.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* Make account selection control larger ([74abddc](https://github.com/cozy/cozy-libs/commit/74abddc))
+* **doctypes:** Better test error ([163b233](https://github.com/cozy/cozy-libs/commit/163b233))
+
+
+
+
+
 # [1.67.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.66.2...cozy-doctypes@1.67.0) (2019-09-23)
 
 
