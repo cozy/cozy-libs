@@ -17,19 +17,36 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import { TWO_FA_MISMATCH_EVENT } from '../models/KonnectorJob'
+import {
+  TWO_FA_MISMATCH_EVENT,
+  TWO_FA_REQUEST_EVENT
+} from '../models/KonnectorJob'
+
+// Remove when https://github.com/cozy/cozy-ui/pull/1215 is fixed
+const empty = {
+  toString: () => ''
+}
 
 export class TwoFAModal extends PureComponent {
   constructor(props) {
     super(props)
-    this.state = { twoFACode: '' }
+    this.state = { twoFACode: empty, requestNb: 1 }
     this.handleChange = this.handleChange.bind(this)
+    this.handleTwoFARequest = this.handleTwoFARequest.bind(this)
     this.handleTwoFAMismatch = this.handleTwoFAMismatch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.props.konnectorJob.on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+    this.props.konnectorJob
+      .on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+      .on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+  }
+
+  handleTwoFARequest() {
+    // When the konnector ask for a two fa a second time, we need
+    // to reset the field
+    this.setState({ twoFACode: empty, requestNb: this.state.requestNb + 1 })
   }
 
   handleChange(e) {
@@ -57,7 +74,7 @@ export class TwoFAModal extends PureComponent {
       account
     } = this.props
     const { isMobile } = breakpoints
-    const { twoFACode } = this.state
+    const { twoFACode, requestNb } = this.state
 
     const twoFAProvider = accounts.getTwoFACodeProvider(account)
     const hasErrored = konnectorJob.isTwoFARetry()
@@ -98,7 +115,10 @@ export class TwoFAModal extends PureComponent {
                 value={twoFACode}
                 onChange={this.handleChange}
                 autoComplete="off"
-                label={t('twoFAForm.code.label')}
+                label={
+                  t('twoFAForm.code.label') +
+                  (requestNb > 1 ? ` (${requestNb})` : '')
+                }
                 size="medium"
                 error={hasErrored}
                 fullwidth

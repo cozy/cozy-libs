@@ -1,7 +1,7 @@
 import MicroEE from 'microee'
 
 import * as accounts from '../helpers/accounts'
-import CozyRealtime from 'cozy-realtime'
+import Realtime from 'cozy-realtime'
 
 import { updateAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
 import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
@@ -72,7 +72,7 @@ export class KonnectorJob {
     this.isTwoFARunning = this.isTwoFARunning.bind(this)
     this.isTwoFARetry = this.isTwoFARetry.bind(this)
 
-    this.realtime = new CozyRealtime({ client })
+    this.realtime = new Realtime({ client })
     this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
   }
 
@@ -104,13 +104,15 @@ export class KonnectorJob {
     return this.trigger.message.konnector
   }
 
-  // TODO: Pass updated account as parameter
-  handleTwoFA(state) {
-    const hasChanged = this.account.state !== state
-    if (!hasChanged) return
+  handleTwoFA(prevAccount) {
+    const account = this.account
 
-    this.account.state = state
+    const prevState = prevAccount && prevAccount.state
+    const state = account.state
 
+    if (prevState === state) {
+      return
+    }
     if (accounts.isTwoFANeeded(state)) {
       this.setStatus(TWO_FA_REQUEST)
       this.emit(TWO_FA_REQUEST_EVENT, this.account)
@@ -142,7 +144,7 @@ export class KonnectorJob {
   }
 
   /**
-   * Send Two FA Code, i.e. save it into account
+   * "Sends" 2FA Code, saves it into account
    */
   async sendTwoFACode(code) {
     this.setStatus(RUNNING_TWOFA)
@@ -168,10 +170,16 @@ export class KonnectorJob {
 
   handleAccountUpdated(account) {
     const prevAccount = this.account
-    this.account = account
+
+    // _type is not present in objects from realtime but we have to keep
+    // it to be compatible with cozy-client's methods
+    this.account = {
+      _type: prevAccount._type,
+      ...account
+    }
     const { state } = this.account
     if (accounts.isTwoFANeeded(state) || accounts.isTwoFARetry(state)) {
-      this.handleTwoFA(state)
+      this.handleTwoFA(prevAccount)
     } else if (accounts.isLoginSuccessHandled(state)) {
       this.handleLoginSuccessHandled()
     } else if (accounts.isLoginSuccess(state)) {
@@ -180,16 +188,16 @@ export class KonnectorJob {
   }
 
   /**
-   * Launch the job and set up everything to follow execution.
+   * Launches the job and sets everything up to follow execution.
    */
   async launch() {
     this.setStatus(PENDING)
 
     this.account = await prepareTriggerAccount(this.client, this.trigger)
 
-    this.jobWatcher = watchKonnectorJob(
-      await launchTrigger(this.client, this.trigger)
-    )
+    const job = await launchTrigger(this.client, this.trigger)
+    this.jobWatcher = watchKonnectorJob(this.client, job)
+
     // Temporary reEmitting until merging of KonnectorJobWatcher and
     // KonnectorAccountWatcher into KonnectorJob
     this.jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
