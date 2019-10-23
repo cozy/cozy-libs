@@ -8,8 +8,8 @@ export { SCANNER_DONE, SCANNER_UPLOADING } from './Scanner'
 import { default as EditDocumentQualificationDefault } from './EditDocumentQualification'
 const EditDocumentQualification = withLocales(EditDocumentQualificationDefault)
 
-import { default as ScannerQualificationDefault } from './ScannerQualification'
-const ScannerQualification = withLocales(ScannerQualificationDefault)
-export { Scanner, EditDocumentQualification, ScannerQualification }
+import { default as ModalScannerQualificationDefault } from './ModalScannerQualification'
+const ModalScannerQualification = withLocales(ModalScannerQualificationDefault)
+export { Scanner, EditDocumentQualification, ModalScannerQualification }
 
 export { getBoundT } from './locales'
