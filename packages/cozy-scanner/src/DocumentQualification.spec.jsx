@@ -1,4 +1,5 @@
 import React from 'react'
+const MockDate = require('mockdate')
 import { render, fireEvent } from '@testing-library/react'
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
@@ -6,24 +7,17 @@ jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
 import { DocumentQualification } from './DocumentQualification'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
-const mockDate = () => {
-  const DATE_TO_USE = new Date('2019')
-  const _Date = Date
-  global.Date = jest.fn(() => DATE_TO_USE)
-  global.Date.UTC = _Date.UTC
-  global.Date.parse = _Date.parse
-  global.Date.now = _Date.now
-}
+const MOCKED_DATE = '2019-01-01'
 
-const unMockDate = () => {
-  global.Date = new Date()
-  global.Date.UTC = Date.UTC
-  global.Date.parse = Date.parse
-  global.Date.now = Date.now
-}
 describe('DocumentQualification', () => {
+  beforeAll(() => {
+    MockDate.set(MOCKED_DATE)
+  })
+
+  afterAll(() => {
+    MockDate.reset()
+  })
   it('Inital render + selection + filename', () => {
-    mockDate()
     const onDescribed = jest.fn()
     const onFileNameChanged = jest.fn()
     const { queryByText, getByText, asFragment, getByLabelText } = render(
@@ -79,7 +73,5 @@ describe('DocumentQualification', () => {
     fireEvent.click(familyItemNode)
     fireEvent.click(queryByText('Scan.items.birth_certificate'))
     expect(inputFileName.value).toBe('Manual name')
-
-    unMockDate()
   })
 })
