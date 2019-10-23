@@ -33,8 +33,16 @@ export const launchTrigger = async (client, trigger) => {
 }
 
 export const prepareTriggerAccount = async (client, trigger) => {
-  const account = await findAccount(client, triggers.getAccountId(trigger))
-  if (!account) throw new Error('Trigger has no account')
+  const accountId = triggers.getAccountId(trigger)
+  if (!accountId) {
+    throw new Error('No account id in the trigger')
+  }
+  const account = await findAccount(client, accountId)
+  if (!account) {
+    throw new Error(
+      `Could not find account ${accountId} for trigger ${trigger._id}`
+    )
+  }
   return updateAccount(client, accounts.resetState(account))
 }
 
