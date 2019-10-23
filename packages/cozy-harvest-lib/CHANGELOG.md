@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.12.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.12.0...cozy-harvest-lib@1.12.1) (2019-10-23)
+
+
+### Bug Fixes
+
+* Delay maintenance information ([75cc502](https://github.com/cozy/cozy-libs/commit/75cc502))
+
+
+
+
+
 # [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.11.0...cozy-harvest-lib@1.12.0) (2019-10-23)
 
 
