@@ -16,7 +16,7 @@ To use the component and get the style, you need to import the css in your app
 import "cozy-scanner/dist/stylesheet.css";
 ```
 
-Since Cozy-Scanner uses a few `Aleter` you also have to put `<Alerter />` (from Cozy-UI)
+Since Cozy-Scanner uses a few `Alerter` you also have to put `<Alerter />` (from Cozy-UI)
 somewhere in your React Tree.
 
 ### Translation
