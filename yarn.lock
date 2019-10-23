@@ -4619,10 +4619,10 @@ cozy-doctypes@1.67.0:
     lodash "4.17.15"
     prop-types "^15.7.2"
 
-cozy-keys-lib@1.9.6:
-  version "1.9.6"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.9.6.tgz#9e286667aae2c7fc3b672130cc035d54537625eb"
-  integrity sha512-m09pfyntYET7Ii4OaA4FjAjnIZq0RaIkWtUOGAKdGsETsIKieF8uNLdd/TRy26RG5TvUiO6mBP0o+bS23A9S7A==
+cozy-keys-lib@1.10.0:
+  version "1.10.0"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-1.10.0.tgz#1fadf7df78fe4a1d5a77a4741b7b24ac1e0fb2e4"
+  integrity sha512-wn0xYDRqNaBOR86sqdqgcLLCRUxSa7312qx9uJSTARA0aKhYPUBfGm5MfIkKzHUyxnArId2nm/VLVq7HWd5drg==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
