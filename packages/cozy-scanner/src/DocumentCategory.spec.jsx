@@ -38,7 +38,7 @@ describe('DocumentCategory', () => {
     fireEvent.click(getByText('Scan.items.test'))
     expect(asFragment()).toMatchSnapshot()
     //Check if the second item is displayed in the ActionMenu
-    expect(getByText('Scan.items.Label2'))
+    expect(() => getByText('Scan.items.Label2')).not.toThrow()
     fireEvent.click(getByText('Scan.items.Label2'))
     //Menu should not be there anymore
     expect(queryByText('Scan.items.Label2')).toBeNull()
