@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`DocumentQualification Inital render + selection + filename 1`] = `
+exports[`DocumentQualification Initial render + selection + filename 1`] = `
 <DocumentFragment>
   <label
     class="styles__c-label___o4ozG styles__c-label--block___2ZV_7"
@@ -451,7 +451,7 @@ exports[`DocumentQualification Inital render + selection + filename 1`] = `
 </DocumentFragment>
 `;
 
-exports[`DocumentQualification Inital render + selection + filename 2`] = `
+exports[`DocumentQualification Initial render + selection + filename 2`] = `
 <DocumentFragment>
   <label
     class="styles__c-label___o4ozG styles__c-label--block___2ZV_7"
