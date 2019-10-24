@@ -46,22 +46,22 @@ import CozyRealtime from 'cozy-realtime'
 const realtime = new CozyRealtime({ client: cozyClient })
 const type = 'io.cozy.accounts'
 const id = 'document_id'
-const handlerCreate = accounts => {
+const handleCreate = accounts => {
   console.log(`A new 'io.cozy.accounts' is created with id '${accounts._id}'.`)
 }
-const handlerUpdate = accounts => {
+const handleUpdate = accounts => {
   console.log(`An account is updated with id '${accounts._id}'.`)
 }
 
 // To subscribe
-await realtime.subscribe('created', type, handlerCreate)
-await realtime.subscribe('updated', type, handlerUpdate)
-await realtime.subscribe('updated', type, id, handlerUpdate)
+await realtime.subscribe('created', type, handleCreate)
+await realtime.subscribe('updated', type, handleCreate)
+await realtime.subscribe('updated', type, id, handleUpdate)
 
 // To unsubscribe
-await realtime.unsubscribe('created', type, handlerCreate)
-await realtime.unsubscribe('updated', type, handlerCreate)
-await realtime.unsubscribe('updated', type, id, handlerCreate)
+await realtime.unsubscribe('created', type, handleCreate)
+await realtime.unsubscribe('updated', type, handleCreate)
+await realtime.unsubscribe('updated', type, id, handleCreate)
 
 // To unsubscribe all
 await realtime.unsubscribeAll()
