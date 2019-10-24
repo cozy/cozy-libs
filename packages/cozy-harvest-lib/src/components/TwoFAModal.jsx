@@ -43,6 +43,12 @@ export class TwoFAModal extends PureComponent {
       .on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
   }
 
+  componentWillUnmount() {
+    this.props.konnectorJob
+      .removeListener(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+      .removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+  }
+
   handleTwoFARequest() {
     // When the konnector ask for a two fa a second time, we need
     // to reset the field
