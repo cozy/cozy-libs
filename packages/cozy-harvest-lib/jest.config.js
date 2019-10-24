@@ -4,6 +4,7 @@ module.exports = {
     '!**/node_modules/**',
     '!**/vendor/**'
   ],
+  testPathIgnorePatterns: ['node_modules', 'dist'],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],
