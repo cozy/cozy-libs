@@ -6,6 +6,9 @@ import { Modal } from 'cozy-ui/transpiled/react'
 
 import ModalScannerQualification from './ModalScannerQualification'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
+
+import { doUpload } from './ScannerUpload'
+
 export const SCANNER_IDLE = 'idle'
 export const SCANNER_DONE = 'done'
 export const SCANNER_UPLOADING = 'uploading'
@@ -41,7 +44,6 @@ class Scanner extends React.Component {
   }
 
   /**
-   *
    * @param {String} imageURI native path to the file (file:///var....)
    */
   onSuccess = async imageURI => {
@@ -52,71 +54,37 @@ class Scanner extends React.Component {
       imageURI
     })
   }
+  /**
+   * @param {String} message
+   */
+  onFail = message => {
+    this.setState({ loadingScreen: false })
+    console.log('failed', message) //eslint-disable-line no-console
+  }
 
   onUpload = async (imageURI, qualification, filename = '') => {
     const { generateName } = this.props
     const name = filename === '' ? generateName() : filename
     this.setState({ status: SCANNER_UPLOADING, filename: name })
     const { dirId, onConflict, onBeforeUpload, onFinish } = this.props
-    const onResolvedLocalFS = async fileEntry => {
-      fileEntry.file(
-        file => {
-          const reader = new FileReader()
-          reader.onloadend = async () => {
-            //we get the result of the readAsBuffer in the `result` attr
-            try {
-              if (onBeforeUpload) onBeforeUpload()
-              const newFile = await CozyFile.uploadFileWithConflictStrategy(
-                name,
-                reader.result,
-                dirId,
-                onConflict,
-                qualification
-              )
-              //It's possible that the filename as changed, so let's update it
-              if (onConflict === 'rename') {
-                this.setState({ filename: newFile.data.name })
-              }
-
-              if (onFinish) onFinish()
-            } catch (error) {
-              this.setState({ error })
-            } finally {
-              this.setState({ status: SCANNER_DONE })
-            }
-          }
-          // Read the file as an ArrayBuffer
-          reader.readAsArrayBuffer(file)
-        },
-        err => {
-          this.setState({ error: err })
-          this.setState({ status: SCANNER_DONE })
-          //Since this module is pretty recent, let's have this info in sentry if needed
-          console.error('error getting fileentry file!' + err) //eslint-disable-line no-console
-        }
+    if (onBeforeUpload) onBeforeUpload()
+    try {
+      const { data: uploadedFile } = await doUpload(
+        imageURI,
+        qualification,
+        name,
+        dirId,
+        onConflict
       )
-    }
-
-    const onError = error => {
+      this.setState({ filename: uploadedFile.name })
+      if (onFinish) onFinish()
+    } catch (error) {
       this.setState({ error })
+    } finally {
       this.setState({ status: SCANNER_DONE })
     }
-    /**
-     * file:/// can not be converted to a fileEntry without the Cordova's File plugin.
-     * `resolveLocalFileSystemURL` is provided by this plugin and can resolve the native
-     * path to a fileEntry readable by a `FileReader`
-     *
-     * When we finished to read the fileEntry as buffer, we start the upload process
-     *
-     */
-
-    window.resolveLocalFileSystemURL(imageURI, onResolvedLocalFS, onError)
   }
 
-  onFail = message => {
-    this.setState({ loadingScreen: false })
-    console.log('failed', message) //eslint-disable-line no-console
-  }
   startScanner = () => {
     try {
       this.setState({ loadingScreen: true })
