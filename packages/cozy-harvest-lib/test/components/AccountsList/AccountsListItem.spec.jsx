@@ -15,7 +15,7 @@ describe('AccountsListItem', () => {
           vendor_link: 'test konnector link'
         }}
         onClick={jest.fn()}
-        trigger={jest.fn()}
+        trigger={{}}
       />
     )
     const component = wrapper.shallow()
@@ -34,7 +34,7 @@ describe('AccountsListItem', () => {
           vendor_link: 'test konnector link'
         }}
         onClick={jest.fn()}
-        trigger={jest.fn()}
+        trigger={{}}
       />
     )
     const component = wrapper.shallow()

@@ -85,7 +85,6 @@ export class TwoFAModal extends PureComponent {
     }
 
     const isJobRunning = konnectorJob.isTwoFARunning()
-
     return (
       <Modal
         dismissAction={dismissAction}

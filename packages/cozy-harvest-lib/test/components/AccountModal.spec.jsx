@@ -25,9 +25,23 @@ const accountsMock = [
 const accountIdMock = '123'
 
 describe('AccountModal', () => {
+  const setup = ({ findAccount }) => {
+    const mockHistoryPush = jest.fn()
+    const component = shallow(
+      <AccountModal
+        konnector={{}}
+        t={x => x}
+        accountId={accountIdMock}
+        accounts={accountsMock}
+        findAccount={findAccount}
+        pushHistory={mockHistoryPush}
+      />
+    )
+    return { component, mockHistoryPush }
+  }
   it('should display the fetching state by default', () => {
-    const component = shallow(<AccountModal />).getElement()
-    expect(component).toMatchSnapshot()
+    const { component } = setup({ findAccount: jest.fn() })
+    expect(component.getElement()).toMatchSnapshot()
   })
 
   describe('with an account', () => {
@@ -35,16 +49,7 @@ describe('AccountModal', () => {
       _id: '123',
       name: 'account 1'
     })
-    const mockHistoryPush = jest.fn()
-    const component = shallow(
-      <AccountModal
-        accountId={accountIdMock}
-        accounts={accountsMock}
-        findAccount={findAccount}
-        pushHistory={mockHistoryPush}
-      />
-    )
-
+    const { component, mockHistoryPush } = setup({ findAccount })
     it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
       await component.instance().componentDidMount()
       expect(component.getElement()).toMatchSnapshot()
