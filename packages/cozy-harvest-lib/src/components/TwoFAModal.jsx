@@ -22,15 +22,14 @@ import {
   TWO_FA_REQUEST_EVENT
 } from '../models/KonnectorJob'
 
-// Remove when https://github.com/cozy/cozy-ui/pull/1215 is fixed
-const empty = {
-  toString: () => ''
-}
-
+/**
+ * Displayed during connection creation when the konnector detects
+ * a two fa request by the vendor.
+ */
 export class TwoFAModal extends PureComponent {
   constructor(props) {
     super(props)
-    this.state = { twoFACode: empty, requestNb: 1 }
+    this.state = { twoFACode: '', requestNb: 1 }
     this.handleChange = this.handleChange.bind(this)
     this.handleTwoFARequest = this.handleTwoFARequest.bind(this)
     this.handleTwoFAMismatch = this.handleTwoFAMismatch.bind(this)
@@ -52,7 +51,7 @@ export class TwoFAModal extends PureComponent {
   handleTwoFARequest() {
     // When the konnector ask for a two fa a second time, we need
     // to reset the field
-    this.setState({ twoFACode: empty, requestNb: this.state.requestNb + 1 })
+    this.setState({ twoFACode: '', requestNb: this.state.requestNb + 1 })
   }
 
   handleChange(e) {
