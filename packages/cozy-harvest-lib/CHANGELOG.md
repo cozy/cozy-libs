@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.12.3...cozy-harvest-lib@1.13.0) (2019-10-25)
+
+
+### Bug Fixes
+
+* Remove KonnectorJob listeners on unmount ([7862d8e](https://github.com/cozy/cozy-libs/commit/7862d8e))
+* With UI update, no need for empty value hack ([02d5674](https://github.com/cozy/cozy-libs/commit/02d5674))
+
+
+### Features
+
+* Better error for prepareTriggerAccount ([bd62fad](https://github.com/cozy/cozy-libs/commit/bd62fad))
+* Handle double otp ([dcb92da](https://github.com/cozy/cozy-libs/commit/dcb92da))
+
+
+
+
+
 ## [1.12.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.12.2...cozy-harvest-lib@1.12.3) (2019-10-23)
 
 
