@@ -31,7 +31,9 @@ describe('KonnectorModal', () => {
     }
     shallowOptions = {
       context: {
-        client: {}
+        client: {
+          stackClient: {}
+        }
       }
     }
   })

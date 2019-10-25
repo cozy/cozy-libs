@@ -1,29 +1,33 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { TwoFAModal } from './TwoFAModal'
+import KonnectorJob from '../models/KonnectorJob'
 
 jest.mock('./KonnectorIcon', () => () => null)
 
 describe('TwoFAModal', () => {
   const setup = ({ konnectorSlug, account }) => {
-    const konnJob = {
-      isTwoFARetry: jest.fn(),
-      getKonnectorSlug: () => konnectorSlug,
-      on: jest.fn(),
-      isTwoFARunning: jest.fn()
+    const client = {
+      on: jest.fn()
     }
-    const client = {}
+    const trigger = {}
+    const konnectorJob = new KonnectorJob(client, trigger)
+
+    konnectorJob.isTwoFARetry = jest.fn()
+    konnectorJob.getKonnectorSlug = () => konnectorSlug
+    konnectorJob.isTwoFARunning = jest.fn()
+
     const root = mount(
       <TwoFAModal
         dismissAction={jest.fn()}
-        konnectorJob={konnJob}
+        konnectorJob={konnectorJob}
         t={x => x}
         breakpoints={{ isMobile: true }}
         account={account}
         client={client}
       />
     )
-    return { root }
+    return { root, konnectorJob }
   }
 
   it('should work even with unknown 2FA', () => {
@@ -51,5 +55,31 @@ describe('TwoFAModal', () => {
     // no input for app two fa
     expect(root.find('input').length).toBe(0)
     expect(root.text()).toContain('twoFAForm.desc')
+  })
+
+  it('should work for several two fa requests', () => {
+    const opts = {
+      account: {
+        state: 'TWO_FA_NEEDED.SMS'
+      },
+      konnectorSlug: 'boursoma83'
+    }
+    const { root, konnectorJob } = setup(opts)
+    const inp = root.find('input')
+    const getInputValue = () =>
+      root
+        .find('input')
+        .props()
+        .value.toString()
+    expect(inp.length).toBe(1)
+    expect(getInputValue()).toBe('')
+    expect(root.text()).toContain('twoFAForm.desc')
+    root.setState({ twoFACode: 'abcd' })
+    root.update()
+    expect(getInputValue()).toBe('abcd')
+    konnectorJob.emit('twoFARequest')
+    root.update()
+    expect(getInputValue()).toBe('')
+    expect(root.text()).toContain('(2)')
   })
 })

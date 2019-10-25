@@ -2,7 +2,9 @@
 
 exports[`AccountModal should display the fetching state by default 1`] = `
 <React.Fragment>
-  <KonnectorModalHeader />
+  <KonnectorModalHeader
+    konnector={Object {}}
+  />
   <ModalContent>
     <div
       className="u-ta-center"
@@ -17,7 +19,9 @@ exports[`AccountModal should display the fetching state by default 1`] = `
 
 exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 1`] = `
 <React.Fragment>
-  <KonnectorModalHeader>
+  <KonnectorModalHeader
+    konnector={Object {}}
+  >
     <AccountSelectBox
       accountsList={
         Array [
@@ -61,6 +65,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
         }
       }
       addAccount={[Function]}
+      konnector={Object {}}
       trigger={
         Object {
           "current_state": Object {},
@@ -74,7 +79,9 @@ exports[`AccountModal with an account should display the AccountSelect & Content
 
 exports[`AccountModal with an account should display the AccountSelect & Content if an account is there and we can change the selectedAccount 2`] = `
 <React.Fragment>
-  <KonnectorModalHeader>
+  <KonnectorModalHeader
+    konnector={Object {}}
+  >
     <AccountSelectBox
       accountsList={
         Array [
@@ -118,6 +125,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
         }
       }
       addAccount={[Function]}
+      konnector={Object {}}
       trigger={
         Object {
           "id": "trigger_account2",

@@ -71,8 +71,7 @@ const {
   createAccount,
   updateAccount,
   saveAccount,
-  deleteAccount,
-  watchKonnectorAccount
+  deleteAccount
 } = accountsMutations(client)
 
 describe('Account mutations', () => {
@@ -130,7 +129,7 @@ describe('Account mutations', () => {
       )
     })
 
-    describe('if parent account does not exists', () => {
+    describe('if parent account does not exist', () => {
       beforeEach(() => {
         client.collection().get = jest.fn().mockRejectedValue({ status: 404 })
 
@@ -368,21 +367,6 @@ describe('Account mutations', () => {
       )
       expect(client.save).toHaveBeenCalledWith(fixtures.existingAccount)
       expect(account).toEqual(fixtures.existingAccount)
-    })
-  })
-
-  describe('watchAccount', () => {
-    it('should return an account watcher with correct properties', async () => {
-      const mockAccount = {
-        accountType: 'dummy',
-        auth: {}
-      }
-      const accountWatcher = await watchKonnectorAccount(mockAccount, {
-        onError: jest.fn(),
-        onLoginSuccess: jest.fn(),
-        onSuccess: jest.fn()
-      })
-      expect(accountWatcher).toMatchSnapshot()
     })
   })
 })

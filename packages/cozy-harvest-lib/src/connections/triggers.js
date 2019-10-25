@@ -1,4 +1,7 @@
-import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
+import * as triggers from '../helpers/triggers'
+import * as accounts from '../helpers/accounts'
+
+import { findAccount, updateAccount } from './accounts'
 
 const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 
@@ -24,32 +27,23 @@ const fetchTrigger = async (client, id) => {
  * @param  {Object}  Trigger to launch
  * @return {Object}  Job document
  */
-const launchTrigger = async (client, trigger) => {
+export const launchTrigger = async (client, trigger) => {
   const { data } = await client.collection(TRIGGERS_DOCTYPE).launch(trigger)
   return data
 }
 
-/**
- * This method is here to listen the jobs.
- *
- * expectedSuccessDelay: Is the time (in ms) before dispatching
- * a `LOGIN_SUCESS` event if nothing was received before this delay
- * (error, success or login success)
- *
- * It means that if the login process takes more than this time, we
- * will have a `LOGIN_SUCESS` even if it's not the case.
- *
- * @param {Object} client CozyClient
- * @param {Object} job
- *
- */
-const watchKonnectorJob = (client, job) => {
-  const jobWatcher = new KonnectorJobWatcher(client, job, {
-    expectedSuccessDelay: 8000
-  })
-  // no need to await realtime initializing here
-  jobWatcher.watch()
-  return jobWatcher
+export const prepareTriggerAccount = async (client, trigger) => {
+  const accountId = triggers.getAccountId(trigger)
+  if (!accountId) {
+    throw new Error('No account id in the trigger')
+  }
+  const account = await findAccount(client, accountId)
+  if (!account) {
+    throw new Error(
+      `Could not find account ${accountId} for trigger ${trigger._id}`
+    )
+  }
+  return updateAccount(client, accounts.resetState(account))
 }
 
 /**
@@ -61,8 +55,7 @@ export const triggersMutations = client => {
   return {
     createTrigger: createTrigger.bind(null, client),
     fetchTrigger: fetchTrigger.bind(null, client),
-    launchTrigger: launchTrigger.bind(null, client),
-    watchKonnectorJob: watchKonnectorJob.bind(null, client)
+    launchTrigger: launchTrigger.bind(null, client)
   }
 }
 

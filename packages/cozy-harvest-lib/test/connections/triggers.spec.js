@@ -1,6 +1,5 @@
 /* eslint-env jest */
 import { triggersMutations } from 'connections/triggers'
-import KonnectorJobWatcher from 'models/konnector/KonnectorJobWatcher'
 import CozyClient from 'cozy-client'
 
 const stackClient = {
@@ -15,9 +14,7 @@ client.collection = jest.fn().mockReturnValue({
   launch: jest.fn()
 })
 
-const { createTrigger, launchTrigger, watchKonnectorJob } = triggersMutations(
-  client
-)
+const { createTrigger, launchTrigger } = triggersMutations(client)
 
 const fixtures = {
   trigger: {
@@ -74,20 +71,6 @@ describe('Trigger mutations', () => {
       const result = await launchTrigger(fixtures.trigger)
       expect(client.collection().launch).toHaveBeenCalledWith(fixtures.trigger)
       expect(result).toEqual(fixtures.launchedJob)
-    })
-  })
-
-  describe('watchKonnectorJob', () => {
-    it('should return a job watcher', async () => {
-      // Lets mock a job to pass as watchKonnectorJob parameter. This job should
-      // be returned after timeout
-      const job = {
-        // Test attribute, not expected in job schema
-        state: 'queued'
-      }
-
-      const result = await watchKonnectorJob(job)
-      expect(result instanceof KonnectorJobWatcher).toBe(true)
     })
   })
 })

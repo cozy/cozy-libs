@@ -46,6 +46,7 @@ describe('KonnectorSuccess', () => {
           successButtonLabel="Fake label"
           error={null}
           onDone={() => {}}
+          onDismiss={() => {}}
           t={jest.fn(str => str)}
         />
       </CozyProvider>

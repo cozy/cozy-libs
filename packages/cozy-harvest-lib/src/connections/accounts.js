@@ -1,7 +1,6 @@
-import KonnectorAccountWatcher from '../models/konnector/KonnectorAccountWatcher'
 import merge from 'lodash/merge'
 
-const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
+export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
 
 /**
@@ -24,7 +23,7 @@ const createAccount = async (client, konnector, attributes) => {
  * @param  {string}  id     io.cozy.accounts document's id
  * @return {Object}         Retrieved account
  */
-const findAccount = async (client, id) => {
+export const findAccount = async (client, id) => {
   try {
     const { data } = await client.query(
       client.find(ACCOUNTS_DOCTYPE).where({
@@ -110,7 +109,7 @@ const createChildAccount = async (client, konnector, attributes) => {
  * @param  {Object}  account io.cozy.accounts document to update
  * @return {Object}          Updated io.cozy.accounts document
  */
-const updateAccount = async (client, account) => {
+export const updateAccount = async (client, account) => {
   try {
     const { data } = await client.save(account)
     return data
@@ -138,13 +137,6 @@ const saveAccount = (client, konnector, account = {}) => {
   return account._id
     ? updateAccount(client, account)
     : createAccount(client, konnector, account)
-}
-
-const watchKonnectorAccount = (client, account, options) => {
-  const accountWatcher = new KonnectorAccountWatcher(client, account, options)
-  // no need to await realtime initializing here
-  accountWatcher.watch()
-  return accountWatcher
 }
 
 /**
@@ -175,8 +167,7 @@ export const accountsMutations = client => ({
   findAccount: findAccount.bind(null, client),
   updateAccount: updateAccount.bind(null, client),
   deleteAccount: deleteAccount.bind(null, client),
-  saveAccount: saveAccount.bind(null, client),
-  watchKonnectorAccount: watchKonnectorAccount.bind(null, client)
+  saveAccount: saveAccount.bind(null, client)
 })
 
 export default accountsMutations

@@ -17,19 +17,41 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import { TWO_FA_MISMATCH_EVENT } from '../models/KonnectorJob'
+import {
+  TWO_FA_MISMATCH_EVENT,
+  TWO_FA_REQUEST_EVENT
+} from '../models/KonnectorJob'
 
+/**
+ * Displayed during connection creation when the konnector detects
+ * a two fa request by the vendor.
+ */
 export class TwoFAModal extends PureComponent {
   constructor(props) {
     super(props)
-    this.state = { twoFACode: '' }
+    this.state = { twoFACode: '', requestNb: 1 }
     this.handleChange = this.handleChange.bind(this)
+    this.handleTwoFARequest = this.handleTwoFARequest.bind(this)
     this.handleTwoFAMismatch = this.handleTwoFAMismatch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    this.props.konnectorJob.on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+    this.props.konnectorJob
+      .on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+      .on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+  }
+
+  componentWillUnmount() {
+    this.props.konnectorJob
+      .removeListener(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+      .removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+  }
+
+  handleTwoFARequest() {
+    // When the konnector ask for a two fa a second time, we need
+    // to reset the field
+    this.setState({ twoFACode: '', requestNb: this.state.requestNb + 1 })
   }
 
   handleChange(e) {
@@ -57,17 +79,17 @@ export class TwoFAModal extends PureComponent {
       account
     } = this.props
     const { isMobile } = breakpoints
-    const { twoFACode } = this.state
+    const { twoFACode, requestNb } = this.state
 
     const twoFAProvider = accounts.getTwoFACodeProvider(account)
     const hasErrored = konnectorJob.isTwoFARetry()
-
     const needUserInput = TWOFA_USER_INPUT[twoFAProvider]
 
     const konn = {
       slug: konnectorJob.getKonnectorSlug()
     }
 
+    const isJobRunning = konnectorJob.isTwoFARunning()
     return (
       <Modal
         dismissAction={dismissAction}
@@ -97,7 +119,10 @@ export class TwoFAModal extends PureComponent {
                 value={twoFACode}
                 onChange={this.handleChange}
                 autoComplete="off"
-                label={t('twoFAForm.code.label')}
+                label={
+                  t('twoFAForm.code.label') +
+                  (requestNb > 1 ? ` (${requestNb})` : '')
+                }
                 size="medium"
                 error={hasErrored}
                 fullwidth
@@ -108,12 +133,13 @@ export class TwoFAModal extends PureComponent {
                 {t('twoFAForm.retry')}
               </Caption>
             )}
+
             {needUserInput ? (
               <Button
                 className="u-mt-1"
                 label={t('twoFAForm.CTA')}
-                busy={konnectorJob.isTwoFARunning()}
-                disabled={konnectorJob.isTwoFARunning() || !twoFACode}
+                busy={isJobRunning}
+                disabled={isJobRunning || !twoFACode}
                 extension="full"
               />
             ) : null}

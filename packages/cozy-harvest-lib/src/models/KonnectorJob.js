@@ -1,10 +1,11 @@
 import MicroEE from 'microee'
 
-import accounts from '../helpers/accounts'
-import triggers from '../helpers/triggers'
+import * as accounts from '../helpers/accounts'
+import Realtime from 'cozy-realtime'
 
-import accountsMutations from '../connections/accounts'
-import triggersMutations from '../connections/triggers'
+import { updateAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
+import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
+import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
 
 // events
 export const ERROR_EVENT = 'error'
@@ -23,16 +24,29 @@ export const RUNNING_TWOFA = 'RUNNING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 
-// helpers
-export const prepareTriggerAccount = async (trigger, accountsMutations) => {
-  const { findAccount, updateAccount } = accountsMutations
-  const account = await findAccount(triggers.getAccountId(trigger))
-  if (!account) throw new Error('Trigger has no account')
-  return await updateAccount(accounts.resetState(account))
+export const watchKonnectorJob = (client, job) => {
+  const jobWatcher = new KonnectorJobWatcher(client, job, {
+    expectedSuccessDelay: 80000
+  })
+  // no need to await realtime initializing here
+  jobWatcher.watch()
+  return jobWatcher
 }
+
 /**
- * KonnectorJob goals is to listen the changes in Jobs & Accounts and dispatch the events to Harvest.
- * This should be the go to source of truth for the State of a Konnector Job.
+ * Event hub to launch and follow a konnector job.
+ *
+ * - Creates the job for a trigger
+ * - Listens to changes on
+ *   - the created job
+ *   - the account linked to the trigger
+ *
+ * Transforms low-level events happening on the documents to higher-level events
+ * closer to business logic.
+ *
+ * TODO: Merge KonnectorJobWatcher here
+ *
+ * This should be the go to source of truth for the state of a Konnector Job.
  */
 export class KonnectorJob {
   constructor(client, trigger) {
@@ -40,9 +54,6 @@ export class KonnectorJob {
     this.trigger = trigger
     this.account = null
     this.unsubscribeAllRealtime = null
-
-    this.accountsMutations = accountsMutations(this.client)
-    this.triggersMutations = triggersMutations(this.client)
 
     // Bind methods used as callbacks
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
@@ -60,6 +71,9 @@ export class KonnectorJob {
     this.isRunning = this.isRunning.bind(this)
     this.isTwoFARunning = this.isTwoFARunning.bind(this)
     this.isTwoFARetry = this.isTwoFARetry.bind(this)
+
+    this.realtime = new Realtime({ client })
+    this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
   }
 
   setStatus(status) {
@@ -90,13 +104,15 @@ export class KonnectorJob {
     return this.trigger.message.konnector
   }
 
-  // TODO: Pass updated account as parameter
-  handleTwoFA(state) {
-    const hasChanged = this.account.state !== state
-    if (!hasChanged) return
+  handleTwoFA(prevAccount) {
+    const account = this.account
 
-    this.account.state = state
+    const prevState = prevAccount && prevAccount.state
+    const state = account.state
 
+    if (prevState === state) {
+      return
+    }
     if (accounts.isTwoFANeeded(state)) {
       this.setStatus(TWO_FA_REQUEST)
       this.emit(TWO_FA_REQUEST_EVENT, this.account)
@@ -128,13 +144,15 @@ export class KonnectorJob {
   }
 
   /**
-   * Send Two FA Code, i.e. save it into account
+   * "Sends" 2FA Code, saves it into account
    */
   async sendTwoFACode(code) {
     this.setStatus(RUNNING_TWOFA)
-    const { updateAccount } = this.accountsMutations
     try {
-      await updateAccount(accounts.updateTwoFaCode(this.account, code))
+      await updateAccount(
+        this.client,
+        accounts.updateTwoFaCode(this.account, code)
+      )
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
@@ -142,38 +160,63 @@ export class KonnectorJob {
     }
   }
 
+  handleLoginSuccess() {
+    this.jobWatcher.handleSuccess()
+  }
+
+  handleLoginSuccessHandled() {
+    this.jobWatcher.disableSuccessTimer()
+  }
+
+  handleAccountUpdated(account) {
+    const prevAccount = this.account
+
+    // _type is not present in objects from realtime but we have to keep
+    // it to be compatible with cozy-client's methods
+    this.account = {
+      _type: prevAccount._type,
+      ...account
+    }
+    const { state } = this.account
+    if (accounts.isTwoFANeeded(state) || accounts.isTwoFARetry(state)) {
+      this.handleTwoFA(prevAccount)
+    } else if (accounts.isLoginSuccessHandled(state)) {
+      this.handleLoginSuccessHandled()
+    } else if (accounts.isLoginSuccess(state)) {
+      this.handleLoginSuccess()
+    }
+  }
+
   /**
-   * Launch the job and set up everything to follow execution.
+   * Launches the job and sets everything up to follow execution.
    */
   async launch() {
     this.setStatus(PENDING)
-    const { watchKonnectorAccount } = this.accountsMutations
-    const { launchTrigger, watchKonnectorJob } = this.triggersMutations
 
-    this.account = await prepareTriggerAccount(
-      this.trigger,
-      this.accountsMutations
-    )
+    this.account = await prepareTriggerAccount(this.client, this.trigger)
 
-    const jobWatcher = watchKonnectorJob(await launchTrigger(this.trigger))
+    const job = await launchTrigger(this.client, this.trigger)
+    this.jobWatcher = watchKonnectorJob(this.client, job)
+
     // Temporary reEmitting until merging of KonnectorJobWatcher and
     // KonnectorAccountWatcher into KonnectorJob
-    jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
-    jobWatcher.on(
+    this.jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
+    this.jobWatcher.on(
       LOGIN_SUCCESS_EVENT,
       this.handleLegacyEvent(LOGIN_SUCCESS_EVENT)
     )
-    jobWatcher.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
+    this.jobWatcher.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
 
-    const accountWatcher = watchKonnectorAccount(this.account, {
-      onTwoFACodeAsked: this.handleTwoFA,
-      onLoginSuccess: jobWatcher.handleSuccess,
-      onLoginSuccessHandled: jobWatcher.disableSuccessTimer
-    })
+    this.realtime.subscribe(
+      'updated',
+      ACCOUNTS_DOCTYPE,
+      this.account._id,
+      this.handleAccountUpdated
+    )
 
     this.unsubscribeAllRealtime = () => {
-      jobWatcher.unsubscribeAll()
-      accountWatcher.unsubscribeAll()
+      this.jobWatcher.unsubscribeAll()
+      this.realtime.unsubscribeAll()
     }
   }
 
