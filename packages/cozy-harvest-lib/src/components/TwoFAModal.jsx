@@ -37,15 +37,15 @@ export class TwoFAModal extends PureComponent {
   }
 
   componentDidMount() {
-    this.props.konnectorJob
-      .on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
-      .on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+    const konnJob = this.props.konnectorJob
+    konnJob.on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+    konnJob.on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
   }
 
   componentWillUnmount() {
-    this.props.konnectorJob
-      .removeListener(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
-      .removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+    const konnJob = this.props.konnectorJob
+    konnJob.removeListener(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
+    konnJob.removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
   }
 
   handleTwoFARequest() {
