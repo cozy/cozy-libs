@@ -57,6 +57,11 @@ describe('TwoFAModal', () => {
     expect(root.text()).toContain('twoFAForm.desc')
   })
 
+  it('should correctly unmount', () => {
+    const { root } = setup({})
+    expect(() => root.instance().componentWillUnmount()).not.toThrow()
+  })
+
   it('should work for several two fa requests', () => {
     const opts = {
       account: {
