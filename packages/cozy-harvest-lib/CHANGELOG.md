@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.13.0...cozy-harvest-lib@1.13.1) (2019-10-26)
+
+
+### Bug Fixes
+
+* Correctly unmount TwoFAModal ([465d8dd](https://github.com/cozy/cozy-libs/commit/465d8dd))
+
+
+
+
+
 # [1.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.12.3...cozy-harvest-lib@1.13.0) (2019-10-25)
 
 
