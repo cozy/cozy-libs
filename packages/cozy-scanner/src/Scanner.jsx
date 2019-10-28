@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { CozyFile } from 'cozy-doctypes'
 import { Modal } from 'cozy-ui/transpiled/react'
 
-import ModalScannerQualification from './ModalScannerQualification'
+import { ModalScannerQualification } from './'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
 
 import { doUpload } from './ScannerUpload'
