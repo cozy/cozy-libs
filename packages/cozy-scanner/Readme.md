@@ -10,12 +10,6 @@ Cozy-Scanner requires :
 - At least Cozy-UI 25.7
 - Cozy-Doctypes
 
-To use the component and get the style, you need to import the css in your app
-
-```js
-import "cozy-scanner/dist/stylesheet.css";
-```
-
 Since Cozy-Scanner uses a few `Alerter` you also have to put `<Alerter />` (from Cozy-UI)
 somewhere in your React Tree.
 
