@@ -46,9 +46,6 @@
     "cozy-ui": "^25.7.0"
   },
   "jest": {
-    "transform": {
-      "^.+\\.(js|jsx)?$": "<rootDir>/babel-transformer.js"
-    },
     "transformIgnorePatterns": [
       "node_modules/(?!cozy-ui)"
     ],
