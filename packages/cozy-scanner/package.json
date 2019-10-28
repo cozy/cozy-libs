@@ -53,7 +53,7 @@
       "node_modules/(?!cozy-ui)"
     ],
     "moduleNameMapper": {
-      "styles.styl": "identity-obj-proxy",
+      "stylesheet.css": "identity-obj-proxy",
       "\\.(png|gif|jpe?g|svg)$": "<rootDir>/test/__mocks__/fileMock.js",
       "^cozy-client$": "cozy-client/dist/index.js"
     }

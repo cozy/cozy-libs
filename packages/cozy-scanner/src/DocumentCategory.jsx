@@ -13,7 +13,7 @@ import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 
 import CategoryGridItem from './CategoryGridItem'
 
-import styles from './styles.styl'
+import styles from './stylesheet.css'
 
 /**
  *

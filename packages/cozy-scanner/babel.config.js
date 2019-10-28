@@ -8,10 +8,9 @@ module.exports = {
         [
           'css-modules-transform',
           {
-            extensions: ['.styl'],
-            preprocessCss: './preprocess',
             extractCss: './dist/stylesheet.css',
-            generateScopedName: '[name]__[local]___[hash:base64:5]'
+            generateScopedName: '[name]__[local]___[hash:base64:5]',
+            keepImport: true
           }
         ]
       ]
