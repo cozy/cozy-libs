@@ -5,7 +5,6 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { Icon, IconStack } from 'cozy-ui/transpiled/react'
 
 import styles from './stylesheet.css'
-console.log('styles', styles)
 
 const CategoryGridItem = ({ isSelected, icon, theme, label }) => {
   return (
