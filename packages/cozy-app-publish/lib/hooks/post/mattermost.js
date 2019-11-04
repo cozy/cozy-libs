@@ -7,20 +7,54 @@ const MATTERMOST_ICON =
   'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
 const MATTERMOST_USERNAME = 'Travis'
 
+const appTypeLabelMap = {
+  webapp: 'Application',
+  konnector: 'Connector'
+}
+
+const makeGithubCommitsURL = (repoSlug, commitSha) => {
+  return `https://github.com/${repoSlug}/commits/${commitSha}`
+}
+
+const getMessage = options => {
+  const { appSlug, appVersion, spaceName, appType } = options
+  const {
+    TRAVIS_COMMIT_MESSAGE,
+    TRAVIS_JOB_WEB_URL,
+    TRAVIS_REPO_SLUG,
+    TRAVIS_COMMIT
+  } = process.env
+  const spaceMessage = spaceName ? ` on space __${spaceName}__` : ''
+  const infos = [
+    TRAVIS_COMMIT_MESSAGE
+      ? `- [Last commit: ${
+          TRAVIS_COMMIT_MESSAGE.split('\n')[0]
+        }](${makeGithubCommitsURL(TRAVIS_REPO_SLUG, TRAVIS_COMMIT)})`
+      : null,
+    TRAVIS_JOB_WEB_URL ? `- [Job](${TRAVIS_JOB_WEB_URL})` : null
+  ]
+    .filter(Boolean)
+    .join('\n')
+  const message = `${appTypeLabelMap[appType] ||
+    ''} __${appSlug}__ version \`${appVersion}\` has been published${spaceMessage}.${
+    infos.length > 0 ? '\n\n' + infos : ''
+  }`
+  return message
+}
+
 const sendMattermostReleaseMessage = (
   appSlug,
   appVersion,
   spaceName,
   appType
 ) => {
-  const spaceMessage = spaceName ? ` on space __${spaceName}__` : ''
-  const appTypeLabelMap = {
-    webapp: 'Application',
-    konnector: 'Connector'
-  }
-  const message = `${appTypeLabelMap[appType] ||
-    ''} __${appSlug}__ version \`${appVersion}\` has been published${spaceMessage}.`
   const mattermostHookUrl = url.parse(MATTERMOST_HOOK_URL)
+  const message = getMessage({
+    appSlug,
+    appVersion,
+    spaceName,
+    appType
+  })
 
   return new Promise((resolve, reject) => {
     console.log(
@@ -75,3 +109,5 @@ module.exports = async options => {
 
   return options
 }
+
+module.exports.getMessage = getMessage
