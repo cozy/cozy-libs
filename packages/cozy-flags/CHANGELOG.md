@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.11.0 (2019-11-04)
+
+
+### Bug Fixes
+
+* Add account link ([9745b34](https://github.com/cozy/cozy-libs/commit/9745b34))
+
+
+### Features
+
+* Sort flags ([b60e44c](https://github.com/cozy/cozy-libs/commit/b60e44c))
+
+
+
+
+
 # 1.10.0 (2019-09-05)
 
 
