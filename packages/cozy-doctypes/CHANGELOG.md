@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.67.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.67.1...cozy-doctypes@1.67.2) (2019-11-04)
+
+
+### Bug Fixes
+
+* Update snapshots for encrypted-tests ([3515029](https://github.com/cozy/cozy-libs/commit/3515029))
+
+
+
+
+
 ## [1.67.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.66.1...cozy-doctypes@1.67.1) (2019-10-23)
 
 
