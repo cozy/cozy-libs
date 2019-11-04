@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.20.0 (2019-11-04)
+
+
+### Bug Fixes
+
+* Translating components ([1101a66](https://github.com/cozy/cozy-libs/commit/1101a66))
+
+
+### Features
+
+* Output commit link and travis link in publish message ([779028e](https://github.com/cozy/cozy-libs/commit/779028e))
+
+
+
+
+
 ## [0.19.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.19.2...cozy-app-publish@0.19.3) (2019-10-07)
 
 **Note:** Version bump only for package cozy-app-publish
