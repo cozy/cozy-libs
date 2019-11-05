@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.0.0 (2019-11-05)
+
+
+### Bug Fixes
+
+* **cozy-auth:** Don't display appRoute too soon ([521b817](https://github.com/cozy/cozy-libs/commit/521b817))
+* **cozy-auth:** Don't redirect everytime we loged in ([03cfd32](https://github.com/cozy/cozy-libs/commit/03cfd32))
+
+
+### BREAKING CHANGES
+
+* **cozy-auth:** Each time we try to reconnect from localStorage, we redirect
+to loginPath (defaulted to /). It works great for application
+that doesn't have to handle deeplinking for instance, but not
+for them.
+
+Since we can't be sure that `handleDeeplink` is called after `handleAfterLogin`
+we can have a race condition between the both method resulting to redirecting
+the user to loginPath instead of the url provided by the deeplink.
+
+To prevent this issue, we should not redirect to loginPath in cozy-auth and
+let the application does what she wants after a loggin.
+
+In order to upgrade your app your need to :
+- remove loginPath props
+- in the `afterAuthenticated` callback you need to manually push to your previous
+loginPath (ie router.push('/afterLogin'))
+
+
+
+
+
 ## [1.19.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@1.19.1...cozy-authentication@1.19.2) (2019-09-18)
 
 **Note:** Version bump only for package cozy-authentication
