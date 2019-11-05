@@ -72,7 +72,6 @@ describe('MobileRouter', () => {
         <I18n t={x => x} lang="en" dictRequire={() => ({})}>
           <MobileRouter
             {...props}
-            loginPath="/afterLogin"
             logoutPath="/afterLogout"
             initialTriedToReconnect={true}
             LogoutComponent={LogoutComponent}
@@ -94,19 +93,6 @@ describe('MobileRouter', () => {
     setup()
     client.emit('login')
     expect(onAuthenticated).toHaveBeenCalled()
-  })
-
-  it('should go to loginPath after login', done => {
-    setup()
-    client.emit('login')
-
-    // Without this setTimeout, history.replace is reported as not called,
-    // but it's because the expectation seems to be executed before the code
-    // itself.
-    setTimeout(() => {
-      expect(history.replace).toHaveBeenCalledWith('/afterLogin')
-      done()
-    }, 0)
   })
 
   it('should go to logoutPath after logout', () => {
@@ -170,13 +156,18 @@ describe('MobileRouter', () => {
   })
 
   describe('Logging in', () => {
-    it('should show LogInComponent during logout', () => {
+    it('should show LogInComponent during login', async () => {
       LogoutComponent = LoggingOut
       setup()
       client.emit('beforeLogin')
       app.update()
       expect(app.find(LoginInComponent).length).toBe(1)
-      client.emit('login')
+      // We don't emit('login') since we need to wait the end of
+      // `afterAuthentication` now to check if the login component is
+      // here or not. So we call afterAuth manually
+      const mobileRouter = app.find(DumbMobileRouter).instance()
+
+      await mobileRouter.afterAuthentication()
       app.update()
       expect(app.find(LoginInComponent).length).toBe(0)
     })

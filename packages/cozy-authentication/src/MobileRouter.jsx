@@ -71,7 +71,10 @@ export class MobileRouter extends Component {
     try {
       if (saved && saved.oauthOptions) {
         client.stackClient.setOAuthOptions(saved.oauthOptions)
-        await client.login({ uri: saved.uri, token: saved.token })
+        await client.login({
+          uri: saved.uri,
+          token: saved.token
+        })
       }
     } finally {
       this.setState({ triedToReconnect: true })
@@ -218,7 +221,6 @@ export class MobileRouter extends Component {
       client,
       LoginInComponent,
       children,
-
       // TODO LogoutComponent should come from props.components and have
       // a default
       LogoutComponent
@@ -280,15 +282,16 @@ export class MobileRouter extends Component {
   }
 
   async afterAuthentication() {
-    this.setState({ isLoggingIn: false })
-
     if (this.props.onAuthenticated) {
       await this.props.onAuthenticated()
     }
 
-    this.props.history.replace(this.props.loginPath)
-
     await credentials.saveFromClient(this.props.client)
+    //We need to set the state after all the previous actions
+    //since we can have async task in `onAuthenticated`. Setting
+    //isLoggingIn to true before result in displaying `appRoutes`
+    //too soon in this case
+    this.setState({ isLoggingIn: false })
   }
 
   handleBeforeLogout() {
@@ -315,7 +318,6 @@ MobileRouter.defaultProps = {
     console.error('Exception', e) //eslint-disable-line no-console
   },
 
-  loginPath: '/',
   logoutPath: '/',
 
   components: {
@@ -344,8 +346,6 @@ MobileRouter.propTypes = {
   /** CozyClient instance, should be provided via <CozyProvider /> */
   client: PropTypes.object.isRequired,
 
-  /** After login, where do we go */
-  loginPath: PropTypes.string,
   /** After logout, where do we go */
   logoutPath: PropTypes.string,
 
