@@ -13,7 +13,10 @@ With Harvest components, an app is able to:
 
 # Current version
 
-The current version exposes base components to create and edit account and trigger documents.
+The current version exposes base components to
+
+- create and edit accounts
+- check status of the synchronization
 
 Those components are used for now in [Cozy-Home](https://github.com/cozy/cozy-home).
 
