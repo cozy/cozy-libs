@@ -316,12 +316,14 @@
       "default": "Enter the code sent to you by e-mail or SMS",
       "email": "Enter the code sent to you by e-mail",
       "sms": "Enter the code sent to you by SMS",
-      "app": "Please check your provider app to authenticate"
+      "app": "Enter the one-time code sent to you"
     },
-    "desc": "This code allows you to finish your connexion.",
     "desc-2fa": "You need to open your provider's app and/or click on a notification to confirm your authentication.",
+    "desc_1": "This code enables you to finish your connexion.",
+    "desc_2": "The second code received on your mobile phone or by email enables you to finalize your connexion.",
     "code": {
-      "label": "code"
+      "label_1": "code",
+      "label_2": "Second code"
     },
     "retry": "Invalid code, please re-enter.",
     "CTA": "Validate"

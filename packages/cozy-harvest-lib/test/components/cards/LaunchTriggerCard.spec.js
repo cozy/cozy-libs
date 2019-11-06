@@ -11,7 +11,8 @@ const fixtures = {
 
 const props = {
   trigger: fixtures.trigger,
-  t: key => key
+  t: key => key,
+  f: () => {}
 }
 
 describe('LaunchTriggerCard', () => {
