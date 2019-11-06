@@ -109,9 +109,11 @@ export class TwoFAModal extends PureComponent {
             </SubTitle>
 
             <Text>
-              {twoFAProvider === TWOFA_PROVIDERS.APP
-                ? t('twoFAForm.desc-2fa')
-                : t('twoFAForm.desc')}
+              {twoFAProvider !== TWOFA_PROVIDERS.APP
+                ? t(`twoFAForm.desc_${requestNb}`, {
+                    _: t(`twoFAForm.desc_1`)
+                  })
+                : t('twoFAForm.desc-2fa')}
             </Text>
             {needUserInput ? (
               <Field
@@ -120,8 +122,9 @@ export class TwoFAModal extends PureComponent {
                 onChange={this.handleChange}
                 autoComplete="off"
                 label={
-                  t('twoFAForm.code.label') +
-                  (requestNb > 1 ? ` (${requestNb})` : '')
+                  t(`twoFAForm.code.label_${requestNb}`, {
+                    _: t(`twoFAForm.code.label_1`)
+                  }) + (requestNb > 2 ? ` (${requestNb})` : '')
                 }
                 size="medium"
                 error={hasErrored}

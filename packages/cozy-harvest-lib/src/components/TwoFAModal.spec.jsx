@@ -2,10 +2,16 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { TwoFAModal } from './TwoFAModal'
 import KonnectorJob from '../models/KonnectorJob'
+import { Text, Field } from 'cozy-ui/transpiled/react'
+import en from '../locales/en'
+import Polyglot from 'node-polyglot'
 
 jest.mock('./KonnectorIcon', () => () => null)
 
 describe('TwoFAModal', () => {
+  const polyglot = new Polyglot()
+  polyglot.extend(en)
+
   const setup = ({ konnectorSlug, account }) => {
     const client = {
       on: jest.fn()
@@ -21,7 +27,7 @@ describe('TwoFAModal', () => {
       <TwoFAModal
         dismissAction={jest.fn()}
         konnectorJob={konnectorJob}
-        t={x => x}
+        t={polyglot.t.bind(polyglot)}
         breakpoints={{ isMobile: true }}
         account={account}
         client={client}
@@ -29,6 +35,14 @@ describe('TwoFAModal', () => {
     )
     return { root, konnectorJob }
   }
+
+  const getDesc = root => root.find(Text).text()
+  const getFieldLabel = root => root.find(Field).props().label
+  const getInputValue = root =>
+    root
+      .find('input')
+      .props()
+      .value.toString()
 
   it('should work even with unknown 2FA', () => {
     const opts = {
@@ -41,7 +55,9 @@ describe('TwoFAModal', () => {
 
     // show an input by default
     expect(root.find('input').length).toBe(1)
-    expect(root.text()).toContain('twoFAForm.desc')
+    expect(root.text()).toContain(
+      'This code enables you to finish your connexion.'
+    )
   })
 
   it('should work', () => {
@@ -54,7 +70,9 @@ describe('TwoFAModal', () => {
     const { root } = setup(opts)
     // no input for app two fa
     expect(root.find('input').length).toBe(0)
-    expect(root.text()).toContain('twoFAForm.desc')
+    expect(root.text()).toContain(
+      `You need to open your provider's app and/or click on a notification to confirm your authentication.`
+    )
   })
 
   it('should correctly unmount', () => {
@@ -71,20 +89,38 @@ describe('TwoFAModal', () => {
     }
     const { root, konnectorJob } = setup(opts)
     const inp = root.find('input')
-    const getInputValue = () =>
-      root
-        .find('input')
-        .props()
-        .value.toString()
+
     expect(inp.length).toBe(1)
-    expect(getInputValue()).toBe('')
-    expect(root.text()).toContain('twoFAForm.desc')
+    expect(getInputValue(root)).toBe('')
+    expect(getDesc(root)).toBe(
+      'This code enables you to finish your connexion.'
+    )
+    expect(getFieldLabel(root)).toContain('code')
     root.setState({ twoFACode: 'abcd' })
     root.update()
-    expect(getInputValue()).toBe('abcd')
+    expect(getInputValue(root)).toBe('abcd')
+
+    // 2nd 2FA request
     konnectorJob.emit('twoFARequest')
     root.update()
-    expect(getInputValue()).toBe('')
-    expect(root.text()).toContain('(2)')
+    expect(getInputValue(root)).toBe('')
+    expect(getDesc(root)).toBe(
+      'The second code received on your mobile phone or by email enables you to finalize your connexion.'
+    )
+    expect(getFieldLabel(root)).toBe('Second code')
+    konnectorJob.emit('twoFARequest')
+    root.update()
+
+    // 3rd 2FA (should not happen, hypothetical case)
+    konnectorJob.emit('twoFARequest')
+    root.update()
+    expect(getInputValue(root)).toBe('')
+    // First attempt translations are re-used
+    expect(getDesc(root)).toContain(
+      'This code enables you to finish your connexion.'
+    )
+    expect(getFieldLabel(root)).toBe('code (4)')
+    konnectorJob.emit('twoFARequest')
+    root.update()
   })
 })
