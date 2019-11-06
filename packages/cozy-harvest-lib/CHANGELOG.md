@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.13.5...cozy-harvest-lib@1.14.0) (2019-11-06)
+
+
+### Bug Fixes
+
+* Prop warning during tests ([6c6576f](https://github.com/cozy/cozy-libs/commit/6c6576f))
+
+
+### Features
+
+* Change texts for 2fa modal ([e7cf32e](https://github.com/cozy/cozy-libs/commit/e7cf32e))
+
+
+
+
+
 ## [1.13.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.13.4...cozy-harvest-lib@1.13.5) (2019-11-06)
 
 **Note:** Version bump only for package cozy-harvest-lib
