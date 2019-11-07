@@ -2,7 +2,9 @@ import { useState, useEffect } from 'react'
 import { Registry } from 'cozy-client'
 import get from 'lodash/get'
 
-const useMaintenanceStatus = (client, slug) => {
+const useMaintenanceStatus = (client, konnector) => {
+  const { slug, source } = konnector
+
   const [isInMaintenance, setIsInMaintenance] = useState(false)
   const [messages, setMessages] = useState({})
   const [fetchStatus, setFetchStatus] = useState('idle')
@@ -14,6 +16,11 @@ const useMaintenanceStatus = (client, slug) => {
 
   useEffect(() => {
     const fetchData = async () => {
+      if (/^registry:\/\//i.test(source) === false) {
+        // Only konnectors from the registry have a maintenance status, manually installed once are always considered OK
+        setFetchStatus('loaded')
+        return
+      }
       try {
         setFetchStatus('loading')
         const appStatus = await registry.fetchApp(slug)
@@ -28,7 +35,7 @@ const useMaintenanceStatus = (client, slug) => {
       }
     }
     fetchData()
-  }, [slug])
+  }, [slug, source])
 
   return {
     data: {
