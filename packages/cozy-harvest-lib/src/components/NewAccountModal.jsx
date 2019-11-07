@@ -27,7 +27,8 @@ const NewAccountModal = ({ konnector, client, t }) => {
     fetchStatus,
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector.slug)
-  const isMaintenanceLoaded = fetchStatus === 'loaded'
+  const isMaintenanceLoaded =
+    fetchStatus === 'loaded' || fetchStatus === 'failed'
 
   return (
     <>
