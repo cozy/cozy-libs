@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.14.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.14.1...cozy-harvest-lib@1.14.2) (2019-11-07)
+
+
+### Bug Fixes
+
+* Don't block the UI if maintenance status can't be fetched ([080b2d1](https://github.com/cozy/cozy-libs/commit/080b2d1))
+* Don't poll the maintenance status for manually installed konnectors ([cfd38af](https://github.com/cozy/cozy-libs/commit/cfd38af))
+
+
+
+
+
 ## [1.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.14.0...cozy-harvest-lib@1.14.1) (2019-11-06)
 
 
