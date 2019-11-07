@@ -46,7 +46,7 @@ const KonnectorAccountTabs = ({
 }) => {
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
-  } = useMaintenanceStatus(client, konnector.slug)
+  } = useMaintenanceStatus(client, konnector)
   const { pushHistory } = useContext(MountPointContext)
 
   return (
