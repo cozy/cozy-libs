@@ -39,7 +39,8 @@ fnDescribe('account matching', () => {
     'creditmutuel',
     'banquepostale',
     'milleis',
-    'banquepostale2'
+    'banquepostale2',
+    'fortuneo2'
   ]
   for (let bank of banks) {
     it(`should correctly match ${bank}`, () => {
