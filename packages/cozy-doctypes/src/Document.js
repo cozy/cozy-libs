@@ -172,6 +172,41 @@ class Document {
     return this.createOrUpdateViaOldClient(attributes)
   }
 
+  /**
+   * Update a document with `update` attributes. If the
+   * `update` does not concern "important" attributes, the original
+   * document is returned. Otherwise, the update document is
+   * returned with metadata updated.
+   *
+   * @private
+   */
+  static applyUpdateIfDifferent(doc, update) {
+    // only update if some fields are different
+    if (
+      !this.checkAttributes ||
+      isDifferent(
+        pick(doc, this.checkAttributes),
+        pick(update, this.checkAttributes)
+      )
+    ) {
+      // do not emit a mail for those attribute updates
+      delete update.dateImport
+
+      const updatedDoc = this.addCozyMetadata({
+        ...doc,
+        ...update
+      })
+
+      return updatedDoc
+    } else {
+      log(
+        'debug',
+        `[updateIfDifferent] No need to update ${update._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
+      )
+      return doc
+    }
+  }
+
   static async createOrUpdateViaNewClient(attributes) {
     const selector = fromPairs(
       this.idAttributes.map(idAttribute => [
@@ -188,31 +223,13 @@ class Document {
     if (results.length === 0) {
       return this.create(this.addCozyMetadata(attributes))
     } else if (results.length === 1) {
+      const doc = results[0]
       const update = omit(attributes, userAttributes)
-
-      // only update if some fields are different
-      if (
-        !this.checkAttributes ||
-        isDifferent(
-          pick(results[0], this.checkAttributes),
-          pick(update, this.checkAttributes)
-        )
-      ) {
-        // do not emit a mail for those attribute updates
-        delete update.dateImport
-
-        const updated = this.addCozyMetadata({
-          ...results[0],
-          ...update
-        })
-
-        return this.cozyClient.save(updated)
+      const updatedDoc = this.applyUpdateIfDifferent(doc, update)
+      if (updatedDoc !== doc) {
+        return this.cozyClient.save(updatedDoc)
       } else {
-        log(
-          'debug',
-          `[createOrUpdate] Didn't update ${results[0]._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
-        )
-        return results[0]
+        return updatedDoc
       }
     } else {
       throw new Error(
@@ -244,31 +261,17 @@ class Document {
         this.addCozyMetadata(attributes)
       )
     } else if (results.length === 1) {
-      const id = results[0]._id
+      const doc = results[0]
       const update = omit(attributes, userAttributes)
-
-      // only update if some fields are different
-      if (
-        !this.checkAttributes ||
-        isDifferent(
-          pick(results[0], this.checkAttributes),
-          pick(update, this.checkAttributes)
-        )
-      ) {
-        // do not emit a mail for those attribute updates
-        delete update.dateImport
-
+      const updatedDoc = this.applyUpdateIfDifferent(doc, update)
+      if (updatedDoc !== doc) {
         return this.cozyClient.data.updateAttributes(
           this.doctype,
-          id,
-          this.addCozyMetadata(update)
+          updatedDoc._id,
+          updatedDoc
         )
       } else {
-        log(
-          'debug',
-          `[bulkSave] Didn't update ${results[0]._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
-        )
-        return results[0]
+        return doc
       }
     } else {
       throw new Error(
