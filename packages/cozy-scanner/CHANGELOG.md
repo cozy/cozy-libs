@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.1.0...cozy-scanner@0.1.1) (2019-11-12)
+
+
+### Bug Fixes
+
+* **scanner:** Fix publish lang ([13e3375](https://github.com/cozy/cozy-libs/commit/13e3375))
+
+
+
+
+
 # 0.1.0 (2019-11-06)
 
 
