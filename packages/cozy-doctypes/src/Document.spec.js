@@ -1,12 +1,17 @@
 const MockDate = require('mockdate')
 const Document = require('./Document')
 const { cozyClientJS, cozyClient } = require('./testUtils')
+const logger = require('cozy-logger')
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
 Simpson.idAttributes = ['name']
 
 const MOCKED_DATE = '2019-05-14T12:00:00.210Z'
+
+beforeEach(() => {
+  logger.mockReset()
+})
 
 beforeAll(() => {
   MockDate.set(MOCKED_DATE)
@@ -421,16 +426,64 @@ describe('Document used with CozyClient', () => {
   })
 
   describe('createOrUpdate', () => {
-    afterEach(() => {
-      Simpson.queryAll.mockReset()
-    })
+    describe('duplicate strategies', () => {
+      beforeEach(() => {
+        jest.spyOn(Simpson, 'queryAll').mockReturnValueOnce([
+          {
+            _id: 1,
+            name: 'Marge',
+            cozyMetadata: { updatedAt: new Date('2019-11-19') }
+          },
+          {
+            _id: 2,
+            name: 'Marge',
+            cozyMetadata: { updatedAt: new Date('2019-11-20') }
+          }
+        ])
+        jest.spyOn(cozyClient, 'save').mockReturnValueOnce()
+        jest.spyOn(Simpson, 'deleteAll').mockReturnValueOnce()
+      })
 
-    it('should throw an error if there are more than one corresponding documents', async () => {
-      jest
-        .spyOn(Simpson, 'queryAll')
-        .mockReturnValueOnce([{ name: 'Marge' }, { name: 'Marge' }])
+      afterEach(() => {
+        Simpson.queryAll.mockReset()
+        Simpson.deleteAll.mockReset()
+      })
 
-      await expect(Simpson.createOrUpdate({ name: 'Marge' })).rejects.toThrow()
+      it('should throw if there is more than one corresponding documents (default throw strategy)', async () => {
+        await expect(Simpson.createOrUpdate({ name: 'Marge' })).rejects
+          .toThrow(`Create or update with selectors that returns more than 1 result
+{"name":"Marge"}
+[{"_id":2,"name":"Marge","cozyMetadata":{"updatedAt":"2019-11-20T00:00:00.000Z"}},{"_id":1,"name":"Marge","cozyMetadata":{"updatedAt":"2019-11-19T00:00:00.000Z"}}]`)
+      })
+
+      it('should throw there is more than one corresponding documents (throw strategy)', async () => {
+        await expect(
+          Simpson.createOrUpdate(
+            { name: 'Marge' },
+            { handleDuplicates: 'throw' }
+          )
+        ).rejects
+          .toThrow(`Create or update with selectors that returns more than 1 result
+{"name":"Marge"}
+[{"_id":2,"name":"Marge","cozyMetadata":{"updatedAt":"2019-11-20T00:00:00.000Z"}},{"_id":1,"name":"Marge","cozyMetadata":{"updatedAt":"2019-11-19T00:00:00.000Z"}}]`)
+      })
+
+      it('should update 1 doc and delete duplicates if there is more than one corresponding documents (remove strategy)', async () => {
+        await Simpson.createOrUpdate(
+          { name: 'Marge' },
+          { handleDuplicates: 'remove' }
+        )
+        expect(cozyClient.save).toHaveBeenCalledWith(
+          Simpson.addCozyMetadata({ _id: 2, name: 'Marge' })
+        )
+        expect(logger).toHaveBeenCalledWith(
+          'warn',
+          'Cleaning duplicates for doctype io.cozy.simpsons (kept: 2, removed: 1)'
+        )
+        expect(Simpson.deleteAll).toHaveBeenCalledWith([
+          { _id: 1, name: 'Marge', cozyMetadata: expect.any(Object) }
+        ])
+      })
     })
 
     it('should create the document if it does not exist', async () => {

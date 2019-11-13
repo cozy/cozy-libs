@@ -18,7 +18,9 @@ class BankingReconciliator {
     )
 
     log('info', 'Saving accounts...')
-    const savedAccounts = await BankAccount.bulkSave(reconciliatedAccounts)
+    const savedAccounts = await BankAccount.bulkSave(reconciliatedAccounts, {
+      handleDuplicates: 'remove'
+    })
     if (options.onAccountsSaved) {
       options.onAccountsSaved(savedAccounts)
     }
@@ -75,11 +77,11 @@ class BankingReconciliator {
     const logProgress = doc => {
       log('debug', `[bulkSave] ${i++} Saving ${doc.date} ${doc.label}`)
     }
-    const savedTransactions = await BankTransaction.bulkSave(
-      transactions,
-      30,
-      logProgress
-    )
+    const savedTransactions = await BankTransaction.bulkSave(transactions, {
+      concurrency: 30,
+      logProgress,
+      handleDuplicates: 'remove'
+    })
     return {
       accounts: savedAccounts,
       transactions: savedTransactions
