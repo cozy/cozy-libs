@@ -63,6 +63,16 @@ const withoutUndefined = x => omitBy(x, isUndefined)
 
 const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
 
+const getDocumentUpdateDate = doc => {
+  const d = doc.cozyMetadata && doc.cozyMetadata.updatedAt
+  return d ? new Date(d) : null
+}
+
+const newestDocumentComparisonFunc = doc => {
+  const d = getDocumentUpdateDate(doc)
+  return d ? -d : 0
+}
+
 class Document {
   /**
    * Registers a client
@@ -164,12 +174,24 @@ class Document {
     return resp.data
   }
 
-  static async createOrUpdate(attributes) {
+  /**
+   * Creates or updates a document.
+   *
+   * Before creating/updating, we try to find an existing document by
+   * building a selector with the idAttributes.
+   *
+   * - If not document is found, document is created
+   * - If a document is found, it is updated
+   * - If duplicates are found, it depends on options.handleDuplicates
+   *
+   * @param {String|Function} options.handleDuplicates - How duplicates are handled, see Document.duplicateHandlingStrategies
+   */
+  static async createOrUpdate(attributes, options = {}) {
     if (this.usesCozyClient()) {
-      return this.createOrUpdateViaNewClient(attributes)
+      return this.createOrUpdateViaNewClient(attributes, options)
     }
 
-    return this.createOrUpdateViaOldClient(attributes)
+    return this.createOrUpdateViaOldClient(attributes, options)
   }
 
   /**
@@ -207,7 +229,29 @@ class Document {
     }
   }
 
-  static async createOrUpdateViaNewClient(attributes) {
+  static getHandleDuplicateStrategy(name) {
+    if (Document.duplicateHandlingStrategies[name]) {
+      return Document.duplicateHandlingStrategies[name]
+    } else {
+      throw new Error(
+        `${name} is not a know duplication handling strategy. Known strategies are ${Object.keys(
+          Document.duplicateHandlingStrategies
+        )}`
+      )
+    }
+  }
+
+  static async handleDuplicates(strategyNameOrFn, duplicates, selector) {
+    strategyNameOrFn = strategyNameOrFn || this.defaultDuplicateHandling
+    const strategyFn =
+      typeof strategyNameOrFn === 'string'
+        ? this.getHandleDuplicateStrategy(strategyNameOrFn)
+        : strategyNameOrFn
+
+    return await strategyFn.call(this, duplicates, selector)
+  }
+
+  static async createOrUpdateViaNewClient(attributes, options) {
     const selector = fromPairs(
       this.idAttributes.map(idAttribute => [
         idAttribute,
@@ -222,7 +266,11 @@ class Document {
 
     if (results.length === 0) {
       return this.create(this.addCozyMetadata(attributes))
-    } else if (results.length === 1) {
+    } else {
+      results = sortBy(results, newestDocumentComparisonFunc)
+      if (results.length > 1) {
+        await this.handleDuplicates(options.handleDuplicates, results, selector)
+      }
       const doc = results[0]
       const update = omit(attributes, userAttributes)
       const updatedDoc = this.applyUpdateIfDifferent(doc, update)
@@ -231,17 +279,10 @@ class Document {
       } else {
         return updatedDoc
       }
-    } else {
-      throw new Error(
-        'Create or update with selectors that returns more than 1 result\n' +
-          JSON.stringify(selector) +
-          '\n' +
-          JSON.stringify(results)
-      )
     }
   }
 
-  static async createOrUpdateViaOldClient(attributes) {
+  static async createOrUpdateViaOldClient(attributes, options) {
     const selector = fromPairs(
       this.idAttributes.map(idAttribute => [
         idAttribute,
@@ -260,7 +301,12 @@ class Document {
         this.doctype,
         this.addCozyMetadata(attributes)
       )
-    } else if (results.length === 1) {
+    } else {
+      results = sortBy(results, newestDocumentComparisonFunc)
+      if (results.length > 1) {
+        await this.handleDuplicates(options.handleDuplicates, results, selector)
+      }
+
       const doc = results[0]
       const update = omit(attributes, userAttributes)
       const updatedDoc = this.applyUpdateIfDifferent(doc, update)
@@ -273,13 +319,6 @@ class Document {
       } else {
         return doc
       }
-    } else {
-      throw new Error(
-        'Create or update with selectors that returns more than 1 result\n' +
-          JSON.stringify(selector) +
-          '\n' +
-          JSON.stringify(results)
-      )
     }
   }
 
@@ -299,15 +338,49 @@ class Document {
     return this.cozyClient.data.create(this.doctype, attributes)
   }
 
-  static bulkSave(documents, concurrency, logProgress) {
-    concurrency = concurrency || 30
+  /**
+   * Save many documents concurrently
+   */
+  static bulkSave(documents, optionsOrConcurrency, logProgressOrNothing) {
+    if (logProgressOrNothing || typeof optionsOrConcurrency !== 'object') {
+      log(
+        'warn',
+        'Second argument of bulkSave is now an object, please use bulkSave(documents, { logProgress, concurrency })'
+      )
+    }
+
+    const options = {}
+
+    if (typeof optionsOrConcurrency === 'number') {
+      options.concurrency = optionsOrConcurrency
+    }
+
+    if (typeof logProgressOrNothing === 'function') {
+      options.logProgress = logProgressOrNothing
+    }
+
+    if (typeof optionsOrConcurrency === 'object') {
+      Object.assign(options, optionsOrConcurrency)
+    }
+
+    return this._bulkSave(documents, options)
+  }
+
+  /**
+   * @private
+   *
+   * Meat of the method bulkSave
+   */
+  static _bulkSave(documents, options = {}) {
+    const { concurrency = 30, logProgress, ...createOrUpdateOptions } = options
+
     return parallelMap(
       documents,
       doc => {
         if (logProgress) {
           logProgress(doc)
         }
-        return this.createOrUpdate(doc)
+        return this.createOrUpdate(doc, createOrUpdateOptions)
       },
       concurrency
     )
@@ -559,6 +632,32 @@ class Document {
     }
     const rows = resp.rows.filter(row => row.doc)
     return rows.map(row => row.doc)
+  }
+}
+
+Document.defaultDuplicateHandling = 'throw'
+
+Document.duplicateHandlingStrategies = {
+  throw: function(duplicates, selector) {
+    throw new Error(
+      'Create or update with selectors that returns more than 1 result\n' +
+        JSON.stringify(selector) +
+        '\n' +
+        JSON.stringify(duplicates)
+    )
+  },
+
+  remove: async function(duplicates) {
+    const docsToRemove = duplicates.slice(1)
+    if (docsToRemove.length > 0) {
+      log(
+        'warn',
+        `Cleaning duplicates for doctype ${this.doctype} (kept: ${
+          duplicates[0]._id
+        }, removed: ${docsToRemove.map(x => x._id)})`
+      )
+      await this.deleteAll(docsToRemove)
+    }
   }
 }
 
