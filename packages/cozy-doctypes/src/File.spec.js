@@ -233,6 +233,20 @@ describe('File model', () => {
     })
   })
 
+  describe('generateFileNameForRevision', () => {
+    it('should generate the right file name for a revision', () => {
+      const MOCKED_DATE = '2018-01-01T12:00:00.210Z'
+      const expectedFilename = 'test_01 January - 12h00.pdf'
+      const date = new Date(MOCKED_DATE)
+      const result = CozyFile.generateFileNameForRevision(
+        { name: 'test.pdf' },
+        { updated_at: date },
+        () => '01 January - 12h00'
+      )
+      expect(result).toEqual(expectedFilename)
+    })
+  })
+
   describe('uploadFileWithConflictStrategy', () => {
     beforeEach(() => {
       getSpy.mockImplementation(() =>
