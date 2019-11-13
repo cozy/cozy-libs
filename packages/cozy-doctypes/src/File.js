@@ -149,6 +149,16 @@ class CozyFile extends Document {
     }
   }
 
+  static generateFileNameForRevision(file, revision, f) {
+    const { filename, extension } = CozyFile.splitFilename({
+      name: file.name,
+      type: 'file'
+    })
+    return `${filename}_${f(
+      revision.updated_at,
+      'DD MMMM - HH[h]mm'
+    )}${extension}`
+  }
   /**
    * The goal of this method is to upload a file based on a conflict strategy.
    * Be careful: We need to check if the file exists by doing a statByPath query
