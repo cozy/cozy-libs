@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.68.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.67.4...cozy-doctypes@1.68.0) (2019-11-13)
+
+
+### Features
+
+* Be more precise in the expected error ([853340b](https://github.com/cozy/cozy-libs/commit/853340b))
+* Both accounts and transactions handle duplicates by removing them ([be82008](https://github.com/cozy/cozy-libs/commit/be82008))
+* Duplicate handling strategies for createOrUpdate ([ea98430](https://github.com/cozy/cozy-libs/commit/ea98430))
+* Extract applyUpdateIfDifferent ([308345e](https://github.com/cozy/cozy-libs/commit/308345e))
+* **cozy-doctypes:** Add generateFileName for a version ([38f62c1](https://github.com/cozy/cozy-libs/commit/38f62c1))
+
+
+
+
+
 ## [1.67.4](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.67.3...cozy-doctypes@1.67.4) (2019-11-06)
 
 **Note:** Version bump only for package cozy-doctypes
