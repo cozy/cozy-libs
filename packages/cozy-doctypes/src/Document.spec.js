@@ -428,9 +428,15 @@ describe('Document used with CozyClient', () => {
     it('should throw an error if there are more than one corresponding documents', async () => {
       jest
         .spyOn(Simpson, 'queryAll')
-        .mockReturnValueOnce([{ name: 'Marge' }, { name: 'Marge' }])
+        .mockReturnValueOnce([
+          { _id: 1, name: 'Marge' },
+          { _id: 2, name: 'Marge' }
+        ])
 
-      await expect(Simpson.createOrUpdate({ name: 'Marge' })).rejects.toThrow()
+      await expect(Simpson.createOrUpdate({ name: 'Marge' })).rejects
+        .toThrow(`Create or update with selectors that returns more than 1 result
+{\"name\":\"Marge\"}
+[{\"_id\":1,\"name\":\"Marge\"},{\"_id\":2,\"name\":\"Marge\"}]`)
     })
 
     it('should create the document if it does not exist', async () => {
