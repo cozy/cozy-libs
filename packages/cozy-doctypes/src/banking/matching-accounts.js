@@ -187,6 +187,20 @@ const findMatch = (account, existingAccounts) => {
     }
   }
 
+  const matchRawNumberCurrencyType = existingAccounts.find(
+    otherAccount =>
+      (eqNotUndefined(account.rawNumber, otherAccount.number) ||
+        eqNotUndefined(account.number, otherAccount.rawNumber)) &&
+      otherAccount.type == account.type &&
+      otherAccount.currency == account.currency
+  )
+  if (matchRawNumberCurrencyType) {
+    return {
+      match: matchRawNumberCurrencyType,
+      method: 'rawNumber-exact-currency-type'
+    }
+  }
+
   // Now we get more fuzzy and score accounts
   const scored = sortBy(
     existingAccounts.map(existingAccount => score(account, existingAccount)),
