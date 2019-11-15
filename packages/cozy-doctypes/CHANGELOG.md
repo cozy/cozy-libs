@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.69.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.68.0...cozy-doctypes@1.69.0) (2019-11-15)
+
+
+### Bug Fixes
+
+* **doctypes:** Better test error ([163b233](https://github.com/cozy/cozy-libs/commit/163b233))
+* Update snapshots for encrypted-tests ([3515029](https://github.com/cozy/cozy-libs/commit/3515029))
+
+
+### Features
+
+* Add rawNumberCurrencyType account matching ([978e373](https://github.com/cozy/cozy-libs/commit/978e373))
+* New matching test from Fortuneo ([76e26fd](https://github.com/cozy/cozy-libs/commit/76e26fd))
+
+
+
+
+
 # [1.68.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.67.4...cozy-doctypes@1.68.0) (2019-11-13)
 
 
