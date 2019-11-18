@@ -54,10 +54,10 @@ describe('CozyRealtime', () => {
       cozyStack.emitMessage(type, fakeDoc, 'CREATED')
     })
 
-    it('should throw an error when config has id for created event', () => {
-      expect(() =>
+    it('should not throw an error when config has id for created event', () => {
+      expect(
         realtime.subscribe('created', type, 'my_id', () => {})
-      ).toThrow()
+      ).resolves.toBeDefined()
     })
 
     it('should launch handler when document is updated', async done => {

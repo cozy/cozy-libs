@@ -47,10 +47,6 @@ const validateParameters = (eventName, type, id, handler) => {
     msg = `'${type}' is not a valide type, it should be a string.`
   }
 
-  if (id && eventName === 'created') {
-    msg = `The 'id' should not be specified for 'created' event.`
-  }
-
   if (typeof handler !== 'function') {
     msg = `The handler '${handler}' should be a function.`
   }
