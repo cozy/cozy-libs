@@ -6,6 +6,7 @@ import TriggerManagerWithoutLocales from './components/TriggerManager'
 import TriggerLauncherWithoutLocales from './components/TriggerLauncher'
 import RoutesWithoutLocales from './components/Routes'
 import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
+import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal/'
 
 // All entry point files need to be exported wrapped with the translation context of harvest
 export const DeleteAccountButton = withLocales(
@@ -16,6 +17,9 @@ export const TriggerManager = withLocales(TriggerManagerWithoutLocales)
 export const TriggerLauncher = withLocales(TriggerLauncherWithoutLocales)
 export const Routes = withLocales(RoutesWithoutLocales)
 export const withKonnectorModal = withLocales(withKonnectorModalWithoutLocales)
+export const KonnectorSuggestionModal = withLocales(
+  KonnectorSuggestionModalWithoutLocales
+)
 
 export {
   KonnectorJobError,
