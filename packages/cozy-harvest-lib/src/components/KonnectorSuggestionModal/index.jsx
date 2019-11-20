@@ -101,6 +101,7 @@ KonnectorSuggestionModal.propTypes = {
   t: PropTypes.func.isRequired,
   client: PropTypes.object.isRequired,
   konnectorAppSuggestion: PropTypes.shape({
+    // io.cozy.apps.suggestions, see https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.apps.suggestions.md
     slug: PropTypes.string,
     silenced: PropTypes.bool,
     reason: PropTypes.shape({
