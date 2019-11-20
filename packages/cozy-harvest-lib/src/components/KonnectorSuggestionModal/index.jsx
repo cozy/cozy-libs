@@ -31,10 +31,13 @@ const KonnectorSuggestionModal = ({
   const reason = get(konnectorAppSuggestion, 'reason.code')
 
   const silenceSuggestion = async () => {
-    setIsSilencing(true)
-    await client.save({ ...konnectorAppSuggestion, silenced: true })
-    setIsSilencing(false)
-    closeModal()
+    try {
+      setIsSilencing(true)
+      await client.save({ ...konnectorAppSuggestion, silenced: true })
+    } finally {
+      setIsSilencing(false)
+      closeModal()
+    }
   }
 
   return (
