@@ -11,6 +11,8 @@ import { Title, Caption } from 'cozy-ui/transpiled/react/Text'
 
 import Illustration from './Illustration'
 import DataTypes from './DataTypes'
+import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
+import { getSuggestionReason } from '../../helpers/appSuggestions'
 
 const KonnectorSuggestionModal = ({
   t,
@@ -26,9 +28,9 @@ const KonnectorSuggestionModal = ({
   const { cozySubdomainType: subDomainType } = client.getInstanceOptions()
   const [isSilencing, setIsSilencing] = useState(false)
 
-  const dataTypes = get(konnectorManifest, 'data_types', [])
-  const name = get(konnectorManifest, 'name', slug)
-  const reason = get(konnectorAppSuggestion, 'reason.code')
+  const dataTypes = getDataTypes(konnectorManifest) || []
+  const name = getKonnectorName(konnectorManifest) || slug
+  const { code: reason } = getSuggestionReason(konnectorAppSuggestion)
 
   const silenceSuggestion = async () => {
     try {

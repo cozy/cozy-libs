@@ -3,6 +3,7 @@ import _cloneDeep from 'lodash/cloneDeep'
 import findKey from 'lodash/findKey'
 import _mapValues from 'lodash/mapValues'
 import _pickBy from 'lodash/pickBy'
+import _get from 'lodash/get'
 
 export const ROLE_IDENTIFIER = 'identifier'
 
@@ -193,9 +194,14 @@ export const sanitize = (manifest = {}) =>
       }
     : manifest
 
+export const getDataTypes = (manifest = {}) => _get(manifest, 'data_types')
+export const getKonnectorName = (manifest = {}) => _get(manifest, 'name')
+
 export default {
   defaultFieldsValues,
   getIdentifier,
   sanitize,
-  sanitizeFields
+  sanitizeFields,
+  getDataTypes,
+  getKonnectorName
 }
