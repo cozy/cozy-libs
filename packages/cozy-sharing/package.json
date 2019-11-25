@@ -1,0 +1,50 @@
+{
+  "name": "cozy-sharing",
+  "version": "1.0.0",
+  "description": "Provides sharing login for React applications.",
+  "main": "dist/index.js",
+  "author": "Cozy",
+  "license": "MIT",
+  "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-sharing/README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozy/cozy-libs.git"
+  },
+  "bugs": {
+    "url": "https://github.com/cozy/cozy-libs/issues"
+  },
+  "scripts": {
+    "build": "babel src -d dist --copy-files --verbose",
+    "build:doc:react": "(cd ../.. && TARGET=cozy-sharing yarn build:doc:react)",
+    "deploy:doc": "(cd ../.. && yarn deploy:doc)",
+    "prebuild": "yarn tx",
+    "prepublishOnly": "yarn build",
+    "test": "env USE_REACT=true jest src/ test/ --verbose",
+    "lint": "cd .. && yarn lint packages/cozy-sharing",
+    "tx": "tx pull --all",
+    "watch": "yarn build --watch",
+    "watch:doc:react": "(cd ../.. && TARGET=cozy-sharing yarn watch:doc:react)"
+  },
+  "dependencies": {
+    "classnames": "^2.2.6",
+    "copy-text-to-clipboard": "^2.1.1",
+    "cozy-device-helper": "^1.8.0",
+    "cozy-doctypes": "^1.69.0",
+    "lodash": "^4.17.15",
+    "minilog": "^3.1.0",
+    "react-autosuggest": "^9.4.3",
+    "react-tooltip": "^3.11.1"
+  },
+  "devDependencies": {
+    "babel-jest": "^24.9.0",
+    "enzyme-adapter-react-16": "^1.15.1",
+    "react": "^16.12.0"
+  },
+  "peerDependencies": {
+    "cozy-client": "^8.2.0",
+    "cozy-ui": "^27.7.0",
+    "prop-types": "^15.7.2",
+    "react": "^16.12.0"
+  },
+  "sideEffects": false
+}
