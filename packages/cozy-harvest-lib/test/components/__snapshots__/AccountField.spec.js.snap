@@ -38,7 +38,7 @@ exports[`AccountField render a dropdown field 1`] = `
   >
     fields.multiple.label
   </Label>
-  <Aware
+  <withBreakpoints(SelectBox)
     className="u-m-0"
     error={false}
     fieldProps={Object {}}
