@@ -12,7 +12,7 @@ exports[`TwoFAForm should have busy button state and disabled if submitting 1`] 
 `;
 
 exports[`TwoFAForm should render correctly with value change 1`] = `
-<Unknown
+<Modal
   className="u-mt-3"
   closable={true}
   containerClassName="u-pos-absolute"
@@ -24,7 +24,7 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
   size="xsmall"
 >
   <ModalHeader>
-    <AppIcon
+    <withClient(AppIcon)
       className="u-mah-3 u-ml-1"
       fetchIcon={[Function]}
     />
@@ -71,5 +71,5 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
       />
     </form>
   </ModalContent>
-</Unknown>
+</Modal>
 `;
