@@ -25,7 +25,8 @@ const KonnectorSuggestionModal = ({
   client,
   konnectorAppSuggestion,
   konnectorManifest,
-  closeModal,
+  onClose,
+  onSilence,
   fullScreen
 }) => {
   const { slug } = konnectorAppSuggestion
@@ -45,7 +46,7 @@ const KonnectorSuggestionModal = ({
       await client.save({ ...konnectorAppSuggestion, silenced: true })
     } finally {
       setIsSilencing(false)
-      closeModal()
+      onSilence()
     }
   }
 
@@ -53,13 +54,13 @@ const KonnectorSuggestionModal = ({
     <MuiCozyTheme>
       <Dialog
         open
-        onClose={closeModal}
+        onClose={onClose}
         fullScreen={fullScreen}
         fullWidth
         maxWidth="sm"
         scroll="body"
       >
-        <DialogCloseButton onClick={closeModal} />
+        <DialogCloseButton onClick={onClose} />
         <DialogContent>
           <div className="u-flex u-flex-column u-flex-items-center">
             <Illustration alt={t('app.logo.alt', { name })} app={slug} />
@@ -127,7 +128,8 @@ KonnectorSuggestionModal.propTypes = {
     dataTypes: PropTypes.array,
     name: PropTypes.string
   }),
-  closeModal: PropTypes.func.isRequired
+  onClose: PropTypes.func.isRequired,
+  onSilence: PropTypes.func.isRequired
 }
 
 export default withClient(
