@@ -342,7 +342,6 @@
     "explanationTitle": "What is going on?"
   },
   "suggestions": {
-    "illustration": "Install a konnector on your cozy",
     "title": "Import your data from %{name}",
     "data": "Installing %{name} will automatically import the following data into your cozy:",
     "why": "Why is %{name} suggested to me?",

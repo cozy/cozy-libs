@@ -18,7 +18,6 @@ import { getSuggestionReason } from '../../helpers/appSuggestions'
 import Dialog from '@material-ui/core/Dialog'
 import DialogActions from '@material-ui/core/DialogActions'
 import DialogContent from '@material-ui/core/DialogContent'
-import DialogContentText from '@material-ui/core/DialogContentText'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
 
 const KonnectorSuggestionModal = ({
@@ -62,19 +61,13 @@ const KonnectorSuggestionModal = ({
       >
         <DialogCloseButton onClick={closeModal} />
         <DialogContent>
-          <DialogContentText>
-            <div className="u-flex u-flex-column u-flex-items-center">
-              <Illustration
-                alt={t('suggestions.illustration')}
-                iconAlt={t('app.logo.alt', { name })}
-                app={slug}
-              />
-              <Title className="u-mb-half">
-                {t('suggestions.title', { name })}
-              </Title>
-              <DataTypes dataTypes={dataTypes} konnectorName={name} />
-            </div>
-          </DialogContentText>
+          <div className="u-flex u-flex-column u-flex-items-center">
+            <Illustration alt={t('app.logo.alt', { name })} app={slug} />
+            <Title className="u-mb-half">
+              {t('suggestions.title', { name })}
+            </Title>
+            <DataTypes dataTypes={dataTypes} konnectorName={name} />
+          </div>
         </DialogContent>
         <DialogActions>
           <div className="u-flex u-flex-column u-flex-items-center">
