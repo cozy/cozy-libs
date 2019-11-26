@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.14.4...cozy-harvest-lib@1.15.0) (2019-11-26)
+
+
+### Bug Fixes
+
+* Guard against silencing errors ([a3756e3](https://github.com/cozy/cozy-libs/commit/a3756e3))
+* Removed trailing slash ([8730eb4](https://github.com/cozy/cozy-libs/commit/8730eb4))
+* Replace faulty illustration ([f789b3a](https://github.com/cozy/cozy-libs/commit/f789b3a))
+* Upgrade cozy-client ([641de64](https://github.com/cozy/cozy-libs/commit/641de64))
+
+
+### Features
+
+* Added datatypes icons ([223130c](https://github.com/cozy/cozy-libs/commit/223130c))
+* Distinguish between close and silencing modal ([cf72967](https://github.com/cozy/cozy-libs/commit/cf72967))
+* Konnector suggestion modal ([1c247f1](https://github.com/cozy/cozy-libs/commit/1c247f1))
+* Upgrade cozy-ui ([4df4f62](https://github.com/cozy/cozy-libs/commit/4df4f62))
+
+
+
+
+
 ## [1.14.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.14.3...cozy-harvest-lib@1.14.4) (2019-11-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
