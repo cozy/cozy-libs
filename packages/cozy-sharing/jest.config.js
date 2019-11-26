@@ -2,8 +2,9 @@ module.exports = {
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!**/node_modules/**',
-    '!**/vendor/**',
+    '!**/vendor/**'
   ],
+  snapshotSerializers: ['enzyme-to-json/serializer'],
   testPathIgnorePatterns: ['node_modules', 'dist', '__tests__'],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],

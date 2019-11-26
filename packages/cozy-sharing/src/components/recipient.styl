@@ -1,6 +1,6 @@
-@require 'components/button.styl'
-@require 'settings/breakpoints.styl'
-@require 'settings/palette.styl'
+@require 'cozy-ui/stylus/components/button.styl'
+@require 'cozy-ui/stylus/settings/breakpoints.styl'
+@require 'cozy-ui/stylus/settings/palette.styl'
 
 .recipient
     display flex
@@ -42,7 +42,7 @@
         font-size 1rem
 
     .recipient-avatar-link
-        background embedurl("../assets/icons/icon-link-16.svg") center center no-repeat
+        background embedurl("..././assets/icons/icon-link-16.svg") center center no-repeat
         height 1rem
         width  1rem
 
@@ -109,7 +109,7 @@
 .recipient-status .recipient-menu-btn
     @extend $button
     text-transform capitalize
-    background transparent embedurl("../assets/icons/icon-arrow-down.svg") right center  no-repeat
+    background transparent embedurl("../../assets/icons/icon-arrow-down.svg") right center  no-repeat
     border     none
     min-width  1rem
     padding-right 1.1rem

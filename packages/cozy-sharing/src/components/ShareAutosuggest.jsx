@@ -5,7 +5,7 @@ import { Icon, Spinner } from 'cozy-ui/transpiled/react'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import styles from './autosuggest.styl'
-import BoldCross from '../assets/icons/icon-cross-bold.svg'
+import BoldCross from '../../assets/icons/icon-cross-bold.svg'
 
 import { Contact } from '../models'
 import { cozyUrlMatch, emailMatch, groupNameMatch } from '../suggestionMatchers'

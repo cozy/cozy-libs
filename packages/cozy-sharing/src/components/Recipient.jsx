@@ -8,15 +8,15 @@ import {
   Icon
 } from 'cozy-ui/transpiled/react'
 
-import MenuAwareMobile from '../../components/Menu/Menuawaremobile'
+import MenuAwareMobile from './MenuAwareMobile'
 import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
 
 import styles from './recipient.styl'
 
-import IconHourglass from '../assets/icons/icon-hourglass-16.svg'
-import IconEye from '../assets/icons/icon-eye-16.svg'
-import IconPen from '../assets/icons/icon-pen-write-16.svg'
-import IconTrash from '../assets/icons/icon-trash-red.svg'
+import IconHourglass from '../../assets/icons/icon-hourglass-16.svg'
+import IconEye from '../../assets/icons/icon-eye-16.svg'
+import IconPen from '../../assets/icons/icon-pen-write-16.svg'
+import IconTrash from '../../assets/icons/icon-trash-red.svg'
 
 import { Contact } from '../models'
 import Identity from './Identity'

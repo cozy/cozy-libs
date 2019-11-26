@@ -1,0 +1,80 @@
+@require 'cozy-ui/stylus/settings/palette.styl'
+@require 'cozy-ui/stylus/settings/z-index.styl'
+@require 'cozy-ui/stylus/components/popover.styl'
+
+.fil-actionmenu-inner
+    @extend    $popover
+    z-index    $file-action-menu
+    position   absolute
+    margin     0
+    margin-top rem(1)
+    min-width  rem(220)
+    overflow   hidden
+    border     0
+    color      var(--charcoalGrey)
+
+    .fil-actionmenu-recipients
+        display none
+
+.fil-actionmenu-inner
+    .fil-action:hover
+        background-color var(--paleGrey)
+    .fil-action:active
+        background-color var(--silver)
+
+.fil-actionmenu-overlay
+  opacity 0
+  -webkit-tap-highlight-color rgba(0,0,0,0)
+
+.fil-mobileactionmenu
+    color      var(--charcoalGrey)
+    hr
+        margin-top 0
+
+.fil-mobileactionmenu-header
+    font-weight bold
+
+.fil-mobileactionmenu-file-name
+    overflow hidden
+    text-overflow ellipsis
+    white-space   nowrap
+
+.fil-mobileactionmenu-file-ext
+    color var(--coolGrey)
+.fil-mobileactionmenu-category
+    padding-left rem(4)
+    line-height rem(18)
+.fil-action-phone-download
+    position relative
+    background embedurl('../assets/icons/icon-phone-download.svg') 1rem center no-repeat
+
+    [class*='toggle']
+        position absolute
+        top 50%
+        transform translateY(-50%)
+        margin-left 1rem
+.fil-action-openWith
+    background embedurl("../assets/icons/icon-link-out-16.svg") 1rem center no-repeat
+.fil-action-download
+    background embedurl("../assets/icons/icon-download-16.svg") 1rem center no-repeat
+.fil-action-destroy
+.fil-action-trash
+    background embedurl("../assets/icons/icon-delete-16.svg") 1rem center no-repeat
+.fil-action-restore
+    background embedurl("../assets/icons/icon-restore.svg") 1rem center no-repeat
+.fil-action-rename
+    background embedurl("../assets/icons/icon-rename.svg") 1rem center no-repeat
+.fil-action-share
+    background embedurl("../assets/icons/icon-share-grey.svg") 1rem center no-repeat
+    position   relative
+.fil-action-moveto
+    background embedurl("../assets/icons/icon-moveto-grey.svg") 1rem center no-repeat
+.fil-action-qualify
+    background embedurl("../assets/icons/icon-label-grey.svg") 1rem center no-repeat
+.fil-action-history
+    background embedurl("../assets/icons/icon-history.svg") 1rem center no-repeat
+
+.fil-action-share .fil-actionmenu-recipients
+    position absolute
+    right    1rem
+    top      .1rem

@@ -6,7 +6,7 @@ import WhoHasAccess from './components/WhoHasAccess'
 
 import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 
-import { Contact } from '../models'
+import { Contact } from './models'
 
 export class SharingDetailsModal extends Component {
   static contextTypes = {

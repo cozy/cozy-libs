@@ -6,7 +6,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import { Contact } from '../models'
 import styles from './status.styl'
-import linkIcon from '../assets/icons/icon-link.svg'
+import linkIcon from '../../assets/icons/icon-link.svg'
 
 const SharedStatus = ({ className, docId, recipients, link, t }) => (
   <span className={cx(className, styles['shared-status'])}>
