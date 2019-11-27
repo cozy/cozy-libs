@@ -30,7 +30,7 @@
     "babel-jest": "^24.9.0",
     "babel-preset-cozy-app": "^1.7.0",
     "cozy-doctypes": "1.67.0",
-    "cozy-ui": "^25.7.0",
+    "cozy-ui": "27.11.2",
     "jest": "24.1.0",
     "jest-dom": "^4.0.0",
     "mockdate": "^2.0.5",
@@ -42,7 +42,7 @@
   "peerDependencies": {
     "cozy-client": "7.4.1",
     "cozy-doctypes": "1.67.0",
-    "cozy-ui": "^25.7.0"
+    "cozy-ui": "^27.11.2"
   },
   "jest": {
     "transformIgnorePatterns": [
