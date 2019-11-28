@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.4.2 (2019-11-28)
+
+
+### Bug Fixes
+
+* Few comments / lang ([88eaf27](https://github.com/cozy/cozy-libs/commit/88eaf27))
+
+
+
+
+
 ## 0.4.1 (2019-11-06)
 
 **Note:** Version bump only for package cozy-notifications
