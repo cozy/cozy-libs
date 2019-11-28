@@ -5248,27 +5248,10 @@ cozy-ui@22.14.1:
     react-pdf "^4.0.5"
     react-select "2.2.0"
 
-cozy-ui@24.8.0:
-  version "24.8.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-24.8.0.tgz#0c1c0c413aabeae0a43902bde49c4981a1e078a6"
-  integrity sha512-ukW/j74XBhfazQzkLAbS/TSJVwf6UaUveARUWwbff5gZGy1JMrWCUZIo6VGOx9K4RJ1W+U3NuKI5Xx/3DBwXBw==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    body-scroll-lock "^2.5.8"
-    classnames "^2.2.5"
-    date-fns "^1.28.5"
-    hammerjs "^2.0.8"
-    node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
-    react-hot-loader "^4.3.11"
-    react-markdown "^4.0.8"
-    react-pdf "^4.0.5"
-    react-select "2.2.0"
-
-cozy-ui@27.6.2:
-  version "27.6.2"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-27.6.2.tgz#d200907a6799e24f5eff867361bf25efaf74b9e1"
-  integrity sha512-t4ilyQ38/tVkw5tAuBfZt8wStq4D01yjUz9WzCPg3N9T9Kuid1a+NM7Vpa4pc2cSd1/v7e4hyHz9LthNdA4dMQ==
+cozy-ui@27.11.2:
+  version "27.11.2"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-27.11.2.tgz#4e79e25049848f3b225d36cd341a29046701b6df"
+  integrity sha512-dFQTQ5vftNXfKBdsa3gYa/3t+KCaSLk38x8w8X+KjzfMdrj2Yx2XaC2HFk5eOvVu4wj9YG0KN7aCKJepg2/SKg==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
@@ -5282,23 +5265,6 @@ cozy-ui@27.6.2:
     react-pdf "^4.0.5"
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
-
-cozy-ui@^25.7.0:
-  version "25.13.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-25.13.1.tgz#fc7d2a4066c4a45c8894d1b59e7aff51dc9057a1"
-  integrity sha512-Xv7r65dj5RZKtqygSbsm07frATqJnZy4xSdD0tNoRpszHzqrqxozp0vKXlPPBM6/7J83esmGopcZXIv7+po6WA==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    body-scroll-lock "^2.5.8"
-    classnames "^2.2.5"
-    date-fns "^1.28.5"
-    hammerjs "^2.0.8"
-    node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
-    react-hot-loader "^4.3.11"
-    react-markdown "^4.0.8"
-    react-pdf "^4.0.5"
-    react-select "2.2.0"
 
 create-ecdh@^4.0.0:
   version "4.0.3"
@@ -13481,14 +13447,6 @@ pouchdb-utils@7.0.0:
     pouchdb-errors "7.0.0"
     pouchdb-md5 "7.0.0"
     uuid "3.2.1"
-
-preact-portal@^1.1.3:
-  version "1.1.3"
-  resolved "https://registry.yarnpkg.com/preact-portal/-/preact-portal-1.1.3.tgz#22cdd3ecf6ad9aaa3f830607a9c6591de90aedb7"
-
-preact@^8.4.2:
-  version "8.4.2"
-  resolved "https://registry.yarnpkg.com/preact/-/preact-8.4.2.tgz#1263b974a17d1ea80b66590e41ef786ced5d6a23"
 
 prelude-ls@~1.1.2:
   version "1.1.2"

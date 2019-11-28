@@ -34,7 +34,6 @@
     "lodash": "4.17.15",
     "microee": "^0.0.6",
     "node-polyglot": "^2.4.0",
-    "preact-portal": "^1.1.3",
     "react-final-form": "3.7.0",
     "react-markdown": "4.2.2",
     "react-router-dom": "^5.0.1",
@@ -48,13 +47,11 @@
     "cozy-client": "7.13.0",
     "cozy-device-helper": "^1.8.0",
     "cozy-realtime": "3.1.0",
-    "cozy-ui": "27.6.2",
+    "cozy-ui": "27.11.2",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.1",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.1.0",
-    "preact": "^8.4.2",
-    "preact-portal": "^1.1.3",
     "prop-types": "15.7.2",
     "react": "16.11.0",
     "react-dom": "16.11.0"
@@ -63,7 +60,7 @@
     "cozy-client": "7.13.0",
     "cozy-device-helper": "1.7.1",
     "cozy-realtime": "^3.1.0",
-    "cozy-ui": "^27.6.2"
+    "cozy-ui": "^27.11.2"
   },
   "sideEffects": false
 }

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SelectBoxAdapter component should match snapshot 1`] = `
-<Aware
+<withBreakpoints(SelectBox)
   fullwidth={true}
   isClearable={true}
   isSearchable={false}
