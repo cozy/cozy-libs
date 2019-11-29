@@ -14,6 +14,8 @@
     "cozy-client": "^6.58.1",
     "cozy-device-helper": "^1.8.0",
     "cozy-doctypes": "^1.70.0",
+    "cozy-realtime": "^3.2.3",
+    "cozy-sharing": "^1.0.0",
     "cozy-ui": "22.14.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
