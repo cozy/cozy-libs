@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.1...cozy-harvest-lib@1.15.2) (2019-11-29)
+
+
+### Bug Fixes
+
+* Konnector Success image ([1cec327](https://github.com/cozy/cozy-libs/commit/1cec327))
+* Maintenance icon ([94d41ad](https://github.com/cozy/cozy-libs/commit/94d41ad))
+
+
+
+
+
 ## [1.15.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.0...cozy-harvest-lib@1.15.1) (2019-11-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
