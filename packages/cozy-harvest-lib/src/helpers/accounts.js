@@ -113,7 +113,7 @@ export const mergeAuth = (account, authData) => ({
  * @return {string}           cipher uuid
  */
 export const getVaultCipherId = account =>
-  get(account, 'relationships.vaultCipher._id')
+  get(account, 'relationships.vaultCipher.data[0]._id')
 
 /**
  * Adds or updates a vault cipher relationship to an account
@@ -126,9 +126,13 @@ export const setVaultCipherRelationship = (account, vaultCipherId) => ({
   relationships: {
     ...account.relationships,
     vaultCipher: {
-      _id: vaultCipherId,
-      _type: 'com.bitwarden.ciphers',
-      _protocol: 'bitwarden'
+      data: [
+        {
+          _id: vaultCipherId,
+          _type: 'com.bitwarden.ciphers',
+          _protocol: 'bitwarden'
+        }
+      ]
     }
   }
 })
