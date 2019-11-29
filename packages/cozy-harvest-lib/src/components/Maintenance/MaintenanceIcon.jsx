@@ -4,8 +4,7 @@ import cx from 'classnames'
 import IconMaintenance from '../../assets/maintenance.svg'
 
 const MaintenanceIcon = ({ breakpoints: { isMobile } }) => (
-  <img
-    src={IconMaintenance}
+  <IconMaintenance
     className={cx(
       isMobile ? 'u-w-3' : 'u-w-4',
       isMobile ? 'u-h-3' : 'u-h-4',
