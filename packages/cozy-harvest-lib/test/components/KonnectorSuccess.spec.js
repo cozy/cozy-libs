@@ -5,7 +5,8 @@ import CozyClient, { CozyProvider } from 'cozy-client'
 import {
   KonnectorSuccess,
   BanksLink,
-  DriveLink
+  DriveLink,
+  SuccessImage
 } from 'components/KonnectorSuccess'
 
 describe('KonnectorSuccess', () => {
@@ -52,6 +53,18 @@ describe('KonnectorSuccess', () => {
       </CozyProvider>
     )
   }
+
+  it('should render the success image', () => {
+    setup()
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(SuccessImage)
+        .dive()
+        .getElement()
+    ).toMatchSnapshot()
+  })
 
   it('should not show drive if trigger has no folder_to_save', () => {
     setup()

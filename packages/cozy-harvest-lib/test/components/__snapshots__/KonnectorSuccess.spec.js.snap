@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KonnectorSuccess should render the success image 1`] = `
+<ConnectingIllu
+  className="u-w-4 u-h-4"
+  viewBox="0 0 120 112"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlnsXlink="http://www.w3.org/1999/xlink"
+/>
+`;
