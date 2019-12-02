@@ -10,7 +10,7 @@ import 'cozy-ui/dist/cozy-ui.min.css'
 
 import { queryConnect } from 'cozy-client'
 
-import SharingProvider, { ShareButton } from 'cozy-sharing'
+import SharingProvider, { ShareButton, ShareModal } from 'cozy-sharing'
 import withLocales from 'cozy-sharing/dist/withLocales'
 
 const reducer = combineReducers({
@@ -30,11 +30,13 @@ const LocalizedSharingProvider = withLocales(SharingProvider)
 const MySharing = props => {
   const file = props.file
   const docId = file.id
-  return <ShareButton docId={docId} />
+  return <>
+    <ShareButton docId={docId} />
+    <ShareModal document={file} />
+  </>
 }
 
 export const WithFirstChild = (props) => {
-  console.log(props)
   if (props.file.fetchStatus == 'loaded') {
     const Component = props.component
     return <Component file={props.file.data.relationships.contents.data[0]} {...props} />
