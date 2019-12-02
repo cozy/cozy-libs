@@ -36,6 +36,7 @@
   },
   "devDependencies": {
     "babel-jest": "^24.9.0",
+    "babel-plugin-css-modules-transform": "^1.6.2",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
     "react": "^16.12.0"
