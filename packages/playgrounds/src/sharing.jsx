@@ -7,6 +7,7 @@ import client from './common/client'
 import { Route } from 'react-router'
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import 'cozy-ui/dist/cozy-ui.min.css'
+import 'cozy-sharing/dist/stylesheet.css'
 
 import { queryConnect } from 'cozy-client'
 
