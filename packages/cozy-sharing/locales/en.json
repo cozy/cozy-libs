@@ -121,6 +121,83 @@
       }
     }
   },
+  "Notes": {
+    "share": {
+      "cta": "Share",
+      "title": "Share",
+      "details": {
+        "title": "Sharing details",
+        "createdAt": "On %{date}",
+        "ro": "Can read",
+        "rw": "Can change",
+        "desc": {
+          "ro": "You can view, download, and add this content to your Cozy. You will get updates by the owner, but you won't be able to update this content yourself.",
+          "rw": "You can view, update, delete and add this content to your Cozy. Updates you make will be seen on other Cozies."
+        }
+      },
+      "sharedByMe": "Shared by me",
+      "sharedWithMe": "Shared with me",
+      "sharedBy": "Shared by %{name}",
+      "shareByLink": {
+        "subtitle": "By public link",
+        "desc": "Anyone with the provided link can see and edit your note.",
+        "creating": "Creating your link...",
+        "copy": "Copy link",
+        "copied": "Link has been copied to clipboard",
+        "failed": "Unable to copy to clipboard"
+      },
+      "shareByEmail": {
+        "subtitle": "By email",
+        "email": "To:",
+        "emailPlaceholder": "Enter the email address or name of the recipient",
+        "send": "Send",
+        "genericSuccess": "You sent an invite to %{count} contacts.",
+        "success": "You sent an invite to %{email}.",
+        "comingsoon": "Coming soon! You will be able to share documents and photos in a single click with your family, your friends, and even your coworkers. Don't worry, we'll let you know when it's ready!",
+        "onlyByLink": "This %{type} can only be shared by link, because",
+        "type": {
+          "file": "file",
+          "folder": "folder",
+          "note": "note"
+        },
+        "hasSharedParent": "it has a shared parent",
+        "hasSharedChild": "it contains a shared element"
+      },
+      "revoke": {
+        "title": "Remove from sharing",
+        "desc": "This contact will keep a copy but the changes won't be synchrnoized anymore.",
+        "success": "You removed this shared file from %{email}."
+      },
+      "revokeSelf": {
+        "title": "Remove me from sharing",
+        "desc": "You keep the content but it won't be updated between your Cozy anymore.",
+        "success": "You were removed from this sharing."
+      },
+      "sharingLink": {
+        "title": "Link to share",
+        "copy": "Copy",
+        "copied": "Copied"
+      },
+      "whoHasAccess": {
+        "title": "1 person has access |||| %{smart_count} people have access"
+      },
+      "protectedShare": {
+        "title": "Coming soon!",
+        "desc": "Share anything by email with your family and friends!"
+      },
+      "close": "Close",
+      "gettingLink": "Getting your link...",
+      "error": {
+        "generic": "An error occurred when creating the note share link, please try again.",
+        "revoke": "Woops, an error occurred. Please contact us so we can fix this issue as soon as possible."
+      },
+      "specialCase": {
+        "base": "This %{type} cannot be shared but with a link as it",
+        "isInSharedFolder": "is in a shared folder",
+        "hasSharedFolder": "contains a shared folder"
+      }
+    }
+  },
   "Albums": {
     "share": {
       "cta": "Share",

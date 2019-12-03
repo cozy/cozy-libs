@@ -70,19 +70,22 @@ export default class ShareModal extends Component {
             styles['share-moral-override-bottom']
           )}
         >
-          {documentType !== 'Albums' && !hasSharedParent && !hasSharedChild && (
-            <DumbShareByEmail
-              currentRecipients={recipients}
-              document={document}
-              documentType={documentType}
-              sharingDesc={sharingDesc}
-              contacts={contacts}
-              groups={groups}
-              createContact={createContact}
-              onShare={onShare}
-              needsContactsPermission={needsContactsPermission}
-            />
-          )}
+          {documentType !== 'Notes' &&
+            documentType !== 'Albums' &&
+            !hasSharedParent &&
+            !hasSharedChild && (
+              <DumbShareByEmail
+                currentRecipients={recipients}
+                document={document}
+                documentType={documentType}
+                sharingDesc={sharingDesc}
+                contacts={contacts}
+                groups={groups}
+                createContact={createContact}
+                onShare={onShare}
+                needsContactsPermission={needsContactsPermission}
+              />
+            )}
           <div className={styles['share-modal-separator']} />
           <div className={styles['share-modal-secondary']}>
             <div className={cx(styles['share-modal-margins'], 'u-pb-1')}>

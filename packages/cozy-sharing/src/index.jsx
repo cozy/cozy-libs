@@ -232,11 +232,11 @@ export const SharedDocument = ({ docId, children }) => (
   </SharingContext.Consumer>
 )
 
-export const SharedStatus = ({ docId, className }) => (
+export const SharedStatus = ({ docId, className, noSharedClassName }) => (
   <SharingContext.Consumer>
     {({ byDocId, getRecipients, getSharingLink } = {}) =>
       !byDocId || !byDocId[docId] ? (
-        <span className={className}>—</span>
+        <span className={className + ' ' + noSharedClassName}>—</span>
       ) : (
         <DumbSharedStatus
           className={className}

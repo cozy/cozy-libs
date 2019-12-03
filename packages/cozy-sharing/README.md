@@ -1,3 +1,7 @@
+# Test 'n play
+
+Open the playgrounds in cozy-libs and run `yarn start`
+
 # Share and send mail in development
 
 Cozy apps let users [share documents from cozy to cozy](https://github.com/cozy/cozy-stack/blob/master/docs/sharing.md#cozy-to-cozy-sharing).

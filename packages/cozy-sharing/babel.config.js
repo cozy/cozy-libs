@@ -14,7 +14,8 @@ module.exports = {
         extractCss: './dist/stylesheet.css',
         generateScopedName: '[name]__[local]___[hash:base64:5]'
       }
-    ]
+    ],
+    'inline-react-svg'
   ],
   env: {
     test: {

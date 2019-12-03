@@ -2,11 +2,10 @@ import React from 'react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { SharingTooltip, TooltipRecipientList } from './Tooltip'
 import cx from 'classnames'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import { Contact } from '../models'
 import styles from './status.styl'
-import linkIcon from '../../assets/icons/icon-link.svg'
+import LinkIcon from '../../assets/icons/icon-link.svg'
 
 const SharedStatus = ({ className, docId, recipients, link, t }) => (
   <span className={cx(className, styles['shared-status'])}>
@@ -28,7 +27,7 @@ const SharedStatus = ({ className, docId, recipients, link, t }) => (
         />
       </SharingTooltip>
     )}
-    {link && <Icon icon={linkIcon} />}
+    {link && <LinkIcon />}
   </span>
 )
 

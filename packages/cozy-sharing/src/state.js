@@ -392,6 +392,8 @@ const buildSharingLink = (state, documentType, sharecode) => {
 const getAppUrlForDoctype = (state, documentType) => {
   const apps = getApps(state)
   switch (documentType) {
+    case 'Notes':
+      return getAppUrl(apps, 'notes')
     case 'Files':
     case 'Document':
       return getAppUrl(apps, 'drive')
