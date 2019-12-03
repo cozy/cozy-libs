@@ -18,6 +18,7 @@ import { Route } from 'react-router'
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-sharing/dist/stylesheet.css'
+import { Alerter, I18n } from 'cozy-ui/transpiled/react'
 
 import { queryConnect } from 'cozy-client'
 
