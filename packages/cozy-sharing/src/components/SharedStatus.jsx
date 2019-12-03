@@ -2,6 +2,7 @@ import React from 'react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { SharingTooltip, TooltipRecipientList } from './Tooltip'
 import cx from 'classnames'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import { Contact } from '../models'
 import styles from './status.styl'
@@ -27,7 +28,7 @@ const SharedStatus = ({ className, docId, recipients, link, t }) => (
         />
       </SharingTooltip>
     )}
-    {link && <LinkIcon />}
+    {link && <Icon icon={LinkIcon} />}
   </span>
 )
 

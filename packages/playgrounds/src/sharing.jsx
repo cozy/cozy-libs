@@ -5,8 +5,7 @@ import ReactDOM from 'react-dom'
 
 import SharingProvider, {
   ShareButton,
-  ShareModal,
-  SharedStatus
+  ShareModal
 } from 'cozy-sharing'
 import withLocales from 'cozy-sharing/dist/withLocales'
 
