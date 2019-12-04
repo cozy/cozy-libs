@@ -1,5 +1,4 @@
 const trimEnd = require('lodash/trimEnd')
-
 const Document = require('./Document')
 
 const FILENAME_WITH_EXTENSION_REGEX = /(.+)(\..*)$/
@@ -171,12 +170,16 @@ class CozyFile extends Document {
    * @param {ArrayBuffer} file data
    * @param {String} dirId dir id where to upload
    * @param {String} conflictStrategy Actually only 2 hardcoded strategies 'erase' or 'rename'
+   * @param {Object} metadata An object containing the metadata to attach
+   * @param {String} contentType content type of the file
    */
   static async uploadFileWithConflictStrategy(
     name,
     file,
     dirId,
-    conflictStrategy
+    conflictStrategy,
+    metadata,
+    contentType
   ) {
     const filesCollection = this.cozyClient.collection('io.cozy.files')
 
@@ -190,7 +193,9 @@ class CozyFile extends Document {
         const resp = await filesCollection.updateFile(file, {
           dirId,
           fileId,
-          name
+          name,
+          metadata,
+          contentType
         })
         return resp
       } else {
@@ -205,21 +210,34 @@ class CozyFile extends Document {
           newFileName,
           file,
           dirId,
-          conflictStrategy
+          conflictStrategy,
+          metadata,
+          contentType
         )
       }
     } catch (error) {
       if (/Not Found/.test(error.message)) {
-        return await CozyFile.upload(name, file, dirId)
+        return await CozyFile.upload(name, file, dirId, metadata, contentType)
       }
       throw error
     }
   }
-
-  static async upload(name, file, dirId) {
-    return this.cozyClient
-      .collection('io.cozy.files')
-      .createFile(file, { name, dirId, contentType: 'image/jpeg' })
+  /**
+   *
+   * @param {String} name File's name
+   * @param {ArrayBuffer} file
+   * @param {String} dirId
+   * @param {Object} metadata
+   * @param {String} contentType
+   */
+  static async upload(name, file, dirId, metadata, contentType = 'image/jpeg') {
+    return this.cozyClient.collection('io.cozy.files').createFile(file, {
+      name,
+      dirId,
+      contentType,
+      lastModifiedDate: new Date(),
+      metadata
+    })
   }
 }
 
