@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.70.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.69.0...cozy-doctypes@1.70.0) (2019-12-04)
+
+
+### Features
+
+* We can pass contentType if needed ([2b5dd52](https://github.com/cozy/cozy-libs/commit/2b5dd52))
+
+
+
+
+
 # [1.69.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.68.0...cozy-doctypes@1.69.0) (2019-11-15)
 
 

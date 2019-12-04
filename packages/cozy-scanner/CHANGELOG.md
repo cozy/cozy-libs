@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.1.2...cozy-scanner@0.2.0) (2019-12-04)
+
+
+### Features
+
+* We can pass contentType if needed ([2b5dd52](https://github.com/cozy/cozy-libs/commit/2b5dd52))
+
+
+
+
+
 ## [0.1.2](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.1.1...cozy-scanner@0.1.2) (2019-11-28)
 
 **Note:** Version bump only for package cozy-scanner
