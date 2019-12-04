@@ -3,10 +3,7 @@ import { createStore, combineReducers } from 'redux'
 import { Provider } from 'react-redux'
 import ReactDOM from 'react-dom'
 
-import SharingProvider, {
-  ShareButton,
-  ShareModal
-} from 'cozy-sharing'
+import SharingProvider, { ShareButton, ShareModal } from 'cozy-sharing'
 import withLocales from 'cozy-sharing/dist/withLocales'
 
 import App from './common/App'
