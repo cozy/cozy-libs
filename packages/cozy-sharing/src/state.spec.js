@@ -19,7 +19,7 @@ import {
   PERM_1,
   PERM_2,
   APPS
-} from './__tests__/fixtures'
+} from '../__tests__/fixtures'
 
 describe('Sharing state', () => {
   it('should have a default state', () => {
