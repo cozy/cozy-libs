@@ -1,19 +1,21 @@
 import { CozyFile } from 'cozy-doctypes'
 
 /**
- *
+ * //!TODO this method sould be extracted to Cozy-Client itself
  * @param {String} imageURI path to access to image (file://)
  * @param {Object} qualification attached to the file
  * @param {String} name of the file you want to upload
  * @param {String} dirId to upload to file to
  * @param {String} onConflict erase / rename
+ * @param {String} contentType Content-Type of the file
  */
 export const doUpload = async (
   imageURI,
   qualification,
   name = '',
   dirId,
-  onConflict
+  onConflict,
+  contentType
 ) => {
   /** Cordova plugin doesn't support promise since there are supporting Android 4.X.X
    * so we have to create manually a promise to be able to write beautiful code ;)
@@ -31,7 +33,8 @@ export const doUpload = async (
                 reader.result,
                 dirId,
                 onConflict,
-                qualification
+                qualification,
+                contentType
               )
               resolve(newFile)
             } catch (error) {
