@@ -32,10 +32,10 @@ class MJFooter extends core.BodyComponent {
 
   cozySignature(locale) {
     // The default locale is 'en'
-    let text = 'Cozy, your smart personal cloud'
+    let text = 'Cozy Cloud hosts your personal cloud, Cozy'
     let more = 'Hosted in France • Respectful of your privacy • Secure'
     if (locale == 'fr') {
-      text = 'Cozy, votre domicile numérique'
+      text = 'Cozy Cloud héberge votre domicile numérique, Cozy'
       more = 'Hébergé en France • Respectueux de votre vie privée • Sécurisé'
     }
     return `
