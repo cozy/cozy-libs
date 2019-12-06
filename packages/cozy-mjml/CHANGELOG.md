@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.10.0 (2019-12-06)
+
+
+### Features
+
+* Update the signature in mjml footer ([#884](https://github.com/cozy/cozy-libs/issues/884)) ([112416d](https://github.com/cozy/cozy-libs/commit/112416d))
+
+
+
+
+
 ## 0.9.3 (2019-11-06)
 
 **Note:** Version bump only for package cozy-mjml
