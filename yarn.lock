@@ -5168,29 +5168,13 @@ cozy-client@7.4.1:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-client@^8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-8.5.0.tgz#ec76fd9ee12a395a6c26604edbc9549281561570"
-  integrity sha512-lzQUwUtf0K3zeyd35IBHrtmLkuOn+OHO0MzePzB0Rajy7wSloRc9fOTSz3Y/Gk44GzsiliP4Zs3n3EITiCQycw==
+cozy-client@^8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-8.7.0.tgz#74d4d5ee3307b79400ed3fa1209f27e4369e7cf8"
+  integrity sha512-RoMsn7e+pAD7S2GNlhO5frd2bqc66lb/JzNREnP19YBrFwjqGFsTmtH0/0aM+BoUmHE2myxNbVcfwq37vd+jOQ==
   dependencies:
     cozy-device-helper "^1.7.3"
-    cozy-stack-client "^8.4.0"
-    lodash "^4.17.13"
-    microee "^0.0.6"
-    prop-types "^15.6.2"
-    react-redux "^5.0.7"
-    redux "^3.7.2"
-    redux-thunk "^2.3.0"
-    sift "^6.0.0"
-    url-search-params-polyfill "^7.0.0"
-
-cozy-client@^8.5.1:
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-8.5.1.tgz#7303302a3f0241b965798c1a7239c3697f659b46"
-  integrity sha512-Ds+U2sGkQjK8nslcCIlysK/RAhCkjNX7jZdpun8KIZCRoryvmDYWND9Xprd+cB+MN4kueLPIZdasTHoFF4i38g==
-  dependencies:
-    cozy-device-helper "^1.7.3"
-    cozy-stack-client "^8.5.1"
+    cozy-stack-client "^8.7.0"
     lodash "^4.17.13"
     microee "^0.0.6"
     prop-types "^15.6.2"
@@ -5235,19 +5219,10 @@ cozy-stack-client@^7.1.1:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-stack-client@^8.4.0:
-  version "8.4.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-8.4.0.tgz#45e1151442ab45da5d228f0cd948e4999860e368"
-  integrity sha512-Si9iHQKRfIUgvnwDW6rKxA/0N2locngi7T2xIwMF17CJFTYj/CjOVJXae/FsaK02B9rJgha8mPAIW+hNl1EKOw==
-  dependencies:
-    detect-node "^2.0.4"
-    mime "^2.4.0"
-    qs "^6.7.0"
-
-cozy-stack-client@^8.5.1:
-  version "8.5.1"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-8.5.1.tgz#a3f88eee07d168a0eafe70bc68f9333ed34c71a3"
-  integrity sha512-SZB1hma9Zh50FeTiCl9bFneUy2XNwo++W6x9zd70tfNsMlXt504iDaV8MCew2lvuVszK+HFzsq+hyByB0m2VlA==
+cozy-stack-client@^8.7.0:
+  version "8.7.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-8.7.0.tgz#736c13cb086fe95b464a22dce578b8e8ebb06221"
+  integrity sha512-1mZ7VtyTtSKEyjSCGICLxaRHVr5c0Dp5/OhhDH3q61VPUsPNYSkKKSFD6wUc1yHJBdiqHJAPEFfk8lflePTQew==
   dependencies:
     detect-node "^2.0.4"
     mime "^2.4.0"
@@ -14019,6 +13994,16 @@ react-dom@16.8.6, react-dom@^16.5.2:
     prop-types "^15.6.2"
     scheduler "^0.13.6"
 
+react-dom@^16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
+  integrity sha512-LMxFfAGrcS3kETtQaCkTKjMiifahaMySFDn71fZUNpPHZQEzmk/GiAeIT8JSOrHB23fnuCOMruL2a8NYlw+8Gw==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+    prop-types "^15.6.2"
+    scheduler "^0.18.0"
+
 react-error-overlay@^4.0.1:
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-4.0.1.tgz#417addb0814a90f3a7082eacba7cee588d00da89"
@@ -15285,6 +15270,14 @@ scheduler@^0.17.0:
   version "0.17.0"
   resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.17.0.tgz#7c9c673e4ec781fac853927916d1c426b6f3ddfe"
   integrity sha512-7rro8Io3tnCPuY4la/NuI5F2yfESpnfZyT6TtkXnSWVkcu0BCDJ+8gk5ozUaFaxpIyNuWAPXrH0yFcSi28fnDA==
+  dependencies:
+    loose-envify "^1.1.0"
+    object-assign "^4.1.1"
+
+scheduler@^0.18.0:
+  version "0.18.0"
+  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.18.0.tgz#5901ad6659bc1d8f3fdaf36eb7a67b0d6746b1c4"
+  integrity sha512-agTSHR1Nbfi6ulI0kYNK0203joW2Y5W4po4l+v03tOoiJKpTBbxpNhWDvqc/4IcOw+KLmSiQLTasZ4cab2/UWQ==
   dependencies:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
