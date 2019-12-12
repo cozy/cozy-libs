@@ -3,6 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
 }))
+
 import DocumentCategory from './DocumentCategory'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
