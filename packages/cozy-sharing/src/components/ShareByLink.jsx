@@ -29,8 +29,13 @@ class ShareByLink extends React.Component {
 
   copyLinkToClipboard = () => {
     if (copy(this.props.link))
-      Alerter.success(this.context.t(`${this.props.documentType}.share.shareByLink.copied`))
-    else Alerter.error(this.context.t(`${this.props.documentType}.share.shareByLink.failed`))
+      Alerter.success(
+        this.context.t(`${this.props.documentType}.share.shareByLink.copied`)
+      )
+    else
+      Alerter.error(
+        this.context.t(`${this.props.documentType}.share.shareByLink.failed`)
+      )
   }
 
   async createShareLink() {
@@ -38,7 +43,9 @@ class ShareByLink extends React.Component {
       this.setState(state => ({ ...state, loading: true }))
       await this.props.onEnable(this.props.document)
     } catch (e) {
-      Alerter.error(this.context.t(`${this.props.documentType}.share.error.generic`))
+      Alerter.error(
+        this.context.t(`${this.props.documentType}.share.error.generic`)
+      )
       logger.log(e)
     } finally {
       this.setState(state => ({ ...state, loading: false }))
@@ -50,7 +57,9 @@ class ShareByLink extends React.Component {
       this.setState(state => ({ ...state, loading: true }))
       await this.props.onDisable(this.props.document)
     } catch (e) {
-      Alerter.error(this.context.t(`${this.props.documentType}.share.error.revoke`))
+      Alerter.error(
+        this.context.t(`${this.props.documentType}.share.error.revoke`)
+      )
       logger.log(e)
     } finally {
       this.setState(state => ({ ...state, loading: false }))
