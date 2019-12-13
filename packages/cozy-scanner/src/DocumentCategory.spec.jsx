@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent, wait } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
 }))
@@ -39,12 +39,10 @@ describe('DocumentCategory', () => {
     expect(asFragment()).toMatchSnapshot()
     //Check if the second item is displayed in the ActionMenu
     expect(() => getByText('Scan.items.Label2')).not.toThrow()
-    await wait(() => getByText('Scan.items.Label2'))
     fireEvent.click(getByText('Scan.items.Label2'))
     //Menu should not be there anymore
     expect(queryByText('Scan.items.Label2')).toBeNull()
     fireEvent.click(getByText('Scan.items.test'))
-    await wait(() => getByText('Scan.items.Label2'))
 
     fireEvent.click(getByText('Scan.items.Label2'))
     expect(onSelect).toBeCalledWith({
