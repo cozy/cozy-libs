@@ -7,7 +7,7 @@ import DocumentCategory from './DocumentCategory'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 describe('DocumentCategory', () => {
-  it('should match snapshot if selected and icon', async () => {
+  it('should match snapshot if selected and icon', () => {
     const onSelect = jest.fn()
     const { queryByText, getByText, asFragment } = render(
       <MuiCozyTheme>
