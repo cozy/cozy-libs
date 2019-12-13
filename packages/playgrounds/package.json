@@ -16,7 +16,7 @@
     "cozy-doctypes": "^1.70.0",
     "cozy-realtime": "^3.2.3",
     "cozy-sharing": "^1.0.0",
-    "cozy-ui": "22.14.1",
+    "cozy-ui": "28.4.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.0.3",
