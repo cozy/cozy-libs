@@ -15,6 +15,7 @@
   },
   "scripts": {
     "build": "env BABEL_ENV=transpilation babel src -d dist --copy-files --verbose",
+    "postbuild": "find dist -name '*.snap' -exec rm {} \\;",
     "build:doc:react": "(cd ../.. && TARGET=cozy-sharing yarn build:doc:react)",
     "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prepublishOnly": "yarn build",
