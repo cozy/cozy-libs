@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.4 (2019-12-13)
+
+
+### Bug Fixes
+
+* Use camelCase ([b3e2b54](https://github.com/cozy/cozy-libs/commit/b3e2b54))
+
+
+
+
+
 ## [2.0.3](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.0.2...cozy-authentication@2.0.3) (2019-11-06)
 
 **Note:** Version bump only for package cozy-authentication
