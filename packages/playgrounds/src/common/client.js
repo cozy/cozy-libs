@@ -27,7 +27,13 @@ const getClient = customOptions => {
             doctype: 'io.cozy.contacts'
           },
           files: {
-            doctype: 'io.cozy.files'
+            doctype: 'io.cozy.files',
+            relationships: {
+              contents: {
+                type: 'io.cozy.files:has-many',
+                doctype: 'io.cozy.files'
+              }
+            }
           },
           konnectors: {
             doctype: 'io.cozy.konnectors'

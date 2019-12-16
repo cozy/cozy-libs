@@ -1,0 +1,256 @@
+{
+  "Share": {
+    "status": {
+      "owner": "Propriétaire",
+      "pending": "En attente",
+      "ready": "Accepté",
+      "refused": "Refusé",
+      "error": "Erreur",
+      "unregistered": "Erreur",
+      "mail-not-sent": "En attente",
+      "revoked": "Erreur"
+    },
+    "type": {
+      "one-way": "Peut consulter",
+      "two-way": "Peut modifier",
+      "desc": {
+        "one-way": "Les contacts peuvent consulter, télécharger, et ajouter le contenu à leur Cozy. En cas d’ajout à leur Cozy, ils recevront vos modifications sur le contenu mais ils ne pourront pas le modifier.",
+        "two-way": "Les contacts peuvent modifier, supprimer et ajouter le contenu à leur Cozy. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+      }
+    },
+    "locked-type-file": "Bientôt : vous pourrez changer la permission donnée sur le fichier.",
+    "locked-type-folder": "Bientôt : vous pourrez changer la permission donnée sur le dossier.",
+    "recipients": {
+      "you": "Vous",
+      "accessCount": "%{count} personnes y ont accès"
+    },
+    "create-cozy": "Créer mon Cozy",
+    "members": {
+      "count": "1 membre |||| %{smart_count} membres",
+      "others": "et 1 autre… |||| et %{smart_count} autres…",
+      "otherContacts": "autre contact |||| autres contacts"
+    },
+    "contacts": {
+      "permissionRequired": {
+        "title": "Enregistrer vos contacts dans votre Cozy ?",
+        "desc": "Autorisez l'application à accéder aux contacts de votre Cozy : vous pourrez les sélectionner la prochaine fois.",
+        "action": "Autoriser l'accès",
+        "success": "L'application a accès à vos contacts"
+      }
+    }
+  },
+  "Sharings": {
+    "unavailable": {
+      "title": "Ravi de vous revoir !",
+      "message": "Connectez-vous à Internet pour faire apparaitre la liste de vos récents partages."
+    }
+  },
+  "Files": {
+    "share": {
+      "cta": "Partager",
+      "title": "Partager",
+      "details": {
+        "title": "Détails du partage",
+        "createdAt": "Depuis le %{date}",
+        "ro": "Peut consulter",
+        "rw": "Peut modifier",
+        "desc": {
+          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Cozy. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
+          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+        }
+      },
+      "sharedByMe": "Partagé",
+      "sharedWithMe": "Partagé avec moi",
+      "sharedBy": "Partagé par %{name}",
+      "shareByLink": {
+        "subtitle": "Par lien public",
+        "desc": "Chaque personne possédant le lien fourni peut voir et télécharger vos fichiers.",
+        "creating": "Création du lien...",
+        "copy": "Copier le lien",
+        "copied": "Lien copié dans le presse-papiers.",
+        "failed": "Impossible de copier dans le presse papier"
+      },
+      "shareByEmail": {
+        "subtitle": "Par email",
+        "email": "À :",
+        "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
+        "send": "Envoyer",
+        "genericSuccess": "Vous avez invité %{count} contacts.",
+        "success": "Vous avez envoyé une invitation à %{email}.",
+        "comingsoon": "Bientôt disponible ! Vous pourrez partager un document et vos photos en un seul clic avec votre famille, vos amis, et même vos collaborateurs. Ne vous inquiétez pas, on vous prévient quand ce sera prêt !",
+        "onlyByLink": "Ce %{type} ne peut être partagé que sous la forme d'un lien, car il",
+        "type": {
+          "file": "fichier",
+          "folder": "dossier"
+        },
+        "hasSharedParent": "se trouve dans un dossier partagé.",
+        "hasSharedChild": "contient un élément partagé."
+      },
+      "revoke": {
+        "title": "Arrêter le partage",
+        "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
+        "success": "Vous avez cessé de partager ce fichier avec %{email}."
+      },
+      "revokeSelf": {
+        "title": "Arrêter le partage",
+        "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy.",
+        "success": "Vous avez été retiré de ce partage."
+      },
+      "sharingLink": {
+        "title": "Partager",
+        "copy": "Copier",
+        "copied": "Copié"
+      },
+      "whoHasAccess": {
+        "title": "1 personne y a accès |||| %{smart_count} personnes y ont accès"
+      },
+      "protectedShare": {
+        "title": "Prochainement !",
+        "desc": "Partagez ce que vous souhaitez par email avec votre famille et vos amis !"
+      },
+      "close": "Fermer",
+      "gettingLink": "Création du lien…",
+      "error": {
+        "generic": "Une erreur est survenue lors de la création du lien de partage, merci de réessayer",
+        "revoke": "Oups, une erreur est survenue. Contactez-nous pour que nous résolvions la situation au plus vite.\n"
+      },
+      "specialCase": {
+        "base": "Ce %{type} ne peut être partagé que sous la forme d'un lien, car il",
+        "isInSharedFolder": "se trouve dans un dossier partagé.",
+        "hasSharedFolder": "contient un dossier partagé."
+      }
+    }
+  },
+  "Files": {
+    "share": {
+      "cta": "Partager",
+      "title": "Partager",
+      "details": {
+        "title": "Détails du partage",
+        "createdAt": "Depuis le %{date}",
+        "ro": "Peut consulter",
+        "rw": "Peut modifier",
+        "desc": {
+          "ro": "Vous pouvez consulter, télécharger, et ajouter ce contenu à votre Cozy. Vous recevrez les modifications faites par le propriétaire, mais vous ne pourrez pas le modifier.",
+          "rw": "Vous pouvez consulter, modifier et supprimer du contenu. Les modifications sur le contenu seront répercutées automatiquement entre vos Cozy."
+        }
+      },
+      "sharedByMe": "Partagé",
+      "sharedWithMe": "Partagé avec moi",
+      "sharedBy": "Partagé par %{name}",
+      "shareByLink": {
+        "subtitle": "Par lien public",
+        "desc": "Chaque personne possédant le lien fourni peut voir et modifier votre note.",
+        "creating": "Création du lien...",
+        "copy": "Copier le lien",
+        "copied": "Lien copié dans le presse-papiers.",
+        "failed": "Impossible de copier dans le presse papier"
+      },
+      "shareByEmail": {
+        "subtitle": "Par email",
+        "email": "À :",
+        "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
+        "send": "Envoyer",
+        "genericSuccess": "Vous avez invité %{count} contacts.",
+        "success": "Vous avez envoyé une invitation à %{email}.",
+        "comingsoon": "Bientôt disponible ! Vous pourrez partager un document et vos photos en un seul clic avec votre famille, vos amis, et même vos collaborateurs. Ne vous inquiétez pas, on vous prévient quand ce sera prêt !",
+        "onlyByLink": "Ce %{type} ne peut être partagé que sous la forme d'un lien, car il",
+        "type": {
+          "file": "fichier",
+          "folder": "dossier",
+          "note": "note"
+        },
+        "hasSharedParent": "se trouve dans un dossier partagé.",
+        "hasSharedChild": "contient un élément partagé."
+      },
+      "revoke": {
+        "title": "Arrêter le partage",
+        "desc": "Votre contact conservera une copie mais vos changements ne seront plus synchronisés.",
+        "success": "Vous avez cessé de partager ce fichier avec %{email}."
+      },
+      "revokeSelf": {
+        "title": "Arrêter le partage",
+        "desc": "Vous conservez le contenu mais il ne sera plus mis à jour entre vos Cozy.",
+        "success": "Vous avez été retiré de ce partage."
+      },
+      "sharingLink": {
+        "title": "Partager",
+        "copy": "Copier",
+        "copied": "Copié"
+      },
+      "whoHasAccess": {
+        "title": "1 personne y a accès |||| %{smart_count} personnes y ont accès"
+      },
+      "protectedShare": {
+        "title": "Prochainement !",
+        "desc": "Partagez ce que vous souhaitez par email avec votre famille et vos amis !"
+      },
+      "close": "Fermer",
+      "gettingLink": "Création du lien…",
+      "error": {
+        "generic": "Une erreur est survenue lors de la création du lien de partage, merci de réessayer",
+        "revoke": "Oups, une erreur est survenue. Contactez-nous pour que nous résolvions la situation au plus vite.\n"
+      },
+      "specialCase": {
+        "base": "Ce %{type} ne peut être partagé que sous la forme d'un lien, car il",
+        "isInSharedFolder": "se trouve dans un dossier partagé.",
+        "hasSharedFolder": "contient un dossier partagé."
+      }
+    }
+  },
+  "Albums": {
+    "share": {
+      "cta": "Partager",
+      "title": "Partager avec d'autres",
+      "details": {
+        "title": "Détails du partage",
+        "createdAt": "Depuis le %{date}",
+        "ro": "Permission de lecture",
+        "rw": "Permission d'écriture et de lecture"
+      },
+      "sharedByMe": "Partagé",
+      "sharedWithMe": "Partagé avec moi",
+      "shareByLink": {
+        "subtitle": "Par lien public",
+        "desc": "Chaque personne possédant le lien fourni peut voir et télécharger vos photos.",
+        "fetchFailed": "Oups ! Il semblerait que votre connexion internet soit limitée, réessayez plus tard quand le réseau sera meilleur.",
+        "creating": "Création de votre lien...",
+        "copy": "Copier le lien",
+        "copied": "Lien copié dans le presse-papier",
+        "failed": "Impossible de copier dans le presse-papier"
+      },
+      "shareByEmail": {
+        "title": "Par e-mail",
+        "subtitle": "Par email",
+        "email": "e-mail",
+        "emailPlaceholder": "Saisissez l'email ou le nom du destinataire.",
+        "send": "Envoyer",
+        "genericSuccess": "Vous avez envoyé une invitation à %{count} contacts.",
+        "success": "Vous avez envoyé une invitation à %{email}.",
+        "comingsoon": "Bientôt disponible ! Vous pourrez partager vos documents et vos photos en un seul clic avec votre famille, vos amis et même vos collaborateurs. Ne vous inquiétez pas, on vous préviendra quand ce sera prêt !\n"
+      },
+      "unshare": {
+        "title": "Arrêter le partage avec ce contact",
+        "success": "Vous avez cessé de partager cet album avec %{email}."
+      },
+      "sharingLink": {
+        "title": "Partager",
+        "copy": "Copier",
+        "copied": "Copié"
+      },
+      "whoHasAccess": {
+        "title": "Qui a accès"
+      },
+      "protectedShare": {
+        "title": "Prochainement !",
+        "desc": "Partagez ce que vous souhaitez par email avec votre famille et vos amis !"
+      },
+      "close": "Fermer",
+      "gettingLink": "Récupération du lien...",
+      "error": {
+        "generic": "Une erreur est survenue lors de la création du lien de partage de l'album, merci de réessayer",
+        "revoke": "Une erreur est survenue lors de la révocation du lien de partage de l'album, merci de réessayer"
+      }
+    }
+  }
+}

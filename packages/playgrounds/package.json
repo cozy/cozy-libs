@@ -5,16 +5,18 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "env USE_REACT=true parcel src/*.html"
+    "start": "env USE_REACT=true parcel src/sharing.html"
   },
   "dependencies": {
     "@material-ui/core": "3.9.3",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "cozy-authentication": "^2.0.4",
-    "cozy-client": "^6.58.1",
+    "cozy-client": "^8.7.0",
     "cozy-device-helper": "^1.8.0",
     "cozy-doctypes": "^1.70.0",
-    "cozy-ui": "22.14.1",
+    "cozy-realtime": "^3.2.3",
+    "cozy-sharing": "^1.0.0",
+    "cozy-ui": "28.4.1",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "react-redux": "^7.0.3",
