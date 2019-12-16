@@ -10,8 +10,6 @@ import { default as DumbShareByLink } from './ShareByLink'
 import { default as DumbShareByEmail } from './ShareByEmail'
 import WhoHasAccess from './WhoHasAccess'
 
-require('url-polyfill')
-
 export default class ShareModal extends Component {
   static contextTypes = {
     t: PropTypes.func.isRequired
