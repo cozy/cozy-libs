@@ -81,7 +81,7 @@ export class EditAccountModal extends Component {
      * When we are on mobile, we display a back button
      * On desktop we display a cross
      */
-    const { konnector, pushHistory } = this.props
+    const { konnector } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <Modal
