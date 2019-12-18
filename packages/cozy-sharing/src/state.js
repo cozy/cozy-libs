@@ -386,7 +386,12 @@ const getDocumentSharingType = (sharing, docId) => {
 
 const buildSharingLink = (state, documentType, sharecode) => {
   const appUrl = getAppUrlForDoctype(state, documentType)
-  return `${appUrl}public?sharecode=${sharecode}`
+  switch (documentType) {
+    case 'Notes':
+      return `${appUrl}public/?sharecode=${sharecode}`
+    default:
+      return `${appUrl}public?sharecode=${sharecode}`
+  }
 }
 
 const getAppUrlForDoctype = (state, documentType) => {
