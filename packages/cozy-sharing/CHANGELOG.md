@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.2.0...cozy-sharing@1.3.0) (2019-12-18)
+
+
+### Bug Fixes
+
+* **cozy-sharing:** URL for notes public link ([b065d43](https://github.com/cozy/cozy-libs/commit/b065d43))
+
+
+### Features
+
+* **cozy-sharing:** Allows notes to be edited through a public link ([300e88d](https://github.com/cozy/cozy-libs/commit/300e88d))
+
+
+
+
+
 # [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.1.0...cozy-sharing@1.2.0) (2019-12-18)
 
 
