@@ -115,7 +115,8 @@ CozyFolder.magicFolders = {
   ADMINISTRATIVE: `${Application.doctype}/administrative`,
   PHOTOS: `${Application.doctype}/photos`,
   PHOTOS_BACKUP: `${Application.doctype}/photos/mobile`,
-  PHOTOS_UPLOAD: `${Application.doctype}/photos/upload`
+  PHOTOS_UPLOAD: `${Application.doctype}/photos/upload`,
+  NOTES_FOLDER: `${Application.doctype}/notes`
 }
 
 module.exports = CozyFolder
