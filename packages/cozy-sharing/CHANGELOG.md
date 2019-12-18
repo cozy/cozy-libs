@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.3.2...cozy-sharing@1.4.0) (2019-12-18)
+
+
+### Bug Fixes
+
+* **cozy-sharing:** Patch is necessary for cozy-notes ([46c6ffc](https://github.com/cozy/cozy-libs/commit/46c6ffc))
+
+
+### Features
+
+* **cozy-sharing:** Updates cozy-client peer dep ([d872c6f](https://github.com/cozy/cozy-libs/commit/d872c6f))
+
+
+
+
+
 ## [1.3.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.3.1...cozy-sharing@1.3.2) (2019-12-18)
 
 
