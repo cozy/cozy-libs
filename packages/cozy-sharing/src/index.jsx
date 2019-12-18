@@ -176,7 +176,7 @@ class SharingProvider extends Component {
     // Notes should be shared with write permissions
     // so that the recipient may edit the content of the note
     const options =
-      documentType === 'Notes' ? { verbs: ['GET', 'POST', 'PUT'] } : {}
+      documentType === 'Notes' ? { verbs: ['GET', 'POST', 'PUT', 'PATCH'] } : {}
     trackSharingByLink(document)
     const resp = await this.props.client
       .collection('io.cozy.permissions')
