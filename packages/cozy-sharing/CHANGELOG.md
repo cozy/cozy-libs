@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.1.0...cozy-sharing@1.2.0) (2019-12-18)
+
+
+### Features
+
+* URL polyfill is useless ([c574e76](https://github.com/cozy/cozy-libs/commit/c574e76))
+
+
+
+
+
 # 1.1.0 (2019-12-16)
 
 
