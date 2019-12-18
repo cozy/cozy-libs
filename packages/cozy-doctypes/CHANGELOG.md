@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.71.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.70.0...cozy-doctypes@1.71.0) (2019-12-18)
+
+
+### Features
+
+* Add notes folder ([94fa863](https://github.com/cozy/cozy-libs/commit/94fa863))
+
+
+
+
+
 # [1.70.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.69.0...cozy-doctypes@1.70.0) (2019-12-04)
 
 
