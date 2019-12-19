@@ -71,7 +71,7 @@ const KonnectorSuggestionModal = ({
           </div>
         </DialogContent>
         <DialogActions>
-          <div className="u-flex u-flex-column u-flex-items-center">
+          <div className="u-flex u-flex-column u-flex-items-center u-w-100">
             {reason === 'FOUND_TRANSACTION' && (
               <Caption className="u-mb-1">
                 {t('suggestions.why', { name })}
