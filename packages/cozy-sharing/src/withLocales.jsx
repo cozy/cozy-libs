@@ -6,6 +6,11 @@ const locales = {
   fr: require(`../locales/fr.json`)
 }
 
+/**
+ * Adds cozy-sharing translations in the React context
+ *
+ * @param {Function} Component - React component
+ */
 const withLocales = Component =>
   translate()(props => {
     return (

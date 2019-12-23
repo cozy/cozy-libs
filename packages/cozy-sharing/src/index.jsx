@@ -40,6 +40,8 @@ import { RecipientsAvatars } from './components/Recipient'
 import { default as DumbSharedStatus } from './components/SharedStatus'
 import { withClient } from 'cozy-client'
 
+export { default as withLocales } from './withLocales'
+
 const track = (document, action) => {
   const tracker = getTracker()
   if (!tracker) {
