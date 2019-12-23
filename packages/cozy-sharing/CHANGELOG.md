@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.4.0...cozy-sharing@1.5.0) (2019-12-23)
+
+
+### Features
+
+* Export withLocales from cozy-sharing ([c727aa3](https://github.com/cozy/cozy-libs/commit/c727aa3))
+
+
+
+
+
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.3.2...cozy-sharing@1.4.0) (2019-12-18)
 
 
