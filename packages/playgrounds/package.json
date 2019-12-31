@@ -8,7 +8,7 @@
     "start": "env USE_REACT=true parcel src/sharing.html"
   },
   "dependencies": {
-    "@material-ui/core": "3.9.3",
+    "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "cozy-authentication": "^2.0.5",
     "cozy-client": "^9.1.0",
