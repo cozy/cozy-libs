@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.0.4...cozy-authentication@2.0.5) (2019-12-31)
+
+
+### Bug Fixes
+
+* Add string to create sync folder ([3c192ae](https://github.com/cozy/cozy-libs/commit/3c192ae))
+
+
+
+
+
 ## 2.0.4 (2019-12-13)
 
 
