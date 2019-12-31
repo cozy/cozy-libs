@@ -49,6 +49,14 @@
       "description": "Vous semblez avoir révoqué votre périphérique depuis votre Cozy. Si ce n'est pas vous, n'hésitez pas à nous contacter à contact@cozycloud.cc. Toutes les données relatives à Cozy présentes localement vont être supprimées.",
       "loginagain": "Se réenregistrer",
       "logout": "Se déconnecter"
+    },
+    "settings": {
+      "media_backup": {
+        "media_folder": "Photos",
+        "backup_folder": "Sauvegardées depuis mon mobile",
+        "legacy_backup_folder": "Sauvegardées depuis mon mobile",
+        "title": "Sauvegarder des médias"
+      }
     }
   }
 }
