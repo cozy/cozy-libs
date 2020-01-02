@@ -23,6 +23,7 @@
     "@babel/cli": "7.4.4",
     "babel-plugin-rewire": "1.2.0",
     "babel-preset-cozy-app": "^1.7.0",
+    "cozy-client": "^9.3.0",
     "jest-cli": "24.7.1",
     "mock-socket": "9.0.0"
   },
