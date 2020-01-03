@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.3.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.3.0...cozy-realtime@3.3.1) (2020-01-03)
+
+
+### Bug Fixes
+
+* **cozy-realtime:** Don't crash if no event exist ([654c3ed](https://github.com/cozy/cozy-libs/commit/654c3ed))
+
+
+
+
+
 # 3.3.0 (2020-01-02)
 
 
