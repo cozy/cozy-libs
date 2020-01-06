@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.3.4 (2020-01-06)
+
+**Note:** Version bump only for package eslint-config-cozy-app
+
+
+
+
+
 ## [1.3.3](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@1.3.2...eslint-config-cozy-app@1.3.3) (2019-10-07)
 
 **Note:** Version bump only for package eslint-config-cozy-app
