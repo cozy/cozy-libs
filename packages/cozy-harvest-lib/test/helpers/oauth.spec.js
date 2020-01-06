@@ -1,6 +1,55 @@
-import { handleOAuthResponse } from 'helpers/oauth'
+import { handleOAuthResponse, getOAuthUrl } from 'helpers/oauth'
 
 describe('Oauth helper', () => {
+  describe('getOAuthUrl', () => {
+    const defaultConf = {
+      cozyUrl: 'https://cozyurl',
+      accountType: 'testslug',
+      oAuthStateKey: 'statekey',
+      nonce: '1234'
+    }
+    it('should work with all params', () => {
+      const url = getOAuthUrl({
+        ...defaultConf,
+        oAuthConf: { scope: ['myscope'] }
+      })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=myscope'
+      )
+    })
+    it('should remove scope if scope value is undefined or null or false', () => {
+      let url = getOAuthUrl({ ...defaultConf, oAuthConf: {} })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234'
+      )
+      url = getOAuthUrl({ ...defaultConf, oAuthConf: { scope: false } })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234'
+      )
+      url = getOAuthUrl({ ...defaultConf, oAuthConf: { scope: null } })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234'
+      )
+    })
+    it('should accept string value', () => {
+      let url = getOAuthUrl({
+        ...defaultConf,
+        oAuthConf: { scope: 'thescope' }
+      })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope'
+      )
+    })
+    it('should should join array values with spaces', () => {
+      let url = getOAuthUrl({
+        ...defaultConf,
+        oAuthConf: { scope: ['thescope', 'thescope2'] }
+      })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope+thescope2'
+      )
+    })
+  })
   describe('handleOAuthResponse', () => {
     let originalLocation
     let originalOpener
