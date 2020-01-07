@@ -39,11 +39,15 @@ const getBuiltInHelpersForView = notifView => {
 
 export const buildAttributes = async (notifView, options = {}) => {
   const templateData = await notifView.buildData()
-  templateData.lang = options.lang
 
-  if (notifView.shouldSend && !notifView.shouldSend(templateData)) {
+  if (
+    !templateData ||
+    (notifView.shouldSend && !notifView.shouldSend(templateData))
+  ) {
     return
   }
+
+  templateData.lang = options.lang
 
   const partials = result(notifView.getPartials, {})
 
