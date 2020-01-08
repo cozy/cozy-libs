@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.6...cozy-harvest-lib@1.15.7) (2020-01-08)
+
+
+### Bug Fixes
+
+* Allow oauth without scope and handle array value ([b41fdd3](https://github.com/cozy/cozy-libs/commit/b41fdd3))
+
+
+
+
+
 ## [1.15.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.5...cozy-harvest-lib@1.15.6) (2019-12-19)
 
 
