@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.3](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.4.2...cozy-notifications@0.4.3) (2020-01-08)
+
+
+### Bug Fixes
+
+* Only set lang inside templateData if it is defined ([3cf875b](https://github.com/cozy/cozy-libs/commit/3cf875b))
+
+
+
+
+
 ## 0.4.2 (2019-11-28)
 
 
