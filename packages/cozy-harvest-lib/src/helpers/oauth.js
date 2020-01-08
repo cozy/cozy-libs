@@ -76,6 +76,35 @@ export const handleOAuthResponse = () => {
 }
 
 /**
+ * Generate oauth popup url
+ * @param  {string} cozyUrl cozy url
+ * @param  {string} accountType connector slug
+ * @param  {string} oAuthStateKey localStorage key
+ * @param  {Object} oAuthConf connector manifest oauth configuration
+ * @param  {string} nonce unique nonce string
+ */
+export const getOAuthUrl = ({
+  cozyUrl,
+  accountType,
+  oAuthStateKey,
+  oAuthConf,
+  nonce
+}) => {
+  let oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?state=${oAuthStateKey}&nonce=${nonce}`
+  if (
+    oAuthConf.scope !== undefined &&
+    oAuthConf.scope !== null &&
+    oAuthConf.scope !== false
+  ) {
+    const urlScope = Array.isArray(oAuthConf.scope)
+      ? oAuthConf.scope.join('+')
+      : oAuthConf.scope
+    oAuthUrl += `&scope=${urlScope}`
+  }
+  return oAuthUrl
+}
+
+/**
  * Initializes client OAuth workflow by storing the current information about
  * account type in localStorage. Generates the OAuth URL to stack endpoint,
  * passing the localStorage key as state in query string.
@@ -97,9 +126,13 @@ export const prepareOAuth = (client, konnector) => {
 
   const cozyUrl = client.stackClient.uri
 
-  const oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?scope=${
-    oauth.scope
-  }&state=${oAuthStateKey}&nonce=${Date.now()}`
+  const oAuthUrl = getOAuthUrl({
+    cozyUrl,
+    accountType,
+    oAuthStateKey,
+    oAuthConf: oauth,
+    nonce: Date.now()
+  })
 
   return { oAuthStateKey, oAuthUrl }
 }
@@ -116,5 +149,6 @@ export default {
   checkOAuthData,
   handleOAuthResponse,
   prepareOAuth,
-  terminateOAuth
+  terminateOAuth,
+  getOAuthUrl
 }
