@@ -176,7 +176,8 @@ const mockVaultClient = {
   decrypt: jest.fn(),
   createNewCozySharedCipher: jest.fn(),
   get: jest.fn(),
-  shareWithCozy: jest.fn()
+  shareWithCozy: jest.fn(),
+  isLocked: jest.fn().mockResolvedValue(false)
 }
 
 const addPermissionMock = jest.fn()
