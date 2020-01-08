@@ -74,6 +74,13 @@ describe('notifications', () => {
     expect(client.stackClient.fetchJSON).toMatchSnapshot()
   })
 
+  it('should not send if buildData returns false', async () => {
+    const { notificationView, client } = setup()
+    notificationView.buildData = jest.fn().mockReturnValue(false)
+    await sendNotification(client, notificationView)
+    expect(client.stackClient.fetchJSON).not.toHaveBeenCalled()
+  })
+
   it('should not send if shouldSend returns false', async () => {
     const { notificationView, client } = setup()
     notificationView.shouldSend = jest.fn().mockReturnValue(false)
