@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
+    "@testing-library/react": "9.4.0",
     "babel-jest": "24.1.0",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-preset-cozy-app": "^1.7.0",

@@ -52,7 +52,7 @@ export class DumbTriggerManager extends Component {
     this.handleError = this.handleError.bind(this)
     this.handleCipherSelect = this.handleCipherSelect.bind(this)
     this.showCiphersList = this.showCiphersList.bind(this)
-    this.handleNoCiphers = this.handleNoCiphers.bind(this)
+    this.handleVaultUnlock = this.handleVaultUnlock.bind(this)
 
     this.state = {
       account,
@@ -60,7 +60,8 @@ export class DumbTriggerManager extends Component {
       status: IDLE,
       step: account ? 'accountForm' : 'ciphersList',
       selectedCipher: undefined,
-      showBackButton: false
+      showBackButton: false,
+      ciphers: []
     }
   }
 
@@ -368,13 +369,6 @@ export class DumbTriggerManager extends Component {
     })
   }
 
-  handleNoCiphers() {
-    this.setState({
-      step: 'accountForm',
-      showBackButton: false
-    })
-  }
-
   cipherToAccount(cipher) {
     if (cipher === undefined) {
       return null
@@ -407,6 +401,29 @@ export class DumbTriggerManager extends Component {
     return this.state.selectedCipher !== undefined
   }
 
+  async handleVaultUnlock() {
+    const { vaultClient, konnector } = this.props
+
+    try {
+      const ciphers = await vaultClient.getAllDecrypted({
+        type: CipherType.Login,
+        uri: get(konnector, 'vendor_link')
+      })
+
+      if (ciphers.length > 0) {
+        this.setState({ ciphers })
+      } else {
+        this.setState({
+          step: 'accountForm',
+          showBackButton: false
+        })
+      }
+    } catch (err) {
+      console.error(`Error while getting decrypted ciphers for ${konnector.slug} konnector:`)
+      console.error(err)
+    }
+  }
+
   render() {
     const {
       error: triggerError,
@@ -418,14 +435,17 @@ export class DumbTriggerManager extends Component {
       onVaultDismiss,
       vaultClosable
     } = this.props
+
     const {
       account,
       error,
       status,
       step,
       selectedCipher,
-      showBackButton
+      showBackButton,
+      ciphers
     } = this.state
+
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
@@ -456,13 +476,17 @@ export class DumbTriggerManager extends Component {
     }
 
     return (
-      <VaultUnlocker onDismiss={onVaultDismiss} closable={vaultClosable}>
+      <VaultUnlocker
+        onDismiss={onVaultDismiss}
+        closable={vaultClosable}
+        onUnlock={this.handleVaultUnlock}
+      >
         <div id={modalInto} />
         {showCiphersList && (
           <VaultCiphersList
             konnector={konnector}
+            ciphers={ciphers}
             onSelect={this.handleCipherSelect}
-            onNoCiphers={this.handleNoCiphers}
           />
         )}
         {showAccountForm && (
