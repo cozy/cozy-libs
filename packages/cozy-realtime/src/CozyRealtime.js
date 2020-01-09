@@ -320,7 +320,7 @@ class CozyRealtime {
   }
 
   /**
-   * Unsubscibe all handlers and close socket
+   * Unsubscribe all handlers and close socket
    */
   unsubscribeAll() {
     this._getEventKeys()
