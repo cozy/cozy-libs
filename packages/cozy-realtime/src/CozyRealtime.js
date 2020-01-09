@@ -2,7 +2,8 @@ import MicroEE from 'microee'
 import Socket from './Socket'
 import minilog_ from 'minilog'
 
-const minilog = (typeof window !== 'undefined' && window.minilog) || minilog_
+const inBrowser = typeof window !== 'undefined'
+const minilog = (inBrowser && window.minilog) || minilog_
 const logger = minilog('cozy-realtime')
 minilog.suggest.deny('cozy-realtime', 'info')
 
@@ -163,7 +164,7 @@ class CozyRealtime {
     this._cozyClient.on('tokenRefreshed', this._updateAuthentication)
     this._cozyClient.on('logout', this.unsubscribeAll)
 
-    if (global) {
+    if (inBrowser) {
       global.addEventListener('beforeunload', this._beforeUnload)
       global.addEventListener('online', this._resubscribe)
       global.removeEventListener('offline', this._resetSocket)
