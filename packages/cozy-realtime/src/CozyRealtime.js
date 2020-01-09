@@ -37,7 +37,7 @@ const getHandlerAndId = (handlerOrId, handlerOrUndefined) => {
   return { id, handler }
 }
 
-const VALID_EVENTS = ['created', 'updated', 'deleted']
+const VALID_EVENTS = ['created', 'updated', 'deleted', 'notified']
 
 const validateParameters = (eventName, type, id, handler) => {
   let msg
