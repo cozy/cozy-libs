@@ -331,6 +331,16 @@ class CozyRealtime {
     this._resetSocket()
   }
 
+  async send(doctype, id, data) {
+    return this._cozyClient.stackClient.fetchJSON(
+      'POST',
+      `/realtime/${doctype}/${id}`,
+      {
+        data
+      }
+    )
+  }
+
   _getEventKeys() {
     if (!this._events) return []
 
