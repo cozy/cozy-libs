@@ -52,7 +52,7 @@ export class DumbTriggerManager extends Component {
     this.handleError = this.handleError.bind(this)
     this.handleCipherSelect = this.handleCipherSelect.bind(this)
     this.showCiphersList = this.showCiphersList.bind(this)
-    this.handleNoCiphers = this.handleNoCiphers.bind(this)
+    this.handleVaultUnlock = this.handleVaultUnlock.bind(this)
 
     this.state = {
       account,
@@ -60,7 +60,8 @@ export class DumbTriggerManager extends Component {
       status: IDLE,
       step: account ? 'accountForm' : 'ciphersList',
       selectedCipher: undefined,
-      showBackButton: false
+      showBackButton: false,
+      ciphers: []
     }
   }
 
@@ -259,7 +260,7 @@ export class DumbTriggerManager extends Component {
    * TODO move to AccountHelper
    */
   async handleSubmit(data = {}) {
-    const { konnector, saveAccount } = this.props
+    const { konnector, saveAccount, vaultClient } = this.props
 
     const { account } = this.state
     const isUpdate = !!account
@@ -271,28 +272,37 @@ export class DumbTriggerManager extends Component {
 
     const identifierProperty = manifest.getIdentifier(konnector.fields)
 
+    const isVaultLocked = await vaultClient.isLocked()
+
     try {
       const identifier = data[identifierProperty]
       const password = data.password
       let cipherId = this.getSelectedCipherId()
 
-      if (cipherId) {
-        await this.updateCipher(cipherId, identifier, password)
-      } else {
-        const existingCipherId = await this.getExistingCipherIdForAccount(
-          identifier,
-          password
+      if (isVaultLocked) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
         )
-
-        if (existingCipherId) {
-          cipherId = existingCipherId
+      } else {
+        if (cipherId) {
           await this.updateCipher(cipherId, identifier, password)
         } else {
-          cipherId = await this.createNewCipherId(identifier, password)
-        }
-      }
+          const existingCipherId = await this.getExistingCipherIdForAccount(
+            identifier,
+            password
+          )
 
-      await this.shareCipherWithCozy(cipherId)
+          if (existingCipherId) {
+            cipherId = existingCipherId
+            await this.updateCipher(cipherId, identifier, password)
+          } else {
+            cipherId = await this.createNewCipherId(identifier, password)
+          }
+        }
+
+        await this.shareCipherWithCozy(cipherId)
+      }
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
         accounts.resetState(account),
@@ -301,10 +311,18 @@ export class DumbTriggerManager extends Component {
       const accountDocument = isUpdate
         ? accounts.mergeAuth(accountWithNewState, data)
         : accounts.build(konnector, data)
-      const accountToSave = accounts.setVaultCipherRelationship(
-        accountDocument,
-        cipherId
-      )
+
+      let accountToSave
+
+      if (cipherId) {
+        accountToSave = accounts.setVaultCipherRelationship(
+          accountDocument,
+          cipherId
+        )
+      } else {
+        accountToSave = accountDocument
+      }
+
       const savedAccount = accounts.mergeAuth(
         await saveAccount(konnector, accountToSave),
         data
@@ -368,13 +386,6 @@ export class DumbTriggerManager extends Component {
     })
   }
 
-  handleNoCiphers() {
-    this.setState({
-      step: 'accountForm',
-      showBackButton: false
-    })
-  }
-
   cipherToAccount(cipher) {
     if (cipher === undefined) {
       return null
@@ -407,6 +418,35 @@ export class DumbTriggerManager extends Component {
     return this.state.selectedCipher !== undefined
   }
 
+  async handleVaultUnlock() {
+    const { vaultClient, konnector } = this.props
+
+    const encryptedCiphers = await vaultClient.getAll({
+      type: CipherType.Login
+    })
+
+    if (encryptedCiphers.length === 0) {
+      this.setState({ step: 'accountForm', showBackButton: false })
+      return
+    }
+
+    try {
+      const ciphers = await vaultClient.getAllDecrypted({
+        type: CipherType.Login,
+        uri: get(konnector, 'vendor_link')
+      })
+
+      this.setState({ ciphers })
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Error while getting decrypted ciphers for ${konnector.slug} konnector:`
+      )
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+  }
+
   render() {
     const {
       error: triggerError,
@@ -418,14 +458,17 @@ export class DumbTriggerManager extends Component {
       onVaultDismiss,
       vaultClosable
     } = this.props
+
     const {
       account,
       error,
       status,
       step,
       selectedCipher,
-      showBackButton
+      showBackButton,
+      ciphers
     } = this.state
+
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
@@ -456,13 +499,17 @@ export class DumbTriggerManager extends Component {
     }
 
     return (
-      <VaultUnlocker onDismiss={onVaultDismiss} closable={vaultClosable}>
+      <VaultUnlocker
+        onDismiss={onVaultDismiss}
+        closable={vaultClosable}
+        onUnlock={this.handleVaultUnlock}
+      >
         <div id={modalInto} />
         {showCiphersList && (
           <VaultCiphersList
             konnector={konnector}
+            ciphers={ciphers}
             onSelect={this.handleCipherSelect}
-            onNoCiphers={this.handleNoCiphers}
           />
         )}
         {showAccountForm && (
