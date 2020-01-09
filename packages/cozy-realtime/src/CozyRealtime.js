@@ -46,7 +46,7 @@ const validateParameters = (eventName, type, id, handler) => {
   }
 
   if (typeof type !== 'string') {
-    msg = `'${type}' is not a valide type, it should be a string.`
+    msg = `'${type}' is not a valid type, it should be a string.`
   }
 
   if (id && eventName === 'created') {
