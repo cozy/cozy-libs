@@ -36,10 +36,12 @@ const getHandlerAndId = (handlerOrId, handlerOrUndefined) => {
   return { id, handler }
 }
 
+const VALID_EVENTS = ['created', 'updated', 'deleted']
+
 const validateParameters = (eventName, type, id, handler) => {
   let msg
 
-  if (!['created', 'updated', 'deleted'].includes(eventName)) {
+  if (!VALID_EVENTS.includes(eventName)) {
     msg = `'${eventName}' is not a valid event, valid events are 'created', 'updated' or 'deleted'.`
   }
 
