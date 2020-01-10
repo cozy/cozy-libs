@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.3.1...cozy-realtime@3.4.0) (2020-01-10)
+
+
+### Bug Fixes
+
+* Correctly check that window exists ([c5da980](https://github.com/cozy/cozy-libs/commit/c5da980))
+* Do not handle {add,remove}EventListener when not in browser ([19d10e2](https://github.com/cozy/cozy-libs/commit/19d10e2))
+* Typo in docstring ([c98e84a](https://github.com/cozy/cozy-libs/commit/c98e84a))
+* Typo in error message ([29054a9](https://github.com/cozy/cozy-libs/commit/29054a9))
+
+
+### Features
+
+* Ability to send realtime event ([dc95cb9](https://github.com/cozy/cozy-libs/commit/dc95cb9))
+* Add chat example ([40bf01e](https://github.com/cozy/cozy-libs/commit/40bf01e))
+* Support "notified" event ([7c7f524](https://github.com/cozy/cozy-libs/commit/7c7f524))
+
+
+
+
+
 ## [3.3.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.3.0...cozy-realtime@3.3.1) (2020-01-03)
 
 
