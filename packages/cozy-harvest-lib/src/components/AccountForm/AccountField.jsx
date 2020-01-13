@@ -1,4 +1,4 @@
-import Field from 'cozy-ui/transpiled/react/Field'
+import { Field } from './Field'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import pick from 'lodash/pick'
@@ -21,6 +21,20 @@ const canAutofocus = () => {
     return false
   }
   return true
+}
+
+/*
+ * Password manager extensions try to find strings like "login" and "password" in
+ * inputs name and id. We need to map these so it is not included in these
+ * attributes
+ */
+const fieldNameRemap = {
+  login: 'lgn',
+  password: 'pwd'
+}
+
+const getFieldName = originalName => {
+  return fieldNameRemap[originalName] || originalName
 }
 
 /**
@@ -73,10 +87,13 @@ export class AccountField extends PureComponent {
         ? label
         : name
 
+    const finalName = getFieldName(name)
+
     // Cozy-UI <Field /> props
     const fieldProps = {
       ...this.props,
-      id: `harvest-account-${name}`,
+      name: finalName,
+      id: `harvest-account-${finalName}`,
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
       disabled: disabled,
@@ -113,18 +130,7 @@ export class AccountField extends PureComponent {
       case 'dropdown':
         return <Field {...sanitizeSelectProps(fieldProps)} />
       case 'password':
-        return (
-          /*
-          Using the `new-password` value is the best way to avoid
-          autocomplete for password.
-          See https://stackoverflow.com/a/17721462/1135990
-           */
-          <Field
-            {...fieldProps}
-            autoComplete="new-password"
-            secondaryLabels={passwordLabels}
-          />
-        )
+        return <Field {...fieldProps} secondaryLabels={passwordLabels} />
       case 'hidden':
         return (
           <input {...pick(fieldProps, ['value', 'type', 'name', 'role'])} />
