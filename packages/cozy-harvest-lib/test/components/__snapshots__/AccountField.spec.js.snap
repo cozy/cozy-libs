@@ -2,6 +2,7 @@
 
 exports[`AccountField render a date field 1`] = `
 <Field
+  aria-label="fields.date.label"
   autoComplete="off"
   className="u-m-0"
   error={false}
@@ -96,6 +97,7 @@ exports[`AccountField render a date field 1`] = `
 
 exports[`AccountField render a dropdown field 1`] = `
 <Field
+  aria-label="fields.multiple.label"
   className="u-m-0"
   error={false}
   fieldProps={Object {}}
@@ -184,6 +186,7 @@ exports[`AccountField render a dropdown field 1`] = `
 
 exports[`AccountField render a password field 1`] = `
 <PasswordField
+  aria-label="fields.passphrase.label"
   autoComplete="off"
   className="u-m-0"
   encrypted={true}
@@ -264,6 +267,7 @@ exports[`AccountField render a password field 1`] = `
 
 exports[`AccountField should render 1`] = `
 <Field
+  aria-label="fields.username.label"
   autoComplete="off"
   className="u-m-0"
   encrypted={false}
