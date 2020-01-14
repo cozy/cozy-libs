@@ -1,4 +1,5 @@
 module.exports = {
+  browser: true,
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!**/node_modules/**',

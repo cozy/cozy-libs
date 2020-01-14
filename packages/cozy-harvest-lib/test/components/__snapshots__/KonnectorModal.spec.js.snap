@@ -29,7 +29,7 @@ exports[`KonnectorModal adding an account should render the form when controlled
 
 exports[`KonnectorModal should render the selected account via a prop 1`] = `
 <ModalContent>
-  <withClient(Wrapper)
+  <withClient(withI18n(KonnectorAccountTabs))
     account={
       Object {
         "_id": "123",
@@ -80,7 +80,7 @@ exports[`KonnectorModal should show a spinner while loading 1`] = `
 
 exports[`KonnectorModal should show an error view 1`] = `
 <ModalContent>
-  <Infos
+  <Memo(InfosMigration)
     actionButton={
       <DefaultButton
         theme="danger"
@@ -88,7 +88,6 @@ exports[`KonnectorModal should show an error view 1`] = `
         modal.konnector.error.button
       </DefaultButton>
     }
-    icon={null}
     isImportant={true}
     text="modal.konnector.error.description"
     title="modal.konnector.error.title"
@@ -98,7 +97,7 @@ exports[`KonnectorModal should show an error view 1`] = `
 
 exports[`KonnectorModal should show the configuration view of a single account 1`] = `
 <ModalContent>
-  <withClient(Wrapper)
+  <withClient(withI18n(KonnectorAccountTabs))
     account={
       Object {
         "_id": "123",
@@ -135,7 +134,7 @@ exports[`KonnectorModal should show the configuration view of a single account 1
 exports[`KonnectorModal should show the list of accounts 1`] = `
 <ModalContent>
   <React.Fragment>
-    <Wrapper
+    <withI18n(AccountsList)
       accounts={
         Array [
           Object {
@@ -187,7 +186,7 @@ exports[`KonnectorModal should show the list of accounts 1`] = `
 
 exports[`KonnectorModal switching account should show the add account view when controlled by state 1`] = `
 <ModalContent>
-  <withClient(Wrapper)
+  <withClient(withI18n(KonnectorAccountTabs))
     account={
       Object {
         "_id": "123",

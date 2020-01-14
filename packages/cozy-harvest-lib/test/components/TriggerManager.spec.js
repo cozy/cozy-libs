@@ -6,6 +6,8 @@ import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
 
 jest.mock('cozy-doctypes', () => {
+  const doctypes = jest.requireActual('cozy-doctypes')
+
   const CozyFolder = {
     copyWithClient: () => CozyFolder,
     ensureMagicFolder: () => ({ path: '/Administrative' }),
@@ -14,7 +16,9 @@ jest.mock('cozy-doctypes', () => {
       PHOTOS: '/photos'
     }
   }
+
   return {
+    ...doctypes,
     CozyFolder
   }
 })

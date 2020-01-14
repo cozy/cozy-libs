@@ -42,7 +42,7 @@ exports[`TriggerLauncher handleTwoFA should display Two FA modal 1`] = `
     launch={[Function]}
     running={false}
   />
-  <Wrapper
+  <withI18n(withBreakpoints(TwoFAModal))
     dismissAction={[Function]}
     into="coz-harvest-modal-place"
   />
