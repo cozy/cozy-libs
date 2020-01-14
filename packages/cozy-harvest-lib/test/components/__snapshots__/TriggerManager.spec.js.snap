@@ -8,7 +8,7 @@ exports[`TriggerManager handleError should render error 1`] = `
     id="coz-harvest-modal-place"
   />
   <React.Fragment>
-    <Wrapper
+    <withI18n(withLocales(withKonnectorLocales(AccountForm))
       account={
         Object {
           "_id": "61c683295560485db0f34b859197c581",
@@ -44,7 +44,7 @@ exports[`TriggerManager handleError should render error 1`] = `
 `;
 
 exports[`TriggerManager should redirect to OAuthForm 1`] = `
-<Wrapper
+<withI18n(OAuthForm)
   konnector={
     Object {
       "oauth": Object {
@@ -65,7 +65,7 @@ exports[`TriggerManager should render with account 1`] = `
     id="coz-harvest-modal-place"
   />
   <React.Fragment>
-    <Wrapper
+    <withI18n(withLocales(withKonnectorLocales(AccountForm))
       account={
         Object {
           "_id": "61c683295560485db0f34b859197c581",
@@ -106,7 +106,7 @@ exports[`TriggerManager should render without account 1`] = `
   <div
     id="coz-harvest-modal-place"
   />
-  <Wrapper
+  <withI18n(withLocales(DumbVaultCiphersList))
     ciphers={Array []}
     konnector={
       Object {
