@@ -198,6 +198,7 @@ describe('Konnectors Helpers', () => {
       'USER_ACTION_NEEDED.ACCOUNT_REMOVED',
       'USER_ACTION_NEEDED.CHANGE_PASSWORD',
       'USER_ACTION_NEEDED.PERMISSIONS_CHANGED',
+      'USER_ACTION_NEEDED.SCA_REQUIRED',
       'VENDOR_DOWN',
       'VENDOR_DOWN.BANK_DOWN',
       'VENDOR_DOWN.LINXO_DOWN'
@@ -224,7 +225,8 @@ describe('Konnectors Helpers', () => {
             'USER_ACTION_NEEDED.OAUTH_OUTDATED',
             'USER_ACTION_NEEDED.ACCOUNT_REMOVED',
             'USER_ACTION_NEEDED.CHANGE_PASSWORD',
-            'USER_ACTION_NEEDED.PERMISSIONS_CHANGED'
+            'USER_ACTION_NEEDED.PERMISSIONS_CHANGED',
+            'USER_ACTION_NEEDED.SCA_REQUIRED'
           ].includes(message)
         )
         expect(error.isTermsVersionMismatchError()).toBe(
