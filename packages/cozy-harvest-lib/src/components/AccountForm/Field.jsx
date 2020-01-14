@@ -33,6 +33,7 @@ export const Field = ({ label, type, ...props }) => {
     <Component
       {...props}
       label={<ObfuscatedLabel label={label} />}
+      aria-label={label}
       type={type}
     />
   )
