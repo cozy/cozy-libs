@@ -2,6 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { shallow, mount } from 'enzyme'
+import { I18n } from 'cozy-ui/transpiled/react'
 
 import { isMobile } from 'cozy-device-helper'
 
@@ -415,22 +416,24 @@ describe('AccountForm', () => {
   describe('with read-only identifier', () => {
     it('should render a read-only identifier field if the account has a relationship with a vault cipher and props.readOnlyIdentifier is true', () => {
       const wrapper = mount(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-          account={{
-            ...fixtures.account,
-            relationships: {
-              vaultCipher: {
-                _id: 'fake-cipher-id',
-                _type: 'com.bitwarden.ciphers',
-                _protocol: 'bitwarden'
+        <I18n lang="en" dictRequire={() => {}}>
+          <AccountForm
+            konnector={fixtures.konnector}
+            onSubmit={onSubmit}
+            t={t}
+            account={{
+              ...fixtures.account,
+              relationships: {
+                vaultCipher: {
+                  _id: 'fake-cipher-id',
+                  _type: 'com.bitwarden.ciphers',
+                  _protocol: 'bitwarden'
+                }
               }
-            }
-          }}
-          readOnlyIdentifier={true}
-        />,
+            }}
+            readOnlyIdentifier={true}
+          />
+        </I18n>,
         {
           context: { t },
           childContextTypes: {

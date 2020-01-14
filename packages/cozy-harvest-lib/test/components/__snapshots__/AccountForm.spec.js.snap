@@ -106,7 +106,7 @@ exports[`AccountForm should render error 1`] = `
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
-  <Wrapper
+  <withI18n(withKonnectorLocales(TriggerErrorInfo)
     className="u-mb-1"
     error={[Error: Test error]}
     konnector={

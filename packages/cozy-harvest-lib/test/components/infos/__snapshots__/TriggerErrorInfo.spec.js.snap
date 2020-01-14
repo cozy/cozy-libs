@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TriggerErrorInfo should render 1`] = `
-<Infos
-  icon={null}
+<InfosMigration
   isImportant={true}
   text={
     <Markdown
@@ -14,8 +13,7 @@ exports[`TriggerErrorInfo should render 1`] = `
 `;
 
 exports[`TriggerErrorInfo should render regular Error 1`] = `
-<Infos
-  icon={null}
+<InfosMigration
   isImportant={true}
   text={
     <Markdown
