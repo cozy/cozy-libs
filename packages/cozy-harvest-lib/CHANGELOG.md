@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.7...cozy-harvest-lib@1.16.0) (2020-01-15)
+
+
+### Features
+
+* Support SCA_REQUIRED and WEBAUTH_REQUIRED ([0829420](https://github.com/cozy/cozy-libs/commit/0829420))
+
+
+
+
+
 ## [1.15.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.6...cozy-harvest-lib@1.15.7) (2020-01-08)
 
 
