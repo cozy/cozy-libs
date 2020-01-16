@@ -145,7 +145,15 @@ const byDocId = (state = {}, action) => {
       }
       return state
     case ADD_SHARING_LINK:
-      return indexPermission(state, action.data)
+      if (!Array.isArray(action.data)) {
+        return indexPermission(state, action.data)
+      } else {
+        let clonedState = { ...state }
+        action.data.map(s => {
+          clonedState = { ...indexPermission(clonedState, s) }
+        })
+        return clonedState
+      }
     case REVOKE_SELF:
       return forgetSharing(state, action.sharing)
     case REVOKE_SHARING_LINK:
@@ -163,7 +171,11 @@ const permissions = (state = [], action) => {
     case RECEIVE_SHARINGS:
       return action.data.permissions
     case ADD_SHARING_LINK:
-      return [...state, action.data]
+      if (!Array.isArray(action.data)) {
+        return [...state, action.data]
+      } else {
+        return [...state, ...action.data]
+      }
     case REVOKE_SHARING_LINK:
       // eslint-disable-next-line no-case-declarations
       const permIds = action.permissions.map(p => p.id)
