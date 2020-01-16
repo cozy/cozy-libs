@@ -126,13 +126,11 @@ export const setVaultCipherRelationship = (account, vaultCipherId) => ({
   relationships: {
     ...account.relationships,
     vaultCipher: {
-      data: [
-        {
-          _id: vaultCipherId,
-          _type: 'com.bitwarden.ciphers',
-          _protocol: 'bitwarden'
-        }
-      ]
+      data: {
+        _id: vaultCipherId,
+        _type: 'com.bitwarden.ciphers',
+        _protocol: 'bitwarden'
+      }
     }
   }
 })
