@@ -42,6 +42,7 @@ import { withClient } from 'cozy-client'
 
 export { default as withLocales } from './withLocales'
 
+import { loadNextPermissions } from './checkIfNextPermissions'
 const track = (document, action) => {
   const tracker = getTracker()
   if (!tracker) {
@@ -102,6 +103,7 @@ class SharingProvider extends Component {
         apps: apps.data
       })
     )
+    loadNextPermissions(permissions, this.dispatch, client)
     if (doctype !== 'io.cozy.files') return
 
     const sharedDocIds = sharings.data
