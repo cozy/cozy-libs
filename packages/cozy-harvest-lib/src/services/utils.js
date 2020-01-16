@@ -36,12 +36,12 @@ export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
     cozyClient
       .find('io.cozy.accounts')
       .where({
-        'relationships.vaultCipher': {
+        'relationships.vaultCipher.data': {
           _id: cipherId,
           _type: 'com.bitwarden.ciphers'
         }
       })
-      .indexFields(['relationships.vaultCipher._id'])
+      .indexFields(['relationships.vaultCipher.data._id'])
   )
 
   return accounts

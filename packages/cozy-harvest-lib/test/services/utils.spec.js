@@ -92,13 +92,13 @@ describe('fetchAccountsForCipherId', () => {
 
     expect(mockCozyClient.find).toHaveBeenCalledWith('io.cozy.accounts')
     expect(mockCozyClient.where).toHaveBeenCalledWith({
-      'relationships.vaultCipher': {
+      'relationships.vaultCipher.data': {
         _id: '123-456',
         _type: 'com.bitwarden.ciphers'
       }
     })
     expect(mockCozyClient.indexFields).toHaveBeenCalledWith([
-      'relationships.vaultCipher._id'
+      'relationships.vaultCipher.data._id'
     ])
   })
 })
