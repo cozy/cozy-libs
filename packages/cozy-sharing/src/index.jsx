@@ -19,7 +19,7 @@ import reducer, {
   getSharingForSelf,
   getSharingType,
   getSharingLink,
-  getSharingDocIds,
+  getSharedDocIdsBySharings,
   getDocumentSharing,
   getDocumentPermissions,
   hasSharedParent,
@@ -105,14 +105,7 @@ class SharingProvider extends Component {
     )
     fetchNextPermissions(permissions, this.dispatch, client)
     if (doctype !== 'io.cozy.files') return
-
-    const sharedDocIds = sharings.data
-      .map(s => {
-        if (s.attributes && s.attributes.active) {
-          return getSharingDocIds(s)
-        }
-      })
-      .reduce((acc, val) => acc.concat(val), [])
+    const sharedDocIds = getSharedDocIdsBySharings(sharings)
     const resp = await client.collection(doctype).all({ keys: sharedDocIds })
     const folderPaths = resp.data
       .filter(f => f.type === 'directory')
