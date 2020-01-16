@@ -105,7 +105,11 @@ class SharingProvider extends Component {
     if (doctype !== 'io.cozy.files') return
 
     const sharedDocIds = sharings.data
-      .map(s => getSharingDocIds(s))
+      .map(s => {
+        if (s.attributes && s.attributes.active) {
+          return getSharingDocIds(s)
+        }
+      })
       .reduce((acc, val) => acc.concat(val), [])
     const resp = await client.collection(doctype).all({ keys: sharedDocIds })
     const folderPaths = resp.data
