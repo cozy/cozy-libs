@@ -172,6 +172,22 @@ describe('Sharing state', () => {
     expect(newState.permissions).toEqual([PERM_1, PERM_2])
   })
 
+  it('should index an array of sharing links', () => {
+    const initialState = reducer(
+      undefined,
+      receiveSharings({
+        sharings: [SHARING_1, SHARING_2],
+        permissions: []
+      })
+    )
+    const newState = reducer(initialState, addSharingLink([PERM_1, PERM_2]))
+    expect(newState.byDocId).toEqual({
+      folder_1: { sharings: [SHARING_1.id], permissions: [PERM_1.id] },
+      folder_2: { sharings: [SHARING_2.id], permissions: [PERM_2.id] }
+    })
+    expect(newState.permissions).toEqual([PERM_1, PERM_2])
+  })
+
   it('should revoke a sharing link', () => {
     const initialState = reducer(
       undefined,
