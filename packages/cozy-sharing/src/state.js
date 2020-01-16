@@ -430,3 +430,19 @@ const getAppUrl = (apps, appName) => {
   }
   return app.links.related
 }
+
+/**
+ *
+ * @param {SharingCollection} sharings
+ * @return {Array} Array of docIds
+ */
+export const getSharedDocIdsBySharings = sharings => {
+  const docs = []
+  if (!sharings.data) return []
+  sharings.data.map(s => {
+    if (s.attributes && s.attributes.active) {
+      docs.push(getSharingDocIds(s))
+    }
+  })
+  return docs.reduce((acc, val) => acc.concat(val), [])
+}
