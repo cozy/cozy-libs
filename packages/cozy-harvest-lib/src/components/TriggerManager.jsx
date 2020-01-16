@@ -418,6 +418,10 @@ export class DumbTriggerManager extends Component {
     return this.state.selectedCipher !== undefined
   }
 
+  showAccountForm() {
+    this.setState({ step: 'accountForm', showBackButton: false })
+  }
+
   async handleVaultUnlock() {
     const { vaultClient, konnector } = this.props
 
@@ -426,7 +430,7 @@ export class DumbTriggerManager extends Component {
     })
 
     if (encryptedCiphers.length === 0) {
-      this.setState({ step: 'accountForm', showBackButton: false })
+      this.showAccountForm()
       return
     }
 
@@ -436,6 +440,7 @@ export class DumbTriggerManager extends Component {
         uri: get(konnector, 'vendor_link')
       })
 
+      this.showAccountForm()
       this.setState({ ciphers })
     } catch (err) {
       // eslint-disable-next-line no-console
