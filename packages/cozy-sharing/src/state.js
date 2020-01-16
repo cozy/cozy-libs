@@ -217,12 +217,10 @@ const sharedPaths = (state = [], action) => {
     case RECEIVE_PATHS:
       //!TODO Remove after we solved the sharedPaths bugs
       //eslint-disable-next-line
-      console.log('RECEIVE PATHS', action)
       return action.paths
     case ADD_SHARING:
       //!TODO Remove after we solved the sharedPaths bugs
       //eslint-disable-next-line
-      console.log('ADD SHARING', action)
       //eslint-disable-next-line
       const newState = [...state, action.path]
       return newState
