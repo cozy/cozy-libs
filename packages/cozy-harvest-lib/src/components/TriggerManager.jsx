@@ -440,7 +440,10 @@ export class DumbTriggerManager extends Component {
         uri: get(konnector, 'vendor_link')
       })
 
-      this.showAccountForm()
+      if (ciphers.length === 0) {
+        this.showAccountForm()
+      }
+
       this.setState({ ciphers })
     } catch (err) {
       // eslint-disable-next-line no-console
