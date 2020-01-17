@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.5.5...cozy-sharing@1.6.0) (2020-01-17)
+
+
+### Bug Fixes
+
+* Fix issue with svg loader ([753a066](https://github.com/cozy/cozy-libs/commit/753a066))
+* Uniq key name ([bbc1a0b](https://github.com/cozy/cozy-libs/commit/bbc1a0b))
+
+
+### Features
+
+* Add a prop to tell if the request has been done at least one. ([a8c66d2](https://github.com/cozy/cozy-libs/commit/a8c66d2))
+
+
+
+
+
 ## [1.5.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.5.4...cozy-sharing@1.5.5) (2020-01-17)
 
 
