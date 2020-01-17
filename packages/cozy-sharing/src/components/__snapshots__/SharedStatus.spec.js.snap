@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SharedStatus component should display the link if there is a link 1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <SharedStatus
+        docId="1"
+        link={true}
+        recipients={Array []}
+        t={[Function]}
+      >
+        <span
+          className="shared-status"
+        >
+          <LinkIcon
+            height="16"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlnsXlink="http://www.w3.org/1999/xlink"
+          >
+            <svg
+              height="16"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+              xmlnsXlink="http://www.w3.org/1999/xlink"
+            >
+              <defs>
+                <path
+                  d="M8.88 3.88a1 1 0 1 1-1.415-1.415L9.053.877A2.998 2.998 0 0 1 13.29.876l1.18 1.18a2.998 2.998 0 0 1-.007 4.24L10.999 9.76c-1.535 1.535-4.07 1.583-5.534.12A1 1 0 1 1 6.88 8.465c.67.67 1.94.646 2.705-.119l3.465-3.464a.998.998 0 0 0 .006-1.413l-1.18-1.18a.998.998 0 0 0-1.408.003L8.88 3.88zm-2.415 7.585A1 1 0 1 1 7.88 12.88l-1.587 1.587a2.998 2.998 0 0 1-4.237.002l-1.18-1.18a2.998 2.998 0 0 1 .007-4.24l3.464-3.464c1.534-1.535 4.07-1.583 5.533-.12A1 1 0 1 1 8.465 6.88c-.67-.67-1.94-.646-2.705.119l-3.464 3.464a.998.998 0 0 0-.006 1.413l1.18 1.18a.998.998 0 0 0 1.407-.003l1.588-1.588z"
+                  id="link-1-path-1"
+                />
+              </defs>
+              <use
+                fillRule="nonzero"
+                xlinkHref="#link-1-path-1"
+              />
+            </svg>
+          </LinkIcon>
+        </span>
+      </SharedStatus>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;
+
+exports[`SharedStatus component should have the right display if there is several recipients 1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <SharedStatus
+        docId="1"
+        recipients={
+          Array [
+            Object {
+              "_id": 1,
+              "name": "1",
+            },
+            Object {
+              "_id": 2,
+              "name": "2",
+            },
+          ]
+        }
+        t={[Function]}
+      >
+        <span
+          className="shared-status"
+        >
+          <a
+            className="shared-status-label"
+            data-for="members1"
+            data-tip={true}
+          >
+            Share.members.count
+          </a>
+          <SharingTooltip
+            id="members1"
+          >
+            <ReactTooltip
+              className="shared-tooltip"
+              clickable={false}
+              effect="solid"
+              id="members1"
+              insecure={true}
+              place="bottom"
+              resizeHide={true}
+              wrapper="div"
+            >
+              <div
+                className="__react_component_tooltip place-bottom type-dark "
+                data-id="tooltip"
+                id="members1"
+              >
+                <TooltipRecipientList
+                  cutoff={4}
+                  recipientNames={
+                    Array [
+                      "1",
+                      "2",
+                    ]
+                  }
+                >
+                  <ul
+                    className="shared-tooltip-list"
+                  >
+                    <li
+                      key="key_name_1_0"
+                    >
+                      1
+                    </li>
+                    <li
+                      key="key_name_2_1"
+                    >
+                      2
+                    </li>
+                  </ul>
+                </TooltipRecipientList>
+              </div>
+            </ReactTooltip>
+          </SharingTooltip>
+        </span>
+      </SharedStatus>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;
+
+exports[`SharedStatus component should just render a span if no sharing 1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <SharedStatus
+        docId="1"
+        recipients={Array []}
+      >
+        <span
+          className="shared-status"
+        />
+      </SharedStatus>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;

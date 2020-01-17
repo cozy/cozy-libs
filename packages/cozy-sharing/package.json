@@ -41,6 +41,7 @@
     "babel-plugin-css-modules-transform": "^1.6.2",
     "cozy-client": "^9.1.0",
     "cozy-ui": "^28.4.1",
+    "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "^1.15.1",
     "enzyme-to-json": "^3.4.3",
     "react": "^16.12.0",
