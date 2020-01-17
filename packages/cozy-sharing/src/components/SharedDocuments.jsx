@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-
+import uniq from 'lodash/uniq'
 import SharingContext from '../context'
 
 export const SharedDocuments = ({ children }) => (
   <SharingContext.Consumer>
-    {({ sharings } = { sharings: [] }) =>
-      children({
-        sharedDocuments: sharings.map(
-          sharing => sharing.attributes.rules[0].values[0]
-        )
+    {({ byDocId, hasLoadedAtLeastOnePage } = { byDocId: [] }) => {
+      const sharedDocuments = uniq(Object.keys(byDocId))
+      return children({
+        sharedDocuments,
+        hasLoadedAtLeastOnePage
       })
-    }
+    }}
   </SharingContext.Consumer>
 )
 

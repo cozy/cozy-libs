@@ -81,7 +81,8 @@ class SharingProvider extends Component {
       revoke: this.revoke,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
-      revokeSharingLink: this.revokeSharingLink
+      revokeSharingLink: this.revokeSharingLink,
+      hasLoadedAtLeastOnePage: false
     }
   }
 
@@ -103,6 +104,7 @@ class SharingProvider extends Component {
         apps: apps.data
       })
     )
+    this.setState({ hasLoadedAtLeastOnePage: true })
     fetchNextPermissions(permissions, this.dispatch, client)
     if (doctype !== 'io.cozy.files') return
     const sharedDocIds = getSharedDocIdsBySharings(sharings)
