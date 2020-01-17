@@ -7,7 +7,7 @@ import { Contact } from '../models'
 import styles from './status.styl'
 import LinkIcon from '../../assets/icons/icon-link.svg'
 
-const SharedStatus = ({ className, docId, recipients, link, t }) => (
+export const SharedStatus = ({ className, docId, recipients, link, t }) => (
   <span className={cx(className, styles['shared-status'])}>
     {recipients.length > 1 && (
       <a
