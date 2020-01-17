@@ -1,12 +1,7 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import {
-  Spinner,
-  MenuItem,
-  withBreakpoints,
-  Icon
-} from 'cozy-ui/transpiled/react'
+import { Spinner, MenuItem, withBreakpoints } from 'cozy-ui/transpiled/react'
 
 import MenuAwareMobile from './MenuAwareMobile'
 import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
@@ -99,11 +94,11 @@ class Status extends Component {
   getStatusIcon = type => {
     switch (type) {
       case 'one-way':
-        return IconEye
+        return <IconEye />
       case 'two-way':
-        return IconPen
+        return <IconPen />
       default:
-        return IconHourglass
+        return <IconHourglass />
     }
   }
 
@@ -138,7 +133,7 @@ class Status extends Component {
             }}
             name={name}
           >
-            <MenuItem icon={<Icon icon={this.getStatusIcon(status)} />}>
+            <MenuItem icon={this.getStatusIcon(status)}>
               {status === 'ready' && type
                 ? t(`Share.type.${type}`)
                 : t(`Share.status.${status}`)}
@@ -148,7 +143,7 @@ class Status extends Component {
             <MenuItem
               onSelect={this.onRevoke}
               onClick={this.onRevoke}
-              icon={<Icon icon={IconTrash} />}
+              icon={<IconTrash />}
             >
               <div className={styles['action-unshare']}>
                 {isOwner
