@@ -439,10 +439,10 @@ const getAppUrl = (apps, appName) => {
 export const getSharedDocIdsBySharings = sharings => {
   const docs = []
   if (!sharings.data) return []
-  sharings.data.map(s => {
+  sharings.data.forEach(s => {
     if (s.attributes && s.attributes.active) {
-      docs.push(getSharingDocIds(s))
+      docs.push(...getSharingDocIds(s))
     }
   })
-  return docs.reduce((acc, val) => acc.concat(val), [])
+  return docs
 }
