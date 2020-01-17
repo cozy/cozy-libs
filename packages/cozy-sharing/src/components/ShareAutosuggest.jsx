@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Autosuggest from 'react-autosuggest'
 
-import { Icon, Spinner } from 'cozy-ui/transpiled/react'
+import { Spinner } from 'cozy-ui/transpiled/react'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import styles from './autosuggest.styl'
@@ -115,7 +115,7 @@ export default class ShareAutocomplete extends Component {
                 className={styles['removeRecipient']}
                 onClick={() => this.onRemove(recipient)}
               >
-                <Icon icon={BoldCross} width="16" height="16" />
+                <BoldCross />
               </button>
             </div>
           )
