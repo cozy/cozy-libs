@@ -25,8 +25,8 @@ export class TooltipRecipientList extends React.Component {
 
     return (
       <ul className={styles['shared-tooltip-list']}>
-        {recipientNames.slice(0, cutoff).map(name => (
-          <li key={`key_name_${name}`}>{name}</li>
+        {recipientNames.slice(0, cutoff).map((name, i) => (
+          <li key={`key_name_${name}_${i}`}>{name}</li>
         ))}
         {recipientNames.length > cutoff && (
           <li>
