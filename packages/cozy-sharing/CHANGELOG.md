@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.6.0...cozy-sharing@1.6.1) (2020-01-20)
+
+
+### Bug Fixes
+
+* Use minilog cozy fork ([6f815ed](https://github.com/cozy/cozy-libs/commit/6f815ed))
+
+
+
+
+
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.5.5...cozy-sharing@1.6.0) (2020-01-17)
 
 
