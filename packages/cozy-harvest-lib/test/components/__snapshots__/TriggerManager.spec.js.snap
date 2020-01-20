@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TriggerManager handleError should render error 1`] = `
-<Wrapper
+<withI18n(withLocales(withClient(VaultUnlocker)))
   onUnlock={[Function]}
 >
   <div
@@ -40,7 +40,7 @@ exports[`TriggerManager handleError should render error 1`] = `
       submitting={false}
     />
   </React.Fragment>
-</Wrapper>
+</withI18n(withLocales(withClient(VaultUnlocker)))>
 `;
 
 exports[`TriggerManager should redirect to OAuthForm 1`] = `
@@ -58,7 +58,7 @@ exports[`TriggerManager should redirect to OAuthForm 1`] = `
 `;
 
 exports[`TriggerManager should render with account 1`] = `
-<Wrapper
+<withI18n(withLocales(withClient(VaultUnlocker)))
   onUnlock={[Function]}
 >
   <div
@@ -96,11 +96,11 @@ exports[`TriggerManager should render with account 1`] = `
       submitting={false}
     />
   </React.Fragment>
-</Wrapper>
+</withI18n(withLocales(withClient(VaultUnlocker)))>
 `;
 
 exports[`TriggerManager should render without account 1`] = `
-<Wrapper
+<withI18n(withLocales(withClient(VaultUnlocker)))
   onUnlock={[Function]}
 >
   <div
@@ -123,5 +123,5 @@ exports[`TriggerManager should render without account 1`] = `
     }
     onSelect={[Function]}
   />
-</Wrapper>
+</withI18n(withLocales(withClient(VaultUnlocker)))>
 `;
