@@ -1,12 +1,15 @@
 import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
+import Modal from 'cozy-ui/transpiled/react/Modal'
 import withLocales from '../hoc/withLocales'
 
 import AccountFields from './AccountFields'
+import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
@@ -29,6 +32,10 @@ export class AccountForm extends PureComponent {
   constructor(props) {
     super(props)
 
+    this.state = {
+      showConfirmationModal: false
+    }
+
     this.inputs = {}
     this.inputFocused = null
 
@@ -36,6 +43,8 @@ export class AccountForm extends PureComponent {
     this.handleFocus = this.handleFocus.bind(this)
     this.handleKeyUp = this.handleKeyUp.bind(this)
     this.focusNext = this.focusNext.bind(this)
+    this.showConfirmationModal = this.showConfirmationModal.bind(this)
+    this.hideConfirmationModal = this.hideConfirmationModal.bind(this)
   }
 
   /**
@@ -112,10 +121,28 @@ export class AccountForm extends PureComponent {
    * @param  {Object} form          The form object injected by ReactFinalForm.
    */
   handleSubmit(values, form) {
+    const { account, konnector } = this.props
+
+    const identifier = manifest.getIdentifier(konnector.fields)
+
+    if (
+      account &&
+      account.auth[identifier] &&
+      account.auth[identifier] !== values[identifier]
+    ) {
+      this.showConfirmationModal()
+    } else {
+      this.doSubmit(values, form)
+    }
+  }
+
+  doSubmit(values, form) {
     const { onSubmit } = this.props
+
     // Reset form with new values to set back dirty to false
     form.reset(values)
     onSubmit(values)
+    this.hideConfirmationModal()
   }
 
   /**
@@ -147,22 +174,39 @@ export class AccountForm extends PureComponent {
     return errors
   }
 
+  showConfirmationModal() {
+    this.setState({ showConfirmationModal: true })
+  }
+
+  hideConfirmationModal() {
+    this.setState({ showConfirmationModal: false })
+  }
+
   render() {
     const {
       account,
       error,
       konnector,
+      onBack,
       onSubmit,
       showError,
       submitting,
       t
     } = this.props
-    const { fields } = konnector
 
+    const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
-    const defaultValues = manifest.defaultFieldsValues(sanitizedFields)
     const initialValues = account && account.auth
-    const initialAndDefaultValues = { ...defaultValues, ...initialValues }
+    const values = manifest.getFieldsValues(konnector, account)
+
+    const isReadOnlyIdentifier =
+      Boolean(get(account, 'relationships.vaultCipher')) &&
+      this.props.readOnlyIdentifier
+
+    if (isReadOnlyIdentifier) {
+      const identifier = manifest.getIdentifier(fields)
+      sanitizedFields[identifier].type = 'hidden'
+    }
 
     let container = null
     const isLoginError =
@@ -171,9 +215,9 @@ export class AccountForm extends PureComponent {
     return (
       // See https://github.com/final-form/react-final-form#getting-started
       <Form
-        initialValues={initialAndDefaultValues}
+        initialValues={values}
         onSubmit={onSubmit}
-        validate={this.validate(sanitizedFields, initialAndDefaultValues)}
+        validate={this.validate(sanitizedFields, values)}
         render={({ dirty, form, values, valid }) => (
           <div
             onKeyUp={event =>
@@ -197,12 +241,23 @@ export class AccountForm extends PureComponent {
                 konnector={konnector}
               />
             )}
+            {isReadOnlyIdentifier && (
+              <ReadOnlyIdentifier
+                className="u-mb-1"
+                onClick={onBack}
+                konnector={konnector}
+                identifier={get(
+                  account,
+                  `auth.${manifest.getIdentifier(konnector.fields)}`
+                )}
+              />
+            )}
             <AccountFields
               container={container}
               disabled={submitting}
               fields={sanitizedFields}
               hasError={error && isLoginError}
-              initialValues={initialAndDefaultValues}
+              initialValues={values}
               inputRefByName={this.inputRefByName}
               t={t}
             />
@@ -217,6 +272,20 @@ export class AccountForm extends PureComponent {
               label={t('accountForm.submit.label')}
               onClick={() => this.handleSubmit(values, form)}
             />
+            {this.state.showConfirmationModal && (
+              <Modal
+                title={t('triggerManager.confirmationModal.title')}
+                description={t('triggerManager.confirmationModal.description')}
+                primaryText={t('triggerManager.confirmationModal.primaryText')}
+                primaryType="primary"
+                primaryAction={() => this.doSubmit(values, form)}
+                secondaryText={t(
+                  'triggerManager.confirmationModal.secondaryText'
+                )}
+                secondaryAction={this.hideConfirmationModal}
+                dismissAction={this.hideConfirmationModal}
+              />
+            )}
           </div>
         )}
       />

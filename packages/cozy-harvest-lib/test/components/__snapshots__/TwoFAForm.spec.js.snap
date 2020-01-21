@@ -33,19 +33,19 @@ exports[`TwoFAForm should render correctly with value change 1`] = `
     <form
       onSubmit={[Function]}
     >
-      <SubTitle
+      <ForwardRef
         className="u-mb-1 u-mt-half u-ta-center"
         ellipsis={false}
         tag="div"
       >
         twoFAForm.title.default
-      </SubTitle>
-      <Text
+      </ForwardRef>
+      <ForwardRef
         ellipsis={false}
         tag="div"
       >
         twoFAForm.desc
-      </Text>
+      </ForwardRef>
       <Field
         autoComplete="off"
         className="u-mt-0 u-mb-0"

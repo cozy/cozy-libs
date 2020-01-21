@@ -26,6 +26,8 @@ export class EditAccountModal extends Component {
       fetching: true,
       error: false
     }
+
+    this.redirectToAccount = this.redirectToAccount.bind(this)
   }
 
   componentDidMount() {
@@ -66,6 +68,10 @@ export class EditAccountModal extends Component {
     }
   }
 
+  redirectToAccount() {
+    this.props.pushHistory(`/accounts/${this.state.account._id}`)
+  }
+
   render() {
     /**
      * We don't use the dismiss action pros that we can have from our
@@ -75,11 +81,11 @@ export class EditAccountModal extends Component {
      * When we are on mobile, we display a back button
      * On desktop we display a cross
      */
-    const { konnector, pushHistory } = this.props
+    const { konnector } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <Modal
-        dismissAction={() => pushHistory(`/accounts/${account._id}`)}
+        dismissAction={this.redirectToAccount}
         mobileFullscreen
         size="small"
       >
@@ -101,8 +107,9 @@ export class EditAccountModal extends Component {
               account={account}
               konnector={konnector}
               initialTrigger={trigger}
-              onSuccess={() => pushHistory(`/accounts/${account._id}`)}
+              onSuccess={this.redirectToAccount}
               showError={true}
+              onVaultDismiss={this.redirectToAccount}
             />
           )}
         </ModalContent>

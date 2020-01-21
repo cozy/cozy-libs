@@ -41,13 +41,15 @@
   },
   "devDependencies": {
     "@babel/cli": "7.2.3",
+    "@testing-library/react": "9.4.0",
     "babel-jest": "24.1.0",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-preset-cozy-app": "^1.7.0",
     "cozy-client": "7.13.0",
     "cozy-device-helper": "^1.8.0",
+    "cozy-keys-lib": "2.5.2",
     "cozy-realtime": "3.1.0",
-    "cozy-ui": "27.11.2",
+    "cozy-ui": "29.2.1",
     "enzyme": "3.10.0",
     "enzyme-adapter-react-16": "1.15.1",
     "identity-obj-proxy": "3.0.0",
@@ -59,8 +61,9 @@
   "peerDependencies": {
     "cozy-client": "7.13.0",
     "cozy-device-helper": "1.7.1",
+    "cozy-keys-lib": "^2.5.2",
     "cozy-realtime": "^3.1.0",
-    "cozy-ui": "^27.11.2"
+    "cozy-ui": "^29.2.1"
   },
   "sideEffects": false
 }

@@ -1,9 +1,19 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
+import flow from 'lodash/flow'
 
 import { withMutations, withClient } from 'cozy-client'
-import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
+import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import {
+  VaultUnlocker,
+  withVaultClient,
+  CipherType,
+  UriMatchType
+} from 'cozy-keys-lib'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -16,6 +26,10 @@ import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
+import VaultCiphersList from './VaultCiphersList'
+import manifest from '../helpers/manifest'
+import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
+import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -27,7 +41,7 @@ const MODAL_PLACE_ID = 'coz-harvest-modal-place'
  * After that it calls TriggerLauncher to run the konnector.
  * @type {Component}
  */
-export class TriggerManager extends Component {
+export class DumbTriggerManager extends Component {
   constructor(props) {
     super(props)
     const { account } = props
@@ -36,11 +50,18 @@ export class TriggerManager extends Component {
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleError = this.handleError.bind(this)
+    this.handleCipherSelect = this.handleCipherSelect.bind(this)
+    this.showCiphersList = this.showCiphersList.bind(this)
+    this.handleVaultUnlock = this.handleVaultUnlock.bind(this)
 
     this.state = {
       account,
       error: null,
-      status: IDLE
+      status: IDLE,
+      step: account ? 'accountForm' : 'ciphersList',
+      selectedCipher: undefined,
+      showBackButton: false,
+      ciphers: []
     }
   }
 
@@ -123,11 +144,123 @@ export class TriggerManager extends Component {
       this.handleError(error)
     }
   }
+
+  /**
+   * Get the ID of the cipher selected by the user in the list
+   *
+   * @returns {string|null} the cipher ID
+   */
+  getSelectedCipherId() {
+    const { selectedCipher } = this.state
+    return selectedCipher && selectedCipher.id
+  }
+
+  /**
+   * Create a new cipher and return its ID
+   *
+   * @param {string} login - the login to register in the new cipher
+   * @param {string} password - the password to register in the new cipher
+   *
+   * @returns {string} the cipher ID
+   */
+  async createNewCipherId(login, password) {
+    const { vaultClient, konnector } = this.props
+
+    const konnectorURI = get(konnector, 'vendor_link')
+    const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
+
+    const cipherData = {
+      id: null,
+      type: CipherType.Login,
+      name: konnectorName,
+      login: {
+        username: login,
+        password,
+        uris: konnectorURI
+          ? [{ uri: konnectorURI, match: UriMatchType.Domain }]
+          : []
+      }
+    }
+
+    const cipher = await vaultClient.createNewCozySharedCipher(cipherData, null)
+    await vaultClient.saveCipher(cipher)
+
+    return cipher.id
+  }
+
+  /**
+   * Find an existing cipher for the account and return its ID
+   *
+   * @param {string} login - the login to set in the cipher
+   * @param {string} password - the password to set in the cipher
+   *
+   * @returns {string|null} the cipher ID or null if no cipher was found
+   */
+  async getExistingCipherIdForAccount(login, password) {
+    const { account } = this.state
+    const { vaultClient, konnector } = this.props
+
+    const konnectorURI = get(konnector, 'vendor_link')
+
+    const id = accounts.getVaultCipherId(account)
+    const search = {
+      username: login,
+      uri: konnectorURI,
+      type: CipherType.Login
+    }
+    const sort = [view => view.login.password === password, 'revisionDate']
+    const originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
+
+    if (originalCipher) {
+      return originalCipher.id
+    } else {
+      return null
+    }
+  }
+
+  /**
+   * Share a cipher to the cozy org
+   * @param {string} cipherId - uuid of a cipher
+   */
+  async shareCipherWithCozy(cipherId) {
+    const { vaultClient } = this.props
+    const cipher = await vaultClient.get(cipherId)
+    const cipherView = await vaultClient.decrypt(cipher)
+    await vaultClient.shareWithCozy(cipherView)
+  }
+
+  /**
+   * Update a cipher with provided identifier and password
+   *
+   * @param {string} cipherId - uuid of a cipher
+   * @param {string} login - the new login
+   * @param {string} password - the new password
+   */
+  async updateCipher(cipherId, login, password) {
+    const { vaultClient } = this.props
+    const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
+    const cipherData = await vaultClient.decrypt(originalCipher)
+
+    if (
+      cipherData.login.username !== login ||
+      cipherData.login.password !== password
+    ) {
+      cipherData.login.username = login
+      cipherData.login.password = password
+
+      const cipher = await vaultClient.createNewCozySharedCipher(
+        cipherData,
+        originalCipher
+      )
+      await vaultClient.saveCipher(cipher)
+    }
+  }
+
   /**
    * TODO move to AccountHelper
    */
   async handleSubmit(data = {}) {
-    const { konnector, saveAccount } = this.props
+    const { konnector, saveAccount, vaultClient } = this.props
 
     const { account } = this.state
     const isUpdate = !!account
@@ -137,16 +270,59 @@ export class TriggerManager extends Component {
       status: RUNNING
     })
 
+    const identifierProperty = manifest.getIdentifier(konnector.fields)
+
+    const isVaultLocked = await vaultClient.isLocked()
+
     try {
-      const accountToSave = isUpdate
-        ? accounts.mergeAuth(
-            accounts.setSessionResetIfNecessary(
-              accounts.resetState(account),
-              data
-            ),
-            data
+      const identifier = data[identifierProperty]
+      const password = data.password
+      let cipherId = this.getSelectedCipherId()
+
+      if (isVaultLocked) {
+        // eslint-disable-next-line no-console
+        console.warn(
+          'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
+        )
+      } else {
+        if (cipherId) {
+          await this.updateCipher(cipherId, identifier, password)
+        } else {
+          const existingCipherId = await this.getExistingCipherIdForAccount(
+            identifier,
+            password
           )
+
+          if (existingCipherId) {
+            cipherId = existingCipherId
+            await this.updateCipher(cipherId, identifier, password)
+          } else {
+            cipherId = await this.createNewCipherId(identifier, password)
+          }
+        }
+
+        await this.shareCipherWithCozy(cipherId)
+      }
+
+      const accountWithNewState = accounts.setSessionResetIfNecessary(
+        accounts.resetState(account),
+        data
+      )
+      const accountDocument = isUpdate
+        ? accounts.mergeAuth(accountWithNewState, data)
         : accounts.build(konnector, data)
+
+      let accountToSave
+
+      if (cipherId) {
+        accountToSave = accounts.setVaultCipherRelationship(
+          accountDocument,
+          cipherId
+        )
+      } else {
+        accountToSave = accountDocument
+      }
+
       const savedAccount = accounts.mergeAuth(
         await saveAccount(konnector, accountToSave),
         data
@@ -176,19 +352,139 @@ export class TriggerManager extends Component {
     if (typeof onError === 'function') onError(error)
   }
 
+  handleCipherSelect(selectedCipher) {
+    const { konnector } = this.props
+    const account = this.cipherToAccount(selectedCipher)
+    const values = manifest.getFieldsValues(konnector, account)
+
+    const hasValuesForRequiredFields = manifest.hasValuesForRequiredFields(
+      konnector,
+      values
+    )
+
+    if (hasValuesForRequiredFields) {
+      this.setState(
+        {
+          selectedCipher
+        },
+        () => {
+          this.handleSubmit(values)
+        }
+      )
+    } else {
+      this.setState({
+        step: 'accountForm',
+        selectedCipher,
+        showBackButton: true
+      })
+    }
+  }
+
+  showCiphersList() {
+    this.setState({
+      step: 'ciphersList'
+    })
+  }
+
+  cipherToAccount(cipher) {
+    if (cipher === undefined) {
+      return null
+    }
+
+    const identifierProperty = manifest.getIdentifier(
+      this.props.konnector.fields
+    )
+
+    const account = Account.fromCipher(cipher, {
+      identifierProperty
+    })
+
+    return account
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.error && this.props.error !== prevProps.error) {
+      this.setState({ step: 'accountForm' })
+    }
+  }
+
+  /**
+   * Tells whether we currently have a cipher selected or not
+   * selectedCipher === undefined means nothing has been selected
+   * selectedCipher === null means « from another account has been selected »
+   * selectedCipher === Object means a cipher has been selected
+   */
+  hasCipherSelected() {
+    return this.state.selectedCipher !== undefined
+  }
+
+  showAccountForm() {
+    this.setState({ step: 'accountForm', showBackButton: false })
+  }
+
+  async handleVaultUnlock() {
+    const { vaultClient, konnector } = this.props
+
+    const encryptedCiphers = await vaultClient.getAll({
+      type: CipherType.Login
+    })
+
+    if (encryptedCiphers.length === 0) {
+      this.showAccountForm()
+      return
+    }
+
+    try {
+      const ciphers = await vaultClient.getAllDecrypted({
+        type: CipherType.Login,
+        uri: get(konnector, 'vendor_link')
+      })
+
+      if (ciphers.length === 0) {
+        this.showAccountForm()
+      }
+
+      this.setState({ ciphers })
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.error(
+        `Error while getting decrypted ciphers for ${konnector.slug} konnector:`
+      )
+      // eslint-disable-next-line no-console
+      console.error(err)
+    }
+  }
+
   render() {
     const {
       error: triggerError,
       konnector,
       running: triggerRunning,
       showError,
-      modalContainerId
+      modalContainerId,
+      t,
+      onVaultDismiss,
+      vaultClosable
     } = this.props
-    const { account, error, status } = this.state
+
+    const {
+      account,
+      error,
+      status,
+      step,
+      selectedCipher,
+      showBackButton,
+      ciphers
+    } = this.state
+
     const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
     const { oauth } = konnector
+
+    const showSpinner = submitting && selectedCipher && step === 'ciphersList'
+    const showCiphersList = step === 'ciphersList'
+    const showAccountForm = step === 'accountForm'
 
     if (oauth) {
       return (
@@ -201,23 +497,59 @@ export class TriggerManager extends Component {
       )
     }
 
+    if (showSpinner) {
+      return (
+        <div className="u-flex u-flex-column u-flex-items-center">
+          <Spinner size="xxlarge" />
+          <p>{t('triggerManager.connecting')}</p>
+        </div>
+      )
+    }
+
     return (
-      <div>
+      <VaultUnlocker
+        onDismiss={onVaultDismiss}
+        closable={vaultClosable}
+        onUnlock={this.handleVaultUnlock}
+      >
         <div id={modalInto} />
-        <AccountForm
-          account={account}
-          error={error || triggerError}
-          konnector={konnector}
-          onSubmit={this.handleSubmit}
-          showError={showError}
-          submitting={submitting}
-        />
-      </div>
+        {showCiphersList && (
+          <VaultCiphersList
+            konnector={konnector}
+            ciphers={ciphers}
+            onSelect={this.handleCipherSelect}
+          />
+        )}
+        {showAccountForm && (
+          <>
+            {showBackButton && (
+              <ModalBackButton
+                onClick={this.showCiphersList}
+                label={t('back')}
+              />
+            )}
+            <AccountForm
+              account={
+                !this.hasCipherSelected()
+                  ? account
+                  : this.cipherToAccount(selectedCipher)
+              }
+              error={error || triggerError}
+              konnector={konnector}
+              onSubmit={this.handleSubmit}
+              showError={showError}
+              submitting={submitting}
+              onBack={this.showCiphersList}
+              readOnlyIdentifier={this.hasCipherSelected()}
+            />
+          </>
+        )}
+      </VaultUnlocker>
     )
   }
 }
 
-TriggerManager.propTypes = {
+DumbTriggerManager.propTypes = {
   /**
    * Account document. Used to get intial form values.
    * If no account is passed, AccountForm will use empty initial values.
@@ -297,17 +629,42 @@ TriggerManager.propTypes = {
    * Trigger mutations
    * @type {Function}
    */
-  statDirectoryByPath: PropTypes.func
+  statDirectoryByPath: PropTypes.func,
+  /**
+   * What to do when the Vault unlock screen is dismissed without password
+   */
+  onVaultDismiss: PropTypes.func.isRequired,
+  /**
+   * Whether the vault will be closable or not.
+   * @type {Boolean}
+   */
+  vaultClosable: PropTypes.bool
 }
 
-const SmartTriggerManager = translate()(
+const SmartTriggerManager = flow(
+  translate(),
+  withClient,
+  withVaultClient,
   withMutations(
     accountsMutations,
     filesMutations,
     permissionsMutations,
     triggersMutations
-  )(withClient(TriggerManager))
-)
+  )
+)(DumbTriggerManager)
+
+// The TriggerManager is wrapped in the providers required for it to work by
+// itself instead of receiving it from its parents because it is used as
+// standalone in places like cozy-home intents
+export const TriggerManager = props => {
+  return (
+    <HarvestVaultProvider>
+      <MuiCozyTheme>
+        <SmartTriggerManager {...props} />
+      </MuiCozyTheme>
+    </HarvestVaultProvider>
+  )
+}
 
 // TriggerManager is exported wrapped in TriggerLauncher to avoid breaking changes.
 const LegacyTriggerManager = props => {
@@ -328,7 +685,7 @@ const LegacyTriggerManager = props => {
       initialTrigger={initialTrigger}
     >
       {({ error, launch, running, trigger }) => (
-        <SmartTriggerManager
+        <TriggerManager
           {...otherProps}
           error={error}
           launch={launch}

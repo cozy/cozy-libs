@@ -108,6 +108,34 @@ export const mergeAuth = (account, authData) => ({
 })
 
 /**
+ * Gets the vault cipher relationship to an account
+ * @param  {object} account   io.cozy.accounts document
+ * @return {string}           cipher uuid
+ */
+export const getVaultCipherId = account =>
+  get(account, 'relationships.vaultCipher.data[0]._id')
+
+/**
+ * Adds or updates a vault cipher relationship to an account
+ * @param  {object} account   io.cozy.accounts document
+ * @param  {string} vaultCipherId The id of the cipher mathcing this account in the vault
+ * @return {object}           io.cozy.accounts attributes
+ */
+export const setVaultCipherRelationship = (account, vaultCipherId) => ({
+  ...account,
+  relationships: {
+    ...account.relationships,
+    vaultCipher: {
+      data: {
+        _id: vaultCipherId,
+        _type: 'com.bitwarden.ciphers',
+        _protocol: 'bitwarden'
+      }
+    }
+  }
+})
+
+/**
  * Update Two FA code from TwoFAForm into io.cozy.accounts document
  * @param  {object} account   io.cozy.accounts document
  * @param  {object} code      Code from TwoFAForm
@@ -157,5 +185,7 @@ export default {
   mergeAuth,
   resetState,
   setSessionResetIfNecessary,
-  updateTwoFaCode
+  updateTwoFaCode,
+  setVaultCipherRelationship,
+  getVaultCipherId
 }

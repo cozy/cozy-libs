@@ -9,7 +9,6 @@ import NewAccountModal from './NewAccountModal'
 import EditAccountModal from './EditAccountModal'
 import KonnectorSuccess from './KonnectorSuccess'
 import HarvestModalRoot from './HarvestModalRoot'
-
 import { MountPointProvider } from './MountPointContext'
 
 const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
@@ -52,7 +51,12 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
               <Route
                 path={`${konnectorRoot}/new`}
                 exact
-                render={() => <NewAccountModal konnector={konnector} />}
+                render={() => (
+                  <NewAccountModal
+                    konnector={konnector}
+                    onDismiss={onDismiss}
+                  />
+                )}
               />
               <Route
                 path={`${konnectorRoot}/accounts/:accountId/success`}

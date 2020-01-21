@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`KonnectorUpdateInfos should render 1`] = `
-<Infos
+<InfosMigration
   actionButton={
     <KonnectorUpdateLinker
       konnector={
@@ -12,14 +12,13 @@ exports[`KonnectorUpdateInfos should render 1`] = `
       label="infos.konnectorUpdate.button.label"
     />
   }
-  icon={null}
   text="infos.konnectorUpdate.body.regular"
   title="infos.konnectorUpdate.title"
 />
 `;
 
 exports[`KonnectorUpdateInfos should render as blocking 1`] = `
-<Infos
+<InfosMigration
   actionButton={
     <KonnectorUpdateLinker
       isBlocking={true}
@@ -31,7 +30,6 @@ exports[`KonnectorUpdateInfos should render as blocking 1`] = `
       label="infos.konnectorUpdate.button.label"
     />
   }
-  icon={null}
   isImportant={true}
   text="infos.konnectorUpdate.body.blocking"
   title="infos.konnectorUpdate.title"

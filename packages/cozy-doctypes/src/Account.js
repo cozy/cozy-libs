@@ -1,4 +1,6 @@
 const Document = require('./Document')
+const pickBy = require('lodash/pickBy')
+const get = require('lodash/get')
 
 const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
@@ -28,6 +30,54 @@ class Account extends Document {
         if (account.auth[fieldName]) return account.auth[fieldName]
       }
     }
+  }
+
+  /**
+   * Create an account document from a vault cipher
+   *
+   * @param {Object} cipher
+   * @param {Object} [options={}]
+   * @param {string} [options.identifierProperty=login] - The name of the identifier property to use for this account
+   *
+   * @returns {Object}
+   */
+  static fromCipher(cipher, options = {}) {
+    const opts = {
+      identifierProperty: 'login',
+      ...options
+    }
+
+    const customFields = (get(cipher, 'fields') || []).reduce(
+      (fields, field) => {
+        fields[field.name] = field.value
+
+        return fields
+      },
+      {}
+    )
+
+    const account = {
+      auth: pickBy(
+        {
+          [opts.identifierProperty]: get(cipher, 'login.username', ''),
+          password: get(cipher, 'login.password', ''),
+          ...customFields
+        },
+        value => Boolean(value)
+      )
+    }
+
+    if (cipher) {
+      account.relationships = {
+        vaultCipher: {
+          _id: cipher.id,
+          _type: 'com.bitwarden.ciphers',
+          _protocol: 'bitwarden'
+        }
+      }
+    }
+
+    return account
   }
 }
 
