@@ -10,8 +10,8 @@ module.exports = {
   env: basics.env,
   settings: { react: { version: 'latest' } },
   rules: Object.assign({}, basics.rules, {
-    'react/prop-types': 0,
-    'react-hooks/rules-of-hooks': 2,
-    'react-hooks/exhaustive-deps': 1
+    'react/prop-types': 'off',
+    'react-hooks/rules-of-hooks': 'error',
+    'react-hooks/exhaustive-deps': 'warn'
   })
 }
