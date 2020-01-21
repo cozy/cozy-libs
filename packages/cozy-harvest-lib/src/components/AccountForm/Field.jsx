@@ -4,7 +4,7 @@ import UIField from 'cozy-ui/transpiled/react/Field'
 const ObfuscateChar = () => {
   return (
     <span style={{ fontSize: 0 }} aria-hidden="true">
-      a
+      ·
     </span>
   )
 }
