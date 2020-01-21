@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.72.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.71.0...cozy-doctypes@1.72.0) (2020-01-21)
+
+
+### Features
+
+* Add prop types to VaultCiphersList ([7252a36](https://github.com/cozy/cozy-libs/commit/7252a36))
+* **cozy-doctypes:** Account::fromCipher handles identifier property ([dba811d](https://github.com/cozy/cozy-libs/commit/dba811d))
+* **cozy-doctypes:** Account::fromCipher handles null ([8504536](https://github.com/cozy/cozy-libs/commit/8504536))
+
+
+
+
+
 # [1.71.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.70.0...cozy-doctypes@1.71.0) (2019-12-18)
 
 

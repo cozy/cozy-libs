@@ -3,6 +3,56 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.16.0...cozy-harvest-lib@1.17.0) (2020-01-21)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Fix deps ([ee4a4cf](https://github.com/cozy/cozy-libs/commit/ee4a4cf))
+* Share the cipher with cozy when editing a cipher ([#805](https://github.com/cozy/cozy-libs/issues/805)) ([2bbac67](https://github.com/cozy/cozy-libs/commit/2bbac67))
+* **cozy-harvest-lib:** Correctly fetch accounts for given cipher id ([12d4942](https://github.com/cozy/cozy-libs/commit/12d4942))
+* **cozy-harvest-lib:** Go back when dismissing the vault unlocker ([6da5ca0](https://github.com/cozy/cozy-libs/commit/6da5ca0))
+* **cozy-harvest-lib:** Show empty form if creating account from nothing ([ff21cb1](https://github.com/cozy/cozy-libs/commit/ff21cb1))
+* **cozy-harvest-lib:** Show spinner if selected cipher is complete ([9fb63f7](https://github.com/cozy/cozy-libs/commit/9fb63f7))
+* **cozy-harvest-lib:** Update cozy-keys-lib to v1.9.0 ([4704526](https://github.com/cozy/cozy-libs/commit/4704526))
+* **cozy-harvest-lib:** Update selected cipher if needed ([54c6bbe](https://github.com/cozy/cozy-libs/commit/54c6bbe))
+* **cozy-harvest-lib:** Use cozy-ui transpiled imports only ([4dc984a](https://github.com/cozy/cozy-libs/commit/4dc984a))
+* Use data in vaultCipher relationship ([88e0d8f](https://github.com/cozy/cozy-libs/commit/88e0d8f))
+* **deps:** Update cozy-keys-lib to v1.10.0 ([2120f79](https://github.com/cozy/cozy-libs/commit/2120f79))
+* **deps:** Update cozy-keys-lib to v1.9.4 ([d66cd08](https://github.com/cozy/cozy-libs/commit/d66cd08))
+* **deps:** Update cozy-keys-lib to v1.9.6 ([5b4ff51](https://github.com/cozy/cozy-libs/commit/5b4ff51))
+* **deps:** Update cozy-keys-lib to v2.5.2 ([40f0c53](https://github.com/cozy/cozy-libs/commit/40f0c53))
+* **deps:** Update cozy-ui to v29.2.1 ([e5b0b18](https://github.com/cozy/cozy-libs/commit/e5b0b18))
+* **TriggerManager:** Bypass ciphers list if there's no cipher ([6559fec](https://github.com/cozy/cozy-libs/commit/6559fec))
+* **TriggerManager:** Bypass ciphers list when there's no choice in it ([64f76d8](https://github.com/cozy/cozy-libs/commit/64f76d8))
+* **TriggerManager:** Handle existing account without cipher update ([5281fed](https://github.com/cozy/cozy-libs/commit/5281fed))
+
+
+### Features
+
+* **cozy-harvest-lib:** Handle identifier property ([ac6cf00](https://github.com/cozy/cozy-libs/commit/ac6cf00))
+* Add prop types to VaultCiphersList ([7252a36](https://github.com/cozy/cozy-libs/commit/7252a36))
+* **AccountField:** Make it non recognizable by browser extensions ([f35d7b5](https://github.com/cozy/cozy-libs/commit/f35d7b5))
+* **AccountForm:** Add aria-label to ObfuscatedLabel ([102810d](https://github.com/cozy/cozy-libs/commit/102810d))
+* **cozy-harvest-lib:** Cipher relationship should not be an array ([6a5770b](https://github.com/cozy/cozy-libs/commit/6a5770b))
+* **cozy-harvest-lib:** Ciphers list back button ([19d7d61](https://github.com/cozy/cozy-libs/commit/19d7d61))
+* **cozy-harvest-lib:** Don't show read-only identifier on creation ([363a818](https://github.com/cozy/cozy-libs/commit/363a818))
+* **cozy-harvest-lib:** Handle decrypt errors in service ([f9bb105](https://github.com/cozy/cozy-libs/commit/f9bb105))
+* **cozy-harvest-lib:** Identifier is not editable when from a cipher ([f849ea9](https://github.com/cozy/cozy-libs/commit/f849ea9))
+* Go back to account form on error with selected cipher ([164281a](https://github.com/cozy/cozy-libs/commit/164281a))
+* Show a spinner when selected cipher has all required values ([d49d8be](https://github.com/cozy/cozy-libs/commit/d49d8be))
+* Update account username ([0c8f5e1](https://github.com/cozy/cozy-libs/commit/0c8f5e1))
+* Update accounts script ([e22cdbb](https://github.com/cozy/cozy-libs/commit/e22cdbb))
+* **cozy-harvest-lib:** Launch LOGIN_FAILED triggers after cipher update ([359c18e](https://github.com/cozy/cozy-libs/commit/359c18e))
+* **cozy-harvest-lib:** Make TriggerManager usable standalone ([6392a78](https://github.com/cozy/cozy-libs/commit/6392a78))
+* **cozy-harvest-lib:** Make TriggerManager work with locked vault ([90232c5](https://github.com/cozy/cozy-libs/commit/90232c5))
+* **cozy-harvest-lib:** Show confirmation modal if edited an identifier ([762a460](https://github.com/cozy/cozy-libs/commit/762a460))
+* **cozy-harvest-lib:** Use special char in obfuscated label ([7179281](https://github.com/cozy/cozy-libs/commit/7179281))
+
+
+
+
+
 # [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.15.7...cozy-harvest-lib@1.16.0) (2020-01-15)
 
 
