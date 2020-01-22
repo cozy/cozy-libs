@@ -2,6 +2,7 @@ import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 import set from 'lodash/set'
 import unset from 'lodash/unset'
+import get from 'lodash/get'
 
 export const decryptString = (encryptedString, vaultClient, orgKey) => {
   const [encTypeAndIv, data, mac] = encryptedString.split('|')
@@ -45,6 +46,63 @@ export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
   )
 
   return accounts
+}
+
+export const fetchSharedCiphers = async cozyClient => {
+  const ciphers = await cozyClient.query(
+    cozyClient
+      .find('com.bitwarden.ciphers')
+      .where({
+        shared_with_cozy: true
+      })
+      .indexFields(['shared_with_cozy'])
+  )
+  return ciphers
+}
+
+export const fetchTriggersForAccountId = async (cozyClient, accountId) => {
+  const triggers = await cozyClient.query(
+    cozyClient
+      .find('io.cozy.triggers')
+      .where({
+        'message.account': {
+          $eq: accountId
+        }
+      })
+      .indexFields(['message.account'])
+  )
+  return triggers
+}
+
+export const fetchKonnectorManifestBySlug = async (cozyClient, slug) => {
+  const konnector = await cozyClient.query(
+    cozyClient
+      .get('io.cozy.konnectors', slug)
+  )
+  return konnector
+}
+
+export const fetchKonnectorForAccountId = async (cozyClient, accountId) => {
+  const triggers = await fetchTriggersForAccountId(cozyClient, accountId)
+  const slug = get(triggers, 'data[0].message.konnector')
+  if (slug) {
+    const manifest = await fetchKonnectorManifestBySlug(cozyClient, slug)
+    return manifest
+  }
+  return
+}
+
+export const fetchDecryptedAccount = async (cozyClient, id) => {
+  /*const account = await cozyClient.query(
+    cozyClient.find('io.cozy.accounts').getById(id)
+  )*/
+
+  const account = await cozyClient
+    .getStackClient()
+    .fetchJSON('GET', `/data/io.cozy.accounts/${id}?include=credentials`)
+
+  //await cozyClient.fetch('GET', `/data/io.cozy.accounts/${id}`)
+  return account
 }
 
 export const updateAccounts = async (
