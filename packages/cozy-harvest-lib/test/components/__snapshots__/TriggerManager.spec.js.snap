@@ -1,7 +1,20 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`TriggerManager handleError should render error 1`] = `
-<withI18n(withLocales(withClient(VaultUnlocker)))
+<KonnectorVaultUnlocker
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
   onDismiss={[MockFunction]}
   onUnlock={[Function]}
 >
@@ -41,11 +54,24 @@ exports[`TriggerManager handleError should render error 1`] = `
       submitting={false}
     />
   </React.Fragment>
-</withI18n(withLocales(withClient(VaultUnlocker)))>
+</KonnectorVaultUnlocker>
 `;
 
 exports[`TriggerManager when given an account should render correctly 1`] = `
-<withI18n(withLocales(withClient(VaultUnlocker)))
+<KonnectorVaultUnlocker
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
   onDismiss={[MockFunction]}
   onUnlock={[Function]}
 >
@@ -84,7 +110,7 @@ exports[`TriggerManager when given an account should render correctly 1`] = `
       submitting={false}
     />
   </React.Fragment>
-</withI18n(withLocales(withClient(VaultUnlocker)))>
+</KonnectorVaultUnlocker>
 `;
 
 exports[`TriggerManager when given an oauth konnector should redirect to OAuthForm 1`] = `
@@ -102,12 +128,25 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
 `;
 
 exports[`TriggerManager when given no account should render correctly 1`] = `
-<withI18n(withLocales(withClient(VaultUnlocker)))
+<KonnectorVaultUnlocker
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
   onDismiss={[MockFunction]}
   onUnlock={[Function]}
 >
   <div
     id="coz-harvest-modal-place"
   />
-</withI18n(withLocales(withClient(VaultUnlocker)))>
+</KonnectorVaultUnlocker>
 `;

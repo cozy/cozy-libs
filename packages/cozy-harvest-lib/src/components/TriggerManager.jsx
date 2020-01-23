@@ -28,40 +28,82 @@ import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import clone from 'lodash/clone'
+import flag from 'cozy-flags'
 
 import { createOrUpdateCipher } from '../models/cipherUtils'
+
+const defaultKonnectorPolicy = {
+  accountContainsAuth: true,
+  saveInVault: true,
+  onAccountCreation: null,
+  match: () => true
+}
+
+const policies = [defaultKonnectorPolicy]
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
+const findKonnectorPolicy = konnector =>
+  policies.find(policy => policy.match(konnector))
+
+/**
+ * Creates or updates an io.cozy.accounts
+ * Used as a form submit handler
+ *
+ * @param  {io.cozy.account} options.account - Existing io.cozy.account or object
+ * @param  {[type]} options.cipher - Vault cipher if vault has been unlocked
+ * @param  {CozyClient} options.client - A cozy client
+ * @param  {io.cozy.konnector} options.konnector - Konnector to which the account is linked
+ * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts
+ * and if auth is saved into the vault
+ * @param  {function} options.saveAccount
+ * @param  {object} options.userData
+ * @param  {function} options.ensureTrigger
+ */
 const createOrUpdateAccount = async ({
   account,
   cipher,
+  client,
   konnector,
+  konnectorPolicy,
   saveAccount,
-  userData
+  userCredentials
 }) => {
   const isUpdate = !!account
+  const { onAccountCreation, saveInVault } = konnectorPolicy
 
   let accountToSave = clone(account)
 
+  accountToSave = accounts.resetState(accountToSave)
+
   accountToSave = accounts.setSessionResetIfNecessary(
-    accounts.resetState(accountToSave),
-    userData
+    accountToSave,
+    userCredentials
   )
 
   accountToSave = isUpdate
-    ? accounts.mergeAuth(accountToSave, userData)
-    : accounts.build(konnector, userData)
+    ? accounts.mergeAuth(accountToSave, userCredentials)
+    : accounts.build(konnector, userCredentials)
 
-  if (cipher) {
+  if (onAccountCreation) {
+    accountToSave = await onAccountCreation({
+      client,
+      account: accountToSave,
+      konnector,
+      saveAccount
+    })
+  }
+
+  if (cipher && saveInVault) {
     accountToSave = accounts.setVaultCipherRelationship(
       accountToSave,
       cipher.id
     )
   } else {
+    // eslint-disable-next-line no-console
     console.warn(
       'No cipher passed when creating/updating account, account will not be linked to cipher'
     )
@@ -71,8 +113,22 @@ const createOrUpdateAccount = async ({
 }
 
 /**
+ * Wraps conditionally its children inside VaultUnlocker, only if
+ * props.konnector's policy tells to saveInVault
+ */
+const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
+  const konnectorPolicy = findKonnectorPolicy(konnector)
+  if (konnectorPolicy.saveInVault) {
+    return <VaultUnlocker {...props}>{children}</VaultUnlocker>
+  } else {
+    return <>{children}</>
+  }
+}
+
+/**
  * Displays the login form and on submission will create the account, triggers and folders.
  * After that it calls TriggerLauncher to run the konnector.
+ *
  * @type {Component}
  */
 export class DumbTriggerManager extends Component {
@@ -197,7 +253,7 @@ export class DumbTriggerManager extends Component {
    * - Saves account
    */
   async handleSubmit(data = {}) {
-    const { konnector, saveAccount, vaultClient } = this.props
+    const { client, konnector, saveAccount, vaultClient } = this.props
     const { account } = this.state
 
     this.setState({
@@ -205,20 +261,33 @@ export class DumbTriggerManager extends Component {
       status: RUNNING
     })
 
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+
     try {
-      const cipherId = this.getSelectedCipherId()
-      const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-        account,
-        konnector,
-        userData: data
-      })
+      let cipher
+      if (konnectorPolicy.saveInVault) {
+        const cipherId = this.getSelectedCipherId()
+        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+          account,
+          konnector,
+          userCredentials: data
+        })
+      } else {
+        // eslint-disable-next-line no-console
+        console.info(
+          'Bypassing cipher creation because of konnector account policy'
+        )
+      }
 
       const savedAccount = await createOrUpdateAccount({
+        client,
         account,
         cipher,
         konnector,
+        konnectorPolicy,
         saveAccount,
-        userData: data
+        ensureTrigger: this.ensureTrigger.bind(this),
+        userCredentials: data
       })
 
       return await this.handleNewAccount(accounts.mergeAuth(savedAccount, data))
@@ -405,7 +474,8 @@ export class DumbTriggerManager extends Component {
     }
 
     return (
-      <VaultUnlocker
+      <KonnectorVaultUnlocker
+        konnector={konnector}
         onDismiss={onVaultDismiss}
         closable={vaultClosable}
         onUnlock={this.handleVaultUnlock}
@@ -442,7 +512,7 @@ export class DumbTriggerManager extends Component {
             />
           </>
         )}
-      </VaultUnlocker>
+      </KonnectorVaultUnlocker>
     )
   }
 }

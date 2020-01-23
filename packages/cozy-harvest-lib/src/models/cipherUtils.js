@@ -86,11 +86,11 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
 export const createOrUpdateCipher = async (
   vaultClient,
   cipherId,
-  { userData, account, konnector }
+  { userCredentials, account, konnector }
 ) => {
   const identifierProperty = manifest.getIdentifier(konnector.fields)
-  const login = userData[identifierProperty]
-  const password = userData.password
+  const login = userCredentials[identifierProperty]
+  const password = userCredentials.password
 
   let cipher
   if (!cipherId) {
