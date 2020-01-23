@@ -401,7 +401,7 @@ describe('TriggerManager', () => {
         }
       })
 
-      await wrapper.instance().handleSubmit({ login: 'test' })
+      await wrapper.instance().handleSubmit({ username: 'foo' })
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
         expect.objectContaining(fixtures.existingAccount)

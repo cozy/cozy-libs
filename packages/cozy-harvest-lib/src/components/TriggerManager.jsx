@@ -27,6 +27,7 @@ import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
+import clone from 'lodash/clone'
 
 import { createOrUpdateCipher } from '../models/cipherUtils'
 
@@ -44,10 +45,10 @@ const createOrUpdateAccount = async ({
 }) => {
   const isUpdate = !!account
 
-  let accountToSave
+  let accountToSave = clone(account)
 
   accountToSave = accounts.setSessionResetIfNecessary(
-    accounts.resetState(account),
+    accounts.resetState(accountToSave),
     userData
   )
 
