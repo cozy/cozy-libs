@@ -35,7 +35,13 @@ const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
-const buildOrUpdateAccount = ({ account, userData, cipher, konnector }) => {
+const createOrUpdateAccount = async ({
+  account,
+  cipher,
+  konnector,
+  saveAccount,
+  userData
+}) => {
   const isUpdate = !!account
 
   let accountToSave
@@ -56,7 +62,7 @@ const buildOrUpdateAccount = ({ account, userData, cipher, konnector }) => {
     )
   }
 
-  return accountToSave
+  return await saveAccount(konnector, accountToSave)
 }
 
 /**
@@ -213,18 +219,15 @@ export class DumbTriggerManager extends Component {
         })
       }
 
-      const accountToSave = buildOrUpdateAccount({
+      const savedAccount = await createOrUpdateAccount({
         account,
         cipher,
         konnector,
+        saveAccount,
         userData: data
       })
 
-      const savedAccount = accounts.mergeAuth(
-        await saveAccount(konnector, accountToSave),
-        data
-      )
-      return await this.handleNewAccount(savedAccount)
+      return await this.handleNewAccount(accounts.mergeAuth(savedAccount, data))
     } catch (error) {
       return this.handleError(error)
     }
