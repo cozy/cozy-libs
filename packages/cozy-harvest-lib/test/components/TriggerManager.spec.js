@@ -5,6 +5,15 @@ import { render } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
+import { konnectorPolicy as biKonnectorPolicy } from '../../src/services/budget-insight'
+
+jest.mock('cozy-flags', () => name => {
+  if (name === 'bi-konnector-policy') {
+    return true
+  } else {
+    return false
+  }
+})
 
 jest.mock('cozy-keys-lib')
 
@@ -23,6 +32,18 @@ jest.mock('cozy-doctypes', () => {
   return {
     ...doctypes,
     CozyFolder
+  }
+})
+
+jest.mock('../../src/services/budget-insight', () => {
+  const originalBudgetInsight = jest.requireActual(
+    '../../src/services/budget-insight'
+  )
+  return {
+    konnectorPolicy: {
+      ...originalBudgetInsight.konnectorPolicy,
+      onAccountCreation: jest.fn()
+    }
   }
 })
 
@@ -121,6 +142,13 @@ const fixtures = {
         konnector: 'konnectest'
       }
     }
+  },
+  bankingKonnectorAccountAttributes: {
+    auth: {
+      identifier: '80564789',
+      secret: '13337'
+    },
+    identifier: '80564789'
   },
   createdTrigger: {
     id: 'created-trigger-id',
@@ -502,6 +530,66 @@ describe('TriggerManager', () => {
 
       expect(instance.handleNewAccount).toHaveBeenCalledWith(
         fixtures.createdAccount
+      )
+    })
+
+    it('should merge information returned by onBIAccountCreation into account that will be saved', async () => {
+      saveAccountMock.mockReset().mockImplementation((konnector, acc) => ({
+        ...acc,
+        _id: fixtures.updatedAccount._id
+      }))
+      // Information returned
+      biKonnectorPolicy.onAccountCreation.mockReset().mockReturnValue({
+        auth: {
+          bi: {
+            connId: 7
+          }
+        }
+      })
+
+      const account = {
+        ...fixtures.existingAccount,
+        ...fixtures.bankingKonnectorAccountAttributes
+      }
+
+      const konnector = {
+        ...fixtures.konnector,
+        partnership: {
+          domain: 'budget-insight.com'
+        }
+      }
+
+      const { root } = setup({
+        account,
+        konnector
+      })
+      const instance = root.instance()
+      jest
+        .spyOn(instance, 'handleNewAccount')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await instance.handleSubmit(
+        fixtures.bankingKonnectorAccountAttributes.auth
+      )
+
+      expect(saveAccountMock).not.toHaveBeenCalledWith(
+        expect.objectContaining({
+          auth: {
+            secret: 'bar'
+          }
+        })
+      )
+      expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
+      expect(instance.handleNewAccount).toHaveBeenCalledTimes(1)
+      expect(saveAccountMock).toHaveBeenCalledWith(
+        konnector,
+        expect.objectContaining({
+          auth: {
+            bi: {
+              connId: 7
+            }
+          }
+        })
       )
     })
   })

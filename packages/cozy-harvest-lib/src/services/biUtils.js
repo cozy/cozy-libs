@@ -1,0 +1,102 @@
+import assert from '../assert'
+import biPublicKeyProd from './bi-public-key-prod.json'
+
+const biURLProd = 'https://cozy.biapi.pro/2.0'
+const biURLDev = 'https://cozytest-sandbox.biapi.pro/2.0'
+
+export const getBIModeFromCurrentLocation = (wdw = window) => {
+  if (!wdw || !wdw.location || !wdw.location.host) {
+    return 'dev'
+  } else {
+    const domain = wdw.location.host
+      .split('.')
+      .slice(-2)
+      .join('.')
+    switch (domain) {
+      case 'cozy.rocks':
+      case 'mycozy.cloud':
+        return 'prod'
+      case 'cozy.works':
+      case 'cozy.dev':
+        return 'dev'
+      default:
+        return 'dev'
+    }
+  }
+}
+
+export const getBIConfig = mode => {
+  if (mode === 'prod') {
+    return {
+      url: biURLProd,
+      publicKey: biPublicKeyProd
+    }
+  } else {
+    return {
+      url: biURLDev
+    }
+  }
+}
+
+const biRequest = async (method, path, config, rawForm, bearer) => {
+  assert(bearer, 'biRequest: Need access token')
+  const fullURL = `${config.url}${path}`
+  const formData = new FormData()
+  for (const [k, v] of Object.entries(rawForm)) {
+    formData.append(k, v)
+  }
+
+  try {
+    const resp = await fetch(fullURL, {
+      method: method,
+      body: formData,
+      headers: {
+        'User-Agent': 'cozy.bi-harvest',
+        Authorization: `Bearer ${bearer}`
+      }
+    })
+    return await resp.json()
+  } catch (originalError) {
+    console.error(originalError)
+    const err = new Error('biRequest failed')
+    err.original = originalError
+    throw err
+  }
+}
+
+export const createBIConnection = async (
+  config,
+  encryptedAuth,
+  biAccessToken
+) => {
+  const connection = await biRequest(
+    'POST',
+    '/users/me/connections',
+    config,
+    encryptedAuth,
+    biAccessToken
+  )
+  return connection
+}
+
+export const updateBIConnection = async (
+  config,
+  connId,
+  encryptedAuth,
+  biAccessToken
+) => {
+  return biRequest(
+    'PUT',
+    `/users/me/connections/${connId}`,
+    config,
+    encryptedAuth,
+    biAccessToken
+  )
+}
+
+export const isBudgetInsightConnector = konnector => {
+  return (
+    konnector.partnership &&
+    konnector.partnership.domain.includes('budget-insight')
+  )
+}

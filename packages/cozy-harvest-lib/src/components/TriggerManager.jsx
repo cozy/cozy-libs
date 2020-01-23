@@ -31,6 +31,7 @@ import clone from 'lodash/clone'
 import flag from 'cozy-flags'
 
 import { createOrUpdateCipher } from '../models/cipherUtils'
+import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
 
 const defaultKonnectorPolicy = {
   accountContainsAuth: true,
@@ -39,7 +40,10 @@ const defaultKonnectorPolicy = {
   match: () => true
 }
 
-const policies = [defaultKonnectorPolicy]
+const policies = [
+  flag('bi-konnector-policy') ? biKonnectorPolicy : null,
+  defaultKonnectorPolicy
+].filter(Boolean)
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
