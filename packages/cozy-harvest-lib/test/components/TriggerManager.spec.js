@@ -220,13 +220,31 @@ const propsWithAccount = {
   trigger: fixtures.existingTrigger
 }
 
-const shallowWithoutAccount = konnector =>
-  shallow(
-    <TriggerManager {...props} konnector={konnector || fixtures.konnector} />
+const setup = ({ konnector = fixtures.konnector, account, trigger } = {}) => {
+  const root = shallow(
+    <TriggerManager
+      {...props}
+      konnector={konnector}
+      trigger={trigger}
+      account={account}
+    />
   )
+  return { root }
+}
 
-const shallowWithAccount = () =>
-  shallow(<TriggerManager {...propsWithAccount} />)
+const shallowWithoutAccount = konnector => {
+  const { root } = setup({ konnector })
+  return root
+}
+
+const shallowWithAccount = options => {
+  const { root } = setup({
+    account: fixtures.existingAccount,
+    trigger: fixtures.existingTrigger,
+    ...options
+  })
+  return root
+}
 
 describe('TriggerManager', () => {
   beforeEach(() => {
@@ -312,7 +330,7 @@ describe('TriggerManager', () => {
     })
 
     it('should render error', async () => {
-      const wrapper = shallowWithAccount()
+      const wrapper = shallowWithAccount({ onError: null })
       await wrapper.instance().handleError(new Error('Test error'))
       expect(wrapper.getElement()).toMatchSnapshot()
     })
