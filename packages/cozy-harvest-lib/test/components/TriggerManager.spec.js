@@ -71,7 +71,7 @@ const fixtures = {
     type: '@cron',
     worker: 'konnector',
     message: {
-      account: 'a87f9a8bd3884479a48811e7b7deec75',
+      account: 'created-account-id',
       konnector: 'konnectest'
     }
   },
@@ -84,7 +84,7 @@ const fixtures = {
     identifier: 'username'
   },
   createdAccount: {
-    _id: 'a87f9a8bd3884479a48811e7b7deec75',
+    _id: 'created-account-id',
     account_type: 'konnectest',
     auth: {
       username: 'foo',
@@ -93,7 +93,7 @@ const fixtures = {
     identifier: 'username'
   },
   updatedAccount: {
-    _id: 'a87f9a8bd3884479a48811e7b7deec75',
+    _id: 'updated-account-id',
     account_type: 'konnectest',
     auth: {
       username: 'foo',
@@ -101,7 +101,7 @@ const fixtures = {
     }
   },
   existingAccount: {
-    _id: '61c683295560485db0f34b859197c581',
+    _id: 'existing-account-id',
     account_type: 'konnectest',
     auth: {
       username: 'foo',
@@ -110,34 +110,34 @@ const fixtures = {
     identifier: 'username'
   },
   existingTrigger: {
-    id: '4b67e0bedd464704a6a995f5c2070ccf',
+    id: 'existing-trigger-id',
     _type: 'io.cozy.triggers',
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
       worker: 'konnector',
       message: {
-        account: '61c683295560485db0f34b859197c581',
+        account: 'existing-account-id',
         konnector: 'konnectest'
       }
     }
   },
   createdTrigger: {
-    id: '669e9a7cc3064a97bc0aa20feef71cb2',
+    id: 'created-trigger-id',
     _type: 'io.cozy.triggers',
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
       worker: 'konnector',
       message: {
-        account: 'a87f9a8bd3884479a48811e7b7deec75',
+        account: 'updated-account-id',
         konnector: 'konnectest'
       }
     }
   },
   launchedJob: {
     type: 'io.cozy.jobs',
-    id: 'ac09e6f4473f4b6fbb83c9d2f532504e',
+    id: 'lauched-job-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'running',
@@ -145,12 +145,12 @@ const fixtures = {
     started_at: '2016-09-19T12:35:08Z',
     error: '',
     links: {
-      self: '/jobs/ac09e6f4473f4b6fbb83c9d2f532504e'
+      self: '/jobs/lauched-job-id'
     }
   },
   runningJob: {
     type: 'io.cozy.jobs',
-    id: 'ac09e6f4473f4b6fbb83c9d2f532504e',
+    id: 'running-job-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'running',
@@ -158,12 +158,12 @@ const fixtures = {
     started_at: '2016-09-19T12:35:08Z',
     error: '',
     links: {
-      self: '/jobs/ac09e6f4473f4b6fbb83c9d2f532504e'
+      self: '/jobs/running-job-id'
     }
   },
   doneJob: {
     type: 'io.cozy.jobs',
-    id: 'ac09e6f4473f4b6fbb83c9d2f532504e',
+    id: 'done-job-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'done',
@@ -171,7 +171,7 @@ const fixtures = {
     started_at: '2016-09-19T12:35:08Z',
     error: '',
     links: {
-      self: '/jobs/ac09e6f4473f4b6fbb83c9d2f532504e'
+      self: '/jobs/done-job-id'
     }
   }
 }

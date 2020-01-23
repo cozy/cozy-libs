@@ -12,7 +12,7 @@ exports[`TriggerManager handleError should render error 1`] = `
     <withI18n(withLocales(withKonnectorLocales(AccountForm))
       account={
         Object {
-          "_id": "61c683295560485db0f34b859197c581",
+          "_id": "existing-account-id",
           "account_type": "konnectest",
           "auth": Object {
             "passphrase": "bar",
@@ -56,7 +56,7 @@ exports[`TriggerManager when given an account should render correctly 1`] = `
     <withI18n(withLocales(withKonnectorLocales(AccountForm))
       account={
         Object {
-          "_id": "61c683295560485db0f34b859197c581",
+          "_id": "existing-account-id",
           "account_type": "konnectest",
           "auth": Object {
             "passphrase": "bar",
