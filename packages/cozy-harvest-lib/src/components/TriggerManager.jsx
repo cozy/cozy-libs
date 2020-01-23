@@ -431,9 +431,9 @@ export class DumbTriggerManager extends Component {
             )}
             <AccountForm
               account={
-                !this.hasCipherSelected()
-                  ? account
-                  : this.cipherToAccount(selectedCipher)
+                this.hasCipherSelected()
+                  ? this.cipherToAccount(selectedCipher)
+                  : account
               }
               error={error || triggerError}
               konnector={konnector}
