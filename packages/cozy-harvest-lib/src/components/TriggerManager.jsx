@@ -95,6 +95,16 @@ const createCipher = async (vaultClient, createOptions) => {
 }
 
 /**
+ * Share a cipher to the cozy org
+ * @param {string} cipherId - uuid of a cipher
+ */
+const shareCipherWithCozy = async (vaultClient, cipherId) => {
+  const cipher = await vaultClient.get(cipherId)
+  const cipherView = await vaultClient.decrypt(cipher)
+  await vaultClient.shareWithCozy(cipherView)
+}
+
+/**
  * Update a cipher with provided identifier and password
  *
  * @param {string} cipherId - uuid of a cipher
@@ -245,17 +255,6 @@ export class DumbTriggerManager extends Component {
   }
 
   /**
-   * Share a cipher to the cozy org
-   * @param {string} cipherId - uuid of a cipher
-   */
-  async shareCipherWithCozy(cipherId) {
-    const { vaultClient } = this.props
-    const cipher = await vaultClient.get(cipherId)
-    const cipherView = await vaultClient.decrypt(cipher)
-    await vaultClient.shareWithCozy(cipherView)
-  }
-
-  /**
    * TODO move to AccountHelper
    */
   async handleSubmit(data = {}) {
@@ -306,7 +305,7 @@ export class DumbTriggerManager extends Component {
           }
         }
 
-        await this.shareCipherWithCozy(cipherId)
+        await shareCipherWithCozy(vaultClient, cipherId)
       }
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
