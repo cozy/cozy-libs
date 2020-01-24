@@ -37,19 +37,26 @@ const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 const buildOrUpdateAccount = ({ account, userData, cipher, konnector }) => {
   const isUpdate = !!account
-  const accountWithNewState = accounts.setSessionResetIfNecessary(
+
+  let accountToSave
+
+  accountToSave = accounts.setSessionResetIfNecessary(
     accounts.resetState(account),
     userData
   )
-  const accountDocument = isUpdate
-    ? accounts.mergeAuth(accountWithNewState, userData)
+
+  accountToSave = isUpdate
+    ? accounts.mergeAuth(accountToSave, userData)
     : accounts.build(konnector, userData)
 
   if (cipher) {
-    return accounts.setVaultCipherRelationship(accountDocument, cipher.id)
-  } else {
-    return accountDocument
+    accountToSave = accounts.setVaultCipherRelationship(
+      accountToSave,
+      cipher.id
+    )
   }
+
+  return accountToSave
 }
 
 /**
