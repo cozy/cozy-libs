@@ -37,6 +37,37 @@ const RUNNING = 'RUNNING'
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 /**
+ * Update a cipher with provided identifier and password
+ *
+ * @param {string} cipherId - uuid of a cipher
+ * @param {string} data.login - the new login
+ * @param {string} data.password - the new password
+ */
+const updateCipher = async (vaultClient, cipherId, data) => {
+  const { login, password } = data
+
+  const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
+  const cipherData = await vaultClient.decrypt(originalCipher)
+
+  if (
+    cipherData.login.username !== login ||
+    cipherData.login.password !== password
+  ) {
+    cipherData.login.username = login
+    cipherData.login.password = password
+
+    const newCipher = await vaultClient.createNewCozySharedCipher(
+      cipherData,
+      originalCipher
+    )
+    const cipher = await vaultClient.saveCipher(newCipher)
+    return cipher
+  } else {
+    return originalCipher
+  }
+}
+
+/**
  * Displays the login form and on submission will create the account, triggers and folders.
  * After that it calls TriggerLauncher to run the konnector.
  * @type {Component}
@@ -230,33 +261,6 @@ export class DumbTriggerManager extends Component {
   }
 
   /**
-   * Update a cipher with provided identifier and password
-   *
-   * @param {string} cipherId - uuid of a cipher
-   * @param {string} login - the new login
-   * @param {string} password - the new password
-   */
-  async updateCipher(cipherId, login, password) {
-    const { vaultClient } = this.props
-    const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
-    const cipherData = await vaultClient.decrypt(originalCipher)
-
-    if (
-      cipherData.login.username !== login ||
-      cipherData.login.password !== password
-    ) {
-      cipherData.login.username = login
-      cipherData.login.password = password
-
-      const cipher = await vaultClient.createNewCozySharedCipher(
-        cipherData,
-        originalCipher
-      )
-      await vaultClient.saveCipher(cipher)
-    }
-  }
-
-  /**
    * TODO move to AccountHelper
    */
   async handleSubmit(data = {}) {
@@ -286,7 +290,7 @@ export class DumbTriggerManager extends Component {
         )
       } else {
         if (cipherId) {
-          await this.updateCipher(cipherId, identifier, password)
+          await updateCipher(vaultClient, cipherId, identifier, password)
         } else {
           const existingCipherId = await this.getExistingCipherIdForAccount(
             identifier,
@@ -295,7 +299,7 @@ export class DumbTriggerManager extends Component {
 
           if (existingCipherId) {
             cipherId = existingCipherId
-            await this.updateCipher(cipherId, identifier, password)
+            await updateCipher(vaultClient, cipherId, identifier, password)
           } else {
             cipherId = await this.createNewCipherId(identifier, password)
           }
