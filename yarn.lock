@@ -2347,6 +2347,14 @@
     pretty-format "^24.0.0"
     redent "^3.0.0"
 
+"@testing-library/react-hooks@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@testing-library/react-hooks/-/react-hooks-3.2.1.tgz#19b6caa048ef15faa69d439c469033873ea01294"
+  integrity sha512-1OB6Ksvlk6BCJA1xpj8/WWz0XVd1qRcgqdaFAq+xeC6l61Ucj0P6QpA5u+Db/x9gU4DCX8ziR5b66Mlfg0M2RA==
+  dependencies:
+    "@babel/runtime" "^7.5.4"
+    "@types/testing-library__react-hooks" "^3.0.0"
+
 "@testing-library/react@9.4.0":
   version "9.4.0"
   resolved "https://registry.yarnpkg.com/@testing-library/react/-/react-9.4.0.tgz#b021ac8cb987c8dc54c6841875f745bf9b2e88e5"
@@ -2455,6 +2463,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-test-renderer@*":
+  version "16.9.2"
+  resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.2.tgz#e1c408831e8183e5ad748fdece02214a7c2ab6c5"
+  integrity sha512-4eJr1JFLIAlWhzDkBCkhrOIWOvOxcCAfQh+jiKg7l/nNZcCIL2MHl2dZhogIFKyHzedVWHaVP1Yydq/Ruu4agw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-transition-group@^2.0.8":
   version "2.9.2"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.9.2.tgz#c48cf2a11977c8b4ff539a1c91d259eaa627028d"
@@ -2478,6 +2493,14 @@
   resolved "https://registry.yarnpkg.com/@types/testing-library__dom/-/testing-library__dom-6.5.3.tgz#4a33e91055994c9f08981253edec44c85f4dd7f0"
   dependencies:
     pretty-format "^24.3.0"
+
+"@types/testing-library__react-hooks@^3.0.0":
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/@types/testing-library__react-hooks/-/testing-library__react-hooks-3.2.0.tgz#52f3a109bef06080e3b1e3ae7ea1c014ce859897"
+  integrity sha512-dE8iMTuR5lzB+MqnxlzORlXzXyCL0EKfzH0w/lau20OpkHD37EaWjZDz0iNG8b71iEtxT4XKGmSKAGVEqk46mw==
+  dependencies:
+    "@types/react" "*"
+    "@types/react-test-renderer" "*"
 
 "@types/testing-library__react@^9.1.0", "@types/testing-library__react@^9.1.2":
   version "9.1.2"
@@ -8576,6 +8599,7 @@ jest-leak-detector@^24.9.0:
 jest-localstorage-mock@2.4.0:
   version "2.4.0"
   resolved "https://registry.yarnpkg.com/jest-localstorage-mock/-/jest-localstorage-mock-2.4.0.tgz#c6073810735dd3af74020ea6c3885ec1cc6d0d13"
+  integrity sha512-/mC1JxnMeuIlAaQBsDMilskC/x/BicsQ/BXQxEOw+5b1aGZkkOAqAF3nu8yq449CpzGtp5jJ5wCmDNxLgA2m6A==
 
 jest-matcher-utils@^24.0.0, jest-matcher-utils@^24.9.0:
   version "24.9.0"
