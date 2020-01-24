@@ -287,23 +287,17 @@ export class DumbTriggerManager extends Component {
    */
   async handleSubmit(data = {}) {
     const { konnector, saveAccount, vaultClient } = this.props
-
     const { account } = this.state
-    const isUpdate = !!account
 
     this.setState({
       error: null,
       status: RUNNING
     })
 
-    const identifierProperty = manifest.getIdentifier(konnector.fields)
-
-    const isVaultLocked = await vaultClient.isLocked()
-
     try {
-      const identifier = data[identifierProperty]
-      const password = data.password
-      let cipherId = this.getSelectedCipherId()
+      let cipherId
+
+      const isVaultLocked = await vaultClient.isLocked()
 
       if (isVaultLocked) {
         // eslint-disable-next-line no-console
@@ -311,15 +305,20 @@ export class DumbTriggerManager extends Component {
           'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
         )
       } else {
+        const identifierProperty = manifest.getIdentifier(konnector.fields)
+        const login = data[identifierProperty]
+        const password = data.password
+        let cipherId = this.getSelectedCipherId()
         const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
           konnector,
           account,
-          login: identifier,
+          login,
           password
         })
         cipherId = cipher.id
       }
 
+      const isUpdate = !!account
       const accountWithNewState = accounts.setSessionResetIfNecessary(
         accounts.resetState(account),
         data
