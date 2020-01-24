@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2020-01-24)
+
+
+### Features
+
+* Add notes folder ([94fa863](https://github.com/cozy/cozy-libs/commit/94fa863))
+* Adds a useFlag react hook ([4c3df09](https://github.com/cozy/cozy-libs/commit/4c3df09))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@1.11.0...cozy-flags@2.0.0) (2019-12-09)
 
 
