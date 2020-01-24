@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.20.1 (2020-01-24)
+
+
+### Bug Fixes
+
+* **cozy-app-publish:** Handle explicit default space ([dc355cc](https://github.com/cozy/cozy-libs/commit/dc355cc))
+
+
+
+
+
 # 0.20.0 (2019-11-04)
 
 
