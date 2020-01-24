@@ -309,7 +309,11 @@ export class DumbTriggerManager extends Component {
   }
 
   /**
-   * TODO move to AccountHelper
+   * - Ensures a cipher is created for the authentication data
+   *   Find cipher via identifier / password
+   * - Creates io.cozy.accounts
+   * - Links cipher to account
+   * - Saves account
    */
   async handleSubmit(data = {}) {
     const { konnector, saveAccount, vaultClient } = this.props
