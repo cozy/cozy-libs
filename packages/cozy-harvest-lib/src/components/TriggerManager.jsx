@@ -163,6 +163,23 @@ const createOrUpdateCipher = async (vaultClient, cipherId, data) => {
   return cipher
 }
 
+const buildOrUpdateAccount = ({ account, userData, cipher, konnector }) => {
+  const isUpdate = !!account
+  const accountWithNewState = accounts.setSessionResetIfNecessary(
+    accounts.resetState(account),
+    userData
+  )
+  const accountDocument = isUpdate
+    ? accounts.mergeAuth(accountWithNewState, userData)
+    : accounts.build(konnector, userData)
+
+  if (cipher) {
+    return accounts.setVaultCipherRelationship(accountDocument, cipher.id)
+  } else {
+    return accountDocument
+  }
+}
+
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
  * After that it calls TriggerLauncher to run the konnector.
@@ -295,7 +312,7 @@ export class DumbTriggerManager extends Component {
     })
 
     try {
-      let cipherId
+      let cipher
 
       const isVaultLocked = await vaultClient.isLocked()
 
@@ -309,34 +326,20 @@ export class DumbTriggerManager extends Component {
         const login = data[identifierProperty]
         const password = data.password
         let cipherId = this.getSelectedCipherId()
-        const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
           konnector,
           account,
           login,
           password
         })
-        cipherId = cipher.id
       }
 
-      const isUpdate = !!account
-      const accountWithNewState = accounts.setSessionResetIfNecessary(
-        accounts.resetState(account),
-        data
-      )
-      const accountDocument = isUpdate
-        ? accounts.mergeAuth(accountWithNewState, data)
-        : accounts.build(konnector, data)
-
-      let accountToSave
-
-      if (cipherId) {
-        accountToSave = accounts.setVaultCipherRelationship(
-          accountDocument,
-          cipherId
-        )
-      } else {
-        accountToSave = accountDocument
-      }
+      const accountToSave = buildOrUpdateAccount({
+        account,
+        userData: data,
+        konnector,
+        cipher
+      })
 
       const savedAccount = accounts.mergeAuth(
         await saveAccount(konnector, accountToSave),
