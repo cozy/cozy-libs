@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.0...cozy-harvest-lib@1.17.1) (2020-01-24)
+
+
+### Bug Fixes
+
+* Remove prop warning ([b33d5a9](https://github.com/cozy/cozy-libs/commit/b33d5a9))
+
+
+### Performance Improvements
+
+* Mock cozy-keys-lib in TriggerManager ([c717a92](https://github.com/cozy/cozy-libs/commit/c717a92))
+
+
+
+
+
 # [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.16.0...cozy-harvest-lib@1.17.0) (2020-01-21)
 
 
