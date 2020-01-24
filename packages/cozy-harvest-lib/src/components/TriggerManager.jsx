@@ -5,15 +5,18 @@ import flow from 'lodash/flow'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
+
 import {
   VaultUnlocker,
   withVaultClient,
   CipherType,
   UriMatchType
 } from 'cozy-keys-lib'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -28,7 +31,6 @@ import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
-import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
