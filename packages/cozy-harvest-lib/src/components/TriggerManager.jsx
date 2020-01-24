@@ -63,6 +63,38 @@ const searchForCipher = async (vaultClient, searchOptions) => {
 }
 
 /**
+ * Create a new cipher and return its ID
+ *
+ * @param {string} login - the login to register in the new cipher
+ * @param {string} password - the password to register in the new cipher
+ *
+ * @returns {string} the cipher ID
+ */
+const createCipher = async (vaultClient, createOptions) => {
+  const { konnector, login, password } = createOptions
+  const konnectorURI = get(konnector, 'vendor_link')
+  const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
+
+  const cipherData = {
+    id: null,
+    type: CipherType.Login,
+    name: konnectorName,
+    login: {
+      username: login,
+      password,
+      uris: konnectorURI
+        ? [{ uri: konnectorURI, match: UriMatchType.Domain }]
+        : []
+    }
+  }
+
+  const cipher = await vaultClient.createNewCozySharedCipher(cipherData, null)
+  await vaultClient.saveCipher(cipher)
+
+  return cipher
+}
+
+/**
  * Update a cipher with provided identifier and password
  *
  * @param {string} cipherId - uuid of a cipher
@@ -213,39 +245,6 @@ export class DumbTriggerManager extends Component {
   }
 
   /**
-   * Create a new cipher and return its ID
-   *
-   * @param {string} login - the login to register in the new cipher
-   * @param {string} password - the password to register in the new cipher
-   *
-   * @returns {string} the cipher ID
-   */
-  async createNewCipherId(login, password) {
-    const { vaultClient, konnector } = this.props
-
-    const konnectorURI = get(konnector, 'vendor_link')
-    const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
-
-    const cipherData = {
-      id: null,
-      type: CipherType.Login,
-      name: konnectorName,
-      login: {
-        username: login,
-        password,
-        uris: konnectorURI
-          ? [{ uri: konnectorURI, match: UriMatchType.Domain }]
-          : []
-      }
-    }
-
-    const cipher = await vaultClient.createNewCozySharedCipher(cipherData, null)
-    await vaultClient.saveCipher(cipher)
-
-    return cipher.id
-  }
-
-  /**
    * Share a cipher to the cozy org
    * @param {string} cipherId - uuid of a cipher
    */
@@ -298,7 +297,12 @@ export class DumbTriggerManager extends Component {
             cipherId = existingCipher.id
             await updateCipher(vaultClient, cipherId, identifier, password)
           } else {
-            cipherId = await this.createNewCipherId(identifier, password)
+            const cipher = await createCipher(vaultClient, {
+              konnector,
+              login: identifier,
+              password
+            })
+            cipherId = cipher.id
           }
         }
 
