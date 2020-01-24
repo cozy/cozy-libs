@@ -249,26 +249,32 @@ describe('TriggerManager', () => {
     jest.resetAllMocks()
   })
 
-  it('should redirect to OAuthForm', () => {
-    const konnector = {
-      oauth: {
-        scope: 'test'
+  describe('when given an oauth konnector', () => {
+    it('should redirect to OAuthForm', () => {
+      const konnector = {
+        oauth: {
+          scope: 'test'
+        }
       }
-    }
-    const component = shallow(
-      <TriggerManager {...props} konnector={konnector} />
-    ).getElement()
-    expect(component).toMatchSnapshot()
+      const component = shallow(
+        <TriggerManager {...props} konnector={konnector} />
+      ).getElement()
+      expect(component).toMatchSnapshot()
+    })
   })
 
-  it('should render without account', () => {
-    const component = shallowWithoutAccount().getElement()
-    expect(component).toMatchSnapshot()
+  describe('when given no account', () => {
+    it('should render correctly', () => {
+      const component = shallowWithoutAccount().getElement()
+      expect(component).toMatchSnapshot()
+    })
   })
 
-  it('should render with account', () => {
-    const component = shallowWithAccount().getElement()
-    expect(component).toMatchSnapshot()
+  describe('when given an account', () => {
+    it('should render correctly', () => {
+      const component = shallowWithAccount().getElement()
+      expect(component).toMatchSnapshot()
+    })
   })
 
   describe('handleError', () => {
