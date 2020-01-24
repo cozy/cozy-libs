@@ -135,8 +135,15 @@ const updateCipher = async (vaultClient, cipherId, data) => {
   }
 }
 
-const createOrUpdateCipher = async (vaultClient, cipherId, data) => {
-  const { login, password, konnector, account } = data
+const createOrUpdateCipher = async (
+  vaultClient,
+  cipherId,
+  { userData, account, konnector }
+) => {
+  const identifierProperty = manifest.getIdentifier(konnector.fields)
+  const login = userData[identifierProperty]
+  const password = userData.password
+
   let cipher
   if (!cipherId) {
     cipher = await searchForCipher(vaultClient, {
@@ -322,23 +329,19 @@ export class DumbTriggerManager extends Component {
           'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
         )
       } else {
-        const identifierProperty = manifest.getIdentifier(konnector.fields)
-        const login = data[identifierProperty]
-        const password = data.password
         let cipherId = this.getSelectedCipherId()
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-          konnector,
           account,
-          login,
-          password
+          konnector,
+          userData: data
         })
       }
 
       const accountToSave = buildOrUpdateAccount({
         account,
-        userData: data,
+        cipher,
         konnector,
-        cipher
+        userData: data
       })
 
       const savedAccount = accounts.mergeAuth(
