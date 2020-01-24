@@ -37,6 +37,32 @@ const RUNNING = 'RUNNING'
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 /**
+ * Finds a cipher inside vaultClient from account / konnector / login / password
+ *
+ * @param {string} searchOptions - Used to find the cipher
+ * @param {string} searchOptions.konnector - Used for its vendor link
+ * @param {string} searchOptions.account - Used for its cipherId if it exists
+ * @param {string} searchOptions.login - Used to match the cipher
+ * @param {string} searchOptions.password - Used to match the cipher
+ *
+ * @returns {Cipher} The cipher or null if no cipher was found
+ */
+const searchForCipher = async (vaultClient, searchOptions) => {
+  const { konnector, account, login, password } = searchOptions
+  const konnectorURI = get(konnector, 'vendor_link')
+
+  const id = accounts.getVaultCipherId(account)
+  const search = {
+    username: login,
+    uri: konnectorURI,
+    type: CipherType.Login
+  }
+  const sort = [view => view.login.password === password, 'revisionDate']
+  const cipher = await vaultClient.getByIdOrSearch(id, search, sort)
+  return cipher || null
+}
+
+/**
  * Update a cipher with provided identifier and password
  *
  * @param {string} cipherId - uuid of a cipher
@@ -220,36 +246,6 @@ export class DumbTriggerManager extends Component {
   }
 
   /**
-   * Find an existing cipher for the account and return its ID
-   *
-   * @param {string} login - the login to set in the cipher
-   * @param {string} password - the password to set in the cipher
-   *
-   * @returns {string|null} the cipher ID or null if no cipher was found
-   */
-  async getExistingCipherIdForAccount(login, password) {
-    const { account } = this.state
-    const { vaultClient, konnector } = this.props
-
-    const konnectorURI = get(konnector, 'vendor_link')
-
-    const id = accounts.getVaultCipherId(account)
-    const search = {
-      username: login,
-      uri: konnectorURI,
-      type: CipherType.Login
-    }
-    const sort = [view => view.login.password === password, 'revisionDate']
-    const originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
-
-    if (originalCipher) {
-      return originalCipher.id
-    } else {
-      return null
-    }
-  }
-
-  /**
    * Share a cipher to the cozy org
    * @param {string} cipherId - uuid of a cipher
    */
@@ -292,13 +288,14 @@ export class DumbTriggerManager extends Component {
         if (cipherId) {
           await updateCipher(vaultClient, cipherId, identifier, password)
         } else {
-          const existingCipherId = await this.getExistingCipherIdForAccount(
-            identifier,
+          const existingCipher = await searchForCipher(vaultClient, {
+            account,
+            konnector,
+            login: identifier,
             password
-          )
-
-          if (existingCipherId) {
-            cipherId = existingCipherId
+          })
+          if (existingCipher) {
+            cipherId = existingCipher.id
             await updateCipher(vaultClient, cipherId, identifier, password)
           } else {
             cipherId = await this.createNewCipherId(identifier, password)
