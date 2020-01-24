@@ -60,6 +60,10 @@ const createOrUpdateAccount = async ({
       accountToSave,
       cipher.id
     )
+  } else {
+    console.warn(
+      'No cipher passed when creating/updating account, account will not be linked to cipher'
+    )
   }
 
   return await saveAccount(konnector, accountToSave)
@@ -201,23 +205,12 @@ export class DumbTriggerManager extends Component {
     })
 
     try {
-      let cipher
-
-      const isVaultLocked = await vaultClient.isLocked()
-
-      if (isVaultLocked) {
-        // eslint-disable-next-line no-console
-        console.warn(
-          'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
-        )
-      } else {
-        let cipherId = this.getSelectedCipherId()
-        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-          account,
-          konnector,
-          userData: data
-        })
-      }
+      const cipherId = this.getSelectedCipherId()
+      const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+        account,
+        konnector,
+        userData: data
+      })
 
       const savedAccount = await createOrUpdateAccount({
         account,
