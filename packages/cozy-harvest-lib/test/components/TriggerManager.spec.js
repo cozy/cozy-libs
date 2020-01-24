@@ -218,7 +218,8 @@ const props = {
   launch: launchTriggerMock,
   t: tMock,
   vaultClient: mockVaultClient,
-  breakpoints: { isMobile: false }
+  breakpoints: { isMobile: false },
+  onVaultDismiss: jest.fn()
 }
 
 const propsWithAccount = {
