@@ -69,4 +69,21 @@ describe('Publish script (helper)', () => {
     expect(publish(getOptions())).rejects.toThrowErrorMatchingSnapshot()
     expect(fetch).toHaveBeenCalledTimes(1)
   })
+
+  describe('when provided space if the default one', () => {
+    it('should not put the space name in the requested URL', async () => {
+      fetch.mockResponseOnce('', {
+        status: 201
+      })
+
+      const options = getOptions()
+      options.spaceName = 'default'
+
+      await publish(options)
+
+      expect(fetch.mock.calls[0][0]).toBe(
+        options.registryUrl + '/registry/' + options.appSlug
+      )
+    })
+  })
 })

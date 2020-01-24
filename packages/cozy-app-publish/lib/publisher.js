@@ -6,7 +6,11 @@ const constants = require('./constants')
 const promptConfirm = require('./confirm')
 const defaults = require('lodash/defaults')
 
-const { DEFAULT_REGISTRY_URL, DEFAULT_BUILD_DIR } = constants
+const {
+  DEFAULT_REGISTRY_URL,
+  DEFAULT_BUILD_DIR,
+  DEFAULT_SPACE_NAME
+} = constants
 
 const publisher = ({
   getManifest,
@@ -20,7 +24,8 @@ const publisher = ({
   defaults(ctx, {
     buildDir: DEFAULT_BUILD_DIR,
     registryUrl: DEFAULT_REGISTRY_URL,
-    registryToken: getRegistryToken ? getRegistryToken() : undefined
+    registryToken: getRegistryToken ? getRegistryToken() : undefined,
+    spaceName: DEFAULT_SPACE_NAME
   })
 
   const {

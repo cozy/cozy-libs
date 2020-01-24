@@ -91,7 +91,7 @@ Object {
   "registryToken": "registryTokenForTest123",
   "registryUrl": "https://apps-registry.cozycloud.cc",
   "sha256Sum": "fakeshasum5644545",
-  "spaceName": undefined,
+  "spaceName": "default",
 }
 `;
 
