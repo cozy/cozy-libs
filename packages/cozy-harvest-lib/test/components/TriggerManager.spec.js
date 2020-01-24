@@ -5,6 +5,19 @@ import { shallow } from 'enzyme'
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
 
+jest.mock('cozy-keys-lib', () => {
+  const FakeVaultUnlocker = ({ children }) => children
+  FakeVaultUnlocker.displayName =
+    'withI18n(withLocales(withClient(VaultUnlocker)))'
+  return {
+    CipherType: {
+      Login: 'Login'
+    },
+    VaultUnlocker: FakeVaultUnlocker,
+    withVaultClient: Component => Component
+  }
+})
+
 jest.mock('cozy-doctypes', () => {
   const doctypes = jest.requireActual('cozy-doctypes')
 
