@@ -1,4 +1,14 @@
 const fetch = require('node-fetch')
+const { DEFAULT_SPACE_NAME } = require('./constants')
+
+const getFullRegistryUrl = (baseRegistryUrl, spaceName, appSlug) => {
+  const spaceNameFragment =
+    spaceName && spaceName !== DEFAULT_SPACE_NAME ? `${spaceName}/` : ''
+
+  const url = `${baseRegistryUrl}/${spaceNameFragment}registry/${appSlug}`
+
+  return url
+}
 
 module.exports = async ({
   registryUrl,
@@ -11,9 +21,7 @@ module.exports = async ({
   sha256Sum,
   appType
 }) => {
-  const url = `${registryUrl}/${
-    spaceName ? spaceName + '/' : ''
-  }registry/${appSlug}`
+  const url = getFullRegistryUrl(registryUrl, spaceName, appSlug)
   const response = await fetch(url, {
     method: 'POST',
     headers: {
