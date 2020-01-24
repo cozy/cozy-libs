@@ -135,6 +135,34 @@ const updateCipher = async (vaultClient, cipherId, data) => {
   }
 }
 
+const createOrUpdateCipher = async (vaultClient, cipherId, data) => {
+  const { login, password, konnector, account } = data
+  let cipher
+  if (!cipherId) {
+    cipher = await searchForCipher(vaultClient, {
+      account,
+      konnector,
+      login,
+      password
+    })
+    cipherId = cipher ? cipher.id : null
+  }
+
+  if (cipherId) {
+    cipher = await updateCipher(vaultClient, cipherId, { login, password })
+  } else {
+    cipher = await createCipher(vaultClient, {
+      konnector,
+      login,
+      password
+    })
+  }
+
+  await shareCipherWithCozy(vaultClient, cipher.id)
+
+  return cipher
+}
+
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
  * After that it calls TriggerLauncher to run the konnector.
@@ -283,29 +311,13 @@ export class DumbTriggerManager extends Component {
           'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
         )
       } else {
-        if (cipherId) {
-          await updateCipher(vaultClient, cipherId, identifier, password)
-        } else {
-          const existingCipher = await searchForCipher(vaultClient, {
-            account,
-            konnector,
-            login: identifier,
-            password
-          })
-          if (existingCipher) {
-            cipherId = existingCipher.id
-            await updateCipher(vaultClient, cipherId, identifier, password)
-          } else {
-            const cipher = await createCipher(vaultClient, {
-              konnector,
-              login: identifier,
-              password
-            })
-            cipherId = cipher.id
-          }
-        }
-
-        await shareCipherWithCozy(vaultClient, cipherId)
+        const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+          konnector,
+          account,
+          login: identifier,
+          password
+        })
+        cipherId = cipher.id
       }
 
       const accountWithNewState = accounts.setSessionResetIfNecessary(
