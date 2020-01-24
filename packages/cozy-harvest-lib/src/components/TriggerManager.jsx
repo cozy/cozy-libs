@@ -5,15 +5,13 @@ import flow from 'lodash/flow'
 
 import { withMutations, withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import {
-  VaultUnlocker,
-  withVaultClient,
-  CipherType,
-  UriMatchType
-} from 'cozy-keys-lib'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
+
+import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -28,13 +26,38 @@ import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
-import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 import HarvestVaultProvider from './HarvestVaultProvider'
+
+import { createOrUpdateCipher } from '../models/cipherUtils'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
+
+const buildOrUpdateAccount = ({ account, userData, cipher, konnector }) => {
+  const isUpdate = !!account
+
+  let accountToSave
+
+  accountToSave = accounts.setSessionResetIfNecessary(
+    accounts.resetState(account),
+    userData
+  )
+
+  accountToSave = isUpdate
+    ? accounts.mergeAuth(accountToSave, userData)
+    : accounts.build(konnector, userData)
+
+  if (cipher) {
+    accountToSave = accounts.setVaultCipherRelationship(
+      accountToSave,
+      cipher.id
+    )
+  }
+
+  return accountToSave
+}
 
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
@@ -156,128 +179,25 @@ export class DumbTriggerManager extends Component {
   }
 
   /**
-   * Create a new cipher and return its ID
-   *
-   * @param {string} login - the login to register in the new cipher
-   * @param {string} password - the password to register in the new cipher
-   *
-   * @returns {string} the cipher ID
-   */
-  async createNewCipherId(login, password) {
-    const { vaultClient, konnector } = this.props
-
-    const konnectorURI = get(konnector, 'vendor_link')
-    const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
-
-    const cipherData = {
-      id: null,
-      type: CipherType.Login,
-      name: konnectorName,
-      login: {
-        username: login,
-        password,
-        uris: konnectorURI
-          ? [{ uri: konnectorURI, match: UriMatchType.Domain }]
-          : []
-      }
-    }
-
-    const cipher = await vaultClient.createNewCozySharedCipher(cipherData, null)
-    await vaultClient.saveCipher(cipher)
-
-    return cipher.id
-  }
-
-  /**
-   * Find an existing cipher for the account and return its ID
-   *
-   * @param {string} login - the login to set in the cipher
-   * @param {string} password - the password to set in the cipher
-   *
-   * @returns {string|null} the cipher ID or null if no cipher was found
-   */
-  async getExistingCipherIdForAccount(login, password) {
-    const { account } = this.state
-    const { vaultClient, konnector } = this.props
-
-    const konnectorURI = get(konnector, 'vendor_link')
-
-    const id = accounts.getVaultCipherId(account)
-    const search = {
-      username: login,
-      uri: konnectorURI,
-      type: CipherType.Login
-    }
-    const sort = [view => view.login.password === password, 'revisionDate']
-    const originalCipher = await vaultClient.getByIdOrSearch(id, search, sort)
-
-    if (originalCipher) {
-      return originalCipher.id
-    } else {
-      return null
-    }
-  }
-
-  /**
-   * Share a cipher to the cozy org
-   * @param {string} cipherId - uuid of a cipher
-   */
-  async shareCipherWithCozy(cipherId) {
-    const { vaultClient } = this.props
-    const cipher = await vaultClient.get(cipherId)
-    const cipherView = await vaultClient.decrypt(cipher)
-    await vaultClient.shareWithCozy(cipherView)
-  }
-
-  /**
-   * Update a cipher with provided identifier and password
-   *
-   * @param {string} cipherId - uuid of a cipher
-   * @param {string} login - the new login
-   * @param {string} password - the new password
-   */
-  async updateCipher(cipherId, login, password) {
-    const { vaultClient } = this.props
-    const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
-    const cipherData = await vaultClient.decrypt(originalCipher)
-
-    if (
-      cipherData.login.username !== login ||
-      cipherData.login.password !== password
-    ) {
-      cipherData.login.username = login
-      cipherData.login.password = password
-
-      const cipher = await vaultClient.createNewCozySharedCipher(
-        cipherData,
-        originalCipher
-      )
-      await vaultClient.saveCipher(cipher)
-    }
-  }
-
-  /**
-   * TODO move to AccountHelper
+   * - Ensures a cipher is created for the authentication data
+   *   Find cipher via identifier / password
+   * - Creates io.cozy.accounts
+   * - Links cipher to account
+   * - Saves account
    */
   async handleSubmit(data = {}) {
     const { konnector, saveAccount, vaultClient } = this.props
-
     const { account } = this.state
-    const isUpdate = !!account
 
     this.setState({
       error: null,
       status: RUNNING
     })
 
-    const identifierProperty = manifest.getIdentifier(konnector.fields)
-
-    const isVaultLocked = await vaultClient.isLocked()
-
     try {
-      const identifier = data[identifierProperty]
-      const password = data.password
-      let cipherId = this.getSelectedCipherId()
+      let cipher
+
+      const isVaultLocked = await vaultClient.isLocked()
 
       if (isVaultLocked) {
         // eslint-disable-next-line no-console
@@ -285,43 +205,20 @@ export class DumbTriggerManager extends Component {
           'Impossible to manage ciphers since vault is locked. The created io.cozy.accounts will not be linked to an com.bitwarden.ciphers'
         )
       } else {
-        if (cipherId) {
-          await this.updateCipher(cipherId, identifier, password)
-        } else {
-          const existingCipherId = await this.getExistingCipherIdForAccount(
-            identifier,
-            password
-          )
-
-          if (existingCipherId) {
-            cipherId = existingCipherId
-            await this.updateCipher(cipherId, identifier, password)
-          } else {
-            cipherId = await this.createNewCipherId(identifier, password)
-          }
-        }
-
-        await this.shareCipherWithCozy(cipherId)
+        let cipherId = this.getSelectedCipherId()
+        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+          account,
+          konnector,
+          userData: data
+        })
       }
 
-      const accountWithNewState = accounts.setSessionResetIfNecessary(
-        accounts.resetState(account),
-        data
-      )
-      const accountDocument = isUpdate
-        ? accounts.mergeAuth(accountWithNewState, data)
-        : accounts.build(konnector, data)
-
-      let accountToSave
-
-      if (cipherId) {
-        accountToSave = accounts.setVaultCipherRelationship(
-          accountDocument,
-          cipherId
-        )
-      } else {
-        accountToSave = accountDocument
-      }
+      const accountToSave = buildOrUpdateAccount({
+        account,
+        cipher,
+        konnector,
+        userData: data
+      })
 
       const savedAccount = accounts.mergeAuth(
         await saveAccount(konnector, accountToSave),

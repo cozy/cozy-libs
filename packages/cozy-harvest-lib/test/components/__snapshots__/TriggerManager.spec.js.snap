@@ -2,6 +2,7 @@
 
 exports[`TriggerManager handleError should render error 1`] = `
 <withI18n(withLocales(withClient(VaultUnlocker)))
+  onDismiss={[MockFunction]}
   onUnlock={[Function]}
 >
   <div
@@ -59,6 +60,7 @@ exports[`TriggerManager should redirect to OAuthForm 1`] = `
 
 exports[`TriggerManager should render with account 1`] = `
 <withI18n(withLocales(withClient(VaultUnlocker)))
+  onDismiss={[MockFunction]}
   onUnlock={[Function]}
 >
   <div
@@ -101,6 +103,7 @@ exports[`TriggerManager should render with account 1`] = `
 
 exports[`TriggerManager should render without account 1`] = `
 <withI18n(withLocales(withClient(VaultUnlocker)))
+  onDismiss={[MockFunction]}
   onUnlock={[Function]}
 >
   <div
