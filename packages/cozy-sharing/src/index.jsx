@@ -82,14 +82,20 @@ class SharingProvider extends Component {
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
       revokeSharingLink: this.revokeSharingLink,
-      hasLoadedAtLeastOnePage: false
+      hasLoadedAtLeastOnePage: false,
+      revokeAllRecipients: this.revokeAllRecipients,
+      refresh: this.fetchAllSharings
     }
   }
 
   dispatch = action =>
     this.setState(state => ({ ...state, ...reducer(state, action) }))
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchAllSharings()
+  }
+
+  fetchAllSharings = async () => {
     const { doctype, client } = this.props
     const [sharings, permissions, apps] = await Promise.all([
       client.collection('io.cozy.sharings').findByDoctype(doctype),
@@ -110,10 +116,10 @@ class SharingProvider extends Component {
     const sharedDocIds = getSharedDocIdsBySharings(sharings)
     const resp = await client.collection(doctype).all({ keys: sharedDocIds })
     const folderPaths = resp.data
-      .filter(f => f.type === 'directory')
+      .filter(f => f.type === 'directory' && !f.trashed)
       .map(f => f.path)
     const filePaths = await this.getFilesPaths(
-      resp.data.filter(f => f.type !== 'directory')
+      resp.data.filter(f => f.type !== 'directory' && !f.trashed)
     )
     this.dispatch(receivePaths([...folderPaths, ...filePaths]))
   }
@@ -152,6 +158,24 @@ class SharingProvider extends Component {
       .collection('io.cozy.sharings')
       .addRecipients(sharing, recipients, sharingType)
     this.dispatch(updateSharing(resp.data))
+  }
+
+  revokeAllRecipients = async document => {
+    const recipients = getRecipients(this.state, document.id)
+    const sharing = getDocumentSharing(this.state, document.id)
+
+    await this.props.client
+      .collection('io.cozy.sharings')
+      .revokeAllRecipients(sharing)
+    recipients.map(async (recipient, recipientIndex) => {
+      this.dispatch(
+        revokeRecipient(
+          sharing,
+          recipientIndex,
+          document.path || (await this.getFilesPaths([document]))
+        )
+      )
+    })
   }
 
   revoke = async (document, sharingId, recipientIndex) => {
@@ -220,6 +244,7 @@ export const SharedDocument = ({ docId, children }) => (
       getSharingType,
       getRecipients,
       getSharingLink,
+      refresh,
       revokeSelf
     } = {}) =>
       children({
@@ -234,6 +259,7 @@ export const SharedDocument = ({ docId, children }) => (
           byDocId !== undefined && byDocId[docId] && !isOwner(docId),
         recipients: getRecipients(docId),
         link: getSharingLink(docId) !== null,
+        onFileDelete: refresh,
         onLeave: revokeSelf
       })
     }

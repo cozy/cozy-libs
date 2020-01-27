@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Spinner, MenuItem, withBreakpoints } from 'cozy-ui/transpiled/react'
-
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { withClient } from 'cozy-client'
 import MenuAwareMobile from './MenuAwareMobile'
 import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
 
@@ -74,14 +75,9 @@ export const UserAvatar = ({ url, size, ...rest }) => (
   </div>
 )
 
-class Status extends Component {
+export class Status extends Component {
   state = {
     revoking: false
-  }
-
-  static contextTypes = {
-    t: PropTypes.func.isRequired,
-    client: PropTypes.object.isRequired
   }
 
   onRevoke = async () => {
@@ -103,8 +99,16 @@ class Status extends Component {
   }
 
   render() {
-    const { isOwner, status, instance, type, documentType, name } = this.props
-    const { t, client } = this.context
+    const {
+      isOwner,
+      status,
+      instance,
+      type,
+      documentType,
+      name,
+      client,
+      t
+    } = this.props
     const { revoking } = this.state
     const isMe =
       instance !== undefined && instance === client.options.uri && !isOwner
@@ -163,7 +167,7 @@ class Status extends Component {
   }
 }
 
-const StatusWithBreakpoints = withBreakpoints()(Status)
+const StatusWithBreakpoints = translate()(withBreakpoints()(withClient(Status)))
 
 const Recipient = (props, { client, t }) => {
   const { instance, isOwner, status, ...rest } = props

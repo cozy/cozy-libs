@@ -18,14 +18,28 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
           className="shared-status"
         >
           <LinkIcon
+            data-for="linkfor1"
+            data-tip={true}
             height="16"
+            style={
+              Object {
+                "fill": "var(--coolGrey)",
+              }
+            }
             viewBox="0 0 16 16"
             width="16"
             xmlns="http://www.w3.org/2000/svg"
             xmlnsXlink="http://www.w3.org/1999/xlink"
           >
             <svg
+              data-for="linkfor1"
+              data-tip={true}
               height="16"
+              style={
+                Object {
+                  "fill": "var(--coolGrey)",
+                }
+              }
               viewBox="0 0 16 16"
               width="16"
               xmlns="http://www.w3.org/2000/svg"
@@ -43,6 +57,30 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
               />
             </svg>
           </LinkIcon>
+          <SharingTooltip
+            id="linkfor1"
+          >
+            <ReactTooltip
+              className="shared-tooltip"
+              clickable={false}
+              effect="solid"
+              id="linkfor1"
+              insecure={true}
+              place="bottom"
+              resizeHide={true}
+              wrapper="div"
+            >
+              <div
+                className="__react_component_tooltip place-bottom type-dark "
+                data-id="tooltip"
+                id="linkfor1"
+              >
+                <span>
+                  Files.share.shareByLink.subtitle
+                </span>
+              </div>
+            </ReactTooltip>
+          </SharingTooltip>
         </span>
       </SharedStatus>
     </I18n>

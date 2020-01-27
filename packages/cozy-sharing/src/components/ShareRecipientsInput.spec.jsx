@@ -6,6 +6,7 @@ import ShareRecipientsInput from './ShareRecipientsInput'
 describe('ShareRecipientsInput component', () => {
   it('should match snapshot', () => {
     const props = {
+      client: '',
       label: 'Recipients',
       contacts: {
         id: 'contacts',
@@ -14,6 +15,8 @@ describe('ShareRecipientsInput component', () => {
         data: [
           {
             id: 'df563cc4-6440',
+            _id: 'df563cc4-6440',
+            _type: 'io.cozy.contacts',
             name: {
               givenName: 'Michale',
               familyName: 'Russel'
@@ -21,6 +24,8 @@ describe('ShareRecipientsInput component', () => {
           },
           {
             id: '5a3b4ccf-c257',
+            _id: '5a3b4ccf-c257',
+            _type: 'io.cozy.contacts',
             name: {
               givenName: 'Teagan',
               familyName: 'Wolf'
@@ -33,8 +38,18 @@ describe('ShareRecipientsInput component', () => {
         fetchStatus: 'loaded',
         hasMore: false,
         data: [
-          { id: 'fe86af20-c6c5', name: "The Night's Watch" },
-          { id: '3d8193ab-2ce4', name: 'The North' }
+          {
+            id: 'fe86af20-c6c5',
+            name: "The Night's Watch",
+            _id: 'fe86af20-c6c5',
+            _type: 'io.cozy.contacts.groups'
+          },
+          {
+            id: '3d8193ab-2ce4',
+            name: 'The North',
+            _id: '3d8193ab-2ce4',
+            _type: 'io.cozy.contacts.groups'
+          }
         ]
       },
       recipients: [
@@ -57,6 +72,7 @@ describe('ShareRecipientsInput component', () => {
 
   it('should include groups only if all contacts are loaded', () => {
     const props = {
+      client: '',
       label: 'Recipients',
       contacts: {
         id: 'contacts',
@@ -65,6 +81,8 @@ describe('ShareRecipientsInput component', () => {
         data: [
           {
             id: 'df563cc4-6440',
+            _id: 'df563cc4-6440',
+            _type: 'io.cozy.contacts',
             name: {
               givenName: 'Michale',
               familyName: 'Russel'
@@ -72,6 +90,8 @@ describe('ShareRecipientsInput component', () => {
           },
           {
             id: '5a3b4ccf-c257',
+            _id: '5a3b4ccf-c257',
+            _type: 'io.cozy.contacts',
             name: {
               givenName: 'Teagan',
               familyName: 'Wolf'
@@ -84,8 +104,18 @@ describe('ShareRecipientsInput component', () => {
         fetchStatus: 'loaded',
         hasMore: false,
         data: [
-          { id: 'fe86af20-c6c5', name: "The Night's Watch" },
-          { id: '3d8193ab-2ce4', name: 'The North' }
+          {
+            id: 'fe86af20-c6c5',
+            name: "The Night's Watch",
+            _id: 'fe86af20-c6c5',
+            _type: 'io.cozy.contacts.groups'
+          },
+          {
+            id: '3d8193ab-2ce4',
+            name: 'The North',
+            _id: '3d8193ab-2ce4',
+            _type: 'io.cozy.contacts.groups'
+          }
         ]
       },
       recipients: [

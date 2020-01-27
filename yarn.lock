@@ -3585,7 +3585,7 @@ btoa-lite@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/btoa-lite/-/btoa-lite-1.0.0.tgz#337766da15801210fdd956c22e9c6891ab9d0337"
 
-btoa@1.2.1:
+btoa@1.2.1, btoa@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/btoa/-/btoa-1.2.1.tgz#01a9909f8b2c93f6bf680ba26131eb30f7fa3d73"
 
@@ -4642,6 +4642,27 @@ cozy-client@7.13.0:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
+cozy-client@^10.4.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-10.4.0.tgz#d57384a7f5a4b84a7499b525b5a962c823627217"
+  integrity sha512-CUar2CDYusbRiUXu7KqQex7mFxUzD+QsM5E07kyNYavLYmFQZ/l7tcTzM7GIjjT4hxUaGrwIDzNs3AH1RND5lA==
+  dependencies:
+    btoa "^1.2.1"
+    cozy-device-helper "^1.7.3"
+    cozy-logger "^1.6.0"
+    cozy-stack-client "^10.4.0"
+    isomorphic-fetch "^2.2.1"
+    lodash "^4.17.13"
+    microee "^0.0.6"
+    opn "^6.0.0"
+    prop-types "^15.6.2"
+    react-redux "^5.0.7"
+    redux "^3.7.2"
+    redux-thunk "^2.3.0"
+    server-destroy "^1.0.1"
+    sift "^6.0.0"
+    url-search-params-polyfill "^7.0.0"
+
 cozy-client@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-9.1.0.tgz#1ff8a34514734b42e1e58821d8c0a44ae434ed35"
@@ -4718,6 +4739,15 @@ cozy-stack-client@6.66.0, cozy-stack-client@^6.66.0:
   version "6.66.0"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.66.0.tgz#ba217c2d615dd31a9f40ae131644c68c4108b101"
   integrity sha512-NPdoDplH43nLBlTXVXYCOutRkh3Q+Dib92BGU8F3PanCMjCBXiRUni6I7EhcumwJkXeJVm7qul72X4LYKlOzgA==
+  dependencies:
+    detect-node "^2.0.4"
+    mime "^2.4.0"
+    qs "^6.7.0"
+
+cozy-stack-client@^10.4.0:
+  version "10.4.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-10.4.0.tgz#5fc104eb881982c42feae126c2cb6de58e416f9f"
+  integrity sha512-VoiztT2NXaNQYOtp2w4QVQh9Y05ikJ4ityIOATY9mNjG6Ah+cs42P0SxBw9rcG6J6/hRI6gZqeo95qFwixDdMg==
   dependencies:
     detect-node "^2.0.4"
     mime "^2.4.0"
@@ -10962,6 +10992,13 @@ opn@^5.1.0, opn@^5.5.0:
   dependencies:
     is-wsl "^1.1.0"
 
+opn@^6.0.0:
+  version "6.0.0"
+  resolved "https://registry.yarnpkg.com/opn/-/opn-6.0.0.tgz#3c5b0db676d5f97da1233d1ed42d182bc5a27d2d"
+  integrity sha512-I9PKfIZC+e4RXZ/qr1RhgyCnGgYX0UEIlXgWnCOVACIvFgaC9rz6Won7xbdhoHrd8IIhV7YEpHjreNUNkqCGkQ==
+  dependencies:
+    is-wsl "^1.1.0"
+
 optimist@^0.6.1:
   version "0.6.1"
   resolved "https://registry.yarnpkg.com/optimist/-/optimist-0.6.1.tgz#da3ea74686fa21a19a111c326e90eb15a0196686"
@@ -14130,6 +14167,11 @@ serve-static@1.14.1, serve-static@^1.12.4:
     escape-html "~1.0.3"
     parseurl "~1.3.3"
     send "0.17.1"
+
+server-destroy@^1.0.1:
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/server-destroy/-/server-destroy-1.0.1.tgz#f13bf928e42b9c3e79383e61cc3998b5d14e6cdd"
+  integrity sha1-8Tv5KOQrnD55OD5hzDmYtdFObN0=
 
 set-blocking@^2.0.0, set-blocking@~2.0.0:
   version "2.0.0"

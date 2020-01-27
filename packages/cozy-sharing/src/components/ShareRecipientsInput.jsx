@@ -6,10 +6,6 @@ import ShareAutosuggest from './ShareAutosuggest'
 import styles from '../share.styl'
 
 class ShareRecipientsInput extends Component {
-  static contextTypes = {
-    client: PropTypes.object.isRequired
-  }
-
   state = {
     loading: false
   }
