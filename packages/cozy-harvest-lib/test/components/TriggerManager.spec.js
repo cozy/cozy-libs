@@ -1,22 +1,12 @@
 /* eslint-env jest */
 import React from 'react'
 import { shallow } from 'enzyme'
+import { render } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
 
-jest.mock('cozy-keys-lib', () => {
-  const FakeVaultUnlocker = ({ children }) => children
-  FakeVaultUnlocker.displayName =
-    'withI18n(withLocales(withClient(VaultUnlocker)))'
-  return {
-    CipherType: {
-      Login: 'Login'
-    },
-    VaultUnlocker: FakeVaultUnlocker,
-    withVaultClient: Component => Component
-  }
-})
+jest.mock('cozy-keys-lib')
 
 jest.mock('cozy-doctypes', () => {
   const doctypes = jest.requireActual('cozy-doctypes')
@@ -193,6 +183,8 @@ const mockVaultClient = {
   decrypt: jest.fn(),
   createNewCozySharedCipher: jest.fn(),
   get: jest.fn(),
+  getAll: jest.fn(),
+  getAllDecrypted: jest.fn(),
   shareWithCozy: jest.fn(),
   isLocked: jest.fn().mockResolvedValue(false)
 }
@@ -249,26 +241,68 @@ describe('TriggerManager', () => {
     jest.resetAllMocks()
   })
 
-  it('should redirect to OAuthForm', () => {
-    const konnector = {
-      oauth: {
-        scope: 'test'
+  describe('when given an oauth konnector', () => {
+    it('should redirect to OAuthForm', () => {
+      const konnector = {
+        oauth: {
+          scope: 'test'
+        }
       }
-    }
-    const component = shallow(
-      <TriggerManager {...props} konnector={konnector} />
-    ).getElement()
-    expect(component).toMatchSnapshot()
+      const component = shallow(
+        <TriggerManager {...props} konnector={konnector} />
+      ).getElement()
+      expect(component).toMatchSnapshot()
+    })
   })
 
-  it('should render without account', () => {
-    const component = shallowWithoutAccount().getElement()
-    expect(component).toMatchSnapshot()
+  describe('when given no account', () => {
+    it('should render correctly', () => {
+      const component = shallowWithoutAccount().getElement()
+      expect(component).toMatchSnapshot()
+    })
+
+    describe('when the vault does not contain ciphers', () => {
+      it('should show the new account form', async () => {
+        mockVaultClient.getAll.mockResolvedValue([])
+        mockVaultClient.getAllDecrypted.mockResolvedValue([])
+
+        const { findByLabelText } = render(<TriggerManager {...props} />)
+
+        const usernameField = await findByLabelText('username')
+        const passwordField = await findByLabelText('passphrase')
+
+        expect(usernameField).toBeDefined()
+        expect(passwordField).toBeDefined()
+      })
+    })
+
+    describe('when the vault contains ciphers', () => {
+      it('should show the ciphers list', async () => {
+        mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
+        mockVaultClient.getAllDecrypted.mockResolvedValue([
+          {
+            id: 'cipher1',
+            name: fixtures.konnector.name,
+            login: {
+              username: 'Isabelle'
+            }
+          }
+        ])
+
+        const { findByText } = render(<TriggerManager {...props} />)
+
+        const cipherItem = await findByText('Isabelle')
+
+        expect(cipherItem).toBeDefined()
+      })
+    })
   })
 
-  it('should render with account', () => {
-    const component = shallowWithAccount().getElement()
-    expect(component).toMatchSnapshot()
+  describe('when given an account', () => {
+    it('should render correctly', () => {
+      const component = shallowWithAccount().getElement()
+      expect(component).toMatchSnapshot()
+    })
   })
 
   describe('handleError', () => {

@@ -81,7 +81,7 @@ export class DumbTriggerManager extends Component {
       account,
       error: null,
       status: IDLE,
-      step: account ? 'accountForm' : 'ciphersList',
+      step: account ? 'accountForm' : null,
       selectedCipher: undefined,
       showBackButton: false,
       ciphers: []
@@ -277,12 +277,6 @@ export class DumbTriggerManager extends Component {
     }
   }
 
-  showCiphersList() {
-    this.setState({
-      step: 'ciphersList'
-    })
-  }
-
   cipherToAccount(cipher) {
     if (cipher === undefined) {
       return null
@@ -319,6 +313,16 @@ export class DumbTriggerManager extends Component {
     this.setState({ step: 'accountForm', showBackButton: false })
   }
 
+  showCiphersList(ciphers) {
+    const newState = { step: 'ciphersList' }
+
+    if (ciphers) {
+      newState.ciphers = ciphers
+    }
+
+    this.setState(newState)
+  }
+
   async handleVaultUnlock() {
     const { vaultClient, konnector } = this.props
 
@@ -339,9 +343,9 @@ export class DumbTriggerManager extends Component {
 
       if (ciphers.length === 0) {
         this.showAccountForm()
+      } else {
+        this.showCiphersList(ciphers)
       }
-
-      this.setState({ ciphers })
     } catch (err) {
       // eslint-disable-next-line no-console
       console.error(
@@ -421,7 +425,7 @@ export class DumbTriggerManager extends Component {
           <>
             {showBackButton && (
               <ModalBackButton
-                onClick={this.showCiphersList}
+                onClick={() => this.showCiphersList()}
                 label={t('back')}
               />
             )}
@@ -436,7 +440,7 @@ export class DumbTriggerManager extends Component {
               onSubmit={this.handleSubmit}
               showError={showError}
               submitting={submitting}
-              onBack={this.showCiphersList}
+              onBack={() => this.showCiphersList()}
               readOnlyIdentifier={this.hasCipherSelected()}
             />
           </>
