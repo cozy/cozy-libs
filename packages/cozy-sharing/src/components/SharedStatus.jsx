@@ -1,5 +1,6 @@
 import React from 'react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import palette from 'cozy-ui/transpiled/react/palette'
 import { SharingTooltip, TooltipRecipientList } from './Tooltip'
 import cx from 'classnames'
 
@@ -27,7 +28,19 @@ export const SharedStatus = ({ className, docId, recipients, link, t }) => (
         />
       </SharingTooltip>
     )}
-    {link && <LinkIcon />}
+    {link && (
+      <>
+        <LinkIcon
+          style={{ fill: palette.coolGrey }}
+          data-tip
+          data-for={`linkfor${docId}`}
+        />
+
+        <SharingTooltip id={`linkfor${docId}`}>
+          <span>{t('Files.share.shareByLink.subtitle')}</span>
+        </SharingTooltip>
+      </>
+    )}
   </span>
 )
 
