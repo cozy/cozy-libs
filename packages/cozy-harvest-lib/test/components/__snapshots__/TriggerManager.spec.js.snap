@@ -109,22 +109,5 @@ exports[`TriggerManager when given no account should render correctly 1`] = `
   <div
     id="coz-harvest-modal-place"
   />
-  <withI18n(withLocales(DumbVaultCiphersList))
-    ciphers={Array []}
-    konnector={
-      Object {
-        "fields": Object {
-          "passphrase": Object {
-            "type": "password",
-          },
-          "username": Object {
-            "type": "text",
-          },
-        },
-        "slug": "konnectest",
-      }
-    }
-    onSelect={[Function]}
-  />
 </withI18n(withLocales(withClient(VaultUnlocker)))>
 `;
