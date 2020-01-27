@@ -71,7 +71,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
               wrapper="div"
             >
               <div
-                className="__react_component_tooltip place-bottom type-dark"
+                className="__react_component_tooltip place-bottom type-dark "
                 data-id="tooltip"
                 id="linkfor1"
               >
@@ -136,7 +136,7 @@ exports[`SharedStatus component should have the right display if there is severa
               wrapper="div"
             >
               <div
-                className="__react_component_tooltip place-bottom type-dark"
+                className="__react_component_tooltip place-bottom type-dark "
                 data-id="tooltip"
                 id="members1"
               >
