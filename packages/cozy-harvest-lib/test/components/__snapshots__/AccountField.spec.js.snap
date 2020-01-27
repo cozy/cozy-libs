@@ -2,7 +2,6 @@
 
 exports[`AccountField render a date field 1`] = `
 <Field
-  aria-label="fields.date.label"
   autoComplete="off"
   className="u-m-0"
   error={false}
@@ -15,7 +14,11 @@ exports[`AccountField render a date field 1`] = `
       label="fields.date.label"
     />
   }
-  labelProps={Object {}}
+  labelProps={
+    Object {
+      "aria-label": "fields.date.label",
+    }
+  }
   name="date"
   placeholder="fields.date.placeholder"
   required={true}
@@ -97,7 +100,6 @@ exports[`AccountField render a date field 1`] = `
 
 exports[`AccountField render a dropdown field 1`] = `
 <Field
-  aria-label="fields.multiple.label"
   className="u-m-0"
   error={false}
   fieldProps={Object {}}
@@ -109,7 +111,11 @@ exports[`AccountField render a dropdown field 1`] = `
       label="fields.multiple.label"
     />
   }
-  labelProps={Object {}}
+  labelProps={
+    Object {
+      "aria-label": "fields.multiple.label",
+    }
+  }
   name="multiple"
   options={
     Array [
@@ -186,7 +192,6 @@ exports[`AccountField render a dropdown field 1`] = `
 
 exports[`AccountField render a password field 1`] = `
 <PasswordField
-  aria-label="fields.passphrase.label"
   autoComplete="off"
   className="u-m-0"
   encrypted={true}
@@ -197,6 +202,11 @@ exports[`AccountField render a password field 1`] = `
     <ObfuscatedLabel
       label="fields.passphrase.label"
     />
+  }
+  labelProps={
+    Object {
+      "aria-label": "fields.passphrase.label",
+    }
   }
   name="passphrase"
   placeholder="fields.passphrase.placeholder"
@@ -267,7 +277,6 @@ exports[`AccountField render a password field 1`] = `
 
 exports[`AccountField should render 1`] = `
 <Field
-  aria-label="fields.username.label"
   autoComplete="off"
   className="u-m-0"
   encrypted={false}
@@ -281,7 +290,11 @@ exports[`AccountField should render 1`] = `
       label="fields.username.label"
     />
   }
-  labelProps={Object {}}
+  labelProps={
+    Object {
+      "aria-label": "fields.username.label",
+    }
+  }
   name="username"
   placeholder="fields.username.placeholder"
   required={true}
