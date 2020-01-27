@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.1...cozy-harvest-lib@1.17.2) (2020-01-27)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Don't show empty ciphers list in a flash ([12c671f](https://github.com/cozy/cozy-libs/commit/12c671f))
+* **cozy-harvest-lib:** Use labelProps in Field to set aria-label ([fb7f5e2](https://github.com/cozy/cozy-libs/commit/fb7f5e2))
+
+
+
+
+
 ## [1.17.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.0...cozy-harvest-lib@1.17.1) (2020-01-24)
 
 
