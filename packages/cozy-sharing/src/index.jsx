@@ -83,13 +83,18 @@ class SharingProvider extends Component {
       shareByLink: this.shareByLink,
       revokeSharingLink: this.revokeSharingLink,
       hasLoadedAtLeastOnePage: false
+      refresh: this.fetchAllSharings
     }
   }
 
   dispatch = action =>
     this.setState(state => ({ ...state, ...reducer(state, action) }))
 
-  async componentDidMount() {
+  componentDidMount() {
+    this.fetchAllSharings()
+  }
+
+  fetchAllSharings = async () => {
     const { doctype, client } = this.props
     const [sharings, permissions, apps] = await Promise.all([
       client.collection('io.cozy.sharings').findByDoctype(doctype),
@@ -220,6 +225,7 @@ export const SharedDocument = ({ docId, children }) => (
       getSharingType,
       getRecipients,
       getSharingLink,
+      refresh,
       revokeSelf
     } = {}) =>
       children({
@@ -234,6 +240,7 @@ export const SharedDocument = ({ docId, children }) => (
           byDocId !== undefined && byDocId[docId] && !isOwner(docId),
         recipients: getRecipients(docId),
         link: getSharingLink(docId) !== null,
+        onFileDelete: refresh,
         onLeave: revokeSelf
       })
     }
