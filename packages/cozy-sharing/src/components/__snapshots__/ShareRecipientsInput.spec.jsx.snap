@@ -12,6 +12,8 @@ exports[`ShareRecipientsInput component should include groups only if all contac
     contactsAndGroups={
       Array [
         Object {
+          "_id": "df563cc4-6440",
+          "_type": "io.cozy.contacts",
           "id": "df563cc4-6440",
           "name": Object {
             "familyName": "Russel",
@@ -19,6 +21,8 @@ exports[`ShareRecipientsInput component should include groups only if all contac
           },
         },
         Object {
+          "_id": "5a3b4ccf-c257",
+          "_type": "io.cozy.contacts",
           "id": "5a3b4ccf-c257",
           "name": Object {
             "familyName": "Wolf",
@@ -59,6 +63,8 @@ exports[`ShareRecipientsInput component should match snapshot 1`] = `
     contactsAndGroups={
       Array [
         Object {
+          "_id": "df563cc4-6440",
+          "_type": "io.cozy.contacts",
           "id": "df563cc4-6440",
           "name": Object {
             "familyName": "Russel",
@@ -66,6 +72,8 @@ exports[`ShareRecipientsInput component should match snapshot 1`] = `
           },
         },
         Object {
+          "_id": "5a3b4ccf-c257",
+          "_type": "io.cozy.contacts",
           "id": "5a3b4ccf-c257",
           "name": Object {
             "familyName": "Wolf",
@@ -73,10 +81,14 @@ exports[`ShareRecipientsInput component should match snapshot 1`] = `
           },
         },
         Object {
+          "_id": "fe86af20-c6c5",
+          "_type": "io.cozy.contacts.groups",
           "id": "fe86af20-c6c5",
           "name": "The Night's Watch",
         },
         Object {
+          "_id": "3d8193ab-2ce4",
+          "_type": "io.cozy.contacts.groups",
           "id": "3d8193ab-2ce4",
           "name": "The North",
         },
