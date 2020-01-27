@@ -167,7 +167,7 @@ export class Status extends Component {
   }
 }
 
-const StatusWithBreakpoints = translate()(withBreakpoints()(withClient(Status)))
+const StatusWithBreakpoints = withBreakpoints()(translate()(withClient(Status)))
 
 const Recipient = (props, { client, t }) => {
   const { instance, isOwner, status, ...rest } = props

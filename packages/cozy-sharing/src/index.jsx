@@ -58,7 +58,7 @@ const track = (document, action) => {
 const trackSharingByLink = document => track(document, 'shareByLink')
 const isFile = ({ _type }) => _type === 'io.cozy.files'
 
-class SharingProvider extends Component {
+export class SharingProvider extends Component {
   constructor(props, context) {
     super(props, context)
     const instanceUri = props.client.getStackClient().uri
@@ -377,6 +377,18 @@ export const ShareModal = ({ document, ...rest }) => (
       ) : (
         <SharingModal document={document} {...rest} />
       )
+    }
+  </SharingContext.Consumer>
+)
+/**
+ * Expose a refresh method
+ */
+export const RefreshableSharings = ({ children }) => (
+  <SharingContext.Consumer>
+    {({ refresh }) =>
+      children({
+        refresh
+      })
     }
   </SharingContext.Consumer>
 )
