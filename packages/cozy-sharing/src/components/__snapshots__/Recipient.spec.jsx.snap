@@ -1,0 +1,620 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Recipient component should match snapshot if isMe and type file 1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <Status
+        client={
+          Object {
+            "options": Object {
+              "uri": "foo.mycozy.cloud",
+            },
+          }
+        }
+        instance="foo.mycozy.cloud"
+        status="ready"
+        t={[Function]}
+        type="file"
+      >
+        <div
+          className="recipient-status u-ml-1"
+        >
+          <withBreakpoints(MenuAwareMobile)
+            buttonClassName="recipient-menu-btn"
+            className="recipient-menu"
+            itemsStyle={
+              Object {
+                "maxWidth": "280px",
+              }
+            }
+            popover={true}
+            position="right"
+            text="Share.type.file"
+          >
+            <MenuAwareMobile
+              breakpoints={
+                Object {
+                  "isDesktop": true,
+                  "isExtraLarge": false,
+                  "isLarge": true,
+                  "isMedium": false,
+                  "isMobile": false,
+                  "isSmall": false,
+                  "isTablet": false,
+                  "isTiny": false,
+                }
+              }
+              buttonClassName="recipient-menu-btn"
+              className="recipient-menu"
+              itemsStyle={
+                Object {
+                  "maxWidth": "280px",
+                }
+              }
+              popover={true}
+              position="right"
+              text="Share.type.file"
+            >
+              <Menu
+                breakpoints={
+                  Object {
+                    "isDesktop": true,
+                    "isExtraLarge": false,
+                    "isLarge": true,
+                    "isMedium": false,
+                    "isMobile": false,
+                    "isSmall": false,
+                    "isTablet": false,
+                    "isTiny": false,
+                  }
+                }
+                buttonClassName="recipient-menu-btn"
+                className="recipient-menu"
+                itemsStyle={
+                  Object {
+                    "maxWidth": "280px",
+                  }
+                }
+                popover={true}
+                position="right"
+                text="Share.type.file"
+              >
+                <Menu
+                  breakpoints={
+                    Object {
+                      "isDesktop": true,
+                      "isExtraLarge": false,
+                      "isLarge": true,
+                      "isMedium": false,
+                      "isMobile": false,
+                      "isSmall": false,
+                      "isTablet": false,
+                      "isTiny": false,
+                    }
+                  }
+                  buttonClassName="recipient-menu-btn"
+                  className="recipient-menu"
+                  component={null}
+                  disabled={false}
+                  initialOpen={false}
+                  itemsStyle={
+                    Object {
+                      "maxWidth": "280px",
+                    }
+                  }
+                  label="Share.type.file"
+                  onSelect={null}
+                  onSelectDisabled={null}
+                  popover={true}
+                  position="right"
+                >
+                  <div
+                    breakpoints={
+                      Object {
+                        "isDesktop": true,
+                        "isExtraLarge": false,
+                        "isLarge": true,
+                        "isMedium": false,
+                        "isMobile": false,
+                        "isSmall": false,
+                        "isTablet": false,
+                        "isTiny": false,
+                      }
+                    }
+                    className="styles__c-menu___2YTiU styles__c-menu--right___3wxbb recipient-menu"
+                  >
+                    <Button
+                      buttonClassName="recipient-menu-btn"
+                      disabled={false}
+                      onClick={[Function]}
+                      text="Share.type.file"
+                    >
+                      <button
+                        className="c-btn styles__c-menu__btn___18qF8 recipient-menu-btn"
+                        disabled={false}
+                        onClick={[Function]}
+                        role="button"
+                      >
+                        Share.type.file
+                      </button>
+                    </Button>
+                  </div>
+                </Menu>
+              </Menu>
+            </MenuAwareMobile>
+          </withBreakpoints(MenuAwareMobile)>
+        </div>
+      </Status>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;
+
+exports[`Recipient component should match snapshot if isMe and type folder 1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <Status
+        client={
+          Object {
+            "options": Object {
+              "uri": "foo.mycozy.cloud",
+            },
+          }
+        }
+        instance="foo.mycozy.cloud"
+        status="ready"
+        t={[Function]}
+        type="folder"
+      >
+        <div
+          className="recipient-status u-ml-1"
+        >
+          <withBreakpoints(MenuAwareMobile)
+            buttonClassName="recipient-menu-btn"
+            className="recipient-menu"
+            itemsStyle={
+              Object {
+                "maxWidth": "280px",
+              }
+            }
+            popover={true}
+            position="right"
+            text="Share.type.folder"
+          >
+            <MenuAwareMobile
+              breakpoints={
+                Object {
+                  "isDesktop": true,
+                  "isExtraLarge": false,
+                  "isLarge": true,
+                  "isMedium": false,
+                  "isMobile": false,
+                  "isSmall": false,
+                  "isTablet": false,
+                  "isTiny": false,
+                }
+              }
+              buttonClassName="recipient-menu-btn"
+              className="recipient-menu"
+              itemsStyle={
+                Object {
+                  "maxWidth": "280px",
+                }
+              }
+              popover={true}
+              position="right"
+              text="Share.type.folder"
+            >
+              <Menu
+                breakpoints={
+                  Object {
+                    "isDesktop": true,
+                    "isExtraLarge": false,
+                    "isLarge": true,
+                    "isMedium": false,
+                    "isMobile": false,
+                    "isSmall": false,
+                    "isTablet": false,
+                    "isTiny": false,
+                  }
+                }
+                buttonClassName="recipient-menu-btn"
+                className="recipient-menu"
+                itemsStyle={
+                  Object {
+                    "maxWidth": "280px",
+                  }
+                }
+                popover={true}
+                position="right"
+                text="Share.type.folder"
+              >
+                <Menu
+                  breakpoints={
+                    Object {
+                      "isDesktop": true,
+                      "isExtraLarge": false,
+                      "isLarge": true,
+                      "isMedium": false,
+                      "isMobile": false,
+                      "isSmall": false,
+                      "isTablet": false,
+                      "isTiny": false,
+                    }
+                  }
+                  buttonClassName="recipient-menu-btn"
+                  className="recipient-menu"
+                  component={null}
+                  disabled={false}
+                  initialOpen={false}
+                  itemsStyle={
+                    Object {
+                      "maxWidth": "280px",
+                    }
+                  }
+                  label="Share.type.folder"
+                  onSelect={null}
+                  onSelectDisabled={null}
+                  popover={true}
+                  position="right"
+                >
+                  <div
+                    breakpoints={
+                      Object {
+                        "isDesktop": true,
+                        "isExtraLarge": false,
+                        "isLarge": true,
+                        "isMedium": false,
+                        "isMobile": false,
+                        "isSmall": false,
+                        "isTablet": false,
+                        "isTiny": false,
+                      }
+                    }
+                    className="styles__c-menu___2YTiU styles__c-menu--right___3wxbb recipient-menu"
+                  >
+                    <Button
+                      buttonClassName="recipient-menu-btn"
+                      disabled={false}
+                      onClick={[Function]}
+                      text="Share.type.folder"
+                    >
+                      <button
+                        className="c-btn styles__c-menu__btn___18qF8 recipient-menu-btn"
+                        disabled={false}
+                        onClick={[Function]}
+                        role="button"
+                      >
+                        Share.type.folder
+                      </button>
+                    </Button>
+                  </div>
+                </Menu>
+              </Menu>
+            </MenuAwareMobile>
+          </withBreakpoints(MenuAwareMobile)>
+        </div>
+      </Status>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;
+
+exports[`Recipient component should match snapshot if isOwner 1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <Status
+        client={
+          Object {
+            "options": Object {
+              "uri": "foo.mycozy.cloud",
+            },
+          }
+        }
+        instance="foo.mycozy.cloud"
+        isOwner="true"
+        status="ready"
+        t={[Function]}
+      >
+        <div
+          className="recipient-status u-ml-1"
+        >
+          <withBreakpoints(MenuAwareMobile)
+            buttonClassName="recipient-menu-btn"
+            className="recipient-menu"
+            itemsStyle={
+              Object {
+                "maxWidth": "280px",
+              }
+            }
+            popover={true}
+            position="right"
+            text="Share.status.ready"
+          >
+            <MenuAwareMobile
+              breakpoints={
+                Object {
+                  "isDesktop": true,
+                  "isExtraLarge": false,
+                  "isLarge": true,
+                  "isMedium": false,
+                  "isMobile": false,
+                  "isSmall": false,
+                  "isTablet": false,
+                  "isTiny": false,
+                }
+              }
+              buttonClassName="recipient-menu-btn"
+              className="recipient-menu"
+              itemsStyle={
+                Object {
+                  "maxWidth": "280px",
+                }
+              }
+              popover={true}
+              position="right"
+              text="Share.status.ready"
+            >
+              <Menu
+                breakpoints={
+                  Object {
+                    "isDesktop": true,
+                    "isExtraLarge": false,
+                    "isLarge": true,
+                    "isMedium": false,
+                    "isMobile": false,
+                    "isSmall": false,
+                    "isTablet": false,
+                    "isTiny": false,
+                  }
+                }
+                buttonClassName="recipient-menu-btn"
+                className="recipient-menu"
+                itemsStyle={
+                  Object {
+                    "maxWidth": "280px",
+                  }
+                }
+                popover={true}
+                position="right"
+                text="Share.status.ready"
+              >
+                <Menu
+                  breakpoints={
+                    Object {
+                      "isDesktop": true,
+                      "isExtraLarge": false,
+                      "isLarge": true,
+                      "isMedium": false,
+                      "isMobile": false,
+                      "isSmall": false,
+                      "isTablet": false,
+                      "isTiny": false,
+                    }
+                  }
+                  buttonClassName="recipient-menu-btn"
+                  className="recipient-menu"
+                  component={null}
+                  disabled={false}
+                  initialOpen={false}
+                  itemsStyle={
+                    Object {
+                      "maxWidth": "280px",
+                    }
+                  }
+                  label="Share.status.ready"
+                  onSelect={null}
+                  onSelectDisabled={null}
+                  popover={true}
+                  position="right"
+                >
+                  <div
+                    breakpoints={
+                      Object {
+                        "isDesktop": true,
+                        "isExtraLarge": false,
+                        "isLarge": true,
+                        "isMedium": false,
+                        "isMobile": false,
+                        "isSmall": false,
+                        "isTablet": false,
+                        "isTiny": false,
+                      }
+                    }
+                    className="styles__c-menu___2YTiU styles__c-menu--right___3wxbb recipient-menu"
+                  >
+                    <Button
+                      buttonClassName="recipient-menu-btn"
+                      disabled={false}
+                      onClick={[Function]}
+                      text="Share.status.ready"
+                    >
+                      <button
+                        className="c-btn styles__c-menu__btn___18qF8 recipient-menu-btn"
+                        disabled={false}
+                        onClick={[Function]}
+                        role="button"
+                      >
+                        Share.status.ready
+                      </button>
+                    </Button>
+                  </div>
+                </Menu>
+              </Menu>
+            </MenuAwareMobile>
+          </withBreakpoints(MenuAwareMobile)>
+        </div>
+      </Status>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;
+
+exports[`Recipient component should render if isMe  1`] = `
+<AppLike>
+  <TestI18n>
+    <I18n
+      defaultLang="en"
+      dictRequire={[Function]}
+      lang="en"
+    >
+      <Status
+        client={
+          Object {
+            "options": Object {
+              "uri": "foo.mycozy.cloud",
+            },
+          }
+        }
+        instance="foo.mycozy.cloud"
+        status="ready"
+        t={[Function]}
+      >
+        <div
+          className="recipient-status u-ml-1"
+        >
+          <withBreakpoints(MenuAwareMobile)
+            buttonClassName="recipient-menu-btn"
+            className="recipient-menu"
+            itemsStyle={
+              Object {
+                "maxWidth": "280px",
+              }
+            }
+            popover={true}
+            position="right"
+            text="Share.status.ready"
+          >
+            <MenuAwareMobile
+              breakpoints={
+                Object {
+                  "isDesktop": true,
+                  "isExtraLarge": false,
+                  "isLarge": true,
+                  "isMedium": false,
+                  "isMobile": false,
+                  "isSmall": false,
+                  "isTablet": false,
+                  "isTiny": false,
+                }
+              }
+              buttonClassName="recipient-menu-btn"
+              className="recipient-menu"
+              itemsStyle={
+                Object {
+                  "maxWidth": "280px",
+                }
+              }
+              popover={true}
+              position="right"
+              text="Share.status.ready"
+            >
+              <Menu
+                breakpoints={
+                  Object {
+                    "isDesktop": true,
+                    "isExtraLarge": false,
+                    "isLarge": true,
+                    "isMedium": false,
+                    "isMobile": false,
+                    "isSmall": false,
+                    "isTablet": false,
+                    "isTiny": false,
+                  }
+                }
+                buttonClassName="recipient-menu-btn"
+                className="recipient-menu"
+                itemsStyle={
+                  Object {
+                    "maxWidth": "280px",
+                  }
+                }
+                popover={true}
+                position="right"
+                text="Share.status.ready"
+              >
+                <Menu
+                  breakpoints={
+                    Object {
+                      "isDesktop": true,
+                      "isExtraLarge": false,
+                      "isLarge": true,
+                      "isMedium": false,
+                      "isMobile": false,
+                      "isSmall": false,
+                      "isTablet": false,
+                      "isTiny": false,
+                    }
+                  }
+                  buttonClassName="recipient-menu-btn"
+                  className="recipient-menu"
+                  component={null}
+                  disabled={false}
+                  initialOpen={false}
+                  itemsStyle={
+                    Object {
+                      "maxWidth": "280px",
+                    }
+                  }
+                  label="Share.status.ready"
+                  onSelect={null}
+                  onSelectDisabled={null}
+                  popover={true}
+                  position="right"
+                >
+                  <div
+                    breakpoints={
+                      Object {
+                        "isDesktop": true,
+                        "isExtraLarge": false,
+                        "isLarge": true,
+                        "isMedium": false,
+                        "isMobile": false,
+                        "isSmall": false,
+                        "isTablet": false,
+                        "isTiny": false,
+                      }
+                    }
+                    className="styles__c-menu___2YTiU styles__c-menu--right___3wxbb recipient-menu"
+                  >
+                    <Button
+                      buttonClassName="recipient-menu-btn"
+                      disabled={false}
+                      onClick={[Function]}
+                      text="Share.status.ready"
+                    >
+                      <button
+                        className="c-btn styles__c-menu__btn___18qF8 recipient-menu-btn"
+                        disabled={false}
+                        onClick={[Function]}
+                        role="button"
+                      >
+                        Share.status.ready
+                      </button>
+                    </Button>
+                  </div>
+                </Menu>
+              </Menu>
+            </MenuAwareMobile>
+          </withBreakpoints(MenuAwareMobile)>
+        </div>
+      </Status>
+    </I18n>
+  </TestI18n>
+</AppLike>
+`;
