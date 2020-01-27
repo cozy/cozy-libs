@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.6.2...cozy-sharing@1.7.0) (2020-01-27)
+
+
+### Bug Fixes
+
+* Better alignment for the display status ([a4b9c3b](https://github.com/cozy/cozy-libs/commit/a4b9c3b))
+* Since we have a bug in the Stack, don't manipulate trashed files ([9e04ffc](https://github.com/cozy/cozy-libs/commit/9e04ffc))
+
+
+### Features
+
+* Add a onFileDelete method to refresh the Provider ([98e921e](https://github.com/cozy/cozy-libs/commit/98e921e))
+* Add a tooltip on the LinkIcon and set the right color ([8a6d998](https://github.com/cozy/cozy-libs/commit/8a6d998))
+
+
+
+
+
 ## [1.6.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.6.1...cozy-sharing@1.6.2) (2020-01-21)
 
 **Note:** Version bump only for package cozy-sharing
