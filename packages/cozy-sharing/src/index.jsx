@@ -115,10 +115,10 @@ class SharingProvider extends Component {
     const sharedDocIds = getSharedDocIdsBySharings(sharings)
     const resp = await client.collection(doctype).all({ keys: sharedDocIds })
     const folderPaths = resp.data
-      .filter(f => f.type === 'directory')
+      .filter(f => f.type === 'directory' && !f.trashed)
       .map(f => f.path)
     const filePaths = await this.getFilesPaths(
-      resp.data.filter(f => f.type !== 'directory')
+      resp.data.filter(f => f.type !== 'directory' && !f.trashed)
     )
     this.dispatch(receivePaths([...folderPaths, ...filePaths]))
   }
