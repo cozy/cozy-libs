@@ -82,7 +82,8 @@ class SharingProvider extends Component {
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
       revokeSharingLink: this.revokeSharingLink,
-      hasLoadedAtLeastOnePage: false
+      hasLoadedAtLeastOnePage: false,
+      revokeAllRecipients: this.revokeAllRecipients,
       refresh: this.fetchAllSharings
     }
   }
@@ -157,6 +158,24 @@ class SharingProvider extends Component {
       .collection('io.cozy.sharings')
       .addRecipients(sharing, recipients, sharingType)
     this.dispatch(updateSharing(resp.data))
+  }
+
+  revokeAllRecipients = async document => {
+    const recipients = getRecipients(this.state, document.id)
+    const sharing = getDocumentSharing(this.state, document.id)
+
+    await this.props.client
+      .collection('io.cozy.sharings')
+      .revokeAllRecipients(sharing)
+    recipients.map(async (recipient, recipientIndex) => {
+      this.dispatch(
+        revokeRecipient(
+          sharing,
+          recipientIndex,
+          document.path || (await this.getFilesPaths([document]))
+        )
+      )
+    })
   }
 
   revoke = async (document, sharingId, recipientIndex) => {
