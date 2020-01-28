@@ -1,0 +1,18 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`KonnectorAccounts should show a spinner 1`] = `
+<React.Fragment>
+  <KonnectorModalHeader
+    konnector={Object {}}
+  />
+  <ModalContent>
+    <div
+      className="u-pv-2 u-ta-center"
+    >
+      <withI18n(Spinner)
+        size="xxlarge"
+      />
+    </div>
+  </ModalContent>
+</React.Fragment>
+`;

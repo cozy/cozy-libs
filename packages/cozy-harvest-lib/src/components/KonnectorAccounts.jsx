@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withMutations } from 'cozy-client'
+import { withClient, withMutations } from 'cozy-client'
 import { withRouter } from 'react-router'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
@@ -8,34 +8,72 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import get from 'lodash/get'
+import CozyRealtime from 'cozy-realtime'
 
 import accountMutations from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
 
-class KonnectorAccounts extends React.Component {
-  state = {
-    fetchingAccounts: true,
-    error: null,
-    accounts: []
+export class KonnectorAccounts extends React.Component {
+  constructor(props) {
+    super(props)
+    this.realtime = new CozyRealtime({ client: this.props.client })
+    this.state = {
+      fetchingAccounts: true,
+      error: null,
+      accounts: []
+    }
   }
 
   /**
-   * TODO Use queryConnect to fetch the accounts
+   * At the moment we fetch the accounts manually and the triggers are received as props
+   * TODO Use queryConnect to fetch the accounts and the triggers once the home uses queryConnect too
+   * (Using queryConnect here before the home would result in duplicate queries and longer loading times than necessary)
    */
   async componentDidMount() {
     await this.fetchAccounts()
+
+    await this.realtime.subscribe(
+      'updated',
+      'io.cozy.jobs',
+      this.handleTriggerUpdate.bind(this)
+    )
   }
 
   componentDidUpdate(prevProps) {
     // After leaving the new account screen, we need to refetch accounts in case a new one was created
-    // TODO: We should use an AccountsWatcher (realtime)
     if (
       this.props.location.pathname !== prevProps.location.pathname &&
       /\/new\/?$/.test(prevProps.location.pathname)
     ) {
       this.fetchAccounts()
+    }
+  }
+
+  async handleTriggerUpdate(job) {
+    const { fetchTrigger } = this.props
+    const { accounts } = this.state
+    const triggerId = job.trigger_id
+
+    const matchingAccount = accounts.find(
+      ({ trigger }) => trigger && trigger._id === triggerId
+    )
+
+    if (matchingAccount) {
+      const trigger = await fetchTrigger(triggerId)
+      const updatedAccountIndex = accounts.indexOf(matchingAccount)
+
+      this.setState({
+        accounts: [
+          ...accounts.slice(0, updatedAccountIndex),
+          {
+            account: matchingAccount.account,
+            trigger
+          },
+          ...accounts.slice(updatedAccountIndex + 1)
+        ]
+      })
     }
   }
 
@@ -101,9 +139,11 @@ class KonnectorAccounts extends React.Component {
 KonnectorAccounts.propTypes = {
   konnector: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
+  client: PropTypes.object.isRequired,
   findAccount: PropTypes.func.isRequired,
+  fetchTrigger: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
 export default withMutations(accountMutations, triggersMutations)(
-  withRouter(translate()(KonnectorAccounts))
+  withRouter(translate()(withClient(KonnectorAccounts)))
 )
