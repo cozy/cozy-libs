@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.17.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.2...cozy-harvest-lib@1.17.3) (2020-01-28)
+
+
+### Bug Fixes
+
+* Add arial label to modal ([50fb617](https://github.com/cozy/cozy-libs/commit/50fb617))
+* Handle trigger changes ([9f1d5ae](https://github.com/cozy/cozy-libs/commit/9f1d5ae))
+
+
+
+
+
 ## [1.17.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.1...cozy-harvest-lib@1.17.2) (2020-01-27)
 
 
