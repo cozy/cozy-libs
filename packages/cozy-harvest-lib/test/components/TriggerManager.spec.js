@@ -220,13 +220,23 @@ const propsWithAccount = {
   trigger: fixtures.existingTrigger
 }
 
-const setup = ({ konnector = fixtures.konnector, account, trigger } = {}) => {
+const defaultOnError = error => {
+  throw error
+}
+
+const setup = ({
+  konnector = fixtures.konnector,
+  account,
+  trigger,
+  onError = defaultOnError
+} = {}) => {
   const root = shallow(
     <TriggerManager
       {...props}
       konnector={konnector}
       trigger={trigger}
       account={account}
+      onError={onError}
     />
   )
   return { root }
@@ -370,16 +380,18 @@ describe('TriggerManager', () => {
   })
 
   describe('handleSubmit', () => {
-    it('should render as submitting when there is no account', () => {
+    it('should render as submitting when there is no account', async () => {
       const wrapper = shallowWithoutAccount()
-      wrapper.instance().handleSubmit()
+      const submitPromise = wrapper.instance().handleSubmit()
       expect(wrapper.state().status).toEqual('RUNNING') // TODO: test disabled prop of submit button instead of the internal state
+      await submitPromise
     })
 
-    it('should render as submitting when there is an account', () => {
+    it('should render as submitting when there is an account', async () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleSubmit()
+      const submitPromise = wrapper.instance().handleSubmit()
       expect(wrapper.state().status).toEqual('RUNNING')
+      await submitPromise
     })
 
     it('should call saveAccount without account', async () => {
