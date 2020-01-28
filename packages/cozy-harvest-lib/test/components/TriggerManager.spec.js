@@ -380,6 +380,21 @@ describe('TriggerManager', () => {
   })
 
   describe('handleSubmit', () => {
+    beforeEach(() => {
+      jest.spyOn(console, 'log').mockImplementation(() => {})
+      jest.spyOn(console, 'info').mockImplementation(() => {})
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+      // eslint-disable-next-line no-console
+      console.log.mockRestore()
+      // eslint-disable-next-line no-console
+      console.info.mockRestore()
+      // eslint-disable-next-line no-console
+      console.warn.mockRestore()
+    })
+
     it('should render as submitting when there is no account', async () => {
       const wrapper = shallowWithoutAccount()
       const submitPromise = wrapper.instance().handleSubmit()
