@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.7.0...cozy-sharing@1.8.0) (2020-01-28)
+
+
+### Features
+
+* Add RefreshableSharings to expose a way to refresh sharings ([6afd92f](https://github.com/cozy/cozy-libs/commit/6afd92f))
+
+
+
+
+
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.6.2...cozy-sharing@1.7.0) (2020-01-27)
 
 
