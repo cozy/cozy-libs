@@ -14,7 +14,12 @@ import { MountPointProvider } from './MountPointContext'
 const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
   return (
     <MountPointProvider baseRoute={konnectorRoot}>
-      <Modal dismissAction={onDismiss} mobileFullscreen size="small">
+      <Modal
+        dismissAction={onDismiss}
+        mobileFullscreen
+        size="small"
+        aria-label={konnector.name}
+      >
         <KonnectorAccounts konnector={konnector}>
           {accounts => (
             <Switch>
