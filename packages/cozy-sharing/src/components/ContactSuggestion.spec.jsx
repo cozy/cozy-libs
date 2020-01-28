@@ -85,7 +85,7 @@ describe('ContactSuggestion component', () => {
       _type: 'io.cozy.contacts',
       relationships: {
         groups: {
-          data: [{ _id: '610718e6-2d7a' }]
+          data: [{ _id: '610718e6-2d7a', _type: 'io.cozy.contacts.groups' }]
         }
       }
     }
@@ -121,7 +121,7 @@ describe('ContactSuggestion component', () => {
       _type: 'io.cozy.contacts',
       relationships: {
         groups: {
-          data: [{ _id: '610718e6-2d7a' }]
+          data: [{ _id: '610718e6-2d7a', _type: 'io.cozy.contacts.groups' }]
         }
       }
     }
