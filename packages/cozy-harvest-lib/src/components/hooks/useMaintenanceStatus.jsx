@@ -35,7 +35,7 @@ const useMaintenanceStatus = (client, konnector) => {
       }
     }
     fetchData()
-  }, [slug, source])
+  }, [registry, slug, source])
 
   return {
     data: {
