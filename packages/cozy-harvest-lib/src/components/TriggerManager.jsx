@@ -140,6 +140,26 @@ const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
 }
 
 /**
+ * If the vault is not going to be unlocked, we go directly to accountForm
+ * step
+ * If we need the vault unlocker, the `null` step represents
+ *
+ * - either vault locked
+ * - ciphers being loaded
+ *
+ * TODO Find a way not to have to check konnectorPolicy here and again through
+ * KonnectorVaultUnlocker
+ */
+const getInitialStep = ({ account, konnector }) => {
+  const konnectorPolicy = findKonnectorPolicy(konnector)
+  if (konnectorPolicy.saveInVault) {
+    return account ? 'accountForm' : null
+  } else {
+    return 'accountForm'
+  }
+}
+
+/**
  * Displays the login form and on submission will create the account, triggers and folders.
  * After that it calls TriggerLauncher to run the konnector.
  *
@@ -148,7 +168,7 @@ const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
 export class DumbTriggerManager extends Component {
   constructor(props) {
     super(props)
-    const { account } = props
+    const { account, konnector } = props
 
     this.handleNewAccount = this.handleNewAccount.bind(this)
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
@@ -162,7 +182,7 @@ export class DumbTriggerManager extends Component {
       account,
       error: null,
       status: IDLE,
-      step: account ? 'accountForm' : null,
+      step: getInitialStep(props),
       selectedCipher: undefined,
       showBackButton: false,
       ciphers: []
