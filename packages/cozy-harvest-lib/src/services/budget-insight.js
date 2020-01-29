@@ -8,8 +8,7 @@ import { waitForRealtimeResult } from './jobUtils'
 import {
   createBIConnection,
   updateBIConnection,
-  getBIConfig,
-  getBIModeFromCozyURL,
+  getBIConfigForCozyURL,
   isBudgetInsightConnector
 } from './biUtils'
 import assert from '../assert'
@@ -68,8 +67,7 @@ export const createOrUpdateBIConnection = async ({
   konnector
 }) => {
   try {
-    const mode = getBIModeFromCozyURL(client.stackClient.uri)
-    const config = getBIConfig(mode)
+    const config = getBIConfigForCozyURL(client.stackClient.uri)
     const connId = getBIConnectionIdFromAccount(account)
     const tempToken = await createTemporaryToken({
       account,
