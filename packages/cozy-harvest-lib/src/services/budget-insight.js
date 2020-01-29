@@ -123,6 +123,7 @@ export const onBIAccountCreation = async ({
 }
 
 export const konnectorPolicy = {
+  name: 'budget-insight',
   match: isBudgetInsightConnector,
   saveInVault: false,
   onAccountCreation: onBIAccountCreation

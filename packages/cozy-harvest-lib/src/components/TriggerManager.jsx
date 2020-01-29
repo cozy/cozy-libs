@@ -37,7 +37,8 @@ const defaultKonnectorPolicy = {
   accountContainsAuth: true,
   saveInVault: true,
   onAccountCreation: null,
-  match: () => true
+  match: () => true,
+  name: 'default'
 }
 
 const policies = [
