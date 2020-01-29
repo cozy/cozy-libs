@@ -284,6 +284,11 @@ const shallowWithAccount = options => {
   return root
 }
 
+const isHigherComponentOfDisplayName = displayName => node => {
+  const type = node.type()
+  return type.displayName && type.displayName.includes(`(${displayName})`)
+}
+
 describe('TriggerManager', () => {
   beforeEach(() => {
     createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
@@ -533,19 +538,23 @@ describe('TriggerManager', () => {
       )
     })
 
-    it('should merge information returned by onBIAccountCreation into account that will be saved', async () => {
+    it('should use custom konnector policy', async () => {
       saveAccountMock.mockReset().mockImplementation((konnector, acc) => ({
         ...acc,
         _id: fixtures.updatedAccount._id
       }))
-      // Information returned
-      biKonnectorPolicy.onAccountCreation.mockReset().mockReturnValue({
+
+      const onAccountCreationResult = {
         auth: {
           bi: {
             connId: 7
           }
         }
-      })
+      }
+
+      biKonnectorPolicy.onAccountCreation
+        .mockReset()
+        .mockReturnValue(onAccountCreationResult)
 
       const account = {
         ...fixtures.existingAccount,
@@ -563,6 +572,11 @@ describe('TriggerManager', () => {
         account,
         konnector
       })
+
+      expect(
+        root.findWhere(isHigherComponentOfDisplayName('AccountForm')).length
+      ).toBe(1)
+      expect(root.find('VaultUnlocker').length).toBe(0)
       const instance = root.instance()
       jest
         .spyOn(instance, 'handleNewAccount')
@@ -572,24 +586,11 @@ describe('TriggerManager', () => {
         fixtures.bankingKonnectorAccountAttributes.auth
       )
 
-      expect(saveAccountMock).not.toHaveBeenCalledWith(
-        expect.objectContaining({
-          auth: {
-            secret: 'bar'
-          }
-        })
-      )
       expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
       expect(instance.handleNewAccount).toHaveBeenCalledTimes(1)
       expect(saveAccountMock).toHaveBeenCalledWith(
         konnector,
-        expect.objectContaining({
-          auth: {
-            bi: {
-              connId: 7
-            }
-          }
-        })
+        onAccountCreationResult
       )
     })
   })
