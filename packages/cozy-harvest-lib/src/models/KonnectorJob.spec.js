@@ -11,6 +11,9 @@ describe('watchKonnectorJob', () => {
     }
 
     const client = {
+      stackClient: {
+        uri: 'http://cozy.tools:8080'
+      },
       on: jest.fn()
     }
     const result = await watchKonnectorJob(client, job)

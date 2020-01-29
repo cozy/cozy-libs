@@ -104,7 +104,7 @@ export const build = (konnector, authData) => {
  */
 export const mergeAuth = (account, authData) => ({
   ...account,
-  auth: merge(account.auth, authData)
+  auth: merge({}, account.auth, authData)
 })
 
 /**

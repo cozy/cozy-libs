@@ -13,6 +13,12 @@ import { CipherType, UriMatchType } from 'cozy-keys-lib'
  * @returns {string} the cipher ID
  */
 export const createCipher = async (vaultClient, createOptions) => {
+  if (vaultClient.isLocked()) {
+    // eslint-disable-next-line no-console
+    console.warn('Impossible to create cipher since vault is locked')
+    return null
+  }
+
   const { konnector, login, password } = createOptions
   const konnectorURI = get(konnector, 'vendor_link')
   const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
@@ -80,11 +86,11 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
 export const createOrUpdateCipher = async (
   vaultClient,
   cipherId,
-  { userData, account, konnector }
+  { userCredentials, account, konnector }
 ) => {
   const identifierProperty = manifest.getIdentifier(konnector.fields)
-  const login = userData[identifierProperty]
-  const password = userData.password
+  const login = userCredentials[identifierProperty]
+  const password = userCredentials.password
 
   let cipher
   if (!cipherId) {

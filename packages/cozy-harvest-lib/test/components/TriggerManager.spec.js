@@ -5,6 +5,15 @@ import { render } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
+import { konnectorPolicy as biKonnectorPolicy } from '../../src/services/budget-insight'
+
+jest.mock('cozy-flags', () => name => {
+  if (name === 'bi-konnector-policy') {
+    return true
+  } else {
+    return false
+  }
+})
 
 jest.mock('cozy-keys-lib')
 
@@ -23,6 +32,18 @@ jest.mock('cozy-doctypes', () => {
   return {
     ...doctypes,
     CozyFolder
+  }
+})
+
+jest.mock('../../src/services/budget-insight', () => {
+  const originalBudgetInsight = jest.requireActual(
+    '../../src/services/budget-insight'
+  )
+  return {
+    konnectorPolicy: {
+      ...originalBudgetInsight.konnectorPolicy,
+      onAccountCreation: jest.fn()
+    }
   }
 })
 
@@ -71,7 +92,7 @@ const fixtures = {
     type: '@cron',
     worker: 'konnector',
     message: {
-      account: 'a87f9a8bd3884479a48811e7b7deec75',
+      account: 'created-account-id',
       konnector: 'konnectest'
     }
   },
@@ -84,7 +105,7 @@ const fixtures = {
     identifier: 'username'
   },
   createdAccount: {
-    _id: 'a87f9a8bd3884479a48811e7b7deec75',
+    _id: 'created-account-id',
     account_type: 'konnectest',
     auth: {
       username: 'foo',
@@ -93,7 +114,7 @@ const fixtures = {
     identifier: 'username'
   },
   updatedAccount: {
-    _id: 'a87f9a8bd3884479a48811e7b7deec75',
+    _id: 'updated-account-id',
     account_type: 'konnectest',
     auth: {
       username: 'foo',
@@ -101,7 +122,7 @@ const fixtures = {
     }
   },
   existingAccount: {
-    _id: '61c683295560485db0f34b859197c581',
+    _id: 'existing-account-id',
     account_type: 'konnectest',
     auth: {
       username: 'foo',
@@ -110,34 +131,41 @@ const fixtures = {
     identifier: 'username'
   },
   existingTrigger: {
-    id: '4b67e0bedd464704a6a995f5c2070ccf',
+    id: 'existing-trigger-id',
     _type: 'io.cozy.triggers',
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
       worker: 'konnector',
       message: {
-        account: '61c683295560485db0f34b859197c581',
+        account: 'existing-account-id',
         konnector: 'konnectest'
       }
     }
   },
+  bankingKonnectorAccountAttributes: {
+    auth: {
+      identifier: '80564789',
+      secret: '13337'
+    },
+    identifier: '80564789'
+  },
   createdTrigger: {
-    id: '669e9a7cc3064a97bc0aa20feef71cb2',
+    id: 'created-trigger-id',
     _type: 'io.cozy.triggers',
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
       worker: 'konnector',
       message: {
-        account: 'a87f9a8bd3884479a48811e7b7deec75',
+        account: 'updated-account-id',
         konnector: 'konnectest'
       }
     }
   },
   launchedJob: {
     type: 'io.cozy.jobs',
-    id: 'ac09e6f4473f4b6fbb83c9d2f532504e',
+    id: 'lauched-job-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'running',
@@ -145,12 +173,12 @@ const fixtures = {
     started_at: '2016-09-19T12:35:08Z',
     error: '',
     links: {
-      self: '/jobs/ac09e6f4473f4b6fbb83c9d2f532504e'
+      self: '/jobs/lauched-job-id'
     }
   },
   runningJob: {
     type: 'io.cozy.jobs',
-    id: 'ac09e6f4473f4b6fbb83c9d2f532504e',
+    id: 'running-job-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'running',
@@ -158,12 +186,12 @@ const fixtures = {
     started_at: '2016-09-19T12:35:08Z',
     error: '',
     links: {
-      self: '/jobs/ac09e6f4473f4b6fbb83c9d2f532504e'
+      self: '/jobs/running-job-id'
     }
   },
   doneJob: {
     type: 'io.cozy.jobs',
-    id: 'ac09e6f4473f4b6fbb83c9d2f532504e',
+    id: 'done-job-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'done',
@@ -171,7 +199,7 @@ const fixtures = {
     started_at: '2016-09-19T12:35:08Z',
     error: '',
     links: {
-      self: '/jobs/ac09e6f4473f4b6fbb83c9d2f532504e'
+      self: '/jobs/done-job-id'
     }
   }
 }
@@ -220,13 +248,46 @@ const propsWithAccount = {
   trigger: fixtures.existingTrigger
 }
 
-const shallowWithoutAccount = konnector =>
-  shallow(
-    <TriggerManager {...props} konnector={konnector || fixtures.konnector} />
-  )
+const defaultOnError = error => {
+  throw error
+}
 
-const shallowWithAccount = () =>
-  shallow(<TriggerManager {...propsWithAccount} />)
+const setup = ({
+  konnector = fixtures.konnector,
+  account,
+  trigger,
+  onError = defaultOnError
+} = {}) => {
+  const root = shallow(
+    <TriggerManager
+      {...props}
+      konnector={konnector}
+      trigger={trigger}
+      account={account}
+      onError={onError}
+    />
+  )
+  return { root }
+}
+
+const shallowWithoutAccount = konnector => {
+  const { root } = setup({ konnector })
+  return root
+}
+
+const shallowWithAccount = options => {
+  const { root } = setup({
+    account: fixtures.existingAccount,
+    trigger: fixtures.existingTrigger,
+    ...options
+  })
+  return root
+}
+
+const isHigherComponentOfDisplayName = displayName => node => {
+  const type = node.type()
+  return type.displayName && type.displayName.includes(`(${displayName})`)
+}
 
 describe('TriggerManager', () => {
   beforeEach(() => {
@@ -312,7 +373,7 @@ describe('TriggerManager', () => {
     })
 
     it('should render error', async () => {
-      const wrapper = shallowWithAccount()
+      const wrapper = shallowWithAccount({ onError: null })
       await wrapper.instance().handleError(new Error('Test error'))
       expect(wrapper.getElement()).toMatchSnapshot()
     })
@@ -352,16 +413,33 @@ describe('TriggerManager', () => {
   })
 
   describe('handleSubmit', () => {
-    it('should render as submitting when there is no account', () => {
-      const wrapper = shallowWithoutAccount()
-      wrapper.instance().handleSubmit()
-      expect(wrapper.state().status).toEqual('RUNNING') // TODO: test disabled prop of submit button instead of the internal state
+    beforeEach(() => {
+      jest.spyOn(console, 'log').mockImplementation(() => {})
+      jest.spyOn(console, 'info').mockImplementation(() => {})
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
     })
 
-    it('should render as submitting when there is an account', () => {
+    afterEach(() => {
+      // eslint-disable-next-line no-console
+      console.log.mockRestore()
+      // eslint-disable-next-line no-console
+      console.info.mockRestore()
+      // eslint-disable-next-line no-console
+      console.warn.mockRestore()
+    })
+
+    it('should render as submitting when there is no account', async () => {
+      const wrapper = shallowWithoutAccount()
+      const submitPromise = wrapper.instance().handleSubmit()
+      expect(wrapper.state().status).toEqual('RUNNING') // TODO: test disabled prop of submit button instead of the internal state
+      await submitPromise
+    })
+
+    it('should render as submitting when there is an account', async () => {
       const wrapper = shallowWithAccount()
-      wrapper.instance().handleSubmit()
+      const submitPromise = wrapper.instance().handleSubmit()
       expect(wrapper.state().status).toEqual('RUNNING')
+      await submitPromise
     })
 
     it('should call saveAccount without account', async () => {
@@ -383,7 +461,7 @@ describe('TriggerManager', () => {
         }
       })
 
-      await wrapper.instance().handleSubmit({ login: 'test' })
+      await wrapper.instance().handleSubmit({ username: 'foo' })
       expect(saveAccountMock).toHaveBeenCalledWith(
         fixtures.konnector,
         expect.objectContaining(fixtures.existingAccount)
@@ -457,6 +535,62 @@ describe('TriggerManager', () => {
 
       expect(instance.handleNewAccount).toHaveBeenCalledWith(
         fixtures.createdAccount
+      )
+    })
+
+    it('should use custom konnector policy', async () => {
+      saveAccountMock.mockReset().mockImplementation((konnector, acc) => ({
+        ...acc,
+        _id: fixtures.updatedAccount._id
+      }))
+
+      const onAccountCreationResult = {
+        auth: {
+          bi: {
+            connId: 7
+          }
+        }
+      }
+
+      biKonnectorPolicy.onAccountCreation
+        .mockReset()
+        .mockReturnValue(onAccountCreationResult)
+
+      const account = {
+        ...fixtures.existingAccount,
+        ...fixtures.bankingKonnectorAccountAttributes
+      }
+
+      const konnector = {
+        ...fixtures.konnector,
+        partnership: {
+          domain: 'budget-insight.com'
+        }
+      }
+
+      const { root } = setup({
+        account,
+        konnector
+      })
+
+      expect(
+        root.findWhere(isHigherComponentOfDisplayName('AccountForm')).length
+      ).toBe(1)
+      expect(root.find('VaultUnlocker').length).toBe(0)
+      const instance = root.instance()
+      jest
+        .spyOn(instance, 'handleNewAccount')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await instance.handleSubmit(
+        fixtures.bankingKonnectorAccountAttributes.auth
+      )
+
+      expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
+      expect(instance.handleNewAccount).toHaveBeenCalledTimes(1)
+      expect(saveAccountMock).toHaveBeenCalledWith(
+        konnector,
+        onAccountCreationResult
       )
     })
   })

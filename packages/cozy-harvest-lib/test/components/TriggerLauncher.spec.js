@@ -3,7 +3,12 @@ import { shallow } from 'enzyme'
 import { TriggerLauncher } from 'components/TriggerLauncher'
 import KonnectorJob from 'models/KonnectorJob'
 
-const client = { on: jest.fn() }
+const client = {
+  on: jest.fn(),
+  stackClient: {
+    uri: 'https://cozy.tools:8080'
+  }
+}
 const trigger = {
   _id: '65c347d1ef144288a64105702cc36e59'
 }

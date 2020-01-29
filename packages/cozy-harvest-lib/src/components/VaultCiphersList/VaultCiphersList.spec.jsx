@@ -2,6 +2,8 @@ import { DumbVaultCiphersList } from './VaultCiphersList'
 import { render, waitForElement, fireEvent } from '@testing-library/react'
 import React from 'react'
 
+jest.mock('cozy-ui/transpiled/react/AppIcon', () => () => null)
+
 describe('when there is some ciphers', () => {
   it('should handler cipher select', async () => {
     const onSelect = jest.fn()
