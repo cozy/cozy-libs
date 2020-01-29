@@ -35,7 +35,7 @@ const SharingExample = props => {
   const file = props.file
   const docId = file.id
   const [showModal, setShowModal] = useState(false)
-  const onClick = useCallback(() => setShowModal(!showModal), [])
+  const onClick = useCallback(() => setShowModal(!showModal), [showModal])
   const onClose = useCallback(() => setShowModal(false), [])
   return (
     <div>
