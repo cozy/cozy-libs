@@ -1,25 +1,12 @@
-import { getBIModeFromCurrentLocation, updateBIConnection } from './biUtils'
+import { getBIModeFromCozyURL, updateBIConnection } from './biUtils'
 
 describe('getBIModeFromCurrentLocation', () => {
   it('should correctly work', () => {
-    const makeWindowWithLocation = host => ({
-      location: {
-        host
-      }
-    })
-    expect(getBIModeFromCurrentLocation(makeWindowWithLocation())).toBe('dev')
-    expect(
-      getBIModeFromCurrentLocation(makeWindowWithLocation('cozy.tools:8080'))
-    ).toBe('dev')
-    expect(
-      getBIModeFromCurrentLocation(makeWindowWithLocation('test.cozy.works'))
-    ).toBe('dev')
-    expect(
-      getBIModeFromCurrentLocation(makeWindowWithLocation('test.cozy.rocks'))
-    ).toBe('prod')
-    expect(
-      getBIModeFromCurrentLocation(makeWindowWithLocation('test.mycozy.cloud'))
-    ).toBe('prod')
+    expect(getBIModeFromCozyURL()).toBe('dev')
+    expect(getBIModeFromCozyURL('http://cozy.tools:8080')).toBe('dev')
+    expect(getBIModeFromCozyURL('https://test.cozy.works')).toBe('dev')
+    expect(getBIModeFromCozyURL('https://test.cozy.rocks')).toBe('prod')
+    expect(getBIModeFromCozyURL('https://test.mycozy.cloud')).toBe('prod')
   })
 })
 

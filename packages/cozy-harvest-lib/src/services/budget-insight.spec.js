@@ -17,7 +17,7 @@ jest.mock('./biUtils', () => {
     createBIConnection: jest.fn(),
     updateBIConnection: jest.fn(),
     getBIConfig: originalBIUtils.getBIConfig,
-    getBIModeFromCurrentLocation: jest.fn().mockReturnValue('prod'),
+    getBIModeFromCozyURL: originalBIUtils.getBIModeFromCozyURL,
     isBudgetInsightConnector: originalBIUtils.isBudgetInsightConnector
   }
 })
@@ -50,7 +50,9 @@ const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 
 describe('createOrUpdateBIConnection', () => {
   const setup = () => {
-    const client = new CozyClient({})
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
     client.stackClient.jobs.create = jest.fn().mockReturnValue({
       data: {
         attributes: {

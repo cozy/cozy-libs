@@ -15,24 +15,24 @@ import biPublicKeyProd from './bi-public-key-prod.json'
 const biURLProd = 'https://cozy.biapi.pro/2.0'
 const biURLDev = 'https://cozytest-sandbox.biapi.pro/2.0'
 
-export const getBIModeFromCurrentLocation = (wdw = window) => {
-  if (!wdw || !wdw.location || !wdw.location.host) {
+export const getBIModeFromCozyURL = rawCozyURL => {
+  if (!rawCozyURL) {
     return 'dev'
-  } else {
-    const domain = wdw.location.host
-      .split('.')
-      .slice(-2)
-      .join('.')
-    switch (domain) {
-      case 'cozy.rocks':
-      case 'mycozy.cloud':
-        return 'prod'
-      case 'cozy.works':
-      case 'cozy.dev':
-        return 'dev'
-      default:
-        return 'dev'
-    }
+  }
+  const cozyURL = new URL(rawCozyURL)
+  const domain = cozyURL.host
+    .split('.')
+    .slice(-2)
+    .join('.')
+  switch (domain) {
+    case 'cozy.rocks':
+    case 'mycozy.cloud':
+      return 'prod'
+    case 'cozy.works':
+    case 'cozy.dev':
+      return 'dev'
+    default:
+      return 'dev'
   }
 }
 

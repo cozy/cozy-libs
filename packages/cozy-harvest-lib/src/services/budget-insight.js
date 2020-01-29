@@ -9,7 +9,7 @@ import {
   createBIConnection,
   updateBIConnection,
   getBIConfig,
-  getBIModeFromCurrentLocation,
+  getBIModeFromCozyURL,
   isBudgetInsightConnector
 } from './biUtils'
 import assert from '../assert'
@@ -68,7 +68,7 @@ export const createOrUpdateBIConnection = async ({
   konnector
 }) => {
   try {
-    const mode = getBIModeFromCurrentLocation()
+    const mode = getBIModeFromCozyURL(client.stackClient.uri)
     const config = getBIConfig(mode)
     const connId = getBIConnectionIdFromAccount(account)
     const tempToken = await createTemporaryToken({
