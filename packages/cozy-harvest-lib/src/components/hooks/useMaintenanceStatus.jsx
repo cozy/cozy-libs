@@ -10,11 +10,11 @@ const useMaintenanceStatus = (client, konnector) => {
   const [fetchStatus, setFetchStatus] = useState('idle')
   const [lastError, setLastError] = useState(null)
 
-  const registry = new Registry({
-    client
-  })
-
   useEffect(() => {
+    const registry = new Registry({
+      client
+    })
+
     const fetchData = async () => {
       if (/^registry:\/\//i.test(source) === false) {
         // Only konnectors from the registry have a maintenance status, manually installed once are always considered OK
@@ -35,7 +35,7 @@ const useMaintenanceStatus = (client, konnector) => {
       }
     }
     fetchData()
-  }, [registry, slug, source])
+  }, [client, slug, source])
 
   return {
     data: {
