@@ -523,11 +523,18 @@ describe('TriggerManager', () => {
       )
     })
 
-    it('should use custom konnector policy', async () => {
-      saveAccountMock.mockReset().mockImplementation((konnector, acc) => ({
-        ...acc,
-        _id: fixtures.updatedAccount._id
-      }))
+    describe('custom konnector policy', () => {
+      const konnector = {
+        ...fixtures.konnector,
+        partnership: {
+          domain: 'budget-insight.com'
+        }
+      }
+
+      const account = {
+        ...fixtures.existingAccount,
+        ...fixtures.bankingKonnectorAccountAttributes
+      }
 
       const onAccountCreationResult = {
         auth: {
@@ -537,46 +544,63 @@ describe('TriggerManager', () => {
         }
       }
 
-      biKonnectorPolicy.onAccountCreation
-        .mockReset()
-        .mockReturnValue(onAccountCreationResult)
+      it('should display the account form (when no account)', () => {
+        const { root } = setup({
+          account: null,
+          konnector
+        })
 
-      const account = {
-        ...fixtures.existingAccount,
-        ...fixtures.bankingKonnectorAccountAttributes
-      }
+        expect(
+          root.findWhere(isHigherComponentOfDisplayName('AccountForm')).length
+        ).toBe(1)
 
-      const konnector = {
-        ...fixtures.konnector,
-        partnership: {
-          domain: 'budget-insight.com'
-        }
-      }
-
-      const { root } = setup({
-        account,
-        konnector
+        expect(root.find('VaultUnlocker').length).toBe(0)
       })
 
-      expect(
-        root.findWhere(isHigherComponentOfDisplayName('AccountForm')).length
-      ).toBe(1)
-      expect(root.find('VaultUnlocker').length).toBe(0)
-      const instance = root.instance()
-      jest
-        .spyOn(instance, 'handleNewAccount')
-        .mockResolvedValue(fixtures.launchedJob)
+      it('should display the account form (when account)', () => {
+        const { root } = setup({
+          account: null,
+          konnector
+        })
 
-      await instance.handleSubmit(
-        fixtures.bankingKonnectorAccountAttributes.auth
-      )
+        expect(
+          root.findWhere(isHigherComponentOfDisplayName('AccountForm')).length
+        ).toBe(1)
 
-      expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
-      expect(instance.handleNewAccount).toHaveBeenCalledTimes(1)
-      expect(saveAccountMock).toHaveBeenCalledWith(
-        konnector,
-        onAccountCreationResult
-      )
+        expect(root.find('VaultUnlocker').length).toBe(0)
+      })
+
+      it('should use custom konnector policy', async () => {
+        saveAccountMock.mockReset().mockImplementation((konnector, acc) => ({
+          ...acc,
+          _id: fixtures.updatedAccount._id
+        }))
+
+        biKonnectorPolicy.onAccountCreation
+          .mockReset()
+          .mockReturnValue(onAccountCreationResult)
+
+        const { root } = setup({
+          account,
+          konnector
+        })
+
+        const instance = root.instance()
+        jest
+          .spyOn(instance, 'handleNewAccount')
+          .mockResolvedValue(fixtures.launchedJob)
+
+        await instance.handleSubmit(
+          fixtures.bankingKonnectorAccountAttributes.auth
+        )
+
+        expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
+        expect(instance.handleNewAccount).toHaveBeenCalledTimes(1)
+        expect(saveAccountMock).toHaveBeenCalledWith(
+          konnector,
+          onAccountCreationResult
+        )
+      })
     })
   })
 
