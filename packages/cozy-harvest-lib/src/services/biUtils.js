@@ -68,6 +68,7 @@ const biRequest = async (method, path, config, rawForm, bearer) => {
     })
     return await resp.json()
   } catch (originalError) {
+    // eslint-disable-next-line no-console
     console.error(originalError)
     const err = new Error('biRequest failed')
     err.original = originalError
