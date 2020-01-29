@@ -29,6 +29,7 @@ import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import clone from 'lodash/clone'
 import flag from 'cozy-flags'
+import logger from '../logger'
 
 import { createOrUpdateCipher } from '../models/cipherUtils'
 import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
@@ -46,13 +47,18 @@ const policies = [
   defaultKonnectorPolicy
 ].filter(Boolean)
 
+logger.info('Available konnector policies', policies)
+
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
-const findKonnectorPolicy = konnector =>
-  policies.find(policy => policy.match(konnector))
+const findKonnectorPolicy = konnector => {
+  const policy = policies.find(policy => policy.match(konnector))
+  logger.info(`Using ${policy.name} konnector policy for ${konnector.slug}`)
+  return policy
+}
 
 /**
  * Creates or updates an io.cozy.accounts
@@ -109,7 +115,7 @@ const createOrUpdateAccount = async ({
     )
   } else {
     // eslint-disable-next-line no-console
-    console.warn(
+    logger.warn(
       'No cipher passed when creating/updating account, account will not be linked to cipher'
     )
   }
@@ -126,6 +132,9 @@ const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
   if (konnectorPolicy.saveInVault) {
     return <VaultUnlocker {...props}>{children}</VaultUnlocker>
   } else {
+    logger.info(
+      'Not rendering VaultUnlocker since konnectorPolicy.saveInVault = false'
+    )
     return <>{children}</>
   }
 }
@@ -270,6 +279,8 @@ export class DumbTriggerManager extends Component {
 
     try {
       let cipher
+
+      logger.log('konnector policy', konnectorPolicy)
       if (konnectorPolicy.saveInVault) {
         const cipherId = this.getSelectedCipherId()
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
@@ -279,7 +290,7 @@ export class DumbTriggerManager extends Component {
         })
       } else {
         // eslint-disable-next-line no-console
-        console.info(
+        logger.info(
           'Bypassing cipher creation because of konnector account policy'
         )
       }
@@ -315,6 +326,7 @@ export class DumbTriggerManager extends Component {
    * TODO rename state error to accountError
    */
   handleError(error) {
+    logger.error('TriggerManager handleError', error)
     const { onError } = this.props
     this.setState({ error, state: IDLE })
     if (typeof onError === 'function') onError(error)
@@ -419,11 +431,11 @@ export class DumbTriggerManager extends Component {
       }
     } catch (err) {
       // eslint-disable-next-line no-console
-      console.error(
+      logger.error(
         `Error while getting decrypted ciphers for ${konnector.slug} konnector:`
       )
       // eslint-disable-next-line no-console
-      console.error(err)
+      logger.error(err)
     }
   }
 
