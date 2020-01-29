@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.3...cozy-harvest-lib@1.18.0) (2020-01-29)
+
+
+### Bug Fixes
+
+* Do not change passed account ([6875290](https://github.com/cozy/cozy-libs/commit/6875290))
+* Remove console warnings ([536167a](https://github.com/cozy/cozy-libs/commit/536167a))
+* Stop spinner on error ([981ce18](https://github.com/cozy/cozy-libs/commit/981ce18))
+* Test warning ([ab499fa](https://github.com/cozy/cozy-libs/commit/ab499fa))
+* Use client URI instead of window.location to determine BI mode ([e486bb0](https://github.com/cozy/cozy-libs/commit/e486bb0))
+* Warning in Jest ([c80e6ef](https://github.com/cozy/cozy-libs/commit/c80e6ef))
+
+
+### Features
+
+* Ability to have a konnector policy ([98e1f8b](https://github.com/cozy/cozy-libs/commit/98e1f8b))
+* Budget-Insight custom konnector policy ([6622b3d](https://github.com/cozy/cozy-libs/commit/6622b3d))
+
+
+
+
+
 ## [1.17.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.17.2...cozy-harvest-lib@1.17.3) (2020-01-28)
 
 
