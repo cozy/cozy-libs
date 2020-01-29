@@ -29,14 +29,15 @@
     "@testing-library/react": "^9.3.0",
     "babel-jest": "^24.9.0",
     "babel-preset-cozy-app": "^1.7.0",
+    "cozy-client": "^10.5.0",
     "cozy-doctypes": "1.67.0",
-    "cozy-ui": "27.11.2",
+    "cozy-ui": "^30.3.0",
     "jest": "24.1.0",
     "jest-dom": "^4.0.0",
     "mockdate": "^2.0.5",
     "prop-types": "15.7.2",
-    "react": "16.8.6",
-    "react-dom": "16.8.6",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
     "stylus": "^0.54.7"
   },
   "peerDependencies": {

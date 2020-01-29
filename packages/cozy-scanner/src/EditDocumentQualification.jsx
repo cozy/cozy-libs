@@ -5,9 +5,23 @@ import { withClient } from 'cozy-client'
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
-import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
+//import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
 import DocumentQualification from './DocumentQualification'
 import { getItemById, getThemeByItem } from './DocumentTypeDataHelpers'
+
+//import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
+
+//import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogContentText from '@material-ui/core/DialogContentText'
+import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+//import Divider from '@material-ui/core/Divider'
+import Button from 'cozy-ui/transpiled/react/Button'
+import AppTitle from 'cozy-ui/transpiled/react/AppTitle'
 
 const pushAnalytics = item => {
   const tracker = getTracker()
@@ -37,45 +51,55 @@ class EditDocumentQualification extends Component {
     const theme = item ? getThemeByItem(item) : null
     const categoryLabel = item ? theme.label : null
     return (
-      <ExperimentalModal
-        title={document.name}
-        dismissAction={onClose}
-        primaryText={t('Scan.apply')}
-        primaryAction={async () => {
-          if (isOffline) {
-            Alerter.error(t('Scan.error.offline'))
-          } else {
-            try {
-              const fileCollection = client.collection('io.cozy.files')
-              const updatedFile = await fileCollection.updateMetadataAttribute(
-                document._id,
-                qualification
-              )
-              pushAnalytics(item)
-              if (onDescribed) onDescribed(updatedFile.data)
-              onClose()
-              Alerter.success(t('Scan.successful.qualified_ok'))
-            } catch (error) {
-              Alerter.error(t('Scan.error.generic'))
-            }
-          }
-        }}
-        primaryType={'regular'}
-        secondaryText={t('Scan.cancel')}
-        secondaryAction={() => onClose()}
-        secondaryType={'secondary'}
-        description={
-          <DocumentQualification
-            onDescribed={qualification => {
-              this.setState({ qualification })
-            }}
-            initialSelected={{
-              itemId,
-              categoryLabel
+      <Dialog onClose={onClose}>
+        <DialogCloseButton onClick={onClose} />
+        <DialogTitle disableTypography>
+          <AppTitle>{document.name}</AppTitle>
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            <DocumentQualification
+              onDescribed={qualification => {
+                this.setState({ qualification })
+              }}
+              initialSelected={{
+                itemId,
+                categoryLabel
+              }}
+            />
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button
+            theme="secondary"
+            onClick={() => onClose()}
+            label={t('Scan.cancel')}
+          />
+          <Button
+            theme="primary"
+            label={t('Scan.apply')}
+            onClick={async () => {
+              if (isOffline) {
+                Alerter.error(t('Scan.error.offline'))
+              } else {
+                try {
+                  const fileCollection = client.collection('io.cozy.files')
+                  const updatedFile = await fileCollection.updateMetadataAttribute(
+                    document._id,
+                    qualification
+                  )
+                  pushAnalytics(item)
+                  if (onDescribed) onDescribed(updatedFile.data)
+                  onClose()
+                  Alerter.success(t('Scan.successful.qualified_ok'))
+                } catch (error) {
+                  Alerter.error(t('Scan.error.generic'))
+                }
+              }
             }}
           />
-        }
-      />
+        </DialogActions>
+      </Dialog>
     )
   }
 }

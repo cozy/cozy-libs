@@ -5,6 +5,9 @@ jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
 }))
 import DocumentCategory from './DocumentCategory'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+jest.mock('@material-ui/core/Popper', () => {
+  return ({ children }) => children
+})
 
 describe('DocumentCategory', () => {
   it('should match snapshot if selected and icon', async () => {

@@ -6,7 +6,9 @@ jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
 }))
 import { DocumentQualification } from './DocumentQualification'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-
+jest.mock('@material-ui/core/Popper', () => {
+  return ({ children }) => children
+})
 const MOCKED_DATE = '2019-01-01'
 
 describe('DocumentQualification', () => {

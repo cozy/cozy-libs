@@ -4663,6 +4663,27 @@ cozy-client@^10.4.0:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
+cozy-client@^10.5.0:
+  version "10.5.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-10.5.0.tgz#0dbf05786d9549c266d2f2c20a7448af6d828bb7"
+  integrity sha512-j2z1lj1yxLOK6mNPKnS+DjLibXrABVMsd9+YM9Beh29KW6f5gefNXecrfBcfWGoUOYF2z3j2xtxeTnncEWQM+A==
+  dependencies:
+    btoa "^1.2.1"
+    cozy-device-helper "^1.7.3"
+    cozy-logger "^1.6.0"
+    cozy-stack-client "^10.4.0"
+    isomorphic-fetch "^2.2.1"
+    lodash "^4.17.13"
+    microee "^0.0.6"
+    opn "^6.0.0"
+    prop-types "^15.6.2"
+    react-redux "^5.0.7"
+    redux "^3.7.2"
+    redux-thunk "^2.3.0"
+    server-destroy "^1.0.1"
+    sift "^6.0.0"
+    url-search-params-polyfill "^7.0.0"
+
 cozy-client@^9.1.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-9.1.0.tgz#1ff8a34514734b42e1e58821d8c0a44ae434ed35"
@@ -4855,6 +4876,24 @@ cozy-ui@^29.3.1:
   version "29.3.1"
   resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-29.3.1.tgz#b0d3760e966f28dbcc6b04d3adfb6b95914b8292"
   integrity sha512-2Q9VGcgvvYxmN++Tt2M0WdDW4GhtBGfS9OO3KaOMviyfNVU8K27x9zdRCRLWTPKGdLPafX5LvuCAVdPalVnbyQ==
+  dependencies:
+    "@babel/runtime" "^7.3.4"
+    body-scroll-lock "^2.5.8"
+    classnames "^2.2.5"
+    date-fns "^1.28.5"
+    hammerjs "^2.0.8"
+    node-polyglot "^2.2.2"
+    normalize.css "^7.0.0"
+    react-hot-loader "^4.3.11"
+    react-markdown "^4.0.8"
+    react-pdf "^4.0.5"
+    react-select "2.2.0"
+    react-swipeable-views "0.13.3"
+
+cozy-ui@^30.3.0:
+  version "30.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-30.3.0.tgz#d5ae0e76f162c0e3724ae9c10e52c35ce05e73ca"
+  integrity sha512-3x8ZqnI7yn+axbr8n6QiB2QF2hvuNqu3w4cnOEJvOmvIehH9Ul/dwN8/Lds4BcijUr6ToTSykuy4m8DQutrpgg==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
@@ -12727,15 +12766,6 @@ react-docgen@^4.1.0:
     node-dir "^0.1.10"
     recast "^0.17.3"
 
-react-dom@16.8.6:
-  version "16.8.6"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.8.6.tgz#71d6303f631e8b0097f56165ef608f051ff6e10f"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.13.6"
-
 react-dom@^16.12.0:
   version "16.12.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.12.0.tgz#0da4b714b8d13c2038c9396b54a92baea633fe11"
@@ -13157,15 +13187,6 @@ react-transition-group@^2.2.1:
     loose-envify "^1.4.0"
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
-
-react@16.8.6:
-  version "16.8.6"
-  resolved "https://registry.yarnpkg.com/react/-/react-16.8.6.tgz#ad6c3a9614fd3a4e9ef51117f54d888da01f2bbe"
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
-    prop-types "^15.6.2"
-    scheduler "^0.13.6"
 
 react@^16.12.0:
   version "16.12.0"
@@ -14017,14 +14038,6 @@ saxes@^3.1.9:
   integrity sha512-Ydydq3zC+WYDJK1+gRxRapLIED9PWeSuuS41wqyoRmzvhhh9nc+QQrVMKJYzJFULazeGhzSV0QleN2wD3boh2g==
   dependencies:
     xmlchars "^2.1.1"
-
-scheduler@^0.13.6:
-  version "0.13.6"
-  resolved "https://registry.yarnpkg.com/scheduler/-/scheduler-0.13.6.tgz#466a4ec332467b31a91b9bf74e5347072e4cd889"
-  integrity sha512-IWnObHt413ucAYKsD9J1QShUKkbKLQQHdxRyw73sw4FN26iWr3DY/H34xGPe4nmL1DwXyWmSWmMrA9TfQbE/XQ==
-  dependencies:
-    loose-envify "^1.1.0"
-    object-assign "^4.1.1"
 
 scheduler@^0.15.0:
   version "0.15.0"
