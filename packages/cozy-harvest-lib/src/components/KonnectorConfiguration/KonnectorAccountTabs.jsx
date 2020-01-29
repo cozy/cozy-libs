@@ -1,5 +1,6 @@
-import React, { useContext } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
+import flow from 'lodash/flow'
 
 import {
   Tab,
@@ -9,63 +10,27 @@ import {
   TabPanel
 } from 'cozy-ui/transpiled/react/Tabs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import Card from 'cozy-ui/transpiled/react/Card'
-import { Uppercase } from 'cozy-ui/transpiled/react/Text'
-import Button from 'cozy-ui/transpiled/react/Button'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Stack from 'cozy-ui/transpiled/react/Stack'
-import palette from 'cozy-ui/transpiled/react/palette'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Account } from 'cozy-doctypes'
-import get from 'lodash/get'
-import has from 'lodash/has'
-import flow from 'lodash/flow'
-import { withClient } from 'cozy-client'
 
-import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
-import * as konnectorsModel from '../../helpers/konnectors'
-
-import TriggerErrorInfo from '../infos/TriggerErrorInfo'
-import LaunchTriggerCard from '../cards/LaunchTriggerCard'
-import DocumentsLinkCard from '../cards/DocumentsLinkCard'
-import DeleteAccountButton from '../DeleteAccountButton'
 import TriggerLauncher from '../TriggerLauncher'
-import KonnectorMaintenance from '../Maintenance'
-import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
-import { MountPointContext } from '../MountPointContext'
+import DataTab from './DataTab'
+import ConfigurationTab from './ConfigurationTab'
 
-const KonnectorAccountTabs = ({
+export const KonnectorAccountTabs = ({
   konnector,
   trigger: initialTrigger,
   account,
   onAccountDeleted,
-  //TODO on``
+  //TODO rename to onAddAccount
   addAccount,
-  client,
   t
 }) => {
-  const {
-    data: { isInMaintenance, messages: maintenanceMessages }
-  } = useMaintenanceStatus(client, konnector)
-  const { pushHistory } = useContext(MountPointContext)
-
   return (
     <TriggerLauncher initialTrigger={initialTrigger}>
       {({ error, running }) => {
-        const hasError = error
-        const shouldDisplayError = !running && error
+        const hasError = !!error
+        const shouldDisplayError = !running && hasError
         const hasLoginError = hasError && error.isLoginError()
-        const hasTermsVersionMismatchError =
-          hasError && error.isTermsVersionMismatchError()
-
-        const isTermsVersionMismatchErrorWithVersionAvailable =
-          hasTermsVersionMismatchError &&
-          konnectorsModel.hasNewVersionAvailable(konnector)
-
-        const hasGenericError =
-          hasError &&
-          !hasLoginError &&
-          !isTermsVersionMismatchErrorWithVersionAvailable
 
         return (
           <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
@@ -87,83 +52,25 @@ const KonnectorAccountTabs = ({
 
             <TabPanels>
               <TabPanel name="data" className="u-pt-1-half u-pb-0">
-                <Stack>
-                  {isInMaintenance && (
-                    <div className="u-bg-paleGrey u-p-1">
-                      <KonnectorMaintenance
-                        maintenanceMessages={maintenanceMessages}
-                      />
-                    </div>
-                  )}
-                  {konnectorsModel.hasNewVersionAvailable(konnector) && (
-                    <KonnectorUpdateInfos
-                      konnector={konnector}
-                      isBlocking={hasTermsVersionMismatchError}
-                    />
-                  )}
-                  {shouldDisplayError && hasGenericError && (
-                    <TriggerErrorInfo error={error} konnector={konnector} />
-                  )}
-                  <LaunchTriggerCard
-                    initialTrigger={initialTrigger}
-                    disabled={isInMaintenance}
-                  />
-                  {has(initialTrigger, 'message.folder_to_save') && (
-                    <DocumentsLinkCard
-                      folderId={get(initialTrigger, 'message.folder_to_save')}
-                    />
-                  )}
-                </Stack>
+                <DataTab
+                  konnector={konnector}
+                  trigger={initialTrigger}
+                  error={error}
+                  shouldDisplayError={shouldDisplayError}
+                  hasLoginError={hasLoginError}
+                />
               </TabPanel>
               <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
-                {shouldDisplayError && hasLoginError && (
-                  <TriggerErrorInfo
-                    className="u-mb-2"
-                    error={error}
-                    konnector={konnector}
-                  />
-                )}
-                {!konnector.oauth ? (
-                  <div className="u-mb-1">
-                    <Uppercase className="u-mb-half u-slateGrey u-fz-xsmall">
-                      {t('modal.updateAccount.title')}
-                    </Uppercase>
-                    <Card
-                      className="u-flex u-flex-items-center u-c-pointer"
-                      onClick={() =>
-                        pushHistory(`/accounts/${account._id}/edit`)
-                      }
-                    >
-                      <div className="u-w-2 u-mr-1">
-                        <Icon
-                          icon="lock"
-                          color={palette['coolGrey']}
-                          size={36}
-                        />
-                      </div>
-                      <div className="u-flex-grow-1">
-                        {konnector.name}
-                        <div className="u-coolGrey u-fz-tiny">
-                          {Account.getAccountName(account)}
-                        </div>
-                      </div>
-                      <div>{running && <Spinner />}</div>
-                      <Icon icon="right" color={palette['coolGrey']} />
-                    </Card>
-                  </div>
-                ) : null}
-                <div className="u-flex u-flex-row">
-                  <DeleteAccountButton
-                    account={account}
-                    disabled={running}
-                    onSuccess={onAccountDeleted}
-                  />
-                  <Button
-                    onClick={addAccount}
-                    label={t('modal.addAccount.button')}
-                    theme="ghost"
-                  />
-                </div>
+                <ConfigurationTab
+                  konnector={konnector}
+                  error={error}
+                  account={account}
+                  addAccount={addAccount}
+                  onAccountDeleted={onAccountDeleted}
+                  konnectorIsRunning={running}
+                  shouldDisplayError={shouldDisplayError}
+                  hasLoginError={hasLoginError}
+                />
               </TabPanel>
             </TabPanels>
           </Tabs>
@@ -182,7 +89,4 @@ KonnectorAccountTabs.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default flow(
-  translate(),
-  withClient
-)(KonnectorAccountTabs)
+export default flow(translate())(KonnectorAccountTabs)
