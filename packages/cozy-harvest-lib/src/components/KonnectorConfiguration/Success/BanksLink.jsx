@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import { queryConnect } from 'cozy-client'
+import { queryConnect, Q } from 'cozy-client'
 
 import { Application } from 'cozy-doctypes'
 
@@ -56,7 +56,7 @@ BanksLinkRedirectStore.propTypes = {
 }
 const ConnectedBanksLinkRedirectStore = queryConnect({
   apps: {
-    query: client => client.all('io.cozy.apps'),
+    query: () => Q('io.cozy.apps'),
     as: 'apps'
   }
 })(withLocales(BanksLinkRedirectStore))

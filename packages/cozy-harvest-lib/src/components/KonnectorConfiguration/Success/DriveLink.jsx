@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { queryConnect } from 'cozy-client'
+import { queryConnect, Q } from 'cozy-client'
 
 export class DriveLink extends PureComponent {
   render() {
@@ -37,7 +37,7 @@ DriveLink.propTypes = {
 }
 export default queryConnect({
   driveQuery: {
-    query: client => client.all('io.cozy.apps').where({ slug: 'drive' }),
+    query: () => Q('io.cozy.apps').where({ slug: 'drive' }),
     as: 'driveQuery'
   }
 })(translate()(DriveLink))
