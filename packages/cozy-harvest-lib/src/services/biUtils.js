@@ -74,7 +74,6 @@ const biRequest = async (method, path, config, rawForm, bearer) => {
       method: method,
       body: formData,
       headers: {
-        'User-Agent': 'cozy.bi-harvest',
         Authorization: `Bearer ${bearer}`
       }
     })
