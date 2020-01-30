@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.20.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.20.0...cozy-harvest-lib@1.20.1) (2020-01-30)
+
+
+### Bug Fixes
+
+* Correctly handle BI errors ([94a29ae](https://github.com/cozy/cozy-libs/commit/94a29ae))
+
+
+
+
+
 # [1.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.19.0...cozy-harvest-lib@1.20.0) (2020-01-30)
 
 
