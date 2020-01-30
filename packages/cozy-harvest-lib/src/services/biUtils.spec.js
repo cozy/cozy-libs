@@ -33,8 +33,7 @@ describe('bi request', () => {
       {
         body: expect.any(Object),
         headers: {
-          Authorization: 'Bearer bi-access-token',
-          'User-Agent': 'cozy.bi-harvest'
+          Authorization: 'Bearer bi-access-token'
         },
         method: 'PUT'
       }
