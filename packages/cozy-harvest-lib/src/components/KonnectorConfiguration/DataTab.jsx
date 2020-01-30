@@ -32,7 +32,7 @@ export const DataTab = ({
     !hasLoginError &&
     !isTermsVersionMismatchErrorWithVersionAvailable
 
-  const documentSaveFolderId = get(trigger, 'message.folder_to_save')
+  const folderToSaveId = get(trigger, 'message.folder_to_save')
   const showBanksLink = get(konnector, 'data_types', []).includes(
     'bankAccounts'
   )
@@ -59,10 +59,10 @@ export const DataTab = ({
         <TriggerErrorInfo error={error} konnector={konnector} />
       )}
       <LaunchTriggerCard initialTrigger={trigger} disabled={isInMaintenance} />
-      {documentSaveFolderId && (
+      {folderToSaveId && (
         <AppLinkCard
           slug="drive"
-          path={`/files/${documentSaveFolderId}`}
+          path={`/files/${folderToSaveId}`}
           icon="file"
           iconColor="puertoRico"
         />
