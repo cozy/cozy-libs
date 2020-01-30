@@ -23,6 +23,7 @@ const AppLinkCard = ({
   t
 }) => {
   const cozyURL = new URL(client.getStackClient().uri)
+  const { cozySubdomainType: subDomainType } = client.getInstanceOptions()
 
   return (
     <Card>
@@ -44,7 +45,8 @@ const AppLinkCard = ({
           href={generateWebLink({
             cozyUrl: cozyURL.origin,
             slug,
-            nativePath: path
+            nativePath: path,
+            subDomainType
           })}
         >
           {({ onClick, href }) => (
