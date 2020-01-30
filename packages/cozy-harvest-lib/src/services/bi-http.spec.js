@@ -1,20 +1,10 @@
-import { getBIModeFromCozyURL, updateBIConnection } from './biUtils'
-
-describe('getBIModeFromCurrentLocation', () => {
-  it('should correctly work', () => {
-    expect(getBIModeFromCozyURL()).toBe('dev')
-    expect(getBIModeFromCozyURL('http://cozy.tools:8080')).toBe('dev')
-    expect(getBIModeFromCozyURL('https://test.cozy.works')).toBe('dev')
-    expect(getBIModeFromCozyURL('https://test.cozy.rocks')).toBe('prod')
-    expect(getBIModeFromCozyURL('https://test.mycozy.cloud')).toBe('prod')
-  })
-})
+import { updateBIConnection } from './bi-http'
 
 describe('bi request', () => {
   beforeEach(() => {
     global.fetch = jest
       .fn()
-      .mockResolvedValue({ json: () => Promise.resolve({}) })
+      .mockResolvedValue({ ok: true, json: () => Promise.resolve({}) })
   })
 
   afterEach(() => {

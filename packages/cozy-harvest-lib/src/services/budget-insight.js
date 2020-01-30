@@ -5,14 +5,22 @@ import clone from 'lodash/clone'
 import defaults from 'lodash/defaults'
 
 import { waitForRealtimeResult } from './jobUtils'
-import {
-  createBIConnection,
-  updateBIConnection,
-  getBIConfigForCozyURL,
-  isBudgetInsightConnector
-} from './biUtils'
+import { createBIConnection, updateBIConnection, BIError } from './bi-http'
 import assert from '../assert'
 import { mkConnAuth } from 'cozy-bi-auth'
+import biPublicKeyProd from './bi-public-key-prod.json'
+
+const configsByMode = {
+  prod: {
+    mode: 'prod',
+    url: 'https://cozy.biapi.pro/2.0',
+    publicKey: biPublicKeyProd
+  },
+  dev: {
+    mode: 'dev',
+    url: 'https://cozytest-sandbox.biapi.pro/2.0'
+  }
+}
 
 const getBIConnectionIdFromAccount = account =>
   get(account, 'data.auth.bi.connId')
@@ -43,6 +51,47 @@ const createTemporaryToken = async ({ client, account, konnector }) => {
   } catch (e) {
     throwWrappedError(e, 'createTemporaryToken')
   }
+}
+
+const getBIModeFromCozyURL = rawCozyURL => {
+  if (!rawCozyURL) {
+    return 'dev'
+  }
+  const cozyURL = new URL(rawCozyURL)
+  const domain = cozyURL.host
+    .split('.')
+    .slice(-2)
+    .join('.')
+  switch (domain) {
+    case 'cozy.rocks':
+    case 'mycozy.cloud':
+      return 'prod'
+    case 'cozy.works':
+    case 'cozy.dev':
+      return 'dev'
+    default:
+      return 'dev'
+  }
+}
+
+export const getBIConfigForCozyURL = url => {
+  const mode = getBIModeFromCozyURL(url)
+  if (configsByMode[mode]) {
+    return configsByMode[mode]
+  } else {
+    throw new Error(
+      `getBIConfig: Unknown mode ${mode}, known modes are ${Object.keys(
+        configsByMode
+      ).join(', ')}`
+    )
+  }
+}
+
+export const isBudgetInsightConnector = konnector => {
+  return (
+    konnector.partnership &&
+    konnector.partnership.domain.includes('budget-insight')
+  )
 }
 
 /**

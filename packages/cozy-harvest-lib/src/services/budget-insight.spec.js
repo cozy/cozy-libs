@@ -1,24 +1,23 @@
 import CozyClient from 'cozy-client'
 import {
   createOrUpdateBIConnection,
-  onBIAccountCreation
+  onBIAccountCreation,
+  getBIConfigForCozyURL
 } from './budget-insight'
 import { waitForRealtimeResult } from './jobUtils'
-import { createBIConnection, updateBIConnection } from './biUtils'
+import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
 
 jest.mock('./jobUtils', () => ({
   waitForRealtimeResult: jest.fn()
 }))
 
-jest.mock('./biUtils', () => {
-  const originalBIUtils = jest.requireActual('./biUtils')
-  return {
-    ...originalBIUtils,
-    createBIConnection: jest.fn(),
-    updateBIConnection: jest.fn()
-  }
-})
+jest.mock('./bi-http', () => ({
+  createBIConnection: jest
+    .fn()
+    .mockResolvedValue({ text: Promise.resolve('{}') }),
+  updateBIConnection: jest.fn()
+}))
 
 const TEST_BANK_COZY_ID = '100000'
 const TEST_BANK_BI_ID = 40
@@ -45,6 +44,16 @@ expect.extend({
 })
 
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
+
+describe('getBIConfigForCozyURL', () => {
+  it('should correctly work', () => {
+    expect(getBIConfigForCozyURL().mode).toBe('dev')
+    expect(getBIConfigForCozyURL('http://cozy.tools:8080').mode).toBe('dev')
+    expect(getBIConfigForCozyURL('https://test.cozy.works').mode).toBe('dev')
+    expect(getBIConfigForCozyURL('https://test.cozy.rocks').mode).toBe('prod')
+    expect(getBIConfigForCozyURL('https://test.mycozy.cloud').mode).toBe('prod')
+  })
+})
 
 describe('createOrUpdateBIConnection', () => {
   const setup = () => {
