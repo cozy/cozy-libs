@@ -9,7 +9,7 @@ import * as konnectorsModel from '../../helpers/konnectors'
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
 import LaunchTriggerCard from '../cards/LaunchTriggerCard'
 import KonnectorMaintenance from '../Maintenance'
-import DocumentsLinkCard from '../cards/DocumentsLinkCard'
+import AppLinkCard from '../cards/AppLinkCard'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
@@ -33,6 +33,10 @@ export const DataTab = ({
     !isTermsVersionMismatchErrorWithVersionAvailable
 
   const documentSaveFolderId = get(trigger, 'message.folder_to_save')
+  const showBanksLink = get(konnector, 'data_types', []).includes(
+    'bankAccounts'
+  )
+  const showContactsLink = get(konnector, 'data_types', []).includes('contact')
 
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
@@ -56,7 +60,18 @@ export const DataTab = ({
       )}
       <LaunchTriggerCard initialTrigger={trigger} disabled={isInMaintenance} />
       {documentSaveFolderId && (
-        <DocumentsLinkCard folderId={documentSaveFolderId} />
+        <AppLinkCard
+          slug="drive"
+          path={`/files/${documentSaveFolderId}`}
+          icon="file"
+          iconColor="puertoRico"
+        />
+      )}
+      {showBanksLink && (
+        <AppLinkCard slug="banks" icon="bank" iconColor="weirdGreen" />
+      )}
+      {showContactsLink && (
+        <AppLinkCard slug="contacts" icon="team" iconColor="brightSun" />
       )}
     </Stack>
   )
