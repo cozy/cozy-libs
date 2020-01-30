@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.19.0...cozy-harvest-lib@1.20.0) (2020-01-30)
+
+
+### Bug Fixes
+
+* Go to accountForm if VaultUnlocker not going to be displayed ([387290b](https://github.com/cozy/cozy-libs/commit/387290b))
+* Prevent infinite loop in useMaintenance hook ([1c3f4cc](https://github.com/cozy/cozy-libs/commit/1c3f4cc))
+* Use correct id for BI connection in prod ([8b685f7](https://github.com/cozy/cozy-libs/commit/8b685f7))
+
+
+### Features
+
+* Add minilog with logs ([dd83369](https://github.com/cozy/cozy-libs/commit/dd83369))
+* Add names to konnector policies for easier debugging ([5ed3f2a](https://github.com/cozy/cozy-libs/commit/5ed3f2a))
+
+
+
+
+
 # [1.19.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.18.0...cozy-harvest-lib@1.19.0) (2020-01-29)
 
 
