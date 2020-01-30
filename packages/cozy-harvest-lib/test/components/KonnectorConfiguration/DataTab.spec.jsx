@@ -6,6 +6,7 @@ import AppLinkCard from 'components/cards/AppLinkCard'
 
 describe('DataTab', () => {
   beforeEach(() => {
+    // LaunchTriggerCard inside DataTab will emit propType errors because there is no I18n wrapper, but we're not interested in testing LaunchTriggerCard here.
     jest.spyOn(console, 'error').mockImplementation(() => {})
   })
 
