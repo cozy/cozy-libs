@@ -14,16 +14,14 @@ jest.mock('./jobUtils', () => ({
 jest.mock('./biUtils', () => {
   const originalBIUtils = jest.requireActual('./biUtils')
   return {
+    ...originalBIUtils,
     createBIConnection: jest.fn(),
-    updateBIConnection: jest.fn(),
-    getBIConfig: originalBIUtils.getBIConfig,
-    getBIModeFromCozyURL: originalBIUtils.getBIModeFromCozyURL,
-    isBudgetInsightConnector: originalBIUtils.isBudgetInsightConnector
+    updateBIConnection: jest.fn()
   }
 })
 
 const TEST_BANK_COZY_ID = '100000'
-const TEST_BANK_BI_ID = 59
+const TEST_BANK_BI_ID = 40
 
 expect.extend({
   toBeJWEValue(received) {

@@ -36,16 +36,28 @@ export const getBIModeFromCozyURL = rawCozyURL => {
   }
 }
 
-export const getBIConfig = mode => {
-  if (mode === 'prod') {
-    return {
-      url: biURLProd,
-      publicKey: biPublicKeyProd
-    }
+const configsByMode = {
+  prod: {
+    mode: 'prod',
+    url: biURLProd,
+    publicKey: biPublicKeyProd
+  },
+  dev: {
+    mode: 'dev',
+    url: biURLDev
+  }
+}
+
+export const getBIConfigForCozyURL = url => {
+  const mode = getBIModeFromCozyURL(url)
+  if (configsByMode[mode]) {
+    return configsByMode[mode]
   } else {
-    return {
-      url: biURLDev
-    }
+    throw new Error(
+      `getBIConfig: Unknown mode ${mode}, known modes are ${Object.keys(
+        configsByMode
+      ).join(', ')}`
+    )
   }
 }
 
