@@ -4,7 +4,6 @@ import { withClient } from 'cozy-client'
 
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import get from 'lodash/get'
-import has from 'lodash/has'
 
 import * as konnectorsModel from '../../helpers/konnectors'
 import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
@@ -14,7 +13,7 @@ import DocumentsLinkCard from '../cards/DocumentsLinkCard'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
-const DataTab = ({
+export const DataTab = ({
   konnector,
   trigger,
   error,
@@ -32,6 +31,8 @@ const DataTab = ({
     hasError &&
     !hasLoginError &&
     !isTermsVersionMismatchErrorWithVersionAvailable
+
+  const documentSaveFolderId = get(trigger, 'message.folder_to_save')
 
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
@@ -54,8 +55,8 @@ const DataTab = ({
         <TriggerErrorInfo error={error} konnector={konnector} />
       )}
       <LaunchTriggerCard initialTrigger={trigger} disabled={isInMaintenance} />
-      {has(trigger, 'message.folder_to_save') && (
-        <DocumentsLinkCard folderId={get(trigger, 'message.folder_to_save')} />
+      {documentSaveFolderId && (
+        <DocumentsLinkCard folderId={documentSaveFolderId} />
       )}
     </Stack>
   )
