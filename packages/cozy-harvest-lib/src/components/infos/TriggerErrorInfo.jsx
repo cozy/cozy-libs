@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
+import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
@@ -22,13 +23,19 @@ export class TriggerErrorInfo extends PureComponent {
     return (
       <Infos
         className={className}
-        isImportant
-        text={
-          <Markdown
-            source={getErrorLocale(error, konnector, t, 'description')}
-          />
+        theme="danger"
+        description={
+          <>
+            <SubTitle className="u-pomegranate">
+              {getErrorLocale(error, konnector, t, 'title')}
+            </SubTitle>
+            <Text>
+              <Markdown
+                source={getErrorLocale(error, konnector, t, 'description')}
+              />
+            </Text>
+          </>
         }
-        title={getErrorLocale(error, konnector, t, 'title')}
       />
     )
   }

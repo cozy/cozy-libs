@@ -2,7 +2,7 @@
 
 exports[`KonnectorUpdateInfos should render 1`] = `
 <InfosMigration
-  actionButton={
+  action={
     <KonnectorUpdateLinker
       konnector={
         Object {
@@ -12,14 +12,30 @@ exports[`KonnectorUpdateInfos should render 1`] = `
       label="infos.konnectorUpdate.button.label"
     />
   }
-  text="infos.konnectorUpdate.body.regular"
-  title="infos.konnectorUpdate.title"
+  description={
+    <React.Fragment>
+      <ForwardRef
+        className=""
+        ellipsis={false}
+        tag="div"
+      >
+        infos.konnectorUpdate.title
+      </ForwardRef>
+      <ForwardRef
+        ellipsis={false}
+        tag="div"
+      >
+        infos.konnectorUpdate.body.regular
+      </ForwardRef>
+    </React.Fragment>
+  }
+  theme="secondary"
 />
 `;
 
 exports[`KonnectorUpdateInfos should render as blocking 1`] = `
 <InfosMigration
-  actionButton={
+  action={
     <KonnectorUpdateLinker
       isBlocking={true}
       konnector={
@@ -30,8 +46,23 @@ exports[`KonnectorUpdateInfos should render as blocking 1`] = `
       label="infos.konnectorUpdate.button.label"
     />
   }
-  isImportant={true}
-  text="infos.konnectorUpdate.body.blocking"
-  title="infos.konnectorUpdate.title"
+  description={
+    <React.Fragment>
+      <ForwardRef
+        className="u-pomegranate"
+        ellipsis={false}
+        tag="div"
+      >
+        infos.konnectorUpdate.title
+      </ForwardRef>
+      <ForwardRef
+        ellipsis={false}
+        tag="div"
+      >
+        infos.konnectorUpdate.body.blocking
+      </ForwardRef>
+    </React.Fragment>
+  }
+  theme="danger"
 />
 `;

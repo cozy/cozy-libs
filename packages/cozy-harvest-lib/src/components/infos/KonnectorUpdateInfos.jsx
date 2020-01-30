@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
+import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import KonnectorUpdateLinker from '../KonnectorUpdateLinker'
 
@@ -15,21 +16,27 @@ export const KonnectorUpdateInfos = props => {
   const { className, konnector, isBlocking, t } = props
   return (
     <Infos
-      actionButton={
+      className={className}
+      theme={isBlocking ? 'danger' : 'secondary'}
+      description={
+        <>
+          <SubTitle className={isBlocking ? 'u-pomegranate' : ''}>
+            {t('infos.konnectorUpdate.title')}
+          </SubTitle>
+          <Text>
+            {isBlocking
+              ? t('infos.konnectorUpdate.body.blocking')
+              : t('infos.konnectorUpdate.body.regular')}
+          </Text>
+        </>
+      }
+      action={
         <KonnectorUpdateLinker
           konnector={konnector}
           isBlocking={isBlocking}
           label={t('infos.konnectorUpdate.button.label')}
         />
       }
-      className={className}
-      isImportant={isBlocking}
-      text={
-        isBlocking
-          ? t('infos.konnectorUpdate.body.blocking')
-          : t('infos.konnectorUpdate.body.regular')
-      }
-      title={t('infos.konnectorUpdate.title')}
     />
   )
 }

@@ -2,24 +2,50 @@
 
 exports[`TriggerErrorInfo should render 1`] = `
 <InfosMigration
-  isImportant={true}
-  text={
-    <Markdown
-      source="error.job.LOGIN_FAILED.description"
-    />
+  description={
+    <React.Fragment>
+      <ForwardRef
+        className="u-pomegranate"
+        ellipsis={false}
+        tag="div"
+      >
+        error.job.LOGIN_FAILED.title
+      </ForwardRef>
+      <ForwardRef
+        ellipsis={false}
+        tag="div"
+      >
+        <Markdown
+          source="error.job.LOGIN_FAILED.description"
+        />
+      </ForwardRef>
+    </React.Fragment>
   }
-  title="error.job.LOGIN_FAILED.title"
+  theme="danger"
 />
 `;
 
 exports[`TriggerErrorInfo should render regular Error 1`] = `
 <InfosMigration
-  isImportant={true}
-  text={
-    <Markdown
-      source="error.job.UNKNOWN_ERROR.description (Something is undefined)"
-    />
+  description={
+    <React.Fragment>
+      <ForwardRef
+        className="u-pomegranate"
+        ellipsis={false}
+        tag="div"
+      >
+        error.job.UNKNOWN_ERROR.title
+      </ForwardRef>
+      <ForwardRef
+        ellipsis={false}
+        tag="div"
+      >
+        <Markdown
+          source="error.job.UNKNOWN_ERROR.description (Something is undefined)"
+        />
+      </ForwardRef>
+    </React.Fragment>
   }
-  title="error.job.UNKNOWN_ERROR.title"
+  theme="danger"
 />
 `;
