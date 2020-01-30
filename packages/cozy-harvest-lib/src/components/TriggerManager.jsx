@@ -167,7 +167,7 @@ const getInitialStep = ({ account, konnector }) => {
 export class DumbTriggerManager extends Component {
   constructor(props) {
     super(props)
-    const { account, konnector } = props
+    const { account } = props
 
     this.handleNewAccount = this.handleNewAccount.bind(this)
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
