@@ -1,6 +1,8 @@
 import manifest from '../helpers/manifest'
 import accounts from '../helpers/accounts'
 import get from 'lodash/get'
+import assert from '../assert'
+import logger from '../logger'
 
 import { CipherType, UriMatchType } from 'cozy-keys-lib'
 
@@ -13,12 +15,6 @@ import { CipherType, UriMatchType } from 'cozy-keys-lib'
  * @returns {string} the cipher ID
  */
 export const createCipher = async (vaultClient, createOptions) => {
-  if (vaultClient.isLocked()) {
-    // eslint-disable-next-line no-console
-    console.warn('Impossible to create cipher since vault is locked')
-    return null
-  }
-
   const { konnector, login, password } = createOptions
   const konnectorURI = get(konnector, 'vendor_link')
   const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
@@ -83,12 +79,32 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
   }
 }
 
+/**
+ * Creates or updates a cipher from Cozy objects
+ *
+ * If not cipherId is passed, finds existing cipher based on the
+ * identifier declared in the `konnector` manifest
+ *
+ * @param  {VaultClient} vaultClient
+ * @param  {string} cipherId
+ * @param  {object} options.userCredentials
+ * @param  {io.cozy.account} options.account
+ * @param  {io.cozy.konnector} options.konnector
+ * @return {Cipher|null} - Returns null if vault is locked
+ */
 export const createOrUpdateCipher = async (
   vaultClient,
   cipherId,
   { userCredentials, account, konnector }
 ) => {
+  if (vaultClient.isLocked()) {
+    logger.warn('Impossible to create cipher since vault is locked')
+    return null
+  }
+
   const identifierProperty = manifest.getIdentifier(konnector.fields)
+  assert(identifierProperty, 'No identifier property found in konnector fields')
+
   const login = userCredentials[identifierProperty]
   const password = userCredentials.password
 
@@ -100,11 +116,10 @@ export const createOrUpdateCipher = async (
       login,
       password
     })
-    cipherId = cipher ? cipher.id : null
   }
 
-  if (cipherId) {
-    cipher = await updateCipher(vaultClient, cipherId, { login, password })
+  if (cipher) {
+    cipher = await updateCipher(vaultClient, cipher.id, { login, password })
   } else {
     cipher = await createCipher(vaultClient, {
       konnector,
@@ -113,7 +128,9 @@ export const createOrUpdateCipher = async (
     })
   }
 
-  await shareCipherWithCozy(vaultClient, cipher.id)
+  if (cipher) {
+    await shareCipherWithCozy(vaultClient, cipher.id)
+  }
 
   return cipher
 }
@@ -132,7 +149,6 @@ export const createOrUpdateCipher = async (
 const searchForCipher = async (vaultClient, searchOptions) => {
   const { konnector, account, login, password } = searchOptions
   const konnectorURI = get(konnector, 'vendor_link')
-
   const id = accounts.getVaultCipherId(account)
   const search = {
     username: login,

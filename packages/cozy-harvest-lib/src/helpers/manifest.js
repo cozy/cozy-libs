@@ -86,7 +86,7 @@ const defaultFieldsValues = fields => {
 /**
  * Returns the key for the field having the role=identifier attribute
  * @param  {Object} fields Konnector fields
- * @return {[type]}        The key for the identifier field, example 'login'
+ * @return {string}        The key for the identifier field, example 'login'
  */
 const getIdentifier = (fields = {}) =>
   findKey(sanitizeIdentifier(fields), field => field.role === ROLE_IDENTIFIER)
