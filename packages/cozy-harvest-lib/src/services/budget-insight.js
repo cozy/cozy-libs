@@ -1,3 +1,10 @@
+/**
+ * Interface between Budget Insight and Cozy.
+ *
+ * - Deals with the konnector to get temporary tokens
+ * - Converts low-level BI errors to KonnectorJobErrors
+ */
+
 import get from 'lodash/get'
 import omit from 'lodash/omit'
 import merge from 'lodash/merge'
@@ -5,10 +12,11 @@ import clone from 'lodash/clone'
 import defaults from 'lodash/defaults'
 
 import { waitForRealtimeResult } from './jobUtils'
-import { createBIConnection, updateBIConnection, BIError } from './bi-http'
+import { createBIConnection, updateBIConnection } from './bi-http'
 import assert from '../assert'
-import { mkConnAuth } from 'cozy-bi-auth'
+import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
+import { KonnectorJobError } from '../helpers/konnectors'
 
 const configsByMode = {
   prod: {
@@ -25,32 +33,18 @@ const configsByMode = {
 const getBIConnectionIdFromAccount = account =>
   get(account, 'data.auth.bi.connId')
 
-const throwWrappedError = (originalError, namespace) => {
-  const error = new Error(`${namespace} failed (${originalError.message})`)
-  error.original = originalError
-  throw error
-}
-
-const createTemporaryToken = async ({ client, account, konnector }) => {
-  try {
-    assert(
-      account && account._id,
-      'createTemporaryToken: Invalid account for createTemporaryToken'
-    )
-    assert(konnector.slug, 'createTemporaryToken: No konnector slug')
-    const jobResponse = await client.stackClient.jobs.create('konnector', {
-      mode: 'getTemporaryToken',
-      konnector: konnector.slug,
-      account: account._id
-    })
-    const event = await waitForRealtimeResult(
-      client,
-      jobResponse.data.attributes
-    )
-    return event.data.code
-  } catch (e) {
-    throwWrappedError(e, 'createTemporaryToken')
-  }
+/**
+ * Converts and chains error
+ */
+const convertBIErrortoKonnectorJobError = error => {
+  const errorCode = error ? error.code : null
+  const cozyErrorMessage = errorCode ? biErrorMap[errorCode] : null
+  const errorMessage =
+    cozyErrorMessage ||
+    (errorCode ? `UNKNOWN_ERROR.${errorCode}` : 'UNKNOWN_ERROR')
+  const err = new KonnectorJobError(errorMessage)
+  err.original = error
+  throw err
 }
 
 const getBIModeFromCozyURL = rawCozyURL => {
@@ -94,6 +88,21 @@ export const isBudgetInsightConnector = konnector => {
   )
 }
 
+const createTemporaryToken = async ({ client, account, konnector }) => {
+  assert(
+    account && account._id,
+    'createTemporaryToken: Invalid account for createTemporaryToken'
+  )
+  assert(konnector.slug, 'createTemporaryToken: No konnector slug')
+  const jobResponse = await client.stackClient.jobs.create('konnector', {
+    mode: 'getTemporaryToken',
+    konnector: konnector.slug,
+    account: account._id
+  })
+  const event = await waitForRealtimeResult(client, jobResponse.data.attributes)
+  return event.data.code
+}
+
 /**
  * Ensures a BI connection is ready
  *
@@ -115,27 +124,28 @@ export const createOrUpdateBIConnection = async ({
   client,
   konnector
 }) => {
+  const config = getBIConfigForCozyURL(client.stackClient.uri)
+  const connId = getBIConnectionIdFromAccount(account)
+  const tempToken = await createTemporaryToken({
+    account,
+    client,
+    konnector
+  })
+  assert(tempToken, 'No temporary token')
+  const credentials = { ...account.auth }
+  // The konnector can have "baked-in" parameters that need to be passed in the
+  // auth. This is the case for example for some konnectors for the bankId
+  // parameter
+  defaults(credentials, konnector.parameters)
+  const credsToSend = await mkConnAuth(config, credentials)
+
   try {
-    const config = getBIConfigForCozyURL(client.stackClient.uri)
-    const connId = getBIConnectionIdFromAccount(account)
-    const tempToken = await createTemporaryToken({
-      account,
-      client,
-      konnector
-    })
-    assert(tempToken, 'No temporary token')
-    const credentials = { ...account.auth }
-    // The konnector can have "baked-in" parameters that need to be passed in the
-    // auth. This is the case for example for some konnectors for the bankId
-    // parameter
-    defaults(credentials, konnector.parameters)
-    const credsToSend = await mkConnAuth(config, credentials)
     const connection = await (connId
       ? updateBIConnection(config, connId, credsToSend, tempToken)
       : createBIConnection(config, credsToSend, tempToken))
     return connection
   } catch (e) {
-    throwWrappedError(e, 'createOrUpdateBIConnection')
+    return convertBIErrortoKonnectorJobError(e)
   }
 }
 
@@ -146,6 +156,9 @@ const removeSensibleDataFromAccount = fullAccount => {
   return account
 }
 
+/**
+ * Used in the custom konnector policy for BI
+ */
 export const onBIAccountCreation = async ({
   account,
   client,

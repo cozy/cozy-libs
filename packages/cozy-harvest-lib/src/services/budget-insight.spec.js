@@ -154,6 +154,50 @@ describe('createOrUpdateBIConnection', () => {
     expect(connection).toEqual({ id: 'updated-bi-connection-id-789' })
   })
 
+  it('should convert wrongpass correctly', async () => {
+    const { client } = setup()
+    const err = new Error()
+    err.code = 'wrongpass'
+    updateBIConnection.mockReset().mockRejectedValue(err)
+    await expect(
+      createOrUpdateBIConnection({
+        client,
+        account: merge(account, {
+          data: {
+            auth: {
+              bi: {
+                connId: 1337
+              }
+            }
+          }
+        }),
+        konnector
+      })
+    ).rejects.toEqual(new Error('LOGIN_FAILED'))
+  })
+
+  it('should convert SCARequired correctly', async () => {
+    const { client } = setup()
+    const err = new Error()
+    err.code = 'SCARequired'
+    updateBIConnection.mockReset().mockRejectedValue(err)
+    await expect(
+      createOrUpdateBIConnection({
+        client,
+        account: merge(account, {
+          data: {
+            auth: {
+              bi: {
+                connId: 1337
+              }
+            }
+          }
+        }),
+        konnector
+      })
+    ).rejects.toEqual(new Error('USER_ACTION_NEEDED.SCA_REQUIRED'))
+  })
+
   it('should remove sensible data from account and create bi connection', async () => {
     const { client } = setup()
 

@@ -10,11 +10,37 @@
 
 import assert from '../assert'
 
+const softJSONParse = maybeJSONData => {
+  try {
+    return JSON.parse(maybeJSONData)
+  } catch (e) {
+    return maybeJSONData
+  }
+}
+
+/**
+ * Handles BI HTTP Error
+ *
+ * - "code" attribute: wrongpass, actionNeeded etc..
+ */
+export class BIError extends Error {
+  constructor(message) {
+    super(message)
+    const error = softJSONParse(message)
+    if (typeof error === 'object') {
+      this.code = error.code || 'NO_CODE'
+      this.message = error.message || 'NO_MESSAGE'
+    } else {
+      this.message = error
+    }
+  }
+}
+
 /**
  * Sends BI request and parses the response
  * Handles authentication and form serializing
  *
- * @throws {KonnectorJobError} Converts BI errors to KonnectorJobError
+ * @throws {BIError}
  */
 const biRequest = async (method, path, config, rawForm, bearer) => {
   assert(bearer, 'biRequest: Need access token')
@@ -24,21 +50,19 @@ const biRequest = async (method, path, config, rawForm, bearer) => {
     formData.append(k, v)
   }
 
-  try {
-    const resp = await fetch(fullURL, {
-      method: method,
-      body: formData,
-      headers: {
-        Authorization: `Bearer ${bearer}`
-      }
-    })
+  const resp = await fetch(fullURL, {
+    method: method,
+    body: formData,
+    headers: {
+      Authorization: `Bearer ${bearer}`
+    }
+  })
+
+  if (resp.ok) {
     return await resp.json()
-  } catch (originalError) {
-    // eslint-disable-next-line no-console
-    console.error(originalError)
-    const err = new Error('biRequest failed')
-    err.original = originalError
-    throw err
+  } else {
+    const rawBody = await resp.text()
+    throw new BIError(rawBody)
   }
 }
 
