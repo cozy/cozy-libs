@@ -13,14 +13,15 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { withBreakpoints } from 'cozy-ui/transpiled/react'
 import { withClient } from 'cozy-client'
 
-const DocumentsLinkCard = ({
-  folderId,
+const AppLinkCard = ({
+  slug,
+  path,
+  icon,
+  iconColor,
   breakpoints: { isMobile },
   client,
   t
 }) => {
-  const nativePath = `/files/${folderId}`
-  const appSlug = 'drive'
   const cozyURL = new URL(client.getStackClient().uri)
 
   return (
@@ -29,21 +30,21 @@ const DocumentsLinkCard = ({
         <SubTitle>
           <Circle
             size="small"
-            backgroundColor={palette['puertoRico']}
+            backgroundColor={palette[iconColor]}
             className="u-mr-half"
           >
-            <Icon icon="file" color={palette['white']} />
+            <Icon icon={icon} color={palette['white']} />
           </Circle>
-          {t('card.documentsLink.title')}
+          {t(`card.appLink.${slug}.title`)}
         </SubTitle>
-        <Text>{t('card.documentsLink.description')}</Text>
+        <Text>{t(`card.appLink.${slug}.description`)}</Text>
         <AppLinker
-          slug={appSlug}
-          nativePath={nativePath}
+          slug={slug}
+          nativePath={path}
           href={generateWebLink({
             cozyUrl: cozyURL.origin,
-            slug: appSlug,
-            nativePath: nativePath
+            slug,
+            nativePath: path
           })}
         >
           {({ onClick, href }) => (
@@ -52,14 +53,14 @@ const DocumentsLinkCard = ({
               href={href}
               icon={
                 <AppIcon
-                  app={appSlug}
+                  app={slug}
                   domain={cozyURL.host}
                   secure={cozyURL.protocol === 'https:'}
                   className="u-w-1 u-h-1 u-mr-half"
                 />
               }
               theme="secondary"
-              label={t('card.documentsLink.button')}
+              label={t(`card.appLink.${slug}.button`)}
               className={isMobile ? 'u-w-100' : null}
             />
           )}
@@ -69,13 +70,19 @@ const DocumentsLinkCard = ({
   )
 }
 
-DocumentsLinkCard.propTypes = {
-  folderId: PropTypes.string.isRequired,
-  breakpoints: PropTypes.shape({
-    isMobile: PropTypes.bool
-  }),
-  client: PropTypes.object,
-  t: PropTypes.func
+AppLinkCard.propTypes = {
+  slug: PropTypes.string.isRequired,
+  path: PropTypes.string,
+  icon: PropTypes.string.isRequired,
+  iconColor: PropTypes.string,
+  breakpoints: PropTypes.object.isRequired,
+  client: PropTypes.object.isRequired,
+  t: PropTypes.func.isRequired
 }
 
-export default withClient(withBreakpoints()(translate()(DocumentsLinkCard)))
+AppLinkCard.defaultProps = {
+  path: '/',
+  iconColor: 'primaryColor'
+}
+
+export default withClient(withBreakpoints()(translate()(AppLinkCard)))

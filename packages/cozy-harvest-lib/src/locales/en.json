@@ -36,10 +36,22 @@
         "format": "MMMM D[,] YYYY [at] HH[:]mm"
       }
     },
-    "documentsLink": {
-      "title": "Your documents",
-      "description": "This service retrieves your latest documents and keeps a complete back-up for you.",
-      "button": "Open the documents"
+    "appLink": {
+      "drive": {
+        "title": "Your documents",
+        "description": "This service retrieves your latest documents and keeps a complete back-up for you.",
+        "button": "Open the documents"
+      },
+      "contacts": {
+        "title": "Your contacts",
+        "description": "This service synchronizes all your contacts for you.",
+        "button": "Open contacts"
+      },
+      "banks": {
+        "title": "Your banking data",
+        "description": "This service retrieves your latest baking operations and keeps a complete record for you.",
+        "button": "Access bank accounts"
+      }
     }
   },
   "default": {
