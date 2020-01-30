@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { Query } from 'cozy-client'
+import { Query, Q } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 
@@ -22,7 +22,7 @@ export class KonnectorUpdateLinker extends PureComponent {
   render() {
     const { label, isBlocking, konnector } = this.props
     return (
-      <Query query={client => client.all('io.cozy.apps')}>
+      <Query query={() => Q('io.cozy.apps')}>
         {({ data, fetchStatus }) => {
           const isLoaded = fetchStatus === 'loaded'
           const konnectorUpdateUrl = Application.getStoreInstallationURL(
