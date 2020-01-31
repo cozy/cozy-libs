@@ -265,6 +265,8 @@ export class DumbTriggerManager extends Component {
       return await this.handleNewAccount(oAuthAccount)
     } catch (error) {
       this.handleError(error)
+    } finally {
+      this.setState({ status: IDLE })
     }
   }
 
@@ -294,11 +296,9 @@ export class DumbTriggerManager extends Component {
       status: RUNNING
     })
 
-    const konnectorPolicy = findKonnectorPolicy(konnector)
-
     try {
       let cipher
-
+      const konnectorPolicy = findKonnectorPolicy(konnector)
       logger.log('konnector policy', konnectorPolicy)
       if (konnectorPolicy.saveInVault) {
         const cipherId = this.getSelectedCipherId()
@@ -327,6 +327,10 @@ export class DumbTriggerManager extends Component {
       return await this.handleNewAccount(accounts.mergeAuth(savedAccount, data))
     } catch (error) {
       return this.handleError(error)
+    } finally {
+      this.setState({
+        status: IDLE
+      })
     }
   }
 
@@ -337,7 +341,7 @@ export class DumbTriggerManager extends Component {
    */
   async handleNewAccount(account) {
     const trigger = await this.ensureTrigger(account)
-    this.setState({ account, status: IDLE })
+    this.setState({ account })
     return await this.props.launch(trigger)
   }
   /**
@@ -346,7 +350,7 @@ export class DumbTriggerManager extends Component {
   handleError(error) {
     logger.error('TriggerManager handleError', error)
     const { onError } = this.props
-    this.setState({ error, state: IDLE })
+    this.setState({ error })
     if (typeof onError === 'function') onError(error)
   }
 
