@@ -1,5 +1,4 @@
 import has from 'lodash/has'
-import sortBy from 'lodash/sortBy'
 import get from 'lodash/get'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -40,12 +39,15 @@ export class KonnectorSuccess extends Component {
   }
   render() {
     const { t } = this.props
-    const relatedApps = sortBy(
-      Object.values(KonnectorSuccess.apps).filter(app =>
-        app.predicate(this.state, this.props)
-      ),
-      app => -app.priority
-    )
+    const relatedApps = relatedAppsConfiguration
+      .filter(app =>
+        app.predicate({
+          konnectorManifest: this.props.konnector,
+          trigger: this.state.trigger
+        })
+      )
+      .map(({ slug }) => KonnectorSuccess.apps[slug])
+      .filter(Boolean)
 
     const hasLinks = relatedApps.length > 0
 
@@ -79,15 +81,27 @@ export class KonnectorSuccess extends Component {
   }
 }
 
-KonnectorSuccess.apps = {
-  drive: {
-    priority: 0,
-    // eslint-disable-next-line react/display-name
-    predicate: state => {
-      const trigger = state.trigger
+const relatedAppsConfiguration = [
+  {
+    slug: 'banks',
+    predicate: ({ konnectorManifest }) => {
+      return (
+        Array.isArray(konnectorManifest.data_types) &&
+        konnectorManifest.data_types.includes('bankAccounts')
+      )
+    }
+  },
+  {
+    slug: 'drive',
+    predicate: ({ trigger }) => {
       const res = has(trigger, 'message.folder_to_save')
       return res
-    },
+    }
+  }
+]
+
+KonnectorSuccess.apps = {
+  drive: {
     // eslint-disable-next-line react/display-name
     successLink: (state, props, context, i) => {
       return (
@@ -108,17 +122,7 @@ KonnectorSuccess.apps = {
       )
     }
   },
-
   banks: {
-    priority: 1,
-    // eslint-disable-next-line react/display-name
-    predicate: (state, props) => {
-      const konnector = props.konnector
-      return (
-        Array.isArray(konnector.data_types) &&
-        konnector.data_types.includes('bankAccounts')
-      )
-    },
     // eslint-disable-next-line react/display-name
     successLink: (state, props, context, i) => {
       return <BanksLink key={i} />
