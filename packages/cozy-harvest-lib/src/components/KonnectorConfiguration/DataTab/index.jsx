@@ -4,15 +4,15 @@ import { withClient } from 'cozy-client'
 
 import Stack from 'cozy-ui/transpiled/react/Stack'
 
-import * as konnectorsModel from 'helpers/konnectors'
-import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
-import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
-import KonnectorMaintenance from 'components/Maintenance'
-import AppLinkCard from 'components/cards/AppLinkCard'
-import TriggerErrorInfo from 'components/infos/TriggerErrorInfo'
-import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
-import getRelatedAppsSlugs from 'models/getRelatedAppsSlugs'
-import appLinksProps from 'components/KonnectorConfiguration/DataTab/appLinksProps'
+import * as konnectorsModel from '../../../helpers/konnectors'
+import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
+import LaunchTriggerCard from '../../../components/cards/LaunchTriggerCard'
+import KonnectorMaintenance from '../../../components/Maintenance'
+import AppLinkCard from '../../../components/cards/AppLinkCard'
+import TriggerErrorInfo from '../../../components/infos/TriggerErrorInfo'
+import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
+import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
+import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
 
 export const DataTab = ({
   konnector,

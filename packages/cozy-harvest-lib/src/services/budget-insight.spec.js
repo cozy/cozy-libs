@@ -4,12 +4,12 @@ import {
   onBIAccountCreation,
   getBIConfigForCozyURL
 } from './budget-insight'
-import { waitForRealtimeResult } from './jobUtils'
+import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
 
 jest.mock('./jobUtils', () => ({
-  waitForRealtimeResult: jest.fn()
+  waitForRealtimeEvent: jest.fn()
 }))
 
 jest.mock('./bi-http', () => ({
@@ -67,11 +67,13 @@ describe('createOrUpdateBIConnection', () => {
         }
       }
     })
-    waitForRealtimeResult.mockImplementation(async () => {
+    waitForRealtimeEvent.mockImplementation(async () => {
       sleep(2)
       return {
         data: {
-          code: 'bi-temporary-access-token-145613'
+          result: {
+            code: 'bi-temporary-access-token-145613'
+          }
         }
       }
     })
@@ -106,9 +108,13 @@ describe('createOrUpdateBIConnection', () => {
       account,
       konnector
     })
-    expect(waitForRealtimeResult).toHaveBeenCalledWith(client, {
-      _id: 'job-id-1337'
-    })
+    expect(waitForRealtimeEvent).toHaveBeenCalledWith(
+      client,
+      {
+        _id: 'job-id-1337'
+      },
+      'result'
+    )
     expect(createBIConnection).toHaveBeenCalledWith(
       expect.any(Object),
       {
@@ -137,9 +143,13 @@ describe('createOrUpdateBIConnection', () => {
       }),
       konnector
     })
-    expect(waitForRealtimeResult).toHaveBeenCalledWith(client, {
-      _id: 'job-id-1337'
-    })
+    expect(waitForRealtimeEvent).toHaveBeenCalledWith(
+      client,
+      {
+        _id: 'job-id-1337'
+      },
+      'result'
+    )
     expect(createBIConnection).not.toHaveBeenCalled()
     expect(updateBIConnection).toHaveBeenCalledWith(
       expect.any(Object),

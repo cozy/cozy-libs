@@ -11,7 +11,7 @@ import merge from 'lodash/merge'
 import clone from 'lodash/clone'
 import defaults from 'lodash/defaults'
 
-import { waitForRealtimeResult } from './jobUtils'
+import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
 import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
@@ -97,10 +97,15 @@ const createTemporaryToken = async ({ client, account, konnector }) => {
   const jobResponse = await client.stackClient.jobs.create('konnector', {
     mode: 'getTemporaryToken',
     konnector: konnector.slug,
-    account: account._id
+    account: account._id,
+    bankId: account.auth.bankId
   })
-  const event = await waitForRealtimeResult(client, jobResponse.data.attributes)
-  return event.data.code
+  const event = await waitForRealtimeEvent(
+    client,
+    jobResponse.data.attributes,
+    'result'
+  )
+  return event.data.result.code
 }
 
 /**
