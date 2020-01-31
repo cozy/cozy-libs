@@ -11,7 +11,7 @@ import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
-import relatedAppsConfiguration from '../models/relatedAppsConfiguration'
+import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
@@ -39,14 +39,11 @@ export class KonnectorSuccess extends Component {
   }
   render() {
     const { t } = this.props
-    const relatedApps = relatedAppsConfiguration
-      .filter(app =>
-        app.predicate({
-          konnectorManifest: this.props.konnector,
-          trigger: this.state.trigger
-        })
-      )
-      .map(({ slug }) => KonnectorSuccess.apps[slug])
+    const relatedApps = getRelatedAppsSlugs({
+      konnectorManifest: this.props.konnector,
+      trigger: this.state.trigger
+    })
+      .map(slug => KonnectorSuccess.apps[slug])
       .filter(Boolean)
 
     const hasLinks = relatedApps.length > 0
