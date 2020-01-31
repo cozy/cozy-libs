@@ -5,6 +5,7 @@ const colorize = require('../utils/colorize')
 const constants = require('./constants')
 const promptConfirm = require('./confirm')
 const defaults = require('lodash/defaults')
+const logger = require('../utils/logger')
 
 const {
   DEFAULT_REGISTRY_URL,
@@ -84,7 +85,7 @@ const publisher = ({
   }
 
   // ready publish the application on the registry
-  console.log(
+  logger.log(
     `Attempting to publish ${colorize.bold(
       publishOptions.appSlug
     )} (version ${colorize.bold(
@@ -95,14 +96,14 @@ const publisher = ({
       publishOptions.registryUrl
     )} (space: ${publishOptions.spaceName || 'default one'})`
   )
-  console.log()
+  logger.log()
 
   if (showConfirmation && !yes) {
     const goFurther = await promptConfirm(
       'Are you sure you want to publish this application above?'
     )
     if (!goFurther) {
-      console.log('Publishing cancelled')
+      logger.log('Publishing cancelled')
       return
     }
   }

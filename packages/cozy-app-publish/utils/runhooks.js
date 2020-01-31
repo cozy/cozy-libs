@@ -1,3 +1,5 @@
+const logger = require('./logger')
+
 const requireHook = (hook, type) => {
   try {
     return require(`${__dirname}/../lib/hooks/${type}/` + hook + '.js')
@@ -6,7 +8,7 @@ const requireHook = (hook, type) => {
       // Not builtin
       return require(process.cwd() + '/' + hook)
     } catch (err) {
-      console.error(err)
+      logger.error(err)
       throw new Error(`"${hook}" could not be loaded.`)
     }
   }
@@ -21,10 +23,10 @@ module.exports = async (hookNames, type, options) => {
     for (const hook of hooks) {
       try {
         const hookScript = requireHook(hook, type)
-        console.log(`↳ ℹ️  Running ${type}publish hook ${hook}`)
+        logger.log(`↳ ℹ️  Running ${type}publish hook ${hook}`)
         hookOptions = (await hookScript(hookOptions)) || hookOptions
       } catch (error) {
-        console.error(
+        logger.error(
           `↳ ❌  An error occured with ${type}publish hook ${hook}: ${error.message}`
         )
         throw new Error(`${type}publish hooks failed`)

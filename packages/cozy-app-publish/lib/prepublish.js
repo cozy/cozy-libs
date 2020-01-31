@@ -1,6 +1,8 @@
 const runHooks = require('../utils/runhooks')
 const request = require('request')
 const crypto = require('crypto')
+const logger = require('../utils/logger')
+
 /**
  * Returns only expected value, avoid data injection by hook
  */
@@ -90,7 +92,7 @@ const shasum256FromURL = url =>
 const shasum = async options => {
   const { appBuildUrl } = options
   try {
-    console.log('Verifying shasum...')
+    logger.log('Verifying shasum...')
     const shasum = await prepublish.shasum256FromURL(appBuildUrl)
     options.sha256Sum = shasum
   } catch (e) {

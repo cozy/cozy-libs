@@ -8,10 +8,11 @@ const {
   createArchive,
   pushArchive
 } = require('./helpers')
+const logger = require('../../../utils/logger')
 
 module.exports = async options => {
   if (!fs.existsSync(options.buildDir)) {
-    console.error('↳ ❌  Build folder does not exist. Run `yarn build`.')
+    logger.error('↳ ❌  Build folder does not exist. Run `yarn build`.')
     throw new Error('Missing build folder')
   }
 
