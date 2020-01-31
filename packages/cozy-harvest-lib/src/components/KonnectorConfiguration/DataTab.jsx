@@ -12,7 +12,7 @@ import KonnectorMaintenance from '../Maintenance'
 import AppLinkCard from '../cards/AppLinkCard'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
-import relatedAppsConfiguration from '../../models/relatedAppsConfiguration'
+import getRelatedAppsSlugs from '../../models/getRelatedAppsSlugs'
 
 const appLinksProps = {
   drive: ({ trigger }) => ({
@@ -52,14 +52,11 @@ export const DataTab = ({
     !hasLoginError &&
     !isTermsVersionMismatchErrorWithVersionAvailable
 
-  const appLinks = relatedAppsConfiguration
-    .filter(app =>
-      app.predicate({
-        konnectorManifest: konnector,
-        trigger
-      })
-    )
-    .map(({ slug }) => appLinksProps[slug] && appLinksProps[slug]({ trigger }))
+  const appLinks = getRelatedAppsSlugs({
+    konnectorManifest: konnector,
+    trigger
+  })
+    .map(slug => appLinksProps[slug] && appLinksProps[slug]({ trigger }))
     .filter(Boolean)
 
   const {

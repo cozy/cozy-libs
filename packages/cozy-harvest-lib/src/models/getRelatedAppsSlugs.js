@@ -27,4 +27,9 @@ const relatedAppsConfiguration = [
   }
 ]
 
-export default relatedAppsConfiguration
+const getRelatedAppsSlugs = ({ konnectorManifest, trigger }) =>
+  relatedAppsConfiguration
+    .filter(app => app.predicate({ konnectorManifest, trigger }))
+    .map(({ slug }) => slug)
+
+export default getRelatedAppsSlugs
