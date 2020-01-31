@@ -12,6 +12,26 @@ import KonnectorMaintenance from '../Maintenance'
 import AppLinkCard from '../cards/AppLinkCard'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+import relatedAppsConfiguration from '../../models/relatedAppsConfiguration'
+
+const appLinksProps = {
+  drive: ({ trigger }) => ({
+    slug: 'drive',
+    path: `/files/${get(trigger, 'message.folder_to_save')}`,
+    icon: 'file',
+    iconColor: 'puertoRico'
+  }),
+  banks: () => ({
+    slug: 'banks',
+    icon: 'bank',
+    iconColor: 'weirdGreen'
+  }),
+  contacts: () => ({
+    slug: 'contacts',
+    icon: 'team',
+    iconColor: 'brightSun'
+  })
+}
 
 export const DataTab = ({
   konnector,
@@ -32,11 +52,15 @@ export const DataTab = ({
     !hasLoginError &&
     !isTermsVersionMismatchErrorWithVersionAvailable
 
-  const folderToSaveId = get(trigger, 'message.folder_to_save')
-  const showBanksLink = get(konnector, 'data_types', []).includes(
-    'bankAccounts'
-  )
-  const showContactsLink = get(konnector, 'data_types', []).includes('contact')
+  const appLinks = relatedAppsConfiguration
+    .filter(app =>
+      app.predicate({
+        konnectorManifest: konnector,
+        trigger
+      })
+    )
+    .map(({ slug }) => appLinksProps[slug] && appLinksProps[slug]({ trigger }))
+    .filter(Boolean)
 
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
@@ -59,20 +83,9 @@ export const DataTab = ({
         <TriggerErrorInfo error={error} konnector={konnector} />
       )}
       <LaunchTriggerCard initialTrigger={trigger} disabled={isInMaintenance} />
-      {folderToSaveId && (
-        <AppLinkCard
-          slug="drive"
-          path={`/files/${folderToSaveId}`}
-          icon="file"
-          iconColor="puertoRico"
-        />
-      )}
-      {showBanksLink && (
-        <AppLinkCard slug="banks" icon="bank" iconColor="weirdGreen" />
-      )}
-      {showContactsLink && (
-        <AppLinkCard slug="contacts" icon="team" iconColor="brightSun" />
-      )}
+      {appLinks.map(({ slug, ...otherProps }) => (
+        <AppLinkCard key={slug} slug={slug} {...otherProps} />
+      ))}
     </Stack>
   )
 }

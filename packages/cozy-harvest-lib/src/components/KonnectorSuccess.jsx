@@ -1,4 +1,3 @@
-import has from 'lodash/has'
 import get from 'lodash/get'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
@@ -12,6 +11,7 @@ import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
+import relatedAppsConfiguration from '../models/relatedAppsConfiguration'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
@@ -80,25 +80,6 @@ export class KonnectorSuccess extends Component {
     )
   }
 }
-
-const relatedAppsConfiguration = [
-  {
-    slug: 'banks',
-    predicate: ({ konnectorManifest }) => {
-      return (
-        Array.isArray(konnectorManifest.data_types) &&
-        konnectorManifest.data_types.includes('bankAccounts')
-      )
-    }
-  },
-  {
-    slug: 'drive',
-    predicate: ({ trigger }) => {
-      const res = has(trigger, 'message.folder_to_save')
-      return res
-    }
-  }
-]
 
 KonnectorSuccess.apps = {
   drive: {
