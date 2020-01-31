@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.22.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.21.1...cozy-harvest-lib@1.22.0) (2020-01-31)
+
+
+### Bug Fixes
+
+* Don't show drive link when empty save folder ([de0344a](https://github.com/cozy/cozy-libs/commit/de0344a))
+* Migrate Infos components ([cacf3a4](https://github.com/cozy/cozy-libs/commit/cacf3a4))
+* Supported nested and flat subdomains ([d33345f](https://github.com/cozy/cozy-libs/commit/d33345f))
+
+
+### Features
+
+* Display links to other apps ([9224253](https://github.com/cozy/cozy-libs/commit/9224253))
+
+
+
+
+
 ## [1.21.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.21.0...cozy-harvest-lib@1.21.1) (2020-01-31)
 
 
