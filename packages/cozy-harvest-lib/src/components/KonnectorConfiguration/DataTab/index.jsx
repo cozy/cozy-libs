@@ -3,35 +3,16 @@ import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import get from 'lodash/get'
 
-import * as konnectorsModel from '../../helpers/konnectors'
-import KonnectorUpdateInfos from '../infos/KonnectorUpdateInfos'
-import LaunchTriggerCard from '../cards/LaunchTriggerCard'
-import KonnectorMaintenance from '../Maintenance'
-import AppLinkCard from '../cards/AppLinkCard'
-import TriggerErrorInfo from '../infos/TriggerErrorInfo'
-import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
-import getRelatedAppsSlugs from '../../models/getRelatedAppsSlugs'
-
-const appLinksProps = {
-  drive: ({ trigger }) => ({
-    slug: 'drive',
-    path: `/files/${get(trigger, 'message.folder_to_save')}`,
-    icon: 'file',
-    iconColor: 'puertoRico'
-  }),
-  banks: () => ({
-    slug: 'banks',
-    icon: 'bank',
-    iconColor: 'weirdGreen'
-  }),
-  contacts: () => ({
-    slug: 'contacts',
-    icon: 'team',
-    iconColor: 'brightSun'
-  })
-}
+import * as konnectorsModel from 'helpers/konnectors'
+import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
+import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
+import KonnectorMaintenance from 'components/Maintenance'
+import AppLinkCard from 'components/cards/AppLinkCard'
+import TriggerErrorInfo from 'components/infos/TriggerErrorInfo'
+import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
+import getRelatedAppsSlugs from 'models/getRelatedAppsSlugs'
+import appLinksProps from 'components/KonnectorConfiguration/DataTab/appLinksProps'
 
 export const DataTab = ({
   konnector,
