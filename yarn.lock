@@ -4606,10 +4606,10 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.0.7, cosmiconfig@^5.1.0, cosmiconfig@^5.2.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-bi-auth@0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.2.tgz#9309080e8b3a907ab81bd97efe8b69b9a339f55a"
-  integrity sha512-QPdTDtPdFhb+1jhNiChAYvbSOjSnld6ejXjTPFSKHW3EU1e0rY4co5M1+9KOIkC/mYL7FIbWb3RiTD3S0niqyA==
+cozy-bi-auth@0.0.3:
+  version "0.0.3"
+  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.3.tgz#c868c153799cc54ba33d3bd77c82c6cd7a4a4a49"
+  integrity sha512-lqQ4kPCisTEc4jzOxY4GkX6Qh3WAoo4yVFd8bOHRVPKDFR1S50xOkGcqQXdchlctpPPY+7bJ9boQaPGLpOoNxw==
   dependencies:
     cozy-logger "^1.3.0"
     lodash "^4.17.15"

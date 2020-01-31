@@ -65,7 +65,7 @@ const findKonnectorPolicy = konnector => {
  * Used as a form submit handler
  *
  * @param  {io.cozy.account} options.account - Existing io.cozy.account or object
- * @param  {[type]} options.cipher - Vault cipher if vault has been unlocked
+ * @param  {Cipher} options.cipher - Vault cipher if vault has been unlocked
  * @param  {CozyClient} options.client - A cozy client
  * @param  {io.cozy.konnector} options.konnector - Konnector to which the account is linked
  * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts
