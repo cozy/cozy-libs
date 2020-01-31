@@ -31,3 +31,4 @@ export { withLocales }
 export {
   default as updateAccountsPassword
 } from './services/updateAccountsPassword'
+export { default as deleteAccounts } from './services/deleteAccounts'

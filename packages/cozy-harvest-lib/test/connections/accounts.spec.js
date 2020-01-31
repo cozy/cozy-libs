@@ -344,6 +344,20 @@ describe('Account mutations', () => {
       await deleteAccount(fixtures.simpleAccount)
       expect(client.destroy).toHaveBeenCalledWith(fixtures.simpleAccount)
     })
+
+    describe('when there is a conflict', () => {
+      it('should re-fetch the account and retry', async () => {
+        client.destroy.mockRejectedValueOnce({ status: 409 })
+        client.query.mockResolvedValueOnce([
+          { _id: 'account1', _type: 'io.cozy.accounts' }
+        ])
+
+        await deleteAccount(fixtures.simpleAccount)
+
+        expect(client.query).toHaveBeenCalled()
+        expect(client.destroy).toHaveBeenCalledTimes(2)
+      })
+    })
   })
 
   describe('saveAccount', () => {

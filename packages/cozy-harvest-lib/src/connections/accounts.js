@@ -144,7 +144,7 @@ const saveAccount = (client, konnector, account = {}) => {
  * @param  {Object}  client  CozyClient
  * @param  {Object}  account io.cozy.accounts document
  */
-const deleteAccount = async (client, account) => {
+export const deleteAccount = async (client, account) => {
   try {
     await client.destroy(account)
   } catch (error) {
