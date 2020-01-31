@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.23.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.22.0...cozy-harvest-lib@1.23.0) (2020-01-31)
+
+
+### Bug Fixes
+
+* Submitting button returns to idle state after error ([c7edd4f](https://github.com/cozy/cozy-libs/commit/c7edd4f))
+
+
+### Features
+
+* Send bankId as part of the job options ([2cddda4](https://github.com/cozy/cozy-libs/commit/2cddda4))
+
+
+
+
+
 # [1.22.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.21.1...cozy-harvest-lib@1.22.0) (2020-01-31)
 
 
