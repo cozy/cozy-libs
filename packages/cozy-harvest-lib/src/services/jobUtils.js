@@ -2,7 +2,7 @@ import CozyRealtime from 'cozy-realtime'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
-export const waitForRealtimeResult = (client, job) =>
+export const waitForRealtimeEvent = (client, job, eventType) =>
   new Promise((resolve, reject) => {
     const rt = new CozyRealtime({ client })
 
@@ -13,8 +13,10 @@ export const waitForRealtimeResult = (client, job) =>
     }
     const id = job._id
     const handleNotification = event => {
-      rt.unsubscribe('notified', JOBS_DOCTYPE, id, handleNotification)
-      resolve(event)
+      if (!eventType || event.data.type == eventType) {
+        rt.unsubscribe('notified', JOBS_DOCTYPE, id, handleNotification)
+        resolve(event)
+      }
     }
 
     rt.subscribe('updated', JOBS_DOCTYPE, id, handleUpdate)
