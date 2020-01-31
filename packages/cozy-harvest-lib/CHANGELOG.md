@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.20.2...cozy-harvest-lib@1.21.0) (2020-01-31)
+
+
+### Bug Fixes
+
+* Do not explode when vault is locked ([3b73427](https://github.com/cozy/cozy-libs/commit/3b73427))
+
+
+### Features
+
+* Convert BI errors to user errors shown in the UI ([3b82c30](https://github.com/cozy/cozy-libs/commit/3b82c30))
+
+
+
+
+
 ## [1.20.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.20.1...cozy-harvest-lib@1.20.2) (2020-01-30)
 
 **Note:** Version bump only for package cozy-harvest-lib
