@@ -413,17 +413,22 @@ describe('TriggerManager', () => {
   })
 
   describe('handleSubmit', () => {
+    const isSubmitting = wrapper => {
+      // TODO: test disabled prop of submit button instead of the internal state
+      return wrapper.state().status == 'RUNNING'
+    }
+
     it('should render as submitting when there is no account', async () => {
       const wrapper = shallowWithoutAccount()
       const submitPromise = wrapper.instance().handleSubmit()
-      expect(wrapper.state().status).toEqual('RUNNING') // TODO: test disabled prop of submit button instead of the internal state
+      expect(isSubmitting(wrapper)).toBe(true)
       await submitPromise
     })
 
     it('should render as submitting when there is an account', async () => {
       const wrapper = shallowWithAccount()
       const submitPromise = wrapper.instance().handleSubmit()
-      expect(wrapper.state().status).toEqual('RUNNING')
+      expect(isSubmitting(wrapper)).toBe(true)
       await submitPromise
     })
 
