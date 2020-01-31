@@ -97,7 +97,8 @@ const createTemporaryToken = async ({ client, account, konnector }) => {
   const jobResponse = await client.stackClient.jobs.create('konnector', {
     mode: 'getTemporaryToken',
     konnector: konnector.slug,
-    account: account._id
+    account: account._id,
+    bankId: account.auth.bankId
   })
   const event = await waitForRealtimeEvent(
     client,
