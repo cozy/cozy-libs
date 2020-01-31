@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.21.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.21.0...cozy-harvest-lib@1.21.1) (2020-01-31)
+
+
+### Bug Fixes
+
+* Remove extra translation context ([a36fd13](https://github.com/cozy/cozy-libs/commit/a36fd13))
+
+
+
+
+
 # [1.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.20.2...cozy-harvest-lib@1.21.0) (2020-01-31)
 
 
