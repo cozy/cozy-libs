@@ -432,6 +432,22 @@ describe('TriggerManager', () => {
       await submitPromise
     })
 
+    it('should stop being rendered as submitting on error', async () => {
+      const wrapper = shallowWithAccount()
+      mockVaultClient.isLocked.mockReset().mockImplementationOnce(() => {
+        throw new Error('fakeerror')
+      })
+
+      try {
+        await wrapper.instance().handleSubmit(fixtures.data)
+        expect(mockVaultClient.isLocked).toHaveBeenCalledTimes(1)
+      } catch (e) {
+        // eslint-disable-next-line no-empty
+      }
+
+      expect(isSubmitting(wrapper)).toBe(false)
+    })
+
     it('should call saveAccount without account', async () => {
       const wrapper = shallowWithoutAccount()
       await wrapper.instance().handleSubmit(fixtures.data)
