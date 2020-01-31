@@ -16,7 +16,7 @@ import Markdown from './Markdown'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
-const DescriptionContent = ({ title, message, children }) => {
+export const DescriptionContent = ({ title, message, children }) => {
   return (
     <>
       <h4>{title}</h4>

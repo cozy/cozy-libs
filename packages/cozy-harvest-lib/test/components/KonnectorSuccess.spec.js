@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 import CozyClient, { CozyProvider } from 'cozy-client'
 import {
   KonnectorSuccess,
+  DescriptionContent,
   BanksLink,
   DriveLink,
   SuccessImage
@@ -100,5 +101,28 @@ describe('KonnectorSuccess', () => {
         .dive()
         .find(BanksLink).length
     ).toBe(1)
+  })
+
+  it('should show apps in the correct order', () => {
+    setup({ isBankingKonnector: true, folder_to_save: '123' })
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(DriveLink).length
+    ).toBe(1)
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(BanksLink).length
+    ).toBe(1)
+    expect(
+      root
+        .find(KonnectorSuccess)
+        .dive()
+        .find(DescriptionContent)
+        .getElement()
+    ).toMatchSnapshot()
   })
 })
