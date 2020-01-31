@@ -13,7 +13,7 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "test": "jest --verbose --coverage",
+    "test": "jest",
     "test:integration": "env TEST_INTEGRATION=1 jest"
   },
   "bin": {
