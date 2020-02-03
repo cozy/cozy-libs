@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.23.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.23.0...cozy-harvest-lib@1.23.1) (2020-02-03)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Correctly check vault locked state ([61463f7](https://github.com/cozy/cozy-libs/commit/61463f7))
+
+
+
+
+
 # [1.23.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.22.0...cozy-harvest-lib@1.23.0) (2020-01-31)
 
 
