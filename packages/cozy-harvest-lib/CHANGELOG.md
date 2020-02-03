@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.24.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.23.1...cozy-harvest-lib@1.24.0) (2020-02-03)
+
+
+### Features
+
+* **cozy-harvest-lib:** Add deleteAccounts service ([8c78c6e](https://github.com/cozy/cozy-libs/commit/8c78c6e))
+
+
+
+
+
 ## [1.23.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.23.0...cozy-harvest-lib@1.23.1) (2020-02-03)
 
 
