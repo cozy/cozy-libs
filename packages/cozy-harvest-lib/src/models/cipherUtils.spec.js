@@ -68,7 +68,7 @@ describe('createOrUpdateCipher', () => {
   it('should return null if vault client is locked', async () => {
     const { konnector, account, userCredentials, vaultClient } = setup({
       vaultClient: {
-        isLocked: () => true
+        isLocked: jest.fn().mockResolvedValue(true)
       }
     })
     const cipherId = null
