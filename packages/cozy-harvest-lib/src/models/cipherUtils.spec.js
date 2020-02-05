@@ -83,7 +83,7 @@ describe('createOrUpdateCipher', () => {
   it('should pass the correct search to vault client', async () => {
     const { konnector, account, userCredentials, vaultClient } = setup({
       vaultClient: {
-        isLocked: () => false
+        isLocked: jest.fn().mockResolvedValue(false)
       }
     })
     const cipherId = null
