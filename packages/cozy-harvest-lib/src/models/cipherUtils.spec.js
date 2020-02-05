@@ -1,28 +1,15 @@
-import { createOrUpdateCipher } from './cipherUtils'
+import * as cipherUtils from './cipherUtils'
 
 describe('createOrUpdateCipher', () => {
   const setup = ({
-    account: accountAttrs,
     konnector: konnectorAttrs,
     userCredentials: userCredentialsAttrs,
     vaultClient: vaultClientAttrs
   } = {}) => {
-    const account = {
-      relationships: {
-        vaultCipher: {
-          data: [
-            {
-              _id: 'cipher-relationship-id'
-            }
-          ]
-        }
-      },
-      ...accountAttrs
-    }
-
     const konnector = {
       vendor_link: 'konnector-vendor-link',
       fields: { login: { role: 'identifier' } },
+      name: 'konnector-name',
       ...konnectorAttrs
     }
 
@@ -32,10 +19,6 @@ describe('createOrUpdateCipher', () => {
       ...userCredentialsAttrs
     }
 
-    const savedCipher = {
-      id: 'saved-cipher-id'
-    }
-
     const sharedCipher = {
       id: 'shared-with-cozy-cipher-id'
     }
@@ -43,68 +26,128 @@ describe('createOrUpdateCipher', () => {
     const foundCipher = { id: 'found-cipher-id' }
 
     const vaultClient = {
-      decrypt: jest.fn().mockReturnValue({
-        login: {
-          username: 'my-decrypted-username',
-          password: 'my-decrypted-password'
-        }
-      }),
-      get: ({ id }) => ({ id }),
+      decrypt: jest.fn().mockImplementation(cipher => cipher),
+      get: id => ({ id }),
       getByIdOrSearch: jest.fn().mockReturnValue(foundCipher),
       shareWithCozy: jest.fn().mockResolvedValue(sharedCipher),
-      createNewCozySharedCipher: jest.fn(),
-      saveCipher: jest.fn().mockResolvedValue(savedCipher),
+      createNewCozySharedCipher: jest.fn().mockImplementation(cipherData => ({
+        ...cipherData,
+        organizationId: 'cozy-org-id',
+        collectionIds: ['cozy-org-collection-id']
+      })),
+      saveCipher: jest.fn().mockImplementation(cipher => ({
+        ...cipher,
+        id: cipher.id || 'saved-cipher'
+      })),
       ...vaultClientAttrs
     }
 
     return {
-      account,
       konnector,
       userCredentials,
       vaultClient
     }
   }
 
-  it('should return null if vault client is locked', async () => {
-    const { konnector, account, userCredentials, vaultClient } = setup({
-      vaultClient: {
-        isLocked: jest.fn().mockResolvedValue(true)
-      }
-    })
-    const cipherId = null
-    const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-      konnector,
-      account,
-      userCredentials
-    })
-    expect(cipher).toBe(null)
+  const existingCipher = {
+    collectionIds: ['cozy-org-collection-id'],
+    id: 'existing-cipher',
+    login: {
+      password: 'password-to-be-updated',
+      uris: [
+        {
+          match: 'Domain',
+          uri: 'konnector-vendor-link'
+        }
+      ],
+      username: 'login-to-be-updated'
+    },
+    name: 'konnector-name',
+    organizationId: 'cozy-org-id',
+    type: 'Login'
+  }
+
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
-  it('should pass the correct search to vault client', async () => {
-    const { konnector, account, userCredentials, vaultClient } = setup({
-      vaultClient: {
-        isLocked: jest.fn().mockResolvedValue(false)
-      }
+  describe('when not given a cipherId', () => {
+    describe('when no cipher exists with same credentials', () => {
+      it('should create a cipher with given credentials', async () => {
+        const { konnector, account, userCredentials, vaultClient } = setup({
+          vaultClient: {
+            isLocked: jest.fn().mockResolvedValue(false)
+          }
+        })
+
+        vaultClient.getByIdOrSearch.mockResolvedValue(null)
+
+        const cipherId = null
+
+        const cipher = await cipherUtils.createOrUpdateCipher(
+          vaultClient,
+          cipherId,
+          { userCredentials, account, konnector }
+        )
+
+        expect(cipher.id).toBeNull()
+        expect(cipher.login.username).toBe(userCredentials.login)
+        expect(cipher.login.password).toBe(userCredentials.password)
+        expect(cipher.organizationId).toBe('cozy-org-id')
+        expect(cipher.collectionIds).toEqual(['cozy-org-collection-id'])
+      })
     })
-    const cipherId = null
-    const cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-      konnector,
-      account,
-      userCredentials
+
+    describe('when a cipher exists with the same credentials', () => {
+      it('should update the cipher with given credentials', async () => {
+        const { konnector, account, userCredentials, vaultClient } = setup({
+          vaultClient: {
+            isLocked: jest.fn().mockResolvedValue(false)
+          }
+        })
+
+        vaultClient.getByIdOrSearch.mockResolvedValue(existingCipher)
+
+        const cipherId = null
+
+        const cipher = await cipherUtils.createOrUpdateCipher(
+          vaultClient,
+          cipherId,
+          { userCredentials, account, konnector }
+        )
+
+        expect(cipher.id).toBe('existing-cipher')
+        expect(cipher.login.username).toBe(userCredentials.login)
+        expect(cipher.login.password).toBe(userCredentials.password)
+        expect(cipher.organizationId).toBe('cozy-org-id')
+        expect(cipher.collectionIds).toEqual(['cozy-org-collection-id'])
+      })
     })
-    expect(vaultClient.getByIdOrSearch).toHaveBeenCalledTimes(2)
-    expect(vaultClient.getByIdOrSearch).toHaveBeenCalledWith(
-      'cipher-relationship-id',
-      {
-        type: 'Login',
-        uri: 'konnector-vendor-link',
-        username: 'my-login-credential'
-      },
-      [expect.any(Function), 'revisionDate']
-    )
-    expect(vaultClient.getByIdOrSearch).toHaveBeenCalledWith('found-cipher-id')
-    expect(cipher).toEqual({
-      id: 'saved-cipher-id'
+  })
+
+  describe('when given a cipherId', () => {
+    it('should update the cipher with given credentials', async () => {
+      const { konnector, account, userCredentials, vaultClient } = setup({
+        vaultClient: {
+          isLocked: jest.fn().mockResolvedValue(false)
+        }
+      })
+
+      vaultClient.getByIdOrSearch.mockResolvedValue(existingCipher)
+
+      const cipherId = 'existing-cipher'
+
+      const cipher = await cipherUtils.createOrUpdateCipher(
+        vaultClient,
+        cipherId,
+        { userCredentials, account, konnector }
+      )
+
+      expect(cipher.id).toBe('existing-cipher')
+      expect(cipher.login.username).toBe(userCredentials.login)
+      expect(cipher.login.password).toBe(userCredentials.password)
+      expect(cipher.organizationId).toBe('cozy-org-id')
+      expect(cipher.collectionIds).toEqual(['cozy-org-collection-id'])
     })
   })
 })
