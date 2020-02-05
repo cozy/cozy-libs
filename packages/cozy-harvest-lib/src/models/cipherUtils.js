@@ -100,7 +100,7 @@ export const createOrUpdateCipher = async (
   const isLocked = await vaultClient.isLocked()
 
   if (isLocked) {
-    logger.warn('Impossible to create cipher since vault is locked')
+    logger.warn('Impossible to create or update cipher since vault is locked')
     return null
   }
 
