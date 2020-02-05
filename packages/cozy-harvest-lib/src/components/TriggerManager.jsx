@@ -638,7 +638,7 @@ DumbTriggerManager.propTypes = {
   /**
    * What to do when the Vault unlock screen is dismissed without password
    */
-  onVaultDismiss: PropTypes.func.isRequired,
+  onVaultDismiss: PropTypes.func,
   /**
    * Whether the vault will be closable or not.
    * @type {Boolean}
