@@ -1,5 +1,5 @@
 /**
- * Replaces all orccurences of flag('my-flag') by true, simplifies conditions
+ * Replaces all occurences of flag('my-flag') by true, simplifies conditions
  * and removes dead code.
  */
 
