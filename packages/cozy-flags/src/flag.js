@@ -65,12 +65,14 @@ export const initializeFromRemote = async client => {
   enable(attributes)
 }
 
+const capitalize = str => str[0].toUppercase() + str.slice(1)
+
 export const getTemplateData = attr => {
   if (typeof document === 'undefined') {
     return null
   }
   const allDataNode = document.querySelector('[data-cozy]')
-  const attrNode = document.querySelector(`[data-${attr}]`)
+  const attrNode = document.querySelector(`[data-cozy-${attr}]`)
   try {
     if (allDataNode) {
       return JSON.parse(allDataNode.dataset.cozy)[attr]
@@ -78,7 +80,7 @@ export const getTemplateData = attr => {
       console.warn(
         'Prefer to use [data-cozy] to store template data. <div data-cozy="{{.CozyData}}></div>. "'
       )
-      return JSON.parse(attrNode.dataset[attr])
+      return JSON.parse(attrNode.dataset[`cozy${capitalize(attr)}`])
     } else {
       return null
     }
