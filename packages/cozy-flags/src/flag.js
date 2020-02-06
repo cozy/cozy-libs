@@ -51,6 +51,13 @@ export const enable = flagsToEnable => {
   }
 }
 
+/**
+ * Initializes flags from the remote endpoint serving instance flags
+ *
+ * @private
+ * @see  https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags
+ * @param  {CozyClient} client
+ */
 export const initializeFromRemote = async client => {
   const {
     data: { attributes }
@@ -59,6 +66,9 @@ export const initializeFromRemote = async client => {
 }
 
 export const getTemplateData = attr => {
+  if (typeof document === 'undefined') {
+    return null
+  }
   const allDataNode = document.querySelector('[data-cozy]')
   const attrNode = document.querySelector(`[data-${attr}]`)
   try {
@@ -77,14 +87,43 @@ export const getTemplateData = attr => {
   }
 }
 
-export const initializeFromDOM = client => {
+/**
+ * Initialize from the template data injected by cozy-stack into the DOM
+ *
+ * @private
+ * @see https://docs.cozy.io/en/cozy-stack/client-app-dev/#good-practices-for-your-application
+ *
+ * @returns {Boolean} - False is DOM initialization could not be completed, true otherwise
+ */
+export const initializeFromDOM = async () => {
   const domData = getTemplateData('flags')
   if (!domData) {
-    console.warn('no dom daa')
-    return
+    return false
   }
-  for (const [flagName, flagValue] of Object.entries(domData)) {
-    flag(flagName, flagValue)
+  enable(domData)
+  return true
+}
+
+/**
+ * Initialize flags from DOM if possible, otherwise from remote endpoint
+ *
+ * @example
+ *
+ * Flags can be taken from the flags injected by the stack
+ * ```
+ * <div data-cozy="{{ .CozyData }}"></div>
+ *
+ * // not recommended but possible
+ * <div data-flags="{{ .Flags }}"></div>
+ * ````
+ *
+ * @param  {CozyClient} client - A CozyClient
+ * @return {Promise} Resolves when flags have been initialized
+ */
+export const initialize = async client => {
+  const domRes = await initializeFromDOM()
+  if (domRes == false) {
+    await initializeFromRemote(client)
   }
 }
 
@@ -94,5 +133,6 @@ flag.reset = resetFlags
 flag.enable = enable
 flag.initializeFromRemote = initializeFromRemote
 flag.initializeFromDOM = initializeFromDOM
+flag.initialize = initialize
 
 export default flag

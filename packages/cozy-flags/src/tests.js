@@ -56,52 +56,63 @@ export default function testFlagAPI(flag) {
     })
   })
 
-  if (typeof document !== 'undefined') {
-    describe('initializeFromDOM', () => {
-      it('should initialize from DOM', async () => {
-        const body = document.body
-        const div = document.createElement('div')
-        div.dataset.cozy = JSON.stringify({
-          flags: {
-            has_feature1: true,
-            has_feature2: false,
-            number_of_foos: 10,
-            bar_config: { qux: 'quux' }
-          }
-        })
-        body.appendChild(div)
-
-        await flag.initializeFromDOM()
-        expect(flag('has_feature1')).toBe(true)
-        expect(flag('has_feature2')).toBe(false)
-        expect(flag('number_of_foos')).toBe(10)
-        expect(flag('bar_config')).toEqual({ qux: 'quux' })
-      })
-    })
-  }
-
-  describe('initializeFromRemote', () => {
-    it('should initialize from the remote stack', async () => {
-      const client = new CozyClient({})
-      const flagResponseFixture = {
-        data: {
-          type: 'io.cozy.settings',
-          id: 'io.cozy.settings.flags',
-          attributes: {
-            has_feature1: true,
-            has_feature2: false,
-            number_of_foos: 10,
-            bar_config: { qux: 'quux' }
-          },
-          links: {
-            self: '/settings/flags'
-          }
+  describe('initialization', () => {
+    const remoteFlags = {
+      has_feature1: true,
+      has_feature2: false,
+      number_of_foos: 10,
+      bar_config: { qux: 'quux' },
+      from_remote: true
+    }
+    const flagRemoteResponse = {
+      data: {
+        type: 'io.cozy.settings',
+        id: 'io.cozy.settings.flags',
+        attributes: remoteFlags,
+        links: {
+          self: '/settings/flags'
         }
       }
-      client.stackClient.fetchJSON = jest.fn(() => flagResponseFixture)
-      await flag.initializeFromRemote(client)
+    }
+
+    const domFlags = {
+      has_feature1: true,
+      has_feature2: false,
+      number_of_foos: 10,
+      bar_config: { qux: 'quux' },
+      from_remote: false
+    }
+
+    const setup = () => {
+      const client = new CozyClient({})
+      client.stackClient.fetchJSON = jest.fn(() => flagRemoteResponse)
+      return { client }
+    }
+
+    if (typeof document !== 'undefined') {
+      it('should initialize from DOM', async () => {
+        let div
+        try {
+          div = document.createElement('div')
+          div.dataset.cozy = JSON.stringify({ flags: domFlags })
+          document.body.appendChild(div)
+          await flag.initialize()
+          expect(flag('has_feature1')).toBe(true)
+          expect(flag('has_feature2')).toBe(false)
+          expect(flag('number_of_foos')).toBe(10)
+          expect(flag('bar_config')).toEqual({ qux: 'quux' })
+        } finally {
+          document.body.removeChild(div)
+        }
+      })
+    }
+
+    it('should initialize from the remote stack', async () => {
+      const { client } = setup()
+      await flag.initialize(client)
       expect(flag('has_feature1')).toBe(true)
       expect(flag('has_feature2')).toBe(false)
+      expect(flag('from_remote')).toBe(true)
       expect(flag('number_of_foos')).toBe(10)
       expect(flag('bar_config')).toEqual({ qux: 'quux' })
     })
