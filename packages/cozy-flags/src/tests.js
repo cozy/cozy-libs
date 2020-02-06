@@ -1,3 +1,5 @@
+import CozyClient from 'cozy-client'
+
 export default function testFlagAPI(flag) {
   afterEach(() => {
     flag.reset()
@@ -51,6 +53,32 @@ export default function testFlagAPI(flag) {
       flag.reset()
 
       expect(flag.list()).toHaveLength(0)
+    })
+  })
+  describe('initializeFromRemote', () => {
+    it('should initialize from the remote stack', async () => {
+      const client = new CozyClient({})
+      const flagResponseFixture = {
+        data: {
+          type: 'io.cozy.settings',
+          id: 'io.cozy.settings.flags',
+          attributes: {
+            has_feature1: true,
+            has_feature2: false,
+            number_of_foos: 10,
+            bar_config: { qux: 'quux' }
+          },
+          links: {
+            self: '/settings/flags'
+          }
+        }
+      }
+      client.stackClient.fetchJSON = jest.fn(() => flagResponseFixture)
+      await flag.initializeFromRemote(client)
+      expect(flag('has_feature1')).toBe(true)
+      expect(flag('has_feature2')).toBe(false)
+      expect(flag('number_of_foos')).toBe(10)
+      expect(flag('bar_config')).toEqual({ qux: 'quux' })
     })
   })
 }

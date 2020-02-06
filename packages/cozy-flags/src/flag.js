@@ -49,9 +49,17 @@ export const enable = flagsToEnable => {
   }
 }
 
+export const initializeFromRemote = async client => {
+  const {
+    data: { attributes }
+  } = await client.stackClient.fetchJSON('/settings/flags')
+  enable(attributes)
+}
+
 flag.store = store
 flag.list = listFlags
 flag.reset = resetFlags
 flag.enable = enable
+flag.initializeFromRemote = initializeFromRemote
 
 export default flag
