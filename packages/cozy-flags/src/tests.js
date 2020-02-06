@@ -55,6 +55,31 @@ export default function testFlagAPI(flag) {
       expect(flag.list()).toHaveLength(0)
     })
   })
+
+  if (typeof document !== 'undefined') {
+    describe('initializeFromDOM', () => {
+      it('should initialize from DOM', async () => {
+        const body = document.body
+        const div = document.createElement('div')
+        div.dataset.cozy = JSON.stringify({
+          flags: {
+            has_feature1: true,
+            has_feature2: false,
+            number_of_foos: 10,
+            bar_config: { qux: 'quux' }
+          }
+        })
+        body.appendChild(div)
+
+        await flag.initializeFromDOM()
+        expect(flag('has_feature1')).toBe(true)
+        expect(flag('has_feature2')).toBe(false)
+        expect(flag('number_of_foos')).toBe(10)
+        expect(flag('bar_config')).toEqual({ qux: 'quux' })
+      })
+    })
+  }
+
   describe('initializeFromRemote', () => {
     it('should initialize from the remote stack', async () => {
       const client = new CozyClient({})

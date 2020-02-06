@@ -58,10 +58,41 @@ export const initializeFromRemote = async client => {
   enable(attributes)
 }
 
+export const getTemplateData = attr => {
+  const allDataNode = document.querySelector('[data-cozy]')
+  const attrNode = document.querySelector(`[data-${attr}]`)
+  try {
+    if (allDataNode) {
+      return JSON.parse(allDataNode.dataset.cozy)[attr]
+    } else if (attrNode) {
+      console.warn(
+        'Prefer to use [data-cozy] to store template data. <div data-cozy="{{.CozyData}}></div>. "'
+      )
+      return JSON.parse(attrNode.dataset[attr])
+    } else {
+      return null
+    }
+  } catch (e) {
+    return null
+  }
+}
+
+export const initializeFromDOM = client => {
+  const domData = getTemplateData('flags')
+  if (!domData) {
+    console.warn('no dom daa')
+    return
+  }
+  for (const [flagName, flagValue] of Object.entries(domData)) {
+    flag(flagName, flagValue)
+  }
+}
+
 flag.store = store
 flag.list = listFlags
 flag.reset = resetFlags
 flag.enable = enable
 flag.initializeFromRemote = initializeFromRemote
+flag.initializeFromDOM = initializeFromDOM
 
 export default flag
