@@ -77,6 +77,7 @@ export const getTemplateData = attr => {
     if (allDataNode) {
       return JSON.parse(allDataNode.dataset.cozy)[attr]
     } else if (attrNode) {
+      // eslint-disable-next-line no-console
       console.warn(
         'Prefer to use [data-cozy] to store template data. <div data-cozy="{{.CozyData}}></div>. "'
       )
@@ -130,7 +131,7 @@ export const initialize = async client => {
 }
 
 class FlagClientPlugin {
-  constructor(client, options) {
+  constructor(client) {
     this.client = client
     this.handleLogin = this.handleLogin.bind(this)
     this.handleLogout = this.handleLogout.bind(this)
