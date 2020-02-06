@@ -39,68 +39,6 @@ const RUNNING = 'RUNNING'
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
 /**
- * Creates or updates an io.cozy.accounts
- * Used as a form submit handler
- *
- * @param  {io.cozy.account} options.account - Existing io.cozy.account or object
- * @param  {Cipher} options.cipher - Vault cipher if vault has been unlocked
- * @param  {CozyClient} options.client - A cozy client
- * @param  {io.cozy.konnector} options.konnector - Konnector to which the account is linked
- * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts
- * and if auth is saved into the vault
- * @param  {function} options.saveAccount
- * @param  {object} options.userData
- * @param  {function} options.ensureTrigger
- */
-const createOrUpdateAccount = async ({
-  account,
-  cipher,
-  client,
-  konnector,
-  konnectorPolicy,
-  saveAccount,
-  userCredentials
-}) => {
-  const isUpdate = !!account
-  const { onAccountCreation, saveInVault } = konnectorPolicy
-
-  let accountToSave = clone(account)
-
-  accountToSave = accounts.resetState(accountToSave)
-
-  accountToSave = accounts.setSessionResetIfNecessary(
-    accountToSave,
-    userCredentials
-  )
-
-  accountToSave = isUpdate
-    ? accounts.mergeAuth(accountToSave, userCredentials)
-    : accounts.build(konnector, userCredentials)
-
-  if (onAccountCreation) {
-    accountToSave = await onAccountCreation({
-      client,
-      account: accountToSave,
-      konnector,
-      saveAccount
-    })
-  }
-
-  if (cipher && saveInVault) {
-    accountToSave = accounts.setVaultCipherRelationship(
-      accountToSave,
-      cipher.id
-    )
-  } else {
-    logger.warn(
-      'No cipher passed when creating/updating account, account will not be linked to cipher'
-    )
-  }
-
-  return await saveAccount(konnector, accountToSave)
-}
-
-/**
  * Wraps conditionally its children inside VaultUnlocker, only if
  * props.konnector's policy tells to saveInVault
  */
