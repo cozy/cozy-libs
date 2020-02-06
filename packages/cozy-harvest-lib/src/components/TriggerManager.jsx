@@ -32,33 +32,12 @@ import flag from 'cozy-flags'
 import logger from '../logger'
 
 import { createOrUpdateCipher } from '../models/cipherUtils'
-import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
-
-const defaultKonnectorPolicy = {
-  accountContainsAuth: true,
-  saveInVault: true,
-  onAccountCreation: null,
-  match: () => true,
-  name: 'default'
-}
-
-const policies = [
-  flag('bi-konnector-policy') ? biKonnectorPolicy : null,
-  defaultKonnectorPolicy
-].filter(Boolean)
-
-logger.info('Available konnector policies', policies)
+import { findKonnectorPolicy } from '../konnector-policies'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
-
-const findKonnectorPolicy = konnector => {
-  const policy = policies.find(policy => policy.match(konnector))
-  logger.info(`Using ${policy.name} konnector policy for ${konnector.slug}`)
-  return policy
-}
 
 /**
  * Creates or updates an io.cozy.accounts
@@ -299,7 +278,7 @@ export class DumbTriggerManager extends Component {
     try {
       let cipher
       const konnectorPolicy = findKonnectorPolicy(konnector)
-      logger.log('konnector policy', konnectorPolicy)
+      logger.log('Handling submit, konnector policy', konnectorPolicy)
       if (konnectorPolicy.saveInVault) {
         const cipherId = this.getSelectedCipherId()
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
