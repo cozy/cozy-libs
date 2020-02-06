@@ -34,15 +34,13 @@ export const createDirectoryByPath = async (client, path) => {
  * @return {Object}        Created io.cozy.files document
  */
 export const statDirectoryByPath = async (client, path) => {
-  let response
   try {
-    response = await client.collection(FILES_DOCTYPE).statByPath(path)
+    const response = await client.collection(FILES_DOCTYPE).statByPath(path)
+    return response.data
   } catch (error) {
     if (error && error.status === 404) return null
     throw new Error(error.message)
   }
-
-  return response.data
 }
 
 export const filesMutations = client => ({
