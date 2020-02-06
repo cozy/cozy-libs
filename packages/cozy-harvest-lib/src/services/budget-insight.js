@@ -17,6 +17,7 @@ import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
+import { saveAccount } from '../connections/accounts'
 import logger from '../logger'
 
 const configsByMode = {
@@ -174,12 +175,11 @@ export const onBIAccountCreation = async ({
   account,
   client,
   konnector,
-  saveAccount,
   createOrUpdateBIConnectionFn = createOrUpdateBIConnection
 }) => {
   const fullAccount = account
   account = removeSensibleDataFromAccount(account)
-  account = await saveAccount(konnector, account)
+  account = await saveAccount(client, konnector, account)
 
   const biConnection = await createOrUpdateBIConnectionFn({
     account: {

@@ -1,4 +1,5 @@
 import merge from 'lodash/merge'
+import accounts from '../helpers/accounts'
 
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
@@ -133,7 +134,7 @@ export const updateAccount = async (client, account) => {
  * @param  {Object}  konnector  io.cozy.konnectors document
  * @param  {Object}  authData   Account auth attribute
  */
-const saveAccount = (client, konnector, account = {}) => {
+export const saveAccount = (client, konnector, account = {}) => {
   return account._id
     ? updateAccount(client, account)
     : createAccount(client, konnector, account)
@@ -158,16 +159,5 @@ export const deleteAccount = async (client, account) => {
 }
 
 /**
- * Get accounts mutations
- * @param  {Object} client CozyClient
- * @return {Object}        Object containing accounts mutations
  */
-export const accountsMutations = client => ({
-  createAccount: createAccount.bind(null, client),
-  findAccount: findAccount.bind(null, client),
-  updateAccount: updateAccount.bind(null, client),
-  deleteAccount: deleteAccount.bind(null, client),
-  saveAccount: saveAccount.bind(null, client)
-})
 
-export default accountsMutations

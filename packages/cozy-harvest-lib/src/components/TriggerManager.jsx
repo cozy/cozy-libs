@@ -19,6 +19,7 @@ import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
 import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
+import { findAccount } from '../connections/accounts'
 import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
@@ -174,7 +175,7 @@ export class DumbTriggerManager extends Component {
     const { findAccount } = this.props
     try {
       this.setState({ error: null, status: RUNNING })
-      const oAuthAccount = await findAccount(accountId)
+      const oAuthAccount = await findAccount(client, accountId)
       return await this.handleNewAccount(oAuthAccount)
     } catch (error) {
       this.handleError(error)
@@ -510,21 +511,12 @@ DumbTriggerManager.propTypes = {
    * Translation function
    */
   t: PropTypes.func,
-  //
-  // mutations
-  //
   /**
    * Permission mutation
    * @type {Function}
    */
   addPermission: PropTypes.func,
   /**
-  findAccount: PropTypes.func,
-  /**
-   * Account mutation
-   * @type {Func}
-   */
-  saveAccount: PropTypes.func.isRequired,
    * What to do when the Vault unlock screen is dismissed without password
    */
   onVaultDismiss: PropTypes.func,
@@ -538,11 +530,10 @@ DumbTriggerManager.propTypes = {
 const SmartTriggerManager = flow(
   translate(),
   withClient,
-  withVaultClient,
   withMutations(
-    accountsMutations,
     permissionsMutations,
   )
+  withVaultClient
 )(DumbTriggerManager)
 
 // The TriggerManager is wrapped in the providers required for it to work by
