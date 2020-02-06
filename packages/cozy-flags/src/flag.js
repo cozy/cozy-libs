@@ -15,10 +15,12 @@ const flag = function() {
   }
 }
 
+/** List all flags from the store */
 export const listFlags = () => {
   return store.keys().sort()
 }
 
+/** Resets all the flags */
 export const resetFlags = () => {
   listFlags().forEach(name => store.remove(name))
 }
