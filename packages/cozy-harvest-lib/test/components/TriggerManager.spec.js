@@ -364,6 +364,48 @@ describe('TriggerManager', () => {
       const component = shallowWithAccount().getElement()
       expect(component).toMatchSnapshot()
     })
+
+    describe('when the vault contains ciphers', () => {
+      it('should show the account form', async () => {
+        mockVaultClient.getAll.mockResolvedValue([])
+        mockVaultClient.getAllDecrypted.mockResolvedValue([])
+
+        const { findByLabelText } = render(
+          <TriggerManager {...propsWithAccount} />
+        )
+
+        const usernameField = await findByLabelText('username')
+        const passwordField = await findByLabelText('passphrase')
+
+        expect(usernameField).toBeDefined()
+        expect(passwordField).toBeDefined()
+      })
+    })
+
+    describe('when the vault does not contain ciphers', () => {
+      it('should show the account form', async () => {
+        mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
+        mockVaultClient.getAllDecrypted.mockResolvedValue([
+          {
+            id: 'cipher1',
+            name: fixtures.konnector.name,
+            login: {
+              username: 'Isabelle'
+            }
+          }
+        ])
+
+        const { findByLabelText } = render(
+          <TriggerManager {...propsWithAccount} />
+        )
+
+        const usernameField = await findByLabelText('username')
+        const passwordField = await findByLabelText('passphrase')
+
+        expect(usernameField).toBeDefined()
+        expect(passwordField).toBeDefined()
+      })
+    })
   })
 
   describe('handleError', () => {

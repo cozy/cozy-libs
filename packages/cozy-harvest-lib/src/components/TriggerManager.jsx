@@ -419,13 +419,12 @@ export class DumbTriggerManager extends Component {
   }
 
   showCiphersList(ciphers) {
-    const newState = { step: 'ciphersList' }
-
-    if (ciphers) {
-      newState.ciphers = ciphers
-    }
-
-    this.setState(newState)
+    this.setState(prevState => {
+      return {
+        step: prevState.step === 'accountForm' ? 'accountForm' : 'ciphersList',
+        ciphers: ciphers ? ciphers : prevState.ciphers
+      }
+    })
   }
 
   async handleVaultUnlock() {
