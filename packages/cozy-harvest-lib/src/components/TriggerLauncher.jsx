@@ -69,6 +69,7 @@ export class TriggerLauncher extends Component {
       })
     }
   }
+
   async componentDidMount() {
     await this.realtime.subscribe(
       'updated',
@@ -76,9 +77,11 @@ export class TriggerLauncher extends Component {
       this.handleUpdate.bind(this)
     )
   }
+
   async componentWillUnmount() {
     await this.realtime.unsubscribeAll()
   }
+
   launch(trigger) {
     const { client, onLaunch } = this.props
     this.konnectorJob = new KonnectorJob(client, trigger)
@@ -126,7 +129,7 @@ export class TriggerLauncher extends Component {
    * redirecting to the right route after an account creation.
    *
    * We need to do that on both, `handleSuccess` and `handleLoginSuccess`
-   * since we can receive a sucess before a loginSuccess (since only
+   * since we can receive a success before a loginSuccess (since only
    * few konnectors are dealing with loginSuccess)
    *
    */
