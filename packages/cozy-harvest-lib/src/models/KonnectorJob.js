@@ -3,14 +3,24 @@ import MicroEE from 'microee'
 import * as accounts from '../helpers/accounts'
 import Realtime from 'cozy-realtime'
 
-import { updateAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
+import {
+  createOrUpdateAccount,
+  updateAccount,
+  ACCOUNTS_DOCTYPE
+} from '../connections/accounts'
 import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
 import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
+import logger from '../logger'
+import { findKonnectorPolicy } from '../konnector-policies'
+import { createOrUpdateCipher } from '../models/cipherUtils'
+import { ensureTrigger } from '../connections/triggers'
+import assert from '../assert'
 
 // events
 export const ERROR_EVENT = 'error'
 export const LOGIN_SUCCESS_EVENT = 'loginSuccess'
 export const SUCCESS_EVENT = 'success'
+
 export const TWO_FA_REQUEST_EVENT = 'twoFARequest'
 export const TWO_FA_MISMATCH_EVENT = 'twoFAMismatch'
 
@@ -43,8 +53,6 @@ export const watchKonnectorJob = (client, job) => {
  *
  * Transforms low-level events happening on the documents to higher-level events
  * closer to business logic.
- *
- * TODO: Merge KonnectorJobWatcher here
  *
  * This should be the go to source of truth for the state of a Konnector Job.
  */
@@ -168,6 +176,57 @@ export class KonnectorJob {
     this.jobWatcher.disableSuccessTimer()
   }
 
+  /**
+   * - Creates io.cozy.accounts
+   * - Links cipher to account
+   * - Saves account
+   * - Ensures trigger is existing for account
+   * - Ensures a cipher is created for the authentication data
+   *   Find cipher via identifier / password
+   * - Launches konnector job
+   */
+  async handleFormSubmit(options) {
+    const {
+      client,
+      konnector,
+      cipherId,
+      vaultClient,
+      userCredentials
+    } = options
+    let { account, trigger } = options
+
+    assert(client, 'No client')
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+    logger.log(`Handling submit, with konnector policy ${konnectorPolicy.name}`)
+
+    let cipher
+    if (konnectorPolicy.saveInVault) {
+      cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+        account,
+        konnector,
+        userCredentials
+      })
+    } else {
+      logger.info(
+        'Bypassing cipher creation because of konnector account policy'
+      )
+    }
+
+    account = await createOrUpdateAccount({
+      account,
+      cipher,
+      client,
+      flow: this,
+      konnector,
+      konnectorPolicy,
+      userCredentials
+    })
+
+    logger.info('Created account')
+
+    await this.ensureTriggerAndLaunch(client, { trigger, account, konnector })
+  }
+
   handleAccountUpdated(account) {
     const prevAccount = this.account
 
@@ -185,6 +244,15 @@ export class KonnectorJob {
     } else if (accounts.isLoginSuccess(state)) {
       this.handleLoginSuccess()
     }
+  }
+
+  async ensureTriggerAndLaunch(client, { trigger, account, konnector }) {
+    logger.info('Ensuring trigger...')
+    trigger = await ensureTrigger(client, { trigger, account, konnector })
+    this.trigger = trigger
+
+    logger.info('Launching...')
+    await this.launch()
   }
 
   /**

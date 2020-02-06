@@ -179,10 +179,12 @@ export const createOrUpdateAccount = async ({
   account,
   cipher,
   client,
+  flow,
   konnector,
   konnectorPolicy,
   userCredentials
 }) => {
+  assert(flow, 'No flow')
   assert(account, 'No account')
   assert(userCredentials, 'No user credentials')
   const isUpdate = !!account
@@ -204,6 +206,7 @@ export const createOrUpdateAccount = async ({
   if (onAccountCreation) {
     accountToSave = await onAccountCreation({
       client,
+      flow,
       account: accountToSave,
       konnector
     })

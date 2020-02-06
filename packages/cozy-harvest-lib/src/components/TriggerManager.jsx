@@ -29,8 +29,6 @@ import HarvestVaultProvider from './HarvestVaultProvider'
 import clone from 'lodash/clone'
 import flag from 'cozy-flags'
 import logger from '../logger'
-
-import { createOrUpdateCipher } from '../models/cipherUtils'
 import { findKonnectorPolicy } from '../konnector-policies'
 
 const IDLE = 'IDLE'
@@ -114,7 +112,11 @@ export class DumbTriggerManager extends Component {
     try {
       this.setState({ error: null, status: RUNNING })
       const oAuthAccount = await findAccount(client, accountId)
-      return await this.handleNewAccount(oAuthAccount)
+      return await flow.ensureTriggerAndLaunch(client, {
+        account: oAuthAccount,
+        konnector: this.props.konnector,
+        trigger: this.props.trigger
+      })
     } catch (error) {
       this.handleError(error)
     } finally {
@@ -132,17 +134,9 @@ export class DumbTriggerManager extends Component {
     return selectedCipher && selectedCipher.id
   }
 
-  /**
-   * - Ensures a cipher is created for the authentication data
-   *   Find cipher via identifier / password
-   * - Creates io.cozy.accounts
-   * - Links cipher to account
-   * - Saves account
-   */
   async handleSubmit(data = {}) {
-    const { client, konnector, saveAccount, vaultClient } = this.props
+    const { client, flow, konnector, trigger, vaultClient } = this.props
     const { account } = this.state
-    const cipherId = this.getSelectedCipherId()
 
     this.setState({
       error: null,
@@ -150,32 +144,17 @@ export class DumbTriggerManager extends Component {
     })
 
     try {
-      let cipher
-      const konnectorPolicy = findKonnectorPolicy(konnector)
-      logger.log('Handling submit, konnector policy', konnectorPolicy)
-      if (konnectorPolicy.saveInVault) {
-        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-          account,
-          konnector,
-          userCredentials: data
-        })
-      } else {
-        logger.info(
-          'Bypassing cipher creation because of konnector account policy'
-        )
-      }
-
-      const savedAccount = await createOrUpdateAccount({
+      const cipherId = this.getSelectedCipherId()
+      await flow.handleFormSubmit({
         client,
         account,
-        cipher,
+        cipherId,
         konnector,
         konnectorPolicy,
-        saveAccount,
-        userCredentials: data
+        trigger,
+        userCredentials: data,
+        vaultClient
       })
-
-      return await this.handleNewAccount(accounts.mergeAuth(savedAccount, data))
     } catch (error) {
       return this.handleError(error)
     } finally {
@@ -184,19 +163,6 @@ export class DumbTriggerManager extends Component {
       })
     }
   }
-
-  /**
-   * Account creation success handler
-   * @param  {Object}  account Created io.cozy.accounts document
-   * @return {Object}          io.cozy.jobs document, runned with account data
-   */
-  async handleNewAccount(account) {
-    const { client, trigger, konnector } = this.props
-    const trigger = await ensureTrigger(client, { trigger, account, konnector })
-    this.setState({ account })
-    return await this.props.launch(trigger)
-  }
-
   /**
    * TODO rename state error to accountError
    */
