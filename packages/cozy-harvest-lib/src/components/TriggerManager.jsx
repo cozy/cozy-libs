@@ -204,6 +204,7 @@ export class DumbTriggerManager extends Component {
   async handleSubmit(data = {}) {
     const { client, konnector, saveAccount, vaultClient } = this.props
     const { account } = this.state
+    const cipherId = this.getSelectedCipherId()
 
     this.setState({
       error: null,
@@ -215,7 +216,6 @@ export class DumbTriggerManager extends Component {
       const konnectorPolicy = findKonnectorPolicy(konnector)
       logger.log('Handling submit, konnector policy', konnectorPolicy)
       if (konnectorPolicy.saveInVault) {
-        const cipherId = this.getSelectedCipherId()
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
           account,
           konnector,
