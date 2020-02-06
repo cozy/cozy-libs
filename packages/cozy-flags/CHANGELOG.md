@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.2.0 (2020-02-06)
+
+
+### Bug Fixes
+
+* Use useEffect to clean up event handlers on unmount ([3cdf5be](https://github.com/cozy/cozy-libs/commit/3cdf5be))
+
+
+### Features
+
+* Add CozyClient plugin for automatic flag initialisation ([0959c8b](https://github.com/cozy/cozy-libs/commit/0959c8b))
+* Deprecate flags.enable with an array ([85000f5](https://github.com/cozy/cozy-libs/commit/85000f5))
+* Expose only 1 method to initialize flags ([f5a65ec](https://github.com/cozy/cozy-libs/commit/f5a65ec))
+* Initialize flags from DOM ([d822f68](https://github.com/cozy/cozy-libs/commit/d822f68))
+* Initialize from remote endpoint ([1383590](https://github.com/cozy/cozy-libs/commit/1383590))
+* Use data-cozy-flags attribute instead of data-flags ([4254a8b](https://github.com/cozy/cozy-libs/commit/4254a8b))
+
+
+
+
+
 # 2.1.0 (2020-01-24)
 
 
