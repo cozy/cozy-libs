@@ -17,10 +17,8 @@ import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
 import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
-import filesMutations from '../connections/files'
 import permissionsMutations from '../connections/permissions'
 import accounts from '../helpers/accounts'
-import cron from '../helpers/cron'
 import konnectors from '../helpers/konnectors'
 import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
@@ -167,70 +165,6 @@ export class DumbTriggerManager extends Component {
     }
   }
 
-  componentDidMount() {
-    this.CozyFolder = CozyFolderClass.copyWithClient(this.props.client)
-  }
-
-  /**
-   * Ensure that a trigger will exist, with valid destination folder with
-   * permissions and references
-   * TODO move this to Cozy-Doctypes https://github.com/cozy/cozy-libs/issues/743
-   *
-   * @param  {object}  account
-   * @return {Object} Trigger document
-   */
-  async ensureTrigger(account) {
-    const {
-      addPermission,
-      addReferencesTo,
-      createDirectoryByPath,
-      createTrigger,
-      statDirectoryByPath,
-      konnector,
-      t
-    } = this.props
-
-    const { trigger } = this.props
-    if (trigger) {
-      return trigger
-    }
-
-    let folder
-
-    if (konnectors.needsFolder(konnector)) {
-      const [adminFolder, photosFolder] = await Promise.all([
-        this.CozyFolder.ensureMagicFolder(
-          this.CozyFolder.magicFolders.ADMINISTRATIVE,
-          `/${t('folder.administrative')}`
-        ),
-        this.CozyFolder.ensureMagicFolder(
-          this.CozyFolder.magicFolders.PHOTOS,
-          `/${t('folder.photos')}`
-        )
-      ])
-
-      const path = konnectors.buildFolderPath(konnector, account, {
-        administrative: adminFolder.path,
-        photos: photosFolder.path
-      })
-
-      folder =
-        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
-
-      await addPermission(konnector, konnectors.buildFolderPermission(folder))
-      await addReferencesTo(konnector, [folder])
-    }
-
-    return await createTrigger(
-      triggers.buildAttributes({
-        account,
-        cron: cron.fromKonnector(konnector),
-        folder,
-        konnector
-      })
-    )
-  }
-
   /**
    * OAuth Form success handler. OAuthForm retrieves an account id created by the
    * cozy stack
@@ -299,7 +233,6 @@ export class DumbTriggerManager extends Component {
         konnector,
         konnectorPolicy,
         saveAccount,
-        ensureTrigger: this.ensureTrigger.bind(this),
         userCredentials: data
       })
 
@@ -319,10 +252,12 @@ export class DumbTriggerManager extends Component {
    * @return {Object}          io.cozy.jobs document, runned with account data
    */
   async handleNewAccount(account) {
-    const trigger = await this.ensureTrigger(account)
+    const { client, trigger, konnector } = this.props
+    const trigger = await ensureTrigger(client, { trigger, account, konnector })
     this.setState({ account })
     return await this.props.launch(trigger)
   }
+
   /**
    * TODO rename state error to accountError
    */
@@ -584,36 +519,12 @@ DumbTriggerManager.propTypes = {
    */
   addPermission: PropTypes.func,
   /**
-   * File mutation
-   * @type {Function}
-   */
-  addReferencesTo: PropTypes.func,
-  /**
-   * Trigger mutation
-   * @type {Function}
-   */
-  createTrigger: PropTypes.func.isRequired,
-  /**
-   * Trigger mutations
-   * @type {Function}
-   */
-  createDirectoryByPath: PropTypes.func,
-  /**
-   * Account Mutation, used to retrieve OAuth account
-   * @type {Function}
-   */
   findAccount: PropTypes.func,
   /**
    * Account mutation
    * @type {Func}
    */
   saveAccount: PropTypes.func.isRequired,
-  /**
-   * Trigger mutations
-   * @type {Function}
-   */
-  statDirectoryByPath: PropTypes.func,
-  /**
    * What to do when the Vault unlock screen is dismissed without password
    */
   onVaultDismiss: PropTypes.func,
@@ -630,9 +541,7 @@ const SmartTriggerManager = flow(
   withVaultClient,
   withMutations(
     accountsMutations,
-    filesMutations,
     permissionsMutations,
-    triggersMutations
   )
 )(DumbTriggerManager)
 
