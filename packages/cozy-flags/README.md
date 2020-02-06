@@ -44,6 +44,22 @@ const App = () => {
 
 ```
 
+### Flags enabled on the server
+
+Feature flags can be served by the server and injected in the HTML page of an
+application. See https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags
+and https://docs.cozy.io/en/cozy-stack/client-app-dev/#good-practices-for-your-application.
+
+#### Client plugin
+
+A CozyClient plugin is exported that initializes and resets flags on client's login
+and logout. It will initialize flags either from DOM data (if `data-cozy={{ .CozyData }}`
+or `data-flags={{ .Flags }}`, on web) or by fetching data from the server (on mobile).
+
+```
+client.registerPlugin(flag.plugin)
+```
+
 ### Flags enabled at build time
 
 It is possible to handle flags enabled at build time. Your app should just

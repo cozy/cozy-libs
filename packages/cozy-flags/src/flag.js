@@ -127,6 +127,26 @@ export const initialize = async client => {
   }
 }
 
+class FlagClientPlugin {
+  constructor(client, options) {
+    this.client = client
+    this.handleLogin = this.handleLogin.bind(this)
+    this.handleLogout = this.handleLogout.bind(this)
+    this.client.on('login', this.handleLogin)
+    this.client.on('logout', this.handleLogout)
+  }
+
+  async handleLogin() {
+    await flag.initialize(this.client)
+  }
+
+  async handleLogout() {
+    flag.reset()
+  }
+}
+
+FlagClientPlugin.pluginName = 'flags'
+
 flag.store = store
 flag.list = listFlags
 flag.reset = resetFlags
@@ -134,5 +154,6 @@ flag.enable = enable
 flag.initializeFromRemote = initializeFromRemote
 flag.initializeFromDOM = initializeFromDOM
 flag.initialize = initialize
+flag.plugin = FlagClientPlugin
 
 export default flag
