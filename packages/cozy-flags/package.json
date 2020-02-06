@@ -29,6 +29,7 @@
     "react": "^16.12.0"
   },
   "jest": {
+    "testPathIgnorePatterns": ["<rootDir>/dist"],
     "setupFiles": [
       "jest-localstorage-mock"
     ]
