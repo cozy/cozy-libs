@@ -34,6 +34,21 @@ export const RUNNING_TWOFA = 'RUNNING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 
+const JOB_EVENTS = [
+  ERROR_EVENT,
+  LOGIN_SUCCESS_EVENT,
+  SUCCESS_EVENT
+]
+
+const eventToStatus = {
+  [ERROR_EVENT]: ERRORED,
+  [LOGIN_SUCCESS_EVENT]: LOGIN_SUCCESS,
+  [SUCCESS_EVENT]: SUCCESS
+}
+const stepEvents = [LOGIN_SUCCESS_EVENT]
+const isStatusEvent = eventName => Boolean(jobEventToStatus[eventName])
+const isStepEvent = eventName => stepEvents.includes(eventName)
+
 export const watchKonnectorJob = (client, job) => {
   const jobWatcher = new KonnectorJobWatcher(client, job, {
     expectedSuccessDelay: 80000
@@ -66,7 +81,7 @@ export class KonnectorJob {
     // Bind methods used as callbacks
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
     this.getKonnectorSlug = this.getKonnectorSlug.bind(this)
-    this.handleLegacyEvent = this.handleLegacyEvent.bind(this)
+
     this.handleTwoFA = this.handleTwoFA.bind(this)
     this.launch = this.launch.bind(this)
     this.sendTwoFACode = this.sendTwoFACode.bind(this)
@@ -130,25 +145,15 @@ export class KonnectorJob {
     }
   }
 
-  /**
-   * Legacy events use the KonnectorJobWatcher until it has been merged into
-   * KonnectorJob so we need to re-emit the events
-   */
-  handleLegacyEvent(event) {
-    return (...args) => {
-      switch (event) {
-        case ERROR_EVENT:
-          this.setStatus(ERRORED)
-          break
-        case LOGIN_SUCCESS_EVENT:
-          this.setStatus(LOGIN_SUCCESS)
-          break
-        case SUCCESS_EVENT:
-          this.setStatus(SUCCESS)
-          break
-      }
-      this.emit(event, ...args)
+  triggerEvent(eventName, ...args) {
+    if (isStepEvent(eventName)) {
+      this.setState({ [eventName]: true })
     }
+    if (eventToStatus[eventName]) {
+      logger.debug(`Setting status ${eventToStatus[eventName]}`)
+      this.setState({ status: eventToStatus[eventName] })
+    }
+    this.emit(eventName, ...args)
   }
 
   /**
@@ -262,25 +267,25 @@ export class KonnectorJob {
     this.setStatus(PENDING)
 
     this.account = await prepareTriggerAccount(this.client, this.trigger)
-
-    const job = await launchTrigger(this.client, this.trigger)
-    this.jobWatcher = watchKonnectorJob(this.client, job)
-
-    // Temporary reEmitting until merging of KonnectorJobWatcher and
-    // KonnectorAccountWatcher into KonnectorJob
-    this.jobWatcher.on(ERROR_EVENT, this.handleLegacyEvent(ERROR_EVENT))
-    this.jobWatcher.on(
-      LOGIN_SUCCESS_EVENT,
-      this.handleLegacyEvent(LOGIN_SUCCESS_EVENT)
-    )
-    this.jobWatcher.on(SUCCESS_EVENT, this.handleLegacyEvent(SUCCESS_EVENT))
-
     this.realtime.subscribe(
       'updated',
       ACCOUNTS_DOCTYPE,
       this.account._id,
       this.handleAccountUpdated
     )
+    this.job = await launchTrigger(this.client, this.trigger)
+    this.realtime.subscribe(
+      'updated',
+      JOBS_DOCTYPE,
+      this.job._id,
+      this.handleJobUpdated.bind(this)
+    )
+    this.jobWatcher = watchKonnectorJob(this.client, this.job)
+    logger.info(`Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
+
+    for (const ev of JOB_EVENTS) {
+      this.jobWatcher.on(ev, () => this.triggerEvent(ev))
+    }
 
     this.unsubscribeAllRealtime = () => {
       this.jobWatcher.unsubscribeAll()
