@@ -26,17 +26,19 @@ export const resetFlags = () => {
 }
 
 /**
- * Enables a list of flags
+ * Enables several flags
  *
- * Supports passing either
- * - an array containing flag names (in this case, flag values will be true)
- * - or an object flagName -> flagValue
+ * Supports passing either  object flagName -> flagValue
  *
  * @param {string[]|Object} flagsToEnable
  */
 export const enable = flagsToEnable => {
   let flagNameToValue
   if (Array.isArray(flagsToEnable)) {
+    // eslint-disable-next-line no-console
+    console.log(
+      'flags.enable: Deprecation warning: prefer to use an object { flag1: true, flag2: true } instead of an array when using flags.enable'
+    )
     flagNameToValue = flagsToEnable.map(flagName => [flagName, true])
   } else if (typeof flagsToEnable === 'object') {
     flagNameToValue = Object.entries(flagsToEnable)
