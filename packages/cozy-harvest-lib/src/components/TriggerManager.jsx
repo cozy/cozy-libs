@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
 
-import { withMutations, withClient } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -17,7 +17,7 @@ import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
 import accountsMutations from '../connections/accounts'
 import { triggersMutations } from '../connections/triggers'
-import permissionsMutations from '../connections/permissions'
+import { addPermission } from '../connections/permissions'
 import accounts from '../helpers/accounts'
 import { findAccount } from '../connections/accounts'
 import konnectors from '../helpers/konnectors'
@@ -512,11 +512,6 @@ DumbTriggerManager.propTypes = {
    */
   t: PropTypes.func,
   /**
-   * Permission mutation
-   * @type {Function}
-   */
-  addPermission: PropTypes.func,
-  /**
    * What to do when the Vault unlock screen is dismissed without password
    */
   onVaultDismiss: PropTypes.func,
@@ -530,9 +525,6 @@ DumbTriggerManager.propTypes = {
 const SmartTriggerManager = flow(
   translate(),
   withClient,
-  withMutations(
-    permissionsMutations,
-  )
   withVaultClient
 )(DumbTriggerManager)
 
