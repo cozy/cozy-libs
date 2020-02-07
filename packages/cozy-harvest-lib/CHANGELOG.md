@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.2...cozy-harvest-lib@1.24.3) (2020-02-07)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Don't duplicate cipher on selection ([3d21176](https://github.com/cozy/cozy-libs/commit/3d21176))
+* **cozy-harvest-lib:** Make warning log clearer ([9c2ef2d](https://github.com/cozy/cozy-libs/commit/9c2ef2d))
+
+
+
+
+
 ## [1.24.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.1...cozy-harvest-lib@1.24.2) (2020-02-06)
 
 
