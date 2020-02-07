@@ -10,6 +10,7 @@ import {
 } from 'services/utils'
 
 jest.mock('services/utils')
+jest.mock('services/logger')
 
 afterEach(() => {
   jest.clearAllMocks()
@@ -62,6 +63,7 @@ describe('update accounts password function', () => {
     const orgKey = {}
     getOrganizationKey.mockResolvedValue(orgKey)
     fetchAccountsForCipherId.mockResolvedValue({ data: [] })
+    fetchLoginFailedTriggersForAccountsIds.mockResolvedValue({ data: [] })
 
     await updateAccountsPassword(mockCozyClient, mockVaultClient, {
       login: {
