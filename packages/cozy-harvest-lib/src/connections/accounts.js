@@ -1,6 +1,7 @@
 import merge from 'lodash/merge'
 import clone from 'lodash/clone'
 import accounts from '../helpers/accounts'
+import assert from '../assert'
 import logger from '../logger'
 
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
@@ -182,6 +183,8 @@ export const createOrUpdateAccount = async ({
   konnectorPolicy,
   userCredentials
 }) => {
+  assert(account, 'No account')
+  assert(userCredentials, 'No user credentials')
   const isUpdate = !!account
   const { onAccountCreation, saveInVault } = konnectorPolicy
 
