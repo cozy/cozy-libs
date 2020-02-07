@@ -9,7 +9,7 @@ import {
   ACCOUNTS_DOCTYPE
 } from '../connections/accounts'
 import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
-import KonnectorJobWatcher from '../models/konnector/KonnectorJobWatcher'
+import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import { createOrUpdateCipher } from '../models/cipherUtils'
@@ -48,15 +48,6 @@ const eventToStatus = {
 const stepEvents = [LOGIN_SUCCESS_EVENT]
 const isStatusEvent = eventName => Boolean(jobEventToStatus[eventName])
 const isStepEvent = eventName => stepEvents.includes(eventName)
-
-export const watchKonnectorJob = (client, job) => {
-  const jobWatcher = new KonnectorJobWatcher(client, job, {
-    expectedSuccessDelay: 80000
-  })
-  // no need to await realtime initializing here
-  jobWatcher.watch()
-  return jobWatcher
-}
 
 /**
  * Event hub to launch and follow a konnector job.

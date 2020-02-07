@@ -126,6 +126,15 @@ export class KonnectorJobWatcher {
   }
 }
 
+export const watchKonnectorJob = (client, job) => {
+  const jobWatcher = new KonnectorJobWatcher(client, job, {
+    expectedSuccessDelay: 80000
+  })
+  // no need to await realtime initializing here
+  jobWatcher.watch()
+  return jobWatcher
+}
+
 MicroEE.mixin(KonnectorJobWatcher)
 
 export default KonnectorJobWatcher
