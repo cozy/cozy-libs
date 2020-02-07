@@ -1,5 +1,6 @@
 import merge from 'lodash/merge'
 import accounts from '../helpers/accounts'
+import logger from '../logger'
 
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
@@ -86,6 +87,7 @@ const createChildAccount = async (client, konnector, attributes) => {
       }
     })
   } catch (error) {
+    logger.warn(error)
     throw new Error(
       `Cannot set permission for account ${parentAccountId} (${error.message})`
     )
