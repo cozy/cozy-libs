@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { shallow } from 'enzyme'
-import { render } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
@@ -296,10 +296,16 @@ describe('TriggerManager', () => {
     mockVaultClient.createNewCozySharedCipher.mockResolvedValue({
       id: 'cipher-id-1'
     })
+    tMock.mockImplementation(key => key)
   })
 
   afterEach(() => {
     jest.resetAllMocks()
+
+    // This should be done automatically by react-testing-library, but
+    // not calling it manually leads to errors because the dom has not
+    // been cleaned up between some test cases
+    cleanup()
   })
 
   describe('when given an oauth konnector', () => {
@@ -327,13 +333,16 @@ describe('TriggerManager', () => {
         mockVaultClient.getAll.mockResolvedValue([])
         mockVaultClient.getAllDecrypted.mockResolvedValue([])
 
-        const { findByLabelText } = render(<TriggerManager {...props} />)
+        const { findByLabelText, findByTitle } = render(
+          <TriggerManager {...props} />
+        )
 
         const usernameField = await findByLabelText('username')
         const passwordField = await findByLabelText('passphrase')
 
         expect(usernameField).toBeDefined()
         expect(passwordField).toBeDefined()
+        expect(findByTitle('back')).rejects.toThrow()
       })
     })
 
@@ -356,6 +365,40 @@ describe('TriggerManager', () => {
 
         expect(cipherItem).toBeDefined()
       })
+
+      describe('when selecting a cipher without password', () => {
+        it('should show the account form with only password field editable', async () => {
+          mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
+          mockVaultClient.getAllDecrypted.mockResolvedValue([
+            {
+              id: 'cipher1',
+              name: fixtures.konnector.name,
+              login: {
+                username: 'Isabelle'
+              }
+            }
+          ])
+
+          const { findByText, findByLabelText, findByTitle } = render(
+            <TriggerManager {...props} />
+          )
+
+          const cipherItem = await findByText('Isabelle')
+
+          fireEvent.click(cipherItem)
+
+          const passwordField = await findByLabelText('passphrase')
+          const backButton = await findByTitle('back')
+
+          expect(findByLabelText('username')).rejects.toThrow()
+          expect(passwordField).toBeDefined()
+          expect(backButton).toBeDefined()
+
+          fireEvent.click(backButton)
+
+          expect(findByText('Isabelle')).resolves.toBeDefined()
+        })
+      })
     })
   })
 
@@ -363,48 +406,6 @@ describe('TriggerManager', () => {
     it('should render correctly', () => {
       const component = shallowWithAccount().getElement()
       expect(component).toMatchSnapshot()
-    })
-
-    describe('when the vault contains ciphers', () => {
-      it('should show the account form', async () => {
-        mockVaultClient.getAll.mockResolvedValue([])
-        mockVaultClient.getAllDecrypted.mockResolvedValue([])
-
-        const { findByLabelText } = render(
-          <TriggerManager {...propsWithAccount} />
-        )
-
-        const usernameField = await findByLabelText('username')
-        const passwordField = await findByLabelText('passphrase')
-
-        expect(usernameField).toBeDefined()
-        expect(passwordField).toBeDefined()
-      })
-    })
-
-    describe('when the vault does not contain ciphers', () => {
-      it('should show the account form', async () => {
-        mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
-        mockVaultClient.getAllDecrypted.mockResolvedValue([
-          {
-            id: 'cipher1',
-            name: fixtures.konnector.name,
-            login: {
-              username: 'Isabelle'
-            }
-          }
-        ])
-
-        const { findByLabelText } = render(
-          <TriggerManager {...propsWithAccount} />
-        )
-
-        const usernameField = await findByLabelText('username')
-        const passwordField = await findByLabelText('passphrase')
-
-        expect(usernameField).toBeDefined()
-        expect(passwordField).toBeDefined()
-      })
     })
   })
 
