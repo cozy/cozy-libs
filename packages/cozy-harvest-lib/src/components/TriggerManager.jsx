@@ -419,12 +419,13 @@ export class DumbTriggerManager extends Component {
   }
 
   showCiphersList(ciphers) {
-    this.setState(prevState => {
-      return {
-        step: prevState.step === 'accountForm' ? 'accountForm' : 'ciphersList',
-        ciphers: ciphers ? ciphers : prevState.ciphers
-      }
-    })
+    const newState = { step: 'ciphersList' }
+
+    if (ciphers) {
+      newState.ciphers = ciphers
+    }
+
+    this.setState(newState)
   }
 
   async handleVaultUnlock() {
@@ -448,7 +449,11 @@ export class DumbTriggerManager extends Component {
       if (ciphers.length === 0) {
         this.showAccountForm()
       } else {
-        this.showCiphersList(ciphers)
+        if (this.step === 'accountForm') {
+          this.setState({ ciphers })
+        } else {
+          this.showCiphersList(ciphers)
+        }
       }
     } catch (err) {
       logger.error(
