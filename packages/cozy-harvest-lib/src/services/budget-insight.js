@@ -19,6 +19,7 @@ import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { saveAccount } from '../connections/accounts'
 import logger from '../logger'
+import flag from 'cozy-flags'
 
 const configsByMode = {
   prod: {
@@ -84,6 +85,9 @@ export const getBIConfigForCozyURL = url => {
 }
 
 export const isBudgetInsightConnector = konnector => {
+  if (!flag('bi-konnector-policy')) {
+    return false
+  }
   return (
     konnector.partnership &&
     konnector.partnership.domain.includes('budget-insight')

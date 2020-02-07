@@ -1,4 +1,3 @@
-import flag from 'cozy-flags'
 import logger from './logger'
 import { konnectorPolicy as biKonnectorPolicy } from './services/budget-insight'
 
@@ -10,10 +9,7 @@ const defaultKonnectorPolicy = {
   name: 'default'
 }
 
-const policies = [
-  flag('bi-konnector-policy') ? biKonnectorPolicy : null,
-  defaultKonnectorPolicy
-].filter(Boolean)
+const policies = [biKonnectorPolicy, defaultKonnectorPolicy].filter(Boolean)
 
 logger.info('Available konnector policies', policies)
 
