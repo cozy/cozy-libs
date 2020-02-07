@@ -100,7 +100,7 @@ export const createOrUpdateCipher = async (
   const isLocked = await vaultClient.isLocked()
 
   if (isLocked) {
-    logger.warn('Impossible to create cipher since vault is locked')
+    logger.warn('Impossible to create or update cipher since vault is locked')
     return null
   }
 
@@ -111,17 +111,21 @@ export const createOrUpdateCipher = async (
   const password = userCredentials.password
 
   let cipher
+
   if (!cipherId) {
     cipher = await searchForCipher(vaultClient, {
-      account,
       konnector,
+      account,
       login,
       password
     })
   }
 
-  if (cipher) {
-    cipher = await updateCipher(vaultClient, cipher.id, { login, password })
+  if (cipherId || cipher) {
+    cipher = await updateCipher(vaultClient, cipherId || cipher.id, {
+      login,
+      password
+    })
   } else {
     cipher = await createCipher(vaultClient, {
       konnector,
