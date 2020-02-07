@@ -449,7 +449,7 @@ export class DumbTriggerManager extends Component {
       if (ciphers.length === 0) {
         this.showAccountForm()
       } else {
-        if (this.step === 'accountForm') {
+        if (this.state.step === 'accountForm') {
           this.setState({ ciphers })
         } else {
           this.showCiphersList(ciphers)
