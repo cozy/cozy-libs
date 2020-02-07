@@ -5,8 +5,7 @@ import CozyRealtime from 'cozy-realtime'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
-import { accountsMutations } from '../connections/accounts'
-import { triggersMutations } from '../connections/triggers'
+import { fetchTrigger } from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import * as jobsModel from '../helpers/jobs'
 import KonnectorJob, {
@@ -153,10 +152,10 @@ export class TriggerLauncher extends Component {
   }
 
   async refetchTrigger() {
-    const { fetchTrigger } = this.props
+    const { client } = this.props
     const { trigger } = this.state
     try {
-      return await fetchTrigger(trigger._id)
+      return await fetchTrigger(client, trigger._id)
     } catch (error) {
       this.setState({ error, running: false })
       throw error
@@ -231,6 +230,6 @@ TriggerLauncher.propTypes = {
 
 export default translate()(
   withClient(
-    withMutations(accountsMutations, triggersMutations)(TriggerLauncher)
+    TriggerLauncher
   )
 )
