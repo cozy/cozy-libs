@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.24.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.4...cozy-harvest-lib@1.24.5) (2020-02-07)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Show account form on account edition ([57531a2](https://github.com/cozy/cozy-libs/commit/57531a2))
+
+
+
+
+
 ## [1.24.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.3...cozy-harvest-lib@1.24.4) (2020-02-07)
 
 
