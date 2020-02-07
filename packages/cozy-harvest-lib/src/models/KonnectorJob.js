@@ -247,6 +247,7 @@ export class KonnectorJob {
     trigger = await ensureTrigger(client, { trigger, account, konnector })
     logger.info('Trigger ensured')
     this.trigger = trigger
+    this.emit(UPDATE_EVENT)
     await this.launch()
   }
 

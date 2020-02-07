@@ -6,7 +6,8 @@ import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
-  TWO_FA_REQUEST_EVENT
+  TWO_FA_REQUEST_EVENT,
+  UPDATE_EVENT
 } from '../models/KonnectorJob'
 import minilog from 'minilog'
 import flag from 'cozy-flags'
@@ -22,6 +23,14 @@ const TRIGGER_DOCTYPE = 'io.cozy.triggers'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'
 const JOB_DOCTYPE = 'io.cozy.jobs'
 
+const logChanges = (a, b) => {
+  const allKeys = Array.from(new Set([...Object.keys(a), ...Object.keys(b)]))
+  for (const k of allKeys) {
+    if (b[k] !== a[k]) {
+      logger.debug(`${k} changed to: ${b[k]} (prev ${a[k]})`)
+    }
+  }
+}
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 const wait = (obs, ev) =>
   new Promise(resolve => {
@@ -52,10 +61,16 @@ const createOrUpdateMain = async (args, client) => {
   konnector._type = 'io.cozy.konnectors'
   const flow = new KonnectorJob(client)
 
+  let lastState = flow.getState()
   flow
     .on(ERROR_EVENT, logDebug('ERROR_EVENT'))
     .on(SUCCESS_EVENT, logDebug('SUCCESS_EVENT'))
     .on(LOGIN_SUCCESS_EVENT, logDebug('LOGIN_SUCCESS_EVENT'))
+    .on(UPDATE_EVENT, () => {
+      const newState = flow.getState()
+      logChanges(lastState, newState)
+      lastState = newState
+    })
 
   const account = args.account ? await fetchAccount(client, args.account) : {}
 
@@ -71,12 +86,19 @@ const createOrUpdateMain = async (args, client) => {
     userCredentials: args.fields
   })
 
+  const rejectedProm = new Promise((resolve, reject) => prom.catch(e => reject))
+
+  const finalEvents = [
+    ERROR_EVENT,
+    SUCCESS_EVENT,
+    args.waitCompletion ? null : LOGIN_SUCCESS_EVENT
+  ].filter(Boolean)
+
+  logger.debug('Waiting on events', finalEvents)
   const ev = await Promise.race(
-    [ERROR_EVENT, SUCCESS_EVENT, LOGIN_SUCCESS_EVENT, TWO_FA_REQUEST_EVENT]
-      .map(ev => wait(flow, ev))
-      .concat([prom])
+    finalEvents.map(ev => wait(flow, ev)).concat([rejectedProm])
   )
-  logger('Finished waiting because', ev)
+  logger.info('Finished waiting because', ev)
 
   await sleep(1000)
   logger('After save')
