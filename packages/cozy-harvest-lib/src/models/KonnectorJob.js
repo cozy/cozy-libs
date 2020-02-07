@@ -245,9 +245,8 @@ export class KonnectorJob {
   async ensureTriggerAndLaunch(client, { trigger, account, konnector }) {
     logger.info('Ensuring trigger...')
     trigger = await ensureTrigger(client, { trigger, account, konnector })
+    logger.info('Trigger ensured')
     this.trigger = trigger
-
-    logger.info('Launching...')
     await this.launch()
   }
 
@@ -255,6 +254,7 @@ export class KonnectorJob {
    * Launches the job and sets everything up to follow execution.
    */
   async launch() {
+    logger.info('Launching job...')
     this.setStatus(PENDING)
 
     this.account = await prepareTriggerAccount(this.client, this.trigger)
@@ -282,6 +282,7 @@ export class KonnectorJob {
       this.jobWatcher.unsubscribeAll()
       this.realtime.unsubscribeAll()
     }
+    logger.info('Job finished...')
   }
 
   unwatch() {

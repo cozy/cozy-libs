@@ -204,6 +204,7 @@ export const createOrUpdateAccount = async ({
     : accounts.build(konnector, userCredentials)
 
   if (onAccountCreation) {
+    logger.info('Custom account creation callback')
     accountToSave = await onAccountCreation({
       client,
       flow,
