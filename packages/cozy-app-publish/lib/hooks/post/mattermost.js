@@ -1,12 +1,6 @@
 const https = require('https')
 const url = require('url')
 
-const MATTERMOST_CHANNEL = process.env.MATTERMOST_CHANNEL
-const MATTERMOST_HOOK_URL = process.env.MATTERMOST_HOOK_URL
-const MATTERMOST_ICON =
-  'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
-const MATTERMOST_USERNAME = 'Travis'
-
 const appTypeLabelMap = {
   webapp: 'Application',
   konnector: 'Connector'
@@ -48,6 +42,12 @@ const sendMattermostReleaseMessage = (
   spaceName,
   appType
 ) => {
+  const { MATTERMOST_CHANNEL, MATTERMOST_HOOK_URL } = process.env
+
+  const MATTERMOST_ICON =
+    'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
+  const MATTERMOST_USERNAME = 'Travis'
+
   const mattermostHookUrl = url.parse(MATTERMOST_HOOK_URL)
   const message = getMessage({
     appSlug,
@@ -55,22 +55,20 @@ const sendMattermostReleaseMessage = (
     spaceName,
     appType
   })
-
   return new Promise((resolve, reject) => {
     console.log(
       `↳ ℹ️  Sending to mattermost channel ${MATTERMOST_CHANNEL} the following message: "${message}"`
     )
-    const postData = `payload=${JSON.stringify({
+    const postData = JSON.stringify({
       channel: MATTERMOST_CHANNEL,
       icon_url: MATTERMOST_ICON,
       username: MATTERMOST_USERNAME,
       text: message
-    })}`
-
+    })
     const request = https.request(
       {
         headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
+          'Content-Type': 'application/json',
           'Content-Length': Buffer.byteLength(postData)
         },
         hostname: mattermostHookUrl.hostname,
@@ -83,13 +81,12 @@ const sendMattermostReleaseMessage = (
         } else {
           reject(
             new Error(
-              `Mattermost message sending failed (error status: ${res.statusCode}).`
+              `Mattermost message sending failed (error status: ${res.statusCode}) and message : ${res.statusMessage}.`
             )
           )
         }
       }
     )
-
     request.on('error', error => reject(error))
     request.write(postData)
     request.end()
@@ -98,6 +95,7 @@ const sendMattermostReleaseMessage = (
 
 module.exports = async options => {
   console.log('↳ ℹ️  Sending message to Mattermost')
+  const MATTERMOST_HOOK_URL = process.env.MATTERMOST_HOOK_URL
 
   if (!MATTERMOST_HOOK_URL) {
     throw new Error('No MATTERMOST_HOOK_URL environment variable defined')
@@ -111,3 +109,4 @@ module.exports = async options => {
 }
 
 module.exports.getMessage = getMessage
+module.exports.sendMattermostReleaseMessage = sendMattermostReleaseMessage
