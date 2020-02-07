@@ -9,6 +9,7 @@
  */
 
 import assert from '../assert'
+import logger from '../logger'
 
 const softJSONParse = maybeJSONData => {
   try {
@@ -61,6 +62,7 @@ const biRequest = async (method, path, config, rawForm, bearer) => {
   if (resp.ok) {
     return await resp.json()
   } else {
+    logger.warn(`Error while contacting BI (method: ${method}, path: ${path})`)
     const rawBody = await resp.text()
     throw new BIError(rawBody)
   }

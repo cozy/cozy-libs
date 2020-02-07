@@ -17,6 +17,7 @@ import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
+import logger from '../logger'
 
 const configsByMode = {
   prod: {
@@ -131,11 +132,14 @@ export const createOrUpdateBIConnection = async ({
 }) => {
   const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
+  logger.info('Creating temporary token...')
   const tempToken = await createTemporaryToken({
     account,
     client,
     konnector
   })
+
+  logger.info('Created temporary token')
   assert(tempToken, 'No temporary token')
   const credentials = { ...account.auth }
   // The konnector can have "baked-in" parameters that need to be passed in the
@@ -145,9 +149,11 @@ export const createOrUpdateBIConnection = async ({
   const credsToSend = await mkConnAuth(config, credentials)
 
   try {
+    logger.info('Creating connection...')
     const connection = await (connId
       ? updateBIConnection(config, connId, credsToSend, tempToken)
       : createBIConnection(config, credsToSend, tempToken))
+    logger.info(`Created connection ${connection.id}`)
     return connection
   } catch (e) {
     return convertBIErrortoKonnectorJobError(e)
