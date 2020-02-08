@@ -9,12 +9,26 @@ import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import get from 'lodash/get'
 import compose from 'lodash/flowRight'
+import keyBy from 'lodash/keyBy'
 import CozyRealtime from 'cozy-realtime'
 
 import { findAccount } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
+
+/**
+ * Returns { trigger, account } list
+ */
+const fetchAccountsFromTriggers = async (client, triggers) => {
+  const accountCol = client.collection('io.cozy.accounts')
+  const accountIdToTrigger = keyBy(triggers, triggersModel.getAccountId)
+  const accountIds = Object.keys(accountIdToTrigger)
+  const { data: accounts } = await accountCol.getAll(accountIds)
+  return accounts
+    .filter(Boolean)
+    .map(account => ({ account, trigger: accountIdToTrigger[account._id] }))
+}
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
@@ -83,19 +97,10 @@ export class KonnectorAccounts extends React.Component {
     const { client } = this.props
     this.setState({ fetchingAccounts: true })
     try {
-      const accounts = (await Promise.all(
-        triggers.map(async trigger => {
-          return {
-            account: await findAccount(
-              client,
-              triggersModel.getAccountId(trigger)
-            ),
-            trigger
-          }
-        })
-      )).filter(({ account }) => !!account)
-      this.setState({ accounts, error: null })
+      const triggerAccounts = await fetchAccountsFromTriggers(client, triggers)
+      this.setState({ accounts: triggerAccounts, error: null })
     } catch (error) {
+      console.error(error)
       this.setState({ error })
     } finally {
       this.setState({ fetchingAccounts: false })
