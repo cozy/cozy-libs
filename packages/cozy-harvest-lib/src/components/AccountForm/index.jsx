@@ -185,14 +185,17 @@ export class AccountForm extends PureComponent {
   render() {
     const {
       account,
-      error,
       konnector,
       onBack,
       onSubmit,
       showError,
-      submitting,
-      t
+      t,
+      flow
     } = this.props
+
+    const flowState = flow.getState()
+    const submitting = flowState.running
+    const error = flowState.error
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
@@ -323,12 +326,6 @@ AccountForm.propTypes = {
    * @type {Boolean}
    */
   showError: PropTypes.bool,
-  /**
-   * Indicates if the form should be rendered as submitting data or busy.
-   * Typically updated after an `onSubmit` call.
-   * @type {Object}
-   */
-  submitting: PropTypes.bool,
   /**
    * Translation function
    */

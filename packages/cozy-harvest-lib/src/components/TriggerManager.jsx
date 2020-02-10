@@ -392,7 +392,7 @@ export class DumbTriggerManager extends Component {
                   ? this.cipherToAccount(selectedCipher)
                   : account
               }
-              submitting={submitting}
+              flow={flow}
               konnector={konnector}
               onSubmit={this.handleSubmit}
               showError={showError}
