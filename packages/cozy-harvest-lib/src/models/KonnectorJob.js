@@ -330,6 +330,7 @@ export class KonnectorJob {
       await this.ensureTriggerAndLaunch(client, { trigger, account, konnector })
     } catch (e) {
       console.error(e)
+      this.setState({ error: e })
       this.triggerEvent(ERROR_EVENT, e)
       throw e
     }
