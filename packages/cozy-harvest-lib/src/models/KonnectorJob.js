@@ -157,6 +157,14 @@ export class KonnectorJob {
     }
   }
 
+  /**
+   * Waits until two fa code has been sent
+   *
+   * - Monitors the account (for the case where the 2FA code is filled by the konnector job)
+   * - Subscribes a "manual" waiter for when the 2FA is done completely in-browser (budget-insight
+   *   for example)
+   *
+   */
   waitForTwoFA() {
     logger.info('Waiting for two FA')
     return new Promise(rawResolve => {
@@ -264,8 +272,8 @@ export class KonnectorJob {
    * - Links cipher to account
    * - Saves account
    * - Ensures trigger is existing for account
-   * - Ensures a cipher is created for the authentication data
-   *   Find cipher via identifier / password
+   * - Finds cipher via identifier / password
+   * - Ensures a cipher is created if vault is unlocked
    * - Launches konnector job
    */
   async handleFormSubmit(options) {
