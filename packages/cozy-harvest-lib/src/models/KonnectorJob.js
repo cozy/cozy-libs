@@ -143,13 +143,13 @@ export class KonnectorJob {
 
   async saveTwoFARequest(twoFARequestOptions) {
     this.setState({ status: WAITING_TWOFA })
-    this.triggerEvent(TWO_FA_REQUEST_EVENT, twoFARequestOptions)
     try {
       const account = accounts.updateTwoFAState(
         this.account,
         twoFARequestOptions
       )
       await this.saveAccount(account)
+      this.triggerEvent(TWO_FA_REQUEST_EVENT, twoFARequestOptions)
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)

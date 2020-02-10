@@ -68,10 +68,21 @@ export class TwoFAModal extends PureComponent {
   }
 
   handleSubmit(e) {
-    // prevent refreshing the page when submitting
-    // (happens not systematically)
     e.preventDefault()
-    this.props.flow.sendTwoFACode(this.state.twoFACode)
+
+    const { flow } = this.props
+    const code = this.state.twoFACode
+
+    const konnectorPolicy = flow.getKonnectorPolicy()
+    if (konnectorPolicy.sendAdditionalInformation) {
+      const fields = flow.getAdditionalInformationNeeded()
+      const firstField = fields[0]
+      flow.sendAdditionalInformation({
+        [firstField.name]: code
+      })
+    } else {
+      flow.sendTwoFACode(code)
+    }
   }
 
   render() {
