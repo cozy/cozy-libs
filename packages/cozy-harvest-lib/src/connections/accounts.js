@@ -138,7 +138,11 @@ export const updateAccount = async (client, account) => {
  * @param  {Object}  konnector  io.cozy.konnectors document
  * @param  {Object}  authData   Account auth attribute
  */
-export const saveAccount = (client, konnector, account = {}) => {
+export const saveAccount = (client, konnector, account) => {
+  assert(
+    client && konnector && account,
+    'Must pass both client, konnector and account to saveAccount'
+  )
   return account._id
     ? updateAccount(client, account)
     : createAccount(client, konnector, account)
@@ -204,7 +208,9 @@ export const createOrUpdateAccount = async ({
     : accounts.build(konnector, userCredentials)
 
   if (onAccountCreation) {
-    logger.info('Custom account creation callback')
+    logger.debug(
+      `Using konnector policy "${konnectorPolicy.name}"'s custom  account creation`
+    )
     accountToSave = await onAccountCreation({
       client,
       flow,

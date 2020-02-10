@@ -7,8 +7,8 @@
 
 import get from 'lodash/get'
 import omit from 'lodash/omit'
-import merge from 'lodash/merge'
 import clone from 'lodash/clone'
+import set from 'lodash/set'
 import defaults from 'lodash/defaults'
 
 import { waitForRealtimeEvent } from './jobUtils'
@@ -17,9 +17,14 @@ import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
-import { saveAccount } from '../connections/accounts'
-import logger from '../logger'
+import { LOGIN_SUCCESS_EVENT } from '../models/KonnectorJob'
+import harvestLogger from '../logger'
 import flag from 'cozy-flags'
+
+const DECOUPLED_ERROR = 'decoupled'
+const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
+
+const logger = harvestLogger('harvest/bi')
 
 const configsByMode = {
   prod: {
@@ -97,7 +102,7 @@ export const isBudgetInsightConnector = konnector => {
 const createTemporaryToken = async ({ client, account, konnector }) => {
   assert(
     account && account._id,
-    'createTemporaryToken: Invalid account for createTemporaryToken'
+    'createTemporaryToken: Account without id passed to createTemporaryToken'
   )
   assert(konnector.slug, 'createTemporaryToken: No konnector slug')
   const jobResponse = await client.stackClient.jobs.create('konnector', {
@@ -112,6 +117,16 @@ const createTemporaryToken = async ({ client, account, konnector }) => {
     'result'
   )
   return event.data.result.code
+}
+
+export const saveTemporaryToken = (flow, tempToken) =>
+  flow.setData({
+    tempToken
+  })
+
+export const getTemporaryToken = flow => {
+  const data = flow.getData()
+  return data.tempToken
 }
 
 /**
@@ -133,16 +148,19 @@ const createTemporaryToken = async ({ client, account, konnector }) => {
 export const createOrUpdateBIConnection = async ({
   account,
   client,
-  konnector
+  konnector,
+  flow
 }) => {
   const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
   logger.info('Creating temporary token...')
+
   const tempToken = await createTemporaryToken({
     account,
     client,
     konnector
   })
+  saveTemporaryToken(flow, tempToken)
 
   logger.info('Created temporary token')
   assert(tempToken, 'No temporary token')
@@ -158,6 +176,7 @@ export const createOrUpdateBIConnection = async ({
     const connection = await (connId
       ? updateBIConnection(config, connId, credsToSend, tempToken)
       : createBIConnection(config, credsToSend, tempToken))
+
     logger.info(`Created connection ${connection.id}`)
     return connection
   } catch (e) {
@@ -172,18 +191,95 @@ const removeSensibleDataFromAccount = fullAccount => {
   return account
 }
 
+export const setBIConnectionId = (account_, biConnectionId) => {
+  const account = clone(account_)
+  set(account, 'data.auth.bi.connId', biConnectionId)
+  return account
+}
+
+export const getBIConnectionId = account => {
+  return get(account, 'data.auth.bi.connId')
+}
+
+export const sendAdditionalInformation = async ({
+  account,
+  client,
+  flow,
+  fields
+}) => {
+  const config = getBIConfigForCozyURL(client.stackClient.uri)
+  const connId = getBIConnectionIdFromAccount(account)
+  const temporaryToken = getTemporaryToken(flow)
+  const hasFields = Object.keys(fields).length > 0
+
+  let updatedConnection
+  if (hasFields) {
+    logger.debug('Sending fields')
+    updatedConnection = await updateBIConnection(
+      config,
+      connId,
+      fields,
+      temporaryToken
+    )
+    logger.debug('2FA code sent')
+  } else {
+    logger.debug('Resuming decoupled connection')
+    updatedConnection = await updateBIConnection(
+      config,
+      connId,
+      { resume: 'true' },
+      temporaryToken
+    )
+    logger.info('Resumed decoupled connection')
+  }
+
+  flow.setData({ biConnection: updatedConnection })
+}
+
+/**
+ * Checks for 2FA or decoupled requests
+ *
+ * - Resolves when 2FA has been resolved
+ * - Triggers LOGIN_SUCCESS_EVENT
+ */
+export const finishConnection = async ({ biConnection, flow }) => {
+  if (biConnection.error) {
+    if (biConnection.error === DECOUPLED_ERROR) {
+      const twoFAOptions = { type: 'app', retry: false }
+      await flow.saveTwoFARequest(twoFAOptions)
+      await flow.waitForTwoFA()
+      logger.debug('Finished waiting for decoupled connection to be validated')
+    } else if (biConnection.error === ADDITIONAL_INFORMATION_NEEDED_ERROR) {
+      const twoFAOptions = { type: 'sms', retry: false }
+      while (
+        flow.getData().biConnection.error === 'additionalInformationNeeded'
+      ) {
+        await flow.saveTwoFARequest(twoFAOptions)
+        await flow.waitForTwoFA()
+      }
+      flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+    } else {
+      throw convertBIErrortoKonnectorJobError(biConnection.error)
+    }
+  } else {
+    flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+  }
+}
+
 /**
  * Used in the custom konnector policy for BI
  */
 export const onBIAccountCreation = async ({
   account,
   client,
+  flow,
   konnector,
   createOrUpdateBIConnectionFn = createOrUpdateBIConnection
 }) => {
   const fullAccount = account
   account = removeSensibleDataFromAccount(account)
-  account = await saveAccount(client, konnector, account)
+
+  account = await flow.saveAccount(account)
 
   const biConnection = await createOrUpdateBIConnectionFn({
     account: {
@@ -191,15 +287,41 @@ export const onBIAccountCreation = async ({
       _id: account._id
     },
     client,
-    konnector
+    konnector,
+    flow
   })
 
-  return merge(account, { data: { auth: { bi: { connId: biConnection.id } } } })
+  flow.setData({
+    biConnection
+  })
+
+  account = await flow.saveAccount(setBIConnectionId(account, biConnection.id))
+
+  // At this point, we can be in two fa request stat
+  await finishConnection({
+    account,
+    biConnection,
+    client,
+    flow
+  })
+
+  return account
+}
+
+export const getAdditionalInformationNeeded = flow => {
+  const biConnection = flow.getData().biConnection
+  assert(
+    biConnection,
+    'No BI connection saved in connection flow, cannot determine additional fields'
+  )
+  return biConnection.fields
 }
 
 export const konnectorPolicy = {
   name: 'budget-insight',
   match: isBudgetInsightConnector,
   saveInVault: false,
-  onAccountCreation: onBIAccountCreation
+  onAccountCreation: onBIAccountCreation,
+  sendAdditionalInformation: sendAdditionalInformation,
+  getAdditionalInformationNeeded
 }

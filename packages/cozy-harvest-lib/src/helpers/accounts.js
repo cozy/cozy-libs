@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
+import clone from 'lodash/clone'
 
 import manifest from './manifest'
 
@@ -66,6 +67,19 @@ export const getTwoFACodeProvider = account => {
   } else {
     return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
   }
+}
+
+export const updateTwoFAState = (account_, { retry, type }) => {
+  const account = clone(account_)
+  let state = retry ? 'TWOFA_NEEDED_RETRY' : 'TWOFA_NEEDED'
+  if (type === 'email') {
+    state += '.EMAIL'
+  } else if (type === 'sms') {
+    state += '.SMS'
+  } else if (type === 'app') {
+    state += '.APP'
+  }
+  return merge(account, { state, twoFACode: null })
 }
 
 /**

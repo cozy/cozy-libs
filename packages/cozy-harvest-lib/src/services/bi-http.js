@@ -43,17 +43,13 @@ export class BIError extends Error {
  *
  * @throws {BIError}
  */
-const biRequest = async (method, path, config, rawForm, bearer) => {
+const biRequest = async (method, path, config, body, bearer) => {
   assert(bearer, 'biRequest: Need access token')
   const fullURL = `${config.url}${path}`
-  const formData = new FormData()
-  for (const [k, v] of Object.entries(rawForm)) {
-    formData.append(k, v)
-  }
 
   const resp = await fetch(fullURL, {
     method: method,
-    body: formData,
+    body: body,
     headers: {
       Authorization: `Bearer ${bearer}`
     }
@@ -64,8 +60,17 @@ const biRequest = async (method, path, config, rawForm, bearer) => {
   } else {
     logger.warn(`Error while contacting BI (method: ${method}, path: ${path})`)
     const rawBody = await resp.text()
+    logger.debug(rawBody)
     throw new BIError(rawBody)
   }
+}
+
+const encodeToForm = rawForm => {
+  const formData = new FormData()
+  for (const [k, v] of Object.entries(rawForm)) {
+    formData.append(k, v)
+  }
+  return formData
 }
 
 export const createBIConnection = async (
@@ -77,7 +82,7 @@ export const createBIConnection = async (
     'POST',
     '/users/me/connections',
     config,
-    encryptedAuth,
+    encodeToForm(encryptedAuth),
     biAccessToken
   )
 }
@@ -85,14 +90,32 @@ export const createBIConnection = async (
 export const updateBIConnection = async (
   config,
   connId,
-  encryptedAuth,
+  data,
   biAccessToken
 ) => {
+  assert(
+    connId,
+    `Must pass connection id to updateBIConnection (${connId} was passed)`
+  )
   return await biRequest(
     'PUT',
     `/users/me/connections/${connId}`,
     config,
-    encryptedAuth,
+    encodeToForm(data),
+    biAccessToken
+  )
+}
+
+export const resumeBIConnection = async (config, connId, biAccessToken) => {
+  assert(
+    connId,
+    `Must pass connection id to resumeBIConnection (${connId} was passed)`
+  )
+  return await biRequest(
+    'PUT',
+    `/users/me/connections/${connId}`,
+    config,
+    encodeToForm({ resume: 'true' }),
     biAccessToken
   )
 }

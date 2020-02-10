@@ -12,6 +12,8 @@ import KonnectorJob, {
 import minilog from 'minilog'
 import flag from 'cozy-flags'
 import logger from '../logger'
+import { multiPrompt } from './prompt'
+import assert from '../assert'
 
 flag('bi-konnector-policy', true)
 
@@ -61,11 +63,27 @@ const createOrUpdateMain = async (args, client) => {
   konnector._type = 'io.cozy.konnectors'
   const flow = new KonnectorJob(client)
 
+  const handleTwoFARequest = async options => {
+    await sleep(300)
+
+    const fields = flow.getAdditionalInformationNeeded()
+
+    let responses
+    if (fields.length > 0) {
+      responses = await multiPrompt(fields)
+    } else {
+      await prompt('Type [enter] to resume decoupled connection')
+      responses = {}
+    }
+    flow.sendAdditionalInformation(responses)
+  }
+
   let lastState = flow.getState()
   flow
     .on(ERROR_EVENT, logDebug('ERROR_EVENT'))
     .on(SUCCESS_EVENT, logDebug('SUCCESS_EVENT'))
     .on(LOGIN_SUCCESS_EVENT, logDebug('LOGIN_SUCCESS_EVENT'))
+    .on(TWO_FA_REQUEST_EVENT, handleTwoFARequest)
     .on(UPDATE_EVENT, () => {
       const newState = flow.getState()
       logChanges(lastState, newState)
@@ -73,6 +91,8 @@ const createOrUpdateMain = async (args, client) => {
     })
 
   const account = args.account ? await fetchAccount(client, args.account) : {}
+
+  assert(account, `Could not find account ${args.account}`)
 
   logger.info(`${args.account ? 'Updating' : 'Creating'} account`)
 

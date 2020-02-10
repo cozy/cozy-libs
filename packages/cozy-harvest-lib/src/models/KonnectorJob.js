@@ -1,11 +1,10 @@
 import MicroEE from 'microee'
 
-import * as accounts from '../helpers/accounts'
 import Realtime from 'cozy-realtime'
 
 import {
   createOrUpdateAccount,
-  updateAccount,
+  saveAccount,
   ACCOUNTS_DOCTYPE
 } from '../connections/accounts'
 import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
@@ -15,6 +14,7 @@ import { findKonnectorPolicy } from '../konnector-policies'
 import { createOrUpdateCipher } from '../models/cipherUtils'
 import { fetchTrigger, ensureTrigger } from '../connections/triggers'
 import assert from '../assert'
+import * as accounts from '../helpers/accounts'
 import * as triggersModel from '../helpers/triggers'
 import * as jobsModel from '../helpers/jobs'
 
@@ -38,6 +38,7 @@ export const ERRORED = 'ERRORED'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const SUCCESS = 'SUCCESS'
 export const RUNNING_TWOFA = 'RUNNING_TWOFA'
+export const WAITING_TWOFA = 'WAITING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 
@@ -90,6 +91,12 @@ export class KonnectorJob {
       status: IDLE
     }
 
+    // Stores data necessary for custom connection flow, for example
+    // a budget-insight temporary token
+    this.data = {}
+
+    this.twoFAWaiters = this.twoFAWaiters || []
+
     this.realtime = new Realtime({ client })
   }
 
@@ -134,24 +141,113 @@ export class KonnectorJob {
     return this.account
   }
 
-  getKonnectorPolicy() {
-    return findKonnectorPolicy(this.konnector)
+  async saveTwoFARequest(twoFARequestOptions) {
+    this.setState({ status: WAITING_TWOFA })
+    this.triggerEvent(TWO_FA_REQUEST_EVENT, twoFARequestOptions)
+    try {
+      const account = accounts.updateTwoFAState(
+        this.account,
+        twoFARequestOptions
+      )
+      await this.saveAccount(account)
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.error(error)
+      this.setState({ status: ERRORED, error })
+    }
+  }
+
+  waitForTwoFA() {
+    logger.info('Waiting for two FA')
+    return new Promise(rawResolve => {
+      const accountId = this.account._id
+      assert(accountId, 'Cannot wait for two fa on account without id')
+
+      const finishWaiting = () => {}
+
+      const resolve = () => {
+        this.realtime.unsubscribe(
+          'updated',
+          ACCOUNTS_DOCTYPE,
+          accountId,
+          handleAccountUpdate
+        )
+        rawResolve()
+      }
+
+      const handleAccountUpdate = account => {
+        if (account && account.twoFACode) {
+          resolve()
+        }
+      }
+
+      const updateFromCustomPolicy = () => {
+        resolve()
+      }
+
+      this.twoFAWaiters.push(updateFromCustomPolicy)
+
+      this.realtime.subscribe(
+        'updated',
+        ACCOUNTS_DOCTYPE,
+        accountId,
+        handleAccountUpdate
+      )
+    })
   }
 
   /**
-   * "Sends" 2FA Code, saves it into account
+   * Saves and updates internal account
+   */
+  async saveAccount(updatedAccount) {
+    logger.debug('Saving account')
+    this.account = await saveAccount(
+      this.client,
+      this.konnector,
+      updatedAccount
+    )
+    logger.info('Saved account')
+    return this.account
+  }
+
+  flushTwoFAWaiters() {
+    logger.debug(`Flushing ${this.twoFAWaiters.length} two fa waiters`)
+    for (const w of this.twoFAWaiters) {
+      w()
+    }
+    this.twoFAWaiters = []
+  }
+
+  async sendAdditionalInformation(fields) {
+    this.setState({ status: RUNNING_TWOFA })
+    try {
+      const konnectorPolicy = this.getKonnectorPolicy()
+      await konnectorPolicy.sendAdditionalInformation({
+        account: this.account,
+        client: this.client,
+        flow: this,
+        fields
+      })
+      this.flushTwoFAWaiters()
+    } catch (error) {
+      console.error(error)
+      this.setState({ status: ERRORED, error })
+    }
+  }
+
+  /**
+   * "Sends" 2FA Code
+>>>>>>> theirs
    */
   async sendTwoFACode(code) {
     this.setState({ status: RUNNING_TWOFA })
     try {
-      await updateAccount(
-        this.client,
-        accounts.updateTwoFaCode(this.account, code)
-      )
+      logger.debug(`Sending two fa code ${code}`)
+      await this.saveAccount(accounts.updateTwoFaCode(this.account, code))
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
-      this.setState({ status: ERRORED })
+      this.setState({ status: ERRORED, error })
     }
   }
 
@@ -186,6 +282,7 @@ export class KonnectorJob {
       this.setState({ status: CREATING_ACCOUNT })
       this.trigger = trigger
       this.account = account
+      this.konnector = konnector
 
       assert(client, 'No client')
       const konnectorPolicy = findKonnectorPolicy(konnector)
@@ -206,7 +303,8 @@ export class KonnectorJob {
         )
       }
 
-      logger.info(`Create or update account`)
+      logger.debug('Creating/updating account...')
+
       account = await createOrUpdateAccount({
         account,
         cipher,
@@ -217,7 +315,9 @@ export class KonnectorJob {
         userCredentials
       })
 
-      logger.info('Created account')
+      this.account = account
+
+      logger.info(`Saved account ${account._id}`)
 
       await this.ensureTriggerAndLaunch(client, { trigger, account, konnector })
     } catch (e) {
@@ -258,9 +358,9 @@ export class KonnectorJob {
   }
 
   async ensureTriggerAndLaunch(client, { trigger, account, konnector }) {
-    logger.info('Ensuring trigger...')
+    logger.debug('Ensuring trigger...')
     trigger = await ensureTrigger(client, { trigger, account, konnector })
-    logger.info('Trigger ensured')
+    logger.info(`Trigger is ${trigger._id}`)
     this.trigger = trigger
     this.emit(UPDATE_EVENT)
     await this.launch()
@@ -336,6 +436,30 @@ export class KonnectorJob {
   setState(update) {
     this.state = { ...this.state, ...update }
     this.emit(UPDATE_EVENT)
+  }
+
+  setData(update) {
+    this.data = { ...this.data, ...update }
+  }
+
+  getData() {
+    return this.data
+  }
+
+  getKonnectorPolicy() {
+    return findKonnectorPolicy(this.konnector)
+  }
+
+  getAdditionalInformationNeeded() {
+    const konnectorPolicy = this.getKonnectorPolicy()
+    if (!konnectorPolicy) {
+      throw new Error(
+        'A konnector policy is needed to be able to detect additional information'
+      )
+    } else {
+      const fields = konnectorPolicy.getAdditionalInformationNeeded(this)
+      return fields
+    }
   }
 }
 
