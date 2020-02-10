@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.5...cozy-harvest-lib@1.25.0) (2020-02-10)
+
+
+### Features
+
+* **cozy-harvest-lib:** Add logs to updateAccountsPassword service ([32fca31](https://github.com/cozy/cozy-libs/commit/32fca31))
+
+
+
+
+
 ## [1.24.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.4...cozy-harvest-lib@1.24.5) (2020-02-07)
 
 
