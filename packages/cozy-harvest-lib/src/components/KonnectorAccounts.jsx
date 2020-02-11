@@ -12,27 +12,16 @@ import compose from 'lodash/flowRight'
 import keyBy from 'lodash/keyBy'
 import CozyRealtime from 'cozy-realtime'
 
+import { fetchAccountsFromTriggers } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
-
-/**
- * Returns { trigger, account } list
- */
-const fetchAccountsFromTriggers = async (client, triggers) => {
-  const accountCol = client.collection('io.cozy.accounts')
-  const accountIdToTrigger = keyBy(triggers, triggersModel.getAccountId)
-  const accountIds = Object.keys(accountIdToTrigger)
-  const { data: accounts } = await accountCol.getAll(accountIds)
-  return accounts
-    .filter(Boolean)
-    .map(account => ({ account, trigger: accountIdToTrigger[account._id] }))
-}
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
     super(props)
     this.realtime = new CozyRealtime({ client: this.props.client })
+    this.handleTriggerUpdate = this.handleTriggerUpdate.bind(this)
     this.state = {
       fetchingAccounts: true,
       error: null,
@@ -48,10 +37,18 @@ export class KonnectorAccounts extends React.Component {
   async componentDidMount() {
     await this.fetchAccounts()
 
-    await this.realtime.subscribe(
+    this.realtime.subscribe(
       'updated',
       'io.cozy.jobs',
-      this.handleTriggerUpdate.bind(this)
+      this.handleTriggerUpdate
+    )
+  }
+
+  componentWillUnmount() {
+    this.realtime.unsubscribe(
+      'updated',
+      'io.cozy.jobs',
+      this.handleTriggerUpdate
     )
   }
 
