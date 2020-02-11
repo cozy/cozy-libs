@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import flow from 'lodash/flow'
 
 import { withClient } from 'cozy-client'
-import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
+import { Account } from 'cozy-doctypes'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
@@ -15,24 +15,14 @@ import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
-import accountsMutations from '../connections/accounts'
-import { triggersMutations } from '../connections/triggers'
-import { addPermission } from '../connections/permissions'
-import accounts from '../helpers/accounts'
 import { findAccount } from '../connections/accounts'
-import konnectors from '../helpers/konnectors'
-import triggers from '../helpers/triggers'
 import TriggerLauncher from './TriggerLauncher'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
-import clone from 'lodash/clone'
-import flag from 'cozy-flags'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
-import {
-  UPDATE_EVENT
-} from '../models/KonnectorJob'
+import { UPDATE_EVENT } from '../models/KonnectorJob'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -142,14 +132,15 @@ export class DumbTriggerManager extends Component {
    * @param  {string}  accountId
    */
   async handleOAuthAccountId(accountId) {
-    const { findAccount } = this.props
+    const { client } = this.props
     try {
       this.setState({ error: null, status: RUNNING })
       const oAuthAccount = await findAccount(client, accountId)
       return await flow.ensureTriggerAndLaunch(client, {
         account: oAuthAccount,
         konnector: this.props.konnector,
-        trigger: this.props.trigger
+        trigger: this.props.trigger,
+        t: this.props.t
       })
     } catch (error) {
       this.handleError(error)
@@ -169,7 +160,7 @@ export class DumbTriggerManager extends Component {
   }
 
   async handleSubmit(data = {}) {
-    const { client, flow, konnector, trigger, vaultClient } = this.props
+    const { client, flow, konnector, trigger, vaultClient, t } = this.props
     const { account } = this.state
 
     this.setState({
@@ -186,7 +177,8 @@ export class DumbTriggerManager extends Component {
         konnector,
         trigger,
         userCredentials: data,
-        vaultClient
+        vaultClient,
+        t
       })
     } catch (error) {
       return this.handleError(error)
@@ -311,9 +303,7 @@ export class DumbTriggerManager extends Component {
 
   render() {
     const {
-      error: triggerError,
       konnector,
-      running: triggerRunning,
       showError,
       modalContainerId,
       t,
@@ -327,8 +317,6 @@ export class DumbTriggerManager extends Component {
 
     const {
       account,
-      error,
-      status,
       step,
       selectedCipher,
       showBackButton,
@@ -408,7 +396,7 @@ export class DumbTriggerManager extends Component {
 
 DumbTriggerManager.propTypes = {
   /**
-   * Account document. Used to get intial form values.
+   * Account document. Used to get initial form values.
    * If no account is passed, AccountForm will use empty initial values.
    * @type {Object}
    */
@@ -431,16 +419,6 @@ DumbTriggerManager.propTypes = {
    * @type {Object}
    */
   trigger: PropTypes.object,
-  /**
-   * Indicates if the given trigger is already running, i.e. if it has been
-   * launched and if an associated job with status 'running' exists.
-   * @type {[type]}
-   */
-  running: PropTypes.bool,
-  /**
-   * The current error for the job (string or KonnectorJob error)
-   */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   /**
    * Function to call to launch the job
    */
@@ -497,7 +475,7 @@ const LegacyTriggerManager = props => {
       onError={onError}
       initialTrigger={initialTrigger}
     >
-      {({ error, launch, running, trigger, flow }) => (
+      {({ error, trigger, flow }) => (
         <TriggerManager
           {...otherProps}
           error={error}

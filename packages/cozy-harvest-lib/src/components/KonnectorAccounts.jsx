@@ -12,7 +12,6 @@ import compose from 'lodash/flowRight'
 import keyBy from 'lodash/keyBy'
 import CozyRealtime from 'cozy-realtime'
 
-import { findAccount } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
@@ -100,6 +99,7 @@ export class KonnectorAccounts extends React.Component {
       const triggerAccounts = await fetchAccountsFromTriggers(client, triggers)
       this.setState({ accounts: triggerAccounts, error: null })
     } catch (error) {
+      // eslint-disable-next-line no-console
       console.error(error)
       this.setState({ error })
     } finally {

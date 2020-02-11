@@ -17,11 +17,7 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import {
-  TWO_FA_MISMATCH_EVENT,
-  TWO_FA_REQUEST_EVENT,
-  UPDATE_EVENT
-} from '../models/KonnectorJob'
+import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/KonnectorJob'
 
 /**
  * Displayed during connection creation when the konnector detects
@@ -86,13 +82,7 @@ export class TwoFAModal extends PureComponent {
   }
 
   render() {
-    const {
-      dismissAction,
-      konnectorJob,
-      t,
-      breakpoints = {},
-      flow
-    } = this.props
+    const { dismissAction, t, breakpoints = {}, flow } = this.props
     const { isMobile } = breakpoints
     const { twoFACode, requestNb, hasErrored, isJobRunning } = this.state
 

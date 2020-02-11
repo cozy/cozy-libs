@@ -16,7 +16,6 @@ import { fetchTrigger, ensureTrigger } from '../connections/triggers'
 import assert from '../assert'
 import * as accounts from '../helpers/accounts'
 import * as triggersModel from '../helpers/triggers'
-import * as jobsModel from '../helpers/jobs'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
@@ -42,11 +41,7 @@ export const WAITING_TWOFA = 'WAITING_TWOFA'
 export const TWO_FA_MISMATCH = 'TWO_FA_MISMATCH'
 export const TWO_FA_REQUEST = 'TWO_FA_REQUEST'
 
-const JOB_EVENTS = [
-  ERROR_EVENT,
-  LOGIN_SUCCESS_EVENT,
-  SUCCESS_EVENT
-]
+const JOB_EVENTS = [ERROR_EVENT, LOGIN_SUCCESS_EVENT, SUCCESS_EVENT]
 
 const eventToStatus = {
   [ERROR_EVENT]: ERRORED,
@@ -54,7 +49,6 @@ const eventToStatus = {
   [SUCCESS_EVENT]: SUCCESS
 }
 const stepEvents = [LOGIN_SUCCESS_EVENT]
-const isStatusEvent = eventName => Boolean(jobEventToStatus[eventName])
 const isStepEvent = eventName => stepEvents.includes(eventName)
 
 /**
@@ -71,10 +65,15 @@ const isStepEvent = eventName => stepEvents.includes(eventName)
  * This should be the go to source of truth for the state of a Konnector Job.
  */
 export class KonnectorJob {
-  constructor(client, trigger) {
+  constructor(
+    client,
+    { trigger = null, account = null, t = null, konnector = null }
+  ) {
     this.client = client
     this.trigger = trigger
-    this.account = null
+    this.account = account
+    this.konnector = konnector
+    this.t = t
     this.unsubscribeAllRealtime = null
 
     // Bind methods used as callbacks
@@ -171,8 +170,6 @@ export class KonnectorJob {
       const accountId = this.account._id
       assert(accountId, 'Cannot wait for two fa on account without id')
 
-      const finishWaiting = () => {}
-
       const resolve = () => {
         this.realtime.unsubscribe(
           'updated',
@@ -238,14 +235,13 @@ export class KonnectorJob {
       })
       this.flushTwoFAWaiters()
     } catch (error) {
-      console.error(error)
+      logger.error(error)
       this.setState({ status: ERRORED, error })
     }
   }
 
   /**
    * "Sends" 2FA Code
->>>>>>> theirs
    */
   async sendTwoFACode(code) {
     this.setState({ status: RUNNING_TWOFA })
@@ -254,7 +250,7 @@ export class KonnectorJob {
       await this.saveAccount(accounts.updateTwoFaCode(this.account, code))
     } catch (error) {
       // eslint-disable-next-line no-console
-      console.error(error)
+      logger.error(error)
       this.setState({ status: ERRORED, error })
     }
   }
@@ -282,7 +278,8 @@ export class KonnectorJob {
       konnector,
       cipherId,
       vaultClient,
-      userCredentials
+      userCredentials,
+      t
     } = options
     try {
       let { account, trigger } = options
@@ -291,6 +288,7 @@ export class KonnectorJob {
       this.trigger = trigger
       this.account = account
       this.konnector = konnector
+      this.t = t
 
       assert(client, 'No client')
       const konnectorPolicy = findKonnectorPolicy(konnector)
@@ -329,7 +327,7 @@ export class KonnectorJob {
 
       await this.ensureTriggerAndLaunch(client, { trigger, account, konnector })
     } catch (e) {
-      console.error(e)
+      logger.error(e)
       this.setState({ error: e })
       this.triggerEvent(ERROR_EVENT, e)
       throw e
@@ -356,7 +354,7 @@ export class KonnectorJob {
     }
   }
 
-  async handleJobUpdated(job) {
+  async handleJobUpdated() {
     await this.refetchTrigger()
   }
 
@@ -366,9 +364,10 @@ export class KonnectorJob {
     this.emit(UPDATE_EVENT)
   }
 
-  async ensureTriggerAndLaunch(client, { trigger, account, konnector }) {
+  async ensureTriggerAndLaunch(client, { trigger, account, konnector, t }) {
     logger.debug('Ensuring trigger...')
-    trigger = await ensureTrigger(client, { trigger, account, konnector })
+    this.t = t
+    trigger = await ensureTrigger(client, { trigger, account, konnector, t })
     logger.info(`Trigger is ${trigger._id}`)
     this.trigger = trigger
     this.emit(UPDATE_EVENT)
