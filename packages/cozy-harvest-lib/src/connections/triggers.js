@@ -23,7 +23,7 @@ const createTrigger = async (client, attributes) => {
   return data
 }
 
-const fetchTrigger = async (client, id) => {
+export const fetchTrigger = async (client, id) => {
   const { data } = await client.collection(TRIGGERS_DOCTYPE).get(id)
   return data
 }

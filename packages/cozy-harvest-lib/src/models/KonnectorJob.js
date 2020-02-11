@@ -13,19 +13,26 @@ import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import { createOrUpdateCipher } from '../models/cipherUtils'
-import { ensureTrigger } from '../connections/triggers'
+import { fetchTrigger, ensureTrigger } from '../connections/triggers'
 import assert from '../assert'
+import * as triggersModel from '../helpers/triggers'
+import * as jobsModel from '../helpers/jobs'
+
+const JOBS_DOCTYPE = 'io.cozy.jobs'
 
 // events
 export const ERROR_EVENT = 'error'
 export const LOGIN_SUCCESS_EVENT = 'loginSuccess'
 export const SUCCESS_EVENT = 'success'
+export const TRIGGER_LAUNCH_EVENT = 'TRIGGER_LAUNCH_EVENT'
 
 export const TWO_FA_REQUEST_EVENT = 'twoFARequest'
 export const TWO_FA_MISMATCH_EVENT = 'twoFAMismatch'
+export const UPDATE_EVENT = 'update'
 
 // statuses
 export const IDLE = 'IDLE'
+export const CREATING_ACCOUNT = 'CREATING_ACCOUNT'
 export const PENDING = 'PENDING'
 export const ERRORED = 'ERRORED'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -72,42 +79,18 @@ export class KonnectorJob {
     // Bind methods used as callbacks
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
     this.getKonnectorSlug = this.getKonnectorSlug.bind(this)
-
+    this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
+    this.handleJobUpdated = this.handleJobUpdated.bind(this)
     this.handleTwoFA = this.handleTwoFA.bind(this)
     this.launch = this.launch.bind(this)
     this.sendTwoFACode = this.sendTwoFACode.bind(this)
     this.unwatch = this.unwatch.bind(this)
 
-    // status and setter/getters
-    this._status = IDLE
-    this.setStatus = this.setStatus.bind(this)
-    this.getStatus = this.getStatus.bind(this)
-    this.isRunning = this.isRunning.bind(this)
-    this.isTwoFARunning = this.isTwoFARunning.bind(this)
-    this.isTwoFARetry = this.isTwoFARetry.bind(this)
+    this.state = {
+      status: IDLE
+    }
 
     this.realtime = new Realtime({ client })
-    this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
-  }
-
-  setStatus(status) {
-    this._status = status
-  }
-
-  getStatus() {
-    return this._status
-  }
-
-  isRunning() {
-    return ![ERRORED, IDLE, SUCCESS].includes(this.getStatus())
-  }
-
-  isTwoFARunning() {
-    return this.getStatus() === RUNNING_TWOFA
-  }
-
-  isTwoFARetry() {
-    return this.getStatus() === TWO_FA_MISMATCH
   }
 
   getTwoFACodeProvider() {
@@ -128,11 +111,11 @@ export class KonnectorJob {
       return
     }
     if (accounts.isTwoFANeeded(state)) {
-      this.setStatus(TWO_FA_REQUEST)
-      this.emit(TWO_FA_REQUEST_EVENT, this.account)
+      this.setState({ status: TWO_FA_REQUEST })
+      this.emit(TWO_FA_REQUEST_EVENT)
     } else if (accounts.isTwoFARetry(state)) {
-      this.setStatus(TWO_FA_MISMATCH)
-      this.emit(TWO_FA_MISMATCH_EVENT, this.account)
+      this.setState({ status: TWO_FA_MISMATCH })
+      this.emit(TWO_FA_MISMATCH_EVENT)
     }
   }
 
@@ -147,11 +130,19 @@ export class KonnectorJob {
     this.emit(eventName, ...args)
   }
 
+  getAccount() {
+    return this.account
+  }
+
+  getKonnectorPolicy() {
+    return findKonnectorPolicy(this.konnector)
+  }
+
   /**
    * "Sends" 2FA Code, saves it into account
    */
   async sendTwoFACode(code) {
-    this.setStatus(RUNNING_TWOFA)
+    this.setState({ status: RUNNING_TWOFA })
     try {
       await updateAccount(
         this.client,
@@ -160,7 +151,7 @@ export class KonnectorJob {
     } catch (error) {
       // eslint-disable-next-line no-console
       console.error(error)
-      this.setStatus(ERRORED)
+      this.setState({ status: ERRORED })
     }
   }
 
@@ -189,38 +180,51 @@ export class KonnectorJob {
       vaultClient,
       userCredentials
     } = options
-    let { account, trigger } = options
+    try {
+      let { account, trigger } = options
 
-    assert(client, 'No client')
-    const konnectorPolicy = findKonnectorPolicy(konnector)
-    logger.log(`Handling submit, with konnector policy ${konnectorPolicy.name}`)
+      this.setState({ status: CREATING_ACCOUNT })
+      this.trigger = trigger
+      this.account = account
 
-    let cipher
-    if (konnectorPolicy.saveInVault) {
-      cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+      assert(client, 'No client')
+      const konnectorPolicy = findKonnectorPolicy(konnector)
+      logger.log(
+        `Handling submit, with konnector policy ${konnectorPolicy.name}`
+      )
+
+      let cipher
+      if (konnectorPolicy.saveInVault) {
+        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
+          account,
+          konnector,
+          userCredentials
+        })
+      } else {
+        logger.info(
+          'Bypassing cipher creation because of konnector account policy'
+        )
+      }
+
+      logger.info(`Create or update account`)
+      account = await createOrUpdateAccount({
         account,
+        cipher,
+        client,
+        flow: this,
         konnector,
+        konnectorPolicy,
         userCredentials
       })
-    } else {
-      logger.info(
-        'Bypassing cipher creation because of konnector account policy'
-      )
+
+      logger.info('Created account')
+
+      await this.ensureTriggerAndLaunch(client, { trigger, account, konnector })
+    } catch (e) {
+      console.error(e)
+      this.triggerEvent(ERROR_EVENT, e)
+      throw e
     }
-
-    account = await createOrUpdateAccount({
-      account,
-      cipher,
-      client,
-      flow: this,
-      konnector,
-      konnectorPolicy,
-      userCredentials
-    })
-
-    logger.info('Created account')
-
-    await this.ensureTriggerAndLaunch(client, { trigger, account, konnector })
   }
 
   handleAccountUpdated(account) {
@@ -228,6 +232,7 @@ export class KonnectorJob {
 
     // _type is not present in objects from realtime but we have to keep
     // it to be compatible with cozy-client's methods
+    //
     this.account = {
       _type: prevAccount._type,
       ...account
@@ -240,6 +245,16 @@ export class KonnectorJob {
     } else if (accounts.isLoginSuccess(state)) {
       this.handleLoginSuccess()
     }
+  }
+
+  async handleJobUpdated(job) {
+    await this.refetchTrigger()
+  }
+
+  async refetchTrigger() {
+    const trigger = await fetchTrigger(this.client, this.trigger._id)
+    this.trigger = trigger
+    this.emit(UPDATE_EVENT)
   }
 
   async ensureTriggerAndLaunch(client, { trigger, account, konnector }) {
@@ -256,7 +271,7 @@ export class KonnectorJob {
    */
   async launch() {
     logger.info('Launching job...')
-    this.setStatus(PENDING)
+    this.setState({ status: PENDING })
 
     this.account = await prepareTriggerAccount(this.client, this.trigger)
     this.realtime.subscribe(
@@ -265,6 +280,8 @@ export class KonnectorJob {
       this.account._id,
       this.handleAccountUpdated
     )
+    logger.info(`Subscribed to ${ACCOUNTS_DOCTYPE}:${this.account._id}`)
+
     this.job = await launchTrigger(this.client, this.trigger)
     this.realtime.subscribe(
       'updated',
@@ -283,13 +300,42 @@ export class KonnectorJob {
       this.jobWatcher.unsubscribeAll()
       this.realtime.unsubscribeAll()
     }
-    logger.info('Job finished...')
   }
 
   unwatch() {
     if (typeof this.unsubscribeAllRealtime === 'function') {
       this.unsubscribeAllRealtime()
     }
+  }
+
+  reset() {
+    this.trigger = null
+    this.job = null
+    this.emit(UPDATE_EVENT)
+  }
+
+  getDerivedState() {
+    const trigger = this.trigger
+    const { status } = this.state
+    return {
+      running: ![ERRORED, IDLE, SUCCESS].includes(status),
+      twoFARunning: status === RUNNING_TWOFA,
+      twoFARetry: status == TWO_FA_MISMATCH,
+      triggerError: triggersModel.getKonnectorJobError(trigger),
+      konnectorRunning: triggersModel.isKonnectorRunning(trigger)
+    }
+  }
+
+  getState() {
+    return {
+      ...this.state,
+      ...this.getDerivedState()
+    }
+  }
+
+  setState(update) {
+    this.state = { ...this.state, ...update }
+    this.emit(UPDATE_EVENT)
   }
 }
 

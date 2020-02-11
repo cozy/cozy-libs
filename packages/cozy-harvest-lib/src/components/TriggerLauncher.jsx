@@ -1,18 +1,16 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withClient, withMutations } from 'cozy-client'
-import CozyRealtime from 'cozy-realtime'
+import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
-import { fetchTrigger } from '../connections/triggers'
-import * as triggersModel from '../helpers/triggers'
-import * as jobsModel from '../helpers/jobs'
 import KonnectorJob, {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
-  TWO_FA_REQUEST_EVENT
+  TWO_FA_REQUEST_EVENT,
+  TRIGGER_LAUNCH_EVENT,
+  UPDATE_EVENT
 } from '../models/KonnectorJob'
 
 /**
@@ -39,12 +37,9 @@ import KonnectorJob, {
 export class TriggerLauncher extends Component {
   constructor(props, context) {
     super(props, context)
-    const { initialTrigger, client } = this.props
+    const { initialTrigger } = this.props
     this.state = {
-      showTwoFAModal: false,
-      trigger: initialTrigger,
-      error: triggersModel.getKonnectorJobError(initialTrigger),
-      running: triggersModel.isKonnectorRunning(initialTrigger)
+      showTwoFAModal: false
     }
 
     this.dismissTwoFAModal = this.dismissTwoFAModal.bind(this)
@@ -52,68 +47,49 @@ export class TriggerLauncher extends Component {
     this.handleError = this.handleError.bind(this)
     this.handleSuccess = this.handleSuccess.bind(this)
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
+    this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
 
-    this.launch = this.launch.bind(this)
-
-    this.realtime = new CozyRealtime({ client })
+    this.setupKonnectorJob(initialTrigger)
   }
 
-  async handleUpdate(job) {
-    if (this.state.trigger && this.state.trigger._id === job.trigger_id) {
-      const trigger = await this.refetchTrigger()
-      this.setState({
-        trigger,
-        running: job.state === 'running', //TODO possible race ?
-        error: job.error ? jobsModel.getKonnectorJobError(job) : undefined
-      })
-    }
-  }
-
-  async componentDidMount() {
-    await this.realtime.subscribe(
-      'updated',
-      'io.cozy.jobs',
-      this.handleUpdate.bind(this)
-    )
-  }
-
-  async componentWillUnmount() {
-    await this.realtime.unsubscribeAll()
-  }
-
-  launch(trigger) {
-    const { client, onLaunch } = this.props
+  setupKonnectorJob(trigger) {
+    const { client } = this.props
     this.konnectorJob = new KonnectorJob(client, trigger)
     this.konnectorJob
       .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.handleSuccess)
+      .on(TRIGGER_LAUNCH_EVENT, this.handleTriggerLaunch)
       .on(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
       .on(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
+      .on(UPDATE_EVENT, this.handleFlowUpdate)
+  }
 
-    this.setState({
-      error: null,
-      running: true,
-      trigger
-    })
+  handleFlowUpdate() {
+    this.setState({ flowState: this.konnectorJob.getState() })
+  }
 
+  stopWatchingKonnectorJob() {
+    this.konnectorJob.unwatch()
+  }
+
+  componentWillUnmount() {
+    this.stopWatchingKonnectorJob()
+  }
+
+  handleTriggerLaunch(trigger) {
+    const { onLaunch } = this.props
     if (typeof onLaunch === 'function') onLaunch(trigger)
-
-    this.konnectorJob.launch()
   }
 
-  dismissTwoFAModal(account) {
-    this.setState({ showTwoFAModal: false, account })
+  dismissTwoFAModal() {
+    this.setState({ showTwoFAModal: false })
   }
 
-  displayTwoFAModal(account) {
-    this.setState({ showTwoFAModal: true, account })
+  displayTwoFAModal() {
+    this.setState({ showTwoFAModal: true })
   }
 
   async handleError(error) {
-    /**
-     * We don't setState error / running here, since it's the job of `refeshTrigger`
-     * to do it
-     */
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
@@ -151,40 +127,20 @@ export class TriggerLauncher extends Component {
     if (typeof onLoginSuccess === 'function') onLoginSuccess(trigger)
   }
 
-  async refetchTrigger() {
-    const { client } = this.props
-    const { trigger } = this.state
-    try {
-      return await fetchTrigger(client, trigger._id)
-    } catch (error) {
-      this.setState({ error, running: false })
-      throw error
-    }
-  }
-
-  stopWatchingKonnectorJob() {
-    this.konnectorJob.unwatch()
-    delete this.konnectorJob
-  }
-
   render() {
-    const { error, running, showTwoFAModal, trigger, account } = this.state
-
-    const { children, submitting } = this.props
+    const { showTwoFAModal } = this.state
+    const flow = this.konnectorJob
+    const { children } = this.props
     return (
       <>
         {children({
-          error: error ? error : undefined,
-          launch: this.launch,
-          running: !!running || !!submitting,
-          trigger
+          flow
         })}
         {showTwoFAModal && (
           <TwoFAModal
+            flow={flow}
             dismissAction={this.dismissTwoFAModal}
             into="coz-harvest-modal-place"
-            konnectorJob={this.konnectorJob}
-            account={account}
           />
         )}
       </>
@@ -228,8 +184,4 @@ TriggerLauncher.propTypes = {
   initialTrigger: PropTypes.object
 }
 
-export default translate()(
-  withClient(
-    TriggerLauncher
-  )
-)
+export default translate()(withClient(TriggerLauncher))

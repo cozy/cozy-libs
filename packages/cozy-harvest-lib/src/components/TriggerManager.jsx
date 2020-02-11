@@ -30,11 +30,30 @@ import clone from 'lodash/clone'
 import flag from 'cozy-flags'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
+import {
+  UPDATE_EVENT
+} from '../models/KonnectorJob'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
+
+class ConnectionFlowStatus extends Component {
+  handleUpdate() {
+    this.forceUpdate()
+  }
+  componentDidMount() {
+    this.handleUpdate = this.handleUpdate.bind(this)
+    this.props.flow.on(UPDATE_EVENT, this.handleUpdate)
+  }
+  componentWillUnmount() {
+    this.props.flow.removeListener(UPDATE_EVENT, this.handleUpdate)
+  }
+  render() {
+    return <pre>{JSON.stringify(this.props.flow.getState(), null, 2)}</pre>
+  }
+}
 
 /**
  * Wraps conditionally its children inside VaultUnlocker, only if
@@ -83,13 +102,13 @@ export class DumbTriggerManager extends Component {
     super(props)
     const { account } = props
 
-    this.handleNewAccount = this.handleNewAccount.bind(this)
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleError = this.handleError.bind(this)
     this.handleCipherSelect = this.handleCipherSelect.bind(this)
     this.showCiphersList = this.showCiphersList.bind(this)
     this.handleVaultUnlock = this.handleVaultUnlock.bind(this)
+    this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
 
     this.state = {
       account,
@@ -100,6 +119,21 @@ export class DumbTriggerManager extends Component {
       showBackButton: false,
       ciphers: []
     }
+  }
+
+  componentDidMount() {
+    const { flow } = this.props
+    flow.on(UPDATE_EVENT, this.handleFlowUpdate)
+  }
+
+  componentWillUnmount() {
+    const { flow } = this.props
+    flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
+  }
+
+  handleFlowUpdate() {
+    const { flow } = this.props
+    this.setState({ flowState: flow.getState() })
   }
 
   /**
@@ -147,10 +181,9 @@ export class DumbTriggerManager extends Component {
       const cipherId = this.getSelectedCipherId()
       await flow.handleFormSubmit({
         client,
-        account,
+        account: account || {},
         cipherId,
         konnector,
-        konnectorPolicy,
         trigger,
         userCredentials: data,
         vaultClient
@@ -167,7 +200,6 @@ export class DumbTriggerManager extends Component {
    * TODO rename state error to accountError
    */
   handleError(error) {
-    logger.error('TriggerManager handleError', error)
     const { onError } = this.props
     this.setState({ error })
     if (typeof onError === 'function') onError(error)
@@ -286,8 +318,12 @@ export class DumbTriggerManager extends Component {
       modalContainerId,
       t,
       onVaultDismiss,
-      vaultClosable
+      vaultClosable,
+      flow
     } = this.props
+
+    const flowState = flow.getState()
+    const submitting = flowState.running
 
     const {
       account,
@@ -299,7 +335,6 @@ export class DumbTriggerManager extends Component {
       ciphers
     } = this.state
 
-    const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
     const { oauth } = konnector
@@ -314,7 +349,6 @@ export class DumbTriggerManager extends Component {
           account={account}
           konnector={konnector}
           onSuccess={this.handleOAuthAccountId}
-          submitting={submitting}
         />
       )
     }
@@ -343,6 +377,7 @@ export class DumbTriggerManager extends Component {
             onSelect={this.handleCipherSelect}
           />
         )}
+        <ConnectionFlowStatus flow={this.props.flow} />
         {showAccountForm && (
           <>
             {showBackButton && (
@@ -357,11 +392,10 @@ export class DumbTriggerManager extends Component {
                   ? this.cipherToAccount(selectedCipher)
                   : account
               }
-              error={error || triggerError}
+              submitting={submitting}
               konnector={konnector}
               onSubmit={this.handleSubmit}
               showError={showError}
-              submitting={submitting}
               onBack={() => this.showCiphersList()}
               readOnlyIdentifier={this.hasCipherSelected()}
             />
@@ -410,7 +444,7 @@ DumbTriggerManager.propTypes = {
   /**
    * Function to call to launch the job
    */
-  launch: PropTypes.func.isRequired,
+  onFormSubmit: PropTypes.func.isRequired,
   /**
    * Translation function
    */
@@ -463,13 +497,12 @@ const LegacyTriggerManager = props => {
       onError={onError}
       initialTrigger={initialTrigger}
     >
-      {({ error, launch, running, trigger }) => (
+      {({ error, launch, running, trigger, flow }) => (
         <TriggerManager
           {...otherProps}
           error={error}
-          launch={launch}
-          running={running}
           trigger={trigger}
+          flow={flow}
         />
       )}
     </TriggerLauncher>
