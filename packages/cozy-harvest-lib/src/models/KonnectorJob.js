@@ -67,7 +67,7 @@ const isStepEvent = eventName => stepEvents.includes(eventName)
 export class KonnectorJob {
   constructor(
     client,
-    { trigger = null, account = null, t = null, konnector = null }
+    { trigger = null, account = null, t = null, konnector = null } = {}
   ) {
     this.client = client
     this.trigger = trigger
