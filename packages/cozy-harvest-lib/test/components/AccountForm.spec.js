@@ -7,7 +7,13 @@ import { I18n } from 'cozy-ui/transpiled/react'
 import { isMobile } from 'cozy-device-helper'
 
 import { AccountForm } from 'components/AccountForm'
+import enLocale from 'locales/en.json'
+import Polyglot from 'node-polyglot'
 
+const polyglot = new Polyglot()
+polyglot.extend(enLocale)
+
+const t = polyglot.t.bind(polyglot)
 const fixtures = {
   konnector: {
     fields: {
@@ -37,7 +43,6 @@ const fixtures = {
 }
 
 const onSubmit = jest.fn()
-const t = jest.fn()
 
 jest.mock('cozy-device-helper', () => ({
   ...require.requireActual('cozy-device-helper'),
@@ -50,57 +55,60 @@ jest.mock('components/KonnectorIcon', () => {
   return KonnectorIcon
 })
 
+const makeFlow = state => {
+  return {
+    getState: () => state
+  }
+}
+
 describe('AccountForm', () => {
   beforeEach(() => {
-    t.mockClear()
-    t.mockImplementation(key => key)
     onSubmit.mockClear()
   })
 
-  it('should render', () => {
+  const setup = ({ error, showError, account, konnector, disableLifecycleMethods } = {}) => {
+    const flow = makeFlow({ error })
     const wrapper = shallow(
-      <AccountForm konnector={fixtures.konnector} onSubmit={onSubmit} t={t} />
+        <AccountForm
+          flow={flow}
+          account={account}
+          konnector={konnector || fixtures.konnector}
+          onSubmit={onSubmit}
+          showError={showError}
+          t={t}
+        />
+      , { disableLifecycleMethods }
     )
+    return { wrapper }
+  }
+
+  it('should render', () => {
+    const { wrapper } = setup()
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should render error', () => {
-    const wrapper = shallow(
-      <AccountForm
-        error={new Error('Test error')}
-        konnector={fixtures.konnector}
-        onSubmit={onSubmit}
-        t={t}
-      />
-    )
+    const { wrapper } = setup({
+      error: new Error('Test error')
+    })
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should not render error', () => {
-    const wrapper = shallow(
-      <AccountForm
-        error={new Error('Test error')}
-        konnector={fixtures.konnector}
-        onSubmit={onSubmit}
-        showError={false}
-        t={t}
-      />
-    )
+    const { wrapper } = setup({
+      error: new Error('Test error'),
+      showError: false
+    })
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should inject initial values from account', () => {
-    const wrapper = shallow(
-      <AccountForm
-        account={fixtures.account}
-        konnector={fixtures.konnector}
-        onSubmit={onSubmit}
-        t={t}
-      />
-    )
+    const { wrapper } = setup({
+      account: fixtures.account
+    })
     expect(wrapper.props().initialValues).toEqual(fixtures.account.auth)
   })
 
@@ -113,9 +121,9 @@ describe('AccountForm', () => {
         }
       }
     }
-    const wrapper = shallow(
-      <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />
-    )
+    const { wrapper } = setup({
+        konnector
+    })
     expect(wrapper.props().initialValues).toEqual({
       foo: 'bar'
     })
@@ -143,12 +151,10 @@ describe('AccountForm', () => {
         }
       }
 
+      const { wrapper } = setup({ konnector })
+
       assertButtonDisabled(
-        shallow(
-          <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />,
-          // Avoid componentDidMount
-          { disableLifecycleMethods: true }
-        )
+        wrapper
       )
     })
 
@@ -161,26 +167,18 @@ describe('AccountForm', () => {
           }
         }
       }
+      const { wrapper } = setup({ konnector })
       assertButtonEnabled(
-        shallow(
-          <AccountForm konnector={konnector} onSubmit={onSubmit} t={t} />,
-          // Avoid componentDidMount
-          { disableLifecycleMethods: true }
-        )
+        wrapper
       )
     })
 
     it("should be enabled if fields isn't required", () => {
+      const { wrapper } = setup({
+        konnector: fixtures.konnectorWithOptionalFields
+      })
       assertButtonEnabled(
-        shallow(
-          <AccountForm
-            konnector={fixtures.konnectorWithOptionalFields}
-            onSubmit={onSubmit}
-            t={t}
-          />,
-          // Avoid componentDidMount
-          { disableLifecycleMethods: true }
-        )
+        wrapper
       )
     })
 
@@ -191,18 +189,12 @@ describe('AccountForm', () => {
           passphrase: 'bar'
         }
       }
+      const { wrapper } = setup({
+        account
+      })
 
       assertButtonDisabled(
-        shallow(
-          <AccountForm
-            account={account}
-            konnector={fixtures.konnector}
-            onSubmit={onSubmit}
-            t={t}
-          />,
-          // Avoid componentDidMount
-          { disableLifecycleMethods: true }
-        )
+        wrapper
       )
     })
 
@@ -217,52 +209,31 @@ describe('AccountForm', () => {
           passphrase: 'bar'
         }
       }
+      const error = new Error('Existing trigger error')
+      const { wrapper } = setup({
+        account,
+        error
+      })
 
       assertButtonDisabled(
-        shallow(
-          <AccountForm
-            account={account}
-            error={new Error('Existing trigger error')}
-            konnector={fixtures.konnector}
-            onSubmit={onSubmit}
-            t={t}
-          />,
-          // Avoid componentDidMount
-          { disableLifecycleMethods: true }
-        )
+        wrapper
       )
     })
 
     it('should be enabled when an error exists', () => {
-      const values = {
-        username: 'foo',
-        passphrase: 'bar'
-      }
+      const account = {}
+      const error = new Error('Test error')
+      const { wrapper } = setup({ account, error })
       assertButtonEnabled(
-        shallow(
-          <AccountForm
-            error={new Error('Test error')}
-            konnector={fixtures.konnector}
-            initialValues={values}
-            onSubmit={onSubmit}
-            t={t}
-          />,
-          // Avoid componentDidMount
-          { disableLifecycleMethods: true }
-        )
+        wrapper
       )
     })
   })
 
   it('should call onSubmit on click', () => {
-    const wrapper = shallow(
-      <AccountForm
-        account={fixtures.account}
-        konnector={fixtures.konnectorWithOptionalFields}
-        onSubmit={onSubmit}
-        t={t}
-      />
-    )
+    const { wrapper } = setup({
+      konnector: fixtures.konnectorWithOptionalFields
+    })
     wrapper
       .dive()
       .find('DefaultButton')
@@ -276,9 +247,7 @@ describe('AccountForm', () => {
     const passwordInput = document.createElement('input')
 
     it('should focus next input', () => {
-      const wrapper = shallow(
-        <AccountForm konnector={fixtures.konnector} onSubmit={onSubmit} t={t} />
-      )
+      const { wrapper } = setup()
 
       wrapper.instance().inputs = { login: loginInput, password: passwordInput }
       wrapper.instance().inputs.login.focus()
@@ -296,16 +265,7 @@ describe('AccountForm', () => {
   describe('handleKeyUp', () => {
     it('should ignore other keys than ENTER', () => {
       isMobile.mockReturnValue(false)
-      const wrapper = shallow(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-        />,
-        // Avoid componentDidMount
-        { disableLifecycleMethods: true }
-      )
-
+      const { wrapper } = setup()
       wrapper.instance().handleSubmit = jest.fn()
 
       wrapper.instance().handleKeyUp({ key: 'Space' }, {})
@@ -314,15 +274,7 @@ describe('AccountForm', () => {
 
     it('should submit form', () => {
       isMobile.mockReturnValue(false)
-      const wrapper = shallow(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-        />,
-        // Avoid componentDidMount
-        { disableLifecycleMethods: true }
-      )
+      const { wrapper } = setup()
 
       wrapper.instance().handleSubmit = jest.fn()
       wrapper.instance().isSubmittable = jest.fn().mockReturnValue(true)
@@ -333,15 +285,7 @@ describe('AccountForm', () => {
 
     it('should not submit form', () => {
       isMobile.mockReturnValue(false)
-      const wrapper = shallow(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-        />,
-        // Avoid componentDidMount
-        { disableLifecycleMethods: true }
-      )
+      const { wrapper } = setup({})
 
       wrapper.instance().handleSubmit = jest.fn()
       wrapper.instance().isSubmittable = jest.fn().mockReturnValue(false)
@@ -352,15 +296,7 @@ describe('AccountForm', () => {
 
     it('should focus next input on mobile', () => {
       isMobile.mockReturnValue(true)
-      const wrapper = shallow(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-        />,
-        // Avoid componentDidMount
-        { disableLifecycleMethods: true }
-      )
+      const { wrapper } = setup()
 
       wrapper.instance().focusNext = jest
         .fn()
@@ -372,15 +308,7 @@ describe('AccountForm', () => {
 
     it('should submit form on mobile', () => {
       isMobile.mockReturnValue(true)
-      const wrapper = shallow(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-        />,
-        // Avoid componentDidMount
-        { disableLifecycleMethods: true }
-      )
+      const { wrapper } = setup()
 
       wrapper.instance().focusNext = jest.fn().mockReturnValue(null)
       wrapper.instance().isSubmittable = jest.fn().mockReturnValue(true)
@@ -393,15 +321,7 @@ describe('AccountForm', () => {
 
     it('should not submit form on mobile', () => {
       isMobile.mockReturnValue(true)
-      const wrapper = shallow(
-        <AccountForm
-          konnector={fixtures.konnector}
-          onSubmit={onSubmit}
-          t={t}
-        />,
-        // Avoid componentDidMount
-        { disableLifecycleMethods: true }
-      )
+      const { wrapper } = setup()
 
       wrapper.instance().focusNext = jest.fn().mockReturnValue(null)
       wrapper.instance().isSubmittable = jest.fn().mockReturnValue(false)
@@ -415,26 +335,29 @@ describe('AccountForm', () => {
 
   describe('with read-only identifier', () => {
     it('should render a read-only identifier field if the account has a relationship with a vault cipher and props.readOnlyIdentifier is true', () => {
+      const accountWithCipher = {
+        ...fixtures.account,
+        relationships: {
+          vaultCipher: {
+            _id: 'fake-cipher-id',
+            _type: 'com.bitwarden.ciphers',
+            _protocol: 'bitwarden'
+          }
+        }
+      }
+      const flow = makeFlow({})
       const wrapper = mount(
-        <I18n lang="en" dictRequire={() => {}}>
+        <I18n lang='en' dictRequire={() => {}}>
           <AccountForm
+            flow={flow}
+            t={t}
             konnector={fixtures.konnector}
             onSubmit={onSubmit}
-            t={t}
-            account={{
-              ...fixtures.account,
-              relationships: {
-                vaultCipher: {
-                  _id: 'fake-cipher-id',
-                  _type: 'com.bitwarden.ciphers',
-                  _protocol: 'bitwarden'
-                }
-              }
-            }}
+            account={accountWithCipher}
             readOnlyIdentifier={true}
           />
         </I18n>,
-        {
+                {
           context: { t },
           childContextTypes: {
             t: PropTypes.func

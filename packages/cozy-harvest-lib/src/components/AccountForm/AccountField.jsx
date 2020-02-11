@@ -197,4 +197,4 @@ AccountField.propTypes = {
   t: PropTypes.func
 }
 
-export default translate()(AccountField)
+export default AccountField

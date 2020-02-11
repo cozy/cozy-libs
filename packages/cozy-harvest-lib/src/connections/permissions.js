@@ -1,7 +1,7 @@
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
 
 /**
- * Add the given permisison to the given subject
+ * Add the given permission to the given subject
  * @param {Object} client     CozyClient
  * @param {Object} target     Target document, could have doctype io.cozy.apps,
  * io.cozy.konnectors or io.cozy.permissions

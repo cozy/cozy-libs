@@ -26,7 +26,8 @@ export class AccountFields extends PureComponent {
       fields,
       hasError,
       initialValues = {},
-      inputRefByName
+      inputRefByName,
+      t
     } = this.props
 
     // Ready to use named fields array
@@ -56,6 +57,7 @@ export class AccountFields extends PureComponent {
                 }
                 inputRef={inputRefByName(field.name)}
                 forceEncryptedPlaceholder={!!Object.keys(initialValues).length}
+                t={t}
               />
             )}
           </FinalFormField>
