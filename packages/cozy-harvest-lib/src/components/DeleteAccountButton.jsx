@@ -54,7 +54,7 @@ export class DeleteAccountButton extends Component {
         busy={deleting}
         onClick={this.handleDelete}
         label={t('accountForm.disconnect.button')}
-        {...omit(this.props, Object.keys(excludedButtonProptypes))}
+        {...omit(this.props, Object.keys(excludedButtonProptypes), 'client')}
       />
     )
   }

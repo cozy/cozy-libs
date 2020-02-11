@@ -2,6 +2,11 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { DeleteAccountButton } from 'components/DeleteAccountButton'
+import { deleteAccount } from '../../src/connections/accounts'
+
+jest.mock('../../src/connections/accounts', () => ({
+  deleteAccount: jest.fn()
+}))
 
 const fixtures = {
   account: {
@@ -18,33 +23,36 @@ const fixtures = {
 const tMock = () => 'Mock button label'
 
 const props = {
-  t: tMock,
-  deleteAccount: jest.fn()
+  t: tMock
 }
 
 describe('DeleteAccountButton', () => {
+  const client = {}
   beforeEach(() => {
-    jest.resetAllMocks()
+    deleteAccount.mockReset()
   })
 
   it('should render without listeners', () => {
     const component = shallow(
-      <DeleteAccountButton account={fixtures.account} {...props} />
+      <DeleteAccountButton
+        client={client} account={fixtures.account} {...props} />
     ).getElement()
     expect(component).toMatchSnapshot()
   })
 
   it('should run deleteAccount on click', () => {
     const component = shallow(
-      <DeleteAccountButton account={fixtures.account} {...props} />
+      <DeleteAccountButton
+        client={client} account={fixtures.account} {...props} />
     )
     component.simulate('click')
-    expect(props.deleteAccount).toHaveBeenCalledWith(fixtures.account)
+    expect(deleteAccount).toHaveBeenCalledWith(client, fixtures.account)
   })
 
   it('should change state on click and handle onSuccess', done => {
     const component = shallow(
       <DeleteAccountButton
+        client={client}
         account={fixtures.account}
         onSuccess={() => done()}
         {...props}
@@ -57,18 +65,18 @@ describe('DeleteAccountButton', () => {
 
   it('should handle onError if provided', done => {
     const mockError = new Error('Expected logout error test')
-    const deleteAccount = () => {
+    deleteAccount.mockImplementation(() => {
       throw mockError
-    }
+    })
     const onError = e => {
       expect(e).toBe(mockError)
       done()
     }
     const component = shallow(
       <DeleteAccountButton
+        client={client}
         account={fixtures.account}
         {...props}
-        deleteAccount={deleteAccount}
         onError={onError}
       />
     )
