@@ -55,6 +55,16 @@ const fakeVault = {
 const logDebug = name => (...args) =>
   logger.debug('Connection flow emitted', name, ...args)
 
+const exitOnError = fn => async function () {
+  try {
+    const res = await fn.apply(this, arguments)
+    return res
+  } catch (e) {
+    console.error(error)
+    process.exit(1)
+  }
+}
+
 const createOrUpdateMain = async (args, client) => {
   const {
     data: { attributes: konnector }
@@ -63,7 +73,7 @@ const createOrUpdateMain = async (args, client) => {
   konnector._type = 'io.cozy.konnectors'
   const flow = new KonnectorJob(client)
 
-  const handleTwoFARequest = async options => {
+  const handleTwoFARequest = exitOnError(async options => {
     await sleep(300)
 
     const fields = flow.getAdditionalInformationNeeded()
@@ -76,7 +86,7 @@ const createOrUpdateMain = async (args, client) => {
       responses = {}
     }
     flow.sendAdditionalInformation(responses)
-  }
+  })
 
   let lastState = flow.getState()
   flow

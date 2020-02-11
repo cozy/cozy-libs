@@ -13,7 +13,6 @@ const prompt = question =>
     })
   })
 
-
 export const multiPrompt = async fields => {
   const responses = {}
   for (let f of fields) {
