@@ -16,17 +16,17 @@ describe('TwoFAModal', () => {
     const client = {
       on: jest.fn()
     }
+
     const trigger = {}
     const konnectorJob = new KonnectorJob(client, trigger)
 
-    konnectorJob.isTwoFARetry = jest.fn()
+    konnectorJob.getAccount = () => account
     konnectorJob.getKonnectorSlug = () => konnectorSlug
-    konnectorJob.isTwoFARunning = jest.fn()
 
     const root = mount(
       <TwoFAModal
         dismissAction={jest.fn()}
-        konnectorJob={konnectorJob}
+        flow={konnectorJob}
         t={polyglot.t.bind(polyglot)}
         breakpoints={{ isMobile: true }}
         account={account}
