@@ -29,21 +29,7 @@ const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
-class ConnectionFlowStatus extends Component {
-  handleUpdate() {
-    this.forceUpdate()
-  }
-  componentDidMount() {
-    this.handleUpdate = this.handleUpdate.bind(this)
-    this.props.flow.on(UPDATE_EVENT, this.handleUpdate)
-  }
-  componentWillUnmount() {
-    this.props.flow.removeListener(UPDATE_EVENT, this.handleUpdate)
-  }
-  render() {
-    return <pre>{JSON.stringify(this.props.flow.getState(), null, 2)}</pre>
-  }
-}
+
 
 /**
  * Wraps conditionally its children inside VaultUnlocker, only if
@@ -365,7 +351,6 @@ export class DumbTriggerManager extends Component {
             onSelect={this.handleCipherSelect}
           />
         )}
-        <ConnectionFlowStatus flow={this.props.flow} />
         {showAccountForm && (
           <>
             {showBackButton && (
