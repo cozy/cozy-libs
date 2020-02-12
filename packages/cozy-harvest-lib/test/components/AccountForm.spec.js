@@ -57,6 +57,8 @@ jest.mock('components/KonnectorIcon', () => {
 
 const makeFlow = state => {
   return {
+    on: () => {},
+    removeEventListener: () => {},
     getState: () => state
   }
 }
@@ -67,13 +69,13 @@ describe('AccountForm', () => {
   })
 
   const setup = ({
-    error,
+    triggerError,
     showError,
     account,
     konnector,
     disableLifecycleMethods
   } = {}) => {
-    const flow = makeFlow({ error })
+    const flow = makeFlow({ triggerError })
     const wrapper = shallow(
       <AccountForm
         flow={flow}
@@ -96,7 +98,7 @@ describe('AccountForm', () => {
 
   it('should render error', () => {
     const { wrapper } = setup({
-      error: new Error('Test error')
+      triggerError: new Error('Test error')
     })
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
@@ -104,7 +106,7 @@ describe('AccountForm', () => {
 
   it('should not render error', () => {
     const { wrapper } = setup({
-      error: new Error('Test error'),
+      triggerError: new Error('Test error'),
       showError: false
     })
     const component = wrapper.dive().getElement()
@@ -207,10 +209,10 @@ describe('AccountForm', () => {
           passphrase: 'bar'
         }
       }
-      const error = new Error('Existing trigger error')
+      const triggerError = new Error('Existing trigger error')
       const { wrapper } = setup({
         account,
-        error
+        triggerError
       })
 
       assertButtonDisabled(wrapper)
@@ -218,8 +220,8 @@ describe('AccountForm', () => {
 
     it('should be enabled when an error exists', () => {
       const account = {}
-      const error = new Error('Test error')
-      const { wrapper } = setup({ account, error })
+      const triggerError = new Error('Test error')
+      const { wrapper } = setup({ account, triggerError })
       assertButtonEnabled(wrapper)
     })
   })

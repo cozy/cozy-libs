@@ -15,6 +15,7 @@ import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
+import { UPDATE_EVENT } from '../../models/KonnectorJob'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -33,7 +34,8 @@ export class AccountForm extends PureComponent {
     super(props)
 
     this.state = {
-      showConfirmationModal: false
+      showConfirmationModal: false,
+      flowState: props.flow.getState()
     }
 
     this.inputs = {}
@@ -45,6 +47,22 @@ export class AccountForm extends PureComponent {
     this.focusNext = this.focusNext.bind(this)
     this.showConfirmationModal = this.showConfirmationModal.bind(this)
     this.hideConfirmationModal = this.hideConfirmationModal.bind(this)
+    this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
+  }
+
+  componentDidMount() {
+    const { flow } = this.props
+    flow.on(UPDATE_EVENT, this.handleFlowUpdate)
+  }
+
+  componentWillUnmount() {
+    const { flow } = this.props
+    flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
+  }
+
+  handleFlowUpdate() {
+    const { flow } = this.props
+    this.setState({ flowState: flow.getState() })
   }
 
   /**
@@ -189,13 +207,12 @@ export class AccountForm extends PureComponent {
       onBack,
       onSubmit,
       showError,
-      t,
-      flow
+      t
     } = this.props
 
-    const flowState = flow.getState()
+    const flowState = this.state.flowState
     const submitting = flowState.running
-    const error = flowState.error
+    const error = flowState.triggerError
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
