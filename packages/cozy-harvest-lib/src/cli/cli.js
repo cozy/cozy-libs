@@ -1,5 +1,4 @@
 import './polyfill'
-import { ArgumentParser } from 'argparse'
 import { build } from '@cozy/cli-tree'
 import { createClientInteractive } from 'cozy-client/dist/cli'
 import KonnectorJob, {
@@ -39,8 +38,6 @@ const wait = (obs, ev) =>
     obs.once(ev, () => resolve(ev))
   })
 
-const select = (obs, events) => Promise.race(events.map(ev => wait(obs, ev)))
-
 const fetchAccount = async (client, accountId) => {
   const { data: account } = await client
     .collection(ACCOUNT_DOCTYPE)
@@ -55,15 +52,16 @@ const fakeVault = {
 const logDebug = name => (...args) =>
   logger.debug('Connection flow emitted', name, ...args)
 
-const exitOnError = fn => async function () {
-  try {
-    const res = await fn.apply(this, arguments)
-    return res
-  } catch (e) {
-    console.error(error)
-    process.exit(1)
+const exitOnError = fn =>
+  async function() {
+    try {
+      const res = await fn.apply(this, arguments)
+      return res
+    } catch (error) {
+      logger.error(error)
+      process.exit(1)
+    }
   }
-}
 
 const createOrUpdateMain = async (args, client) => {
   const {
@@ -73,7 +71,7 @@ const createOrUpdateMain = async (args, client) => {
   konnector._type = 'io.cozy.konnectors'
   const flow = new KonnectorJob(client)
 
-  const handleTwoFARequest = exitOnError(async options => {
+  const handleTwoFARequest = exitOnError(async () => {
     await sleep(300)
 
     const fields = flow.getAdditionalInformationNeeded()
@@ -115,7 +113,7 @@ const createOrUpdateMain = async (args, client) => {
     userCredentials: args.fields
   })
 
-  const rejectedProm = new Promise((resolve, reject) => prom.catch(e => reject))
+  const rejectedProm = new Promise((resolve, reject) => prom.catch(reject))
 
   const finalEvents = [
     ERROR_EVENT,

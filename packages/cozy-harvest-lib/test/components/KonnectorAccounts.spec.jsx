@@ -4,12 +4,16 @@ import { KonnectorAccounts } from 'components/KonnectorAccounts'
 import CozyClient from 'cozy-client'
 import { fetchAccountsFromTriggers } from '../../src/connections/accounts'
 
-jest.mock('cozy-realtime', () => function () {
-  return {
-    subscribe: jest.fn(),
-    unsubscribe: jest.fn()
-  }
-})
+jest.mock(
+  'cozy-realtime',
+  () =>
+    function() {
+      return {
+        subscribe: jest.fn(),
+        unsubscribe: jest.fn()
+      }
+    }
+)
 jest.mock('../../src/connections/accounts', () => ({
   fetchAccountsFromTriggers: jest.fn()
 }))
@@ -37,10 +41,12 @@ describe('KonnectorAccounts', () => {
   it('should call children with the accounts and triggers list', async () => {
     const children = jest.fn()
     const trigger = { _id: 'abc', error: null }
-    fetchAccountsFromTriggers.mockResolvedValueOnce([{
-      account: { _type: 'io.cozy.accounts', _id: '123' },
-      trigger
-    }])
+    fetchAccountsFromTriggers.mockResolvedValueOnce([
+      {
+        account: { _type: 'io.cozy.accounts', _id: '123' },
+        trigger
+      }
+    ])
     const fetchTrigger = jest.fn()
     const component = shallow(
       <KonnectorAccounts

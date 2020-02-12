@@ -4,8 +4,6 @@ import { shallow } from 'enzyme'
 import { render } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
-import cronHelpers from 'helpers/cron'
-import { konnectorPolicy as biKonnectorPolicy } from '../../src/services/budget-insight'
 import fixtures from '../../test/fixtures'
 import KonnectorJob from '../../src/models/KonnectorJob'
 import CozyClient from 'cozy-client'
@@ -74,54 +72,13 @@ const props = {
   t: tMock,
   vaultClient: mockVaultClient,
   breakpoints: { isMobile: false },
-  onVaultDismiss: jest.fn(),
+  onVaultDismiss: jest.fn()
 }
 
 const propsWithAccount = {
   ...props,
   account: fixtures.existingAccount,
   trigger: fixtures.existingTrigger
-}
-
-const defaultOnError = error => {
-  throw error
-}
-
-const setup = ({
-  konnector = fixtures.konnector,
-  account,
-  trigger,
-  onError = defaultOnError
-} = {}) => {
-  const root = shallow(
-    <TriggerManager
-      {...props}
-      konnector={konnector}
-      trigger={trigger}
-      account={account}
-      onError={onError}
-    />
-  )
-  return { root }
-}
-
-const shallowWithoutAccount = konnector => {
-  const { root } = setup({ konnector })
-  return root
-}
-
-const shallowWithAccount = options => {
-  const { root } = setup({
-    account: fixtures.existingAccount,
-    trigger: fixtures.existingTrigger,
-    ...options
-  })
-  return root
-}
-
-const isHigherComponentOfDisplayName = displayName => node => {
-  const type = node.type()
-  return type.displayName && type.displayName.includes(`(${displayName})`)
 }
 
 describe('TriggerManager', () => {

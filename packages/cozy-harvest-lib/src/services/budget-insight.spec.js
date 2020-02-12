@@ -271,7 +271,6 @@ describe('createOrUpdateBIConnection', () => {
       }
     })
 
-
     expect(accountToSave).toEqual({
       _id: 'created-account-id',
       auth: {

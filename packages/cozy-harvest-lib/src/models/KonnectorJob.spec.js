@@ -2,11 +2,15 @@ import CozyClient from 'cozy-client'
 import KonnectorJob from './KonnectorJob'
 import cronHelpers from 'helpers/cron'
 import { saveAccount } from '../connections/accounts'
-import { createTrigger, ensureTrigger, prepareTriggerAccount, launchTrigger } from '../connections/triggers'
+import {
+  createTrigger,
+  ensureTrigger,
+  prepareTriggerAccount,
+  launchTrigger
+} from '../connections/triggers'
 import CozyRealtime from 'cozy-realtime'
 import KonnectorJobWatcher from './konnector/KonnectorJobWatcher'
 import { konnectorPolicy as biKonnectorPolicy } from '../../src/services/budget-insight'
-import { statDirectoryByPath, createDirectoryByPath } from '../../src/connections/files'
 import fixtures from '../../test/fixtures'
 
 jest.mock('../../src/connections/files', () => ({
@@ -60,7 +64,6 @@ beforeEach(() => {
   launchTrigger.mockClear()
 })
 
-
 createTrigger.mockImplementation(async () => fixtures.createdTrigger)
 ensureTrigger.mockImplementation(async () => fixtures.createdTrigger)
 prepareTriggerAccount.mockImplementation(async () => fixtures.createdAccount)
@@ -84,7 +87,6 @@ const mockVaultClient = {
   isLocked: jest.fn().mockResolvedValue(false)
 }
 
-
 const setup = ({ account, konnector, trigger } = {}) => {
   const client = new CozyClient({})
   const flow = new KonnectorJob(client, { account, konnector, trigger })
@@ -100,10 +102,6 @@ const setupSubmit = (flow, submitOptions) => {
   })
 }
 
-process.on('unhandledRejection', e => {
-  console.log(e.stack)
-})
-
 describe('KonnectorJob', () => {
   describe('handleFormSubmit', () => {
     const isSubmitting = flow => {
@@ -111,21 +109,24 @@ describe('KonnectorJob', () => {
     }
 
     it('should render as submitting when there is no account', async () => {
-      const { flow, client } = setup()
+      const { flow } = setup()
       const submitPromise = setupSubmit(flow)
       expect(isSubmitting(flow)).toBe(true)
       await submitPromise
     })
 
     it('should render as submitting when there is an account', async () => {
-      const { flow, client } = setup()
+      const { flow } = setup()
       const submitPromise = setupSubmit(flow)
       expect(isSubmitting(flow)).toBe(true)
       await submitPromise
     })
 
     it('should stop being rendered as submitting on error', async () => {
-      const { flow } = setup({ account: fixtures.existingAccount, trigger: fixtures.existingTrigger })
+      const { flow } = setup({
+        account: fixtures.existingAccount,
+        trigger: fixtures.existingTrigger
+      })
       mockVaultClient.isLocked.mockReset().mockImplementationOnce(() => {
         throw new Error('fakeerror')
       })
@@ -191,7 +192,10 @@ describe('KonnectorJob', () => {
     })
 
     it('should call saveAccount with account with RESET_SESSION state if password changed', async () => {
-      const { flow, client } = setup({ account: fixtures.existingAccount, trigger: fixtures.existingTrigger })
+      const { flow } = setup({
+        account: fixtures.existingAccount,
+        trigger: fixtures.existingTrigger
+      })
 
       mockVaultClient.decrypt.mockResolvedValueOnce({
         login: {
@@ -321,7 +325,10 @@ describe('KonnectorJob', () => {
         trigger: fixtures.createdTrigger
       })
       expect(launchTrigger).toHaveBeenCalledTimes(1)
-      expect(launchTrigger).toHaveBeenCalledWith(client, fixtures.createdTrigger)
+      expect(launchTrigger).toHaveBeenCalledWith(
+        client,
+        fixtures.createdTrigger
+      )
     })
 
     it('should launch trigger with account', async () => {
@@ -339,13 +346,18 @@ describe('KonnectorJob', () => {
 
     it('should keep internal trigger up-to-date', async () => {
       const { flow, client } = setup()
-      const trigger = {...fixtures.existingTrigger}
+      const trigger = { ...fixtures.existingTrigger }
       ensureTrigger.mockResolvedValue(trigger)
-      await flow.ensureTriggerAndLaunch(client, { account: fixtures.createdAccount })
+      await flow.ensureTriggerAndLaunch(client, {
+        account: fixtures.createdAccount
+      })
       expect(ensureTrigger).toHaveBeenCalledTimes(1)
-      expect(ensureTrigger).toHaveBeenCalledWith(client, expect.objectContaining({
-        trigger: undefined
-      }))
+      expect(ensureTrigger).toHaveBeenCalledWith(
+        client,
+        expect.objectContaining({
+          trigger: undefined
+        })
+      )
       expect(flow.trigger).toBe(trigger)
     })
 
@@ -355,17 +367,21 @@ describe('KonnectorJob', () => {
         trigger: fixtures.existingTrigger,
         account: fixtures.updatedAccount
       })
-      expect(ensureTrigger).toHaveBeenCalledWith(client, expect.objectContaining({
-        trigger: fixtures.existingTrigger
-      }))
+      expect(ensureTrigger).toHaveBeenCalledWith(
+        client,
+        expect.objectContaining({
+          trigger: fixtures.existingTrigger
+        })
+      )
     })
 
     it('should keep updated account in state', async () => {
       const { flow, client } = setup()
       prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
-      await flow.ensureTriggerAndLaunch(client,
-        { account: fixtures.existingAccount, trigger: fixtures.existingTrigger }
-      )
+      await flow.ensureTriggerAndLaunch(client, {
+        account: fixtures.existingAccount,
+        trigger: fixtures.existingTrigger
+      })
       expect(flow.account).toEqual(fixtures.updatedAccount)
     })
   })

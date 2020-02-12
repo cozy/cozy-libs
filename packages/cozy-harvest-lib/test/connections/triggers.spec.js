@@ -13,7 +13,6 @@ import Polyglot from 'node-polyglot'
 import { CozyFolder } from 'cozy-doctypes'
 
 import TriggerCollection from 'cozy-stack-client/dist/TriggerCollection'
-import JobCollection from 'cozy-stack-client/dist/JobCollection'
 import PermissionCollection from 'cozy-stack-client/dist/PermissionCollection'
 import FileCollection from 'cozy-stack-client/dist/FileCollection'
 
@@ -29,10 +28,8 @@ beforeEach(() => {
   jest.spyOn(TriggerCollection.prototype, 'launch').mockResolvedValue({
     data: fixtures.launchedJob
   })
-  jest.spyOn(PermissionCollection.prototype, 'add').mockResolvedValue({
-  })
-  jest.spyOn(FileCollection.prototype, 'addReferencesTo').mockResolvedValue({
-  })
+  jest.spyOn(PermissionCollection.prototype, 'add').mockResolvedValue({})
+  jest.spyOn(FileCollection.prototype, 'addReferencesTo').mockResolvedValue({})
 })
 
 afterEach(() => {
@@ -50,7 +47,7 @@ CozyFolder.copyWithClient = () => ({
 
 const polyglot = new Polyglot()
 polyglot.extend(en)
-const fakeT  = polyglot.t.bind(polyglot)
+const fakeT = polyglot.t.bind(polyglot)
 
 const client = new CozyClient({})
 
@@ -101,10 +98,9 @@ describe('when konnector needs folder', () => {
 
     const addReferencesTo = FileCollection.prototype.addReferencesTo
     expect(addReferencesTo).toHaveBeenCalledTimes(1)
-    expect(addReferencesTo).toHaveBeenCalledWith(
-      fixtures.konnectorWithFolder,
-      [fixtures.folder]
-    )
+    expect(addReferencesTo).toHaveBeenCalledWith(fixtures.konnectorWithFolder, [
+      fixtures.folder
+    ])
   })
 
   fit('should not create folder if it exists', async () => {
@@ -128,9 +124,8 @@ describe('when konnector needs folder', () => {
 
     const addReferencesTo = FileCollection.prototype.addReferencesTo
     expect(addReferencesTo).toHaveBeenCalledTimes(1)
-    expect(addReferencesTo).toHaveBeenCalledWith(
-      fixtures.konnectorWithFolder,
-      [fixtures.folder]
-    )
+    expect(addReferencesTo).toHaveBeenCalledWith(fixtures.konnectorWithFolder, [
+      fixtures.folder
+    ])
   })
 })

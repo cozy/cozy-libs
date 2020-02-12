@@ -29,8 +29,6 @@ const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
 
-
-
 /**
  * Wraps conditionally its children inside VaultUnlocker, only if
  * props.konnector's policy tells to saveInVault
@@ -404,10 +402,6 @@ DumbTriggerManager.propTypes = {
    * @type {Object}
    */
   trigger: PropTypes.object,
-  /**
-   * Function to call to launch the job
-   */
-  onFormSubmit: PropTypes.func.isRequired,
   /**
    * Translation function
    */

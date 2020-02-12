@@ -1,6 +1,7 @@
+import * as triggersModel from '../helpers/triggers'
+
 import merge from 'lodash/merge'
-import clone from 'lodash/clone'
-import accounts from '../helpers/accounts'
+import keyBy from 'lodash/keyBy'
 import assert from '../assert'
 import logger from '../logger'
 

@@ -35,7 +35,10 @@ describe('DeleteAccountButton', () => {
   it('should render without listeners', () => {
     const component = shallow(
       <DeleteAccountButton
-        client={client} account={fixtures.account} {...props} />
+        client={client}
+        account={fixtures.account}
+        {...props}
+      />
     ).getElement()
     expect(component).toMatchSnapshot()
   })
@@ -43,7 +46,10 @@ describe('DeleteAccountButton', () => {
   it('should run deleteAccount on click', () => {
     const component = shallow(
       <DeleteAccountButton
-        client={client} account={fixtures.account} {...props} />
+        client={client}
+        account={fixtures.account}
+        {...props}
+      />
     )
     component.simulate('click')
     expect(deleteAccount).toHaveBeenCalledWith(client, fixtures.account)

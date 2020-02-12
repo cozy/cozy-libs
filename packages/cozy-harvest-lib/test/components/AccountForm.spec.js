@@ -66,18 +66,24 @@ describe('AccountForm', () => {
     onSubmit.mockClear()
   })
 
-  const setup = ({ error, showError, account, konnector, disableLifecycleMethods } = {}) => {
+  const setup = ({
+    error,
+    showError,
+    account,
+    konnector,
+    disableLifecycleMethods
+  } = {}) => {
     const flow = makeFlow({ error })
     const wrapper = shallow(
-        <AccountForm
-          flow={flow}
-          account={account}
-          konnector={konnector || fixtures.konnector}
-          onSubmit={onSubmit}
-          showError={showError}
-          t={t}
-        />
-      , { disableLifecycleMethods }
+      <AccountForm
+        flow={flow}
+        account={account}
+        konnector={konnector || fixtures.konnector}
+        onSubmit={onSubmit}
+        showError={showError}
+        t={t}
+      />,
+      { disableLifecycleMethods }
     )
     return { wrapper }
   }
@@ -122,7 +128,7 @@ describe('AccountForm', () => {
       }
     }
     const { wrapper } = setup({
-        konnector
+      konnector
     })
     expect(wrapper.props().initialValues).toEqual({
       foo: 'bar'
@@ -153,9 +159,7 @@ describe('AccountForm', () => {
 
       const { wrapper } = setup({ konnector })
 
-      assertButtonDisabled(
-        wrapper
-      )
+      assertButtonDisabled(wrapper)
     })
 
     it("should be enabled if required field isn't empty", () => {
@@ -168,18 +172,14 @@ describe('AccountForm', () => {
         }
       }
       const { wrapper } = setup({ konnector })
-      assertButtonEnabled(
-        wrapper
-      )
+      assertButtonEnabled(wrapper)
     })
 
     it("should be enabled if fields isn't required", () => {
       const { wrapper } = setup({
         konnector: fixtures.konnectorWithOptionalFields
       })
-      assertButtonEnabled(
-        wrapper
-      )
+      assertButtonEnabled(wrapper)
     })
 
     it('should be disabled with initialValues', () => {
@@ -193,9 +193,7 @@ describe('AccountForm', () => {
         account
       })
 
-      assertButtonDisabled(
-        wrapper
-      )
+      assertButtonDisabled(wrapper)
     })
 
     /**
@@ -215,18 +213,14 @@ describe('AccountForm', () => {
         error
       })
 
-      assertButtonDisabled(
-        wrapper
-      )
+      assertButtonDisabled(wrapper)
     })
 
     it('should be enabled when an error exists', () => {
       const account = {}
       const error = new Error('Test error')
       const { wrapper } = setup({ account, error })
-      assertButtonEnabled(
-        wrapper
-      )
+      assertButtonEnabled(wrapper)
     })
   })
 
@@ -347,7 +341,7 @@ describe('AccountForm', () => {
       }
       const flow = makeFlow({})
       const wrapper = mount(
-        <I18n lang='en' dictRequire={() => {}}>
+        <I18n lang="en" dictRequire={() => {}}>
           <AccountForm
             flow={flow}
             t={t}
@@ -357,7 +351,7 @@ describe('AccountForm', () => {
             readOnlyIdentifier={true}
           />
         </I18n>,
-                {
+        {
           context: { t },
           childContextTypes: {
             t: PropTypes.func

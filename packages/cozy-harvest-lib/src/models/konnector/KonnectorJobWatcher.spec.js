@@ -1,4 +1,4 @@
-import KonnectorJobWatcher, { watchKonnectorJob} from './KonnectorJobWatcher'
+import KonnectorJobWatcher, { watchKonnectorJob } from './KonnectorJobWatcher'
 
 describe('watchKonnectorJob', () => {
   it('should return a job watcher', async () => {

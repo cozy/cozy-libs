@@ -17,10 +17,13 @@ const props = {
 describe('LaunchTriggerCard', () => {
   it('should render', () => {
     const component = shallow(
-      <I18n dictRequire={() => {}} lang='en'>
+      <I18n dictRequire={() => {}} lang="en">
         <LaunchTriggerCard {...props} />
       </I18n>
-    ).dive().dive().getElement()
+    )
+      .dive()
+      .dive()
+      .getElement()
     expect(component).toMatchSnapshot()
   })
 })

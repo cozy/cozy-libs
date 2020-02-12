@@ -1,4 +1,3 @@
-
 const fixtures = {
   credentials: {
     username: 'foo',

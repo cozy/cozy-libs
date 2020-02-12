@@ -9,12 +9,10 @@ import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import get from 'lodash/get'
 import compose from 'lodash/flowRight'
-import keyBy from 'lodash/keyBy'
 import CozyRealtime from 'cozy-realtime'
 
 import { fetchAccountsFromTriggers } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
-import * as triggersModel from '../helpers/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
 
 export class KonnectorAccounts extends React.Component {
@@ -37,11 +35,7 @@ export class KonnectorAccounts extends React.Component {
   async componentDidMount() {
     await this.fetchAccounts()
 
-    this.realtime.subscribe(
-      'updated',
-      'io.cozy.jobs',
-      this.handleTriggerUpdate
-    )
+    this.realtime.subscribe('updated', 'io.cozy.jobs', this.handleTriggerUpdate)
   }
 
   componentWillUnmount() {

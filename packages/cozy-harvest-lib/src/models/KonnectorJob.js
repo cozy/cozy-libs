@@ -2,10 +2,7 @@ import MicroEE from 'microee'
 
 import Realtime from 'cozy-realtime'
 
-import {
-  saveAccount,
-  ACCOUNTS_DOCTYPE
-} from '../connections/accounts'
+import { saveAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
 import clone from 'lodash/clone'
 import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
 import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
@@ -50,7 +47,6 @@ const eventToStatus = {
 }
 const stepEvents = [LOGIN_SUCCESS_EVENT]
 const isStepEvent = eventName => stepEvents.includes(eventName)
-
 
 /**
  * Creates or updates an io.cozy.accounts from user submitted data
@@ -117,7 +113,6 @@ export const createOrUpdateAccount = async ({
 
   return await saveAccount(client, konnector, accountToSave)
 }
-
 
 /**
  * Event hub to launch and follow a konnector job.
@@ -340,13 +335,7 @@ export class KonnectorJob {
    * - Launches konnector job
    */
   async handleFormSubmit(options) {
-    const {
-      konnector,
-      cipherId,
-      vaultClient,
-      userCredentials,
-      t
-    } = options
+    const { konnector, cipherId, vaultClient, userCredentials, t } = options
     try {
       let { account, trigger } = options
 

@@ -3,8 +3,6 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import pick from 'lodash/pick'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
 import {
   legacyLabels,

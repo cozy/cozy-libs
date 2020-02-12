@@ -68,8 +68,7 @@ describe('AccountModal', () => {
 
       expect(component.getElement()).toMatchSnapshot()
       component.setProps({
-        accountId: 'account_2',
-
+        accountId: 'account_2'
       })
 
       await component

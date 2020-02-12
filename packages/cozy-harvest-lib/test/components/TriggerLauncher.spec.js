@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { shallow } from 'enzyme'
 import { TriggerLauncher } from 'components/TriggerLauncher'
-import KonnectorJob, {
+import {
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT
