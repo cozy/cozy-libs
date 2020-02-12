@@ -1,63 +1,62 @@
 /* eslint-env jest */
-import { triggersMutations } from 'connections/triggers'
+import { triggersMutations, ensureTrigger } from 'connections/triggers'
 import CozyClient from 'cozy-client'
 
-const stackClient = {
-  uri: 'cozy.tools:8080',
-  token: {
-    token: '1234abcd'
-  }
-}
-const client = new CozyClient({ stackClient })
-client.collection = jest.fn().mockReturnValue({
-  create: jest.fn(),
-  launch: jest.fn()
+import {
+  statDirectoryByPath,
+  createDirectoryByPath
+} from '../../src/connections/files'
+
+import fixtures from '../../test/fixtures'
+import en from '../../src/locales/en'
+import Polyglot from 'node-polyglot'
+import { CozyFolder } from 'cozy-doctypes'
+
+import TriggerCollection from 'cozy-stack-client/dist/TriggerCollection'
+import JobCollection from 'cozy-stack-client/dist/JobCollection'
+import PermissionCollection from 'cozy-stack-client/dist/PermissionCollection'
+import FileCollection from 'cozy-stack-client/dist/FileCollection'
+
+jest.mock('../../src/connections/files', () => ({
+  statDirectoryByPath: jest.fn(),
+  createDirectoryByPath: jest.fn()
+}))
+
+beforeEach(() => {
+  jest.spyOn(TriggerCollection.prototype, 'create').mockResolvedValue({
+    data: fixtures.createdTrigger
+  })
+  jest.spyOn(TriggerCollection.prototype, 'launch').mockResolvedValue({
+    data: fixtures.launchedJob
+  })
+  jest.spyOn(PermissionCollection.prototype, 'add').mockResolvedValue({
+  })
+  jest.spyOn(FileCollection.prototype, 'addReferencesTo').mockResolvedValue({
+  })
 })
+
+afterEach(() => {
+  jest.restoreAllMocks()
+  statDirectoryByPath.mockClear()
+  createDirectoryByPath.mockClear()
+})
+
+CozyFolder.copyWithClient = () => ({
+  magicFolders: CozyFolder.magicFolders,
+  ensureMagicFolder: (id, path) => ({
+    path
+  })
+})
+
+const polyglot = new Polyglot()
+polyglot.extend(en)
+const fakeT  = polyglot.t.bind(polyglot)
+
+const client = new CozyClient({})
 
 const { createTrigger, launchTrigger } = triggersMutations(client)
 
-const fixtures = {
-  trigger: {
-    type: '@cron',
-    worker: 'konnector',
-    message: {
-      account: '8f75c33780e2487fa474e0965521dc32',
-      konnector: 'konnectest'
-    }
-  },
-  createdTrigger: {
-    _id: '42817ec169d047e68b912c6f7d7564a2',
-    _type: 'io.cozy.triggers',
-    type: '@cron',
-    worker: 'konnector',
-    message: {
-      account: '8f75c33780e2487fa474e0965521dc32',
-      konnector: 'konnectest'
-    }
-  },
-  launchedJob: {
-    _type: 'io.cozy.jobs',
-    _id: '2794bb7c3cd64712a427ca4454aef238',
-    state: 'queued'
-  }
-}
-
 describe('Trigger mutations', () => {
-  beforeAll(() => {
-    client
-      .collection()
-      .create.mockResolvedValue({ data: fixtures.createdTrigger })
-    client.collection().launch.mockResolvedValue({ data: fixtures.launchedJob })
-  })
-
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-
-  afterAll(() => {
-    jest.restoreAllMocks()
-  })
-
   describe('createTrigger', () => {
     it('calls Cozy Client and returns trigger', async () => {
       const result = await createTrigger(fixtures.trigger)
@@ -72,5 +71,66 @@ describe('Trigger mutations', () => {
       expect(client.collection().launch).toHaveBeenCalledWith(fixtures.trigger)
       expect(result).toEqual(fixtures.launchedJob)
     })
+  })
+})
+
+describe('when konnector needs folder', () => {
+  fit('should create folder if it does not exist', async () => {
+    statDirectoryByPath.mockResolvedValue(null)
+    createDirectoryByPath.mockReturnValue(fixtures.folder)
+
+    await ensureTrigger(client, {
+      konnector: fixtures.konnectorWithFolder,
+      account: fixtures.account,
+      t: fakeT
+    })
+
+    expect(statDirectoryByPath).toHaveBeenCalledTimes(1)
+    expect(createDirectoryByPath).toHaveBeenCalledTimes(1)
+    expect(createDirectoryByPath).toHaveBeenCalledWith(
+      client,
+      fixtures.folderPath
+    )
+
+    const addPermission = PermissionCollection.prototype.add
+    expect(addPermission).toHaveBeenCalledTimes(1)
+    expect(addPermission).toHaveBeenCalledWith(
+      fixtures.konnectorWithFolder,
+      fixtures.folderPermission
+    )
+
+    const addReferencesTo = FileCollection.prototype.addReferencesTo
+    expect(addReferencesTo).toHaveBeenCalledTimes(1)
+    expect(addReferencesTo).toHaveBeenCalledWith(
+      fixtures.konnectorWithFolder,
+      [fixtures.folder]
+    )
+  })
+
+  fit('should not create folder if it exists', async () => {
+    statDirectoryByPath.mockResolvedValue(fixtures.folder)
+
+    await ensureTrigger(client, {
+      account: fixtures.account,
+      konnector: fixtures.konnectorWithFolder,
+      t: fakeT
+    })
+
+    expect(statDirectoryByPath).toHaveBeenCalledTimes(1)
+    expect(createDirectoryByPath).toHaveBeenCalledTimes(0)
+
+    const addPermission = PermissionCollection.prototype.add
+    expect(addPermission).toHaveBeenCalledTimes(1)
+    expect(addPermission).toHaveBeenCalledWith(
+      fixtures.konnectorWithFolder,
+      fixtures.folderPermission
+    )
+
+    const addReferencesTo = FileCollection.prototype.addReferencesTo
+    expect(addReferencesTo).toHaveBeenCalledTimes(1)
+    expect(addReferencesTo).toHaveBeenCalledWith(
+      fixtures.konnectorWithFolder,
+      [fixtures.folder]
+    )
   })
 })

@@ -70,10 +70,6 @@ const ensureKonnectorFolder = async (client, { konnector, account, t }) => {
   const permissions = client.collection(PERMISSIONS_DOCTYPE)
   const files = client.collection(FILES_DOCTYPE)
   const CozyFolder = CozyFolderClass.copyWithClient(client)
-  const path = konnectors.buildFolderPath(konnector, account, {
-    administrative: adminFolder.path,
-    photos: photosFolder.path
-  })
   const [adminFolder, photosFolder] = await Promise.all([
     CozyFolder.ensureMagicFolder(
       CozyFolder.magicFolders.ADMINISTRATIVE,
@@ -84,6 +80,10 @@ const ensureKonnectorFolder = async (client, { konnector, account, t }) => {
       `/${t('folder.photos')}`
     )
   ])
+  const path = konnectors.buildFolderPath(konnector, account, {
+    administrative: adminFolder.path,
+    photos: photosFolder.path
+  })
   const folder =
     (await statDirectoryByPath(client, path)) ||
     (await createDirectoryByPath(client, path))
