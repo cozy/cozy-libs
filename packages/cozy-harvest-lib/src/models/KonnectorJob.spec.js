@@ -87,9 +87,9 @@ const mockVaultClient = {
   isLocked: jest.fn().mockResolvedValue(false)
 }
 
-const setup = ({ account, konnector, trigger } = {}) => {
+const setup = ({ trigger } = {}) => {
   const client = new CozyClient({})
-  const flow = new KonnectorJob(client, { account, konnector, trigger })
+  const flow = new KonnectorJob(client, trigger)
   return { flow, client }
 }
 
@@ -123,10 +123,7 @@ describe('KonnectorJob', () => {
     })
 
     it('should stop being rendered as submitting on error', async () => {
-      const { flow } = setup({
-        account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger
-      })
+      const { flow } = setup()
       mockVaultClient.isLocked.mockReset().mockImplementationOnce(() => {
         throw new Error('fakeerror')
       })
@@ -192,11 +189,7 @@ describe('KonnectorJob', () => {
     })
 
     it('should call saveAccount with account with RESET_SESSION state if password changed', async () => {
-      const { flow } = setup({
-        account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger
-      })
-
+      const { flow } = setup()
       mockVaultClient.decrypt.mockResolvedValueOnce({
         login: {
           username: 'username',

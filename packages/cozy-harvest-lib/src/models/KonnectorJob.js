@@ -130,13 +130,10 @@ export const createOrUpdateAccount = async ({
 export class KonnectorJob {
   constructor(
     client,
-    { trigger = null, account = null, t = null, konnector = null } = {}
+    trigger
   ) {
     this.client = client
     this.trigger = trigger
-    this.account = account
-    this.konnector = konnector
-    this.t = t
     this.unsubscribeAllRealtime = null
 
     // Bind methods used as callbacks
@@ -189,6 +186,7 @@ export class KonnectorJob {
   }
 
   triggerEvent(eventName, ...args) {
+    logger.debug(`TriggerEvent ${eventName}`, args)
     if (isStepEvent(eventName)) {
       this.setState({ [eventName]: true })
     }
