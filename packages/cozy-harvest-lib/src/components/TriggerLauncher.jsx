@@ -69,6 +69,13 @@ export class TriggerLauncher extends Component {
   }
 
   stopWatchingKonnectorJob() {
+    this.konnectorJob
+      .removeListener(ERROR_EVENT, this.handleError)
+    this.konnectorJob.removeListener(SUCCESS_EVENT, this.handleSuccess)
+    this.konnectorJob.removeListener(TRIGGER_LAUNCH_EVENT, this.handleTriggerLaunch)
+    this.konnectorJob.removeListener(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
+    this.konnectorJob.removeListener(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
+    this.konnectorJob.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
     this.konnectorJob.unwatch()
   }
 
@@ -114,8 +121,8 @@ export class TriggerLauncher extends Component {
     }
     this.stopWatchingKonnectorJob()
     const { onSuccess } = this.props
-    const { trigger } = this.state
-    if (typeof onSuccess === 'function') onSuccess(trigger)
+    const flow = this
+    if (typeof onSuccess === 'function') onSuccess(flow.trigger)
   }
 
   async handleLoginSuccess() {
@@ -123,8 +130,8 @@ export class TriggerLauncher extends Component {
       this.dismissTwoFAModal()
     }
     const { onLoginSuccess } = this.props
-    const { trigger } = this.state
-    if (typeof onLoginSuccess === 'function') onLoginSuccess(trigger)
+    const flow = this
+    if (typeof onLoginSuccess === 'function') onLoginSuccess(flow.trigger)
   }
 
   render() {
