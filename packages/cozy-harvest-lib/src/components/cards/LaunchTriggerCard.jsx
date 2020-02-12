@@ -84,8 +84,6 @@ export class LaunchTriggerCard extends Component {
 LaunchTriggerCard.propTypes = {
   ...Card.propTypes,
   ...TriggerLauncher.propTypes,
-  f: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   /**
    * Indicates if a konnector job for the current trigger is already running
    * TODO: rename all running props to hasJobRunning to make its role clearer
