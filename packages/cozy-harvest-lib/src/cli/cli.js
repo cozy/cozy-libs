@@ -107,7 +107,6 @@ const createOrUpdateMain = async (args, client) => {
   logger.info(`${args.account ? 'Updating' : 'Creating'} account`)
 
   const prom = flow.handleFormSubmit({
-    client,
     konnector,
     vaultClient: fakeVault,
     cipherId: null,

@@ -273,7 +273,6 @@ export class KonnectorJob {
    */
   async handleFormSubmit(options) {
     const {
-      client,
       konnector,
       cipherId,
       vaultClient,
@@ -282,6 +281,8 @@ export class KonnectorJob {
     } = options
     try {
       let { account, trigger } = options
+
+      const client = this.client
 
       this.setState({ status: CREATING_ACCOUNT })
       this.trigger = trigger
