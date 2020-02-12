@@ -12,6 +12,13 @@ import TriggerLauncher, {
   TriggerLauncher as DumbTriggerLauncher
 } from '../TriggerLauncher'
 
+
+/**
+ * Shows the state of the trigger and provides the ability to
+ * relaunch a trigger
+ *
+ * - Will follow the connection flow and re-render in case of change
+ */
 export class LaunchTriggerCard extends Component {
   render() {
     const { className, f, t, disabled } = this.props
@@ -20,7 +27,11 @@ export class LaunchTriggerCard extends Component {
         <TriggerLauncher
           {...pick(this.props, Object.keys(DumbTriggerLauncher.propTypes))}
         >
-          {({ launch, running, trigger }) => {
+          {({ flow }) => {
+            const flowState = flow.getState()
+            const launch = flow.launch
+            const trigger = flow.trigger
+            const running = flowState.running
             const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
               <div className="u-flex u-flex-column-s">
