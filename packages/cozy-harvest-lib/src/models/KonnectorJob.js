@@ -449,7 +449,7 @@ export class KonnectorJob {
     logger.info(`Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
 
     for (const ev of JOB_EVENTS) {
-      this.jobWatcher.on(ev, () => this.triggerEvent(ev))
+      this.jobWatcher.on(ev, (...args) => this.triggerEvent(ev, ...args))
     }
 
     this.unsubscribeAllRealtime = () => {
