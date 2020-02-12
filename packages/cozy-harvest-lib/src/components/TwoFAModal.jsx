@@ -157,7 +157,7 @@ export class TwoFAModal extends PureComponent {
 }
 
 TwoFAModal.propTypes = {
-  konnectorJob: PropTypes.object.isRequired
+  flow: PropTypes.object.isRequired
 }
 
 export default translate()(withBreakpoints()(TwoFAModal))
