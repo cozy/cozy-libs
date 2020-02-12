@@ -13,7 +13,7 @@ const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
  * @param  {Object}  konnector  io.cozy.konnectors document
  * @param  {Object}  attributes Account attributes
  */
-const createAccount = async (client, konnector, attributes) => {
+export const createAccount = async (client, konnector, attributes) => {
   const { data } = konnector.aggregator
     ? await createChildAccount(client, konnector, attributes)
     : await client.create(ACCOUNTS_DOCTYPE, attributes)

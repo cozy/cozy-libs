@@ -1,6 +1,11 @@
 /* eslint-env jest */
 
-import { accountsMutations } from 'connections/accounts'
+import {
+  createAccount,
+  updateAccount,
+  saveAccount,
+  deleteAccount
+} from 'connections/accounts'
 
 const client = {
   collection: jest.fn().mockReturnValue({
@@ -67,13 +72,6 @@ const fixtures = {
   }
 }
 
-const {
-  createAccount,
-  updateAccount,
-  saveAccount,
-  deleteAccount
-} = accountsMutations(client)
-
 describe('Account mutations', () => {
   beforeEach(() => {
     client.create.mockResolvedValue({ data: fixtures.existingAccount })
@@ -91,6 +89,7 @@ describe('Account mutations', () => {
   describe('createAccount', () => {
     it('calls Cozy Client and return account', async () => {
       const account = await createAccount(
+        client,
         fixtures.konnector,
         fixtures.simpleAccount
       )
@@ -123,7 +122,7 @@ describe('Account mutations', () => {
     it('throws an error when konnector have no aggregator.accountId attribute', async () => {
       const konnector = { aggregator: {} }
       await expect(
-        createAccount(konnector, fixtures.simpleAccount)
+        createAccount(client, konnector, fixtures.simpleAccount)
       ).rejects.toEqual(
         new Error('Konnector does not provide aggregator account id')
       )
@@ -142,6 +141,7 @@ describe('Account mutations', () => {
 
       it('creates parent account', async () => {
         await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -153,6 +153,7 @@ describe('Account mutations', () => {
 
       it('adds permissions to parent account', async () => {
         await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -165,6 +166,7 @@ describe('Account mutations', () => {
 
       it('creates child account', async () => {
         await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -181,6 +183,7 @@ describe('Account mutations', () => {
 
         await expect(
           createAccount(
+            client,
             fixtures.konnectorWithAggregator,
             fixtures.simpleAccount
           )
@@ -197,6 +200,7 @@ describe('Account mutations', () => {
           .add.mockRejectedValueOnce(new Error('Mocked add Error'))
         await expect(
           createAccount(
+            client,
             fixtures.konnectorWithAggregator,
             fixtures.simpleAccount
           )
@@ -209,6 +213,7 @@ describe('Account mutations', () => {
 
       it('returns child account', async () => {
         const account = await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -222,6 +227,7 @@ describe('Account mutations', () => {
 
         await expect(
           createAccount(
+            client,
             fixtures.konnectorWithAggregator,
             fixtures.simpleAccount
           )
@@ -239,6 +245,7 @@ describe('Account mutations', () => {
 
         await expect(
           createAccount(
+            client,
             fixtures.konnectorWithAggregator,
             fixtures.simpleAccount
           )
@@ -259,6 +266,7 @@ describe('Account mutations', () => {
 
       it('does not create parent account', async () => {
         await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -270,6 +278,7 @@ describe('Account mutations', () => {
 
       it('adds permissions to parent account', async () => {
         await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -282,6 +291,7 @@ describe('Account mutations', () => {
 
       it('creates child account', async () => {
         await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -294,6 +304,7 @@ describe('Account mutations', () => {
 
       it('returns child account', async () => {
         const account = await createAccount(
+          client,
           fixtures.konnectorWithAggregator,
           fixtures.simpleAccount
         )
@@ -307,6 +318,7 @@ describe('Account mutations', () => {
 
         await expect(
           createAccount(
+            client,
             fixtures.konnectorWithAggregator,
             fixtures.simpleAccount
           )
@@ -323,6 +335,7 @@ describe('Account mutations', () => {
 
         await expect(
           createAccount(
+            client,
             fixtures.konnectorWithAggregator,
             fixtures.simpleAccount
           )
@@ -333,7 +346,7 @@ describe('Account mutations', () => {
 
   describe('updateAccount', () => {
     it('calls CozyClient::save and returns account', async () => {
-      const account = await updateAccount(fixtures.simpleAccount)
+      const account = await updateAccount(client, fixtures.simpleAccount)
       expect(client.save).toHaveBeenCalledWith(fixtures.simpleAccount)
       expect(account).toEqual(fixtures.existingAccount)
     })
@@ -341,7 +354,7 @@ describe('Account mutations', () => {
 
   describe('deleteAccount', () => {
     it('calls CozyClient::destroy', async () => {
-      await deleteAccount(fixtures.simpleAccount)
+      await deleteAccount(client, fixtures.simpleAccount)
       expect(client.destroy).toHaveBeenCalledWith(fixtures.simpleAccount)
     })
 
@@ -352,7 +365,7 @@ describe('Account mutations', () => {
           { _id: 'account1', _type: 'io.cozy.accounts' }
         ])
 
-        await deleteAccount(fixtures.simpleAccount)
+        await deleteAccount(client, fixtures.simpleAccount)
 
         expect(client.query).toHaveBeenCalled()
         expect(client.destroy).toHaveBeenCalledTimes(2)
@@ -363,6 +376,7 @@ describe('Account mutations', () => {
   describe('saveAccount', () => {
     it('calls CozyClient::create for new account', async () => {
       const account = await saveAccount(
+        client,
         fixtures.konnector,
         fixtures.simpleAccount
       )
@@ -376,6 +390,7 @@ describe('Account mutations', () => {
 
     it('calls CozyClient::save for existing account', async () => {
       const account = await saveAccount(
+        client,
         fixtures.konnector,
         fixtures.existingAccount
       )
