@@ -19,7 +19,7 @@ jest.mock('../../src/connections/files', () => ({
 }))
 
 jest.mock('cozy-flags', () => name => {
-  if (name === 'bi-konnector-policy') {
+  if (name === 'harvest.bi-konnector-policy') {
     return true
   } else {
     return false

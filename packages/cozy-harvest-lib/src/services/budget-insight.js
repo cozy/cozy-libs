@@ -90,7 +90,7 @@ export const getBIConfigForCozyURL = url => {
 }
 
 export const isBudgetInsightConnector = konnector => {
-  if (!flag('bi-konnector-policy')) {
+  if (!flag('harvest.bi-konnector-policy')) {
     return false
   }
   return (
