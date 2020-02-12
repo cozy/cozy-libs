@@ -202,6 +202,7 @@ export class KonnectorJob {
   }
 
   async saveTwoFARequest(twoFARequestOptions) {
+    logger.debug('Saving 2FA request', twoFARequestOptions)
     this.setState({ status: WAITING_TWOFA })
     try {
       const account = accounts.updateTwoFAState(

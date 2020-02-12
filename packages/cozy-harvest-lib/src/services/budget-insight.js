@@ -241,6 +241,7 @@ export const finishConnection = async ({ biConnection, flow }) => {
     if (biConnection.error === DECOUPLED_ERROR) {
       const twoFAOptions = { type: 'app', retry: false }
       await flow.saveTwoFARequest(twoFAOptions)
+      logger.debug('Resuming BI connection...')
       await resumeBIConnection(flow)
       flow.triggerEvent(LOGIN_SUCCESS_EVENT)
       logger.debug('Finished waiting for decoupled connection to be validated')
