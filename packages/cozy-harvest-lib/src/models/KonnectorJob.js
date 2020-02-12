@@ -289,12 +289,7 @@ export class KonnectorJob {
     this.setState({ status: RUNNING_TWOFA })
     try {
       const konnectorPolicy = this.getKonnectorPolicy()
-      await konnectorPolicy.sendAdditionalInformation({
-        account: this.account,
-        client: this.client,
-        flow: this,
-        fields
-      })
+      await konnectorPolicy.sendAdditionalInformation(this, fields)
       this.flushTwoFAWaiters()
     } catch (error) {
       logger.error(error)

@@ -201,39 +201,33 @@ export const getBIConnectionId = account => {
   return get(account, 'data.auth.bi.connId')
 }
 
-export const sendAdditionalInformation = async ({
-  account,
-  client,
-  flow,
-  fields
-}) => {
+export const updateBIConnectionFromFlow = async (flow, connectionData) => {
+  const client = flow.client
+  const account = flow.account
+
   const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
   const temporaryToken = getTemporaryToken(flow)
-  const hasFields = Object.keys(fields).length > 0
 
-  let updatedConnection
-  if (hasFields) {
-    logger.debug('Sending fields')
-    updatedConnection = await updateBIConnection(
-      config,
-      connId,
-      fields,
-      temporaryToken
-    )
-    logger.debug('2FA code sent')
-  } else {
-    logger.debug('Resuming decoupled connection')
-    updatedConnection = await updateBIConnection(
-      config,
-      connId,
-      { resume: 'true' },
-      temporaryToken
-    )
-    logger.info('Resumed decoupled connection')
-  }
+  logger.debug('Updating BI connection')
+  const updatedConnection = await updateBIConnection(
+    config,
+    connId,
+    connectionData,
+    temporaryToken
+  )
+  logger.info('Updated BI connection')
 
   flow.setData({ biConnection: updatedConnection })
+}
+
+
+export const sendAdditionalInformation = (flow, fields) => {
+  return updateBIConnectionFromFlow(flow, fields)
+}
+
+export const resumeBIConnection = (flow) => {
+  return updateBIConnectionFromFlow(flow, { resume: 'true' })
 }
 
 /**
@@ -247,7 +241,8 @@ export const finishConnection = async ({ biConnection, flow }) => {
     if (biConnection.error === DECOUPLED_ERROR) {
       const twoFAOptions = { type: 'app', retry: false }
       await flow.saveTwoFARequest(twoFAOptions)
-      await flow.waitForTwoFA()
+      await resumeBIConnection(flow)
+      flow.triggerEvent(LOGIN_SUCCESS_EVENT)
       logger.debug('Finished waiting for decoupled connection to be validated')
     } else if (biConnection.error === ADDITIONAL_INFORMATION_NEEDED_ERROR) {
       const twoFAOptions = { type: 'sms', retry: false }
