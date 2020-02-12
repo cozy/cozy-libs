@@ -26,7 +26,10 @@ import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 
 /**
- * KonnectorModal can be completely standalone and will use it's internal state to switch between views, or it can be controlled by the parents through props (such as accountId) and callbacks (such as createAction and onAccountChange)
+ * KonnectorModal can be completely standalone and will use it's internal
+ * state to switch between views, or it can be controlled by the parents
+ * through props (such as accountId) and callbacks (such as createAction
+ * and onAccountChange)
  */
 export class KonnectorModal extends PureComponent {
   state = {
