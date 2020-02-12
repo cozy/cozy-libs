@@ -150,8 +150,7 @@ export class KonnectorJob {
       await this.saveAccount(account)
       this.triggerEvent(TWO_FA_REQUEST_EVENT, twoFARequestOptions)
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
+      logger.error(error)
       this.setState({ status: ERRORED, error })
     }
   }
@@ -217,8 +216,8 @@ export class KonnectorJob {
 
   flushTwoFAWaiters() {
     logger.debug(`Flushing ${this.twoFAWaiters.length} two fa waiters`)
-    for (const w of this.twoFAWaiters) {
-      w()
+    for (const callback of this.twoFAWaiters) {
+      callback()
     }
     this.twoFAWaiters = []
   }

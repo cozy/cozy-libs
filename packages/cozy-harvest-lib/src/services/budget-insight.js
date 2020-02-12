@@ -191,8 +191,8 @@ const removeSensibleDataFromAccount = fullAccount => {
   return account
 }
 
-export const setBIConnectionId = (account_, biConnectionId) => {
-  const account = clone(account_)
+export const setBIConnectionId = (originalAccount, biConnectionId) => {
+  const account = clone(originalAccount)
   set(account, 'data.auth.bi.connId', biConnectionId)
   return account
 }
