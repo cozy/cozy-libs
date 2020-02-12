@@ -69,12 +69,20 @@ export class TriggerLauncher extends Component {
   }
 
   stopWatchingKonnectorJob() {
-    this.konnectorJob
-      .removeListener(ERROR_EVENT, this.handleError)
+    this.konnectorJob.removeListener(ERROR_EVENT, this.handleError)
     this.konnectorJob.removeListener(SUCCESS_EVENT, this.handleSuccess)
-    this.konnectorJob.removeListener(TRIGGER_LAUNCH_EVENT, this.handleTriggerLaunch)
-    this.konnectorJob.removeListener(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
-    this.konnectorJob.removeListener(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
+    this.konnectorJob.removeListener(
+      TRIGGER_LAUNCH_EVENT,
+      this.handleTriggerLaunch
+    )
+    this.konnectorJob.removeListener(
+      LOGIN_SUCCESS_EVENT,
+      this.handleLoginSuccess
+    )
+    this.konnectorJob.removeListener(
+      TWO_FA_REQUEST_EVENT,
+      this.displayTwoFAModal
+    )
     this.konnectorJob.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
     this.konnectorJob.unwatch()
   }

@@ -221,12 +221,11 @@ export const updateBIConnectionFromFlow = async (flow, connectionData) => {
   flow.setData({ biConnection: updatedConnection })
 }
 
-
 export const sendAdditionalInformation = (flow, fields) => {
   return updateBIConnectionFromFlow(flow, fields)
 }
 
-export const resumeBIConnection = (flow) => {
+export const resumeBIConnection = flow => {
   return updateBIConnectionFromFlow(flow, { resume: 'true' })
 }
 

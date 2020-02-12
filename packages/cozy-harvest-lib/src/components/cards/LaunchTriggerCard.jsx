@@ -12,7 +12,6 @@ import TriggerLauncher, {
   TriggerLauncher as DumbTriggerLauncher
 } from '../TriggerLauncher'
 
-
 /**
  * Shows the state of the trigger and provides the ability to
  * relaunch a trigger

@@ -128,10 +128,7 @@ export const createOrUpdateAccount = async ({
  * This should be the go to source of truth for the state of a Konnector Job.
  */
 export class KonnectorJob {
-  constructor(
-    client,
-    trigger
-  ) {
+  constructor(client, trigger) {
     this.client = client
     this.trigger = trigger
     this.unsubscribeAllRealtime = null
