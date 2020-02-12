@@ -8773,6 +8773,13 @@ jest-regex-util@^24.0.0, jest-regex-util@^24.3.0, jest-regex-util@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-regex-util/-/jest-regex-util-24.9.0.tgz#c13fb3380bde22bf6575432c493ea8fe37965636"
 
+jest-resolve-cached@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/jest-resolve-cached/-/jest-resolve-cached-1.0.0.tgz#3da0ffa182af5c1f1775141c255fe23940bdfecb"
+  integrity sha512-PgVAZCq/CSEKuXj7w5Eqi4jMXgi+neExEt/XOBIR3IbM7g9M90hommYfnBWJ7hbIF5utRJar7aV2/qasczc8KA==
+  dependencies:
+    jest-resolve "^23.6.0"
+
 jest-resolve-dependencies@^24.1.0, jest-resolve-dependencies@^24.9.0:
   version "24.9.0"
   resolved "https://registry.yarnpkg.com/jest-resolve-dependencies/-/jest-resolve-dependencies-24.9.0.tgz#ad055198959c4cfba8a4f066c673a3f0786507ab"
@@ -8780,6 +8787,15 @@ jest-resolve-dependencies@^24.1.0, jest-resolve-dependencies@^24.9.0:
     "@jest/types" "^24.9.0"
     jest-regex-util "^24.3.0"
     jest-snapshot "^24.9.0"
+
+jest-resolve@^23.6.0:
+  version "23.6.0"
+  resolved "https://registry.yarnpkg.com/jest-resolve/-/jest-resolve-23.6.0.tgz#cf1d1a24ce7ee7b23d661c33ba2150f3aebfa0ae"
+  integrity sha512-XyoRxNtO7YGpQDmtQCmZjum1MljDqUCob7XlZ6jy9gsMugHdN2hY4+Acz9Qvjz2mSsOnPSH7skBmDYCHXVZqkA==
+  dependencies:
+    browser-resolve "^1.11.3"
+    chalk "^2.0.1"
+    realpath-native "^1.0.0"
 
 jest-resolve@^24.9.0:
   version "24.9.0"

@@ -61,6 +61,7 @@
     "form-data": "3.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.1.0",
+    "jest-resolve-cached": "^1.0.0",
     "jsdom": "^16.1.0",
     "prop-types": "15.7.2",
     "react": "^16.12.0",

@@ -5,6 +5,7 @@ module.exports = {
     '!**/node_modules/**',
     '!**/vendor/**'
   ],
+  resolver: 'jest-resolve-cached',
   testPathIgnorePatterns: ['node_modules', 'dist'],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
