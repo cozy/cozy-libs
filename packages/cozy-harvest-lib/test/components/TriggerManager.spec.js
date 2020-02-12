@@ -7,6 +7,8 @@ import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import cronHelpers from 'helpers/cron'
 import { konnectorPolicy as biKonnectorPolicy } from '../../src/services/budget-insight'
 import fixtures from '../../test/fixtures'
+import KonnectorJob from '../../src/models/KonnectorJob'
+import CozyClient from 'cozy-client'
 
 jest.mock('cozy-flags', () => name => {
   if (name === 'bi-konnector-policy') {
@@ -63,29 +65,16 @@ const mockVaultClient = {
   isLocked: jest.fn().mockResolvedValue(false)
 }
 
-const addPermissionMock = jest.fn()
-const addReferencesToMock = jest.fn()
-const createTriggerMock = jest.fn()
-const createDirectoryByPathMock = jest.fn()
-const statDirectoryByPathMock = jest.fn()
-const launchTriggerMock = jest.fn()
-const saveAccountMock = jest.fn()
-
 const tMock = jest.fn()
 
+const client = new CozyClient({})
 const props = {
-  addPermission: addPermissionMock,
-  addReferencesTo: addReferencesToMock,
   konnector: fixtures.konnector,
-  createTrigger: createTriggerMock,
-  createDirectoryByPath: createDirectoryByPathMock,
-  statDirectoryByPath: statDirectoryByPathMock,
-  saveAccount: saveAccountMock,
-  launch: launchTriggerMock,
+  flow: new KonnectorJob(client),
   t: tMock,
   vaultClient: mockVaultClient,
   breakpoints: { isMobile: false },
-  onVaultDismiss: jest.fn()
+  onVaultDismiss: jest.fn(),
 }
 
 const propsWithAccount = {
@@ -137,8 +126,6 @@ const isHigherComponentOfDisplayName = displayName => node => {
 
 describe('TriggerManager', () => {
   beforeEach(() => {
-    createTriggerMock.mockResolvedValue(fixtures.createdTrigger)
-    saveAccountMock.mockResolvedValue(fixtures.createdAccount)
     mockVaultClient.createNewCozySharedCipher.mockResolvedValue({
       id: 'cipher-id-1'
     })
@@ -163,11 +150,6 @@ describe('TriggerManager', () => {
   })
 
   describe('when given no account', () => {
-    it('should render correctly', () => {
-      const component = shallowWithoutAccount().getElement()
-      expect(component).toMatchSnapshot()
-    })
-
     describe('when the vault does not contain ciphers', () => {
       it('should show the new account form', async () => {
         mockVaultClient.getAll.mockResolvedValue([])
@@ -206,11 +188,6 @@ describe('TriggerManager', () => {
   })
 
   describe('when given an account', () => {
-    it('should render correctly', () => {
-      const component = shallowWithAccount().getElement()
-      expect(component).toMatchSnapshot()
-    })
-
     describe('when the vault contains ciphers', () => {
       it('should show the account form', async () => {
         mockVaultClient.getAll.mockResolvedValue([])
@@ -252,51 +229,5 @@ describe('TriggerManager', () => {
         expect(passwordField).toBeDefined()
       })
     })
-  })
-
-  describe('handleError', () => {
-    beforeEach(() => {
-      statDirectoryByPathMock.mockResolvedValue(fixtures.folder)
-      createDirectoryByPathMock.mockResolvedValue(fixtures.folder)
-    })
-
-    it('should render error', async () => {
-      const wrapper = shallowWithAccount({ onError: null })
-      await wrapper.instance().handleError(new Error('Test error'))
-      expect(wrapper.getElement()).toMatchSnapshot()
-    })
-
-    const clientMutations = {
-      saveAccount: saveAccountMock,
-      createDirectoryByPath: createDirectoryByPathMock,
-      addPermission: addPermissionMock,
-      addReferencesTo: addReferencesToMock,
-      createTrigger: createTriggerMock,
-      statDirectoryByPath: statDirectoryByPathMock
-    }
-
-    for (var mutation of Object.keys(clientMutations)) {
-      const mutationSync = mutation
-      it(`should be called when ${mutation} fails`, async () => {
-        clientMutations[mutationSync].mockRejectedValue(
-          new Error(`${mutationSync} error`)
-        )
-
-        if (mutationSync !== 'statDirectoryByPath') {
-          statDirectoryByPathMock.mockResolvedValue(null)
-        }
-
-        const wrapper = shallowWithoutAccount(fixtures.konnectorWithFolder)
-
-        jest
-          .spyOn(wrapper.instance(), 'handleError')
-          .mockImplementation(() => {})
-
-        await wrapper.instance().handleSubmit(fixtures.data)
-        expect(wrapper.instance().handleError).toHaveBeenCalledWith(
-          new Error(`${mutationSync} error`)
-        )
-      })
-    }
   })
 })
