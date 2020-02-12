@@ -5,6 +5,7 @@ describe('watchKonnectorJob', () => {
     // Lets mock a job to pass as watchKonnectorJob parameter. This job should
     // be returned after timeout
     const job = {
+      _id: 'job-id',
       // Test attribute, not expected in job schema
       state: 'queued'
     }

@@ -2,6 +2,7 @@ import MicroEE from 'microee'
 
 import CozyRealtime from 'cozy-realtime'
 import { KonnectorJobError } from '../../helpers/konnectors'
+import assert from '../../assert'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
@@ -33,6 +34,8 @@ export class KonnectorJobWatcher {
     this.client = client
     this.realtime = new CozyRealtime({ client })
     this.job = job
+    assert(this.job._id, 'No job id')
+
     /**
      * Options
      *  expectedSuccessDelay: delay for login timer in ms
