@@ -191,6 +191,9 @@ export class ConnectionFlow {
       logger.debug(`Setting status ${eventToStatus[eventName]}`)
       this.setState({ status: eventToStatus[eventName] })
     }
+    if (eventName === ERROR_EVENT) {
+      this.refetchTrigger()
+    }
     this.emit(eventName, ...args)
   }
 
@@ -379,9 +382,10 @@ export class ConnectionFlow {
         konnector,
         t
       })
+      this.setState({ accountError: null })
     } catch (e) {
       logger.error(e)
-      this.setState({ error: e })
+      this.setState({ accountError: e })
       this.triggerEvent(ERROR_EVENT, e)
       throw e
     }
@@ -408,11 +412,17 @@ export class ConnectionFlow {
   }
 
   async handleJobUpdated() {
+    logger.debug('Handling update from job')
     await this.refetchTrigger()
   }
 
   async refetchTrigger() {
+    if (!this.trigger) {
+      return null
+    }
+    logger.debug(`Refetching trigger  ${this.trigger._id}`)
     const trigger = await fetchTrigger(this.client, this.trigger._id)
+    logger.debug(`Refetched trigger`, trigger)
     this.trigger = trigger
     this.emit(UPDATE_EVENT)
   }
@@ -477,12 +487,15 @@ export class ConnectionFlow {
 
   getDerivedState() {
     const trigger = this.trigger
-    const { status } = this.state
+    const { status, accountError } = this.state
+    const triggerError = triggersModel.getKonnectorJobError(trigger)
     return {
       running: ![ERRORED, IDLE, SUCCESS].includes(status),
       twoFARunning: status === RUNNING_TWOFA,
       twoFARetry: status == TWO_FA_MISMATCH,
-      triggerError: triggersModel.getKonnectorJobError(trigger),
+      triggerError: triggerError,
+      accountError,
+      error: accountError || triggerError,
       konnectorRunning: triggersModel.isKonnectorRunning(trigger)
     }
   }

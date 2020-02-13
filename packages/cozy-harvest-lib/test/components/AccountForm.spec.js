@@ -69,13 +69,13 @@ describe('AccountForm', () => {
   })
 
   const setup = ({
-    triggerError,
+    error,
     showError,
     account,
     konnector,
     disableLifecycleMethods
   } = {}) => {
-    const flow = makeFlow({ triggerError })
+    const flow = makeFlow({ error })
     const wrapper = shallow(
       <AccountForm
         flow={flow}
@@ -98,7 +98,7 @@ describe('AccountForm', () => {
 
   it('should render error', () => {
     const { wrapper } = setup({
-      triggerError: new Error('Test error')
+      error: new Error('Test error')
     })
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
@@ -106,7 +106,7 @@ describe('AccountForm', () => {
 
   it('should not render error', () => {
     const { wrapper } = setup({
-      triggerError: new Error('Test error'),
+      error: new Error('Test error'),
       showError: false
     })
     const component = wrapper.dive().getElement()
@@ -209,10 +209,10 @@ describe('AccountForm', () => {
           passphrase: 'bar'
         }
       }
-      const triggerError = new Error('Existing trigger error')
+      const error = new Error('Existing trigger error')
       const { wrapper } = setup({
         account,
-        triggerError
+        error
       })
 
       assertButtonDisabled(wrapper)
@@ -220,8 +220,8 @@ describe('AccountForm', () => {
 
     it('should be enabled when an error exists', () => {
       const account = {}
-      const triggerError = new Error('Test error')
-      const { wrapper } = setup({ account, triggerError })
+      const error = new Error('Test error')
+      const { wrapper } = setup({ account, error })
       assertButtonEnabled(wrapper)
     })
   })

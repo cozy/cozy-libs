@@ -187,7 +187,7 @@ export class AccountForm extends PureComponent {
   render() {
     const { account, konnector, onBack, onSubmit, showError, t, flowState } = this.props
     const submitting = flowState.running
-    const error = flowState.triggerError
+    const error = flowState.error
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
