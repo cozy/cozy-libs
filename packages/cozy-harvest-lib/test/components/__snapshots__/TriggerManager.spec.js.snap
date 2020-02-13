@@ -1,5 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+<<<<<<< HEAD
+=======
+exports[`TriggerManager account creation should render correctly 1`] = `
+<KonnectorVaultUnlocker
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
+  onDismiss={[MockFunction]}
+  onUnlock={[Function]}
+>
+  <div
+    id="coz-harvest-modal-place"
+  />
+</KonnectorVaultUnlocker>
+`;
+
+exports[`TriggerManager account update should render correctly 1`] = `
+<KonnectorVaultUnlocker
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
+  onDismiss={[MockFunction]}
+  onUnlock={[Function]}
+>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <React.Fragment>
+    <withI18n(withLocales(withKonnectorLocales(AccountForm))
+      account={
+        Object {
+          "_id": "existing-account-id",
+          "account_type": "konnectest",
+          "auth": Object {
+            "passphrase": "bar",
+            "username": "foo",
+          },
+          "identifier": "username",
+        }
+      }
+      konnector={
+        Object {
+          "fields": Object {
+            "passphrase": Object {
+              "type": "password",
+            },
+            "username": Object {
+              "type": "text",
+            },
+          },
+          "slug": "konnectest",
+        }
+      }
+      onBack={[Function]}
+      onSubmit={[Function]}
+      readOnlyIdentifier={false}
+      submitting={false}
+    />
+  </React.Fragment>
+</KonnectorVaultUnlocker>
+`;
+
+exports[`TriggerManager handleError should render error 1`] = `
+<KonnectorVaultUnlocker
+  konnector={
+    Object {
+      "fields": Object {
+        "passphrase": Object {
+          "type": "password",
+        },
+        "username": Object {
+          "type": "text",
+        },
+      },
+      "slug": "konnectest",
+    }
+  }
+  onDismiss={[MockFunction]}
+  onUnlock={[Function]}
+>
+  <div
+    id="coz-harvest-modal-place"
+  />
+  <React.Fragment>
+    <withI18n(withLocales(withKonnectorLocales(AccountForm))
+      account={
+        Object {
+          "_id": "existing-account-id",
+          "account_type": "konnectest",
+          "auth": Object {
+            "passphrase": "bar",
+            "username": "foo",
+          },
+          "identifier": "username",
+        }
+      }
+      error={[Error: Test error]}
+      konnector={
+        Object {
+          "fields": Object {
+            "passphrase": Object {
+              "type": "password",
+            },
+            "username": Object {
+              "type": "text",
+            },
+          },
+          "slug": "konnectest",
+        }
+      }
+      onBack={[Function]}
+      onSubmit={[Function]}
+      readOnlyIdentifier={false}
+      submitting={false}
+    />
+  </React.Fragment>
+</KonnectorVaultUnlocker>
+`;
+
+>>>>>>> master
 exports[`TriggerManager when given an oauth konnector should redirect to OAuthForm 1`] = `
 <withI18n(OAuthForm)
   konnector={

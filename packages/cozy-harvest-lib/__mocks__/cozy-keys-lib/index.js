@@ -14,6 +14,10 @@ const CipherType = {
   Login: 'Login'
 }
 
+const UriMatchType = {
+  Domain: 'Domain'
+}
+
 const withVaultClient = Component => Component
 
-export { VaultUnlocker, CipherType, withVaultClient }
+export { VaultUnlocker, CipherType, withVaultClient, UriMatchType }

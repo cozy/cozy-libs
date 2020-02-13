@@ -1,7 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
 import { shallow } from 'enzyme'
-import { render } from '@testing-library/react'
+import { render, fireEvent, cleanup } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import fixtures from '../../test/fixtures'
@@ -86,10 +86,10 @@ describe('TriggerManager', () => {
     mockVaultClient.createNewCozySharedCipher.mockResolvedValue({
       id: 'cipher-id-1'
     })
+    tMock.mockImplementation(key => key)
   })
 
   afterEach(() => {
-    jest.resetAllMocks()
   })
 
   describe('when given an oauth konnector', () => {
@@ -108,22 +108,24 @@ describe('TriggerManager', () => {
 
   describe('when given no account', () => {
     describe('when the vault does not contain ciphers', () => {
-      it('should show the new account form', async () => {
+      beforeEach(() => {
         mockVaultClient.getAll.mockResolvedValue([])
         mockVaultClient.getAllDecrypted.mockResolvedValue([])
+      })
 
-        const { findByLabelText } = render(<TriggerManager {...props} />)
+      it('should show the new account form', async () => {
+        const { findByLabelText, findByTitle } = render(
+          <TriggerManager {...props} />
+        )
 
-        const usernameField = await findByLabelText('username')
-        const passwordField = await findByLabelText('passphrase')
-
-        expect(usernameField).toBeDefined()
-        expect(passwordField).toBeDefined()
+        expect(findByLabelText('username')).resolves.toBeDefined()
+        expect(findByLabelText('passphrase')).resolves.toBeDefined()
+        expect(findByTitle('back')).rejects.toThrow()
       })
     })
 
     describe('when the vault contains ciphers', () => {
-      it('should show the ciphers list', async () => {
+      beforeEach(() => {
         mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
         mockVaultClient.getAllDecrypted.mockResolvedValue([
           {
@@ -134,22 +136,62 @@ describe('TriggerManager', () => {
             }
           }
         ])
+      })
 
+      it('should show the ciphers list', async () => {
         const { findByText } = render(<TriggerManager {...props} />)
 
         const cipherItem = await findByText('Isabelle')
 
         expect(cipherItem).toBeDefined()
       })
+
+      describe('when selecting a cipher without password', () => {
+        beforeEach(() => {
+          mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
+          mockVaultClient.getAllDecrypted.mockResolvedValue([
+            {
+              id: 'cipher1',
+              name: fixtures.konnector.name,
+              login: {
+                username: 'Isabelle'
+              }
+            }
+          ])
+        })
+
+        it('should show the account form with only password field editable', async () => {
+          const { findByText, findByLabelText, findByTitle } = render(
+            <TriggerManager {...props} />
+          )
+
+          const cipherItem = await findByText('Isabelle')
+
+          fireEvent.click(cipherItem)
+
+          const passwordField = await findByLabelText('passphrase')
+          const backButton = await findByTitle('back')
+
+          expect(findByLabelText('username')).rejects.toThrow()
+          expect(passwordField).toBeDefined()
+          expect(backButton).toBeDefined()
+
+          fireEvent.click(backButton)
+
+          expect(findByText('Isabelle')).resolves.toBeDefined()
+        })
+      })
     })
   })
 
   describe('when given an account', () => {
     describe('when the vault contains ciphers', () => {
-      it('should show the account form', async () => {
+      beforeEach(() => {
         mockVaultClient.getAll.mockResolvedValue([])
         mockVaultClient.getAllDecrypted.mockResolvedValue([])
+      })
 
+      it('should show the account form', async () => {
         const { findByLabelText } = render(
           <TriggerManager {...propsWithAccount} />
         )
@@ -163,7 +205,7 @@ describe('TriggerManager', () => {
     })
 
     describe('when the vault does not contain ciphers', () => {
-      it('should show the account form', async () => {
+      beforeEach(() => {
         mockVaultClient.getAll.mockResolvedValue([{ id: 'cipher1' }])
         mockVaultClient.getAllDecrypted.mockResolvedValue([
           {
@@ -174,7 +216,9 @@ describe('TriggerManager', () => {
             }
           }
         ])
+      })
 
+      it('should show the account form', async () => {
         const { findByLabelText } = render(
           <TriggerManager {...propsWithAccount} />
         )

@@ -3,6 +3,51 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.5...cozy-harvest-lib@1.25.0) (2020-02-10)
+
+
+### Features
+
+* **cozy-harvest-lib:** Add logs to updateAccountsPassword service ([32fca31](https://github.com/cozy/cozy-libs/commit/32fca31))
+
+
+
+
+
+## [1.24.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.4...cozy-harvest-lib@1.24.5) (2020-02-07)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Show account form on account edition ([57531a2](https://github.com/cozy/cozy-libs/commit/57531a2))
+
+
+
+
+
+## [1.24.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.3...cozy-harvest-lib@1.24.4) (2020-02-07)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Back button on account form ([15e64e0](https://github.com/cozy/cozy-libs/commit/15e64e0))
+
+
+
+
+
+## [1.24.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.2...cozy-harvest-lib@1.24.3) (2020-02-07)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Don't duplicate cipher on selection ([3d21176](https://github.com/cozy/cozy-libs/commit/3d21176))
+* **cozy-harvest-lib:** Make warning log clearer ([9c2ef2d](https://github.com/cozy/cozy-libs/commit/9c2ef2d))
+
+
+
+
+
 ## [1.24.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.1...cozy-harvest-lib@1.24.2) (2020-02-06)
 
 
