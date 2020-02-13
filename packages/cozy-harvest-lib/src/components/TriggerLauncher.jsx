@@ -120,7 +120,7 @@ export class TriggerLauncher extends Component {
     }
     this.stopWatchingConnectionFlow()
     const { onSuccess } = this.props
-    const flow = this
+    const flow = this.flow
     if (typeof onSuccess === 'function') onSuccess(flow.trigger)
   }
 
@@ -129,7 +129,7 @@ export class TriggerLauncher extends Component {
       this.dismissTwoFAModal()
     }
     const { onLoginSuccess } = this.props
-    const flow = this
+    const flow = this.flow
     if (typeof onLoginSuccess === 'function') onLoginSuccess(flow.trigger)
   }
 
