@@ -116,21 +116,14 @@ export class DumbTriggerManager extends Component {
    * @param  {string}  accountId
    */
   async handleOAuthAccountId(accountId) {
-    const { client } = this.props
-    try {
-      this.setState({ error: null, status: RUNNING })
-      const oAuthAccount = await findAccount(client, accountId)
-      return await flow.ensureTriggerAndLaunch(client, {
-        account: oAuthAccount,
-        konnector: this.props.konnector,
-        trigger: this.props.trigger,
-        t: this.props.t
-      })
-    } catch (error) {
-      this.handleError(error)
-    } finally {
-      this.setState({ status: IDLE })
-    }
+    const { client, flow, konnector, trigger, t } = this.props
+    const oAuthAccount = await findAccount(client, accountId)
+    flow.ensureTriggerAndLaunch(client, {
+      account: oAuthAccount,
+      konnector: konnector,
+      trigger: trigger,
+      t: t
+    })
   }
 
   /**
