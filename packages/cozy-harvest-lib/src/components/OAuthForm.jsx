@@ -4,6 +4,8 @@ import PropTypes from 'prop-types'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import OAuthWindow from './OAuthWindow'
+import compose from 'lodash/flowRight'
+import withConnectionFlow from '../models/withConnectionFlow'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -48,10 +50,11 @@ export class OAuthForm extends PureComponent {
     this.setState({ showOAuthWindow: true })
   }
 
+
   render() {
-    const { konnector, submitting, t } = this.props
+    const { konnector, t, flowState } = this.props
     const { initialValues, showOAuthWindow } = this.state
-    const isBusy = showOAuthWindow === true || submitting
+    const isBusy = showOAuthWindow === true || flowState.running
 
     return initialValues ? null : (
       <>
@@ -82,10 +85,11 @@ OAuthForm.propTypes = {
   konnector: PropTypes.object.isRequired,
   /** Success callback, takes account as parameter */
   onSuccess: PropTypes.func,
-  /** Indicates if the form should be rendered as submitting */
-  submitting: PropTypes.bool,
   /** Translation function */
   t: PropTypes.func.isRequired
 }
 
-export default translate()(OAuthForm)
+export default compose(
+  translate(),
+  withConnectionFlow()
+)(OAuthForm)
