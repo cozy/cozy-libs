@@ -50,7 +50,6 @@ export class OAuthForm extends PureComponent {
     this.setState({ showOAuthWindow: true })
   }
 
-
   render() {
     const { konnector, t, flowState } = this.props
     const { initialValues, showOAuthWindow } = this.state

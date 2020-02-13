@@ -185,7 +185,15 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { account, konnector, onBack, onSubmit, showError, t, flowState } = this.props
+    const {
+      account,
+      konnector,
+      onBack,
+      onSubmit,
+      showError,
+      t,
+      flowState
+    } = this.props
     const submitting = flowState.running
     const error = flowState.error
 
@@ -331,5 +339,5 @@ AccountForm.defaultProps = {
 export default compose(
   withConnectionFlow(),
   withLocales,
-  withKonnectorLocales,
+  withKonnectorLocales
 )(AccountForm)

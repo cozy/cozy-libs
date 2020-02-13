@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import { UPDATE_EVENT } from './ConnectionFlow'
 
 /**
@@ -40,10 +40,16 @@ const withConnectionFlow = ({
     }
 
     render() {
-      return <Wrapped {...this.props} {...{ [statePropName]: this.state.flowState } } />
+      return (
+        <Wrapped
+          {...this.props}
+          {...{ [statePropName]: this.state.flowState }}
+        />
+      )
     }
   }
-  Wrapper.displayName = `withConnectionFlow(${Wrapped.displayName || Wrapped.name})`
+  Wrapper.displayName = `withConnectionFlow(${Wrapped.displayName ||
+    Wrapped.name})`
   return Wrapper
 }
 
