@@ -22,7 +22,7 @@ import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
-import { UPDATE_EVENT } from '../models/ConnectionFlow'
+import withConnectionFlow from '../models/withConnectionFlow'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -82,32 +82,15 @@ export class DumbTriggerManager extends Component {
     this.handleCipherSelect = this.handleCipherSelect.bind(this)
     this.showCiphersList = this.showCiphersList.bind(this)
     this.handleVaultUnlock = this.handleVaultUnlock.bind(this)
-    this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
 
     this.state = {
       account,
       error: null,
-      status: IDLE,
       step: getInitialStep(props),
       selectedCipher: undefined,
       showBackButton: false,
       ciphers: []
     }
-  }
-
-  componentDidMount() {
-    const { flow } = this.props
-    flow.on(UPDATE_EVENT, this.handleFlowUpdate)
-  }
-
-  componentWillUnmount() {
-    const { flow } = this.props
-    flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
-  }
-
-  handleFlowUpdate() {
-    const { flow } = this.props
-    this.setState({ flowState: flow.getState() })
   }
 
   /**
@@ -291,10 +274,10 @@ export class DumbTriggerManager extends Component {
       t,
       onVaultDismiss,
       vaultClosable,
-      flow
+      flow,
+      flowState
     } = this.props
 
-    const flowState = flow.getState()
     const submitting = flowState.running
 
     const {
@@ -316,6 +299,7 @@ export class DumbTriggerManager extends Component {
     if (oauth) {
       return (
         <OAuthForm
+          flow={flow}
           account={account}
           konnector={konnector}
           onSuccess={this.handleOAuthAccountId}
@@ -418,7 +402,8 @@ DumbTriggerManager.propTypes = {
 const SmartTriggerManager = flow(
   translate(),
   withClient,
-  withVaultClient
+  withVaultClient,
+  withConnectionFlow()
 )(DumbTriggerManager)
 
 // The TriggerManager is wrapped in the providers required for it to work by

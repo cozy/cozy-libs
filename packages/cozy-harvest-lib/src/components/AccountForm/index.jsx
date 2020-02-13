@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
@@ -15,7 +16,7 @@ import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
-import { UPDATE_EVENT } from '../../models/ConnectionFlow'
+import withConnectionFlow from '../../models/withConnectionFlow'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -34,8 +35,7 @@ export class AccountForm extends PureComponent {
     super(props)
 
     this.state = {
-      showConfirmationModal: false,
-      flowState: props.flow.getState()
+      showConfirmationModal: false
     }
 
     this.inputs = {}
@@ -47,22 +47,6 @@ export class AccountForm extends PureComponent {
     this.focusNext = this.focusNext.bind(this)
     this.showConfirmationModal = this.showConfirmationModal.bind(this)
     this.hideConfirmationModal = this.hideConfirmationModal.bind(this)
-    this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
-  }
-
-  componentDidMount() {
-    const { flow } = this.props
-    flow.on(UPDATE_EVENT, this.handleFlowUpdate)
-  }
-
-  componentWillUnmount() {
-    const { flow } = this.props
-    flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
-  }
-
-  handleFlowUpdate() {
-    const { flow } = this.props
-    this.setState({ flowState: flow.getState() })
   }
 
   /**
@@ -201,9 +185,7 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const { account, konnector, onBack, onSubmit, showError, t } = this.props
-
-    const flowState = this.state.flowState
+    const { account, konnector, onBack, onSubmit, showError, t, flowState } = this.props
     const submitting = flowState.running
     const error = flowState.triggerError
 
@@ -346,4 +328,8 @@ AccountForm.defaultProps = {
   showError: true
 }
 
-export default withLocales(withKonnectorLocales(AccountForm))
+export default compose(
+  withConnectionFlow(),
+  withLocales,
+  withKonnectorLocales,
+)(AccountForm)
