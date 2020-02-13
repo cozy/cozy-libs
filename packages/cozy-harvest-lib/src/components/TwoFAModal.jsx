@@ -17,7 +17,7 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/KonnectorJob'
+import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/ConnectionFlow'
 
 /**
  * Displayed during connection creation when the konnector detects

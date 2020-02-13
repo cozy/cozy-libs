@@ -4,14 +4,14 @@ import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
-import KonnectorJob, {
+import ConnectionFlow, {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT,
   TRIGGER_LAUNCH_EVENT,
   UPDATE_EVENT
-} from '../models/KonnectorJob'
+} from '../models/ConnectionFlow'
 
 /**
  * Trigger Launcher renders its children with following props:
@@ -49,13 +49,13 @@ export class TriggerLauncher extends Component {
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
     this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
 
-    this.setupKonnectorJob(initialTrigger)
+    this.setupConnectionFlow(initialTrigger)
   }
 
-  setupKonnectorJob(trigger) {
+  setupConnectionFlow(trigger) {
     const { client } = this.props
-    this.konnectorJob = new KonnectorJob(client, trigger)
-    this.konnectorJob
+    this.flow = new ConnectionFlow(client, trigger)
+    this.flow
       .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.handleSuccess)
       .on(TRIGGER_LAUNCH_EVENT, this.handleTriggerLaunch)
@@ -65,30 +65,21 @@ export class TriggerLauncher extends Component {
   }
 
   handleFlowUpdate() {
-    this.setState({ flowState: this.konnectorJob.getState() })
+    this.setState({ flowState: this.flow.getState() })
   }
 
-  stopWatchingKonnectorJob() {
-    this.konnectorJob.removeListener(ERROR_EVENT, this.handleError)
-    this.konnectorJob.removeListener(SUCCESS_EVENT, this.handleSuccess)
-    this.konnectorJob.removeListener(
-      TRIGGER_LAUNCH_EVENT,
-      this.handleTriggerLaunch
-    )
-    this.konnectorJob.removeListener(
-      LOGIN_SUCCESS_EVENT,
-      this.handleLoginSuccess
-    )
-    this.konnectorJob.removeListener(
-      TWO_FA_REQUEST_EVENT,
-      this.displayTwoFAModal
-    )
-    this.konnectorJob.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
-    this.konnectorJob.unwatch()
+  stopWatchingConnectionFlow() {
+    this.flow.removeListener(ERROR_EVENT, this.handleError)
+    this.flow.removeListener(SUCCESS_EVENT, this.handleSuccess)
+    this.flow.removeListener(TRIGGER_LAUNCH_EVENT, this.handleTriggerLaunch)
+    this.flow.removeListener(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
+    this.flow.removeListener(TWO_FA_REQUEST_EVENT, this.displayTwoFAModal)
+    this.flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
+    this.flow.unwatch()
   }
 
   componentWillUnmount() {
-    this.stopWatchingKonnectorJob()
+    this.stopWatchingConnectionFlow()
   }
 
   handleTriggerLaunch(trigger) {
@@ -108,7 +99,7 @@ export class TriggerLauncher extends Component {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
-    this.stopWatchingKonnectorJob()
+    this.stopWatchingConnectionFlow()
 
     const { onError } = this.props
     if (typeof onError === 'function') onError(error)
@@ -127,7 +118,7 @@ export class TriggerLauncher extends Component {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
-    this.stopWatchingKonnectorJob()
+    this.stopWatchingConnectionFlow()
     const { onSuccess } = this.props
     const flow = this
     if (typeof onSuccess === 'function') onSuccess(flow.trigger)
@@ -144,7 +135,7 @@ export class TriggerLauncher extends Component {
 
   render() {
     const { showTwoFAModal } = this.state
-    const flow = this.konnectorJob
+    const flow = this.flow
     const { children } = this.props
     return (
       <>

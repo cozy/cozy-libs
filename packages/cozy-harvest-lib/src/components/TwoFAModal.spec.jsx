@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import { TwoFAModal } from './TwoFAModal'
-import KonnectorJob from '../models/KonnectorJob'
+import ConnectionFlow from '../models/ConnectionFlow'
 import { Text, Field } from 'cozy-ui/transpiled/react'
 import en from '../locales/en'
 import Polyglot from 'node-polyglot'
@@ -18,22 +18,22 @@ describe('TwoFAModal', () => {
     }
 
     const trigger = {}
-    const konnectorJob = new KonnectorJob(client, trigger)
+    const flow = new ConnectionFlow(client, trigger)
 
-    konnectorJob.getAccount = () => account
-    konnectorJob.getKonnectorSlug = () => konnectorSlug
+    flow.getAccount = () => account
+    flow.getKonnectorSlug = () => konnectorSlug
 
     const root = mount(
       <TwoFAModal
         dismissAction={jest.fn()}
-        flow={konnectorJob}
+        flow={flow}
         t={polyglot.t.bind(polyglot)}
         breakpoints={{ isMobile: true }}
         account={account}
         client={client}
       />
     )
-    return { root, konnectorJob }
+    return { root, flow }
   }
 
   const getDesc = root => root.find(Text).text()
@@ -87,7 +87,7 @@ describe('TwoFAModal', () => {
       },
       konnectorSlug: 'boursoma83'
     }
-    const { root, konnectorJob } = setup(opts)
+    const { root, flow } = setup(opts)
     const inp = root.find('input')
 
     expect(inp.length).toBe(1)
@@ -101,18 +101,18 @@ describe('TwoFAModal', () => {
     expect(getInputValue(root)).toBe('abcd')
 
     // 2nd 2FA request
-    konnectorJob.emit('twoFARequest')
+    flow.emit('twoFARequest')
     root.update()
     expect(getInputValue(root)).toBe('')
     expect(getDesc(root)).toBe(
       'The second code received on your mobile phone or by email enables you to finalize your connexion.'
     )
     expect(getFieldLabel(root)).toBe('Second code')
-    konnectorJob.emit('twoFARequest')
+    flow.emit('twoFARequest')
     root.update()
 
     // 3rd 2FA (should not happen, hypothetical case)
-    konnectorJob.emit('twoFARequest')
+    flow.emit('twoFARequest')
     root.update()
     expect(getInputValue(root)).toBe('')
     // First attempt translations are re-used
@@ -120,7 +120,7 @@ describe('TwoFAModal', () => {
       'This code enables you to finish your connexion.'
     )
     expect(getFieldLabel(root)).toBe('code (4)')
-    konnectorJob.emit('twoFARequest')
+    flow.emit('twoFARequest')
     root.update()
   })
 })

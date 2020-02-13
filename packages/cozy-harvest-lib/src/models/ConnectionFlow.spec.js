@@ -1,5 +1,5 @@
 import CozyClient from 'cozy-client'
-import KonnectorJob from './KonnectorJob'
+import ConnectionFlow from './ConnectionFlow'
 import cronHelpers from 'helpers/cron'
 import { saveAccount } from '../connections/accounts'
 import {
@@ -89,7 +89,7 @@ const mockVaultClient = {
 
 const setup = ({ trigger } = {}) => {
   const client = new CozyClient({})
-  const flow = new KonnectorJob(client, trigger)
+  const flow = new ConnectionFlow(client, trigger)
   return { flow, client }
 }
 
@@ -102,7 +102,7 @@ const setupSubmit = (flow, submitOptions) => {
   })
 }
 
-describe('KonnectorJob', () => {
+describe('ConnectionFlow', () => {
   describe('handleFormSubmit', () => {
     const isSubmitting = flow => {
       return flow.getState().running === true

@@ -127,7 +127,7 @@ export const createOrUpdateAccount = async ({
  *
  * This should be the go to source of truth for the state of a Konnector Job.
  */
-export class KonnectorJob {
+export class ConnectionFlow {
   constructor(client, trigger) {
     this.client = client
     this.trigger = trigger
@@ -519,6 +519,6 @@ export class KonnectorJob {
   }
 }
 
-MicroEE.mixin(KonnectorJob)
+MicroEE.mixin(ConnectionFlow)
 
-export default KonnectorJob
+export default ConnectionFlow

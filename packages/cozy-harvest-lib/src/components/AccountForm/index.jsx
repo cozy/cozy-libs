@@ -15,7 +15,7 @@ import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
-import { UPDATE_EVENT } from '../../models/KonnectorJob'
+import { UPDATE_EVENT } from '../../models/ConnectionFlow'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 

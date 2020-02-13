@@ -7,7 +7,7 @@ import {
 import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
-import KonnectorJob from '../models/KonnectorJob'
+import ConnectionFlow from '../models/ConnectionFlow'
 
 jest.mock('../connections/accounts', () => ({
   saveAccount: jest.fn().mockImplementation(async account => account)
@@ -78,7 +78,7 @@ describe('createOrUpdateBIConnection', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    const flow = new KonnectorJob(client, { konnector, account })
+    const flow = new ConnectionFlow(client, { konnector, account })
     client.stackClient.jobs.create = jest.fn().mockReturnValue({
       data: {
         attributes: {

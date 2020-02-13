@@ -1,13 +1,13 @@
 import './polyfill'
 import { build } from '@cozy/cli-tree'
 import { createClientInteractive } from 'cozy-client/dist/cli'
-import KonnectorJob, {
+import ConnectionFlow, {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT,
   UPDATE_EVENT
-} from '../models/KonnectorJob'
+} from '../models/ConnectionFlow'
 import minilog from 'minilog'
 import flag from 'cozy-flags'
 import logger from '../logger'
@@ -69,7 +69,7 @@ const createOrUpdateMain = async (args, client) => {
   } = await client.collection(KONNECTOR_DOCTYPE).get(args.konnector)
 
   konnector._type = 'io.cozy.konnectors'
-  const flow = new KonnectorJob(client)
+  const flow = new ConnectionFlow(client)
 
   const handleTwoFARequest = exitOnError(async () => {
     await sleep(300)

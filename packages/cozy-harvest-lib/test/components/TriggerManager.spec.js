@@ -5,7 +5,7 @@ import { render } from '@testing-library/react'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import fixtures from '../../test/fixtures'
-import KonnectorJob from '../../src/models/KonnectorJob'
+import ConnectionFlow from '../../src/models/ConnectionFlow'
 import CozyClient from 'cozy-client'
 
 jest.mock('cozy-flags', () => name => {
@@ -68,7 +68,7 @@ const tMock = jest.fn()
 const client = new CozyClient({})
 const props = {
   konnector: fixtures.konnector,
-  flow: new KonnectorJob(client),
+  flow: new ConnectionFlow(client),
   t: tMock,
   vaultClient: mockVaultClient,
   breakpoints: { isMobile: false },

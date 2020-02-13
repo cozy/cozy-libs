@@ -22,7 +22,7 @@ import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
-import { UPDATE_EVENT } from '../models/KonnectorJob'
+import { UPDATE_EVENT } from '../models/ConnectionFlow'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'

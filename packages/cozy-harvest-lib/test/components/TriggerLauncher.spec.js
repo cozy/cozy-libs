@@ -5,7 +5,7 @@ import {
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT
-} from 'models/KonnectorJob'
+} from 'models/ConnectionFlow'
 import TwoFAModal from 'components/TwoFAModal'
 
 const client = {
@@ -72,7 +72,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      const flow = wrapper.instance().konnectorJob
+      const flow = wrapper.instance().flow
 
       flow.triggerEvent(TWO_FA_REQUEST_EVENT)
       wrapper.update()
@@ -91,7 +91,7 @@ describe('TriggerLauncher', () => {
         </TriggerLauncher>
       )
 
-      const flow = wrapper.instance().konnectorJob
+      const flow = wrapper.instance().flow
       flow.triggerEvent(TWO_FA_REQUEST_EVENT)
       wrapper.update()
       expect(wrapper.find(TwoFAModal).length).toBe(1)
@@ -107,7 +107,7 @@ describe('TriggerLauncher', () => {
           {({ launch, running }) => <Child launch={launch} running={running} />}
         </TriggerLauncher>
       )
-      const flow = wrapper.instance().konnectorJob
+      const flow = wrapper.instance().flow
       flow.triggerEvent(LOGIN_SUCCESS_EVENT)
       expect(onLoginSuccess).toHaveBeenCalled()
     })

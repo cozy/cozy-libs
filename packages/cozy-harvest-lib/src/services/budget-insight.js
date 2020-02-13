@@ -17,7 +17,7 @@ import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
-import { LOGIN_SUCCESS_EVENT } from '../models/KonnectorJob'
+import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
 import harvestLogger from '../logger'
 import flag from 'cozy-flags'
 
