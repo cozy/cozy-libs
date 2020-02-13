@@ -14,6 +14,7 @@ import CozyRealtime from 'cozy-realtime'
 import { fetchAccountsFromTriggers } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
+import logger from '../../src/logger'
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
@@ -90,8 +91,7 @@ export class KonnectorAccounts extends React.Component {
       const triggerAccounts = await fetchAccountsFromTriggers(client, triggers)
       this.setState({ accounts: triggerAccounts, error: null })
     } catch (error) {
-      // eslint-disable-next-line no-console
-      console.error(error)
+      logger.error('KonnectorAccounts could not fetch accounts', error)
       this.setState({ error })
     } finally {
       this.setState({ fetchingAccounts: false })
