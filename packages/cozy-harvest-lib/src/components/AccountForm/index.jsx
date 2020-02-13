@@ -201,14 +201,7 @@ export class AccountForm extends PureComponent {
   }
 
   render() {
-    const {
-      account,
-      konnector,
-      onBack,
-      onSubmit,
-      showError,
-      t
-    } = this.props
+    const { account, konnector, onBack, onSubmit, showError, t } = this.props
 
     const flowState = this.state.flowState
     const submitting = flowState.running
