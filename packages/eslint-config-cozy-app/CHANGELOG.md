@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.5.0 (2020-02-14)
+
+
+### Features
+
+* Adds no-console as eslint errors ([e5605fd](https://github.com/cozy/cozy-libs/commit/e5605fd))
+
+
+
+
+
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@1.3.4...eslint-config-cozy-app@1.4.0) (2020-01-21)
 
 
