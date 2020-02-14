@@ -2,6 +2,7 @@ import React from 'react'
 
 const deprecated = deprecationMessage => Wrapped => {
   const Wrapper = props => {
+    // eslint-disable-next-line no-console
     console.warn(deprecationMessage)
     return <Wrapped {...props} />
   }

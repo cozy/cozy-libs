@@ -21,7 +21,8 @@ export const TriggerLauncher = deprecated(
 The API has not changed, only the name and import call.
 
 import { FlowProvider } from "cozy-harvest-lib"
-`)(FlowProvider)
+`
+)(FlowProvider)
 export const Routes = withLocales(RoutesWithoutLocales)
 export const withKonnectorModal = withLocales(withKonnectorModalWithoutLocales)
 export const KonnectorSuggestionModal = withLocales(

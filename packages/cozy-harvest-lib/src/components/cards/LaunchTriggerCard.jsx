@@ -8,9 +8,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Uppercase, { Text } from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
-import FlowProvider, {
-  FlowProvider as DumbFlowProvider
-} from '../FlowProvider'
+import FlowProvider, { FlowProvider as DumbFlowProvider } from '../FlowProvider'
 
 /**
  * Shows the state of the trigger and provides the ability to
