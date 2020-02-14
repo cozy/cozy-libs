@@ -16,5 +16,5 @@ module.exports = {
     '^cozy-client$': 'cozy-client/dist/index.js'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-keys-lib))'],
-  setupFilesAfterEnv: ['<rootDir>/test/setup.js']
+  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.js']
 }
