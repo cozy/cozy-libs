@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+
 const { build } = require('../src')
 
 const removeUsers = args => {
@@ -15,7 +17,11 @@ const main = () => {
         description: 'List users',
         arguments: [
           // The option apart from "argument" are the ones of argparse
-          { argument: '--deleted', action: 'storeTrue', help: 'Show also deleted users' }
+          {
+            argument: '--deleted',
+            action: 'storeTrue',
+            help: 'Show also deleted users'
+          }
         ],
         handler: listUsers
       },
