@@ -17,7 +17,9 @@ jest.mock('cozy-flags', () => name => {
 })
 
 jest.mock('cozy-keys-lib')
-
+jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
+  getCssVariableValue: () => '#fff'
+}))
 jest.mock('cozy-doctypes', () => {
   const doctypes = jest.requireActual('cozy-doctypes')
 
@@ -48,7 +50,6 @@ jest.mock('../../src/services/budget-insight', () => {
   }
 })
 
-jest.mock('cozy-ui/transpiled/react/utils/color')
 
 const mockVaultClient = {
   createNewCipher: jest.fn(),
@@ -69,6 +70,7 @@ const client = new CozyClient({})
 const props = {
   konnector: fixtures.konnector,
   flow: new ConnectionFlow(client),
+  flowState: {},
   t: tMock,
   vaultClient: mockVaultClient,
   breakpoints: { isMobile: false },
@@ -89,7 +91,8 @@ describe('TriggerManager', () => {
     tMock.mockImplementation(key => key)
   })
 
-  afterEach(() => {
+  afterEach(async () => {
+    await cleanup()
   })
 
   describe('when given an oauth konnector', () => {
