@@ -1,5 +1,9 @@
 /* eslint-env jest */
-import { createTrigger, launchTrigger, ensureTrigger } from 'connections/triggers'
+import {
+  createTrigger,
+  launchTrigger,
+  ensureTrigger
+} from 'connections/triggers'
 import CozyClient from 'cozy-client'
 
 import {
@@ -93,7 +97,7 @@ describe('Trigger mutations', () => {
 
 describe('when konnector needs folder', () => {
   it('should create folder if it does not exist', async () => {
-      const { client, permissionCollection, fileCollection } = setup()
+    const { client, permissionCollection, fileCollection } = setup()
     statDirectoryByPath.mockResolvedValue(null)
     createDirectoryByPath.mockReturnValue(fixtures.folder)
 
@@ -124,7 +128,7 @@ describe('when konnector needs folder', () => {
   })
 
   it('should not create folder if it exists', async () => {
-      const { client, permissionCollection, fileCollection } = setup()
+    const { client, permissionCollection, fileCollection } = setup()
     statDirectoryByPath.mockResolvedValue(fixtures.folder)
 
     await ensureTrigger(client, {

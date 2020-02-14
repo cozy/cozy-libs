@@ -50,7 +50,6 @@ jest.mock('../../src/services/budget-insight', () => {
   }
 })
 
-
 const mockVaultClient = {
   createNewCipher: jest.fn(),
   saveCipher: jest.fn(),
