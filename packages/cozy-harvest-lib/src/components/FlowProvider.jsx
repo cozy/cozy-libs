@@ -14,27 +14,22 @@ import ConnectionFlow, {
 } from '../models/ConnectionFlow'
 
 /**
- * Trigger Launcher renders its children with following props:
- * * launch: Callback to launch the trigger
- * * running: Boolean which indicates if the trigger is running
- * * error: KonnectorJobError
- * * trigger: The current Trigger
+ * FlowProvider instantiates a ConnectionFlow and provides it to its children.
+ * It will listen to 2FA events and display 2FA modals.
+ * It re-renders children when the connectionFlow updates.
+ *
  *
  * ### Example
  * ```js
- * <TriggerLauncher initialTrigger={trigger}>
- *   {(launch, running, trigger, error) => (
- *     <Button onClick={() => launch(trigger)} disabled={running} />
- *    )}
- * </TriggerLauncher>
+ * <FlowProvider initialTrigger={trigger}>
+ *   {({ flow }) => {
+ *     const flowState = flow.getState()
+ *     return <Button onClick={() => flow.launch(trigger)} disabled={running} />
+ *    }}
+ * </FlowProvider>
  * ```
- *
- * TODO: inject other props to indicates status (for example: loginSucceed),
- * and use callbacks like `onLoginSuccess` to make this component usable in
- * TriggerManager for example
- *
  */
-export class TriggerLauncher extends Component {
+export class FlowProvider extends Component {
   constructor(props, context) {
     super(props, context)
     const { initialTrigger } = this.props
@@ -154,7 +149,7 @@ export class TriggerLauncher extends Component {
   }
 }
 
-TriggerLauncher.propTypes = {
+FlowProvider.propTypes = {
   /**
    * Mandatory for render prop
    */
@@ -185,9 +180,9 @@ TriggerLauncher.propTypes = {
    */
   submitting: PropTypes.bool,
   /**
-   * Optionnal trigger in its initial state
+   * Optional trigger in its initial state
    */
   initialTrigger: PropTypes.object
 }
 
-export default translate()(withClient(TriggerLauncher))
+export default translate()(withClient(FlowProvider))

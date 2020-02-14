@@ -16,7 +16,7 @@ import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
 import { findAccount } from '../connections/accounts'
-import TriggerLauncher from './TriggerLauncher'
+import FlowProvider from './FlowProvider'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
@@ -67,7 +67,7 @@ const getInitialStep = ({ account, konnector }) => {
 
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
- * After that it calls TriggerLauncher to run the konnector.
+ * After that it calls FlowProvider to run the konnector.
  *
  * @type {Component}
  */
@@ -419,7 +419,7 @@ export const TriggerManager = props => {
   )
 }
 
-// TriggerManager is exported wrapped in TriggerLauncher to avoid breaking changes.
+// TriggerManager is exported wrapped in FlowProvider to avoid breaking changes.
 const LegacyTriggerManager = props => {
   const {
     onLaunch,
@@ -430,7 +430,7 @@ const LegacyTriggerManager = props => {
     ...otherProps
   } = props
   return (
-    <TriggerLauncher
+    <FlowProvider
       onLaunch={onLaunch}
       onSuccess={onSuccess}
       onLoginSuccess={onLoginSuccess}
@@ -445,7 +445,7 @@ const LegacyTriggerManager = props => {
           flow={flow}
         />
       )}
-    </TriggerLauncher>
+    </FlowProvider>
   )
 }
 

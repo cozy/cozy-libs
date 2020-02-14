@@ -8,9 +8,9 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Uppercase, { Text } from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
-import TriggerLauncher, {
-  TriggerLauncher as DumbTriggerLauncher
-} from '../TriggerLauncher'
+import FlowProvider, {
+  FlowProvider as DumbFlowProvider
+} from '../FlowProvider'
 
 /**
  * Shows the state of the trigger and provides the ability to
@@ -23,8 +23,8 @@ export class LaunchTriggerCard extends Component {
     const { className, f, t, disabled } = this.props
     return (
       <Card className={className}>
-        <TriggerLauncher
-          {...pick(this.props, Object.keys(DumbTriggerLauncher.propTypes))}
+        <FlowProvider
+          {...pick(this.props, Object.keys(DumbFlowProvider.propTypes))}
         >
           {({ flow }) => {
             const flowState = flow.getState()
@@ -85,7 +85,7 @@ export class LaunchTriggerCard extends Component {
               </div>
             )
           }}
-        </TriggerLauncher>
+        </FlowProvider>
       </Card>
     )
   }
@@ -93,7 +93,7 @@ export class LaunchTriggerCard extends Component {
 
 LaunchTriggerCard.propTypes = {
   ...Card.propTypes,
-  ...TriggerLauncher.propTypes,
+  ...FlowProvider.propTypes,
   /**
    * Indicates if a konnector job for the current trigger is already running
    * TODO: rename all running props to hasJobRunning to make its role clearer

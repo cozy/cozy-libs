@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { shallow } from 'enzyme'
-import { TriggerLauncher } from 'components/TriggerLauncher'
+import { FlowProvider } from 'components/FlowProvider'
 import {
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
@@ -42,7 +42,7 @@ const props = {
 
 class Child extends Component {}
 
-describe('TriggerLauncher', () => {
+describe('FlowProvider', () => {
   // Chainable mock
   const onMock = jest.fn(() => ({
     on: onMock
@@ -59,7 +59,7 @@ describe('TriggerLauncher', () => {
 
   it('should render', () => {
     const component = shallow(
-      <TriggerLauncher {...props}>{() => <Child />}</TriggerLauncher>
+      <FlowProvider {...props}>{() => <Child />}</FlowProvider>
     ).getElement()
     expect(component).toMatchSnapshot()
   })
@@ -67,9 +67,9 @@ describe('TriggerLauncher', () => {
   describe('handleSuccess', () => {
     it('should hide twoFA modal', async () => {
       const wrapper = shallow(
-        <TriggerLauncher {...props}>
+        <FlowProvider {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
-        </TriggerLauncher>
+        </FlowProvider>
       )
 
       const flow = wrapper.instance().flow
@@ -86,9 +86,9 @@ describe('TriggerLauncher', () => {
   describe('handleLoginSuccess', () => {
     it('should show/hide twoFA modal', async () => {
       const wrapper = shallow(
-        <TriggerLauncher {...props}>
+        <FlowProvider {...props}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
-        </TriggerLauncher>
+        </FlowProvider>
       )
 
       const flow = wrapper.instance().flow
@@ -103,9 +103,9 @@ describe('TriggerLauncher', () => {
     it('should call the onLoginSuccess callback', () => {
       const onLoginSuccess = jest.fn()
       const wrapper = shallow(
-        <TriggerLauncher {...props} onLoginSuccess={onLoginSuccess}>
+        <FlowProvider {...props} onLoginSuccess={onLoginSuccess}>
           {({ launch, running }) => <Child launch={launch} running={running} />}
-        </TriggerLauncher>
+        </FlowProvider>
       )
       const flow = wrapper.instance().flow
       flow.triggerEvent(LOGIN_SUCCESS_EVENT)
