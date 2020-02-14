@@ -18,7 +18,7 @@ const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
  * @param  {Object}   attributes
  * @return {Object}   Created trigger
  */
-const createTrigger = async (client, attributes) => {
+export const createTrigger = async (client, attributes) => {
   const { data } = await client.collection(TRIGGERS_DOCTYPE).create(attributes)
   return data
 }
