@@ -15,7 +15,7 @@ const fixtures = {
 describe('OAuthForm', () => {
   it('should render', () => {
     const component = shallow(
-      <OAuthForm konnector={fixtures.konnector} t={t} />
+      <OAuthForm flowState={{}} konnector={fixtures.konnector} t={t} />
     ).getElement()
     expect(component).toMatchSnapshot()
   })
@@ -23,6 +23,7 @@ describe('OAuthForm', () => {
   it('should not render button when update', () => {
     const component = shallow(
       <OAuthForm
+        flowState={{}}
         account={{ oauth: { access_token: '1234abcd' } }}
         konnector={fixtures.konnector}
         t={t}

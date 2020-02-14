@@ -55,14 +55,6 @@ jest.mock('components/KonnectorIcon', () => {
   return KonnectorIcon
 })
 
-const makeFlow = state => {
-  return {
-    on: () => {},
-    removeEventListener: () => {},
-    getState: () => state
-  }
-}
-
 describe('AccountForm', () => {
   beforeEach(() => {
     onSubmit.mockClear()
@@ -75,10 +67,10 @@ describe('AccountForm', () => {
     konnector,
     disableLifecycleMethods
   } = {}) => {
-    const flow = makeFlow({ error })
+    const flowState = { error }
     const wrapper = shallow(
       <AccountForm
-        flow={flow}
+        flowState={flowState}
         account={account}
         konnector={konnector || fixtures.konnector}
         onSubmit={onSubmit}
@@ -341,11 +333,11 @@ describe('AccountForm', () => {
           }
         }
       }
-      const flow = makeFlow({})
+      const flowState = {}
       const wrapper = mount(
         <I18n lang="en" dictRequire={() => {}}>
           <AccountForm
-            flow={flow}
+            flowState={flowState}
             t={t}
             konnector={fixtures.konnector}
             onSubmit={onSubmit}
