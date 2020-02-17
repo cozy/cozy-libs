@@ -65,8 +65,6 @@ describe('useAppLinkWithStoreFallback', () => {
 
     await waitForNextUpdate()
     expect(result.current.isInstalled).toBe(false)
-    expect(result.current.url).toBe(
-      'http://store.cozy.io#/discover/testapp/install'
-    )
+    expect(result.current.url).toBe('http://store.cozy.io#/discover/testapp')
   })
 })
