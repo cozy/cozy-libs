@@ -1,5 +1,6 @@
 const https = require('https')
 const url = require('url')
+const tags = require('../../tags')
 
 const appTypeLabelMap = {
   webapp: 'Application',
@@ -88,18 +89,34 @@ const validate = () => {
   }
 }
 
+const getMattermostChannels = ({ appVersion }) => {
+  const tagInfo = tags.parse(appVersion)
+  const envChannel = process.env.MATTERMOST_CHANNEL
+  let channelOptions
+  try {
+    channelOptions = JSON.parse(envChannel)
+  } catch {
+    channelOptions = {
+      dev: envChannel,
+      beta: envChannel,
+      stable: envChannel
+    }
+  }
+  const channels = channelOptions[tagInfo.channel]
+  return channels && channels.length > 0 ? channels.split(',') : []
+}
+
 const sendMattermostReleaseMessage = async options => {
   validate()
 
-  console.log('↳ ℹ️  Sending message to Mattermost')
 
   const hookURL = process.env.MATTERMOST_HOOK_URL
-  const channels = process.env.MATTERMOST_CHANNEL.split(',')
+  const channels = getMattermostChannels({ appVersion: options.appVersion })
   const iconURL = 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
   const username = 'Travis'
   const message = getMessage(options)
-
   for (const channel of channels) {
+    console.log('↳ ℹ️  Sending message to Mattermost')
     await sendMattermostMessage({
       hookURL,
       iconURL,
@@ -116,8 +133,9 @@ module.exports.sendMattermostMessage = sendMattermostMessage
 module.exports.sendMattermostReleaseMessage = sendMattermostReleaseMessage
 
 if (require.main === module) {
+  const args = process.argv.slice(2)
+  const appVersion = args[0]
   const appSlug = 'test'
-  const appVersion = '0.0.1'
   const spaceName = 'spacemountain'
   const appType = 'konnector'
   sendMattermostReleaseMessage({
