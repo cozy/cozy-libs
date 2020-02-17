@@ -58,7 +58,7 @@
     "cozy-realtime": "3.4.0",
     "cozy-ui": "30.7.0",
     "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.1",
+    "enzyme-adapter-react-16": "1.15.2",
     "form-data": "3.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.1.0",
