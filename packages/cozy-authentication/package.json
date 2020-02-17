@@ -27,7 +27,7 @@
     "cozy-ui": "22.14.1",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
-    "enzyme": "3.10.0",
+    "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.1",
     "eslint-cli": "1.1.1",
     "foreman": "^3.0.1",
