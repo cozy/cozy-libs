@@ -64,7 +64,9 @@ const AppLinkCard = ({
                 )
               }
               theme="secondary"
-              label={t(`card.appLink.${slug}.button`)}
+              label={t(
+                `card.appLink.${slug}.${isInstalled ? 'button' : 'install'}`
+              )}
               className={isMobile ? 'u-w-100' : null}
             />
           )}
