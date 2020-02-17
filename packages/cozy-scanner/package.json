@@ -40,7 +40,7 @@
     "stylus": "^0.54.7"
   },
   "peerDependencies": {
-    "cozy-client": "7.4.1",
+    "cozy-client": "7.14.0",
     "cozy-doctypes": "1.67.0",
     "cozy-ui": "^27.11.2"
   },

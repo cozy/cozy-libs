@@ -69,7 +69,7 @@
     "react-dom": "^16.12.0"
   },
   "peerDependencies": {
-    "cozy-client": "7.13.0",
+    "cozy-client": "7.14.0",
     "cozy-device-helper": "1.7.1",
     "cozy-keys-lib": "^2.5.2",
     "cozy-realtime": "^3.1.0",
