@@ -109,7 +109,6 @@ const getMattermostChannels = ({ appVersion }) => {
 const sendMattermostReleaseMessage = async options => {
   validate()
 
-
   const hookURL = process.env.MATTERMOST_HOOK_URL
   const channels = getMattermostChannels({ appVersion: options.appVersion })
   const iconURL = 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'

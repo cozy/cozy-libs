@@ -104,7 +104,7 @@ describe('sendMattermost Post', () => {
         }
       })
       try {
-         await sendMattermostReleaseMessage(commonInfo)
+        await sendMattermostReleaseMessage(commonInfo)
         expect(JSON.parse(writeSpy.mock.calls[0][0])).toEqual({
           channel: 'gh-notif-appvenger',
           icon_url: 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png',
