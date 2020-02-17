@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
-import { Q } from 'cozy-client'
-import { Application } from 'cozy-doctypes'
+import { Q, models } from 'cozy-client'
+
+const { applications: ApplicationsModel } = models
 
 const useAppLinkWithStoreFallback = (slug, client, path = '') => {
   const [fetchStatus, setFetchStatus] = useState('loading')
@@ -12,12 +13,17 @@ const useAppLinkWithStoreFallback = (slug, client, path = '') => {
       try {
         const apps = await client.query(Q('io.cozy.apps'))
         const appDocument = { slug }
-        const appInstalled = Application.isInstalled(apps.data, appDocument)
+        const appInstalled = ApplicationsModel.isInstalled(
+          apps.data,
+          appDocument
+        )
         setIsInstalled(!!appInstalled)
         if (appInstalled) {
-          setURL(Application.getUrl(appInstalled) + path)
+          setURL(ApplicationsModel.getUrl(appInstalled) + path)
         } else {
-          setURL(Application.getStoreInstallationURL(apps.data, appDocument))
+          setURL(
+            ApplicationsModel.getStoreInstallationURL(apps.data, appDocument)
+          )
         }
         setFetchStatus('loaded')
       } catch (error) {
