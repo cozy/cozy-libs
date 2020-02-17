@@ -36,35 +36,22 @@ const getMessage = options => {
   return message
 }
 
-const sendMattermostReleaseMessage = (
-  appSlug,
-  appVersion,
-  spaceName,
-  appType
-) => {
-  const { MATTERMOST_CHANNEL, MATTERMOST_HOOK_URL } = process.env
+const sendMattermostMessage = options => {
+  const { channel, iconURL, hookURL, username, message } = options
 
-  const MATTERMOST_ICON =
-    'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
-  const MATTERMOST_USERNAME = 'Travis'
+  const mattermostHookUrl = url.parse(hookURL)
 
-  const mattermostHookUrl = url.parse(MATTERMOST_HOOK_URL)
-  const message = getMessage({
-    appSlug,
-    appVersion,
-    spaceName,
-    appType
-  })
   return new Promise((resolve, reject) => {
     console.log(
-      `↳ ℹ️  Sending to mattermost channel ${MATTERMOST_CHANNEL} the following message: "${message}"`
+      `↳ ℹ️  Sending to mattermost channel ${channel} the following message: "${message}"`
     )
     const postData = JSON.stringify({
-      channel: MATTERMOST_CHANNEL,
-      icon_url: MATTERMOST_ICON,
-      username: MATTERMOST_USERNAME,
+      channel: channel,
+      icon_url: iconURL,
+      username: username,
       text: message
     })
+
     const request = https.request(
       {
         headers: {
@@ -93,20 +80,36 @@ const sendMattermostReleaseMessage = (
   })
 }
 
-module.exports = async options => {
-  console.log('↳ ℹ️  Sending message to Mattermost')
-  const MATTERMOST_HOOK_URL = process.env.MATTERMOST_HOOK_URL
-
-  if (!MATTERMOST_HOOK_URL) {
+const validate = () => {
+  if (!process.env.MATTERMOST_HOOK_URL) {
     throw new Error('No MATTERMOST_HOOK_URL environment variable defined')
+  } else if (!process.env.MATTERMOST_CHANNEL) {
+    throw new Error('No MATTERMOST_CHANNEL environment variable defined')
   }
-
-  const { appSlug, appVersion, spaceName, appType } = options
-
-  sendMattermostReleaseMessage(appSlug, appVersion, spaceName, appType)
-
-  return options
 }
 
+const sendMattermostReleaseMessage = async options => {
+  validate()
+
+  console.log('↳ ℹ️  Sending message to Mattermost')
+
+  const hookURL = process.env.MATTERMOST_HOOK_URL
+  const channel = process.env.MATTERMOST_CHANNEL
+  const iconURL = 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
+  const username = 'Travis'
+  const message = getMessage(options)
+
+  return await sendMattermostMessage({
+    hookURL,
+    iconURL,
+    username,
+    channel,
+    message
+  })
+}
+
+
+module.exports = sendMattermostReleaseMessage
 module.exports.getMessage = getMessage
+module.exports.sendMattermostMessage = sendMattermostMessage
 module.exports.sendMattermostReleaseMessage = sendMattermostReleaseMessage

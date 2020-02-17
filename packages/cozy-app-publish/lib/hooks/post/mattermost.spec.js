@@ -8,6 +8,7 @@ describe('get message', () => {
     spaceName: 'banks',
     appType: 'webapp'
   }
+
   const travisVars = {
     TRAVIS_COMMIT_MESSAGE:
       'Beautiful commit title  & a beautiful ampersand \n\nAnd a beautiful explanation',
@@ -15,6 +16,7 @@ describe('get message', () => {
     TRAVIS_REPO_SLUG: 'cozy/cozy-banks',
     TRAVIS_COMMIT: 'sha1deadbeef'
   }
+
   describe('with travis vars', () => {
     beforeEach(() => {
       Object.assign(process.env, travisVars)
@@ -43,6 +45,15 @@ describe('get message', () => {
 })
 
 describe('sendMattermost Post', () => {
+
+  beforeEach(() => {
+    jest.spyOn(console, 'log').mockImplementation(() => {})
+  })
+
+  afterEach(() => {
+    console.log.mockRestore()
+  })
+
   const httpIncomingMessage = {
     statusCode: 200,
     statusMessage: 'OK',
@@ -79,7 +90,7 @@ describe('sendMattermost Post', () => {
       })
     })
 
-    it('should call the write with the right content and callback', async () => {
+    it('should send the right content to mattermost hook', async () => {
       const onSpy = jest.fn()
       const writeSpy = jest.fn()
       const endSpy = jest.fn()
@@ -94,15 +105,14 @@ describe('sendMattermost Post', () => {
         }
       })
       try {
-        const resp = await sendMattermostReleaseMessage(
-          commonInfo.appSlug,
-          commonInfo.appVersion,
-          commonInfo.spaceName,
-          commonInfo.appType
-        )
-        expect(writeSpy).toHaveBeenCalledWith(
-          '{"channel":"gh-notif-appvenger","icon_url":"https://travis-ci.com/images/logos/TravisCI-Mascot-1.png","username":"Travis","text":"Application __banks__ version `1.6.1` has been published on space __banks__.\\n\\n- [Last commit: Beautiful commit title & a beautiful ampersand 😍 ](https://github.com/cozy/cozy-banks/commits/sha1deadbeef)\\n- [Job](https://travis.com/cozy/cozy-banks/jobs/jobId1234)"}'
-        )
+        const resp = await sendMattermostReleaseMessage(commonInfo)
+        expect(JSON.parse(writeSpy.mock.calls[0][0])).toEqual({
+          "channel":"gh-notif-appvenger",
+          "icon_url":"https://travis-ci.com/images/logos/TravisCI-Mascot-1.png",
+          "username":"Travis",
+          "text":"Application __banks__ version `1.6.1` has been published on space __banks__.\n\n- [Last commit: Beautiful commit title & a beautiful ampersand 😍 ](https://github.com/cozy/cozy-banks/commits/sha1deadbeef)\n- [Job](https://travis.com/cozy/cozy-banks/jobs/jobId1234)"
+
+        })
         expect(https.request).toHaveBeenCalledWith(
           {
             headers: {
