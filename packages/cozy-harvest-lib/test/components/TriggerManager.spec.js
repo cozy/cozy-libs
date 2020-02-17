@@ -17,9 +17,7 @@ jest.mock('cozy-flags', () => name => {
 })
 
 jest.mock('cozy-keys-lib')
-jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
-  getCssVariableValue: () => '#fff'
-}))
+jest.mock('cozy-ui/transpiled/react/utils/color')
 jest.mock('cozy-doctypes', () => {
   const doctypes = jest.requireActual('cozy-doctypes')
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import flow from 'lodash/flow'
+import compose from 'lodash/flowRight'
 
 import { withClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
@@ -399,7 +399,7 @@ DumbTriggerManager.propTypes = {
   vaultClosable: PropTypes.bool
 }
 
-const SmartTriggerManager = flow(
+const SmartTriggerManager = compose(
   translate(),
   withClient,
   withVaultClient,
