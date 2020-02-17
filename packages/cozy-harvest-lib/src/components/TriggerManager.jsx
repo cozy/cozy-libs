@@ -99,12 +99,12 @@ export class DumbTriggerManager extends Component {
    * @param  {string}  accountId
    */
   async handleOAuthAccountId(accountId) {
-    const { client, flow, konnector, trigger, t } = this.props
+    const { client, flow, konnector, t } = this.props
     const oAuthAccount = await findAccount(client, accountId)
     flow.ensureTriggerAndLaunch(client, {
       account: oAuthAccount,
       konnector: konnector,
-      trigger: trigger,
+      trigger: flow.trigger,
       t: t
     })
   }
@@ -120,7 +120,7 @@ export class DumbTriggerManager extends Component {
   }
 
   async handleSubmit(data = {}) {
-    const { client, flow, konnector, trigger, vaultClient, t } = this.props
+    const { client, flow, konnector, vaultClient, t } = this.props
     const { account } = this.state
 
     this.setState({
@@ -135,7 +135,7 @@ export class DumbTriggerManager extends Component {
         account: account || {},
         cipherId,
         konnector,
-        trigger,
+        trigger: flow.trigger,
         userCredentials: data,
         vaultClient,
         t
@@ -379,14 +379,6 @@ DumbTriggerManager.propTypes = {
    * @type {Boolean}
    */
   showError: PropTypes.bool,
-  /**
-   * Existing trigger document to manage.
-   * @type {Object}
-   */
-  trigger: PropTypes.object,
-  /**
-   * Translation function
-   */
   t: PropTypes.func,
   /**
    * What to do when the Vault unlock screen is dismissed without password
@@ -437,11 +429,10 @@ const LegacyTriggerManager = props => {
       onError={onError}
       initialTrigger={initialTrigger}
     >
-      {({ error, trigger, flow }) => (
+      {({ flow }) => (
         <TriggerManager
           {...otherProps}
-          error={error}
-          trigger={trigger}
+          error={flow.getState().error}
           flow={flow}
         />
       )}
