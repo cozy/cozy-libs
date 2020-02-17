@@ -1,6 +1,6 @@
 {
   "name": "cozy-app-publish",
-  "version": "0.20.3",
+  "version": "0.21.0",
   "main": "index.js",
   "author": "Cozy",
   "license": "MIT",

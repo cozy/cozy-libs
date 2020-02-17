@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.20.3...cozy-app-publish@0.21.0) (2020-02-17)
+
+
+### Features
+
+* Ability to send publication message on several channels ([b3d84ab](https://github.com/cozy/cozy-libs/commit/b3d84ab))
+* Add way to test easily the mattermost hook ([8d01617](https://github.com/cozy/cozy-libs/commit/8d01617))
+* Publication message mattermost chan depends on registry chan ([464430a](https://github.com/cozy/cozy-libs/commit/464430a))
+
+
+
+
+
 ## [0.20.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.20.2...cozy-app-publish@0.20.3) (2020-02-12)
 
 
