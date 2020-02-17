@@ -27,7 +27,9 @@ export const KonnectorAccountTabs = ({
 }) => {
   return (
     <FlowProvider initialTrigger={initialTrigger}>
-      {({ error, running }) => {
+      {({ flow }) => {
+        const { error, running } = flow.getState()
+
         const hasError = !!error
         const shouldDisplayError = !running && hasError
         const hasLoginError = hasError && error.isLoginError()

@@ -17,7 +17,8 @@ import FlowProvider from '../FlowProvider'
 const Status = ({ t, trigger, konnector }) => {
   return (
     <FlowProvider initialTrigger={trigger}>
-      {({ error, running }) => {
+      {({ flow }) => {
+        const { error, running } = flow.getState()
         const errorTitle = getErrorLocale(error, konnector, t, 'title')
         if (running) {
           return (
