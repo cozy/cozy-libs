@@ -2,24 +2,22 @@ import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { queryConnect, Q } from 'cozy-client'
+import { withClient } from 'cozy-client'
+import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 
-const DriveLink = memo(({ folderId, driveQuery, t }) => {
-  let hasDrive = false
-  if (driveQuery.fetchStatus === 'loaded') {
-    if (driveQuery.data.length > 0) {
-      hasDrive = true
-    }
-  }
-  const href = hasDrive
-    ? `${driveQuery.data[0].links.related}#/files/${folderId}`
-    : undefined
+const DriveLink = memo(({ folderId, client, t }) => {
+  const { fetchStatus, url, isInstalled } = useAppLinkWithStoreFallback(
+    'drive',
+    client,
+    `#/files/${folderId}`
+  )
+  const href = fetchStatus === 'loaded' && isInstalled ? url : undefined
 
   return (
     <ButtonLink
       href={href}
       target="_parent"
-      disabled={!hasDrive}
+      disabled={!isInstalled}
       subtle
       icon="openwith"
       label={t('account.success.driveLinkText')}
@@ -31,11 +29,6 @@ DriveLink.displayName = 'DriveLink'
 DriveLink.propTypes = {
   t: PropTypes.func.isRequired,
   folderId: PropTypes.string.isRequired,
-  driveQuery: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired
 }
-export default queryConnect({
-  driveQuery: {
-    query: () => Q('io.cozy.apps').where({ slug: 'drive' }),
-    as: 'driveQuery'
-  }
-})(translate()(DriveLink))
+export default withClient(translate()(DriveLink))
