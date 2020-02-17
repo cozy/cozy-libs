@@ -21,9 +21,7 @@ const useAppLinkWithStoreFallback = (slug, client, path = '') => {
         if (appInstalled) {
           setURL(ApplicationsModel.getUrl(appInstalled) + path)
         } else {
-          setURL(
-            ApplicationsModel.getStoreInstallationURL(apps.data, appDocument)
-          )
+          setURL(ApplicationsModel.getStoreURL(apps.data, appDocument))
         }
         setFetchStatus('loaded')
       } catch (error) {
