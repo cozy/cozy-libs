@@ -45,7 +45,6 @@ describe('get message', () => {
 })
 
 describe('sendMattermost Post', () => {
-
   beforeEach(() => {
     jest.spyOn(console, 'log').mockImplementation(() => {})
   })
@@ -105,13 +104,13 @@ describe('sendMattermost Post', () => {
         }
       })
       try {
-        const resp = await sendMattermostReleaseMessage(commonInfo)
+         await sendMattermostReleaseMessage(commonInfo)
         expect(JSON.parse(writeSpy.mock.calls[0][0])).toEqual({
-          "channel":"gh-notif-appvenger",
-          "icon_url":"https://travis-ci.com/images/logos/TravisCI-Mascot-1.png",
-          "username":"Travis",
-          "text":"Application __banks__ version `1.6.1` has been published on space __banks__.\n\n- [Last commit: Beautiful commit title & a beautiful ampersand 😍 ](https://github.com/cozy/cozy-banks/commits/sha1deadbeef)\n- [Job](https://travis.com/cozy/cozy-banks/jobs/jobId1234)"
-
+          channel: 'gh-notif-appvenger',
+          icon_url: 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png',
+          username: 'Travis',
+          text:
+            'Application __banks__ version `1.6.1` has been published on space __banks__.\n\n- [Last commit: Beautiful commit title & a beautiful ampersand 😍 ](https://github.com/cozy/cozy-banks/commits/sha1deadbeef)\n- [Job](https://travis.com/cozy/cozy-banks/jobs/jobId1234)'
         })
         expect(https.request).toHaveBeenCalledWith(
           {
@@ -125,7 +124,6 @@ describe('sendMattermost Post', () => {
           },
           expect.any(Function)
         )
-        expect(resp.statusCode).toEqual(200)
       } catch (error) {
         throw error
       }

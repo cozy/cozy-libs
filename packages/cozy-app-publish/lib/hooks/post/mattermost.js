@@ -94,20 +94,21 @@ const sendMattermostReleaseMessage = async options => {
   console.log('↳ ℹ️  Sending message to Mattermost')
 
   const hookURL = process.env.MATTERMOST_HOOK_URL
-  const channel = process.env.MATTERMOST_CHANNEL
+  const channels = process.env.MATTERMOST_CHANNEL.split(',')
   const iconURL = 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
   const username = 'Travis'
   const message = getMessage(options)
 
-  return await sendMattermostMessage({
-    hookURL,
-    iconURL,
-    username,
-    channel,
-    message
-  })
+  for (const channel of channels) {
+    await sendMattermostMessage({
+      hookURL,
+      iconURL,
+      username,
+      channel,
+      message
+    })
+  }
 }
-
 
 module.exports = sendMattermostReleaseMessage
 module.exports.getMessage = getMessage
