@@ -40,17 +40,20 @@
       "drive": {
         "title": "Your documents",
         "description": "This service retrieves your latest documents and keeps a complete back-up for you.",
-        "button": "Open the documents"
+        "button": "Open the documents",
+        "install": "Discover Cozy Drive"
       },
       "contacts": {
         "title": "Your contacts",
         "description": "This service synchronizes all your contacts for you.",
-        "button": "Open contacts"
+        "button": "Open contacts",
+        "install": "Discover Cozy Contacts"
       },
       "banks": {
         "title": "Your banking data",
         "description": "This service retrieves your latest baking operations and keeps a complete record for you.",
-        "button": "Access bank accounts"
+        "button": "Access bank accounts",
+        "install": "Discover Cozy Banks"
       }
     }
   },
