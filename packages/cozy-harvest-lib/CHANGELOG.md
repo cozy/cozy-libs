@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.26.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.25.0...cozy-harvest-lib@1.26.0) (2020-02-17)
+
+
+### Bug Fixes
+
+* AccountForm error is from triggerError ([ccd30a9](https://github.com/cozy/cozy-libs/commit/ccd30a9))
+* Assert the job passed to KonnectorJobWatcher has an id ([0daf312](https://github.com/cozy/cozy-libs/commit/0daf312))
+* **EditAccountModal:** Use directly client helper instead of mutation ([703e5db](https://github.com/cozy/cozy-libs/commit/703e5db))
+* Correctly follow ConnectionFlow ([f8e10fd](https://github.com/cozy/cozy-libs/commit/f8e10fd))
+* Correctly take flow from props ([2f104e4](https://github.com/cozy/cozy-libs/commit/2f104e4))
+* LaunchTriggerCard uses flow ([2eb7d82](https://github.com/cozy/cozy-libs/commit/2eb7d82))
+* Pass t correctly ([befa573](https://github.com/cozy/cozy-libs/commit/befa573))
+* Proptype ([521d2a2](https://github.com/cozy/cozy-libs/commit/521d2a2))
+* Revert to old KonnectorJob constructor ([b539ad9](https://github.com/cozy/cozy-libs/commit/b539ad9))
+* TriggerLauncher correctly executes callbacks with the trigger ([94115da](https://github.com/cozy/cozy-libs/commit/94115da))
+* When handling decoupled error, automatically triggers resume=true ([8db6740](https://github.com/cozy/cozy-libs/commit/8db6740))
+
+
+### Features
+
+* Add accountError to ConnectionFlow state ([f31963a](https://github.com/cozy/cozy-libs/commit/f31963a))
+* Add logs ([dde448a](https://github.com/cozy/cozy-libs/commit/dde448a))
+* Completely proxy the event from KonnectorJobWatcher to KonnectorJob ([91409d2](https://github.com/cozy/cozy-libs/commit/91409d2))
+* Remove listeners on unmount ([765753a](https://github.com/cozy/cozy-libs/commit/765753a))
+* Rename flag to add namespace ([2629909](https://github.com/cozy/cozy-libs/commit/2629909))
+* Rename TriggerLauncher into FlowProvider ([33c951d](https://github.com/cozy/cozy-libs/commit/33c951d))
+* Update cozy-flags ([75e0bb8](https://github.com/cozy/cozy-libs/commit/75e0bb8))
+
+
+
+
+
 # [1.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.24.5...cozy-harvest-lib@1.25.0) (2020-02-10)
 
 
