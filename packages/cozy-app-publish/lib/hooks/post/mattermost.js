@@ -113,3 +113,19 @@ module.exports = sendMattermostReleaseMessage
 module.exports.getMessage = getMessage
 module.exports.sendMattermostMessage = sendMattermostMessage
 module.exports.sendMattermostReleaseMessage = sendMattermostReleaseMessage
+
+if (require.main === module) {
+  const appSlug = 'test'
+  const appVersion = '0.0.1'
+  const spaceName = 'spacemountain'
+  const appType = 'konnector'
+  sendMattermostReleaseMessage({
+    appSlug,
+    appVersion,
+    spaceName,
+    appType
+  }).catch(e => {
+    console.error(e)
+    process.exit(1)
+  })
+}
