@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import AppLinker, { generateWebLink } from 'cozy-ui/transpiled/react/AppLinker'
+import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Circle from 'cozy-ui/transpiled/react/Circle'
 import Stack from 'cozy-ui/transpiled/react/Stack'
@@ -12,6 +12,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { withBreakpoints } from 'cozy-ui/transpiled/react'
 import { withClient } from 'cozy-client'
+import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 
 const AppLinkCard = ({
   slug,
@@ -23,7 +24,13 @@ const AppLinkCard = ({
   t
 }) => {
   const cozyURL = new URL(client.getStackClient().uri)
-  const { cozySubdomainType: subDomainType } = client.getInstanceOptions()
+  const { fetchStatus, url, isInstalled } = useAppLinkWithStoreFallback(
+    slug,
+    client,
+    path
+  )
+
+  if (fetchStatus !== 'loaded') return null
 
   return (
     <Card>
@@ -39,27 +46,22 @@ const AppLinkCard = ({
           {t(`card.appLink.${slug}.title`)}
         </SubTitle>
         <Text>{t(`card.appLink.${slug}.description`)}</Text>
-        <AppLinker
-          slug={slug}
-          nativePath={path}
-          href={generateWebLink({
-            cozyUrl: cozyURL.origin,
-            slug,
-            nativePath: path,
-            subDomainType
-          })}
-        >
+        <AppLinker slug={slug} nativePath={path} href={url}>
           {({ onClick, href }) => (
             <ButtonLink
               onClick={onClick}
               href={href}
               icon={
-                <AppIcon
-                  app={slug}
-                  domain={cozyURL.host}
-                  secure={cozyURL.protocol === 'https:'}
-                  className="u-w-1 u-h-1 u-mr-half"
-                />
+                isInstalled ? (
+                  <AppIcon
+                    app={slug}
+                    domain={cozyURL.host}
+                    secure={cozyURL.protocol === 'https:'}
+                    className="u-w-1 u-h-1 u-mr-half"
+                  />
+                ) : (
+                  'openwith'
+                )
               }
               theme="secondary"
               label={t(`card.appLink.${slug}.button`)}

@@ -17,8 +17,8 @@ exports[`KonnectorSuccess should show apps in the correct order 1`] = `
   <p
     className="u-mv-half"
   >
-    <withQuery(withI18n(withLocales(BanksLinkRedirectStore))) />
-    <withQuery(withI18n(DriveLink))
+    <withClient(withI18n(withLocales(BanksLinkRedirectStore))) />
+    <withClient(withI18n(DriveLink))
       folderId="/path"
     />
   </p>
