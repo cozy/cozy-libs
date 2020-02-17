@@ -1758,10 +1758,10 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-authentication@^2.0.5:
-  version "2.0.5"
-  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.0.5.tgz#64505b6ddfe9dde29b1eab431bc89195b2cd9cb7"
-  integrity sha512-36Jofvz3v6h7by2EUxKUh5uZPwM+pVtdPXFpKMzmRJDMgZ8N2eUjJLuUaU9Xt4PzQML+pA8ccCIWuMc1xmJVcA==
+cozy-authentication@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.0.6.tgz#589992ac3cc42c2433944e50fbd737699a1003eb"
+  integrity sha512-ywjPxiJYB3xJHV2PXy9RGhsUq+P4iCOSEzvecxJfqbcY2hEvploTOGBINRJFnRaYSXh2BqRb38zAfAeQqi0uYA==
   dependencies:
     cozy-device-helper "^1.8.0"
     localforage "1.7.3"
@@ -1819,10 +1819,10 @@ cozy-realtime@^3.4.0:
   dependencies:
     minilog "git+https://github.com/cozy/minilog.git#master"
 
-cozy-sharing@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-1.8.0.tgz#63d8b4f33606522be84b9395419b59c28ca28719"
-  integrity sha512-aGfrjBNbnui8/SiWQpixh2Jj17WJMiGDmnJtXjy0j1uTutJUGbsDHV77JHPJtrQtPdocfN2/dScr7eUj4N6dKg==
+cozy-sharing@^1.8.1:
+  version "1.8.1"
+  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-1.8.1.tgz#d6f410badd5781ed754eaf63679efbb42cd25764"
+  integrity sha512-IJlhleoKWERvp+YLhIlgr+888ZXI8hth+4xe95lk2dlOLtINJd+5sk0icQQlNt/ZEY9uszUypL4OdUGTbAmUrw==
   dependencies:
     babel-plugin-inline-react-svg "^1.1.0"
     classnames "^2.2.6"
@@ -5546,9 +5546,9 @@ safe-regex@^1.1.0:
   integrity sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
 
 safer-eval@^1.3.0:
-  version "1.3.2"
-  resolved "https://registry.yarnpkg.com/safer-eval/-/safer-eval-1.3.2.tgz#35f9658458cdfb5769d64fd6842866b53372d568"
-  integrity sha512-mAkc9NX+ULPw4qX+lkFVuIhXQbjFaX97fWFj6atFXMG11lUX4rXfQY6Q0VFf1wfJfqCHYO7cxtC7cA8fIkWsLQ==
+  version "1.3.6"
+  resolved "https://registry.yarnpkg.com/safer-eval/-/safer-eval-1.3.6.tgz#ee51e3348c39fdc4117a47dfb4b69df56a2e40cf"
+  integrity sha512-DN9tBsZgtUOHODzSfO1nGCLhZtxc7Qq/d8/2SNxQZ9muYXZspSh1fO7HOsrf4lcelBNviAJLCxB/ggmG+jV1aw==
   dependencies:
     clones "^1.2.0"
 
