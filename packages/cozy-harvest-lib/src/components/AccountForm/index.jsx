@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
@@ -15,6 +16,7 @@ import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
+import withConnectionFlow from '../../models/withConnectionFlow'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -185,14 +187,15 @@ export class AccountForm extends PureComponent {
   render() {
     const {
       account,
-      error,
       konnector,
       onBack,
       onSubmit,
       showError,
-      submitting,
-      t
+      t,
+      flowState
     } = this.props
+    const submitting = flowState.running
+    const error = flowState.error
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
@@ -324,12 +327,6 @@ AccountForm.propTypes = {
    */
   showError: PropTypes.bool,
   /**
-   * Indicates if the form should be rendered as submitting data or busy.
-   * Typically updated after an `onSubmit` call.
-   * @type {Object}
-   */
-  submitting: PropTypes.bool,
-  /**
    * Translation function
    */
   t: PropTypes.func
@@ -339,4 +336,8 @@ AccountForm.defaultProps = {
   showError: true
 }
 
-export default withLocales(withKonnectorLocales(AccountForm))
+export default compose(
+  withConnectionFlow(),
+  withLocales,
+  withKonnectorLocales
+)(AccountForm)

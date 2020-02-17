@@ -25,27 +25,13 @@ exports[`AccountForm should not render error 1`] = `
     hasError={false}
     initialValues={Object {}}
     inputRefByName={[Function]}
-    t={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            "accountForm.submit.label",
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": "accountForm.submit.label",
-          },
-        ],
-      }
-    }
+    t={[Function]}
   />
   <DefaultButton
     className="u-mt-2 u-mb-1-half"
     disabled={false}
     extension="full"
-    label="accountForm.submit.label"
+    label="Submit"
     onClick={[Function]}
   />
 </div>
@@ -75,27 +61,13 @@ exports[`AccountForm should render 1`] = `
     }
     initialValues={Object {}}
     inputRefByName={[Function]}
-    t={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            "accountForm.submit.label",
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": "accountForm.submit.label",
-          },
-        ],
-      }
-    }
+    t={[Function]}
   />
   <DefaultButton
     className="u-mt-2 u-mb-1-half"
     disabled={true}
     extension="full"
-    label="accountForm.submit.label"
+    label="Submit"
     onClick={[Function]}
   />
 </div>
@@ -142,27 +114,13 @@ exports[`AccountForm should render error 1`] = `
     hasError={false}
     initialValues={Object {}}
     inputRefByName={[Function]}
-    t={
-      [MockFunction] {
-        "calls": Array [
-          Array [
-            "accountForm.submit.label",
-          ],
-        ],
-        "results": Array [
-          Object {
-            "type": "return",
-            "value": "accountForm.submit.label",
-          },
-        ],
-      }
-    }
+    t={[Function]}
   />
   <DefaultButton
     className="u-mt-2 u-mb-1-half"
     disabled={false}
     extension="full"
-    label="accountForm.submit.label"
+    label="Submit"
     onClick={[Function]}
   />
 </div>

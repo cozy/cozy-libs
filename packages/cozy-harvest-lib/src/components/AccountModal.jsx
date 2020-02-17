@@ -3,14 +3,14 @@ import PropTypes from 'prop-types'
 
 import get from 'lodash/get'
 import flow from 'lodash/flow'
-import { withMutations } from 'cozy-client'
+import { withClient, withMutations } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import accountMutations from '../connections/accounts'
+import { findAccount } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
@@ -74,11 +74,14 @@ export class AccountModal extends Component {
   }
 
   async fetchAccount(trigger) {
-    const { findAccount } = this.props
     this.setState({ fetching: true })
 
     try {
-      const account = await findAccount(triggersModel.getAccountId(trigger))
+      const { client } = this.props
+      const account = await findAccount(
+        client,
+        triggersModel.getAccountId(trigger)
+      )
       this.setState({
         account,
         trigger
@@ -157,13 +160,13 @@ AccountModal.propTypes = {
   onDismiss: PropTypes.func,
   accounts: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired,
-  findAccount: PropTypes.func.isRequired,
   pushHistory: PropTypes.func.isRequired,
   accountId: PropTypes.string.isRequired
 }
 
 export default flow(
-  withMutations(accountMutations, triggersMutations),
+  withClient,
+  withMutations(triggersMutations),
   translate(),
   withMountPointPushHistory
 )(AccountModal)

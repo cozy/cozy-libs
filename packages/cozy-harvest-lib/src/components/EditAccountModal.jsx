@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import get from 'lodash/get'
 import flow from 'lodash/flow'
-import { withMutations } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Modal, {
   ModalContent,
@@ -11,11 +11,11 @@ import Modal, {
 } from 'cozy-ui/transpiled/react/Modal'
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
 
-import accountMutations from '../connections/accounts'
-import triggersMutations from '../connections/triggers'
+import { findAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import { withMountPointPushHistory } from './MountPointContext'
+import logger from '../logger'
 
 export class EditAccountModal extends Component {
   constructor(props) {
@@ -32,26 +32,31 @@ export class EditAccountModal extends Component {
 
   componentDidMount() {
     const { accountId, accounts } = this.props
+
     /**
      * @TODO In theory we can have several trigger for the same account.
      * If so this code will not work as excepted. This case is theoretical
      */
-
     const matchingTrigger = get(
       accounts.find(account => account.account._id === accountId),
       'trigger'
     )
-    if (matchingTrigger) this.fetchAccount(matchingTrigger)
+    if (matchingTrigger) {
+      this.fetchAccount(matchingTrigger)
+    } else {
+      logger.warn('No matching trigger for account', accountId)
+    }
   }
   /**
    * TODO use queryConnect to know if we're fecthing or not
    */
   async fetchAccount(trigger) {
-    const { findAccount } = this.props
+    const { client } = this.props
     this.setState({ fetching: true })
 
     try {
-      const account = await findAccount(triggersModel.getAccountId(trigger))
+      const accountId = triggersModel.getAccountId(trigger)
+      const account = await findAccount(client, accountId)
       this.setState({
         account,
         trigger
@@ -69,7 +74,12 @@ export class EditAccountModal extends Component {
   }
 
   redirectToAccount() {
-    this.props.pushHistory(`/accounts/${this.state.account._id}`)
+    const { account } = this.state
+    if (account) {
+      this.props.pushHistory(`/accounts/${account._id}`)
+    } else {
+      this.props.pushHistory(`/accounts`)
+    }
   }
 
   render() {
@@ -121,12 +131,10 @@ export class EditAccountModal extends Component {
 EditAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   accountId: PropTypes.string.isRequired,
-  accounts: PropTypes.array.isRequired,
-  findAccount: PropTypes.func.isRequired,
-  fetchTrigger: PropTypes.func.isRequired
+  accounts: PropTypes.array.isRequired
 }
 
 export default flow(
-  withMutations(accountMutations, triggersMutations),
+  withClient,
   withMountPointPushHistory
 )(EditAccountModal)

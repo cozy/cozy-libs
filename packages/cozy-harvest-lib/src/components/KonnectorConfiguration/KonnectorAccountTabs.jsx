@@ -12,7 +12,7 @@ import {
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import TriggerLauncher from '../TriggerLauncher'
+import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 
@@ -26,7 +26,7 @@ export const KonnectorAccountTabs = ({
   t
 }) => {
   return (
-    <TriggerLauncher initialTrigger={initialTrigger}>
+    <FlowProvider initialTrigger={initialTrigger}>
       {({ error, running }) => {
         const hasError = !!error
         const shouldDisplayError = !running && hasError
@@ -76,7 +76,7 @@ export const KonnectorAccountTabs = ({
           </Tabs>
         )
       }}
-    </TriggerLauncher>
+    </FlowProvider>
   )
 }
 

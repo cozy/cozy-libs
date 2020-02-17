@@ -17,10 +17,7 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import {
-  TWO_FA_MISMATCH_EVENT,
-  TWO_FA_REQUEST_EVENT
-} from '../models/KonnectorJob'
+import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/ConnectionFlow'
 
 /**
  * Displayed during connection creation when the konnector detects
@@ -30,22 +27,30 @@ export class TwoFAModal extends PureComponent {
   constructor(props) {
     super(props)
     this.state = { twoFACode: '', requestNb: 1 }
-    this.handleChange = this.handleChange.bind(this)
+    this.handleFieldChange = this.handleFieldChange.bind(this)
+    this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
     this.handleTwoFARequest = this.handleTwoFARequest.bind(this)
-    this.handleTwoFAMismatch = this.handleTwoFAMismatch.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount() {
-    const konnJob = this.props.konnectorJob
-    konnJob.on(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
-    konnJob.on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+    const flow = this.props.flow
+    flow.on(UPDATE_EVENT, this.handleFlowUpdate)
+    flow.on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
   }
 
   componentWillUnmount() {
-    const konnJob = this.props.konnectorJob
-    konnJob.removeListener(TWO_FA_MISMATCH_EVENT, this.handleTwoFAMismatch)
-    konnJob.removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+    const flow = this.props.flow
+    flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
+    flow.removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
+  }
+
+  handleFlowUpdate() {
+    const flowState = this.props.flow.getState()
+    this.setState({
+      hasErrored: flowState.twoFARetry,
+      isJobRunning: flowState.twoFARunning || flowState.konnectorRunning
+    })
   }
 
   handleTwoFARequest() {
@@ -54,42 +59,40 @@ export class TwoFAModal extends PureComponent {
     this.setState({ twoFACode: '', requestNb: this.state.requestNb + 1 })
   }
 
-  handleChange(e) {
+  handleFieldChange(e) {
     this.setState({ twoFACode: e.currentTarget.value })
   }
 
   handleSubmit(e) {
-    // prevent refreshing the page when submitting
-    // (happens not systematically)
     e.preventDefault()
-    this.props.konnectorJob.sendTwoFACode(this.state.twoFACode)
-  }
 
-  handleTwoFAMismatch() {
-    // force a re-render to get the updated error and running state from konnectorJob
-    this.forceUpdate()
+    const { flow } = this.props
+    const code = this.state.twoFACode
+
+    const konnectorPolicy = flow.getKonnectorPolicy()
+    if (konnectorPolicy.sendAdditionalInformation) {
+      const fields = flow.getAdditionalInformationNeeded()
+      const firstField = fields[0]
+      flow.sendAdditionalInformation({
+        [firstField.name]: code
+      })
+    } else {
+      flow.sendTwoFACode(code)
+    }
   }
 
   render() {
-    const {
-      dismissAction,
-      konnectorJob,
-      t,
-      breakpoints = {},
-      account
-    } = this.props
+    const { dismissAction, t, breakpoints = {}, flow } = this.props
     const { isMobile } = breakpoints
-    const { twoFACode, requestNb } = this.state
+    const { twoFACode, requestNb, hasErrored, isJobRunning } = this.state
+
+    const account = flow.getAccount()
 
     const twoFAProvider = accounts.getTwoFACodeProvider(account)
-    const hasErrored = konnectorJob.isTwoFARetry()
     const needUserInput = TWOFA_USER_INPUT[twoFAProvider]
 
-    const konn = {
-      slug: konnectorJob.getKonnectorSlug()
-    }
+    const konn = flow.konnector
 
-    const isJobRunning = konnectorJob.isTwoFARunning()
     return (
       <Modal
         dismissAction={dismissAction}
@@ -119,7 +122,7 @@ export class TwoFAModal extends PureComponent {
               <Field
                 className="u-mt-0 u-mb-0"
                 value={twoFACode}
-                onChange={this.handleChange}
+                onChange={this.handleFieldChange}
                 autoComplete="off"
                 label={
                   t(`twoFAForm.code.label_${requestNb}`, {
@@ -154,7 +157,7 @@ export class TwoFAModal extends PureComponent {
 }
 
 TwoFAModal.propTypes = {
-  konnectorJob: PropTypes.object.isRequired
+  flow: PropTypes.object.isRequired
 }
 
 export default translate()(withBreakpoints()(TwoFAModal))

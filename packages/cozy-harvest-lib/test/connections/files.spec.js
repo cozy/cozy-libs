@@ -2,7 +2,7 @@
 
 import client from 'cozy-client'
 
-import { filesMutations } from 'connections/files'
+import { createDirectoryByPath, statDirectoryByPath } from 'connections/files'
 
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({
@@ -35,12 +35,6 @@ const fixtures = {
   }
 }
 
-const {
-  addReferencesTo,
-  createDirectoryByPath,
-  statDirectoryByPath
-} = filesMutations(client)
-
 describe('Files mutations', () => {
   beforeAll(() => {
     client
@@ -64,20 +58,9 @@ describe('Files mutations', () => {
     jest.restoreAllMocks()
   })
 
-  describe('addReferencesTo', () => {
-    it('calls Cozy Client and return io.cozy.files', async () => {
-      await addReferencesTo(fixtures.konnector, [fixtures.directory])
-
-      expect(client.collection().addReferencesTo).toHaveBeenCalledWith(
-        fixtures.konnector,
-        [fixtures.directory]
-      )
-    })
-  })
-
   describe('createDirectoryByPath', () => {
     it('calls Cozy Client and return io.cozy.files document', async () => {
-      const directory = await createDirectoryByPath(fixtures.path)
+      const directory = await createDirectoryByPath(client, fixtures.path)
 
       expect(client.collection().createDirectoryByPath).toHaveBeenCalledWith(
         fixtures.path
@@ -88,14 +71,14 @@ describe('Files mutations', () => {
 
   describe('statDirectoryByPath', () => {
     it('calls Cozy Client and return io.cozy.files data', async () => {
-      expect(await statDirectoryByPath(fixtures.path)).toEqual(
+      expect(await statDirectoryByPath(client, fixtures.path)).toEqual(
         fixtures.directory
       )
     })
 
     it('returns null if Cozy Client returns a 404 error', async () => {
       client.collection().statByPath.mockRejectedValue({ status: 404 })
-      expect(await statDirectoryByPath(fixtures.path)).toBeNull()
+      expect(await statDirectoryByPath(client, fixtures.path)).toBeNull()
     })
 
     it('throw error if Cozy Client returns any other error', async () => {
@@ -103,7 +86,7 @@ describe('Files mutations', () => {
         .collection()
         .statByPath.mockRejectedValue({ status: 403, message: 'Test error' })
 
-      await expect(statDirectoryByPath(fixtures.path)).rejects.toThrow(
+      await expect(statDirectoryByPath(client, fixtures.path)).rejects.toThrow(
         'Test error'
       )
     })

@@ -2,7 +2,12 @@ module.exports = {
   presets: [
     [
       'cozy-app',
-      { presetEnv: { modules: false }, transformRuntime: { helpers: true } }
+      {
+        presetEnv: {
+          modules: process.env.BABEL_ENV == 'es5' ? 'commonjs' : false
+        },
+        transformRuntime: { helpers: true }
+      }
     ]
   ],
   plugins: ['inline-react-svg'],

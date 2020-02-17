@@ -7,7 +7,11 @@ import {
 import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
+import ConnectionFlow from '../models/ConnectionFlow'
 
+jest.mock('../connections/accounts', () => ({
+  saveAccount: jest.fn().mockImplementation(async account => account)
+}))
 jest.mock('./jobUtils', () => ({
   waitForRealtimeEvent: jest.fn()
 }))
@@ -43,6 +47,20 @@ expect.extend({
   }
 })
 
+const konnector = {
+  slug: 'boursorama83',
+  parameters: {
+    bankId: TEST_BANK_COZY_ID
+  }
+}
+const account = {
+  _id: '1337',
+  auth: {
+    login: '80546578',
+    secret: 'secretsecret'
+  }
+}
+
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 
 describe('getBIConfigForCozyURL', () => {
@@ -60,6 +78,7 @@ describe('createOrUpdateBIConnection', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    const flow = new ConnectionFlow(client, { konnector, account })
     client.stackClient.jobs.create = jest.fn().mockReturnValue({
       data: {
         attributes: {
@@ -84,29 +103,16 @@ describe('createOrUpdateBIConnection', () => {
     updateBIConnection
       .mockReset()
       .mockResolvedValue({ id: 'updated-bi-connection-id-789' })
-    return { client }
-  }
-
-  const konnector = {
-    slug: 'boursorama83',
-    parameters: {
-      bankId: TEST_BANK_COZY_ID
-    }
-  }
-  const account = {
-    _id: '1337',
-    auth: {
-      login: '80546578',
-      secret: 'secretsecret'
-    }
+    return { client, flow }
   }
 
   it('should create a BI connection if no connection id in account', async () => {
-    const { client } = setup()
+    const { client, flow } = setup()
     const connection = await createOrUpdateBIConnection({
       client,
       account,
-      konnector
+      konnector,
+      flow
     })
     expect(waitForRealtimeEvent).toHaveBeenCalledWith(
       client,
@@ -129,9 +135,10 @@ describe('createOrUpdateBIConnection', () => {
   })
 
   it('should update the BI connection if connection id in account', async () => {
-    const { client } = setup()
+    const { client, flow } = setup()
     const connection = await createOrUpdateBIConnection({
       client,
+      flow,
       account: merge(account, {
         data: {
           auth: {
@@ -165,13 +172,14 @@ describe('createOrUpdateBIConnection', () => {
   })
 
   it('should convert wrongpass correctly', async () => {
-    const { client } = setup()
+    const { client, flow } = setup()
     const err = new Error()
     err.code = 'wrongpass'
     updateBIConnection.mockReset().mockRejectedValue(err)
     await expect(
       createOrUpdateBIConnection({
         client,
+        flow,
         account: merge(account, {
           data: {
             auth: {
@@ -187,13 +195,14 @@ describe('createOrUpdateBIConnection', () => {
   })
 
   it('should convert SCARequired correctly', async () => {
-    const { client } = setup()
+    const { client, flow } = setup()
     const err = new Error()
     err.code = 'SCARequired'
     updateBIConnection.mockReset().mockRejectedValue(err)
     await expect(
       createOrUpdateBIConnection({
         client,
+        flow,
         account: merge(account, {
           data: {
             auth: {
@@ -209,7 +218,7 @@ describe('createOrUpdateBIConnection', () => {
   })
 
   it('should remove sensible data from account and create bi connection', async () => {
-    const { client } = setup()
+    const { client, flow } = setup()
 
     const account = {
       auth: {
@@ -224,7 +233,7 @@ describe('createOrUpdateBIConnection', () => {
       slug: 'bankingconnectortest'
     }
 
-    const saveAccount = jest.fn().mockImplementation((konnector, account) => ({
+    jest.spyOn(flow, 'saveAccount').mockImplementation(account => ({
       _id: 'created-account-id',
       ...account
     }))
@@ -235,17 +244,10 @@ describe('createOrUpdateBIConnection', () => {
 
     const accountToSave = await onBIAccountCreation({
       client,
+      flow,
       account,
       konnector,
-      saveAccount,
       createOrUpdateBIConnectionFn: createOrUpdateBIConnection
-    })
-
-    expect(saveAccount).toHaveBeenCalledWith(konnector, {
-      auth: {
-        login: '1234',
-        bankId: '100000'
-      }
     })
 
     expect(createOrUpdateBIConnection).toHaveBeenCalledWith(
@@ -261,6 +263,13 @@ describe('createOrUpdateBIConnection', () => {
         }
       })
     )
+
+    expect(flow.saveAccount).toHaveBeenCalledWith({
+      auth: {
+        login: '1234',
+        bankId: '100000'
+      }
+    })
 
     expect(accountToSave).toEqual({
       _id: 'created-account-id',

@@ -7,16 +7,16 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import { getErrorLocale } from '../../helpers/konnectors'
-import TriggerLauncher from '../TriggerLauncher'
+import FlowProvider from '../FlowProvider'
 
 /**
  *
  * Display trigger's status.
- * Get error / running from TriggerLauncher (aka realtime)
+ * Get error / running from FlowProvider (aka realtime)
  */
 const Status = ({ t, trigger, konnector }) => {
   return (
-    <TriggerLauncher initialTrigger={trigger}>
+    <FlowProvider initialTrigger={trigger}>
       {({ error, running }) => {
         const errorTitle = getErrorLocale(error, konnector, t, 'title')
         if (running) {
@@ -45,7 +45,7 @@ const Status = ({ t, trigger, konnector }) => {
           />
         )
       }}
-    </TriggerLauncher>
+    </FlowProvider>
   )
 }
 

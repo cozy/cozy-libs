@@ -8,19 +8,27 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Uppercase, { Text } from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
-import TriggerLauncher, {
-  TriggerLauncher as DumbTriggerLauncher
-} from '../TriggerLauncher'
+import FlowProvider, { FlowProvider as DumbFlowProvider } from '../FlowProvider'
 
+/**
+ * Shows the state of the trigger and provides the ability to
+ * relaunch a trigger
+ *
+ * - Will follow the connection flow and re-render in case of change
+ */
 export class LaunchTriggerCard extends Component {
   render() {
     const { className, f, t, disabled } = this.props
     return (
       <Card className={className}>
-        <TriggerLauncher
-          {...pick(this.props, Object.keys(DumbTriggerLauncher.propTypes))}
+        <FlowProvider
+          {...pick(this.props, Object.keys(DumbFlowProvider.propTypes))}
         >
-          {({ launch, running, trigger }) => {
+          {({ flow }) => {
+            const flowState = flow.getState()
+            const launch = flow.launch
+            const trigger = flow.trigger
+            const running = flowState.running
             const lastSuccessDate = triggers.getLastSuccessDate(trigger)
             return (
               <div className="u-flex u-flex-column-s">
@@ -75,7 +83,7 @@ export class LaunchTriggerCard extends Component {
               </div>
             )
           }}
-        </TriggerLauncher>
+        </FlowProvider>
       </Card>
     )
   }
@@ -83,9 +91,7 @@ export class LaunchTriggerCard extends Component {
 
 LaunchTriggerCard.propTypes = {
   ...Card.propTypes,
-  ...TriggerLauncher.propTypes,
-  f: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
+  ...FlowProvider.propTypes,
   /**
    * Indicates if a konnector job for the current trigger is already running
    * TODO: rename all running props to hasJobRunning to make its role clearer

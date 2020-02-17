@@ -1,11 +1,11 @@
-import { watchKonnectorJob } from './KonnectorJob'
-import KonnectorJobWatcher from './konnector/KonnectorJobWatcher'
+import KonnectorJobWatcher, { watchKonnectorJob } from './KonnectorJobWatcher'
 
 describe('watchKonnectorJob', () => {
   it('should return a job watcher', async () => {
     // Lets mock a job to pass as watchKonnectorJob parameter. This job should
     // be returned after timeout
     const job = {
+      _id: 'job-id',
       // Test attribute, not expected in job schema
       state: 'queued'
     }

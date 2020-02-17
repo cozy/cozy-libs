@@ -1,6 +1,12 @@
 import { AccountModal } from 'components/AccountModal'
 import React from 'react'
 import { shallow } from 'enzyme'
+import { findAccount } from '../../src/connections/accounts'
+
+jest.mock('../../src/connections/accounts', () => ({
+  findAccount: jest.fn()
+}))
+
 const accountsMock = [
   {
     account: {
@@ -25,7 +31,7 @@ const accountsMock = [
 const accountIdMock = '123'
 
 describe('AccountModal', () => {
-  const setup = ({ findAccount }) => {
+  const setup = () => {
     const mockHistoryPush = jest.fn()
     const component = shallow(
       <AccountModal
@@ -33,32 +39,36 @@ describe('AccountModal', () => {
         t={x => x}
         accountId={accountIdMock}
         accounts={accountsMock}
-        findAccount={findAccount}
         pushHistory={mockHistoryPush}
       />
     )
     return { component, mockHistoryPush }
   }
+
   it('should display the fetching state by default', () => {
-    const { component } = setup({ findAccount: jest.fn() })
+    const { component } = setup()
     expect(component.getElement()).toMatchSnapshot()
   })
 
   describe('with an account', () => {
-    const findAccount = jest.fn().mockResolvedValue({
+    findAccount.mockResolvedValue({
       _id: '123',
       name: 'account 1'
     })
+
     const { component, mockHistoryPush } = setup({ findAccount })
+
     it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
       await component.instance().componentDidMount()
+
+      findAccount.mockResolvedValue({
+        _id: 'account_2',
+        name: 'account_2'
+      })
+
       expect(component.getElement()).toMatchSnapshot()
       component.setProps({
-        accountId: 'account_2',
-        findAccount: jest.fn().mockResolvedValue({
-          _id: 'account_2',
-          name: 'account_2'
-        })
+        accountId: 'account_2'
       })
 
       await component

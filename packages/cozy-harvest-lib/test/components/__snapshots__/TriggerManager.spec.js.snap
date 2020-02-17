@@ -1,144 +1,306 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`TriggerManager account creation should render correctly 1`] = `
-<KonnectorVaultUnlocker
-  konnector={
-    Object {
-      "fields": Object {
-        "passphrase": Object {
-          "type": "password",
-        },
-        "username": Object {
-          "type": "text",
-        },
-      },
-      "slug": "konnectest",
-    }
-  }
-  onDismiss={[MockFunction]}
-  onUnlock={[Function]}
->
-  <div
-    id="coz-harvest-modal-place"
-  />
-</KonnectorVaultUnlocker>
-`;
-
-exports[`TriggerManager account update should render correctly 1`] = `
-<KonnectorVaultUnlocker
-  konnector={
-    Object {
-      "fields": Object {
-        "passphrase": Object {
-          "type": "password",
-        },
-        "username": Object {
-          "type": "text",
-        },
-      },
-      "slug": "konnectest",
-    }
-  }
-  onDismiss={[MockFunction]}
-  onUnlock={[Function]}
->
-  <div
-    id="coz-harvest-modal-place"
-  />
-  <React.Fragment>
-    <withI18n(withLocales(withKonnectorLocales(AccountForm))
-      account={
-        Object {
-          "_id": "existing-account-id",
-          "account_type": "konnectest",
-          "auth": Object {
-            "passphrase": "bar",
-            "username": "foo",
-          },
-          "identifier": "username",
-        }
-      }
-      konnector={
-        Object {
-          "fields": Object {
-            "passphrase": Object {
-              "type": "password",
-            },
-            "username": Object {
-              "type": "text",
-            },
-          },
-          "slug": "konnectest",
-        }
-      }
-      onBack={[Function]}
-      onSubmit={[Function]}
-      readOnlyIdentifier={false}
-      submitting={false}
-    />
-  </React.Fragment>
-</KonnectorVaultUnlocker>
-`;
-
-exports[`TriggerManager handleError should render error 1`] = `
-<KonnectorVaultUnlocker
-  konnector={
-    Object {
-      "fields": Object {
-        "passphrase": Object {
-          "type": "password",
-        },
-        "username": Object {
-          "type": "text",
-        },
-      },
-      "slug": "konnectest",
-    }
-  }
-  onDismiss={[MockFunction]}
-  onUnlock={[Function]}
->
-  <div
-    id="coz-harvest-modal-place"
-  />
-  <React.Fragment>
-    <withI18n(withLocales(withKonnectorLocales(AccountForm))
-      account={
-        Object {
-          "_id": "existing-account-id",
-          "account_type": "konnectest",
-          "auth": Object {
-            "passphrase": "bar",
-            "username": "foo",
-          },
-          "identifier": "username",
-        }
-      }
-      error={[Error: Test error]}
-      konnector={
-        Object {
-          "fields": Object {
-            "passphrase": Object {
-              "type": "password",
-            },
-            "username": Object {
-              "type": "text",
-            },
-          },
-          "slug": "konnectest",
-        }
-      }
-      onBack={[Function]}
-      onSubmit={[Function]}
-      readOnlyIdentifier={false}
-      submitting={false}
-    />
-  </React.Fragment>
-</KonnectorVaultUnlocker>
-`;
-
 exports[`TriggerManager when given an oauth konnector should redirect to OAuthForm 1`] = `
-<withI18n(OAuthForm)
+<withI18n(withConnectionFlow(OAuthForm))
+  flow={
+    ConnectionFlow {
+      "client": CozyClient {
+        "_events": Object {
+          "login": Array [
+            [Function],
+          ],
+          "logout": Array [
+            [Function],
+          ],
+          "tokenRefreshed": Array [
+            [Function],
+          ],
+        },
+        "appMetadata": Object {},
+        "chain": CozyLink {
+          "request": [Function],
+        },
+        "client": CozyStackClient {
+          "jobs": JobCollection {
+            "stackClient": CozyStackClient {
+              "jobs": [Circular],
+              "konnectors": KonnectorCollection {
+                "doctype": "io.cozy.konnectors",
+                "endpoint": "/konnectors/",
+                "indexes": Object {},
+                "stackClient": [Circular],
+              },
+              "options": Object {
+                "onRevocationChange": [Function],
+                "onTokenRefresh": [Function],
+              },
+              "token": null,
+              "uri": "",
+            },
+          },
+          "konnectors": KonnectorCollection {
+            "doctype": "io.cozy.konnectors",
+            "endpoint": "/konnectors/",
+            "indexes": Object {},
+            "stackClient": CozyStackClient {
+              "jobs": JobCollection {
+                "stackClient": [Circular],
+              },
+              "konnectors": [Circular],
+              "options": Object {
+                "onRevocationChange": [Function],
+                "onTokenRefresh": [Function],
+              },
+              "token": null,
+              "uri": "",
+            },
+          },
+          "options": Object {
+            "onRevocationChange": [Function],
+            "onTokenRefresh": [Function],
+          },
+          "token": null,
+          "uri": "",
+        },
+        "handleRevocationChange": [Function],
+        "handleTokenRefresh": [Function],
+        "idCounter": 1,
+        "instanceOptions": Object {},
+        "isLogged": false,
+        "links": Array [
+          StackLink {
+            "stackClient": CozyStackClient {
+              "jobs": JobCollection {
+                "stackClient": [Circular],
+              },
+              "konnectors": KonnectorCollection {
+                "doctype": "io.cozy.konnectors",
+                "endpoint": "/konnectors/",
+                "indexes": Object {},
+                "stackClient": [Circular],
+              },
+              "options": Object {
+                "onRevocationChange": [Function],
+                "onTokenRefresh": [Function],
+              },
+              "token": null,
+              "uri": "",
+            },
+          },
+        ],
+        "options": Object {},
+        "plugins": Object {},
+        "schema": Schema {
+          "byDoctype": Object {},
+          "client": CozyStackClient {
+            "jobs": JobCollection {
+              "stackClient": [Circular],
+            },
+            "konnectors": KonnectorCollection {
+              "doctype": "io.cozy.konnectors",
+              "endpoint": "/konnectors/",
+              "indexes": Object {},
+              "stackClient": [Circular],
+            },
+            "options": Object {
+              "onRevocationChange": [Function],
+              "onTokenRefresh": [Function],
+            },
+            "token": null,
+            "uri": "",
+          },
+        },
+        "stackClient": CozyStackClient {
+          "jobs": JobCollection {
+            "stackClient": [Circular],
+          },
+          "konnectors": KonnectorCollection {
+            "doctype": "io.cozy.konnectors",
+            "endpoint": "/konnectors/",
+            "indexes": Object {},
+            "stackClient": [Circular],
+          },
+          "options": Object {
+            "onRevocationChange": [Function],
+            "onTokenRefresh": [Function],
+          },
+          "token": null,
+          "uri": "",
+        },
+      },
+      "data": Object {},
+      "getKonnectorSlug": [Function],
+      "getTwoFACodeProvider": [Function],
+      "handleAccountUpdated": [Function],
+      "handleJobUpdated": [Function],
+      "handleTwoFA": [Function],
+      "launch": [Function],
+      "realtime": CozyRealtime {
+        "_beforeUnload": [Function],
+        "_cozyClient": CozyClient {
+          "_events": Object {
+            "login": Array [
+              [Function],
+            ],
+            "logout": Array [
+              [Function],
+            ],
+            "tokenRefreshed": Array [
+              [Function],
+            ],
+          },
+          "appMetadata": Object {},
+          "chain": CozyLink {
+            "request": [Function],
+          },
+          "client": CozyStackClient {
+            "jobs": JobCollection {
+              "stackClient": CozyStackClient {
+                "jobs": [Circular],
+                "konnectors": KonnectorCollection {
+                  "doctype": "io.cozy.konnectors",
+                  "endpoint": "/konnectors/",
+                  "indexes": Object {},
+                  "stackClient": [Circular],
+                },
+                "options": Object {
+                  "onRevocationChange": [Function],
+                  "onTokenRefresh": [Function],
+                },
+                "token": null,
+                "uri": "",
+              },
+            },
+            "konnectors": KonnectorCollection {
+              "doctype": "io.cozy.konnectors",
+              "endpoint": "/konnectors/",
+              "indexes": Object {},
+              "stackClient": CozyStackClient {
+                "jobs": JobCollection {
+                  "stackClient": [Circular],
+                },
+                "konnectors": [Circular],
+                "options": Object {
+                  "onRevocationChange": [Function],
+                  "onTokenRefresh": [Function],
+                },
+                "token": null,
+                "uri": "",
+              },
+            },
+            "options": Object {
+              "onRevocationChange": [Function],
+              "onTokenRefresh": [Function],
+            },
+            "token": null,
+            "uri": "",
+          },
+          "handleRevocationChange": [Function],
+          "handleTokenRefresh": [Function],
+          "idCounter": 1,
+          "instanceOptions": Object {},
+          "isLogged": false,
+          "links": Array [
+            StackLink {
+              "stackClient": CozyStackClient {
+                "jobs": JobCollection {
+                  "stackClient": [Circular],
+                },
+                "konnectors": KonnectorCollection {
+                  "doctype": "io.cozy.konnectors",
+                  "endpoint": "/konnectors/",
+                  "indexes": Object {},
+                  "stackClient": [Circular],
+                },
+                "options": Object {
+                  "onRevocationChange": [Function],
+                  "onTokenRefresh": [Function],
+                },
+                "token": null,
+                "uri": "",
+              },
+            },
+          ],
+          "options": Object {},
+          "plugins": Object {},
+          "schema": Schema {
+            "byDoctype": Object {},
+            "client": CozyStackClient {
+              "jobs": JobCollection {
+                "stackClient": [Circular],
+              },
+              "konnectors": KonnectorCollection {
+                "doctype": "io.cozy.konnectors",
+                "endpoint": "/konnectors/",
+                "indexes": Object {},
+                "stackClient": [Circular],
+              },
+              "options": Object {
+                "onRevocationChange": [Function],
+                "onTokenRefresh": [Function],
+              },
+              "token": null,
+              "uri": "",
+            },
+          },
+          "stackClient": CozyStackClient {
+            "jobs": JobCollection {
+              "stackClient": [Circular],
+            },
+            "konnectors": KonnectorCollection {
+              "doctype": "io.cozy.konnectors",
+              "endpoint": "/konnectors/",
+              "indexes": Object {},
+              "stackClient": [Circular],
+            },
+            "options": Object {
+              "onRevocationChange": [Function],
+              "onTokenRefresh": [Function],
+            },
+            "token": null,
+            "uri": "",
+          },
+        },
+        "_events": Object {},
+        "_receiveError": [Function],
+        "_receiveMessage": [Function],
+        "_resetSocket": [Function],
+        "_resubscribe": [Function],
+        "_retryDelay": 1000,
+        "_retryLimit": 60,
+        "_socket": Socket {
+          "_doctype": "io.cozy.websocket",
+          "_events": Object {
+            "close": Array [
+              [Function],
+            ],
+            "error": Array [
+              [Function],
+            ],
+            "message": Array [
+              [Function],
+            ],
+          },
+          "_getToken": [Function],
+          "_getUrl": [Function],
+          "_token": null,
+          "_url": null,
+          "_webSocket": null,
+          "removeAllListeners": [Function],
+        },
+        "_updateAuthentication": [Function],
+        "unsubscribeAll": [Function],
+      },
+      "sendTwoFACode": [Function],
+      "state": Object {
+        "status": "IDLE",
+      },
+      "trigger": undefined,
+      "twoFAWaiters": Array [],
+      "unsubscribeAllRealtime": null,
+      "unwatch": [Function],
+    }
+  }
   konnector={
     Object {
       "oauth": Object {
@@ -147,6 +309,5 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
     }
   }
   onSuccess={[Function]}
-  submitting={false}
 />
 `;

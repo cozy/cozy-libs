@@ -2,7 +2,7 @@
 
 import client from 'cozy-client'
 
-import { permissionsMutations } from 'connections/permissions'
+import { addPermission } from 'connections/permissions'
 
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({
@@ -39,8 +39,6 @@ const fixtures = {
   }
 }
 
-const { addPermission } = permissionsMutations(client)
-
 describe('Permissions mutations', () => {
   beforeAll(() => {
     client
@@ -58,7 +56,7 @@ describe('Permissions mutations', () => {
 
   describe('addPermission', () => {
     it('calls Cozy Client and return io.cozy.permissions document', async () => {
-      await addPermission(fixtures.konnector, fixtures.permission)
+      await addPermission(client, fixtures.konnector, fixtures.permission)
       expect(client.collection().add).toHaveBeenCalledWith(
         fixtures.konnector,
         fixtures.permission

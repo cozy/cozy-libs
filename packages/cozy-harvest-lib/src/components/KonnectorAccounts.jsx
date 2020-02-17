@@ -8,17 +8,19 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import get from 'lodash/get'
+import compose from 'lodash/flowRight'
 import CozyRealtime from 'cozy-realtime'
 
-import accountMutations from '../connections/accounts'
+import { fetchAccountsFromTriggers } from '../connections/accounts'
 import triggersMutations from '../connections/triggers'
-import * as triggersModel from '../helpers/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
+import logger from '../../src/logger'
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
     super(props)
     this.realtime = new CozyRealtime({ client: this.props.client })
+    this.handleTriggerUpdate = this.handleTriggerUpdate.bind(this)
     this.state = {
       fetchingAccounts: true,
       error: null,
@@ -34,10 +36,14 @@ export class KonnectorAccounts extends React.Component {
   async componentDidMount() {
     await this.fetchAccounts()
 
-    await this.realtime.subscribe(
+    this.realtime.subscribe('updated', 'io.cozy.jobs', this.handleTriggerUpdate)
+  }
+
+  componentWillUnmount() {
+    this.realtime.unsubscribe(
       'updated',
       'io.cozy.jobs',
-      this.handleTriggerUpdate.bind(this)
+      this.handleTriggerUpdate
     )
   }
 
@@ -79,19 +85,13 @@ export class KonnectorAccounts extends React.Component {
 
   async fetchAccounts() {
     const triggers = get(this.props, 'konnector.triggers.data', [])
-    const { findAccount } = this.props
+    const { client } = this.props
     this.setState({ fetchingAccounts: true })
     try {
-      const accounts = (await Promise.all(
-        triggers.map(async trigger => {
-          return {
-            account: await findAccount(triggersModel.getAccountId(trigger)),
-            trigger
-          }
-        })
-      )).filter(({ account }) => !!account)
-      this.setState({ accounts, error: null })
+      const triggerAccounts = await fetchAccountsFromTriggers(client, triggers)
+      this.setState({ accounts: triggerAccounts, error: null })
     } catch (error) {
+      logger.error('KonnectorAccounts could not fetch accounts', error)
       this.setState({ error })
     } finally {
       this.setState({ fetchingAccounts: false })
@@ -140,10 +140,13 @@ KonnectorAccounts.propTypes = {
   konnector: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   client: PropTypes.object.isRequired,
-  findAccount: PropTypes.func.isRequired,
   fetchTrigger: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
-export default withMutations(accountMutations, triggersMutations)(
-  withRouter(translate()(withClient(KonnectorAccounts)))
-)
+
+export default compose(
+  withMutations(triggersMutations),
+  withRouter,
+  translate(),
+  withClient
+)(KonnectorAccounts)

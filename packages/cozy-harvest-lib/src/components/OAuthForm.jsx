@@ -3,27 +3,24 @@ import PropTypes from 'prop-types'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-
 import OAuthWindow from './OAuthWindow'
-
-const IDLE = 'idle'
-const WAITING = 'waiting'
+import compose from 'lodash/flowRight'
+import withConnectionFlow from '../models/withConnectionFlow'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
  * starts the OAuth process
  */
 export class OAuthForm extends PureComponent {
-  state = {
-    initialValues: null,
-    status: IDLE
-  }
-
   constructor(props, context) {
     super(props, context)
     this.handleAccountId = this.handleAccountId.bind(this)
-    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleConnect = this.handleConnect.bind(this)
     this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
+    this.state = {
+      initialValues: null,
+      showingOAuthModal: false
+    }
   }
 
   componentDidMount() {
@@ -31,33 +28,33 @@ export class OAuthForm extends PureComponent {
     this.setState({ initialValues: account ? account.oauth : null })
   }
 
-  endOAuth() {
-    this.setState({ status: IDLE })
-  }
-
-  startOAuth() {
-    this.setState({ status: WAITING })
-  }
-
   handleAccountId(accountId) {
     const { onSuccess } = this.props
-    this.endOAuth()
+    this.hideOAuthWindow()
     if (typeof onSuccess === 'function') onSuccess(accountId)
   }
 
-  handleSubmit() {
-    this.startOAuth()
+  handleConnect() {
+    this.showOAuthWindow()
   }
 
   handleOAuthCancel() {
-    this.endOAuth()
+    this.hideOAuthWindow()
+  }
+
+  hideOAuthWindow() {
+    this.setState({ showOAuthWindow: false })
+  }
+
+  showOAuthWindow() {
+    this.setState({ showOAuthWindow: true })
   }
 
   render() {
-    const { konnector, submitting, t } = this.props
-    const { initialValues, status } = this.state
-    const isWaiting = status === WAITING
-    const isBusy = isWaiting || submitting
+    const { konnector, t, flowState } = this.props
+    const { initialValues, showOAuthWindow } = this.state
+    const isBusy = showOAuthWindow === true || flowState.running
+
     return initialValues ? null : (
       <>
         <Button
@@ -66,9 +63,9 @@ export class OAuthForm extends PureComponent {
           disabled={isBusy}
           extension="full"
           label={t('oauth.connect.label')}
-          onClick={this.handleSubmit}
+          onClick={this.handleConnect}
         />
-        {isWaiting && (
+        {showOAuthWindow && (
           <OAuthWindow
             konnector={konnector}
             onSuccess={this.handleAccountId}
@@ -87,10 +84,11 @@ OAuthForm.propTypes = {
   konnector: PropTypes.object.isRequired,
   /** Success callback, takes account as parameter */
   onSuccess: PropTypes.func,
-  /** Indicates if the form should be rendered as submitting */
-  submitting: PropTypes.bool,
   /** Translation function */
   t: PropTypes.func.isRequired
 }
 
-export default translate()(OAuthForm)
+export default compose(
+  translate(),
+  withConnectionFlow()
+)(OAuthForm)

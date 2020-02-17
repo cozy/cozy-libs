@@ -4,11 +4,9 @@ import omit from 'lodash/omit'
 
 import { Button } from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { withMutations } from 'cozy-client'
-
-import accountsMutations from '../connections/accounts'
+import { withClient } from 'cozy-client'
 import { i18nContextTypes } from './hoc/withLocales'
-import { getMutationsProptypes } from '../helpers/proptypes'
+import { deleteAccount } from '../connections/accounts'
 
 export class DeleteAccountButton extends Component {
   constructor(props) {
@@ -28,10 +26,11 @@ export class DeleteAccountButton extends Component {
   }
 
   async handleDelete() {
+    const { client } = this.props
     this.setState({ deleting: true })
-    const { account, deleteAccount, onError, onSuccess } = this.props
+    const { account, onError, onSuccess } = this.props
     try {
-      await deleteAccount(account)
+      await deleteAccount(client, account)
       if (typeof onSuccess === 'function') onSuccess(account)
     } catch (e) {
       if (typeof onError === 'function') {
@@ -55,7 +54,7 @@ export class DeleteAccountButton extends Component {
         busy={deleting}
         onClick={this.handleDelete}
         label={t('accountForm.disconnect.button')}
-        {...omit(this.props, Object.keys(excludedButtonProptypes))}
+        {...omit(this.props, Object.keys(excludedButtonProptypes), 'client')}
       />
     )
   }
@@ -66,10 +65,6 @@ DeleteAccountButton.propTypes = {
    * io.cozy.accounts document
    */
   account: PropTypes.object.isRequired,
-  /**
-   * Provided by accountsMutations
-   */
-  deleteAccount: PropTypes.func.isRequired,
   /**
    * callback to handle account deleting error
    */
@@ -86,10 +81,7 @@ DeleteAccountButton.propTypes = {
 
 const excludedButtonProptypes = {
   ...DeleteAccountButton.propTypes,
-  ...getMutationsProptypes(accountsMutations),
   ...i18nContextTypes
 }
 
-export default translate()(
-  withMutations(accountsMutations)(DeleteAccountButton)
-)
+export default translate()(withClient(DeleteAccountButton))

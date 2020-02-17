@@ -5,6 +5,8 @@ module.exports = {
     '!**/node_modules/**',
     '!**/vendor/**'
   ],
+  roots: ['src', 'test'],
+  resolver: 'jest-resolve-cached',
   testPathIgnorePatterns: ['node_modules', 'dist'],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
@@ -15,5 +17,5 @@ module.exports = {
     '^cozy-client$': 'cozy-client/dist/index.js'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-keys-lib))'],
-  setupFilesAfterEnv: ['<rootDir>/test/setup.js']
+  setupFilesAfterEnv: ['<rootDir>/test/jest.setup.js']
 }

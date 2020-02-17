@@ -1,4 +1,9 @@
+import * as triggersModel from '../helpers/triggers'
+
 import merge from 'lodash/merge'
+import keyBy from 'lodash/keyBy'
+import assert from '../assert'
+import logger from '../logger'
 
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
@@ -9,7 +14,7 @@ const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
  * @param  {Object}  konnector  io.cozy.konnectors document
  * @param  {Object}  attributes Account attributes
  */
-const createAccount = async (client, konnector, attributes) => {
+export const createAccount = async (client, konnector, attributes) => {
   const { data } = konnector.aggregator
     ? await createChildAccount(client, konnector, attributes)
     : await client.create(ACCOUNTS_DOCTYPE, attributes)
@@ -85,6 +90,7 @@ const createChildAccount = async (client, konnector, attributes) => {
       }
     })
   } catch (error) {
+    logger.warn(error)
     throw new Error(
       `Cannot set permission for account ${parentAccountId} (${error.message})`
     )
@@ -133,7 +139,11 @@ export const updateAccount = async (client, account) => {
  * @param  {Object}  konnector  io.cozy.konnectors document
  * @param  {Object}  authData   Account auth attribute
  */
-const saveAccount = (client, konnector, account = {}) => {
+export const saveAccount = (client, konnector, account) => {
+  assert(
+    client && konnector && account,
+    'Must pass both client, konnector and account to saveAccount'
+  )
   return account._id
     ? updateAccount(client, account)
     : createAccount(client, konnector, account)
@@ -158,16 +168,14 @@ export const deleteAccount = async (client, account) => {
 }
 
 /**
- * Get accounts mutations
- * @param  {Object} client CozyClient
- * @return {Object}        Object containing accounts mutations
+ * Returns { trigger, account } list
  */
-export const accountsMutations = client => ({
-  createAccount: createAccount.bind(null, client),
-  findAccount: findAccount.bind(null, client),
-  updateAccount: updateAccount.bind(null, client),
-  deleteAccount: deleteAccount.bind(null, client),
-  saveAccount: saveAccount.bind(null, client)
-})
-
-export default accountsMutations
+export const fetchAccountsFromTriggers = async (client, triggers) => {
+  const accountCol = client.collection('io.cozy.accounts')
+  const accountIdToTrigger = keyBy(triggers, triggersModel.getAccountId)
+  const accountIds = Object.keys(accountIdToTrigger)
+  const { data: accounts } = await accountCol.getAll(accountIds)
+  return accounts
+    .filter(Boolean)
+    .map(account => ({ account, trigger: accountIdToTrigger[account._id] }))
+}

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import flow from 'lodash/flow'
+import compose from 'lodash/flowRight'
 
-import { withMutations, withClient } from 'cozy-client'
-import { CozyFolder as CozyFolderClass, Account } from 'cozy-doctypes'
+import { withClient } from 'cozy-client'
+import { Account } from 'cozy-doctypes'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
@@ -15,112 +15,19 @@ import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
-import accountsMutations from '../connections/accounts'
-import { triggersMutations } from '../connections/triggers'
-import filesMutations from '../connections/files'
-import permissionsMutations from '../connections/permissions'
-import accounts from '../helpers/accounts'
-import cron from '../helpers/cron'
-import konnectors from '../helpers/konnectors'
-import triggers from '../helpers/triggers'
-import TriggerLauncher from './TriggerLauncher'
+import { findAccount } from '../connections/accounts'
+import FlowProvider from './FlowProvider'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
 import HarvestVaultProvider from './HarvestVaultProvider'
-import clone from 'lodash/clone'
-import flag from 'cozy-flags'
 import logger from '../logger'
-
-import { createOrUpdateCipher } from '../models/cipherUtils'
-import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
-
-const defaultKonnectorPolicy = {
-  accountContainsAuth: true,
-  saveInVault: true,
-  onAccountCreation: null,
-  match: () => true,
-  name: 'default'
-}
-
-const policies = [
-  flag('bi-konnector-policy') ? biKonnectorPolicy : null,
-  defaultKonnectorPolicy
-].filter(Boolean)
-
-logger.info('Available konnector policies', policies)
+import { findKonnectorPolicy } from '../konnector-policies'
+import withConnectionFlow from '../models/withConnectionFlow'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
 
 const MODAL_PLACE_ID = 'coz-harvest-modal-place'
-
-const findKonnectorPolicy = konnector => {
-  const policy = policies.find(policy => policy.match(konnector))
-  logger.info(`Using ${policy.name} konnector policy for ${konnector.slug}`)
-  return policy
-}
-
-/**
- * Creates or updates an io.cozy.accounts
- * Used as a form submit handler
- *
- * @param  {io.cozy.account} options.account - Existing io.cozy.account or object
- * @param  {Cipher} options.cipher - Vault cipher if vault has been unlocked
- * @param  {CozyClient} options.client - A cozy client
- * @param  {io.cozy.konnector} options.konnector - Konnector to which the account is linked
- * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts
- * and if auth is saved into the vault
- * @param  {function} options.saveAccount
- * @param  {object} options.userData
- * @param  {function} options.ensureTrigger
- */
-const createOrUpdateAccount = async ({
-  account,
-  cipher,
-  client,
-  konnector,
-  konnectorPolicy,
-  saveAccount,
-  userCredentials
-}) => {
-  const isUpdate = !!account
-  const { onAccountCreation, saveInVault } = konnectorPolicy
-
-  let accountToSave = clone(account)
-
-  accountToSave = accounts.resetState(accountToSave)
-
-  accountToSave = accounts.setSessionResetIfNecessary(
-    accountToSave,
-    userCredentials
-  )
-
-  accountToSave = isUpdate
-    ? accounts.mergeAuth(accountToSave, userCredentials)
-    : accounts.build(konnector, userCredentials)
-
-  if (onAccountCreation) {
-    accountToSave = await onAccountCreation({
-      client,
-      account: accountToSave,
-      konnector,
-      saveAccount
-    })
-  }
-
-  if (cipher && saveInVault) {
-    accountToSave = accounts.setVaultCipherRelationship(
-      accountToSave,
-      cipher.id
-    )
-  } else {
-    logger.warn(
-      'No cipher passed when creating/updating account, account will not be linked to cipher'
-    )
-  }
-
-  return await saveAccount(konnector, accountToSave)
-}
 
 /**
  * Wraps conditionally its children inside VaultUnlocker, only if
@@ -160,7 +67,7 @@ const getInitialStep = ({ account, konnector }) => {
 
 /**
  * Displays the login form and on submission will create the account, triggers and folders.
- * After that it calls TriggerLauncher to run the konnector.
+ * After that it calls FlowProvider to run the konnector.
  *
  * @type {Component}
  */
@@ -169,7 +76,6 @@ export class DumbTriggerManager extends Component {
     super(props)
     const { account } = props
 
-    this.handleNewAccount = this.handleNewAccount.bind(this)
     this.handleOAuthAccountId = this.handleOAuthAccountId.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
     this.handleError = this.handleError.bind(this)
@@ -180,76 +86,11 @@ export class DumbTriggerManager extends Component {
     this.state = {
       account,
       error: null,
-      status: IDLE,
       step: getInitialStep(props),
       selectedCipher: undefined,
       showBackButton: false,
       ciphers: []
     }
-  }
-
-  componentDidMount() {
-    this.CozyFolder = CozyFolderClass.copyWithClient(this.props.client)
-  }
-
-  /**
-   * Ensure that a trigger will exist, with valid destination folder with
-   * permissions and references
-   * TODO move this to Cozy-Doctypes https://github.com/cozy/cozy-libs/issues/743
-   *
-   * @param  {object}  account
-   * @return {Object} Trigger document
-   */
-  async ensureTrigger(account) {
-    const {
-      addPermission,
-      addReferencesTo,
-      createDirectoryByPath,
-      createTrigger,
-      statDirectoryByPath,
-      konnector,
-      t
-    } = this.props
-
-    const { trigger } = this.props
-    if (trigger) {
-      return trigger
-    }
-
-    let folder
-
-    if (konnectors.needsFolder(konnector)) {
-      const [adminFolder, photosFolder] = await Promise.all([
-        this.CozyFolder.ensureMagicFolder(
-          this.CozyFolder.magicFolders.ADMINISTRATIVE,
-          `/${t('folder.administrative')}`
-        ),
-        this.CozyFolder.ensureMagicFolder(
-          this.CozyFolder.magicFolders.PHOTOS,
-          `/${t('folder.photos')}`
-        )
-      ])
-
-      const path = konnectors.buildFolderPath(konnector, account, {
-        administrative: adminFolder.path,
-        photos: photosFolder.path
-      })
-
-      folder =
-        (await statDirectoryByPath(path)) || (await createDirectoryByPath(path))
-
-      await addPermission(konnector, konnectors.buildFolderPermission(folder))
-      await addReferencesTo(konnector, [folder])
-    }
-
-    return await createTrigger(
-      triggers.buildAttributes({
-        account,
-        cron: cron.fromKonnector(konnector),
-        folder,
-        konnector
-      })
-    )
   }
 
   /**
@@ -258,16 +99,14 @@ export class DumbTriggerManager extends Component {
    * @param  {string}  accountId
    */
   async handleOAuthAccountId(accountId) {
-    const { findAccount } = this.props
-    try {
-      this.setState({ error: null, status: RUNNING })
-      const oAuthAccount = await findAccount(accountId)
-      return await this.handleNewAccount(oAuthAccount)
-    } catch (error) {
-      this.handleError(error)
-    } finally {
-      this.setState({ status: IDLE })
-    }
+    const { client, flow, konnector, trigger, t } = this.props
+    const oAuthAccount = await findAccount(client, accountId)
+    flow.ensureTriggerAndLaunch(client, {
+      account: oAuthAccount,
+      konnector: konnector,
+      trigger: trigger,
+      t: t
+    })
   }
 
   /**
@@ -280,15 +119,8 @@ export class DumbTriggerManager extends Component {
     return selectedCipher && selectedCipher.id
   }
 
-  /**
-   * - Ensures a cipher is created for the authentication data
-   *   Find cipher via identifier / password
-   * - Creates io.cozy.accounts
-   * - Links cipher to account
-   * - Saves account
-   */
   async handleSubmit(data = {}) {
-    const { client, konnector, saveAccount, vaultClient } = this.props
+    const { client, flow, konnector, trigger, vaultClient, t } = this.props
     const { account } = this.state
 
     this.setState({
@@ -297,34 +129,17 @@ export class DumbTriggerManager extends Component {
     })
 
     try {
-      let cipher
-      const konnectorPolicy = findKonnectorPolicy(konnector)
-      logger.log('konnector policy', konnectorPolicy)
-      if (konnectorPolicy.saveInVault) {
-        const cipherId = this.getSelectedCipherId()
-        cipher = await createOrUpdateCipher(vaultClient, cipherId, {
-          account,
-          konnector,
-          userCredentials: data
-        })
-      } else {
-        logger.info(
-          'Bypassing cipher creation because of konnector account policy'
-        )
-      }
-
-      const savedAccount = await createOrUpdateAccount({
+      const cipherId = this.getSelectedCipherId()
+      await flow.handleFormSubmit({
         client,
-        account,
-        cipher,
+        account: account || {},
+        cipherId,
         konnector,
-        konnectorPolicy,
-        saveAccount,
-        ensureTrigger: this.ensureTrigger.bind(this),
-        userCredentials: data
+        trigger,
+        userCredentials: data,
+        vaultClient,
+        t
       })
-
-      return await this.handleNewAccount(accounts.mergeAuth(savedAccount, data))
     } catch (error) {
       return this.handleError(error)
     } finally {
@@ -333,22 +148,10 @@ export class DumbTriggerManager extends Component {
       })
     }
   }
-
-  /**
-   * Account creation success handler
-   * @param  {Object}  account Created io.cozy.accounts document
-   * @return {Object}          io.cozy.jobs document, runned with account data
-   */
-  async handleNewAccount(account) {
-    const trigger = await this.ensureTrigger(account)
-    this.setState({ account })
-    return await this.props.launch(trigger)
-  }
   /**
    * TODO rename state error to accountError
    */
   handleError(error) {
-    logger.error('TriggerManager handleError', error)
     const { onError } = this.props
     this.setState({ error })
     if (typeof onError === 'function') onError(error)
@@ -465,27 +268,26 @@ export class DumbTriggerManager extends Component {
 
   render() {
     const {
-      error: triggerError,
       konnector,
-      running: triggerRunning,
       showError,
       modalContainerId,
       t,
       onVaultDismiss,
-      vaultClosable
+      vaultClosable,
+      flow,
+      flowState
     } = this.props
+
+    const submitting = flowState.running
 
     const {
       account,
-      error,
-      status,
       step,
       selectedCipher,
       showBackButton,
       ciphers
     } = this.state
 
-    const submitting = !!(status === RUNNING || triggerRunning)
     const modalInto = modalContainerId || MODAL_PLACE_ID
 
     const { oauth } = konnector
@@ -497,10 +299,10 @@ export class DumbTriggerManager extends Component {
     if (oauth) {
       return (
         <OAuthForm
+          flow={flow}
           account={account}
           konnector={konnector}
           onSuccess={this.handleOAuthAccountId}
-          submitting={submitting}
         />
       )
     }
@@ -543,11 +345,10 @@ export class DumbTriggerManager extends Component {
                   ? this.cipherToAccount(selectedCipher)
                   : account
               }
-              error={error || triggerError}
+              flow={flow}
               konnector={konnector}
               onSubmit={this.handleSubmit}
               showError={showError}
-              submitting={submitting}
               onBack={() => this.showCiphersList()}
               readOnlyIdentifier={this.hasCipherSelected()}
             />
@@ -560,7 +361,7 @@ export class DumbTriggerManager extends Component {
 
 DumbTriggerManager.propTypes = {
   /**
-   * Account document. Used to get intial form values.
+   * Account document. Used to get initial form values.
    * If no account is passed, AccountForm will use empty initial values.
    * @type {Object}
    */
@@ -584,61 +385,9 @@ DumbTriggerManager.propTypes = {
    */
   trigger: PropTypes.object,
   /**
-   * Indicates if the given trigger is already running, i.e. if it has been
-   * launched and if an associated job with status 'running' exists.
-   * @type {[type]}
-   */
-  running: PropTypes.bool,
-  /**
-   * The current error for the job (string or KonnectorJob error)
-   */
-  error: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  /**
-   * Function to call to launch the job
-   */
-  launch: PropTypes.func.isRequired,
-  /**
    * Translation function
    */
   t: PropTypes.func,
-  //
-  // mutations
-  //
-  /**
-   * Permission mutation
-   * @type {Function}
-   */
-  addPermission: PropTypes.func,
-  /**
-   * File mutation
-   * @type {Function}
-   */
-  addReferencesTo: PropTypes.func,
-  /**
-   * Trigger mutation
-   * @type {Function}
-   */
-  createTrigger: PropTypes.func.isRequired,
-  /**
-   * Trigger mutations
-   * @type {Function}
-   */
-  createDirectoryByPath: PropTypes.func,
-  /**
-   * Account Mutation, used to retrieve OAuth account
-   * @type {Function}
-   */
-  findAccount: PropTypes.func,
-  /**
-   * Account mutation
-   * @type {Func}
-   */
-  saveAccount: PropTypes.func.isRequired,
-  /**
-   * Trigger mutations
-   * @type {Function}
-   */
-  statDirectoryByPath: PropTypes.func,
   /**
    * What to do when the Vault unlock screen is dismissed without password
    */
@@ -650,16 +399,11 @@ DumbTriggerManager.propTypes = {
   vaultClosable: PropTypes.bool
 }
 
-const SmartTriggerManager = flow(
+const SmartTriggerManager = compose(
   translate(),
   withClient,
   withVaultClient,
-  withMutations(
-    accountsMutations,
-    filesMutations,
-    permissionsMutations,
-    triggersMutations
-  )
+  withConnectionFlow()
 )(DumbTriggerManager)
 
 // The TriggerManager is wrapped in the providers required for it to work by
@@ -675,7 +419,7 @@ export const TriggerManager = props => {
   )
 }
 
-// TriggerManager is exported wrapped in TriggerLauncher to avoid breaking changes.
+// TriggerManager is exported wrapped in FlowProvider to avoid breaking changes.
 const LegacyTriggerManager = props => {
   const {
     onLaunch,
@@ -686,23 +430,22 @@ const LegacyTriggerManager = props => {
     ...otherProps
   } = props
   return (
-    <TriggerLauncher
+    <FlowProvider
       onLaunch={onLaunch}
       onSuccess={onSuccess}
       onLoginSuccess={onLoginSuccess}
       onError={onError}
       initialTrigger={initialTrigger}
     >
-      {({ error, launch, running, trigger }) => (
+      {({ error, trigger, flow }) => (
         <TriggerManager
           {...otherProps}
           error={error}
-          launch={launch}
-          running={running}
           trigger={trigger}
+          flow={flow}
         />
       )}
-    </TriggerLauncher>
+    </FlowProvider>
   )
 }
 
