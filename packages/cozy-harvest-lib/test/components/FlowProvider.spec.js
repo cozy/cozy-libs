@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { shallow } from 'enzyme'
 import { FlowProvider } from 'components/FlowProvider'
 import {
@@ -36,11 +36,9 @@ const triggersMutationsMock = {
 
 const props = {
   client,
-  trigger,
+  initialTrigger: trigger,
   ...triggersMutationsMock
 }
-
-class Child extends Component {}
 
 describe('FlowProvider', () => {
   // Chainable mock
@@ -57,59 +55,65 @@ describe('FlowProvider', () => {
     jest.resetAllMocks()
   })
 
-  it('should render', () => {
-    const component = shallow(
-      <FlowProvider {...props}>{() => <Child />}</FlowProvider>
-    ).getElement()
-    expect(component).toMatchSnapshot()
+  it('should support a flow with a SUCCESS', () => {
+    const children = jest.fn()
+    const wrapper = shallow(<FlowProvider {...props}>{children}</FlowProvider>)
+
+    const flow = wrapper.instance().flow
+    expect(children.mock.calls[0][0].flow.getState().status).toEqual('IDLE')
+
+    flow.triggerEvent(TWO_FA_REQUEST_EVENT)
+    wrapper.update()
+    expect(wrapper.find(TwoFAModal).length).toBe(1)
+
+    flow.triggerEvent(SUCCESS_EVENT)
+    wrapper.update()
+    expect(wrapper.find(TwoFAModal).length).toBe(0)
+    expect(children.mock.calls[2][0].flow.getState().status).toEqual('SUCCESS')
   })
 
-  describe('handleSuccess', () => {
-    it('should hide twoFA modal', async () => {
-      const wrapper = shallow(
-        <FlowProvider {...props}>
-          {({ launch, running }) => <Child launch={launch} running={running} />}
-        </FlowProvider>
-      )
+  it('should support a flow with a LOGIN_SUCCESS', () => {
+    const children = jest.fn()
+    const wrapper = shallow(<FlowProvider {...props}>{children}</FlowProvider>)
 
-      const flow = wrapper.instance().flow
+    const flow = wrapper.instance().flow
 
-      flow.triggerEvent(TWO_FA_REQUEST_EVENT)
-      wrapper.update()
-      expect(wrapper.find(TwoFAModal).length).toBe(1)
-      flow.triggerEvent(SUCCESS_EVENT)
-      wrapper.update()
-      expect(wrapper.find(TwoFAModal).length).toBe(0)
-    })
+    flow.triggerEvent(TWO_FA_REQUEST_EVENT)
+    wrapper.update()
+    expect(wrapper.find(TwoFAModal).length).toBe(1)
+
+    flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+    wrapper.update()
+    expect(wrapper.find(TwoFAModal).length).toBe(0)
+    expect(children.mock.calls[2][0].flow.getState().status).toEqual(
+      'LOGIN_SUCCESS'
+    )
   })
 
-  describe('handleLoginSuccess', () => {
-    it('should show/hide twoFA modal', async () => {
-      const wrapper = shallow(
-        <FlowProvider {...props}>
-          {({ launch, running }) => <Child launch={launch} running={running} />}
-        </FlowProvider>
-      )
+  it('should call the onLoginSuccess callback', () => {
+    const onLoginSuccess = jest.fn()
+    const wrapper = shallow(
+      <FlowProvider {...props} onLoginSuccess={onLoginSuccess}>
+        {jest.fn()}
+      </FlowProvider>
+    )
+    const flow = wrapper.instance().flow
+    flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+    expect(onLoginSuccess).toHaveBeenCalled()
+  })
 
-      const flow = wrapper.instance().flow
-      flow.triggerEvent(TWO_FA_REQUEST_EVENT)
-      wrapper.update()
-      expect(wrapper.find(TwoFAModal).length).toBe(1)
-      flow.triggerEvent(LOGIN_SUCCESS_EVENT)
-      wrapper.update()
-      expect(wrapper.find(TwoFAModal).length).toBe(0)
-    })
+  it('should detect an error in the initial trigger', () => {
+    const children = jest.fn()
+    const triggerWithExistingError = {
+      ...trigger,
+      current_state: { status: 'errored', last_error: 'Login failed' }
+    }
+    shallow(
+      <FlowProvider {...props} initialTrigger={triggerWithExistingError}>
+        {children}
+      </FlowProvider>
+    )
 
-    it('should call the onLoginSuccess callback', () => {
-      const onLoginSuccess = jest.fn()
-      const wrapper = shallow(
-        <FlowProvider {...props} onLoginSuccess={onLoginSuccess}>
-          {({ launch, running }) => <Child launch={launch} running={running} />}
-        </FlowProvider>
-      )
-      const flow = wrapper.instance().flow
-      flow.triggerEvent(LOGIN_SUCCESS_EVENT)
-      expect(onLoginSuccess).toHaveBeenCalled()
-    })
+    expect(children.mock.calls[0][0].flow.getState().error).not.toBe(null)
   })
 })
