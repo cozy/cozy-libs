@@ -119,6 +119,8 @@ export class AccountForm extends PureComponent {
 
   /**
    * Submit handler
+   * Will ask for confirmation if identifier changes
+   *
    * @param  {Object} values        Actual form values data
    * @param  {Object} form          The form object injected by ReactFinalForm.
    */
@@ -126,7 +128,6 @@ export class AccountForm extends PureComponent {
     const { account, konnector } = this.props
 
     const identifier = manifest.getIdentifier(konnector.fields)
-
     if (
       account &&
       account.auth[identifier] &&

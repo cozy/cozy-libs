@@ -231,4 +231,101 @@ describe('TriggerManager', () => {
       })
     })
   })
+
+  describe('sending form', () => {
+    beforeEach(() => {
+      mockVaultClient.getAll.mockResolvedValue([])
+      mockVaultClient.getAllDecrypted.mockResolvedValue([])
+    })
+    const setupForm = async ({ account } = {}) => {
+      const flow = new ConnectionFlow(client)
+      jest.spyOn(flow, 'handleFormSubmit').mockImplementation(() => {})
+      const utils = render(
+        <TriggerManager {...props} account={account} flow={flow} />
+      )
+
+      // Identification of inputs is a tad fragile, it should be better
+      // if data-test-id were supported by Field
+      // See https://github.com/cozy/cozy-ui/issues/1387
+      const identifierLabel = await utils.findByLabelText('username')
+      const passphraseLabel = await utils.findByLabelText('passphrase')
+      const identifierInput = identifierLabel.nextElementSibling
+      const passphraseInput =
+        passphraseLabel.nextElementSibling.nextElementSibling
+      const submitButton = await utils.findByText('Submit')
+
+      return {
+        flow,
+        identifierLabel,
+        passphraseLabel,
+        identifierInput,
+        passphraseInput,
+        submitButton,
+
+        ...utils
+      }
+    }
+
+    describe('when no account is passed in props', () => {
+      it('should correctly send the form', async () => {
+        const {
+          flow,
+          identifierInput,
+          passphraseInput,
+          submitButton
+        } = await setupForm()
+        fireEvent.change(identifierInput, {
+          target: { value: 'my-identifier' }
+        })
+        fireEvent.change(passphraseInput, {
+          target: { value: 'my-passphrase' }
+        })
+        fireEvent.click(submitButton)
+        expect(flow.handleFormSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            account: undefined,
+            userCredentials: {
+              passphrase: 'my-passphrase',
+              username: 'my-identifier'
+            }
+          })
+        )
+      })
+    })
+
+    describe('when an account is passed in props', () => {
+      it('should correctly send the form', async () => {
+        const account = {
+          auth: {
+            identifier: 'my-identifier',
+            passphrase: 'my-old-passphrase'
+          }
+        }
+        const {
+          flow,
+          identifierInput,
+          passphraseInput,
+          submitButton,
+          debug
+        } = await setupForm({ account })
+        fireEvent.change(identifierInput, {
+          target: { value: 'my-identifier' }
+        })
+        fireEvent.change(passphraseInput, {
+          target: { value: 'my-passphrase' }
+        })
+        fireEvent.click(submitButton)
+        expect(flow.handleFormSubmit).toHaveBeenCalledWith(
+          expect.objectContaining({
+            account,
+            userCredentials: {
+              passphrase: 'my-passphrase',
+              username: 'my-identifier',
+              identifier: 'my-identifier'
+            }
+          })
+        )
+      })
+    })
+  })
 })

@@ -98,9 +98,11 @@ const createOrUpdateMain = async (args, client) => {
       lastState = newState
     })
 
-  const account = args.account ? await fetchAccount(client, args.account) : {}
+  const account = args.account ? await fetchAccount(client, args.account) : null
 
-  assert(account, `Could not find account ${args.account}`)
+  if (args.account) {
+    assert(account, `Could not find account ${args.account}`)
+  }
 
   logger.info(`${args.account ? 'Updating' : 'Creating'} account`)
 
