@@ -120,7 +120,9 @@ describe('TriggerManager', () => {
 
         await expect(findByLabelText('username')).resolves.toBeDefined()
         await expect(findByLabelText('passphrase')).resolves.toBeDefined()
-        await expect(findByTitle('back', null, { timeout: 500 })).rejects.toThrow()
+        await expect(
+          findByTitle('back', null, { timeout: 500 })
+        ).rejects.toThrow()
       })
     })
 
@@ -172,7 +174,9 @@ describe('TriggerManager', () => {
           const passwordField = await findByLabelText('passphrase')
           const backButton = await findByTitle('back')
 
-          await expect(findByLabelText('username', null, { timeout: 500 })).rejects.toThrow()
+          await expect(
+            findByLabelText('username', null, { timeout: 500 })
+          ).rejects.toThrow()
           expect(passwordField).toBeDefined()
           expect(backButton).toBeDefined()
 
@@ -305,8 +309,7 @@ describe('TriggerManager', () => {
           flow,
           identifierInput,
           passphraseInput,
-          submitButton,
-          debug
+          submitButton
         } = await setupForm({ account })
         fireEvent.change(identifierInput, {
           target: { value: 'my-identifier' }
