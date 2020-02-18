@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.27.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.27.1...cozy-harvest-lib@1.27.2) (2020-02-18)
+
+
+### Bug Fixes
+
+* Account correctly created with the account_type property ([599da35](https://github.com/cozy/cozy-libs/commit/599da35))
+
+
+
+
+
 ## [1.27.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.27.0...cozy-harvest-lib@1.27.1) (2020-02-18)
 
 **Note:** Version bump only for package cozy-harvest-lib
