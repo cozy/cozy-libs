@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.27.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.26.3...cozy-harvest-lib@1.27.0) (2020-02-18)
+
+
+### Bug Fixes
+
+* Make DriveLink similar to BankLink ([5b7fbbf](https://github.com/cozy/cozy-libs/commit/5b7fbbf))
+
+
+### Features
+
+* Different labels for store links ([ed3c48d](https://github.com/cozy/cozy-libs/commit/ed3c48d))
+* Fallback links in harvest app cards ([efbe550](https://github.com/cozy/cozy-libs/commit/efbe550))
+* Redirect to store page instead of installation page ([2e0b985](https://github.com/cozy/cozy-libs/commit/2e0b985))
+
+
+
+
+
 ## [1.26.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.26.2...cozy-harvest-lib@1.26.3) (2020-02-18)
 
 
