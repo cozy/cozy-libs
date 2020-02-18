@@ -73,6 +73,13 @@ export const createOrUpdateAccount = async ({
   assert(flow, 'No flow')
   assert(userCredentials, 'No user credentials')
   const isUpdate = !!account
+
+  if (isUpdate) {
+    logger.debug('Updating the account...')
+  } else {
+    logger.debug('Creating the account...')
+  }
+
   const { onAccountCreation, saveInVault } = konnectorPolicy
 
   let accountToSave = clone(account) || {}
@@ -360,7 +367,7 @@ export class ConnectionFlow {
         )
       }
 
-      logger.debug('Creating/updating account...')
+      logger.debug('Creating/updating account...', account)
 
       account = await createOrUpdateAccount({
         account,

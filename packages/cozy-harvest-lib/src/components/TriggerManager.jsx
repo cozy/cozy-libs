@@ -132,7 +132,7 @@ export class DumbTriggerManager extends Component {
       const cipherId = this.getSelectedCipherId()
       await flow.handleFormSubmit({
         client,
-        account: account || {},
+        account,
         cipherId,
         konnector,
         trigger: flow.trigger,

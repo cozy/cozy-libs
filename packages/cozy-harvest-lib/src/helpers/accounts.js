@@ -2,6 +2,7 @@ import get from 'lodash/get'
 import merge from 'lodash/merge'
 import clone from 'lodash/clone'
 
+import assert from '../assert'
 import manifest from './manifest'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
@@ -100,6 +101,10 @@ export const getLabel = account =>
  * @return {object}           io.cozy.accounts attributes
  */
 export const build = (konnector, authData) => {
+  assert(
+    konnector.slug,
+    'Cannot build an account when the konnector has no slug'
+  )
   // We are not at the final target for io.cozy.accounts.
   // For now we are just ensuring legacy
   return {
