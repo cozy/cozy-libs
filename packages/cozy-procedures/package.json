@@ -15,7 +15,7 @@
     "watch": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --watch",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
     "copy-files": "cp -rf src/locales dist/",
-    "test": "jest --verbose",
+    "test": "jest",
     "lint": "cd ..; yarn lint packages/cozy-procedures"
   },
   "dependencies": {

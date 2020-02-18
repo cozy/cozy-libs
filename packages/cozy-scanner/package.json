@@ -16,7 +16,7 @@
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
     "copy-files": "cp -rf src/locales dist/",
-    "test": "jest src/ --verbose",
+    "test": "jest src/",
     "lint": "cd .. && yarn lint packages/cozy-scanner",
     "watch": "yarn build --watch"
   },
