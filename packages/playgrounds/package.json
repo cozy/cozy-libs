@@ -5,7 +5,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "start": "env USE_REACT=true parcel src/sharing.html"
+    "start": "env USE_REACT=true parcel src/*.html"
   },
   "dependencies": {
     "@material-ui/core": "3.9.4",
