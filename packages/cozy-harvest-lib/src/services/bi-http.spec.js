@@ -2,7 +2,10 @@ import { updateBIConnection } from './bi-http'
 
 describe('bi request', () => {
   beforeEach(() => {
-    global.fetch = jest.fn()
+    global.fetch = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve({ id: 1337 })
+    })
   })
 
   afterEach(() => {
@@ -30,7 +33,10 @@ describe('bi request', () => {
   it('should send the correct data', async () => {
     global.fetch.mockResolvedValue({
       ok: true,
-      json: () => Promise.resolve({})
+      json: () =>
+        Promise.resolve({
+          id: 1337
+        })
     })
     await updateBIConnection(
       { mode: 'dev', url: 'https://bi-sandox.test' },
@@ -45,8 +51,42 @@ describe('bi request', () => {
         headers: {
           Authorization: 'Bearer bi-access-token'
         },
-        method: 'PUT'
+        method: 'POST'
       }
     )
+  })
+
+  it('should return the correct data', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () => Promise.resolve({ id: 1337 })
+    })
+    const resp = await updateBIConnection(
+      { mode: 'dev', url: 'https://bi-sandox.test' },
+      1337,
+      { login: 'encrypted-login' },
+      'bi-access-token'
+    )
+    expect(resp.id).toBe(1337)
+  })
+
+  it('should return the correct data when connection is wrapped', async () => {
+    global.fetch.mockResolvedValueOnce({
+      ok: true,
+      json: () =>
+        Promise.resolve({
+          message: 'Connection cannot be updated at the moment',
+          connection: {
+            id: 1338
+          }
+        })
+    })
+    const resp = await updateBIConnection(
+      { mode: 'dev', url: 'https://bi-sandox.test' },
+      1338,
+      { login: 'encrypted-login' },
+      'bi-access-token'
+    )
+    expect(resp.id).toBe(1338)
   })
 })

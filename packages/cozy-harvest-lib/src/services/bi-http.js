@@ -97,13 +97,24 @@ export const updateBIConnection = async (
     connId,
     `Must pass connection id to updateBIConnection (${connId} was passed)`
   )
-  return await biRequest(
-    'PUT',
+  const resp = await biRequest(
+    'POST',
     `/users/me/connections/${connId}`,
     config,
     encodeToForm(data),
     biAccessToken
   )
+
+  // The doc indicates that the response should be a connection object.
+  // But, when the connection cannot be force updated, the response is
+  // in the form { connection, message }.
+  if (resp.id) {
+    return resp
+  } else if (resp.connection) {
+    return resp.connection
+  } else {
+    throw new Error('Unknown response from Budget-Insight')
+  }
 }
 
 export const resumeBIConnection = async (config, connId, biAccessToken) => {
