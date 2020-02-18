@@ -118,9 +118,9 @@ describe('TriggerManager', () => {
           <TriggerManager {...props} />
         )
 
-        expect(findByLabelText('username')).resolves.toBeDefined()
-        expect(findByLabelText('passphrase')).resolves.toBeDefined()
-        expect(findByTitle('back')).rejects.toThrow()
+        await expect(findByLabelText('username')).resolves.toBeDefined()
+        await expect(findByLabelText('passphrase')).resolves.toBeDefined()
+        await expect(findByTitle('back', null, { timeout: 500 })).rejects.toThrow()
       })
     })
 
@@ -172,13 +172,13 @@ describe('TriggerManager', () => {
           const passwordField = await findByLabelText('passphrase')
           const backButton = await findByTitle('back')
 
-          expect(findByLabelText('username')).rejects.toThrow()
+          await expect(findByLabelText('username', null, { timeout: 500 })).rejects.toThrow()
           expect(passwordField).toBeDefined()
           expect(backButton).toBeDefined()
 
           fireEvent.click(backButton)
 
-          expect(findByText('Isabelle')).resolves.toBeDefined()
+          await expect(findByText('Isabelle')).resolves.toBeDefined()
         })
       })
     })
