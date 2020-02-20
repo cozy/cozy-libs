@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.27.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.27.2...cozy-harvest-lib@1.27.3) (2020-02-20)
+
+
+### Bug Fixes
+
+* Support Budget Insight alternate schema for update connection ([9f0702b](https://github.com/cozy/cozy-libs/commit/9f0702b))
+
+
+
+
+
 ## [1.27.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.27.1...cozy-harvest-lib@1.27.2) (2020-02-18)
 
 
