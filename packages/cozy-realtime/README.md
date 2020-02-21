@@ -38,6 +38,10 @@ A simple way to have realtime using Websocket with [cozy-stack](https://github.c
 or
 `yarn add cozy-realtime`
 
+### Cordova
+
+In order to listen to online and offline events, you should install the [Network Information](https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-network-information/) plugin.
+
 ## Example
 
 ```js
