@@ -67,7 +67,7 @@ export const initializeFromRemote = async client => {
   enable(attributes)
 }
 
-const capitalize = str => str[0].toUppercase() + str.slice(1)
+const capitalize = str => str[0].toUpperCase() + str.slice(1)
 
 export const getTemplateData = attr => {
   if (typeof document === 'undefined') {
