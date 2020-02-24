@@ -95,7 +95,7 @@ const getMattermostChannels = ({ appVersion }) => {
   let channelOptions
   try {
     channelOptions = JSON.parse(envChannel)
-  } catch {
+  } catch (e) {
     channelOptions = {
       dev: envChannel,
       beta: envChannel,
