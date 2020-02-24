@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.2.1...cozy-flags@2.2.2) (2020-02-24)
+
+
+### Bug Fixes
+
+* Init flags when client is already logged in ([ff4d3ed](https://github.com/cozy/cozy-libs/commit/ff4d3ed))
+
+
+
+
+
 ## [2.2.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.2.0...cozy-flags@2.2.1) (2020-02-24)
 
 
