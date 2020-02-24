@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.4.3...cozy-notifications@0.5.0) (2020-02-24)
+
+
+### Features
+
+* Update cozy-bi-auth ([fc191ee](https://github.com/cozy/cozy-libs/commit/fc191ee))
+
+
+
+
+
 ## [0.4.3](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.4.2...cozy-notifications@0.4.3) (2020-01-08)
 
 

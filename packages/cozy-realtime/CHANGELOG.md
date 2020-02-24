@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.3.1...cozy-realtime@3.5.0) (2020-02-24)
+
+
+### Features
+
+* Update cozy-bi-auth ([fc191ee](https://github.com/cozy/cozy-libs/commit/fc191ee))
+
+
+
+
+
 # [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.3.1...cozy-realtime@3.4.0) (2020-01-10)
 
 
