@@ -89,15 +89,29 @@ export default function testFlagAPI(flag) {
       return { client }
     }
 
-    it('should have a cozy-client plugin', async () => {
-      const { client } = setup()
-      client.registerPlugin(flag.plugin)
-      await client.plugins.flags.handleLogin()
-      expect(flag('has_feature1')).toBe(true)
-      expect(flag('has_feature2')).toBe(false)
-      expect(flag('from_remote')).toBe(true)
-      expect(flag('number_of_foos')).toBe(10)
-      expect(flag('bar_config')).toEqual({ qux: 'quux' })
+    describe('cozy-client plugin', () => {
+      it('should have a cozy-client plugin', async () => {
+        const { client } = setup()
+        client.registerPlugin(flag.plugin)
+        await client.plugins.flags.handleLogin()
+        expect(flag('has_feature1')).toBe(true)
+        expect(flag('has_feature2')).toBe(false)
+        expect(flag('from_remote')).toBe(true)
+        expect(flag('number_of_foos')).toBe(10)
+        expect(flag('bar_config')).toEqual({ qux: 'quux' })
+      })
+
+      it('should initialize when already logged in', async () => {
+        const { client } = setup()
+        client.isLogged = true
+        client.registerPlugin(flag.plugin)
+        await client.plugins.flags.initializing
+        expect(flag('has_feature1')).toBe(true)
+        expect(flag('has_feature2')).toBe(false)
+        expect(flag('from_remote')).toBe(true)
+        expect(flag('number_of_foos')).toBe(10)
+        expect(flag('bar_config')).toEqual({ qux: 'quux' })
+      })
     })
 
     if (typeof document !== 'undefined') {
