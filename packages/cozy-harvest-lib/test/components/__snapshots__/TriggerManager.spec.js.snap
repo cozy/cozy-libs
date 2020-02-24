@@ -5,17 +5,6 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
   flow={
     ConnectionFlow {
       "client": CozyClient {
-        "_events": Object {
-          "login": Array [
-            [Function],
-          ],
-          "logout": Array [
-            [Function],
-          ],
-          "tokenRefreshed": Array [
-            [Function],
-          ],
-        },
         "appMetadata": Object {},
         "chain": CozyLink {
           "request": [Function],
@@ -136,19 +125,7 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
       "handleTwoFA": [Function],
       "launch": [Function],
       "realtime": CozyRealtime {
-        "_beforeUnload": [Function],
-        "_cozyClient": CozyClient {
-          "_events": Object {
-            "login": Array [
-              [Function],
-            ],
-            "logout": Array [
-              [Function],
-            ],
-            "tokenRefreshed": Array [
-              [Function],
-            ],
-          },
+        "client": CozyClient {
           "appMetadata": Object {},
           "chain": CozyLink {
             "request": [Function],
@@ -261,35 +238,36 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
             "uri": "",
           },
         },
-        "_events": Object {},
-        "_receiveError": [Function],
-        "_receiveMessage": [Function],
-        "_resetSocket": [Function],
-        "_resubscribe": [Function],
-        "_retryDelay": 1000,
-        "_retryLimit": 60,
-        "_socket": Socket {
-          "_doctype": "io.cozy.websocket",
+        "onClientLogin": [Function],
+        "onClientLogout": [Function],
+        "onClientTokenRefreshed": [Function],
+        "onDeviceReady": [Function],
+        "onOffline": [Function],
+        "onOnline": [Function],
+        "onResume": [Function],
+        "onWebSocketClose": [Function],
+        "onWebSocketError": [Function],
+        "onWebSocketMessage": [Function],
+        "onWebSocketOpen": [Function],
+        "retryManager": RetryManager {
           "_events": Object {
-            "close": Array [
-              [Function],
-            ],
             "error": Array [
               [Function],
             ],
-            "message": Array [
-              [Function],
-            ],
           },
-          "_getToken": [Function],
-          "_getUrl": [Function],
-          "_token": null,
-          "_url": null,
-          "_webSocket": null,
-          "removeAllListeners": [Function],
+          "baseWaitAfterFirstFailure": 128,
+          "maxWaitBetweenRetries": 300000,
+          "onFailure": [Function],
+          "onSuccess": [Function],
+          "onSuccessAcknowledged": [Function],
+          "raiseErrorAfterAttempts": 8,
+          "retries": 0,
+          "timeBeforeSuccessful": 1200,
+          "wait": 0,
         },
-        "_updateAuthentication": [Function],
-        "unsubscribeAll": [Function],
+        "subscriptions": SubscriptionList {
+          "subscriptions": Array [],
+        },
       },
       "sendTwoFACode": [Function],
       "state": Object {
