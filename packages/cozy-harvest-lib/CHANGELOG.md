@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.28.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.27.6...cozy-harvest-lib@1.28.0) (2020-02-24)
+
+
+### Features
+
+* Rewrite of realtime ([1022af7](https://github.com/cozy/cozy-libs/commit/1022af7))
+
+
+
+
+
 ## [1.27.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.27.5...cozy-harvest-lib@1.27.6) (2020-02-24)
 
 **Note:** Version bump only for package cozy-harvest-lib

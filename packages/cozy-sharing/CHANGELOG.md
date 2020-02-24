@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.4...cozy-sharing@1.8.5) (2020-02-24)
+
+**Note:** Version bump only for package cozy-sharing
+
+
+
+
+
 ## [1.8.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.3...cozy-sharing@1.8.4) (2020-02-24)
 
 **Note:** Version bump only for package cozy-sharing

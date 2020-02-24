@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.22.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.22.0...cozy-app-publish@0.22.1) (2020-02-24)
+
+
+### Bug Fixes
+
+* Must declare error variable in catch block ([cdd1d42](https://github.com/cozy/cozy-libs/commit/cdd1d42))
+
+
+
+
+
 # [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.21.0...cozy-app-publish@0.22.0) (2020-02-24)
 
 
