@@ -116,6 +116,26 @@ export default function testFlagAPI(flag) {
           document.body.removeChild(div)
         }
       })
+
+      it('should initialize from DOM (legacy)', async () => {
+        jest.spyOn(console, 'warn').mockImplementation(() => {})
+        let div
+        try {
+          div = document.createElement('div')
+          div.dataset.cozyFlags = JSON.stringify(domFlags)
+          document.body.appendChild(div)
+          await flag.initialize()
+          expect(flag('has_feature1')).toBe(true)
+          expect(flag('has_feature2')).toBe(false)
+          expect(flag('number_of_foos')).toBe(10)
+          expect(flag('bar_config')).toEqual({ qux: 'quux' })
+
+          // eslint-disable-next-line no-console
+          expect(console.warn).toHaveBeenCalled()
+        } finally {
+          document.body.removeChild(div)
+        }
+      })
     }
 
     it('should initialize from the remote stack', async () => {
