@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.9.0 (2020-02-24)
+
+
+### Bug Fixes
+
+* Correctly handle BI errors ([#934](https://github.com/cozy/cozy-libs/issues/934)) ([bbed41d](https://github.com/cozy/cozy-libs/commit/bbed41d))
+
+
+### Features
+
+* Checks for cordova's network info plugin ([81e0e6b](https://github.com/cozy/cozy-libs/commit/81e0e6b))
+
+
+
+
+
 # 1.8.0 (2019-09-05)
 
 
