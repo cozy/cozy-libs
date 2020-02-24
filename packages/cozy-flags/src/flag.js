@@ -139,10 +139,17 @@ class FlagClientPlugin {
     this.handleLogout = this.handleLogout.bind(this)
     this.client.on('login', this.handleLogin)
     this.client.on('logout', this.handleLogout)
+
+    this.initializing = new Promise(resolve => {
+      this.resolveInitializing = resolve
+    })
+
+    if (client.isLogged) this.handleLogin()
   }
 
   async handleLogin() {
     await flag.initialize(this.client)
+    this.resolveInitializing()
   }
 
   async handleLogout() {
