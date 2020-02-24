@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.2.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.2.0...cozy-flags@2.2.1) (2020-02-24)
+
+
+### Bug Fixes
+
+* Load flags from legacy DOM ([#968](https://github.com/cozy/cozy-libs/issues/968)) ([6f54cc7](https://github.com/cozy/cozy-libs/commit/6f54cc7))
+
+
+
+
+
 # 2.2.0 (2020-02-06)
 
 
