@@ -1,8 +1,8 @@
 /* eslint-env jest */
-const prepublishLib = require('../lib/prepublish')
+const prepublishLib = require('./prepublish')
 
 const downcloudSpy = jest.fn()
-jest.doMock('../lib/hooks/pre/downcloud', () => downcloudSpy)
+jest.doMock('./hooks/pre/downcloud', () => downcloudSpy)
 
 describe('Prepublish script', () => {
   beforeEach(() => {
@@ -35,7 +35,7 @@ describe('Prepublish script', () => {
   it('sanitize options from hook script', async () => {
     const options = {
       ...optionsMock,
-      prepublishHook: './test/__mocks__/prepublish-unsanitized-hook'
+      prepublishHook: './src/__mocks__/prepublish-unsanitized-hook'
     }
     await expect(prepublishLib(options)).resolves.toMatchSnapshot()
   })
@@ -43,7 +43,7 @@ describe('Prepublish script', () => {
   it('check for undefined mandatory options', async () => {
     const options = {
       ...optionsMock,
-      prepublishHook: './test/__mocks__/prepublish-missing-options-hook'
+      prepublishHook: './src/__mocks__/prepublish-missing-options-hook'
     }
     await expect(prepublishLib(options)).rejects.toThrowErrorMatchingSnapshot()
   })
@@ -51,8 +51,7 @@ describe('Prepublish script', () => {
   it('check for undefined manifest mandatory options', async () => {
     const options = {
       ...optionsMock,
-      prepublishHook:
-        './test/__mocks__/prepublish-missing-manifest-options-hook'
+      prepublishHook: './src/__mocks__/prepublish-missing-manifest-options-hook'
     }
     await expect(prepublishLib(options)).rejects.toThrowErrorMatchingSnapshot()
   })
@@ -60,7 +59,7 @@ describe('Prepublish script', () => {
   it('check for bad values in options', async () => {
     const options = {
       ...optionsMock,
-      prepublishHook: './test/__mocks__/prepublish-bad-value-options-hook'
+      prepublishHook: './src/__mocks__/prepublish-bad-value-options-hook'
     }
     await expect(prepublishLib(options)).rejects.toThrowErrorMatchingSnapshot()
   })

@@ -1,7 +1,7 @@
 /* eslint-env jest */
 const fetch = require('jest-fetch-mock')
 
-const publish = require('../lib/publish')
+const publish = require('./publish')
 
 function getOptions() {
   const options = {

@@ -2,24 +2,25 @@
 const fs = require('fs-extra')
 const path = require('path')
 
-const manualScript = require('../lib/manual').manualPublish
-const publishLib = require('../lib/publish')
-const prepublish = require('../lib/prepublish')
-const tags = require('../lib/tags')
+const manualScript = require('./manual').manualPublish
+const publishLib = require('./publish')
+const prepublish = require('./prepublish')
+const tags = require('./tags')
 
 const rootPath = process.cwd()
 const testFolder = '.tmp_test'
 const testPath = path.join(rootPath, testFolder)
-const mockAppDir = path.join(__dirname, 'mockApps/mockApp')
-const promptConfirm = require('../lib/confirm')
 
-jest.mock('../lib/confirm')
-jest.mock('../lib/publish', () => jest.fn())
+const mockAppDir = path.join(__dirname, 'test/mockApps/mockApp')
+const promptConfirm = require('./confirm')
 
-jest.mock('../lib/hooks/pre/downcloud', () => ({
+jest.mock('./confirm')
+jest.mock('./publish', () => jest.fn())
+
+jest.mock('./hooks/pre/downcloud', () => ({
   appBuildUrl: 'https://mock.getarchive.cc/12345.tar.gz'
 }))
-jest.mock('../lib/prepublish', () => jest.fn())
+jest.mock('./prepublish', () => jest.fn())
 
 const commons = {
   token: 'registryTokenForTest123'

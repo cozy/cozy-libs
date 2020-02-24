@@ -1,7 +1,7 @@
-const runHooks = require('../utils/runhooks')
+const runHooks = require('./runhooks')
 const request = require('request')
 const crypto = require('crypto')
-const logger = require('../utils/logger')
+const logger = require('./utils/logger')
 
 /**
  * Returns only expected value, avoid data injection by hook

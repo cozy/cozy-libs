@@ -1,5 +1,5 @@
 /* eslint-env jest */
-const runHooks = require('../utils/runhooks')
+const runHooks = require('./runhooks')
 
 describe('RunHooks', () => {
   beforeEach(() => {
@@ -18,19 +18,19 @@ describe('RunHooks', () => {
 
   it('handles hook', async () => {
     await expect(
-      runHooks('./test/__mocks__/hook', 'pre', optionsMock)
+      runHooks('./src/__mocks__/hook', 'pre', optionsMock)
     ).resolves.toMatchSnapshot()
   })
 
   it('throws error on invalid prepublish hook path', async () => {
     await expect(
-      runHooks('./test/__mocks__/not-existing-hook', 'post', optionsMock)
+      runHooks('./src/__mocks__/not-existing-hook', 'post', optionsMock)
     ).rejects.toMatchSnapshot()
   })
 
   it('throws error when prepublish hook throws error', async () => {
     await expect(
-      runHooks('./test/__mocks__/errored-hook', 'pre', optionsMock)
+      runHooks('./src/__mocks__/errored-hook', 'pre', optionsMock)
     ).rejects.toMatchSnapshot()
   })
 })
