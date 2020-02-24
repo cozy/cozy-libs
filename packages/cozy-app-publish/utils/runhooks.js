@@ -1,14 +1,17 @@
 const logger = require('./logger')
 
 const requireHook = (hook, type) => {
+  const builtInHookPath = `${__dirname}/../lib/hooks/${type}/` + hook + '.js'
+  const customHookPath = process.cwd() + '/' + hook
   try {
-    return require(`${__dirname}/../lib/hooks/${type}/` + hook + '.js')
-  } catch (error) {
+    return require(builtInHookPath)
+  } catch (err1) {
     try {
       // Not builtin
-      return require(process.cwd() + '/' + hook)
-    } catch (err) {
-      logger.error(err)
+      return require(customHookPath)
+    } catch (err2) {
+      logger.error(`Error when loading ${builtInHookPath}`, err1)
+      logger.error(`Error when loading ${customHookPath}`, err2)
       throw new Error(`"${hook}" could not be loaded.`)
     }
   }
