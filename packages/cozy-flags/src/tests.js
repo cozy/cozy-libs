@@ -117,7 +117,7 @@ export default function testFlagAPI(flag) {
         }
       })
 
-      fit('should initialize from DOM (legacy)', async () => {
+      it('should initialize from DOM (legacy)', async () => {
         jest.spyOn(console, 'warn').mockImplementation(() => {})
         let div
         try {
