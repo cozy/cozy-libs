@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.21.0...cozy-app-publish@0.22.0) (2020-02-24)
+
+
+### Features
+
+* Log precise error when failing to require hook ([3636156](https://github.com/cozy/cozy-libs/commit/3636156))
+
+
+
+
+
 # [0.21.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.20.3...cozy-app-publish@0.21.0) (2020-02-17)
 
 
