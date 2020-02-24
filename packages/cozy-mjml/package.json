@@ -22,7 +22,7 @@
   "scripts": {
     "build": "webpack",
     "watch": "webpack --watch",
-    "test": "jest --verbose"
+    "test": "jest"
   },
   "bin": {
     "mjml": "dist/main.js"

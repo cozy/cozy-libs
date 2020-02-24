@@ -14,7 +14,7 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "test": "jest --coverage --verbose",
+    "test": "jest",
     "build": "babel src -d dist",
     "prepublishOnly": "yarn build",
     "watch": "yarn build --watch"
