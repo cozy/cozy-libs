@@ -1,8 +1,8 @@
 /* eslint-env jest */
-const postpublishLib = require('../lib/postpublish')
+const postpublishLib = require('./postpublish')
 
 const mattermostSpy = jest.fn()
-jest.doMock('../lib/hooks/post/mattermost', () => mattermostSpy)
+jest.doMock('./hooks/post/mattermost', () => mattermostSpy)
 
 describe('Postpublish script', () => {
   beforeEach(() => {

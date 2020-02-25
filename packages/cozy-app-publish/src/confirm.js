@@ -1,5 +1,5 @@
 const prompt = require('prompt')
-const colorize = require('../utils/colorize')
+const colorize = require('./utils/colorize')
 
 const promptConfirm = question =>
   new Promise((resolve, reject) => {

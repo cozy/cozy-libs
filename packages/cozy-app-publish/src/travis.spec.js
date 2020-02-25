@@ -1,21 +1,21 @@
 /* eslint-env jest */
 const path = require('path')
 
-const publishLib = require('../lib/publish')
-const postpublish = require('../lib/postpublish')
-const prepublish = require('../lib/prepublish')
+const publishLib = require('./publish')
+const postpublish = require('./postpublish')
+const prepublish = require('./prepublish')
 
-const mockAppDir = path.join(__dirname, 'mockApps/mockApp')
-const mockAppNoEditorDir = path.join(__dirname, 'mockApps/mockAppNoEditor')
-const getTravisVariables = require('../utils/getTravisVariables')
+const mockAppDir = path.join(__dirname, 'test/mockApps/mockApp')
+const mockAppNoEditorDir = path.join(__dirname, 'test/mockApps/mockAppNoEditor')
+const getTravisVariables = require('./utils/getTravisVariables')
 
-jest.mock('../lib/publish', () => jest.fn())
-jest.mock('../lib/prepublish', () =>
+jest.mock('./publish', () => jest.fn())
+jest.mock('./prepublish', () =>
   jest.fn(options => {
     return Object.assign({}, options, { sha256Sum: 'fakeshasum5644545' })
   })
 )
-jest.mock('../lib/postpublish', () => jest.fn())
+jest.mock('./postpublish', () => jest.fn())
 
 const mockCommons = {
   token: 'registryTokenForTest123',
@@ -24,9 +24,9 @@ const mockCommons = {
   buildDir: mockAppDir
 }
 
-jest.mock('../utils/getTravisVariables')
+jest.mock('./utils/getTravisVariables')
 
-const travisScript = require('../lib/travis')
+const travisScript = require('./travis')
 
 function getOptions(buildUrl = null) {
   const options = {

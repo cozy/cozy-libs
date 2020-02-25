@@ -1,6 +1,6 @@
 const path = require('path')
 const fs = require('fs-extra')
-const getManifestAsObject = require('../utils/getManifestAsObject')
+const getManifestAsObject = require('./utils/getManifestAsObject')
 const tags = require('./tags')
 const publisher = require('./publisher')
 
