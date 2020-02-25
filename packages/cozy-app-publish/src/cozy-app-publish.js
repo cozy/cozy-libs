@@ -8,7 +8,7 @@ const scripts = require('./index')
 const capitalize = require('lodash/capitalize')
 const omitBy = require('lodash/omitBy')
 
-const pkg = require('./package.json')
+const pkg = require('../package.json')
 
 const MODES = {
   TRAVIS: 'travis',
