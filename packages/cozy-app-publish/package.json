@@ -32,11 +32,9 @@
   },
   "files": [
     "index.js",
-    "cozy-app-publish.js",
     "LICENSE",
     "README.md",
-    "utils",
-    "lib"
+    "src"
   ],
   "devDependencies": {
     "babel-core": "7.0.0-bridge.0",
