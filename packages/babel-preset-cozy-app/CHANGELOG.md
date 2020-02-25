@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.8.0 (2020-02-25)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Always show account form when editing an account ([a8718cd](https://github.com/cozy/cozy-libs/commit/a8718cd))
+
+
+### Features
+
+* Remove proptype in production mode ([4287527](https://github.com/cozy/cozy-libs/commit/4287527))
+
+
+
+
+
 # 1.7.0 (2019-09-05)
 
 

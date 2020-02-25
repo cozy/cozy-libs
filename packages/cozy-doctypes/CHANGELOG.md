@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.72.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.71.0...cozy-doctypes@1.72.1) (2020-02-25)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Always show account form when editing an account ([a8718cd](https://github.com/cozy/cozy-libs/commit/a8718cd))
+
+
+
+
+
 # [1.72.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.71.0...cozy-doctypes@1.72.0) (2020-01-21)
 
 
