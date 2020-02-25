@@ -22,7 +22,11 @@
 
 A shareable configuration for Cozy Applications or Scripts.
 
-This package is a Babel preset already used by [`create-cozy-app`](https://github.com/CPatchane/create-cozy-app).
+This package is a Babel preset used by all our applications and libs at Cozy. 
+
+### Features
+* Removal of PropTypes in production build
+* Optionally converts ES6 imports to ES5 requires (deactivated for libs, important for down the stream tree shaking)
 
 To install:
 
