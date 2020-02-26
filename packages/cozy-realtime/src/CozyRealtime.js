@@ -429,6 +429,7 @@ class CozyRealtime {
     // global events
     this.onOnline = this.onOnline.bind(this)
     this.onOffline = this.onOffline.bind(this)
+    this.onVisibilityChange = this.onVisibilityChange.bind(this)
     // cordova events
     this.onDeviceReady = this.onDeviceReady.bind(this)
     this.onResume = this.onResume.bind(this)
@@ -618,6 +619,7 @@ class CozyRealtime {
     if (hasBrowserContext && window.addEventListener) {
       window.addEventListener('online', this.onOnline)
       window.addEventListener('offline', this.onOffline)
+      window.addEventListener('visibilitychange', this.onVisibilityChange)
     }
   }
 
@@ -629,6 +631,7 @@ class CozyRealtime {
     if (hasBrowserContext && window.removeEventListener) {
       window.removeEventListener('online', this.onOnline)
       window.removeEventListener('offline', this.onOffline)
+      window.removeEventListener('visibilitychange', this.onVisibilityChange)
     }
   }
 
@@ -647,6 +650,17 @@ class CozyRealtime {
    */
   onOffline() {
     this.hasWebSocket() && this.revokeWebSocket()
+  }
+
+  /**
+   * When the page visibility changes
+   * @private
+   */
+  onVisibilityChange() {
+    if (document.visibilityState && document.visibilityState === 'visible') {
+      // if we have a reconnect waiting, do it immediatly
+      this.retryManager.stopCurrentAttemptWaitingTime()
+    }
   }
 }
 
