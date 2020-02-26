@@ -100,8 +100,19 @@ class CozyRealtime {
    */
   async connect() {
     logger.info('connecting…')
-    await this.retryManager.waitBeforeNextAttempt()
-    this.createSocket()
+    // avoid multiple concurrent calls to connect, keeps the first one
+    if (this.waitingForConnect) {
+      logger.debug('Pending reconnection, skipping reconnect')
+      return
+    }
+    logger.debug('No pending reconnection, will reconnect')
+    try {
+      this.waitingForConnect = true
+      await this.retryManager.waitBeforeNextAttempt()
+      this.createSocket()
+    } finally {
+      this.waitingForConnect = false
+    }
   }
 
   /**
@@ -618,6 +629,7 @@ class CozyRealtime {
    * @private
    */
   onOnline() {
+    logger.info('reconnect because receiving an online event')
     this.reconnect()
   }
 

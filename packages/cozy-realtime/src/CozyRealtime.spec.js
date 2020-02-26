@@ -608,5 +608,31 @@ describe('CozyRealtime', () => {
         server.stop(done)
       })
     })
+
+    describe('connection concurrency', () => {
+      it('should not start two concurrent connections', async done => {
+        const server = createSocketServer()
+        const realtime = createRealtime()
+        const handler = jest.fn()
+        realtime.subscribe(event, type, undefined, handler)
+        await realtime.waitForSocketReady()
+
+        // makes the reconnect wait
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        realtime.onOnline()
+        await sleep(25)
+
+        // reconnect before the previous connection finishes to wait
+        realtime.onOnline()
+        await realtime.waitForSocketReady()
+
+        expect(server.onconnect).toHaveBeenCalledTimes(2)
+        server.stop(done)
+      })
+    })
   })
 })
