@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.3](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.2...cozy-realtime@3.6.3) (2020-02-26)
+
+
+### Bug Fixes
+
+* **realtime:** Comments in RetryManager ([9974e9d](https://github.com/cozy/cozy-libs/commit/9974e9d))
+* **realtime:** Ensures we always clean up tests ([f0a49cf](https://github.com/cozy/cozy-libs/commit/f0a49cf))
+* **realtime:** Erroneous warning on unsubscribe ([3447a6f](https://github.com/cozy/cozy-libs/commit/3447a6f))
+* **realtime:** Remove a console.log ([fe1a304](https://github.com/cozy/cozy-libs/commit/fe1a304))
+* **realtime:** Removes legacy code ([eb1bf74](https://github.com/cozy/cozy-libs/commit/eb1bf74))
+* **realtime:** Resilience to errors in subscribe ([30f5d33](https://github.com/cozy/cozy-libs/commit/30f5d33))
+
+
+
+
+
 ## [3.6.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.1...cozy-realtime@3.6.2) (2020-02-26)
 
 
