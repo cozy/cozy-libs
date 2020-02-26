@@ -59,10 +59,14 @@ export default class SubscriptionList {
     if (requireDoubleUnsubscriptions) {
       // remove only the first matching
       const found = this.subscriptions.findIndex(s => isEqual(s, subscription))
-      if (found >= 0) pullAt(this.subscriptions, found)
+      if (found >= 0) {
+        pullAt(this.subscriptions, found)
+        return
+      }
     } else {
       // remove all matching
-      remove(this.subscriptions, s => isEqual(s, subscription))
+      const removed = remove(this.subscriptions, s => isEqual(s, subscription))
+      if (removed && removed.length > 0) return
     }
     logger.warn(
       'Trying to unsubscribe to an unknown subscription',
