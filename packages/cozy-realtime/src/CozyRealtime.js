@@ -448,7 +448,13 @@ class CozyRealtime {
     logger.info('receive message from server', { event, payload })
     const handlers = this.subscriptions.getAllHandlersForEvent(event, payload)
     for (const handler of handlers) {
-      handler(payload.doc)
+      try {
+        handler(payload.doc)
+      } catch (e) {
+        logger.error(
+          `handler did throw for ${event}, ${payload.type}, ${payload.id}`
+        )
+      }
     }
     if (event === 'error') {
       logger.warn('Stack returned an error', payload)
