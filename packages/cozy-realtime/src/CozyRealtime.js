@@ -629,9 +629,6 @@ class CozyRealtime {
       window.removeEventListener('online', this.onOnline)
       window.removeEventListener('offline', this.onOffline)
     }
-    if (isCordova()) {
-      document.removeEventListener('deviceready', this.onDeviceReady)
-    }
   }
 
   /**
