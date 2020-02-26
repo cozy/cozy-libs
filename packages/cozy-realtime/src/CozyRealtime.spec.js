@@ -657,7 +657,7 @@ describe('CozyRealtime', () => {
         realtime.retryManager.onFailure()
         realtime.retryManager.onFailure()
         realtime.retryManager.onFailure()
-        realtime.onOnline()
+        realtime.onWebSocketError()
         await sleep(25)
 
         // reconnect before the previous connection finishes to wait
@@ -665,6 +665,47 @@ describe('CozyRealtime', () => {
         await realtime.waitForSocketReady()
 
         expect(server.onconnect).toHaveBeenCalledTimes(2)
+        realtime.unsubscribeAll()
+        server.stop(done)
+      })
+    })
+
+    describe('on becoming online', () => {
+      it('reconnects', async done => {
+        const server = createSocketServer()
+        server.onconnect.named = 'reconnect'
+        const realtime = createRealtime()
+        const handler = jest.fn()
+        realtime.subscribe(event, type, undefined, handler)
+        await realtime.waitForSocketReady()
+
+        const event = new Event('online')
+        window.dispatchEvent(event)
+
+        await sleep(100)
+        await realtime.waitForSocketReady()
+        expect(server.onconnect).toHaveBeenCalledTimes(2)
+        realtime.unsubscribeAll()
+        server.stop(done)
+      })
+
+      it('reconnects immediatly', async done => {
+        const server = createSocketServer()
+        const realtime = createRealtime()
+        const handler = jest.fn()
+        realtime.subscribe(event, type, undefined, handler)
+        await realtime.waitForSocketReady()
+
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        realtime.retryManager.onFailure()
+        const event = new Event('online')
+        window.dispatchEvent(event)
+
+        await sleep(100)
+        expect(server.onconnect).toHaveBeenCalledTimes(2)
+        realtime.unsubscribeAll()
         server.stop(done)
       })
     })

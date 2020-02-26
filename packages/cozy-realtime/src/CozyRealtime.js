@@ -98,20 +98,21 @@ class CozyRealtime {
    * Connects a new websocket as soon as possible
    * @private
    */
-  async connect() {
+  async connect({ immediate = false } = {}) {
     logger.info('connecting…')
     // avoid multiple concurrent calls to connect, keeps the first one
     if (this.waitingForConnect) {
       logger.debug('Pending reconnection, skipping reconnect')
-      return
-    }
-    logger.debug('No pending reconnection, will reconnect')
-    try {
-      this.waitingForConnect = true
-      await this.retryManager.waitBeforeNextAttempt()
-      this.createSocket()
-    } finally {
-      this.waitingForConnect = false
+      if (immediate) this.retryManager.stopCurrentAttemptWaitingTime()
+    } else {
+      logger.debug('No pending reconnection, will reconnect')
+      try {
+        this.waitingForConnect = true
+        if (!immediate) await this.retryManager.waitBeforeNextAttempt()
+        this.createSocket()
+      } finally {
+        this.waitingForConnect = false
+      }
     }
   }
 
@@ -119,9 +120,9 @@ class CozyRealtime {
    * Throws the previous socket and connect a new one
    * @private
    */
-  async reconnect() {
+  async reconnect({ immediate = false } = {}) {
     if (this.hasWebSocket()) this.revokeWebSocket()
-    this.connect()
+    this.connect({ immediate })
   }
 
   /**
@@ -602,7 +603,7 @@ class CozyRealtime {
    * @private
    */
   onResume() {
-    this.reconnect()
+    this.reconnect({ immediate: true })
   }
 
   /* * * * * * * * * * * * * * * */
@@ -637,7 +638,7 @@ class CozyRealtime {
    */
   onOnline() {
     logger.info('reconnect because receiving an online event')
-    this.reconnect()
+    this.reconnect({ immediate: true })
   }
 
   /**
