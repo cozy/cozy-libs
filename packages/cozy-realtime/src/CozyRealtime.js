@@ -446,7 +446,11 @@ class CozyRealtime {
   onWebSocketMessage(message) {
     const { event, payload } = JSON.parse(message.data)
     logger.info('receive message from server', { event, payload })
-    const handlers = this.subscriptions.getAllHandlersForEvent(event, payload)
+    const handlers = this.subscriptions.getAllHandlersForEvent(
+      event,
+      payload.type,
+      payload.id
+    )
     for (const handler of handlers) {
       try {
         handler(payload.doc)
