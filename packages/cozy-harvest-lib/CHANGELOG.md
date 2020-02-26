@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.29.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.29.0...cozy-harvest-lib@1.29.1) (2020-02-26)
+
+
+### Bug Fixes
+
+* Tell the right thing for app 2FA ([e1035d2](https://github.com/cozy/cozy-libs/commit/e1035d2))
+
+
+
+
+
 # [1.29.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.28.1...cozy-harvest-lib@1.29.0) (2020-02-25)
 
 
