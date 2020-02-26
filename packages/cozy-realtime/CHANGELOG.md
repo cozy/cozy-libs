@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.1...cozy-realtime@3.6.2) (2020-02-26)
+
+
+### Bug Fixes
+
+* **realtime:** Connect concurrency ([eb04d84](https://github.com/cozy/cozy-libs/commit/eb04d84))
+
+
+
+
+
 ## [3.6.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.0...cozy-realtime@3.6.1) (2020-02-25)
 
 **Note:** Version bump only for package cozy-realtime
