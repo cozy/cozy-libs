@@ -1,5 +1,7 @@
 import MicroEE from 'microee'
 
+import logger from './logger'
+
 import {
   maxWaitBetweenRetries as defaultMaxWaitBetweenRetries,
   baseWaitAfterFirstFailure as defaultBaseWaitAfterFirstFailure,
@@ -109,6 +111,7 @@ class RetryManager {
    * @param {object} error
    */
   onFailure(error) {
+    logger.debug('failure, increase the failure counter of the retry manager')
     this.clearSuccessWatcher()
     this.increaseFailureCounter()
     this.emit('failure', error)
@@ -128,6 +131,7 @@ class RetryManager {
    * Reset failures counters (do not wait before trying to connect next time)
    */
   reset() {
+    logger.debug('reset the retry manager')
     this.clearSuccessWatcher()
     this.retries = 0
     this.wait = 0
@@ -155,6 +159,7 @@ class RetryManager {
    * Wait an amount of time before the next attempt (if needed)
    */
   async waitBeforeNextAttempt() {
+    logger.debug('waitBeforeNextAttempt', this.wait)
     if (this.wait) {
       await new Promise(resolve => {
         global.setTimeout(resolve, this.wait)
