@@ -1,0 +1,423 @@
+{
+  "close": "Fermer",
+  "accountForm": {
+    "submit": {
+      "label": "Sauvegarder"
+    },
+    "fields": {
+      "optional": "(Optionnel)"
+    },
+    "password": {
+      "show": "Voir",
+      "hide": "Cacher"
+    },
+    "disconnect": {
+      "button": "Supprimer ce compte"
+    }
+  },
+  "card": {
+    "launchTrigger": {
+      "button": {
+        "label": "Mettre à jour"
+      },
+      "error": "Une erreur est survenue.",
+      "frequency": {
+        "label": "Fréquence :",
+        "hourly": "Une fois par heure",
+        "daily": "Journalier",
+        "weekly": "Hebdomadaire",
+        "monthly": "Mensuel",
+        "undefined": "Manuellement"
+      },
+      "lastSync": {
+        "label": "Mise à jour :",
+        "syncing": "En cours...",
+        "unknown": "Indéterminée",
+        "format": "Le D MMMM YYYY [à] HH[:]mm"
+      }
+    },
+    "appLink": {
+      "drive": {
+        "title": "Vos documents",
+        "description": "Ce service récupère vos derniers documents et en sauvegarde l'historique complet à votre place.",
+        "button": "Ouvrir les documents",
+        "install": "Découvrir Cozy Drive"
+      },
+      "contacts": {
+        "title": "Vos contacts",
+        "description": "Ce service synchronise l'ensemble de vos contacts à votre place.",
+        "button": "Accéder aux contacts",
+        "install": "Découvrir Cozy Contacts"
+      },
+      "banks": {
+        "title": "Vos données bancaires",
+        "description": "Ce service récupère vos dernières lignes bancaires et en sauvegarde l'historique complet à votre place.",
+        "button": "Accéder aux comptes bancaires",
+        "install": "Découvrir Cozy Banks"
+      }
+    }
+  },
+  "default": {
+    "dateFormat": "DD/MM/YYYY",
+    "baseDir": "/Administratif"
+  },
+  "error": {
+    "job": {
+      "DISK_QUOTA_EXCEEDED": {
+        "title": "Espace Cozy plein",
+        "description": "Actuellement, le service ne peut plus récupérer vos documents.\nLibérez de l'espace en supprimant des fichiers ou rendez-vous dans **Paramètres > Stockage** pour augmenter l'espace de stockage de votre Cozy"
+      },
+      "CHALLENGE_ASKED": {
+        "title": "Second facteur d’authentification demandé",
+        "description": "Le site demande une authentification forte à deux facteurs. Vous devez relancer le connecteur manuellement pour vous authentifier et continuer à récupérer vos données."
+      },
+      "LOGIN_FAILED": {
+        "title": "Identifiants erronés ou expirés",
+        "description": "Votre identifiant et/ou mot de passe ne sont pas corrects. Vous pouvez les vérifier directement sur le site [%{name}](%{link}) avant de réessayer"
+      },
+      "LOGIN_FAILED.NEEDS_SECRET": {
+        "title": "Information additionnelle requise",
+        "description": "Un champ additionnel doit être rempli pour vérifier vos identifiants."
+      },
+      "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
+        "title": "Temporairement bloqué",
+        "description": "Trop de tentatives erronées ont eu lieu. Merci de modifier votre mot de passe sur le site [%{name}](%{link}) et de mettre à jour le connecteur ensuite."
+      },
+      "MAINTENANCE": {
+        "title": "Site non disponible",
+        "description": "Il semble que le site [%{name}](%{link}) soit indisponible. Merci de relancer ultérieurement ou de consulter notre aide en ligne."
+      },
+      "NOT_EXISTING_DIRECTORY": {
+        "title": "Dossier de destination manquant",
+        "description": "Il semble que le dossier de destination pour ce compte ait été supprimé. Merci de le restaurer en déconnectant ce compte puis en le reconnectant à nouveau."
+      },
+      "TERMS_VERSION_MISMATCH": {
+        "title": "Nouvelles CGUs à accepter",
+        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de vérifier que le service est à jour. Si l'erreur persiste, contacter nous via <a href=\\\"mailto:contact@cozycloud.cc\\\">contact@cozycloud.cc</a>."
+      },
+      "UNKNOWN_ERROR": {
+        "title": "Erreur de Connexion",
+        "description": "Une erreur inconnue est survenue"
+      },
+      "USER_ACTION_NEEDED": {
+        "title": "Action nécessaire chez le fournisseur",
+        "description": "Il semble que le site [%{name}](%{link}) ait besoin que vous vous y authentifiez pour réaliser une action spécifique. Merci de relancer une connexion manuelle une fois cette action effectuée."
+      },
+      "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
+        "title": "Renouvellement de l’authentification requis",
+        "description": "Le service [%{name}](%{link}) demande d'autoriser à nouveau votre accès. Merci de déconnecter puis reconnecter votre compte %{name} sur cette application. Aucune donnée ne sera perdue."
+      },
+      "USER_ACTION_NEEDED.ACCOUNT_REMOVED": {
+        "title": "Compte client non accessible",
+        "description": "Il semble que votre compte ne soit plus actif. Merci de vérifier son statut sur le site [%{name}](%{link}) avant de réessayer."
+      },
+      "USER_ACTION_NEEDED.CHANGE_PASSWORD": {
+        "title": "Renouvellement de mot de passe demandé",
+        "description": "Il semble que le site [%{name}](%{link}) ait besoin que vous vous y authentifiiez pour renouveler votre mot de passe. Merci de relancer le connecteur une fois cette action effectuée."
+      },
+      "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
+        "title": "Validation des nouvelles permissions nécessaire",
+        "description": "Votre connecteur a été mis à jour et les permissions nécessaires ont changé. Merci de valider les nouvelles permissions avant de relancer le connecteur."
+      },
+      "USER_ACTION_NEEDED.SCA_REQUIRED": {
+        "title": "Authentification demandée",
+        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez sur leur site ou application pour que la connexion à Cozy refonctionne. Merci de relancer le connecteur une fois cette action effectuée."
+      },
+      "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
+        "title": "Renouvellement de l’authentification demandé",
+        "description": "La dernière connexion au service a échoué; merci de la relancer.\nIl vous faudra peut-être renseigner un code de validation."
+      },
+      "USER_ACTION_NEEDED.WEBAUTH_REQUIRED": {
+        "title": "Authentification sur le site web demandée",
+        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez à leur site web pour que la connexion à Cozy refonctionne. Merci de relancer le connecteur une fois cette action effectuée."
+      },
+      "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
+        "title": "Le code fourni ne semble pas correct",
+        "description": "Le second facteur d’authentification fourni est incorrect, veuillez recommencer."
+      },
+      "VENDOR_DOWN": {
+        "title": "Service non disponible",
+        "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de le relancer manuellement maintenant ou ultérieurement."
+      },
+      "VENDOR_DOWN.BANK_DOWN": {
+        "title": "Site non disponible",
+        "description": "Site non disponible"
+      },
+      "VENDOR_DOWN.LINXO_DOWN": {
+        "title": "Service non disponible",
+        "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de le relancer manuellement maintenant ou ultérieurement."
+      }
+    }
+  },
+  "fields": {
+    "answer": {
+      "label": "Réponse secrète"
+    },
+    "birthdate": {
+      "label": "Date de naissance",
+      "placeholder": "jj/mm/aaaa"
+    },
+    "code": {
+      "label": "Code confidentiel"
+    },
+    "date": {
+      "label": "Date",
+      "placeholder": "jj/mm/aaaa"
+    },
+    "email": {
+      "label": "Adresse e-mail"
+    },
+    "firstname": {
+      "label": "Prénom"
+    },
+    "lastname": {
+      "label": "Nom de famille"
+    },
+    "login": {
+      "label": "Identifiant"
+    },
+    "password": {
+      "label": "Mot de passe"
+    },
+    "phone": {
+      "label": "Numéro de téléphone"
+    },
+    "two_fa_code": {
+      "label": "Second facteur d’authentification"
+    }
+  },
+  "folder": {
+    "administrative": "Administratif",
+    "photos": "Photos"
+  },
+  "infos": {
+    "konnectorUpdate": {
+      "title": "Une mise à jour est disponible pour ce service.",
+      "body": {
+        "regular": "Effectuez la mise à jour pour continuer à récupérer vos données et profiter des dernières fonctionnalités.",
+        "blocking": "Mettez-le à jour pour continuer à récupérer vos données."
+      },
+      "button": {
+        "label": "Voir la mise à jour"
+      }
+    }
+  },
+  "legacy": {
+    "fields": {
+      "access_token": {
+        "label": "Jeton d'accès"
+      },
+      "accessTokenSecret": {
+        "label": "Jeton d'accès secret"
+      },
+      "accountName": {
+        "label": "Nom du compte"
+      },
+      "agreement": {
+        "label": "J'accepte"
+      },
+      "apikey": {
+        "label": "Clé d'API"
+      },
+      "appKey": {
+        "label": "Clé d'application"
+      },
+      "appSecret": {
+        "label": "Secret d'application"
+      },
+      "authCode": {
+        "label": "Code Auth"
+      },
+      "bank_identifier": {
+        "label": "Identifiant Banque (optionnel)"
+      },
+      "branchName": {
+        "label": "Agence"
+      },
+      "cardNumber": {
+        "label": "Numéro de carte"
+      },
+      "consumerKey": {
+        "label": "Clé client"
+      },
+      "consumerSecret": {
+        "label": "Secret client"
+      },
+      "dob": {
+        "label": "Date de naissance"
+      },
+      "folderPath": {
+        "label": "Chemin du dossier"
+      },
+      "identifier": {
+        "label": "Identifiant"
+      },
+      "loginUrl": {
+        "label": "URL du login"
+      },
+      "namePath": {
+        "label": "Nom du dossier"
+      },
+      "new_identifier": {
+        "label": "Identifiant"
+      },
+      "phoneNumber": {
+        "label": "Numéro de téléphone"
+      },
+      "profileName": {
+        "label": "Nom du profil"
+      },
+      "refreshToken": {
+        "label": "Jeton de rafraîchissement"
+      },
+      "secret": {
+        "label": "Mot de passe"
+      },
+      "timeout": {
+        "label": "Délai (ms)"
+      },
+      "token": {
+        "label": "Jeton"
+      },
+      "tricountUrl": {
+        "label": "URL de Tricount"
+      }
+    }
+  },
+  "modal": {
+    "konnector": {
+      "error": {
+        "title": "Impossible de récupérer le compte",
+        "description": "Le compte n'a pas pu être récupéré (%{message})",
+        "button": "Fermer"
+      }
+    },
+    "accounts": {
+      "title": "Sélectionner un compte %{name} ",
+      "error": {
+        "title": "Erreur",
+        "description": "Impossible de charger vos comptes",
+        "retry": "Réessayer"
+      }
+    },
+    "tabs": {
+      "data": "Données",
+      "configuration": "Configuration"
+    },
+    "addAccount": {
+      "title": "Connexion à %{name}",
+      "button": "Ajouter un compte"
+    },
+    "deleteAccount": {
+      "title": "Déconnexion",
+      "description": "Vous serez déconnecté de ce compte, mais les données importées seront conservées"
+    },
+    "updateAccount": {
+      "title": "Mise à jour de vos identifiants"
+    }
+  },
+  "oauth": {
+    "connect": {
+      "label": "Connecter"
+    },
+    "window": {
+      "title": "OAuth"
+    }
+  },
+  "triggerSuccessMessage": {
+    "button": {
+      "label": "Fermer"
+    },
+    "description": "Vos données existantes seront disponibles dans votre Cozy dans quelques minutes et les prochaines suivront automatiquement.",
+    "figure": {
+      "alt": "Connecté"
+    },
+    "title": "Configuration réussie !"
+  },
+  "twoFAForm": {
+    "providers": {
+      "default": "Saisissez le code qui vous a été envoyé par e-mail ou SMS.",
+      "email": "Saisissez le code qui vous a été envoyé par e-mail.",
+      "sms": "Saisissez le code qui vous a été envoyé par SMS.",
+      "app": "Utilisez l'application de votre service pour continuer à vous connecter"
+    },
+    "desc-2fa": "Vous devez ouvrir l'application de votre banque et/ou cliquer sur une notification pour confirmer votre identité.",
+    "desc_1": "Ce code reçu sur votre mobile ou par email vous permet de valider votre connexion.",
+    "desc_2": "Ce second code reçu sur votre mobile ou par email vous permet de finaliser votre connexion.",
+    "code": {
+      "label_1": "code",
+      "label_2": "Second code"
+    },
+    "retry": "Code invalide, veuillez le ressaisir.",
+    "CTA": "Valider"
+  },
+  "account": {
+    "success": {
+      "title": "Configuration réussie !",
+      "connect": "Vos données existantes seront disponibles dans votre Cozy dans quelques minutes et les prochaines suivront automatiquement.",
+      "banksLinkText": "Voir mes comptes dans %{appName}",
+      "driveLinkText": "Ouvrir le dossier dans Cozy Drive",
+      "button": "Fermer"
+    }
+  },
+  "maintenance": {
+    "noService": "Service interrompu",
+    "explanationTitle": "Que se passe-t-il ?"
+  },
+  "suggestions": {
+    "title": "Importer mes données %{name}",
+    "data": "Installer %{name} importera automatiquement les données suivantes dans votre cozy :",
+    "why": "Pourquoi %{name} m’est proposé ?",
+    "reason_bank": "%{name} a été détecté à partir de vos dépenses bancaires. Pas d’inquiétude, personne à part vous ne peut avoir accès à cette  information.",
+    "install": "Installer",
+    "silence": "Ne plus me proposer"
+  },
+  "dataType": {
+    "none": "%{name} n'accèdera à aucune donnée de votre Cozy",
+    "activity": "Vos activités",
+    "appointment": "Vos rendez-vous",
+    "bankTransactions": "Vos mouvements bancaires",
+    "bankAccounts": "Vos comptes bancaires",
+    "bill": "Vos factures",
+    "bloodPressure": "Votre pression artérielle",
+    "calendar": "Vos calendriers",
+    "certificate": "Vos attestations",
+    "commit": "Vos commits",
+    "consumption": "Votre consommation",
+    "contact": "Vos contacts",
+    "contract": "Vos contrats",
+    "courseMaterial": "Vos supports de cours",
+    "document": "Vos documents",
+    "event": "Vos évènements",
+    "family": "Informations sur votre foyer",
+    "geopoint": "Vos géolocalisations",
+    "heartbeat": "Votre rythme cardiaque",
+    "home": "Informations sur votre domicile",
+    "phonecommunicationlog": "Votre journal d'appels",
+    "picture": "Vos images",
+    "podcast": "Vos podcasts",
+    "profile": "Votre profil client",
+    "refund": "Vos remboursements",
+    "sinister": "Vos sinistres",
+    "sleepTime": "Votre temps de sommeil",
+    "stepsNumber": "Vos nombres de pas",
+    "temperature": "Vos données de température",
+    "travelDate": "Vos séjours et voyages",
+    "tweet": "Vos tweets",
+    "videostream": "Vos vidéos",
+    "weight": "Votre poids"
+  },
+  "vaultCiphersList": {
+    "title": "Depuis quel compte souhaitez vous importer vos données ?",
+    "otherAccount": "Depuis un autre compte…"
+  },
+  "triggerManager": {
+    "connecting": "Connexion du compte…",
+    "confirmationModal": {
+      "title": "Mettre à jour les identifiants ?",
+      "description": "Vos identifiants précédents seront perdus. Ajoutez un nouveau compte pour les conserver.",
+      "primaryText": "Mettre à jour",
+      "secondaryText": "Annuler"
+    }
+  }
+}

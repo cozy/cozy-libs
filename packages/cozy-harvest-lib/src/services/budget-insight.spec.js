@@ -214,7 +214,7 @@ describe('createOrUpdateBIConnection', () => {
         }),
         konnector
       })
-    ).rejects.toEqual(new Error('USER_ACTION_NEEDED.SCA_REQUIRED'))
+    ).rejects.toEqual(new Error('USER_ACTION_NEEDED.TWOFA_NEEDED'))
   })
 
   it('should remove sensible data from account and create bi connection', async () => {

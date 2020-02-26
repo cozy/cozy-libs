@@ -339,7 +339,7 @@
       "default": "Enter the code sent to you by e-mail or SMS",
       "email": "Enter the code sent to you by e-mail",
       "sms": "Enter the code sent to you by SMS",
-      "app": "Enter the one-time code sent to you"
+      "app": "Use your provider's app to continue authentication"
     },
     "desc-2fa": "You need to open your provider's app and/or click on a notification to confirm your authentication.",
     "desc_1": "This code enables you to finish your connexion.",
