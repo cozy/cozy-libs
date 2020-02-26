@@ -119,7 +119,7 @@ class RetryManager {
   }
 
   /**
-   * Returns if we reached a level where we need to raise an error
+   * Returns if we reached a level where we need to emit an error
    *
    * @returns {boolean}
    */
