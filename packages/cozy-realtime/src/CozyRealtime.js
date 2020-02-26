@@ -40,7 +40,7 @@ class CozyRealtime {
     this.retryManager.on('error', err => this.emit('error', err))
     this.bindEventHandlers()
     if (isCordova() && !hasNetworkInformationPlugin()) {
-      console.warn(
+      logger.warn(
         `This seems a Cordova app and cordova-plugin-network-information doesn't seem to be installed. Please install it from https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-network-information/ to support online and offline events.`
       )
     }
