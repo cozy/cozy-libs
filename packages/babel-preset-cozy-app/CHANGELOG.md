@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.8.0...babel-preset-cozy-app@1.8.1) (2020-02-27)
+
+
+### Bug Fixes
+
+* Revert "Merge pull request [#974](https://github.com/cozy/cozy-libs/issues/974) from cozy/feat/RemovePropTypes" ([2d15d78](https://github.com/cozy/cozy-libs/commit/2d15d78))
+
+
+
+
+
 # 1.8.0 (2020-02-25)
 
 

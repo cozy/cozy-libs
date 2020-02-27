@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.6.4](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.3...cozy-realtime@3.6.4) (2020-02-27)
+
+**Note:** Version bump only for package cozy-realtime
+
+
+
+
+
 ## [3.6.3](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.2...cozy-realtime@3.6.3) (2020-02-26)
 
 
