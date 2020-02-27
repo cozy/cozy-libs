@@ -43,6 +43,7 @@ describe('DataTab', () => {
       })
       expect(withFolder.find(AppLinkCard).length).toEqual(1)
       expect(withFolder.find(AppLinkCard).prop('slug')).toEqual('drive')
+      expect(withFolder.find(AppLinkCard).prop('path')).toEqual('#/files/123')
     })
 
     it('should show the link to banks', () => {
