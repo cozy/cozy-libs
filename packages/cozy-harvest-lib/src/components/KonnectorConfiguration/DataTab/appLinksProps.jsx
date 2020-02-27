@@ -3,7 +3,7 @@ import get from 'lodash/get'
 const appLinksProps = {
   drive: ({ trigger }) => ({
     slug: 'drive',
-    path: `/files/${get(trigger, 'message.folder_to_save')}`,
+    path: `#/files/${get(trigger, 'message.folder_to_save')}`,
     icon: 'file',
     iconColor: 'puertoRico'
   }),
