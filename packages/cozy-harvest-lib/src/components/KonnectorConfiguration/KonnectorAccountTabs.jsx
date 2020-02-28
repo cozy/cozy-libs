@@ -15,6 +15,11 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
+import tabSpecs from './tabSpecs'
+
+const WarningError = () => (
+  <Icon icon="warning" size={13} className="u-ml-half" />
+)
 
 export const KonnectorAccountTabs = ({
   konnector,
@@ -39,15 +44,14 @@ export const KonnectorAccountTabs = ({
             <TabList>
               <Tab name="data">
                 {t('modal.tabs.data')}
-                {// Login error should not be mentionned in data tab
-                hasError && !hasLoginError && (
-                  <Icon icon="warning" size={13} className="u-ml-half" />
+                {tabSpecs.data.errorShouldBeDisplayed(error) && (
+                  <WarningError />
                 )}
               </Tab>
               <Tab name="configuration">
                 {t('modal.tabs.configuration')}
-                {shouldDisplayError && hasLoginError && (
-                  <Icon icon="warning" size={13} className="u-ml-half" />
+                {tabSpecs.configuration.errorShouldBeDisplayed(error) && (
+                  <WarningError />
                 )}
               </Tab>
             </TabList>
