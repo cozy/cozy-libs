@@ -55,7 +55,6 @@ export const KonnectorAccountTabs = ({
                 )}
               </Tab>
             </TabList>
-
             <TabPanels>
               <TabPanel name="data" className="u-pt-1-half u-pb-0">
                 <DataTab
@@ -64,6 +63,7 @@ export const KonnectorAccountTabs = ({
                   error={error}
                   shouldDisplayError={shouldDisplayError}
                   hasLoginError={hasLoginError}
+                  flow={flow}
                 />
               </TabPanel>
               <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
@@ -71,6 +71,7 @@ export const KonnectorAccountTabs = ({
                   konnector={konnector}
                   error={error}
                   account={account}
+                  flow={flow}
                   addAccount={addAccount}
                   onAccountDeleted={onAccountDeleted}
                   konnectorIsRunning={running}

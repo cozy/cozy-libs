@@ -70,6 +70,9 @@ const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
  * - Will follow the connection flow and re-render in case of change
  */
 const LaunchTriggerCard = props => {
+  if (props.flow) {
+    return <DumbLaunchTriggerCard {...props} />
+  }
   return (
     <FlowProvider {...pick(props, Object.keys(DumbFlowProvider.propTypes))}>
       {({ flow }) => {

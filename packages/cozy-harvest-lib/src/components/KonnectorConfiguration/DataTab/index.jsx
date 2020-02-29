@@ -20,7 +20,8 @@ export const DataTab = ({
   error,
   shouldDisplayError,
   hasLoginError,
-  client
+  client,
+  flow
 }) => {
   const hasError = !!error
   const hasTermsVersionMismatchError =
@@ -60,7 +61,11 @@ export const DataTab = ({
       {shouldDisplayError && hasGenericError && (
         <TriggerErrorInfo error={error} konnector={konnector} />
       )}
-      <LaunchTriggerCard initialTrigger={trigger} disabled={isInMaintenance} />
+      <LaunchTriggerCard
+        flow={flow}
+        initialTrigger={trigger}
+        disabled={isInMaintenance}
+      />
       {appLinks.map(({ slug, ...otherProps }) => (
         <AppLinkCard key={slug} slug={slug} {...otherProps} />
       ))}
