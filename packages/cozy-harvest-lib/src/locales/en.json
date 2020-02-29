@@ -51,7 +51,7 @@
       },
       "banks": {
         "title": "Your banking data",
-        "description": "This service retrieves your latest baking operations and keeps a complete record for you.",
+        "description": "This service retrieves and keeps a complete record of your latest banking operations for you.",
         "button": "Access bank accounts",
         "install": "Discover Cozy Banks"
       }
