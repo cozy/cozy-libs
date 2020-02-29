@@ -15,7 +15,7 @@ const client = {
   }
 }
 const trigger = {
-  _id: '65c347d1ef144288a64105702cc36e59'
+  _id: 'trigger-id'
 }
 
 const triggersMutationsMock = {
@@ -98,8 +98,17 @@ describe('FlowProvider', () => {
       </FlowProvider>
     )
     const flow = wrapper.instance().flow
+    flow.account = {
+      _id: 'account-id'
+    }
     flow.triggerEvent(LOGIN_SUCCESS_EVENT)
-    expect(onLoginSuccess).toHaveBeenCalled()
+    expect(onLoginSuccess).toHaveBeenCalledWith(
+      expect.objectContaining({
+        message: {
+          account: 'account-id'
+        }
+      })
+    )
   })
 
   it('should detect an error in the initial trigger', () => {
