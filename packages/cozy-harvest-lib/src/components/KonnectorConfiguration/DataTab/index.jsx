@@ -13,17 +13,18 @@ import TriggerErrorInfo from '../../../components/infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
+import tabSpecs from '../tabSpecs'
 
-export const DataTab = ({
-  konnector,
-  trigger,
-  error,
-  shouldDisplayError,
-  hasLoginError,
-  client,
-  flow
-}) => {
+export const DataTab = ({ konnector, trigger, client, flow }) => {
+  const flowState = flow.getState()
+  const { error } = flowState
+  const hasLoginError = hasError && error.isLoginError()
   const hasError = !!error
+
+  const shouldDisplayError = tabSpecs.data.errorShouldBeDisplayed(
+    error,
+    flowState
+  )
   const hasTermsVersionMismatchError =
     hasError && error.isTermsVersionMismatchError()
   const isTermsVersionMismatchErrorWithVersionAvailable =
@@ -76,9 +77,6 @@ export const DataTab = ({
 DataTab.propTypes = {
   konnector: PropTypes.object.isRequired,
   trigger: PropTypes.object.isRequired,
-  error: PropTypes.object,
-  shouldDisplayError: PropTypes.bool.isRequired,
-  hasLoginError: PropTypes.bool.isRequired,
   client: PropTypes.object.isRequired
 }
 

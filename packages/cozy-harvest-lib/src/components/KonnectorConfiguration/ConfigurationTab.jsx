@@ -13,19 +13,24 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import DeleteAccountButton from '../DeleteAccountButton'
 import { MountPointContext } from '../MountPointContext'
+import tabSpecs from './tabSpecs'
 
 const ConfigurationTab = ({
   konnector,
   account,
-  error,
-  konnectorIsRunning,
   addAccount,
   onAccountDeleted,
-  shouldDisplayError,
-  hasLoginError,
+  flow,
   t
 }) => {
   const { pushHistory } = useContext(MountPointContext)
+  const flowState = flow.getState()
+  const { error, running } = flowState
+  const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
+    error,
+    flowState
+  )
+  const hasLoginError = error && error.isLoginError()
 
   return (
     <>
@@ -54,7 +59,7 @@ const ConfigurationTab = ({
                 {Account.getAccountName(account)}
               </div>
             </div>
-            <div>{konnectorIsRunning && <Spinner />}</div>
+            <div>{running && <Spinner />}</div>
             <Icon icon="right" color={palette['coolGrey']} />
           </Card>
         </div>
@@ -62,7 +67,7 @@ const ConfigurationTab = ({
       <div className="u-flex u-flex-row">
         <DeleteAccountButton
           account={account}
-          disabled={konnectorIsRunning}
+          disabled={running}
           onSuccess={onAccountDeleted}
         />
         <Button

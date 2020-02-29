@@ -14,10 +14,10 @@ describe('DataTab', () => {
     const props = {
       konnector: {},
       trigger: {},
-      error: null,
       client: {},
-      shouldDisplayError: false,
-      hasLoginError: false,
+      flow: {
+        getState: () => ({ error: null, running: false })
+      },
       ...customProps
     }
     return shallow(<DataTab {...props} />)

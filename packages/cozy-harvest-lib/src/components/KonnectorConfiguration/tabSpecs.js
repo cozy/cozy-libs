@@ -1,9 +1,11 @@
 const tabSpecs = {
   data: {
-    errorShouldBeDisplayed: error => error && !error.isLoginError()
+    errorShouldBeDisplayed: (error, flowState) =>
+      !flowState.running && error && !error.isLoginError()
   },
   configuration: {
-    errorShouldBeDisplayed: error => error && error.isLoginError()
+    errorShouldBeDisplayed: (error, flowState) =>
+      !flowState.running && error && error.isLoginError()
   }
 }
 

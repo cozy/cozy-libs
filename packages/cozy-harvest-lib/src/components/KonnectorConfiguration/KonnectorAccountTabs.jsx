@@ -33,10 +33,9 @@ export const KonnectorAccountTabs = ({
   return (
     <FlowProvider initialTrigger={initialTrigger}>
       {({ flow }) => {
-        const { error, running } = flow.getState()
-
+        const flowState = flow.getState()
+        const { error } = flowState
         const hasError = !!error
-        const shouldDisplayError = !running && hasError
         const hasLoginError = hasError && error.isLoginError()
 
         return (
@@ -44,15 +43,16 @@ export const KonnectorAccountTabs = ({
             <TabList>
               <Tab name="data">
                 {t('modal.tabs.data')}
-                {tabSpecs.data.errorShouldBeDisplayed(error) && (
+                {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
                   <WarningError />
                 )}
               </Tab>
               <Tab name="configuration">
                 {t('modal.tabs.configuration')}
-                {tabSpecs.configuration.errorShouldBeDisplayed(error) && (
-                  <WarningError />
-                )}
+                {tabSpecs.configuration.errorShouldBeDisplayed(
+                  error,
+                  flowState
+                ) && <WarningError />}
               </Tab>
             </TabList>
             <TabPanels>
@@ -60,23 +60,16 @@ export const KonnectorAccountTabs = ({
                 <DataTab
                   konnector={konnector}
                   trigger={initialTrigger}
-                  error={error}
-                  shouldDisplayError={shouldDisplayError}
-                  hasLoginError={hasLoginError}
                   flow={flow}
                 />
               </TabPanel>
               <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
                 <ConfigurationTab
                   konnector={konnector}
-                  error={error}
                   account={account}
                   flow={flow}
                   addAccount={addAccount}
                   onAccountDeleted={onAccountDeleted}
-                  konnectorIsRunning={running}
-                  shouldDisplayError={shouldDisplayError}
-                  hasLoginError={hasLoginError}
                 />
               </TabPanel>
             </TabPanels>
