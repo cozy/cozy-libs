@@ -92,9 +92,11 @@ const PasswordField = ({
       autoComplete="new-password"
       onChange={handleChange}
       side={
-        <span onClick={() => setHidden(!hidden)}>
-          {hidden ? secondaryLabels.showLabel : secondaryLabels.hideLabel}
-        </span>
+        value ? (
+          <span onClick={() => setHidden(!hidden)}>
+            {hidden ? secondaryLabels.showLabel : secondaryLabels.hideLabel}
+          </span>
+        ) : null
       }
     />
   )

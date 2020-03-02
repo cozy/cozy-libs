@@ -255,7 +255,9 @@ describe('TriggerManager', () => {
       const passphraseLabel = await utils.findByLabelText('passphrase')
       const identifierInput = identifierLabel.nextElementSibling
       const passphraseInput =
-        passphraseLabel.nextElementSibling.nextElementSibling
+        passphraseLabel.nextElementSibling instanceof HTMLInputElement
+          ? passphraseLabel.nextElementSibling
+          : passphraseLabel.nextElementSibling.nextElementSibling
       const submitButton = await utils.findByText('Submit')
 
       return {
