@@ -62,11 +62,7 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
       {shouldDisplayError && hasGenericError && (
         <TriggerErrorInfo error={error} konnector={konnector} />
       )}
-      <LaunchTriggerCard
-        flow={flow}
-        initialTrigger={trigger}
-        disabled={isInMaintenance}
-      />
+      <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
       {appLinks.map(({ slug, ...otherProps }) => (
         <AppLinkCard key={slug} slug={slug} {...otherProps} />
       ))}

@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import pick from 'lodash/pick'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -8,9 +7,9 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Uppercase, { Text } from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
-import FlowProvider, { FlowProvider as DumbFlowProvider } from '../FlowProvider'
+import FlowProvider from '../FlowProvider'
 
-const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
+export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   const flowState = flow.getState()
   const launch = flow.launch
   const trigger = flow.trigger
@@ -73,8 +72,17 @@ const LaunchTriggerCard = props => {
   if (props.flow) {
     return <DumbLaunchTriggerCard {...props} />
   }
+
+  const normalizedProps = { ...props }
+  if (props.initialTrigger) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      'props.initialTrigger is deprecated for LaunchTriggerCard, please use flowProps={{ initialTrigger: {...} }} instead.'
+    )
+    normalizedProps.flowProps = { initialTrigger: props.initialTrigger }
+  }
   return (
-    <FlowProvider {...pick(props, Object.keys(DumbFlowProvider.propTypes))}>
+    <FlowProvider {...normalizedProps.flowProps}>
       {({ flow }) => {
         return <DumbLaunchTriggerCard {...props} flow={flow} />
       }}
@@ -84,13 +92,12 @@ const LaunchTriggerCard = props => {
 
 LaunchTriggerCard.propTypes = {
   ...Card.propTypes,
-  ...FlowProvider.propTypes,
-  /**
-   * Indicates if a konnector job for the current trigger is already running
-   * TODO: rename all running props to hasJobRunning to make its role clearer
-   * @type {boolean}
-   */
-  submitting: PropTypes.bool,
+
+  /** @type {Object} A ConnectionFlow instance */
+  flow: PropTypes.object,
+
+  /** @type {Object} ConnectionFlow options (used if props.flow is not provided) */
+  flowProps: PropTypes.object,
 
   /**
    * Disables the "run trigger" button
