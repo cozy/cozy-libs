@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.29.5...cozy-harvest-lib@1.30.0) (2020-03-02)
+
+
+### Bug Fixes
+
+* Fix typo and reorder sentence ([59b7d3c](https://github.com/cozy/cozy-libs/commit/59b7d3c))
+* LaunchTriggerCard uses the same flow as its container ([1f747be](https://github.com/cozy/cozy-libs/commit/1f747be))
+* Success URL does not included undefined anymore ([138bbf1](https://github.com/cozy/cozy-libs/commit/138bbf1))
+
+
+### Features
+
+* Use flowProps in LaunchTriggerCard ([6bafab1](https://github.com/cozy/cozy-libs/commit/6bafab1))
+
+
+
+
+
 ## [1.29.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.29.4...cozy-harvest-lib@1.29.5) (2020-02-27)
 
 
