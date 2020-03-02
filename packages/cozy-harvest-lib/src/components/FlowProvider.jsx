@@ -125,7 +125,19 @@ export class FlowProvider extends Component {
     }
     const { onLoginSuccess } = this.props
     const flow = this.flow
-    if (typeof onLoginSuccess === 'function') onLoginSuccess(flow.trigger)
+
+    // Handlers expect to be passed a trigger, but it is not
+    // guaranteed that the trigger is ready when receiving a LOGIN_SUCCESS
+    // since it can happen during account creation, and when the account
+    // creation is done directly with the provider, the trigger is not yet
+    // created, this is why a trigger like object is created here
+    const triggerLike = {
+      message: {
+        account: flow.account._id
+      },
+      ...flow.trigger
+    }
+    if (typeof onLoginSuccess === 'function') onLoginSuccess(triggerLike)
   }
 
   render() {

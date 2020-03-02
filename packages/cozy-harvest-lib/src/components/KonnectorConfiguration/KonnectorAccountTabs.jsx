@@ -15,6 +15,11 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
+import tabSpecs from './tabSpecs'
+
+const WarningError = () => (
+  <Icon icon="warning" size={13} className="u-ml-half" />
+)
 
 export const KonnectorAccountTabs = ({
   konnector,
@@ -28,10 +33,9 @@ export const KonnectorAccountTabs = ({
   return (
     <FlowProvider initialTrigger={initialTrigger}>
       {({ flow }) => {
-        const { error, running } = flow.getState()
-
+        const flowState = flow.getState()
+        const { error } = flowState
         const hasError = !!error
-        const shouldDisplayError = !running && hasError
         const hasLoginError = hasError && error.isLoginError()
 
         return (
@@ -39,39 +43,33 @@ export const KonnectorAccountTabs = ({
             <TabList>
               <Tab name="data">
                 {t('modal.tabs.data')}
-                {// Login error should not be mentionned in data tab
-                hasError && !hasLoginError && (
-                  <Icon icon="warning" size={13} className="u-ml-half" />
+                {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
+                  <WarningError />
                 )}
               </Tab>
               <Tab name="configuration">
                 {t('modal.tabs.configuration')}
-                {shouldDisplayError && hasLoginError && (
-                  <Icon icon="warning" size={13} className="u-ml-half" />
-                )}
+                {tabSpecs.configuration.errorShouldBeDisplayed(
+                  error,
+                  flowState
+                ) && <WarningError />}
               </Tab>
             </TabList>
-
             <TabPanels>
               <TabPanel name="data" className="u-pt-1-half u-pb-0">
                 <DataTab
                   konnector={konnector}
                   trigger={initialTrigger}
-                  error={error}
-                  shouldDisplayError={shouldDisplayError}
-                  hasLoginError={hasLoginError}
+                  flow={flow}
                 />
               </TabPanel>
               <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
                 <ConfigurationTab
                   konnector={konnector}
-                  error={error}
                   account={account}
+                  flow={flow}
                   addAccount={addAccount}
                   onAccountDeleted={onAccountDeleted}
-                  konnectorIsRunning={running}
-                  shouldDisplayError={shouldDisplayError}
-                  hasLoginError={hasLoginError}
                 />
               </TabPanel>
             </TabPanels>
