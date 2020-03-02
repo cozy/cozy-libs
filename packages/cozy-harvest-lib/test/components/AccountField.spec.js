@@ -49,6 +49,27 @@ describe('AccountField', () => {
     expect(component).toMatchSnapshot()
   })
 
+  it('hide the password toggle on empty fields', () => {
+    const wrapper = shallow(
+      <AccountField {...fixtures.passphrase} name="passphrase" t={t} value="" />
+    )
+    const component = wrapper.dive().dive()
+    expect(component.prop('side')).toBe(null)
+  })
+
+  it('show the password toggle on non-empty fields', () => {
+    const wrapper = shallow(
+      <AccountField
+        {...fixtures.passphrase}
+        name="passphrase"
+        value="123"
+        t={t}
+      />
+    )
+    const component = wrapper.dive().dive()
+    expect(component.prop('side')).not.toBe(null)
+  })
+
   it('render a dropdown field', () => {
     const options = [
       { label: 'Option 1', value: 'option1' },
