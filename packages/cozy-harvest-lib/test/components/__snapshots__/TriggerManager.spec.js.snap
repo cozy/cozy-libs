@@ -245,6 +245,7 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
         "onOffline": [Function],
         "onOnline": [Function],
         "onResume": [Function],
+        "onVisibilityChange": [Function],
         "onWebSocketClose": [Function],
         "onWebSocketError": [Function],
         "onWebSocketMessage": [Function],
