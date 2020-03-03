@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.31.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.30.0...cozy-harvest-lib@1.31.0) (2020-03-03)
+
+
+### Features
+
+* Hide password toggle when field is empty ([1fb9993](https://github.com/cozy/cozy-libs/commit/1fb9993))
+
+
+
+
+
 # [1.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.29.5...cozy-harvest-lib@1.30.0) (2020-03-02)
 
 
