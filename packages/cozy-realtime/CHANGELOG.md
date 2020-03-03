@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.4...cozy-realtime@3.7.0) (2020-03-03)
+
+
+### Features
+
+* **realtime:** Allows for immediate reconnect ([a2170a8](https://github.com/cozy/cozy-libs/commit/a2170a8))
+* **realtime:** Reacts to visibility changes ([4ce703e](https://github.com/cozy/cozy-libs/commit/4ce703e))
+
+
+
+
+
 ## [3.6.4](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.3...cozy-realtime@3.6.4) (2020-02-27)
 
 **Note:** Version bump only for package cozy-realtime
