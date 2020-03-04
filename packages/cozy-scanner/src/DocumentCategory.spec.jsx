@@ -3,6 +3,12 @@ import { render, fireEvent, wait } from '@testing-library/react'
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
 }))
+
+// Popper does not work well inside of jest as it heavily relies on DOM APIs (see https://github.com/popperjs/popper-core/issues/478).
+jest.mock('@material-ui/core/Popper', () => {
+  return ({ children }) => children
+})
+
 import DocumentCategory from './DocumentCategory'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
