@@ -45,7 +45,7 @@ class EditDocumentQualification extends Component {
     const theme = item ? getThemeByItem(item) : null
     const categoryLabel = item ? theme.label : null
     return (
-      <ExperimentalDialog>
+      <ExperimentalDialog onClose={onClose}>
         <DialogCloseButton onClick={onClose} />
         <ExperimentalDialogTitle>{document.name}</ExperimentalDialogTitle>
         <DialogContent>
