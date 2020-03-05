@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { Icon, Media, Bd, Img, Bold, IconStack } from 'cozy-ui/transpiled/react'
-
+import { Bold } from 'cozy-ui/transpiled/react/Text'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconStack from 'cozy-ui/transpiled/react/IconStack'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import ActionMenu, {
   ActionMenuItem,
   ActionMenuHeader
