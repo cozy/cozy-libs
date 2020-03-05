@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { Icon } from 'cozy-ui/transpiled/react'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import styles from './badge.styl'
 import palette from 'cozy-ui/transpiled/react/palette'
 
