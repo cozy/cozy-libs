@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.3.0...cozy-scanner@0.3.1) (2020-03-05)
+
+
+### Bug Fixes
+
+* Don't import from index ([9ab678c](https://github.com/cozy/cozy-libs/commit/9ab678c))
+
+
+
+
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.2.5...cozy-scanner@0.3.0) (2020-03-05)
 
 
