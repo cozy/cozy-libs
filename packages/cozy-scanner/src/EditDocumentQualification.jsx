@@ -46,7 +46,7 @@ class EditDocumentQualification extends Component {
     const categoryLabel = item ? theme.label : null
     return (
       <ExperimentalDialog>
-        <DialogCloseButton onClick={() => onClose()} />
+        <DialogCloseButton onClick={onClose} />
         <ExperimentalDialogTitle>{document.name}</ExperimentalDialogTitle>
         <DialogContent>
           <DocumentQualification
@@ -62,7 +62,7 @@ class EditDocumentQualification extends Component {
         <ExperimentalDialogActions layout="row">
           <Button
             theme="secondary"
-            onClick={() => onClose()}
+            onClick={onClose}
             label={t('Scan.cancel')}
           />
           <Button

@@ -54,7 +54,7 @@ class ModalScannerQualification extends Component {
     const { qualification, filename } = this.state
     return (
       <ExperimentalDialog>
-        <DialogCloseButton onClick={() => dismissAction()} />
+        <DialogCloseButton onClick={dismissAction} />
         <ExperimentalDialogTitle>{t('Scan.save_doc')}</ExperimentalDialogTitle>
         <DialogContent>
           <DocumentQualification
@@ -71,7 +71,7 @@ class ModalScannerQualification extends Component {
         <ExperimentalDialogActions layout="row">
           <Button
             theme="secondary"
-            onClick={() => dismissAction()}
+            onClick={dismissAction}
             label={t('Scan.cancel')}
           />
           <Button
