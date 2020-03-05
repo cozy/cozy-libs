@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.2.5...cozy-scanner@0.3.0) (2020-03-05)
+
+
+### Bug Fixes
+
+* Add onClose ([052cdb0](https://github.com/cozy/cozy-libs/commit/052cdb0))
+* Import cozy-ui ([342f5df](https://github.com/cozy/cozy-libs/commit/342f5df))
+* New modal ([56b9afa](https://github.com/cozy/cozy-libs/commit/56b9afa))
+
+
+### Features
+
+* Use new Dialog from UI ([4e9774d](https://github.com/cozy/cozy-libs/commit/4e9774d))
+
+
+
+
+
 ## [0.2.5](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.2.4...cozy-scanner@0.2.5) (2020-02-27)
 
 **Note:** Version bump only for package cozy-scanner
