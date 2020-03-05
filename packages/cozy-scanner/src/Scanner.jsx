@@ -2,7 +2,7 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import PropTypes from 'prop-types'
 import { CozyFile } from 'cozy-doctypes'
-import { Modal } from 'cozy-ui/transpiled/react'
+import Modal from 'cozy-ui/transpiled/react/Modal'
 
 import { ModalScannerQualification } from './'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
