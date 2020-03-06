@@ -1,5 +1,18 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import { UPDATE_EVENT } from './ConnectionFlow'
+
+export const useFlowState = flow => {
+  const [flowState, setFlowState] = useState(flow.getState())
+  useEffect(() => {
+    const handleFlowUpdate = () => setFlowState(flow.getState())
+    flow.on(UPDATE_EVENT, handleFlowUpdate)
+    return () => {
+      flow.removeListener(UPDATE_EVENT, handleFlowUpdate)
+    }
+  }, [flow, setFlowState])
+
+  return flowState
+}
 
 /**
  * HOC to connect a ConnectionFlow state to a prop
@@ -12,41 +25,9 @@ const withConnectionFlow = ({
   flowPropName = 'flow',
   statePropName = 'flowState'
 } = {}) => Wrapped => {
-  class Wrapper extends React.Component {
-    constructor(props, context) {
-      super(props, context)
-      const flow = this.props[flowPropName]
-      this.state = {
-        flowState: flow.getState()
-      }
-      this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
-    }
-
-    componentDidMount() {
-      const flow = this.props[flowPropName]
-      flow.on(UPDATE_EVENT, this.handleFlowUpdate)
-    }
-
-    componentWillUnmount() {
-      const flow = this.props[flowPropName]
-      flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
-    }
-
-    handleFlowUpdate() {
-      const flow = this.props[flowPropName]
-      this.setState({
-        flowState: flow.getState()
-      })
-    }
-
-    render() {
-      return (
-        <Wrapped
-          {...this.props}
-          {...{ [statePropName]: this.state.flowState }}
-        />
-      )
-    }
+  const Wrapper = props => {
+    const flowState = useFlowState(props[flowPropName])
+    return <Wrapped {...props} {...{ [statePropName]: flowState }} />
   }
   Wrapper.displayName = `withConnectionFlow(${Wrapped.displayName ||
     Wrapped.name})`

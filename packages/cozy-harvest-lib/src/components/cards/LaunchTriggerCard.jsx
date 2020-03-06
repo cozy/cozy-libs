@@ -8,13 +8,15 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Uppercase, { Text } from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
 import FlowProvider from '../FlowProvider'
+import { useFlowState } from '../../models/withConnectionFlow'
 
 export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
-  const flowState = flow.getState()
   const launch = flow.launch
-  const trigger = flow.trigger
+  const flowState = useFlowState(flow)
+  const trigger = flowState.trigger
   const running = flowState.running
   const lastSuccessDate = triggers.getLastSuccessDate(trigger)
+
   return (
     <Card className={className}>
       <div className="u-flex u-flex-column-s">
