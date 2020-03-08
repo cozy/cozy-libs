@@ -501,6 +501,7 @@ export class ConnectionFlow {
       twoFARunning: status === RUNNING_TWOFA,
       twoFARetry: status == TWO_FA_MISMATCH,
       triggerError: triggerError,
+      trigger,
       accountError,
       error: accountError || triggerError,
       konnectorRunning: triggersModel.isKonnectorRunning(trigger)
