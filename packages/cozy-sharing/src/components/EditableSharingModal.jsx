@@ -29,26 +29,30 @@ const EditableSharingModal = ({
           shareByLink,
           revokeSharingLink,
           hasSharedParent,
-          hasSharedChild
-        }) => (
-          <DumbShareModal
-            document={document}
-            documentType={documentType}
-            contacts={contacts}
-            createContact={contact => client.create(Contact.doctype, contact)}
-            groups={groups}
-            recipients={getRecipients(document.id)}
-            link={getSharingLink(document.id)}
-            isOwner={isOwner(document.id)}
-            hasSharedParent={hasSharedParent(document)}
-            hasSharedChild={hasSharedChild(document)}
-            onShare={share}
-            onRevoke={revoke}
-            onShareByLink={shareByLink}
-            onRevokeLink={revokeSharingLink}
-            {...rest}
-          />
-        )}
+          hasSharedChild,
+          revokeSelf
+        }) => {
+          return (
+            <DumbShareModal
+              document={document}
+              documentType={documentType}
+              contacts={contacts}
+              createContact={contact => client.create(Contact.doctype, contact)}
+              groups={groups}
+              recipients={getRecipients(document.id)}
+              link={getSharingLink(document.id)}
+              isOwner={isOwner(document.id)}
+              hasSharedParent={hasSharedParent(document)}
+              hasSharedChild={hasSharedChild(document)}
+              onShare={share}
+              onRevoke={revoke}
+              onShareByLink={shareByLink}
+              onRevokeLink={revokeSharingLink}
+              onRevokeSelf={revokeSelf}
+              {...rest}
+            />
+          )
+        }}
       </SharingContext.Consumer>
     </ContactsAndGroupsDataLoader>
   )

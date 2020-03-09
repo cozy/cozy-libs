@@ -81,9 +81,21 @@ export class Status extends Component {
   }
 
   onRevoke = async () => {
-    const { onRevoke, document, sharingId, index } = this.props
+    const {
+      onRevoke,
+      document,
+      sharingId,
+      index,
+      isOwner,
+      onRevokeSelf
+    } = this.props
     this.setState({ revoking: true })
-    await onRevoke(document, sharingId, index)
+    if (isOwner) {
+      await onRevoke(document, sharingId, index)
+    } else {
+      await onRevokeSelf(document)
+    }
+
     this.setState({ revoking: false })
   }
 

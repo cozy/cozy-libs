@@ -33,7 +33,8 @@ export default class ShareModal extends Component {
       onShare,
       onRevoke,
       onShareByLink,
-      onRevokeLink
+      onRevokeLink,
+      onRevokeSelf
     } = this.props
     return (
       <Modal
@@ -103,6 +104,7 @@ export default class ShareModal extends Component {
                   document={document}
                   documentType={documentType}
                   onRevoke={onRevoke}
+                  onRevokeSelf={onRevokeSelf}
                 />
               )}
             </div>

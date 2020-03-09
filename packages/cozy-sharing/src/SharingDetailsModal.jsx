@@ -22,7 +22,8 @@ export class SharingDetailsModal extends Component {
       recipients,
       document,
       documentType = 'Document',
-      onRevoke
+      onRevoke,
+      onRevokeSelf
     } = this.props
     return (
       <Modal
@@ -70,6 +71,7 @@ export class SharingDetailsModal extends Component {
             document={document}
             documentType={documentType}
             onRevoke={onRevoke}
+            onRevokeSelf={onRevokeSelf}
           />
         </ModalContent>
       </Modal>
