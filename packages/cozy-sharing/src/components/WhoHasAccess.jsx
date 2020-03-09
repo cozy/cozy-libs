@@ -14,7 +14,8 @@ class WhoHasAccess extends PureComponent {
       document,
       documentType,
       onRevoke,
-      className
+      className,
+      onRevokeSelf
     } = this.props
     const { t } = this.context
 
@@ -35,6 +36,7 @@ class WhoHasAccess extends PureComponent {
             document={document}
             documentType={documentType}
             onRevoke={onRevoke}
+            onRevokeSelf={onRevokeSelf}
           />
         ))}
       </div>
