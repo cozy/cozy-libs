@@ -156,12 +156,29 @@ const searchForCipher = async (vaultClient, searchOptions) => {
   const { konnector, account, login, password } = searchOptions
   const konnectorURI = get(konnector, 'vendor_link')
   const id = accounts.getVaultCipherId(account)
+
   const search = {
     username: login,
     uri: konnectorURI,
     type: CipherType.Login
   }
-  const sort = [view => view.login.password === password, 'revisionDate']
+  const sort = [
+    view => (view.login.password === password ? 0 : 1),
+    'revisionDate'
+  ]
+
   const cipher = await vaultClient.getByIdOrSearch(id, search, sort)
-  return cipher || null
+
+  // If there is no id, we do strict password matching
+  if (!id) {
+    // Since getByIdOrSearch does not support password matching,
+    // we have to do the password matching here
+    const decrypted = await vaultClient.decrypt(cipher)
+    if (decrypted && decrypted.login && decrypted.login.password === password) {
+      return cipher
+    }
+  } else {
+    return cipher
+  }
+  return null
 }
