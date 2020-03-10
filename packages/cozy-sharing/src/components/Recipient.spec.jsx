@@ -69,4 +69,52 @@ describe('Recipient component', () => {
     )
     expect(component).toMatchSnapshot()
   })
+
+  it('should call revokeSelf is i m not the owner but try to revoke myselk', async () => {
+    const onRevoke = jest.fn()
+    const onRevokeSelf = jest.fn()
+    const component = mount(
+      <AppLike>
+        <Status
+          instance="foo.mycozy.cloud"
+          client={client}
+          t={x => x}
+          status="ready"
+          type="file"
+          onRevoke={onRevoke}
+          onRevokeSelf={onRevokeSelf}
+          isOwner={false}
+        />
+      </AppLike>
+    )
+
+    const instance = component.find(Status).instance()
+
+    await instance.onRevoke()
+    expect(onRevokeSelf).toBeCalled()
+  })
+
+  it('should call revoke if I m the owner of the sharing', async () => {
+    const onRevoke = jest.fn()
+    const onRevokeSelf = jest.fn()
+    const component = mount(
+      <AppLike>
+        <Status
+          instance="foo.mycozy.cloud"
+          client={client}
+          t={x => x}
+          status="ready"
+          type="file"
+          onRevoke={onRevoke}
+          onRevokeSelf={onRevokeSelf}
+          isOwner={true}
+        />
+      </AppLike>
+    )
+
+    const instance = component.find(Status).instance()
+
+    await instance.onRevoke()
+    expect(onRevoke).toBeCalled()
+  })
 })
