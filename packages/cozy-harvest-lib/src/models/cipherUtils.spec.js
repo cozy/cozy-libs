@@ -42,29 +42,30 @@ describe('createOrUpdateCipher', () => {
       ...vaultClientAttrs
     }
 
+    const existingCipher = {
+      collectionIds: ['cozy-org-collection-id'],
+      id: 'existing-cipher',
+      login: {
+        password: 'password-to-be-updated',
+        uris: [
+          {
+            match: 'Domain',
+            uri: 'konnector-vendor-link'
+          }
+        ],
+        username: 'login-to-be-updated'
+      },
+      name: 'konnector-name',
+      organizationId: 'cozy-org-id',
+      type: 'Login'
+    }
+
     return {
       konnector,
       userCredentials,
-      vaultClient
+      vaultClient,
+      existingCipher
     }
-  }
-
-  const existingCipher = {
-    collectionIds: ['cozy-org-collection-id'],
-    id: 'existing-cipher',
-    login: {
-      password: 'password-to-be-updated',
-      uris: [
-        {
-          match: 'Domain',
-          uri: 'konnector-vendor-link'
-        }
-      ],
-      username: 'login-to-be-updated'
-    },
-    name: 'konnector-name',
-    organizationId: 'cozy-org-id',
-    type: 'Login'
   }
 
   afterEach(() => {
@@ -100,7 +101,13 @@ describe('createOrUpdateCipher', () => {
 
     describe('when a cipher exists with the same credentials', () => {
       it('should update the cipher with given credentials', async () => {
-        const { konnector, account, userCredentials, vaultClient } = setup({
+        const {
+          konnector,
+          account,
+          userCredentials,
+          vaultClient,
+          existingCipher
+        } = setup({
           vaultClient: {
             isLocked: jest.fn().mockResolvedValue(false)
           }
@@ -127,7 +134,13 @@ describe('createOrUpdateCipher', () => {
 
   describe('when given a cipherId', () => {
     it('should update the cipher with given credentials', async () => {
-      const { konnector, account, userCredentials, vaultClient } = setup({
+      const {
+        konnector,
+        account,
+        userCredentials,
+        vaultClient,
+        existingCipher
+      } = setup({
         vaultClient: {
           isLocked: jest.fn().mockResolvedValue(false)
         }
