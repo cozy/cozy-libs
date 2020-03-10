@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.1...cozy-harvest-lib@1.32.2) (2020-03-10)
+
+
+### Bug Fixes
+
+* Bad password matching would result in null fields ([743282e](https://github.com/cozy/cozy-libs/commit/743282e))
+
+
+
+
+
 ## [1.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.0...cozy-harvest-lib@1.32.1) (2020-03-08)
 
 
