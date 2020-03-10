@@ -156,12 +156,34 @@ const searchForCipher = async (vaultClient, searchOptions) => {
   const { konnector, account, login, password } = searchOptions
   const konnectorURI = get(konnector, 'vendor_link')
   const id = accounts.getVaultCipherId(account)
+
   const search = {
     username: login,
     uri: konnectorURI,
     type: CipherType.Login
   }
-  const sort = [view => view.login.password === password, 'revisionDate']
+  const sort = [
+    view => (view.login.password === password ? 0 : 1),
+    'revisionDate'
+  ]
+
   const cipher = await vaultClient.getByIdOrSearch(id, search, sort)
-  return cipher || null
+
+  if (id) {
+    // We know the cipher we are targetting, so we do not need to check
+    // for password equality. Checking for password inequality would
+    // prevent password update through Harvest.
+    return cipher
+  } else {
+    // If there is no id, we do strict password matching
+    // We are in a case where we add an account through Harvest
+    // There might be already a cipher that corresponds to it in the Vault
+    // (through an import for example) and we want it to be found but we
+    // do not want to match a cipher that has not exactly the same password.
+    const decrypted = await vaultClient.decrypt(cipher)
+    if (decrypted && decrypted.login && decrypted.login.password === password) {
+      return cipher
+    }
+  }
+  return null
 }
