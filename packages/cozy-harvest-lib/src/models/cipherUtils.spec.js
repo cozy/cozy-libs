@@ -1,5 +1,9 @@
 import * as cipherUtils from './cipherUtils'
 
+const accountWithoutCipher = {
+  relationships: {}
+}
+
 describe('createOrUpdateCipher', () => {
   const setup = ({
     konnector: konnectorAttrs,
@@ -100,9 +104,7 @@ describe('createOrUpdateCipher', () => {
           vaultClient: {
             isLocked: jest.fn().mockResolvedValue(false)
           },
-          account: {
-            relationships: {}
-          }
+          account: accountWithoutCipher
         })
 
         vaultClient.getByIdOrSearch.mockResolvedValue(null)
@@ -167,9 +169,7 @@ describe('createOrUpdateCipher', () => {
           vaultClient: {
             isLocked: jest.fn().mockResolvedValue(false)
           },
-          account: {
-            relationships: {}
-          }
+          account: accountWithoutCipher
         })
 
         vaultClient.getByIdOrSearch.mockResolvedValue(existingCipher)
