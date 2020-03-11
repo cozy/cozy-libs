@@ -174,7 +174,7 @@ const searchForCipher = async (vaultClient, searchOptions) => {
     // for password equality. Checking for password inequality would
     // prevent password update through Harvest.
     return cipher
-  } else {
+  } else if (cipher) {
     // If there is no id, we do strict password matching
     // We are in a case where we add an account through Harvest
     // There might be already a cipher that corresponds to it in the Vault
