@@ -1,5 +1,9 @@
 import * as cipherUtils from './cipherUtils'
 
+const accountWithoutCipher = {
+  relationships: {}
+}
+
 describe('createOrUpdateCipher', () => {
   const setup = ({
     konnector: konnectorAttrs,
@@ -40,7 +44,13 @@ describe('createOrUpdateCipher', () => {
     const foundCipher = { id: 'found-cipher-id' }
 
     const vaultClient = {
-      decrypt: jest.fn().mockImplementation(cipher => cipher),
+      decrypt: jest.fn().mockImplementation(cipher => {
+        if (!cipher) {
+          throw new Error('Mocked decrypt called with a null cipher')
+        } else {
+          return cipher
+        }
+      }),
       get: id => ({ id }),
       getByIdOrSearch: jest.fn().mockReturnValue(foundCipher),
       shareWithCozy: jest.fn().mockResolvedValue(sharedCipher),
@@ -93,7 +103,8 @@ describe('createOrUpdateCipher', () => {
         const { konnector, account, userCredentials, vaultClient } = setup({
           vaultClient: {
             isLocked: jest.fn().mockResolvedValue(false)
-          }
+          },
+          account: accountWithoutCipher
         })
 
         vaultClient.getByIdOrSearch.mockResolvedValue(null)
@@ -158,9 +169,7 @@ describe('createOrUpdateCipher', () => {
           vaultClient: {
             isLocked: jest.fn().mockResolvedValue(false)
           },
-          account: {
-            relationships: {}
-          }
+          account: accountWithoutCipher
         })
 
         vaultClient.getByIdOrSearch.mockResolvedValue(existingCipher)
