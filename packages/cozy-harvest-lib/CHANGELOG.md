@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.2...cozy-harvest-lib@1.32.3) (2020-03-11)
+
+
+### Bug Fixes
+
+* Decrypt called on null ([a2e7876](https://github.com/cozy/cozy-libs/commit/a2e7876))
+
+
+
+
+
 ## [1.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.1...cozy-harvest-lib@1.32.2) (2020-03-10)
 
 
