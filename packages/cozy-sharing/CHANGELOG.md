@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.12](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.11...cozy-sharing@1.8.12) (2020-03-13)
+
+
+### Bug Fixes
+
+* Call revokeSelf if not the owner of the sharing ([f7afc60](https://github.com/cozy/cozy-libs/commit/f7afc60))
+
+
+
+
+
 ## [1.8.11](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.10...cozy-sharing@1.8.11) (2020-03-05)
 
 
