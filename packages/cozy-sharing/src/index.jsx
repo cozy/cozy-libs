@@ -392,3 +392,5 @@ export const RefreshableSharings = ({ children }) => (
     }
   </SharingContext.Consumer>
 )
+
+export { SharingContext }
