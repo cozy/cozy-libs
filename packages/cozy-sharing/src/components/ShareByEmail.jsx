@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 
-import { useClient } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
@@ -13,9 +13,8 @@ import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import ShareRecipientsInput from './ShareRecipientsInput'
 import styles from '../share.styl'
-import { validateEmail } from '../helpers/email'
 import { getSuccessMessage } from '../helpers/successMessage'
-
+import { getOrCreateFromArray } from '../helpers/contacts'
 class ShareByEmail extends Component {
   initialState = {
     recipients: [],
@@ -35,17 +34,6 @@ class ShareByEmail extends Component {
 
   onSubmit = () => {
     this.sendSharingLink()
-  }
-
-  sanitizeRecipient = recipient => {
-    const matches = recipient.email.match(/\s(.+@.+)\s/g)
-    recipient.email = matches.length
-      ? matches[0]
-          .trim()
-          .replace(/\s.+/g, '')
-          .replace(/^[\W]|[\W]$/g, '')
-      : recipient.email
-    return recipient
   }
 
   onRecipientPick = recipient => {
@@ -96,70 +84,29 @@ class ShareByEmail extends Component {
       sharingDesc,
       onShare,
       createContact,
-      documentType
+      documentType,
+      client
     } = this.props
     const { recipients, sharingType } = this.state
     if (recipients.length === 0) {
       return
     }
-    const client = useClient()
 
     // we can't use currentRecipients prop in getSuccessMessage because it may use
     // the updated prop to count the new recipients
     const recipientsBefore = this.props.currentRecipients
 
-    const verifiedContacts = []
     this.setState(state => ({ ...state, loading: true }))
-
-    await Promise.all(
-      recipients.map(async recipient => {
-        if (recipient.id) {
-          verifiedContacts.push(recipient)
-        } else if (validateEmail(recipient.email)) {
-          const contact = await client.collection('io.cozy.contacts').find(
-            {
-              email: {
-                $elemMatch: {
-                  address: recipient.email
-                }
-              },
-              id: {
-                $gt: null
-              }
-            },
-            {
-              indexedFields: ['id']
-            }
-          )
-          if (contact.data.length > 0) {
-            //We take the shortcut that if we have sevaral contacts
-            //with the same address, we take the first one for now
-            verifiedContacts.push(contact.data[0])
-          } else {
-            verifiedContacts.push(recipient)
-          }
-        }
-      })
-    )
     try {
-      const allCreatedRecipients = await Promise.all(
-        verifiedContacts.map(recipient =>
-          recipient.id
-            ? recipient
-            : createContact({
-                email: [{ address: recipient.email, primary: true }]
-              }).then(resp => resp.data)
-        )
+      const contacts = await getOrCreateFromArray(
+        client,
+        recipients,
+        createContact
       )
-
-      await onShare(document, allCreatedRecipients, sharingType, sharingDesc)
+      await onShare(document, contacts, sharingType, sharingDesc)
 
       Alerter.success(
-        ...getSuccessMessage(
-          recipientsBefore,
-          allCreatedRecipients,
-          documentType
-        )
+        ...getSuccessMessage(recipientsBefore, contacts, documentType)
       )
       this.reset()
     } catch (err) {
@@ -187,8 +134,7 @@ class ShareByEmail extends Component {
     ]
   }
   render() {
-    const { t } = this.context
-    const { contacts, documentType, groups } = this.props
+    const { contacts, documentType, groups, t } = this.props
     const { recipients } = this.state
 
     return (
@@ -237,4 +183,4 @@ ShareByEmail.propTypes = {
   createContact: PropTypes.func.isRequired
 }
 
-export default translate()(ShareByEmail)
+export default translate()(withClient(ShareByEmail))
