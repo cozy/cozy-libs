@@ -84,7 +84,8 @@ export class SharingProvider extends Component {
       revokeSharingLink: this.revokeSharingLink,
       hasLoadedAtLeastOnePage: false,
       revokeAllRecipients: this.revokeAllRecipients,
-      refresh: this.fetchAllSharings
+      refresh: this.fetchAllSharings,
+      hasWriteAccess: this.hasWriteAccess
     }
   }
 
@@ -224,6 +225,17 @@ export class SharingProvider extends Component {
     this.dispatch(revokeSharingLink(perms))
   }
 
+  hasWriteAccess = docId => {
+    const instanceUri = this.props.client.getStackClient().uri
+
+    return (
+      !this.state.byDocId ||
+      !this.state.byDocId[docId] ||
+      isOwner(this.state, docId) ||
+      getSharingType(this.state, docId, instanceUri) === 'two-way'
+    )
+  }
+
   render() {
     // WARN: whe shouldn't do this (https://reactjs.org/docs/context.html#caveats)
     // but if we don't, consumers don't rerender when the state changes after loading the sharings,
@@ -239,20 +251,16 @@ export default withClient(SharingProvider)
 export const SharedDocument = ({ docId, children }) => (
   <SharingContext.Consumer>
     {({
+      hasWriteAccess,
       byDocId,
       isOwner,
-      getSharingType,
       getRecipients,
       getSharingLink,
       refresh,
       revokeSelf
     } = {}) =>
       children({
-        hasWriteAccess:
-          !byDocId ||
-          !byDocId[docId] ||
-          isOwner(docId) ||
-          getSharingType(docId) === 'two-way',
+        hasWriteAccess: hasWriteAccess(docId),
         isShared: byDocId !== undefined && byDocId[docId],
         isSharedByMe: byDocId !== undefined && byDocId[docId] && isOwner(docId),
         isSharedWithMe:
