@@ -15,7 +15,7 @@ import ShareRecipientsInput from './ShareRecipientsInput'
 import styles from '../share.styl'
 import { getSuccessMessage } from '../helpers/successMessage'
 import { getOrCreateFromArray } from '../helpers/contacts'
-class ShareByEmail extends Component {
+export class ShareByEmail extends Component {
   initialState = {
     recipients: [],
     sharingType: 'two-way',
