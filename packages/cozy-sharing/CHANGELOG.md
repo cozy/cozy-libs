@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.12...cozy-sharing@1.9.0) (2020-03-23)
+
+
+### Bug Fixes
+
+* Better regex to handle more complexe emails ([c2d6959](https://github.com/cozy/cozy-libs/commit/c2d6959))
+
+
+### Features
+
+* Handle copy paste string with emails + refacto ([f7042dd](https://github.com/cozy/cozy-libs/commit/f7042dd))
+
+
+
+
+
 ## [1.8.12](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.11...cozy-sharing@1.8.12) (2020-03-13)
 
 
