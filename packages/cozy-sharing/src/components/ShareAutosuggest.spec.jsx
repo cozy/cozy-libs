@@ -3,7 +3,7 @@ import { render, fireEvent } from '@testing-library/react'
 
 import ShareAutosuggest from './ShareAutosuggest'
 describe('ShareAutosuggest', () => {
-  it('tests if ShareAutosuggest call onFocus and onPick', () => {
+  it('tests if ShareAutosuggest calls onFocus and onPick', () => {
     const onPick = jest.fn()
     const onFocus = jest.fn()
     const onRemove = jest.fn()
