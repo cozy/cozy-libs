@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
 
 import { Spinner } from 'cozy-ui/transpiled/react'
@@ -10,6 +11,7 @@ import BoldCross from '../../assets/icons/icon-cross-bold.svg'
 import { Contact } from '../models'
 import { cozyUrlMatch, emailMatch, groupNameMatch } from '../suggestionMatchers'
 import ContactSuggestion from './ContactSuggestion'
+import { extractEmails, validateEmail } from '../helpers/email'
 
 export default class ShareAutocomplete extends Component {
   state = {
@@ -49,13 +51,26 @@ export default class ShareAutocomplete extends Component {
   onSuggestionsClearRequested = () => {
     this.setState(state => ({ ...state, suggestions: [] }))
   }
+  onPaste = () => {
+    this.isPasted = true
+  }
 
   onChange = (event, { newValue, method }) => {
-    if (typeof newValue !== 'object') {
-      this.setState(state => ({ ...state, inputValue: newValue }))
-    } else if (method === 'click' || method === 'enter') {
-      // A suggestion has been picked
-      this.onPick(newValue)
+    if (this.isPasted) {
+      const emails = extractEmails(newValue)
+      if (emails) {
+        emails.map(email => {
+          this.onPick({ email })
+        })
+      }
+      this.isPasted = false
+    } else {
+      if (typeof newValue !== 'object') {
+        this.setState(state => ({ ...state, inputValue: newValue }))
+      } else if (method === 'click' || method === 'enter') {
+        // A suggestion has been picked
+        this.onPick(newValue)
+      }
     }
   }
 
@@ -63,9 +78,9 @@ export default class ShareAutocomplete extends Component {
     // The user wants to add an unknown email
     if (
       ((event.key === 'Enter' || event.keyCode === 13) &&
-        this.state.inputValue !== '') ||
+        validateEmail(this.state.inputValue)) ||
       ((event.key === 'Space' || event.keyCode === 32) &&
-        /^.+@.+/.test(this.state.inputValue))
+        validateEmail(this.state.inputValue))
     ) {
       this.onPick({ email: this.state.inputValue })
     }
@@ -157,6 +172,7 @@ export default class ShareAutocomplete extends Component {
         inputProps={{
           onFocus: this.onFocus,
           onChange: this.onChange,
+          onPaste: this.onPaste,
           onBlur: this.onBlur,
           value: inputValue,
           type: 'email',
@@ -165,4 +181,14 @@ export default class ShareAutocomplete extends Component {
       />
     )
   }
+}
+
+ShareAutocomplete.propTypes = {
+  contactsAndGroups: PropTypes.array,
+  placeholder: PropTypes.string,
+  onFocus: PropTypes.func.isRequired,
+  onPick: PropTypes.func.isRequired,
+  onRemove: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+  recipients: PropTypes.array.isRequired
 }

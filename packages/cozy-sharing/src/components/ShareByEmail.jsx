@@ -3,17 +3,19 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import get from 'lodash/get'
 
+import { useClient } from 'cozy-client'
 import { Button, Icon } from 'cozy-ui/transpiled/react'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
 import palette from 'cozy-ui/transpiled/react/palette'
 
-import { Contact, Group } from '../models'
+import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import ShareRecipientsInput from './ShareRecipientsInput'
 import styles from '../share.styl'
 import logger from '../logger'
-
+import { validateEmail } from '../helpers/email'
+import { getSuccessMessage } from '../helpers/successMessage'
 const DropdownIndicator = props => (
   <components.DropdownIndicator {...props}>
     <Icon icon="bottom" color={palette.coolGrey} />
@@ -96,22 +98,9 @@ ShareSubmit.defaultProps = {
   loading: false
 }
 
-export const countNewRecipients = (currentRecipients, newRecipients) => {
-  return newRecipients.filter(contact => {
-    const email = Contact.getPrimaryEmail(contact)
-    const cozyUrl = Contact.getPrimaryCozy(contact)
-    return !currentRecipients.find(
-      r =>
-        (email && r.email && r.email === email) ||
-        (cozyUrl && r.instance && r.instance === cozyUrl)
-    )
-  }).length
-}
-
 class ShareByEmail extends Component {
   static contextTypes = {
-    t: PropTypes.func.isRequired,
-    client: PropTypes.object.isRequired
+    t: PropTypes.func.isRequired
   }
   sharingTypes = [
     {
@@ -201,81 +190,83 @@ class ShareByEmail extends Component {
     }))
   }
 
-  getSuccessMessage = recipientsBefore => {
-    const { documentType } = this.props
-    const { recipients } = this.state
-    if (recipients.length === 1) {
-      const recipient = recipients[0]
-      const email = Contact.isContact(recipient)
-        ? Contact.getPrimaryEmail(recipient)
-        : recipient.email
-      const cozyUrl = Contact.getPrimaryCozy(recipient)
-
-      if (email) {
-        return [
-          `${documentType}.share.shareByEmail.success`,
-          {
-            email
-          }
-        ]
-      } else if (cozyUrl) {
-        return [
-          `${documentType}.share.shareByEmail.success`,
-          {
-            email: cozyUrl
-          }
-        ]
-      } else {
-        return [
-          `${documentType}.share.shareByEmail.genericSuccess`,
-          {
-            count: 1
-          }
-        ]
-      }
-    } else {
-      return [
-        `${documentType}.share.shareByEmail.genericSuccess`,
-        {
-          count: countNewRecipients(recipientsBefore, recipients)
-        }
-      ]
-    }
-  }
-
-  share = () => {
-    const { document, sharingDesc, onShare, createContact } = this.props
+  share = async () => {
+    const {
+      document,
+      sharingDesc,
+      onShare,
+      createContact,
+      documentType
+    } = this.props
     const { recipients, sharingType } = this.state
     if (recipients.length === 0) {
       return
     }
+    const client = useClient()
 
     // we can't use currentRecipients prop in getSuccessMessage because it may use
     // the updated prop to count the new recipients
     const recipientsBefore = this.props.currentRecipients
 
+    const verifiedContacts = []
     this.setState(state => ({ ...state, loading: true }))
-    Promise.all(
-      recipients.map(recipient =>
-        recipient.id
-          ? recipient
-          : createContact({
-              email: [{ address: recipient.email, primary: true }]
-            }).then(resp => resp.data)
-      )
+
+    await Promise.all(
+      recipients.map(async recipient => {
+        if (recipient.id) {
+          verifiedContacts.push(recipient)
+        } else if (validateEmail(recipient.email)) {
+          const contact = await client.collection('io.cozy.contacts').find(
+            {
+              email: {
+                $elemMatch: {
+                  address: recipient.email
+                }
+              },
+              id: {
+                $gt: null
+              }
+            },
+            {
+              indexedFields: ['id']
+            }
+          )
+          if (contact.data.length > 0) {
+            //We take the shortcut that if we have sevaral contacts
+            //with the same address, we take the first one for now
+            verifiedContacts.push(contact.data[0])
+          } else {
+            verifiedContacts.push(recipient)
+          }
+        }
+      })
     )
-      .then(recipients =>
-        onShare(document, recipients, sharingType, sharingDesc)
+    try {
+      const allCreatedRecipients = await Promise.all(
+        verifiedContacts.map(recipient =>
+          recipient.id
+            ? recipient
+            : createContact({
+                email: [{ address: recipient.email, primary: true }]
+              }).then(resp => resp.data)
+        )
       )
-      .then(() => {
-        Alerter.success(...this.getSuccessMessage(recipientsBefore))
-        this.reset()
-      })
-      .catch(err => {
-        Alerter.error('Error.generic')
-        this.reset()
-        throw err
-      })
+
+      await onShare(document, allCreatedRecipients, sharingType, sharingDesc)
+
+      Alerter.success(
+        ...getSuccessMessage(
+          recipientsBefore,
+          allCreatedRecipients,
+          documentType
+        )
+      )
+      this.reset()
+    } catch (err) {
+      Alerter.error('Error.generic')
+      this.reset()
+      throw err
+    }
   }
 
   render() {
