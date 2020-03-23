@@ -1,122 +1,22 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 import get from 'lodash/get'
 
 import { useClient } from 'cozy-client'
-import { Button, Icon } from 'cozy-ui/transpiled/react'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
-import palette from 'cozy-ui/transpiled/react/palette'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+
+import ShareSubmit from './Sharesubmit'
+import ShareTypeSelect from './Sharetypeselect'
 
 import { Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import ShareRecipientsInput from './ShareRecipientsInput'
 import styles from '../share.styl'
-import logger from '../logger'
 import { validateEmail } from '../helpers/email'
 import { getSuccessMessage } from '../helpers/successMessage'
-const DropdownIndicator = props => (
-  <components.DropdownIndicator {...props}>
-    <Icon icon="bottom" color={palette.coolGrey} />
-  </components.DropdownIndicator>
-)
-const Option = props => (
-  <components.Option {...props}>
-    <div className={cx(styles['select-option'])}>
-      {props.isSelected && <Icon icon="check" color={palette.dodgerBlue} />}
-      <div>
-        <div className={styles['select-option-label']}>{props.label}</div>
-        <div className={styles['select-option-desc']}>{props.data.desc}</div>
-      </div>
-    </div>
-  </components.Option>
-)
-const customStyles = {
-  option: (base, state) => ({
-    ...base,
-    color: 'black',
-    backgroundColor: state.isFocused ? palette.paleGrey : null,
-    padding: 0,
-    borderBottom:
-      state.options.findIndex(o => o.value === state.value) === 0
-        ? `1px solid ${palette.silver}`
-        : null
-  }),
-  menu: base => ({
-    ...base,
-    width: '204%'
-  })
-}
-const ShareTypeSelect = ({ options, onChange }) => (
-  <div className={styles['select-wrapper']}>
-    <SelectBox
-      name="select"
-      classNamePrefix="needsclick react-select"
-      components={{ DropdownIndicator, Option }}
-      styles={customStyles}
-      defaultValue={options[0]}
-      isSearchable={false}
-      onChange={option => {
-        onChange(option.value)
-      }}
-      options={options}
-    />
-  </div>
-)
-
-ShareTypeSelect.propTypes = {
-  onChange: PropTypes.func,
-  options: PropTypes.array.isRequired
-}
-
-ShareTypeSelect.defaultProps = {
-  onChange: logger.log,
-  value: ''
-}
-
-const ShareSubmit = props => (
-  <Button
-    onClick={() => {
-      props.onSubmit()
-    }}
-    busy={props.loading}
-    label={props.label}
-    disabled={props.disabled}
-  />
-)
-
-ShareSubmit.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  label: PropTypes.string,
-  loading: PropTypes.bool,
-  disabled: PropTypes.bool
-}
-
-ShareSubmit.defaultProps = {
-  label: 'Submit',
-  loading: false
-}
 
 class ShareByEmail extends Component {
-  static contextTypes = {
-    t: PropTypes.func.isRequired
-  }
-  sharingTypes = [
-    {
-      value: 'two-way',
-      label: this.context.t('Share.type.two-way'),
-      desc: this.context.t('Share.type.desc.two-way'),
-      disabled: false
-    },
-    {
-      value: 'one-way',
-      label: this.context.t('Share.type.one-way'),
-      desc: this.context.t('Share.type.desc.one-way'),
-      disabled: false
-    }
-  ]
-
   initialState = {
     recipients: [],
     sharingType: 'two-way',
@@ -269,6 +169,23 @@ class ShareByEmail extends Component {
     }
   }
 
+  getSharingTypes = () => {
+    const { t } = this.props
+    return [
+      {
+        value: 'two-way',
+        label: t('Share.type.two-way'),
+        desc: t('Share.type.desc.two-way'),
+        disabled: false
+      },
+      {
+        value: 'one-way',
+        label: t('Share.type.one-way'),
+        desc: t('Share.type.desc.one-way'),
+        disabled: false
+      }
+    ]
+  }
   render() {
     const { t } = this.context
     const { contacts, documentType, groups } = this.props
@@ -294,7 +211,7 @@ class ShareByEmail extends Component {
         </div>
         <div className={styles['share-type-control']}>
           <ShareTypeSelect
-            options={this.sharingTypes}
+            options={this.getSharingTypes()}
             onChange={this.onChange}
           />
           <ShareSubmit
@@ -320,4 +237,4 @@ ShareByEmail.propTypes = {
   createContact: PropTypes.func.isRequired
 }
 
-export default ShareByEmail
+export default translate()(ShareByEmail)
