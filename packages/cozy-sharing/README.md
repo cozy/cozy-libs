@@ -2,12 +2,61 @@
 
 Open the playgrounds in cozy-libs and run `yarn start`
 
-# How to use the lib 
+# How to use the lib
 
-In your app, you have to : 
+In your app, you have to :
 
-- import the Provider: ```import SharingProvider, { ShareButton, ShareModal } from 'cozy-sharing'```
-- import the sylesheet.css: ```import 'cozy-sharing/dist/stylesheet.css'```
+- import the Provider: `import SharingProvider, { ShareButton, ShareModal } from 'cozy-sharing'`
+- import the stylesheet.css: `import 'cozy-sharing/dist/stylesheet.css'`
+
+## Using the built-in components
+
+Some of the exposed components are fully featured components, ready to render. They need a `SharingProvider` above them in the render tree and the imported stylesheet for their styles.
+
+```
+import { ShareModal } from 'cozy-sharing'
+
+const ToggleModal = () => {
+  const [isModalDisplayed, setIsModalDisplayed] = useState(false)
+
+  return (
+    <div>
+      <Button onClick={() => setIsModalDisplayed(true)}>Open modal</Button>
+      {isModalDisplayed && <ShareModal document={doc} />}
+    </div>
+  )
+}
+```
+
+Other components accept a render prop as children that receive some information from the sharing context.
+
+```
+import { SharedDocument } from 'cozy-sharing'
+
+const MyComp = () => {
+  return (
+    <SharedDocument docId='123'>
+      {({ isShared, link }) => (
+        {isShared ? link : 'Not shared yet'}
+      )}
+    </SharedDocument>
+  )
+}
+```
+
+## Usage with hooks
+
+`cozy-sharing` can now be used with hooks as well:
+
+```
+import { SharingContext } from 'cozy-sharing'
+
+const MyComp = () => {
+  const { share } = useContext(SharingContext)
+
+  return <Button onClick={() => share(document, recipients, sharingType, description)}>Share</Button>
+}
+```
 
 # Share and send mail in development
 
@@ -42,4 +91,4 @@ Then simply run `mailhog` and open http://cozy.tools:8025/.
 
 ## Retrieve sent emails
 
-With MailHog, **every email** sent by cozy-stack is caught. That means the email address *does not have to be a real one*, ie. `bob@cozy`, `bob@cozy.tools` are perfectly fine. It *could be a real one*, but the email will not reach the real recipient's inbox, say `contact@cozycloud.cc`.
+With MailHog, **every email** sent by cozy-stack is caught. That means the email address _does not have to be a real one_, ie. `bob@cozy`, `bob@cozy.tools` are perfectly fine. It _could be a real one_, but the email will not reach the real recipient's inbox, say `contact@cozycloud.cc`.
