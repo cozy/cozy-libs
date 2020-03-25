@@ -16,12 +16,12 @@ export const getOrCreateFromArray = async (client, contacts, createContact) => {
                 address: contact.email
               }
             },
-            id: {
+            _id: {
               $gt: null
             }
           },
           {
-            indexedFields: ['id']
+            indexedFields: ['_id']
           }
         )
 
