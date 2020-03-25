@@ -109,4 +109,13 @@ class ShareByLink extends React.Component {
   }
 }
 
+ShareByLink.propTypes = {
+  checked: PropTypes.bool.isRequired,
+  documentType: PropTypes.string.isRequired,
+  document: PropTypes.object.isRequired,
+  link: PropTypes.string.isRequired,
+  onEnable: PropTypes.func.isRequired,
+  onDisable: PropTypes.func.isRequired
+}
+
 export default ShareByLink
