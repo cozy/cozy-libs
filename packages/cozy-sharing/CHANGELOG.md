@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.9.0...cozy-sharing@1.9.1) (2020-03-25)
+
+
+### Bug Fixes
+
+* Use _id instead of id ([de27d3b](https://github.com/cozy/cozy-libs/commit/de27d3b))
+
+
+
+
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.8.12...cozy-sharing@1.9.0) (2020-03-23)
 
 
