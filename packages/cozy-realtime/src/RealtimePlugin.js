@@ -3,6 +3,9 @@ import CozyRealtime from './CozyRealtime'
 /**
  * Realtime plugin for cozy-client
  *
+ * - Handles login/logout
+ * - Proxies subscribe/unsubscribe/unsubscribeAll to CozyRealtime
+ *
  * @class
  */
 class RealtimePlugin {
