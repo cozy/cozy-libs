@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.9.1...cozy-sharing@1.10.0) (2020-03-25)
+
+
+### Features
+
+* Expose hasWriteAccess function in context ([571fdc4](https://github.com/cozy/cozy-libs/commit/571fdc4))
+* Expose SharingContext for usage in hooks ([04b0b5b](https://github.com/cozy/cozy-libs/commit/04b0b5b))
+
+
+
+
+
 ## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.9.0...cozy-sharing@1.9.1) (2020-03-25)
 
 
