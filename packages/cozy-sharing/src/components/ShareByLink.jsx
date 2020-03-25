@@ -101,9 +101,6 @@ class ShareByLink extends React.Component {
             onToggle={this.toggleShareLink}
           />
         </div>
-        <div className={styles['share-bylink-desc']}>
-          {t(`${documentType}.share.shareByLink.desc`)}
-        </div>
       </div>
     )
   }

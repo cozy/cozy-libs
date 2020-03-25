@@ -64,7 +64,6 @@
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
         "subtitle": "Par lien public",
-        "desc": "Chaque personne possédant le lien fourni peut voir et télécharger vos fichiers.",
         "creating": "Création du lien...",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
