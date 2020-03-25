@@ -64,7 +64,6 @@
       "sharedBy": "Shared by %{name}",
       "shareByLink": {
         "subtitle": "By public link",
-        "desc": "Anyone with the provided link can see and download your files.",
         "creating": "Creating your link...",
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
