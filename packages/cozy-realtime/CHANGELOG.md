@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.7.0...cozy-realtime@3.8.0) (2020-03-26)
+
+
+### Features
+
+* CozyRealtime handles login/logout ([44cbcbc](https://github.com/cozy/cozy-libs/commit/44cbcbc))
+
+
+
+
+
 # [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.6.4...cozy-realtime@3.7.0) (2020-03-03)
 
 
