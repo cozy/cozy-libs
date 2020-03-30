@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import reducer, {
   receiveSharings,
@@ -40,7 +41,7 @@ import { RecipientsAvatars } from './components/Recipient'
 import { default as DumbSharedStatus } from './components/SharedStatus'
 import { withClient } from 'cozy-client'
 
-export { default as withLocales } from './withLocales'
+import withLocales from './withLocales'
 
 import { fetchNextPermissions } from './fetchNextPermissions'
 const track = (document, action) => {
@@ -247,7 +248,9 @@ export class SharingProvider extends Component {
     )
   }
 }
+
 export default withClient(SharingProvider)
+
 export const SharedDocument = ({ docId, children }) => (
   <SharingContext.Consumer>
     {({
@@ -274,24 +277,26 @@ export const SharedDocument = ({ docId, children }) => (
   </SharingContext.Consumer>
 )
 
-export const SharedStatus = ({ docId, className, noSharedClassName }) => (
-  <SharingContext.Consumer>
-    {({ byDocId, getRecipients, getSharingLink } = {}) =>
-      !byDocId || !byDocId[docId] ? (
-        <span className={className + ' ' + noSharedClassName}>—</span>
-      ) : (
-        <DumbSharedStatus
-          className={className}
-          recipients={getRecipients(docId)}
-          docId={docId}
-          link={getSharingLink(docId) !== null}
-        />
-      )
-    }
-  </SharingContext.Consumer>
+export const SharedStatus = withLocales(
+  ({ docId, className, noSharedClassName }) => (
+    <SharingContext.Consumer>
+      {({ byDocId, getRecipients, getSharingLink } = {}) =>
+        !byDocId || !byDocId[docId] ? (
+          <span className={className + ' ' + noSharedClassName}>—</span>
+        ) : (
+          <DumbSharedStatus
+            className={className}
+            recipients={getRecipients(docId)}
+            docId={docId}
+            link={getSharingLink(docId) !== null}
+          />
+        )
+      }
+    </SharingContext.Consumer>
+  )
 )
 
-export const SharedBadge = ({ docId, ...rest }) => (
+export const SharedBadge = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>
     {({ byDocId, isOwner } = {}) =>
       !byDocId || !byDocId[docId] ? null : (
@@ -299,9 +304,9 @@ export const SharedBadge = ({ docId, ...rest }) => (
       )
     }
   </SharingContext.Consumer>
-)
+))
 
-export const SharedRecipients = ({ docId, onClick, ...rest }) => (
+export const SharedRecipients = withLocales(({ docId, onClick, ...rest }) => (
   <SharingContext.Consumer>
     {({ byDocId, getRecipients, getSharingLink } = {}) =>
       !byDocId || !byDocId[docId] ? null : (
@@ -314,9 +319,9 @@ export const SharedRecipients = ({ docId, onClick, ...rest }) => (
       )
     }
   </SharingContext.Consumer>
-)
+))
 
-export const SharedRecipientsList = ({ docId, ...rest }) => (
+export const SharedRecipientsList = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>
     {({ byDocId, isOwner, getRecipients } = {}) =>
       !byDocId || !byDocId[docId] || !isOwner(docId) ? null : (
@@ -327,26 +332,28 @@ export const SharedRecipientsList = ({ docId, ...rest }) => (
       )
     }
   </SharingContext.Consumer>
-)
+))
 
-export const ShareButton = ({ docId, ...rest }, { t }) => (
-  <SharingContext.Consumer>
-    {({ byDocId, documentType, isOwner }) =>
-      !byDocId[docId] ? (
-        <DumbShareButton label={t(`${documentType}.share.cta`)} {...rest} />
-      ) : isOwner(docId) ? (
-        <SharedByMeButton
-          label={t(`${documentType}.share.sharedByMe`)}
-          {...rest}
-        />
-      ) : (
-        <SharedWithMeButton
-          label={t(`${documentType}.share.sharedWithMe`)}
-          {...rest}
-        />
-      )
-    }
-  </SharingContext.Consumer>
+export const ShareButton = withLocales(
+  translate()(({ t, docId, ...rest }) => (
+    <SharingContext.Consumer>
+      {({ byDocId, documentType, isOwner }) => {
+        return !byDocId[docId] ? (
+          <DumbShareButton label={t(`${documentType}.share.cta`)} {...rest} />
+        ) : isOwner(docId) ? (
+          <SharedByMeButton
+            label={t(`${documentType}.share.sharedByMe`)}
+            {...rest}
+          />
+        ) : (
+          <SharedWithMeButton
+            label={t(`${documentType}.share.sharedWithMe`)}
+            {...rest}
+          />
+        )
+      }}
+    </SharingContext.Consumer>
+  ))
 )
 
 ShareButton.contextTypes = {
@@ -375,7 +382,7 @@ const SharingModal = ({ document, ...rest }) => (
   </SharingContext.Consumer>
 )
 
-export const ShareModal = ({ document, ...rest }) => (
+export const ShareModal = withLocales(({ document, ...rest }) => (
   <SharingContext.Consumer>
     {({ byDocId, isOwner, canReshare }) =>
       !byDocId[document.id] ||
@@ -387,7 +394,8 @@ export const ShareModal = ({ document, ...rest }) => (
       )
     }
   </SharingContext.Consumer>
-)
+))
+
 /**
  * Expose a refresh method
  */
@@ -401,4 +409,4 @@ export const RefreshableSharings = ({ children }) => (
   </SharingContext.Consumer>
 )
 
-export { SharingContext }
+export { SharingContext, withLocales }
