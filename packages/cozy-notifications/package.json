@@ -21,7 +21,7 @@
     "watch": "yarn build --watch"
   },
   "dependencies": {
-    "cozy-ui": "27.11.2",
+    "cozy-ui": "27.14.0",
     "handlebars": "4.1.2",
     "handlebars-layouts": "3.1.4",
     "lodash": "4.17.15",
