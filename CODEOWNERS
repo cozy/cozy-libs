@@ -1,4 +1,4 @@
-packages/babel-preset-cozy-app @ptbrowne
+packages/babel-preset-cozy-app @ptbrowne @Crash-- 
 packages/browserslist-config-cozy @Crash-- @ptbrowne
 packages/commitlint-config-cozy @y-lohse
 packages/cozy-app-publish @y-lohse @doubleface
