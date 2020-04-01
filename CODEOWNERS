@@ -4,12 +4,12 @@ packages/commitlint-config-cozy @y-lohse
 packages/cozy-app-publish @y-lohse @doubleface
 packages/cozy-ci @y-lohse
 packages/cozy-device-helper @ptbrowne
-packages/cozy-doctypes @ptbrowne
+packages/cozy-doctypes @ptbrowne @y-lohse
 packages/cozy-flags @ptbrowne @drazik
 packages/cozy-harvest-lib @Crash-- @y-lohse
 packages/cozy-interapp @Crash-- @y-lohse
 packages/cozy-realtime @ptbrowne @Crash
 packages/cozy-release @doubleface @ptbrowne
-packages/eslint-config-cozy-app @ptbrowne
+packages/eslint-config-cozy-app @y-lohse @ptbrowne
 packages/renovate-config-cozy @y-lohse @doubleface
 packages/cozy-logger @doubleface
