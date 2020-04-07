@@ -123,6 +123,11 @@ exports[`TriggerManager when given an oauth konnector should redirect to OAuthFo
       "handleAccountUpdated": [Function],
       "handleJobUpdated": [Function],
       "handleTwoFA": [Function],
+      "konnector": Object {
+        "oauth": Object {
+          "scope": "test",
+        },
+      },
       "launch": [Function],
       "realtime": CozyRealtime {
         "client": CozyClient {

@@ -31,7 +31,7 @@ export const KonnectorAccountTabs = ({
   t
 }) => {
   return (
-    <FlowProvider initialTrigger={initialTrigger}>
+    <FlowProvider initialTrigger={initialTrigger} konnector={konnector}>
       {({ flow }) => {
         const flowState = flow.getState()
         const { error } = flowState

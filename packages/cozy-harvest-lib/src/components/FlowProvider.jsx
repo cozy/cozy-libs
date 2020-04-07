@@ -32,7 +32,7 @@ import ConnectionFlow, {
 export class FlowProvider extends Component {
   constructor(props, context) {
     super(props, context)
-    const { initialTrigger } = this.props
+    const { initialTrigger, konnector } = this.props
     this.state = {
       showTwoFAModal: false
     }
@@ -44,12 +44,12 @@ export class FlowProvider extends Component {
     this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
     this.handleFlowUpdate = this.handleFlowUpdate.bind(this)
 
-    this.setupConnectionFlow(initialTrigger)
+    this.setupConnectionFlow(initialTrigger, konnector)
   }
 
-  setupConnectionFlow(trigger) {
+  setupConnectionFlow(trigger, konnector) {
     const { client } = this.props
-    this.flow = new ConnectionFlow(client, trigger)
+    this.flow = new ConnectionFlow(client, trigger, konnector)
     this.flow
       .on(ERROR_EVENT, this.handleError)
       .on(SUCCESS_EVENT, this.handleSuccess)
@@ -170,6 +170,10 @@ FlowProvider.propTypes = {
    * CozyClient instance
    */
   client: PropTypes.object.isRequired,
+  /**
+   * konnector manifest
+   */
+  konnector: PropTypes.object.isRequired,
   /**
    * Callback to call when the trigger is launched
    */

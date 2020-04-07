@@ -66,7 +66,7 @@ const tMock = jest.fn()
 const client = new CozyClient({})
 const props = {
   konnector: fixtures.konnector,
-  flow: new ConnectionFlow(client),
+  flow: new ConnectionFlow(client, undefined, fixtures.konnector),
   flowState: {},
   t: tMock,
   vaultClient: mockVaultClient,
@@ -76,8 +76,24 @@ const props = {
 
 const propsWithAccount = {
   ...props,
+  flow: new ConnectionFlow(
+    client,
+    fixtures.existingTrigger,
+    fixtures.konnector
+  ),
   account: fixtures.existingAccount,
   trigger: fixtures.existingTrigger
+}
+
+const oAuthKonnector = {
+  oauth: {
+    scope: 'test'
+  }
+}
+const oAuthProps = {
+  ...props,
+  konnector: oAuthKonnector,
+  flow: new ConnectionFlow(client, undefined, oAuthKonnector)
 }
 
 describe('TriggerManager', () => {
@@ -94,13 +110,8 @@ describe('TriggerManager', () => {
 
   describe('when given an oauth konnector', () => {
     it('should redirect to OAuthForm', () => {
-      const konnector = {
-        oauth: {
-          scope: 'test'
-        }
-      }
       const component = shallow(
-        <TriggerManager {...props} konnector={konnector} />
+        <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
       ).getElement()
       expect(component).toMatchSnapshot()
     })

@@ -37,6 +37,9 @@ const triggersMutationsMock = {
 const props = {
   client,
   initialTrigger: trigger,
+  konnector: {
+    slug: 'konnectorslug'
+  },
   ...triggersMutationsMock
 }
 
@@ -53,6 +56,13 @@ describe('FlowProvider', () => {
 
   afterAll(() => {
     jest.resetAllMocks()
+  })
+
+  it('should pass the konnector to the flow', () => {
+    const children = jest.fn()
+    const wrapper = shallow(<FlowProvider {...props}>{children}</FlowProvider>)
+    const flow = wrapper.instance().flow
+    expect(flow.konnector).toEqual(props.konnector)
   })
 
   it('should support a flow with a SUCCESS', () => {
