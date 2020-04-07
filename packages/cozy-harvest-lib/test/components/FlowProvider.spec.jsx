@@ -2,6 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { FlowProvider } from 'components/FlowProvider'
 import {
+  ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT
@@ -80,6 +81,8 @@ describe('FlowProvider', () => {
     wrapper.update()
     expect(wrapper.find(TwoFAModal).length).toBe(0)
     expect(children.mock.calls[2][0].flow.getState().status).toEqual('SUCCESS')
+    expect(flow.listeners(SUCCESS_EVENT).length).toEqual(1)
+    expect(flow.listeners(ERROR_EVENT).length).toEqual(1)
   })
 
   it('should support a flow with a LOGIN_SUCCESS', () => {
@@ -98,6 +101,8 @@ describe('FlowProvider', () => {
     expect(children.mock.calls[2][0].flow.getState().status).toEqual(
       'LOGIN_SUCCESS'
     )
+    expect(flow.listeners(SUCCESS_EVENT).length).toEqual(1)
+    expect(flow.listeners(ERROR_EVENT).length).toEqual(1)
   })
 
   it('should call the onLoginSuccess callback', () => {
@@ -119,6 +124,8 @@ describe('FlowProvider', () => {
         }
       })
     )
+    expect(flow.listeners(SUCCESS_EVENT).length).toEqual(1)
+    expect(flow.listeners(ERROR_EVENT).length).toEqual(1)
   })
 
   it('should detect an error in the initial trigger', () => {

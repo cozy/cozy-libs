@@ -94,7 +94,6 @@ export class FlowProvider extends Component {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
-    this.stopWatchingConnectionFlow()
 
     const { onError } = this.props
     if (typeof onError === 'function') onError(error)
@@ -113,7 +112,6 @@ export class FlowProvider extends Component {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
-    this.stopWatchingConnectionFlow()
     const { onSuccess } = this.props
     const flow = this.flow
     if (typeof onSuccess === 'function') onSuccess(flow.trigger)
@@ -171,7 +169,7 @@ FlowProvider.propTypes = {
    */
   client: PropTypes.object.isRequired,
   /**
-   * konnector manifest
+   * Konnector manifest
    */
   konnector: PropTypes.object.isRequired,
   /**
