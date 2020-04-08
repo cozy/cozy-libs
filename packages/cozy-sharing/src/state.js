@@ -6,6 +6,7 @@ const UPDATE_SHARING = 'UPDATE_SHARING'
 const REVOKE_RECIPIENT = 'REVOKE_RECIPIENT'
 const REVOKE_SELF = 'REVOKE_SELF'
 const ADD_SHARING_LINK = 'ADD_SHARING_LINK'
+const UPDATE_SHARING_LINK = 'UPDATE_SHARING_LINK'
 const REVOKE_SHARING_LINK = 'REVOKE_SHARING_LINK'
 const RECEIVE_PATHS = 'RECEIVE_PATHS'
 
@@ -61,6 +62,7 @@ export const revokeRecipient = (sharing, index, path) => {
 }
 export const revokeSelf = sharing => ({ type: REVOKE_SELF, sharing })
 export const addSharingLink = data => ({ type: ADD_SHARING_LINK, data })
+export const updateSharingLink = data => ({ type: UPDATE_SHARING_LINK, data })
 export const revokeSharingLink = permissions => ({
   type: REVOKE_SHARING_LINK,
   permissions
@@ -176,6 +178,8 @@ const permissions = (state = [], action) => {
       } else {
         return [...state, ...action.data]
       }
+    case UPDATE_SHARING_LINK:
+      return state.map(p => (p.id === action.data.id ? action.data : p))
     case REVOKE_SHARING_LINK:
       // eslint-disable-next-line no-case-declarations
       const permIds = action.permissions.map(p => p.id)
