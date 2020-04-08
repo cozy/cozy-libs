@@ -2,6 +2,7 @@ import reducer, {
   receiveSharings,
   addSharing,
   addSharingLink,
+  updateSharingLink,
   revokeSharingLink,
   getRecipients,
   revokeRecipient,
@@ -172,6 +173,20 @@ describe('Sharing state', () => {
       folder_2: { sharings: [SHARING_2.id], permissions: [PERM_2.id] }
     })
     expect(newState.permissions).toEqual([PERM_1, PERM_2])
+  })
+
+  it('should update a sharing link', () => {
+    const initialState = reducer(
+      undefined,
+      receiveSharings({
+        permissions: [PERM_1, PERM_2]
+      })
+    )
+    const updatedPerm = { ...PERM_1 }
+    updatedPerm.attributes.permissions.rule0.verbs = ['GET', 'POST']
+
+    const newState = reducer(initialState, updateSharingLink(updatedPerm))
+    expect(newState.permissions).toEqual([updatedPerm, PERM_2])
   })
 
   it('should index an array of sharing links', () => {
