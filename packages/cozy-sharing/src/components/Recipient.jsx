@@ -18,7 +18,7 @@ import { Contact } from '../models'
 import Identity from './Identity'
 
 const MAX_DISPLAYED_RECIPIENTS = 3
-const DEFAULT_DISPLAY_NAME = 'models.contact.defaultDisplayName'
+const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
 export const RecipientsAvatars = ({
   recipients,
