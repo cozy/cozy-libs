@@ -36,7 +36,8 @@
         "desc": "Authorize the application to access to your Cozy's contacts: you'll be able to select them next time.",
         "action": "Authorize access",
         "success": "The application has access to your contacts"
-      }
+      },
+      "defaultDisplayName": "Anonymous"
     }
   },
   "Sharings": {
