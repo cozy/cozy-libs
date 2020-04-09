@@ -5,7 +5,7 @@ packages/cozy-app-publish @y-lohse @doubleface
 packages/cozy-ci @y-lohse
 packages/cozy-device-helper @ptbrowne
 packages/cozy-doctypes @ptbrowne @y-lohse
-packages/cozy-flags @ptbrowne @drazik
+packages/cozy-flags @ptbrowne @crash--
 packages/cozy-harvest-lib @Crash-- @y-lohse
 packages/cozy-interapp @Crash-- @y-lohse
 packages/cozy-realtime @ptbrowne @Crash
