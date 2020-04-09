@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.32.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.4...cozy-harvest-lib@1.32.5) (2020-04-09)
+
+
+### Bug Fixes
+
+* **Harvest:** Feed konnector to the flow in the trigger launcher ([361f909](https://github.com/cozy/cozy-libs/commit/361f909))
+* **Harvest:** Keep watching connection flow on result ([5a9e17b](https://github.com/cozy/cozy-libs/commit/5a9e17b))
+
+
+
+
+
 ## [1.32.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.3...cozy-harvest-lib@1.32.4) (2020-03-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
