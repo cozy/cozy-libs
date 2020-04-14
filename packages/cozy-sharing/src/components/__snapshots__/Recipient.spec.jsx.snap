@@ -3,7 +3,7 @@
 exports[`Recipient component should match snapshot if isMe and type file 1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -150,7 +150,7 @@ exports[`Recipient component should match snapshot if isMe and type file 1`] = `
           </withBreakpoints(MenuAwareMobile)>
         </div>
       </Status>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
@@ -158,7 +158,7 @@ exports[`Recipient component should match snapshot if isMe and type file 1`] = `
 exports[`Recipient component should match snapshot if isMe and type folder 1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -305,7 +305,7 @@ exports[`Recipient component should match snapshot if isMe and type folder 1`] =
           </withBreakpoints(MenuAwareMobile)>
         </div>
       </Status>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
@@ -313,7 +313,7 @@ exports[`Recipient component should match snapshot if isMe and type folder 1`] =
 exports[`Recipient component should match snapshot if isOwner 1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -460,7 +460,7 @@ exports[`Recipient component should match snapshot if isOwner 1`] = `
           </withBreakpoints(MenuAwareMobile)>
         </div>
       </Status>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
@@ -468,7 +468,7 @@ exports[`Recipient component should match snapshot if isOwner 1`] = `
 exports[`Recipient component should render if isMe  1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -614,7 +614,7 @@ exports[`Recipient component should render if isMe  1`] = `
           </withBreakpoints(MenuAwareMobile)>
         </div>
       </Status>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
