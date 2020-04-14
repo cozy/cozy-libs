@@ -10,16 +10,13 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Radio from 'cozy-ui/transpiled/react/Radio'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 import logger from '../logger'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 
 class ShareByLink extends React.Component {
-  static contextTypes = {
-    t: PropTypes.func.isRequired
-  }
-
   constructor(props) {
     super(props)
     this.state = {
@@ -41,11 +38,11 @@ class ShareByLink extends React.Component {
   copyLinkToClipboard = () => {
     if (copy(this.props.link))
       Alerter.success(
-        this.context.t(`${this.props.documentType}.share.shareByLink.copied`)
+        this.props.t(`${this.props.documentType}.share.shareByLink.copied`)
       )
     else
       Alerter.error(
-        this.context.t(`${this.props.documentType}.share.shareByLink.failed`)
+        this.props.t(`${this.props.documentType}.share.shareByLink.failed`)
       )
   }
 
@@ -55,7 +52,7 @@ class ShareByLink extends React.Component {
       await this.props.onEnable(this.props.document)
     } catch (e) {
       Alerter.error(
-        this.context.t(`${this.props.documentType}.share.error.generic`)
+        this.props.t(`${this.props.documentType}.share.error.generic`)
       )
       logger.log(e)
     } finally {
@@ -69,7 +66,7 @@ class ShareByLink extends React.Component {
       await this.props.onDisable(this.props.document)
     } catch (e) {
       Alerter.error(
-        this.context.t(`${this.props.documentType}.share.error.revoke`)
+        this.props.t(`${this.props.documentType}.share.error.revoke`)
       )
       logger.log(e)
     } finally {
@@ -82,14 +79,14 @@ class ShareByLink extends React.Component {
   }
 
   render() {
-    const t = this.context.t
     const { loading, menuIsOpen } = this.state
     const {
       checked,
       document,
       documentType,
       permissions,
-      onChangePermissions
+      onChangePermissions,
+      t
     } = this.props
     const permissionCategories = get(
       permissions,
@@ -238,4 +235,4 @@ ShareByLink.propTypes = {
   onDisable: PropTypes.func.isRequired
 }
 
-export default ShareByLink
+export default translate()(ShareByLink)
