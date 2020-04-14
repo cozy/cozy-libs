@@ -64,11 +64,19 @@
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
-        "subtitle": "Par lien public",
-        "creating": "Création du lien...",
+        "subtitle": "Ou partager par lien",
+        "create": "Générer un lien",
+        "activated": "Lien activé",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
-        "failed": "Impossible de copier dans le presse papier"
+        "failed": "Impossible de copier dans le presse papier",
+        "ro": "Peut consulter",
+        "rw": "Peut modifier",
+        "desc": {
+          "ro": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
+          "rw": "Les détenteurs du lien peuvent modifier et supprimer le contenu. "
+        },
+        "deactivate": "Désactiver le lien"
       },
       "shareByEmail": {
         "subtitle": "Par email",
@@ -139,12 +147,20 @@
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
-        "subtitle": "Par lien public",
+        "subtitle": "Partager par lien",
         "desc": "Chaque personne possédant le lien fourni peut voir et modifier votre note.",
-        "creating": "Création du lien...",
+        "create": "Générer un lien",
+        "activated": "Lien activé",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
-        "failed": "Impossible de copier dans le presse papier"
+        "failed": "Impossible de copier dans le presse papier",
+        "ro": "Peut consulter",
+        "rw": "Peut modifier",
+        "desc": {
+          "ro": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
+          "rw": "Les détenteurs du lien peuvent modifier et supprimer le contenu. "
+        },
+        "deactivate": "Désactiver le lien"
       },
       "shareByEmail": {
         "subtitle": "Par email",
@@ -211,13 +227,21 @@
       "sharedByMe": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "shareByLink": {
-        "subtitle": "Par lien public",
+        "subtitle": "Ou partager par lien",
         "desc": "Chaque personne possédant le lien fourni peut voir et télécharger vos photos.",
         "fetchFailed": "Oups ! Il semblerait que votre connexion internet soit limitée, réessayez plus tard quand le réseau sera meilleur.",
-        "creating": "Création de votre lien...",
+        "create": "Générer un lien",
+        "activated": "Lien activé",
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papier",
-        "failed": "Impossible de copier dans le presse-papier"
+        "failed": "Impossible de copier dans le presse-papier",
+        "ro": "Peut consulter",
+        "rw": "Peut modifier",
+        "desc": {
+          "ro": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
+          "rw": "Les détenteurs du lien peuvent modifier et supprimer le contenu. "
+        },
+        "deactivate": "Désactiver le lien"
       },
       "shareByEmail": {
         "title": "Par e-mail",

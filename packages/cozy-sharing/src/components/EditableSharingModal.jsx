@@ -24,9 +24,11 @@ const EditableSharingModal = ({
           isOwner,
           getRecipients,
           getSharingLink,
+          getDocumentPermissions,
           share,
           revoke,
           shareByLink,
+          updateDocumentPermissions,
           revokeSharingLink,
           hasSharedParent,
           hasSharedChild,
@@ -41,12 +43,14 @@ const EditableSharingModal = ({
               groups={groups}
               recipients={getRecipients(document.id)}
               link={getSharingLink(document.id)}
+              permissions={getDocumentPermissions(document.id)}
               isOwner={isOwner(document.id)}
               hasSharedParent={hasSharedParent(document)}
               hasSharedChild={hasSharedChild(document)}
               onShare={share}
               onRevoke={revoke}
               onShareByLink={shareByLink}
+              onUpdateShareLinkPermissions={updateDocumentPermissions}
               onRevokeLink={revokeSharingLink}
               onRevokeSelf={revokeSelf}
               {...rest}
