@@ -3,7 +3,7 @@
 exports[`SharedStatus component should display the link if there is a link 1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -83,7 +83,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
           </SharingTooltip>
         </span>
       </SharedStatus>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
@@ -91,7 +91,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
 exports[`SharedStatus component should have the right display if there is several recipients 1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -169,7 +169,7 @@ exports[`SharedStatus component should have the right display if there is severa
           </SharingTooltip>
         </span>
       </SharedStatus>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
@@ -177,7 +177,7 @@ exports[`SharedStatus component should have the right display if there is severa
 exports[`SharedStatus component should just render a span if no sharing 1`] = `
 <AppLike>
   <TestI18n>
-    <I18n
+    <BaseI18n
       defaultLang="en"
       dictRequire={[Function]}
       lang="en"
@@ -190,7 +190,7 @@ exports[`SharedStatus component should just render a span if no sharing 1`] = `
           className="shared-status"
         />
       </SharedStatus>
-    </I18n>
+    </BaseI18n>
   </TestI18n>
 </AppLike>
 `;
