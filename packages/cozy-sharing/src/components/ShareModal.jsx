@@ -24,6 +24,7 @@ export default class ShareModal extends Component {
       groups,
       createContact,
       link,
+      permissions,
       recipients,
       documentType = 'Document',
       needsContactsPermission,
@@ -33,6 +34,7 @@ export default class ShareModal extends Component {
       onShare,
       onRevoke,
       onShareByLink,
+      onUpdateShareLinkPermissions,
       onRevokeLink,
       onRevokeSelf
     } = this.props
@@ -90,11 +92,13 @@ export default class ShareModal extends Component {
             <div className={cx(styles['share-modal-margins'], 'u-pb-1')}>
               <DumbShareByLink
                 document={document}
+                permissions={permissions}
                 documentType={documentType}
                 checked={link !== null}
                 link={link}
                 onEnable={onShareByLink}
                 onDisable={onRevokeLink}
+                onChangePermissions={onUpdateShareLinkPermissions}
               />
               {documentType !== 'Albums' && (
                 <WhoHasAccess
@@ -117,6 +121,7 @@ export default class ShareModal extends Component {
 
 ShareModal.propTypes = {
   document: PropTypes.object.isRequired,
+  permissions: PropTypes.object.isRequired,
   isOwner: PropTypes.bool,
   sharingDesc: PropTypes.string,
   contacts: contactsResponseType.isRequired,
@@ -132,5 +137,6 @@ ShareModal.propTypes = {
   onShare: PropTypes.func.isRequired,
   onRevoke: PropTypes.func.isRequired,
   onShareByLink: PropTypes.func.isRequired,
+  onUpdateShareLinkPermissions: PropTypes.func.isRequired,
   onRevokeLink: PropTypes.func.isRequired
 }

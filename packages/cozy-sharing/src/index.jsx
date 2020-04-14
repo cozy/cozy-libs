@@ -8,6 +8,7 @@ import reducer, {
   addSharing,
   updateSharing,
   addSharingLink,
+  updateSharingLink,
   revokeSharingLink,
   revokeRecipient,
   revokeSelf,
@@ -75,6 +76,8 @@ export class SharingProvider extends Component {
       getOwner: docId => getOwner(this.state, docId),
       getSharingType: docId => getSharingType(this.state, docId, instanceUri),
       getRecipients: docId => getRecipients(this.state, docId),
+      getDocumentPermissions: docId =>
+        getDocumentPermissions(this.state, docId),
       getSharingLink: docId => getSharingLink(this.state, docId, documentType),
       hasSharedParent: document => hasSharedParent(this.state, document),
       hasSharedChild: document => hasSharedChild(this.state, document),
@@ -82,6 +85,7 @@ export class SharingProvider extends Component {
       revoke: this.revoke,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
+      updateDocumentPermissions: this.updateDocumentPermissions,
       revokeSharingLink: this.revokeSharingLink,
       hasLoadedAtLeastOnePage: false,
       revokeAllRecipients: this.revokeAllRecipients,
@@ -212,6 +216,35 @@ export class SharingProvider extends Component {
       .createSharingLink(document, options)
     this.dispatch(addSharingLink(resp.data))
     return resp
+  }
+
+  /**
+   * updateDocumentPermissions - Description
+   *
+   * @param {Object} document A shared document
+   * @param {Array} newVerbs The new verbs to use for the permission, eg. ['GET']
+   *
+   * @return {Array}
+   */
+  updateDocumentPermissions = async (document, newVerbs) => {
+    const permissions = getDocumentPermissions(this.state, document.id)
+
+    const responses = await Promise.all(
+      permissions.map(async permissionDocument => {
+        const updatedPermissions = permissionDocument.attributes.permissions
+        Object.keys(updatedPermissions).map(permType => {
+          updatedPermissions[permType].verbs = newVerbs
+        })
+
+        const resp = await this.props.client
+          .collection('io.cozy.permissions')
+          .add(permissionDocument, updatedPermissions)
+        this.dispatch(updateSharingLink(resp))
+        return resp
+      })
+    )
+
+    return responses
   }
 
   revokeSharingLink = async document => {
