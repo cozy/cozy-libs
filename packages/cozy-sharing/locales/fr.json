@@ -239,7 +239,7 @@
         "rw": "Peut modifier",
         "desc": {
           "ro": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
-          "rw": "Les détenteurs du lien peuvent modifier et supprimer le contenu. "
+          "rw": "Les détenteurs du lien peuvent modifier et supprimer le contenu."
         },
         "deactivate": "Désactiver le lien"
       },
