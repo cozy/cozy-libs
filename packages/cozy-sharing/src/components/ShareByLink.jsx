@@ -74,20 +74,24 @@ class ShareByLink extends React.Component {
     }
   }
 
+  updateLinkPermissions({ isReadOnly }) {
+    const { document, documentType, onChangePermissions, t } = this.props
+    const verbs = isReadOnly ? ['GET'] : ['GET', 'POST', 'PUT', 'PATCH']
+    try {
+      onChangePermissions(document, verbs)
+    } catch (err) {
+      Alerter.error(t(`${documentType}.share.shareByLink.permserror`))
+      logger.log(err)
+    }
+  }
+
   toggleMenu = () => {
     this.setState(state => ({ ...state, menuIsOpen: !state.menuIsOpen }))
   }
 
   render() {
     const { loading, menuIsOpen } = this.state
-    const {
-      checked,
-      document,
-      documentType,
-      permissions,
-      onChangePermissions,
-      t
-    } = this.props
+    const { checked, documentType, permissions, t } = this.props
     const permissionCategories = get(
       permissions,
       '[0].attributes.permissions',
@@ -165,7 +169,7 @@ class ShareByLink extends React.Component {
                       }
                       onClick={() => {
                         this.toggleMenu()
-                        onChangePermissions(document, ['GET'])
+                        this.updateLinkPermissions({ isReadOnly: true })
                       }}
                     >
                       <>
@@ -187,12 +191,7 @@ class ShareByLink extends React.Component {
                       }
                       onClick={() => {
                         this.toggleMenu()
-                        onChangePermissions(document, [
-                          'GET',
-                          'POST',
-                          'PUT',
-                          'PATCH'
-                        ])
+                        this.updateLinkPermissions({ isReadOnly: false })
                       }}
                     >
                       <>

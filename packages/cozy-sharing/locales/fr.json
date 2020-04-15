@@ -70,6 +70,7 @@
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
+        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
         "ro": "Peut consulter",
         "rw": "Peut modifier",
         "desc": {
