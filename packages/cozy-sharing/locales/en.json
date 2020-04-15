@@ -154,6 +154,7 @@
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
+        "permserror": "An error occurred while changing the permissions of the link, please try again.",
         "ro": "Can read",
         "rw": "Can change",
         "desc": {
