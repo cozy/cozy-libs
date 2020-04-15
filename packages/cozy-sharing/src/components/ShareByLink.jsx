@@ -16,6 +16,19 @@ import logger from '../logger'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 
+const checkWritePermissions = permissions => {
+  const permissionCategories = get(
+    permissions,
+    '[0].attributes.permissions',
+    {}
+  )
+  return (
+    Object.values(permissionCategories).filter(permissionCategory =>
+      get(permissionCategory, 'verbs', []).includes('POST')
+    ).length > 0
+  )
+}
+
 class ShareByLink extends React.Component {
   constructor(props) {
     super(props)
@@ -92,15 +105,8 @@ class ShareByLink extends React.Component {
   render() {
     const { loading, menuIsOpen } = this.state
     const { checked, documentType, permissions, t } = this.props
-    const permissionCategories = get(
-      permissions,
-      '[0].attributes.permissions',
-      {}
-    )
-    const hasWritePermissions =
-      Object.values(permissionCategories).filter(permissionCategory =>
-        get(permissionCategory, 'verbs', []).includes('POST')
-      ).length > 0
+
+    const hasWritePermissions = checkWritePermissions(permissions)
 
     return (
       <div ref={this.containerRef}>
