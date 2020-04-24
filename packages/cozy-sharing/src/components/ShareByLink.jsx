@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import copy from 'copy-text-to-clipboard'
+import { models } from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Text, { Caption } from 'cozy-ui/transpiled/react/Text'
 import Button from 'cozy-ui/transpiled/react/Button'
@@ -16,7 +17,9 @@ import logger from '../logger'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 
-const checkWritePermissions = permissions => {
+const permissionModel = models.permission
+
+const checkIsReadOnlyPermissions = permissions => {
   const permissionCategories = get(
     permissions,
     '[0].attributes.permissions',
@@ -24,7 +27,7 @@ const checkWritePermissions = permissions => {
   )
   return (
     Object.values(permissionCategories).filter(permissionCategory =>
-      get(permissionCategory, 'verbs', []).includes('POST')
+      permissionModel.isReadOnly(permissionCategory)
     ).length > 0
   )
 }
@@ -106,7 +109,7 @@ class ShareByLink extends React.Component {
     const { loading, menuIsOpen } = this.state
     const { checked, documentType, permissions, t } = this.props
 
-    const hasWritePermissions = checkWritePermissions(permissions)
+    const hasReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
 
     return (
       <div ref={this.containerRef}>
@@ -152,7 +155,7 @@ class ShareByLink extends React.Component {
                   <Text>
                     {t(
                       `${documentType}.share.shareByLink.${
-                        hasWritePermissions ? 'rw' : 'ro'
+                        hasReadOnlyPermissions ? 'ro' : 'rw'
                       }`
                     )}
                   </Text>
@@ -169,7 +172,7 @@ class ShareByLink extends React.Component {
                           name="permissions"
                           value="ro"
                           className="u-w-1 u-h-1"
-                          checked={!hasWritePermissions}
+                          checked={hasReadOnlyPermissions}
                           readOnly
                         />
                       }
@@ -191,7 +194,7 @@ class ShareByLink extends React.Component {
                           name="permissions"
                           value="rw"
                           className="u-w-1 u-h-1"
-                          checked={hasWritePermissions}
+                          checked={!hasReadOnlyPermissions}
                           readOnly
                         />
                       }
