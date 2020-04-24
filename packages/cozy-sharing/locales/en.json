@@ -240,7 +240,7 @@
         "rw": "Can change",
         "desc": {
           "ro": "Link holders can only read or download content.",
-          "rw": "Link holders can alter and delete content."
+          "rw": "Link holders can change and delete content."
         },
         "deactivate": "Deactivate link"
       },
