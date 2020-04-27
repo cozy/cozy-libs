@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.10.1...cozy-sharing@1.11.0) (2020-04-27)
+
+
+### Bug Fixes
+
+* Export all components with locales ([5dd92cb](https://github.com/cozy/cozy-libs/commit/5dd92cb))
+* Missing translation ([dddaf29](https://github.com/cozy/cozy-libs/commit/dddaf29))
+* Removed extra space in string ([651f804](https://github.com/cozy/cozy-libs/commit/651f804))
+* Upgrade ui and client ([c0b9b77](https://github.com/cozy/cozy-libs/commit/c0b9b77))
+
+
+### Features
+
+* Allow to update a link sharing in state ([d8970f3](https://github.com/cozy/cozy-libs/commit/d8970f3))
+* Handle permission errors ([b7979f5](https://github.com/cozy/cozy-libs/commit/b7979f5))
+* Removed share by link description ([abc9309](https://github.com/cozy/cozy-libs/commit/abc9309))
+* Support writable link-sharing ([e099c7e](https://github.com/cozy/cozy-libs/commit/e099c7e))
+
+
+
+
+
 ## [1.10.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.10.0...cozy-sharing@1.10.1) (2020-03-26)
 
 **Note:** Version bump only for package cozy-sharing
