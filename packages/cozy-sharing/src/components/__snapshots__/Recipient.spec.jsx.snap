@@ -32,9 +32,9 @@ exports[`Recipient component should match snapshot if isMe and type file 1`] = `
                 "maxWidth": "280px",
               }
             }
+            label="Share.type.file"
             popover={true}
             position="right"
-            text="Share.type.file"
           >
             <MenuAwareMobile
               breakpoints={
@@ -56,9 +56,9 @@ exports[`Recipient component should match snapshot if isMe and type file 1`] = `
                   "maxWidth": "280px",
                 }
               }
+              label="Share.type.file"
               popover={true}
               position="right"
-              text="Share.type.file"
             >
               <Menu
                 breakpoints={
@@ -80,9 +80,9 @@ exports[`Recipient component should match snapshot if isMe and type file 1`] = `
                     "maxWidth": "280px",
                   }
                 }
+                label="Share.type.file"
                 popover={true}
                 position="right"
-                text="Share.type.file"
               >
                 <Menu
                   breakpoints={
@@ -187,9 +187,9 @@ exports[`Recipient component should match snapshot if isMe and type folder 1`] =
                 "maxWidth": "280px",
               }
             }
+            label="Share.type.folder"
             popover={true}
             position="right"
-            text="Share.type.folder"
           >
             <MenuAwareMobile
               breakpoints={
@@ -211,9 +211,9 @@ exports[`Recipient component should match snapshot if isMe and type folder 1`] =
                   "maxWidth": "280px",
                 }
               }
+              label="Share.type.folder"
               popover={true}
               position="right"
-              text="Share.type.folder"
             >
               <Menu
                 breakpoints={
@@ -235,9 +235,9 @@ exports[`Recipient component should match snapshot if isMe and type folder 1`] =
                     "maxWidth": "280px",
                   }
                 }
+                label="Share.type.folder"
                 popover={true}
                 position="right"
-                text="Share.type.folder"
               >
                 <Menu
                   breakpoints={
@@ -342,9 +342,9 @@ exports[`Recipient component should match snapshot if isOwner 1`] = `
                 "maxWidth": "280px",
               }
             }
+            label="Share.status.ready"
             popover={true}
             position="right"
-            text="Share.status.ready"
           >
             <MenuAwareMobile
               breakpoints={
@@ -366,9 +366,9 @@ exports[`Recipient component should match snapshot if isOwner 1`] = `
                   "maxWidth": "280px",
                 }
               }
+              label="Share.status.ready"
               popover={true}
               position="right"
-              text="Share.status.ready"
             >
               <Menu
                 breakpoints={
@@ -390,9 +390,9 @@ exports[`Recipient component should match snapshot if isOwner 1`] = `
                     "maxWidth": "280px",
                   }
                 }
+                label="Share.status.ready"
                 popover={true}
                 position="right"
-                text="Share.status.ready"
               >
                 <Menu
                   breakpoints={
@@ -496,9 +496,9 @@ exports[`Recipient component should render if isMe  1`] = `
                 "maxWidth": "280px",
               }
             }
+            label="Share.status.ready"
             popover={true}
             position="right"
-            text="Share.status.ready"
           >
             <MenuAwareMobile
               breakpoints={
@@ -520,9 +520,9 @@ exports[`Recipient component should render if isMe  1`] = `
                   "maxWidth": "280px",
                 }
               }
+              label="Share.status.ready"
               popover={true}
               position="right"
-              text="Share.status.ready"
             >
               <Menu
                 breakpoints={
@@ -544,9 +544,9 @@ exports[`Recipient component should render if isMe  1`] = `
                     "maxWidth": "280px",
                   }
                 }
+                label="Share.status.ready"
                 popover={true}
                 position="right"
-                text="Share.status.ready"
               >
                 <Menu
                   breakpoints={
