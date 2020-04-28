@@ -21,7 +21,7 @@ class MenuAwareMobile extends Component {
     const {
       breakpoints: { isMobile },
       children,
-      text,
+      label,
       buttonClassName,
       name
     } = this.props
@@ -30,7 +30,7 @@ class MenuAwareMobile extends Component {
         <div>
           <MenuButton
             onClick={this.toggle}
-            text={text}
+            text={label}
             buttonClassName={buttonClassName}
           />
           {this.state.active && (
