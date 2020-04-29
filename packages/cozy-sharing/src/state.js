@@ -87,15 +87,19 @@ const updateByIdItem = (state, id, updater) => {
       }
 }
 
-const indexSharing = (state = {}, sharing) =>
-  getSharedDocIds(sharing).reduce(
-    (byId, id) =>
-      updateByIdItem(byId, id, state => ({
-        ...state,
-        sharings: [...state.sharings, sharing.id]
-      })),
-    state
-  )
+const indexSharing = (state = {}, sharing) => {
+  const sharedDocs = getSharedDocIds(sharing)
+  return sharedDocs.reduce((byId, id) => {
+    const updatedByIdItem = updateByIdItem(byId, id, state => ({
+      ...state,
+      //todo index by id instead of having an array
+      sharings: Object.values(state.sharings).includes(sharing.id)
+        ? [...state.sharings]
+        : [...state.sharings, sharing.id]
+    }))
+    return updatedByIdItem
+  }, state)
+}
 
 const forgetSharing = (state = {}, sharing) =>
   getSharedDocIds(sharing).reduce(
@@ -142,6 +146,7 @@ const byDocId = (state = {}, action) => {
     case ADD_SHARING:
       return indexSharing(state, action.data)
     case REVOKE_RECIPIENT:
+    case UPDATE_SHARING:
       if (areAllRecipientsRevoked(action.sharing)) {
         return forgetSharing(state, action.sharing)
       }
@@ -203,7 +208,13 @@ const sharings = (state = [], action) => {
     case RECEIVE_SHARINGS:
       return action.data.sharings
     case ADD_SHARING:
-      return [...state, action.data]
+      //be sure that we're not adding the sharing twice
+      //can be the case if we launch the create and
+      //receive the realtime in the same time
+      //TODO Index by index...
+      const filtered_state = state.filter(s => s.id !== action.data.id)
+      const new_state = [...filtered_state, action.data]
+      return new_state
     case UPDATE_SHARING:
     case REVOKE_RECIPIENT:
       return state.map(s => {

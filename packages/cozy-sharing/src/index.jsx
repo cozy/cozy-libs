@@ -18,6 +18,7 @@ import reducer, {
   getOwner,
   getRecipients,
   getSharingById,
+  getSharingDocIds,
   getSharingForSelf,
   getSharingType,
   getSharingLink,
@@ -60,6 +61,32 @@ const track = (document, action) => {
 const trackSharingByLink = document => track(document, 'shareByLink')
 const isFile = ({ _type }) => _type === 'io.cozy.files'
 
+const fixIdForSharingReceiveByRealtime = sharing => {
+  return {
+    id: sharing._id,
+    ...sharing
+  }
+}
+/**
+ * When we receive an event for the sharing from
+ * the websocket the message is not formatted as
+ * the response of the api endpoint.
+ *
+ * Let's merge together
+ * @param {*} fromHTTPRequest
+ * @param {*} fromWebsocket
+ */
+const mergeSharing = (fromHTTPRequest, fromWebsocket) => {
+  return {
+    ...fromHTTPRequest,
+    meta: {
+      rev: fromWebsocket._rev
+    },
+    attributes: {
+      ...fromWebsocket
+    }
+  }
+}
 export class SharingProvider extends Component {
   constructor(props, context) {
     super(props, context)
@@ -99,6 +126,43 @@ export class SharingProvider extends Component {
 
   componentDidMount() {
     this.fetchAllSharings()
+    const { client } = this.props
+    this.realtime = client.plugins.realtime
+    this.type = 'io.cozy.sharings'
+    this.realtime.subscribe('created', this.type, this.handleCreateOrUpdate)
+    this.realtime.subscribe('updated', this.type, this.handleCreateOrUpdate)
+  }
+
+  componentWillUnmount() {
+    this.realtime.unsubscribe('created', this.type, this.handleCreateOrUpdate)
+    this.realtime.unsubscribe('updated', this.type, this.handleCreateOrUpdate)
+  }
+
+  handleCreateOrUpdate = async sharing => {
+    const internalSharing = getSharingById(this.state, sharing._id)
+    if (internalSharing) {
+      const newSharing = mergeSharing(internalSharing, sharing)
+      this.dispatch(updateSharing(newSharing))
+    } else {
+      const sharingWithId = fixIdForSharingReceiveByRealtime(sharing)
+      const fakedSharing = {
+        ...sharingWithId,
+        attributes: { ...sharingWithId },
+        type: 'io.cozy.sharings'
+      }
+
+      //TODO Check if we can getByIds to avoid query in map
+      const docsId = getSharingDocIds(fakedSharing)
+      docsId.map(async id => {
+        const file = await this.props.client.collection('io.cozy.files').get(id)
+        this.dispatch(
+          addSharing(
+            fakedSharing,
+            file.data.path || (await this.getFilesPaths([file.data]))
+          )
+        )
+      })
+    }
   }
 
   fetchAllSharings = async () => {
