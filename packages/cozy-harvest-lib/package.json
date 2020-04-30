@@ -50,7 +50,7 @@
     "babel-jest": "24.1.0",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-preset-cozy-app": "^1.8.1",
-    "cozy-client": "10.8.1",
+    "cozy-client": "10.9.0",
     "cozy-device-helper": "^1.9.2",
     "cozy-keys-lib": "^3.0.0",
     "cozy-realtime": "^3.8.0",
