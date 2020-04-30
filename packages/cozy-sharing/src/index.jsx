@@ -46,6 +46,9 @@ import { withClient } from 'cozy-client'
 import withLocales from './withLocales'
 
 import { fetchNextPermissions } from './fetchNextPermissions'
+
+import { getFilesPaths } from './helpers/files'
+
 const track = (document, action) => {
   const tracker = getTracker()
   if (!tracker) {
@@ -139,6 +142,7 @@ export class SharingProvider extends Component {
   }
 
   handleCreateOrUpdate = async sharing => {
+    const { client, doctype } = this.props
     const internalSharing = getSharingById(this.state, sharing._id)
     if (internalSharing) {
       const newSharing = mergeSharing(internalSharing, sharing)
@@ -154,11 +158,12 @@ export class SharingProvider extends Component {
       //TODO Check if we can getByIds to avoid query in map
       const docsId = getSharingDocIds(fakedSharing)
       docsId.map(async id => {
-        const file = await this.props.client.collection('io.cozy.files').get(id)
+        const file = await client.collection('io.cozy.files').get(id)
         this.dispatch(
           addSharing(
             fakedSharing,
-            file.data.path || (await this.getFilesPaths([file.data]))
+            file.data.path ||
+              (await getFilesPaths(client, doctype, [file.data]))
           )
         )
       })
@@ -188,36 +193,26 @@ export class SharingProvider extends Component {
     const folderPaths = resp.data
       .filter(f => f.type === 'directory' && !f.trashed)
       .map(f => f.path)
-    const filePaths = await this.getFilesPaths(
+    const filePaths = await getFilesPaths(
+      client,
+      doctype,
       resp.data.filter(f => f.type !== 'directory' && !f.trashed)
     )
+
     this.dispatch(receivePaths([...folderPaths, ...filePaths]))
   }
 
-  getFilesPaths = async files => {
-    const parentDirIds = files
-      .map(f => f.dir_id)
-      .filter((f, idx, arr) => arr.indexOf(f) === idx)
-    const parentDirs = await this.props.client
-      .collection(this.props.doctype)
-      .all({ keys: parentDirIds })
-    const filePaths = files.map(f => {
-      const parentDirPath = parentDirs.data.find(d => d.id === f.dir_id).path
-      return parentDirPath === '/' ? `/${f.name}` : `${parentDirPath}/${f.name}`
-    })
-    return filePaths
-  }
-
   share = async (document, recipients, sharingType, description) => {
+    const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
     if (sharing) return this.addRecipients(sharing, recipients, sharingType)
-    const resp = await this.props.client
+    const resp = await client
       .collection('io.cozy.sharings')
       .share(document, recipients, sharingType, description, '/preview')
     this.dispatch(
       addSharing(
         resp.data,
-        document.path || (await this.getFilesPaths([document]))
+        document.path || (await getFilesPaths(client, doctype, [document]))
       )
     )
     return resp.data
@@ -231,33 +226,33 @@ export class SharingProvider extends Component {
   }
 
   revokeAllRecipients = async document => {
+    const { client, doctype } = this.props
     const recipients = getRecipients(this.state, document.id)
     const sharing = getDocumentSharing(this.state, document.id)
 
-    await this.props.client
-      .collection('io.cozy.sharings')
-      .revokeAllRecipients(sharing)
+    await client.collection('io.cozy.sharings').revokeAllRecipients(sharing)
     recipients.map(async (recipient, recipientIndex) => {
       this.dispatch(
         revokeRecipient(
           sharing,
           recipientIndex,
-          document.path || (await this.getFilesPaths([document]))
+          document.path || (await getFilesPaths(client, doctype, [document]))
         )
       )
     })
   }
 
   revoke = async (document, sharingId, recipientIndex) => {
+    const { client, doctype } = this.props
     const sharing = getSharingById(this.state, sharingId)
-    await this.props.client
+    await client
       .collection('io.cozy.sharings')
       .revokeRecipient(sharing, recipientIndex)
     this.dispatch(
       revokeRecipient(
         sharing,
         recipientIndex,
-        document.path || (await this.getFilesPaths([document]))
+        document.path || (await getFilesPaths(client, doctype, [document]))
       )
     )
   }
