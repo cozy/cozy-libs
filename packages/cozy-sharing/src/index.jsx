@@ -46,8 +46,11 @@ import { withClient } from 'cozy-client'
 import withLocales from './withLocales'
 
 import { fetchNextPermissions } from './fetchNextPermissions'
-
 import { getFilesPaths } from './helpers/files'
+import {
+  createFakeInternalObjectFromRealtime,
+  mergeObjectFromRealTime
+} from './helpers/realtime'
 
 const track = (document, action) => {
   const tracker = getTracker()
@@ -64,32 +67,6 @@ const track = (document, action) => {
 const trackSharingByLink = document => track(document, 'shareByLink')
 const isFile = ({ _type }) => _type === 'io.cozy.files'
 
-const fixIdForSharingReceiveByRealtime = sharing => {
-  return {
-    id: sharing._id,
-    ...sharing
-  }
-}
-/**
- * When we receive an event for the sharing from
- * the websocket the message is not formatted as
- * the response of the api endpoint.
- *
- * Let's merge together
- * @param {*} fromHTTPRequest
- * @param {*} fromWebsocket
- */
-const mergeSharing = (fromHTTPRequest, fromWebsocket) => {
-  return {
-    ...fromHTTPRequest,
-    meta: {
-      rev: fromWebsocket._rev
-    },
-    attributes: {
-      ...fromWebsocket
-    }
-  }
-}
 export class SharingProvider extends Component {
   constructor(props, context) {
     super(props, context)
@@ -131,29 +108,43 @@ export class SharingProvider extends Component {
     this.fetchAllSharings()
     const { client } = this.props
     this.realtime = client.plugins.realtime
-    this.type = 'io.cozy.sharings'
-    this.realtime.subscribe('created', this.type, this.handleCreateOrUpdate)
-    this.realtime.subscribe('updated', this.type, this.handleCreateOrUpdate)
+    this.sharingsDoctype = 'io.cozy.sharings'
+    this.realtime.subscribe(
+      'created',
+      this.sharingsDoctype,
+      this.handleCreateOrUpdateSharings
+    )
+    this.realtime.subscribe(
+      'updated',
+      this.sharingsDoctype,
+      this.handleCreateOrUpdateSharings
+    )
   }
 
   componentWillUnmount() {
-    this.realtime.unsubscribe('created', this.type, this.handleCreateOrUpdate)
-    this.realtime.unsubscribe('updated', this.type, this.handleCreateOrUpdate)
+    this.realtime.unsubscribe(
+      'created',
+      this.sharingsDoctype,
+      this.handleCreateOrUpdateSharings
+    )
+    this.realtime.unsubscribe(
+      'updated',
+      this.sharingsDoctype,
+      this.handleCreateOrUpdateSharings
+    )
   }
 
-  handleCreateOrUpdate = async sharing => {
+  handleCreateOrUpdateSharings = async sharing => {
     const { client, doctype } = this.props
     const internalSharing = getSharingById(this.state, sharing._id)
     if (internalSharing) {
-      const newSharing = mergeSharing(internalSharing, sharing)
+      const newSharing = mergeObjectFromRealTime(internalSharing, sharing)
       this.dispatch(updateSharing(newSharing))
     } else {
-      const sharingWithId = fixIdForSharingReceiveByRealtime(sharing)
-      const fakedSharing = {
-        ...sharingWithId,
-        attributes: { ...sharingWithId },
-        type: 'io.cozy.sharings'
-      }
+      const fakedSharing = createFakeInternalObjectFromRealtime(
+        sharing,
+        'io.cozy.sharings'
+      )
 
       //TODO Check if we can getByIds to avoid query in map
       const docsId = getSharingDocIds(fakedSharing)
