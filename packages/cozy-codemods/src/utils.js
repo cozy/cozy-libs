@@ -1,4 +1,4 @@
-import makeRemoveImportIfUnused from './remove-import-if-unused'
+const makeRemoveImportIfUnused = require('./remove-import-if-unused')
 
 /* eslint new-cap: 0 */
 
@@ -32,7 +32,12 @@ module.exports = function(j) {
     return x.type === 'Literal' && strip(x.value).length === 0
   }
 
-  const removeDefaultExportHOC = (root, ComponentName, hocName) => {
+  const removeDefaultExportHOC = (
+    root,
+    ComponentName,
+    hocName,
+    noOptionsHOC
+  ) => {
     const defaultExports = root.find(j.ExportDefaultDeclaration)
     if (!defaultExports.length) {
       return
@@ -42,10 +47,16 @@ module.exports = function(j) {
     if (decl.type !== 'CallExpression') {
       return
     } else if (
-      decl.callee &&
-      decl.callee.callee &&
-      decl.callee.callee.name == hocName &&
-      decl.arguments[0].name == ComponentName
+      (!noOptionsHOC &&
+        decl.callee &&
+        decl.callee.callee &&
+        decl.callee.callee.name == hocName &&
+        decl.arguments[0].name == ComponentName) ||
+      (noOptionsHOC &&
+        decl.callee &&
+        decl.callee &&
+        decl.callee.name == hocName &&
+        decl.arguments[0].name == ComponentName)
     ) {
       defaultExport.node.declaration = decl.arguments[0]
     } else if (
@@ -68,14 +79,19 @@ module.exports = function(j) {
     }
   }
 
-  const removeHOC = (arrowFunctionBodyPath, hocName) => {
+  const removeHOC = (arrowFunctionBodyPath, hocName, noOptionsHOC) => {
     let curPath = arrowFunctionBodyPath
     while (curPath) {
       const curNode = curPath.node
       if (
-        curNode.type === 'CallExpression' &&
-        curNode.callee.callee &&
-        curNode.callee.callee.name === hocName
+        (!noOptionsHOC &&
+          curNode.type === 'CallExpression' &&
+          curNode.callee.callee &&
+          curNode.callee.callee.name === hocName) ||
+        (noOptionsHOC &&
+          curNode.type === 'CallExpression' &&
+          curNode.callee &&
+          curNode.callee.name === hocName)
       ) {
         const component = curPath.parentPath.node.arguments[0]
         curPath.parentPath.replace(component)

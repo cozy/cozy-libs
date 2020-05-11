@@ -67,7 +67,8 @@ const hocReplacer = options => {
     hookUsage,
     hocName,
     importOptions,
-    j
+    j,
+    noOptionsHOC
   } = options
   const utils = makeUtils(j)
 
@@ -118,7 +119,7 @@ const hocReplacer = options => {
       arrowFunctionBody.body.body,
       typeof hookUsage === 'function' ? hookUsage(hocProps) : hookUsage
     )
-    utils.hoc.removeHOC(arrowFunctionBodyPath, hocName)
+    utils.hoc.removeHOC(arrowFunctionBodyPath, hocName, noOptionsHOC)
 
     const declarator = findNearest(
       arrowFunctionBodyPath,
@@ -134,7 +135,7 @@ const hocReplacer = options => {
         utils.hoc.removeHOC(path, hocName)
       })
 
-    utils.hoc.removeDefaultExportHOC(root, ComponentName, hocName)
+    utils.hoc.removeDefaultExportHOC(root, ComponentName, hocName, noOptionsHOC)
     return true
   }
 
@@ -157,7 +158,9 @@ const hocReplacer = options => {
       )
       utils.simplifyCompose(root)
       utils.imports.removeUnused(root)
-      return root.toSource()
+      return root
+    } else {
+      return root
     }
   }
 }
