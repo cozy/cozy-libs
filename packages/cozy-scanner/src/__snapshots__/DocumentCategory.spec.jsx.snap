@@ -112,7 +112,7 @@ exports[`DocumentCategory should match snapshot if selected and icon 2`] = `
       class="styles__c-actionmenu___22Fp1 styles__c-actionmenu--inline___1SXZa"
     >
       <div
-        class="styles__media___cSJMp styles__c-actionmenu-item___gODqd"
+        class="styles__media___cSJMp styles__media--top___K9w0I styles__c-actionmenu-item___gODqd"
       >
         <div
           class="styles__bd___1Uv-F u-mh-1"
@@ -121,7 +121,7 @@ exports[`DocumentCategory should match snapshot if selected and icon 2`] = `
         </div>
       </div>
       <div
-        class="styles__media___cSJMp styles__c-actionmenu-item___gODqd"
+        class="styles__media___cSJMp styles__media--top___K9w0I styles__c-actionmenu-item___gODqd"
       >
         <div
           class="styles__bd___1Uv-F u-mh-1"

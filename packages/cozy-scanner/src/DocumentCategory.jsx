@@ -33,12 +33,12 @@ class DocumentCategory extends Component {
     isMenuDisplayed: false
   }
 
-  toggleMenu() {
-    this.setState(prevState => {
-      return {
-        isMenuDisplayed: !prevState.isMenuDisplayed
-      }
-    })
+  openMenu = () => {
+    this.setState({ isMenuDisplayed: true })
+  }
+
+  closeMenu = () => {
+    this.setState({ isMenuDisplayed: false })
   }
 
   onSelect = item => {
@@ -50,7 +50,7 @@ class DocumentCategory extends Component {
     const { category, isSelected, selectedItem, items, t } = this.props
     return (
       <>
-        <GridItem onClick={() => this.toggleMenu()}>
+        <GridItem onClick={this.openMenu}>
           <CategoryGridItem
             isSelected={isSelected}
             icon={category.icon}
@@ -62,7 +62,7 @@ class DocumentCategory extends Component {
         </GridItem>
 
         {isMenuDisplayed && (
-          <ActionMenu onClose={() => this.toggleMenu()}>
+          <ActionMenu onClose={this.closeMenu} autoclose>
             <ActionMenuHeader>
               <Media>
                 <Img>
@@ -99,7 +99,6 @@ class DocumentCategory extends Component {
                       categoryLabel: category.label,
                       itemId: item.id
                     })
-                    this.toggleMenu()
                   }}
                   key={item.id}
                 >
