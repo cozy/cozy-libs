@@ -112,8 +112,8 @@ describe('TriggerManager', () => {
     it('should redirect to OAuthForm', () => {
       const component = shallow(
         <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
-      ).getElement()
-      expect(component).toMatchSnapshot()
+      )
+      expect(component.name()).toContain('OAuthForm')
     })
   })
 
