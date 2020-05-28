@@ -335,6 +335,7 @@
     "title": "Successful configuration!"
   },
   "twoFAForm": {
+    "modal-label": "Two factor authentication form",
     "providers": {
       "default": "Enter the code sent to you by e-mail or SMS",
       "email": "Enter the code sent to you by e-mail",
