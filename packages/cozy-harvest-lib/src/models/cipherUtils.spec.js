@@ -220,4 +220,46 @@ describe('createOrUpdateCipher', () => {
       expect(cipher.collectionIds).toEqual(['cozy-org-collection-id'])
     })
   })
+
+  describe('additional fields', () => {
+    it('should put data that is not login/password inside cipher fields', async () => {
+      const {
+        konnector,
+        account,
+        userCredentials,
+        vaultClient,
+        existingCipher
+      } = setup({
+        vaultClient: {
+          isLocked: jest.fn().mockResolvedValue(false)
+        },
+        userCredentials: {
+          zipcode: '64000'
+        }
+      })
+
+      vaultClient.getByIdOrSearch.mockResolvedValue(existingCipher)
+
+      const cipherId = 'existing-cipher'
+
+      const cipher = await cipherUtils.createOrUpdateCipher(
+        vaultClient,
+        cipherId,
+        { userCredentials, account, konnector }
+      )
+
+      expect(cipher.id).toBe('existing-cipher')
+      expect(cipher.login.username).toBe(userCredentials.login)
+      expect(cipher.login.password).toBe(userCredentials.password)
+      expect(cipher.organizationId).toBe('cozy-org-id')
+      expect(cipher.collectionIds).toEqual(['cozy-org-collection-id'])
+      expect(cipher.fields).toEqual([
+        {
+          name: 'zipcode',
+          type: 0,
+          value: '64000'
+        }
+      ])
+    })
+  })
 })

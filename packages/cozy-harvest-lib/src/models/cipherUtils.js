@@ -6,6 +6,12 @@ import logger from '../logger'
 
 import { CipherType, UriMatchType } from 'cozy-keys-lib'
 
+const fieldTypes = {
+    text: 0,
+    hidden: 1,
+    boolean: 2
+}
+
 /**
  * Create a new cipher and return its ID
  *
@@ -15,7 +21,7 @@ import { CipherType, UriMatchType } from 'cozy-keys-lib'
  * @returns {string} the cipher ID
  */
 export const createCipher = async (vaultClient, createOptions) => {
-  const { konnector, login, password } = createOptions
+  const { konnector, login, password, fields } = createOptions
   const konnectorURI = get(konnector, 'vendor_link')
   const konnectorName = get(konnector, 'name') || get(konnector, 'slug')
 
@@ -23,6 +29,7 @@ export const createCipher = async (vaultClient, createOptions) => {
     id: null,
     type: CipherType.Login,
     name: konnectorName,
+    fields,
     login: {
       username: login,
       password,
@@ -33,6 +40,7 @@ export const createCipher = async (vaultClient, createOptions) => {
   }
 
   const cipher = await vaultClient.createNewCozySharedCipher(cipherData, null)
+
   await vaultClient.saveCipher(cipher)
 
   return cipher
@@ -56,7 +64,7 @@ export const shareCipherWithCozy = async (vaultClient, cipherId) => {
  * @param {string} data.password - the new password
  */
 export const updateCipher = async (vaultClient, cipherId, data) => {
-  const { login, password } = data
+  const { login, password, fields = null } = data
 
   const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
   const cipherData = await vaultClient.decrypt(originalCipher)
@@ -66,7 +74,11 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
     cipherData.login.password !== password
   ) {
     cipherData.login.username = login
-    cipherData.login.password = password
+
+    if (password !== undefined) {
+      cipherData.login.password = password
+    }
+    cipherData.fields = fields
 
     const newCipher = await vaultClient.createNewCozySharedCipher(
       cipherData,
@@ -77,6 +89,23 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
   } else {
     return originalCipher
   }
+}
+
+const isAdditionalField = (fieldName, { identifierProperty }) => {
+  return fieldName !== 'login'
+    && fieldName !== 'password'
+    && fieldName !== identifierProperty
+    && fieldName !== 'credentials_encrypted'
+}
+
+const fieldsFromUserCredentials = (userCredentials, { identifierProperty }) => {
+  return Object.entries(userCredentials)
+    .filter(([fieldName]) => isAdditionalField(fieldName, { identifierProperty }))
+    .map(([fieldName, fieldValue]) => ({
+      name: fieldName,
+      value: fieldValue,
+      type: fieldTypes.text
+    }))
 }
 
 /**
@@ -97,6 +126,7 @@ export const createOrUpdateCipher = async (
   cipherId,
   { userCredentials, account, konnector }
 ) => {
+
   const isLocked = await vaultClient.isLocked()
 
   if (isLocked) {
@@ -109,6 +139,9 @@ export const createOrUpdateCipher = async (
 
   const login = userCredentials[identifierProperty]
   const password = userCredentials.password
+  const fields = fieldsFromUserCredentials(userCredentials, {
+    identifierProperty
+  })
 
   let cipher
 
@@ -124,13 +157,15 @@ export const createOrUpdateCipher = async (
   if (cipherId || cipher) {
     cipher = await updateCipher(vaultClient, cipherId || cipher.id, {
       login,
-      password
+      password,
+      fields
     })
   } else {
     cipher = await createCipher(vaultClient, {
       konnector,
       login,
-      password
+      password,
+      fields
     })
   }
 
