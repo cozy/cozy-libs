@@ -131,8 +131,9 @@ export const mergeAuth = (account, authData) => ({
  * @param  {object} account   io.cozy.accounts document
  * @return {string}           cipher uuid
  */
-export const getVaultCipherId = account =>
-  get(account, 'relationships.vaultCipher.data[0]._id')
+export const getVaultCipherId = account => {
+  return get(account, 'relationships.vaultCipher.data._id')
+}
 
 /**
  * Adds or updates a vault cipher relationship to an account

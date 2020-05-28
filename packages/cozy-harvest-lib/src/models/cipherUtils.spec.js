@@ -31,11 +31,9 @@ describe('createOrUpdateCipher', () => {
     const account = {
       relationships: {
         vaultCipher: {
-          data: [
-            {
-              _id: 'existing-cipher'
-            }
-          ]
+          data: {
+            _id: 'existing-cipher'
+          }
         }
       },
       ...accountAttrs
