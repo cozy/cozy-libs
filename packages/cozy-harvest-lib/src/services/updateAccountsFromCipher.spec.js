@@ -49,42 +49,6 @@ describe('update accounts from cipher', () => {
     }
   })
 
-  it('should decrypt the password', async () => {
-    const encType = 2
-    const iv = 'iv123'
-    const mac = 'mac456'
-    const password = 'iamsuperman'
-    const username = 'Clark Kent'
-
-    const encryptedPassword = `${encType}.${iv}|${password}|${mac}`
-    const encryptedUsername = `${encType}.${iv}|${username}|${mac}`
-
-    decryptString.mockImplementation(str => str)
-    const orgKey = {}
-    getOrganizationKey.mockResolvedValue(orgKey)
-    fetchAccountsForCipherId.mockResolvedValue({ data: [] })
-    fetchLoginFailedTriggersForAccountsIds.mockResolvedValue({ data: [] })
-
-    await updateAccountsPassword(mockCozyClient, mockVaultClient, {
-      login: {
-        password: encryptedPassword,
-        username: encryptedUsername
-      }
-    })
-
-    expect(decryptString).toHaveBeenCalledWith(
-      encryptedPassword,
-      mockVaultClient,
-      orgKey
-    )
-
-    expect(decryptString).toHaveBeenCalledWith(
-      encryptedUsername,
-      mockVaultClient,
-      orgKey
-    )
-  })
-
   it('should update accounts', async () => {
     const orgKey = {}
     getOrganizationKey.mockResolvedValue(orgKey)
@@ -109,6 +73,7 @@ describe('update accounts from cipher', () => {
       ]
     }
     fetchAccountsForCipherId.mockResolvedValue(accounts)
+    fetchLoginFailedTriggersForAccountsIds.mockResolvedValue({ data: [] })
 
     await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
       login: {
