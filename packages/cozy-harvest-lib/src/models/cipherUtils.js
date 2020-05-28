@@ -7,9 +7,9 @@ import logger from '../logger'
 import { CipherType, UriMatchType } from 'cozy-keys-lib'
 
 const fieldTypes = {
-    text: 0,
-    hidden: 1,
-    boolean: 2
+  text: 0,
+  hidden: 1,
+  boolean: 2
 }
 
 /**
@@ -92,15 +92,19 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
 }
 
 const isAdditionalField = (fieldName, { identifierProperty }) => {
-  return fieldName !== 'login'
-    && fieldName !== 'password'
-    && fieldName !== identifierProperty
-    && fieldName !== 'credentials_encrypted'
+  return (
+    fieldName !== 'login' &&
+    fieldName !== 'password' &&
+    fieldName !== identifierProperty &&
+    fieldName !== 'credentials_encrypted'
+  )
 }
 
 const fieldsFromUserCredentials = (userCredentials, { identifierProperty }) => {
   return Object.entries(userCredentials)
-    .filter(([fieldName]) => isAdditionalField(fieldName, { identifierProperty }))
+    .filter(([fieldName]) =>
+      isAdditionalField(fieldName, { identifierProperty })
+    )
     .map(([fieldName, fieldValue]) => ({
       name: fieldName,
       value: fieldValue,
@@ -126,7 +130,6 @@ export const createOrUpdateCipher = async (
   cipherId,
   { userCredentials, account, konnector }
 ) => {
-
   const isLocked = await vaultClient.isLocked()
 
   if (isLocked) {
