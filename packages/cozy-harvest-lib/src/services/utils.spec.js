@@ -122,13 +122,10 @@ describe('updateAccountsAuth', () => {
       }
     ]
 
-    await updateAccountsAuth(
-      mockCozyClient,
-      accounts, {
-        login: 'newLogin',
-        password: 'newPassword'
-      }
-    )
+    await updateAccountsAuth(mockCozyClient, accounts, {
+      login: 'newLogin',
+      password: 'newPassword'
+    })
 
     expect(mockCozyClient.save).toHaveBeenCalledTimes(2)
     expect(mockCozyClient.save).toHaveBeenCalledWith({

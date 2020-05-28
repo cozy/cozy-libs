@@ -132,7 +132,8 @@ describe('update accounts from cipher', () => {
 
       expect(updateAccountsAuth).toHaveBeenCalledWith(
         mockCozyClient,
-        accounts.data, {
+        accounts.data,
+        {
           login: 'username_decrypted',
           password: 'password_decrypted',
           zipcode_decrypted: '64000_decrypted'

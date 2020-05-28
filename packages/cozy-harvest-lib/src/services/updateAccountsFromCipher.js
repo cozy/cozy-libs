@@ -11,11 +11,8 @@ import {
 
 import logger from './logger'
 
-const makeDecrypt = (vaultClient, orgKey) => encryptedVal => decryptString(
-    encryptedVal,
-    vaultClient,
-    orgKey
-  )
+const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
+  decryptString(encryptedVal, vaultClient, orgKey)
 
 const updateAccountsFromCipher = async (
   cozyClient,
@@ -48,7 +45,6 @@ const updateAccountsFromCipher = async (
     decryptedFields[fieldName] = fieldValue
   }
   logger.debug('Decrypted fields')
-
 
   if (decryptedPassword === null || decryptedUsername === null) {
     throw new Error('DECRYPT_FAILED')
