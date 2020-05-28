@@ -1,4 +1,4 @@
-import updateAccountsPassword from 'services/updateAccountsPassword'
+import updateAccountsFromCipher from './updateAccountsFromCipher'
 
 import {
   decryptString,
@@ -16,7 +16,7 @@ afterEach(() => {
   jest.clearAllMocks()
 })
 
-describe('update accounts password function', () => {
+describe('update accounts from cipher', () => {
   const mockVaultClient = {
     Utils: {
       fromB64ToArray: str => str
@@ -41,7 +41,7 @@ describe('update accounts password function', () => {
     })
     expect.assertions(1)
     try {
-      await updateAccountsPassword(mockCozyClient, mockVaultClient, {})
+      await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {})
     } catch (err) {
       expect(err).toEqual({
         error: 'No org key'
@@ -110,7 +110,7 @@ describe('update accounts password function', () => {
     }
     fetchAccountsForCipherId.mockResolvedValue(accounts)
 
-    await updateAccountsPassword(mockCozyClient, mockVaultClient, {
+    await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
       login: {
         password: 'yolo',
         username: 'yolo'
@@ -134,7 +134,7 @@ describe('update accounts password function', () => {
 
     fetchLoginFailedTriggersForAccountsIds.mockResolvedValue(['tri1', 'tri2'])
 
-    await updateAccountsPassword(mockCozyClient, mockVaultClient, {
+    await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
       login: {
         password: 'yolo',
         username: 'yolo'
@@ -158,7 +158,7 @@ describe('update accounts password function', () => {
     decryptString.mockResolvedValue(null)
 
     expect(
-      updateAccountsPassword(mockCozyClient, mockVaultClient, {
+      updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
         login: {
           password: 'yolo',
           username: 'yolo'

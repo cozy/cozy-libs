@@ -11,7 +11,7 @@ import {
 
 import logger from './logger'
 
-const updateAccountsPassword = async (
+const updateAccountsFromCipher = async (
   cozyClient,
   vaultClient,
   bitwardenCipherDocument
@@ -72,4 +72,4 @@ const updateAccountsPassword = async (
   logger.debug('Launched LOGIN_FAILED triggers...')
 }
 
-export default updateAccountsPassword
+export default updateAccountsFromCipher

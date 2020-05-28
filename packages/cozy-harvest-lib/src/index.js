@@ -38,6 +38,6 @@ export {
 export { handleOAuthResponse } from './helpers/oauth'
 export { withLocales }
 export {
-  default as updateAccountsPassword
-} from './services/updateAccountsPassword'
+  default as updateAccountsFromCipher
+} from './services/updateAccountsFromCipher'
 export { default as deleteAccounts } from './services/deleteAccounts'
