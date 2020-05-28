@@ -1,6 +1,6 @@
 import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
-import set from 'lodash/set'
+import merge from 'lodash/merge'
 import unset from 'lodash/unset'
 
 export const decryptString = (encryptedString, vaultClient, orgKey) => {
@@ -47,16 +47,10 @@ export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
   return accounts
 }
 
-export const updateAccounts = async (
-  cozyClient,
-  accounts,
-  newUsername,
-  newPassword
-) => {
+export const updateAccountsAuth = async (cozyClient, accounts, authData) => {
   await Promise.all(
     accounts.map(account => {
-      set(account, 'auth.password', newPassword)
-      set(account, 'auth.login', newUsername)
+      merge(account.auth, authData)
       unset(account, 'auth.credentials_encrypted')
       const updatedAccount = {
         ...account,

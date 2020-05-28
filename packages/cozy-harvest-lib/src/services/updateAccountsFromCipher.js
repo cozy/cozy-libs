@@ -4,12 +4,18 @@ import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
-  updateAccounts,
+  updateAccountsAuth,
   fetchLoginFailedTriggersForAccountsIds,
   launchTriggers
 } from './utils'
 
 import logger from './logger'
+
+const makeDecrypt = (vaultClient, orgKey) => encryptedVal => decryptString(
+    encryptedVal,
+    vaultClient,
+    orgKey
+  )
 
 const updateAccountsFromCipher = async (
   cozyClient,
@@ -24,21 +30,25 @@ const updateAccountsFromCipher = async (
   const orgKey = await getOrganizationKey(cozyClient, vaultClient)
   logger.debug('Fetched organization key')
 
+  const decrypt = makeDecrypt(vaultClient, orgKey)
   logger.debug('Decrypting cipher password...')
-  const decryptedPassword = await decryptString(
-    encryptedPassword,
-    vaultClient,
-    orgKey
-  )
+  const decryptedPassword = await decrypt(encryptedPassword)
   logger.debug('Decrypted cipher password')
 
   logger.debug('Decrypting cipher username...')
-  const decryptedUsername = await decryptString(
-    encryptedUsername,
-    vaultClient,
-    orgKey
-  )
+  const decryptedUsername = await decrypt(encryptedUsername)
   logger.debug('Decrypted cipher username')
+
+  const encryptedFields = get(bitwardenCipherDocument, 'fields') || []
+  logger.debug(`Decrypting ${encryptedFields.length} fields...`)
+  const decryptedFields = {}
+  for (const encryptedField of encryptedFields) {
+    const fieldName = await decrypt(encryptedField.name)
+    const fieldValue = await decrypt(encryptedField.value)
+    decryptedFields[fieldName] = fieldValue
+  }
+  logger.debug('Decrypted fields')
+
 
   if (decryptedPassword === null || decryptedUsername === null) {
     throw new Error('DECRYPT_FAILED')
@@ -51,12 +61,11 @@ const updateAccountsFromCipher = async (
   )
 
   logger.debug('Updating accounts...')
-  await updateAccounts(
-    cozyClient,
-    accounts.data,
-    decryptedUsername,
-    decryptedPassword
-  )
+  await updateAccountsAuth(cozyClient, accounts.data, {
+    login: decryptedUsername,
+    password: decryptedPassword,
+    ...decryptedFields
+  })
   logger.debug('Updated accounts')
 
   logger.debug('Fetching LOGIN_FAILED triggers...')
@@ -65,6 +74,7 @@ const updateAccountsFromCipher = async (
     cozyClient,
     accountsIds
   )
+
   logger.debug(`Fetched ${loginFailedTriggers.length} LOGIN_FAILED triggers...`)
 
   logger.debug('Launching LOGIN_FAILED triggers...')

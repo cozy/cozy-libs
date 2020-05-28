@@ -4,7 +4,7 @@ import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
-  updateAccounts,
+  updateAccountsAuth,
   fetchLoginFailedTriggersForAccountsIds,
   launchTriggers
 } from 'services/utils'
@@ -77,17 +77,68 @@ describe('update accounts from cipher', () => {
 
     await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
       login: {
-        password: 'yolo',
-        username: 'yolo'
+        password: 'password',
+        username: 'username'
       }
     })
 
-    expect(updateAccounts).toHaveBeenCalledWith(
+    expect(updateAccountsAuth).toHaveBeenCalledWith(
       mockCozyClient,
       accounts.data,
-      'yolo_decrypted',
-      'yolo_decrypted'
+      {
+        login: 'username_decrypted',
+        password: 'password_decrypted'
+      }
     )
+  })
+
+  describe('additional fields', () => {
+    it('should update accounts with additional fields', async () => {
+      const orgKey = {}
+      getOrganizationKey.mockResolvedValue(orgKey)
+
+      decryptString.mockImplementation(str => `${str}_decrypted`)
+
+      const accounts = {
+        data: [
+          {
+            auth: {
+              credentials_encrypted: 'abc123',
+              login: 'A'
+            }
+          },
+          {
+            auth: {
+              credentials_encrypted: 'abc123',
+              login: 'B',
+              extra_field: 'stays'
+            }
+          }
+        ]
+      }
+      fetchAccountsForCipherId.mockResolvedValue(accounts)
+      fetchLoginFailedTriggersForAccountsIds.mockResolvedValue({ data: [] })
+
+      await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
+        login: {
+          password: 'password',
+          username: 'username'
+        },
+        fields: [
+          // 0 is text
+          { name: 'zipcode', value: '64000', type: 0 }
+        ]
+      })
+
+      expect(updateAccountsAuth).toHaveBeenCalledWith(
+        mockCozyClient,
+        accounts.data, {
+          login: 'username_decrypted',
+          password: 'password_decrypted',
+          zipcode_decrypted: '64000_decrypted'
+        }
+      )
+    })
   })
 
   it('should launch triggers in LOGIN_FAILED error state', async () => {
@@ -96,13 +147,12 @@ describe('update accounts from cipher', () => {
     }
 
     fetchAccountsForCipherId.mockResolvedValue(accounts)
-
     fetchLoginFailedTriggersForAccountsIds.mockResolvedValue(['tri1', 'tri2'])
 
     await updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
       login: {
-        password: 'yolo',
-        username: 'yolo'
+        password: 'password',
+        username: 'username'
       }
     })
 
@@ -125,8 +175,8 @@ describe('update accounts from cipher', () => {
     expect(
       updateAccountsFromCipher(mockCozyClient, mockVaultClient, {
         login: {
-          password: 'yolo',
-          username: 'yolo'
+          password: 'password',
+          username: 'username'
         }
       })
     ).rejects.toThrow('DECRYPT_FAILED')

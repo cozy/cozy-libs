@@ -2,7 +2,7 @@ import {
   decryptString,
   getOrganizationKey,
   fetchAccountsForCipherId,
-  updateAccounts,
+  updateAccountsAuth,
   fetchLoginFailedTriggersForAccountsIds,
   launchTriggers
 } from 'services/utils'
@@ -103,7 +103,7 @@ describe('fetchAccountsForCipherId', () => {
   })
 })
 
-describe('updateAccounts', () => {
+describe('updateAccountsAuth', () => {
   it('should update all accounts with the given credentials', async () => {
     const accounts = [
       {
@@ -122,7 +122,13 @@ describe('updateAccounts', () => {
       }
     ]
 
-    await updateAccounts(mockCozyClient, accounts, 'newLogin', 'newPassword')
+    await updateAccountsAuth(
+      mockCozyClient,
+      accounts, {
+        login: 'newLogin',
+        password: 'newPassword'
+      }
+    )
 
     expect(mockCozyClient.save).toHaveBeenCalledTimes(2)
     expect(mockCozyClient.save).toHaveBeenCalledWith({
