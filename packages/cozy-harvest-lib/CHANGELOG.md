@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.33.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.5...cozy-harvest-lib@1.33.0) (2020-05-29)
+
+
+### Bug Fixes
+
+* Bad relationship was used in test ([b0085e6](https://github.com/cozy/cozy-libs/commit/b0085e6))
+* Remove test testing implementation ([d3a4f57](https://github.com/cozy/cozy-libs/commit/d3a4f57))
+
+
+### Features
+
+* Support additional fields in cipher ([8ca5a01](https://github.com/cozy/cozy-libs/commit/8ca5a01))
+* Update additional fields when updating accounts from ciphers ([cee7dcb](https://github.com/cozy/cozy-libs/commit/cee7dcb))
+
+
+
+
+
 ## [1.32.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.32.4...cozy-harvest-lib@1.32.5) (2020-04-09)
 
 
