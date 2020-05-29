@@ -1,4 +1,7 @@
 import { useEffect } from 'react'
+import CipherType from 'cozy-keys-lib/transpiled/CipherType'
+import FieldType from 'cozy-keys-lib/transpiled/FieldType'
+import UriMatchType from 'cozy-keys-lib/transpiled/UriMatchType'
 
 const VaultUnlocker = ({ children, onUnlock }) => {
   useEffect(() => {
@@ -10,14 +13,9 @@ const VaultUnlocker = ({ children, onUnlock }) => {
 
 VaultUnlocker.displayName = 'withI18n(withLocales(withClient(VaultUnlocker)))'
 
-const CipherType = {
-  Login: 'Login'
-}
-
-const UriMatchType = {
-  Domain: 'Domain'
-}
+// eslint-disable-next-line no-console
+console.log('Using cozy-keys-lib from __mocks__')
 
 const withVaultClient = Component => Component
 
-export { VaultUnlocker, CipherType, withVaultClient, UriMatchType }
+export { VaultUnlocker, CipherType, withVaultClient, UriMatchType, FieldType }

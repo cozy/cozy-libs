@@ -101,6 +101,7 @@ export class TwoFAModal extends PureComponent {
         className={isMobile ? '' : 'u-mt-3'}
         size="xsmall"
         into="body"
+        aria-label={t(`twoFAForm.modal-label`)}
       >
         <ModalHeader>
           <KonnectorIcon konnector={konn} className="u-mah-3 u-ml-1" />

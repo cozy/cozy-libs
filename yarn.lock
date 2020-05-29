@@ -4716,10 +4716,10 @@ cozy-doctypes@1.67.0:
     lodash "4.17.15"
     prop-types "^15.7.2"
 
-cozy-keys-lib@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.0.0.tgz#bff5c43d380884e45dbff4e945dedd48aef24e0a"
-  integrity sha512-VNh3Odm1p13YY5rszeYk+nabNLcAh7u5VDiga4SDfUxr2R0bWxBhM03TnLNbZ4SCqXXcKt0pi0ANmW23Nu5oiA==
+cozy-keys-lib@3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.1.1.tgz#d2e896498f168e28bc82801a59062f8bea47c2d5"
+  integrity sha512-3RHbTB12YKlFUqBqxYovbNZ3dLUz1L9YkwmIuksVBUk6Kk3NZuMLd9BMgvgZRhanKhXQZQYMri6hmnZOya9ItQ==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
@@ -10137,6 +10137,13 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
+
+"minilog@git+https://github.com/cozy/minilog.git#master":
+  version "3.1.0"
+  uid f01f7d9dfe20981177dd34b9662c2f077d818f82
+  resolved "git+https://github.com/cozy/minilog.git#f01f7d9dfe20981177dd34b9662c2f077d818f82"
+  dependencies:
+    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
