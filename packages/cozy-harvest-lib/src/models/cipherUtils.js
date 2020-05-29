@@ -4,13 +4,7 @@ import get from 'lodash/get'
 import assert from '../assert'
 import logger from '../logger'
 
-import { CipherType, UriMatchType } from 'cozy-keys-lib'
-
-const fieldTypes = {
-  text: 0,
-  hidden: 1,
-  boolean: 2
-}
+import { CipherType, UriMatchType, FieldType } from 'cozy-keys-lib'
 
 /**
  * Create a new cipher and return its ID
@@ -108,7 +102,7 @@ const fieldsFromUserCredentials = (userCredentials, { identifierProperty }) => {
     .map(([fieldName, fieldValue]) => ({
       name: fieldName,
       value: fieldValue,
-      type: fieldTypes.text
+      type: FieldType.Text
     }))
 }
 
