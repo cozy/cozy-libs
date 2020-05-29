@@ -24,6 +24,7 @@ const FieldType = {
   Boolean: 2
 }
 
+// eslint-disable-next-line no-console
 console.log('Using cozy-keys-lib from __mocks__')
 
 const withVaultClient = Component => Component
