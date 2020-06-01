@@ -32,6 +32,9 @@ const main = () => {
       }
     }
   })
+  // parser is an argparse parser
+  await completionHandler(commands)
+  const [parser] = build(commands)
 
   // You can further customize parser here
   const args = parser.parseArgs()

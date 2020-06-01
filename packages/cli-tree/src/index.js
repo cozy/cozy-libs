@@ -1,6 +1,10 @@
 const argparse = require('argparse')
 const merge = require('lodash/merge')
 const omit = require('lodash/omit')
+const {
+  getCompletionSetupCommands,
+  completionHandler
+} = require('./completion')
 
 const visit = (tree, fn, path = []) => {
   for (let [k, v] of Object.entries(tree)) {
@@ -15,6 +19,7 @@ const visit = (tree, fn, path = []) => {
 
 const build = (cliTree, options = {}) => {
   const parser = new argparse.ArgumentParser()
+  const completionSetupCommands = getCompletionSetupCommands(parser)
   const rootParser = parser
   const subparsers = parser.addSubparsers()
 
@@ -43,7 +48,7 @@ const build = (cliTree, options = {}) => {
       return [parser, subparsers]
     }
   }
-  visit(cliTree, (node, path) => {
+  visit(Object.assign(cliTree, completionSetupCommands), (node, path) => {
     if (typeof node !== 'object') {
       return
     }
@@ -69,5 +74,6 @@ const build = (cliTree, options = {}) => {
 }
 
 module.exports = {
-  build
+  build,
+  completionHandler
 }

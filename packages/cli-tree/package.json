@@ -5,6 +5,13 @@
   "license": "MIT",
   "dependencies": {
     "argparse": "^1.0.10",
-    "lodash": "^4.17.15"
+    "lodash": "^4.17.15",
+    "tabtab": "^3.0.2"
+  },
+  "devDependencies": {
+    "jest": "^26.0.1"
+  },
+  "scripts": {
+    "test": "jest"
   }
 }
