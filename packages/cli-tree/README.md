@@ -6,7 +6,7 @@ way.
 
 ## Usage
 
-See the [example](./examples/users.js).
+See the [example]
 
 ## Automated help
 
@@ -23,4 +23,22 @@ Optional arguments:
   --deleted   Show also deleted users
 ```
 
+## Command completion
+
+CLI tree uses [tabtab] to add command completion.
+
+Completion setup commands are automatically added and available like this :
+
+```bash
+$ node examples/users.js users completion -h
+```
+
+To properly handle completion in you program, you will have to add the completionHandler like in
+the [example]
+
+
+
+
+[example]: ./examples/users.js
 [argparse]: https://github.com/nodeca/argparse
+[tabtab]: https://www.npmjs.com/package/tabtab

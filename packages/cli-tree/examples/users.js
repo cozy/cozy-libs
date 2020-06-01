@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 
-const { build } = require('../src')
+const { build, completionHandler } = require('../src')
 
 const removeUsers = args => {
   console.log('Remove users', args)
@@ -9,9 +9,8 @@ const listUsers = args => {
   console.log('List users', args)
 }
 
-const main = () => {
-  // parser is an argparse parser
-  const [parser] = build({
+const main = async () => {
+  const commands = {
     users: {
       list: {
         description: 'List users',
@@ -31,7 +30,7 @@ const main = () => {
         handler: removeUsers
       }
     }
-  })
+  }
   // parser is an argparse parser
   await completionHandler(commands)
   const [parser] = build(commands)
