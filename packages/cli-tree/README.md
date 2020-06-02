@@ -6,7 +6,7 @@ way.
 
 ## Usage
 
-See the [example]
+See the [example].
 
 ## Automated help
 
