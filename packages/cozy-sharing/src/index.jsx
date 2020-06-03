@@ -48,9 +48,10 @@ import withLocales from './withLocales'
 import { fetchNextPermissions } from './fetchNextPermissions'
 import { getFilesPaths } from './helpers/files'
 import {
-  createFakeInternalObjectFromRealtime,
-  mergeObjectFromRealTime
-} from './helpers/realtime'
+  getSharingObject,
+  createSharingInStore,
+  updateSharingInStore
+} from './ducks/sharings'
 
 const track = (document, action) => {
   const tracker = getTracker()
@@ -111,7 +112,7 @@ export class SharingProvider extends Component {
     if (!client.plugins.realtime) {
       //eslint-disable-next-line
       console.warn(
-        `You should register the realtime plugin to tour CozyClient instance see https://docs.cozy.io/en/cozy-realtime/#example`
+        `You should register the realtime plugin to your CozyClient instance see https://docs.cozy.io/en/cozy-realtime/#example`
       )
     } else {
       this.realtime = client.plugins.realtime
@@ -147,27 +148,12 @@ export class SharingProvider extends Component {
   handleCreateOrUpdateSharings = async sharing => {
     const { client, doctype } = this.props
     const internalSharing = getSharingById(this.state, sharing._id)
+    const newSharing = getSharingObject(internalSharing, sharing)
     if (internalSharing) {
-      const newSharing = mergeObjectFromRealTime(internalSharing, sharing)
-      this.dispatch(updateSharing(newSharing))
+      updateSharingInStore(this.dispatch, newSharing)
     } else {
-      const fakedSharing = createFakeInternalObjectFromRealtime(
-        sharing,
-        'io.cozy.sharings'
-      )
-
-      //TODO Check if we can getByIds to avoid query in map
-      const docsId = getSharingDocIds(fakedSharing)
-      docsId.map(async id => {
-        const file = await client.collection('io.cozy.files').get(id)
-        this.dispatch(
-          addSharing(
-            fakedSharing,
-            file.data.path ||
-              (await getFilesPaths(client, doctype, [file.data]))
-          )
-        )
-      })
+      const docsId = getSharingDocIds(newSharing)
+      createSharingInStore(client, doctype, this.dispatch, docsId, newSharing)
     }
   }
 
