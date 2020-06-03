@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.11.0...cozy-sharing@1.11.1) (2020-06-03)
+
+
+### Bug Fixes
+
+* No special case for sharing notes ([425b227](https://github.com/cozy/cozy-libs/commit/425b227))
+
+
+
+
+
 # [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.10.1...cozy-sharing@1.11.0) (2020-04-27)
 
 
