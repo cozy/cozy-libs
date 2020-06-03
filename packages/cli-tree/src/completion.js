@@ -6,27 +6,7 @@ const _ = require('lodash')
 
 module.exports = {
   getCompletionSetupCommands,
-  completionHandler: async (commands = {}) => {
-    const env = tabtab.parseEnv(process.env)
-
-    if (!env.complete) {
-      return false
-    }
-
-    const command = findCommand(
-      { _main: commands },
-      '_main ' +
-        env.line
-          .split(' ')
-          .slice(1)
-          .join(' ')
-    )
-    if (!command) process.exit(1)
-
-    const completion = getCommandCompletion(command)
-    await tabtab.log(completion)
-    process.exit()
-  },
+  completionHandler,
   findCommand,
   getCommandCompletion
 }
@@ -65,6 +45,28 @@ function findCommand(commands, line) {
     if (!command) words.pop()
   }
   return command
+}
+
+async function completionHandler(commands = {}) {
+  const env = tabtab.parseEnv(process.env)
+
+  if (!env.complete) {
+    return false
+  }
+
+  const command = findCommand(
+    { _main: commands },
+    '_main ' +
+      env.line
+        .split(' ')
+        .slice(1)
+        .join(' ')
+  )
+  if (!command) process.exit(1)
+
+  const completion = getCommandCompletion(command)
+  await tabtab.log(completion)
+  process.exit()
 }
 
 function getCompletionSetupCommands(parser) {
