@@ -44,12 +44,77 @@ In order to listen to online and offline events, you should install the [Network
 
 ## Example
 
+### With CozyClient
+
+CozyRealtime comes with a plugin for CozyClient. This is the recommended way to use it: 
+
 ```js
+
+//instanciation
+import React, { Component } from 'react'
+import { RealtimePlugin } from 'cozy-realtime'
+import CozyClient, { withClient } from 'cozy-client'
+
+const client = new CozyClient({})
+
+client.registerPlugin(RealtimePlugin)
+
+// Usage
+
+handleCreate = accounts => {
+  console.log(`A new 'io.cozy.accounts' is created with id '${accounts._id}'.`)
+}
+
+handleUpdate = accounts => {
+  console.log(`An account is updated with id '${accounts._id}'.`)
+}
+
+class MyComp extends Component {
+
+  constructor(props){
+    super(props)
+  }
+
+  componentDidMount(){
+    this.realtime = this.props.client.plugins.realtime
+    if(this.realtime){
+      // To subscribe
+      await this.realtime.subscribe('created', type, this.handleCreate)
+      //listen of the update for a type
+      await this.realtime.subscribe('updated', type, this.handleUpdate)
+      //listen a specific document
+      await this.realtime.subscribe('updated', type, id, this.handleUpdate)
+    }
+
+  }
+
+  componentWillUnmount(){
+    if(this.realtime){
+      // To unsubscribe
+      await this.realtime.unsubscribe('created', type, handleCreate)
+      await this.realtime.unsubscribe('updated', type, handleUpdate)
+      await this.realtime.unsubscribe('updated', type, id, handleUpdate)
+
+      // To unsubscribe all
+      await this.realtime.unsubscribeAll()
+    }
+  }
+}
+
+export default withClient(MyComp)
+
+```
+
+### Standalone
+
+```js
+
 import CozyRealtime from 'cozy-realtime'
 
 const realtime = new CozyRealtime({ client: cozyClient })
 const type = 'io.cozy.accounts'
 const id = 'document_id'
+
 const handleCreate = accounts => {
   console.log(`A new 'io.cozy.accounts' is created with id '${accounts._id}'.`)
 }
@@ -64,8 +129,8 @@ await realtime.subscribe('updated', type, id, handleUpdate)
 
 // To unsubscribe
 await realtime.unsubscribe('created', type, handleCreate)
-await realtime.unsubscribe('updated', type, handleCreate)
-await realtime.unsubscribe('updated', type, id, handleCreate)
+await realtime.unsubscribe('updated', type, handleUpdate)
+await realtime.unsubscribe('updated', type, id, handleUpdate)
 
 // To unsubscribe all
 await realtime.unsubscribeAll()
