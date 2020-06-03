@@ -99,6 +99,7 @@ export class SharingProvider extends Component {
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess
     }
+    this.realtime = null
   }
 
   dispatch = action =>
@@ -107,31 +108,40 @@ export class SharingProvider extends Component {
   componentDidMount() {
     this.fetchAllSharings()
     const { client } = this.props
-    this.realtime = client.plugins.realtime
-    this.sharingsDoctype = 'io.cozy.sharings'
-    this.realtime.subscribe(
-      'created',
-      this.sharingsDoctype,
-      this.handleCreateOrUpdateSharings
-    )
-    this.realtime.subscribe(
-      'updated',
-      this.sharingsDoctype,
-      this.handleCreateOrUpdateSharings
-    )
+    if (!client.plugins.realtime) {
+      //eslint-disable-next-line
+      console.warn(
+        `You should register the realtime plugin to tour CozyClient instance see https://docs.cozy.io/en/cozy-realtime/#example`
+      )
+    } else {
+      this.realtime = client.plugins.realtime
+      this.sharingsDoctype = 'io.cozy.sharings'
+      this.realtime.subscribe(
+        'created',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+      this.realtime.subscribe(
+        'updated',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+    }
   }
 
   componentWillUnmount() {
-    this.realtime.unsubscribe(
-      'created',
-      this.sharingsDoctype,
-      this.handleCreateOrUpdateSharings
-    )
-    this.realtime.unsubscribe(
-      'updated',
-      this.sharingsDoctype,
-      this.handleCreateOrUpdateSharings
-    )
+    if (this.realtime) {
+      this.realtime.unsubscribe(
+        'created',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+      this.realtime.unsubscribe(
+        'updated',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+    }
   }
 
   handleCreateOrUpdateSharings = async sharing => {
