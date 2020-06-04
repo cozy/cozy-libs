@@ -171,7 +171,7 @@ FlowProvider.propTypes = {
   /**
    * Konnector manifest
    */
-  konnector: PropTypes.object.isRequired,
+  konnector: PropTypes.object,
   /**
    * Callback to call when the trigger is launched
    */
