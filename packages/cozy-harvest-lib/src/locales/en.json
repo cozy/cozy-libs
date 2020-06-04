@@ -1,5 +1,6 @@
 {
   "close": "Close",
+  "back": "Go back",
   "accountForm": {
     "submit": {
       "label": "Submit"

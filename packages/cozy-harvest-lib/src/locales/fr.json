@@ -1,5 +1,6 @@
 {
   "close": "Fermer",
+  "back": "Revenir",
   "accountForm": {
     "submit": {
       "label": "Sauvegarder"
