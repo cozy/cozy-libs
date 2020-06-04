@@ -3,13 +3,20 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { KonnectorModal } from 'components/KonnectorModal'
+import { findAccount } from 'connections/accounts'
+
+jest.mock('connections/accounts', () => ({
+  findAccount: jest.fn()
+}))
 
 const t = key => key
 
-const findAccountMock = jest.fn().mockImplementation(() => ({
-  _id: '123',
-  doctype: 'io.cozy.accounts'
-}))
+beforeEach(() => {
+  findAccount.mockImplementation(() => ({
+    _id: '123',
+    doctype: 'io.cozy.accounts'
+  }))
+})
 
 describe('KonnectorModal', () => {
   let mockKonnector, props, shallowOptions
@@ -23,7 +30,6 @@ describe('KonnectorModal', () => {
       }
     }
     props = {
-      findAccount: findAccountMock,
       dismissAction: jest.fn(),
       onSuccess: jest.fn(),
       konnector: mockKonnector,
@@ -64,19 +70,16 @@ describe('KonnectorModal', () => {
   })
 
   it('should show an error view', async () => {
-    const component = await getMountedComponent({
-      findAccount: () => {
-        throw new Error('nope')
-      }
+    findAccount.mockImplementation(() => {
+      throw new Error('nope')
     })
-
+    const component = await getMountedComponent()
     const content = component.dive().find('ModalContent')
     expect(content.getElement()).toMatchSnapshot()
   })
 
   it('should show the configuration view of a single account', async () => {
     const component = await getMountedComponent()
-
     const content = component.dive().find('ModalContent')
     expect(content.getElement()).toMatchSnapshot()
   })
