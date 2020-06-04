@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import get from 'lodash/get'
 import flow from 'lodash/flow'
-import { withClient, withMutations } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Infos from 'cozy-ui/transpiled/react/Infos'
@@ -11,7 +11,6 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import { findAccount } from '../connections/accounts'
-import triggersMutations from '../connections/triggers'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
@@ -166,7 +165,6 @@ AccountModal.propTypes = {
 
 export default flow(
   withClient,
-  withMutations(triggersMutations),
   translate(),
   withMountPointPushHistory
 )(AccountModal)
