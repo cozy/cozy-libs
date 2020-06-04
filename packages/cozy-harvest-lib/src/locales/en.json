@@ -285,6 +285,7 @@
     }
   },
   "modal": {
+    "aria-label": "Connector configuration",
     "konnector": {
       "error": {
         "title": "Unable to retrieve your account",

@@ -201,6 +201,7 @@ export class KonnectorModal extends PureComponent {
         size="small"
         into={into}
         closable={false}
+        aria-label={t('modal.aria-label')}
       >
         <ModalHeader className="u-pr-2">
           <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
