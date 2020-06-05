@@ -3,7 +3,8 @@ import {
   getLabel,
   mergeAuth,
   updateTwoFaCode,
-  resetState
+  resetState,
+  getVaultCipherId
 } from 'helpers/accounts'
 
 const fixtures = {
@@ -109,6 +110,38 @@ describe('Accounts Helper', () => {
           }
         }
       })
+    })
+  })
+
+  describe('getVaultCipherId', () => {
+    it('should return the cipher id', () => {
+      expect(
+        getVaultCipherId({
+          relationships: {
+            vaultCipher: {
+              data: {
+                _id: 'cipher-id'
+              }
+            }
+          }
+        })
+      ).toEqual('cipher-id')
+    })
+
+    it('should return the cipher id (old format)', () => {
+      expect(
+        getVaultCipherId({
+          relationships: {
+            vaultCipher: {
+              data: [
+                {
+                  _id: 'cipher-id'
+                }
+              ]
+            }
+          }
+        })
+      ).toEqual('cipher-id')
     })
   })
 })

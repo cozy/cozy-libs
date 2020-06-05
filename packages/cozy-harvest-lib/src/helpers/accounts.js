@@ -132,7 +132,16 @@ export const mergeAuth = (account, authData) => ({
  * @return {string}           cipher uuid
  */
 export const getVaultCipherId = account => {
-  return get(account, 'relationships.vaultCipher.data._id')
+  const relationshipData = get(account, 'relationships.vaultCipher.data')
+  if (!relationshipData) {
+    return
+  } else if (Array.isArray(relationshipData)) {
+    // Support for bug from cipher migration. See link below for context.
+    // https://github.com/cozy/cozy-stack/pull/2535#discussion_r433986611
+    return relationshipData[0]._id
+  } else {
+    return relationshipData._id
+  }
 }
 
 /**
