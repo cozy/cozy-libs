@@ -3,6 +3,7 @@ import { shallow } from 'enzyme'
 import { KonnectorAccounts } from 'components/KonnectorAccounts'
 import CozyClient from 'cozy-client'
 import { fetchAccountsFromTriggers } from '../../src/connections/accounts'
+import { fetchTrigger } from '../../src/connections/triggers'
 
 jest.mock(
   'cozy-realtime',
@@ -18,6 +19,10 @@ jest.mock('../../src/connections/accounts', () => ({
   fetchAccountsFromTriggers: jest.fn()
 }))
 
+jest.mock('../../src/connections/triggers', () => ({
+  fetchTrigger: jest.fn()
+}))
+
 describe('KonnectorAccounts', () => {
   const client = new CozyClient({})
   it('should show a spinner', () => {
@@ -27,7 +32,6 @@ describe('KonnectorAccounts', () => {
         konnector={{}}
         location={{}}
         client={client}
-        fetchTrigger={jest.fn()}
         t={jest.fn()}
       >
         {children}
@@ -47,13 +51,11 @@ describe('KonnectorAccounts', () => {
         trigger
       }
     ])
-    const fetchTrigger = jest.fn()
     const component = shallow(
       <KonnectorAccounts
         konnector={{ triggers: { data: [trigger] } }}
         location={{}}
         client={client}
-        fetchTrigger={fetchTrigger}
         t={jest.fn()}
       >
         {children}

@@ -1,6 +1,8 @@
+import get from 'lodash/get'
+import isEqual from 'lodash/isEqual'
+
 import manifest from '../helpers/manifest'
 import accounts from '../helpers/accounts'
-import get from 'lodash/get'
 import assert from '../assert'
 import logger from '../logger'
 
@@ -65,7 +67,8 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
 
   if (
     cipherData.login.username !== login ||
-    cipherData.login.password !== password
+    cipherData.login.password !== password ||
+    !isEqual(cipherData.fields, fields)
   ) {
     cipherData.login.username = login
 

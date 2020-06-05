@@ -84,11 +84,8 @@ ConfigurationTab.propTypes = {
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
   error: PropTypes.object,
-  konnectorIsRunning: PropTypes.bool.isRequired,
   addAccount: PropTypes.func.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
-  shouldDisplayError: PropTypes.bool.isRequired,
-  hasLoginError: PropTypes.bool.isRequired,
   t: PropTypes.func.isRequired
 }
 

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
-import { withMutations } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Infos from 'cozy-ui/transpiled/react/Infos'
@@ -14,8 +14,8 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 
-import accountMutations from '../connections/accounts'
-import triggersMutations from '../connections/triggers'
+import { fetchTrigger } from '../connections/triggers'
+import { findAccount } from '../connections/accounts'
 import * as konnectorsModel from '../helpers/konnectors'
 import * as triggersModel from '../helpers/triggers'
 
@@ -130,14 +130,17 @@ export class KonnectorModal extends PureComponent {
   }
 
   async fetchAccounts() {
+    const { client } = this.props
     const triggers = this.props.konnector.triggers.data
-    const { findAccount } = this.props
     this.setState({ fetchingAccounts: true })
     try {
       const accounts = (await Promise.all(
         triggers.map(async trigger => {
           return {
-            account: await findAccount(triggersModel.getAccountId(trigger)),
+            account: await findAccount(
+              client,
+              triggersModel.getAccountId(trigger)
+            ),
             trigger
           }
         })
@@ -149,11 +152,14 @@ export class KonnectorModal extends PureComponent {
   }
 
   async fetchAccount(trigger) {
-    const { findAccount } = this.props
+    const { client } = this.props
     this.setState({ fetching: true })
 
     try {
-      const account = await findAccount(triggersModel.getAccountId(trigger))
+      const account = await findAccount(
+        client,
+        triggersModel.getAccountId(trigger)
+      )
       this.setState({
         account,
         trigger
@@ -181,10 +187,10 @@ export class KonnectorModal extends PureComponent {
   }
 
   async refetchTrigger() {
-    const { fetchTrigger } = this.props
+    const { client } = this.props
     const { trigger } = this.state
 
-    const upToDateTrigger = await fetchTrigger(trigger._id)
+    const upToDateTrigger = await fetchTrigger(client, trigger._id)
     this.setState({
       trigger: upToDateTrigger
     })
@@ -201,6 +207,7 @@ export class KonnectorModal extends PureComponent {
         size="small"
         into={into}
         closable={false}
+        aria-label={t('modal.aria-label')}
       >
         <ModalHeader className="u-pr-2">
           <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
@@ -317,8 +324,6 @@ KonnectorModal.propTypes = {
       data: PropTypes.arrayOf(PropTypes.object)
     })
   }).isRequired,
-  findAccount: PropTypes.func.isRequired,
-  fetchTrigger: PropTypes.func,
   dismissAction: PropTypes.func.isRequired,
   createAction: PropTypes.func,
   onAccountChange: PropTypes.func,
@@ -329,10 +334,4 @@ KonnectorModal.defaultProps = {
   into: 'body'
 }
 
-KonnectorModal.contextTypes = {
-  client: PropTypes.object.isRequired
-}
-
-export default withMutations(accountMutations, triggersMutations)(
-  translate()(KonnectorModal)
-)
+export default withClient(translate()(KonnectorModal))

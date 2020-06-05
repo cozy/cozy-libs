@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withClient, withMutations } from 'cozy-client'
+import { withClient } from 'cozy-client'
 import { withRouter } from 'react-router'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
@@ -12,7 +12,7 @@ import compose from 'lodash/flowRight'
 import CozyRealtime from 'cozy-realtime'
 
 import { fetchAccountsFromTriggers } from '../connections/accounts'
-import triggersMutations from '../connections/triggers'
+import { fetchTrigger } from '../connections/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import logger from '../../src/logger'
 
@@ -58,7 +58,7 @@ export class KonnectorAccounts extends React.Component {
   }
 
   async handleTriggerUpdate(job) {
-    const { fetchTrigger } = this.props
+    const { client } = this.props
     const { accounts } = this.state
     const triggerId = job.trigger_id
 
@@ -67,7 +67,7 @@ export class KonnectorAccounts extends React.Component {
     )
 
     if (matchingAccount) {
-      const trigger = await fetchTrigger(triggerId)
+      const trigger = await fetchTrigger(client, triggerId)
       const updatedAccountIndex = accounts.indexOf(matchingAccount)
 
       this.setState({
@@ -140,12 +140,10 @@ KonnectorAccounts.propTypes = {
   konnector: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   client: PropTypes.object.isRequired,
-  fetchTrigger: PropTypes.func.isRequired,
   t: PropTypes.func.isRequired
 }
 
 export default compose(
-  withMutations(triggersMutations),
   withRouter,
   translate(),
   withClient

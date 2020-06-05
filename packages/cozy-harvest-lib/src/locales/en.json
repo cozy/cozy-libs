@@ -1,5 +1,6 @@
 {
   "close": "Close",
+  "back": "Go back",
   "accountForm": {
     "submit": {
       "label": "Submit"
@@ -285,6 +286,7 @@
     }
   },
   "modal": {
+    "aria-label": "Connector configuration",
     "konnector": {
       "error": {
         "title": "Unable to retrieve your account",

@@ -1,5 +1,6 @@
 {
   "close": "Fermer",
+  "back": "Revenir",
   "accountForm": {
     "submit": {
       "label": "Sauvegarder"
@@ -285,6 +286,7 @@
     }
   },
   "modal": {
+    "aria-label": "Configuration du connecteur",
     "konnector": {
       "error": {
         "title": "Impossible de récupérer le compte",
