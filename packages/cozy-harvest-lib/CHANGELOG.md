@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.34.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.34.0...cozy-harvest-lib@1.34.1) (2020-06-05)
+
+
+### Bug Fixes
+
+* Add "back" locale to remove warning in console ([c5070dc](https://github.com/cozy/cozy-libs/commit/c5070dc))
+* Add aria label on modal to remove console warning ([f16d42a](https://github.com/cozy/cozy-libs/commit/f16d42a))
+* Save cipher if fields have changed ([24fe44c](https://github.com/cozy/cozy-libs/commit/24fe44c))
+
+
+
+
+
 # [1.34.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.33.1...cozy-harvest-lib@1.34.0) (2020-06-05)
 
 
