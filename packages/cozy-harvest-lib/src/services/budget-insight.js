@@ -19,7 +19,6 @@ import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
 import harvestLogger from '../logger'
-import flag from 'cozy-flags'
 
 const DECOUPLED_ERROR = 'decoupled'
 const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
@@ -90,9 +89,6 @@ export const getBIConfigForCozyURL = url => {
 }
 
 export const isBudgetInsightConnector = konnector => {
-  if (!flag('harvest.bi-konnector-policy')) {
-    return false
-  }
   return (
     konnector.partnership &&
     konnector.partnership.domain.includes('budget-insight')

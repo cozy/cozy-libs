@@ -8,14 +8,6 @@ import fixtures from '../../test/fixtures'
 import ConnectionFlow from '../../src/models/ConnectionFlow'
 import CozyClient from 'cozy-client'
 
-jest.mock('cozy-flags', () => name => {
-  if (name === 'bi-konnector-policy') {
-    return true
-  } else {
-    return false
-  }
-})
-
 jest.mock('cozy-keys-lib')
 jest.mock('cozy-ui/transpiled/react/utils/color')
 jest.mock('cozy-doctypes', () => {
