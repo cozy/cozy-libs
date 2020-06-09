@@ -9,12 +9,9 @@ import ConnectionFlow, {
   UPDATE_EVENT
 } from '../models/ConnectionFlow'
 import minilog from 'minilog'
-import flag from 'cozy-flags'
 import logger from '../logger'
 import { multiPrompt } from './prompt'
 import assert from '../assert'
-
-flag('bi-konnector-policy', true)
 
 minilog.enable()
 

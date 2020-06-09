@@ -18,14 +18,6 @@ jest.mock('../../src/connections/files', () => ({
   createDirectoryByPath: jest.fn()
 }))
 
-jest.mock('cozy-flags', () => name => {
-  if (name === 'harvest.bi-konnector-policy') {
-    return true
-  } else {
-    return false
-  }
-})
-
 jest.mock('../../src/services/budget-insight', () => {
   const originalBudgetInsight = jest.requireActual(
     '../../src/services/budget-insight'
