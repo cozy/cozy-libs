@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.36.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.35.0...cozy-harvest-lib@1.36.0) (2020-06-10)
+
+
+### Features
+
+* Remove undocumented local.config.json ([8c59662](https://github.com/cozy/cozy-libs/commit/8c59662))
+
+
+
+
+
 # [1.35.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.34.2...cozy-harvest-lib@1.35.0) (2020-06-09)
 
 
