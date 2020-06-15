@@ -50,7 +50,7 @@ CozyRealtime comes with a plugin for CozyClient. This is the recommended way to 
 
 ```js
 
-//instanciation
+// Instantiation
 import React, { Component } from 'react'
 import { RealtimePlugin } from 'cozy-realtime'
 import CozyClient, { withClient } from 'cozy-client'
