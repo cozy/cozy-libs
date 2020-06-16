@@ -63,15 +63,23 @@ const getBIModeFromCozyURL = rawCozyURL => {
     .split('.')
     .slice(-2)
     .join('.')
+    .split(':')
+    .shift()
   switch (domain) {
-    case 'cozy.rocks':
-    case 'mycozy.cloud':
-      return 'prod'
+    case 'cozy.tools':
+    case 'cozy.wtf':
+    case 'cozy.blue':
     case 'cozy.works':
+    case 'cozy.red':
+    case 'cozy.company':
+    case 'cozy.solutions':
+    case 'toutatice.fr':
+    case 'cozymaif.cloud':
+    case 'cozy-maif-int.fr':
     case 'cozy.dev':
       return 'dev'
     default:
-      return 'dev'
+      return 'prod'
   }
 }
 

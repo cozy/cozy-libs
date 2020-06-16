@@ -70,6 +70,7 @@ describe('getBIConfigForCozyURL', () => {
     expect(getBIConfigForCozyURL('https://test.cozy.works').mode).toBe('dev')
     expect(getBIConfigForCozyURL('https://test.cozy.rocks').mode).toBe('prod')
     expect(getBIConfigForCozyURL('https://test.mycozy.cloud').mode).toBe('prod')
+    expect(getBIConfigForCozyURL('https://test.mydomain.net').mode).toBe('prod')
   })
 })
 
