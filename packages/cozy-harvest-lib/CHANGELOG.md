@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.36.0...cozy-harvest-lib@1.36.1) (2020-06-16)
+
+
+### Bug Fixes
+
+* **Harvest:** Change prod/sandbox environment detection ([adff14a](https://github.com/cozy/cozy-libs/commit/adff14a))
+
+
+
+
+
 # [1.36.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.35.0...cozy-harvest-lib@1.36.0) (2020-06-10)
 
 
