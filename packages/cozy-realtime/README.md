@@ -82,7 +82,7 @@ class MyComp extends Component {
       await this.realtime.subscribe('created', type, this.handleCreate)
       //listen of the update for a type
       await this.realtime.subscribe('updated', type, this.handleUpdate)
-      //listen a specific document
+      // Listen to a specific document
       await this.realtime.subscribe('updated', type, id, this.handleUpdate)
     }
 
