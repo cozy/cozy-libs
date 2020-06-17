@@ -78,7 +78,7 @@ class MyComp extends Component {
   componentDidMount(){
     this.realtime = this.props.client.plugins.realtime
     if(this.realtime){
-      // To subscribe
+      // Listen to document creations
       await this.realtime.subscribe('created', type, this.handleCreate)
       //listen of the update for a type
       await this.realtime.subscribe('updated', type, this.handleUpdate)
