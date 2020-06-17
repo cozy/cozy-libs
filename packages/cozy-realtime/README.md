@@ -59,16 +59,29 @@ const handleUpdate = accounts => {
 
 // To subscribe
 await realtime.subscribe('created', type, handleCreate)
-await realtime.subscribe('updated', type, handleCreate)
-await realtime.subscribe('updated', type, id, handleUpdate)
+await realtime.subscribe('updated', type, handleUpdate)
+await realtime.subscribe('updated', type, id, handleSingleUpdate)
 
 // To unsubscribe
 await realtime.unsubscribe('created', type, handleCreate)
-await realtime.unsubscribe('updated', type, handleCreate)
-await realtime.unsubscribe('updated', type, id, handleCreate)
+await realtime.unsubscribe('updated', type, handleUpdate)
+await realtime.unsubscribe('updated', type, id, handleSingleUpdate)
 
 // To unsubscribe all
 await realtime.unsubscribeAll()
+```
+
+## Usage with cozy-client
+
+Instead of passing an instance of cozy-client to cozy-realtime, it is possible to provide cozy-realtime as a plugin to cozy-client.
+
+```
+// Registering the plugin
+import { RealtimePlugin } from 'cozy-realtime'
+client.registerPlugin(RealtimePlugin)
+
+// Using realtime
+await client.plugins.realtime.subscribe('created', type, handleCreate)
 ```
 
 ## License
