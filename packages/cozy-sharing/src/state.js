@@ -212,9 +212,9 @@ const sharings = (state = [], action) => {
       //can be the case if we launch the create and
       //receive the realtime in the same time
       //TODO Index by index...
+      //eslint-disable-next-line
       const filtered_state = state.filter(s => s.id !== action.data.id)
-      const new_state = [...filtered_state, action.data]
-      return new_state
+      return [...filtered_state, action.data]
     case UPDATE_SHARING:
     case REVOKE_RECIPIENT:
       return state.map(s => {
@@ -235,7 +235,6 @@ const sharedPaths = (state = [], action) => {
       return action.paths
     case ADD_SHARING:
       //!TODO Remove after we solved the sharedPaths bugs
-      //eslint-disable-next-line
       //eslint-disable-next-line
       const newState = [...state, action.path]
       return newState
