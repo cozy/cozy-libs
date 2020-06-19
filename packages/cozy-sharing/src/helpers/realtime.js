@@ -1,9 +1,12 @@
 /**
+ * When we receive a sharing from the realtime
+ * we need to format it in the same way we store
+ * the sharing in the redux store
  *
  * @param {Object} object Document from Realtime
  * @param {String} type type of the document
  */
-export const createFakeInternalObjectFromRealtime = (object, type) => {
+export const normalizeDocFromRealtime = (object, type) => {
   const fakedSharing = {
     id: object._id,
     ...object,
@@ -18,18 +21,23 @@ export const createFakeInternalObjectFromRealtime = (object, type) => {
  * the realtime, the message is not formatted as
  * the response of the api endpoint.
  *
- * Let's merge together
- * @param {*} fromHTTPRequest
- * @param {*} fromWebsocket
+ * Let's merge together to update an existing sharing
+ * from the one coming from the realtime
+ *
+ * @param {*} internalSharingFromStore
+ * @param {*} sharingFromRealtime
  */
-export const mergeObjectFromRealTime = (fromHTTPRequest, fromWebsocket) => {
+export const updateInternalObjectFromRealtime = (
+  internalSharingFromStore,
+  sharingFromRealtime
+) => {
   return {
-    ...fromHTTPRequest,
+    ...internalSharingFromStore,
     meta: {
-      rev: fromWebsocket._rev
+      rev: sharingFromRealtime._rev
     },
     attributes: {
-      ...fromWebsocket
+      ...sharingFromRealtime
     }
   }
 }

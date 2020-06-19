@@ -1,6 +1,6 @@
 import {
-  mergeObjectFromRealTime,
-  createFakeInternalObjectFromRealtime
+  updateInternalObjectFromRealtime,
+  normalizeDocFromRealtime
 } from '../helpers/realtime'
 
 import { addSharing, updateSharing } from '../state'
@@ -8,9 +8,9 @@ import { getFilesPaths } from '../helpers/files'
 
 export const getSharingObject = (internalSharing, sharing) => {
   if (internalSharing) {
-    return mergeObjectFromRealTime(internalSharing, sharing)
+    return updateInternalObjectFromRealtime(internalSharing, sharing)
   } else {
-    return createFakeInternalObjectFromRealtime(sharing, 'io.cozy.sharings')
+    return normalizeDocFromRealtime(sharing, 'io.cozy.sharings')
   }
 }
 
