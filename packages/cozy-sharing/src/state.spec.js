@@ -10,7 +10,6 @@ import reducer, {
   matchingInstanceName,
   getSharingLink,
   hasSharedParent,
-  isShared,
   getSharedDocIdsBySharings
 } from './state'
 
@@ -398,30 +397,6 @@ describe('hasSharedParent helper', () => {
     }
     const documentPath = '/dir3/doc3'
     const result = hasSharedParent(state, documentPath)
-    expect(result).toBe(false)
-  })
-})
-
-describe('isShared helper', () => {
-  it('should return true if document is shared', () => {
-    const state = {
-      sharedPaths: ['/dir0/doc0', '/dir1/doc1']
-    }
-    const document = {
-      path: '/dir1/doc1'
-    }
-    const result = isShared(state, document)
-    expect(result).toBe(true)
-  })
-
-  it('should return true if document is shared', () => {
-    const state = {
-      sharedPaths: ['/dir0/doc0', '/dir1/doc1']
-    }
-    const document = {
-      path: '/dir1/doc2'
-    }
-    const result = isShared(state, document)
     expect(result).toBe(false)
   })
 })

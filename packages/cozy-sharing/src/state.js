@@ -364,15 +364,6 @@ export const hasSharedChild = (state, documentPath) => {
   return ret
 }
 
-export const isShared = (state, document) => {
-  if (!state.sharedPaths) {
-    //eslint-disable-next-line
-    console.log('isShared should not occurs', state, document)
-    return false
-  }
-  return state.sharedPaths.some(path => path === document.path)
-}
-
 // helpers
 const getSharedDocIds = doc =>
   doc.type === 'io.cozy.sharings'
