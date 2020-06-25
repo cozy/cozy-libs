@@ -1,10 +1,10 @@
 import {
   updateInternalObjectFromRealtime,
   normalizeDocFromRealtime
-} from '../helpers/realtime'
+} from './realtime'
 
 import { addSharing, updateSharing } from '../state'
-import { getFilesPaths } from '../helpers/files'
+import { getFilesPaths } from './files'
 
 export const getSharingObject = (internalSharing, sharing) => {
   if (internalSharing) {

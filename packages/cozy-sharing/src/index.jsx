@@ -51,7 +51,7 @@ import {
   getSharingObject,
   createSharingInStore,
   updateSharingInStore
-} from './ducks/sharings'
+} from './helpers/sharings'
 
 const track = (document, action) => {
   const tracker = getTracker()
