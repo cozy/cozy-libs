@@ -343,23 +343,23 @@ const getPermissionById = (state, id) =>
 
 const getApps = state => state.apps
 
-export const hasSharedParent = (state, document) => {
+export const hasSharedParent = (state, documentPath) => {
   if (!state.sharedPaths) {
     //eslint-disable-next-line
-    console.log('hasSharedParent should not occurs', state, document)
+    console.log('hasSharedParent should not occurs', state, documentPath)
     return false
   }
-  return state.sharedPaths.some(path => document.path.indexOf(`${path}/`) === 0)
+  return state.sharedPaths.some(path => documentPath.indexOf(`${path}/`) === 0)
 }
 
-export const hasSharedChild = (state, document) => {
+export const hasSharedChild = (state, documentPath) => {
   if (!state.sharedPaths) {
     //eslint-disable-next-line
-    console.log('hasSharedChild should not occurs', state, document)
+    console.log('hasSharedChild should not occurs', state, documentPath)
     return false
   }
   const ret = state.sharedPaths.some(
-    path => path.indexOf(`${document.path}/`) === 0
+    path => path.indexOf(`${documentPath}/`) === 0
   )
   return ret
 }

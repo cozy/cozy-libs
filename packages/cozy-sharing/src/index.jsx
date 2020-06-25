@@ -87,8 +87,9 @@ export class SharingProvider extends Component {
       getDocumentPermissions: docId =>
         getDocumentPermissions(this.state, docId),
       getSharingLink: docId => getSharingLink(this.state, docId, documentType),
-      hasSharedParent: document => hasSharedParent(this.state, document),
-      hasSharedChild: document => hasSharedChild(this.state, document),
+      hasSharedParent: documentPath =>
+        hasSharedParent(this.state, documentPath),
+      hasSharedChild: documentPath => hasSharedChild(this.state, documentPath),
       share: this.share,
       revoke: this.revoke,
       revokeSelf: this.revokeSelf,

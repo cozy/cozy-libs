@@ -387,10 +387,8 @@ describe('hasSharedParent helper', () => {
     const state = {
       sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
     }
-    const document = {
-      path: '/dir1/subdir0/doc2'
-    }
-    const result = hasSharedParent(state, document)
+    const documentPath = '/dir1/subdir0/doc2'
+    const result = hasSharedParent(state, documentPath)
     expect(result).toBe(true)
   })
 
@@ -398,10 +396,8 @@ describe('hasSharedParent helper', () => {
     const state = {
       sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
     }
-    const document = {
-      path: '/dir3/doc3'
-    }
-    const result = hasSharedParent(state, document)
+    const documentPath = '/dir3/doc3'
+    const result = hasSharedParent(state, documentPath)
     expect(result).toBe(false)
   })
 })
