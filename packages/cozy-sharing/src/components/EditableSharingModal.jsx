@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import flow from 'lodash/flow'
 import { queryConnect, withClient } from 'cozy-client'
@@ -6,6 +6,7 @@ import { queryConnect, withClient } from 'cozy-client'
 import { Contact, Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import SharingContext from '../context'
+import { getFilesPaths } from '../helpers/files'
 import ContactsAndGroupsDataLoader from './ContactsAndGroupsDataLoader'
 import { default as DumbShareModal } from './ShareModal'
 
@@ -16,6 +17,18 @@ const EditableSharingModal = ({
   groups,
   ...rest
 }) => {
+  const [documentPath, setDocumentPath] = useState(
+    document.path ? document.path : null
+  )
+  useEffect(() => {
+    ;(async () => {
+      const path = await getFilesPaths(client, document._type, [document])
+      setDocumentPath(path[0])
+    })()
+  })
+
+  if (documentPath === null) return null
+
   return (
     <ContactsAndGroupsDataLoader contacts={contacts} groups={groups}>
       <SharingContext.Consumer>
@@ -45,8 +58,8 @@ const EditableSharingModal = ({
               link={getSharingLink(document.id)}
               permissions={getDocumentPermissions(document.id)}
               isOwner={isOwner(document.id)}
-              hasSharedParent={hasSharedParent(document.path)}
-              hasSharedChild={hasSharedChild(document.path)}
+              hasSharedParent={hasSharedParent(documentPath)}
+              hasSharedChild={hasSharedChild(documentPath)}
               onShare={share}
               onRevoke={revoke}
               onShareByLink={shareByLink}
