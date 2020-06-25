@@ -65,6 +65,7 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
   const originalCipher = await vaultClient.getByIdOrSearch(cipherId)
   const cipherData = await vaultClient.decrypt(originalCipher)
 
+  let cipher
   if (
     cipherData.login.username !== login ||
     cipherData.login.password !== password ||
@@ -77,15 +78,21 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
     }
     cipherData.fields = fields
 
-    const newCipher = await vaultClient.createNewCozySharedCipher(
-      cipherData,
-      originalCipher
-    )
-    const cipher = await vaultClient.saveCipher(newCipher)
-    return cipher
+    // We cannot create the cipher as shared here, we need a separate call
+    // to shareCipherWithCozy below to follow the official bitwarden
+    // implementation that needs a separate call to the share route
+    cipher = await vaultClient.createOrUpdateCipher(cipherData, originalCipher)
+
+    await vaultClient.saveCipher(cipher)
   } else {
-    return originalCipher
+    cipher = originalCipher
   }
+
+  // When updating the cipher from Harvest, ciphers are automatically
+  // shared with the Cozy organization, for the stack to be able to
+  // decipher the credentials to pass them to the konnectors
+  await shareCipherWithCozy(vaultClient, cipher.id)
+  return cipher
 }
 
 const isAdditionalField = (fieldName, { identifierProperty }) => {
@@ -167,10 +174,6 @@ export const createOrUpdateCipher = async (
       password,
       fields
     })
-  }
-
-  if (cipher) {
-    await shareCipherWithCozy(vaultClient, cipher.id)
   }
 
   return cipher
