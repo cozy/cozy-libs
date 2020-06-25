@@ -159,6 +159,38 @@ describe('Sharing state', () => {
     })
   })
 
+  it('will not add twice the same sharing', () => {
+    const state = reducer(
+      reducer(
+        undefined,
+        receiveSharings({
+          sharings: [SHARING_1, SHARING_2]
+        })
+      ),
+      receiveSharings(SHARING_1)
+    )
+    expect(state.byDocId).toEqual({
+      folder_1: { sharings: [SHARING_1.id], permissions: [] },
+      folder_2: { sharings: [SHARING_2.id], permissions: [] }
+    })
+  })
+
+  it('will not add twice the same sharing', () => {
+    const state = reducer(
+      reducer(
+        undefined,
+        receiveSharings({
+          sharings: [SHARING_1, SHARING_2]
+        })
+      ),
+      receiveSharings(SHARING_1)
+    )
+    expect(state.byDocId).toEqual({
+      folder_1: { sharings: [SHARING_1.id], permissions: [] },
+      folder_2: { sharings: [SHARING_2.id], permissions: [] }
+    })
+  })
+
   it('should index a newly created sharing link', () => {
     const initialState = reducer(
       undefined,
@@ -224,12 +256,15 @@ describe('Sharing state', () => {
   describe('selectors', () => {
     const state = reducer(
       reducer(
-        undefined,
-        receiveSharings({
-          sharings: [SHARING_1, SHARING_2],
-          permissions: [PERM_1],
-          apps: APPS
-        })
+        reducer(
+          undefined,
+          receiveSharings({
+            sharings: [SHARING_1, SHARING_2, SHARING_2],
+            permissions: [PERM_1],
+            apps: APPS
+          })
+        ),
+        addSharing(SHARING_3)
       ),
       addSharing(SHARING_3)
     )

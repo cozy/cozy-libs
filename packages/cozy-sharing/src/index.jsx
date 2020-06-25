@@ -18,6 +18,7 @@ import reducer, {
   getOwner,
   getRecipients,
   getSharingById,
+  getSharingDocIds,
   getSharingForSelf,
   getSharingType,
   getSharingLink,
@@ -45,6 +46,13 @@ import { withClient } from 'cozy-client'
 import withLocales from './withLocales'
 
 import { fetchNextPermissions } from './fetchNextPermissions'
+import { getFilesPaths } from './helpers/files'
+import {
+  getSharingObject,
+  createSharingInStore,
+  updateSharingInStore
+} from './helpers/sharings'
+
 const track = (document, action) => {
   const tracker = getTracker()
   if (!tracker) {
@@ -92,6 +100,7 @@ export class SharingProvider extends Component {
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess
     }
+    this.realtime = null
   }
 
   dispatch = action =>
@@ -99,6 +108,53 @@ export class SharingProvider extends Component {
 
   componentDidMount() {
     this.fetchAllSharings()
+    const { client } = this.props
+    if (!client.plugins.realtime) {
+      //eslint-disable-next-line
+      console.warn(
+        `You should register the realtime plugin to your CozyClient instance see https://docs.cozy.io/en/cozy-realtime/#example`
+      )
+    } else {
+      this.realtime = client.plugins.realtime
+      this.sharingsDoctype = 'io.cozy.sharings'
+      this.realtime.subscribe(
+        'created',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+      this.realtime.subscribe(
+        'updated',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+    }
+  }
+
+  componentWillUnmount() {
+    if (this.realtime) {
+      this.realtime.unsubscribe(
+        'created',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+      this.realtime.unsubscribe(
+        'updated',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+    }
+  }
+
+  handleCreateOrUpdateSharings = async sharing => {
+    const { client, doctype } = this.props
+    const internalSharing = getSharingById(this.state, sharing._id)
+    const newSharing = getSharingObject(internalSharing, sharing)
+    if (internalSharing) {
+      updateSharingInStore(this.dispatch, newSharing)
+    } else {
+      const docsId = getSharingDocIds(newSharing)
+      createSharingInStore(client, doctype, this.dispatch, docsId, newSharing)
+    }
   }
 
   fetchAllSharings = async () => {
@@ -124,36 +180,26 @@ export class SharingProvider extends Component {
     const folderPaths = resp.data
       .filter(f => f.type === 'directory' && !f.trashed)
       .map(f => f.path)
-    const filePaths = await this.getFilesPaths(
+    const filePaths = await getFilesPaths(
+      client,
+      doctype,
       resp.data.filter(f => f.type !== 'directory' && !f.trashed)
     )
+
     this.dispatch(receivePaths([...folderPaths, ...filePaths]))
   }
 
-  getFilesPaths = async files => {
-    const parentDirIds = files
-      .map(f => f.dir_id)
-      .filter((f, idx, arr) => arr.indexOf(f) === idx)
-    const parentDirs = await this.props.client
-      .collection(this.props.doctype)
-      .all({ keys: parentDirIds })
-    const filePaths = files.map(f => {
-      const parentDirPath = parentDirs.data.find(d => d.id === f.dir_id).path
-      return parentDirPath === '/' ? `/${f.name}` : `${parentDirPath}/${f.name}`
-    })
-    return filePaths
-  }
-
   share = async (document, recipients, sharingType, description) => {
+    const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
     if (sharing) return this.addRecipients(sharing, recipients, sharingType)
-    const resp = await this.props.client
+    const resp = await client
       .collection('io.cozy.sharings')
       .share(document, recipients, sharingType, description, '/preview')
     this.dispatch(
       addSharing(
         resp.data,
-        document.path || (await this.getFilesPaths([document]))
+        document.path || (await getFilesPaths(client, doctype, [document]))
       )
     )
     return resp.data
@@ -167,33 +213,33 @@ export class SharingProvider extends Component {
   }
 
   revokeAllRecipients = async document => {
+    const { client, doctype } = this.props
     const recipients = getRecipients(this.state, document.id)
     const sharing = getDocumentSharing(this.state, document.id)
 
-    await this.props.client
-      .collection('io.cozy.sharings')
-      .revokeAllRecipients(sharing)
+    await client.collection('io.cozy.sharings').revokeAllRecipients(sharing)
     recipients.map(async (recipient, recipientIndex) => {
       this.dispatch(
         revokeRecipient(
           sharing,
           recipientIndex,
-          document.path || (await this.getFilesPaths([document]))
+          document.path || (await getFilesPaths(client, doctype, [document]))
         )
       )
     })
   }
 
   revoke = async (document, sharingId, recipientIndex) => {
+    const { client, doctype } = this.props
     const sharing = getSharingById(this.state, sharingId)
-    await this.props.client
+    await client
       .collection('io.cozy.sharings')
       .revokeRecipient(sharing, recipientIndex)
     this.dispatch(
       revokeRecipient(
         sharing,
         recipientIndex,
-        document.path || (await this.getFilesPaths([document]))
+        document.path || (await getFilesPaths(client, doctype, [document]))
       )
     )
   }
