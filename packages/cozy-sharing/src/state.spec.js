@@ -424,13 +424,13 @@ describe('isShared helper', () => {
     const result = isShared(state, document)
     expect(result).toBe(false)
   })
+})
 
-  describe('getSharedDocIdsBySharings method', () => {
-    it('should test getSharedDocIdsBySharings', () => {
-      const sharedDocsId = getSharedDocIdsBySharings({
-        data: [SHARING_1, SHARING_NO_ACTIVE]
-      })
-      expect(sharedDocsId).toEqual(SHARING_1.attributes.rules[0].values)
+describe('getSharedDocIdsBySharings method', () => {
+  it('should test getSharedDocIdsBySharings', () => {
+    const sharedDocsId = getSharedDocIdsBySharings({
+      data: [SHARING_1, SHARING_NO_ACTIVE]
     })
+    expect(sharedDocsId).toEqual(SHARING_1.attributes.rules[0].values)
   })
 })
