@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.36.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.36.2...cozy-harvest-lib@1.36.3) (2020-06-25)
+
+
+### Bug Fixes
+
+* Update a not shared-with-cozy cipher from harvest ([1ff07cd](https://github.com/cozy/cozy-libs/commit/1ff07cd))
+
+
+
+
+
 ## [1.36.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.36.1...cozy-harvest-lib@1.36.2) (2020-06-17)
 
 **Note:** Version bump only for package cozy-harvest-lib
