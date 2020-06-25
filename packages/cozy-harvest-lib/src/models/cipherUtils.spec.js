@@ -52,6 +52,11 @@ describe('createOrUpdateCipher', () => {
       get: id => ({ id }),
       getByIdOrSearch: jest.fn().mockReturnValue(foundCipher),
       shareWithCozy: jest.fn().mockResolvedValue(sharedCipher),
+      createOrUpdateCipher: jest.fn().mockImplementation(cipherData => ({
+        ...cipherData,
+        organizationId: 'cozy-org-id',
+        collectionIds: ['cozy-org-collection-id']
+      })),
       createNewCozySharedCipher: jest.fn().mockImplementation(cipherData => ({
         ...cipherData,
         organizationId: 'cozy-org-id',
@@ -114,6 +119,9 @@ describe('createOrUpdateCipher', () => {
           cipherId,
           { userCredentials, account, konnector }
         )
+
+        // Created cipher should be shared with Cozy
+        expect(vaultClient.createNewCozySharedCipher).toHaveBeenCalled()
 
         expect(cipher.id).toBeNull()
         expect(cipher.login.username).toBe(userCredentials.login)
@@ -247,6 +255,10 @@ describe('createOrUpdateCipher', () => {
         cipherId,
         { userCredentials, account, konnector }
       )
+
+      // Updated cipher should have been updated, then shared with Cozy
+      expect(vaultClient.createOrUpdateCipher).toHaveBeenCalled()
+      expect(vaultClient.shareWithCozy).toHaveBeenCalled()
 
       expect(cipher.id).toBe('existing-cipher')
       expect(cipher.login.username).toBe(userCredentials.login)
