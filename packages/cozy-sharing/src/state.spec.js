@@ -10,7 +10,7 @@ import reducer, {
   matchingInstanceName,
   getSharingLink,
   hasSharedParent,
-  isShared,
+  hasSharedChild,
   getSharedDocIdsBySharings
 } from './state'
 
@@ -387,54 +387,46 @@ describe('hasSharedParent helper', () => {
     const state = {
       sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
     }
-    const document = {
-      path: '/dir1/subdir0/doc2'
-    }
-    const result = hasSharedParent(state, document)
+    const documentPath = '/dir1/subdir0/doc2'
+    const result = hasSharedParent(state, documentPath)
     expect(result).toBe(true)
   })
 
-  it("should return true if one of the document's parents is shared", () => {
+  it("should return false if none of the document's parents is shared", () => {
     const state = {
       sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
     }
-    const document = {
-      path: '/dir3/doc3'
-    }
-    const result = hasSharedParent(state, document)
+    const documentPath = '/dir3/doc3'
+    const result = hasSharedParent(state, documentPath)
     expect(result).toBe(false)
   })
 })
 
-describe('isShared helper', () => {
-  it('should return true if document is shared', () => {
+describe('hasSharedChild helper', () => {
+  it('returns true if a child is shared', () => {
     const state = {
-      sharedPaths: ['/dir0/doc0', '/dir1/doc1']
+      sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
     }
-    const document = {
-      path: '/dir1/doc1'
-    }
-    const result = isShared(state, document)
+    const documentPath = '/dir0'
+    const result = hasSharedChild(state, documentPath)
     expect(result).toBe(true)
   })
 
-  it('should return true if document is shared', () => {
+  it('returns false if no child is shared', () => {
     const state = {
-      sharedPaths: ['/dir0/doc0', '/dir1/doc1']
+      sharedPaths: ['/dir0/doc0', '/dir1', '/dir2/doc1']
     }
-    const document = {
-      path: '/dir1/doc2'
-    }
-    const result = isShared(state, document)
+    const documentPath = '/dir3'
+    const result = hasSharedChild(state, documentPath)
     expect(result).toBe(false)
   })
+})
 
-  describe('getSharedDocIdsBySharings method', () => {
-    it('should test getSharedDocIdsBySharings', () => {
-      const sharedDocsId = getSharedDocIdsBySharings({
-        data: [SHARING_1, SHARING_NO_ACTIVE]
-      })
-      expect(sharedDocsId).toEqual(SHARING_1.attributes.rules[0].values)
+describe('getSharedDocIdsBySharings method', () => {
+  it('should test getSharedDocIdsBySharings', () => {
+    const sharedDocsId = getSharedDocIdsBySharings({
+      data: [SHARING_1, SHARING_NO_ACTIVE]
     })
+    expect(sharedDocsId).toEqual(SHARING_1.attributes.rules[0].values)
   })
 })
