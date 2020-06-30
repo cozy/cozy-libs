@@ -165,5 +165,14 @@ export default function testFlagAPI(flag) {
       })
       expect(flag('bar_config')).toEqual({ qux: 'quux' })
     })
+
+    it('should garbage collect flags', () => {
+      flag('a', true)
+      flag('b', true)
+      expect(flag.list()).toEqual(['a', 'b'])
+      flag('a', null)
+      flag.garbageCollect()
+      expect(flag.list()).toEqual(['b'])
+    })
   })
 }

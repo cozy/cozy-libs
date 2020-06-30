@@ -157,6 +157,18 @@ class FlagClientPlugin {
   }
 }
 
+/** Reset flags, keeping only those not set to null */
+export const garbageCollect = () => {
+  const notNullFlags = flag
+    .list()
+    .map(name => [name, flag(name)])
+    .filter(x => x[1] !== null)
+    .map(x => x[0])
+  flag.reset()
+  for (const flagName of notNullFlags) {
+    flag(flagName, true)
+  }
+}
 FlagClientPlugin.pluginName = 'flags'
 
 flag.store = store
@@ -167,5 +179,6 @@ flag.initializeFromRemote = initializeFromRemote
 flag.initializeFromDOM = initializeFromDOM
 flag.initialize = initialize
 flag.plugin = FlagClientPlugin
+flag.garbageCollect = garbageCollect
 
 export default flag
