@@ -35,3 +35,29 @@ it('should login/logout correctly', async () => {
   await client.logout()
   expect(client.plugins.realtime.realtime).toBeNull()
 })
+
+it('throws user friendly errors when trying to use the realtime while logged out', async () => {
+  const errorMessage =
+    'Unable to use realtime while cozy-client is not logged in'
+  client = new CozyClient({})
+  client.registerPlugin(RealtimePlugin)
+  expect(() => client.plugins.realtime.subscribe()).toThrowError(errorMessage)
+  expect(() => client.plugins.realtime.unsubscribe()).toThrowError(errorMessage)
+  expect(() => client.plugins.realtime.unsubscribeAll()).toThrowError(
+    errorMessage
+  )
+
+  await client.login({
+    uri: 'http://cozy.tools:8080',
+    token: 'fake-token'
+  })
+  expect(() => client.plugins.realtime.subscribe()).not.toThrowError(
+    errorMessage
+  )
+  expect(() => client.plugins.realtime.unsubscribe()).not.toThrowError(
+    errorMessage
+  )
+  expect(() => client.plugins.realtime.unsubscribeAll()).not.toThrowError(
+    errorMessage
+  )
+})

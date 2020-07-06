@@ -37,10 +37,18 @@ class RealtimePlugin {
     this.realtime = null
   }
 
+  checkRealtimeInstance() {
+    if (!this.realtime)
+      throw new Error(
+        'Unable to use realtime while cozy-client is not logged in'
+      )
+  }
+
   /**
    * @see CozyRealtime.subscribe
    */
   subscribe(...args) {
+    this.checkRealtimeInstance()
     this.realtime.subscribe(...args)
   }
 
@@ -48,6 +56,7 @@ class RealtimePlugin {
    * @see CozyRealtime.unsubscribe
    */
   unsubscribe(...args) {
+    this.checkRealtimeInstance()
     this.realtime.unsubscribe(...args)
   }
 
@@ -55,6 +64,7 @@ class RealtimePlugin {
    * @see CozyRealtime.unsubscribeAll
    */
   unsubscribeAll() {
+    this.checkRealtimeInstance()
     this.realtime.unsubscribeAll()
   }
 }
