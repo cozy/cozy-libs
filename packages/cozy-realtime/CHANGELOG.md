@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.8.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.8.1...cozy-realtime@3.8.2) (2020-07-07)
+
+
+### Bug Fixes
+
+* Better error message when using a logged off client with realtime ([6dd7192](https://github.com/cozy/cozy-libs/commit/6dd7192))
+
+
+
+
+
 ## [3.8.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.8.0...cozy-realtime@3.8.1) (2020-06-17)
 
 **Note:** Version bump only for package cozy-realtime
