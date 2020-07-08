@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.3.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.3.0...cozy-flags@2.3.1) (2020-07-08)
+
+
+### Bug Fixes
+
+* Make sure the initializing promise is reset on logout ([673029b](https://github.com/cozy/cozy-libs/commit/673029b))
+
+
+
+
+
 # [2.3.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.2.5...cozy-flags@2.3.0) (2020-07-08)
 
 
