@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.8.2...cozy-realtime@3.9.0) (2020-07-08)
+
+
+### Features
+
+* Emit events when plugins are ready ([5fc182c](https://github.com/cozy/cozy-libs/commit/5fc182c))
+
+
+
+
+
 ## [3.8.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.8.1...cozy-realtime@3.8.2) (2020-07-07)
 
 
