@@ -20,6 +20,38 @@ const AppWrapper = ({ children, client }) => {
   )
 }
 
+describe('SharingProvider', () => {
+  const client = createMockClient({})
+
+  client.plugins.realtime = {
+    subscribe: jest.fn(),
+    unsubscribe: jest.fn()
+  }
+  client.collection = jest.fn(() => client)
+  client.isLogged = true
+
+  afterEach(() => jest.resetAllMocks())
+
+  it('loads data on mount', () => {
+    mount(<AppWrapper client={client} />)
+
+    expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
+    expect(client.collection).toHaveBeenCalledWith('io.cozy.sharings')
+  })
+
+  it('loads nothing when the client is not logged in', () => {
+    client.isLogged = false
+    mount(<AppWrapper client={client} />)
+
+    expect(client.plugins.realtime.subscribe).not.toHaveBeenCalled()
+    expect(client.collection).not.toHaveBeenCalledWith('io.cozy.sharings')
+
+    client.emit('plugin:realtime:login')
+    expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
+    expect(client.collection).toHaveBeenCalledWith('io.cozy.sharings')
+  })
+})
+
 describe('hasWriteAccess', () => {
   it('tells if a doc is writtable', () => {
     const client = createMockClient({})
