@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.11.6...cozy-sharing@1.11.7) (2020-07-08)
+
+
+### Bug Fixes
+
+* Defer loading data until cozy-client is ready ([5b2a2c0](https://github.com/cozy/cozy-libs/commit/5b2a2c0))
+
+
+
+
+
+## [1.11.6](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.11.5...cozy-sharing@1.11.6) (2020-07-08)
+
+**Note:** Version bump only for package cozy-sharing
+
+
+
+
+
 ## [1.11.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.11.4...cozy-sharing@1.11.5) (2020-07-07)
 
 **Note:** Version bump only for package cozy-sharing

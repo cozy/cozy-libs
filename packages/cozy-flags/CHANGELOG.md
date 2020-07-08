@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.2.5...cozy-flags@2.3.0) (2020-07-08)
+
+
+### Features
+
+* Emit events when plugins are ready ([5fc182c](https://github.com/cozy/cozy-libs/commit/5fc182c))
+
+
+
+
+
 ## [2.2.5](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.2.4...cozy-flags@2.2.5) (2020-06-09)
 
 

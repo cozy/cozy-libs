@@ -26,14 +26,23 @@ it('should expose the same API as CozyRealtime', () => {
 it('should login/logout correctly', async () => {
   client = new CozyClient({})
   client.registerPlugin(RealtimePlugin)
+
+  const onLogin = jest.fn()
+  const onLogout = jest.fn()
+  client.on('plugin:realtime:login', onLogin)
+  client.on('plugin:realtime:logout', onLogout)
   expect(client.plugins.realtime.realtime).toBeNull()
   await client.login({
     uri: 'http://cozy.tools:8080',
     token: 'fake-token'
   })
   expect(client.plugins.realtime.realtime).not.toBeNull()
+  expect(onLogin).toHaveBeenCalledTimes(1)
+  expect(onLogout).toHaveBeenCalledTimes(0)
   await client.logout()
   expect(client.plugins.realtime.realtime).toBeNull()
+  expect(onLogin).toHaveBeenCalledTimes(1)
+  expect(onLogout).toHaveBeenCalledTimes(1)
 })
 
 it('throws user friendly errors when trying to use the realtime while logged out', async () => {

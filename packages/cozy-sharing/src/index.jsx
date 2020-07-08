@@ -102,14 +102,39 @@ export class SharingProvider extends Component {
       hasWriteAccess: this.hasWriteAccess
     }
     this.realtime = null
+    this.isInitialized = false
   }
 
   dispatch = action =>
     this.setState(state => ({ ...state, ...reducer(state, action) }))
 
   componentDidMount() {
-    this.fetchAllSharings()
     const { client } = this.props
+
+    if (client.isLogged) this.initialize()
+    else client.on('plugin:realtime:login', this.initialize)
+  }
+
+  componentWillUnmount() {
+    if (this.realtime) {
+      this.realtime.unsubscribe(
+        'created',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+      this.realtime.unsubscribe(
+        'updated',
+        this.sharingsDoctype,
+        this.handleCreateOrUpdateSharings
+      )
+    }
+  }
+
+  initialize = () => {
+    if (this.isInitialized) return
+    const { client } = this.props
+
+    this.fetchAllSharings()
     if (!client.plugins.realtime) {
       //eslint-disable-next-line
       console.warn(
@@ -129,21 +154,8 @@ export class SharingProvider extends Component {
         this.handleCreateOrUpdateSharings
       )
     }
-  }
 
-  componentWillUnmount() {
-    if (this.realtime) {
-      this.realtime.unsubscribe(
-        'created',
-        this.sharingsDoctype,
-        this.handleCreateOrUpdateSharings
-      )
-      this.realtime.unsubscribe(
-        'updated',
-        this.sharingsDoctype,
-        this.handleCreateOrUpdateSharings
-      )
-    }
+    this.isInitialized = true
   }
 
   handleCreateOrUpdateSharings = async sharing => {

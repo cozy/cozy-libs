@@ -158,11 +158,13 @@ class FlagClientPlugin {
   async handleLogin() {
     await flag.initialize(this.client)
     this.resolveInitializing()
+    this.client.emit('plugin:flag:login')
   }
 
   async handleLogout() {
     flag.reset()
     this.setupInitializing()
+    this.client.emit('plugin:flag:logout')
   }
 }
 

@@ -30,11 +30,13 @@ class RealtimePlugin {
     this.realtime = new CozyRealtime({
       client: this.client
     })
+    this.client.emit('plugin:realtime:login')
   }
 
   handleLogout() {
     this.unsubscribeAll()
     this.realtime = null
+    this.client.emit('plugin:realtime:logout')
   }
 
   checkRealtimeInstance() {
