@@ -1,0 +1,16 @@
+{
+  "name": "@cozy/repo-doctor",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "chalk": "^4.1.0",
+    "colorette": "^1.2.1",
+    "node-fetch": "^2.6.0",
+    "semver-diff": "^3.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0"
+  }
+}
