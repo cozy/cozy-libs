@@ -1,4 +1,3 @@
-const fetch = require('node-fetch')
 const colorette = require('colorette')
 const fs = require('fs')
 const semverDiff = require('semver-diff')
@@ -13,17 +12,17 @@ const {
   keyBy
 } = require('./toolbelt')
 
-const colorsBySemverDiffType = {
-  patch: colorette.blue,
-  minor: colorette.yellow,
-  major: colorette.red
+const colorsBySeverity = {
+  info: colorette.blue,
+  warn: colorette.yellow,
+  error: colorette.red
 }
 
 const checks = [checkDependencies]
 
 const main = async () => {
-  const repositories = JSON.parse(fs.readFileSync(path.join(__dirname, '../repositories.json')))
-  const dependencies = JSON.parse(fs.readFileSync(path.join(__dirname, '../dependencies.json')))
+  const repositories = JSON.parse(fs.readFileSync('./repositories.json'))
+  const dependencies = JSON.parse(fs.readFileSync('./dependencies.json'))
 
   const dependencyInfos = await Promise.all(
     dependencies.map(fetchDependencyInfo)
@@ -38,7 +37,11 @@ const main = async () => {
   for (const repositoryInfo of repositoryInfos) {
     console.log(`Repository: ${repositoryInfo.slug}`)
     for (const check of checks) {
-      check(repositoryInfo, { dependencyInfos: dependencyInfosByName })
+      for (const message of check(repositoryInfo, { dependencyInfos: dependencyInfosByName })) {
+        const formatColor = colorsBySeverity[message.severity]
+        console.log(`  ${message.type}: ${formatColor(message.message)}`)
+      }
+
     }
   }
 }
