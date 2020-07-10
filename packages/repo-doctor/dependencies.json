@@ -8,5 +8,6 @@
   "cozy-app-publish",
   "cozy-sharing",
   "cozy-scripts",
-  "cozy-bar"
+  "cozy-bar",
+  "babel-preset-cozy-app"
 ]
