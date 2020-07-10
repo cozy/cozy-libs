@@ -1,4 +1,5 @@
 const semverDiff = require('semver-diff')
+const { fetchDependencyInfo } = require('../fetch')
 
 const severityByDiffType = {
   patch: 'info',
@@ -7,9 +8,9 @@ const severityByDiffType = {
   undefined: 'success'
 }
 
-const checkDependencies = async function*(repositoryInfo, { dependencyInfos }) {
+const depUpToDate = async function*(repositoryInfo) {
   for (const dependency of repositoryInfo.dependencies) {
-    const depInfo = dependencyInfos[dependency.name]
+    const depInfo = await fetchDependencyInfo(dependency.name)
     const diffType = semverDiff(
       dependency.version.replace('^', ''),
       depInfo.lastVersion
@@ -17,7 +18,7 @@ const checkDependencies = async function*(repositoryInfo, { dependencyInfos }) {
     const severity = severityByDiffType[diffType]
     yield {
       severity,
-      type: 'depcheck',
+      type: 'dep-up-to-date',
       message: `${dependency.name}: ${dependency.version}, last is ${depInfo.lastVersion}`
     }
   }

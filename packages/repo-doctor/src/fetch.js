@@ -39,17 +39,31 @@ const fetchRepositoryInfo = async (repository, dependencies) => {
   }
 }
 
-const fetchDependencyInfo = async dependencyName => {
-  const text = await fetch(`https://registry.npmjs.org/${dependencyName}`).then(
-    resp => resp.text()
-  )
-  const data = JSON.parse(text)
-  const versions = Object.values(data.versions)
-  return {
-    name: data.name,
-    lastVersion: versions[versions.length - 1].version
+const memoize = (fn, key) => {
+  const store = {}
+  return async function () {
+    const k = key(...arguments)
+    if (!store[k]) {
+      store[k] = await fn.apply(this, arguments)
+    }
+    return store[k]
   }
 }
+
+const fetchDependencyInfo = memoize(
+  async dependencyName => {
+    const text = await fetch(`https://registry.npmjs.org/${dependencyName}`).then(
+      resp => resp.text()
+    )
+    const data = JSON.parse(text)
+    const versions = Object.values(data.versions)
+    return {
+      name: data.name,
+      lastVersion: versions[versions.length - 1].version
+    }
+  },
+  dependencyName => dependencyName
+)
 
 module.exports = {
   fetchRepositoryInfo,

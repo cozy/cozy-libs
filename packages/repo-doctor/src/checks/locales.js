@@ -8,7 +8,7 @@ const fetchRepositoryDirectoryContent = async (repoSlug, pathName) => {
 }
 
 
-const checkLocales = async function*(repositoryInfo) {
+const localesInRepo = async function*(repositoryInfo) {
   const localeDirContent = await fetchRepositoryDirectoryContent(
     repositoryInfo.slug,
     'src/locales'
@@ -29,4 +29,4 @@ const checkLocales = async function*(repositoryInfo) {
   }
 }
 
-module.exports = { checkLocales }
+module.exports = { localesInRepo }

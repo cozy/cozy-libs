@@ -1,3 +1,3 @@
-const { checkDependencies } = require('./dependencies')
-const { checkLocales } = require('./locales')
-module.exports = { checkDependencies, checkLocales }
+const { depUpToDate } = require('./dependencies')
+const { localesInRepo } = require('./locales')
+module.exports = { depUpToDate, localesInRepo }

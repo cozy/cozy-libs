@@ -1,17 +1,21 @@
 const { ArgumentParser } = require('argparse')
 const fs = require('fs')
-const { checkDependencies, checkLocales } = require('./checks')
-const { fetchDependencyInfo, fetchRepositoryInfo } = require('./fetch')
+const { depUpToDate, localesInRepo } = require('./checks')
+const { fetchRepositoryInfo } = require('./fetch')
 const { keyBy } = require('./toolbelt')
 const ConsoleReporter = require('./reporters/console')
-const checks = [checkDependencies, checkLocales]
+
+const checks = [
+  depUpToDate,
+  localesInRepo,
+]
 
 /**
  * Yields checkResults
  */
-const runChecks = async function*(repositoryInfo, checkContext, checks) {
+const runChecks = async function*(repositoryInfo, checks) {
   for (const check of checks) {
-    for await (const checkResult of check(repositoryInfo, checkContext)) {
+    for await (const checkResult of check(repositoryInfo)) {
       yield checkResult
     }
   }
@@ -45,23 +49,15 @@ const main = async () => {
   const Reporter = reporters[args.reporter]
   const reporter = new Reporter(args)
 
-  const dependencyInfos = await Promise.all(
-    dependencies.map(fetchDependencyInfo)
-  )
 
   const repositoryInfos = await Promise.all(
     repositories.map(repo => fetchRepositoryInfo(repo, dependencies))
   )
 
-  const dependencyInfosByName = keyBy(dependencyInfos, depInfo => depInfo.name)
-  const checkContext = {
-    dependencyInfos: dependencyInfosByName
-  }
-
   for (const repositoryInfo of repositoryInfos) {
     // eslint-disable-next-line no-console
     console.log(`Repository: ${repositoryInfo.slug}`)
-    for await (const message of runChecks(repositoryInfo, checkContext, checks)) {
+    for await (const message of runChecks(repositoryInfo, checks)) {
       reporter.write(message)
     }
   }
