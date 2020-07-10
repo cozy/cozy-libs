@@ -1,8 +1,5 @@
-// eslint-disable no-console
-
 const colorette = require('colorette')
 const fs = require('fs')
-const semverDiff = require('semver-diff')
 const { checkDependencies } = require('./checks')
 const { fetchDependencyInfo, fetchRepositoryInfo } = require('./fetch')
 const { keyBy } = require('./toolbelt')
@@ -43,6 +40,7 @@ const main = async () => {
           continue
         }
         const formatColor = colorsBySeverity[message.severity]
+        // eslint-disable-next-line no-console
         console.log(`  ${message.type}: ${formatColor(message.message)}`)
       }
     }
@@ -50,6 +48,7 @@ const main = async () => {
 }
 
 main().catch(e => {
+  // eslint-disable-next-line no-console
   console.error(e)
   process.exit(1)
 })
