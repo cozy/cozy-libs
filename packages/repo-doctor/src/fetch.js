@@ -6,7 +6,7 @@ const depEntryToObject = type => depEntry => ({
   type
 })
 
-const fetchRepositoryInfo = async (repository, dependencies) => {
+const fetchRepositoryInfo = async (repository) => {
   const slug = repository.slug
   const packageJsonPath = repository.packageJsonPath || 'package.json'
   const packageJsonURL = `https://raw.githubusercontent.com/${slug}/master/${packageJsonPath}`
@@ -29,12 +29,8 @@ const fetchRepositoryInfo = async (repository, dependencies) => {
       )
     )
 
-  const filtered = allDependencies.filter(x => {
-    return dependencies.includes(x.name)
-  })
-
   return {
-    dependencies: filtered,
+    dependencies: allDependencies,
     ...repository
   }
 }
