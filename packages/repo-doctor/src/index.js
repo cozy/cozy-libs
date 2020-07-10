@@ -1,3 +1,4 @@
+const { ArgumentParser } = require('argparse')
 const colorette = require('colorette')
 const fs = require('fs')
 const { checkDependencies } = require('./checks')
@@ -14,7 +15,16 @@ const colorsBySeverity = {
 const checks = [checkDependencies]
 
 const main = async () => {
-  const repositories = JSON.parse(fs.readFileSync('./repositories.json'))
+  const parser = new ArgumentParser()
+  parser.addArgument('--repo')
+  const args = parser.parseArgs()
+
+  let repositories = JSON.parse(fs.readFileSync('./repositories.json'))
+
+  if (args.repo) {
+    repositories = repositories.filter(repo => repo.slug === args.repo)
+  }
+
   const dependencies = JSON.parse(fs.readFileSync('./dependencies.json'))
 
   const dependencyInfos = await Promise.all(
