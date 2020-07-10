@@ -1,22 +1,34 @@
 const { ArgumentParser } = require('argparse')
-const colorette = require('colorette')
 const fs = require('fs')
 const { checkDependencies } = require('./checks')
 const { fetchDependencyInfo, fetchRepositoryInfo } = require('./fetch')
 const { keyBy } = require('./toolbelt')
+const ConsoleReporter = require('./reporters/console')
+const checks = [checkDependencies]
 
-const colorsBySeverity = {
-  success: colorette.green,
-  info: colorette.blue,
-  warn: colorette.yellow,
-  error: colorette.red
+/**
+ * Yields checkResults
+ */
+const runChecks = function*(repositoryInfo, checkContext, checks) {
+  for (const check of checks) {
+    for (const checkResult of check(repositoryInfo, checkContext)) {
+      yield checkResult
+    }
+  }
 }
 
-const checks = [checkDependencies]
+const reporters = {
+  console: ConsoleReporter
+}
 
 const main = async () => {
   const parser = new ArgumentParser()
   parser.addArgument('--repo')
+  parser.addArgument('--reporter', {
+    choices: Object.keys(reporters),
+    defaultValue: 'console'
+  })
+
   const args = parser.parseArgs()
 
   let repositories = JSON.parse(fs.readFileSync('./repositories.json'))
@@ -25,36 +37,32 @@ const main = async () => {
     repositories = repositories.filter(repo => repo.slug === args.repo)
   }
 
+  const Reporter = reporters[args.reporter]
+  const reporter = new Reporter(args)
+
   const dependencies = JSON.parse(fs.readFileSync('./dependencies.json'))
 
   const dependencyInfos = await Promise.all(
     dependencies.map(fetchDependencyInfo)
   )
 
-  const dependencyInfosByName = keyBy(dependencyInfos, depInfo => depInfo.name)
-
   const repositoryInfos = await Promise.all(
     repositories.map(repo => fetchRepositoryInfo(repo, dependencies))
   )
 
+  const dependencyInfosByName = keyBy(dependencyInfos, depInfo => depInfo.name)
+  const checkContext = {
+    dependencyInfos: dependencyInfosByName
+  }
+
   for (const repositoryInfo of repositoryInfos) {
     // eslint-disable-next-line no-console
     console.log(`Repository: ${repositoryInfo.slug}`)
-    for (const check of checks) {
-      for (const message of check(repositoryInfo, {
-        dependencyInfos: dependencyInfosByName
-      })) {
-        if (!colorsBySeverity[message.severity]) {
-          // eslint-disable-next-line no-console
-          console.warn('Unknown severity', message.severity, message)
-          continue
-        }
-        const formatColor = colorsBySeverity[message.severity]
-        // eslint-disable-next-line no-console
-        console.log(`  ${message.type}: ${formatColor(message.message)}`)
-      }
+    for (const message of runChecks(repositoryInfo, checkContext, checks)) {
+      reporter.write(message)
     }
   }
+  reporter.flush()
 }
 
 main().catch(e => {
