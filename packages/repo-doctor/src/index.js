@@ -2,13 +2,7 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const { depUpToDate, localesInRepo } = require('./checks')
 const { fetchRepositoryInfo } = require('./fetch')
-const { keyBy } = require('./toolbelt')
 const ConsoleReporter = require('./reporters/console')
-
-const checks = [
-  depUpToDate,
-  localesInRepo,
-]
 
 /**
  * Yields checkResults
@@ -45,6 +39,11 @@ const main = async () => {
   if (args.dep) {
     dependencies = dependencies.filter(dep => dep === args.dep)
   }
+
+  const checks = [
+    depUpToDate({ dependencies }),
+    localesInRepo,
+  ]
 
   const Reporter = reporters[args.reporter]
   const reporter = new Reporter(args)
