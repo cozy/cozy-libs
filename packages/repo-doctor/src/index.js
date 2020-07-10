@@ -24,23 +24,27 @@ const reporters = {
 const main = async () => {
   const parser = new ArgumentParser()
   parser.addArgument('--repo')
+  parser.addArgument('--dep')
   parser.addArgument('--reporter', {
     choices: Object.keys(reporters),
     defaultValue: 'console'
   })
 
+
   const args = parser.parseArgs()
 
   let repositories = JSON.parse(fs.readFileSync('./repositories.json'))
-
   if (args.repo) {
     repositories = repositories.filter(repo => repo.slug === args.repo)
   }
 
+  let dependencies = JSON.parse(fs.readFileSync('./dependencies.json'))
+  if (args.dep) {
+    dependencies = dependencies.filter(dep => dep === args.dep)
+  }
+
   const Reporter = reporters[args.reporter]
   const reporter = new Reporter(args)
-
-  const dependencies = JSON.parse(fs.readFileSync('./dependencies.json'))
 
   const dependencyInfos = await Promise.all(
     dependencies.map(fetchDependencyInfo)
