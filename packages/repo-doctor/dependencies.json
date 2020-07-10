@@ -7,5 +7,6 @@
   "cozy-flags",
   "cozy-app-publish",
   "cozy-sharing",
-  "cozy-scripts"
+  "cozy-scripts",
+  "cozy-bar"
 ]

@@ -30,7 +30,6 @@ const main = async () => {
     defaultValue: 'console'
   })
 
-
   const args = parser.parseArgs()
 
   let repositories = JSON.parse(fs.readFileSync('./repositories.json'))
