@@ -9,9 +9,9 @@ const checks = [checkDependencies]
 /**
  * Yields checkResults
  */
-const runChecks = function*(repositoryInfo, checkContext, checks) {
+const runChecks = async function*(repositoryInfo, checkContext, checks) {
   for (const check of checks) {
-    for (const checkResult of check(repositoryInfo, checkContext)) {
+    for await (const checkResult of check(repositoryInfo, checkContext)) {
       yield checkResult
     }
   }
@@ -61,7 +61,7 @@ const main = async () => {
   for (const repositoryInfo of repositoryInfos) {
     // eslint-disable-next-line no-console
     console.log(`Repository: ${repositoryInfo.slug}`)
-    for (const message of runChecks(repositoryInfo, checkContext, checks)) {
+    for await (const message of runChecks(repositoryInfo, checkContext, checks)) {
       reporter.write(message)
     }
   }

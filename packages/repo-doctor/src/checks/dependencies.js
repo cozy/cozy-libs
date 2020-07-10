@@ -7,7 +7,7 @@ const severityByDiffType = {
   undefined: 'success'
 }
 
-const checkDependencies = function*(repositoryInfo, { dependencyInfos }) {
+const checkDependencies = async function*(repositoryInfo, { dependencyInfos }) {
   for (const dependency of repositoryInfo.dependencies) {
     const depInfo = dependencyInfos[dependency.name]
     const diffType = semverDiff(
