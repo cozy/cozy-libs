@@ -6,5 +6,6 @@
   "cozy-keys-lib",
   "cozy-flags",
   "cozy-app-publish",
-  "cozy-sharing"
+  "cozy-sharing",
+  "cozy-scripts"
 ]
