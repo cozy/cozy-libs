@@ -1,2 +1,3 @@
 const { checkDependencies } = require('./dependencies')
-module.exports = { checkDependencies }
+const { checkLocales } = require('./locales')
+module.exports = { checkDependencies, checkLocales }

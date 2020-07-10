@@ -1,10 +1,10 @@
 const { ArgumentParser } = require('argparse')
 const fs = require('fs')
-const { checkDependencies } = require('./checks')
+const { checkDependencies, checkLocales } = require('./checks')
 const { fetchDependencyInfo, fetchRepositoryInfo } = require('./fetch')
 const { keyBy } = require('./toolbelt')
 const ConsoleReporter = require('./reporters/console')
-const checks = [checkDependencies]
+const checks = [checkDependencies, checkLocales]
 
 /**
  * Yields checkResults
