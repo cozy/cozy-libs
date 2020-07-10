@@ -51,7 +51,6 @@ const fetchDependencyInfo = async dependencyName => {
   }
 }
 
-
 module.exports = {
   fetchRepositoryInfo,
   fetchDependencyInfo
