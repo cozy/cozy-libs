@@ -1,3 +1,3 @@
-const { depUpToDate } = require('./dependencies')
+const { depUpToDate, noForbiddenDep } = require('./dependencies')
 const { localesInRepo } = require('./locales')
-module.exports = { depUpToDate, localesInRepo }
+module.exports = { depUpToDate, noForbiddenDep, localesInRepo }

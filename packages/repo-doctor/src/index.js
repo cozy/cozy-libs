@@ -1,6 +1,6 @@
 const { ArgumentParser } = require('argparse')
 const fs = require('fs')
-const { depUpToDate, localesInRepo } = require('./checks')
+const { depUpToDate, noForbiddenDep, localesInRepo } = require('./checks')
 const { fetchRepositoryInfo } = require('./fetch')
 const ConsoleReporter = require('./reporters/console')
 
@@ -14,6 +14,17 @@ const runChecks = async function*(repositoryInfo, checks) {
     }
   }
 }
+
+const FORBIDDEN_DEPS = [
+  {
+    name: 'babel-preset-cozy-app',
+    reason: 'Used through cozy-scripts'
+  },
+  {
+    name: 'eslint-loader',
+    reason: 'Used through cozy-scripts'
+  }
+]
 
 const reporters = {
   console: ConsoleReporter
@@ -43,6 +54,9 @@ const main = async () => {
   const checks = [
     depUpToDate({ dependencies }),
     localesInRepo,
+    noForbiddenDep({
+      dependencies: FORBIDDEN_DEPS
+    })
   ]
 
   const Reporter = reporters[args.reporter]
