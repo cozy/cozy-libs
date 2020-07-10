@@ -62,7 +62,6 @@ const main = async () => {
   const Reporter = reporters[args.reporter]
   const reporter = new Reporter(args)
 
-
   const repositoryInfos = await Promise.all(
     repositories.map(repo => fetchRepositoryInfo(repo, dependencies))
   )

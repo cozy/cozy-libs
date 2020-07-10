@@ -6,7 +6,7 @@ const depEntryToObject = type => depEntry => ({
   type
 })
 
-const fetchRepositoryInfo = async (repository) => {
+const fetchRepositoryInfo = async repository => {
   const slug = repository.slug
   const packageJsonPath = repository.packageJsonPath || 'package.json'
   const packageJsonURL = `https://raw.githubusercontent.com/${slug}/master/${packageJsonPath}`
@@ -37,7 +37,7 @@ const fetchRepositoryInfo = async (repository) => {
 
 const memoize = (fn, key) => {
   const store = {}
-  return async function () {
+  return async function() {
     const k = key(...arguments)
     if (!store[k]) {
       store[k] = await fn.apply(this, arguments)
@@ -48,9 +48,9 @@ const memoize = (fn, key) => {
 
 const fetchDependencyInfo = memoize(
   async dependencyName => {
-    const text = await fetch(`https://registry.npmjs.org/${dependencyName}`).then(
-      resp => resp.text()
-    )
+    const text = await fetch(
+      `https://registry.npmjs.org/${dependencyName}`
+    ).then(resp => resp.text())
     const data = JSON.parse(text)
     const versions = Object.values(data.versions)
     return {
