@@ -1,6 +1,9 @@
 [
   "cozy-ui",
+  "cozy-client",
   "cozy-realtime",
   "cozy-harvest-lib",
-  "cozy-flags"
+  "cozy-keys-lib",
+  "cozy-flags",
+  "cozy-app-publish"
 ]
