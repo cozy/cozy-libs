@@ -5,5 +5,6 @@
   "cozy-harvest-lib",
   "cozy-keys-lib",
   "cozy-flags",
-  "cozy-app-publish"
+  "cozy-app-publish",
+  "cozy-sharing"
 ]
