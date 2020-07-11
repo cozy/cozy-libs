@@ -1,4 +1,5 @@
 const semverDiff = require('semver-diff')
+const bluebird = require('bluebird')
 const { fetchDependencyInfo } = require('../fetch')
 const { keyBy } = require('../toolbelt')
 
@@ -22,22 +23,29 @@ const depUpToDate = (options, args) => {
 
   return async function*(repositoryInfo) {
     const repDepsByName = keyBy(repositoryInfo.dependencies, dep => dep.name)
-    for (const depName of dependencies) {
+
+    const runForDep = async depName => {
       const depInfo = await fetchDependencyInfo(depName)
       const repDep = repDepsByName[depName]
       if (!repDep) {
-        continue
+        return
       }
       const diffType = semverDiff(
         repDep.version.replace('^', ''),
         depInfo.lastVersion
       )
       const severity = severityByDiffType[diffType]
-      yield {
+      return {
         severity,
         type: 'dep-up-to-date',
         message: `${repDep.name}: ${repDep.version}, last is ${depInfo.lastVersion}`
       }
+    }
+
+    const results = await bluebird.map(dependencies, runForDep, { concurrency: 10 })
+    for (let r of results) {
+      if (!r) { continue }
+      yield r
     }
   }
 }
