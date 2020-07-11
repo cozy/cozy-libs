@@ -4,7 +4,7 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
 
-const { setupChecks, runChecks } = require('./checks')
+const { setupRules, runRules } = require('./rules')
 const { fetchRepositoryInfo } = require('./fetch')
 const { ConsoleReporter, MattermostReporter } = require('./reporters')
 
@@ -33,7 +33,7 @@ const main = async () => {
     repositories = repositories.filter(repo => repo.slug === args.repo)
   }
 
-  const checks = setupChecks(config, args)
+  const rules = setupRules(config, args)
   const Reporter = reporters[args.reporter]
   const reporter = new Reporter(args)
 
@@ -44,7 +44,7 @@ const main = async () => {
   for (const repositoryInfo of repositoryInfos) {
     // eslint-disable-next-line no-console
     reporter.write({ message: `Repository: ${repositoryInfo.slug}` })
-    for await (const message of runChecks(repositoryInfo, checks)) {
+    for await (const message of runRules(repositoryInfo, rules)) {
       reporter.write(message)
     }
   }
