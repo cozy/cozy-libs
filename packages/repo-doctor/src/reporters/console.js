@@ -15,7 +15,7 @@ class ConsoleReporter {
       return
     }
 
-    const formatColor = colorsBySeverity[message.severity]
+    const formatColor = colorsBySeverity[message.severity] || (x => x)
     // eslint-disable-next-line no-console
     console.log(`  ${message.type}: ${formatColor(message.message)}`)
   }

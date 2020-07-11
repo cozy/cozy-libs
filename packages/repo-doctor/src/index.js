@@ -2,7 +2,7 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const { depUpToDate, noForbiddenDep, localesInRepo } = require('./checks')
 const { fetchRepositoryInfo } = require('./fetch')
-const ConsoleReporter = require('./reporters/console')
+const { ConsoleReporter, MattermostReporter } = require('./reporters')
 
 /**
  * Yields checkResults
@@ -27,7 +27,8 @@ const FORBIDDEN_DEPS = [
 ]
 
 const reporters = {
-  console: ConsoleReporter
+  console: ConsoleReporter,
+  mattermost: MattermostReporter
 }
 
 const main = async () => {
@@ -68,12 +69,12 @@ const main = async () => {
 
   for (const repositoryInfo of repositoryInfos) {
     // eslint-disable-next-line no-console
-    console.log(`Repository: ${repositoryInfo.slug}`)
+    reporter.write({ message: `Repository: ${repositoryInfo.slug}` })
     for await (const message of runChecks(repositoryInfo, checks)) {
       reporter.write(message)
     }
   }
-  reporter.flush()
+  await reporter.flush()
 }
 
 main().catch(e => {
