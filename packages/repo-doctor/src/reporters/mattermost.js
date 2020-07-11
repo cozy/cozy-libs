@@ -36,7 +36,7 @@ class MattermostReporter {
         .join('\n')
     }
 
-    const res = await fetch(process.env.MATTERMOST_HOOK, {
+    await fetch(process.env.MATTERMOST_HOOK, {
       headers: {
         'Content-Type': 'application/json'
       },
