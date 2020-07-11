@@ -42,9 +42,13 @@ const depUpToDate = (options, args) => {
       }
     }
 
-    const results = await bluebird.map(dependencies, runForDep, { concurrency: 10 })
+    const results = await bluebird.map(dependencies, runForDep, {
+      concurrency: 10
+    })
     for (let r of results) {
-      if (!r) { continue }
+      if (!r) {
+        continue
+      }
       yield r
     }
   }
