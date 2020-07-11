@@ -1,43 +1,14 @@
 const { ArgumentParser } = require('argparse')
 const fs = require('fs')
-const checkFns = require('./checks')
+const path = require('path')
+
+const { setupChecks, runChecks } = require('./checks')
 const { fetchRepositoryInfo } = require('./fetch')
 const { ConsoleReporter, MattermostReporter } = require('./reporters')
-const config = require('./config.json')
-/**
- * Yields checkResults
- */
-const runChecks = async function*(repositoryInfo, checks) {
-  for (const check of checks) {
-    for await (const checkResult of check(repositoryInfo)) {
-      yield checkResult
-    }
-  }
-}
-
 
 const reporters = {
   console: ConsoleReporter,
   mattermost: MattermostReporter
-}
-
-const setupChecks = (config, args) => {
-  const checks = config.rules.map(
-    (rule => {
-      let ruleName
-      let options
-      if (Array.isArray(rule)) {
-        ruleName = rule[0]
-        options = rule[1]
-      } else {
-        ruleName = rule
-        options = {}
-      }
-      const checkFn = checkFns[ruleName]
-      return checkFn(options, args)
-    })
-  )
-  return checks
 }
 
 const main = async () => {
@@ -48,8 +19,12 @@ const main = async () => {
     choices: Object.keys(reporters),
     defaultValue: 'console'
   })
+  parser.addArgument('--config', {
+    defaultValue: path.join(process.cwd(), './repo-doctor.json')
+  })
 
   const args = parser.parseArgs()
+  const config = JSON.parse(fs.readFileSync(args.config))
 
   let repositories = config.repositories
   if (args.repo) {
