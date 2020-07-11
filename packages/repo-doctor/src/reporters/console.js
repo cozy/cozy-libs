@@ -9,15 +9,9 @@ const colorsBySeverity = {
 
 class ConsoleReporter {
   write(message) {
-    if (!colorsBySeverity[message.severity]) {
-      // eslint-disable-next-line no-console
-      console.warn('Unknown severity', message.severity, message)
-      return
-    }
-
     const formatColor = colorsBySeverity[message.severity] || (x => x)
     // eslint-disable-next-line no-console
-    console.log(`  ${message.type}: ${formatColor(message.message)}`)
+    console.log(`${message.type ? `  ${message.type}: ` : ''}${formatColor(message.message)}`)
   }
 
   flush() {}

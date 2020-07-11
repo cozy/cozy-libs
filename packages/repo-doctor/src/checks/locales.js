@@ -6,7 +6,7 @@ const fetchRepositoryDirectoryContent = async (repoSlug, pathName) => {
   ).then(resp => resp.json())
 }
 
-const localesInRepo = async function*(repositoryInfo) {
+const localesInRepo = () => async function*(repositoryInfo) {
   const localeDirContent = await fetchRepositoryDirectoryContent(
     repositoryInfo.slug,
     'src/locales'
