@@ -15,7 +15,9 @@ class MattermostReporter {
 
   checkEnv() {
     if (!process.env.MATTERMOST_HOOK) {
-      throw new Error('To be instantiated, mattermost reporter needs process.env.MATTERMOST_HOOK')
+      throw new Error(
+        'To be instantiated, mattermost reporter needs process.env.MATTERMOST_HOOK'
+      )
     }
   }
 
@@ -26,10 +28,12 @@ class MattermostReporter {
   async sendAllMessages() {
     const payload = {
       channel: '@patrick',
-      text: this.messages.map(x => {
-        const symbol = symbolBySeverity[x.severity]
-        return `${x.type || ''} ${symbol || ''} ${x.message}`
-      }).join('\n')
+      text: this.messages
+        .map(x => {
+          const symbol = symbolBySeverity[x.severity]
+          return `${x.type || ''} ${symbol || ''} ${x.message}`
+        })
+        .join('\n')
     }
 
     const res = await fetch(process.env.MATTERMOST_HOOK, {
@@ -39,7 +43,6 @@ class MattermostReporter {
       method: 'POST',
       body: JSON.stringify(payload)
     })
-    console.log(res)
   }
 
   async flush() {

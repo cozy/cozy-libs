@@ -11,7 +11,11 @@ class ConsoleReporter {
   write(message) {
     const formatColor = colorsBySeverity[message.severity] || (x => x)
     // eslint-disable-next-line no-console
-    console.log(`${message.type ? `  ${message.type}: ` : ''}${formatColor(message.message)}`)
+    console.log(
+      `${message.type ? `  ${message.type}: ` : ''}${formatColor(
+        message.message
+      )}`
+    )
   }
 
   flush() {}
