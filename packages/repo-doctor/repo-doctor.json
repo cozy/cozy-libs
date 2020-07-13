@@ -46,7 +46,7 @@
         }
       ]
     }],
-    "localesInRepo"
+    "LocalesInRepo"
   ],
   "reporters": {
     "mattermost": {

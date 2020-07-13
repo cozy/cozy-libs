@@ -1,7 +1,7 @@
 const { fetchRepositoryDirectoryContent } = require('../fetch')
 
-const localesInRepo = () =>
-  async function*(repositoryInfo) {
+class LocalesInRepo {
+  async *run(repositoryInfo) {
     const localeDirContent = await fetchRepositoryDirectoryContent(
       repositoryInfo.slug,
       'src/locales'
@@ -21,5 +21,6 @@ const localesInRepo = () =>
       }
     }
   }
+}
 
-module.exports = { localesInRepo }
+module.exports = { LocalesInRepo }
