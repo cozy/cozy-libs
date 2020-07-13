@@ -1,5 +1,6 @@
 const { DepUpToDate, noForbiddenDep } = require('./dependencies')
 const { localesInRepo } = require('./locales')
+const validate = require('schema-utils')
 
 const ruleFns = { DepUpToDate, noForbiddenDep, localesInRepo }
 
@@ -18,6 +19,10 @@ const setupRules = (config, args) => {
       ruleConfig = {}
     }
     let ruleFn = ruleFns[ruleName]
+
+    if (ruleFn.configSchema) {
+      validate(ruleFn.configSchema, {}, ruleConfig)
+    }
 
     return ruleFn.prototype
       ? new ruleFn(ruleConfig, args)

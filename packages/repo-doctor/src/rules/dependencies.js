@@ -59,6 +59,17 @@ class DepUpToDate {
   }
 }
 
+DepUpToDate.configSchema = {
+  name: 'DepUpToDate',
+  type: 'object',
+  properties: {
+    dependencies: {
+      type: 'array'
+    }
+  },
+  additionalProperties: false
+}
+
 /**
  * Returns a function that will warn if options.dependencies are
  * are present in the concerned repository
