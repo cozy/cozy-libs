@@ -51,4 +51,4 @@ See [the example config](./examples/repo-doctor.json).
 
 ## Screenshots
 
-![Example run](./screenshots/example1.png)
+<img src='./screenshots/example1.png' width='350px' /> 
