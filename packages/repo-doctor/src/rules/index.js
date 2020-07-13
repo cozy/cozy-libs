@@ -9,16 +9,19 @@ const ruleFns = { depUpToDate, noForbiddenDep, localesInRepo }
 const setupRules = (config, args) => {
   const rules = config.rules.map(rule => {
     let ruleName
-    let options
+    let ruleConfig
     if (Array.isArray(rule)) {
       ruleName = rule[0]
-      options = rule[1]
+      ruleConfig = rule[1]
     } else {
       ruleName = rule
-      options = {}
+      ruleConfig = {}
     }
-    const ruleFn = ruleFns[ruleName]
-    return ruleFn(options, args)
+    let ruleFn = ruleFns[ruleName]
+
+    return ruleFn.prototype
+      ? new ruleFn(ruleConfig, args)
+      : ruleFn(ruleConfig, args)
   })
   return rules
 }
@@ -28,7 +31,11 @@ const setupRules = (config, args) => {
  */
 const runRules = async function*(repositoryInfo, rules) {
   for (const rule of rules) {
-    for await (const ruleResult of rule(repositoryInfo)) {
+    const generator =
+      rule.constructor && rule.constructor.prototype.run
+        ? rule.run(repositoryInfo)
+        : rule(repositoryInfo)
+    for await (const ruleResult of generator) {
       yield ruleResult
     }
   }
