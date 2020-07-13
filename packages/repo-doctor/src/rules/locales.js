@@ -1,10 +1,4 @@
-const fetch = require('node-fetch')
-
-const fetchRepositoryDirectoryContent = async (repoSlug, pathName) => {
-  return await fetch(
-    `https://api.github.com/repos/${repoSlug}/contents/${pathName}`
-  ).then(resp => resp.json())
-}
+const { fetchRepositoryDirectoryContent } = require('../fetch')
 
 const localesInRepo = () =>
   async function*(repositoryInfo) {
