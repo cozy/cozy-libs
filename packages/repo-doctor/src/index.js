@@ -18,14 +18,20 @@ const reporters = {
 
 const main = async () => {
   const parser = new ArgumentParser()
-  parser.addArgument('--repo')
-  parser.addArgument('--dep')
+  parser.addArgument('--repo', {
+    help: 'Run rules only on a repository'
+  })
+  parser.addArgument('--dep', {
+    help: 'Run rules only on selected dependencies'
+  })
   parser.addArgument('--reporter', {
     choices: Object.keys(reporters),
-    defaultValue: 'console'
+    defaultValue: 'console',
+    help: 'Where to send the output (by default: console)'
   })
   parser.addArgument('--config', {
-    defaultValue: path.join(process.cwd(), './repo-doctor.json')
+    defaultValue: path.join(process.cwd(), './repo-doctor.json'),
+    help: 'Path to config'
   })
 
   const args = parser.parseArgs()
