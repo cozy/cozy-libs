@@ -18,15 +18,14 @@ const setupRules = (config, args) => {
       ruleName = rule
       ruleConfig = {}
     }
-    let ruleFn = ruleFns[ruleName]
 
-    if (ruleFn.configSchema) {
-      validate(ruleFn.configSchema, {}, ruleConfig)
+    let Rule = ruleFns[ruleName]
+
+    if (Rule.configSchema) {
+      validate(Rule.configSchema, {}, ruleConfig)
     }
 
-    return ruleFn.prototype
-      ? new ruleFn(ruleConfig, args)
-      : ruleFn(ruleConfig, args)
+    return new Rule(ruleConfig, args)
   })
   return rules
 }
@@ -36,10 +35,7 @@ const setupRules = (config, args) => {
  */
 const runRules = async function*(repositoryInfo, rules) {
   for (const rule of rules) {
-    const generator =
-      rule.constructor && rule.constructor.prototype.run
-        ? rule.run(repositoryInfo)
-        : rule(repositoryInfo)
+    const generator = rule.run(repositoryInfo)
     for await (const ruleResult of generator) {
       yield ruleResult
     }
