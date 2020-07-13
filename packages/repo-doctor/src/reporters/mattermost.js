@@ -8,7 +8,8 @@ const symbolBySeverity = {
 }
 
 class MattermostReporter {
-  constructor() {
+  constructor(config) {
+    this.config = config
     this.checkEnv()
     this.messages = []
   }
@@ -27,7 +28,7 @@ class MattermostReporter {
 
   async sendAllMessages() {
     const payload = {
-      channel: '@patrick',
+      channel: this.config.channel,
       text: this.messages
         .map(x => {
           const symbol = symbolBySeverity[x.severity]

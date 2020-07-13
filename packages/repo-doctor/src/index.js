@@ -3,6 +3,7 @@
 const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
+const get = require('lodash/get')
 
 const { setupRules, runRules } = require('./rules')
 const { fetchRepositoryInfo } = require('./fetch')
@@ -35,7 +36,8 @@ const main = async () => {
 
   const rules = setupRules(config, args)
   const Reporter = reporters[args.reporter]
-  const reporter = new Reporter(args)
+  const reporterConfig = get(config, `reporters.${args.reporter}`)
+  const reporter = new Reporter(reporterConfig)
 
   const repositoryInfos = await Promise.all(
     repositories.map(repo => fetchRepositoryInfo(repo))

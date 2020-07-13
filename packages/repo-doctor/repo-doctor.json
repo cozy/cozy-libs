@@ -47,5 +47,10 @@
       ]
     }],
     "localesInRepo"
-  ]
+  ],
+  "reporters": {
+    "mattermost": {
+      "channel": "@patrick"
+    }
+  }
 }
