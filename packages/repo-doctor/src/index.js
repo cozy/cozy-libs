@@ -4,10 +4,12 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
 const get = require('lodash/get')
+const validate = require('schema-utils')
 
 const { setupRules, runRules } = require('./rules')
 const { fetchRepositoryInfo } = require('./fetch')
 const { ConsoleReporter, MattermostReporter } = require('./reporters')
+const { schema: configSchema } = require('./config')
 
 const reporters = {
   console: ConsoleReporter,
@@ -28,6 +30,8 @@ const main = async () => {
 
   const args = parser.parseArgs()
   const config = JSON.parse(fs.readFileSync(args.config))
+
+  validate(configSchema, {}, config)
 
   let repositories = config.repositories
   if (args.repo) {
