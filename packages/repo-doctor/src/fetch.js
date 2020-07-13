@@ -11,8 +11,7 @@ const fetchRepositoryInfo = async repository => {
   const slug = repository.slug
   const packageJsonPath = repository.packageJsonPath || 'package.json'
   const packageJsonURL = `https://raw.githubusercontent.com/${slug}/master/${packageJsonPath}`
-  const packageJsonText = await fetch(packageJsonURL).then(resp => resp.text())
-  const packageJsonData = JSON.parse(packageJsonText)
+  const packageJsonData = await fetch(packageJsonURL).then(resp => resp.json())
   const allDependencies = []
     .concat(
       Object.entries(packageJsonData.dependencies || {}).map(
