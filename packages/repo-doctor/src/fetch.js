@@ -1,4 +1,5 @@
 const fetch = require('node-fetch')
+const memoize = require('lodash/memoize')
 
 const depEntryToObject = type => depEntry => ({
   name: depEntry[0],
@@ -32,17 +33,6 @@ const fetchRepositoryInfo = async repository => {
   return {
     dependencies: allDependencies,
     ...repository
-  }
-}
-
-const memoize = (fn, key) => {
-  const store = {}
-  return async function() {
-    const k = key(...arguments)
-    if (!store[k]) {
-      store[k] = await fn.apply(this, arguments)
-    }
-    return store[k]
   }
 }
 

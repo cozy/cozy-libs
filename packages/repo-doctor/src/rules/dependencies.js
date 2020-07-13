@@ -1,7 +1,7 @@
 const semverDiff = require('semver-diff')
 const bluebird = require('bluebird')
 const { fetchDependencyInfo } = require('../fetch')
-const { keyBy } = require('../toolbelt')
+const { keyBy } = require('lodash')
 
 const severityByDiffType = {
   patch: 'info',
