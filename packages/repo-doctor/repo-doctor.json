@@ -20,7 +20,7 @@
     }
   ],
   "rules": [
-    ["depUpToDate", {
+    ["DepUpToDate", {
       "dependencies": [
         "cozy-ui",
         "cozy-client",

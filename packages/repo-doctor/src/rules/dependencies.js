@@ -1,7 +1,8 @@
 const semverDiff = require('semver-diff')
 const bluebird = require('bluebird')
+const keyBy = require('lodash/keyBy')
+
 const { fetchDependencyInfo } = require('../fetch')
-const { keyBy } = require('lodash')
 
 const severityByDiffType = {
   patch: 'info',
@@ -11,17 +12,21 @@ const severityByDiffType = {
 }
 
 /**
- * Returns a function that will check if options.dependencies are
- * up-to-date in the concerned repository
+ * Rule that checks if options.dependencies are up-to-date in the concerned
+ * repository
  */
-const depUpToDate = (options, args) => {
-  let dependencies = options.dependencies
+class DepUpToDate {
+  constructor(config, args) {
+    let dependencies = config.dependencies
 
-  if (args.dep) {
-    dependencies = dependencies.filter(dep => dep === args.dep)
+    if (args.dep) {
+      dependencies = dependencies.filter(dep => dep === args.dep)
+    }
+
+    this.dependencies = dependencies
   }
 
-  return async function*(repositoryInfo) {
+  async *run(repositoryInfo) {
     const repDepsByName = keyBy(repositoryInfo.dependencies, dep => dep.name)
 
     const runForDep = async depName => {
@@ -42,14 +47,14 @@ const depUpToDate = (options, args) => {
       }
     }
 
-    const results = await bluebird.map(dependencies, runForDep, {
+    const results = await bluebird.map(this.dependencies, runForDep, {
       concurrency: 10
     })
-    for (let r of results) {
-      if (!r) {
+    for (let result of results) {
+      if (!result) {
         continue
       }
-      yield r
+      yield result
     }
   }
 }
@@ -74,4 +79,4 @@ const noForbiddenDep = options =>
     }
   }
 
-module.exports = { depUpToDate, noForbiddenDep }
+module.exports = { DepUpToDate, noForbiddenDep }

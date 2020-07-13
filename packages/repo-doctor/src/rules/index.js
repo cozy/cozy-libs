@@ -1,7 +1,7 @@
-const { depUpToDate, noForbiddenDep } = require('./dependencies')
+const { DepUpToDate, noForbiddenDep } = require('./dependencies')
 const { localesInRepo } = require('./locales')
 
-const ruleFns = { depUpToDate, noForbiddenDep, localesInRepo }
+const ruleFns = { DepUpToDate, noForbiddenDep, localesInRepo }
 
 /**
  * Instantiate rules according to config and CLI args
