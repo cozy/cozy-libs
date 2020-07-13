@@ -28,6 +28,23 @@ to mattermost.
 $ repo-doctor -c config.json
 ```
 
+```
+$ repo-doctor --help
+usage: repo-doctor [-h] [--repo REPO] [--dep DEP]
+                   [--reporter {console,mattermost}] [--config CONFIG]
+                   [--rule RULE]
+                   
+
+Optional arguments:
+  -h, --help            Show this help message and exit.
+  --repo REPO           Run rules only on a repository
+  --dep DEP             Run rules only on selected dependencies
+  --reporter {console,mattermost}
+                        Where to send the output (by default: console)
+  --config CONFIG       Path to config
+  --rule RULE           Run only selected rule
+```
+
 ## Config example
 
 See [the example config](./examples/repo-doctor.json).
