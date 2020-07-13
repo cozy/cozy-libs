@@ -71,13 +71,23 @@ DepUpToDate.configSchema = {
 }
 
 /**
- * Returns a function that will warn if options.dependencies are
- * are present in the concerned repository
+ * Rules that warns if options.dependencies are present in the concerned
+ * repository
  */
-const noForbiddenDep = options =>
-  async function*(repositoryInfo) {
+class NoForbiddenDep {
+  constructor(config, args) {
+    let dependencies = config.dependencies
+
+    if (args.dep) {
+      dependencies = dependencies.filter(dep => dep === args.dep)
+    }
+
+    this.dependencies = dependencies
+  }
+
+  async *run(repositoryInfo) {
     for (let dep of repositoryInfo.dependencies) {
-      const forbiddenDep = options.dependencies.find(
+      const forbiddenDep = this.dependencies.find(
         optionDep => optionDep.name == dep.name
       )
       if (forbiddenDep) {
@@ -89,5 +99,6 @@ const noForbiddenDep = options =>
       }
     }
   }
+}
 
-module.exports = { DepUpToDate, noForbiddenDep }
+module.exports = { DepUpToDate, NoForbiddenDep }

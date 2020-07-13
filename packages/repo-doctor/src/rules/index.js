@@ -1,8 +1,8 @@
-const { DepUpToDate, noForbiddenDep } = require('./dependencies')
+const { DepUpToDate, NoForbiddenDep } = require('./dependencies')
 const { localesInRepo } = require('./locales')
 const validate = require('schema-utils')
 
-const ruleFns = { DepUpToDate, noForbiddenDep, localesInRepo }
+const ruleFns = { DepUpToDate, NoForbiddenDep, localesInRepo }
 
 /**
  * Instantiate rules according to config and CLI args

@@ -34,7 +34,7 @@
         "cozy-bar"
       ]
     }],
-    ["noForbiddenDep", {
+    ["NoForbiddenDep", {
       "dependencies": [
         {
           "name": "babel-preset-cozy-app",
