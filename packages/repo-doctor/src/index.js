@@ -33,6 +33,9 @@ const main = async () => {
     defaultValue: path.join(process.cwd(), './repo-doctor.json'),
     help: 'Path to config'
   })
+  parser.addArgument('--rule', {
+    help: 'Run only selected rule'
+  })
 
   const args = parser.parseArgs()
   const config = JSON.parse(fs.readFileSync(args.config))
@@ -44,7 +47,11 @@ const main = async () => {
     repositories = repositories.filter(repo => repo.slug === args.repo)
   }
 
-  const rules = setupRules(config, args)
+  let rules = setupRules(config, args)
+  if (args.rule) {
+    rules = rules.filter(r => r.constructor.name === args.rule)
+  }
+
   const Reporter = reporters[args.reporter]
   const reporterConfig = get(config, `reporters.${args.reporter}`)
   const reporter = new Reporter(reporterConfig)
