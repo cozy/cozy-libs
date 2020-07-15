@@ -55,7 +55,7 @@
     "cozy-device-helper": "^1.9.2",
     "cozy-keys-lib": "^3.1.0",
     "cozy-realtime": "^3.9.0",
-    "cozy-ui": "30.7.0",
+    "cozy-ui": "35.28.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "form-data": "3.0.0",
@@ -72,7 +72,7 @@
     "cozy-device-helper": "1.7.1",
     "cozy-keys-lib": "^3.1.0",
     "cozy-realtime": "^3.1.0",
-    "cozy-ui": "^29.2.1"
+    "cozy-ui": "^35.28.0"
   },
   "sideEffects": false
 }

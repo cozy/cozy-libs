@@ -9,12 +9,12 @@ exports[`CompletedFromDriveStatus component should display a status if there are
   <div
     className="u-mt-1-half u-ml-half u-mr-half u-ta-center"
   >
-    <Bold
+    <ForwardRef(Bold)
       className="u-weirdGreen"
       ellipsis={false}
       tag="span"
     >
-      <BaseText
+      <ForwardRef
         className="u-title-h4 u-weirdGreen"
         ellipsis={false}
         tag="span"
@@ -24,8 +24,8 @@ exports[`CompletedFromDriveStatus component should display a status if there are
         >
           documents.completedStatus.main {"smart_count":5,"total":10}
         </span>
-      </BaseText>
-    </Bold>
+      </ForwardRef>
+    </ForwardRef(Bold)>
      
     documents.completedStatus.rest {"smart_count":5}
   </div>

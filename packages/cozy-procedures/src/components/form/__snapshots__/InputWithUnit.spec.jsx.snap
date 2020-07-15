@@ -4,13 +4,13 @@ exports[`InputWithUnit component should match snapshot 1`] = `
 <div>
   <InputGroup
     append={
-      <Text
+      <ForwardRef
         className="u-pr-1"
         ellipsis={false}
         tag="div"
       >
         € 
-      </Text>
+      </ForwardRef>
     }
     error={false}
     fullwidth={false}
