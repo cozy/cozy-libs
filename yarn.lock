@@ -5395,14 +5395,6 @@ cozy-keys-lib@3.1.1:
     tldjs "^2.3.1"
     zxcvbn "^4.4.2"
 
-cozy-realtime@^3.9.0:
-  version "3.9.0"
-  resolved "https://registry.yarnpkg.com/cozy-realtime/-/cozy-realtime-3.9.0.tgz#4aa09ac74c973b720d0249ad1c2173ed123b28db"
-  integrity sha512-5TqHDrxKUyNIAxrOb/DlTkhMJj7UnsbKmAriOq6359HjXVlvIUfVMSght44xik3KLQ8inUSmF+1TAFeKe9tBGA==
-  dependencies:
-    cozy-device-helper "^1.9.2"
-    minilog "https://github.com/cozy/minilog.git#master"
-
 cozy-stack-client@6.66.0, cozy-stack-client@^6.66.0:
   version "6.66.0"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-6.66.0.tgz#ba217c2d615dd31a9f40ae131644c68c4108b101"
@@ -5483,10 +5475,10 @@ cozy-ui@27.11.2:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@28.13.0:
-  version "28.13.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-28.13.0.tgz#85854c3f7b8a39873e301c476e09459cb2b667a9"
-  integrity sha512-CrXod4wNYAn7CMT/OyhgGiX0r0eEO9xdXaELimLzI1R4vJjwJaQHy2jETiBzmXv+sQ5OdnTJ+rvWQVfGpaR6Xw==
+cozy-ui@30.7.0:
+  version "30.7.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-30.7.0.tgz#5d736c96e272a739908b1dcf7852b573c58b89ea"
+  integrity sha512-aylBjrekV2eA8Sx84hY8AjFGunHkR/tVRJBGx1/CavYIffLj6DVttPwNdz/j2V1YbI1U5kgMN1MXZ7PQLZo8ng==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
@@ -5501,10 +5493,10 @@ cozy-ui@28.13.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@30.7.0:
-  version "30.7.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-30.7.0.tgz#5d736c96e272a739908b1dcf7852b573c58b89ea"
-  integrity sha512-aylBjrekV2eA8Sx84hY8AjFGunHkR/tVRJBGx1/CavYIffLj6DVttPwNdz/j2V1YbI1U5kgMN1MXZ7PQLZo8ng==
+cozy-ui@35.28.0:
+  version "35.28.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.28.0.tgz#d0e1d02924df15b4c46cefd6b4407552980ae3e9"
+  integrity sha512-udF40VMSZc2XpXidGgK2MrN1mipvmfTSzWPjpyCDdXoTfxckeHwmR04yW+vDncbM1kpDxVRn3XxJOFUOouuQFQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
@@ -11425,13 +11417,6 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
-
-"minilog@git+https://github.com/cozy/minilog.git#master":
-  version "3.1.0"
-  uid f01f7d9dfe20981177dd34b9662c2f077d818f82
-  resolved "git+https://github.com/cozy/minilog.git#f01f7d9dfe20981177dd34b9662c2f077d818f82"
-  dependencies:
-    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
