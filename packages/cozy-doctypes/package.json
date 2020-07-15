@@ -19,16 +19,16 @@
     "@babel/cli": "7.5.5",
     "babel-preset-cozy-app": "^1.8.1",
     "btoa": "1.2.1",
-    "cozy-client": "6.66.0",
+    "cozy-client": "13.14.1",
     "cozy-client-js": "0.16.4",
-    "cozy-stack-client": "6.66.0",
+    "cozy-stack-client": "13.12.1",
     "eslint-plugin-node": "10.0.0",
     "fs-extra": "8.1.0",
     "jest": "24.9.0",
     "mockdate": "2.0.5"
   },
   "peerDependencies": {
-    "cozy-client": "6.66.0"
+    "cozy-client": "^13.14.1"
   },
   "scripts": {
     "lint": "cd ../../; yarn lint packages/cozy-doctypes",

@@ -11,7 +11,7 @@
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "cozy-authentication": "^2.0.10",
-    "cozy-client": "^9.1.0",
+    "cozy-client": "13.14.1",
     "cozy-device-helper": "^1.9.2",
     "cozy-doctypes": "^1.72.2",
     "cozy-realtime": "^3.9.0",
