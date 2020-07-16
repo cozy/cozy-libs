@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.23.0 (2020-07-16)
+
+
+### Bug Fixes
+
+* Call revokeSelf if not the owner of the sharing ([f7afc60](https://github.com/cozy/cozy-libs/commit/f7afc60))
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 ## [0.22.3](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.22.2...cozy-app-publish@0.22.3) (2020-02-26)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/cozy/cozy-libs/compare/@cozy/cli-tree@0.1.0...@cozy/cli-tree@0.2.0) (2020-07-16)
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 # 0.1.0 (2020-06-03)
 
 

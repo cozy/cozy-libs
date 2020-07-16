@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.9.0 (2020-07-16)
+
+
+### Bug Fixes
+
+* Call revokeSelf if not the owner of the sharing ([f7afc60](https://github.com/cozy/cozy-libs/commit/f7afc60))
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 ## [1.8.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.8.0...babel-preset-cozy-app@1.8.1) (2020-02-27)
 
 
