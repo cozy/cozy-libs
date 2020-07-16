@@ -26,6 +26,6 @@
     "@babel/preset-react": "7.0.0",
     "@babel/runtime": "7.2.0",
     "browserslist-config-cozy": "^0.3.0",
-    "lodash": "4.17.15"
+    "lodash": "4.17.19"
   }
 }
