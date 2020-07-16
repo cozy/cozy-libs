@@ -1,7 +1,7 @@
 const spawn = require('child_process').spawn
+const logger = require('./utils/logger')
 
 const launchCmd = (cmd, params, options) => {
-  console.log('Spawning', cmd, params) // eslint-disable-line no-console
   return new Promise(async (resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
@@ -34,16 +34,19 @@ const getCurrentTags = async () => {
     // get tag on head commit
     const result = await launchCmd('git', ['tag', '-l', '--points-at', 'HEAD'])
     if (result.stdout.length === 0) {
+      logger.info('No tags')
       return []
     }
     const gitTags = result.stdout
       .join('')
       .split('\n')
       .filter(Boolean)
+
+    logger.info('Current tags: ', gitTags.join(', '))
     return gitTags
   } catch (e) {
-    console.error(`\n⚠️  Erreur lors de la récupération du tag :\n`)
-    console.error(' ', e.stderr ? e.stderr : e, '\n')
+    logger.error(`\n⚠️  Erreur lors de la récupération du tag :\n`)
+    logger.error(' ', e.stderr ? e.stderr : e, '\n')
     process.exit(1)
   }
 }
