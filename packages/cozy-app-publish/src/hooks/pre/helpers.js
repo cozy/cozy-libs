@@ -2,6 +2,7 @@ const tar = require('tar')
 const { spawn } = require('child_process')
 const fs = require('fs-extra')
 const path = require('path')
+const logger = require('../../utils/logger')
 
 const UPLOAD_DIR = 'www-upload/'
 const USER = 'upload'
@@ -31,12 +32,12 @@ const deleteArchive = async archivePath => {
   try {
     await fs.remove(archivePath)
   } catch (error) {
-    console.error(`↳ ⚠️  Unable to delete the previous archive.`)
+    logger.error(`↳ ⚠️  Unable to delete the previous archive.`)
   }
 }
 
 const sshCommand = async (cmd, hostString) => {
-  console.log('Launching', cmd, 'on', hostString)
+  logger.log('Launching', cmd, 'on', hostString)
   return launchCmd('ssh', ['-o', 'StrictHostKeyChecking=no', hostString, cmd])
 }
 
@@ -81,7 +82,7 @@ const getAppBuildUrl = remoteArchivePath => {
 
 const pushArchive = async (archiveFileName, options) => {
   const { buildDir } = options
-  console.log(`↳ ℹ️  Sending archive to downcloud`)
+  logger.log(`↳ ℹ️  Sending archive to downcloud`)
 
   const remoteDir = getRemoteDir(options)
   const uploadDir = path.join(UPLOAD_DIR, remoteDir)
@@ -96,7 +97,7 @@ const pushArchive = async (archiveFileName, options) => {
 
   await rsync(archiveFileName, uploadDir, { cwd: buildDir })
 
-  console.log(`↳ ℹ️  Upload to downcloud complete.`)
+  logger.log(`↳ ℹ️  Upload to downcloud complete.`)
   return {
     ...options,
     appBuildUrl: getAppBuildUrl(path.join(remoteDir, archiveFileName))
@@ -108,7 +109,7 @@ const getArchiveFileName = slug => {
 }
 
 const createArchive = async archivePath => {
-  console.log(`↳ ℹ️  Creating archive ${archivePath}`)
+  logger.log(`↳ ℹ️  Creating archive ${archivePath}`)
   const cwd = path.resolve(path.dirname(archivePath))
   const fileList = await fs.readdir(path.dirname(archivePath))
   const options = {
@@ -119,7 +120,7 @@ const createArchive = async archivePath => {
   try {
     await tar.c(options, fileList)
   } catch (error) {
-    console.error(
+    logger.error(
       `↳ ❌ Unable to generate app archive. Is tar installed as a dependency ? Error : ${error.message}`
     )
     throw new Error('Unable to generate archive')

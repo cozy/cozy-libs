@@ -3,6 +3,7 @@ const fs = require('fs-extra')
 const getManifestAsObject = require('./utils/getManifestAsObject')
 const tags = require('./tags')
 const publisher = require('./publisher')
+const logger = require('./utils/logger')
 
 const getManifestManual = ctx => {
   return getManifestAsObject(
@@ -23,6 +24,12 @@ const getAppVersionManual = async ctx => {
       devVersion = await tags.getDevVersion(ctx.appManifestObj.version)
     }
   }
+
+  logger.info(
+    `Getting app version ${
+      ctx.tagPrefix ? ` with prefix ${ctx.tagPrefix}` : ''
+    }`
+  )
   return (
     tagVersion || devVersion || ctx.manualVersion || ctx.appManifestObj.version
   )
