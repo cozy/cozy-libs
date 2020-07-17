@@ -22,6 +22,7 @@ import {
   WizardTitle,
   WizardSelect,
   WizardFooter,
+  WizardDualField
 } from './Wizard'
 
 require('url-polyfill')
@@ -267,14 +268,9 @@ export class SelectServer extends Component {
             <Label htmlFor={inputID}>
               {t('mobile.onboarding.server_selection.label')}
             </Label>
-            <div
-              className={classNames(
-                styles['wizard-dualfield'],
-                this.state.focusClass,
-                {
-                  [styles['wizard-dualfield--error']]: error
-                }
-              )}
+            <WizardDualField
+              hasFocus={this.state.dualFieldHasFocus}
+              hasError={error}
             >
               {!isTiny && (
                 <div className={styles['wizard-protocol']}>
@@ -301,10 +297,10 @@ export class SelectServer extends Component {
                   }}
                   onFocus={() =>
                     this.setState({
-                      focusClass: styles['wizard-dualfield--focus']
+                      dualFieldHasFocus: true
                     })
                   }
-                  onBlur={() => this.setState({ focusClass: undefined })}
+                  onBlur={() => this.setState({ dualFieldHasFocus: false })}
                   value={value}
                 />
               </div>
@@ -323,7 +319,7 @@ export class SelectServer extends Component {
                   {t('mobile.onboarding.server_selection.domain_custom')}
                 </option>
               </WizardSelect>
-            </div>
+            </WizardDualField>
             <ReactMarkdown
               className={classNames(
                 styles['wizard-notice'],

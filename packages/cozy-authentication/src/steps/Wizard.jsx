@@ -100,3 +100,19 @@ export const WizardSelect = ({ children, narrow, medium, ...props }) => {
     </select>
   )
 }
+
+export const WizardDualField = ({ children, hasFocus, hasError }) => {
+  return (
+    <div
+      className={cx(
+        styles['wizard-dualfield'],
+        hasFocus ? styles['wizard-dualfield--focus'] : null,
+        {
+          [styles['wizard-dualfield--error']]: hasError
+        }
+      )}
+    >
+      {children}
+    </div>
+  )
+}
