@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { getPlatform, nativeLinkOpen } from 'cozy-device-helper'
-import { Button } from 'cozy-ui/transpiled/react'
+import Button from 'cozy-ui/transpiled/react/Button'
 import { withClient } from 'cozy-client'
 
 import { generateOnboardingQueryPart } from '../utils/onboarding'
