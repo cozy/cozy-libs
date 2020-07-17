@@ -135,9 +135,10 @@ the user to loginPath instead of the url provided by the deeplink.
 To prevent this issue, we should not redirect to loginPath in cozy-auth and
 let the application does what she wants after a loggin.
 
-In order to upgrade your app your need to :
-- remove loginPath props
-- in the `afterAuthenticated` callback you need to manually push to your previous
+In order to upgrade your app your need to change how you instantiate
+the `MobileRouter`:
+- remove the `loginPath` prop
+- in the `onAuthenticated` callback you need to manually push to your previous
 loginPath (ie router.push('/afterLogin'))
 
 
