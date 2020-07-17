@@ -1,12 +1,21 @@
 import React, { Component } from 'react'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Button, MainTitle, Icon } from 'cozy-ui/transpiled/react'
+import { Button } from 'cozy-ui/transpiled/react'
 import 'cozy-ui/assets/icons/ui/cloud.svg'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
-import styles from '../styles.styl'
+import {
+  Wizard,
+  WizardLogo,
+  WizardWrapper,
+  WizardMain,
+  WizardFooter,
+  WizardTitle,
+  WizardDescription
+} from './Wizard'
+
 import ButtonLinkRegistration from './ButtonLinkRegistration'
 
 export class Welcome extends Component {
@@ -46,37 +55,18 @@ export class Welcome extends Component {
     } = this.props
 
     return (
-      <div className={classNames(styles['wizard'])}>
-        <div
-          className={classNames(
-            styles['wizard-wrapper'],
-            styles['wizard-wrapper--center']
-          )}
-        >
-          <div className={styles['wizard-main']}>
-            <div className={styles['wizard-logo']}>
-              <img
-                className={styles['wizard-logo-img']}
-                src={appIcon}
-                alt=""
-                aria-hidden="true"
-                focusable="false"
-              />
-              <div className={styles['wizard-logo-badge']}>
-                <Icon icon="cloud" width="20" height="20" color="white" />
-              </div>
-            </div>
-            <MainTitle
-              tag="h1"
-              className={classNames(styles['wizard-title'], 'u-mt-0')}
-            >
+      <Wizard>
+        <WizardWrapper align="center">
+          <WizardMain>
+            <WizardLogo src={appIcon} />
+            <WizardTitle className="u-mt-0">
               {t('mobile.onboarding.welcome.title', { appTitle })}
-            </MainTitle>
-            <p className={styles['wizard-desc']}>
+            </WizardTitle>
+            <WizardDescription>
               {t('mobile.onboarding.welcome.desc', { appTitle })}
-            </p>
-          </div>
-          <footer className={styles['wizard-footer']}>
+            </WizardDescription>
+          </WizardMain>
+          <WizardFooter>
             {this.registerRender()}
             <Button
               onClick={selectServer}
@@ -84,9 +74,9 @@ export class Welcome extends Component {
               label={t('mobile.onboarding.welcome.button')}
               size={isMobile ? 'normal' : 'large'}
             />
-          </footer>
-        </div>
-      </div>
+          </WizardFooter>
+        </WizardWrapper>
+      </Wizard>
     )
   }
 }

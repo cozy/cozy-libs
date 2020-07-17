@@ -4,14 +4,25 @@ import ReactMarkdown from 'react-markdown'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import isUrl from 'is-url'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Button, Label, Input, MainTitle, Icon } from 'cozy-ui/transpiled/react'
+import { Button, Label, Input, Icon } from 'cozy-ui/transpiled/react'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
 import styles from '../styles.styl'
 import ButtonLinkRegistration from './ButtonLinkRegistration'
+import {
+  Wizard,
+  WizardMain,
+  WizardNextButton,
+  WizardHeader,
+  WizardWrapper,
+  WizardTitle,
+  WizardSelect,
+  WizardFooter,
+} from './Wizard'
 
 require('url-polyfill')
 
@@ -235,9 +246,9 @@ export class SelectServer extends Component {
     } = this.props
     const inputID = 'inputID'
     return (
-      <form className={styles['wizard']} onSubmit={this.onSubmit}>
-        <div className={styles['wizard-wrapper']}>
-          <header className={styles['wizard-header']}>
+      <Wizard tag="form" onSubmit={this.onSubmit}>
+        <WizardWrapper>
+          <WizardHeader>
             <Button
               subtle
               icon="previous"
@@ -248,11 +259,11 @@ export class SelectServer extends Component {
               type="button"
               label={t('mobile.onboarding.server_selection.previous')}
             />
-            <MainTitle tag="h1" className={styles['wizard-title']}>
+            <WizardTitle>
               {t('mobile.onboarding.server_selection.title')}
-            </MainTitle>
-          </header>
-          <div className={styles['wizard-main']}>
+            </WizardTitle>
+          </WizardHeader>
+          <WizardMain>
             <Label htmlFor={inputID}>
               {t('mobile.onboarding.server_selection.label')}
             </Label>
@@ -297,11 +308,9 @@ export class SelectServer extends Component {
                   value={value}
                 />
               </div>
-              <select
-                className={classNames(styles['wizard-select'], {
-                  [styles['wizard-select--narrow']]: isCustomDomain,
-                  [styles['wizard-select--medium']]: isTiny
-                })}
+              <WizardSelect
+                narrow={isCustomDomain}
+                medium={isTiny}
                 value={this.state.selectValue}
                 onChange={e => {
                   this.selectOnChange(e)
@@ -313,7 +322,7 @@ export class SelectServer extends Component {
                 <option value="custom">
                   {t('mobile.onboarding.server_selection.domain_custom')}
                 </option>
-              </select>
+              </WizardSelect>
             </div>
             <ReactMarkdown
               className={classNames(
@@ -328,15 +337,9 @@ export class SelectServer extends Component {
                 source={t(error)}
               />
             )}
-          </div>
-          <footer
-            className={classNames(
-              styles['wizard-footer'],
-              isTiny ? 'u-mt-auto' : 'u-pb-2'
-            )}
-          >
-            <Button
-              className={styles['wizard-next']}
+          </WizardMain>
+          <WizardFooter className={isTiny ? 'u-mt-auto' : 'u-pb-2'}>
+            <WizardNextButton
               disabled={Boolean(
                 error ||
                   fetching ||
@@ -348,7 +351,7 @@ export class SelectServer extends Component {
               size={isTiny ? 'normal' : 'large'}
             >
               {!fetching && <Icon icon="next" color="white" />}
-            </Button>
+            </WizardNextButton>
             <ButtonLinkRegistration
               className={classNames('wizard-buttonlink')}
               label={t('mobile.onboarding.welcome.no_account_link')}
@@ -358,9 +361,9 @@ export class SelectServer extends Component {
               theme="text"
               onboarding={onboarding}
             />
-          </footer>
-        </div>
-      </form>
+          </WizardFooter>
+        </WizardWrapper>
+      </Wizard>
     )
   }
 }
