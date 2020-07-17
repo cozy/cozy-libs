@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.0.11...cozy-authentication@2.1.0) (2020-07-17)
+
+
+### Features
+
+* Extract wizard to cozy-ui ([70b8c38](https://github.com/cozy/cozy-libs/commit/70b8c38))
+* Update cozy-client as dev dep for cozy-authentication ([98b34e0](https://github.com/cozy/cozy-libs/commit/98b34e0))
+
+
+
+
+
 ## 2.0.11 (2020-07-16)
 
 
