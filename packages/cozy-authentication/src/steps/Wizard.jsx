@@ -4,6 +4,7 @@ import cx from 'classnames'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { MainTitle } from 'cozy-ui/transpiled/react/Text'
+import Input from 'cozy-ui/transpiled/react/Input'
 
 import styles from '../styles.styl'
 
@@ -87,6 +88,18 @@ export const WizardNextButton = ({ children, ...props }) => {
   )
 }
 
+export const WizardPreviousButton = ({ children, ...props }) => {
+  return (
+    <Button className={styles['wizard-previous']} {...props}>
+      {children}
+    </Button>
+  )
+}
+
+export const WizardProtocol = ({ children }) => {
+  return <div className={styles['wizard-protocol']}>{children}</div>
+}
+
 export const WizardSelect = ({ children, narrow, medium, ...props }) => {
   return (
     <select
@@ -114,5 +127,39 @@ export const WizardDualField = ({ children, hasFocus, hasError }) => {
     >
       {children}
     </div>
+  )
+}
+
+export const DualFieldWrapper = ({ children }) => {
+  return <div className={styles['wizard-dualfield-wrapper']}>{children}</div>
+}
+
+export const WizardDualFieldInput = ({ className, ...props }) => {
+  return (
+    <Input
+      className={cx(styles['wizard-dualfield-input'], className)}
+      {...props}
+    />
+  )
+}
+
+export const WizardNotice = ({
+  children,
+  className,
+  tag: Component,
+  variant,
+  ...props
+}) => {
+  return (
+    <Component
+      className={cx(
+        styles['wizard-notice'],
+        variant === 'lost' ? styles['wizard-notice--lost'] : null,
+        className
+      )}
+      {...props}
+    >
+      {children}
+    </Component>
   )
 }

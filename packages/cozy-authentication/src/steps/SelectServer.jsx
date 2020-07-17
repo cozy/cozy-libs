@@ -6,23 +6,28 @@ import PropTypes from 'prop-types'
 import isUrl from 'is-url'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Button, Label, Input, Icon } from 'cozy-ui/transpiled/react'
+import { Label, Icon } from 'cozy-ui/transpiled/react'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
-import styles from '../styles.styl'
 import ButtonLinkRegistration from './ButtonLinkRegistration'
 import {
   Wizard,
   WizardMain,
+  WizardPreviousButton,
   WizardNextButton,
   WizardHeader,
   WizardWrapper,
   WizardTitle,
   WizardSelect,
   WizardFooter,
-  WizardDualField
+  WizardDualField,
+  WizardNotice,
+  WizardErrors,
+  WizardProtocol,
+  WizardDualFieldWrapper,
+  WizardDualFieldInput
 } from './Wizard'
 
 require('url-polyfill')
@@ -250,12 +255,11 @@ export class SelectServer extends Component {
       <Wizard tag="form" onSubmit={this.onSubmit}>
         <WizardWrapper>
           <WizardHeader>
-            <Button
+            <WizardPreviousButton
               subtle
               icon="previous"
               iconOnly
               extension="narrow"
-              className={classNames(styles['wizard-previous'])}
               onClick={previousStep}
               type="button"
               label={t('mobile.onboarding.server_selection.previous')}
@@ -273,20 +277,19 @@ export class SelectServer extends Component {
               hasError={error}
             >
               {!isTiny && (
-                <div className={styles['wizard-protocol']}>
+                <WizardProtocol>
                   <Icon icon="lock" />
                   <span>https://</span>
-                </div>
+                </WizardProtocol>
               )}
-              <div className={styles['wizard-dualfield-wrapper']}>
-                <Input
+              <WizardDualFieldWrapper>
+                <WizardDualFieldInput
                   type="text"
                   id={inputID}
                   autoCapitalize="none"
                   autoCorrect="off"
                   autoComplete="off"
                   autoFocus
-                  className={classNames(styles['wizard-dualfield-input'])}
                   placeholder={t(placeholderValue)}
                   size={isTiny ? 'medium' : undefined}
                   inputRef={input => {
@@ -303,7 +306,7 @@ export class SelectServer extends Component {
                   onBlur={() => this.setState({ dualFieldHasFocus: false })}
                   value={value}
                 />
-              </div>
+              </WizardDualFieldWrapper>
               <WizardSelect
                 narrow={isCustomDomain}
                 medium={isTiny}
@@ -320,19 +323,12 @@ export class SelectServer extends Component {
                 </option>
               </WizardSelect>
             </WizardDualField>
-            <ReactMarkdown
-              className={classNames(
-                styles['wizard-notice'],
-                styles['wizard-notice--lost']
-              )}
+            <WizardNotice
+              tag={ReactMarkdown}
+              variant="lost"
               source={t('mobile.onboarding.server_selection.lostpwd')}
             />
-            {error && (
-              <ReactMarkdown
-                className={classNames(styles['wizard-errors'], 'u-error')}
-                source={t(error)}
-              />
-            )}
+            {error && <WizardErrors tag={ReactMarkdown} source={t(error)} />}
           </WizardMain>
           <WizardFooter className={isTiny ? 'u-mt-auto' : 'u-pb-2'}>
             <WizardNextButton
