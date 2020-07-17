@@ -65,7 +65,7 @@ export const WizardTitle = ({ children, tag, className }) => {
   )
 }
 
-export const WizardLogo = ({ src }) => (
+export const WizardLogo = ({ src, badgeIcon, badgeColor }) => (
   <div className={styles['wizard-logo']}>
     <img
       className={styles['wizard-logo-img']}
@@ -75,7 +75,7 @@ export const WizardLogo = ({ src }) => (
       focusable="false"
     />
     <div className={styles['wizard-logo-badge']}>
-      <Icon icon="cloud" width="20" height="20" color="white" />
+      <Icon icon="cloud" width={badgeIcon} height="20" color={badgeColor} />
     </div>
   </div>
 )

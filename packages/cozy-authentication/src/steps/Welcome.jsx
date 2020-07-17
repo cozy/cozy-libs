@@ -58,7 +58,7 @@ export class Welcome extends Component {
       <Wizard>
         <WizardWrapper align="center">
           <WizardMain>
-            <WizardLogo src={appIcon} />
+            <WizardLogo src={appIcon} badgeIcon="cloud" badgeColor="white" />
             <WizardTitle className="u-mt-0">
               {t('mobile.onboarding.welcome.title', { appTitle })}
             </WizardTitle>
