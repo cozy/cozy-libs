@@ -28,7 +28,7 @@ import {
   WizardProtocol,
   WizardDualFieldWrapper,
   WizardDualFieldInput
-} from './Wizard'
+} from 'cozy-ui/transpiled/react/Wizard'
 
 require('url-polyfill')
 
@@ -39,6 +39,7 @@ const ERR_COSY = 'mobile.onboarding.server_selection.wrong_address_cosy'
 
 const customValue = 'custom'
 const cozyDomain = '.mycozy.cloud'
+
 export class SelectServer extends Component {
   state = {
     value: '',

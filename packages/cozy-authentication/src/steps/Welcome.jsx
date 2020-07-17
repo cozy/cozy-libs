@@ -14,7 +14,7 @@ import {
   WizardFooter,
   WizardTitle,
   WizardDescription
-} from './Wizard'
+} from 'cozy-ui/transpiled/react/Wizard'
 
 import ButtonLinkRegistration from './ButtonLinkRegistration'
 
