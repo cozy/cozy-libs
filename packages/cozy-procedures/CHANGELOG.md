@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.42.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.41.0...cozy-procedures@0.42.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-client ([14ca0b9](https://github.com/cozy/cozy-libs/commit/14ca0b9))
+* Update cozy-ui ([a8710f9](https://github.com/cozy/cozy-libs/commit/a8710f9))
+
+
+
+
+
+# [0.41.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.40.15...cozy-procedures@0.41.0) (2020-07-16)
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 ## [0.40.15](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.40.14...cozy-procedures@0.40.15) (2020-07-08)
 
 **Note:** Version bump only for package cozy-procedures

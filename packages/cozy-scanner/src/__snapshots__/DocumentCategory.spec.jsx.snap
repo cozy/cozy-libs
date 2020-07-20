@@ -115,7 +115,7 @@ exports[`DocumentCategory should match snapshot if selected and icon 2`] = `
         class="styles__media___cSJMp styles__media--top___K9w0I styles__c-actionmenu-item___gODqd"
       >
         <div
-          class="styles__bd___1Uv-F u-mh-1"
+          class="styles__bd___1Uv-F u-mh-1 u-stack-xs"
         >
           Scan.items.Label1
         </div>
@@ -124,7 +124,7 @@ exports[`DocumentCategory should match snapshot if selected and icon 2`] = `
         class="styles__media___cSJMp styles__media--top___K9w0I styles__c-actionmenu-item___gODqd"
       >
         <div
-          class="styles__bd___1Uv-F u-mh-1"
+          class="styles__bd___1Uv-F u-mh-1 u-stack-xs"
         >
           Scan.items.Label2
         </div>

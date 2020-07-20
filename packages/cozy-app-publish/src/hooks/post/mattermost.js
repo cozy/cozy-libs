@@ -1,6 +1,7 @@
 const https = require('https')
 const url = require('url')
 const tags = require('../../tags')
+const logger = require('../../utils/logger')
 
 const appTypeLabelMap = {
   webapp: 'Application',
@@ -43,7 +44,7 @@ const sendMattermostMessage = options => {
   const mattermostHookUrl = url.parse(hookURL)
 
   return new Promise((resolve, reject) => {
-    console.log(
+    logger.log(
       `↳ ℹ️  Sending to mattermost channel ${channel} the following message: "${message}"`
     )
     const postData = JSON.stringify({
@@ -115,7 +116,7 @@ const sendMattermostReleaseMessage = async options => {
   const username = 'Travis'
   const message = getMessage(options)
   for (const channel of channels) {
-    console.log('↳ ℹ️  Sending message to Mattermost')
+    logger.log('↳ ℹ️  Sending message to Mattermost')
     await sendMattermostMessage({
       hookURL,
       iconURL,
@@ -143,7 +144,7 @@ if (require.main === module) {
     spaceName,
     appType
   }).catch(e => {
-    console.error(e)
+    logger.error(e)
     process.exit(1)
   })
 }

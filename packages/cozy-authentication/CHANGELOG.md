@@ -3,6 +3,49 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.1.1...cozy-authentication@2.2.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-client ([14ca0b9](https://github.com/cozy/cozy-libs/commit/14ca0b9))
+* Update cozy-ui ([a8710f9](https://github.com/cozy/cozy-libs/commit/a8710f9))
+
+
+
+
+
+## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.1.0...cozy-authentication@2.1.1) (2020-07-17)
+
+**Note:** Version bump only for package cozy-authentication
+
+
+
+
+
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.0.11...cozy-authentication@2.1.0) (2020-07-17)
+
+
+### Features
+
+* Extract wizard to cozy-ui ([70b8c38](https://github.com/cozy/cozy-libs/commit/70b8c38))
+* Update cozy-client as dev dep for cozy-authentication ([98b34e0](https://github.com/cozy/cozy-libs/commit/98b34e0))
+
+
+
+
+
+## 2.0.11 (2020-07-16)
+
+
+### Bug Fixes
+
+* Call revokeSelf if not the owner of the sharing ([f7afc60](https://github.com/cozy/cozy-libs/commit/f7afc60))
+
+
+
+
+
 ## [2.0.10](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.0.9...cozy-authentication@2.0.10) (2020-02-27)
 
 **Note:** Version bump only for package cozy-authentication
@@ -112,9 +155,10 @@ the user to loginPath instead of the url provided by the deeplink.
 To prevent this issue, we should not redirect to loginPath in cozy-auth and
 let the application does what she wants after a loggin.
 
-In order to upgrade your app your need to :
-- remove loginPath props
-- in the `afterAuthenticated` callback you need to manually push to your previous
+In order to upgrade your app your need to change how you instantiate
+the `MobileRouter`:
+- remove the `loginPath` prop
+- in the `onAuthenticated` callback you need to manually push to your previous
 loginPath (ie router.push('/afterLogin'))
 
 

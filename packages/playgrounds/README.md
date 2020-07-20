@@ -10,7 +10,14 @@ If you work on a local cozy and you don't have https enabled you have to define 
 yarn start --global __ALLOW_HTTP__
 ```
 
-Don't forget to launch your browser with disabled CORS and write the full domain for your cozy when reaching http://localhost:1234/index.html :
+You need to launch your browser with disabled CORS, for example on macOS (the important bits are the flags):
+
+```
+/Applications/Chromium.app/Contents/MacOS/Chromium --disable-web-security --user-data-dir="/tmp"
+```
+
+And on the connexion page, you need to indicate the full domain for your cozy when reaching
+http://localhost:1234/index.html:
 
 ```
 http://cozy.tools:8080

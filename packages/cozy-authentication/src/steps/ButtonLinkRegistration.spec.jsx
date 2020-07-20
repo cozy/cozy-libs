@@ -1,6 +1,7 @@
 jest.mock('cozy-device-helper', () => ({
   getPlatform: () => 'testing-platform',
-  nativeLinkOpen: jest.fn()
+  nativeLinkOpen: jest.fn(),
+  isAndroidApp: () => false
 }))
 
 import React from 'react'

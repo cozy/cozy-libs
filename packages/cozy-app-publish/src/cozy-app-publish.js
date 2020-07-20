@@ -3,10 +3,12 @@
 'use strict'
 
 const { ArgumentParser } = require('argparse')
-const colorize = require('./utils/colorize')
-const scripts = require('./index')
 const capitalize = require('lodash/capitalize')
 const omitBy = require('lodash/omitBy')
+
+const logger = require('./utils/logger')
+const colorize = require('./utils/colorize')
+const scripts = require('./index')
 
 const pkg = require('../package.json')
 
@@ -82,7 +84,7 @@ parser.addArgument('--verbose', {
 })
 
 const handleError = error => {
-  console.log(colorize.red(`Publishing failed: ${error.message}`))
+  logger.error(colorize.red(`Publishing failed: ${error.message}`))
   process.exit(1)
 }
 
@@ -108,11 +110,10 @@ async function publishApp(cliOptions) {
   const publishMode = _getPublishMode()
   const publishFn = scripts[publishMode]
 
-  console.log()
-  console.log(
+  logger.log(
     `${colorize.bold(capitalize(publishMode))} ${colorize.blue('publish mode')}`
   )
-  console.log()
+
   return publishFn({
     appBuildUrl: cliOptions.buildUrl,
     buildCommit: cliOptions.buildCommit,

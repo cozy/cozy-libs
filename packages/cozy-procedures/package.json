@@ -1,6 +1,6 @@
 {
   "name": "cozy-procedures",
-  "version": "0.40.15",
+  "version": "0.42.0",
   "main": "dist/index.js",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-procedures/README.md",
   "repository": {
@@ -20,10 +20,10 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.5.4",
-    "babel-preset-cozy-app": "^1.8.1",
-    "cozy-realtime": "^3.9.0",
+    "babel-preset-cozy-app": "^1.9.0",
+    "cozy-realtime": "^3.10.0",
     "date-fns": "^1.30.1",
-    "lodash": "4.17.15",
+    "lodash": "4.17.19",
     "prop-types": "^15.7.2",
     "react-jsonschema-form": "1.8.0",
     "react-redux": "7.1.1",
@@ -38,8 +38,8 @@
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "babel-plugin-inline-react-svg": "^1.1.0",
-    "cozy-client": "6.66.0",
-    "cozy-ui": "27.11.2",
+    "cozy-client": "13.14.1",
+    "cozy-ui": "35.28.0",
     "enzyme-to-json": "3.4.4",
     "jest": "24.8.0",
     "react": "^16.12.0"
@@ -47,9 +47,9 @@
   "peerDependencies": {
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "cozy-client": "6.66.0",
+    "cozy-client": "^13.14.1",
     "cozy-doctypes": "^1.49.3",
-    "cozy-ui": "^27.11.2"
+    "cozy-ui": "^35.28.0"
   },
   "jest": {
     "setupFiles": [
