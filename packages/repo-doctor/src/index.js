@@ -4,7 +4,6 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
 const get = require('lodash/get')
-const merge = require('lodash/merge')
 const validate = require('schema-utils')
 const levn = require('levn')
 

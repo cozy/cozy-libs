@@ -5,6 +5,9 @@
   "bin": {
     "repo-doctor": "src/index.js"
   },
+  "scripts": {
+    "lint": "cd ..; yarn eslint --ext js,jsx packages/repo-doctor"
+  },
   "dependencies": {
     "argparse": "^1.0.10",
     "chalk": "^4.1.0",
