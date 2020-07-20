@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.3.4...cozy-scanner@0.4.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-client ([14ca0b9](https://github.com/cozy/cozy-libs/commit/14ca0b9))
+* Update cozy-ui ([a8710f9](https://github.com/cozy/cozy-libs/commit/a8710f9))
+
+
+
+
+
 ## [0.3.4](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.3.3...cozy-scanner@0.3.4) (2020-07-16)
 
 **Note:** Version bump only for package cozy-scanner

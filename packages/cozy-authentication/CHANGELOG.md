@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.1.1...cozy-authentication@2.2.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-client ([14ca0b9](https://github.com/cozy/cozy-libs/commit/14ca0b9))
+* Update cozy-ui ([a8710f9](https://github.com/cozy/cozy-libs/commit/a8710f9))
+
+
+
+
+
 ## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.1.0...cozy-authentication@2.1.1) (2020-07-17)
 
 **Note:** Version bump only for package cozy-authentication

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.6.0...cozy-notifications@0.7.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-ui ([a8710f9](https://github.com/cozy/cozy-libs/commit/a8710f9))
+
+
+
+
+
 # 0.6.0 (2020-07-16)
 
 

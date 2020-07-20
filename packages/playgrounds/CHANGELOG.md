@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.14.24...cozy-playgrounds@1.15.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-client ([14ca0b9](https://github.com/cozy/cozy-libs/commit/14ca0b9))
+* Update cozy-ui ([f7d801b](https://github.com/cozy/cozy-libs/commit/f7d801b))
+
+
+
+
+
 ## [1.14.24](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.14.23...cozy-playgrounds@1.14.24) (2020-07-17)
 
 **Note:** Version bump only for package cozy-playgrounds

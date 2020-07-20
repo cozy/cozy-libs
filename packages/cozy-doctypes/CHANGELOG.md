@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.74.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.73.0...cozy-doctypes@1.74.0) (2020-07-20)
+
+
+### Features
+
+* Update cozy-client ([14ca0b9](https://github.com/cozy/cozy-libs/commit/14ca0b9))
+
+
+
+
+
 # 1.73.0 (2020-07-16)
 
 
