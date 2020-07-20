@@ -69,7 +69,7 @@
     }
   },
   "peerDependencies": {
-    "cozy-client": "6.66.0",
+    "cozy-client": "13.14.1",
     "cozy-ui": "35.31.0-beta.1",
     "react": ">=15",
     "react-router": "3"

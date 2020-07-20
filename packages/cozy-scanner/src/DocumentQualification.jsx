@@ -73,11 +73,11 @@ export class DocumentQualification extends Component {
     const { onDescribed } = this.props
     if (onDescribed) {
       const realItem = getItemById(item.itemId)
-      /* ATM, we only accept JPG extension from the scanner. So 
-      we hardcode the filename extension here. 
+      /* ATM, we only accept JPG extension from the scanner. So
+      we hardcode the filename extension here.
 
-      If we can't edit file name, then we don't need to use the 
-      generated filename 
+      If we can't edit file name, then we don't need to use the
+      generated filename
       */
       if (allowEditFileName) {
         onDescribed(realItem ? realItem : undefined, filename + fileExtension)
