@@ -4,14 +4,32 @@ import ReactMarkdown from 'react-markdown'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import isUrl from 'is-url'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Button, Label, Input, MainTitle, Icon } from 'cozy-ui/transpiled/react'
+import Label from 'cozy-ui/transpiled/react/Label'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
-import styles from '../styles.styl'
 import ButtonLinkRegistration from './ButtonLinkRegistration'
+import {
+  Wizard,
+  WizardMain,
+  WizardPreviousButton,
+  WizardNextButton,
+  WizardHeader,
+  WizardWrapper,
+  WizardTitle,
+  WizardSelect,
+  WizardFooter,
+  WizardDualField,
+  WizardNotice,
+  WizardErrors,
+  WizardProtocol,
+  WizardDualFieldWrapper,
+  WizardDualFieldInput
+} from 'cozy-ui/transpiled/react/Wizard'
 
 require('url-polyfill')
 
@@ -22,6 +40,7 @@ const ERR_COSY = 'mobile.onboarding.server_selection.wrong_address_cosy'
 
 const customValue = 'custom'
 const cozyDomain = '.mycozy.cloud'
+
 export class SelectServer extends Component {
   state = {
     value: '',
@@ -235,51 +254,44 @@ export class SelectServer extends Component {
     } = this.props
     const inputID = 'inputID'
     return (
-      <form className={styles['wizard']} onSubmit={this.onSubmit}>
-        <div className={styles['wizard-wrapper']}>
-          <header className={styles['wizard-header']}>
-            <Button
+      <Wizard tag="form" onSubmit={this.onSubmit}>
+        <WizardWrapper>
+          <WizardHeader>
+            <WizardPreviousButton
               subtle
               icon="previous"
               iconOnly
               extension="narrow"
-              className={classNames(styles['wizard-previous'])}
               onClick={previousStep}
               type="button"
               label={t('mobile.onboarding.server_selection.previous')}
             />
-            <MainTitle tag="h1" className={styles['wizard-title']}>
+            <WizardTitle>
               {t('mobile.onboarding.server_selection.title')}
-            </MainTitle>
-          </header>
-          <div className={styles['wizard-main']}>
+            </WizardTitle>
+          </WizardHeader>
+          <WizardMain>
             <Label htmlFor={inputID}>
               {t('mobile.onboarding.server_selection.label')}
             </Label>
-            <div
-              className={classNames(
-                styles['wizard-dualfield'],
-                this.state.focusClass,
-                {
-                  [styles['wizard-dualfield--error']]: error
-                }
-              )}
+            <WizardDualField
+              hasFocus={this.state.dualFieldHasFocus}
+              hasError={error}
             >
               {!isTiny && (
-                <div className={styles['wizard-protocol']}>
+                <WizardProtocol>
                   <Icon icon="lock" />
                   <span>https://</span>
-                </div>
+                </WizardProtocol>
               )}
-              <div className={styles['wizard-dualfield-wrapper']}>
-                <Input
+              <WizardDualFieldWrapper>
+                <WizardDualFieldInput
                   type="text"
                   id={inputID}
                   autoCapitalize="none"
                   autoCorrect="off"
                   autoComplete="off"
                   autoFocus
-                  className={classNames(styles['wizard-dualfield-input'])}
                   placeholder={t(placeholderValue)}
                   size={isTiny ? 'medium' : undefined}
                   inputRef={input => {
@@ -290,18 +302,16 @@ export class SelectServer extends Component {
                   }}
                   onFocus={() =>
                     this.setState({
-                      focusClass: styles['wizard-dualfield--focus']
+                      dualFieldHasFocus: true
                     })
                   }
-                  onBlur={() => this.setState({ focusClass: undefined })}
+                  onBlur={() => this.setState({ dualFieldHasFocus: false })}
                   value={value}
                 />
-              </div>
-              <select
-                className={classNames(styles['wizard-select'], {
-                  [styles['wizard-select--narrow']]: isCustomDomain,
-                  [styles['wizard-select--medium']]: isTiny
-                })}
+              </WizardDualFieldWrapper>
+              <WizardSelect
+                narrow={isCustomDomain}
+                medium={isTiny}
                 value={this.state.selectValue}
                 onChange={e => {
                   this.selectOnChange(e)
@@ -313,30 +323,17 @@ export class SelectServer extends Component {
                 <option value="custom">
                   {t('mobile.onboarding.server_selection.domain_custom')}
                 </option>
-              </select>
-            </div>
-            <ReactMarkdown
-              className={classNames(
-                styles['wizard-notice'],
-                styles['wizard-notice--lost']
-              )}
+              </WizardSelect>
+            </WizardDualField>
+            <WizardNotice
+              tag={ReactMarkdown}
+              variant="lost"
               source={t('mobile.onboarding.server_selection.lostpwd')}
             />
-            {error && (
-              <ReactMarkdown
-                className={classNames(styles['wizard-errors'], 'u-error')}
-                source={t(error)}
-              />
-            )}
-          </div>
-          <footer
-            className={classNames(
-              styles['wizard-footer'],
-              isTiny ? 'u-mt-auto' : 'u-pb-2'
-            )}
-          >
-            <Button
-              className={styles['wizard-next']}
+            {error && <WizardErrors tag={ReactMarkdown} source={t(error)} />}
+          </WizardMain>
+          <WizardFooter className={isTiny ? 'u-mt-auto' : 'u-pb-2'}>
+            <WizardNextButton
               disabled={Boolean(
                 error ||
                   fetching ||
@@ -348,7 +345,7 @@ export class SelectServer extends Component {
               size={isTiny ? 'normal' : 'large'}
             >
               {!fetching && <Icon icon="next" color="white" />}
-            </Button>
+            </WizardNextButton>
             <ButtonLinkRegistration
               className={classNames('wizard-buttonlink')}
               label={t('mobile.onboarding.welcome.no_account_link')}
@@ -358,9 +355,9 @@ export class SelectServer extends Component {
               theme="text"
               onboarding={onboarding}
             />
-          </footer>
-        </div>
-      </form>
+          </WizardFooter>
+        </WizardWrapper>
+      </Wizard>
     )
   }
 }

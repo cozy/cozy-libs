@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.6.0 (2020-07-16)
+
+
+### Bug Fixes
+
+* Call revokeSelf if not the owner of the sharing ([f7afc60](https://github.com/cozy/cozy-libs/commit/f7afc60))
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 # [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.4.3...cozy-notifications@0.5.0) (2020-02-24)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.37.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.36.6...cozy-harvest-lib@1.37.0) (2020-07-16)
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 ## [1.36.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.36.5...cozy-harvest-lib@1.36.6) (2020-07-08)
 
 **Note:** Version bump only for package cozy-harvest-lib

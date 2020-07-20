@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.11.7...cozy-sharing@1.12.0) (2020-07-16)
+
+
+### Features
+
+* Update lodash accross all packages ([6a20128](https://github.com/cozy/cozy-libs/commit/6a20128))
+
+
+
+
+
 ## [1.11.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.11.6...cozy-sharing@1.11.7) (2020-07-08)
 
 
