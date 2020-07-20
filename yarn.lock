@@ -5158,37 +5158,15 @@ cozy-client-js@0.16.4:
     pouchdb-browser "7.0.0"
     pouchdb-find "7.0.0"
 
-cozy-client@13.14.1:
-  version "13.14.1"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-13.14.1.tgz#0c4cb31585cbd40dc1ce07f6586a96978221a4ff"
-  integrity sha512-1WhhDuE3wcNh2bWn5E0foTtF2bMfHDm6JHPSTyIft2/vxqXgntPC+4dLXurgnpA9WQs6TmmNOM+Q2+/ZJ/cA6w==
+cozy-client@13.15.1:
+  version "13.15.1"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-13.15.1.tgz#66f13066f653b5577468167a0c3e4fd64ccc7b06"
+  integrity sha512-CM202LvrxC+OBr8ZBwnqekfQDuwLfZmoiO/ScNvY3DMTivw4qH08s17co+cFHvcN9I+ty9LqTR9q/ZA4wdPnjg==
   dependencies:
     btoa "^1.2.1"
     cozy-device-helper "^1.7.3"
     cozy-logger "^1.6.0"
-    cozy-stack-client "^13.12.1"
-    isomorphic-fetch "^2.2.1"
-    lodash "^4.17.13"
-    microee "^0.0.6"
-    minilog "https://github.com/cozy/minilog.git#master"
-    open "^7.0.2"
-    prop-types "^15.6.2"
-    react-redux "^7.2.0"
-    redux "^3.7.2"
-    redux-thunk "^2.3.0"
-    server-destroy "^1.0.1"
-    sift "^6.0.0"
-    url-search-params-polyfill "^7.0.0"
-
-cozy-client@13.14.2:
-  version "13.14.2"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-13.14.2.tgz#5008fb975dcc750970417ea388ba6d328c7c89b9"
-  integrity sha512-ydzIdCHrkWtopV6xO1TWCI2qFYT+d0GrLDzWTkirc3TjuCWltS3f2ilrmAkbQU5W8aqnIpaEtXcB0lBRAhvwUw==
-  dependencies:
-    btoa "^1.2.1"
-    cozy-device-helper "^1.7.3"
-    cozy-logger "^1.6.0"
-    cozy-stack-client "^13.12.1"
+    cozy-stack-client "^13.15.1"
     isomorphic-fetch "^2.2.1"
     lodash "^4.17.13"
     microee "^0.0.6"
@@ -5235,25 +5213,7 @@ cozy-keys-lib@3.1.1:
     tldjs "^2.3.1"
     zxcvbn "^4.4.2"
 
-cozy-stack-client@13.12.1:
-  version "13.12.1"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-13.12.1.tgz#9de6e2cbe3202e351f935d5e16faf2fa27cfa3af"
-  integrity sha512-lZhWm3XB3YpvJ6dP1IPLioSJvVQLbPl3eeIrqI6RmGWi4KyIEES6jw1xEWaO7BNLT6p27BboGedqxeZzMXoBjw==
-  dependencies:
-    detect-node "^2.0.4"
-    mime "^2.4.0"
-    qs "^6.7.0"
-
-cozy-stack-client@^10.7.0:
-  version "10.7.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-10.7.0.tgz#2f9a886af423abe9111d6c1524104c29d2ed517f"
-  integrity sha512-O2z9sFwDhcbn/rZJr0f2BL3CAc2L37QMzmIlQXY/70x/SqkSd+zyFhgwfYImqlwYsByf6Mo6qwtpwv5goRj9Ig==
-  dependencies:
-    detect-node "^2.0.4"
-    mime "^2.4.0"
-    qs "^6.7.0"
-
-cozy-stack-client@^13.12.1:
+cozy-stack-client@^13.15.1:
   version "13.15.1"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-13.15.1.tgz#6beb2703ab916c568b226ea5a572c0cba13d02df"
   integrity sha512-ZNGphplNg98P2bFqIvYRHm7wJKpjTCVL5oed5GBKb4DDwW/CogVaYaiGfF8sfm/1AZqQWyRMfvZjLaIZtH1/QQ==
@@ -5262,28 +5222,10 @@ cozy-stack-client@^13.12.1:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-ui@35.28.0:
-  version "35.28.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.28.0.tgz#d0e1d02924df15b4c46cefd6b4407552980ae3e9"
-  integrity sha512-udF40VMSZc2XpXidGgK2MrN1mipvmfTSzWPjpyCDdXoTfxckeHwmR04yW+vDncbM1kpDxVRn3XxJOFUOouuQFQ==
-  dependencies:
-    "@babel/runtime" "^7.3.4"
-    body-scroll-lock "^2.5.8"
-    classnames "^2.2.5"
-    date-fns "^1.28.5"
-    hammerjs "^2.0.8"
-    node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
-    react-hot-loader "^4.3.11"
-    react-markdown "^4.0.8"
-    react-pdf "^4.0.5"
-    react-select "2.2.0"
-    react-swipeable-views "0.13.3"
-
-cozy-ui@35.31.0-beta.1:
-  version "35.31.0-beta.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.31.0-beta.1.tgz#d25502afd9ca2cc171e600c30cd9a1fc6387d2c8"
-  integrity sha512-LHzU6aBkBqJU+eEfLidQNmL4f7Fb/PKyDlVSgzXN9VSCcJ38DPGuMcD8ugnQY2lV2apIizzxBIaD6TbCeswt1Q==
+cozy-ui@35.32.0:
+  version "35.32.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.32.0.tgz#5432df74ec6f7920a2a9096174f1a34858f8bd6a"
+  integrity sha512-W/FZj1hX4RDLf1Ji6feu/68bz127sQQ3XE98hynCtB9nKBiTSt9Lwy9QxAW/JcexxRxtgMPu+0l7j3yha8P/fA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     body-scroll-lock "^2.5.8"
@@ -13695,7 +13637,7 @@ react-jsonschema-form@1.8.0:
     react-lifecycles-compat "^3.0.4"
     shortid "^2.2.14"
 
-react-lifecycles-compat@^3.0.0, react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
+react-lifecycles-compat@^3.0.2, react-lifecycles-compat@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
 
@@ -13734,19 +13676,6 @@ react-redux@7.1.1, react-redux@^7.0.3:
     loose-envify "^1.4.0"
     prop-types "^15.7.2"
     react-is "^16.9.0"
-
-react-redux@^5.0.7:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-5.1.2.tgz#b19cf9e21d694422727bf798e934a916c4080f57"
-  integrity sha512-Ns1G0XXc8hDyH/OcBHOxNgQx9ayH3SPxBnFCOidGKSle8pKihysQw2rG/PmciUQRoclhVBO8HMhiRmGXnDja9Q==
-  dependencies:
-    "@babel/runtime" "^7.1.2"
-    hoist-non-react-statics "^3.3.0"
-    invariant "^2.2.4"
-    loose-envify "^1.1.0"
-    prop-types "^15.6.1"
-    react-is "^16.6.0"
-    react-lifecycles-compat "^3.0.0"
 
 react-redux@^7.2.0:
   version "7.2.0"
