@@ -1,3 +1,7 @@
+const validate = require('schema-utils')
+
+const { ConfigError } = require('./errors')
+
 const schema = {
   name: 'global config',
   type: 'object',
@@ -32,7 +36,16 @@ const mergeConfigFromArgs = (config, argConfig) => {
   }
 }
 
+const validateConfig = (configSchema, config) => {
+  try {
+    validate(configSchema, config)
+  } catch (e) {
+    throw new ConfigError(e.message)
+  }
+}
+
 module.exports = {
   schema,
-  mergeConfigFromArgs
+  mergeConfigFromArgs,
+  validateConfig
 }

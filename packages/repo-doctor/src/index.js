@@ -4,13 +4,17 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
 const get = require('lodash/get')
-const validate = require('schema-utils')
 const levn = require('levn')
 
 const { setupRules, runRules } = require('./rules')
 const { fetchRepositoryInfo } = require('./fetch')
 const { ConsoleReporter, MattermostReporter } = require('./reporters')
-const { schema: configSchema, mergeConfigFromArgs } = require('./config')
+const {
+  schema: configSchema,
+  mergeConfigFromArgs,
+  validateConfig
+} = require('./config')
+const { ConfigError } = require('./errors')
 
 const reporters = {
   console: ConsoleReporter,
@@ -51,7 +55,17 @@ const main = async () => {
     mergeConfigFromArgs(config, argConfig)
   }
 
-  validate(configSchema, {}, config)
+  try {
+    validateConfig(configSchema, config)
+  } catch (e) {
+    if (e instanceof ConfigError) {
+      // eslint-disable-next-line no-console
+      console.error(e.message)
+      process.exit(1)
+    } else {
+      throw e
+    }
+  }
 
   let repositories = config.repositories
   if (args.repo) {
