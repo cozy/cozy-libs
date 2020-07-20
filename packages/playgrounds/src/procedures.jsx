@@ -9,7 +9,11 @@ import 'cozy-ui/transpiled/react/stylesheet.css'
 import 'cozy-ui/dist/cozy-ui.min.css'
 // import Comp from 'cozy-procedures'
 import injectProcedureRoutes from '../../cozy-procedures/dist'
-import { PageLayout, PageFooter, PageContent } from 'cozy-ui/transpiled/react'
+import {
+  PageLayout,
+  PageFooter,
+  PageContent
+} from 'cozy-ui/transpiled/react/Page'
 
 const padded = Component => {
   const Wrapped = ({ children }) => (
