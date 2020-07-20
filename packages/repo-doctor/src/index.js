@@ -4,12 +4,14 @@ const { ArgumentParser } = require('argparse')
 const fs = require('fs')
 const path = require('path')
 const get = require('lodash/get')
+const merge = require('lodash/merge')
 const validate = require('schema-utils')
+const levn = require('levn')
 
 const { setupRules, runRules } = require('./rules')
 const { fetchRepositoryInfo } = require('./fetch')
 const { ConsoleReporter, MattermostReporter } = require('./reporters')
-const { schema: configSchema } = require('./config')
+const { schema: configSchema, mergeConfigFromArgs } = require('./config')
 
 const reporters = {
   console: ConsoleReporter,
@@ -29,16 +31,26 @@ const main = async () => {
     defaultValue: 'console',
     help: 'Where to send the output (by default: console)'
   })
-  parser.addArgument('--config', {
+  parser.addArgument('--configFile', {
     defaultValue: path.join(process.cwd(), './repo-doctor.json'),
     help: 'Path to config'
+  })
+  parser.addArgument('--config', {
+    help:
+      'Config options ex: --config "dep-up-to-date: { dependencies: [\'cozy-ui\'] }"'
   })
   parser.addArgument('--rule', {
     help: 'Run only selected rule'
   })
 
   const args = parser.parseArgs()
-  const config = JSON.parse(fs.readFileSync(args.config))
+  const config = JSON.parse(fs.readFileSync(args.configFile))
+  const argConfig = args.config ? levn.parse('Object', args.config) : null
+
+  // Merge config from args to JSON config
+  if (argConfig) {
+    mergeConfigFromArgs(config, argConfig)
+  }
 
   validate(configSchema, {}, config)
 
@@ -47,7 +59,7 @@ const main = async () => {
     repositories = repositories.filter(repo => repo.slug === args.repo)
   }
 
-  let rules = setupRules(config, args)
+  let rules = setupRules(config)
   if (args.rule) {
     rules = rules.filter(r => r.constructor.name === args.rule)
   }

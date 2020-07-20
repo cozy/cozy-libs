@@ -16,14 +16,8 @@ const severityByDiffType = {
  * repository
  */
 class DepUpToDate {
-  constructor(config, args) {
-    let dependencies = config.dependencies
-
-    if (args.dep) {
-      dependencies = dependencies.filter(dep => dep === args.dep)
-    }
-
-    this.dependencies = dependencies
+  constructor(config) {
+    this.config = config
   }
 
   async *run(repositoryInfo) {
@@ -47,7 +41,7 @@ class DepUpToDate {
       }
     }
 
-    const results = await bluebird.map(this.dependencies, runForDep, {
+    const results = await bluebird.map(this.config.dependencies, runForDep, {
       concurrency: 10
     })
     for (let result of results) {
@@ -75,19 +69,13 @@ DepUpToDate.configSchema = {
  * repository
  */
 class NoForbiddenDep {
-  constructor(config, args) {
-    let dependencies = config.dependencies
-
-    if (args.dep) {
-      dependencies = dependencies.filter(dep => dep === args.dep)
-    }
-
-    this.dependencies = dependencies
+  constructor(config) {
+    this.config = config
   }
 
   async *run(repositoryInfo) {
     for (let dep of repositoryInfo.dependencies) {
-      const forbiddenDep = this.dependencies.find(
+      const forbiddenDep = this.config.dependencies.find(
         optionDep => optionDep.name == dep.name
       )
       if (forbiddenDep) {
