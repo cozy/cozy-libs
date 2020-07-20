@@ -33,7 +33,7 @@ $ repo-doctor --help
 usage: repo-doctor [-h] [--repo REPO] [--dep DEP]
                    [--reporter {console,mattermost}] [--config CONFIG]
                    [--rule RULE]
-                   
+
 
 Optional arguments:
   -h, --help            Show this help message and exit.
@@ -49,6 +49,49 @@ Optional arguments:
 
 See [the example config](./examples/repo-doctor.json).
 
+## How to write a rule
+
+A rule is a class with a run method that needs to generate check reports:
+
+```js
+class MyRule {
+  constructor(config) {
+    // Save the config for later
+    this.config = config
+  }
+
+  async *run(repositoryInfo) {
+    const checkSomething = await doCheckSomething(this.config)
+
+    if (checkOK) {
+      yield {
+        severity: 'success',
+        message: 'The check is OK',
+        type: 'my-rule'
+      }
+    } else {
+      yield {
+        severity: 'warn',
+        message: 'The check is not OK, please fix it',
+        type: 'my-rule'
+      }
+    }
+  }
+}
+
+module.exports = MyRule
+```
+
+To configure this rule, edit the config file:
+
+```patch
+ {
+   "rules": [
++    ["MyRule", { option1: true }]
+   ]
+ }
+```
+
 ## Screenshots
 
-<img src='./screenshots/example1.png' width='350px' /> 
+<img src='./screenshots/example1.png' width='350px' />
