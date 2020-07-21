@@ -49,6 +49,10 @@ Optional arguments:
 
 See [the example config](./examples/repo-doctor.json).
 
+For the mattermost reporter, you'll need to set up the `MATTERMOST_HOOK` env
+variable with the URL of the incoming hook that you've set up in mattermost.
+
+
 ## How to write a rule
 
 A rule is a class with a run method that needs to generate check reports:
