@@ -15,7 +15,7 @@
   "scripts": {
     "build:doc:react": "styleguidist build --config docs/styleguidist.config.js",
     "deploy:doc": "git-directory-deploy --directory docs/build/ --branch gh-pages",
-    "lint": "eslint . --ext js,jsx",
+    "lint": "eslint --ext js,jsx .",
     "test": "lerna run --concurrency 1 test",
     "build": "lerna run --parallel build",
     "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js"

@@ -1,0 +1,56 @@
+{
+  "repositories": [
+    {
+      "slug": "cozy/cozy-drive"
+    },
+    {
+      "slug": "cozy/cozy-banks"
+    },
+    {
+      "slug": "cozy/cozy-store"
+    },
+    {
+      "slug": "cozy/cozy-settings"
+    },
+    {
+      "slug": "cozy/cozy-home"
+    },
+    {
+       "slug": "cozy/cozy-contacts"
+    }
+  ],
+  "rules": [
+    ["DepUpToDate", {
+      "dependencies": [
+        "cozy-ui",
+        "cozy-client",
+        "cozy-realtime",
+        "cozy-harvest-lib",
+        "cozy-keys-lib",
+        "cozy-flags",
+        "cozy-app-publish",
+        "cozy-sharing",
+        "cozy-scripts",
+        "cozy-bar"
+      ]
+    }],
+    ["NoForbiddenDep", {
+      "dependencies": [
+        {
+          "name": "babel-preset-cozy-app",
+          "reason": "Used through cozy-scripts"
+        },
+        {
+          "name": "eslint-loader",
+          "reason": "Used through cozy-scripts"
+        }
+      ]
+    }],
+    "LocalesInRepo"
+  ],
+  "reporters": {
+    "mattermost": {
+      "channel": "@patrick"
+    }
+  }
+}

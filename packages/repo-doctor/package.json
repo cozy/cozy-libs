@@ -1,0 +1,24 @@
+{
+  "name": "@cozy/repo-doctor",
+  "version": "0.0.1",
+  "license": "MIT",
+  "bin": {
+    "repo-doctor": "src/index.js"
+  },
+  "scripts": {
+    "lint": "cd ..; yarn eslint --ext js,jsx packages/repo-doctor"
+  },
+  "dependencies": {
+    "argparse": "^1.0.10",
+    "chalk": "^4.1.0",
+    "colorette": "^1.2.1",
+    "levn": "^0.4.1",
+    "lodash": "^4.17.19",
+    "node-fetch": "^2.6.0",
+    "schema-utils": "^2.7.0",
+    "semver-diff": "^3.1.1"
+  },
+  "devDependencies": {
+    "eslint": "^7.4.0"
+  }
+}
