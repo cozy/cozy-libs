@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.15.0...cozy-playgrounds@1.15.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* Import component from the right paths, not from the root ([a385cd9](https://github.com/cozy/cozy-libs/commit/a385cd9))
+* Use same Cozy-UI and CozyClient version everywhere ([6216e62](https://github.com/cozy/cozy-libs/commit/6216e62))
+
+
+
+
+
 # [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.14.24...cozy-playgrounds@1.15.0) (2020-07-20)
 
 

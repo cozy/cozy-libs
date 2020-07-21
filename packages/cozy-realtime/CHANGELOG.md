@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.10.1](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.10.0...cozy-realtime@3.10.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* Use same Cozy-UI and CozyClient version everywhere ([6216e62](https://github.com/cozy/cozy-libs/commit/6216e62))
+
+
+
+
+
 # [3.10.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.9.1...cozy-realtime@3.10.0) (2020-07-20)
 
 
