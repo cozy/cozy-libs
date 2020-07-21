@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.38.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.38.0...cozy-harvest-lib@1.38.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* Use same Cozy-UI and CozyClient version everywhere ([6216e62](https://github.com/cozy/cozy-libs/commit/6216e62))
+
+
+
+
+
 # [1.38.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.37.0...cozy-harvest-lib@1.38.0) (2020-07-20)
 
 

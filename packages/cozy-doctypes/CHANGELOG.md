@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.74.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.0...cozy-doctypes@1.74.1) (2020-07-21)
+
+
+### Bug Fixes
+
+* CozyDoctypes dep ([0fdc90e](https://github.com/cozy/cozy-libs/commit/0fdc90e))
+* Use same Cozy-UI and CozyClient version everywhere ([6216e62](https://github.com/cozy/cozy-libs/commit/6216e62))
+
+
+
+
+
 # [1.74.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.73.0...cozy-doctypes@1.74.0) (2020-07-20)
 
 
