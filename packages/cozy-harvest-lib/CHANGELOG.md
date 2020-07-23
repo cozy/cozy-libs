@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.39.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.39.0...cozy-harvest-lib@1.39.1) (2020-07-23)
+
+
+### Bug Fixes
+
+* Manually add window.opener in OAuth popup ([6dcd67a](https://github.com/cozy/cozy-libs/commit/6dcd67a))
+
+
+
+
+
 # [1.39.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.38.1...cozy-harvest-lib@1.39.0) (2020-07-22)
 
 
