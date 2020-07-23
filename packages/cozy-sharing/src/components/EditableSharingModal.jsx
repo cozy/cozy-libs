@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import flow from 'lodash/flow'
-import { queryConnect, withClient } from 'cozy-client'
+import { queryConnect, withClient, Q } from 'cozy-client'
 
 import { Contact, Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
@@ -82,9 +82,8 @@ EditableSharingModal.propTypes = {
   groups: groupsResponseType.isRequired
 }
 
-const contactsQuery = client =>
-  client
-    .all(Contact.doctype)
+const contactsQuery = () =>
+  Q(Contact.doctype)
     .where({
       _id: {
         $gt: null
@@ -111,7 +110,7 @@ const contactsQuery = client =>
     })
     .indexFields(['_id'])
 
-const groupsQuery = client => client.all(Group.doctype)
+const groupsQuery = () => Q(Group.doctype)
 
 export default flow(
   queryConnect({
