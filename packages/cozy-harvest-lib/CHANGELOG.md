@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.40.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.39.1...cozy-harvest-lib@1.40.0) (2020-07-27)
+
+
+### Features
+
+* Use logger from harvest for BI ([9df7b4c](https://github.com/cozy/cozy-libs/commit/9df7b4c))
+
+
+
+
+
 ## [1.39.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.39.0...cozy-harvest-lib@1.39.1) (2020-07-23)
 
 
