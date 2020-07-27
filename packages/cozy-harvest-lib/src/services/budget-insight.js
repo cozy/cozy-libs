@@ -18,12 +18,10 @@ import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
-import harvestLogger from '../logger'
+import logger from '../logger'
 
 const DECOUPLED_ERROR = 'decoupled'
 const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
-
-const logger = harvestLogger('harvest/bi')
 
 const configsByMode = {
   prod: {
