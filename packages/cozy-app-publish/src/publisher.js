@@ -6,6 +6,7 @@ const constants = require('./constants')
 const promptConfirm = require('./confirm')
 const defaults = require('lodash/defaults')
 const logger = require('./utils/logger')
+const { VError } = require('verror')
 
 const {
   DEFAULT_REGISTRY_URL,
@@ -81,7 +82,7 @@ const publisher = ({
       appType
     })
   } catch (error) {
-    throw new Error(`Prepublish failed: ${error.message}`)
+    throw new VError(error, 'Prepublish failed')
   }
 
   // ready publish the application on the registry
@@ -111,13 +112,13 @@ const publisher = ({
   try {
     await publish(publishOptions)
   } catch (error) {
-    throw new Error(`Publish failed: ${error.message}`)
+    throw new VError(error, 'Publish failed')
   }
 
   try {
     await postpublish({ ...publishOptions, postpublishHook })
   } catch (error) {
-    throw new Error(`Postpublish hooks failed: ${error.message}`)
+    throw new VError(error, 'Postpublish hooks failed')
   }
 }
 
