@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Travis publishing script should fail on postPublish error 1`] = `[Error: Postpublish hooks failed: Postpublish test error]`;
+exports[`Travis publishing script should fail on postPublish error 1`] = `[VError: Postpublish hooks failed: Postpublish test error]`;
 
-exports[`Travis publishing script should fail on prePublish error 1`] = `[Error: Prepublish failed: Prepublish test error]`;
+exports[`Travis publishing script should fail on prePublish error 1`] = `[VError: Prepublish failed: Prepublish test error]`;
 
-exports[`Travis publishing script should fail on publish error 1`] = `[Error: Publish failed: Publish test error]`;
+exports[`Travis publishing script should fail on publish error 1`] = `[VError: Publish failed: Publish test error]`;
 
 exports[`Travis publishing script should support prefix 1`] = `
 Object {
