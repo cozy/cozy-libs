@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.23.1...cozy-app-publish@0.24.0) (2020-07-28)
+
+
+### Bug Fixes
+
+* Clone response since we need to read the text() after reading json() ([0dd0c3a](https://github.com/cozy/cozy-libs/commit/0dd0c3a))
+
+
+### Features
+
+* Use VError to chain stack traces ([fd3e586](https://github.com/cozy/cozy-libs/commit/fd3e586))
+
+
+
+
+
 ## [0.23.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.23.0...cozy-app-publish@0.23.1) (2020-07-16)
 
 **Note:** Version bump only for package cozy-app-publish
