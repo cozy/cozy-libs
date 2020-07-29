@@ -9,40 +9,6 @@
     height 1px
     margin-top 0
 
-.share-bylink-header
-    display        flex
-    flex-direction row
-    align-items    center
-
-    > :not(:last-child)
-        margin 0
-        margin-right .5rem
-
-    > :last-child
-        margin-left auto
-
-    .share-bylink-header-dot
-        height .2rem
-        width  .2rem
-        background-color var(--black)
-        border-radius    50%
-        display inline-block
-
-    .share-bylink-header-creating
-    .share-bylink-header-copybtn
-        color var(--dodgerBlue)
-        font-weight bold
-        cursor pointer
-
-    .share-bylink-header-copybtn
-        background transparent
-        border  0
-        padding 0
-
-@media (max-width 32em)
-    .share-bylink-desc
-        width 80%
-
 .share-byemail-onlybylink
     background var(--paleGrey)
     padding    1rem 1.5rem
@@ -90,7 +56,6 @@
         width: calc(100% + 3em);
         height: 1px
         background-color: var(--silver)
-
 
 @media (max-width 32em)
     .share-modal-secondary
@@ -164,67 +129,6 @@
 
 input[type=text]
     width 100%
-
-.input-dual
-    display flex
-    align-items center
-
-    input[type=text]
-        width 100%
-        height 3rem
-
-    > :first-child
-        flex 2 0 1%
-        padding-right .5rem
-
-    > :last-child
-        flex 0 0 6rem
-        text-align right
-
-    .coz-form-desc
-        margin 0
-
-    +tiny-screen()
-        > :last-child
-            flex-basis auto
-
-.btn-copy
-    width 100%
-    height 3rem
-    margin 0
-
-.permission-required-popin
-    @extend $popover
-    display flex
-    flex-direction column
-    position relative
-    line-height 1.25rem
-    margin-top .25rem
-
-    .permission-required-popin-close
-        position absolute
-        top 0
-        right .9375rem
-        margin 0
-        padding 0
-        background-size .875rem
-        background-color transparent
-        cursor pointer
-        display block
-        width .875rem
-        height .875rem
-        z-index $modal-index
-
-    h4
-        font-size .875rem
-        margin 1.5rem 1rem 0 1rem
-    p
-        font-size .875rem
-        margin 0 1rem 1rem 1rem
-
-    .permission-required-popin-accept
-        color var(--white)
-        margin 0 1rem 1.5rem 1rem
 
 .share-details-created
 .share-details-perm
