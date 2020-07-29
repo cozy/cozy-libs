@@ -109,9 +109,6 @@
         "copy": "Copy",
         "copied": "Copied"
       },
-      "whoHasAccess": {
-        "title": "1 person has access |||| %{smart_count} people have access"
-      },
       "protectedShare": {
         "title": "Coming soon!",
         "desc": "Share anything by email with your family and friends!"

@@ -110,9 +110,6 @@
         "copy": "Copier",
         "copied": "Copié"
       },
-      "whoHasAccess": {
-        "title": "1 personne y a accès |||| %{smart_count} personnes y ont accès"
-      },
       "protectedShare": {
         "title": "Prochainement !",
         "desc": "Partagez ce que vous souhaitez par email avec votre famille et vos amis !"
