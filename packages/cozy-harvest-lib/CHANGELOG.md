@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.41.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.40.0...cozy-harvest-lib@1.41.0) (2020-07-30)
+
+
+### Features
+
+* **Harvest:** Add maif bi url for bi account creation ([dda0cb6](https://github.com/cozy/cozy-libs/commit/dda0cb6))
+
+
+
+
+
 # [1.40.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.39.1...cozy-harvest-lib@1.40.0) (2020-07-27)
 
 
