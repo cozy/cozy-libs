@@ -112,7 +112,7 @@ class ShareByLink extends React.Component {
     const hasReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
 
     return (
-      <div ref={this.containerRef}>
+      <div className="u-w-100 u-pt-half">
         <div className="u-flex u-flex-row u-flex-justify-between u-flex-items-center">
           <Text>{t(`${documentType}.share.shareByLink.subtitle`)}</Text>
           {!checked && (
@@ -149,7 +149,7 @@ class ShareByLink extends React.Component {
               </Circle>
             }
             right={
-              <div>
+              <div ref={this.containerRef}>
                 <DropdownButton onClick={this.toggleMenu}>
                   <Text>
                     {t(
@@ -164,6 +164,7 @@ class ShareByLink extends React.Component {
                     onClose={this.toggleMenu}
                     placement="bottom-end"
                     containerElRef={this.containerRef}
+                    anchorElRef={this.containerRef}
                   >
                     <ActionMenuItem
                       left={

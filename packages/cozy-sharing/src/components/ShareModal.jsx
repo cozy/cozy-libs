@@ -1,8 +1,15 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+
+import ExperimentalDialog, {
+  ExperimentalDialogTitle,
+  ExperimentalDialogActions
+} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
+import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import DialogContent from '@material-ui/core/DialogContent'
+import Divider from '@material-ui/core/Divider'
 
 import styles from '../share.styl'
 
@@ -35,14 +42,11 @@ export const ShareModal = ({
   t
 }) => {
   return (
-    <Modal
-      title={t(`${documentType}.share.title`)}
-      dismissAction={onClose}
-      into="body"
-      size="small"
-      spacing="small"
-      mobileFullscreen
-    >
+    <ExperimentalDialog open={true} onClose={onClose}>
+      <DialogCloseButton onClick={onClose} />
+      <ExperimentalDialogTitle>
+        {t(`${documentType}.share.title`)}
+      </ExperimentalDialogTitle>
       {(hasSharedParent || hasSharedChild) && (
         <div className={styles['share-byemail-onlybylink']}>
           {t(`${documentType}.share.shareByEmail.onlyByLink`, {
@@ -61,12 +65,7 @@ export const ShareModal = ({
           </strong>
         </div>
       )}
-      <ModalContent
-        className={cx(
-          styles['share-modal-content'],
-          styles['share-moral-override-bottom']
-        )}
-      >
+      <DialogContent className={cx(styles['share-modal-content'])}>
         {documentType !== 'Notes' &&
           documentType !== 'Albums' &&
           !hasSharedParent &&
@@ -83,34 +82,32 @@ export const ShareModal = ({
               needsContactsPermission={needsContactsPermission}
             />
           )}
-        <div className={styles['share-modal-separator']} />
-        <div className={styles['share-modal-secondary']}>
-          <div className={cx(styles['share-modal-margins'], 'u-pb-1')}>
-            <DumbShareByLink
-              document={document}
-              permissions={permissions}
-              documentType={documentType}
-              checked={link !== null}
-              link={link}
-              onEnable={onShareByLink}
-              onDisable={onRevokeLink}
-              onChangePermissions={onUpdateShareLinkPermissions}
-            />
-            {documentType !== 'Albums' && (
-              <WhoHasAccess
-                className={'u-mt-1'}
-                isOwner={isOwner}
-                recipients={recipients}
-                document={document}
-                documentType={documentType}
-                onRevoke={onRevoke}
-                onRevokeSelf={onRevokeSelf}
-              />
-            )}
-          </div>
-        </div>
-      </ModalContent>
-    </Modal>
+        {documentType !== 'Albums' && (
+          <WhoHasAccess
+            className={'u-mt-1 u-ov-auto'}
+            isOwner={isOwner}
+            recipients={recipients}
+            document={document}
+            documentType={documentType}
+            onRevoke={onRevoke}
+            onRevokeSelf={onRevokeSelf}
+          />
+        )}
+      </DialogContent>
+      <Divider />
+      <ExperimentalDialogActions>
+        <DumbShareByLink
+          document={document}
+          permissions={permissions}
+          documentType={documentType}
+          checked={link !== null}
+          link={link}
+          onEnable={onShareByLink}
+          onDisable={onRevokeLink}
+          onChangePermissions={onUpdateShareLinkPermissions}
+        />
+      </ExperimentalDialogActions>
+    </ExperimentalDialog>
   )
 }
 export default translate()(ShareModal)
