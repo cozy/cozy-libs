@@ -10,6 +10,7 @@ import ExperimentalDialog, {
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
 import DialogContent from '@material-ui/core/DialogContent'
 import Divider from '@material-ui/core/Divider'
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 import styles from '../share.styl'
 
@@ -42,72 +43,74 @@ export const ShareModal = ({
   t
 }) => {
   return (
-    <ExperimentalDialog open={true} onClose={onClose}>
-      <DialogCloseButton onClick={onClose} />
-      <ExperimentalDialogTitle>
-        {t(`${documentType}.share.title`)}
-      </ExperimentalDialogTitle>
-      {(hasSharedParent || hasSharedChild) && (
-        <div className={styles['share-byemail-onlybylink']}>
-          {t(`${documentType}.share.shareByEmail.onlyByLink`, {
-            type: t(
-              `${documentType}.share.shareByEmail.type.${
-                document.type === 'directory' ? 'folder' : 'file'
-              }`
-            )
-          })}{' '}
-          <strong>
-            {t(
-              `${documentType}.share.shareByEmail.${
-                hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
-              }`
+    <MuiCozyTheme>
+      <ExperimentalDialog open={true} onClose={onClose}>
+        <DialogCloseButton onClick={onClose} />
+        <ExperimentalDialogTitle>
+          {t(`${documentType}.share.title`)}
+        </ExperimentalDialogTitle>
+        {(hasSharedParent || hasSharedChild) && (
+          <div className={styles['share-byemail-onlybylink']}>
+            {t(`${documentType}.share.shareByEmail.onlyByLink`, {
+              type: t(
+                `${documentType}.share.shareByEmail.type.${
+                  document.type === 'directory' ? 'folder' : 'file'
+                }`
+              )
+            })}{' '}
+            <strong>
+              {t(
+                `${documentType}.share.shareByEmail.${
+                  hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
+                }`
+              )}
+            </strong>
+          </div>
+        )}
+        <DialogContent className={cx(styles['share-modal-content'])}>
+          {documentType !== 'Notes' &&
+            documentType !== 'Albums' &&
+            !hasSharedParent &&
+            !hasSharedChild && (
+              <DumbShareByEmail
+                currentRecipients={recipients}
+                document={document}
+                documentType={documentType}
+                sharingDesc={sharingDesc}
+                contacts={contacts}
+                groups={groups}
+                createContact={createContact}
+                onShare={onShare}
+                needsContactsPermission={needsContactsPermission}
+              />
             )}
-          </strong>
-        </div>
-      )}
-      <DialogContent className={cx(styles['share-modal-content'])}>
-        {documentType !== 'Notes' &&
-          documentType !== 'Albums' &&
-          !hasSharedParent &&
-          !hasSharedChild && (
-            <DumbShareByEmail
-              currentRecipients={recipients}
+          {documentType !== 'Albums' && (
+            <WhoHasAccess
+              className={'u-mt-1 u-mb-1 u-ov-auto'}
+              isOwner={isOwner}
+              recipients={recipients}
               document={document}
               documentType={documentType}
-              sharingDesc={sharingDesc}
-              contacts={contacts}
-              groups={groups}
-              createContact={createContact}
-              onShare={onShare}
-              needsContactsPermission={needsContactsPermission}
+              onRevoke={onRevoke}
+              onRevokeSelf={onRevokeSelf}
             />
           )}
-        {documentType !== 'Albums' && (
-          <WhoHasAccess
-            className={'u-mt-1 u-ov-auto'}
-            isOwner={isOwner}
-            recipients={recipients}
+        </DialogContent>
+        <Divider />
+        <ExperimentalDialogActions>
+          <DumbShareByLink
             document={document}
+            permissions={permissions}
             documentType={documentType}
-            onRevoke={onRevoke}
-            onRevokeSelf={onRevokeSelf}
+            checked={link !== null}
+            link={link}
+            onEnable={onShareByLink}
+            onDisable={onRevokeLink}
+            onChangePermissions={onUpdateShareLinkPermissions}
           />
-        )}
-      </DialogContent>
-      <Divider />
-      <ExperimentalDialogActions>
-        <DumbShareByLink
-          document={document}
-          permissions={permissions}
-          documentType={documentType}
-          checked={link !== null}
-          link={link}
-          onEnable={onShareByLink}
-          onDisable={onRevokeLink}
-          onChangePermissions={onUpdateShareLinkPermissions}
-        />
-      </ExperimentalDialogActions>
-    </ExperimentalDialog>
+        </ExperimentalDialogActions>
+      </ExperimentalDialog>
+    </MuiCozyTheme>
   )
 }
 export default translate()(ShareModal)
