@@ -9,7 +9,6 @@ import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
 
 import styles from './recipient.styl'
 
-import IconHourglass from '../../assets/icons/icon-hourglass-16.svg'
 import IconEye from '../../assets/icons/icon-eye-16.svg'
 import IconPen from '../../assets/icons/icon-pen-write-16.svg'
 import IconTrash from '../../assets/icons/icon-trash-red.svg'
@@ -75,7 +74,7 @@ export const UserAvatar = ({ url, size, ...rest }) => (
   </div>
 )
 
-export class Status extends Component {
+export class Permissions extends Component {
   state = {
     revoking: false
   }
@@ -99,17 +98,6 @@ export class Status extends Component {
     this.setState({ revoking: false })
   }
 
-  getStatusIcon = type => {
-    switch (type) {
-      case 'one-way':
-        return <IconEye />
-      case 'two-way':
-        return <IconPen />
-      default:
-        return <IconHourglass />
-    }
-  }
-
   render() {
     const {
       isOwner,
@@ -125,6 +113,7 @@ export class Status extends Component {
     const isMe =
       instance !== undefined && instance === client.options.uri && !isOwner
     const shouldShowMenu = !revoking && status !== 'owner' && (isMe || isOwner)
+
     return (
       <div className={classNames(styles['recipient-status'], 'u-ml-1')}>
         {revoking && <Spinner />}
@@ -135,11 +124,7 @@ export class Status extends Component {
         )}
         {shouldShowMenu && (
           <MenuAwareMobile
-            label={
-              status === 'ready' && type
-                ? t(`Share.type.${type}`)
-                : t(`Share.status.${status}`)
-            }
+            text={t(`Share.type.${type}`)}
             className={styles['recipient-menu']}
             buttonClassName={styles['recipient-menu-btn']}
             position={'right'}
@@ -149,10 +134,8 @@ export class Status extends Component {
             }}
             name={name}
           >
-            <MenuItem icon={this.getStatusIcon(status)}>
-              {status === 'ready' && type
-                ? t(`Share.type.${type}`)
-                : t(`Share.status.${status}`)}
+            <MenuItem icon={type === 'two-way' ? <IconPen /> : <IconEye />}>
+              {t(`Share.type.${type}`)}
             </MenuItem>
 
             <hr />
@@ -179,7 +162,9 @@ export class Status extends Component {
   }
 }
 
-const StatusWithBreakpoints = withBreakpoints()(translate()(withClient(Status)))
+const PermissionsWithBreakpoints = withBreakpoints()(
+  translate()(withClient(Permissions))
+)
 
 const Recipient = (props, { client, t }) => {
   const { instance, isOwner, status, ...rest } = props
@@ -188,6 +173,7 @@ const Recipient = (props, { client, t }) => {
   const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
   const defaultInitials = defaultDisplayName[0].toUpperCase()
   const name = Contact.getDisplayName(rest, defaultDisplayName)
+
   return (
     <div className={classNames(styles['recipient'], 'u-mt-1')}>
       <Avatar
@@ -200,7 +186,7 @@ const Recipient = (props, { client, t }) => {
           name={isMe ? t('Share.recipients.you') : name}
           details={instance}
         />
-        <StatusWithBreakpoints {...props} name={name} />
+        <PermissionsWithBreakpoints {...props} name={name} />
       </div>
     </div>
   )
