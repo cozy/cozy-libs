@@ -34,6 +34,10 @@ const configsByMode = {
   dev: {
     mode: 'dev',
     url: 'https://cozytest-sandbox.biapi.pro/2.0'
+  },
+  devmaif: {
+    mode: 'dev',
+    url: 'https://cozytest-sandbox.biapi.pro/2.0'
   }
 }
 
@@ -54,9 +58,9 @@ const convertBIErrortoKonnectorJobError = error => {
   throw err
 }
 
-const getBIModeFromCozyURL = rawCozyURL => {
+export const getBIConfigForCozyURL = rawCozyURL => {
   if (!rawCozyURL) {
-    return 'dev'
+    return configsByMode['dev']
   }
   const cozyURL = new URL(rawCozyURL)
   const domain = cozyURL.host
@@ -74,25 +78,13 @@ const getBIModeFromCozyURL = rawCozyURL => {
     case 'cozy.company':
     case 'cozy.solutions':
     case 'toutatice.fr':
+    case 'cozy.dev':
+      return configsByMode['dev']
     case 'cozymaif.cloud':
     case 'cozy-maif-int.fr':
-    case 'cozy.dev':
-      return 'dev'
+      return configsByMode['maifdev']
     default:
-      return 'prod'
-  }
-}
-
-export const getBIConfigForCozyURL = url => {
-  const mode = getBIModeFromCozyURL(url)
-  if (configsByMode[mode]) {
-    return configsByMode[mode]
-  } else {
-    throw new Error(
-      `getBIConfig: Unknown mode ${mode}, known modes are ${Object.keys(
-        configsByMode
-      ).join(', ')}`
-    )
+      return configsByMode['prod']
   }
 }
 
