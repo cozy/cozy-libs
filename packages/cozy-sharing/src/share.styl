@@ -10,13 +10,15 @@
     margin-top 0
 
 .share-byemail-onlybylink
+    --modal-padding: 2rem
     background var(--paleGrey)
-    padding    1rem 1.5rem
-    margin 0
+    padding    1rem var(--modal-padding)
+    margin-left calc(var(--modal-padding) * -1)
+    margin-right calc(var(--modal-padding) * -1)
     border-top 1px solid var(--silver)
-
-.share-moral-override-bottom
-    padding-bottom : 0 !important
+    
+    +small-screen()
+      --modal-padding: 1rem
 
 .share-modal-content
     @extend $form
@@ -24,43 +26,17 @@
     @extend $form-button
     display flex
     flex-direction column
-    flex-grow 1
-    overflow: auto
-    min-height: rem(400)
-
-    > .share-byemail-onlybylink
-        margin 0
+    flex-shrink: 1
+    overflow: hidden
+    padding: 0 !important
+    min-height: rem(250)
 
     .coz-form-group
-      flex-shrink 0
+        flex-shrink 0
 
     .coz-form-label
         padding-top 0
         margin-top  0
-
-    .share-modal-secondary
-      overflow auto
-      flex-grow 1
-      padding-top: 0.5rem
-      width: calc(100% + 3em)
-      margin-left: -1.5em
-
-    .share-modal-margins
-        margin-left: 1.5em
-        margin-right: 1.5em
-
-
-    .share-modal-separator
-        margin-left: -1.5em
-        margin-top: rem(24)
-        width: calc(100% + 3em);
-        height: 1px
-        background-color: var(--silver)
-
-@media (max-width 32em)
-    .share-modal-secondary
-        > div
-            margin-bottom 1.5rem
 
 .coz-form-group
     margin 0
