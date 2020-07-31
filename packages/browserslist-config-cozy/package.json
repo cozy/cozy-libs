@@ -17,7 +17,7 @@
     "test": "jest --env node ./*.spec.js"
   },
   "devDependencies": {
-    "jest-cli": "24.1.0"
+    "jest-cli": "24.9.0"
   },
   "files": [
     "index.js",
