@@ -1,11 +1,14 @@
 import React, { Component } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { Spinner, MenuItem, withBreakpoints } from 'cozy-ui/transpiled/react'
+import { Spinner, withBreakpoints } from 'cozy-ui/transpiled/react'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
-import MenuAwareMobile from './MenuAwareMobile'
 import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
+
+import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
+import { Text, Caption } from 'cozy-ui/transpiled/react/Text'
 
 import styles from './recipient.styl'
 
@@ -76,7 +79,8 @@ export const UserAvatar = ({ url, size, ...rest }) => (
 
 export class Permissions extends Component {
   state = {
-    revoking: false
+    revoking: false,
+    isMenuDisplayed: false
   }
 
   onRevoke = async () => {
@@ -105,14 +109,18 @@ export class Permissions extends Component {
       instance,
       type,
       documentType,
-      name,
       client,
       t
     } = this.props
-    const { revoking } = this.state
+    const { revoking, isMenuDisplayed } = this.state
     const isMe =
       instance !== undefined && instance === client.options.uri && !isOwner
     const shouldShowMenu = !revoking && status !== 'owner' && (isMe || isOwner)
+
+    const showMenu = () => this.setState({ isMenuDisplayed: true })
+    const hideMenu = () => this.setState({ isMenuDisplayed: false })
+
+    const buttonRef = React.createRef()
 
     return (
       <div className={classNames(styles['recipient-status'], 'u-ml-1')}>
@@ -123,39 +131,39 @@ export class Permissions extends Component {
           </span>
         )}
         {shouldShowMenu && (
-          <MenuAwareMobile
-            text={t(`Share.type.${type}`)}
-            className={styles['recipient-menu']}
-            buttonClassName={styles['recipient-menu-btn']}
-            position={'right'}
-            popover
-            itemsStyle={{
-              maxWidth: '280px'
-            }}
-            name={name}
-          >
-            <MenuItem icon={type === 'two-way' ? <IconPen /> : <IconEye />}>
+          <div>
+            <DropdownButton onClick={showMenu} ref={buttonRef}>
               {t(`Share.type.${type}`)}
-            </MenuItem>
+            </DropdownButton>
+            {isMenuDisplayed && (
+              <ActionMenu
+                onClose={hideMenu}
+                placement="bottom-end"
+                anchorElRef={buttonRef}
+                preventOverflow
+              >
+                <ActionMenuItem
+                  left={type === 'two-way' ? <IconPen /> : <IconEye />}
+                >
+                  {t(`Share.type.${type}`)}
+                </ActionMenuItem>
 
-            <hr />
-            <MenuItem
-              onSelect={this.onRevoke}
-              onClick={this.onRevoke}
-              icon={<IconTrash />}
-            >
-              <div className={styles['action-unshare']}>
-                {isOwner
-                  ? t(`${documentType}.share.revoke.title`)
-                  : t(`${documentType}.share.revokeSelf.title`)}
-              </div>
-              <p className={styles['action-unshare-desc']}>
-                {isOwner
-                  ? t(`${documentType}.share.revoke.desc`)
-                  : t(`${documentType}.share.revokeSelf.desc`)}
-              </p>
-            </MenuItem>
-          </MenuAwareMobile>
+                <hr />
+                <ActionMenuItem onClick={this.onRevoke} left={<IconTrash />}>
+                  <Text>
+                    {isOwner
+                      ? t(`${documentType}.share.revoke.title`)
+                      : t(`${documentType}.share.revokeSelf.title`)}
+                  </Text>
+                  <Caption>
+                    {isOwner
+                      ? t(`${documentType}.share.revoke.desc`)
+                      : t(`${documentType}.share.revokeSelf.desc`)}
+                  </Caption>
+                </ActionMenuItem>
+              </ActionMenu>
+            )}
+          </div>
         )}
       </div>
     )
@@ -186,7 +194,7 @@ const Recipient = (props, { client, t }) => {
           name={isMe ? t('Share.recipients.you') : name}
           details={instance}
         />
-        <PermissionsWithBreakpoints {...props} name={name} />
+        <PermissionsWithBreakpoints {...props} />
       </div>
     </div>
   )
