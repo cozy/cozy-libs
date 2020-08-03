@@ -1,7 +1,7 @@
 {
   "name": "cozy-playgrounds",
   "private": true,
-  "version": "1.15.2",
+  "version": "1.15.3",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,12 +10,12 @@
   "dependencies": {
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "cozy-authentication": "^2.2.1",
+    "cozy-authentication": "^2.2.2",
     "cozy-client": "13.15.1",
-    "cozy-device-helper": "^1.10.0",
-    "cozy-doctypes": "^1.74.1",
-    "cozy-realtime": "^3.10.1",
-    "cozy-sharing": "^1.13.2",
+    "cozy-device-helper": "^1.10.1",
+    "cozy-doctypes": "^1.74.2",
+    "cozy-realtime": "^3.10.2",
+    "cozy-sharing": "^1.13.3",
     "cozy-ui": "35.32.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
