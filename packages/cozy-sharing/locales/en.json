@@ -6,7 +6,7 @@
       "seen": "Invitation seen",
       "ready": "Accepted",
       "refused": "Refused",
-      "error": "Error",
+      "error": "Sharing error",
       "unregistered": "Error",
       "mail-not-sent": "Pending",
       "revoked": "Error"
