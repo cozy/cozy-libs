@@ -189,10 +189,17 @@ const PermissionsWithBreakpoints = withBreakpoints()(
 const Status = ({ status, isMe, instance }) => {
   const { t } = useI18n()
 
+  const isError =
+    !isMe && ['error', 'unregistered', 'mail-not-sent'].includes(status)
+  const isReady = isMe || status === 'ready'
+
   let text, icon
-  if (isMe) {
+  if (isReady) {
     text = instance
     icon = 'to-the-cloud'
+  } else if (isError) {
+    text = t('Share.status.error')
+    icon = 'warning'
   } else {
     text = ['pending', 'seen'].includes(status)
       ? t(`Share.status.${status}`)
@@ -207,7 +214,9 @@ const Status = ({ status, isMe, instance }) => {
         <Icon icon={icon} size={10} />
       </Img>
       <Bd>
-        <Caption>{text}</Caption>
+        <Caption className={classNames({ 'u-pomegranate': isError })}>
+          {text}
+        </Caption>
       </Bd>
     </Media>
   )
