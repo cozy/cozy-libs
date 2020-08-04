@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { useClient } from 'cozy-client'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Spinner, withBreakpoints } from 'cozy-ui/transpiled/react'
@@ -222,7 +223,9 @@ const Status = ({ status, isMe, instance }) => {
   )
 }
 
-const Recipient = (props, { client, t }) => {
+const Recipient = props => {
+  const { t } = useI18n()
+  const client = useClient()
   const { instance, isOwner, status, ...rest } = props
   const isMe =
     (isOwner && status === 'owner') || instance === client.options.uri
@@ -252,11 +255,6 @@ const Recipient = (props, { client, t }) => {
       }
     />
   )
-}
-
-Recipient.contextTypes = {
-  client: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
 }
 
 export default Recipient
