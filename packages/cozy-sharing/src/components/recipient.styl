@@ -2,12 +2,12 @@
 @require 'settings/breakpoints.styl'
 @require 'settings/palette.styl'
 
-.recipient
-    display flex
-    flex-direction row
-    align-items center
+.recipient	
+    display flex	
+    flex-direction row	
+    align-items center	
 
-    +small-screen()
+    +small-screen()	
         align-items flex-start
 
 .recipients-list-light
@@ -53,18 +53,9 @@
     flex 1 1 auto
     overflow hidden
     text-overflow ellipsis
-
-.recipient-status
-    flex 0 0 auto
-    font-size .875rem
-    color var(--coolGrey)
-
-.recipient-ident-status
-    flex 1 1 auto
-    display flex
-    flex-direction row
-    align-items center
-    max-width calc(100% - 3rem)
+    
+.recipient-status-icon
+  margin-right: .25rem
 
 .recipient-user
 .recipient-details
@@ -86,7 +77,6 @@
     flex-direction row
     align-items center
 
-
     .recipient-user
         font-size 1.125rem
 
@@ -102,41 +92,3 @@
         margin-right -0.6rem
         border 2px solid var(--white)
         box-sizing border-box
-
-.recipient-status .recipient-owner
-    padding .2rem 0
-
-.recipient-status .recipient-menu-btn
-    @extend $button
-    text-transform capitalize
-    background transparent embedurl("../../assets/icons/icon-arrow-down.svg") right center  no-repeat
-    border     none
-    min-width  1rem
-    padding-right 1.1rem
-    color    var(--black)
-    display inherit
-
-
-// bit of a hack because the menu is inside a scrollable area
-.recipient-menu > div
-  margin-bottom .5rem
-
-.action-unshare
-    color var(--pomegranate) !important
-    text-decoration none !important
-
-.action-unshare-desc
-    color var(--coolGrey)
-    margin    0
-    padding   .5rem 0
-    font-size .8125rem
-
-+small-screen()
-    .recipient-ident-status
-        display block
-
-    .recipient-status  .recipient-menu-btn
-        padding-left 0
-        padding-right 1.1rem
-        margin 0
-        min-height 0
