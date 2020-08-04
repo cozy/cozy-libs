@@ -44,7 +44,11 @@ export const ShareModal = ({
 }) => {
   return (
     <MuiCozyTheme>
-      <ExperimentalDialog open={true} onClose={onClose}>
+      <ExperimentalDialog
+        open={true}
+        onClose={onClose}
+        PaperProps={{ className: 'u-pb-half' }}
+      >
         <DialogCloseButton onClick={onClose} />
         <ExperimentalDialogTitle>
           {t(`${documentType}.share.title`)}

@@ -14,6 +14,7 @@ import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 import logger from '../logger'
+import styles from '../share.styl'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 
@@ -118,6 +119,7 @@ class ShareByLink extends React.Component {
           {!checked && (
             <Button
               theme="text"
+              className={styles['aligned-dropdown-button']}
               onClick={async () => {
                 await this.createShareLink()
                 this.copyLinkToClipboard()
