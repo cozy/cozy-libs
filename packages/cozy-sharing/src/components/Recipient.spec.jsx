@@ -1,120 +1,98 @@
 import React from 'react'
-import { mount } from 'enzyme'
-import { Status } from './Recipient'
+import Recipient from './Recipient'
 import AppLike from '../../test/AppLike'
-describe('Recipient component', () => {
-  //const props = isOwner, status, instance, type, documentType, name, client, t
+import { createMockClient } from 'cozy-client'
+import { render, fireEvent } from '@testing-library/react'
 
-  const client = {
-    options: {
-      uri: 'foo.mycozy.cloud'
-    }
+describe('Recipient component', () => {
+  const client = createMockClient({})
+  client.options = {
+    uri: 'foo.mycozy.cloud'
   }
 
-  it('should render if isMe ', () => {
-    const component = mount(
-      <AppLike>
-        <Status
-          instance="foo.mycozy.cloud"
-          client={client}
-          t={x => x}
-          status="ready"
-        />
+  const setup = props => {
+    return render(
+      <AppLike client={client}>
+        <Recipient {...props} />
       </AppLike>
     )
-    expect(component).toMatchSnapshot()
+  }
+
+  let createRangeBackup
+
+  beforeAll(() => {
+    createRangeBackup = global.document.createRange
+    global.document.createRange = jest.fn(() => ({
+      setStart: () => {},
+      setEnd: () => {},
+      commonAncestorContainer: {
+        nodeName: 'BODY',
+        ownerDocument: document
+      }
+    }))
+  })
+
+  afterAll(() => {
+    global.document.createRange = createRangeBackup
+  })
+
+  it('should render if isMe ', () => {
+    const { getByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way'
+    })
+    expect(getByText('You')).toBeTruthy()
+    expect(getByText('foo.mycozy.cloud')).toBeTruthy()
   })
 
   it('should match snapshot if isOwner', () => {
-    const component = mount(
-      <AppLike>
-        <Status
-          instance="foo.mycozy.cloud"
-          client={client}
-          t={x => x}
-          status="ready"
-          isOwner="true"
-        />
-      </AppLike>
-    )
-    expect(component).toMatchSnapshot()
+    const { getByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      isOwner: true
+    })
+    expect(getByText('You')).toBeTruthy()
+    expect(getByText('foo.mycozy.cloud')).toBeTruthy()
   })
 
-  it('should match snapshot if isMe and type folder', () => {
-    const component = mount(
-      <AppLike>
-        <Status
-          instance="foo.mycozy.cloud"
-          client={client}
-          t={x => x}
-          status="ready"
-          type="folder"
-        />
-      </AppLike>
-    )
-    expect(component).toMatchSnapshot()
-  })
-
-  it('should match snapshot if isMe and type file', () => {
-    const component = mount(
-      <AppLike>
-        <Status
-          instance="foo.mycozy.cloud"
-          client={client}
-          t={x => x}
-          status="ready"
-          type="file"
-        />
-      </AppLike>
-    )
-    expect(component).toMatchSnapshot()
-  })
-
-  it('should call revokeSelf is i m not the owner but try to revoke myselk', async () => {
+  it('should call revokeSelf if I am not the owner but try to revoke myself', async () => {
     const onRevoke = jest.fn()
     const onRevokeSelf = jest.fn()
-    const component = mount(
-      <AppLike>
-        <Status
-          instance="foo.mycozy.cloud"
-          client={client}
-          t={x => x}
-          status="ready"
-          type="file"
-          onRevoke={onRevoke}
-          onRevokeSelf={onRevokeSelf}
-          isOwner={false}
-        />
-      </AppLike>
-    )
 
-    const instance = component.find(Status).instance()
+    const { getByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      documentType: 'Files',
+      onRevoke,
+      onRevokeSelf
+    })
 
-    await instance.onRevoke()
+    fireEvent.click(getByText('Can Change'))
+    fireEvent.click(getByText('Remove me from sharing'))
+    expect(onRevoke).not.toBeCalled()
     expect(onRevokeSelf).toBeCalled()
   })
 
-  it('should call revoke if I m the owner of the sharing', async () => {
+  it('should call revoke if I am the owner of the sharing', async () => {
     const onRevoke = jest.fn()
     const onRevokeSelf = jest.fn()
-    const component = mount(
-      <AppLike>
-        <Status
-          instance="foo.mycozy.cloud"
-          client={client}
-          t={x => x}
-          status="ready"
-          type="file"
-          onRevoke={onRevoke}
-          onRevokeSelf={onRevokeSelf}
-          isOwner={true}
-        />
-      </AppLike>
-    )
 
-    const instance = component.find(Status).instance()
+    const { getByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      isOwner: true,
+      documentType: 'Files',
+      onRevoke,
+      onRevokeSelf
+    })
 
-    await instance.onRevoke()
+    fireEvent.click(getByText('Can Change'))
+    fireEvent.click(getByText('Remove from sharing'))
     expect(onRevoke).toBeCalled()
+    expect(onRevokeSelf).not.toBeCalled()
   })
 })
