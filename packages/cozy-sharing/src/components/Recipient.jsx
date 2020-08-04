@@ -182,12 +182,18 @@ const PermissionsWithBreakpoints = withBreakpoints()(
 
 const Status = ({ status, isMe, instance }) => {
   const { t } = useI18n()
-  const shouldShowStatus = ['pending', 'seen'].includes(status) && !isMe
-  const text = shouldShowStatus ? t(`Share.status.${status}`) : instance
 
-  let icon = 'to-the-cloud'
-  if (shouldShowStatus && status === 'pending') icon = 'paperplane'
-  else if (shouldShowStatus && status === 'seen') icon = 'eye'
+  let text, icon
+  if (isMe) {
+    text = instance
+    icon = 'to-the-cloud'
+  } else {
+    text = ['pending', 'seen'].includes(status)
+      ? t(`Share.status.${status}`)
+      : t('Share.status.pending')
+
+    icon = status === 'seen' ? 'eye' : 'paperplane'
+  }
 
   return (
     <Media>
