@@ -2,7 +2,8 @@
   "Share": {
     "status": {
       "owner": "Propriétaire",
-      "pending": "En attente",
+      "pending": "Invitation envoyée",
+      "seen": "Partage consulté",
       "ready": "Accepté",
       "refused": "Refusé",
       "error": "Erreur",

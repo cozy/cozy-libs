@@ -2,7 +2,8 @@
   "Share": {
     "status": {
       "owner": "Owner",
-      "pending": "Pending",
+      "pending": "Invitation sent",
+      "seen": "Invitation seen",
       "ready": "Accepted",
       "refused": "Refused",
       "error": "Error",

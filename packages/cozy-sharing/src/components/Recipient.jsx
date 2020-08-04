@@ -2,19 +2,18 @@ import React, { Component } from 'react'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Spinner, withBreakpoints } from 'cozy-ui/transpiled/react'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { translate, useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
 import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
 
+import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import { Text, Caption } from 'cozy-ui/transpiled/react/Text'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
 import styles from './recipient.styl'
-
-import IconEye from '../../assets/icons/icon-eye-16.svg'
-import IconPen from '../../assets/icons/icon-pen-write-16.svg'
-import IconTrash from '../../assets/icons/icon-trash-red.svg'
 
 import { Contact } from '../models'
 import Identity from './Identity'
@@ -121,16 +120,15 @@ export class Permissions extends Component {
     const hideMenu = () => this.setState({ isMenuDisplayed: false })
 
     const buttonRef = React.createRef()
+    const permissionIconName = type === 'two-way' ? 'rename' : 'eye'
 
     return (
-      <div className={classNames(styles['recipient-status'], 'u-ml-1')}>
+      <div>
         {revoking && <Spinner />}
-        {!shouldShowMenu && (
-          <span className={styles['recipient-owner']}>
-            {t(`Share.status.${status}`)}
-          </span>
+        {!shouldShowMenu && !revoking && (
+          <span>{t(`Share.status.${status}`)}</span>
         )}
-        {shouldShowMenu && (
+        {shouldShowMenu && !revoking && (
           <div>
             <DropdownButton onClick={showMenu} ref={buttonRef}>
               {t(`Share.type.${type}`)}
@@ -143,14 +141,22 @@ export class Permissions extends Component {
                 preventOverflow
               >
                 <ActionMenuItem
-                  left={type === 'two-way' ? <IconPen /> : <IconEye />}
+                  left={
+                    <Icon
+                      icon={permissionIconName}
+                      color="var(--primaryTextColor)"
+                    />
+                  }
                 >
                   {t(`Share.type.${type}`)}
                 </ActionMenuItem>
 
                 <hr />
-                <ActionMenuItem onClick={this.onRevoke} left={<IconTrash />}>
-                  <Text>
+                <ActionMenuItem
+                  onClick={this.onRevoke}
+                  left={<Icon icon="trash" color="var(--pomegranate)" />}
+                >
+                  <Text className="u-pomegranate">
                     {isOwner
                       ? t(`${documentType}.share.revoke.title`)
                       : t(`${documentType}.share.revokeSelf.title`)}
@@ -174,6 +180,27 @@ const PermissionsWithBreakpoints = withBreakpoints()(
   translate()(withClient(Permissions))
 )
 
+const Status = ({ status, isMe, instance }) => {
+  const { t } = useI18n()
+  const shouldShowStatus = ['pending', 'seen'].includes(status) && !isMe
+  const text = shouldShowStatus ? t(`Share.status.${status}`) : instance
+
+  let icon = 'to-the-cloud'
+  if (shouldShowStatus && status === 'pending') icon = 'paperplane'
+  else if (shouldShowStatus && status === 'seen') icon = 'eye'
+
+  return (
+    <Media>
+      <Img className={styles['recipient-status-icon']}>
+        <Icon icon={icon} size={10} />
+      </Img>
+      <Bd>
+        <Caption>{text}</Caption>
+      </Bd>
+    </Media>
+  )
+}
+
 const Recipient = (props, { client, t }) => {
   const { instance, isOwner, status, ...rest } = props
   const isMe =
@@ -183,20 +210,20 @@ const Recipient = (props, { client, t }) => {
   const name = Contact.getDisplayName(rest, defaultDisplayName)
 
   return (
-    <div className={classNames(styles['recipient'], 'u-mt-1')}>
-      <Avatar
-        text={Contact.getInitials(rest, defaultInitials)}
-        size={'small-plus'}
-        textId={name}
-      />
-      <div className={styles['recipient-ident-status']}>
-        <Identity
-          name={isMe ? t('Share.recipients.you') : name}
-          details={instance}
+    <CompositeRow
+      dense
+      className={classNames(styles['recipient'], 'u-ph-0')}
+      primaryText={isMe ? t('Share.recipients.you') : name}
+      secondaryText={<Status status={status} isMe={isMe} instance={instance} />}
+      image={
+        <Avatar
+          text={Contact.getInitials(rest, defaultInitials)}
+          size="small-plus"
+          textId={name}
         />
-        <PermissionsWithBreakpoints {...props} />
-      </div>
-    </div>
+      }
+      right={<PermissionsWithBreakpoints {...props} />}
+    />
   )
 }
 
