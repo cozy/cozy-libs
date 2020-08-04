@@ -14,6 +14,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
 import styles from './recipient.styl'
+import modalStyles from '../share.styl'
 
 import { Contact } from '../models'
 import Identity from './Identity'
@@ -109,6 +110,7 @@ export class Permissions extends Component {
       type,
       documentType,
       client,
+      className,
       t
     } = this.props
     const { revoking, isMenuDisplayed } = this.state
@@ -123,14 +125,18 @@ export class Permissions extends Component {
     const permissionIconName = type === 'two-way' ? 'rename' : 'eye'
 
     return (
-      <div>
+      <div className={className}>
         {revoking && <Spinner />}
         {!shouldShowMenu && !revoking && (
           <span>{t(`Share.status.${status}`)}</span>
         )}
         {shouldShowMenu && !revoking && (
           <div>
-            <DropdownButton onClick={showMenu} ref={buttonRef}>
+            <DropdownButton
+              onClick={showMenu}
+              ref={buttonRef}
+              className={modalStyles['aligned-dropdown-button']}
+            >
               {t(`Share.type.${type}`)}
             </DropdownButton>
             {isMenuDisplayed && (
@@ -219,7 +225,11 @@ const Recipient = (props, { client, t }) => {
     <CompositeRow
       dense
       className={classNames(styles['recipient'], 'u-ph-0')}
-      primaryText={isMe ? t('Share.recipients.you') : name}
+      primaryText={
+        <Text className="u-ellipsis">
+          {isMe ? t('Share.recipients.you') : name}
+        </Text>
+      }
       secondaryText={<Status status={status} isMe={isMe} instance={instance} />}
       image={
         <Avatar
@@ -228,7 +238,9 @@ const Recipient = (props, { client, t }) => {
           textId={name}
         />
       }
-      right={<PermissionsWithBreakpoints {...props} />}
+      right={
+        <PermissionsWithBreakpoints {...props} className="u-flex-shrink-0" />
+      }
     />
   )
 }
