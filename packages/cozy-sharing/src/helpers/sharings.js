@@ -4,7 +4,7 @@ import {
 } from './realtime'
 
 import { addSharing, updateSharing } from '../state'
-import { getFilesPaths } from './files'
+import { fetchFilesPaths } from './files'
 
 export const getSharingObject = (internalSharing, sharing) => {
   if (internalSharing) {
@@ -27,7 +27,7 @@ export const createSharingInStore = (
     dispatch(
       addSharing(
         sharing,
-        file.data.path || (await getFilesPaths(client, doctype, [file.data]))
+        file.data.path || (await fetchFilesPaths(client, doctype, [file.data]))
       )
     )
   })
