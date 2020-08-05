@@ -39,9 +39,8 @@ describe('EditableSharingModal', () => {
   }
   it('will set to false the shared parent / child if the document has no path', () => {
     const { component } = setup({ document: {} })
-    //expect(component).toMatchSnapshot()
+
     const mod = component.find(DumbShareModal)
-    //console.log('test', component.find(DumbShareModal))
     expect(mod.length).toBe(1)
     expect(mod.prop('hasSharedChild')).toBe(undefined)
     expect(mod.prop('hasSharedParent')).toBe(undefined)
@@ -56,7 +55,6 @@ describe('EditableSharingModal', () => {
 
     component.update()
 
-    //console.log('test', component.find(DumbShareModal))
     const mod = component.find(DumbShareModal)
     expect(mod.length).toBe(1)
     expect(mod.prop('hasSharedChild')).toBe(true)

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { getFilesPaths } from '../helpers/files'
+import { fetchFilesPaths } from '../helpers/files'
 
 export const useFetchDocumentPath = (client, document) => {
   const [documentPath, setDocumentPath] = useState(
@@ -8,7 +8,7 @@ export const useFetchDocumentPath = (client, document) => {
   useEffect(() => {
     ;(async () => {
       try {
-        const path = await getFilesPaths(client, document._type, [document])
+        const path = await fetchFilesPaths(client, document._type, [document])
         setDocumentPath(path[0])
         //eslint-disable-next-line
       } catch {}

@@ -1,4 +1,4 @@
-export const getFilesPaths = async (client, doctype, files) => {
+export const fetchFilesPaths = async (client, doctype, files) => {
   const parentDirIds = files
     .map(f => f.dir_id)
     .filter((f, idx, arr) => arr.indexOf(f) === idx)

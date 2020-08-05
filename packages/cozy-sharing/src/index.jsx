@@ -46,7 +46,7 @@ import { withClient } from 'cozy-client'
 import withLocales from './withLocales'
 
 import { fetchNextPermissions } from './fetchNextPermissions'
-import { getFilesPaths } from './helpers/files'
+import { fetchFilesPaths } from './helpers/files'
 import {
   getSharingObject,
   createSharingInStore,
@@ -193,7 +193,7 @@ export class SharingProvider extends Component {
     const folderPaths = resp.data
       .filter(f => f.type === 'directory' && !f.trashed)
       .map(f => f.path)
-    const filePaths = await getFilesPaths(
+    const filePaths = await fetchFilesPaths(
       client,
       doctype,
       resp.data.filter(f => f.type !== 'directory' && !f.trashed)
@@ -212,7 +212,7 @@ export class SharingProvider extends Component {
     this.dispatch(
       addSharing(
         resp.data,
-        document.path || (await getFilesPaths(client, doctype, [document]))
+        document.path || (await fetchFilesPaths(client, doctype, [document]))
       )
     )
     return resp.data
@@ -236,7 +236,7 @@ export class SharingProvider extends Component {
         revokeRecipient(
           sharing,
           recipientIndex,
-          document.path || (await getFilesPaths(client, doctype, [document]))
+          document.path || (await fetchFilesPaths(client, doctype, [document]))
         )
       )
     })
@@ -252,7 +252,7 @@ export class SharingProvider extends Component {
       revokeRecipient(
         sharing,
         recipientIndex,
-        document.path || (await getFilesPaths(client, doctype, [document]))
+        document.path || (await fetchFilesPaths(client, doctype, [document]))
       )
     )
   }
