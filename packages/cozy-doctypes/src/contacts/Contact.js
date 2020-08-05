@@ -9,6 +9,12 @@ const getPrimaryOrFirst = property => obj => {
   return obj[property].find(property => property.primary) || obj[property][0]
 }
 
+const logDeprecated = methodName =>
+  log(
+    'warn',
+    `${methodName} from cozy-doctypes contact is deprecated, use cozy-client/models/contacts/${methodName} instead`
+  )
+
 /**
  * Class representing the contact model.
  * @extends Document
@@ -31,6 +37,7 @@ class Contact extends Document {
    * @return {string} - the contact's initials
    */
   static getInitials(contact) {
+    logDeprecated('getInitials')
     if (typeof contact === 'string') {
       log(
         'warn',
@@ -64,6 +71,7 @@ class Contact extends Document {
   // TODO: sadly we have different versions of contacts' doctype to handle...
   // A migration tool on the stack side is needed here
   static getPrimaryEmail(contact) {
+    logDeprecated('getPrimaryEmail')
     return Array.isArray(contact.email)
       ? getPrimaryOrFirst('email')(contact).address
       : contact.email
@@ -76,6 +84,7 @@ class Contact extends Document {
    * @return {string} - The contact's main cozy
    */
   static getPrimaryCozy(contact) {
+    logDeprecated('getPrimaryCozy')
     return Array.isArray(contact.cozy)
       ? getPrimaryOrFirst('cozy')(contact).url
       : contact.url
@@ -88,6 +97,7 @@ class Contact extends Document {
    * @return {string} - The contact's main phone number
    */
   static getPrimaryPhone(contact) {
+    logDeprecated('getPrimaryPhone')
     return getPrimaryOrFirst('phone')(contact).number
   }
 
@@ -98,6 +108,7 @@ class Contact extends Document {
    * @return {string} - The contact's main address
    */
   static getPrimaryAddress(contact) {
+    logDeprecated('getPrimaryAddress')
     return getPrimaryOrFirst('address')(contact).formattedAddress
   }
 
@@ -108,6 +119,7 @@ class Contact extends Document {
    * @return {string} - The contact's fullname
    */
   static getFullname(contact) {
+    logDeprecated('getFullname')
     if (contact.fullname) {
       return contact.fullname
     } else if (contact.name) {
@@ -134,6 +146,7 @@ class Contact extends Document {
    * @return {string} - the contact's display name
    **/
   static getDisplayName(contact) {
+    logDeprecated('getDisplayName')
     return Contact.getFullname(contact) || Contact.getPrimaryEmail(contact)
   }
 }
