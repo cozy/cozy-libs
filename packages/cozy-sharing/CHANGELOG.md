@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.3...cozy-sharing@1.13.4) (2020-08-05)
+
+
+### Bug Fixes
+
+* Shared Element when the document has no path ([#1054](https://github.com/cozy/cozy-libs/issues/1054)) ([6ebd223](https://github.com/cozy/cozy-libs/commit/6ebd223))
+
+
+
+
+
 ## [1.13.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.2...cozy-sharing@1.13.3) (2020-08-03)
 
 **Note:** Version bump only for package cozy-sharing
