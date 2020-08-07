@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
+import React, { useState, useCallback } from 'react'
 import { useClient } from 'cozy-client'
 import classNames from 'classnames'
 import PropTypes from 'prop-types'
-import { Spinner, withBreakpoints } from 'cozy-ui/transpiled/react'
-import { translate, useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { withClient } from 'cozy-client'
+import { Spinner } from 'cozy-ui/transpiled/react'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
 
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
@@ -78,114 +77,100 @@ export const UserAvatar = ({ url, size, ...rest }) => (
   </div>
 )
 
-export class Permissions extends Component {
-  state = {
-    revoking: false,
-    isMenuDisplayed: false
-  }
+export const Permissions = ({
+  isOwner,
+  status,
+  instance,
+  type,
+  document,
+  documentType,
+  className,
+  onRevoke,
+  onRevokeSelf,
+  sharingId,
+  index
+}) => {
+  const { t } = useI18n()
+  const client = useClient()
+  const [revoking, setRevoking] = useState(false)
+  const [isMenuDisplayed, setIsMenuDisplayed] = useState(false)
+  const isMe =
+    instance !== undefined && instance === client.options.uri && !isOwner
+  const shouldShowMenu = !revoking && status !== 'owner' && (isMe || isOwner)
 
-  onRevoke = async () => {
-    const {
-      onRevoke,
-      document,
-      sharingId,
-      index,
-      isOwner,
-      onRevokeSelf
-    } = this.props
-    this.setState({ revoking: true })
+  const showMenu = () => setIsMenuDisplayed(true)
+  const hideMenu = () => setIsMenuDisplayed(false)
+
+  const onRevokeClick = useCallback(async () => {
+    setRevoking(true)
     if (isOwner) {
       await onRevoke(document, sharingId, index)
     } else {
       await onRevokeSelf(document)
     }
 
-    this.setState({ revoking: false })
-  }
+    setRevoking(false)
+  }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, index])
 
-  render() {
-    const {
-      isOwner,
-      status,
-      instance,
-      type,
-      documentType,
-      client,
-      className,
-      t
-    } = this.props
-    const { revoking, isMenuDisplayed } = this.state
-    const isMe =
-      instance !== undefined && instance === client.options.uri && !isOwner
-    const shouldShowMenu = !revoking && status !== 'owner' && (isMe || isOwner)
+  const buttonRef = React.createRef()
+  const permissionIconName = type === 'two-way' ? 'rename' : 'eye'
 
-    const showMenu = () => this.setState({ isMenuDisplayed: true })
-    const hideMenu = () => this.setState({ isMenuDisplayed: false })
-
-    const buttonRef = React.createRef()
-    const permissionIconName = type === 'two-way' ? 'rename' : 'eye'
-
-    return (
-      <div className={className}>
-        {revoking && <Spinner />}
-        {!shouldShowMenu && !revoking && (
-          <span>{t(`Share.status.${status}`)}</span>
-        )}
-        {shouldShowMenu && !revoking && (
-          <div>
-            <DropdownButton
-              onClick={showMenu}
-              ref={buttonRef}
-              className={modalStyles['aligned-dropdown-button']}
+  return (
+    <div className={className}>
+      {revoking && <Spinner />}
+      {!shouldShowMenu && !revoking && (
+        <span>{t(`Share.status.${status}`)}</span>
+      )}
+      {shouldShowMenu && !revoking && (
+        <>
+          <DropdownButton
+            onClick={showMenu}
+            ref={buttonRef}
+            className={modalStyles['aligned-dropdown-button']}
+          >
+            {t(`Share.type.${type}`)}
+          </DropdownButton>
+          {isMenuDisplayed && (
+            <ActionMenu
+              onClose={hideMenu}
+              placement="bottom-end"
+              anchorElRef={buttonRef}
+              preventOverflow
             >
-              {t(`Share.type.${type}`)}
-            </DropdownButton>
-            {isMenuDisplayed && (
-              <ActionMenu
-                onClose={hideMenu}
-                placement="bottom-end"
-                anchorElRef={buttonRef}
-                preventOverflow
+              <ActionMenuItem
+                left={
+                  <Icon
+                    icon={permissionIconName}
+                    color="var(--primaryTextColor)"
+                  />
+                }
               >
-                <ActionMenuItem
-                  left={
-                    <Icon
-                      icon={permissionIconName}
-                      color="var(--primaryTextColor)"
-                    />
-                  }
-                >
-                  {t(`Share.type.${type}`)}
-                </ActionMenuItem>
+                {t(`Share.type.${type}`)}
+              </ActionMenuItem>
 
-                <hr />
-                <ActionMenuItem
-                  onClick={this.onRevoke}
-                  left={<Icon icon="trash" color="var(--pomegranate)" />}
-                >
-                  <Text className="u-pomegranate">
-                    {isOwner
-                      ? t(`${documentType}.share.revoke.title`)
-                      : t(`${documentType}.share.revokeSelf.title`)}
-                  </Text>
-                  <Caption>
-                    {isOwner
-                      ? t(`${documentType}.share.revoke.desc`)
-                      : t(`${documentType}.share.revokeSelf.desc`)}
-                  </Caption>
-                </ActionMenuItem>
-              </ActionMenu>
-            )}
-          </div>
-        )}
-      </div>
-    )
-  }
+              <hr />
+              <ActionMenuItem
+                onClick={onRevokeClick}
+                left={<Icon icon="trash" color="var(--pomegranate)" />}
+              >
+                <Text className="u-pomegranate">
+                  {isOwner
+                    ? t(`${documentType}.share.revoke.title`)
+                    : t(`${documentType}.share.revokeSelf.title`)}
+                </Text>
+                <Caption>
+                  {isOwner
+                    ? t(`${documentType}.share.revoke.desc`)
+                    : t(`${documentType}.share.revokeSelf.desc`)}
+                </Caption>
+              </ActionMenuItem>
+            </ActionMenu>
+          )}
+        </>
+      )}
+    </div>
+  )
 }
-
-const PermissionsWithBreakpoints = withBreakpoints()(
-  translate()(withClient(Permissions))
-)
 
 const Status = ({ status, isMe, instance }) => {
   const { t } = useI18n()
@@ -250,9 +235,7 @@ const Recipient = props => {
           textId={name}
         />
       }
-      right={
-        <PermissionsWithBreakpoints {...props} className="u-flex-shrink-0" />
-      }
+      right={<Permissions {...props} className="u-flex-shrink-0" />}
     />
   )
 }
