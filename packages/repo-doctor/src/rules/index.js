@@ -1,32 +1,39 @@
 const { DepUpToDate, NoForbiddenDep } = require('./dependencies')
 const { LocalesInRepo } = require('./locales')
+const { TravisIsOK } = require('./travis')
 const validate = require('schema-utils')
 
-const ruleFns = { DepUpToDate, NoForbiddenDep, LocalesInRepo }
+const ruleFns = { DepUpToDate, NoForbiddenDep, LocalesInRepo, TravisIsOK }
 
 /**
  * Instantiate rules according to config and CLI args
  */
 const setupRules = (config, args) => {
-  const rules = config.rules.map(rule => {
-    let ruleName
-    let ruleConfig
-    if (Array.isArray(rule)) {
-      ruleName = rule[0]
-      ruleConfig = rule[1]
-    } else {
-      ruleName = rule
-      ruleConfig = {}
-    }
+  const rules = config.rules
+    .map(rule => {
+      let ruleName
+      let ruleConfig
+      if (Array.isArray(rule)) {
+        ruleName = rule[0]
+        ruleConfig = rule[1]
+      } else if (rule) {
+        ruleName = rule
+        ruleConfig = {}
+      }
 
-    let Rule = ruleFns[ruleName]
+      let Rule = ruleFns[ruleName]
+      if (!Rule) {
+        console.warn('Unknown rule', rule)
+        return null
+      }
 
-    if (Rule.configSchema) {
-      validate(Rule.configSchema, {}, ruleConfig)
-    }
+      if (Rule.configSchema) {
+        validate(Rule.configSchema, {}, ruleConfig)
+      }
 
-    return new Rule(ruleConfig, args)
-  })
+      return new Rule(ruleConfig, args)
+    })
+    .filter(Boolean)
   return rules
 }
 

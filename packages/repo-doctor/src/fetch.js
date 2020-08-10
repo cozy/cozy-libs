@@ -52,15 +52,25 @@ const fetchDependencyInfo = memoize(
 
 const fetchRepositoryDirectoryContent = memoize(
   async (repoSlug, pathName) => {
-    return await fetch(
+    return fetch(
       `https://api.github.com/repos/${repoSlug}/contents/${pathName}`
     ).then(resp => resp.json())
   },
   (repoSlug, pathName) => `${repoSlug} / ${pathName}`
 )
 
+const fetchRepositoryFileContent = memoize(
+  async (repoSlug, pathName) => {
+    return fetch(
+      `https://raw.githubusercontent.com/${repoSlug}/master/${pathName}`
+    )
+  },
+  (repoSlug, pathName) => `${repoSlug} / ${pathName}`
+)
+
 module.exports = {
   fetchRepositoryInfo,
+  fetchDependencyInfo,
   fetchRepositoryDirectoryContent,
-  fetchDependencyInfo
+  fetchRepositoryFileContent
 }
