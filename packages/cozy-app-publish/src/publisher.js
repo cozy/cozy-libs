@@ -66,6 +66,22 @@ const publisher = ({
   const appVersion = await getAppVersion(ctx)
   const appBuildUrl = getAppBuildURL ? getAppBuildURL(ctx) : ctx.appBuildUrl
 
+  logger.log(
+    `Will publish ${colorize.bold(appSlug)}@${colorize.bold(
+      appVersion
+    )} to ${colorize.bold(registryUrl)} (space: ${spaceName || 'default one'})`
+  )
+
+  if (showConfirmation && !yes) {
+    const goFurther = await promptConfirm(
+      'Are you sure you want to publish this application above?'
+    )
+    if (!goFurther) {
+      logger.log('Publishing cancelled')
+      return
+    }
+  }
+
   let publishOptions
   try {
     publishOptions = await prepublish({
@@ -85,28 +101,12 @@ const publisher = ({
     throw new VError(error, 'Prepublish failed')
   }
 
-  // ready publish the application on the registry
-  logger.log(
-    `Attempting to publish ${colorize.bold(
-      publishOptions.appSlug
-    )} (version ${colorize.bold(
-      publishOptions.appVersion
-    )}) from ${colorize.bold(
-      publishOptions.appBuildUrl
-    )} (sha256 ${colorize.bold(publishOptions.sha256Sum)}) to ${colorize.bold(
-      publishOptions.registryUrl
-    )} (space: ${publishOptions.spaceName || 'default one'})`
-  )
-  logger.log()
-
-  if (showConfirmation && !yes) {
-    const goFurther = await promptConfirm(
-      'Are you sure you want to publish this application above?'
+  if (!appBuildUrl && publishOptions.appBuildUrl) {
+    logger.log(
+      `Uploaded app to ${publishOptions.appBuildUrl} (sha256 ${colorize.bold(
+        publishOptions.sha256Sum
+      )})`
     )
-    if (!goFurther) {
-      logger.log('Publishing cancelled')
-      return
-    }
   }
 
   try {
