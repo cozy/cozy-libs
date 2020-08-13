@@ -31,7 +31,7 @@ const setupRules = (config, args) => {
 }
 
 /**
- * Yields ruleResults
+ * Executes rules against a repository and yields rule results
  */
 const runRules = async function*(repositoryInfo, rules) {
   for (const rule of rules) {
