@@ -1,17 +1,38 @@
 const BankAccount = require('./BankAccount')
 
 describe('account reconciliation', () => {
+  const localAccounts = [
+    {
+      _id: 'a1',
+      number: '1',
+      balance: 50,
+      relationships: { aRelationship: { _id: 'fake-id', _type: 'fake-type' } }
+    }
+  ]
+  const remoteAccounts = [
+    {
+      number: '1',
+      balance: 100,
+      relationships: {
+        aRelationship: { _id: 'old-fake-id', _type: 'old-fake-type' },
+        anotherRelationship: { _id: 'fake-id2', _type: 'fake-type2' }
+      }
+    },
+    { number: '2', balance: 200 }
+  ]
+
   it('should correctly match linxo accounts to cozy accounts through number', () => {
-    const localAccounts = [{ _id: 'a1', number: '1', balance: 50 }]
-    const remoteAccounts = [
-      { number: '1', balance: 100 },
-      { number: '2', balance: 200 }
-    ]
     const matchedAccounts = BankAccount.reconciliate(
       remoteAccounts,
       localAccounts
     )
-    expect(matchedAccounts.find(x => x.number === '1')._id).toBe('a1')
+
+    const accountA1 = matchedAccounts.find(x => x.number === '1')
+    expect(accountA1._id).toBe('a1')
+    expect(accountA1.relationships).toEqual({
+      aRelationship: { _id: 'fake-id', _type: 'fake-type' }, // aRelationship is updated
+      anotherRelationship: { _id: 'fake-id2', _type: 'fake-type2' } // anotherRelationship is kept
+    })
     expect(matchedAccounts.find(x => x.number !== '1')._id).toBe(undefined)
     expect(matchedAccounts.length).toBe(2)
   })

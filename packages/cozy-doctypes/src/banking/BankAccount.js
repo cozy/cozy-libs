@@ -1,5 +1,6 @@
 const groupBy = require('lodash/groupBy')
 const get = require('lodash/get')
+const merge = require('lodash/merge')
 const Document = require('../Document')
 const matching = require('./matching-accounts')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
@@ -13,6 +14,11 @@ class BankAccount extends Document {
     return matchings.map(matching => {
       return {
         ...matching.account,
+        relationships: merge(
+          {},
+          matching.account.relationships,
+          matching.match ? matching.match.relationships : null
+        ),
         _id: matching.match ? matching.match._id : undefined
       }
     })
