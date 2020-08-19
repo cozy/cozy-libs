@@ -215,6 +215,20 @@ const findMatch = (account, existingAccounts) => {
   }
 }
 
+/**
+ * Matches existing accounts with accounts fetched on a vendor
+ *
+ * @typedef {MatchResult}
+ * @property {io.cozy.account} account - Account from fetched accounts
+ * @property {io.cozy.account} match - Existing account that was matched. Null if no match was found.
+ * @property {string} method - How the two accounts were matched
+ *
+ * @param  {io.cozy.account} fetchedAccounts - Account that have been fetched
+ * on the vendor and that will be matched with existing accounts
+ * @param  {io.cozy.accounts} existingAccounts - Will be match against (those
+ * io.cozy.accounts already have an _id)
+ * @return {Array<MatchResult>} - Match results (as many results as fetchedAccounts.length)
+ */
 const matchAccounts = (fetchedAccounts, existingAccounts) => {
   fetchedAccounts = fetchedAccounts.map(normalizeAccount)
   const toMatch = [...existingAccounts].map(normalizeAccount)
