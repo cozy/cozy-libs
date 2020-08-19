@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.41.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.41.2...cozy-harvest-lib@1.41.3) (2020-08-19)
+
+
+### Bug Fixes
+
+* **Harvest:** Maif epa url association error ([25e6dc8](https://github.com/cozy/cozy-libs/commit/25e6dc8))
+
+
+
+
+
 ## [1.41.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.41.1...cozy-harvest-lib@1.41.2) (2020-08-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
