@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.74.4](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.3...cozy-doctypes@1.74.4) (2020-08-20)
+
+
+### Bug Fixes
+
+* When matching accounts, relationships are kept ([1051988](https://github.com/cozy/cozy-libs/commit/1051988))
+
+
+
+
+
 ## [1.74.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.2...cozy-doctypes@1.74.3) (2020-08-05)
 
 
