@@ -9,7 +9,7 @@ import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListSubHeader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubHeader'
+import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
@@ -94,7 +94,7 @@ const DumbContracts = ({ contracts, doctype }) => {
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
   return (
     <MuiCozyTheme>
-      <ListSubHeader>{t(`contracts.headers.${headerKey}`)}</ListSubHeader>
+      <ListSubheader>{t(`contracts.headers.${headerKey}`)}</ListSubheader>
       <List dense>
         {contracts &&
           contracts.data &&

@@ -12,7 +12,7 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListSubHeader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubHeader'
+import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import flag from 'cozy-flags'
@@ -64,7 +64,7 @@ const ConfigurationTab = ({
         )}
         {!konnector.oauth ? (
           <div>
-            <ListSubHeader>{t('modal.updateAccount.title')}</ListSubHeader>
+            <ListSubheader>{t('modal.updateAccount.title')}</ListSubheader>
             <List dense className="u-pt-0">
               <ListItem
                 className="u-mt-half u-c-pointer"
