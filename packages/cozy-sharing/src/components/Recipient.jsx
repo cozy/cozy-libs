@@ -135,7 +135,7 @@ export class Status extends Component {
         )}
         {shouldShowMenu && (
           <MenuAwareMobile
-            text={
+            label={
               status === 'ready' && type
                 ? t(`Share.type.${type}`)
                 : t(`Share.status.${status}`)
