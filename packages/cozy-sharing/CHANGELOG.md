@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.8](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.7...cozy-sharing@1.13.8) (2020-08-20)
+
+
+### Bug Fixes
+
+* Use label instead of text to remove Proptypes warning ([10616e2](https://github.com/cozy/cozy-libs/commit/10616e2))
+
+
+
+
+
 ## [1.13.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.6...cozy-sharing@1.13.7) (2020-08-20)
 
 **Note:** Version bump only for package cozy-sharing

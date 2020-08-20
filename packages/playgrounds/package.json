@@ -1,7 +1,7 @@
 {
   "name": "cozy-playgrounds",
   "private": true,
-  "version": "1.15.7",
+  "version": "1.15.8",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -15,7 +15,7 @@
     "cozy-device-helper": "^1.10.1",
     "cozy-doctypes": "^1.74.4",
     "cozy-realtime": "^3.10.3",
-    "cozy-sharing": "^1.13.7",
+    "cozy-sharing": "^1.13.8",
     "cozy-ui": "35.32.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
