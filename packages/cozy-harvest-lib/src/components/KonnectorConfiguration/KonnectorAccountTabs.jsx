@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import flow from 'lodash/flow'
 
 import {
   Tab,
@@ -92,4 +91,4 @@ KonnectorAccountTabs.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default flow(translate())(KonnectorAccountTabs)
+export default translate()(KonnectorAccountTabs)
