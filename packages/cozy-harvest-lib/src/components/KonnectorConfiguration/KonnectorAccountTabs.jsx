@@ -17,6 +17,8 @@ import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 import tabSpecs from './tabSpecs'
 
+import { useI18n } from "cozy-ui/transpiled/react";
+
 const WarningError = () => (
   <Icon icon="warning" size={13} className="u-ml-half" />
 )
@@ -26,10 +28,11 @@ export const KonnectorAccountTabs = ({
   trigger: initialTrigger,
   account,
   onAccountDeleted,
+
   //TODO rename to onAddAccount
-  addAccount,
-  t
+  addAccount
 }) => {
+  const { t } = useI18n()
   return (
     <FlowProvider initialTrigger={initialTrigger} konnector={konnector}>
       {({ flow }) => {
