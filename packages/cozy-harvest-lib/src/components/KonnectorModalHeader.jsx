@@ -2,19 +2,20 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { ModalHeader } from 'cozy-ui/transpiled/react/Modal'
 import KonnectorIcon from './KonnectorIcon'
+import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 
 const KonnectorModalHeader = ({ konnector, children }) => {
   return (
     <ModalHeader className="u-pr-2">
-      <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
-        <div className="u-w-3 u-h-3 u-mr-half">
+      <Media>
+        <Img className="u-w-3 u-h-3 u-mr-1">
           <KonnectorIcon konnector={konnector} />
-        </div>
-        <div className="u-flex-grow-1 u-mr-half">
+        </Img>
+        <div className="u-flex-grow-1 u-mr-1">
           <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
           {children}
         </div>
-      </div>
+      </Media>
     </ModalHeader>
   )
 }
