@@ -4,7 +4,7 @@
   <a href="https://www.npmjs.com/package/cozy-realtime">
     <img src="https://img.shields.io/npm/v/cozy-realtime.svg" alt="npm version" />
   </a>
-  <a href="https://github.com/cozy/cozy-realtime/blob/master/LICENSE">
+  <a href="https://github.com/cozy/cozy-libs/blob/master/LICENSE">
     <img src="https://img.shields.io/npm/l/cozy-realtime.svg" alt="license" />
   </a>
   <a href="https://travis-ci.org/cozy/cozy-realtime">
@@ -12,12 +12,6 @@
   </a>
   <a href="https://npmcharts.com/compare/cozy-realtime">
     <img src="https://img.shields.io/npm/dm/cozy-realtime.svg" alt="npm downloads" />
-  </a>
-  <a href="https://david-dm.org/cozy/cozy-realtime">
-    <img src="https://img.shields.io/david/cozy/cozy-realtime.svg" alt="david-dm" />
-  </a>
-  <a href="https://david-dm.org/cozy/cozy-realtime">
-    <img src="https://img.shields.io/david/dev/cozy/cozy-realtime.svg" alt="david-dm" />
   </a>
   <a href="https://renovateapp.com/">
     <img src="https://img.shields.io/badge/renovate-enabled-brightgreen.svg" alt="renovate" />
