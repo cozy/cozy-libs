@@ -7,6 +7,10 @@ jest.mock('../../src/connections/accounts', () => ({
   findAccount: jest.fn()
 }))
 
+jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
+  isMobile: false
+}))
+
 const accountsMock = [
   {
     account: {
@@ -40,6 +44,7 @@ describe('AccountModal', () => {
         accountId={accountIdMock}
         accounts={accountsMock}
         pushHistory={mockHistoryPush}
+        breakpoints={{ isMobile: true }}
       />
     )
     return { component, mockHistoryPush }
@@ -88,8 +93,11 @@ describe('AccountModal', () => {
       component.find('AccountSelectBox').prop('onCreate')()
       expect(mockHistoryPush).toHaveBeenCalledWith('/new')
 
-      const ModalContent = component.find('ModalContent').childAt(0)
-      ModalContent.prop('addAccount')()
+      const konnectorAccountTabs = component
+        .find('ModalContent')
+        .at(1)
+        .childAt(0)
+      konnectorAccountTabs.prop('addAccount')()
       expect(mockHistoryPush).toHaveBeenCalledWith('/new')
     })
   })

@@ -4,6 +4,10 @@ import { DataTab } from 'components/KonnectorConfiguration/DataTab'
 import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
 import AppLinkCard from 'components/cards/AppLinkCard'
 
+jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
+  isMobile: false
+}))
+
 describe('DataTab', () => {
   beforeEach(() => {
     // LaunchTriggerCard inside DataTab will emit propType errors because there is no I18n wrapper, but we're not interested in testing LaunchTriggerCard here.

@@ -17,7 +17,7 @@ import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 import tabSpecs from './tabSpecs'
 
-import { useI18n } from "cozy-ui/transpiled/react";
+import { useI18n } from 'cozy-ui/transpiled/react'
 
 const WarningError = () => (
   <Icon icon="warning" size={13} className="u-ml-half" />

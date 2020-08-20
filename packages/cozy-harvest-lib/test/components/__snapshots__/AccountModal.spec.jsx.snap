@@ -56,7 +56,10 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       }
     />
   </KonnectorModalHeader>
-  <ModalContent>
+  <ModalContent />
+  <ModalContent
+    className="u-p-0"
+  >
     <withI18n(KonnectorAccountTabs)
       account={
         Object {
@@ -116,7 +119,10 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       }
     />
   </KonnectorModalHeader>
-  <ModalContent>
+  <ModalContent />
+  <ModalContent
+    className="u-p-0"
+  >
     <withI18n(KonnectorAccountTabs)
       account={
         Object {
