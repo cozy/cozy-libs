@@ -1,5 +1,6 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import memoize from 'lodash/memoize'
 
 import { Account } from 'cozy-doctypes'
 import Button from 'cozy-ui/transpiled/react/Button'
@@ -8,14 +9,13 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListSubHeader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubHeader'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
+import flag from 'cozy-flags'
 
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import DeleteAccountButton from '../../DeleteAccountButton'
@@ -25,6 +25,15 @@ import Contracts from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react'
 
+const contractRx = /io\.cozy\.[a-z]+\.accounts/
+
+const getContractDoctypeFromKonnector = memoize(konnector => {
+  const contractPermission = Object.values(konnector.permissions).find(
+    permission => permission.type.match(contractRx)
+  )
+  return contractPermission && contractPermission.type
+})
+
 const ConfigurationTab = ({
   konnector,
   account,
@@ -33,7 +42,6 @@ const ConfigurationTab = ({
   flow
 }) => {
   const { t } = useI18n()
-  const { isMobile } = useBreakpoints()
   const { pushHistory } = useContext(MountPointContext)
   const flowState = flow.getState()
   const { error, running } = flowState
@@ -43,6 +51,7 @@ const ConfigurationTab = ({
   )
   const hasLoginError = error && error.isLoginError()
 
+  const contractDoctype = getContractDoctypeFromKonnector(konnector)
   return (
     <ModalContent className={'u-p-0'}>
       <Stack spacing="m">
@@ -82,11 +91,13 @@ const ConfigurationTab = ({
             </List>
           </div>
         ) : null}
-        <Contracts
-          doctype="io.cozy.bank.accounts"
-          konnector={konnector}
-          account={account}
-        />
+        {flag('harvest.show-contracts') && contractDoctype ? (
+          <Contracts
+            doctype={contractDoctype}
+            konnector={konnector}
+            account={account}
+          />
+        ) : null}
         <div className="u-flex u-flex-row">
           <DeleteAccountButton
             account={account}
