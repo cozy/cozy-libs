@@ -18,6 +18,7 @@ import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import DeleteAccountButton from '../../DeleteAccountButton'
 import { MountPointContext } from '../../MountPointContext'
 import tabSpecs from '../tabSpecs'
+import Contracts from './Contracts'
 
 import { useI18n } from "cozy-ui/transpiled/react";
 
@@ -76,6 +77,11 @@ const ConfigurationTab = ({
           </List>
         </div>
       ) : null}
+      <Contracts
+        doctype="io.cozy.bank.accounts"
+        konnector={konnector}
+        account={account}
+      />
       <div className="u-flex u-flex-row">
         <DeleteAccountButton
           account={account}
