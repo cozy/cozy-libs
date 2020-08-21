@@ -1,6 +1,6 @@
 import { get, set, uniqBy, flatten } from 'lodash'
 
-const PARTS_TO_DELETE = ['(sans Secure Key)']
+const PARTS_TO_DELETE = [' (sans Secure Key)']
 
 export const getAccountInstitutionLabel = account => {
   if (!account) {

@@ -19,7 +19,7 @@
       "currency": "EUR",
       "iban": "FR7616275105013700467740644",
       "id": "eb28fde38c8e024d56ea98217114237d",
-      "institutionLabel": "Caisse d'Épargne Particuliers",
+      "institutionLabel": "Caisse d'Épargne Particuliers (sans Secure Key)",
       "label": "CPT PARTS SOCIALES",
       "metadata": {
         "dateImport": "2020-08-19T14:49:08.949Z",
@@ -44,7 +44,7 @@
           ]
         }
       },
-      "shortLabel": "CPT PARTS SOCIALES",
+      "shortLabel": "Mon compte sociétaire",
       "type": "Market",
       "vendorId": "2412"
     }

@@ -36,7 +36,9 @@ describe('EditContract', () => {
 
   it('should show fields of the bank account', () => {
     const { root } = setup()
-    expect(root.getByPlaceholderText('Label').value).toBe('CPT PARTS SOCIALES')
+    expect(root.getByPlaceholderText('Label').value).toBe(
+      'Mon compte sociétaire'
+    )
     expect(root.getByPlaceholderText('Bank').value).toBe(
       "Caisse d'Épargne Particuliers"
     )

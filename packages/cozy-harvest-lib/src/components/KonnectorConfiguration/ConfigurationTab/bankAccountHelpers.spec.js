@@ -1,31 +1,12 @@
-import { getAccountType } from './bankAccountHelpers'
+import {
+  getAccountInstitutionLabel,
+  getAccountLabel
+} from './bankAccountHelpers'
+import bankAccountFixture from './bank-account-fixture.json'
 
-describe('getAccountType', () => {
-  it('should map types correctly', () => {
-    const accountTypes = {
-      Other: ['Unkown', 'None'],
-      LongTermSavings: [
-        'Article83',
-        'LifeInsurance',
-        'Madelin',
-        'Market',
-        'Mortgage',
-        'PEA',
-        'PEE',
-        'Perco',
-        'Perp',
-        'RSP'
-      ],
-      Business: ['Asset', 'Capitalisation', 'Liability'],
-      Checkings: ['Bank', 'Cash', 'Deposit'],
-      Loan: ['ConsumerCredit', 'RevolvingCredit'],
-      CreditCard: ['Credit card']
-    }
-
-    for (const [mapped, originals] of Object.entries(accountTypes)) {
-      for (const original of originals) {
-        expect(getAccountType({ type: original })).toBe(mapped)
-      }
-    }
-  })
+test('helpers', () => {
+  expect(getAccountInstitutionLabel(bankAccountFixture)).toEqual(
+    "Caisse d'Épargne Particuliers"
+  )
+  expect(getAccountLabel(bankAccountFixture)).toEqual('Mon compte sociétaire')
 })
