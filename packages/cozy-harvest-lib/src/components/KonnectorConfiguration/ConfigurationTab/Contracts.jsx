@@ -12,8 +12,14 @@ import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
-import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import ExperimentalDialog, {
+  ExperimentalDialogTitle,
+  ExperimentalDialogActions
+} from 'cozy-ui/transpiled/react/labs/ExperimentalDialog'
+
+import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
+import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
 
 import { getAccountLabel } from './bankAccountHelpers'
 import EditContract from './EditContract'
@@ -33,15 +39,18 @@ const makeContractsConn = ({ account }) => {
 
 const EditModal = ({ contract, dismissAction }) => {
   return (
-    <Modal mobileFullscreen dismissAction={dismissAction}>
-      <ModalContent>
+    <ExperimentalDialog>
+      <DialogCloseButton onClick={dismissAction} />
+      <DialogContent>
         <EditContract
+          TitleWrapper={ExperimentalDialogTitle}
+          FormControlsWrapper={ExperimentalDialogActions}
           account={contract}
           onCancel={dismissAction}
           onSuccess={dismissAction}
         />
-      </ModalContent>
-    </Modal>
+      </DialogContent>
+    </ExperimentalDialog>
   )
 }
 

@@ -1,5 +1,6 @@
 import { set } from 'lodash'
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
@@ -21,10 +22,9 @@ import ExperimentalDialog, {
 import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
 
-import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
+import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 import NarrowContent from 'cozy-ui/transpiled/react/NarrowContent'
 import withLocales from '../../hoc/withLocales'
-import { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import {
   getAccountLabel,
@@ -49,7 +49,7 @@ const EditBankAccountForm = props => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
 
-  const { account, onSubmit, onCancel, ...rest } = props
+  const { account, onSubmit, onCancel, FormControlsWrapper, ...rest } = props
 
   const [shortLabel, setShortLabel] = useState(getAccountLabel(account))
   const [owners, setOwners] = useState(getAccountOwners(account))
@@ -103,17 +103,24 @@ const EditBankAccountForm = props => {
           variant={fieldVariant}
         />
       </Stack>
-      <FormControls onCancel={onCancel} t={t} />
+      <FormControlsWrapper>
+        <FormControls onCancel={onCancel} t={t} />
+      </FormControlsWrapper>
     </form>
   )
 }
 
+EditBankAccountForm.propTypes = {
+  /** The Component used to wrap the form buttons */
+  FormControlsWrapper: PropTypes.node.isRequired
+}
+
 const FormControls = props => {
   const { t } = useI18n()
-  const { onCancel, form, ...rest } = props
+  const { onCancel, form } = props
 
   return (
-    <div className="u-mt-2" {...rest}>
+    <>
       <Button
         label={t('contractForm.cancel')}
         theme="secondary"
@@ -125,7 +132,7 @@ const FormControls = props => {
         label={t('contractForm.apply')}
         theme="primary"
       />
-    </div>
+    </>
   )
 }
 
@@ -184,7 +191,14 @@ const EditBankAccount = props => {
   const { isMobile } = useBreakpoints()
   const client = useClient()
 
-  const { account, onAfterRemove, onSuccess, onCancel, TitleComponent } = props
+  const {
+    account,
+    onAfterRemove,
+    onSuccess,
+    onCancel,
+    TitleWrapper,
+    FormControlsWrapper
+  } = props
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const [deleting, setDeleting] = useState(false)
@@ -234,10 +248,8 @@ const EditBankAccount = props => {
         'u-pt-2': !isMobile
       })}
     >
+      <TitleWrapper>{getAccountLabel(account)}</TitleWrapper>
       <Media className="u-maw-7">
-        <Bd>
-          <TitleComponent>{getAccountLabel(account)}</TitleComponent>
-        </Bd>
         {!isMobile && (
           <Img>
             <Button
@@ -251,6 +263,7 @@ const EditBankAccount = props => {
       </Media>
       <NarrowContent className={cx({ 'u-mt-2': !isMobile })}>
         <EditBankAccountForm
+          FormControlsWrapper={FormControlsWrapper}
           account={account}
           onSubmit={fields => handleSaveAccount(account, fields)}
           onSuccess={onSuccess}
@@ -277,8 +290,11 @@ const EditBankAccount = props => {
   )
 }
 
-EditBankAccount.defaultProps = {
-  TitleComponent: SubTitle
+EditBankAccount.propTypes = {
+  /** The Component used to wrap the title */
+  TitleWrapper: PropTypes.node.isRequired,
+  /** The Component used to wrap the form buttons */
+  FormControlsWrapper: PropTypes.node.isRequired
 }
 
 export default withLocales(EditBankAccount)
