@@ -23,7 +23,7 @@ import { MountPointContext } from '../../MountPointContext'
 import tabSpecs from '../tabSpecs'
 import Contracts from './Contracts'
 
-import { useI18n } from 'cozy-ui/transpiled/react'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 const contractRx = /io\.cozy\.[a-z]+\.accounts/
 
