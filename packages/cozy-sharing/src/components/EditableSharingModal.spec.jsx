@@ -32,6 +32,7 @@ describe('EditableSharingModal', () => {
           document={document}
           groups={{ data: [] }}
           t={x => x}
+          onClose={() => {}}
         />
       </AppWrapper>
     )
