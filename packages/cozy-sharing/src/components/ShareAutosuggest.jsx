@@ -106,12 +106,12 @@ export default class ShareAutocomplete extends Component {
   onPick = value => {
     this.props.onPick(value)
     this.setState(state => ({ ...state, inputValue: '' }))
-    setTimeout(() => this.input.focus(), 1) // don't ask...
+    requestAnimationFrame(() => this.input && this.input.focus(), 1) // don't ask...
   }
 
   onRemove = value => {
     this.props.onRemove(value)
-    setTimeout(() => this.input.focus(), 1)
+    requestAnimationFrame(() => this.input && this.input.focus(), 1)
   }
 
   renderInput(inputProps) {
