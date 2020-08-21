@@ -103,6 +103,7 @@ export class SharingProvider extends Component {
     }
     this.realtime = null
     this.isInitialized = false
+    this.fetchAllSharings = this.fetchAllSharings.bind(this)
   }
 
   dispatch = action =>
@@ -111,20 +112,23 @@ export class SharingProvider extends Component {
   componentDidMount() {
     const { client } = this.props
 
-    if (client.isLogged) this.initialize()
-    else client.on('plugin:realtime:login', this.initialize)
+    if (client.isLogged) {
+      this.initialize()
+    } else {
+      client.on('plugin:realtime:login', this.initialize)
+    }
   }
 
   componentWillUnmount() {
     if (this.realtime) {
       this.realtime.unsubscribe(
         'created',
-        this.sharingsDoctype,
+        SHARING_DOCTYPE,
         this.handleCreateOrUpdateSharings
       )
       this.realtime.unsubscribe(
         'updated',
-        this.sharingsDoctype,
+        SHARING_DOCTYPE,
         this.handleCreateOrUpdateSharings
       )
     }
@@ -142,15 +146,14 @@ export class SharingProvider extends Component {
       )
     } else {
       this.realtime = client.plugins.realtime
-      this.sharingsDoctype = 'io.cozy.sharings'
       this.realtime.subscribe(
         'created',
-        this.sharingsDoctype,
+        SHARING_DOCTYPE,
         this.handleCreateOrUpdateSharings
       )
       this.realtime.subscribe(
         'updated',
-        this.sharingsDoctype,
+        SHARING_DOCTYPE,
         this.handleCreateOrUpdateSharings
       )
     }
@@ -170,7 +173,7 @@ export class SharingProvider extends Component {
     }
   }
 
-  fetchAllSharings = async () => {
+  async fetchAllSharings() {
     const { doctype, client } = this.props
     const [sharings, permissions, apps] = await Promise.all([
       client.collection('io.cozy.sharings').findByDoctype(doctype),

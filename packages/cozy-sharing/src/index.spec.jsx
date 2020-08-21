@@ -27,9 +27,15 @@ describe('SharingProvider', () => {
     subscribe: jest.fn(),
     unsubscribe: jest.fn()
   }
-  client.collection = jest.fn(() => client)
+
   client.isLogged = true
 
+  beforeEach(() => {
+    jest.spyOn(client, 'collection')
+    jest
+      .spyOn(SharingProvider.prototype, 'fetchAllSharings')
+      .mockReturnValue(Promise.resolve())
+  })
   afterEach(() => jest.resetAllMocks())
 
   it('loads data on mount', () => {
@@ -37,6 +43,7 @@ describe('SharingProvider', () => {
 
     expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
     expect(client.collection).toHaveBeenCalledWith('io.cozy.sharings')
+    expect(SharingProvider.prototype.fetchAllSharings).toHaveBeenCalled()
   })
 
   it('loads nothing when the client is not logged in', () => {
@@ -45,6 +52,7 @@ describe('SharingProvider', () => {
 
     expect(client.plugins.realtime.subscribe).not.toHaveBeenCalled()
     expect(client.collection).not.toHaveBeenCalledWith('io.cozy.sharings')
+    expect(SharingProvider.prototype.fetchAllSharings).not.toHaveBeenCalled()
 
     client.emit('plugin:realtime:login')
     expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
