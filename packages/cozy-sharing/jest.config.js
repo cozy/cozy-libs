@@ -6,6 +6,7 @@ module.exports = {
   ],
   snapshotSerializers: ['enzyme-to-json/serializer'],
   testPathIgnorePatterns: ['node_modules', 'dist', '__tests__'],
+  roots: ['<rootDir>/src'],
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],

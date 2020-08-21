@@ -9,6 +9,7 @@ import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import { findAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
@@ -98,7 +99,14 @@ export class AccountModal extends Component {
   }
 
   render() {
-    const { konnector, onDismiss, accounts, t, pushHistory } = this.props
+    const {
+      konnector,
+      onDismiss,
+      accounts,
+      t,
+      pushHistory,
+      breakpoints: { isMobile }
+    } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
       <>
@@ -137,7 +145,9 @@ export class AccountModal extends Component {
               <Spinner size="xxlarge" />
             </div>
           )}
-          {!error && !fetching && (
+        </ModalContent>
+        {!error && !fetching && (
+          <ModalContent className={isMobile ? 'u-p-0' : null}>
             <KonnectorAccountTabs
               konnector={konnector}
               trigger={trigger}
@@ -145,8 +155,8 @@ export class AccountModal extends Component {
               onAccountDeleted={onDismiss}
               addAccount={() => pushHistory('/new')}
             />
-          )}
-        </ModalContent>
+          </ModalContent>
+        )}
       </>
     )
   }
@@ -166,5 +176,6 @@ AccountModal.propTypes = {
 export default flow(
   withClient,
   translate(),
-  withMountPointPushHistory
+  withMountPointPushHistory,
+  withBreakpoints()
 )(AccountModal)

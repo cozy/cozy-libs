@@ -12,11 +12,11 @@
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
     "watch": "yarn build -w",
-    "test": "env USE_REACT=true yarn jest src",
+    "test": "yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
     "lint": "cd ..; yarn lint packages/cozy-authentication",
     "example": "nf start",
-    "example-server": "env USE_REACT=true parcel --port 1234 $(pwd)/examples/index.html"
+    "example-server": "parcel --port 1234 $(pwd)/examples/index.html"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
@@ -24,7 +24,7 @@
     "babel-plugin-css-modules-transform": "^1.6.2",
     "babel-preset-cozy-app": "^1.9.1",
     "cozy-client": "13.15.1",
-    "cozy-ui": "35.32.0",
+    "cozy-ui": "35.39.0",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
     "enzyme": "3.11.0",
@@ -70,7 +70,7 @@
   },
   "peerDependencies": {
     "cozy-client": "^13.15.1",
-    "cozy-ui": "^35.32.0",
+    "cozy-ui": "^35.39.0",
     "react": ">=15",
     "react-router": "3"
   }

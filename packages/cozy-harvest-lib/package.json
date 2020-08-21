@@ -18,7 +18,7 @@
     "build:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn build:doc:react)",
     "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prepublishOnly": "yarn build",
-    "test": "env USE_REACT=true jest --runInBand",
+    "test": "jest --runInBand",
     "lint": "cd .. && yarn lint packages/cozy-harvest-lib",
     "watch": "yarn build --watch",
     "cli": "env BABEL_ENV=es5 node src/cli/index.js",
@@ -27,6 +27,7 @@
   "dependencies": {
     "@babel/runtime": "^7.5.2",
     "@material-ui/core": "3",
+    "@testing-library/react": "^10.4.9",
     "cozy-bi-auth": "0.0.6",
     "cozy-doctypes": "^1.74.4",
     "cozy-flags": "^2.3.3",
@@ -55,12 +56,13 @@
     "cozy-device-helper": "^1.10.1",
     "cozy-keys-lib": "^3.1.0",
     "cozy-realtime": "^3.10.3",
-    "cozy-ui": "35.32.0",
+    "cozy-ui": "35.39.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "form-data": "3.0.0",
     "identity-obj-proxy": "3.0.0",
     "jest": "24.9.0",
+    "jest-environment-jsdom-sixteen": "^1.0.3",
     "jest-resolve-cached": "^1.0.0",
     "jsdom": "^16.1.0",
     "prop-types": "15.7.2",
@@ -72,7 +74,7 @@
     "cozy-device-helper": "^1.7.1",
     "cozy-keys-lib": "^3.1.0",
     "cozy-realtime": "^3.1.0",
-    "cozy-ui": "^35.32.0"
+    "cozy-ui": "^35.39.0"
   },
   "sideEffects": false
 }

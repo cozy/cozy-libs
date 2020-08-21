@@ -1,0 +1,50 @@
+{
+      "_id": "eb28fde38c8e024d56ea98217114237d",
+      "_type": "io.cozy.bank.accounts",
+      "balance": 60,
+      "comingBalance": 60,
+      "cozyMetadata": {
+        "createdByApp": "caissedepargne1",
+        "updatedAt": "2020-08-21T08:20:02.380Z",
+        "updatedByApps": [
+          {
+            "date": "2020-08-21T08:20:02.380Z"
+          },
+          {
+            "date": "2020-08-19T14:49:10.826Z",
+            "slug": "caissedepargne1"
+          }
+        ]
+      },
+      "currency": "EUR",
+      "iban": "FR7616275105013700467740644",
+      "id": "eb28fde38c8e024d56ea98217114237d",
+      "institutionLabel": "Caisse d'Épargne Particuliers (sans Secure Key)",
+      "label": "CPT PARTS SOCIALES",
+      "metadata": {
+        "dateImport": "2020-08-19T14:49:08.949Z",
+        "updatedAt": "2020-08-19T15:16:19",
+        "vendor": "budget-insight",
+        "version": 1
+      },
+      "number": "400001",
+      "originalNumber": "400001",
+      "rawNumber": "400001",
+      "relationships": {
+        "connection": {
+          "_id": "eb28fde38c8e024d56ea9821710a3c24",
+          "_type": "io.cozy.accounts"
+        },
+        "owners": {
+          "data": [
+            {
+              "_id": "9dac2002-3aeb-4117-85b0-0c0c1f48120c",
+              "_type": "io.cozy.contacts"
+            }
+          ]
+        }
+      },
+      "shortLabel": "Mon compte sociétaire",
+      "type": "Market",
+      "vendorId": "2412"
+    }

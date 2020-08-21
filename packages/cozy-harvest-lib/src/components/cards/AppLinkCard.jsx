@@ -82,8 +82,7 @@ AppLinkCard.propTypes = {
   icon: PropTypes.string.isRequired,
   iconColor: PropTypes.string,
   breakpoints: PropTypes.object.isRequired,
-  client: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  client: PropTypes.object.isRequired
 }
 
 AppLinkCard.defaultProps = {

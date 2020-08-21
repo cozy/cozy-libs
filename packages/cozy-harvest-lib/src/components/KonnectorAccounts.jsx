@@ -1,14 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withClient } from 'cozy-client'
+import get from 'lodash/get'
+import compose from 'lodash/flowRight'
 import { withRouter } from 'react-router'
+
+import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
-import get from 'lodash/get'
-import compose from 'lodash/flowRight'
+import Bold from 'cozy-ui/transpiled/react/Text'
 import CozyRealtime from 'cozy-realtime'
 
 import { fetchAccountsFromTriggers } from '../connections/accounts'
@@ -24,8 +26,14 @@ export class KonnectorAccounts extends React.Component {
     this.state = {
       fetchingAccounts: true,
       error: null,
+      boundaryError: null,
+      boundaryErrorInfo: null,
       accounts: []
     }
+  }
+
+  componentDidCatch(boundaryError, boundaryErrorInfo) {
+    this.setState({ boundaryError, boundaryErrorInfo })
   }
 
   /**
@@ -101,6 +109,16 @@ export class KonnectorAccounts extends React.Component {
   render() {
     const { accounts, fetchingAccounts, error } = this.state
     const { konnector, t } = this.props
+
+    if (this.state.boundaryErrorInfo) {
+      return (
+        <div className="u-error">
+          <Bold>{this.state.boundaryError.message}</Bold>
+          <pre>{this.state.boundaryErrorInfo.componentStack + ''}</pre>
+        </div>
+      )
+    }
+
     return (
       <>
         {(error || fetchingAccounts) && (

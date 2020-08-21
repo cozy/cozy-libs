@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import flow from 'lodash/flow'
 
 import {
   Tab,
@@ -17,6 +16,8 @@ import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 import tabSpecs from './tabSpecs'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
 const WarningError = () => (
   <Icon icon="warning" size={13} className="u-ml-half" />
 )
@@ -26,10 +27,11 @@ export const KonnectorAccountTabs = ({
   trigger: initialTrigger,
   account,
   onAccountDeleted,
+
   //TODO rename to onAddAccount
-  addAccount,
-  t
+  addAccount
 }) => {
+  const { t } = useI18n()
   return (
     <FlowProvider initialTrigger={initialTrigger} konnector={konnector}>
       {({ flow }) => {
@@ -89,4 +91,4 @@ KonnectorAccountTabs.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default flow(translate())(KonnectorAccountTabs)
+export default translate()(KonnectorAccountTabs)
