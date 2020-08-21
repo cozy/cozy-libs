@@ -123,9 +123,8 @@ class ShareByLink extends React.Component {
                 this.copyLinkToClipboard()
               }}
               busy={loading}
-            >
-              {t(`${documentType}.share.shareByLink.create`)}
-            </Button>
+              label={t(`${documentType}.share.shareByLink.create`)}
+            />
           )}
         </div>
         {checked && (
