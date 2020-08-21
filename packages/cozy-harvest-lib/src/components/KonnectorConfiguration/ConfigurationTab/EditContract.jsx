@@ -27,9 +27,6 @@ import {
 
 const ContactPicker = props => {
   const { t } = useI18n()
-  // eslint-disable-next-line no-unused-vars
-  const { ...rest } = props
-
   return (
     <BaseContactPicker
       listPlaceholder={t('contractForm.listPlaceholder')}
