@@ -12,7 +12,15 @@ import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import Modal from 'cozy-ui/transpiled/react/Modal'
+
+import ExperimentalDialog, {
+  ExperimentalDialogTitle,
+  ExperimentalDialogActions
+} from 'cozy-ui/transpiled/react/labs/ExperimentalDialog'
+
+import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
+import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import NarrowContent from 'cozy-ui/transpiled/react/NarrowContent'
 import withLocales from '../../hoc/withLocales'
@@ -122,25 +130,25 @@ const FormControls = props => {
 }
 
 const DeleteConfirm = ({
-  cancel,
-  confirm,
+  onCancel,
+  onConfirm,
   title,
   description,
   secondaryText,
   primaryText
 }) => {
   return (
-    <Modal
-      title={title}
-      description={<div dangerouslySetInnerHTML={{ __html: description }} />}
-      secondaryType="secondary"
-      secondaryText={secondaryText}
-      secondaryAction={cancel}
-      dismissAction={cancel}
-      primaryType="danger"
-      primaryText={primaryText}
-      primaryAction={confirm}
-    />
+    <ExperimentalDialog>
+      <ExperimentalDialogTitle>{title}</ExperimentalDialogTitle>
+      <DialogCloseButton onClick={() => onCancel()} />
+      <DialogContent>
+        <div dangerouslySetInnerHTML={{ __html: description }} />
+      </DialogContent>
+      <ExperimentalDialogActions>
+        <Button theme="secondary" label={secondaryText} onClick={onCancel} />
+        <Button theme="danger" label={primaryText} onClick={onConfirm} />
+      </ExperimentalDialogActions>
+    </ExperimentalDialog>
   )
 }
 
@@ -260,8 +268,8 @@ const EditBankAccount = props => {
               )
             }
             secondaryText={t('contractForm.cancel')}
-            confirm={() => handleRemoveAccount(account)}
-            cancel={() => setShowDeleteConfirmation(false)}
+            onConfirm={() => handleRemoveAccount(account)}
+            onCancel={() => setShowDeleteConfirmation(false)}
           />
         ) : null}
       </NarrowContent>
