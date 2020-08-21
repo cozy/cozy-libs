@@ -12,11 +12,11 @@
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
     "watch": "yarn build -w",
-    "test": "env USE_REACT=true yarn jest src",
+    "test": "yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
     "lint": "cd ..; yarn lint packages/cozy-authentication",
     "example": "nf start",
-    "example-server": "env USE_REACT=true parcel --port 1234 $(pwd)/examples/index.html"
+    "example-server": "parcel --port 1234 $(pwd)/examples/index.html"
   },
   "devDependencies": {
     "@babel/cli": "^7.2.3",
