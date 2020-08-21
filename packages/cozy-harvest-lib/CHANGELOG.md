@@ -3,6 +3,40 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.41.5...cozy-harvest-lib@2.0.0) (2020-08-21)
+
+
+### Bug Fixes
+
+* T is not longer required as it is taken from the context ([ede5725](https://github.com/cozy/cozy-libs/commit/ede5725))
+* Typo ([8c24b4b](https://github.com/cozy/cozy-libs/commit/8c24b4b))
+* Use correct capitalisation ([f0943bc](https://github.com/cozy/cozy-libs/commit/f0943bc))
+
+
+### Features
+
+* Add ErrorBoundary on KonnectorAccounts ([0c2c422](https://github.com/cozy/cozy-libs/commit/0c2c422))
+* Extract contract doctype from konnector ([43cff34](https://github.com/cozy/cozy-libs/commit/43cff34))
+* Make attribute setting dependent on the doctype ([8ee1c9e](https://github.com/cozy/cozy-libs/commit/8ee1c9e))
+* On mobile, have ListItems go from edge to edge ([c4b798d](https://github.com/cozy/cozy-libs/commit/c4b798d))
+* Show contracts that have been fetched for an io.cozy.accounts ([d53b966](https://github.com/cozy/cozy-libs/commit/d53b966))
+* Show EditForm and label contract section depending on doctype ([84a2cf1](https://github.com/cozy/cozy-libs/commit/84a2cf1))
+* Update cozy-ui across all libs ([73549b0](https://github.com/cozy/cozy-libs/commit/73549b0))
+* Use ExperimentalDialog instead of Modal ([34b1150](https://github.com/cozy/cozy-libs/commit/34b1150))
+* Use ExperimentalDialog instead of Modal for deletion confirmation ([ce3997a](https://github.com/cozy/cozy-libs/commit/ce3997a))
+* Use List components for ConfigurationTab ([97ed0ab](https://github.com/cozy/cozy-libs/commit/97ed0ab))
+
+
+### BREAKING CHANGES
+
+* The host app using harvest must wrap harvest inside
+a <BreakpointsProvider />. This is most easily done at the root of the
+app.
+
+
+
+
+
 ## [1.41.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@1.41.4...cozy-harvest-lib@1.41.5) (2020-08-20)
 
 **Note:** Version bump only for package cozy-harvest-lib

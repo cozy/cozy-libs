@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.8...cozy-sharing@1.14.0) (2020-08-21)
+
+
+### Bug Fixes
+
+* Remove warning in tests concerning Button label ([88ba928](https://github.com/cozy/cozy-libs/commit/88ba928))
+* Use global minilog if available and remove logging by default ([91e3959](https://github.com/cozy/cozy-libs/commit/91e3959))
+
+
+### Features
+
+* Add isRequired on ShareModal `link` prop ([b3cd14e](https://github.com/cozy/cozy-libs/commit/b3cd14e))
+* Update cozy-ui across all libs ([73549b0](https://github.com/cozy/cozy-libs/commit/73549b0))
+
+
+
+
+
 ## [1.13.8](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.7...cozy-sharing@1.13.8) (2020-08-20)
 
 
