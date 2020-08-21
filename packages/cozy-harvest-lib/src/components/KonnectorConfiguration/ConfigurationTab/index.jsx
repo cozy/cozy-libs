@@ -53,7 +53,7 @@ const ConfigurationTab = ({
 
   const contractDoctype = getContractDoctypeFromKonnector(konnector)
   return (
-    <ModalContent className={'u-p-0'}>
+    <ModalContent className="u-p-0">
       <Stack spacing="m">
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
