@@ -27,6 +27,7 @@
   "dependencies": {
     "@babel/runtime": "^7.5.2",
     "@material-ui/core": "3",
+    "@testing-library/react": "^10.4.9",
     "cozy-bi-auth": "0.0.6",
     "cozy-doctypes": "^1.74.4",
     "cozy-flags": "^2.3.3",

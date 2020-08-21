@@ -1,4 +1,3 @@
-import { set } from 'lodash'
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
@@ -25,11 +24,11 @@ import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/Dial
 import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 import NarrowContent from 'cozy-ui/transpiled/react/NarrowContent'
 import withLocales from '../../hoc/withLocales'
+import { updateContract } from './helpers'
 
 import {
   getAccountLabel,
   getAccountInstitutionLabel,
-  getAccountType,
   getAccountOwners
 } from './bankAccountHelpers'
 
@@ -45,11 +44,18 @@ const ContactPicker = props => {
   )
 }
 
-const EditBankAccountForm = props => {
+const EditContractForm = props => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
 
-  const { account, onSubmit, onCancel, FormControlsWrapper, ...rest } = props
+  const {
+    account,
+    onSuccess, // eslint-disable-line no-unused-vars
+    onSubmit,
+    onCancel,
+    FormControlsWrapper,
+    ...rest
+  } = props
 
   const [shortLabel, setShortLabel] = useState(getAccountLabel(account))
   const [owners, setOwners] = useState(getAccountOwners(account))
@@ -66,6 +72,7 @@ const EditBankAccountForm = props => {
       <Stack spacing={isMobile ? 's' : 'm'}>
         <Field
           id="account-label"
+          placeholder={t('contractForm.label')}
           label={t('contractForm.label')}
           value={shortLabel}
           onChange={e => setShortLabel(e.target.value)}
@@ -83,6 +90,7 @@ const EditBankAccountForm = props => {
         />
         <Field
           id="account-institution"
+          placeholder={t('contractForm.bank')}
           label={t('contractForm.bank')}
           value={getAccountInstitutionLabel(account)}
           disabled
@@ -90,15 +98,9 @@ const EditBankAccountForm = props => {
         />
         <Field
           id="account-number"
+          placeholder={t('contractForm.number')}
           label={t('contractForm.number')}
           value={account.number}
-          disabled
-          variant={fieldVariant}
-        />
-        <Field
-          id="account-type"
-          label={t('contractForm.type')}
-          value={getAccountType(account)}
           disabled
           variant={fieldVariant}
         />
@@ -110,7 +112,7 @@ const EditBankAccountForm = props => {
   )
 }
 
-EditBankAccountForm.propTypes = {
+EditContractForm.propTypes = {
   /** The Component used to wrap the form buttons */
   FormControlsWrapper: PropTypes.node.isRequired
 }
@@ -159,34 +161,7 @@ const DeleteConfirm = ({
   )
 }
 
-const transformDocToRelationship = doc => ({
-  _id: doc._id,
-  _type: doc._type
-})
-
-const updateContract = async (client, contract, options) => {
-  const { fields, onSuccess, onError } = options
-
-  Object.keys(fields).forEach(key => {
-    if (key === 'owners') {
-      const ownerRelationships = fields[key]
-        .filter(Boolean)
-        .map(transformDocToRelationship)
-      set(contract, 'relationships.owners.data', ownerRelationships)
-    } else {
-      contract[key] = fields[key]
-    }
-  })
-
-  try {
-    await client.save(contract)
-    onSuccess()
-  } catch (err) {
-    onError(err)
-  }
-}
-
-const EditBankAccount = props => {
+const EditContract = props => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const client = useClient()
@@ -262,7 +237,7 @@ const EditBankAccount = props => {
         )}
       </Media>
       <NarrowContent className={cx({ 'u-mt-2': !isMobile })}>
-        <EditBankAccountForm
+        <EditContractForm
           FormControlsWrapper={FormControlsWrapper}
           account={account}
           onSubmit={fields => handleSaveAccount(account, fields)}
@@ -290,11 +265,17 @@ const EditBankAccount = props => {
   )
 }
 
-EditBankAccount.propTypes = {
+EditContract.propTypes = {
+  /** The account that will be edited */
+  account: PropTypes.object.isRequired,
   /** The Component used to wrap the title */
   TitleWrapper: PropTypes.node.isRequired,
   /** The Component used to wrap the form buttons */
-  FormControlsWrapper: PropTypes.node.isRequired
+  FormControlsWrapper: PropTypes.node.isRequired,
+  /** The callback called when the document is saved */
+  onSuccess: PropTypes.func.isRequired,
+  /** The callback called when edition is cancelled */
+  onCancel: PropTypes.func.isRequired
 }
 
-export default withLocales(EditBankAccount)
+export default withLocales(EditContract)

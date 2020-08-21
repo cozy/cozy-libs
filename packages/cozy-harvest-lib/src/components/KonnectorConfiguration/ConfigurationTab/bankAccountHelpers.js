@@ -1,4 +1,4 @@
-import { get, uniqBy, flatten } from 'lodash'
+import { get, set, uniqBy, flatten } from 'lodash'
 
 const PARTS_TO_DELETE = ['(sans Secure Key)']
 
@@ -29,41 +29,32 @@ export const accountTypesWithTranslation = [
   'Savings'
 ]
 
-const accountTypesMap = {
-  Article83: 'LongTermSavings',
-  Asset: 'Business',
-  Bank: 'Checkings',
-  Capitalisation: 'Business',
-  Cash: 'Checkings',
-  ConsumerCredit: 'Loan',
-  'Credit card': 'CreditCard',
-  Deposit: 'Checkings',
-  Liability: 'Business',
-  LifeInsurance: 'LongTermSavings',
-  Madelin: 'LongTermSavings',
-  Market: 'LongTermSavings',
-  Mortgage: 'LongTermSavings',
-  None: 'Other',
-  PEA: 'LongTermSavings',
-  PEE: 'LongTermSavings',
-  Perco: 'LongTermSavings',
-  Perp: 'LongTermSavings',
-  RevolvingCredit: 'Loan',
-  RSP: 'LongTermSavings',
-  Unkown: 'Other'
-}
-
-export const getAccountType = account => {
-  const mappedType = accountTypesMap[account.type] || account.type || 'Other'
-  const type = accountTypesWithTranslation.includes(mappedType)
-    ? mappedType
-    : 'Other'
-
-  return type
-}
-
 export const getAccountOwners = account => {
   return get(account, 'owners.data', []).filter(Boolean)
+}
+
+const transformDocToRelationship = doc => ({
+  _id: doc._id,
+  _type: doc._type
+})
+
+/**
+ * Set attributes into bank account, taking special care of
+ * owner attributes.
+ *
+ * TODO: Rely on the schema to do that
+ */
+export const setFields = (account, fields) => {
+  Object.keys(fields).forEach(key => {
+    if (key === 'owners') {
+      const ownerRelationships = fields[key]
+        .filter(Boolean)
+        .map(transformDocToRelationship)
+      set(account, 'relationships.owners.data', ownerRelationships)
+    } else {
+      account[key] = fields[key]
+    }
+  })
 }
 
 export const getUniqueOwners = accounts => {
