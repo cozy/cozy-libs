@@ -123,7 +123,7 @@ ShareModal.propTypes = {
   groups: groupsResponseType.isRequired,
   createContact: PropTypes.func.isRequired,
   recipients: PropTypes.array.isRequired,
-  link: PropTypes.string,
+  link: PropTypes.string.isRequired,
   documentType: PropTypes.string,
   needsContactsPermission: PropTypes.bool,
   hasSharedParent: PropTypes.bool,
