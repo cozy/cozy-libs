@@ -42,7 +42,6 @@ describe('SharingProvider', () => {
     mount(<AppWrapper client={client} />)
 
     expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
-    expect(client.collection).toHaveBeenCalledWith('io.cozy.sharings')
     expect(SharingProvider.prototype.fetchAllSharings).toHaveBeenCalled()
   })
 
@@ -51,12 +50,11 @@ describe('SharingProvider', () => {
     mount(<AppWrapper client={client} />)
 
     expect(client.plugins.realtime.subscribe).not.toHaveBeenCalled()
-    expect(client.collection).not.toHaveBeenCalledWith('io.cozy.sharings')
     expect(SharingProvider.prototype.fetchAllSharings).not.toHaveBeenCalled()
 
     client.emit('plugin:realtime:login')
     expect(client.plugins.realtime.subscribe).toHaveBeenCalled()
-    expect(client.collection).toHaveBeenCalledWith('io.cozy.sharings')
+    expect(SharingProvider.prototype.fetchAllSharings).toHaveBeenCalled()
   })
 })
 
