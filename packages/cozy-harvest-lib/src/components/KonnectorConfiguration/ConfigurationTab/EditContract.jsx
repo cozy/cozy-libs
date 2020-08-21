@@ -159,27 +159,27 @@ const DeleteConfirm = ({
   )
 }
 
-const saveAccount = async params => {
-  const { client, account, fields, onSuccess, onError } = params
+const transformDocToRelationship = doc => ({
+  _id: doc._id,
+  _type: doc._type
+})
+
+const updateContract = async (client, contract, options) => {
+  const { fields, onSuccess, onError } = options
 
   Object.keys(fields).forEach(key => {
     if (key === 'owners') {
-      set(
-        account,
-        'relationships.owners.data',
-        fields[key].map(owner => ({
-          _id: owner._id,
-          _type: owner._type
-        }))
-      )
-      return
+      const ownerRelationships = fields[key]
+        .filter(Boolean)
+        .map(transformDocToRelationship)
+      set(contract, 'relationships.owners.data', ownerRelationships)
+    } else {
+      contract[key] = fields[key]
     }
-
-    account[key] = fields[key]
   })
 
   try {
-    await client.save(account)
+    await client.save(contract)
     onSuccess()
   } catch (err) {
     onError(err)
@@ -204,7 +204,7 @@ const EditBankAccount = props => {
   const [deleting, setDeleting] = useState(false)
 
   const handleSaveAccount = async (account, fields) => {
-    await saveAccount({
+    await updateContract(client, account, {
       client,
       account,
       fields,
