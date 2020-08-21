@@ -16,7 +16,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import ExperimentalDialog, {
   ExperimentalDialogTitle,
   ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/labs/ExperimentalDialog'
+} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
 
 import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
