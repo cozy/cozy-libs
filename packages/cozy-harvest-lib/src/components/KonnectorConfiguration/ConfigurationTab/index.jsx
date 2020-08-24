@@ -25,13 +25,10 @@ import Contracts from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-const contractRx = /io\.cozy\.[a-z]+\.accounts/
-
 const getContractDoctypeFromKonnector = memoize(konnector => {
-  const contractPermission = Object.values(konnector.permissions).find(
-    permission => permission.type.match(contractRx)
-  )
-  return contractPermission && contractPermission.type
+  if (konnector.categories.includes('banking')) {
+    return 'io.cozy.bank.accounts'
+  }
 })
 
 const ConfigurationTab = ({
