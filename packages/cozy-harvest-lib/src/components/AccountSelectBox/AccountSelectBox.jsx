@@ -12,8 +12,12 @@ const AccountSelectBox = ({
   accountsList,
   selectedAccount,
   onChange,
-  onCreate
+  onCreate,
+  loading
 }) => {
+  if (loading) {
+    return <div style={{ height: 20.8 }}>&nbsp;</div>
+  }
   return (
     <SelectBox
       size="tiny"
@@ -44,7 +48,10 @@ const AccountSelectBox = ({
 
 AccountSelectBox.propTypes = {
   accountsList: PropTypes.arrayOf(PropTypes.object).isRequired,
-  selectedAccount: PropTypes.object.isRequired,
+  /** @type {io.cozy.accounts} The account currently shown, can be null if loading is true */
+  selectedAccount: PropTypes.object,
+  /** @type {Boolean} If true, renders an empty div with the same height as the SelectBox */
+  loading: PropTypes.bool,
   onChange: PropTypes.func.isRequired,
   onCreate: PropTypes.func.isRequired
 }

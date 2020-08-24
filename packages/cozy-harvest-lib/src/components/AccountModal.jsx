@@ -111,18 +111,17 @@ export class AccountModal extends Component {
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
-          {account && (
-            <AccountSelectBox
-              selectedAccount={account}
-              accountsList={accounts}
-              onChange={option => {
-                pushHistory(`/accounts/${option.account._id}`)
-              }}
-              onCreate={() => {
-                pushHistory('/new')
-              }}
-            />
-          )}
+          <AccountSelectBox
+            loading={!account}
+            selectedAccount={account}
+            accountsList={accounts}
+            onChange={option => {
+              pushHistory(`/accounts/${option.account._id}`)
+            }}
+            onCreate={() => {
+              pushHistory('/new')
+            }}
+          />
         </KonnectorModalHeader>
         <ModalContent>
           {error && (
