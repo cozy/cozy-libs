@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
@@ -21,8 +20,6 @@ import ExperimentalDialog, {
 import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
 
-import { Media, Img } from 'cozy-ui/transpiled/react/Media'
-import NarrowContent from 'cozy-ui/transpiled/react/NarrowContent'
 import withLocales from '../../hoc/withLocales'
 import { updateContract } from './helpers'
 
@@ -41,100 +38,6 @@ const ContactPicker = props => {
       addContactLabel={t('contractForm.addContactLabel')}
       {...props}
     />
-  )
-}
-
-const EditContractForm = props => {
-  const { t } = useI18n()
-  const { isMobile } = useBreakpoints()
-
-  const {
-    account,
-    onSuccess, // eslint-disable-line no-unused-vars
-    onSubmit,
-    onCancel,
-    FormControlsWrapper,
-    ...rest
-  } = props
-
-  const [shortLabel, setShortLabel] = useState(getAccountLabel(account))
-  const [owners, setOwners] = useState(getAccountOwners(account))
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    onSubmit({ shortLabel, owners })
-  }
-
-  const fieldVariant = isMobile ? 'default' : 'inline'
-
-  return (
-    <form onSubmit={handleSubmit} {...rest}>
-      <Stack spacing={isMobile ? 's' : 'm'}>
-        <Field
-          id="account-label"
-          placeholder={t('contractForm.label')}
-          label={t('contractForm.label')}
-          value={shortLabel}
-          onChange={e => setShortLabel(e.target.value)}
-          variant={fieldVariant}
-        />
-        <CollectionField
-          label={t('contractForm.owner')}
-          values={owners}
-          component={ContactPicker}
-          addButtonLabel={t('contractForm.addOwnerBtn')}
-          removeButtonLabel={t('contractForm.removeOwnerBtn')}
-          variant={fieldVariant}
-          onChange={owners => setOwners(owners)}
-          placeholder={t('contractForm.ownerPlaceholder')}
-        />
-        <Field
-          id="account-institution"
-          placeholder={t('contractForm.bank')}
-          label={t('contractForm.bank')}
-          value={getAccountInstitutionLabel(account)}
-          disabled
-          variant={fieldVariant}
-        />
-        <Field
-          id="account-number"
-          placeholder={t('contractForm.number')}
-          label={t('contractForm.number')}
-          value={account.number}
-          disabled
-          variant={fieldVariant}
-        />
-      </Stack>
-      <FormControlsWrapper>
-        <FormControls onCancel={onCancel} t={t} />
-      </FormControlsWrapper>
-    </form>
-  )
-}
-
-EditContractForm.propTypes = {
-  /** The Component used to wrap the form buttons */
-  FormControlsWrapper: PropTypes.node.isRequired
-}
-
-const FormControls = props => {
-  const { t } = useI18n()
-  const { onCancel, form } = props
-
-  return (
-    <>
-      <Button
-        label={t('contractForm.cancel')}
-        theme="secondary"
-        onClick={onCancel}
-      />
-      <Button
-        type="submit"
-        form={form}
-        label={t('contractForm.apply')}
-        theme="primary"
-      />
-    </>
   )
 }
 
@@ -167,13 +70,11 @@ const EditContract = props => {
   const client = useClient()
 
   const {
-    account,
+    contract: account,
     onAfterRemove,
     onSuccess,
-    onCancel,
-    onError,
-    TitleWrapper,
-    FormControlsWrapper
+    dismissAction,
+    onError
   } = props
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
@@ -201,6 +102,14 @@ const EditContract = props => {
     })
   }
 
+  const [shortLabel, setShortLabel] = useState(getAccountLabel(account))
+  const [owners, setOwners] = useState(getAccountOwners(account))
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    handleSaveAccount(account, { shortLabel, owners })
+  }
+
   const handleRemoveAccount = async account => {
     setDeleting(true)
 
@@ -220,52 +129,89 @@ const EditContract = props => {
   }
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
+  const fieldVariant = isMobile ? 'default' : 'inline'
 
   return (
-    <div
-      className={cx({
-        'u-pt-2': !isMobile
-      })}
-    >
-      <TitleWrapper>{getAccountLabel(account)}</TitleWrapper>
-      <Media className="u-maw-7">
-        {!isMobile && (
-          <Img>
+    <ExperimentalDialog>
+      <ExperimentalDialogTitle>
+        {getAccountLabel(account)}
+      </ExperimentalDialogTitle>
+      <DialogContent>
+        <form id={`edit-contract-${account._id}`} onSubmit={handleSubmit}>
+          <Stack spacing={isMobile ? 's' : 'm'}>
+            <Field
+              id="account-label"
+              placeholder={t('contractForm.label')}
+              label={t('contractForm.label')}
+              value={shortLabel}
+              onChange={e => setShortLabel(e.target.value)}
+              variant={fieldVariant}
+            />
+            <CollectionField
+              label={t('contractForm.owner')}
+              values={owners}
+              component={ContactPicker}
+              addButtonLabel={t('contractForm.addOwnerBtn')}
+              removeButtonLabel={t('contractForm.removeOwnerBtn')}
+              variant={fieldVariant}
+              onChange={owners => setOwners(owners)}
+              placeholder={t('contractForm.ownerPlaceholder')}
+            />
+            <Field
+              id="account-institution"
+              placeholder={t('contractForm.bank')}
+              label={t('contractForm.bank')}
+              value={getAccountInstitutionLabel(account)}
+              disabled
+              variant={fieldVariant}
+            />
+            <Field
+              id="account-number"
+              placeholder={t('contractForm.number')}
+              label={t('contractForm.number')}
+              value={account.number}
+              disabled
+              variant={fieldVariant}
+            />
             <Button
-              className="u-mr-0 u-ml-auto"
+              className="u-ml-auto"
               label={t('contractForm.removeAccountBtn')}
               theme="danger-outline"
               onClick={() => setShowDeleteConfirmation(true)}
             />
-          </Img>
-        )}
-      </Media>
-      <NarrowContent className={cx({ 'u-mt-2': !isMobile })}>
-        <EditContractForm
-          FormControlsWrapper={FormControlsWrapper}
-          account={account}
-          onSubmit={fields => handleSaveAccount(account, fields)}
-          onSuccess={onSuccess}
-          onCancel={onCancel}
+          </Stack>
+        </form>
+      </DialogContent>
+      <ExperimentalDialogActions layout="row">
+        <Button
+          label={t('contractForm.cancel')}
+          theme="secondary"
+          onClick={dismissAction}
         />
-        {showDeleteConfirmation ? (
-          <DeleteConfirm
-            title={t('contractForm.confirm-deletion.title')}
-            description={confirmPrimaryText}
-            primaryText={
-              deleting ? (
-                <Spinner color="white" />
-              ) : (
-                t('contractForm.confirm-deletion.confirm')
-              )
-            }
-            secondaryText={t('contractForm.cancel')}
-            onConfirm={() => handleRemoveAccount(account)}
-            onCancel={() => setShowDeleteConfirmation(false)}
-          />
-        ) : null}
-      </NarrowContent>
-    </div>
+        <Button
+          type="submit"
+          form={`edit-contract-${account._id}`}
+          label={t('contractForm.apply')}
+          theme="primary"
+        />
+      </ExperimentalDialogActions>
+      {showDeleteConfirmation ? (
+        <DeleteConfirm
+          title={t('contractForm.confirm-deletion.title')}
+          description={confirmPrimaryText}
+          primaryText={
+            deleting ? (
+              <Spinner color="white" />
+            ) : (
+              t('contractForm.confirm-deletion.confirm')
+            )
+          }
+          secondaryText={t('contractForm.cancel')}
+          onConfirm={() => handleRemoveAccount(account)}
+          onCancel={() => setShowDeleteConfirmation(false)}
+        />
+      ) : null}
+    </ExperimentalDialog>
   )
 }
 
