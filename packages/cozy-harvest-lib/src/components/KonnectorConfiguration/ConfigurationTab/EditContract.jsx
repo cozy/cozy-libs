@@ -171,6 +171,7 @@ const EditContract = props => {
     onAfterRemove,
     onSuccess,
     onCancel,
+    onError,
     TitleWrapper,
     FormControlsWrapper
   } = props
@@ -190,6 +191,9 @@ const EditContract = props => {
         Alerter.success(t('contractForm.success'))
       },
       onError: err => {
+        if (onError) {
+          onError()
+        }
         // eslint-disable-next-line no-console
         console.error(err)
         Alerter.error(t('contractForm.failure'))
