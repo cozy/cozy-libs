@@ -22,7 +22,7 @@ export class KonnectorAccounts extends React.Component {
   constructor(props) {
     super(props)
     this.realtime = new CozyRealtime({ client: this.props.client })
-    this.handleTriggerUpdate = this.handleTriggerUpdate.bind(this)
+    this.handleJobUpdate = this.handleJobUpdate.bind(this)
     this.state = {
       fetchingAccounts: true,
       error: null,
@@ -44,15 +44,11 @@ export class KonnectorAccounts extends React.Component {
   async componentDidMount() {
     await this.fetchAccounts()
 
-    this.realtime.subscribe('updated', 'io.cozy.jobs', this.handleTriggerUpdate)
+    this.realtime.subscribe('updated', 'io.cozy.jobs', this.handleJobUpdate)
   }
 
   componentWillUnmount() {
-    this.realtime.unsubscribe(
-      'updated',
-      'io.cozy.jobs',
-      this.handleTriggerUpdate
-    )
+    this.realtime.unsubscribe('updated', 'io.cozy.jobs', this.handleJobUpdate)
   }
 
   componentDidUpdate(prevProps) {
@@ -65,7 +61,7 @@ export class KonnectorAccounts extends React.Component {
     }
   }
 
-  async handleTriggerUpdate(job) {
+  async handleJobUpdate(job) {
     const { client } = this.props
     const { accounts } = this.state
     const triggerId = job.trigger_id

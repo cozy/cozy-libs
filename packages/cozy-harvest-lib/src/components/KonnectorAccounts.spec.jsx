@@ -75,7 +75,7 @@ describe('KonnectorAccounts', () => {
       _id: 'abc',
       error: 'LOGIN_FAILED'
     })
-    await component.instance().handleTriggerUpdate({ trigger_id: 'abc' })
+    await component.instance().handleJobUpdate({ trigger_id: 'abc' })
     await component.update()
 
     expect(children).toHaveBeenCalledWith([
