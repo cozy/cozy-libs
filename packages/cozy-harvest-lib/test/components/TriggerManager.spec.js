@@ -7,9 +7,12 @@ import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import fixtures from '../../test/fixtures'
 import ConnectionFlow from '../../src/models/ConnectionFlow'
 import CozyClient from 'cozy-client'
+import I18n from 'cozy-ui/transpiled/react/I18n'
+import enLocale from '../../src/locales/en.json'
 
 jest.mock('cozy-keys-lib')
 jest.mock('cozy-ui/transpiled/react/utils/color')
+jest.mock('cozy-ui/transpiled/react/AppIcon', () => () => null)
 jest.mock('cozy-doctypes', () => {
   const doctypes = jest.requireActual('cozy-doctypes')
 
@@ -248,7 +251,9 @@ describe('TriggerManager', () => {
       const flow = new ConnectionFlow(client)
       jest.spyOn(flow, 'handleFormSubmit').mockImplementation(() => {})
       const utils = render(
-        <TriggerManager {...props} account={account} flow={flow} />
+        <I18n lang="en" dictRequire={() => enLocale}>
+          <TriggerManager {...props} account={account} flow={flow} />
+        </I18n>
       )
 
       // Identification of inputs is a tad fragile, it should be better
