@@ -35,7 +35,7 @@ const configsByMode = {
   },
   devmaif: {
     mode: 'dev',
-    url: 'https://cozytest-sandbox.biapi.pro/2.0'
+    url: 'https://maif-sandbox.biapi.pro/2.0'
   }
 }
 
