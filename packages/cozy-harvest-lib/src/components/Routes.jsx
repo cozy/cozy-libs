@@ -21,13 +21,16 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
         aria-label={konnector.name}
       >
         <KonnectorAccounts konnector={konnector}>
-          {accounts => (
+          {accountAndTriggers => (
             <Switch>
               <Route
                 path={`${konnectorRoot}/`}
                 exact
                 render={() => (
-                  <HarvestModalRoot accounts={accounts} konnector={konnector} />
+                  <HarvestModalRoot
+                    accounts={accountAndTriggers}
+                    konnector={konnector}
+                  />
                 )}
               />
               <Route
@@ -37,7 +40,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                   <AccountModal
                     konnector={konnector}
                     accountId={match.params.accountId}
-                    accounts={accounts}
+                    accountAndTriggers={accountAndTriggers}
                     onDismiss={onDismiss}
                   />
                 )}
@@ -49,7 +52,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                   <EditAccountModal
                     konnector={konnector}
                     accountId={match.params.accountId}
-                    accounts={accounts}
+                    accounts={accountAndTriggers}
                   />
                 )}
               />
@@ -71,7 +74,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                     <KonnectorSuccess
                       konnector={konnector}
                       accountId={match.params.accountId}
-                      accounts={accounts}
+                      accounts={accountAndTriggers}
                       onDismiss={onDismiss}
                     />
                   )

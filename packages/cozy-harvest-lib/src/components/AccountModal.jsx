@@ -60,9 +60,11 @@ export class AccountModal extends Component {
   }
 
   async loadSelectedAccountId() {
-    const { accountId, accounts } = this.props
+    const { accountId, accountAndTriggers } = this.props
     const matchingTrigger = get(
-      accounts.find(account => account.account._id === accountId),
+      accountAndTriggers.find(
+        accountAndTrigger => accountAndTrigger.account._id === accountId
+      ),
       'trigger'
     )
     if (matchingTrigger) await this.fetchAccount(matchingTrigger)
@@ -102,7 +104,7 @@ export class AccountModal extends Component {
     const {
       konnector,
       onDismiss,
-      accounts,
+      accountAndTriggers,
       t,
       pushHistory,
       breakpoints: { isMobile }
@@ -114,7 +116,7 @@ export class AccountModal extends Component {
           <AccountSelectBox
             loading={!account}
             selectedAccount={account}
-            accountsList={accounts}
+            accountsList={accountAndTriggers}
             onChange={option => {
               pushHistory(`/accounts/${option.account._id}`)
             }}
@@ -166,7 +168,15 @@ AccountModal.defaultProps = {
 AccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   onDismiss: PropTypes.func,
-  accounts: PropTypes.array.isRequired,
+  /**
+   * Contains accounts along with their associated triggers
+   * @typedef TriggerAccountItem
+   * @property {io.cozy.accounts} account
+   * @property {io.cozy.triggers} trigger
+   *
+   * @type {Array<TriggerAccountItem>}
+   */
+  accountAndTriggers: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired,
   pushHistory: PropTypes.func.isRequired,
   accountId: PropTypes.string.isRequired
