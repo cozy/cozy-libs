@@ -156,8 +156,8 @@
         "description": "Votre connecteur a été mis à jour et les permissions nécessaires ont changé. Merci de valider les nouvelles permissions avant de relancer le connecteur."
       },
       "USER_ACTION_NEEDED.SCA_REQUIRED": {
-        "title": "Authentification demandée",
-        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez sur leur site ou application pour que la connexion à Cozy refonctionne. Merci de relancer le connecteur une fois cette action effectuée."
+        "title": "Renouvellement d'authentification demandé",
+        "description": "Il semble que %{name} ait besoin de revérifier votre connexion avant d'autoriser Cozy à synchroniser vos comptes. Merci de relancer le connecteur, cela déclenchera la demande auprès de votre banque. Vous recevrez un code à usage unique ou une demande sur l'espace client ou l'application de votre banque."
       },
       "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
         "title": "Renouvellement de l’authentification demandé",

@@ -157,8 +157,8 @@
         "description": "You connector was updated and the permissions changed. Please validate them before launching the connector again."
       },
       "USER_ACTION_NEEDED.SCA_REQUIRED": {
-        "title": "Authentication on vendor required",
-        "description": "It seems that [%{name}](%{link}) requires you to log in on their app/website for the synchronisation to work. Please re-run the connector once you have settled the issue on the app/website."
+        "title": "Renewal of authentication  required",
+        "description": "It seems that %{name} requires a recheck on your login for the synchronisation to work. Please re-run the connector to start the verification process. You will receive a one-time password or a validation process on your bank application or website."
       },
       "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
         "title": "Authentication renewal required",
