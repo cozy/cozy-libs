@@ -1,5 +1,5 @@
 import { DumbVaultCiphersList } from './VaultCiphersList'
-import { render, waitForElement, fireEvent } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 
@@ -29,7 +29,7 @@ describe('when there is some ciphers', () => {
       </I18n>
     )
 
-    const node = await waitForElement(() => getByText('isabelledurand'))
+    const node = await getByText('isabelledurand')
     fireEvent.click(node)
 
     expect(onSelect).toHaveBeenCalledWith(ciphers[0])
@@ -58,7 +58,7 @@ describe('when there is some ciphers', () => {
       </I18n>
     )
 
-    const node = await waitForElement(() => getByText(/from another account/i))
+    const node = await getByText(/from another account/i)
     fireEvent.click(node)
 
     expect(onSelect).toHaveBeenCalledWith(null)
@@ -81,7 +81,7 @@ describe('when there is no cipher', () => {
       </I18n>
     )
 
-    const node = await waitForElement(() => getByText(/from another account/i))
+    const node = await getByText(/from another account/i)
     fireEvent.click(node)
 
     expect(onSelect).toHaveBeenCalledWith(null)
