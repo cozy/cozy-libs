@@ -16,10 +16,10 @@ class WhoHasAccess extends PureComponent {
 
     return (
       <div className={className}>
-        {recipients.map((recipient, index) => (
+        {recipients.map(recipient => (
           <Recipient
             {...recipient}
-            key={`key_r_${index}`}
+            key={`key_r_${recipient.index}`}
             isOwner={isOwner}
             document={document}
             documentType={documentType}
