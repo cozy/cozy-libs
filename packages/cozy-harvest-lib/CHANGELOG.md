@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.1.1...cozy-harvest-lib@2.2.0) (2020-08-26)
+
+
+### Features
+
+* Deactivate logging for harvest during tests ([d49ce55](https://github.com/cozy/cozy-libs/commit/d49ce55))
+
+
+
+
+
 ## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.1.0...cozy-harvest-lib@2.1.1) (2020-08-25)
 
 
