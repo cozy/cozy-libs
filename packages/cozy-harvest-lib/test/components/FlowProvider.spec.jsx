@@ -95,6 +95,7 @@ describe('FlowProvider', () => {
     wrapper.update()
     expect(wrapper.find(TwoFAModal).length).toBe(1)
 
+    flow.account = { _id: 'fake-account-id' }
     flow.triggerEvent(LOGIN_SUCCESS_EVENT)
     wrapper.update()
     expect(wrapper.find(TwoFAModal).length).toBe(0)

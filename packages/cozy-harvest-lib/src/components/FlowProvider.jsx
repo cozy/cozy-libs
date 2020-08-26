@@ -90,7 +90,7 @@ export class FlowProvider extends Component {
     this.setState({ showTwoFAModal: true })
   }
 
-  async handleError(error) {
+  handleError(error) {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
@@ -108,7 +108,7 @@ export class FlowProvider extends Component {
    * few konnectors are dealing with loginSuccess)
    *
    */
-  async handleSuccess() {
+  handleSuccess() {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
@@ -117,7 +117,7 @@ export class FlowProvider extends Component {
     if (typeof onSuccess === 'function') onSuccess(flow.trigger)
   }
 
-  async handleLoginSuccess() {
+  handleLoginSuccess() {
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }

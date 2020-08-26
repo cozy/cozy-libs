@@ -1,3 +1,4 @@
+import CozyClient from 'cozy-client'
 import KonnectorJobWatcher, { watchKonnectorJob } from './KonnectorJobWatcher'
 
 describe('watchKonnectorJob', () => {
@@ -10,12 +11,10 @@ describe('watchKonnectorJob', () => {
       state: 'queued'
     }
 
-    const client = {
-      stackClient: {
-        uri: 'http://cozy.tools:8080'
-      },
-      on: jest.fn()
-    }
+    const client = new CozyClient({
+      uri: 'http://cozy.tools:8080'
+    })
+    client.on = jest.fn()
     const result = await watchKonnectorJob(client, job)
     expect(result instanceof KonnectorJobWatcher).toBe(true)
   })

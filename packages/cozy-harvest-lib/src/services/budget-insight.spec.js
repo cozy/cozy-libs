@@ -9,6 +9,9 @@ import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
 
+jest.mock('cozy-logger', () => ({
+  namespace: () => () => {}
+}))
 jest.mock('../connections/accounts', () => ({
   saveAccount: jest.fn().mockImplementation(async account => account)
 }))
