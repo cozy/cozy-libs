@@ -62,7 +62,11 @@ class DocumentCategory extends Component {
         </GridItem>
 
         {isMenuDisplayed && (
-          <ActionMenu onClose={this.closeMenu} autoclose>
+          <ActionMenu
+            onClose={this.closeMenu}
+            autoclose
+            popperOptions={{ strategy: 'fixed' }}
+          >
             <ActionMenuHeader>
               <Media>
                 <Img>
