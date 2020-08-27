@@ -26,7 +26,7 @@ const makeContractsConn = ({ account }) => {
     query: () =>
       Q(doctype).where({ 'relationships.connection.data._id': account._id }),
     as: `connection-${account._id}/contracts`,
-    fetchPolicy: CozyClient.fetchPolicies.olderThan(60 * 1000)
+    fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
   }
 }
 
@@ -62,6 +62,9 @@ const ContractItem = ({ contract }) => {
         <EditContractModal
           contract={contract}
           dismissAction={() => {
+            setShowingEditModal(false)
+          }}
+          onSuccess={() => {
             setShowingEditModal(false)
           }}
         />
