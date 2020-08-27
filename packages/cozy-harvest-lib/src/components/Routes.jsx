@@ -89,4 +89,4 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
   )
 }
 
-export default translate()(Routes)
+export default Routes
