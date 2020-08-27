@@ -187,7 +187,8 @@ const Status = ({ status, isMe, instance }) => {
     text = t('Share.status.error')
     icon = 'warning'
   } else {
-    text = ['pending', 'seen'].includes(status)
+    const supportedStatus = ['pending', 'seen']
+    text = supportedStatus.includes(status)
       ? t(`Share.status.${status}`)
       : t('Share.status.pending')
 
