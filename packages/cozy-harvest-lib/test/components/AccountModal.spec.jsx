@@ -45,6 +45,7 @@ describe('AccountModal', () => {
         accountsAndTriggers={accountsAndTriggersMock}
         pushHistory={mockHistoryPush}
         breakpoints={{ isMobile: true }}
+        onDismiss={jest.fn()}
       />
     )
     return { component, mockHistoryPush }

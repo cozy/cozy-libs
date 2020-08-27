@@ -170,7 +170,7 @@ AccountModal.defaultProps = {
 }
 AccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
-  onDismiss: PropTypes.func,
+  onDismiss: PropTypes.func.isRequired,
   /**
    * Contains accounts along with their associated triggers
    * @typedef TriggerAccountItem
