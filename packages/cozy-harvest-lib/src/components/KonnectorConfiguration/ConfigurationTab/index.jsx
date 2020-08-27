@@ -84,14 +84,14 @@ const ConfigurationTab = ({
                   secondaryText={Account.getAccountName(account)}
                 />
                 <ListItemSecondaryAction>
-                  {running && <Spinner />}
-                </ListItemSecondaryAction>
-                <ListItemSecondaryAction>
-                  <Icon
-                    className="u-mr-1"
-                    icon="right"
-                    color={palette['coolGrey']}
-                  />
+                  <div>
+                    {running && <Spinner />}
+                    <Icon
+                      className="u-mr-1"
+                      icon="right"
+                      color={palette['coolGrey']}
+                    />
+                  </div>
                 </ListItemSecondaryAction>
               </ListItem>
             </List>
