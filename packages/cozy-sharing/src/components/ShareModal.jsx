@@ -8,8 +8,8 @@ import ExperimentalDialog, {
   ExperimentalDialogActions
 } from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
-import DialogContent from '@material-ui/core/DialogContent'
-import Divider from '@material-ui/core/Divider'
+import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 import styles from '../share.styl'
