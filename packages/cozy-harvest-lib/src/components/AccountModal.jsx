@@ -17,6 +17,7 @@ import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointPushHistory } from './MountPointContext'
+import withLocales from './hoc/withLocales'
 
 /**
  * AccountModal take an accountId and a list of accounts containing their
@@ -194,6 +195,7 @@ AccountModal.propTypes = {
 
 export default flow(
   withClient,
+  withLocales,
   translate(),
   withMountPointPushHistory,
   withBreakpoints()
