@@ -93,7 +93,7 @@ const EditContract = props => {
       },
       onError: err => {
         if (onError) {
-          onError()
+          onError(err)
         }
         // eslint-disable-next-line no-console
         console.error(err)
