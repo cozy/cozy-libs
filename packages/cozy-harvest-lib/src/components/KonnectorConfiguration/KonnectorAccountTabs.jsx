@@ -27,6 +27,7 @@ export const KonnectorAccountTabs = ({
   trigger: initialTrigger,
   account,
   onAccountDeleted,
+  initialActiveTab,
 
   //TODO rename to onAddAccount
   addAccount
@@ -41,7 +42,11 @@ export const KonnectorAccountTabs = ({
         const hasLoginError = hasError && error.isLoginError()
 
         return (
-          <Tabs initialActiveTab={hasLoginError ? 'configuration' : 'data'}>
+          <Tabs
+            initialActiveTab={
+              initialActiveTab || (hasLoginError ? 'configuration' : 'data')
+            }
+          >
             <TabList>
               <Tab name="data">
                 {t('modal.tabs.data')}
@@ -89,6 +94,8 @@ KonnectorAccountTabs.propTypes = {
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
 
+  /** @type {string} Can be used to force the initial tab */
+  initialActiveTab: PropTypes.oneOf(['configuration', 'data'])
 }
 
 export default KonnectorAccountTabs

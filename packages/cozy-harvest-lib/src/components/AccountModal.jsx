@@ -107,6 +107,7 @@ export class AccountModal extends Component {
       accountsAndTriggers,
       t,
       pushHistory,
+      initialActiveTab,
       breakpoints: { isMobile }
     } = this.props
     const { trigger, account, fetching, error } = this.state
@@ -150,6 +151,7 @@ export class AccountModal extends Component {
         {!error && !fetching && (
           <ModalContent className={isMobile ? 'u-p-0' : null}>
             <KonnectorAccountTabs
+              initialActiveTab={initialActiveTab}
               konnector={konnector}
               trigger={trigger}
               account={account}
@@ -184,7 +186,10 @@ AccountModal.propTypes = {
   ).isRequired,
   t: PropTypes.func.isRequired,
   pushHistory: PropTypes.func.isRequired,
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string.isRequired,
+
+  /** @type {string} Can be set to force the initial active tab */
+  initialActiveTab: PropTypes.oneOf(['configuration', 'data'])
 }
 
 export default flow(
