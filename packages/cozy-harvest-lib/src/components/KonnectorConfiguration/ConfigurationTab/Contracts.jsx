@@ -51,7 +51,7 @@ const ContractItem = ({ contract }) => {
         }}
       >
         <ListItemIcon>
-          <Icon icon="wallet" className="u-coolGrey" />
+          <Icon icon="wallet" className="u-slateGrey" />
         </ListItemIcon>
         <ListItemText
           primaryText={startCase(getPrimaryText(contract).toLowerCase())}

@@ -77,7 +77,7 @@ const ConfigurationTab = ({
                 onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
               >
                 <ListItemIcon>
-                  <Icon icon="key" color={palette['coolGrey']} />
+                  <Icon icon="key" color={palette['slateGrey']} />
                 </ListItemIcon>
                 <ListItemText
                   primaryText={t('modal.updateAccount.identifiers')}
