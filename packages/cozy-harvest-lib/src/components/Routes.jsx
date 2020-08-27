@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import Modal from 'cozy-ui/transpiled/react/Modal'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import KonnectorAccounts from './KonnectorAccounts'
 import AccountModal from './AccountModal'

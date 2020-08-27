@@ -9,7 +9,6 @@ import {
   TabPanel
 } from 'cozy-ui/transpiled/react/Tabs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'

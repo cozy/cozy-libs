@@ -91,7 +91,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   <ModalContent
     className="u-p-0"
   >
-    <withI18n(KonnectorAccountTabs)
+    <KonnectorAccountTabs
       account={
         Object {
           "_id": "123",
@@ -155,7 +155,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   <ModalContent
     className="u-p-0"
   >
-    <withI18n(KonnectorAccountTabs)
+    <KonnectorAccountTabs
       account={
         Object {
           "_id": "account_2",
