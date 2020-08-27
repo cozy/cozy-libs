@@ -9,7 +9,7 @@ import MenuWithFixedComponent from './MenuWithFixedComponent'
 import AccountSelectControl from './AccountSelectControl'
 
 const AccountSelectBox = ({
-  accountAndTriggers,
+  accountsAndTriggers,
   selectedAccount,
   onChange,
   onCreate,
@@ -21,7 +21,7 @@ const AccountSelectBox = ({
   return (
     <SelectBox
       size="tiny"
-      options={accountAndTriggers}
+      options={accountsAndTriggers}
       onChange={onChange}
       createAction={onCreate}
       getOptionLabel={option => Account.getAccountName(option.account)}
@@ -29,10 +29,10 @@ const AccountSelectBox = ({
       isSearchable={false}
       defaultValue={
         selectedAccount
-          ? accountAndTriggers.find(
+          ? accountsAndTriggers.find(
               ({ account }) => account._id === selectedAccount._id
             )
-          : accountAndTriggers[0]
+          : accountsAndTriggers[0]
       }
       components={{
         Control: reactSelectControl(
@@ -47,7 +47,7 @@ const AccountSelectBox = ({
 }
 
 AccountSelectBox.propTypes = {
-  accountAndTriggers: PropTypes.arrayOf(PropTypes.object).isRequired,
+  accountsAndTriggers: PropTypes.arrayOf(PropTypes.object).isRequired,
   /** @type {io.cozy.accounts} The account currently shown, can be null if loading is true */
   selectedAccount: PropTypes.object,
   /** @type {Boolean} If true, renders an empty div with the same height as the SelectBox */

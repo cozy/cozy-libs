@@ -60,9 +60,9 @@ export class AccountModal extends Component {
   }
 
   async loadSelectedAccountId() {
-    const { accountId, accountAndTriggers } = this.props
+    const { accountId, accountsAndTriggers } = this.props
     const matchingTrigger = get(
-      accountAndTriggers.find(
+      accountsAndTriggers.find(
         accountAndTrigger => accountAndTrigger.account._id === accountId
       ),
       'trigger'
@@ -104,7 +104,7 @@ export class AccountModal extends Component {
     const {
       konnector,
       onDismiss,
-      accountAndTriggers,
+      accountsAndTriggers,
       t,
       pushHistory,
       breakpoints: { isMobile }
@@ -116,7 +116,7 @@ export class AccountModal extends Component {
           <AccountSelectBox
             loading={!account}
             selectedAccount={account}
-            accountsList={accountAndTriggers}
+            accountsAndTriggers={accountsAndTriggers}
             onChange={option => {
               pushHistory(`/accounts/${option.account._id}`)
             }}
@@ -176,7 +176,12 @@ AccountModal.propTypes = {
    *
    * @type {Array<TriggerAccountItem>}
    */
-  accountAndTriggers: PropTypes.array.isRequired,
+  accountsAndTriggers: PropTypes.arrayOf(
+    PropTypes.shape({
+      account: PropTypes.object.isRequired,
+      trigger: PropTypes.object.isRequired
+    })
+  ).isRequired,
   t: PropTypes.func.isRequired,
   pushHistory: PropTypes.func.isRequired,
   accountId: PropTypes.string.isRequired

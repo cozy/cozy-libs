@@ -6,7 +6,7 @@ exports[`AccountModal should display the fetching state by default 1`] = `
     konnector={Object {}}
   >
     <AccountSelectBox
-      accountsList={
+      accountsAndTriggers={
         Array [
           Object {
             "account": Object {
@@ -53,7 +53,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     konnector={Object {}}
   >
     <AccountSelectBox
-      accountsList={
+      accountsAndTriggers={
         Array [
           Object {
             "account": Object {
@@ -117,7 +117,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     konnector={Object {}}
   >
     <AccountSelectBox
-      accountsList={
+      accountsAndTriggers={
         Array [
           Object {
             "account": Object {

@@ -11,7 +11,7 @@ jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
   isMobile: false
 }))
 
-const accountsMock = [
+const accountsAndTriggersMock = [
   {
     account: {
       _id: '123',
@@ -42,7 +42,7 @@ describe('AccountModal', () => {
         konnector={{}}
         t={x => x}
         accountId={accountIdMock}
-        accounts={accountsMock}
+        accountsAndTriggers={accountsAndTriggersMock}
         pushHistory={mockHistoryPush}
         breakpoints={{ isMobile: true }}
       />
