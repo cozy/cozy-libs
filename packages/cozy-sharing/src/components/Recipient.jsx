@@ -94,9 +94,13 @@ export const Permissions = ({
   const client = useClient()
   const [revoking, setRevoking] = useState(false)
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false)
-  const isMe =
-    instance !== undefined && instance === client.options.uri && !isOwner
-  const shouldShowMenu = !revoking && status !== 'owner' && (isMe || isOwner)
+  const instanceMatchesClient =
+    instance !== undefined && instance === client.options.uri
+  const contactIsOwner = status === 'owner'
+  const shouldShowMenu =
+    !revoking &&
+    !contactIsOwner &&
+    ((instanceMatchesClient && !isOwner) || isOwner)
 
   const showMenu = () => setIsMenuDisplayed(true)
   const hideMenu = () => setIsMenuDisplayed(false)
@@ -121,7 +125,7 @@ export const Permissions = ({
       {!shouldShowMenu && !revoking && (
         <span>{t(`Share.status.${status}`)}</span>
       )}
-      {shouldShowMenu && !revoking && (
+      {shouldShowMenu && (
         <>
           <DropdownButton
             onClick={showMenu}
