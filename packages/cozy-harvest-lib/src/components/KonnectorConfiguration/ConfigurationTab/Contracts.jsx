@@ -14,8 +14,6 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
-
 import { getAccountLabel } from './bankAccountHelpers'
 import EditContractModal from './EditContract'
 
