@@ -79,7 +79,7 @@ const customHeaderPerDoctype = {
 const DumbContracts = ({ contracts, doctype }) => {
   const { t } = useI18n()
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
-  return (
+  return contracts.data.length > 0 ? (
     <MuiCozyTheme>
       <ListSubheader>{t(`contracts.headers.${headerKey}`)}</ListSubheader>
       <List dense>
@@ -90,7 +90,7 @@ const DumbContracts = ({ contracts, doctype }) => {
           })}
       </List>
     </MuiCozyTheme>
-  )
+  ) : null
 }
 
 export default compose(
