@@ -12,7 +12,7 @@ import {
 } from '../../src/connections/files'
 
 import fixtures from '../../test/fixtures'
-import en from '../../src/locales/en'
+import en from '../../src/locales/en.json'
 import Polyglot from 'node-polyglot'
 import { CozyFolder } from 'cozy-doctypes'
 

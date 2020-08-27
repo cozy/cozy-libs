@@ -7,7 +7,7 @@ import LaunchTriggerCard, {
 } from 'components/cards/LaunchTriggerCard'
 import CozyClient, { CozyProvider } from 'cozy-client'
 import ConnectionFlow from '../../models/ConnectionFlow'
-import enLocale from '../../locales/en'
+import enLocale from '../../locales/en.json'
 
 const triggerFixture = {
   _id: 'd861818b62204988bf0bb78c182a9149',

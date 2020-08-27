@@ -3,7 +3,7 @@ import { mount } from 'enzyme'
 import { TwoFAModal } from './TwoFAModal'
 import ConnectionFlow from '../models/ConnectionFlow'
 import { Text, Field } from 'cozy-ui/transpiled/react'
-import en from '../locales/en'
+import en from '../locales/en.json'
 import Polyglot from 'node-polyglot'
 
 jest.mock('./KonnectorIcon', () => () => null)
