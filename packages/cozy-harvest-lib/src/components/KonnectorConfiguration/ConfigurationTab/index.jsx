@@ -59,19 +59,28 @@ const ConfigurationTab = ({
             konnector={konnector}
           />
         )}
+        {flag('harvest.show-contracts') && contractDoctype ? (
+          <Contracts
+            doctype={contractDoctype}
+            konnector={konnector}
+            account={account}
+          />
+        ) : null}
         {!konnector.oauth ? (
           <div>
-            <ListSubheader>{t('modal.updateAccount.title')}</ListSubheader>
+            <ListSubheader>
+              {t('modal.updateAccount.general-subheader')}
+            </ListSubheader>
             <List dense className="u-pt-0">
               <ListItem
                 className="u-mt-half u-c-pointer"
                 onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
               >
                 <ListItemIcon>
-                  <Icon icon="lock" color={palette['coolGrey']} />
+                  <Icon icon="key" color={palette['coolGrey']} />
                 </ListItemIcon>
                 <ListItemText
-                  primaryText={konnector.name}
+                  primaryText={t('modal.updateAccount.identifiers')}
                   secondaryText={Account.getAccountName(account)}
                 />
                 <ListItemSecondaryAction>
@@ -87,13 +96,6 @@ const ConfigurationTab = ({
               </ListItem>
             </List>
           </div>
-        ) : null}
-        {flag('harvest.show-contracts') && contractDoctype ? (
-          <Contracts
-            doctype={contractDoctype}
-            konnector={konnector}
-            account={account}
-          />
         ) : null}
         <div className="u-flex u-flex-row">
           <DeleteAccountButton
