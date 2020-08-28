@@ -1,6 +1,6 @@
 {
   "name": "cozy-sharing",
-  "version": "1.14.0",
+  "version": "1.15.0",
   "description": "Provides sharing login for React applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -37,6 +37,7 @@
     "react-tooltip": "^3.11.1"
   },
   "devDependencies": {
+    "@material-ui/core": "3",
     "babel-jest": "^24.9.0",
     "babel-plugin-css-modules-transform": "^1.6.2",
     "cozy-client": "13.15.1",
@@ -44,14 +45,13 @@
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "enzyme-to-json": "3.4.4",
-    "@material-ui/core": "3",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "peerDependencies": {
+    "@material-ui/core": "3",
     "cozy-client": "^13.15.1",
     "cozy-ui": "^35.39.0",
-    "@material-ui/core": "3",
     "prop-types": "^15.7.2",
     "react": "^16.12.0"
   },

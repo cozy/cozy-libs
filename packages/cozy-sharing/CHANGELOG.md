@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.14.0...cozy-sharing@1.15.0) (2020-08-28)
+
+
+### Bug Fixes
+
+* Adjust aligment issues ([efdf056](https://github.com/cozy/cozy-libs/commit/efdf056))
+* Make keys more relevant ([2e77114](https://github.com/cozy/cozy-libs/commit/2e77114))
+
+
+### Features
+
+* Add MUI dependency ([15037a8](https://github.com/cozy/cozy-libs/commit/15037a8))
+* Change share modal layout ([ad74703](https://github.com/cozy/cozy-libs/commit/ad74703))
+* Dedicate dropdown menu to permissions ([337bb2c](https://github.com/cozy/cozy-libs/commit/337bb2c))
+* Different display for error statuses ([c476b3c](https://github.com/cozy/cozy-libs/commit/c476b3c))
+* Remove who has access title ([96fa93b](https://github.com/cozy/cozy-libs/commit/96fa93b))
+* Sharing status is now always displayed ([b02cef3](https://github.com/cozy/cozy-libs/commit/b02cef3))
+* Show pending status when we dont support the real status ([498640e](https://github.com/cozy/cozy-libs/commit/498640e))
+
+
+
+
+
 # [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.13.8...cozy-sharing@1.14.0) (2020-08-21)
 
 
