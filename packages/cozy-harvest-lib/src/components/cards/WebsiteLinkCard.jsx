@@ -11,17 +11,15 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 const WebsiteLinkCard = ({ link, t }) => {
-  const imgStyle = { paddingRight: '1rem' }
-  const linkStyle = { textTransform: 'lowercase', margin: 0 }
-  const hrStyle = { color: palette['silver'] }
+  const linkStyle = { textTransform: 'lowercase' }
   const label = new URL(link).host
 
   return (
     <Card>
       <SubTitle className="u-mb-1">{t('card.websiteLink.title')}</SubTitle>
-      <hr style={hrStyle} />
+      <hr className="u-silver" />
       <Media align="top">
-        <Img style={imgStyle}>
+        <Img className="u-pr-1">
           <Icon icon="globe" color={palette['coolGrey']} />
         </Img>
         <Bd>
@@ -31,7 +29,7 @@ const WebsiteLinkCard = ({ link, t }) => {
             href={link}
             label={label}
             theme="text"
-            className="u-dodgerBlue"
+            className="u-dodgerBlue u-m-0"
             style={linkStyle}
           />
           <Caption>{t('card.websiteLink.description')}</Caption>
