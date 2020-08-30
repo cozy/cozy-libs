@@ -351,7 +351,7 @@
       "description": "Vous serez déconnecté de ce compte, mais les données importées seront conservées"
     },
     "updateAccount": {
-      "general": "Général",
+      "general-subheader": "Général",
       "identifiers": "Identifiants"
     }
   },
