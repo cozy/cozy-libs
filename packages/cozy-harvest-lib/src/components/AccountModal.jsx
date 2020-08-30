@@ -17,6 +17,7 @@ import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointPushHistory } from './MountPointContext'
+import withLocales from './hoc/withLocales'
 
 /**
  * AccountModal take an accountId and a list of accounts containing their
@@ -60,9 +61,11 @@ export class AccountModal extends Component {
   }
 
   async loadSelectedAccountId() {
-    const { accountId, accounts } = this.props
+    const { accountId, accountsAndTriggers } = this.props
     const matchingTrigger = get(
-      accounts.find(account => account.account._id === accountId),
+      accountsAndTriggers.find(
+        accountAndTrigger => accountAndTrigger.account._id === accountId
+      ),
       'trigger'
     )
     if (matchingTrigger) await this.fetchAccount(matchingTrigger)
@@ -102,27 +105,27 @@ export class AccountModal extends Component {
     const {
       konnector,
       onDismiss,
-      accounts,
+      accountsAndTriggers,
       t,
       pushHistory,
+      initialActiveTab,
       breakpoints: { isMobile }
     } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
-          {account && (
-            <AccountSelectBox
-              selectedAccount={account}
-              accountsList={accounts}
-              onChange={option => {
-                pushHistory(`/accounts/${option.account._id}`)
-              }}
-              onCreate={() => {
-                pushHistory('/new')
-              }}
-            />
-          )}
+          <AccountSelectBox
+            loading={!account}
+            selectedAccount={account}
+            accountsAndTriggers={accountsAndTriggers}
+            onChange={option => {
+              pushHistory(`/accounts/${option.account._id}`)
+            }}
+            onCreate={() => {
+              pushHistory('/new')
+            }}
+          />
         </KonnectorModalHeader>
         <ModalContent>
           {error && (
@@ -149,6 +152,7 @@ export class AccountModal extends Component {
         {!error && !fetching && (
           <ModalContent className={isMobile ? 'u-p-0' : null}>
             <KonnectorAccountTabs
+              initialActiveTab={initialActiveTab}
               konnector={konnector}
               trigger={trigger}
               account={account}
@@ -166,15 +170,32 @@ AccountModal.defaultProps = {
 }
 AccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
-  onDismiss: PropTypes.func,
-  accounts: PropTypes.array.isRequired,
+  onDismiss: PropTypes.func.isRequired,
+  /**
+   * Contains accounts along with their associated triggers
+   * @typedef TriggerAccountItem
+   * @property {io.cozy.accounts} account
+   * @property {io.cozy.triggers} trigger
+   *
+   * @type {Array<TriggerAccountItem>}
+   */
+  accountsAndTriggers: PropTypes.arrayOf(
+    PropTypes.shape({
+      account: PropTypes.object.isRequired,
+      trigger: PropTypes.object.isRequired
+    })
+  ).isRequired,
   t: PropTypes.func.isRequired,
   pushHistory: PropTypes.func.isRequired,
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string.isRequired,
+
+  /** @type {string} Can be set to force the initial active tab */
+  initialActiveTab: PropTypes.oneOf(['configuration', 'data'])
 }
 
 export default flow(
   withClient,
+  withLocales,
   translate(),
   withMountPointPushHistory,
   withBreakpoints()

@@ -25,13 +25,10 @@ import Contracts from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-const contractRx = /io\.cozy\.[a-z]+\.accounts/
-
 const getContractDoctypeFromKonnector = memoize(konnector => {
-  const contractPermission = Object.values(konnector.permissions).find(
-    permission => permission.type.match(contractRx)
-  )
-  return contractPermission && contractPermission.type
+  if (konnector.categories.includes('banking')) {
+    return 'io.cozy.bank.accounts'
+  }
 })
 
 const ConfigurationTab = ({
@@ -62,41 +59,43 @@ const ConfigurationTab = ({
             konnector={konnector}
           />
         )}
-        {!konnector.oauth ? (
-          <div>
-            <ListSubheader>{t('modal.updateAccount.title')}</ListSubheader>
-            <List dense className="u-pt-0">
-              <ListItem
-                className="u-mt-half u-c-pointer"
-                onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
-              >
-                <ListItemIcon>
-                  <Icon icon="lock" color={palette['coolGrey']} />
-                </ListItemIcon>
-                <ListItemText
-                  primaryText={konnector.name}
-                  secondaryText={Account.getAccountName(account)}
-                />
-                <ListItemSecondaryAction>
-                  {running && <Spinner />}
-                </ListItemSecondaryAction>
-                <ListItemSecondaryAction>
-                  <Icon
-                    className="u-mr-1"
-                    icon="right"
-                    color={palette['coolGrey']}
-                  />
-                </ListItemSecondaryAction>
-              </ListItem>
-            </List>
-          </div>
-        ) : null}
         {flag('harvest.show-contracts') && contractDoctype ? (
           <Contracts
             doctype={contractDoctype}
             konnector={konnector}
             account={account}
           />
+        ) : null}
+        {!konnector.oauth ? (
+          <div>
+            <ListSubheader>
+              {t('modal.updateAccount.general-subheader')}
+            </ListSubheader>
+            <List dense className="u-pt-0">
+              <ListItem
+                className="u-mt-half u-c-pointer"
+                onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
+              >
+                <ListItemIcon>
+                  <Icon icon="key" color={palette['slateGrey']} />
+                </ListItemIcon>
+                <ListItemText
+                  primaryText={t('modal.updateAccount.identifiers')}
+                  secondaryText={Account.getAccountName(account)}
+                />
+                <ListItemSecondaryAction>
+                  <div>
+                    {running && <Spinner />}
+                    <Icon
+                      className="u-mr-1"
+                      icon="right"
+                      color={palette['coolGrey']}
+                    />
+                  </div>
+                </ListItemSecondaryAction>
+              </ListItem>
+            </List>
+          </div>
         ) : null}
         <div className="u-flex u-flex-row">
           <DeleteAccountButton

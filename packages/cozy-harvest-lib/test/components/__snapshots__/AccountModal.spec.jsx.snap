@@ -4,7 +4,37 @@ exports[`AccountModal should display the fetching state by default 1`] = `
 <React.Fragment>
   <KonnectorModalHeader
     konnector={Object {}}
-  />
+  >
+    <AccountSelectBox
+      accountsAndTriggers={
+        Array [
+          Object {
+            "account": Object {
+              "_id": "123",
+              "name": "account 1",
+            },
+            "trigger": Object {
+              "current_state": Object {},
+              "id": "triggerid",
+            },
+          },
+          Object {
+            "account": Object {
+              "_id": "account_2",
+              "name": "account_2",
+            },
+            "trigger": Object {
+              "id": "trigger_account2",
+            },
+          },
+        ]
+      }
+      loading={true}
+      onChange={[Function]}
+      onCreate={[Function]}
+      selectedAccount={null}
+    />
+  </KonnectorModalHeader>
   <ModalContent>
     <div
       className="u-ta-center"
@@ -23,7 +53,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     konnector={Object {}}
   >
     <AccountSelectBox
-      accountsList={
+      accountsAndTriggers={
         Array [
           Object {
             "account": Object {
@@ -46,6 +76,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
           },
         ]
       }
+      loading={false}
       onChange={[Function]}
       onCreate={[Function]}
       selectedAccount={
@@ -60,7 +91,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   <ModalContent
     className="u-p-0"
   >
-    <withI18n(KonnectorAccountTabs)
+    <KonnectorAccountTabs
       account={
         Object {
           "_id": "123",
@@ -69,6 +100,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       }
       addAccount={[Function]}
       konnector={Object {}}
+      onAccountDeleted={[MockFunction]}
       trigger={
         Object {
           "current_state": Object {},
@@ -86,7 +118,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
     konnector={Object {}}
   >
     <AccountSelectBox
-      accountsList={
+      accountsAndTriggers={
         Array [
           Object {
             "account": Object {
@@ -109,6 +141,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
           },
         ]
       }
+      loading={false}
       onChange={[Function]}
       onCreate={[Function]}
       selectedAccount={
@@ -123,7 +156,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   <ModalContent
     className="u-p-0"
   >
-    <withI18n(KonnectorAccountTabs)
+    <KonnectorAccountTabs
       account={
         Object {
           "_id": "account_2",
@@ -132,6 +165,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       }
       addAccount={[Function]}
       konnector={Object {}}
+      onAccountDeleted={[MockFunction]}
       trigger={
         Object {
           "id": "trigger_account2",

@@ -39,7 +39,7 @@ export class KonnectorModal extends PureComponent {
     addingAccount: false,
     trigger: null,
     error: null,
-    accounts: []
+    accountsAndTriggers: []
   }
 
   constructor(props) {
@@ -57,11 +57,13 @@ export class KonnectorModal extends PureComponent {
    */
   async componentDidMount() {
     await this.fetchAccounts()
-    const { accounts } = this.state
+    const { accountsAndTriggers } = this.state
 
     if (this.props.accountId) this.loadSelectedAccountId()
-    else if (accounts.length === 1)
-      this.requestAccountChange(accounts[0].account, accounts[0].trigger)
+    else if (accountsAndTriggers.length === 1) {
+      const { account, trigger } = accountsAndTriggers[0]
+      this.requestAccountChange(account, trigger)
+    }
   }
 
   componentWillUnmount() {
@@ -95,10 +97,12 @@ export class KonnectorModal extends PureComponent {
 
   loadSelectedAccountId() {
     const selectedAccountId = this.props.accountId
-    const { accounts } = this.state
+    const { accountsAndTriggers } = this.state
 
     const matchingTrigger = get(
-      accounts.find(account => account.account._id === selectedAccountId),
+      accountsAndTriggers.find(
+        account => account.account._id === selectedAccountId
+      ),
       'trigger'
     )
 
@@ -118,8 +122,8 @@ export class KonnectorModal extends PureComponent {
     if (account) {
       this.setState(prevState => ({
         ...prevState,
-        accounts: [
-          ...prevState.accounts,
+        accountsAndTriggers: [
+          ...prevState.accountsAndTriggers,
           {
             account,
             trigger
@@ -134,7 +138,7 @@ export class KonnectorModal extends PureComponent {
     const triggers = this.props.konnector.triggers.data
     this.setState({ fetchingAccounts: true })
     try {
-      const accounts = (await Promise.all(
+      const accountsAndTriggers = (await Promise.all(
         triggers.map(async trigger => {
           return {
             account: await findAccount(
@@ -145,7 +149,11 @@ export class KonnectorModal extends PureComponent {
           }
         })
       )).filter(({ account }) => !!account)
-      this.setState({ accounts, fetchingAccounts: false, error: null })
+      this.setState({
+        accountsAndTriggers,
+        fetchingAccounts: false,
+        error: null
+      })
     } catch (error) {
       this.setState({ error, fetchingAccounts: false })
     }
@@ -198,7 +206,7 @@ export class KonnectorModal extends PureComponent {
 
   render() {
     const { dismissAction, konnector, into, t } = this.props
-    const { account, accounts, addingAccount } = this.state
+    const { account, accountsAndTriggers, addingAccount } = this.state
 
     return (
       <Modal
@@ -217,10 +225,10 @@ export class KonnectorModal extends PureComponent {
             <div className="u-flex-grow-1 u-mr-half">
               <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
 
-              {accounts.length > 0 && account && !addingAccount && (
+              {accountsAndTriggers.length > 0 && account && !addingAccount && (
                 <AccountSelectBox
                   selectedAccount={account}
-                  accountsList={accounts}
+                  accountsAndTriggers={accountsAndTriggers}
                   onChange={option => {
                     this.requestAccountChange(option.account, option.trigger)
                   }}
@@ -247,7 +255,7 @@ export class KonnectorModal extends PureComponent {
     const { dismissAction, konnector, t } = this.props
     const {
       account,
-      accounts,
+      accountsAndTriggers,
       error,
       fetching,
       fetchingAccounts,
@@ -290,7 +298,7 @@ export class KonnectorModal extends PureComponent {
             <KonnectorUpdateInfos className="u-mb-1" konnector={konnector} />
           )}
           <AccountsList
-            accounts={accounts}
+            accounts={accountsAndTriggers}
             konnector={konnector}
             onPick={option => {
               this.requestAccountChange(option.account, option.trigger)

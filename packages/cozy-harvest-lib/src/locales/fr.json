@@ -49,7 +49,8 @@
     "removeAccountBtn": "Effacer le compte",
     "listPlaceholder": "Rechercher un contact",
     "listEmptyMessage": "Aucun contact trouvé",
-    "addContactLabel": "Créer un contact"
+    "addContactLabel": "Créer un contact",
+    "cancel": "Annuler"
   },
   "card": {
     "launchTrigger": {
@@ -350,7 +351,8 @@
       "description": "Vous serez déconnecté de ce compte, mais les données importées seront conservées"
     },
     "updateAccount": {
-      "title": "Mise à jour de vos identifiants"
+      "general": "Général",
+      "identifiers": "Identifiants"
     }
   },
   "oauth": {

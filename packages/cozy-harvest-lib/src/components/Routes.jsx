@@ -1,7 +1,6 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import Modal from 'cozy-ui/transpiled/react/Modal'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import KonnectorAccounts from './KonnectorAccounts'
 import AccountModal from './AccountModal'
@@ -21,13 +20,16 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
         aria-label={konnector.name}
       >
         <KonnectorAccounts konnector={konnector}>
-          {accounts => (
+          {accountsAndTriggers => (
             <Switch>
               <Route
                 path={`${konnectorRoot}/`}
                 exact
                 render={() => (
-                  <HarvestModalRoot accounts={accounts} konnector={konnector} />
+                  <HarvestModalRoot
+                    accounts={accountsAndTriggers}
+                    konnector={konnector}
+                  />
                 )}
               />
               <Route
@@ -37,7 +39,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                   <AccountModal
                     konnector={konnector}
                     accountId={match.params.accountId}
-                    accounts={accounts}
+                    accountsAndTriggers={accountsAndTriggers}
                     onDismiss={onDismiss}
                   />
                 )}
@@ -49,7 +51,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                   <EditAccountModal
                     konnector={konnector}
                     accountId={match.params.accountId}
-                    accounts={accounts}
+                    accounts={accountsAndTriggers}
                   />
                 )}
               />
@@ -71,7 +73,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                     <KonnectorSuccess
                       konnector={konnector}
                       accountId={match.params.accountId}
-                      accounts={accounts}
+                      accounts={accountsAndTriggers}
                       onDismiss={onDismiss}
                     />
                   )
@@ -86,4 +88,4 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
   )
 }
 
-export default translate()(Routes)
+export default Routes

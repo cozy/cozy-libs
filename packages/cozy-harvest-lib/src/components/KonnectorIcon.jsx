@@ -6,10 +6,10 @@ import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 // TODO move this to cozy-ui
 class KonnectorIcon extends PureComponent {
   fetchIcon() {
-    const { konnector, client } = this.props
+    const { konnector, konnectorSlug, client } = this.props
     return client.getStackClient().getIconURL({
       type: 'konnector',
-      slug: konnector.slug
+      slug: konnectorSlug || konnector.slug
     })
   }
 
@@ -21,7 +21,8 @@ class KonnectorIcon extends PureComponent {
 }
 
 KonnectorIcon.propTypes = {
-  konnector: PropTypes.object.isRequired,
+  konnector: PropTypes.object,
+  konnectorSlug: PropTypes.string,
   client: PropTypes.object.isRequired
 }
 export default withClient(KonnectorIcon)

@@ -13,16 +13,9 @@ import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-
-import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
 
 import { getAccountLabel } from './bankAccountHelpers'
-import EditContract from './EditContract'
+import EditContractModal from './EditContract'
 
 import withLocales from '../../hoc/withLocales'
 
@@ -31,27 +24,10 @@ const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
   return {
     query: () =>
-      Q(doctype).where({ 'relationships.connection._id': account._id }),
+      Q(doctype).where({ 'relationships.connection.data._id': account._id }),
     as: `connection-${account._id}/contracts`,
-    fetchPolicy: CozyClient.fetchPolicies.olderThan(60 * 1000)
+    fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
   }
-}
-
-const EditModal = ({ contract, dismissAction }) => {
-  return (
-    <ExperimentalDialog>
-      <DialogCloseButton onClick={dismissAction} />
-      <DialogContent>
-        <EditContract
-          TitleWrapper={ExperimentalDialogTitle}
-          FormControlsWrapper={ExperimentalDialogActions}
-          account={contract}
-          onCancel={dismissAction}
-          onSuccess={dismissAction}
-        />
-      </DialogContent>
-    </ExperimentalDialog>
-  )
 }
 
 const getPrimaryTextPerDoctype = {
@@ -73,7 +49,7 @@ const ContractItem = ({ contract }) => {
         }}
       >
         <ListItemIcon>
-          <Icon icon="wallet" className="u-coolGrey" />
+          <Icon icon="wallet" className="u-slateGrey" />
         </ListItemIcon>
         <ListItemText
           primaryText={startCase(getPrimaryText(contract).toLowerCase())}
@@ -83,9 +59,12 @@ const ContractItem = ({ contract }) => {
         </ListItemSecondaryAction>
       </ListItem>
       {showingEditModal ? (
-        <EditModal
+        <EditContractModal
           contract={contract}
           dismissAction={() => {
+            setShowingEditModal(false)
+          }}
+          onSuccess={() => {
             setShowingEditModal(false)
           }}
         />
@@ -101,7 +80,7 @@ const customHeaderPerDoctype = {
 const DumbContracts = ({ contracts, doctype }) => {
   const { t } = useI18n()
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
-  return (
+  return contracts.data.length > 0 ? (
     <MuiCozyTheme>
       <ListSubheader>{t(`contracts.headers.${headerKey}`)}</ListSubheader>
       <List dense>
@@ -112,7 +91,7 @@ const DumbContracts = ({ contracts, doctype }) => {
           })}
       </List>
     </MuiCozyTheme>
-  )
+  ) : null
 }
 
 export default compose(
