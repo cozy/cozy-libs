@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.2.0...cozy-harvest-lib@2.3.0) (2020-08-30)
+
+
+### Bug Fixes
+
+* Add cancel in locales ([93880a3](https://github.com/cozy/cozy-libs/commit/93880a3))
+* Cannot use several ListSecondaryAction, use only 1 with wrapping div ([ade9203](https://github.com/cozy/cozy-libs/commit/ade9203))
+* Contracts query was wrong (a relationship 1-1 has a data attribute) ([124c262](https://github.com/cozy/cozy-libs/commit/124c262))
+* Wrap AccountModal into withLocales so that it is self sufficient ([7a85630](https://github.com/cozy/cozy-libs/commit/7a85630))
+
+
+### Features
+
+* Ability to force the initialActiveTab of AccountModal ([9c602c7](https://github.com/cozy/cozy-libs/commit/9c602c7))
+* Ability to pass the triggers prop directly to KonnectorAccounts ([20c12b8](https://github.com/cozy/cozy-libs/commit/20c12b8))
+* Add onError callback for EditContract ([96383da](https://github.com/cozy/cozy-libs/commit/96383da))
+* Do not display the contracts if there are no contracts to display ([8bd56ee](https://github.com/cozy/cozy-libs/commit/8bd56ee))
+* Hide contracts modal after saving a contract ([967910d](https://github.com/cozy/cozy-libs/commit/967910d))
+* KonnectorIcon can take a konnectorSlug directly ([4f7b212](https://github.com/cozy/cozy-libs/commit/4f7b212))
+* Pass error to onError callback ([c018769](https://github.com/cozy/cozy-libs/commit/c018769))
+* Re-organize EditContract code for buttons to be in correct layout ([5c690b0](https://github.com/cozy/cozy-libs/commit/5c690b0))
+* Remove the io.cozy.*.accounts feature ([566c6f5](https://github.com/cozy/cozy-libs/commit/566c6f5))
+* Remove translate() as the component uses useI18n ([9c372bd](https://github.com/cozy/cozy-libs/commit/9c372bd))
+* Tweaks to ConfigurationTab layout and wording ([49d418f](https://github.com/cozy/cozy-libs/commit/49d418f))
+* Use slateGrey instead of coolGrey for icons ([40ecf33](https://github.com/cozy/cozy-libs/commit/40ecf33))
+
+
+
+
+
 # [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.1.1...cozy-harvest-lib@2.2.0) (2020-08-26)
 
 
