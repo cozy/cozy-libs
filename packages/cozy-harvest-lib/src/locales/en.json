@@ -92,6 +92,10 @@
         "button": "Access bank accounts",
         "install": "Discover Cozy Banks"
       }
+    },
+    "websiteLink": {
+      "title": "Useful information",
+      "description": "Service website"
     }
   },
   "default": {

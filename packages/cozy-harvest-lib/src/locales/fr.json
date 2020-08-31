@@ -92,6 +92,10 @@
         "button": "Accéder aux comptes bancaires",
         "install": "Découvrir Cozy Banks"
       }
+    },
+    "websiteLink": {
+      "title": "Informations utiles",
+      "description": "Site du service"
     }
   },
   "default": {
