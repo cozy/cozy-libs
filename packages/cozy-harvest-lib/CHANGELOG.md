@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.3.1...cozy-harvest-lib@2.4.0) (2020-08-31)
+
+
+### Bug Fixes
+
+* **Harvest:** Use css classes when possible ([6e5bf5e](https://github.com/cozy/cozy-libs/commit/6e5bf5e))
+
+
+### Features
+
+* Add website link in connector data ([755c547](https://github.com/cozy/cozy-libs/commit/755c547))
+
+
+
+
+
 ## [2.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.3.0...cozy-harvest-lib@2.3.1) (2020-08-30)
 
 
