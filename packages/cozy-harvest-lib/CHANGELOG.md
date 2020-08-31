@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.4.0...cozy-harvest-lib@2.4.1) (2020-08-31)
+
+
+### Bug Fixes
+
+* **Harvest:** Better unit tests for WebsiteLinkCard ([6155ecb](https://github.com/cozy/cozy-libs/commit/6155ecb)), closes [/github.com/cozy/cozy-libs/pull/1066#discussion_r479137378](https://github.com//github.com/cozy/cozy-libs/pull/1066/issues/discussion_r479137378)
+
+
+
+
+
 # [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.3.1...cozy-harvest-lib@2.4.0) (2020-08-31)
 
 
