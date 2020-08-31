@@ -45,6 +45,7 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
   })
     .map(slug => appLinksProps[slug] && appLinksProps[slug]({ trigger }))
     .filter(Boolean)
+    .filter(app => client.appMetadata.slug !== app.slug)
 
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
