@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import PropTypes from 'prop-types'
 import startCase from 'lodash/startCase'
 import compose from 'lodash/flowRight'
 
@@ -39,6 +40,7 @@ const ContractItem = ({ contract }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
   const getPrimaryText =
     getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
+  const { t } = useI18n()
   return (
     <>
       <ListItem
@@ -52,6 +54,7 @@ const ContractItem = ({ contract }) => {
         </ListItemIcon>
         <ListItemText
           primaryText={startCase(getPrimaryText(contract).toLowerCase())}
+          secondaryText={contract._deleted ? t('contracts.deleted') : null}
         />
         <ListItemSecondaryAction>
           <Icon icon="right" className="u-coolGrey u-mr-1" />
@@ -66,6 +69,12 @@ const ContractItem = ({ contract }) => {
           onSuccess={() => {
             setShowingEditModal(false)
           }}
+          onCancel={() => {
+            setShowingEditModal(false)
+          }}
+          onAfterRemove={() => {
+            setShowingEditModal(false)
+          }}
         />
       ) : null}
     </>
@@ -77,20 +86,30 @@ const customHeaderPerDoctype = {
 }
 
 const DumbContracts = ({ contracts, doctype }) => {
+  contracts = contracts.data ? contracts.data : contracts
   const { t } = useI18n()
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
-  return contracts.data.length > 0 ? (
+  return contracts.length > 0 ? (
     <MuiCozyTheme>
       <ListSubheader>{t(`contracts.headers.${headerKey}`)}</ListSubheader>
       <List dense>
         {contracts &&
-          contracts.data &&
-          contracts.data.map(contract => {
+          contracts.map(contract => {
             return <ContractItem key={contract._id} contract={contract} />
           })}
       </List>
     </MuiCozyTheme>
   ) : null
+}
+
+const CollectionPropType = PropTypes.shape({
+  fetchStatus: PropTypes.string.isRequired,
+  data: PropTypes.array.isRequired,
+  lastUpdate: PropTypes.bool.isRequired
+})
+
+DumbContracts.propTypes = {
+  contracts: PropTypes.oneOfType([CollectionPropType, PropTypes.array])
 }
 
 export const ContractsForAccount = compose(

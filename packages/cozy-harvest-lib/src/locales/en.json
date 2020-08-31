@@ -20,7 +20,8 @@
     "headers": {
       "bankAccounts": "Bank accounts",
       "default": "Contracts"
-    }
+    },
+    "deleted": "Deleted"
   },
   "contractForm": {
     "details": "Details",

@@ -65,7 +65,7 @@ const ConfigurationTab = ({
   }
 
   return (
-    <ModalContent className="u-p-0">
+    <ModalContent className="u-pt-0 u-ph-0">
       <Stack spacing="m">
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo

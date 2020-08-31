@@ -110,6 +110,11 @@ const EditContract = props => {
     handleSaveAccount(account, { shortLabel, owners })
   }
 
+  const handleRequestDeletion = ev => {
+    ev.preventDefault()
+    setShowDeleteConfirmation(true)
+  }
+
   const handleRemoveAccount = async account => {
     setDeleting(true)
 
@@ -177,7 +182,7 @@ const EditContract = props => {
               className="u-ml-auto"
               label={t('contractForm.removeAccountBtn')}
               theme="danger-outline"
-              onClick={() => setShowDeleteConfirmation(true)}
+              onClick={handleRequestDeletion}
             />
           </Stack>
         </form>

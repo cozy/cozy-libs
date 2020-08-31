@@ -20,7 +20,8 @@
     "headers": {
       "bankAccounts": "Comptes et livrets d'épargne",
       "default": "Contrats"
-    }
+    },
+    "deleted": "Supprimé"
   },
   "contractForm": {
     "details": "Détails",
