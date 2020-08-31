@@ -20,7 +20,6 @@ import EditContractModal from './EditContract'
 import withLocales from '../../hoc/withLocales'
 
 const makeContractsConn = ({ account }) => {
-  // TODO make it in function of the konnector
   const doctype = 'io.cozy.bank.accounts'
   return {
     query: () =>
@@ -94,9 +93,11 @@ const DumbContracts = ({ contracts, doctype }) => {
   ) : null
 }
 
-export default compose(
+export const ContractsForAccount = compose(
   withLocales,
   queryConnect({
     contracts: props => makeContractsConn(props)
   })
 )(DumbContracts)
+
+export const Contracts = withLocales(DumbContracts)

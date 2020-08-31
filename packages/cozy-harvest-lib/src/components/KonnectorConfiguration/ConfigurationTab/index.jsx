@@ -23,7 +23,7 @@ import { MountPointContext } from '../../MountPointContext'
 import { deleteAccount } from '../../../connections/accounts'
 
 import tabSpecs from '../tabSpecs'
-import Contracts from './Contracts'
+import { ContractsForAccount } from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -75,11 +75,7 @@ const ConfigurationTab = ({
           />
         )}
         {flag('harvest.show-contracts') && contractDoctype ? (
-          <Contracts
-            doctype={contractDoctype}
-            konnector={konnector}
-            account={account}
-          />
+          <ContractsForAccount doctype={contractDoctype} account={account} />
         ) : null}
         {!konnector.oauth ? (
           <div>
