@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.4.1...cozy-harvest-lib@2.4.2) (2020-08-31)
+
+
+### Bug Fixes
+
+* **Harvest:** Change hr separator height to 1px ([e4888f7](https://github.com/cozy/cozy-libs/commit/e4888f7))
+* Use Divider component ([9981c42](https://github.com/cozy/cozy-libs/commit/9981c42))
+
+
+
+
+
 ## [2.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.4.0...cozy-harvest-lib@2.4.1) (2020-08-31)
 
 
