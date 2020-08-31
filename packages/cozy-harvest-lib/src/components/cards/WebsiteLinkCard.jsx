@@ -11,13 +11,18 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 const WebsiteLinkCard = ({ link }) => {
   const linkStyle = { textTransform: 'lowercase' }
+  const hrStyle = {
+    height: '1px',
+    border: 'none',
+    backgroundColor: palette['silver']
+  }
   const label = new URL(link).host
   const { t } = useI18n()
 
   return (
     <Card>
       <SubTitle className="u-mb-1">{t('card.websiteLink.title')}</SubTitle>
-      <hr className="u-silver" />
+      <hr style={hrStyle} />
       <Media align="top">
         <Img className="u-pr-1">
           <Icon icon="globe" color={palette['coolGrey']} />
