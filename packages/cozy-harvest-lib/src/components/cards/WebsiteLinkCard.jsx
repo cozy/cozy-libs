@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -11,18 +12,13 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 const WebsiteLinkCard = ({ link }) => {
   const linkStyle = { textTransform: 'lowercase' }
-  const hrStyle = {
-    height: '1px',
-    border: 'none',
-    backgroundColor: palette['silver']
-  }
   const label = new URL(link).host
   const { t } = useI18n()
 
   return (
     <Card>
       <SubTitle className="u-mb-1">{t('card.websiteLink.title')}</SubTitle>
-      <hr style={hrStyle} />
+      <Divider className="u-ml-0 u-maw-100" />
       <Media align="top">
         <Img className="u-pr-1">
           <Icon icon="globe" color={palette['coolGrey']} />
