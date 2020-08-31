@@ -1,7 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import memoize from 'lodash/memoize'
 
+import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -18,8 +19,9 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListI
 import flag from 'cozy-flags'
 
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
-import DeleteAccountButton from '../../DeleteAccountButton'
 import { MountPointContext } from '../../MountPointContext'
+import { deleteAccount } from '../../../connections/accounts'
+
 import tabSpecs from '../tabSpecs'
 import Contracts from './Contracts'
 
@@ -40,6 +42,8 @@ const ConfigurationTab = ({
 }) => {
   const { t } = useI18n()
   const { pushHistory } = useContext(MountPointContext)
+  const client = useClient()
+  const [deleting, setDeleting] = useState(false)
   const flowState = flow.getState()
   const { error, running } = flowState
   const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
@@ -49,6 +53,17 @@ const ConfigurationTab = ({
   const hasLoginError = error && error.isLoginError()
 
   const contractDoctype = getContractDoctypeFromKonnector(konnector)
+
+  const handleDeleteAccount = async () => {
+    setDeleting(true)
+    try {
+      await deleteAccount(client, account)
+      onAccountDeleted(account)
+    } finally {
+      setDeleting(false)
+    }
+  }
+
   return (
     <ModalContent className="u-p-0">
       <Stack spacing="m">
@@ -94,15 +109,25 @@ const ConfigurationTab = ({
                   </div>
                 </ListItemSecondaryAction>
               </ListItem>
+              <ListItem
+                className="u-mt-half u-c-pointer"
+                onClick={() => handleDeleteAccount(account)}
+              >
+                <ListItemIcon>
+                  <Icon icon="trash" className="u-error" />
+                </ListItemIcon>
+                <ListItemText
+                  className="u-error"
+                  primaryText={t('accountForm.disconnect.button')}
+                />
+                <ListItemSecondaryAction>
+                  {deleting && <Spinner />}
+                </ListItemSecondaryAction>
+              </ListItem>
             </List>
           </div>
         ) : null}
         <div className="u-flex u-flex-row">
-          <DeleteAccountButton
-            account={account}
-            disabled={running}
-            onSuccess={onAccountDeleted}
-          />
           <Button
             onClick={addAccount}
             label={t('modal.addAccount.button')}
