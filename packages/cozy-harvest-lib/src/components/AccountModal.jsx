@@ -109,23 +109,26 @@ export class AccountModal extends Component {
       t,
       pushHistory,
       initialActiveTab,
-      breakpoints: { isMobile }
+      breakpoints: { isMobile },
+      showAccountSelection
     } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
-          <AccountSelectBox
-            loading={!account}
-            selectedAccount={account}
-            accountsAndTriggers={accountsAndTriggers}
-            onChange={option => {
-              pushHistory(`/accounts/${option.account._id}`)
-            }}
-            onCreate={() => {
-              pushHistory('/new')
-            }}
-          />
+          {showAccountSelection ? (
+            <AccountSelectBox
+              loading={!account}
+              selectedAccount={account}
+              accountsAndTriggers={accountsAndTriggers}
+              onChange={option => {
+                pushHistory(`/accounts/${option.account._id}`)
+              }}
+              onCreate={() => {
+                pushHistory('/new')
+              }}
+            />
+          ) : null}
         </KonnectorModalHeader>
         <ModalContent>
           {error && (
@@ -166,8 +169,10 @@ export class AccountModal extends Component {
   }
 }
 AccountModal.defaultProps = {
-  accounts: []
+  accounts: [],
+  showAccountSelection: true
 }
+
 AccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   onDismiss: PropTypes.func.isRequired,
@@ -190,7 +195,10 @@ AccountModal.propTypes = {
   accountId: PropTypes.string.isRequired,
 
   /** @type {string} Can be set to force the initial active tab */
-  initialActiveTab: PropTypes.oneOf(['configuration', 'data'])
+  initialActiveTab: PropTypes.oneOf(['configuration', 'data']),
+
+  /** @type {Boolean} Whether to show the account selection UI */
+  showAccountSelection: PropTypes.bool
 }
 
 export default flow(
