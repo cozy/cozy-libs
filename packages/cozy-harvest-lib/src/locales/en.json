@@ -31,7 +31,7 @@
     "delete": "Reset",
     "deleting": "Resetting...",
     "confirm-deletion": {
-      "description": "This action will delete your transactions in the Cozy Banks app along with the links set up with your bills. You can delete your bank account in #{LINK}the #{APP_NAME} app#{/LINK} if you do not wish to reimport your banking data at the next scheduled synchronization.",
+      "description": "This will also delete your transactions along with bill links. If you do not wish to reimport your banking data at the next scheduled synchronization, you'll have to remove the connection.",
       "confirm": "Confirm account deletion",
       "title": "Are you definitive ?"
     },
