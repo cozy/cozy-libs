@@ -7,12 +7,12 @@ import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import palette from 'cozy-ui/transpiled/react/palette'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-
-const WebsiteLinkCard = ({ link, t }) => {
+const WebsiteLinkCard = ({ link }) => {
   const linkStyle = { textTransform: 'lowercase' }
   const label = new URL(link).host
+  const { t } = useI18n()
 
   return (
     <Card>
@@ -43,4 +43,4 @@ WebsiteLinkCard.propTypes = {
   link: PropTypes.string.isRequired
 }
 
-export default translate()(WebsiteLinkCard)
+export default WebsiteLinkCard
