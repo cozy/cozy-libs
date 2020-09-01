@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.6.0 (2020-09-01)
+
+
+### Features
+
+* Activate the no-param-reassign rule ([4bf903f](https://github.com/cozy/cozy-libs/commit/4bf903f)), closes [#1073](https://github.com/cozy/cozy-libs/issues/1073)
+
+
+
+
+
 # 1.5.0 (2020-02-14)
 
 
