@@ -48,6 +48,7 @@ export const ShareModal = ({
         open={true}
         onClose={onClose}
         PaperProps={{ className: 'u-pb-half' }}
+        disableEnforceFocus
       >
         <DialogCloseButton onClick={onClose} />
         <ExperimentalDialogTitle>
