@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.5.1...cozy-harvest-lib@2.6.0) (2020-09-01)
+
+
+### Features
+
+* Ability to hide new account button on ConfigurationTab ([83fe00c](https://github.com/cozy/cozy-libs/commit/83fe00c))
+* New account button to the right on desktop and fullWidth on mobile ([f611f2f](https://github.com/cozy/cozy-libs/commit/f611f2f))
+
+
+
+
+
 ## [2.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.5.0...cozy-harvest-lib@2.5.1) (2020-09-01)
 
 
