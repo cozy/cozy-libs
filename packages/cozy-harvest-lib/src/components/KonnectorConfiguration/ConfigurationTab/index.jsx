@@ -40,7 +40,7 @@ const ConfigurationTab = ({
   account,
   addAccount,
   onAccountDeleted,
-  showNewAccount,
+  showNewAccountButton,
   flow
 }) => {
   const { t } = useI18n()
@@ -127,15 +127,17 @@ const ConfigurationTab = ({
             </List>
           </div>
         ) : null}
-        <div className={cx('u-ta-right', isMobile ? 'u-ph-1' : null)}>
-          <Button
-            extension={isMobile ? 'full' : null}
-            onClick={addAccount}
-            className="u-ml-0"
-            label={t('modal.addAccount.button')}
-            theme="ghost"
-          />
-        </div>
+        {showNewAccountButton ? (
+          <div className={cx('u-ta-right', isMobile ? 'u-ph-1' : null)}>
+            <Button
+              extension={isMobile ? 'full' : null}
+              onClick={addAccount}
+              className="u-ml-0"
+              label={t('modal.addAccount.button')}
+              theme="ghost"
+            />
+          </div>
+        ) : null}
       </Stack>
     </ModalContent>
   )

@@ -101,6 +101,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       addAccount={[Function]}
       konnector={Object {}}
       onAccountDeleted={[MockFunction]}
+      showNewAccountButton={true}
       trigger={
         Object {
           "current_state": Object {},
@@ -166,6 +167,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       addAccount={[Function]}
       konnector={Object {}}
       onAccountDeleted={[MockFunction]}
+      showNewAccountButton={true}
       trigger={
         Object {
           "id": "trigger_account2",

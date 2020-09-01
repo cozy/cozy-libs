@@ -29,7 +29,8 @@ export const KonnectorAccountTabs = ({
   initialActiveTab,
 
   //TODO rename to onAddAccount
-  addAccount
+  addAccount,
+  showNewAccountButton
 }) => {
   const { t } = useI18n()
   return (
@@ -76,6 +77,7 @@ export const KonnectorAccountTabs = ({
                   flow={flow}
                   addAccount={addAccount}
                   onAccountDeleted={onAccountDeleted}
+                  showNewAccountButton={showNewAccountButton}
                 />
               </TabPanel>
             </TabPanels>
