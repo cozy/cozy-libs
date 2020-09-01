@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.6.1...cozy-harvest-lib@2.7.0) (2020-09-01)
+
+
+
+## 2.2.1 (2020-09-01)
+
+
+### Bug Fixes
+
+* Use Divider component ([68a661e](https://github.com/cozy/cozy-libs/commit/68a661e))
+* **Harvest:** Add margin on top of the website link ([8e8b962](https://github.com/cozy/cozy-libs/commit/8e8b962))
+* **Harvest:** Better unit tests for WebsiteLinkCard ([eecd7d1](https://github.com/cozy/cozy-libs/commit/eecd7d1)), closes [/github.com/cozy/cozy-libs/pull/1066#discussion_r479137378](https://github.com//github.com/cozy/cozy-libs/pull/1066/issues/discussion_r479137378)
+* **Harvest:** Change hr separator height to 1px ([5e7e7b0](https://github.com/cozy/cozy-libs/commit/5e7e7b0))
+* **Harvest:** Do not throw error on invalid url in manifest ([664a78d](https://github.com/cozy/cozy-libs/commit/664a78d))
+* **Harvest:** Use css classes when possible ([494174f](https://github.com/cozy/cozy-libs/commit/494174f))
+
+
+### Features
+
+* Add website link in connector data ([321b771](https://github.com/cozy/cozy-libs/commit/321b771))
+
+
+
+
+
 ## [2.6.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.6.0...cozy-harvest-lib@2.6.1) (2020-09-01)
 
 
