@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.4.2...cozy-harvest-lib@2.5.0) (2020-09-01)
+
+
+### Bug Fixes
+
+* No mention of Cozy Banks when deleting a bank account ([b1edc03](https://github.com/cozy/cozy-libs/commit/b1edc03))
+
+
+### Features
+
+* Ability to hide the account selection box in AccountModal ([a620ff6](https://github.com/cozy/cozy-libs/commit/a620ff6))
+* Add a DisconnectedAccountModal ([beed0e5](https://github.com/cozy/cozy-libs/commit/beed0e5))
+* Do not show app links to current app ([2d960b3](https://github.com/cozy/cozy-libs/commit/2d960b3))
+* Use a ListItem to delete the account ([792bcf3](https://github.com/cozy/cozy-libs/commit/792bcf3))
+
+
+
+
+
 ## [2.4.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.4.1...cozy-harvest-lib@2.4.2) (2020-08-31)
 
 
