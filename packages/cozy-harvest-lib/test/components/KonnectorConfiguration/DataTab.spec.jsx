@@ -18,7 +18,11 @@ describe('DataTab', () => {
     const props = {
       konnector: {},
       trigger: {},
-      client: {},
+      client: {
+        appMetadata: {
+          slug: 'notes'
+        }
+      },
       flow: {
         getState: () => ({ error: null, running: false })
       },
