@@ -19,7 +19,7 @@ const WebsiteLinkCard = ({ link }) => {
     <Card>
       <SubTitle className="u-mb-1">{t('card.websiteLink.title')}</SubTitle>
       <Divider className="u-ml-0 u-maw-100" />
-      <Media align="top">
+      <Media className="u-mt-1" align="top">
         <Img className="u-pr-1">
           <Icon icon="globe" color={palette['coolGrey']} />
         </Img>
