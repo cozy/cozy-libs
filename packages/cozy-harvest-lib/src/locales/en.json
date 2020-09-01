@@ -21,7 +21,8 @@
       "bankAccounts": "Bank accounts",
       "default": "Contracts"
     },
-    "deleted": "Deleted"
+    "deleted": "Deleted",
+    "no-contracts": "No contracts anymore"
   },
   "contractForm": {
     "details": "Details",

@@ -21,7 +21,8 @@
       "bankAccounts": "Comptes et livrets d'épargne",
       "default": "Contrats"
     },
-    "deleted": "Supprimé"
+    "deleted": "Supprimé",
+    "no-contracts": "Vous n'avez plus de contrats"
   },
   "contractForm": {
     "details": "Détails",
