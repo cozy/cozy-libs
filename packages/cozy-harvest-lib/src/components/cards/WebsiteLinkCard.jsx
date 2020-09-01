@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import logger from '../../logger'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
@@ -11,9 +12,17 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 const WebsiteLinkCard = ({ link }) => {
-  const linkStyle = { textTransform: 'lowercase' }
-  const label = new URL(link).host
   const { t } = useI18n()
+  let url = null
+  try {
+    url = new URL(link)
+  } catch (err) {
+    logger('warn', err.message)
+    return null
+  }
+
+  const linkStyle = { textTransform: 'lowercase' }
+  const label = url.host
 
   return (
     <Card>
