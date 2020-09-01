@@ -19,4 +19,14 @@ describe('WebsiteLinkCard', () => {
       'fc.assure.ameli.fr'
     )
   })
+  it('should ignore invalid urls', () => {
+    const link = 'www.trainline.fr'
+    const wrapper = mount(
+      <I18n dictRequire={() => enLocale} lang="en">
+        <WebsiteLinkCard link={link} />)
+      </I18n>
+    )
+    const component = wrapper.find(WebsiteLinkCard)
+    expect(component.exists('ButtonLink')).toEqual(false)
+  })
 })
