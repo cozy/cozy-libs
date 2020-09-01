@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
 import memoize from 'lodash/memoize'
 
 import { useClient } from 'cozy-client'
@@ -8,6 +9,7 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -38,9 +40,11 @@ const ConfigurationTab = ({
   account,
   addAccount,
   onAccountDeleted,
+  showNewAccountButton,
   flow
 }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
   const [deleting, setDeleting] = useState(false)
@@ -123,13 +127,17 @@ const ConfigurationTab = ({
             </List>
           </div>
         ) : null}
-        <div className="u-flex u-flex-row">
-          <Button
-            onClick={addAccount}
-            label={t('modal.addAccount.button')}
-            theme="ghost"
-          />
-        </div>
+        {showNewAccountButton ? (
+          <div className={cx('u-ta-right', isMobile ? 'u-ph-1' : null)}>
+            <Button
+              extension={isMobile ? 'full' : null}
+              onClick={addAccount}
+              className="u-ml-0"
+              label={t('modal.addAccount.button')}
+              theme="ghost"
+            />
+          </div>
+        ) : null}
       </Stack>
     </ModalContent>
   )

@@ -110,7 +110,8 @@ export class AccountModal extends Component {
       pushHistory,
       initialActiveTab,
       breakpoints: { isMobile },
-      showAccountSelection
+      showAccountSelection,
+      showNewAccountButton
     } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
@@ -161,6 +162,7 @@ export class AccountModal extends Component {
               account={account}
               onAccountDeleted={onDismiss}
               addAccount={() => pushHistory('/new')}
+              showNewAccountButton={showNewAccountButton}
             />
           </ModalContent>
         )}
@@ -170,7 +172,8 @@ export class AccountModal extends Component {
 }
 AccountModal.defaultProps = {
   accounts: [],
-  showAccountSelection: true
+  showAccountSelection: true,
+  showNewAccountButton: true
 }
 
 AccountModal.propTypes = {
@@ -198,7 +201,10 @@ AccountModal.propTypes = {
   initialActiveTab: PropTypes.oneOf(['configuration', 'data']),
 
   /** @type {Boolean} Whether to show the account selection UI */
-  showAccountSelection: PropTypes.bool
+  showAccountSelection: PropTypes.bool,
+
+  /** @type {Boolean} Whether to show the button to add a new account */
+  showNewAccountButton: PropTypes.bool
 }
 
 export default flow(
