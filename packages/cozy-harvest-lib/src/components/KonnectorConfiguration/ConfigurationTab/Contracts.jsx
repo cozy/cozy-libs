@@ -86,15 +86,15 @@ const customHeaderPerDoctype = {
 }
 
 const DumbContracts = ({ contracts, doctype }) => {
-  contracts = contracts.data ? contracts.data : contracts
+  const contractData = contracts.data ? contracts.data : contracts
   const { t } = useI18n()
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
   return contracts.length > 0 ? (
     <MuiCozyTheme>
       <ListSubheader>{t(`contracts.headers.${headerKey}`)}</ListSubheader>
       <List dense>
-        {contracts &&
-          contracts.map(contract => {
+        {contractData &&
+          contractData.map(contract => {
             return <ContractItem key={contract._id} contract={contract} />
           })}
       </List>
