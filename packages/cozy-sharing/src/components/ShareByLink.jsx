@@ -52,12 +52,13 @@ class ShareByLink extends React.Component {
     }
   }
 
-  copyLinkToClipboard = () => {
+  copyLinkToClipboard = ({ isAutomaticCopy }) => {
     if (copy(this.props.link))
       Alerter.success(
         this.props.t(`${this.props.documentType}.share.shareByLink.copied`)
       )
-    else
+    else if (!isAutomaticCopy)
+      // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
       Alerter.error(
         this.props.t(`${this.props.documentType}.share.shareByLink.failed`)
       )
@@ -122,7 +123,7 @@ class ShareByLink extends React.Component {
               className={styles['aligned-dropdown-button']}
               onClick={async () => {
                 await this.createShareLink()
-                this.copyLinkToClipboard()
+                this.copyLinkToClipboard({ isAutomaticCopy: true })
               }}
               busy={loading}
               label={t(`${documentType}.share.shareByLink.create`)}
