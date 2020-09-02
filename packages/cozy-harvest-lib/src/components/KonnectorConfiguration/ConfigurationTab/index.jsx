@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import memoize from 'lodash/memoize'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
@@ -11,7 +10,6 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
-import Stack from 'cozy-ui/transpiled/react/Stack'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -28,12 +26,6 @@ import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
-const getContractDoctypeFromKonnector = memoize(konnector => {
-  if (konnector.categories.includes('banking')) {
-    return 'io.cozy.bank.accounts'
-  }
-})
 
 const ConfigurationTab = ({
   konnector,
@@ -56,8 +48,6 @@ const ConfigurationTab = ({
   )
   const hasLoginError = error && error.isLoginError()
 
-  const contractDoctype = getContractDoctypeFromKonnector(konnector)
-
   const handleDeleteAccount = async () => {
     setDeleting(true)
     try {
@@ -70,7 +60,7 @@ const ConfigurationTab = ({
 
   return (
     <ModalContent className="u-pt-0 u-ph-0">
-      <Stack spacing="m">
+      <>
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
             className="u-mb-2"
@@ -78,8 +68,8 @@ const ConfigurationTab = ({
             konnector={konnector}
           />
         )}
-        {flag('harvest.show-contracts') && contractDoctype ? (
-          <ContractsForAccount doctype={contractDoctype} account={account} />
+        {flag('harvest.show-contracts') ? (
+          <ContractsForAccount account={account} />
         ) : null}
         {!konnector.oauth ? (
           <div>
@@ -117,7 +107,7 @@ const ConfigurationTab = ({
                   <Icon icon="trash" className="u-error" />
                 </ListItemIcon>
                 <ListItemText
-                  className="u-error"
+                  primaryTextClassName="u-error"
                   primaryText={t('accountForm.disconnect.button')}
                 />
                 <ListItemSecondaryAction>
@@ -128,7 +118,7 @@ const ConfigurationTab = ({
           </div>
         ) : null}
         {showNewAccountButton ? (
-          <div className={cx('u-ta-right', isMobile ? 'u-ph-1' : null)}>
+          <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
             <Button
               extension={isMobile ? 'full' : null}
               onClick={addAccount}
@@ -138,7 +128,7 @@ const ConfigurationTab = ({
             />
           </div>
         ) : null}
-      </Stack>
+      </>
     </ModalContent>
   )
 }

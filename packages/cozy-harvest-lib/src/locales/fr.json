@@ -465,5 +465,9 @@
       "primaryText": "Mettre à jour",
       "secondaryText": "Annuler"
     }
+  },
+
+  "disconnectedAccountModal": {
+    "disconnected-help": "Le compte a été déconnecté de votre Cozy. L'historique de vos données a été conservé mais leur mise à jour est maintenant impossible."
   }
 }
