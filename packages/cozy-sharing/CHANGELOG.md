@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.15.0...cozy-sharing@1.15.1) (2020-09-02)
+
+
+### Bug Fixes
+
+* Ability to copy links ([69791e7](https://github.com/cozy/cozy-libs/commit/69791e7))
+* Don't show clipboard error if automatic copy fails ([c21c690](https://github.com/cozy/cozy-libs/commit/c21c690))
+
+
+
+
+
 # [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.14.0...cozy-sharing@1.15.0) (2020-08-28)
 
 
