@@ -11,7 +11,6 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
-import Stack from 'cozy-ui/transpiled/react/Stack'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -70,7 +69,7 @@ const ConfigurationTab = ({
 
   return (
     <ModalContent className="u-pt-0 u-ph-0">
-      <Stack spacing="m">
+      <>
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
             className="u-mb-2"
@@ -128,7 +127,7 @@ const ConfigurationTab = ({
           </div>
         ) : null}
         {showNewAccountButton ? (
-          <div className={cx('u-ta-right', isMobile ? 'u-ph-1' : null)}>
+          <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
             <Button
               extension={isMobile ? 'full' : null}
               onClick={addAccount}
@@ -138,7 +137,7 @@ const ConfigurationTab = ({
             />
           </div>
         ) : null}
-      </Stack>
+      </>
     </ModalContent>
   )
 }

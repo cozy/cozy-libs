@@ -70,7 +70,7 @@ export const KonnectorAccountTabs = ({
                   flow={flow}
                 />
               </TabPanel>
-              <TabPanel name="configuration" className="u-pt-1-half u-pb-0">
+              <TabPanel name="configuration" className="u-pt-0 u-pb-0">
                 <ConfigurationTab
                   konnector={konnector}
                   account={account}
