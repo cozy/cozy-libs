@@ -18,12 +18,12 @@ const findExactMatch = (attr, account, existingAccounts) => {
 const untrimmedAccountNumber = /^(?:[A-Za-z]+)?-?([0-9]+)-?(?:[A-Za-z]+)?$/
 const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
 
-const normalizeAccountNumber = (number, iban) => {
-  iban = iban && iban.replace(/\s/g, '')
-  number =
-    number && !number.match(redactedCreditCard)
-      ? number.replace(/\s/g, '')
-      : number
+const normalizeAccountNumber = (numberArg, ibanArg) => {
+  const iban = ibanArg && ibanArg.replace(/\s/g, '')
+  const number =
+    numberArg && !numberArg.match(redactedCreditCard)
+      ? numberArg.replace(/\s/g, '')
+      : numberArg
   let match
   if (iban && iban.length == 27) {
     return iban.substr(14, 11)
@@ -229,8 +229,8 @@ const findMatch = (account, existingAccounts) => {
  * io.cozy.accounts already have an _id)
  * @return {Array<MatchResult>} - Match results (as many results as fetchedAccounts.length)
  */
-const matchAccounts = (fetchedAccounts, existingAccounts) => {
-  fetchedAccounts = fetchedAccounts.map(normalizeAccount)
+const matchAccounts = (fetchedAccountsArg, existingAccounts) => {
+  const fetchedAccounts = fetchedAccountsArg.map(normalizeAccount)
   const toMatch = [...existingAccounts].map(normalizeAccount)
   const results = []
   for (let fetchedAccount of fetchedAccounts) {

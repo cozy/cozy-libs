@@ -241,8 +241,9 @@ class Document {
     }
   }
 
-  static async handleDuplicates(strategyNameOrFn, duplicates, selector) {
-    strategyNameOrFn = strategyNameOrFn || this.defaultDuplicateHandling
+  static async handleDuplicates(strategyNameOrFnArg, duplicates, selector) {
+    const strategyNameOrFn =
+      strategyNameOrFnArg || this.defaultDuplicateHandling
     const strategyFn =
       typeof strategyNameOrFn === 'string'
         ? this.getHandleDuplicateStrategy(strategyNameOrFn)
@@ -580,12 +581,13 @@ class Document {
     return result
   }
 
-  static async queryAllViaOldClient(selector, index) {
+  static async queryAllViaOldClient(selector, indexArg) {
     if (!selector) {
       // fetchAll is faster in this case
       return await this.fetchAll()
     }
 
+    let index = indexArg
     if (!index) {
       index = await this.cozyClient.data.defineIndex(
         this.doctype,

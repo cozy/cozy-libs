@@ -8,8 +8,8 @@ const PromisePool = require('es6-promise-pool')
  * @param  {Number}   concurrency  How many promise can be in flight at the same time
  * @return {Promise}               Resolved with the results of the promise, not necessary in order
  */
-const parallelMap = (iterable, fn, concurrency) => {
-  concurrency = concurrency || 30
+const parallelMap = (iterable, fn, concurrencyArg) => {
+  const concurrency = concurrencyArg || 30
   const res = []
   const pool = new PromisePool(function*() {
     for (let item of iterable) {
