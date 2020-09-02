@@ -117,7 +117,7 @@ const ConfigurationTab = ({
                   <Icon icon="trash" className="u-error" />
                 </ListItemIcon>
                 <ListItemText
-                  className="u-error"
+                  primaryTextClassName="u-error"
                   primaryText={t('accountForm.disconnect.button')}
                 />
                 <ListItemSecondaryAction>
