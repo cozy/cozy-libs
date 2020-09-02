@@ -85,9 +85,10 @@ const customHeaderPerDoctype = {
   'io.cozy.bank.accounts': 'bankAccounts'
 }
 
-const DumbContracts = ({ contracts, doctype }) => {
+const DumbContracts = ({ contracts }) => {
   const contractData = contracts.data ? contracts.data : contracts
   const { t } = useI18n()
+  const doctype = contractData[0] ? contractData[0]._type : null
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
   return contractData.length > 0 ? (
     <MuiCozyTheme>

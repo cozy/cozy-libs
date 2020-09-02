@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import memoize from 'lodash/memoize'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
@@ -28,12 +27,6 @@ import { ContractsForAccount } from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-const getContractDoctypeFromKonnector = memoize(konnector => {
-  if (konnector.categories.includes('banking')) {
-    return 'io.cozy.bank.accounts'
-  }
-})
-
 const ConfigurationTab = ({
   konnector,
   account,
@@ -55,8 +48,6 @@ const ConfigurationTab = ({
   )
   const hasLoginError = error && error.isLoginError()
 
-  const contractDoctype = getContractDoctypeFromKonnector(konnector)
-
   const handleDeleteAccount = async () => {
     setDeleting(true)
     try {
@@ -77,8 +68,8 @@ const ConfigurationTab = ({
             konnector={konnector}
           />
         )}
-        {flag('harvest.show-contracts') && contractDoctype ? (
-          <ContractsForAccount doctype={contractDoctype} account={account} />
+        {flag('harvest.show-contracts') ? (
+          <ContractsForAccount account={account} />
         ) : null}
         {!konnector.oauth ? (
           <div>
