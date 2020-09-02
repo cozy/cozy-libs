@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.7.0...cozy-harvest-lib@2.8.0) (2020-09-02)
+
+
+### Bug Fixes
+
+* Correct className on ListItem ([7c2cd48](https://github.com/cozy/cozy-libs/commit/7c2cd48))
+* Use correct variable to check the length ([9e5d35a](https://github.com/cozy/cozy-libs/commit/9e5d35a))
+
+
+### Features
+
+* Make the KonnectorModalHeader smaller when there is no children ([fcf0c82](https://github.com/cozy/cozy-libs/commit/fcf0c82))
+* Removed the prop doctype that can be implied from the data ([aa39298](https://github.com/cozy/cozy-libs/commit/aa39298))
+* Tweak DisconnectedAccountModal so that matches the AccountModal ([278008a](https://github.com/cozy/cozy-libs/commit/278008a))
+* Tweak margins of ConfigurationTab and KonnectorAccountTabs ([f5725c0](https://github.com/cozy/cozy-libs/commit/f5725c0))
+
+
+
+
+
 # [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.6.1...cozy-harvest-lib@2.7.0) (2020-09-01)
 
 
