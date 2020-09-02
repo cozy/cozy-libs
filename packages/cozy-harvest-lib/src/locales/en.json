@@ -465,5 +465,9 @@
       "primaryText": "Update",
       "secondaryText": "Cancel"
     }
+  },
+
+  "disconnectedAccountModal": {
+    "disconnected-help": "The account is disconnected from your Cozy. Your data has been kept but they won't be updated."
   }
 }
