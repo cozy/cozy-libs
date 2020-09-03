@@ -105,8 +105,7 @@ const DumbContracts = ({ contracts }) => {
 
 const CollectionPropType = PropTypes.shape({
   fetchStatus: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
-  lastUpdate: PropTypes.bool.isRequired
+  data: PropTypes.array.isRequired
 })
 
 DumbContracts.propTypes = {
