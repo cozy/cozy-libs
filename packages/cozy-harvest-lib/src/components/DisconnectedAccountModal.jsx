@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
-import { Contracts } from 'cozy-harvest-lib/dist/components/KonnectorConfiguration/ConfigurationTab/Contracts'
-import KonnectorModalHeader from 'cozy-harvest-lib/dist/components/KonnectorModalHeader'
+import PropTypes from 'prop-types'
+import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -47,7 +48,11 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab)
 
   return (
-    <Modal mobileFullscreen={true} dismissAction={onClose}>
+    <Modal
+      aria-label={t('modal.aria-label')}
+      mobileFullscreen={true}
+      dismissAction={onClose}
+    >
       <KonnectorModalHeader konnector={konnectorRef.current} />
       <ModalContent className={isMobile ? 'u-p-0' : null}>
         <Tabs initialActiveTab={initialActiveTab}>
@@ -86,6 +91,10 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
 
 DisconnectedModal.defaultProps = {
   initialActiveTab: 'configuration'
+}
+
+DisconnectedModal.propTypes = {
+  accounts: PropTypes.array.isRequired
 }
 
 export default withLocales(DisconnectedModal)
