@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.8.0...cozy-harvest-lib@2.8.1) (2020-09-03)
+
+
+### Bug Fixes
+
+* Add necessary aria-label on DisconnectedModal ([6446c25](https://github.com/cozy/cozy-libs/commit/6446c25))
+
+
+
+
+
 # [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.7.0...cozy-harvest-lib@2.8.0) (2020-09-02)
 
 
