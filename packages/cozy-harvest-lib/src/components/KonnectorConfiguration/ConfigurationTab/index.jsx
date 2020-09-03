@@ -10,10 +10,12 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
+import NavigationList, {
+  NavigationListSection,
+  NavigationListHeader
+} from 'cozy-ui/transpiled/react/NavigationList'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import flag from 'cozy-flags'
@@ -26,6 +28,8 @@ import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
+const tabMobileNavListStyle = { borderTop: 'none' }
 
 const ConfigurationTab = ({
   konnector,
@@ -59,7 +63,7 @@ const ConfigurationTab = ({
   }
 
   return (
-    <ModalContent className="u-pt-0 u-ph-0">
+    <ModalContent className={cx('u-ph-0', isMobile ? 'u-pt-0' : 'u-pt-1-half')}>
       <>
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
@@ -68,55 +72,57 @@ const ConfigurationTab = ({
             konnector={konnector}
           />
         )}
-        {flag('harvest.show-contracts') ? (
-          <ContractsForAccount account={account} />
-        ) : null}
-        {!konnector.oauth ? (
-          <div>
-            <ListSubheader>
-              {t('modal.updateAccount.general-subheader')}
-            </ListSubheader>
-            <List dense className="u-pt-0">
-              <ListItem
-                className="u-mt-half u-c-pointer"
-                onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
-              >
-                <ListItemIcon>
-                  <Icon icon="key" color={palette['slateGrey']} />
-                </ListItemIcon>
-                <ListItemText
-                  primaryText={t('modal.updateAccount.identifiers')}
-                  secondaryText={Account.getAccountName(account)}
-                />
-                <ListItemSecondaryAction>
-                  <div>
-                    {running && <Spinner />}
-                    <Icon
-                      className="u-mr-1"
-                      icon="right"
-                      color={palette['coolGrey']}
-                    />
-                  </div>
-                </ListItemSecondaryAction>
-              </ListItem>
-              <ListItem
-                className="u-mt-half u-c-pointer"
-                onClick={() => handleDeleteAccount(account)}
-              >
-                <ListItemIcon>
-                  <Icon icon="trash" className="u-error" />
-                </ListItemIcon>
-                <ListItemText
-                  primaryTextClassName="u-error"
-                  primaryText={t('accountForm.disconnect.button')}
-                />
-                <ListItemSecondaryAction>
-                  {deleting && <Spinner />}
-                </ListItemSecondaryAction>
-              </ListItem>
-            </List>
-          </div>
-        ) : null}
+        <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
+          {flag('harvest.show-contracts') ? (
+            <ContractsForAccount account={account} />
+          ) : null}
+          {!konnector.oauth ? (
+            <>
+              <NavigationListHeader>
+                {t('modal.updateAccount.general-subheader')}
+              </NavigationListHeader>
+              <NavigationListSection>
+                <ListItem
+                  className="u-c-pointer"
+                  onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
+                >
+                  <ListItemIcon>
+                    <Icon icon="key" color={palette['slateGrey']} />
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryText={t('modal.updateAccount.identifiers')}
+                    secondaryText={Account.getAccountName(account)}
+                  />
+                  <ListItemSecondaryAction>
+                    <div>
+                      {running && <Spinner />}
+                      <Icon
+                        className="u-mr-1"
+                        icon="right"
+                        color={palette['coolGrey']}
+                      />
+                    </div>
+                  </ListItemSecondaryAction>
+                </ListItem>
+                <ListItem
+                  className="u-c-pointer"
+                  onClick={() => handleDeleteAccount(account)}
+                >
+                  <ListItemIcon>
+                    <Icon icon="trash" className="u-error" />
+                  </ListItemIcon>
+                  <ListItemText
+                    primaryTextClassName="u-error"
+                    primaryText={t('accountForm.disconnect.button')}
+                  />
+                  <ListItemSecondaryAction>
+                    {deleting && <Spinner />}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              </NavigationListSection>
+            </>
+          ) : null}
+        </NavigationList>
         {showNewAccountButton ? (
           <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
             <Button
