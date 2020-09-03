@@ -27,6 +27,7 @@ console.warn = function(message) {
   ) {
     return
   } else {
-    return originalConsoleWarn.apply(this, arguments)
+    originalConsoleWarn.apply(this, arguments)
+    throw new Error('console.warn should not be called during tests')
   }
 }
