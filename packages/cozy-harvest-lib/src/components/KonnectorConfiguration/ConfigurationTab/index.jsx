@@ -16,6 +16,14 @@ import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
+import Dialog, {
+  ExperimentalDialogTitle as DialogTitle,
+  ExperimentalDialogActions as DialogActions
+} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
+
+import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
+import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import flag from 'cozy-flags'
@@ -31,6 +39,29 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
+const ConfirmationDialog = ({ onConfirm, onCancel }) => {
+  const { t } = useI18n()
+  return (
+    <Dialog maxWidth="xs">
+      <DialogCloseButton onClick={onCancel} />
+      <DialogTitle>{t('modal.deleteAccount.title')}</DialogTitle>
+      <DialogContent>{t('modal.deleteAccount.description')}</DialogContent>
+      <DialogActions>
+        <Button
+          theme="secondary"
+          label={t('modal.deleteAccount.cancel')}
+          onClick={onCancel}
+        />
+        <Button
+          theme="danger"
+          label={t('modal.deleteAccount.confirm')}
+          onClick={onConfirm}
+        />
+      </DialogActions>
+    </Dialog>
+  )
+}
+
 const ConfigurationTab = ({
   konnector,
   account,
@@ -44,6 +75,7 @@ const ConfigurationTab = ({
   const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
   const [deleting, setDeleting] = useState(false)
+  const [requestingDeletion, setRequestDeletion] = useState(false)
   const flowState = flow.getState()
   const { error, running } = flowState
   const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
@@ -60,6 +92,14 @@ const ConfigurationTab = ({
     } finally {
       setDeleting(false)
     }
+  }
+
+  const handleCancelDeleteRequest = () => {
+    setRequestDeletion(false)
+  }
+
+  const handleDeleteRequest = () => {
+    setRequestDeletion(true)
   }
 
   return (
@@ -104,12 +144,9 @@ const ConfigurationTab = ({
                     </div>
                   </ListItemSecondaryAction>
                 </ListItem>
-                <ListItem
-                  className="u-c-pointer"
-                  onClick={() => handleDeleteAccount(account)}
-                >
+                <ListItem className="u-c-pointer" onClick={handleDeleteRequest}>
                   <ListItemIcon>
-                    <Icon icon="trash" className="u-error" />
+                    <Icon icon="unlink" className="u-error" />
                   </ListItemIcon>
                   <ListItemText
                     primaryTextClassName="u-error"
@@ -119,6 +156,12 @@ const ConfigurationTab = ({
                     {deleting && <Spinner />}
                   </ListItemSecondaryAction>
                 </ListItem>
+                {requestingDeletion ? (
+                  <ConfirmationDialog
+                    onCancel={handleCancelDeleteRequest}
+                    onConfirm={handleDeleteAccount}
+                  />
+                ) : null}
               </NavigationListSection>
             </>
           ) : null}

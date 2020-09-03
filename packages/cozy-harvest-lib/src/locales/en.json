@@ -354,7 +354,9 @@
     },
     "deleteAccount": {
       "title": "Disconnection",
-      "description": "Your account will be disconnected, but imported data will be kept"
+      "description": "Your account will be disconnected, but already imported data will be kept.",
+      "confirm": "Disconnect",
+      "cancel": "Cancel"
     },
     "updateAccount": {
       "general-subheader": "General",
