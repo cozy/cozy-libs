@@ -77,7 +77,7 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
         </TabPanel>
         <TabPanel name="configuration">
           {accounts.length ? (
-            <ModalContent className={isMobile ? 'u-p-0' : null}>
+            <ModalContent className={isMobile ? 'u-ph-0' : 'u-pt-1-half'}>
               <Contracts contracts={accounts} />
             </ModalContent>
           ) : (
