@@ -21,9 +21,11 @@ describe('DisconnectedAccountModal', () => {
         </I18n>
       </CozyProvider>
     )
+    return { root }
   }
 
   it('should render a modal without warnings', () => {
-    setup()
+    const { root } = setup()
+    expect(() => root.getByText('Mon Compte Societaire')).not.toThrow()
   })
 })
