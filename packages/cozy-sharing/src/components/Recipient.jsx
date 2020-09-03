@@ -4,7 +4,9 @@ import classNames from 'classnames'
 import PropTypes from 'prop-types'
 import { Spinner } from 'cozy-ui/transpiled/react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { AvatarPlusX, AvatarLink, Avatar } from './Avatar'
+import AvatarPlusX from './AvatarPlusX'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import Circle from 'cozy-ui/transpiled/react/Circle'
 
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
@@ -25,7 +27,7 @@ const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 export const RecipientsAvatars = ({
   recipients,
   link,
-  size = 'small-plus',
+  size,
   className,
   onClick
 }) => {
@@ -43,7 +45,11 @@ export const RecipientsAvatars = ({
       )}
       onClick={onClick}
     >
-      {link && <AvatarLink size={size} />}
+      {link && (
+        <Circle size={size} backgroundColor="var(--silver)">
+          <Icon icon="link" size={16} color="var(--charcoalGrey)" />
+        </Circle>
+      )}
       {recipients.length > MAX_DISPLAYED_RECIPIENTS && (
         <AvatarPlusX
           extraRecipients={reversedRecipients
@@ -60,6 +66,7 @@ export const RecipientsAvatars = ({
             text={Contact.getInitials(recipient)}
             size={size}
             textId={Contact.getDisplayName(recipient)}
+            className={classNames(styles['recipient-avatar'])}
           />
         ))}
     </div>
@@ -236,7 +243,6 @@ const Recipient = props => {
       image={
         <Avatar
           text={Contact.getInitials(rest, defaultInitials)}
-          size="small-plus"
           textId={name}
         />
       }
@@ -251,11 +257,7 @@ export const RecipientWithoutStatus = ({ instance, ...rest }) => {
   const name = Contact.getDisplayName(rest)
   return (
     <div className={styles['recipient']}>
-      <Avatar
-        text={Contact.getInitials(rest)}
-        size={'small-plus'}
-        textId={name}
-      />
+      <Avatar text={Contact.getInitials(rest)} textId={name} />
       <div className={styles['recipient-ident-status']}>
         <Identity name={name} details={instance} />
       </div>
