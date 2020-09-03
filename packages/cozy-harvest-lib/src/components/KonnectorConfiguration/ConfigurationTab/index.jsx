@@ -67,7 +67,7 @@ const ConfigurationTab = ({
       <>
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
-            className="u-mb-2"
+            className="u-mv-2"
             error={error}
             konnector={konnector}
           />
