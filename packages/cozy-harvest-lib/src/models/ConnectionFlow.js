@@ -438,9 +438,14 @@ export class ConnectionFlow {
   async ensureTriggerAndLaunch(client, { trigger, account, konnector, t }) {
     logger.debug('Ensuring trigger...')
     this.t = t
-    trigger = await ensureTrigger(client, { trigger, account, konnector, t })
-    logger.info(`Trigger is ${trigger._id}`)
-    this.trigger = trigger
+    const ensuredTrigger = await ensureTrigger(client, {
+      trigger,
+      account,
+      konnector,
+      t
+    })
+    logger.info(`Trigger is ${ensuredTrigger._id}`)
+    this.trigger = ensuredTrigger
     this.emit(UPDATE_EVENT)
     await this.launch()
   }

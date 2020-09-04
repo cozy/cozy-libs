@@ -98,7 +98,8 @@ class CozyFile extends Document {
    * @param {Object} file HTML Object file
    * @param {Object} metadata An object containing the wanted metadata to attach
    */
-  static async overrideFileForPath(path, file, metadata) {
+  static async overrideFileForPath(pathArg, file, metadata) {
+    let path = pathArg
     if (!path.endsWith('/')) path = path + '/'
 
     const filesCollection = this.cozyClient.collection('io.cozy.files')

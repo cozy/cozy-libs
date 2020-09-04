@@ -259,14 +259,13 @@ export const finishConnection = async ({ biConnection, flow }) => {
  * Used in the custom konnector policy for BI
  */
 export const onBIAccountCreation = async ({
-  account,
+  account: fullAccount,
   client,
   flow,
   konnector,
   createOrUpdateBIConnectionFn = createOrUpdateBIConnection
 }) => {
-  const fullAccount = account
-  account = removeSensibleDataFromAccount(account)
+  let account = removeSensibleDataFromAccount(fullAccount)
 
   account = await flow.saveAccount(account)
 
