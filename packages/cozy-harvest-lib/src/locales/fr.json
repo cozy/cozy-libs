@@ -13,7 +13,7 @@
       "hide": "Cacher"
     },
     "disconnect": {
-      "button": "Supprimer ce compte"
+      "button": "Déconnecter le compte"
     }
   },
   "contracts": {
@@ -354,7 +354,9 @@
     },
     "deleteAccount": {
       "title": "Déconnexion",
-      "description": "Vous serez déconnecté de ce compte, mais les données importées seront conservées"
+      "description": "Vous serez déconnecté de ce compte, mais les données déjà importées seront conservées.",
+      "confirm": "Déconnecter",
+      "cancel": "Annuler"
     },
     "updateAccount": {
       "general-subheader": "Général",

@@ -7,13 +7,15 @@ import CozyClient, { Q, queryConnect } from 'cozy-client'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import NavigationList, {
+  NavigationListSection,
+  NavigationListHeader
+} from 'cozy-ui/transpiled/react/NavigationList'
 
 import { getAccountLabel } from './bankAccountHelpers'
 import EditContractModal from './EditContract'
@@ -92,21 +94,24 @@ const DumbContracts = ({ contracts }) => {
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
   return contractData.length > 0 ? (
     <MuiCozyTheme>
-      <ListSubheader>{t(`contracts.headers.${headerKey}`)}</ListSubheader>
-      <List dense>
-        {contractData &&
-          contractData.map(contract => {
-            return <ContractItem key={contract._id} contract={contract} />
-          })}
-      </List>
+      <NavigationList>
+        <NavigationListHeader>
+          {t(`contracts.headers.${headerKey}`)}
+        </NavigationListHeader>
+        <NavigationListSection>
+          {contractData &&
+            contractData.map(contract => {
+              return <ContractItem key={contract._id} contract={contract} />
+            })}
+        </NavigationListSection>
+      </NavigationList>
     </MuiCozyTheme>
   ) : null
 }
 
 const CollectionPropType = PropTypes.shape({
   fetchStatus: PropTypes.string.isRequired,
-  data: PropTypes.array.isRequired,
-  lastUpdate: PropTypes.bool.isRequired
+  data: PropTypes.array.isRequired
 })
 
 DumbContracts.propTypes = {
@@ -116,7 +121,7 @@ DumbContracts.propTypes = {
 export const ContractsForAccount = compose(
   withLocales,
   queryConnect({
-    contracts: props => makeContractsConn(props)
+    contracts: makeContractsConn
   })
 )(DumbContracts)
 

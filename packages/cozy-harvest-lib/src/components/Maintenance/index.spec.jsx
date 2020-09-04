@@ -1,7 +1,7 @@
 import React from 'react'
 import { mount } from 'enzyme'
 import KonnectorMaintenance from 'components/Maintenance'
-import { I18n } from 'cozy-ui/transpiled/react'
+import I18n from 'cozy-ui/transpiled/react/I18n'
 import enLocale from 'locales/en.json'
 
 describe('KonnectorMaintenance', () => {
