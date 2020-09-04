@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.8.1...cozy-harvest-lib@2.9.0) (2020-09-04)
+
+
+### Bug Fixes
+
+* Add margin after tabs on desktop ([72d6441](https://github.com/cozy/cozy-libs/commit/72d6441))
+* LastUpdate is null when the query has not yet been fetched ([e73dd42](https://github.com/cozy/cozy-libs/commit/e73dd42))
+* Make sure the error has a margin with the tabs ([95d0b37](https://github.com/cozy/cozy-libs/commit/95d0b37))
+* Use useI18n from full path ([5e4654d](https://github.com/cozy/cozy-libs/commit/5e4654d))
+
+
+### Features
+
+* Add deletion confirmation modal ([fb25348](https://github.com/cozy/cozy-libs/commit/fb25348))
+* Use NavigationList inside ConfigurationTab ([1e4c71a](https://github.com/cozy/cozy-libs/commit/1e4c71a))
+
+
+
+
+
 ## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.8.0...cozy-harvest-lib@2.8.1) (2020-09-03)
 
 
