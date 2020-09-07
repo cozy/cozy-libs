@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.10.1...cozy-harvest-lib@2.11.0) (2020-09-07)
+
+
+### Features
+
+* Disconnnect modal should not be fullscreen on mobile ([e758ddf](https://github.com/cozy/cozy-libs/commit/e758ddf))
+* Use semantic color instead of absolute color ([4102824](https://github.com/cozy/cozy-libs/commit/4102824))
+
+
+
+
+
 ## [2.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.10.0...cozy-harvest-lib@2.10.1) (2020-09-07)
 
 
