@@ -26,7 +26,7 @@ export class TriggerErrorInfo extends PureComponent {
         theme="danger"
         description={
           <>
-            <SubTitle className="u-pomegranate">
+            <SubTitle className="u-error">
               {getErrorLocale(error, konnector, t, 'title')}
             </SubTitle>
             <Text>

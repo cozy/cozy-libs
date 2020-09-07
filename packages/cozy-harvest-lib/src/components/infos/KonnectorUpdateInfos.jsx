@@ -20,7 +20,7 @@ export const KonnectorUpdateInfos = props => {
       theme={isBlocking ? 'danger' : 'secondary'}
       description={
         <>
-          <SubTitle className={isBlocking ? 'u-pomegranate' : ''}>
+          <SubTitle className={isBlocking ? 'u-error' : ''}>
             {t('infos.konnectorUpdate.title')}
           </SubTitle>
           <Text>

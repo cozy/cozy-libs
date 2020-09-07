@@ -19,10 +19,10 @@ const MaintenanceHeader = ({ message, t, breakpoints: { isMobile } }) => (
   >
     <MaintenanceIcon />
     <Stack spacing="xs">
-      <SubTitle className="u-ta-center-s u-pomegranate">
+      <SubTitle className="u-ta-center-s u-error">
         {t('maintenance.noService')}
       </SubTitle>
-      <Text className="u-pomegranate">{message}</Text>
+      <Text className="u-error">{message}</Text>
     </Stack>
   </div>
 )

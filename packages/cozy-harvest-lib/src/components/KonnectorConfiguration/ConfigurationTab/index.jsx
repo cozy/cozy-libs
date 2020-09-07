@@ -42,7 +42,7 @@ const tabMobileNavListStyle = { borderTop: 'none' }
 const ConfirmationDialog = ({ onConfirm, onCancel }) => {
   const { t } = useI18n()
   return (
-    <Dialog maxWidth="xs">
+    <Dialog maxWidth="xs" fullScreen={false}>
       <DialogCloseButton onClick={onCancel} />
       <DialogTitle>{t('modal.deleteAccount.title')}</DialogTitle>
       <DialogContent>{t('modal.deleteAccount.description')}</DialogContent>
