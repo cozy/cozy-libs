@@ -21,6 +21,7 @@ import {
   PERM_1,
   PERM_2,
   SHARING_NO_ACTIVE,
+  SHARING_WITH_SHORTCUT,
   APPS
 } from '../__tests__/fixtures'
 
@@ -39,13 +40,24 @@ describe('Sharing state', () => {
   it('should index received sharings', () => {
     const state = reducer(
       undefined,
-      receiveSharings({ sharings: [SHARING_1, SHARING_2] })
+      receiveSharings({
+        sharings: [SHARING_1, SHARING_2, SHARING_WITH_SHORTCUT]
+      })
     )
     expect(state.byDocId).toEqual({
       folder_1: { sharings: [SHARING_1.id], permissions: [] },
-      folder_2: { sharings: [SHARING_2.id], permissions: [] }
+      folder_2: { sharings: [SHARING_2.id], permissions: [] },
+      shortcut_id: { sharings: [SHARING_WITH_SHORTCUT.id], permissions: [] },
+      previewed_folder_id: {
+        sharings: [SHARING_WITH_SHORTCUT.id],
+        permissions: []
+      }
     })
-    expect(state.sharings).toEqual([SHARING_1, SHARING_2])
+    expect(state.sharings).toEqual([
+      SHARING_1,
+      SHARING_2,
+      SHARING_WITH_SHORTCUT
+    ])
   })
 
   it('should filter out sharings revoked by all recipients', () => {
@@ -259,7 +271,7 @@ describe('Sharing state', () => {
         reducer(
           undefined,
           receiveSharings({
-            sharings: [SHARING_1, SHARING_2, SHARING_2],
+            sharings: [SHARING_1, SHARING_2, SHARING_2, SHARING_WITH_SHORTCUT],
             permissions: [PERM_1],
             apps: APPS
           })
@@ -306,6 +318,26 @@ describe('Sharing state', () => {
           index: 1,
           status: 'pending',
           type: 'two-way'
+        }
+      ])
+      expect(getRecipients(state, 'shortcut_id')).toEqual([
+        {
+          email: 'jane@doe.com',
+          instance: 'http://cozy.tools:8080',
+          name: 'Jane Doe',
+          sharingId: 'sharing_5',
+          index: 0,
+          status: 'owner',
+          type: 'one-way'
+        },
+        {
+          email: 'johnny@doe.com',
+          instance: 'http://cozy.foo:8080',
+          name: 'Johnny Doe',
+          sharingId: 'sharing_5',
+          index: 1,
+          status: 'pending',
+          type: 'one-way'
         }
       ])
     })
