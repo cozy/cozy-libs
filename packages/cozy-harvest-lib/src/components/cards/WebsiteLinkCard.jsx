@@ -39,7 +39,7 @@ const WebsiteLinkCard = ({ link }) => {
             href={link}
             label={label}
             theme="text"
-            className="u-dodgerBlue u-m-0"
+            className="u-primaryColor u-m-0"
             style={linkStyle}
           />
           <Caption>{t('card.websiteLink.description')}</Caption>
