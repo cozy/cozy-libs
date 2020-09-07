@@ -73,7 +73,7 @@ export const RecipientsAvatars = ({
   )
 }
 
-export const UserAvatar = ({ url, size, ...rest }) => (
+export const OwnerIdentity = ({ url, size, ...rest }) => (
   <div className={styles['avatar']}>
     <Avatar
       text={Contact.getInitials(rest)}

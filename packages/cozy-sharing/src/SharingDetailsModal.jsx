@@ -5,7 +5,7 @@ import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 
-import { UserAvatar as Owner } from './components/Recipient'
+import { OwnerIdentity } from './components/Recipient'
 import WhoHasAccess from './components/WhoHasAccess'
 import { Contact } from './models'
 
@@ -32,7 +32,7 @@ export const SharingDetailsModal = ({
     >
       <ModalContent className={styles['share-modal-content']}>
         <div className={styles['share-details']}>
-          <Owner
+          <OwnerIdentity
             name={t(`${documentType}.share.sharedBy`, {
               name: Contact.getDisplayName(owner)
             })}
