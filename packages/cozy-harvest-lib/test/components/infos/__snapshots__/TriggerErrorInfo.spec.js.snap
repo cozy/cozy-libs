@@ -5,7 +5,7 @@ exports[`TriggerErrorInfo should render 1`] = `
   description={
     <React.Fragment>
       <ForwardRef
-        className="u-pomegranate"
+        className="u-error"
         ellipsis={false}
         tag="div"
       >
@@ -30,7 +30,7 @@ exports[`TriggerErrorInfo should render regular Error 1`] = `
   description={
     <React.Fragment>
       <ForwardRef
-        className="u-pomegranate"
+        className="u-error"
         ellipsis={false}
         tag="div"
       >

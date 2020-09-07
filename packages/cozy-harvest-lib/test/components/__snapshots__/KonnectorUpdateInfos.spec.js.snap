@@ -49,7 +49,7 @@ exports[`KonnectorUpdateInfos should render as blocking 1`] = `
   description={
     <React.Fragment>
       <ForwardRef
-        className="u-pomegranate"
+        className="u-error"
         ellipsis={false}
         tag="div"
       >
