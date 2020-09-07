@@ -470,6 +470,6 @@
   },
 
   "disconnectedAccountModal": {
-    "disconnected-help": "Vous avez déconnecté votre compte. Vous conservez l'historique de vos données déjà importées. Si vous souhaitez reprendre la connexion , reconfigurez votre compte depuis le bouton \"Ajouter une banque\"."
+    "disconnected-help": "Vous avez déconnecté votre compte. Vous conservez l'historique de vos données déjà importées. Si vous souhaitez reprendre la connexion, reconfigurez votre compte depuis le bouton \"Ajouter une banque\"."
   }
 }
