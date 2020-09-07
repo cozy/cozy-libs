@@ -1,7 +1,10 @@
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 
-const relatedAppsConfiguration = [
+/**
+ * Exporting relatedAppsConfiguration is useful for overrides
+ */
+export const relatedAppsConfiguration = [
   {
     slug: 'banks',
     priority: 2,
