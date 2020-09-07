@@ -370,10 +370,17 @@ const getSharedDocIds = doc =>
     ? getSharingDocIds(doc)
     : getPermissionDocIds(doc)
 
-export const getSharingDocIds = sharing =>
-  sharing.attributes.rules
+export const getSharingDocIds = sharing => {
+  const docs = sharing.attributes.rules
     .map(r => r.values)
     .reduce((acc, val) => acc.concat(val), [])
+
+  if (sharing.attributes.shortcut_id) {
+    docs.push(sharing.attributes.shortcut_id)
+  }
+
+  return docs
+}
 
 const getPermissionDocIds = perm =>
   Object.keys(perm.attributes.permissions)
@@ -394,7 +401,9 @@ const getDocumentSharingType = (sharing, docId) => {
   const rule = sharing.attributes.rules.find(
     r => r.values.indexOf(docId) !== -1
   )
-  return rule.update === 'sync' && rule.remove === 'sync'
+
+  // If a document has no rule, it is a shortcut preview of a sharing. Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
+  return rule && rule.update === 'sync' && rule.remove === 'sync'
     ? 'two-way'
     : 'one-way'
 }
