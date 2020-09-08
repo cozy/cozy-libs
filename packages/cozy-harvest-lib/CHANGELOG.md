@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.11.0...cozy-harvest-lib@2.11.1) (2020-09-08)
+
+
+### Bug Fixes
+
+* Lint ([174bbcc](https://github.com/cozy/cozy-libs/commit/174bbcc))
+* Remove extra margin ([7c0ddb4](https://github.com/cozy/cozy-libs/commit/7c0ddb4))
+
+
+
+
+
 # [2.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.10.1...cozy-harvest-lib@2.11.0) (2020-09-07)
 
 
