@@ -46,8 +46,8 @@ export const RecipientsAvatars = ({
       onClick={onClick}
     >
       {link && (
-        <Circle size={size} backgroundColor="var(--silver)">
-          <Icon icon="link" size={16} color="var(--charcoalGrey)" />
+        <Circle size={size} backgroundColor="var(--genericRecipientBackground)">
+          <Icon icon="link" size={16} color="var(--genericRecipientColor)" />
         </Circle>
       )}
       {recipients.length > MAX_DISPLAYED_RECIPIENTS && (

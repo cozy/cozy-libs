@@ -8,7 +8,10 @@ const AvatarPlusX = ({ size, extraRecipients = [] }) => (
     <Avatar
       size={size}
       text={`+${Math.min(extraRecipients.length, 99)}`}
-      style={{ backgroundColor: 'var(--silver)', color: 'var(--charcoalGrey)' }}
+      style={{
+        backgroundColor: 'var(--genericRecipientBackground)',
+        color: 'var(--genericRecipientColor)'
+      }}
     />
     <SharingTooltip id="extra-recipients-avatar">
       <TooltipRecipientList recipientNames={extraRecipients} />
