@@ -39,7 +39,7 @@ import {
 import EditableSharingModal from './components/EditableSharingModal'
 import { SharingDetailsModal } from './SharingDetailsModal'
 import { default as RecipientsList } from './components/WhoHasAccessLight'
-import { RecipientsAvatars } from './components/Recipient'
+import { RecipientsAvatars, RecipientAvatar } from './components/Recipient'
 import { default as DumbSharedStatus } from './components/SharedStatus'
 import { withClient } from 'cozy-client'
 
@@ -400,6 +400,16 @@ export const SharedBadge = withLocales(({ docId, ...rest }) => (
         <DumbSharedBadge byMe={isOwner(docId)} {...rest} />
       )
     }
+  </SharingContext.Consumer>
+))
+
+export const SharingOwnerAvatar = withLocales(({ docId, ...rest }) => (
+  <SharingContext.Consumer>
+    {({ byDocId, getOwner } = {}) => {
+      return !byDocId || !byDocId[docId] ? null : (
+        <RecipientAvatar recipient={getOwner(docId)} {...rest} />
+      )
+    }}
   </SharingContext.Consumer>
 ))
 

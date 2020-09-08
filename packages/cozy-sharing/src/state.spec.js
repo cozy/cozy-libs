@@ -290,7 +290,8 @@ describe('Sharing state', () => {
           sharingId: 'sharing_1',
           index: 0,
           status: 'owner',
-          type: 'two-way'
+          type: 'two-way',
+          avatarPath: '/sharings/sharing_1/recipients/0/avatar'
         },
         {
           email: 'john@doe.com',
@@ -299,7 +300,8 @@ describe('Sharing state', () => {
           sharingId: 'sharing_1',
           index: 1,
           status: 'ready',
-          type: 'two-way'
+          type: 'two-way',
+          avatarPath: '/sharings/sharing_1/recipients/1/avatar'
         },
         {
           email: 'john2@doe.com',
@@ -308,7 +310,8 @@ describe('Sharing state', () => {
           sharingId: 'sharing_1',
           index: 2,
           status: 'ready',
-          type: 'two-way'
+          type: 'two-way',
+          avatarPath: '/sharings/sharing_1/recipients/2/avatar'
         },
         {
           email: 'johnny@doe.com',
@@ -317,7 +320,8 @@ describe('Sharing state', () => {
           sharingId: 'sharing_3',
           index: 1,
           status: 'pending',
-          type: 'two-way'
+          type: 'two-way',
+          avatarPath: '/sharings/sharing_3/recipients/1/avatar'
         }
       ])
       expect(getRecipients(state, 'shortcut_id')).toEqual([
@@ -328,7 +332,8 @@ describe('Sharing state', () => {
           sharingId: 'sharing_5',
           index: 0,
           status: 'owner',
-          type: 'one-way'
+          type: 'one-way',
+          avatarPath: '/sharings/sharing_5/recipients/0/avatar'
         },
         {
           email: 'johnny@doe.com',
@@ -337,7 +342,8 @@ describe('Sharing state', () => {
           sharingId: 'sharing_5',
           index: 1,
           status: 'pending',
-          type: 'one-way'
+          type: 'one-way',
+          avatarPath: '/sharings/sharing_5/recipients/1/avatar'
         }
       ])
     })

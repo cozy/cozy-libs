@@ -61,15 +61,26 @@ export const RecipientsAvatars = ({
       {reversedRecipients
         .slice(0, MAX_DISPLAYED_RECIPIENTS)
         .map((recipient, idx) => (
-          <Avatar
+          <RecipientAvatar
             key={idx}
-            text={Contact.getInitials(recipient)}
+            recipient={recipient}
             size={size}
-            textId={Contact.getDisplayName(recipient)}
             className={classNames(styles['recipient-avatar'])}
           />
         ))}
     </div>
+  )
+}
+
+export const RecipientAvatar = ({ recipient, ...rest }) => {
+  const client = useClient()
+  return (
+    <Avatar
+      image={`${client.options.uri}${recipient.avatarPath}`}
+      text={Contact.getInitials(recipient)}
+      textId={Contact.getDisplayName(recipient)}
+      {...rest}
+    />
   )
 }
 
@@ -227,7 +238,6 @@ const Recipient = props => {
   const isMe =
     (isOwner && status === 'owner') || instance === client.options.uri
   const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
-  const defaultInitials = defaultDisplayName[0].toUpperCase()
   const name = Contact.getDisplayName(rest, defaultDisplayName)
 
   return (
@@ -240,12 +250,7 @@ const Recipient = props => {
         </Text>
       }
       secondaryText={<Status status={status} isMe={isMe} instance={instance} />}
-      image={
-        <Avatar
-          text={Contact.getInitials(rest, defaultInitials)}
-          textId={name}
-        />
-      }
+      image={<RecipientAvatar recipient={props} />}
       right={<Permissions {...props} className="u-flex-shrink-0" />}
     />
   )
