@@ -121,6 +121,22 @@ describe('Sharing state', () => {
     expect(newState.sharings).toEqual([SHARING_1, SHARING_2, SHARING_3])
   })
 
+  it('should add the path of a sharing shortcut', () => {
+    const initialState = reducer(
+      undefined,
+      receiveSharings({
+        sharings: []
+      })
+    )
+    const sharedShortcutPath = 'path/to/shortcut.url'
+    const newState = reducer(
+      initialState,
+      addSharing(SHARING_WITH_SHORTCUT, sharedShortcutPath)
+    )
+    expect(newState.sharings).toEqual([SHARING_WITH_SHORTCUT])
+    expect(newState.sharedPaths).toEqual([sharedShortcutPath])
+  })
+
   it('should revoke a recipient', () => {
     const state = reducer(
       reducer(
