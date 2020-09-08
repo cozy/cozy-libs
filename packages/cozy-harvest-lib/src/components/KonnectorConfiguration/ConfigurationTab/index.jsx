@@ -107,7 +107,7 @@ const ConfigurationTab = ({
       <>
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
-            className={isMobile ? "u-mv-2" : "u-mb-2"}
+            className={isMobile ? 'u-mv-2' : 'u-mb-2'}
             error={error}
             konnector={konnector}
           />
