@@ -285,7 +285,8 @@ export const getRecipients = (state, docId) => {
         ...m,
         type: m.read_only ? 'one-way' : type,
         sharingId: sharing.id,
-        index: idx
+        index: idx,
+        avatarPath: `/sharings/${sharing.id}/recipients/${idx}/avatar`
       }))
     })
     .reduce((acc, member) => acc.concat(member), [])
