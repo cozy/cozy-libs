@@ -15,6 +15,15 @@ class TravisIsOK {
         type: 'travis-lint'
       }
     }
+
+    if (travisContent.includes('fast_finish')) {
+      yield {
+        severity: 'warn',
+        message:
+          'fast_finish parameter most likely is not needed if you do not use the matrix feature from travis',
+        type: 'travis-lint'
+      }
+    }
   }
 }
 
