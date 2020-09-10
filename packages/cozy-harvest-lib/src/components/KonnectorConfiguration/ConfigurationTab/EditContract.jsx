@@ -70,7 +70,7 @@ const EditContract = props => {
   const client = useClient()
 
   const {
-    contract: account,
+    contract,
     onAfterRemove,
     onSuccess,
     dismissAction,
@@ -80,10 +80,10 @@ const EditContract = props => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
-  const handleSaveAccount = async (account, fields) => {
-    await updateContract(client, account, {
+  const handleSaveContract = async (contract, fields) => {
+    await updateContract(client, contract, {
       client,
-      account,
+      contract,
       fields,
       onSuccess: () => {
         if (onSuccess) {
@@ -102,12 +102,12 @@ const EditContract = props => {
     })
   }
 
-  const [shortLabel, setShortLabel] = useState(getAccountLabel(account))
-  const [owners, setOwners] = useState(getAccountOwners(account))
+  const [shortLabel, setShortLabel] = useState(getAccountLabel(contract))
+  const [owners, setOwners] = useState(getAccountOwners(contract))
 
   const handleSubmit = e => {
     e.preventDefault()
-    handleSaveAccount(account, { shortLabel, owners })
+    handleSaveContract(contract, { shortLabel, owners })
   }
 
   const handleRequestDeletion = ev => {
@@ -115,11 +115,11 @@ const EditContract = props => {
     setShowDeleteConfirmation(true)
   }
 
-  const handleRemoveAccount = async account => {
+  const handleRemoveAccount = async contract => {
     setDeleting(true)
 
     try {
-      await client.destroy(account)
+      await client.destroy(contract)
 
       if (onAfterRemove) {
         onAfterRemove()
@@ -139,10 +139,10 @@ const EditContract = props => {
   return (
     <ExperimentalDialog>
       <ExperimentalDialogTitle>
-        {getAccountLabel(account)}
+        {getAccountLabel(contract)}
       </ExperimentalDialogTitle>
       <DialogContent>
-        <form id={`edit-contract-${account._id}`} onSubmit={handleSubmit}>
+        <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
           <Stack spacing={isMobile ? 's' : 'm'}>
             <Field
               id="account-label"
@@ -166,7 +166,7 @@ const EditContract = props => {
               id="account-institution"
               placeholder={t('contractForm.bank')}
               label={t('contractForm.bank')}
-              value={getAccountInstitutionLabel(account)}
+              value={getAccountInstitutionLabel(contract)}
               disabled
               variant={fieldVariant}
             />
@@ -174,7 +174,7 @@ const EditContract = props => {
               id="account-number"
               placeholder={t('contractForm.number')}
               label={t('contractForm.number')}
-              value={account.number}
+              value={contract.number}
               disabled
               variant={fieldVariant}
             />
@@ -195,7 +195,7 @@ const EditContract = props => {
         />
         <Button
           type="submit"
-          form={`edit-contract-${account._id}`}
+          form={`edit-contract-${contract._id}`}
           label={t('contractForm.apply')}
           theme="primary"
         />
@@ -212,7 +212,7 @@ const EditContract = props => {
             )
           }
           secondaryText={t('contractForm.cancel')}
-          onConfirm={() => handleRemoveAccount(account)}
+          onConfirm={() => handleRemoveAccount(contract)}
           onCancel={() => setShowDeleteConfirmation(false)}
         />
       ) : null}
@@ -222,7 +222,7 @@ const EditContract = props => {
 
 EditContract.propTypes = {
   /** The account that will be edited */
-  account: PropTypes.object.isRequired,
+  contract: PropTypes.object.isRequired,
   /** The Component used to wrap the title */
   TitleWrapper: PropTypes.node.isRequired,
   /** The Component used to wrap the form buttons */
