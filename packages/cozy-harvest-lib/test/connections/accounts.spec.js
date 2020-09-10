@@ -1,5 +1,6 @@
 /* eslint-env jest */
 
+import omit from 'lodash/omit'
 import {
   createAccount,
   updateAccount,
@@ -53,6 +54,7 @@ const fixtures = {
     }
   },
   simpleAccount: {
+    _id: 'simple-account-id',
     account_type: 'test',
     auth: {
       login: 'login',
@@ -130,7 +132,7 @@ describe('Account mutations', () => {
 
     describe('if parent account does not exist', () => {
       beforeEach(() => {
-        client.collection().get = jest.fn().mockRejectedValue({ status: 404 })
+        client.query = jest.fn().mockRejectedValue({ status: 404 })
 
         client.create.mockReset()
         client.create.mockResolvedValue({
@@ -375,15 +377,16 @@ describe('Account mutations', () => {
 
   describe('saveAccount', () => {
     it('calls CozyClient::create for new account', async () => {
+      const newSimpleAccount = omit(fixtures.simpleAccount, '_id')
       const account = await saveAccount(
         client,
         fixtures.konnector,
-        fixtures.simpleAccount
+        newSimpleAccount
       )
 
       expect(client.create).toHaveBeenCalledWith(
         'io.cozy.accounts',
-        fixtures.simpleAccount
+        newSimpleAccount
       )
       expect(account).toEqual(fixtures.existingAccount)
     })

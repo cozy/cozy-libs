@@ -15,7 +15,7 @@ import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
-import { findAccount } from '../connections/accounts'
+import { fetchAccount } from '../connections/accounts'
 import FlowProvider from './FlowProvider'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
@@ -100,7 +100,7 @@ export class DumbTriggerManager extends Component {
    */
   async handleOAuthAccountId(accountId) {
     const { client, flow, konnector, t } = this.props
-    const oAuthAccount = await findAccount(client, accountId)
+    const oAuthAccount = await fetchAccount(client, accountId)
     flow.ensureTriggerAndLaunch(client, {
       account: oAuthAccount,
       konnector: konnector,
