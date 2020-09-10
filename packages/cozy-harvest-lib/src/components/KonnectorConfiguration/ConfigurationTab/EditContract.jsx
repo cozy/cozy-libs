@@ -223,10 +223,6 @@ const EditContract = props => {
 EditContract.propTypes = {
   /** The account that will be edited */
   contract: PropTypes.object.isRequired,
-  /** The Component used to wrap the title */
-  TitleWrapper: PropTypes.node.isRequired,
-  /** The Component used to wrap the form buttons */
-  FormControlsWrapper: PropTypes.node.isRequired,
   /** The callback called when the document is saved */
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
