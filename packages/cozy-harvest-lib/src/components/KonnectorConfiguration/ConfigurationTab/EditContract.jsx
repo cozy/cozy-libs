@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Field from 'cozy-ui/transpiled/react/Field'
+import Field, { FieldContainer } from 'cozy-ui/transpiled/react/Field'
 import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
+import Label from 'cozy-ui/transpiled/react/Label'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
@@ -16,9 +18,11 @@ import ExperimentalDialog, {
   ExperimentalDialogTitle,
   ExperimentalDialogActions
 } from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-
 import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+
+import SyncContractSwitch from './SyncContractSwitch'
+import { findKonnectorPolicy } from '../../../konnector-policies'
 
 import withLocales from '../../hoc/withLocales'
 import { updateContract } from './helpers'
@@ -71,6 +75,8 @@ const EditContract = props => {
 
   const {
     contract,
+    accountId,
+    konnector,
     onAfterRemove,
     onSuccess,
     dismissAction,
@@ -135,6 +141,7 @@ const EditContract = props => {
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
   const fieldVariant = isMobile ? 'default' : 'inline'
+  const policy = findKonnectorPolicy(konnector)
 
   return (
     <ExperimentalDialog>
@@ -178,6 +185,21 @@ const EditContract = props => {
               disabled
               variant={fieldVariant}
             />
+            {policy.setSync && flag('harvest.toggle-contract-sync') ? (
+              <FieldContainer variant={fieldVariant}>
+                <Label for="account-sync-switch">
+                  {t('contractForm.imported')}
+                </Label>
+                <span>
+                  <SyncContractSwitch
+                    contract={contract}
+                    accountId={accountId}
+                    konnector={konnector}
+                  />
+                </span>
+              </FieldContainer>
+            ) : null}
+
             <Button
               className="u-ml-auto"
               label={t('contractForm.removeAccountBtn')}
@@ -226,7 +248,9 @@ EditContract.propTypes = {
   /** The callback called when the document is saved */
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
+  /** Account id (necessary to toggle contract sync) */
+  accountId: PropTypes.string.isRequired
 }
 
 export default withLocales(EditContract)

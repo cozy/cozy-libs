@@ -38,7 +38,7 @@ const getPrimaryTextPerDoctype = {
 
 const getPrimaryTextDefault = contract => contract.label
 
-const ContractItem = ({ contract }) => {
+const ContractItem = ({ contract, konnector, accountId }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
   const getPrimaryText =
     getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
@@ -64,6 +64,8 @@ const ContractItem = ({ contract }) => {
       </ListItem>
       {showingEditModal ? (
         <EditContract
+          konnector={konnector}
+          accountId={accountId}
           contract={contract}
           dismissAction={() => {
             setShowingEditModal(false)
@@ -87,7 +89,7 @@ const customHeaderPerDoctype = {
   'io.cozy.bank.accounts': 'bankAccounts'
 }
 
-const DumbContracts = ({ contracts }) => {
+const DumbContracts = ({ contracts, account, konnector }) => {
   const contractData = contracts.data ? contracts.data : contracts
   const { t } = useI18n()
   const doctype = contractData[0] ? contractData[0]._type : null
@@ -101,7 +103,14 @@ const DumbContracts = ({ contracts }) => {
         <NavigationListSection>
           {contractData &&
             contractData.map(contract => {
-              return <ContractItem key={contract._id} contract={contract} />
+              return (
+                <ContractItem
+                  key={contract._id}
+                  konnector={konnector}
+                  accountId={account ? account._id : null}
+                  contract={contract}
+                />
+              )
             })}
         </NavigationListSection>
       </NavigationList>
@@ -115,7 +124,11 @@ const CollectionPropType = PropTypes.shape({
 })
 
 DumbContracts.propTypes = {
-  contracts: PropTypes.oneOfType([CollectionPropType, PropTypes.array])
+  contracts: PropTypes.oneOfType([CollectionPropType, PropTypes.array]),
+  /** Can be present if showing contracts still linked to an account/konnector/trigger */
+  account: PropTypes.object,
+  /** Can be present if showing contracts still linked to an account/konnector/trigger */
+  konnector: PropTypes.object
 }
 
 export const ContractsForAccount = compose(

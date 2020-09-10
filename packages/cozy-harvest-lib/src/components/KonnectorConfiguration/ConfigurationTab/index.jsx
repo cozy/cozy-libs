@@ -114,7 +114,7 @@ const ConfigurationTab = ({
         )}
         <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
           {flag('harvest.show-contracts') ? (
-            <ContractsForAccount account={account} />
+            <ContractsForAccount konnector={konnector} account={account} />
           ) : null}
           {!konnector.oauth ? (
             <>
