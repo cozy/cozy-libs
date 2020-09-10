@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.15.2...cozy-sharing@1.16.0) (2020-09-10)
+
+
+### Features
+
+* Support sharings with shortcuts ([1c24ed0](https://github.com/cozy/cozy-libs/commit/1c24ed0))
+* Use avatar from server ([2c56ac8](https://github.com/cozy/cozy-libs/commit/2c56ac8))
+
+
+
+
+
 ## [1.15.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.15.1...cozy-sharing@1.15.2) (2020-09-04)
 
 **Note:** Version bump only for package cozy-sharing
