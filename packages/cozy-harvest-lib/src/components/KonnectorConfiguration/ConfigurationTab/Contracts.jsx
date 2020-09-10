@@ -18,7 +18,7 @@ import NavigationList, {
 } from 'cozy-ui/transpiled/react/NavigationList'
 
 import { getAccountLabel } from './bankAccountHelpers'
-import EditContractModal from './EditContract'
+import EditContract from './EditContract'
 
 import withLocales from '../../hoc/withLocales'
 
@@ -63,7 +63,7 @@ const ContractItem = ({ contract }) => {
         </ListItemSecondaryAction>
       </ListItem>
       {showingEditModal ? (
-        <EditContractModal
+        <EditContract
           contract={contract}
           dismissAction={() => {
             setShowingEditModal(false)
