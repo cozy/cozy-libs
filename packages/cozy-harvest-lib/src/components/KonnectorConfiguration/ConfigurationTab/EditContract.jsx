@@ -187,9 +187,8 @@ const EditContract = props => {
             />
             {policy.setSync && flag('harvest.toggle-contract-sync') ? (
               <FieldContainer variant={fieldVariant}>
-                <Label for="account-sync-switch">
-                  {t('contractForm.imported')}
-                </Label>
+                <Label>{t('contractForm.imported')}</Label>
+                {/* The span is needed otherwise the switch is not correctly rendered */}
                 <span>
                   <SyncContractSwitch
                     contract={contract}
