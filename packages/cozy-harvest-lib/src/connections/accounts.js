@@ -1,8 +1,7 @@
-import { Q, HasMany } from 'cozy-client'
+import { Q } from 'cozy-client'
 import * as triggersModel from '../helpers/triggers'
 
 import merge from 'lodash/merge'
-import get from 'lodash/get'
 import keyBy from 'lodash/keyBy'
 import assert from '../assert'
 import logger from '../logger'
@@ -187,35 +186,4 @@ export const fetchAccountsFromTriggers = async (client, triggers) => {
   return accounts
     .filter(Boolean)
     .map(account => ({ account, trigger: accountIdToTrigger[account._id] }))
-}
-
-const DEFAULT_CONTRACT_SYNC_STATUS = true
-
-/**
- * Returns whether a contract is synced from account relationship
- * @param  {io.cozy.accounts} account
- */
-export const getContractSyncStatusFromAccount = (account, contractId) => {
-  const relItem = HasMany.getHasManyItem(account, 'contracts', contractId)
-  if (!relItem) {
-    throw new Error(`Cannot find contrat ${contractId} in account`)
-  }
-  return get(relItem, 'metadata.imported', DEFAULT_CONTRACT_SYNC_STATUS)
-}
-
-/**
- * Sets contract sync status into account relationship
- * @param  {io.cozy.accounts} account
- */
-export const setContractSyncStatusInAccount = (
-  account,
-  contractId,
-  syncStatus
-) => {
-  return HasMany.updateHasManyItem(account, 'contracts', contractId, contractRel => {
-    if (contractRel === undefined) {
-      throw new Error(`Cannot find contrat ${contractId} in account`)
-    }
-    return merge({}, contractRel, { metadata: { imported: syncStatus } })
-  })
 }

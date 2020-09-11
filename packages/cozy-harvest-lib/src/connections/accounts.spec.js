@@ -5,9 +5,7 @@ import {
   createAccount,
   updateAccount,
   saveAccount,
-  deleteAccount,
-  getContractSyncStatusFromAccount,
-  setContractSyncStatusInAccount
+  deleteAccount
 } from 'connections/accounts'
 
 const client = {
@@ -406,56 +404,6 @@ describe('Account mutations', () => {
       )
       expect(client.save).toHaveBeenCalledWith(fixtures.existingAccount)
       expect(account).toEqual(fixtures.existingAccount)
-    })
-  })
-
-  describe('contract sync status', () => {
-    it('should get/set correctly the sync status', () => {
-      const CONTRACT_ID = 'contract-id-1'
-
-      const syncStatus = getContractSyncStatusFromAccount(
-        fixtures.existingAccount,
-        CONTRACT_ID
-      )
-      // Check that default value is correctly returned
-      expect(syncStatus).toBe(true)
-
-      const account2 = setContractSyncStatusInAccount(
-        fixtures.existingAccount,
-        CONTRACT_ID,
-        false
-      )
-      const syncStatus2 = getContractSyncStatusFromAccount(
-        account2,
-        CONTRACT_ID
-      )
-      expect(syncStatus2).toBe(false)
-      const account3 = setContractSyncStatusInAccount(
-        account2,
-        CONTRACT_ID,
-        true
-      )
-      const syncStatus3 = getContractSyncStatusFromAccount(
-        account3,
-        CONTRACT_ID
-      )
-
-      expect(syncStatus3).toBe(true)
-    })
-
-    it('should throw when getting/setting sync status for contract that does not exist', () => {
-      expect(() =>
-        getContractSyncStatusFromAccount(
-          fixtures.existingAccount,
-          'non-existing-contract-id'
-        )
-      ).toThrow('Cannot find contrat non-existing-contract-id in account')
-      expect(() =>
-        setContractSyncStatusInAccount(
-          fixtures.existingAccount,
-          'non-existing-contract-id'
-        )
-      ).toThrow('Cannot find contrat non-existing-contract-id in account')
     })
   })
 })
