@@ -198,6 +198,9 @@ const DEFAULT_CONTRACT_SYNC_STATUS = true
  */
 export const getContractSyncStatusFromAccount = (account, contractId) => {
   const relItem = getHasManyItem(account, 'contracts', contractId)
+  if (!relItem) {
+    throw new Error(`Cannot find contrat ${contractId} in account`)
+  }
   return get(relItem, 'meta.imported', DEFAULT_CONTRACT_SYNC_STATUS)
 }
 
@@ -210,7 +213,10 @@ export const setContractSyncStatusInAccount = (
   contractId,
   syncStatus
 ) => {
-  return updateHasManyItem(account, 'contracts', contractId, contractRel =>
-    merge({}, contractRel, { meta: { imported: syncStatus } })
-  )
+  return updateHasManyItem(account, 'contracts', contractId, contractRel => {
+    if (contractRel === undefined) {
+      throw new Error(`Cannot find contrat ${contractId} in account`)
+    }
+    return merge({}, contractRel, { meta: { imported: syncStatus } })
+  })
 }
