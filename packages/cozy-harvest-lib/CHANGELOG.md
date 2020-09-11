@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.11.1...cozy-harvest-lib@2.11.2) (2020-09-11)
+
+
+### Bug Fixes
+
+* **Harvest:** Unit tests ([1f82509](https://github.com/cozy/cozy-libs/commit/1f82509))
+
+
+
+
+
 ## [2.11.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.11.0...cozy-harvest-lib@2.11.1) (2020-09-08)
 
 
