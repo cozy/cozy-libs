@@ -20,7 +20,7 @@ Object {
         Object {
           "_id": "book-2",
           "_type": "io.cozy.books",
-          "meta": Object {
+          "metadata": Object {
             "read": true,
           },
         },
@@ -54,14 +54,14 @@ Object {
         Object {
           "_id": "book-2",
           "_type": "io.cozy.books",
-          "meta": Object {
+          "metadata": Object {
             "read": true,
           },
         },
         Object {
           "_id": "book-3",
           "_type": "io.cozy.books",
-          "meta": Object {
+          "metadata": Object {
             "read": true,
           },
         },

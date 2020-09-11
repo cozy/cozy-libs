@@ -18,11 +18,11 @@ describe('has-many helpers', () => {
     }
 
     const doc2 = updateHasManyItem(doc, 'books', 'book-2', rel => {
-      return { ...rel, meta: { read: true } }
+      return { ...rel, metadata: { read: true } }
     })
 
     const doc3 = updateHasManyItem(doc2, 'books', 'book-3', rel => {
-      return { ...rel, meta: { read: true } }
+      return { ...rel, metadata: { read: true } }
     })
 
     expect(doc2).toMatchSnapshot()

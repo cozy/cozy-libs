@@ -201,7 +201,7 @@ export const getContractSyncStatusFromAccount = (account, contractId) => {
   if (!relItem) {
     throw new Error(`Cannot find contrat ${contractId} in account`)
   }
-  return get(relItem, 'meta.imported', DEFAULT_CONTRACT_SYNC_STATUS)
+  return get(relItem, 'metadata.imported', DEFAULT_CONTRACT_SYNC_STATUS)
 }
 
 /**
@@ -217,6 +217,6 @@ export const setContractSyncStatusInAccount = (
     if (contractRel === undefined) {
       throw new Error(`Cannot find contrat ${contractId} in account`)
     }
-    return merge({}, contractRel, { meta: { imported: syncStatus } })
+    return merge({}, contractRel, { metadata: { imported: syncStatus } })
   })
 }
