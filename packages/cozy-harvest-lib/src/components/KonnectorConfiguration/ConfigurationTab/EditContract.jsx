@@ -121,7 +121,7 @@ const EditContract = props => {
     setShowDeleteConfirmation(true)
   }
 
-  const handleRemoveAccount = async contract => {
+  const handleRemoveContract = async contract => {
     setDeleting(true)
 
     try {
@@ -233,7 +233,7 @@ const EditContract = props => {
             )
           }
           secondaryText={t('contractForm.cancel')}
-          onConfirm={() => handleRemoveAccount(contract)}
+          onConfirm={() => handleRemoveContract(contract)}
           onCancel={() => setShowDeleteConfirmation(false)}
         />
       ) : null}
