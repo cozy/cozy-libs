@@ -6,14 +6,12 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import DocumentQualification from './DocumentQualification'
 
-//import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
-import DialogContent from '@material-ui/core/DialogContent'
-
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import Dialog, {
+  DialogContent,
+  DialogCloseButton,
+  DialogTitle,
+  DialogActions
+} from 'cozy-ui/transpiled/react/Dialog'
 import Button from 'cozy-ui/transpiled/react/Button'
 
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
@@ -53,9 +51,9 @@ class ModalScannerQualification extends Component {
     const { onSave, t, dismissAction } = this.props
     const { qualification, filename } = this.state
     return (
-      <ExperimentalDialog onClose={dismissAction}>
+      <Dialog onClose={dismissAction}>
         <DialogCloseButton onClick={dismissAction} />
-        <ExperimentalDialogTitle>{t('Scan.save_doc')}</ExperimentalDialogTitle>
+        <DialogTitle>{t('Scan.save_doc')}</DialogTitle>
         <DialogContent>
           <DocumentQualification
             onDescribed={(qualification, filename) => {
@@ -68,7 +66,7 @@ class ModalScannerQualification extends Component {
             title={t('Scan.qualify')}
           />
         </DialogContent>
-        <ExperimentalDialogActions layout="row">
+        <DialogActions layout="row">
           <Button
             theme="secondary"
             onClick={dismissAction}
@@ -86,8 +84,8 @@ class ModalScannerQualification extends Component {
               }
             }}
           />
-        </ExperimentalDialogActions>
-      </ExperimentalDialog>
+        </DialogActions>
+      </Dialog>
     )
   }
 }
