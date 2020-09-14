@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.11.1...cozy-harvest-lib@2.12.0) (2020-09-14)
+
+
+### Bug Fixes
+
+* Remove old prop type ([08dbf6b](https://github.com/cozy/cozy-libs/commit/08dbf6b))
+* **Harvest:** Unit tests ([1f82509](https://github.com/cozy/cozy-libs/commit/1f82509))
+
+
+### Features
+
+* Create a spec to fetch an account ([0cd67f0](https://github.com/cozy/cozy-libs/commit/0cd67f0))
+* Set the sync status of an io.cozy.bank.accounts ([64e0cf5](https://github.com/cozy/cozy-libs/commit/64e0cf5))
+* Use HasMany static helpers instead of adhoc methods ([2cf1ea6](https://github.com/cozy/cozy-libs/commit/2cf1ea6))
+* Use metadata field instead of meta inside of relationship ([d0b6e74](https://github.com/cozy/cozy-libs/commit/d0b6e74))
+* Use methods from cozy-client ([482642e](https://github.com/cozy/cozy-libs/commit/482642e))
+
+
+
+
+
 ## [2.11.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.11.1...cozy-harvest-lib@2.11.2) (2020-09-11)
 
 
