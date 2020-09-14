@@ -19,14 +19,20 @@ export class DumbSyncContractSwitch extends React.Component {
       syncStatusLoading: false
     }
     this.handleSetSyncStatus = this.handleSetSyncStatus.bind(this)
-    this.checkToUpdateContractState({ mounting: true })
+    const stateUpdate = this.checkToUpdateContractState()
+    if (stateUpdate) {
+      Object.assign(this.state, stateUpdate)
+    }
   }
 
   componentDidUpdate() {
-    this.checkToUpdateContractState()
+    const stateUpdate = this.checkToUpdateContractState()
+    if (stateUpdate) {
+      this.setState(stateUpdate)
+    }
   }
 
-  checkToUpdateContractState({ mounting = false } = {}) {
+  checkToUpdateContractState() {
     const { accountCol, contract } = this.props
     if (
       accountCol.fetchStatus === 'loaded' &&
@@ -39,12 +45,7 @@ export class DumbSyncContractSwitch extends React.Component {
         contract._id
       )
       if (relSyncStatus !== null) {
-        if (mounting) {
-          // eslint-disable-next-line react/no-direct-mutation-state
-          this.state.syncStatus = relSyncStatus
-        } else {
-          this.setState({ syncStatus: relSyncStatus })
-        }
+        return { syncStatus: relSyncStatus }
       }
     }
   }
