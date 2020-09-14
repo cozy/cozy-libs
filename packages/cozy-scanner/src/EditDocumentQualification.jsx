@@ -5,13 +5,12 @@ import { withClient } from 'cozy-client'
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
-import DialogContent from '@material-ui/core/DialogContent'
-
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import Dialog, {
+  DialogContent,
+  DialogCloseButton,
+  DialogTitle,
+  DialogActions
+} from 'cozy-ui/transpiled/react/Dialog'
 import Button from 'cozy-ui/transpiled/react/Button'
 
 import DocumentQualification from './DocumentQualification'
@@ -45,9 +44,9 @@ class EditDocumentQualification extends Component {
     const theme = item ? getThemeByItem(item) : null
     const categoryLabel = item ? theme.label : null
     return (
-      <ExperimentalDialog onClose={onClose}>
+      <Dialog onClose={onClose}>
         <DialogCloseButton onClick={onClose} />
-        <ExperimentalDialogTitle>{document.name}</ExperimentalDialogTitle>
+        <DialogTitle>{document.name}</DialogTitle>
         <DialogContent>
           <DocumentQualification
             onDescribed={qualification => {
@@ -59,7 +58,7 @@ class EditDocumentQualification extends Component {
             }}
           />
         </DialogContent>
-        <ExperimentalDialogActions layout="row">
+        <DialogActions layout="row">
           <Button
             theme="secondary"
             onClick={onClose}
@@ -88,8 +87,8 @@ class EditDocumentQualification extends Component {
               }
             }}
           />
-        </ExperimentalDialogActions>
-      </ExperimentalDialog>
+        </DialogActions>
+      </Dialog>
     )
   }
 }

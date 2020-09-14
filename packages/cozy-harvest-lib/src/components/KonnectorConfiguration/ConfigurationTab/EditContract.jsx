@@ -14,12 +14,12 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import Dialog, {
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogCloseButton
+} from 'cozy-ui/transpiled/react/Dialog'
 
 import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -54,17 +54,17 @@ const DeleteConfirm = ({
   primaryText
 }) => {
   return (
-    <ExperimentalDialog>
-      <ExperimentalDialogTitle>{title}</ExperimentalDialogTitle>
+    <Dialog>
+      <DialogTitle>{title}</DialogTitle>
       <DialogCloseButton onClick={() => onCancel()} />
       <DialogContent>
         <div dangerouslySetInnerHTML={{ __html: description }} />
       </DialogContent>
-      <ExperimentalDialogActions>
+      <DialogActions>
         <Button theme="secondary" label={secondaryText} onClick={onCancel} />
         <Button theme="danger" label={primaryText} onClick={onConfirm} />
-      </ExperimentalDialogActions>
-    </ExperimentalDialog>
+      </DialogActions>
+    </Dialog>
   )
 }
 
@@ -144,10 +144,8 @@ const EditContract = props => {
   const policy = findKonnectorPolicy(konnector)
 
   return (
-    <ExperimentalDialog>
-      <ExperimentalDialogTitle>
-        {getAccountLabel(contract)}
-      </ExperimentalDialogTitle>
+    <Dialog>
+      <DialogTitle>{getAccountLabel(contract)}</DialogTitle>
       <DialogContent>
         <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
           <Stack spacing={isMobile ? 's' : 'm'}>
@@ -208,7 +206,7 @@ const EditContract = props => {
           </Stack>
         </form>
       </DialogContent>
-      <ExperimentalDialogActions layout="row">
+      <DialogActions layout="row">
         <Button
           label={t('contractForm.cancel')}
           theme="secondary"
@@ -220,7 +218,7 @@ const EditContract = props => {
           label={t('contractForm.apply')}
           theme="primary"
         />
-      </ExperimentalDialogActions>
+      </DialogActions>
       {showDeleteConfirmation ? (
         <DeleteConfirm
           title={t('contractForm.confirm-deletion.title')}
@@ -237,7 +235,7 @@ const EditContract = props => {
           onCancel={() => setShowDeleteConfirmation(false)}
         />
       ) : null}
-    </ExperimentalDialog>
+    </Dialog>
   )
 }
 

@@ -3,12 +3,12 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
-import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
+import Dialog, {
+  DialogTitle,
+  DialogActions,
+  DialogCloseButton,
+  DialogContent
+} from 'cozy-ui/transpiled/react/Dialog'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
@@ -44,16 +44,14 @@ export const ShareModal = ({
 }) => {
   return (
     <MuiCozyTheme>
-      <ExperimentalDialog
+      <Dialog
         open={true}
         onClose={onClose}
         PaperProps={{ className: 'u-pb-half' }}
         disableEnforceFocus
       >
         <DialogCloseButton onClick={onClose} />
-        <ExperimentalDialogTitle>
-          {t(`${documentType}.share.title`)}
-        </ExperimentalDialogTitle>
+        <DialogTitle>{t(`${documentType}.share.title`)}</DialogTitle>
         {(hasSharedParent || hasSharedChild) && (
           <div className={styles['share-byemail-onlybylink']}>
             {t(`${documentType}.share.shareByEmail.onlyByLink`, {
@@ -102,7 +100,7 @@ export const ShareModal = ({
           )}
         </DialogContent>
         <Divider />
-        <ExperimentalDialogActions>
+        <DialogActions>
           <DumbShareByLink
             document={document}
             permissions={permissions}
@@ -113,8 +111,8 @@ export const ShareModal = ({
             onDisable={onRevokeLink}
             onChangePermissions={onUpdateShareLinkPermissions}
           />
-        </ExperimentalDialogActions>
-      </ExperimentalDialog>
+        </DialogActions>
+      </Dialog>
     </MuiCozyTheme>
   )
 }

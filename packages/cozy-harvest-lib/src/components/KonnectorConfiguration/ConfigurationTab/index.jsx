@@ -17,12 +17,11 @@ import NavigationList, {
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
 import Dialog, {
-  ExperimentalDialogTitle as DialogTitle,
-  ExperimentalDialogActions as DialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-
-import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogCloseButton
+} from 'cozy-ui/transpiled/react/Dialog'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
