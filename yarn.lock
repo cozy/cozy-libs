@@ -5382,10 +5382,10 @@ cozy-ui@35.39.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@35.40.2:
-  version "35.40.2"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.40.2.tgz#58866f9a8307e373f74ad09fc2700fbe227860b5"
-  integrity sha512-kNlz1FsgYsp67Kvxo5od62wgE/Wy9MQ5tuiH2e3WSpDa4kHl/+mNXM3/lDys+LQi4hKYZePRfQiZcW/M6Vc/yg==
+cozy-ui@35.45.0:
+  version "35.45.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.45.0.tgz#0af7c9002f99e2d1b40bd92823d35572ecbd1b8f"
+  integrity sha512-Ltce5GpPe/F9hd+lNV9QvdsEH98SLTIa5cdCtwwyXyBGdBnd16BIcjiaZgAblDcqk0EuY6qYKFhhkdn0pmDV4g==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -5404,10 +5404,10 @@ cozy-ui@35.40.2:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@35.45.0:
-  version "35.45.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.45.0.tgz#0af7c9002f99e2d1b40bd92823d35572ecbd1b8f"
-  integrity sha512-Ltce5GpPe/F9hd+lNV9QvdsEH98SLTIa5cdCtwwyXyBGdBnd16BIcjiaZgAblDcqk0EuY6qYKFhhkdn0pmDV4g==
+cozy-ui@36.3.0:
+  version "36.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-36.3.0.tgz#49ea0de60484c0819692e48854c2b199826a1d38"
+  integrity sha512-XQIw9hzPqvANgmlDyZEJs3YqU09kn0DKCk3xscsDuXeX5CGBpBAFwvUuVTnWXp9sESilywOiiUXjJI7/Qn0OUA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -11196,13 +11196,6 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
-
-"minilog@git+https://github.com/cozy/minilog.git#master":
-  version "3.1.0"
-  uid f01f7d9dfe20981177dd34b9662c2f077d818f82
-  resolved "git+https://github.com/cozy/minilog.git#f01f7d9dfe20981177dd34b9662c2f077d818f82"
-  dependencies:
-    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
