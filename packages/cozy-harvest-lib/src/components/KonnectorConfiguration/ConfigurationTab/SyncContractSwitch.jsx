@@ -2,28 +2,37 @@ import React from 'react'
 import { withClient, queryConnect } from 'cozy-client'
 import compose from 'lodash/flowRight'
 
-import {
-  setContractSyncStatusInAccount,
-  getContractSyncStatusFromAccount,
-  DEFAULT_CONTRACT_SYNC_STATUS,
-  createAccountQuerySpec
-} from '../../../connections/accounts'
-
+import { models } from 'cozy-client'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
+
+import { createAccountQuerySpec } from '../../../connections/accounts'
 
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
-class DumbSyncContractSwitch extends React.Component {
+const { account: accountModel } = models
+
+export class DumbSyncContractSwitch extends React.Component {
   constructor(props, context) {
     super(props, context)
     this.state = {
-      syncStatus: DEFAULT_CONTRACT_SYNC_STATUS,
+      syncStatus: accountModel.DEFAULT_CONTRACT_SYNC_STATUS,
       syncStatusLoading: false
     }
     this.handleSetSyncStatus = this.handleSetSyncStatus.bind(this)
+    const stateUpdate = this.checkToUpdateContractState()
+    if (stateUpdate) {
+      Object.assign(this.state, stateUpdate)
+    }
   }
 
   componentDidUpdate() {
+    const stateUpdate = this.checkToUpdateContractState()
+    if (stateUpdate) {
+      this.setState(stateUpdate)
+    }
+  }
+
+  checkToUpdateContractState() {
     const { accountCol, contract } = this.props
     if (
       accountCol.fetchStatus === 'loaded' &&
@@ -31,11 +40,13 @@ class DumbSyncContractSwitch extends React.Component {
     ) {
       this.hasSetSyncStatusFromAccount = true
       const account = accountCol.data
-      const relSyncStatus = getContractSyncStatusFromAccount(
+      const relSyncStatus = accountModel.getContractSyncStatusFromAccount(
         account,
         contract._id
       )
-      this.setState({ syncStatus: relSyncStatus })
+      if (relSyncStatus !== null) {
+        return { syncStatus: relSyncStatus }
+      }
     }
   }
 
@@ -55,19 +66,22 @@ class DumbSyncContractSwitch extends React.Component {
         contract,
         syncStatus: newSyncStatus
       })
-      const updatedAccount = setContractSyncStatusInAccount(
+      const updatedAccount = accountModel.setContractSyncStatusInAccount(
         account,
         contract._id,
         newSyncStatus
       )
       await client.save(updatedAccount)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn('Could not set sync status', e)
     } finally {
       this.setState({ syncStatusLoading: false })
     }
   }
 
   render() {
-    const { accountCol } = this.props
+    const { accountCol, switchProps } = this.props
     const { syncStatus, syncStatusLoading } = this.state
 
     if (accountCol.fetchStatus === 'loading') {
@@ -80,6 +94,7 @@ class DumbSyncContractSwitch extends React.Component {
         disabled={syncStatusLoading}
         onClick={this.handleSetSyncStatus}
         checked={syncStatus}
+        {...switchProps}
       />
     )
   }
