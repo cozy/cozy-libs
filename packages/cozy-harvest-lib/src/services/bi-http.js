@@ -130,3 +130,23 @@ export const resumeBIConnection = async (config, connId, biAccessToken) => {
     biAccessToken
   )
 }
+
+export const setBIConnectionSyncStatus = async (
+  config,
+  connId,
+  accountId,
+  syncStatus,
+  biAccessToken
+) => {
+  assert(
+    connId,
+    `Must pass connection id to resumeBIConnection (${connId} was passed)`
+  )
+  return await biRequest(
+    'PUT',
+    `/users/me/accounts/${accountId}?all`,
+    config,
+    encodeToForm({ disabled: syncStatus ? 'true' : 'false' }),
+    biAccessToken
+  )
+}

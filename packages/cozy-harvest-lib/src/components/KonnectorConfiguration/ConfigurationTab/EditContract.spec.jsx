@@ -15,12 +15,16 @@ describe('EditContract', () => {
     const client = {
       save: jest.fn()
     }
+    const mockKonnector = {
+      slug: 'mock-konnector'
+    }
     const root = render(
       <CozyProvider client={client}>
         <I18n lang="en" dictRequire={() => en}>
           <BreakpointsProvider>
             <EditContract
-              account={bankAccount}
+              konnector={mockKonnector}
+              accountId={bankAccount._id}
               TitleWrapper="div"
               FormControlsWrapper="div"
               onSuccess={() => {}}

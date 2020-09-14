@@ -11,7 +11,7 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
-import { findAccount } from '../connections/accounts'
+import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
@@ -68,12 +68,14 @@ export class AccountModal extends Component {
       ),
       'trigger'
     )
-    if (matchingTrigger) await this.fetchAccount(matchingTrigger)
-    else
+    if (matchingTrigger) {
+      await this.fetchAccount(matchingTrigger)
+    } else {
       this.setState({
         error: new Error('No matching trigger found'),
         fetching: false
       })
+    }
   }
 
   async fetchAccount(trigger) {
@@ -81,7 +83,7 @@ export class AccountModal extends Component {
 
     try {
       const { client } = this.props
-      const account = await findAccount(
+      const account = await fetchAccount(
         client,
         triggersModel.getAccountId(trigger)
       )

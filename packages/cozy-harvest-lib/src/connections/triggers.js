@@ -5,7 +5,7 @@ import * as accounts from '../helpers/accounts'
 import * as konnectors from '../helpers/konnectors'
 import cron from '../helpers/cron'
 
-import { findAccount, updateAccount } from './accounts'
+import { fetchAccount, updateAccount } from './accounts'
 import { statDirectoryByPath, createDirectoryByPath } from './files'
 
 const FILES_DOCTYPE = 'io.cozy.files'
@@ -44,7 +44,7 @@ export const prepareTriggerAccount = async (client, trigger) => {
   if (!accountId) {
     throw new Error('No account id in the trigger')
   }
-  const account = await findAccount(client, accountId)
+  const account = await fetchAccount(client, accountId)
   if (!account) {
     throw new Error(
       `Could not find account ${accountId} for trigger ${trigger._id}`

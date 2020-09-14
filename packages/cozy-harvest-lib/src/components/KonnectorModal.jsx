@@ -15,7 +15,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 
 import { fetchTrigger } from '../connections/triggers'
-import { findAccount } from '../connections/accounts'
+import { fetchAccount } from '../connections/accounts'
 import * as konnectorsModel from '../helpers/konnectors'
 import * as triggersModel from '../helpers/triggers'
 
@@ -141,7 +141,7 @@ export class KonnectorModal extends PureComponent {
       const accountsAndTriggers = (await Promise.all(
         triggers.map(async trigger => {
           return {
-            account: await findAccount(
+            account: await fetchAccount(
               client,
               triggersModel.getAccountId(trigger)
             ),
@@ -164,7 +164,7 @@ export class KonnectorModal extends PureComponent {
     this.setState({ fetching: true })
 
     try {
-      const account = await findAccount(
+      const account = await fetchAccount(
         client,
         triggersModel.getAccountId(trigger)
       )

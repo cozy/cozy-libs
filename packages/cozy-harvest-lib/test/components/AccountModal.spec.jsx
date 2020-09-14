@@ -1,10 +1,10 @@
 import { AccountModal } from 'components/AccountModal'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { findAccount } from '../../src/connections/accounts'
+import { fetchAccount } from '../../src/connections/accounts'
 
 jest.mock('../../src/connections/accounts', () => ({
-  findAccount: jest.fn()
+  fetchAccount: jest.fn()
 }))
 
 jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
@@ -57,17 +57,17 @@ describe('AccountModal', () => {
   })
 
   describe('with an account', () => {
-    findAccount.mockResolvedValue({
+    fetchAccount.mockResolvedValue({
       _id: '123',
       name: 'account 1'
     })
 
-    const { component, mockHistoryPush } = setup({ findAccount })
+    const { component, mockHistoryPush } = setup({ fetchAccount })
 
     it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
       await component.instance().componentDidMount()
 
-      findAccount.mockResolvedValue({
+      fetchAccount.mockResolvedValue({
         _id: 'account_2',
         name: 'account_2'
       })

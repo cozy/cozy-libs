@@ -114,7 +114,7 @@ const ConfigurationTab = ({
         )}
         <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
           {flag('harvest.show-contracts') ? (
-            <ContractsForAccount account={account} />
+            <ContractsForAccount konnector={konnector} account={account} />
           ) : null}
           {!konnector.oauth ? (
             <>
@@ -187,8 +187,7 @@ ConfigurationTab.propTypes = {
   account: PropTypes.object.isRequired,
   error: PropTypes.object,
   addAccount: PropTypes.func.isRequired,
-  onAccountDeleted: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  onAccountDeleted: PropTypes.func.isRequired
 }
 
 export default ConfigurationTab

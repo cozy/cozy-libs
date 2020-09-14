@@ -11,7 +11,7 @@ import Modal, {
 } from 'cozy-ui/transpiled/react/Modal'
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
 
-import { findAccount } from '../connections/accounts'
+import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import { withMountPointPushHistory } from './MountPointContext'
@@ -56,7 +56,7 @@ export class EditAccountModal extends Component {
 
     try {
       const accountId = triggersModel.getAccountId(trigger)
-      const account = await findAccount(client, accountId)
+      const account = await fetchAccount(client, accountId)
       this.setState({
         account,
         trigger

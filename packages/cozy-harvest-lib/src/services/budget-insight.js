@@ -12,7 +12,11 @@ import set from 'lodash/set'
 import defaults from 'lodash/defaults'
 
 import { waitForRealtimeEvent } from './jobUtils'
-import { createBIConnection, updateBIConnection } from './bi-http'
+import {
+  createBIConnection,
+  updateBIConnection,
+  setBIConnectionSyncStatus
+} from './bi-http'
 import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
@@ -41,6 +45,8 @@ const configsByMode = {
 
 const getBIConnectionIdFromAccount = account =>
   get(account, 'data.auth.bi.connId')
+
+const getBIIdFromContract = bankAccount => bankAccount.vendorId
 
 /**
  * Converts and chains error
@@ -305,11 +311,48 @@ export const getAdditionalInformationNeeded = flow => {
   return biConnection.fields
 }
 
+/**
+ * Sets whether a BI account (io.cozy.bank.accounts on Cozy side)
+ * will be synced.
+ *
+ * It creates a temporary token (via the banking konnector job) and
+ * calls directly BI from the front-end.
+ */
+export const setSync = async ({
+  client,
+  account,
+  konnector,
+  contract,
+  syncStatus
+}) => {
+  const temporaryToken = await createTemporaryToken({
+    account,
+    client,
+    konnector
+  })
+
+  const connId = getBIConnectionIdFromAccount(account)
+  const contractId = getBIIdFromContract(contract)
+  const config = getBIConfigForCozyURL(client.stackClient.uri)
+
+  logger.info(
+    `Toggling contract ${contractId} in connection ${connId}: syncStatus`
+  )
+  await setBIConnectionSyncStatus(
+    config,
+    connId,
+    contractId,
+    syncStatus,
+    temporaryToken
+  )
+}
+
 export const konnectorPolicy = {
   name: 'budget-insight',
   match: isBudgetInsightConnector,
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
   sendAdditionalInformation: sendAdditionalInformation,
-  getAdditionalInformationNeeded
+  getAdditionalInformationNeeded,
+  setSync
 }

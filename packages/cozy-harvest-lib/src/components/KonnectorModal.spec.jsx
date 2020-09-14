@@ -3,16 +3,16 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { KonnectorModal } from 'components/KonnectorModal'
-import { findAccount } from 'connections/accounts'
+import { fetchAccount } from 'connections/accounts'
 
 jest.mock('connections/accounts', () => ({
-  findAccount: jest.fn()
+  fetchAccount: jest.fn()
 }))
 
 const t = key => key
 
 beforeEach(() => {
-  findAccount.mockImplementation(() => ({
+  fetchAccount.mockImplementation(() => ({
     _id: '123',
     doctype: 'io.cozy.accounts'
   }))
@@ -70,7 +70,7 @@ describe('KonnectorModal', () => {
   })
 
   it('should show an error view', async () => {
-    findAccount.mockImplementation(() => {
+    fetchAccount.mockImplementation(() => {
       throw new Error('nope')
     })
     const component = await getMountedComponent()

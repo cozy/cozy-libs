@@ -1,3 +1,4 @@
+import { Q } from 'cozy-client'
 import * as triggersModel from '../helpers/triggers'
 
 import merge from 'lodash/merge'
@@ -21,21 +22,28 @@ export const createAccount = async (client, konnector, attributes) => {
   return data
 }
 
+export const createAccountQuerySpec = accountId => {
+  if (!accountId) {
+    throw new Error('createAccountQuerySpec called with undefined accountId')
+  }
+  return {
+    query: Q(ACCOUNTS_DOCTYPE).getById(accountId),
+    as: `io.cozy.accounts/${accountId}`
+  }
+}
+
 /**
- * TODO Use get
- * Performs a query to find the given account
+ * Fetches an account
+ * Returns null if the account does not exist
  * @param  {Object}  client CozyClient
  * @param  {string}  id     io.cozy.accounts document's id
  * @return {Object}         Retrieved account
  */
-export const findAccount = async (client, id) => {
+export const fetchAccount = async (client, id) => {
   try {
-    const { data } = await client.query(
-      client.find(ACCOUNTS_DOCTYPE).where({
-        _id: id
-      })
-    )
-    return (data && data[0]) || null
+    const qspec = createAccountQuerySpec(id)
+    const { data } = await client.query(qspec.query, qspec)
+    return data
   } catch (error) {
     if (error.status === 404) {
       return null
@@ -62,7 +70,7 @@ const createChildAccount = async (client, konnector, attributes) => {
 
   let parentAccount
   try {
-    parentAccount = await findAccount(client, parentAccountId)
+    parentAccount = await fetchAccount(client, parentAccountId)
   } catch (error) {
     throw new Error(
       `An error occurred when finding parent account ${parentAccountId} (${error.message})`
@@ -123,7 +131,7 @@ export const updateAccount = async (client, account) => {
     if (error.status === 409) {
       /* We fetch before in case of conflicts since the account can be changed
       in the database by the konnector */
-      const upToDateAccount = await findAccount(client, account._id)
+      const upToDateAccount = await fetchAccount(client, account._id)
       delete account._rev
       const { data } = await client.save(merge(upToDateAccount, account))
       return data
@@ -159,7 +167,7 @@ export const deleteAccount = async (client, account) => {
     await client.destroy(account)
   } catch (error) {
     if (error.status === 409) {
-      const syncedAccount = await findAccount(client, account._id)
+      const syncedAccount = await fetchAccount(client, account._id)
       await client.destroy(syncedAccount)
     } else {
       throw error

@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Field from 'cozy-ui/transpiled/react/Field'
+import Field, { FieldContainer } from 'cozy-ui/transpiled/react/Field'
 import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
+import Label from 'cozy-ui/transpiled/react/Label'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
@@ -16,9 +18,11 @@ import ExperimentalDialog, {
   ExperimentalDialogTitle,
   ExperimentalDialogActions
 } from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-
 import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
 import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+
+import SyncContractSwitch from './SyncContractSwitch'
+import { findKonnectorPolicy } from '../../../konnector-policies'
 
 import withLocales from '../../hoc/withLocales'
 import { updateContract } from './helpers'
@@ -70,7 +74,9 @@ const EditContract = props => {
   const client = useClient()
 
   const {
-    contract: account,
+    contract,
+    accountId,
+    konnector,
     onAfterRemove,
     onSuccess,
     dismissAction,
@@ -80,10 +86,10 @@ const EditContract = props => {
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const [deleting, setDeleting] = useState(false)
 
-  const handleSaveAccount = async (account, fields) => {
-    await updateContract(client, account, {
+  const handleSaveContract = async (contract, fields) => {
+    await updateContract(client, contract, {
       client,
-      account,
+      contract,
       fields,
       onSuccess: () => {
         if (onSuccess) {
@@ -102,12 +108,12 @@ const EditContract = props => {
     })
   }
 
-  const [shortLabel, setShortLabel] = useState(getAccountLabel(account))
-  const [owners, setOwners] = useState(getAccountOwners(account))
+  const [shortLabel, setShortLabel] = useState(getAccountLabel(contract))
+  const [owners, setOwners] = useState(getAccountOwners(contract))
 
   const handleSubmit = e => {
     e.preventDefault()
-    handleSaveAccount(account, { shortLabel, owners })
+    handleSaveContract(contract, { shortLabel, owners })
   }
 
   const handleRequestDeletion = ev => {
@@ -115,11 +121,11 @@ const EditContract = props => {
     setShowDeleteConfirmation(true)
   }
 
-  const handleRemoveAccount = async account => {
+  const handleRemoveAccount = async contract => {
     setDeleting(true)
 
     try {
-      await client.destroy(account)
+      await client.destroy(contract)
 
       if (onAfterRemove) {
         onAfterRemove()
@@ -135,14 +141,15 @@ const EditContract = props => {
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
   const fieldVariant = isMobile ? 'default' : 'inline'
+  const policy = findKonnectorPolicy(konnector)
 
   return (
     <ExperimentalDialog>
       <ExperimentalDialogTitle>
-        {getAccountLabel(account)}
+        {getAccountLabel(contract)}
       </ExperimentalDialogTitle>
       <DialogContent>
-        <form id={`edit-contract-${account._id}`} onSubmit={handleSubmit}>
+        <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
           <Stack spacing={isMobile ? 's' : 'm'}>
             <Field
               id="account-label"
@@ -166,7 +173,7 @@ const EditContract = props => {
               id="account-institution"
               placeholder={t('contractForm.bank')}
               label={t('contractForm.bank')}
-              value={getAccountInstitutionLabel(account)}
+              value={getAccountInstitutionLabel(contract)}
               disabled
               variant={fieldVariant}
             />
@@ -174,10 +181,24 @@ const EditContract = props => {
               id="account-number"
               placeholder={t('contractForm.number')}
               label={t('contractForm.number')}
-              value={account.number}
+              value={contract.number}
               disabled
               variant={fieldVariant}
             />
+            {policy.setSync && flag('harvest.toggle-contract-sync') ? (
+              <FieldContainer variant={fieldVariant}>
+                <Label>{t('contractForm.imported')}</Label>
+                {/* The span is needed otherwise the switch is not correctly rendered */}
+                <span>
+                  <SyncContractSwitch
+                    contract={contract}
+                    accountId={accountId}
+                    konnector={konnector}
+                  />
+                </span>
+              </FieldContainer>
+            ) : null}
+
             <Button
               className="u-ml-auto"
               label={t('contractForm.removeAccountBtn')}
@@ -195,7 +216,7 @@ const EditContract = props => {
         />
         <Button
           type="submit"
-          form={`edit-contract-${account._id}`}
+          form={`edit-contract-${contract._id}`}
           label={t('contractForm.apply')}
           theme="primary"
         />
@@ -212,7 +233,7 @@ const EditContract = props => {
             )
           }
           secondaryText={t('contractForm.cancel')}
-          onConfirm={() => handleRemoveAccount(account)}
+          onConfirm={() => handleRemoveAccount(contract)}
           onCancel={() => setShowDeleteConfirmation(false)}
         />
       ) : null}
@@ -222,15 +243,13 @@ const EditContract = props => {
 
 EditContract.propTypes = {
   /** The account that will be edited */
-  account: PropTypes.object.isRequired,
-  /** The Component used to wrap the title */
-  TitleWrapper: PropTypes.node.isRequired,
-  /** The Component used to wrap the form buttons */
-  FormControlsWrapper: PropTypes.node.isRequired,
+  contract: PropTypes.object.isRequired,
   /** The callback called when the document is saved */
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
-  onCancel: PropTypes.func.isRequired
+  onCancel: PropTypes.func.isRequired,
+  /** Account id (necessary to toggle contract sync) */
+  accountId: PropTypes.string.isRequired
 }
 
 export default withLocales(EditContract)
