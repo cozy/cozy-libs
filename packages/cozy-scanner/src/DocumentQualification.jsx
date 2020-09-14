@@ -15,8 +15,7 @@ import CategoryGridItem from './CategoryGridItem'
 import DocumentCategory from './DocumentCategory'
 
 import { themes } from './DocumentTypeData'
-import { getItemById } from './DocumentTypeDataHelpers'
-import { getItemsByCategory } from './DocumentTypeDataHelpers'
+import { getItemById, getItemsByCategory } from './DocumentTypeDataHelpers'
 import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './stylesheet.css'
 
