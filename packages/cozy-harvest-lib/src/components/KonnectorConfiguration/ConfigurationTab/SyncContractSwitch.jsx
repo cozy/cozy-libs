@@ -5,12 +5,12 @@ import compose from 'lodash/flowRight'
 import {
   setContractSyncStatusInAccount,
   getContractSyncStatusFromAccount,
-  DEFAULT_CONTRACT_SYNC_STATUS
+  DEFAULT_CONTRACT_SYNC_STATUS,
+  createAccountQuerySpec
 } from '../../../connections/accounts'
 
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 
-import { createAccountQuerySpec } from '../../../connections/accounts'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
 class DumbSyncContractSwitch extends React.Component {

@@ -5246,12 +5246,11 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.0.7, cosmiconfig@^5.1.0, cosmiconfig@^5.2.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-bi-auth@0.0.8:
-  version "0.0.8"
-  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.8.tgz#a4930720d10db9fb3d7382d8a1e7bfe8aee80432"
-  integrity sha512-XgBtwNsI2X5j0tpP8BURVrtpL02dwmflt6phkkEJvuNw5HKZF7u7pP6CKrGBTq2GPiEdw5dJUIbm9oxC/j1nKg==
+cozy-bi-auth@0.0.11:
+  version "0.0.11"
+  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.11.tgz#95e8229fef454f25a8166baff8736b786df29814"
+  integrity sha512-HJTWaEsGqvNcSviazNqER7IkwXFzb4BayYo1dCuOOu1/lSe29MER+DuTc84MPwKTgoQsdmVUhKJIpQBBX/7L8g==
   dependencies:
-    "@cozy/cli-tree" "^0.2.1"
     cozy-logger "^1.3.0"
     lodash "^4.17.20"
     node-jose "^1.1.4"
@@ -11196,13 +11195,6 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
-
-"minilog@git+https://github.com/cozy/minilog.git#master":
-  version "3.1.0"
-  uid f01f7d9dfe20981177dd34b9662c2f077d818f82
-  resolved "git+https://github.com/cozy/minilog.git#f01f7d9dfe20981177dd34b9662c2f077d818f82"
-  dependencies:
-    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"

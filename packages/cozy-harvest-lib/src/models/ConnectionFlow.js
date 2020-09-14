@@ -4,12 +4,16 @@ import Realtime from 'cozy-realtime'
 
 import { saveAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
 import clone from 'lodash/clone'
-import { launchTrigger, prepareTriggerAccount } from '../connections/triggers'
+import {
+  launchTrigger,
+  prepareTriggerAccount,
+  fetchTrigger,
+  ensureTrigger
+} from '../connections/triggers'
 import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import { createOrUpdateCipher } from '../models/cipherUtils'
-import { fetchTrigger, ensureTrigger } from '../connections/triggers'
 import assert from '../assert'
 import * as accounts from '../helpers/accounts'
 import * as triggersModel from '../helpers/triggers'
