@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.2...cozy-harvest-lib@2.13.3) (2020-09-15)
+
+
+### Bug Fixes
+
+* Correct disabling of account on BI side ([84567fc](https://github.com/cozy/cozy-libs/commit/84567fc))
+
+
+
+
+
 ## [2.13.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.1...cozy-harvest-lib@2.13.2) (2020-09-15)
 
 **Note:** Version bump only for package cozy-harvest-lib
