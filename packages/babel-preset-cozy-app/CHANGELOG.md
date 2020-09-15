@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.9.2 (2020-09-15)
+
+
+### Bug Fixes
+
+* Flaky builds due to SyntaxError ([6b86b76](https://github.com/cozy/cozy-libs/commit/6b86b76))
+
+
+
+
+
 ## [1.9.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.9.0...babel-preset-cozy-app@1.9.1) (2020-08-03)
 
 **Note:** Version bump only for package babel-preset-cozy-app
