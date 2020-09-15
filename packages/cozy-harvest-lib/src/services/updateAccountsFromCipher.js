@@ -23,6 +23,12 @@ const updateAccountsFromCipher = async (
   const encryptedUsername = get(bitwardenCipherDocument, 'login.username')
   const bitwardenCipherId = get(bitwardenCipherDocument, '_id')
 
+  const isSoftDeleted = get(bitwardenCipherDocument, 'deletedDate')
+  if (isSoftDeleted) {
+    logger.debug('Cipher is soft deleted: do not update.')
+    return
+  }
+
   logger.debug('Fetching organization key...')
   const orgKey = await getOrganizationKey(cozyClient, vaultClient)
   logger.debug('Fetched organization key')

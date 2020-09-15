@@ -47,6 +47,31 @@ export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
   return accounts
 }
 
+export const fetchKonnectorFromAccount = async (cozyClient, account) => {
+  const konnectorDoctype = 'io.cozy.konnectors'
+  const slug = account.account_type
+  const konnector = await cozyClient.query(
+    cozyClient.get(konnectorDoctype, slug)
+  )
+  return konnector.data
+    ? {
+        _id: konnector.data._id,
+        _type: konnector.data.type,
+        ...konnector.data.attributes
+      }
+    : null
+}
+
+export const fetchTriggersFromAccount = async (cozyClient, account) => {
+  const triggers = await cozyClient.queryAll(
+    cozyClient.find('io.cozy.triggers').where({
+      worker: 'konnector',
+      'message.account': account._id
+    })
+  )
+  return triggers
+}
+
 export const updateAccountsAuth = async (cozyClient, accounts, authData) => {
   await Promise.all(
     accounts.map(account => {
