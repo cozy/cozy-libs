@@ -34,6 +34,7 @@ describe('SyncContractSwitch', () => {
         client={mockClient}
         accountCol={{ data: account, fetchStatus: 'loaded' }}
         contract={contract}
+        t={x => x}
         switchProps={{
           inputProps: { 'data-testid': 'switch' }
         }}
@@ -47,16 +48,36 @@ describe('SyncContractSwitch', () => {
     jest.spyOn(accountModels, 'getContractSyncStatusFromAccount')
   })
 
-  it('should correctly render', () => {
+  it('should correctly render (contract synced)', () => {
     const { root } = setup({ account: mockAccount, contract: mockContract1 })
     const input = root.getByTestId('switch')
     expect(input.checked).toBe(true)
   })
 
-  it('should correctly render 2', () => {
+  it('should correctly render (contract is not synced)', () => {
     const { root } = setup({ account: mockAccount, contract: mockContract2 })
     const input = root.getByTestId('switch')
     expect(input.checked).toBe(false)
+  })
+
+  describe('unexisting contract', () => {
+    beforeEach(() => {
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+      // eslint-disable-next-line no-console
+      console.warn.mockRestore()
+    })
+
+    it('should correctly render (contract does not exist)', () => {
+      const unexistingContract = { ...mockContract2, _id: 'contract-3' }
+      const { root } = setup({
+        account: mockAccount,
+        contract: unexistingContract
+      })
+      expect(root.queryByTestId('switch')).toBe(null)
+    })
   })
 
   it('should correctly behave', async () => {
