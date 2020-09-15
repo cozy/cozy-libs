@@ -146,7 +146,7 @@ export const setBIConnectionSyncStatus = async (
     'PUT',
     `/users/me/accounts/${accountId}?all`,
     config,
-    encodeToForm({ disabled: syncStatus ? 'true' : 'false' }),
+    encodeToForm({ disabled: syncStatus ? 'false' : 'true' }),
     biAccessToken
   )
 }
