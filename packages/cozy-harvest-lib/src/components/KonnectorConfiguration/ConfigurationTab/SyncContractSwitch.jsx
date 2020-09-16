@@ -1,5 +1,9 @@
 import React from 'react'
 import { withClient, queryConnect } from 'cozy-client'
+import { FieldContainer } from 'cozy-ui/transpiled/react/Field'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Label from 'cozy-ui/transpiled/react/Label'
+
 import compose from 'lodash/flowRight'
 
 import { models } from 'cozy-client'
@@ -40,12 +44,16 @@ export class DumbSyncContractSwitch extends React.Component {
     ) {
       this.hasSetSyncStatusFromAccount = true
       const account = accountCol.data
-      const relSyncStatus = accountModel.getContractSyncStatusFromAccount(
-        account,
-        contract._id
-      )
-      if (relSyncStatus !== null) {
-        return { syncStatus: relSyncStatus }
+      try {
+        const relSyncStatus = accountModel.getContractSyncStatusFromAccount(
+          account,
+          contract._id
+        )
+        if (relSyncStatus !== null) {
+          return { syncStatus: relSyncStatus }
+        }
+      } catch (e) {
+        return
       }
     }
   }
@@ -81,27 +89,46 @@ export class DumbSyncContractSwitch extends React.Component {
   }
 
   render() {
-    const { accountCol, switchProps } = this.props
+    const { accountCol, switchProps, contract, fieldVariant, t } = this.props
     const { syncStatus, syncStatusLoading } = this.state
 
     if (accountCol.fetchStatus === 'loading') {
       return null
     }
 
+    const account = accountCol.data
+
+    try {
+      accountModel.getContractSyncStatusFromAccount(account, contract._id)
+    } catch (e) {
+      // eslint-disable-next-line no-console
+      console.warn(
+        `Contract ${contract._id} could not be found in account ${account._id}.`
+      )
+      return null
+    }
+
     return (
-      <Switch
-        color="primary"
-        disabled={syncStatusLoading}
-        onClick={this.handleSetSyncStatus}
-        checked={syncStatus}
-        {...switchProps}
-      />
+      <FieldContainer variant={fieldVariant}>
+        <Label>{t('contractForm.imported')}</Label>
+        {/* The span is needed otherwise the switch is not correctly rendered */}
+        <span>
+          <Switch
+            color="primary"
+            disabled={syncStatusLoading}
+            onClick={this.handleSetSyncStatus}
+            checked={syncStatus}
+            {...switchProps}
+          />
+        </span>
+      </FieldContainer>
     )
   }
 }
 
 const SyncContractSwitch = compose(
   withClient,
+  translate(),
   queryConnect({
     accountCol: props => createAccountQuerySpec(props.accountId)
   })

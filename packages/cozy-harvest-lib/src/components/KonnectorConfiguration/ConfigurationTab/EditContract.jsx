@@ -7,9 +7,8 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Field, { FieldContainer } from 'cozy-ui/transpiled/react/Field'
+import Field from 'cozy-ui/transpiled/react/Field'
 import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
-import Label from 'cozy-ui/transpiled/react/Label'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
@@ -186,17 +185,12 @@ const EditContract = props => {
               variant={fieldVariant}
             />
             {policy.setSync && flag('harvest.toggle-contract-sync') ? (
-              <FieldContainer variant={fieldVariant}>
-                <Label>{t('contractForm.imported')}</Label>
-                {/* The span is needed otherwise the switch is not correctly rendered */}
-                <span>
-                  <SyncContractSwitch
-                    contract={contract}
-                    accountId={accountId}
-                    konnector={konnector}
-                  />
-                </span>
-              </FieldContainer>
+              <SyncContractSwitch
+                fieldVariant={fieldVariant}
+                contract={contract}
+                accountId={accountId}
+                konnector={konnector}
+              />
             ) : null}
 
             <Button
