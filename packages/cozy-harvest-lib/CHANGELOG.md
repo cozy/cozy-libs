@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.13.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.3...cozy-harvest-lib@2.13.4) (2020-09-16)
+
+
+### Bug Fixes
+
+* Check for message.startsWith since console.warn can be called with ([2c00ae2](https://github.com/cozy/cozy-libs/commit/2c00ae2))
+* Handle cases where io.cozy.accounts does not have contract ([66bcd5c](https://github.com/cozy/cozy-libs/commit/66bcd5c))
+
+
+
+
+
 ## [2.13.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.2...cozy-harvest-lib@2.13.3) (2020-09-15)
 
 
