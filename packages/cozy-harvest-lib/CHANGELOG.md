@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.4...cozy-harvest-lib@2.14.0) (2020-09-17)
+
+
+### Bug Fixes
+
+* Correctly use t function ([f11b3c6](https://github.com/cozy/cozy-libs/commit/f11b3c6))
+* Correctly use t function ([ff0d6cc](https://github.com/cozy/cozy-libs/commit/ff0d6cc))
+* Typo in comment ([01a2e52](https://github.com/cozy/cozy-libs/commit/01a2e52))
+
+
+### Features
+
+* Add softDeleteOrRestoreAccounts service ([1fd0131](https://github.com/cozy/cozy-libs/commit/1fd0131))
+
+
+
+
+
 ## [2.13.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.3...cozy-harvest-lib@2.13.4) (2020-09-16)
 
 
