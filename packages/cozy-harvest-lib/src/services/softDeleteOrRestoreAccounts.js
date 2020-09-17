@@ -32,7 +32,7 @@ const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
 
  * When a cipher is soft deleted, a deletedDate field is added to the
  * cipher. Then, the service removes the encrypted credentials from the
- * referenced account and delete the associated trigger.
+ * referenced account and deletes the associated trigger.
 
  * When the cipher is restored, the deletedDate is removed: the service
  * recreates the account's trigger. The account's credentials are then
