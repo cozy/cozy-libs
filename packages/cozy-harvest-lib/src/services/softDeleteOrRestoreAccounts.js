@@ -14,6 +14,19 @@ import { translate as t } from 'cozy-ui/transpiled/react/I18n'
 const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
   decryptString(encryptedVal, vaultClient, orgKey)
 
+/**
+ * This service is useful to deal with soft delete and restore from
+ * bitwarden routes, used for a trash feature.
+ * See https://docs.cozy.io/en/cozy-stack/bitwarden/#put-bitwardenapiciphersiddelete
+
+ * When a cipher is soft deleted, a deletedDate field is added to the
+ * cipher. Then, the service removes the encrypted credentials from the
+ * referenced account and delete the associated trigger.
+
+ * When the cipher is restored, the deletedDate is removed: the service
+ * recreates the account's trigger. The account's credentials are then
+ * restored through the updateAccountsFromCipher service.
+ */
 const softDeleteOrRestoreAccounts = async (
   cozyClient,
   vaultClient,
@@ -44,10 +57,12 @@ const softDeleteOrRestoreAccounts = async (
   const decryptedPassword = await decrypt(encryptedPassword)
   const decryptedUsername = await decrypt(encryptedUsername)
   if (decryptedPassword === null || decryptedUsername === null) {
+    // Something wrong occured dujring the credentials encryption
+    // and/or decryption
     throw new Error('DECRYPT_FAILED')
   }
   if (cipherDoc.deletedDate) {
-    // Soft delete from bitwarden
+    // The cipher has been soft deleted.
     logger.debug('Remove accounts credentials and triggers...')
 
     // Delete triggers
@@ -65,7 +80,7 @@ const softDeleteOrRestoreAccounts = async (
       ...decryptedFields
     })
   } else {
-    // Restore from bitwarden
+    // The cipher has been restored.
     logger.debug('Restore accounts triggers...')
 
     // Restore triggers
@@ -78,8 +93,8 @@ const softDeleteOrRestoreAccounts = async (
         konnector
       })
     }
-    // Note: there is no need to restore credentials here, because it is already
-    // done by the updateAccountsFromCipher service.
+    // The updateAccountsFromCipher service will restore the credentials from
+    // the linked cipher: therefore, it is not useful to it here.
   }
 }
 export default softDeleteOrRestoreAccounts

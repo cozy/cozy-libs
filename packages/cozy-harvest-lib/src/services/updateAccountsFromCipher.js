@@ -14,6 +14,9 @@ import logger from './logger'
 const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
   decryptString(encryptedVal, vaultClient, orgKey)
 
+/**
+ * This service updates the accounts referencing an updated cipher.
+ */
 const updateAccountsFromCipher = async (
   cozyClient,
   vaultClient,
