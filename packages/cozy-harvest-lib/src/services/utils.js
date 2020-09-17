@@ -2,6 +2,7 @@ import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 import merge from 'lodash/merge'
 import unset from 'lodash/unset'
+const Polyglot = require('node-polyglot')
 
 export const decryptString = (encryptedString, vaultClient, orgKey) => {
   const [encTypeAndIv, data, mac] = encryptedString.split('|')
@@ -15,6 +16,16 @@ export const decryptString = (encryptedString, vaultClient, orgKey) => {
     mac,
     orgKey
   )
+}
+
+export const getT = () => {
+  const supportedLocales = ['en', 'fr', 'es']
+  const locale =
+    supportedLocales.find(l => l === process.env.COZY_LOCALE) || 'en'
+  const locales = require(`../locales/${locale}.json`)
+  const polyglot = new Polyglot()
+  polyglot.extend(locales)
+  return polyglot.t.bind(polyglot)
 }
 
 export const getOrganizationKey = async (cozyClient, vaultClient) => {

@@ -6,10 +6,10 @@ import {
   fetchAccountsForCipherId,
   fetchTriggersFromAccount,
   fetchKonnectorFromAccount,
-  updateAccountsAuth
+  updateAccountsAuth,
+  getT
 } from 'services/utils'
 
-import { translate as t } from 'cozy-ui/transpiled/react/I18n'
 import { ensureTrigger } from '../connections/triggers'
 
 jest.mock('services/utils')
@@ -18,11 +18,9 @@ jest.mock('services/logger')
 jest.mock('../connections/triggers', () => ({
   ensureTrigger: jest.fn()
 }))
-jest.mock('cozy-ui/transpiled/react/I18n', () => {
-  return () => jest.fn()
-})
 
 decryptString.mockImplementation(str => `${str}_decrypted`)
+getT.mockImplementation(() => ({}))
 
 const mockCozyClient = {
   getStackClient: () => mockCozyClient,
@@ -119,7 +117,7 @@ describe('restore from cipher', () => {
 
     expect(ensureTrigger).toHaveBeenCalledWith(mockCozyClient, {
       account: accounts.data[0],
-      t,
+      t: {},
       konnector
     })
   })
