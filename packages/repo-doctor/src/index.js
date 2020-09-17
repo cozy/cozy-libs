@@ -15,6 +15,7 @@ const {
   validateConfig
 } = require('./config')
 const { ConfigError } = require('./errors')
+const { autoDetectRepository } = require('./detect')
 
 const reporters = {
   console: ConsoleReporter,
@@ -68,8 +69,13 @@ const main = async () => {
   }
 
   let repositories = config.repositories
-  if (args.repo) {
-    repositories = repositories.filter(repo => repo.slug === args.repo)
+
+  const filterRepo = args.repo || await autoDetectRepository()
+  if (filterRepo) {
+    if (!args.repo) {
+      console.info('Detected repository as', filterRepo)
+    }
+    repositories = repositories.filter(repo => repo.slug === filterRepo)
   }
 
   let rules = setupRules(config)
