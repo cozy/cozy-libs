@@ -2,6 +2,7 @@ import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 import merge from 'lodash/merge'
 import unset from 'lodash/unset'
+const Polyglot = require('node-polyglot')
 
 export const decryptString = (encryptedString, vaultClient, orgKey) => {
   const [encTypeAndIv, data, mac] = encryptedString.split('|')
@@ -15,6 +16,16 @@ export const decryptString = (encryptedString, vaultClient, orgKey) => {
     mac,
     orgKey
   )
+}
+
+export const getT = () => {
+  const supportedLocales = ['en', 'fr', 'es']
+  const locale =
+    supportedLocales.find(l => l === process.env.COZY_LOCALE) || 'en'
+  const locales = require(`../locales/${locale}.json`)
+  const polyglot = new Polyglot()
+  polyglot.extend(locales)
+  return polyglot.t.bind(polyglot)
 }
 
 export const getOrganizationKey = async (cozyClient, vaultClient) => {
@@ -45,6 +56,31 @@ export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
   )
 
   return accounts
+}
+
+export const fetchKonnectorFromAccount = async (cozyClient, account) => {
+  const konnectorDoctype = 'io.cozy.konnectors'
+  const slug = account.account_type
+  const konnector = await cozyClient.query(
+    cozyClient.get(konnectorDoctype, slug)
+  )
+  return konnector.data
+    ? {
+        _id: konnector.data._id,
+        _type: konnector.data.type,
+        ...konnector.data.attributes
+      }
+    : null
+}
+
+export const fetchTriggersFromAccount = async (cozyClient, account) => {
+  const triggers = await cozyClient.queryAll(
+    cozyClient.find('io.cozy.triggers').where({
+      worker: 'konnector',
+      'message.account': account._id
+    })
+  )
+  return triggers
 }
 
 export const updateAccountsAuth = async (cozyClient, accounts, authData) => {

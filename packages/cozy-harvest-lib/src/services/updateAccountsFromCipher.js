@@ -14,6 +14,9 @@ import logger from './logger'
 const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
   decryptString(encryptedVal, vaultClient, orgKey)
 
+/**
+ * This service updates the accounts referencing an updated cipher.
+ */
 const updateAccountsFromCipher = async (
   cozyClient,
   vaultClient,
@@ -22,6 +25,12 @@ const updateAccountsFromCipher = async (
   const encryptedPassword = get(bitwardenCipherDocument, 'login.password')
   const encryptedUsername = get(bitwardenCipherDocument, 'login.username')
   const bitwardenCipherId = get(bitwardenCipherDocument, '_id')
+
+  const isSoftDeleted = get(bitwardenCipherDocument, 'deletedDate')
+  if (isSoftDeleted) {
+    logger.debug('Cipher is soft deleted: do not update.')
+    return
+  }
 
   logger.debug('Fetching organization key...')
   const orgKey = await getOrganizationKey(cozyClient, vaultClient)

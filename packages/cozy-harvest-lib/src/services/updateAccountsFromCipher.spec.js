@@ -52,9 +52,7 @@ describe('update accounts from cipher', () => {
   it('should update accounts', async () => {
     const orgKey = {}
     getOrganizationKey.mockResolvedValue(orgKey)
-
     decryptString.mockImplementation(str => `${str}_decrypted`)
-
     const accounts = {
       data: [
         {
