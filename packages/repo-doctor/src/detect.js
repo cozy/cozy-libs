@@ -4,10 +4,7 @@ const path = require('path')
 const githubHttpRepo = /url = https:\/\/github.com\/([a-z-\\/]+)/
 const githubGitRepo = /url = git@github.com:([a-z-\\/]+)/
 
-const detectRegexes = [
-  githubHttpRepo,
-  githubGitRepo
-]
+const detectRegexes = [githubHttpRepo, githubGitRepo]
 
 const matchFirst = (string, regexes) => {
   for (let rx of regexes) {
@@ -20,7 +17,9 @@ const matchFirst = (string, regexes) => {
 
 const autoDetectRepository = async () => {
   try {
-    const gitConfig = fs.readFileSync(path.join(process.cwd(), '.git/config')).toString()
+    const gitConfig = fs
+      .readFileSync(path.join(process.cwd(), '.git/config'))
+      .toString()
     const match = matchFirst(gitConfig, detectRegexes)
     if (match) {
       return match[1]
@@ -28,7 +27,6 @@ const autoDetectRepository = async () => {
       return null
     }
   } catch (e) {
-    console.log(e)
     return null
   }
 }

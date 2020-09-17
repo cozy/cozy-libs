@@ -30,6 +30,7 @@ const setupRules = (config, args) => {
 
       let Rule = ruleFns[ruleName]
       if (!Rule) {
+        // eslint-disable-next-line no-console
         console.warn('Unknown rule', rule)
         return null
       }

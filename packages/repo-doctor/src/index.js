@@ -23,7 +23,8 @@ const reporters = {
 }
 
 const getDefaultConfigPath = () => {
-  const configDir = process.env.XDG_CONFIG_HOME || path.join(process.env.HOME, '.config')
+  const configDir =
+    process.env.XDG_CONFIG_HOME || path.join(process.env.HOME, '.config')
   return path.join(configDir, './repo-doctor.json')
 }
 
@@ -75,9 +76,10 @@ const main = async () => {
 
   let repositories = config.repositories
 
-  const filterRepo = args.repo || await autoDetectRepository()
+  const filterRepo = args.repo || (await autoDetectRepository())
   if (filterRepo) {
     if (!args.repo) {
+      // eslint-disable-next-line no-console
       console.info('Detected repository as', filterRepo)
     }
     repositories = repositories.filter(repo => repo.slug === filterRepo)
