@@ -24,8 +24,27 @@ to mattermost.
 
 ## Usage
 
-```
-$ repo-doctor -c config.json
+- Repo doctor needs a config to work so you need to download a config.
+- It will try to detect the current folder repository
+- If no repository is detected, it will run repo-doctor on all the repositories
+  of the config
+
+
+```bash
+# Download an example config
+$ curl -o https://raw.githubusercontent.com/cozy/cozy-libs/master/packages/repo-doctor/examples/repo-doctor.json ~/.config/repo-doctor.json
+$ repo-doctor
+Detected repository as cozy/cozy-banks
+Repository: cozy/cozy-banks
+  dep-up-to-date: cozy-ui: 36.3.1, last is 36.5.0
+  dep-up-to-date: cozy-client: 14.5.0, last is 14.5.0
+  dep-up-to-date: cozy-realtime: 3.9.0, last is 3.10.5
+  dep-up-to-date: cozy-harvest-lib: 2.13.4, last is 2.13.4
+  dep-up-to-date: cozy-flags: 2.2.5, last is 2.3.4
+  dep-up-to-date: cozy-app-publish: 0.22.3, last is 0.25.0
+  dep-up-to-date: cozy-scripts: 5.0.1, last is 5.0.1
+  dep-up-to-date: cozy-bar: 7.13.3, last is 7.15.2
+  locales-in-repo: Locales are stored in the repository
 ```
 
 ```
