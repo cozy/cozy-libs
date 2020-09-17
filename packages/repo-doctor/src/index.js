@@ -22,6 +22,11 @@ const reporters = {
   mattermost: MattermostReporter
 }
 
+const getDefaultConfigPath = () => {
+  const configDir = process.env.XDG_CONFIG_HOME || path.join(process.env.HOME, '.config')
+  return path.join(configDir, './repo-doctor.json')
+}
+
 const main = async () => {
   const parser = new ArgumentParser()
   parser.addArgument('--repo', {
@@ -36,7 +41,7 @@ const main = async () => {
     help: 'Where to send the output (by default: console)'
   })
   parser.addArgument('--configFile', {
-    defaultValue: path.join(process.cwd(), './repo-doctor.json'),
+    defaultValue: getDefaultConfigPath(),
     help: 'Path to config'
   })
   parser.addArgument('--config', {
