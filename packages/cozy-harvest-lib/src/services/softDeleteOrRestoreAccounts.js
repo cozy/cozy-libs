@@ -9,7 +9,18 @@ import {
 } from './utils'
 import get from 'lodash/get'
 import { ensureTrigger } from '../connections/triggers'
-import { translate as t } from 'cozy-ui/transpiled/react/I18n'
+const Polyglot = require('node-polyglot')
+
+const supportedLocales = ['en', 'fr', 'es']
+
+const getT = () => {
+  const locale =
+    supportedLocales.find(l => l === process.env.COZY_LOCALE) || 'en'
+  const locales = require(`../locales/${locale}.json`)
+  const polyglot = new Polyglot()
+  polyglot.extend(locales)
+  return polyglot.t.bind(polyglot)
+}
 
 const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
   decryptString(encryptedVal, vaultClient, orgKey)
@@ -89,7 +100,7 @@ const softDeleteOrRestoreAccounts = async (
 
       await ensureTrigger(cozyClient, {
         account,
-        t,
+        t: getT(),
         konnector
       })
     }
