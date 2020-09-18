@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.1.1...@cozy/repo-doctor@0.2.0) (2020-09-18)
+
+
+### Features
+
+* Add bluebird dependency ([cf34402](https://github.com/cozy/cozy-libs/commit/cf34402))
+* Add command to start repo-doctor when developing ([7cc3901](https://github.com/cozy/cozy-libs/commit/7cc3901))
+* Auto detect repository ([bfd0dee](https://github.com/cozy/cozy-libs/commit/bfd0dee))
+* Check for Python deadsnakes presence in Travis ([36fca59](https://github.com/cozy/cozy-libs/commit/36fca59))
+* Check if deps are at the same version ([31376f1](https://github.com/cozy/cozy-libs/commit/31376f1))
+* Detect fast_finish from travis ([63d73a2](https://github.com/cozy/cozy-libs/commit/63d73a2))
+* Read config from ~/.config or $XDG_CONFIG_HOME ([50101c8](https://github.com/cozy/cozy-libs/commit/50101c8))
+* Show pending status when we dont support the real status ([498640e](https://github.com/cozy/cozy-libs/commit/498640e))
+
+
+
+
+
 ## [0.1.1](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.1.0...@cozy/repo-doctor@0.1.1) (2020-08-13)
 
 **Note:** Version bump only for package @cozy/repo-doctor
