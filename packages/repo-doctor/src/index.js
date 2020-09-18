@@ -15,10 +15,17 @@ const {
   validateConfig
 } = require('./config')
 const { ConfigError } = require('./errors')
+const { autoDetectRepository } = require('./detect')
 
 const reporters = {
   console: ConsoleReporter,
   mattermost: MattermostReporter
+}
+
+const getDefaultConfigPath = () => {
+  const configDir =
+    process.env.XDG_CONFIG_HOME || path.join(process.env.HOME, '.config')
+  return path.join(configDir, './repo-doctor.json')
 }
 
 const main = async () => {
@@ -35,7 +42,7 @@ const main = async () => {
     help: 'Where to send the output (by default: console)'
   })
   parser.addArgument('--configFile', {
-    defaultValue: path.join(process.cwd(), './repo-doctor.json'),
+    defaultValue: getDefaultConfigPath(),
     help: 'Path to config'
   })
   parser.addArgument('--config', {
@@ -68,8 +75,14 @@ const main = async () => {
   }
 
   let repositories = config.repositories
-  if (args.repo) {
-    repositories = repositories.filter(repo => repo.slug === args.repo)
+
+  const filterRepo = args.repo || (await autoDetectRepository())
+  if (filterRepo) {
+    if (!args.repo) {
+      // eslint-disable-next-line no-console
+      console.info('Detected repository as', filterRepo)
+    }
+    repositories = repositories.filter(repo => repo.slug === filterRepo)
   }
 
   let rules = setupRules(config)
