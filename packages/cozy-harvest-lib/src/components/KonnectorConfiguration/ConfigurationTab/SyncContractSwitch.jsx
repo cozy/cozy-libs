@@ -1,12 +1,11 @@
 import React from 'react'
-import { withClient, queryConnect } from 'cozy-client'
+import { withClient, queryConnect, models } from 'cozy-client'
 import { FieldContainer } from 'cozy-ui/transpiled/react/Field'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Label from 'cozy-ui/transpiled/react/Label'
 
 import compose from 'lodash/flowRight'
 
-import { models } from 'cozy-client'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
