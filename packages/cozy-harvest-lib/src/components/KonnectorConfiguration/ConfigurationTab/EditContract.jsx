@@ -140,7 +140,7 @@ const EditContract = props => {
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
   const fieldVariant = isMobile ? 'default' : 'inline'
-  const policy = findKonnectorPolicy(konnector)
+  const policy = konnector ? findKonnectorPolicy(konnector) : null
 
   return (
     <ExperimentalDialog>
@@ -184,7 +184,9 @@ const EditContract = props => {
               disabled
               variant={fieldVariant}
             />
-            {policy.setSync && flag('harvest.toggle-contract-sync') ? (
+            {policy &&
+            policy.setSync &&
+            flag('harvest.toggle-contract-sync') ? (
               <SyncContractSwitch
                 fieldVariant={fieldVariant}
                 contract={contract}
@@ -243,7 +245,9 @@ EditContract.propTypes = {
   /** The callback called when edition is cancelled */
   onCancel: PropTypes.func.isRequired,
   /** Account id (necessary to toggle contract sync) */
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string.isRequired,
+  /** Konnector that fetched the contract (not present for disconnected accounts) */
+  konnector: PropTypes.object
 }
 
 export default withLocales(EditContract)
