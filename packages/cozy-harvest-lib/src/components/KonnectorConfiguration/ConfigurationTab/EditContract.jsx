@@ -144,6 +144,7 @@ const EditContract = props => {
 
   return (
     <Dialog>
+      <DialogCloseButton onClick={dismissAction} />
       <DialogTitle>{getAccountLabel(contract)}</DialogTitle>
       <DialogContent>
         <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
