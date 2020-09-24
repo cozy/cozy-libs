@@ -6,6 +6,7 @@ import Label from 'cozy-ui/transpiled/react/Label'
 
 import compose from 'lodash/flowRight'
 
+import Media, { Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
@@ -108,10 +109,9 @@ export class DumbSyncContractSwitch extends React.Component {
     }
 
     return (
-      <FieldContainer variant={fieldVariant}>
-        <Label>{t('contractForm.imported')}</Label>
-        {/* The span is needed otherwise the switch is not correctly rendered */}
-        <span>
+      <Media>
+        <Bd>{t('contractForm.imported')}</Bd>
+        <Img>
           <Switch
             color="primary"
             disabled={syncStatusLoading}
@@ -119,8 +119,8 @@ export class DumbSyncContractSwitch extends React.Component {
             checked={syncStatus}
             {...switchProps}
           />
-        </span>
-      </FieldContainer>
+        </Img>
+      </Media>
     )
   }
 }

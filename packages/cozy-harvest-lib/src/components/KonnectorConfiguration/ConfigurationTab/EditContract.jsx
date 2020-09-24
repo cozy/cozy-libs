@@ -10,8 +10,10 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Field from 'cozy-ui/transpiled/react/Field'
 import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Stack from 'cozy-ui/transpiled/react/Stack'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { withStyles } from '@material-ui/core/styles'
 
 import Dialog, {
   DialogTitle,
@@ -19,6 +21,7 @@ import Dialog, {
   DialogContent,
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/Dialog'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -43,6 +46,12 @@ const ContactPicker = props => {
     />
   )
 }
+
+const NonGrowingDialogContent = withStyles({
+  root: {
+    flexGrow: 0
+  }
+})(DialogContent)
 
 const DeleteConfirm = ({
   onCancel,
@@ -143,10 +152,20 @@ const EditContract = props => {
   const policy = konnector ? findKonnectorPolicy(konnector) : null
 
   return (
-    <Dialog>
+    <Dialog onClose={dismissAction}>
       <DialogCloseButton onClick={dismissAction} />
-      <DialogTitle>{getAccountLabel(contract)}</DialogTitle>
-      <DialogContent>
+      <DialogTitle>
+        {isMobile ? (
+          <Icon
+            className="u-pr-1 u-coolGrey"
+            icon="left"
+            onClick={dismissAction}
+          />
+        ) : null}
+        {getAccountLabel(contract)}
+      </DialogTitle>
+      <Divider />
+      <NonGrowingDialogContent className="u-pb-1">
         <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
           <Stack spacing={isMobile ? 's' : 'm'}>
             <Field
@@ -183,39 +202,39 @@ const EditContract = props => {
               disabled
               variant={fieldVariant}
             />
-            {policy &&
-            policy.setSync &&
-            flag('harvest.toggle-contract-sync') ? (
-              <SyncContractSwitch
-                fieldVariant={fieldVariant}
-                contract={contract}
-                accountId={accountId}
-                konnector={konnector}
-              />
-            ) : null}
-
             <Button
-              className="u-ml-auto"
-              label={t('contractForm.removeAccountBtn')}
-              theme="danger-outline"
-              onClick={handleRequestDeletion}
+              type="submit"
+              form={`edit-contract-${contract._id}`}
+              label={t('contractForm.apply')}
+              theme="primary"
+              className="u-ml-0"
             />
           </Stack>
         </form>
+      </NonGrowingDialogContent>
+      <Divider />
+      {policy && policy.setSync && flag('harvest.toggle-contract-sync') ? (
+        <>
+          <NonGrowingDialogContent className="u-pv-1">
+            <SyncContractSwitch
+              fieldVariant={fieldVariant}
+              contract={contract}
+              accountId={accountId}
+              konnector={konnector}
+            />
+          </NonGrowingDialogContent>
+          <Divider />
+        </>
+      ) : null}
+      <DialogContent className="u-pv-1">
+        <Button
+          className="u-ml-auto u-error u-ml-0 u-ph-half"
+          icon="trash"
+          theme="text"
+          label={t('contractForm.removeAccountBtn')}
+          onClick={handleRequestDeletion}
+        />
       </DialogContent>
-      <DialogActions layout="row">
-        <Button
-          label={t('contractForm.cancel')}
-          theme="secondary"
-          onClick={dismissAction}
-        />
-        <Button
-          type="submit"
-          form={`edit-contract-${contract._id}`}
-          label={t('contractForm.apply')}
-          theme="primary"
-        />
-      </DialogActions>
       {showDeleteConfirmation ? (
         <DeleteConfirm
           title={t('contractForm.confirm-deletion.title')}
@@ -243,8 +262,8 @@ EditContract.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
   onCancel: PropTypes.func.isRequired,
-  /** Account id (necessary to toggle contract sync) */
-  accountId: PropTypes.string.isRequired,
+  /** Account id (necessary to toggle contract sync, not present for disconnected accounts) */
+  accountId: PropTypes.string,
   /** Konnector that fetched the contract (not present for disconnected accounts) */
   konnector: PropTypes.object
 }
