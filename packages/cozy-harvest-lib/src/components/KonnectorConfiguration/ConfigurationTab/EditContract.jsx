@@ -19,7 +19,8 @@ import Dialog, {
   DialogTitle,
   DialogActions,
   DialogContent,
-  DialogCloseButton
+  DialogCloseButton,
+  DialogBackButton
 } from 'cozy-ui/transpiled/react/Dialog'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
@@ -155,13 +156,7 @@ const EditContract = props => {
     <Dialog onClose={dismissAction}>
       <DialogCloseButton onClick={dismissAction} />
       <DialogTitle>
-        {isMobile ? (
-          <Icon
-            className="u-pr-1 u-coolGrey"
-            icon="left"
-            onClick={dismissAction}
-          />
-        ) : null}
+        {isMobile ? <DialogBackButton onClick={dismissAction} /> : null}
         {getAccountLabel(contract)}
       </DialogTitle>
       <Divider />
