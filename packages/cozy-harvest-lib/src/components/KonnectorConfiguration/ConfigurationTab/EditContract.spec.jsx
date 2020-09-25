@@ -9,9 +9,13 @@ import en from 'locales/en.json'
 import bankAccount from './bank-account-fixture.json'
 import EditContract from './EditContract'
 
-jest.mock('./SyncContractSwitch', () => function SyncContractSwitch () {
-  return <input type="checkbox" role="sync-contract-switch" />
-})
+jest.mock(
+  './SyncContractSwitch',
+  () =>
+    function SyncContractSwitch() {
+      return <input type="checkbox" role="sync-contract-switch" />
+    }
+)
 
 jest.mock('cozy-flags', () => name => {
   if (name == 'harvest.toggle-contract-sync') {

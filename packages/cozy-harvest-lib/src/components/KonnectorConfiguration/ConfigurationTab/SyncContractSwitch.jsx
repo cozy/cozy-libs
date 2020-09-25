@@ -1,8 +1,6 @@
 import React from 'react'
 import { withClient, queryConnect, models } from 'cozy-client'
-import { FieldContainer } from 'cozy-ui/transpiled/react/Field'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Label from 'cozy-ui/transpiled/react/Label'
 
 import compose from 'lodash/flowRight'
 
@@ -89,7 +87,7 @@ export class DumbSyncContractSwitch extends React.Component {
   }
 
   render() {
-    const { accountCol, switchProps, contract, fieldVariant, t } = this.props
+    const { accountCol, switchProps, contract,  t } = this.props
     const { syncStatus, syncStatusLoading } = this.state
 
     if (accountCol.fetchStatus === 'loading') {
