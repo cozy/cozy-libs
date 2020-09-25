@@ -5320,6 +5320,11 @@ cozy-doctypes@1.67.0:
     lodash "4.17.15"
     prop-types "^15.7.2"
 
+cozy-interapp@0.5.4:
+  version "0.5.4"
+  resolved "https://registry.yarnpkg.com/cozy-interapp/-/cozy-interapp-0.5.4.tgz#2573f1800f073c84c289267d04234954d88eae0c"
+  integrity sha512-f0UaKpBkRUnIKgAWND0e1IwfTTINjizlgDmfQwX3aMyWp8t9wX0xkNFn53TSyKUoBUnfovrclS3hm9fngjEp7A==
+
 cozy-keys-lib@3.1.2:
   version "3.1.2"
   resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.1.2.tgz#524b4360d8e6008c3f234aeb9bd9730f1d2276fc"
@@ -5403,10 +5408,10 @@ cozy-ui@35.40.2:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@35.45.0:
-  version "35.45.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-35.45.0.tgz#0af7c9002f99e2d1b40bd92823d35572ecbd1b8f"
-  integrity sha512-Ltce5GpPe/F9hd+lNV9QvdsEH98SLTIa5cdCtwwyXyBGdBnd16BIcjiaZgAblDcqk0EuY6qYKFhhkdn0pmDV4g==
+cozy-ui@37.6.0:
+  version "37.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-37.6.0.tgz#8e8ea9ac2ef8a706f04ce9436c7b05a598f2303a"
+  integrity sha512-5Fp2tja2FKLAGOBVUPC2uJGm0Lnp/u7pCcJd/+OY/d2p6yc9ZDgx6rxlbgRM4s2Ml7RYBjbxdqZwGjXi9o7VYQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
