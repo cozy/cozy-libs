@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.14.0...cozy-harvest-lib@2.14.1) (2020-09-28)
+
+
+### Bug Fixes
+
+* **Harvest:** Use cozy-realtime for OAuth popup communication ([209e15b](https://github.com/cozy/cozy-libs/commit/209e15b))
+
+
+
+
+
 # [2.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.13.4...cozy-harvest-lib@2.14.0) (2020-09-17)
 
 
