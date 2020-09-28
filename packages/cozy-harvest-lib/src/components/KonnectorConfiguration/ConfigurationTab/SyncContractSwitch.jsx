@@ -4,7 +4,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import compose from 'lodash/flowRight'
 
-import Media, { Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
