@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.14.1...cozy-harvest-lib@2.15.0) (2020-09-28)
+
+
+### Bug Fixes
+
+* Do not show sync contract switch if no konnector is passed ([5267d32](https://github.com/cozy/cozy-libs/commit/5267d32))
+* Typo in import ([72a03d0](https://github.com/cozy/cozy-libs/commit/72a03d0))
+
+
+### Features
+
+* Add close button to edit contract modal ([8b5340e](https://github.com/cozy/cozy-libs/commit/8b5340e))
+* Better descriptions for the sync contract switch ([448fdcd](https://github.com/cozy/cozy-libs/commit/448fdcd))
+* Better EditContractDialog ([f43ae48](https://github.com/cozy/cozy-libs/commit/f43ae48))
+* By default show a select box to select the contact in EditContract ([e1e575d](https://github.com/cozy/cozy-libs/commit/e1e575d))
+* Update cozy-ui dev dependency ([3e487bf](https://github.com/cozy/cozy-libs/commit/3e487bf))
+* Use DialogBackButton from cozy-ui ([8156a7b](https://github.com/cozy/cozy-libs/commit/8156a7b))
+
+
+
+
+
 ## [2.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.14.0...cozy-harvest-lib@2.14.1) (2020-09-28)
 
 
