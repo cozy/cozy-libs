@@ -87,7 +87,7 @@ export class DumbSyncContractSwitch extends React.Component {
   }
 
   render() {
-    const { accountCol, switchProps, contract,  t } = this.props
+    const { accountCol, switchProps, contract, t } = this.props
     const { syncStatus, syncStatusLoading } = this.state
 
     if (accountCol.fetchStatus === 'loading') {
