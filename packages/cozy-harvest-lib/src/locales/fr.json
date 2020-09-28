@@ -53,7 +53,7 @@
     "listEmptyMessage": "Aucun contact trouvé",
     "addContactLabel": "Créer un contact",
     "cancel": "Annuler",
-    "imported": "Importé"
+    "imported": "Synchronisé dans mon Cozy"
   },
   "card": {
     "launchTrigger": {
