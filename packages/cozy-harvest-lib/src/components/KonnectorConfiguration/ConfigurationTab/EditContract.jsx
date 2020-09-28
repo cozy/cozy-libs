@@ -12,13 +12,16 @@ import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { withStyles } from '@material-ui/core/styles'
 
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import Dialog, {
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+  DialogCloseButton,
+  DialogBackButton
+} from 'cozy-ui/transpiled/react/Dialog'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -44,6 +47,12 @@ const ContactPicker = props => {
   )
 }
 
+const NonGrowingDialogContent = withStyles({
+  root: {
+    flexGrow: 0
+  }
+})(DialogContent)
+
 const DeleteConfirm = ({
   onCancel,
   onConfirm,
@@ -53,17 +62,17 @@ const DeleteConfirm = ({
   primaryText
 }) => {
   return (
-    <ExperimentalDialog>
-      <ExperimentalDialogTitle>{title}</ExperimentalDialogTitle>
+    <Dialog>
+      <DialogTitle>{title}</DialogTitle>
       <DialogCloseButton onClick={() => onCancel()} />
       <DialogContent>
         <div dangerouslySetInnerHTML={{ __html: description }} />
       </DialogContent>
-      <ExperimentalDialogActions>
+      <DialogActions>
         <Button theme="secondary" label={secondaryText} onClick={onCancel} />
         <Button theme="danger" label={primaryText} onClick={onConfirm} />
-      </ExperimentalDialogActions>
-    </ExperimentalDialog>
+      </DialogActions>
+    </Dialog>
   )
 }
 
@@ -140,14 +149,17 @@ const EditContract = props => {
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
   const fieldVariant = isMobile ? 'default' : 'inline'
-  const policy = findKonnectorPolicy(konnector)
+  const policy = konnector ? findKonnectorPolicy(konnector) : null
 
   return (
-    <ExperimentalDialog>
-      <ExperimentalDialogTitle>
+    <Dialog onClose={dismissAction}>
+      <DialogCloseButton onClick={dismissAction} />
+      <DialogTitle>
+        {isMobile ? <DialogBackButton onClick={dismissAction} /> : null}
         {getAccountLabel(contract)}
-      </ExperimentalDialogTitle>
-      <DialogContent>
+      </DialogTitle>
+      <Divider />
+      <NonGrowingDialogContent className="u-pb-1">
         <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
           <Stack spacing={isMobile ? 's' : 'm'}>
             <Field
@@ -160,7 +172,7 @@ const EditContract = props => {
             />
             <CollectionField
               label={t('contractForm.owner')}
-              values={owners}
+              values={owners && owners.length > 0 ? owners : [null]}
               component={ContactPicker}
               addButtonLabel={t('contractForm.addOwnerBtn')}
               removeButtonLabel={t('contractForm.removeOwnerBtn')}
@@ -184,37 +196,39 @@ const EditContract = props => {
               disabled
               variant={fieldVariant}
             />
-            {policy.setSync && flag('harvest.toggle-contract-sync') ? (
-              <SyncContractSwitch
-                fieldVariant={fieldVariant}
-                contract={contract}
-                accountId={accountId}
-                konnector={konnector}
-              />
-            ) : null}
-
             <Button
-              className="u-ml-auto"
-              label={t('contractForm.removeAccountBtn')}
-              theme="danger-outline"
-              onClick={handleRequestDeletion}
+              type="submit"
+              form={`edit-contract-${contract._id}`}
+              label={t('contractForm.apply')}
+              theme="primary"
+              className="u-ml-0"
             />
           </Stack>
         </form>
+      </NonGrowingDialogContent>
+      <Divider />
+      {policy && policy.setSync && flag('harvest.toggle-contract-sync') ? (
+        <>
+          <NonGrowingDialogContent className="u-pv-1">
+            <SyncContractSwitch
+              fieldVariant={fieldVariant}
+              contract={contract}
+              accountId={accountId}
+              konnector={konnector}
+            />
+          </NonGrowingDialogContent>
+          <Divider />
+        </>
+      ) : null}
+      <DialogContent className="u-pv-1">
+        <Button
+          className="u-ml-auto u-error u-ml-0 u-ph-half"
+          icon="trash"
+          theme="text"
+          label={t('contractForm.removeAccountBtn')}
+          onClick={handleRequestDeletion}
+        />
       </DialogContent>
-      <ExperimentalDialogActions layout="row">
-        <Button
-          label={t('contractForm.cancel')}
-          theme="secondary"
-          onClick={dismissAction}
-        />
-        <Button
-          type="submit"
-          form={`edit-contract-${contract._id}`}
-          label={t('contractForm.apply')}
-          theme="primary"
-        />
-      </ExperimentalDialogActions>
       {showDeleteConfirmation ? (
         <DeleteConfirm
           title={t('contractForm.confirm-deletion.title')}
@@ -231,7 +245,7 @@ const EditContract = props => {
           onCancel={() => setShowDeleteConfirmation(false)}
         />
       ) : null}
-    </ExperimentalDialog>
+    </Dialog>
   )
 }
 
@@ -242,8 +256,10 @@ EditContract.propTypes = {
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
   onCancel: PropTypes.func.isRequired,
-  /** Account id (necessary to toggle contract sync) */
-  accountId: PropTypes.string.isRequired
+  /** Account id (necessary to toggle contract sync, not present for disconnected accounts) */
+  accountId: PropTypes.string,
+  /** Konnector that fetched the contract (not present for disconnected accounts) */
+  konnector: PropTypes.object
 }
 
 export default withLocales(EditContract)

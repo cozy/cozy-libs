@@ -1,12 +1,10 @@
 import React from 'react'
-import { withClient, queryConnect } from 'cozy-client'
-import { FieldContainer } from 'cozy-ui/transpiled/react/Field'
+import { withClient, queryConnect, models } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Label from 'cozy-ui/transpiled/react/Label'
 
 import compose from 'lodash/flowRight'
 
-import { models } from 'cozy-client'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
@@ -89,7 +87,7 @@ export class DumbSyncContractSwitch extends React.Component {
   }
 
   render() {
-    const { accountCol, switchProps, contract, fieldVariant, t } = this.props
+    const { accountCol, switchProps, contract, t } = this.props
     const { syncStatus, syncStatusLoading } = this.state
 
     if (accountCol.fetchStatus === 'loading') {
@@ -109,10 +107,9 @@ export class DumbSyncContractSwitch extends React.Component {
     }
 
     return (
-      <FieldContainer variant={fieldVariant}>
-        <Label>{t('contractForm.imported')}</Label>
-        {/* The span is needed otherwise the switch is not correctly rendered */}
-        <span>
+      <Media>
+        <Bd>{t('contractForm.imported')}</Bd>
+        <Img>
           <Switch
             color="primary"
             disabled={syncStatusLoading}
@@ -120,8 +117,8 @@ export class DumbSyncContractSwitch extends React.Component {
             checked={syncStatus}
             {...switchProps}
           />
-        </span>
-      </FieldContainer>
+        </Img>
+      </Media>
     )
   }
 }

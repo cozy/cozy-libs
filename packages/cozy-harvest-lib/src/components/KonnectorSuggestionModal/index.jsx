@@ -8,16 +8,17 @@ import { Button, ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { Title, Caption } from 'cozy-ui/transpiled/react/Text'
 
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import Dialog, {
+  DialogCloseButton,
+  DialogActions,
+  DialogContent
+} from 'cozy-ui/transpiled/react/Dialog'
 
 import Illustration from './Illustration'
 import DataTypes from './DataTypes'
 import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
 import { getSuggestionReason } from '../../helpers/appSuggestions'
 
-import Dialog from '@material-ui/core/Dialog'
-import DialogActions from '@material-ui/core/DialogActions'
-import DialogContent from '@material-ui/core/DialogContent'
 import withMobileDialog from '@material-ui/core/withMobileDialog'
 
 const KonnectorSuggestionModal = ({
