@@ -172,7 +172,7 @@ const EditContract = props => {
             />
             <CollectionField
               label={t('contractForm.owner')}
-              values={owners}
+              values={owners && owners.length > 0 ? owners : [null]}
               component={ContactPicker}
               addButtonLabel={t('contractForm.addOwnerBtn')}
               removeButtonLabel={t('contractForm.removeOwnerBtn')}
