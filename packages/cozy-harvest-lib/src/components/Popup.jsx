@@ -49,7 +49,6 @@ export class Popup extends PureComponent {
   constructor(props, context) {
     super(props, context)
     this.handleClose = this.handleClose.bind(this)
-    this.handleMessage = this.handleMessage.bind(this)
     this.handleUrlChange = this.handleUrlChange.bind(this)
   }
 
@@ -62,9 +61,6 @@ export class Popup extends PureComponent {
   }
 
   addListeners(popup) {
-    // Listen here for message FROM popup
-    window.addEventListener('message', this.handleMessage)
-
     // rest of instructions only on mobile app
     if (!isMobileApp()) return
     popup.addEventListener('loadstart', this.handleUrlChange)
@@ -72,8 +68,6 @@ export class Popup extends PureComponent {
   }
 
   removeListeners(popup) {
-    window.removeEventListener('message', this.handleMessage)
-
     // rest of instructions only if popup is still opened
     if (popup.closed) return
 
@@ -81,13 +75,6 @@ export class Popup extends PureComponent {
     if (!isMobileApp()) return
     popup.removeEventListener('loadstart', this.handleUrlChange)
     popup.removeEventListener('exit', this.handleClose)
-  }
-
-  handleMessage(messageEvent) {
-    const { popup } = this.state
-    const { onMessage } = this.props
-    const isFromPopup = popup === messageEvent.source
-    if (isFromPopup && typeof onMessage === 'function') onMessage(messageEvent)
   }
 
   handleClose(popup) {

@@ -1,4 +1,8 @@
-import { handleOAuthResponse, getOAuthUrl } from 'helpers/oauth'
+import {
+  handleOAuthResponse,
+  getOAuthUrl,
+  OAUTH_REALTIME_CHANNEL
+} from 'helpers/oauth'
 
 describe('Oauth helper', () => {
   describe('getOAuthUrl', () => {
@@ -52,11 +56,12 @@ describe('Oauth helper', () => {
   })
   describe('handleOAuthResponse', () => {
     let originalLocation
-    let originalOpener
+    const realtime = {
+      sendNotification: jest.fn()
+    }
 
     beforeEach(() => {
       originalLocation = window.location
-      originalOpener = window.opener
 
       // As seen at https://gist.github.com/remarkablemark/5cb571a13a6635ab89cf2bb47dc004a3#gistcomment-2905726
       delete window.location
@@ -64,14 +69,10 @@ describe('Oauth helper', () => {
         search:
           'account=bc2aca6566cf4a72afe6c615aa1e3d31&state=70720eb0-6204-484d'
       }
-      window.opener = {
-        postMessage: jest.fn()
-      }
     })
 
     afterEach(() => {
       window.location = originalLocation
-      window.opener = originalOpener
     })
 
     it('should send message with query string data', () => {
@@ -80,15 +81,16 @@ describe('Oauth helper', () => {
         oAuthStateKey: '70720eb0-6204-484d'
       }
 
-      handleOAuthResponse()
-      expect(window.opener.postMessage).toHaveBeenCalledWith(
-        expectedOAuthData,
-        '*'
+      handleOAuthResponse({ realtime })
+      expect(realtime.sendNotification).toHaveBeenCalledWith(
+        'io.cozy.accounts',
+        OAUTH_REALTIME_CHANNEL,
+        expectedOAuthData
       )
     })
 
     it('should return true', () => {
-      const result = handleOAuthResponse()
+      const result = handleOAuthResponse({ realtime })
       expect(result).toBe(true)
     })
 
@@ -97,7 +99,7 @@ describe('Oauth helper', () => {
         search: 'state=70720eb0-6204-484d'
       }
 
-      const result = handleOAuthResponse()
+      const result = handleOAuthResponse({ realtime })
       expect(result).toBe(false)
     })
 
@@ -106,7 +108,7 @@ describe('Oauth helper', () => {
         search: 'account=bc2aca6566cf4a72afe6c615aa1e3d31'
       }
 
-      const result = handleOAuthResponse()
+      const result = handleOAuthResponse({ realtime })
       expect(result).toBe(false)
     })
   })

@@ -3,8 +3,14 @@ import PropTypes from 'prop-types'
 
 import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import CozyRealtime from 'cozy-realtime'
 
-import { prepareOAuth, checkOAuthData, terminateOAuth } from '../helpers/oauth'
+import {
+  prepareOAuth,
+  checkOAuthData,
+  terminateOAuth,
+  OAUTH_REALTIME_CHANNEL
+} from '../helpers/oauth'
 //TODO use PopUp from cozy-ui
 import Popup from './Popup'
 
@@ -38,6 +44,13 @@ export class OAuthWindow extends PureComponent {
 
   componentDidMount() {
     const { client, konnector } = this.props
+    this.realtime = new CozyRealtime({ client })
+    this.realtime.subscribe(
+      'notified',
+      'io.cozy.accounts',
+      OAUTH_REALTIME_CHANNEL,
+      this.handleMessage
+    )
     const { oAuthStateKey, oAuthUrl } = prepareOAuth(client, konnector)
     this.setState({ oAuthStateKey, oAuthUrl, succeed: false })
   }
@@ -45,6 +58,7 @@ export class OAuthWindow extends PureComponent {
   componentWillUnmount() {
     const { oAuthStateKey } = this.state
     terminateOAuth(oAuthStateKey)
+    this.realtime.unsubscribeAll()
   }
 
   handleClose() {
@@ -57,7 +71,7 @@ export class OAuthWindow extends PureComponent {
 
   /**
    * Handles OAuth data. OAuth data may be provided by different way:
-   * * postMessage from web apps (see handleMessage)
+   * * realtime message from web apps (see handleMessage)
    * * url changes from mobile apps
    * @param  {string} data.key `io.cozy.accounts` id The created OAuth account
    * @param  {string} data.oAuthStateKey key for localStorage
@@ -127,7 +141,6 @@ export class OAuthWindow extends PureComponent {
           url={oAuthUrl}
           height={OAUTH_POPUP_HEIGHT}
           width={OAUTH_POPUP_WIDTH}
-          onMessage={this.handleMessage}
           onClose={this.handleClose}
           onUrlChange={this.handleUrlChange}
           title={t(`oauth.window.title`)}

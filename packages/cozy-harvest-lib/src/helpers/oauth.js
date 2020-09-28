@@ -1,6 +1,10 @@
 import uuid from 'uuid/v4'
 
 import * as konnectors from './konnectors'
+import CozyClient from 'cozy-client'
+import CozyRealtime from 'cozy-realtime'
+
+export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
 
 /**
  * Checks that the given data for the given konnector is consistent with the
@@ -29,6 +33,10 @@ export const checkOAuthData = (konnector, data) => {
 /**
  * Handler to be called at the top level of an application.
  * Aimed to handle an OAuth redirect with data in query string.
+ * @param  {Object} options.client (optional) : cozy-client instance which will be used to create
+ * cozy-realtime instance if not specified
+ * @param  {Object} options.realtime (optional) : cozy-realtime instance used to notify the
+ * resulting accountId to the origin harvest window after OAuth redirect
  *
  * We are supposed here to be in the OAuth popup, at the end of the process.
  *
@@ -41,15 +49,26 @@ export const checkOAuthData = (konnector, data) => {
  * ```
  * @return {boolean} `true` if an OAuth response has been handled, `false` otherwise
  */
-export const handleOAuthResponse = () => {
+export const handleOAuthResponse = (options = {}) => {
+  let realtime = options.realtime
+  if (!realtime) {
+    let client = options.client
+    if (!client) {
+      const root = document.querySelector('[role=application]')
+      client = new CozyClient({
+        uri: `${window.location.protocol}//${root.dataset.cozyDomain}`,
+        token: root.dataset.cozyToken
+      })
+    }
+    realtime = new CozyRealtime({ client })
+  }
+
   /* global URLSearchParams */
   const queryParams = new URLSearchParams(window.location.search)
 
   const accountId = queryParams.get('account')
   if (!accountId) return false
 
-  /** As we are in a popup, get the opener window */
-  const opener = window.opener
   /**
    * Key for localStorage, used at the beginning of the OAuth process to store
    * data about the account currently created, and used at the end to check
@@ -58,19 +77,10 @@ export const handleOAuthResponse = () => {
   const oAuthStateKey = queryParams.get('state')
   if (!oAuthStateKey) return false
 
-  opener.postMessage(
-    {
-      key: accountId,
-      oAuthStateKey
-    },
-    /**
-     * FIXME: Here we are using this wildcard because we cannot be sure about
-     * the target origin we are sending the message to.
-     * At the time this code is written, this handler is called only in
-     * cozy-home, and may send message to another app.
-     */
-    '*'
-  )
+  realtime.sendNotification('io.cozy.accounts', OAUTH_REALTIME_CHANNEL, {
+    key: accountId,
+    oAuthStateKey
+  })
 
   return true
 }
