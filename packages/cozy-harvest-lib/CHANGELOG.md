@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.15.1...cozy-harvest-lib@2.16.0) (2020-09-29)
+
+
+### Features
+
+* Add redirectSlug to OAuthWindow ([#1113](https://github.com/cozy/cozy-libs/issues/1113)) ([114ac74](https://github.com/cozy/cozy-libs/commit/114ac74))
+
+
+
+
+
 ## [2.15.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.15.0...cozy-harvest-lib@2.15.1) (2020-09-28)
 
 
