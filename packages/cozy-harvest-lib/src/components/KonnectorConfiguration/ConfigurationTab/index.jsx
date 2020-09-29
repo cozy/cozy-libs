@@ -115,55 +115,53 @@ const ConfigurationTab = ({
           {flag('harvest.show-contracts') ? (
             <ContractsForAccount konnector={konnector} account={account} />
           ) : null}
-          {!konnector.oauth ? (
-            <>
-              <NavigationListHeader>
-                {t('modal.updateAccount.general-subheader')}
-              </NavigationListHeader>
-              <NavigationListSection>
-                <ListItem
-                  className="u-c-pointer"
-                  onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
-                >
-                  <ListItemIcon>
-                    <Icon icon="key" color={palette['slateGrey']} />
-                  </ListItemIcon>
-                  <ListItemText
-                    primaryText={t('modal.updateAccount.identifiers')}
-                    secondaryText={Account.getAccountName(account)}
-                  />
-                  <ListItemSecondaryAction>
-                    <div>
-                      {running && <Spinner />}
-                      <Icon
-                        className="u-mr-1"
-                        icon="right"
-                        color={palette['coolGrey']}
-                      />
-                    </div>
-                  </ListItemSecondaryAction>
-                </ListItem>
-                <ListItem className="u-c-pointer" onClick={handleDeleteRequest}>
-                  <ListItemIcon>
-                    <Icon icon="unlink" className="u-error" />
-                  </ListItemIcon>
-                  <ListItemText
-                    primaryTextClassName="u-error"
-                    primaryText={t('accountForm.disconnect.button')}
-                  />
-                  <ListItemSecondaryAction>
-                    {deleting && <Spinner />}
-                  </ListItemSecondaryAction>
-                </ListItem>
-                {requestingDeletion ? (
-                  <ConfirmationDialog
-                    onCancel={handleCancelDeleteRequest}
-                    onConfirm={handleDeleteAccount}
-                  />
-                ) : null}
-              </NavigationListSection>
-            </>
-          ) : null}
+          <NavigationListHeader>
+            {t('modal.updateAccount.general-subheader')}
+          </NavigationListHeader>
+          <NavigationListSection>
+            {konnector.oauth ? null : (
+              <ListItem
+                className="u-c-pointer"
+                onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
+              >
+                <ListItemIcon>
+                  <Icon icon="key" color={palette['slateGrey']} />
+                </ListItemIcon>
+                <ListItemText
+                  primaryText={t('modal.updateAccount.identifiers')}
+                  secondaryText={Account.getAccountName(account)}
+                />
+                <ListItemSecondaryAction>
+                  <div>
+                    {running && <Spinner />}
+                    <Icon
+                      className="u-mr-1"
+                      icon="right"
+                      color={palette['coolGrey']}
+                    />
+                  </div>
+                </ListItemSecondaryAction>
+              </ListItem>
+            )}
+            <ListItem className="u-c-pointer" onClick={handleDeleteRequest}>
+              <ListItemIcon>
+                <Icon icon="unlink" className="u-error" />
+              </ListItemIcon>
+              <ListItemText
+                primaryTextClassName="u-error"
+                primaryText={t('accountForm.disconnect.button')}
+              />
+              <ListItemSecondaryAction>
+                {deleting && <Spinner />}
+              </ListItemSecondaryAction>
+            </ListItem>
+            {requestingDeletion ? (
+              <ConfirmationDialog
+                onCancel={handleCancelDeleteRequest}
+                onConfirm={handleDeleteAccount}
+              />
+            ) : null}
+          </NavigationListSection>
         </NavigationList>
         {showNewAccountButton ? (
           <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
