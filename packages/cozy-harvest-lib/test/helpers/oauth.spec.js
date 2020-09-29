@@ -53,6 +53,16 @@ describe('Oauth helper', () => {
         'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope+thescope2'
       )
     })
+    it('should use redirectSlug if present', () => {
+      const url = getOAuthUrl({
+        ...defaultConf,
+        oAuthConf: {},
+        redirectSlug: 'drive'
+      })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&slug=drive'
+      )
+    })
   })
   describe('handleOAuthResponse', () => {
     let originalLocation

@@ -43,7 +43,7 @@ export class OAuthWindow extends PureComponent {
   }
 
   componentDidMount() {
-    const { client, konnector } = this.props
+    const { client, konnector, redirectSlug } = this.props
     this.realtime = new CozyRealtime({ client })
     this.realtime.subscribe(
       'notified',
@@ -51,7 +51,11 @@ export class OAuthWindow extends PureComponent {
       OAUTH_REALTIME_CHANNEL,
       this.handleMessage
     )
-    const { oAuthStateKey, oAuthUrl } = prepareOAuth(client, konnector)
+    const { oAuthStateKey, oAuthUrl } = prepareOAuth(
+      client,
+      konnector,
+      redirectSlug
+    )
     this.setState({ oAuthStateKey, oAuthUrl, succeed: false })
   }
 
@@ -159,7 +163,9 @@ OAuthWindow.propTypes = {
   onSuccess: PropTypes.func,
   /** Callback called when the OAuth window is closed wihout having retrieved
   an account id */
-  onCancel: PropTypes.func
+  onCancel: PropTypes.func,
+  /** The app we want to redirect the user on, after the OAuth flow. It used by the stack */
+  redirectSlug: PropTypes.string
 }
 
 export default translate()(withClient(OAuthWindow))
