@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.16.0...cozy-harvest-lib@2.16.1) (2020-09-29)
+
+
+### Bug Fixes
+
+* **Harvest:** Display disconnect button for OAuth connectors ([257c37a](https://github.com/cozy/cozy-libs/commit/257c37a))
+
+
+
+
+
 # [2.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.15.1...cozy-harvest-lib@2.16.0) (2020-09-29)
 
 
