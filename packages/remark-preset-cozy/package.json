@@ -1,0 +1,9 @@
+{
+  "name": "remark-preset-cozy",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "remark-preset-lint-recommended": "^4.0.1"
+  }
+}
