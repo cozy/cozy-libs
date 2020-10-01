@@ -28,7 +28,7 @@ const documentsSlice = createSlice({
       return {
         completedFromDrive: 0,
         data: Object.keys(action.payload).reduce((acc, fieldId) => {
-          //init files with undefined value
+          // init files with undefined value
           acc[fieldId] = {
             files: Array.from(Array(action.payload[fieldId].count))
           }
@@ -167,7 +167,7 @@ export function fetchDocumentsByCategory(documentTemplate) {
       }
     } catch (error) {
       const docWithRules = creditApplicationTemplate.documents[documentTemplate]
-      //If we had a global error for a category, let's set the error everywhere
+      // If we had a global error for a category, let's set the error everywhere
       for (let i = 0; i < docWithRules.count; i++) {
         dispatch(
           fetchDocumentError({

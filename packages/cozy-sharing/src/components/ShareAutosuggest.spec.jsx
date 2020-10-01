@@ -20,7 +20,7 @@ describe('ShareAutosuggest', () => {
     const inputNode = getByPlaceholderText('myPlaceHolder')
     inputNode.focus()
     expect(onFocus).toHaveBeenCalled()
-    //It should not call onPick if the value is not an email
+    // It should not call onPick if the value is not an email
     fireEvent.change(inputNode, { target: { value: 'quentin@qq' } })
     fireEvent.keyPress(inputNode, { key: 'Enter', keyCode: 13, charCode: 13 })
     expect(onPick).not.toHaveBeenCalled()

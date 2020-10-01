@@ -6,7 +6,7 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import DocumentQualification from './DocumentQualification'
 
-//import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
+// import ExperimentalModal from 'cozy-ui/transpiled/react/Labs/ExperimentalModal'
 import DialogContent from '@material-ui/core/DialogContent'
 
 import ExperimentalDialog, {

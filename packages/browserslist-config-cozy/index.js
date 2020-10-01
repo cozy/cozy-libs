@@ -1,4 +1,4 @@
-/***
+/** *
  * We need to target Android 5 and at least iOS 10 for our mobile apps.
  * We have to target Android 4.4 since Android 5 doesn't exist because Webview and OS
  * version are different since Android 5.

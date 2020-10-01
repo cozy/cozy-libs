@@ -132,12 +132,12 @@ class CozyFile extends Document {
    * @return {String} A filename with the right suffix
    */
   static generateNewFileNameOnConflict(filenameWithoutExtension) {
-    //Check if the string ends by _1
+    // Check if the string ends by _1
     const regex = new RegExp('(_)([0-9]+)$')
     const matches = filenameWithoutExtension.match(regex)
     if (matches) {
       let versionNumber = parseInt(matches[2])
-      //increment versionNumber
+      // increment versionNumber
       versionNumber++
       const newFilenameWithoutExtension = filenameWithoutExtension.replace(
         new RegExp('(_)([0-9]+)$'),
@@ -190,7 +190,7 @@ class CozyFile extends Document {
       const existingFile = await filesCollection.statByPath(path)
       const { id: fileId } = existingFile.data
       if (conflictStrategy === 'erase') {
-        //!TODO Bug Fix. Seems we have to pass a name attribute ?!
+        // !TODO Bug Fix. Seems we have to pass a name attribute ?!
         const resp = await filesCollection.updateFile(file, {
           dirId,
           fileId,
@@ -206,7 +206,7 @@ class CozyFile extends Document {
         })
         const newFileName =
           CozyFile.generateNewFileNameOnConflict(filename) + extension
-        //recall itself with the newFilename.
+        // recall itself with the newFilename.
         return CozyFile.uploadFileWithConflictStrategy(
           newFileName,
           file,

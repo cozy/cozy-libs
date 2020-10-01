@@ -40,15 +40,15 @@ describe('DocumentCategory', () => {
       </MuiCozyTheme>
     )
     expect(asFragment()).toMatchSnapshot()
-    //Click on the item
+    // Click on the item
     fireEvent.click(getByText('Scan.items.test'))
     expect(asFragment()).toMatchSnapshot()
-    //Check if the second item is displayed in the ActionMenu
+    // Check if the second item is displayed in the ActionMenu
     expect(() => getByText('Scan.items.Label2')).not.toThrow()
     await wait(() => getByText('Scan.items.Label2'))
 
     fireEvent.click(getByText('Scan.items.Label2'))
-    //Menu should not be there anymore
+    // Menu should not be there anymore
     expect(queryByText('Scan.items.Label2')).toBeNull()
     fireEvent.click(getByText('Scan.items.test'))
     await wait(() => getByText('Scan.items.Label2'))

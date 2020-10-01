@@ -26,8 +26,8 @@ export const getOrCreateFromArray = async (client, contacts, createContact) => {
         )
 
         if (matchedContact.data.length > 0) {
-          //We take the shortcut that if we have sevaral contacts
-          //with the same address, we take the first one for now
+          // We take the shortcut that if we have sevaral contacts
+          // with the same address, we take the first one for now
           return matchedContact.data[0]
         } else {
           const resp = await createContact({

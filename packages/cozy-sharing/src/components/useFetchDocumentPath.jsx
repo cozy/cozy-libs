@@ -10,7 +10,7 @@ export const useFetchDocumentPath = (client, document) => {
       try {
         const path = await fetchFilesPaths(client, document._type, [document])
         setDocumentPath(path[0])
-        //eslint-disable-next-line
+        // eslint-disable-next-line
       } catch {}
     })()
   }, [client, document])

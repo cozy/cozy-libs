@@ -61,11 +61,11 @@ class AdministrativeProcedure extends Document {
       type: 'file',
       ...rules
     }
-    //Create an index in order to query and sort
+    // Create an index in order to query and sort
     await this.cozyClient
       .collection('io.cozy.files')
       .createIndex(['metadata.datetime', 'metadata.classification'])
-    //Use the index
+    // Use the index
     const files = await this.cozyClient
       .collection('io.cozy.files')
       .find(cozyRules, {
@@ -95,7 +95,7 @@ class AdministrativeProcedure extends Document {
     const { documentsData, personalData, procedureData } = data
     const files = Object.keys(documentsData).map(identifier => {
       return documentsData[identifier].files.map(file => {
-        //TODO Remove this check. it has to be done before
+        // TODO Remove this check. it has to be done before
         if (file)
           return {
             _id: file.id,

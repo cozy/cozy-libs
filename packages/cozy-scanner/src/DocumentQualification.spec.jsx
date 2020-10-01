@@ -32,7 +32,7 @@ describe('DocumentQualification', () => {
           onDescribed={onDescribed}
           onFileNameChanged={onFileNameChanged}
           title={'Edit'}
-          //initialSelected={{ itemId: 1, categoryLabel: 'Label1' }}
+          // initialSelected={{ itemId: 1, categoryLabel: 'Label1' }}
           t={text => text}
         />
       </MuiCozyTheme>

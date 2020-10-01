@@ -23,10 +23,10 @@ const reducer = combineReducers({
 
 // get a directory
 // const FileCollection = client.getStackClient().collection('io.cozy.files')
-//const rootDir = FileCollection.get('io.cozy.files.root-dir')
+// const rootDir = FileCollection.get('io.cozy.files.root-dir')
 
-//console.log(rootDir)
-//console.log(client)
+// console.log(rootDir)
+// console.log(client)
 
 const store = createStore(reducer)
 const LocalizedSharingProvider = withLocales(SharingProvider)

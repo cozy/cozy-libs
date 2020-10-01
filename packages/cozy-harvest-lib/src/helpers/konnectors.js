@@ -273,7 +273,7 @@ export const buildFolderPath = (konnector, account, folders = {}) => {
   )
   // Trim `/` and avoid multiple `/` characters with regexp
   let sanitizedPath = trim(fullPath.replace(/(\/+)/g, '/'), '/')
-  //If the konnector doesn't have any of our base dir, we set it to $administrative
+  // If the konnector doesn't have any of our base dir, we set it to $administrative
   if (!hasBaseDir(sanitizedPath)) {
     sanitizedPath = '$administrative/' + sanitizedPath
   }

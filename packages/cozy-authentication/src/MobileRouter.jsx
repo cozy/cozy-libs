@@ -287,10 +287,10 @@ export class MobileRouter extends Component {
     }
 
     await credentials.saveFromClient(this.props.client)
-    //We need to set the state after all the previous actions
-    //since we can have async task in `onAuthenticated`. Setting
-    //isLoggingIn to true before result in displaying `appRoutes`
-    //too soon in this case
+    // We need to set the state after all the previous actions
+    // since we can have async task in `onAuthenticated`. Setting
+    // isLoggingIn to true before result in displaying `appRoutes`
+    // too soon in this case
     this.setState({ isLoggingIn: false })
   }
 
@@ -315,7 +315,7 @@ export class MobileRouter extends Component {
 
 MobileRouter.defaultProps = {
   onException: e => {
-    console.error('Exception', e) //eslint-disable-line no-console
+    console.error('Exception', e) // eslint-disable-line no-console
   },
 
   logoutPath: '/',

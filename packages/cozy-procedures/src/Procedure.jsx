@@ -17,7 +17,7 @@ class Procedure extends React.Component {
       initializationSuccess,
       fetchBankAccountsStats
     } = this.props
-    //We init our Document model here to be able to use CozyFile or AdministrativeProcedure models where we want
+    // We init our Document model here to be able to use CozyFile or AdministrativeProcedure models where we want
     if (!Document.cozyClient) {
       Document.registerClient(client)
     }
@@ -26,7 +26,7 @@ class Procedure extends React.Component {
     )
 
     initDocuments(get(creditApplicationTemplate, 'documents'))
-    //Since init is done, we tell the app we can start to render thing
+    // Since init is done, we tell the app we can start to render thing
     initializationSuccess()
     fetchMyself(client)
 
