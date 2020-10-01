@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "2.16.2",
+  "version": "2.16.3",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -31,7 +31,7 @@
     "@testing-library/react": "^10.4.9",
     "cozy-bi-auth": "0.0.11",
     "cozy-doctypes": "^1.74.7",
-    "cozy-flags": "^2.3.5",
+    "cozy-flags": "^2.4.0",
     "cozy-keys-lib": "3.1.2",
     "cozy-logger": "1.6.0",
     "date-fns": "^1.30.1",
