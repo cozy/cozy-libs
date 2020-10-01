@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.16.1...cozy-sharing@1.16.2) (2020-10-01)
+
+
+### Bug Fixes
+
+* Lint issue ([aa10617](https://github.com/cozy/cozy-libs/commit/aa10617))
+
+
+
+
+
 ## [1.16.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.16.0...cozy-sharing@1.16.1) (2020-09-15)
 
 **Note:** Version bump only for package cozy-sharing

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.16.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.16.1...cozy-harvest-lib@2.16.2) (2020-10-01)
+
+
+### Bug Fixes
+
+* Lint issue ([aa10617](https://github.com/cozy/cozy-libs/commit/aa10617))
+
+
+
+
+
 ## [2.16.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.16.0...cozy-harvest-lib@2.16.1) (2020-09-29)
 
 

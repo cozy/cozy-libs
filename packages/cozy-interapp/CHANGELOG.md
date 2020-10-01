@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.6](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.5.5...cozy-interapp@0.5.6) (2020-10-01)
+
+
+### Bug Fixes
+
+* Lint issue ([aa10617](https://github.com/cozy/cozy-libs/commit/aa10617))
+
+
+
+
+
 ## 0.5.5 (2020-09-15)
 
 **Note:** Version bump only for package cozy-interapp

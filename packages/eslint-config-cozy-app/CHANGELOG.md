@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@1.6.0...eslint-config-cozy-app@2.0.0) (2020-10-01)
+
+
+### Bug Fixes
+
+* Lint issue ([aa10617](https://github.com/cozy/cozy-libs/commit/aa10617))
+
+
+### Features
+
+* Throw error if comments are not spaced ([6dae942](https://github.com/cozy/cozy-libs/commit/6dae942))
+
+
+### BREAKING CHANGES
+
+* Comments without starting with a
+space will throw an error. To fix them, you should
+run lint --fix
+
+
+
+
+
 # 1.6.0 (2020-09-01)
 
 

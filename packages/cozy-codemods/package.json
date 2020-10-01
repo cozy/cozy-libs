@@ -1,13 +1,13 @@
 {
   "name": "@cozy/codemods",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "main": "src/index.js",
   "license": "MIT",
   "scripts": {
     "test": "jest src"
   },
   "dependencies": {
-    "eslint-config-cozy-app": "^1.6.0"
+    "eslint-config-cozy-app": "^2.0.0"
   },
   "devDependencies": {
     "jest": "24.9.0"

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.74.7](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.6...cozy-doctypes@1.74.7) (2020-10-01)
+
+
+### Bug Fixes
+
+* Lint issue ([aa10617](https://github.com/cozy/cozy-libs/commit/aa10617))
+
+
+
+
+
 ## [1.74.6](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.5...cozy-doctypes@1.74.6) (2020-09-15)
 
 **Note:** Version bump only for package cozy-doctypes
