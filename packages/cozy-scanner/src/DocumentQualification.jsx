@@ -112,12 +112,12 @@ export class DocumentQualification extends Component {
                 placeholder={t('Scan.filename')}
                 value={filename}
                 onChange={event => {
-                  //console.log('event', event)
-                  //If the user write something once, we don't want to rename the file automatically anymore
+                  // console.log('event', event)
+                  // If the user write something once, we don't want to rename the file automatically anymore
                   if (!hasUserWrittenFileName) {
                     this.setState({ hasUserWrittenFileName: true })
                   }
-                  //If we left an empty value, then we reset the behavior
+                  // If we left an empty value, then we reset the behavior
                   if (event.target.value === '') {
                     this.setState({ hasUserWrittenFileName: false })
                   }

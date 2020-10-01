@@ -11,7 +11,7 @@ import {
   terminateOAuth,
   OAUTH_REALTIME_CHANNEL
 } from '../helpers/oauth'
-//TODO use PopUp from cozy-ui
+// TODO use PopUp from cozy-ui
 import Popup from './Popup'
 
 const OAUTH_POPUP_HEIGHT = 800

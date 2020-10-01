@@ -20,6 +20,6 @@ module.exports = {
       }
     ],
     'no-param-reassign': 'warn',
-    'spaced-comment': ['error','always']
+    'spaced-comment': ['error', 'always']
   }
 }

@@ -26,7 +26,7 @@ export const doUpload = async (
         async file => {
           const reader = new FileReader()
           reader.onloadend = async () => {
-            //we get the result of the readAsBuffer in the `result` attr
+            // we get the result of the readAsBuffer in the `result` attr
             try {
               const newFile = await CozyFile.uploadFileWithConflictStrategy(
                 name,
@@ -38,7 +38,7 @@ export const doUpload = async (
               )
               resolve(newFile)
             } catch (error) {
-              console.log('error', error) //eslint-disable-line no-console
+              console.log('error', error) // eslint-disable-line no-console
               reject(error)
             }
           }
@@ -46,8 +46,8 @@ export const doUpload = async (
           reader.readAsArrayBuffer(file)
         },
         err => {
-          //Since this module is pretty recent, let's have this info in sentry if needed
-          console.error('error getting fileentry file!' + err) //eslint-disable-line no-console
+          // Since this module is pretty recent, let's have this info in sentry if needed
+          console.error('error getting fileentry file!' + err) // eslint-disable-line no-console
           reject(err)
         }
       )

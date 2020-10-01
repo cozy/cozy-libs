@@ -59,7 +59,7 @@ class Scanner extends React.Component {
    */
   onFail = message => {
     this.setState({ loadingScreen: false })
-    console.log('failed', message) //eslint-disable-line no-console
+    console.log('failed', message) // eslint-disable-line no-console
   }
 
   onUpload = async (imageURI, qualification, filename = '') => {
@@ -100,7 +100,7 @@ class Scanner extends React.Component {
         ...this.props.pluginConfig
       })
     } catch (e) {
-      console.error('You have to install cordova camera plugin', e) //eslint-disable-line no-console
+      console.error('You have to install cordova camera plugin', e) // eslint-disable-line no-console
     }
   }
 

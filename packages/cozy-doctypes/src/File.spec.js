@@ -336,8 +336,8 @@ describe('File model', () => {
 
     it('should rename the file if there is a conflict', async () => {
       const dirId = 'toto'
-      //first call we return an existing file => conflict
-      //second call, we reject as not found
+      // first call we return an existing file => conflict
+      // second call, we reject as not found
       statByPathSpy
         .mockReturnValueOnce({
           data: {
@@ -364,8 +364,8 @@ describe('File model', () => {
 
     it('should erase the file if there is a conflict', async () => {
       const dirId = 'toto'
-      //first call we return an existing file => conflict
-      //second call, we reject as not found
+      // first call we return an existing file => conflict
+      // second call, we reject as not found
       statByPathSpy.mockReturnValueOnce({
         data: {
           id: 'file_id'

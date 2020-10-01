@@ -92,7 +92,7 @@ const indexSharing = (state = {}, sharing) => {
   return sharedDocs.reduce((byId, id) => {
     const updatedByIdItem = updateByIdItem(byId, id, state => ({
       ...state,
-      //todo index by id instead of having an array
+      // todo index by id instead of having an array
       sharings: Object.values(state.sharings).includes(sharing.id)
         ? [...state.sharings]
         : [...state.sharings, sharing.id]
@@ -208,11 +208,11 @@ const sharings = (state = [], action) => {
     case RECEIVE_SHARINGS:
       return action.data.sharings
     case ADD_SHARING:
-      //be sure that we're not adding the sharing twice
-      //can be the case if we launch the create and
-      //receive the realtime in the same time
-      //TODO Index by index...
-      //eslint-disable-next-line
+      // be sure that we're not adding the sharing twice
+      // can be the case if we launch the create and
+      // receive the realtime in the same time
+      // TODO Index by index...
+      // eslint-disable-next-line
       const filtered_state = state.filter(s => s.id !== action.data.id)
       return [...filtered_state, action.data]
     case UPDATE_SHARING:
@@ -230,12 +230,12 @@ const sharings = (state = [], action) => {
 const sharedPaths = (state = [], action) => {
   switch (action.type) {
     case RECEIVE_PATHS:
-      //!TODO Remove after we solved the sharedPaths bugs
-      //eslint-disable-next-line
+      // !TODO Remove after we solved the sharedPaths bugs
+      // eslint-disable-next-line
       return action.paths
     case ADD_SHARING:
-      //!TODO Remove after we solved the sharedPaths bugs
-      //eslint-disable-next-line
+      // !TODO Remove after we solved the sharedPaths bugs
+      // eslint-disable-next-line
       const newState = [...state, action.path]
       return newState
     case REVOKE_RECIPIENT:
@@ -346,7 +346,7 @@ const getApps = state => state.apps
 
 export const hasSharedParent = (state, documentPath) => {
   if (!state.sharedPaths) {
-    //eslint-disable-next-line
+    // eslint-disable-next-line
     console.log('hasSharedParent should not occur', state, documentPath)
     return false
   }
@@ -355,7 +355,7 @@ export const hasSharedParent = (state, documentPath) => {
 
 export const hasSharedChild = (state, documentPath) => {
   if (!state.sharedPaths) {
-    //eslint-disable-next-line
+    // eslint-disable-next-line
     console.log('hasSharedChild should not occur', state, documentPath)
     return false
   }

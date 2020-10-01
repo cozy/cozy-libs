@@ -92,7 +92,7 @@ class DocumentHolder extends Component {
 DocumentHolder.propTypes = {
   unlinkDocument: PropTypes.func.isRequired,
   categoryId: PropTypes.string.isRequired,
-  //io.cozy.files
+  // io.cozy.files
   document: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired,
   index: PropTypes.number.isRequired

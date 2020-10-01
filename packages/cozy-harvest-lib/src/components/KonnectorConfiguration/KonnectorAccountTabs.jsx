@@ -28,7 +28,7 @@ export const KonnectorAccountTabs = ({
   onAccountDeleted,
   initialActiveTab,
 
-  //TODO rename to onAddAccount
+  // TODO rename to onAddAccount
   addAccount,
   showNewAccountButton
 }) => {

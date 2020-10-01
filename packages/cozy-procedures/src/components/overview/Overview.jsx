@@ -142,7 +142,7 @@ class Overview extends React.Component {
     Object.keys(documentsData).forEach(categoryName => {
       const documentCategory = documentsData[categoryName]
       documentCategory.files.forEach(f => {
-        //!TODO Remove this check. We need to clean datas structure before
+        // !TODO Remove this check. We need to clean datas structure before
         if (f) {
           const identifier = `documents/${f.name}`
           files[identifier] = f.id

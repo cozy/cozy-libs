@@ -53,7 +53,7 @@ export class SelectServer extends Component {
   }
 
   componentDidMount() {
-    //if the cordova plugin is here, then shrink the view on iOS
+    // if the cordova plugin is here, then shrink the view on iOS
     if (window.Keyboard && window.Keyboard.shrinkView) {
       window.Keyboard.shrinkView(true)
     } else {
