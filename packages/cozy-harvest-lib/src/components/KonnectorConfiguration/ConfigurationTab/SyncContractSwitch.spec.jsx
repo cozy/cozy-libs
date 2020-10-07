@@ -4,6 +4,7 @@ import { render, fireEvent, act } from '@testing-library/react'
 import { models } from 'cozy-client'
 
 import { findKonnectorPolicy } from '../../../konnector-policies'
+import { trackerShim } from '../../hoc/tracking'
 
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
@@ -32,6 +33,7 @@ describe('SyncContractSwitch', () => {
     const root = render(
       <DumbSyncContractSwitch
         client={mockClient}
+        tracker={trackerShim}
         accountCol={{ data: account, fetchStatus: 'loaded' }}
         contract={contract}
         t={x => x}

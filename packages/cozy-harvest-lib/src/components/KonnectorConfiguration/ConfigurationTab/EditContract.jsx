@@ -28,6 +28,7 @@ import { findKonnectorPolicy } from '../../../konnector-policies'
 
 import withLocales from '../../hoc/withLocales'
 import { updateContract } from './helpers'
+import { useTracker } from '../../hoc/tracking'
 
 import {
   getAccountLabel,
@@ -80,6 +81,7 @@ const EditContract = props => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const client = useClient()
+  const tracker = useTracker()
 
   const {
     contract,
@@ -122,11 +124,18 @@ const EditContract = props => {
   const handleSubmit = e => {
     e.preventDefault()
     handleSaveContract(contract, { shortLabel, owners })
+    tracker.trackEvent('appliquer')
   }
 
   const handleRequestDeletion = ev => {
     ev.preventDefault()
     setShowDeleteConfirmation(true)
+    tracker.trackEvent('supprimer_compte')
+  }
+
+  const handleCancelDeletion = () => {
+    setShowDeleteConfirmation(false)
+    tracker.trackEvent('annuler')
   }
 
   const handleRemoveContract = async contract => {
@@ -134,6 +143,7 @@ const EditContract = props => {
 
     try {
       await client.destroy(contract)
+      tracker.trackEvent('confirmer_suppression')
 
       if (onAfterRemove) {
         onAfterRemove()
@@ -145,6 +155,11 @@ const EditContract = props => {
     } finally {
       setDeleting(false)
     }
+  }
+
+  const handleChangeOwners = owners => {
+    setOwners(owners)
+    tracker.trackEvent('changement_titulaire')
   }
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')
@@ -177,7 +192,7 @@ const EditContract = props => {
               addButtonLabel={t('contractForm.addOwnerBtn')}
               removeButtonLabel={t('contractForm.removeOwnerBtn')}
               variant={fieldVariant}
-              onChange={owners => setOwners(owners)}
+              onChange={handleChangeOwners}
               placeholder={t('contractForm.ownerPlaceholder')}
             />
             <Field
@@ -242,7 +257,7 @@ const EditContract = props => {
           }
           secondaryText={t('contractForm.cancel')}
           onConfirm={() => handleRemoveContract(contract)}
-          onCancel={() => setShowDeleteConfirmation(false)}
+          onCancel={() => handleCancelDeletion()}
         />
       ) : null}
     </Dialog>
