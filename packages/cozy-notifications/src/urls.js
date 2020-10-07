@@ -12,8 +12,12 @@ const getUniversalLinkDomain = cozyUrl => {
   }
 }
 
-export const generateWebLink = ({ cozyUrl, nativePath, slug }) => {
-  nativePath = ensureFirstSlash(nativePath)
+export const generateWebLink = ({
+  cozyUrl,
+  nativePath: nativePathArg,
+  slug
+}) => {
+  const nativePath = ensureFirstSlash(nativePathArg)
   const url = new URL(cozyUrl)
   url.host = url.host
     .split('.')
