@@ -16,6 +16,7 @@ import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
 import { withMountPointPushHistory } from './MountPointContext'
 import logger from '../logger'
+import { withTracker } from './hoc/tracking'
 
 export class EditAccountModal extends Component {
   constructor(props) {
@@ -46,6 +47,8 @@ export class EditAccountModal extends Component {
     } else {
       logger.warn('No matching trigger for account', accountId)
     }
+
+    this.props.trackPage('harvest:comptes:details')
   }
   /**
    * TODO use queryConnect to know if we're fecthing or not
@@ -137,5 +140,6 @@ EditAccountModal.propTypes = {
 
 export default flow(
   withClient,
-  withMountPointPushHistory
+  withMountPointPushHistory,
+  withTracker
 )(EditAccountModal)
