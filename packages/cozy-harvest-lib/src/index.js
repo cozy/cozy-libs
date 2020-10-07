@@ -41,3 +41,4 @@ export {
   default as updateAccountsFromCipher
 } from './services/updateAccountsFromCipher'
 export { default as deleteAccounts } from './services/deleteAccounts'
+export { TrackingContext } from './components/hoc/tracking'
