@@ -22,7 +22,7 @@ class DepSameVersion {
         versions.slice(1).filter(x => x !== versions[0]).length > 0
       if (notSameVersion) {
         yield {
-          severity: 'warning',
+          severity: 'warn',
           type: 'DepSameVersion',
           message: `Different versions for ${repoDeps
             .map(r => `${r.name}@${r.version}`)
