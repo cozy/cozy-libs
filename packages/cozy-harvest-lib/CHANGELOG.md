@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.16.4...cozy-harvest-lib@2.17.0) (2020-10-07)
+
+
+### Bug Fixes
+
+* Solve warning for modal aria-label ([eb70908](https://github.com/cozy/cozy-libs/commit/eb70908))
+
+
+### Features
+
+* Export TrackingContext ([dc17fd3](https://github.com/cozy/cozy-libs/commit/dc17fd3))
+* Track events in harvest (only after user consent) ([57151de](https://github.com/cozy/cozy-libs/commit/57151de))
+* Track page edit account modal ([9f5d13a](https://github.com/cozy/cozy-libs/commit/9f5d13a))
+* Track pages inside harvest ([0060103](https://github.com/cozy/cozy-libs/commit/0060103))
+
+
+
+
+
 ## [2.16.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.16.3...cozy-harvest-lib@2.16.4) (2020-10-05)
 
 

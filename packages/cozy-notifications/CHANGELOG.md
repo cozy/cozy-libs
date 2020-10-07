@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.9.1 (2020-10-07)
+
+**Note:** Version bump only for package cozy-notifications
+
+
+
+
+
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.8.0...cozy-notifications@0.9.0) (2020-08-21)
 
 
