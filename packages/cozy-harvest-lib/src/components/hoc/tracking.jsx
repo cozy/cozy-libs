@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react'
+import { createContext, useContext, useEffect } from 'react'
 
 // When the tracking context is not available, this object is passed
 // so that downstream components do not have to check for existence
@@ -13,6 +13,13 @@ export const trackerShim = {
 export const TrackingContext = createContext(trackerShim)
 
 export const useTracker = () => useContext(TrackingContext)
+
+export const useTrackPage = pageName => {
+  const tracker = useTracker()
+  useEffect(() => {
+    tracker.trackPage(pageName)
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+}
 
 export const withTracker = Component => props => {
   return (

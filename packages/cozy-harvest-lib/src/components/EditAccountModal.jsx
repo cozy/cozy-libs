@@ -48,7 +48,7 @@ export class EditAccountModal extends Component {
       logger.warn('No matching trigger for account', accountId)
     }
 
-    this.props.trackPage('harvest:comptes:details')
+    this.props.trackPage('editer_identifiants')
   }
   /**
    * TODO use queryConnect to know if we're fecthing or not

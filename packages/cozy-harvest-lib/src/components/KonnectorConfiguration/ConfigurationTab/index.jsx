@@ -22,6 +22,7 @@ import Dialog, {
   DialogContent,
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/Dialog'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
@@ -30,11 +31,10 @@ import flag from 'cozy-flags'
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { deleteAccount } from '../../../connections/accounts'
+import { useTrackPage } from '../../hoc/tracking'
 
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
-
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
@@ -81,6 +81,9 @@ const ConfigurationTab = ({
     error,
     flowState
   )
+
+  useTrackPage('configuration')
+
   const hasLoginError = error && error.isLoginError()
 
   const handleDeleteAccount = async () => {

@@ -28,7 +28,7 @@ import { findKonnectorPolicy } from '../../../konnector-policies'
 
 import withLocales from '../../hoc/withLocales'
 import { updateContract } from './helpers'
-import { useTracker } from '../../hoc/tracking'
+import { useTracker, useTrackPage } from '../../hoc/tracking'
 
 import {
   getAccountLabel,
@@ -95,6 +95,8 @@ const EditContract = props => {
 
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const [deleting, setDeleting] = useState(false)
+
+  useTrackPage('editer_contrat')
 
   const handleSaveContract = async (contract, fields) => {
     await updateContract(client, contract, {
