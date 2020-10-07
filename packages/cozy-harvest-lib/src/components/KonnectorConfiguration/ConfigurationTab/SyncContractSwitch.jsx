@@ -1,15 +1,14 @@
 import React from 'react'
-import { withClient, queryConnect, models } from 'cozy-client'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-
 import compose from 'lodash/flowRight'
 
+import { withClient, queryConnect, models } from 'cozy-client'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
-
 import { findKonnectorPolicy } from '../../../konnector-policies'
+import { withTracker } from '../../hoc/tracking'
 
 const { account: accountModel } = models
 
@@ -58,7 +57,7 @@ export class DumbSyncContractSwitch extends React.Component {
 
   async handleSetSyncStatus(ev) {
     ev.preventDefault()
-    const { client, konnector, contract, accountCol } = this.props
+    const { client, konnector, contract, accountCol, tracker } = this.props
     const { data: account } = accountCol
     const { syncStatus } = this.state
     const newSyncStatus = !syncStatus
@@ -78,6 +77,7 @@ export class DumbSyncContractSwitch extends React.Component {
         newSyncStatus
       )
       await client.save(updatedAccount)
+      tracker.trackEvent(`synchroniser_compte-${newSyncStatus ? 'on' : 'off'}`)
     } catch (e) {
       // eslint-disable-next-line no-console
       console.warn('Could not set sync status', e)
@@ -128,7 +128,8 @@ const SyncContractSwitch = compose(
   translate(),
   queryConnect({
     accountCol: props => createAccountQuerySpec(props.accountId)
-  })
+  }),
+  withTracker
 )(DumbSyncContractSwitch)
 
 export default SyncContractSwitch

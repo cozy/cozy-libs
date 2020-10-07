@@ -49,6 +49,34 @@ import { withLocales } from 'cozy-harvest-lib'
 const MyTriggerManager = withLocales(TriggerManager)
 ```
 
+# Tracking
+
+Harvest components come with tracking calls (that would be effective only if the
+user has consented to tracking). Your app must provide the correct tracking
+context via the `TrackingContext` component.
+
+Here, we pass a tracker to harvest that prefixes the page names sent by harvest
+with "app-harvest:".
+
+```
+import { useMemo } from 'react'
+import { KonnectorModal, TrackingContext } from 'cozy-harvest-lib'
+
+export default () => {
+  const appTracker = useTracker() // tracker from the app
+  const trackerForHarvest = useMemo(() => {
+    const trackPage = pageName => tracker.trackPage(`app-harvest:${pageName}`)
+    const trackEvent = event => tracker.trackEvent(event)
+    return { trackPage, trackEvent }
+  }, [appTracker])
+  return <TrackingContext.Provider value={trackerForHarvest}>
+    <KonnectorModal />
+  </TrackingContext.Provider>
+}
+```
+
+If the app does not provide a tracking context, tracking calls will do nothing.
+
 # Getting Started
 
 For now it is possible to instanciate a `<TriggerManager />` which will allow to edit an account and launch the trigger.

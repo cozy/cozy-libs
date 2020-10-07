@@ -17,6 +17,7 @@ import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
 import tabSpecs from '../tabSpecs'
+import { useTrackPage } from '../../../components/hoc/tracking'
 
 export const DataTab = ({ konnector, trigger, client, flow }) => {
   const { isMobile } = useBreakpoints()
@@ -24,6 +25,8 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
   const { error } = flowState
   const hasLoginError = hasError && error.isLoginError()
   const hasError = !!error
+
+  useTrackPage('donnees')
 
   const shouldDisplayError = tabSpecs.data.errorShouldBeDisplayed(
     error,
