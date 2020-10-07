@@ -98,6 +98,7 @@ export class EditAccountModal extends Component {
         dismissAction={this.redirectToAccount}
         mobileFullscreen
         size="small"
+        aria-label={konnector.name}
       >
         <ModalHeader
           title={
