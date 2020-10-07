@@ -1,11 +1,11 @@
-import { createContext, useContext, useEffect } from 'react'
+import React, { createContext, useContext, useEffect } from 'react'
 
 // When the tracking context is not available, this object is passed
 // so that downstream components do not have to check for existence
 // of the tracker
 export const trackerShim = {
-  trackPage: pageName => {},
-  trackEvent: event => {}
+  trackPage: () => {},
+  trackEvent: () => {}
 }
 
 // This should be used by apps wanting to track actions inside
@@ -21,12 +21,17 @@ export const useTrackPage = pageName => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 }
 
-export const withTracker = Component => props => {
-  return (
-    <TrackingContext.Consumer>
-      {({ trackPage, trackEvent }) => (
-        <Component {...props} trackPage={trackPage} trackEvent={trackEvent} />
-      )}
-    </TrackingContext.Consumer>
-  )
+export const withTracker = Component => {
+  const Wrapped = props => {
+    return (
+      <TrackingContext.Consumer>
+        {({ trackPage, trackEvent }) => (
+          <Component {...props} trackPage={trackPage} trackEvent={trackEvent} />
+        )}
+      </TrackingContext.Consumer>
+    )
+  }
+  Wrapped.displayName = `withTracker(${Component.name ||
+    Component.displayName})`
+  return Wrapped
 }
