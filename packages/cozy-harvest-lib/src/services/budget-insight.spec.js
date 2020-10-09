@@ -60,7 +60,8 @@ const account = {
   _id: '1337',
   auth: {
     login: '80546578',
-    secret: 'secretsecret'
+    secret: 'secretsecret',
+    bankId: TEST_BANK_COZY_ID
   }
 }
 

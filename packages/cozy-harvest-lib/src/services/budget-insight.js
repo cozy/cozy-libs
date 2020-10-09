@@ -99,17 +99,16 @@ export const isBudgetInsightConnector = konnector => {
   )
 }
 
-const createTemporaryToken = async ({ client, account, konnector }) => {
+const createTemporaryToken = async ({ client, bankId, konnector }) => {
   assert(
-    account && account._id,
-    'createTemporaryToken: Account without id passed to createTemporaryToken'
+    bankId,
+    'createTemporaryToken: no bankId passed to createTemporaryToken'
   )
   assert(konnector.slug, 'createTemporaryToken: No konnector slug')
   const jobResponse = await client.stackClient.jobs.create('konnector', {
     mode: 'getTemporaryToken',
     konnector: konnector.slug,
-    account: account._id,
-    bankId: account.auth.bankId
+    bankId
   })
   const event = await waitForRealtimeEvent(
     client,
@@ -156,7 +155,7 @@ export const createOrUpdateBIConnection = async ({
   logger.info('Creating temporary token...')
 
   const tempToken = await createTemporaryToken({
-    account,
+    bankId: account.auth.bankId,
     client,
     konnector
   })
@@ -291,7 +290,7 @@ export const onBIAccountCreation = async ({
 
   account = await flow.saveAccount(setBIConnectionId(account, biConnection.id))
 
-  // At this point, we can be in two fa request stat
+  // At this point, we can be in two fa request state
   await finishConnection({
     account,
     biConnection,
@@ -326,7 +325,7 @@ export const setSync = async ({
   syncStatus
 }) => {
   const temporaryToken = await createTemporaryToken({
-    account,
+    bankId: account.auth.bankId,
     client,
     konnector
   })
