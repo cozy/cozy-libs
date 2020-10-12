@@ -100,7 +100,8 @@ export const getOAuthUrl = ({
   oAuthStateKey,
   oAuthConf,
   nonce,
-  redirectSlug
+  redirectSlug,
+  moreParams
 }) => {
   let oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?state=${oAuthStateKey}&nonce=${nonce}`
   if (
@@ -116,6 +117,13 @@ export const getOAuthUrl = ({
   if (redirectSlug) {
     oAuthUrl += `&slug=${redirectSlug}`
   }
+
+  if (moreParams) {
+    for (const key in moreParams) {
+      oAuthUrl += `&${key}=${moreParams[key]}`
+    }
+  }
+
   return oAuthUrl
 }
 
@@ -129,7 +137,7 @@ export const getOAuthUrl = ({
  * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack
  * OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
-export const prepareOAuth = (client, konnector, redirectSlug) => {
+export const prepareOAuth = (client, konnector, redirectSlug, moreParams) => {
   const { oauth } = konnector
   const accountType = konnectors.getAccountType(konnector)
 
@@ -148,7 +156,8 @@ export const prepareOAuth = (client, konnector, redirectSlug) => {
     oAuthStateKey,
     oAuthConf: oauth,
     nonce: Date.now(),
-    redirectSlug
+    redirectSlug,
+    moreParams
   })
 
   return { oAuthStateKey, oAuthUrl }

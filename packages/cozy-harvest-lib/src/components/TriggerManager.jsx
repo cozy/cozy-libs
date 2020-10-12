@@ -97,16 +97,35 @@ export class DumbTriggerManager extends Component {
    * OAuth Form success handler. OAuthForm retrieves an account id created by the
    * cozy stack
    * @param  {string}  accountId
+   * @param  {integer} bankId
    */
-  async handleOAuthAccountId(accountId) {
+  async handleOAuthAccountId(accountId, bankId) {
     const { client, flow, konnector, t } = this.props
-    const oAuthAccount = await fetchAccount(client, accountId)
-    flow.ensureTriggerAndLaunch(client, {
-      account: oAuthAccount,
-      konnector: konnector,
-      trigger: flow.trigger,
-      t: t
-    })
+    let oAuthAccount = await fetchAccount(client, accountId)
+
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+
+    let foundWebauthConnection = false
+    if (konnectorPolicy.handleWebauthAccount) {
+      foundWebauthConnection = await konnectorPolicy.handleWebauthAccount({
+        account: oAuthAccount,
+        bankId,
+        flow,
+        konnector,
+        client,
+        t
+      })
+    }
+
+    // for "normal" OAuth connectors
+    if (!foundWebauthConnection) {
+      flow.ensureTriggerAndLaunch(client, {
+        account: oAuthAccount,
+        konnector: konnector,
+        trigger: flow.trigger,
+        t
+      })
+    }
   }
 
   /**
@@ -275,7 +294,8 @@ export class DumbTriggerManager extends Component {
       onVaultDismiss,
       vaultClosable,
       flow,
-      flowState
+      flowState,
+      client
     } = this.props
 
     const submitting = flowState.running
@@ -299,6 +319,7 @@ export class DumbTriggerManager extends Component {
     if (oauth) {
       return (
         <OAuthForm
+          client={client}
           flow={flow}
           account={account}
           konnector={konnector}

@@ -2,7 +2,9 @@ import CozyClient from 'cozy-client'
 import {
   createOrUpdateBIConnection,
   onBIAccountCreation,
-  getBIConfigForCozyURL
+  getBIConfigForCozyURL,
+  fetchMoreOAuthUrlParams,
+  handleWebauthAccount
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
@@ -294,6 +296,81 @@ describe('createOrUpdateBIConnection', () => {
             connId: 'created-bi-connection-id'
           }
         }
+      }
+    })
+  })
+})
+
+describe('fetchMoreOAuthUrlParams', () => {
+  const setup = () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            code: 'bi-temporary-access-token-121212'
+          }
+        }
+      }
+    })
+
+    return { client }
+  }
+  it('should create a temporary token', async () => {
+    const { client } = setup()
+    const konnector = {
+      slug: 'revolut',
+      parameters: {
+        bankId: TEST_BANK_COZY_ID
+      }
+    }
+
+    const onSuccess = ({ id_connector, token }) => {
+      expect(token).toEqual('bi-temporary-access-token-121212')
+      expect(id_connector).toEqual(TEST_BANK_BI_ID)
+    }
+
+    await fetchMoreOAuthUrlParams({ client, konnector, onSuccess })
+  })
+})
+
+describe('handleWebauthAccount', () => {
+  it('should handle webauth if any connection is found in the account', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    const flow = new ConnectionFlow(client, { konnector, account })
+    flow.handleFormSubmit = jest.fn()
+    flow.saveAccount = async account => account
+    const account = { oauth: { query: { id_connection: ['12'] } } }
+    const konnector = {}
+    const t = jest.fn()
+    await handleWebauthAccount({
+      account,
+      bankId: 12,
+      flow,
+      client,
+      konnector: {},
+      t
+    })
+    expect(flow.handleFormSubmit).toHaveBeenCalledWith({
+      client,
+      konnector,
+      t,
+      account: {
+        ...account,
+        ...{ auth: { bankId: 12 } },
+        ...{ data: { auth: { bi: { connId: 12 } } } }
       }
     })
   })
