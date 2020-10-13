@@ -4,7 +4,8 @@ import {
   mergeAuth,
   updateTwoFaCode,
   resetState,
-  getVaultCipherId
+  getVaultCipherId,
+  setSessionResetIfNecessary
 } from 'helpers/accounts'
 
 const fixtures = {
@@ -93,6 +94,34 @@ describe('Accounts Helper', () => {
       ).toEqual({
         ...fixtures.account,
         state: null
+      })
+    })
+  })
+
+  describe('setSessionResetIfNecessary', () => {
+    it('should set session reset when password is changed', () => {
+      expect(
+        setSessionResetIfNecessary(
+          {
+            ...fixtures.account,
+            state: 'TWOFA_NEEDED'
+          },
+          { password: 'newpassword' }
+        )
+      ).toEqual({
+        ...fixtures.account,
+        state: 'RESET_SESSION'
+      })
+    })
+    it('should not fail when no changed field', () => {
+      expect(
+        setSessionResetIfNecessary({
+          ...fixtures.account,
+          state: 'TWOFA_NEEDED'
+        })
+      ).toEqual({
+        ...fixtures.account,
+        state: 'TWOFA_NEEDED'
       })
     })
   })
