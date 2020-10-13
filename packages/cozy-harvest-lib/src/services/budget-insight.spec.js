@@ -3,7 +3,7 @@ import {
   createOrUpdateBIConnection,
   onBIAccountCreation,
   getBIConfigForCozyURL,
-  fetchMoreOAuthUrlParams,
+  fetchExtraOAuthUrlParams,
   handleWebauthAccount
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
@@ -301,7 +301,7 @@ describe('createOrUpdateBIConnection', () => {
   })
 })
 
-describe('fetchMoreOAuthUrlParams', () => {
+describe('fetchExtraOAuthUrlParams', () => {
   const setup = () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
@@ -340,7 +340,7 @@ describe('fetchMoreOAuthUrlParams', () => {
       expect(id_connector).toEqual(TEST_BANK_BI_ID)
     }
 
-    await fetchMoreOAuthUrlParams({ client, konnector, onSuccess })
+    await fetchExtraOAuthUrlParams({ client, konnector, onSuccess })
   })
 })
 

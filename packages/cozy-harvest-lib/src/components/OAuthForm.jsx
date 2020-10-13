@@ -19,7 +19,7 @@ export class OAuthForm extends PureComponent {
     this.handleAccountId = this.handleAccountId.bind(this)
     this.handleConnect = this.handleConnect.bind(this)
     this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
-    this.handleMoreParams = this.handleMoreParams.bind(this)
+    this.handleExtraParams = this.handleExtraParams.bind(this)
     this.state = {
       initialValues: null,
       showingOAuthModal: false
@@ -32,26 +32,26 @@ export class OAuthForm extends PureComponent {
 
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
-    if (konnectorPolicy.fetchMoreOAuthUrlParams) {
-      this.setState({ needMoreParams: true })
-      konnectorPolicy.fetchMoreOAuthUrlParams({
-        flow,
-        konnector,
-        client,
-        onSuccess: this.handleMoreParams
-      })
+    if (konnectorPolicy.fetchExtraOAuthUrlParams) {
+      this.setState({ needExtraParams: true })
+      konnectorPolicy
+        .fetchExtraOAuthUrlParams({
+          flow,
+          konnector,
+          client
+        })
+        .then(this.handleExtraParams)
     }
   }
 
-  handleMoreParams(moreParams) {
-    this.setState({ moreParams: moreParams })
+  handleExtraParams(extraParams) {
+    this.setState({ extraParams: extraParams })
   }
 
   handleAccountId(accountId) {
     const { onSuccess } = this.props
     this.hideOAuthWindow()
-    if (typeof onSuccess === 'function')
-      onSuccess(accountId, get(this.state, 'moreParams.id_connector'))
+    if (typeof onSuccess === 'function') onSuccess(accountId)
   }
 
   handleConnect() {
@@ -75,8 +75,8 @@ export class OAuthForm extends PureComponent {
     const {
       initialValues,
       showOAuthWindow,
-      needMoreParams,
-      moreParams
+      needExtraParams,
+      extraParams
     } = this.state
     const isBusy = showOAuthWindow === true || flowState.running
 
@@ -90,9 +90,9 @@ export class OAuthForm extends PureComponent {
           label={t('oauth.connect.label')}
           onClick={this.handleConnect}
         />
-        {showOAuthWindow && (!needMoreParams || moreParams) && (
+        {showOAuthWindow && (!needExtraParams || extraParams) && (
           <OAuthWindow
-            moreParams={moreParams}
+            extraParams={extraParams}
             konnector={konnector}
             onSuccess={this.handleAccountId}
             onCancel={this.handleOAuthCancel}

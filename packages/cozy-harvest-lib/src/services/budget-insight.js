@@ -398,14 +398,14 @@ export const fetchMoreOAuthUrlParams = async ({
 }) => {
   const cozyUrl = client.stackClient.uri
   const config = getBIConfigForCozyURL(cozyUrl)
-  const id_connector = getMappingLinxoBI(config)[konnector.parameters.bankId].id
+  const id_connector = getBankId({ client, konnector })
   const token = await createTemporaryToken({
     client,
     bankId: id_connector,
     konnector
   })
 
-  onSuccess({ id_connector, token })
+  return { id_connector, token }
 }
 
 export const konnectorPolicy = {
@@ -414,7 +414,7 @@ export const konnectorPolicy = {
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
   sendAdditionalInformation: sendAdditionalInformation,
-  fetchMoreOAuthUrlParams: fetchMoreOAuthUrlParams,
+  fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   getAdditionalInformationNeeded,
   handleWebauthAccount,
   setSync

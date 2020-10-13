@@ -93,6 +93,7 @@ export const handleOAuthResponse = (options = {}) => {
  * @param  {Object} oAuthConf connector manifest oauth configuration
  * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
  * @param  {string} nonce unique nonce string
+ * @param  {Object} extraParams some extra parameters to add to the query string
  */
 export const getOAuthUrl = ({
   cozyUrl,
@@ -101,7 +102,7 @@ export const getOAuthUrl = ({
   oAuthConf,
   nonce,
   redirectSlug,
-  moreParams
+  extraParams
 }) => {
   let oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?state=${oAuthStateKey}&nonce=${nonce}`
   if (
@@ -118,9 +119,9 @@ export const getOAuthUrl = ({
     oAuthUrl += `&slug=${redirectSlug}`
   }
 
-  if (moreParams) {
-    for (const key in moreParams) {
-      oAuthUrl += `&${key}=${moreParams[key]}`
+  if (extraParams) {
+    for (const key in extraParams) {
+      oAuthUrl += `&${key}=${extraParams[key]}`
     }
   }
 
@@ -137,7 +138,7 @@ export const getOAuthUrl = ({
  * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack
  * OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
-export const prepareOAuth = (client, konnector, redirectSlug, moreParams) => {
+export const prepareOAuth = (client, konnector, redirectSlug, extraParams) => {
   const { oauth } = konnector
   const accountType = konnectors.getAccountType(konnector)
 
@@ -157,7 +158,7 @@ export const prepareOAuth = (client, konnector, redirectSlug, moreParams) => {
     oAuthConf: oauth,
     nonce: Date.now(),
     redirectSlug,
-    moreParams
+    extraParams
   })
 
   return { oAuthStateKey, oAuthUrl }

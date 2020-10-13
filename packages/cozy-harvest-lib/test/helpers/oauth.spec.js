@@ -63,11 +63,11 @@ describe('Oauth helper', () => {
         'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&slug=drive'
       )
     })
-    it('should use moreParams if present', () => {
+    it('should use extraParams if present', () => {
       const url = getOAuthUrl({
         ...defaultConf,
         oAuthConf: {},
-        moreParams: {
+        extraParams: {
           token: 'thetoken',
           id_connector: 40
         }
