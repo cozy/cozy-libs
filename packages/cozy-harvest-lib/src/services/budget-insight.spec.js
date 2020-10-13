@@ -335,12 +335,12 @@ describe('fetchExtraOAuthUrlParams', () => {
       }
     }
 
-    const onSuccess = ({ id_connector, token }) => {
-      expect(token).toEqual('bi-temporary-access-token-121212')
-      expect(id_connector).toEqual(TEST_BANK_BI_ID)
-    }
-
-    await fetchExtraOAuthUrlParams({ client, konnector, onSuccess })
+    const { id_connector, token } = await fetchExtraOAuthUrlParams({
+      client,
+      konnector
+    })
+    expect(token).toEqual('bi-temporary-access-token-121212')
+    expect(id_connector).toEqual(TEST_BANK_BI_ID)
   })
 })
 
@@ -368,7 +368,7 @@ describe('handleOAuthAccount', () => {
       t,
       account: {
         ...account,
-        ...{ auth: { bankId: TEST_BANK_BI_ID } },
+        ...{ auth: { bankId: TEST_BANK_COZY_ID } },
         ...{ data: { auth: { bi: { connId: 12 } } } }
       }
     })
