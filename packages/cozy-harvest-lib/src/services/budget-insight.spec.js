@@ -4,7 +4,7 @@ import {
   onBIAccountCreation,
   getBIConfigForCozyURL,
   fetchExtraOAuthUrlParams,
-  handleWebauthAccount
+  handleOAuthAccount
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
@@ -344,7 +344,7 @@ describe('fetchExtraOAuthUrlParams', () => {
   })
 })
 
-describe('handleWebauthAccount', () => {
+describe('handleOAuthAccount', () => {
   it('should handle webauth if any connection is found in the account', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
@@ -353,14 +353,13 @@ describe('handleWebauthAccount', () => {
     flow.handleFormSubmit = jest.fn()
     flow.saveAccount = async account => account
     const account = { oauth: { query: { id_connection: ['12'] } } }
-    const konnector = {}
+    const konnector = { parameters: { bankId: TEST_BANK_COZY_ID } }
     const t = jest.fn()
-    await handleWebauthAccount({
+    await handleOAuthAccount({
       account,
-      bankId: 12,
       flow,
       client,
-      konnector: {},
+      konnector: { parameters: { bankId: TEST_BANK_COZY_ID } },
       t
     })
     expect(flow.handleFormSubmit).toHaveBeenCalledWith({
@@ -369,7 +368,7 @@ describe('handleWebauthAccount', () => {
       t,
       account: {
         ...account,
-        ...{ auth: { bankId: 12 } },
+        ...{ auth: { bankId: TEST_BANK_BI_ID } },
         ...{ data: { auth: { bi: { connId: 12 } } } }
       }
     })

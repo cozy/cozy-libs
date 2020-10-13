@@ -5,7 +5,6 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import OAuthWindow from './OAuthWindow'
 import compose from 'lodash/flowRight'
-import get from 'lodash/get'
 import withConnectionFlow from '../models/withConnectionFlow'
 import { findKonnectorPolicy } from '../konnector-policies'
 
