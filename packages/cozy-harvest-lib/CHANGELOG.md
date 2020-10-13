@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.17.0...cozy-harvest-lib@2.18.0) (2020-10-13)
+
+
+### Bug Fixes
+
+* **Harvest:** Rename moreParams to extraParams ([2c5ea04](https://github.com/cozy/cozy-libs/commit/2c5ea04))
+
+
+### Features
+
+* **Harvest:** Add some unit tests ([522723f](https://github.com/cozy/cozy-libs/commit/522723f))
+* **Harvest:** CreateTemporarToken does not need the account ([d9dfd7a](https://github.com/cozy/cozy-libs/commit/d9dfd7a))
+* **Harvest:** Handle bi webauth connectors ([9f71f8c](https://github.com/cozy/cozy-libs/commit/9f71f8c))
+* **Harvest:** Upgrade cozy-bi-auth ([87b0022](https://github.com/cozy/cozy-libs/commit/87b0022))
+
+
+
+
+
 # [2.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.16.4...cozy-harvest-lib@2.17.0) (2020-10-07)
 
 
