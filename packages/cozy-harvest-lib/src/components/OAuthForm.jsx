@@ -6,6 +6,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import OAuthWindow from './OAuthWindow'
 import compose from 'lodash/flowRight'
 import withConnectionFlow from '../models/withConnectionFlow'
+import { findKonnectorPolicy } from '../konnector-policies'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -17,6 +18,7 @@ export class OAuthForm extends PureComponent {
     this.handleAccountId = this.handleAccountId.bind(this)
     this.handleConnect = this.handleConnect.bind(this)
     this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
+    this.handleExtraParams = this.handleExtraParams.bind(this)
     this.state = {
       initialValues: null,
       showingOAuthModal: false
@@ -24,8 +26,25 @@ export class OAuthForm extends PureComponent {
   }
 
   componentDidMount() {
-    const { account } = this.props
+    const { account, konnector, flow, client } = this.props
     this.setState({ initialValues: account ? account.oauth : null })
+
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+
+    if (konnectorPolicy.fetchExtraOAuthUrlParams) {
+      this.setState({ needExtraParams: true })
+      konnectorPolicy
+        .fetchExtraOAuthUrlParams({
+          flow,
+          konnector,
+          client
+        })
+        .then(this.handleExtraParams)
+    }
+  }
+
+  handleExtraParams(extraParams) {
+    this.setState({ extraParams: extraParams })
   }
 
   handleAccountId(accountId) {
@@ -52,7 +71,12 @@ export class OAuthForm extends PureComponent {
 
   render() {
     const { konnector, t, flowState } = this.props
-    const { initialValues, showOAuthWindow } = this.state
+    const {
+      initialValues,
+      showOAuthWindow,
+      needExtraParams,
+      extraParams
+    } = this.state
     const isBusy = showOAuthWindow === true || flowState.running
 
     return initialValues ? null : (
@@ -65,8 +89,9 @@ export class OAuthForm extends PureComponent {
           label={t('oauth.connect.label')}
           onClick={this.handleConnect}
         />
-        {showOAuthWindow && (
+        {showOAuthWindow && (!needExtraParams || extraParams) && (
           <OAuthWindow
+            extraParams={extraParams}
             konnector={konnector}
             onSuccess={this.handleAccountId}
             onCancel={this.handleOAuthCancel}

@@ -192,7 +192,7 @@ export const resetState = account => ({
  * @param  {object} account   io.cozy.accounts document
  * @return {object}           io.cozy.accounts updated document
  */
-export const setSessionResetIfNecessary = (account, changedFields) => {
+export const setSessionResetIfNecessary = (account, changedFields = {}) => {
   const isPasswordChanged =
     !!account && !!(changedFields.password || changedFields.passphrase)
   return isPasswordChanged

@@ -100,13 +100,30 @@ export class DumbTriggerManager extends Component {
    */
   async handleOAuthAccountId(accountId) {
     const { client, flow, konnector, t } = this.props
-    const oAuthAccount = await fetchAccount(client, accountId)
-    flow.ensureTriggerAndLaunch(client, {
-      account: oAuthAccount,
-      konnector: konnector,
-      trigger: flow.trigger,
-      t: t
-    })
+    let oAuthAccount = await fetchAccount(client, accountId)
+
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+
+    let foundOAuthConnection = false
+    if (konnectorPolicy.handleOAuthAccount) {
+      foundOAuthConnection = await konnectorPolicy.handleOAuthAccount({
+        account: oAuthAccount,
+        flow,
+        konnector,
+        client,
+        t
+      })
+    }
+
+    // for "normal" OAuth connectors
+    if (!foundOAuthConnection) {
+      flow.ensureTriggerAndLaunch(client, {
+        account: oAuthAccount,
+        konnector: konnector,
+        trigger: flow.trigger,
+        t
+      })
+    }
   }
 
   /**
@@ -275,7 +292,8 @@ export class DumbTriggerManager extends Component {
       onVaultDismiss,
       vaultClosable,
       flow,
-      flowState
+      flowState,
+      client
     } = this.props
 
     const submitting = flowState.running
@@ -299,6 +317,7 @@ export class DumbTriggerManager extends Component {
     if (oauth) {
       return (
         <OAuthForm
+          client={client}
           flow={flow}
           account={account}
           konnector={konnector}

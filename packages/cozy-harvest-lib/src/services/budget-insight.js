@@ -18,7 +18,7 @@ import {
   setBIConnectionSyncStatus
 } from './bi-http'
 import assert from '../assert'
-import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
+import { mkConnAuth, biErrorMap, getMappingLinxoBI } from 'cozy-bi-auth'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
@@ -99,17 +99,16 @@ export const isBudgetInsightConnector = konnector => {
   )
 }
 
-const createTemporaryToken = async ({ client, account, konnector }) => {
+const createTemporaryToken = async ({ client, bankId, konnector }) => {
   assert(
-    account && account._id,
-    'createTemporaryToken: Account without id passed to createTemporaryToken'
+    bankId,
+    'createTemporaryToken: no bankId passed to createTemporaryToken'
   )
   assert(konnector.slug, 'createTemporaryToken: No konnector slug')
   const jobResponse = await client.stackClient.jobs.create('konnector', {
     mode: 'getTemporaryToken',
     konnector: konnector.slug,
-    account: account._id,
-    bankId: account.auth.bankId
+    bankId
   })
   const event = await waitForRealtimeEvent(
     client,
@@ -153,10 +152,11 @@ export const createOrUpdateBIConnection = async ({
 }) => {
   const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
+  const bankId = getBankId({ client, konnector })
   logger.info('Creating temporary token...')
 
   const tempToken = await createTemporaryToken({
-    account,
+    bankId,
     client,
     konnector
   })
@@ -199,6 +199,61 @@ export const setBIConnectionId = (originalAccount, biConnectionId) => {
 
 export const getBIConnectionId = account => {
   return get(account, 'data.auth.bi.connId')
+}
+
+/**
+ * Handles webauth connection
+ *
+ * @param {Object} options.account The account content
+ * @param {Object} options.flow
+ * @param {Object} options.konnector connector manifest content
+ * @param {Object} options.client CozyClient object
+ *
+ * @return {Integer} Connection Id
+ */
+export const handleOAuthAccount = async ({
+  account,
+  flow,
+  konnector,
+  client,
+  t
+}) => {
+  let webAuthAccount = clone(account)
+  const bankId = getBankId({ client, konnector })
+  if (bankId) {
+    set(webAuthAccount, 'auth.bankId', bankId)
+  }
+
+  const connectionId = getWebauthBIConnectionId(webAuthAccount)
+
+  if (connectionId) {
+    logger.info(`Found a webauth connection id: ${connectionId}`)
+    flow.konnector = konnector
+    webAuthAccount = await flow.saveAccount(
+      setBIConnectionId(webAuthAccount, connectionId)
+    )
+
+    await flow.handleFormSubmit({
+      client,
+      account: webAuthAccount,
+      konnector,
+      t
+    })
+  }
+
+  return connectionId
+}
+
+/**
+ * Gets BI webauth connection id which is returned in the account by the stack
+ * via oauth callback url
+ *
+ * @param {io.cozy.accounts} The account content created by the stack
+ *
+ * @return {Integer} Connection Id
+ */
+const getWebauthBIConnectionId = account => {
+  return Number(get(account, 'oauth.query.id_connection[0]'))
 }
 
 export const updateBIConnectionFromFlow = async (flow, connectionData) => {
@@ -291,7 +346,7 @@ export const onBIAccountCreation = async ({
 
   account = await flow.saveAccount(setBIConnectionId(account, biConnection.id))
 
-  // At this point, we can be in two fa request stat
+  // At this point, we can be in two fa request state
   await finishConnection({
     account,
     biConnection,
@@ -326,7 +381,7 @@ export const setSync = async ({
   syncStatus
 }) => {
   const temporaryToken = await createTemporaryToken({
-    account,
+    bankId: getBankId({ client, konnector }),
     client,
     konnector
   })
@@ -347,12 +402,32 @@ export const setSync = async ({
   )
 }
 
+export const getBankId = ({ client, konnector }) => {
+  const cozyUrl = client.stackClient.uri
+  const config = getBIConfigForCozyURL(cozyUrl)
+  const bankId = getMappingLinxoBI(config)[konnector.parameters.bankId].id
+  return bankId
+}
+
+export const fetchExtraOAuthUrlParams = async ({ client, konnector }) => {
+  const id_connector = getBankId({ client, konnector })
+  const token = await createTemporaryToken({
+    client,
+    bankId: id_connector,
+    konnector
+  })
+
+  return { id_connector, token }
+}
+
 export const konnectorPolicy = {
   name: 'budget-insight',
   match: isBudgetInsightConnector,
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
   sendAdditionalInformation: sendAdditionalInformation,
+  fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   getAdditionalInformationNeeded,
+  handleOAuthAccount,
   setSync
 }

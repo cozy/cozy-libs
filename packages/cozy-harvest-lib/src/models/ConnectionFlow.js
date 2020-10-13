@@ -75,7 +75,6 @@ export const createOrUpdateAccount = async ({
   userCredentials
 }) => {
   assert(flow, 'No flow')
-  assert(userCredentials, 'No user credentials')
   const isUpdate = !!account
 
   if (isUpdate) {
