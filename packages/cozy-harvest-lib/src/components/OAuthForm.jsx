@@ -81,15 +81,17 @@ export class OAuthForm extends PureComponent {
 
     return initialValues ? null : (
       <>
-        <Button
-          className="u-mt-1"
-          busy={isBusy}
-          disabled={isBusy}
-          extension="full"
-          label={t('oauth.connect.label')}
-          onClick={this.handleConnect}
-        />
-        {showOAuthWindow && (!needExtraParams || extraParams) && (
+        {(!needExtraParams || extraParams) && (
+          <Button
+            className="u-mt-1"
+            busy={isBusy}
+            disabled={isBusy}
+            extension="full"
+            label={t('oauth.connect.label')}
+            onClick={this.handleConnect}
+          />
+        )}
+        {showOAuthWindow && (
           <OAuthWindow
             extraParams={extraParams}
             konnector={konnector}

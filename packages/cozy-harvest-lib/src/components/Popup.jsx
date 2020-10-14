@@ -99,10 +99,6 @@ export class Popup extends PureComponent {
       `scrollbars=yes, width=${w}, height=${h}, top=${top}, left=${left}`
     )
 
-    // fixes no window.opener on some new version of safari
-    // at least on IPhone XS with safari 13
-    popup.opener = window
-
     // Puts focus on the newWindow
     if (popup.focus) {
       popup.focus()
