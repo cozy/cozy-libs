@@ -152,8 +152,8 @@ export const createOrUpdateBIConnection = async ({
 }) => {
   const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
-  const linxoBankId = getLinxoBankId({ konnector })
-  const biBankId = getBiBankId({ client, linxoBankId })
+  const cozyBankId = getCozyBankId({ konnector })
+  const biBankId = getBiBankId({ client, cozyBankId })
 
   logger.info('Creating temporary token...')
 
@@ -221,9 +221,9 @@ export const handleOAuthAccount = async ({
   t
 }) => {
   let webAuthAccount = clone(account)
-  const linxoBankId = getLinxoBankId({ konnector })
-  if (linxoBankId) {
-    set(webAuthAccount, 'auth.bankId', linxoBankId)
+  const cozyBankId = getCozyBankId({ konnector })
+  if (cozyBankId) {
+    set(webAuthAccount, 'auth.bankId', cozyBankId)
   }
 
   const connectionId = getWebauthBIConnectionId(webAuthAccount)
@@ -382,9 +382,9 @@ export const setSync = async ({
   contract,
   syncStatus
 }) => {
-  const linxoBankId = getLinxoBankId({ konnector })
+  const cozyBankId = getCozyBankId({ konnector })
   const temporaryToken = await createTemporaryToken({
-    bankId: getBiBankId({ client, linxoBankId }),
+    bankId: getBiBankId({ client, cozyBankId }),
     client,
     konnector
   })
@@ -405,20 +405,20 @@ export const setSync = async ({
   )
 }
 
-export const getLinxoBankId = ({ konnector }) => {
+export const getCozyBankId = ({ konnector }) => {
   return konnector.parameters.bankId
 }
 
-export const getBiBankId = ({ client, linxoBankId }) => {
+export const getBiBankId = ({ client, cozyBankId }) => {
   const cozyUrl = client.stackClient.uri
   const config = getBIConfigForCozyURL(cozyUrl)
-  const bankId = getMappingLinxoBI(config)[linxoBankId].id
+  const bankId = getMappingLinxoBI(config)[cozyBankId].id
   return bankId
 }
 
 export const fetchExtraOAuthUrlParams = async ({ client, konnector }) => {
-  const linxoBankId = getLinxoBankId({ konnector })
-  const biBankId = getBiBankId({ client, linxoBankId })
+  const cozyBankId = getCozyBankId({ konnector })
+  const biBankId = getBiBankId({ client, cozyBankId })
   const token = await createTemporaryToken({
     client,
     biBankId,
