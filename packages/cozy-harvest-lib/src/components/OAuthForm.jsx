@@ -77,7 +77,10 @@ export class OAuthForm extends PureComponent {
       needExtraParams,
       extraParams
     } = this.state
-    const isBusy = showOAuthWindow === true || flowState.running
+    const isBusy =
+      showOAuthWindow === true ||
+      flowState.running ||
+      (needExtraParams && !extraParams)
 
     return initialValues ? null : (
       <>
@@ -89,7 +92,7 @@ export class OAuthForm extends PureComponent {
           label={t('oauth.connect.label')}
           onClick={this.handleConnect}
         />
-        {showOAuthWindow && (!needExtraParams || extraParams) && (
+        {showOAuthWindow && (
           <OAuthWindow
             extraParams={extraParams}
             konnector={konnector}
