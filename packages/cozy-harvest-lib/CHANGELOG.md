@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.18.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.18.0...cozy-harvest-lib@2.18.1) (2020-10-14)
+
+
+### Bug Fixes
+
+* **Harvest:** Better diffentiate bankId ([bdf3119](https://github.com/cozy/cozy-libs/commit/bdf3119))
+* **Harvest:** Handle busy and disabled state of connect button ([14002f1](https://github.com/cozy/cozy-libs/commit/14002f1))
+* **Harvest:** No more permission needed to open the popup ([e7e591a](https://github.com/cozy/cozy-libs/commit/e7e591a))
+* **Harvest:** Replace referencences to linxo by cozy ([004f663](https://github.com/cozy/cozy-libs/commit/004f663))
+
+
+
+
+
 # [2.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.17.0...cozy-harvest-lib@2.18.0) (2020-10-13)
 
 
