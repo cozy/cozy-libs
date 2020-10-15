@@ -44,12 +44,6 @@ const App = () => {
 
 ```
 
-### Flags enabled on the server
-
-Feature flags can be served by the server and injected in the HTML page of an
-application. See https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags
-and https://docs.cozy.io/en/cozy-stack/client-app-dev/#good-practices-for-your-application.
-
 #### Client plugin
 
 A CozyClient plugin is exported that initializes and resets flags on client's login
@@ -59,6 +53,11 @@ or `data-flags={{ .Flags }}`, on web) or by fetching data from the server (on mo
 ```
 client.registerPlugin(flag.plugin)
 ```
+
+### Flags enabled on the server
+
+Feature flags can be served by the server and injected in the HTML page of an
+application. See [the stack documentation on flags](https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags) and [how to access flags at page load](https://docs.cozy.io/en/cozy-stack/client-app-dev/#good-practices-for-your-application).
 
 ### Flags enabled at build time
 
