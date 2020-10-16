@@ -50,7 +50,7 @@
   "Files": {
     "share": {
       "cta": "Partager",
-      "title": "Partager",
+      "title": "Partager « %{name} »",
       "details": {
         "title": "Détails du partage",
         "createdAt": "Depuis le %{date}",
@@ -131,7 +131,7 @@
   "Notes": {
     "share": {
       "cta": "Partager",
-      "title": "Partager",
+      "title": "Partager « %{name} »",
       "details": {
         "title": "Détails du partage",
         "createdAt": "Depuis le %{date}",
@@ -216,7 +216,7 @@
   "Albums": {
     "share": {
       "cta": "Partager",
-      "title": "Partager avec d'autres",
+      "title": "Partager « %{name} » avec d'autres",
       "details": {
         "title": "Détails du partage",
         "createdAt": "Depuis le %{date}",

@@ -52,7 +52,9 @@ export const ShareModal = ({
         disableEnforceFocus
       >
         <DialogCloseButton onClick={onClose} />
-        <DialogTitle>{t(`${documentType}.share.title`)}</DialogTitle>
+        <DialogTitle>
+          {t(`${documentType}.share.title`, { name: document.name })}
+        </DialogTitle>
         {(hasSharedParent || hasSharedChild) && (
           <div className={styles['share-byemail-onlybylink']}>
             {t(`${documentType}.share.shareByEmail.onlyByLink`, {
