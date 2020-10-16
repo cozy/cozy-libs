@@ -50,7 +50,7 @@
   "Files": {
     "share": {
       "cta": "Share",
-      "title": "Share",
+      "title": "Share \"%{name}\"",
       "details": {
         "title": "Sharing details",
         "createdAt": "On %{date}",
@@ -130,7 +130,7 @@
   "Notes": {
     "share": {
       "cta": "Share",
-      "title": "Share",
+      "title": "Share \"%{name}\"",
       "details": {
         "title": "Sharing details",
         "createdAt": "On %{date}",
@@ -216,7 +216,7 @@
   "Albums": {
     "share": {
       "cta": "Share",
-      "title": "Share with others",
+      "title": "Share  \"%{name}\" with others",
       "details": {
         "title": "Sharing details",
         "createdAt": "On %{date}",
