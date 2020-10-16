@@ -55,6 +55,7 @@ const ShareTypeSelect = ({ options, onChange }) => (
         onChange(option.value)
       }}
       options={options}
+      menuPosition={'fixed'}
     />
   </div>
 )
