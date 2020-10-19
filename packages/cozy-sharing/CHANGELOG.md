@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.16.2...cozy-sharing@2.0.0) (2020-10-19)
+
+
+### Bug Fixes
+
+* SelectBox is displayed 'fixed' ([2445e83](https://github.com/cozy/cozy-libs/commit/2445e83))
+
+
+### Features
+
+* Upgrade Cozy-UI ([ca1cb0d](https://github.com/cozy/cozy-libs/commit/ca1cb0d))
+
+
+### BREAKING CHANGES
+
+* You have to upgrade at least
+to UI 36.2.0 to have access to non
+ ExperimentalDialog
+
+
+
+
+
 ## [1.16.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.16.1...cozy-sharing@1.16.2) (2020-10-01)
 
 
