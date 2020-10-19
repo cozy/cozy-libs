@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.19.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.18.2...cozy-harvest-lib@2.19.0) (2020-10-19)
+
+
+### Features
+
+* Use @cozy/minilog instead of minilog ([621abad](https://github.com/cozy/cozy-libs/commit/621abad))
+
+
+
+
+
 ## [2.18.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.18.1...cozy-harvest-lib@2.18.2) (2020-10-16)
 
 **Note:** Version bump only for package cozy-harvest-lib

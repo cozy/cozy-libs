@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.0.0...cozy-sharing@2.1.0) (2020-10-19)
+
+
+### Features
+
+* Use @cozy/minilog instead of minilog ([621abad](https://github.com/cozy/cozy-libs/commit/621abad))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@1.16.2...cozy-sharing@2.0.0) (2020-10-19)
 
 

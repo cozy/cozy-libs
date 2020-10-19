@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.10.6...cozy-realtime@3.11.0) (2020-10-19)
+
+
+### Features
+
+* Use @cozy/minilog instead of minilog ([621abad](https://github.com/cozy/cozy-libs/commit/621abad))
+
+
+
+
+
 ## [3.10.6](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.10.5...cozy-realtime@3.10.6) (2020-10-01)
 
 
