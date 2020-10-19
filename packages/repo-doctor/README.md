@@ -32,7 +32,7 @@ to mattermost.
 
 ```bash
 # Download an example config
-$ curl -o https://raw.githubusercontent.com/cozy/cozy-libs/master/packages/repo-doctor/examples/repo-doctor.json ~/.config/repo-doctor.json
+$ curl -o ~/.config/repo-doctor.json https://raw.githubusercontent.com/cozy/cozy-libs/master/packages/repo-doctor/examples/repo-doctor.json
 $ repo-doctor
 Detected repository as cozy/cozy-banks
 Repository: cozy/cozy-banks
