@@ -43,7 +43,7 @@
     ]
   },
   "dependencies": {
-    "cozy-device-helper": "^1.10.3",
-    "minilog": "https://github.com/cozy/minilog.git#master"
+    "@cozy/minilog": "^1.0.0",
+    "cozy-device-helper": "^1.10.3"
   }
 }

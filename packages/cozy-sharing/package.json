@@ -25,6 +25,7 @@
     "watch:doc:react": "(cd ../.. && TARGET=cozy-sharing yarn watch:doc:react)"
   },
   "dependencies": {
+    "@cozy/minilog": "^1.0.0",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "classnames": "^2.2.6",
     "copy-text-to-clipboard": "^2.1.1",
@@ -32,7 +33,6 @@
     "cozy-doctypes": "^1.74.7",
     "cozy-realtime": "^3.10.6",
     "lodash": "^4.17.19",
-    "minilog": "https://github.com/cozy/minilog.git#master",
     "react-autosuggest": "^9.4.3",
     "react-tooltip": "^3.11.1"
   },
