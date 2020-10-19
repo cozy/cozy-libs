@@ -8,7 +8,7 @@ import ConnectionFlow, {
   TWO_FA_REQUEST_EVENT,
   UPDATE_EVENT
 } from '../models/ConnectionFlow'
-import minilog from 'minilog'
+import minilog from '@cozy/minilog'
 import logger from '../logger'
 import { multiPrompt } from './prompt'
 import assert from '../assert'
