@@ -16,10 +16,14 @@ import styles from '../share.styl'
 import { getSuccessMessage } from '../helpers/successMessage'
 import { getOrCreateFromArray } from '../helpers/contacts'
 export class ShareByEmail extends Component {
-  initialState = {
-    recipients: [],
-    sharingType: 'two-way',
-    loading: false
+  constructor(props) {
+    super(props)
+    this.initialState = {
+      recipients: [],
+      sharingType: this.props.sharingType ? this.props.sharingType : 'two-way',
+      loading: false
+    }
+    this.state = { ...this.initialState }
   }
 
   state = { ...this.initialState }
@@ -118,20 +122,20 @@ export class ShareByEmail extends Component {
 
   getSharingTypes = () => {
     const { t } = this.props
-    return [
-      {
-        value: 'two-way',
-        label: t('Share.type.two-way'),
-        desc: t('Share.type.desc.two-way'),
-        disabled: false
-      },
-      {
-        value: 'one-way',
-        label: t('Share.type.one-way'),
-        desc: t('Share.type.desc.one-way'),
-        disabled: false
-      }
-    ]
+    const { sharingType } = this.state
+    const twoWay = {
+      value: 'two-way',
+      label: t('Share.type.two-way'),
+      desc: t('Share.type.desc.two-way'),
+      disabled: false
+    }
+    const oneWay = {
+      value: 'one-way',
+      label: t('Share.type.one-way'),
+      desc: t('Share.type.desc.one-way'),
+      disabled: false
+    }
+    return sharingType === 'two-way' ? [twoWay, oneWay] : [oneWay]
   }
   render() {
     const { contacts, documentType, groups, t } = this.props
@@ -180,7 +184,8 @@ ShareByEmail.propTypes = {
   documentType: PropTypes.string.isRequired,
   sharingDesc: PropTypes.string.isRequired,
   onShare: PropTypes.func.isRequired,
-  createContact: PropTypes.func.isRequired
+  createContact: PropTypes.func.isRequired,
+  sharingType: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
 }
 
 export default translate()(withClient(ShareByEmail))

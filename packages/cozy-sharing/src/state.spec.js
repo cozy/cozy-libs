@@ -11,13 +11,15 @@ import reducer, {
   getSharingLink,
   hasSharedParent,
   hasSharedChild,
-  getSharedDocIdsBySharings
+  getSharedDocIdsBySharings,
+  getSharingType
 } from './state'
 
 import {
   SHARING_1,
   SHARING_2,
   SHARING_3,
+  SHARING_READ_ONLY,
   PERM_1,
   PERM_2,
   SHARING_NO_ACTIVE,
@@ -482,5 +484,41 @@ describe('getSharedDocIdsBySharings method', () => {
       data: [SHARING_1, SHARING_NO_ACTIVE]
     })
     expect(sharedDocsId).toEqual(SHARING_1.attributes.rules[0].values)
+  })
+})
+
+describe('getSharingType selector', () => {
+  it('should return false is this a sharingByLink', () => {
+    const newState = reducer({}, addSharingLink(PERM_2))
+    expect(
+      getSharingType(newState, PERM_2.attributes.permissions.rule0.values, '')
+    ).toBe(false)
+  })
+
+  it('should return two-way if the sharing is two-way', () => {
+    const newState = reducer(
+      {},
+      receiveSharings({
+        sharings: [SHARING_3]
+      })
+    )
+    expect(
+      getSharingType(newState, SHARING_3.attributes.rules[0].values[0], '')
+    ).toBe('two-way')
+  })
+  it('should return one-way if the sharing is one-way', () => {
+    const newState = reducer(
+      {},
+      receiveSharings({
+        sharings: [SHARING_READ_ONLY]
+      })
+    )
+    expect(
+      getSharingType(
+        newState,
+        SHARING_READ_ONLY.attributes.rules[0].values[0],
+        ''
+      )
+    ).toBe('one-way')
   })
 })
