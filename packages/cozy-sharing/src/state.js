@@ -317,6 +317,7 @@ export const getSharingForSelf = (state, docId) =>
 
 export const getSharingType = (state, docId, instanceUri) => {
   const sharing = getSharingForSelf(state, docId)
+  if (!sharing) return false
   const type = getDocumentSharingType(sharing, docId)
   if (sharing.attributes.owner) return type
   const me = sharing.attributes.members.find(matchingInstanceName(instanceUri))
