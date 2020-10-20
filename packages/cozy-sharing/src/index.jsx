@@ -217,20 +217,22 @@ export class SharingProvider extends Component {
     const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
     if (sharing) return this.addRecipients(sharing, recipients, sharingType)
-    const resp = await this.sharingCol.share(
+    const { data } = await this.sharingCol.share(
       document,
       recipients,
       sharingType,
       description,
-      '/preview'
+      '/preview',
+      true
     )
+
     this.dispatch(
       addSharing(
-        resp.data,
+        data,
         document.path || (await fetchFilesPaths(client, doctype, [document]))
       )
     )
-    return resp.data
+    return data
   }
 
   addRecipients = async (sharing, recipients, sharingType) => {
