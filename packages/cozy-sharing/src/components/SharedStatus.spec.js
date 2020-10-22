@@ -26,7 +26,6 @@ describe('SharedStatus component', () => {
             name: '2'
           }
         ]}
-        t={x => x}
       />,
       {
         wrappingComponent: WrappingComponent
@@ -37,7 +36,7 @@ describe('SharedStatus component', () => {
 
   it('should display the link if there is a link', () => {
     const component = mount(
-      <SharedStatus docId="1" recipients={[]} t={x => x} link={true} />,
+      <SharedStatus docId="1" recipients={[]} link={true} />,
       {
         wrappingComponent: WrappingComponent
       }

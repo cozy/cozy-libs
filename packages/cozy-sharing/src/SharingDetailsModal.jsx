@@ -2,12 +2,12 @@ import styles from './share.styl'
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 
 import { OwnerIdentity } from './components/Recipient'
 import WhoHasAccess from './components/WhoHasAccess'
-import { Contact } from './models'
+import { getDisplayName } from './models'
 
 export const SharingDetailsModal = ({
   onClose,
@@ -17,10 +17,9 @@ export const SharingDetailsModal = ({
   document,
   documentType = 'Document',
   onRevoke,
-  onRevokeSelf,
-  t,
-  f
+  onRevokeSelf
 }) => {
+  const { t, f } = useI18n()
   return (
     <Modal
       title={t(`${documentType}.share.details.title`)}
@@ -34,7 +33,7 @@ export const SharingDetailsModal = ({
         <div className={styles['share-details']}>
           <OwnerIdentity
             name={t(`${documentType}.share.sharedBy`, {
-              name: Contact.getDisplayName(owner)
+              name: getDisplayName(owner)
             })}
             url={owner.instance}
           />
@@ -81,8 +80,6 @@ SharingDetailsModal.propTypes = {
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
-  onRevokeSelf: PropTypes.func,
-  f: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  onRevokeSelf: PropTypes.func
 }
-export default translate()(SharingDetailsModal)
+export default SharingDetailsModal

@@ -1,4 +1,4 @@
-import Contact from './DoctypeContact'
+import { getDisplayName, getInitials } from './DoctypeContact'
 
 describe('Contact model', () => {
   describe('getInitials method', () => {
@@ -7,7 +7,7 @@ describe('Contact model', () => {
         name: 'whatever',
         public_name: 'janedoe'
       }
-      const result = Contact.getInitials(recipient)
+      const result = getInitials(recipient)
       expect(result).toEqual('J')
     })
 
@@ -15,7 +15,7 @@ describe('Contact model', () => {
       const recipient = {
         name: 'janedoe'
       }
-      const result = Contact.getInitials(recipient)
+      const result = getInitials(recipient)
       expect(result).toEqual('J')
     })
 
@@ -25,19 +25,19 @@ describe('Contact model', () => {
         public_name: undefined,
         email: 'janedoe@example.com'
       }
-      const result = Contact.getInitials(recipient)
+      const result = getInitials(recipient)
       expect(result).toEqual('J')
     })
 
     it('should return an empty string if name/public_name are undefined', () => {
       const recipient = {}
-      const result = Contact.getInitials(recipient)
+      const result = getInitials(recipient)
       expect(result).toEqual('')
     })
 
     it('should use a default value if name/public_name are undefined', () => {
       const recipient = {}
-      const result = Contact.getInitials(recipient, 'A')
+      const result = getInitials(recipient, 'A')
       expect(result).toEqual('A')
     })
 
@@ -50,7 +50,7 @@ describe('Contact model', () => {
           familyName: 'Stark'
         }
       }
-      const result = Contact.getInitials(contact)
+      const result = getInitials(contact)
       expect(result).toEqual('AS')
     })
   })
@@ -66,7 +66,7 @@ describe('Contact model', () => {
           familyName: 'Stark'
         }
       }
-      const result = Contact.getDisplayName(contact)
+      const result = getDisplayName(contact)
       expect(result).toEqual('Arya Stark')
     })
 
@@ -76,7 +76,7 @@ describe('Contact model', () => {
         name: 'Arya Stark',
         public_name: 'aryastark'
       }
-      const result = Contact.getDisplayName(contact)
+      const result = getDisplayName(contact)
       expect(result).toEqual('aryastark')
     })
 
@@ -84,7 +84,7 @@ describe('Contact model', () => {
       const contact = {
         name: 'Arya Stark'
       }
-      const result = Contact.getDisplayName(contact)
+      const result = getDisplayName(contact)
       expect(result).toEqual('Arya Stark')
     })
 
@@ -92,19 +92,19 @@ describe('Contact model', () => {
       const recipient = {
         email: 'arya.stark@winterfell.westeros'
       }
-      const result = Contact.getDisplayName(recipient)
+      const result = getDisplayName(recipient)
       expect(result).toEqual('arya.stark@winterfell.westeros')
     })
 
     it('should use an empty string as default value if nothing is available', () => {
       const recipient = {}
-      const result = Contact.getDisplayName(recipient)
+      const result = getDisplayName(recipient)
       expect(result).toEqual('')
     })
 
     it('should use a default value if nothing is available', () => {
       const recipient = {}
-      const result = Contact.getDisplayName(recipient, 'Anonymous')
+      const result = getDisplayName(recipient, 'Anonymous')
       expect(result).toEqual('Anonymous')
     })
   })

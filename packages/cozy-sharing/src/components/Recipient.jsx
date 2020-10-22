@@ -18,7 +18,7 @@ import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import styles from './recipient.styl'
 import modalStyles from '../share.styl'
 
-import { Contact } from '../models'
+import { getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
 const MAX_DISPLAYED_RECIPIENTS = 3
@@ -54,7 +54,7 @@ export const RecipientsAvatars = ({
         <AvatarPlusX
           extraRecipients={reversedRecipients
             .slice(MAX_DISPLAYED_RECIPIENTS)
-            .map(recipient => Contact.getDisplayName(recipient))}
+            .map(recipient => getDisplayName(recipient))}
           size={size}
         />
       )}
@@ -77,8 +77,8 @@ export const RecipientAvatar = ({ recipient, ...rest }) => {
   return (
     <Avatar
       image={`${client.options.uri}${recipient.avatarPath}`}
-      text={Contact.getInitials(recipient)}
-      textId={Contact.getDisplayName(recipient)}
+      text={getInitials(recipient)}
+      textId={getDisplayName(recipient)}
       {...rest}
     />
   )
@@ -87,11 +87,11 @@ export const RecipientAvatar = ({ recipient, ...rest }) => {
 export const OwnerIdentity = ({ url, size, ...rest }) => (
   <div className={styles['avatar']}>
     <Avatar
-      text={Contact.getInitials(rest)}
+      text={getInitials(rest)}
       size={size}
-      textId={Contact.getDisplayName(rest)}
+      textId={getDisplayName(rest)}
     />
-    <Identity name={Contact.getDisplayName(rest)} details={url} />
+    <Identity name={getDisplayName(rest)} details={url} />
   </div>
 )
 
@@ -238,7 +238,7 @@ const Recipient = props => {
   const isMe =
     (isOwner && status === 'owner') || instance === client.options.uri
   const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
-  const name = Contact.getDisplayName(rest, defaultDisplayName)
+  const name = getDisplayName(rest, defaultDisplayName)
 
   return (
     <CompositeRow
@@ -259,10 +259,10 @@ const Recipient = props => {
 export default Recipient
 
 export const RecipientWithoutStatus = ({ instance, ...rest }) => {
-  const name = Contact.getDisplayName(rest)
+  const name = getDisplayName(rest)
   return (
     <div className={styles['recipient']}>
-      <Avatar text={Contact.getInitials(rest)} textId={name} />
+      <Avatar text={getInitials(rest)} textId={name} />
       <div className={styles['recipient-ident-status']}>
         <Identity name={name} details={instance} />
       </div>
@@ -274,7 +274,7 @@ export const RecipientPlusX = ({ extraRecipients }, { t }) => (
   <div className={styles['recipient']}>
     <AvatarPlusX
       extraRecipients={extraRecipients.map(recipient =>
-        Contact.getDisplayName(recipient)
+        getDisplayName(recipient)
       )}
     />
     <div className={styles['recipient-ident-status']}>
