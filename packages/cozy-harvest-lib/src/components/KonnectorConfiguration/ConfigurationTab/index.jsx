@@ -131,8 +131,8 @@ const ConfigurationTab = ({
                   <Icon icon="key" color={palette['slateGrey']} />
                 </ListItemIcon>
                 <ListItemText
-                  primaryText={t('modal.updateAccount.identifiers')}
-                  secondaryText={Account.getAccountName(account)}
+                  primary={t('modal.updateAccount.identifiers')}
+                  secondary={Account.getAccountName(account)}
                 />
                 <ListItemSecondaryAction>
                   <div>
@@ -151,8 +151,11 @@ const ConfigurationTab = ({
                 <Icon icon="unlink" className="u-error" />
               </ListItemIcon>
               <ListItemText
-                primaryTextClassName="u-error"
-                primaryText={t('accountForm.disconnect.button')}
+                primary={
+                  <span className="u-error">
+                    {t('accountForm.disconnect.button')}
+                  </span>
+                }
               />
               <ListItemSecondaryAction>
                 {deleting && <Spinner />}
