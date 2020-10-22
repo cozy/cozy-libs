@@ -41,7 +41,7 @@ export const ContactSuggestion = ({ contactOrGroup, contacts, t }) => {
   return (
     <div className={styles['recipient']}>
       <Avatar text={avatarText} size="small" />
-      <Identity name={name} details={details} />
+      <Identity name={name} details={details === '' ? undefined : details} />
     </div>
   )
 }
