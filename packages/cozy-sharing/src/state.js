@@ -410,6 +410,14 @@ const getDocumentSharingType = (sharing, docId) => {
     : 'one-way'
 }
 
+export const isReadOnlySharing = (sharing, docId) => {
+  const rule = sharing.attributes.rules.find(
+    r => r.values.indexOf(docId) !== -1
+  )
+  // If a document has no rule, it is a shortcut preview of a sharing. Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
+  return rule && rule.update === 'sync' && rule.remove === 'sync' ? false : true
+}
+
 const buildSharingLink = (state, documentType, sharecode) => {
   const appUrl = getAppUrlForDoctype(state, documentType)
   switch (documentType) {

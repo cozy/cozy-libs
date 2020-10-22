@@ -22,13 +22,12 @@ describe('ShareByEmailComponent', () => {
     const comp = mount(<ShareByEmail {...props} />)
     comp.instance().onRecipientPick({ id: 1, email: 'quentin@cozycloud.cc' })
     await comp.instance().share()
-    expect(onShare).toHaveBeenCalledWith(
-      {
-        id: 'doc_id'
-      },
-      [{ email: 'quentin@cozycloud.cc', id: 1 }],
-      'two-way',
-      'test'
-    )
+    expect(onShare).toHaveBeenCalledWith({
+      description: props.sharingDesc,
+      document: props.document,
+      openSharing: true,
+      readOnlyRecipients: [],
+      recipients: [{ id: 1, email: 'quentin@cozycloud.cc' }]
+    })
   })
 })
