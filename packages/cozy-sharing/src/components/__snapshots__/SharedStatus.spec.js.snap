@@ -5,7 +5,6 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
   docId="1"
   link={true}
   recipients={Array []}
-  t={[Function]}
 >
   <span
     className="shared-status"
@@ -69,7 +68,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
           id="linkfor1"
         >
           <span>
-            Files.share.shareByLink.subtitle
+            Or share by link
           </span>
         </div>
       </ReactTooltip>
@@ -93,7 +92,6 @@ exports[`SharedStatus component should have the right display if there is severa
       },
     ]
   }
-  t={[Function]}
 >
   <span
     className="shared-status"
@@ -103,7 +101,7 @@ exports[`SharedStatus component should have the right display if there is severa
       data-for="members1"
       data-tip={true}
     >
-      Share.members.count
+      2 members
     </a>
     <SharingTooltip
       id="members1"

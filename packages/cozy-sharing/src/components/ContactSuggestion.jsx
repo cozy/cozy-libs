@@ -1,12 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import { models } from 'cozy-client'
+const ContactModel = models.contact
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import styles from './recipient.styl'
 
-import { Contact, Group } from '../models'
+import { Contact, Group, getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
 export const ContactSuggestion = ({ contactOrGroup, contacts, t }) => {
@@ -31,9 +33,9 @@ export const ContactSuggestion = ({ contactOrGroup, contacts, t }) => {
     })
     avatarText = 'G'
   } else {
-    name = Contact.getDisplayName(contactOrGroup)
-    avatarText = Contact.getInitials(contactOrGroup)
-    details = Contact.getPrimaryCozy(contactOrGroup)
+    name = getDisplayName(contactOrGroup)
+    avatarText = getInitials(contactOrGroup)
+    details = ContactModel.getPrimaryCozy(contactOrGroup)
   }
 
   return (

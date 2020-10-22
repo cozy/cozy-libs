@@ -8,7 +8,7 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import styles from './autosuggest.styl'
 import BoldCross from '../../assets/icons/icon-cross-bold.svg'
 
-import { Contact } from '../models'
+import { getDisplayName, Contact } from '../models'
 import { cozyUrlMatch, emailMatch, groupNameMatch } from '../suggestionMatchers'
 import ContactSuggestion from './ContactSuggestion'
 import { extractEmails, validateEmail } from '../helpers/email'
@@ -119,7 +119,7 @@ export default class ShareAutocomplete extends Component {
     return (
       <div className={styles['recipientsContainer']}>
         {recipients.map((recipient, idx) => {
-          const value = Contact.getDisplayName(recipient)
+          const value = getDisplayName(recipient)
           return (
             <div
               className={styles['recipientChip']}
