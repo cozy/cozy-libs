@@ -20,7 +20,7 @@ const OtherAccountListItem = props => {
       )}
       {...rest}
     >
-      <ListItemText primaryText={t('vaultCiphersList.otherAccount')} />
+      <ListItemText primary={t('vaultCiphersList.otherAccount')} />
     </ListItem>
   )
 }
