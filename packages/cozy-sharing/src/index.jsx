@@ -214,10 +214,22 @@ export class SharingProvider extends Component {
     this.dispatch(receivePaths([...folderPaths, ...filePaths]))
   }
 
-  share = async (document, recipients, sharingType, description) => {
+  share = async ({
+    document,
+    recipients,
+    readOnlyRecipients,
+    description,
+    openSharing
+  }) => {
     const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
-    if (sharing) return this.addRecipients(sharing, recipients, sharingType)
+    if (sharing)
+      return this.addRecipients({
+        document: sharing,
+        recipients,
+        readOnlyRecipients
+      })
+
     const { data } = await this.sharingCol.create({
       document,
       recipients,
@@ -236,12 +248,12 @@ export class SharingProvider extends Component {
     return data
   }
 
-  addRecipients = async (sharing, recipients, sharingType) => {
-    const resp = await this.sharingCol.addRecipients(
-      sharing,
+  addRecipients = async ({ document, recipients, readOnlyRecipients }) => {
+    const resp = await this.sharingCol.addRecipients({
+      document,
       recipients,
-      sharingType
-    )
+      readOnlyRecipients
+    })
     this.dispatch(updateSharing(resp.data))
   }
 

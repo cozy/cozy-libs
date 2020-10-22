@@ -15,12 +15,12 @@ import ShareRecipientsInput from './ShareRecipientsInput'
 import styles from '../share.styl'
 import { getSuccessMessage } from '../helpers/successMessage'
 import { getOrCreateFromArray } from '../helpers/contacts'
+import { isReadOnlySharing } from '../state'
 export class ShareByEmail extends Component {
   constructor(props) {
     super(props)
     this.initialState = {
       recipients: [],
-      sharingType: this.props.sharingType ? this.props.sharingType : 'two-way',
       loading: false
     }
     this.state = { ...this.initialState }
@@ -33,7 +33,10 @@ export class ShareByEmail extends Component {
   }
 
   onChange = value => {
-    this.setState(state => ({ ...state, sharingType: value }))
+    this.setState(state => ({
+      ...state,
+      selectedOption: value
+    }))
   }
 
   onSubmit = () => {
@@ -91,7 +94,7 @@ export class ShareByEmail extends Component {
       documentType,
       client
     } = this.props
-    const { recipients, sharingType } = this.state
+    const { recipients, selectedOption } = this.state
     if (recipients.length === 0) {
       return
     }
@@ -107,7 +110,20 @@ export class ShareByEmail extends Component {
         recipients,
         createContact
       )
-      await onShare(document, contacts, sharingType, sharingDesc)
+      let readWriteRecipients = []
+      let readOnlyRecipients = []
+      if (selectedOption === 'readOnly') {
+        readOnlyRecipients = contacts
+      } else {
+        readWriteRecipients = contacts
+      }
+      await onShare({
+        document,
+        recipients: readWriteRecipients,
+        readOnlyRecipients,
+        description: sharingDesc,
+        openSharing: readWriteRecipients.length > 0
+      })
 
       Alerter.success(
         ...getSuccessMessage(recipientsBefore, contacts, documentType)
@@ -120,22 +136,24 @@ export class ShareByEmail extends Component {
     }
   }
 
-  getSharingTypes = () => {
-    const { t } = this.props
-    const { sharingType } = this.state
-    const twoWay = {
-      value: 'two-way',
+  getSharingOptions = () => {
+    const { t, sharing, document } = this.props
+    const isSharingReadOnly = sharing
+      ? isReadOnlySharing(sharing, document._id)
+      : false
+    const readWrite = {
+      value: 'readWrite',
       label: t('Share.type.two-way'),
       desc: t('Share.type.desc.two-way'),
       disabled: false
     }
-    const oneWay = {
-      value: 'one-way',
+    const readOnly = {
+      value: 'readOnly',
       label: t('Share.type.one-way'),
       desc: t('Share.type.desc.one-way'),
       disabled: false
     }
-    return sharingType === 'two-way' ? [twoWay, oneWay] : [oneWay]
+    return isSharingReadOnly ? [readOnly] : [readWrite, readOnly]
   }
   render() {
     const { contacts, documentType, groups, t } = this.props
@@ -161,7 +179,7 @@ export class ShareByEmail extends Component {
         </div>
         <div className={styles['share-type-control']}>
           <ShareTypeSelect
-            options={this.getSharingTypes()}
+            options={this.getSharingOptions()}
             onChange={this.onChange}
           />
           <ShareSubmit
@@ -185,7 +203,8 @@ ShareByEmail.propTypes = {
   sharingDesc: PropTypes.string.isRequired,
   onShare: PropTypes.func.isRequired,
   createContact: PropTypes.func.isRequired,
-  sharingType: PropTypes.oneOfType([PropTypes.string, PropTypes.bool])
+  // We can display this component without having created the sharing yet
+  sharing: PropTypes.object
 }
 
 export default translate()(withClient(ShareByEmail))
