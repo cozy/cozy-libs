@@ -41,7 +41,7 @@ export const ShareModal = ({
   onRevokeLink,
   onRevokeSelf,
   t,
-  sharingType
+  sharing
 }) => {
   return (
     <MuiCozyTheme>
@@ -86,7 +86,7 @@ export const ShareModal = ({
                 createContact={createContact}
                 onShare={onShare}
                 needsContactsPermission={needsContactsPermission}
-                sharingType={sharingType}
+                sharing={sharing}
               />
             )}
           {documentType !== 'Albums' && (
