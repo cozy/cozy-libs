@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import Dialog, {
   DialogTitle,
@@ -40,9 +40,9 @@ export const ShareModal = ({
   onUpdateShareLinkPermissions,
   onRevokeLink,
   onRevokeSelf,
-  t,
   sharing
 }) => {
+  const { t } = useI18n()
   return (
     <MuiCozyTheme>
       <Dialog
@@ -118,7 +118,8 @@ export const ShareModal = ({
     </MuiCozyTheme>
   )
 }
-export default translate()(ShareModal)
+export default ShareModal
+
 ShareModal.propTypes = {
   document: PropTypes.object.isRequired,
   permissions: PropTypes.array.isRequired,
@@ -138,6 +139,5 @@ ShareModal.propTypes = {
   onRevoke: PropTypes.func.isRequired,
   onShareByLink: PropTypes.func.isRequired,
   onUpdateShareLinkPermissions: PropTypes.func.isRequired,
-  onRevokeLink: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired
+  onRevokeLink: PropTypes.func.isRequired
 }
