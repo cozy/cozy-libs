@@ -1,7 +1,10 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount } from 'enzyme'
+
+import AppLike from '../../test/AppLike'
 
 import { ContactSuggestion } from './ContactSuggestion'
+const WrappingComponent = ({ children }) => <AppLike>{children}</AppLike>
 
 describe('ContactSuggestion component', () => {
   const fakeT = jest.fn((s, args) => {
@@ -40,7 +43,9 @@ describe('ContactSuggestion component', () => {
       t: fakeT
     }
     const jsx = <ContactSuggestion {...props} />
-    const wrapper = shallow(jsx)
+    const wrapper = mount(jsx, {
+      wrappingComponent: WrappingComponent
+    })
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -64,7 +69,9 @@ describe('ContactSuggestion component', () => {
       t: fakeT
     }
     const jsx = <ContactSuggestion {...props} />
-    const wrapper = shallow(jsx)
+    const wrapper = mount(jsx, {
+      wrappingComponent: WrappingComponent
+    })
     expect(wrapper).toMatchSnapshot()
   })
 
@@ -137,7 +144,9 @@ describe('ContactSuggestion component', () => {
       t: fakeT
     }
     const jsx = <ContactSuggestion {...props} />
-    const wrapper = shallow(jsx)
+    const wrapper = mount(jsx, {
+      wrappingComponent: WrappingComponent
+    })
     expect(wrapper).toMatchSnapshot()
   })
 })

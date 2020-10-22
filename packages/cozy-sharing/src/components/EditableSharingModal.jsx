@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import flow from 'lodash/flow'
-import { queryConnect, withClient, Q } from 'cozy-client'
+import { queryConnect, useClient, Q } from 'cozy-client'
 
 import { Contact, Group } from '../models'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
@@ -10,12 +9,12 @@ import ContactsAndGroupsDataLoader from './ContactsAndGroupsDataLoader'
 import { default as DumbShareModal } from './ShareModal'
 import { useFetchDocumentPath } from './useFetchDocumentPath'
 export const EditableSharingModal = ({
-  client,
   contacts,
   document,
   groups,
   ...rest
 }) => {
+  const client = useClient()
   const documentPath = useFetchDocumentPath(client, document)
   return (
     <ContactsAndGroupsDataLoader contacts={contacts} groups={groups}>
@@ -102,16 +101,13 @@ const contactsQuery = () =>
 
 const groupsQuery = () => Q(Group.doctype)
 
-export default flow(
-  queryConnect({
-    contacts: {
-      query: contactsQuery,
-      as: 'contacts'
-    },
-    groups: {
-      query: groupsQuery,
-      as: 'groups'
-    }
-  }),
-  withClient
-)(EditableSharingModal)
+export default queryConnect({
+  contacts: {
+    query: contactsQuery,
+    as: 'contacts'
+  },
+  groups: {
+    query: groupsQuery,
+    as: 'groups'
+  }
+})(EditableSharingModal)

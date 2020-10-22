@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import { models } from 'cozy-client'
 const ContactModel = models.contact
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import styles from './recipient.styl'
@@ -11,7 +11,8 @@ import styles from './recipient.styl'
 import { Contact, Group, getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
-export const ContactSuggestion = ({ contactOrGroup, contacts, t }) => {
+export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
+  const { t } = useI18n()
   let avatarText, name, details
   if (contactOrGroup._type === Group.doctype) {
     name = contactOrGroup.name
@@ -49,8 +50,7 @@ export const ContactSuggestion = ({ contactOrGroup, contacts, t }) => {
 ContactSuggestion.propTypes = {
   contactOrGroup: PropTypes.oneOfType([Contact.propType, Group.propType])
     .isRequired,
-  contacts: PropTypes.arrayOf(Contact.propType),
-  t: PropTypes.func.isRequired
+  contacts: PropTypes.arrayOf(Contact.propType)
 }
 
-export default translate()(ContactSuggestion)
+export default ContactSuggestion
