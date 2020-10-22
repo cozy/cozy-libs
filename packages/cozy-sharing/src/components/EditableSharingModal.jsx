@@ -34,7 +34,7 @@ export const EditableSharingModal = ({
           hasSharedParent,
           hasSharedChild,
           revokeSelf,
-          getSharingType
+          getSharingForSelf
         }) => {
           return (
             <DumbShareModal
@@ -55,7 +55,7 @@ export const EditableSharingModal = ({
               onUpdateShareLinkPermissions={updateDocumentPermissions}
               onRevokeLink={revokeSharingLink}
               onRevokeSelf={revokeSelf}
-              sharingType={getSharingType(document.id)}
+              sharing={getSharingForSelf(document.id)}
               {...rest}
             />
           )

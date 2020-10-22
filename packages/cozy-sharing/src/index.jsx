@@ -86,6 +86,7 @@ export class SharingProvider extends Component {
       canReshare: docId => canReshare(this.state, docId, instanceUri),
       getOwner: docId => getOwner(this.state, docId),
       getSharingType: docId => getSharingType(this.state, docId, instanceUri),
+      getSharingForSelf: docId => getSharingForSelf(this.state, docId),
       getRecipients: docId => getRecipients(this.state, docId),
       getDocumentPermissions: docId =>
         getDocumentPermissions(this.state, docId),
