@@ -126,18 +126,18 @@ const EditContract = props => {
   const handleSubmit = e => {
     e.preventDefault()
     handleSaveContract(contract, { shortLabel, owners })
-    tracker.trackEvent('appliquer')
+    tracker.trackEvent({ name: 'appliquer' })
   }
 
   const handleRequestDeletion = ev => {
     ev.preventDefault()
     setShowDeleteConfirmation(true)
-    tracker.trackEvent('supprimer_compte')
+    tracker.trackEvent({ name: 'supprimer_compte' })
   }
 
   const handleCancelDeletion = () => {
     setShowDeleteConfirmation(false)
-    tracker.trackEvent('annuler')
+    tracker.trackEvent({ name: 'annuler' })
   }
 
   const handleRemoveContract = async contract => {
@@ -145,7 +145,7 @@ const EditContract = props => {
 
     try {
       await client.destroy(contract)
-      tracker.trackEvent('confirmer_suppression')
+      tracker.trackEvent({ name: 'confirmer_suppression' })
 
       if (onAfterRemove) {
         onAfterRemove()
@@ -161,7 +161,7 @@ const EditContract = props => {
 
   const handleChangeOwners = owners => {
     setOwners(owners)
-    tracker.trackEvent('changement_titulaire')
+    tracker.trackEvent({ name: 'changement_titulaire' })
   }
 
   const confirmPrimaryText = t('contractForm.confirm-deletion.description')

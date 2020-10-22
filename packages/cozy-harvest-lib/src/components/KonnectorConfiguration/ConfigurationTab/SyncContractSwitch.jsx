@@ -77,7 +77,9 @@ export class DumbSyncContractSwitch extends React.Component {
         newSyncStatus
       )
       await client.save(updatedAccount)
-      tracker.trackEvent(`synchroniser_compte-${newSyncStatus ? 'on' : 'off'}`)
+      tracker.trackEvent({
+        name: `synchroniser_compte-${newSyncStatus ? 'on' : 'off'}`
+      })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.warn('Could not set sync status', e)
