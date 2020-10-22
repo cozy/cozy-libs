@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.19.0...cozy-harvest-lib@2.20.0) (2020-10-22)
+
+
+### Bug Fixes
+
+* Do not use deprecated ListItemText props ([8d61589](https://github.com/cozy/cozy-libs/commit/8d61589))
+* Track event call needs an object with name attribute ([d745599](https://github.com/cozy/cozy-libs/commit/d745599))
+
+
+### Features
+
+* Update cozy-ui ([5b0ea73](https://github.com/cozy/cozy-libs/commit/5b0ea73))
+
+
+
+
+
 # [2.19.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.18.2...cozy-harvest-lib@2.19.0) (2020-10-19)
 
 
