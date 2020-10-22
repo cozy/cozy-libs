@@ -55,8 +55,8 @@ const ContractItem = ({ contract, konnector, accountId }) => {
           <Icon icon="wallet" className="u-slateGrey" />
         </ListItemIcon>
         <ListItemText
-          primaryText={startCase(getPrimaryText(contract).toLowerCase())}
-          secondaryText={contract._deleted ? t('contracts.deleted') : null}
+          primary={startCase(getPrimaryText(contract).toLowerCase())}
+          secondary={contract._deleted ? t('contracts.deleted') : null}
         />
         <ListItemSecondaryAction>
           <Icon icon="right" className="u-coolGrey u-mr-1" />
