@@ -217,14 +217,14 @@ export class SharingProvider extends Component {
     const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
     if (sharing) return this.addRecipients(sharing, recipients, sharingType)
-    const { data } = await this.sharingCol.share(
+    const { data } = await this.sharingCol.create({
       document,
       recipients,
-      sharingType,
+      readOnlyRecipients,
       description,
-      '/preview',
-      true
-    )
+      previewPath: '/preview',
+      openSharing
+    })
 
     this.dispatch(
       addSharing(
