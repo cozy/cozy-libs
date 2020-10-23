@@ -9,6 +9,7 @@ export const getInitials = (contactOrRecipient, defaultValue = '') => {
   if (isContact(contactOrRecipient)) {
     return ContactModel.getInitials(contactOrRecipient)
   } else {
+    // @todo Extract to RecipientModel ?
     const s =
       contactOrRecipient.public_name ||
       contactOrRecipient.name ||
@@ -21,6 +22,7 @@ export const getDisplayName = (contact, defaultValue = '') => {
   if (isContact(contact)) {
     return ContactModel.getDisplayName(contact)
   } else {
+    // @todo Extract to RecipientModel ?
     return contact.public_name || contact.name || contact.email || defaultValue
   }
 }
