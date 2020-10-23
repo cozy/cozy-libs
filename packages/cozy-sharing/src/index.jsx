@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import reducer, {
   receiveSharings,
@@ -457,30 +456,30 @@ export const SharedRecipientsList = withLocales(({ docId, ...rest }) => (
 ))
 
 export const ShareButton = withLocales(
-  translate()(({ t, docId, ...rest }) => (
-    <SharingContext.Consumer>
-      {({ byDocId, documentType, isOwner }) => {
-        return !byDocId[docId] ? (
-          <DumbShareButton label={t(`${documentType}.share.cta`)} {...rest} />
-        ) : isOwner(docId) ? (
-          <SharedByMeButton
-            label={t(`${documentType}.share.sharedByMe`)}
-            {...rest}
-          />
-        ) : (
-          <SharedWithMeButton
-            label={t(`${documentType}.share.sharedWithMe`)}
-            {...rest}
-          />
-        )
-      }}
-    </SharingContext.Consumer>
-  ))
+  // eslint-disable-next-line no-unused-vars
+  ({ docId, ...rest }) => {
+    const { t } = useI18n()
+    return (
+      <SharingContext.Consumer>
+        {({ byDocId, documentType, isOwner }) => {
+          return !byDocId[docId] ? (
+            <DumbShareButton label={t(`${documentType}.share.cta`)} {...rest} />
+          ) : isOwner(docId) ? (
+            <SharedByMeButton
+              label={t(`${documentType}.share.sharedByMe`)}
+              {...rest}
+            />
+          ) : (
+            <SharedWithMeButton
+              label={t(`${documentType}.share.sharedWithMe`)}
+              {...rest}
+            />
+          )
+        }}
+      </SharingContext.Consumer>
+    )
+  }
 )
-
-ShareButton.contextTypes = {
-  t: PropTypes.func.isRequired
-}
 
 const SharingModal = ({ document, ...rest }) => (
   <SharingContext.Consumer>
