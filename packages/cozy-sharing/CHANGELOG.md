@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.1.0...cozy-sharing@2.2.0) (2020-10-26)
+
+
+### Bug Fixes
+
+* Add open_sharing attribute to share() ([8dd6f8d](https://github.com/cozy/cozy-libs/commit/8dd6f8d))
+* GetPrimaryCozy is not exactly the same between doctypes and models ([f7e6a09](https://github.com/cozy/cozy-libs/commit/f7e6a09))
+* If sharingType is read only don't display read / write option ([69f8be5](https://github.com/cozy/cozy-libs/commit/69f8be5))
+
+
+### Features
+
+* Pass the sharing Object down to the tree ([6b5e26b](https://github.com/cozy/cozy-libs/commit/6b5e26b))
+* Upgrade Cozy-Client ([aac9610](https://github.com/cozy/cozy-libs/commit/aac9610))
+* Upgrade cozy-client to get SharingAPI ([40b6e14](https://github.com/cozy/cozy-libs/commit/40b6e14))
+
+
+
+
+
 # [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.0.0...cozy-sharing@2.1.0) (2020-10-19)
 
 
