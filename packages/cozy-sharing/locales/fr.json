@@ -275,5 +275,6 @@
         "revoke": "Une erreur est survenue lors de la révocation du lien de partage de l'album, merci de réessayer"
       }
     }
-  }
+  },
+  "inDoubleQuote": "« %{text} »"
 }

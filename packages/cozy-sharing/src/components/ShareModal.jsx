@@ -52,7 +52,16 @@ export const ShareModal = ({
         disableEnforceFocus
       >
         <DialogCloseButton onClick={onClose} />
-        <DialogTitle>{t(`${documentType}.share.title`)}</DialogTitle>
+        <DialogTitle>
+          {documentType === 'Files' ? (
+            <div className="u-ellipsis">
+              {t(`${documentType}.share.title`)}{' '}
+              {t('inDoubleQuote', { text: document.name })}
+            </div>
+          ) : (
+            t(`${documentType}.share.title`)
+          )}
+        </DialogTitle>
         {(hasSharedParent || hasSharedChild) && (
           <div className={styles['share-byemail-onlybylink']}>
             {t(`${documentType}.share.shareByEmail.onlyByLink`, {

@@ -275,5 +275,6 @@
         "revoke": "An error occurred when revoking the album share link, please try again."
       }
     }
-  }
+  },
+  "inDoubleQuote": "\"%{text}\""
 }
