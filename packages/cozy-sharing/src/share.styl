@@ -16,9 +16,13 @@
     margin-left calc(var(--modal-padding) * -1)
     margin-right calc(var(--modal-padding) * -1)
     border-top 1px solid var(--silver)
-    
+
     +small-screen()
       --modal-padding: 1rem
+
+.share-modal-title
+    h6
+        width: 100%
 
 .share-modal-content
     @extend $form
@@ -37,7 +41,7 @@
     .coz-form-label
         padding-top 0
         margin-top  0
-        
+
 .aligned-dropdown-button
   margin-right: -1rem
 

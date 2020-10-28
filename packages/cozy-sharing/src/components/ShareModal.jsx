@@ -52,8 +52,13 @@ export const ShareModal = ({
         disableEnforceFocus
       >
         <DialogCloseButton onClick={onClose} />
-        <DialogTitle>
-          {t(`${documentType}.share.title`, { name: document.name })}
+        {/* we need here a troncated ellipsis title, so we need to do it manually
+        by adding 'share-modal-title' and 'u-ellipsis'
+        until the new modals are implemented in cozy-ui */}
+        <DialogTitle classes={{ root: styles['share-modal-title'] }}>
+          <div className="u-ellipsis">
+            {t(`${documentType}.share.title`, { name: document.name })}
+          </div>
         </DialogTitle>
         {(hasSharedParent || hasSharedChild) && (
           <div className={styles['share-byemail-onlybylink']}>
