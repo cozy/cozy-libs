@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.20.0...cozy-harvest-lib@2.21.0) (2020-10-28)
+
+
+### Features
+
+* Add PropType for konnector/konnectorSlug ([31393fe](https://github.com/cozy/cozy-libs/commit/31393fe))
+
+
+
+
+
 # [2.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.19.0...cozy-harvest-lib@2.20.0) (2020-10-22)
 
 
