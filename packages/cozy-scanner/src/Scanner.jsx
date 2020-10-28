@@ -5,7 +5,7 @@ import { CozyFile } from 'cozy-doctypes'
 import Modal from 'cozy-ui/transpiled/react/Modal'
 
 import { ModalScannerQualification } from './'
-import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
+import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
 import { doUpload } from './ScannerUpload'
 
