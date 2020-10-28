@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.5](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.5.4...cozy-scanner@0.5.5) (2020-10-28)
+
+
+### Bug Fixes
+
+* Import withOffline after a BC in UI ([905958e](https://github.com/cozy/cozy-libs/commit/905958e))
+
+
+
+
+
 ## [0.5.4](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.5.3...cozy-scanner@0.5.4) (2020-10-01)
 
 
