@@ -4,7 +4,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import withOffline from 'cozy-ui/transpiled/helpers/withOffline'
+import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 import DialogContent from '@material-ui/core/DialogContent'
 
 import ExperimentalDialog, {
