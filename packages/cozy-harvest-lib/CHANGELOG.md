@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.22.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.21.0...cozy-harvest-lib@2.22.0) (2020-10-28)
+
+
+### Features
+
+* **Harvest:** Upgrade cozy-bi-auth to 0.0.14 ([01537c1](https://github.com/cozy/cozy-libs/commit/01537c1))
+
+
+
+
+
 # [2.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.20.0...cozy-harvest-lib@2.21.0) (2020-10-28)
 
 
