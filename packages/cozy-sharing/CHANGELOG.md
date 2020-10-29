@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.2.0...cozy-sharing@2.3.0) (2020-10-29)
+
+
+### Features
+
+* Add size to title ([5f14685](https://github.com/cozy/cozy-libs/commit/5f14685))
+* Display the document name in the Sharing Modale ([a7832ac](https://github.com/cozy/cozy-libs/commit/a7832ac))
+
+
+
+
+
 # [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.1.0...cozy-sharing@2.2.0) (2020-10-26)
 
 
