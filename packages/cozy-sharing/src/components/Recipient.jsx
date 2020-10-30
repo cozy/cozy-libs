@@ -79,6 +79,9 @@ export const RecipientAvatar = ({ recipient, ...rest }) => {
       image={`${client.options.uri}${recipient.avatarPath}`}
       text={getInitials(recipient)}
       textId={getDisplayName(recipient)}
+      disabled={
+        recipient.status === 'pending' || recipient.status === 'mail-not-send'
+      }
       {...rest}
     />
   )
