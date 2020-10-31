@@ -1,4 +1,4 @@
-const hocReplacer = require('./hoc-replacer')
+const { hocToHookReplacer } = require('./hoc')
 
 const examples = {
   client: {
@@ -100,7 +100,7 @@ const findBreakpointsProp = objPattern => {
 
 describe('HOC replacer', () => {
   it('should replace an HOC by a hook (HOC takes no option = simpleHOC)', () => {
-    const replaceClientPropsByHook = hocReplacer({
+    const replaceClientPropsByHook = hocToHookReplacer({
       propsFilter: isClientProp,
       propsFinder: findClientProps,
       hookUsage: `const client = useClient()`,
@@ -121,7 +121,7 @@ describe('HOC replacer', () => {
   })
 
   it('should replace an HOC by a hook (HOC takes options)', () => {
-    const replaceBreakpointsHOC = hocReplacer({
+    const replaceBreakpointsHOC = hocToHookReplacer({
       propsFilter: isBreakpointProp,
       propsFinder: findBreakpointsProp,
       hookUsage: foundProps => {

@@ -1,5 +1,5 @@
 const j = require('jscodeshift')
-const transformImports = require('./transform-imports')
+const { simplify } = require('./imports')
 
 const before = `
 import React from 'react'
@@ -21,7 +21,7 @@ describe('transform imports', () => {
   it('should transform imports according to options', () => {
     const root = j(before)
 
-    transformImports(j, root, {
+    simplify(root, {
       imports: {
         Dialog: {
           importPath: 'cozy-ui/transpiled/react/Dialog',

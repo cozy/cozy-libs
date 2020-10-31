@@ -22,11 +22,11 @@
  * <App />
  * ```
  */
-import removeUnusedImports from '../utils/remove-unused-imports'
+import { imports } from '..'
 
 export default function removeUnusedImportsTransform(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
-  removeUnusedImports(root, j)
+  imports.removeUnused(root)
   return root.toSource()
 }

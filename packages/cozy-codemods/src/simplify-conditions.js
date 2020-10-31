@@ -1,3 +1,5 @@
+const j = require('jscodeshift')
+
 /**
  * Returns true if path is Program or a Block
  *
@@ -44,7 +46,7 @@ const flatReplace = (path, newNode) => {
  * @param  {NodePath} root
  * @param  {Object} j
  */
-const simplifyConditions = (root, j) => {
+const simplifyConditions = root => {
   // Unary expressions with true/false
   for (let v of [true, false]) {
     root
@@ -101,4 +103,4 @@ const simplifyConditions = (root, j) => {
   }
 }
 
-export default simplifyConditions
+module.exports = simplifyConditions

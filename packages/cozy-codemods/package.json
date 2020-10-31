@@ -1,15 +1,18 @@
 {
   "name": "@cozy/codemods",
-  "version": "1.2.2",
-  "main": "src/index.js",
+  "version": "1.4.0",
+  "description": "Codeshifts used inside Cozies",
+  "main": "index.js",
+  "repository": "https://github.com/cozy/cozy-libs",
+  "author": "Cozy",
   "license": "MIT",
   "scripts": {
-    "test": "jest src"
-  },
-  "dependencies": {
-    "eslint-config-cozy-app": "^2.0.0"
+    "docs": "jsdoc2md -f 'src/**/*.js' -t .README.md.template > README.md",
+    "build": "babel src -d dist --verbose"
   },
   "devDependencies": {
-    "jest": "24.9.0"
+    "jest": "^24.8.0",
+    "jscodeshift": "^0.6.4",
+    "jsdoc-to-markdown": "^5.0.0"
   }
 }

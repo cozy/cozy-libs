@@ -1,5 +1,101 @@
+const j = require('jscodeshift')
 const findNearest = require('./find-nearest')
-const makeUtils = require('./utils')
+const imports = require('./imports')
+
+/**
+ * Before
+ *
+ * compose(onlyOneFunction)()
+ *
+ * After
+ *
+ * onlyOneFunction()
+ *
+ */
+const simplifyCompose = root => {
+  root
+    .find(j.CallExpression, {
+      callee: {
+        callee: {
+          name: 'compose'
+        }
+      }
+    })
+    .forEach(path => {
+      if (path.node.callee.arguments.length === 1) {
+        path.node.callee = path.node.callee.arguments[0]
+      }
+    })
+}
+
+const removeHOC = (arrowFunctionBodyPath, hocName, noOptionsHOC) => {
+  let curPath = arrowFunctionBodyPath
+  while (curPath) {
+    const curNode = curPath.node
+    if (
+      (!noOptionsHOC &&
+        curNode.type === 'CallExpression' &&
+        curNode.callee.callee &&
+        curNode.callee.callee.name === hocName) ||
+      (noOptionsHOC &&
+        curNode.type === 'CallExpression' &&
+        curNode.callee &&
+        curNode.callee.name === hocName)
+    ) {
+      const component = curPath.parentPath.node.arguments[0]
+      curPath.parentPath.replace(component)
+      break
+    }
+    curPath = curPath.parentPath
+  }
+}
+
+export const removeDefaultExportHOC = (
+  root,
+  ComponentName,
+  hocName,
+  noOptionsHOC
+) => {
+  const defaultExports = root.find(j.ExportDefaultDeclaration)
+  if (!defaultExports.length) {
+    return
+  }
+  const defaultExport = defaultExports.get(0)
+  const decl = defaultExport.node.declaration
+  if (decl.type !== 'CallExpression') {
+    return
+  } else if (
+    (!noOptionsHOC &&
+      decl.callee &&
+      decl.callee.callee &&
+      decl.callee.callee.name == hocName &&
+      decl.arguments[0].name == ComponentName) ||
+    (noOptionsHOC &&
+      decl.callee &&
+      decl.callee &&
+      decl.callee.name == hocName &&
+      decl.arguments[0].name == ComponentName)
+  ) {
+    defaultExport.node.declaration = decl.arguments[0]
+  } else if (
+    decl.callee &&
+    decl.callee.callee &&
+    decl.callee.callee.name == 'compose' &&
+    decl.arguments[0].name == ComponentName
+  ) {
+    decl.callee.arguments = decl.callee.arguments.filter(node => {
+      if (node.callee) {
+        // hoc with options called in compose like compose(hoc())
+        return node.callee.name !== hocName
+      } else if (node.name) {
+        // hoc without options called in compose like compose(hoc)
+        return node.name !== hocName
+      } else {
+        return true
+      }
+    })
+  }
+}
 
 const prepend = (arr, item) => {
   arr.splice(0, 0, item)
@@ -60,17 +156,15 @@ const findPropObjectPattern = (j, functionBodyPath) => {
  * @example
  * See example in cozy-client/codemods/use-client.js
  */
-const hocReplacer = options => {
+const hocToHookReplacer = options => {
   const {
     propsFinder,
     propsFilter,
     hookUsage,
     hocName,
     importOptions,
-    j,
     noOptionsHOC
   } = options
-  const utils = makeUtils(j)
 
   const replacer = (root, arrowFunctionBodyPath) => {
     const arrowFunctionBody = arrowFunctionBodyPath.node
@@ -119,7 +213,8 @@ const hocReplacer = options => {
       arrowFunctionBody.body.body,
       typeof hookUsage === 'function' ? hookUsage(hocProps) : hookUsage
     )
-    utils.hoc.removeHOC(arrowFunctionBodyPath, hocName, noOptionsHOC)
+
+    removeHOC(arrowFunctionBodyPath, hocName, noOptionsHOC)
 
     const declarator = findNearest(
       arrowFunctionBodyPath,
@@ -132,10 +227,10 @@ const hocReplacer = options => {
         name: ComponentName
       })
       .forEach(path => {
-        utils.hoc.removeHOC(path, hocName)
+        removeHOC(path, hocName)
       })
 
-    utils.hoc.removeDefaultExportHOC(root, ComponentName, hocName, noOptionsHOC)
+    removeDefaultExportHOC(root, ComponentName, hocName, noOptionsHOC)
     return true
   }
 
@@ -150,14 +245,14 @@ const hocReplacer = options => {
     })
 
     if (needToAddImport) {
-      utils.imports.add(
+      imports.ensure(
         root,
         importOptions.specifiers,
         importOptions.filter,
         importOptions.package
       )
-      utils.simplifyCompose(root)
-      utils.imports.removeUnused(root)
+      simplifyCompose(root)
+      imports.removeUnused(root)
       return root
     } else {
       return root
@@ -165,4 +260,8 @@ const hocReplacer = options => {
   }
 }
 
-module.exports = hocReplacer
+module.exports = {
+  simplifyCompose,
+  removeDefaultExportHOC,
+  hocToHookReplacer
+}

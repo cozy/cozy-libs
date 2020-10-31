@@ -1,4 +1,6 @@
-const removeEmptyDeclarations = (root, j) => {
+const j = require('jscodeshift')
+
+const removeEmptyDeclarations = root => {
   // Remove empty declarations
   root.find(j.VariableDeclaration).forEach(p => {
     if (p.node.declarations.filter(Boolean).length === 0) {
@@ -7,7 +9,7 @@ const removeEmptyDeclarations = (root, j) => {
   })
 }
 
-const replaceBooleanVars = (root, j) => {
+const replaceBooleanVars = root => {
   for (let booleanValue of [true, false]) {
     root
       .find(j.VariableDeclarator, { init: { value: booleanValue } })
@@ -37,4 +39,4 @@ const replaceBooleanVars = (root, j) => {
   }
 }
 
-export default replaceBooleanVars
+module.exports = replaceBooleanVars
