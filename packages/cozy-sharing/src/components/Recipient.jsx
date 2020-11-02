@@ -21,19 +21,39 @@ import modalStyles from '../share.styl'
 import { getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
-const MAX_DISPLAYED_RECIPIENTS = 3
+export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
+
+/**
+ * Exclude me from the list of recipients if I'm the owner of the share
+ * @typedef {object} Recipient
+ * @param {array<Recipient>} recipients - List of recipients
+ * @param {boolean} isOwner - Indicates if I'm the owner or not
+ * @returns {array<Recipient>} List of recipients without me if I'm the owner
+ */
+const excludeMeAsOwnerFromRecipients = ({ recipients, isOwner }) => {
+  return recipients.filter(recipient =>
+    isOwner ? recipient.status !== 'owner' : recipient
+  )
+}
 
 export const RecipientsAvatars = ({
   recipients,
   link,
   size,
   className,
-  onClick
+  onClick,
+  isOwner,
+  showMeAsOwner
 }) => {
+  const filteredRecipients = showMeAsOwner
+    ? recipients.slice().reverse() // we slice first to clone the original array because reverser() mutates it
+    : excludeMeAsOwnerFromRecipients({
+        recipients,
+        isOwner
+      }).reverse()
   // we reverse the recipients array because we use `flex-direction: row-reverse` to display them correctly
-  // we slice first to clone the original array because reverse() mutates it
-  const reversedRecipients = recipients.slice().reverse()
+
   return (
     <div
       className={classNames(
@@ -46,27 +66,40 @@ export const RecipientsAvatars = ({
       onClick={onClick}
     >
       {link && (
-        <Circle size={size} backgroundColor="var(--genericRecipientBackground)">
-          <Icon icon="link" size={16} color="var(--genericRecipientColor)" />
-        </Circle>
+        <span data-testid="recipientsAvatars-link">
+          <Circle
+            size={size}
+            backgroundColor="var(--genericRecipientBackground)"
+          >
+            <Icon icon="link" size={16} color="var(--genericRecipientColor)" />
+          </Circle>
+        </span>
       )}
-      {recipients.length > MAX_DISPLAYED_RECIPIENTS && (
-        <AvatarPlusX
-          extraRecipients={reversedRecipients
-            .slice(MAX_DISPLAYED_RECIPIENTS)
-            .map(recipient => getDisplayName(recipient))}
-          size={size}
-        />
+      {filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS && (
+        <span data-testid="recipientsAvatars-plusX">
+          <AvatarPlusX
+            extraRecipients={filteredRecipients
+              .slice(MAX_DISPLAYED_RECIPIENTS)
+              .map(recipient => getDisplayName(recipient))}
+            size={size}
+          />
+        </span>
       )}
-      {reversedRecipients
+      {filteredRecipients
         .slice(0, MAX_DISPLAYED_RECIPIENTS)
         .map((recipient, idx) => (
-          <RecipientAvatar
+          <span
+            data-testid={`recipientsAvatars-avatar${
+              recipient.status === 'owner' ? '-owner' : ''
+            }`}
             key={idx}
-            recipient={recipient}
-            size={size}
-            className={classNames(styles['recipient-avatar'])}
-          />
+          >
+            <RecipientAvatar
+              recipient={recipient}
+              size={size}
+              className={classNames(styles['recipient-avatar'])}
+            />
+          </span>
         ))}
     </div>
   )
