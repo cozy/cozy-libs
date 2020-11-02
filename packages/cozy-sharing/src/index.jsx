@@ -39,7 +39,6 @@ import EditableSharingModal from './components/EditableSharingModal'
 import { SharingDetailsModal } from './SharingDetailsModal'
 import { default as RecipientsList } from './components/WhoHasAccessLight'
 import { RecipientsAvatars, RecipientAvatar } from './components/Recipient'
-import { default as DumbSharedStatus } from './components/SharedStatus'
 import { withClient } from 'cozy-client'
 
 import withLocales from './withLocales'
@@ -389,17 +388,20 @@ export const SharedDocument = ({ docId, children }) => (
 )
 
 export const SharedStatus = withLocales(
-  ({ docId, className, noSharedClassName }) => (
+  ({ docId, className, noSharedClassName, onClick, showMeAsOwner }) => (
     <SharingContext.Consumer>
-      {({ byDocId, getRecipients, getSharingLink } = {}) =>
+      {({ byDocId, getRecipients, getSharingLink, isOwner } = {}) =>
         !byDocId || !byDocId[docId] ? (
           <span className={className + ' ' + noSharedClassName}>—</span>
         ) : (
-          <DumbSharedStatus
+          <RecipientsAvatars
             className={className}
             recipients={getRecipients(docId)}
-            docId={docId}
             link={getSharingLink(docId) !== null}
+            onClick={onClick}
+            isOwner={isOwner(docId)}
+            size="small"
+            showMeAsOwner={showMeAsOwner}
           />
         )
       }
@@ -429,12 +431,13 @@ export const SharingOwnerAvatar = withLocales(({ docId, ...rest }) => (
 
 export const SharedRecipients = withLocales(({ docId, onClick, ...rest }) => (
   <SharingContext.Consumer>
-    {({ byDocId, getRecipients, getSharingLink } = {}) =>
+    {({ byDocId, getRecipients, getSharingLink, isOwner } = {}) =>
       !byDocId || !byDocId[docId] ? null : (
         <RecipientsAvatars
           recipients={getRecipients(docId)}
           link={getSharingLink(docId) !== null}
           onClick={onClick}
+          isOwner={isOwner(docId)}
           {...rest}
         />
       )
