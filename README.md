@@ -22,3 +22,7 @@
 
 - [Cozy CI](.packages/cozy-ci): Utility scripts for Cozy Cloud CI integration
 - [Cozy App Publish](./packages/cozy-app-publish): Publish an application/konnector to the Cozy Cloud registry
+
+## Note
+
+- To run unit tests of a package, as some packages may be required for testing, you must first build the cozy-libs packages by running `yarn build`.
