@@ -30,6 +30,9 @@ const ShareDialogOnlyByLink = ({
           onEnable={onShareByLink}
           onDisable={onRevokeLink}
           onChangePermissions={onUpdateShareLinkPermissions}
+          popperOptions={{
+            strategy: 'fixed'
+          }}
         />
       }
     />
