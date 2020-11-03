@@ -1,19 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import Dialog, {
-  DialogTitle,
-  DialogActions
-} from 'cozy-ui/transpiled/react/Dialog'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
-import DialogContent from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogContent'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 import styles from '../share.styl'
-
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import { default as DumbShareByLink } from './ShareByLink'
 import { default as DumbShareByEmail } from './ShareByEmail'
@@ -43,46 +36,42 @@ export const ShareModal = ({
   sharing
 }) => {
   const { t } = useI18n()
+
+  const showShareByEmail =
+    documentType !== 'Notes' &&
+    documentType !== 'Albums' &&
+    !hasSharedParent &&
+    !hasSharedChild
+  const showShareOnlyByLink = hasSharedParent || hasSharedChild
+  const showWhoHasAccess = documentType !== 'Albums'
+
   return (
     <MuiCozyTheme>
-      <Dialog
-        open={true}
+      <FixedDialog
+        opened={true}
         onClose={onClose}
-        PaperProps={{ className: 'u-pb-half' }}
-        disableEnforceFocus
-      >
-        <DialogCloseButton onClick={onClose} />
-        {/* we need here a troncated ellipsis title, so we need to do it manually
-        by adding 'share-modal-title' and 'u-ellipsis'
-        until the new modals are implemented in cozy-ui */}
-        <DialogTitle classes={{ root: styles['share-modal-title'] }}>
-          <div className="u-ellipsis">
-            {t(`${documentType}.share.title`, { name: document.name })}
-          </div>
-        </DialogTitle>
-        {(hasSharedParent || hasSharedChild) && (
-          <div className={styles['share-byemail-onlybylink']}>
-            {t(`${documentType}.share.shareByEmail.onlyByLink`, {
-              type: t(
-                `${documentType}.share.shareByEmail.type.${
-                  document.type === 'directory' ? 'folder' : 'file'
-                }`
-              )
-            })}{' '}
-            <strong>
-              {t(
-                `${documentType}.share.shareByEmail.${
-                  hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
-                }`
-              )}
-            </strong>
-          </div>
-        )}
-        <DialogContent className={cx(styles['share-modal-content'])}>
-          {documentType !== 'Notes' &&
-            documentType !== 'Albums' &&
-            !hasSharedParent &&
-            !hasSharedChild && (
+        title={t(`${documentType}.share.title`, { name: document.name })}
+        content={
+          <div className={cx(styles['share-modal-content'])}>
+            {showShareOnlyByLink && (
+              <div className={styles['share-byemail-onlybylink']}>
+                {t(`${documentType}.share.shareByEmail.onlyByLink`, {
+                  type: t(
+                    `${documentType}.share.shareByEmail.type.${
+                      document.type === 'directory' ? 'folder' : 'file'
+                    }`
+                  )
+                })}{' '}
+                <strong>
+                  {t(
+                    `${documentType}.share.shareByEmail.${
+                      hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
+                    }`
+                  )}
+                </strong>
+              </div>
+            )}
+            {showShareByEmail && (
               <DumbShareByEmail
                 currentRecipients={recipients}
                 document={document}
@@ -96,20 +85,20 @@ export const ShareModal = ({
                 sharing={sharing}
               />
             )}
-          {documentType !== 'Albums' && (
-            <WhoHasAccess
-              className={'u-mt-1 u-mb-1 u-ov-auto'}
-              isOwner={isOwner}
-              recipients={recipients}
-              document={document}
-              documentType={documentType}
-              onRevoke={onRevoke}
-              onRevokeSelf={onRevokeSelf}
-            />
-          )}
-        </DialogContent>
-        <Divider />
-        <DialogActions>
+            {showWhoHasAccess && (
+              <WhoHasAccess
+                className={'u-mt-1'}
+                isOwner={isOwner}
+                recipients={recipients}
+                document={document}
+                documentType={documentType}
+                onRevoke={onRevoke}
+                onRevokeSelf={onRevokeSelf}
+              />
+            )}
+          </div>
+        }
+        actions={
           <DumbShareByLink
             document={document}
             permissions={permissions}
@@ -120,11 +109,12 @@ export const ShareModal = ({
             onDisable={onRevokeLink}
             onChangePermissions={onUpdateShareLinkPermissions}
           />
-        </DialogActions>
-      </Dialog>
+        }
+      />
     </MuiCozyTheme>
   )
 }
+
 export default ShareModal
 
 ShareModal.propTypes = {

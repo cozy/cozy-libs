@@ -2,6 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 
 import { createMockClient } from 'cozy-client'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import AppLike from '../../test/AppLike'
 import { default as DumbShareModal } from './ShareModal'
@@ -17,10 +18,13 @@ jest.mock('./useFetchDocumentPath', () => ({
 const AppWrapper = ({ children, client }) => {
   return (
     <AppLike client={client}>
-      <SharingProvider client={client}>{children}</SharingProvider>
+      <BreakpointsProvider>
+        <SharingProvider client={client}>{children}</SharingProvider>
+      </BreakpointsProvider>
     </AppLike>
   )
 }
+
 describe('EditableSharingModal', () => {
   const client = createMockClient({})
   const setup = ({ document }) => {
@@ -38,6 +42,7 @@ describe('EditableSharingModal', () => {
     )
     return { component }
   }
+
   it('will set to false the shared parent / child if the document has no path', () => {
     const { component } = setup({ document: {} })
 

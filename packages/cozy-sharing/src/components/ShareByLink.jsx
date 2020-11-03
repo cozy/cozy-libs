@@ -114,7 +114,7 @@ class ShareByLink extends React.Component {
     const hasReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
 
     return (
-      <div className="u-w-100 u-pt-half">
+      <div className="u-w-100">
         <div className="u-flex u-flex-row u-flex-justify-between u-flex-items-center">
           <Text>{t(`${documentType}.share.shareByLink.subtitle`)}</Text>
           {!checked && (

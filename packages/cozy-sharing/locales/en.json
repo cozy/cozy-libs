@@ -81,7 +81,7 @@
       },
       "shareByEmail": {
         "subtitle": "By email",
-        "email": "To:",
+        "email": "Send to:",
         "emailPlaceholder": "Enter the email address or name of the recipient",
         "send": "Send",
         "genericSuccess": "You sent an invite to %{count} contacts.",
