@@ -62,11 +62,10 @@ exports[`ContactSuggestion component should display contact suggestion for a con
       text="JS"
     >
       <div
-        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv"
+        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv styles__c-avatar--text___2dvna"
         style={
           Object {
             "backgroundColor": "var(--lavender)",
-            "color": "white",
           }
         }
       >
@@ -144,11 +143,10 @@ exports[`ContactSuggestion component should display contact suggestion for a con
       text="J"
     >
       <div
-        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv"
+        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv styles__c-avatar--text___2dvna"
         style={
           Object {
             "backgroundColor": "var(--puertoRico)",
-            "color": "white",
           }
         }
       >
@@ -277,11 +275,10 @@ exports[`ContactSuggestion component should display contact suggestion for a gro
       text="G"
     >
       <div
-        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv"
+        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv styles__c-avatar--text___2dvna"
         style={
           Object {
             "backgroundColor": "var(--purpley)",
-            "color": "white",
           }
         }
       >
