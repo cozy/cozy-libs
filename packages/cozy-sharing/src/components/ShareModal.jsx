@@ -1,17 +1,10 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-
-import styles from '../share.styl'
 import { contactsResponseType, groupsResponseType } from '../propTypes'
-import { default as DumbShareByLink } from './ShareByLink'
-import { default as DumbShareByEmail } from './ShareByEmail'
-import WhoHasAccess from './WhoHasAccess'
 
+import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
+import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
 export const ShareModal = ({
   document,
   isOwner,
@@ -35,8 +28,6 @@ export const ShareModal = ({
   onRevokeSelf,
   sharing
 }) => {
-  const { t } = useI18n()
-
   const showShareByEmail =
     documentType !== 'Notes' &&
     documentType !== 'Albums' &&
@@ -46,72 +37,47 @@ export const ShareModal = ({
   const showWhoHasAccess = documentType !== 'Albums'
 
   return (
-    <MuiCozyTheme>
-      <FixedDialog
-        open={true}
-        onClose={onClose}
-        title={t(`${documentType}.share.title`, { name: document.name })}
-        content={
-          <div className={cx(styles['share-modal-content'])}>
-            {showShareOnlyByLink && (
-              <div className={styles['share-byemail-onlybylink']}>
-                {t(`${documentType}.share.shareByEmail.onlyByLink`, {
-                  type: t(
-                    `${documentType}.share.shareByEmail.type.${
-                      document.type === 'directory' ? 'folder' : 'file'
-                    }`
-                  )
-                })}{' '}
-                <strong>
-                  {t(
-                    `${documentType}.share.shareByEmail.${
-                      hasSharedParent ? 'hasSharedParent' : 'hasSharedChild'
-                    }`
-                  )}
-                </strong>
-              </div>
-            )}
-            {showShareByEmail && (
-              <DumbShareByEmail
-                currentRecipients={recipients}
-                document={document}
-                documentType={documentType}
-                sharingDesc={sharingDesc}
-                contacts={contacts}
-                groups={groups}
-                createContact={createContact}
-                onShare={onShare}
-                needsContactsPermission={needsContactsPermission}
-                sharing={sharing}
-              />
-            )}
-            {showWhoHasAccess && (
-              <WhoHasAccess
-                className={'u-mt-1'}
-                isOwner={isOwner}
-                recipients={recipients}
-                document={document}
-                documentType={documentType}
-                onRevoke={onRevoke}
-                onRevokeSelf={onRevokeSelf}
-              />
-            )}
-          </div>
-        }
-        actions={
-          <DumbShareByLink
-            document={document}
-            permissions={permissions}
-            documentType={documentType}
-            checked={link !== null}
-            link={link}
-            onEnable={onShareByLink}
-            onDisable={onRevokeLink}
-            onChangePermissions={onUpdateShareLinkPermissions}
-          />
-        }
-      />
-    </MuiCozyTheme>
+    <>
+      {(documentType === 'Notes' || documentType === 'Albums') && (
+        <ShareDialogOnlyByLink
+          onClose={onClose}
+          documentType={documentType}
+          document={document}
+          permissions={permissions}
+          link={link}
+          onShareByLink={onShareByLink}
+          onRevokeLink={onRevokeLink}
+          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+        />
+      )}
+      {documentType !== 'Notes' && documentType !== 'Albums' && (
+        <ShareDialogCozyToCozy
+          onClose={onClose}
+          documentType={documentType}
+          document={document}
+          permissions={permissions}
+          link={link}
+          onShareByLink={onShareByLink}
+          onRevokeLink={onRevokeLink}
+          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+          showShareOnlyByLink={showShareOnlyByLink}
+          showShareByEmail={showShareByEmail}
+          hasSharedParent={hasSharedParent}
+          recipients={recipients}
+          sharingDesc={sharingDesc}
+          contacts={contacts}
+          groups={groups}
+          createContact={createContact}
+          onShare={onShare}
+          needsContactsPermission={needsContactsPermission}
+          sharing={sharing}
+          showWhoHasAccess={showWhoHasAccess}
+          isOwner={isOwner}
+          onRevoke={onRevoke}
+          onRevokeSelf={onRevokeSelf}
+        />
+      )}
+    </>
   )
 }
 
