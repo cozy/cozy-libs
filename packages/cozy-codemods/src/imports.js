@@ -50,7 +50,13 @@ imports.add(root, {
   } else {
     const imports = root.find(j.ImportDeclaration)
     const decl = j.importDeclaration(specifiers, j.literal(source))
-    imports.at(-1).insertAfter(decl)
+    if (imports.length > 0) {
+      imports.at(-1).insertAfter(decl)
+    } else {
+      root.find('Program').forEach(path => {
+        path.node.body.unshift(decl)
+      })
+    }
   }
 }
 
