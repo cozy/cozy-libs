@@ -1,3 +1,4 @@
 {
-  "extends": ["cozy-app/react"]
+  "extends": ["cozy-app/react"],
+  "ignore": ["*.output.js"]
 }
