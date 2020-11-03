@@ -5,13 +5,8 @@ import { withClient } from 'cozy-client'
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
-import DialogContent from '@material-ui/core/DialogContent'
 
-import ExperimentalDialog, {
-  ExperimentalDialogTitle,
-  ExperimentalDialogActions
-} from 'cozy-ui/transpiled/react/Labs/ExperimentalDialog'
-import DialogCloseButton from 'cozy-ui/transpiled/react/MuiCozyTheme/Dialog/DialogCloseButton'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Button from 'cozy-ui/transpiled/react/Button'
 
 import DocumentQualification from './DocumentQualification'
@@ -45,10 +40,11 @@ class EditDocumentQualification extends Component {
     const theme = item ? getThemeByItem(item) : null
     const categoryLabel = item ? theme.label : null
     return (
-      <ExperimentalDialog onClose={onClose}>
-        <DialogCloseButton onClick={onClose} />
-        <ExperimentalDialogTitle>{document.name}</ExperimentalDialogTitle>
-        <DialogContent>
+      <Dialog
+        onClose={onClose}
+        title={document.name}
+        opened={true}
+        content={
           <DocumentQualification
             onDescribed={qualification => {
               this.setState({ qualification })
@@ -58,38 +54,41 @@ class EditDocumentQualification extends Component {
               categoryLabel
             }}
           />
-        </DialogContent>
-        <ExperimentalDialogActions layout="row">
-          <Button
-            theme="secondary"
-            onClick={onClose}
-            label={t('Scan.cancel')}
-          />
-          <Button
-            theme="primary"
-            label={t('Scan.apply')}
-            onClick={async () => {
-              if (isOffline) {
-                Alerter.error(t('Scan.error.offline'))
-              } else {
-                try {
-                  const fileCollection = client.collection('io.cozy.files')
-                  const updatedFile = await fileCollection.updateMetadataAttribute(
-                    document._id,
-                    qualification
-                  )
-                  pushAnalytics(item)
-                  if (onDescribed) onDescribed(updatedFile.data)
-                  onClose()
-                  Alerter.success(t('Scan.successful.qualified_ok'))
-                } catch (error) {
-                  Alerter.error(t('Scan.error.generic'))
+        }
+        actions={
+          <>
+            <Button
+              theme="secondary"
+              onClick={onClose}
+              label={t('Scan.cancel')}
+            />
+            <Button
+              theme="primary"
+              label={t('Scan.apply')}
+              onClick={async () => {
+                if (isOffline) {
+                  Alerter.error(t('Scan.error.offline'))
+                } else {
+                  try {
+                    const fileCollection = client.collection('io.cozy.files')
+                    const updatedFile = await fileCollection.updateMetadataAttribute(
+                      document._id,
+                      qualification
+                    )
+                    pushAnalytics(item)
+                    if (onDescribed) onDescribed(updatedFile.data)
+                    onClose()
+                    Alerter.success(t('Scan.successful.qualified_ok'))
+                  } catch (error) {
+                    Alerter.error(t('Scan.error.generic'))
+                  }
                 }
-              }
-            }}
-          />
-        </ExperimentalDialogActions>
-      </ExperimentalDialog>
+              }}
+            />
+          </>
+        }
+        actionsLayout="row"
+      />
     )
   }
 }
