@@ -82,7 +82,7 @@
       },
       "shareByEmail": {
         "subtitle": "Par email",
-        "email": "À :",
+        "email": "Envoyer à :",
         "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
         "send": "Envoyer",
         "genericSuccess": "Vous avez invité %{count} contacts.",

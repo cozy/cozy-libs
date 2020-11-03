@@ -3,36 +3,19 @@
 @require 'settings/breakpoints.styl'
 @require 'settings/palette.styl'
 
-.divider
-    border 0
-    background-color var(--silver)
-    height 1px
-    margin-top 0
-
 .share-byemail-onlybylink
-    --modal-padding: 2rem
     background var(--paleGrey)
-    padding    1rem var(--modal-padding)
-    margin-left calc(var(--modal-padding) * -1)
-    margin-right calc(var(--modal-padding) * -1)
-    border-top 1px solid var(--silver)
+    padding 1rem 2rem
+    margin -1.5rem -2rem 1rem
 
     +small-screen()
-      --modal-padding: 1rem
-
-.share-modal-title
-    h6
-        width: 100%
+        padding 1rem
+        margin -1.5rem -1rem 1rem
 
 .share-modal-content
     @extend $form
     @extend $form-text
     @extend $form-button
-    display flex
-    flex-direction column
-    flex-shrink: 1
-    overflow: hidden
-    padding: 0 !important
     min-height: rem(250)
 
     .coz-form-group
