@@ -18,6 +18,7 @@ const mergeSpecifiersToImport = (importDeclaration, specifiers) => {
 
 export const ensure = (root, specifierObj, sourceOrFilter, maybeSource) => {
   if (!specifierObj) {
+    // eslint-disable-next-line no-console
     console.warn(`Example usage of imports.add:
 
 imports.add(root, {

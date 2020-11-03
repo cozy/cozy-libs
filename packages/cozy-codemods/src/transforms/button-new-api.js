@@ -52,7 +52,9 @@ module.exports = function(file, api) {
       delete button.closingElement
       button.children = children
     } else {
+      // eslint-disable-next-line no-console
       console.warn('Not a simple button, cannot automatically migrate')
+      // eslint-disable-next-line no-console
       console.log(j(path).toSource())
     }
   }
