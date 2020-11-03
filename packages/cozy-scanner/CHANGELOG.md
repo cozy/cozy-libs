@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.5.5...cozy-scanner@0.6.0) (2020-11-03)
+
+
+### Features
+
+* Use CozyDialog ([6292af0](https://github.com/cozy/cozy-libs/commit/6292af0))
+
+
+
+
+
 ## [0.5.5](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.5.4...cozy-scanner@0.5.5) (2020-10-28)
 
 
