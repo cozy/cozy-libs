@@ -109,7 +109,7 @@ class ShareByLink extends React.Component {
 
   render() {
     const { loading, menuIsOpen } = this.state
-    const { checked, documentType, permissions, t } = this.props
+    const { checked, documentType, permissions, t, popperOptions } = this.props
 
     const hasReadOnlyPermissions = checkIsReadOnlyPermissions(permissions)
 
@@ -168,6 +168,7 @@ class ShareByLink extends React.Component {
                     placement="bottom-end"
                     containerElRef={this.containerRef}
                     anchorElRef={this.containerRef}
+                    popperOptions={popperOptions ? popperOptions : undefined}
                   >
                     <ActionMenuItem
                       left={
