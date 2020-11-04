@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.2.2...@cozy/codemods@1.5.0) (2020-11-04)
+
+
+### Features
+
+* Add codemod to replace icons to SVGr icons ([249dff9](https://github.com/cozy/cozy-libs/commit/249dff9))
+* Move codemods from client/ui/flags to @cozy/codemods ([5fb6eed](https://github.com/cozy/cozy-libs/commit/5fb6eed))
+* Remove cozy-codeshifts and reorganize code and APIs ([49c6521](https://github.com/cozy/cozy-libs/commit/49c6521))
+
+
+
+
+
 # 1.4.0 (2019-09-05)
 
 
