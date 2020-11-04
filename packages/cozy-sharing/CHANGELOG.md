@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.3.1...cozy-sharing@2.4.0) (2020-11-04)
+
+
+### Features
+
+* RecipientAvatar are greyed if pending ([f8a7a53](https://github.com/cozy/cozy-libs/commit/f8a7a53))
+* RecipientsAvatars doesn't show owner avatar if it's 'me' ([3adbba6](https://github.com/cozy/cozy-libs/commit/3adbba6))
+* SharedStatus shows avatars instead of text ([0f7bf9b](https://github.com/cozy/cozy-libs/commit/0f7bf9b))
+
+
+
+
+
 ## [2.3.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.3.0...cozy-sharing@2.3.1) (2020-11-03)
 
 **Note:** Version bump only for package cozy-sharing
