@@ -68,7 +68,7 @@ exports[`SharedStatus component should display the link if there is a link 1`] =
           id="linkfor1"
         >
           <span>
-            Or share by link
+            Shared by link
           </span>
         </div>
       </ReactTooltip>

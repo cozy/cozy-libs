@@ -39,7 +39,7 @@ export const SharedStatus = ({ className, docId, recipients, link }) => {
           />
 
           <SharingTooltip id={`linkfor${docId}`}>
-            <span>{t('Files.share.shareByLink.subtitle')}</span>
+            <span>{t('Files.share.sharedByLink')}</span>
           </SharingTooltip>
         </>
       )}

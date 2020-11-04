@@ -64,6 +64,7 @@
       "sharedByMe": "Shared by me",
       "sharedWithMe": "Shared with me",
       "sharedBy": "Shared by %{name}",
+      "sharedByLink": "Shared by link",
       "shareByLink": {
         "subtitle": "Or share by link",
         "create": "Generate a link",
@@ -146,7 +147,6 @@
       "sharedBy": "Shared by %{name}",
       "shareByLink": {
         "subtitle": "Share by link",
-        "desc": "Anyone with the provided link can see and edit your note.",
         "create": "Generate a link",
         "activated": "Link activated",
         "copy": "Copy link",
@@ -226,8 +226,7 @@
       "sharedByMe": "Shared",
       "sharedWithMe": "Shared with me",
       "shareByLink": {
-        "subtitle": "Or share by link",
-        "desc": "Anyone with the provided link can see and download your photos.",
+        "subtitle": "Share by link",
         "fetchFailed": "Woops! It seems your connectivity is limited, try again later when it gets better.",
         "create": "Generate a link",
         "activated": "Link activated",
