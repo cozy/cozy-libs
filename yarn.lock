@@ -5529,10 +5529,10 @@ cozy-ui@40.1.1:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@40.2.0:
-  version "40.2.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.2.0.tgz#b9192c580566eb6f42bb36788b25f5158567a059"
-  integrity sha512-S9Bvlvqm/YHhVzf/wrnPAOl2uzrL9B3BkRiXGdPORWvUeco5m9twxm4FrS4zD8QoEMdk3mX/h2yR3mRqkT3X9A==
+cozy-ui@40.3.0:
+  version "40.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.3.0.tgz#f0c00f9c36a291fa6e94ec5389c4a41341830039"
+  integrity sha512-EC859D3pWO6uGHMZAil1rM8HjIopyG9fuYd93xOHzSEDQdkoqOSAro7GZ146z8Ok1Q0+8fvR4+8WnVY5V05Z4A==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
