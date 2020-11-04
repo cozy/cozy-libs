@@ -48,7 +48,7 @@ export const ShareModal = ({
   return (
     <MuiCozyTheme>
       <FixedDialog
-        opened={true}
+        open={true}
         onClose={onClose}
         title={t(`${documentType}.share.title`, { name: document.name })}
         content={
