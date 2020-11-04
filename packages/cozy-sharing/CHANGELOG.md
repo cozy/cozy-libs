@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.4.0...cozy-sharing@2.5.0) (2020-11-04)
+
+
+### Features
+
+* Update cozy-ui to 40.3.0 ([0a104fa](https://github.com/cozy/cozy-libs/commit/0a104fa))
+
+
+
+
+
 # [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.3.1...cozy-sharing@2.4.0) (2020-11-04)
 
 
