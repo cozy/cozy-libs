@@ -37,7 +37,7 @@ const ShareDialogCozyToCozy = ({
   return (
     <FixedDialog
       disableEnforceFocus
-      opened={true}
+      open={true}
       onClose={onClose}
       title={t(`${documentType}.share.title`, { name: document.name })}
       content={
