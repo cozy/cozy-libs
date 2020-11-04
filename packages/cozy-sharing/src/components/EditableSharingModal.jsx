@@ -65,10 +65,9 @@ export const EditableSharingModal = ({
 }
 
 EditableSharingModal.propTypes = {
-  client: PropTypes.object.isRequired,
   document: PropTypes.object,
-  contacts: contactsResponseType.isRequired,
-  groups: groupsResponseType.isRequired
+  contacts: contactsResponseType,
+  groups: groupsResponseType
 }
 
 const contactsQuery = () =>
