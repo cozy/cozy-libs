@@ -8,7 +8,12 @@
   "license": "MIT",
   "scripts": {
     "docs": "jsdoc2md -f 'src/**/*.js' -t .README.md.template > README.md",
-    "build": "babel src -d dist --verbose"
+    "build": "babel src -d dist --verbose",
+    "test": "jest src"
+  },
+  "dependencies": {
+    "eslint-config-cozy-app": "^2.0.0",
+    "jscodeshift": "^0.11.0"
   },
   "devDependencies": {
     "jest": "^24.8.0",
