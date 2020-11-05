@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.25.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.25.0...cozy-app-publish@0.25.1) (2020-11-05)
+
+
+### Bug Fixes
+
+* Adjust aligment issues ([efdf056](https://github.com/cozy/cozy-libs/commit/efdf056))
+
+
+
+
+
 # [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.24.1...cozy-app-publish@0.25.0) (2020-08-13)
 
 
