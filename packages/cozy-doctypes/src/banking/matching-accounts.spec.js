@@ -3,7 +3,8 @@ const path = require('path')
 const {
   matchAccounts,
   normalizeAccountNumber,
-  score
+  score,
+  creditCardMatch
 } = require('./matching-accounts')
 
 const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
@@ -95,4 +96,32 @@ it('should normalize account number', () => {
   expect(normalizeAccountNumber('')).toBe('')
   expect(normalizeAccountNumber(null)).toBe(null)
   expect(normalizeAccountNumber(undefined)).toBe(undefined)
+})
+
+describe('creditCardMatch', () => {
+  it('should not throw when an account does not have a number', () => {
+    expect(creditCardMatch).not.toThrow()
+    // real paypal example
+    expect(
+      creditCardMatch(
+        {
+          balance: 0,
+          comingBalance: 0,
+          currency: 'EUR',
+          label: 'xxx EUR PERSONAL',
+          metadata: {
+            dateImport: '2020-11-04T18:06:57.857Z',
+            vendor: 'budget-insight',
+            version: 1,
+            updatedAt: '2020-11-04T18:45:42'
+          },
+          shortLabel: 'xxx EUR PERSONAL',
+          type: 'Checkings',
+          vendorId: '230',
+          institutionLabel: 'Paypal REST API'
+        },
+        { number: '13002900002' }
+      )
+    ).toBe(undefined)
+  })
 })
