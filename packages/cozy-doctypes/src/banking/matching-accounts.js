@@ -73,14 +73,14 @@ const approxNumberMatch = (account, existingAccount) => {
 const creditCardMatch = (account, existingAccount) => {
   let ccAccount, lastDigits
   for (let acc of [account, existingAccount]) {
-    const match = acc.number && acc.number.match(redactedCreditCard)
+    const match = acc && acc.number && acc.number.match(redactedCreditCard)
     if (match) {
       ccAccount = acc
       lastDigits = match[1]
     }
   }
   const other = ccAccount === account ? existingAccount : account
-  if (other.number.slice(-4) === lastDigits) {
+  if (other && other.number && other.number.slice(-4) === lastDigits) {
     return true
   }
 }
@@ -249,5 +249,6 @@ const matchAccounts = (fetchedAccountsArg, existingAccounts) => {
 module.exports = {
   matchAccounts,
   normalizeAccountNumber,
-  score
+  score,
+  creditCardMatch
 }
