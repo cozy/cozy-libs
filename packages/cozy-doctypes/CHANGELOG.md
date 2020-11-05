@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.74.8](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.7...cozy-doctypes@1.74.8) (2020-11-05)
+
+
+### Bug Fixes
+
+* **cozy-doctypes:** CreditCardMatch handle acount without number ([d20a2a0](https://github.com/cozy/cozy-libs/commit/d20a2a0))
+
+
+
+
+
 ## [1.74.7](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.6...cozy-doctypes@1.74.7) (2020-10-01)
 
 
