@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.5.0...cozy-sharing@2.5.1) (2020-11-05)
+
+
+### Bug Fixes
+
+* Better proptypes ([cdc9af5](https://github.com/cozy/cozy-libs/commit/cdc9af5))
+* Don't use the same key for different usage. ([6186711](https://github.com/cozy/cozy-libs/commit/6186711))
+* Need disableEnforceFocus to be able to coyp/past the link ([a034b5f](https://github.com/cozy/cozy-libs/commit/a034b5f))
+* Note has its title in attributes.name ([1224476](https://github.com/cozy/cozy-libs/commit/1224476))
+* Split Dialog in two ([ac16bac](https://github.com/cozy/cozy-libs/commit/ac16bac))
+* Use open and not opened ([3d23325](https://github.com/cozy/cozy-libs/commit/3d23325))
+* Use popper fixed if needed ([b5210e3](https://github.com/cozy/cozy-libs/commit/b5210e3))
+
+
+
+
+
 # [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.4.0...cozy-sharing@2.5.0) (2020-11-04)
 
 
