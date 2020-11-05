@@ -21,39 +21,39 @@ export const EditableSharingModal = ({
       <SharingContext.Consumer>
         {({
           documentType,
-          isOwner,
-          getRecipients,
-          getSharingLink,
           getDocumentPermissions,
-          share,
-          revoke,
-          shareByLink,
-          updateDocumentPermissions,
-          revokeSharingLink,
-          hasSharedParent,
+          getRecipients,
+          getSharingForSelf,
+          getSharingLink,
           hasSharedChild,
+          hasSharedParent,
+          isOwner,
+          revoke,
           revokeSelf,
-          getSharingForSelf
+          revokeSharingLink,
+          share,
+          shareByLink,
+          updateDocumentPermissions
         }) => {
           return (
             <DumbShareModal
-              document={document}
-              documentType={documentType}
               contacts={contacts}
               createContact={contact => client.create(Contact.doctype, contact)}
+              document={document}
+              documentType={documentType}
               groups={groups}
-              recipients={getRecipients(document.id)}
-              link={getSharingLink(document.id)}
-              permissions={getDocumentPermissions(document.id)}
-              isOwner={isOwner(document.id)}
-              hasSharedParent={documentPath && hasSharedParent(documentPath)}
               hasSharedChild={documentPath && hasSharedChild(documentPath)}
-              onShare={share}
+              hasSharedParent={documentPath && hasSharedParent(documentPath)}
+              isOwner={isOwner(document.id)}
+              link={getSharingLink(document.id)}
               onRevoke={revoke}
-              onShareByLink={shareByLink}
-              onUpdateShareLinkPermissions={updateDocumentPermissions}
               onRevokeLink={revokeSharingLink}
               onRevokeSelf={revokeSelf}
+              onShare={share}
+              onShareByLink={shareByLink}
+              onUpdateShareLinkPermissions={updateDocumentPermissions}
+              permissions={getDocumentPermissions(document.id)}
+              recipients={getRecipients(document.id)}
               sharing={getSharingForSelf(document.id)}
               {...rest}
             />
@@ -65,8 +65,8 @@ export const EditableSharingModal = ({
 }
 
 EditableSharingModal.propTypes = {
-  document: PropTypes.object,
   contacts: contactsResponseType,
+  document: PropTypes.object,
   groups: groupsResponseType
 }
 
