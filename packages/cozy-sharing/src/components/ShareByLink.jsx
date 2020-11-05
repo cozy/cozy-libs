@@ -168,7 +168,7 @@ class ShareByLink extends React.Component {
                     placement="bottom-end"
                     containerElRef={this.containerRef}
                     anchorElRef={this.containerRef}
-                    popperOptions={popperOptions ? popperOptions : undefined}
+                    popperOptions={popperOptions}
                   >
                     <ActionMenuItem
                       left={
