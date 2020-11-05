@@ -6,27 +6,27 @@ import { contactsResponseType, groupsResponseType } from '../propTypes'
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
 export const ShareModal = ({
-  document,
-  isOwner,
-  sharingDesc,
   contacts,
-  groups,
   createContact,
-  link,
-  permissions,
-  recipients,
+  document,
   documentType = 'Document',
-  needsContactsPermission,
-  hasSharedParent,
+  groups,
   hasSharedChild,
+  hasSharedParent,
+  isOwner,
+  link,
+  needsContactsPermission,
   onClose,
-  onShare,
   onRevoke,
-  onShareByLink,
-  onUpdateShareLinkPermissions,
   onRevokeLink,
   onRevokeSelf,
-  sharing
+  onShare,
+  onShareByLink,
+  onUpdateShareLinkPermissions,
+  permissions,
+  recipients,
+  sharing,
+  sharingDesc
 }) => {
   const showShareByEmail =
     documentType !== 'Notes' &&
@@ -40,41 +40,41 @@ export const ShareModal = ({
     <>
       {(documentType === 'Notes' || documentType === 'Albums') && (
         <ShareDialogOnlyByLink
-          onClose={onClose}
-          documentType={documentType}
           document={document}
-          permissions={permissions}
+          documentType={documentType}
           link={link}
-          onShareByLink={onShareByLink}
+          onClose={onClose}
           onRevokeLink={onRevokeLink}
+          onShareByLink={onShareByLink}
           onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+          permissions={permissions}
         />
       )}
       {documentType !== 'Notes' && documentType !== 'Albums' && (
         <ShareDialogCozyToCozy
-          onClose={onClose}
-          documentType={documentType}
-          document={document}
-          permissions={permissions}
-          link={link}
-          onShareByLink={onShareByLink}
-          onRevokeLink={onRevokeLink}
-          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
-          showShareOnlyByLink={showShareOnlyByLink}
-          showShareByEmail={showShareByEmail}
-          hasSharedParent={hasSharedParent}
-          recipients={recipients}
-          sharingDesc={sharingDesc}
           contacts={contacts}
-          groups={groups}
           createContact={createContact}
-          onShare={onShare}
-          needsContactsPermission={needsContactsPermission}
-          sharing={sharing}
-          showWhoHasAccess={showWhoHasAccess}
+          document={document}
+          documentType={documentType}
+          groups={groups}
+          hasSharedParent={hasSharedParent}
           isOwner={isOwner}
+          link={link}
+          needsContactsPermission={needsContactsPermission}
+          onClose={onClose}
           onRevoke={onRevoke}
+          onRevokeLink={onRevokeLink}
           onRevokeSelf={onRevokeSelf}
+          onShare={onShare}
+          onShareByLink={onShareByLink}
+          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+          permissions={permissions}
+          recipients={recipients}
+          sharing={sharing}
+          sharingDesc={sharingDesc}
+          showShareByEmail={showShareByEmail}
+          showShareOnlyByLink={showShareOnlyByLink}
+          showWhoHasAccess={showWhoHasAccess}
         />
       )}
     </>
@@ -84,23 +84,23 @@ export const ShareModal = ({
 export default ShareModal
 
 ShareModal.propTypes = {
-  document: PropTypes.object.isRequired,
-  permissions: PropTypes.array.isRequired,
-  isOwner: PropTypes.bool,
-  sharingDesc: PropTypes.string,
   contacts: contactsResponseType.isRequired,
-  groups: groupsResponseType.isRequired,
   createContact: PropTypes.func.isRequired,
-  recipients: PropTypes.array.isRequired,
-  link: PropTypes.string.isRequired,
+  document: PropTypes.object.isRequired,
   documentType: PropTypes.string,
-  needsContactsPermission: PropTypes.bool,
-  hasSharedParent: PropTypes.bool,
+  groups: groupsResponseType.isRequired,
   hasSharedChild: PropTypes.bool,
+  hasSharedParent: PropTypes.bool,
+  isOwner: PropTypes.bool,
+  link: PropTypes.string.isRequired,
+  needsContactsPermission: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
-  onShare: PropTypes.func.isRequired,
   onRevoke: PropTypes.func.isRequired,
+  onRevokeLink: PropTypes.func.isRequired,
+  onShare: PropTypes.func.isRequired,
   onShareByLink: PropTypes.func.isRequired,
   onUpdateShareLinkPermissions: PropTypes.func.isRequired,
-  onRevokeLink: PropTypes.func.isRequired
+  permissions: PropTypes.array.isRequired,
+  recipients: PropTypes.array.isRequired,
+  sharingDesc: PropTypes.string
 }

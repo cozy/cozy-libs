@@ -9,29 +9,29 @@ import WhoHasAccess from './WhoHasAccess'
 import cx from 'classnames'
 import styles from '../share.styl'
 const ShareDialogCozyToCozy = ({
-  onClose,
-  documentType,
-  document,
-  permissions,
-  link,
-  onShareByLink,
-  onRevokeLink,
-  onUpdateShareLinkPermissions,
-  showShareOnlyByLink,
-  showShareByEmail,
-  hasSharedParent,
-  recipients,
-  sharingDesc,
   contacts,
-  groups,
   createContact,
-  onShare,
-  needsContactsPermission,
-  sharing,
-  showWhoHasAccess,
+  document,
+  documentType,
+  groups,
+  hasSharedParent,
   isOwner,
+  link,
+  needsContactsPermission,
+  onClose,
   onRevoke,
-  onRevokeSelf
+  onRevokeLink,
+  onRevokeSelf,
+  onShare,
+  onShareByLink,
+  onUpdateShareLinkPermissions,
+  permissions,
+  recipients,
+  sharing,
+  sharingDesc,
+  showShareByEmail,
+  showShareOnlyByLink,
+  showWhoHasAccess
 }) => {
   const { t } = useI18n()
   return (
@@ -62,41 +62,41 @@ const ShareDialogCozyToCozy = ({
           )}
           {showShareByEmail && (
             <DumbShareByEmail
+              contacts={contacts}
+              createContact={createContact}
               currentRecipients={recipients}
               document={document}
               documentType={documentType}
-              sharingDesc={sharingDesc}
-              contacts={contacts}
               groups={groups}
-              createContact={createContact}
-              onShare={onShare}
               needsContactsPermission={needsContactsPermission}
+              onShare={onShare}
               sharing={sharing}
+              sharingDesc={sharingDesc}
             />
           )}
           {showWhoHasAccess && (
             <WhoHasAccess
               className={'u-mt-1'}
-              isOwner={isOwner}
-              recipients={recipients}
               document={document}
               documentType={documentType}
+              isOwner={isOwner}
               onRevoke={onRevoke}
               onRevokeSelf={onRevokeSelf}
+              recipients={recipients}
             />
           )}
         </div>
       }
       actions={
         <DumbShareByLink
-          document={document}
-          permissions={permissions}
-          documentType={documentType}
           checked={link !== null}
+          document={document}
+          documentType={documentType}
           link={link}
-          onEnable={onShareByLink}
-          onDisable={onRevokeLink}
           onChangePermissions={onUpdateShareLinkPermissions}
+          onDisable={onRevokeLink}
+          onEnable={onShareByLink}
+          permissions={permissions}
         />
       }
     />
