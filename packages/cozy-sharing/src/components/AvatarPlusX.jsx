@@ -1,11 +1,14 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { SharingTooltip, TooltipRecipientList } from './Tooltip'
+
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
-const AvatarPlusX = ({ size, extraRecipients = [] }) => (
-  <div data-tip data-for="extra-recipients-avatar">
+import { SharingTooltip, TooltipRecipientList } from './Tooltip'
+
+const AvatarPlusX = ({ className, size, extraRecipients = [] }) => (
+  <span data-tip data-for="extra-recipients-avatar" className="u-db">
     <Avatar
+      className={className}
       size={size}
       text={`+${Math.min(extraRecipients.length, 99)}`}
       style={{
@@ -16,12 +19,13 @@ const AvatarPlusX = ({ size, extraRecipients = [] }) => (
     <SharingTooltip id="extra-recipients-avatar">
       <TooltipRecipientList recipientNames={extraRecipients} />
     </SharingTooltip>
-  </div>
+  </span>
 )
 
 AvatarPlusX.propTypes = {
   extraRecipients: PropTypes.arrayOf(PropTypes.string),
-  size: PropTypes.string
+  size: PropTypes.string,
+  className: PropTypes.string
 }
 
 AvatarPlusX.defaultProps = {
