@@ -1,13 +1,11 @@
 import React, { useState, useCallback } from 'react'
-import { useClient } from 'cozy-client'
-import classNames from 'classnames'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
+
+import { useClient } from 'cozy-client'
 import { Spinner } from 'cozy-ui/transpiled/react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import AvatarPlusX from './AvatarPlusX'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Circle from 'cozy-ui/transpiled/react/Circle'
-
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
@@ -15,9 +13,9 @@ import { Text, Caption } from 'cozy-ui/transpiled/react/Text'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
+import AvatarPlusX from './AvatarPlusX'
 import styles from './recipient.styl'
 import modalStyles from '../share.styl'
-
 import { getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
@@ -56,7 +54,7 @@ export const RecipientsAvatars = ({
 
   return (
     <div
-      className={classNames(
+      className={cx(
         styles['recipients-avatars'],
         {
           [styles['--interactive']]: onClick
@@ -67,17 +65,17 @@ export const RecipientsAvatars = ({
     >
       {link && (
         <span data-testid="recipientsAvatars-link">
-          <Circle
+          <Avatar
+            className={styles['recipients-avatars--link']}
+            icon="link"
             size={size}
-            backgroundColor="var(--genericRecipientBackground)"
-          >
-            <Icon icon="link" size={16} color="var(--genericRecipientColor)" />
-          </Circle>
+          />
         </span>
       )}
       {filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS && (
         <span data-testid="recipientsAvatars-plusX">
           <AvatarPlusX
+            className={styles['recipients-avatars--plusX']}
             extraRecipients={filteredRecipients
               .slice(MAX_DISPLAYED_RECIPIENTS)
               .map(recipient => getDisplayName(recipient))}
@@ -97,7 +95,7 @@ export const RecipientsAvatars = ({
             <RecipientAvatar
               recipient={recipient}
               size={size}
-              className={classNames(styles['recipient-avatar'])}
+              className={styles['recipients-avatars--avatar']}
             />
           </span>
         ))}
@@ -259,9 +257,7 @@ const Status = ({ status, isMe, instance }) => {
         <Icon icon={icon} size={10} />
       </Img>
       <Bd>
-        <Caption className={classNames({ 'u-pomegranate': isError })}>
-          {text}
-        </Caption>
+        <Caption className={cx({ 'u-error': isError })}>{text}</Caption>
       </Bd>
     </Media>
   )
@@ -279,7 +275,7 @@ const Recipient = props => {
   return (
     <CompositeRow
       dense
-      className={classNames(styles['recipient'], 'u-ph-0')}
+      className={cx(styles['recipient'], 'u-ph-0')}
       primaryText={
         <Text className="u-ellipsis">
           {isMe ? t('Share.recipients.you') : name}
