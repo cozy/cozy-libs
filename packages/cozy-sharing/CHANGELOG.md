@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.5.2...cozy-sharing@2.6.0) (2020-11-10)
+
+
+### Bug Fixes
+
+* Size of sharing avatar to smaller ([725cdf7](https://github.com/cozy/cozy-libs/commit/725cdf7))
+* Style of Recipient icons ([859c409](https://github.com/cozy/cozy-libs/commit/859c409))
+
+
+### Features
+
+* AvatarPlusX can now use className ([d5fc1b3](https://github.com/cozy/cozy-libs/commit/d5fc1b3))
+* Update cozy-ui to 40.6.0 ([6b9f348](https://github.com/cozy/cozy-libs/commit/6b9f348))
+
+
+
+
+
 ## [2.5.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.5.1...cozy-sharing@2.5.2) (2020-11-05)
 
 **Note:** Version bump only for package cozy-sharing
