@@ -104,7 +104,7 @@ const ConfigurationTab = ({
   }
 
   return (
-    <ModalContent className={cx('u-ph-0', isMobile ? 'u-pt-0' : 'u-pt-1-half')}>
+    <ModalContent className="u-p-0">
       <>
         {shouldDisplayError && hasLoginError && (
           <TriggerErrorInfo
