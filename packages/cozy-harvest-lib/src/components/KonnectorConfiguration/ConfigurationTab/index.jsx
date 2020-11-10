@@ -16,12 +16,7 @@ import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-import Dialog, {
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-  DialogCloseButton
-} from 'cozy-ui/transpiled/react/Dialog'
+import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -40,23 +35,24 @@ const tabMobileNavListStyle = { borderTop: 'none' }
 const ConfirmationDialog = ({ onConfirm, onCancel }) => {
   const { t } = useI18n()
   return (
-    <Dialog maxWidth="xs" fullScreen={false}>
-      <DialogCloseButton onClick={onCancel} />
-      <DialogTitle>{t('modal.deleteAccount.title')}</DialogTitle>
-      <DialogContent>{t('modal.deleteAccount.description')}</DialogContent>
-      <DialogActions>
-        <Button
-          theme="secondary"
-          label={t('modal.deleteAccount.cancel')}
-          onClick={onCancel}
-        />
-        <Button
-          theme="danger"
-          label={t('modal.deleteAccount.confirm')}
-          onClick={onConfirm}
-        />
-      </DialogActions>
-    </Dialog>
+    <ConfirmDialog
+      title={t('modal.deleteAccount.title')}
+      content={t('modal.deleteAccount.description')}
+      actions={
+        <>
+          <Button
+            theme="secondary"
+            label={t('modal.deleteAccount.cancel')}
+            onClick={onCancel}
+          />
+          <Button
+            theme="danger"
+            label={t('modal.deleteAccount.confirm')}
+            onClick={onConfirm}
+          />
+        </>
+      }
+    />
   )
 }
 

@@ -13,14 +13,17 @@ import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { withStyles } from '@material-ui/core/styles'
 
-import Dialog, {
-  DialogTitle,
-  DialogActions,
-  DialogContent,
+import {
   DialogCloseButton,
-  DialogBackButton
+  DialogBackButton,
+  ConfirmDialog,
+  useCozyDialog
+} from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog, {
+  DialogContent,
+  DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { CardDivider as Divider } from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -62,17 +65,17 @@ const DeleteConfirm = ({
   primaryText
 }) => {
   return (
-    <Dialog>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogCloseButton onClick={() => onCancel()} />
-      <DialogContent>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
-      </DialogContent>
-      <DialogActions>
-        <Button theme="secondary" label={secondaryText} onClick={onCancel} />
-        <Button theme="danger" label={primaryText} onClick={onConfirm} />
-      </DialogActions>
-    </Dialog>
+    <ConfirmDialog
+      onClose={onCancel}
+      title={title}
+      content={<div dangerouslySetInnerHTML={{ __html: description }} />}
+      actions={
+        <>
+          <Button theme="secondary" label={secondaryText} onClick={onCancel} />
+          <Button theme="danger" label={primaryText} onClick={onConfirm} />
+        </>
+      }
+    />
   )
 }
 
@@ -167,10 +170,15 @@ const EditContract = props => {
   const fieldVariant = isMobile ? 'default' : 'inline'
   const policy = konnector ? findKonnectorPolicy(konnector) : null
 
+  const { dialogProps, dialogTitleProps } = useCozyDialog({
+    size: 'medium',
+    open: true
+  })
+
   return (
-    <Dialog onClose={dismissAction}>
+    <Dialog onClose={dismissAction} {...dialogProps}>
       <DialogCloseButton onClick={dismissAction} />
-      <DialogTitle>
+      <DialogTitle {...dialogTitleProps}>
         {isMobile ? <DialogBackButton onClick={dismissAction} /> : null}
         {getAccountLabel(contract)}
       </DialogTitle>
