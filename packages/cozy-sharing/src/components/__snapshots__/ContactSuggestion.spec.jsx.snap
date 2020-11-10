@@ -57,14 +57,18 @@ exports[`ContactSuggestion component should display contact suggestion for a con
   >
     <Avatar
       className=""
+      disabled={false}
+      icon="people"
       image=""
       size="small"
+      style={Object {}}
       text="JS"
     >
       <div
-        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv styles__c-avatar--text___2dvna"
+        className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
         style={
           Object {
+            "--circleSize": "32px",
             "backgroundColor": "var(--lavender)",
           }
         }
@@ -138,14 +142,18 @@ exports[`ContactSuggestion component should display contact suggestion for a con
   >
     <Avatar
       className=""
+      disabled={false}
+      icon="people"
       image=""
       size="small"
+      style={Object {}}
       text="J"
     >
       <div
-        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv styles__c-avatar--text___2dvna"
+        className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
         style={
           Object {
+            "--circleSize": "32px",
             "backgroundColor": "var(--puertoRico)",
           }
         }
@@ -270,14 +278,18 @@ exports[`ContactSuggestion component should display contact suggestion for a gro
   >
     <Avatar
       className=""
+      disabled={false}
+      icon="people"
       image=""
       size="small"
+      style={Object {}}
       text="G"
     >
       <div
-        className="styles__c-avatar___PpDI- styles__c-avatar--small___1Y_Pv styles__c-avatar--text___2dvna"
+        className="styles__c-avatar___PpDI- styles__c-avatar--text___2dvna"
         style={
           Object {
+            "--circleSize": "32px",
             "backgroundColor": "var(--purpley)",
           }
         }
