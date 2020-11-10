@@ -43,7 +43,7 @@ describe('EditContract', () => {
               TitleWrapper="div"
               FormControlsWrapper="div"
               onSuccess={() => {}}
-              onCancel={() => {}}
+              onClose={() => {}}
               contract={bankAccount}
             />
           </BreakpointsProvider>

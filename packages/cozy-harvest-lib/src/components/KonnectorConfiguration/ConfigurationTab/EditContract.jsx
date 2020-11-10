@@ -94,7 +94,7 @@ const EditContract = props => {
     konnector,
     onAfterRemove,
     onSuccess,
-    dismissAction,
+    onClose,
     onError
   } = props
 
@@ -179,10 +179,10 @@ const EditContract = props => {
   })
 
   return (
-    <Dialog onClose={dismissAction} {...dialogProps}>
-      <DialogCloseButton onClick={dismissAction} />
+    <Dialog onClose={onClose} {...dialogProps}>
+      <DialogCloseButton onClick={onClose} />
       <DialogTitle {...dialogTitleProps}>
-        {isMobile ? <DialogBackButton onClick={dismissAction} /> : null}
+        {isMobile ? <DialogBackButton onClick={onClose} /> : null}
         {getAccountLabel(contract)}
       </DialogTitle>
       <Divider />
@@ -282,7 +282,7 @@ EditContract.propTypes = {
   /** The callback called when the document is saved */
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
-  onCancel: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   /** Account id (necessary to toggle contract sync, not present for disconnected accounts) */
   accountId: PropTypes.string,
   /** Konnector that fetched the contract (not present for disconnected accounts) */

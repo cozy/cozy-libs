@@ -70,13 +70,10 @@ const ContractItem = ({ contract, konnector, accountId }) => {
           konnector={konnector}
           accountId={accountId}
           contract={contract}
-          dismissAction={() => {
-            setShowingEditModal(false)
-          }}
           onSuccess={() => {
             setShowingEditModal(false)
           }}
-          onCancel={() => {
+          onClose={() => {
             setShowingEditModal(false)
           }}
           onAfterRemove={() => {
