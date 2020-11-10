@@ -3,7 +3,11 @@ const groupBy = require('lodash/groupBy')
 const flatten = require('lodash/flatten')
 
 const isSameSpec = (eSpec, spec) => {
-  return eSpec.imported && eSpec.imported.name == spec.imported.name
+  if (eSpec.imported) {
+    return eSpec.imported.name == spec.imported.name
+  } else if (eSpec.local && spec.local) {
+    return eSpec.local.name == spec.local.name
+  }
 }
 
 const mergeSpecifiersToImport = (importDeclaration, specifiers) => {
