@@ -17,8 +17,10 @@ import tabSpecs from './tabSpecs'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
+
 const WarningError = () => (
-  <Icon icon="warning" size={13} className="u-ml-half" />
+  <Icon icon={WarningIcon} size={13} className="u-ml-half" />
 )
 
 export const KonnectorAccountTabs = ({

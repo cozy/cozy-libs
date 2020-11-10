@@ -38,6 +38,9 @@ import {
   getAccountOwners
 } from './bankAccountHelpers'
 
+import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+
 const ContactPicker = props => {
   const { t } = useI18n()
   return (
@@ -247,7 +250,7 @@ const EditContract = props => {
       <DialogContent className="u-pv-1">
         <Button
           className="u-ml-auto u-error u-ml-0 u-ph-half"
-          icon="trash"
+          icon={<Icon icon={TrashIcon} />}
           theme="text"
           label={t('contractForm.removeAccountBtn')}
           onClick={handleRequestDeletion}

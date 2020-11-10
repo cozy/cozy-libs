@@ -11,6 +11,8 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
+
 const WebsiteLinkCard = ({ link }) => {
   const { t } = useI18n()
   let url = null
@@ -30,7 +32,7 @@ const WebsiteLinkCard = ({ link }) => {
       <Divider className="u-ml-0 u-maw-100" />
       <Media className="u-mt-1" align="top">
         <Img className="u-pr-1">
-          <Icon icon="globe" color={palette['coolGrey']} />
+          <Icon icon={GlobeIcon} color={palette['coolGrey']} />
         </Img>
         <Bd>
           <ButtonLink

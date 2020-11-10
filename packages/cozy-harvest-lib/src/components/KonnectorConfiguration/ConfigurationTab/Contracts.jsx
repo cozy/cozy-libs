@@ -22,6 +22,9 @@ import EditContract from './EditContract'
 
 import withLocales from '../../hoc/withLocales'
 
+import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
   return {
@@ -52,14 +55,14 @@ const ContractItem = ({ contract, konnector, accountId }) => {
         }}
       >
         <ListItemIcon>
-          <Icon icon="wallet" className="u-slateGrey" />
+          <Icon icon={WalletIcon} className="u-slateGrey" />
         </ListItemIcon>
         <ListItemText
           primary={startCase(getPrimaryText(contract).toLowerCase())}
           secondary={contract._deleted ? t('contracts.deleted') : null}
         />
         <ListItemSecondaryAction>
-          <Icon icon="right" className="u-coolGrey u-mr-1" />
+          <Icon icon={RightIcon} className="u-coolGrey u-mr-1" />
         </ListItemSecondaryAction>
       </ListItem>
       {showingEditModal ? (

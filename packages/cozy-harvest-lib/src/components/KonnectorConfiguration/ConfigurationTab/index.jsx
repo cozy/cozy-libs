@@ -30,6 +30,10 @@ import { useTrackPage } from '../../hoc/tracking'
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
+import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
+
 const tabMobileNavListStyle = { borderTop: 'none' }
 
 const ConfirmationDialog = ({ onConfirm, onCancel }) => {
@@ -121,7 +125,7 @@ const ConfigurationTab = ({
                 onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
               >
                 <ListItemIcon>
-                  <Icon icon="key" color={palette['slateGrey']} />
+                  <Icon icon={KeyIcon} color={palette['slateGrey']} />
                 </ListItemIcon>
                 <ListItemText
                   primary={t('modal.updateAccount.identifiers')}
@@ -132,7 +136,7 @@ const ConfigurationTab = ({
                     {running && <Spinner />}
                     <Icon
                       className="u-mr-1"
-                      icon="right"
+                      icon={RightIcon}
                       color={palette['coolGrey']}
                     />
                   </div>
@@ -141,7 +145,7 @@ const ConfigurationTab = ({
             )}
             <ListItem className="u-c-pointer" onClick={handleDeleteRequest}>
               <ListItemIcon>
-                <Icon icon="unlink" className="u-error" />
+                <Icon icon={UnlinkIcon} className="u-error" />
               </ListItemIcon>
               <ListItemText
                 primary={
