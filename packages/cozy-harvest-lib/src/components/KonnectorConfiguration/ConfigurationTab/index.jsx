@@ -26,7 +26,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
-import flag from 'cozy-flags'
 
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
@@ -115,9 +114,7 @@ const ConfigurationTab = ({
           />
         )}
         <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
-          {flag('harvest.show-contracts') ? (
-            <ContractsForAccount konnector={konnector} account={account} />
-          ) : null}
+          <ContractsForAccount konnector={konnector} account={account} />
           <NavigationListHeader>
             {t('modal.updateAccount.general-subheader')}
           </NavigationListHeader>

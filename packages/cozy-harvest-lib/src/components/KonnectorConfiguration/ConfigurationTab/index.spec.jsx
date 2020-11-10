@@ -7,6 +7,8 @@ import I18n from 'cozy-ui/transpiled/react/I18n'
 import enLocale from '../../../locales/en.json'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { MountPointProvider } from '../../../components/MountPointContext'
+import { CozyProvider as CozyClientProvider } from 'cozy-client'
+import { createMockClient } from 'cozy-client/dist/mock'
 
 describe('ConfigurationTab', () => {
   let originalWarn
@@ -34,19 +36,22 @@ describe('ConfigurationTab', () => {
         running: true
       })
     }
+    const mockClient = createMockClient({ queries: {} })
     const root = render(
       <MountPointProvider baseRoute="/">
-        <BreakpointsProvider>
-          <I18n lang="en" dictRequire={() => enLocale}>
-            <ConfigurationTab
-              konnector={konnector}
-              account={account}
-              addAccount={addAccount}
-              onAccountDeleted={onAccountDeleted}
-              flow={flow}
-            />
-          </I18n>
-        </BreakpointsProvider>
+        <CozyClientProvider client={mockClient}>
+          <BreakpointsProvider>
+            <I18n lang="en" dictRequire={() => enLocale}>
+              <ConfigurationTab
+                konnector={konnector}
+                account={account}
+                addAccount={addAccount}
+                onAccountDeleted={onAccountDeleted}
+                flow={flow}
+              />
+            </I18n>
+          </BreakpointsProvider>
+        </CozyClientProvider>
       </MountPointProvider>
     )
     return { root }

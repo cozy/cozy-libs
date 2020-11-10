@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -224,7 +223,7 @@ const EditContract = props => {
         </form>
       </NonGrowingDialogContent>
       <Divider />
-      {policy && policy.setSync && flag('harvest.toggle-contract-sync') ? (
+      {policy && policy.setSync ? (
         <>
           <NonGrowingDialogContent className="u-pv-1">
             <SyncContractSwitch
