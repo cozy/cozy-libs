@@ -20,8 +20,8 @@ const publisher = ({
   showConfirmation,
   getAppBuildURL,
   getRegistryToken
-}) => async ctx => {
-  ctx = { ...ctx }
+}) => async ctxArg => {
+  const ctx = { ...ctxArg }
 
   defaults(ctx, {
     buildDir: DEFAULT_BUILD_DIR,

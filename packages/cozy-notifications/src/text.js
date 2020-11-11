@@ -50,8 +50,8 @@ const getContentDefault = $ => {
   return content
 }
 
-export const toText = (cozyHTMLEmail, getContent) => {
-  getContent = getContent || getContentDefault
+export const toText = (cozyHTMLEmail, getContentArg) => {
+  const getContent = getContentArg || getContentDefault
 
   const $ = cheerio.load(cozyHTMLEmail)
   const title = $('.header__title')
