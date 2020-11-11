@@ -26,8 +26,9 @@ function maximize(element) {
   }
 }
 
-export const start = request => (intentId, serviceWindow) => {
-  serviceWindow = serviceWindow || (typeof window !== 'undefined' && window)
+export const start = request => (intentIdArg, serviceWindowArg) => {
+  const serviceWindow =
+    serviceWindowArg || (typeof window !== 'undefined' && window)
   if (!serviceWindow || !serviceWindow.document) {
     return Promise.reject(new Error('Intent service should be used in browser'))
   }
@@ -39,7 +40,7 @@ export const start = request => (intentId, serviceWindow) => {
     ;[document.documentElement, document.body].forEach(maximize)
   })
 
-  intentId = intentId || serviceWindow.location.search.split('=')[1]
+  const intentId = intentIdArg || serviceWindow.location.search.split('=')[1]
   if (!intentId)
     return Promise.reject(new Error('Cannot retrieve intent from URL'))
 

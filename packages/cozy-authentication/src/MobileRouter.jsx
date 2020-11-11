@@ -163,9 +163,9 @@ export class MobileRouter extends Component {
     }
   }
 
-  handleDeepLink(url) {
+  handleDeepLink(urlArg) {
     const { protocol, appSlug, universalLinkDomain } = this.props
-    url = url || deeplink.get()
+    const url = urlArg || deeplink.get()
     deeplink.clear()
     if (!url) {
       return

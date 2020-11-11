@@ -60,7 +60,12 @@ exports[`AccountsList should render 1`] = `
       <DefaultButton
         className="u-bdrs-4"
         extension="full"
-        icon="plus"
+        icon={
+          <Icon
+            icon={[Function]}
+            spin={false}
+          />
+        }
         label="modal.addAccount.button"
         onClick={[MockFunction]}
         theme="text"

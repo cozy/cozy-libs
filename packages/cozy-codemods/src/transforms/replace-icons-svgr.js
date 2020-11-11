@@ -38,5 +38,37 @@ export default function replaceSvgrIcons(file, api) {
       }
     })
 
+  root
+    .find(j.JSXOpeningElement, {
+      name: {
+        name: 'Button'
+      }
+    })
+    .forEach(path => {
+      const iconAttr = path.node.attributes.find(
+        attr => attr.name && attr.name.name === 'icon'
+      )
+
+      if (iconAttr && iconAttr.value.type === 'Literal') {
+        const componentName = iconNameToComponentName(iconAttr.value.value)
+
+        imports.ensure(
+          root,
+          {
+            default: `${componentName}Icon`
+          },
+          `cozy-ui/transpiled/react/Icons/${componentName}`
+        )
+        imports.ensure(
+          root,
+          {
+            default: `Icon`
+          },
+          `cozy-ui/transpiled/react/Icon`
+        )
+        iconAttr.value = `{<Icon icon={${componentName}Icon} />}`
+      }
+    })
+
   return root.toSource()
 }

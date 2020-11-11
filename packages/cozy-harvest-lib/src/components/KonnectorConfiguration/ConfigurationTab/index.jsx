@@ -16,17 +16,11 @@ import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-import Dialog, {
-  DialogTitle,
-  DialogActions,
-  DialogContent,
-  DialogCloseButton
-} from 'cozy-ui/transpiled/react/Dialog'
+import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
-import flag from 'cozy-flags'
 
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
@@ -36,28 +30,33 @@ import { useTrackPage } from '../../hoc/tracking'
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
+import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
+
 const tabMobileNavListStyle = { borderTop: 'none' }
 
 const ConfirmationDialog = ({ onConfirm, onCancel }) => {
   const { t } = useI18n()
   return (
-    <Dialog maxWidth="xs" fullScreen={false}>
-      <DialogCloseButton onClick={onCancel} />
-      <DialogTitle>{t('modal.deleteAccount.title')}</DialogTitle>
-      <DialogContent>{t('modal.deleteAccount.description')}</DialogContent>
-      <DialogActions>
-        <Button
-          theme="secondary"
-          label={t('modal.deleteAccount.cancel')}
-          onClick={onCancel}
-        />
-        <Button
-          theme="danger"
-          label={t('modal.deleteAccount.confirm')}
-          onClick={onConfirm}
-        />
-      </DialogActions>
-    </Dialog>
+    <ConfirmDialog
+      title={t('modal.deleteAccount.title')}
+      content={t('modal.deleteAccount.description')}
+      actions={
+        <>
+          <Button
+            theme="secondary"
+            label={t('modal.deleteAccount.cancel')}
+            onClick={onCancel}
+          />
+          <Button
+            theme="danger"
+            label={t('modal.deleteAccount.confirm')}
+            onClick={onConfirm}
+          />
+        </>
+      }
+    />
   )
 }
 
@@ -115,9 +114,7 @@ const ConfigurationTab = ({
           />
         )}
         <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
-          {flag('harvest.show-contracts') ? (
-            <ContractsForAccount konnector={konnector} account={account} />
-          ) : null}
+          <ContractsForAccount konnector={konnector} account={account} />
           <NavigationListHeader>
             {t('modal.updateAccount.general-subheader')}
           </NavigationListHeader>
@@ -128,7 +125,7 @@ const ConfigurationTab = ({
                 onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
               >
                 <ListItemIcon>
-                  <Icon icon="key" color={palette['slateGrey']} />
+                  <Icon icon={KeyIcon} color={palette['slateGrey']} />
                 </ListItemIcon>
                 <ListItemText
                   primary={t('modal.updateAccount.identifiers')}
@@ -139,7 +136,7 @@ const ConfigurationTab = ({
                     {running && <Spinner />}
                     <Icon
                       className="u-mr-1"
-                      icon="right"
+                      icon={RightIcon}
                       color={palette['coolGrey']}
                     />
                   </div>
@@ -148,7 +145,7 @@ const ConfigurationTab = ({
             )}
             <ListItem className="u-c-pointer" onClick={handleDeleteRequest}>
               <ListItemIcon>
-                <Icon icon="unlink" className="u-error" />
+                <Icon icon={UnlinkIcon} className="u-error" />
               </ListItemIcon>
               <ListItemText
                 primary={

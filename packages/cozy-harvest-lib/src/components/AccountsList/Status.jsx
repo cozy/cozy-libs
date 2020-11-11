@@ -8,6 +8,9 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { getErrorLocale } from '../../helpers/konnectors'
 import FlowProvider from '../FlowProvider'
 
+import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
+import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
+
 /**
  *
  * Display trigger's status.
@@ -30,12 +33,16 @@ const Status = ({ t, trigger, konnector }) => {
           return (
             <div className="u-flex u-flex-justify-center u-flex-items-center">
               <span className="u-mr-half u-caption u-error">{errorTitle}</span>
-              <Icon icon="warning" size={16} className="u-flex-shrink-0" />
+              <Icon icon={WarningIcon} size={16} className="u-flex-shrink-0" />
             </div>
           )
         }
         return (
-          <Icon icon="check" size={16} className="u-flex-shrink-0 u-valid" />
+          <Icon
+            icon={CheckIcon}
+            size={16}
+            className="u-flex-shrink-0 u-valid"
+          />
         )
       }}
     </FlowProvider>

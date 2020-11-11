@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -14,14 +13,17 @@ import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { withStyles } from '@material-ui/core/styles'
 
-import Dialog, {
-  DialogTitle,
-  DialogActions,
-  DialogContent,
+import {
   DialogCloseButton,
-  DialogBackButton
+  DialogBackButton,
+  ConfirmDialog,
+  useCozyDialog
+} from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog, {
+  DialogContent,
+  DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { CardDivider as Divider } from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -35,6 +37,9 @@ import {
   getAccountInstitutionLabel,
   getAccountOwners
 } from './bankAccountHelpers'
+
+import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 const ContactPicker = props => {
   const { t } = useI18n()
@@ -63,17 +68,17 @@ const DeleteConfirm = ({
   primaryText
 }) => {
   return (
-    <Dialog>
-      <DialogTitle>{title}</DialogTitle>
-      <DialogCloseButton onClick={() => onCancel()} />
-      <DialogContent>
-        <div dangerouslySetInnerHTML={{ __html: description }} />
-      </DialogContent>
-      <DialogActions>
-        <Button theme="secondary" label={secondaryText} onClick={onCancel} />
-        <Button theme="danger" label={primaryText} onClick={onConfirm} />
-      </DialogActions>
-    </Dialog>
+    <ConfirmDialog
+      onClose={onCancel}
+      title={title}
+      content={<div dangerouslySetInnerHTML={{ __html: description }} />}
+      actions={
+        <>
+          <Button theme="secondary" label={secondaryText} onClick={onCancel} />
+          <Button theme="danger" label={primaryText} onClick={onConfirm} />
+        </>
+      }
+    />
   )
 }
 
@@ -89,7 +94,7 @@ const EditContract = props => {
     konnector,
     onAfterRemove,
     onSuccess,
-    dismissAction,
+    onClose,
     onError
   } = props
 
@@ -168,11 +173,16 @@ const EditContract = props => {
   const fieldVariant = isMobile ? 'default' : 'inline'
   const policy = konnector ? findKonnectorPolicy(konnector) : null
 
+  const { dialogProps, dialogTitleProps } = useCozyDialog({
+    size: 'medium',
+    open: true
+  })
+
   return (
-    <Dialog onClose={dismissAction}>
-      <DialogCloseButton onClick={dismissAction} />
-      <DialogTitle>
-        {isMobile ? <DialogBackButton onClick={dismissAction} /> : null}
+    <Dialog onClose={onClose} {...dialogProps}>
+      <DialogCloseButton onClick={onClose} />
+      <DialogTitle {...dialogTitleProps}>
+        {isMobile ? <DialogBackButton onClick={onClose} /> : null}
         {getAccountLabel(contract)}
       </DialogTitle>
       <Divider />
@@ -224,7 +234,7 @@ const EditContract = props => {
         </form>
       </NonGrowingDialogContent>
       <Divider />
-      {policy && policy.setSync && flag('harvest.toggle-contract-sync') ? (
+      {policy && policy.setSync ? (
         <>
           <NonGrowingDialogContent className="u-pv-1">
             <SyncContractSwitch
@@ -240,7 +250,7 @@ const EditContract = props => {
       <DialogContent className="u-pv-1">
         <Button
           className="u-ml-auto u-error u-ml-0 u-ph-half"
-          icon="trash"
+          icon={<Icon icon={TrashIcon} />}
           theme="text"
           label={t('contractForm.removeAccountBtn')}
           onClick={handleRequestDeletion}
@@ -272,7 +282,7 @@ EditContract.propTypes = {
   /** The callback called when the document is saved */
   onSuccess: PropTypes.func.isRequired,
   /** The callback called when edition is cancelled */
-  onCancel: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   /** Account id (necessary to toggle contract sync, not present for disconnected accounts) */
   accountId: PropTypes.string,
   /** Konnector that fetched the contract (not present for disconnected accounts) */

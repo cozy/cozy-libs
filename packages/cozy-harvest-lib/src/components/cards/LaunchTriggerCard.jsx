@@ -10,6 +10,8 @@ import * as triggers from '../../helpers/triggers'
 import FlowProvider from '../FlowProvider'
 import { useFlowState } from '../../models/withConnectionFlow'
 
+import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
+
 export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   const launch = flow.launch
   const flowState = useFlowState(flow)
@@ -51,7 +53,7 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             (either with an utility class or a Button prop) */}
           <Button
             label={t('card.launchTrigger.button.label')}
-            icon={<Icon focusable="false" icon="sync" spin={running} />}
+            icon={<Icon focusable="false" icon={SyncIcon} spin={running} />}
             className="u-mh-0 u-mv-0"
             disabled={running || disabled}
             onClick={() => launch(trigger)}

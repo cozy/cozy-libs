@@ -5585,14 +5585,13 @@ cozy-ui@35.39.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@38.3.0:
-  version "38.3.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-38.3.0.tgz#0943d19f5d0f08c31f6bfe12bfe6ad9f30749c82"
-  integrity sha512-eei02zXDWfTNyftS7dHf6GAvS+ffeTHtZou8o9Cm4j7co+n5XiAvUGuSr78sWjRW3oHmlb5C5oG28c9c4m8FeA==
+cozy-ui@40.1.1:
+  version "40.1.1"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.1.1.tgz#679c489f4d2be080f67649a1fefffc75968f1f28"
+  integrity sha512-lfRaBCE/D43T/ZmxXRSfExnMmuaN2GKIcE6bvck/1Uj2O14gFbm2+c0Qvq5DJQ4KEGKBUKMziuppTuxfnHtP2w==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
-    body-scroll-lock "^2.5.8"
     classnames "^2.2.5"
     cozy-interapp "0.5.4"
     date-fns "^1.28.5"
@@ -5603,13 +5602,14 @@ cozy-ui@38.3.0:
     react-markdown "^4.0.8"
     react-pdf "^4.0.5"
     react-popper "^2.2.3"
+    react-remove-scroll "^2.4.0"
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@40.1.1:
-  version "40.1.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.1.1.tgz#679c489f4d2be080f67649a1fefffc75968f1f28"
-  integrity sha512-lfRaBCE/D43T/ZmxXRSfExnMmuaN2GKIcE6bvck/1Uj2O14gFbm2+c0Qvq5DJQ4KEGKBUKMziuppTuxfnHtP2w==
+cozy-ui@40.5.0:
+  version "40.5.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.5.0.tgz#5021fed1ce93e588c4bc02033e1a9320a47c8682"
+  integrity sha512-A6iO6kV3XAMWICS3tUqiP0JjNnDS1icJzbBQTEZNdyJl8pLD2Mv9EoEK5U0uGv9q8sw6vVvy2bmruYSC6zI6XA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"

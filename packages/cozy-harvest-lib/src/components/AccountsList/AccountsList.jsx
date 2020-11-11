@@ -7,6 +7,9 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import AccountsListItem from './AccountsListItem'
 
+import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+
 export class AccountsList extends React.PureComponent {
   render() {
     const { accounts, konnector, addAccount, onPick, t } = this.props
@@ -29,7 +32,7 @@ export class AccountsList extends React.PureComponent {
               label={t('modal.addAccount.button')}
               theme="text"
               extension="full"
-              icon="plus"
+              icon={<Icon icon={PlusIcon} />}
               className="u-bdrs-4"
               onClick={addAccount}
             />
