@@ -3,15 +3,15 @@
 @require 'settings/palette.styl'
 
 :root
-  --genericRecipientBackground: var(--silver)
-  --genericRecipientColor: var(--charcoalGrey)
+  --genericRecipientBackground: var(--slateGrey)
+  --genericRecipientColor: var(--white)
 
-.recipient	
-    display flex	
-    flex-direction row	
-    align-items center	
+.recipient
+    display flex
+    flex-direction row
+    align-items center
 
-    +small-screen()	
+    +small-screen()
         align-items flex-start
 
 .recipients-list-light
@@ -25,7 +25,7 @@
     flex 1 1 auto
     overflow hidden
     text-overflow ellipsis
-    
+
 .recipient-status-icon
   margin-right: .25rem
 
@@ -60,7 +60,18 @@
     &.--interactive
         cursor pointer
 
-    .recipient-avatar
-        margin-right -0.6rem
-        border 2px solid var(--white)
+    &--link,
+    &--plusX,
+    &--avatar
+        border-width 2px
+        border-style solid
+        border-color var(--white)
         box-sizing border-box
+
+    &--link
+        background-color var(--genericRecipientBackground)
+        svg
+            fill: var(--genericRecipientColor)
+
+    &--avatar
+        margin-right -0.6rem

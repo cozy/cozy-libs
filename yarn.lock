@@ -5606,10 +5606,10 @@ cozy-ui@40.1.1:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@40.4.0:
-  version "40.4.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.4.0.tgz#1b5f302bab116e6348f07c192deeeb27f2e8ca73"
-  integrity sha512-dinvj4BrPHKc36ade4R+EsOAOV1/FQNFbyWcZG7CYf1BgQSDY4bnKN0ehsMhJmy0JPESZAxqagNcCGdLyc8YVQ==
+cozy-ui@40.5.0:
+  version "40.5.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.5.0.tgz#5021fed1ce93e588c4bc02033e1a9320a47c8682"
+  integrity sha512-A6iO6kV3XAMWICS3tUqiP0JjNnDS1icJzbBQTEZNdyJl8pLD2Mv9EoEK5U0uGv9q8sw6vVvy2bmruYSC6zI6XA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -5627,10 +5627,10 @@ cozy-ui@40.4.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@40.5.0:
-  version "40.5.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.5.0.tgz#5021fed1ce93e588c4bc02033e1a9320a47c8682"
-  integrity sha512-A6iO6kV3XAMWICS3tUqiP0JjNnDS1icJzbBQTEZNdyJl8pLD2Mv9EoEK5U0uGv9q8sw6vVvy2bmruYSC6zI6XA==
+cozy-ui@40.6.0:
+  version "40.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.6.0.tgz#e7616aa91295daad3513c775219390ce9739f361"
+  integrity sha512-ShjZRLczlZBYbAj5oduBnMMCuDOs/Ec7uoQHu6f5UHQNinrS+onZqRkpJdFKohvCbyCtrHRJZ5jrq9fnJ36DiQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
