@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.5.1...@cozy/codemods@1.6.0) (2020-11-11)
+
+
+### Features
+
+* Handle buttons for svgr icons ([9f3f60b](https://github.com/cozy/cozy-libs/commit/9f3f60b))
+
+
+
+
+
 ## [1.5.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.5.0...@cozy/codemods@1.5.1) (2020-11-05)
 
 

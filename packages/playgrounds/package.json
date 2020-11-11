@@ -1,7 +1,7 @@
 {
   "name": "cozy-playgrounds",
   "private": true,
-  "version": "1.16.16",
+  "version": "1.16.17",
   "main": "index.js",
   "license": "MIT",
   "scripts": {
@@ -10,7 +10,7 @@
   "dependencies": {
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
-    "cozy-authentication": "^2.3.2",
+    "cozy-authentication": "^2.3.3",
     "cozy-client": "13.15.1",
     "cozy-device-helper": "^1.10.3",
     "cozy-doctypes": "^1.74.8",

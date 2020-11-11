@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.23.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.22.1...cozy-harvest-lib@2.23.0) (2020-11-11)
+
+
+### Features
+
+* Remove show contracts flag and toggle contract sync flag ([336d279](https://github.com/cozy/cozy-libs/commit/336d279))
+* Update cozy-ui ([2d3c497](https://github.com/cozy/cozy-libs/commit/2d3c497))
+* Use SVGr icons in harvest ([c877448](https://github.com/cozy/cozy-libs/commit/c877448))
+
+
+
+
+
 ## [2.22.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.22.0...cozy-harvest-lib@2.22.1) (2020-11-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
