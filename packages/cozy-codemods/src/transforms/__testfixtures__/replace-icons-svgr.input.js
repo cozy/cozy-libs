@@ -1,6 +1,7 @@
 import React from 'react'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Button from 'cozy-ui/transpiled/react/Button'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import CustomIcon from './CustomIcon'
 
 const App = () => {
@@ -12,6 +13,7 @@ const App = () => {
       <Icon icon={CustomIcon} className="u-m-3" />
       <Icon icon="file-outline" className="u-m-3" />
       <Button icon="file-outline" className="u-m-3" />
+      <Avatar icon="link" className="u-m-3" />
     </div>
   )
 }
