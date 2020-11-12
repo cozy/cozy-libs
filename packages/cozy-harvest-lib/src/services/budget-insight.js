@@ -15,6 +15,8 @@ import { waitForRealtimeEvent } from './jobUtils'
 import {
   createBIConnection,
   updateBIConnection,
+  getBIUserConfig,
+  updateBIUserConfig,
   setBIConnectionSyncStatus
 } from './bi-http'
 import assert from '../assert'
@@ -405,6 +407,32 @@ export const setSync = async ({
   )
 }
 
+export const getUserConfig = async ({ client, konnector }) => {
+  const config = getBIConfigForCozyURL(client.stackClient.uri)
+  const cozyBankId = getCozyBankId({ konnector })
+  const biBankId = getBiBankId({ client, cozyBankId })
+  const temporaryToken = await createTemporaryToken({
+    biBankId,
+    client,
+    konnector
+  })
+  const data = await getBIUserConfig(config, temporaryToken)
+  return data
+}
+
+export const updateUserConfig = async ({ client, konnector, userConfig }) => {
+  const config = getBIConfigForCozyURL(client.stackClient.uri)
+  const cozyBankId = getCozyBankId({ konnector })
+  const biBankId = getBiBankId({ client, cozyBankId })
+  const temporaryToken = await createTemporaryToken({
+    biBankId,
+    client,
+    konnector
+  })
+  const data = await updateBIUserConfig(config, userConfig, temporaryToken)
+  return data
+}
+
 export const getCozyBankId = ({ konnector }) => {
   return konnector.parameters.bankId
 }
@@ -412,7 +440,8 @@ export const getCozyBankId = ({ konnector }) => {
 export const getBiBankId = ({ client, cozyBankId }) => {
   const cozyUrl = client.stackClient.uri
   const config = getBIConfigForCozyURL(cozyUrl)
-  const bankId = getMappingLinxoBI(config)[cozyBankId].id
+  const mapping = getMappingLinxoBI(config)
+  const bankId = mapping[cozyBankId].id
   return bankId
 }
 

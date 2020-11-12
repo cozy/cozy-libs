@@ -73,6 +73,20 @@ const encodeToForm = rawForm => {
   return formData
 }
 
+export const getBIUserConfig = async (config, biAccessToken) => {
+  return await biRequest('GET', '/users/me/config', config, null, biAccessToken)
+}
+
+export const updateBIUserConfig = async (config, userConfig, biAccessToken) => {
+  return await biRequest(
+    'POST',
+    '/users/me/config',
+    config,
+    encodeToForm(userConfig),
+    biAccessToken
+  )
+}
+
 export const createBIConnection = async (
   config,
   encryptedAuth,
