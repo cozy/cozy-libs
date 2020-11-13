@@ -14,7 +14,7 @@
   },
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
-    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
+    "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --copy-files --verbose",
     "copy-files": "cp -rf src/locales dist/",
     "test": "jest src/",
     "lint": "cd .. && yarn lint packages/cozy-scanner",
@@ -29,7 +29,7 @@
     "@testing-library/react": "^9.3.0",
     "babel-jest": "^24.9.0",
     "babel-preset-cozy-app": "^1.9.3",
-    "cozy-client": "13.15.1",
+    "cozy-client": "16.2.0",
     "cozy-doctypes": "1.67.0",
     "cozy-ui": "40.1.1",
     "jest": "24.9.0",
