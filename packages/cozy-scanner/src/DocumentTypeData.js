@@ -1,221 +1,103 @@
-export const items = [
-  {
-    id: '1',
-    classification: 'identity_document',
-    subClassification: 'national_id_card',
-    label: 'national_id_card'
-  },
-  {
-    id: '2',
-    classification: 'identity_document',
-    subClassification: 'passport',
-    label: 'passport'
-  },
-  {
-    id: '3',
-    classification: 'identity_document',
-    subClassification: 'residence_permit',
-    label: 'residence_permit'
-  },
-  {
-    id: '4',
-    classification: 'identity_document',
-    subClassification: 'family_record_book',
-    label: 'family_record_book',
-    defaultTheme: 'theme2'
-  },
-  {
-    id: '5',
-    classification: 'certificate',
-    subject: 'life',
-    label: 'birth_certificate',
-    defaultTheme: 'theme1'
-  },
-  {
-    id: '6',
-    classification: 'diploma',
-    subClassification: 'car',
-    label: 'driver_license',
-    defaultTheme: 'theme6'
-  },
-  {
-    id: '7',
-    classification: 'contract',
-    subject: 'wedding',
-    label: 'wedding'
-  },
-  {
-    id: '8',
-    classification: 'contract',
-    subject: 'pacs',
-    label: 'pacs'
-  },
-  {
-    id: '9',
-    classification: 'contract',
-    subject: 'divorce',
-    label: 'divorce'
-  },
-  {
-    id: '10',
-    classification: 'certificate',
-    subject: 'family',
-    label: 'large_family_card'
-  },
-  {
-    id: '11',
-    classification: 'certificate',
-    subject: 'family',
-    label: 'caf'
-  },
-  {
-    id: '12',
-    classification: 'diploma',
-    label: 'diploma'
-  },
-  {
-    id: '13',
-    classification: 'contract',
-    categorie: 'work',
-    label: 'work_contract'
-  },
-  {
-    id: '14',
-    classification: 'payslip',
-    label: 'pay_sheet'
-  },
-  {
-    id: '15',
-    classification: 'payslip',
-    label: 'unemployment_benefit'
-  },
-  {
-    id: '16',
-    classification: 'payslip',
-    label: 'pension'
-  },
-  {
-    id: '17',
-    classification: 'payslip',
-    label: 'other_revenue'
-  },
-  {
-    id: '18',
-    classification: 'office',
-    categorie: 'study',
-    label: 'gradebook'
-  },
-  {
-    id: '19',
-    classification: 'certificate',
-    subject: 'health',
-    label: 'health_book'
-  },
-  {
-    id: '20',
-    classification: 'certificate',
-    subject: 'health',
-    categorie: 'insurance',
-    label: 'insurance_card'
-  },
-  {
-    id: '21',
-    classification: 'report',
-    categorie: 'health',
-    label: 'prescription'
-  },
-  {
-    id: '22',
-    classification: 'invoicing',
-    categorie: 'health',
-    label: 'health_invoice'
-  },
-  {
-    id: '23',
-    classification: 'certificate',
-    subject: 'car',
-    label: 'registration'
-  },
-  {
-    id: '24',
-    classification: 'certificate',
-    subject: 'car',
-    label: 'car_insurance'
-  },
-  {
-    id: '25',
-    classification: 'invoicing',
-    categorie: 'car',
-    label: 'mechanic_invoice'
-  },
-  {
-    id: '26',
-    classification: 'invoicing',
-    categorie: 'car',
-    label: 'transport_invoice'
-  },
-  {
-    id: '27',
-    classification: 'invoicing',
-    categorie: 'phone',
-    label: 'phone_invoice'
-  },
-  {
-    id: '28',
-    classification: 'invoicing',
-    categorie: 'isp',
-    label: 'isp_invoice'
-  },
-  {
-    id: '29',
-    classification: 'invoicing',
-    categorie: 'energy',
-    label: 'energy_invoice'
-  },
-  {
-    id: '30',
-    classification: 'invoicing',
-    categorie: 'web',
-    label: 'web_service_invoice'
-  },
-  {
-    id: '31',
-    classification: 'contract',
-    subject: 'house',
-    label: 'lease'
-  },
-  {
-    id: '32',
-    classification: 'invoicing',
-    subClassification: 'payment_statement',
-    label: 'rent_receipt'
-  },
-  {
-    id: '33',
-    classification: 'contract',
-    subject: 'house',
-    label: 'house_insurance'
-  },
-  {
-    id: '34',
-    classification: 'tax_return',
-    label: 'tax_return'
-  },
-  {
-    id: '35',
-    classification: 'tax_notice',
-    label: 'tax_notice'
-  },
-  {
-    id: '36',
-    classification: 'tax_notice',
-    label: 'tax_timetable'
-  },
-  {
-    id: '37',
-    classification: 'invoicing',
-    label: 'invoices'
-  }
+import { models } from 'cozy-client'
+const { Qualification } = models.document
+
+const buildItems = labels => {
+  return labels
+    .map(label => {
+      try {
+        return new Qualification.getByLabel(label)
+      } catch (e) {
+        console.log('error', e) // eslint-disable-line no-console
+        return null
+      }
+    })
+    .filter(item => item)
+}
+
+const identityLabels = [
+  'national_id_card',
+  'passport',
+  'residence_permit',
+  'family_record_book',
+  'birth_certificate',
+  'driver_license',
+  'other_identity_document'
+]
+
+const familyLabels = [
+  'family_record_book',
+  'birth_certificate',
+  'wedding',
+  'pacs',
+  'divorce',
+  'large_family_card',
+  'caf',
+  'other_family_document'
+]
+
+const workStudyLabels = [
+  'diploma',
+  'work_contract',
+  'pay_sheet',
+  'unemployment_benefit',
+  'pension',
+  'other_revenue',
+  'gradebook',
+  'student_card',
+  'resume',
+  'motivation_letter',
+  'other_work_document'
+]
+
+const healthLabels = [
+  'health_book',
+  'national_insurance_card',
+  'health_insurance_card',
+  'prescription',
+  'health_invoice'
+]
+
+const homeLabels = [
+  'phone_invoice',
+  'isp_invoice',
+  'telecom_invoice',
+  'energy_invoice',
+  'water_invoice',
+  'house_sale_agreeement',
+  'building_permit',
+  'technical_diagnostic_record',
+  'lease',
+  'rent_receipt',
+  'house_insurance',
+  'work_quote',
+  'work_invoice',
+  'other_house_document'
+]
+
+const transportLabels = [
+  'driver_license',
+  'vehicle_registration',
+  'car_insurance',
+  'mechanic_invoice',
+  'transport_invoice',
+  'other_transport_document'
+]
+
+const taxLabels = ['tax_return', 'tax_notice', 'tax_timetable']
+
+const invoiceLabels = [
+  'phone_invoice',
+  'isp_invoice',
+  'telecom_invoice',
+  'energy_invoice',
+  'water_invoice',
+  'appliance_invoice',
+  'web_service_invoice',
+  'restaurant_invoice',
+  'work_invoice',
+  'transport_invoice',
+  'health_invoice',
+  'other_invoice'
 ]
 
 export const themes = [
@@ -223,48 +105,51 @@ export const themes = [
     id: 'theme1',
     label: 'identity',
     icon: 'people',
-    file_type_ids: ['1', '2', '3', '4', '5', '6']
+    items: buildItems(identityLabels),
+    defaultItems: ['birth_certificate']
   },
   {
     id: 'theme2',
     label: 'family',
     icon: 'team',
-    file_type_ids: ['4', '5', '7', '8', '9', '10', '11']
+    items: buildItems(familyLabels),
+    defaultItems: ['family_record_book']
   },
   {
     id: 'theme3',
     label: 'work_study',
     icon: 'company',
-    file_type_ids: ['12', '13', '14', '15', '16', '17', '18']
+    items: buildItems(workStudyLabels)
   },
   {
     id: 'theme4',
     label: 'health',
     icon: 'heart',
-    file_type_ids: ['19', '20', '21', '22']
+    items: buildItems(healthLabels)
   },
   {
     id: 'theme5',
     label: 'home',
     icon: 'home',
-    file_type_ids: ['31', '32', '33', '27', '28', '29']
+    items: buildItems(homeLabels)
   },
   {
     id: 'theme6',
     label: 'transport',
     icon: 'car',
-    file_type_ids: ['6', '23', '24', '25', '26']
+    items: buildItems(transportLabels),
+    defaultItems: ['driver_license']
   },
   {
     id: 'theme7',
     label: 'tax',
     icon: 'bank',
-    file_type_ids: ['34', '35', '36']
+    items: buildItems(taxLabels)
   },
   {
     id: 'theme8',
     label: 'invoice',
     icon: 'euro',
-    file_type_ids: ['27', '28', '29', '26', '30']
+    items: buildItems(invoiceLabels)
   }
 ]
