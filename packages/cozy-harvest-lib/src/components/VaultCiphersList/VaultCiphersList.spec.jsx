@@ -35,7 +35,7 @@ describe('when there is some ciphers', () => {
     expect(onSelect).toHaveBeenCalledWith(ciphers[0])
   })
 
-  it('should ignore trashed ciphers', async () => {
+  it('should ignore soft deleted ciphers', async () => {
     const onSelect = jest.fn()
     const ciphers = [
       {
