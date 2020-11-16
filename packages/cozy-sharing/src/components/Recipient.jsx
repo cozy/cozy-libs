@@ -52,6 +52,8 @@ export const RecipientsAvatars = ({
       }).reverse()
   // we reverse the recipients array because we use `flex-direction: row-reverse` to display them correctly
 
+  const isAvatarPlusX = filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS
+
   return (
     <div
       className={cx(
@@ -72,7 +74,7 @@ export const RecipientsAvatars = ({
           />
         </span>
       )}
-      {filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS && (
+      {isAvatarPlusX && (
         <span data-testid="recipientsAvatars-plusX">
           <AvatarPlusX
             className={styles['recipients-avatars--plusX']}
@@ -95,7 +97,10 @@ export const RecipientsAvatars = ({
             <RecipientAvatar
               recipient={recipient}
               size={size}
-              className={styles['recipients-avatars--avatar']}
+              className={cx(styles['recipients-avatars--avatar'], {
+                [styles['recipients-avatars--avatar--noMarginRight']]:
+                  !isAvatarPlusX && idx === 0
+              })}
             />
           </span>
         ))}
