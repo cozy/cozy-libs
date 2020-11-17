@@ -47,7 +47,7 @@ class DocumentCategory extends Component {
   }
   render() {
     const { isMenuDisplayed } = this.state
-    const { category, isSelected, selectedItem, items, t } = this.props
+    const { category, isSelected, selectedItem, t } = this.props
     return (
       <>
         <GridItem onClick={this.openMenu}>
@@ -95,16 +95,16 @@ class DocumentCategory extends Component {
                 </Bd>
               </Media>
             </ActionMenuHeader>
-            {items.map(item => {
+            {category.items.map(item => {
               return (
                 <ActionMenuItem
                   onClick={() => {
                     this.onSelect({
                       categoryLabel: category.label,
-                      itemId: item.id
+                      item: item
                     })
                   }}
-                  key={item.id}
+                  key={item.label}
                 >
                   {t(`Scan.items.${item.label}`)}
                 </ActionMenuItem>
@@ -122,7 +122,6 @@ DocumentCategory.propTypes = {
   category: PropTypes.object.isRequired,
   isSelected: PropTypes.bool,
   selectedItem: PropTypes.object.isRequired,
-  items: PropTypes.array.isRequired,
   t: PropTypes.func.isRequired
 }
 

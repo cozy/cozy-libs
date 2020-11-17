@@ -10,7 +10,7 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Button from 'cozy-ui/transpiled/react/Button'
 
 import DocumentQualification from './DocumentQualification'
-import { getItemById, getThemeByItem } from './DocumentTypeDataHelpers'
+import { getThemeByItem } from './DocumentTypeDataHelpers'
 
 const pushAnalytics = item => {
   const tracker = getTracker()
@@ -32,11 +32,9 @@ class EditDocumentQualification extends Component {
     const { document, onClose, t, client, onDescribed, isOffline } = this.props
     const { qualification } = this.state
     const item =
-      document.metadata && document.metadata.id
-        ? getItemById(document.metadata.id)
+      document.metadata && document.metadata.qualification
+        ? document.metadata.qualification
         : null
-    const itemId = item ? item.id : null
-
     const theme = item ? getThemeByItem(item) : null
     const categoryLabel = item ? theme.label : null
     return (
@@ -50,7 +48,7 @@ class EditDocumentQualification extends Component {
               this.setState({ qualification })
             }}
             initialSelected={{
-              itemId,
+              item,
               categoryLabel
             }}
           />
@@ -73,7 +71,7 @@ class EditDocumentQualification extends Component {
                     const fileCollection = client.collection('io.cozy.files')
                     const updatedFile = await fileCollection.updateMetadataAttribute(
                       document._id,
-                      qualification
+                      { qualification }
                     )
                     pushAnalytics(item)
                     if (onDescribed) onDescribed(updatedFile.data)

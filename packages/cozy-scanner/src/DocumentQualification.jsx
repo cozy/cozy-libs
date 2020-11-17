@@ -15,7 +15,6 @@ import CategoryGridItem from './CategoryGridItem'
 import DocumentCategory from './DocumentCategory'
 
 import { themes } from './DocumentTypeData'
-import { getItemById, getItemsByCategory } from './DocumentTypeDataHelpers'
 import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './stylesheet.css'
 
@@ -35,10 +34,10 @@ const idFileInput = 'filename_input'
 export class DocumentQualification extends Component {
   constructor(props) {
     super(props)
-    const { categoryLabel = null, itemId = null } = props.initialSelected || {}
+    const { categoryLabel = null, item = null } = props.initialSelected || {}
     this.defaultFilename = `Scan_${new Date().toISOString().replace(/:/g, '-')}`
     this.state = {
-      selected: { categoryLabel, itemId },
+      selected: { categoryLabel, item },
       filename: this.defaultFilename,
       hasUserWrittenFileName: false
     }
@@ -46,9 +45,8 @@ export class DocumentQualification extends Component {
   }
 
   getFilenameFromCategory = (item, t) => {
-    const realItem = getItemById(item.itemId)
-    if (realItem) {
-      const name = t(`Scan.items.${realItem.label}`)
+    if (item) {
+      const name = t(`Scan.items.${item.label}`)
       return `${name.replace(/ /g, '-')}_${new Date()
         .toISOString()
         .substr(0, 10)}`
@@ -57,31 +55,31 @@ export class DocumentQualification extends Component {
     }
   }
 
-  onSelect = item => {
+  onSelect = selected => {
     const { t, allowEditFileName } = this.props
     const { hasUserWrittenFileName } = this.state
     let filename = null
     if (!hasUserWrittenFileName) {
-      filename = this.getFilenameFromCategory(item, t)
+      filename = this.getFilenameFromCategory(selected.item, t)
     } else {
       filename = this.state.filename
     }
-    this.setState({ selected: item })
+    this.setState({ selected })
     this.handleFileNameChange(filename)
 
     const { onDescribed } = this.props
     if (onDescribed) {
-      const realItem = getItemById(item.itemId)
       /* ATM, we only accept JPG extension from the scanner. So
       we hardcode the filename extension here.
 
       If we can't edit file name, then we don't need to use the
       generated filename
       */
+      const item = selected.item ? selected.item : undefined
       if (allowEditFileName) {
-        onDescribed(realItem ? realItem : undefined, filename + fileExtension)
+        onDescribed(item, filename + fileExtension)
       } else {
-        onDescribed(realItem ? realItem : undefined)
+        onDescribed(item)
       }
     }
   }
@@ -112,7 +110,6 @@ export class DocumentQualification extends Component {
                 placeholder={t('Scan.filename')}
                 value={filename}
                 onChange={event => {
-                  // console.log('event', event)
                   // If the user write something once, we don't want to rename the file automatically anymore
                   if (!hasUserWrittenFileName) {
                     this.setState({ hasUserWrittenFileName: true })
@@ -131,7 +128,7 @@ export class DocumentQualification extends Component {
                 onBlur={() => {
                   if (filename === '') {
                     this.handleFileNameChange(
-                      this.getFilenameFromCategory(selected, t)
+                      this.getFilenameFromCategory(selected.item, t)
                     )
                   }
                 }}
@@ -157,7 +154,7 @@ export class DocumentQualification extends Component {
         )}
         <Grid container spacing={8}>
           <GridItem
-            onClick={() => this.onSelect({ categoryLabel: null, itemId: null })}
+            onClick={() => this.onSelect({ categoryLabel: null, item: null })}
           >
             <CategoryGridItem
               isSelected={selected.categoryLabel === null}
@@ -168,14 +165,11 @@ export class DocumentQualification extends Component {
           {themes.map((category, i) => {
             return (
               <DocumentCategory
-                onSelect={item => this.onSelect(item)}
+                onSelect={selected => this.onSelect(selected)}
                 category={category}
-                items={getItemsByCategory(category)}
                 key={i}
                 isSelected={selected.categoryLabel === category.label}
-                selectedItem={
-                  selected.itemId ? getItemById(selected.itemId) : {}
-                }
+                selectedItem={selected.item || {}}
                 t={t}
               />
             )
@@ -197,7 +191,7 @@ DocumentQualification.propTypes = {
   onFileNameChanged: PropTypes.func,
   title: PropTypes.string,
   initialSelected: PropTypes.shape({
-    itemId: PropTypes.string,
+    item: PropTypes.object,
     categoryLabel: PropTypes.string
   }),
   /** define is the user can edit the filename */
