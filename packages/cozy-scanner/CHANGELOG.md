@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.6.0...cozy-scanner@0.7.0) (2020-11-17)
+
+
+### Features
+
+* Add locales for new labels ([8eaaeb7](https://github.com/cozy/cozy-libs/commit/8eaaeb7))
+* Use new Qualification API ([a217343](https://github.com/cozy/cozy-libs/commit/a217343))
+
+
+
+
+
 # [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.5.5...cozy-scanner@0.6.0) (2020-11-03)
 
 
