@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.26.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.25.0...cozy-harvest-lib@2.26.0) (2020-11-17)
+
+
+### Features
+
+* Update cozy-ui for cozy-harvest-lib ([b5d3af5](https://github.com/cozy/cozy-libs/commit/b5d3af5))
+
+
+
+
+
 # [2.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.24.0...cozy-harvest-lib@2.25.0) (2020-11-16)
 
 
