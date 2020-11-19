@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.7.0...cozy-sharing@2.7.1) (2020-11-19)
+
+
+### Bug Fixes
+
+* SharingAvatar link is not separated + avatar size ([5bf669b](https://github.com/cozy/cozy-libs/commit/5bf669b))
+
+
+
+
+
 # [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.6.1...cozy-sharing@2.7.0) (2020-11-17)
 
 
