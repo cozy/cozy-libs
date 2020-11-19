@@ -97,10 +97,7 @@ export const RecipientsAvatars = ({
             <RecipientAvatar
               recipient={recipient}
               size={size}
-              className={cx(styles['recipients-avatars--avatar'], {
-                [styles['recipients-avatars--avatar--noMarginRight']]:
-                  !isAvatarPlusX && idx === 0
-              })}
+              className={cx(styles['recipients-avatars--avatar'])}
             />
           </span>
         ))}
