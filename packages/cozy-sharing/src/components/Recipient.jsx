@@ -233,8 +233,7 @@ export const Permissions = ({
 const Status = ({ status, isMe, instance }) => {
   const { t } = useI18n()
 
-  const isError =
-    !isMe && ['error', 'unregistered', 'mail-not-sent'].includes(status)
+  const isError = !isMe && status === 'mail-not-sent'
   const isReady = isMe || status === 'ready'
 
   let text, icon
