@@ -53,6 +53,10 @@ export const RecipientsAvatars = ({
   // we reverse the recipients array because we use `flex-direction: row-reverse` to display them correctly
 
   const isAvatarPlusX = filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS
+  const extraRecipients = filteredRecipients
+    .slice(MAX_DISPLAYED_RECIPIENTS)
+    .map(recipient => getDisplayName(recipient))
+  const shownRecipients = filteredRecipients.slice(0, MAX_DISPLAYED_RECIPIENTS)
 
   return (
     <div
@@ -78,29 +82,25 @@ export const RecipientsAvatars = ({
         <span data-testid="recipientsAvatars-plusX">
           <AvatarPlusX
             className={styles['recipients-avatars--plusX']}
-            extraRecipients={filteredRecipients
-              .slice(MAX_DISPLAYED_RECIPIENTS)
-              .map(recipient => getDisplayName(recipient))}
+            extraRecipients={extraRecipients}
             size={size}
           />
         </span>
       )}
-      {filteredRecipients
-        .slice(0, MAX_DISPLAYED_RECIPIENTS)
-        .map((recipient, idx) => (
-          <span
-            data-testid={`recipientsAvatars-avatar${
-              recipient.status === 'owner' ? '-owner' : ''
-            }`}
-            key={idx}
-          >
-            <RecipientAvatar
-              recipient={recipient}
-              size={size}
-              className={cx(styles['recipients-avatars--avatar'])}
-            />
-          </span>
-        ))}
+      {shownRecipients.map((recipient, idx) => (
+        <span
+          data-testid={`recipientsAvatars-avatar${
+            recipient.status === 'owner' ? '-owner' : ''
+          }`}
+          key={idx}
+        >
+          <RecipientAvatar
+            recipient={recipient}
+            size={size}
+            className={cx(styles['recipients-avatars--avatar'])}
+          />
+        </span>
+      ))}
     </div>
   )
 }
