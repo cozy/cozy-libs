@@ -6,7 +6,7 @@
       "seen": "Invitation seen",
       "ready": "Accepted",
       "refused": "Refused",
-      "mail-not-sent": "Pending",
+      "mail-not-sent": "Sending invitation mail...",
       "revoked": "Error"
     },
     "type": {

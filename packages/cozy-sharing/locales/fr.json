@@ -6,7 +6,7 @@
       "seen": "Partage consulté",
       "ready": "Accepté",
       "refused": "Refusé",
-      "mail-not-sent": "En attente",
+      "mail-not-sent": "Envoie du mail d'invitation...",
       "revoked": "Erreur"
     },
     "type": {
