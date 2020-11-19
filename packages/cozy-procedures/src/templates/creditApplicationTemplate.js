@@ -162,7 +162,13 @@ const documents = {
     count: 1,
     rules: {
       metadata: {
-        classification: 'identity_document'
+        qualification: {
+          purpose: 'attestation',
+          sourceCategory: 'gov',
+          subjects: {
+            $in: ['identity']
+          }
+        }
       }
     }
   },
@@ -172,9 +178,13 @@ const documents = {
     count: 1,
     rules: {
       metadata: {
-        classification: 'tax_notice',
-        subjects: {
-          $in: ['income']
+        qualification: {
+          purpose: 'invoice',
+          sourceCategory: 'gov',
+          sourceSubCategory: 'tax',
+          subjects: {
+            $in: ['revenues']
+          }
         }
       }
     }
@@ -185,7 +195,13 @@ const documents = {
     count: 1,
     rules: {
       metadata: {
-        classification: 'payslip'
+        qualification: {
+          purpose: 'attestation',
+          sourceCategory: 'employer',
+          subjects: {
+            $in: ['revenues']
+          }
+        }
       }
     }
   },
@@ -194,7 +210,15 @@ const documents = {
     order: 4,
     count: 1,
     rules: {
-      metadata: {}
+      metadata: {
+        qualification: {
+          purpose: 'attestation',
+          sourceCategory: 'bank',
+          subjects: {
+            $in: ['identity']
+          }
+        }
+      }
     }
   },
   address_certificate: {
@@ -203,30 +227,31 @@ const documents = {
     count: 1,
     rules: {
       metadata: {
-        $or: [
-          {
-            classification: 'certificate',
-            categories: {
-              $in: ['energy']
+        qualification: {
+          $or: [
+            {
+              purpose: 'invoice',
+              sourceCategory: {
+                $or: [
+                  'telecom',
+                  'internet',
+                  'mobile',
+                  'energy',
+                  'water',
+                  'real_estate'
+                ]
+              }
             },
-            subjects: {
-              $in: ['subscription']
+            {
+              purpose: 'invoice',
+              sourceCategory: 'gov',
+              sourceSubCategory: 'tax',
+              subjects: {
+                $in: ['revenues', 'real_estate']
+              }
             }
-          },
-          {
-            classification: 'invoicing',
-            isSubscription: true,
-            categories: {
-              $in: ['internet', 'phone', 'energy']
-            }
-          },
-          {
-            classification: 'tax_notice',
-            subjects: {
-              $in: ['income', 'residence']
-            }
-          }
-        ]
+          ]
+        }
       }
     }
   }
