@@ -236,16 +236,15 @@ export const Permissions = ({
 const Status = ({ status, isMe, instance }) => {
   const { t } = useI18n()
 
-  const isError = !isMe && status === 'mail-not-sent'
+  const isSendingEmail = !isMe && status === 'mail-not-sent'
   const isReady = isMe || status === 'ready'
-
   let text, icon
   if (isReady) {
     text = instance
     icon = 'to-the-cloud'
-  } else if (isError) {
-    text = t('Share.status.error')
-    icon = 'warning'
+  } else if (isSendingEmail) {
+    text = t('Share.status.mail-not-sent')
+    icon = 'paperplane'
   } else {
     const supportedStatus = ['pending', 'seen']
     text = supportedStatus.includes(status)
@@ -261,7 +260,7 @@ const Status = ({ status, isMe, instance }) => {
         <Icon icon={icon} size={10} />
       </Img>
       <Bd>
-        <Caption className={cx({ 'u-error': isError })}>{text}</Caption>
+        <Caption>{text}</Caption>
       </Bd>
     </Media>
   )
