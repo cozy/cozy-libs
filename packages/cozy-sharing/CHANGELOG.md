@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.0...cozy-sharing@2.8.1) (2020-11-19)
+
+
+### Bug Fixes
+
+* Tooltip on sharingAvatars show only the row recipients ([b2b71ff](https://github.com/cozy/cozy-libs/commit/b2b71ff))
+
+
+
+
+
 # [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.7.1...cozy-sharing@2.8.0) (2020-11-19)
 
 
