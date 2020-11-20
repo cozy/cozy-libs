@@ -29,7 +29,7 @@ const AvatarPlusX = ({ className, size, extraRecipients = [] }) => {
 
 AvatarPlusX.propTypes = {
   extraRecipients: PropTypes.arrayOf(PropTypes.string),
-  size: PropTypes.string,
+  size: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   className: PropTypes.string
 }
 
