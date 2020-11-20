@@ -1,9 +1,9 @@
 import { Contact } from '../models'
-
+import { models } from 'cozy-client'
 export const countNewRecipients = (currentRecipients, newRecipients) => {
   return newRecipients.filter(contact => {
-    const email = Contact.getPrimaryEmail(contact)
-    const cozyUrl = Contact.getPrimaryCozy(contact)
+    const email = models.contact.getPrimaryEmail(contact)
+    const cozyUrl = models.contact.getPrimaryCozy(contact)
     return !currentRecipients.find(
       r =>
         (email && r.email && r.email === email) ||
@@ -20,9 +20,9 @@ export const getSuccessMessage = (
   if (recipientsAfter.length === 1) {
     const recipient = recipientsAfter[0]
     const email = Contact.isContact(recipient)
-      ? Contact.getPrimaryEmail(recipient)
+      ? models.contact.getPrimaryEmail(recipient)
       : recipient.email
-    const cozyUrl = Contact.getPrimaryCozy(recipient)
+    const cozyUrl = models.contact.getPrimaryCozy(recipient)
 
     if (email) {
       return [
