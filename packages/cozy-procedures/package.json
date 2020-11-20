@@ -19,7 +19,6 @@
     "lint": "cd ..; yarn lint packages/cozy-procedures"
   },
   "dependencies": {
-    "babel-preset-cozy-app": "^1.9.3",
     "cozy-realtime": "^3.11.0",
     "date-fns": "^1.30.1",
     "lodash": "^4.17.19",
@@ -37,6 +36,7 @@
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "babel-plugin-inline-react-svg": "^1.1.0",
+    "babel-preset-cozy-app": "^1.9.3",
     "cozy-client": "13.15.1",
     "cozy-ui": "35.39.0",
     "enzyme-to-json": "3.4.4",
