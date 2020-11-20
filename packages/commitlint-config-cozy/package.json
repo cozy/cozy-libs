@@ -21,7 +21,7 @@
     "@commitlint/lint": "7.5.2",
     "babel-jest": "24.9.0",
     "babel-preset-cozy-app": "^1.9.3",
-    "jest": "24.9.0"
+    "jest": "26.2.2"
   },
   "dependencies": {
     "@commitlint/cli": "7.5.2"

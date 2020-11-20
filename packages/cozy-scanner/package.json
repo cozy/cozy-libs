@@ -32,7 +32,7 @@
     "cozy-client": "13.15.1",
     "cozy-doctypes": "1.67.0",
     "cozy-ui": "40.1.1",
-    "jest": "24.9.0",
+    "jest": "26.2.2",
     "jest-dom": "^4.0.0",
     "mockdate": "^2.0.5",
     "prop-types": "15.7.2",

@@ -41,7 +41,7 @@
     "cozy-client": "13.15.1",
     "cozy-ui": "35.39.0",
     "enzyme-to-json": "3.4.4",
-    "jest": "24.9.0",
+    "jest": "26.2.2",
     "react": "^16.12.0"
   },
   "peerDependencies": {
@@ -74,9 +74,6 @@
       "node_modules",
       "src"
     ],
-    "transform": {
-      "^.+\\.(js|jsx)?$": "<rootDir>/babel-transformer.js"
-    },
     "transformIgnorePatterns": [
       "node_modules/(?!cozy-ui)"
     ],
