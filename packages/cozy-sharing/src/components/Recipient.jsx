@@ -119,7 +119,16 @@ export const RecipientAvatar = ({ recipient, ...rest }) => {
   const client = useClient()
   return (
     <Avatar
-      image={`${client.options.uri}${recipient.avatarPath}`}
+      /**
+       * avatarPath is always the same for a recipient, but image
+       * can be different since the stack generate it on the fly.
+       * It can be "gray" during the first load depending of the
+       * status' sharing, but can become active (from the realtime)
+       * so we need a way to "refresh" the image. Passing the
+       * status in the url force the refresh of the image when the
+       * status changes
+       */
+      image={`${client.options.uri}${recipient.avatarPath}?v=${recipient.status}`}
       text={getInitials(recipient)}
       textId={getDisplayName(recipient)}
       disabled={
