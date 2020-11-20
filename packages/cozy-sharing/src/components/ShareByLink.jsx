@@ -165,10 +165,12 @@ class ShareByLink extends React.Component {
                 {menuIsOpen && (
                   <ActionMenu
                     onClose={this.toggleMenu}
-                    placement="bottom-end"
+                    popperOptions={{
+                      ...popperOptions,
+                      placement: 'bottom-end'
+                    }}
                     containerElRef={this.containerRef}
                     anchorElRef={this.containerRef}
-                    popperOptions={popperOptions}
                   >
                     <ActionMenuItem
                       left={

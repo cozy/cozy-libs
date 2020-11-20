@@ -210,9 +210,15 @@ export const Permissions = ({
           {isMenuDisplayed && (
             <ActionMenu
               onClose={hideMenu}
-              placement="bottom-end"
+              popperOptions={{
+                placement: 'bottom-end',
+                modifiers: [
+                  {
+                    name: 'preventOverflow'
+                  }
+                ]
+              }}
               anchorElRef={buttonRef}
-              preventOverflow
             >
               <ActionMenuItem
                 left={
