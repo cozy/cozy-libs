@@ -26,7 +26,6 @@
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
   "dependencies": {
-    "@babel/runtime": "^7.5.2",
     "@cozy/minilog": "^1.0.0",
     "@material-ui/core": "3",
     "@testing-library/react": "^10.4.9",
@@ -72,6 +71,7 @@
     "react-dom": "^16.12.0"
   },
   "peerDependencies": {
+    "@babel/runtime": "7.12.5",
     "cozy-client": "^14.4.0",
     "cozy-device-helper": "^1.10.2",
     "cozy-flags": "^2.3.5",

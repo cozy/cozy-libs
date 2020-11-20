@@ -20,9 +20,7 @@
     "lint": "cd .. && yarn lint packages/cozy-scanner",
     "watch": "yarn build --watch"
   },
-  "dependencies": {
-    "@babel/runtime": "^7.5.2"
-  },
+  "dependencies": {},
   "devDependencies": {
     "@babel/cli": "7.2.3",
     "@babel/core": "7.12.3",
@@ -42,6 +40,7 @@
     "stylus": "^0.54.7"
   },
   "peerDependencies": {
+    "@babel/runtime": "7.12.5",
     "cozy-client": "^13.15.1",
     "cozy-doctypes": "1.67.0",
     "cozy-ui": "^40"
