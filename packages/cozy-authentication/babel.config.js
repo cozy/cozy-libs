@@ -1,18 +1,7 @@
 module.exports = {
   env: {
     transpilation: {
-      presets: [['cozy-app', { lib: true }]],
-      plugins: [
-        [
-          'css-modules-transform',
-          {
-            extensions: ['.styl'],
-            preprocessCss: './preprocess',
-            extractCss: './dist/stylesheet.css',
-            generateScopedName: '[name]__[local]___[hash:base64:5]'
-          }
-        ]
-      ]
+      presets: [['cozy-app', { lib: true }]]
     },
     test: {
       presets: ['cozy-app']
