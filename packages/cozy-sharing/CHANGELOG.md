@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.1...cozy-sharing@2.8.2) (2020-11-20)
+
+
+### Bug Fixes
+
+* Don't display "Me" in the SharingRecipients. ([f291aeb](https://github.com/cozy/cozy-libs/commit/f291aeb))
+* Fix issue with AvatarX proptype ([d3b7062](https://github.com/cozy/cozy-libs/commit/d3b7062))
+* Reloading issue on Avatar from the stack ([0627982](https://github.com/cozy/cozy-libs/commit/0627982))
+* Remove warning by using popperOptions ([17986ab](https://github.com/cozy/cozy-libs/commit/17986ab))
+* Use models.contact from cozy-client instead of cozy-doctypes ([affac41](https://github.com/cozy/cozy-libs/commit/affac41))
+
+
+
+
+
 ## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.0...cozy-sharing@2.8.1) (2020-11-19)
 
 
