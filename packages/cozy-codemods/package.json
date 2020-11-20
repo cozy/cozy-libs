@@ -16,7 +16,6 @@
     "jscodeshift": "^0.11.0"
   },
   "devDependencies": {
-    "jscodeshift": "^0.6.4",
     "jest": "26.2.2",
     "jsdoc-to-markdown": "^5.0.0"
   }
