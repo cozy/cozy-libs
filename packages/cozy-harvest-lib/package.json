@@ -44,7 +44,7 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.2.3",
+    "@babel/cli": "7.12.1",
     "@babel/core": "7.12.3",
     "@babel/register": "^7.8.3",
     "@cozy/cli-tree": "^0.2.1",

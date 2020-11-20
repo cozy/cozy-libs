@@ -24,7 +24,7 @@
     "redux": "3.7.2"
   },
   "devDependencies": {
-    "babel-polyfill": "^6.26.0",
+    "@babel/polyfill": "7.12.1",
     "parcel": "^1.12.3"
   },
   "peerDependencies": {

@@ -23,7 +23,7 @@
     "cozy-client": "^13.15.1"
   },
   "devDependencies": {
-    "@babel/cli": "7.4.4",
+    "@babel/cli": "7.12.1",
     "babel-plugin-rewire": "1.2.0",
     "babel-preset-cozy-app": "^1.9.3",
     "cozy-client": "13.15.1",
