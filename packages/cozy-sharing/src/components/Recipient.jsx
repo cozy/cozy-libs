@@ -23,16 +23,24 @@ export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
 /**
- * Exclude me from the list of recipients if I'm the owner of the share
+ * Exclude me from the list of recipients.
  * @typedef {object} Recipient
  * @param {array<Recipient>} recipients - List of recipients
  * @param {boolean} isOwner - Indicates if I'm the owner or not
+ * @param {object} client - CozyClient instance
  * @returns {array<Recipient>} List of recipients without me if I'm the owner
  */
-const excludeMeAsOwnerFromRecipients = ({ recipients, isOwner }) => {
-  return recipients.filter(recipient =>
-    isOwner ? recipient.status !== 'owner' : recipient
-  )
+export const excludeMeAsOwnerFromRecipients = ({
+  recipients,
+  isOwner,
+  client
+}) => {
+  return recipients.filter(recipient => {
+    if (isOwner) {
+      return recipient.status !== 'owner'
+    }
+    return recipient.instance !== client.options.uri
+  })
 }
 
 export const RecipientsAvatars = ({
@@ -44,11 +52,13 @@ export const RecipientsAvatars = ({
   isOwner,
   showMeAsOwner
 }) => {
+  const client = useClient()
   const filteredRecipients = showMeAsOwner
     ? recipients.slice().reverse() // we slice first to clone the original array because reverser() mutates it
     : excludeMeAsOwnerFromRecipients({
         recipients,
-        isOwner
+        isOwner,
+        client
       }).reverse()
   // we reverse the recipients array because we use `flex-direction: row-reverse` to display them correctly
 

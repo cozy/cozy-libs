@@ -1,5 +1,5 @@
 import React from 'react'
-import Recipient from './Recipient'
+import Recipient, { excludeMeAsOwnerFromRecipients } from './Recipient'
 import AppLike from '../../test/AppLike'
 import { createMockClient } from 'cozy-client'
 import { render, fireEvent } from '@testing-library/react'
@@ -94,5 +94,43 @@ describe('Recipient component', () => {
     fireEvent.click(getByText('Remove from sharing'))
     expect(onRevoke).toBeCalled()
     expect(onRevokeSelf).not.toBeCalled()
+  })
+})
+
+describe('excludeMeAsOwnerFromRecipients', () => {
+  test('excludeMeAsOwnerFromRecipients behavior', () => {
+    const recipients = [
+      {
+        status: 'owner',
+        instance: 'http://foo1.cozy.bar'
+      },
+      { status: 'pending', instance: 'http://foo2.cozy.bar' },
+      {
+        status: 'pending',
+        instance: 'http://foo3.cozy.bar'
+      }
+    ]
+    const client = { options: { uri: 'http://foo2.cozy.bar' } }
+    expect(
+      excludeMeAsOwnerFromRecipients({ recipients, isOwner: true, client })
+    ).toEqual([
+      { status: 'pending', instance: 'http://foo2.cozy.bar' },
+      {
+        status: 'pending',
+        instance: 'http://foo3.cozy.bar'
+      }
+    ])
+    expect(
+      excludeMeAsOwnerFromRecipients({ recipients, isOwner: false, client })
+    ).toEqual([
+      {
+        status: 'owner',
+        instance: 'http://foo1.cozy.bar'
+      },
+      {
+        status: 'pending',
+        instance: 'http://foo3.cozy.bar'
+      }
+    ])
   })
 })
