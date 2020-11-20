@@ -20,7 +20,7 @@
     "watch": "yarn build --watch"
   },
   "peerDependencies": {
-    "cozy-client": "^13.15.1"
+    "cozy-client": ">=13.15.1"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",

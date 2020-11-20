@@ -26,6 +26,6 @@
     "jest": "26.2.2"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.12.5"
+    "@babel/runtime": ">=7.12.5"
   }
 }

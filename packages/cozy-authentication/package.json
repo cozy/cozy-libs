@@ -66,8 +66,8 @@
     }
   },
   "peerDependencies": {
-    "cozy-client": "^13.15.1",
-    "cozy-ui": "^35.39.0",
+    "cozy-client": ">=13.15.1",
+    "cozy-ui": ">=35.39.0",
     "react": ">=15",
     "react-router": "3"
   }

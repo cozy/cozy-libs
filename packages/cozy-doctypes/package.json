@@ -28,9 +28,9 @@
     "mockdate": "2.0.5"
   },
   "peerDependencies": {
-    "@babel/runtime": "7.12.5",
-    "cozy-client": "^13.15.1",
-    "cozy-stack-client": "^13.15.1"
+    "@babel/runtime": ">=7.12.5",
+    "cozy-client": ">=13.15.1",
+    "cozy-stack-client": ">=13.15.1"
   },
   "scripts": {
     "lint": "cd ../../; yarn lint packages/cozy-doctypes",
