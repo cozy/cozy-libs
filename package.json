@@ -22,7 +22,8 @@
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",
-    "@babel/core": "^7.12.3",
+    "@babel/core": "7.12.3",
+    "@babel/runtime": "7.12.5",
     "babel-loader": "^8.0.5",
     "babel-preset-cozy-app": "^1.5.0",
     "css-loader": "^2.1.1",
