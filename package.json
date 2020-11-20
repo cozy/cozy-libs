@@ -18,7 +18,8 @@
     "lint": "eslint --ext js,jsx .",
     "test": "lerna run --concurrency 1 test",
     "build": "lerna run --parallel build",
-    "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js"
+    "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js",
+    "check": "node scripts/check-packages.js"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",

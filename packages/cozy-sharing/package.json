@@ -30,7 +30,6 @@
     "copy-text-to-clipboard": "^2.1.1",
     "cozy-device-helper": "^1.10.3",
     "cozy-doctypes": "^1.74.8",
-    "cozy-realtime": "^3.11.0",
     "lodash": "^4.17.19",
     "react-autosuggest": "^9.4.3",
     "react-tooltip": "^3.11.1"
@@ -56,6 +55,7 @@
     "@material-ui/styles": "^4.10.0",
     "cozy-client": "^16",
     "cozy-ui": "^40.6.0",
+    "cozy-realtime": "^3.11.0",
     "prop-types": "^15.7.2",
     "react": "^16.12.0"
   },
