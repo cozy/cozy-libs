@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.6.0...@cozy/codemods@1.7.0) (2020-11-23)
+
+
+### Features
+
+* No need for jscodeshift as dev dep when specified already as dep ([402cebf](https://github.com/cozy/cozy-libs/commit/402cebf))
+* Update @babel/core and babel-jest ([352ddc3](https://github.com/cozy/cozy-libs/commit/352ddc3))
+
+
+
+
+
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.5.1...@cozy/codemods@1.6.0) (2020-11-11)
 
 

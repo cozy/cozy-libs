@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.10.0 (2020-11-23)
+
+
+### Features
+
+* Update babel-preset-cozy-app dependencies ([0fcccb5](https://github.com/cozy/cozy-libs/commit/0fcccb5))
+* Use ^ for dependencies ([fc28de7](https://github.com/cozy/cozy-libs/commit/fc28de7))
+
+
+
+
+
 ## [1.9.3](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.9.2...babel-preset-cozy-app@1.9.3) (2020-10-01)
 
 **Note:** Version bump only for package babel-preset-cozy-app

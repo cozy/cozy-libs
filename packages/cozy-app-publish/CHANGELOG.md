@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.25.2...cozy-app-publish@0.26.0) (2020-11-23)
+
+
+### Features
+
+* Update jest ([3b2c32a](https://github.com/cozy/cozy-libs/commit/3b2c32a))
+* Use ^ for dependencies ([fc28de7](https://github.com/cozy/cozy-libs/commit/fc28de7))
+
+
+
+
+
 ## [0.25.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.25.1...cozy-app-publish@0.25.2) (2020-11-11)
 
 **Note:** Version bump only for package cozy-app-publish

@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.7.0...cozy-scanner@0.8.0) (2020-11-23)
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+* All babel runtime at 7.12.5 ([a77137c](https://github.com/cozy/cozy-libs/commit/a77137c))
+* Update @babel/core and babel-jest ([352ddc3](https://github.com/cozy/cozy-libs/commit/352ddc3))
+* Update jest ([3b2c32a](https://github.com/cozy/cozy-libs/commit/3b2c32a))
+* Use >= for peer dependencies ([6ec2826](https://github.com/cozy/cozy-libs/commit/6ec2826))
+
+
+
+
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.6.0...cozy-scanner@0.7.0) (2020-11-17)
 
 

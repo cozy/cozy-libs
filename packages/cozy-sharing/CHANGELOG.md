@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.2...cozy-sharing@2.9.0) (2020-11-23)
+
+
+### Bug Fixes
+
+* Move babel dep to devDep ([d524f28](https://github.com/cozy/cozy-libs/commit/d524f28))
+
+
+### Features
+
+* Update @babel/core and babel-jest ([352ddc3](https://github.com/cozy/cozy-libs/commit/352ddc3))
+* Update jest ([3b2c32a](https://github.com/cozy/cozy-libs/commit/3b2c32a))
+* Use >= for peer dependencies ([6ec2826](https://github.com/cozy/cozy-libs/commit/6ec2826))
+
+
+
+
+
 ## [2.8.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.1...cozy-sharing@2.8.2) (2020-11-20)
 
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.9.2...cozy-notifications@0.10.0) (2020-11-23)
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+* Update @babel/core and babel-jest ([352ddc3](https://github.com/cozy/cozy-libs/commit/352ddc3))
+* Use ^ for dependencies ([fc28de7](https://github.com/cozy/cozy-libs/commit/fc28de7))
+
+
+
+
+
 ## [0.9.2](https://github.com/cozy/cozy-libs/compare/cozy-notifications@0.9.1...cozy-notifications@0.9.2) (2020-11-11)
 
 **Note:** Version bump only for package cozy-notifications

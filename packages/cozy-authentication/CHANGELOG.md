@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.3.3...cozy-authentication@2.4.0) (2020-11-23)
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+* Remove react-redux from cozy-authentication deps ([a6c0138](https://github.com/cozy/cozy-libs/commit/a6c0138))
+* Simplify transpilation of cozy-authentication ([696e8a9](https://github.com/cozy/cozy-libs/commit/696e8a9))
+* Update @babel/core and babel-jest ([352ddc3](https://github.com/cozy/cozy-libs/commit/352ddc3))
+* Update jest ([3b2c32a](https://github.com/cozy/cozy-libs/commit/3b2c32a))
+* Use >= for peer dependencies ([6ec2826](https://github.com/cozy/cozy-libs/commit/6ec2826))
+
+
+
+
+
 ## [2.3.3](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.3.2...cozy-authentication@2.3.3) (2020-11-11)
 
 **Note:** Version bump only for package cozy-authentication

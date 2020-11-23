@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.12.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.11.0...cozy-realtime@3.12.0) (2020-11-23)
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+* Use >= for peer dependencies ([6ec2826](https://github.com/cozy/cozy-libs/commit/6ec2826))
+
+
+
+
+
 # [3.11.0](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.10.6...cozy-realtime@3.11.0) (2020-10-19)
 
 

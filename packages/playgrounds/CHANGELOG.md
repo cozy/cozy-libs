@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.23...cozy-playgrounds@1.17.0) (2020-11-23)
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+* All babel runtime at 7.12.5 ([a77137c](https://github.com/cozy/cozy-libs/commit/a77137c))
+* Move @babel/runtime as dependency as playgrounds is an app ([b1b7c6e](https://github.com/cozy/cozy-libs/commit/b1b7c6e))
+* Use >= for peer dependencies ([6ec2826](https://github.com/cozy/cozy-libs/commit/6ec2826))
+
+
+
+
+
 ## [1.16.23](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.22...cozy-playgrounds@1.16.23) (2020-11-20)
 
 **Note:** Version bump only for package cozy-playgrounds

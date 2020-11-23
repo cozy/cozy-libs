@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2020-11-23)
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+
+
+
+
+
 ## [2.4.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.4.0...cozy-flags@2.4.1) (2020-10-16)
 
 **Note:** Version bump only for package cozy-flags

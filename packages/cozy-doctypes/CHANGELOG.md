@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.75.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.8...cozy-doctypes@1.75.0) (2020-11-23)
+
+
+### Bug Fixes
+
+* Add @babel/core since it's necessary for @babel/cli ([a3540c1](https://github.com/cozy/cozy-libs/commit/a3540c1))
+
+
+### Features
+
+* All babel cli at 7.12.1 ([387a24a](https://github.com/cozy/cozy-libs/commit/387a24a))
+* All babel runtime at 7.12.5 ([a77137c](https://github.com/cozy/cozy-libs/commit/a77137c))
+* Update jest ([3b2c32a](https://github.com/cozy/cozy-libs/commit/3b2c32a))
+* Use >= for peer dependencies ([6ec2826](https://github.com/cozy/cozy-libs/commit/6ec2826))
+
+
+
+
+
 ## [1.74.8](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.74.7...cozy-doctypes@1.74.8) (2020-11-05)
 
 
