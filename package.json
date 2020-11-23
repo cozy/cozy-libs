@@ -19,7 +19,7 @@
     "test": "lerna run --concurrency 1 test",
     "build": "lerna run --parallel build",
     "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js",
-    "check": "node scripts/check-packages.js"
+    "check-constraints": "node scripts/check-packages-constraints.js"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",
