@@ -18,10 +18,6 @@ module.exports = {
     '^cozy-logger$': 'cozy-logger/dist/index.js',
     '^cozy-client$': 'cozy-client/dist/index.js'
   },
-  transform: {
-    '^.+\\.(js|jsx)?$': '<rootDir>/test/jestLib/babel-transformer.js',
-    '^.+\\.webapp$': '<rootDir>/test/jestLib/json-transformer.js'
-  },
   transformIgnorePatterns: ['node_modules/(?!cozy-ui)'],
   setupFilesAfterEnv: ['<rootDir>/jestHelpers/setup.js']
 }
