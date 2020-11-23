@@ -15,14 +15,16 @@ export const DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
         {t('vaultCiphersList.title')}
       </Title>
       <List>
-        {ciphers.map(cipherView => (
-          <CiphersListItem
-            key={cipherView.id}
-            cipherView={cipherView}
-            konnector={konnector}
-            onClick={() => onSelect(cipherView)}
-          />
-        ))}
+        {ciphers
+          .filter(cipherView => !cipherView.deletedDate)
+          .map(cipherView => (
+            <CiphersListItem
+              key={cipherView.id}
+              cipherView={cipherView}
+              konnector={konnector}
+              onClick={() => onSelect(cipherView)}
+            />
+          ))}
 
         <OtherAccountListItem onClick={() => onSelect(null)} />
       </List>

@@ -21,20 +21,18 @@ describe('DocumentCategory', () => {
           onSelect={onSelect}
           category={{
             icon: 'test',
-            label: 'test'
+            label: 'test',
+            items: [
+              {
+                label: 'Label1'
+              },
+              {
+                label: 'Label2'
+              }
+            ]
           }}
           isSelected={true}
-          selectedItem={{ label: 'test', id: '1' }}
-          items={[
-            {
-              id: '1',
-              label: 'Label1'
-            },
-            {
-              id: '2',
-              label: 'Label2'
-            }
-          ]}
+          selectedItem={{ label: 'test' }}
           t={text => text}
         />
       </MuiCozyTheme>
@@ -55,7 +53,9 @@ describe('DocumentCategory', () => {
 
     fireEvent.click(getByText('Scan.items.Label2'))
     expect(onSelect).toBeCalledWith({
-      itemId: '2',
+      item: {
+        label: 'Label2'
+      },
       categoryLabel: 'test'
     })
   })

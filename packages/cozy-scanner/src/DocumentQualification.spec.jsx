@@ -48,11 +48,11 @@ describe('DocumentQualification', () => {
     fireEvent.click(getByText('Scan.items.family_record_book'))
     expect(onDescribed).toBeCalledWith(
       {
-        classification: 'identity_document',
-        defaultTheme: 'theme2',
-        id: '4',
         label: 'family_record_book',
-        subClassification: 'family_record_book'
+        purpose: 'attestation',
+        sourceCategory: 'gov',
+        sourceSubCategory: 'civil_registration',
+        subjects: ['family']
       },
       'Scan.items.family_record_book_2019-01-01.jpg'
     )

@@ -23,16 +23,24 @@ export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
 /**
- * Exclude me from the list of recipients if I'm the owner of the share
+ * Exclude me from the list of recipients.
  * @typedef {object} Recipient
  * @param {array<Recipient>} recipients - List of recipients
  * @param {boolean} isOwner - Indicates if I'm the owner or not
+ * @param {object} client - CozyClient instance
  * @returns {array<Recipient>} List of recipients without me if I'm the owner
  */
-const excludeMeAsOwnerFromRecipients = ({ recipients, isOwner }) => {
-  return recipients.filter(recipient =>
-    isOwner ? recipient.status !== 'owner' : recipient
-  )
+export const excludeMeAsOwnerFromRecipients = ({
+  recipients,
+  isOwner,
+  client
+}) => {
+  return recipients.filter(recipient => {
+    if (isOwner) {
+      return recipient.status !== 'owner'
+    }
+    return recipient.instance !== client.options.uri
+  })
 }
 
 export const RecipientsAvatars = ({
@@ -44,13 +52,21 @@ export const RecipientsAvatars = ({
   isOwner,
   showMeAsOwner
 }) => {
+  const client = useClient()
   const filteredRecipients = showMeAsOwner
     ? recipients.slice().reverse() // we slice first to clone the original array because reverser() mutates it
     : excludeMeAsOwnerFromRecipients({
         recipients,
-        isOwner
+        isOwner,
+        client
       }).reverse()
   // we reverse the recipients array because we use `flex-direction: row-reverse` to display them correctly
+
+  const isAvatarPlusX = filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS
+  const extraRecipients = filteredRecipients
+    .slice(MAX_DISPLAYED_RECIPIENTS)
+    .map(recipient => getDisplayName(recipient))
+  const shownRecipients = filteredRecipients.slice(0, MAX_DISPLAYED_RECIPIENTS)
 
   return (
     <div
@@ -72,33 +88,29 @@ export const RecipientsAvatars = ({
           />
         </span>
       )}
-      {filteredRecipients.length > MAX_DISPLAYED_RECIPIENTS && (
+      {isAvatarPlusX && (
         <span data-testid="recipientsAvatars-plusX">
           <AvatarPlusX
             className={styles['recipients-avatars--plusX']}
-            extraRecipients={filteredRecipients
-              .slice(MAX_DISPLAYED_RECIPIENTS)
-              .map(recipient => getDisplayName(recipient))}
+            extraRecipients={extraRecipients}
             size={size}
           />
         </span>
       )}
-      {filteredRecipients
-        .slice(0, MAX_DISPLAYED_RECIPIENTS)
-        .map((recipient, idx) => (
-          <span
-            data-testid={`recipientsAvatars-avatar${
-              recipient.status === 'owner' ? '-owner' : ''
-            }`}
-            key={idx}
-          >
-            <RecipientAvatar
-              recipient={recipient}
-              size={size}
-              className={styles['recipients-avatars--avatar']}
-            />
-          </span>
-        ))}
+      {shownRecipients.map((recipient, idx) => (
+        <span
+          data-testid={`recipientsAvatars-avatar${
+            recipient.status === 'owner' ? '-owner' : ''
+          }`}
+          key={idx}
+        >
+          <RecipientAvatar
+            recipient={recipient}
+            size={size}
+            className={cx(styles['recipients-avatars--avatar'])}
+          />
+        </span>
+      ))}
     </div>
   )
 }
@@ -107,7 +119,16 @@ export const RecipientAvatar = ({ recipient, ...rest }) => {
   const client = useClient()
   return (
     <Avatar
-      image={`${client.options.uri}${recipient.avatarPath}`}
+      /**
+       * avatarPath is always the same for a recipient, but image
+       * can be different since the stack generate it on the fly.
+       * It can be "gray" during the first load depending of the
+       * status' sharing, but can become active (from the realtime)
+       * so we need a way to "refresh" the image. Passing the
+       * status in the url force the refresh of the image when the
+       * status changes
+       */
+      image={`${client.options.uri}${recipient.avatarPath}?v=${recipient.status}`}
       text={getInitials(recipient)}
       textId={getDisplayName(recipient)}
       disabled={
@@ -189,9 +210,15 @@ export const Permissions = ({
           {isMenuDisplayed && (
             <ActionMenu
               onClose={hideMenu}
-              placement="bottom-end"
+              popperOptions={{
+                placement: 'bottom-end',
+                modifiers: [
+                  {
+                    name: 'preventOverflow'
+                  }
+                ]
+              }}
               anchorElRef={buttonRef}
-              preventOverflow
             >
               <ActionMenuItem
                 left={
@@ -231,17 +258,15 @@ export const Permissions = ({
 const Status = ({ status, isMe, instance }) => {
   const { t } = useI18n()
 
-  const isError =
-    !isMe && ['error', 'unregistered', 'mail-not-sent'].includes(status)
+  const isSendingEmail = !isMe && status === 'mail-not-sent'
   const isReady = isMe || status === 'ready'
-
   let text, icon
   if (isReady) {
     text = instance
     icon = 'to-the-cloud'
-  } else if (isError) {
-    text = t('Share.status.error')
-    icon = 'warning'
+  } else if (isSendingEmail) {
+    text = t('Share.status.mail-not-sent')
+    icon = 'paperplane'
   } else {
     const supportedStatus = ['pending', 'seen']
     text = supportedStatus.includes(status)
@@ -257,7 +282,7 @@ const Status = ({ status, isMe, instance }) => {
         <Icon icon={icon} size={10} />
       </Img>
       <Bd>
-        <Caption className={cx({ 'u-error': isError })}>{text}</Caption>
+        <Caption>{text}</Caption>
       </Bd>
     </Media>
   )

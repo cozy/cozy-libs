@@ -3,6 +3,81 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.1...cozy-sharing@2.8.2) (2020-11-20)
+
+
+### Bug Fixes
+
+* Don't display "Me" in the SharingRecipients. ([f291aeb](https://github.com/cozy/cozy-libs/commit/f291aeb))
+* Fix issue with AvatarX proptype ([d3b7062](https://github.com/cozy/cozy-libs/commit/d3b7062))
+* Reloading issue on Avatar from the stack ([0627982](https://github.com/cozy/cozy-libs/commit/0627982))
+* Remove warning by using popperOptions ([17986ab](https://github.com/cozy/cozy-libs/commit/17986ab))
+* Use models.contact from cozy-client instead of cozy-doctypes ([affac41](https://github.com/cozy/cozy-libs/commit/affac41))
+
+
+
+
+
+## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.0...cozy-sharing@2.8.1) (2020-11-19)
+
+
+### Bug Fixes
+
+* Tooltip on sharingAvatars show only the row recipients ([b2b71ff](https://github.com/cozy/cozy-libs/commit/b2b71ff))
+
+
+
+
+
+# [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.7.1...cozy-sharing@2.8.0) (2020-11-19)
+
+
+### Bug Fixes
+
+* Remove status that doesn't exist ([bd4cc2e](https://github.com/cozy/cozy-libs/commit/bd4cc2e))
+
+
+### Features
+
+* SendingEmail is not an error ([18bfe76](https://github.com/cozy/cozy-libs/commit/18bfe76))
+
+
+
+
+
+## [2.7.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.7.0...cozy-sharing@2.7.1) (2020-11-19)
+
+
+### Bug Fixes
+
+* SharingAvatar link is not separated + avatar size ([5bf669b](https://github.com/cozy/cozy-libs/commit/5bf669b))
+
+
+
+
+
+# [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.6.1...cozy-sharing@2.7.0) (2020-11-17)
+
+
+### Features
+
+* Update cozy-ui for cozy-sharing ([914a57f](https://github.com/cozy/cozy-libs/commit/914a57f))
+
+
+
+
+
+## [2.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.6.0...cozy-sharing@2.6.1) (2020-11-16)
+
+
+### Bug Fixes
+
+* No margin on first recipient when no AvatarPlusX ([5f14ad7](https://github.com/cozy/cozy-libs/commit/5f14ad7))
+
+
+
+
+
 # [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.5.2...cozy-sharing@2.6.0) (2020-11-10)
 
 

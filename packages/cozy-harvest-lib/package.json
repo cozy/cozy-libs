@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "2.24.0",
+  "version": "2.26.1",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -29,7 +29,7 @@
     "@cozy/minilog": "^1.0.0",
     "@material-ui/core": "3",
     "@testing-library/react": "^10.4.9",
-    "cozy-bi-auth": "0.0.14",
+    "cozy-bi-auth": "0.0.15",
     "cozy-doctypes": "^1.74.8",
     "cozy-keys-lib": "^3.1.2",
     "cozy-logger": "^1.6.0",
@@ -57,7 +57,7 @@
     "cozy-flags": "^2.4.1",
     "cozy-keys-lib": "^3.1.0",
     "cozy-realtime": "^3.11.0",
-    "cozy-ui": "40.5.0",
+    "cozy-ui": "40.9.1",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.2",
     "form-data": "3.0.0",
@@ -77,7 +77,7 @@
     "cozy-flags": ">=2.3.5",
     "cozy-keys-lib": ">=3.1.0",
     "cozy-realtime": ">=3.10.5",
-    "cozy-ui": ">=40.6.0"
+    "cozy-ui": ">=40.9.1"
   },
   "sideEffects": false
 }

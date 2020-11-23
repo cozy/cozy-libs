@@ -6,9 +6,7 @@
       "seen": "Invitation seen",
       "ready": "Accepted",
       "refused": "Refused",
-      "error": "Sharing error",
-      "unregistered": "Error",
-      "mail-not-sent": "Pending",
+      "mail-not-sent": "Sending invitation mail...",
       "revoked": "Error"
     },
     "type": {

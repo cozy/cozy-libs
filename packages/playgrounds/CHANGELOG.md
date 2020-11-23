@@ -3,6 +3,54 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.23](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.22...cozy-playgrounds@1.16.23) (2020-11-20)
+
+**Note:** Version bump only for package cozy-playgrounds
+
+
+
+
+
+## [1.16.22](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.21...cozy-playgrounds@1.16.22) (2020-11-19)
+
+**Note:** Version bump only for package cozy-playgrounds
+
+
+
+
+
+## [1.16.21](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.20...cozy-playgrounds@1.16.21) (2020-11-19)
+
+**Note:** Version bump only for package cozy-playgrounds
+
+
+
+
+
+## [1.16.20](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.19...cozy-playgrounds@1.16.20) (2020-11-19)
+
+**Note:** Version bump only for package cozy-playgrounds
+
+
+
+
+
+## [1.16.19](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.18...cozy-playgrounds@1.16.19) (2020-11-17)
+
+**Note:** Version bump only for package cozy-playgrounds
+
+
+
+
+
+## [1.16.18](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.17...cozy-playgrounds@1.16.18) (2020-11-16)
+
+**Note:** Version bump only for package cozy-playgrounds
+
+
+
+
+
 ## [1.16.17](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.16.16...cozy-playgrounds@1.16.17) (2020-11-11)
 
 **Note:** Version bump only for package cozy-playgrounds

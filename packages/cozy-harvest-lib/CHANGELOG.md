@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.26.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.26.0...cozy-harvest-lib@2.26.1) (2020-11-17)
+
+**Note:** Version bump only for package cozy-harvest-lib
+
+
+
+
+
+# [2.26.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.25.0...cozy-harvest-lib@2.26.0) (2020-11-17)
+
+
+### Features
+
+* Update cozy-ui for cozy-harvest-lib ([b5d3af5](https://github.com/cozy/cozy-libs/commit/b5d3af5))
+
+
+
+
+
+# [2.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.24.0...cozy-harvest-lib@2.25.0) (2020-11-16)
+
+
+### Features
+
+* **Harvest:** Ignore soft deleted ciphers ([3f40ef5](https://github.com/cozy/cozy-libs/commit/3f40ef5))
+
+
+
+
+
 # [2.24.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.23.0...cozy-harvest-lib@2.24.0) (2020-11-13)
 
 

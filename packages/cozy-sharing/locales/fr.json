@@ -6,9 +6,7 @@
       "seen": "Partage consulté",
       "ready": "Accepté",
       "refused": "Refusé",
-      "error": "Erreur de partage",
-      "unregistered": "Erreur",
-      "mail-not-sent": "En attente",
+      "mail-not-sent": "Envoie du mail d'invitation...",
       "revoked": "Erreur"
     },
     "type": {
