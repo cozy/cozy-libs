@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.27.0...cozy-harvest-lib@2.27.1) (2020-11-24)
+
+
+### Bug Fixes
+
+* Wrap TwoFaModal in withLocales ([5b05afa](https://github.com/cozy/cozy-libs/commit/5b05afa))
+
+
+
+
+
 # [2.27.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.26.1...cozy-harvest-lib@2.27.0) (2020-11-23)
 
 
