@@ -118,6 +118,7 @@ const constraints = [
   [isPkg('cozy-client'), [depKeyIs(['peerDependencies', 'devDependencies'])]],
   [isPkg('cozy-ui'), [depKeyIs(['peerDependencies', 'devDependencies'])]],
   [isPkg('cozy-realtime'), [depKeyIs(['peerDependencies', 'devDependencies'])]],
+  [isPkg('@testing-library/react'), [uniqueVersion()]],
   [isPkg('babel-core'), [shouldNotBeUsed()]]
 ]
 
