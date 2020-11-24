@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-
+import compose from 'lodash/flowRight'
 import Modal, {
   ModalDescription,
   ModalHeader
@@ -11,6 +11,7 @@ import Field from 'cozy-ui/transpiled/react/Field'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
 import KonnectorIcon from './KonnectorIcon'
+import withLocales from './hoc/withLocales'
 
 import accounts, {
   TWOFA_PROVIDERS,
@@ -161,4 +162,8 @@ TwoFAModal.propTypes = {
   flow: PropTypes.object.isRequired
 }
 
-export default translate()(withBreakpoints()(TwoFAModal))
+export default compose(
+  withLocales,
+  translate(),
+  withBreakpoints()
+)(TwoFAModal)
