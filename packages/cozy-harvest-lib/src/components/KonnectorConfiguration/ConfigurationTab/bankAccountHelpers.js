@@ -1,4 +1,7 @@
-import { get, set, uniqBy, flatten } from 'lodash'
+import flatten from 'lodash/flatten'
+import uniqBy from 'lodash/uniqBy'
+import set from 'lodash/set'
+import get from 'lodash/get'
 
 const PARTS_TO_DELETE = [' (sans Secure Key)']
 
