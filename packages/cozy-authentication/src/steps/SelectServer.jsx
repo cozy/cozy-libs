@@ -31,6 +31,9 @@ import {
   WizardDualFieldInput
 } from 'cozy-ui/transpiled/react/Wizard'
 
+import LockIcon from 'cozy-ui/transpiled/react/Icons/Lock'
+import NextIcon from 'cozy-ui/transpiled/react/Icons/Next'
+
 require('url-polyfill')
 
 const ERR_WRONG_ADDRESS = 'mobile.onboarding.server_selection.wrong_address'
@@ -280,7 +283,7 @@ export class SelectServer extends Component {
             >
               {!isTiny && (
                 <WizardProtocol>
-                  <Icon icon="lock" />
+                  <Icon icon={LockIcon} />
                   <span>https://</span>
                 </WizardProtocol>
               )}
@@ -344,7 +347,7 @@ export class SelectServer extends Component {
               label={t('mobile.onboarding.server_selection.button')}
               size={isTiny ? 'normal' : 'large'}
             >
-              {!fetching && <Icon icon="next" color="white" />}
+              {!fetching && <Icon icon={NextIcon} color="white" />}
             </WizardNextButton>
             <ButtonLinkRegistration
               className={classNames('wizard-buttonlink')}
