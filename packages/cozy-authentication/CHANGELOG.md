@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.4.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.4.0...cozy-authentication@2.4.1) (2020-11-25)
+
+
+### Bug Fixes
+
+* Remove import to stylesheet ([39c6114](https://github.com/cozy/cozy-libs/commit/39c6114))
+
+
+
+
+
 # [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.3.3...cozy-authentication@2.4.0) (2020-11-23)
 
 
