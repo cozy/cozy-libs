@@ -9,10 +9,10 @@ import { Title, Caption } from 'cozy-ui/transpiled/react/Text'
 
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Dialog, {
-  DialogCloseButton,
   DialogActions,
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
+import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import Illustration from './Illustration'
 import DataTypes from './DataTypes'
