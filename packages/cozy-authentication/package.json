@@ -14,7 +14,7 @@
     "watch": "yarn build -w",
     "test": "yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
-    "lint": "cd ..; yarn lint packages/cozy-authentication",
+    "lint": "cd ..; yarn eslint --ext js,jsx packages/cozy-authentication",
     "example": "nf start",
     "example-server": "parcel --port 1234 $(pwd)/examples/index.html"
   },

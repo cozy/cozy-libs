@@ -16,7 +16,7 @@
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist && yarn run copy-files",
     "copy-files": "cp -rf src/locales dist/",
     "test": "jest",
-    "lint": "cd ..; yarn lint packages/cozy-procedures"
+    "lint": "cd ..; yarn eslint --ext js,jsx packages/cozy-procedures"
   },
   "dependencies": {
     "date-fns": "^1.30.1",
