@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.45.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.44.0...cozy-procedures@0.45.0) (2020-11-25)
+
+
+### Features
+
+* Use new qualifications ([e4f650e](https://github.com/cozy/cozy-libs/commit/e4f650e))
+
+
+
+
+
 # [0.44.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.43.4...cozy-procedures@0.44.0) (2020-11-23)
 
 
