@@ -9,6 +9,7 @@ import Modal, {
   ModalContent,
   ModalHeader
 } from 'cozy-ui/transpiled/react/Modal'
+import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -237,7 +238,7 @@ export class KonnectorModal extends PureComponent {
               )}
             </div>
             <Button
-              icon={<Icon icon={'cross'} size={'24'} />}
+              icon={<Icon icon={CrossIcon} size={'24'} />}
               onClick={dismissAction}
               iconOnly
               label={t('close')}
