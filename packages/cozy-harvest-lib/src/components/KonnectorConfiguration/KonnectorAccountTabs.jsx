@@ -1,14 +1,9 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
-import {
-  Tab,
-  Tabs,
-  TabList,
-  TabPanels,
-  TabPanel
-} from 'cozy-ui/transpiled/react/Tabs'
+import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
@@ -23,69 +18,82 @@ const WarningError = () => (
   <Icon icon={WarningIcon} size={13} className="u-ml-half" />
 )
 
-export const KonnectorAccountTabs = ({
-  konnector,
-  trigger: initialTrigger,
-  account,
-  onAccountDeleted,
-  initialActiveTab,
+const tabIndexes = {
+  data: 0,
+  configuration: 1
+}
 
-  // TODO rename to onAddAccount
-  addAccount,
-  showNewAccountButton
-}) => {
+const DumbKonnectorAccountTabs = props => {
+  const {
+    konnector,
+    trigger: initialTrigger,
+    account,
+    onAccountDeleted,
+    initialActiveTab,
+
+    // TODO rename to onAddAccount
+    addAccount,
+    showNewAccountButton,
+    flow
+  } = props
   const { t } = useI18n()
-  return (
-    <FlowProvider initialTrigger={initialTrigger} konnector={konnector}>
-      {({ flow }) => {
-        const flowState = flow.getState()
-        const { error } = flowState
-        const hasError = !!error
-        const hasLoginError = hasError && error.isLoginError()
+  const [tab, setTab] = useState(
+    initialActiveTab
+      ? tabIndexes[initialActiveTab]
+      : hasLoginError
+      ? tabIndexes.configuration
+      : tabIndexes.data
+  )
+  const handleTabChange = (ev, newTab) => setTab(newTab)
 
-        return (
-          <Tabs
-            initialActiveTab={
-              initialActiveTab || (hasLoginError ? 'configuration' : 'data')
-            }
-          >
-            <TabList>
-              <Tab name="data">
-                {t('modal.tabs.data')}
-                {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
-                  <WarningError />
-                )}
-              </Tab>
-              <Tab name="configuration">
-                {t('modal.tabs.configuration')}
-                {tabSpecs.configuration.errorShouldBeDisplayed(
-                  error,
-                  flowState
-                ) && <WarningError />}
-              </Tab>
-            </TabList>
-            <TabPanels>
-              <TabPanel name="data" className="u-pt-1-half u-pb-0">
-                <DataTab
-                  konnector={konnector}
-                  trigger={initialTrigger}
-                  flow={flow}
-                />
-              </TabPanel>
-              <TabPanel name="configuration" className="u-pt-0 u-pb-0">
-                <ConfigurationTab
-                  konnector={konnector}
-                  account={account}
-                  flow={flow}
-                  addAccount={addAccount}
-                  onAccountDeleted={onAccountDeleted}
-                  showNewAccountButton={showNewAccountButton}
-                />
-              </TabPanel>
-            </TabPanels>
-          </Tabs>
-        )
-      }}
+  const flowState = flow.getState()
+  const { error } = flowState
+  const hasError = !!error
+  const hasLoginError = hasError && error.isLoginError()
+
+  return (
+    <>
+      <Tabs onChange={handleTabChange} value={tab}>
+        <Tab label="data">
+          {t('modal.tabs.data')}
+          {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
+            <WarningError />
+          )}
+        </Tab>
+        <Tab label="configuration">
+          {t('modal.tabs.configuration')}
+          {tabSpecs.configuration.errorShouldBeDisplayed(error, flowState) && (
+            <WarningError />
+          )}
+        </Tab>
+      </Tabs>
+      <Divider />
+      <div className="u-pt-1-half u-pb-0">
+        {tab === 0 && (
+          <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
+        )}
+        {tab === 1 && (
+          <ConfigurationTab
+            konnector={konnector}
+            account={account}
+            flow={flow}
+            addAccount={addAccount}
+            onAccountDeleted={onAccountDeleted}
+            showNewAccountButton={showNewAccountButton}
+          />
+        )}
+      </div>
+    </>
+  )
+}
+
+export const KonnectorAccountTabs = props => {
+  return (
+    <FlowProvider
+      initialTrigger={props.initialTrigger}
+      konnector={props.konnector}
+    >
+      {({ flow }) => <DumbKonnectorAccountTabs {...props} flow={flow} />}
     </FlowProvider>
   )
 }
