@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
-import { Spinner } from 'cozy-ui/transpiled/react'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
@@ -12,6 +12,11 @@ import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import { Text, Caption } from 'cozy-ui/transpiled/react/Text'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import RenameIcon from 'cozy-ui/transpiled/react/Icons/Rename'
+import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
+import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
+import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
 
 import AvatarPlusX from './AvatarPlusX'
 import styles from './recipient.styl'
@@ -190,7 +195,7 @@ export const Permissions = ({
   }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, index])
 
   const buttonRef = React.createRef()
-  const permissionIconName = type === 'two-way' ? 'rename' : 'eye'
+  const PermissionIcon = type === 'two-way' ? RenameIcon : EyeIcon
 
   return (
     <div className={className}>
@@ -223,7 +228,7 @@ export const Permissions = ({
               <ActionMenuItem
                 left={
                   <Icon
-                    icon={permissionIconName}
+                    icon={PermissionIcon}
                     color="var(--primaryTextColor)"
                   />
                 }
@@ -234,7 +239,7 @@ export const Permissions = ({
               <hr />
               <ActionMenuItem
                 onClick={onRevokeClick}
-                left={<Icon icon="trash" color="var(--pomegranate)" />}
+                left={<Icon icon={TrashIcon} color="var(--pomegranate)" />}
               >
                 <Text className="u-pomegranate">
                   {isOwner
@@ -263,17 +268,17 @@ const Status = ({ status, isMe, instance }) => {
   let text, icon
   if (isReady) {
     text = instance
-    icon = 'to-the-cloud'
+    icon = ToTheCloudIcon
   } else if (isSendingEmail) {
     text = t('Share.status.mail-not-sent')
-    icon = 'paperplane'
+    icon = PaperplaneIcon
   } else {
     const supportedStatus = ['pending', 'seen']
     text = supportedStatus.includes(status)
       ? t(`Share.status.${status}`)
       : t('Share.status.pending')
 
-    icon = status === 'seen' ? 'eye' : 'paperplane'
+    icon = status === 'seen' ? EyeIcon : PaperplaneIcon
   }
 
   return (
