@@ -58,6 +58,11 @@ const konnector = {
     bankId: TEST_BANK_COZY_ID
   }
 }
+
+const konnectorWithoutParam = {
+  slug: 'lcl-linxo'
+}
+
 const account = {
   _id: '1337',
   auth: {
@@ -118,6 +123,34 @@ describe('createOrUpdateBIConnection', () => {
       .mockResolvedValue({ id: 'updated-bi-connection-id-789' })
     return { client, flow }
   }
+
+  it('should accept a connector without parameter and find bank id in the account', async () => {
+    const { client, flow } = setup()
+    const connection = await createOrUpdateBIConnection({
+      client,
+      account,
+      konnector: konnectorWithoutParam,
+      flow
+    })
+    expect(waitForRealtimeEvent).toHaveBeenCalledWith(
+      client,
+      {
+        _id: 'job-id-1337'
+      },
+      'result'
+    )
+    expect(createBIConnection).toHaveBeenCalledWith(
+      expect.any(Object),
+      {
+        id_bank: TEST_BANK_BI_ID,
+        login: expect.toBeJWEValue(),
+        password: expect.toBeJWEValue()
+      },
+      'bi-temporary-access-token-145613'
+    )
+    expect(updateBIConnection).not.toHaveBeenCalled()
+    expect(connection).toEqual({ id: 'created-bi-connection-id-789' })
+  })
 
   it('should create a BI connection if no connection id in account', async () => {
     const { client, flow } = setup()
