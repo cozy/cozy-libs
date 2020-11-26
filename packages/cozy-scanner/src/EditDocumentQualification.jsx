@@ -6,7 +6,7 @@ import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Button from 'cozy-ui/transpiled/react/Button'
 
 import DocumentQualification from './DocumentQualification'
@@ -38,10 +38,10 @@ class EditDocumentQualification extends Component {
     const theme = item ? getThemeByItem(item) : null
     const categoryLabel = item ? theme.label : null
     return (
-      <Dialog
+      <FixedDialog
         onClose={onClose}
         title={document.name}
-        opened={true}
+        open={true}
         content={
           <DocumentQualification
             onDescribed={qualification => {

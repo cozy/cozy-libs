@@ -5,7 +5,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import DocumentQualification from './DocumentQualification'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 
@@ -46,7 +46,8 @@ class ModalScannerQualification extends Component {
     const { onSave, t, dismissAction } = this.props
     const { qualification, filename } = this.state
     return (
-      <Dialog
+      <FixedDialog
+        open={true}
         onClose={dismissAction}
         title={t('Scan.save_doc')}
         content={
@@ -83,7 +84,6 @@ class ModalScannerQualification extends Component {
           </>
         }
         actionsLayout="row"
-        opened={true}
       />
     )
   }
