@@ -16,6 +16,9 @@ import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import { isAndroidApp } from 'cozy-device-helper'
 import UploadInputLabel from '../UploadInputLabel'
 
+import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
+import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+
 class MenuUploadMobile extends Component {
   state = {
     menuDisplayed: false
@@ -40,7 +43,7 @@ class MenuUploadMobile extends Component {
           label={t('documents.import')}
           iconOnly
         >
-          <Icon icon="plus" size={16} className="u-mr-1 u-pa-half" />
+          <Icon icon={PlusIcon} size={16} className="u-mr-1 u-pa-half" />
           <span>{t('documents.import')}</span>
         </Button>
         {this.state.menuDisplayed && (
@@ -50,7 +53,7 @@ class MenuUploadMobile extends Component {
             </ActionMenuHeader>
 
             <MenuItem
-              icon={<Icon icon="file" />}
+              icon={<Icon icon={FileIcon} />}
               onClick={e => e.stopPropagation()}
               disabled
             >
@@ -58,7 +61,7 @@ class MenuUploadMobile extends Component {
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
             <MenuItem
-              icon={<Icon icon="file" />}
+              icon={<Icon icon={FileIcon} />}
               disabled
               onClick={e => e.stopPropagation()}
             >
@@ -66,7 +69,7 @@ class MenuUploadMobile extends Component {
               <Caption>{t('documents.upload.soon_available')}</Caption>
             </MenuItem>
             <MenuItem
-              icon={<Icon icon="file" />}
+              icon={<Icon icon={FileIcon} />}
               /**
                * We need to stop the propagation since when we click on an Item, MenuItem closes the Menu
                *
@@ -83,7 +86,7 @@ class MenuUploadMobile extends Component {
 
             {isAndroidApp() && (
               <MenuItem
-                icon={<Icon icon="file" />}
+                icon={<Icon icon={FileIcon} />}
                 onClick={e => e.stopPropagation()}
                 disabled
               >

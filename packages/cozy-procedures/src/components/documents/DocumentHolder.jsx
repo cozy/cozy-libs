@@ -13,6 +13,8 @@ import { CozyFile } from 'cozy-doctypes'
 import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 import flow from 'lodash/flow'
 
+import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
+
 class DocumentHolder extends Component {
   state = {
     isUnlinkConfirmationModalOpened: false,
@@ -75,7 +77,7 @@ class DocumentHolder extends Component {
             <span className="u-coolGrey">{splittedName.extension}</span>
           </span>
           <Icon
-            icon="cross"
+            icon={CrossIcon}
             size={16}
             className="u-pr-1 u-c-pointer u-flex-shrink-0"
             onClick={e => {
