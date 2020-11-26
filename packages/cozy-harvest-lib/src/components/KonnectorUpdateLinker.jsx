@@ -7,12 +7,14 @@ import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 
 import { Application } from 'cozy-doctypes'
 
+import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
+
 const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
   <ButtonLink
     disabled={disabled}
     className="u-m-0"
     href={href}
-    icon="eye"
+    icon={EyeIcon}
     label={label}
     theme={isBlocking ? 'danger' : 'secondary'}
   />
