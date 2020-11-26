@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.27.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.27.4...cozy-harvest-lib@2.27.5) (2020-11-26)
+
+
+### Bug Fixes
+
+* **Harvest:** Regression on handling banking connectors where bankId is ([d42436c](https://github.com/cozy/cozy-libs/commit/d42436c))
+
+
+
+
+
 ## [2.27.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.27.3...cozy-harvest-lib@2.27.4) (2020-11-25)
 
 
