@@ -227,10 +227,7 @@ export const Permissions = ({
             >
               <ActionMenuItem
                 left={
-                  <Icon
-                    icon={PermissionIcon}
-                    color="var(--primaryTextColor)"
-                  />
+                  <Icon icon={PermissionIcon} color="var(--primaryTextColor)" />
                 }
               >
                 {t(`Share.type.${type}`)}
