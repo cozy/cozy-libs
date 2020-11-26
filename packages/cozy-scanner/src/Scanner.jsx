@@ -2,11 +2,12 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import PropTypes from 'prop-types'
 import { CozyFile } from 'cozy-doctypes'
-import Overlay from 'cozy-ui/transpiled/react/Overlay'
+import { isAndroidApp } from 'cozy-device-helper'
 
-import { ModalScannerQualification } from './'
+import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
+import { ModalScannerQualification } from './'
 import { doUpload } from './ScannerUpload'
 
 export const SCANNER_IDLE = 'idle'
@@ -88,13 +89,16 @@ class Scanner extends React.Component {
   startScanner = () => {
     try {
       this.setState({ loadingScreen: true })
+      // We have a bug in Android since we target API 29+
+      // Same as reported in https://github.com/apache/cordova-plugin-camera/issues/587
+      // So we use a different config as a workaround
       this.defaultPluginConfig = {
-        quality: 80,
+        quality: isAndroidApp() ? 100 : 80,
         destinationType: window.navigator.camera.DestinationType.FILE_URI,
         sourceTypes: window.navigator.camera.PictureSourceType.CAMERA,
-        correctOrientation: true
+        correctOrientation: isAndroidApp() ? false : true,
+        saveToPhotoAlbum: false
       }
-
       window.navigator.camera.getPicture(this.onSuccess, this.onFail, {
         ...this.defaultPluginConfig,
         ...this.props.pluginConfig

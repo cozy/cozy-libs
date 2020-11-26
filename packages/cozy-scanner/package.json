@@ -57,5 +57,8 @@
     ],
     "testEnvironment": "jest-environment-jsdom-sixteen"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "cozy-device-helper": "^1.11.0"
+  }
 }
