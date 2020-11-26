@@ -2,7 +2,7 @@ import React from 'react'
 import { withClient } from 'cozy-client'
 import PropTypes from 'prop-types'
 import { CozyFile } from 'cozy-doctypes'
-import Modal from 'cozy-ui/transpiled/react/Modal'
+import Overlay from 'cozy-ui/transpiled/react/Overlay'
 
 import { ModalScannerQualification } from './'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
@@ -121,13 +121,7 @@ class Scanner extends React.Component {
       loadingScreen
     } = this.state
     if (loadingScreen) {
-      return (
-        <Modal
-          mobileFullscreen
-          closable={false}
-          className="u-bg-black u-mih-100"
-        />
-      )
+      return <Overlay className="u-bg-black u-mih-100" />
     }
     if (shouldShowScannerQualification)
       return (
