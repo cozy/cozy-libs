@@ -24,6 +24,8 @@ import modalStyles from '../share.styl'
 import { getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
+import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
+
 export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
@@ -88,7 +90,7 @@ export const RecipientsAvatars = ({
         <span data-testid="recipientsAvatars-link">
           <Avatar
             className={styles['recipients-avatars--link']}
-            icon="link"
+            icon={LinkIcon}
             size={size}
           />
         </span>
