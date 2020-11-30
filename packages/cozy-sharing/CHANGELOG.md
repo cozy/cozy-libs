@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.9.0...cozy-sharing@2.10.0) (2020-11-30)
+
+
+### Features
+
+* Use svgr icon for cozy-sharings ([6bcc95a](https://github.com/cozy/cozy-libs/commit/6bcc95a))
+
+
+
+
+
 # [2.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.8.2...cozy-sharing@2.9.0) (2020-11-23)
 
 

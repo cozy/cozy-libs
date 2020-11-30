@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.46.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.45.0...cozy-procedures@0.46.0) (2020-11-30)
+
+
+### Features
+
+* Update cozy-ui minimal versions ([7e7755f](https://github.com/cozy/cozy-libs/commit/7e7755f))
+
+
+
+
+
 # [0.45.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.44.0...cozy-procedures@0.45.0) (2020-11-25)
 
 

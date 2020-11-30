@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.7.0...@cozy/codemods@1.8.0) (2020-11-30)
+
+
+### Features
+
+* Use svgr icons supports ButtonLink and Avatar ([ba7b783](https://github.com/cozy/cozy-libs/commit/ba7b783))
+
+
+
+
+
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.6.0...@cozy/codemods@1.7.0) (2020-11-23)
 
 

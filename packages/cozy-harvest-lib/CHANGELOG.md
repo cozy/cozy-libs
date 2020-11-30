@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.29.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.28.0...cozy-harvest-lib@2.29.0) (2020-11-30)
+
+
+### Features
+
+* Use svgr icon for harvest ([8b838cd](https://github.com/cozy/cozy-libs/commit/8b838cd))
+
+
+
+
+
 # [2.28.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.27.5...cozy-harvest-lib@2.28.0) (2020-11-30)
 
 

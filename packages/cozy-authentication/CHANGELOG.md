@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.4.1...cozy-authentication@2.5.0) (2020-11-30)
+
+
+### Features
+
+* Update cozy-ui minimal versions ([7e7755f](https://github.com/cozy/cozy-libs/commit/7e7755f))
+* Use svgr icons in cozy-authentication ([13ca3ec](https://github.com/cozy/cozy-libs/commit/13ca3ec))
+
+
+
+
+
 ## [2.4.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.4.0...cozy-authentication@2.4.1) (2020-11-25)
 
 

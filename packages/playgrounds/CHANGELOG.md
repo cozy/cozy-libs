@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.18.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.17.1...cozy-playgrounds@1.18.0) (2020-11-30)
+
+
+### Features
+
+* Update cozy-ui minimal versions ([7e7755f](https://github.com/cozy/cozy-libs/commit/7e7755f))
+
+
+
+
+
 ## [1.17.1](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.17.0...cozy-playgrounds@1.17.1) (2020-11-25)
 
 **Note:** Version bump only for package cozy-playgrounds
