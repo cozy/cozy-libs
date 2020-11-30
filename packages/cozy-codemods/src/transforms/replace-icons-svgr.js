@@ -32,37 +32,15 @@ export default function replaceSvgrIcons(file, api) {
     }
   }
 
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'Avatar'
-      }
-    })
-    .forEach(transform)
-
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'Icon'
-      }
-    })
-    .forEach(transform)
-
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'Button'
-      }
-    })
-    .forEach(transform)
-
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'ButtonLink'
-      }
-    })
-    .forEach(transform)
+  for (let componentName of ['Avatar', 'Icon', 'Button', 'ButtonLink']) {
+    root
+      .find(j.JSXOpeningElement, {
+        name: {
+          name: componentName
+        }
+      })
+      .forEach(transform)
+  }
 
   return root.toSource()
 }
