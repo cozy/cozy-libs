@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { Button, Chip, translate } from 'cozy-ui/transpiled/react'
+import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
 const PersonalDataNotFullyCompleted = ({
   navigateTo,
   personalDataFieldsCompleted,
@@ -21,7 +22,7 @@ const PersonalDataNotFullyCompleted = ({
       theme="ghost"
       extension="full"
       size="large"
-      icon="pen"
+      icon={PenIcon}
     />
   )
 }

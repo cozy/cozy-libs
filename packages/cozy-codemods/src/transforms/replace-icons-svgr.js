@@ -11,64 +11,36 @@ export default function replaceSvgrIcons(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'Icon'
-      }
-    })
-    .forEach(path => {
-      const iconAttr = path.node.attributes.find(
-        attr => attr.name.name === 'icon'
+  const transform = path => {
+    const iconAttr = path.node.attributes.find(
+      attr => attr.name && attr.name.name === 'icon'
+    )
+
+    if (iconAttr && iconAttr.value.type === 'Literal') {
+      const componentName = iconNameToComponentName(iconAttr.value.value)
+
+      imports.ensure(
+        root,
+        {
+          default: `${componentName}Icon`
+        },
+        `cozy-ui/transpiled/react/Icons/${componentName}`
       )
-
-      if (iconAttr.value.type === 'Literal') {
-        const componentName = iconNameToComponentName(iconAttr.value.value)
-
-        imports.ensure(
-          root,
-          {
-            default: `${componentName}Icon`
-          },
-          `cozy-ui/transpiled/react/Icons/${componentName}`
-        )
-        iconAttr.value = j.jsxExpressionContainer(
-          j.jsxIdentifier(`${componentName}Icon`)
-        )
-      }
-    })
-
-  root
-    .find(j.JSXOpeningElement, {
-      name: {
-        name: 'Button'
-      }
-    })
-    .forEach(path => {
-      const iconAttr = path.node.attributes.find(
-        attr => attr.name && attr.name.name === 'icon'
+      iconAttr.value = j.jsxExpressionContainer(
+        j.jsxIdentifier(`${componentName}Icon`)
       )
+    }
+  }
 
-      if (iconAttr && iconAttr.value.type === 'Literal') {
-        const componentName = iconNameToComponentName(iconAttr.value.value)
-
-        imports.ensure(
-          root,
-          {
-            default: `${componentName}Icon`
-          },
-          `cozy-ui/transpiled/react/Icons/${componentName}`
-        )
-        imports.ensure(
-          root,
-          {
-            default: `Icon`
-          },
-          `cozy-ui/transpiled/react/Icon`
-        )
-        iconAttr.value = `{<Icon icon={${componentName}Icon} />}`
-      }
-    })
+  for (let componentName of ['Avatar', 'Icon', 'Button', 'ButtonLink']) {
+    root
+      .find(j.JSXOpeningElement, {
+        name: {
+          name: componentName
+        }
+      })
+      .forEach(transform)
+  }
 
   return root.toSource()
 }

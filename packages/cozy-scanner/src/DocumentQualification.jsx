@@ -18,6 +18,8 @@ import { themes } from './DocumentTypeData'
 import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './stylesheet.css'
 
+import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
+
 const fileExtension = '.jpg'
 const idFileInput = 'filename_input'
 
@@ -141,7 +143,7 @@ export class DocumentQualification extends Component {
 
         {title && (
           <div className="u-flex u-flex-items-center u-mt-1-half">
-            <Icon icon="qualify" />
+            <Icon icon={QualifyIcon} />
             <Title
               className={classNames(
                 styles['grid-item-title'],

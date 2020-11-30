@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Button, Chip, translate } from 'cozy-ui/transpiled/react'
 
+import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
+
 const DocumentsNotFullyCompleted = ({
   documentsCompleted,
   documentsTotal,
@@ -22,7 +24,7 @@ const DocumentsNotFullyCompleted = ({
       theme="ghost"
       extension="full"
       size="large"
-      icon="pen"
+      icon={PenIcon}
     />
   )
 }

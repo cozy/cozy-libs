@@ -4,6 +4,8 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import styles from './badge.styl'
 import palette from 'cozy-ui/transpiled/react/palette'
 
+import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
+
 const SharedBadge = ({ byMe, className, small, xsmall }) => (
   <div
     className={classNames(
@@ -15,7 +17,7 @@ const SharedBadge = ({ byMe, className, small, xsmall }) => (
     )}
   >
     <Icon
-      icon="share"
+      icon={ShareIcon}
       color={palette.white}
       className={styles['shared-badge-icon']}
     />

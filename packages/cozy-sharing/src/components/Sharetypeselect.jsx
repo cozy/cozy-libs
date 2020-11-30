@@ -10,15 +10,18 @@ import styles from '../share.styl'
 
 import logger from '../logger'
 
+import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
+import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
+
 const DropdownIndicator = props => (
   <components.DropdownIndicator {...props}>
-    <Icon icon="bottom" color={palette.coolGrey} />
+    <Icon icon={BottomIcon} color={palette.coolGrey} />
   </components.DropdownIndicator>
 )
 const Option = props => (
   <components.Option {...props}>
     <div className={cx(styles['select-option'])}>
-      {props.isSelected && <Icon icon="check" color={palette.dodgerBlue} />}
+      {props.isSelected && <Icon icon={CheckIcon} color={palette.dodgerBlue} />}
       <div>
         <div className={styles['select-option-label']}>{props.label}</div>
         <div className={styles['select-option-desc']}>{props.data.desc}</div>

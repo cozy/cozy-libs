@@ -6,6 +6,8 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
 import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 
+import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
+
 const DriveLink = memo(({ folderId, client, t }) => {
   const slug = 'drive'
   const path = `#/files/${folderId}`
@@ -16,7 +18,7 @@ const DriveLink = memo(({ folderId, client, t }) => {
       <AppLinker slug={slug} href={url} nativePath={path}>
         {({ href, name }) => (
           <ButtonLink
-            icon="openwith"
+            icon={OpenwithIcon}
             href={href}
             label={t('account.success.driveLinkText', {
               appName: name
@@ -29,7 +31,7 @@ const DriveLink = memo(({ folderId, client, t }) => {
   } else {
     return (
       <ButtonLink
-        icon="openwith"
+        icon={OpenwithIcon}
         label={t('account.success.banksLinkText', {
           appName: name
         })}

@@ -33,7 +33,7 @@
     "cozy-stack-client": ">=13.15.1"
   },
   "scripts": {
-    "lint": "cd ../../; yarn lint packages/cozy-doctypes",
+    "lint": "cd ../../; yarn eslint --ext js,jsx packages/cozy-doctypes",
     "build": "babel src -d dist",
     "test": "jest src/",
     "encrypt-banking-tests": "cd src/banking/; make encrypted.tar.gz.gpg",

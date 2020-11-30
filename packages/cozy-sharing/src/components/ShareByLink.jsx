@@ -18,6 +18,9 @@ import styles from '../share.styl'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 
+import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
+import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+
 const permissionModel = models.permission
 
 const checkIsReadOnlyPermissions = permissions => {
@@ -148,7 +151,7 @@ class ShareByLink extends React.Component {
             }
             image={
               <Circle backgroundColor="var(--silver)">
-                <Icon icon="link" color="var(--charcoalGrey)" />
+                <Icon icon={LinkIcon} color="var(--charcoalGrey)" />
               </Circle>
             }
             right={
@@ -218,7 +221,9 @@ class ShareByLink extends React.Component {
                     </ActionMenuItem>
                     <hr />
                     <ActionMenuItem
-                      left={<Icon icon="trash" color={palette.pomegranate} />}
+                      left={
+                        <Icon icon={TrashIcon} color={palette.pomegranate} />
+                      }
                       onClick={() => {
                         this.toggleMenu()
                         this.deleteShareLink()

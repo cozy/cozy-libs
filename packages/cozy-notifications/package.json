@@ -28,7 +28,7 @@
     "word-wrap": "^1.2.3"
   },
   "peerDependencies": {
-    "cozy-ui": ">=35.39.0"
+    "cozy-ui": ">=40.9.1"
   },
   "devDependencies": {
     "@babel/cli": "7.12.1",

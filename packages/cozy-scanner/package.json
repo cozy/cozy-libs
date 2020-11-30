@@ -17,7 +17,7 @@
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --copy-files --verbose",
     "copy-files": "cp -rf src/locales dist/",
     "test": "jest src/",
-    "lint": "cd .. && yarn lint packages/cozy-scanner",
+    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-scanner",
     "watch": "yarn build --watch"
   },
   "devDependencies": {
@@ -41,7 +41,7 @@
     "@babel/runtime": ">=7.12.5",
     "cozy-client": ">=13.15.1",
     "cozy-doctypes": ">=1.67.0",
-    "cozy-ui": ">=40"
+    "cozy-ui": ">=40.9.1"
   },
   "jest": {
     "transformIgnorePatterns": [

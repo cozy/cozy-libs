@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { InlineCard, Icon } from 'cozy-ui/transpiled/react'
+import FileTypeFilesIcon from 'cozy-ui/transpiled/react/Icons/FileTypeFiles'
 const DocumentsFullyCompleted = ({ documents, navigateTo }) => {
   const flatennedFiles = []
   Object.values(documents).map(document => {
@@ -17,7 +18,7 @@ const DocumentsFullyCompleted = ({ documents, navigateTo }) => {
       {flatennedFiles.map((file, index) => {
         return (
           <div className={'u-flex u-pv-half'} key={index}>
-            <Icon icon="file-type-files" className={'u-flex-shrink-0'} />
+            <Icon icon={FileTypeFilesIcon} className={'u-flex-shrink-0'} />
             <span className="u-ml-half u-ellipsis ">{file.name}</span>
           </div>
         )

@@ -7,6 +7,8 @@ import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback
 
 import withLocales from '../../hoc/withLocales'
 
+import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
+
 const BanksLinkRedirectStore = ({ client, t }) => {
   const slug = 'banks'
   const { fetchStatus, url } = useAppLinkWithStoreFallback(slug, client)
@@ -16,7 +18,7 @@ const BanksLinkRedirectStore = ({ client, t }) => {
       <AppLinker slug={slug} href={url}>
         {({ href, name }) => (
           <ButtonLink
-            icon="openwith"
+            icon={OpenwithIcon}
             href={href}
             label={t('account.success.banksLinkText', {
               appName: name
@@ -29,7 +31,7 @@ const BanksLinkRedirectStore = ({ client, t }) => {
   } else {
     return (
       <ButtonLink
-        icon="openwith"
+        icon={OpenwithIcon}
         label={t('account.success.banksLinkText', {
           appName: name
         })}

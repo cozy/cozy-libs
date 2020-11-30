@@ -12,6 +12,8 @@ import {
   Button
 } from 'cozy-ui/transpiled/react'
 
+import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
+
 const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {
   const hasCozyBar = !!cozy.bar
 
@@ -35,7 +37,7 @@ const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {
           className="u-mr-1"
           theme="secondary"
           subtle
-          icon="previous"
+          icon={PreviousIcon}
           iconOnly
           label={t('back')}
           extension="narrow"
