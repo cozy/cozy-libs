@@ -50,12 +50,7 @@ const removeHOC = (arrowFunctionBodyPath, hocName, noOptionsHOC) => {
   }
 }
 
-export const removeDefaultExportHOC = (
-  root,
-  ComponentName,
-  hocName,
-  noOptionsHOC
-) => {
+const removeDefaultExportHOC = (root, ComponentName, hocName, noOptionsHOC) => {
   const defaultExports = root.find(j.ExportDefaultDeclaration)
   if (!defaultExports.length) {
     return

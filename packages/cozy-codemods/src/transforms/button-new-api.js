@@ -67,3 +67,5 @@ module.exports = function(file, api) {
   // print
   return root.toSource()
 }
+
+module.exports.description = 'Use the new Button API'

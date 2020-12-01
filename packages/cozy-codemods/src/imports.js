@@ -20,7 +20,7 @@ const mergeSpecifiersToImport = (importDeclaration, specifiers) => {
   }
 }
 
-export const ensure = (root, specifierObj, sourceOrFilter, maybeSource) => {
+const ensure = (root, specifierObj, sourceOrFilter, maybeSource) => {
   if (!specifierObj) {
     // eslint-disable-next-line no-console
     console.warn(`Example usage of imports.add:
@@ -65,7 +65,7 @@ imports.add(root, {
   }
 }
 
-export const removeUnused = root => {
+const removeUnused = root => {
   const removeIfUnused = (importSpecifier, importDeclaration) => {
     if (!importSpecifier.value.local) {
       return
@@ -236,7 +236,7 @@ const mergeImports = root => {
  * import Dialog, { DialogFile, DialogContent } from "cozy-ui/transpiled/react/Dialog";
  * ```
  */
-export const simplify = (root, options) => {
+const simplify = (root, options) => {
   const imports = options.imports
   const identifiers = Object.keys(imports)
   root.find(j.ImportDeclaration).forEach(path => {
@@ -268,4 +268,10 @@ export const simplify = (root, options) => {
     }
   })
   mergeImports(root)
+}
+
+module.exports = {
+  simplify,
+  ensure,
+  removeUnused
 }
