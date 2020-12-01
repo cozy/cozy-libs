@@ -1,11 +1,11 @@
-import { simplifyConditions, replaceBooleanVars, jsx, imports } from '..'
+const { simplifyConditions, replaceBooleanVars, jsx, imports } = require('..')
 
 const flagCallFinder = name => ({
   callee: { name: 'flag' },
   arguments: [{ value: name }]
 })
 
-export default function applyFlag(file, api, options) {
+module.exports = function applyFlag(file, api, options) {
   const j = api.jscodeshift
   const root = j(file.source)
 
@@ -30,3 +30,5 @@ export default function applyFlag(file, api, options) {
 
   return root.toSource()
 }
+
+module.exports.description = 'Sets a flag to true in the code'

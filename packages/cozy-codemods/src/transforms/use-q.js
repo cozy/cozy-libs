@@ -1,6 +1,6 @@
-import importUtils from '../imports'
+const importUtils = require('../imports')
 
-export default function transformer(file, api) {
+module.exports = function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 

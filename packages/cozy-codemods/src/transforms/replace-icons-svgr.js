@@ -7,7 +7,7 @@ const iconNameToComponentName = iconName => {
   )
 }
 
-export default function replaceSvgrIcons(file, api) {
+module.exports = function replaceSvgrIcons(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 
@@ -44,3 +44,6 @@ export default function replaceSvgrIcons(file, api) {
 
   return root.toSource()
 }
+
+module.exports.description =
+  'Replaces Icon that come from a sprite with an SVGr version'

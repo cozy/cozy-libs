@@ -1,4 +1,4 @@
-import { hocToHookReplacer } from '../hoc'
+const { hocToHookReplacer } = require('../hoc')
 
 const isBreakpointProp = prop => {
   return prop.key && prop.key.name === 'breakpoints'
@@ -17,7 +17,7 @@ const findBreakpointsProp = objPattern => {
     : []
 }
 
-export default function transformer(file, api) {
+module.exports = function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 

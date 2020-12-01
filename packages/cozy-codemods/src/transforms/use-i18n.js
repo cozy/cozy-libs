@@ -1,4 +1,4 @@
-import { hocToHookReplacer } from '../hoc'
+const { hocToHookReplacer } = require('../hoc')
 
 const isI18nProp = prop => {
   return prop.key && (prop.key.name === 't' || prop.key.name === 'f')
@@ -16,7 +16,7 @@ const findI18nProps = objPattern => {
     : []
 }
 
-export default function transformer(file, api) {
+module.exports = function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 

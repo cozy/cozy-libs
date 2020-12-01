@@ -1,6 +1,6 @@
-import { removeBooleanVars, simplifyConditions, imports } from '..'
+const { removeBooleanVars, simplifyConditions, imports } = require('..')
 
-export default function(file, api) {
+module.exports = function(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 
@@ -10,3 +10,5 @@ export default function(file, api) {
 
   return root.toSource()
 }
+
+module.exports.description = 'Simplify boolean vars'
