@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.9.0...cozy-scanner@0.9.1) (2020-12-01)
+
+
+### Bug Fixes
+
+* The image was not saved since we got an error from the native side ([b42b41f](https://github.com/cozy/cozy-libs/commit/b42b41f))
+* Use FixedDialog ([d462437](https://github.com/cozy/cozy-libs/commit/d462437))
+
+
+
+
+
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.8.1...cozy-scanner@0.9.0) (2020-11-30)
 
 
