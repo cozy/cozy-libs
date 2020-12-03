@@ -1,6 +1,6 @@
 {
   "name": "cozy-harvest-lib",
-  "version": "2.29.0",
+  "version": "2.29.1",
   "description": "Provides logic, modules and components for Cozy's harvest applications.",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -46,7 +46,7 @@
     "@babel/cli": "7.12.1",
     "@babel/core": "7.12.3",
     "@babel/register": "^7.8.3",
-    "@cozy/cli-tree": "^0.2.1",
+    "@cozy/cli-tree": "^0.2.2",
     "@testing-library/jest-dom": "^4.1.2",
     "@testing-library/react": "10.4.9",
     "babel-jest": "26.6.3",

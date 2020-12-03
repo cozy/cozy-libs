@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.8.0...@cozy/codemods@1.9.0) (2020-12-03)
+
+
+### Features
+
+* Add cli to easily use cozy-codemods ([9131875](https://github.com/cozy/cozy-libs/commit/9131875))
+
+
+
+
+
 # [1.8.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.7.0...@cozy/codemods@1.8.0) (2020-11-30)
 
 
