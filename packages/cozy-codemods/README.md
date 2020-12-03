@@ -16,10 +16,22 @@ See [here][jscodeshift-docs] for more information on codeshifts.
 [jscodeshift]: https://github.com/facebook/jscodeshift
 [jscodeshift-docs]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation
 
+### Installation
+
+You can install @cozy/codemods globally so that you do not have to pollute your package.json
+and yarn.lock in every project where you use it.
+
+```
+yarn global add @cozy/codemods
+```
+
 ### General usage
 
 ```
-$ jscodeshift -t node_modules/cozy-codeshifts/dist/<TRANSFORM> --parser babel --js,jsx -- src
+$ cozy-codemods --help
+$ cozy-codemods list # List available transforms
+$ cozy-codemods showExample apply-flag # Show an example of what a transform does
+$ cozy-codemods run apply-flag -- --flag=my-flag # Run a transform, pass jscodeshift args after --
 ```
 
 ### Available transforms

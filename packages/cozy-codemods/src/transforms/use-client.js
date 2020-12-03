@@ -1,4 +1,4 @@
-import { hocToHookReplacer } from '../hoc'
+const { hocToHookReplacer } = require('../hoc')
 
 const isClientProp = prop => {
   return prop.key && prop.key.name === 'client'
@@ -16,7 +16,7 @@ const findClientProps = objPattern => {
     : []
 }
 
-export default function transformer(file, api) {
+module.exports = function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 

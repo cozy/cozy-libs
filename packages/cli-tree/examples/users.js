@@ -37,7 +37,7 @@ const main = async () => {
 
   // You can further customize parser here
   const args = parser.parseArgs()
-  args.handle(args)
+  args.handler(args)
 }
 
 if (require.main === module) {

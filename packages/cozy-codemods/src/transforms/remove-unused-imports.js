@@ -22,9 +22,9 @@
  * <App />
  * ```
  */
-import { imports } from '..'
+const { imports } = require('..')
 
-export default function removeUnusedImportsTransform(file, api) {
+module.exports = function removeUnusedImportsTransform(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
   imports.removeUnused(root)
