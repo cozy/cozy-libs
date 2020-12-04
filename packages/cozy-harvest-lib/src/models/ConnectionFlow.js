@@ -2,7 +2,11 @@ import MicroEE from 'microee'
 
 import Realtime from 'cozy-realtime'
 
-import { saveAccount, ACCOUNTS_DOCTYPE } from '../connections/accounts'
+import {
+  fetchAccountsWithoutTriggers,
+  saveAccount,
+  ACCOUNTS_DOCTYPE
+} from '../connections/accounts'
 import clone from 'lodash/clone'
 import {
   launchTrigger,
@@ -94,9 +98,25 @@ export const createOrUpdateAccount = async ({
     userCredentials
   )
 
-  accountToSave = isUpdate
-    ? accounts.mergeAuth(accountToSave, userCredentials)
-    : accounts.build(konnector, userCredentials)
+  if (isUpdate) {
+    accountToSave = accounts.mergeAuth(accountToSave, userCredentials)
+  } else {
+    const triggers = await client.collection('io.cozy.triggers').all()
+    const accountsWithoutTrigger = await fetchAccountsWithoutTriggers(
+      client,
+      triggers
+    )
+    const rescuableAccount = accounts.getRescuableAccount(
+      accountsWithoutTrigger,
+      konnector,
+      userCredentials
+    )
+    if (rescuableAccount) {
+      accountToSave = accounts.mergeAuth(rescuableAccount, userCredentials)
+    } else {
+      accountToSave = accounts.build(konnector, userCredentials)
+    }
+  }
 
   if (onAccountCreation) {
     logger.debug(

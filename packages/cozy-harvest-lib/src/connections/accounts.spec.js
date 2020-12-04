@@ -5,13 +5,15 @@ import {
   createAccount,
   updateAccount,
   saveAccount,
-  deleteAccount
+  deleteAccount,
+  fetchAccountsWithoutTriggers
 } from 'connections/accounts'
 
 const client = {
   collection: jest.fn().mockReturnValue({
     add: jest.fn(),
-    get: jest.fn()
+    get: jest.fn(),
+    all: jest.fn()
   }),
   create: jest.fn(),
   destroy: jest.fn(),
@@ -78,6 +80,29 @@ const fixtures = {
     _id: 'kaggregated-aggregator'
   }
 }
+
+describe('fetchAccountsWithoutTriggers', () => {
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  afterAll(() => {
+    jest.restoreAllMocks()
+  })
+
+  it('should fetch the list of accounts without triggers', async () => {
+    client.collection().all.mockResolvedValue({
+      data: [fixtures.existingAccount]
+    })
+    const triggers = [
+      { message: { account: 'toto' } },
+      { message: { account: '561be660ff384ce0846c8f20e829ad62' } }
+    ]
+    expect(await fetchAccountsWithoutTriggers(client, triggers)).toEqual([
+      fixtures.existingAccount
+    ])
+  })
+})
 
 describe('Account mutations', () => {
   beforeEach(() => {

@@ -203,6 +203,18 @@ export const setSessionResetIfNecessary = (account, changedFields = {}) => {
     : account
 }
 
+export const getRescuableAccount = (accounts, konnector, userCredentials) => {
+  const identifierProperty = manifest.getIdentifier(konnector.fields)
+  return accounts.find(account => {
+    return (
+      account.account_type === konnector.slug &&
+      userCredentials[identifierProperty] ===
+        get(account, `auth.${identifierProperty}`) &&
+      userCredentials.password === get(account, 'auth.password')
+    )
+  })
+}
+
 export default {
   build,
   getLabel,
@@ -216,5 +228,6 @@ export default {
   setSessionResetIfNecessary,
   updateTwoFaCode,
   setVaultCipherRelationship,
-  getVaultCipherId
+  getVaultCipherId,
+  getRescuableAccount
 }
