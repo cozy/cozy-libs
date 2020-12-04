@@ -97,6 +97,7 @@ const contactsQuery = () =>
       ]
     })
     .indexFields(['_id'])
+    .limitBy(1000)
 
 const groupsQuery = () => Q(Group.doctype)
 
