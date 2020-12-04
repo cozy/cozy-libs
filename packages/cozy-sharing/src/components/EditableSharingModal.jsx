@@ -8,6 +8,7 @@ import SharingContext from '../context'
 import ContactsAndGroupsDataLoader from './ContactsAndGroupsDataLoader'
 import { default as DumbShareModal } from './ShareModal'
 import { useFetchDocumentPath } from './useFetchDocumentPath'
+
 export const EditableSharingModal = ({
   contacts,
   document,
@@ -75,7 +76,9 @@ const contactsQuery = () =>
     .where({
       _id: {
         $gt: null
-      },
+      }
+    })
+    .partialIndex({
       trashed: {
         $or: [{ $eq: false }, { $exists: false }]
       },
