@@ -40,8 +40,10 @@ const ConfirmationDialog = ({ onConfirm, onCancel }) => {
   const { t } = useI18n()
   return (
     <ConfirmDialog
+      open
       title={t('modal.deleteAccount.title')}
       content={t('modal.deleteAccount.description')}
+      onClose={onCancel}
       actions={
         <>
           <Button
