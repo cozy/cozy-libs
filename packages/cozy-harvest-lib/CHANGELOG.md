@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.29.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.1...cozy-harvest-lib@2.29.2) (2020-12-07)
+
+
+### Bug Fixes
+
+* Add onClose prop to correctly close modal when clicking outside it ([3c83311](https://github.com/cozy/cozy-libs/commit/3c83311))
+* Put open prop on ConfirmDialog otherwise the dialog does not show ([dc0499d](https://github.com/cozy/cozy-libs/commit/dc0499d))
+* Put open prop on ConfirmDialog otherwise the dialog does not show ([24d9f7d](https://github.com/cozy/cozy-libs/commit/24d9f7d))
+
+
+
+
+
 ## [2.29.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.0...cozy-harvest-lib@2.29.1) (2020-12-03)
 
 **Note:** Version bump only for package cozy-harvest-lib
