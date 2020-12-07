@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.10.0...cozy-sharing@2.11.0) (2020-12-07)
+
+
+### Features
+
+* Increase pagination size ([f03a36c](https://github.com/cozy/cozy-libs/commit/f03a36c))
+* Upgrade cozy-client to have access to partialIndex API ([532df4a](https://github.com/cozy/cozy-libs/commit/532df4a))
+* Use partial index to speed up contact search ([0eaa281](https://github.com/cozy/cozy-libs/commit/0eaa281))
+
+
+
+
+
 # [2.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.9.0...cozy-sharing@2.10.0) (2020-11-30)
 
 
