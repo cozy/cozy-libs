@@ -1,6 +1,6 @@
 import React from 'react'
 import CozyClient, { CozyProvider } from 'cozy-client'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, act } from '@testing-library/react'
 
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
@@ -29,6 +29,7 @@ describe('EditContract', () => {
   const setup = ({ konnector } = {}) => {
     const client = new CozyClient({})
     client.save = jest.fn()
+    client.destroy = jest.fn()
 
     const mockKonnector = konnector || {
       slug: 'mock-konnector'
@@ -88,6 +89,18 @@ describe('EditContract', () => {
       }
     })
     expect(root.getByRole('sync-contract-switch')).not.toBeUndefined()
+  })
+
+  it('shows confirmation deletion and allows to delete contract', async () => {
+    const { root, client } = setup()
+    const btn = root.getByText('Remove the account')
+    fireEvent.click(btn)
+    const confirmBtn = root.getByText('Confirm account deletion')
+    expect(client.destroy).not.toHaveBeenCalled()
+    await act(async () => {
+      fireEvent.click(confirmBtn)
+    })
+    expect(client.destroy).toHaveBeenCalled()
   })
 
   it('should not show sync contract switch if the konnector policy does not support it', () => {

@@ -69,6 +69,7 @@ const DeleteConfirm = ({
 }) => {
   return (
     <ConfirmDialog
+      open
       onClose={onCancel}
       title={title}
       content={<div dangerouslySetInnerHTML={{ __html: description }} />}
