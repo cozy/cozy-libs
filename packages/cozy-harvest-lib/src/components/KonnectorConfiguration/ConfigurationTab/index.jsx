@@ -43,6 +43,7 @@ const ConfirmationDialog = ({ onConfirm, onCancel }) => {
       open
       title={t('modal.deleteAccount.title')}
       content={t('modal.deleteAccount.description')}
+      onClose={onCancel}
       actions={
         <>
           <Button
