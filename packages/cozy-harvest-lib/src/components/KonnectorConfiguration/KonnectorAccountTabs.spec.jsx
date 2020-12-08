@@ -28,5 +28,8 @@ describe('Konnector account tabs', () => {
     const { root } = setup()
     expect(root.getByText('Data')).toBeTruthy()
     expect(root.getByText('Configuration')).toBeTruthy()
+    expect(
+      root.getByRole('tab', { name: 'Configuration Warning' })
+    ).toBeTruthy()
   })
 })

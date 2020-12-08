@@ -4,32 +4,31 @@ import PropTypes from 'prop-types'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
 
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 import tabSpecs from './tabSpecs'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
-import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
-
-const WarningError = () => (
-  <Icon icon={WarningIcon} size={13} className="u-ml-half" />
-)
+const WarningError = () => {
+  const { t } = useI18n()
+  return (
+    <span aria-label={t('badges.warning')}>
+      <Icon icon={WarningIcon} size={13} className="u-ml-half" />
+    </span>
+  )
+}
 
 const tabIndexes = {
   data: 0,
   configuration: 1
 }
 
-export const KonnectorAccountTabsTabs = ({
-  tab,
-  onChange,
-  flowState,
-  error
-}) => {
+export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {
   const { t } = useI18n()
+  const { error } = flowState
   return (
     <Tabs onChange={onChange} value={tab}>
       <Tab
@@ -42,7 +41,6 @@ export const KonnectorAccountTabsTabs = ({
           </>
         }
       />
-
       <Tab
         label={
           <>
