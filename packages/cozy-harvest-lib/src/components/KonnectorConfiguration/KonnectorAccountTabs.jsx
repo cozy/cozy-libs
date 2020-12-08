@@ -123,7 +123,7 @@ export const KonnectorAccountTabs = props => {
 
 KonnectorAccountTabs.propTypes = {
   konnector: PropTypes.object.isRequired,
-  trigger: PropTypes.object.isRequired,
+  initialTrigger: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
