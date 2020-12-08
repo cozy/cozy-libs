@@ -37,6 +37,12 @@ exports[`KonnectorModal should render the selected account via a prop 1`] = `
       }
     }
     addAccount={[Function]}
+    initialTrigger={
+      Object {
+        "_id": "784",
+        "doctype": "io.cozy.triggers",
+      }
+    }
     konnector={
       Object {
         "name": "Mock",
@@ -57,12 +63,6 @@ exports[`KonnectorModal should render the selected account via a prop 1`] = `
     }
     onAccountDeleted={[MockFunction]}
     refetchTrigger={[Function]}
-    trigger={
-      Object {
-        "_id": "784",
-        "doctype": "io.cozy.triggers",
-      }
-    }
   />
 </ModalContent>
 `;
@@ -105,6 +105,12 @@ exports[`KonnectorModal should show the configuration view of a single account 1
       }
     }
     addAccount={[Function]}
+    initialTrigger={
+      Object {
+        "_id": 784,
+        "doctype": "io.cozy.triggers",
+      }
+    }
     konnector={
       Object {
         "name": "Mock",
@@ -121,12 +127,6 @@ exports[`KonnectorModal should show the configuration view of a single account 1
     }
     onAccountDeleted={[MockFunction]}
     refetchTrigger={[Function]}
-    trigger={
-      Object {
-        "_id": 784,
-        "doctype": "io.cozy.triggers",
-      }
-    }
   />
 </ModalContent>
 `;
@@ -194,6 +194,11 @@ exports[`KonnectorModal switching account should show the add account view when 
       }
     }
     addAccount={[Function]}
+    initialTrigger={
+      Object {
+        "_id": "abc",
+      }
+    }
     konnector={
       Object {
         "name": "Mock",
@@ -210,11 +215,6 @@ exports[`KonnectorModal switching account should show the add account view when 
     }
     onAccountDeleted={[MockFunction]}
     refetchTrigger={[Function]}
-    trigger={
-      Object {
-        "_id": "abc",
-      }
-    }
   />
 </ModalContent>
 `;
