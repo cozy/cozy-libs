@@ -1,5 +1,5 @@
 import React from 'react'
-import CozyClient, { CozyProvider } from 'cozy-client'
+import CozyClient from 'cozy-client'
 import { render, fireEvent, act } from '@testing-library/react'
 
 import AppLike from '../../../../test/AppLike'
