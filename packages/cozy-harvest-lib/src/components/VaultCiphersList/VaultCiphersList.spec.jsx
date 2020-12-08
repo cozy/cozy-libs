@@ -1,7 +1,7 @@
-import { DumbVaultCiphersList } from './VaultCiphersList'
 import { render, fireEvent } from '@testing-library/react'
 import React from 'react'
-import I18n from 'cozy-ui/transpiled/react/I18n'
+import VaultCiphersList from './VaultCiphersList'
+import AppLike from '../../../test/AppLike'
 
 jest.mock('cozy-ui/transpiled/react/AppIcon', () => () => null)
 
@@ -17,16 +17,16 @@ describe('when there is some ciphers', () => {
         }
       }
     ]
+    const client = {}
 
     const { getByText } = render(
-      <I18n lang="en" dictRequire={() => {}}>
-        <DumbVaultCiphersList
+      <AppLike client={client}>
+        <VaultCiphersList
           konnector={{ vendor_link: 'https://alan.com' }}
           onSelect={onSelect}
           ciphers={ciphers}
-          t={key => key}
         />
-      </I18n>
+      </AppLike>
     )
 
     const node = await getByText('isabelledurand')
@@ -55,14 +55,14 @@ describe('when there is some ciphers', () => {
       }
     ]
     const { queryByText } = render(
-      <I18n lang="en" dictRequire={() => {}}>
-        <DumbVaultCiphersList
+      <AppLike client={{}}>
+        <VaultCiphersList
           konnector={{ vendor_link: 'https://alan.com' }}
           ciphers={ciphers}
           onSelect={onSelect}
           t={key => key}
         />
-      </I18n>
+      </AppLike>
     )
 
     const node = await queryByText('toignore')
@@ -82,14 +82,13 @@ describe('when there is some ciphers', () => {
     ]
 
     const { getByText } = render(
-      <I18n lang="en" dictRequire={() => {}}>
-        <DumbVaultCiphersList
+      <AppLike client={{}}>
+        <VaultCiphersList
           konnector={{ vendor_link: 'https://alan.com' }}
           onSelect={onSelect}
           ciphers={ciphers}
-          t={key => key}
         />
-      </I18n>
+      </AppLike>
     )
 
     const node = await getByText(/from another account/i)
@@ -104,15 +103,14 @@ describe('when there is no cipher', () => {
     const onSelect = jest.fn()
 
     const { getByText } = render(
-      <I18n lang="en" dictRequire={() => {}}>
-        <DumbVaultCiphersList
+      <AppLike client={{}}>
+        <VaultCiphersList
           konnector={{ vendor_link: 'https://alan.com' }}
           onNoCiphers={() => {}}
           ciphers={[]}
           onSelect={onSelect}
-          t={key => key}
         />
-      </I18n>
+      </AppLike>
     )
 
     const node = await getByText(/from another account/i)

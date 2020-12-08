@@ -2,10 +2,8 @@ import React from 'react'
 import CozyClient, { CozyProvider } from 'cozy-client'
 import { render, fireEvent, act } from '@testing-library/react'
 
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import AppLike from '../../../../test/AppLike'
 
-import en from 'locales/en.json'
 import bankAccount from './bank-account-fixture.json'
 import EditContract from './EditContract'
 
@@ -35,21 +33,17 @@ describe('EditContract', () => {
       slug: 'mock-konnector'
     }
     const root = render(
-      <CozyProvider client={client}>
-        <I18n lang="en" dictRequire={() => en}>
-          <BreakpointsProvider>
-            <EditContract
-              konnector={mockKonnector}
-              accountId={bankAccount._id}
-              TitleWrapper="div"
-              FormControlsWrapper="div"
-              onSuccess={() => {}}
-              onClose={() => {}}
-              contract={bankAccount}
-            />
-          </BreakpointsProvider>
-        </I18n>
-      </CozyProvider>
+      <AppLike client={client}>
+        <EditContract
+          konnector={mockKonnector}
+          accountId={bankAccount._id}
+          TitleWrapper="div"
+          FormControlsWrapper="div"
+          onSuccess={() => {}}
+          onClose={() => {}}
+          contract={bankAccount}
+        />
+      </AppLike>
     )
     return { root, client }
   }
