@@ -23,6 +23,41 @@ const tabIndexes = {
   configuration: 1
 }
 
+export const KonnectorAccountTabsTabs = ({
+  tab,
+  onChange,
+  flowState,
+  error
+}) => {
+  const { t } = useI18n()
+  return (
+    <Tabs onChange={onChange} value={tab}>
+      <Tab
+        label={
+          <>
+            {t('modal.tabs.data')}
+            {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
+              <WarningError />
+            )}
+          </>
+        }
+      />
+
+      <Tab
+        label={
+          <>
+            {t('modal.tabs.configuration')}
+            {tabSpecs.configuration.errorShouldBeDisplayed(
+              error,
+              flowState
+            ) && <WarningError />}
+          </>
+        }
+      />
+    </Tabs>
+  )
+}
+
 const DumbKonnectorAccountTabs = props => {
   const {
     konnector,
@@ -36,7 +71,6 @@ const DumbKonnectorAccountTabs = props => {
     showNewAccountButton,
     flow
   } = props
-  const { t } = useI18n()
   const [tab, setTab] = useState(
     initialActiveTab
       ? tabIndexes[initialActiveTab]
@@ -53,20 +87,11 @@ const DumbKonnectorAccountTabs = props => {
 
   return (
     <>
-      <Tabs onChange={handleTabChange} value={tab}>
-        <Tab label="data">
-          {t('modal.tabs.data')}
-          {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
-            <WarningError />
-          )}
-        </Tab>
-        <Tab label="configuration">
-          {t('modal.tabs.configuration')}
-          {tabSpecs.configuration.errorShouldBeDisplayed(error, flowState) && (
-            <WarningError />
-          )}
-        </Tab>
-      </Tabs>
+      <KonnectorAccountTabsTabs
+        tab={tab}
+        onChange={handleTabChange}
+        flowState={flowState}
+      />
       <Divider />
       <div className="u-pt-1-half u-pb-0">
         {tab === 0 && (
