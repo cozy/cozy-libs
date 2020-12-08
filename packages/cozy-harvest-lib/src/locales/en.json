@@ -1,6 +1,9 @@
 {
   "close": "Close",
   "back": "Go back",
+  "badges": {
+    "warning": "Warning"
+  },
   "accountForm": {
     "submit": {
       "label": "Submit"

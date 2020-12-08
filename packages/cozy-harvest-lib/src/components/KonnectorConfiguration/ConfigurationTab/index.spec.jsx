@@ -3,13 +3,10 @@
 import { render, fireEvent, act } from '@testing-library/react'
 import ConfigurationTab from './index'
 import React from 'react'
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import enLocale from '../../../locales/en.json'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { MountPointProvider } from '../../../components/MountPointContext'
-import { CozyProvider as CozyClientProvider } from 'cozy-client'
 import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
+import AppLike from '../../../../test/AppLike'
 
 jest.mock('../../../connections/accounts', () => ({
   deleteAccount: jest.fn()
@@ -44,19 +41,15 @@ describe('ConfigurationTab', () => {
     const mockClient = createMockClient({ queries: {} })
     const root = render(
       <MountPointProvider baseRoute="/">
-        <CozyClientProvider client={mockClient}>
-          <BreakpointsProvider>
-            <I18n lang="en" dictRequire={() => enLocale}>
-              <ConfigurationTab
-                konnector={konnector}
-                account={account}
-                addAccount={addAccount}
-                onAccountDeleted={onAccountDeleted}
-                flow={flow}
-              />
-            </I18n>
-          </BreakpointsProvider>
-        </CozyClientProvider>
+        <AppLike client={mockClient}>
+          <ConfigurationTab
+            konnector={konnector}
+            account={account}
+            addAccount={addAccount}
+            onAccountDeleted={onAccountDeleted}
+            flow={flow}
+          />
+        </AppLike>
       </MountPointProvider>
     )
     return { root }

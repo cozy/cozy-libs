@@ -1,6 +1,9 @@
 {
   "close": "Fermer",
   "back": "Revenir",
+  "badges": {
+    "warning": "Warning"
+  },
   "accountForm": {
     "submit": {
       "label": "Sauvegarder"

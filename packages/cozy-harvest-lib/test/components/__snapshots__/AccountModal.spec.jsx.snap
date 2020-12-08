@@ -99,15 +99,15 @@ exports[`AccountModal with an account should display the AccountSelect & Content
         }
       }
       addAccount={[Function]}
-      konnector={Object {}}
-      onAccountDeleted={[MockFunction]}
-      showNewAccountButton={true}
-      trigger={
+      initialTrigger={
         Object {
           "current_state": Object {},
           "id": "triggerid",
         }
       }
+      konnector={Object {}}
+      onAccountDeleted={[MockFunction]}
+      showNewAccountButton={true}
     />
   </ModalContent>
 </React.Fragment>
@@ -165,14 +165,14 @@ exports[`AccountModal with an account should display the AccountSelect & Content
         }
       }
       addAccount={[Function]}
-      konnector={Object {}}
-      onAccountDeleted={[MockFunction]}
-      showNewAccountButton={true}
-      trigger={
+      initialTrigger={
         Object {
           "id": "trigger_account2",
         }
       }
+      konnector={Object {}}
+      onAccountDeleted={[MockFunction]}
+      showNewAccountButton={true}
     />
   </ModalContent>
 </React.Fragment>

@@ -160,7 +160,7 @@ export class AccountModal extends Component {
             <KonnectorAccountTabs
               initialActiveTab={initialActiveTab}
               konnector={konnector}
-              trigger={trigger}
+              initialTrigger={trigger}
               account={account}
               onAccountDeleted={onDismiss}
               addAccount={() => pushHistory('/new')}

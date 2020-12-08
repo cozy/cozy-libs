@@ -1,9 +1,9 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
-import I18n from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
 import ConnectionFlow from '../models/ConnectionFlow'
+import AppLike from '../../test/AppLike'
 
 jest.mock('./KonnectorIcon', () => () => null)
 
@@ -20,7 +20,7 @@ describe('TwoFAModal', () => {
     flow.getKonnectorSlug = () => konnectorSlug
 
     const root = render(
-      <I18n dictRequire={() => {}} lang="en">
+      <AppLike client={client}>
         <TwoFAModal
           dismissAction={jest.fn()}
           flow={flow}
@@ -28,7 +28,7 @@ describe('TwoFAModal', () => {
           account={account}
           client={client}
         />
-      </I18n>
+      </AppLike>
     )
     return { root, flow }
   }

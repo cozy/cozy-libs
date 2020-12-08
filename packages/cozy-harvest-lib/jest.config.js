@@ -15,7 +15,11 @@ module.exports = {
   moduleNameMapper: {
     '^cozy-logger$': 'cozy-logger/dist/index.js',
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
-    '^cozy-client$': 'cozy-client/dist/index.js'
+    // Force cozy-client resolving to use harvest's version of cozy-client
+    // Can be removed when cozy-client's version in the workspace is > 14.4.0.
+    // Since otherwise harvest tries to mock unexisting methods from
+    // cozy-client/models/account (getContractSyncStatusFromAccount for ex)
+    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js'
   },
   transformIgnorePatterns: ['node_modules/(?!(cozy-ui|cozy-keys-lib))'],
   setupFilesAfterEnv: ['<rootDir>/test/jest.setup.js']

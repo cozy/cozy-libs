@@ -312,7 +312,7 @@ export class KonnectorModal extends PureComponent {
       return (
         <KonnectorAccountTabs
           konnector={konnector}
-          trigger={trigger}
+          initialTrigger={trigger}
           account={account}
           onAccountDeleted={dismissAction}
           addAccount={this.requestAccountCreation}
