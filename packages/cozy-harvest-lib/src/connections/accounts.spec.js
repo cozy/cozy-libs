@@ -91,7 +91,7 @@ describe('fetchAccountsWithoutTriggers', () => {
   })
 
   it('should fetch the list of accounts without triggers', async () => {
-    client.collection().all.mockResolvedValue({
+    client.query.mockResolvedValue({
       data: [fixtures.existingAccount]
     })
     const triggers = [

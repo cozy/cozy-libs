@@ -195,9 +195,14 @@ export const fetchAccountsFromTriggers = async (client, triggers) => {
  * @param  {Array}  triggers io.cozy.triggers documents
  */
 export const fetchAccountsWithoutTriggers = async (client, triggers) => {
-  const accountCol = client.collection('io.cozy.accounts')
-  const accountIdToTrigger = keyBy(triggers, triggersModel.getAccountId)
-  return (await accountCol.all({ limit: null })).data.filter(
-    account => !accountIdToTrigger[account.id]
+  const triggerAccountIds = triggers.map(trigger =>
+    triggersModel.getAccountId(trigger)
   )
+  return (await client.query(
+    Q(ACCOUNTS_DOCTYPE).where({
+      _id: {
+        $nin: triggerAccountIds
+      }
+    })
+  )).data
 }
