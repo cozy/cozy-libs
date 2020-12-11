@@ -59,11 +59,10 @@ export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {
 const DumbKonnectorAccountTabs = props => {
   const {
     konnector,
-    trigger: initialTrigger,
+    initialTrigger,
     account,
     onAccountDeleted,
     initialActiveTab,
-
     // TODO rename to onAddAccount
     addAccount,
     showNewAccountButton,
