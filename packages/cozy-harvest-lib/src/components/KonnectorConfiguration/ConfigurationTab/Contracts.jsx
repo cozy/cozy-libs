@@ -41,7 +41,7 @@ const getPrimaryTextPerDoctype = {
 
 const getPrimaryTextDefault = contract => contract.label
 
-const ContractItem = ({ contract, konnector, accountId }) => {
+const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
   const getPrimaryText =
     getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
@@ -49,6 +49,8 @@ const ContractItem = ({ contract, konnector, accountId }) => {
   return (
     <>
       <ListItem
+        button
+        divider={divider}
         className="u-c-pointer"
         onClick={() => {
           setShowingEditModal(true)
@@ -102,13 +104,14 @@ const DumbContracts = ({ contracts, account, konnector }) => {
         </NavigationListHeader>
         <NavigationListSection>
           {contractData &&
-            contractData.map(contract => {
+            contractData.map((contract, i) => {
               return (
                 <ContractItem
                   key={contract._id}
                   konnector={konnector}
                   accountId={account ? account._id : null}
                   contract={contract}
+                  divider={i !== contractData.length - 1}
                 />
               )
             })}
