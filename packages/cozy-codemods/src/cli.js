@@ -80,9 +80,14 @@ const runHandler = args => {
         '--extensions',
         'js,jsx'
       ]
-  spawnSync('jscodeshift', [...defaultJscodeshiftArgs, ...args.rest], {
-    stdio: 'inherit'
-  })
+
+  spawnSync(
+    'yarn',
+    ['run', 'jscodeshift', ...defaultJscodeshiftArgs, ...args.rest],
+    {
+      stdio: 'inherit'
+    }
+  )
 
   console.log('Done ! You might want to run a linter now.')
 }
