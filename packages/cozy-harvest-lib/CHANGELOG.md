@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.29.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.3...cozy-harvest-lib@2.29.4) (2020-12-11)
+
+
+### Bug Fixes
+
+* Show drive card in data tab ([7969f9b](https://github.com/cozy/cozy-libs/commit/7969f9b))
+
+
+
+
+
 ## [2.29.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.2...cozy-harvest-lib@2.29.3) (2020-12-08)
 
 
