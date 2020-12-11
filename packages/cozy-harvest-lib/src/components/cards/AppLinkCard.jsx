@@ -8,21 +8,16 @@ import Circle from 'cozy-ui/transpiled/react/Circle'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Text, SubTitle } from 'cozy-ui/transpiled/react/Text'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { useClient } from 'cozy-client'
 import palette from 'cozy-ui/transpiled/react/palette'
-import { withBreakpoints } from 'cozy-ui/transpiled/react'
-import { withClient } from 'cozy-client'
 import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 
-const AppLinkCard = ({
-  slug,
-  path,
-  icon,
-  iconColor,
-  breakpoints: { isMobile },
-  client,
-  t
-}) => {
+const AppLinkCard = ({ slug, path, icon, iconColor }) => {
+  const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
+  const client = useClient()
   const cozyURL = new URL(client.getStackClient().uri)
   const { fetchStatus, url, isInstalled } = useAppLinkWithStoreFallback(
     slug,
@@ -80,9 +75,7 @@ AppLinkCard.propTypes = {
   slug: PropTypes.string.isRequired,
   path: PropTypes.string,
   icon: PropTypes.string.isRequired,
-  iconColor: PropTypes.string,
-  breakpoints: PropTypes.object.isRequired,
-  client: PropTypes.object.isRequired
+  iconColor: PropTypes.string
 }
 
 AppLinkCard.defaultProps = {
@@ -90,4 +83,4 @@ AppLinkCard.defaultProps = {
   iconColor: 'primaryColor'
 }
 
-export default withClient(withBreakpoints()(translate()(AppLinkCard)))
+export default AppLinkCard
