@@ -83,7 +83,7 @@ const transportLabels = [
   'other_transport_document'
 ]
 
-const taxLabels = ['tax_return', 'tax_notice', 'tax_timetable']
+const taxLabels = ['tax_return', 'tax_notice', 'tax_timetable', 'receipt']
 
 const invoiceLabels = [
   'phone_invoice',
