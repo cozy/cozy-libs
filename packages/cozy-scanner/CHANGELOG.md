@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.9.1...cozy-scanner@0.10.0) (2020-12-11)
+
+
+### Bug Fixes
+
+* Deal with theme not found ([8e25d3f](https://github.com/cozy/cozy-libs/commit/8e25d3f))
+
+
+### Features
+
+* Add tax receipt ([648e774](https://github.com/cozy/cozy-libs/commit/648e774))
+
+
+
+
+
 ## [0.9.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.9.0...cozy-scanner@0.9.1) (2020-12-01)
 
 
