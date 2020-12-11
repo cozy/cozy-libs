@@ -80,6 +80,7 @@
       "tax_return": "Déclaration d'impôt",
       "tax_notice": "Avis d'imposition",
       "tax_timetable": "Echéancier d'imposition",
+      "receipt": "Accusé de réception",
       "other_tax_document": "Autre document d'impôt",
       "invoices": "Factures",
       "other_invoice": "Autre facture"

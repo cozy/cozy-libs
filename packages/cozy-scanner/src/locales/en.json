@@ -80,6 +80,7 @@
       "tax_return": "Tax return",
       "tax_notice": "Tax notice",
       "tax_timetable": "Payment Plans Installment Agreements",
+      "receipt": "Receipt",
       "other_tax_document": "Other tax document",
       "invoices": "Invoices",
       "other_invoice": "Other invoice"
