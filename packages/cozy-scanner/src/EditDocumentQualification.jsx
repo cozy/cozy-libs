@@ -36,7 +36,7 @@ class EditDocumentQualification extends Component {
         ? document.metadata.qualification
         : null
     const theme = item ? getThemeByItem(item) : null
-    const categoryLabel = item ? theme.label : null
+    const categoryLabel = item && theme ? theme.label : null
     return (
       <FixedDialog
         onClose={onClose}
