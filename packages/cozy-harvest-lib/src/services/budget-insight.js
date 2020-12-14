@@ -382,11 +382,16 @@ export const setSync = async ({
   account,
   konnector,
   contract,
-  syncStatus
+  syncStatus,
+
+  // Used for tests
+  createTemporaryToken: createTemporaryTokenOpt,
+  setBIConnectionSyncStatus: setBIConnectionSyncStatusOpt
 }) => {
   const cozyBankId = getCozyBankId({ konnector, account })
-  const temporaryToken = await createTemporaryToken({
-    bankId: getBiBankId({ client, cozyBankId }),
+  const temporaryToken = await (createTemporaryTokenOpt ||
+    createTemporaryToken)({
+    biBankId: getBiBankId({ client, cozyBankId }),
     client,
     konnector
   })
@@ -398,7 +403,7 @@ export const setSync = async ({
   logger.info(
     `Toggling contract ${contractId} in connection ${connId}: syncStatus`
   )
-  await setBIConnectionSyncStatus(
+  await (setBIConnectionSyncStatusOpt || setBIConnectionSyncStatus)(
     config,
     connId,
     contractId,

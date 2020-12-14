@@ -40,6 +40,7 @@ describe('SyncContractSwitch', () => {
         switchProps={{
           inputProps: { 'data-testid': 'switch' }
         }}
+        trackEvent={jest.fn()}
       />
     )
     return { root, client: mockClient }
@@ -90,9 +91,10 @@ describe('SyncContractSwitch', () => {
       account: mockAccount,
       contract: mockContract2
     })
+
+    const toggle = root.getByTestId('switch')
     act(() => {
-      const input = root.getByTestId('switch')
-      fireEvent.click(input)
+      fireEvent.click(toggle)
     })
 
     expect(setSync).toHaveBeenCalledWith(
@@ -100,7 +102,10 @@ describe('SyncContractSwitch', () => {
         syncStatus: true
       })
     )
-    await setSyncProm
+
+    await act(async () => {
+      await setSyncProm
+    })
     expect(client.save).toHaveBeenCalledWith(
       expect.objectContaining({
         relationships: {
@@ -113,5 +118,45 @@ describe('SyncContractSwitch', () => {
         }
       })
     )
+    expect(toggle.checked).toBe(true)
+  })
+
+  describe('when there is an error', () => {
+    beforeEach(() => {
+      // Disable console.warn since we expect a warning
+      // eslint-disable-next-line no-console
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+      // eslint-disable-next-line no-console
+      console.warn.mockRestore()
+    })
+
+    it('should correctly behave during an error', async () => {
+      const setSyncProm = Promise.resolve()
+      const setSync = jest.fn().mockRejectedValue('Error')
+      findKonnectorPolicy.mockReturnValue({ setSync })
+      const { root, client } = setup({
+        account: mockAccount,
+        contract: mockContract2
+      })
+      const toggle = root.getByTestId('switch')
+      act(() => {
+        fireEvent.click(toggle)
+      })
+
+      expect(setSync).toHaveBeenCalledWith(
+        expect.objectContaining({
+          syncStatus: true
+        })
+      )
+
+      await act(async () => {
+        await setSyncProm
+      })
+      expect(client.save).not.toHaveBeenCalled()
+      expect(toggle.checked).toBe(false)
+    })
   })
 })

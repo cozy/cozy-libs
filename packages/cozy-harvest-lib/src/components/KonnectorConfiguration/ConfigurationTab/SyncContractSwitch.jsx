@@ -5,6 +5,7 @@ import { withClient, queryConnect, models } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -57,7 +58,14 @@ export class DumbSyncContractSwitch extends React.Component {
 
   async handleSetSyncStatus(ev) {
     ev.preventDefault()
-    const { client, konnector, contract, accountCol, tracker } = this.props
+    const {
+      client,
+      konnector,
+      contract,
+      accountCol,
+      t,
+      trackEvent
+    } = this.props
     const { data: account } = accountCol
     const { syncStatus } = this.state
     const newSyncStatus = !syncStatus
@@ -77,12 +85,14 @@ export class DumbSyncContractSwitch extends React.Component {
         newSyncStatus
       )
       await client.save(updatedAccount)
-      tracker.trackEvent({
+      trackEvent({
         name: `synchroniser_compte-${newSyncStatus ? 'on' : 'off'}`
       })
     } catch (e) {
       // eslint-disable-next-line no-console
       console.warn('Could not set sync status', e)
+      Alerter.error(t('contractForm.failure'))
+      this.setState({ syncStatus })
     } finally {
       this.setState({ syncStatusLoading: false })
     }
