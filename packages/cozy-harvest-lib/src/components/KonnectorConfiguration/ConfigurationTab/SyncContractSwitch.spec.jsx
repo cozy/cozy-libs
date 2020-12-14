@@ -30,6 +30,7 @@ describe('SyncContractSwitch', () => {
     const mockClient = {
       save: jest.fn()
     }
+    const trackEvent = jest.fn()
     const root = render(
       <DumbSyncContractSwitch
         client={mockClient}
@@ -40,10 +41,10 @@ describe('SyncContractSwitch', () => {
         switchProps={{
           inputProps: { 'data-testid': 'switch' }
         }}
-        trackEvent={jest.fn()}
+        trackEvent={trackEvent}
       />
     )
-    return { root, client: mockClient }
+    return { root, client: mockClient, trackEvent }
   }
 
   beforeEach(() => {
@@ -87,7 +88,7 @@ describe('SyncContractSwitch', () => {
     const setSyncProm = Promise.resolve()
     const setSync = jest.fn().mockReturnValue(setSyncProm)
     findKonnectorPolicy.mockReturnValue({ setSync })
-    const { root, client } = setup({
+    const { root, client, trackEvent } = setup({
       account: mockAccount,
       contract: mockContract2
     })
@@ -103,6 +104,8 @@ describe('SyncContractSwitch', () => {
       })
     )
 
+    // Since the state of the component is changed after the promise
+    // resolves/rejects, we need to wrap the waiting into act
     await act(async () => {
       await setSyncProm
     })
@@ -118,6 +121,7 @@ describe('SyncContractSwitch', () => {
         }
       })
     )
+    expect(trackEvent).toHaveBeenCalledWith({ name: 'synchroniser_compte-on' })
     expect(toggle.checked).toBe(true)
   })
 
@@ -152,6 +156,8 @@ describe('SyncContractSwitch', () => {
         })
       )
 
+      // Since the state of the component is changed after the promise
+      // resolves/rejects, we need to wrap the waiting into act
       await act(async () => {
         await setSyncProm
       })
