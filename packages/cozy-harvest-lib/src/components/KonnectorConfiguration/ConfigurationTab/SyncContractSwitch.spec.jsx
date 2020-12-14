@@ -30,6 +30,7 @@ describe('SyncContractSwitch', () => {
     const mockClient = {
       save: jest.fn()
     }
+    const trackEvent = jest.fn()
     const root = render(
       <DumbSyncContractSwitch
         client={mockClient}
@@ -40,9 +41,10 @@ describe('SyncContractSwitch', () => {
         switchProps={{
           inputProps: { 'data-testid': 'switch' }
         }}
+        trackEvent={trackEvent}
       />
     )
-    return { root, client: mockClient }
+    return { root, client: mockClient, trackEvent }
   }
 
   beforeEach(() => {
@@ -86,13 +88,14 @@ describe('SyncContractSwitch', () => {
     const setSyncProm = Promise.resolve()
     const setSync = jest.fn().mockReturnValue(setSyncProm)
     findKonnectorPolicy.mockReturnValue({ setSync })
-    const { root, client } = setup({
+    const { root, client, trackEvent } = setup({
       account: mockAccount,
       contract: mockContract2
     })
+
+    const toggle = root.getByTestId('switch')
     act(() => {
-      const input = root.getByTestId('switch')
-      fireEvent.click(input)
+      fireEvent.click(toggle)
     })
 
     expect(setSync).toHaveBeenCalledWith(
@@ -100,7 +103,12 @@ describe('SyncContractSwitch', () => {
         syncStatus: true
       })
     )
-    await setSyncProm
+
+    // Since the state of the component is changed after the promise
+    // resolves/rejects, we need to wrap the waiting into act
+    await act(async () => {
+      await setSyncProm
+    })
     expect(client.save).toHaveBeenCalledWith(
       expect.objectContaining({
         relationships: {
@@ -113,5 +121,48 @@ describe('SyncContractSwitch', () => {
         }
       })
     )
+    expect(trackEvent).toHaveBeenCalledWith({ name: 'synchroniser_compte-on' })
+    expect(toggle.checked).toBe(true)
+  })
+
+  describe('when there is an error', () => {
+    beforeEach(() => {
+      // Disable console.warn since we expect a warning
+      // eslint-disable-next-line no-console
+      jest.spyOn(console, 'warn').mockImplementation(() => {})
+    })
+
+    afterEach(() => {
+      // eslint-disable-next-line no-console
+      console.warn.mockRestore()
+    })
+
+    it('should correctly behave during an error', async () => {
+      const setSyncProm = Promise.resolve()
+      const setSync = jest.fn().mockRejectedValue('Error')
+      findKonnectorPolicy.mockReturnValue({ setSync })
+      const { root, client } = setup({
+        account: mockAccount,
+        contract: mockContract2
+      })
+      const toggle = root.getByTestId('switch')
+      act(() => {
+        fireEvent.click(toggle)
+      })
+
+      expect(setSync).toHaveBeenCalledWith(
+        expect.objectContaining({
+          syncStatus: true
+        })
+      )
+
+      // Since the state of the component is changed after the promise
+      // resolves/rejects, we need to wrap the waiting into act
+      await act(async () => {
+        await setSyncProm
+      })
+      expect(client.save).not.toHaveBeenCalled()
+      expect(toggle.checked).toBe(false)
+    })
   })
 })
