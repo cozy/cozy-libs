@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.5...cozy-harvest-lib@2.30.0) (2020-12-15)
+
+
+### Features
+
+* Add button&divider props ([e1b8d1b](https://github.com/cozy/cozy-libs/commit/e1b8d1b))
+
+
+
+
+
 ## [2.29.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.4...cozy-harvest-lib@2.29.5) (2020-12-14)
 
 
