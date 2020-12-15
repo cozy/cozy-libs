@@ -123,7 +123,8 @@ const ConfigurationTab = ({
           <NavigationListSection>
             {konnector.oauth ? null : (
               <ListItem
-                className="u-c-pointer"
+                button
+                divider
                 onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
               >
                 <ListItemIcon>
@@ -145,7 +146,7 @@ const ConfigurationTab = ({
                 </ListItemSecondaryAction>
               </ListItem>
             )}
-            <ListItem className="u-c-pointer" onClick={handleDeleteRequest}>
+            <ListItem button onClick={handleDeleteRequest}>
               <ListItemIcon>
                 <Icon icon={UnlinkIcon} className="u-error" />
               </ListItemIcon>

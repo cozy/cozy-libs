@@ -9,22 +9,21 @@ import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
 
 export const DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
+  const activeCiphers = ciphers.filter(cipherView => !cipherView.deletedDate)
   return (
     <>
       <Title className="u-ta-center u-mb-2">
         {t('vaultCiphersList.title')}
       </Title>
       <List>
-        {ciphers
-          .filter(cipherView => !cipherView.deletedDate)
-          .map(cipherView => (
-            <CiphersListItem
-              key={cipherView.id}
-              cipherView={cipherView}
-              konnector={konnector}
-              onClick={() => onSelect(cipherView)}
-            />
-          ))}
+        {activeCiphers.map(cipherView => (
+          <CiphersListItem
+            key={cipherView.id}
+            cipherView={cipherView}
+            konnector={konnector}
+            onClick={() => onSelect(cipherView)}
+          />
+        ))}
 
         <OtherAccountListItem onClick={() => onSelect(null)} />
       </List>

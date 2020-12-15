@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import cx from 'classnames'
 
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -14,12 +13,9 @@ const CiphersListItem = props => {
 
   return (
     <ListItem
-      className={cx(
-        {
-          'u-c-pointer': onClick
-        },
-        className
-      )}
+      button={Boolean(onClick)}
+      divider
+      className={className}
       onClick={onClick}
       {...rest}
     >
