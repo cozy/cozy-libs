@@ -6,6 +6,8 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import SwipeableViews from 'react-swipeable-views'
 
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
@@ -68,6 +70,7 @@ const DumbKonnectorAccountTabs = props => {
     showNewAccountButton,
     flow
   } = props
+  const { isMobile } = useBreakpoints()
   const [tab, setTab] = useState(
     initialActiveTab
       ? tabIndexes[initialActiveTab]
@@ -90,21 +93,22 @@ const DumbKonnectorAccountTabs = props => {
         flowState={flowState}
       />
       <Divider />
-      <div className="u-pt-1-half u-pb-0">
-        {tab === 0 && (
-          <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
-        )}
-        {tab === 1 && (
-          <ConfigurationTab
-            konnector={konnector}
-            account={account}
-            flow={flow}
-            addAccount={addAccount}
-            onAccountDeleted={onAccountDeleted}
-            showNewAccountButton={showNewAccountButton}
-          />
-        )}
-      </div>
+      <SwipeableViews
+        animateHeight={true}
+        index={tab}
+        disabled
+        animateTransitions={isMobile}
+      >
+        <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
+        <ConfigurationTab
+          konnector={konnector}
+          account={account}
+          flow={flow}
+          addAccount={addAccount}
+          onAccountDeleted={onAccountDeleted}
+          showNewAccountButton={showNewAccountButton}
+        />
+      </SwipeableViews>
     </>
   )
 }

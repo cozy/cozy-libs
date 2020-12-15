@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 
 import * as konnectorsModel from '../../../helpers/konnectors'
 import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
@@ -55,7 +55,7 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
   } = useMaintenanceStatus(client, konnector)
 
   return (
-    <ModalContent className={isMobile ? null : 'u-p-0'}>
+    <div className={isMobile ? 'u-p-1' : 'u-pt-1 u-pb-1-half'}>
       <Stack>
         {isInMaintenance && (
           <div className="u-bg-paleGrey u-p-1">
@@ -79,7 +79,7 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
           <WebsiteLinkCard link={konnector.vendor_link} />
         )}
       </Stack>
-    </ModalContent>
+    </div>
   )
 }
 

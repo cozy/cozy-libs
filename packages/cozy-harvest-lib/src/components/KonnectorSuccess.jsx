@@ -3,15 +3,15 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-
 import Button from 'cozy-ui/transpiled/react/Button'
+
 import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
 import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
+import DialogContent from '@material-ui/core/DialogContent'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
@@ -49,7 +49,7 @@ export class KonnectorSuccess extends Component {
     const hasLinks = relatedApps.length > 0
 
     return (
-      <ModalContent>
+      <DialogContent className="u-pb-2">
         <div className="u-ta-center">
           <SuccessImage />
           <DescriptionContent
@@ -73,7 +73,7 @@ export class KonnectorSuccess extends Component {
               : null}
           </>
         </div>
-      </ModalContent>
+      </DialogContent>
     )
   }
 }
