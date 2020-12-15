@@ -328,7 +328,7 @@ export class DumbTriggerManager extends Component {
 
     if (showSpinner) {
       return (
-        <div className="u-flex u-flex-column u-flex-items-center">
+        <div className="u-flex u-flex-column u-flex-items-center u-pv-2">
           <Spinner size="xxlarge" />
           <p>{t('triggerManager.connecting')}</p>
         </div>

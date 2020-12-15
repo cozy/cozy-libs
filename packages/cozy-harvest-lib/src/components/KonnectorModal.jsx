@@ -5,10 +5,7 @@ import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Infos from 'cozy-ui/transpiled/react/Infos'
-import Modal, {
-  ModalContent,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
+import { ModalHeader } from 'cozy-ui/transpiled/react/Modal'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -25,6 +22,9 @@ import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
+
+import { Dialog, DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
+import DialogContent from '@material-ui/core/DialogContent'
 
 /**
  * KonnectorModal can be completely standalone and will use it's internal
@@ -210,14 +210,16 @@ export class KonnectorModal extends PureComponent {
     const { account, accountsAndTriggers, addingAccount } = this.state
 
     return (
-      <Modal
-        dismissAction={dismissAction}
+      <Dialog
+        onClose={dismissAction}
         mobileFullscreen
-        size="small"
+        size="s"
         into={into}
         closable={false}
         aria-label={t('modal.aria-label')}
+        open={true}
       >
+        <DialogCloseButton onClick={dismissAction} />
         <ModalHeader className="u-pr-2">
           <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
             <div className="u-w-3 u-h-3 u-mr-half">
@@ -247,8 +249,8 @@ export class KonnectorModal extends PureComponent {
             />
           </div>
         </ModalHeader>
-        <ModalContent>{this.renderModalContent()}</ModalContent>
-      </Modal>
+        <DialogContent>{this.renderModalContent()}</DialogContent>
+      </Dialog>
     )
   }
 

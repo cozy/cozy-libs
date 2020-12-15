@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react'
 import compose from 'lodash/flowRight'
-import Modal, {
-  ModalDescription,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
+import { ModalDescription, ModalHeader } from 'cozy-ui/transpiled/react/Modal'
 import Text, { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Button'
@@ -19,6 +16,8 @@ import accounts, {
 } from '../helpers/accounts'
 
 import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/ConnectionFlow'
+
+import { Dialog, DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 /**
  * Displayed during connection creation when the konnector detects
@@ -95,15 +94,17 @@ export class TwoFAModal extends PureComponent {
     const konn = flow.konnector
 
     return (
-      <Modal
-        dismissAction={dismissAction}
+      <Dialog
+        onClose={dismissAction}
         mobileFullscreen
         containerClassName="u-pos-absolute"
         className={isMobile ? '' : 'u-mt-3'}
-        size="xsmall"
+        size="s"
         into="body"
         aria-label={t(`twoFAForm.modal-label`)}
+        open={true}
       >
+        <DialogCloseButton onClick={dismissAction} />
         <ModalHeader>
           <KonnectorIcon konnector={konn} className="u-mah-3 u-ml-1" />
         </ModalHeader>
@@ -153,7 +154,7 @@ export class TwoFAModal extends PureComponent {
             ) : null}
           </form>
         </ModalDescription>
-      </Modal>
+      </Dialog>
     )
   }
 }

@@ -6,7 +6,6 @@ import KonnectorModalHeader from './KonnectorModalHeader'
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import Modal, { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Card from 'cozy-ui/transpiled/react/Card'
 import {
   Tabs,
@@ -19,6 +18,9 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import withLocales from './hoc/withLocales'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
+
+import { Dialog, DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
+import DialogContent from '@material-ui/core/DialogContent'
 
 const createDummyKonnectorFromAccount = account => {
   return {
@@ -48,13 +50,15 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab)
 
   return (
-    <Modal
+    <Dialog
       aria-label={t('modal.aria-label')}
       mobileFullscreen={true}
-      dismissAction={onClose}
+      onClose={onClose}
+      open={true}
     >
+      <DialogCloseButton onClick={onClose} />
       <KonnectorModalHeader konnector={konnectorRef.current} />
-      <ModalContent className={isMobile ? 'u-p-0' : null}>
+      <DialogContent className={isMobile ? 'u-p-0' : null}>
         <Tabs initialActiveTab={initialActiveTab}>
           <TabList>
             <Tab onClick={() => setActiveTab('data')} name="data">
@@ -68,24 +72,24 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
             </Tab>
           </TabList>
         </Tabs>
-      </ModalContent>
+      </DialogContent>
       <TabPanels activeTab={activeTab}>
         <TabPanel name="data" className="u-pt-1">
-          <ModalContent>
+          <DialogContent>
             <Card>{t('disconnectedAccountModal.disconnected-help')}</Card>
-          </ModalContent>
+          </DialogContent>
         </TabPanel>
         <TabPanel name="configuration">
           {accounts.length ? (
-            <ModalContent className={isMobile ? 'u-ph-0' : 'u-pt-1-half'}>
+            <DialogContent className={isMobile ? 'u-ph-0' : 'u-pt-1-half'}>
               <Contracts contracts={accounts} />
-            </ModalContent>
+            </DialogContent>
           ) : (
             t('contracts.no-contracts')
           )}
         </TabPanel>
       </TabPanels>
-    </Modal>
+    </Dialog>
   )
 }
 
