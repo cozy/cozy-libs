@@ -25,8 +25,6 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
     path
   )
 
-  if (fetchStatus !== 'loaded') return null
-
   return (
     <Card>
       <Stack>
@@ -44,7 +42,7 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
         <AppLinker slug={slug} nativePath={path} href={url}>
           {({ onClick, href }) => (
             <ButtonLink
-              onClick={onClick}
+              onClick={fetchStatus !== 'loaded' ? onClick : null}
               href={href}
               icon={
                 isInstalled ? (
