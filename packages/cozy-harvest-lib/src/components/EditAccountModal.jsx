@@ -1,15 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
 
 import get from 'lodash/get'
 import flow from 'lodash/flow'
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Modal, {
-  ModalContent,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
@@ -17,6 +15,60 @@ import TriggerManager from './TriggerManager'
 import { withMountPointPushHistory } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
+
+import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import {
+  DialogCloseButton,
+  useCozyDialog
+} from 'cozy-ui/transpiled/react/CozyDialogs'
+import DialogContent from '@material-ui/core/DialogContent'
+
+const DumbEditAccountModal = ({
+  konnector,
+  account,
+  trigger,
+  fetching,
+  redirectToAccount
+}) => {
+  const { dialogProps, dialogTitleProps } = useCozyDialog({
+    open: true,
+    size: 'm',
+    onClose: redirectToAccount
+  })
+  return (
+    <Dialog
+      aria-label={konnector.name}
+      {...dialogProps}
+      onClose={redirectToAccount}
+    >
+      <DialogCloseButton onClick={redirectToAccount} />
+      <DialogTitle
+        {...dialogTitleProps}
+        className={cx(dialogTitleProps.className, 'u-flex u-flex-items-center')}
+        disableTypography
+      >
+        <CipherIcon konnector={konnector.slug} className="u-mr-1" />
+        <Typography variant="h5">{konnector.name}</Typography>
+      </DialogTitle>
+      <DialogContent className="u-pt-0">
+        {fetching ? (
+          <div className="u-pv-2 u-ta-center">
+            <Spinner size="xxlarge" />
+          </div>
+        ) : (
+          <TriggerManager
+            account={account}
+            konnector={konnector}
+            initialTrigger={trigger}
+            onSuccess={redirectToAccount}
+            showError={true}
+            onVaultDismiss={redirectToAccount}
+          />
+        )}
+      </DialogContent>
+    </Dialog>
+  )
+}
 
 export class EditAccountModal extends Component {
   constructor(props) {
@@ -97,37 +149,13 @@ export class EditAccountModal extends Component {
     const { konnector } = this.props
     const { trigger, account, fetching } = this.state
     return (
-      <Modal
-        dismissAction={this.redirectToAccount}
-        mobileFullscreen
-        size="small"
-        aria-label={konnector.name}
-      >
-        <ModalHeader
-          title={
-            <div className="u-flex u-flex-items-center">
-              <CipherIcon konnector={konnector.slug} className="u-mr-1" />
-              {konnector.name}
-            </div>
-          }
-        />
-        <ModalContent>
-          {fetching ? (
-            <div className="u-pv-2 u-ta-center">
-              <Spinner size="xxlarge" />
-            </div>
-          ) : (
-            <TriggerManager
-              account={account}
-              konnector={konnector}
-              initialTrigger={trigger}
-              onSuccess={this.redirectToAccount}
-              showError={true}
-              onVaultDismiss={this.redirectToAccount}
-            />
-          )}
-        </ModalContent>
-      </Modal>
+      <DumbEditAccountModal
+        konnector={konnector}
+        account={account}
+        trigger={trigger}
+        fetching={fetching}
+        redirectToAccount={this.redirectToAccount}
+      />
     )
   }
 }

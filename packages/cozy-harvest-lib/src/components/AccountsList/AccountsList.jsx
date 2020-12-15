@@ -9,36 +9,39 @@ import AccountsListItem from './AccountsListItem'
 
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 
 export class AccountsList extends React.PureComponent {
   render() {
     const { accounts, konnector, addAccount, onPick, t } = this.props
 
     return (
-      <ul className="u-nolist u-p-0 u-m-0">
-        {accounts.map((account, index) => (
-          <li key={index} className="u-mb-half">
-            <AccountsListItem
-              account={account.account}
-              konnector={konnector}
-              trigger={account.trigger}
-              onClick={() => onPick(account)}
-            />
+      <DialogContent className="u-pb-2 u-pt-0 u-ph-0">
+        <ul className="u-nolist u-p-0 u-m-0">
+          {accounts.map((account, index) => (
+            <li key={index} className="u-mb-half">
+              <AccountsListItem
+                account={account.account}
+                konnector={konnector}
+                trigger={account.trigger}
+                onClick={() => onPick(account)}
+              />
+            </li>
+          ))}
+          <li className="u-mb-half">
+            <Card className="u-p-0">
+              <Button
+                label={t('modal.addAccount.button')}
+                theme="text"
+                extension="full"
+                icon={<Icon icon={PlusIcon} />}
+                className="u-bdrs-4"
+                onClick={addAccount}
+              />
+            </Card>
           </li>
-        ))}
-        <li className="u-mb-half">
-          <Card className="u-p-0">
-            <Button
-              label={t('modal.addAccount.button')}
-              theme="text"
-              extension="full"
-              icon={<Icon icon={PlusIcon} />}
-              className="u-bdrs-4"
-              onClick={addAccount}
-            />
-          </Card>
-        </li>
-      </ul>
+        </ul>
+      </DialogContent>
     )
   }
 }

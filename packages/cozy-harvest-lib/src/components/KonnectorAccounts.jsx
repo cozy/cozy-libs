@@ -6,17 +6,17 @@ import { withRouter } from 'react-router'
 
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Bold from 'cozy-ui/transpiled/react/Text'
 import CozyRealtime from 'cozy-realtime'
-
 import { fetchAccountsFromTriggers } from '../connections/accounts'
+
 import { fetchTrigger } from '../connections/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import logger from '../../src/logger'
+import DialogContent from '@material-ui/core/DialogContent'
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
@@ -122,7 +122,7 @@ export class KonnectorAccounts extends React.Component {
           <KonnectorModalHeader konnector={konnector} />
         )}
         {error && (
-          <ModalContent>
+          <DialogContent className="u-pb-2">
             <Infos
               actionButton={
                 <Button
@@ -136,16 +136,16 @@ export class KonnectorAccounts extends React.Component {
               icon="warning"
               isImportant
             />
-          </ModalContent>
+          </DialogContent>
         )}
         {fetchingAccounts && (
-          <ModalContent>
+          <DialogContent className="u-pb-2">
             <div className="u-pv-2 u-ta-center">
               <Spinner size="xxlarge" />
             </div>
-          </ModalContent>
+          </DialogContent>
         )}
-        {!error && !fetchingAccounts && this.props.children(accounts)}
+        {!error && !fetchingAccounts ? this.props.children(accounts) : null}
       </>
     )
   }

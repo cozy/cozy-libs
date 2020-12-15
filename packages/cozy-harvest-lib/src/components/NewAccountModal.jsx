@@ -1,19 +1,21 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { withClient } from 'cozy-client'
+import cx from 'classnames'
+import { useClient } from 'cozy-client'
 
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Stack from 'cozy-ui/transpiled/react/Stack'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import flow from 'lodash/flow'
-
 import TriggerManager from '../components/TriggerManager'
+
 import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
 import { MountPointContext } from './MountPointContext'
+import DialogContent from '@material-ui/core/DialogContent'
+import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import { useDialogContext } from './DialogContext'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  * We need to deal with `onLoginSuccess` and `onSucess` because we
@@ -21,7 +23,9 @@ import { MountPointContext } from './MountPointContext'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, client, onDismiss, t }) => {
+const NewAccountModal = ({ konnector, onDismiss }) => {
+  const { t } = useI18n()
+  const client = useClient()
   const { pushHistory } = useContext(MountPointContext)
   const {
     fetchStatus,
@@ -30,40 +34,48 @@ const NewAccountModal = ({ konnector, client, onDismiss, t }) => {
   const isMaintenanceLoaded =
     fetchStatus === 'loaded' || fetchStatus === 'failed'
 
+  const { dialogTitleProps } = useDialogContext()
   return (
     <>
-      <ModalContent className="u-mh-2">
-        <Stack className="u-mb-3">
-          <div className="u-w-3 u-h-3 u-mh-auto">
-            <KonnectorIcon konnector={konnector} />
-          </div>
-          <h3 className="u-title-h3 u-ta-center">
+      <DialogTitle
+        {...dialogTitleProps}
+        className={cx(
+          dialogTitleProps.className,
+          'u-ta-center u-stack-m u-pb-1'
+        )}
+        disableTypography
+      >
+        <KonnectorIcon className="u-w-3 u-h-3" konnector={konnector} />
+        <div>
+          <Typography variant="h5">
             {t('modal.addAccount.title', { name: konnector.name })}
-          </h3>
-        </Stack>
-        {!isMaintenanceLoaded && (
-          <div className="u-ta-center">
-            <Spinner size="xxlarge" />
-          </div>
-        )}
-        {isMaintenanceLoaded && isInMaintenance && (
-          <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
-        )}
-        {isMaintenanceLoaded && !isInMaintenance && (
-          <TriggerManager
-            konnector={konnector}
-            onLoginSuccess={trigger => {
-              const accountId = triggersModel.getAccountId(trigger)
-              pushHistory(`/accounts/${accountId}/success`)
-            }}
-            onSuccess={trigger => {
-              const accountId = triggersModel.getAccountId(trigger)
-              pushHistory(`/accounts/${accountId}/success`)
-            }}
-            onVaultDismiss={onDismiss}
-          />
-        )}
-      </ModalContent>
+          </Typography>
+        </div>
+      </DialogTitle>
+      {!isMaintenanceLoaded ? (
+        <DialogContent className="u-ta-center u-pt-1 u-pb-3">
+          <Spinner size="xxlarge" />
+        </DialogContent>
+      ) : (
+        <DialogContent className="u-pt-0">
+          {isInMaintenance ? (
+            <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
+          ) : (
+            <TriggerManager
+              konnector={konnector}
+              onLoginSuccess={trigger => {
+                const accountId = triggersModel.getAccountId(trigger)
+                pushHistory(`/accounts/${accountId}/success`)
+              }}
+              onSuccess={trigger => {
+                const accountId = triggersModel.getAccountId(trigger)
+                pushHistory(`/accounts/${accountId}/success`)
+              }}
+              onVaultDismiss={onDismiss}
+            />
+          )}
+        </DialogContent>
+      )}
     </>
   )
 }
@@ -72,7 +84,4 @@ NewAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired
 }
 
-export default flow(
-  translate(),
-  withClient
-)(NewAccountModal)
+export default NewAccountModal
