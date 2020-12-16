@@ -187,3 +187,22 @@ export const fetchAccountsFromTriggers = async (client, triggers) => {
     .filter(Boolean)
     .map(account => ({ account, trigger: accountIdToTrigger[account._id] }))
 }
+
+/**
+ * Returns the list of accounts which do not have any associated trigger
+ *
+ * @param  {Object}  client  CozyClient
+ * @param  {Array}  triggers io.cozy.triggers documents
+ */
+export const fetchAccountsWithoutTriggers = async (client, triggers) => {
+  const triggerAccountIds = triggers.map(trigger =>
+    triggersModel.getAccountId(trigger)
+  )
+  return (await client.query(
+    Q(ACCOUNTS_DOCTYPE).where({
+      _id: {
+        $nin: triggerAccountIds
+      }
+    })
+  )).data
+}
