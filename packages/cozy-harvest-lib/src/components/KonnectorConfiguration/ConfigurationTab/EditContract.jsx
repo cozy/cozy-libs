@@ -23,7 +23,7 @@ import Dialog, {
   DialogContent,
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
-import { CardDivider as Divider } from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
