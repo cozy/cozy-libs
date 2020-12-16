@@ -4,7 +4,6 @@ import { withClient } from 'cozy-client'
 
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
 
 import * as konnectorsModel from '../../../helpers/konnectors'
 import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'

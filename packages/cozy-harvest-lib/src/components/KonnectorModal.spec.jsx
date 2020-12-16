@@ -7,9 +7,13 @@ import { KonnectorModal } from 'components/KonnectorModal'
 import { fetchAccount } from 'connections/accounts'
 import AppLike from '../../test/AppLike'
 
-jest.mock('./KonnectorConfiguration/ConfigurationTab/index', () => () => (
-  <p>ConfigurationTab</p>
-))
+jest.mock(
+  './KonnectorConfiguration/ConfigurationTab/index',
+  () =>
+    function ConfigurationTab() {
+      return <p>ConfigurationTab</p>
+    }
+)
 jest.mock('connections/accounts', () => ({
   fetchAccount: jest.fn()
 }))
