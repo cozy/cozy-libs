@@ -19,7 +19,11 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import withLocales from './hoc/withLocales'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
 
-import { Dialog, DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
+import {
+  useCozyDialog,
+  DialogCloseButton
+} from 'cozy-ui/transpiled/react/CozyDialogs'
 import DialogContent from '@material-ui/core/DialogContent'
 
 const createDummyKonnectorFromAccount = account => {
@@ -49,13 +53,9 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
 
   const [activeTab, setActiveTab] = useState(initialActiveTab)
 
+  const { dialogProps } = useCozyDialog({ onClose, open: true })
   return (
-    <Dialog
-      aria-label={t('modal.aria-label')}
-      mobileFullscreen={true}
-      onClose={onClose}
-      open={true}
-    >
+    <Dialog aria-label={t('modal.aria-label')} {...dialogProps}>
       <DialogCloseButton onClick={onClose} />
       <KonnectorModalHeader konnector={konnectorRef.current} />
       <DialogContent className={isMobile ? 'u-p-0' : null}>

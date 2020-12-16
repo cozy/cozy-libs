@@ -10,7 +10,10 @@ describe('DisconnectedAccountModal', () => {
     const mockClient = {}
     const root = render(
       <AppLike client={mockClient}>
-        <DisconnectedAccountModal accounts={[bankAccounts]} />
+        <DisconnectedAccountModal
+          accounts={[bankAccounts]}
+          onClose={jest.fn()}
+        />
       </AppLike>
     )
     return { root }
