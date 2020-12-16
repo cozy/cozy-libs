@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.31.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.30.0...cozy-harvest-lib@2.31.0) (2020-12-16)
+
+
+### Bug Fixes
+
+* **Harvest:** Use client.queryAll ([d269f5a](https://github.com/cozy/cozy-libs/commit/d269f5a))
+
+
+### Features
+
+* **Harvest:** Reuse unlinked accounts ([79973d1](https://github.com/cozy/cozy-libs/commit/79973d1))
+
+
+
+
+
 # [2.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.29.5...cozy-harvest-lib@2.30.0) (2020-12-15)
 
 
