@@ -104,7 +104,7 @@ export const createOrUpdateAccount = async ({
     const triggers = await client.collection('io.cozy.triggers').all()
     const accountsWithoutTrigger = await fetchAccountsWithoutTriggers(
       client,
-      triggers
+      triggers.data
     )
     const rescuableAccount = accounts.getRescuableAccount(
       accountsWithoutTrigger,
@@ -140,7 +140,6 @@ export const createOrUpdateAccount = async ({
       'No cipher passed when creating/updating account, account will not be linked to cipher'
     )
   }
-
   return await saveAccount(client, konnector, accountToSave)
 }
 
