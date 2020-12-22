@@ -89,7 +89,9 @@ const mockVaultClient = {
 const setup = ({ trigger } = {}) => {
   const client = {
     collection: jest.fn().mockReturnValue({
-      all: jest.fn()
+      all: jest.fn().mockReturnValue({
+        data: []
+      })
     })
   }
   const flow = new ConnectionFlow(client, trigger)
