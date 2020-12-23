@@ -5203,10 +5203,10 @@ cozy-interapp@0.5.4:
   resolved "https://registry.yarnpkg.com/cozy-interapp/-/cozy-interapp-0.5.4.tgz#2573f1800f073c84c289267d04234954d88eae0c"
   integrity sha512-f0UaKpBkRUnIKgAWND0e1IwfTTINjizlgDmfQwX3aMyWp8t9wX0xkNFn53TSyKUoBUnfovrclS3hm9fngjEp7A==
 
-cozy-keys-lib@^3.1.2:
-  version "3.1.2"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.1.2.tgz#524b4360d8e6008c3f234aeb9bd9730f1d2276fc"
-  integrity sha512-AgCO7otBoUvNs5lYWZquXm/YItM3Go+WseeFx99e6KuYs4219cSlEjzNyHgIGythfXRiBlQjWVuZaK4t/yvaPQ==
+cozy-keys-lib@^3.3.0:
+  version "3.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.3.0.tgz#888a6918cdd148dc22dc9269165b1fdf78019001"
+  integrity sha512-hk4/jTV7XTJLJeyTg9cIHkFb3g79YEGoeLudH7O9yRQ6LSlfpFt4zAkRQoKquiCjmGTJ+lMz3+WM6NwvKnYhnQ==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
@@ -11009,6 +11009,12 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
+
+"minilog@git+https://github.com/cozy/minilog.git#master":
+  version "3.1.0"
+  resolved "git+https://github.com/cozy/minilog.git#6da0aa58759c4f1a1a7e0fd093dbe2a67c035c55"
+  dependencies:
+    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
