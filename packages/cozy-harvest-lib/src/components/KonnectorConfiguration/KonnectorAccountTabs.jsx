@@ -11,6 +11,7 @@ import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 import tabSpecs from './tabSpecs'
+import HarvestVaultProvider from '../HarvestVaultProvider'
 
 const WarningError = () => {
   const { t } = useI18n()
@@ -95,14 +96,16 @@ const DumbKonnectorAccountTabs = props => {
           <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
         )}
         {tab === 1 && (
-          <ConfigurationTab
-            konnector={konnector}
-            account={account}
-            flow={flow}
-            addAccount={addAccount}
-            onAccountDeleted={onAccountDeleted}
-            showNewAccountButton={showNewAccountButton}
-          />
+          <HarvestVaultProvider>
+            <ConfigurationTab
+              konnector={konnector}
+              account={account}
+              flow={flow}
+              addAccount={addAccount}
+              onAccountDeleted={onAccountDeleted}
+              showNewAccountButton={showNewAccountButton}
+            />
+          </HarvestVaultProvider>
         )}
       </div>
     </>

@@ -12,6 +12,23 @@ jest.mock('../../../connections/accounts', () => ({
   deleteAccount: jest.fn()
 }))
 
+jest.mock('../../../models/cipherUtils', () => ({
+  unshareCipher: jest.fn()
+}))
+
+jest.mock('cozy-keys-lib', () => ({
+  useVaultClient: jest.fn(),
+  withVaultClient: jest.fn().mockReturnValue({
+    displayName: 'withVault'
+  }),
+  CozyUtils: {
+    checkHasInstalledExtension: jest.fn()
+  },
+  VaultUnlocker: jest.fn().mockReturnValue({
+    render: jest.fn().mockReturnValue(null)
+  })
+}))
+
 describe('ConfigurationTab', () => {
   let originalWarn
   beforeEach(() => {

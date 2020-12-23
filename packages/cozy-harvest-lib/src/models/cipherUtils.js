@@ -53,6 +53,25 @@ export const shareCipherWithCozy = async (vaultClient, cipherId) => {
 }
 
 /**
+ * Unshare a cipher from the cozy org
+ *
+ * @param {object} vaultClient - The vault instance
+ * @param {object} account - The account linked to the cipher
+ */
+export const unshareCipher = async (vaultClient, account) => {
+  const cipherId = accounts.getVaultCipherId(account)
+  if (!cipherId) {
+    return
+  }
+  const encryptedOrgCipher = await vaultClient.get(cipherId)
+  const cipher = await vaultClient.decrypt(encryptedOrgCipher)
+  // The cipher is automatically re-encrypted in end-to-end if there is no org
+  delete cipher.organizationId
+  const encryptedCipher = await vaultClient.encrypt(cipher)
+  await vaultClient.saveCipher(encryptedCipher)
+}
+
+/**
  * Update a cipher with provided identifier and password
  *
  * @param {string} cipherId - uuid of a cipher
