@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.32.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.31.0...cozy-harvest-lib@2.32.0) (2020-12-23)
+
+
+### Bug Fixes
+
+* Use data object from query ([5e324d2](https://github.com/cozy/cozy-libs/commit/5e324d2))
+* Wrap HarvestVaultProvider in highest level ([4cbe0f6](https://github.com/cozy/cozy-libs/commit/4cbe0f6))
+
+
+### Features
+
+* Unshare ciphers when after account delete ([dc675f7](https://github.com/cozy/cozy-libs/commit/dc675f7))
+
+
+
+
+
 # [2.31.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.30.0...cozy-harvest-lib@2.31.0) (2020-12-16)
 
 
