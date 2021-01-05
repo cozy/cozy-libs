@@ -5,14 +5,11 @@ import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Infos from 'cozy-ui/transpiled/react/Infos'
-import Modal, {
-  ModalContent,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 
 import { fetchTrigger } from '../connections/triggers'
@@ -25,6 +22,147 @@ import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
+
+import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import {
+  useCozyDialog,
+  DialogCloseButton
+} from 'cozy-ui/transpiled/react/CozyDialogs'
+import DialogContent from '@material-ui/core/DialogContent'
+
+const DumbKonnectorDialog = ({
+  dismissAction,
+  konnector,
+  addingAccount,
+  account,
+  accountsAndTriggers,
+  requestAccountCreation,
+  requestAccountChange,
+  content
+}) => {
+  const { t } = useI18n()
+  const { dialogProps, dialogTitleProps } = useCozyDialog({
+    size: 'medium',
+    open: true,
+    onClose: dismissAction
+  })
+  return (
+    <Dialog {...dialogProps}>
+      <DialogCloseButton onClick={dismissAction} />
+      <DialogTitle {...dialogTitleProps}>
+        <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
+          <div className="u-w-3 u-h-3 u-mr-half">
+            <AppIcon />
+          </div>
+          <div className="u-flex-grow-1 u-mr-half">
+            <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
+
+            {accountsAndTriggers.length > 0 && account && !addingAccount && (
+              <AccountSelectBox
+                selectedAccount={account}
+                accountsAndTriggers={accountsAndTriggers}
+                onChange={option => {
+                  requestAccountChange(option.account, option.trigger)
+                }}
+                onCreate={requestAccountCreation}
+              />
+            )}
+          </div>
+          <Button
+            icon={<Icon icon={CrossIcon} size={'24'} />}
+            onClick={dismissAction}
+            iconOnly
+            label={t('close')}
+            subtle
+            theme={'secondary'}
+          />
+        </div>
+      </DialogTitle>
+      <DialogContent>{content}</DialogContent>
+    </Dialog>
+  )
+}
+
+const DumbKonnectorDialogContent = props => {
+  const { t } = useI18n()
+  const {
+    dismissAction,
+    konnector,
+    account,
+    accountsAndTriggers,
+    error,
+    fetching,
+    fetchingAccounts,
+    trigger,
+    addingAccount,
+    requestAccountCreation,
+    requestAccountChange,
+    refetchTrigger,
+    endAccountCreation
+  } = props
+
+  if (fetching || fetchingAccounts) {
+    return (
+      <Spinner size="xxlarge" className="u-flex u-flex-justify-center u-pv-3" />
+    )
+  } else if (error) {
+    return (
+      <Infos
+        theme="danger"
+        description={
+          <>
+            <Typography variant="h5">
+              {t('modal.konnector.error.title')}
+            </Typography>
+            <Typography variant="body1">
+              {t('modal.konnector.error.description', error)}
+            </Typography>
+          </>
+        }
+        action={
+          <Button theme="danger" label={t('modal.konnector.error.button')} />
+        }
+      />
+    )
+  } else if (addingAccount) {
+    return (
+      <div className="u-pt-1-half">
+        <TriggerManager
+          konnector={konnector}
+          onLoginSuccess={endAccountCreation}
+          onSuccess={endAccountCreation}
+        />
+      </div>
+    )
+  } else if (!account) {
+    return (
+      <>
+        {konnectorsModel.hasNewVersionAvailable(konnector) && (
+          <KonnectorUpdateInfos className="u-mb-1" konnector={konnector} />
+        )}
+        <AccountsList
+          accounts={accountsAndTriggers}
+          konnector={konnector}
+          onPick={option => {
+            requestAccountChange(option.account, option.trigger)
+          }}
+          addAccount={requestAccountCreation}
+        />
+      </>
+    )
+  } else {
+    return (
+      <KonnectorAccountTabs
+        konnector={konnector}
+        initialTrigger={trigger}
+        account={account}
+        onAccountDeleted={dismissAction}
+        addAccount={requestAccountCreation}
+        refetchTrigger={refetchTrigger}
+      />
+    )
+  }
+}
 
 /**
  * KonnectorModal can be completely standalone and will use it's internal
@@ -45,7 +183,6 @@ export class KonnectorModal extends PureComponent {
 
   constructor(props) {
     super(props)
-    this.fetchIcon = this.fetchIcon.bind(this)
     this.refetchTrigger = this.refetchTrigger.bind(this)
     this.requestAccountChange = this.requestAccountChange.bind(this)
     this.requestAccountCreation = this.requestAccountCreation.bind(this)
@@ -67,21 +204,6 @@ export class KonnectorModal extends PureComponent {
     }
   }
 
-  componentWillUnmount() {
-    const { into } = this.props
-    if (!into || into === 'body') return
-    // The Modal is never closed after a dismiss on Preact apps, even if it is
-    // not rendered anymore. The best hack we found is to explicitly empty the
-    // modal portal container.
-    setTimeout(() => {
-      try {
-        const modalRoot = document.querySelector(into)
-        modalRoot.innerHTML = ''
-        // eslint-disable-next-line no-empty
-      } catch (error) {}
-    }, 50)
-  }
-
   componentDidUpdate(prevProps) {
     if (this.props.accountId && this.props.accountId !== prevProps.accountId) {
       this.loadSelectedAccountId()
@@ -89,7 +211,9 @@ export class KonnectorModal extends PureComponent {
   }
 
   requestAccountChange(account, trigger) {
-    // This component can either defer the account switching to a parent component through the onAccountChange prop, or handle the change itself if the prop is missing
+    // This component can either defer the account switching to a parent component
+    // through the onAccountChange prop, or handle the change itself if the prop
+    // is missing
     const { onAccountChange } = this.props
     return onAccountChange
       ? onAccountChange(account)
@@ -186,15 +310,6 @@ export class KonnectorModal extends PureComponent {
     }
   }
 
-  fetchIcon() {
-    const { client } = this.context
-    const { konnector } = this.props
-    return client.stackClient.getIconURL({
-      type: 'konnector',
-      slug: konnector.slug
-    })
-  }
-
   async refetchTrigger() {
     const { client } = this.props
     const { trigger } = this.state
@@ -206,120 +321,43 @@ export class KonnectorModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, konnector, into, t } = this.props
-    const { account, accountsAndTriggers, addingAccount } = this.state
-
-    return (
-      <Modal
-        dismissAction={dismissAction}
-        mobileFullscreen
-        size="small"
-        into={into}
-        closable={false}
-        aria-label={t('modal.aria-label')}
-      >
-        <ModalHeader className="u-pr-2">
-          <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
-            <div className="u-w-3 u-h-3 u-mr-half">
-              <AppIcon fetchIcon={this.fetchIcon} />
-            </div>
-            <div className="u-flex-grow-1 u-mr-half">
-              <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
-
-              {accountsAndTriggers.length > 0 && account && !addingAccount && (
-                <AccountSelectBox
-                  selectedAccount={account}
-                  accountsAndTriggers={accountsAndTriggers}
-                  onChange={option => {
-                    this.requestAccountChange(option.account, option.trigger)
-                  }}
-                  onCreate={this.requestAccountCreation}
-                />
-              )}
-            </div>
-            <Button
-              icon={<Icon icon={CrossIcon} size={'24'} />}
-              onClick={dismissAction}
-              iconOnly
-              label={t('close')}
-              subtle
-              theme={'secondary'}
-            />
-          </div>
-        </ModalHeader>
-        <ModalContent>{this.renderModalContent()}</ModalContent>
-      </Modal>
-    )
-  }
-
-  renderModalContent() {
-    const { dismissAction, konnector, t } = this.props
+    const { dismissAction, konnector } = this.props
     const {
       account,
       accountsAndTriggers,
-      error,
+      addingAccount,
       fetching,
-      fetchingAccounts,
-      trigger,
-      addingAccount
+      error,
+      trigger
     } = this.state
 
-    if (fetching || fetchingAccounts) {
-      return (
-        <Spinner
-          size="xxlarge"
-          className="u-flex u-flex-justify-center u-pv-3"
-        />
-      )
-    } else if (error) {
-      return (
-        <Infos
-          actionButton={
-            <Button theme="danger">{t('modal.konnector.error.button')}</Button>
-          }
-          title={t('modal.konnector.error.title')}
-          text={t('modal.konnector.error.description', error)}
-          isImportant
-        />
-      )
-    } else if (addingAccount) {
-      return (
-        <div className="u-pt-1-half">
-          <TriggerManager
+    return (
+      <DumbKonnectorDialog
+        dismissAction={dismissAction}
+        konnector={konnector}
+        account={account}
+        accountsAndTriggers={accountsAndTriggers}
+        addingAccount={addingAccount}
+        requestAccountCreation={this.requestAccountCreation}
+        requestAccountChange={this.requestAccountChange}
+        content={
+          <DumbKonnectorDialogContent
+            dismissAction={dismissAction}
             konnector={konnector}
-            onLoginSuccess={this.endAccountCreation}
-            onSuccess={this.endAccountCreation}
+            account={account}
+            accountsAndTriggers={accountsAndTriggers}
+            addingAccount={addingAccount}
+            error={error}
+            fetching={fetching}
+            trigger={trigger}
+            requestAccountCreation={this.requestAccountCreation}
+            requestAccountChange={this.requestAccountChange}
+            refetchTrigger={this.refetchTrigger}
+            endAccountCreation={this.endAccountCreation}
           />
-        </div>
-      )
-    } else if (!account) {
-      return (
-        <>
-          {konnectorsModel.hasNewVersionAvailable(konnector) && (
-            <KonnectorUpdateInfos className="u-mb-1" konnector={konnector} />
-          )}
-          <AccountsList
-            accounts={accountsAndTriggers}
-            konnector={konnector}
-            onPick={option => {
-              this.requestAccountChange(option.account, option.trigger)
-            }}
-            addAccount={this.requestAccountCreation}
-          />
-        </>
-      )
-    } else {
-      return (
-        <KonnectorAccountTabs
-          konnector={konnector}
-          initialTrigger={trigger}
-          account={account}
-          onAccountDeleted={dismissAction}
-          addAccount={this.requestAccountCreation}
-          refetchTrigger={this.refetchTrigger}
-        />
-      )
-    }
+        }
+      />
+    )
   }
 }
 
@@ -335,12 +373,7 @@ KonnectorModal.propTypes = {
   }).isRequired,
   dismissAction: PropTypes.func.isRequired,
   createAction: PropTypes.func,
-  onAccountChange: PropTypes.func,
-  t: PropTypes.func.isRequired
+  onAccountChange: PropTypes.func
 }
 
-KonnectorModal.defaultProps = {
-  into: 'body'
-}
-
-export default withClient(translate()(KonnectorModal))
+export default withClient(KonnectorModal)

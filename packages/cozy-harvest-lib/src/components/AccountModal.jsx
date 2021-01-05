@@ -5,7 +5,6 @@ import get from 'lodash/get'
 import flow from 'lodash/flow'
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
@@ -18,6 +17,7 @@ import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointPushHistory } from './MountPointContext'
 import withLocales from './hoc/withLocales'
+import DialogContent from '@material-ui/core/DialogContent'
 
 /**
  * AccountModal take an accountId and a list of accounts containing their
@@ -133,30 +133,32 @@ export class AccountModal extends Component {
             />
           ) : null}
         </KonnectorModalHeader>
-        <ModalContent>
-          {error && (
-            <Infos
-              actionButton={
-                <Button
-                  theme="danger"
-                  onClick={this.loadSelectedAccountId.bind(this)}
-                  label={t('modal.konnector.error.button')}
-                />
-              }
-              title={t('modal.konnector.error.title')}
-              text={t('modal.konnector.error.description', error)}
-              icon="warning"
-              isImportant
-            />
-          )}
-          {fetching && (
-            <div className="u-ta-center">
-              <Spinner size="xxlarge" />
-            </div>
-          )}
-        </ModalContent>
+        {error || fetching ? (
+          <DialogContent className="u-pb-2">
+            {error && (
+              <Infos
+                actionButton={
+                  <Button
+                    theme="danger"
+                    onClick={this.loadSelectedAccountId.bind(this)}
+                    label={t('modal.konnector.error.button')}
+                  />
+                }
+                title={t('modal.konnector.error.title')}
+                text={t('modal.konnector.error.description', error)}
+                icon="warning"
+                isImportant
+              />
+            )}
+            {fetching && (
+              <div className="u-ta-center">
+                <Spinner size="xxlarge" />
+              </div>
+            )}
+          </DialogContent>
+        ) : null}
         {!error && !fetching && (
-          <ModalContent className={isMobile ? 'u-p-0' : null}>
+          <DialogContent className={isMobile ? 'u-p-0' : 'u-pt-0'}>
             <KonnectorAccountTabs
               initialActiveTab={initialActiveTab}
               konnector={konnector}
@@ -166,7 +168,7 @@ export class AccountModal extends Component {
               addAccount={() => pushHistory('/new')}
               showNewAccountButton={showNewAccountButton}
             />
-          </ModalContent>
+          </DialogContent>
         )}
       </>
     )

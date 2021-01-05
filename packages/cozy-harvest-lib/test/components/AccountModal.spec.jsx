@@ -83,7 +83,7 @@ describe('AccountModal', () => {
       expect(component.getElement()).toMatchSnapshot()
     })
 
-    it('should redirect toi the correct locations', async () => {
+    it('should redirect to the correct locations', async () => {
       await component.instance().componentDidMount()
 
       component.find('AccountSelectBox').prop('onChange')({
@@ -94,11 +94,8 @@ describe('AccountModal', () => {
       component.find('AccountSelectBox').prop('onCreate')()
       expect(mockHistoryPush).toHaveBeenCalledWith('/new')
 
-      const konnectorAccountTabs = component
-        .find('ModalContent')
-        .at(1)
-        .childAt(0)
-      konnectorAccountTabs.prop('addAccount')()
+      const accountTabs = component.find('KonnectorAccountTabs')
+      accountTabs.prop('addAccount')()
       expect(mockHistoryPush).toHaveBeenCalledWith('/new')
     })
   })

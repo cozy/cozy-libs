@@ -1,76 +1,85 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountsList should render 1`] = `
-<ul
-  className="u-nolist u-p-0 u-m-0"
+<DialogContent
+  className="u-pb-2 u-pt-0 u-ph-0"
+  classes={
+    Object {
+      "root": "MuiDialogContent-root-1",
+    }
+  }
 >
-  <li
-    className="u-mb-half"
+  <ul
+    className="u-nolist u-p-0 u-m-0"
   >
-    <AccountsListItem
-      account={
-        Object {
-          "_id": "account-1",
-        }
-      }
-      konnector={
-        Object {
-          "name": "test-konnector",
-          "vendor_link": "test konnector link",
-        }
-      }
-      onClick={[Function]}
-      trigger={
-        Object {
-          "_id": "trigger-1",
-        }
-      }
-    />
-  </li>
-  <li
-    className="u-mb-half"
-  >
-    <AccountsListItem
-      account={
-        Object {
-          "_id": "account-2",
-        }
-      }
-      konnector={
-        Object {
-          "name": "test-konnector",
-          "vendor_link": "test konnector link",
-        }
-      }
-      onClick={[Function]}
-      trigger={
-        Object {
-          "_id": "trigger-2",
-        }
-      }
-    />
-  </li>
-  <li
-    className="u-mb-half"
-  >
-    <Card
-      className="u-p-0"
-      tag="div"
+    <li
+      className="u-mb-half"
     >
-      <DefaultButton
-        className="u-bdrs-4"
-        extension="full"
-        icon={
-          <Icon
-            icon={[Function]}
-            spin={false}
-          />
+      <AccountsListItem
+        account={
+          Object {
+            "_id": "account-1",
+          }
         }
-        label="modal.addAccount.button"
-        onClick={[MockFunction]}
-        theme="text"
+        konnector={
+          Object {
+            "name": "test-konnector",
+            "vendor_link": "test konnector link",
+          }
+        }
+        onClick={[Function]}
+        trigger={
+          Object {
+            "_id": "trigger-1",
+          }
+        }
       />
-    </Card>
-  </li>
-</ul>
+    </li>
+    <li
+      className="u-mb-half"
+    >
+      <AccountsListItem
+        account={
+          Object {
+            "_id": "account-2",
+          }
+        }
+        konnector={
+          Object {
+            "name": "test-konnector",
+            "vendor_link": "test konnector link",
+          }
+        }
+        onClick={[Function]}
+        trigger={
+          Object {
+            "_id": "trigger-2",
+          }
+        }
+      />
+    </li>
+    <li
+      className="u-mb-half"
+    >
+      <Card
+        className="u-p-0"
+        tag="div"
+      >
+        <DefaultButton
+          className="u-bdrs-4"
+          extension="full"
+          icon={
+            <Icon
+              icon={[Function]}
+              spin={false}
+            />
+          }
+          label="modal.addAccount.button"
+          onClick={[MockFunction]}
+          theme="text"
+        />
+      </Card>
+    </li>
+  </ul>
+</DialogContent>
 `;

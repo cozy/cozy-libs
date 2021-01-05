@@ -1,10 +1,6 @@
 import React, { PureComponent } from 'react'
 import compose from 'lodash/flowRight'
-import Modal, {
-  ModalDescription,
-  ModalHeader
-} from 'cozy-ui/transpiled/react/Modal'
-import Text, { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Field from 'cozy-ui/transpiled/react/Field'
@@ -19,6 +15,8 @@ import accounts, {
 } from '../helpers/accounts'
 
 import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/ConnectionFlow'
+
+import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 /**
  * Displayed during connection creation when the konnector detects
@@ -83,8 +81,7 @@ export class TwoFAModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, t, breakpoints = {}, flow } = this.props
-    const { isMobile } = breakpoints
+    const { dismissAction, t, flow } = this.props
     const { twoFACode, requestNb, hasErrored, isJobRunning } = this.state
 
     const account = flow.getAccount()
@@ -95,31 +92,24 @@ export class TwoFAModal extends PureComponent {
     const konn = flow.konnector
 
     return (
-      <Modal
-        dismissAction={dismissAction}
-        mobileFullscreen
-        containerClassName="u-pos-absolute"
-        className={isMobile ? '' : 'u-mt-3'}
-        size="xsmall"
-        into="body"
-        aria-label={t(`twoFAForm.modal-label`)}
-      >
-        <ModalHeader>
-          <KonnectorIcon konnector={konn} className="u-mah-3 u-ml-1" />
-        </ModalHeader>
-        <ModalDescription>
+      <IllustrationDialog
+        onClose={dismissAction}
+        size="small"
+        open
+        title={<KonnectorIcon konnector={konn} className="u-mah-3 u-ml-1" />}
+        content={
           <form onSubmit={this.handleSubmit}>
-            <SubTitle className="u-mb-1 u-mt-half u-ta-center">
+            <Typography variant="h4" className="u-mb-1 u-mt-half u-ta-center">
               {t(`twoFAForm.providers.${twoFAProvider}`)}
-            </SubTitle>
+            </Typography>
 
-            <Text>
+            <Typography variant="body1">
               {twoFAProvider !== TWOFA_PROVIDERS.APP
                 ? t(`twoFAForm.desc_${requestNb}`, {
                     _: t(`twoFAForm.desc_1`)
                   })
                 : t('twoFAForm.desc-2fa')}
-            </Text>
+            </Typography>
             {needUserInput ? (
               <Field
                 className="u-mt-0 u-mb-0"
@@ -137,9 +127,12 @@ export class TwoFAModal extends PureComponent {
               />
             ) : null}
             {hasErrored && (
-              <Caption className="u-error u-fs-italic u-mt-half">
+              <Typography
+                variant="caption"
+                className="u-error u-fs-italic u-mt-half"
+              >
                 {t('twoFAForm.retry')}
-              </Caption>
+              </Typography>
             )}
 
             {needUserInput ? (
@@ -152,8 +145,8 @@ export class TwoFAModal extends PureComponent {
               />
             ) : null}
           </form>
-        </ModalDescription>
-      </Modal>
+        }
+      />
     )
   }
 }

@@ -1,13 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { ModalHeader } from 'cozy-ui/transpiled/react/Modal'
 import KonnectorIcon from './KonnectorIcon'
 import { Media, Img } from 'cozy-ui/transpiled/react/Media'
+import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useDialogContext } from './DialogContext'
 
+const resetFontStyles = { fontSize: '1rem', fontWeight: 'normal' }
 const KonnectorModalHeader = ({ konnector, children }) => {
+  const { dialogTitleProps } = useDialogContext()
   return (
-    <ModalHeader className="u-pr-2">
+    <DialogTitle {...dialogTitleProps} className="u-pb-half" disableTypography>
       <Media>
         <Img
           className={cx('u-mr-1', {
@@ -18,11 +22,13 @@ const KonnectorModalHeader = ({ konnector, children }) => {
           <KonnectorIcon konnector={konnector} />
         </Img>
         <div className="u-flex-grow-1 u-mr-1">
-          <h3 className="u-title-h3 u-m-0">{konnector.name}</h3>
-          {children}
+          <Typography variant="h5" className="u-m-0">
+            {konnector.name}
+          </Typography>
+          <div style={resetFontStyles}>{children}</div>
         </div>
       </Media>
-    </ModalHeader>
+    </DialogTitle>
   )
 }
 

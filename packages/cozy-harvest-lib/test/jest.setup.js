@@ -18,18 +18,24 @@ console.warn = function(message) {
      * removed when ReactFinalForm/ModalContent is updated and does not use
      * componentWillMount and componentWillUpdate
      */
-    ((message.startsWith &&
+    (((message.startsWith &&
       message.startsWith('Warning: componentWillMount has been renamed')) ||
       (message.startsWith &&
         message.startsWith('Warning: componentWillUpdate has been renamed'))) &&
-    ((message.endsWith &&
-      message.endsWith(
-        'Please update the following components: ReactFinalForm'
-      )) ||
-      (message.endsWith &&
+      ((message.endsWith &&
         message.endsWith(
-          'Please update the following components: ModalContent'
-        )))
+          'Please update the following components: ReactFinalForm'
+        )) ||
+        (message.endsWith &&
+          message.endsWith(
+            'Please update the following components: ModalContent'
+          )))) ||
+    (message.endsWith &&
+      message.endsWith(
+        'Please update the following components: ReactSwipableView'
+      )) ||
+    (message.endsWith &&
+      message.endsWith('Please update the following components: Select'))
   ) {
     return
   } else {

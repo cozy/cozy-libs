@@ -9,7 +9,6 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import NavigationList, {
@@ -130,90 +129,88 @@ const ConfigurationTab = ({
   }
 
   return (
-    <ModalContent className="u-p-0">
-      <>
-        {shouldDisplayError && hasLoginError && (
-          <TriggerErrorInfo
-            className={isMobile ? 'u-mv-2' : 'u-mb-2'}
-            error={error}
-            konnector={konnector}
-          />
-        )}
-        <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
-          <ContractsForAccount konnector={konnector} account={account} />
-          <NavigationListHeader>
-            {t('modal.updateAccount.general-subheader')}
-          </NavigationListHeader>
-          <NavigationListSection>
-            {konnector.oauth ? null : (
-              <ListItem
-                button
-                divider
-                onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
-              >
-                <ListItemIcon>
-                  <Icon icon={KeyIcon} color={palette['slateGrey']} />
-                </ListItemIcon>
-                <ListItemText
-                  primary={t('modal.updateAccount.identifiers')}
-                  secondary={Account.getAccountName(account)}
-                />
-                <ListItemSecondaryAction>
-                  <div>
-                    {running && <Spinner />}
-                    <Icon
-                      className="u-mr-1"
-                      icon={RightIcon}
-                      color={palette['coolGrey']}
-                    />
-                  </div>
-                </ListItemSecondaryAction>
-              </ListItem>
-            )}
-            <ListItem button onClick={handleDeleteRequest}>
+    <div className={isMobile ? '' : 'u-pv-1-half'}>
+      {shouldDisplayError && hasLoginError && (
+        <TriggerErrorInfo
+          className={isMobile ? 'u-mv-2' : 'u-mb-2'}
+          error={error}
+          konnector={konnector}
+        />
+      )}
+      <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
+        <ContractsForAccount konnector={konnector} account={account} />
+        <NavigationListHeader>
+          {t('modal.updateAccount.general-subheader')}
+        </NavigationListHeader>
+        <NavigationListSection>
+          {konnector.oauth ? null : (
+            <ListItem
+              button
+              divider
+              onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
+            >
               <ListItemIcon>
-                <Icon icon={UnlinkIcon} className="u-error" />
+                <Icon icon={KeyIcon} color={palette['slateGrey']} />
               </ListItemIcon>
               <ListItemText
-                primary={
-                  <span className="u-error">
-                    {t('accountForm.disconnect.button')}
-                  </span>
-                }
+                primary={t('modal.updateAccount.identifiers')}
+                secondary={Account.getAccountName(account)}
               />
               <ListItemSecondaryAction>
-                {deleting && <Spinner />}
+                <div>
+                  {running && <Spinner />}
+                  <Icon
+                    className="u-mr-1"
+                    icon={RightIcon}
+                    color={palette['coolGrey']}
+                  />
+                </div>
               </ListItemSecondaryAction>
             </ListItem>
-            {requestingDeletion ? (
-              <ConfirmationDialog
-                onCancel={handleCancelDeleteRequest}
-                onConfirm={handleDeleteConfirm}
-              />
-            ) : null}
-            {unlockVault ? (
-              <KonnectorVaultUnlocker
-                konnector={konnector}
-                onDismiss={() => setUnlockVault(false)}
-                closable={true}
-                onUnlock={handleUnlock}
-              />
-            ) : null}
-          </NavigationListSection>
-        </NavigationList>
-        {showNewAccountButton ? (
-          <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
-            <Button
-              extension={isMobile ? 'full' : null}
-              onClick={addAccount}
-              className="u-ml-0"
-              label={t('modal.addAccount.button')}
-              theme="ghost"
+          )}
+          <ListItem button onClick={handleDeleteRequest}>
+            <ListItemIcon>
+              <Icon icon={UnlinkIcon} className="u-error" />
+            </ListItemIcon>
+            <ListItemText
+              primary={
+                <span className="u-error">
+                  {t('accountForm.disconnect.button')}
+                </span>
+              }
             />
-          </div>
-        ) : null}
-      </>
-    </ModalContent>
+            <ListItemSecondaryAction>
+              {deleting && <Spinner />}
+            </ListItemSecondaryAction>
+          </ListItem>
+          {requestingDeletion ? (
+            <ConfirmationDialog
+              onCancel={handleCancelDeleteRequest}
+              onConfirm={handleDeleteConfirm}
+            />
+          ) : null}
+          {unlockVault ? (
+            <KonnectorVaultUnlocker
+              konnector={konnector}
+              onDismiss={() => setUnlockVault(false)}
+              closable={true}
+              onUnlock={handleUnlock}
+            />
+          ) : null}
+        </NavigationListSection>
+      </NavigationList>
+      {showNewAccountButton ? (
+        <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
+          <Button
+            extension={isMobile ? 'full' : null}
+            onClick={addAccount}
+            className="u-ml-0"
+            label={t('modal.addAccount.button')}
+            theme="ghost"
+          />
+        </div>
+      ) : null}
+    </div>
   )
 }
 

@@ -1,17 +1,17 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { ModalContent } from 'cozy-ui/transpiled/react/Modal'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorIcon from './KonnectorIcon'
 import { MountPointContext } from './MountPointContext'
+import DialogContent from '@material-ui/core/DialogContent'
 
 const AccountsListModal = ({ konnector, accounts, t }) => {
   const { pushHistory } = useContext(MountPointContext)
   return (
     <>
-      <ModalContent>
+      <DialogContent>
         <Stack className="u-mb-3">
           <div className="u-w-3 u-h-3 u-mh-auto">
             <KonnectorIcon konnector={konnector} />
@@ -26,7 +26,7 @@ const AccountsListModal = ({ konnector, accounts, t }) => {
           onPick={option => pushHistory(`/accounts/${option.account._id}`)}
           addAccount={() => pushHistory('/new')}
         />
-      </ModalContent>
+      </DialogContent>
     </>
   )
 }

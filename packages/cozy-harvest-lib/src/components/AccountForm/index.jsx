@@ -6,10 +6,9 @@ import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
-import Modal from 'cozy-ui/transpiled/react/Modal'
 import withLocales from '../hoc/withLocales'
-
 import AccountFields from './AccountFields'
+
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
@@ -17,6 +16,7 @@ import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -277,17 +277,26 @@ export class AccountForm extends PureComponent {
               onClick={() => this.handleSubmit(values, form)}
             />
             {this.state.showConfirmationModal && (
-              <Modal
+              <Dialog
                 title={t('triggerManager.confirmationModal.title')}
                 description={t('triggerManager.confirmationModal.description')}
-                primaryText={t('triggerManager.confirmationModal.primaryText')}
-                primaryType="primary"
-                primaryAction={() => this.doSubmit(values, form)}
-                secondaryText={t(
-                  'triggerManager.confirmationModal.secondaryText'
-                )}
-                secondaryAction={this.hideConfirmationModal}
-                dismissAction={this.hideConfirmationModal}
+                onClose={this.hideConfirmationModal}
+                open={true}
+                actions={
+                  <>
+                    <Button
+                      label={t('triggerManager.confirmationModal.primaryText')}
+                      onClick={() => this.doSubmit(values, form)}
+                      variant="primary"
+                    />
+                    <Button
+                      label={t(
+                        'triggerManager.confirmationModal.secondaryText'
+                      )}
+                      onClick={this.hideConfirmationModal}
+                    />
+                  </>
+                }
               />
             )}
           </div>

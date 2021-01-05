@@ -1,10 +1,19 @@
 /* eslint-env jest */
 import React from 'react'
-import { shallow } from 'enzyme'
+import { render, waitFor, fireEvent } from '@testing-library/react'
+import CozyClient from 'cozy-client'
 
 import { KonnectorModal } from 'components/KonnectorModal'
 import { fetchAccount } from 'connections/accounts'
+import AppLike from '../../test/AppLike'
 
+jest.mock(
+  './KonnectorConfiguration/ConfigurationTab/index',
+  () =>
+    function ConfigurationTab() {
+      return <p>ConfigurationTab</p>
+    }
+)
 jest.mock('connections/accounts', () => ({
   fetchAccount: jest.fn()
 }))
@@ -26,7 +35,9 @@ describe('KonnectorModal', () => {
       slug: 'mock',
       name: 'Mock',
       triggers: {
-        data: [{ _id: 784, doctype: 'io.cozy.triggers' }]
+        data: [
+          { _id: 784, doctype: 'io.cozy.triggers', arguments: '* * * * *' }
+        ]
       }
     }
     props = {
@@ -44,44 +55,49 @@ describe('KonnectorModal', () => {
     }
   })
 
-  const getMountedComponent = async extraProps => {
+  const setup = extraProps => {
     const finalProps = {
       ...props,
       ...extraProps
     }
-    const component = shallow(
-      <KonnectorModal {...finalProps} />,
+    const client = new CozyClient()
+    const root = render(
+      <AppLike client={client}>
+        <KonnectorModal {...finalProps} />
+      </AppLike>,
       shallowOptions
     )
-    await component.instance().componentDidMount()
-    component.update()
-    return component
+    return { root }
   }
 
-  it('should show a spinner while loading', () => {
-    const component = shallow(<KonnectorModal {...props} />, shallowOptions)
-
-    const spinner = component
-      .dive()
-      .find('ModalContent')
-      .childAt(0)
-      .dive()
-    expect(spinner.getElement()).toMatchSnapshot()
+  it('should show a spinner while loading', async () => {
+    const { root } = setup()
+    waitFor(() => root.getByRole('progressbar'))
   })
 
   it('should show an error view', async () => {
     fetchAccount.mockImplementation(() => {
       throw new Error('nope')
     })
-    const component = await getMountedComponent()
-    const content = component.dive().find('ModalContent')
-    expect(content.getElement()).toMatchSnapshot()
+    const { root } = setup()
+    await waitFor(() => root.getByText('Unable to retrieve your account'))
+    // expect(root).toMatchSnapshot()
   })
 
-  it('should show the configuration view of a single account', async () => {
-    const component = await getMountedComponent()
-    const content = component.dive().find('ModalContent')
-    expect(content.getElement()).toMatchSnapshot()
+  it('should show the data view of a single account', async () => {
+    const { root } = setup()
+    await waitFor(() => root.getByText('Once a week'))
+  })
+
+  it('should render the selected account via a prop', async () => {
+    mockKonnector.triggers.data = [
+      { _id: '784', doctype: 'io.cozy.triggers', arguments: '* * * * *' },
+      { _id: '872', doctype: 'io.cozy.triggers', arguments: '* * 1 1 1' }
+    ]
+    const { root } = await setup({
+      accountId: '123'
+    })
+    await waitFor(() => root.getByText('Once a week'))
   })
 
   it('should show the list of accounts', async () => {
@@ -89,66 +105,23 @@ describe('KonnectorModal', () => {
       { _id: '784', doctype: 'io.cozy.triggers' },
       { _id: '872', doctype: 'io.cozy.triggers' }
     ]
-    const component = await getMountedComponent()
+    const { root } = setup()
 
-    const content = component.dive().find('ModalContent')
-    expect(content.getElement()).toMatchSnapshot()
+    await waitFor(() => root.queryByText('123'))
   })
 
-  it('should render the selected account via a prop', async () => {
+  it('should request account creation', async () => {
     mockKonnector.triggers.data = [
       { _id: '784', doctype: 'io.cozy.triggers' },
       { _id: '872', doctype: 'io.cozy.triggers' }
     ]
-    const component = await getMountedComponent({
-      accountId: '123'
+    const createAction = jest.fn()
+    const { root } = setup({
+      createAction
     })
-
-    const content = component.dive().find('ModalContent')
-    expect(content.getElement()).toMatchSnapshot()
-  })
-
-  describe('adding an account', () => {
-    it('should call the parent when controlled by props', async () => {
-      const createAction = jest.fn()
-      const component = await getMountedComponent({
-        createAction
-      })
-      component.instance().requestAccountCreation()
-      expect(createAction).toHaveBeenCalled()
-    })
-
-    it('should render the form when controlled by state', async () => {
-      const component = await getMountedComponent()
-      component.instance().requestAccountCreation()
-
-      const content = component.dive().find('ModalContent')
-      expect(content.getElement()).toMatchSnapshot()
-    })
-  })
-
-  describe('switching account', () => {
-    it('should call the parent when controlled by props', async () => {
-      const onAccountChange = jest.fn()
-      const account = { _id: '456' }
-      const trigger = { _id: 'abc' }
-      const component = await getMountedComponent({
-        onAccountChange
-      })
-
-      component.instance().requestAccountChange(account, trigger)
-      expect(onAccountChange).toHaveBeenCalledWith(account)
-    })
-
-    it('should show the add account view when controlled by state', async () => {
-      const component = await getMountedComponent()
-
-      const account = { _id: '456' }
-      const trigger = { _id: 'abc' }
-      await component.instance().requestAccountChange(account, trigger)
-
-      const content = component.dive().find('ModalContent')
-      expect(content.getElement()).toMatchSnapshot()
-    })
+    const btnText = await waitFor(() => root.getByText('Add an account'))
+    const btn = btnText.closest('button')
+    fireEvent.click(btn)
+    expect(createAction).toHaveBeenCalled()
   })
 })
