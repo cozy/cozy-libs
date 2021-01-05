@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.32.0...cozy-harvest-lib@2.32.1) (2021-01-05)
+
+
+### Bug Fixes
+
+* **Harvest:** Remove check on identifiers for account rescue ([d4c382d](https://github.com/cozy/cozy-libs/commit/d4c382d))
+
+
+
+
+
 # [2.32.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.31.0...cozy-harvest-lib@2.32.0) (2020-12-23)
 
 
