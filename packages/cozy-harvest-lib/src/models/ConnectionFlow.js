@@ -108,8 +108,7 @@ export const createOrUpdateAccount = async ({
     )
     const rescuableAccount = accounts.getRescuableAccount(
       accountsWithoutTrigger,
-      konnector,
-      userCredentials
+      konnector
     )
     if (rescuableAccount) {
       accountToSave = accounts.mergeAuth(rescuableAccount, userCredentials)

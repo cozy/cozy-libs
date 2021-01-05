@@ -179,11 +179,11 @@ describe('Accounts Helper', () => {
     it('should return the right account when possible', () => {
       const accounts = [
         {
-          account_type: 'konnectest',
+          account_type: 'otherslug',
           auth: { login: 'badlogin', password: 'toto' }
         },
         {
-          account_type: 'konnectest',
+          account_type: 'otherslug',
           auth: { login: 'goodlogin', password: 'badpassword' }
         },
         {
@@ -191,24 +191,14 @@ describe('Accounts Helper', () => {
           auth: { login: 'goodlogin', password: 'secretpassword' }
         }
       ]
-      expect(
-        getRescuableAccount(accounts, fixtures.konnector, {
-          login: 'goodlogin',
-          password: 'secretpassword'
-        })
-      ).toEqual({
+      expect(getRescuableAccount(accounts, fixtures.konnector)).toEqual({
         account_type: 'konnectest',
         auth: { login: 'goodlogin', password: 'secretpassword' }
       })
     })
 
     it('should return undefined when no correct account available', () => {
-      expect(
-        getRescuableAccount([], fixtures.konnector, {
-          login: 'goodlogin',
-          password: 'secretpassword'
-        })
-      ).toBe(undefined)
+      expect(getRescuableAccount([], fixtures.konnector)).toBe(undefined)
     })
   })
 })
