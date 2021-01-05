@@ -33,7 +33,7 @@ const MODAL_PLACE_ID = 'coz-harvest-modal-place'
  * Wraps conditionally its children inside VaultUnlocker, only if
  * props.konnector's policy tells to saveInVault
  */
-const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
+export const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)
   if (konnectorPolicy.saveInVault) {
     return <VaultUnlocker {...props}>{children}</VaultUnlocker>
@@ -265,7 +265,6 @@ export class DumbTriggerManager extends Component {
         type: CipherType.Login,
         uri: get(konnector, 'vendor_link')
       })
-
       if (ciphers.length === 0) {
         this.showAccountForm()
       } else {

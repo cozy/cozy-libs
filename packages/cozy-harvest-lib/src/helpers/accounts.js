@@ -203,6 +203,12 @@ export const setSessionResetIfNecessary = (account, changedFields = {}) => {
     : account
 }
 
+export const getRescuableAccount = (accounts, konnector) => {
+  return accounts.find(account => {
+    return account.account_type === konnector.slug
+  })
+}
+
 export default {
   build,
   getLabel,
@@ -216,5 +222,6 @@ export default {
   setSessionResetIfNecessary,
   updateTwoFaCode,
   setVaultCipherRelationship,
-  getVaultCipherId
+  getVaultCipherId,
+  getRescuableAccount
 }

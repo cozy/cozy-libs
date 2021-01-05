@@ -33,6 +33,10 @@ import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 
+import { useVaultClient, CozyUtils } from 'cozy-keys-lib'
+import { KonnectorVaultUnlocker } from '../../TriggerManager'
+import { unshareCipher } from '../../../models/cipherUtils'
+
 const tabMobileNavListStyle = { borderTop: 'none' }
 
 const ConfirmationDialog = ({ onConfirm, onCancel }) => {
@@ -73,8 +77,10 @@ const ConfigurationTab = ({
   const { isMobile } = useBreakpoints()
   const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
+  const vaultClient = useVaultClient()
   const [deleting, setDeleting] = useState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
+  const [unlockVault, setUnlockVault] = useState(false)
   const flowState = flow.getState()
   const { error, running } = flowState
   const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
@@ -85,6 +91,18 @@ const ConfigurationTab = ({
   useTrackPage('configuration')
 
   const hasLoginError = error && error.isLoginError()
+
+  const handleDeleteConfirm = async () => {
+    setRequestDeletion(false)
+    const extensionInstalled = await CozyUtils.checkHasInstalledExtension(
+      client
+    )
+    if (extensionInstalled) {
+      setUnlockVault(true)
+    } else {
+      await handleDeleteAccount()
+    }
+  }
 
   const handleDeleteAccount = async () => {
     setDeleting(true)
@@ -102,6 +120,12 @@ const ConfigurationTab = ({
 
   const handleDeleteRequest = () => {
     setRequestDeletion(true)
+  }
+
+  const handleUnlock = async () => {
+    await handleDeleteAccount()
+    await unshareCipher(vaultClient, account)
+    setUnlockVault(false)
   }
 
   return (
@@ -162,7 +186,15 @@ const ConfigurationTab = ({
           {requestingDeletion ? (
             <ConfirmationDialog
               onCancel={handleCancelDeleteRequest}
-              onConfirm={handleDeleteAccount}
+              onConfirm={handleDeleteConfirm}
+            />
+          ) : null}
+          {unlockVault ? (
+            <KonnectorVaultUnlocker
+              konnector={konnector}
+              onDismiss={() => setUnlockVault(false)}
+              closable={true}
+              onUnlock={handleUnlock}
             />
           ) : null}
         </NavigationListSection>
