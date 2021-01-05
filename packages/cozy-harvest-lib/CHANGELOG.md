@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.33.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.33.0...cozy-harvest-lib@2.33.1) (2021-01-05)
+
+
+### Bug Fixes
+
+* Put cozy-keys-lib as {peer/dev}Dep ([a1a9248](https://github.com/cozy/cozy-libs/commit/a1a9248))
+* React-router-dom as a peer dep ([fe7083f](https://github.com/cozy/cozy-libs/commit/fe7083f))
+
+
+
+
+
 # [2.33.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.32.1...cozy-harvest-lib@2.33.0) (2021-01-05)
 
 
