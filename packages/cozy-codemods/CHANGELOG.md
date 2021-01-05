@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.9.0...@cozy/codemods@1.10.0) (2021-01-05)
+
+
+### Features
+
+* Modal to dialog codemod ([c564891](https://github.com/cozy/cozy-libs/commit/c564891))
+
+
+
+
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.8.0...@cozy/codemods@1.9.0) (2020-12-03)
 
 

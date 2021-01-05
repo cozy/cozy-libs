@@ -1,6 +1,6 @@
 {
   "name": "@cozy/codemods",
-  "version": "1.9.0",
+  "version": "1.10.0",
   "description": "Codeshifts used inside Cozies",
   "main": "index.js",
   "repository": "https://github.com/cozy/cozy-libs",

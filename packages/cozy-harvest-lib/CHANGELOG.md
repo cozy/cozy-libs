@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.33.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.32.1...cozy-harvest-lib@2.33.0) (2021-01-05)
+
+
+### Bug Fixes
+
+* Divider comes directly from cozy-ui/transpiled/react/Divider ([cb6be90](https://github.com/cozy/cozy-libs/commit/cb6be90))
+
+
+### Features
+
+* AppLinkCard does not wait for fetch before showing ([7d06e05](https://github.com/cozy/cozy-libs/commit/7d06e05))
+* Modal to Dialog 1 ([b0eced8](https://github.com/cozy/cozy-libs/commit/b0eced8))
+* Modal to Dialog 2 ([6318b9e](https://github.com/cozy/cozy-libs/commit/6318b9e))
+* Modal to Dialog 3 ([eb28e73](https://github.com/cozy/cozy-libs/commit/eb28e73))
+* Modal to Dialog 4 ([70bb2b5](https://github.com/cozy/cozy-libs/commit/70bb2b5))
+* Update cozy-keys-lib ([84ce459](https://github.com/cozy/cozy-libs/commit/84ce459))
+
+
+
+
+
 ## [2.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.32.0...cozy-harvest-lib@2.32.1) (2021-01-05)
 
 
