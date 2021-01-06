@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.34.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.33.1...cozy-harvest-lib@2.34.0) (2021-01-06)
+
+
+### Bug Fixes
+
+* Banking connector deletion ([0e700fc](https://github.com/cozy/cozy-libs/commit/0e700fc))
+
+
+### Features
+
+* Add tracking event for banking account deleted ([f6d3f55](https://github.com/cozy/cozy-libs/commit/f6d3f55))
+
+
+
+
+
 ## [2.33.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.33.0...cozy-harvest-lib@2.33.1) (2021-01-05)
 
 
