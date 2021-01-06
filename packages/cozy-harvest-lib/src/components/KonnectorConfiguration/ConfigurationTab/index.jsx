@@ -4,6 +4,8 @@ import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
+import { useVaultClient, CozyUtils } from 'cozy-keys-lib'
+
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
@@ -17,6 +19,9 @@ import NavigationList, {
 } from 'cozy-ui/transpiled/react/NavigationList'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
@@ -24,18 +29,14 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListI
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { deleteAccount } from '../../../connections/accounts'
-import { useTrackPage } from '../../hoc/tracking'
+import { useTrackPage, useTracker } from '../../hoc/tracking'
 
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
-import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
-
-import { useVaultClient, CozyUtils } from 'cozy-keys-lib'
 import { KonnectorVaultUnlocker } from '../../TriggerManager'
 import { unshareCipher } from '../../../models/cipherUtils'
+import { findKonnectorPolicy } from '../../../konnector-policies'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
@@ -81,6 +82,7 @@ const ConfigurationTab = ({
   const [deleting, setDeleting] = useState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
   const [unlockVault, setUnlockVault] = useState(false)
+  const tracker = useTracker()
   const flowState = flow.getState()
   const { error, running } = flowState
   const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
@@ -97,7 +99,8 @@ const ConfigurationTab = ({
     const extensionInstalled = await CozyUtils.checkHasInstalledExtension(
       client
     )
-    if (extensionInstalled) {
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+    if (extensionInstalled && konnectorPolicy.saveInVault) {
       setUnlockVault(true)
     } else {
       await handleDeleteAccount()
@@ -109,6 +112,10 @@ const ConfigurationTab = ({
     try {
       await deleteAccount(client, account)
       onAccountDeleted(account)
+      tracker.trackEvent({
+        name: 'compte_bancaire_supprime',
+        connectorSlug: account.account_type
+      })
     } finally {
       setDeleting(false)
     }
