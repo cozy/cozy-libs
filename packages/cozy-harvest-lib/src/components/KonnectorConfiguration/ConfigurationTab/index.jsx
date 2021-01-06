@@ -29,7 +29,7 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListI
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { deleteAccount } from '../../../connections/accounts'
-import { useTrackPage } from '../../hoc/tracking'
+import { useTrackPage, useTracker } from '../../hoc/tracking'
 
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
@@ -82,6 +82,7 @@ const ConfigurationTab = ({
   const [deleting, setDeleting] = useState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
   const [unlockVault, setUnlockVault] = useState(false)
+  const tracker = useTracker()
   const flowState = flow.getState()
   const { error, running } = flowState
   const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
@@ -111,6 +112,10 @@ const ConfigurationTab = ({
     try {
       await deleteAccount(client, account)
       onAccountDeleted(account)
+      tracker.trackEvent({
+        name: 'compte_bancaire_supprime',
+        connectorSlug: account.account_type
+      })
     } finally {
       setDeleting(false)
     }
