@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.35.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.34.0...cozy-harvest-lib@2.35.0) (2021-01-07)
+
+
+### Bug Fixes
+
+* Defensive programming in case we are in an old browser ([89c51c5](https://github.com/cozy/cozy-libs/commit/89c51c5))
+* Update height after change of subtree ([cffb5ab](https://github.com/cozy/cozy-libs/commit/cffb5ab))
+* Use deep import for cozy-ui Text ([0a934ca](https://github.com/cozy/cozy-libs/commit/0a934ca))
+
+
+### Features
+
+* Do not center the harvest modal to prevent content jump ([9e6b856](https://github.com/cozy/cozy-libs/commit/9e6b856))
+
+
+
+
+
 # [2.34.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.33.1...cozy-harvest-lib@2.34.0) (2021-01-06)
 
 
