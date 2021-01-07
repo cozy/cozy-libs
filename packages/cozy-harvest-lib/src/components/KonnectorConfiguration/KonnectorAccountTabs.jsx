@@ -1,4 +1,4 @@
-import React, { useState, useRef, useCallback, useEffect } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
@@ -9,6 +9,7 @@ import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import SwipeableViews from 'react-swipeable-views'
 
+import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
@@ -56,22 +57,6 @@ export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {
       />
     </Tabs>
   )
-}
-
-const useDOMMutations = (node, config, cb) => {
-  useEffect(() => {
-    let observer
-    if (!window.MutationObserver) {
-      return
-    }
-    if (node) {
-      observer = new MutationObserver(cb)
-      observer.observe(node, config)
-    }
-    return () => {
-      observer && observer.disconnect()
-    }
-  }, [node, config, cb])
 }
 
 const domMutationsConfig = { childList: true, subtree: true }
