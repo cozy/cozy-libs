@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
@@ -58,6 +58,21 @@ export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {
   )
 }
 
+const useDOMMutations = (node, config, cb) => {
+  useEffect(() => {
+    let observer
+    if (node) {
+      observer = new MutationObserver(cb)
+      observer.observe(node, config)
+    }
+    return () => {
+      observer && observer.disconnect()
+    }
+  }, [node, config, cb])
+}
+
+const domMutationsConfig = { childList: true, subtree: true }
+
 const DumbKonnectorAccountTabs = props => {
   const {
     konnector,
@@ -85,8 +100,14 @@ const DumbKonnectorAccountTabs = props => {
   const hasError = !!error
   const hasLoginError = hasError && error.isLoginError()
 
+  const swipeableActions = useRef()
+  const nodeRef = useRef()
+
+  const updateSwiperHeight = useCallback(() => swipeableActions.current.updateHeight(), [swipeableActions])
+  useDOMMutations(nodeRef.current, domMutationsConfig, updateSwiperHeight)
+
   return (
-    <>
+    <div ref={nodeRef}>
       <KonnectorAccountTabsTabs
         tab={tab}
         onChange={handleTabChange}
@@ -98,6 +119,7 @@ const DumbKonnectorAccountTabs = props => {
         index={tab}
         disabled
         animateTransitions={isMobile}
+        action={actions => {swipeableActions.current = actions}}
       >
         <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
         <ConfigurationTab
@@ -109,7 +131,7 @@ const DumbKonnectorAccountTabs = props => {
           showNewAccountButton={showNewAccountButton}
         />
       </SwipeableViews>
-    </>
+    </div>
   )
 }
 
