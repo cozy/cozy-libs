@@ -7,7 +7,6 @@ import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
 import { fetchAccount } from '../connections/accounts'
@@ -20,8 +19,8 @@ import withLocales from './hoc/withLocales'
 import DialogContent from '@material-ui/core/DialogContent'
 
 /**
- * AccountModal take an accountId and a list of accounts containing their
- * respecting triggers and display the selected account and the accounts linked
+ * Takes an accountId and a list of accounts containing their respecting triggers
+ * isplays the selected account and the accounts linked
  * to this konnector
  *
  * You have to pass an array of accounts containing their associated trigger:
@@ -214,7 +213,6 @@ AccountModal.propTypes = {
 export default flow(
   withClient,
   withLocales,
-  translate(),
   withMountPointPushHistory,
   withBreakpoints()
 )(AccountModal)
