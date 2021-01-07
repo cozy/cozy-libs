@@ -1,5 +1,6 @@
 import React from 'react'
-import { Text, Icon } from 'cozy-ui/transpiled/react'
+import { Text } from 'cozy-ui/transpiled/react/Text'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
