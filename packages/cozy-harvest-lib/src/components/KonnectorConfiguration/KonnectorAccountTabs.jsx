@@ -106,7 +106,10 @@ const DumbKonnectorAccountTabs = props => {
   const swipeableActions = useRef()
   const nodeRef = useRef()
 
-  const updateSwiperHeight = useCallback(() => swipeableActions.current.updateHeight(), [swipeableActions])
+  const updateSwiperHeight = useCallback(
+    () => swipeableActions.current.updateHeight(),
+    [swipeableActions]
+  )
   useDOMMutations(nodeRef.current, domMutationsConfig, updateSwiperHeight)
 
   return (
@@ -122,7 +125,9 @@ const DumbKonnectorAccountTabs = props => {
         index={tab}
         disabled
         animateTransitions={isMobile}
-        action={actions => {swipeableActions.current = actions}}
+        action={actions => {
+          swipeableActions.current = actions
+        }}
       >
         <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
         <ConfigurationTab

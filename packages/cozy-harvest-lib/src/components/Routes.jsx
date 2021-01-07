@@ -40,7 +40,10 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
     <MountPointProvider baseRoute={konnectorRoot}>
       <DialogContext.Provider value={dialogContext}>
         <HarvestVaultProvider>
-          <HarvestDialog {...dialogContext.dialogProps} aria-label={konnector.name}>
+          <HarvestDialog
+            {...dialogContext.dialogProps}
+            aria-label={konnector.name}
+          >
             <DialogCloseButton onClick={onDismiss} />
             <KonnectorAccounts konnector={konnector}>
               {accountsAndTriggers => (
