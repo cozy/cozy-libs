@@ -20,8 +20,8 @@ import withLocales from './hoc/withLocales'
 import DialogContent from '@material-ui/core/DialogContent'
 
 /**
- * AccountModal take an accountId and a list of accounts containing their
- * respecting triggers and display the selected account and the accounts linked
+ * Takes an accountId and a list of accounts containing their respecting triggers
+ * isplays the selected account and the accounts linked
  * to this konnector
  *
  * You have to pass an array of accounts containing their associated trigger:
@@ -214,7 +214,6 @@ AccountModal.propTypes = {
 export default flow(
   withClient,
   withLocales,
-  translate(),
   withMountPointPushHistory,
   withBreakpoints()
 )(AccountModal)

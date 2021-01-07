@@ -1,7 +1,14 @@
 import React from 'react'
 import { Switch, Route, Redirect } from 'react-router'
-import KonnectorAccounts from './KonnectorAccounts'
+import { withStyles } from '@material-ui/core/styles'
 
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
+import {
+  DialogCloseButton,
+  useCozyDialog
+} from 'cozy-ui/transpiled/react/CozyDialogs'
+
+import KonnectorAccounts from './KonnectorAccounts'
 import AccountModal from './AccountModal'
 import NewAccountModal from './NewAccountModal'
 import EditAccountModal from './EditAccountModal'
@@ -9,12 +16,19 @@ import KonnectorSuccess from './KonnectorSuccess'
 import HarvestModalRoot from './HarvestModalRoot'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import { MountPointProvider } from './MountPointContext'
-import Dialog from 'cozy-ui/transpiled/react/Dialog'
-import {
-  DialogCloseButton,
-  useCozyDialog
-} from 'cozy-ui/transpiled/react/CozyDialogs'
 import DialogContext from './DialogContext'
+
+/**
+ * Dialog will not be centered vertically since we need the modal to "stay in place"
+ * when changing tabs. Since tabs content's height is not the same between the data
+ * tab and the configuration, having the modal vertically centered makes it "jump"
+ * when changing tabs.
+ */
+const HarvestDialog = withStyles({
+  scrollPaper: {
+    alignItems: 'start'
+  }
+})(Dialog)
 
 const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
   const dialogContext = useCozyDialog({
@@ -26,7 +40,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
     <MountPointProvider baseRoute={konnectorRoot}>
       <DialogContext.Provider value={dialogContext}>
         <HarvestVaultProvider>
-          <Dialog {...dialogContext.dialogProps} aria-label={konnector.name}>
+          <HarvestDialog {...dialogContext.dialogProps} aria-label={konnector.name}>
             <DialogCloseButton onClick={onDismiss} />
             <KonnectorAccounts konnector={konnector}>
               {accountsAndTriggers => (
@@ -95,7 +109,7 @@ const Routes = ({ konnectorRoot, konnector, onDismiss }) => {
                 </Switch>
               )}
             </KonnectorAccounts>
-          </Dialog>
+          </HarvestDialog>
         </HarvestVaultProvider>
       </DialogContext.Provider>
     </MountPointProvider>
