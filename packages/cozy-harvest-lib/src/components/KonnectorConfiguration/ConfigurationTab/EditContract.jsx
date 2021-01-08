@@ -176,11 +176,12 @@ const EditContract = props => {
 
   const { dialogProps, dialogTitleProps } = useCozyDialog({
     size: 'medium',
-    open: true
+    open: true,
+    onClose
   })
 
   return (
-    <Dialog onClose={onClose} {...dialogProps}>
+    <Dialog {...dialogProps}>
       <DialogCloseButton onClick={onClose} />
       <DialogTitle {...dialogTitleProps}>
         {isMobile ? <DialogBackButton onClick={onClose} /> : null}
