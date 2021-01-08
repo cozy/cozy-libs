@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.35.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.35.0...cozy-harvest-lib@2.35.1) (2021-01-08)
+
+
+### Bug Fixes
+
+* Close edit contract modal on escape ([ec9bfd9](https://github.com/cozy/cozy-libs/commit/ec9bfd9))
+
+
+
+
+
 # [2.35.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.34.0...cozy-harvest-lib@2.35.0) (2021-01-07)
 
 
