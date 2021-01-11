@@ -290,7 +290,7 @@ export const buildFolderPath = (konnector, account, folders = {}) => {
     // When adding a new allowed variable here, please keep documentation
     // of `renderSubDir` function up to date.
     konnector: konnector.name,
-    account: accounts.getLabel(account)
+    account: accounts.getLabel(account).replace(/\//g, '-')
   })
   return `/${renderedBaseDir}/${renderedPath}`
 }

@@ -12,18 +12,16 @@ import {
 } from '../connections/triggers'
 import CozyRealtime from 'cozy-realtime'
 import KonnectorJobWatcher from './konnector/KonnectorJobWatcher'
-import { konnectorPolicy as biKonnectorPolicy } from '../../src/services/budget-insight'
+import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
 import fixtures from '../../test/fixtures'
 
-jest.mock('../../src/connections/files', () => ({
+jest.mock('../connections/files', () => ({
   statDirectoryByPath: jest.fn(),
   createDirectoryByPath: jest.fn()
 }))
 
-jest.mock('../../src/services/budget-insight', () => {
-  const originalBudgetInsight = jest.requireActual(
-    '../../src/services/budget-insight'
-  )
+jest.mock('../services/budget-insight', () => {
+  const originalBudgetInsight = jest.requireActual('../services/budget-insight')
   return {
     konnectorPolicy: {
       ...originalBudgetInsight.konnectorPolicy,
