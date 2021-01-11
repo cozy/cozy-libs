@@ -38,6 +38,8 @@ const USER_ERRORS = [
   USER_ACTION_NEEDED
 ]
 
+const sanitizeAccountIdentifierRx = /\//g
+
 /**
  * Custom error to handle errors returnes by konnector.
  * Konnectors are returning error codes in error messages.
@@ -290,7 +292,9 @@ export const buildFolderPath = (konnector, account, folders = {}) => {
     // When adding a new allowed variable here, please keep documentation
     // of `renderSubDir` function up to date.
     konnector: konnector.name,
-    account: accounts.getLabel(account).replace(/\//g, '-')
+    account: accounts
+      .getLabel(account)
+      .replace(sanitizeAccountIdentifierRx, '-')
   })
   return `/${renderedBaseDir}/${renderedPath}`
 }
