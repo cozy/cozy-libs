@@ -63,6 +63,30 @@ describe('Konnectors Helpers', () => {
       )
     })
 
+    it('should should build the default path when account has identifier', () => {
+      expect(
+        buildFolderPath(fixtures.konnector, {
+          ...fixtures.account,
+          identifier: 'login',
+          auth: {
+            login: 'ada@lovelace.com'
+          }
+        })
+      ).toEqual('/Administrative/Test Konnector/ada@lovelace.com')
+    })
+
+    it('should should build the default path when account has identifier', () => {
+      expect(
+        buildFolderPath(fixtures.konnector, {
+          ...fixtures.account,
+          identifier: 'login',
+          auth: {
+            login: 'identifier/with/slashes'
+          }
+        })
+      ).toEqual('/Administrative/Test Konnector/identifier-with-slashes')
+    })
+
     it('should build localized default path', () => {
       expect(
         buildFolderPath(fixtures.konnector, fixtures.account, {
