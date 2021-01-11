@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.35.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.35.1...cozy-harvest-lib@2.35.2) (2021-01-11)
+
+
+### Bug Fixes
+
+* Replace / with - in account identifier when building folder path ([a9ddef2](https://github.com/cozy/cozy-libs/commit/a9ddef2))
+
+
+
+
+
 ## [2.35.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.35.0...cozy-harvest-lib@2.35.1) (2021-01-08)
 
 
