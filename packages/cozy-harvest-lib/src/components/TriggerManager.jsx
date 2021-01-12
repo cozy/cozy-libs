@@ -7,11 +7,10 @@ import { withClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 
-import { VaultUnlocker, withVaultClient, CipherType } from 'cozy-keys-lib'
+import { CipherType } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -19,31 +18,18 @@ import { fetchAccount } from '../connections/accounts'
 import FlowProvider from './FlowProvider'
 import VaultCiphersList from './VaultCiphersList'
 import manifest from '../helpers/manifest'
-import HarvestVaultProvider from './HarvestVaultProvider'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
+import { withVaultUnlockContext } from './vaultUnlockContext'
+import HarvestVaultProvider from './HarvestVaultProvider'
+import {
+  VaultUnlockProvider,
+  VaultUnlockPlaceholder
+} from './vaultUnlockContext'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
-
-const MODAL_PLACE_ID = 'coz-harvest-modal-place'
-
-/**
- * Wraps conditionally its children inside VaultUnlocker, only if
- * props.konnector's policy tells to saveInVault
- */
-export const KonnectorVaultUnlocker = ({ konnector, children, ...props }) => {
-  const konnectorPolicy = findKonnectorPolicy(konnector)
-  if (konnectorPolicy.saveInVault) {
-    return <VaultUnlocker {...props}>{children}</VaultUnlocker>
-  } else {
-    logger.info(
-      'Not rendering VaultUnlocker since konnectorPolicy.saveInVault = false'
-    )
-    return <>{children}</>
-  }
-}
 
 /**
  * If the vault is not going to be unlocked, we go directly to accountForm
@@ -218,6 +204,31 @@ export class DumbTriggerManager extends Component {
     return account
   }
 
+  async componentDidMount() {
+    const {
+      konnector,
+      showUnlockForm,
+      onVaultDismiss,
+      vaultClosable,
+      vaultClient
+    } = this.props
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+    const isVaultLocked = await vaultClient.isLocked()
+    if (konnectorPolicy.saveInVault) {
+      if (isVaultLocked) {
+        showUnlockForm({
+          onDismiss: onVaultDismiss,
+          closable: vaultClosable,
+          onUnlock: this.handleVaultUnlock
+        })
+      } else {
+        this.handleVaultUnlock()
+      }
+    } else {
+      this.showAccountForm()
+    }
+  }
+
   componentDidUpdate(prevProps) {
     if (this.props.error && this.props.error !== prevProps.error) {
       this.setState({ step: 'accountForm' })
@@ -283,17 +294,7 @@ export class DumbTriggerManager extends Component {
   }
 
   render() {
-    const {
-      konnector,
-      showError,
-      modalContainerId,
-      t,
-      onVaultDismiss,
-      vaultClosable,
-      flow,
-      flowState,
-      client
-    } = this.props
+    const { konnector, showError, t, flow, flowState, client } = this.props
 
     const submitting = flowState.running
 
@@ -304,8 +305,6 @@ export class DumbTriggerManager extends Component {
       showBackButton,
       ciphers
     } = this.state
-
-    const modalInto = modalContainerId || MODAL_PLACE_ID
 
     const { oauth } = konnector
 
@@ -335,13 +334,7 @@ export class DumbTriggerManager extends Component {
     }
 
     return (
-      <KonnectorVaultUnlocker
-        konnector={konnector}
-        onDismiss={onVaultDismiss}
-        closable={vaultClosable}
-        onUnlock={this.handleVaultUnlock}
-      >
-        <div id={modalInto} />
+      <>
         {showCiphersList && (
           <VaultCiphersList
             konnector={konnector}
@@ -372,7 +365,7 @@ export class DumbTriggerManager extends Component {
             />
           </>
         )}
-      </KonnectorVaultUnlocker>
+      </>
     )
   }
 }
@@ -409,25 +402,12 @@ DumbTriggerManager.propTypes = {
   vaultClosable: PropTypes.bool
 }
 
-const SmartTriggerManager = compose(
+const TriggerManager = compose(
   translate(),
   withClient,
-  withVaultClient,
+  withVaultUnlockContext,
   withConnectionFlow()
 )(DumbTriggerManager)
-
-// The TriggerManager is wrapped in the providers required for it to work by
-// itself instead of receiving it from its parents because it is used as
-// standalone in places like cozy-home intents
-export const TriggerManager = props => {
-  return (
-    <HarvestVaultProvider>
-      <MuiCozyTheme>
-        <SmartTriggerManager {...props} />
-      </MuiCozyTheme>
-    </HarvestVaultProvider>
-  )
-}
 
 // TriggerManager is exported wrapped in FlowProvider to avoid breaking changes.
 const LegacyTriggerManager = props => {
@@ -455,6 +435,17 @@ const LegacyTriggerManager = props => {
         />
       )}
     </FlowProvider>
+  )
+}
+
+export const IntentTriggerManager = props => {
+  return (
+    <HarvestVaultProvider>
+      <VaultUnlockProvider>
+        <LegacyTriggerManager {...props} />
+        <VaultUnlockPlaceholder />
+      </VaultUnlockProvider>
+    </HarvestVaultProvider>
   )
 }
 

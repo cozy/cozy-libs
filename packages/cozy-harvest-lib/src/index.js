@@ -2,7 +2,9 @@ import withLocales from './components/hoc/withLocales'
 
 import DeleteAccountButtonWithoutLocales from './components/DeleteAccountButton'
 import KonnectorModalWithoutLocales from './components/KonnectorModal'
-import TriggerManagerWithoutLocales from './components/TriggerManager'
+import TriggerManagerWithoutLocales, {
+  IntentTriggerManager as IntentTriggerManagerWithoutLocales
+} from './components/TriggerManager'
 import FlowProviderWithLocales from './components/FlowProvider'
 import RoutesWithoutLocales from './components/Routes'
 import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
@@ -15,6 +17,9 @@ export const DeleteAccountButton = withLocales(
 )
 export const KonnectorModal = withLocales(KonnectorModalWithoutLocales)
 export const TriggerManager = withLocales(TriggerManagerWithoutLocales)
+export const IntentTriggerManager = withLocales(
+  IntentTriggerManagerWithoutLocales
+)
 export const FlowProvider = withLocales(FlowProviderWithLocales)
 export const TriggerLauncher = deprecated(
   `TriggerLauncher is deprecated, please use FlowProvider now.
