@@ -1,6 +1,14 @@
 import { useState, useEffect } from 'react'
 import { Registry } from 'cozy-client'
 import get from 'lodash/get'
+import memoize from 'lodash/memoize'
+
+const memoizedFetchApp = memoize(
+  (registry, slug) => {
+    return registry.fetchApp(slug)
+  },
+  (registry, slug) => slug
+)
 
 const useMaintenanceStatus = (client, konnector) => {
   const { slug, source } = konnector
@@ -23,7 +31,7 @@ const useMaintenanceStatus = (client, konnector) => {
       }
       try {
         setFetchStatus('loading')
-        const appStatus = await registry.fetchApp(slug)
+        const appStatus = await memoizedFetchApp(registry, slug)
         const isInMaintenance = get(appStatus, 'maintenance_activated', false)
         const messages = get(appStatus, 'maintenance_options.messages', {})
         setFetchStatus('loaded')
