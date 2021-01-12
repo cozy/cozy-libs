@@ -19,7 +19,7 @@ const WarningError = () => {
   const { t } = useI18n()
   return (
     <span aria-label={t('badges.warning')}>
-      <Icon icon={WarningIcon} size={13} className="u-ml-half" />
+      <Icon icon={WarningIcon} size={13} className="u-error u-ml-half" />
     </span>
   )
 }
