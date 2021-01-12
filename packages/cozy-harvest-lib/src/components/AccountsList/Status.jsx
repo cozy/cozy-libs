@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import { getErrorLocale } from '../../helpers/konnectors'
@@ -32,8 +33,14 @@ const Status = ({ t, trigger, konnector }) => {
         if (error) {
           return (
             <div className="u-flex u-flex-justify-center u-flex-items-center">
-              <span className="u-mr-half u-caption u-error">{errorTitle}</span>
-              <Icon icon={WarningIcon} size={16} className="u-flex-shrink-0" />
+              <Typography variant="caption" className="u-mr-half u-error">
+                {errorTitle}
+              </Typography>
+              <Icon
+                icon={WarningIcon}
+                size={16}
+                className="u-error u-flex-shrink-0"
+              />
             </div>
           )
         }

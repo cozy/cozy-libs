@@ -3,15 +3,15 @@ import PropTypes from 'prop-types'
 
 import logger from '../../logger'
 import Card from 'cozy-ui/transpiled/react/Card'
-import { SubTitle, Caption } from 'cozy-ui/transpiled/react/Text'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
 import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const WebsiteLinkCard = ({ link }) => {
   const { t } = useI18n()
@@ -28,7 +28,9 @@ const WebsiteLinkCard = ({ link }) => {
 
   return (
     <Card>
-      <SubTitle className="u-mb-1">{t('card.websiteLink.title')}</SubTitle>
+      <Typography className="u-mb-1" variant="h5">
+        {t('card.websiteLink.title')}
+      </Typography>
       <Divider className="u-ml-0 u-maw-100" />
       <Media className="u-mt-1" align="top">
         <Img className="u-pr-1">
@@ -44,7 +46,9 @@ const WebsiteLinkCard = ({ link }) => {
             className="u-primaryColor u-m-0"
             style={linkStyle}
           />
-          <Caption>{t('card.websiteLink.description')}</Caption>
+          <Typography variant="caption" color="textSecondary">
+            {t('card.websiteLink.description')}
+          </Typography>
         </Bd>
       </Media>
     </Card>

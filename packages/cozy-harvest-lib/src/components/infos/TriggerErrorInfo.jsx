@@ -3,11 +3,11 @@ import PropTypes from 'prop-types'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
-import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
-
 import { getErrorLocale } from '../../helpers/konnectors'
+
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  * Component used to show an error related to an account or to a konnector job
@@ -26,14 +26,14 @@ export class TriggerErrorInfo extends PureComponent {
         theme="danger"
         description={
           <>
-            <SubTitle className="u-error">
+            <Typography className="u-error" variant="h6" gutterBottom>
               {getErrorLocale(error, konnector, t, 'title')}
-            </SubTitle>
-            <Text>
+            </Typography>
+            <Typography variant="body1">
               <Markdown
                 source={getErrorLocale(error, konnector, t, 'description')}
               />
-            </Text>
+            </Typography>
           </>
         }
       />

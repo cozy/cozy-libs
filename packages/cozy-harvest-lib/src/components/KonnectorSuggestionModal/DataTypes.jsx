@@ -1,10 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Text from 'cozy-ui/transpiled/react/Text'
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
-
 import activityIcon from '../../assets/datatypes/icon-activity.svg'
+
 import appointmentIcon from '../../assets/datatypes/icon-appointment.svg'
 import bankTransactionsIcon from '../../assets/datatypes/icon-bankTransactions.svg'
 import bankAccountsIcon from '../../assets/datatypes/icon-bankAccounts.svg'
@@ -36,6 +35,7 @@ import travelDateIcon from '../../assets/datatypes/icon-travelDate.svg'
 import tweetIcon from '../../assets/datatypes/icon-tweet.svg'
 import videostreamIcon from '../../assets/datatypes/icon-videostream.svg'
 import weightIcon from '../../assets/datatypes/icon-weight.svg'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const icons = {
   activity: activityIcon,
@@ -75,9 +75,9 @@ const icons = {
 const DataTypes = ({ t, dataTypes, konnectorName }) => {
   return dataTypes.length > 0 ? (
     <>
-      <Text className="u-ta-center">
+      <Typography className="u-ta-center" variant="body1">
         {t('suggestions.data', { name: konnectorName })}
-      </Text>
+      </Typography>
       <ul className="u-w-100 u-nolist u-mt-0 u-ph-0 u-mb-half">
         {dataTypes.map(dataType => {
           const TypeIcon = icons[dataType]
