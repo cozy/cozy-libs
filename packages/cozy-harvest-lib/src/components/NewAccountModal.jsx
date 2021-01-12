@@ -56,24 +56,24 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
         <DialogContent className="u-ta-center u-pt-1 u-pb-3">
           <Spinner size="xxlarge" />
         </DialogContent>
+      ) : isInMaintenance ? (
+        <DialogContent className="u-pt-0 u-pb-2">
+          <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
+        </DialogContent>
       ) : (
-        <DialogContent className="u-pt-0">
-          {isInMaintenance ? (
-            <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
-          ) : (
-            <TriggerManager
-              konnector={konnector}
-              onLoginSuccess={trigger => {
-                const accountId = triggersModel.getAccountId(trigger)
-                pushHistory(`/accounts/${accountId}/success`)
-              }}
-              onSuccess={trigger => {
-                const accountId = triggersModel.getAccountId(trigger)
-                pushHistory(`/accounts/${accountId}/success`)
-              }}
-              onVaultDismiss={onDismiss}
-            />
-          )}
+        <DialogContent className="u-pt-0 u-pb-2">
+          <TriggerManager
+            konnector={konnector}
+            onLoginSuccess={trigger => {
+              const accountId = triggersModel.getAccountId(trigger)
+              pushHistory(`/accounts/${accountId}/success`)
+            }}
+            onSuccess={trigger => {
+              const accountId = triggersModel.getAccountId(trigger)
+              pushHistory(`/accounts/${accountId}/success`)
+            }}
+            onVaultDismiss={onDismiss}
+          />
         </DialogContent>
       )}
     </>
