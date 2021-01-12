@@ -2,10 +2,10 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import MaintenanceHeader from './MaintenanceHeader'
+
 import Markdown from '../Markdown'
 
 const KonnectorMaintenance = ({ maintenanceMessages, lang, t }) => {
@@ -16,10 +16,12 @@ const KonnectorMaintenance = ({ maintenanceMessages, lang, t }) => {
       <MaintenanceHeader message={shortMessage} />
       {longMessage && (
         <Stack spacing="xs">
-          <SubTitle>{t('maintenance.explanationTitle')}</SubTitle>
-          <Text>
+          <Typography variant="h5">
+            {t('maintenance.explanationTitle')}
+          </Typography>
+          <Typography variant="body1">
             <Markdown source={longMessage} />
-          </Text>
+          </Typography>
         </Stack>
       )}
     </div>
