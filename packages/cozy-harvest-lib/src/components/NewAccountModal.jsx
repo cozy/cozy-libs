@@ -5,8 +5,9 @@ import { useClient } from 'cozy-client'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import TriggerManager from '../components/TriggerManager'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import TriggerManager from './TriggerManager'
 import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
@@ -15,7 +16,6 @@ import { MountPointContext } from './MountPointContext'
 import DialogContent from '@material-ui/core/DialogContent'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import { useDialogContext } from './DialogContext'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  * We need to deal with `onLoginSuccess` and `onSucess` because we
