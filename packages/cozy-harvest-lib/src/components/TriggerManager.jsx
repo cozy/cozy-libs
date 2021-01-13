@@ -438,12 +438,12 @@ const LegacyTriggerManager = props => {
   )
 }
 
-export const IntentTriggerManager = props => {
+export const IntentTriggerManager = ({ vaultUnlockFormProps, ...props }) => {
   return (
     <HarvestVaultProvider>
       <VaultUnlockProvider>
         <LegacyTriggerManager {...props} />
-        <VaultUnlockPlaceholder />
+        <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
       </VaultUnlockProvider>
     </HarvestVaultProvider>
   )

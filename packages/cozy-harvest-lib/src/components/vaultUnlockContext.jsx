@@ -45,12 +45,14 @@ export const VaultUnlockProvider = ({ children }) => {
   )
 }
 
-export const VaultUnlockPlaceholder = () => {
+export const VaultUnlockPlaceholder = ({
+  unlockFormProps: unlockFormPropsProp
+}) => {
   const { showingUnlockForm, unlockFormProps } = useVaultUnlockContext()
   if (!showingUnlockForm) {
     return null
   }
-  return <VaultUnlocker {...unlockFormProps} />
+  return <VaultUnlocker {...unlockFormProps} {...unlockFormPropsProp} />
 }
 
 export const withVaultUnlockContext = Component => {
