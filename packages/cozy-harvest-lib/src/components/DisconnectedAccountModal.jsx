@@ -74,7 +74,9 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
               <Contracts contracts={accounts} />
             </DialogContent>
           ) : (
-            t('contracts.no-contracts')
+            <DialogContent className="u-pb-1-half">
+              {t('contracts.no-contracts')}
+            </DialogContent>
           )}
         </>
       ) : null}
