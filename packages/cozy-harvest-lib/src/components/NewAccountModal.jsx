@@ -5,8 +5,9 @@ import { useClient } from 'cozy-client'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import TriggerManager from '../components/TriggerManager'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import TriggerManager from './TriggerManager'
 import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
@@ -15,7 +16,6 @@ import { MountPointContext } from './MountPointContext'
 import DialogContent from '@material-ui/core/DialogContent'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import { useDialogContext } from './DialogContext'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  * We need to deal with `onLoginSuccess` and `onSucess` because we
@@ -56,24 +56,24 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
         <DialogContent className="u-ta-center u-pt-1 u-pb-3">
           <Spinner size="xxlarge" />
         </DialogContent>
+      ) : isInMaintenance ? (
+        <DialogContent className="u-pt-0 u-pb-2">
+          <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
+        </DialogContent>
       ) : (
-        <DialogContent className="u-pt-0">
-          {isInMaintenance ? (
-            <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
-          ) : (
-            <TriggerManager
-              konnector={konnector}
-              onLoginSuccess={trigger => {
-                const accountId = triggersModel.getAccountId(trigger)
-                pushHistory(`/accounts/${accountId}/success`)
-              }}
-              onSuccess={trigger => {
-                const accountId = triggersModel.getAccountId(trigger)
-                pushHistory(`/accounts/${accountId}/success`)
-              }}
-              onVaultDismiss={onDismiss}
-            />
-          )}
+        <DialogContent className="u-pt-0 u-pb-2">
+          <TriggerManager
+            konnector={konnector}
+            onLoginSuccess={trigger => {
+              const accountId = triggersModel.getAccountId(trigger)
+              pushHistory(`/accounts/${accountId}/success`)
+            }}
+            onSuccess={trigger => {
+              const accountId = triggersModel.getAccountId(trigger)
+              pushHistory(`/accounts/${accountId}/success`)
+            }}
+            onVaultDismiss={onDismiss}
+          />
         </DialogContent>
       )}
     </>

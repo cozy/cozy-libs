@@ -1,20 +1,20 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { Title } from 'cozy-ui/transpiled/react/Text'
-
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/RaisedList'
 
 import withLocales from '../hoc/withLocales'
+
 import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 export const DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
   const activeCiphers = ciphers.filter(cipherView => !cipherView.deletedDate)
   return (
     <>
-      <Title className="u-ta-center u-mb-2">
+      <Typography className="u-ta-center u-mb-2" variant="h4">
         {t('vaultCiphersList.title')}
-      </Title>
+      </Typography>
       <List>
         {activeCiphers.map(cipherView => (
           <CiphersListItem

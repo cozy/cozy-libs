@@ -5,21 +5,21 @@ import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import AppLinker, { generateWebLink } from 'cozy-ui/transpiled/react/AppLinker'
 import { Button, ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import { Title, Caption } from 'cozy-ui/transpiled/react/Text'
-
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+
 import Dialog, {
   DialogActions,
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
 import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
-
 import Illustration from './Illustration'
+
 import DataTypes from './DataTypes'
 import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
 import { getSuggestionReason } from '../../helpers/appSuggestions'
-
 import withMobileDialog from '@material-ui/core/withMobileDialog'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const KonnectorSuggestionModal = ({
   t,
@@ -65,20 +65,24 @@ const KonnectorSuggestionModal = ({
         <DialogContent>
           <div className="u-flex u-flex-column u-flex-items-center">
             <Illustration alt={t('app.logo.alt', { name })} app={slug} />
-            <Title className="u-mb-half">
+            <Typography className="u-mb-half" variant="h4">
               {t('suggestions.title', { name })}
-            </Title>
+            </Typography>
             <DataTypes dataTypes={dataTypes} konnectorName={name} />
           </div>
         </DialogContent>
         <DialogActions>
           <div className="u-flex u-flex-column u-flex-items-center u-w-100">
             {reason === 'FOUND_TRANSACTION' && (
-              <Caption className="u-mb-1">
+              <Typography
+                className="u-mb-1"
+                variant="caption"
+                color="textSecondary"
+              >
                 {t('suggestions.why', { name })}
                 <br />
                 {t('suggestions.reason_bank', { name })}
-              </Caption>
+              </Typography>
             )}
             <AppLinker
               slug={storeAppName}

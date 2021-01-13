@@ -106,6 +106,7 @@ describe('TriggerManager', () => {
 
   describe('when given an oauth konnector', () => {
     it('should redirect to OAuthForm', () => {
+      mockVaultClient.getAll.mockResolvedValue([])
       const component = shallow(
         <I18n lang="en" dictRequire={() => enLocale}>
           <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />

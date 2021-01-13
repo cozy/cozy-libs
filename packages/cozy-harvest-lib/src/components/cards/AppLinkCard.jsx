@@ -7,12 +7,12 @@ import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Circle from 'cozy-ui/transpiled/react/Circle'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { Text, SubTitle } from 'cozy-ui/transpiled/react/Text'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useClient } from 'cozy-client'
 import palette from 'cozy-ui/transpiled/react/palette'
 import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const AppLinkCard = ({ slug, path, icon, iconColor }) => {
   const { t } = useI18n()
@@ -28,7 +28,7 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
   return (
     <Card>
       <Stack>
-        <SubTitle>
+        <Typography variant="h6" gutterBottom>
           <Circle
             size="small"
             backgroundColor={palette[iconColor]}
@@ -37,8 +37,10 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
             <Icon icon={icon} color={palette['white']} />
           </Circle>
           {t(`card.appLink.${slug}.title`)}
-        </SubTitle>
-        <Text>{t(`card.appLink.${slug}.description`)}</Text>
+        </Typography>
+        <Typography variant="body1">
+          {t(`card.appLink.${slug}.description`)}
+        </Typography>
         <AppLinker slug={slug} nativePath={path} href={url}>
           {({ onClick, href }) => (
             <ButtonLink

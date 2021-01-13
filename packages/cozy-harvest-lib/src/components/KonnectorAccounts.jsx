@@ -9,7 +9,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
-import Bold from 'cozy-ui/transpiled/react/Text'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import CozyRealtime from 'cozy-realtime'
 import { fetchAccountsFromTriggers } from '../connections/accounts'
 
@@ -110,7 +110,9 @@ export class KonnectorAccounts extends React.Component {
     if (this.state.boundaryErrorInfo) {
       return (
         <div className="u-error">
-          <Bold>{this.state.boundaryError.message}</Bold>
+          <Typography variant="h6">
+            {this.state.boundaryError.message}
+          </Typography>
           <pre>{this.state.boundaryErrorInfo.componentStack + ''}</pre>
         </div>
       )

@@ -34,7 +34,7 @@ import { useTrackPage, useTracker } from '../../hoc/tracking'
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
-import { KonnectorVaultUnlocker } from '../../TriggerManager'
+import { useVaultUnlockContext } from '../../vaultUnlockContext'
 import { unshareCipher } from '../../../models/cipherUtils'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
@@ -81,10 +81,10 @@ const ConfigurationTab = ({
   const vaultClient = useVaultClient()
   const [deleting, setDeleting] = useState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
-  const [unlockVault, setUnlockVault] = useState(false)
   const tracker = useTracker()
   const flowState = flow.getState()
   const { error, running } = flowState
+  const { showUnlockForm } = useVaultUnlockContext()
   const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
     error,
     flowState
@@ -101,7 +101,10 @@ const ConfigurationTab = ({
     )
     const konnectorPolicy = findKonnectorPolicy(konnector)
     if (extensionInstalled && konnectorPolicy.saveInVault) {
-      setUnlockVault(true)
+      showUnlockForm({
+        closable: true,
+        onUnlock: handleUnlock
+      })
     } else {
       await handleDeleteAccount()
     }
@@ -132,7 +135,6 @@ const ConfigurationTab = ({
   const handleUnlock = async () => {
     await handleDeleteAccount()
     await unshareCipher(vaultClient, account)
-    setUnlockVault(false)
   }
 
   return (
@@ -194,14 +196,6 @@ const ConfigurationTab = ({
             <ConfirmationDialog
               onCancel={handleCancelDeleteRequest}
               onConfirm={handleDeleteConfirm}
-            />
-          ) : null}
-          {unlockVault ? (
-            <KonnectorVaultUnlocker
-              konnector={konnector}
-              onDismiss={() => setUnlockVault(false)}
-              closable={true}
-              onUnlock={handleUnlock}
             />
           ) : null}
         </NavigationListSection>

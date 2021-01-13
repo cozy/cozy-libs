@@ -8,7 +8,10 @@ import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
 import AppLike from '../../../../test/AppLike'
 import { CozyUtils } from 'cozy-keys-lib'
-
+import {
+  VaultUnlockProvider,
+  VaultUnlockPlaceholder
+} from '../../vaultUnlockContext'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
 jest.mock('../../../konnector-policies', () => ({
@@ -69,13 +72,16 @@ describe('ConfigurationTab', () => {
     const root = render(
       <MountPointProvider baseRoute="/">
         <AppLike client={mockClient}>
-          <ConfigurationTab
-            konnector={konnector}
-            account={account}
-            addAccount={addAccount}
-            onAccountDeleted={onAccountDeleted}
-            flow={flow}
-          />
+          <VaultUnlockProvider>
+            <ConfigurationTab
+              konnector={konnector}
+              account={account}
+              addAccount={addAccount}
+              onAccountDeleted={onAccountDeleted}
+              flow={flow}
+            />
+            <VaultUnlockPlaceholder />
+          </VaultUnlockProvider>
         </AppLike>
       </MountPointProvider>
     )

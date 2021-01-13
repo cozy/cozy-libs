@@ -4,8 +4,8 @@ import cx from 'classnames'
 import { withBreakpoints } from 'cozy-ui/transpiled/react'
 import MaintenanceIcon from './MaintenanceIcon'
 import Stack from 'cozy-ui/transpiled/react/Stack'
-import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const MaintenanceHeader = ({ message, t, breakpoints: { isMobile } }) => (
   <div
@@ -19,10 +19,12 @@ const MaintenanceHeader = ({ message, t, breakpoints: { isMobile } }) => (
   >
     <MaintenanceIcon />
     <Stack spacing="xs">
-      <SubTitle className="u-ta-center-s u-error">
+      <Typography className="u-ta-center-s u-error" variant="h5">
         {t('maintenance.noService')}
-      </SubTitle>
-      <Text className="u-error">{message}</Text>
+      </Typography>
+      <Typography className="u-error" variant="body1">
+        {message}
+      </Typography>
     </Stack>
   </div>
 )
