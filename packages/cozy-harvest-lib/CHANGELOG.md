@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.35.2...cozy-harvest-lib@3.0.0) (2021-01-13)
+
+
+### Bug Fixes
+
+* Add bottom padding to oauth modal ([1ea3e5b](https://github.com/cozy/cozy-libs/commit/1ea3e5b))
+
+
+### Features
+
+* Add u-error class to WarningIcon ([9079377](https://github.com/cozy/cozy-libs/commit/9079377))
+* Convert Text to Typography ([e919799](https://github.com/cozy/cozy-libs/commit/e919799))
+* Main harvest modal is hidden when vault unlock is opened ([76b3343](https://github.com/cozy/cozy-libs/commit/76b3343))
+* Pass props to the VaultUnlocker through VaultUnlockPlaceholder ([46e3356](https://github.com/cozy/cozy-libs/commit/46e3356))
+
+
+### Performance Improvements
+
+* Memoize fetch app from registry for maintenance ([bbea7aa](https://github.com/cozy/cozy-libs/commit/bbea7aa))
+
+
+### BREAKING CHANGES
+
+* When using the TriggerManager outside the main Harvest
+Routes, you need to
+`import { IntentTriggerManager } from 'cozy-harvest-lib'`, instead of
+`import { TriggerManager } from 'cozy-harvest-lib'.
+
+
+
+
+
 ## [2.35.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.35.1...cozy-harvest-lib@2.35.2) (2021-01-11)
 
 
