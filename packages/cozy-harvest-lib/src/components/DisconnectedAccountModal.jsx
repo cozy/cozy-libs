@@ -1,21 +1,16 @@
 import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
-import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
-import KonnectorModalHeader from './KonnectorModalHeader'
 
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Card from 'cozy-ui/transpiled/react/Card'
-import {
-  Tabs,
-  Tab,
-  TabList,
-  TabPanels,
-  TabPanel
-} from 'cozy-ui/transpiled/react/Tabs'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
+import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
+import KonnectorModalHeader from './KonnectorModalHeader'
 import withLocales from './hoc/withLocales'
 import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
 
@@ -58,28 +53,22 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
     <Dialog aria-label={t('modal.aria-label')} {...dialogProps}>
       <DialogCloseButton onClick={onClose} />
       <KonnectorModalHeader konnector={konnectorRef.current} />
-      <DialogContent className={isMobile ? 'u-p-0' : null}>
-        <Tabs initialActiveTab={initialActiveTab}>
-          <TabList>
-            <Tab onClick={() => setActiveTab('data')} name="data">
-              {t('modal.tabs.data')}
-            </Tab>
-            <Tab
-              onClick={() => setActiveTab('configuration')}
-              name="configuration"
-            >
-              {t('modal.tabs.configuration')}
-            </Tab>
-          </TabList>
-        </Tabs>
-      </DialogContent>
-      <TabPanels activeTab={activeTab}>
-        <TabPanel name="data" className="u-pt-1">
-          <DialogContent>
-            <Card>{t('disconnectedAccountModal.disconnected-help')}</Card>
-          </DialogContent>
-        </TabPanel>
-        <TabPanel name="configuration">
+      <Tabs onChange={setActiveTab} value={activeTab}>
+        <Tab label={t('modal.tabs.data')} onClick={() => setActiveTab(0)} />
+        <Tab
+          onClick={() => setActiveTab(1)}
+          label={t('modal.tabs.configuration')}
+        />
+      </Tabs>
+      <Divider />
+
+      {activeTab === 0 ? (
+        <DialogContent className="u-pb-1-half">
+          <Card>{t('disconnectedAccountModal.disconnected-help')}</Card>
+        </DialogContent>
+      ) : null}
+      {activeTab === 1 ? (
+        <>
           {accounts.length ? (
             <DialogContent className={isMobile ? 'u-ph-0' : 'u-pt-1-half'}>
               <Contracts contracts={accounts} />
@@ -87,14 +76,14 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
           ) : (
             t('contracts.no-contracts')
           )}
-        </TabPanel>
-      </TabPanels>
+        </>
+      ) : null}
     </Dialog>
   )
 }
 
 DisconnectedModal.defaultProps = {
-  initialActiveTab: 'configuration'
+  initialActiveTab: 1
 }
 
 DisconnectedModal.propTypes = {
