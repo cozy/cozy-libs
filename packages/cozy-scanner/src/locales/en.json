@@ -82,6 +82,10 @@
       "tax_timetable": "Payment Plans Installment Agreements",
       "receipt": "Receipt",
       "other_tax_document": "Other tax document",
+      "bank_details": "Bank details",
+      "bank_statement": "Bank statement",
+      "loan_agreement": "Loan agreement",
+      "other_bank_document": "Other banking document",
       "invoices": "Invoices",
       "other_invoice": "Other invoice"
     },
@@ -95,7 +99,7 @@
       "invoice": "Invoice",
       "others": "Others",
       "undefined": "Undefined",
-      "tax": "Tax"
+      "finance": "Finance"
     }
   }
 }
