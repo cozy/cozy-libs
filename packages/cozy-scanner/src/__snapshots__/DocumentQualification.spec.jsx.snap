@@ -399,7 +399,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.tax
+            Scan.themes.finance
           </span>
         </div>
       </div>
@@ -857,7 +857,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
           <span
             class="grid-item-theme u-ellipsis"
           >
-            Scan.themes.tax
+            Scan.themes.finance
           </span>
         </div>
       </div>
