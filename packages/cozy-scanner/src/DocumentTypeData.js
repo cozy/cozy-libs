@@ -83,7 +83,17 @@ const transportLabels = [
   'other_transport_document'
 ]
 
-const taxLabels = ['tax_return', 'tax_notice', 'tax_timetable', 'receipt']
+const financeLabels = [
+  'tax_return',
+  'tax_notice',
+  'tax_timetable',
+  'receipt',
+  'other_tax_document',
+  'bank_details',
+  'bank_statement',
+  'loan_agreement',
+  'other_bank_document'
+]
 
 const invoiceLabels = [
   'phone_invoice',
@@ -142,9 +152,9 @@ export const themes = [
   },
   {
     id: 'theme7',
-    label: 'tax',
+    label: 'finance',
     icon: 'bank',
-    items: buildItems(taxLabels)
+    items: buildItems(financeLabels)
   },
   {
     id: 'theme8',

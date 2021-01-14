@@ -82,6 +82,10 @@
       "tax_timetable": "Echéancier d'imposition",
       "receipt": "Accusé de réception",
       "other_tax_document": "Autre document d'impôt",
+      "bank_details": "RIB",
+      "bank_statement": "Relevé de compte",
+      "loan_agreement": "Contrat de prêt",
+      "other_bank_document": "Autre document bancaire",
       "invoices": "Factures",
       "other_invoice": "Autre facture"
     },
@@ -95,7 +99,7 @@
       "invoice": "Factures",
       "others": "Autres",
       "undefined": "Indéfini",
-      "tax": "Impôts"
+      "finance": "Finances"
     }
   }
 }
