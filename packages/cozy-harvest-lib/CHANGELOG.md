@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.0.0...cozy-harvest-lib@3.1.0) (2021-01-14)
+
+
+### Bug Fixes
+
+* Add padding for text when no more account ([af019ab](https://github.com/cozy/cozy-libs/commit/af019ab))
+
+
+### Features
+
+* Make wording of account deletion dialog cozy agnostic ([7c92eba](https://github.com/cozy/cozy-libs/commit/7c92eba))
+* Use new tabs in disconnected account modal ([a917a1d](https://github.com/cozy/cozy-libs/commit/a917a1d))
+
+
+
+
+
 # [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@2.35.2...cozy-harvest-lib@3.0.0) (2021-01-13)
 
 
