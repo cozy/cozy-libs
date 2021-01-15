@@ -22,22 +22,21 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
-
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
+
+import { deleteAccount } from '../../../connections/accounts'
+import { unshareCipher } from '../../../models/cipherUtils'
+import { findKonnectorPolicy } from '../../../konnector-policies'
 
 import useSafeState from '../../useSafeState'
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
-import { deleteAccount } from '../../../connections/accounts'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
+import { useVaultUnlockContext } from '../../vaultUnlockContext'
 
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
-
-import { useVaultUnlockContext } from '../../vaultUnlockContext'
-import { unshareCipher } from '../../../models/cipherUtils'
-import { findKonnectorPolicy } from '../../../konnector-policies'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
