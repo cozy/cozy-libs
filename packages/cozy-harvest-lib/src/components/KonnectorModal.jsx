@@ -31,7 +31,7 @@ import {
 import DialogContent from '@material-ui/core/DialogContent'
 
 const DumbKonnectorDialog = ({
-  dismissAction,
+  onClose,
   konnector,
   addingAccount,
   account,
@@ -44,11 +44,11 @@ const DumbKonnectorDialog = ({
   const { dialogProps, dialogTitleProps } = useCozyDialog({
     size: 'medium',
     open: true,
-    onClose: dismissAction
+    onClose
   })
   return (
     <Dialog {...dialogProps}>
-      <DialogCloseButton onClick={dismissAction} />
+      <DialogCloseButton onClick={onClose} />
       <DialogTitle {...dialogTitleProps}>
         <div className="u-flex u-flex-row u-w-100 u-flex-items-center">
           <div className="u-w-3 u-h-3 u-mr-half">
@@ -70,7 +70,7 @@ const DumbKonnectorDialog = ({
           </div>
           <Button
             icon={<Icon icon={CrossIcon} size={'24'} />}
-            onClick={dismissAction}
+            onClick={onClose}
             iconOnly
             label={t('close')}
             subtle
@@ -86,7 +86,7 @@ const DumbKonnectorDialog = ({
 const DumbKonnectorDialogContent = props => {
   const { t } = useI18n()
   const {
-    dismissAction,
+    onClose,
     konnector,
     account,
     accountsAndTriggers,
@@ -156,7 +156,7 @@ const DumbKonnectorDialogContent = props => {
         konnector={konnector}
         initialTrigger={trigger}
         account={account}
-        onAccountDeleted={dismissAction}
+        onAccountDeleted={onClose}
         addAccount={requestAccountCreation}
         refetchTrigger={refetchTrigger}
       />
@@ -321,7 +321,7 @@ export class KonnectorModal extends PureComponent {
   }
 
   render() {
-    const { dismissAction, konnector } = this.props
+    const { onClose, konnector } = this.props
     const {
       account,
       accountsAndTriggers,
@@ -333,7 +333,7 @@ export class KonnectorModal extends PureComponent {
 
     return (
       <DumbKonnectorDialog
-        dismissAction={dismissAction}
+        onClose={onClose}
         konnector={konnector}
         account={account}
         accountsAndTriggers={accountsAndTriggers}
@@ -342,7 +342,7 @@ export class KonnectorModal extends PureComponent {
         requestAccountChange={this.requestAccountChange}
         content={
           <DumbKonnectorDialogContent
-            dismissAction={dismissAction}
+            onClose={onClose}
             konnector={konnector}
             account={account}
             accountsAndTriggers={accountsAndTriggers}
@@ -371,7 +371,7 @@ KonnectorModal.propTypes = {
       data: PropTypes.arrayOf(PropTypes.object)
     })
   }).isRequired,
-  dismissAction: PropTypes.func.isRequired,
+  onClose: PropTypes.func.isRequired,
   createAction: PropTypes.func,
   onAccountChange: PropTypes.func
 }

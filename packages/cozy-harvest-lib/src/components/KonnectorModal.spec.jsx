@@ -42,7 +42,7 @@ describe('KonnectorModal', () => {
       }
     }
     props = {
-      dismissAction: jest.fn(),
+      onClose: jest.fn(),
       onSuccess: jest.fn(),
       konnector: mockKonnector,
       t
