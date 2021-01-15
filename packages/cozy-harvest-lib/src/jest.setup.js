@@ -9,34 +9,39 @@ minilog.suggest.deny('harvest', 'error')
 
 configure({ adapter: new Adapter() })
 
+const isComponentWillMountOrWillUpdateWarning = message => {
+  return (
+    message.startsWith('Warning: componentWillMount has been renamed') ||
+    message.startsWith('Warning: componentWillUpdate has been renamed') ||
+    message.startsWith('Warning: componentWillReceiveProps has been renamed')
+  )
+}
+
+const isWarningForComponent = (message, Component) => {
+  return message.endsWith(
+    `Please update the following components: ${Component}`
+  )
+}
+
+const shouldIgnoreWarning = message => {
+  /**
+   * We cannot control ReactFinalForm, ReactSwipableView and Select
+   * thus we ignore their warnings, this can be
+   * removed when ReactFinalForm is updated and does not use
+   * componentWillMount and componentWillUpdate
+   */
+  return (
+    isComponentWillMountOrWillUpdateWarning(message) &&
+    (isWarningForComponent(message, 'ReactSwipableView') ||
+      isWarningForComponent(message, 'ReactFinalForm') ||
+      isWarningForComponent(message, 'Select'))
+  )
+}
+
 const originalConsoleWarn = console.warn // eslint-disable-line no-console
 // eslint-disable-next-line no-console
 console.warn = function(message) {
-  if (
-    /**
-     * We cannot control ReactFinalForm, thus we ignore the warning, this can be
-     * removed when ReactFinalForm/ModalContent is updated and does not use
-     * componentWillMount and componentWillUpdate
-     */
-    (((message.startsWith &&
-      message.startsWith('Warning: componentWillMount has been renamed')) ||
-      (message.startsWith &&
-        message.startsWith('Warning: componentWillUpdate has been renamed'))) &&
-      ((message.endsWith &&
-        message.endsWith(
-          'Please update the following components: ReactFinalForm'
-        )) ||
-        (message.endsWith &&
-          message.endsWith(
-            'Please update the following components: ModalContent'
-          )))) ||
-    (message.endsWith &&
-      message.endsWith(
-        'Please update the following components: ReactSwipableView'
-      )) ||
-    (message.endsWith &&
-      message.endsWith('Please update the following components: Select'))
-  ) {
+  if (shouldIgnoreWarning(message)) {
     return
   } else {
     originalConsoleWarn.apply(this, arguments)
