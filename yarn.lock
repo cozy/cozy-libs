@@ -5142,19 +5142,19 @@ cozy-client@14.4.0:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-client@16.2.0:
-  version "16.2.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-16.2.0.tgz#6b1168cf2a91592da5a4dde1d237084dd90aa338"
-  integrity sha512-QJFaUbYGWg98uViIB5LX+4OEHZ7aEYubq5W/zqXQQlbDlGAhxYAtVJyl7hZfF/pex5VyGzSXMmfKxVqxiV0exQ==
+cozy-client@16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-16.12.0.tgz#081bf9b6e4f5e55dba6614fd5e6cbc8ccfece9eb"
+  integrity sha512-9USFGWIRrfu7pYVGNbxmLDu79ysMFjYFvdtT5kXZLoDfscQfsuAKkN8DPeV3ssm+oK8OKQ/qeVCs0JQ0rKb1Aw==
   dependencies:
     "@cozy/minilog" "1.0.0"
     btoa "^1.2.1"
     cozy-device-helper "^1.7.3"
     cozy-logger "^1.6.0"
-    cozy-stack-client "^16.0.0"
-    isomorphic-fetch "^3.0.0"
+    cozy-stack-client "^16.12.0"
     lodash "^4.17.13"
     microee "^0.0.6"
+    node-fetch "^2.6.1"
     open "^7.0.2"
     prop-types "^15.6.2"
     react-redux "^7.2.0"
@@ -5264,11 +5264,12 @@ cozy-stack-client@^14.1.2:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-stack-client@^16.0.0:
-  version "16.0.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-16.0.0.tgz#9946dd2b7afe3ac7b747156ef47e3af20b37759d"
-  integrity sha512-FV+wnjeVzdy3Gv/YQInIVeGO0CFFpATNfXW599+cxPQPejvzAq7XkGYLx2zw6Bmu/2vyBxk8UoomtA2eB27oXA==
+cozy-stack-client@^16.12.0:
+  version "16.12.0"
+  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-16.12.0.tgz#243d35058e2660f3923721ae91ae272a46d7e6ba"
+  integrity sha512-oLWDSFMXbqKDjFAS9saj0U4X9LTfA45JZPPF6p5T2+mYAV4m7NW4pEdv3aYx43z0I9jhyRJyBhiI8E6GYLAjTA==
   dependencies:
+    cozy-flags "^2.5.0"
     detect-node "^2.0.4"
     mime "^2.4.0"
     qs "^6.7.0"
@@ -5282,10 +5283,10 @@ cozy-stack-client@^16.8.0:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-ui@40.1.1:
-  version "40.1.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.1.1.tgz#679c489f4d2be080f67649a1fefffc75968f1f28"
-  integrity sha512-lfRaBCE/D43T/ZmxXRSfExnMmuaN2GKIcE6bvck/1Uj2O14gFbm2+c0Qvq5DJQ4KEGKBUKMziuppTuxfnHtP2w==
+cozy-ui@40.9.1:
+  version "40.9.1"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.9.1.tgz#043394b25704b50bbc54f95325cdd6de7379b3bf"
+  integrity sha512-PYkjJmZpWRVO1dy+FJneKw8va+ooJ39muYCZm0D0jQdocmFVMPCKTfEbtPIMADykNi78B70rhSxsK0xeQ4sm6A==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -5303,10 +5304,10 @@ cozy-ui@40.1.1:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@40.9.1:
-  version "40.9.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-40.9.1.tgz#043394b25704b50bbc54f95325cdd6de7379b3bf"
-  integrity sha512-PYkjJmZpWRVO1dy+FJneKw8va+ooJ39muYCZm0D0jQdocmFVMPCKTfEbtPIMADykNi78B70rhSxsK0xeQ4sm6A==
+cozy-ui@44.1.0:
+  version "44.1.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-44.1.0.tgz#1afa08ac84744e60c4cce7cf2d6bab32497be643"
+  integrity sha512-ycQbXe7GKTTB9HeMX7UH3eusqXBnIwTj2F06bS4CGC9eZuyXxzX9dpucuSTcOn4EaHe+Y7diad9j2tnuHyVyVQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -8872,14 +8873,6 @@ isomorphic-fetch@^2.1.1, isomorphic-fetch@^2.2.1:
     node-fetch "^1.0.1"
     whatwg-fetch ">=0.10.0"
 
-isomorphic-fetch@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz#0267b005049046d2421207215d45d6a262b8b8b4"
-  integrity sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==
-  dependencies:
-    node-fetch "^2.6.1"
-    whatwg-fetch "^3.4.1"
-
 isstream@0.1.x, isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
@@ -11007,12 +11000,6 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
-
-"minilog@git+https://github.com/cozy/minilog.git#master":
-  version "3.1.0"
-  resolved "git+https://github.com/cozy/minilog.git#6da0aa58759c4f1a1a7e0fd093dbe2a67c035c55"
-  dependencies:
-    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
@@ -17050,7 +17037,7 @@ whatwg-fetch@2.0.4:
   version "2.0.4"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-2.0.4.tgz#dde6a5df315f9d39991aa17621853d720b85566f"
 
-whatwg-fetch@>=0.10.0, whatwg-fetch@^3.4.1:
+whatwg-fetch@>=0.10.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.5.0.tgz#605a2cd0a7146e5db141e29d1c62ab84c0c4c868"
   integrity sha512-jXkLtsR42xhXg7akoDKvKWE40eJeI+2KZqcp2h3NsOrRnDvtWX36KcKl30dy+hxECivdk2BVUHVNrPtoMBUx6A==

@@ -433,7 +433,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
               width="16"
             >
               <use
-                xlink:href="#euro"
+                xlink:href="#bill"
               />
             </svg>
           </div>
@@ -891,7 +891,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
               width="16"
             >
               <use
-                xlink:href="#euro"
+                xlink:href="#bill"
               />
             </svg>
           </div>
