@@ -159,7 +159,7 @@ export const themes = [
   {
     id: 'theme8',
     label: 'invoice',
-    icon: 'euro',
+    icon: 'bill',
     items: buildItems(invoiceLabels)
   }
 ]
