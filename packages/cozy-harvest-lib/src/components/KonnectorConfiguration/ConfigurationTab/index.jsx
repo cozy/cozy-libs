@@ -26,6 +26,7 @@ import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 
+import useSafeState from '../../useSafeState'
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { deleteAccount } from '../../../connections/accounts'
@@ -79,7 +80,7 @@ const ConfigurationTab = ({
   const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
   const vaultClient = useVaultClient()
-  const [deleting, setDeleting] = useState(false)
+  const [deleting, setDeleting] = useSafeState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
   const tracker = useTracker()
   const flowState = flow.getState()
