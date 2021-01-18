@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.1.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.1.1...cozy-harvest-lib@3.1.2) (2021-01-18)
+
+
+### Bug Fixes
+
+* Call onUnlock directly if vault is already unlocked ([484c624](https://github.com/cozy/cozy-libs/commit/484c624))
+* Correct padding bottom on vault ciphers list ([28440d1](https://github.com/cozy/cozy-libs/commit/28440d1))
+* Deletion of account ([cc38c8a](https://github.com/cozy/cozy-libs/commit/cc38c8a))
+* Prevent runtime warnings from MUI ([2f5c9c0](https://github.com/cozy/cozy-libs/commit/2f5c9c0))
+* Prevent warnings in console due to setState used after component unmounting ([17910e7](https://github.com/cozy/cozy-libs/commit/17910e7))
+
+
+
+
+
 ## [3.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.1.0...cozy-harvest-lib@3.1.1) (2021-01-18)
 
 **Note:** Version bump only for package cozy-harvest-lib
