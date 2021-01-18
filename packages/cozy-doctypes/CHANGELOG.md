@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.75.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.75.1...cozy-doctypes@1.75.2) (2021-01-18)
+
+
+### Bug Fixes
+
+* Procedure request index ([6423b4a](https://github.com/cozy/cozy-libs/commit/6423b4a))
+
+
+
+
+
 ## [1.75.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.75.0...cozy-doctypes@1.75.1) (2020-11-30)
 
 **Note:** Version bump only for package cozy-doctypes
