@@ -183,7 +183,7 @@ const documents = {
           sourceCategory: 'gov',
           sourceSubCategory: 'tax',
           subjects: {
-            $in: ['revenues']
+            $in: ['tax']
           }
         }
       }
