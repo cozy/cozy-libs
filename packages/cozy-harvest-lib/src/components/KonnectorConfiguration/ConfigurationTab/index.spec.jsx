@@ -7,7 +7,7 @@ import { MountPointProvider } from '../../../components/MountPointContext'
 import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
 import AppLike from '../../../../test/AppLike'
-import { CozyUtils } from 'cozy-keys-lib'
+import { CozyUtils, useVaultClient } from 'cozy-keys-lib'
 import {
   VaultUnlockProvider,
   VaultUnlockPlaceholder
@@ -141,6 +141,9 @@ describe('ConfigurationTab', () => {
   it('should display deletion modal when clicking on disconnect this account (pass extension installed, connector policy saves in vault)', async () => {
     CozyUtils.checkHasInstalledExtension.mockReturnValue(true)
     findKonnectorPolicy.mockReturnValue({ saveInVault: true })
+    useVaultClient.mockReturnValue({
+      isLocked: jest.fn().mockResolvedValue(true)
+    })
     const { root } = setup()
     const btn = root.getByText('Disconnect this account')
     expect(
@@ -170,6 +173,9 @@ describe('ConfigurationTab', () => {
   })
 
   it('should not render identifiers for oauth konnectors', () => {
+    useVaultClient.mockReturnValue({
+      isLocked: jest.fn().mockResolvedValue(false)
+    })
     const { root } = setup({ konnector: { oauth: true } })
     expect(root.queryByText('Identifiers')).toBe(null)
   })

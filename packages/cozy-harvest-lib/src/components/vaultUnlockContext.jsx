@@ -13,7 +13,7 @@ export const VaultUnlockProvider = ({ children }) => {
   const [unlockFormProps, setUnlockFormProps] = useState(null)
 
   const value = useMemo(() => {
-    const showUnlockForm = unlockFormProps => {
+    const showUnlockForm = async unlockFormProps => {
       const onUnlock = () => {
         setShowingUnlockForm(false)
         unlockFormProps.onUnlock && unlockFormProps.onUnlock()
@@ -22,12 +22,18 @@ export const VaultUnlockProvider = ({ children }) => {
         setShowingUnlockForm(false)
         unlockFormProps.onDismiss && unlockFormProps.onDismiss()
       }
-      setUnlockFormProps({
-        ...unlockFormProps,
-        onUnlock,
-        onDismiss
-      })
-      setShowingUnlockForm(true)
+
+      const isLocked = await vaultClient.isLocked()
+      if (isLocked) {
+        setUnlockFormProps({
+          ...unlockFormProps,
+          onUnlock,
+          onDismiss
+        })
+        setShowingUnlockForm(true)
+      } else {
+        onUnlock()
+      }
     }
 
     return {

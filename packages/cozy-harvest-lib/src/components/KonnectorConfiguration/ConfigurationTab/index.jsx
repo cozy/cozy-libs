@@ -22,21 +22,22 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
-
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
+import { deleteAccount } from '../../../connections/accounts'
+import { unshareCipher } from '../../../models/cipherUtils'
+import { findKonnectorPolicy } from '../../../konnector-policies'
+
+import useSafeState from '../../useSafeState'
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
-import { deleteAccount } from '../../../connections/accounts'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
+import { useVaultUnlockContext } from '../../vaultUnlockContext'
 
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
-
-import { useVaultUnlockContext } from '../../vaultUnlockContext'
-import { unshareCipher } from '../../../models/cipherUtils'
-import { findKonnectorPolicy } from '../../../konnector-policies'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
@@ -79,7 +80,7 @@ const ConfigurationTab = ({
   const { pushHistory } = useContext(MountPointContext)
   const client = useClient()
   const vaultClient = useVaultClient()
-  const [deleting, setDeleting] = useState(false)
+  const [deleting, setDeleting] = useSafeState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
   const tracker = useTracker()
   const flowState = flow.getState()
@@ -103,7 +104,7 @@ const ConfigurationTab = ({
     if (extensionInstalled && konnectorPolicy.saveInVault) {
       showUnlockForm({
         closable: true,
-        onUnlock: handleUnlock
+        onUnlock: handleUnlockForDeletion
       })
     } else {
       await handleDeleteAccount()
@@ -113,12 +114,17 @@ const ConfigurationTab = ({
   const handleDeleteAccount = async () => {
     setDeleting(true)
     try {
-      await deleteAccount(client, account)
       onAccountDeleted(account)
+      await deleteAccount(client, account)
+      Alerter.success(t('modal.updateAccount.delete-account-success'))
       tracker.trackEvent({
         name: 'compte_bancaire_supprime',
         connectorSlug: account.account_type
       })
+    } catch (error) {
+      // eslint-disable-next-line no-console
+      console.warn('Error while deleting account', error)
+      Alerter.error(t('modal.updateAccount.delete-account-error'))
     } finally {
       setDeleting(false)
     }
@@ -132,7 +138,7 @@ const ConfigurationTab = ({
     setRequestDeletion(true)
   }
 
-  const handleUnlock = async () => {
+  const handleUnlockForDeletion = async () => {
     await handleDeleteAccount()
     await unshareCipher(vaultClient, account)
   }

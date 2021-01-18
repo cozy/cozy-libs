@@ -364,7 +364,9 @@
     },
     "updateAccount": {
       "general-subheader": "Général",
-      "identifiers": "Identifiants"
+      "identifiers": "Identifiants",
+      "delete-account-success": "Le compte a été déconnecté",
+      "delete-account-error": "Le compte n'a pas pu être déconnecté, merci de réessayer plus tard, ou contactez notre support."
     }
   },
   "oauth": {

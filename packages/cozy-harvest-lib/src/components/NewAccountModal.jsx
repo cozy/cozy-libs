@@ -61,7 +61,7 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
           <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
         </DialogContent>
       ) : (
-        <DialogContent className="u-pt-0 u-pb-2">
+        <DialogContent className="u-pt-0">
           <TriggerManager
             konnector={konnector}
             onLoginSuccess={trigger => {
@@ -74,6 +74,11 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
             }}
             onVaultDismiss={onDismiss}
           />
+          {/*
+            Necessary for correct padding-bottom in the DialogContent scroll
+            container. u-pb-2 on DialogContent would not work in Firefox.
+          */}
+          <div className="u-mb-2" />
         </DialogContent>
       )}
     </>

@@ -81,7 +81,6 @@ describe('KonnectorModal', () => {
     })
     const { root } = setup()
     await waitFor(() => root.getByText('Unable to retrieve your account'))
-    // expect(root).toMatchSnapshot()
   })
 
   it('should show the data view of a single account', async () => {
