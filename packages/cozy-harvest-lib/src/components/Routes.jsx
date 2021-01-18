@@ -32,7 +32,10 @@ import {
 const HarvestDialog = withStyles({
   scrollPaper: {
     alignItems: 'start'
-  }
+  },
+
+  // Necessary to prevent warnings at runtime
+  paper: {}
 })(props => {
   const { showingUnlockForm } = useVaultUnlockContext()
   if (showingUnlockForm) {
