@@ -64,18 +64,18 @@ class AdministrativeProcedure extends Document {
     // Create an index in order to query and sort
     await this.cozyClient
       .collection('io.cozy.files')
-      .createIndex(['metadata.datetime', 'metadata.classification'])
+      .createIndex(['metadata.datetime', 'metadata.qualification'])
     // Use the index
     const files = await this.cozyClient
       .collection('io.cozy.files')
       .find(cozyRules, {
-        indexedFields: ['metadata.datetime', 'metadata.classification'],
+        indexedFields: ['metadata.datetime', 'metadata.qualification'],
         sort: [
           {
             'metadata.datetime': 'desc'
           },
           {
-            'metadata.classification': 'desc'
+            'metadata.qualification': 'desc'
           }
         ],
         limit: count ? count : 1
