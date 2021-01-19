@@ -36,7 +36,7 @@
     "@material-ui/lab": "^3.0.0-alpha.30",
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-preset-cozy-app": "^1.10.0",
-    "cozy-client": "13.15.1",
+    "cozy-client": "16.13.1",
     "cozy-ui": "40.9.1",
     "enzyme-to-json": "3.4.4",
     "jest": "26.2.2",
@@ -46,7 +46,7 @@
     "@babel/runtime": ">=7.12.5",
     "@material-ui/core": ">=3.9.4",
     "@material-ui/lab": ">=3.0.0-alpha.30",
-    "cozy-client": ">=13.15.1",
+    "cozy-client": ">=16.13.1",
     "cozy-doctypes": ">=1.49.3",
     "cozy-realtime": "^3.11.0",
     "cozy-ui": ">=40.9.1"
