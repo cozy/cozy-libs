@@ -19,7 +19,7 @@ const KonnectorMaintenance = ({ maintenanceMessages, lang, t }) => {
           <Typography variant="h5">
             {t('maintenance.explanationTitle')}
           </Typography>
-          <Typography variant="body1">
+          <Typography variant="body1" component="div">
             <Markdown source={longMessage} />
           </Typography>
         </Stack>
