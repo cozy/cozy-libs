@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.11.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.11.0...cozy-scanner@0.11.1) (2021-01-19)
+
+
+### Bug Fixes
+
+* Rename vehicle registration ([8e694cc](https://github.com/cozy/cozy-libs/commit/8e694cc))
+
+
+
+
+
 # [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.10.0...cozy-scanner@0.11.0) (2021-01-14)
 
 
