@@ -10,7 +10,13 @@ import CozyClient from 'cozy-client'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import enLocale from '../../src/locales/en.json'
 
-jest.mock('cozy-keys-lib')
+jest.mock('cozy-keys-lib', () => {
+  const actual = jest.requireActual('cozy-keys-lib')
+  return {
+    ...actual,
+    withVaultUnlockContext: Component => Component
+  }
+})
 jest.mock('cozy-ui/transpiled/react/utils/color')
 jest.mock('cozy-ui/transpiled/react/AppIcon', () => () => null)
 jest.mock('../../src/components/KonnectorIcon', () => () => null)
