@@ -34,7 +34,7 @@ class Procedure extends React.Component {
 
     const { documents: documentsCategory } = creditApplicationTemplate
     Object.keys(documentsCategory).map(document => {
-      fetchDocumentsByCategory(document)
+      fetchDocumentsByCategory(client, document)
     })
   }
 
