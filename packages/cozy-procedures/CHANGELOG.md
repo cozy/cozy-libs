@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.47.0 (2021-01-19)
+
+
+### Bug Fixes
+
+* Use correct subject for tax notice ([58e7ecb](https://github.com/cozy/cozy-libs/commit/58e7ecb)), closes [/github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/assets/qualifications.json#L315-L319](https://github.com//github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/assets/qualifications.json/issues/L315-L319)
+
+
+### Features
+
+* Restrict identify selectivity ([22804ba](https://github.com/cozy/cozy-libs/commit/22804ba))
+
+
+
+
+
 # [0.46.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.45.0...cozy-procedures@0.46.0) (2020-11-30)
 
 
