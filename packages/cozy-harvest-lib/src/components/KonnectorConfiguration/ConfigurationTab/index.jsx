@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
-import { useVaultClient, CozyUtils } from 'cozy-keys-lib'
+import { useVaultClient } from 'cozy-keys-lib'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -25,6 +25,7 @@ import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import { useVaultUnlockContext } from 'cozy-keys-lib'
 
 import { deleteAccount } from '../../../connections/accounts'
 import { unshareCipher } from '../../../models/cipherUtils'
@@ -34,7 +35,6 @@ import useSafeState from '../../useSafeState'
 import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
-import { useVaultUnlockContext } from '../../vaultUnlockContext'
 
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
@@ -97,11 +97,8 @@ const ConfigurationTab = ({
 
   const handleDeleteConfirm = async () => {
     setRequestDeletion(false)
-    const extensionInstalled = await CozyUtils.checkHasInstalledExtension(
-      client
-    )
     const konnectorPolicy = findKonnectorPolicy(konnector)
-    if (extensionInstalled && konnectorPolicy.saveInVault) {
+    if (konnectorPolicy.saveInVault) {
       showUnlockForm({
         closable: true,
         onUnlock: handleUnlockForDeletion

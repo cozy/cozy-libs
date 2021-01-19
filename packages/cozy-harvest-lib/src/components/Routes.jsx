@@ -21,7 +21,7 @@ import {
   useVaultUnlockContext,
   VaultUnlockProvider,
   VaultUnlockPlaceholder
-} from './vaultUnlockContext'
+} from 'cozy-keys-lib'
 
 /**
  * Dialog will not be centered vertically since we need the modal to "stay in place"
@@ -41,6 +41,7 @@ const HarvestDialog = withStyles({
   if (showingUnlockForm) {
     return null
   }
+
   return <Dialog disableRestoreFocus {...props} />
 })
 

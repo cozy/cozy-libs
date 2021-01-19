@@ -21,12 +21,12 @@ import manifest from '../helpers/manifest'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
-import { withVaultUnlockContext } from './vaultUnlockContext'
-import HarvestVaultProvider from './HarvestVaultProvider'
 import {
-  VaultUnlockProvider,
-  VaultUnlockPlaceholder
-} from './vaultUnlockContext'
+  withVaultUnlockContext,
+  VaultUnlockPlaceholder,
+  VaultUnlockProvider
+} from 'cozy-keys-lib'
+import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
