@@ -1,7 +1,8 @@
 import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 import { creditApplicationTemplate } from 'cozy-procedures'
-import { AdministrativeProcedure } from 'cozy-doctypes'
+import { models } from 'cozy-client'
+const { fetchFilesByQualificationRules } = models.file
 
 const documentsSlice = createSlice({
   initialState: {
@@ -124,7 +125,7 @@ export const {
   setLoadingFalse
 } = actions
 
-export function fetchDocumentsByCategory(documentTemplate) {
+export function fetchDocumentsByCategory(client, documentTemplate) {
   return async dispatch => {
     try {
       const docWithRules = creditApplicationTemplate.documents[documentTemplate]
@@ -136,9 +137,7 @@ export function fetchDocumentsByCategory(documentTemplate) {
           })
         )
       }
-
-      const files = await AdministrativeProcedure.getFilesByRules(docWithRules)
-
+      const files = await fetchFilesByQualificationRules(client, docWithRules)
       if (files.data) {
         files.data.map((file, index) => {
           dispatch(
