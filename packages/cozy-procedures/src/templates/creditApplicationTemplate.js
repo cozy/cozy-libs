@@ -165,6 +165,7 @@ const documents = {
         qualification: {
           purpose: 'attestation',
           sourceCategory: 'gov',
+          sourceSubCategory: 'civil_registration',
           subjects: {
             $in: ['identity']
           }
