@@ -262,6 +262,15 @@ export class DumbTriggerManager extends Component {
   async handleVaultUnlock() {
     const { vaultClient, konnector } = this.props
 
+    // If the vault has not been setup, it is still locked
+    // here, since the unlock form has not been shown to
+    // the user.
+    const isLocked = await vaultClient.isLocked()
+    if (isLocked) {
+      this.showAccountForm()
+      return
+    }
+
     const encryptedCiphers = await vaultClient.getAll({
       type: CipherType.Login
     })
