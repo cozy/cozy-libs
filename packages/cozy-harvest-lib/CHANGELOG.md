@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.1.2...cozy-harvest-lib@3.2.0) (2021-01-20)
+
+
+### Bug Fixes
+
+* Show account form if the vault is still locked in handleVaultUnlock ([6b279d8](https://github.com/cozy/cozy-libs/commit/6b279d8))
+
+
+### Features
+
+* Update cozy-keys-lib dev dep ([0e5e8c7](https://github.com/cozy/cozy-libs/commit/0e5e8c7))
+* Update cozy-keys-lib peer dep and dev dep ([0e09dc1](https://github.com/cozy/cozy-libs/commit/0e09dc1))
+
+
+
+
+
 ## [3.1.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.1.1...cozy-harvest-lib@3.1.2) (2021-01-18)
 
 
