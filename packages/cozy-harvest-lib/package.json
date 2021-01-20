@@ -53,7 +53,7 @@
     "cozy-client": "14.4.0",
     "cozy-device-helper": "^1.11.0",
     "cozy-flags": "^2.5.0",
-    "cozy-keys-lib": "3.4.2",
+    "cozy-keys-lib": "3.7.0",
     "cozy-realtime": "^3.12.0",
     "cozy-ui": "40.9.1",
     "enzyme": "3.11.0",
@@ -73,7 +73,7 @@
     "cozy-client": ">=14.4.0",
     "cozy-device-helper": ">=1.10.2",
     "cozy-flags": ">=2.3.5",
-    "cozy-keys-lib": ">=3.4.2",
+    "cozy-keys-lib": ">=3.7.0",
     "cozy-realtime": ">=3.10.5",
     "cozy-ui": ">=40.9.1",
     "react-router-dom": "^5.0.1"

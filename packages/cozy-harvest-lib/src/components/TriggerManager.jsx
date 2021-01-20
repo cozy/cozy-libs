@@ -21,12 +21,12 @@ import manifest from '../helpers/manifest'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
-import { withVaultUnlockContext } from './vaultUnlockContext'
-import HarvestVaultProvider from './HarvestVaultProvider'
 import {
-  VaultUnlockProvider,
-  VaultUnlockPlaceholder
-} from './vaultUnlockContext'
+  withVaultUnlockContext,
+  VaultUnlockPlaceholder,
+  VaultUnlockProvider
+} from 'cozy-keys-lib'
+import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -261,6 +261,15 @@ export class DumbTriggerManager extends Component {
 
   async handleVaultUnlock() {
     const { vaultClient, konnector } = this.props
+
+    // If the vault has not been setup, it is still locked
+    // here, since the unlock form has not been shown to
+    // the user.
+    const isLocked = await vaultClient.isLocked()
+    if (isLocked) {
+      this.showAccountForm()
+      return
+    }
 
     const encryptedCiphers = await vaultClient.getAll({
       type: CipherType.Login

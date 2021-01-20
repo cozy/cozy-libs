@@ -14,5 +14,13 @@ const VaultUnlocker = ({ children, onUnlock }) => {
 VaultUnlocker.displayName = 'withI18n(withLocales(withClient(VaultUnlocker)))'
 
 const withVaultClient = Component => Component
+const withVaultUnlockContext = Component => Component
 
-export { VaultUnlocker, CipherType, withVaultClient, UriMatchType, FieldType }
+export {
+  withVaultUnlockContext,
+  VaultUnlocker,
+  CipherType,
+  withVaultClient,
+  UriMatchType,
+  FieldType
+}

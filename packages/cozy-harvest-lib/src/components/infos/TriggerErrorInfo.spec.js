@@ -1,7 +1,8 @@
 import React from 'react'
-import { shallow } from 'enzyme'
+import { render } from '@testing-library/react'
 
-import { TriggerErrorInfo } from 'components/infos/TriggerErrorInfo'
+import AppLike from '../../../test/AppLike'
+import TriggerErrorInfo from 'components/infos/TriggerErrorInfo'
 import { KonnectorJobError } from 'helpers/konnectors'
 
 const fixtures = {
@@ -29,18 +30,29 @@ describe('TriggerErrorInfo', () => {
     t: tMock
   }
 
+  const setup = ({ props: optionProps } = {}) => {
+    const fakeClient = {}
+    const root = render(
+      <AppLike client={fakeClient}>
+        <TriggerErrorInfo {...props} {...optionProps} />
+      </AppLike>
+    )
+    return { root }
+  }
+
   it('should render', () => {
-    const component = shallow(<TriggerErrorInfo {...props} />).getElement()
-    expect(component).toMatchSnapshot()
+    const { root } = setup()
+    expect(root.getByText('Incorrect or expired credentials')).toBeTruthy()
   })
 
   it('should render regular Error', () => {
-    const component = shallow(
-      <TriggerErrorInfo
-        {...props}
-        error={new Error('Something is undefined')}
-      />
-    ).getElement()
-    expect(component).toMatchSnapshot()
+    const { root } = setup({
+      props: {
+        error: new Error('Something is undefined')
+      }
+    })
+    expect(
+      root.getByText('An unknown error has occurred. (Something is undefined)')
+    ).toBeTruthy()
   })
 })

@@ -7,11 +7,12 @@ import { MountPointProvider } from '../../../components/MountPointContext'
 import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
 import AppLike from '../../../../test/AppLike'
-import { CozyUtils, useVaultClient } from 'cozy-keys-lib'
 import {
+  VaultProvider,
+  VaultUnlockPlaceholder,
   VaultUnlockProvider,
-  VaultUnlockPlaceholder
-} from '../../vaultUnlockContext'
+  useVaultClient
+} from 'cozy-keys-lib'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
 jest.mock('../../../konnector-policies', () => ({
@@ -26,19 +27,15 @@ jest.mock('../../../models/cipherUtils', () => ({
   unshareCipher: jest.fn()
 }))
 
+const SimpleVaultUnlocker = ({ onUnlock }) => {
+  return <button onClick={onUnlock}>Unlock</button>
+}
+
 jest.mock('cozy-keys-lib', () => {
-  const FakeVaultUnlocker = ({ onUnlock }) => {
-    return <button onClick={onUnlock}>Unlock</button>
-  }
+  const actual = jest.requireActual('cozy-keys-lib')
   return {
-    useVaultClient: jest.fn(),
-    withVaultClient: jest.fn().mockReturnValue({
-      displayName: 'withVault'
-    }),
-    CozyUtils: {
-      checkHasInstalledExtension: jest.fn()
-    },
-    VaultUnlocker: FakeVaultUnlocker
+    ...actual,
+    useVaultClient: jest.fn()
   }
 })
 
@@ -58,7 +55,7 @@ describe('ConfigurationTab', () => {
     console.warn = originalWarn
   })
 
-  function setup({ konnector = {} } = {}) {
+  function setup({ konnector = {}, checkShouldUnlock } = {}) {
     const account = {}
     const addAccount = jest.fn()
     const onAccountDeleted = jest.fn()
@@ -69,37 +66,48 @@ describe('ConfigurationTab', () => {
       })
     }
     const mockClient = createMockClient({ queries: {} })
+    const unlockFormProps = {
+      checkShouldUnlock,
+      UnlockForm: SimpleVaultUnlocker
+    }
     const root = render(
       <MountPointProvider baseRoute="/">
         <AppLike client={mockClient}>
-          <VaultUnlockProvider>
-            <ConfigurationTab
-              konnector={konnector}
-              account={account}
-              addAccount={addAccount}
-              onAccountDeleted={onAccountDeleted}
-              flow={flow}
-            />
-            <VaultUnlockPlaceholder />
-          </VaultUnlockProvider>
+          <VaultProvider instance="http://cozy.tools:8080">
+            <VaultUnlockProvider checkShouldUnlock={checkShouldUnlock}>
+              <ConfigurationTab
+                konnector={konnector}
+                account={account}
+                addAccount={addAccount}
+                onAccountDeleted={onAccountDeleted}
+                flow={flow}
+              />
+              <VaultUnlockPlaceholder unlockFormProps={unlockFormProps} />
+            </VaultUnlockProvider>
+          </VaultProvider>
         </AppLike>
       </MountPointProvider>
     )
     return { root }
   }
 
+  beforeEach(() => {
+    deleteAccount.mockReset()
+  })
+
   it('should render', () => {
     const { root } = setup()
     expect(root.getByText('Identifiers')).toBeTruthy()
   })
 
-  beforeEach(() => {
-    deleteAccount.mockReset()
-  })
-
-  it('should display deletion modal when clicking on disconnect this account (pass extension not installed)', async () => {
-    CozyUtils.checkHasInstalledExtension.mockReturnValue(false)
-    const { root } = setup()
+  it('should display deletion modal when clicking on disconnect this account (vault does not need to be unlocked)', async () => {
+    const { root } = setup({
+      checkShouldUnlock: jest.fn().mockResolvedValue(false)
+    })
+    useVaultClient.mockReturnValue({
+      isLocked: jest.fn().mockResolvedValue(false)
+    })
+    findKonnectorPolicy.mockReturnValue({ saveInVault: true })
     const btn = root.getByText('Disconnect this account')
     const modalText =
       'Your account will be disconnected, but already imported data will be kept.'
@@ -114,10 +122,11 @@ describe('ConfigurationTab', () => {
     expect(deleteAccount).toHaveBeenCalled()
   })
 
-  it('should display deletion modal when clicking on disconnect this account (pass extension installed, connector policy does not save in vault)', async () => {
-    CozyUtils.checkHasInstalledExtension.mockReturnValue(true)
+  it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy does not save in vault)', async () => {
     findKonnectorPolicy.mockReturnValue({ saveInVault: false })
-    const { root } = setup()
+    const { root } = setup({
+      checkShouldUnlock: jest.fn().mockResolvedValue(true)
+    })
     const btn = root.getByText('Disconnect this account')
     expect(
       root.queryByText(
@@ -138,13 +147,14 @@ describe('ConfigurationTab', () => {
     expect(deleteAccount).toHaveBeenCalled()
   })
 
-  it('should display deletion modal when clicking on disconnect this account (pass extension installed, connector policy saves in vault)', async () => {
-    CozyUtils.checkHasInstalledExtension.mockReturnValue(true)
+  it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy saves in vault)', async () => {
     findKonnectorPolicy.mockReturnValue({ saveInVault: true })
     useVaultClient.mockReturnValue({
       isLocked: jest.fn().mockResolvedValue(true)
     })
-    const { root } = setup()
+    const { root } = setup({
+      checkShouldUnlock: jest.fn().mockResolvedValue(true)
+    })
     const btn = root.getByText('Disconnect this account')
     expect(
       root.queryByText(
