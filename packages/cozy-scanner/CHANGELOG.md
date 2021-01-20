@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.11.1...cozy-scanner@0.12.0) (2021-01-20)
+
+
+### Features
+
+* Update cozy-client to get newest qualifications ([18fa0ab](https://github.com/cozy/cozy-libs/commit/18fa0ab))
+* Update cozy-ui to use new bill icon ([d5c2d7c](https://github.com/cozy/cozy-libs/commit/d5c2d7c))
+
+
+
+
+
 ## [0.11.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.11.0...cozy-scanner@0.11.1) (2021-01-19)
 
 
