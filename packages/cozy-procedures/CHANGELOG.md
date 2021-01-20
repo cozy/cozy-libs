@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.48.0](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.47.0...cozy-procedures@0.48.0) (2021-01-20)
+
+
+### Features
+
+* Fetch documents through cozy-client helper ([9208ae2](https://github.com/cozy/cozy-libs/commit/9208ae2))
+
+
+
+
+
 # 0.47.0 (2021-01-19)
 
 
