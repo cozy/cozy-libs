@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.2.0...cozy-harvest-lib@3.3.0) (2021-01-21)
+
+
+### Bug Fixes
+
+* Field components used in CollectionField need to forward their ref ([9687414](https://github.com/cozy/cozy-libs/commit/9687414))
+* Filter triggers on worker=konnector, type=[@cron](https://github.com/cron) ([d09c1ea](https://github.com/cozy/cozy-libs/commit/d09c1ea))
+
+
+### Features
+
+* Update cozy-ui ([f551e4c](https://github.com/cozy/cozy-libs/commit/f551e4c))
+
+
+
+
+
 # [3.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.1.2...cozy-harvest-lib@3.2.0) (2021-01-20)
 
 
