@@ -191,7 +191,7 @@ export const fetchAccountsFromTriggers = async (client, triggers) => {
 /**
  * Returns the list of accounts which do not have any associated trigger
  *
- * @param  {Object}  client  CozyClient
+ * @param  {CozyClient}  client  CozyClient
  * @param  {Array}  triggers io.cozy.triggers documents
  */
 export const fetchAccountsWithoutTriggers = async (client, triggers) => {
@@ -206,4 +206,22 @@ export const fetchAccountsWithoutTriggers = async (client, triggers) => {
       }
     })
   )).data
+}
+
+/**
+ * Returns an account without trigger for the given konnector
+ *
+ * @param  {CozyClient} client - Cozy client
+ * @param  {Konnector} konnector - Konnector
+ * @return {Account} An account without trigger for the given konnector
+ */
+export const fetchReusableAccount = async (client, konnector) => {
+  const { data: triggers } = await client.collection('io.cozy.triggers').all()
+  const accountsWithoutTrigger = await fetchAccountsWithoutTriggers(
+    client,
+    triggers
+  )
+  return accountsWithoutTrigger.find(
+    account => account.account_type === konnector.slug
+  )
 }

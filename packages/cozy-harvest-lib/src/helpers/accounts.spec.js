@@ -5,8 +5,7 @@ import {
   updateTwoFaCode,
   resetState,
   getVaultCipherId,
-  setSessionResetIfNecessary,
-  getRescuableAccount
+  setSessionResetIfNecessary
 } from 'helpers/accounts'
 
 const fixtures = {
@@ -172,33 +171,6 @@ describe('Accounts Helper', () => {
           }
         })
       ).toEqual('cipher-id')
-    })
-  })
-
-  describe('getRescuableAccount', () => {
-    it('should return the right account when possible', () => {
-      const accounts = [
-        {
-          account_type: 'otherslug',
-          auth: { login: 'badlogin', password: 'toto' }
-        },
-        {
-          account_type: 'otherslug',
-          auth: { login: 'goodlogin', password: 'badpassword' }
-        },
-        {
-          account_type: 'konnectest',
-          auth: { login: 'goodlogin', password: 'secretpassword' }
-        }
-      ]
-      expect(getRescuableAccount(accounts, fixtures.konnector)).toEqual({
-        account_type: 'konnectest',
-        auth: { login: 'goodlogin', password: 'secretpassword' }
-      })
-    })
-
-    it('should return undefined when no correct account available', () => {
-      expect(getRescuableAccount([], fixtures.konnector)).toBe(undefined)
     })
   })
 })
