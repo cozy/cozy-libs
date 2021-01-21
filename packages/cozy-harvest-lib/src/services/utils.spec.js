@@ -90,16 +90,18 @@ describe('fetchAccountsForCipherId', () => {
   it('should fetch accounts with a relationship with the given cipher id', async () => {
     await fetchAccountsForCipherId(mockCozyClient, '123-456')
 
-    expect(mockCozyClient.find).toHaveBeenCalledWith('io.cozy.accounts')
-    expect(mockCozyClient.where).toHaveBeenCalledWith({
-      'relationships.vaultCipher.data': {
-        _id: '123-456',
-        _type: 'com.bitwarden.ciphers'
-      }
-    })
-    expect(mockCozyClient.indexFields).toHaveBeenCalledWith([
-      'relationships.vaultCipher.data._id'
-    ])
+    expect(mockCozyClient.query).toHaveBeenCalledWith(
+      expect.objectContaining({
+        doctype: 'io.cozy.accounts',
+        selector: {
+          'relationships.vaultCipher.data': {
+            _id: '123-456',
+            _type: 'com.bitwarden.ciphers'
+          }
+        },
+        indexedFields: ['relationships.vaultCipher.data._id']
+      })
+    )
   })
 })
 
@@ -167,6 +169,16 @@ describe('fetchLoginFailedTriggersForAccountsIds', () => {
     const triggers = await fetchLoginFailedTriggersForAccountsIds(
       mockCozyClient,
       accountsIds
+    )
+
+    expect(mockCozyClient.queryAll).toHaveBeenCalledWith(
+      expect.objectContaining({
+        selector: {
+          'message.account': { $in: ['acc1', 'acc2'] },
+          type: '@cron',
+          worker: 'konnector'
+        }
+      })
     )
 
     expect(triggers).toEqual(['tri1', 'tri2'])
