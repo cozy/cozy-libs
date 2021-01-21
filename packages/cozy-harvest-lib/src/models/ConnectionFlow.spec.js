@@ -1,8 +1,6 @@
 import ConnectionFlow from './ConnectionFlow'
 import cronHelpers from 'helpers/cron'
-import {
-  saveAccount
-} from '../connections/accounts'
+import { saveAccount } from '../connections/accounts'
 import {
   createTrigger,
   ensureTrigger,
