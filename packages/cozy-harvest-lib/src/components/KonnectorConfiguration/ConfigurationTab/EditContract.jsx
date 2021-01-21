@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
@@ -41,10 +41,11 @@ import {
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
-const ContactPicker = props => {
+const EditContractContactPicker = function(props, ref) {
   const { t } = useI18n()
   return (
     <BaseContactPicker
+      ref={ref}
       listPlaceholder={t('contractForm.listPlaceholder')}
       listEmptyMessage={t('contractForm.listEmptyMessage')}
       addContactLabel={t('contractForm.addContactLabel')}
@@ -52,6 +53,7 @@ const ContactPicker = props => {
     />
   )
 }
+const ContactPicker = forwardRef(EditContractContactPicker)
 
 const NonGrowingDialogContent = withStyles({
   root: {
