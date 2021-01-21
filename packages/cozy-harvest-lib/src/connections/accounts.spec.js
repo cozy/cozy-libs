@@ -1,13 +1,15 @@
 /* eslint-env jest */
 
 import omit from 'lodash/omit'
+import CozyClient from 'cozy-client'
 import {
   createAccount,
   updateAccount,
   saveAccount,
   deleteAccount,
-  fetchAccountsWithoutTriggers
+  fetchReusableAccount
 } from 'connections/accounts'
+import fixtureFile from '../../test/fixtures'
 
 const client = {
   collection: jest.fn().mockReturnValue({
@@ -80,29 +82,6 @@ const fixtures = {
     _id: 'kaggregated-aggregator'
   }
 }
-
-describe('fetchAccountsWithoutTriggers', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
-
-  afterAll(() => {
-    jest.restoreAllMocks()
-  })
-
-  it('should fetch the list of accounts without triggers', async () => {
-    client.query.mockResolvedValue({
-      data: [fixtures.existingAccount]
-    })
-    const triggers = [
-      { message: { account: 'toto' } },
-      { message: { account: '561be660ff384ce0846c8f20e829ad62' } }
-    ]
-    expect(await fetchAccountsWithoutTriggers(client, triggers)).toEqual([
-      fixtures.existingAccount
-    ])
-  })
-})
 
 describe('Account mutations', () => {
   beforeEach(() => {
@@ -430,5 +409,54 @@ describe('Account mutations', () => {
       expect(client.save).toHaveBeenCalledWith(fixtures.existingAccount)
       expect(account).toEqual(fixtures.existingAccount)
     })
+  })
+})
+
+describe('fetchReusableAccount', () => {
+  const setup = ({ accounts, triggers }) => {
+    const client = new CozyClient({})
+    client.collection = jest.fn(doctype => {
+      if (doctype === 'io.cozy.triggers') {
+        return {
+          all: jest.fn().mockResolvedValue({ data: triggers })
+        }
+      } else {
+        throw new Error(`client.collection for ${doctype} is not mocked`)
+      }
+    })
+    client.query = jest.fn().mockImplementation(() => {
+      return {
+        data: accounts
+      }
+    })
+    return { client }
+  }
+  it('should return the right account when possible', async () => {
+    const { client } = setup({
+      accounts: fixtureFile.accounts,
+      triggers: fixtureFile.triggers
+    })
+    await expect(
+      fetchReusableAccount(client, fixtures.konnector)
+    ).resolves.toEqual({
+      account_type: 'konnectest',
+      auth: { login: 'goodlogin', password: 'secretpassword' }
+    })
+    expect(client.query).toHaveBeenCalledWith(
+      expect.objectContaining({
+        selector: {
+          _id: {
+            $nin: ['otherslug-account', 'otherslug-account2']
+          }
+        }
+      })
+    )
+  })
+
+  it('should return undefined when no correct account available', async () => {
+    const { client } = setup({ accounts: [], triggers: fixtureFile.triggers })
+    await expect(
+      fetchReusableAccount(client, fixtures.konnector)
+    ).resolves.toBe(undefined)
   })
 })

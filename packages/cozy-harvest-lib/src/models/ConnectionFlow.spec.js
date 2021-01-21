@@ -1,9 +1,6 @@
 import ConnectionFlow from './ConnectionFlow'
 import cronHelpers from 'helpers/cron'
-import {
-  saveAccount,
-  fetchAccountsWithoutTriggers
-} from '../connections/accounts'
+import { saveAccount } from '../connections/accounts'
 import {
   createTrigger,
   ensureTrigger,
@@ -38,7 +35,7 @@ CozyRealtime.prototype.unsubscribe = jest.fn()
 
 jest.mock('../connections/accounts', () => ({
   saveAccount: jest.fn(),
-  fetchAccountsWithoutTriggers: jest.fn()
+  fetchReusableAccount: jest.fn()
 }))
 
 jest.mock('../connections/triggers', () => {
@@ -65,10 +62,6 @@ launchTrigger.mockImplementation(async () => fixtures.launchedJob)
 saveAccount.mockImplementation(async (client, konnector, account) => {
   const { _id } = account
   return _id ? fixtures.updatedAccount : fixtures.createdAccount
-})
-
-fetchAccountsWithoutTriggers.mockImplementation(async () => {
-  return []
 })
 
 const mockVaultClient = {

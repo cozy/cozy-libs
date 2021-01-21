@@ -152,7 +152,37 @@ const fixtures = {
     links: {
       self: '/jobs/done-job-id'
     }
-  }
+  },
+  triggers: [
+    {
+      message: {
+        account: 'otherslug-account',
+        konnector: 'otherslug'
+      }
+    },
+    {
+      message: {
+        account: 'otherslug-account2',
+        konnector: 'otherslug'
+      }
+    }
+  ],
+  accounts: [
+    {
+      _id: 'otherslug-account',
+      account_type: 'otherslug',
+      auth: { login: 'badlogin', password: 'toto' }
+    },
+    {
+      _id: 'otherslug-account2',
+      account_type: 'otherslug',
+      auth: { login: 'goodlogin', password: 'badpassword' }
+    },
+    {
+      account_type: 'konnectest',
+      auth: { login: 'goodlogin', password: 'secretpassword' }
+    }
+  ]
 }
 
 export default fixtures

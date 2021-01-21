@@ -1,8 +1,9 @@
 /* eslint-env jest */
 import React from 'react'
-import { shallow } from 'enzyme'
+import { render } from '@testing-library/react'
 
-import { KonnectorUpdateInfos } from 'components/infos/KonnectorUpdateInfos'
+import AppLike from '../../test/AppLike'
+import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
 
 // Default props
 const intents = {
@@ -21,14 +22,26 @@ const props = {
 
 describe('KonnectorUpdateInfos', () => {
   it('should render', () => {
-    const component = shallow(<KonnectorUpdateInfos {...props} />).getElement()
-    expect(component).toMatchSnapshot()
+    const root = render(
+      <AppLike>
+        <KonnectorUpdateInfos {...props} />
+      </AppLike>
+    )
+    expect(
+      root.getByText('An update is available for this service.')
+    ).toBeTruthy()
+    expect(root.queryByText('Update it to keep fetching your data:')).toBe(null)
   })
 
   it('should render as blocking', () => {
-    const component = shallow(
-      <KonnectorUpdateInfos {...props} isBlocking={true} />
-    ).getElement()
-    expect(component).toMatchSnapshot()
+    const root = render(
+      <AppLike>
+        <KonnectorUpdateInfos {...props} isBlocking={true} />
+      </AppLike>
+    )
+    expect(
+      root.getByText('An update is available for this service.')
+    ).toBeTruthy()
+    expect(root.getByText('Update it to keep fetching your data:')).toBeTruthy()
   })
 })

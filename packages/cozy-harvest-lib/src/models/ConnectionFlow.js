@@ -3,7 +3,7 @@ import MicroEE from 'microee'
 import Realtime from 'cozy-realtime'
 
 import {
-  fetchAccountsWithoutTriggers,
+  fetchReusableAccount,
   saveAccount,
   ACCOUNTS_DOCTYPE
 } from '../connections/accounts'
@@ -101,17 +101,9 @@ export const createOrUpdateAccount = async ({
   if (isUpdate) {
     accountToSave = accounts.mergeAuth(accountToSave, userCredentials)
   } else {
-    const triggers = await client.collection('io.cozy.triggers').all()
-    const accountsWithoutTrigger = await fetchAccountsWithoutTriggers(
-      client,
-      triggers.data
-    )
-    const rescuableAccount = accounts.getRescuableAccount(
-      accountsWithoutTrigger,
-      konnector
-    )
-    if (rescuableAccount) {
-      accountToSave = accounts.mergeAuth(rescuableAccount, userCredentials)
+    const recycableAccount = await fetchReusableAccount(client, konnector)
+    if (recycableAccount) {
+      accountToSave = accounts.mergeAuth(recycableAccount, userCredentials)
     } else {
       accountToSave = accounts.build(konnector, userCredentials)
     }

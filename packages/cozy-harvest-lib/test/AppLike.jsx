@@ -3,8 +3,10 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoin
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import { CozyProvider as CozyClientProvider } from 'cozy-client'
 import enLocale from '../src/locales/en.json'
+import CozyClient from 'cozy-client'
 
-const AppLike = ({ client, locale, children }) => {
+const AppLike = ({ client: clientOption, locale, children }) => {
+  const client = clientOption || new CozyClient({})
   return (
     <CozyClientProvider client={client}>
       <BreakpointsProvider>

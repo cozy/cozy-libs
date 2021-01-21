@@ -2,7 +2,8 @@ import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 import merge from 'lodash/merge'
 import unset from 'lodash/unset'
-const Polyglot = require('node-polyglot')
+import { Q } from 'cozy-client'
+import Polyglot from 'node-polyglot'
 
 export const decryptString = (encryptedString, vaultClient, orgKey) => {
   const [encTypeAndIv, data, mac] = encryptedString.split('|')
@@ -44,8 +45,7 @@ export const getOrganizationKey = async (cozyClient, vaultClient) => {
 
 export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
   const accounts = await cozyClient.query(
-    cozyClient
-      .find('io.cozy.accounts')
+    Q('io.cozy.accounts')
       .where({
         'relationships.vaultCipher.data': {
           _id: cipherId,
@@ -75,8 +75,9 @@ export const fetchKonnectorFromAccount = async (cozyClient, account) => {
 
 export const fetchTriggersFromAccount = async (cozyClient, account) => {
   const triggers = await cozyClient.queryAll(
-    cozyClient.find('io.cozy.triggers').where({
+    Q('io.cozy.triggers').where({
       worker: 'konnector',
+      type: '@cron',
       'message.account': account._id
     })
   )
@@ -103,7 +104,9 @@ export const fetchLoginFailedTriggersForAccountsIds = async (
   accountsIds
 ) => {
   const triggers = await cozyClient.queryAll(
-    cozyClient.find('io.cozy.triggers').where({
+    Q('io.cozy.triggers').where({
+      worker: 'konnector',
+      type: '@cron',
       'message.account': {
         $in: accountsIds
       }

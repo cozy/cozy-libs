@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
@@ -12,8 +12,9 @@ import KonnectorUpdateLinker from '../KonnectorUpdateLinker'
  * Offer a button to redirect to an app able to update a konnector
  * (typically the store).
  */
-export const KonnectorUpdateInfos = props => {
-  const { className, konnector, isBlocking, t } = props
+const KonnectorUpdateInfos = props => {
+  const { t } = useI18n()
+  const { className, konnector, isBlocking } = props
   return (
     <Infos
       className={className}
@@ -44,8 +45,7 @@ export const KonnectorUpdateInfos = props => {
 KonnectorUpdateInfos.propTypes = {
   konnector: PropTypes.object.isRequired,
   className: PropTypes.string,
-  isBlocking: PropTypes.bool,
-  t: PropTypes.func.isRequired
+  isBlocking: PropTypes.bool
 }
 
-export default React.memo(translate()(KonnectorUpdateInfos))
+export default React.memo(KonnectorUpdateInfos)

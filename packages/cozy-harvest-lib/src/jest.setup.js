@@ -39,6 +39,8 @@ const shouldIgnoreWarning = message => {
 }
 
 const originalConsoleWarn = console.warn // eslint-disable-line no-console
+const originalConsoleError = console.error // eslint-disable-line no-console
+
 // eslint-disable-next-line no-console
 console.warn = function(message) {
   if (shouldIgnoreWarning(message)) {
@@ -47,4 +49,10 @@ console.warn = function(message) {
     originalConsoleWarn.apply(this, arguments)
     throw new Error('console.warn should not be called during tests')
   }
+}
+
+// eslint-disable-next-line no-console
+console.error = function() {
+  originalConsoleError.apply(this, arguments)
+  throw new Error('console.error should not be called during tests')
 }
