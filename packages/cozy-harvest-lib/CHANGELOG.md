@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.3.0...cozy-harvest-lib@3.4.0) (2021-01-22)
+
+
+### Features
+
+* Add sentry integration to harvest connection flow ([185f032](https://github.com/cozy/cozy-libs/commit/185f032))
+
+
+
+
+
 # [3.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.2.0...cozy-harvest-lib@3.3.0) (2021-01-21)
 
 
