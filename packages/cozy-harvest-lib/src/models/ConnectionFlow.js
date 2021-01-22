@@ -21,6 +21,7 @@ import { createOrUpdateCipher } from '../models/cipherUtils'
 import assert from '../assert'
 import * as accounts from '../helpers/accounts'
 import * as triggersModel from '../helpers/triggers'
+import sentryHub from '../sentry'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
@@ -416,6 +417,10 @@ export class ConnectionFlow {
       logger.error(e)
       this.setState({ accountError: e })
       this.triggerEvent(ERROR_EVENT, e)
+      sentryHub.withScope(scope => {
+        scope.setTag('konnector', konnector.slug)
+        sentryHub.captureException(e)
+      })
       throw e
     }
   }
