@@ -5,12 +5,15 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import Uppercase, { Text } from 'cozy-ui/transpiled/react/Text'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Text } from 'cozy-ui/transpiled/react/Text'
 import * as triggers from '../../helpers/triggers'
 import FlowProvider from '../FlowProvider'
 import { useFlowState } from '../../models/withConnectionFlow'
 
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
+
+const inlineStyle = { display: 'inline-block' }
 
 export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   const launch = flow.launch
@@ -24,9 +27,14 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
       <div className="u-flex u-flex-column-s">
         <ul className="u-nolist u-m-0 u-mr-1 u-pl-0 u-flex-grow-1">
           <li className="u-mb-half">
-            <Uppercase tag="span" className="u-coolGrey u-mr-half u-fz-tiny">
+            <Typography
+              variant="caption"
+              component="span"
+              style={inlineStyle}
+              className="u-mr-half"
+            >
               {t('card.launchTrigger.lastSync.label')}
-            </Uppercase>
+            </Typography>
             <Text className="u-fz-tiny" tag="span">
               {running
                 ? t('card.launchTrigger.lastSync.syncing')
@@ -36,9 +44,14 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             </Text>
           </li>
           <li className="u-mb-half">
-            <Uppercase className="u-coolGrey u-mr-half u-fz-tiny" tag="span">
+            <Typography
+              variant="caption"
+              component="span"
+              style={inlineStyle}
+              className="u-mr-half"
+            >
               {t('card.launchTrigger.frequency.label')}
-            </Uppercase>
+            </Typography>
             <Text className="u-fz-tiny" tag="span">
               {t(
                 `card.launchTrigger.frequency.${triggers.getFrequency(
