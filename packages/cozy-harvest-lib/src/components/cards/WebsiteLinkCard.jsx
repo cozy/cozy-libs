@@ -31,7 +31,7 @@ const WebsiteLinkCard = ({ link }) => {
         {t('card.websiteLink.title')}
       </Typography>
       <Divider className="u-ml-0 u-maw-100" />
-      <Media className="u-mt-1" align="top">
+      <Media className="u-mt-1">
         <Img className="u-pr-1">
           <Typography color="textSecondary">
             <Icon icon={GlobeIcon} />
