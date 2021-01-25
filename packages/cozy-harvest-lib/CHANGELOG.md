@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.4.0...cozy-harvest-lib@3.4.1) (2021-01-25)
+
+
+### Bug Fixes
+
+* **Harvest:** Remove wrong 80s job watcher delay ([de2c7cf](https://github.com/cozy/cozy-libs/commit/de2c7cf))
+
+
+
+
+
 # [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.3.0...cozy-harvest-lib@3.4.0) (2021-01-22)
 
 
