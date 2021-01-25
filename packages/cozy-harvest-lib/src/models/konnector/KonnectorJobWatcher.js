@@ -130,9 +130,7 @@ export class KonnectorJobWatcher {
 }
 
 export const watchKonnectorJob = (client, job) => {
-  const jobWatcher = new KonnectorJobWatcher(client, job, {
-    expectedSuccessDelay: 80000
-  })
+  const jobWatcher = new KonnectorJobWatcher(client, job)
   // no need to await realtime initializing here
   jobWatcher.watch()
   return jobWatcher
