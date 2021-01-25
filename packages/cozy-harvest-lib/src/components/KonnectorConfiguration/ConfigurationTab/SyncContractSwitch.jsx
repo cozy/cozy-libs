@@ -6,6 +6,7 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'
 import { findKonnectorPolicy } from '../../../konnector-policies'
@@ -120,7 +121,9 @@ export class DumbSyncContractSwitch extends React.Component {
 
     return (
       <Media>
-        <Bd>{t('contractForm.imported')}</Bd>
+        <Bd>
+          <Typography variant="body1">{t('contractForm.imported')}</Typography>
+        </Bd>
         <Img>
           <Switch
             color="primary"
