@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.5.0...cozy-harvest-lib@3.6.0) (2021-01-26)
+
+
+### Bug Fixes
+
+* Correctly configure sentry to send events only in production ([b865167](https://github.com/cozy/cozy-libs/commit/b865167))
+
+
+### Features
+
+* Send original error to Sentry instead of wrapped one ([aaf1902](https://github.com/cozy/cozy-libs/commit/aaf1902))
+
+
+
+
+
 # [3.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.4.1...cozy-harvest-lib@3.5.0) (2021-01-25)
 
 
