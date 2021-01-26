@@ -9,7 +9,7 @@ export const client = new Sentry.BrowserClient({
   dsn: 'https://888abd94993a47a39e751598fc6be803@sentry.cozycloud.cc/145',
   integrations: Sentry.defaultIntegrations,
   beforeSend(event) {
-    if (process.env.NODE_ENV === 'production') {
+    if (process.env.NODE_ENV !== 'production') {
       return null
     }
     return event

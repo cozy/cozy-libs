@@ -411,7 +411,9 @@ export class ConnectionFlow {
       this.triggerEvent(ERROR_EVENT, e)
       sentryHub.withScope(scope => {
         scope.setTag('konnector', konnector.slug)
-        sentryHub.captureException(e)
+
+        // Capture the original exception instead of the user one
+        sentryHub.captureException(e.original || e)
       })
       throw e
     }

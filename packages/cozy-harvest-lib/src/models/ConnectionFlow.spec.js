@@ -11,6 +11,17 @@ import CozyRealtime from 'cozy-realtime'
 import KonnectorJobWatcher from './konnector/KonnectorJobWatcher'
 import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
 import fixtures from '../../test/fixtures'
+import sentryHub from '../sentry'
+
+jest.mock('../sentry', () => {
+  const mockScope = {
+    setTag: jest.fn()
+  }
+  return {
+    withScope: cb => cb(mockScope),
+    captureException: jest.fn()
+  }
+})
 
 jest.mock('../connections/files', () => ({
   statDirectoryByPath: jest.fn(),
@@ -120,8 +131,11 @@ describe('ConnectionFlow', () => {
 
     it('should stop being rendered as submitting on error', async () => {
       const { flow } = setup()
+      const originalError = new Error()
       mockVaultClient.isLocked.mockReset().mockImplementationOnce(() => {
-        throw new Error('fakeerror')
+        const wrapped = new Error('fakeerror')
+        wrapped.original = originalError
+        throw wrapped
       })
 
       try {
@@ -130,7 +144,7 @@ describe('ConnectionFlow', () => {
       } catch (e) {
         // eslint-disable-next-line no-empty
       }
-
+      expect(sentryHub.captureException).toHaveBeenCalledWith(originalError)
       expect(isSubmitting(flow)).toBe(false)
     })
 
