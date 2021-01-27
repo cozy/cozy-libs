@@ -249,6 +249,10 @@ export class ConnectionFlow {
    */
   waitForTwoFA() {
     logger.info('ConnectionFlow: Waiting for two FA')
+    if (this.jobWatcher) {
+      this.jobWatcher.disableSuccessTimer()
+    }
+
     return new Promise(rawResolve => {
       const accountId = this.account._id
       assert(accountId, 'Cannot wait for two fa on account without id')
