@@ -41,7 +41,7 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
         <Typography variant="body1">
           {t(`card.appLink.${slug}.description`)}
         </Typography>
-        <AppLinker slug={slug} nativePath={path} href={url}>
+        <AppLinker slug={slug} nativePath={path} href={url || '#'}>
           {({ onClick, href }) => (
             <ButtonLink
               onClick={fetchStatus !== 'loaded' ? onClick : null}
