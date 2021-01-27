@@ -25,7 +25,7 @@ import ConnectionFlow, {
  * <FlowProvider initialTrigger={trigger}>
  *   {({ flow }) => {
  *     const flowState = flow.getState()
- *     return <Button onClick={() => flow.launch(trigger)} disabled={running} />
+ *     return <Button onClick={() => flow.launch()} disabled={running} />
  *    }}
  * </FlowProvider>
  * ```

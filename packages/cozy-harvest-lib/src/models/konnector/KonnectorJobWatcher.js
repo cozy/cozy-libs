@@ -1,8 +1,9 @@
 import MicroEE from 'microee'
-
 import CozyRealtime from 'cozy-realtime'
+
 import { KonnectorJobError } from '../../helpers/konnectors'
 import assert from '../../assert'
+import logger from '../../logger'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
@@ -58,12 +59,14 @@ export class KonnectorJobWatcher {
   }
 
   handleError(error) {
+    logger.info(`KonnectorJobWatcher: Job has encountered an error`)
     this.disableSuccessTimer()
     this._error = error
     this.emit('error', new KonnectorJobError(error))
   }
 
   handleSuccess() {
+    logger.info(`KonnectorJobWatcher: Job has succeeded`)
     this.disableSuccessTimer()
     if (this._error || this._succeed) return
     this._succeed = true
@@ -71,6 +74,9 @@ export class KonnectorJobWatcher {
   }
 
   handleSuccessDelay() {
+    logger.info(
+      `KonnectorJobWatcher: Job has ran for ${DEFAULT_TIMER_DELAY}ms without error, considering success`
+    )
     this.disableSuccessTimer()
     if (this._error || this._succeed) return
 
@@ -78,6 +84,7 @@ export class KonnectorJobWatcher {
   }
 
   disableSuccessTimer() {
+    logger.info(`KonnectorJobWatcher: Disabling auto success timer`)
     if (this.successTimer) {
       logger.info(`KonnectorJobWatcher: Disabling auto success timer`)
       clearTimeout(this.successTimer)
@@ -87,6 +94,7 @@ export class KonnectorJobWatcher {
 
   enableSuccessTimer(time) {
     if (!this.successTimer) {
+      logger.info(`KonnectorJobWatcher: Enabling auto success timer`)
       this.successTimer = setTimeout(
         this.handleSuccessDelay,
         time || this.options.expectedSuccessDelay
@@ -102,8 +110,12 @@ export class KonnectorJobWatcher {
     if (state === JOB_STATE_ERRORED) this.handleError(this.job.error)
   }
 
-  async watch() {
-    this.enableSuccessTimer()
+  async watch(options) {
+    if (options.autoSuccessTimer !== false) {
+      this.enableSuccessTimer()
+    } else {
+      logger.info('KonnectorJobWatcher: Watching job without success timer')
+    }
 
     // It's important to wait here because we want to be sure that the realtime
     // has subscribed to job changes before we fetch the last revision manually.
@@ -130,10 +142,10 @@ export class KonnectorJobWatcher {
   }
 }
 
-export const watchKonnectorJob = (client, job) => {
+export const watchKonnectorJob = (client, job, options) => {
   const jobWatcher = new KonnectorJobWatcher(client, job)
   // no need to await realtime initializing here
-  jobWatcher.watch()
+  jobWatcher.watch(options)
   return jobWatcher
 }
 

@@ -475,7 +475,7 @@ export class ConnectionFlow {
   /**
    * Launches the job and sets everything up to follow execution.
    */
-  async launch() {
+  async launch({ autoSuccessTimer = true } = {}) {
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
 
@@ -497,7 +497,9 @@ export class ConnectionFlow {
       this.job._id,
       this.handleJobUpdated.bind(this)
     )
-    this.jobWatcher = watchKonnectorJob(this.client, this.job)
+    this.jobWatcher = watchKonnectorJob(this.client, this.job, {
+      autoSuccessTimer
+    })
     logger.info(`ConnectionFlow: Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
 
     for (const ev of JOB_EVENTS) {
