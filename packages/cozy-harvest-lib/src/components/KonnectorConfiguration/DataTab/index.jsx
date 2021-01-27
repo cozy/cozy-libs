@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
-
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
@@ -17,6 +16,7 @@ import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
 import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
+import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
 export const DataTab = ({ konnector, trigger, client, flow }) => {
   const { isMobile } = useBreakpoints()
@@ -68,7 +68,18 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
           />
         )}
         {shouldDisplayError && hasGenericError && (
-          <TriggerErrorInfo error={error} konnector={konnector} />
+          <TriggerErrorInfo
+            error={error}
+            konnector={konnector}
+            action={
+              error.isSolvableViaReconnect() ? (
+                <RedirectToAccountFormButton
+                  konnector={konnector}
+                  trigger={trigger}
+                />
+              ) : null
+            }
+          />
         )}
         <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
         {appLinks.map(({ slug, ...otherProps }) => (

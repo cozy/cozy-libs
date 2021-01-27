@@ -109,6 +109,7 @@
     "baseDir": "/Administrative"
   },
   "error": {
+    "reconnect-via-form": "Reconnect",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
         "title": "Cozy Storage full",

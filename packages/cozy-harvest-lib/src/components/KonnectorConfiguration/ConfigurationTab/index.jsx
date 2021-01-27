@@ -36,6 +36,8 @@ import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
 
+import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
+
 import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
@@ -147,6 +149,15 @@ const ConfigurationTab = ({
           className={isMobile ? 'u-mv-2' : 'u-mb-2'}
           error={error}
           konnector={konnector}
+          trigger={flow.trigger}
+          action={
+            error.isSolvableViaReconnect() ? (
+              <RedirectToAccountFormButton
+                konnector={konnector}
+                trigger={flow.trigger}
+              />
+            ) : null
+          }
         />
       )}
       <NavigationList style={isMobile ? tabMobileNavListStyle : null}>

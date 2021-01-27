@@ -6,6 +6,7 @@ import React from 'react'
 import { MountPointProvider } from '../../../components/MountPointContext'
 import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
+import { KonnectorJobError } from '../../../helpers/konnectors'
 import AppLike from '../../../../test/AppLike'
 import {
   VaultProvider,
@@ -55,15 +56,23 @@ describe('ConfigurationTab', () => {
     console.warn = originalWarn
   })
 
-  function setup({ konnector = {}, checkShouldUnlock } = {}) {
+  const DEFAULT_FLOW_STATE = {
+    error: null,
+    running: false
+  }
+
+  function setup({
+    konnector = {},
+    trigger = {},
+    checkShouldUnlock,
+    flowState = DEFAULT_FLOW_STATE
+  } = {}) {
     const account = {}
     const addAccount = jest.fn()
     const onAccountDeleted = jest.fn()
     const flow = {
-      getState: jest.fn().mockReturnValue({
-        error: null,
-        running: true
-      })
+      trigger,
+      getState: jest.fn().mockReturnValue(flowState)
     }
     const mockClient = createMockClient({ queries: {} })
     const unlockFormProps = {
@@ -98,6 +107,40 @@ describe('ConfigurationTab', () => {
   it('should render', () => {
     const { root } = setup()
     expect(root.getByText('Identifiers')).toBeTruthy()
+  })
+
+  describe('reconnect button', () => {
+    it('should show a reconnect button if error is solvable by reconnecting through form', () => {
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(false),
+        trigger: {
+          message: {
+            account: 'account-id-123',
+            konnector: 'konnector-slug'
+          }
+        },
+        flowState: {
+          error: new KonnectorJobError('LOGIN_FAILED')
+        }
+      })
+      expect(root.getByText('Reconnect')).toBeTruthy()
+    })
+
+    it('should not show a reconnect button if error is not solvable by reconnecting through form)', () => {
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(false),
+        trigger: {
+          message: {
+            account: 'account-id-123',
+            konnector: 'konnector-slug'
+          }
+        },
+        flowState: {
+          error: new KonnectorJobError('USER_ACTION_NEEDED')
+        }
+      })
+      expect(root.queryByText('Reconnect')).toBeFalsy()
+    })
   })
 
   describe('deletion modal', () => {
