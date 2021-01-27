@@ -79,6 +79,7 @@ export class KonnectorJobWatcher {
 
   disableSuccessTimer() {
     if (this.successTimer) {
+      logger.info(`KonnectorJobWatcher: Disabling auto success timer`)
       clearTimeout(this.successTimer)
       this.successTimer = null
     }
