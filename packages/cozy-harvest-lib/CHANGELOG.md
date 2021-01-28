@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.6.0...cozy-harvest-lib@3.7.0) (2021-01-28)
+
+
+### Features
+
+* Add KonnectorBlock to show konnector informations ([33c37d2](https://github.com/cozy/cozy-libs/commit/33c37d2))
+* Upgrade cozy-client to 16.17.0 ([d61e3e0](https://github.com/cozy/cozy-libs/commit/d61e3e0))
+
+
+
+
+
 # [3.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.5.0...cozy-harvest-lib@3.6.0) (2021-01-26)
 
 
