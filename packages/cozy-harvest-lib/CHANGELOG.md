@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.7.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.7.0...cozy-harvest-lib@3.7.1) (2021-01-28)
+
+
+### Bug Fixes
+
+* Bottom content was hidden by Swipeable View ([189159d](https://github.com/cozy/cozy-libs/commit/189159d))
+
+
+
+
+
 # [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.6.0...cozy-harvest-lib@3.7.0) (2021-01-28)
 
 
