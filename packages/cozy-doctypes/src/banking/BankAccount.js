@@ -16,8 +16,8 @@ class BankAccount extends Document {
         ...matching.account,
         relationships: merge(
           {},
-          matching.account.relationships,
-          matching.match ? matching.match.relationships : null
+          matching.match ? matching.match.relationships : null,
+          matching.account.relationships
         ),
         _id: matching.match ? matching.match._id : undefined
       }
