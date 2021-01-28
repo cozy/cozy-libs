@@ -1,30 +1,32 @@
 const BankAccount = require('./BankAccount')
 
 describe('account reconciliation', () => {
-  const localAccounts = [
-    {
-      _id: 'a1',
-      number: '1',
-      balance: 50,
-      relationships: { aRelationship: { _id: 'fake-id', _type: 'fake-type' } }
-    }
-  ]
-  const remoteAccounts = [
+  const newAccounts = [
     {
       number: '1',
       balance: 100,
       relationships: {
-        aRelationship: { _id: 'old-fake-id', _type: 'old-fake-type' },
+        aRelationship: { _id: 'fake-id', _type: 'fake-type' },
         anotherRelationship: { _id: 'fake-id2', _type: 'fake-type2' }
       }
     },
     { number: '2', balance: 200 }
   ]
+  const currentAccounts = [
+    {
+      _id: 'a1',
+      number: '1',
+      balance: 50,
+      relationships: {
+        aRelationship: { _id: 'old-fake-id', _type: 'old-fake-type' }
+      }
+    }
+  ]
 
   it('should correctly match linxo accounts to cozy accounts through number', () => {
     const matchedAccounts = BankAccount.reconciliate(
-      remoteAccounts,
-      localAccounts
+      newAccounts,
+      currentAccounts
     )
 
     const accountA1 = matchedAccounts.find(x => x.number === '1')
