@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.76.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.75.2...cozy-doctypes@1.76.0) (2021-01-28)
+
+
+### Features
+
+* Correctly update relationships when reconciliating accounts ([9db8ee9](https://github.com/cozy/cozy-libs/commit/9db8ee9))
+
+
+
+
+
 ## [1.75.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.75.1...cozy-doctypes@1.75.2) (2021-01-18)
 
 
