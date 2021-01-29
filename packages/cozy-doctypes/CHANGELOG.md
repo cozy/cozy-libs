@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.77.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.76.0...cozy-doctypes@1.77.0) (2021-01-29)
+
+
+### Features
+
+* Add log for matching ([7115639](https://github.com/cozy/cozy-libs/commit/7115639))
+* Approx number match only works if number min length >= 4 ([df74756](https://github.com/cozy/cozy-libs/commit/df74756))
+* Can compute slug for linxea bank accounts ([6cc7aec](https://github.com/cozy/cozy-libs/commit/6cc7aec))
+
+
+
+
+
 # [1.76.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.75.2...cozy-doctypes@1.76.0) (2021-01-28)
 
 
