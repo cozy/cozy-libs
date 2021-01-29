@@ -35,6 +35,7 @@
   "scripts": {
     "lint": "cd ../../; yarn eslint --ext js,jsx packages/cozy-doctypes",
     "build": "babel src -d dist",
+    "watch": "yarn build --watch",
     "test": "jest src/",
     "encrypt-banking-tests": "cd src/banking/; make encrypted.tar.gz.gpg",
     "clean-banking-tests": "cd src/banking/; make clean",

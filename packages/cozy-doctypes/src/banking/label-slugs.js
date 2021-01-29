@@ -18,6 +18,7 @@ module.exports = {
   '/Crédit du Nord.*/': 'cdngroup88',
   '/Crédit Maritime.*/': 'creditmaritime',
   '/Crédit Mutuel.*/': 'cic45',
+  '/Linxea/': 'linxea',
   Fortuneo: 'fortuneo84',
   'Hello bank!': 'hellobank145',
   'HSBC France': 'hsbc119',

@@ -4,6 +4,7 @@ const merge = require('lodash/merge')
 const Document = require('../Document')
 const matching = require('./matching-accounts')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
+const log = require('cozy-logger').namespace('BankAccount')
 
 class BankAccount extends Document {
   /**
@@ -12,6 +13,12 @@ class BankAccount extends Document {
   static reconciliate(fetchedAccounts, localAccounts) {
     const matchings = matching.matchAccounts(fetchedAccounts, localAccounts)
     return matchings.map(matching => {
+      log(
+        'info',
+        matching.match
+          ? `${matching.account.label} matched with ${matching.match.label} via ${matching.method}`
+          : `${matching.account.label} did not match with an existing account`
+      )
       return {
         ...matching.account,
         relationships: merge(

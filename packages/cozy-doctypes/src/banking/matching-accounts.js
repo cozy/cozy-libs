@@ -66,11 +66,15 @@ const approxNumberMatch = (account, existingAccount) => {
     existingAccount.number &&
     account.number &&
     (existingAccount.number.length === 11 || account.number.length === 11) &&
-    eitherIncludes(existingAccount.number, account.number)
+    eitherIncludes(existingAccount.number, account.number) &&
+    Math.min(existingAccount.number.length, account.number.length) >= 4
   )
 }
 
 const creditCardMatch = (account, existingAccount) => {
+  if (account.type !== 'CreditCard' && existingAccount.type !== 'CreditCard') {
+    return false
+  }
   let ccAccount, lastDigits
   for (let acc of [account, existingAccount]) {
     const match = acc && acc.number && acc.number.match(redactedCreditCard)
@@ -83,6 +87,7 @@ const creditCardMatch = (account, existingAccount) => {
   if (other && other.number && other.number.slice(-4) === lastDigits) {
     return true
   }
+  return false
 }
 
 const slugMatch = (account, existingAccount) => {
@@ -97,6 +102,32 @@ const slugMatch = (account, existingAccount) => {
   )
 }
 
+const currencyMatch = (account, existingAccount) => {
+  if (!account.currency) {
+    return false
+  }
+  return (
+    (existingAccount.rawNumber &&
+      existingAccount.rawNumber.includes(account.currency)) ||
+    (existingAccount.label &&
+      existingAccount.label.includes(account.currency)) ||
+    (existingAccount.originalBankLabel &&
+      existingAccount.originalBankLabel.includes(account.currency))
+  )
+}
+
+const sameTypeMatch = (account, existingAccount) => {
+  return account.type === existingAccount.type
+}
+
+const rules = [
+  { rule: slugMatch, bonus: 0, malus: -1000 },
+  { rule: approxNumberMatch, bonus: 50, malus: -50, name: 'approx-number' },
+  { rule: sameTypeMatch, bonus: 50, malus: 0, name: 'same-type' },
+  { rule: creditCardMatch, bonus: 150, malus: 0, name: 'credit-card-number' },
+  { rule: currencyMatch, bonus: 50, malus: 0, name: 'currency' }
+]
+
 const score = (account, existingAccount) => {
   const methods = []
   const res = {
@@ -105,43 +136,19 @@ const score = (account, existingAccount) => {
   }
 
   let points = 0
-
-  /* To avoid accounts from different banks to be considered */
-  if (!slugMatch(account, existingAccount)) {
-    points -= 1000
-  }
-
-  if (approxNumberMatch(account, existingAccount)) {
-    points += 50
-    methods.push('approx-number')
-  } else {
-    points -= 50
-  }
-  if (account.type === existingAccount.type) {
-    points += 50
-    methods.push('same-type')
-  }
-  if (
-    (account.type === 'CreditCard' || existingAccount.type === 'CreditCard') &&
-    creditCardMatch(account, existingAccount)
-  ) {
-    points += 150
-    methods.push('credit-card-number')
-  }
-  if (account.currency) {
-    const sameCurrency =
-      (existingAccount.rawNumber &&
-        existingAccount.rawNumber.includes(account.currency)) ||
-      (existingAccount.label &&
-        existingAccount.label.includes(account.currency)) ||
-      (existingAccount.originalBankLabel &&
-        existingAccount.originalBankLabel.includes(account.currency))
-
-    if (sameCurrency) {
-      points += 50
-      methods.push('currency')
+  for (let { rule, bonus, malus, name } of rules) {
+    const ok = rule(account, existingAccount)
+    if (ok && bonus) {
+      points += bonus
+    }
+    if (!ok && malus) {
+      points += malus
+    }
+    if (name && ok) {
+      methods.push(name)
     }
   }
+
   res.points = points
   return res
 }
@@ -250,5 +257,6 @@ module.exports = {
   matchAccounts,
   normalizeAccountNumber,
   score,
-  creditCardMatch
+  creditCardMatch,
+  approxNumberMatch
 }

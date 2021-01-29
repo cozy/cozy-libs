@@ -4,7 +4,8 @@ const {
   matchAccounts,
   normalizeAccountNumber,
   score,
-  creditCardMatch
+  creditCardMatch,
+  approxNumberMatch
 } = require('./matching-accounts')
 
 const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
@@ -100,7 +101,7 @@ it('should normalize account number', () => {
 
 describe('creditCardMatch', () => {
   it('should not throw when an account does not have a number', () => {
-    expect(creditCardMatch).not.toThrow()
+    expect(() => creditCardMatch({}, {})).not.toThrow()
     // real paypal example
     expect(
       creditCardMatch(
@@ -120,8 +121,33 @@ describe('creditCardMatch', () => {
           vendorId: '230',
           institutionLabel: 'Paypal REST API'
         },
-        { number: '13002900002' }
+        { number: '13002900002', type: 'CreditCard' }
       )
-    ).toBe(undefined)
+    ).toBe(false)
+  })
+})
+
+describe('approxNumberMatch', () => {
+  it('should not match when one of the number is too short', () => {
+    expect(
+      approxNumberMatch(
+        {
+          number: '90'
+        },
+        {
+          number: '01234567890'
+        }
+      )
+    ).toBe(false)
+    expect(
+      approxNumberMatch(
+        {
+          number: '7890'
+        },
+        {
+          number: '01234567890'
+        }
+      )
+    ).toBe(true)
   })
 })
