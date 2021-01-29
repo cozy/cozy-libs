@@ -1,27 +1,22 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, waitFor } from '@testing-library/react'
 
-import { createMockClient, useQuery } from 'cozy-client'
+import { createMockClient } from 'cozy-client'
 
 import AppLike from '../../test/AppLike'
 import KonnectorBlock from './KonnectorBlock'
 import en from '../locales/en.json'
 
-jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
+import { fetchKonnectorData } from '../helpers/konnectorBlock'
+
+jest.mock('../helpers/konnectorBlock', () => ({
+  fetchKonnectorData: jest.fn()
+}))
+
 const client = createMockClient({})
 client.getStackClient = jest.fn(() => ({ uri: 'http://cozy.tools:8080' }))
 
-const setup = ({
-  file = {},
-  queryRes = {
-    data: [],
-    fetchStatus: 'pending',
-    hasMore: false,
-    fetchMore: jest.fn()
-  }
-} = {}) => {
-  useQuery.mockReturnValue(queryRes)
-
+const setup = ({ file = {} } = {}) => {
   const root = render(
     <AppLike client={client}>
       <KonnectorBlock file={file} />
@@ -38,42 +33,40 @@ describe('KonnectorBlock', () => {
     expect(getByTestId('KonnectorBlock-spinner'))
   })
 
-  it('should show konnector title and its link, also customer account and its link', () => {
+  it('should show konnector title and its link, also customer account and its link', async () => {
+    fetchKonnectorData.mockResolvedValue({
+      name: 'Pajemploi',
+      link:
+        'https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Faccounts%2F012345',
+      vendorLink: {
+        component: 'a',
+        href: 'https://www.pajemploi.urssaf.fr/',
+        target: '_blank'
+      }
+    })
+
     const { root } = setup({
       file: {
         cozyMetadata: {
           uploadedBy: { slug: 'pajemploi' },
           sourceAccount: '012345'
         }
-      },
-      queryRes: {
-        data: [
-          {
-            id: 'fromStack',
-            type: 'type',
-            attributes: {
-              slug: 'pajemploi',
-              name: 'Pajemploi',
-              vendor_link: 'https://www.pajemploi.urssaf.fr/'
-            }
-          }
-        ],
-        fetchStatus: 'loaded'
       }
     })
     const { getByText } = root
 
-    expect(getByText('Pajemploi'))
-    expect(getByText('Pajemploi').closest('a')).toHaveAttribute(
-      'href',
-      `https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=${encodeURIComponent(
-        'http://cozy-home.tools:8080/#/connected/pajemploi/accounts/012345'
-      )}`
-    )
-    expect(getByText('https://www.pajemploi.urssaf.fr/'))
-    expect(
-      getByText('https://www.pajemploi.urssaf.fr/').closest('a')
-    ).toHaveAttribute('href', 'https://www.pajemploi.urssaf.fr/')
-    expect(getByText(en.konnectorBlock.account))
+    await waitFor(() => {
+      expect(getByText('Pajemploi').closest('a')).toHaveAttribute(
+        'href',
+        `https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=${encodeURIComponent(
+          'http://cozy-home.tools:8080/#/connected/pajemploi/accounts/012345'
+        )}`
+      )
+      expect(getByText('https://www.pajemploi.urssaf.fr/'))
+      expect(
+        getByText('https://www.pajemploi.urssaf.fr/').closest('a')
+      ).toHaveAttribute('href', 'https://www.pajemploi.urssaf.fr/')
+      expect(getByText(en.konnectorBlock.account))
+    })
   })
 })
