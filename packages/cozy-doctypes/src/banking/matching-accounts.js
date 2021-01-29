@@ -66,7 +66,8 @@ const approxNumberMatch = (account, existingAccount) => {
     existingAccount.number &&
     account.number &&
     (existingAccount.number.length === 11 || account.number.length === 11) &&
-    eitherIncludes(existingAccount.number, account.number)
+    eitherIncludes(existingAccount.number, account.number) &&
+    Math.min(existingAccount.number.length, account.number.length) >= 4
   )
 }
 
@@ -256,5 +257,6 @@ module.exports = {
   matchAccounts,
   normalizeAccountNumber,
   score,
-  creditCardMatch
+  creditCardMatch,
+  approxNumberMatch
 }

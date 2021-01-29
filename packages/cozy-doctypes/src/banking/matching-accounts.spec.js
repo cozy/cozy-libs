@@ -4,7 +4,8 @@ const {
   matchAccounts,
   normalizeAccountNumber,
   score,
-  creditCardMatch
+  creditCardMatch,
+  approxNumberMatch
 } = require('./matching-accounts')
 
 const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
@@ -123,5 +124,30 @@ describe('creditCardMatch', () => {
         { number: '13002900002', type: 'CreditCard' }
       )
     ).toBe(false)
+  })
+})
+
+describe('approxNumberMatch', () => {
+  it('should not match when one of the number is too short', () => {
+    expect(
+      approxNumberMatch(
+        {
+          number: '90'
+        },
+        {
+          number: '01234567890'
+        }
+      )
+    ).toBe(false)
+    expect(
+      approxNumberMatch(
+        {
+          number: '7890'
+        },
+        {
+          number: '01234567890'
+        }
+      )
+    ).toBe(true)
   })
 })
