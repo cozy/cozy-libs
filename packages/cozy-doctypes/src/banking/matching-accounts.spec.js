@@ -100,7 +100,7 @@ it('should normalize account number', () => {
 
 describe('creditCardMatch', () => {
   it('should not throw when an account does not have a number', () => {
-    expect(creditCardMatch).not.toThrow()
+    expect(() => creditCardMatch({}, {})).not.toThrow()
     // real paypal example
     expect(
       creditCardMatch(
@@ -120,8 +120,8 @@ describe('creditCardMatch', () => {
           vendorId: '230',
           institutionLabel: 'Paypal REST API'
         },
-        { number: '13002900002' }
+        { number: '13002900002', type: 'CreditCard' }
       )
-    ).toBe(undefined)
+    ).toBe(false)
   })
 })
