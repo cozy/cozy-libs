@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.7.2...cozy-harvest-lib@3.8.0) (2021-01-29)
+
+
+### Bug Fixes
+
+* Pass # to AppLinker if we have no URL to remove props warning ([bd3cde6](https://github.com/cozy/cozy-libs/commit/bd3cde6))
+
+
+### Features
+
+* Add a reconnect button inside trigger info to reconnect account ([c27f64a](https://github.com/cozy/cozy-libs/commit/c27f64a))
+* Add log messages and remove deny rule ([9d1dd28](https://github.com/cozy/cozy-libs/commit/9d1dd28))
+* Deactivate auto success when launching job via "update" button ([48bba00](https://github.com/cozy/cozy-libs/commit/48bba00))
+* When receiving a 2FA event, stop the auto-success timer ([f55b4cc](https://github.com/cozy/cozy-libs/commit/f55b4cc))
+
+
+
+
+
 ## [3.7.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.7.1...cozy-harvest-lib@3.7.2) (2021-01-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
