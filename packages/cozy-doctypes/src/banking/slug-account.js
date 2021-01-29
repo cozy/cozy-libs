@@ -1,3 +1,4 @@
+const log = require('cozy-logger').namespace('slug-account')
 const labelSlugs = require('./label-slugs')
 
 const institutionLabelsCompiled = Object.entries(labelSlugs).map(
@@ -12,6 +13,7 @@ const institutionLabelsCompiled = Object.entries(labelSlugs).map(
 
 const getSlugFromInstitutionLabel = institutionLabel => {
   if (!institutionLabel) {
+    log('warn', 'No institution label, cannot compute slug')
     return
   }
   for (const [rx, slug] of institutionLabelsCompiled) {
@@ -24,6 +26,7 @@ const getSlugFromInstitutionLabel = institutionLabel => {
       return slug
     }
   }
+  log('warn', `Could not compute slug for ${institutionLabel}`)
 }
 
 module.exports = {
