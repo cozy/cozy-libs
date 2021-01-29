@@ -95,6 +95,10 @@ export class KonnectorJobError extends Error {
   isTermsVersionMismatchError() {
     return this.type === TERMS_VERSION_MISMATCH
   }
+
+  isSolvableViaReconnect() {
+    return this.type === LOGIN_FAILED || this.type === CHALLENGE_ASKED
+  }
 }
 
 /**

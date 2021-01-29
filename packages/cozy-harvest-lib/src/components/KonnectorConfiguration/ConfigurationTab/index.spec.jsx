@@ -6,6 +6,7 @@ import React from 'react'
 import { MountPointProvider } from '../../../components/MountPointContext'
 import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
+import { KonnectorJobError } from '../../../helpers/konnectors'
 import AppLike from '../../../../test/AppLike'
 import {
   VaultProvider,
@@ -55,15 +56,23 @@ describe('ConfigurationTab', () => {
     console.warn = originalWarn
   })
 
-  function setup({ konnector = {}, checkShouldUnlock } = {}) {
+  const DEFAULT_FLOW_STATE = {
+    error: null,
+    running: false
+  }
+
+  function setup({
+    konnector = {},
+    trigger = {},
+    checkShouldUnlock,
+    flowState = DEFAULT_FLOW_STATE
+  } = {}) {
     const account = {}
     const addAccount = jest.fn()
     const onAccountDeleted = jest.fn()
     const flow = {
-      getState: jest.fn().mockReturnValue({
-        error: null,
-        running: true
-      })
+      trigger,
+      getState: jest.fn().mockReturnValue(flowState)
     }
     const mockClient = createMockClient({ queries: {} })
     const unlockFormProps = {
@@ -100,86 +109,122 @@ describe('ConfigurationTab', () => {
     expect(root.getByText('Identifiers')).toBeTruthy()
   })
 
-  it('should display deletion modal when clicking on disconnect this account (vault does not need to be unlocked)', async () => {
-    const { root } = setup({
-      checkShouldUnlock: jest.fn().mockResolvedValue(false)
+  describe('reconnect button', () => {
+    it('should show a reconnect button if error is solvable by reconnecting through form', () => {
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(false),
+        trigger: {
+          message: {
+            account: 'account-id-123',
+            konnector: 'konnector-slug'
+          }
+        },
+        flowState: {
+          error: new KonnectorJobError('LOGIN_FAILED')
+        }
+      })
+      expect(root.getByText('Reconnect')).toBeTruthy()
     })
-    useVaultClient.mockReturnValue({
-      isLocked: jest.fn().mockResolvedValue(false)
+
+    it('should not show a reconnect button if error is not solvable by reconnecting through form)', () => {
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(false),
+        trigger: {
+          message: {
+            account: 'account-id-123',
+            konnector: 'konnector-slug'
+          }
+        },
+        flowState: {
+          error: new KonnectorJobError('USER_ACTION_NEEDED')
+        }
+      })
+      expect(root.queryByText('Reconnect')).toBeFalsy()
     })
-    findKonnectorPolicy.mockReturnValue({ saveInVault: true })
-    const btn = root.getByText('Disconnect this account')
-    const modalText =
-      'Your account will be disconnected, but already imported data will be kept.'
-    expect(root.queryByText(modalText)).toBeFalsy()
-    fireEvent.click(btn)
-    expect(root.getByText(modalText))
-    expect(deleteAccount).not.toHaveBeenCalled()
-    const confirmBtn = root.getByText('Disconnect')
-    await act(async () => {
-      fireEvent.click(confirmBtn)
-    })
-    expect(deleteAccount).toHaveBeenCalled()
   })
 
-  it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy does not save in vault)', async () => {
-    findKonnectorPolicy.mockReturnValue({ saveInVault: false })
-    const { root } = setup({
-      checkShouldUnlock: jest.fn().mockResolvedValue(true)
-    })
-    const btn = root.getByText('Disconnect this account')
-    expect(
-      root.queryByText(
+  describe('deletion modal', () => {
+    it('should display deletion modal when clicking on disconnect this account (vault does not need to be unlocked)', async () => {
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(false)
+      })
+      useVaultClient.mockReturnValue({
+        isLocked: jest.fn().mockResolvedValue(false)
+      })
+      findKonnectorPolicy.mockReturnValue({ saveInVault: true })
+      const btn = root.getByText('Disconnect this account')
+      const modalText =
         'Your account will be disconnected, but already imported data will be kept.'
-      )
-    ).toBeFalsy()
-    fireEvent.click(btn)
-    expect(
-      root.getByText(
-        'Your account will be disconnected, but already imported data will be kept.'
-      )
-    )
-    expect(deleteAccount).not.toHaveBeenCalled()
-    const confirmBtn = root.getByText('Disconnect')
-    await act(async () => {
-      fireEvent.click(confirmBtn)
+      expect(root.queryByText(modalText)).toBeFalsy()
+      fireEvent.click(btn)
+      expect(root.getByText(modalText))
+      expect(deleteAccount).not.toHaveBeenCalled()
+      const confirmBtn = root.getByText('Disconnect')
+      await act(async () => {
+        fireEvent.click(confirmBtn)
+      })
+      expect(deleteAccount).toHaveBeenCalled()
     })
-    expect(deleteAccount).toHaveBeenCalled()
-  })
 
-  it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy saves in vault)', async () => {
-    findKonnectorPolicy.mockReturnValue({ saveInVault: true })
-    useVaultClient.mockReturnValue({
-      isLocked: jest.fn().mockResolvedValue(true)
-    })
-    const { root } = setup({
-      checkShouldUnlock: jest.fn().mockResolvedValue(true)
-    })
-    const btn = root.getByText('Disconnect this account')
-    expect(
-      root.queryByText(
-        'Your account will be disconnected, but already imported data will be kept.'
+    it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy does not save in vault)', async () => {
+      findKonnectorPolicy.mockReturnValue({ saveInVault: false })
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(true)
+      })
+      const btn = root.getByText('Disconnect this account')
+      expect(
+        root.queryByText(
+          'Your account will be disconnected, but already imported data will be kept.'
+        )
+      ).toBeFalsy()
+      fireEvent.click(btn)
+      expect(
+        root.getByText(
+          'Your account will be disconnected, but already imported data will be kept.'
+        )
       )
-    ).toBeFalsy()
-    fireEvent.click(btn)
-    expect(
-      root.getByText(
-        'Your account will be disconnected, but already imported data will be kept.'
-      )
-    )
-    expect(deleteAccount).not.toHaveBeenCalled()
-    const confirmBtn = root.getByText('Disconnect')
-    await act(async () => {
-      fireEvent.click(confirmBtn)
+      expect(deleteAccount).not.toHaveBeenCalled()
+      const confirmBtn = root.getByText('Disconnect')
+      await act(async () => {
+        fireEvent.click(confirmBtn)
+      })
+      expect(deleteAccount).toHaveBeenCalled()
     })
-    expect(deleteAccount).not.toHaveBeenCalled()
 
-    // Since the konnector saves the cipher in the vault, we need to unlock the
-    // vault, for the cipher to be correctly unshared from the vault
-    await act(async () => {
-      fireEvent.click(root.getByText('Unlock'))
+    it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy saves in vault)', async () => {
+      findKonnectorPolicy.mockReturnValue({ saveInVault: true })
+      useVaultClient.mockReturnValue({
+        isLocked: jest.fn().mockResolvedValue(true)
+      })
+      const { root } = setup({
+        checkShouldUnlock: jest.fn().mockResolvedValue(true)
+      })
+      const btn = root.getByText('Disconnect this account')
+      expect(
+        root.queryByText(
+          'Your account will be disconnected, but already imported data will be kept.'
+        )
+      ).toBeFalsy()
+      fireEvent.click(btn)
+      expect(
+        root.getByText(
+          'Your account will be disconnected, but already imported data will be kept.'
+        )
+      )
+      expect(deleteAccount).not.toHaveBeenCalled()
+      const confirmBtn = root.getByText('Disconnect')
+      await act(async () => {
+        fireEvent.click(confirmBtn)
+      })
+      expect(deleteAccount).not.toHaveBeenCalled()
+
+      // Since the konnector saves the cipher in the vault, we need to unlock the
+      // vault, for the cipher to be correctly unshared from the vault
+      await act(async () => {
+        fireEvent.click(root.getByText('Unlock'))
+      })
+      expect(deleteAccount).toHaveBeenCalled()
     })
-    expect(deleteAccount).toHaveBeenCalled()
   })
 
   it('should not render identifiers for oauth konnectors', () => {

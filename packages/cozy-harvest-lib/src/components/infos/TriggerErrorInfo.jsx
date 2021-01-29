@@ -19,11 +19,12 @@ import Markdown from '../Markdown'
  */
 export class TriggerErrorInfo extends PureComponent {
   render() {
-    const { className, error, konnector, t } = this.props
+    const { className, error, konnector, t, action } = this.props
     return (
       <Infos
         className={className}
         theme="danger"
+        action={action}
         description={
           <>
             <Typography className="u-error" variant="h6" gutterBottom>

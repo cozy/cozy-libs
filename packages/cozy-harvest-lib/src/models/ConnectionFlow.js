@@ -205,12 +205,12 @@ export class ConnectionFlow {
   }
 
   triggerEvent(eventName, ...args) {
-    logger.debug(`TriggerEvent ${eventName}`, args)
+    logger.debug(`ConnectionFlow: triggerEvent ${eventName}`, args)
     if (isStepEvent(eventName)) {
       this.setState({ [eventName]: true })
     }
     if (eventToStatus[eventName]) {
-      logger.debug(`Setting status ${eventToStatus[eventName]}`)
+      logger.debug(`ConnectionFlow: Setting status ${eventToStatus[eventName]}`)
       this.setState({ status: eventToStatus[eventName] })
     }
     if (eventName === ERROR_EVENT) {
@@ -248,7 +248,11 @@ export class ConnectionFlow {
    *
    */
   waitForTwoFA() {
-    logger.info('Waiting for two FA')
+    logger.info('ConnectionFlow: Waiting for two FA')
+    if (this.jobWatcher) {
+      this.jobWatcher.disableSuccessTimer()
+    }
+
     return new Promise(rawResolve => {
       const accountId = this.account._id
       assert(accountId, 'Cannot wait for two fa on account without id')
@@ -288,18 +292,20 @@ export class ConnectionFlow {
    * Saves and updates internal account
    */
   async saveAccount(updatedAccount) {
-    logger.debug('Saving account')
+    logger.debug('ConnectionFlow: Saving account')
     this.account = await saveAccount(
       this.client,
       this.konnector,
       updatedAccount
     )
-    logger.info('Saved account')
+    logger.info('ConnectionFlow: Saved account')
     return this.account
   }
 
   flushTwoFAWaiters() {
-    logger.debug(`Flushing ${this.twoFAWaiters.length} two fa waiters`)
+    logger.debug(
+      `ConnectionFlow: Flushing ${this.twoFAWaiters.length} two fa waiters`
+    )
     for (const callback of this.twoFAWaiters) {
       callback()
     }
@@ -324,7 +330,7 @@ export class ConnectionFlow {
   async sendTwoFACode(code) {
     this.setState({ status: RUNNING_TWOFA })
     try {
-      logger.debug(`Sending two fa code ${code}`)
+      logger.debug(`ConnectionFlow: Sending two fa code ${code}`)
       await this.saveAccount(accounts.updateTwoFaCode(this.account, code))
     } catch (error) {
       // eslint-disable-next-line no-console
@@ -366,7 +372,7 @@ export class ConnectionFlow {
       assert(client, 'No client')
       const konnectorPolicy = findKonnectorPolicy(konnector)
       logger.log(
-        `Handling submit, with konnector policy ${konnectorPolicy.name}`
+        `ConnectionFlow: Handling submit, with konnector policy ${konnectorPolicy.name}`
       )
 
       let cipher
@@ -378,11 +384,11 @@ export class ConnectionFlow {
         })
       } else {
         logger.info(
-          'Bypassing cipher creation because of konnector account policy'
+          'ConnectionFlow: Bypassing cipher creation because of konnector account policy'
         )
       }
 
-      logger.debug('Creating/updating account...', account)
+      logger.debug('ConnectionFlow: Creating/updating account...', account)
 
       account = await createOrUpdateAccount({
         account,
@@ -396,7 +402,7 @@ export class ConnectionFlow {
 
       this.account = account
 
-      logger.info(`Saved account ${account._id}`)
+      logger.info(`ConnectionFlow: Saved account ${account._id}`)
 
       await this.ensureTriggerAndLaunch(client, {
         trigger,
@@ -440,7 +446,7 @@ export class ConnectionFlow {
   }
 
   async handleJobUpdated() {
-    logger.debug('Handling update from job')
+    logger.debug('ConnectionFlow: Handling update from job')
     await this.refetchTrigger()
   }
 
@@ -448,7 +454,7 @@ export class ConnectionFlow {
     if (!this.trigger) {
       return null
     }
-    logger.debug(`Refetching trigger  ${this.trigger._id}`)
+    logger.debug(`ConnectionFlow: Refetching trigger  ${this.trigger._id}`)
     const trigger = await fetchTrigger(this.client, this.trigger._id)
     logger.debug(`Refetched trigger`, trigger)
     this.trigger = trigger
@@ -456,7 +462,7 @@ export class ConnectionFlow {
   }
 
   async ensureTriggerAndLaunch(client, { trigger, account, konnector, t }) {
-    logger.debug('Ensuring trigger...')
+    logger.debug('ConnectionFlow: Ensuring trigger...')
     this.t = t
     const ensuredTrigger = await ensureTrigger(client, {
       trigger,
@@ -473,8 +479,8 @@ export class ConnectionFlow {
   /**
    * Launches the job and sets everything up to follow execution.
    */
-  async launch() {
-    logger.info('Launching job...')
+  async launch({ autoSuccessTimer = true } = {}) {
+    logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
 
     this.account = await prepareTriggerAccount(this.client, this.trigger)
@@ -484,7 +490,9 @@ export class ConnectionFlow {
       this.account._id,
       this.handleAccountUpdated
     )
-    logger.info(`Subscribed to ${ACCOUNTS_DOCTYPE}:${this.account._id}`)
+    logger.info(
+      `ConnectionFlow: Subscribed to ${ACCOUNTS_DOCTYPE}:${this.account._id}`
+    )
 
     this.job = await launchTrigger(this.client, this.trigger)
     this.realtime.subscribe(
@@ -493,8 +501,10 @@ export class ConnectionFlow {
       this.job._id,
       this.handleJobUpdated.bind(this)
     )
-    this.jobWatcher = watchKonnectorJob(this.client, this.job)
-    logger.info(`Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
+    this.jobWatcher = watchKonnectorJob(this.client, this.job, {
+      autoSuccessTimer
+    })
+    logger.info(`ConnectionFlow: Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
 
     for (const ev of JOB_EVENTS) {
       this.jobWatcher.on(ev, (...args) => this.triggerEvent(ev, ...args))

@@ -84,7 +84,7 @@ For now it is possible to instanciate a `<TriggerManager />` which will allow to
 As this component uses CozyClient, it must be wrapped at some point into a [`<CozyProvider />`](https://github.com/cozy/cozy-client/blob/master/docs/getting-started.md#wrapping-the-app-in-a-cozyprovider).
 
 ```js
-import CozyClient, { CozyProvider } from 'cozy-client'
+import CozyClient, { CozyProvider, Q } from 'cozy-client'
 import { TriggerManager } from 'cozy-harvest-lib'
 
 const client = new CozyClient({
@@ -93,8 +93,8 @@ const client = new CozyClient({
 
 ReactDOM.render(
   <CozyProvider client={client}>
-    <Query query={client => client.get('io.cozy.apps', 'my-konnector-id')}>
-      {konnector => (
+    <Query query={()=> Q('io.cozy.apps').getById('my-konnector-id')}>
+      {({ data: konnector }) => (
         <TriggerManager
           konnector={konnector}
           onSuccessLogin={() => alert('logged in')}

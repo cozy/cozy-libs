@@ -56,7 +56,7 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             icon={<Icon focusable="false" icon={SyncIcon} spin={running} />}
             className="u-mh-0 u-mv-0"
             disabled={running || disabled}
-            onClick={() => launch(trigger)}
+            onClick={() => launch({ autoSuccessTimer: false })}
             subtle
             style={{ lineHeight: '1.4' }}
           />

@@ -4,6 +4,7 @@ import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
+import logger from '../logger'
 import ConnectionFlow, {
   ERROR_EVENT,
   SUCCESS_EVENT,
@@ -24,7 +25,7 @@ import ConnectionFlow, {
  * <FlowProvider initialTrigger={trigger}>
  *   {({ flow }) => {
  *     const flowState = flow.getState()
- *     return <Button onClick={() => flow.launch(trigger)} disabled={running} />
+ *     return <Button onClick={() => flow.launch()} disabled={running} />
  *    }}
  * </FlowProvider>
  * ```
@@ -60,7 +61,9 @@ export class FlowProvider extends Component {
   }
 
   handleFlowUpdate() {
-    this.setState({ flowState: this.flow.getState() })
+    const flowState = this.flow.getState()
+    logger.info('FlowProvider: Handle flow update', flowState)
+    this.setState({ flowState })
   }
 
   stopWatchingConnectionFlow() {
@@ -78,19 +81,23 @@ export class FlowProvider extends Component {
   }
 
   handleTriggerLaunch(trigger) {
+    logger.info('FlowProvider: Dismissing two fa modal')
     const { onLaunch } = this.props
     if (typeof onLaunch === 'function') onLaunch(trigger)
   }
 
   dismissTwoFAModal() {
+    logger.info('FlowProvider: Dismissing two fa modal')
     this.setState({ showTwoFAModal: false })
   }
 
   displayTwoFAModal() {
+    logger.info('FlowProvider: Show two fa modal')
     this.setState({ showTwoFAModal: true })
   }
 
   handleError(error) {
+    logger.info('FlowProvider: Handle error')
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
@@ -109,6 +116,7 @@ export class FlowProvider extends Component {
    *
    */
   handleSuccess() {
+    logger.info('FlowProvider: Handle success')
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
@@ -118,6 +126,7 @@ export class FlowProvider extends Component {
   }
 
   handleLoginSuccess() {
+    logger.info('FlowProvider: Handle success')
     if (this.state.showTwoFAModal) {
       this.dismissTwoFAModal()
     }
