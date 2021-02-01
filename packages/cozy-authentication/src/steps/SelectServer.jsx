@@ -252,8 +252,7 @@ export class SelectServer extends Component {
     const {
       t,
       previousStep,
-      breakpoints: { isTiny },
-      onboarding
+      breakpoints: { isTiny }
     } = this.props
     const inputID = 'inputID'
     return (
@@ -356,7 +355,6 @@ export class SelectServer extends Component {
               subtle={true}
               type={'button'}
               theme="text"
-              onboarding={onboarding}
             />
           </WizardFooter>
         </WizardWrapper>
