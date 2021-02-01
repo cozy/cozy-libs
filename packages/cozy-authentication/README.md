@@ -1,10 +1,56 @@
 [Cozy] Authentication component
 ==================
 
-What's cozy-authentication
+What's cozy-authentication?
 ----------------
 
-Cozy-Authentication is a React component used to authenticate to a Cozy. It acts as a login page.
+Cozy-Authentication is a React component used to authenticate to a Cozy when targeting a Cordova Application (if you are targeting a web application, no need to use this component since the cozy-stack (server) will serve you the login page). It acts as a login page.
+
+Its key's features: 
+- Select Server page
+- Handle OAuth login 
+- Handle Deeplink (custom schema or universal link)
+- Generation of a specific link to the cozy's manager to create a cozy and make the auto-login
+- Based on Cozy-client 
+
+How to use it?
+----------------
+
+```jsx
+import { MobileRouter } from 'cozy-authentication'
+import { hashHistory, Route } from 'react-router'
+
+import {useClient} from 'cozy-client'
+
+const LoginPage = () => {
+    // LoginPage has to be a child of a CozyProvider from cozy-client
+    const client = useClient()
+    // client will have isLogged === false at first
+    return <MobileRouter
+          protocol={'mycustomSchema://'}
+          appTitle={'My App Name'}
+          universalLinkDomain={'https://links.mycozy.cloud'}
+          appSlug={'appname'}
+          history={hashHistory}
+          onAuthenticated={() => {
+              alert('user Authenticated')
+              console.log({client}) // client is logged
+          }}
+          loginPath={'/path/after/successfullLogin'}
+          onLogout={() => alert('logout')}
+          appIcon={require('icon.png')}
+        >
+            <Route>
+                <Route path="path1" component={...} />
+                <Route path="path2" component={...} />
+            </Route>
+        </MobileRouter>
+}
+```
+
+Check MobileRouter.propTypes, to see the full list of options
+
+Also take a look to our playground lib to have an exemple: https://github.com/cozy/cozy-libs/blob/master/packages/playgrounds/src/common/App.jsx#L59
 
 What's Cozy?
 ------------
