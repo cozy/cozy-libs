@@ -29,11 +29,14 @@ npm install --save cozy-realtime`
 yarn add cozy-realtime
 ```
 
-## Simple Example
+### Example
 
 CozyRealtime comes with a plugin for CozyClient. This is the recommended way to use it: 
 
 ```js
+import CozyClient from 'cozy-client'
+import { RealtimePlugin } from 'cozy-realtime'
+
 const client = new CozyClient({})
 client.registerPlugin(RealtimePlugin)
 realtime.subscribe('created', 'io.cozy.bank.accounts', handleBankAccountCreated)
