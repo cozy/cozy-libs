@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.8.1...cozy-harvest-lib@3.9.0) (2021-02-02)
+
+
+### Features
+
+* Support for MAIF staging cozys to talk with the right BI endpoint ([eb3ef6c](https://github.com/cozy/cozy-libs/commit/eb3ef6c))
+
+
+
+
+
 ## [3.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.8.0...cozy-harvest-lib@3.8.1) (2021-01-29)
 
 **Note:** Version bump only for package cozy-harvest-lib
