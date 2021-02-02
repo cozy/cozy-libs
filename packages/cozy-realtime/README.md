@@ -20,27 +20,29 @@
 
 <br />
 
-# What's cozy-realtime?
-
-A simple way to have realtime using Websocket with [cozy-stack](https://github.com/cozy/cozy-stack).
-
-## Setup
+Subscribe to cozy-stack server side events [cozy-stack](https://github.com/cozy/cozy-stack) via Websocket.
 
 ### Install
 
-`npm install --save cozy-realtime`
-or
-`yarn add cozy-realtime`
+```bash
+npm install --save cozy-realtime`
+yarn add cozy-realtime
+```
 
-### Cordova
-
-In order to listen to online and offline events, you should install the [Network Information](https://cordova.apache.org/docs/en/latest/reference/cordova-plugin-network-information/) plugin.
-
-## Example
-
-### With CozyClient
+## Simple Example
 
 CozyRealtime comes with a plugin for CozyClient. This is the recommended way to use it: 
+
+```js
+const client = new CozyClient({})
+client.registerPlugin(RealtimePlugin)
+realtime.subscribe('created', 'io.cozy.bank.accounts', handleBankAccountCreated)
+realtime.unsubscribe('created', 'io.cozy.bank.accounts', handleBankAccountCreated)
+```
+
+### Inside a component
+
+It is important to unsubscribe when unmounting React components.
 
 ```js
 
@@ -55,11 +57,11 @@ client.registerPlugin(RealtimePlugin)
 
 // Usage
 
-handleCreate = accounts => {
+const handleCreate = accounts => {
   console.log(`A new 'io.cozy.accounts' is created with id '${accounts._id}'.`)
 }
 
-handleUpdate = accounts => {
+const handleUpdate = accounts => {
   console.log(`An account is updated with id '${accounts._id}'.`)
 }
 
@@ -99,7 +101,12 @@ export default withClient(MyComp)
 
 ```
 
-### Standalone
+### Subscribe to multiple events
+
+Here we subscribe to
+
+- The creation event
+- The update of a single document
 
 ```js
 
@@ -118,15 +125,13 @@ const handleUpdate = accounts => {
 
 // To subscribe
 await realtime.subscribe('created', type, handleCreate)
-await realtime.subscribe('updated', type, handleCreate)
 await realtime.subscribe('updated', type, id, handleUpdate)
 
 // To unsubscribe
 await realtime.unsubscribe('created', type, handleCreate)
-await realtime.unsubscribe('updated', type, handleUpdate)
 await realtime.unsubscribe('updated', type, id, handleUpdate)
 
-// To unsubscribe all
+// To unsubscribe all events in one go
 await realtime.unsubscribeAll()
 ```
 
