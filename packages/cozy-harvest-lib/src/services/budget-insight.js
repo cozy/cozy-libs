@@ -88,6 +88,7 @@ export const getBIConfigForCozyURL = rawCozyURL => {
       return configsByMode['dev']
     case 'cozymaif.cloud':
     case 'cozy-maif-int.fr':
+    case 'cozy-maif-stg.fr':
       return configsByMode['devmaif']
     default:
       return configsByMode['prod']
