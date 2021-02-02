@@ -1,18 +1,38 @@
 Flags
 =====
 
-Simple client side toggle flags.
+Use and manage cozy feature flags.
+Flags can be toggled for a cozy instance, a context or globally.
+See [the stack documentation on flags](https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags) for more information.
 
-- [x] jQuery like API for getter/setter
-- [x] Dev React component to set/unset flags
+- ✅ jQuery like API for getter/setter
+- ✅ Devtool component to set/unset flags
 
-### Demo
+### Installation
 
-The `FlagSwitcher` component helps toggling the flags.
+```bash
+npm install --save cozy-flags
+# or yarn add cozy-flags
+```
 
-<img src='https://user-images.githubusercontent.com/1606068/43769674-93301fa4-9a3a-11e8-9d2a-93a6ab4f1a07.gif' />
+A CozyClient plugin is exported that 
+
+- initializes flags on client's login
+- resets them on client's logout
+
+```jsx
+import flag from 'cozy-flags'
+client.registerPlugin(flag.plugin)
+```
+
+ℹ️ It will fetch server flags for consumption by the app 
+
+- either from DOM data (if `data-cozy={{ .CozyData }}` or `data-flags={{ .Flags }}`, on web
+- or by fetching data from the server (on mobile)
 
 ### Usage
+
+⚠️ Make sure you have registered the flag plugin before using the flags.
 
 ```js
 import flag from 'cozy-flags'
@@ -44,20 +64,12 @@ const App = () => {
 
 ```
 
-#### Client plugin
+### Demo
 
-A CozyClient plugin is exported that initializes and resets flags on client's login
-and logout. It will initialize flags either from DOM data (if `data-cozy={{ .CozyData }}`
-or `data-flags={{ .Flags }}`, on web) or by fetching data from the server (on mobile).
+The `FlagSwitcher` component helps toggling the flags.
 
-```
-client.registerPlugin(flag.plugin)
-```
+<img src='https://user-images.githubusercontent.com/1606068/43769674-93301fa4-9a3a-11e8-9d2a-93a6ab4f1a07.gif' />
 
-### Flags enabled on the server
-
-Feature flags can be served by the server and injected in the HTML page of an
-application. See [the stack documentation on flags](https://docs.cozy.io/en/cozy-stack/settings/#get-settingsflags) and [how to access flags at page load](https://docs.cozy.io/en/cozy-stack/client-app-dev/#good-practices-for-your-application).
 
 ### Flags enabled at build time
 
