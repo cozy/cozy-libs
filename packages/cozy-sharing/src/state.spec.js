@@ -12,7 +12,8 @@ import reducer, {
   hasSharedParent,
   hasSharedChild,
   getSharedDocIdsBySharings,
-  getSharingType
+  getSharingType,
+  getPermissionDocIds
 } from './state'
 
 import {
@@ -22,6 +23,7 @@ import {
   SHARING_READ_ONLY,
   PERM_1,
   PERM_2,
+  PERM_WITHOUT_DOC,
   SHARING_NO_ACTIVE,
   SHARING_WITH_SHORTCUT,
   APPS
@@ -487,6 +489,16 @@ describe('getSharedDocIdsBySharings method', () => {
   })
 })
 
+describe('getPermissionDocIds method', () => {
+  it('should return the docs ids for the permission', () => {
+    const docs = getPermissionDocIds(PERM_2)
+    expect(docs).toEqual(['folder_2'])
+  })
+  it('should return nothing if there is no document', () => {
+    const docs = getPermissionDocIds(PERM_WITHOUT_DOC)
+    expect(docs).toEqual([])
+  })
+})
 describe('getSharingType selector', () => {
   it('should return false is this a sharingByLink', () => {
     const newState = reducer({}, addSharingLink(PERM_2))
