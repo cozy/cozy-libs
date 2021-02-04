@@ -307,6 +307,22 @@ export const PERM_2 = {
   }
 }
 
+export const PERM_WITHOUT_DOC = {
+  type: 'io.cozy.permissions',
+  id: 'PERM_WITHOUT_DOC',
+  attributes: {
+    type: 'share',
+    permissions: {
+      rule0: {
+        type: 'io.cozy.files',
+        verbs: ['GET']
+      }
+    },
+    codes: { email: 'longcode' },
+    shortcodes: { email: 'shortcode' }
+  }
+}
+
 export const APPS = [
   {
     type: 'io.cozy.apps',

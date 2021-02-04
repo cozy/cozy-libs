@@ -367,7 +367,7 @@ export const hasSharedChild = (state, documentPath) => {
 }
 
 // helpers
-const getSharedDocIds = doc =>
+export const getSharedDocIds = doc =>
   doc.type === 'io.cozy.sharings'
     ? getSharingDocIds(doc)
     : getPermissionDocIds(doc)
@@ -384,9 +384,16 @@ export const getSharingDocIds = sharing => {
   return docs
 }
 
-const getPermissionDocIds = perm =>
+// Some permissions can not have values since they can
+// be on a global doctype. In that case, we can't sort
+// them by id
+export const getPermissionDocIds = perm =>
   Object.keys(perm.attributes.permissions)
-    .map(k => perm.attributes.permissions[k].values)
+    .map(k =>
+      perm.attributes.permissions[k].values
+        ? perm.attributes.permissions[k].values
+        : []
+    )
     .reduce((acc, val) => [...acc, ...val], [])
 
 const areAllRecipientsRevoked = sharing =>
