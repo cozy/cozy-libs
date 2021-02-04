@@ -27,7 +27,6 @@
   },
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
-    "@material-ui/core": "3",
     "@sentry/browser": "^6.0.1",
     "cozy-bi-auth": "0.0.16",
     "cozy-doctypes": "^1.77.0",
@@ -65,12 +64,14 @@
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "jest-resolve-cached": "^1.0.0",
     "jsdom": "^16.1.0",
+    "@material-ui/core": "4",
     "prop-types": "15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
+    "@material-ui/core": ">=4",
     "cozy-client": ">=16.17.0",
     "cozy-device-helper": ">=1.10.2",
     "cozy-flags": ">=2.3.5",
