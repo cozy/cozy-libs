@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.11.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.11.3...cozy-sharing@2.11.4) (2021-02-04)
+
+
+### Bug Fixes
+
+* Don't crash if there is no value inside a permission ([bf35110](https://github.com/cozy/cozy-libs/commit/bf35110))
+
+
+
+
+
 ## [2.11.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.11.2...cozy-sharing@2.11.3) (2021-01-29)
 
 **Note:** Version bump only for package cozy-sharing
