@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.11.0...cozy-harvest-lib@3.12.0) (2021-02-05)
+
+
+### Features
+
+* Relaunch Travis to force a deploy ([c60f4b2](https://github.com/cozy/cozy-libs/commit/c60f4b2))
+
+
+
+
+
 # [3.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.10.0...cozy-harvest-lib@3.11.0) (2021-02-05)
 
 
