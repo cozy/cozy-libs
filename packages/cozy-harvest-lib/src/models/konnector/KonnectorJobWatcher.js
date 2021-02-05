@@ -110,7 +110,7 @@ export class KonnectorJobWatcher {
     if (state === JOB_STATE_ERRORED) this.handleError(this.job.error)
   }
 
-  async watch(options) {
+  async watch(options = {}) {
     if (options.autoSuccessTimer !== false) {
       this.enableSuccessTimer()
     } else {
