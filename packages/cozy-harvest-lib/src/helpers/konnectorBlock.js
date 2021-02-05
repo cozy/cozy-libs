@@ -230,7 +230,6 @@ const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
           client,
           buildKonnectorQuery(slug, 'registry')
         )
-
         return { konnector, status: 'stackNotFound' }
       } catch (error) {
         return { status: 'not404Error', error }
