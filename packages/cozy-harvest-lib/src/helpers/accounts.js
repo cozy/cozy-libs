@@ -10,6 +10,7 @@ const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
 export const TWOFA_PROVIDERS = {
   EMAIL: 'email',
   SMS: 'sms',
+  APP_CODE: 'app_code',
   APP: 'app'
 }
 
@@ -22,6 +23,7 @@ export const TWOFA_USER_INPUT = {
   default: true,
   [TWOFA_PROVIDERS.EMAIL]: true,
   [TWOFA_PROVIDERS.SMS]: true,
+  [TWOFA_PROVIDERS.APP_CODE]: true,
   [TWOFA_PROVIDERS.APP]: false
 }
 
@@ -77,6 +79,8 @@ export const updateTwoFAState = (account_, { retry, type }) => {
     state += '.EMAIL'
   } else if (type === 'sms') {
     state += '.SMS'
+  } else if (type === 'app_code') {
+    state += '.APP_CODE'
   } else if (type === 'app') {
     state += '.APP'
   }
