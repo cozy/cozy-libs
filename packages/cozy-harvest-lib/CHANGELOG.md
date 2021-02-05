@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.10.0...cozy-harvest-lib@3.11.0) (2021-02-05)
+
+
+### Features
+
+* KonnectorBlock handles konnector errors ([83c5168](https://github.com/cozy/cozy-libs/commit/83c5168))
+
+
+
+
+
 # [3.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.9.0...cozy-harvest-lib@3.10.0) (2021-02-05)
 
 
