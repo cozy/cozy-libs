@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.9.0...cozy-harvest-lib@3.10.0) (2021-02-05)
+
+
+### Features
+
+* Add in harvest a new 2FA mode (mobile app with code) ([789cf47](https://github.com/cozy/cozy-libs/commit/789cf47))
+
+
+
+
+
 # [3.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.8.1...cozy-harvest-lib@3.9.0) (2021-02-02)
 
 
