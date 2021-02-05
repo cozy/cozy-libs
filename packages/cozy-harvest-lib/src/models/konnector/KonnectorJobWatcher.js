@@ -1,5 +1,6 @@
 import MicroEE from 'microee'
 import CozyRealtime from 'cozy-realtime'
+import { Q } from 'cozy-client'
 
 import { KonnectorJobError } from '../../helpers/konnectors'
 import assert from '../../assert'
@@ -131,7 +132,7 @@ export class KonnectorJobWatcher {
     // Retrieves the last revision of the job in case we missed an update during
     // realtime subscription.
     const jobResponse = await this.client.query(
-      this.client.get('io.cozy.jobs', this.job._id)
+      Q('io.cozy.jobs').getById(this.job._id)
     )
 
     this.handleJobUpdated(jobResponse.data)
