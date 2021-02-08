@@ -213,8 +213,13 @@ export class DumbTriggerManager extends Component {
       vaultClient
     } = this.props
     const konnectorPolicy = findKonnectorPolicy(konnector)
-    const isVaultLocked = await vaultClient.isLocked()
     if (konnectorPolicy.saveInVault) {
+      if (!vaultClient) {
+        throw new Error(
+          'Konnector policy `saveInVault` is true, but no vault has been passed in the context of the TriggerManager. You can wrap it the TriggerManager in a VaultUnlockProvider or VaultProvider (from cozy-keys-lib).'
+        )
+      }
+      const isVaultLocked = await vaultClient.isLocked()
       if (isVaultLocked) {
         showUnlockForm({
           onDismiss: onVaultDismiss,
