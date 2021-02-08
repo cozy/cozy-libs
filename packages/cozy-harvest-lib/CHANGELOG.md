@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.12.0...cozy-harvest-lib@3.13.0) (2021-02-08)
+
+
+### Features
+
+* Add FR translation for KonnectorBlock ([fe5d706](https://github.com/cozy/cozy-libs/commit/fe5d706))
+
+
+
+
+
 # [3.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.11.0...cozy-harvest-lib@3.12.0) (2021-02-05)
 
 
