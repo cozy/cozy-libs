@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.13.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.13.0...cozy-harvest-lib@3.13.1) (2021-02-09)
+
+
+### Bug Fixes
+
+* Only check if vault is locked if konnectorPolicy says to save in vault ([99e6181](https://github.com/cozy/cozy-libs/commit/99e6181))
+
+
+
+
+
 # [3.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.12.0...cozy-harvest-lib@3.13.0) (2021-02-08)
 
 
