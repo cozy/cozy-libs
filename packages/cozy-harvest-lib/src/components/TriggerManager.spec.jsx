@@ -1,5 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
+import omit from 'lodash/omit'
+
 import { shallow } from 'enzyme'
 import { render, fireEvent, cleanup } from '@testing-library/react'
 
@@ -9,6 +11,17 @@ import ConnectionFlow from '../../src/models/ConnectionFlow'
 import CozyClient from 'cozy-client'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import enLocale from '../../src/locales/en.json'
+import { findKonnectorPolicy } from '../konnector-policies'
+
+const { findKonnectorPolicy: originalFindKonnectorPolicy } = jest.requireActual(
+  '../konnector-policies'
+)
+
+jest.mock('../konnector-policies', () => {
+  return {
+    findKonnectorPolicy: jest.fn()
+  }
+})
 
 jest.mock('cozy-keys-lib', () => {
   const actual = jest.requireActual('cozy-keys-lib')
@@ -98,6 +111,10 @@ const oAuthProps = {
   flow: new ConnectionFlow(client, undefined, oAuthKonnector)
 }
 
+beforeEach(() => {
+  findKonnectorPolicy.mockImplementation(originalFindKonnectorPolicy)
+})
+
 describe('TriggerManager', () => {
   beforeEach(() => {
     mockVaultClient.createNewCozySharedCipher.mockResolvedValue({
@@ -135,6 +152,28 @@ describe('TriggerManager', () => {
         const { findByLabelText, findByTitle } = render(
           <I18n lang="en" dictRequire={() => enLocale}>
             <TriggerManager {...props} />
+          </I18n>
+        )
+
+        await expect(findByLabelText('username')).resolves.toBeDefined()
+        await expect(findByLabelText('passphrase')).resolves.toBeDefined()
+        await expect(
+          findByTitle('back', null, { timeout: 500 })
+        ).rejects.toThrow()
+      })
+    })
+
+    describe('when the vaultClient is not part of the context', () => {
+      beforeEach(() => {
+        mockVaultClient.getAll.mockResolvedValue([])
+        mockVaultClient.getAllDecrypted.mockResolvedValue([])
+      })
+
+      it('should show the new account form without any warning', async () => {
+        findKonnectorPolicy.mockReturnValue({ saveInVault: false })
+        const { findByLabelText, findByTitle } = render(
+          <I18n lang="en" dictRequire={() => enLocale}>
+            <TriggerManager {...omit(props, 'vaultClient')} />
           </I18n>
         )
 
