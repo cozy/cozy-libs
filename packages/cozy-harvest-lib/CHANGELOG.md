@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.14.0...cozy-harvest-lib@3.15.0) (2021-02-10)
+
+
+### Features
+
+* Upgrade cozy-bi-auth with some new banking connectors ([dab43f2](https://github.com/cozy/cozy-libs/commit/dab43f2))
+
+
+
+
+
 # [3.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.13.1...cozy-harvest-lib@3.14.0) (2021-02-10)
 
 
