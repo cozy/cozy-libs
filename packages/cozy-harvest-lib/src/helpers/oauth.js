@@ -3,6 +3,7 @@ import uuid from 'uuid/v4'
 import * as konnectors from './konnectors'
 import CozyClient from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
+import get from 'lodash/get'
 
 export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
 
@@ -101,7 +102,7 @@ export const getOAuthUrl = ({
   oAuthStateKey,
   oAuthConf,
   nonce,
-  redirectSlug,
+  redirectSlug = getAppSlug(),
   extraParams
 }) => {
   let oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?state=${oAuthStateKey}&nonce=${nonce}`
@@ -126,6 +127,11 @@ export const getOAuthUrl = ({
   }
 
   return oAuthUrl
+}
+
+const getAppSlug = () => {
+  const root = document.querySelector('[role=application]')
+  return get(root, 'dataset.cozyAppSlug')
 }
 
 /**
