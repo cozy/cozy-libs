@@ -102,7 +102,7 @@ export const getOAuthUrl = ({
   oAuthStateKey,
   oAuthConf,
   nonce,
-  redirectSlug = getAppSlug(),
+  redirectSlug,
   extraParams
 }) => {
   let oAuthUrl = `${cozyUrl}/accounts/${accountType}/start?state=${oAuthStateKey}&nonce=${nonce}`
@@ -129,9 +129,8 @@ export const getOAuthUrl = ({
   return oAuthUrl
 }
 
-const getAppSlug = () => {
-  const root = document.querySelector('[role=application]')
-  return get(root, 'dataset.cozyAppSlug')
+const getAppSlug = client => {
+  return get(client, 'appMetadata.slug')
 }
 
 /**
@@ -163,7 +162,7 @@ export const prepareOAuth = (client, konnector, redirectSlug, extraParams) => {
     oAuthStateKey,
     oAuthConf: oauth,
     nonce: Date.now(),
-    redirectSlug,
+    redirectSlug: redirectSlug || getAppSlug(client),
     extraParams
   })
 
