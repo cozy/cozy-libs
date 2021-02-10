@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.13.1...cozy-harvest-lib@3.14.0) (2021-02-10)
+
+
+### Features
+
+* KonnectorBlock open konnector modal in new tab ([b7d7002](https://github.com/cozy/cozy-libs/commit/b7d7002))
+
+
+
+
+
 ## [3.13.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.13.0...cozy-harvest-lib@3.13.1) (2021-02-09)
 
 
