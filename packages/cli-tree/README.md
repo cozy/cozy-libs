@@ -1,5 +1,4 @@
-CLI tree
-========
+# CLI tree
 
 CLI tree is a small package based on [argparse] to create a tree like CLI in a declarative
 way.
@@ -36,9 +35,8 @@ $ node examples/users.js users completion -h
 To properly handle completion in you program, you will have to add the completionHandler like in
 the [example]
 
-
-
-
 [example]: ./examples/users.js
+
 [argparse]: https://github.com/nodeca/argparse
+
 [tabtab]: https://www.npmjs.com/package/tabtab

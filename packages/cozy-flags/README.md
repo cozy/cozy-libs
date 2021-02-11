@@ -1,5 +1,4 @@
-Flags
-=====
+# Flags
 
 Use and manage cozy feature flags.
 Flags can be toggled for a cozy instance, a context or globally.
@@ -69,7 +68,6 @@ const App = () => {
 The `FlagSwitcher` component helps toggling the flags.
 
 <img src='https://user-images.githubusercontent.com/1606068/43769674-93301fa4-9a3a-11e8-9d2a-93a6ab4f1a07.gif' />
-
 
 ### Flags enabled at build time
 

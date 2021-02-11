@@ -29,7 +29,6 @@ to mattermost.
 - If no repository is detected, it will run repo-doctor on all the repositories
   of the config
 
-
 ```bash
 # Download an example config
 $ curl -o ~/.config/repo-doctor.json https://raw.githubusercontent.com/cozy/cozy-libs/master/packages/repo-doctor/examples/repo-doctor.json
@@ -70,7 +69,6 @@ See [the example config](./examples/repo-doctor.json).
 
 For the mattermost reporter, you'll need to set up the `MATTERMOST_HOOK` env
 variable with the URL of the incoming hook that you've set up in mattermost.
-
 
 ## How to write a rule
 

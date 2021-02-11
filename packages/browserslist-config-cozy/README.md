@@ -37,7 +37,11 @@ The maintainers for Browserslist Config Cozy are [CPatchane](https://github.com/
 `browserslist-config-cozy` is distributed under the MIT license.
 
 [cozy]: https://cozy.io "Cozy Cloud"
+
 [freenode]: http://webchat.freenode.net/?randomnick=1&channels=%23cozycloud&uio=d4
+
 [forum]: https://forum.cozy.io/
+
 [github]: https://github.com/cozy/
+
 [twitter]: https://twitter.com/cozycloud

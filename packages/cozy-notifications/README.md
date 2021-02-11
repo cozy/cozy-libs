@@ -73,7 +73,6 @@ The mobile channels consists of a push notification. Its title will be
 the result of the `getTitle` method and its content will be the result
 of `getPushContent`.
 
-
 ### mail
 
 Emails need more markup and thus will need the `template` class attribute.
@@ -193,7 +192,7 @@ MyNotificationView.template = template
 email will not be sent directly to the stack, but only rendered parts will be
 sent; in other words, only `appURL`, `topLogo`, `content` etc... will be sent,
 instead of the whole content). This is why `cozy-notifications` needs to know
-our *uncompiled* partials. We can destructure `parts` to access rendered parts.
+our _uncompiled_ partials. We can destructure `parts` to access rendered parts.
 
 ```
 import { renderer } from 'cozy-notifications'
@@ -205,7 +204,7 @@ const { parts } = render({ template, data })
 ## Built-in helpers
 
 - `t` will be passed automatically as a helper in templates. We must pass
- the `locales` object when instantiating the NotificationView.
+  the `locales` object when instantiating the NotificationView.
 
 ```javascript
 const locales = {

@@ -11,6 +11,7 @@
 
 - Add the library on your dev dependency (`yarn add commitlint-config-cozy --dev --exact`)
 - Add configuration on your `package.json` ([see an example](https://github.com/cozy/cozy-banks/blob/85572b6827cdaa45c1ed44d6922829ba6480b3c9/package.json#L242-L246)):
+
 ```json
 "commitlint": {
   "extends": [
@@ -18,7 +19,9 @@
   ]
 }
 ```
+
 - Add verification during a commit with husky (> 1.0.0) on your `package.json` ([see an example](https://github.com/cozy/cozy-libs/blob/ea325a4ea2b5bf0067875f625b5ad0a5b320e7e9/package.json#L24-L28)):
+
 ```
 "husky": {
   "hooks": {
@@ -58,7 +61,11 @@ The maintainer for Commitlint Config Cozy is [kosssi](https://github.com/kosssi)
 `commitlint-config-cozy` is distributed under the MIT license.
 
 [cozy]: https://cozy.io "Cozy Cloud"
+
 [freenode]: http://webchat.freenode.net/?randomnick=1&channels=%23cozycloud&uio=d4
+
 [forum]: https://forum.cozy.io/
+
 [github]: https://github.com/cozy/
+
 [twitter]: https://twitter.com/cozycloud

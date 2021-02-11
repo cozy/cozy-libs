@@ -10,7 +10,7 @@ With Cozy-Procedure, you can fetch documents that match the rules you define. Se
 
 It also helps to enhance the file you manipulate by adding the corresponsing metadata automatically.
 
-See https://docs.cozy.io/en/cozy-doctypes/docs/io.cozy.files_metadata/#administrative-documents for more information about administrative documents.
+See <https://docs.cozy.io/en/cozy-doctypes/docs/io.cozy.files_metadata/#administrative-documents> for more information about administrative documents.
 
 ## Setup
 

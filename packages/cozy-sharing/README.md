@@ -75,7 +75,7 @@ Bob sees Alice's shared folder in his own cozy.
 
 If you develop with the [cozy-app-dev docker image](https://github.com/cozy/cozy-stack/blob/master/docs/client-app-dev.md#with-docker), [MailHog](https://github.com/mailhog/MailHog) is running inside it to catch emails.
 
-If cozy-stack has to send an email, MailHog catches it and exposes it on its web interface on http://cozy.tools:8025/.
+If cozy-stack has to send an email, MailHog catches it and exposes it on its web interface on <http://cozy.tools:8025/>.
 
 ## With the binary cozy-stack
 
@@ -87,7 +87,7 @@ If you develop with the [cozy-stack CLI](https://github.com/cozy/cozy-stack/blob
 
 _This commands assumes you `git clone` [cozy-drive](https://github.com/cozy/cozy-drive) and [cozy-settings](https://github.com/cozy/cozy-settings) in the same folder than you `git clone` [cozy-stack](https://github.com/cozy/cozy-stack)._
 
-Then simply run `mailhog` and open http://cozy.tools:8025/.
+Then simply run `mailhog` and open <http://cozy.tools:8025/>.
 
 ## Retrieve sent emails
 
