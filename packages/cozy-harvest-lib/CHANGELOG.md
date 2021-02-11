@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.15.1...cozy-harvest-lib@3.16.0) (2021-02-11)
+
+
+### Bug Fixes
+
+* Use cozy-client metadata to get app slug ([6bd8fc6](https://github.com/cozy/cozy-libs/commit/6bd8fc6))
+
+
+### Features
+
+* **Harvest:** Set the current app as default redirect slug for OAuth ([2e55296](https://github.com/cozy/cozy-libs/commit/2e55296))
+
+
+
+
+
 ## [3.15.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.15.0...cozy-harvest-lib@3.15.1) (2021-02-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
