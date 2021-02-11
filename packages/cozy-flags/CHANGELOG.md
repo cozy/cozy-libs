@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.5.1...cozy-flags@2.5.2) (2021-02-11)
+
+
+### Bug Fixes
+
+* Do not use deprecated client.get ([078369e](https://github.com/cozy/cozy-libs/commit/078369e))
+
+
+
+
+
 ## 2.5.1 (2021-02-02)
 
 **Note:** Version bump only for package cozy-flags
