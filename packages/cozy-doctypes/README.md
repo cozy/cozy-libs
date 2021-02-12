@@ -133,7 +133,7 @@ The `package.json` has both `main` and `browser` fields. This allows
 - browser runtimes to use transpiled code
 
 The only caveat here is that we must pay attention to features that we use that are not supported yet
-in nodeJS, for example 
+in nodeJS, for example
 
 - the lack of ES6 module support in nodeJS, we have to use `module.exports`
 - class properties: must bind the methods in the constructor

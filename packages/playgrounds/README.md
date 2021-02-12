@@ -17,7 +17,7 @@ You need to launch your browser with disabled CORS, for example on macOS (the im
 ```
 
 And on the connexion page, you need to indicate the full domain for your cozy when reaching
-http&#x3A;//localhost:1234/index.html:
+http://localhost:1234/index.html:
 
 ```
 http://cozy.tools:8080

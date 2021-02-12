@@ -14,7 +14,7 @@ npm install --save cozy-flags
 # or yarn add cozy-flags
 ```
 
-A CozyClient plugin is exported that 
+A CozyClient plugin is exported that
 
 - initializes flags on client's login
 - resets them on client's logout
@@ -24,7 +24,7 @@ import flag from 'cozy-flags'
 client.registerPlugin(flag.plugin)
 ```
 
-ℹ️ It will fetch server flags for consumption by the app 
+ℹ️ It will fetch server flags for consumption by the app
 
 - either from DOM data (if `data-cozy={{ .CozyData }}` or `data-flags={{ .Flags }}`, on web
 - or by fetching data from the server (on mobile)

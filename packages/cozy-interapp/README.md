@@ -58,7 +58,7 @@ intents.create('EDIT', 'io.cozy.apps')
 
 If `intentId` and `window` parameters are not provided the method will try to retrieve them automatically.
 
-It returns a _service_ object, which provides the following methods :
+It returns a *service* object, which provides the following methods :
 
 - `compose(action, doctype, data)`: request the client to make a second intent. This returns a promise fulfilled with the second intent result.
 

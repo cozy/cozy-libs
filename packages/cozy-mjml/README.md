@@ -76,8 +76,8 @@ There are no props for this component.
 
 #### Available props
 
-- `mycozy`: bool, default `false` - Displays a header with _MyCozy_ logo instead of _CozyCloud_ logo
-- `locale`: `en`\|`fr`, default `en` - Displays the _MyCozy_ logo in english or french
+- `mycozy`: bool, default `false` - Displays a header with *MyCozy* logo instead of *CozyCloud* logo
+- `locale`: `en`|`fr`, default `en` - Displays the *MyCozy* logo in english or french
 
 ```xml
 <mj-header></mj-header>
@@ -88,7 +88,7 @@ There are no props for this component.
 
 #### Available props
 
-- `locale`: `en`\|`fr`, default `en` - Displays the footer texts & urls in english or french
+- `locale`: `en`|`fr`, default `en` - Displays the footer texts & urls in english or french
 - `instance`: `string` - Displays the user's instance text & link instead of Cozy logo
 
 ```xml

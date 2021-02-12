@@ -192,7 +192,7 @@ MyNotificationView.template = template
 email will not be sent directly to the stack, but only rendered parts will be
 sent; in other words, only `appURL`, `topLogo`, `content` etc... will be sent,
 instead of the whole content). This is why `cozy-notifications` needs to know
-our _uncompiled_ partials. We can destructure `parts` to access rendered parts.
+our *uncompiled* partials. We can destructure `parts` to access rendered parts.
 
 ```
 import { renderer } from 'cozy-notifications'
