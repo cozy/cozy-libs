@@ -1,4 +1,4 @@
-# [Cozy] Authentication component
+# [Cozy][cozy] Authentication component
 
 ## What's cozy-authentication
 
@@ -8,7 +8,7 @@ Cozy-Authentication is a React component used to authenticate to a Cozy. It acts
 
 ![Cozy Logo](https://cdn.rawgit.com/cozy/cozy-guidelines/master/templates/cozy_logo_small.svg)
 
-[Cozy] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
+[Cozy][cozy] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
 
 ## Contribute
 
@@ -33,7 +33,7 @@ You can reach the Cozy Community by:
 
 ## Licence
 
-cozy-authentication is developed by Cozy Cloud and distributed under the [MIT].
+cozy-authentication is developed by Cozy Cloud and distributed under the [MIT][].
 
 [cozy]: https://cozy.io "Cozy Cloud"
 

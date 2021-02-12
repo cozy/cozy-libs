@@ -2,7 +2,7 @@
 
 ## Cozy codeshifts
 
-A collection of utils and transforms for [jscodeshift].
+A collection of utils and transforms for [jscodeshift][].
 
 Codeshifts are automatic transformations of Javascript code. They can be used
 for
