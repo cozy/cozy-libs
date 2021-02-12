@@ -5,7 +5,7 @@ exports[`KonnectorAccounts should show a spinner 1`] = `
   <KonnectorModalHeader
     konnector={Object {}}
   />
-  <WithStyles(DialogContent)
+  <ForwardRef(WithStyles)
     className="u-pb-2"
   >
     <div
@@ -15,6 +15,6 @@ exports[`KonnectorAccounts should show a spinner 1`] = `
         size="xxlarge"
       />
     </div>
-  </WithStyles(DialogContent)>
+  </ForwardRef(WithStyles)>
 </React.Fragment>
 `;

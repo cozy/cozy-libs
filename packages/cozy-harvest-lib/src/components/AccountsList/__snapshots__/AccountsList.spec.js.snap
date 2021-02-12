@@ -1,11 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`AccountsList should render 1`] = `
-<DialogContent
+<ForwardRef(DialogContent)
   className="u-pb-2 u-pt-0 u-ph-0"
   classes={
     Object {
-      "root": "MuiDialogContent-root-1",
+      "dividers": "MuiDialogContent-dividers",
+      "root": "MuiDialogContent-root",
     }
   }
 >
@@ -81,5 +82,5 @@ exports[`AccountsList should render 1`] = `
       </Card>
     </li>
   </ul>
-</DialogContent>
+</ForwardRef(DialogContent)>
 `;

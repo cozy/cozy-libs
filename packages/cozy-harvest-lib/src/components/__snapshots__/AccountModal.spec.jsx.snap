@@ -35,7 +35,7 @@ exports[`AccountModal should display the fetching state by default 1`] = `
       selectedAccount={null}
     />
   </KonnectorModalHeader>
-  <WithStyles(DialogContent)
+  <ForwardRef(WithStyles)
     className="u-pb-2"
   >
     <div
@@ -45,7 +45,7 @@ exports[`AccountModal should display the fetching state by default 1`] = `
         size="xxlarge"
       />
     </div>
-  </WithStyles(DialogContent)>
+  </ForwardRef(WithStyles)>
 </React.Fragment>
 `;
 
@@ -89,7 +89,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       }
     />
   </KonnectorModalHeader>
-  <WithStyles(DialogContent)
+  <ForwardRef(WithStyles)
     className="u-p-0"
   >
     <KonnectorAccountTabs
@@ -110,7 +110,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       onAccountDeleted={[MockFunction]}
       showNewAccountButton={true}
     />
-  </WithStyles(DialogContent)>
+  </ForwardRef(WithStyles)>
 </React.Fragment>
 `;
 
@@ -154,7 +154,7 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       }
     />
   </KonnectorModalHeader>
-  <WithStyles(DialogContent)
+  <ForwardRef(WithStyles)
     className="u-p-0"
   >
     <KonnectorAccountTabs
@@ -174,6 +174,6 @@ exports[`AccountModal with an account should display the AccountSelect & Content
       onAccountDeleted={[MockFunction]}
       showNewAccountButton={true}
     />
-  </WithStyles(DialogContent)>
+  </ForwardRef(WithStyles)>
 </React.Fragment>
 `;
