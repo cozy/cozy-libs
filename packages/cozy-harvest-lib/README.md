@@ -113,4 +113,4 @@ See the [Styleguidist](https://docs.cozy.io/cozy-libs/cozy-harvest-lib/).
 
 # Doc and example about manifests
 
-https://docs.cozy.io/en/tutorials/konnector/#the-manifest
+<https://docs.cozy.io/en/tutorials/konnector/#the-manifest>

@@ -73,7 +73,6 @@ The mobile channels consists of a push notification. Its title will be
 the result of the `getTitle` method and its content will be the result
 of `getPushContent`.
 
-
 ### mail
 
 Emails need more markup and thus will need the `template` class attribute.
@@ -205,7 +204,7 @@ const { parts } = render({ template, data })
 ## Built-in helpers
 
 - `t` will be passed automatically as a helper in templates. We must pass
- the `locales` object when instantiating the NotificationView.
+  the `locales` object when instantiating the NotificationView.
 
 ```javascript
 const locales = {

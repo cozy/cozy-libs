@@ -1,12 +1,11 @@
-CLI tree
-========
+# CLI tree
 
-CLI tree is a small package based on [argparse] to create a tree like CLI in a declarative
+CLI tree is a small package based on [argparse][] to create a tree like CLI in a declarative
 way.
 
 ## Usage
 
-See the [example].
+See the [example][].
 
 ## Automated help
 
@@ -25,7 +24,7 @@ Optional arguments:
 
 ## Command completion
 
-CLI tree uses [tabtab] to add command completion.
+CLI tree uses [tabtab][] to add command completion.
 
 Completion setup commands are automatically added and available like this :
 
@@ -34,11 +33,10 @@ $ node examples/users.js users completion -h
 ```
 
 To properly handle completion in you program, you will have to add the completionHandler like in
-the [example]
-
-
-
+the [example][].
 
 [example]: ./examples/users.js
+
 [argparse]: https://github.com/nodeca/argparse
+
 [tabtab]: https://www.npmjs.com/package/tabtab

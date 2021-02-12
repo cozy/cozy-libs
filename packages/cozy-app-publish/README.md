@@ -1,4 +1,5 @@
 # Cozy App Publish
+
 ![https://npmjs.org/package/cozy-app-publish](https://img.shields.io/npm/v/cozy-app-publish.svg)
 ![https://github.com/cozy/cozy-libs/blob/master/packages//LICENSE](https://img.shields.io/npm/l/cozy-app-publish.svg)
 ![https://npmcharts.com/compare/cozy-app-publish](https://img.shields.io/npm/dm/cozy-app-publish.svg)
@@ -9,7 +10,7 @@
 
 #### Requirements
 
- - Node.js version 8 or higher;
+- Node.js version 8 or higher;
 
 ### Install
 
@@ -24,12 +25,14 @@ You can find more information about the registry and how to prepare an applicati
 ### Usage via Travis CI (recommended)
 
 First of all, don't forget to build the application:
+
 ```
 # build the application (in the ./build folder here)
 yarn build
 ```
 
 Then, just publish it using the Travis CI workflow:
+
 ```
 # publish it, REGISTRY_TOKEN should be
 # encrypted and provided via Travis CI environment
@@ -42,12 +45,14 @@ yarn cozy-app-publish \
 ### Manual usage (not recommended)
 
 First of all, don't forget to build the application:
+
 ```
 # build the application (in the ./build folder here)
 yarn build
 ```
 
 Then, just publish it using:
+
 ```
 yarn cozy-app-publish \
 --token $REGISTRY_TOKEN \
@@ -80,6 +85,7 @@ In the manual mode, we don't have a way to compute the version like in the Travi
 #### `--prepublish <script_path>`
 
 Specify custom prepublish hook to manage how the app archive is generated and uploaded. The script must export a asynchronous function which has the following signature:
+
 ```js
 module.exports = async ({
   appBuildUrl,
@@ -98,18 +104,17 @@ module.exports = async ({
 
 This function must return an object containing the same options given as parameter, which can have been updated. For example, you may specifiy a new appBuildUrl in the hook. Here's a description of the different options:
 
-|Options|Description|
-|-|-|
-| `appBuildUrl` | The url where the build can be retrieved. For example, `http://github.com/cozy/cozy-foo/archives/cozy-foo.tar.gz`|
-| `appSlug` | The slug of the application, as defined in the manifest. Should not be mutated |
-| `appType` | `webapp` or `konnector` |
-| `appVersion` | App version, as defined in the manifest. Should not be mutated. |
-| `buildCommit` | sha of the commit, should not be mutated. |
-| `registryUrl` | URL of the Cozy registry, should not be mutated. |
-| `registryEditor` | Editor as it appears in the Cozy registry. |
-| `registryToken` | Registry Token. See [registry documentation](https://docs.cozy.io/en/cozy-stack/registry-publish/). Should not be mutated. |
-| `spaceName` | Space name in the Cozy registry. |
-
+| Options          | Description                                                                                                                |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `appBuildUrl`    | The url where the build can be retrieved. For example, `http://github.com/cozy/cozy-foo/archives/cozy-foo.tar.gz`          |
+| `appSlug`        | The slug of the application, as defined in the manifest. Should not be mutated                                             |
+| `appType`        | `webapp` or `konnector`                                                                                                    |
+| `appVersion`     | App version, as defined in the manifest. Should not be mutated.                                                            |
+| `buildCommit`    | sha of the commit, should not be mutated.                                                                                  |
+| `registryUrl`    | URL of the Cozy registry, should not be mutated.                                                                           |
+| `registryEditor` | Editor as it appears in the Cozy registry.                                                                                 |
+| `registryToken`  | Registry Token. See [registry documentation](https://docs.cozy.io/en/cozy-stack/registry-publish/). Should not be mutated. |
+| `spaceName`      | Space name in the Cozy registry.                                                                                           |
 
 #### `--postpublish <script_path>`
 
@@ -169,7 +174,7 @@ Sends a message to a mattermost channel to notify of the app's deployment. Requi
 
 #### `--registry-url <url>`
 
-The url of the registry, by default it will be https://staging-apps-registry.cozycloud.cc.
+The url of the registry, by default it will be <https://staging-apps-registry.cozycloud.cc>.
 
 #### `--space <space-name>`
 

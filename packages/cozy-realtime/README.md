@@ -31,7 +31,7 @@ yarn add cozy-realtime
 
 ### Example
 
-CozyRealtime comes with a plugin for CozyClient. This is the recommended way to use it: 
+CozyRealtime comes with a plugin for CozyClient. This is the recommended way to use it:
 
 ```js
 import CozyClient from 'cozy-client'

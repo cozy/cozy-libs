@@ -1,5 +1,4 @@
-Expose package information
-======================
+# Expose package information
 
 This plugin is useful if you want to expose chosen package information to
 a bundle created via webpack.
@@ -19,7 +18,7 @@ new PackageInfoPlugin({
 
 #### Exposed variable
 
-By default the exposed variable is __PACKAGES__ but it can be customized
+By default the exposed variable is **PACKAGES** but it can be customized
 via the `varName` option.
 
 ```patch

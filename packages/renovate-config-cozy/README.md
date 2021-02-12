@@ -6,7 +6,7 @@ To easily develop renovate configs, it is recommended to
 
 - install globally the `renovate` npm package
 - test the changes inside one repo
-- backport the changes to the config renovate 
+- backport the changes to the config renovate
 
 ```bash
 yarn global add renovate
