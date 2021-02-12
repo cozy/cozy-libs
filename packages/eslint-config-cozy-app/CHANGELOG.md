@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2021-02-12)
+
+
+### Features
+
+* Add finance theme ([bb8cf35](https://github.com/cozy/cozy-libs/commit/bb8cf35))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@1.6.0...eslint-config-cozy-app@2.0.0) (2020-10-01)
 
 

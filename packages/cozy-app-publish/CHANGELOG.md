@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.27.0 (2021-02-12)
+
+
+### Features
+
+* Add finance theme ([bb8cf35](https://github.com/cozy/cozy-libs/commit/bb8cf35))
+
+
+
+
+
 # [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.25.2...cozy-app-publish@0.26.0) (2020-11-23)
 
 

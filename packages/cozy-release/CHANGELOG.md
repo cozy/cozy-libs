@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.11.0 (2021-02-12)
+
+
+### Bug Fixes
+
+* Add references for links ([beca11c](https://github.com/cozy/cozy-libs/commit/beca11c))
+
+
+### Features
+
+* Add finance theme ([bb8cf35](https://github.com/cozy/cozy-libs/commit/bb8cf35))
+
+
+
+
+
 # 1.10.0 (2019-09-05)
 
 
