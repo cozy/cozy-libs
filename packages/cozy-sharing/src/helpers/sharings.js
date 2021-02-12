@@ -1,3 +1,5 @@
+import { Q } from 'cozy-client'
+
 import {
   updateInternalObjectFromRealtime,
   normalizeDocFromRealtime
@@ -23,7 +25,7 @@ export const createSharingInStore = (
 ) => {
   // TODO Check if we can getByIds to avoid query in map
   docsId.map(async id => {
-    const file = await client.query(client.get('io.cozy.files', id))
+    const file = await client.query(Q('io.cozy.files').getById(id))
     dispatch(
       addSharing(
         sharing,
