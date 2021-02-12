@@ -2,15 +2,13 @@
 import React from 'react'
 import omit from 'lodash/omit'
 
-import { shallow } from 'enzyme'
 import { render, fireEvent, cleanup } from '@testing-library/react'
+import CozyClient from 'cozy-client'
 
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import fixtures from '../../test/fixtures'
+import AppLike from '../../test/AppLike'
 import ConnectionFlow from '../../src/models/ConnectionFlow'
-import CozyClient from 'cozy-client'
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import enLocale from '../../src/locales/en.json'
 import { findKonnectorPolicy } from '../konnector-policies'
 
 const { findKonnectorPolicy: originalFindKonnectorPolicy } = jest.requireActual(
@@ -128,16 +126,16 @@ describe('TriggerManager', () => {
   })
 
   describe('when given an oauth konnector', () => {
-    it('should redirect to OAuthForm', () => {
+    it('should should not show a form but only a button to connect with oauth', async () => {
       mockVaultClient.getAll.mockResolvedValue([])
-      const component = shallow(
-        <I18n lang="en" dictRequire={() => enLocale}>
+      const root = render(
+        <AppLike>
           <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
-        </I18n>
+        </AppLike>
       )
-        .dive()
-        .dive()
-      expect(component.name()).toContain('OAuthForm')
+      await expect(root.findByText('Connect')).resolves.toBeDefined()
+      expect(root.queryByLabelText('username')).toBeFalsy()
+      expect(root.queryByLabelText('passphrase')).toBeFalsy()
     })
   })
 
@@ -150,9 +148,9 @@ describe('TriggerManager', () => {
 
       it('should show the new account form', async () => {
         const { findByLabelText, findByTitle } = render(
-          <I18n lang="en" dictRequire={() => enLocale}>
+          <AppLike>
             <TriggerManager {...props} />
-          </I18n>
+          </AppLike>
         )
 
         await expect(findByLabelText('username')).resolves.toBeDefined()
@@ -172,9 +170,9 @@ describe('TriggerManager', () => {
       it('should show the new account form without any warning', async () => {
         findKonnectorPolicy.mockReturnValue({ saveInVault: false })
         const { findByLabelText, findByTitle } = render(
-          <I18n lang="en" dictRequire={() => enLocale}>
+          <AppLike>
             <TriggerManager {...omit(props, 'vaultClient')} />
-          </I18n>
+          </AppLike>
         )
 
         await expect(findByLabelText('username')).resolves.toBeDefined()
@@ -201,9 +199,9 @@ describe('TriggerManager', () => {
 
       it('should show the ciphers list', async () => {
         const { findByText } = render(
-          <I18n lang="en" dictRequire={() => enLocale}>
+          <AppLike>
             <TriggerManager {...props} />
-          </I18n>
+          </AppLike>
         )
 
         const cipherItem = await findByText('Isabelle')
@@ -227,9 +225,9 @@ describe('TriggerManager', () => {
 
         it('should show the account form with only password field editable', async () => {
           const { findByText, findByLabelText, findByTitle } = render(
-            <I18n lang="en" dictRequire={() => enLocale}>
+            <AppLike>
               <TriggerManager {...props} />
-            </I18n>
+            </AppLike>
           )
 
           const cipherItem = await findByText('Isabelle')
@@ -262,9 +260,9 @@ describe('TriggerManager', () => {
 
       it('should show the account form', async () => {
         const { findByLabelText } = render(
-          <I18n lang="en" dictRequire={() => enLocale}>
+          <AppLike>
             <TriggerManager {...propsWithAccount} />
-          </I18n>
+          </AppLike>
         )
 
         const usernameField = await findByLabelText('username')
@@ -291,9 +289,9 @@ describe('TriggerManager', () => {
 
       it('should show the account form', async () => {
         const { findByLabelText } = render(
-          <I18n lang="en" dictRequire={() => enLocale}>
+          <AppLike>
             <TriggerManager {...propsWithAccount} />
-          </I18n>
+          </AppLike>
         )
 
         const usernameField = await findByLabelText('username')
@@ -314,9 +312,9 @@ describe('TriggerManager', () => {
       const flow = new ConnectionFlow(client)
       jest.spyOn(flow, 'handleFormSubmit').mockImplementation(() => {})
       const utils = render(
-        <I18n lang="en" dictRequire={() => enLocale}>
+        <AppLike>
           <TriggerManager {...props} account={account} flow={flow} />
-        </I18n>
+        </AppLike>
       )
 
       // Identification of inputs is a tad fragile, it should be better
