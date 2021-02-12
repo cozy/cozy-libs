@@ -1,9 +1,10 @@
-import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
-import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 import merge from 'lodash/merge'
 import unset from 'lodash/unset'
-import { Q } from 'cozy-client'
 import Polyglot from 'node-polyglot'
+
+import { Q } from 'cozy-client'
+import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
+import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
 
 export const decryptString = (encryptedString, vaultClient, orgKey) => {
   const [encTypeAndIv, data, mac] = encryptedString.split('|')
@@ -59,10 +60,9 @@ export const fetchAccountsForCipherId = async (cozyClient, cipherId) => {
 }
 
 export const fetchKonnectorFromAccount = async (cozyClient, account) => {
-  const konnectorDoctype = 'io.cozy.konnectors'
   const slug = account.account_type
   const konnector = await cozyClient.query(
-    cozyClient.get(konnectorDoctype, slug)
+    Q('io.cozy.konnectors').getById(`io.cozy.konnectors/${slug}`)
   )
   return konnector.data
     ? {
