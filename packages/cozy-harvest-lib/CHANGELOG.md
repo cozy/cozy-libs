@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.16.1...cozy-harvest-lib@4.0.0) (2021-02-12)
+
+
+### Bug Fixes
+
+* DialogTitle is a flex now, we need to set the direction to column ([a63ad22](https://github.com/cozy/cozy-libs/commit/a63ad22))
+* Test was firing a warning because of a failed promise ([cd0e2f4](https://github.com/cozy/cozy-libs/commit/cd0e2f4))
+* Warning icon was on a new line in Configuration tab ([2a8f467](https://github.com/cozy/cozy-libs/commit/2a8f467))
+
+
+### Features
+
+* Harvest needs mui v4 now ([420d89e](https://github.com/cozy/cozy-libs/commit/420d89e))
+* Update cozy-ui to beta for harvest tests ([5956b50](https://github.com/cozy/cozy-libs/commit/5956b50))
+* Use Paper and List to make a RaisedList ([0166ea9](https://github.com/cozy/cozy-libs/commit/0166ea9))
+
+
+### BREAKING CHANGES
+
+* Needs @material-ui/core@4 now
+
+
+
+
+
 ## [3.16.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@3.16.0...cozy-harvest-lib@3.16.1) (2021-02-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
