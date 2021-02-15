@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { makeStyles } from '@material-ui/core/styles'
@@ -10,6 +10,7 @@ import WarningIcon from 'cozy-ui/transpiled/react/Icons/Warning'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import SwipeableViews from 'react-swipeable-views'
 
+import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
@@ -70,6 +71,8 @@ export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {
   )
 }
 
+const domMutationsConfig = { childList: true, subtree: true }
+
 const DumbKonnectorAccountTabs = props => {
   const {
     konnector,
@@ -100,6 +103,12 @@ const DumbKonnectorAccountTabs = props => {
   const swipeableActions = useRef()
   const nodeRef = useRef()
 
+  const updateSwiperHeight = useCallback(
+    () => swipeableActions.current.updateHeight(),
+    [swipeableActions]
+  )
+  useDOMMutations(nodeRef.current, domMutationsConfig, updateSwiperHeight)
+
   return (
     <div ref={nodeRef}>
       <KonnectorAccountTabsTabs
@@ -109,6 +118,7 @@ const DumbKonnectorAccountTabs = props => {
       />
       <Divider />
       <SwipeableViews
+        animateHeight={true}
         index={tab}
         disabled
         animateTransitions={isMobile}
