@@ -3,6 +3,7 @@ import uuid from 'uuid/v4'
 import * as konnectors from './konnectors'
 import CozyClient from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
+import get from 'lodash/get'
 
 export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
 
@@ -128,6 +129,10 @@ export const getOAuthUrl = ({
   return oAuthUrl
 }
 
+const getAppSlug = client => {
+  return get(client, 'appMetadata.slug')
+}
+
 /**
  * Initializes client OAuth workflow by storing the current information about
  * account type in localStorage. Generates the OAuth URL to stack endpoint,
@@ -157,7 +162,7 @@ export const prepareOAuth = (client, konnector, redirectSlug, extraParams) => {
     oAuthStateKey,
     oAuthConf: oauth,
     nonce: Date.now(),
-    redirectSlug,
+    redirectSlug: redirectSlug || getAppSlug(client),
     extraParams
   })
 

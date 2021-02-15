@@ -31,6 +31,11 @@ const customStyles = () => ({
   }
 })
 
+/**
+ * KonnectorBlock is a standalone component and can be imported directly.
+ * It needs GET permission on io.cozy.konnectors, io.cozy.accounts and
+ * io.cozy.triggers to work properly.
+ */
 const KonnectorBlock = ({ classes, file }) => {
   const [konnector, setKonnector] = useState()
   const client = useClient()
@@ -71,7 +76,13 @@ const KonnectorBlock = ({ classes, file }) => {
 
   return (
     <List>
-      <ListItem className="u-ph-2 u-h-3" button component="a" href={link}>
+      <ListItem
+        className="u-ph-2 u-h-3"
+        button
+        component="a"
+        href={link}
+        target="_blank"
+      >
         <ListItemIcon>
           <AppIcon app={slug} className={classes[iconStatus]} />
         </ListItemIcon>
