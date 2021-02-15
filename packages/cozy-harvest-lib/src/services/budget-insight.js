@@ -20,30 +20,13 @@ import {
   setBIConnectionSyncStatus
 } from './bi-http'
 import assert from '../assert'
-import { mkConnAuth, biErrorMap, getMappingLinxoBI } from 'cozy-bi-auth'
-import biPublicKeyProd from './bi-public-key-prod.json'
+import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
 import logger from '../logger'
 
 const DECOUPLED_ERROR = 'decoupled'
 const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
-
-const configsByMode = {
-  prod: {
-    mode: 'prod',
-    url: 'https://cozy.biapi.pro/2.0',
-    publicKey: biPublicKeyProd
-  },
-  dev: {
-    mode: 'dev',
-    url: 'https://cozytest-sandbox.biapi.pro/2.0'
-  },
-  devmaif: {
-    mode: 'dev',
-    url: 'https://maif-sandbox.biapi.pro/2.0'
-  }
-}
 
 const getBIConnectionIdFromAccount = account =>
   get(account, 'data.auth.bi.connId')
@@ -64,37 +47,6 @@ const convertBIErrortoKonnectorJobError = error => {
   throw err
 }
 
-export const getBIConfigForCozyURL = rawCozyURL => {
-  if (!rawCozyURL) {
-    return configsByMode['dev']
-  }
-  const cozyURL = new URL(rawCozyURL)
-  const domain = cozyURL.host
-    .split('.')
-    .slice(-2)
-    .join('.')
-    .split(':')
-    .shift()
-  switch (domain) {
-    case 'cozy.tools':
-    case 'cozy.wtf':
-    case 'cozy.blue':
-    case 'cozy.works':
-    case 'cozy.red':
-    case 'cozy.company':
-    case 'cozy.solutions':
-    case 'toutatice.fr':
-    case 'cozy.dev':
-      return configsByMode['dev']
-    case 'cozymaif.cloud':
-    case 'cozy-maif-int.fr':
-    case 'cozy-maif-stg.fr':
-      return configsByMode['devmaif']
-    default:
-      return configsByMode['prod']
-  }
-}
-
 export const isBudgetInsightConnector = konnector => {
   return (
     konnector.partnership &&
@@ -102,31 +54,36 @@ export const isBudgetInsightConnector = konnector => {
   )
 }
 
-const createTemporaryToken = async ({ client, biBankId, konnector }) => {
+const createTemporaryToken = async ({ client, konnector, account }) => {
   assert(
-    biBankId,
-    'createTemporaryToken: no biBankId passed to createTemporaryToken'
+    konnector.slug,
+    'createTemporaryToken: konnector passed in options has no slug'
   )
-  assert(konnector.slug, 'createTemporaryToken: No konnector slug')
+  assert(account, 'createTemporaryToken: No account passed in options')
+  const cozyBankId = getCozyBankId({ konnector, account })
+  assert(
+    cozyBankId,
+    'createTemporaryToken: Could not determine cozyBankId from account or konnector'
+  )
   const jobResponse = await client.stackClient.jobs.create('konnector', {
     mode: 'getTemporaryToken',
     konnector: konnector.slug,
-    bankId: biBankId
+    cozyBankId: cozyBankId
   })
   const event = await waitForRealtimeEvent(
     client,
     jobResponse.data.attributes,
     'result'
   )
-  return event.data.result.code
+  return event.data.result
 }
 
-export const saveTemporaryToken = (flow, tempToken) =>
+export const saveBIConfig = (flow, biConfig) =>
   flow.setData({
-    tempToken
+    biConfig
   })
 
-export const getTemporaryToken = flow => {
+export const getBIConfig = flow => {
   const data = flow.getData()
   return data.tempToken
 }
@@ -153,19 +110,18 @@ export const createOrUpdateBIConnection = async ({
   konnector,
   flow
 }) => {
-  const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
-  const cozyBankId = getCozyBankId({ konnector, account })
-  const biBankId = getBiBankId({ client, cozyBankId })
 
   logger.info('Creating temporary token...')
 
-  const tempToken = await createTemporaryToken({
-    biBankId,
+  const biConfig = await createTemporaryToken({
     client,
-    konnector
+    konnector,
+    account
   })
-  saveTemporaryToken(flow, tempToken)
+  saveBIConfig(flow, biConfig)
+
+  const { code: tempToken, ...config } = biConfig
 
   logger.info('Created temporary token')
   assert(tempToken, 'No temporary token')
@@ -262,12 +218,10 @@ const getWebauthBIConnectionId = account => {
 }
 
 export const updateBIConnectionFromFlow = async (flow, connectionData) => {
-  const client = flow.client
   const account = flow.account
 
-  const config = getBIConfigForCozyURL(client.stackClient.uri)
   const connId = getBIConnectionIdFromAccount(account)
-  const temporaryToken = getTemporaryToken(flow)
+  const { code: temporaryToken, config } = getBIConfig(flow)
 
   logger.debug('Updating BI connection')
   const updatedConnection = await updateBIConnection(
@@ -389,17 +343,15 @@ export const setSync = async ({
   createTemporaryToken: createTemporaryTokenOpt,
   setBIConnectionSyncStatus: setBIConnectionSyncStatusOpt
 }) => {
-  const cozyBankId = getCozyBankId({ konnector, account })
-  const temporaryToken = await (createTemporaryTokenOpt ||
+  const { code: temporaryToken, ...config } = await (createTemporaryTokenOpt ||
     createTemporaryToken)({
-    biBankId: getBiBankId({ client, cozyBankId }),
     client,
-    konnector
+    konnector,
+    account
   })
 
   const connId = getBIConnectionIdFromAccount(account)
   const contractId = getBIIdFromContract(contract)
-  const config = getBIConfigForCozyURL(client.stackClient.uri)
 
   logger.info(
     `Toggling contract ${contractId} in connection ${connId}: syncStatus`
@@ -414,13 +366,10 @@ export const setSync = async ({
 }
 
 export const getUserConfig = async ({ client, konnector, account }) => {
-  const config = getBIConfigForCozyURL(client.stackClient.uri)
-  const cozyBankId = getCozyBankId({ konnector, account })
-  const biBankId = getBiBankId({ client, cozyBankId })
-  const temporaryToken = await createTemporaryToken({
-    biBankId,
+  const { code: temporaryToken, ...config } = await createTemporaryToken({
     client,
-    konnector
+    konnector,
+    account
   })
   const data = await getBIUserConfig(config, temporaryToken)
   return data
@@ -432,13 +381,10 @@ export const updateUserConfig = async ({
   userConfig,
   account
 }) => {
-  const config = getBIConfigForCozyURL(client.stackClient.uri)
-  const cozyBankId = getCozyBankId({ konnector, account })
-  const biBankId = getBiBankId({ client, cozyBankId })
-  const temporaryToken = await createTemporaryToken({
-    biBankId,
+  const { code: temporaryToken, ...config } = await createTemporaryToken({
     client,
-    konnector
+    konnector,
+    account
   })
   const data = await updateBIUserConfig(config, userConfig, temporaryToken)
   return data
@@ -453,21 +399,15 @@ export const getCozyBankId = ({ konnector, account }) => {
   return cozyBankId
 }
 
-export const getBiBankId = ({ client, cozyBankId }) => {
-  const cozyUrl = client.stackClient.uri
-  const config = getBIConfigForCozyURL(cozyUrl)
-  const mapping = getMappingLinxoBI(config)
-  const bankId = mapping[cozyBankId].id
-  return bankId
-}
-
-export const fetchExtraOAuthUrlParams = async ({ client, konnector }) => {
-  const cozyBankId = getCozyBankId({ konnector })
-  const biBankId = getBiBankId({ client, cozyBankId })
-  const token = await createTemporaryToken({
+export const fetchExtraOAuthUrlParams = async ({
+  client,
+  konnector,
+  account
+}) => {
+  const { code: token, biBankId } = await createTemporaryToken({
     client,
-    biBankId,
-    konnector
+    konnector,
+    account
   })
 
   return { id_connector: biBankId, token }

@@ -2,7 +2,6 @@ import CozyClient from 'cozy-client'
 import {
   createOrUpdateBIConnection,
   onBIAccountCreation,
-  getBIConfigForCozyURL,
   fetchExtraOAuthUrlParams,
   handleOAuthAccount,
   setSync
@@ -11,6 +10,7 @@ import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
+import biPublicKeyProd from './bi-public-key-prod.json'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
@@ -75,23 +75,6 @@ const account = {
 
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 
-describe('getBIConfigForCozyURL', () => {
-  it('should correctly work', () => {
-    expect(getBIConfigForCozyURL().mode).toBe('dev')
-    expect(getBIConfigForCozyURL('http://cozy.tools:8080').mode).toBe('dev')
-    expect(getBIConfigForCozyURL('https://test.cozy.works').mode).toBe('dev')
-    expect(getBIConfigForCozyURL('https://test.cozy-maif-int.fr').mode).toBe(
-      'dev'
-    )
-    expect(getBIConfigForCozyURL('https://test.cozy-maif-int.fr').url).toBe(
-      'https://maif-sandbox.biapi.pro/2.0'
-    )
-    expect(getBIConfigForCozyURL('https://test.cozy.rocks').mode).toBe('prod')
-    expect(getBIConfigForCozyURL('https://test.mycozy.cloud').mode).toBe('prod')
-    expect(getBIConfigForCozyURL('https://test.mydomain.net').mode).toBe('prod')
-  })
-})
-
 describe('createOrUpdateBIConnection', () => {
   const setup = () => {
     const client = new CozyClient({
@@ -110,6 +93,9 @@ describe('createOrUpdateBIConnection', () => {
       return {
         data: {
           result: {
+            mode: 'prod',
+            url: 'https://cozy.biapi.pro/2.0',
+            publicKey: biPublicKeyProd,
             code: 'bi-temporary-access-token-145613'
           }
         }
@@ -352,7 +338,8 @@ describe('fetchExtraOAuthUrlParams', () => {
       return {
         data: {
           result: {
-            code: 'bi-temporary-access-token-121212'
+            code: 'bi-temporary-access-token-121212',
+            biBankId: TEST_BANK_BI_ID
           }
         }
       }
@@ -369,9 +356,12 @@ describe('fetchExtraOAuthUrlParams', () => {
       }
     }
 
+    const account = {}
+
     const { id_connector, token } = await fetchExtraOAuthUrlParams({
       client,
-      konnector
+      konnector,
+      account
     })
     expect(token).toEqual('bi-temporary-access-token-121212')
     expect(id_connector).toEqual(TEST_BANK_BI_ID)
@@ -421,7 +411,9 @@ describe('setSync', () => {
     const biContractId = '1234'
     const account = { data: { auth: { bi: { connId: biConnId } } } }
     const contract = { vendorId: biContractId }
-    const createTemporaryToken = jest.fn().mockResolvedValue(tempToken)
+    const createTemporaryToken = jest.fn().mockResolvedValue({
+      code: tempToken
+    })
     const setBIConnectionSyncStatus = jest.fn()
     await setSync({
       client,
