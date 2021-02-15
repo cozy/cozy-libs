@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.0.1...cozy-harvest-lib@4.1.0) (2021-02-15)
+
+
+### Features
+
+* Get BI config from result of getTemporaryToken ([f82f3fe](https://github.com/cozy/cozy-libs/commit/f82f3fe))
+
+
+
+
+
 ## [4.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.0.0...cozy-harvest-lib@4.0.1) (2021-02-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
