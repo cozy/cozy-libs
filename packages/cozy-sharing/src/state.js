@@ -405,24 +405,68 @@ const hasBeenSelfRevoked = (sharing, instanceUri) => {
   return !sharing.attributes.owner && me && me.status === 'revoked'
 }
 
-const getDocumentSharingType = (sharing, docId) => {
-  if (!sharing) return null
-  const rule = sharing.attributes.rules.find(
-    r => r.values.indexOf(docId) !== -1
-  )
+/**
+ * Returns the sharing rule of a document
+ * @param {object} sharing - The sharing
+ * @param {string} docId - Id of the shared document
+ * @returns {object} sharing rule
+ */
+const getSharingRule = (sharing, docId) =>
+  sharing.attributes.rules.find(r => r.values.indexOf(docId) !== -1)
 
-  // If a document has no rule, it is a shortcut preview of a sharing. Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
+/**
+ * Returns the sharing type of a directory
+ * @param {object} rule - Sharing rule of a document
+ * @returns {string} two-way or one-way
+ */
+const getDirectorySharingType = rule => {
+  // If a document has no rule, it is a shortcut preview of a sharing.
+  // Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
+  // TODO : the sharing type shouldn't be based on rule but on ready_only prop of the member
   return rule && rule.update === 'sync' && rule.remove === 'sync'
     ? 'two-way'
     : 'one-way'
 }
 
+/**
+ * Returns the sharing type of a file
+ * @param {object} rule - Sharing rule of a document
+ * @returns {string} two-way or one-way
+ */
+const getFileSharingType = rule => {
+  // If a document has no rule, it is a shortcut preview of a sharing.
+  // Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
+  // TODO : the sharing type shouldn't be based on rule but on ready_only prop of the member
+  return rule && rule.update === 'sync' && rule.remove === 'revoke'
+    ? 'two-way'
+    : 'one-way'
+}
+
+/**
+ * Returns the sharing type of a document
+ * @param {object} sharing - The sharing
+ * @param {string} docId - Id of the shared document
+ * @returns {string} two-way or one-way
+ */
+export const getDocumentSharingType = (sharing, docId) => {
+  if (!sharing) return null
+  const rule = getSharingRule(sharing, docId)
+  const directorySharingType = getDirectorySharingType(rule)
+  const fileSharingType = getFileSharingType(rule)
+
+  return directorySharingType === 'two-way' || fileSharingType === 'two-way'
+    ? 'two-way'
+    : 'one-way'
+}
+
 export const isReadOnlySharing = (sharing, docId) => {
-  const rule = sharing.attributes.rules.find(
-    r => r.values.indexOf(docId) !== -1
-  )
-  // If a document has no rule, it is a shortcut preview of a sharing. Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
-  return rule && rule.update === 'sync' && rule.remove === 'sync' ? false : true
+  const rule = getSharingRule(sharing, docId)
+  const directorySharingType = getDirectorySharingType(rule)
+  const fileSharingType = getFileSharingType(rule)
+
+  return directorySharingType === 'two-way' || fileSharingType === 'two-way'
+    ? false
+    : true
 }
 
 const buildSharingLink = (state, documentType, sharecode) => {
