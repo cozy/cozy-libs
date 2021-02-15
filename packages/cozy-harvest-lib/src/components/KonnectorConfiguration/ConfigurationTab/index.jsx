@@ -144,21 +144,28 @@ const ConfigurationTab = ({
 
   return (
     <div className={isMobile ? '' : 'u-pv-1-half'}>
+      {/**
+       * Use an extra div with padding instead of setting margins on TriggerErrorInfo since
+       * the offsetHeight of the parent does not take into account margins; slide content was
+       * cropped since SwipeableViews uses the offsetHeight of the first slide children when
+       * computing the height of the slide wrapper.
+       */}
       {shouldDisplayError && hasLoginError && (
-        <TriggerErrorInfo
-          className={isMobile ? 'u-mv-2' : 'u-mb-2'}
-          error={error}
-          konnector={konnector}
-          trigger={flow.trigger}
-          action={
-            error.isSolvableViaReconnect() ? (
-              <RedirectToAccountFormButton
-                konnector={konnector}
-                trigger={flow.trigger}
-              />
-            ) : null
-          }
-        />
+        <div className={isMobile ? 'u-pv-1' : 'u-pb-2'}>
+          <TriggerErrorInfo
+            error={error}
+            konnector={konnector}
+            trigger={flow.trigger}
+            action={
+              error.isSolvableViaReconnect() ? (
+                <RedirectToAccountFormButton
+                  konnector={konnector}
+                  trigger={flow.trigger}
+                />
+              ) : null
+            }
+          />
+        </div>
       )}
       <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
         <ContractsForAccount konnector={konnector} account={account} />
