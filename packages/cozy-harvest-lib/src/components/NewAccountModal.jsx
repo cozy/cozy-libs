@@ -41,7 +41,7 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
         {...dialogTitleProps}
         className={cx(
           dialogTitleProps.className,
-          'u-ta-center u-stack-m u-pb-1'
+          'u-ta-center u-flex-column u-stack-m u-pb-1'
         )}
         disableTypography
       >

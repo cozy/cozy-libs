@@ -1,7 +1,8 @@
 import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 
-import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
+import { makeStyles } from '@material-ui/core/styles'
+import { Tab as UITab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -26,6 +27,17 @@ const WarningError = () => {
 const tabIndexes = {
   data: 0,
   configuration: 1
+}
+
+const useTabStyles = makeStyles({
+  wrapper: {
+    flexDirection: 'row'
+  }
+})
+
+const Tab = props => {
+  const classes = useTabStyles()
+  return <UITab classes={classes} {...props} />
 }
 
 export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {

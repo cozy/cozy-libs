@@ -99,8 +99,8 @@ the ability to prune unused module away. It works by configuring babel-preset-en
 
 You can have control on the options passed to `babel-preset-env` and `babel-plugin-transform-runtime`:
 
-* `presetEnv` will be passed to `babel-preset-env`
-* `transformRuntime` will be passed to `babel-plugin-transform-runtime`
+- `presetEnv` will be passed to `babel-preset-env`
+- `transformRuntime` will be passed to `babel-plugin-transform-runtime`
 
 ```json
 {
@@ -118,8 +118,8 @@ to be replaced by imports from `babel-runtime`.
 
 See the options on the official docs :
 
-https://babeljs.io/docs/en/babel-preset-env#modules
-https://babeljs.io/docs/en/babel-plugin-transform-runtime#helpers
+<https://babeljs.io/docs/en/babel-preset-env#modules>
+<https://babeljs.io/docs/en/babel-plugin-transform-runtime#helpers>
 
 ## Community
 
@@ -132,7 +132,7 @@ https://babeljs.io/docs/en/babel-plugin-transform-runtime#helpers
  </div>
  </br>
 
-[Cozy] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
+[Cozy][cozy] is a platform that brings all your web services in the same private space.  With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
 
 ### Get in touch
 
@@ -143,14 +143,16 @@ You can reach the Cozy Community by:
 - Posting issues on the [Github repos][github]
 - Say Hi! on [Twitter][twitter]
 
-
 ## License
 
 `babel-preset-cozy-app` is distributed under the MIT license.
 
-
 [cozy]: https://cozy.io "Cozy Cloud"
+
 [freenode]: http://webchat.freenode.net/?randomnick=1&channels=%23cozycloud&uio=d4
+
 [forum]: https://forum.cozy.io/
+
 [github]: https://github.com/cozy/
+
 [twitter]: https://twitter.com/cozycloud

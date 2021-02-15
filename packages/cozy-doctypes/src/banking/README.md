@@ -9,7 +9,7 @@ Account matching necessitates real world data for its tests. After
 anonymizing the data, it has been encrypted to further increase
 security and privacy.
 
-To run the tests (you'll need a password for the decryption step): 
+To run the tests (you'll need a password for the decryption step):
 
 ```bash
 cd packages/cozy-doctypes

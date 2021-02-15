@@ -14,6 +14,7 @@ before_install:
 script:
   - yarn build
   - yarn lint
+  - yarn lint:md -f
   - yarn test
 before_deploy:
   - git config --global user.email "npm@cozycloud.cc"

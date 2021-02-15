@@ -128,16 +128,16 @@ The created document will have a `cozyMetadata` property like this:
 The `package.json` has both `main` and `browser` fields. This allows
 
 - a nodeJS runtime to run the non transpiled code (async/await are for example
-supported in nodeJS) which allows for easier to read stacktraces.
+  supported in nodeJS) which allows for easier to read stacktraces.
 
 - browser runtimes to use transpiled code
 
 The only caveat here is that we must pay attention to features that we use that are not supported yet
-in nodeJS, for example 
+in nodeJS, for example
 
 - the lack of ES6 module support in nodeJS, we have to use `module.exports`
 - class properties: must bind the methods in the constructor
 
-webpack doc for browser field: https://webpack.js.org/configuration/resolve/#resolvealiasfields
+webpack doc for browser field: <https://webpack.js.org/configuration/resolve/#resolvealiasfields>
 
-package.json doc for browser field: https://docs.npmjs.com/files/package.json#browser
+package.json doc for browser field: <https://docs.npmjs.com/files/package.json#browser>

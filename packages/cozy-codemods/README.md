@@ -2,7 +2,7 @@
 
 ## Cozy codeshifts
 
-A collection of utils and transforms for [jscodeshift].
+A collection of utils and transforms for [jscodeshift][].
 
 Codeshifts are automatic transformations of Javascript code. They can be used
 for
@@ -14,6 +14,7 @@ for
 See [here][jscodeshift-docs] for more information on codeshifts.
 
 [jscodeshift]: https://github.com/facebook/jscodeshift
+
 [jscodeshift-docs]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation
 
 ### Installation
@@ -78,7 +79,6 @@ After
 - Replace a HOC with a hook with [`hoc-replacer.js`](./src/hoc-replacer.js)
 - Remove unused imports with [`remove-unused-imports.js`](./src/remove-unused-imports.js)
 
-
 ## API
 
 ## Functions
@@ -103,53 +103,58 @@ JSX identifiers are counted as React usage.</p>
 <a name="removeUnusedImports"></a>
 
 ## removeUnusedImports(root, j)
+
 Removes unused imports by counting usage.
 JSX identifiers are counted as React usage.
 
 **Kind**: global function
 
-| Param | Type |
-| --- | --- |
-| root | <code>PathNode</code> |
-| j | <code>Object</code> |
+| Param | Type                  |
+| ----- | --------------------- |
+| root  | <code>PathNode</code> |
+| j     | <code>Object</code>   |
 
 <a name="isBlockLike"></a>
 
 ## isBlockLike(path) ⇒ <code>Boolean</code>
+
 Returns true if path is Program or a Block
 
 **Kind**: global function
 
-| Param | Type |
-| --- | --- |
-| path | <code>PathNode</code> |
+| Param | Type                  |
+| ----- | --------------------- |
+| path  | <code>PathNode</code> |
 
 <a name="flatReplace"></a>
 
 ## flatReplace(path, newNode)
+
 Replaces `path.node` with `newNode` without keeping blocks, flattening
 `newNode` into `path`. Useful when removing `if`/`else`.
 
 **Kind**: global function
 
-| Param | Type |
-| --- | --- |
-| path | <code>PathNode</code> |
-| newNode | <code>Node</code> |
+| Param   | Type                  |
+| ------- | --------------------- |
+| path    | <code>PathNode</code> |
+| newNode | <code>Node</code>     |
 
 <a name="simplifyConditions"></a>
 
 ## simplifyConditions(root, j)
+
 Statically evaluates boolean conditions
 
 **Kind**: global function
 
-| Param | Type |
-| --- | --- |
-| root | <code>NodePath</code> |
-| j | <code>Object</code> |
+| Param | Type                  |
+| ----- | --------------------- |
+| root  | <code>NodePath</code> |
+| j     | <code>Object</code>   |
 
 **Example**
+
 ```js
 `if (true) { foo } else { bar }` -> `foo`
 
@@ -157,4 +162,3 @@ Statically evaluates boolean conditions
 
 `!true ? foo : bar` -> `bar`
 ```
-

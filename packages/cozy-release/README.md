@@ -71,7 +71,7 @@ git tag -a x.y.z
  </div>
  </br>
 
-[Cozy] is a platform that brings all your web services in the same private space. With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
+[Cozy][cozy] is a platform that brings all your web services in the same private space. With it, your webapps and your devices can share data easily, providing you with a new experience. You can install Cozy on your own hardware where no one's tracking you.
 
 ### Get in touch
 
@@ -89,3 +89,13 @@ The maintainers for Cozy Release are [Gregory](https://github.com/gregorylegarec
 ## License
 
 `cozy-release` is distributed under the MIT license.
+
+[cozy]: https://cozy.io "Cozy Cloud"
+
+[freenode]: http://webchat.freenode.net/?randomnick=1&channels=%23cozycloud&uio=d4
+
+[forum]: https://forum.cozy.io/
+
+[github]: https://github.com/cozy/
+
+[twitter]: https://twitter.com/cozycloud

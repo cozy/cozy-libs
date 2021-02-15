@@ -1,5 +1,4 @@
-Flags
-=====
+# Flags
 
 Use and manage cozy feature flags.
 Flags can be toggled for a cozy instance, a context or globally.
@@ -15,7 +14,7 @@ npm install --save cozy-flags
 # or yarn add cozy-flags
 ```
 
-A CozyClient plugin is exported that 
+A CozyClient plugin is exported that
 
 - initializes flags on client's login
 - resets them on client's logout
@@ -25,7 +24,7 @@ import flag from 'cozy-flags'
 client.registerPlugin(flag.plugin)
 ```
 
-ℹ️ It will fetch server flags for consumption by the app 
+ℹ️ It will fetch server flags for consumption by the app
 
 - either from DOM data (if `data-cozy={{ .CozyData }}` or `data-flags={{ .Flags }}`, on web
 - or by fetching data from the server (on mobile)
@@ -69,7 +68,6 @@ const App = () => {
 The `FlagSwitcher` component helps toggling the flags.
 
 <img src='https://user-images.githubusercontent.com/1606068/43769674-93301fa4-9a3a-11e8-9d2a-93a6ab4f1a07.gif' />
-
 
 ### Flags enabled at build time
 

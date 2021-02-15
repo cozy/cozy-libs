@@ -1,10 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import KonnectorIcon from './KonnectorIcon'
+
 import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+
+import KonnectorIcon from './KonnectorIcon'
 import { useDialogContext } from './DialogContext'
 
 const resetFontStyles = { fontSize: '1rem', fontWeight: 'normal' }
