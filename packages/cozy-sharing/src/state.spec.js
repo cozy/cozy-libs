@@ -13,7 +13,8 @@ import reducer, {
   hasSharedChild,
   getSharedDocIdsBySharings,
   getSharingType,
-  getPermissionDocIds
+  getPermissionDocIds,
+  getDocumentSharingType
 } from './state'
 
 import {
@@ -344,6 +345,7 @@ describe('Sharing state', () => {
           avatarPath: '/sharings/sharing_3/recipients/1/avatar'
         }
       ])
+
       expect(getRecipients(state, 'shortcut_id')).toEqual([
         {
           email: 'jane@doe.com',
@@ -499,6 +501,7 @@ describe('getPermissionDocIds method', () => {
     expect(docs).toEqual([])
   })
 })
+
 describe('getSharingType selector', () => {
   it('should return false is this a sharingByLink', () => {
     const newState = reducer({}, addSharingLink(PERM_2))
@@ -518,6 +521,7 @@ describe('getSharingType selector', () => {
       getSharingType(newState, SHARING_3.attributes.rules[0].values[0], '')
     ).toBe('two-way')
   })
+
   it('should return one-way if the sharing is one-way', () => {
     const newState = reducer(
       {},
@@ -530,6 +534,82 @@ describe('getSharingType selector', () => {
         newState,
         SHARING_READ_ONLY.attributes.rules[0].values[0],
         ''
+      )
+    ).toBe('one-way')
+  })
+})
+
+describe('getDocumentSharingType', () => {
+  it('should return null if no sharing', () => {
+    expect(getDocumentSharingType()).toBeNull()
+  })
+
+  it('should return one-way or two-way according to the rules', () => {
+    expect(
+      getDocumentSharingType(
+        {
+          attributes: {
+            rules: [
+              {
+                values: ['folder_1'],
+                update: 'sync',
+                remove: 'sync'
+              }
+            ]
+          }
+        },
+        'folder_1'
+      )
+    ).toBe('two-way')
+
+    expect(
+      getDocumentSharingType(
+        {
+          attributes: {
+            rules: [
+              {
+                values: ['file_1'],
+                update: 'sync',
+                remove: 'revoke'
+              }
+            ]
+          }
+        },
+        'file_1'
+      )
+    ).toBe('two-way')
+
+    expect(
+      getDocumentSharingType(
+        {
+          attributes: {
+            rules: [
+              {
+                values: ['folder_1'],
+                update: 'revoke',
+                remove: 'revoke'
+              }
+            ]
+          }
+        },
+        'folder_1'
+      )
+    ).toBe('one-way')
+
+    expect(
+      getDocumentSharingType(
+        {
+          attributes: {
+            rules: [
+              {
+                values: ['folder_1'],
+                update: 'revoke',
+                remove: 'sync'
+              }
+            ]
+          }
+        },
+        'folder_1'
       )
     ).toBe('one-way')
   })

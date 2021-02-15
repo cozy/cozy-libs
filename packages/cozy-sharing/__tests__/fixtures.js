@@ -228,6 +228,7 @@ export const SHARING_READ_ONLY = {
     }
   }
 }
+
 export const SHARING_WITH_SHORTCUT = {
   type: 'io.cozy.sharings',
   id: 'sharing_5',
