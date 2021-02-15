@@ -215,7 +215,9 @@ const ConfigurationTab = ({
         </NavigationListSection>
       </NavigationList>
       {showNewAccountButton ? (
-        <div className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1' : null)}>
+        <div
+          className={cx('u-ta-right u-mt-1', isMobile ? 'u-ph-1 u-pb-1' : null)}
+        >
           <Button
             extension={isMobile ? 'full' : null}
             onClick={addAccount}
