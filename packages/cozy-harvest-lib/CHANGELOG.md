@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.1.0...cozy-harvest-lib@4.1.1) (2021-02-15)
+
+
+### Bug Fixes
+
+* Small padding for adding account button on mobile ([d7ab87e](https://github.com/cozy/cozy-libs/commit/d7ab87e))
+* Update slide height correctly ([aae63eb](https://github.com/cozy/cozy-libs/commit/aae63eb))
+
+
+
+
+
 # [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.0.1...cozy-harvest-lib@4.1.0) (2021-02-15)
 
 
