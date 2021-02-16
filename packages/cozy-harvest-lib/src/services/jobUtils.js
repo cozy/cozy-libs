@@ -2,7 +2,12 @@ import CozyRealtime from 'cozy-realtime'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
-export const waitForRealtimeEvent = (client, job, eventType) =>
+export const waitForRealtimeEvent = (
+  client,
+  job,
+  eventType,
+  timeout = 15 * 1000
+) =>
   new Promise((resolve, reject) => {
     const rt = new CozyRealtime({ client })
 
@@ -23,5 +28,5 @@ export const waitForRealtimeEvent = (client, job, eventType) =>
     rt.subscribe('notified', JOBS_DOCTYPE, id, handleNotification)
     setTimeout(() => {
       reject(new Error('Timeout for waitForRealtimeResult'))
-    }, 15 * 1000)
+    }, timeout)
   })
