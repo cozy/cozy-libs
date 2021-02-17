@@ -342,7 +342,9 @@ describe('fetchExtraOAuthUrlParams', () => {
         data: {
           result: {
             code: 'bi-temporary-access-token-121212',
-            biBankId: TEST_BANK_BI_ID
+            mode: 'prod',
+            biBankId: TEST_BANK_BI_ID,
+            bankId: TEST_BANK_COZY_ID
           }
         }
       }
