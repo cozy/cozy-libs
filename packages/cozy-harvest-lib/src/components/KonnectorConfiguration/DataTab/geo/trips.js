@@ -1,6 +1,7 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 import keyBy from 'lodash/keyBy'
+import format from 'date-fns/format'
 
 export const collectFeaturesByOid = geojson => {
   const res = {}
@@ -38,4 +39,12 @@ export const getStartPlaceDisplayName = trip => {
 
 export const getEndPlaceDisplayName = trip => {
   return get(trip, 'properties.end_place.data.properties.display_name')
+}
+
+export const getStartPlaceCaption = trip => {
+  return format(get(trip, 'properties.start_fmt_time'), 'HH:mm DD/MM/YYYY')
+}
+
+export const getEndPlaceCaption = trip => {
+  return format(get(trip, 'properties.end_fmt_time'), 'HH:mm DD/MM/YYYY')
 }
