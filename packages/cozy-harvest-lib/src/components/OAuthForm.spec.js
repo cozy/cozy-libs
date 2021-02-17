@@ -3,6 +3,15 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { OAuthForm } from 'components/OAuthForm'
+import { findKonnectorPolicy } from '../konnector-policies'
+jest.mock('../konnector-policies', () => ({
+  findKonnectorPolicy: jest.fn()
+}))
+const fetchExtraOAuthUrlParams = jest.fn()
+fetchExtraOAuthUrlParams.mockResolvedValue({})
+findKonnectorPolicy.mockReturnValue({
+  fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams
+})
 
 const t = jest.fn().mockImplementation(key => key)
 
@@ -30,5 +39,23 @@ describe('OAuthForm', () => {
       />
     ).getElement()
     expect(component).toBeNull()
+  })
+  it('should call policy fetchExtraOAuthUrlParams with proper params', () => {
+    shallow(
+      <OAuthForm
+        flowState={{}}
+        account={{ oauth: { access_token: '1234abcd' } }}
+        konnector={fixtures.konnector}
+        t={t}
+      />
+    )
+    expect(fetchExtraOAuthUrlParams).toHaveBeenCalledWith({
+      account: {
+        oauth: { access_token: '1234abcd' }
+      },
+      client: undefined,
+      flow: undefined,
+      konnector: { slug: 'test-konnector' }
+    })
   })
 })
