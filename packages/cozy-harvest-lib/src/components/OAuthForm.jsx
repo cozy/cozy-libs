@@ -36,6 +36,7 @@ export class OAuthForm extends PureComponent {
       konnectorPolicy
         .fetchExtraOAuthUrlParams({
           flow,
+          account,
           konnector,
           client
         })
