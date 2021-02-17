@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.3.0...cozy-harvest-lib@4.3.1) (2021-02-17)
+
+
+### Bug Fixes
+
+* **Harvest:** Get bi bank id in fetchExtraOAuthUrlParams ([0960896](https://github.com/cozy/cozy-libs/commit/0960896))
+* **Harvest:** Remove account assert in createTemporaryToken ([cfda049](https://github.com/cozy/cozy-libs/commit/cfda049))
+
+
+
+
+
 # [4.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.2.0...cozy-harvest-lib@4.3.0) (2021-02-17)
 
 
