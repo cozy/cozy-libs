@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
-import { CardDivider } from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import { OwnerIdentity } from './components/Recipient'
 import WhoHasAccess from './components/WhoHasAccess'
@@ -57,7 +57,7 @@ export const SharingDetailsModal = ({
               )}
             </div>
           </div>
-          <CardDivider />
+          <Divider className="u-mv-1" />
           <WhoHasAccess
             title={t('Share.recipients.accessCount', {
               count: recipients.length
