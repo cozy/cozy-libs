@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.1.1...cozy-harvest-lib@4.2.0) (2021-02-17)
+
+
+### Features
+
+* Use bankId instead of cozyBankId when calling getTemporaryToken ([fc61b58](https://github.com/cozy/cozy-libs/commit/fc61b58))
+* Wait a little longer for realtime event from budget insight ([2d74ca6](https://github.com/cozy/cozy-libs/commit/2d74ca6))
+
+
+
+
+
 ## [4.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.1.0...cozy-harvest-lib@4.1.1) (2021-02-15)
 
 
