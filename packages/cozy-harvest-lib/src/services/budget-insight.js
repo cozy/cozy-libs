@@ -59,7 +59,6 @@ const createTemporaryToken = async ({ client, konnector, account }) => {
     konnector.slug,
     'createTemporaryToken: konnector passed in options has no slug'
   )
-  assert(account, 'createTemporaryToken: No account passed in options')
   const cozyBankId = getCozyBankId({ konnector, account })
   assert(
     cozyBankId,
