@@ -68,12 +68,13 @@ const createTemporaryToken = async ({ client, konnector, account }) => {
   const jobResponse = await client.stackClient.jobs.create('konnector', {
     mode: 'getTemporaryToken',
     konnector: konnector.slug,
-    cozyBankId: cozyBankId
+    bankId: cozyBankId
   })
   const event = await waitForRealtimeEvent(
     client,
     jobResponse.data.attributes,
-    'result'
+    'result',
+    30 * 1000
   )
   return event.data.result
 }
