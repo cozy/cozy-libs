@@ -1,6 +1,13 @@
-import React, { useEffect, useRef, useMemo, useCallback, useState } from 'react'
+import React, {
+  useEffect,
+  useRef,
+  useMemo,
+  useCallback,
+  useState,
+  memo
+} from 'react'
 import Card from 'cozy-ui/transpiled/react/Card'
-import L, { icon, Marker } from 'leaflet'
+import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import Box from '@material-ui/core/Box'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -16,26 +23,10 @@ import exampleData from './example.json'
 import {
   prepareTrips,
   getStartPlaceDisplayName,
-  getEndPlaceDisplayName
+  getEndPlaceDisplayName,
+  getStartPlaceCaption,
+  getEndPlaceCaption
 } from './trips'
-
-import iconRetinaUrl from './marker-icon-2x.png'
-import iconUrl from './marker-icon.png'
-import shadowUrl from './marker-shadow.png'
-
-const iconDefault = icon({
-  iconRetinaUrl,
-  iconUrl,
-  shadowUrl,
-  iconSize: [25, 41],
-  iconAnchor: [12, 41],
-  popupAnchor: [1, -34],
-  tooltipAnchor: [16, -28],
-  shadowSize: [41, 41]
-})
-
-console.log(iconDefault)
-Marker.prototype.options.icon = iconDefault
 
 const setupMap = node => {
   var map = L.map(node).setView([51.505, -0.09], 13)
@@ -115,6 +106,43 @@ const useCarrousel = (initialState, min, max) => {
   return [curIndex, handlePrev, handleNext]
 }
 
+const TripInfoSlideRaw = ({ trip }) => {
+  return (
+    <div>
+      <Media>
+        <Img>
+          <Icon icon={FlagIcon} color="var(--emerald)" className="u-mr-half" />
+        </Img>
+        <Bd>
+          <Typography variant="body1">
+            {getStartPlaceDisplayName(trip)}
+          </Typography>
+          <Typography variant="caption">
+            {getStartPlaceCaption(trip)}
+          </Typography>
+        </Bd>
+      </Media>
+      <Media>
+        <Img>
+          <Icon
+            icon={FlagIcon}
+            color="var(--pomegranate)"
+            className="u-mr-half"
+          />
+        </Img>
+        <Bd>
+          <Typography variant="body1">
+            {getEndPlaceDisplayName(trip)}
+          </Typography>
+          <Typography variant="caption">{getEndPlaceCaption(trip)}</Typography>
+        </Bd>
+      </Media>
+    </div>
+  )
+}
+
+const TripInfoSlide = memo(TripInfoSlideRaw)
+
 const GeoDataCard = ({ trips }) => {
   const enhancedTrips = useMemo(() => prepareTrips(trips), [trips])
   const [index, setPrev, setNext] = useCarrousel(0, 0, trips.length - 1)
@@ -130,23 +158,7 @@ const GeoDataCard = ({ trips }) => {
           <Box ml={1} mr={1}>
             <SwipeableViews index={index} disabled>
               {enhancedTrips.map(trip => {
-                return (
-                  <Typography variant="body1" key={trip.id}>
-                    <Icon
-                      icon={FlagIcon}
-                      color="var(--emerald)"
-                      className="u-mr-half"
-                    />{' '}
-                    {getStartPlaceDisplayName(trip)}
-                    <br />
-                    <Icon
-                      icon={FlagIcon}
-                      color="var(--pomegranate)"
-                      className="u-mr-half"
-                    />{' '}
-                    {getEndPlaceDisplayName(trip)}
-                  </Typography>
-                )
+                return <TripInfoSlide key={trip.id} trip={trip} />
               })}
             </SwipeableViews>
           </Box>
@@ -162,6 +174,8 @@ const GeoDataCard = ({ trips }) => {
   )
 }
 
-export default () => {
+const GeoDataCardExample = () => {
   return <GeoDataCard trips={exampleData.data} />
 }
+
+export default GeoDataCardExample
