@@ -3,7 +3,9 @@
 exports[`OAuthForm should render 1`] = `
 <React.Fragment>
   <DefaultButton
+    busy={true}
     className="u-mt-1"
+    disabled={true}
     extension="full"
     label="oauth.connect.label"
     onClick={[Function]}
