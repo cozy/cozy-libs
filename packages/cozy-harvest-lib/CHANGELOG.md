@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.2.0...cozy-harvest-lib@4.3.0) (2021-02-17)
+
+
+### Bug Fixes
+
+* **Harvest:** Missing account param for fetchExtraOAuthUrlParams ([17ee22f](https://github.com/cozy/cozy-libs/commit/17ee22f))
+
+
+### Features
+
+* Unit tests ([f5337a8](https://github.com/cozy/cozy-libs/commit/f5337a8))
+
+
+
+
+
 # [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.1.1...cozy-harvest-lib@4.2.0) (2021-02-17)
 
 
