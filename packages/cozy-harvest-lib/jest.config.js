@@ -14,7 +14,7 @@ module.exports = {
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
     '^cozy-logger$': 'cozy-logger/dist/index.js',
-    '\\.(png|gif|jpe?g|svg)$': '<rootDir>/src/__mocks__/fileMock.js',
+    '\\.(png|gif|jpe?g|svg|css)$': '<rootDir>/src/__mocks__/fileMock.js',
     // Force cozy-client resolving to use harvest's version of cozy-client
     // Can be removed when cozy-client's version in the workspace is > 14.4.0.
     // Since otherwise harvest tries to mock unexisting methods from

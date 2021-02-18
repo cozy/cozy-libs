@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import flag from 'cozy-flags'
 
 import * as konnectorsModel from '../../../helpers/konnectors'
 import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
@@ -17,6 +18,7 @@ import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/ap
 import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
+import GeoDataCard from './geo/GeoDataCard'
 
 export const DataTab = ({ konnector, trigger, client, flow }) => {
   const { isMobile } = useBreakpoints()
@@ -85,6 +87,7 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
         {appLinks.map(({ slug, ...otherProps }) => (
           <AppLinkCard key={slug} slug={slug} {...otherProps} />
         ))}
+        {flag('harvest.show-geodata') ? <GeoDataCard /> : null}
         {konnector.vendor_link && (
           <WebsiteLinkCard link={konnector.vendor_link} />
         )}
