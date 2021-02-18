@@ -1,6 +1,7 @@
 import MicroEE from 'microee'
 
 import Realtime from 'cozy-realtime'
+import flag from 'cozy-flags'
 
 import {
   fetchReusableAccount,
@@ -14,6 +15,7 @@ import {
   fetchTrigger,
   ensureTrigger
 } from '../connections/triggers'
+import { KonnectorJobError } from '../helpers/konnectors'
 import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
@@ -528,6 +530,12 @@ export class ConnectionFlow {
     this.emit(UPDATE_EVENT)
   }
 
+  getMockError() {
+    return flag('harvest.force-last-error')
+      ? new KonnectorJobError(flag('harvest.force-last-error'))
+      : null
+  }
+
   getDerivedState() {
     const trigger = this.trigger
     const { status, accountError } = this.state
@@ -539,7 +547,7 @@ export class ConnectionFlow {
       triggerError: triggerError,
       trigger,
       accountError,
-      error: accountError || triggerError,
+      error: this.getMockError() || accountError || triggerError,
       konnectorRunning: triggersModel.isKonnectorRunning(trigger)
     }
   }
