@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.3.1...cozy-harvest-lib@4.4.0) (2021-02-18)
+
+
+### Features
+
+* Add flag to mock last error from trigger ([b5e5ddb](https://github.com/cozy/cozy-libs/commit/b5e5ddb))
+* In harvest, we use a special context to push on history ([3d365dc](https://github.com/cozy/cozy-libs/commit/3d365dc))
+
+
+
+
+
 ## [4.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.3.0...cozy-harvest-lib@4.3.1) (2021-02-17)
 
 
