@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.11.7...cozy-sharing@2.12.0) (2021-02-18)
+
+
+### Bug Fixes
+
+* Divider import in SharingDetailsModal ([f349b54](https://github.com/cozy/cozy-libs/commit/f349b54))
+
+
+### Features
+
+* Upgrade cozy-ui to 44.10.1 ([de02e39](https://github.com/cozy/cozy-libs/commit/de02e39))
+
+
+
+
+
 ## [2.11.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.11.6...cozy-sharing@2.11.7) (2021-02-17)
 
 
