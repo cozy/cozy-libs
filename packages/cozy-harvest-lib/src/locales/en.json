@@ -56,7 +56,7 @@
     "listEmptyMessage": "No contact found",
     "addContactLabel": "Add a contact",
     "cancel": "Cancel",
-    "imported": "Synchronized in my Cozy"
+    "imported": "Synchronized account"
   },
   "card": {
     "launchTrigger": {
