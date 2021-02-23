@@ -4,7 +4,10 @@ import {
   onBIAccountCreation,
   fetchExtraOAuthUrlParams,
   handleOAuthAccount,
-  setSync
+  setSync,
+  getBIConfig,
+  saveBIConfig,
+  updateBIConnectionFromFlow
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
 import { createBIConnection, updateBIConnection } from './bi-http'
@@ -205,6 +208,14 @@ describe('createOrUpdateBIConnection', () => {
       'bi-temporary-access-token-145613'
     )
     expect(connection).toEqual({ id: 'updated-bi-connection-id-789' })
+    expect(getBIConfig(flow)).toEqual(
+      expect.objectContaining({
+        code: 'bi-temporary-access-token-145613',
+        publicKey: expect.any(Object),
+        url: 'https://cozy.biapi.pro/2.0',
+        mode: 'prod'
+      })
+    )
   })
 
   it('should convert wrongpass correctly', async () => {
@@ -378,7 +389,8 @@ describe('handleOAuthAccount', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    const flow = new ConnectionFlow(client, { konnector, account })
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
     flow.handleFormSubmit = jest.fn()
     flow.saveAccount = async account => account
     const account = { oauth: { query: { id_connection: ['12'] } } }
@@ -408,7 +420,8 @@ describe('setSync', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    const flow = new ConnectionFlow(client, { konnector, account })
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
     flow.handleFormSubmit = jest.fn()
     flow.saveAccount = async account => account
     const biConnId = 'conn-1337'
@@ -435,6 +448,35 @@ describe('setSync', () => {
       biContractId,
       false,
       tempToken
+    )
+  })
+})
+
+describe('updateBIConnectionFromFlow', () => {
+  it('should update a connection with given fields', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    const biConnId = 'conn-1337'
+    const account = { data: { auth: { bi: { connId: biConnId } } } }
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
+    saveBIConfig(flow, {
+      code: 'temporary-token',
+      url: 'https://bi-endpoint.biapi.pro'
+    })
+    updateBIConnection.mockReturnValue({
+      id: 'connection-id'
+    })
+    const connectionData = { login: '1234' }
+    await updateBIConnectionFromFlow(flow, connectionData)
+    expect(updateBIConnection).toHaveBeenCalledWith(
+      {
+        url: 'https://bi-endpoint.biapi.pro'
+      },
+      'conn-1337',
+      { login: '1234' },
+      'temporary-token'
     )
   })
 })

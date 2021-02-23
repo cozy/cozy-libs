@@ -85,7 +85,7 @@ export const saveBIConfig = (flow, biConfig) =>
 
 export const getBIConfig = flow => {
   const data = flow.getData()
-  return data.tempToken
+  return data.biConfig
 }
 
 /**
@@ -221,7 +221,7 @@ export const updateBIConnectionFromFlow = async (flow, connectionData) => {
   const account = flow.account
 
   const connId = getBIConnectionIdFromAccount(account)
-  const { code: temporaryToken, config } = getBIConfig(flow)
+  const { code: temporaryToken, ...config } = getBIConfig(flow)
 
   logger.debug('Updating BI connection')
   const updatedConnection = await updateBIConnection(
