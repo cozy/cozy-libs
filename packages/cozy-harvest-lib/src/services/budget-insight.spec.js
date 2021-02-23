@@ -378,7 +378,8 @@ describe('handleOAuthAccount', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    const flow = new ConnectionFlow(client, { konnector, account })
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
     flow.handleFormSubmit = jest.fn()
     flow.saveAccount = async account => account
     const account = { oauth: { query: { id_connection: ['12'] } } }
@@ -408,7 +409,8 @@ describe('setSync', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    const flow = new ConnectionFlow(client, { konnector, account })
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
     flow.handleFormSubmit = jest.fn()
     flow.saveAccount = async account => account
     const biConnId = 'conn-1337'
