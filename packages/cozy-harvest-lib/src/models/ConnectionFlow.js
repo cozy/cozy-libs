@@ -114,7 +114,7 @@ export const createOrUpdateAccount = async ({
 
   if (onAccountCreation) {
     logger.debug(
-      `Using konnector policy "${konnectorPolicy.name}"'s custom  account creation`
+      `Using ${konnectorPolicy.name} konnector policy custom account creation`
     )
     accountToSave = await onAccountCreation({
       client,
