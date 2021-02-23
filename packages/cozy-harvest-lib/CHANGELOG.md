@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.4.0...cozy-harvest-lib@4.4.1) (2021-02-23)
+
+
+### Bug Fixes
+
+* Change text Sync Contract Switch ([24cb0d5](https://github.com/cozy/cozy-libs/commit/24cb0d5))
+
+
+
+
+
 # [4.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.3.1...cozy-harvest-lib@4.4.0) (2021-02-18)
 
 
