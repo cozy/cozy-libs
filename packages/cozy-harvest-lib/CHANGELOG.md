@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.4.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.4.1...cozy-harvest-lib@4.4.2) (2021-02-23)
+
+
+### Bug Fixes
+
+* Pass bi config correctly for otp/2fa ([b3b2c8a](https://github.com/cozy/cozy-libs/commit/b3b2c8a))
+
+
+
+
+
 ## [4.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.4.0...cozy-harvest-lib@4.4.1) (2021-02-23)
 
 
