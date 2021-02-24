@@ -18,8 +18,9 @@ import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
+import { Q, useClient } from 'cozy-client'
 
-import exampleData from './example.json'
+//import exampleData from './example.json'
 import {
   prepareTrips,
   getStartPlaceDisplayName,
@@ -27,6 +28,20 @@ import {
   getStartPlaceCaption,
   getEndPlaceCaption
 } from './trips'
+
+const buildGeoJSONQuery = () => ({
+  definition: Q('io.cozy.timeseries.geojson')
+    .where({
+      _id: {
+        $gt: null
+      }
+    })
+    .sortBy([{ startDate: 'desc' }])
+    .limitBy(5),
+  options: {
+    as: 'geoJSONSortedByDate'
+  }
+})
 
 const setupMap = node => {
   var map = L.map(node).setView([51.505, -0.09], 13)
@@ -175,7 +190,23 @@ const GeoDataCard = ({ trips }) => {
 }
 
 const GeoDataCardExample = () => {
-  return <GeoDataCard trips={exampleData.data} />
+  const [trips, setTrips] = useState([])
+  const client = useClient()
+
+  useEffect(() => {
+    const fetchGeoJSON = async client => {
+      const geoJSONQuery = buildGeoJSONQuery()
+      const timeseries = await client.query(
+        geoJSONQuery.definition,
+        geoJSONQuery.options
+      )
+      const trips = timeseries.data.map(ts => ts.series[0])
+      setTrips(trips)
+    }
+    fetchGeoJSON(client)
+  }, [client])
+
+  return trips.length > 1 ? <GeoDataCard trips={trips} /> : null
 }
 
 export default GeoDataCardExample
