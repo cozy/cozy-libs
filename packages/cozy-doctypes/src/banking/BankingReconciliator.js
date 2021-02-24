@@ -28,6 +28,26 @@ class BankingReconciliator {
     return { savedAccounts, reconciliatedAccounts }
   }
 
+  /**
+   * @typedef ReconciliatorResponse
+   * @attribute {Array<BankAccount>} accounts
+   * @attribute {Array<BankTransactions>} transactions
+   */
+
+  /**
+   * @typedef ReconciliatorSaveOptions
+   * @attribute {Function} logProgress
+   */
+
+  /**
+   * Save new accounts and transactions
+   *
+   * @param {Array<BankAccount>} fetchedAccounts
+   * @param {Array<BankTransactions>} fetchedTransactions
+   * @param  {ReconciliatorSaveOptions} options
+   * @returns {ReconciliatorResponse}
+   *
+   */
   async save(fetchedAccounts, fetchedTransactions, options = {}) {
     const { BankAccount, BankTransaction } = this.options
 
@@ -74,12 +94,13 @@ class BankingReconciliator {
 
     log('info', 'Saving transactions...')
     let i = 1
-    const logProgress = doc => {
+    const logProgressFn = doc => {
       log('debug', `[bulkSave] ${i++} Saving ${doc.date} ${doc.label}`)
     }
     const savedTransactions = await BankTransaction.bulkSave(transactions, {
       concurrency: 30,
-      logProgress,
+      logProgress:
+        options.logProgress !== undefined ? options.logProgress : logProgressFn,
       handleDuplicates: 'remove'
     })
     return {
