@@ -484,6 +484,6 @@
     "disconnected": "Disconnected",
     "inMaintenance": "In maintenance",
     "hasNewVersionAvailable": "New version available",
-    "not404Error": "An error occurred while recovering the service. If this problem persists, do not hesitate to contact us at [%{name}](%{link})"
+    "fatalError": "An error occurred while recovering the service. If this problem persists, do not hesitate to contact us at [%{name}](%{link})"
   }
 }

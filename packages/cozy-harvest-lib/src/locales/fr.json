@@ -484,6 +484,6 @@
     "disconnected": "Déconnecté",
     "inMaintenance": "En maintenance",
     "hasNewVersionAvailable": "Nouvelle version disponible",
-    "not404Error": "Une erreur est survenue à la récupération du service. Si ce problème persiste, n'hésitez pas à nous contacter à [%{name}](%{link})"
+    "fatalError": "Une erreur est survenue à la récupération du service. Si ce problème persiste, n'hésitez pas à nous contacter à [%{name}](%{link})"
   }
 }

@@ -67,7 +67,7 @@ describe('fetchKonnectorData', () => {
     jest.spyOn(konnectorBlock, 'fetchKonnector').mockRejectedValue(error)
 
     const res = await setup()
-    expect(res).toMatchObject({ not404Error: 'konnectorBlock.not404Error' })
+    expect(res).toMatchObject({ fatalError: 'konnectorBlock.fatalError' })
   })
 
   it('should return appropriate response if stack returns other error than 404', async () => {
@@ -76,7 +76,7 @@ describe('fetchKonnectorData', () => {
     jest.spyOn(konnectorBlock, 'fetchKonnector').mockRejectedValue(error)
 
     const res = await setup()
-    expect(res).toMatchObject({ not404Error: 'konnectorBlock.not404Error' })
+    expect(res).toMatchObject({ fatalError: 'konnectorBlock.fatalError' })
   })
 
   it('should return appropriate response from the registry', async () => {
