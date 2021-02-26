@@ -69,4 +69,17 @@ describe('KonnectorBlock', () => {
       expect(getByText(en.konnectorBlock.account))
     })
   })
+
+  it('should show fatal error correctly', async () => {
+    fetchKonnectorData.mockResolvedValue({
+      fatalError: 'Fatal error message'
+    })
+
+    const { root } = setup()
+    const { getByText } = root
+
+    await waitFor(() => {
+      expect(getByText('Fatal error message'))
+    })
+  })
 })

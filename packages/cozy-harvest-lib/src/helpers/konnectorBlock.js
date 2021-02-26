@@ -91,7 +91,8 @@ const isInError = async ({ client, slug, sourceAccount }) => {
   return { error: { message, isActionable } }
 }
 
-const not404Error = ({ t, slug, error }) => {
+const fatalError = ({ t, slug, error, consoleMessage }) => {
+  logger.error(`konnectorBlock : ${consoleMessage}`)
   logger.error(error)
   sentryHub.withScope(scope => {
     scope.setTag('konnectorBlock with konnector', slug)
@@ -100,7 +101,7 @@ const not404Error = ({ t, slug, error }) => {
     sentryHub.captureException(error.original || error)
   })
   return {
-    not404Error: t('konnectorBlock.not404Error', {
+    fatalError: t('konnectorBlock.fatalError', {
       name: 'support@cozycloud.cc',
       link: 'mailto:support@cozycloud.cc'
     })
@@ -185,7 +186,15 @@ const statusToFormatOptions = {
       },
       iconStatus: 'disabled'
     }),
-  not404Error: ({ t, slug, error }) => not404Error({ t, slug, error })
+  stackErrorOtherThan404: ({ t, slug, error }) =>
+    fatalError({
+      t,
+      slug,
+      error,
+      consoleMessage: 'This is a stack error other than 404'
+    }),
+  registryError: ({ t, slug, error }) =>
+    fatalError({ t, slug, error, consoleMessage: 'This is a registry error' })
 }
 
 const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
@@ -232,10 +241,10 @@ const fetchKonnectorStatus = async ({ client, slug, sourceAccount }) => {
         )
         return { konnector, status: 'stackNotFound' }
       } catch (error) {
-        return { status: 'not404Error', error }
+        return { status: 'registryError', error }
       }
     }
-    return { status: 'not404Error', error }
+    return { status: 'stackErrorOtherThan404', error }
   }
 }
 
