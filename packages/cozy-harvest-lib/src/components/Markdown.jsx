@@ -9,7 +9,7 @@ export const reactMarkdownRendererOptions = {
     </a>
   ),
   // eslint-disable-next-line react/display-name
-  paragraph: props => <p className="u-mv-0">{props.children}</p>
+  paragraph: props => <span className="u-db u-mv-0">{props.children}</span>
 }
 
 export const Markdown = ({ source }) => (
