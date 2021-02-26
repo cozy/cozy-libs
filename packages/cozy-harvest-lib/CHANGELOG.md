@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.4.3...cozy-harvest-lib@4.5.0) (2021-02-26)
+
+
+### Features
+
+* Upgrade cozy-bi-auth in harvest ([425e2be](https://github.com/cozy/cozy-libs/commit/425e2be))
+
+
+
+
+
 ## [4.4.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.4.2...cozy-harvest-lib@4.4.3) (2021-02-24)
 
 **Note:** Version bump only for package cozy-harvest-lib
