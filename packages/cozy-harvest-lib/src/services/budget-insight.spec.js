@@ -3,6 +3,7 @@ import {
   createOrUpdateBIConnection,
   onBIAccountCreation,
   fetchExtraOAuthUrlParams,
+  finishConnection,
   handleOAuthAccount,
   setSync,
   getBIConfig,
@@ -14,6 +15,7 @@ import { createBIConnection, updateBIConnection } from './bi-http'
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
 import biPublicKeyProd from './bi-public-key-prod.json'
+import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
@@ -77,6 +79,188 @@ const account = {
 }
 
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
+
+describe('finishConnection', () => {
+  const setup = () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    const flow = new ConnectionFlow(client, { konnector, account })
+    return { flow }
+  }
+
+  it('should not do anything when the connection state is ok', async () => {
+    const { flow } = setup()
+    flow.setData({
+      biConnection: {
+        id: 'testConnId',
+        error: null
+      }
+    })
+    flow.saveTwoFARequest = jest.fn()
+    flow.triggerEvent = jest.fn()
+
+    await finishConnection({ flow })
+    expect(flow.saveTwoFARequest).not.toHaveBeenCalled()
+    expect(flow.triggerEvent).toHaveBeenCalledWith(LOGIN_SUCCESS_EVENT)
+  })
+
+  it('should throw if connection error is not decoupled or additionalinfo', async () => {
+    const { flow } = setup()
+    flow.setData({
+      biConnection: {
+        id: 'testConnId',
+        error: 'unknown error'
+      }
+    })
+    flow.saveTwoFARequest = jest.fn()
+    flow.triggerEvent = jest.fn()
+
+    await expect(finishConnection({ flow })).rejects.toEqual(
+      new Error('UNKNOWN_ERROR')
+    )
+    expect(flow.saveTwoFARequest).not.toHaveBeenCalled()
+    expect(flow.triggerEvent).not.toHaveBeenCalled()
+  })
+
+  it('should handle one decoupled state', async () => {
+    const { flow } = setup()
+    flow.setData({
+      biConnection: {
+        id: 'testConnId',
+        error: 'decoupled'
+      },
+      biConfig: { code: 'testCode' }
+    })
+    flow.account = {
+      data: {
+        auth: {
+          bi: {
+            connId: 'testConnId'
+          }
+        }
+      }
+    }
+
+    flow.triggerEvent = jest.fn()
+    flow.saveTwoFARequest = jest.fn()
+
+    updateBIConnection
+      .mockReset()
+      .mockResolvedValue({ id: 'updated-bi-connection-id-789', error: null })
+    await finishConnection({ flow })
+    expect(flow.triggerEvent).toHaveBeenCalledWith(LOGIN_SUCCESS_EVENT)
+    expect(updateBIConnection).toHaveBeenCalledWith(
+      expect.any(Object),
+      'testConnId',
+      {
+        resume: 'true'
+      },
+      'testCode'
+    )
+  })
+
+  it('should handle one additional information needed state', async () => {
+    const { flow } = setup()
+    flow.setData({
+      biConnection: {
+        id: 'testConnId',
+        error: 'additionalInformationNeeded'
+      }
+    })
+
+    flow.triggerEvent = jest.fn()
+    flow.saveTwoFARequest = jest.fn()
+    flow.waitForTwoFA = jest.fn().mockImplementationOnce(async () => {
+      flow.setData({
+        biConnection: {
+          id: 'testConnId',
+          error: null
+        }
+      })
+    })
+
+    await finishConnection({ flow })
+    expect(flow.triggerEvent).toHaveBeenCalledWith(LOGIN_SUCCESS_EVENT)
+  })
+
+  it('should handle multiple decoupled states', async () => {
+    const { flow } = setup()
+    flow.setData({
+      biConnection: {
+        id: 'testConnId',
+        error: 'decoupled'
+      },
+      biConfig: { code: 'testCode' }
+    })
+    flow.account = {
+      data: {
+        auth: {
+          bi: {
+            connId: 'testConnId'
+          }
+        }
+      }
+    }
+
+    flow.triggerEvent = jest.fn()
+    flow.saveTwoFARequest = jest.fn()
+
+    updateBIConnection
+      .mockReset()
+      .mockResolvedValueOnce({
+        id: 'updated-bi-connection-id-789',
+        error: 'decoupled'
+      })
+      .mockResolvedValueOnce({
+        id: 'updated-bi-connection-id-789',
+        error: null
+      })
+    await finishConnection({ flow })
+    expect(flow.triggerEvent).toHaveBeenCalledWith(LOGIN_SUCCESS_EVENT)
+    expect(updateBIConnection).toHaveBeenCalledTimes(2)
+  })
+
+  it('should handle multiple decoupled states and additionalinformation needed', async () => {
+    const { flow } = setup()
+    flow.setData({
+      biConnection: {
+        id: 'testConnId',
+        error: 'decoupled'
+      },
+      biConfig: { code: 'testCode' }
+    })
+    flow.account = {
+      data: {
+        auth: {
+          bi: {
+            connId: 'testConnId'
+          }
+        }
+      }
+    }
+
+    flow.triggerEvent = jest.fn()
+    flow.saveTwoFARequest = jest.fn()
+
+    flow.waitForTwoFA = jest.fn().mockImplementationOnce(async () => {
+      flow.setData({
+        biConnection: {
+          id: 'testConnId',
+          error: null
+        }
+      })
+    })
+    updateBIConnection.mockReset().mockResolvedValueOnce({
+      id: 'updated-bi-connection-id-789',
+      error: 'additionalInformationNeeded'
+    })
+    await finishConnection({ flow })
+    expect(flow.triggerEvent).toHaveBeenCalledWith(LOGIN_SUCCESS_EVENT)
+    expect(updateBIConnection).toHaveBeenCalledTimes(1)
+    expect(flow.waitForTwoFA).toHaveBeenCalledTimes(1)
+  })
+})
 
 describe('createOrUpdateBIConnection', () => {
   const setup = () => {
