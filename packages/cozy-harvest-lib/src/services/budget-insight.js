@@ -257,35 +257,49 @@ export const resumeBIConnection = flow => {
 }
 
 /**
- * Checks for 2FA or decoupled requests
+ * @typedef biConnection
+ * @property {number} id
+ * @property {number} id_user
+ * @property {number} id_connector
+ * @property {string|null} state  - ( wrongpass | additionalInformationNeeded | websiteUnavailable | actionNeeded | SCARequired | decoupled | passwordExpired | webauthRequired | rateLimiting | bug). Null indicates a success
+ * @property {string|null} last_update - Date string: Last successful update.
+ * @property {string|null} created - Date string: Creation date
+ * @property {boolean} active - Whether this connection is active and will be automatically synced.
+ * @property {string|null} last_push - Date string: Last successfull push
+ * @property {string|null} next_try - Date string: Date of next synchronization.
+ */
+
+/**
+ * Checks for any number 2FA and/or decoupled requests
  *
  * - Resolves when 2FA has been resolved
  * - Triggers LOGIN_SUCCESS_EVENT
+ *
+ * @param  {Object} options
+ * @param  {biConnection} options.biConnection
+ * @param  {ConnectionFlow} options.flow
  */
-export const finishConnection = async ({ biConnection, flow }) => {
-  if (biConnection.error) {
-    if (biConnection.error === DECOUPLED_ERROR) {
+export const finishConnection = async ({ flow }) => {
+  while (flow.getData().biConnection.error) {
+    const connectionError = flow.getData().biConnection.error
+    if (connectionError === DECOUPLED_ERROR) {
       const twoFAOptions = { type: 'app', retry: false }
       await flow.saveTwoFARequest(twoFAOptions)
       logger.debug('Resuming BI connection...')
+
       await resumeBIConnection(flow)
-      flow.triggerEvent(LOGIN_SUCCESS_EVENT)
       logger.debug('Finished waiting for decoupled connection to be validated')
-    } else if (biConnection.error === ADDITIONAL_INFORMATION_NEEDED_ERROR) {
+    } else if (connectionError === ADDITIONAL_INFORMATION_NEEDED_ERROR) {
       const twoFAOptions = { type: 'sms', retry: false }
-      while (
-        flow.getData().biConnection.error === 'additionalInformationNeeded'
-      ) {
-        await flow.saveTwoFARequest(twoFAOptions)
-        await flow.waitForTwoFA()
-      }
-      flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+      await flow.saveTwoFARequest(twoFAOptions)
+      logger.debug('Waiting for 2FA...')
+      await flow.waitForTwoFA()
+      logger.debug('Finished waiting for 2FA...')
     } else {
-      throw convertBIErrortoKonnectorJobError(biConnection.error)
+      throw convertBIErrortoKonnectorJobError(flow.getData().biConnection.error)
     }
-  } else {
-    flow.triggerEvent(LOGIN_SUCCESS_EVENT)
   }
+  flow.triggerEvent(LOGIN_SUCCESS_EVENT)
 }
 
 /**
