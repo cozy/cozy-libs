@@ -13,6 +13,7 @@ import defaults from 'lodash/defaults'
 
 import { waitForRealtimeEvent } from './jobUtils'
 import {
+  getBIConnection,
   createBIConnection,
   updateBIConnection,
   getBIUserConfig,
@@ -96,12 +97,15 @@ export const getBIConfig = flow => {
  * Then:
  * If no BI connection is present in the io.cozy.accounts:
  *  - Creates the BI connection using user supplied data
- * If a BI connection exists:
+ * If a BI connection is defined:
  *  - Updates the BI connection using user supplied data
+ * If a BI connection is defined but does not exist:
+ *  - Creates the BI connection using user supplied data
  *
  * @param  {Client} options.client
  * @param  {io.cozy.accounts} options.account
  * @param  {io.cozy.konnectors} options.konnector
+ * @param  {ConnectionFlow} options.flow
  * @return {BIConnection}
  */
 export const createOrUpdateBIConnection = async ({
@@ -110,7 +114,7 @@ export const createOrUpdateBIConnection = async ({
   konnector,
   flow
 }) => {
-  const connId = getBIConnectionIdFromAccount(account)
+  let connId = getBIConnectionIdFromAccount(account)
 
   logger.info('Creating temporary token...')
 
@@ -133,12 +137,21 @@ export const createOrUpdateBIConnection = async ({
   const credsToSend = await mkConnAuth(config, credentials)
 
   try {
-    logger.info('Creating connection...')
+    if (connId) {
+      try {
+        logger.info(`Checking connection ${connId}...`)
+        await getBIConnection(config, connId, tempToken)
+      } catch (err) {
+        logger.warn(`Connection ${connId} does not exist. Creating a new one`)
+        connId = null
+      }
+    }
+    logger.info('Creating or updating connection...')
     const connection = await (connId
       ? updateBIConnection(config, connId, credsToSend, tempToken)
       : createBIConnection(config, credsToSend, tempToken))
 
-    logger.info(`Created connection ${connection.id}`)
+    logger.info(`Created or updated connection ${connection.id}`)
     return connection
   } catch (e) {
     return convertBIErrortoKonnectorJobError(e)
