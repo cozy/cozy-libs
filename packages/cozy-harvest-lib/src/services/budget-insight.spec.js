@@ -10,7 +10,11 @@ import {
   updateBIConnectionFromFlow
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
-import { createBIConnection, updateBIConnection } from './bi-http'
+import {
+  getBIConnection,
+  createBIConnection,
+  updateBIConnection
+} from './bi-http'
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
 import biPublicKeyProd from './bi-public-key-prod.json'
@@ -29,7 +33,8 @@ jest.mock('./bi-http', () => ({
   createBIConnection: jest
     .fn()
     .mockResolvedValue({ text: Promise.resolve('{}') }),
-  updateBIConnection: jest.fn()
+  updateBIConnection: jest.fn(),
+  getBIConnection: jest.fn()
 }))
 
 const TEST_BANK_COZY_ID = '100000'
@@ -208,6 +213,52 @@ describe('createOrUpdateBIConnection', () => {
       'bi-temporary-access-token-145613'
     )
     expect(connection).toEqual({ id: 'updated-bi-connection-id-789' })
+    expect(getBIConfig(flow)).toEqual(
+      expect.objectContaining({
+        code: 'bi-temporary-access-token-145613',
+        publicKey: expect.any(Object),
+        url: 'https://cozy.biapi.pro/2.0',
+        mode: 'prod'
+      })
+    )
+  })
+
+  it('should create the BI connection if connection id in the account does not exist', async () => {
+    const { client, flow } = setup()
+    getBIConnection.mockRejectedValueOnce()
+    const connection = await createOrUpdateBIConnection({
+      client,
+      flow,
+      account: merge(account, {
+        data: {
+          auth: {
+            bi: {
+              connId: 1337
+            }
+          }
+        }
+      }),
+      konnector
+    })
+    expect(waitForRealtimeEvent).toHaveBeenCalledWith(
+      client,
+      {
+        _id: 'job-id-1337'
+      },
+      'result',
+      30000
+    )
+    expect(updateBIConnection).not.toHaveBeenCalled()
+    expect(createBIConnection).toHaveBeenCalledWith(
+      expect.any(Object),
+      {
+        id_bank: TEST_BANK_BI_ID,
+        login: expect.toBeJWEValue(),
+        password: expect.toBeJWEValue()
+      },
+      'bi-temporary-access-token-145613'
+    )
+    expect(connection).toEqual({ id: 'created-bi-connection-id-789' })
     expect(getBIConfig(flow)).toEqual(
       expect.objectContaining({
         code: 'bi-temporary-access-token-145613',

@@ -20,6 +20,11 @@ const softJSONParse = maybeJSONData => {
 }
 
 /**
+ * @typedef {Object} BIConfig
+ * @priority {string} url
+ */
+
+/**
  * Handles BI HTTP Error
  *
  * - "code" attribute: wrongpass, actionNeeded etc..
@@ -87,6 +92,32 @@ export const updateBIUserConfig = async (config, userConfig, biAccessToken) => {
   )
 }
 
+/**
+ * Get a bi connection given it's id
+ *
+ * @param  {BIConfig} config
+ * @param  {number} connId
+ * @param  {string} biAccessToken
+ * @return {BIConnection}
+ */
+export const getBIConnection = async (config, connId, biAccessToken) => {
+  return await biRequest(
+    'GET',
+    `/users/me/connections/${connId}`,
+    config,
+    null,
+    biAccessToken
+  )
+}
+
+/**
+ * Create a BI connection
+ *
+ * @param  {BIConfig} config
+ * @param  {Object} encryptedAuth
+ * @param  {string} biAccessToken
+ * @return {BIConnection}
+ */
 export const createBIConnection = async (
   config,
   encryptedAuth,
@@ -101,10 +132,19 @@ export const createBIConnection = async (
   )
 }
 
+/**
+ * Update an existing BI connection
+ *
+ * @param  {BIConfig} config
+ * @param  {number} connId
+ * @param  {Object} encryptedAuth
+ * @param  {string} biAccessToken
+ * @return {BIConnection}
+ */
 export const updateBIConnection = async (
   config,
   connId,
-  data,
+  encryptedAuth,
   biAccessToken
 ) => {
   assert(
@@ -115,7 +155,7 @@ export const updateBIConnection = async (
     'POST',
     `/users/me/connections/${connId}`,
     config,
-    encodeToForm(data),
+    encodeToForm(encryptedAuth),
     biAccessToken
   )
 
@@ -131,6 +171,14 @@ export const updateBIConnection = async (
   }
 }
 
+/**
+ * Resume a blocked BI connection
+ *
+ * @param  {BIConfig} config
+ * @param  {number} connId
+ * @param  {string} biAccessToken
+ * @return {BIConnection}
+ */
 export const resumeBIConnection = async (config, connId, biAccessToken) => {
   assert(
     connId,
