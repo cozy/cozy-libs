@@ -30,7 +30,7 @@
     "enzyme-adapter-react-16": "1.15.2",
     "eslint-cli": "1.1.1",
     "foreman": "^3.0.1",
-    "jest": "26.2.2",
+    "jest": "26.6.3",
     "parcel": "^1.12.3",
     "postcss-merge-rules": "4.0.3",
     "react": "^16.12.0",
