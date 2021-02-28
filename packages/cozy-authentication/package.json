@@ -19,7 +19,7 @@
     "example-server": "parcel --port 1234 $(pwd)/examples/index.html"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
+    "@babel/cli": "7.13.0",
     "@babel/polyfill": "7.12.1",
     "babel-preset-cozy-app": "^1.11.0",
     "cozy-client": "13.15.1",
