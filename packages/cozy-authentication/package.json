@@ -22,7 +22,7 @@
     "@babel/cli": "7.12.1",
     "@babel/polyfill": "7.12.1",
     "babel-preset-cozy-app": "^1.11.0",
-    "cozy-client": "13.15.1",
+    "cozy-client": "13.21.0",
     "cozy-ui": "40.9.1",
     "cssnano-preset-advanced": "^4.0.7",
     "date-fns": "^1.29.0",
