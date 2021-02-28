@@ -30,12 +30,12 @@
     "cozy-doctypes": "1.67.0",
     "cozy-ui": "44.1.0",
     "jest": "26.2.2",
-    "jest-environment-jsdom-sixteen": "^1.0.3",
-    "mockdate": "^2.0.5",
+    "jest-environment-jsdom-sixteen": "1.0.3",
+    "mockdate": "2.0.5",
     "prop-types": "15.7.2",
     "react": "16.12.0",
     "react-dom": "16.12.0",
-    "stylus": "^0.54.7"
+    "stylus": "0.54.7"
   },
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
