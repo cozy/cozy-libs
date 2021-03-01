@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
 import get from 'lodash/get'
-import flow from 'lodash/flow'
-import { withStyles } from '@material-ui/core/styles'
 
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -24,19 +23,12 @@ import withLocales from './hoc/withLocales'
 
 import { fetchKonnectorData } from '../helpers/konnectorBlock'
 
-const customStyles = () => ({
-  disabled: {
-    filter: 'grayscale(1)',
-    opacity: 0.5
-  }
-})
-
 /**
  * KonnectorBlock is a standalone component and can be imported directly.
  * It needs GET permission on io.cozy.konnectors, io.cozy.accounts and
  * io.cozy.triggers to work properly.
  */
-const KonnectorBlock = ({ classes, file }) => {
+const KonnectorBlock = ({ file }) => {
   const [konnector, setKonnector] = useState()
   const client = useClient()
   const { t } = useI18n()
@@ -84,7 +76,12 @@ const KonnectorBlock = ({ classes, file }) => {
         target="_blank"
       >
         <ListItemIcon>
-          <AppIcon app={slug} className={classes[iconStatus]} />
+          <AppIcon
+            app={slug}
+            className={cx({
+              'u-filter-gray-100 u-o-50': iconStatus === 'disabled'
+            })}
+          />
         </ListItemIcon>
         <ListItemText
           primary={name}
@@ -122,7 +119,4 @@ KonnectorBlock.propTypes = {
   file: PropTypes.object.isRequired
 }
 
-export default flow(
-  withLocales,
-  withStyles(customStyles)
-)(KonnectorBlock)
+export default withLocales(KonnectorBlock)
