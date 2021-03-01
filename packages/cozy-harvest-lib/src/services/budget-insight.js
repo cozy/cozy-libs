@@ -140,7 +140,13 @@ export const createOrUpdateBIConnection = async ({
     if (connId) {
       try {
         logger.info(`Checking connection ${connId}...`)
-        await getBIConnection(config, connId, tempToken)
+        const biConnection = await getBIConnection(config, connId, tempToken)
+        if (shouldResumeConnection(biConnection.error)) {
+          // BI api does not allow to update a connection in 'decoupled' state wihout resume option
+          // finishConnection will finish the work
+          logger.info('Resumable connection, not updating identifiers')
+          return biConnection
+        }
       } catch (err) {
         logger.warn(`Connection ${connId} does not exist. Creating a new one`)
         connId = null
@@ -440,6 +446,18 @@ export const fetchExtraOAuthUrlParams = async ({
   })
 
   return { id_connector: biBankId, token }
+}
+
+/**
+ * Should the connection be resumed ?
+ *
+ * @param  {string} err - connection error string
+ * @return {bool}
+ */
+const shouldResumeConnection = error => {
+  return (
+    error === DECOUPLED_ERROR || error === ADDITIONAL_INFORMATION_NEEDED_ERROR
+  )
 }
 
 export const konnectorPolicy = {
