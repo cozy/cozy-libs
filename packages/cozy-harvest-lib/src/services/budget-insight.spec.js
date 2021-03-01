@@ -363,6 +363,12 @@ describe('createOrUpdateBIConnection', () => {
 
   it('should update the BI connection if connection id in account', async () => {
     const { client, flow } = setup()
+    getBIConnection.mockReset().mockResolvedValue({
+      id: 'updated-bi-connection-id-789'
+    })
+    updateBIConnection.mockReset().mockResolvedValue({
+      id: 'updated-bi-connection-id-789'
+    })
     const connection = await createOrUpdateBIConnection({
       client,
       flow,
@@ -457,6 +463,7 @@ describe('createOrUpdateBIConnection', () => {
     const { client, flow } = setup()
     const err = new Error()
     err.code = 'wrongpass'
+    getBIConnection.mockReset().mockResolvedValueOnce({})
     updateBIConnection.mockReset().mockRejectedValue(err)
     await expect(
       createOrUpdateBIConnection({
@@ -480,6 +487,7 @@ describe('createOrUpdateBIConnection', () => {
     const { client, flow } = setup()
     const err = new Error()
     err.code = 'SCARequired'
+    getBIConnection.mockReset().mockResolvedValueOnce({})
     updateBIConnection.mockReset().mockRejectedValue(err)
     await expect(
       createOrUpdateBIConnection({
