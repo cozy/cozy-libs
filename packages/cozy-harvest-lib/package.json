@@ -28,7 +28,7 @@
   "dependencies": {
     "@cozy/minilog": "^1.0.0",
     "@sentry/browser": "^6.0.1",
-    "cozy-bi-auth": "0.0.18",
+    "cozy-bi-auth": "0.0.19",
     "cozy-doctypes": "^1.78.0",
     "cozy-logger": "^1.7.0",
     "date-fns": "^1.30.1",
