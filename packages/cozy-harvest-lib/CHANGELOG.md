@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.6.0...cozy-harvest-lib@4.7.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* **Harvest:** Do not try to update decoupled bi connections ([0246f23](https://github.com/cozy/cozy-libs/commit/0246f23))
+* **Harvest:** Update decoupled locales ([0a25d7c](https://github.com/cozy/cozy-libs/commit/0a25d7c))
+
+
+### Features
+
+* **Harvest:** Upgrade cozy-bi-auth ([fd47e41](https://github.com/cozy/cozy-libs/commit/fd47e41))
+
+
+
+
+
 # [4.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.5.0...cozy-harvest-lib@4.6.0) (2021-03-01)
 
 
