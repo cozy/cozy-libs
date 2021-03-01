@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.5.0...cozy-harvest-lib@4.6.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* **Harvest:** Recreate non existing BI connection saved in account ([37e4887](https://github.com/cozy/cozy-libs/commit/37e4887))
+* Nit ([f00b696](https://github.com/cozy/cozy-libs/commit/f00b696))
+
+
+### Features
+
+* **Harvest:** Handle multiple decoupled states ([b763a14](https://github.com/cozy/cozy-libs/commit/b763a14))
+
+
+
+
+
 # [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.4.3...cozy-harvest-lib@4.5.0) (2021-02-26)
 
 
