@@ -5132,10 +5132,10 @@ cosmiconfig@^5.0.0, cosmiconfig@^5.0.7, cosmiconfig@^5.1.0, cosmiconfig@^5.2.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-bi-auth@0.0.17:
-  version "0.0.17"
-  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.17.tgz#dea325731c67b12b73e9e9c60febfa3c8e16b934"
-  integrity sha512-8wKKDgz6Mm8IWn6IAf5QNYInnRPWQa6SEizX54JnqaboBeo8j4WlK5jQ6+4jYEJ2+8FpJwVzjFp2uFJJhgMHdw==
+cozy-bi-auth@0.0.18:
+  version "0.0.18"
+  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.18.tgz#d76353b7d134b5afdbd26973ba283a03225e206c"
+  integrity sha512-LhmfTlzz/h5mWJP+6kSPF2QQPRAsJeQXUKd2QjJZ+T//Cp6nk3mCokS6GT2OtypdcmKPQaNVot1z3Ua3GWPcsg==
   dependencies:
     cozy-logger "^1.3.0"
     lodash "^4.17.20"
@@ -5272,6 +5272,17 @@ cozy-doctypes@1.67.0:
     lodash "4.17.15"
     prop-types "^15.7.2"
 
+cozy-doctypes@^1.78.0:
+  version "1.78.0"
+  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.78.0.tgz#4e860d119ecef6235739f9f3945793595e966978"
+  integrity sha512-44mHU+IjpfuRgR39131lJHVxDo7ktwDV7U3ZVc8dEVfBS7Gu2zwq9f91nOdIa3cofPvd412SPKiXzDzTcNINaw==
+  dependencies:
+    cozy-logger "^1.7.0"
+    date-fns "1.30.1"
+    es6-promise-pool "2.5.0"
+    lodash "4.17.19"
+    prop-types "^15.7.2"
+
 cozy-interapp@0.5.4:
   version "0.5.4"
   resolved "https://registry.yarnpkg.com/cozy-interapp/-/cozy-interapp-0.5.4.tgz#2573f1800f073c84c289267d04234954d88eae0c"
@@ -5297,6 +5308,14 @@ cozy-keys-lib@3.7.0:
     sweetalert "^2.1.2"
     tldjs "^2.3.1"
     zxcvbn "^4.4.2"
+
+cozy-logger@^1.7.0:
+  version "1.7.0"
+  resolved "https://registry.yarnpkg.com/cozy-logger/-/cozy-logger-1.7.0.tgz#945ff84df66f7e7e9640db00f8c632d4ff776fc8"
+  integrity sha512-JBOAmfgujZZASE4TCRfeNvHoDnxPwFbLMO3G6UReByjR3Ix1/RSEtOL9b4hReuG2XX0BsPokfLWCZEWRgGN4TQ==
+  dependencies:
+    chalk "^2.4.2"
+    json-stringify-safe "5.0.1"
 
 cozy-stack-client@13.15.1, cozy-stack-client@^13.15.1:
   version "13.15.1"
