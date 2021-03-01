@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.7.0...cozy-harvest-lib@4.8.0) (2021-03-01)
+
+
+### Bug Fixes
+
+* KonnectorBlock fatalError is now shown correctly ([29c91a5](https://github.com/cozy/cozy-libs/commit/29c91a5))
+* Replace <p> wrapper around markdown paragraph children ([73dd905](https://github.com/cozy/cozy-libs/commit/73dd905))
+
+
+### Features
+
+* Remove customStyles on KonnectorBlock ([8d3541f](https://github.com/cozy/cozy-libs/commit/8d3541f))
+* Update cozy-client to 17.6.1 ([a5d7d18](https://github.com/cozy/cozy-libs/commit/a5d7d18))
+* Update cozy-ui to 45.0.0-beta.6 ([9cb0d4e](https://github.com/cozy/cozy-libs/commit/9cb0d4e))
+
+
+
+
+
 # [4.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.6.0...cozy-harvest-lib@4.7.0) (2021-03-01)
 
 
