@@ -280,8 +280,9 @@ export const resumeBIConnection = flow => {
  * @param  {ConnectionFlow} options.flow
  */
 export const finishConnection = async ({ flow }) => {
+  let connectionError
   while (flow.getData().biConnection.error) {
-    const connectionError = flow.getData().biConnection.error
+    connectionError = flow.getData().biConnection.error
     if (connectionError === DECOUPLED_ERROR) {
       const twoFAOptions = { type: 'app', retry: false }
       await flow.saveTwoFARequest(twoFAOptions)
@@ -296,7 +297,8 @@ export const finishConnection = async ({ flow }) => {
       await flow.waitForTwoFA()
       logger.debug('Finished waiting for 2FA...')
     } else {
-      throw convertBIErrortoKonnectorJobError(flow.getData().biConnection.error)
+      connectionError = flow.getData().biConnection.error
+      throw convertBIErrortoKonnectorJobError(connectionError)
     }
   }
   flow.triggerEvent(LOGIN_SUCCESS_EVENT)
