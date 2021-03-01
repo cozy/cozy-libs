@@ -397,7 +397,7 @@
       "app_code": "Enter the code sent to you by your mobile application",
       "app": "Use your provider's app to continue authentication"
     },
-    "desc-2fa": "You need to open your provider's app and/or click on a notification to confirm your authentication.",
+    "desc-2fa": "You need to open your provider's app to confirm your authentication. In some cases, you will have to validate two times.",
     "desc_1": "This code enables you to finish your connexion.",
     "desc_2": "The second code received on your mobile phone or by email enables you to finalize your connexion.",
     "code": {

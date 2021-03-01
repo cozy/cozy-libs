@@ -397,7 +397,7 @@
       "app_code": "Saisissez le code qui vous a été envoyé dans votre application mobile.",
       "app": "Utilisez l'application de votre service pour continuer à vous connecter"
     },
-    "desc-2fa": "Vous devez ouvrir l'application de votre banque et/ou cliquer sur une notification pour confirmer votre identité.",
+    "desc-2fa": " Vous devez ouvrir l'application de votre banque pour confirmer votre identité. Dans certains cas, vous devrez valider deux fois la demande.",
     "desc_1": "Ce code reçu sur votre mobile ou par email vous permet de valider votre connexion.",
     "desc_2": "Ce second code reçu sur votre mobile ou par email vous permet de finaliser votre connexion.",
     "code": {

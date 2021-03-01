@@ -63,7 +63,7 @@ describe('TwoFAModal', () => {
     expect(root.queryByPlaceholderText('')).toBeFalsy()
     expect(
       root.getByText(
-        `You need to open your provider's app and/or click on a notification to confirm your authentication.`
+        `You need to open your provider's app to confirm your authentication. In some cases, you will have to validate two times.`
       )
     )
   })
