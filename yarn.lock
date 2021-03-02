@@ -2481,7 +2481,7 @@
     mkdirp "^0.5.1"
     rimraf "^2.5.2"
 
-"@material-ui/core@3", "@material-ui/core@3.9.4":
+"@material-ui/core@3.9.4":
   version "3.9.4"
   resolved "https://registry.yarnpkg.com/@material-ui/core/-/core-3.9.4.tgz#5297fd4ad9e739a87da4a6d34fc4af5396886e13"
   integrity sha512-r8QFLSexcYZbnqy/Hn4v8xzmAJV41yaodUVjmbGLi1iGDLG3+W941hEtEiBmxTRRqv2BdK3r4ijILcqKmDv/Sw==
@@ -5442,10 +5442,10 @@ cozy-ui@44.1.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@44.10.1:
-  version "44.10.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-44.10.1.tgz#61fd4ecfb2a6c464343d2cb33be2cee07bdc49ca"
-  integrity sha512-OJRxlcZwmhUwmdcX/dezj6QWARUXdRbXKdhKB2Cl6NqGjmKvIoKVSDU4BJaWzz1ZSHxvGpcvhESEi+iBf2QK9A==
+cozy-ui@45.0.0-beta.6:
+  version "45.0.0-beta.6"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-45.0.0-beta.6.tgz#73a6c39537d8184310ee346064a4f9c71a1f17f7"
+  integrity sha512-Wzrm3B7lQ1B7sV7h8dwxv/G//iEkph3uXx2aOmwuV1lxa9+ZPajLiCTWQ1X3VWOJRDeiCwciHidKMyHDz3QUWA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
