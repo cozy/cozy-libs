@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.79.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.78.0...cozy-doctypes@1.79.0) (2021-03-02)
+
+
+### Features
+
+* Update encrypted tests ([1241629](https://github.com/cozy/cozy-libs/commit/1241629))
+
+
+
+
+
 # [1.78.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.77.1...cozy-doctypes@1.78.0) (2021-02-24)
 
 
