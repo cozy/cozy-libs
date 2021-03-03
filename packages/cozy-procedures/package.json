@@ -37,7 +37,7 @@
     "babel-plugin-inline-react-svg": "^1.1.0",
     "babel-preset-cozy-app": "^1.11.0",
     "cozy-client": "16.13.1",
-    "cozy-ui": "40.9.1",
+    "cozy-ui": "45.3.0",
     "enzyme-to-json": "3.4.4",
     "jest": "26.2.2",
     "react": "^16.12.0"
