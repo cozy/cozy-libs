@@ -27,7 +27,9 @@ const KonnectorModalHeader = ({ konnector, children }) => {
           <Typography variant="h5" className="u-m-0">
             {konnector.name}
           </Typography>
-          <div style={resetFontStyles}>{children}</div>
+          <div className="u-w-100" style={resetFontStyles}>
+            {children}
+          </div>
         </div>
       </Media>
     </DialogTitle>
