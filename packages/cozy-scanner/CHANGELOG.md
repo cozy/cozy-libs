@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.0.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.12.1...cozy-scanner@1.0.0) (2021-03-04)
+
+
+### Features
+
+* Update to muiv4 for cozy-sharing ([9d5c589](https://github.com/cozy/cozy-libs/commit/9d5c589))
+
+
+### BREAKING CHANGES
+
+* The application needs to use MUI v4 to works properly with this version of cozy-sharing
+
+
+
+
+
 ## [0.12.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.12.0...cozy-scanner@0.12.1) (2021-02-12)
 
 **Note:** Version bump only for package cozy-scanner

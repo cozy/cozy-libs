@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.12.2...cozy-sharing@3.0.0) (2021-03-04)
+
+
+### Features
+
+* Update to muiv4 for cozy-sharing ([9d5c589](https://github.com/cozy/cozy-libs/commit/9d5c589))
+
+
+### BREAKING CHANGES
+
+* The application needs to use MUI v4 to works properly with this version of cozy-sharing
+
+
+
+
+
 ## [2.12.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.12.1...cozy-sharing@2.12.2) (2021-03-02)
 
 **Note:** Version bump only for package cozy-sharing
