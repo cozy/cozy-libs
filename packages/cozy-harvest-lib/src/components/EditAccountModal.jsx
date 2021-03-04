@@ -4,10 +4,17 @@ import cx from 'classnames'
 
 import get from 'lodash/get'
 import flow from 'lodash/flow'
+import DialogContent from '@material-ui/core/DialogContent'
+
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import {
+  DialogCloseButton,
+  useCozyDialog
+} from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
@@ -15,13 +22,10 @@ import TriggerManager from './TriggerManager'
 import { withMountPointPushHistory } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
+import useTimeout from './hooks/useTimeout'
 
-import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
-import {
-  DialogCloseButton,
-  useCozyDialog
-} from 'cozy-ui/transpiled/react/CozyDialogs'
-import DialogContent from '@material-ui/core/DialogContent'
+const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
+const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
 
 const DumbEditAccountModal = ({
   konnector,
@@ -35,8 +39,18 @@ const DumbEditAccountModal = ({
     size: 'm',
     onClose: redirectToAccount
   })
+
+  /**
+   * The TriggerManager can open the vault if necessary when it is mounted.
+   * If the vault is opened, the EditAccountModal will be closed and will reappear
+   * once the vault has been unlocked.
+   * To prevent any jarring effect (open edit modal -> close edit modal -> open
+   * vault modal), we delay a bit the appearing of the edit modal via CSS.
+   */
+  const shouldShow = useTimeout(500)
   return (
     <Dialog
+      style={shouldShow ? showStyle : hideStyle}
       aria-label={konnector.name}
       {...dialogProps}
       onClose={redirectToAccount}
