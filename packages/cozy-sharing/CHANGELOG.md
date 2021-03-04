@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.0.0...cozy-sharing@3.1.0) (2021-03-04)
+
+
+### Features
+
+* Add shortLabel prop to ShareButton ([7d83069](https://github.com/cozy/cozy-libs/commit/7d83069))
+
+
+
+
+
 # [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@2.12.2...cozy-sharing@3.0.0) (2021-03-04)
 
 
