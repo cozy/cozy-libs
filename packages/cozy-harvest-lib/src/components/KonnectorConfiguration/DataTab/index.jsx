@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import flag from 'cozy-flags'
 
 import * as konnectorsModel from '../../../helpers/konnectors'
 import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
@@ -19,6 +18,16 @@ import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 import GeoDataCard from './geo/GeoDataCard'
+
+const permissionToDataCard = {
+  'io.cozy.timeseries.geojson': GeoDataCard
+}
+
+const findSuitableDataCards = permissions => {
+  return Object.values(permissions)
+    .map(permission => permissionToDataCard[permission.type])
+    .filter(Boolean)
+}
 
 export const DataTab = ({ konnector, trigger, client, flow }) => {
   const { isMobile } = useBreakpoints()
@@ -51,6 +60,8 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
     .filter(Boolean)
     .filter(app => client.appMetadata.slug !== app.slug)
 
+  const permissions = konnector.attributes.permissions
+  const dataCards = findSuitableDataCards(permissions)
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
@@ -87,7 +98,13 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
         {appLinks.map(({ slug, ...otherProps }) => (
           <AppLinkCard key={slug} slug={slug} {...otherProps} />
         ))}
-        {flag('harvest.show-geodata') ? <GeoDataCard /> : null}
+        {dataCards.map((DataCard, i) => (
+          <DataCard
+            key={i}
+            konnector={konnector}
+            accountId={trigger.message.account}
+          />
+        ))}
         {konnector.vendor_link && (
           <WebsiteLinkCard link={konnector.vendor_link} />
         )}

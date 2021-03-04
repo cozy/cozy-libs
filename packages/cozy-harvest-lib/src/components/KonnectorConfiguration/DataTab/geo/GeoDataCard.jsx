@@ -6,6 +6,10 @@ import React, {
   useState,
   memo
 } from 'react'
+import flatten from 'lodash/flatten'
+
+import PropTypes from 'prop-types'
+import CozyClient, { Q, queryConnect } from 'cozy-client'
 import Card from 'cozy-ui/transpiled/react/Card'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
@@ -18,8 +22,8 @@ import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
+import Skeleton from '@material-ui/lab/Skeleton'
 
-import exampleData from './example.json'
 import {
   prepareTrips,
   getStartPlaceDisplayName,
@@ -174,8 +178,48 @@ const GeoDataCard = ({ trips }) => {
   )
 }
 
-const GeoDataCardExample = () => {
-  return <GeoDataCard trips={exampleData.data} />
+const makeQueryFromProps = ({ accountId }) => ({
+  query: Q('io.cozy.timeseries.geojson')
+    .where({
+      'cozyMetadata.sourceAccount': accountId
+    })
+    .sortBy([
+      { 'cozyMetadata.sourceAccount': 'desc' },
+      { 'cozyMetadata.createdAt': 'desc' }
+    ])
+    .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
+    .limitBy(5),
+  as: `io.cozy.accounts/${accountId}/io.cozy.timeseries.geojson`,
+  fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
+})
+
+const transformSeries = geojsonTimeseries => {
+  return flatten(geojsonTimeseries.map(g => g.series))
 }
 
-export default GeoDataCardExample
+const DataGeoDataCard = ({ timeseriesCol }) => {
+  const { data: timeseries, fetchStatus } = timeseriesCol
+  const transformedSeries = useMemo(() => {
+    if (!timeseries) {
+      return
+    } else {
+      return transformSeries(timeseries)
+    }
+  }, [timeseries])
+  if (fetchStatus === 'loading' && !timeseries) {
+    return (
+      <Card>
+        <Skeleton />
+      </Card>
+    )
+  }
+  return <GeoDataCard trips={transformedSeries} />
+}
+
+DataGeoDataCard.propTypes = {
+  accountId: PropTypes.string.isRequired
+}
+
+export default queryConnect({
+  timeseriesCol: props => makeQueryFromProps(props)
+})(DataGeoDataCard)
