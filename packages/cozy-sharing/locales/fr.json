@@ -60,6 +60,7 @@
         }
       },
       "sharedByMe": "Partagé",
+      "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
@@ -141,6 +142,7 @@
         }
       },
       "sharedByMe": "Partagé",
+      "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
@@ -222,6 +224,7 @@
         "rw": "Permission d'écriture et de lecture"
       },
       "sharedByMe": "Partagé",
+      "shared": "Partagé",
       "sharedWithMe": "Partagé avec moi",
       "shareByLink": {
         "subtitle": "Ou partager par lien",
