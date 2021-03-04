@@ -460,7 +460,7 @@ export const SharedRecipientsList = withLocales(({ docId, ...rest }) => (
 
 export const ShareButton = withLocales(
   // eslint-disable-next-line no-unused-vars
-  ({ docId, ...rest }) => {
+  ({ docId, useShortLabel, ...rest }) => {
     const { t } = useI18n()
     return (
       <SharingContext.Consumer>
@@ -469,12 +469,20 @@ export const ShareButton = withLocales(
             <DumbShareButton label={t(`${documentType}.share.cta`)} {...rest} />
           ) : isOwner(docId) ? (
             <SharedByMeButton
-              label={t(`${documentType}.share.sharedByMe`)}
+              label={
+                useShortLabel
+                  ? t(`${documentType}.share.shared`)
+                  : t(`${documentType}.share.sharedByMe`)
+              }
               {...rest}
             />
           ) : (
             <SharedWithMeButton
-              label={t(`${documentType}.share.sharedWithMe`)}
+              label={
+                useShortLabel
+                  ? t(`${documentType}.share.shared`)
+                  : t(`${documentType}.share.sharedWithMe`)
+              }
               {...rest}
             />
           )
