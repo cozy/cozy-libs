@@ -170,7 +170,6 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
 const TripInfoSlide = memo(TripInfoSlideRaw)
 
 const GeoDataCard = ({ trips, loading, konnector }) => {
-  console.log('trips iun geo card ? ', trips)
   const { t } = useI18n()
   const [index, setPrev, setNext] = useCarrousel(
     0,
