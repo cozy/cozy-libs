@@ -1,4 +1,4 @@
-import exampleData from './example'
+import exampleData from './GeoDataCard.fixture.json'
 import { prepareTrips } from './trips'
 
 describe('trips', () => {

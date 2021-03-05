@@ -34,6 +34,7 @@ describe('KonnectorModal', () => {
     mockKonnector = {
       slug: 'mock',
       name: 'Mock',
+      attributes: {},
       triggers: {
         data: [
           { _id: 784, doctype: 'io.cozy.triggers', arguments: '* * * * *' }
