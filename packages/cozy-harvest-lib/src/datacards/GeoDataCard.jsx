@@ -112,7 +112,7 @@ const useCarrousel = (initialState, min, max) => {
   return [curIndex, handlePrev, handleNext]
 }
 
-const TripInfoSlideRaw = ({ trip }) => {
+const TripInfoSlideRaw = ({ trip, loading }) => {
   return (
     <div>
       <Media>
@@ -120,12 +120,18 @@ const TripInfoSlideRaw = ({ trip }) => {
           <Icon icon={FlagIcon} color="var(--emerald)" className="u-mr-half" />
         </Img>
         <Bd>
-          <Typography variant="body1">
-            {getStartPlaceDisplayName(trip)}
-          </Typography>
-          <Typography variant="caption">
-            {getStartPlaceCaption(trip)}
-          </Typography>
+          {loading ? (
+            <Skeleton height={20.5} className="u-pv-half" />
+          ) : (
+            <Typography variant="body1">
+              {getStartPlaceDisplayName(trip)}
+            </Typography>
+          )}
+          {!loading ? (
+            <Typography variant="caption">
+              {getStartPlaceCaption(trip)}
+            </Typography>
+          ) : null}
         </Bd>
       </Media>
       <Media>
@@ -137,10 +143,18 @@ const TripInfoSlideRaw = ({ trip }) => {
           />
         </Img>
         <Bd>
-          <Typography variant="body1">
-            {getEndPlaceDisplayName(trip)}
-          </Typography>
-          <Typography variant="caption">{getEndPlaceCaption(trip)}</Typography>
+          {loading ? (
+            <Skeleton height={20.5} className="u-pv-half" />
+          ) : (
+            <Typography variant="body1">
+              {getEndPlaceDisplayName(trip)}
+            </Typography>
+          )}
+          {loading ? null : (
+            <Typography variant="caption">
+              {getEndPlaceCaption(trip)}
+            </Typography>
+          )}
         </Bd>
       </Media>
     </div>
@@ -149,11 +163,15 @@ const TripInfoSlideRaw = ({ trip }) => {
 
 const TripInfoSlide = memo(TripInfoSlideRaw)
 
-const GeoDataCard = ({ trips }) => {
-  const enhancedTrips = useMemo(() => prepareTrips(trips), [trips])
-  const [index, setPrev, setNext] = useCarrousel(0, 0, trips.length - 1)
+const GeoDataCard = ({ trips, loading, konnector }) => {
+  const { t } = useI18n()
+  const [index, setPrev, setNext] = useCarrousel(
+    0,
+    0,
+    loading ? 0 : trips.length - 1
+  )
   return (
-    <Card className="u-ph-0 u-pb-0">
+    <Card className="u-ph-0 u-pb-0 u-ov-hidden">
       <Media className="u-mb-1">
         <Img className="u-pl-half">
           <IconButton onClick={setPrev}>
@@ -162,11 +180,15 @@ const GeoDataCard = ({ trips }) => {
         </Img>
         <Bd>
           <Box ml={1} mr={1}>
-            <SwipeableViews index={index} disabled>
-              {enhancedTrips.map(trip => {
-                return <TripInfoSlide key={trip.id} trip={trip} />
-              })}
-            </SwipeableViews>
+            {loading ? (
+              <TripInfoSlide loading />
+            ) : (
+              <SwipeableViews index={index} disabled>
+                {trips.map(trip => {
+                  return <TripInfoSlide key={trip.id} trip={trip} />
+                })}
+              </SwipeableViews>
+            )}
           </Box>
         </Bd>
         <Img className="u-pr-half">
@@ -175,7 +197,11 @@ const GeoDataCard = ({ trips }) => {
           </IconButton>
         </Img>
       </Media>
-      <TripsMap trips={enhancedTrips} index={index} />
+      {loading ? (
+        <Skeleton variant="rect" width="100%" height={300} />
+      ) : (
+        <TripsMap trips={trips} index={index} />
+      )}
     </Card>
   )
 }
@@ -195,7 +221,7 @@ const makeQueryFromProps = ({ accountId }) => ({
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
 })
 
-const DataGeoDataCard = ({ timeseriesCol }) => {
+const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
   const { data: timeseries, fetchStatus } = timeseriesCol
   const trips = useMemo(() => {
     if (!timeseries || !timeseries.length) {
@@ -204,17 +230,21 @@ const DataGeoDataCard = ({ timeseriesCol }) => {
       return transformTimeSeriesToTrips(timeseries)
     }
   }, [timeseries])
-  if (fetchStatus === 'loading' && !timeseries) {
+
+  const noTimeseries = trips && trips.length === 0 && fetchStatus !== 'loading'
+  const isLoading = fetchStatus === 'loading' && (!trips || trips.length === 0)
+
+  if (noTimeseries) {
+    return null
+  } else {
     return (
-      <Card>
-        <Skeleton />
-      </Card>
+      <GeoDataCard trips={trips} loading={isLoading} konnector={konnector} />
     )
   }
-  return <GeoDataCard trips={transformedSeries} />
 }
 
 DataGeoDataCard.propTypes = {
+  konnector: PropTypes.object.isRequired,
   accountId: PropTypes.string.isRequired
 }
 
