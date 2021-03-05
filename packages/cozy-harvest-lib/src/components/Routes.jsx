@@ -45,12 +45,7 @@ const HarvestDialog = withStyles({
   return <Dialog disableRestoreFocus {...props} />
 })
 
-const Routes = ({
-  konnectorRoot,
-  konnector,
-  doctypeToDataCard,
-  onDismiss
-}) => {
+const Routes = ({ konnectorRoot, konnector, doctypeToDataCard, onDismiss }) => {
   const dialogContext = useCozyDialog({
     size: 'l',
     open: true,
