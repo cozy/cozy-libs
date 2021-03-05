@@ -165,6 +165,7 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
 const TripInfoSlide = memo(TripInfoSlideRaw)
 
 const GeoDataCard = ({ trips, loading, konnector }) => {
+  console.log('trips iun geo card ? ', trips)
   const { t } = useI18n()
   const [index, setPrev, setNext] = useCarrousel(
     0,
@@ -237,17 +238,12 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
       return transformTimeSeriesToTrips(timeseries)
     }
   }, [timeseries])
-
-  const noTimeseries = trips && trips.length === 0 && fetchStatus !== 'loading'
+  const noTimeseries =
+    (!trips || trips.length === 0) && fetchStatus !== 'loading'
   const isLoading = fetchStatus === 'loading' && (!trips || trips.length === 0)
-
-  if (noTimeseries) {
-    return null
-  } else {
-    return (
-      <GeoDataCard trips={trips} loading={isLoading} konnector={konnector} />
-    )
-  }
+  return noTimeseries ? null : (
+    <GeoDataCard trips={trips} loading={isLoading} konnector={konnector} />
+  )
 }
 
 DataGeoDataCard.propTypes = {
