@@ -16,7 +16,12 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import IconButton from '@material-ui/core/IconButton'
 import SwipeableViews from 'react-swipeable-views'
 
-import CozyClient, { Q, queryConnect } from 'cozy-client'
+import CozyClient, {
+  Q,
+  queryConnect,
+  isQueryLoading,
+  hasQueryBeenLoaded
+} from 'cozy-client'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -230,7 +235,7 @@ const makeQueryFromProps = ({ accountId }) => ({
 })
 
 const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
-  const { data: timeseries, fetchStatus } = timeseriesCol
+  const { data: timeseries } = timeseriesCol
   const trips = useMemo(() => {
     if (!timeseries || !timeseries.length) {
       return
@@ -239,8 +244,8 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
     }
   }, [timeseries])
   const noTimeseries =
-    (!trips || trips.length === 0) && fetchStatus !== 'loading'
-  const isLoading = fetchStatus === 'loading' && (!trips || trips.length === 0)
+    hasQueryBeenLoaded(timeseriesCol) && timeseries.length == 0
+  const isLoading = isQueryLoading(timeseriesCol)
   return noTimeseries ? null : (
     <GeoDataCard trips={trips} loading={isLoading} konnector={konnector} />
   )
