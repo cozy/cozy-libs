@@ -14,6 +14,11 @@ export const collectFeaturesByOid = geojson => {
   return res
 }
 
+/**
+ * Prepare timeseries for easier consumption by React components
+ *
+ * Resolves $oid pointers for start_place and end_place
+ */
 export const transformSingleTimeSeriesToTrips = singleTimeseries => {
   const { features, properties } = singleTimeseries
   const featureIndex = keyBy(features, feature => feature.id)
@@ -29,12 +34,6 @@ export const transformSingleTimeSeriesToTrips = singleTimeseries => {
   })
 }
 
-/**
- * Prepare timeseries for easier consumption by React components
- *
- *
- * Resolves $oid pointers for start_place and end_place
- */
 export const transformTimeSeriesToTrips = geojsonTimeseries => {
   const allSeries = flatten(geojsonTimeseries.map(g => g.series))
   return allSeries.map(transformSingleTimeSeriesToTrips)
