@@ -79,7 +79,7 @@ export default () => {
 
 If the app does not provide a tracking context, tracking calls will do nothing.
 
-# Datacards
+# Data cards
 
 ⚠️ This is still in progress, things may change abruptly.
 
