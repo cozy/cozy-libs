@@ -25,6 +25,7 @@ import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import {
   transformTimeSeriesToTrips,
@@ -172,6 +173,12 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
   )
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
+      <div className="u-ph-1 u-mb-half">
+        <Typography variant="h5">{t('datacards.trips.title')}</Typography>
+        <Typography variant="caption">
+          {t('datacards.trips.caption', { konnectorName: konnector.name })}
+        </Typography>
+      </div>
       <Media className="u-mb-1">
         <Img className="u-pl-half">
           <IconButton onClick={setPrev}>

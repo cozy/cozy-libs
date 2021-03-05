@@ -485,5 +485,11 @@
     "inMaintenance": "In maintenance",
     "hasNewVersionAvailable": "New version available",
     "fatalError": "An error occurred while recovering the service. If this problem persists, do not hesitate to contact us at [%{name}](%{link})"
+  },
+  "datacards": {
+    "trips": {
+      "title": "Last retrieved trips",
+      "caption": "See the last 5 trips retrieved by %{konnectorName}"
+    }
   }
 }

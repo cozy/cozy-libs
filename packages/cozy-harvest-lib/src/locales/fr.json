@@ -485,5 +485,11 @@
     "inMaintenance": "En maintenance",
     "hasNewVersionAvailable": "Nouvelle version disponible",
     "fatalError": "Une erreur est survenue à la récupération du service. Si ce problème persiste, n'hésitez pas à nous contacter à [%{name}](%{link})"
+  },
+  "datacards": {
+    "trips": {
+      "title": "Derniers trajets récupérés"
+      "caption": "Visualisez les 5 derniers trajets récupérés par %{konnectorName}"
+    }
   }
 }
