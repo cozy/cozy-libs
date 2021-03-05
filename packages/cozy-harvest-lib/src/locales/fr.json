@@ -488,8 +488,8 @@
   },
   "datacards": {
     "trips": {
-      "title": "Derniers trajets récupérés"
-      "caption": "Visualisez les 5 derniers trajets récupérés par %{konnectorName}"
+      "title": "Derniers trajets",
+      "caption": "Visualisez vos 5 trajets les plus récents récupérés sur %{konnectorName}"
     }
   }
 }

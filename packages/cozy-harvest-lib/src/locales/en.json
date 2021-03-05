@@ -488,8 +488,8 @@
   },
   "datacards": {
     "trips": {
-      "title": "Last retrieved trips",
-      "caption": "See the last 5 trips retrieved by %{konnectorName}"
+      "title": "Last trips",
+      "caption": "See your 5 most recent trips retrieved on %{konnectorName}"
     }
   }
 }

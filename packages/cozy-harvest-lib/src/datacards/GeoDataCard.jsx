@@ -223,11 +223,8 @@ const makeQueryFromProps = ({ accountId }) => ({
     .where({
       'cozyMetadata.sourceAccount': accountId
     })
-    .sortBy([
-      { 'cozyMetadata.sourceAccount': 'desc' },
-      { 'cozyMetadata.createdAt': 'desc' }
-    ])
-    .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
+    .sortBy([{ 'cozyMetadata.sourceAccount': 'desc' }, { startDate: 'desc' }])
+    .indexFields(['cozyMetadata.sourceAccount', 'startDate'])
     .limitBy(5),
   as: `io.cozy.accounts/${accountId}/io.cozy.timeseries.geojson`,
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
