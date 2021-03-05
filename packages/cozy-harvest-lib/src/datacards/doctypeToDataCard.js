@@ -8,7 +8,9 @@
  */
 
 import GeoDataCard from './GeoDataCard'
+import FileDataCard from './FileDataCard'
 
 export default {
-  'io.cozy.timeseries.geojson': GeoDataCard
+  'io.cozy.timeseries.geojson': GeoDataCard,
+  'io.cozy.files': FileDataCard
 }

@@ -499,6 +499,10 @@
         "UNKNOWN": "",
         "WALKING": "Walking"
       }
+    },
+    "files": {
+      "title": "Your documents",
+      "caption": "This service retrieves your latest documents and keeps a complete back-up for you."
     }
   }
 }

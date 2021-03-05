@@ -29,7 +29,7 @@ export const relatedAppsConfiguration = [
     slug: 'drive',
     priority: 0,
     predicate: ({ trigger }) => {
-      return !!get(trigger, 'message.folder_to_save')
+      return false && !!get(trigger, 'message.folder_to_save')
     }
   }
 ]
