@@ -8,8 +8,6 @@ import React, {
 } from 'react'
 import PropTypes from 'prop-types'
 
-import flatten from 'lodash/flatten'
-
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
@@ -29,7 +27,7 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
 
 import {
-  prepareTrips,
+  transformTimeSeriesToTrips,
   getStartPlaceDisplayName,
   getEndPlaceDisplayName,
   getStartPlaceCaption,
@@ -197,17 +195,13 @@ const makeQueryFromProps = ({ accountId }) => ({
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
 })
 
-const transformSeries = geojsonTimeseries => {
-  return flatten(geojsonTimeseries.map(g => g.series))
-}
-
 const DataGeoDataCard = ({ timeseriesCol }) => {
   const { data: timeseries, fetchStatus } = timeseriesCol
-  const transformedSeries = useMemo(() => {
-    if (!timeseries) {
+  const trips = useMemo(() => {
+    if (!timeseries || !timeseries.length) {
       return
     } else {
-      return transformSeries(timeseries)
+      return transformTimeSeriesToTrips(timeseries)
     }
   }, [timeseries])
   if (fetchStatus === 'loading' && !timeseries) {

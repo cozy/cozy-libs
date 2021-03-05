@@ -1,6 +1,7 @@
 import get from 'lodash/get'
 import merge from 'lodash/merge'
 import keyBy from 'lodash/keyBy'
+import flatten from 'lodash/flatten'
 import format from 'date-fns/format'
 
 export const collectFeaturesByOid = geojson => {
@@ -13,24 +14,30 @@ export const collectFeaturesByOid = geojson => {
   return res
 }
 
+export const transformSingleTimeSeriesToTrips = singleTimeseries => {
+  const { features, properties } = singleTimeseries
+  const featureIndex = keyBy(features, feature => feature.id)
+  return merge({}, singleTimeseries, {
+    properties: {
+      start_place: {
+        data: featureIndex[properties.start_place['$oid']]
+      },
+      end_place: {
+        data: featureIndex[properties.end_place['$oid']]
+      }
+    }
+  })
+}
+
 /**
- * Prepare trips for easier consumption by React components
+ * Prepare timeseries for easier consumption by React components
+ *
+ *
  * Resolves $oid pointers for start_place and end_place
  */
-export const prepareTrips = trips => {
-  return trips.map(trip => {
-    const featureIndex = keyBy(trip.features, feature => feature.id)
-    return merge({}, trip, {
-      properties: {
-        start_place: {
-          data: featureIndex[trip.properties.start_place['$oid']]
-        },
-        end_place: {
-          data: featureIndex[trip.properties.end_place['$oid']]
-        }
-      }
-    })
-  })
+export const transformTimeSeriesToTrips = geojsonTimeseries => {
+  const allSeries = flatten(geojsonTimeseries.map(g => g.series))
+  return allSeries.map(transformSingleTimeSeriesToTrips)
 }
 
 export const getStartPlaceDisplayName = trip => {
