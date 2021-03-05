@@ -6,23 +6,27 @@ import React, {
   useState,
   memo
 } from 'react'
+import PropTypes from 'prop-types'
+
 import flatten from 'lodash/flatten'
 
-import PropTypes from 'prop-types'
-import CozyClient, { Q, queryConnect } from 'cozy-client'
-import Card from 'cozy-ui/transpiled/react/Card'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
+
 import Box from '@material-ui/core/Box'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
+import Skeleton from '@material-ui/lab/Skeleton'
 import IconButton from '@material-ui/core/IconButton'
 import SwipeableViews from 'react-swipeable-views'
+
+import CozyClient, { Q, queryConnect } from 'cozy-client'
+
+import Card from 'cozy-ui/transpiled/react/Card'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
-import Skeleton from '@material-ui/lab/Skeleton'
 
 import {
   prepareTrips,
