@@ -17,19 +17,20 @@ import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/ap
 import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
-import GeoDataCard from './geo/GeoDataCard'
 
-const permissionToDataCard = {
-  'io.cozy.timeseries.geojson': GeoDataCard
-}
-
-const findSuitableDataCards = permissions => {
+const findSuitableDataCards = (permissions, doctypeToDataCard) => {
   return Object.values(permissions)
-    .map(permission => permissionToDataCard[permission.type])
+    .map(permission => doctypeToDataCard[permission.type])
     .filter(Boolean)
 }
 
-export const DataTab = ({ konnector, trigger, client, flow }) => {
+export const DataTab = ({
+  konnector,
+  trigger,
+  client,
+  flow,
+  doctypeToDataCard
+}) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState
@@ -61,7 +62,9 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
     .filter(app => client.appMetadata.slug !== app.slug)
 
   const permissions = konnector.attributes.permissions
-  const dataCards = findSuitableDataCards(permissions)
+  const dataCards = doctypeToDataCard
+    ? findSuitableDataCards(permissions, doctypeToDataCard)
+    : []
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)

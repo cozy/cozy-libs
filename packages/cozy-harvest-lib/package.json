@@ -34,7 +34,6 @@
     "cozy-ui": "^45.3.0",
     "date-fns": "^1.30.1",
     "final-form": "^4.18.5",
-    "leaflet": "^1.7.1",
     "lodash": "^4.17.19",
     "microee": "^0.0.6",
     "node-polyglot": "^2.4.0",
@@ -68,6 +67,7 @@
     "jest-environment-jsdom-sixteen": "^1.0.3",
     "jest-resolve-cached": "^1.0.0",
     "jsdom": "^16.1.0",
+    "leaflet": "^1.7.1",
     "prop-types": "15.7.2",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
@@ -82,6 +82,7 @@
     "cozy-keys-lib": ">=3.7.0",
     "cozy-realtime": ">=3.10.5",
     "cozy-ui": ">=40.9.1",
+    "leaflet": "^1.7.1",
     "react-router-dom": "^5.0.1"
   },
   "sideEffects": false

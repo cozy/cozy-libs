@@ -112,7 +112,8 @@ export class AccountModal extends Component {
       initialActiveTab,
       breakpoints: { isMobile },
       showAccountSelection,
-      showNewAccountButton
+      showNewAccountButton,
+      doctypeToDataCard
     } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
@@ -166,6 +167,7 @@ export class AccountModal extends Component {
               onAccountDeleted={onDismiss}
               addAccount={() => pushHistory('/new')}
               showNewAccountButton={showNewAccountButton}
+              doctypeToDataCard={doctypeToDataCard}
             />
           </DialogContent>
         )}
