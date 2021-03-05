@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.5.4](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.5.3...cozy-flags@2.5.4) (2021-03-05)
+
+
+### Bug Fixes
+
+* Don't require react in a node context ([bba9d41](https://github.com/cozy/cozy-libs/commit/bba9d41))
+
+
+
+
+
 ## [2.5.3](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.5.2...cozy-flags@2.5.3) (2021-02-12)
 
 **Note:** Version bump only for package cozy-flags
