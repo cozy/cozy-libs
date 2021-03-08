@@ -40,7 +40,9 @@ import { TriggerManager } from 'cozy-harvest-lib'
 import TriggerManager from 'cozy-harvest-lib/TriggerManager'
 ```
 
-This is because all harvest components come with their own translation context. If you really do need to import a component straight from the shipped file, there is a `withLocales` HOC that is available, so something like this would work as a fallback:
+This is because all harvest components come with their own translation context. If you really do need
+to import a component straight from the shipped file, there is a `withLocales` HOC that is available,
+so something like this would work as a fallback:
 
 ```
 import TriggerManager from 'cozy-harvest-lib/TriggerManager'
@@ -76,6 +78,38 @@ export default () => {
 ```
 
 If the app does not provide a tracking context, tracking calls will do nothing.
+
+# Data cards
+
+⚠️ This is still in progress, things may change abruptly.
+
+It is possible to display, in the data tab of Harvest, cards showing the data that
+has been collected by the connector for the current io.cozy.accounts.
+
+It is up to the application to tell Harvest which datacard should be used. It is done
+by passing the `doctypeToDataCard` prop to the `Routes` component of Harvest.
+
+```jsx
+import GeoDataCard from 'cozy-harvest-lib/dist/datacards/GeoDataCard'
+
+const doctypeToDataCard = {
+  'io.cozy.timeseries.geojson': GeoDataCard
+}
+
+<Routes doctypeToDataCard={doctypeToDataCard} ... />
+```
+
+This has the following advantages:
+
+* Since the application imports the datacards component, an application
+not using this functionality is not bloated by the dependencies
+of the data card.
+
+* An application can implement a custom datacard for a particular
+doctype.
+
+This has the inconvenient that if a new datacard is added, an application has
+to explicitly choose to use it.
 
 # Getting Started
 

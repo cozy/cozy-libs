@@ -16,7 +16,9 @@ describe('DataTab', () => {
 
   const setup = customProps => {
     const props = {
-      konnector: {},
+      konnector: {
+        attributes: {}
+      },
       trigger: {},
       client: {
         appMetadata: {
@@ -56,18 +58,21 @@ describe('DataTab', () => {
 
     it('should show the link to banks', () => {
       const withoutAccounts = setup({
-        konnector: { data_types: ['something', 'else'] }
+        konnector: { data_types: ['something', 'else'], attributes: {} }
       })
       expect(withoutAccounts.find(AppLinkCard).length).toEqual(0)
 
       const withAccounts = setup({
-        konnector: { data_types: ['bankAccounts'] }
+        konnector: { data_types: ['bankAccounts'], attributes: {} }
       })
       expect(withAccounts.find(AppLinkCard).length).toEqual(1)
       expect(withAccounts.find(AppLinkCard).prop('slug')).toEqual('banks')
 
       const withAccountsAndOthers = setup({
-        konnector: { data_types: ['bankAccounts', 'something', 'else'] }
+        konnector: {
+          data_types: ['bankAccounts', 'something', 'else'],
+          attributes: {}
+        }
       })
       expect(withAccountsAndOthers.find(AppLinkCard).length).toEqual(1)
       expect(withAccountsAndOthers.find(AppLinkCard).prop('slug')).toEqual(
@@ -77,18 +82,21 @@ describe('DataTab', () => {
 
     it('should show the link to contacts', () => {
       const withoutContacts = setup({
-        konnector: { data_types: ['something', 'else'] }
+        konnector: { attributes: {}, data_types: ['something', 'else'] }
       })
       expect(withoutContacts.find(AppLinkCard).length).toEqual(0)
 
       const withContacts = setup({
-        konnector: { data_types: ['contact'] }
+        konnector: { attributes: {}, data_types: ['contact'] }
       })
       expect(withContacts.find(AppLinkCard).length).toEqual(1)
       expect(withContacts.find(AppLinkCard).prop('slug')).toEqual('contacts')
 
       const withContactsAndOthers = setup({
-        konnector: { data_types: ['contact', 'something', 'else'] }
+        konnector: {
+          attributes: {},
+          data_types: ['contact', 'something', 'else']
+        }
       })
       expect(withContactsAndOthers.find(AppLinkCard).length).toEqual(1)
       expect(withContactsAndOthers.find(AppLinkCard).prop('slug')).toEqual(
@@ -98,7 +106,7 @@ describe('DataTab', () => {
 
     it('should show all links at once', () => {
       const withEverything = setup({
-        konnector: { data_types: ['contact', 'bankAccounts'] },
+        konnector: { data_types: ['contact', 'bankAccounts'], attributes: {} },
         trigger: { message: { folder_to_save: '123' } }
       })
       expect(withEverything.find(AppLinkCard).length).toEqual(3)

@@ -83,7 +83,8 @@ const DumbKonnectorAccountTabs = props => {
     // TODO rename to onAddAccount
     addAccount,
     showNewAccountButton,
-    flow
+    flow,
+    doctypeToDataCard
   } = props
   const { isMobile } = useBreakpoints()
   const [tab, setTab] = useState(
@@ -126,7 +127,12 @@ const DumbKonnectorAccountTabs = props => {
           swipeableActions.current = actions
         }}
       >
-        <DataTab konnector={konnector} trigger={initialTrigger} flow={flow} />
+        <DataTab
+          konnector={konnector}
+          trigger={initialTrigger}
+          flow={flow}
+          doctypeToDataCard={doctypeToDataCard}
+        />
         <ConfigurationTab
           konnector={konnector}
           account={account}

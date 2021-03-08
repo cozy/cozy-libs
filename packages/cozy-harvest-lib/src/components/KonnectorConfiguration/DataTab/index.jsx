@@ -18,7 +18,19 @@ import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
-export const DataTab = ({ konnector, trigger, client, flow }) => {
+const findSuitableDataCards = (permissions, doctypeToDataCard) => {
+  return Object.values(permissions)
+    .map(permission => doctypeToDataCard[permission.type])
+    .filter(Boolean)
+}
+
+export const DataTab = ({
+  konnector,
+  trigger,
+  client,
+  flow,
+  doctypeToDataCard
+}) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState
@@ -49,6 +61,10 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
     .filter(Boolean)
     .filter(app => client.appMetadata.slug !== app.slug)
 
+  const permissions = konnector.attributes.permissions
+  const dataCards = doctypeToDataCard
+    ? findSuitableDataCards(permissions, doctypeToDataCard)
+    : []
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
@@ -84,6 +100,13 @@ export const DataTab = ({ konnector, trigger, client, flow }) => {
         <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
         {appLinks.map(({ slug, ...otherProps }) => (
           <AppLinkCard key={slug} slug={slug} {...otherProps} />
+        ))}
+        {dataCards.map((DataCard, i) => (
+          <DataCard
+            key={i}
+            konnector={konnector}
+            accountId={trigger.message.account}
+          />
         ))}
         {konnector.vendor_link && (
           <WebsiteLinkCard link={konnector.vendor_link} />
