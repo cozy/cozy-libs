@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.8.3...cozy-harvest-lib@4.9.0) (2021-03-08)
+
+
+### Bug Fixes
+
+* Fix logic conditions ([89929fa](https://github.com/cozy/cozy-libs/commit/89929fa))
+* Use query helpers to determine empty/loading status ([080fc8b](https://github.com/cozy/cozy-libs/commit/080fc8b))
+
+
+### Features
+
+* Add a file exporting all possible doctype to data card combination ([716d0c1](https://github.com/cozy/cozy-libs/commit/716d0c1))
+* Add captions for start/end places ([3411ce0](https://github.com/cozy/cozy-libs/commit/3411ce0))
+* Add loading skeletons when geo data is being fetched ([e3139df](https://github.com/cozy/cozy-libs/commit/e3139df))
+* Add title + caption ([656b546](https://github.com/cozy/cozy-libs/commit/656b546))
+* Display geodata from fixture ([6e96539](https://github.com/cozy/cozy-libs/commit/6e96539))
+* Doctype to datacard is passed as prop ([558a011](https://github.com/cozy/cozy-libs/commit/558a011))
+* Move datacards to an easy to import folder ([a28a73b](https://github.com/cozy/cozy-libs/commit/a28a73b))
+* Show real data for timeseries ([b96518e](https://github.com/cozy/cozy-libs/commit/b96518e))
+* Sort by timeseries start date ([5b627a9](https://github.com/cozy/cozy-libs/commit/5b627a9))
+
+
+
+
+
 ## [4.8.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.8.2...cozy-harvest-lib@4.8.3) (2021-03-05)
 
 **Note:** Version bump only for package cozy-harvest-lib
