@@ -6,4 +6,4 @@ if (typeof __ENABLED_FLAGS__ !== 'undefined') {
   flag.enable(__ENABLED_FLAGS__)
 }
 
-module.exports = flag
+export default flag
