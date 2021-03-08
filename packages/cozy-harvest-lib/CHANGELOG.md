@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.9.0...cozy-harvest-lib@4.10.0) (2021-03-08)
+
+
+### Features
+
+* Remove jarring effect when opening edit account modal ([06fcee7](https://github.com/cozy/cozy-libs/commit/06fcee7))
+
+
+
+
+
 # [4.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.8.3...cozy-harvest-lib@4.9.0) (2021-03-08)
 
 
