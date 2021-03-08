@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.5.4...cozy-flags@2.6.0) (2021-03-08)
+
+
+### Bug Fixes
+
+* Import in FlagSwitcher ([5ccc780](https://github.com/cozy/cozy-libs/commit/5ccc780))
+* Remove useless block for node ([fb15094](https://github.com/cozy/cozy-libs/commit/fb15094))
+
+
+### Features
+
+* Use import/export to benefit from tree shaking ([1a72770](https://github.com/cozy/cozy-libs/commit/1a72770))
+
+
+
+
+
 ## [2.5.4](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.5.3...cozy-flags@2.5.4) (2021-03-05)
 
 
