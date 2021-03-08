@@ -101,12 +101,12 @@ const doctypeToDataCard = {
 
 This has the following advantages:
 
-* Since the application imports the datacards component, an application
-not using this functionality is not bloated by the dependencies
-of the data card.
+- Since the application imports the datacards component, an application
+  not using this functionality is not bloated by the dependencies
+  of the data card.
 
-* An application can implement a custom datacard for a particular
-doctype.
+- An application can implement a custom datacard for a particular
+  doctype.
 
 This has the inconvenient that if a new datacard is added, an application has
 to explicitly choose to use it.
