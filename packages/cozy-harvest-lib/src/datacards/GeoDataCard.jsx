@@ -175,14 +175,14 @@ const getSwiperTitle = trip => {
   const endDate = new Date(trip.properties.end_fmt_time)
   if (isSameDay(startDate, endDate)) {
     const yearToken = isSameYear(startDate, now) ? '' : ' YYYY'
-    return `${format(startDate, `ddd DD MMM${yearToken}, HH:mm`)} - ${format(
+    return `${format(startDate, `ddd D MMM${yearToken}, HH:mm`)} - ${format(
       endDate,
       'HH:mm'
     )}`
   } else {
-    return `${format(startDate, 'DDD MMM YYYY, HH:mm')} - ${format(
+    return `${format(startDate, 'D MMM YYYY, HH:mm')} - ${format(
       endDate,
-      'DDD MM YYYY, HH:mm'
+      'D MM YYYY, HH:mm'
     )}`
   }
 }
