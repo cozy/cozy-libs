@@ -489,7 +489,16 @@
   "datacards": {
     "trips": {
       "title": "Derniers trajets",
-      "caption": "Visualisez vos 5 trajets les plus récents récupérés sur %{konnectorName}"
+      "caption": "Visualisez vos 5 trajets les plus récents récupérés sur %{konnectorName}",
+      "modes": {
+        "AIR_OR_HSR": "Avion",
+        "BICYCLING": "Vélo",
+        "CAR": "Voiture",
+        "SUBWAY": "Métro",
+        "TRAIN": "Train",
+        "UNKNOWN": "",
+        "WALKING": "Marche"
+      }
     }
   }
 }
