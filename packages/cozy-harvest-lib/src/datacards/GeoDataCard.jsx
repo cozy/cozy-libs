@@ -1,11 +1,4 @@
-import React, {
-  useEffect,
-  useRef,
-  useMemo,
-  useCallback,
-  useState,
-  memo
-} from 'react'
+import React, { useEffect, useRef, useMemo, memo } from 'react'
 import PropTypes from 'prop-types'
 
 import L from 'leaflet'
@@ -38,6 +31,7 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import useCycle from './useCycle'
 import {
   transformTimeSeriesToTrips,
   getStartPlaceDisplayName,
@@ -108,22 +102,6 @@ const TripsMap = ({ trips, index }) => {
   return <div style={mapStyle} ref={nodeRef} />
 }
 
-const useCarrousel = (initialState, min, max) => {
-  const [curIndex, setIndex] = useState(0)
-
-  const handlePrev = useCallback(() => {
-    const prev = curIndex - 1
-    setIndex(prev < min ? max : prev)
-  }, [curIndex, min, max])
-
-  const handleNext = useCallback(() => {
-    const next = curIndex + 1
-    setIndex(next > max ? min : next)
-  }, [curIndex, max, min])
-
-  return [curIndex, handlePrev, handleNext]
-}
-
 const formatDistance = (t, argDistance) => {
   let unit = 'm'
   let distance = argDistance
@@ -150,7 +128,7 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
         </Img>
         <Bd>
           {loading ? (
-            <Skeleton height={20.5} className="u-pv-half" />
+            <Skeleton height={16} className="u-pv-half" />
           ) : (
             <Typography variant="body1">
               {getStartPlaceDisplayName(trip)}
@@ -217,10 +195,10 @@ const TripInfoSlide = memo(TripInfoSlideRaw)
 
 const GeoDataCard = ({ trips, loading, konnector }) => {
   const { t } = useI18n()
-  const [index, setPrev, setNext] = useCarrousel(
+  const [index, setPrev, setNext] = useCycle(
+    trips && trips.length > 0 ? trips.length - 1 : undefined,
     0,
-    0,
-    loading || !trips ? 0 : trips.length - 1
+    loading || !trips ? undefined : trips.length - 1
   )
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
@@ -238,6 +216,13 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
         </Img>
         <Bd className="u-ta-center">
           {trips ? <TripSwiperTitle trip={trips[index]} /> : <Skeleton />}
+          <Typography variant="caption">
+            {trips
+              ? trips.map((t, i) => (
+                  <span key={i}>{i === index ? '●' : '○'}</span>
+                ))
+              : null}
+          </Typography>
         </Bd>
         <Img className="u-pr-half">
           <IconButton onClick={setNext}>
@@ -248,7 +233,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
       <Media className="u-ph-1 u-mb-1">
         <Bd>
           <Box ml={1} mr={1}>
-            {loading ? (
+            {loading || index === undefined ? (
               <TripInfoSlide loading />
             ) : (
               <SwipeableViews index={index} disabled>
@@ -260,7 +245,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
           </Box>
         </Bd>
       </Media>
-      {loading ? (
+      {loading || index === undefined ? (
         <Skeleton variant="rect" width="100%" height={300} />
       ) : (
         <TripsMap trips={trips} index={index} />
