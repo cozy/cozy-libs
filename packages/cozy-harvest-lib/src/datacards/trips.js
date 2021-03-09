@@ -2,7 +2,8 @@ import get from 'lodash/get'
 import merge from 'lodash/merge'
 import keyBy from 'lodash/keyBy'
 import flatten from 'lodash/flatten'
-import format from 'date-fns/format'
+import uniq from 'lodash/uniq'
+import distanceInWords from 'date-fns/distance_in_words'
 
 export const collectFeaturesByOid = geojson => {
   const res = {}
@@ -46,11 +47,26 @@ export const getStartPlaceDisplayName = trip => {
 export const getEndPlaceDisplayName = trip => {
   return get(trip, 'properties.end_place.data.properties.display_name')
 }
-
-export const getStartPlaceCaption = trip => {
-  return format(get(trip, 'properties.start_fmt_time'), 'HH:mm DD/MM/YYYY')
+export const getFormattedDuration = trip => {
+  const startDate = new Date(trip.properties.start_fmt_time)
+  const endDate = new Date(trip.properties.end_fmt_time)
+  return distanceInWords(endDate, startDate)
 }
 
-export const getEndPlaceCaption = trip => {
-  return format(get(trip, 'properties.end_fmt_time'), 'HH:mm DD/MM/YYYY')
+export const getModes = trip => {
+  return uniq(
+    flatten(
+      trip.features.map(feature => {
+        if (feature.features) {
+          return feature.features.map(feature =>
+            get(feature, 'properties.sensed_mode')
+          )
+        } else {
+          return get(feature, 'properties.sensed_mode')
+        }
+      })
+    )
+      .map(x => (x ? x.split('PredictedModeTypes.')[1] : null))
+      .filter(Boolean)
+  )
 }

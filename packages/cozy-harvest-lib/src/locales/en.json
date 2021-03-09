@@ -489,7 +489,16 @@
   "datacards": {
     "trips": {
       "title": "Last trips",
-      "caption": "See your 5 most recent trips retrieved on %{konnectorName}"
+      "caption": "See your 5 most recent trips retrieved on %{konnectorName}",
+      "modes": {
+        "AIR_OR_HSR": "Plane",
+        "BICYCLING": "Bike",
+        "CAR": "Car",
+        "SUBWAY": "Subway",
+        "TRAIN": "Train",
+        "UNKNOWN": "",
+        "WALKING": "Walking"
+      }
     }
   }
 }

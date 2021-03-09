@@ -16,6 +16,10 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import IconButton from '@material-ui/core/IconButton'
 import SwipeableViews from 'react-swipeable-views'
 
+import isSameDay from 'date-fns/is_same_day'
+import isSameYear from 'date-fns/is_same_year'
+import format from 'date-fns/format'
+
 import CozyClient, {
   Q,
   queryConnect,
@@ -25,6 +29,8 @@ import CozyClient, {
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import ClockIcon from 'cozy-ui/transpiled/react/Icons/Clock'
+import CompassIcon from 'cozy-ui/transpiled/react/Icons/Compass'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -36,8 +42,8 @@ import {
   transformTimeSeriesToTrips,
   getStartPlaceDisplayName,
   getEndPlaceDisplayName,
-  getStartPlaceCaption,
-  getEndPlaceCaption
+  getFormattedDuration,
+  getModes
 } from './trips'
 
 const setupMap = node => {
@@ -118,10 +124,27 @@ const useCarrousel = (initialState, min, max) => {
   return [curIndex, handlePrev, handleNext]
 }
 
+const formatDistance = (t, argDistance) => {
+  let unit = 'm'
+  let distance = argDistance
+  if (distance > 1000) {
+    unit = 'km'
+    distance = distance / 1000
+  }
+  return `${Math.round(distance)}${unit}`
+}
+
+const MiddleDot = () => {
+  return <span className="u-mh-half">·</span>
+}
+
 const TripInfoSlideRaw = ({ trip, loading }) => {
+  const { t } = useI18n()
+  const duration = useMemo(() => trip && getFormattedDuration(trip), [trip])
+  const modes = useMemo(() => trip && getModes(trip), [trip])
   return (
     <div>
-      <Media>
+      <Media className="u-mb-half">
         <Img>
           <Icon icon={FlagIcon} color="var(--emerald)" className="u-mr-half" />
         </Img>
@@ -133,14 +156,9 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
               {getStartPlaceDisplayName(trip)}
             </Typography>
           )}
-          {!loading ? (
-            <Typography variant="caption">
-              {getStartPlaceCaption(trip)}
-            </Typography>
-          ) : null}
         </Bd>
       </Media>
-      <Media>
+      <Media className="u-mb-half">
         <Img>
           <Icon
             icon={FlagIcon}
@@ -156,15 +174,43 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
               {getEndPlaceDisplayName(trip)}
             </Typography>
           )}
-          {loading ? null : (
-            <Typography variant="caption">
-              {getEndPlaceCaption(trip)}
-            </Typography>
-          )}
         </Bd>
       </Media>
+      {loading ? null : (
+        <Typography variant="caption">
+          <Icon icon={ClockIcon} size={10} /> {duration}
+          <MiddleDot />
+          <Icon icon={CompassIcon} size={10} />{' '}
+          {formatDistance(t, trip.properties.distance)}
+          <MiddleDot />
+          {modes.map(m => t(`datacards.trips.modes.${m}`)).join(', ')}
+        </Typography>
+      )}
     </div>
   )
+}
+
+const getSwiperTitle = trip => {
+  const now = new Date()
+  const startDate = new Date(trip.properties.start_fmt_time)
+  const endDate = new Date(trip.properties.end_fmt_time)
+  if (isSameDay(startDate, endDate)) {
+    const yearToken = isSameYear(startDate, now) ? '' : ' YYYY'
+    return `${format(startDate, `ddd DD MMM${yearToken}, HH:mm`)} - ${format(
+      endDate,
+      'HH:mm'
+    )}`
+  } else {
+    return `${format(startDate, 'DDD MMM YYYY, HH:mm')} - ${format(
+      endDate,
+      'DDD MM YYYY, HH:mm'
+    )}`
+  }
+}
+
+const TripSwiperTitle = ({ trip }) => {
+  const message = useMemo(() => trip && getSwiperTitle(trip), [trip])
+  return <Typography variant="subtitle1">{message}</Typography>
 }
 
 const TripInfoSlide = memo(TripInfoSlideRaw)
@@ -174,7 +220,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
   const [index, setPrev, setNext] = useCarrousel(
     0,
     0,
-    loading ? 0 : trips.length - 1
+    loading || !trips ? 0 : trips.length - 1
   )
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
@@ -184,12 +230,22 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
           {t('datacards.trips.caption', { konnectorName: konnector.name })}
         </Typography>
       </div>
-      <Media className="u-mb-1">
+      <Media>
         <Img className="u-pl-half">
           <IconButton onClick={setPrev}>
             <Icon icon={LeftIcon} />
           </IconButton>
         </Img>
+        <Bd className="u-ta-center">
+          {trips ? <TripSwiperTitle trip={trips[index]} /> : <Skeleton />}
+        </Bd>
+        <Img className="u-pr-half">
+          <IconButton onClick={setNext}>
+            <Icon icon={RightIcon} />
+          </IconButton>
+        </Img>
+      </Media>
+      <Media className="u-ph-1 u-mb-1">
         <Bd>
           <Box ml={1} mr={1}>
             {loading ? (
@@ -203,11 +259,6 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
             )}
           </Box>
         </Bd>
-        <Img className="u-pr-half">
-          <IconButton onClick={setNext}>
-            <Icon icon={RightIcon} />
-          </IconButton>
-        </Img>
       </Media>
       {loading ? (
         <Skeleton variant="rect" width="100%" height={300} />
@@ -223,7 +274,7 @@ const makeQueryFromProps = ({ accountId }) => ({
     .where({
       'cozyMetadata.sourceAccount': accountId
     })
-    .sortBy([{ 'cozyMetadata.sourceAccount': 'desc' }, { startDate: 'desc' }])
+    .sortBy([{ 'cozyMetadata.sourceAccount': 'asc' }, { startDate: 'asc' }])
     .indexFields(['cozyMetadata.sourceAccount', 'startDate'])
     .limitBy(5),
   as: `io.cozy.accounts/${accountId}/io.cozy.timeseries.geojson`,
@@ -234,7 +285,7 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
   const { data: timeseries } = timeseriesCol
   const trips = useMemo(() => {
     if (!timeseries || !timeseries.length) {
-      return
+      return []
     } else {
       return transformTimeSeriesToTrips(timeseries)
     }
