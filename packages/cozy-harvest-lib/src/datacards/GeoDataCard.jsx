@@ -9,6 +9,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import IconButton from '@material-ui/core/IconButton'
 import SwipeableViews from 'react-swipeable-views'
 
+import sortBy from 'lodash/sortBy'
 import isSameDay from 'date-fns/is_same_day'
 import isSameYear from 'date-fns/is_same_year'
 import format from 'date-fns/format'
@@ -259,7 +260,7 @@ const makeQueryFromProps = ({ accountId }) => ({
     .where({
       'cozyMetadata.sourceAccount': accountId
     })
-    .sortBy([{ 'cozyMetadata.sourceAccount': 'asc' }, { startDate: 'asc' }])
+    .sortBy([{ 'cozyMetadata.sourceAccount': 'desc' }, { startDate: 'desc' }])
     .indexFields(['cozyMetadata.sourceAccount', 'startDate'])
     .limitBy(5),
   as: `io.cozy.accounts/${accountId}/io.cozy.timeseries.geojson`,
@@ -275,11 +276,18 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
       return transformTimeSeriesToTrips(timeseries)
     }
   }, [timeseries])
+  const ascendingTrips = useMemo(() => {
+    return sortBy(trips, t => t.properties.enter_fmt_time).reverse()
+  }, [trips])
   const noTimeseries =
     hasQueryBeenLoaded(timeseriesCol) && timeseries.length == 0
   const isLoading = isQueryLoading(timeseriesCol)
   return noTimeseries ? null : (
-    <GeoDataCard trips={trips} loading={isLoading} konnector={konnector} />
+    <GeoDataCard
+      trips={ascendingTrips}
+      loading={isLoading}
+      konnector={konnector}
+    />
   )
 }
 
