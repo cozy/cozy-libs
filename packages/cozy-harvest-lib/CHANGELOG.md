@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.10.1...cozy-harvest-lib@4.11.0) (2021-03-09)
+
+
+### Bug Fixes
+
+* Query timeseries in desc but display in asc ([f55b695](https://github.com/cozy/cozy-libs/commit/f55b695))
+
+
+### Features
+
+* Do not display 01 March but 1 March ([24854df](https://github.com/cozy/cozy-libs/commit/24854df))
+* Improve geo data card ([d49a502](https://github.com/cozy/cozy-libs/commit/d49a502))
+* Show current slide ([c281dd7](https://github.com/cozy/cozy-libs/commit/c281dd7))
+
+
+
+
+
 ## [4.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.10.0...cozy-harvest-lib@4.10.1) (2021-03-08)
 
 **Note:** Version bump only for package cozy-harvest-lib
