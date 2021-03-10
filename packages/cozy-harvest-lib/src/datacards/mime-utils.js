@@ -1,4 +1,3 @@
-import IconFolder from 'cozy-ui/transpiled/react/Icons/FileTypeFolder'
 import IconAudio from 'cozy-ui/transpiled/react/Icons/FileTypeAudio'
 import IconBin from 'cozy-ui/transpiled/react/Icons/FileTypeBin'
 import IconCode from 'cozy-ui/transpiled/react/Icons/FileTypeCode'
