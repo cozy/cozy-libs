@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 
 import 'leaflet/dist/leaflet.css'
@@ -7,13 +7,24 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 
 import palette from 'cozy-ui/transpiled/react/palette'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import Circle from 'cozy-ui/transpiled/react/Circle'
+import Portal from 'cozy-ui/transpiled/react/Portal'
+import Viewer from 'cozy-ui/transpiled/react/Viewer'
+import Overlay from 'cozy-ui/transpiled/react/Overlay'
+import Card from 'cozy-ui/transpiled/react/Card'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import CozyClient, {
   Q,
@@ -21,10 +32,6 @@ import CozyClient, {
   isQueryLoading,
   hasQueryBeenLoaded
 } from 'cozy-client'
-
-import Card from 'cozy-ui/transpiled/react/Card'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { getFileIcon } from './mime-utils'
 
@@ -39,8 +46,51 @@ const LoadingFileListItem = ({ divider }) => {
   )
 }
 
+const FileMenu = ({ file, anchorEl, onClose }) => {
+  return (
+    <Menu
+      id={`file-menu-${file._id}`}
+      anchorEl={anchorEl}
+      keepMounted
+      open={Boolean(anchorEl)}
+      onClose={onClose}
+    >
+      <MenuItem onClick={onClose}>Open in Drive</MenuItem>
+    </Menu>
+  )
+}
+
+const FileListItem = ({ divider, file, onClick }) => {
+  const [anchorEl, setAnchorEl] = React.useState(null)
+  const handleOpenMenu = event => {
+    setAnchorEl(event.currentTarget)
+  }
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  return (
+    <ListItem button key={file._id} divider={divider} onClick={onClick}>
+      <ListItemIcon>
+        <Icon icon={getFileIcon(file)} width="32" height="32" />
+      </ListItemIcon>
+      <ListItemText primary={file.name} />
+      <ListItemSecondaryAction>
+        <Typography color="textSecondary">
+          <IconButton onClick={handleOpenMenu} className="u-mr-1">
+            <Icon icon={DotsIcon} />
+          </IconButton>
+          <FileMenu anchorEl={anchorEl} file={file} onClose={handleClose} />
+        </Typography>
+      </ListItemSecondaryAction>
+    </ListItem>
+  )
+}
+
 const FileCard = ({ files, loading, konnector }) => {
   const { t } = useI18n()
+  const [viewerIndex, setViewerIndex] = useState(null)
+  const handleCloseViewer = () => setViewerIndex(null)
+  const handleFileChange = (file, newIndex) => setViewerIndex(newIndex)
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
       <div className="u-ph-1 u-mb-half">
@@ -73,15 +123,27 @@ const FileCard = ({ files, loading, konnector }) => {
           </>
         ) : (
           files.map((file, i) => (
-            <ListItem key={file._id} divider={i !== files.length - 1}>
-              <ListItemIcon>
-                <Icon icon={getFileIcon(file)} width="32" height="32" />
-              </ListItemIcon>
-              <ListItemText primary={file.name} />
-            </ListItem>
+            <FileListItem
+              key={i}
+              onClick={() => setViewerIndex(i)}
+              file={file}
+              divider={i !== files.length - 1}
+            />
           ))
         )}
       </List>
+      {viewerIndex !== null && (
+        <Portal into="body">
+          <Overlay style={{ zIndex: 10000 }}>
+            <Viewer
+              files={files}
+              currentIndex={viewerIndex}
+              onCloseRequest={handleCloseViewer}
+              onChangeRequest={handleFileChange}
+            />
+          </Overlay>
+        </Portal>
+      )}
     </Card>
   )
 }
