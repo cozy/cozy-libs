@@ -24,6 +24,8 @@ import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import { AppLinkButton } from '../components/cards/AppLinkCard'
+
 /*
 import IconButton from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
@@ -48,7 +50,7 @@ const LoadingFileListItem = ({ divider }) => {
       <ListItemIcon>
         <Skeleton variant="circle" />
       </ListItemIcon>
-      <ListItemText primary={<Skeleton height={20.5} />} />
+      <ListItemText primary={<Skeleton height={30.5} />} />
     </ListItem>
   )
 }
@@ -107,7 +109,7 @@ const FileListItem = ({ divider, file, onClick }) => {
   )
 }
 
-const FileCard = ({ files, loading, konnector }) => {
+const FileCard = ({ files, loading, konnector, trigger }) => {
   const { t } = useI18n()
   const [viewerIndex, setViewerIndex] = useState(null)
   const handleCloseViewer = () => setViewerIndex(null)
@@ -166,6 +168,12 @@ const FileCard = ({ files, loading, konnector }) => {
           </Overlay>
         </Portal>
       )}
+      <div className="u-ta-right u-mv-half u-mh-1">
+        <AppLinkButton
+          slug="drive"
+          path={`#/files/${get(trigger, 'message.folder_to_save')}`}
+        />
+      </div>
     </Card>
   )
 }
@@ -185,7 +193,7 @@ const makeQueryFromProps = ({ accountId }) => ({
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
 })
 
-const FileDataCard = ({ filesCol, konnector, accountId }) => {
+const FileDataCard = ({ filesCol, konnector, accountId, trigger }) => {
   const client = useClient()
   const { data: files, fetch } = filesCol
 
@@ -212,13 +220,19 @@ const FileDataCard = ({ filesCol, konnector, accountId }) => {
   const noFiles = hasQueryBeenLoaded(filesCol) && files.length == 0
   const isLoading = isQueryLoading(filesCol)
   return noFiles ? null : (
-    <FileCard files={files} loading={isLoading} konnector={konnector} />
+    <FileCard
+      files={files.slice(0, 5)}
+      loading={isLoading}
+      konnector={konnector}
+      trigger={trigger}
+    />
   )
 }
 
 FileDataCard.propTypes = {
   konnector: PropTypes.object.isRequired,
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string.isRequired,
+  trigger: PropTypes.object.isRequired
 }
 
 export default queryConnect({

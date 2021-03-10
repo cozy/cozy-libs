@@ -105,6 +105,7 @@ export const DataTab = ({
           <DataCard
             key={i}
             konnector={konnector}
+            trigger={trigger}
             accountId={trigger.message.account}
           />
         ))}
