@@ -48,7 +48,7 @@ const LoadingFileListItem = ({ divider }) => {
       <ListItemIcon>
         <Skeleton variant="circle" />
       </ListItemIcon>
-      <ListItemText primary={<Skeleton variant="avatar" />} />
+      <ListItemText primary={<Skeleton height={20.5} />} />
     </ListItem>
   )
 }
@@ -112,6 +112,7 @@ const FileCard = ({ files, loading, konnector }) => {
   const [viewerIndex, setViewerIndex] = useState(null)
   const handleCloseViewer = () => setViewerIndex(null)
   const handleFileChange = (file, newIndex) => setViewerIndex(newIndex)
+
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
       <div className="u-ph-1 u-mb-half">
