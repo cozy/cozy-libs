@@ -12,7 +12,6 @@ import SwipeableViews from 'react-swipeable-views'
 import sortBy from 'lodash/sortBy'
 import isSameDay from 'date-fns/is_same_day'
 import isSameYear from 'date-fns/is_same_year'
-import format from 'date-fns/format'
 
 import CozyClient, {
   Q,
