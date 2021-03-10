@@ -183,11 +183,11 @@ const makeQueryFromProps = ({ accountId }) => ({
     .where({
       'cozyMetadata.sourceAccount': accountId
     })
+    .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
     .sortBy([
       { 'cozyMetadata.sourceAccount': 'desc' },
       { 'cozyMetadata.createdAt': 'desc' }
     ])
-    .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
     .limitBy(5),
   as: `io.cozy.accounts/${accountId}/io.cozy.files`,
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
