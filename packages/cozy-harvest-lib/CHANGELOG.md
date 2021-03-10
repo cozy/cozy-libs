@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.12.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.12.0...cozy-harvest-lib@4.12.1) (2021-03-10)
+
+
+### Bug Fixes
+
+* Trip date was not correctly localized ([0368aa9](https://github.com/cozy/cozy-libs/commit/0368aa9))
+
+
+
+
+
 # [4.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.11.0...cozy-harvest-lib@4.12.0) (2021-03-10)
 
 
