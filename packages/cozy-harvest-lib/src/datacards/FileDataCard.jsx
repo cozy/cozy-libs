@@ -7,11 +7,7 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import IconButton from '@material-ui/core/IconButton'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
@@ -22,9 +18,16 @@ import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
+/*
+import IconButton from '@material-ui/core/IconButton'
+import Menu from '@material-ui/core/Menu'
+import MenuItem from '@material-ui/core/MenuItem'
+import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
+import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
+*/
 
 import CozyClient, {
   Q,
@@ -46,6 +49,7 @@ const LoadingFileListItem = ({ divider }) => {
   )
 }
 
+/*
 const FileMenu = ({ file, anchorEl, onClose }) => {
   return (
     <Menu
@@ -59,8 +63,10 @@ const FileMenu = ({ file, anchorEl, onClose }) => {
     </Menu>
   )
 }
+*/
 
 const FileListItem = ({ divider, file, onClick }) => {
+  /* @TODO TO uncomment when link to drive is done
   const [anchorEl, setAnchorEl] = React.useState(null)
   const handleOpenMenu = event => {
     setAnchorEl(event.currentTarget)
@@ -68,6 +74,7 @@ const FileListItem = ({ divider, file, onClick }) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  */
   return (
     <ListItem button key={file._id} divider={divider} onClick={onClick}>
       <ListItemIcon>
@@ -75,13 +82,14 @@ const FileListItem = ({ divider, file, onClick }) => {
       </ListItemIcon>
       <ListItemText primary={file.name} />
       <ListItemSecondaryAction>
+      {/* <ListItemSecondaryAction>
         <Typography color="textSecondary">
           <IconButton onClick={handleOpenMenu} className="u-mr-1">
             <Icon icon={DotsIcon} />
           </IconButton>
           <FileMenu anchorEl={anchorEl} file={file} onClose={handleClose} />
         </Typography>
-      </ListItemSecondaryAction>
+      </ListItemSecondaryAction>*/}
     </ListItem>
   )
 }
