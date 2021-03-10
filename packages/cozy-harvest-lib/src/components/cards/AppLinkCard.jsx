@@ -14,7 +14,7 @@ import palette from 'cozy-ui/transpiled/react/palette'
 import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-const AppLinkCard = ({ slug, path, icon, iconColor }) => {
+export const AppLinkButton = ({ slug, path }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const client = useClient()
@@ -24,6 +24,37 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
     client,
     path
   )
+  return (
+    <AppLinker slug={slug} nativePath={path} href={url || '#'}>
+      {({ onClick, href }) => (
+        <ButtonLink
+          onClick={fetchStatus !== 'loaded' ? onClick : null}
+          href={href}
+          icon={
+            isInstalled ? (
+              <AppIcon
+                app={slug}
+                domain={cozyURL.host}
+                secure={cozyURL.protocol === 'https:'}
+                className="u-w-1 u-h-1 u-mr-half"
+              />
+            ) : (
+              'openwith'
+            )
+          }
+          theme="secondary"
+          label={t(
+            `card.appLink.${slug}.${isInstalled ? 'button' : 'install'}`
+          )}
+          className={isMobile ? 'u-w-100' : null}
+        />
+      )}
+    </AppLinker>
+  )
+}
+
+const AppLinkCard = ({ slug, path, icon, iconColor }) => {
+  const { t } = useI18n()
 
   return (
     <Card>
@@ -41,31 +72,7 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
         <Typography variant="body1">
           {t(`card.appLink.${slug}.description`)}
         </Typography>
-        <AppLinker slug={slug} nativePath={path} href={url || '#'}>
-          {({ onClick, href }) => (
-            <ButtonLink
-              onClick={fetchStatus !== 'loaded' ? onClick : null}
-              href={href}
-              icon={
-                isInstalled ? (
-                  <AppIcon
-                    app={slug}
-                    domain={cozyURL.host}
-                    secure={cozyURL.protocol === 'https:'}
-                    className="u-w-1 u-h-1 u-mr-half"
-                  />
-                ) : (
-                  'openwith'
-                )
-              }
-              theme="secondary"
-              label={t(
-                `card.appLink.${slug}.${isInstalled ? 'button' : 'install'}`
-              )}
-              className={isMobile ? 'u-w-100' : null}
-            />
-          )}
-        </AppLinker>
+        <AppLinkButton path={path} slug={slug} />
       </Stack>
     </Card>
   )
