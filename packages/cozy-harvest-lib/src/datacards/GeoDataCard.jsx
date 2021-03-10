@@ -31,6 +31,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Stack from 'cozy-ui/transpiled/react/Stack'
 
 import useCycle from './useCycle'
 import {
@@ -110,20 +111,22 @@ const formatDistance = (t, argDistance) => {
     unit = 'km'
     distance = distance / 1000
   }
-  return `${Math.round(distance)}${unit}`
+  return `${Math.round(distance)} ${unit}`
 }
 
 const MiddleDot = () => {
   return <span className="u-mh-half">·</span>
 }
 
+const infoIconStyle = { marginRight: '0.3125rem' }
+
 const TripInfoSlideRaw = ({ trip, loading }) => {
   const { t } = useI18n()
   const duration = useMemo(() => trip && getFormattedDuration(trip), [trip])
   const modes = useMemo(() => trip && getModes(trip), [trip])
   return (
-    <div>
-      <Media className="u-mb-half">
+    <Stack spacing="xs">
+      <Media>
         <Img>
           <Icon icon={FlagIcon} color="var(--emerald)" className="u-mr-half" />
         </Img>
@@ -137,7 +140,7 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
           )}
         </Bd>
       </Media>
-      <Media className="u-mb-half">
+      <Media>
         <Img>
           <Icon
             icon={FlagIcon}
@@ -155,17 +158,20 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
           )}
         </Bd>
       </Media>
-      {loading ? null : (
-        <Typography variant="caption">
-          <Icon icon={ClockIcon} size={10} /> {duration}
-          <MiddleDot />
-          <Icon icon={CompassIcon} size={10} />{' '}
-          {formatDistance(t, trip.properties.distance)}
-          <MiddleDot />
-          {modes.map(m => t(`datacards.trips.modes.${m}`)).join(', ')}
-        </Typography>
-      )}
-    </div>
+      <div>
+        {loading ? null : (
+          <Typography variant="body2" color="textSecondary">
+            <Icon style={infoIconStyle} icon={ClockIcon} size={10} />
+            {duration}
+            <MiddleDot />
+            <Icon style={infoIconStyle} icon={CompassIcon} size={10} />
+            {formatDistance(t, trip.properties.distance)}
+            <MiddleDot />
+            {modes.map(m => t(`datacards.trips.modes.${m}`)).join(', ')}
+          </Typography>
+        )}
+      </div>
+    </Stack>
   )
 }
 
