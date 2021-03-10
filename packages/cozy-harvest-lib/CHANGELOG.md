@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.11.0...cozy-harvest-lib@4.12.0) (2021-03-10)
+
+
+### Features
+
+* Spacing and font size for geo data card ([c07889e](https://github.com/cozy/cozy-libs/commit/c07889e))
+
+
+
+
+
 # [4.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.10.1...cozy-harvest-lib@4.11.0) (2021-03-09)
 
 
