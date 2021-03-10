@@ -175,7 +175,7 @@ const TripInfoSlideRaw = ({ trip, loading }) => {
   )
 }
 
-const getSwiperTitle = trip => {
+const getSwiperTitle = (trip, format) => {
   const now = new Date()
   const startDate = new Date(trip.properties.start_fmt_time)
   const endDate = new Date(trip.properties.end_fmt_time)
@@ -194,7 +194,8 @@ const getSwiperTitle = trip => {
 }
 
 const TripSwiperTitle = ({ trip }) => {
-  const message = useMemo(() => trip && getSwiperTitle(trip), [trip])
+  const { f } = useI18n()
+  const message = useMemo(() => trip && getSwiperTitle(trip, f), [f, trip])
   return <Typography variant="subtitle1">{message}</Typography>
 }
 
