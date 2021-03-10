@@ -502,6 +502,7 @@
     },
     "files": {
       "title": "Vos documents",
+      "imported": "Importé le %{date}",
       "caption": "Ce service récupère vos derniers documents et garde une sauvegarde complète pour vous."
     }
   }

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 
 import 'leaflet/dist/leaflet.css'
 
@@ -75,13 +76,22 @@ const FileListItem = ({ divider, file, onClick }) => {
     setAnchorEl(null)
   }
   */
+  const { t, f } = useI18n()
   return (
     <ListItem button key={file._id} divider={divider} onClick={onClick}>
       <ListItemIcon>
         <Icon icon={getFileIcon(file)} width="32" height="32" />
       </ListItemIcon>
-      <ListItemText primary={file.name} />
-      <ListItemSecondaryAction>
+      <ListItemText
+        primary={file.name}
+        secondary={
+          <Typography variant="caption">
+            {t('datacards.files.imported', {
+              date: f(get(file, 'cozyMetadata.createdAt'), 'DD/MM/YYYY')
+            })}
+          </Typography>
+        }
+      />
       {/* <ListItemSecondaryAction>
         <Typography color="textSecondary">
           <IconButton onClick={handleOpenMenu} className="u-mr-1">
