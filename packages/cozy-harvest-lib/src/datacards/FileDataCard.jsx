@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import throttle from 'lodash/throttle'
 
+import { useRealtime } from 'cozy-realtime'
 import 'leaflet/dist/leaflet.css'
 
 import Skeleton from '@material-ui/lab/Skeleton'
@@ -32,6 +34,7 @@ import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 
 import CozyClient, {
   Q,
+  useClient,
   queryConnect,
   isQueryLoading,
   hasQueryBeenLoaded
@@ -181,8 +184,30 @@ const makeQueryFromProps = ({ accountId }) => ({
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
 })
 
-const FileDataCard = ({ filesCol, konnector }) => {
-  const { data: files } = filesCol
+const FileDataCard = ({ filesCol, konnector, accountId }) => {
+  const client = useClient()
+  const { data: files, fetch } = filesCol
+
+  const debouncedFetch = useMemo(() => throttle(fetch, 300), [fetch])
+  const onFileCreation = useCallback(
+    file => {
+      if (get(file, 'cozyMetadata.sourceAccount') === accountId) {
+        debouncedFetch()
+      }
+    },
+    [accountId, debouncedFetch]
+  )
+  useRealtime(
+    client,
+    {
+      'io.cozy.files': {
+        created: onFileCreation,
+        updated: onFileCreation
+      }
+    },
+    [onFileCreation]
+  )
+
   const noFiles = hasQueryBeenLoaded(filesCol) && files.length == 0
   const isLoading = isQueryLoading(filesCol)
   return noFiles ? null : (
