@@ -26,14 +26,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { AppLinkButton } from '../components/cards/AppLinkCard'
 
-/*
-import IconButton from '@material-ui/core/IconButton'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import ListItemSecondaryAction from '@material-ui/core/ListItemSecondaryAction'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-*/
-
 import CozyClient, {
   Q,
   useClient,
@@ -55,32 +47,7 @@ const LoadingFileListItem = ({ divider }) => {
   )
 }
 
-/*
-const FileMenu = ({ file, anchorEl, onClose }) => {
-  return (
-    <Menu
-      id={`file-menu-${file._id}`}
-      anchorEl={anchorEl}
-      keepMounted
-      open={Boolean(anchorEl)}
-      onClose={onClose}
-    >
-      <MenuItem onClick={onClose}>Open in Drive</MenuItem>
-    </Menu>
-  )
-}
-*/
-
 const FileListItem = ({ divider, file, onClick }) => {
-  /* @TODO TO uncomment when link to drive is done
-  const [anchorEl, setAnchorEl] = React.useState(null)
-  const handleOpenMenu = event => {
-    setAnchorEl(event.currentTarget)
-  }
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
-  */
   const { t, f } = useI18n()
   return (
     <ListItem button key={file._id} divider={divider} onClick={onClick}>
@@ -97,14 +64,6 @@ const FileListItem = ({ divider, file, onClick }) => {
           </Typography>
         }
       />
-      {/* <ListItemSecondaryAction>
-        <Typography color="textSecondary">
-          <IconButton onClick={handleOpenMenu} className="u-mr-1">
-            <Icon icon={DotsIcon} />
-          </IconButton>
-          <FileMenu anchorEl={anchorEl} file={file} onClose={handleClose} />
-        </Typography>
-      </ListItemSecondaryAction>*/}
     </ListItem>
   )
 }
