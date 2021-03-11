@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import throttle from 'lodash/throttle'
 
-import { useRealtime } from 'cozy-realtime'
 import 'leaflet/dist/leaflet.css'
 
 import Skeleton from '@material-ui/lab/Skeleton'
@@ -25,6 +24,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { AppLinkButton } from '../components/cards/AppLinkCard'
+import RefetchQueryRealtime from './RefetchQueryRealtime'
 
 import CozyClient, {
   Q,
@@ -154,38 +154,30 @@ const makeQueryFromProps = ({ accountId }) => ({
 })
 
 const FileDataCard = ({ filesCol, konnector, accountId, trigger }) => {
-  const client = useClient()
   const { data: files, fetch } = filesCol
-
-  const debouncedFetch = useMemo(() => throttle(fetch, 300), [fetch])
-  const onFileCreation = useCallback(
-    file => {
-      if (get(file, 'cozyMetadata.sourceAccount') === accountId) {
-        debouncedFetch()
-      }
-    },
-    [accountId, debouncedFetch]
-  )
-  useRealtime(
-    client,
-    {
-      'io.cozy.files': {
-        created: onFileCreation,
-        updated: onFileCreation
-      }
-    },
-    [onFileCreation]
-  )
 
   const noFiles = hasQueryBeenLoaded(filesCol) && files.length == 0
   const isLoading = isQueryLoading(filesCol)
-  return noFiles ? null : (
-    <FileCard
-      files={files.slice(0, 5)}
-      loading={isLoading}
-      konnector={konnector}
-      trigger={trigger}
-    />
+  const refetchFilter = useCallback(
+    file => get(file, 'cozyMetadata.sourceAccount') === accountId,
+    [accountId]
+  )
+  return (
+    <>
+      <RefetchQueryRealtime
+        doctype="io.cozy.files"
+        filter={refetchFilter}
+        queryResult={filesCol}
+      />
+      {noFiles ? null : (
+        <FileCard
+          files={files.slice(0, 5)}
+          loading={isLoading}
+          konnector={konnector}
+          trigger={trigger}
+        />
+      )}
+    </>
   )
 }
 
