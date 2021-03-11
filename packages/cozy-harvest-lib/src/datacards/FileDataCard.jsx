@@ -148,7 +148,7 @@ const makeQueryFromProps = ({ accountId }) => ({
       { 'cozyMetadata.createdAt': 'desc' }
     ])
     .limitBy(5),
-  as: `io.cozy.accounts/${accountId}/io.cozy.files`,
+  as: `fileDataCard_io.cozy.accounts/${accountId}/io.cozy.files`,
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
 })
 
