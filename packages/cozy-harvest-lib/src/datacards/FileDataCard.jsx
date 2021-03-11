@@ -1,7 +1,6 @@
-import React, { useState, useCallback, useMemo } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import throttle from 'lodash/throttle'
 
 import 'leaflet/dist/leaflet.css'
 
@@ -24,14 +23,13 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { AppLinkButton } from '../components/cards/AppLinkCard'
-import RefetchQueryRealtime from './RefetchQueryRealtime'
 
 import CozyClient, {
   Q,
-  useClient,
   queryConnect,
   isQueryLoading,
-  hasQueryBeenLoaded
+  hasQueryBeenLoaded,
+  RealTimeQueries
 } from 'cozy-client'
 
 import { getFileIcon } from './mime-utils'
@@ -153,22 +151,14 @@ const makeQueryFromProps = ({ accountId }) => ({
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
 })
 
-const FileDataCard = ({ filesCol, konnector, accountId, trigger }) => {
-  const { data: files, fetch } = filesCol
+const FileDataCard = ({ filesCol, konnector, trigger }) => {
+  const { data: files } = filesCol
 
   const noFiles = hasQueryBeenLoaded(filesCol) && files.length == 0
   const isLoading = isQueryLoading(filesCol)
-  const refetchFilter = useCallback(
-    file => get(file, 'cozyMetadata.sourceAccount') === accountId,
-    [accountId]
-  )
   return (
     <>
-      <RefetchQueryRealtime
-        doctype="io.cozy.files"
-        filter={refetchFilter}
-        queryResult={filesCol}
-      />
+      <RealTimeQueries doctype="io.cozy.files" />
       {noFiles ? null : (
         <FileCard
           files={files.slice(0, 5)}
