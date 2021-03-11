@@ -140,7 +140,8 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
 const makeQueryFromProps = ({ accountId }) => ({
   query: Q('io.cozy.files')
     .where({
-      'cozyMetadata.sourceAccount': accountId
+      'cozyMetadata.sourceAccount': accountId,
+      trashed: false
     })
     .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
     .sortBy([
