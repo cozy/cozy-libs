@@ -1,3 +1,7 @@
+/**
+ * @TODO Remove when https://github.com/cozy/cozy-ui/issues/1768 has been solved
+ */
+
 import IconAudio from 'cozy-ui/transpiled/react/Icons/FileTypeAudio'
 import IconBin from 'cozy-ui/transpiled/react/Icons/FileTypeBin'
 import IconCode from 'cozy-ui/transpiled/react/Icons/FileTypeCode'
