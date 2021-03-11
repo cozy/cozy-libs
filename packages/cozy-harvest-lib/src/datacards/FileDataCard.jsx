@@ -22,7 +22,8 @@ import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { AppLinkButton } from '../components/cards/AppLinkCard'
+import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
+import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 
 import CozyClient, {
   Q,
@@ -159,7 +160,9 @@ const FileDataCard = ({ filesCol, konnector, trigger }) => {
   return (
     <>
       <RealTimeQueries doctype="io.cozy.files" />
-      {noFiles ? null : (
+      {noFiles ? (
+        <AppLinkCard {...appLinksProps.drive({ trigger })} />
+      ) : (
         <FileCard
           files={files.slice(0, 5)}
           loading={isLoading}
