@@ -149,7 +149,7 @@ const makeQueryFromProps = ({ accountId }) => ({
     ])
     .limitBy(5),
   as: `io.cozy.accounts/${accountId}/io.cozy.files`,
-  fetchPolicy: CozyClient.fetchPolicies.olderThan(30 & 1000)
+  fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
 })
 
 const FileDataCard = ({ filesCol, konnector, accountId, trigger }) => {
