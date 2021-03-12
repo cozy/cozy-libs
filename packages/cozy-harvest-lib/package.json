@@ -80,7 +80,7 @@
     "cozy-device-helper": ">=1.10.2",
     "cozy-flags": ">=2.3.5",
     "cozy-keys-lib": ">=3.7.0",
-    "cozy-realtime": ">=3.10.5",
+    "cozy-realtime": ">=3.12.2",
     "cozy-ui": ">=40.9.1",
     "leaflet": "^1.7.1",
     "react-router-dom": "^5.0.1"

@@ -8,7 +8,15 @@
  */
 
 import GeoDataCard from './GeoDataCard'
+import FileDataCard from './FileDataCard'
+import flag from 'cozy-flags'
 
-export default {
+const doctypeToDataCard = {
   'io.cozy.timeseries.geojson': GeoDataCard
 }
+
+if (flag('harvest.datacards.files')) {
+  doctypeToDataCard['io.cozy.files'] = FileDataCard
+}
+
+export default doctypeToDataCard
