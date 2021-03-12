@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.13.0 (2021-03-12)
+
+
+### Bug Fixes
+
+* Divider import in SharingDetailsModal ([f349b54](https://github.com/cozy/cozy-libs/commit/f349b54))
+* Do not call useEffect conditionally ([0984f53](https://github.com/cozy/cozy-libs/commit/0984f53))
+* Typo in package.json s/main/browser ([03d5360](https://github.com/cozy/cozy-libs/commit/03d5360))
+
+
+### Features
+
+* Move useRealtime from cozy-ui to cozy-realtime ([229e8f5](https://github.com/cozy/cozy-libs/commit/229e8f5))
+
+
+
+
+
 ## [3.12.2](https://github.com/cozy/cozy-libs/compare/cozy-realtime@3.12.1...cozy-realtime@3.12.2) (2021-02-12)
 
 **Note:** Version bump only for package cozy-realtime

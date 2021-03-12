@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.12.1...cozy-harvest-lib@4.13.0) (2021-03-12)
+
+
+### Bug Fixes
+
+* Index fields before sort not to have any warning ([2a3d603](https://github.com/cozy/cozy-libs/commit/2a3d603))
+* Prefix by component name: risk of conflicting queries is removed ([0df2605](https://github.com/cozy/cozy-libs/commit/0df2605))
+* Remove unused icon ([73dfbda](https://github.com/cozy/cozy-libs/commit/73dfbda))
+* Typo ([3c0c5b4](https://github.com/cozy/cozy-libs/commit/3c0c5b4))
+
+
+### Features
+
+* Add first UI for file data card ([4b07f49](https://github.com/cozy/cozy-libs/commit/4b07f49))
+* Add flag to activate files datacard ([4f284f5](https://github.com/cozy/cozy-libs/commit/4f284f5))
+* Add imported on caption for file data card ([acb1dbf](https://github.com/cozy/cozy-libs/commit/acb1dbf))
+* Add link to folder ([4c7080d](https://github.com/cozy/cozy-libs/commit/4c7080d))
+* Add realtime on files data card ([6697112](https://github.com/cozy/cozy-libs/commit/6697112))
+* Add trashed false to file queries ([bf5b2e9](https://github.com/cozy/cozy-libs/commit/bf5b2e9))
+* Add viewer to FileDataCard ([95f02b1](https://github.com/cozy/cozy-libs/commit/95f02b1))
+* Comment out file menu functionality in file data card ([6bb2923](https://github.com/cozy/cozy-libs/commit/6bb2923))
+* Use drive link card if there are no files ([dbbe237](https://github.com/cozy/cozy-libs/commit/dbbe237))
+
+
+
+
+
 ## [4.12.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.12.0...cozy-harvest-lib@4.12.1) (2021-03-10)
 
 
