@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import keyBy from 'lodash/keyBy'
 
 import 'leaflet/dist/leaflet.css'
 
@@ -9,6 +10,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import ListItemText from '@material-ui/core/ListItemText'
+import Slide from '@material-ui/core/Slide'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
@@ -46,10 +48,16 @@ const LoadingFileListItem = ({ divider }) => {
   )
 }
 
-const FileListItem = ({ divider, file, onClick }) => {
+const FileListItem = ({ divider, file, onClick, style }) => {
   const { t, f } = useI18n()
   return (
-    <ListItem button key={file._id} divider={divider} onClick={onClick}>
+    <ListItem
+      style={style}
+      button
+      key={file._id}
+      divider={divider}
+      onClick={onClick}
+    >
       <ListItemIcon>
         <Icon icon={getFileIcon(file)} width="32" height="32" />
       </ListItemIcon>
@@ -67,8 +75,22 @@ const FileListItem = ({ divider, file, onClick }) => {
   )
 }
 
+const TransitionWrapper = ({ children }) => {
+  return (
+    <Slide direction="left" in={true}>
+      <div>{children}</div>
+    </Slide>
+  )
+}
+
 const FileCard = ({ files, loading, konnector, trigger }) => {
   const { t } = useI18n()
+
+  // Remember files that were there initially so that we do not
+  // animate their ListItem.
+  // Only files coming from realtime and that are added to files
+  // while the component is mounted will be animated.
+  const [initialFilesById] = useState(() => keyBy(files, x => x._id))
   const [viewerIndex, setViewerIndex] = useState(null)
   const handleCloseViewer = () => setViewerIndex(null)
   const handleFileChange = (file, newIndex) => setViewerIndex(newIndex)
@@ -104,14 +126,21 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
             <LoadingFileListItem />
           </>
         ) : (
-          files.map((file, i) => (
-            <FileListItem
-              key={i}
-              onClick={() => setViewerIndex(i)}
-              file={file}
-              divider={i !== files.length - 1}
-            />
-          ))
+          files.map((file, i) => {
+            const shouldAnimate = !initialFilesById[file._id]
+            const ItemWrapper = shouldAnimate
+              ? TransitionWrapper
+              : React.Fragment
+            return (
+              <ItemWrapper key={file._id}>
+                <FileListItem
+                  onClick={() => setViewerIndex(i)}
+                  file={file}
+                  divider={i !== files.length - 1}
+                />
+              </ItemWrapper>
+            )
+          })
         )}
       </List>
       {viewerIndex !== null && (
