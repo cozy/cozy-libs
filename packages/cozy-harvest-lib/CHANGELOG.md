@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.13.0...cozy-harvest-lib@4.14.0) (2021-03-15)
+
+
+### Features
+
+* Animate file list item when it is received via realtime ([336f45b](https://github.com/cozy/cozy-libs/commit/336f45b))
+
+
+
+
+
 # [4.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.12.1...cozy-harvest-lib@4.13.0) (2021-03-12)
 
 
