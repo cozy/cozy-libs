@@ -9,7 +9,12 @@ import styles from './autosuggest.styl'
 import BoldCross from '../../assets/icons/icon-cross-bold.svg'
 
 import { getDisplayName, Contact } from '../models'
-import { cozyUrlMatch, emailMatch, groupNameMatch } from '../suggestionMatchers'
+import {
+  cozyUrlMatch,
+  emailMatch,
+  groupNameMatch,
+  fullnameMatch
+} from '../suggestionMatchers'
 import ContactSuggestion from './ContactSuggestion'
 import { extractEmails, validateEmail } from '../helpers/email'
 
@@ -30,12 +35,15 @@ export default class ShareAutocomplete extends Component {
   }
 
   computeSuggestions(value) {
+    const { contactsAndGroups } = this.props
     const inputValue = value.trim().toLowerCase()
+
     return inputValue.length === 0
       ? []
-      : this.props.contactsAndGroups.filter(
+      : contactsAndGroups.filter(
           contactOrGroup =>
             groupNameMatch(inputValue, contactOrGroup) ||
+            fullnameMatch(inputValue, contactOrGroup) ||
             emailMatch(inputValue, contactOrGroup) ||
             cozyUrlMatch(inputValue, contactOrGroup)
         )

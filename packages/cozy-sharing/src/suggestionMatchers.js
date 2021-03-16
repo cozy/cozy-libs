@@ -26,4 +26,10 @@ const groupNameMatch = (input, contactOrGroup) => {
   return nameInput.test(contactOrGroup.name)
 }
 
-export { emailMatch, cozyUrlMatch, groupNameMatch }
+const fullnameMatch = (input, contact) => {
+  if (!contact.fullname) return false
+  const fullnameInput = new RegExp(input, 'i')
+  return fullnameInput.test(contact.fullname)
+}
+
+export { emailMatch, cozyUrlMatch, groupNameMatch, fullnameMatch }
