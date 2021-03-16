@@ -94,4 +94,27 @@ describe('Suggestion matchers', () => {
       expect(result).toBe(false)
     })
   })
+
+  describe('fullnameMatch', () => {
+    it('should return false if no fullname or no match', () => {
+      const contact = {}
+      const result = matchers.fullnameMatch('jo', contact)
+      expect(result).toBeFalsy()
+
+      expect(
+        matchers.fullnameMatch('Matt', {
+          fullname: 'Jon'
+        })
+      ).toBeFalsy()
+    })
+
+    it('should return true if fullname matches', () => {
+      const contact = {
+        fullname: 'Jon Margaret Snow'
+      }
+      expect(matchers.fullnameMatch('jo', contact)).toBeTruthy()
+      expect(matchers.fullnameMatch('snow', contact)).toBeTruthy()
+      expect(matchers.fullnameMatch('MARG', contact)).toBeTruthy()
+    })
+  })
 })
