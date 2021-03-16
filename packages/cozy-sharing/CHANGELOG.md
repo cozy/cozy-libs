@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.1.0...cozy-sharing@3.2.0) (2021-03-16)
+
+
+### Features
+
+* ShareAutosuggest can now handle with contact givenName ([75b4192](https://github.com/cozy/cozy-libs/commit/75b4192))
+
+
+
+
+
 # [3.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.0.0...cozy-sharing@3.1.0) (2021-03-04)
 
 
