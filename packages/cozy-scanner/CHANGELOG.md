@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@1.0.0...cozy-scanner@1.1.0) (2021-03-17)
+
+
+### Features
+
+* Migrating to Typography component ([62bacb4](https://github.com/cozy/cozy-libs/commit/62bacb4))
+
+
+
+
+
 # [1.0.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@0.12.1...cozy-scanner@1.0.0) (2021-03-04)
 
 

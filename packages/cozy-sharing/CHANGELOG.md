@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.3.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.2.0...cozy-sharing@3.3.0) (2021-03-17)
+
+
+### Bug Fixes
+
+* Changing of pomegranate to error ([24c72f4](https://github.com/cozy/cozy-libs/commit/24c72f4))
+* Error path import ([7f0071f](https://github.com/cozy/cozy-libs/commit/7f0071f))
+
+
+### Features
+
+* Migrating to Typography component ([25a8ef7](https://github.com/cozy/cozy-libs/commit/25a8ef7))
+
+
+
+
+
 # [3.2.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.1.0...cozy-sharing@3.2.0) (2021-03-16)
 
 
