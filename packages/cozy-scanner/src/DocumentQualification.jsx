@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import { Title } from 'cozy-ui/transpiled/react/Text'
 import Label from 'cozy-ui/transpiled/react/Label'
 import Input from 'cozy-ui/transpiled/react/Input'
 import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
@@ -19,6 +18,8 @@ import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './stylesheet.css'
 
 import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const fileExtension = '.jpg'
 const idFileInput = 'filename_input'
@@ -144,14 +145,15 @@ export class DocumentQualification extends Component {
         {title && (
           <div className="u-flex u-flex-items-center u-mt-1-half">
             <Icon icon={QualifyIcon} />
-            <Title
+            <Typography
               className={classNames(
                 styles['grid-item-title'],
                 'u-pl-half u-mb-1'
               )}
+              variant="h4"
             >
               {title}
-            </Title>
+            </Typography>
           </div>
         )}
         <Grid container spacing={8}>
