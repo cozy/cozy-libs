@@ -9,7 +9,6 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
-import { Text, Caption } from 'cozy-ui/transpiled/react/Text'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import RenameIcon from 'cozy-ui/transpiled/react/Icons/Rename'
@@ -25,6 +24,8 @@ import { getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
@@ -238,18 +239,18 @@ export const Permissions = ({
               <hr />
               <ActionMenuItem
                 onClick={onRevokeClick}
-                left={<Icon icon={TrashIcon} color="var(--pomegranate)" />}
+                left={<Icon icon={TrashIcon} color="var(--errorColor)" />}
               >
-                <Text className="u-pomegranate">
+                <Typography className="u-error" variant="body1">
                   {isOwner
                     ? t(`${documentType}.share.revoke.title`)
                     : t(`${documentType}.share.revokeSelf.title`)}
-                </Text>
-                <Caption>
+                </Typography>
+                <Typography variant="caption" color="textSecondary">
                   {isOwner
                     ? t(`${documentType}.share.revoke.desc`)
                     : t(`${documentType}.share.revokeSelf.desc`)}
-                </Caption>
+                </Typography>
               </ActionMenuItem>
             </ActionMenu>
           )}
@@ -286,7 +287,9 @@ const Status = ({ status, isMe, instance }) => {
         <Icon icon={icon} size={10} />
       </Img>
       <Bd>
-        <Caption>{text}</Caption>
+        <Typography variant="caption" color="textSecondary">
+          {text}
+        </Typography>
       </Bd>
     </Media>
   )
@@ -306,9 +309,9 @@ const Recipient = props => {
       dense
       className={cx(styles['recipient'], 'u-ph-0')}
       primaryText={
-        <Text className="u-ellipsis">
+        <Typography className="u-ellipsis" variant="body1">
           {isMe ? t('Share.recipients.you') : name}
-        </Text>
+        </Typography>
       }
       secondaryText={<Status status={status} isMe={isMe} instance={instance} />}
       image={<RecipientAvatar recipient={props} />}

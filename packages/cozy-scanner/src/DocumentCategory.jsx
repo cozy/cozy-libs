@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
 
-import { Bold } from 'cozy-ui/transpiled/react/Text'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
@@ -16,6 +15,8 @@ import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import CategoryGridItem from './CategoryGridItem'
 
 import styles from './stylesheet.css'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  *
@@ -89,9 +90,9 @@ class DocumentCategory extends Component {
                   />
                 </Img>
                 <Bd className={'u-ml-1'}>
-                  <Bold tag="span" ellipsis>
+                  <Typography tag="span" ellipsis variant="h6">
                     {t(`Scan.themes.${category.label}`)}
-                  </Bold>
+                  </Typography>
                 </Bd>
               </Media>
             </ActionMenuHeader>
