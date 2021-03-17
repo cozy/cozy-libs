@@ -3,8 +3,7 @@ import PropTypes from 'prop-types'
 import copy from 'copy-text-to-clipboard'
 import { models } from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import Text, { Caption } from 'cozy-ui/transpiled/react/Text'
-import Button from 'cozy-ui/transpiled/react/Button'
+import Button from 'c`ozy-ui/transpiled/react/Button'
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
 import Circle from 'cozy-ui/transpiled/react/Circle'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -20,6 +19,8 @@ import palette from 'cozy-ui/transpiled/react/palette'
 
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const permissionModel = models.permission
 
@@ -119,7 +120,9 @@ class ShareByLink extends React.Component {
     return (
       <div className="u-w-100">
         <div className="u-flex u-flex-row u-flex-justify-between u-flex-items-center">
-          <Text>{t(`${documentType}.share.shareByLink.subtitle`)}</Text>
+          <Typography variant="body1">
+            {t(`${documentType}.share.shareByLink.subtitle`)}
+          </Typography>
           {!checked && (
             <Button
               theme="text"
@@ -137,17 +140,22 @@ class ShareByLink extends React.Component {
           <CompositeRow
             className={'u-ph-0'}
             primaryText={
-              <Text onClick={this.copyLinkToClipboard} className="u-c-pointer">
+              <Typography
+                onClick={this.copyLinkToClipboard}
+                className="u-c-pointer"
+                variant="body1"
+              >
                 {t(`${documentType}.share.shareByLink.activated`)}
-              </Text>
+              </Typography>
             }
             secondaryText={
-              <Text
+              <Typography
                 className="u-primaryColor u-fz-tiny u-c-pointer"
                 onClick={this.copyLinkToClipboard}
+                variant="body1"
               >
                 {t(`${documentType}.share.shareByLink.copy`)}
-              </Text>
+              </Typography>
             }
             image={
               <Circle backgroundColor="var(--silver)">
@@ -157,13 +165,13 @@ class ShareByLink extends React.Component {
             right={
               <div ref={this.containerRef}>
                 <DropdownButton onClick={this.toggleMenu}>
-                  <Text>
+                  <Typography variant="body1">
                     {t(
                       `${documentType}.share.shareByLink.${
                         hasReadOnlyPermissions ? 'ro' : 'rw'
                       }`
                     )}
-                  </Text>
+                  </Typography>
                 </DropdownButton>
                 {menuIsOpen && (
                   <ActionMenu
@@ -192,9 +200,13 @@ class ShareByLink extends React.Component {
                     >
                       <>
                         {t(`${documentType}.share.shareByLink.ro`)}
-                        <Caption className="u-mt-half">
+                        <Typography
+                          className="u-mt-half"
+                          variant="caption"
+                          color="textSecondary"
+                        >
                           {t(`${documentType}.share.shareByLink.desc.ro`)}
-                        </Caption>
+                        </Typography>
                       </>
                     </ActionMenuItem>
                     <ActionMenuItem
@@ -214,9 +226,13 @@ class ShareByLink extends React.Component {
                     >
                       <>
                         {t(`${documentType}.share.shareByLink.rw`)}
-                        <Caption className="u-mt-half">
+                        <Typography
+                          className="u-mt-half"
+                          variant="caption"
+                          color="textSecondary"
+                        >
                           {t(`${documentType}.share.shareByLink.desc.rw`)}
-                        </Caption>
+                        </Typography>
                       </>
                     </ActionMenuItem>
                     <hr />
@@ -229,9 +245,9 @@ class ShareByLink extends React.Component {
                         this.deleteShareLink()
                       }}
                     >
-                      <Text className="u-pomegranate">
+                      <Typography className="u-pomegranate" variant="body1">
                         {t(`${documentType}.share.shareByLink.deactivate`)}
-                      </Text>
+                      </Typography>
                     </ActionMenuItem>
                   </ActionMenu>
                 )}
