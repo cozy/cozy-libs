@@ -15,8 +15,6 @@ import get from 'lodash/get'
 import logger from '../logger'
 import styles from '../share.styl'
 
-import palette from 'cozy-ui/transpiled/react/palette'
-
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 
@@ -237,15 +235,13 @@ class ShareByLink extends React.Component {
                     </ActionMenuItem>
                     <hr />
                     <ActionMenuItem
-                      left={
-                        <Icon icon={TrashIcon} color={palette.pomegranate} />
-                      }
+                      left={<Icon icon={TrashIcon} color="var(--errorColor)" />}
                       onClick={() => {
                         this.toggleMenu()
                         this.deleteShareLink()
                       }}
                     >
-                      <Typography className="u-pomegranate" variant="body1">
+                      <Typography className="u-error" variant="body1">
                         {t(`${documentType}.share.shareByLink.deactivate`)}
                       </Typography>
                     </ActionMenuItem>

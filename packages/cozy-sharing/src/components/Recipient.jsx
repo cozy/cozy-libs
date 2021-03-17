@@ -239,9 +239,9 @@ export const Permissions = ({
               <hr />
               <ActionMenuItem
                 onClick={onRevokeClick}
-                left={<Icon icon={TrashIcon} color="var(--pomegranate)" />}
+                left={<Icon icon={TrashIcon} color="var(--errorColor)" />}
               >
-                <Typography className="u-pomegranate" variant="body1">
+                <Typography className="u-error" variant="body1">
                   {isOwner
                     ? t(`${documentType}.share.revoke.title`)
                     : t(`${documentType}.share.revokeSelf.title`)}
