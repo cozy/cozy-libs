@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 import Stack from 'cozy-ui/transpiled/react/Stack'
@@ -17,20 +17,37 @@ import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/ap
 import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
+import { useDatacardOptions } from './DatacardOptionsContext'
 
-const findSuitableDataCards = (permissions, doctypeToDataCard) => {
-  return Object.values(permissions)
-    .map(permission => doctypeToDataCard[permission.type])
-    .filter(Boolean)
+const findSuitableDataCards = (datacardOptions, datacardContext) => {
+  return datacardOptions.datacards
+    .filter(({ match }) => match(datacardContext))
+    .map(x => x.component)
 }
 
-export const DataTab = ({
-  konnector,
-  trigger,
-  client,
-  flow,
-  doctypeToDataCard
-}) => {
+const Datacards = ({ konnector, account, trigger }) => {
+  const datacardOptions = useDatacardOptions()
+  const datacards = useMemo(() => {
+    const datacardContext = { konnector, trigger, account }
+    return datacardOptions
+      ? findSuitableDataCards(datacardOptions, datacardContext)
+      : []
+  }, [konnector, trigger, account, datacardOptions])
+  return (
+    <>
+      {datacards.map((Datacard, i) => (
+        <Datacard
+          key={i}
+          konnector={konnector}
+          trigger={trigger}
+          accountId={trigger.message.account}
+        />
+      ))}
+    </>
+  )
+}
+
+export const DataTab = ({ konnector, trigger, client, flow, account }) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState
@@ -61,10 +78,6 @@ export const DataTab = ({
     .filter(Boolean)
     .filter(app => client.appMetadata.slug !== app.slug)
 
-  const permissions = konnector.attributes.permissions
-  const dataCards = doctypeToDataCard
-    ? findSuitableDataCards(permissions, doctypeToDataCard)
-    : []
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
@@ -101,14 +114,7 @@ export const DataTab = ({
         {appLinks.map(({ slug, ...otherProps }) => (
           <AppLinkCard key={slug} slug={slug} {...otherProps} />
         ))}
-        {dataCards.map((DataCard, i) => (
-          <DataCard
-            key={i}
-            konnector={konnector}
-            trigger={trigger}
-            accountId={trigger.message.account}
-          />
-        ))}
+        <Datacards account={account} trigger={trigger} konnector={konnector} />
         {konnector.vendor_link && (
           <WebsiteLinkCard link={konnector.vendor_link} />
         )}

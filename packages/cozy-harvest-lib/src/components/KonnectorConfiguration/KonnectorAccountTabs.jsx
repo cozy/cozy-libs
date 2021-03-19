@@ -83,8 +83,7 @@ const DumbKonnectorAccountTabs = props => {
     // TODO rename to onAddAccount
     addAccount,
     showNewAccountButton,
-    flow,
-    doctypeToDataCard
+    flow
   } = props
   const { isMobile } = useBreakpoints()
   const [tab, setTab] = useState(
@@ -131,7 +130,7 @@ const DumbKonnectorAccountTabs = props => {
           konnector={konnector}
           trigger={initialTrigger}
           flow={flow}
-          doctypeToDataCard={doctypeToDataCard}
+          account={account}
         />
         <ConfigurationTab
           konnector={konnector}
