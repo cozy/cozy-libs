@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 import Stack from 'cozy-ui/transpiled/react/Stack'
@@ -17,35 +17,7 @@ import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/ap
 import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
-import { useDatacardOptions } from './DatacardOptionsContext'
-
-const findSuitableDataCards = (datacardOptions, datacardContext) => {
-  return datacardOptions.datacards
-    .filter(({ match }) => match(datacardContext))
-    .map(x => x.component)
-}
-
-const Datacards = ({ konnector, account, trigger }) => {
-  const datacardOptions = useDatacardOptions()
-  const datacards = useMemo(() => {
-    const datacardContext = { konnector, trigger, account }
-    return datacardOptions
-      ? findSuitableDataCards(datacardOptions, datacardContext)
-      : []
-  }, [konnector, trigger, account, datacardOptions])
-  return (
-    <>
-      {datacards.map((Datacard, i) => (
-        <Datacard
-          key={i}
-          konnector={konnector}
-          trigger={trigger}
-          accountId={trigger.message.account}
-        />
-      ))}
-    </>
-  )
-}
+import Datacards from '../../Datacards'
 
 export const DataTab = ({ konnector, trigger, client, flow, account }) => {
   const { isMobile } = useBreakpoints()

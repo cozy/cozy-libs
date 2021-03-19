@@ -17,7 +17,7 @@ import HarvestModalRoot from './HarvestModalRoot'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import { MountPointProvider } from './MountPointContext'
 import DialogContext from './DialogContext'
-import { DatacardOptions } from './KonnectorConfiguration/DataTab/DatacardOptionsContext'
+import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import {
   useVaultUnlockContext,
   VaultUnlockProvider,
