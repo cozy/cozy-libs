@@ -11,8 +11,8 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import Slide from '@material-ui/core/Slide'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
@@ -65,6 +65,7 @@ const FileListItem = ({ divider, file, onClick, style }) => {
       </ListItemIcon>
       <ListItemText
         primary={file.name}
+        primaryClassName="u-ellipsis"
         secondary={
           <Typography variant="caption">
             {t('datacards.files.imported', {
