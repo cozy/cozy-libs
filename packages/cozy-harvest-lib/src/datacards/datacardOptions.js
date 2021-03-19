@@ -14,7 +14,10 @@ import FileDataCard from './FileDataCard'
 
 const timeseriesGeoJSONDatacard = {
   component: GeoDataCard,
-  match: ({ konnector }) => konnector.permissions['io.cozy.timeseries.geojson']
+  match: ({ konnector }) =>
+    Object.values(konnector.permissions).filter(
+      x => x.type === 'io.cozy.timeseries.geojson'
+    ).length > 0
 }
 
 const filesDatacard = {
