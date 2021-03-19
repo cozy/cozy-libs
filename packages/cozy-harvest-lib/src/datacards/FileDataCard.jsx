@@ -165,17 +165,14 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
   )
 }
 
-const makeQueryFromProps = ({ accountId }) => ({
+const makeQueryFromProps = ({ accountId, trigger }) => ({
   query: Q('io.cozy.files')
     .where({
-      'cozyMetadata.sourceAccount': accountId,
+      dir_id: trigger.message.folder_to_save,
       trashed: false
     })
-    .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
-    .sortBy([
-      { 'cozyMetadata.sourceAccount': 'desc' },
-      { 'cozyMetadata.createdAt': 'desc' }
-    ])
+    .indexFields(['dir_id', 'cozyMetadata.createdAt'])
+    .sortBy([{ dir_id: 'desc' }, { 'cozyMetadata.createdAt': 'desc' }])
     .limitBy(5),
   as: `fileDataCard_io.cozy.accounts/${accountId}/io.cozy.files`,
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
