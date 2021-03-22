@@ -156,7 +156,7 @@ export class DocumentQualification extends Component {
             </Typography>
           </div>
         )}
-        <Grid container spacing={8}>
+        <Grid container spacing={1}>
           <GridItem
             onClick={() => this.onSelect({ categoryLabel: null, item: null })}
           >
