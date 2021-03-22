@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { Field as FinalFormField } from 'react-final-form'
+import get from 'lodash/get'
 
 import AccountField from './AccountField'
 import { getEncryptedFieldName } from '../../helpers/fields'
@@ -44,22 +45,29 @@ export class AccountFields extends PureComponent {
             name={field.name}
             parse={parse(field.type)}
           >
-            {({ input }) => (
-              <AccountField
-                {...field}
-                {...input}
-                container={container}
-                hasError={hasError}
-                disabled={disabled}
-                initialValue={
-                  initialValues[field.name] ||
-                  initialValues[getEncryptedFieldName(field.name)]
-                }
-                inputRef={inputRefByName(field.name)}
-                forceEncryptedPlaceholder={!!Object.keys(initialValues).length}
-                t={t}
-              />
-            )}
+            {({ input }) => {
+              const forceEncryptedPlaceholder = get(
+                field,
+                'forceEncryptedPlaceholder',
+                !!Object.keys(initialValues).length
+              )
+              return (
+                <AccountField
+                  {...field}
+                  {...input}
+                  container={container}
+                  hasError={hasError}
+                  disabled={disabled}
+                  initialValue={
+                    initialValues[field.name] ||
+                    initialValues[getEncryptedFieldName(field.name)]
+                  }
+                  inputRef={inputRefByName(field.name)}
+                  forceEncryptedPlaceholder={forceEncryptedPlaceholder}
+                  t={t}
+                />
+              )
+            }}
           </FinalFormField>
         ))}
       </div>

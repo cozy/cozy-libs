@@ -308,7 +308,15 @@ export class DumbTriggerManager extends Component {
   }
 
   render() {
-    const { konnector, showError, t, flow, flowState, client } = this.props
+    const {
+      konnector,
+      showError,
+      t,
+      fieldsOptions,
+      flow,
+      flowState,
+      client
+    } = this.props
 
     const submitting = flowState.running
 
@@ -376,6 +384,7 @@ export class DumbTriggerManager extends Component {
               showError={showError}
               onBack={() => this.showCiphersList()}
               readOnlyIdentifier={this.hasCipherSelected()}
+              fieldsOptions={fieldsOptions}
             />
           </>
         )}

@@ -7,6 +7,7 @@ import _get from 'lodash/get'
 import intersection from 'lodash/intersection'
 
 export const ROLE_IDENTIFIER = 'identifier'
+export const SECRET = 'secret'
 
 /**
  * We defined "predefined labels", as labels wich can be used in manifest, to
@@ -179,6 +180,15 @@ const sanitizeEncrypted = fields => {
   return sanitized
 }
 
+const addForceEncryptedPlaceholder = (fields, options) => {
+  const secretField = fields[SECRET]
+  const secretFieldOptions = options[SECRET]
+  if (secretField && secretFieldOptions) {
+    secretField.forceEncryptedPlaceholder =
+      secretFieldOptions.forceEncryptedPlaceholder
+  }
+}
+
 /* flow() is like compose() but not in reverse order */
 const sanitizeFields = _flow([
   removeOldFields,
@@ -246,6 +256,7 @@ const hasValuesForRequiredFields = (konnector, values) => {
 }
 
 export default {
+  addForceEncryptedPlaceholder,
   defaultFieldsValues,
   getIdentifier,
   sanitize,

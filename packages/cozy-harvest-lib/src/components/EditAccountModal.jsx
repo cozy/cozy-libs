@@ -48,6 +48,16 @@ const DumbEditAccountModal = ({
    * vault modal), we delay a bit the appearing of the edit modal via CSS.
    */
   const shouldShow = useTimeout(500)
+
+  const fromReconnectButton = window.location.toString().endsWith('reconnect')
+  // If we come from the reconnect button so focus on secret field
+  const fieldsOptions = {
+    secret: {
+      forceEncryptedPlaceholder: !fromReconnectButton,
+      focus: fromReconnectButton
+    }
+  }
+
   return (
     <Dialog
       style={shouldShow ? showStyle : hideStyle}
@@ -77,6 +87,7 @@ const DumbEditAccountModal = ({
             onSuccess={redirectToAccount}
             showError={true}
             onVaultDismiss={redirectToAccount}
+            fieldsOptions={fieldsOptions}
           />
         )}
       </DialogContent>

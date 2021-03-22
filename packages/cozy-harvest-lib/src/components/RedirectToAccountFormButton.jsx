@@ -9,7 +9,7 @@ const RedirectToAccountFormButton = ({ trigger }) => {
   const accountId = getAccountId(trigger)
   const { pushHistory } = useContext(MountPointContext)
   const handleClick = useCallback(() => {
-    pushHistory(`/accounts/${accountId}/edit`)
+    pushHistory(`/accounts/${accountId}/edit?reconnect`)
   }, [accountId, pushHistory])
   return (
     <Button

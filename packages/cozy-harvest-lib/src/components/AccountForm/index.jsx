@@ -13,7 +13,7 @@ import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
-import manifest from '../../helpers/manifest'
+import manifest, { SECRET } from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -185,6 +185,20 @@ export class AccountForm extends PureComponent {
     this.setState({ showConfirmationModal: false })
   }
 
+  manageSecretFieldOptions = () => {
+    const secretFieldOptions = this.props.fieldsOptions[SECRET]
+    if (secretFieldOptions) {
+      const secretInput = this.inputs[SECRET]
+      if (secretInput && secretFieldOptions.focus) {
+        secretInput.focus()
+      }
+    }
+  }
+
+  componentDidMount() {
+    this.manageSecretFieldOptions()
+  }
+
   render() {
     const {
       account,
@@ -193,6 +207,7 @@ export class AccountForm extends PureComponent {
       onSubmit,
       showError,
       t,
+      fieldsOptions,
       flowState
     } = this.props
     const submitting = flowState.running
@@ -200,6 +215,8 @@ export class AccountForm extends PureComponent {
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
+    manifest.addForceEncryptedPlaceholder(sanitizedFields, fieldsOptions)
+
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
 
@@ -339,7 +356,11 @@ AccountForm.propTypes = {
   /**
    * Translation function
    */
-  t: PropTypes.func
+  t: PropTypes.func,
+  /**
+   * Used to have options on fields (forceEncryptedPlaceholder or focus)
+   */
+  fieldsOptions: PropTypes.object
 }
 
 AccountForm.defaultProps = {
