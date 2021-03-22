@@ -15,7 +15,7 @@ import { fetchAccountsFromTriggers } from '../connections/accounts'
 
 import { fetchTrigger } from '../connections/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
-import logger from '../../src/logger'
+import logger from '../logger'
 import DialogContent from '@material-ui/core/DialogContent'
 
 export class KonnectorAccounts extends React.Component {

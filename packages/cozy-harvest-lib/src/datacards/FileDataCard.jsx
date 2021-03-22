@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+import sortBy from 'lodash/sortBy'
+import uniq from 'lodash/uniq'
 import keyBy from 'lodash/keyBy'
 
 import 'leaflet/dist/leaflet.css'
@@ -9,8 +11,8 @@ import Skeleton from '@material-ui/lab/Skeleton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
-import ListItemText from '@material-ui/core/ListItemText'
 import Slide from '@material-ui/core/Slide'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import palette from 'cozy-ui/transpiled/react/palette'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
@@ -63,6 +65,7 @@ const FileListItem = ({ divider, file, onClick, style }) => {
       </ListItemIcon>
       <ListItemText
         primary={file.name}
+        primaryClassName="u-ellipsis"
         secondary={
           <Typography variant="caption">
             {t('datacards.files.imported', {
@@ -165,7 +168,20 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
   )
 }
 
-const makeQueryFromProps = ({ accountId }) => ({
+const makeFolderToSaveQueryFromProps = ({ trigger }) => ({
+  query: Q('io.cozy.files')
+    .where({
+      dir_id: trigger.message.folder_to_save,
+      trashed: false
+    })
+    .indexFields(['dir_id', 'cozyMetadata.createdAt'])
+    .sortBy([{ dir_id: 'desc' }, { 'cozyMetadata.createdAt': 'desc' }])
+    .limitBy(5),
+  as: `fileDataCard_io.cozy.files/${trigger.message.folder_to_save}/io.cozy.files`,
+  fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
+})
+
+const makeSourceAccountQueryFromProps = ({ accountId }) => ({
   query: Q('io.cozy.files')
     .where({
       'cozyMetadata.sourceAccount': accountId,
@@ -181,11 +197,30 @@ const makeQueryFromProps = ({ accountId }) => ({
   fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
 })
 
-const FileDataCard = ({ filesCol, konnector, trigger }) => {
-  const { data: files } = filesCol
+const FileDataCard = ({
+  folderToSaveFiles,
+  sourceAccountFiles,
+  konnector,
+  trigger
+}) => {
+  const { data: files1 } = folderToSaveFiles
+  const { data: files2 } = sourceAccountFiles
 
-  const noFiles = hasQueryBeenLoaded(filesCol) && files.length == 0
-  const isLoading = isQueryLoading(filesCol)
+  const noFiles =
+    hasQueryBeenLoaded(folderToSaveFiles) &&
+    files1.length === 0 &&
+    hasQueryBeenLoaded(sourceAccountFiles) &&
+    files2.length === 0
+  const isLoading =
+    isQueryLoading(folderToSaveFiles) || isQueryLoading(sourceAccountFiles)
+
+  const files = useMemo(() => {
+    return sortBy(uniq([...files1, ...files2], x => x._id), x =>
+      get(x, 'cozyMetadata.createdAt')
+    )
+      .reverse()
+      .slice(0, 5)
+  }, [files1, files2])
   return (
     <>
       <RealTimeQueries doctype="io.cozy.files" />
@@ -193,7 +228,7 @@ const FileDataCard = ({ filesCol, konnector, trigger }) => {
         <AppLinkCard {...appLinksProps.drive({ trigger })} />
       ) : (
         <FileCard
-          files={files.slice(0, 5)}
+          files={files}
           loading={isLoading}
           konnector={konnector}
           trigger={trigger}
@@ -210,5 +245,6 @@ FileDataCard.propTypes = {
 }
 
 export default queryConnect({
-  filesCol: props => makeQueryFromProps(props)
+  folderToSaveFiles: props => makeFolderToSaveQueryFromProps(props),
+  sourceAccountFiles: props => makeSourceAccountQueryFromProps(props)
 })(FileDataCard)
