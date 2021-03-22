@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@1.1.0...cozy-scanner@1.1.1) (2021-03-22)
+
+
+### Bug Fixes
+
+* Adjust DocumentQualification grid spacing ([d933bef](https://github.com/cozy/cozy-libs/commit/d933bef))
+
+
+
+
+
 # [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@1.0.0...cozy-scanner@1.1.0) (2021-03-17)
 
 
