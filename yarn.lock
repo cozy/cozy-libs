@@ -5352,10 +5352,10 @@ cozy-interapp@0.5.4:
   resolved "https://registry.yarnpkg.com/cozy-interapp/-/cozy-interapp-0.5.4.tgz#2573f1800f073c84c289267d04234954d88eae0c"
   integrity sha512-f0UaKpBkRUnIKgAWND0e1IwfTTINjizlgDmfQwX3aMyWp8t9wX0xkNFn53TSyKUoBUnfovrclS3hm9fngjEp7A==
 
-cozy-keys-lib@3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.7.0.tgz#bc146d8c237d8418579a3e5c6c56d12324405cb5"
-  integrity sha512-2K8MGyZxtOIgf+FjUz+3Z9lnxkIO0bKGd59FCN+wQGAMlvXT8Xjiv8IxLjCeArLghhKzDH7BT7gW2N0Y4AcIRg==
+cozy-keys-lib@3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/cozy-keys-lib/-/cozy-keys-lib-3.8.0.tgz#655a6d05d012081d595ece7f25c6e8efa832b91f"
+  integrity sha512-uwuX3btRlItvaSsxTyuX2XiAFMmVjCJYYAKyQjQNgGsRfOiwVGUBp6GxjU54fd6X5tLTNdIysODNlbt+0WuS9Q==
   dependencies:
     "@aspnet/signalr" "^1.1.4"
     "@aspnet/signalr-protocol-msgpack" "^1.1.0"
@@ -6629,7 +6629,7 @@ es6-object-assign@^1.1.0, es6-object-assign@~1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/es6-object-assign/-/es6-object-assign-1.1.0.tgz#c2c3582656247c39ea107cb1e6652b6f9f24523c"
 
-es6-promise-pool@2.5.0:
+es6-promise-pool@2.5.0, es6-promise-pool@^2.5.0:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/es6-promise-pool/-/es6-promise-pool-2.5.0.tgz#147c612b36b47f105027f9d2bf54a598a99d9ccb"
 
@@ -10781,11 +10781,6 @@ lodash@4.17.15:
   version "4.17.15"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
 
-lodash@4.17.19:
-  version "4.17.19"
-  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.19.tgz#e48ddedbe30b3321783c5b4301fbd353bc1e4a4b"
-  integrity sha512-JNvd8XER9GQX0v2qJgsaN/mzFCNA5BRe/j8JN9d+tWyGLSodKQHKFicdwNYzWwI3wjRnaKPsGj1XkBjx/F96DQ==
-
 lodash@^4.14.2, lodash@^4.15.0, lodash@^4.17.11, lodash@^4.17.12, lodash@^4.17.13, lodash@^4.17.14, lodash@^4.17.15, lodash@^4.17.19, lodash@^4.17.2, lodash@^4.17.20, lodash@^4.17.4, lodash@^4.2.1, lodash@^4.3.0:
   version "4.17.20"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.20.tgz#b44a9b6297bcb698f1c51a3545a2b3b368d59c52"
@@ -11307,6 +11302,12 @@ mini-html-webpack-plugin@^0.2.3:
   resolved "https://registry.yarnpkg.com/mini-html-webpack-plugin/-/mini-html-webpack-plugin-0.2.3.tgz#2dfbdc3f35f6ae03864a608808381f8137311ea0"
   dependencies:
     webpack-sources "^1.1.0"
+
+"minilog@git+https://github.com/cozy/minilog.git#master":
+  version "3.1.0"
+  resolved "git+https://github.com/cozy/minilog.git#6da0aa58759c4f1a1a7e0fd093dbe2a67c035c55"
+  dependencies:
+    microee "0.0.6"
 
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
