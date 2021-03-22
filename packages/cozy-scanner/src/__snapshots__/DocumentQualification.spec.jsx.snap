@@ -53,7 +53,7 @@ exports[`DocumentQualification Initial render + selection + filename 1`] = `
     </h4>
   </div>
   <div
-    class="MuiGrid-root-31 MuiGrid-container-32 MuiGrid-spacing-xs-8-61"
+    class="MuiGrid-root-31 MuiGrid-container-32 MuiGrid-spacing-xs-1-54"
   >
     <div
       class="MuiGrid-root-31 styles__gridItem-container___387sO MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
@@ -506,7 +506,7 @@ exports[`DocumentQualification Initial render + selection + filename 2`] = `
     </h4>
   </div>
   <div
-    class="MuiGrid-root-31 MuiGrid-container-32 MuiGrid-spacing-xs-8-61"
+    class="MuiGrid-root-31 MuiGrid-container-32 MuiGrid-spacing-xs-1-54"
   >
     <div
       class="MuiGrid-root-31 styles__gridItem-container___387sO MuiGrid-item-33 MuiGrid-grid-xs-3-68 MuiGrid-grid-sm-2-81"
