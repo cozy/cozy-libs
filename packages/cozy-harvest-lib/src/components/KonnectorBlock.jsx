@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import get from 'lodash/get'
@@ -34,6 +34,16 @@ const KonnectorBlock = ({ file }) => {
   const { t } = useI18n()
   const slug = get(file, 'cozyMetadata.uploadedBy.slug')
   const sourceAccount = get(file, 'cozyMetadata.sourceAccount')
+
+  // TODO To be removed when UI's AppIcon use getIconURL from Cozy-Client
+  // instead of its own see https://github.com/cozy/cozy-ui/issues/1723
+  const fetchIcon = useCallback(() => {
+    return client.getStackClient().getIconURL({
+      type: 'konnector',
+      slug,
+      priority: 'registry'
+    })
+  }, [client, slug])
 
   useEffect(() => {
     const fetchKonnector = async ({ client, t, slug, sourceAccount }) => {
@@ -81,6 +91,7 @@ const KonnectorBlock = ({ file }) => {
             className={cx({
               'u-filter-gray-100 u-o-50': iconStatus === 'disabled'
             })}
+            fetchIcon={fetchIcon}
           />
         </ListItemIcon>
         <ListItemText
