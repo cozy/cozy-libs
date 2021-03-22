@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.80.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.79.0...cozy-doctypes@1.80.0) (2021-03-22)
+
+
+### Features
+
+* Be more lenient for accepted deps ([a4189ac](https://github.com/cozy/cozy-libs/commit/a4189ac))
+
+
+
+
+
 # [1.79.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.78.0...cozy-doctypes@1.79.0) (2021-03-02)
 
 

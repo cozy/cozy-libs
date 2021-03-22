@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.14.0...cozy-harvest-lib@5.0.0) (2021-03-22)
+
+
+### Bug Fixes
+
+* Correct condition to display geo data card ([98eb29f](https://github.com/cozy/cozy-libs/commit/98eb29f))
+
+
+### Features
+
+* Add ellipsis to files data card ([795a8a6](https://github.com/cozy/cozy-libs/commit/795a8a6))
+* Merge two queries for files data card ([b8b0ece](https://github.com/cozy/cozy-libs/commit/b8b0ece))
+* Use folder_to_save query for file datacard ([7e9afd9](https://github.com/cozy/cozy-libs/commit/7e9afd9))
+* Use more generic strategy for datacards matching ([70db808](https://github.com/cozy/cozy-libs/commit/70db808))
+
+
+### BREAKING CHANGES
+
+* An app must use the datacardOptions props to configure
+the datacards shown in Harvest (previously the option
+doctypesToDatacards was too restrictive).
+
+
+
+
+
 # [4.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@4.13.0...cozy-harvest-lib@4.14.0) (2021-03-15)
 
 
