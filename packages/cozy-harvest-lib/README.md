@@ -87,19 +87,30 @@ It is possible to display, in the data tab of Harvest, cards showing the data th
 has been collected by the connector for the current io.cozy.accounts.
 
 It is up to the application to tell Harvest which datacard should be used. It is done
-by passing the `doctypeToDataCard` prop to the `Routes` component of Harvest.
+by passing the `datacardOptions` prop to the `Routes` component of Harvest.
+
+Here, if the konnector displayed has one permission on the "io.cozy.timeseries.geojson"
+doctype, the GeoDataCard is shown.
 
 ```jsx
 import GeoDataCard from 'cozy-harvest-lib/dist/datacards/GeoDataCard'
 
-const doctypeToDataCard = {
-  'io.cozy.timeseries.geojson': GeoDataCard
-}
+const datacardOptions = [{
+  match: ({ konnector }) => any(konnector.permissions, permission => permission.type == 'io.cozy.timeseries.geojson'),
+  component: GeoDataCard
+}]
 
-<Routes doctypeToDataCard={doctypeToDataCard} ... />
+<Routes datacardOptions={datacardOptions} ... />
 ```
 
-This has the following advantages:
+If an application wants to display all the available datacards, it can import
+datacard options from Harvest. /!\ At this point, the app must install all the dependencies
+that are necessary for each datacard to work (Leaflet for GeoDataCard for example).
+
+```
+import datacardOptions from 'cozy-harvest-lib/dist/datacards/datacardOptions'
+<Routes doctypeToDataCard={doctypeToDataCard} ... />
+```
 
 - Since the application imports the datacards component, an application
   not using this functionality is not bloated by the dependencies
@@ -108,8 +119,11 @@ This has the following advantages:
 - An application can implement a custom datacard for a particular
   doctype.
 
-This has the inconvenient that if a new datacard is added, an application has
-to explicitly choose to use it.
+Datacard components receive as props:
+
+- `accountId`: the accountId of the currently displayed `io.cozy.accounts`
+- `konnector`: the konnector currently displayed
+- `trigger`: the trigger linking the account to the konnector
 
 # Getting Started
 
