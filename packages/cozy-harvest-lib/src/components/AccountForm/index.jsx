@@ -14,6 +14,7 @@ import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
+import fieldHelpers, { SECRET } from '../../helpers/fields'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -185,6 +186,18 @@ export class AccountForm extends PureComponent {
     this.setState({ showConfirmationModal: false })
   }
 
+  manageSecretFieldOptions = () => {
+    const secretFieldOptions = this.props.fieldOptions
+    const secretInput = this.inputs[SECRET]
+    if (secretInput && secretFieldOptions.focusSecretField) {
+      secretInput.focus()
+    }
+  }
+
+  componentDidMount() {
+    this.manageSecretFieldOptions()
+  }
+
   render() {
     const {
       account,
@@ -193,6 +206,7 @@ export class AccountForm extends PureComponent {
       onSubmit,
       showError,
       t,
+      fieldOptions,
       flowState
     } = this.props
     const submitting = flowState.running
@@ -200,6 +214,8 @@ export class AccountForm extends PureComponent {
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
+    fieldHelpers.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
+
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
 
@@ -339,7 +355,11 @@ AccountForm.propTypes = {
   /**
    * Translation function
    */
-  t: PropTypes.func
+  t: PropTypes.func,
+  /**
+   * Used to have options on fields (forceEncryptedPlaceholder or focus)
+   */
+  fieldOptions: PropTypes.object
 }
 
 AccountForm.defaultProps = {

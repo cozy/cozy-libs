@@ -9,6 +9,7 @@ import { isMobile } from 'cozy-device-helper'
 import { AccountForm } from 'components/AccountForm'
 import enLocale from 'locales/en.json'
 import Polyglot from 'node-polyglot'
+import { render } from '@testing-library/react'
 
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)
@@ -30,6 +31,16 @@ const fixtures = {
       test: {
         required: false,
         type: 'text'
+      }
+    }
+  },
+  konnectorWithIdendifierAndSecret: {
+    fields: {
+      identifier: {
+        type: 'text'
+      },
+      secret: {
+        type: 'password'
       }
     }
   },
@@ -76,6 +87,7 @@ describe('AccountForm', () => {
         onSubmit={onSubmit}
         showError={showError}
         t={t}
+        fieldOptions={{}}
       />,
       { disableLifecycleMethods }
     )
@@ -343,6 +355,7 @@ describe('AccountForm', () => {
             onSubmit={onSubmit}
             account={accountWithCipher}
             readOnlyIdentifier={true}
+            fieldOptions={{}}
           />
         </I18n>,
         {
@@ -356,6 +369,56 @@ describe('AccountForm', () => {
       const hiddenInput = wrapper.find('input[type="hidden"][name="username"]')
 
       expect(hiddenInput).toHaveLength(1)
+    })
+  })
+
+  describe('fieldOptions', () => {
+    const setup = fieldOptions => {
+      const root = render(
+        <I18n lang="en" dictRequire={() => {}}>
+          <AccountForm
+            flowState={{}}
+            t={t}
+            konnector={fixtures.konnectorWithIdendifierAndSecret}
+            onSubmit={onSubmit}
+            account={fixtures.account}
+            readOnlyIdentifier={true}
+            fieldOptions={fieldOptions}
+          />
+        </I18n>,
+        {
+          context: { t },
+          childContextTypes: {
+            t: PropTypes.func
+          }
+        }
+      )
+      return root
+    }
+
+    it('should render password placeholder', () => {
+      const fieldOptions = {
+        displaySecretPlaceholder: true,
+        focusSecretField: false
+      }
+      const root = setup(fieldOptions)
+      expect(root.getByPlaceholderText('*************')).toBeTruthy()
+    })
+
+    it('should not render password placeholder', () => {
+      const fieldOptions = {
+        displaySecretPlaceholder: false
+      }
+      const root = setup(fieldOptions)
+      expect(root.queryByPlaceholderText('*************')).toBeFalsy()
+    })
+
+    it('should not render password placeholder with focus', () => {
+      const fieldOptions = {
+        focusSecretField: true
+      }
+      const root = setup(fieldOptions)
+      expect(root.queryByPlaceholderText('*************')).toBeFalsy()
     })
   })
 })

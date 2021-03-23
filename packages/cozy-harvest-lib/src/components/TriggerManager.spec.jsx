@@ -84,7 +84,8 @@ const props = {
   t: tMock,
   vaultClient: mockVaultClient,
   breakpoints: { isMobile: false },
-  onVaultDismiss: jest.fn()
+  onVaultDismiss: jest.fn(),
+  fieldOptions: {}
 }
 
 const propsWithAccount = {

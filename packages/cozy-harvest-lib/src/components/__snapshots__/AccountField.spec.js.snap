@@ -29,6 +29,12 @@ exports[`AccountField render a date field 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
+          "fields.date.placeholder",
+          Object {
+            "_": "",
+          },
+        ],
+        Array [
           "legacy.fields.date.label",
           Object {
             "_": "date",
@@ -38,12 +44,6 @@ exports[`AccountField render a date field 1`] = `
           "fields.date.label",
           Object {
             "_": "legacy.fields.date.label",
-          },
-        ],
-        Array [
-          "fields.date.placeholder",
-          Object {
-            "_": "",
           },
         ],
         Array [
@@ -65,15 +65,15 @@ exports[`AccountField render a date field 1`] = `
       "results": Array [
         Object {
           "type": "return",
+          "value": "fields.date.placeholder",
+        },
+        Object {
+          "type": "return",
           "value": "legacy.fields.date.label",
         },
         Object {
           "type": "return",
           "value": "fields.date.label",
-        },
-        Object {
-          "type": "return",
-          "value": "fields.date.placeholder",
         },
         Object {
           "type": "return",
@@ -138,6 +138,12 @@ exports[`AccountField render a dropdown field 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
+          "fields.multiple.placeholder",
+          Object {
+            "_": "",
+          },
+        ],
+        Array [
           "legacy.fields.multiple.label",
           Object {
             "_": "multiple",
@@ -150,12 +156,6 @@ exports[`AccountField render a dropdown field 1`] = `
           },
         ],
         Array [
-          "fields.multiple.placeholder",
-          Object {
-            "_": "",
-          },
-        ],
-        Array [
           "accountForm.password.hide",
         ],
         Array [
@@ -165,15 +165,15 @@ exports[`AccountField render a dropdown field 1`] = `
       "results": Array [
         Object {
           "type": "return",
+          "value": "fields.multiple.placeholder",
+        },
+        Object {
+          "type": "return",
           "value": "legacy.fields.multiple.label",
         },
         Object {
           "type": "return",
           "value": "fields.multiple.label",
-        },
-        Object {
-          "type": "return",
-          "value": "fields.multiple.placeholder",
         },
         Object {
           "type": "return",
@@ -209,6 +209,8 @@ exports[`AccountField render a password field 1`] = `
     }
   }
   name="passphrase"
+  onBlur={[Function]}
+  onFocus={[Function]}
   placeholder="fields.passphrase.placeholder"
   required={true}
   secondaryLabels={
@@ -223,6 +225,12 @@ exports[`AccountField render a password field 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
+          "fields.passphrase.placeholder",
+          Object {
+            "_": "",
+          },
+        ],
+        Array [
           "legacy.fields.passphrase.label",
           Object {
             "_": "passphrase",
@@ -235,12 +243,6 @@ exports[`AccountField render a password field 1`] = `
           },
         ],
         Array [
-          "fields.passphrase.placeholder",
-          Object {
-            "_": "",
-          },
-        ],
-        Array [
           "accountForm.password.hide",
         ],
         Array [
@@ -250,15 +252,15 @@ exports[`AccountField render a password field 1`] = `
       "results": Array [
         Object {
           "type": "return",
+          "value": "fields.passphrase.placeholder",
+        },
+        Object {
+          "type": "return",
           "value": "legacy.fields.passphrase.label",
         },
         Object {
           "type": "return",
           "value": "fields.passphrase.label",
-        },
-        Object {
-          "type": "return",
-          "value": "fields.passphrase.placeholder",
         },
         Object {
           "type": "return",
@@ -305,6 +307,12 @@ exports[`AccountField should render 1`] = `
     [MockFunction] {
       "calls": Array [
         Array [
+          "fields.username.placeholder",
+          Object {
+            "_": "",
+          },
+        ],
+        Array [
           "legacy.fields.username.label",
           Object {
             "_": "username",
@@ -317,12 +325,6 @@ exports[`AccountField should render 1`] = `
           },
         ],
         Array [
-          "fields.username.placeholder",
-          Object {
-            "_": "",
-          },
-        ],
-        Array [
           "accountForm.password.hide",
         ],
         Array [
@@ -332,15 +334,15 @@ exports[`AccountField should render 1`] = `
       "results": Array [
         Object {
           "type": "return",
+          "value": "fields.username.placeholder",
+        },
+        Object {
+          "type": "return",
           "value": "legacy.fields.username.label",
         },
         Object {
           "type": "return",
           "value": "fields.username.label",
-        },
-        Object {
-          "type": "return",
-          "value": "fields.username.placeholder",
         },
         Object {
           "type": "return",

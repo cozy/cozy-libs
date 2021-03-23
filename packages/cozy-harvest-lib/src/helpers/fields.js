@@ -1,4 +1,5 @@
 const ENCRYPTED_PLACEHOLDER = '*************'
+export const SECRET = 'secret'
 
 /**
  * Returns the encrypted fied name as it is computed by the cozy-stack.
@@ -71,6 +72,15 @@ export const sanitizeSelectProps = props => {
   return sanitized
 }
 
+const addForceEncryptedPlaceholder = (fields, options) => {
+  const secretField = fields[SECRET]
+  const displaySecretPlaceholder = options.displaySecretPlaceholder
+  if (secretField) {
+    secretField.forceEncryptedPlaceholder = !!displaySecretPlaceholder
+  }
+}
+
 export default {
+  addForceEncryptedPlaceholder,
   sanitizeSelectProps
 }
