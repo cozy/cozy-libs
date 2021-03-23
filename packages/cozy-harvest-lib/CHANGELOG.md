@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.1.0...cozy-harvest-lib@5.2.0) (2021-03-23)
+
+
+### Bug Fixes
+
+* Optimized focus and placeholder ([7f4dc48](https://github.com/cozy/cozy-libs/commit/7f4dc48))
+* Prefix cozy-ui version with ^ ([bff248a](https://github.com/cozy/cozy-libs/commit/bff248a))
+* Some fixes ([be592ec](https://github.com/cozy/cozy-libs/commit/be592ec))
+* Some tests ([c47e481](https://github.com/cozy/cozy-libs/commit/c47e481))
+
+
+### Features
+
+* Clean password placeholder onFocus ([6b61ba7](https://github.com/cozy/cozy-libs/commit/6b61ba7))
+* Move addForceEncryptedPlaceHolder to fields helper ([5055017](https://github.com/cozy/cozy-libs/commit/5055017))
+* Update cozy-ui to have onFocus on Field ([4ee2b7d](https://github.com/cozy/cozy-libs/commit/4ee2b7d))
+* Use location from react-router ([2a845b9](https://github.com/cozy/cozy-libs/commit/2a845b9))
+
+
+
+
+
 # [5.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.0.1...cozy-harvest-lib@5.1.0) (2021-03-23)
 
 
