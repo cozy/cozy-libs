@@ -86,6 +86,11 @@ export class AccountField extends PureComponent {
         : name
 
     const finalName = getFieldName(name)
+    const placeholder = getFieldPlaceholder(
+      this.props,
+      t(`fields.${name}.placeholder`, { _: '' }),
+      { forceEncryptedPlaceholder }
+    )
 
     // Cozy-UI <Field /> props
     const fieldProps = {
@@ -101,11 +106,7 @@ export class AccountField extends PureComponent {
       label: t(`fields.${localeKey}.label`, {
         _: t(`legacy.fields.${localeKey}.label`, { _: name })
       }),
-      placeholder: getFieldPlaceholder(
-        this.props,
-        t(`fields.${name}.placeholder`, { _: '' }),
-        { forceEncryptedPlaceholder }
-      ),
+      placeholder,
       side: required ? null : t('accountForm.fields.optional'),
       size: 'medium'
     }
@@ -113,6 +114,9 @@ export class AccountField extends PureComponent {
     const passwordLabels = {
       hideLabel: t('accountForm.password.hide'),
       showLabel: t('accountForm.password.show')
+    }
+    const changePlaceholder = placeholder => e => {
+      e.target.placeholder = placeholder
     }
 
     switch (type) {
@@ -128,7 +132,14 @@ export class AccountField extends PureComponent {
       case 'dropdown':
         return <Field {...sanitizeSelectProps(fieldProps)} />
       case 'password':
-        return <Field {...fieldProps} secondaryLabels={passwordLabels} />
+        return (
+          <Field
+            {...fieldProps}
+            onFocus={changePlaceholder('')}
+            onBlur={changePlaceholder(placeholder)}
+            secondaryLabels={passwordLabels}
+          />
+        )
       case 'hidden':
         return (
           <input {...pick(fieldProps, ['value', 'type', 'name', 'role'])} />

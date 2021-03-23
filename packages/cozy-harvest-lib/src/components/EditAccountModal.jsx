@@ -53,7 +53,6 @@ const DumbEditAccountModal = ({
   // If we come from the reconnect button so focus on secret field
   const fieldsOptions = {
     secret: {
-      forceEncryptedPlaceholder: !fromReconnectButton,
       focus: fromReconnectButton
     }
   }
