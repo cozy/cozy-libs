@@ -14,7 +14,7 @@ import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
-import fieldsHelper, { SECRET } from '../../helpers/fields'
+import fieldHelpers, { SECRET } from '../../helpers/fields'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -214,7 +214,7 @@ export class AccountForm extends PureComponent {
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
-    fieldsHelper.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
+    fieldHelpers.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
 
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
