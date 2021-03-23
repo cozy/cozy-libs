@@ -312,7 +312,7 @@ export class DumbTriggerManager extends Component {
       konnector,
       showError,
       t,
-      fieldsOptions,
+      fieldOptions,
       flow,
       flowState,
       client
@@ -384,7 +384,7 @@ export class DumbTriggerManager extends Component {
               showError={showError}
               onBack={() => this.showCiphersList()}
               readOnlyIdentifier={this.hasCipherSelected()}
-              fieldsOptions={fieldsOptions}
+              fieldOptions={fieldOptions}
             />
           </>
         )}

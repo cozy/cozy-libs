@@ -35,10 +35,8 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
     fetchStatus === 'loaded' || fetchStatus === 'failed'
 
   const { dialogTitleProps } = useDialogContext()
-  const fieldsOptions = {
-    secret: {
-      forceEncryptedPlaceholder: false
-    }
+  const fieldOptions = {
+    displaySecretPlaceholder: false
   }
 
   return (
@@ -79,7 +77,7 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
               pushHistory(`/accounts/${accountId}/success`)
             }}
             onVaultDismiss={onDismiss}
-            fieldsOptions={fieldsOptions}
+            fieldOptions={fieldOptions}
           />
           {/*
             Necessary for correct padding-bottom in the DialogContent scroll

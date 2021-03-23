@@ -74,10 +74,9 @@ export const sanitizeSelectProps = props => {
 
 const addForceEncryptedPlaceholder = (fields, options) => {
   const secretField = fields[SECRET]
-  const secretFieldOptions = options[SECRET]
-  if (secretField && secretFieldOptions) {
-    secretField.forceEncryptedPlaceholder =
-      secretFieldOptions.forceEncryptedPlaceholder
+  const displaySecretPlaceholder = options.displaySecretPlaceholder
+  if (secretField) {
+    secretField.forceEncryptedPlaceholder = !!displaySecretPlaceholder
   }
 }
 

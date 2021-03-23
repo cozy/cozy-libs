@@ -51,10 +51,9 @@ const DumbEditAccountModal = ({
 
   const fromReconnectButton = window.location.toString().endsWith('reconnect')
   // If we come from the reconnect button so focus on secret field
-  const fieldsOptions = {
-    secret: {
-      focus: fromReconnectButton
-    }
+  const fieldOptions = {
+    displaySecretPlaceholder: true,
+    focusSecretField: fromReconnectButton
   }
 
   return (
@@ -86,7 +85,7 @@ const DumbEditAccountModal = ({
             onSuccess={redirectToAccount}
             showError={true}
             onVaultDismiss={redirectToAccount}
-            fieldsOptions={fieldsOptions}
+            fieldOptions={fieldOptions}
           />
         )}
       </DialogContent>

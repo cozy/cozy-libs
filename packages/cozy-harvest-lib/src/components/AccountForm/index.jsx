@@ -187,12 +187,10 @@ export class AccountForm extends PureComponent {
   }
 
   manageSecretFieldOptions = () => {
-    const secretFieldOptions = this.props.fieldsOptions[SECRET]
-    if (secretFieldOptions) {
-      const secretInput = this.inputs[SECRET]
-      if (secretInput && secretFieldOptions.focus) {
-        secretInput.focus()
-      }
+    const secretFieldOptions = this.props.fieldOptions
+    const secretInput = this.inputs[SECRET]
+    if (secretInput && secretFieldOptions.focusSecretField) {
+      secretInput.focus()
     }
   }
 
@@ -208,7 +206,7 @@ export class AccountForm extends PureComponent {
       onSubmit,
       showError,
       t,
-      fieldsOptions,
+      fieldOptions,
       flowState
     } = this.props
     const submitting = flowState.running
@@ -216,7 +214,7 @@ export class AccountForm extends PureComponent {
 
     const { fields } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
-    fieldsHelper.addForceEncryptedPlaceholder(sanitizedFields, fieldsOptions)
+    fieldsHelper.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
 
     const initialValues = account && account.auth
     const values = manifest.getFieldsValues(konnector, account)
@@ -361,7 +359,7 @@ AccountForm.propTypes = {
   /**
    * Used to have options on fields (forceEncryptedPlaceholder or focus)
    */
-  fieldsOptions: PropTypes.object
+  fieldOptions: PropTypes.object
 }
 
 AccountForm.defaultProps = {
