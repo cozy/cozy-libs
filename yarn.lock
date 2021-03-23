@@ -5581,7 +5581,7 @@ cozy-ui@45.1.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@47.4.0:
+cozy-ui@^47.4.0:
   version "47.4.0"
   resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-47.4.0.tgz#1bb12cc9b786627e83b1187811a7ba84565c4971"
   integrity sha512-M7DEZppLE5kBjXO+oi6/WL52Wd5agRBw7LAF4qxzEimVU7dzqsmd5iNxxUpQW+CHXzafIGEGEG/FdfMDuGmX8w==
