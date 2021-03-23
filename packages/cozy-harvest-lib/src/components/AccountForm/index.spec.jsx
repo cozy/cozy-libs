@@ -76,6 +76,7 @@ describe('AccountForm', () => {
         onSubmit={onSubmit}
         showError={showError}
         t={t}
+        fieldOptions={{}}
       />,
       { disableLifecycleMethods }
     )
@@ -343,6 +344,7 @@ describe('AccountForm', () => {
             onSubmit={onSubmit}
             account={accountWithCipher}
             readOnlyIdentifier={true}
+            fieldOptions={{}}
           />
         </I18n>,
         {

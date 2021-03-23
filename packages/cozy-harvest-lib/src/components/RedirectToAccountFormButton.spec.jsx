@@ -23,6 +23,8 @@ describe('redirect to account form button', () => {
       </AppLike>
     )
     fireEvent.click(root.getByText('Reconnect'))
-    expect(pushHistory).toHaveBeenCalledWith('/accounts/account-id-1337/edit')
+    expect(pushHistory).toHaveBeenCalledWith(
+      '/accounts/account-id-1337/edit?reconnect'
+    )
   })
 })
