@@ -23,75 +23,75 @@ import { withMountPointPushHistory } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
+import { withRouter } from 'react-router'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
 
-const DumbEditAccountModal = ({
-  konnector,
-  account,
-  trigger,
-  fetching,
-  redirectToAccount
-}) => {
-  const { dialogProps, dialogTitleProps } = useCozyDialog({
-    open: true,
-    size: 'm',
-    onClose: redirectToAccount
-  })
+const DumbEditAccountModal = withRouter(
+  ({ konnector, account, trigger, fetching, redirectToAccount, location }) => {
+    const { dialogProps, dialogTitleProps } = useCozyDialog({
+      open: true,
+      size: 'm',
+      onClose: redirectToAccount
+    })
 
-  /**
-   * The TriggerManager can open the vault if necessary when it is mounted.
-   * If the vault is opened, the EditAccountModal will be closed and will reappear
-   * once the vault has been unlocked.
-   * To prevent any jarring effect (open edit modal -> close edit modal -> open
-   * vault modal), we delay a bit the appearing of the edit modal via CSS.
-   */
-  const shouldShow = useTimeout(500)
+    /**
+     * The TriggerManager can open the vault if necessary when it is mounted.
+     * If the vault is opened, the EditAccountModal will be closed and will reappear
+     * once the vault has been unlocked.
+     * To prevent any jarring effect (open edit modal -> close edit modal -> open
+     * vault modal), we delay a bit the appearing of the edit modal via CSS.
+     */
+    const shouldShow = useTimeout(500)
 
-  const fromReconnectButton = window.location.toString().endsWith('reconnect')
-  // If we come from the reconnect button so focus on secret field
-  const fieldOptions = {
-    displaySecretPlaceholder: true,
-    focusSecretField: fromReconnectButton
-  }
+    const fromReconnectButton = location.search.endsWith('reconnect')
+    // If we come from the reconnect button so focus on secret field
+    const fieldOptions = {
+      displaySecretPlaceholder: true,
+      focusSecretField: fromReconnectButton
+    }
 
-  return (
-    <Dialog
-      style={shouldShow ? showStyle : hideStyle}
-      aria-label={konnector.name}
-      {...dialogProps}
-      onClose={redirectToAccount}
-    >
-      <DialogCloseButton onClick={redirectToAccount} />
-      <DialogTitle
-        {...dialogTitleProps}
-        className={cx(dialogTitleProps.className, 'u-flex u-flex-items-center')}
-        disableTypography
+    return (
+      <Dialog
+        style={shouldShow ? showStyle : hideStyle}
+        aria-label={konnector.name}
+        {...dialogProps}
+        onClose={redirectToAccount}
       >
-        <CipherIcon konnector={konnector.slug} className="u-mr-1" />
-        <Typography variant="h5">{konnector.name}</Typography>
-      </DialogTitle>
-      <DialogContent className="u-pt-0">
-        {fetching ? (
-          <div className="u-pv-2 u-ta-center">
-            <Spinner size="xxlarge" />
-          </div>
-        ) : (
-          <TriggerManager
-            account={account}
-            konnector={konnector}
-            initialTrigger={trigger}
-            onSuccess={redirectToAccount}
-            showError={true}
-            onVaultDismiss={redirectToAccount}
-            fieldOptions={fieldOptions}
-          />
-        )}
-      </DialogContent>
-    </Dialog>
-  )
-}
+        <DialogCloseButton onClick={redirectToAccount} />
+        <DialogTitle
+          {...dialogTitleProps}
+          className={cx(
+            dialogTitleProps.className,
+            'u-flex u-flex-items-center'
+          )}
+          disableTypography
+        >
+          <CipherIcon konnector={konnector.slug} className="u-mr-1" />
+          <Typography variant="h5">{konnector.name}</Typography>
+        </DialogTitle>
+        <DialogContent className="u-pt-0">
+          {fetching ? (
+            <div className="u-pv-2 u-ta-center">
+              <Spinner size="xxlarge" />
+            </div>
+          ) : (
+            <TriggerManager
+              account={account}
+              konnector={konnector}
+              initialTrigger={trigger}
+              onSuccess={redirectToAccount}
+              showError={true}
+              onVaultDismiss={redirectToAccount}
+              fieldOptions={fieldOptions}
+            />
+          )}
+        </DialogContent>
+      </Dialog>
+    )
+  }
+)
 
 export class EditAccountModal extends Component {
   constructor(props) {
