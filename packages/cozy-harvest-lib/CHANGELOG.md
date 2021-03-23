@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.0.1...cozy-harvest-lib@5.1.0) (2021-03-23)
+
+
+### Features
+
+* KonnectorBlock use its own fetchIcon func for AppIcon comp ([7da2d23](https://github.com/cozy/cozy-libs/commit/7da2d23))
+
+
+
+
+
 ## [5.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.0.0...cozy-harvest-lib@5.0.1) (2021-03-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
