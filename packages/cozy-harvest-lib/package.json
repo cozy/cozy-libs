@@ -31,7 +31,6 @@
     "cozy-bi-auth": "0.0.19",
     "cozy-doctypes": "^1.80.0",
     "cozy-logger": "^1.7.0",
-    "cozy-ui": "^47.4.0",
     "date-fns": "^1.30.1",
     "final-form": "^4.18.5",
     "lodash": "^4.17.19",
@@ -81,7 +80,7 @@
     "cozy-flags": ">=2.3.5",
     "cozy-keys-lib": ">=3.7.0",
     "cozy-realtime": ">=3.12.2",
-    "cozy-ui": ">=40.9.1",
+    "cozy-ui": ">=47.4.0",
     "leaflet": "^1.7.1",
     "react-router-dom": "^5.0.1"
   },
