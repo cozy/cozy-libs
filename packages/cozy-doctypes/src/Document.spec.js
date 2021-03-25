@@ -761,3 +761,39 @@ describe('copyWithClient', () => {
     expect(Document.cozyClient).toBe(cozyClient)
   })
 })
+
+describe('bulk save', () => {
+  it('should create or update documents in bulk', async () => {
+    const todos = [{ id: 1 }, { id: 2 }, { id: 3 }]
+    class Todo extends Document {}
+    jest
+      .spyOn(Todo, 'createOrUpdate')
+      .mockImplementation(doc => ({ ...doc, rev: 1 }))
+    const newTodos = await Todo.bulkSave(todos)
+    expect(newTodos).toEqual([
+      { id: 1, rev: 1 },
+      { id: 2, rev: 1 },
+      { id: 3, rev: 1 }
+    ])
+  })
+
+  it('should return errors for failures', async () => {
+    const todos = [{ id: 1 }, { id: 2 }, { id: 3 }]
+    class Todo extends Document {}
+    jest.spyOn(Todo, 'createOrUpdate').mockImplementation(async doc => {
+      if (doc.id === 2) {
+        throw new Error('409: conflict')
+      }
+      return { ...doc, rev: 1 }
+    })
+    const onCreateOrUpdateError = jest.fn(error => {
+      return error
+    })
+    const newTodos = await Todo.bulkSave(todos, { onCreateOrUpdateError })
+    expect(newTodos).toEqual([
+      { id: 1, rev: 1 },
+      new Error('409: conflict'),
+      { id: 3, rev: 1 }
+    ])
+  })
+})
