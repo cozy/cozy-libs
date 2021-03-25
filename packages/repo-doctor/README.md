@@ -24,7 +24,7 @@ to mattermost.
 
 ## Usage
 
-- Repo doctor needs a config to work so you need to download a config.
+- Repo doctor needs a config to work so you need to download a config (the code sample below downloads a sample config from the repository).
 - It will try to detect the current folder repository
 - If no repository is detected, it will run repo-doctor on all the repositories
   of the config
@@ -45,6 +45,8 @@ Repository: cozy/cozy-banks
   dep-up-to-date: cozy-bar: 7.13.3, last is 7.15.2
   locales-in-repo: Locales are stored in the repository
 ```
+
+### Help
 
 ```
 $ repo-doctor --help
