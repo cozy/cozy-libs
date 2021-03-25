@@ -377,11 +377,20 @@ class Document {
 
     return parallelMap(
       documents,
-      doc => {
+      async doc => {
         if (logProgress) {
           logProgress(doc)
         }
-        return this.createOrUpdate(doc, createOrUpdateOptions)
+        try {
+          const newDoc = await this.createOrUpdate(doc, createOrUpdateOptions)
+          return newDoc
+        } catch (e) {
+          if (options.onCreateOrUpdateError) {
+            return options.onCreateOrUpdateError(e, doc)
+          } else {
+            throw e
+          }
+        }
       },
       concurrency
     )
