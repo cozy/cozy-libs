@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.4.0 (2021-03-25)
+
+
+### Features
+
+* Remove customStyles on KonnectorBlock ([8d3541f](https://github.com/cozy/cozy-libs/commit/8d3541f))
+
+
+
+
+
 # 0.3.0 (2021-02-12)
 
 
