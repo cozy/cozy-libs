@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.81.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.80.0...cozy-doctypes@1.81.0) (2021-03-25)
+
+
+### Features
+
+* Allow to pass onCreateOrUpdate error to bulkSave ([eab74d6](https://github.com/cozy/cozy-libs/commit/eab74d6))
+
+
+
+
+
 # [1.80.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.79.0...cozy-doctypes@1.80.0) (2021-03-22)
 
 
