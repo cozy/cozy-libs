@@ -18,9 +18,8 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 
+import withI18n from './hoc/withI18n'
 import Markdown from './Markdown'
-import withLocales from './hoc/withLocales'
-
 import { fetchKonnectorData } from '../helpers/konnectorBlock'
 
 /**
@@ -130,4 +129,4 @@ KonnectorBlock.propTypes = {
   file: PropTypes.object.isRequired
 }
 
-export default withLocales(KonnectorBlock)
+export default withI18n(KonnectorBlock)
