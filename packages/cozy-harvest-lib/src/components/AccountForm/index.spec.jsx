@@ -9,7 +9,7 @@ import { isMobile } from 'cozy-device-helper'
 import { AccountForm } from 'components/AccountForm'
 import enLocale from 'locales/en.json'
 import Polyglot from 'node-polyglot'
-import { render } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
 
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)
@@ -418,6 +418,14 @@ describe('AccountForm', () => {
         focusSecretField: true
       }
       const root = setup(fieldOptions)
+      expect(root.queryByPlaceholderText('*************')).toBeFalsy()
+    })
+
+    it('should not render password placeholder with values in identifier', () => {
+      const fieldOptions = {}
+      const root = setup(fieldOptions)
+      const identifier = root.getAllByDisplayValue('')[0]
+      fireEvent.change(identifier, { target: { value: 'newvalue' } })
       expect(root.queryByPlaceholderText('*************')).toBeFalsy()
     })
   })
