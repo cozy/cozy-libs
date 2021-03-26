@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.3.0...cozy-harvest-lib@5.3.1) (2021-03-26)
+
+
+### Bug Fixes
+
+* Remove default value ([01c7835](https://github.com/cozy/cozy-libs/commit/01c7835))
+
+
+
+
+
 # [5.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.2.2...cozy-harvest-lib@5.3.0) (2021-03-26)
 
 
