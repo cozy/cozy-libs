@@ -48,8 +48,7 @@ export class AccountFields extends PureComponent {
             {({ input }) => {
               const forceEncryptedPlaceholder = get(
                 field,
-                'forceEncryptedPlaceholder',
-                !!Object.keys(initialValues).length
+                'forceEncryptedPlaceholder'
               )
               return (
                 <AccountField
