@@ -29,7 +29,10 @@ const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
   return {
     query: () =>
-      Q(doctype).where({ 'relationships.connection.data._id': account._id }),
+      Q(doctype)
+        .where({ 'relationships.connection.data._id': account._id })
+        .include(['owners'])
+        .indexFields(['relationships.connection.data._id']),
     as: `connection-${account._id}/contracts`,
     fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
   }
