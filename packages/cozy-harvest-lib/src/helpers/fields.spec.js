@@ -1,5 +1,5 @@
 /* eslint-env jest */
-import {
+import fieldHelpers, {
   getEncryptedFieldName,
   getFieldPlaceholder,
   sanitizeSelectProps
@@ -145,6 +145,31 @@ describe('Fields Helper', () => {
         type: 'dropdown'
       }
       expect(sanitizeSelectProps(field).type).toBe('select')
+    })
+  })
+  describe('addForceEncryptedPlaceholder', () => {
+    const fields = {
+      secret: { anything: '' }
+    }
+    it('should add displaySecretPlaceholder with true value to secret field', () => {
+      const options = {
+        displaySecretPlaceholder: true
+      }
+      fieldHelpers.addForceEncryptedPlaceholder(fields, options)
+      expect(fields).toMatchObject({
+        secret: { anything: '', forceEncryptedPlaceholder: true }
+      })
+    })
+    it('should not change anything with null options', () => {
+      const options = null
+      fieldHelpers.addForceEncryptedPlaceholder(fields, options)
+
+      expect(fields).toMatchObject({
+        secret: {
+          anything: '',
+          forceEncryptedPlaceholder: false
+        }
+      })
     })
   })
 })
