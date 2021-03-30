@@ -9,6 +9,7 @@ import {
   ACCOUNTS_DOCTYPE
 } from '../connections/accounts'
 import clone from 'lodash/clone'
+import get from 'lodash/get'
 import {
   launchTrigger,
   prepareTriggerAccount,
@@ -368,6 +369,7 @@ export class ConnectionFlow {
       this.trigger = trigger
       this.account = account
       this.konnector = konnector
+
       this.t = t
 
       assert(client, 'No client')
@@ -408,7 +410,7 @@ export class ConnectionFlow {
       await this.ensureTriggerAndLaunch(client, {
         trigger,
         account,
-        konnector,
+        konnector: this.withClientSide(konnector),
         t
       })
       this.setState({ accountError: null })
@@ -478,9 +480,23 @@ export class ConnectionFlow {
   }
 
   /**
+   * Add clientSide attribute to the konnector manifest according to the context
+   *
+   * @todo When the stack handles the clientSide attribute, this won't be needed anymore
+   */
+  withClientSide(konnector) {
+    const clientSideSlugs = get(window, 'cozy.clientSideSlugs', [])
+    const clientSide = clientSideSlugs.includes(konnector.slug)
+
+    return { ...konnector, clientSide }
+  }
+
+  /**
    * Launches the job and sets everything up to follow execution.
    */
   async launch({ autoSuccessTimer = true } = {}) {
+    const konnector = this.withClientSide(this.konnector)
+
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
 
@@ -496,6 +512,28 @@ export class ConnectionFlow {
     )
 
     this.job = await launchTrigger(this.client, this.trigger)
+
+    if (konnector.clientSide) {
+      logger.info('This connector can be run by the launcher', konnector.slug)
+      const launcher = get(window, 'cozy.ClientConnectorLauncher')
+      logger.info('Found a launcher', launcher)
+      if (launcher === 'react-native') {
+        window.ReactNativeWebView.postMessage(
+          JSON.stringify({
+            message: 'startLauncher',
+            value: {
+              connector: this.konnector,
+              account: this.account,
+              trigger: this.trigger,
+              job: this.job
+            }
+          })
+        )
+      } else {
+        logger.info('Found no client connector launcher')
+      }
+    }
+
     this.realtime.subscribe(
       'updated',
       JOBS_DOCTYPE,
