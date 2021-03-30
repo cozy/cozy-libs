@@ -363,7 +363,8 @@ AccountForm.propTypes = {
 }
 
 AccountForm.defaultProps = {
-  showError: true
+  showError: true,
+  fieldOptions: {}
 }
 
 export default compose(
