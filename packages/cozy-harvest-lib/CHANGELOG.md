@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.3.1...cozy-harvest-lib@5.4.0) (2021-03-30)
+
+
+### Features
+
+* Include owners in Contracts query ([3991157](https://github.com/cozy/cozy-libs/commit/3991157))
+
+
+
+
+
 ## [5.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.3.0...cozy-harvest-lib@5.3.1) (2021-03-26)
 
 
