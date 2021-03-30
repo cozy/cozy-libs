@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.4.0...cozy-harvest-lib@5.4.1) (2021-03-30)
+
+
+### Bug Fixes
+
+* Errors when displaying the inter-app configuration form ([e4a775d](https://github.com/cozy/cozy-libs/commit/e4a775d))
+
+
+
+
+
 # [5.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.3.1...cozy-harvest-lib@5.4.0) (2021-03-30)
 
 
