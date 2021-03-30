@@ -96,7 +96,7 @@ const setup = ({ trigger } = {}) => {
       })
     })
   }
-  const flow = new ConnectionFlow(client, trigger)
+  const flow = new ConnectionFlow(client, trigger, fixtures.konnector)
   return { flow, client }
 }
 
@@ -255,6 +255,28 @@ describe('ConnectionFlow', () => {
       )
     })
 
+    it('should call ensureTriggerAndLaunch with clientSide konnector', async () => {
+      const { flow, client } = setup()
+      window.cozy = {
+        clientSideSlugs: ['konnectest']
+      }
+      jest
+        .spyOn(flow, 'ensureTriggerAndLaunch')
+        .mockResolvedValue(fixtures.launchedJob)
+
+      await setupSubmit(flow, {
+        userCredentials: fixtures.credentials
+      })
+
+      expect(flow.ensureTriggerAndLaunch).toHaveBeenCalledWith(
+        client,
+        expect.objectContaining({
+          konnector: { ...fixtures.konnector, clientSide: true }
+        })
+      )
+      delete window.cozy
+    })
+
     describe('custom konnector policy', () => {
       const bankingKonnector = {
         ...fixtures.konnector,
@@ -387,6 +409,37 @@ describe('ConnectionFlow', () => {
       })
       expect(flow.account).toEqual(fixtures.updatedAccount)
     })
+
+    it('should call the launcher when needed', async () => {
+      const { flow, client } = setup()
+      window.cozy = {
+        clientSideSlugs: ['konnectest'],
+        ClientConnectorLauncher: 'react-native'
+      }
+      window.ReactNativeWebView = {
+        postMessage: jest.fn()
+      }
+      prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
+
+      await flow.ensureTriggerAndLaunch(client, {
+        account: fixtures.existingAccount,
+        trigger: fixtures.existingTrigger
+      })
+      expect(flow.account).toEqual(fixtures.updatedAccount)
+      expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
+        JSON.stringify({
+          message: 'startLauncher',
+          value: {
+            connector: fixtures.konnector,
+            account: fixtures.updatedAccount,
+            trigger: fixtures.existingTrigger,
+            job: fixtures.launchedJob
+          }
+        })
+      )
+    })
+    delete window.cozy
+    delete window.ReactNativeWebView
   })
 })
 
