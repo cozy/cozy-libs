@@ -48,7 +48,7 @@ const Status = ({ t, trigger, konnector }) => {
           <Icon
             icon={CheckIcon}
             size={16}
-            className="u-flex-shrink-0 u-valid"
+            className="u-flex-shrink-0 u-valid u-success"
           />
         )
       }}
