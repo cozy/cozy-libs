@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.4.1...cozy-harvest-lib@5.5.0) (2021-03-31)
+
+
+### Bug Fixes
+
+* Add reconnect to props (used by banks) ([9e1ec01](https://github.com/cozy/cozy-libs/commit/9e1ec01))
+
+
+### Features
+
+* Add u-success className to be forward compatible with cozy-ui ([26af8ad](https://github.com/cozy/cozy-libs/commit/26af8ad))
+
+
+
+
+
 ## [5.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.4.0...cozy-harvest-lib@5.4.1) (2021-03-30)
 
 
