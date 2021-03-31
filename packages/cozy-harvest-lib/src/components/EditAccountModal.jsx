@@ -29,7 +29,15 @@ const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
 
 const DumbEditAccountModal = withRouter(
-  ({ konnector, account, trigger, fetching, redirectToAccount, location }) => {
+  ({
+    konnector,
+    account,
+    trigger,
+    fetching,
+    redirectToAccount,
+    location,
+    reconnect
+  }) => {
     const { dialogProps, dialogTitleProps } = useCozyDialog({
       open: true,
       size: 'm',
@@ -45,11 +53,13 @@ const DumbEditAccountModal = withRouter(
      */
     const shouldShow = useTimeout(500)
 
-    const fromReconnectButton = location.search.endsWith('reconnect')
+    // TODO Avoid passing reconnect in props,
+    // prefer to use location instead.
+    const fromReconnect = reconnect || location.search.endsWith('reconnect')
     // If we come from the reconnect button so focus on secret field
     const fieldOptions = {
       displaySecretPlaceholder: true,
-      focusSecretField: fromReconnectButton
+      focusSecretField: fromReconnect
     }
 
     return (
@@ -169,7 +179,7 @@ export class EditAccountModal extends Component {
      * When we are on mobile, we display a back button
      * On desktop we display a cross
      */
-    const { konnector } = this.props
+    const { konnector, reconnect } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <DumbEditAccountModal
@@ -178,6 +188,7 @@ export class EditAccountModal extends Component {
         trigger={trigger}
         fetching={fetching}
         redirectToAccount={this.redirectToAccount}
+        reconnect={reconnect}
       />
     )
   }
@@ -186,7 +197,8 @@ export class EditAccountModal extends Component {
 EditAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   accountId: PropTypes.string.isRequired,
-  accounts: PropTypes.array.isRequired
+  accounts: PropTypes.array.isRequired,
+  reconnect: PropTypes.bool
 }
 
 export default flow(
