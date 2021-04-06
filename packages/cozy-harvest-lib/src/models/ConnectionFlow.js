@@ -162,7 +162,7 @@ export class ConnectionFlow {
     this.getKonnectorSlug = this.getKonnectorSlug.bind(this)
     this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
     this.handleJobUpdated = this.handleJobUpdated.bind(this)
-    this.handleTwoFA = this.handleTwoFA.bind(this)
+    this.handleAccountTwoFA = this.handleAccountTwoFA.bind(this)
     this.launch = this.launch.bind(this)
     this.sendTwoFACode = this.sendTwoFACode.bind(this)
     this.unwatch = this.unwatch.bind(this)
@@ -188,12 +188,16 @@ export class ConnectionFlow {
     return this.trigger.message.konnector
   }
 
-  handleTwoFA(prevAccount) {
+  handleAccountTwoFA(prevAccount) {
     const account = this.account
 
     const prevState = prevAccount && prevAccount.state
     const state = account.state
 
+    return this.handleTwoFAStateChange(state, prevState)
+  }
+
+  handleTwoFAStateChange(state, prevState = null) {
     if (prevState === state) {
       return
     }
@@ -439,7 +443,7 @@ export class ConnectionFlow {
     }
     const { state } = this.account
     if (accounts.isTwoFANeeded(state) || accounts.isTwoFARetry(state)) {
-      this.handleTwoFA(prevAccount)
+      this.handleAccountTwoFA(prevAccount)
     } else if (accounts.isLoginSuccessHandled(state)) {
       this.handleLoginSuccessHandled()
     } else if (accounts.isLoginSuccess(state)) {
