@@ -6,12 +6,11 @@ import Card from 'cozy-ui/transpiled/react/Card'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { Text } from 'cozy-ui/transpiled/react/Text'
+import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
+
 import * as triggers from '../../helpers/triggers'
 import FlowProvider from '../FlowProvider'
 import { useFlowState } from '../../models/withConnectionFlow'
-
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 const inlineStyle = { display: 'inline-block' }
 
@@ -35,13 +34,13 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             >
               {t('card.launchTrigger.lastSync.label')}
             </Typography>
-            <Text className="u-fz-tiny" tag="span">
+            <Typography variant="caption" color="textPrimary" component="span">
               {running
                 ? t('card.launchTrigger.lastSync.syncing')
                 : lastSuccessDate
                 ? f(lastSuccessDate, t('card.launchTrigger.lastSync.format'))
                 : t('card.launchTrigger.lastSync.unknown')}
-            </Text>
+            </Typography>
           </li>
           <li className="u-mb-half">
             <Typography
@@ -52,13 +51,13 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             >
               {t('card.launchTrigger.frequency.label')}
             </Typography>
-            <Text className="u-fz-tiny" tag="span">
+            <Typography variant="caption" color="textPrimary" component="span">
               {t(
                 `card.launchTrigger.frequency.${triggers.getFrequency(
                   trigger
                 ) || 'undefined'}`
               )}
-            </Text>
+            </Typography>
           </li>
         </ul>
         <div>
