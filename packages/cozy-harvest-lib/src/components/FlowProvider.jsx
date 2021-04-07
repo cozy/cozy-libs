@@ -5,14 +5,15 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
 import logger from '../logger'
-import ConnectionFlow, {
+import {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT,
   TRIGGER_LAUNCH_EVENT,
   UPDATE_EVENT
-} from '../models/ConnectionFlow'
+} from '../models/flowEvents'
+import ConnectionFlow from '../models/ConnectionFlow'
 
 /**
  * FlowProvider instantiates a ConnectionFlow and provides it to its children.

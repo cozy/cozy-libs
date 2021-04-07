@@ -19,7 +19,7 @@ import {
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
 import biPublicKeyProd from './bi-public-key-prod.json'
-import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}

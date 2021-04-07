@@ -23,7 +23,7 @@ import {
 import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { KonnectorJobError } from '../helpers/konnectors'
-import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import logger from '../logger'
 
 const DECOUPLED_ERROR = 'decoupled'

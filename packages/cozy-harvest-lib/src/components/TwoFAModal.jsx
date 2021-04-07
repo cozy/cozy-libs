@@ -14,7 +14,7 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/ConnectionFlow'
+import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/flowEvents'
 
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
