@@ -351,6 +351,34 @@ export const onBIAccountCreation = async ({
   return account
 }
 
+export const sendTwoFaCode = (flow, code) => {
+  let fields
+
+  try {
+    // We can determine missing fields if we already have cached the
+    // connection on the frontend
+    fields = flow.getAdditionalInformationNeeded()
+  } catch (e) {
+    fields = null
+  }
+
+  if (fields) {
+    const firstField = fields[0]
+    // Update a new connection directly through the konnector policy
+    logger.debug('Sending two fa through web...')
+    flow.sendAdditionalInformation({
+      [firstField.name]: code
+    })
+  } else {
+    // If we are sending two fa for an existing connection, we do not
+    // have the connection cached on the front-end, but the connector
+    // knows the missing fields, we just have to send the two fa code
+    // through the connection flow
+    logger.debug('Sending two fa through connector...')
+    flow.sendTwoFACode(code)
+  }
+}
+
 export const getAdditionalInformationNeeded = flow => {
   const biConnection = flow.getData().biConnection
   assert(

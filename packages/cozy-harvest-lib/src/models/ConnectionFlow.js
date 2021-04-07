@@ -572,7 +572,6 @@ export class ConnectionFlow {
   }
 
   getKonnectorPolicy() {
-    console.log('gkp')
     return findKonnectorPolicy(this.konnector)
   }
 
