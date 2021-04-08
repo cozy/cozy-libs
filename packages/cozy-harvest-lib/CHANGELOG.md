@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.5.0...cozy-harvest-lib@5.6.0) (2021-04-08)
+
+
+### Bug Fixes
+
+* Better alignment for website link card icon ([1162e2e](https://github.com/cozy/cozy-libs/commit/1162e2e))
+* Use Typography components for LaunchTriggerCard ([bb9b1b3](https://github.com/cozy/cozy-libs/commit/bb9b1b3))
+
+
+### Features
+
+* Send two fa code through account when launching konnector ([53ad89b](https://github.com/cozy/cozy-libs/commit/53ad89b))
+
+
+
+
+
 # [5.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.4.1...cozy-harvest-lib@5.5.0) (2021-03-31)
 
 
