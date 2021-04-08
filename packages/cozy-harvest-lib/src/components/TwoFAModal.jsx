@@ -14,7 +14,7 @@ import accounts, {
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
 
-import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/ConnectionFlow'
+import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/flowEvents'
 
 import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
@@ -69,12 +69,9 @@ export class TwoFAModal extends PureComponent {
     const code = this.state.twoFACode
 
     const konnectorPolicy = flow.getKonnectorPolicy()
-    if (konnectorPolicy.sendAdditionalInformation) {
-      const fields = flow.getAdditionalInformationNeeded()
-      const firstField = fields[0]
-      flow.sendAdditionalInformation({
-        [firstField.name]: code
-      })
+
+    if (konnectorPolicy.sendTwoFACode) {
+      konnectorPolicy.sendTwoFACode(flow, code)
     } else {
       flow.sendTwoFACode(code)
     }

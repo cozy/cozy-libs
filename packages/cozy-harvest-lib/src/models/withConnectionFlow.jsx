@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { UPDATE_EVENT } from './ConnectionFlow'
+import { UPDATE_EVENT } from './flowEvents'
 
 export const useFlowState = flow => {
   const [flowState, setFlowState] = useState(flow.getState())

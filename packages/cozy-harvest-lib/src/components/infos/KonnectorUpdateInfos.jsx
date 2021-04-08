@@ -2,8 +2,8 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import Infos from 'cozy-ui/transpiled/react/Infos'
-import Text, { SubTitle } from 'cozy-ui/transpiled/react/Text'
 
 import KonnectorUpdateLinker from '../KonnectorUpdateLinker'
 
@@ -21,14 +21,14 @@ const KonnectorUpdateInfos = props => {
       theme={isBlocking ? 'danger' : 'secondary'}
       description={
         <>
-          <SubTitle className={isBlocking ? 'u-error' : ''}>
+          <Typography className={isBlocking ? 'u-error' : ''} variant="h5">
             {t('infos.konnectorUpdate.title')}
-          </SubTitle>
-          <Text>
+          </Typography>
+          <Typography variant="body1">
             {isBlocking
               ? t('infos.konnectorUpdate.body.blocking')
               : t('infos.konnectorUpdate.body.regular')}
-          </Text>
+          </Typography>
         </>
       }
       action={

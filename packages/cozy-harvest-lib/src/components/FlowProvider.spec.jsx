@@ -6,7 +6,7 @@ import {
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT
-} from 'models/ConnectionFlow'
+} from 'models/flowEvents'
 import TwoFAModal from 'components/TwoFAModal'
 
 const client = {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render } from '@testing-library/react'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 
 import WebsiteLinkCard from './WebsiteLinkCard'
@@ -8,25 +8,21 @@ import enLocale from '../../locales/en'
 describe('WebsiteLinkCard', () => {
   it('should render', () => {
     const link = 'https://fc.assure.ameli.fr/FRCO-app/login'
-    const wrapper = mount(
+    const root = render(
       <I18n dictRequire={() => enLocale} lang="en">
         <WebsiteLinkCard link={link} />)
       </I18n>
     )
-    const component = wrapper.find(WebsiteLinkCard)
-    expect(component.find('ButtonLink').props().href).toEqual(link)
-    expect(component.find('ButtonLink').props().label).toEqual(
-      'fc.assure.ameli.fr'
-    )
+    const linkNode = root.getByText('fc.assure.ameli.fr')
+    expect(linkNode.getAttribute('href')).toEqual(link)
   })
   it('should ignore invalid urls', () => {
     const link = 'www.trainline.fr'
-    const wrapper = mount(
+    const root = render(
       <I18n dictRequire={() => enLocale} lang="en">
-        <WebsiteLinkCard link={link} />)
+        <WebsiteLinkCard link={link} />
       </I18n>
     )
-    const component = wrapper.find(WebsiteLinkCard)
-    expect(component.exists('ButtonLink')).toEqual(false)
+    expect(root.queryByText('www.trainline.fr')).toBeFalsy()
   })
 })

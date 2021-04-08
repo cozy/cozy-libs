@@ -8,7 +8,8 @@ import {
   setSync,
   getBIConfig,
   saveBIConfig,
-  updateBIConnectionFromFlow
+  updateBIConnectionFromFlow,
+  sendTwoFaCode
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
 import {
@@ -19,7 +20,7 @@ import {
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
 import biPublicKeyProd from './bi-public-key-prod.json'
-import { LOGIN_SUCCESS_EVENT } from '../models/ConnectionFlow'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
@@ -67,6 +68,9 @@ const konnector = {
   slug: 'boursorama83',
   parameters: {
     bankId: TEST_BANK_COZY_ID
+  },
+  partnership: {
+    domain: 'https://budget-insight.com'
   }
 }
 
@@ -721,5 +725,34 @@ describe('updateBIConnectionFromFlow', () => {
       { login: '1234' },
       'temporary-token'
     )
+  })
+})
+
+describe('sendTwoFaCode', () => {
+  it('should use flow.sendTwoFACode if fields are unknown', () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    const biConnId = 'conn-1337'
+    const account = { data: { auth: { bi: { connId: biConnId } } } }
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
+    jest.spyOn(flow, 'sendTwoFACode')
+    sendTwoFaCode(flow, 'abcde')
+    expect(flow.sendTwoFACode).toHaveBeenCalled()
+  })
+
+  it('should use flow.sendAdditionalInformation if fields are known', () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    const biConnId = 'conn-1337'
+    const account = { data: { auth: { bi: { connId: biConnId } } } }
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
+    flow.setData({ biConnection: { fields: ['sms'] } })
+    jest.spyOn(flow, 'sendAdditionalInformation')
+    sendTwoFaCode(flow, 'abcde')
+    expect(flow.sendAdditionalInformation).toHaveBeenCalled()
   })
 })
