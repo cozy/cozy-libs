@@ -123,6 +123,7 @@ class ShareByLink extends React.Component {
           </Typography>
           {!checked && (
             <Button
+              style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
               theme="text"
               className={styles['aligned-dropdown-button']}
               onClick={async () => {
