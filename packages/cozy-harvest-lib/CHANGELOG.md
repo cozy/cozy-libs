@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.7.0...cozy-harvest-lib@5.8.0) (2021-04-09)
+
+
+### Features
+
+* Use named query for useAppLinkWithStoreFallback ([b9d1fad](https://github.com/cozy/cozy-libs/commit/b9d1fad))
+* Use named query when fetching apps ([38a57f2](https://github.com/cozy/cozy-libs/commit/38a57f2))
+
+
+
+
+
 # [5.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.6.0...cozy-harvest-lib@5.7.0) (2021-04-09)
 
 
