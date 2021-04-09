@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.6.0...cozy-flags@2.7.0) (2021-04-09)
+
+
+### Features
+
+* Use animated SVG ([a0856a5](https://github.com/cozy/cozy-libs/commit/a0856a5))
+
+
+
+
+
 # [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.5.4...cozy-flags@2.6.0) (2021-03-08)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.6.0...cozy-harvest-lib@5.7.0) (2021-04-09)
+
+
+### Features
+
+* Use animated SVG ([a0856a5](https://github.com/cozy/cozy-libs/commit/a0856a5))
+* Use Typography ([87acc62](https://github.com/cozy/cozy-libs/commit/87acc62))
+
+
+
+
+
 # [5.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.5.0...cozy-harvest-lib@5.6.0) (2021-04-08)
 
 
