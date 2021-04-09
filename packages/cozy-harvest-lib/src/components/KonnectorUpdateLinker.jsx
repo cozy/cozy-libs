@@ -4,10 +4,10 @@ import PropTypes from 'prop-types'
 import { useQuery, Q } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
+import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 
 import { Application } from 'cozy-doctypes'
-
-import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
+import { appsConn } from '../connections/apps'
 
 const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
   <ButtonLink
@@ -21,7 +21,7 @@ const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
 )
 
 const KonnectorUpdateLinker = ({ label, isBlocking, konnector }) => {
-  const { data, fetchStatus } = useQuery(Q('io.cozy.apps'))
+  const { data, fetchStatus } = useQuery(appsConn.query, appsConn)
   const isLoaded = fetchStatus === 'loaded'
   const konnectorUpdateUrl = Application.getStoreInstallationURL(
     data,
