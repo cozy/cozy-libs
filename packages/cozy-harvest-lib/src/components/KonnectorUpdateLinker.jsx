@@ -1,7 +1,7 @@
 import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
-import { useQuery, Q } from 'cozy-client'
+import { useQuery } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
