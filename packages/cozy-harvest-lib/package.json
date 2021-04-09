@@ -21,7 +21,7 @@
     "check-locales": "./scripts/check-locales.sh",
     "test": "jest --runInBand",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-harvest-lib",
-    "watch": "yarn build --watch",
+    "start": "yarn build --watch",
     "cli": "env BABEL_ENV=es5 node src/cli/index.js",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
