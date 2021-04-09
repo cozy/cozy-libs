@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { memo } from 'react'
 import PropTypes from 'prop-types'
 
 import { Query, Q } from 'cozy-client'
@@ -20,45 +20,42 @@ const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
   />
 )
 
-export class KonnectorUpdateLinker extends PureComponent {
-  render() {
-    const { label, isBlocking, konnector } = this.props
-    return (
-      <Query query={() => Q('io.cozy.apps')}>
-        {({ data, fetchStatus }) => {
-          const isLoaded = fetchStatus === 'loaded'
-          const konnectorUpdateUrl = Application.getStoreInstallationURL(
-            data,
-            konnector
+const KonnectorUpdateLinker = ({ label, isBlocking, konnector }) => {
+  return (
+    <Query query={() => Q('io.cozy.apps')}>
+      {({ data, fetchStatus }) => {
+        const isLoaded = fetchStatus === 'loaded'
+        const konnectorUpdateUrl = Application.getStoreInstallationURL(
+          data,
+          konnector
+        )
+        const isReady = isLoaded && konnectorUpdateUrl
+        if (isReady) {
+          return (
+            <AppLinker slug="store" href={konnectorUpdateUrl}>
+              {({ href }) => {
+                return (
+                  <KonnectorUpdateButton
+                    href={href}
+                    isBlocking={isBlocking}
+                    label={label}
+                  />
+                )
+              }}
+            </AppLinker>
           )
-          const isReady = isLoaded && konnectorUpdateUrl
-          if (isReady) {
-            return (
-              <AppLinker slug="store" href={konnectorUpdateUrl}>
-                {({ href }) => {
-                  return (
-                    <KonnectorUpdateButton
-                      href={href}
-                      isBlocking={isBlocking}
-                      label={label}
-                    />
-                  )
-                }}
-              </AppLinker>
-            )
-          } else {
-            return (
-              <KonnectorUpdateButton
-                disabled={true}
-                label={label}
-                isBlocking={isBlocking}
-              />
-            )
-          }
-        }}
-      </Query>
-    )
-  }
+        } else {
+          return (
+            <KonnectorUpdateButton
+              disabled={true}
+              label={label}
+              isBlocking={isBlocking}
+            />
+          )
+        }
+      }}
+    </Query>
+  )
 }
 
 KonnectorUpdateLinker.propTypes = {
@@ -67,4 +64,4 @@ KonnectorUpdateLinker.propTypes = {
   label: PropTypes.string
 }
 
-export default KonnectorUpdateLinker
+export default memo(KonnectorUpdateLinker)
