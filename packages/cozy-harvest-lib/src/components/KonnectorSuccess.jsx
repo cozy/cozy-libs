@@ -5,6 +5,7 @@ import { withRouter } from 'react-router'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Button'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
 import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
@@ -18,7 +19,9 @@ const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 export const DescriptionContent = ({ title, message, children }) => {
   return (
     <>
-      <h4>{title}</h4>
+      <Typography variant="h4" className="u-mb-1">
+        {title}
+      </Typography>
       <Markdown source={message} />
       {children}
     </>
