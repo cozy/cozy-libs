@@ -1,17 +1,27 @@
 import React from 'react'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import I18n from 'cozy-ui/transpiled/react/I18n'
-import { CozyProvider as CozyClientProvider } from 'cozy-client'
-import enLocale from '../src/locales/en.json'
-import CozyClient from 'cozy-client'
+import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
+import { Provider as ReduxProvider } from 'react-redux'
 
-const AppLike = ({ client: clientOption, locale, children }) => {
-  const client = clientOption || new CozyClient({})
+import enLocale from '../src/locales/en.json'
+
+const defaultClient = new CozyClient()
+defaultClient.ensureStore()
+
+const AppLike = ({
+  client: clientOption,
+  store: storeOption,
+  locale,
+  children
+}) => {
+  const client = clientOption || defaultClient
+  const store = storeOption || defaultClient.store
   return (
     <CozyClientProvider client={client}>
       <BreakpointsProvider>
         <I18n lang="en" dictRequire={() => locale || enLocale}>
-          {children}
+          <ReduxProvider store={store}>{children}</ReduxProvider>
         </I18n>
       </BreakpointsProvider>
     </CozyClientProvider>

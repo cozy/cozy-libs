@@ -23,10 +23,9 @@ const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
 const KonnectorUpdateLinker = ({ label, isBlocking, konnector }) => {
   const { data, fetchStatus } = useQuery(appsConn.query, appsConn)
   const isLoaded = fetchStatus === 'loaded'
-  const konnectorUpdateUrl = Application.getStoreInstallationURL(
-    data,
-    konnector
-  )
+  const konnectorUpdateUrl = data
+    ? Application.getStoreInstallationURL(data, konnector)
+    : null
   const isReady = isLoaded && konnectorUpdateUrl
 
   return isReady ? (
