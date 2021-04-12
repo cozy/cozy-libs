@@ -487,6 +487,30 @@ describe('createOrUpdateBIConnection', () => {
     ).rejects.toEqual(new Error('LOGIN_FAILED'))
   })
 
+  it('should convert config correctly', async () => {
+    const { client, flow } = setup()
+    const err = new Error()
+    err.code = 'config'
+    getBIConnection.mockReset().mockResolvedValueOnce({})
+    updateBIConnection.mockReset().mockRejectedValue(err)
+    await expect(
+      createOrUpdateBIConnection({
+        client,
+        flow,
+        account: merge(account, {
+          data: {
+            auth: {
+              bi: {
+                connId: 1337
+              }
+            }
+          }
+        }),
+        konnector
+      })
+    ).rejects.toEqual(new Error('LOGIN_FAILED'))
+  })
+
   it('should convert SCARequired correctly', async () => {
     const { client, flow } = setup()
     const err = new Error()
