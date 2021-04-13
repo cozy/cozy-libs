@@ -112,8 +112,8 @@
     "reconnect-via-form": "Se reconnecter",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
-        "title": "Espace Cozy plein",
-        "description": "Actuellement, le service ne peut plus récupérer vos documents.\nLibérez de l'espace en supprimant des fichiers ou rendez-vous dans **Paramètres > Stockage** pour augmenter l'espace de stockage de votre Cozy"
+        "title": "Espace Disque plein",
+        "description": "Actuellement, le service ne peut plus récupérer vos documents.\nLibérez de l'espace en supprimant des fichiers ou rendez-vous dans **Paramètres > Stockage** pour augmenter votre espace de stockage."
       },
       "CHALLENGE_ASKED": {
         "title": "Second facteur d’authentification demandé",
@@ -121,7 +121,7 @@
       },
       "LOGIN_FAILED": {
         "title": "Identifiants erronés ou expirés",
-        "description": "Votre identifiant et/ou mot de passe ne sont pas corrects. Vous pouvez les vérifier directement sur le site [%{name}](%{link}) avant de réessayer"
+        "description": "Votre identifiant et/ou mot de passe ne semblent pas corrects. Merci de les vérifier sur le site [%{name}](%{link}) avant de réessayer."
       },
       "LOGIN_FAILED.NEEDS_SECRET": {
         "title": "Information additionnelle requise",
@@ -149,7 +149,7 @@
       },
       "USER_ACTION_NEEDED": {
         "title": "Action nécessaire chez le fournisseur",
-        "description": "Il semble que le site [%{name}](%{link}) ait besoin que vous vous y authentifiez pour réaliser une action spécifique. Merci de relancer une connexion manuelle une fois cette action effectuée."
+        "description": "Il semble que [%{name}](%{link}) ait besoin de revérifier votre connexion. Connectez-vous sur [%{name}](%{link}) puis cliquez sur \"Mettre à jour\" dans l'onglet données."
       },
       "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
         "title": "Renouvellement de l’authentification requis",
@@ -169,7 +169,7 @@
       },
       "USER_ACTION_NEEDED.SCA_REQUIRED": {
         "title": "Renouvellement d'authentification demandé",
-        "description": "Il semble que %{name} ait besoin de revérifier votre connexion avant d'autoriser Cozy à synchroniser vos comptes. Merci de relancer le connecteur, cela déclenchera la demande auprès de votre banque. Vous recevrez un code à usage unique ou une demande sur l'espace client ou l'application de votre banque."
+        "description": "Il semble que %{name} ait besoin de revérifier votre connexion afin d'autoriser une nouvelle synchronisation de vos comptes. Merci de relancer le connecteur, cela déclenchera la demande auprès de votre banque. Vous recevrez un code à usage unique ou une demande sur l'espace client ou l'application de votre banque."
       },
       "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
         "title": "Renouvellement de l’authentification demandé",
@@ -177,7 +177,7 @@
       },
       "USER_ACTION_NEEDED.WEBAUTH_REQUIRED": {
         "title": "Authentification sur le site web demandée",
-        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez à leur site web pour que la connexion à Cozy refonctionne. Merci de relancer le connecteur une fois cette action effectuée."
+        "description": "Il semble que [%{name}](%{link}) ait besoin que vous vous authentifiiez à leur site web pour que la synchronisation refonctionne. Merci de relancer le connecteur une fois cette action effectuée."
       },
       "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
         "title": "Le code fourni ne semble pas correct",
@@ -382,7 +382,7 @@
     "button": {
       "label": "Fermer"
     },
-    "description": "Vos données existantes seront disponibles dans votre Cozy dans quelques minutes et les prochaines suivront automatiquement.",
+    "description": "Vos données existantes seront disponibles dans quelques minutes et les prochaines suivront automatiquement.",
     "figure": {
       "alt": "Connecté"
     },
@@ -410,9 +410,9 @@
   "account": {
     "success": {
       "title": "Configuration réussie !",
-      "connect": "Vos données existantes seront disponibles dans votre Cozy dans quelques minutes et les prochaines suivront automatiquement.",
+      "connect": "Vos données existantes seront disponibles dans quelques minutes et les prochaines suivront automatiquement.",
       "banksLinkText": "Voir mes comptes dans %{appName}",
-      "driveLinkText": "Ouvrir le dossier dans Cozy Drive",
+      "driveLinkText": "Ouvrir le dossier dans %{appName}",
       "button": "Fermer"
     }
   },
@@ -422,14 +422,14 @@
   },
   "suggestions": {
     "title": "Importer mes données %{name}",
-    "data": "Installer %{name} importera automatiquement les données suivantes dans votre cozy :",
+    "data": "Installer %{name} importera automatiquement les données suivantes :",
     "why": "Pourquoi %{name} m’est proposé ?",
     "reason_bank": "%{name} a été détecté à partir de vos dépenses bancaires. Pas d’inquiétude, personne à part vous ne peut avoir accès à cette  information.",
     "install": "Installer",
     "silence": "Ne plus me proposer"
   },
   "dataType": {
-    "none": "%{name} n'accèdera à aucune donnée de votre Cozy",
+    "none": "%{name} n'accèdera à aucune de vos données personnelles.",
     "activity": "Vos activités",
     "appointment": "Vos rendez-vous",
     "bankTransactions": "Vos mouvements bancaires",
