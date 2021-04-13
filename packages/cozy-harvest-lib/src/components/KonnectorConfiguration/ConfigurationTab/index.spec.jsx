@@ -125,22 +125,6 @@ describe('ConfigurationTab', () => {
       })
       expect(root.getByText('Reconnect')).toBeTruthy()
     })
-
-    it('should not show a reconnect button if error is not solvable by reconnecting through form)', () => {
-      const { root } = setup({
-        checkShouldUnlock: jest.fn().mockResolvedValue(false),
-        trigger: {
-          message: {
-            account: 'account-id-123',
-            konnector: 'konnector-slug'
-          }
-        },
-        flowState: {
-          error: new KonnectorJobError('USER_ACTION_NEEDED')
-        }
-      })
-      expect(root.queryByText('Reconnect')).toBeFalsy()
-    })
   })
 
   describe('deletion modal', () => {

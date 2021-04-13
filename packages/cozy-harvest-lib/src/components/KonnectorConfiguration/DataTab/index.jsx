@@ -14,7 +14,6 @@ import TriggerErrorInfo from '../../../components/infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
-import tabSpecs from '../tabSpecs'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 import Datacards from '../../Datacards'
@@ -23,25 +22,12 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState
-  const hasLoginError = hasError && error.isLoginError()
   const hasError = !!error
 
   useTrackPage('donnees')
 
-  const shouldDisplayError = tabSpecs.data.errorShouldBeDisplayed(
-    error,
-    flowState
-  )
   const hasTermsVersionMismatchError =
     hasError && error.isTermsVersionMismatchError()
-  const isTermsVersionMismatchErrorWithVersionAvailable =
-    hasTermsVersionMismatchError &&
-    konnectorsModel.hasNewVersionAvailable(konnector)
-  const hasGenericError =
-    hasError &&
-    !hasLoginError &&
-    !isTermsVersionMismatchErrorWithVersionAvailable
-
   const appLinks = getRelatedAppsSlugs({
     konnectorManifest: konnector,
     trigger
@@ -68,7 +54,7 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
             isBlocking={hasTermsVersionMismatchError}
           />
         )}
-        {shouldDisplayError && hasGenericError && (
+        {hasError && (
           <TriggerErrorInfo
             error={error}
             konnector={konnector}
