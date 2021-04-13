@@ -35,11 +35,23 @@ const getBIConnectionIdFromAccount = account =>
 const getBIIdFromContract = bankAccount => bankAccount.vendorId
 
 /**
+ * This error map is not in the bi-auth package since it is not really
+ * satisfying to have "config" mapped to LOGIN_FAILED. It might change.
+ * We should not have this error if we validate the fields in the
+ * front-end.
+ */
+const extraBIErrorMap = {
+  config: 'LOGIN_FAILED'
+}
+
+/**
  * Converts and chains error
  */
 const convertBIErrortoKonnectorJobError = error => {
   const errorCode = error ? error.code : null
-  const cozyErrorMessage = errorCode ? biErrorMap[errorCode] : null
+  const cozyErrorMessage = errorCode
+    ? biErrorMap[errorCode] || extraBIErrorMap[errorCode] || null
+    : null
   const errorMessage =
     cozyErrorMessage ||
     (errorCode ? `UNKNOWN_ERROR.${errorCode}` : 'UNKNOWN_ERROR')
