@@ -4,8 +4,8 @@
       "welcome": {
         "title": "%{appTitle}",
         "desc": "Create a Cozy or sign in to access %{appTitle}.",
-        "button": "Sign in",
-        "no_account_link": "I don't have a Cozy",
+        "button": "Sign in to your cozy",
+        "no_account_link": "No Cozy? Ask for one here.",
         "create_my_cozy": "Create my Cozy"
       },
       "server_selection": {
