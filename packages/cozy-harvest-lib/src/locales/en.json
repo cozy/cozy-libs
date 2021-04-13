@@ -112,7 +112,7 @@
     "reconnect-via-form": "Reconnect",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
-        "title": "Cozy Storage full",
+        "title": "Storage full",
         "description": "This service cannot fetch your documents now. Please remove some files or go to **Settings > Storage** to get more free space."
       },
       "CHALLENGE_ASKED": {
@@ -382,7 +382,7 @@
     "button": {
       "label": "Close"
     },
-    "description": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically.",
+    "description": "Your data will be available in a few minutes and the next ones will follow automatically.",
     "figure": {
       "alt": "connected"
     },
@@ -410,7 +410,7 @@
   "account": {
     "success": {
       "title": "Successful configuration!",
-      "connect": "Your data will be available in your Cozy in a few minutes and the next ones will follow automatically.",
+      "connect": "Your data will be available in a few minutes and the next ones will follow automatically.",
       "banksLinkText": "See my accounts in %{appName}",
       "driveLinkText": "Open the folder in Cozy Drive",
       "button": "Close"
@@ -422,14 +422,14 @@
   },
   "suggestions": {
     "title": "Import your data from %{name}",
-    "data": "Installing %{name} will automatically import the following data into your cozy:",
+    "data": "Installing %{name} will automatically import the following data:",
     "why": "Why is %{name} suggested to me?",
     "reason_bank": "%{name} has been detected in one of your bank transactions. Don't worry, no one else can access this information",
     "install": "Install",
     "silence": "Don't suggest it again"
   },
   "dataType": {
-    "none": "%{name} won't access any data in your Cozy",
+    "none": "%{name} won't access any of your personal data",
     "activity": "Your activities",
     "appointment": "Your appointments",
     "bankTransactions": "Your bank transactions",
