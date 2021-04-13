@@ -38,7 +38,6 @@ import { useTrackPage, useTracker } from '../../hoc/tracking'
 
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
-import tabSpecs from '../tabSpecs'
 import { ContractsForAccount } from './Contracts'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
@@ -88,14 +87,8 @@ const ConfigurationTab = ({
   const flowState = flow.getState()
   const { error, running } = flowState
   const { showUnlockForm } = useVaultUnlockContext()
-  const shouldDisplayError = tabSpecs.configuration.errorShouldBeDisplayed(
-    error,
-    flowState
-  )
 
   useTrackPage('configuration')
-
-  const hasLoginError = error && error.isLoginError()
 
   const handleDeleteConfirm = async () => {
     setRequestDeletion(false)
@@ -143,15 +136,15 @@ const ConfigurationTab = ({
   }
 
   return (
-    <div className={isMobile ? '' : 'u-pv-1-half'}>
+    <div className={isMobile ? '' : 'u-pt-1 u-pb-1-half'}>
       {/**
        * Use an extra div with padding instead of setting margins on TriggerErrorInfo since
        * the offsetHeight of the parent does not take into account margins; slide content was
        * cropped since SwipeableViews uses the offsetHeight of the first slide children when
        * computing the height of the slide wrapper.
        */}
-      {shouldDisplayError && hasLoginError && (
-        <div className={isMobile ? 'u-pv-1' : 'u-pb-2'}>
+      {error && (
+        <div className={isMobile ? 'u-p-1' : 'u-pb-2'}>
           <TriggerErrorInfo
             error={error}
             konnector={konnector}

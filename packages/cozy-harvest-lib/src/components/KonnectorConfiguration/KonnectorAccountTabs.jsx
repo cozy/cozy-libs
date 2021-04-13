@@ -14,16 +14,6 @@ import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
-import tabSpecs from './tabSpecs'
-
-const WarningError = () => {
-  const { t } = useI18n()
-  return (
-    <span aria-label={t('badges.warning')}>
-      <Icon icon={WarningIcon} size={13} className="u-error u-ml-half" />
-    </span>
-  )
-}
 
 const tabIndexes = {
   data: 0,
@@ -41,32 +31,12 @@ const Tab = props => {
   return <UITab classes={classes} {...props} />
 }
 
-export const KonnectorAccountTabsTabs = ({ tab, onChange, flowState }) => {
+export const KonnectorAccountTabsTabs = ({ tab, onChange }) => {
   const { t } = useI18n()
-  const { error } = flowState
   return (
     <Tabs onChange={onChange} value={tab}>
-      <Tab
-        label={
-          <>
-            {t('modal.tabs.data')}
-            {tabSpecs.data.errorShouldBeDisplayed(error, flowState) && (
-              <WarningError />
-            )}
-          </>
-        }
-      />
-      <Tab
-        label={
-          <>
-            {t('modal.tabs.configuration')}
-            {tabSpecs.configuration.errorShouldBeDisplayed(
-              error,
-              flowState
-            ) && <WarningError />}
-          </>
-        }
-      />
+      <Tab label={<>{t('modal.tabs.data')}</>} />
+      <Tab label={<>{t('modal.tabs.configuration')}</>} />
     </Tabs>
   )
 }
