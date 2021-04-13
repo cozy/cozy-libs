@@ -9,7 +9,9 @@ import get from 'lodash/get'
 import omit from 'lodash/omit'
 import clone from 'lodash/clone'
 import set from 'lodash/set'
+import fromPairs from 'lodash/fromPairs'
 import defaults from 'lodash/defaults'
+import memoize from 'lodash/memoize'
 
 import { waitForRealtimeEvent } from './jobUtils'
 import {
@@ -18,7 +20,8 @@ import {
   updateBIConnection,
   getBIUserConfig,
   updateBIUserConfig,
-  setBIConnectionSyncStatus
+  setBIConnectionSyncStatus,
+  fetchBank
 } from './bi-http'
 import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
@@ -46,6 +49,8 @@ const extraBIErrorMap = {
 
 /**
  * Converts and chains error
+ *
+ * @throws Error
  */
 const convertBIErrortoKonnectorJobError = error => {
   const errorCode = error ? error.code : null
@@ -60,6 +65,10 @@ const convertBIErrortoKonnectorJobError = error => {
   throw err
 }
 
+/**
+ * @param  {[type]} konnector [description]
+ * @return {Boolean}           [description]
+ */
 export const isBudgetInsightConnector = konnector => {
   return (
     konnector.partnership &&
@@ -67,6 +76,9 @@ export const isBudgetInsightConnector = konnector => {
   )
 }
 
+/**
+ * @return {BIConfig} - Token along with BI endpoint
+ */
 const createTemporaryToken = async ({ client, konnector, account }) => {
   assert(
     konnector.slug,
@@ -488,6 +500,39 @@ export const fetchExtraOAuthUrlParams = async ({
   return { id_connector: biBankId, token }
 }
 
+const fetchValidationRules = memoize(
+  async ({ client, konnector, account }) => {
+    const { code: token, biBankId, ...config } = await createTemporaryToken({
+      client,
+      konnector,
+      account
+    })
+    const bank = await fetchBank(config, biBankId, token)
+    const fields = bank.fields
+    return fromPairs(
+      fields.map(field => {
+        const rx = field.regex ? new RegExp(field.regex) : null
+        return [
+          /**
+           * @TODO map field names from BI names to cozy names since
+           * the form has no idea about BI
+           * Right now, validation cannot work since validators passed to the form
+           * use BI nomenclature.
+           */
+          field.name,
+          {
+            regex: field.regex,
+            isValid: userInput => {
+              return !rx || Boolean(rx.exec(userInput))
+            }
+          }
+        ]
+      })
+    )
+  },
+  ({ client, konnector }) => [client.uri, konnector.slug]
+)
+
 /**
  * Should the connection be resumed ?
  *
@@ -509,5 +554,6 @@ export const konnectorPolicy = {
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   getAdditionalInformationNeeded,
   handleOAuthAccount,
-  setSync
+  setSync,
+  fetchValidationRules
 }

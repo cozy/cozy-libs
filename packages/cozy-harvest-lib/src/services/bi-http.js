@@ -212,3 +212,14 @@ export const setBIConnectionSyncStatus = async (
     biAccessToken
   )
 }
+
+export const fetchBank = async (config, bankId, biAccessToken) => {
+  assert(bankId, `Must pass bankId id to fetchBank (${bankId} was passed)`)
+  return await biRequest(
+    'GET',
+    `/banks/${bankId}?expand=fields`,
+    config,
+    null,
+    biAccessToken
+  )
+}

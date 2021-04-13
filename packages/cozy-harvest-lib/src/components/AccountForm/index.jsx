@@ -6,9 +6,12 @@ import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
-import withLocales from '../hoc/withLocales'
-import AccountFields from './AccountFields'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { withClient } from 'cozy-client'
 
+import { findKonnectorPolicy } from '../../konnector-policies'
+import AccountFields from './AccountFields'
+import withLocales from '../hoc/withLocales'
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
@@ -17,8 +20,8 @@ import manifest from '../../helpers/manifest'
 import fieldHelpers, { SECRET } from '../../helpers/fields'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
+const VALIDATION_ERROR = 'VALIDATION_ERROR'
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
 /**
@@ -167,14 +170,27 @@ export class AccountForm extends PureComponent {
 
   validate = (fields, initialValues) => vals => {
     let errors = {}
-    for (let name in fields)
+
+    for (let name in fields) {
       if (
         fields[name].required &&
         !vals[name] &&
         // Don't require value for empty encrypted fields with initial value
         !initialValues[getEncryptedFieldName(name)]
-      )
+      ) {
         errors[name] = VALIDATION_ERROR_REQUIRED_FIELD
+      }
+
+      const isFieldValid =
+        this.konnectorPolicyValidationRules &&
+        this.konnectorPolicyValidationRules[name] &&
+        this.konnectorPolicyValidationRules[name].isValid
+
+      if (isFieldValid && !isFieldValid(vals[name])) {
+        errors[name] = VALIDATION_ERROR
+      }
+    }
+
     return errors
   }
 
@@ -194,8 +210,27 @@ export class AccountForm extends PureComponent {
     }
   }
 
+  /**
+   * Manage dynamic validation rules from a konnector policy
+   * This is used to load Budget-Insight field validation rules
+   * @return {[type]} [description]
+   */
+  async manageValidationRules() {
+    const { konnector, account, client } = this.props
+    const policy = findKonnectorPolicy(konnector)
+    if (policy.fetchValidationRules) {
+      const rules = await policy.fetchValidationRules({
+        konnector,
+        account,
+        client
+      })
+      this.konnectorPolicyValidationRules = rules
+    }
+  }
+
   componentDidMount() {
     this.manageSecretFieldOptions()
+    this.manageValidationRules()
   }
 
   render() {
@@ -370,5 +405,6 @@ AccountForm.defaultProps = {
 export default compose(
   withConnectionFlow(),
   withLocales,
+  withClient,
   withKonnectorLocales
 )(AccountForm)
