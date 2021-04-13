@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.8.0...cozy-harvest-lib@5.9.0) (2021-04-13)
+
+
+### Features
+
+* Map config errors to LOGIN_FAILED ([8ed782c](https://github.com/cozy/cozy-libs/commit/8ed782c))
+
+
+
+
+
 # [5.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.7.0...cozy-harvest-lib@5.8.0) (2021-04-09)
 
 
