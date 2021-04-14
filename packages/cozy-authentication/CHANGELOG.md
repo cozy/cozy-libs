@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.6.1 (2021-04-14)
+
+
+### Bug Fixes
+
+* Remove url to old unavailable blog post ([4cfb38a](https://github.com/cozy/cozy-libs/commit/4cfb38a))
+* Update cozy-authentication address placeholder in french ([3df4ac8](https://github.com/cozy/cozy-libs/commit/3df4ac8))
+
+
+
+
+
 # 2.6.0 (2021-02-12)
 
 
