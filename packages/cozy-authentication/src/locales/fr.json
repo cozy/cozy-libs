@@ -4,21 +4,23 @@
       "welcome": {
         "title1": "Bienvenue sur Cozy",
         "title2": "Votre propre cloud personnel",
+        "desc": "Créer un Cozy ou connectez vous pour accéder à %{appTitle}.",
         "button": "Vous connecter à votre Cozy",
-        "no_account_link": "Vous n'avez pas de compte? Demandez-en un ici.",
-        "create_my_cozy": "Créer mon Cozy",
-        "desc": "Créer un Cozy ou connectez vous pour accéder à %{appTitle}."
+        "no_account_link": "Vous n'avez pas de compte ? Demandez-en un ici.",
+        "create_my_cozy": "Créer mon Cozy"
       },
       "server_selection": {
         "title": "Vous connecter à votre Cozy",
         "lostpwd": "[J'ai oublié l'adresse de mon Cozy](https://manager.cozycloud.cc/cozy/reminder)",
         "description": "Exemple: https://**claude**.mycozy.cloud\n",
         "label": "Entrez l'adresse de votre Cozy",
-        "cozy_address_placeholder": "claude.mycozy.cloud",
+        "cozy_address_placeholder": "claude",
+        "cozy_custom_address_placeholder": "claude.mycozy.cloud",
+        "domain_custom": "autre",
         "button": "Suivant",
         "previous": "Précédent",
-        "wrong_address_with_email": "Vous avez entré une adresse email. Pour vous connecter à votre Cozy vous devez entrer son url, sous la forme https://camillenimbus.mycozy.cloud",
-        "wrong_address_v2": "Vous avez entré l'adresse d'une Cozy v2. Cette application n'est compatible qu'avec la dernière version de Cozy. Rendez-vous sur [notre site](https://blog.cozycloud.cc/post/2016/11/21/On-the-road-to-Cozy-version-3?lang=fr) pour plus d'informations",
+        "wrong_address_with_email": "Vous avez entré une adresse email. Pour vous connecter à votre Cozy vous devez entrer son url, sous la forme https://claude.mycozy.cloud",
+        "wrong_address_v2": "Vous avez entré l'adresse d'une Cozy v2. Cette application n'est compatible qu'avec la dernière version de Cozy. Contactez notre assistance pour plus d'informations",
         "wrong_address": "Cette adresse ne semble pas correspondre à un Cozy.",
         "wrong_address_cosy": "Oups, ce n'est pas la bonne adresse. Essayez d'écrire \"cozy\" avec un \"z\" !"
       },
