@@ -323,7 +323,10 @@ export const finishConnection = async ({ flow }) => {
 }
 
 /**
- * Used in the custom konnector policy for BI
+ * When a BI io.cozy.accounts is created, we create a connection on BI
+ * side and store its credentials inside the io.cozy.accounts
+ *
+ * Creates the BI connection from the front-end
  */
 export const onBIAccountCreation = async ({
   account: fullAccount,
