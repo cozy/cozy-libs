@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.9.0...cozy-harvest-lib@5.10.0) (2021-04-16)
+
+
+### Bug Fixes
+
+* Open external links in new page ([f193cb0](https://github.com/cozy/cozy-libs/commit/f193cb0))
+
+
+### Features
+
+* Remove references to "cozy" in harvest locales ([22a33e7](https://github.com/cozy/cozy-libs/commit/22a33e7))
+* Show konnector error in both data/configuration tab ([872a20b](https://github.com/cozy/cozy-libs/commit/872a20b))
+
+
+
+
+
 # [5.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.8.0...cozy-harvest-lib@5.9.0) (2021-04-13)
 
 
