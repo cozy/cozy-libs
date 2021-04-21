@@ -1,6 +1,6 @@
 {
   "name": "cozy-flags",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "description": "Flag library used in Cozy",
   "main": "dist/index.js",
   "author": "Cozy",
@@ -38,8 +38,8 @@
     ]
   },
   "peerDependencies": {
-    "react": "^16.12.0",
-    "cozy-client": ">=20.0.0"
+    "cozy-client": ">=20.0.0",
+    "react": "^16.12.0"
   },
   "dependencies": {
     "microee": "^0.0.6"

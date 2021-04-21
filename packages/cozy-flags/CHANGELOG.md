@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.7.0...cozy-flags@2.7.1) (2021-04-21)
+
+
+### Bug Fixes
+
+* Don't import Q from cozy-client ([0be2442](https://github.com/cozy/cozy-libs/commit/0be2442))
+* Flags should install cozy-client ([b1ca8e6](https://github.com/cozy/cozy-libs/commit/b1ca8e6))
+
+
+
+
+
 # [2.7.0](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.6.0...cozy-flags@2.7.0) (2021-04-09)
 
 
