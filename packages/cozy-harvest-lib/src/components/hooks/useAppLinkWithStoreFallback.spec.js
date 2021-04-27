@@ -1,33 +1,36 @@
-import { renderHook } from '@testing-library/react-hooks'
 import useAppLinkWithStoreFallback from 'components/hooks/useAppLinkWithStoreFallback'
+import { useQuery } from 'cozy-client'
+
+jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
 
 describe('useAppLinkWithStoreFallback', () => {
-  const mockClient = { query: jest.fn() }
-
-  it('should change loading status', async () => {
-    mockClient.query.mockResolvedValue({ data: [] })
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useAppLinkWithStoreFallback('test', mockClient)
-    )
-    expect(result.current.fetchStatus).toEqual('loading')
-    await waitForNextUpdate()
-    expect(result.current.fetchStatus).toEqual('loaded')
+  afterEach(() => {
+    jest.clearAllMocks()
   })
 
-  it('should inform when an error occurs', async () => {
-    mockClient.query.mockRejectedValue('error')
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useAppLinkWithStoreFallback('test', mockClient)
-    )
-    expect(result.current.fetchStatus).toEqual('loading')
-    await waitForNextUpdate()
-    expect(result.current.fetchStatus).toEqual('errored')
+  it('should return fetchStatus according to the query fetchStatus', async () => {
+    useQuery.mockReturnValue({ data: [], fetchStatus: 'loading' })
+    const result = useAppLinkWithStoreFallback('test')
+    expect(result.fetchStatus).toEqual('loading')
+
+    useQuery.mockClear()
+
+    useQuery.mockReturnValue({ data: [], fetchStatus: 'loaded' })
+    const result2 = useAppLinkWithStoreFallback('test')
+    expect(result2.fetchStatus).toEqual('loaded')
   })
 
-  it('should return data for an installed app', async () => {
+  it('should inform when an error occurs', () => {
+    useQuery.mockReturnValue({ data: [], fetchStatus: 'error' })
+    const result = useAppLinkWithStoreFallback('test')
+
+    expect(result.fetchStatus).toEqual('error')
+  })
+
+  it('should return data for an installed app', () => {
     const testAppSlug = 'testapp'
     const path = '#/path'
-    mockClient.query.mockResolvedValue({
+    useQuery.mockReturnValue({
       data: [
         {
           attributes: {
@@ -35,21 +38,19 @@ describe('useAppLinkWithStoreFallback', () => {
           },
           links: { related: 'http://testapp.cozy.io' }
         }
-      ]
+      ],
+      fetchStatus: 'loaded'
     })
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useAppLinkWithStoreFallback(testAppSlug, mockClient, path)
-    )
 
-    await waitForNextUpdate()
-    expect(result.current.isInstalled).toBe(true)
-    expect(result.current.url).toBe('http://testapp.cozy.io#/path')
+    const result = useAppLinkWithStoreFallback(testAppSlug, path)
+    expect(result.isInstalled).toBe(true)
+    expect(result.url).toBe('http://testapp.cozy.io#/path')
   })
 
   it('should return a store URL when the app is not installed', async () => {
     const testAppSlug = 'testapp'
     const path = '#/path'
-    mockClient.query.mockResolvedValue({
+    useQuery.mockReturnValue({
       data: [
         {
           attributes: {
@@ -57,14 +58,12 @@ describe('useAppLinkWithStoreFallback', () => {
           },
           links: { related: 'http://store.cozy.io' }
         }
-      ]
+      ],
+      fetchStatus: 'loaded'
     })
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useAppLinkWithStoreFallback(testAppSlug, mockClient, path)
-    )
 
-    await waitForNextUpdate()
-    expect(result.current.isInstalled).toBe(false)
-    expect(result.current.url).toBe('http://store.cozy.io#/discover/testapp')
+    const result = useAppLinkWithStoreFallback(testAppSlug, path)
+    expect(result.isInstalled).toBe(false)
+    expect(result.url).toBe('http://store.cozy.io#/discover/testapp')
   })
 })

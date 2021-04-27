@@ -9,9 +9,9 @@ import withLocales from '../../hoc/withLocales'
 
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 
-const BanksLinkRedirectStore = ({ client, t }) => {
+const BanksLinkRedirectStore = ({ t }) => {
   const slug = 'banks'
-  const { fetchStatus, url } = useAppLinkWithStoreFallback(slug, client)
+  const { fetchStatus, url } = useAppLinkWithStoreFallback(slug)
 
   if (fetchStatus === 'loaded') {
     return (

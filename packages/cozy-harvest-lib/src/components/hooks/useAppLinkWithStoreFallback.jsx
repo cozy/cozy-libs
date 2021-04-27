@@ -1,39 +1,32 @@
-import { useEffect, useState } from 'react'
-import { models } from 'cozy-client'
+import { models, useQuery, isQueryLoading } from 'cozy-client'
 
 import { appsConn } from '../../connections/apps'
 
 const { applications } = models
 
-const useAppLinkWithStoreFallback = (slug, client, path = '') => {
-  const [fetchStatus, setFetchStatus] = useState('loading')
-  const [isInstalled, setIsInstalled] = useState(true)
-  const [url, setURL] = useState()
+const useAppLinkWithStoreFallback = (slug, path = '') => {
+  const res = useQuery(appsConn.query, appsConn)
 
-  useEffect(() => {
-    const load = async () => {
-      try {
-        const apps = await client.query(appsConn.query, appsConn)
-        const appDocument = { slug }
-        const appInstalled = applications.isInstalled(apps.data, appDocument)
-        setIsInstalled(!!appInstalled)
-        if (appInstalled) {
-          setURL(applications.getUrl(appInstalled) + path)
-        } else {
-          setURL(applications.getStoreURL(apps.data, appDocument))
-        }
-        setFetchStatus('loaded')
-      } catch (error) {
-        setFetchStatus('errored')
-      }
+  if (!isQueryLoading(res)) {
+    const apps = res.data
+    const appDocument = { slug }
+    const appInstalled = applications.isInstalled(apps, appDocument)
+
+    const url = appInstalled
+      ? applications.getUrl(appInstalled) + path
+      : applications.getStoreURL(apps, appDocument)
+
+    return {
+      fetchStatus: res.fetchStatus,
+      isInstalled: !!appInstalled,
+      url
     }
-    load()
-  }, [client, slug, path])
+  }
 
   return {
-    fetchStatus,
-    isInstalled,
-    url
+    fetchStatus: 'loading',
+    isInstalled: true,
+    url: ''
   }
 }
 

@@ -8,10 +8,10 @@ import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback
 
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 
-const DriveLink = memo(({ folderId, client, t }) => {
+const DriveLink = memo(({ folderId, t }) => {
   const slug = 'drive'
   const path = `#/files/${folderId}`
-  const { fetchStatus, url } = useAppLinkWithStoreFallback(slug, client, path)
+  const { fetchStatus, url } = useAppLinkWithStoreFallback(slug, path)
 
   if (fetchStatus === 'loaded') {
     return (

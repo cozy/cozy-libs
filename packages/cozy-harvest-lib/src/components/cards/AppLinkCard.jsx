@@ -21,7 +21,6 @@ export const AppLinkButton = ({ slug, path }) => {
   const cozyURL = new URL(client.getStackClient().uri)
   const { fetchStatus, url, isInstalled } = useAppLinkWithStoreFallback(
     slug,
-    client,
     path
   )
   return (
