@@ -7,6 +7,7 @@ const Document = require('../Document')
 const log = require('../log')
 const BankAccount = require('./BankAccount')
 const { matchTransactions } = require('./matching-transactions')
+const cloneDeep = require('lodash/cloneDeep')
 
 const maxValue = (iterable, fn) => {
   const res = maxBy(iterable, fn)
@@ -153,8 +154,9 @@ class Transaction extends Document {
    * @returns {Array} : reconciliated transactions
    */
   static reconciliate(remoteTransactions, localTransactions, options = {}) {
-    if (options.useSplitDate !== false) {
-      options.useSplitDate = true
+    const localOptions = cloneDeep(options)
+    if (localOptions.useSplitDate !== false) {
+      localOptions.useSplitDate = true
     }
     const findByVendorId = transaction =>
       localTransactions.find(t => t.vendorId === transaction.vendorId)
@@ -166,13 +168,13 @@ class Transaction extends Document {
     let newTransactions = groups.newTransactions || []
     const updatedTransactions = groups.updatedTransactions || []
 
-    const splitDate = options.useSplitDate
+    const splitDate = localOptions.useSplitDate
       ? getSplitDate(localTransactions)
       : false
 
     if (splitDate) {
-      if (typeof options.trackEvent === 'function') {
-        options.trackEvent({
+      if (typeof localOptions.trackEvent === 'function') {
+        localOptions.trackEvent({
           e_a: 'ReconciliateSplitDate'
         })
       }
@@ -201,7 +203,7 @@ class Transaction extends Document {
       const missedTransactions = Transaction.getMissedTransactions(
         transactionsBeforeSplit,
         localTransactions,
-        options
+        localOptions
       )
 
       if (missedTransactions.length > 0) {
