@@ -171,6 +171,25 @@ describe('reconciliation', () => {
       e_a: 'ReconciliateSplitDate'
     })
   })
+
+  it('should not send event for split date if useSplitDate option is false', () => {
+    const newTransactions = [
+      {
+        amount: -15,
+        originalBankLabel: 'Test 04',
+        date: '2018-10-01'
+      }
+    ]
+
+    const trackEvent = jest.fn()
+    BankTransaction.reconciliate(newTransactions, existingTransactions, {
+      trackEvent,
+      useSplitDate: false
+    })
+    expect(trackEvent).not.toHaveBeenCalledWith({
+      e_a: 'ReconciliateSplitDate'
+    })
+  })
 })
 
 describe('BankTransaction.getCategoryId', () => {

@@ -143,7 +143,19 @@ class Transaction extends Document {
     return missedTransactions
   }
 
+  /**
+   * Reconcialiate remote transaction with local transaction
+   *
+   * @param {Array} remoteTransactions
+   * @param {Array} localTransactions
+   * @param {Function} options.trackEvent : this callback will be called in case of split date
+   * @param {Boolean} options.useSplitDate : should look for a split date or not (default true)
+   * @returns {Array} : reconciliated transactions
+   */
   static reconciliate(remoteTransactions, localTransactions, options = {}) {
+    if (options.useSplitDate !== false) {
+      options.useSplitDate = true
+    }
     const findByVendorId = transaction =>
       localTransactions.find(t => t.vendorId === transaction.vendorId)
 
@@ -154,7 +166,9 @@ class Transaction extends Document {
     let newTransactions = groups.newTransactions || []
     const updatedTransactions = groups.updatedTransactions || []
 
-    const splitDate = getSplitDate(localTransactions)
+    const splitDate = options.useSplitDate
+      ? getSplitDate(localTransactions)
+      : false
 
     if (splitDate) {
       if (typeof options.trackEvent === 'function') {
