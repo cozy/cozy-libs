@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
-import { models } from 'cozy-client'
-
-import { appsConn } from '../../connections/apps'
+import { Q, models } from 'cozy-client'
 
 const { applications } = models
 
@@ -13,7 +11,7 @@ const useAppLinkWithStoreFallback = (slug, client, path = '') => {
   useEffect(() => {
     const load = async () => {
       try {
-        const apps = await client.query(appsConn.query, appsConn)
+        const apps = await client.query(Q('io.cozy.apps'))
         const appDocument = { slug }
         const appInstalled = applications.isInstalled(apps.data, appDocument)
         setIsInstalled(!!appInstalled)
