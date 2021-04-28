@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.10.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.10.2...cozy-harvest-lib@5.10.3) (2021-04-28)
+
+
+### Bug Fixes
+
+* Revert using named query for useAppLinkWithStoreFallback ([06d0e9c](https://github.com/cozy/cozy-libs/commit/06d0e9c))
+
+
+
+
+
 ## [5.10.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.10.1...cozy-harvest-lib@5.10.2) (2021-04-21)
 
 **Note:** Version bump only for package cozy-harvest-lib
