@@ -91,6 +91,65 @@ describe('slug match', () => {
   })
 })
 
+describe('no "number" attribute match', () => {
+  const acc = {
+    id: 1337,
+    balance: 1337,
+    label: 'Test account',
+    number: null,
+    type: 'pee',
+    institutionLabel: "Plan·d'Epargne·Entreprise"
+  }
+
+  it('should not match the same account (id) without number attribute', () => {
+    const newAcc = {
+      ...acc,
+      id: 1234
+    }
+
+    expect(score(acc, newAcc).points).toBeLessThan(0)
+  })
+
+  it('should match even if there are not the same id', () => {
+    const acc1 = {
+      ...acc,
+      id: 1234,
+      number: '13371337133'
+    }
+    const acc2 = {
+      ...acc,
+      id: 1337,
+      number: '13371337133'
+    }
+
+    expect(score(acc1, acc2).points).toBeGreaterThan(0)
+  })
+
+  it('should not match even if there are same id', () => {
+    const acc1 = {
+      ...acc,
+      id: 1234,
+      number: '13371337133'
+    }
+    const acc2 = {
+      ...acc,
+      id: 1234,
+      number: '12341234123'
+    }
+
+    expect(score(acc1, acc2).points).toBeLessThan(0)
+  })
+
+  it('should match the same account (id) without number attribute', () => {
+    const acc2 = {
+      ...acc,
+      id: 1337,
+      number: null
+    }
+    expect(score(acc, acc2).points).toBeGreaterThan(0)
+  })
+})
+
 it('should normalize account number', () => {
   expect(normalizeAccountNumber('LEO-385248377-EUR')).toBe('385248377')
   expect(normalizeAccountNumber('385248377EUR')).toBe('385248377')

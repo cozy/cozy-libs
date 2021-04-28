@@ -71,6 +71,23 @@ const approxNumberMatch = (account, existingAccount) => {
   )
 }
 
+/**
+ * If there is no "number" attribute or null, "id" attribute is used
+ * in the other, it's not a match
+ *
+ * @param account
+ * @param existingAccount
+ * @returns {boolean}
+ */
+const noNumberMatch = (account, existingAccount) => {
+  const accNumber = account.number || String(account.id)
+  const existingAccNumber = existingAccount.number || String(existingAccount.id)
+  if (!account.number || !existingAccount.number) {
+    return eitherIncludes(accNumber, existingAccNumber)
+  }
+  return false
+}
+
 const creditCardMatch = (account, existingAccount) => {
   if (account.type !== 'CreditCard' && existingAccount.type !== 'CreditCard') {
     return false
@@ -123,6 +140,7 @@ const sameTypeMatch = (account, existingAccount) => {
 const rules = [
   { rule: slugMatch, bonus: 0, malus: -1000 },
   { rule: approxNumberMatch, bonus: 50, malus: -50, name: 'approx-number' },
+  { rule: noNumberMatch, bonus: 10, malus: -10, name: 'no-number-attr' },
   { rule: sameTypeMatch, bonus: 50, malus: 0, name: 'same-type' },
   { rule: creditCardMatch, bonus: 150, malus: 0, name: 'credit-card-number' },
   { rule: currencyMatch, bonus: 50, malus: 0, name: 'currency' }
