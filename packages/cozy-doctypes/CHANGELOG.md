@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.82.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.82.0...cozy-doctypes@1.82.1) (2021-04-29)
+
+
+### Bug Fixes
+
+* When no number or null, use id attribute ([a432816](https://github.com/cozy/cozy-libs/commit/a432816))
+
+
+
+
+
 # [1.82.0](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.81.0...cozy-doctypes@1.82.0) (2021-04-28)
 
 
