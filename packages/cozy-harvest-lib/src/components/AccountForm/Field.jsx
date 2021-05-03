@@ -28,7 +28,6 @@ const ObfuscatedLabel = ({ label }) => {
 
 export const Field = ({ label, type, ...props }) => {
   let Component = type === 'password' ? PasswordField : UIField
-
   return (
     <Component
       {...props}
