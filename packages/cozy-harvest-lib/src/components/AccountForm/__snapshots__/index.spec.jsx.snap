@@ -6,7 +6,6 @@ exports[`AccountForm should not render error 1`] = `
   onKeyUp={[Function]}
 >
   <AccountFields
-    container={null}
     fields={
       Object {
         "passphrase": Object {
@@ -43,7 +42,6 @@ exports[`AccountForm should render 1`] = `
   onKeyUp={[Function]}
 >
   <AccountFields
-    container={null}
     fields={
       Object {
         "passphrase": Object {
@@ -95,7 +93,6 @@ exports[`AccountForm should render error 1`] = `
     }
   />
   <AccountFields
-    container={null}
     fields={
       Object {
         "passphrase": Object {

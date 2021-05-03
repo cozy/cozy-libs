@@ -116,6 +116,7 @@ exports[`AccountField render a dropdown field 1`] = `
       "aria-label": "fields.multiple.label",
     }
   }
+  menuPosition="fixed"
   name="multiple"
   options={
     Array [

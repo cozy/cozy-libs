@@ -130,7 +130,9 @@ export class AccountField extends PureComponent {
           />
         )
       case 'dropdown':
-        return <Field {...sanitizeSelectProps(fieldProps)} />
+        return (
+          <Field {...sanitizeSelectProps(fieldProps)} menuPosition={'fixed'} />
+        )
       case 'password':
         return (
           <Field
@@ -151,11 +153,6 @@ export class AccountField extends PureComponent {
 }
 
 AccountField.propTypes = {
-  /**
-   * The element wrapping the <Field /> component.
-   * Passed to <SelectBox /> component.
-   */
-  container: PropTypes.instanceOf(Element),
   /**
    * Indicates if the <Field /> should be rendered with an error style.
    */

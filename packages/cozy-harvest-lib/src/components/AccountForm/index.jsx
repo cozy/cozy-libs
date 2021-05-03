@@ -228,7 +228,6 @@ export class AccountForm extends PureComponent {
       sanitizedFields[identifier].type = 'hidden'
     }
 
-    let container = null
     const isLoginError =
       error instanceof KonnectorJobError && error.isLoginError()
 
@@ -250,9 +249,6 @@ export class AccountForm extends PureComponent {
               })
             }
             onFocusCapture={this.handleFocus}
-            ref={element => {
-              container = element
-            }}
           >
             {error && showError && (
               <TriggerErrorInfo
@@ -273,7 +269,6 @@ export class AccountForm extends PureComponent {
               />
             )}
             <AccountFields
-              container={container}
               disabled={submitting}
               fields={sanitizedFields}
               hasError={error && isLoginError}

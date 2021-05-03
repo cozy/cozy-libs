@@ -22,7 +22,6 @@ const parse = type => value => {
 export class AccountFields extends PureComponent {
   render() {
     const {
-      container,
       disabled,
       fields,
       hasError,
@@ -54,7 +53,6 @@ export class AccountFields extends PureComponent {
                 <AccountField
                   {...field}
                   {...input}
-                  container={container}
                   hasError={hasError}
                   disabled={disabled}
                   initialValue={
@@ -75,11 +73,6 @@ export class AccountFields extends PureComponent {
 }
 
 AccountFields.propTypes = {
-  /**
-   * The element wrapping the <AccountFields /> component.
-   * Passed to <Field /> component.
-   */
-  container: PropTypes.instanceOf(Element),
   /**
    * Indicates if all the fields are disabled
    * @type {Boolean}
