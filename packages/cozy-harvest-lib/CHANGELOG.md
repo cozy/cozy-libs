@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.10.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.10.5...cozy-harvest-lib@5.10.6) (2021-05-04)
+
+
+### Bug Fixes
+
+* **Harvest:** SelectBox use position Fixed ([d8a30e5](https://github.com/cozy/cozy-libs/commit/d8a30e5))
+
+
+
+
+
 ## [5.10.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.10.4...cozy-harvest-lib@5.10.5) (2021-04-29)
 
 **Note:** Version bump only for package cozy-harvest-lib
