@@ -43,7 +43,7 @@
     "cozy-client": "16.8.0",
     "cozy-ui": "45.1.0",
     "enzyme": "3.11.0",
-    "enzyme-adapter-react-16": "1.15.2",
+    "enzyme-adapter-react-16": "1.15.6",
     "enzyme-to-json": "3.4.4",
     "jest": "26.2.2",
     "react": "^16.12.0",
