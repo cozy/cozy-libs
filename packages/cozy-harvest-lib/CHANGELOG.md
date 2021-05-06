@@ -3,6 +3,65 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.10.6...cozy-harvest-lib@6.0.0) (2021-05-06)
+
+
+### Bug Fixes
+
+* Add bottom padding to oauth modal ([1ea3e5b](https://github.com/cozy/cozy-libs/commit/1ea3e5b))
+* Add padding for text when no more account ([af019ab](https://github.com/cozy/cozy-libs/commit/af019ab))
+* Bottom content was hidden by Swipeable View ([189159d](https://github.com/cozy/cozy-libs/commit/189159d))
+* Call onUnlock directly if vault is already unlocked ([484c624](https://github.com/cozy/cozy-libs/commit/484c624))
+* Correct padding bottom on vault ciphers list ([28440d1](https://github.com/cozy/cozy-libs/commit/28440d1))
+* Correctly configure sentry to send events only in production ([b865167](https://github.com/cozy/cozy-libs/commit/b865167))
+* Deletion of account ([cc38c8a](https://github.com/cozy/cozy-libs/commit/cc38c8a))
+* Field components used in CollectionField need to forward their ref ([9687414](https://github.com/cozy/cozy-libs/commit/9687414))
+* Filter triggers on worker=konnector, type=[@cron](https://github.com/cron) ([d09c1ea](https://github.com/cozy/cozy-libs/commit/d09c1ea))
+* Pass # to AppLinker if we have no URL to remove props warning ([bd3cde6](https://github.com/cozy/cozy-libs/commit/bd3cde6))
+* Prevent runtime warnings from MUI ([2f5c9c0](https://github.com/cozy/cozy-libs/commit/2f5c9c0))
+* **Harvest:** Remove wrong 80s job watcher delay ([de2c7cf](https://github.com/cozy/cozy-libs/commit/de2c7cf))
+* Prevent warnings in console due to setState used after component unmounting ([17910e7](https://github.com/cozy/cozy-libs/commit/17910e7))
+* Show account form if the vault is still locked in handleVaultUnlock ([6b279d8](https://github.com/cozy/cozy-libs/commit/6b279d8))
+
+
+### Features
+
+* Add a reconnect button inside trigger info to reconnect account ([c27f64a](https://github.com/cozy/cozy-libs/commit/c27f64a))
+* Add KonnectorBlock to show konnector informations ([33c37d2](https://github.com/cozy/cozy-libs/commit/33c37d2))
+* Add log messages and remove deny rule ([9d1dd28](https://github.com/cozy/cozy-libs/commit/9d1dd28))
+* Add sentry integration to harvest connection flow ([185f032](https://github.com/cozy/cozy-libs/commit/185f032))
+* Add Typography component ([1aaab29](https://github.com/cozy/cozy-libs/commit/1aaab29))
+* Add u-error class to WarningIcon ([9079377](https://github.com/cozy/cozy-libs/commit/9079377))
+* Convert Text to Typography ([e919799](https://github.com/cozy/cozy-libs/commit/e919799))
+* Deactivate auto success when launching job via "update" button ([48bba00](https://github.com/cozy/cozy-libs/commit/48bba00))
+* Main harvest modal is hidden when vault unlock is opened ([76b3343](https://github.com/cozy/cozy-libs/commit/76b3343))
+* Make wording of account deletion dialog cozy agnostic ([7c92eba](https://github.com/cozy/cozy-libs/commit/7c92eba))
+* Pass props to the VaultUnlocker through VaultUnlockPlaceholder ([46e3356](https://github.com/cozy/cozy-libs/commit/46e3356))
+* Send original error to Sentry instead of wrapped one ([aaf1902](https://github.com/cozy/cozy-libs/commit/aaf1902))
+* Update cozy-keys-lib dev dep ([0e5e8c7](https://github.com/cozy/cozy-libs/commit/0e5e8c7))
+* Update cozy-keys-lib peer dep and dev dep ([0e09dc1](https://github.com/cozy/cozy-libs/commit/0e09dc1))
+* Update cozy-ui ([f551e4c](https://github.com/cozy/cozy-libs/commit/f551e4c))
+* Upgrade cozy-client to 16.17.0 ([d61e3e0](https://github.com/cozy/cozy-libs/commit/d61e3e0))
+* Use new tabs in disconnected account modal ([a917a1d](https://github.com/cozy/cozy-libs/commit/a917a1d))
+* When receiving a 2FA event, stop the auto-success timer ([f55b4cc](https://github.com/cozy/cozy-libs/commit/f55b4cc))
+
+
+### Performance Improvements
+
+* Memoize fetch app from registry for maintenance ([bbea7aa](https://github.com/cozy/cozy-libs/commit/bbea7aa))
+
+
+### BREAKING CHANGES
+
+* When using the TriggerManager outside the main Harvest
+Routes, you need to
+`import { IntentTriggerManager } from 'cozy-harvest-lib'`, instead of
+`import { TriggerManager } from 'cozy-harvest-lib'.
+
+
+
+
+
 ## [5.10.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@5.10.5...cozy-harvest-lib@5.10.6) (2021-05-04)
 
 
