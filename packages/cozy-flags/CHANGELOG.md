@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.7.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.7.1...cozy-flags@2.7.2) (2021-05-12)
+
+
+### Bug Fixes
+
+* Revert change on removal of browser ([cd77604](https://github.com/cozy/cozy-libs/commit/cd77604))
+
+
+
+
+
 ## [2.7.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.7.0...cozy-flags@2.7.1) (2021-04-21)
 
 
