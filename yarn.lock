@@ -5330,10 +5330,10 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-cozy-bi-auth@0.0.20:
-  version "0.0.20"
-  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.20.tgz#43cd81da9c63725789b75fb4d946cb7a9cd2b67f"
-  integrity sha512-ecz8gTKMDo7hRNAyvIuo0ejSkOqG/1GOIqTY/IFwZzFL3hX8j8fQ4Fq/JaijSD8Qr/T3NOhvqTYZOEdBj1CqUA==
+cozy-bi-auth@0.0.21:
+  version "0.0.21"
+  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.21.tgz#f915a5798f402610e5de8cda53a23036adfc21e9"
+  integrity sha512-q4nho7WFwqPR+m5eIWpNM9Hk0frJdcw2eSIqJDh0DS1qry4IOnpg6N2DiY7QSsnvv3ck76MT7azYDMST6X7SUw==
   dependencies:
     cozy-logger "^1.3.0"
     lodash "^4.17.20"
