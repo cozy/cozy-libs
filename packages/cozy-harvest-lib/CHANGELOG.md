@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.0.2...cozy-harvest-lib@6.1.0) (2021-05-17)
+
+
+### Features
+
+* **harvest:** Upgrade cozy-bi-auth ([434a67c](https://github.com/cozy/cozy-libs/commit/434a67c))
+
+
+
+
+
 ## [6.0.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.0.1...cozy-harvest-lib@6.0.2) (2021-05-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
