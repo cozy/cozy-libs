@@ -394,7 +394,7 @@
       "default": "Enter the code sent to you by e-mail or SMS",
       "email": "Enter the code sent to you by e-mail",
       "sms": "Enter the code sent to you by SMS",
-      "app_code": "Enter the code sent to you by your mobile application",
+      "app_code": "Enter the one-time code to generate in ${name} mobile app",
       "app": "Use your provider's app to continue authentication"
     },
     "desc-2fa": "You need to open your provider's app to confirm your authentication. In some cases, you will have to validate two times.",
