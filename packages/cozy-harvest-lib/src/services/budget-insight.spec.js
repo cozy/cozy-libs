@@ -9,7 +9,7 @@ import {
   getBIConfig,
   saveBIConfig,
   updateBIConnectionFromFlow,
-  sendTwoFaCode
+  sendTwoFACode
 } from './budget-insight'
 import { waitForRealtimeEvent } from './jobUtils'
 import {
@@ -752,7 +752,7 @@ describe('updateBIConnectionFromFlow', () => {
   })
 })
 
-describe('sendTwoFaCode', () => {
+describe('sendTwoFACode', () => {
   it('should use flow.sendTwoFACode if fields are unknown', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
@@ -762,7 +762,7 @@ describe('sendTwoFaCode', () => {
     const flow = new ConnectionFlow(client, null, konnector)
     flow.account = account
     jest.spyOn(flow, 'sendTwoFACode')
-    sendTwoFaCode(flow, 'abcde')
+    sendTwoFACode(flow, 'abcde')
     expect(flow.sendTwoFACode).toHaveBeenCalled()
   })
 
@@ -776,7 +776,7 @@ describe('sendTwoFaCode', () => {
     flow.account = account
     flow.setData({ biConnection: { fields: ['sms'] } })
     jest.spyOn(flow, 'sendAdditionalInformation')
-    sendTwoFaCode(flow, 'abcde')
+    sendTwoFACode(flow, 'abcde')
     expect(flow.sendAdditionalInformation).toHaveBeenCalled()
   })
 })
