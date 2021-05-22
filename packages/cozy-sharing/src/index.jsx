@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -73,7 +75,7 @@ export class SharingProvider extends Component {
   constructor(props, context) {
     super(props, context)
     const instanceUri = props.client.getStackClient().uri
-    const documentType = props.documentType || 'Document'
+    const documentType = props.documentType
     this.state = {
       byDocId: {},
       sharings: [],
@@ -219,7 +221,7 @@ export class SharingProvider extends Component {
     description,
     openSharing
   }) => {
-    const { client, doctype } = this.props
+    const { client, doctype, appSlug } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
     if (sharing)
       return this.addRecipients({
@@ -234,7 +236,8 @@ export class SharingProvider extends Component {
       readOnlyRecipients,
       description,
       previewPath: '/preview',
-      openSharing
+      openSharing,
+      appSlug
     })
 
     this.dispatch(
@@ -357,6 +360,20 @@ export class SharingProvider extends Component {
       </SharingContext.Provider>
     )
   }
+}
+
+SharingProvider.propTypes = {
+  // Files / Notes / Albums / Document
+  documentType: PropTypes.string,
+  // Cozy-Client instance
+  client: PropTypes.object.isRequired,
+  // Doctype to share
+  doctype: PropTypes.string.isRequired,
+  // Targeted appSlug.
+  appSlug: PropTypes.string
+}
+SharingProvider.defaultProps = {
+  documentType: 'Document'
 }
 
 export default withClient(SharingProvider)
