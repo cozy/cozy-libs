@@ -6,7 +6,7 @@ import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoin
 
 import AppLike from '../../test/AppLike'
 import { default as DumbShareModal } from './ShareModal'
-import { SharingProvider } from '../index'
+import { SharingProvider } from '../SharingProvider'
 import { receivePaths } from '../state'
 import { useFetchDocumentPath } from './useFetchDocumentPath'
 import { EditableSharingModal } from './EditableSharingModal'
