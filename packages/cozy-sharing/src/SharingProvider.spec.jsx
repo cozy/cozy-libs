@@ -3,14 +3,10 @@ import { mount } from 'enzyme'
 import { createMockClient } from 'cozy-client'
 
 import SharingContext from './context'
-import { RefreshableSharings, SharingProvider } from './'
+import { SharingProvider } from './SharingProvider'
 import AppLike from '../test/AppLike'
 
 import { receiveSharings } from './state'
-
-const DumbComponent = () => {
-  return <div>test </div>
-}
 
 const AppWrapper = ({ children, client }) => {
   return (
@@ -140,28 +136,5 @@ describe('hasWriteAccess', () => {
     expect(component.find('div[data-id="owner-doc"]').text()).toBe('yes')
     expect(component.find('div[data-id="synced-doc"]').text()).toBe('yes')
     expect(component.find('div[data-id="read-only-doc"]').text()).toBe('no')
-  })
-})
-
-describe('RefreshableSharings', () => {
-  it('should test', () => {
-    const client = createMockClient({})
-
-    const component = mount(
-      <AppWrapper client={client}>
-        <RefreshableSharings>
-          {({ refresh }) => (
-            <DumbComponent
-              client={client}
-              t={x => x}
-              refreshSharings={refresh}
-            />
-          )}
-        </RefreshableSharings>
-      </AppWrapper>
-    )
-    const refreshMethod = component.find(DumbComponent).prop('refreshSharings')
-
-    expect(typeof refreshMethod).toBe('function')
   })
 })
