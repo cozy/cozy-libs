@@ -27,12 +27,16 @@ export const buildAttributes = ({
     message['folder_to_save'] = folder._id
   }
 
-  return {
-    type: '@cron',
-    arguments: cron,
+  const result = {
     worker: 'konnector',
     message
   }
+
+  const options = konnector.clientSide
+    ? { type: '@client' }
+    : { type: '@cron', arguments: cron }
+
+  return { ...result, ...options }
 }
 
 export const getAccountId = trigger => {
