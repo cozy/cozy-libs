@@ -70,11 +70,19 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
             konnector={konnector}
             onLoginSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
-              pushHistory(`/accounts/${accountId}/success`)
+              let path = `/accounts/${accountId}`
+              if (trigger.worker !== 'client') {
+                path += '/success'
+              }
+              pushHistory(path)
             }}
             onSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
-              pushHistory(`/accounts/${accountId}/success`)
+              let path = `/accounts/${accountId}`
+              if (trigger.worker !== 'client') {
+                path += '/success'
+              }
+              pushHistory(path)
             }}
             onVaultDismiss={onDismiss}
             fieldOptions={fieldOptions}
