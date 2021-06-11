@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.1.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.1.1...cozy-harvest-lib@6.1.2) (2021-06-11)
+
+
+### Bug Fixes
+
+* esc touch does the same as the back button. ([527f27f](https://github.com/cozy/cozy-libs/commit/527f27f))
+
+
+
+
+
 ## [6.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.1.0...cozy-harvest-lib@6.1.1) (2021-05-22)
 
 
