@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.1.2...cozy-harvest-lib@6.2.0) (2021-06-12)
+
+
+### Features
+
+* **harvest:** Update locales for 2fa app_code ([e505190](https://github.com/cozy/cozy-libs/commit/e505190))
+* **harvest:** Upgrade cozy-bi-auth ([7a30b49](https://github.com/cozy/cozy-libs/commit/7a30b49))
+
+
+
+
+
 ## [6.1.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.1.1...cozy-harvest-lib@6.1.2) (2021-06-11)
 
 
