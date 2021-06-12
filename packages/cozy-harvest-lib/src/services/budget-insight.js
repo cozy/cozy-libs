@@ -366,7 +366,7 @@ export const onBIAccountCreation = async ({
   return account
 }
 
-export const sendTwoFaCode = (flow, code) => {
+export const sendTwoFACode = (flow, code) => {
   let fields
 
   try {
@@ -509,6 +509,7 @@ export const konnectorPolicy = {
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
   sendAdditionalInformation: sendAdditionalInformation,
+  sendTwoFACode: sendTwoFACode,
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   getAdditionalInformationNeeded,
   handleOAuthAccount,

@@ -12,6 +12,8 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Slide from '@material-ui/core/Slide'
+import Modal from '@material-ui/core/Modal'
+
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import palette from 'cozy-ui/transpiled/react/palette'
@@ -19,7 +21,6 @@ import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import Circle from 'cozy-ui/transpiled/react/Circle'
 import Portal from 'cozy-ui/transpiled/react/Portal'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
-import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
@@ -148,14 +149,14 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
       </List>
       {viewerIndex !== null && (
         <Portal into="body">
-          <Overlay style={{ zIndex: 10000 }}>
+          <Modal open={true}>
             <Viewer
               files={files}
               currentIndex={viewerIndex}
               onCloseRequest={handleCloseViewer}
               onChangeRequest={handleFileChange}
             />
-          </Overlay>
+          </Modal>
         </Portal>
       )}
       <div className="u-ta-right u-mv-half u-mh-1">

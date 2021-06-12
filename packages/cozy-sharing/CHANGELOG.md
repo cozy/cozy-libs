@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.4.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.3.7...cozy-sharing@3.4.0) (2021-06-02)
+
+
+### Features
+
+* Expose useFetchDocumentPath method ([ff18898](https://github.com/cozy/cozy-libs/commit/ff18898))
+
+
+
+
+
 ## [3.3.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.3.6...cozy-sharing@3.3.7) (2021-05-06)
 
 **Note:** Version bump only for package cozy-sharing
