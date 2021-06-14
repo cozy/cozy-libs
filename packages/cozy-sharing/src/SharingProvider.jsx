@@ -85,6 +85,7 @@ export class SharingProvider extends Component {
       updateDocumentPermissions: this.updateDocumentPermissions,
       revokeSharingLink: this.revokeSharingLink,
       hasLoadedAtLeastOnePage: false,
+      allLoaded: false,
       revokeAllRecipients: this.revokeAllRecipients,
       refresh: this.fetchAllSharings,
       hasWriteAccess: this.hasWriteAccess
@@ -182,7 +183,9 @@ export class SharingProvider extends Component {
       })
     )
     this.setState({ hasLoadedAtLeastOnePage: true })
-    fetchNextPermissions(permissions, this.dispatch, client)
+    fetchNextPermissions(permissions, this.dispatch, client).then(() =>
+      this.setState({ allLoaded: true })
+    )
     if (doctype !== 'io.cozy.files') return
     const sharedDocIds = getSharedDocIdsBySharings(sharings)
     const resp = await client.collection(doctype).all({ keys: sharedDocIds })
