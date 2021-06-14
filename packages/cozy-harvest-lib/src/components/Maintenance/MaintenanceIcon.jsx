@@ -1,5 +1,5 @@
 import React from 'react'
-import { withBreakpoints } from 'cozy-ui/transpiled/react'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import cx from 'classnames'
 import IconMaintenance from '../../assets/maintenance.svg'
 
