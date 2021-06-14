@@ -5,11 +5,12 @@ import SharingContext from '../context'
 
 export const SharedDocuments = ({ children }) => (
   <SharingContext.Consumer>
-    {({ byDocId, hasLoadedAtLeastOnePage } = { byDocId: [] }) => {
+    {({ byDocId, hasLoadedAtLeastOnePage, allLoaded } = { byDocId: [] }) => {
       const sharedDocuments = uniq(Object.keys(byDocId))
       return children({
         sharedDocuments,
-        hasLoadedAtLeastOnePage
+        hasLoadedAtLeastOnePage,
+        allLoaded
       })
     }}
   </SharingContext.Consumer>

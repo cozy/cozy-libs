@@ -1,5 +1,6 @@
 import React from 'react'
 import { mount } from 'enzyme'
+import { act } from '@testing-library/react'
 import { createMockClient } from 'cozy-client'
 
 import SharingContext from './context'
@@ -15,6 +16,40 @@ const AppWrapper = ({ children, client }) => {
     </AppLike>
   )
 }
+
+describe('allLoaded', () => {
+  const client = createMockClient({})
+  client.isLogged = true
+  client.collection = () => ({
+    findByDoctype: jest.fn().mockResolvedValue({
+      data: []
+    }),
+    findLinksByDoctype: jest.fn().mockResolvedValue({
+      data: []
+    }),
+    findApps: jest.fn().mockResolvedValue({
+      data: []
+    })
+  })
+
+  it('Change to True when all data is loaded', async () => {
+    const component = mount(
+      <AppWrapper client={client}>
+        <SharingContext.Consumer>
+          {({ allLoaded }) => <div>{`allLoaded: ${allLoaded}`}</div>}
+        </SharingContext.Consumer>
+      </AppWrapper>
+    )
+
+    expect(component.find('div').text()).toBe('allLoaded: false')
+
+    await act(async () => {
+      await new Promise(resolve => setTimeout(resolve, 100))
+    })
+
+    expect(component.find('div').text()).toBe('allLoaded: true')
+  })
+})
 
 describe('SharingProvider', () => {
   const client = createMockClient({})
