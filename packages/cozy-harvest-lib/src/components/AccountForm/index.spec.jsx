@@ -2,7 +2,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { shallow, mount } from 'enzyme'
-import { I18n } from 'cozy-ui/transpiled/react'
+import I18n from 'cozy-ui/transpiled/react/I18n'
 
 import { isMobile } from 'cozy-device-helper'
 

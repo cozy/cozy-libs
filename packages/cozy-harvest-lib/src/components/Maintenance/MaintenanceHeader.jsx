@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { withBreakpoints } from 'cozy-ui/transpiled/react'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import MaintenanceIcon from './MaintenanceIcon'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
