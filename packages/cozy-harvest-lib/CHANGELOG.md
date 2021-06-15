@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.2.0...cozy-harvest-lib@6.3.0) (2021-06-15)
+
+
+### Features
+
+* Use deep imports ([9346d6b](https://github.com/cozy/cozy-libs/commit/9346d6b))
+
+
+
+
+
 # [6.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.1.2...cozy-harvest-lib@6.2.0) (2021-06-12)
 
 
