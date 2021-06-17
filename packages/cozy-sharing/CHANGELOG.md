@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.4.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.4.1...cozy-sharing@3.4.2) (2021-06-17)
+
+
+### Bug Fixes
+
+* Add props in state ([6795d00](https://github.com/cozy/cozy-libs/commit/6795d00))
+* **deps:** Update devDeps cozy-client 16.8.0 to 23.9.1 ([0388464](https://github.com/cozy/cozy-libs/commit/0388464))
+
+
+
+
+
 ## [3.4.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.4.0...cozy-sharing@3.4.1) (2021-06-12)
 
 **Note:** Version bump only for package cozy-sharing
