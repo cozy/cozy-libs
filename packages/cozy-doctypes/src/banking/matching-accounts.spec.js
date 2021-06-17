@@ -156,6 +156,12 @@ it('should normalize account number', () => {
   expect(normalizeAccountNumber('')).toBe('')
   expect(normalizeAccountNumber(null)).toBe(null)
   expect(normalizeAccountNumber(undefined)).toBe(undefined)
+  expect(normalizeAccountNumber('xxxx xxxx xxxx 1234')).toBe(
+    'xxxx xxxx xxxx 1234'
+  )
+  expect(normalizeAccountNumber('****-****-****-1234')).toBe(
+    '****-****-****-1234'
+  )
 })
 
 describe('creditCardMatch', () => {
@@ -183,6 +189,26 @@ describe('creditCardMatch', () => {
         { number: '13002900002', type: 'CreditCard' }
       )
     ).toBe(false)
+  })
+  it('should parse correctly redacted number with x and *', () => {
+    expect(
+      creditCardMatch(
+        {
+          number: '****-****-****-1234',
+          type: 'CreditCard'
+        },
+        { number: '1234', type: 'CreditCard' }
+      )
+    ).toBe(true)
+    expect(
+      creditCardMatch(
+        {
+          number: 'xxxx xxxx xxxx 1234',
+          type: 'CreditCard'
+        },
+        { number: '1234', type: 'CreditCard' }
+      )
+    ).toBe(true)
   })
 })
 

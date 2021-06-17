@@ -16,7 +16,9 @@ const findExactMatch = (attr, account, existingAccounts) => {
 }
 
 const untrimmedAccountNumber = /^(?:[A-Za-z]+)?-?([0-9]+)-?(?:[A-Za-z]+)?$/
-const redactedCreditCard = /xxxx xxxx xxxx (\d{4})/
+// Regexp targeting hidden credit card number like
+// ****-****-****-1234;xxxx xxxx xxxx 1234;************1234
+const redactedCreditCard = /[x*]{4}[ -]?[x*]{4}[ -]?[x*]{4}[ -]?(\d{4})/
 
 const normalizeAccountNumber = (numberArg, ibanArg) => {
   const iban = ibanArg && ibanArg.replace(/\s/g, '')
