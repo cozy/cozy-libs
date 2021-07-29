@@ -33,6 +33,7 @@ export const ShareModal = ({
     documentType !== 'Albums' &&
     !hasSharedParent &&
     !hasSharedChild
+  const showShareByLink = documentType !== 'Organizations'
   const showShareOnlyByLink = hasSharedParent || hasSharedChild
   const showWhoHasAccess = documentType !== 'Albums'
 
@@ -73,6 +74,7 @@ export const ShareModal = ({
           sharing={sharing}
           sharingDesc={sharingDesc}
           showShareByEmail={showShareByEmail}
+          showShareByLink={showShareByLink}
           showShareOnlyByLink={showShareOnlyByLink}
           showWhoHasAccess={showWhoHasAccess}
         />
