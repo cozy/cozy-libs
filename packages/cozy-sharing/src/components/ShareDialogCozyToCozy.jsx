@@ -30,6 +30,7 @@ const ShareDialogCozyToCozy = ({
   sharing,
   sharingDesc,
   showShareByEmail,
+  showShareByLink,
   showShareOnlyByLink,
   showWhoHasAccess
 }) => {
@@ -88,16 +89,18 @@ const ShareDialogCozyToCozy = ({
         </div>
       }
       actions={
-        <DumbShareByLink
-          checked={link !== null}
-          document={document}
-          documentType={documentType}
-          link={link}
-          onChangePermissions={onUpdateShareLinkPermissions}
-          onDisable={onRevokeLink}
-          onEnable={onShareByLink}
-          permissions={permissions}
-        />
+        showShareByLink ? (
+          <DumbShareByLink
+            checked={link !== null}
+            document={document}
+            documentType={documentType}
+            link={link}
+            onChangePermissions={onUpdateShareLinkPermissions}
+            onDisable={onRevokeLink}
+            onEnable={onShareByLink}
+            permissions={permissions}
+          />
+        ) : null
       }
     />
   )
