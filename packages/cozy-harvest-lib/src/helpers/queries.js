@@ -47,3 +47,12 @@ export const buildTriggersByIdQuery = id => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
+
+export const buildAppsByIdQuery = appSlug => ({
+  definition: Q('io.cozy.apps').getById(`io.cozy.apps/${appSlug}`),
+  options: {
+    as: `io.cozy.apps/${appSlug}`,
+    fetchPolicy: defaultFetchPolicy,
+    singleDocData: true
+  }
+})

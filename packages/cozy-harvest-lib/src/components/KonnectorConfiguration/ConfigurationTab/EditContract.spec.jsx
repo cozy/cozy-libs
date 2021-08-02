@@ -1,11 +1,13 @@
 import React from 'react'
-import CozyClient from 'cozy-client'
+import CozyClient, { useQuery } from 'cozy-client'
 import { render, fireEvent, act } from '@testing-library/react'
 
 import AppLike from '../../../../test/AppLike'
 
 import bankAccount from './bank-account-fixture.json'
 import EditContract from './EditContract'
+
+jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
 
 jest.mock(
   './SyncContractSwitch',
@@ -28,6 +30,7 @@ describe('EditContract', () => {
     const client = new CozyClient({})
     client.save = jest.fn()
     client.destroy = jest.fn()
+    useQuery.mockReturnValue({ data: {}, fetchStatus: 'loaded' })
 
     const mockKonnector = konnector || {
       slug: 'mock-konnector'
