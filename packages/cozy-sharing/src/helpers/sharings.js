@@ -25,13 +25,16 @@ export const createSharingInStore = (
 ) => {
   // TODO Check if we can getByIds to avoid query in map
   docsId.map(async id => {
-    const file = await client.query(Q('io.cozy.files').getById(id))
-    dispatch(
-      addSharing(
-        sharing,
-        file.data.path || (await fetchFilesPaths(client, doctype, [file.data]))
-      )
-    )
+    const file =
+      doctype === 'io.cozy.files'
+        ? await client.query(Q(doctype).getById(id))
+        : undefined
+
+    const path =
+      file &&
+      (file.data.path || (await fetchFilesPaths(client, doctype, [file.data])))
+
+    dispatch(addSharing(sharing, path))
   })
 }
 
