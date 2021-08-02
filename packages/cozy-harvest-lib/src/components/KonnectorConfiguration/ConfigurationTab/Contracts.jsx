@@ -16,14 +16,12 @@ import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-
-import { getAccountLabel } from './bankAccountHelpers'
-import EditContract from './EditContract'
-
-import withLocales from '../../hoc/withLocales'
-
 import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+
+import withLocales from '../../hoc/withLocales'
+import { getAccountLabel } from './bankAccountHelpers'
+import EditContract from './EditContract'
 
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
@@ -46,9 +44,10 @@ const getPrimaryTextDefault = contract => contract.label
 
 const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
+  const { t } = useI18n()
   const getPrimaryText =
     getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
-  const { t } = useI18n()
+
   return (
     <>
       <ListItem
@@ -70,7 +69,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
           <Icon icon={RightIcon} className="u-coolGrey u-mr-1" />
         </ListItemSecondaryAction>
       </ListItem>
-      {showingEditModal ? (
+      {showingEditModal && (
         <EditContract
           konnector={konnector}
           accountId={accountId}
@@ -85,7 +84,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
             setShowingEditModal(false)
           }}
         />
-      ) : null}
+      )}
     </>
   )
 }
@@ -95,11 +94,15 @@ const customHeaderPerDoctype = {
 }
 
 const DumbContracts = ({ contracts, account, konnector }) => {
-  const contractData = contracts.data ? contracts.data : contracts
   const { t } = useI18n()
+  const contractData = contracts.data ? contracts.data : contracts
+
+  if (contractData.length === 0) return null
+
   const doctype = contractData[0] ? contractData[0]._type : null
   const headerKey = customHeaderPerDoctype[doctype] || 'default'
-  return contractData.length > 0 ? (
+
+  return (
     <MuiCozyTheme>
       <NavigationList>
         <NavigationListHeader>
@@ -121,7 +124,7 @@ const DumbContracts = ({ contracts, account, konnector }) => {
         </NavigationListSection>
       </NavigationList>
     </MuiCozyTheme>
-  ) : null
+  )
 }
 
 const CollectionPropType = PropTypes.shape({

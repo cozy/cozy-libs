@@ -1,7 +1,12 @@
 import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
 
-import { useClient } from 'cozy-client'
+import {
+  useClient,
+  isQueryLoading,
+  hasQueryBeenLoaded,
+  useQuery
+} from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -12,7 +17,6 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { withStyles } from '@material-ui/core/styles'
-
 import {
   DialogCloseButton,
   DialogBackButton,
@@ -24,22 +28,20 @@ import Dialog, {
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 
-import SyncContractSwitch from './SyncContractSwitch'
 import { findKonnectorPolicy } from '../../../konnector-policies'
-
+import { buildAppsByIdQuery } from '../../../helpers/queries'
 import withLocales from '../../hoc/withLocales'
-import { updateContract } from './helpers'
 import { useTracker, useTrackPage } from '../../hoc/tracking'
-
+import SyncContractSwitch from './SyncContractSwitch'
+import { updateContract } from './helpers'
 import {
   getAccountLabel,
   getAccountInstitutionLabel,
   getAccountOwners
 } from './bankAccountHelpers'
-
-import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 
 const EditContractContactPicker = function(props, ref) {
   const { t } = useI18n()
@@ -101,10 +103,26 @@ const EditContract = props => {
     onError
   } = props
 
+  useTrackPage('editer_contrat')
   const [showDeleteConfirmation, setShowDeleteConfirmation] = useState(false)
   const [deleting, setDeleting] = useState(false)
+  const [shortLabel, setShortLabel] = useState(getAccountLabel(contract))
+  const [owners, setOwners] = useState(getAccountOwners(contract))
+  const { dialogProps, dialogTitleProps } = useCozyDialog({
+    size: 'medium',
+    open: true,
+    onClose
+  })
 
-  useTrackPage('editer_contrat')
+  const contactsAppQuery = buildAppsByIdQuery('contacts')
+  const contactsAppResult = useQuery(
+    contactsAppQuery.definition,
+    contactsAppQuery.options
+  )
+
+  const isContactsAppInstalled =
+    hasQueryBeenLoaded(contactsAppResult) &&
+    contactsAppResult.fetchStatus === 'loaded'
 
   const handleSaveContract = async (contract, fields) => {
     await updateContract(client, contract, {
@@ -127,9 +145,6 @@ const EditContract = props => {
       }
     })
   }
-
-  const [shortLabel, setShortLabel] = useState(getAccountLabel(contract))
-  const [owners, setOwners] = useState(getAccountOwners(contract))
 
   const handleSubmit = e => {
     e.preventDefault()
@@ -176,12 +191,6 @@ const EditContract = props => {
   const fieldVariant = isMobile ? 'default' : 'inline'
   const policy = konnector ? findKonnectorPolicy(konnector) : null
 
-  const { dialogProps, dialogTitleProps } = useCozyDialog({
-    size: 'medium',
-    open: true,
-    onClose
-  })
-
   return (
     <Dialog {...dialogProps}>
       <DialogCloseButton onClick={onClose} />
@@ -190,53 +199,62 @@ const EditContract = props => {
         {getAccountLabel(contract)}
       </DialogTitle>
       <Divider />
-      <NonGrowingDialogContent className="u-pb-1">
-        <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
-          <Stack spacing={isMobile ? 's' : 'm'}>
-            <Field
-              id="account-label"
-              placeholder={t('contractForm.label')}
-              label={t('contractForm.label')}
-              value={shortLabel}
-              onChange={e => setShortLabel(e.target.value)}
-              variant={fieldVariant}
-            />
-            <CollectionField
-              label={t('contractForm.owner')}
-              values={owners && owners.length > 0 ? owners : [null]}
-              component={ContactPicker}
-              addButtonLabel={t('contractForm.addOwnerBtn')}
-              removeButtonLabel={t('contractForm.removeOwnerBtn')}
-              variant={fieldVariant}
-              onChange={handleChangeOwners}
-              placeholder={t('contractForm.ownerPlaceholder')}
-            />
-            <Field
-              id="account-institution"
-              placeholder={t('contractForm.bank')}
-              label={t('contractForm.bank')}
-              value={getAccountInstitutionLabel(contract)}
-              disabled
-              variant={fieldVariant}
-            />
-            <Field
-              id="account-number"
-              placeholder={t('contractForm.number')}
-              label={t('contractForm.number')}
-              value={contract.number}
-              disabled
-              variant={fieldVariant}
-            />
-            <Button
-              type="submit"
-              form={`edit-contract-${contract._id}`}
-              label={t('contractForm.apply')}
-              theme="primary"
-              className="u-ml-0"
-            />
-          </Stack>
-        </form>
-      </NonGrowingDialogContent>
+      {isQueryLoading(contactsAppResult) ? (
+        <Spinner
+          className="u-h-100 u-flex u-flex-items-center u-flex-justify-center"
+          size="xxlarge"
+        />
+      ) : (
+        <NonGrowingDialogContent className="u-pb-1">
+          <form id={`edit-contract-${contract._id}`} onSubmit={handleSubmit}>
+            <Stack spacing={isMobile ? 's' : 'm'}>
+              <Field
+                id="account-label"
+                placeholder={t('contractForm.label')}
+                label={t('contractForm.label')}
+                value={shortLabel}
+                onChange={e => setShortLabel(e.target.value)}
+                variant={fieldVariant}
+              />
+              {isContactsAppInstalled && (
+                <CollectionField
+                  label={t('contractForm.owner')}
+                  values={owners && owners.length > 0 ? owners : [null]}
+                  component={ContactPicker}
+                  addButtonLabel={t('contractForm.addOwnerBtn')}
+                  removeButtonLabel={t('contractForm.removeOwnerBtn')}
+                  variant={fieldVariant}
+                  onChange={handleChangeOwners}
+                  placeholder={t('contractForm.ownerPlaceholder')}
+                />
+              )}
+              <Field
+                id="account-institution"
+                placeholder={t('contractForm.bank')}
+                label={t('contractForm.bank')}
+                value={getAccountInstitutionLabel(contract)}
+                disabled
+                variant={fieldVariant}
+              />
+              <Field
+                id="account-number"
+                placeholder={t('contractForm.number')}
+                label={t('contractForm.number')}
+                value={contract.number}
+                disabled
+                variant={fieldVariant}
+              />
+              <Button
+                type="submit"
+                form={`edit-contract-${contract._id}`}
+                label={t('contractForm.apply')}
+                theme="primary"
+                className="u-ml-0"
+              />
+            </Stack>
+          </form>
+        </NonGrowingDialogContent>
+      )}
       <Divider />
       {policy && policy.setSync ? (
         <>
