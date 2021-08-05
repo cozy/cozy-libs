@@ -217,8 +217,7 @@ export class SharingProvider extends Component {
         readOnlyRecipients
       })
 
-    const previewPath =
-      document._type === 'com.bitwarden.organizations' ? undefined : '/preview'
+    const previewPath = this.props.previewPath ?? '/preview'
 
     const { data } = await this.sharingCol.create({
       document,
