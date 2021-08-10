@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.4.2...cozy-sharing@3.5.0) (2021-08-10)
+
+
+### Bug Fixes
+
+* FetchFilesPaths only for documents that have a path ([a1d7e13](https://github.com/cozy/cozy-libs/commit/a1d7e13))
+* Skip path querying for `non-file` documents in createSharingInStore ([c7635e4](https://github.com/cozy/cozy-libs/commit/c7635e4))
+
+
+### Features
+
+* Add translations for Organizations document type ([5916041](https://github.com/cozy/cozy-libs/commit/5916041))
+* Bump cozy-client to `23.19.0` and cozy-ui to `51.5.0` ([949f228](https://github.com/cozy/cozy-libs/commit/949f228))
+* Disable `previewPath` for organizations ([5696109](https://github.com/cozy/cozy-libs/commit/5696109))
+* Disable shareByLink for organizations ([caae1d8](https://github.com/cozy/cozy-libs/commit/caae1d8))
+* Expose `previewPath` as a prop of `SharingContext` ([064458c](https://github.com/cozy/cozy-libs/commit/064458c))
+
+
+
+
+
 ## [3.4.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.4.1...cozy-sharing@3.4.2) (2021-06-17)
 
 
