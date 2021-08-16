@@ -199,3 +199,11 @@ To print more logs when using tool (useful for debug).
 - Each of these prereleases is automatically uploaded on downcloud and deployed on instances that are on the `beta` channel.
 - Once the branch is deemed ready for release, the last commit is tagged with the final version — `1.0.0` in our example. It is then, again, uploaded on downcloud, published on the registry and deployed on specific instances as needed.
 - The release branch is merged back into `master` so that all the bugfixes aren't lost.
+
+### Versions
+
+We apply the semver convention: 
+- If the release brings only bug fixes, then we should create a patch version.
+- If the release brings at least one feature, then we should create a minor version.
+- If the release changes its application's permissions, we should create a minor version even if this release is for bug fixes only. 
+
