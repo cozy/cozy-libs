@@ -76,8 +76,9 @@ export const fetchKonnectorFromAccount = async (cozyClient, account) => {
 export const fetchTriggersFromAccount = async (cozyClient, account) => {
   const triggers = await cozyClient.queryAll(
     Q('io.cozy.triggers').where({
-      worker: 'konnector',
-      type: '@cron',
+      worker: {
+        $in: ['konnector', 'client']
+      },
       'message.account': account._id
     })
   )
@@ -105,8 +106,9 @@ export const fetchLoginFailedTriggersForAccountsIds = async (
 ) => {
   const triggers = await cozyClient.queryAll(
     Q('io.cozy.triggers').where({
-      worker: 'konnector',
-      type: '@cron',
+      worker: {
+        $in: ['konnector', 'client']
+      },
       'message.account': {
         $in: accountsIds
       }
