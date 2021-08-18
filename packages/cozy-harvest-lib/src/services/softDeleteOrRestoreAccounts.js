@@ -57,7 +57,7 @@ const softDeleteOrRestoreAccounts = async (
   const decryptedPassword = await decrypt(encryptedPassword)
   const decryptedUsername = await decrypt(encryptedUsername)
   if (decryptedPassword === null || decryptedUsername === null) {
-    // Something wrong occured dujring the credentials encryption
+    // Something wrong occured during the credentials encryption
     // and/or decryption
     throw new Error('DECRYPT_FAILED')
   }

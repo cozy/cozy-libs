@@ -175,8 +175,9 @@ describe('fetchLoginFailedTriggersForAccountsIds', () => {
       expect.objectContaining({
         selector: {
           'message.account': { $in: ['acc1', 'acc2'] },
-          type: '@cron',
-          worker: 'konnector'
+          worker: {
+            $in: ['konnector', 'client']
+          }
         }
       })
     )
