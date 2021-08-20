@@ -165,7 +165,13 @@ const ShareDialogCozyToCozy = ({
 }) => {
   const { t } = useI18n()
 
-  const [status, setStatus] = React.useState('loading')
+  const shouldGetRecipientsToBeConfirmed =
+    hasTwoStepsConfirmation &&
+    twoStepsConfirmationMethods?.getRecipientsToBeConfirmed
+
+  const [status, setStatus] = React.useState(
+    shouldGetRecipientsToBeConfirmed ? 'loading' : 'sharing'
+  )
   const [recipientsToBeConfirmed, setRecipientsToBeConfirmed] = useState([])
   const [recipientConfirmationData, setRecipientConfirmationData] = useState(
     undefined
@@ -187,10 +193,7 @@ const ShareDialogCozyToCozy = ({
   })
 
   const getRecipientsToBeConfirmed = useCallback(async () => {
-    if (
-      hasTwoStepsConfirmation &&
-      twoStepsConfirmationMethods?.getRecipientsToBeConfirmed
-    ) {
+    if (shouldGetRecipientsToBeConfirmed) {
       setStatus('loading')
 
       try {
@@ -210,7 +213,7 @@ const ShareDialogCozyToCozy = ({
     } else {
       setStatus('sharing')
     }
-  }, [hasTwoStepsConfirmation, twoStepsConfirmationMethods, document])
+  }, [shouldGetRecipientsToBeConfirmed, twoStepsConfirmationMethods, document])
 
   useEffect(() => {
     getRecipientsToBeConfirmed()
