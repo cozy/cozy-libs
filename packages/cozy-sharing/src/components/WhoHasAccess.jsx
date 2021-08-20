@@ -63,7 +63,11 @@ const WhoHasAccess = ({
 WhoHasAccess.propTypes = {
   isOwner: PropTypes.bool,
   recipients: PropTypes.array.isRequired,
-  recipientsToBeConfirmed: PropTypes.array,
+  recipientsToBeConfirmed: PropTypes.arrayOf(
+    PropTypes.shape({
+      email: PropTypes.string.isRequired
+    })
+  ),
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
