@@ -40,7 +40,8 @@
     },
     "twoStepsConfirmation": {
       "confirm": "Confirm",
-      "reject": "Reject"
+      "reject": "Reject",
+      "contactAreWaitingForConfirmation": "Some contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them.||||%{smart_count} contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them."
     },
   },
   "Sharings": {
