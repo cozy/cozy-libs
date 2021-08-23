@@ -37,8 +37,11 @@
         "success": "L'application a accès à vos contacts"
       },
       "defaultDisplayName": "Anonyme"
-    }
-  },
+    },
+    "twoStepsConfirmation": {
+      "confirm": "Confirmer",
+      "reject": "Refuser"
+    },
   "Sharings": {
     "unavailable": {
       "title": "Ravi de vous revoir !",

@@ -95,6 +95,94 @@ describe('Recipient component', () => {
     expect(onRevoke).toBeCalled()
     expect(onRevokeSelf).not.toBeCalled()
   })
+
+  it('should render confirmation actions if recipient is waiting for confirmation', () => {
+    const confirmRecipient = jest.fn()
+    const rejectRecipient = jest.fn()
+
+    const { getByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      isOwner: false,
+      documentType: 'Organizations',
+      recipientConfirmationData: {
+        email: 'me@bob.cozy.localhost'
+      },
+      rejectRecipient,
+      confirmRecipient
+    })
+
+    expect(getByText('Confirm')).toBeTruthy()
+  })
+
+  it('should not render confirmation actions if no recipient is waiting for confirmation', () => {
+    const confirmRecipient = jest.fn()
+    const rejectRecipient = jest.fn()
+
+    const { queryByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      isOwner: false,
+      documentType: 'Organizations',
+      recipientConfirmationData: undefined,
+      rejectRecipient,
+      confirmRecipient
+    })
+
+    expect(queryByText('Confirm')).not.toBeInTheDocument()
+  })
+
+  it(`should call confirmRecipient when clicking 'confirm' button`, () => {
+    const confirmRecipient = jest.fn()
+    const rejectRecipient = jest.fn()
+
+    const { getByText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      isOwner: false,
+      documentType: 'Organizations',
+      recipientConfirmationData: {
+        email: 'me@bob.cozy.localhost'
+      },
+      rejectRecipient,
+      confirmRecipient
+    })
+
+    fireEvent.click(getByText('Confirm'))
+
+    expect(confirmRecipient).toBeCalledWith({
+      email: 'me@bob.cozy.localhost'
+    })
+    expect(rejectRecipient).not.toBeCalled()
+  })
+
+  it(`should call rejectRecipient when clicking 'reject' button`, () => {
+    const confirmRecipient = jest.fn()
+    const rejectRecipient = jest.fn()
+
+    const { getByLabelText } = setup({
+      instance: 'foo.mycozy.cloud',
+      status: 'ready',
+      type: 'two-way',
+      isOwner: false,
+      documentType: 'Organizations',
+      recipientConfirmationData: {
+        email: 'me@bob.cozy.localhost'
+      },
+      rejectRecipient,
+      confirmRecipient
+    })
+
+    fireEvent.click(getByLabelText('Reject'))
+
+    expect(rejectRecipient).toBeCalledWith({
+      email: 'me@bob.cozy.localhost'
+    })
+    expect(confirmRecipient).not.toBeCalled()
+  })
 })
 
 describe('excludeMeAsOwnerFromRecipients', () => {

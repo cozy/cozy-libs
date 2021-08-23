@@ -37,7 +37,11 @@
         "success": "The application has access to your contacts"
       },
       "defaultDisplayName": "Anonymous"
-    }
+    },
+    "twoStepsConfirmation": {
+      "confirm": "Confirm",
+      "reject": "Reject"
+    },
   },
   "Sharings": {
     "unavailable": {

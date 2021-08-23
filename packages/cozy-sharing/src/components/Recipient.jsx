@@ -16,6 +16,8 @@ import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
+import CheckCircleIcon from 'cozy-ui/transpiled/react/Icons/CheckCircle'
+import CrossCircleIcon from 'cozy-ui/transpiled/react/Icons/CrossCircle'
 
 import AvatarPlusX from './AvatarPlusX'
 import styles from './recipient.styl'
@@ -26,6 +28,7 @@ import Identity from './Identity'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Chip from 'cozy-ui/transpiled/react/Chip'
 
 export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
@@ -295,14 +298,82 @@ const Status = ({ status, isMe, instance }) => {
   )
 }
 
+/**
+ * Displays the confirmation interface that allows to confirm or reject a recipient
+ */
+const RecipientConfirm = ({
+  recipientConfirmationData,
+  rejectRecipient,
+  confirmRecipient
+}) => {
+  const { t } = useI18n()
+
+  const reject = () => {
+    rejectRecipient(recipientConfirmationData)
+  }
+
+  const confirm = () => {
+    confirmRecipient(recipientConfirmationData)
+  }
+
+  return (
+    <>
+      <Chip
+        className={cx(styles['recipient-confirm__action--confirm'])}
+        variant="outlined"
+        size="small"
+        onClick={confirm}
+      >
+        <Icon icon={CheckCircleIcon} className={'u-mr-half'} />
+        {t(`Share.twoStepsConfirmation.confirm`)}
+      </Chip>
+      <Chip.Round
+        className={cx(styles['recipient-confirm__action--cancel'])}
+        variant="outlined"
+        size="small"
+        onClick={reject}
+        aria-label={t(`Share.twoStepsConfirmation.reject`)}
+      >
+        <Icon icon={CrossCircleIcon} />
+      </Chip.Round>
+    </>
+  )
+}
+
+RecipientConfirm.propTypes = {
+  recipientConfirmationData: PropTypes.object.isRequired,
+  rejectRecipient: PropTypes.func.isRequired,
+  confirmRecipient: PropTypes.func.isRequired
+}
+
 const Recipient = props => {
   const { t } = useI18n()
   const client = useClient()
-  const { instance, isOwner, status, ...rest } = props
+
+  const {
+    instance,
+    isOwner,
+    status,
+    recipientConfirmationData,
+    rejectRecipient,
+    confirmRecipient,
+    ...rest
+  } = props
+
   const isMe =
     (isOwner && status === 'owner') || instance === client.options.uri
   const defaultDisplayName = t(DEFAULT_DISPLAY_NAME)
   const name = getDisplayName(rest, defaultDisplayName)
+
+  const RightPart = recipientConfirmationData ? (
+    <RecipientConfirm
+      recipientConfirmationData={recipientConfirmationData}
+      rejectRecipient={rejectRecipient}
+      confirmRecipient={confirmRecipient}
+    ></RecipientConfirm>
+  ) : (
+    <Permissions {...props} className="u-flex-shrink-0" />
+  )
 
   return (
     <CompositeRow
@@ -315,7 +386,7 @@ const Recipient = props => {
       }
       secondaryText={<Status status={status} isMe={isMe} instance={instance} />}
       image={<RecipientAvatar recipient={props} />}
-      right={<Permissions {...props} className="u-flex-shrink-0" />}
+      right={RightPart}
     />
   )
 }
