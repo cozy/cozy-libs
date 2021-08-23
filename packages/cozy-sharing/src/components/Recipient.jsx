@@ -391,6 +391,15 @@ const Recipient = props => {
   )
 }
 
+Recipient.propTypes = {
+  instance: PropTypes.string,
+  isOwner: PropTypes.bool,
+  status: PropTypes.string,
+  recipientConfirmationData: PropTypes.object,
+  rejectRecipient: PropTypes.func,
+  confirmRecipient: PropTypes.func
+}
+
 export default Recipient
 
 export const RecipientWithoutStatus = ({ instance, ...rest }) => {
