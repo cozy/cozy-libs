@@ -16,3 +16,6 @@ export { ShareButton } from './ShareButton'
 export { ShareModal } from './ShareModal'
 export { RefreshableSharings } from './RefreshableSharings'
 export { useFetchDocumentPath } from './components/useFetchDocumentPath'
+export {
+  CozyPassFingerprintDialogContent
+} from './components/CozyPassFingerprintDialogContent'
