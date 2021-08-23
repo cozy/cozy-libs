@@ -8,6 +8,8 @@ import { default as DumbShareByLink } from './ShareByLink'
 import { default as DumbShareByEmail } from './ShareByEmail'
 import WhoHasAccess from './WhoHasAccess'
 
+import { useSafeState } from '../helpers/hooks'
+
 import cx from 'classnames'
 import styles from '../share.styl'
 
@@ -169,10 +171,10 @@ const ShareDialogCozyToCozy = ({
     hasTwoStepsConfirmation &&
     twoStepsConfirmationMethods?.getRecipientsToBeConfirmed
 
-  const [status, setStatus] = React.useState(
+  const [status, setStatus] = useSafeState(
     shouldGetRecipientsToBeConfirmed ? 'loading' : 'sharing'
   )
-  const [recipientsToBeConfirmed, setRecipientsToBeConfirmed] = useState([])
+  const [recipientsToBeConfirmed, setRecipientsToBeConfirmed] = useSafeState([])
   const [recipientConfirmationData, setRecipientConfirmationData] = useState(
     undefined
   )
@@ -183,15 +185,6 @@ const ShareDialogCozyToCozy = ({
     recipientConfirmationDialogContent: ConfirmationDialogContent
   } = twoStepsConfirmationMethods
 
-  const mountedRef = React.useRef(false)
-  useEffect(() => {
-    mountedRef.current = true
-
-    return () => {
-      mountedRef.current = false
-    }
-  })
-
   const getRecipientsToBeConfirmed = useCallback(async () => {
     if (shouldGetRecipientsToBeConfirmed) {
       setStatus('loading')
@@ -201,19 +194,21 @@ const ShareDialogCozyToCozy = ({
           document.id
         )
 
-        if (mountedRef.current) {
-          setRecipientsToBeConfirmed(result)
-          setStatus('sharing')
-        }
+        setRecipientsToBeConfirmed(result)
+        setStatus('sharing')
       } catch {
-        if (mountedRef.current) {
-          setStatus('error')
-        }
+        setStatus('error')
       }
     } else {
       setStatus('sharing')
     }
-  }, [shouldGetRecipientsToBeConfirmed, twoStepsConfirmationMethods, document])
+  }, [
+    shouldGetRecipientsToBeConfirmed,
+    twoStepsConfirmationMethods,
+    document,
+    setRecipientsToBeConfirmed,
+    setStatus
+  ])
 
   useEffect(() => {
     getRecipientsToBeConfirmed()
