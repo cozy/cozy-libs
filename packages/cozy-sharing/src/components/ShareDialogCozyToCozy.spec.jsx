@@ -19,10 +19,9 @@ describe('ShareDialogCozyToCozy', () => {
     )
   }
 
-  it('should show sharing dialog directly when hasTwoStepsConfirmation is set to false', () => {
+  it('should show sharing dialog directly when no twoStepsConfirmationMethods are provided', () => {
     let props = {
-      ...getMockProps(),
-      hasTwoStepsConfirmation: false
+      ...getMockProps()
     }
 
     const { getByText } = setup(props)
@@ -35,7 +34,6 @@ describe('ShareDialogCozyToCozy', () => {
 
     let props = {
       ...getMockProps(),
-      hasTwoStepsConfirmation: true,
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
         rejectRecipient: jest.fn()
@@ -64,7 +62,6 @@ describe('ShareDialogCozyToCozy', () => {
 
     let props = {
       ...getMockProps(),
-      hasTwoStepsConfirmation: true,
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
         rejectRecipient: jest.fn()
@@ -94,7 +91,6 @@ describe('ShareDialogCozyToCozy', () => {
 
     let props = {
       ...getMockProps(),
-      hasTwoStepsConfirmation: true,
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
         rejectRecipient: jest.fn()
@@ -129,7 +125,6 @@ describe('ShareDialogCozyToCozy', () => {
 
     let props = {
       ...getMockProps(),
-      hasTwoStepsConfirmation: true,
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
         rejectRecipient: jest.fn()
@@ -155,7 +150,6 @@ describe('ShareDialogCozyToCozy', () => {
 
     let props = {
       ...getMockProps(),
-      hasTwoStepsConfirmation: true,
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
         rejectRecipient

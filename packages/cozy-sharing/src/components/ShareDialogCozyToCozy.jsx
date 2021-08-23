@@ -199,13 +199,11 @@ const ShareDialogCozyToCozy = ({
   showShareByLink,
   showShareOnlyByLink,
   showWhoHasAccess,
-  hasTwoStepsConfirmation = false,
   twoStepsConfirmationMethods = {}
 }) => {
   const { t } = useI18n()
 
   const shouldGetRecipientsToBeConfirmed =
-    hasTwoStepsConfirmation &&
     twoStepsConfirmationMethods?.getRecipientsToBeConfirmed
 
   const [status, setStatus] = useSafeState(
