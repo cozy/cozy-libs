@@ -27,7 +27,6 @@ export const ShareModal = ({
   recipients,
   sharing,
   sharingDesc,
-  hasTwoStepsConfirmation = false,
   twoStepsConfirmationMethods
 }) => {
   const showShareByEmail =
@@ -76,7 +75,6 @@ export const ShareModal = ({
           showShareByLink={showShareByLink}
           showShareOnlyByLink={showShareOnlyByLink}
           showWhoHasAccess={showWhoHasAccess}
-          hasTwoStepsConfirmation={hasTwoStepsConfirmation}
           twoStepsConfirmationMethods={twoStepsConfirmationMethods}
         />
       )}
@@ -106,7 +104,6 @@ ShareModal.propTypes = {
   permissions: PropTypes.array.isRequired,
   recipients: PropTypes.array.isRequired,
   sharingDesc: PropTypes.string,
-  hasTwoStepsConfirmation: PropTypes.bool,
   twoStepsConfirmationMethods: PropTypes.shape({
     getRecipientsToBeConfirmed: PropTypes.func,
     confirmRecipient: PropTypes.func,
