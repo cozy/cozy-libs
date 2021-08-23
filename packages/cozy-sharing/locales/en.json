@@ -360,6 +360,10 @@
         "isInSharedFolder": "is in a shared folder",
         "hasSharedFolder": "contains a shared folder"
       }
+    },
+    "fingerprint": {
+      "instruction": "Every Cozy is associated to a unique **fingerprint phrase**. For security reasons, please ask to %{userName} (%{userEmail}) if his Cozy's fingerprint phrase is corresponding to :",
+      "instruction2": "The fingerprint phrase of a Cozy is visible on top of the Cozy Pass' passwords list. This fingerprint phrase can also be accessed on **Parameters/Profile/Fingerprint phrase** from the mobile client or the browser extension."
     }
   }
 }

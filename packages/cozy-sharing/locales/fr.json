@@ -360,6 +360,10 @@
         "isInSharedFolder": "se trouve dans un dossier partagé.",
         "hasSharedFolder": "contient un dossier partagé."
       }
+    },
+    "fingerprint": {
+      "instruction": "Chaque Cozy est associé **une phrase d’empreinte** unique. Par sécurité, merci de demander à %{userName} (%{userEmail}) si la phrase d’empreinte de son Cozy correspond bien à :",
+      "instruction2": "La phrase d’empreinte d’un Cozy est accessible **en haut de sa liste de mot de passes dans Cozy Pass**. Cette phrase d'empreinte est également accessible dans **Paramètres/Profil/Phrase d’empreinte** de son client mobile ou de son extension navigateur."
     }
   }
 }
