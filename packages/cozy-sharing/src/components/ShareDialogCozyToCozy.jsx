@@ -135,6 +135,43 @@ const ConfirmRecipientActions = ({ confirm, cancel }) => {
 }
 
 /**
+ * Displays the reject interface that can be used when ShareDialogCozyToCozy is in asking for
+ * confirmation after the user clicked on Reject button
+ */
+const RejectDialogContent = ({ recipientConfirmationData }) => {
+  const { t } = useI18n()
+
+  const question = t('Share.twoStepsConfirmation.confirmRejection', {
+    userName: recipientConfirmationData.name,
+    userEmail: recipientConfirmationData.email
+  })
+
+  return question
+}
+
+/**
+ * Displays actions that are available when rejecting a recipient
+ */
+const RejectRecipientActions = ({ reject, cancel }) => {
+  const { t } = useI18n()
+
+  return (
+    <>
+      <Button
+        theme="secondary"
+        label={t(`Share.twoStepsConfirmation.cancel`)}
+        onClick={cancel}
+      />
+      <Button
+        theme="primary"
+        label={t(`Share.twoStepsConfirmation.reject`)}
+        onClick={reject}
+      />
+    </>
+  )
+}
+
+/**
  * Displays a sharing dialog that allows to share a document between multiple Cozy users
  */
 const ShareDialogCozyToCozy = ({
@@ -219,8 +256,20 @@ const ShareDialogCozyToCozy = ({
     setStatus('confirmingRecipient')
   }
 
+  const showRejectDialog = recipientConfirmationData => {
+    setRecipientConfirmationData(recipientConfirmationData)
+    setStatus('rejectingRecipient')
+  }
+
   const onConfirmRecipient = () => {
     confirmRecipient(recipientConfirmationData).then(() => {
+      getRecipientsToBeConfirmed()
+    })
+  }
+
+  const onRejectRecipient = () => {
+    setStatus('loading')
+    rejectRecipient(recipientConfirmationData).then(() => {
       getRecipientsToBeConfirmed()
     })
   }
@@ -260,7 +309,7 @@ const ShareDialogCozyToCozy = ({
         showShareOnlyByLink={showShareOnlyByLink}
         showWhoHasAccess={showWhoHasAccess}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
-        rejectRecipient={rejectRecipient}
+        rejectRecipient={showRejectDialog}
         confirmRecipient={showConfirmationDialog}
       />
     )
@@ -289,6 +338,21 @@ const ShareDialogCozyToCozy = ({
     dialogActions = (
       <ConfirmRecipientActions
         confirm={onConfirmRecipient}
+        cancel={closeConfirmationDialog}
+      />
+    )
+  } else if (status === 'rejectingRecipient') {
+    dialogTitle = t(`Share.twoStepsConfirmation.titleReject`)
+
+    dialogContent = (
+      <RejectDialogContent
+        recipientConfirmationData={recipientConfirmationData}
+      />
+    )
+
+    dialogActions = (
+      <RejectRecipientActions
+        reject={onRejectRecipient}
         cancel={closeConfirmationDialog}
       />
     )

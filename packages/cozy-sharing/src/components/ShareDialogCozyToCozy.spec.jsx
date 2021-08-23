@@ -2,7 +2,7 @@ import React from 'react'
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import AppLike from '../../test/AppLike'
 import { createMockClient } from 'cozy-client'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 import { act } from 'react-dom/test-utils'
 
 describe('ShareDialogCozyToCozy', () => {
@@ -146,6 +146,48 @@ describe('ShareDialogCozyToCozy', () => {
     expect(
       queryByText(/waiting for your confirmation/i)
     ).not.toBeInTheDocument()
+  })
+
+  it(`should display confirmation of 'contact rejection' when user click on the 'reject' button`, async () => {
+    const { promise, resolve } = deferablePromise()
+
+    const rejectRecipient = jest.fn(() => Promise.resolve())
+
+    let props = {
+      ...getMockProps(),
+      hasTwoStepsConfirmation: true,
+      twoStepsConfirmationMethods: {
+        getRecipientsToBeConfirmed: jest.fn(() => promise),
+        rejectRecipient
+      }
+    }
+
+    const { getByText, getByLabelText } = setup(props)
+
+    resolve([
+      {
+        name: recipientBob.public_name,
+        id: 'SOME_ID',
+        email: recipientBob.email
+      }
+    ])
+
+    await act(() => promise)
+
+    const rejectButton = getByLabelText('Reject')
+
+    await act(() => fireEvent.click(rejectButton))
+
+    expect(
+      getByText(
+        `Do you really want to reject contact ${recipientBob.public_name} (${recipientBob.email})?`
+      )
+    ).toBeTruthy()
+
+    const confirmRejectButton = getByText('Reject')
+    await act(() => fireEvent.click(confirmRejectButton))
+
+    expect(rejectRecipient).toBeCalled()
   })
 })
 
