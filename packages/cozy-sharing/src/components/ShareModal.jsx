@@ -29,17 +29,14 @@ export const ShareModal = ({
   sharingDesc
 }) => {
   const showShareByEmail =
-    documentType !== 'Notes' &&
-    documentType !== 'Albums' &&
-    !hasSharedParent &&
-    !hasSharedChild
+    documentType !== 'Albums' && !hasSharedParent && !hasSharedChild
   const showShareByLink = documentType !== 'Organizations'
   const showShareOnlyByLink = hasSharedParent || hasSharedChild
   const showWhoHasAccess = documentType !== 'Albums'
 
   return (
     <>
-      {(documentType === 'Notes' || documentType === 'Albums') && (
+      {documentType === 'Albums' && (
         <ShareDialogOnlyByLink
           document={document}
           documentType={documentType}
@@ -51,7 +48,7 @@ export const ShareModal = ({
           permissions={permissions}
         />
       )}
-      {documentType !== 'Notes' && documentType !== 'Albums' && (
+      {documentType !== 'Albums' && (
         <ShareDialogCozyToCozy
           contacts={contacts}
           createContact={createContact}
