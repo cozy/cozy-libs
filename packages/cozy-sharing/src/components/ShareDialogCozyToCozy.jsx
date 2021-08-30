@@ -40,7 +40,9 @@ const ShareDialogCozyToCozy = ({
       disableEnforceFocus
       open={true}
       onClose={onClose}
-      title={t(`${documentType}.share.title`, { name: document.name })}
+      title={t(`${documentType}.share.title`, {
+        name: document.name || document.attributes?.name
+      })}
       content={
         <div className={cx(styles['share-modal-content'])}>
           {showShareOnlyByLink && (
