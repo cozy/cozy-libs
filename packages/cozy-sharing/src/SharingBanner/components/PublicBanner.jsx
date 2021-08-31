@@ -70,6 +70,7 @@ const SharingBannerCozyToCozy = ({
   onClose
 }) => {
   const { t } = useI18n()
+
   const action = () => openExternalLink(discoveryLink)
   const buttonOne = isSharingShortcutCreated
     ? {
