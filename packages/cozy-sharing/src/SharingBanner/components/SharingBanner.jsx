@@ -2,8 +2,9 @@ import React, { useState, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import { SharingBannerByLink, SharingBannerCozyToCozy } from './PublicBanner'
+import { I18n } from 'cozy-ui/transpiled/react'
 
-export const SharingBanner = ({ sharingInfos }) => {
+export const SharingBanner = ({ sharingInfos, lang }) => {
   const [isOpened, setIsOpened] = useState(true)
   const onClose = useCallback(() => setIsOpened(false), [setIsOpened])
 
@@ -17,7 +18,7 @@ export const SharingBanner = ({ sharingInfos }) => {
   if (loading) return null
   return (
     isOpened && (
-      <div data-testid="sharingBanner">
+      <I18n dictRequire={() => require('../locales/en.json')} lang={lang}>
         {!discoveryLink ? (
           <SharingBannerByLink onClose={onClose} />
         ) : (
@@ -28,7 +29,7 @@ export const SharingBanner = ({ sharingInfos }) => {
             onClose={onClose}
           />
         )}
-      </div>
+      </I18n>
     )
   )
 }
