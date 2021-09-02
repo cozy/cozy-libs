@@ -126,7 +126,9 @@ export class ShareByEmail extends Component {
       })
 
       Alerter.success(
-        ...getSuccessMessage(recipientsBefore, contacts, documentType)
+        this.props.t(
+          ...getSuccessMessage(recipientsBefore, contacts, documentType)
+        )
       )
       this.reset()
     } catch (err) {
