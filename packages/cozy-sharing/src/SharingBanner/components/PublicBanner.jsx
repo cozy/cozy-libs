@@ -5,7 +5,6 @@ import snarkdown from 'snarkdown'
 import { useClient } from 'cozy-client'
 import Banner from 'cozy-ui/transpiled/react/Banner'
 import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import palette from 'cozy-ui/transpiled/react/palette'
 import { useI18n } from 'cozy-ui/transpiled/react'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
@@ -85,7 +84,7 @@ const SharingBannerCozyToCozy = ({
       }
   return (
     <Banner
-      bgcolor={palette['paleGrey']}
+      bgcolor={'var(--defaultBackgroundColor)'}
       text={
         <PublicBannerCozyToCozyContent
           isSharingShortcutCreated={isSharingShortcutCreated}
@@ -126,7 +125,7 @@ const SharingBannerByLinkText = () => {
     </a>
   )
   return (
-    <span className={'u-charcoalGrey'}>
+    <span style={{ color: 'var(--textIconColor)' }}>
       {text} {knowMore}
     </span>
   )
@@ -136,7 +135,7 @@ const SharingBannerByLink = ({ onClose }) => {
   const { t } = useI18n()
   return (
     <Banner
-      bgcolor={palette['paleGrey']}
+      bgcolor={'var(--defaultBackgroundColor)'}
       text={<SharingBannerByLinkText />}
       buttonOne={
         <ButtonLink

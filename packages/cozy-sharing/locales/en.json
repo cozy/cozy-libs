@@ -5,11 +5,12 @@
   "Share": {
     "status": {
       "owner": "Owner",
-      "pending": "Invitation sent",
-      "seen": "Invitation seen",
+      "pending": "Pending",
       "ready": "Accepted",
       "refused": "Refused",
-      "mail-not-sent": "Sending invitation mail...",
+      "error": "Error",
+      "unregistered": "Error",
+      "mail-not-sent": "Pending",
       "revoked": "Error"
     },
     "type": {
@@ -50,7 +51,16 @@
       "contactAreWaitingForConfirmation": "Some contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them.||||%{smart_count} contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them.",
       "confirmRejection": "Do you really want to reject contact %{userName} (%{userEmail})?"
     },
-    "loadingError": "Loading error"
+    "loadingError": "Loading error",
+    "banner": {
+      "shared_from": "Shared from ![avatar](%{image}) %{name}'s cozy.",
+      "synchronise": "Synchronise this content in your cozy to be able to modify it or to keep it in case of cancellation of sharing.",
+      "whats_cozy": "Cozy is a secure digital home for all your data, hosted in France - ",
+      "know_more": "More information",
+      "sync_to_mine": "Synchronise in my Cozy",
+      "add_to_mine": "Add to my Cozy",
+      "close": "Close"
+    }
   },
   "Sharings": {
     "unavailable": {
