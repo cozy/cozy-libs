@@ -14,6 +14,18 @@ const fixtures = {
       }
     }
   },
+  clientKonnector: {
+    slug: 'konnectest',
+    clientSide: true,
+    fields: {
+      username: {
+        type: 'text'
+      },
+      passphrase: {
+        type: 'password'
+      }
+    }
+  },
   konnectorWithFolder: {
     _type: 'io.cozy.konnectors',
     name: 'myBills',

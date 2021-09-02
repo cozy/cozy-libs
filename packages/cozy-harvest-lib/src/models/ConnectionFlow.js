@@ -410,7 +410,7 @@ export class ConnectionFlow {
       await this.ensureTriggerAndLaunch(client, {
         trigger,
         account,
-        konnector: this.withClientSide(konnector),
+        konnector,
         t
       })
       this.setState({ accountError: null })
@@ -480,23 +480,11 @@ export class ConnectionFlow {
   }
 
   /**
-   * Add clientSide attribute to the konnector manifest according to the context
-   *
-   * @todo When the stack handles the clientSide attribute, this won't be needed anymore
-   */
-  withClientSide(konnector) {
-    const clientSideSlugs = get(window, 'cozy.clientSideSlugs', [])
-    const clientSide = clientSideSlugs.includes(konnector.slug)
-
-    return { ...konnector, clientSide }
-  }
-
-  /**
    * Launches the job and sets everything up to follow execution.
    */
   async launch({ autoSuccessTimer = true } = {}) {
-    const konnector = this.withClientSide(this.konnector)
-    const computedAutoSuccessTimer = autoSuccessTimer && !konnector.clientSide
+    const computedAutoSuccessTimer =
+      autoSuccessTimer && !this.konnector.clientSide
 
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
@@ -514,8 +502,11 @@ export class ConnectionFlow {
 
     this.job = await launchTrigger(this.client, this.trigger)
 
-    if (konnector.clientSide) {
-      logger.info('This connector can be run by the launcher', konnector.slug)
+    if (this.konnector.clientSide) {
+      logger.info(
+        'This connector can be run by the launcher',
+        this.konnector.slug
+      )
       const launcher = get(window, 'cozy.ClientConnectorLauncher')
       logger.info('Found a launcher', launcher)
       if (launcher === 'react-native') {
