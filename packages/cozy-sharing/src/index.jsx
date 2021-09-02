@@ -19,4 +19,4 @@ export { useFetchDocumentPath } from './components/useFetchDocumentPath'
 export {
   CozyPassFingerprintDialogContent
 } from './components/CozyPassFingerprintDialogContent'
-export { SharingBanner } from './components/SharingBanner/SharingBanner'
+export { SharingBannerPlugin } from './SharingBanner'
