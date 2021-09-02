@@ -255,28 +255,6 @@ describe('ConnectionFlow', () => {
       )
     })
 
-    it('should call ensureTriggerAndLaunch with clientSide konnector', async () => {
-      const { flow, client } = setup()
-      window.cozy = {
-        clientSideSlugs: ['konnectest']
-      }
-      jest
-        .spyOn(flow, 'ensureTriggerAndLaunch')
-        .mockResolvedValue(fixtures.launchedJob)
-
-      await setupSubmit(flow, {
-        userCredentials: fixtures.credentials
-      })
-
-      expect(flow.ensureTriggerAndLaunch).toHaveBeenCalledWith(
-        client,
-        expect.objectContaining({
-          konnector: { ...fixtures.konnector, clientSide: true }
-        })
-      )
-      delete window.cozy
-    })
-
     describe('custom konnector policy', () => {
       const bankingKonnector = {
         ...fixtures.konnector,
@@ -411,14 +389,19 @@ describe('ConnectionFlow', () => {
     })
 
     it('should call the launcher when needed', async () => {
-      const { flow, client } = setup()
+      const { client } = setup()
+      const flow = new ConnectionFlow(
+        client,
+        fixtures.existingTrigger,
+        fixtures.clientKonnector
+      )
       window.cozy = {
-        clientSideSlugs: ['konnectest'],
         ClientConnectorLauncher: 'react-native'
       }
       window.ReactNativeWebView = {
         postMessage: jest.fn()
       }
+      ensureTrigger.mockImplementation(async () => fixtures.existingTrigger)
       prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
 
       await flow.ensureTriggerAndLaunch(client, {
@@ -430,7 +413,7 @@ describe('ConnectionFlow', () => {
         JSON.stringify({
           message: 'startLauncher',
           value: {
-            connector: fixtures.konnector,
+            connector: fixtures.clientKonnector,
             account: fixtures.updatedAccount,
             trigger: fixtures.existingTrigger,
             job: fixtures.launchedJob
