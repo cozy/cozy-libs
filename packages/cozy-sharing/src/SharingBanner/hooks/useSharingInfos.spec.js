@@ -4,7 +4,7 @@ import { renderHook, act } from '@testing-library/react-hooks'
 import { createMockClient } from 'cozy-client'
 
 import { useSharingInfos } from './useSharingInfos'
-import AppLike from 'test/components/AppLike'
+import AppLike from '../test/AppLike'
 
 describe('useSharingInfos', () => {
   const { location } = window

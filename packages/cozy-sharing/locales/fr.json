@@ -5,13 +5,13 @@
   "Share": {
     "status": {
       "owner": "Propriétaire",
-      "pending": "En attente",
+      "pending": "Invitation envoyée",
+      "seen": "Partage consulté",
       "ready": "Accepté",
       "refused": "Refusé",
-      "error": "Erreur",
-      "unregistered": "Erreur",
-      "mail-not-sent": "En attente",
-      "revoked": "Erreur"
+      "mail-not-sent": "Envoie du mail d'invitation...",
+      "revoked": "Erreur",
+      "unregistered": "Erreur"
     },
     "type": {
       "one-way": "Peut consulter",

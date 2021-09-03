@@ -29,6 +29,7 @@ export const useSharingInfos = () => {
         const response = await client
           .collection('io.cozy.permissions')
           .fetchOwnPermissions()
+
         const isSharingShortcutCreated = models.permission.isShortcutCreatedOnTheRecipientCozy(
           response
         )
