@@ -1,4 +1,7 @@
 {
+  "loading": {
+    "sharing": "Chargement en cours"
+  },
   "Share": {
     "status": {
       "owner": "Propriétaire",
@@ -39,10 +42,14 @@
       "defaultDisplayName": "Anonyme"
     },
     "twoStepsConfirmation": {
+      "title": "Confirmer le contact",
       "confirm": "Confirmer",
       "reject": "Refuser",
+      "cancel": "Annuler",
       "contactAreWaitingForConfirmation": "%{smart_count} contact en attente de confirmation. Confirmer son identité pour lui permettre d’accéder aux éléments que vous avez partagé avec lui.||||%{smart_count} contacts en attente de confirmation. Confirmer leur identité pour leur permettre d’accéder aux éléments que vous avez partagé avec eux."
     },
+    "loadingError": "Erreur de chargement"
+  },
   "Sharings": {
     "unavailable": {
       "title": "Ravi de vous revoir !",
@@ -151,7 +158,6 @@
       "sharedBy": "Partagé par %{name}",
       "shareByLink": {
         "subtitle": "Partager par lien",
-        "desc": "Chaque personne possédant le lien fourni peut voir et modifier votre note.",
         "create": "Générer un lien",
         "activated": "Lien activé",
         "copy": "Copier le lien",
@@ -232,7 +238,6 @@
       "sharedWithMe": "Partagé avec moi",
       "shareByLink": {
         "subtitle": "Ou partager par lien",
-        "desc": "Chaque personne possédant le lien fourni peut voir et télécharger vos photos.",
         "fetchFailed": "Oups ! Il semblerait que votre connexion internet soit limitée, réessayez plus tard quand le réseau sera meilleur.",
         "create": "Générer un lien",
         "activated": "Lien activé",

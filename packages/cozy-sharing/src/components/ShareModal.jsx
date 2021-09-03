@@ -26,7 +26,9 @@ export const ShareModal = ({
   permissions,
   recipients,
   sharing,
-  sharingDesc
+  sharingDesc,
+  hasTwoStepsConfirmation = false,
+  twoStepsConfirmationMethods
 }) => {
   const showShareByEmail =
     documentType !== 'Albums' && !hasSharedParent && !hasSharedChild
@@ -74,6 +76,8 @@ export const ShareModal = ({
           showShareByLink={showShareByLink}
           showShareOnlyByLink={showShareOnlyByLink}
           showWhoHasAccess={showWhoHasAccess}
+          hasTwoStepsConfirmation={hasTwoStepsConfirmation}
+          twoStepsConfirmationMethods={twoStepsConfirmationMethods}
         />
       )}
     </>
@@ -101,5 +105,12 @@ ShareModal.propTypes = {
   onUpdateShareLinkPermissions: PropTypes.func.isRequired,
   permissions: PropTypes.array.isRequired,
   recipients: PropTypes.array.isRequired,
-  sharingDesc: PropTypes.string
+  sharingDesc: PropTypes.string,
+  hasTwoStepsConfirmation: PropTypes.bool,
+  twoStepsConfirmationMethods: PropTypes.shape({
+    getRecipientsToBeConfirmed: PropTypes.func,
+    confirmRecipient: PropTypes.func,
+    rejectRecipient: PropTypes.func,
+    recipientConfirmationDialogContent: PropTypes.func
+  })
 }

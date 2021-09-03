@@ -1,4 +1,7 @@
 {
+  "loading": {
+    "sharing": "Loading in progress"
+  },
   "Share": {
     "status": {
       "owner": "Owner",
@@ -39,10 +42,13 @@
       "defaultDisplayName": "Anonymous"
     },
     "twoStepsConfirmation": {
+      "title": "Confirm contact",
       "confirm": "Confirm",
       "reject": "Reject",
+      "cancel": "Cancel",
       "contactAreWaitingForConfirmation": "Some contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them.||||%{smart_count} contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them."
     },
+    "loadingError": "Loading error"
   },
   "Sharings": {
     "unavailable": {
