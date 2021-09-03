@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.5.0...cozy-sharing@3.6.0) (2021-09-03)
+
+
+### Features
+
+* Add prop-types for `Recipient` ([f5db3d0](https://github.com/cozy/cozy-libs/commit/f5db3d0))
+* Allow email sharing in Notes ([4f6b49b](https://github.com/cozy/cozy-libs/commit/4f6b49b))
+* Implement `CozyPassFingerprintDialogContent` ([bcdcd7a](https://github.com/cozy/cozy-libs/commit/bcdcd7a))
+* Implement `reject` scenario for twoStepsConfirmation ([022543a](https://github.com/cozy/cozy-libs/commit/022543a))
+* Implement confirmation actions on `Recipient` ([d4d905a](https://github.com/cozy/cozy-libs/commit/d4d905a))
+* Implement twoStepsConfirmation in `ShareModal` ([ce96bcf](https://github.com/cozy/cozy-libs/commit/ce96bcf))
+* Implement twoStepsConfirmation in `WhoHasAccess` ([8435795](https://github.com/cozy/cozy-libs/commit/8435795))
+* Improve prop-type for `recipientsToBeConfirmed` in `WhoHasAccess` ([8388860](https://github.com/cozy/cozy-libs/commit/8388860))
+* Remove prop `hasTwhoStepsConfirmation` ([8b1d655](https://github.com/cozy/cozy-libs/commit/8b1d655))
+* Set first `status` to `sharing` if no confirmation method provided ([382a6f6](https://github.com/cozy/cozy-libs/commit/382a6f6))
+* Use `useSafeState` hook in `ShareDialogCozyToCozy` ([855eef9](https://github.com/cozy/cozy-libs/commit/855eef9))
+
+
+
+
+
 # [3.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.4.2...cozy-sharing@3.5.0) (2021-08-10)
 
 

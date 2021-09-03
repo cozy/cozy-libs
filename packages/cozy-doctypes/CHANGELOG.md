@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.82.3](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.82.2...cozy-doctypes@1.82.3) (2021-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-client to v13.21.0 ([f46c241](https://github.com/cozy/cozy-libs/commit/f46c241))
+
+
+
+
+
 ## [1.82.2](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.82.1...cozy-doctypes@1.82.2) (2021-05-06)
 
 **Note:** Version bump only for package cozy-doctypes

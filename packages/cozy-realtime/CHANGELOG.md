@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 3.13.1 (2021-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-client to v13.21.0 ([f46c241](https://github.com/cozy/cozy-libs/commit/f46c241))
+
+
+
+
+
 # 3.13.0 (2021-03-12)
 
 

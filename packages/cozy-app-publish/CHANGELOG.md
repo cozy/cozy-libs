@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.27.1 (2021-09-03)
+
+
+### Bug Fixes
+
+* Lint `cozy-app-publish/README.md` ([ad636c5](https://github.com/cozy/cozy-libs/commit/ad636c5))
+
+
+
+
+
 # 0.27.0 (2021-02-12)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.30](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.29...cozy-playgrounds@1.18.30) (2021-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-client to v13.21.0 ([f46c241](https://github.com/cozy/cozy-libs/commit/f46c241))
+
+
+
+
+
 ## [1.18.29](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.28...cozy-playgrounds@1.18.29) (2021-08-10)
 
 **Note:** Version bump only for package cozy-playgrounds

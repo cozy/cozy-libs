@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.1.1 (2021-09-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint-plugin-react to v7.24.0 ([43af8c1](https://github.com/cozy/cozy-libs/commit/43af8c1))
+
+
+
+
+
 # 2.1.0 (2021-02-12)
 
 
