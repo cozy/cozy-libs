@@ -5,13 +5,13 @@
   "Share": {
     "status": {
       "owner": "Owner",
-      "pending": "Pending",
+      "pending": "Invitation sent",
+      "seen": "Invitation seen",
       "ready": "Accepted",
       "refused": "Refused",
-      "error": "Error",
-      "unregistered": "Error",
-      "mail-not-sent": "Pending",
-      "revoked": "Error"
+      "mail-not-sent": "Sending invitation mail...",
+      "revoked": "Error",
+      "unregistered": "Error"
     },
     "type": {
       "one-way": "Can View",
