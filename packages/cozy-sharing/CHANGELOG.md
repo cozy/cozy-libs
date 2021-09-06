@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.6.0...cozy-sharing@3.7.0) (2021-09-06)
+
+
+### Bug Fixes
+
+* Add translater function to email sharing success ([1d207c3](https://github.com/cozy/cozy-libs/commit/1d207c3))
+
+
+### Features
+
+* Add a displayer check ([50ea467](https://github.com/cozy/cozy-libs/commit/50ea467))
+* Add all needed files for Sharing Banner ([dc288bf](https://github.com/cozy/cozy-libs/commit/dc288bf))
+* Add Sharing Banner ([27ad82d](https://github.com/cozy/cozy-libs/commit/27ad82d))
+* Bump cozy-ui to match cozy-notes version ([34e3cc5](https://github.com/cozy/cozy-libs/commit/34e3cc5))
+* Fix SharingBanner test ([df2a9c6](https://github.com/cozy/cozy-libs/commit/df2a9c6))
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+* Reorganize directories ([3e005e4](https://github.com/cozy/cozy-libs/commit/3e005e4))
+
+
+
+
+
 # [3.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.5.0...cozy-sharing@3.6.0) (2021-09-03)
 
 
