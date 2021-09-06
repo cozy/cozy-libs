@@ -142,7 +142,7 @@ const SharingBannerByLink = ({ onClose }) => {
           theme="text"
           label={t('Share.create-cozy')}
           icon={CozyHomeLinkIcon}
-          href={getHomeLinkHref('sharing-drive')}
+          href={getHomeLinkHref('sharing')}
         />
       }
       buttonTwo={
