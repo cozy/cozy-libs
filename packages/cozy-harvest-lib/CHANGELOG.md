@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.4.1...cozy-harvest-lib@6.5.0) (2021-09-06)
+
+
+### Features
+
+* Add client side connector launcher ([2904272](https://github.com/cozy/cozy-libs/commit/2904272))
+* Build trigger attributes for client side triggers ([a4b81ba](https://github.com/cozy/cozy-libs/commit/a4b81ba))
+* **Harvest:** Do not show the success popup on first run ([4b5f6fc](https://github.com/cozy/cozy-libs/commit/4b5f6fc))
+* Handle client triggers as connector triggers in service/utils.js ([54e82e0](https://github.com/cozy/cozy-libs/commit/54e82e0))
+* No autosuccessTimer for client connectors ([d37ef30](https://github.com/cozy/cozy-libs/commit/d37ef30))
+* Remove withClientSide ([974e5a6](https://github.com/cozy/cozy-libs/commit/974e5a6))
+
+
+
+
+
 ## [6.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.4.0...cozy-harvest-lib@6.4.1) (2021-09-03)
 
 **Note:** Version bump only for package cozy-harvest-lib
