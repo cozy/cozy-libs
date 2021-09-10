@@ -43,7 +43,7 @@
       "defaultDisplayName": "Anonyme"
     },
     "twoStepsConfirmation": {
-      "title": "Confirmer le contact",
+      "title": "Confirmer l'identité du contact",
       "titleReject": "Refuser le contact",
       "confirm": "Confirmer",
       "reject": "Refuser",
@@ -380,8 +380,8 @@
       }
     },
     "fingerprint": {
-      "instruction": "Chaque Cozy est associé **une phrase d’empreinte** unique. Par sécurité, merci de demander à %{userName} (%{userEmail}) si la phrase d’empreinte de son Cozy correspond bien à :",
-      "instruction2": "La phrase d’empreinte d’un Cozy est accessible **en haut de sa liste de mot de passes dans Cozy Pass**. Cette phrase d'empreinte est également accessible dans **Paramètres/Profil/Phrase d’empreinte** de son client mobile ou de son extension navigateur."
+      "instruction": "Par sécurité, nous vous proposons de vérifier l'identité de **%{userName} (%{userEmail})**. Pour cela, contactez **%{userName}** par le moyen de votre choix (Appel, SMS, messagerie instantanée, ...) afin de vérifier son code de sécurité.<br><br>Chaque Cozy a une phrase de sécurité qu'il peut retrouver dans son interface web. Sa phrase de sécurité doit correspondre à :",
+      "instruction2": "Si c'est bien le cas, vous pouvez confirmer ce contact qui sera alors vu comme sécurisé pour vos prochains partages."
     }
   }
 }

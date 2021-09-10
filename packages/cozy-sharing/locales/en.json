@@ -43,7 +43,7 @@
       "defaultDisplayName": "Anonymous"
     },
     "twoStepsConfirmation": {
-      "title": "Confirm contact",
+      "title": "Confirm contact's identity",
       "titleReject": "Reject contact",
       "confirm": "Confirm",
       "reject": "Reject",
@@ -381,8 +381,8 @@
       }
     },
     "fingerprint": {
-      "instruction": "Every Cozy is associated to a unique **fingerprint phrase**. For security reasons, please ask to %{userName} (%{userEmail}) if his Cozy's fingerprint phrase is corresponding to :",
-      "instruction2": "The fingerprint phrase of a Cozy is visible on top of the Cozy Pass' passwords list. This fingerprint phrase can also be accessed on **Parameters/Profile/Fingerprint phrase** from the mobile client or the browser extension."
+      "instruction": "For security reasons, please verify **%{userName} (%{userEmail})**'s identity. To do this, contact **%{userName}** via the means of communication of your choice (call, text message, instant messaging app...) and verify their security code.<br><br>Every Cozy user has a security code that they can find using their web application. Their security code must correspond to:",
+      "instruction2": "If it is the case, then you can confirm this contact who will be considered as secure for your next sharings."
     }
   }
 }
