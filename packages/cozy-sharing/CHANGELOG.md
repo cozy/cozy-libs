@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.7.0...cozy-sharing@3.8.0) (2021-09-13)
+
+
+### Features
+
+* Reword contact confirmation dialog ([942b0cd](https://github.com/cozy/cozy-libs/commit/942b0cd))
+
+
+
+
+
 # [3.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.6.0...cozy-sharing@3.7.0) (2021-09-06)
 
 
