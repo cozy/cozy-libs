@@ -288,6 +288,7 @@ const ShareDialogCozyToCozy = ({
   })
   let dialogContent = null
   let dialogActions = null
+  let onBack = null
 
   if (status === 'error') {
     dialogContent = <ErrorContent />
@@ -346,6 +347,8 @@ const ShareDialogCozyToCozy = ({
         reject={showRejectDialog}
       />
     )
+
+    onBack = closeConfirmationDialog
   } else if (status === 'rejectingRecipient') {
     dialogTitle = t(`Share.twoStepsConfirmation.titleReject`)
 
@@ -361,6 +364,8 @@ const ShareDialogCozyToCozy = ({
         cancel={closeRejectDialog}
       />
     )
+
+    onBack = closeRejectDialog
   }
 
   return (
@@ -368,6 +373,7 @@ const ShareDialogCozyToCozy = ({
       disableEnforceFocus
       open={true}
       onClose={onClose}
+      onBack={onBack}
       title={dialogTitle}
       content={dialogContent}
       actions={dialogActions}
