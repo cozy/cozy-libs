@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.5.0...cozy-harvest-lib@6.6.0) (2021-09-15)
+
+
+### Features
+
+* **Harvest:** Upgrade cozy-bi-auth to v0.0.23 ([af4c800](https://github.com/cozy/cozy-libs/commit/af4c800))
+
+
+
+
+
 # [6.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.4.1...cozy-harvest-lib@6.5.0) (2021-09-06)
 
 
