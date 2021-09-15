@@ -5485,10 +5485,10 @@ cosmiconfig@^6.0.0:
     path-type "^4.0.0"
     yaml "^1.7.2"
 
-cozy-bi-auth@0.0.22:
-  version "0.0.22"
-  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.22.tgz#44a85e06695304e2a682362ac20c38904fccb6c3"
-  integrity sha512-5hqTOCep4SZhIg14lqo53BHWuWpn9Zz4R4jIipFOaK8HV9ZWpBCXRHEsGwxTk98Fwpo3R+K+XIm63s65aJSqwA==
+cozy-bi-auth@0.0.23:
+  version "0.0.23"
+  resolved "https://registry.yarnpkg.com/cozy-bi-auth/-/cozy-bi-auth-0.0.23.tgz#fcbf6b710622c50fad20573b3ca6cac64102b65f"
+  integrity sha512-UXzLlEeq1+g7Q7qQyDzdsIPE+4CbFmNbFVmgel7PlvBols6AunCS2SOptwAmcdCr3jI6CXSv/0TS57jmDPdukg==
   dependencies:
     cozy-logger "^1.3.0"
     lodash "^4.17.20"
@@ -5516,7 +5516,7 @@ cozy-client@13.21.0:
     isomorphic-fetch "^2.2.1"
     lodash "^4.17.13"
     microee "^0.0.6"
-    minilog "git+https://github.com/cozy/minilog.git#master"
+    minilog "https://github.com/cozy/minilog.git#master"
     open "^7.0.2"
     prop-types "^15.6.2"
     react-redux "^7.2.0"
@@ -5791,10 +5791,10 @@ cozy-ui@44.1.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@51.5.0:
-  version "51.5.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-51.5.0.tgz#dfba5e20ee7c1c982e3ff942e8214f1864f6f2af"
-  integrity sha512-Hd31UWsmAoIWkfPGHtavOEqUAHZY/ybq/7d8Pcr3w8zF/4cIV5LTjS40QKd7zqfO3Y/yW6fZ8tJh+Lm9Pmvg+Q==
+cozy-ui@51.6.0:
+  version "51.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-51.6.0.tgz#8dca7b428e87b0403ff95dfdd29568500d603b5a"
+  integrity sha512-q+VkWkWyIi3QAvrq/aY/aUQ2NpI3e3HOy8lUaTh6OFO17z/bxKeFoD1ai1jZUN5m1+PN0LNKcvJ7qkz1LUnPSQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -11903,13 +11903,6 @@ mini-html-webpack-plugin@^0.2.3:
   dependencies:
     webpack-sources "^1.1.0"
 
-"minilog@git+https://github.com/cozy/minilog.git#master":
-  version "3.1.0"
-  uid "6da0aa58759c4f1a1a7e0fd093dbe2a67c035c55"
-  resolved "git+https://github.com/cozy/minilog.git#6da0aa58759c4f1a1a7e0fd093dbe2a67c035c55"
-  dependencies:
-    microee "0.0.6"
-
 "minilog@https://github.com/cozy/minilog.git#master":
   version "3.1.0"
   resolved "https://github.com/cozy/minilog.git#f01f7d9dfe20981177dd34b9662c2f077d818f82"
@@ -16480,7 +16473,7 @@ snarkdown@1.2.2, snarkdown@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/snarkdown/-/snarkdown-1.2.2.tgz#0cfe2f3012b804de120fc0c9f7791e869c59cc74"
 
-snarkdown@2.0.0:
+snarkdown@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/snarkdown/-/snarkdown-2.0.0.tgz#b1feb4db91b9f94a8ebbd7a50f3e99aee18b1e03"
   integrity sha512-MgL/7k/AZdXCTJiNgrO7chgDqaB9FGM/1Tvlcenenb7div6obaDATzs16JhFyHHBGodHT3B7RzRc5qk8pFhg3A==
