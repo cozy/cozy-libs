@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.8.0...cozy-sharing@3.9.0) (2021-09-16)
+
+
+### Features
+
+* Harmonize `DropdownButton` typography ([8f28073](https://github.com/cozy/cozy-libs/commit/8f28073))
+
+
+
+
+
 # [3.8.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.7.0...cozy-sharing@3.8.0) (2021-09-13)
 
 
