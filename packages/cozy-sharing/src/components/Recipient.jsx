@@ -216,7 +216,7 @@ export const Permissions = ({
             ref={buttonRef}
             className={modalStyles['aligned-dropdown-button']}
           >
-            {t(`Share.type.${type}`)}
+            <Typography variant="body1">{t(`Share.type.${type}`)}</Typography>
           </DropdownButton>
           {isMenuDisplayed && (
             <ActionMenu
