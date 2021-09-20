@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.9.0...cozy-sharing@3.10.0) (2021-09-20)
+
+
+### Features
+
+* Expose useSharingInfos hook as public API ([671520b](https://github.com/cozy/cozy-libs/commit/671520b))
+
+
+
+
+
 # [3.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.8.0...cozy-sharing@3.9.0) (2021-09-16)
 
 
