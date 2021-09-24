@@ -23,7 +23,7 @@ const RecipientWaitingForConfirmationAlert = ({ recipientsToBeConfirmed }) => {
 const WhoHasAccess = ({
   isOwner = false,
   recipients,
-  recipientsToBeConfirmed,
+  recipientsToBeConfirmed = [],
   document,
   documentType,
   onRevoke,
