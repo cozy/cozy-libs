@@ -44,15 +44,16 @@ describe('ShareDialogCozyToCozy', () => {
 
     expect(getByText('Loading in progress')).toBeTruthy()
 
-    resolve([
-      {
-        name: recipientBob.public_name,
-        id: 'SOME_ID',
-        email: recipientBob.email
-      }
-    ])
-
-    await act(() => promise)
+    await act(async () => {
+      resolve([
+        {
+          name: recipientBob.public_name,
+          id: 'SOME_ID',
+          email: recipientBob.email
+        }
+      ])
+      await promise
+    })
 
     expect(getByText('Verify')).toBeTruthy()
   })
@@ -70,15 +71,16 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { getByText, getAllByText } = setup(props)
 
-    resolve([
-      {
-        name: recipientBob.public_name,
-        id: 'SOME_ID',
-        email: recipientBob.email
-      }
-    ])
-
-    await act(() => promise)
+    await act(async () => {
+      resolve([
+        {
+          name: recipientBob.public_name,
+          id: 'SOME_ID',
+          email: recipientBob.email
+        }
+      ])
+      await promise
+    })
 
     expect(getAllByText('Verify')).toHaveLength(1)
     expect(
@@ -99,20 +101,21 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { getByText, getAllByText } = setup(props)
 
-    resolve([
-      {
-        name: recipientBob.public_name,
-        id: 'SOME_ID',
-        email: recipientBob.email
-      },
-      {
-        name: recipientClaude.public_name,
-        id: 'SOME_OTHER_ID',
-        email: recipientClaude.email
-      }
-    ])
-
-    await act(() => promise)
+    await act(async () => {
+      resolve([
+        {
+          name: recipientBob.public_name,
+          id: 'SOME_ID',
+          email: recipientBob.email
+        },
+        {
+          name: recipientClaude.public_name,
+          id: 'SOME_OTHER_ID',
+          email: recipientClaude.email
+        }
+      ])
+      await promise
+    })
 
     expect(getAllByText('Verify')).toHaveLength(2)
     expect(
@@ -133,9 +136,10 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { queryByText } = setup(props)
 
-    resolve([])
-
-    await act(() => promise)
+    await act(async () => {
+      resolve([])
+      await promise
+    })
 
     expect(queryByText('Verify')).not.toBeInTheDocument()
     expect(
@@ -159,23 +163,25 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { getByText } = setup(props)
 
-    resolve([
-      {
-        name: recipientBob.public_name,
-        id: 'SOME_ID',
-        email: recipientBob.email
-      }
-    ])
-
-    await act(() => promise)
+    await act(async () => {
+      resolve([
+        {
+          name: recipientBob.public_name,
+          id: 'SOME_ID',
+          email: recipientBob.email,
+          fingerprintPhrase: 'SOME_FINGERPRINT_PHRASE'
+        }
+      ])
+      await promise
+    })
 
     const verifyButton = getByText('Verify')
 
-    await act(() => fireEvent.click(verifyButton))
+    await act(async () => fireEvent.click(verifyButton))
 
     const rejectButton = getByText('Reject')
 
-    await act(() => fireEvent.click(rejectButton))
+    await act(async () => fireEvent.click(rejectButton))
 
     expect(
       getByText(
@@ -184,7 +190,7 @@ describe('ShareDialogCozyToCozy', () => {
     ).toBeTruthy()
 
     const confirmRejectButton = getByText('Reject')
-    await act(() => fireEvent.click(confirmRejectButton))
+    await act(async () => fireEvent.click(confirmRejectButton))
 
     expect(rejectRecipient).toBeCalled()
   })
