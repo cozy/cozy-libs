@@ -1,9 +1,9 @@
 import React from 'react'
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
+import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
 import AppLike from '../../test/AppLike'
 import { createMockClient } from 'cozy-client'
-import { render, fireEvent } from '@testing-library/react'
-import { act } from 'react-dom/test-utils'
+import { act, render, fireEvent } from '@testing-library/react'
 
 describe('ShareDialogCozyToCozy', () => {
   const client = createMockClient({})
@@ -54,7 +54,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     await act(() => promise)
 
-    expect(getByText('Confirm')).toBeTruthy()
+    expect(getByText('Verify')).toBeTruthy()
   })
 
   it('should ask to confirm 1 contact if 1 contact is waiting for confirmation', async () => {
@@ -80,7 +80,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     await act(() => promise)
 
-    expect(getAllByText('Confirm')).toHaveLength(1)
+    expect(getAllByText('Verify')).toHaveLength(1)
     expect(
       getByText(/Some contacts are waiting for your confirmation/i)
     ).toBeTruthy()
@@ -114,7 +114,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     await act(() => promise)
 
-    expect(getAllByText('Confirm')).toHaveLength(2)
+    expect(getAllByText('Verify')).toHaveLength(2)
     expect(
       getByText(/2 contacts are waiting for your confirmation/i)
     ).toBeTruthy()
@@ -137,7 +137,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     await act(() => promise)
 
-    expect(queryByText('Confirm')).not.toBeInTheDocument()
+    expect(queryByText('Verify')).not.toBeInTheDocument()
     expect(
       queryByText(/waiting for your confirmation/i)
     ).not.toBeInTheDocument()
@@ -152,11 +152,12 @@ describe('ShareDialogCozyToCozy', () => {
       ...getMockProps(),
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
-        rejectRecipient
+        rejectRecipient,
+        recipientConfirmationDialogContent: CozyPassFingerprintDialogContent
       }
     }
 
-    const { getByText, getByLabelText } = setup(props)
+    const { getByText } = setup(props)
 
     resolve([
       {
@@ -168,7 +169,11 @@ describe('ShareDialogCozyToCozy', () => {
 
     await act(() => promise)
 
-    const rejectButton = getByLabelText('Reject')
+    const verifyButton = getByText('Verify')
+
+    await act(() => fireEvent.click(verifyButton))
+
+    const rejectButton = getByText('Reject')
 
     await act(() => fireEvent.click(rejectButton))
 

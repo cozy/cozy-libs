@@ -29,8 +29,7 @@ const WhoHasAccess = ({
   onRevoke,
   className,
   onRevokeSelf,
-  rejectRecipient,
-  confirmRecipient
+  verifyRecipient
 }) => (
   <div className={className}>
     <RecipientWaitingForConfirmationAlert
@@ -52,8 +51,7 @@ const WhoHasAccess = ({
           onRevoke={onRevoke}
           onRevokeSelf={onRevokeSelf}
           recipientConfirmationData={recipientConfirmationData}
-          rejectRecipient={rejectRecipient}
-          confirmRecipient={confirmRecipient}
+          verifyRecipient={verifyRecipient}
         />
       )
     })}
@@ -72,7 +70,6 @@ WhoHasAccess.propTypes = {
   documentType: PropTypes.string.isRequired,
   onRevoke: PropTypes.func.isRequired,
   onRevokeSelf: PropTypes.func,
-  confirmRecipient: PropTypes.func,
-  rejectRecipient: PropTypes.func
+  verifyRecipient: PropTypes.func
 }
 export default WhoHasAccess
