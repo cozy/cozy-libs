@@ -141,9 +141,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
       setStatus('loading')
 
       try {
-        const result = await twoStepsConfirmationMethods.getRecipientsToBeConfirmed(
-          document.id
-        )
+        const result = await twoStepsConfirmationMethods.getRecipientsToBeConfirmed()
 
         setRecipientsToBeConfirmed(result)
         setStatus('sharing')
@@ -156,7 +154,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   }, [
     shouldGetRecipientsToBeConfirmed,
     twoStepsConfirmationMethods,
-    document,
     setRecipientsToBeConfirmed,
     setStatus
   ])
