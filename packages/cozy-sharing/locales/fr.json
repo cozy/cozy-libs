@@ -48,6 +48,7 @@
       "confirm": "Confirmer",
       "reject": "Refuser",
       "cancel": "Annuler",
+      "verify": "Vérifier",
       "contactAreWaitingForConfirmation": "%{smart_count} contact en attente de confirmation. Confirmer son identité pour lui permettre d’accéder aux éléments que vous avez partagé avec lui.||||%{smart_count} contacts en attente de confirmation. Confirmer leur identité pour leur permettre d’accéder aux éléments que vous avez partagé avec eux.",
       "confirmRejection": "Êtes-vous sûr de vouloir refuser le contact %{userName} (%{userEmail})?"
     },

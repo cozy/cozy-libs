@@ -113,7 +113,7 @@ describe('Recipient component', () => {
       confirmRecipient
     })
 
-    expect(getByText('Confirm')).toBeTruthy()
+    expect(getByText('Verify')).toBeTruthy()
   })
 
   it('should not render confirmation actions if no recipient is waiting for confirmation', () => {
@@ -131,12 +131,11 @@ describe('Recipient component', () => {
       confirmRecipient
     })
 
-    expect(queryByText('Confirm')).not.toBeInTheDocument()
+    expect(queryByText('Verify')).not.toBeInTheDocument()
   })
 
-  it(`should call confirmRecipient when clicking 'confirm' button`, () => {
-    const confirmRecipient = jest.fn()
-    const rejectRecipient = jest.fn()
+  it(`should call verifyRecipient when clicking 'verify' button`, () => {
+    const verifyRecipient = jest.fn()
 
     const { getByText } = setup({
       instance: 'foo.mycozy.cloud',
@@ -147,41 +146,14 @@ describe('Recipient component', () => {
       recipientConfirmationData: {
         email: 'me@bob.cozy.localhost'
       },
-      rejectRecipient,
-      confirmRecipient
+      verifyRecipient
     })
 
-    fireEvent.click(getByText('Confirm'))
+    fireEvent.click(getByText('Verify'))
 
-    expect(confirmRecipient).toBeCalledWith({
+    expect(verifyRecipient).toBeCalledWith({
       email: 'me@bob.cozy.localhost'
     })
-    expect(rejectRecipient).not.toBeCalled()
-  })
-
-  it(`should call rejectRecipient when clicking 'reject' button`, () => {
-    const confirmRecipient = jest.fn()
-    const rejectRecipient = jest.fn()
-
-    const { getByLabelText } = setup({
-      instance: 'foo.mycozy.cloud',
-      status: 'ready',
-      type: 'two-way',
-      isOwner: false,
-      documentType: 'Organizations',
-      recipientConfirmationData: {
-        email: 'me@bob.cozy.localhost'
-      },
-      rejectRecipient,
-      confirmRecipient
-    })
-
-    fireEvent.click(getByLabelText('Reject'))
-
-    expect(rejectRecipient).toBeCalledWith({
-      email: 'me@bob.cozy.localhost'
-    })
-    expect(confirmRecipient).not.toBeCalled()
   })
 })
 

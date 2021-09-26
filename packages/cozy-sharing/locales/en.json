@@ -48,6 +48,7 @@
       "confirm": "Confirm",
       "reject": "Reject",
       "cancel": "Cancel",
+      "verify": "Verify",
       "contactAreWaitingForConfirmation": "Some contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them.||||%{smart_count} contacts are waiting for your confirmation. Confirm their identities to allow them to access items you shared with them.",
       "confirmRejection": "Do you really want to reject contact %{userName} (%{userEmail})?"
     },

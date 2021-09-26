@@ -55,8 +55,7 @@ const SharingContent = ({
   showShareOnlyByLink,
   showWhoHasAccess,
   recipientsToBeConfirmed,
-  confirmRecipient,
-  rejectRecipient
+  verifyRecipient
 }) => {
   const { t } = useI18n()
 
@@ -104,8 +103,7 @@ const SharingContent = ({
           onRevokeSelf={onRevokeSelf}
           recipients={recipients}
           recipientsToBeConfirmed={recipientsToBeConfirmed}
-          rejectRecipient={rejectRecipient}
-          confirmRecipient={confirmRecipient}
+          verifyRecipient={verifyRecipient}
         />
       )}
     </div>
@@ -115,7 +113,7 @@ const SharingContent = ({
 /**
  * Displays actions that are available when confirming a recipient
  */
-const ConfirmRecipientActions = ({ confirm, cancel }) => {
+const ConfirmRecipientActions = ({ confirm, reject, cancel }) => {
   const { t } = useI18n()
 
   return (
@@ -124,6 +122,11 @@ const ConfirmRecipientActions = ({ confirm, cancel }) => {
         theme="secondary"
         label={t(`Share.twoStepsConfirmation.cancel`)}
         onClick={cancel}
+      />
+      <Button
+        theme="danger-outline"
+        label={t(`Share.twoStepsConfirmation.reject`)}
+        onClick={reject}
       />
       <Button
         theme="primary"
@@ -254,7 +257,7 @@ const ShareDialogCozyToCozy = ({
     setStatus('confirmingRecipient')
   }
 
-  const showRejectDialog = recipientConfirmationData => {
+  const showRejectDialog = () => {
     setRecipientConfirmationData(recipientConfirmationData)
     setStatus('rejectingRecipient')
   }
@@ -274,6 +277,10 @@ const ShareDialogCozyToCozy = ({
 
   const closeConfirmationDialog = () => {
     setStatus('sharing')
+  }
+
+  const closeRejectDialog = () => {
+    setStatus('confirmingRecipient')
   }
 
   let dialogTitle = t(`${documentType}.share.title`, {
@@ -307,8 +314,7 @@ const ShareDialogCozyToCozy = ({
         showShareOnlyByLink={showShareOnlyByLink}
         showWhoHasAccess={showWhoHasAccess}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
-        rejectRecipient={showRejectDialog}
-        confirmRecipient={showConfirmationDialog}
+        verifyRecipient={showConfirmationDialog}
       />
     )
 
@@ -337,6 +343,7 @@ const ShareDialogCozyToCozy = ({
       <ConfirmRecipientActions
         confirm={onConfirmRecipient}
         cancel={closeConfirmationDialog}
+        reject={showRejectDialog}
       />
     )
   } else if (status === 'rejectingRecipient') {
@@ -351,7 +358,7 @@ const ShareDialogCozyToCozy = ({
     dialogActions = (
       <RejectRecipientActions
         reject={onRejectRecipient}
-        cancel={closeConfirmationDialog}
+        cancel={closeRejectDialog}
       />
     )
   }
