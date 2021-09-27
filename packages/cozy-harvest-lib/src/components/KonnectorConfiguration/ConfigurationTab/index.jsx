@@ -161,7 +161,6 @@ const ConfigurationTab = ({
         </div>
       )}
       <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
-        <ContractsForAccount konnector={konnector} account={account} />
         <NavigationListHeader>
           {t('modal.updateAccount.general-subheader')}
         </NavigationListHeader>
@@ -213,6 +212,8 @@ const ConfigurationTab = ({
             />
           ) : null}
         </NavigationListSection>
+
+        <ContractsForAccount konnector={konnector} account={account} />
       </NavigationList>
       {showNewAccountButton ? (
         <div
