@@ -54,7 +54,7 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
             isBlocking={hasTermsVersionMismatchError}
           />
         )}
-        {hasError && (
+        {hasError && !isInMaintenance && (
           <TriggerErrorInfo
             error={error}
             konnector={konnector}
