@@ -328,7 +328,7 @@ describe('TriggerManager', () => {
         passphraseLabel.nextElementSibling instanceof HTMLInputElement
           ? passphraseLabel.nextElementSibling
           : passphraseLabel.nextElementSibling.nextElementSibling
-      const submitButton = await utils.findByText('Submit')
+      const submitButton = await utils.findByText('Connect')
 
       return {
         flow,

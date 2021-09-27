@@ -30,7 +30,7 @@ exports[`AccountForm should not render error 1`] = `
     className="u-mt-2 u-mb-1-half"
     disabled={false}
     extension="full"
-    label="Submit"
+    label="Connect"
     onClick={[Function]}
   />
 </div>
@@ -65,7 +65,7 @@ exports[`AccountForm should render 1`] = `
     className="u-mt-2 u-mb-1-half"
     disabled={true}
     extension="full"
-    label="Submit"
+    label="Connect"
     onClick={[Function]}
   />
 </div>
@@ -117,7 +117,7 @@ exports[`AccountForm should render error 1`] = `
     className="u-mt-2 u-mb-1-half"
     disabled={false}
     extension="full"
-    label="Submit"
+    label="Connect"
     onClick={[Function]}
   />
 </div>
