@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.6.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.6.0...cozy-harvest-lib@6.6.1) (2021-09-27)
+
+
+### Bug Fixes
+
+* Removed line break on frequency label ([1baec68](https://github.com/cozy/cozy-libs/commit/1baec68))
+
+
+
+
+
 # [6.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.5.0...cozy-harvest-lib@6.6.0) (2021-09-15)
 
 
