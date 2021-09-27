@@ -3,7 +3,11 @@ import { shallow } from 'enzyme'
 import { DataTab } from 'components/KonnectorConfiguration/DataTab'
 import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
 import AppLinkCard from 'components/cards/AppLinkCard'
+import TriggerErrorInfo from 'components/infos/TriggerErrorInfo'
+import KonnectorMaintenance from 'components/Maintenance'
+import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
 
+jest.mock('components/hooks/useMaintenanceStatus')
 jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({
   isMobile: false
 }))
@@ -14,7 +18,14 @@ describe('DataTab', () => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
   })
 
-  const setup = customProps => {
+  const setup = (
+    customProps,
+    { isError = false, isInMaintenance = false } = {}
+  ) => {
+    useMaintenanceStatus.mockReturnValue({
+      data: { isInMaintenance, message: '' }
+    })
+
     const props = {
       konnector: {
         attributes: {}
@@ -26,7 +37,15 @@ describe('DataTab', () => {
         }
       },
       flow: {
-        getState: () => ({ error: null, running: false })
+        getState: () => ({
+          error: isError
+            ? {
+                isTermsVersionMismatchError: jest.fn(),
+                isSolvableViaReconnect: jest.fn()
+              }
+            : null,
+          running: false
+        })
       },
       ...customProps
     }
@@ -36,6 +55,26 @@ describe('DataTab', () => {
   it('should show the launch card', () => {
     const component = setup()
     expect(component.find(LaunchTriggerCard).length).toEqual(1)
+  })
+
+  it('should show error info', () => {
+    const component = setup({}, { isError: true })
+    expect(component.find(TriggerErrorInfo).length).toEqual(1)
+  })
+
+  it('should show maintenance info', () => {
+    const component = setup({}, { isInMaintenance: true })
+    expect(component.find(KonnectorMaintenance).length).toEqual(1)
+  })
+
+  it('should show error info if konnector is not in maintenance', () => {
+    const component = setup({}, { isError: true, isInMaintenance: false })
+    expect(component.find(TriggerErrorInfo).length).toEqual(1)
+  })
+
+  it('should not show error info if konnector is in maintenance', () => {
+    const component = setup({}, { isError: true, isInMaintenance: true })
+    expect(component.find(TriggerErrorInfo).length).toEqual(0)
   })
 
   describe('links to other apps', () => {
