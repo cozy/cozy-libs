@@ -51,7 +51,12 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             >
               {t('card.launchTrigger.frequency.label')}
             </Typography>
-            <Typography variant="caption" color="textPrimary" component="span">
+            <Typography
+              variant="caption"
+              color="textPrimary"
+              component="span"
+              style={inlineStyle}
+            >
               {t(
                 `card.launchTrigger.frequency.${triggers.getFrequency(
                   trigger
