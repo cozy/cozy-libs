@@ -6,7 +6,7 @@
   },
   "accountForm": {
     "submit": {
-      "label": "Sauvegarder"
+      "label": "Connecter"
     },
     "fields": {
       "optional": "(Optionnel)"

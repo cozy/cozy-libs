@@ -6,7 +6,7 @@
   },
   "accountForm": {
     "submit": {
-      "label": "Submit"
+      "label": "Connect"
     },
     "fields": {
       "optional": "(optional)"
