@@ -60,6 +60,7 @@ export class SharingProvider extends Component {
     super(props, context)
     const instanceUri = props.client.getStackClient().uri
     const documentType = props.documentType || 'Document'
+    const onShared = props.onShared || (() => {})
     this.state = {
       byDocId: {},
       sharings: [],
@@ -79,6 +80,7 @@ export class SharingProvider extends Component {
         hasSharedParent(this.state, documentPath),
       hasSharedChild: documentPath => hasSharedChild(this.state, documentPath),
       share: this.share,
+      onShared: onShared,
       revoke: this.revoke,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
@@ -210,12 +212,17 @@ export class SharingProvider extends Component {
   }) => {
     const { client, doctype } = this.props
     const sharing = getDocumentSharing(this.state, document.id)
-    if (sharing)
-      return this.addRecipients({
+    if (sharing) {
+      const sharingResult = await this.addRecipients({
         document: sharing,
         recipients,
         readOnlyRecipients
       })
+
+      await this.state.onShared({ document, recipients, readOnlyRecipients })
+
+      return sharingResult
+    }
 
     const previewPath = this.props.previewPath ?? '/preview'
 
@@ -234,6 +241,8 @@ export class SharingProvider extends Component {
         document.path || (await fetchFilesPaths(client, doctype, [document]))
       )
     )
+
+    await this.state.onShared({ document, recipients, readOnlyRecipients })
     return data
   }
 
