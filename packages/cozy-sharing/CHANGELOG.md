@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.11.0...cozy-sharing@3.12.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* Set `recipientsToBeConfirmed` default to `[]` on `WhoHasAccess` ([694c5c8](https://github.com/cozy/cozy-libs/commit/694c5c8))
+
+
+### Features
+
+* Add confirm trusted recipients dialog ([dfe1695](https://github.com/cozy/cozy-libs/commit/dfe1695))
+* Add onShared callback to SharingProvider ([f5e5f8f](https://github.com/cozy/cozy-libs/commit/f5e5f8f))
+
+
+
+
+
 # [3.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.10.0...cozy-sharing@3.11.0) (2021-09-28)
 
 
