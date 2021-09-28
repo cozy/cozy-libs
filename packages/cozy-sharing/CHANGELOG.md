@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.11.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.10.0...cozy-sharing@3.11.0) (2021-09-28)
+
+
+### Bug Fixes
+
+* Correctly handle async events in `ShareDialogCozyToCozy` tests ([5e088cd](https://github.com/cozy/cozy-libs/commit/5e088cd))
+
+
+### Features
+
+* Add a back button to sharing dialog when confirming a contact ([574f68b](https://github.com/cozy/cozy-libs/commit/574f68b))
+* Bump cozy-ui to `54.0.0` ([41f22ec](https://github.com/cozy/cozy-libs/commit/41f22ec))
+* Improve two steps confirmation use experience ([2c4da7b](https://github.com/cozy/cozy-libs/commit/2c4da7b))
+
+
+
+
+
 # [3.10.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.9.0...cozy-sharing@3.10.0) (2021-09-20)
 
 
