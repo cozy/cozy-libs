@@ -385,5 +385,9 @@
       "instruction": "For security reasons, please verify **%{userName} (%{userEmail})**'s identity. To do this, contact **%{userName}** via the means of communication of your choice (call, text message, instant messaging app...) and verify their security code.<br><br>Every Cozy user has a security code that they can find using their web application. Their security code must correspond to:",
       "instruction2": "If it is the case, then you can confirm this contact who will be considered as secure for your next sharings."
     }
+  },
+  "ConfirmRecipientModal": {
+    "title": "%{smart_count} contact waiting for confirmation |||| %{smart_count} contacts waiting for confirmation",
+    "intruction": "Verify identity of their Cozy in order to give them access content you shared with them."
   }
 }

@@ -21,3 +21,6 @@ export {
 } from './components/CozyPassFingerprintDialogContent'
 export { SharingBannerPlugin } from './SharingBanner'
 export { useSharingInfos } from './SharingBanner/hooks/useSharingInfos'
+export {
+  ConfirmTrustedRecipientsDialog
+} from './ConfirmTrustedRecipientsDialog'

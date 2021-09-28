@@ -384,5 +384,9 @@
       "instruction": "Par sécurité, nous vous proposons de vérifier l'identité de **%{userName} (%{userEmail})**. Pour cela, contactez **%{userName}** par le moyen de votre choix (Appel, SMS, messagerie instantanée, ...) afin de vérifier son code de sécurité.<br><br>Chaque Cozy a une phrase de sécurité qu'il peut retrouver dans son interface web. Sa phrase de sécurité doit correspondre à :",
       "instruction2": "Si c'est bien le cas, vous pouvez confirmer ce contact qui sera alors vu comme sécurisé pour vos prochains partages."
     }
+  },
+  "ConfirmRecipientModal": {
+    "title": "%{smart_count} contact en attente de vérification |||| %{smart_count} contacts en attente de vérification",
+    "intruction": "Vérifier l'identité de leur Cozy pour leur permettre d'accéder aux éléments que vous avez partagés avec eux."
   }
 }
