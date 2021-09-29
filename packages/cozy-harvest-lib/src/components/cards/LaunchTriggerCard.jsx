@@ -34,7 +34,12 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
             >
               {t('card.launchTrigger.lastSync.label')}
             </Typography>
-            <Typography variant="caption" color="textPrimary" component="span">
+            <Typography
+              variant="caption"
+              color="textPrimary"
+              component="span"
+              style={inlineStyle}
+            >
               {running
                 ? t('card.launchTrigger.lastSync.syncing')
                 : lastSuccessDate
