@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.7.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.7.1...cozy-harvest-lib@6.7.2) (2021-09-29)
+
+
+### Bug Fixes
+
+* Invert ContractForAcount with General section ([e6e9a96](https://github.com/cozy/cozy-libs/commit/e6e9a96))
+
+
+
+
+
 ## [6.7.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.7.0...cozy-harvest-lib@6.7.1) (2021-09-28)
 
 
