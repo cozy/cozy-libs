@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.7.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.7.2...cozy-harvest-lib@6.7.3) (2021-09-29)
+
+
+### Bug Fixes
+
+* Removed line break on lastSync label ([a65e7ba](https://github.com/cozy/cozy-libs/commit/a65e7ba))
+
+
+
+
+
 ## [6.7.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.7.1...cozy-harvest-lib@6.7.2) (2021-09-29)
 
 
