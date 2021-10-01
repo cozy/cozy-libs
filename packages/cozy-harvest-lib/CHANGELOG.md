@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.7.3...cozy-harvest-lib@6.8.0) (2021-10-01)
+
+
+### Features
+
+* Improve errors management ([6d5d867](https://github.com/cozy/cozy-libs/commit/6d5d867))
+
+
+
+
+
 ## [6.7.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.7.2...cozy-harvest-lib@6.7.3) (2021-09-29)
 
 
