@@ -51,8 +51,6 @@ describe('TriggerErrorInfo', () => {
         error: new Error('Something is undefined')
       }
     })
-    expect(
-      root.getByText('An unknown error has occurred. (Something is undefined)')
-    ).toBeTruthy()
+    expect(root.findByText('An unknown error has occurred.')).toBeTruthy()
   })
 })

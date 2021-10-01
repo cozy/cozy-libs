@@ -141,11 +141,11 @@
       },
       "TERMS_VERSION_MISMATCH": {
         "title": "Nouvelles CGUs à accepter",
-        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de vérifier que le service est à jour. Si l'erreur persiste, contacter nous via <a href=\\\"mailto:contact@cozycloud.cc\\\">contact@cozycloud.cc</a>."
+        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de vérifier que le service est à jour. Si l'erreur persiste, contacter nous via [contact@cozycloud.cc](mailto:contact@cozycloud.cc)."
       },
       "UNKNOWN_ERROR": {
         "title": "Erreur de Connexion",
-        "description": "Une erreur inconnue est survenue"
+        "description": "Une erreur inconnue est survenue. Vous pouvez essayer de mettre à jour vos données. Si le problème persiste, n'hésitez pas à nous contacter via [claude@cozycloud.cc](mailto:claude@cozycloud.cc)."
       },
       "USER_ACTION_NEEDED": {
         "title": "Action nécessaire chez le fournisseur",
@@ -189,7 +189,7 @@
       },
       "VENDOR_DOWN.BANK_DOWN": {
         "title": "Site non disponible",
-        "description": "Site non disponible"
+        "description": "L'accès à l'espace client de [%{name}](%{link}) est actuellement indisponible, veuillez vous reconnecter plus tard"
       },
       "VENDOR_DOWN.LINXO_DOWN": {
         "title": "Service non disponible",

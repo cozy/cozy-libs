@@ -141,11 +141,11 @@
       },
       "TERMS_VERSION_MISMATCH": {
         "title": "Latest Terms of Service non accepted",
-        "description": "%{name} seems to have updated its Terms Of Service. Please check that the service is up to date. It this error still occurs, please contact us at <a href=\"mailto:contact@cozycloud.cc\">contact@cozycloud.cc</a>."
+        "description": "%{name} seems to have updated its Terms Of Service. Please check that the service is up to date. It this error still occurs, please contact us at [contact@cozycloud.cc](mailto:contact@cozycloud.cc)."
       },
       "UNKNOWN_ERROR": {
         "title": "Connection error",
-        "description": "An unknown error has occurred."
+        "description": "An unknown error has occurred. You can try to update your data. If the problem persists, please contact us at [claude@cozycloud.cc](mailto:claude@cozycloud.cc)."
       },
       "USER_ACTION_NEEDED": {
         "title": "Action needed on the provider's website",
@@ -189,7 +189,7 @@
       },
       "VENDOR_DOWN.BANK_DOWN": {
         "title": "Unavailable bank website",
-        "description": "It seems that the [%{name}](%{link}) website is unavailable at the moment. Please rerun the connector later."
+        "description": "Access to the [%{name}](%{link}) customer area is currently unavailable. Please rerun the connector later"
       },
       "VENDOR_DOWN.LINXO_DOWN": {
         "title": "Unavailable service",
