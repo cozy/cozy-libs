@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.12.0...cozy-sharing@3.12.1) (2021-10-04)
+
+
+### Bug Fixes
+
+* Display Recipient's initials if no avatarPath or status is provided ([4b3c167](https://github.com/cozy/cozy-libs/commit/4b3c167))
+
+
+
+
+
 # [3.12.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.11.0...cozy-sharing@3.12.0) (2021-09-28)
 
 
