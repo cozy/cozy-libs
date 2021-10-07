@@ -92,7 +92,8 @@ export class ShareByEmail extends Component {
       onShare,
       createContact,
       documentType,
-      client
+      client,
+      t
     } = this.props
     const { recipients, selectedOption } = this.state
     if (recipients.length === 0) {
@@ -126,7 +127,7 @@ export class ShareByEmail extends Component {
       })
 
       Alerter.success(
-        ...getSuccessMessage(recipientsBefore, contacts, documentType)
+        t(...getSuccessMessage(recipientsBefore, contacts, documentType))
       )
       this.reset()
     } catch (err) {
