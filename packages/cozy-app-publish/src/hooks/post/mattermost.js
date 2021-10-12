@@ -112,7 +112,7 @@ const sendMattermostReleaseMessage = async options => {
 
   const hookURL = process.env.MATTERMOST_HOOK_URL
   const channels = getMattermostChannels({ appVersion: options.appVersion })
-  const iconURL = 'https://travis-ci.com/images/logos/TravisCI-Mascot-1.png'
+  const iconURL = 'https://files.cozycloud.cc/travis.png'
   const username = 'Travis'
   const message = getMessage(options)
   for (const channel of channels) {
