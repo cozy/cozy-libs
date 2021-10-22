@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.2.0 (2021-10-22)
+
+
+### Features
+
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+
+
+
+
+
 ## [1.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@1.1.0...cozy-scanner@1.1.1) (2021-03-22)
 
 

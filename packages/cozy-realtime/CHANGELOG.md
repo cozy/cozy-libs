@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 3.14.0 (2021-10-22)
+
+
+### Features
+
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+
+
+
+
+
 ## 3.13.1 (2021-09-03)
 
 

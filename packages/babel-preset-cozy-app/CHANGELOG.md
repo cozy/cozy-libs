@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.12.0 (2021-10-22)
+
+
+### Features
+
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+* Update preset config to target node 12 ([bae1bcd](https://github.com/cozy/cozy-libs/commit/bae1bcd))
+
+
+
+
+
 # 1.11.0 (2021-02-12)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.49.0 (2021-10-22)
+
+
+### Features
+
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+
+
+
+
+
 ## [0.48.1](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.48.0...cozy-procedures@0.48.1) (2021-02-12)
 
 **Note:** Version bump only for package cozy-procedures

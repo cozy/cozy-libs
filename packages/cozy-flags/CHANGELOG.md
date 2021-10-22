@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.8.0 (2021-10-22)
+
+
+### Features
+
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+
+
+
+
+
 ## [2.7.2](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.7.1...cozy-flags@2.7.2) (2021-05-12)
 
 

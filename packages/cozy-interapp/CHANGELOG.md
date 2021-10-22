@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.7.0 (2021-10-22)
+
+
+### Features
+
+* Remove drive from homeHref ([97010d3](https://github.com/cozy/cozy-libs/commit/97010d3))
+
+
+
+
+
 ## [0.6.2](https://github.com/cozy/cozy-libs/compare/cozy-interapp@0.6.1...cozy-interapp@0.6.2) (2021-02-12)
 
 **Note:** Version bump only for package cozy-interapp
