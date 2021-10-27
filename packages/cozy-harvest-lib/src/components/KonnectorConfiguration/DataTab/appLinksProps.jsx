@@ -16,6 +16,11 @@ const appLinksProps = {
     slug: 'contacts',
     icon: 'team',
     iconColor: 'brightSun'
+  }),
+  coachco2: () => ({
+    slug: 'coachco2',
+    icon: 'location',
+    iconColor: 'brightSun'
   })
 }
 
