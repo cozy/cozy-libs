@@ -97,6 +97,12 @@
         "description": "This service retrieves and keeps a complete record of your latest banking operations for you.",
         "button": "Access bank accounts",
         "install": "Discover Cozy Banks"
+      },
+      "coachco2": {
+        "title": "Your trips",
+        "description": "This service retrieves and keeps a complete record of your trips.",
+        "button": "Access trips",
+        "install": "Discover CoachCO2"
       }
     },
     "websiteLink": {

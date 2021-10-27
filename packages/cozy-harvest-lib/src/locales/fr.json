@@ -97,6 +97,12 @@
         "description": "Ce service récupère vos dernières lignes bancaires et en sauvegarde l'historique complet à votre place.",
         "button": "Accéder aux comptes bancaires",
         "install": "Découvrir Cozy Banks"
+      },
+      "coachco2": {
+        "title": "Vos déplacements",
+        "description": "Ce service récupère l'historique de vos trajets.",
+        "button": "Accéder aux déplacements",
+        "install": "Découvrir Coach CO2"
       }
     },
     "websiteLink": {
