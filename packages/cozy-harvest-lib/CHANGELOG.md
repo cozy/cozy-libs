@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.8.1...cozy-harvest-lib@6.9.0) (2021-10-28)
+
+
+### Features
+
+* Add redirection for geojson data ([176099c](https://github.com/cozy/cozy-libs/commit/176099c))
+
+
+
+
+
 ## [6.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.8.0...cozy-harvest-lib@6.8.1) (2021-10-22)
 
 **Note:** Version bump only for package cozy-harvest-lib
