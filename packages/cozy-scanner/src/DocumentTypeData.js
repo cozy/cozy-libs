@@ -15,6 +15,7 @@ const buildItems = labels => {
 }
 
 const identityLabels = [
+  'identity_photo',
   'national_id_card',
   'passport',
   'residence_permit',
@@ -50,8 +51,9 @@ const workStudyLabels = [
 ]
 
 const healthLabels = [
+  'health_certificate',
   'health_book',
-  'national_insurance_card',
+  'national_health_insurance_card',
   'health_insurance_card',
   'prescription',
   'health_invoice'
