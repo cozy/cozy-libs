@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@1.2.0...cozy-scanner@2.0.0) (2021-10-29)
+
+
+### Features
+
+* Update & added labels ([6123710](https://github.com/cozy/cozy-libs/commit/6123710))
+
+
+### BREAKING CHANGES
+
+* Rename label `national_insurance_card`
+to `national_health_insurance_card`
+
+Please update your `cozy-client` to `26.0.0` version
+to be synchronized with the right labels
+
+
+
+
+
 # 1.2.0 (2021-10-22)
 
 
