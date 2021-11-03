@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.27.2...cozy-app-publish@0.28.0) (2021-11-03)
+
+
+### Features
+
+* Add verror in cozy-app-publish dependencies ([653ae83](https://github.com/cozy/cozy-libs/commit/653ae83))
+
+
+
+
+
 ## 0.27.2 (2021-10-12)
 
 
