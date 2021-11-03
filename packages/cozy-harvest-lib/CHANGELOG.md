@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.9.0...cozy-harvest-lib@6.10.0) (2021-11-03)
+
+
+### Features
+
+* Add new connectors mapping in harvest ([c086c20](https://github.com/cozy/cozy-libs/commit/c086c20))
+
+
+
+
+
 # [6.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.8.1...cozy-harvest-lib@6.9.0) (2021-10-28)
 
 
