@@ -5,14 +5,18 @@ import get from 'lodash/get'
 import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
-import Button from 'cozy-ui/transpiled/react/Button'
+import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import Info from 'cozy-ui/transpiled/react/Icons/Info'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
 
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import { getEncryptedFieldName } from '../../helpers/fields'
-import { KonnectorJobError } from '../../helpers/konnectors'
+import { KonnectorJobError, isRunnable } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import fieldHelpers, { SECRET } from '../../helpers/fields'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
@@ -212,7 +216,7 @@ export class AccountForm extends PureComponent {
     const submitting = flowState.running
     const error = flowState.error
 
-    const { fields } = konnector
+    const { fields, name } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
     fieldHelpers.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
 
@@ -268,25 +272,48 @@ export class AccountForm extends PureComponent {
                 )}
               />
             )}
-            <AccountFields
-              disabled={submitting}
-              fields={sanitizedFields}
-              hasError={error && isLoginError}
-              initialValues={values}
-              inputRefByName={this.inputRefByName}
-              t={t}
-            />
-            <Button
-              busy={submitting}
-              className="u-mt-2 u-mb-1-half"
-              disabled={
-                submitting ||
-                !this.isSubmittable({ dirty, error, initialValues, valid })
-              }
-              extension="full"
-              label={t('accountForm.submit.label')}
-              onClick={() => this.handleSubmit(values, form)}
-            />
+            {isRunnable({ win: window, konnector }) ? (
+              <>
+                <AccountFields
+                  disabled={submitting}
+                  fields={sanitizedFields}
+                  hasError={error && isLoginError}
+                  initialValues={values}
+                  inputRefByName={this.inputRefByName}
+                  t={t}
+                />
+                <Button
+                  busy={submitting}
+                  className="u-mt-2 u-mb-1-half"
+                  disabled={
+                    submitting ||
+                    !this.isSubmittable({ dirty, error, initialValues, valid })
+                  }
+                  extension="full"
+                  label={t('accountForm.submit.label')}
+                  onClick={() => this.handleSubmit(values, form)}
+                />
+              </>
+            ) : (
+              <>
+                <Media align="top">
+                  <Img className="u-m-1">
+                    <Icon icon={Info} />
+                  </Img>
+                  <Bd className="u-m-1">
+                    <Typography variant="body1">
+                      {t('accountForm.notClientSide', { name })}
+                    </Typography>
+                  </Bd>
+                </Media>
+                <ButtonLink
+                  className="u-mt-2 u-mb-1-half"
+                  extension="full"
+                  label={t('accountForm.installFlagship.label')}
+                  href="#"
+                />
+              </>
+            )}
             {this.state.showConfirmationModal && (
               <Dialog
                 title={t('triggerManager.confirmationModal.title')}

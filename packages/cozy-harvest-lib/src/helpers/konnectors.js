@@ -335,11 +335,34 @@ export const buildFolderPermission = folder => {
   }
 }
 
+/**
+ * Get's the launcher in the current environment if any
+ *
+ * @param {Object} win The window object in the current environment
+ * @returns {Object}
+ */
+export const getLauncher = ({ win }) => {
+  return get(win, 'cozy.ClientConnectorLauncher', null)
+}
+
+/**
+ * Define if it is possible to run a konnector in the current environment
+ *
+ * @param {Object} win       The window object in the current environment
+ * @param {Object} konnector The io.cozy.konnectors object for the current konnector
+ * @returns {Boolean}
+ */
+export const isRunnable = ({ win, konnector = {} }) => {
+  return Boolean(!konnector.clientSide || getLauncher({ win }))
+}
+
 export default {
   KonnectorJobError,
   buildFolderPath,
   buildFolderPermission,
   getAccountType,
+  getLauncher,
+  isRunnable,
   hasNewVersionAvailable,
   needsFolder
 }

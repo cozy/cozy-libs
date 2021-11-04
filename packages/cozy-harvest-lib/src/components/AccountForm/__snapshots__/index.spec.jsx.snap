@@ -5,34 +5,36 @@ exports[`AccountForm should not render error 1`] = `
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
-  <AccountFields
-    fields={
-      Object {
-        "passphrase": Object {
-          "encrypted": true,
-          "required": true,
-          "type": "password",
-        },
-        "username": Object {
-          "encrypted": false,
-          "required": true,
-          "role": "identifier",
-          "type": "text",
-        },
+  <React.Fragment>
+    <AccountFields
+      fields={
+        Object {
+          "passphrase": Object {
+            "encrypted": true,
+            "required": true,
+            "type": "password",
+          },
+          "username": Object {
+            "encrypted": false,
+            "required": true,
+            "role": "identifier",
+            "type": "text",
+          },
+        }
       }
-    }
-    hasError={false}
-    initialValues={Object {}}
-    inputRefByName={[Function]}
-    t={[Function]}
-  />
-  <DefaultButton
-    className="u-mt-2 u-mb-1-half"
-    disabled={false}
-    extension="full"
-    label="Connect"
-    onClick={[Function]}
-  />
+      hasError={false}
+      initialValues={Object {}}
+      inputRefByName={[Function]}
+      t={[Function]}
+    />
+    <DefaultButton
+      className="u-mt-2 u-mb-1-half"
+      disabled={false}
+      extension="full"
+      label="Connect"
+      onClick={[Function]}
+    />
+  </React.Fragment>
 </div>
 `;
 
@@ -41,33 +43,35 @@ exports[`AccountForm should render 1`] = `
   onFocusCapture={[Function]}
   onKeyUp={[Function]}
 >
-  <AccountFields
-    fields={
-      Object {
-        "passphrase": Object {
-          "encrypted": true,
-          "required": true,
-          "type": "password",
-        },
-        "username": Object {
-          "encrypted": false,
-          "required": true,
-          "role": "identifier",
-          "type": "text",
-        },
+  <React.Fragment>
+    <AccountFields
+      fields={
+        Object {
+          "passphrase": Object {
+            "encrypted": true,
+            "required": true,
+            "type": "password",
+          },
+          "username": Object {
+            "encrypted": false,
+            "required": true,
+            "role": "identifier",
+            "type": "text",
+          },
+        }
       }
-    }
-    initialValues={Object {}}
-    inputRefByName={[Function]}
-    t={[Function]}
-  />
-  <DefaultButton
-    className="u-mt-2 u-mb-1-half"
-    disabled={true}
-    extension="full"
-    label="Connect"
-    onClick={[Function]}
-  />
+      initialValues={Object {}}
+      inputRefByName={[Function]}
+      t={[Function]}
+    />
+    <DefaultButton
+      className="u-mt-2 u-mb-1-half"
+      disabled={true}
+      extension="full"
+      label="Connect"
+      onClick={[Function]}
+    />
+  </React.Fragment>
 </div>
 `;
 
@@ -92,33 +96,96 @@ exports[`AccountForm should render error 1`] = `
       }
     }
   />
-  <AccountFields
-    fields={
-      Object {
-        "passphrase": Object {
-          "encrypted": true,
-          "required": true,
-          "type": "password",
-        },
-        "username": Object {
-          "encrypted": false,
-          "required": true,
-          "role": "identifier",
-          "type": "text",
-        },
+  <React.Fragment>
+    <AccountFields
+      fields={
+        Object {
+          "passphrase": Object {
+            "encrypted": true,
+            "required": true,
+            "type": "password",
+          },
+          "username": Object {
+            "encrypted": false,
+            "required": true,
+            "role": "identifier",
+            "type": "text",
+          },
+        }
       }
-    }
-    hasError={false}
-    initialValues={Object {}}
-    inputRefByName={[Function]}
-    t={[Function]}
-  />
-  <DefaultButton
-    className="u-mt-2 u-mb-1-half"
-    disabled={false}
-    extension="full"
-    label="Connect"
-    onClick={[Function]}
-  />
+      hasError={false}
+      initialValues={Object {}}
+      inputRefByName={[Function]}
+      t={[Function]}
+    />
+    <DefaultButton
+      className="u-mt-2 u-mb-1-half"
+      disabled={false}
+      extension="full"
+      label="Connect"
+      onClick={[Function]}
+    />
+  </React.Fragment>
+</div>
+`;
+
+exports[`AccountForm should render normally when client side konnector with launcher 1`] = `
+<div
+  onFocusCapture={[Function]}
+  onKeyUp={[Function]}
+>
+  <React.Fragment>
+    <AccountFields
+      fields={Object {}}
+      initialValues={Object {}}
+      inputRefByName={[Function]}
+      t={[Function]}
+    />
+    <DefaultButton
+      className="u-mt-2 u-mb-1-half"
+      disabled={false}
+      extension="full"
+      label="Connect"
+      onClick={[Function]}
+    />
+  </React.Fragment>
+</div>
+`;
+
+exports[`AccountForm should render with specific message when client side konnector without launcher 1`] = `
+<div
+  onFocusCapture={[Function]}
+  onKeyUp={[Function]}
+>
+  <React.Fragment>
+    <Media
+      align="top"
+    >
+      <Img
+        className="u-m-1"
+      >
+        <Icon
+          icon={[Function]}
+          spin={false}
+        />
+      </Img>
+      <Bd
+        className="u-m-1"
+      >
+        <ForwardRef(WithStyles)
+          variant="body1"
+        >
+          The testkonnector application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app.
+        </ForwardRef(WithStyles)>
+      </Bd>
+    </Media>
+    <ButtonLink
+      className="u-mt-2 u-mb-1-half"
+      extension="full"
+      href="#"
+      label="Install Cozy on mobile"
+      tag="a"
+    />
+  </React.Fragment>
 </div>
 `;

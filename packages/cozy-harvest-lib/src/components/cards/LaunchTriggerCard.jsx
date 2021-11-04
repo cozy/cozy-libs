@@ -2,13 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'cozy-ui/transpiled/react/Button'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import * as triggers from '../../helpers/triggers'
+import { isRunnable } from '../../helpers/konnectors'
 import FlowProvider from '../FlowProvider'
 import { useFlowState } from '../../models/withConnectionFlow'
 
@@ -18,8 +21,10 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   const launch = flow.launch
   const flowState = useFlowState(flow)
   const trigger = flowState.trigger
+  const konnector = flow.konnector
   const running = flowState.running
   const lastSuccessDate = triggers.getLastSuccessDate(trigger)
+  const isKonnectorRunnable = isRunnable({ win: window, konnector })
 
   return (
     <Card className={className}>
@@ -47,42 +52,57 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
                 : t('card.launchTrigger.lastSync.unknown')}
             </Typography>
           </li>
-          <li className="u-mb-half">
-            <Typography
-              variant="caption"
-              component="span"
-              style={inlineStyle}
-              className="u-mr-half"
-            >
-              {t('card.launchTrigger.frequency.label')}
-            </Typography>
-            <Typography
-              variant="caption"
-              color="textPrimary"
-              component="span"
-              style={inlineStyle}
-            >
-              {t(
-                `card.launchTrigger.frequency.${triggers.getFrequency(
-                  trigger
-                ) || 'undefined'}`
-              )}
-            </Typography>
-          </li>
+          {isKonnectorRunnable ? (
+            <li className="u-mb-half">
+              <Typography
+                variant="caption"
+                component="span"
+                style={inlineStyle}
+                className="u-mr-half"
+              >
+                {t('card.launchTrigger.frequency.label')}
+              </Typography>
+              <Typography
+                variant="caption"
+                color="textPrimary"
+                component="span"
+                style={inlineStyle}
+              >
+                {t(
+                  `card.launchTrigger.frequency.${triggers.getFrequency(
+                    trigger
+                  ) || 'undefined'}`
+                )}
+              </Typography>
+            </li>
+          ) : (
+            <Media align="top">
+              <Img className="u-m-1">
+                <Icon icon={Info} />
+              </Img>
+              <Bd className="u-m-1">
+                <Typography variant="body1">
+                  {t('accountForm.notClientSide', { name: konnector.name })}
+                </Typography>
+              </Bd>
+            </Media>
+          )}
         </ul>
-        <div>
-          {/* TODO: Extract this directly in Cozy-UI
+        {isKonnectorRunnable && (
+          <div>
+            {/* TODO: Extract this directly in Cozy-UI
             (either with an utility class or a Button prop) */}
-          <Button
-            label={t('card.launchTrigger.button.label')}
-            icon={<Icon focusable="false" icon={SyncIcon} spin={running} />}
-            className="u-mh-0 u-mv-0"
-            disabled={running || disabled}
-            onClick={() => launch({ autoSuccessTimer: false })}
-            subtle
-            style={{ lineHeight: '1.4' }}
-          />
-        </div>
+            <Button
+              label={t('card.launchTrigger.button.label')}
+              icon={<Icon focusable="false" icon={SyncIcon} spin={running} />}
+              className="u-mh-0 u-mv-0"
+              disabled={running || disabled}
+              onClick={() => launch({ autoSuccessTimer: false })}
+              subtle
+              style={{ lineHeight: '1.4' }}
+            />
+          </div>
+        )}
       </div>
     </Card>
   )

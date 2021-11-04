@@ -53,4 +53,29 @@ describe('LaunchTriggerCard', () => {
       triggerFixture
     )
   })
+
+  it('should render impossible to run message when konnector is clientSide without an accessible launcher', () => {
+    const { root } = setup({
+      props: {
+        flow: new ConnectionFlow(client, triggerFixture, {
+          slug: 'test',
+          name: 'testname',
+          clientSide: true
+        })
+      }
+    })
+    expect(root.html()).toMatchSnapshot()
+  })
+
+  it('should render normally when konnector is not clientSide', () => {
+    const { root } = setup({
+      props: {
+        flow: new ConnectionFlow(client, triggerFixture, {
+          slug: 'test',
+          name: 'testname'
+        })
+      }
+    })
+    expect(root.html()).toMatchSnapshot()
+  })
 })

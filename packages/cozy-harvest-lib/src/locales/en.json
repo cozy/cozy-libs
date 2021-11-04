@@ -17,7 +17,11 @@
     },
     "disconnect": {
       "button": "Disconnect this account"
-    }
+    },
+    "installFlagship": {
+      "label": "Install Cozy on mobile"
+    },
+    "notClientSide": "The %{name} application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app."
   },
   "contracts": {
     "headers": {
