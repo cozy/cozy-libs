@@ -9,14 +9,13 @@ import {
   ACCOUNTS_DOCTYPE
 } from '../connections/accounts'
 import clone from 'lodash/clone'
-import get from 'lodash/get'
 import {
   launchTrigger,
   prepareTriggerAccount,
   fetchTrigger,
   ensureTrigger
 } from '../connections/triggers'
-import { KonnectorJobError } from '../helpers/konnectors'
+import { KonnectorJobError, getLauncher } from '../helpers/konnectors'
 import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
@@ -507,8 +506,10 @@ export class ConnectionFlow {
         'This connector can be run by the launcher',
         this.konnector.slug
       )
-      const launcher = get(window, 'cozy.ClientConnectorLauncher')
-      logger.info('Found a launcher', launcher)
+      const launcher = getLauncher({ win: window })
+      if (launcher) {
+        logger.info('Found a launcher', launcher)
+      }
       if (launcher === 'react-native') {
         window.ReactNativeWebView.postMessage(
           JSON.stringify({

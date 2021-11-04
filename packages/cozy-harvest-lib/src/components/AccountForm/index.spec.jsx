@@ -26,6 +26,11 @@ const fixtures = {
       }
     }
   },
+  clientSideKonnector: {
+    clientSide: true,
+    name: 'testkonnector',
+    fields: {}
+  },
   konnectorWithOptionalFields: {
     fields: {
       test: {
@@ -98,6 +103,25 @@ describe('AccountForm', () => {
     const { wrapper } = setup()
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
+  })
+
+  it('should render with specific message when client side konnector without launcher', () => {
+    const { wrapper } = setup({ konnector: fixtures.clientSideKonnector })
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+  })
+
+  it('should render normally when client side konnector with launcher', () => {
+    const windowSpy = jest.spyOn(window, 'window', 'get')
+    windowSpy.mockImplementation(() => ({
+      cozy: {
+        ClientConnectorLauncher: 'react-native'
+      }
+    }))
+    const { wrapper } = setup({ konnector: fixtures.clientSideKonnector })
+    const component = wrapper.dive().getElement()
+    expect(component).toMatchSnapshot()
+    windowSpy.mockRestore()
   })
 
   it('should render error', () => {
