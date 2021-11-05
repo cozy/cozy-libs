@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.10.0...cozy-harvest-lib@6.11.0) (2021-11-05)
+
+
+### Features
+
+* Display a message when running a konnector is not possible ([2ff39da](https://github.com/cozy/cozy-libs/commit/2ff39da))
+
+
+
+
+
 # [6.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.9.0...cozy-harvest-lib@6.10.0) (2021-11-03)
 
 
