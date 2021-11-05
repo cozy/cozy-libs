@@ -103,9 +103,9 @@
         "install": "Discover Cozy Banks"
       },
       "coachco2": {
-        "title": "Your trips",
-        "description": "This service retrieves and keeps a complete record of your trips.",
-        "button": "Access trips",
+        "title": "Apps to go further",
+        "description": "The following apps are able to use privately this kind of data inside your Cozy.",
+        "button": "Coach CO2",
         "install": "Discover CoachCO2"
       }
     },
