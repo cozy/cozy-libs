@@ -19,6 +19,7 @@ import CozyClient, {
   isQueryLoading,
   hasQueryBeenLoaded
 } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -31,6 +32,9 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Stack from 'cozy-ui/transpiled/react/Stack'
+
+import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
+import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 
 import useCycle from './useCycle'
 import {
@@ -257,6 +261,11 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
       ) : (
         <TripsMap trips={trips} index={index} />
       )}
+      {flag('harvest.datacard.coachCO2') ? (
+        <div className="u-ta-right u-mv-half u-mh-1">
+          <AppLinkButton slug="coachco2" />
+        </div>
+      ) : null}
     </Card>
   )
 }
@@ -288,7 +297,15 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
   const noTimeseries =
     hasQueryBeenLoaded(timeseriesCol) && timeseries.length == 0
   const isLoading = isQueryLoading(timeseriesCol)
-  return noTimeseries ? null : (
+
+  if (noTimeseries && flag('harvest.datacard.coachCO2')) {
+    // This is hidden between a flag as long as the CoachCO2 app is not in the store
+    return <AppLinkCard {...appLinksProps.coachco2()} />
+  }
+  if (noTimeseries) {
+    return null
+  }
+  return (
     <GeoDataCard
       trips={ascendingTrips}
       loading={isLoading}

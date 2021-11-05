@@ -103,9 +103,9 @@
         "install": "Découvrir Cozy Banks"
       },
       "coachco2": {
-        "title": "Vos déplacements",
-        "description": "Ce service récupère l'historique de vos trajets.",
-        "button": "Accéder aux déplacements",
+        "title": "Applications pour aller plus loin",
+        "description": "Les applications suivantes proposent d'utiliser ces données en toute confidentialité au sein de votre Cozy",
+        "button": "Coach CO2",
         "install": "Découvrir Coach CO2"
       }
     },

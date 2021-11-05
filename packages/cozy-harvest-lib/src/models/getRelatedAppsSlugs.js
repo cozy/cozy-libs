@@ -7,16 +7,6 @@ import flag from 'cozy-flags'
  */
 export const relatedAppsConfiguration = [
   {
-    slug: 'coachco2',
-    priority: 3,
-    predicate: ({ konnectorManifest }) => {
-      return (
-        Array.isArray(konnectorManifest.data_types) &&
-        konnectorManifest.data_types.includes('geojson')
-      )
-    }
-  },
-  {
     slug: 'banks',
     priority: 2,
     predicate: ({ konnectorManifest }) => {
