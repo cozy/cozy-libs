@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.12.0...cozy-harvest-lib@6.13.0) (2021-11-08)
+
+
+### Features
+
+* Bump cozy-ui from 47.4.0 to 57.6.0 in cozy-harvest-lib ([4015a38](https://github.com/cozy/cozy-libs/commit/4015a38))
+* Disable autocapitalize on Harvest account fields ([7bcbaea](https://github.com/cozy/cozy-libs/commit/7bcbaea))
+
+
+
+
+
 # [6.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.11.0...cozy-harvest-lib@6.12.0) (2021-11-08)
 
 
