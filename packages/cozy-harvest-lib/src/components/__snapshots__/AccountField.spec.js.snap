@@ -2,6 +2,7 @@
 
 exports[`AccountField render a date field 1`] = `
 <Field
+  autoCapitalize="none"
   autoComplete="off"
   className="u-m-0"
   error={false}
@@ -100,6 +101,7 @@ exports[`AccountField render a date field 1`] = `
 
 exports[`AccountField render a dropdown field 1`] = `
 <Field
+  autoCapitalize="none"
   className="u-m-0"
   error={false}
   fieldProps={Object {}}
@@ -193,6 +195,7 @@ exports[`AccountField render a dropdown field 1`] = `
 
 exports[`AccountField render a password field 1`] = `
 <PasswordField
+  autoCapitalize="none"
   autoComplete="off"
   className="u-m-0"
   encrypted={true}
@@ -280,6 +283,7 @@ exports[`AccountField render a password field 1`] = `
 
 exports[`AccountField should render 1`] = `
 <Field
+  autoCapitalize="none"
   autoComplete="off"
   className="u-m-0"
   encrypted={false}
