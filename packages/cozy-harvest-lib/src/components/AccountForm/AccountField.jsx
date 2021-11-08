@@ -97,6 +97,7 @@ export class AccountField extends PureComponent {
       ...this.props,
       name: finalName,
       id: `harvest-account-${finalName}`,
+      autoCapitalize: 'none',
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
       disabled: disabled,
