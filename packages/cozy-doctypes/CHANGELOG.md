@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.83.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.83.0...cozy-doctypes@1.83.1) (2021-11-09)
+
+
+### Bug Fixes
+
+* **doctypes:** Enlarge account matching for hidden credit card number ([f9cf95f](https://github.com/cozy/cozy-libs/commit/f9cf95f))
+
+
+
+
+
 # 1.83.0 (2021-10-22)
 
 
