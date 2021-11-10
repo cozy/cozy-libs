@@ -19,7 +19,6 @@ const appLinksProps = {
   }),
   coachco2: () => ({
     slug: 'coachco2',
-    icon: 'location',
     iconColor: 'brightSun'
   })
 }

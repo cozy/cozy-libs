@@ -60,13 +60,15 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
     <Card>
       <Stack>
         <Typography variant="h6" gutterBottom>
-          <Circle
-            size="small"
-            backgroundColor={palette[iconColor]}
-            className="u-mr-half"
-          >
-            <Icon icon={icon} color={palette['white']} />
-          </Circle>
+          {icon ? (
+            <Circle
+              size="small"
+              backgroundColor={palette[iconColor]}
+              className="u-mr-half"
+            >
+              <Icon icon={icon} color={palette['white']} />
+            </Circle>
+          ) : null}
           {t(`card.appLink.${slug}.title`)}
         </Typography>
         <Typography variant="body1">
