@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.13.1...cozy-harvest-lib@6.14.0) (2021-11-10)
+
+
+### Bug Fixes
+
+* Change UI for geocard ([6408ecb](https://github.com/cozy/cozy-libs/commit/6408ecb))
+* Harmonize title variant ([a4b7941](https://github.com/cozy/cozy-libs/commit/a4b7941))
+
+
+### Features
+
+* Do not display AppLinkCard icon for GeoCard ([d9aadbd](https://github.com/cozy/cozy-libs/commit/d9aadbd))
+
+
+
+
+
 ## [6.13.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.13.0...cozy-harvest-lib@6.13.1) (2021-11-09)
 
 **Note:** Version bump only for package cozy-harvest-lib
