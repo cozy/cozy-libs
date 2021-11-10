@@ -33,7 +33,7 @@ import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 
-import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
+import AppLinkCard from '../components/cards/AppLinkCard'
 import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 
 import useCycle from './useCycle'
@@ -261,11 +261,6 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
       ) : (
         <TripsMap trips={trips} index={index} />
       )}
-      {flag('harvest.datacard.coachCO2') ? (
-        <div className="u-ta-right u-mv-half u-mh-1">
-          <AppLinkButton slug="coachco2" />
-        </div>
-      ) : null}
     </Card>
   )
 }
@@ -306,11 +301,16 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
     return null
   }
   return (
-    <GeoDataCard
-      trips={ascendingTrips}
-      loading={isLoading}
-      konnector={konnector}
-    />
+    <>
+      <GeoDataCard
+        trips={ascendingTrips}
+        loading={isLoading}
+        konnector={konnector}
+      />
+      {flag('harvest.datacard.coachCO2') ? (
+        <AppLinkCard {...appLinksProps.coachco2()} />
+      ) : null}
+    </>
   )
 }
 
