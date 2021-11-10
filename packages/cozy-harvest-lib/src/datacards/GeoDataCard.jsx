@@ -214,7 +214,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
       <div className="u-ph-1 u-mb-half">
-        <Typography variant="h5">{t('datacards.trips.title')}</Typography>
+        <Typography variant="h6">{t('datacards.trips.title')}</Typography>
         <Typography variant="caption">
           {t('datacards.trips.caption', { konnectorName: konnector.name })}
         </Typography>
