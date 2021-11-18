@@ -45,10 +45,11 @@ The `FlagSwitcher` shows all flags in use and displays all
 flags in use.
 
 ```js
-import flag, { FlagSwitcher } from 'cozy-flags'
+import flag from 'cozy-flags'
+import FlagSwitcher from 'cozy-flags/dist/FlagSwitcher'
 
 if (process.env.NODE_ENV !== 'production'
-    && flag('switcher') === undefined) {
+    && flag('switcher') === null) {
     flag('switcher', true) // set default flag in dev mode
 }
 
