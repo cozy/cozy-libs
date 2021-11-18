@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.0...cozy-harvest-lib@6.14.1) (2021-11-18)
+
+
+### Bug Fixes
+
+* Harvest Konnector translation ([d7c13ca](https://github.com/cozy/cozy-libs/commit/d7c13ca))
+
+
+
+
+
 # [6.14.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.13.1...cozy-harvest-lib@6.14.0) (2021-11-10)
 
 
