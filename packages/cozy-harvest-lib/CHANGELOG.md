@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.14.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.1...cozy-harvest-lib@6.14.2) (2021-11-22)
+
+
+### Bug Fixes
+
+* Handle undefined this.konnector for OAuth connectors ([9bea259](https://github.com/cozy/cozy-libs/commit/9bea259))
+
+
+
+
+
 ## [6.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.0...cozy-harvest-lib@6.14.1) (2021-11-18)
 
 
