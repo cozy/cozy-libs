@@ -1,4 +1,5 @@
 import MicroEE from 'microee'
+import get from 'lodash/get'
 
 import Realtime from 'cozy-realtime'
 import flag from 'cozy-flags'
@@ -483,7 +484,7 @@ export class ConnectionFlow {
    */
   async launch({ autoSuccessTimer = true } = {}) {
     const computedAutoSuccessTimer =
-      autoSuccessTimer && !this.konnector.clientSide
+      autoSuccessTimer && !get(this, 'konnector.clientSide')
 
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
@@ -501,7 +502,7 @@ export class ConnectionFlow {
 
     this.job = await launchTrigger(this.client, this.trigger)
 
-    if (this.konnector.clientSide) {
+    if (get(this, 'konnector.clientSide')) {
       logger.info(
         'This connector can be run by the launcher',
         this.konnector.slug
