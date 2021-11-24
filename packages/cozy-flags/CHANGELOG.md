@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.8.0...cozy-flags@2.8.1) (2021-11-24)
+
+
+### Bug Fixes
+
+* Informations on readme ([ea517de](https://github.com/cozy/cozy-libs/commit/ea517de))
+
+
+
+
+
 # 2.8.0 (2021-10-22)
 
 
