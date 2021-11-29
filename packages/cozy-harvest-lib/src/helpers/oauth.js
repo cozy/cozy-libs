@@ -64,6 +64,7 @@ export const handleOAuthResponse = (options = {}) => {
     realtime = new CozyRealtime({ client })
   }
 
+  // eslint-disable-next-line no-redeclare
   /* global URLSearchParams */
   const queryParams = new URLSearchParams(window.location.search)
 

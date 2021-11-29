@@ -69,10 +69,11 @@ class EditDocumentQualification extends Component {
                 } else {
                   try {
                     const fileCollection = client.collection('io.cozy.files')
-                    const updatedFile = await fileCollection.updateMetadataAttribute(
-                      document._id,
-                      { qualification }
-                    )
+                    const updatedFile =
+                      await fileCollection.updateMetadataAttribute(
+                        document._id,
+                        { qualification }
+                      )
                     pushAnalytics(item)
                     if (onDescribed) onDescribed(updatedFile.data)
                     onClose()

@@ -8,9 +8,9 @@ const readJsonSync = filename => {
 }
 
 /* Ensures dependencies are updated for the all workspaces */
-const uniqueVersion = function() {
+const uniqueVersion = function () {
   const store = {}
-  return function*({ pkgName, pkgVersion }) {
+  return function* ({ pkgName, pkgVersion }) {
     if (store[pkgName]) {
       if (pkgVersion != store[pkgName]) {
         yield {
@@ -26,7 +26,7 @@ const uniqueVersion = function() {
 
 /* Ensures we install dependencies at the right place */
 const depKeyIs = depKeyOpt =>
-  function*({ pkgName, depKey }) {
+  function* ({ pkgName, depKey }) {
     if (typeof depKeyOpt === 'string' && depKey !== depKeyOpt) {
       yield {
         level: 'warn',
@@ -45,7 +45,7 @@ const depKeyIs = depKeyOpt =>
 
 /* Disallow a package */
 const shouldNotBeUsed = () =>
-  function*({ pkgName }) {
+  function* ({ pkgName }) {
     yield { level: 'warn', message: `${pkgName} should not be used` }
   }
 
@@ -61,7 +61,7 @@ const isPkg = pkgName => pkgName2 => pkgName === pkgName2
 const any = () => true
 
 const versionAt = versionOpt =>
-  function*({ pkgName, pkgVersion }) {
+  function* ({ pkgName, pkgVersion }) {
     if (pkgVersion !== versionOpt) {
       yield {
         level: 'warn',
@@ -72,7 +72,7 @@ const versionAt = versionOpt =>
 
 /* Ensures a dep is installed with another dep */
 const hasOtherDep = (pkgName, depKey, message) =>
-  function*({ pkgName, depKey, pkgJson }) {
+  function* ({ pkgName, depKey, pkgJson }) {
     if (!pkgJson[depKey] || !pkgJson[depKey][pkgName]) {
       yield {
         level: 'warn',
@@ -85,7 +85,7 @@ const isStrict = version =>
   Boolean(/^[0-9]/.exec(version)) && version.split('.').length === 3
 
 const peerDepHasLenientVersion = () =>
-  function*({ depKey, pkgName, pkgVersion }) {
+  function* ({ depKey, pkgName, pkgVersion }) {
     if (depKey !== 'peerDependencies') {
       return
     }

@@ -16,7 +16,9 @@ module.exports = {
       'error',
       {
         singleQuote: true,
-        semi: false
+        semi: false,
+        trailingComma: 'none',
+        arrowParens: 'avoid'
       }
     ],
     'no-param-reassign': 'warn',

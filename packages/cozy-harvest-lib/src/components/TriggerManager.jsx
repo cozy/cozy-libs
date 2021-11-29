@@ -308,25 +308,13 @@ export class DumbTriggerManager extends Component {
   }
 
   render() {
-    const {
-      konnector,
-      showError,
-      t,
-      fieldOptions,
-      flow,
-      flowState,
-      client
-    } = this.props
+    const { konnector, showError, t, fieldOptions, flow, flowState, client } =
+      this.props
 
     const submitting = flowState.running
 
-    const {
-      account,
-      step,
-      selectedCipher,
-      showBackButton,
-      ciphers
-    } = this.state
+    const { account, step, selectedCipher, showBackButton, ciphers } =
+      this.state
 
     const { oauth } = konnector
 

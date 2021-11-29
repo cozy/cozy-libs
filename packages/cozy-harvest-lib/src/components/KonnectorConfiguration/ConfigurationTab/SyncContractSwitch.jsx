@@ -59,14 +59,8 @@ export class DumbSyncContractSwitch extends React.Component {
 
   async handleSetSyncStatus(ev) {
     ev.preventDefault()
-    const {
-      client,
-      konnector,
-      contract,
-      accountCol,
-      t,
-      trackEvent
-    } = this.props
+    const { client, konnector, contract, accountCol, t, trackEvent } =
+      this.props
     const { data: account } = accountCol
     const { syncStatus } = this.state
     const newSyncStatus = !syncStatus

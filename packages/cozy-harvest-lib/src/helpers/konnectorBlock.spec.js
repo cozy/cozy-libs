@@ -49,8 +49,7 @@ describe('fetchKonnectorData', () => {
 
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Faccounts%2F012345',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Faccounts%2F012345',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -92,8 +91,7 @@ describe('fetchKonnectorData', () => {
     expect(secondResponseArg.definition.sources).toStrictEqual(['registry'])
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/store/discover/pajemploi?fallback=http%3A%2F%2Fcozy-store.tools%3A8080%2F%23%2Fdiscover%2Fpajemploi',
+      link: 'https://links.mycozy.cloud/store/discover/pajemploi?fallback=http%3A%2F%2Fcozy-store.tools%3A8080%2F%23%2Fdiscover%2Fpajemploi',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -109,8 +107,7 @@ describe('fetchKonnectorData', () => {
 
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/home/connected/pajemploi/new?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Fnew',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi/new?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Fnew',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -126,8 +123,7 @@ describe('fetchKonnectorData', () => {
 
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -145,8 +141,7 @@ describe('fetchKonnectorData', () => {
 
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -164,8 +159,7 @@ describe('fetchKonnectorData', () => {
 
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',
@@ -189,8 +183,7 @@ describe('fetchKonnectorData', () => {
 
     expect(res).toMatchObject({
       name: 'Pajemploi',
-      link:
-        'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
+      link: 'https://links.mycozy.cloud/home/connected/pajemploi?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',

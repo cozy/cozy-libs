@@ -103,14 +103,14 @@ describe('sendMattermost Post', () => {
           end: endSpy
         }
       })
+      // eslint-disable-next-line no-useless-catch
       try {
         await sendMattermostReleaseMessage(commonInfo)
         expect(JSON.parse(writeSpy.mock.calls[0][0])).toEqual({
           channel: 'gh-notif-appvenger',
           icon_url: 'https://files.cozycloud.cc/travis.png',
           username: 'Travis',
-          text:
-            'Application __banks__ version `1.6.1` has been published on space __banks__.\n\n- [Last commit: Beautiful commit title & a beautiful ampersand 😍 ](https://github.com/cozy/cozy-banks/commits/sha1deadbeef)\n- [Job](https://travis.com/cozy/cozy-banks/jobs/jobId1234)'
+          text: 'Application __banks__ version `1.6.1` has been published on space __banks__.\n\n- [Last commit: Beautiful commit title & a beautiful ampersand 😍 ](https://github.com/cozy/cozy-banks/commits/sha1deadbeef)\n- [Job](https://travis.com/cozy/cozy-banks/jobs/jobId1234)'
         })
         expect(https.request).toHaveBeenCalledWith(
           {

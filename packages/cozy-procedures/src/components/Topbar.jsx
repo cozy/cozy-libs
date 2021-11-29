@@ -59,8 +59,4 @@ Topbar.defaultProps = {
   title: ''
 }
 
-export default flow(
-  translate(),
-  withBreakpoints(),
-  withRouter
-)(Topbar)
+export default flow(translate(), withBreakpoints(), withRouter)(Topbar)

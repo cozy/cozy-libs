@@ -16,9 +16,8 @@ export const useSharingInfos = () => {
   const client = useClient()
 
   const [discoveryLink, setDiscoveryLink] = useState()
-  const [isSharingShortcutCreated, setIsSharingSharingcutCreated] = useState(
-    false
-  )
+  const [isSharingShortcutCreated, setIsSharingSharingcutCreated] =
+    useState(false)
   const [sharing, setSharing] = useState()
   const [loading, setLoading] = useState(true)
 
@@ -30,9 +29,8 @@ export const useSharingInfos = () => {
           .collection('io.cozy.permissions')
           .fetchOwnPermissions()
 
-        const isSharingShortcutCreated = models.permission.isShortcutCreatedOnTheRecipientCozy(
-          response
-        )
+        const isSharingShortcutCreated =
+          models.permission.isShortcutCreatedOnTheRecipientCozy(response)
         const sharingId = getSharingId(response)
         const { sharecode } = getQueryParameter()
 

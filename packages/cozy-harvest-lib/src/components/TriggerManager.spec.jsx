@@ -344,12 +344,8 @@ describe('TriggerManager', () => {
 
     describe('when no account is passed in props', () => {
       it('should correctly send the form', async () => {
-        const {
-          flow,
-          identifierInput,
-          passphraseInput,
-          submitButton
-        } = await setupForm()
+        const { flow, identifierInput, passphraseInput, submitButton } =
+          await setupForm()
         fireEvent.change(identifierInput, {
           target: { value: 'my-identifier' }
         })
@@ -377,12 +373,8 @@ describe('TriggerManager', () => {
             passphrase: 'my-old-passphrase'
           }
         }
-        const {
-          flow,
-          identifierInput,
-          passphraseInput,
-          submitButton
-        } = await setupForm({ account })
+        const { flow, identifierInput, passphraseInput, submitButton } =
+          await setupForm({ account })
         fireEvent.change(identifierInput, {
           target: { value: 'my-identifier' }
         })

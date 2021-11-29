@@ -5,7 +5,7 @@ let level = LOG_LEVEL || 'debug'
 const format = require('./log-format')
 const filters = [filterLevel, filterSecrets]
 
-const filterOut = function() {
+const filterOut = function () {
   for (const filter of filters) {
     if (filter.apply(null, arguments) === false) {
       return true
@@ -48,18 +48,18 @@ function log(type, message, label, namespace) {
   console.log(format(type, message, label, namespace))
 }
 
-log.addFilter = function(filter) {
+log.addFilter = function (filter) {
   return filters.push(filter)
 }
 
-log.setLevel = function(lvl) {
+log.setLevel = function (lvl) {
   level = lvl
 }
 
 // Short-hands
 const methods = ['debug', 'info', 'warn', 'error', 'ok', 'critical']
 methods.forEach(level => {
-  log[level] = function(message, label, namespace) {
+  log[level] = function (message, label, namespace) {
     return log(level, message, label, namespace)
   }
 })
@@ -72,8 +72,8 @@ log.setNoRetry = obj => {
   return obj.no_retry
 }
 log.Secret = Secret
-log.namespace = function(namespace) {
-  return function(type, message, label, ns = namespace) {
+log.namespace = function (namespace) {
+  return function (type, message, label, ns = namespace) {
     log(type, message, label, ns)
   }
 }

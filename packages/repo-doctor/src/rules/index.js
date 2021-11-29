@@ -48,7 +48,7 @@ const setupRules = (config, args) => {
 /**
  * Executes rules against a repository and yields rule results
  */
-const runRules = async function*(repositoryInfo, rules) {
+const runRules = async function* (repositoryInfo, rules) {
   for (const rule of rules) {
     const generator = rule.run(repositoryInfo)
     for await (const ruleResult of generator) {

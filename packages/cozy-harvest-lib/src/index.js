@@ -42,8 +42,6 @@ export {
 } from './helpers/konnectors'
 export { handleOAuthResponse } from './helpers/oauth'
 export { withLocales }
-export {
-  default as updateAccountsFromCipher
-} from './services/updateAccountsFromCipher'
+export { default as updateAccountsFromCipher } from './services/updateAccountsFromCipher'
 export { default as deleteAccounts } from './services/deleteAccounts'
 export { TrackingContext } from './components/hoc/tracking'

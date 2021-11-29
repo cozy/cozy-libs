@@ -72,12 +72,8 @@ export class OAuthForm extends PureComponent {
 
   render() {
     const { konnector, t, flowState } = this.props
-    const {
-      initialValues,
-      showOAuthWindow,
-      needExtraParams,
-      extraParams
-    } = this.state
+    const { initialValues, showOAuthWindow, needExtraParams, extraParams } =
+      this.state
     const isBusy =
       showOAuthWindow === true ||
       flowState.running ||
@@ -117,7 +113,4 @@ OAuthForm.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default compose(
-  translate(),
-  withConnectionFlow()
-)(OAuthForm)
+export default compose(translate(), withConnectionFlow())(OAuthForm)

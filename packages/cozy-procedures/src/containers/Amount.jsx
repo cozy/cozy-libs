@@ -10,6 +10,7 @@ const mapDispatchToProps = {
   updateAmount
 }
 
-export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
-  Amount
-)
+export default connectWithProcedures(
+  mapStateToProps,
+  mapDispatchToProps
+)(Amount)

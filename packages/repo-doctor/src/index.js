@@ -46,8 +46,7 @@ const main = async () => {
     help: 'Path to config'
   })
   parser.addArgument('--config', {
-    help:
-      'Config options ex: --config "dep-up-to-date: { dependencies: [\'cozy-ui\'] }"'
+    help: 'Config options ex: --config "dep-up-to-date: { dependencies: [\'cozy-ui\'] }"'
   })
   parser.addArgument('--rule', {
     help: 'Run only selected rule'

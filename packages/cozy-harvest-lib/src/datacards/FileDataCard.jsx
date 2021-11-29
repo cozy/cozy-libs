@@ -216,8 +216,9 @@ const FileDataCard = ({
     isQueryLoading(folderToSaveFiles) || isQueryLoading(sourceAccountFiles)
 
   const files = useMemo(() => {
-    return sortBy(uniq([...files1, ...files2], x => x._id), x =>
-      get(x, 'cozyMetadata.createdAt')
+    return sortBy(
+      uniq([...files1, ...files2], x => x._id),
+      x => get(x, 'cozyMetadata.createdAt')
     )
       .reverse()
       .slice(0, 5)

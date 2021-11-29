@@ -199,13 +199,15 @@ export const fetchAccountsWithoutTriggers = async (client, triggers) => {
     .map(trigger => triggersModel.getAccountId(trigger))
     .filter(id => !!id)
 
-  return (await client.query(
-    Q(ACCOUNTS_DOCTYPE).where({
-      _id: {
-        $nin: triggerAccountIds
-      }
-    })
-  )).data
+  return (
+    await client.query(
+      Q(ACCOUNTS_DOCTYPE).where({
+        _id: {
+          $nin: triggerAccountIds
+        }
+      })
+    )
+  ).data
 }
 
 /**

@@ -16,7 +16,7 @@ const promptConfirm = question =>
       }
     ]
 
-    return prompt.get(promptProperties, function(err, received) {
+    return prompt.get(promptProperties, function (err, received) {
       console.log()
       if (err) {
         reject(new Error(colorize.red(`prompt: ${err}`)))
