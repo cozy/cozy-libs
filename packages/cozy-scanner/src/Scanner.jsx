@@ -135,7 +135,10 @@ class Scanner extends React.Component {
             return await this.onUpload(imageURI, qualification, filename)
           }}
           dismissAction={() => {
-            window.navigator.camera.cleanup(() => {}, () => {})
+            window.navigator.camera.cleanup(
+              () => {},
+              () => {}
+            )
             this.setState({ shouldShowScannerQualification: false })
           }}
         />

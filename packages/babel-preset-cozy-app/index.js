@@ -85,13 +85,8 @@ const mkConfig = (api, options) => {
     merge(presetOptions, ...libConfigs)
   }
 
-  const {
-    node,
-    react,
-    presetEnv,
-    transformRuntime,
-    transformRegenerator
-  } = presetOptions
+  const { node, react, presetEnv, transformRuntime, transformRegenerator } =
+    presetOptions
 
   const config = {}
 

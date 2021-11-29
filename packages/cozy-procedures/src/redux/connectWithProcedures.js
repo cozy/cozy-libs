@@ -8,11 +8,9 @@ const connectWithProcedures = (
   mergeProps = null,
   otherOptions = {}
 ) =>
-  connect(
-    mapStateToProps,
-    mapDispatchToProps,
-    mergeProps,
-    { ...otherOptions, context }
-  )
+  connect(mapStateToProps, mapDispatchToProps, mergeProps, {
+    ...otherOptions,
+    context
+  })
 
 export default connectWithProcedures

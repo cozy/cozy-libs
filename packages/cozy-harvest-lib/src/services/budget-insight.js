@@ -421,8 +421,9 @@ export const setSync = async ({
   createTemporaryToken: createTemporaryTokenOpt,
   setBIConnectionSyncStatus: setBIConnectionSyncStatusOpt
 }) => {
-  const { code: temporaryToken, ...config } = await (createTemporaryTokenOpt ||
-    createTemporaryToken)({
+  const { code: temporaryToken, ...config } = await (
+    createTemporaryTokenOpt || createTemporaryToken
+  )({
     client,
     konnector,
     account

@@ -31,7 +31,8 @@ export const withTracker = Component => {
       </TrackingContext.Consumer>
     )
   }
-  Wrapped.displayName = `withTracker(${Component.name ||
-    Component.displayName})`
+  Wrapped.displayName = `withTracker(${
+    Component.name || Component.displayName
+  })`
   return Wrapped
 }

@@ -27,7 +27,7 @@ export const mergeDocsFromStoreAndTemplate = (
 ) => {
   let sorted = {}
   Object.keys(documentsTemplate)
-    .sort(function(a, b) {
+    .sort(function (a, b) {
       return documentsTemplate[a].order - documentsTemplate[b].order
     })
     .forEach(key => {
@@ -64,9 +64,8 @@ class Documents extends React.Component {
           <CompletedFromDriveStatus />
           {Object.keys(populatedTemplateDocsWithFiles).map(
             (categoryId, index) => {
-              const { files, count } = populatedTemplateDocsWithFiles[
-                categoryId
-              ]
+              const { files, count } =
+                populatedTemplateDocsWithFiles[categoryId]
               const filesStatusByCategory = filesStatus[categoryId]
               return (
                 <section key={index}>

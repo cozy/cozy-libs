@@ -242,13 +242,8 @@ export class SelectServer extends Component {
   }
 
   render() {
-    const {
-      value,
-      error,
-      fetching,
-      isCustomDomain,
-      placeholderValue
-    } = this.state
+    const { value, error, fetching, isCustomDomain, placeholderValue } =
+      this.state
     const {
       t,
       previousStep,

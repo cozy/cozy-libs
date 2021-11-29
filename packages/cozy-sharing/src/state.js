@@ -68,9 +68,11 @@ export const revokeSharingLink = permissions => ({
   permissions
 })
 export const receivePaths = paths => ({ type: RECEIVE_PATHS, paths })
-export const matchingInstanceName = (instanceUri = '') => shareMember =>
-  shareMember.instance &&
-  shareMember.instance.toString().toLowerCase() === instanceUri.toLowerCase()
+export const matchingInstanceName =
+  (instanceUri = '') =>
+  shareMember =>
+    shareMember.instance &&
+    shareMember.instance.toString().toLowerCase() === instanceUri.toLowerCase()
 
 // reducers
 const byIdInitialState = { sharings: [], permissions: [] }

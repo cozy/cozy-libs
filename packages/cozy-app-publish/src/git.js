@@ -2,6 +2,7 @@ const spawn = require('child_process').spawn
 const logger = require('./utils/logger')
 
 const launchCmd = (cmd, params, options) => {
+  // eslint-disable-next-line no-async-promise-executor
   return new Promise(async (resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
@@ -37,10 +38,7 @@ const getCurrentTags = async () => {
       logger.info('No tags')
       return []
     }
-    const gitTags = result.stdout
-      .join('')
-      .split('\n')
-      .filter(Boolean)
+    const gitTags = result.stdout.join('').split('\n').filter(Boolean)
 
     logger.info('Current tags: ', gitTags.join(', '))
     return gitTags

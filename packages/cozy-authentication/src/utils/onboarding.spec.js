@@ -140,17 +140,13 @@ describe('generateURI', () => {
   })
 
   it('should generate state/secret and save them locally', async () => {
-    const {
-      state: stateBefore,
-      secret: secretBefore
-    } = await localStateSecret.read()
+    const { state: stateBefore, secret: secretBefore } =
+      await localStateSecret.read()
     expect(stateBefore).toBeNull()
     expect(secretBefore).toBeNull()
     await onboarding.generateOnboardingQueryPart(options)
-    const {
-      state: stateAfter,
-      secret: secretAfter
-    } = await localStateSecret.read()
+    const { state: stateAfter, secret: secretAfter } =
+      await localStateSecret.read()
     expect(stateAfter).not.toBeNull()
     expect(secretAfter).not.toBeNull()
   })

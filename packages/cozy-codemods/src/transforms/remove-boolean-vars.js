@@ -1,6 +1,6 @@
 const { removeBooleanVars, simplifyConditions, imports } = require('..')
 
-module.exports = function(file, api) {
+module.exports = function (file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 

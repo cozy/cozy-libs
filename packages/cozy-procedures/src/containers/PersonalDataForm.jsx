@@ -10,6 +10,7 @@ const mapDispatchToProps = dispatch => ({
   updateFormData: value => dispatch(update(value))
 })
 
-export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
-  PersonalDataForm
-)
+export default connectWithProcedures(
+  mapStateToProps,
+  mapDispatchToProps
+)(PersonalDataForm)

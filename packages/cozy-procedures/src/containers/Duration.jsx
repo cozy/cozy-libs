@@ -15,6 +15,7 @@ const mapDispatchToProps = {
   updateDuration
 }
 
-export default connectWithProcedures(mapStateToProps, mapDispatchToProps)(
-  Duration
-)
+export default connectWithProcedures(
+  mapStateToProps,
+  mapDispatchToProps
+)(Duration)

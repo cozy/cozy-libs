@@ -12,7 +12,7 @@ module.exports = {
   rules: Object.assign({}, basics.rules, {
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn',
+    'react-hooks/exhaustive-deps': 'warn'
   }),
   overrides: [
     {
@@ -20,19 +20,19 @@ module.exports = {
         'eslint:recommended',
         'plugin:@typescript-eslint/eslint-recommended',
         'plugin:@typescript-eslint/recommended',
-        'plugin:@typescript-eslint/recommended-requiring-type-checking',
+        'plugin:@typescript-eslint/recommended-requiring-type-checking'
       ],
 
       files: ['**/*.ts', '**/*.tsx'],
       parser: '@typescript-eslint/parser',
       parserOptions: {
-        project: ['./.tsconfig.json'],
+        project: ['./.tsconfig.json']
       },
       plugins: ['@typescript-eslint'],
       rules: {
         '@typescript-eslint/no-explicit-any': 'error',
-        '@typescript-eslint/explicit-function-return-type': 'error',
-      },
-    },
-  ],
+        '@typescript-eslint/explicit-function-return-type': 'error'
+      }
+    }
+  ]
 }

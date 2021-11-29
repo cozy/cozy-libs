@@ -13,6 +13,7 @@ describe('banking reconciliator', () => {
       .mockImplementation(() => Promise.resolve(existingAccounts))
     Document.createOrUpdate = jest
       .fn()
+      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       .mockImplementation(attrs => Promise.resolve({ ...attrs, _id: _id++ }))
     BankTransaction.fetchAll = jest
       .fn()
