@@ -28,6 +28,7 @@ import logger from '../logger'
 
 const DECOUPLED_ERROR = 'decoupled'
 const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
+const TEMP_TOKEN_TIMOUT_S = 60
 
 const getBIConnectionIdFromAccount = account =>
   get(account, 'data.auth.bi.connId')
@@ -86,7 +87,7 @@ const createTemporaryToken = async ({ client, konnector, account }) => {
     client,
     jobResponse.data.attributes,
     'result',
-    30 * 1000
+    TEMP_TOKEN_TIMOUT_S * 1000
   )
   return event.data.result
 }
