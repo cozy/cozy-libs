@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.14.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.3...cozy-harvest-lib@6.14.4) (2021-11-30)
+
+
+### Bug Fixes
+
+* Change timeout to get BI temporary token ([9dda46f](https://github.com/cozy/cozy-libs/commit/9dda46f))
+
+
+
+
+
 ## [6.14.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.2...cozy-harvest-lib@6.14.3) (2021-11-24)
 
 **Note:** Version bump only for package cozy-harvest-lib
