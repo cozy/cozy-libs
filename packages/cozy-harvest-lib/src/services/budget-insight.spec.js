@@ -321,7 +321,7 @@ describe('createOrUpdateBIConnection', () => {
         _id: 'job-id-1337'
       },
       'result',
-      30000
+      60000
     )
     expect(createBIConnection).toHaveBeenCalledWith(
       expect.any(Object),
@@ -350,7 +350,7 @@ describe('createOrUpdateBIConnection', () => {
         _id: 'job-id-1337'
       },
       'result',
-      30000
+      60000
     )
     expect(createBIConnection).toHaveBeenCalledWith(
       expect.any(Object),
@@ -393,7 +393,7 @@ describe('createOrUpdateBIConnection', () => {
         _id: 'job-id-1337'
       },
       'result',
-      30000
+      60000
     )
     expect(createBIConnection).not.toHaveBeenCalled()
     expect(updateBIConnection).toHaveBeenCalledWith(
@@ -440,7 +440,7 @@ describe('createOrUpdateBIConnection', () => {
         _id: 'job-id-1337'
       },
       'result',
-      30000
+      60000
     )
     expect(updateBIConnection).not.toHaveBeenCalled()
     expect(createBIConnection).toHaveBeenCalledWith(
