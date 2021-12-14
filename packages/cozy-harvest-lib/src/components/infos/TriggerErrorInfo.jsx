@@ -4,8 +4,9 @@ import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { withClient } from 'cozy-client'
 
-import { getErrorLocale } from '../../helpers/konnectors'
+import { getErrorLocale, fetchSupportMail } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
 
@@ -18,8 +19,20 @@ import Markdown from '../Markdown'
  * deals mainly with translation concerns.
  */
 export class TriggerErrorInfo extends PureComponent {
+  state = {
+    supportMail: null
+  }
+  async componentDidMount() {
+    await this.loadSupportMail()
+  }
+  async loadSupportMail() {
+    const { client } = this.props
+    const supportMail = await fetchSupportMail(client)
+    this.setState({ supportMail })
+  }
   render() {
     const { className, error, konnector, t, action } = this.props
+    const { supportMail } = this.state
     return (
       <Infos
         className={className}
@@ -30,11 +43,19 @@ export class TriggerErrorInfo extends PureComponent {
             <Typography className="u-error" variant="h6" gutterBottom>
               {getErrorLocale(error, konnector, t, 'title')}
             </Typography>
-            <Typography variant="body1" component="div">
-              <Markdown
-                source={getErrorLocale(error, konnector, t, 'description')}
-              />
-            </Typography>
+            {supportMail ? (
+              <Typography variant="body1" component="div">
+                <Markdown
+                  source={getErrorLocale(
+                    error,
+                    konnector,
+                    t,
+                    'description',
+                    supportMail
+                  )}
+                />
+              </Typography>
+            ) : null}
           </>
         }
       />
@@ -48,4 +69,4 @@ TriggerErrorInfo.proptTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default translate()(withKonnectorLocales(TriggerErrorInfo))
+export default translate()(withClient(withKonnectorLocales(TriggerErrorInfo)))

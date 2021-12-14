@@ -3,7 +3,11 @@ import has from 'lodash/has'
 import trim from 'lodash/trim'
 import { getBoundT } from '../locales'
 
+import { Q } from 'cozy-client'
+
 import * as accounts from './accounts'
+
+const DEFAULT_SUPPORT_MAIL = 'claude@cozycloud.cc'
 
 // Default name for base directory
 const DEFAULT_LOCALIZED_BASE_DIR = 'Administrative'
@@ -130,11 +134,18 @@ export class KonnectorJobError extends Error {
  * @param  {Func} suffixKey   What part of the error message should be returned, title or description
  * @return {String}           The error locale
  */
-export const getErrorLocale = (error, konnector, t, suffixKey) => {
+export const getErrorLocale = (
+  error,
+  konnector,
+  t,
+  suffixKey,
+  supportMail = DEFAULT_SUPPORT_MAIL
+) => {
   const defaultKey = 'error.job.UNKNOWN_ERROR'
   const translationVariables = {
     name: konnector.name || '',
-    link: konnector.vendor_link || ''
+    link: konnector.vendor_link || '',
+    supportMail
   }
 
   // not handled errors
@@ -156,9 +167,20 @@ export const getErrorLocale = (error, konnector, t, suffixKey) => {
   })
 }
 
-export const getErrorLocaleBound = (error, konnector, lang, suffixKey) => {
+export const fetchSupportMail = async client => {
+  const result = await client.query(Q('io.cozy.settings').getById('context'))
+  return get(result, 'data.attributes.support_address', DEFAULT_SUPPORT_MAIL)
+}
+
+export const getErrorLocaleBound = (
+  error,
+  konnector,
+  lang,
+  suffixKey,
+  supportMail
+) => {
   const t = getBoundT(lang)
-  return getErrorLocale(error, konnector, t, suffixKey)
+  return getErrorLocale(error, konnector, t, suffixKey, supportMail)
 }
 
 /**
@@ -364,5 +386,7 @@ export default {
   getLauncher,
   isRunnable,
   hasNewVersionAvailable,
-  needsFolder
+  needsFolder,
+  fetchSupportMail,
+  DEFAULT_SUPPORT_MAIL
 }

@@ -155,7 +155,7 @@
       },
       "UNKNOWN_ERROR": {
         "title": "Connection error",
-        "description": "An unknown error has occurred. You can try to update your data. If the problem persists, please contact us at [claude@cozycloud.cc](mailto:claude@cozycloud.cc)."
+        "description": "An unknown error has occurred. You can try to update your data. If the problem persists, please contact us at [%{supportMail}](mailto:%{supportMail})."
       },
       "USER_ACTION_NEEDED": {
         "title": "Action needed on the provider's website",
