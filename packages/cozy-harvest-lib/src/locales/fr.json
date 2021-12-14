@@ -155,7 +155,7 @@
       },
       "UNKNOWN_ERROR": {
         "title": "Erreur de Connexion",
-        "description": "Une erreur inconnue est survenue. Vous pouvez essayer de mettre à jour vos données. Si le problème persiste, n'hésitez pas à nous contacter via [claude@cozycloud.cc](mailto:claude@cozycloud.cc)."
+        "description": "Une erreur inconnue est survenue. Vous pouvez essayer de mettre à jour vos données. Si le problème persiste, n'hésitez pas à nous contacter via [%{supportMail}](mailto:%{supportMail})."
       },
       "USER_ACTION_NEEDED": {
         "title": "Action nécessaire chez le fournisseur",

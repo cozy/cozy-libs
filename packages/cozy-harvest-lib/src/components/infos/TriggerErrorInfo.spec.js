@@ -16,6 +16,7 @@ const fixtures = {
 const tMock = jest.fn().mockImplementation(key => key)
 
 describe('TriggerErrorInfo', () => {
+  let fakeClient
   beforeAll(() => {
     jest.spyOn(console, 'error').mockImplementation(() => {})
   })
@@ -31,7 +32,9 @@ describe('TriggerErrorInfo', () => {
   }
 
   const setup = ({ props: optionProps } = {}) => {
-    const fakeClient = {}
+    fakeClient = {
+      query: jest.fn()
+    }
     const root = render(
       <AppLike client={fakeClient}>
         <TriggerErrorInfo {...props} {...optionProps} />
@@ -52,5 +55,17 @@ describe('TriggerErrorInfo', () => {
       }
     })
     expect(root.findByText('An unknown error has occurred.')).toBeTruthy()
+  })
+
+  it('should render unknown error with configured mail support if any', () => {
+    fakeClient.query.mockResolvedValue({
+      data: { attributes: { support_address: 'test@address' } }
+    })
+    const { root } = setup({
+      props: {
+        error: new Error('Something is undefined')
+      }
+    })
+    expect(root.findByText('test@address')).toBeTruthy()
   })
 })
