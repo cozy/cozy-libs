@@ -33,7 +33,7 @@ describe('TriggerErrorInfo', () => {
 
   const setup = ({ props: optionProps } = {}) => {
     fakeClient = {
-      query: jest.fn()
+      fetchQueryAndGetFromState: jest.fn()
     }
     const root = render(
       <AppLike client={fakeClient}>
@@ -58,8 +58,8 @@ describe('TriggerErrorInfo', () => {
   })
 
   it('should render unknown error with configured mail support if any', () => {
-    fakeClient.query.mockResolvedValue({
-      data: { attributes: { support_address: 'test@address' } }
+    fakeClient.fetchQueryAndGetFromState.mockResolvedValue({
+      data: [{ attributes: { support_address: 'test@address' } }]
     })
     const { root } = setup({
       props: {
