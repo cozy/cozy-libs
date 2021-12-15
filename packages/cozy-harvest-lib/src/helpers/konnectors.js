@@ -3,7 +3,7 @@ import has from 'lodash/has'
 import trim from 'lodash/trim'
 import { getBoundT } from '../locales'
 
-import { Q } from 'cozy-client'
+import { Q, fetchPolicies } from 'cozy-client'
 
 import * as accounts from './accounts'
 
@@ -168,8 +168,14 @@ export const getErrorLocale = (
 }
 
 export const fetchSupportMail = async client => {
-  const result = await client.query(Q('io.cozy.settings').getById('context'))
-  return get(result, 'data.attributes.support_address', DEFAULT_SUPPORT_MAIL)
+  const result = await client.fetchQueryAndGetFromState({
+    definition: Q('io.cozy.settings').getById('context'),
+    options: {
+      as: 'contextSupportMail',
+      fetchPolicy: fetchPolicies.olderThan(60 * 60 * 1000)
+    }
+  })
+  return get(result, 'data[0].attributes.support_address', DEFAULT_SUPPORT_MAIL)
 }
 
 export const getErrorLocaleBound = (
