@@ -151,7 +151,7 @@
       },
       "TERMS_VERSION_MISMATCH": {
         "title": "Nouvelles CGUs à accepter",
-        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de vérifier que le service est à jour. Si l'erreur persiste, contacter nous via [contact@cozycloud.cc](mailto:contact@cozycloud.cc)."
+        "description": "Il semblerait que %{name} ait mis à jour ses Conditions Générales d'Utilisation. Merci de vérifier que le service est à jour. Si l'erreur persiste, contacter nous via [%{supportMail}](mailto:%{supportMail})."
       },
       "UNKNOWN_ERROR": {
         "title": "Erreur de Connexion",

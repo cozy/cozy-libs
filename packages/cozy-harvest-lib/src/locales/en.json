@@ -151,7 +151,7 @@
       },
       "TERMS_VERSION_MISMATCH": {
         "title": "Latest Terms of Service non accepted",
-        "description": "%{name} seems to have updated its Terms Of Service. Please check that the service is up to date. It this error still occurs, please contact us at [contact@cozycloud.cc](mailto:contact@cozycloud.cc)."
+        "description": "%{name} seems to have updated its Terms Of Service. Please check that the service is up to date. It this error still occurs, please contact us at [%{supportMail}](mailto:%{supportMail})."
       },
       "UNKNOWN_ERROR": {
         "title": "Connection error",
