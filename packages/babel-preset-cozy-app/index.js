@@ -107,7 +107,6 @@ const mkConfig = (api, options) => {
   }
 
   config.presets = [
-    require.resolve('@babel/preset-typescript'),
     [require.resolve('@babel/preset-env'), presetEnvOptions],
     // if (P)React app
     !node && react ? require.resolve('@babel/preset-react') : null
