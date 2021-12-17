@@ -3,27 +3,6 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
-# 3.0.0 (2021-12-02)
-
-
-### Features
-
-* Add confirm trusted recipients dialog ([dfe1695](https://github.com/cozy/cozy-libs/commit/dfe1695))
-* Handle Typescript files in eslint and babel configs ([fe658ed](https://github.com/cozy/cozy-libs/commit/fe658ed))
-
-
-### BREAKING CHANGES
-
-* - upgrade from eslint 5 to eslint 8
-- upgrade prettier from 1 to 2
-- you'll need to run --fix to fix lint issues after
-the upgrade. Few errors are not auto fixable, you
-can // disable-next-line if needed
-
-
-
-
-
 ## 2.1.1 (2021-09-03)
 
 
