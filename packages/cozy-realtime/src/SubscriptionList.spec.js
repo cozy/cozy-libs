@@ -182,10 +182,7 @@ describe('SubscriptionList', () => {
             type: subscriptions.updatedAlbum.type,
             id: subscriptions.updatedAlbum.id
           },
-          {
-            type: subscriptions.updated33.type,
-            id: subscriptions.updated33.id
-          }
+          { type: subscriptions.updated33.type, id: subscriptions.updated33.id }
         ])
       )
     })

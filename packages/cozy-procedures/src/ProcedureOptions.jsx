@@ -20,9 +20,8 @@ export const optionsProvider = (Component, procedureOptions) => {
       </ProcedureOptionsContext.Provider>
     )
   }
-  Wrapped.displayName = `procedureOptionsProvider(${
-    Component.displayName || Component.name
-  })`
+  Wrapped.displayName = `procedureOptionsProvider(${Component.displayName ||
+    Component.name})`
   return Wrapped
 }
 
@@ -32,8 +31,7 @@ export const optionsConsumer = Component => {
       {options => <Component {...options} {...props} />}
     </ProcedureOptionsContext.Consumer>
   )
-  Wrapped.displayName = `procedureOptionsConsumer(${
-    Component.displayName || Component.name
-  })`
+  Wrapped.displayName = `procedureOptionsConsumer(${Component.displayName ||
+    Component.name})`
   return Wrapped
 }

@@ -46,13 +46,11 @@ const fakeVault = {
   isLocked: () => Promise.resolve(true)
 }
 
-const logDebug =
-  name =>
-  (...args) =>
-    logger.debug('Connection flow emitted', name, ...args)
+const logDebug = name => (...args) =>
+  logger.debug('Connection flow emitted', name, ...args)
 
 const exitOnError = fn =>
-  async function () {
+  async function() {
     try {
       const res = await fn.apply(this, arguments)
       return res

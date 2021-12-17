@@ -10,7 +10,7 @@ describe('KonnectorIcon', () => {
     // eslint-disable-next-line no-console
     originalConsoleError = console.error
     // eslint-disable-next-line no-console
-    console.error = jest.fn(function () {
+    console.error = jest.fn(function() {
       throw new Error('console.error should not be called during tests')
     })
   })

@@ -31,9 +31,8 @@ const getMessage = options => {
   ]
     .filter(Boolean)
     .join('\n')
-  const message = `${
-    appTypeLabelMap[appType] || ''
-  } __${appSlug}__ version \`${appVersion}\` has been published${spaceMessage}.${
+  const message = `${appTypeLabelMap[appType] ||
+    ''} __${appSlug}__ version \`${appVersion}\` has been published${spaceMessage}.${
     infos.length > 0 ? '\n\n' + infos : ''
   }`
   return message

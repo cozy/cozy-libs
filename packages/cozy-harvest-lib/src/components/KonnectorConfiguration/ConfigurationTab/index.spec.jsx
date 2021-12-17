@@ -44,7 +44,7 @@ describe('ConfigurationTab', () => {
   let originalWarn
   beforeEach(() => {
     originalWarn = console.warn
-    console.warn = function (msg) {
+    console.warn = function(msg) {
       if (msg && msg.includes && msg.includes('componentWillReceiveProps')) {
         return
       }

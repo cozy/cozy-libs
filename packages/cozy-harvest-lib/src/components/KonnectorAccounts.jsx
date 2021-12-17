@@ -162,4 +162,8 @@ KonnectorAccounts.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default compose(withRouter, translate(), withClient)(KonnectorAccounts)
+export default compose(
+  withRouter,
+  translate(),
+  withClient
+)(KonnectorAccounts)

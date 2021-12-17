@@ -28,4 +28,7 @@ UploadInputLabel.propTypes = {
   t: PropTypes.func.isRequired,
   breakpoints: PropTypes.object.isRequired
 }
-export default flow(translate(), withBreakpoints())(UploadInputLabel)
+export default flow(
+  translate(),
+  withBreakpoints()
+)(UploadInputLabel)

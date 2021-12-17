@@ -126,8 +126,9 @@ const ShareDialogTwoStepsConfirmationContainer = ({
     shouldGetRecipientsToBeConfirmed ? 'loading' : 'sharing'
   )
   const [recipientsToBeConfirmed, setRecipientsToBeConfirmed] = useSafeState([])
-  const [recipientConfirmationData, setRecipientConfirmationData] =
-    useState(undefined)
+  const [recipientConfirmationData, setRecipientConfirmationData] = useState(
+    undefined
+  )
 
   const {
     confirmRecipient,
@@ -140,8 +141,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
       setStatus('loading')
 
       try {
-        const result =
-          await twoStepsConfirmationMethods.getRecipientsToBeConfirmed()
+        const result = await twoStepsConfirmationMethods.getRecipientsToBeConfirmed()
 
         setRecipientsToBeConfirmed(result)
         setStatus('sharing')

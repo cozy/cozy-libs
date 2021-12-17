@@ -179,7 +179,6 @@ const normalizeAccount = account => {
     account.iban
   )
   return {
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
     ...account,
     rawNumber: account.number,
     number: normalizedAccountNumber
@@ -266,7 +265,6 @@ const matchAccounts = (fetchedAccountsArg, existingAccounts) => {
     if (matchResult) {
       const i = toMatch.indexOf(matchResult.match)
       toMatch.splice(i, 1)
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       results.push({ account: fetchedAccount, ...matchResult })
     } else {
       results.push({ account: fetchedAccount })

@@ -167,7 +167,10 @@ describe('AccountForm', () => {
 
   describe('Submit Button', () => {
     const getButtonDisabledValue = wrapper =>
-      wrapper.dive().find('DefaultButton').props().disabled
+      wrapper
+        .dive()
+        .find('DefaultButton')
+        .props().disabled
 
     const assertButtonDisabled = wrapper =>
       expect(getButtonDisabledValue(wrapper)).toBe(true)
@@ -255,7 +258,10 @@ describe('AccountForm', () => {
     const { wrapper } = setup({
       konnector: fixtures.konnectorWithOptionalFields
     })
-    wrapper.dive().find('DefaultButton').simulate('click')
+    wrapper
+      .dive()
+      .find('DefaultButton')
+      .simulate('click')
 
     expect(onSubmit).toHaveBeenCalled()
   })

@@ -43,7 +43,7 @@ import {
   getAccountOwners
 } from './bankAccountHelpers'
 
-const EditContractContactPicker = function (props, ref) {
+const EditContractContactPicker = function(props, ref) {
   const { t } = useI18n()
   return (
     <BaseContactPicker

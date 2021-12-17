@@ -69,9 +69,9 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
                 style={inlineStyle}
               >
                 {t(
-                  `card.launchTrigger.frequency.${
-                    triggers.getFrequency(trigger) || 'undefined'
-                  }`
+                  `card.launchTrigger.frequency.${triggers.getFrequency(
+                    trigger
+                  ) || 'undefined'}`
                 )}
               </Typography>
             </li>

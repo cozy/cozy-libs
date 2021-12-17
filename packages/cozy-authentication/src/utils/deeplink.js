@@ -1,4 +1,3 @@
-// eslint-disable-next-line no-redeclare
 /* global window */
 
 const saveDeeplink = url => {

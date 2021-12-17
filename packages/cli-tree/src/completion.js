@@ -56,7 +56,11 @@ async function completionHandler(commands = {}) {
 
   const command = findCommand(
     { _main: commands },
-    '_main ' + env.line.split(' ').slice(1).join(' ')
+    '_main ' +
+      env.line
+        .split(' ')
+        .slice(1)
+        .join(' ')
   )
   if (!command) process.exit(1)
 

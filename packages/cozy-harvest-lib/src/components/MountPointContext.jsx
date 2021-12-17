@@ -46,9 +46,8 @@ const withMountPointPushHistory = BaseComponent => {
     return <BaseComponent pushHistory={pushHistory} {...props} />
   }
 
-  Component.displayName = `withMountPointPushHistory(${
-    BaseComponent.displayName || BaseComponent.name
-  })`
+  Component.displayName = `withMountPointPushHistory(${BaseComponent.displayName ||
+    BaseComponent.name})`
 
   return Component
 }

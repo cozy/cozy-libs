@@ -21,17 +21,17 @@ export const useFlowState = flow => {
  * - With every update of the ConnectionFlow instance, the wrapped component will be
  * re-rendered with a [statePropName] prop.
  */
-const withConnectionFlow =
-  ({ flowPropName = 'flow', statePropName = 'flowState' } = {}) =>
-  Wrapped => {
-    const Wrapper = props => {
-      const flowState = useFlowState(props[flowPropName])
-      return <Wrapped {...props} {...{ [statePropName]: flowState }} />
-    }
-    Wrapper.displayName = `withConnectionFlow(${
-      Wrapped.displayName || Wrapped.name
-    })`
-    return Wrapper
+const withConnectionFlow = ({
+  flowPropName = 'flow',
+  statePropName = 'flowState'
+} = {}) => Wrapped => {
+  const Wrapper = props => {
+    const flowState = useFlowState(props[flowPropName])
+    return <Wrapped {...props} {...{ [statePropName]: flowState }} />
   }
+  Wrapper.displayName = `withConnectionFlow(${Wrapped.displayName ||
+    Wrapped.name})`
+  return Wrapper
+}
 
 export default withConnectionFlow

@@ -10,7 +10,7 @@ describe('[Interapp] helpers', () => {
     const url = 'test'
     const data = {
       params: 'ok',
-      unnusedFunction: function (p) {
+      unnusedFunction: function(p) {
         return p
       }
     }

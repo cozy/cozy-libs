@@ -28,12 +28,14 @@ parser.addArgument('--token', {
 })
 parser.addArgument('--space', {
   metavar: 'space-name',
-  help: 'Registry space name to publish the application to (default __default__)'
+  help:
+    'Registry space name to publish the application to (default __default__)'
 })
 parser.addArgument('--build-dir', {
   metavar: 'relative-path',
   dest: 'buildDir',
-  help: 'Path of the build directory relative to the current directory (default ./build)'
+  help:
+    'Path of the build directory relative to the current directory (default ./build)'
 })
 parser.addArgument('--build-url', {
   metavar: 'url',
@@ -48,20 +50,24 @@ parser.addArgument('--build-commit', {
 parser.addArgument('--manual-version', {
   metavar: 'version',
   dest: 'manualVersion',
-  help: 'Specify a version manually (must not be already published in the registry)'
+  help:
+    'Specify a version manually (must not be already published in the registry)'
 })
 parser.addArgument('--prepublish', {
   metavar: 'script-path',
-  help: 'Hook to process parameters just before publishing, typically to upload archive on custom host'
+  help:
+    'Hook to process parameters just before publishing, typically to upload archive on custom host'
 })
 parser.addArgument('--postpublish', {
   metavar: 'script-path',
-  help: 'Hook to process parameters just after publishing, typically to deploy app'
+  help:
+    'Hook to process parameters just after publishing, typically to deploy app'
 })
 parser.addArgument('--tag-prefix', {
   metavar: 'tag-prefix',
   dest: 'tagPrefix',
-  help: 'When publishing from a monorepo, only consider tags with tagPrefix, ex: cozy-banks/1.0.1.'
+  help:
+    'When publishing from a monorepo, only consider tags with tagPrefix, ex: cozy-banks/1.0.1.'
 })
 parser.addArgument('--registry-url', {
   metavar: 'url',

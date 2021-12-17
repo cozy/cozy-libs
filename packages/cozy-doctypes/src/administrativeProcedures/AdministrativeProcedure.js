@@ -59,7 +59,6 @@ class AdministrativeProcedure extends Document {
     const cozyRules = {
       trashed: false,
       type: 'file',
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       ...rules
     }
     // Create an index in order to query and sort

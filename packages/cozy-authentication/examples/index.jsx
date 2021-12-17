@@ -22,7 +22,7 @@ const client = new CozyClient({
   links: [
     new CozyStackClient(),
     {
-      onLogin: async function () {
+      onLogin: async function() {
         await sleep(2000) // So that we can see the logging in view
       }
     }

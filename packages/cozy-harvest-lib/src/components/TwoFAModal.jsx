@@ -152,4 +152,8 @@ TwoFAModal.propTypes = {
   flow: PropTypes.object.isRequired
 }
 
-export default compose(withLocales, translate(), withBreakpoints())(TwoFAModal)
+export default compose(
+  withLocales,
+  translate(),
+  withBreakpoints()
+)(TwoFAModal)

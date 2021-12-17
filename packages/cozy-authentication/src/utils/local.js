@@ -4,7 +4,9 @@ const ONBOARDING_SECRET_KEY = 'onboarding_secret'
 const ONBOARDING_STATE = 'onboarding_state'
 
 const generateRandomString = () => {
-  return Math.random().toString(36).substr(2, 11)
+  return Math.random()
+    .toString(36)
+    .substr(2, 11)
 }
 
 export const read = async () => {

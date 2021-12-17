@@ -144,8 +144,9 @@ const removeUnused = root => {
     if (importDeclaration.value.specifiers.length === 0) return false
 
     const hadUnusedDefaultImport = removeUnusedDefaultImport(importDeclaration)
-    const hadUnusedNonDefaultImports =
-      removeUnusedNonDefaultImports(importDeclaration)
+    const hadUnusedNonDefaultImports = removeUnusedNonDefaultImports(
+      importDeclaration
+    )
 
     if (importDeclaration.value.specifiers.length === 0) {
       j(importDeclaration).remove()

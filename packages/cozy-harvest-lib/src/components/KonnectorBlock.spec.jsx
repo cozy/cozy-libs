@@ -36,7 +36,8 @@ describe('KonnectorBlock', () => {
   it('should show konnector title and its link, also customer account and its link', async () => {
     fetchKonnectorData.mockResolvedValue({
       name: 'Pajemploi',
-      link: 'https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Faccounts%2F012345',
+      link:
+        'https://links.mycozy.cloud/home/connected/pajemploi/accounts/012345?fallback=http%3A%2F%2Fcozy-home.tools%3A8080%2F%23%2Fconnected%2Fpajemploi%2Faccounts%2F012345',
       vendorLink: {
         component: 'a',
         href: 'https://www.pajemploi.urssaf.fr/',

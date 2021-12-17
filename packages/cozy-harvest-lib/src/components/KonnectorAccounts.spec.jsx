@@ -8,7 +8,7 @@ import { fetchTrigger } from '../../src/connections/triggers'
 jest.mock(
   'cozy-realtime',
   () =>
-    function () {
+    function() {
       return {
         subscribe: jest.fn(),
         unsubscribe: jest.fn()

@@ -64,7 +64,6 @@ describe('Document', () => {
     })
     expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
     expect(cozyClientJS.data.updateAttributes).toHaveBeenCalledTimes(0)
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
     queryResult = [{ _id: 5, ...marge }]
     await Simpson.createOrUpdate(marge)
     expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
@@ -155,10 +154,7 @@ describe('Document', () => {
       class AB extends Document {}
       AB.idAttributes = ['a', 'b']
       const dups = AB.findDuplicates(data)
-      expect(dups).toEqual([
-        { a: 1, b: 1, c: 5 },
-        { a: 3, b: 5, c: 7 }
-      ])
+      expect(dups).toEqual([{ a: 1, b: 1, c: 5 }, { a: 3, b: 5, c: 7 }])
     })
 
     it('should find duplicates with complex id attributes', () => {
@@ -220,11 +216,7 @@ describe('Document', () => {
       })
       .mockImplementationOnce((method, doctype, data) =>
         Promise.resolve(
-          data.docs.map(doc => ({
-            id: doc._id,
-            _rev: Math.random(),
-            ok: true
-          }))
+          data.docs.map(doc => ({ id: doc._id, _rev: Math.random(), ok: true }))
         )
       )
 
@@ -776,7 +768,6 @@ describe('bulk save', () => {
     class Todo extends Document {}
     jest
       .spyOn(Todo, 'createOrUpdate')
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       .mockImplementation(doc => ({ ...doc, rev: 1 }))
     const newTodos = await Todo.bulkSave(todos)
     expect(newTodos).toEqual([
@@ -793,7 +784,6 @@ describe('bulk save', () => {
       if (doc.id === 2) {
         throw new Error('409: conflict')
       }
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
       return { ...doc, rev: 1 }
     })
     const onCreateOrUpdateError = jest.fn(error => {

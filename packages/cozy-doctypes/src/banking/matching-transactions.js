@@ -8,7 +8,7 @@ const getDateTransaction = op => op.date.substr(0, 10)
  * Groups `iterables` via `grouper` and returns an iterator
  * that yields [groupKey, groups]
  */
-const zipGroup = function* (iterables, grouper) {
+const zipGroup = function*(iterables, grouper) {
   const grouped = iterables.map(items => groupBy(items, grouper))
   for (const key of Object.keys(grouped[0]).sort()) {
     const groups = grouped.map(keyedGroups => keyedGroups[key] || [])
@@ -144,7 +144,7 @@ const matchTransaction = (newTr, existingTrs, options = {}) => {
  * Logic to match a transaction and removing it from the transactions to
  * match. `matchingFn` is the function used for matching.
  */
-const matchTransactionToGroup = function* (newTrs, existingTrs, options = {}) {
+const matchTransactionToGroup = function*(newTrs, existingTrs, options = {}) {
   const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
   for (let newTr of newTrs) {
     const res = {
@@ -172,7 +172,7 @@ const matchTransactionToGroup = function* (newTrs, existingTrs, options = {}) {
  * Then relax the date constraint 1 day per 1 day to reach
  * a maximum of 5 days of differences
  */
-const matchTransactions = function* (newTrs, existingTrs) {
+const matchTransactions = function*(newTrs, existingTrs) {
   const unmatchedNew = new Set(newTrs)
   const unmatchedExisting = new Set(existingTrs)
   // eslint-disable-next-line no-unused-vars

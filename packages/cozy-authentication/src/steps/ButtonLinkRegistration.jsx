@@ -23,9 +23,8 @@ export class ButtonLinkRegistration extends Component {
     const oauthOptions = await generateOnboardingQueryPart(
       this.props.client.options.oauth
     )
-    const url = `${ButtonLinkRegistration.getManagerUrl()}${
-      getPlatform() || 'browser'
-    }&onboarding=${oauthOptions}`
+    const url = `${ButtonLinkRegistration.getManagerUrl()}${getPlatform() ||
+      'browser'}&onboarding=${oauthOptions}`
     this.setState({ url })
     return url
   }

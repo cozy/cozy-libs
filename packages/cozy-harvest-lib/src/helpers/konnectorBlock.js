@@ -43,7 +43,6 @@ const formatKonnector = ({
 // TODO should be in cozy-client as a new method of client
 // see https://github.com/cozy/cozy-client/issues/867#issuecomment-773907266
 const fetchDataFromState = async (client, query) => {
-  // eslint-disable-next-line no-useless-catch
   try {
     await client.query(query.definition, query.options)
     const { data } = client.getQueryFromState(query.options.as)

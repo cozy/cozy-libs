@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const Document = require('./Document')
 const pickBy = require('lodash/pickBy')
 const get = require('lodash/get')

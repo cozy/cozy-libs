@@ -122,7 +122,8 @@ const main = async () => {
         {
           argument: 'rest',
           nargs: '*',
-          help: 'Pass jscodeshift args after --: cozy-codemods run apply-flag -- --ignore-pattern=src/ignored src'
+          help:
+            'Pass jscodeshift args after --: cozy-codemods run apply-flag -- --ignore-pattern=src/ignored src'
         }
       ],
       handler: runHandler

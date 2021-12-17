@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const omit = require('lodash/omit')
 const pick = require('lodash/pick')
 const size = require('lodash/size')
@@ -650,7 +649,7 @@ class Document {
 Document.defaultDuplicateHandling = 'throw'
 
 Document.duplicateHandlingStrategies = {
-  throw: function (duplicates, selector) {
+  throw: function(duplicates, selector) {
     throw new Error(
       'Create or update with selectors that returns more than 1 result\n' +
         JSON.stringify(selector) +
@@ -659,7 +658,7 @@ Document.duplicateHandlingStrategies = {
     )
   },
 
-  remove: async function (duplicates) {
+  remove: async function(duplicates) {
     const docsToRemove = duplicates.slice(1)
     if (docsToRemove.length > 0) {
       log(

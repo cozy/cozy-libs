@@ -7,8 +7,12 @@ export const SharingBanner = ({ sharingInfos }) => {
   const [isOpened, setIsOpened] = useState(true)
   const onClose = useCallback(() => setIsOpened(false), [setIsOpened])
 
-  const { loading, discoveryLink, sharing, isSharingShortcutCreated } =
-    sharingInfos
+  const {
+    loading,
+    discoveryLink,
+    sharing,
+    isSharingShortcutCreated
+  } = sharingInfos
 
   if (loading) return null
   return (

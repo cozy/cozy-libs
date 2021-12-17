@@ -20,7 +20,6 @@ class BankAccount extends Document {
           : `${matching.account.label} did not match with an existing account`
       )
       return {
-        // eslint-disable-next-line node/no-unsupported-features/es-syntax
         ...matching.account,
         relationships: merge(
           {},

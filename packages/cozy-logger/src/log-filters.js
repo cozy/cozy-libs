@@ -10,13 +10,13 @@ const levels = {
 
 const Secret = require('./Secret')
 
-const filterSecrets = function (level, type, message) {
+const filterSecrets = function(level, type, message) {
   if (type !== 'secret' && message instanceof Secret) {
     throw new Error('You should log a secret with log.secret')
   }
 }
 
-const filterLevel = function (level, type) {
+const filterLevel = function(level, type) {
   return levels[type] >= levels[level]
 }
 
