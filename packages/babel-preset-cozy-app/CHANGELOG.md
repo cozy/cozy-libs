@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@2.0.0...babel-preset-cozy-app@2.0.1) (2021-12-20)
+
+
+### Bug Fixes
+
+* Downgrade babel-core in babel-preset ([5456544](https://github.com/cozy/cozy-libs/commit/5456544))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@1.12.0...babel-preset-cozy-app@2.0.0) (2021-12-02)
 
 
