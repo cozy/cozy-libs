@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.6...cozy-harvest-lib@6.15.0) (2021-12-20)
+
+
+### Features
+
+* Also use supportMail for TERMS_VERSION_MISMATCH error ([986cd33](https://github.com/cozy/cozy-libs/commit/986cd33))
+* Use configured support address in UNKNOWN_ERROR message ([1470f03](https://github.com/cozy/cozy-libs/commit/1470f03))
+* Use fetchQueryAndGetFromState ([bd4c497](https://github.com/cozy/cozy-libs/commit/bd4c497))
+
+
+
+
+
 ## [6.14.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@6.14.5...cozy-harvest-lib@6.14.6) (2021-12-20)
 
 **Note:** Version bump only for package cozy-harvest-lib
