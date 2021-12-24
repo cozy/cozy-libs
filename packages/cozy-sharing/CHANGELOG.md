@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.7](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.12.6...cozy-sharing@3.12.7) (2021-12-24)
+
+
+### Bug Fixes
+
+* **sharing:** typo in fr language when sending email ([59e0266](https://github.com/cozy/cozy-libs/commit/59e0266))
+
+
+
+
+
 ## [3.12.6](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.12.5...cozy-sharing@3.12.6) (2021-12-20)
 
 **Note:** Version bump only for package cozy-sharing
