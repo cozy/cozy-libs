@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.13.2...cozy-device-helper@1.14.0) (2021-12-28)
+
+
+### Features
+
+* Add a check for flagship app in device-helper ([20d6d99](https://github.com/cozy/cozy-libs/commit/20d6d99))
+
+
+
+
+
 ## [1.13.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.13.1...cozy-device-helper@1.13.2) (2021-12-20)
 
 **Note:** Version bump only for package cozy-device-helper
