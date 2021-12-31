@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [3.12.9](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.12.8...cozy-sharing@3.12.9) (2021-12-31)
+
+
+### Bug Fixes
+
+* **sharing:** ShareButton should not pass I18n props to Cozy-UI Button ([587cd2e](https://github.com/cozy/cozy-libs/commit/587cd2e))
+
+
+
+
+
 ## [3.12.8](https://github.com/cozy/cozy-libs/compare/cozy-sharing@3.12.7...cozy-sharing@3.12.8) (2021-12-28)
 
 **Note:** Version bump only for package cozy-sharing
