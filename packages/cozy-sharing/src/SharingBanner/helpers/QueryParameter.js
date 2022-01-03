@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 const arrToObj = (obj = {}, [key, val = true]) => {
   obj[key] = decodeURIComponent(val)
   return obj

@@ -12,7 +12,7 @@ import { CozyFile } from 'cozy-doctypes'
 export const doUpload = async (
   imageURI,
   qualification,
-  name = '',
+  name = '', // eslint-disable-line default-param-last
   dirId,
   onConflict,
   contentType

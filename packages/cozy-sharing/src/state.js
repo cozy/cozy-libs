@@ -1,3 +1,4 @@
+/* eslint-disable default-param-last */
 import get from 'lodash/get'
 
 const RECEIVE_SHARINGS = 'RECEIVE_SHARINGS'
