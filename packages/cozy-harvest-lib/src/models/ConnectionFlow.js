@@ -255,6 +255,7 @@ export class ConnectionFlow {
       this.jobWatcher.disableSuccessTimer()
     }
 
+    // eslint-disable-next-line promise/param-names
     return new Promise(rawResolve => {
       const accountId = this.account._id
       assert(accountId, 'Cannot wait for two fa on account without id')
