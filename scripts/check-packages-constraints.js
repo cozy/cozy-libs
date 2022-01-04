@@ -3,9 +3,8 @@
 const fs = require('fs')
 const path = require('path')
 
-const readJsonSync = filename => {
-  return JSON.parse(fs.readFileSync(filename).toString())
-}
+const readJsonSync = filename =>
+  JSON.parse(fs.readFileSync(filename).toString())
 
 /* Ensures dependencies are updated for the all workspaces */
 const uniqueVersion = function () {
@@ -33,7 +32,7 @@ const depKeyIs = depKeyOpt =>
         message: `${pkgName} should not be in ${depKey}`
       }
     }
-    if (typeof depKeyOpt == 'object' && depKeyOpt.length) {
+    if (typeof depKeyOpt === 'object' && depKeyOpt.length) {
       if (depKeyOpt.indexOf(depKey) === -1) {
         yield {
           level: 'warn',
@@ -49,12 +48,9 @@ const shouldNotBeUsed = () =>
     yield { level: 'warn', message: `${pkgName} should not be used` }
   }
 
-const isBabelDevPackage = dep => {
-  return (
-    (dep.startsWith('@babel') || dep.startsWith('babel')) &&
-    dep !== '@babel/runtime'
-  )
-}
+const isBabelDevPackage = dep =>
+  (dep.startsWith('@babel') || dep.startsWith('babel')) &&
+  dep !== '@babel/runtime'
 
 const isPkg = pkgName => pkgName2 => pkgName === pkgName2
 
@@ -125,7 +121,7 @@ const constraints = [
 /* Reads all the package.json and log warnings when constraints are not met */
 const main = async () => {
   const packages = fs.readdirSync('packages')
-  for (let pkgName of packages) {
+  for (const pkgName of packages) {
     const pkgJson = readJsonSync(path.join('packages', pkgName, 'package.json'))
     if (!pkgJson.devDependencies) {
       continue
@@ -133,7 +129,7 @@ const main = async () => {
     if (pkgJson.private) {
       continue
     }
-    for (let depKey of [
+    for (const depKey of [
       'dependencies',
       'devDependencies',
       'peerDependencies'
@@ -142,12 +138,12 @@ const main = async () => {
         continue
       }
       const deps = Object.keys(pkgJson[depKey])
-      for (let dep of deps) {
-        for (let [pred, checks] of constraints) {
+      for (const dep of deps) {
+        for (const [pred, checks] of constraints) {
           if (!pred(dep)) {
             continue
           }
-          for (let c of checks) {
+          for (const c of checks) {
             const results = Array.from(
               c({
                 pkgName: dep,
@@ -156,7 +152,7 @@ const main = async () => {
                 pkgJson
               })
             )
-            for (let result of results) {
+            for (const result of results) {
               console.log(`[${result.level}] ${pkgName}: ${result.message}`)
             }
           }

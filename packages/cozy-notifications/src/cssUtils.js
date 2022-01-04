@@ -2,15 +2,13 @@ import fromPairs from 'lodash/fromPairs'
 import mapValues from 'lodash/mapValues'
 import uiPalette from 'cozy-ui/stylus/settings/palette.styl'
 
-const resolveCSSPropertiesInMapping = cssMapping => {
-  return mapValues(cssMapping, value => {
+const resolveCSSPropertiesInMapping = cssMapping =>
+  mapValues(cssMapping, value => {
     if (value.startsWith('var(')) {
       return cssMapping[value.slice(4, -1)]
-    } else {
-      return value
     }
+    return value
   })
-}
 
 /**
  * Crude way to extract a mapping of CSS props to their values.
@@ -46,7 +44,7 @@ const resolveCSSProperties = (cssContent, props) => {
     ...props
   }
   const resolvedProps = resolveCSSPropertiesInMapping(allProps)
-  return cssContent.replace(/var\((--.*)\)/g, function (all, varName) {
+  return cssContent.replace(/var\((--.*)\)/g, (all, varName) => {
     if (!resolvedProps[varName]) {
       throw new Error(
         `Could not find var(${varName}). Available vars: ${Object.keys(

@@ -1,9 +1,8 @@
 import get from 'lodash/get'
 import * as localStateSecret from './local'
 
-export const checkIfOnboardingLogin = onboardingInformations => {
-  return get(onboardingInformations, 'code')
-}
+export const checkIfOnboardingLogin = onboardingInformations =>
+  get(onboardingInformations, 'code')
 
 export const generateOnboardingQueryPart = async ({
   clientName,
@@ -29,8 +28,8 @@ export const generateOnboardingQueryPart = async ({
     onboarding: {
       app: softwareID,
       permissions: scope,
-      secret: secret,
-      state: state
+      secret,
+      state
     }
   }
 

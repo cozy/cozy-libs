@@ -1,4 +1,5 @@
 import deeplink from './deeplink'
+
 describe('deeplink', () => {
   const appInfo = {
     protocol: 'cozyfake://',

@@ -9,17 +9,15 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
  *
  * Using touchEnd, seems to fix the issue on mobile device (Android & iOS)
  */
-const CreateAccount = translate()(({ createAction, t }) => {
-  return (
-    <Button
-      subtle
-      size={'small'}
-      className={'u-m-half'}
-      onClick={createAction}
-      onTouchEnd={createAction}
-      label={t('modal.addAccount.button')}
-    />
-  )
-})
+const CreateAccount = translate()(({ createAction, t }) => (
+  <Button
+    subtle
+    size="small"
+    className="u-m-half"
+    onClick={createAction}
+    onTouchEnd={createAction}
+    label={t('modal.addAccount.button')}
+  />
+))
 
 export default CreateAccount

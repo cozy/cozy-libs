@@ -1,8 +1,6 @@
 const { hocToHookReplacer } = require('../hoc')
 
-const isClientProp = prop => {
-  return prop.key && prop.key.name === 'client'
-}
+const isClientProp = prop => prop.key && prop.key.name === 'client'
 
 const findClientProps = objPattern => {
   if (!objPattern) {

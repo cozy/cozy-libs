@@ -4,9 +4,7 @@ import get from 'lodash/get'
 import memoize from 'lodash/memoize'
 
 const memoizedFetchApp = memoize(
-  (registry, slug) => {
-    return registry.fetchApp(slug)
-  },
+  (registry, slug) => registry.fetchApp(slug),
   (registry, slug) => slug
 )
 

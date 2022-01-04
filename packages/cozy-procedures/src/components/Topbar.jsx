@@ -14,7 +14,7 @@ import {
 
 import PreviousIcon from 'cozy-ui/transpiled/react/Icons/Previous'
 
-const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {
+function Topbar({ t, title, router, breakpoints: { isMobile } }) {
   const hasCozyBar = !!cozy.bar
 
   if (isMobile && hasCozyBar) {
@@ -29,23 +29,22 @@ const Topbar = ({ t, title, router, breakpoints: { isMobile } }) => {
         </BarCenter>
       </>
     )
-  } else {
-    return (
-      <div className="u-flex u-flex-items-center u-mb-2">
-        <Button
-          onClick={router.goBack}
-          className="u-mr-1"
-          theme="secondary"
-          subtle
-          icon={PreviousIcon}
-          iconOnly
-          label={t('back')}
-          extension="narrow"
-        />
-        <MainTitle>{title}</MainTitle>
-      </div>
-    )
   }
+  return (
+    <div className="u-flex u-flex-items-center u-mb-2">
+      <Button
+        onClick={router.goBack}
+        className="u-mr-1"
+        theme="secondary"
+        subtle
+        icon={PreviousIcon}
+        iconOnly
+        label={t('back')}
+        extension="narrow"
+      />
+      <MainTitle>{title}</MainTitle>
+    </div>
+  )
 }
 
 Topbar.propTypes = {

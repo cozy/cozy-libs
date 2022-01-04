@@ -6,9 +6,8 @@ import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
-import KonnectorIcon from '../KonnectorIcon'
-
 import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
+import KonnectorIcon from '../KonnectorIcon'
 
 const ReadOnlyIdentifier = props => {
   const { className, onClick, konnector, identifier, ...rest } = props

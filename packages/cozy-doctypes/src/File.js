@@ -68,11 +68,11 @@ class CozyFile extends Document {
           moved: resp.data,
           deleted: conflictResp.data.id
         }
-      } else {
-        throw e
       }
+      throw e
     }
   }
+
   /**
    * Method to split both the filename and the extension
    *
@@ -90,6 +90,7 @@ class CozyFile extends Document {
     }
     return { filename: file.name, extension: '' }
   }
+
   /**
    *
    * Method to upload a file even if a file with the same name already exists.
@@ -100,7 +101,7 @@ class CozyFile extends Document {
    */
   static async overrideFileForPath(pathArg, file, metadata) {
     let path = pathArg
-    if (!path.endsWith('/')) path = path + '/'
+    if (!path.endsWith('/')) path += '/'
 
     const filesCollection = this.cozyClient.collection('io.cozy.files')
     try {
@@ -125,6 +126,7 @@ class CozyFile extends Document {
       throw error
     }
   }
+
   /**
    * Method to generate a new filename if there is a conflict
    *
@@ -144,9 +146,8 @@ class CozyFile extends Document {
         `_${versionNumber}`
       )
       return newFilenameWithoutExtension
-    } else {
-      return `${filenameWithoutExtension}_1`
     }
+    return `${filenameWithoutExtension}_1`
   }
 
   static generateFileNameForRevision(file, revision, f) {
@@ -159,6 +160,7 @@ class CozyFile extends Document {
       'DD MMMM - HH[h]mm'
     )}${extension}`
   }
+
   /**
    * The goal of this method is to upload a file based on a conflict strategy.
    * Be careful: We need to check if the file exists by doing a statByPath query
@@ -199,23 +201,22 @@ class CozyFile extends Document {
           contentType
         })
         return resp
-      } else {
-        const { filename, extension } = CozyFile.splitFilename({
-          name,
-          type: 'file'
-        })
-        const newFileName =
-          CozyFile.generateNewFileNameOnConflict(filename) + extension
-        // recall itself with the newFilename.
-        return CozyFile.uploadFileWithConflictStrategy(
-          newFileName,
-          file,
-          dirId,
-          conflictStrategy,
-          metadata,
-          contentType
-        )
       }
+      const { filename, extension } = CozyFile.splitFilename({
+        name,
+        type: 'file'
+      })
+      const newFileName =
+        CozyFile.generateNewFileNameOnConflict(filename) + extension
+      // recall itself with the newFilename.
+      return CozyFile.uploadFileWithConflictStrategy(
+        newFileName,
+        file,
+        dirId,
+        conflictStrategy,
+        metadata,
+        contentType
+      )
     } catch (error) {
       if (/Not Found/.test(error.message)) {
         return await CozyFile.upload(name, file, dirId, metadata, contentType)
@@ -223,6 +224,7 @@ class CozyFile extends Document {
       throw error
     }
   }
+
   /**
    *
    * @param {String} name File's name

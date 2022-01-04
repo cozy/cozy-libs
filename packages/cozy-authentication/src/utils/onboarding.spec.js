@@ -1,17 +1,17 @@
+import CozyClient from 'cozy-client'
 import * as onboarding from './onboarding'
 import * as localStateSecret from './local'
-import CozyClient from 'cozy-client'
 
 describe('doOnboardingLogin', () => {
-  let serverSecret,
-    serverState,
-    receivedState,
-    serverAccessToken,
-    localState,
-    localSecret,
-    client,
-    fakeExchangeOAuthSecret,
-    fakeFetchAccessToken
+  let serverSecret
+  let serverState
+  let receivedState
+  let serverAccessToken
+  let localState
+  let localSecret
+  let client
+  let fakeExchangeOAuthSecret
+  let fakeFetchAccessToken
   const domain = 'fakedomain.mycozy.cloud'
 
   beforeEach(async () => {

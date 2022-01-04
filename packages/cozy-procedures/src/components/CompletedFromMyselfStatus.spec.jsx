@@ -2,9 +2,7 @@ import React from 'react'
 
 import { CompletedFromMyselfStatus } from './CompletedFromMyselfStatus'
 
-const fakeT = (msgId, args) => {
-  return `${msgId} ${JSON.stringify(args)}`
-}
+const fakeT = (msgId, args) => `${msgId} ${JSON.stringify(args)}`
 
 describe('CompletedFromMyselfStatus component', () => {
   it('should display nothing if no data is filled', () => {

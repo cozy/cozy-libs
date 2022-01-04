@@ -9,13 +9,11 @@ import AppLike from '../test/AppLike'
 
 import { receiveSharings } from './state'
 
-const AppWrapper = ({ children, client }) => {
-  return (
-    <AppLike client={client}>
-      <SharingProvider client={client}>{children}</SharingProvider>
-    </AppLike>
-  )
-}
+const AppWrapper = ({ children, client }) => (
+  <AppLike client={client}>
+    <SharingProvider client={client}>{children}</SharingProvider>
+  </AppLike>
+)
 
 describe('allLoaded', () => {
   const client = createMockClient({})

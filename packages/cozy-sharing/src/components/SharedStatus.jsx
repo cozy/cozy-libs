@@ -1,14 +1,14 @@
 import React from 'react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import palette from 'cozy-ui/transpiled/react/palette'
-import { SharingTooltip, TooltipRecipientList } from './Tooltip'
 import cx from 'classnames'
+import { SharingTooltip, TooltipRecipientList } from './Tooltip'
 
 import { getDisplayName } from '../models'
 import styles from './status.styl'
 import LinkIcon from '../../assets/icons/icon-link.svg'
 
-export const SharedStatus = ({ className, docId, recipients, link }) => {
+export var SharedStatus = ({ className, docId, recipients, link }) => {
   const { t } = useI18n()
   return (
     <span className={cx(className, styles['shared-status'])}>

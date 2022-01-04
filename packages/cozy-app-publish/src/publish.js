@@ -42,7 +42,7 @@ module.exports = async ({
     throw new Error(text)
   } else if (response.status !== 201) {
     let errorMsg
-    let resp2 = response.clone()
+    const resp2 = response.clone()
     try {
       const body = await response.json()
       errorMsg = body.error

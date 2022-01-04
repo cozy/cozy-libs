@@ -7,12 +7,12 @@ const findExactMatch = (attr, account, existingAccounts) => {
     existingAccount => existingAccount[attr] === account[attr]
   )
   if (sameAttr.length === 1) {
-    return { match: sameAttr[0], method: attr + '-exact' }
-  } else if (sameAttr.length > 1) {
-    return { matches: sameAttr, method: attr + '-exact' }
-  } else {
-    return null
+    return { match: sameAttr[0], method: `${attr}-exact` }
   }
+  if (sameAttr.length > 1) {
+    return { matches: sameAttr, method: `${attr}-exact` }
+  }
+  return null
 }
 
 const untrimmedAccountNumber = /^(?:[A-Za-z]+)?-?([0-9]+)-?(?:[A-Za-z]+)?$/
@@ -42,36 +42,31 @@ const normalizeAccountNumber = (numberArg, ibanArg) => {
     // COUNTRY (4) BANK (5) COUNTER (5) NUMBER (11) KEY (2)
     // FRXX 16275 10501 00300060030 00
     return number.substr(10, 11)
-  } else if (number.length == 16) {
+  }
+  if (number.length == 16) {
     // Linxo sends Bank account number that contains
     // the counter number
     return number.substr(5, 11)
-  } else if (
-    number.length > 11 &&
-    (match = number.match(untrimmedAccountNumber))
-  ) {
+  }
+  if (number.length > 11 && (match = number.match(untrimmedAccountNumber))) {
     // Some account numbers from BI are in the form
     // CC-00300060030 (CC for Compte Courant) or
     // LEO-00300060030
     return match[1]
-  } else {
-    return number
   }
+  return number
 }
 
 /**
  * If either of the account numbers has length 11 and one is contained
  * in the other, it's a match
  */
-const approxNumberMatch = (account, existingAccount) => {
-  return (
-    existingAccount.number &&
-    account.number &&
-    (existingAccount.number.length === 11 || account.number.length === 11) &&
-    eitherIncludes(existingAccount.number, account.number) &&
-    Math.min(existingAccount.number.length, account.number.length) >= 4
-  )
-}
+const approxNumberMatch = (account, existingAccount) =>
+  existingAccount.number &&
+  account.number &&
+  (existingAccount.number.length === 11 || account.number.length === 11) &&
+  eitherIncludes(existingAccount.number, account.number) &&
+  Math.min(existingAccount.number.length, account.number.length) >= 4
 
 /**
  * If there is no "number" attribute or null, "id" attribute is used
@@ -94,8 +89,9 @@ const creditCardMatch = (account, existingAccount) => {
   if (account.type !== 'CreditCard' && existingAccount.type !== 'CreditCard') {
     return false
   }
-  let ccAccount, lastDigits
-  for (let acc of [account, existingAccount]) {
+  let ccAccount
+  let lastDigits
+  for (const acc of [account, existingAccount]) {
     const match = acc && acc.number && acc.number.match(redactedCreditCard)
     if (match) {
       ccAccount = acc
@@ -135,9 +131,8 @@ const currencyMatch = (account, existingAccount) => {
   )
 }
 
-const sameTypeMatch = (account, existingAccount) => {
-  return account.type === existingAccount.type
-}
+const sameTypeMatch = (account, existingAccount) =>
+  account.type === existingAccount.type
 
 const rules = [
   { rule: slugMatch, bonus: 0, malus: -1000 },
@@ -156,7 +151,7 @@ const score = (account, existingAccount) => {
   }
 
   let points = 0
-  for (let { rule, bonus, malus, name } of rules) {
+  for (const { rule, bonus, malus, name } of rules) {
     const ok = rule(account, existingAccount)
     if (ok && bonus) {
       points += bonus
@@ -188,9 +183,7 @@ const normalizeAccount = account => {
 
 const exactMatchAttributes = ['iban', 'number']
 
-const eqNotUndefined = (attr1, attr2) => {
-  return attr1 && attr1 === attr2
-}
+const eqNotUndefined = (attr1, attr2) => attr1 && attr1 === attr2
 
 const findMatch = (account, existingAccounts) => {
   // Start with exact attribute matches
@@ -261,7 +254,7 @@ const matchAccounts = (fetchedAccountsArg, existingAccounts) => {
   const fetchedAccounts = fetchedAccountsArg.map(normalizeAccount)
   const toMatch = [...existingAccounts].map(normalizeAccount)
   const results = []
-  for (let fetchedAccount of fetchedAccounts) {
+  for (const fetchedAccount of fetchedAccounts) {
     const matchResult = findMatch(fetchedAccount, toMatch)
     if (matchResult) {
       const i = toMatch.indexOf(matchResult.match)

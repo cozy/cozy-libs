@@ -3,11 +3,12 @@
 // be deleted in a near future. All usefull tests below should
 // have counterpart in CozyRealtime.spec.js
 
-import CozyRealtime from './CozyRealtime'
 import { Server } from 'mock-socket'
 import MicroEE from 'microee'
 
 import Minilog from '@cozy/minilog'
+import CozyRealtime from './CozyRealtime'
+
 Minilog.disable()
 
 const COZY_URL = 'http://cozy.tools:8888'
@@ -25,6 +26,7 @@ class CozyClient {
       getAccessToken: () => COZY_TOKEN
     }
   }
+
   getStackClient() {
     return this.stackClient
   }
@@ -35,7 +37,9 @@ const cozyClient = new CozyClient()
 const pause = time => new Promise(resolve => setTimeout(resolve, time))
 
 describe('CozyRealtime', () => {
-  let realtime, cozyStack, onMessage
+  let realtime
+  let cozyStack
+  let onMessage
 
   beforeEach(() => {
     onMessage = jest.fn()
@@ -178,7 +182,9 @@ describe('CozyRealtime', () => {
   })
 
   describe('unsubscribe', () => {
-    let handlerCreate, handlerUpdate, handlerDelete
+    let handlerCreate
+    let handlerUpdate
+    let handlerDelete
 
     beforeEach(async () => {
       handlerCreate = jest.fn()

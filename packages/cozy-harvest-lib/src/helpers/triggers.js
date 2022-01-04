@@ -24,7 +24,7 @@ export const buildAttributes = ({
   }
 
   if (folder) {
-    message['folder_to_save'] = folder._id
+    message.folder_to_save = folder._id
   }
 
   const result = {
@@ -39,9 +39,7 @@ export const buildAttributes = ({
   return { ...result, ...options }
 }
 
-export const getAccountId = trigger => {
-  return get(trigger, 'message.account')
-}
+export const getAccountId = trigger => get(trigger, 'message.account')
 
 /**
  * Get error for a given trigger document

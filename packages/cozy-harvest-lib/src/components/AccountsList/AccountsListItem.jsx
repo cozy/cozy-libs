@@ -3,9 +3,8 @@ import PropTypes from 'prop-types'
 
 import { Account } from 'cozy-doctypes'
 import Card from 'cozy-ui/transpiled/react/Card'
-import Status from './Status'
-
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import Status from './Status'
 
 export class AccountsListItem extends React.PureComponent {
   render() {

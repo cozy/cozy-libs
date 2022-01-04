@@ -8,22 +8,23 @@ import { MountPointContext } from './MountPointContext'
 
 let onLoginSuccessFn
 let onSuccessFn
-jest.mock('./TriggerManager', () => ({ onLoginSuccess, onSuccess }) => {
-  onLoginSuccessFn = onLoginSuccess
-  onSuccessFn = onSuccess
-  return null
-})
-jest.mock('./DialogContext', () => {
-  return {
-    useDialogContext: () => {
-      return {
+jest.mock(
+  './TriggerManager',
+  () =>
+    function ({ onLoginSuccess, onSuccess }) {
+      onLoginSuccessFn = onLoginSuccess
+      onSuccessFn = onSuccess
+      return null
+    }
+)
+jest.mock('./DialogContext', () => ({
+  useDialogContext: () => ({
         dialogTitleProps: {
           className: 'class'
         }
-      }
-    }
+      })
   }
-})
+}))
 
 describe('NewAccountModal', () => {
   const pushHistory = jest.fn()

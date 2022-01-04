@@ -16,9 +16,11 @@ export class ButtonLinkRegistration extends Component {
   state = {
     url: ''
   }
+
   static getManagerUrl() {
     return `https://manager.cozycloud.cc/cozy/create?pk_campaign=drive-`
   }
+
   async generateUrl() {
     const oauthOptions = await generateOnboardingQueryPart(
       this.props.client.options.oauth

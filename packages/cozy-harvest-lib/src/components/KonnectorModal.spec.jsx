@@ -28,7 +28,9 @@ beforeEach(() => {
 })
 
 describe('KonnectorModal', () => {
-  let mockKonnector, props, shallowOptions
+  let mockKonnector
+  let props
+  let shallowOptions
 
   beforeEach(() => {
     mockKonnector = {

@@ -5,9 +5,8 @@ import { KonnectorJobError } from './konnectors'
  * @param  {Object} jobs io.cozy.jobs as returned by stack
  * @return {KonnectorJobError}         [description]
  */
-export const getKonnectorJobError = job => {
-  return job.state === 'errored' ? new KonnectorJobError(job.error) : null
-}
+export const getKonnectorJobError = job =>
+  job.state === 'errored' ? new KonnectorJobError(job.error) : null
 
 const helpers = {
   getKonnectorJobError

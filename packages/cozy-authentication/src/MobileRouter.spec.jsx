@@ -21,19 +21,19 @@ const AppRoutes = () => <div />
 const LoggingOut = () => <div>Logging out...</div>
 
 describe('MobileRouter', () => {
-  let appRoutes,
-    onAuthenticated,
-    onLogout,
-    history,
-    appIcon,
-    appTitle,
-    appSlug,
-    app,
-    client,
-    currentLocation,
-    props,
-    LogoutComponent,
-    universalLinkDomain
+  let appRoutes
+  let onAuthenticated
+  let onLogout
+  let history
+  let appIcon
+  let appTitle
+  let appSlug
+  let app
+  let client
+  let currentLocation
+  let props
+  let LogoutComponent
+  let universalLinkDomain
 
   beforeEach(() => {
     appRoutes = <AppRoutes />
@@ -73,7 +73,7 @@ describe('MobileRouter', () => {
           <MobileRouter
             {...props}
             logoutPath="/afterLogout"
-            initialTriedToReconnect={true}
+            initialTriedToReconnect
             LogoutComponent={LogoutComponent}
           />
         </I18n>

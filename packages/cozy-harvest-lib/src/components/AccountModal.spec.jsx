@@ -1,9 +1,9 @@
 import { AccountModal } from 'components/AccountModal'
 import React from 'react'
 import { shallow } from 'enzyme'
-import { fetchAccount } from '../../src/connections/accounts'
+import { fetchAccount } from '../connections/accounts'
 
-jest.mock('../../src/connections/accounts', () => ({
+jest.mock('../connections/accounts', () => ({
   fetchAccount: jest.fn()
 }))
 

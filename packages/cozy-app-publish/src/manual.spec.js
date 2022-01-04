@@ -64,9 +64,10 @@ describe('Manual publishing script', () => {
   beforeEach(() => {
     jest.clearAllMocks()
     prepublishResult = { sha256Sum: 'fakeshasum5644545' }
-    prepublish.mockImplementation(options =>
-      Object.assign({}, options, prepublishResult)
-    )
+    prepublish.mockImplementation(options => ({
+      ...options,
+      ...prepublishResult
+    }))
   })
 
   it('should work correctly if expected options provided', async () => {

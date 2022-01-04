@@ -1,4 +1,5 @@
 import CozyClient from 'cozy-client'
+import merge from 'lodash/merge'
 import {
   createOrUpdateBIConnection,
   onBIAccountCreation,
@@ -17,7 +18,6 @@ import {
   createBIConnection,
   updateBIConnection
 } from './bi-http'
-import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
 import biPublicKeyProd from './bi-public-key-prod.json'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
@@ -55,11 +55,10 @@ expect.extend({
         message: () => `expected ${received} not to be a JWE value`,
         pass: true
       }
-    } else {
-      return {
-        message: () => `expected ${received} to be a JWE value`,
-        pass: false
-      }
+    }
+    return {
+      message: () => `expected ${received} to be a JWE value`,
+      pass: false
     }
   }
 })

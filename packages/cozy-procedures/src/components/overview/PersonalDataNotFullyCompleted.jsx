@@ -3,12 +3,13 @@ import PropTypes from 'prop-types'
 
 import { Button, Chip, translate } from 'cozy-ui/transpiled/react'
 import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
-const PersonalDataNotFullyCompleted = ({
+
+function PersonalDataNotFullyCompleted({
   navigateTo,
   personalDataFieldsCompleted,
   personalDataFieldsTotal,
   t
-}) => {
+}) {
   return (
     <Button
       label={t('overview.complete')}

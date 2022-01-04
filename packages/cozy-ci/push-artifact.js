@@ -8,8 +8,8 @@ const { spawn } = require('child_process')
 const DOWNCLOUD_UPLOAD_DIR = 'www-upload/'
 const DOWNCLOUD_URL = 'downcloud.cozycloud.cc'
 
-const launchCmd = (cmd, params, options) => {
-  return new Promise((resolve, reject) => {
+const launchCmd = (cmd, params, options) =>
+  new Promise((resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
     const process = spawn(cmd, params, cmdOptions)
@@ -24,13 +24,12 @@ const launchCmd = (cmd, params, options) => {
       }
     })
   })
-}
 
 /** Updates version in manifest.webapp to add commit sha and Travis build id */
 const updateVersion = async folderName => {
   const buildCommit = process.env.TRAVIS_COMMIT
-  const TRAVIS_BUILD_DIR = process.env.TRAVIS_BUILD_DIR
-  const TRAVIS_BUILD_ID = process.env.TRAVIS_BUILD_ID
+  const { TRAVIS_BUILD_DIR } = process.env
+  const { TRAVIS_BUILD_ID } = process.env
 
   const pathToManifest = path.join(
     TRAVIS_BUILD_DIR,
@@ -54,7 +53,7 @@ const createArchive = async (folderName, archiveFileName) => {
   const options = {
     gzip: true,
     cwd: folderName,
-    file: folderName + '/' + archiveFileName
+    file: `${folderName}/${archiveFileName}`
   }
   try {
     await tar.c(options, fileList)

@@ -1,16 +1,20 @@
 import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
+
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import DocumentCategory from './DocumentCategory'
+
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
 }))
 
 // Popper does not work well inside of jest as it heavily relies on DOM APIs (see https://github.com/popperjs/popper-core/issues/478).
-jest.mock('@material-ui/core/Popper', () => {
-  return ({ children }) => children
-})
-
-import DocumentCategory from './DocumentCategory'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+jest.mock(
+  '@material-ui/core/Popper',
+  () =>
+    ({ children }) =>
+      children
+)
 
 describe('DocumentCategory', () => {
   it('should match snapshot if selected and icon', async () => {
@@ -31,7 +35,7 @@ describe('DocumentCategory', () => {
               }
             ]
           }}
-          isSelected={true}
+          isSelected
           selectedItem={{ label: 'test' }}
           t={text => text}
         />

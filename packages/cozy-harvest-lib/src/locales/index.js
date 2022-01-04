@@ -14,7 +14,7 @@ for (const lang of langs) {
 }
 
 const getBoundT = lang => {
-  const polyglot = polyglots[lang] || polyglots['en']
+  const polyglot = polyglots[lang] || polyglots.en
   return polyglot.t.bind(polyglot)
 }
 

@@ -11,6 +11,7 @@ import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 
 import MenuUploadMobile from './menuUpload/MenuUploadMobile'
 import MenuUploadWeb from './menuUpload/MenuUploadWeb'
+
 class EmptyDocumentHolder extends Component {
   state = {
     menuDisplayed: false

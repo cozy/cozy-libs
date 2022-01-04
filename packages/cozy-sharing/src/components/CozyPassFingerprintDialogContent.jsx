@@ -16,7 +16,7 @@ import styles from './CozyPassFingerprintDialogContent.styl'
  *
  * This should be the case when ShareModal is called from `cozy-pass-web`
  */
-export const CozyPassFingerprintDialogContent = ({
+export var CozyPassFingerprintDialogContent = ({
   recipientConfirmationData
 }) => {
   const { t } = useI18n()
@@ -32,7 +32,7 @@ export const CozyPassFingerprintDialogContent = ({
 
   return (
     <div className={cx(styles['share-modal-content'])}>
-      <p dangerouslySetInnerHTML={{ __html: instruction1 }}></p>
+      <p dangerouslySetInnerHTML={{ __html: instruction1 }} />
       <Paper
         className={cx(styles['cozy-pass-fingerprint-modal__fingerprint'])}
         elevation={1}
@@ -41,7 +41,7 @@ export const CozyPassFingerprintDialogContent = ({
           {recipientConfirmationData.fingerprintPhrase}
         </Typography>
       </Paper>
-      <p dangerouslySetInnerHTML={{ __html: instruction2 }}></p>
+      <p dangerouslySetInnerHTML={{ __html: instruction2 }} />
     </div>
   )
 }

@@ -15,18 +15,16 @@ const personalDataSlice = createSlice({
   },
   slice: 'personalData',
   reducers: {
-    init: (state, action) => {
-      return {
-        completedFromMyself: 0,
-        data: Object.keys(action.payload).reduce((acc, fieldId) => {
-          acc[fieldId] = ''
-          return acc
-        }, {}),
-        myselfLoading: false,
-        bankAccountsStatsLoading: false,
-        error: ''
-      }
-    },
+    init: (state, action) => ({
+      completedFromMyself: 0,
+      data: Object.keys(action.payload).reduce((acc, fieldId) => {
+        acc[fieldId] = ''
+        return acc
+      }, {}),
+      myselfLoading: false,
+      bankAccountsStatsLoading: false,
+      error: ''
+    }),
     fetchMyselfLoading: (state, action) => {
       state.myselfLoading = action.payload.loading
     },

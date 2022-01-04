@@ -1,6 +1,7 @@
 import './polyfill'
 import { build } from '@cozy/cli-tree'
 import { createClientInteractive } from 'cozy-client/dist/cli'
+import minilog from '@cozy/minilog'
 import ConnectionFlow, {
   ERROR_EVENT,
   SUCCESS_EVENT,
@@ -8,7 +9,6 @@ import ConnectionFlow, {
   TWO_FA_REQUEST_EVENT,
   UPDATE_EVENT
 } from '../models/ConnectionFlow'
-import minilog from '@cozy/minilog'
 import logger from '../logger'
 import { multiPrompt } from './prompt'
 import assert from '../assert'

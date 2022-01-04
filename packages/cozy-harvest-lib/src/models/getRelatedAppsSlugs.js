@@ -9,22 +9,16 @@ export const relatedAppsConfiguration = [
   {
     slug: 'banks',
     priority: 2,
-    predicate: ({ konnectorManifest }) => {
-      return (
-        Array.isArray(konnectorManifest.data_types) &&
-        konnectorManifest.data_types.includes('bankAccounts')
-      )
-    }
+    predicate: ({ konnectorManifest }) =>
+      Array.isArray(konnectorManifest.data_types) &&
+      konnectorManifest.data_types.includes('bankAccounts')
   },
   {
     slug: 'contacts',
     priority: 1,
-    predicate: ({ konnectorManifest }) => {
-      return (
-        Array.isArray(konnectorManifest.data_types) &&
-        konnectorManifest.data_types.includes('contact')
-      )
-    }
+    predicate: ({ konnectorManifest }) =>
+      Array.isArray(konnectorManifest.data_types) &&
+      konnectorManifest.data_types.includes('contact')
   },
   {
     slug: 'drive',

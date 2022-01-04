@@ -78,12 +78,10 @@ const fetchTransactionsByAccount = async client => {
     transactions,
     transaction => transaction.account
   )
-  return accounts.map(account => {
-    return {
-      account: account,
-      transactions: transactionsByAccount[account._id] || []
-    }
-  })
+  return accounts.map(account => ({
+    account,
+    transactions: transactionsByAccount[account._id] || []
+  }))
 }
 
 export const fetchTransactionsHistoryContent = async client => {

@@ -28,6 +28,7 @@ class EditDocumentQualification extends Component {
   state = {
     qualification: undefined
   }
+
   render() {
     const { document, onClose, t, client, onDescribed, isOffline } = this.props
     const { qualification } = this.state
@@ -41,7 +42,7 @@ class EditDocumentQualification extends Component {
       <FixedDialog
         onClose={onClose}
         title={document.name}
-        open={true}
+        open
         content={
           <DocumentQualification
             onDescribed={qualification => {

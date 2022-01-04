@@ -54,7 +54,7 @@ describe('notifications', () => {
       }
     }
     const notificationView = new MyNotificationView({
-      client: client,
+      client,
       lang: 'en',
       data: {
         name: 'Homer'

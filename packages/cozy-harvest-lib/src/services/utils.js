@@ -118,11 +118,11 @@ export const fetchLoginFailedTriggersForAccountsIds = async (
   const triggersIds = triggers.map(trigger => trigger._id)
 
   const triggersStates = await Promise.all(
-    triggersIds.map(triggerId => {
-      return cozyClient
+    triggersIds.map(triggerId =>
+      cozyClient
         .getStackClient()
         .fetchJSON('GET', `/jobs/triggers/${triggerId}/state`)
-    })
+    )
   )
 
   const triggersToRetry = triggersStates
@@ -138,10 +138,10 @@ export const fetchLoginFailedTriggersForAccountsIds = async (
 
 export const launchTriggers = async (cozyClient, triggersIds) => {
   await Promise.all(
-    triggersIds.map(triggerId => {
-      return cozyClient
+    triggersIds.map(triggerId =>
+      cozyClient
         .getStackClient()
         .fetchJSON('POST', `/jobs/triggers/${triggerId}/launch`)
-    })
+    )
   )
 }

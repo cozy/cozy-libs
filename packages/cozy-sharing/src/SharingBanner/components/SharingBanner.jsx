@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { SharingBannerByLink, SharingBannerCozyToCozy } from './PublicBanner'
 
-export const SharingBanner = ({ sharingInfos }) => {
+export var SharingBanner = ({ sharingInfos }) => {
   const [isOpened, setIsOpened] = useState(true)
   const onClose = useCallback(() => setIsOpened(false), [setIsOpened])
 

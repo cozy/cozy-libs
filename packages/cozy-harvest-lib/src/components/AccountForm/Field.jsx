@@ -1,13 +1,11 @@
 import React, { useState } from 'react'
 import UIField from 'cozy-ui/transpiled/react/Field'
 
-const ObfuscateChar = () => {
-  return (
-    <span style={{ display: 'none' }} aria-hidden="true">
-      ·
-    </span>
-  )
-}
+const ObfuscateChar = () => (
+  <span style={{ display: 'none' }} aria-hidden="true">
+    ·
+  </span>
+)
 
 /**
  * Obfuscate a given label by inserting chars in it.
@@ -26,8 +24,8 @@ const ObfuscatedLabel = ({ label }) => {
   ))
 }
 
-export const Field = ({ label, type, ...props }) => {
-  let Component = type === 'password' ? PasswordField : UIField
+export var Field = ({ label, type, ...props }) => {
+  const Component = type === 'password' ? PasswordField : UIField
   return (
     <Component
       {...props}
@@ -40,7 +38,7 @@ export const Field = ({ label, type, ...props }) => {
   )
 }
 
-const PasswordField = ({
+var PasswordField = ({
   secondaryLabels,
   value: valueProps,
   onChange,
@@ -58,9 +56,8 @@ const PasswordField = ({
     const newValue = valueArray.reduce((newValue, char, index) => {
       if (char === dot) {
         return newValue + value.charAt(index)
-      } else {
-        return newValue + char
       }
+      return newValue + char
     }, '')
 
     return newValue

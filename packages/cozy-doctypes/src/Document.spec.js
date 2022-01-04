@@ -1,7 +1,7 @@
 const MockDate = require('mockdate')
+const logger = require('cozy-logger')
 const Document = require('./Document')
 const { cozyClientJS, cozyClient } = require('./testUtils')
-const logger = require('cozy-logger')
 
 class Simpson extends Document {}
 Simpson.doctype = 'io.cozy.simpsons'
@@ -796,9 +796,7 @@ describe('bulk save', () => {
       // eslint-disable-next-line node/no-unsupported-features/es-syntax
       return { ...doc, rev: 1 }
     })
-    const onCreateOrUpdateError = jest.fn(error => {
-      return error
-    })
+    const onCreateOrUpdateError = jest.fn(error => error)
     const newTodos = await Todo.bulkSave(todos, { onCreateOrUpdateError })
     expect(newTodos).toEqual([
       { id: 1, rev: 1 },

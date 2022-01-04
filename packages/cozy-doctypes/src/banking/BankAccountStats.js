@@ -1,9 +1,9 @@
-const Document = require('../Document')
 const sumBy = require('lodash/sumBy')
+const Document = require('../Document')
 
 class BankAccountStats extends Document {
   static checkCurrencies(accountsStats) {
-    const currency = accountsStats[0].currency
+    const { currency } = accountsStats[0]
 
     for (const accountStats of accountsStats) {
       if (accountStats.currency !== currency) {

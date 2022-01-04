@@ -1,7 +1,7 @@
-'use strict'
-
 const { declare } = require('@babel/helper-plugin-utils')
 const browserslist = require('browserslist-config-cozy')
+const mapValues = require('lodash/mapValues')
+const merge = require('lodash/merge')
 const {
   validate,
   isFalse,
@@ -9,8 +9,6 @@ const {
   deprecated,
   either
 } = require('./validate')
-const mapValues = require('lodash/mapValues')
-const merge = require('lodash/merge')
 
 const presetEnvBrowserOptions = {
   targets: browserslist,

@@ -53,8 +53,8 @@ const biRequest = async (method, path, config, body, bearer) => {
   const fullURL = `${config.url}${path}`
 
   const resp = await fetch(fullURL, {
-    method: method,
-    body: body,
+    method,
+    body,
     headers: {
       Authorization: `Bearer ${bearer}`
     }
@@ -62,12 +62,11 @@ const biRequest = async (method, path, config, body, bearer) => {
 
   if (resp.ok) {
     return await resp.json()
-  } else {
-    logger.warn(`Error while contacting BI (method: ${method}, path: ${path})`)
-    const rawBody = await resp.text()
-    logger.debug(rawBody)
-    throw new BIError(rawBody)
   }
+  logger.warn(`Error while contacting BI (method: ${method}, path: ${path})`)
+  const rawBody = await resp.text()
+  logger.debug(rawBody)
+  throw new BIError(rawBody)
 }
 
 const encodeToForm = rawForm => {
@@ -78,19 +77,17 @@ const encodeToForm = rawForm => {
   return formData
 }
 
-export const getBIUserConfig = async (config, biAccessToken) => {
-  return await biRequest('GET', '/users/me/config', config, null, biAccessToken)
-}
+export const getBIUserConfig = async (config, biAccessToken) =>
+  await biRequest('GET', '/users/me/config', config, null, biAccessToken)
 
-export const updateBIUserConfig = async (config, userConfig, biAccessToken) => {
-  return await biRequest(
+export const updateBIUserConfig = async (config, userConfig, biAccessToken) =>
+  await biRequest(
     'POST',
     '/users/me/config',
     config,
     encodeToForm(userConfig),
     biAccessToken
   )
-}
 
 /**
  * Get a bi connection given it's id
@@ -100,15 +97,14 @@ export const updateBIUserConfig = async (config, userConfig, biAccessToken) => {
  * @param  {string} biAccessToken
  * @return {BIConnection}
  */
-export const getBIConnection = async (config, connId, biAccessToken) => {
-  return await biRequest(
+export const getBIConnection = async (config, connId, biAccessToken) =>
+  await biRequest(
     'GET',
     `/users/me/connections/${connId}`,
     config,
     null,
     biAccessToken
   )
-}
 
 /**
  * Create a BI connection
@@ -122,15 +118,14 @@ export const createBIConnection = async (
   config,
   encryptedAuth,
   biAccessToken
-) => {
-  return await biRequest(
+) =>
+  await biRequest(
     'POST',
     '/users/me/connections',
     config,
     encodeToForm(encryptedAuth),
     biAccessToken
   )
-}
 
 /**
  * Update an existing BI connection
@@ -164,11 +159,11 @@ export const updateBIConnection = async (
   // in the form { connection, message }.
   if (resp.id) {
     return resp
-  } else if (resp.connection) {
-    return resp.connection
-  } else {
-    throw new Error('Unknown response from Budget-Insight')
   }
+  if (resp.connection) {
+    return resp.connection
+  }
+  throw new Error('Unknown response from Budget-Insight')
 }
 
 /**

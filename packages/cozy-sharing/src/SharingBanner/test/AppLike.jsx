@@ -4,11 +4,11 @@ import { Provider } from 'react-redux'
 import { createStore } from 'redux'
 
 import { I18n } from 'cozy-ui/transpiled/react'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import SharingContext from '../../context'
 
 import langEn from '../../../locales/en.json'
 import { ThumbnailSizeContextProvider } from './ThumbnailSizeContext'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { ModalContext } from './ModalContext'
 import { RouterContext } from './RouterContext'
 import { AcceptingSharingProvider } from './AcceptingSharingContext'
@@ -20,13 +20,11 @@ const mockStore = createStore(() => ({
   }
 }))
 
-export const TestI18n = ({ children }) => {
-  return (
-    <I18n lang={'en'} dictRequire={() => langEn}>
-      {children}
-    </I18n>
-  )
-}
+export var TestI18n = ({ children }) => (
+  <I18n lang="en" dictRequire={() => langEn}>
+    {children}
+  </I18n>
+)
 
 const mockSharingContextValue = {
   refresh: jest.fn(),

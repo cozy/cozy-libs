@@ -44,9 +44,8 @@ class ShareRecipientsInput extends Component {
     const { contacts, groups } = this.props
     if (contacts.hasMore || contacts.fetchStatus === 'loading') {
       return contacts.data
-    } else {
-      return [...contacts.data, ...groups.data]
     }
+    return [...contacts.data, ...groups.data]
   }
 
   render() {

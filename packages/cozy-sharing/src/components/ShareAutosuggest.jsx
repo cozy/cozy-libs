@@ -59,6 +59,7 @@ export default class ShareAutocomplete extends Component {
   onSuggestionsClearRequested = () => {
     this.setState(state => ({ ...state, suggestions: [] }))
   }
+
   onPaste = () => {
     this.isPasted = true
   }
@@ -72,13 +73,11 @@ export default class ShareAutocomplete extends Component {
         })
       }
       this.isPasted = false
-    } else {
-      if (typeof newValue !== 'object') {
-        this.setState(state => ({ ...state, inputValue: newValue }))
-      } else if (method === 'click' || method === 'enter') {
-        // A suggestion has been picked
-        this.onPick(newValue)
-      }
+    } else if (typeof newValue !== 'object') {
+      this.setState(state => ({ ...state, inputValue: newValue }))
+    } else if (method === 'click' || method === 'enter') {
+      // A suggestion has been picked
+      this.onPick(newValue)
     }
   }
 
@@ -125,17 +124,14 @@ export default class ShareAutocomplete extends Component {
   renderInput(inputProps) {
     const { loading, recipients } = this.props
     return (
-      <div className={styles['recipientsContainer']}>
+      <div className={styles.recipientsContainer}>
         {recipients.map((recipient, idx) => {
           const value = getDisplayName(recipient)
           return (
-            <div
-              className={styles['recipientChip']}
-              key={`key_recipient_${idx}`}
-            >
+            <div className={styles.recipientChip} key={`key_recipient_${idx}`}>
               <span>{value}</span>
               <button
-                className={styles['removeRecipient']}
+                className={styles.removeRecipient}
                 onClick={() => this.onRemove(recipient)}
               >
                 <BoldCross />

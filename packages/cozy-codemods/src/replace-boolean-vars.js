@@ -10,7 +10,7 @@ const removeEmptyDeclarations = root => {
 }
 
 const replaceBooleanVars = root => {
-  for (let booleanValue of [true, false]) {
+  for (const booleanValue of [true, false]) {
     root
       .find(j.VariableDeclarator, { init: { value: booleanValue } })
       .forEach(path => {

@@ -5,7 +5,8 @@ const flatten = require('lodash/flatten')
 const isSameSpec = (eSpec, spec) => {
   if (eSpec.imported) {
     return eSpec.imported.name == spec.imported.name
-  } else if (eSpec.local && spec.local) {
+  }
+  if (eSpec.local && spec.local) {
     return eSpec.local.name == spec.local.name
   }
 }
@@ -33,21 +34,19 @@ imports.add(root, {
   const source = maybeSource || sourceOrFilter
   const filter = maybeSource ? sourceOrFilter : null
 
-  const specifiers = Object.entries(specifierObj).map(([k, v]) => {
-    return k === 'default'
+  const specifiers = Object.entries(specifierObj).map(([k, v]) =>
+    k === 'default'
       ? j.importDefaultSpecifier(j.identifier(v))
       : j.importSpecifier(j.identifier(k))
-  })
+  )
 
   const matchingImports = root.find(
     j.ImportDeclaration,
-    filter
-      ? filter
-      : {
-          source: {
-            value: source
-          }
-        }
+    filter || {
+      source: {
+        value: source
+      }
+    }
   )
 
   if (matchingImports.length > 0) {
@@ -75,22 +74,18 @@ const removeUnused = root => {
       return false
     }
 
-    const isUsedInScopes = () => {
-      return (
-        j(importDeclaration)
-          .closestScope()
-          .find(j.Identifier, { name: varName })
-          .filter(p => {
-            if (p.value.start === importSpecifier.value.local.start)
-              return false
-            if (p.parentPath.value.type === 'Property' && p.name === 'key')
-              return false
-            if (p.name === 'property') return false
-            return true
-          })
-          .size() > 0
-      )
-    }
+    const isUsedInScopes = () =>
+      j(importDeclaration)
+        .closestScope()
+        .find(j.Identifier, { name: varName })
+        .filter(p => {
+          if (p.value.start === importSpecifier.value.local.start) return false
+          if (p.parentPath.value.type === 'Property' && p.name === 'key')
+            return false
+          if (p.name === 'property') return false
+          return true
+        })
+        .size() > 0
 
     // Caveat, this doesn't work with annonymously exported class declarations.
     const isUsedInDecorators = () => {
@@ -120,23 +115,17 @@ const removeUnused = root => {
     return false
   }
 
-  const removeUnusedDefaultImport = importDeclaration => {
-    return (
-      j(importDeclaration)
-        .find(j.ImportDefaultSpecifier)
-        .filter(s => removeIfUnused(s, importDeclaration))
-        .size() > 0
-    )
-  }
+  const removeUnusedDefaultImport = importDeclaration =>
+    j(importDeclaration)
+      .find(j.ImportDefaultSpecifier)
+      .filter(s => removeIfUnused(s, importDeclaration))
+      .size() > 0
 
-  const removeUnusedNonDefaultImports = importDeclaration => {
-    return (
-      j(importDeclaration)
-        .find(j.ImportSpecifier)
-        .filter(s => removeIfUnused(s, importDeclaration))
-        .size() > 0
-    )
-  }
+  const removeUnusedNonDefaultImports = importDeclaration =>
+    j(importDeclaration)
+      .find(j.ImportSpecifier)
+      .filter(s => removeIfUnused(s, importDeclaration))
+      .size() > 0
 
   // Return True if somethin was transformed.
   const processImportDeclaration = importDeclaration => {
@@ -186,7 +175,7 @@ const mergeImports = root => {
     }
     const specifiers = flatten(group.map(x => x.node.specifiers))
     group[0].replace(j.importDeclaration(specifiers, group[0].node.source))
-    for (let toRemove of group.slice(1)) {
+    for (const toRemove of group.slice(1)) {
       toRemove.prune()
     }
   }
@@ -236,10 +225,10 @@ const mergeImports = root => {
  * ```
  */
 const simplify = (root, options) => {
-  const imports = options.imports
+  const { imports } = options
   const identifiers = Object.keys(imports)
   root.find(j.ImportDeclaration).forEach(path => {
-    const specifiers = path.node.specifiers
+    const { specifiers } = path.node
     if (!specifiers || !specifiers.length) {
       return
     }

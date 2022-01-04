@@ -10,10 +10,9 @@ const getAutoTravisVersion = async ctx => {
   const { TRAVIS_COMMIT } = getTravisVariables()
   if (tag) {
     return tag
-  } else {
-    const shortCommit = TRAVIS_COMMIT.slice(0, 7)
-    return await getDevVersion(ctx.appManifestObj.version, shortCommit)
   }
+  const shortCommit = TRAVIS_COMMIT.slice(0, 7)
+  return await getDevVersion(ctx.appManifestObj.version, shortCommit)
 }
 
 const getRelevantTagTravis = ctx => {
@@ -34,20 +33,20 @@ const getAppBuildURLFromTravis = ctx => {
   // get archive url from github repo
   // FIXME push directly the archive to the registry
   // for now, the registry needs an external URL
-  const buildUrl = ctx.buildUrl
-  const buildCommit = ctx.buildCommit
+  const { buildUrl } = ctx
+  const { buildCommit } = ctx
   const githubUrl = `https://github.com/${TRAVIS_REPO_SLUG}/archive`
   const buildHash = buildCommit || TRAVIS_COMMIT
   if (buildUrl) {
     return buildUrl
-  } else if (!buildCommit && tag) {
+  }
+  if (!buildCommit && tag) {
     // if we use --build-commit => we are not on the build branch
     // so we can't use this branch tag directly for the url
     // if not, we suppose that we are on the build tagged branch here
     return `${githubUrl}/${tag}.tar.gz`
-  } else {
-    return `${githubUrl}/${buildHash}.tar.gz`
   }
+  return `${githubUrl}/${buildHash}.tar.gz`
 }
 
 const getTravisRegistryToken = () => {

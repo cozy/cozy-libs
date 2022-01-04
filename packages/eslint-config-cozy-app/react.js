@@ -1,5 +1,3 @@
-'use strict'
-
 const basics = require('./basics')
 
 module.exports = {
@@ -9,11 +7,19 @@ module.exports = {
   parserOptions: { ecmaFeatures: { jsx: true } },
   env: basics.env,
   settings: { react: { version: 'latest' } },
-  rules: Object.assign({}, basics.rules, {
+  rules: {
+    ...basics.rules,
     'react/prop-types': 'off',
     'react-hooks/rules-of-hooks': 'error',
-    'react-hooks/exhaustive-deps': 'warn'
-  }),
+    'react-hooks/exhaustive-deps': 'warn',
+    'react/function-component-definition': [
+      'error',
+      {
+        namedComponents: 'arrow-function',
+        unnamedComponents: 'arrow-function'
+      }
+    ]
+  },
   overrides: [
     {
       extends: [

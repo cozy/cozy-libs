@@ -47,8 +47,8 @@ describe('RecipientsAvatars', () => {
     isOwner = true,
     onClick = () => jest.fn(),
     ...rest
-  }) => {
-    return render(
+  }) =>
+    render(
       <AppLike client={client}>
         <RecipientsAvatars
           recipients={recipients}
@@ -59,7 +59,6 @@ describe('RecipientsAvatars', () => {
         />
       </AppLike>
     )
-  }
 
   it('should render link icon if a link is generated', () => {
     const { getByTestId } = setup({

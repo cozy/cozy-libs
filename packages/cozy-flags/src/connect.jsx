@@ -11,15 +11,19 @@ const connect = Component => {
       super(props)
       this.handleChange = this.handleChange.bind(this)
     }
+
     componentDidMount() {
       flag.store.on('change', this.handleChange)
     }
+
     componentWillUnmount() {
       flag.store.removeListener('change', this.handleChange)
     }
+
     handleChange() {
       this.forceUpdate()
     }
+
     render() {
       return <Component {...this.props} />
     }

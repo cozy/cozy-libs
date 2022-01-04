@@ -1,8 +1,7 @@
 const { hocToHookReplacer } = require('../hoc')
 
-const isI18nProp = prop => {
-  return prop.key && (prop.key.name === 't' || prop.key.name === 'f')
-}
+const isI18nProp = prop =>
+  prop.key && (prop.key.name === 't' || prop.key.name === 'f')
 
 const findI18nProps = objPattern => {
   if (!objPattern) {
@@ -27,12 +26,9 @@ module.exports = function transformer(file, api) {
     hocName: 'translate',
     j,
     importOptions: {
-      filter: x => {
-        return (
-          x.source.value == 'cozy-ui/transpiled/react' ||
-          x.source.value == 'cozy-ui/react'
-        )
-      },
+      filter: x =>
+        x.source.value == 'cozy-ui/transpiled/react' ||
+        x.source.value == 'cozy-ui/react',
       specifiers: {
         useI18n: true
       },

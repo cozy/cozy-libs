@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 const useTimeout = (duration, start = false, end = true) => {
   const [ok, setOK] = useState(start)
   useEffect(() => {
-    let timeout = setTimeout(() => {
+    const timeout = setTimeout(() => {
       setOK(end)
     }, duration)
     return () => {

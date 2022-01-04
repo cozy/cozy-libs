@@ -9,9 +9,7 @@ import { getEncryptedFieldName } from '../../helpers/fields'
 // As SelectBox component from Cozy-UI, rendering dropdown type, is just giving
 // us the full Option object, we just get its value to facilitate mapping
 // with account
-const parse = type => value => {
-  return type === 'dropdown' ? value.value : value
-}
+const parse = type => value => type === 'dropdown' ? value.value : value
 
 /**
  * Renders a list of AccountField, encapsulating them in a Field component from

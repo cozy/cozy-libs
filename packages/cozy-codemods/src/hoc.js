@@ -58,7 +58,6 @@ const removeDefaultExportHOC = (root, ComponentName, hocName, noOptionsHOC) => {
   const defaultExport = defaultExports.get(0)
   const decl = defaultExport.node.declaration
   if (decl.type !== 'CallExpression') {
-    return
   } else if (
     (!noOptionsHOC &&
       decl.callee &&
@@ -82,12 +81,12 @@ const removeDefaultExportHOC = (root, ComponentName, hocName, noOptionsHOC) => {
       if (node.callee) {
         // hoc with options called in compose like compose(hoc())
         return node.callee.name !== hocName
-      } else if (node.name) {
+      }
+      if (node.name) {
         // hoc without options called in compose like compose(hoc)
         return node.name !== hocName
-      } else {
-        return true
       }
+      return true
     })
   }
 }
@@ -249,9 +248,8 @@ const hocToHookReplacer = options => {
       simplifyCompose(root)
       imports.removeUnused(root)
       return root
-    } else {
-      return root
     }
+    return root
   }
 }
 

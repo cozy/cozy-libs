@@ -47,7 +47,7 @@ export const doUpload = async (
         },
         err => {
           // Since this module is pretty recent, let's have this info in sentry if needed
-          console.error('error getting fileentry file!' + err) // eslint-disable-line no-console
+          console.error(`error getting fileentry file!${err}`) // eslint-disable-line no-console
           reject(err)
         }
       )

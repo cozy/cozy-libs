@@ -13,7 +13,7 @@ const isFalse = (value, key) => {
 const either =
   (...validators) =>
   (value, key) => {
-    let errors = []
+    const errors = []
     for (const validator of validators) {
       try {
         validator(value, key)
@@ -36,7 +36,7 @@ const validate = (obj, validators) => {
       try {
         validator(obj[key], key)
       } catch (e) {
-        e.message = 'Validation error: ' + e.message
+        e.message = `Validation error: ${e.message}`
         throw e
       }
     }

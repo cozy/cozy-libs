@@ -17,12 +17,12 @@ import { useFlowState } from '../../models/withConnectionFlow'
 
 const inlineStyle = { display: 'inline-block' }
 
-export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
-  const launch = flow.launch
+export var DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
+  const { launch } = flow
   const flowState = useFlowState(flow)
-  const trigger = flowState.trigger
-  const konnector = flow.konnector
-  const running = flowState.running
+  const { trigger } = flowState
+  const { konnector } = flow
+  const { running } = flowState
   const lastSuccessDate = triggers.getLastSuccessDate(trigger)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
 
@@ -129,9 +129,7 @@ const LaunchTriggerCard = props => {
   }
   return (
     <FlowProvider {...normalizedProps.flowProps}>
-      {({ flow }) => {
-        return <DumbLaunchTriggerCard {...props} flow={flow} />
-      }}
+      {({ flow }) => <DumbLaunchTriggerCard {...props} flow={flow} />}
     </FlowProvider>
   )
 }

@@ -1,9 +1,9 @@
-const spawn = require('child_process').spawn
+const { spawn } = require('child_process')
 const logger = require('./utils/logger')
 
-const launchCmd = (cmd, params, options) => {
+const launchCmd = (cmd, params, options) =>
   // eslint-disable-next-line no-async-promise-executor
-  return new Promise(async (resolve, reject) => {
+  new Promise(async (resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
     const process = await spawn(cmd, params, cmdOptions)
@@ -18,7 +18,6 @@ const launchCmd = (cmd, params, options) => {
       }
     })
   })
-}
 
 const getCommitHash = async () => {
   const result = await launchCmd('git', ['rev-parse', 'HEAD'])

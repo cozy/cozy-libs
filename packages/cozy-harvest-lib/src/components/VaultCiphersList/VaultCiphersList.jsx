@@ -9,7 +9,7 @@ import withLocales from '../hoc/withLocales'
 import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
 
-export const DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
+export var DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
   const activeCiphers = ciphers.filter(cipherView => !cipherView.deletedDate)
   return (
     <>

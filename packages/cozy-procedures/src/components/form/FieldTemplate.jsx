@@ -2,12 +2,14 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Label, translate } from 'cozy-ui/transpiled/react'
 
-export const FieldTemplate = ({ children, label, id, t }) => (
-  <div>
-    {label && <Label htmlFor={id}>{t(label)}</Label>}
-    {children}
-  </div>
-)
+export function FieldTemplate({ children, label, id, t }) {
+  return (
+    <div>
+      {label && <Label htmlFor={id}>{t(label)}</Label>}
+      {children}
+    </div>
+  )
+}
 
 FieldTemplate.propTypes = {
   children: PropTypes.node,

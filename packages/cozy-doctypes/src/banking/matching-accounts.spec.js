@@ -13,12 +13,8 @@ const BANK_ACCOUNT_DOCTYPE = 'io.cozy.bank.accounts'
 const readBankAccounts = filename =>
   fs.readJSONSync(filename)[BANK_ACCOUNT_DOCTYPE]
 
-const matchFiles = (biFilename, linxoFilename) => {
-  return matchAccounts(
-    readBankAccounts(biFilename),
-    readBankAccounts(linxoFilename)
-  )
-}
+const matchFiles = (biFilename, linxoFilename) =>
+  matchAccounts(readBankAccounts(biFilename), readBankAccounts(linxoFilename))
 
 const fixturePath = path.join(__dirname, 'fixtures')
 
@@ -45,7 +41,7 @@ fnDescribe('account matching', () => {
     'banquepostale2',
     'fortuneo2'
   ]
-  for (let bank of banks) {
+  for (const bank of banks) {
     it(`should correctly match ${bank}`, () => {
       const results = matchFiles(
         path.join(fixturePath, `${bank}.bi.anonymized.json`),

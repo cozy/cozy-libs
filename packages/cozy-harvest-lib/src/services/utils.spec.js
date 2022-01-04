@@ -19,7 +19,8 @@ jest.mock('cozy-keys-lib/transpiled/SymmetricCryptoKey', () => {
   return MockSymmetricCryptoKey
 })
 
-let mockVaultClient, mockCozyClient
+let mockVaultClient
+let mockCozyClient
 
 beforeEach(() => {
   mockVaultClient = {

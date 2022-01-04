@@ -10,9 +10,8 @@ const getParams = ({ appId, uri }) => {
     return {
       package: appId
     }
-  } else {
-    return uri
   }
+  return uri
 }
 
 const exported = {}
@@ -38,9 +37,8 @@ const startApp = (exported.startApp = async function (appInfo) {
 
       startAppPlugin.set(params).start(resolve, reject)
     })
-  } else {
-    return false
   }
+  return false
 })
 
 /**

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import { withClient } from 'cozy-client'
 import Welcome from './steps/Welcome'
 import SelectServer from './steps/SelectServer'
-import { withClient } from 'cozy-client'
 import withLocales from './withLocales'
 import { registerAndLogin } from './utils/onboarding'
 

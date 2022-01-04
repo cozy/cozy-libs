@@ -83,10 +83,11 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
         type: `intent-${intent._id}:resize`,
         // if a dom element is passed, calculate its size
         dimensions: dimensions.element
-          ? Object.assign({}, dimensions, {
+          ? {
+              ...dimensions,
               maxHeight: dimensions.element.clientHeight,
               maxWidth: dimensions.element.clientWidth
-            })
+            }
           : dimensions,
         transition: transitionProperty
       })
@@ -102,29 +103,25 @@ export const start = request => (intentIdArg, serviceWindowArg) => {
       if (!terminated) cancel()
     })
 
-    return listenClientData(intent, serviceWindow).then(data => {
-      return {
-        compose: compose,
-        getData: () => data,
-        getIntent: () => intent,
-        terminate: doc => {
-          const eventName =
-            data && data.exposeIntentFrameRemoval
-              ? 'exposeFrameRemoval'
-              : 'done'
-          return terminate({
-            type: `intent-${intent._id}:${eventName}`,
-            document: doc
-          })
-        },
-        throw: error =>
-          terminate({
-            type: `intent-${intent._id}:error`,
-            error: errorSerializer.serialize(error)
-          }),
-        resizeClient: resizeClient,
-        cancel: cancel
-      }
-    })
+    return listenClientData(intent, serviceWindow).then(data => ({
+      compose,
+      getData: () => data,
+      getIntent: () => intent,
+      terminate: doc => {
+        const eventName =
+          data && data.exposeIntentFrameRemoval ? 'exposeFrameRemoval' : 'done'
+        return terminate({
+          type: `intent-${intent._id}:${eventName}`,
+          document: doc
+        })
+      },
+      throw: error =>
+        terminate({
+          type: `intent-${intent._id}:error`,
+          error: errorSerializer.serialize(error)
+        }),
+      resizeClient,
+      cancel
+    }))
   })
 }

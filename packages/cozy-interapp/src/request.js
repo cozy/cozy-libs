@@ -5,7 +5,7 @@ class Request {
 
   get(id) {
     return this.stackClient.fetchJSON('GET', `/intents/${id}`).then(resp => {
-      const data = resp.data
+      const { data } = resp
       if (!data._id) data._id = data.id
       return data
     })
@@ -17,10 +17,10 @@ class Request {
         data: {
           type: 'io.cozy.intents',
           attributes: {
-            action: action,
-            type: type,
-            data: data,
-            permissions: permissions
+            action,
+            type,
+            data,
+            permissions
           }
         }
       })

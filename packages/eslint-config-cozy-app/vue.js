@@ -1,5 +1,3 @@
-'use strict'
-
 const basics = require('./basics')
 
 module.exports = {

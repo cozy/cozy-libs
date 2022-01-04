@@ -5,9 +5,7 @@ import IntentListener from './listener'
 /**
  * Keeps only http://domain:port/
  */
-const extractOrigin = url => {
-  return url.split('/', 3).join('/')
-}
+const extractOrigin = url => url.split('/', 3).join('/')
 
 /**
  * Creates the intent iframe and reacts to its messages.
@@ -19,7 +17,8 @@ const extractOrigin = url => {
  *    at the beginning and removed when the intent has completed.
  */
 export function start(createIntent, intent, element, data, options = {}) {
-  let receiver, iframe
+  let receiver
+  let iframe
 
   const destroy = () => {
     iframe && dom.remove(iframe)
@@ -30,7 +29,7 @@ export function start(createIntent, intent, element, data, options = {}) {
     destroy()
   }
 
-  let prom = new Promise((resolve, reject) => {
+  const prom = new Promise((resolve, reject) => {
     const service = pickService(intent, options.filterServices)
     iframe = dom.insertIntentIframe(
       intent,
@@ -71,7 +70,7 @@ export function start(createIntent, intent, element, data, options = {}) {
       onResize: event => {
         const { transition, dimensions } = event.data
         dom.applyStyle(element, {
-          transition: transition,
+          transition,
           ...dimensions
         })
       },

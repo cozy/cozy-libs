@@ -1,5 +1,5 @@
-const { getMessage, sendMattermostReleaseMessage } = require('./mattermost')
 const https = require('https')
+const { getMessage, sendMattermostReleaseMessage } = require('./mattermost')
 
 describe('get message', () => {
   const commonInfo = {

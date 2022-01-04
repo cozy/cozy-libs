@@ -6,16 +6,14 @@ import ReactDOM from 'react-dom'
 import SharingProvider, { ShareButton, ShareModal } from 'cozy-sharing'
 import withLocales from 'cozy-sharing/dist/withLocales'
 
+import { Route } from 'react-router'
+import { queryConnect } from 'cozy-client'
 import App from './common/App'
 import client from './common/client'
-
-import { Route } from 'react-router'
 
 import 'cozy-ui/transpiled/react/stylesheet.css'
 import 'cozy-ui/dist/cozy-ui.min.css'
 import 'cozy-sharing/dist/stylesheet.css'
-
-import { queryConnect } from 'cozy-client'
 
 const reducer = combineReducers({
   cozy: client.reducer()
@@ -32,7 +30,7 @@ const store = createStore(reducer)
 const LocalizedSharingProvider = withLocales(SharingProvider)
 
 const SharingExample = props => {
-  const file = props.file
+  const { file } = props
   const docId = file.id
   const [showModal, setShowModal] = useState(false)
   const onClick = useCallback(() => setShowModal(!showModal), [showModal])
@@ -53,7 +51,7 @@ const SharingExample = props => {
 }
 //
 
-export const WithFirstChild = props => {
+export var WithFirstChild = props => {
   if (props.file.fetchStatus == 'loaded') {
     const Component = props.component
     return (
@@ -62,9 +60,8 @@ export const WithFirstChild = props => {
         file={props.file.data.relationships.contents.data[0]}
       />
     )
-  } else {
-    return <p>{props.file.fetchStatus}</p>
   }
+  return <p>{props.file.fetchStatus}</p>
 }
 
 export const WithFile = queryConnect({
@@ -75,13 +72,11 @@ export const WithFile = queryConnect({
   }
 })(WithFirstChild)
 
-const MyExample = () => {
-  return (
-    <LocalizedSharingProvider doctype="io.cozy.files" documentType="Notes">
-      <WithFile component={SharingExample} />
-    </LocalizedSharingProvider>
-  )
-}
+const MyExample = () => (
+  <LocalizedSharingProvider doctype="io.cozy.files" documentType="Notes">
+    <WithFile component={SharingExample} />
+  </LocalizedSharingProvider>
+)
 
 ReactDOM.render(
   <Provider store={store}>

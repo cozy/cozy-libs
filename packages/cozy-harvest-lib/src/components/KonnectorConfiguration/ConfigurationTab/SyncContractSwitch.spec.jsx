@@ -1,7 +1,7 @@
 import React from 'react'
-import { DumbSyncContractSwitch } from './SyncContractSwitch'
 import { render, fireEvent, act } from '@testing-library/react'
 import { models } from 'cozy-client'
+import { DumbSyncContractSwitch } from './SyncContractSwitch'
 
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import { trackerShim } from '../../hoc/tracking'

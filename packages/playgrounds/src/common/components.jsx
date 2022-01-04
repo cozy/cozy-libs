@@ -4,9 +4,9 @@ import React from 'react'
 import { withClient, queryConnect } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
-export const LogoutButton = withClient(({ client }) => {
-  return <button onClick={() => client.logout()}>Logout</button>
-})
+export const LogoutButton = withClient(({ client }) => (
+  <button onClick={() => client.logout()}>Logout</button>
+))
 
 class _AppList extends React.Component {
   render() {

@@ -1,16 +1,21 @@
 import React from 'react'
-const MockDate = require('mockdate')
 import { render, fireEvent } from '@testing-library/react'
+
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import { DocumentQualification } from './DocumentQualification'
+
+const MockDate = require('mockdate')
+
 jest.mock('cozy-ui/transpiled/react/utils/color', () => ({
   getCssVariableValue: () => '#fff'
 }))
 // Popper does not work well inside of jest as it heavily relies on DOM APIs (see https://github.com/popperjs/popper-core/issues/478).
-jest.mock('@material-ui/core/Popper', () => {
-  return ({ children }) => children
-})
-
-import { DocumentQualification } from './DocumentQualification'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+jest.mock(
+  '@material-ui/core/Popper',
+  () =>
+    ({ children }) =>
+      children
+)
 
 const MOCKED_DATE = '2019-01-01'
 
@@ -28,10 +33,10 @@ describe('DocumentQualification', () => {
     const { queryByText, getByText, asFragment, getByLabelText } = render(
       <MuiCozyTheme>
         <DocumentQualification
-          allowEditFileName={true}
+          allowEditFileName
           onDescribed={onDescribed}
           onFileNameChanged={onFileNameChanged}
-          title={'Edit'}
+          title="Edit"
           // initialSelected={{ itemId: 1, categoryLabel: 'Label1' }}
           t={text => text}
         />

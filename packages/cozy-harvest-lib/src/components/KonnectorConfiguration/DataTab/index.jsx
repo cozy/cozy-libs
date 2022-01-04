@@ -5,20 +5,20 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import * as konnectorsModel from '../../../helpers/konnectors'
-import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
-import LaunchTriggerCard from '../../../components/cards/LaunchTriggerCard'
-import KonnectorMaintenance from '../../../components/Maintenance'
-import AppLinkCard from '../../../components/cards/AppLinkCard'
-import WebsiteLinkCard from '../../../components/cards/WebsiteLinkCard'
-import TriggerErrorInfo from '../../../components/infos/TriggerErrorInfo'
-import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
+import KonnectorUpdateInfos from '../../infos/KonnectorUpdateInfos'
+import LaunchTriggerCard from '../../cards/LaunchTriggerCard'
+import KonnectorMaintenance from '../../Maintenance'
+import AppLinkCard from '../../cards/AppLinkCard'
+import WebsiteLinkCard from '../../cards/WebsiteLinkCard'
+import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
+import useMaintenanceStatus from '../../hooks/useMaintenanceStatus'
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
-import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
-import { useTrackPage } from '../../../components/hoc/tracking'
+import appLinksProps from './appLinksProps'
+import { useTrackPage } from '../../hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 import Datacards from '../../Datacards'
 
-export const DataTab = ({ konnector, trigger, client, flow, account }) => {
+export var DataTab = ({ konnector, trigger, client, flow, account }) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState

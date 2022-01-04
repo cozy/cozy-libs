@@ -1,4 +1,5 @@
 import { mergeDocsFromStoreAndTemplate } from './Documents'
+
 describe('mergeDocsFromStoreAndTemplate', () => {
   it('should order the documents simple', () => {
     const documentsTemplate = {

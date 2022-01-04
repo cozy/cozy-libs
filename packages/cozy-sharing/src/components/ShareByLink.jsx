@@ -12,13 +12,13 @@ import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
-import logger from '../logger'
-import styles from '../share.styl'
 
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import styles from '../share.styl'
+import logger from '../logger'
 
 const permissionModel = models.permission
 
@@ -137,7 +137,7 @@ class ShareByLink extends React.Component {
         </div>
         {checked && (
           <CompositeRow
-            className={'u-ph-0'}
+            className="u-ph-0"
             primaryText={
               <Typography
                 onClick={this.copyLinkToClipboard}

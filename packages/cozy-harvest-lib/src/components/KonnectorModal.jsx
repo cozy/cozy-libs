@@ -12,6 +12,12 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import get from 'lodash/get'
 
+import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import {
+  useCozyDialog,
+  DialogCloseButton
+} from 'cozy-ui/transpiled/react/CozyDialogs'
+import DialogContent from '@material-ui/core/DialogContent'
 import { fetchTrigger } from '../connections/triggers'
 import { fetchAccount } from '../connections/accounts'
 import * as konnectorsModel from '../helpers/konnectors'
@@ -22,13 +28,6 @@ import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
-
-import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
-import {
-  useCozyDialog,
-  DialogCloseButton
-} from 'cozy-ui/transpiled/react/CozyDialogs'
-import DialogContent from '@material-ui/core/DialogContent'
 
 const DumbKonnectorDialog = ({
   onClose,
@@ -69,12 +68,12 @@ const DumbKonnectorDialog = ({
             )}
           </div>
           <Button
-            icon={<Icon icon={CrossIcon} size={'24'} />}
+            icon={<Icon icon={CrossIcon} size="24" />}
             onClick={onClose}
             iconOnly
             label={t('close')}
             subtle
-            theme={'secondary'}
+            theme="secondary"
           />
         </div>
       </DialogTitle>
@@ -105,7 +104,8 @@ const DumbKonnectorDialogContent = props => {
     return (
       <Spinner size="xxlarge" className="u-flex u-flex-justify-center u-pv-3" />
     )
-  } else if (error) {
+  }
+  if (error) {
     return (
       <Infos
         theme="danger"
@@ -124,7 +124,8 @@ const DumbKonnectorDialogContent = props => {
         }
       />
     )
-  } else if (addingAccount) {
+  }
+  if (addingAccount) {
     return (
       <div className="u-pt-1-half">
         <TriggerManager
@@ -134,7 +135,8 @@ const DumbKonnectorDialogContent = props => {
         />
       </div>
     )
-  } else if (!account) {
+  }
+  if (!account) {
     return (
       <>
         {konnectorsModel.hasNewVersionAvailable(konnector) && (
@@ -150,18 +152,17 @@ const DumbKonnectorDialogContent = props => {
         />
       </>
     )
-  } else {
-    return (
-      <KonnectorAccountTabs
-        konnector={konnector}
-        initialTrigger={trigger}
-        account={account}
-        onAccountDeleted={onClose}
-        addAccount={requestAccountCreation}
-        refetchTrigger={refetchTrigger}
-      />
-    )
   }
+  return (
+    <KonnectorAccountTabs
+      konnector={konnector}
+      initialTrigger={trigger}
+      account={account}
+      onAccountDeleted={onClose}
+      addAccount={requestAccountCreation}
+      refetchTrigger={refetchTrigger}
+    />
+  )
 }
 
 /**
@@ -188,6 +189,7 @@ export class KonnectorModal extends PureComponent {
     this.requestAccountCreation = this.requestAccountCreation.bind(this)
     this.endAccountCreation = this.endAccountCreation.bind(this)
   }
+
   /**
    * TODO We should not fetchAccounts and fetchAccount since we already have the informations
    * in the props. We kept this sytem for compatibility on the existing override.
@@ -265,15 +267,13 @@ export class KonnectorModal extends PureComponent {
     try {
       const accountsAndTriggers = (
         await Promise.all(
-          triggers.map(async trigger => {
-            return {
-              account: await fetchAccount(
-                client,
-                triggersModel.getAccountId(trigger)
-              ),
-              trigger
-            }
-          })
+          triggers.map(async trigger => ({
+            account: await fetchAccount(
+              client,
+              triggersModel.getAccountId(trigger)
+            ),
+            trigger
+          }))
         )
       ).filter(({ account }) => !!account)
       this.setState({

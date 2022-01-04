@@ -3,9 +3,7 @@ import localforage from 'localforage'
 const ONBOARDING_SECRET_KEY = 'onboarding_secret'
 const ONBOARDING_STATE = 'onboarding_state'
 
-const generateRandomString = () => {
-  return Math.random().toString(36).substr(2, 11)
-}
+const generateRandomString = () => Math.random().toString(36).substr(2, 11)
 
 export const read = async () => {
   const state = await localforage.getItem(ONBOARDING_STATE)

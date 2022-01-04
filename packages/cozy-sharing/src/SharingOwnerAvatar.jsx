@@ -6,10 +6,10 @@ import { RecipientAvatar } from './components/Recipient'
 
 export const SharingOwnerAvatar = withLocales(({ docId, ...rest }) => (
   <SharingContext.Consumer>
-    {({ byDocId, getOwner } = {}) => {
-      return !byDocId || !byDocId[docId] ? null : (
+    {({ byDocId, getOwner } = {}) =>
+      !byDocId || !byDocId[docId] ? null : (
         <RecipientAvatar recipient={getOwner(docId)} {...rest} />
       )
-    }}
+    }
   </SharingContext.Consumer>
 ))

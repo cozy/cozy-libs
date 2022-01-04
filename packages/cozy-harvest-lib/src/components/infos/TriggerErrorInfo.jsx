@@ -22,14 +22,17 @@ export class TriggerErrorInfo extends PureComponent {
   state = {
     supportMail: null
   }
+
   async componentDidMount() {
     await this.loadSupportMail()
   }
+
   async loadSupportMail() {
     const { client } = this.props
     const supportMail = await fetchSupportMail(client)
     this.setState({ supportMail })
   }
+
   render() {
     const { className, error, konnector, t, action } = this.props
     const { supportMail } = this.state

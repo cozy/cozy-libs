@@ -1,5 +1,5 @@
-import RealtimePlugin from './RealtimePlugin'
 import CozyClient from 'cozy-client'
+import RealtimePlugin from './RealtimePlugin'
 
 let client
 

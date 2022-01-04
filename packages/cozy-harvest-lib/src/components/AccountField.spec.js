@@ -35,7 +35,7 @@ describe('AccountField', () => {
 
   it('render a date field', () => {
     const wrapper = shallow(
-      <AccountField required={true} type="date" name="date" t={t} />
+      <AccountField required type="date" name="date" t={t} />
     )
     const component = wrapper.dive().getElement()
     expect(component).toMatchSnapshot()
@@ -80,7 +80,7 @@ describe('AccountField', () => {
       <AccountField
         name="multiple"
         options={options}
-        required={true}
+        required
         t={t}
         type="dropdown"
       />
@@ -91,13 +91,7 @@ describe('AccountField', () => {
 
   it('uses predefined label', () => {
     const wrapper = shallow(
-      <AccountField
-        label="login"
-        name="username"
-        required={true}
-        type="text"
-        t={t}
-      />
+      <AccountField label="login" name="username" required type="text" t={t} />
     )
     expect(wrapper.props().label).toBe('fields.login.label')
   })
@@ -114,7 +108,7 @@ describe('AccountField', () => {
       <AccountFieldWithPermissiveLabel
         label="foo"
         name="username"
-        required={true}
+        required
         type="text"
         t={t}
       />

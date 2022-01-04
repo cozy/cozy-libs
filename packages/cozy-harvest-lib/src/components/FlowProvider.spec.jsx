@@ -62,7 +62,7 @@ describe('FlowProvider', () => {
   it('should pass the konnector to the flow', () => {
     const children = jest.fn()
     const wrapper = shallow(<FlowProvider {...props}>{children}</FlowProvider>)
-    const flow = wrapper.instance().flow
+    const { flow } = wrapper.instance()
     expect(flow.konnector).toEqual(props.konnector)
   })
 
@@ -70,7 +70,7 @@ describe('FlowProvider', () => {
     const children = jest.fn()
     const wrapper = shallow(<FlowProvider {...props}>{children}</FlowProvider>)
 
-    const flow = wrapper.instance().flow
+    const { flow } = wrapper.instance()
     expect(children.mock.calls[0][0].flow.getState().status).toEqual('IDLE')
 
     flow.triggerEvent(TWO_FA_REQUEST_EVENT)
@@ -89,7 +89,7 @@ describe('FlowProvider', () => {
     const children = jest.fn()
     const wrapper = shallow(<FlowProvider {...props}>{children}</FlowProvider>)
 
-    const flow = wrapper.instance().flow
+    const { flow } = wrapper.instance()
 
     flow.triggerEvent(TWO_FA_REQUEST_EVENT)
     wrapper.update()
@@ -113,7 +113,7 @@ describe('FlowProvider', () => {
         {jest.fn()}
       </FlowProvider>
     )
-    const flow = wrapper.instance().flow
+    const { flow } = wrapper.instance()
     flow.account = {
       _id: 'account-id'
     }

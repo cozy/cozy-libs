@@ -30,7 +30,7 @@ const PublicBannerCozyToCozyContent = ({
     <a
       href="https://cozy.io"
       target="_blank"
-      className={'u-link'}
+      className="u-link"
       rel="noopener noreferrer"
     >
       {t('Share.banner.know_more')}
@@ -38,14 +38,14 @@ const PublicBannerCozyToCozyContent = ({
   )
   const withAvatar = snarkdown(
     t('Share.banner.shared_from', {
-      name: name,
+      name,
       image: avatarURL
     })
   )
   return (
     <>
       <span
-        className={styles['bannermarkdown']}
+        className={styles.bannermarkdown}
         dangerouslySetInnerHTML={{ __html: withAvatar }}
       />
       <span>
@@ -84,7 +84,7 @@ const SharingBannerCozyToCozy = ({
       }
   return (
     <Banner
-      bgcolor={'var(--defaultBackgroundColor)'}
+      bgcolor="var(--defaultBackgroundColor)"
       text={
         <PublicBannerCozyToCozyContent
           isSharingShortcutCreated={isSharingShortcutCreated}
@@ -118,7 +118,7 @@ const SharingBannerByLinkText = () => {
     <a
       href="https://cozy.io"
       target="_blank"
-      className={'u-link'}
+      className="u-link"
       rel="noopener noreferrer"
     >
       {t('Share.banner.know_more')}
@@ -135,7 +135,7 @@ const SharingBannerByLink = ({ onClose }) => {
   const { t } = useI18n()
   return (
     <Banner
-      bgcolor={'var(--defaultBackgroundColor)'}
+      bgcolor="var(--defaultBackgroundColor)"
       text={<SharingBannerByLinkText />}
       buttonOne={
         <ButtonLink

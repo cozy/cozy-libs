@@ -6,7 +6,7 @@ export const reactMarkdownRendererOptions = {
   paragraph: props => <span className="u-db u-mv-0">{props.children}</span>
 }
 
-export const Markdown = ({ source }) => (
+export var Markdown = ({ source }) => (
   <ReactMarkdown
     source={source}
     linkTarget="_blank"

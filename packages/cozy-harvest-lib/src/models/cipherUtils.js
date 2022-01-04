@@ -1,12 +1,11 @@
 import get from 'lodash/get'
 import isEqual from 'lodash/isEqual'
 
+import { CipherType, UriMatchType, FieldType } from 'cozy-keys-lib'
 import manifest from '../helpers/manifest'
 import accounts from '../helpers/accounts'
 import assert from '../assert'
 import logger from '../logger'
-
-import { CipherType, UriMatchType, FieldType } from 'cozy-keys-lib'
 
 /**
  * Create a new cipher and return its ID
@@ -114,17 +113,14 @@ export const updateCipher = async (vaultClient, cipherId, data) => {
   return cipher
 }
 
-const isAdditionalField = (fieldName, { identifierProperty }) => {
-  return (
-    fieldName !== 'login' &&
-    fieldName !== 'password' &&
-    fieldName !== identifierProperty &&
-    fieldName !== 'credentials_encrypted'
-  )
-}
+const isAdditionalField = (fieldName, { identifierProperty }) =>
+  fieldName !== 'login' &&
+  fieldName !== 'password' &&
+  fieldName !== identifierProperty &&
+  fieldName !== 'credentials_encrypted'
 
-const fieldsFromUserCredentials = (userCredentials, { identifierProperty }) => {
-  return Object.entries(userCredentials)
+const fieldsFromUserCredentials = (userCredentials, { identifierProperty }) =>
+  Object.entries(userCredentials)
     .filter(([fieldName]) =>
       isAdditionalField(fieldName, { identifierProperty })
     )
@@ -133,7 +129,6 @@ const fieldsFromUserCredentials = (userCredentials, { identifierProperty }) => {
       value: fieldValue,
       type: FieldType.Text
     }))
-}
 
 /**
  * Creates or updates a cipher from Cozy objects
@@ -164,7 +159,7 @@ export const createOrUpdateCipher = async (
   assert(identifierProperty, 'No identifier property found in konnector fields')
 
   const login = userCredentials[identifierProperty]
-  const password = userCredentials.password
+  const { password } = userCredentials
   const fields = fieldsFromUserCredentials(userCredentials, {
     identifierProperty
   })
@@ -231,7 +226,8 @@ const searchForCipher = async (vaultClient, searchOptions) => {
     // for password equality. Checking for password inequality would
     // prevent password update through Harvest.
     return cipher
-  } else if (cipher) {
+  }
+  if (cipher) {
     // If there is no id, we do strict password matching
     // We are in a case where we add an account through Harvest
     // There might be already a cipher that corresponds to it in the Vault

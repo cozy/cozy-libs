@@ -1,15 +1,15 @@
-import { Field } from './Field'
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 import pick from 'lodash/pick'
 
+import { isIOS } from 'cozy-device-helper'
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
 import {
   legacyLabels,
   predefinedLabels,
   ROLE_IDENTIFIER
 } from '../../helpers/manifest'
-import { isIOS } from 'cozy-device-helper'
+import { Field } from './Field'
 
 // On iOS, focusing an input not in the same tick as the user action is buggy.
 // The field is focused but the keyboard does not show up,
@@ -31,9 +31,8 @@ const fieldNameRemap = {
   password: 'pwd'
 }
 
-const getFieldName = originalName => {
-  return fieldNameRemap[originalName] || originalName
-}
+const getFieldName = originalName =>
+  fieldNameRemap[originalName] || originalName
 
 /**
  * AccountField encapsulate an unique Cozy-UI Field component.
@@ -100,7 +99,7 @@ export class AccountField extends PureComponent {
       autoCapitalize: 'none',
       autoComplete: 'off',
       className: 'u-m-0', // 0 margin
-      disabled: disabled,
+      disabled,
       error: !disabled && hasError,
       fullwidth: true,
       inputRef: this.setInputRef,
@@ -132,7 +131,7 @@ export class AccountField extends PureComponent {
         )
       case 'dropdown':
         return (
-          <Field {...sanitizeSelectProps(fieldProps)} menuPosition={'fixed'} />
+          <Field {...sanitizeSelectProps(fieldProps)} menuPosition="fixed" />
         )
       case 'password':
         return (

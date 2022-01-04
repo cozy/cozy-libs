@@ -9,8 +9,8 @@ const USER = 'upload'
 const HOST = 'downcloud.cozycloud.cc'
 const HOST_STRING = `${USER}@${HOST}`
 
-const launchCmd = (cmd, params, options) => {
-  return new Promise((resolve, reject) => {
+const launchCmd = (cmd, params, options) =>
+  new Promise((resolve, reject) => {
     const result = { stdout: [], stderr: [] }
     const cmdOptions = { encoding: 'utf8', ...options }
     const process = spawn(cmd, params, cmdOptions)
@@ -26,7 +26,6 @@ const launchCmd = (cmd, params, options) => {
       }
     })
   })
-}
 
 const deleteArchive = async archivePath => {
   try {
@@ -41,8 +40,8 @@ const sshCommand = async (cmd, hostString) => {
   return launchCmd('ssh', ['-o', 'StrictHostKeyChecking=no', hostString, cmd])
 }
 
-const rsync = async (src, dest, opts) => {
-  return launchCmd(
+const rsync = async (src, dest, opts) =>
+  launchCmd(
     'rsync',
     [
       // to remove host validation question on CI
@@ -54,7 +53,6 @@ const rsync = async (src, dest, opts) => {
     ],
     opts
   )
-}
 
 const getFullAppVersion = options => {
   const { appVersion, buildCommit } = options
@@ -63,7 +61,7 @@ const getFullAppVersion = options => {
     return appVersion
   }
 
-  return appVersion + '-' + buildCommit
+  return `${appVersion}-${buildCommit}`
 }
 
 const getRemoteDir = options => {
@@ -76,9 +74,8 @@ const getRemoteDir = options => {
   return path.join(...components)
 }
 
-const getAppBuildUrl = remoteArchivePath => {
-  return `https://${HOST}/upload/${remoteArchivePath}`
-}
+const getAppBuildUrl = remoteArchivePath =>
+  `https://${HOST}/upload/${remoteArchivePath}`
 
 const pushArchive = async (archiveFileName, options) => {
   const { buildDir } = options
@@ -104,9 +101,7 @@ const pushArchive = async (archiveFileName, options) => {
   }
 }
 
-const getArchiveFileName = slug => {
-  return `${slug}.tar.gz`
-}
+const getArchiveFileName = slug => `${slug}.tar.gz`
 
 const createArchive = async archivePath => {
   logger.log(`↳ ℹ️  Creating archive ${archivePath}`)

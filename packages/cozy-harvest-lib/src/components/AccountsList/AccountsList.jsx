@@ -5,11 +5,10 @@ import Card from 'cozy-ui/transpiled/react/Card'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
-import AccountsListItem from './AccountsListItem'
-
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { DialogContent } from 'cozy-ui/transpiled/react/Dialog'
+import AccountsListItem from './AccountsListItem'
 
 export class AccountsList extends React.PureComponent {
   render() {

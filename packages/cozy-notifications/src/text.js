@@ -15,33 +15,30 @@ const getContentDefault = $ => {
     const txt = $(txtElement).text().trim()
     switch (txtElement.tagName.toLowerCase()) {
       case 'h1':
-        content += '# ' + txt + '\n\n'
+        content += `# ${txt}\n\n`
         break
       case 'h2':
-        content += '## ' + txt + '\n\n'
+        content += `## ${txt}\n\n`
         break
       case 'h3':
-        content += '### ' + txt + '\n\n'
+        content += `### ${txt}\n\n`
         break
       case 'h4':
-        content += '#### ' + txt + '\n\n'
+        content += `#### ${txt}\n\n`
         break
       case 'h5':
-        content += '##### ' + txt + '\n\n'
+        content += `##### ${txt}\n\n`
         break
       case 'p':
-        content += '' + txt + '\n\n'
+        content += `${txt}\n\n`
         break
       case 'a':
-        content +=
-          '[' +
-          txt.replace(/\n/g, '').replace(/\s+/g, ' ') +
-          '](' +
-          txtElement.attribs.href +
-          ')\n\n'
+        content += `[${txt.replace(/\n/g, '').replace(/\s+/g, ' ')}](${
+          txtElement.attribs.href
+        })\n\n`
         break
       default:
-        throw new Error('Unrecognized tagName ' + txtElement.tagName)
+        throw new Error(`Unrecognized tagName ${txtElement.tagName}`)
     }
   })
 

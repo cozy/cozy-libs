@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import uniq from 'lodash/uniq'
 import SharingContext from '../context'
 
-export const SharedDocuments = ({ children }) => (
+export var SharedDocuments = ({ children }) => (
   <SharingContext.Consumer>
     {({ byDocId, hasLoadedAtLeastOnePage, allLoaded } = { byDocId: [] }) => {
       const sharedDocuments = uniq(Object.keys(byDocId))

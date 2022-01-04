@@ -12,12 +12,10 @@ const locales = {
  * @param {Function} Component - React component
  */
 const withLocales = Component =>
-  translate()(props => {
-    return (
-      <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
-        <Component {...props} />
-      </I18n>
-    )
-  })
+  translate()(props => (
+    <I18n dictRequire={localeCode => locales[localeCode]} lang={props.lang}>
+      <Component {...props} />
+    </I18n>
+  ))
 
 export default withLocales

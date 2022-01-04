@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { translate, Bold } from 'cozy-ui/transpiled/react/'
 
-export const CompletedFromMyselfStatus = ({ completed, total, t }) => {
+export function CompletedFromMyselfStatus({ completed, total, t }) {
   if (completed === 0) {
     return null
   }

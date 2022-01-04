@@ -30,7 +30,7 @@ class AdministrativeProcedure extends Document {
         getter: Contact.getPrimaryPhone
       }
     }
-    let personalData = {}
+    const personalData = {}
     fields.forEach(field => {
       const contactField = get(mapping, field, field)
       let value
@@ -48,6 +48,7 @@ class AdministrativeProcedure extends Document {
 
     return personalData
   }
+
   /**
    * Method to generate a query based on a few rules given by the template
    * @param {Object} docRules
@@ -79,7 +80,7 @@ class AdministrativeProcedure extends Document {
             'metadata.qualification': 'desc'
           }
         ],
-        limit: count ? count : 1
+        limit: count || 1
       })
 
     return files
@@ -94,8 +95,8 @@ class AdministrativeProcedure extends Document {
    */
   static create(data, template) {
     const { documentsData, personalData, procedureData } = data
-    const files = Object.keys(documentsData).map(identifier => {
-      return documentsData[identifier].files.map(file => {
+    const files = Object.keys(documentsData).map(identifier =>
+      documentsData[identifier].files.map(file => {
         // TODO Remove this check. it has to be done before
         if (file)
           return {
@@ -104,7 +105,7 @@ class AdministrativeProcedure extends Document {
             templateDocumentId: identifier
           }
       })
-    })
+    )
     return {
       personalData,
       procedureData,

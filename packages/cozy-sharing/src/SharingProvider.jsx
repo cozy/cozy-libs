@@ -80,7 +80,7 @@ export class SharingProvider extends Component {
         hasSharedParent(this.state, documentPath),
       hasSharedChild: documentPath => hasSharedChild(this.state, documentPath),
       share: this.share,
-      onShared: onShared,
+      onShared,
       revoke: this.revoke,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,

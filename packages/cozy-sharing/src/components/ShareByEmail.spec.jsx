@@ -12,7 +12,7 @@ describe('ShareByEmailComponent', () => {
       t: x => x,
       groups: { data: [] },
       documentType: 'Files',
-      onShare: onShare,
+      onShare,
       document: {
         id: 'doc_id'
       },

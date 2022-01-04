@@ -420,15 +420,12 @@ describe('fetchReusableAccount', () => {
         return {
           all: jest.fn().mockResolvedValue({ data: triggers })
         }
-      } else {
-        throw new Error(`client.collection for ${doctype} is not mocked`)
       }
+      throw new Error(`client.collection for ${doctype} is not mocked`)
     })
-    client.query = jest.fn().mockImplementation(() => {
-      return {
-        data: accounts
-      }
-    })
+    client.query = jest.fn().mockImplementation(() => ({
+      data: accounts
+    }))
     return { client }
   }
   it('should return the right account when possible', async () => {

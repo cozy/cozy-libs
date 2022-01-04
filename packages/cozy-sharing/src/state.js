@@ -35,31 +35,29 @@ export const updateSharing = sharing => ({
   type: UPDATE_SHARING,
   sharing
 })
-export const revokeRecipient = (sharing, index, path) => {
-  return {
-    type: REVOKE_RECIPIENT,
-    /* We set revoked status to the revoked member.
+export const revokeRecipient = (sharing, index, path) => ({
+  type: REVOKE_RECIPIENT,
+  /* We set revoked status to the revoked member.
     We can't just simply remove it, 'cauz we use the index
     to remove members..
     */
-    sharing: {
-      ...sharing,
-      attributes: {
-        ...sharing.attributes,
-        members: sharing.attributes.members.map((m, idx) => {
-          if (idx === index) {
-            return {
-              ...m,
-              status: 'revoked'
-            }
+  sharing: {
+    ...sharing,
+    attributes: {
+      ...sharing.attributes,
+      members: sharing.attributes.members.map((m, idx) => {
+        if (idx === index) {
+          return {
+            ...m,
+            status: 'revoked'
           }
-          return m
-        })
-      }
-    },
-    path
-  }
-}
+        }
+        return m
+      })
+    }
+  },
+  path
+})
 export const revokeSelf = sharing => ({ type: REVOKE_SELF, sharing })
 export const addSharingLink = data => ({ type: ADD_SHARING_LINK, data })
 export const updateSharingLink = data => ({ type: UPDATE_SHARING_LINK, data })
@@ -156,13 +154,13 @@ const byDocId = (state = {}, action) => {
     case ADD_SHARING_LINK:
       if (!Array.isArray(action.data)) {
         return indexPermission(state, action.data)
-      } else {
-        let clonedState = { ...state }
-        action.data.map(s => {
-          clonedState = { ...indexPermission(clonedState, s) }
-        })
-        return clonedState
       }
+      let clonedState = { ...state }
+      action.data.map(s => {
+        clonedState = { ...indexPermission(clonedState, s) }
+      })
+      return clonedState
+
     case REVOKE_SELF:
       return forgetSharing(state, action.sharing)
     case REVOKE_SHARING_LINK:
@@ -182,9 +180,9 @@ const permissions = (state = [], action) => {
     case ADD_SHARING_LINK:
       if (!Array.isArray(action.data)) {
         return [...state, action.data]
-      } else {
-        return [...state, ...action.data]
       }
+      return [...state, ...action.data]
+
     case UPDATE_SHARING_LINK:
       return state.map(p => (p.id === action.data.id ? action.data : p))
     case REVOKE_SHARING_LINK:
@@ -219,9 +217,7 @@ const sharings = (state = [], action) => {
       return [...filtered_state, action.data]
     case UPDATE_SHARING:
     case REVOKE_RECIPIENT:
-      return state.map(s => {
-        return s.id !== action.sharing.id ? s : action.sharing
-      })
+      return state.map(s => (s.id !== action.sharing.id ? s : action.sharing))
     case REVOKE_SELF:
       return state.filter(s => s.id !== action.sharing.id)
     default:
@@ -309,9 +305,8 @@ export const getSharingLink = (state, docId, documentType) => {
     get(perm, 'attributes.codes.email')
   if (code) {
     return buildSharingLink(state, documentType, code)
-  } else {
-    return null
   }
+  return null
 }
 
 export const getSharingForSelf = (state, docId) =>
@@ -421,28 +416,26 @@ const getSharingRule = (sharing, docId) =>
  * @param {object} rule - Sharing rule of a document
  * @returns {string} two-way or one-way
  */
-const getDirectorySharingType = rule => {
+const getDirectorySharingType = rule =>
   // If a document has no rule, it is a shortcut preview of a sharing.
   // Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
   // TODO : the sharing type shouldn't be based on rule but on ready_only prop of the member
-  return rule && rule.update === 'sync' && rule.remove === 'sync'
+  rule && rule.update === 'sync' && rule.remove === 'sync'
     ? 'two-way'
     : 'one-way'
-}
 
 /**
  * Returns the sharing type of a file
  * @param {object} rule - Sharing rule of a document
  * @returns {string} two-way or one-way
  */
-const getFileSharingType = rule => {
+const getFileSharingType = rule =>
   // If a document has no rule, it is a shortcut preview of a sharing.
   // Since the sharing hasn't been accepted, it can't be synced so we return the "one-way" type.
   // TODO : the sharing type shouldn't be based on rule but on ready_only prop of the member
-  return rule && rule.update === 'sync' && rule.remove === 'revoke'
+  rule && rule.update === 'sync' && rule.remove === 'revoke'
     ? 'two-way'
     : 'one-way'
-}
 
 /**
  * Returns the sharing type of a document
@@ -466,9 +459,7 @@ export const isReadOnlySharing = (sharing, docId) => {
   const directorySharingType = getDirectorySharingType(rule)
   const fileSharingType = getFileSharingType(rule)
 
-  return directorySharingType === 'two-way' || fileSharingType === 'two-way'
-    ? false
-    : true
+  return !(directorySharingType === 'two-way' || fileSharingType === 'two-way')
 }
 
 const buildSharingLink = (state, documentType, sharecode) => {

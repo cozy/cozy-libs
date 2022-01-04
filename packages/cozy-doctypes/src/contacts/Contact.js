@@ -122,7 +122,8 @@ class Contact extends Document {
     logDeprecated('getFullname')
     if (contact.fullname) {
       return contact.fullname
-    } else if (contact.name) {
+    }
+    if (contact.name) {
       return [
         'namePrefix',
         'givenName',

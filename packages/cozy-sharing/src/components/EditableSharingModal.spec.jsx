@@ -15,15 +15,13 @@ jest.mock('./useFetchDocumentPath', () => ({
   useFetchDocumentPath: jest.fn()
 }))
 
-const AppWrapper = ({ children, client }) => {
-  return (
-    <AppLike client={client}>
-      <BreakpointsProvider>
-        <SharingProvider client={client}>{children}</SharingProvider>
-      </BreakpointsProvider>
-    </AppLike>
-  )
-}
+const AppWrapper = ({ children, client }) => (
+  <AppLike client={client}>
+    <BreakpointsProvider>
+      <SharingProvider client={client}>{children}</SharingProvider>
+    </BreakpointsProvider>
+  </AppLike>
+)
 
 describe('EditableSharingModal', () => {
   const client = createMockClient({})

@@ -1,16 +1,16 @@
-import styles from './share.styl'
 import React from 'react'
 import PropTypes from 'prop-types'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import styles from './share.styl'
 
 import { OwnerIdentity } from './components/Recipient'
 import WhoHasAccess from './components/WhoHasAccess'
 import { getDisplayName } from './models'
 
-export const SharingDetailsModal = ({
+export var SharingDetailsModal = ({
   onClose,
   sharingType,
   owner,
@@ -24,7 +24,7 @@ export const SharingDetailsModal = ({
 
   return (
     <Dialog
-      open={true}
+      open
       onClose={onClose}
       className={styles['share-modal']}
       title={t(`${documentType}.share.details.title`)}

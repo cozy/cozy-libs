@@ -36,7 +36,7 @@ describe('Oauth helper', () => {
       )
     })
     it('should accept string value', () => {
-      let url = getOAuthUrl({
+      const url = getOAuthUrl({
         ...defaultConf,
         oAuthConf: { scope: 'thescope' }
       })
@@ -45,7 +45,7 @@ describe('Oauth helper', () => {
       )
     })
     it('should should join array values with spaces', () => {
-      let url = getOAuthUrl({
+      const url = getOAuthUrl({
         ...defaultConf,
         oAuthConf: { scope: ['thescope', 'thescope2'] }
       })

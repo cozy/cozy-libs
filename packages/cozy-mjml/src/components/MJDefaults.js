@@ -10,9 +10,7 @@ validator.registerDependencies({
 function buildCSS(className, styles) {
   const rules = reduce(
     styles,
-    (output, value, name) => {
-      return `${output}${name}:${value};`
-    },
+    (output, value, name) => `${output}${name}:${value};`,
     ''
   )
   return `.${className}{${rules}}\n`
@@ -66,18 +64,12 @@ class MJDefaults extends core.HeadComponent {
       'font-weight': 'bold',
       'line-height': '1.43'
     })
-    add(
-      'classes',
-      'primary-link',
-      Object.assign(
-        {
-          'background-color': 'transparent',
-          padding: '0',
-          'inner-padding': '10px 8px'
-        },
-        primaryLink
-      )
-    )
+    add('classes', 'primary-link', {
+      'background-color': 'transparent',
+      padding: '0',
+      'inner-padding': '10px 8px',
+      ...primaryLink
+    })
 
     // Create some styles duplication for HTML elements
     add('style', buildCSS('primary-link', primaryLink))

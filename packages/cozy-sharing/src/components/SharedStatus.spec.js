@@ -2,6 +2,7 @@ import React from 'react'
 import { mount } from 'enzyme'
 import { SharedStatus } from './SharedStatus'
 import AppLike from '../../test/AppLike'
+
 describe('SharedStatus component', () => {
   const WrappingComponent = ({ children }) => <AppLike>{children}</AppLike>
 
@@ -35,12 +36,9 @@ describe('SharedStatus component', () => {
   })
 
   it('should display the link if there is a link', () => {
-    const component = mount(
-      <SharedStatus docId="1" recipients={[]} link={true} />,
-      {
-        wrappingComponent: WrappingComponent
-      }
-    )
+    const component = mount(<SharedStatus docId="1" recipients={[]} link />, {
+      wrappingComponent: WrappingComponent
+    })
     expect(component).toMatchSnapshot()
   })
 })

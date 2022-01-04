@@ -9,20 +9,17 @@ const flagCallFinder = name => ({
 })
 
 /** Returns true if path is Program or a Block */
-const isBlockLike = path => {
-  return path.value && path.value.length !== undefined && path.name === 'body'
-}
+const isBlockLike = path =>
+  path.value && path.value.length !== undefined && path.name === 'body'
 
-const countJSX = (root, j) => {
-  return root.find(j.JSXOpeningElement).length
-}
+const countJSX = (root, j) => root.find(j.JSXOpeningElement).length
 
 /** Removes unused imports by counting usage */
 const removeUnusedImports = (root, j) => {
   const importsToRemove = root.find(j.ImportDeclaration)
   importsToRemove.forEach(path => {
     const toKeep = []
-    for (let specifier of path.node.specifiers) {
+    for (const specifier of path.node.specifiers) {
       const identifierName = specifier.local.name
       const usages = root.find(j.Identifier, { name: identifierName })
       const nUsage =
@@ -65,7 +62,7 @@ const flatReplace = (path, newNode) => {
 
 const simplifyConditions = (root, j) => {
   // Unary expressions with true/false
-  for (let v of [true, false]) {
+  for (const v of [true, false]) {
     root
       .find(j.UnaryExpression, {
         operator: '!',
@@ -77,13 +74,13 @@ const simplifyConditions = (root, j) => {
   }
 
   // Binary expressions with true/false
-  for (let v of [true, false]) {
-    for (let operator of ['&&', '||']) {
-      for (let dir of ['left', 'right']) {
+  for (const v of [true, false]) {
+    for (const operator of ['&&', '||']) {
+      for (const dir of ['left', 'right']) {
         const otherDir = dir === 'left' ? 'right' : 'left'
         const exps = root.find(j.LogicalExpression, {
           [dir]: { value: v },
-          operator: operator
+          operator
         })
         exps.forEach(exp => {
           if (operator == '&&') {
@@ -97,7 +94,7 @@ const simplifyConditions = (root, j) => {
   }
 
   // Simplify ternary conditions
-  for (let v of [true, false]) {
+  for (const v of [true, false]) {
     const conditionals = root.find(j.ConditionalExpression, {
       test: { value: v }
     })
@@ -109,7 +106,7 @@ const simplifyConditions = (root, j) => {
   }
 
   // Simplify ifs
-  for (let v of [true, false]) {
+  for (const v of [true, false]) {
     const ifs = root.find(j.IfStatement, { test: { value: v } })
     ifs.forEach(ifStatement => {
       flatReplace(

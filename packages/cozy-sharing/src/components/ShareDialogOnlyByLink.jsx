@@ -18,7 +18,7 @@ const ShareDialogOnlyByLink = ({
   return (
     <Dialog
       disableEnforceFocus
-      open={true}
+      open
       onClose={onClose}
       title={t(`${documentType}.share.title`, {
         name: document.name || document.attributes.name

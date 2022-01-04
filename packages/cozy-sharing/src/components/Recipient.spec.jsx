@@ -1,8 +1,8 @@
 import React from 'react'
-import Recipient, { excludeMeAsOwnerFromRecipients } from './Recipient'
-import AppLike from '../../test/AppLike'
 import { createMockClient } from 'cozy-client'
 import { render, fireEvent } from '@testing-library/react'
+import Recipient, { excludeMeAsOwnerFromRecipients } from './Recipient'
+import AppLike from '../../test/AppLike'
 
 describe('Recipient component', () => {
   const client = createMockClient({})
@@ -10,13 +10,12 @@ describe('Recipient component', () => {
     uri: 'foo.mycozy.cloud'
   }
 
-  const setup = props => {
-    return render(
+  const setup = props =>
+    render(
       <AppLike client={client}>
         <Recipient {...props} />
       </AppLike>
     )
-  }
 
   let createRangeBackup
 

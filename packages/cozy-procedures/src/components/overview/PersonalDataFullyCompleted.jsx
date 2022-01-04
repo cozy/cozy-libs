@@ -4,7 +4,7 @@ import snarkdown from 'snarkdown'
 import capitalize from 'lodash/capitalize'
 import { InlineCard, translate, Text } from 'cozy-ui/transpiled/react'
 
-const PersonalDataFullyCompleted = ({ navigateTo, personalData, t }) => {
+function PersonalDataFullyCompleted({ navigateTo, personalData, t }) {
   const {
     firstname,
     lastname,

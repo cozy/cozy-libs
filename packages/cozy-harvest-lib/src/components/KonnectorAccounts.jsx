@@ -11,12 +11,12 @@ import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import CozyRealtime from 'cozy-realtime'
+import DialogContent from '@material-ui/core/DialogContent'
 import { fetchAccountsFromTriggers } from '../connections/accounts'
 
 import { fetchTrigger } from '../connections/triggers'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import logger from '../logger'
-import DialogContent from '@material-ui/core/DialogContent'
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
@@ -113,7 +113,7 @@ export class KonnectorAccounts extends React.Component {
           <Typography variant="h6">
             {this.state.boundaryError.message}
           </Typography>
-          <pre>{this.state.boundaryErrorInfo.componentStack + ''}</pre>
+          <pre>{`${this.state.boundaryErrorInfo.componentStack}`}</pre>
         </div>
       )
     }

@@ -76,12 +76,11 @@ const legacyLoginFields = ['login', 'identifier', 'new_identifier', 'email']
  * @param  {object} fields Fields object from manifest
  * @return {object}        key/value pairs of default values
  */
-const defaultFieldsValues = fields => {
-  return _mapValues(
+const defaultFieldsValues = fields =>
+  _mapValues(
     _pickBy(fields, value => !!value.default),
     value => value.default
   )
-}
 
 /**
  * Returns the key for the field having the role=identifier attribute
@@ -110,20 +109,20 @@ const removeOldFields = fields => {
 const sanitizeIdentifier = fields => {
   const sanitized = _cloneDeep(fields)
   let hasIdentifier = false
-  for (let fieldName in sanitized)
+  for (const fieldName in sanitized)
     if (sanitized[fieldName].role === ROLE_IDENTIFIER) {
       if (hasIdentifier) delete sanitized[fieldName].role
       else hasIdentifier = true
     }
   if (hasIdentifier) return sanitized
 
-  for (let name of legacyLoginFields)
+  for (const name of legacyLoginFields)
     if (sanitized[name]) {
       sanitized[name].role = ROLE_IDENTIFIER
       return sanitized
     }
 
-  for (let fieldName in sanitized)
+  for (const fieldName in sanitized)
     if (sanitized[fieldName].type !== 'password') {
       sanitized[fieldName].role = ROLE_IDENTIFIER
       return sanitized
@@ -139,7 +138,7 @@ const sanitizeIdentifier = fields => {
  */
 const sanitizeRequired = fields => {
   const sanitized = _cloneDeep(fields)
-  for (let fieldName in sanitized) {
+  for (const fieldName in sanitized) {
     const field = sanitized[fieldName]
     // Ensure legacy for field isRequired
     const required =
@@ -170,7 +169,7 @@ const legacyEncryptedFields = [
  */
 const sanitizeEncrypted = fields => {
   const sanitized = _cloneDeep(fields)
-  for (let fieldName in sanitized) {
+  for (const fieldName in sanitized) {
     const field = sanitized[fieldName]
     if (typeof field.encrypted !== 'boolean')
       field.encrypted =

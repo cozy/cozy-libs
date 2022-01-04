@@ -30,7 +30,7 @@ const setup = async ({
 }
 
 describe('fetchKonnectorData', () => {
-  let konnector = {
+  const konnector = {
     attributes: {
       name: 'Pajemploi',
       vendor_link: 'https://www.pajemploi.urssaf.fr/'

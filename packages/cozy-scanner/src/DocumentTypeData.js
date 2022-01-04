@@ -1,8 +1,9 @@
 import { models } from 'cozy-client'
+
 const { Qualification } = models.document
 
-const buildItems = labels => {
-  return labels
+const buildItems = labels =>
+  labels
     .map(label => {
       try {
         return new Qualification.getByLabel(label)
@@ -12,7 +13,6 @@ const buildItems = labels => {
       }
     })
     .filter(item => item)
-}
 
 const identityLabels = [
   'identity_photo',

@@ -10,18 +10,20 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
 
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
-import { getEncryptedFieldName } from '../../helpers/fields'
+import fieldHelpers, {
+  getEncryptedFieldName,
+  SECRET
+} from '../../helpers/fields'
 import { KonnectorJobError, isRunnable } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
-import fieldHelpers, { SECRET } from '../../helpers/fields'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -79,8 +81,8 @@ export class AccountForm extends PureComponent {
 
     const currentIndex = inputs.indexOf(this.inputFocused)
 
-    let nextIndex = currentIndex + 1
-    let nextInput = inputs[nextIndex]
+    const nextIndex = currentIndex + 1
+    const nextInput = inputs[nextIndex]
 
     if (nextInput) {
       nextInput.focus()
@@ -170,8 +172,8 @@ export class AccountForm extends PureComponent {
   }
 
   validate = (fields, initialValues) => vals => {
-    let errors = {}
-    for (let name in fields)
+    const errors = {}
+    for (const name in fields)
       if (
         fields[name].required &&
         !vals[name] &&
@@ -214,7 +216,7 @@ export class AccountForm extends PureComponent {
       flowState
     } = this.props
     const submitting = flowState.running
-    const error = flowState.error
+    const { error } = flowState
 
     const { fields, name } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
@@ -319,7 +321,7 @@ export class AccountForm extends PureComponent {
                 title={t('triggerManager.confirmationModal.title')}
                 description={t('triggerManager.confirmationModal.description')}
                 onClose={this.hideConfirmationModal}
-                open={true}
+                open
                 actions={
                   <>
                     <Button

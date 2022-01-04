@@ -1,11 +1,11 @@
 import React from 'react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import cx from 'classnames'
 import { default as DumbShareByLink } from './ShareByLink'
 import { default as DumbShareByEmail } from './ShareByEmail'
 import WhoHasAccess from './WhoHasAccess'
 
-import cx from 'classnames'
 import styles from '../share.styl'
 
 import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
@@ -72,7 +72,7 @@ const SharingContent = ({
       )}
       {showWhoHasAccess && (
         <WhoHasAccess
-          className={'u-mt-1'}
+          className="u-mt-1"
           document={document}
           documentType={documentType}
           isOwner={isOwner}
@@ -109,17 +109,15 @@ const ShareDialogCozyToCozy = ({
   documentType,
   document,
   ...props
-}) => {
-  return (
-    <ShareDialogTwoStepsConfirmationContainer
-      {...props}
-      documentType={documentType}
-      document={document}
-      dialogContentOnShare={SharingContent}
-      dialogActionsOnShare={showShareByLink ? DumbShareByLink : null}
-      dialogTitleOnShare={SharingTitleFunction({ documentType, document })}
-    />
-  )
-}
+}) => (
+  <ShareDialogTwoStepsConfirmationContainer
+    {...props}
+    documentType={documentType}
+    document={document}
+    dialogContentOnShare={SharingContent}
+    dialogActionsOnShare={showShareByLink ? DumbShareByLink : null}
+    dialogTitleOnShare={SharingTitleFunction({ documentType, document })}
+  />
+)
 
 export default ShareDialogCozyToCozy

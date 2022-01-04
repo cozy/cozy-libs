@@ -1,3 +1,1 @@
-module.exports = options => {
-  return Object.assign({}, options, { appBuildUrl: 'http://cozy.io' })
-}
+module.exports = options => ({ ...options, appBuildUrl: 'http://cozy.io' })

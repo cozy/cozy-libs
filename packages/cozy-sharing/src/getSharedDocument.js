@@ -5,7 +5,7 @@ const getSharedDocument = async client => {
     .collection('io.cozy.permissions')
     .getOwnPermissions()
 
-  const permissions = permissionsData.attributes.permissions
+  const { permissions } = permissionsData.attributes
   // permissions contains several named keys, but the one to use depends on the situation. Using the first one is what we want in all known cases.
   const sharedDocumentId = get(Object.values(permissions), '0.values.0')
 

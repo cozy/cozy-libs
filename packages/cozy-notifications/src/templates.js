@@ -8,13 +8,9 @@ import { palette, resolveCSSProperties } from './cssUtils'
 import stylesheet from './style.css'
 import cozyLayout from './cozy-layout.hbs'
 
-const isOfType = type => node => {
-  return node.type == type
-}
+const isOfType = type => node => node.type == type
 
-const isPath = path => node => {
-  return node.path.original == path
-}
+const isPath = path => node => node.path.original == path
 
 const isExtendBlock = overEvery([isOfType('BlockStatement'), isPath('extend')])
 const isContentBlock = overEvery([
@@ -40,8 +36,8 @@ export const collectInfo = (templateContent, partials) => {
   const parsedTemplate = Handlebars.parse(templateContent)
 
   let curBody = parsedTemplate.body
-  let contentNodes = []
-  let parents = []
+  const contentNodes = []
+  const parents = []
 
   while (curBody) {
     // Add content nodes for current AST
@@ -185,13 +181,10 @@ export const renderer = ({ partials: userPartials, helpers: userHelpers }) => {
   return {
     Handlebars: h,
     h,
-    render: ({ template, data }) => {
-      return twoPhaseRender(h, template, data, allPartials)
-    },
-    collectInfo: template => {
-      return collectInfo(template, allPartials)
-    },
-    injectContent: injectContent
+    render: ({ template, data }) =>
+      twoPhaseRender(h, template, data, allPartials),
+    collectInfo: template => collectInfo(template, allPartials),
+    injectContent
   }
 }
 

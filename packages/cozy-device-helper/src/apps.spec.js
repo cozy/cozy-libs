@@ -10,9 +10,7 @@ describe('apps helpers', () => {
       set: () => window.startApp,
       start: mockStart
     }
-    appHelpers.checkApp = jest.fn().mockImplementation(async () => {
-      return true
-    })
+    appHelpers.checkApp = jest.fn().mockImplementation(async () => true)
 
     const res = await appHelpers.startApp({
       appId: 'io.cozy.drive.mobile',

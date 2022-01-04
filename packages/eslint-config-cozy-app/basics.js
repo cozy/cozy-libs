@@ -1,5 +1,3 @@
-'use strict'
-
 module.exports = {
   plugins: ['prettier'],
   extends: ['airbnb', 'eslint:recommended', 'eslint-config-prettier'],

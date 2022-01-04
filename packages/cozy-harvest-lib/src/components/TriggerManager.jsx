@@ -10,7 +10,12 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 
-import { CipherType } from 'cozy-keys-lib'
+import {
+  CipherType,
+  withVaultUnlockContext,
+  VaultUnlockPlaceholder,
+  VaultUnlockProvider
+} from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -21,11 +26,6 @@ import manifest from '../helpers/manifest'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
-import {
-  withVaultUnlockContext,
-  VaultUnlockPlaceholder,
-  VaultUnlockProvider
-} from 'cozy-keys-lib'
 import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
@@ -46,9 +46,8 @@ const getInitialStep = ({ account, konnector }) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)
   if (konnectorPolicy.saveInVault) {
     return account ? 'accountForm' : null
-  } else {
-    return 'accountForm'
   }
+  return 'accountForm'
 }
 
 /**
@@ -86,7 +85,7 @@ export class DumbTriggerManager extends Component {
    */
   async handleOAuthAccountId(accountId) {
     const { client, flow, konnector, t } = this.props
-    let oAuthAccount = await fetchAccount(client, accountId)
+    const oAuthAccount = await fetchAccount(client, accountId)
 
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
@@ -105,7 +104,7 @@ export class DumbTriggerManager extends Component {
     if (!foundOAuthConnection) {
       flow.ensureTriggerAndLaunch(client, {
         account: oAuthAccount,
-        konnector: konnector,
+        konnector,
         trigger: flow.trigger,
         t
       })
@@ -151,6 +150,7 @@ export class DumbTriggerManager extends Component {
       })
     }
   }
+
   /**
    * TODO rename state error to accountError
    */
@@ -292,12 +292,10 @@ export class DumbTriggerManager extends Component {
       })
       if (ciphers.length === 0) {
         this.showAccountForm()
+      } else if (this.state.step === 'accountForm') {
+        this.setState({ ciphers })
       } else {
-        if (this.state.step === 'accountForm') {
-          this.setState({ ciphers })
-        } else {
-          this.showCiphersList(ciphers)
-        }
+        this.showCiphersList(ciphers)
       }
     } catch (err) {
       logger.error(
@@ -449,15 +447,13 @@ const LegacyTriggerManager = props => {
   )
 }
 
-export const IntentTriggerManager = ({ vaultUnlockFormProps, ...props }) => {
-  return (
-    <HarvestVaultProvider>
-      <VaultUnlockProvider>
-        <LegacyTriggerManager {...props} />
-        <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
-      </VaultUnlockProvider>
-    </HarvestVaultProvider>
-  )
-}
+export var IntentTriggerManager = ({ vaultUnlockFormProps, ...props }) => (
+  <HarvestVaultProvider>
+    <VaultUnlockProvider>
+      <LegacyTriggerManager {...props} />
+      <VaultUnlockPlaceholder unlockFormProps={vaultUnlockFormProps} />
+    </VaultUnlockProvider>
+  </HarvestVaultProvider>
+)
 
 export default LegacyTriggerManager

@@ -7,7 +7,7 @@ const {
 } = require('./completion')
 
 const visit = (tree, fn, path = []) => {
-  for (let [k, v] of Object.entries(tree)) {
+  for (const [k, v] of Object.entries(tree)) {
     const newPath = path.slice()
     newPath.push(k)
     fn(v, newPath)
@@ -56,7 +56,7 @@ const build = (cliTree, options = {}) => {
       const [parser] = getParserAtPath(path, node)
       parser.setDefaults({ handler: node.handler })
       if (node.arguments) {
-        for (let argOpt of node.arguments) {
+        for (const argOpt of node.arguments) {
           const arg = typeof argOpt === 'string' ? argOpt : argOpt.argument
           const argumentOptions =
             typeof argOpt === 'string' ? {} : omit(argOpt, 'argument')

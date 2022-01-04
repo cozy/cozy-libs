@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-'use strict'
-
 const { ArgumentParser } = require('argparse')
 const capitalize = require('lodash/capitalize')
 const omitBy = require('lodash/omitBy')
@@ -94,10 +92,9 @@ try {
 function _getPublishMode() {
   if (process.env.TRAVIS === 'true') {
     return MODES.TRAVIS
-  } else {
-    // default mode
-    return MODES.MANUAL
   }
+  // default mode
+  return MODES.MANUAL
 }
 
 async function publishApp(cliOptions) {

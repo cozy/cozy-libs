@@ -16,6 +16,7 @@ import styles from '../share.styl'
 import { getSuccessMessage } from '../helpers/successMessage'
 import { getOrCreateFromArray } from '../helpers/contacts'
 import { isReadOnlySharing } from '../state'
+
 export class ShareByEmail extends Component {
   constructor(props) {
     super(props)
@@ -156,6 +157,7 @@ export class ShareByEmail extends Component {
     }
     return isSharingReadOnly ? [readOnly] : [readWrite, readOnly]
   }
+
   render() {
     const { contacts, documentType, groups, t } = this.props
     const { recipients } = this.state

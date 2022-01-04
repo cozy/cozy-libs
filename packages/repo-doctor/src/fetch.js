@@ -8,7 +8,7 @@ const depEntryToObject = type => depEntry => ({
 })
 
 const fetchRepositoryInfo = async repository => {
-  const slug = repository.slug
+  const { slug } = repository
   const packageJsonPath = repository.packageJsonPath || 'package.json'
   const packageJsonURL = `https://raw.githubusercontent.com/${slug}/master/${packageJsonPath}`
   const packageJsonData = await fetch(packageJsonURL).then(resp => resp.json())
@@ -51,20 +51,16 @@ const fetchDependencyInfo = memoize(
 )
 
 const fetchRepositoryDirectoryContent = memoize(
-  async (repoSlug, pathName) => {
-    return fetch(
-      `https://api.github.com/repos/${repoSlug}/contents/${pathName}`
-    ).then(resp => resp.json())
-  },
+  async (repoSlug, pathName) =>
+    fetch(`https://api.github.com/repos/${repoSlug}/contents/${pathName}`).then(
+      resp => resp.json()
+    ),
   (repoSlug, pathName) => `${repoSlug} / ${pathName}`
 )
 
 const fetchRepositoryFileContent = memoize(
-  async (repoSlug, pathName) => {
-    return fetch(
-      `https://raw.githubusercontent.com/${repoSlug}/master/${pathName}`
-    )
-  },
+  async (repoSlug, pathName) =>
+    fetch(`https://raw.githubusercontent.com/${repoSlug}/master/${pathName}`),
   (repoSlug, pathName) => `${repoSlug} / ${pathName}`
 )
 

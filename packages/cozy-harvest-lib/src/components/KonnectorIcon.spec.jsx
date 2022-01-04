@@ -1,7 +1,7 @@
 import React from 'react'
-import KonnectorIcon from './KonnectorIcon'
 import CozyClient, { CozyProvider } from 'cozy-client'
 import { mount } from 'enzyme'
+import KonnectorIcon from './KonnectorIcon'
 
 describe('KonnectorIcon', () => {
   let originalConsoleError
@@ -10,7 +10,7 @@ describe('KonnectorIcon', () => {
     // eslint-disable-next-line no-console
     originalConsoleError = console.error
     // eslint-disable-next-line no-console
-    console.error = jest.fn(function () {
+    console.error = jest.fn(() => {
       throw new Error('console.error should not be called during tests')
     })
   })

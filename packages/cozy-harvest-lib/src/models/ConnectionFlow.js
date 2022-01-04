@@ -4,12 +4,12 @@ import get from 'lodash/get'
 import Realtime from 'cozy-realtime'
 import flag from 'cozy-flags'
 
+import clone from 'lodash/clone'
 import {
   fetchReusableAccount,
   saveAccount,
   ACCOUNTS_DOCTYPE
 } from '../connections/accounts'
-import clone from 'lodash/clone'
 import {
   launchTrigger,
   prepareTriggerAccount,
@@ -17,10 +17,10 @@ import {
   ensureTrigger
 } from '../connections/triggers'
 import { KonnectorJobError, getLauncher } from '../helpers/konnectors'
-import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
+import { watchKonnectorJob } from './konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
-import { createOrUpdateCipher } from '../models/cipherUtils'
+import { createOrUpdateCipher } from './cipherUtils'
 import assert from '../assert'
 import * as accounts from '../helpers/accounts'
 import * as triggersModel from '../helpers/triggers'
@@ -185,10 +185,10 @@ export class ConnectionFlow {
   }
 
   handleAccountTwoFA(prevAccount) {
-    const account = this.account
+    const { account } = this
 
     const prevState = prevAccount && prevAccount.state
-    const state = account.state
+    const { state } = account
 
     return this.handleTwoFAStateChange(state, prevState)
   }
@@ -363,7 +363,7 @@ export class ConnectionFlow {
     try {
       let { account, trigger } = options
 
-      const client = this.client
+      const { client } = this
 
       this.setState({ status: CREATING_ACCOUNT })
       this.trigger = trigger
@@ -568,14 +568,14 @@ export class ConnectionFlow {
   }
 
   getDerivedState() {
-    const trigger = this.trigger
+    const { trigger } = this
     const { status, accountError } = this.state
     const triggerError = triggersModel.getKonnectorJobError(trigger)
     return {
       running: ![ERRORED, IDLE, SUCCESS].includes(status),
       twoFARunning: status === RUNNING_TWOFA,
       twoFARetry: status == TWO_FA_MISMATCH,
-      triggerError: triggerError,
+      triggerError,
       trigger,
       accountError,
       error: this.getMockError() || accountError || triggerError,

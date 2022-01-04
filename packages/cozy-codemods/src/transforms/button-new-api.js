@@ -4,13 +4,12 @@
  */
 
 module.exports = function (file, api) {
-  var j = api.jscodeshift // alias the jscodeshift API
-  var root = j(file.source) // parse JS code into an AST
+  const j = api.jscodeshift // alias the jscodeshift API
+  const root = j(file.source) // parse JS code into an AST
   const { jsx, nodes } = require('./utils')(j)
 
-  const hasIcon = children => {
-    return children[0] && jsx.elementOfClass(children[0], 'Icon')
-  }
+  const hasIcon = children =>
+    children[0] && jsx.elementOfClass(children[0], 'Icon')
 
   const not = fn => x => !fn(x)
 
@@ -26,9 +25,8 @@ module.exports = function (file, api) {
       jsx.getAttributeName(attrs[0]) !== 'icon'
     ) {
       return j.jsxExpressionContainer(x)
-    } else {
-      return j.literal(jsx.getAttributeValue(attrs[0]))
     }
+    return j.literal(jsx.getAttributeValue(attrs[0]))
   }
 
   const popLeft = arr => {

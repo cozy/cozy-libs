@@ -15,7 +15,7 @@ export function remove(node) {
   node.parentNode.removeChild(node)
 }
 
-const px = val => val + 'px'
+const px = val => `${val}px`
 const propFmt = {
   width: px,
   height: px,

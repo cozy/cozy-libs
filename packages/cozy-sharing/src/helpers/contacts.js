@@ -1,14 +1,15 @@
-import { validateEmail } from '../helpers/email'
+import { validateEmail } from './email'
 
 // Return the contact object if present
 // Else check if a contact exist with this email address, if yes return it
 // if not create it
-export const getOrCreateFromArray = async (client, contacts, createContact) => {
-  return await Promise.all(
+export const getOrCreateFromArray = async (client, contacts, createContact) =>
+  await Promise.all(
     contacts.map(async contact => {
       if (contact.id) {
         return contact
-      } else if (validateEmail(contact.email)) {
+      }
+      if (validateEmail(contact.email)) {
         const matchedContact = await client.collection('io.cozy.contacts').find(
           {
             email: {
@@ -29,13 +30,11 @@ export const getOrCreateFromArray = async (client, contacts, createContact) => {
           // We take the shortcut that if we have sevaral contacts
           // with the same address, we take the first one for now
           return matchedContact.data[0]
-        } else {
-          const resp = await createContact({
-            email: [{ address: contact.email, primary: true }]
-          })
-          return resp.data
         }
+        const resp = await createContact({
+          email: [{ address: contact.email, primary: true }]
+        })
+        return resp.data
       }
     })
   )
-}

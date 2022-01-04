@@ -18,15 +18,13 @@ import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import PaperplaneIcon from 'cozy-ui/transpiled/react/Icons/Paperplane'
 import ToTheCloudIcon from 'cozy-ui/transpiled/react/Icons/ToTheCloud'
 
+import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import AvatarPlusX from './AvatarPlusX'
 import styles from './recipient.styl'
 import modalStyles from '../share.styl'
 import { getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
-
-import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 export const MAX_DISPLAYED_RECIPIENTS = 3
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
@@ -43,16 +41,15 @@ export const excludeMeAsOwnerFromRecipients = ({
   recipients,
   isOwner,
   client
-}) => {
-  return recipients.filter(recipient => {
+}) =>
+  recipients.filter(recipient => {
     if (isOwner) {
       return recipient.status !== 'owner'
     }
     return recipient.instance !== client.options.uri
   })
-}
 
-export const RecipientsAvatars = ({
+export var RecipientsAvatars = ({
   recipients,
   link,
   size,
@@ -124,7 +121,7 @@ export const RecipientsAvatars = ({
   )
 }
 
-export const RecipientAvatar = ({ recipient, ...rest }) => {
+export var RecipientAvatar = ({ recipient, ...rest }) => {
   const client = useClient()
 
   /**
@@ -154,8 +151,8 @@ export const RecipientAvatar = ({ recipient, ...rest }) => {
   )
 }
 
-export const OwnerIdentity = ({ url, size, ...rest }) => (
-  <div className={styles['avatar']}>
+export var OwnerIdentity = ({ url, size, ...rest }) => (
+  <div className={styles.avatar}>
     <Avatar
       text={getInitials(rest)}
       size={size}
@@ -165,7 +162,7 @@ export const OwnerIdentity = ({ url, size, ...rest }) => (
   </div>
 )
 
-export const Permissions = ({
+export var Permissions = ({
   isOwner,
   status,
   instance,
@@ -272,7 +269,8 @@ const Status = ({ status, isMe, instance }) => {
 
   const isSendingEmail = !isMe && status === 'mail-not-sent'
   const isReady = isMe || status === 'ready'
-  let text, icon
+  let text
+  let icon
   if (isReady) {
     text = instance
     icon = ToTheCloudIcon
@@ -313,15 +311,13 @@ const RecipientConfirm = ({ recipientConfirmationData, verifyRecipient }) => {
   }
 
   return (
-    <>
-      <Button
-        style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
-        theme="text"
-        className={modalStyles['aligned-dropdown-button']}
-        onClick={verify}
-        label={t(`Share.twoStepsConfirmation.verify`)}
-      />
-    </>
+    <Button
+      style={{ position: 'initial' }} // fix z-index bug on iOS when under a BottomDrawer due to relative position
+      theme="text"
+      className={modalStyles['aligned-dropdown-button']}
+      onClick={verify}
+      label={t(`Share.twoStepsConfirmation.verify`)}
+    />
   )
 }
 
@@ -352,7 +348,7 @@ const Recipient = props => {
     <RecipientConfirm
       recipientConfirmationData={recipientConfirmationData}
       verifyRecipient={verifyRecipient}
-    ></RecipientConfirm>
+    />
   ) : (
     <Permissions {...props} className="u-flex-shrink-0" />
   )
@@ -360,7 +356,7 @@ const Recipient = props => {
   return (
     <CompositeRow
       dense
-      className={cx(styles['recipient'], 'u-ph-0')}
+      className={cx(styles.recipient, 'u-ph-0')}
       primaryText={
         <Typography className="u-ellipsis" variant="body1">
           {isMe ? t('Share.recipients.you') : name}
@@ -383,10 +379,10 @@ Recipient.propTypes = {
 
 export default Recipient
 
-export const RecipientWithoutStatus = ({ instance, ...rest }) => {
+export var RecipientWithoutStatus = ({ instance, ...rest }) => {
   const name = getDisplayName(rest)
   return (
-    <div className={styles['recipient']}>
+    <div className={styles.recipient}>
       <Avatar text={getInitials(rest)} textId={name} />
       <div className={styles['recipient-ident-status']}>
         <Identity name={name} details={instance} />
@@ -395,8 +391,8 @@ export const RecipientWithoutStatus = ({ instance, ...rest }) => {
   )
 }
 
-export const RecipientPlusX = ({ extraRecipients }, { t }) => (
-  <div className={styles['recipient']}>
+export var RecipientPlusX = ({ extraRecipients }, { t }) => (
+  <div className={styles.recipient}>
     <AvatarPlusX
       extraRecipients={extraRecipients.map(recipient =>
         getDisplayName(recipient)

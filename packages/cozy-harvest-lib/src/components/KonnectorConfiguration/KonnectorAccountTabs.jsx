@@ -29,7 +29,7 @@ const Tab = props => {
   return <UITab classes={classes} {...props} />
 }
 
-export const KonnectorAccountTabsTabs = ({ tab, onChange }) => {
+export var KonnectorAccountTabsTabs = ({ tab, onChange }) => {
   const { t } = useI18n()
   return (
     <Tabs onChange={onChange} value={tab}>
@@ -86,7 +86,7 @@ const DumbKonnectorAccountTabs = props => {
       />
       <Divider />
       <SwipeableViews
-        animateHeight={true}
+        animateHeight
         index={tab}
         disabled
         animateTransitions={isMobile}
@@ -113,16 +113,14 @@ const DumbKonnectorAccountTabs = props => {
   )
 }
 
-export const KonnectorAccountTabs = props => {
-  return (
-    <FlowProvider
-      initialTrigger={props.initialTrigger}
-      konnector={props.konnector}
-    >
-      {({ flow }) => <DumbKonnectorAccountTabs {...props} flow={flow} />}
-    </FlowProvider>
-  )
-}
+export var KonnectorAccountTabs = props => (
+  <FlowProvider
+    initialTrigger={props.initialTrigger}
+    konnector={props.konnector}
+  >
+    {({ flow }) => <DumbKonnectorAccountTabs {...props} flow={flow} />}
+  </FlowProvider>
+)
 
 KonnectorAccountTabs.propTypes = {
   konnector: PropTypes.object.isRequired,

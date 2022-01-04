@@ -10,7 +10,7 @@ validator.registerDependencies({
 class MJFooter extends core.BodyComponent {
   displayInstance(instance) {
     if (instance) {
-      const hostname = url.parse(instance).hostname
+      const { hostname } = url.parse(instance)
       return `
         <mj-section padding="16px 0">
           <mj-column vertical-align="middle">
@@ -20,14 +20,13 @@ class MJFooter extends core.BodyComponent {
             </mj-button>
           </mj-column>
         </mj-section>`
-    } else {
-      return `
+    }
+    return `
         <mj-section padding="16px 0 8px">
           <mj-column align="center">
             <mj-image padding="0" width="32px" src="https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png"></mj-image>
           </mj-column>
         </mj-section>`
-    }
   }
 
   cozySignature(locale) {

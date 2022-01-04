@@ -13,7 +13,7 @@ module.exports = {
         preprocessCss: './preprocess',
         extractCss: './dist/stylesheet.css',
         generateScopedName:
-          process.env['NODE_ENV'] == 'test'
+          process.env.NODE_ENV == 'test'
             ? '[local]'
             : '[name]__[local]___[hash:base64:5]'
       }

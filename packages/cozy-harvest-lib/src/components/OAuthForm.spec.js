@@ -4,13 +4,14 @@ import { shallow } from 'enzyme'
 
 import { OAuthForm } from 'components/OAuthForm'
 import { findKonnectorPolicy } from '../konnector-policies'
+
 jest.mock('../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
 }))
 const fetchExtraOAuthUrlParams = jest.fn()
 fetchExtraOAuthUrlParams.mockResolvedValue({})
 findKonnectorPolicy.mockReturnValue({
-  fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams
+  fetchExtraOAuthUrlParams
 })
 
 const t = jest.fn().mockImplementation(key => key)

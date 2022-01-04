@@ -11,10 +11,10 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useClient } from 'cozy-client'
 import palette from 'cozy-ui/transpiled/react/palette'
-import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 
-export const AppLinkButton = ({ slug, path }) => {
+export var AppLinkButton = ({ slug, path }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const client = useClient()
@@ -66,7 +66,7 @@ const AppLinkCard = ({ slug, path, icon, iconColor }) => {
               backgroundColor={palette[iconColor]}
               className="u-mr-half"
             >
-              <Icon icon={icon} color={palette['white']} />
+              <Icon icon={icon} color={palette.white} />
             </Circle>
           ) : null}
           {t(`card.appLink.${slug}.title`)}

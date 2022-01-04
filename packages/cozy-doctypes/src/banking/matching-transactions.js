@@ -34,35 +34,39 @@ const scoreLabel = (newTr, existingTr) => {
     squash(newTr.originalBankLabel, ' ')
   ) {
     return [200, 'originalBankLabel']
-  } else if (
+  }
+  if (
     compacted(existingTr.originalBankLabel) ===
     compacted(newTr.originalBankLabel)
   ) {
     return [120, 'originalBankLabelCompacted']
-  } else if (
+  }
+  if (
     withoutDate(existingTr.originalBankLabel) ===
     withoutDate(newTr.originalBankLabel)
   ) {
     // For some transfers, the date in the originalBankLabel is different between
     // BudgetInsight and Linxo
     return [150, 'originalBankLabelWithoutDate']
-  } else if (existingTr.label === newTr.label) {
+  }
+  if (existingTr.label === newTr.label) {
     return [100, 'label']
-  } else if (
+  }
+  if (
     eitherIncludes(existingTr.label.toLowerCase(), newTr.label.toLowerCase())
   ) {
     return [70, 'eitherIncludes']
-  } else if (
+  }
+  if (
     eitherIncludes(
       cleanLabel(existingTr.label.toLowerCase()),
       cleanLabel(newTr.label.toLowerCase())
     )
   ) {
     return [50, 'fuzzy-eitherIncludes']
-  } else {
-    // Nothing matches, we penalize so that the score is below 0
-    return [-1000, 'label-penalty']
   }
+  // Nothing matches, we penalize so that the score is below 0
+  return [-1000, 'label-penalty']
 }
 
 const DAY = 1000 * 60 * 60 * 24
@@ -75,9 +79,8 @@ const getDeltaDate = (newTr, existingTr) => {
     const nDate2 = new Date(newTr.realisationDate.substr(0, 10))
     const delta2 = Math.abs(eDate1 - nDate2)
     return Math.min(delta, delta2)
-  } else {
-    return delta
   }
+  return delta
 }
 
 const scoreMatching = (newTr, existingTr, options = {}) => {
@@ -93,9 +96,8 @@ const scoreMatching = (newTr, existingTr, options = {}) => {
       // Early exit, transactions are two far off time-wise
       res.points = -1000
       return res
-    } else {
-      methods.push('approx-date')
     }
+    methods.push('approx-date')
   }
 
   const [labelPoints, labelMethod] = scoreLabel(newTr, existingTr)
@@ -146,7 +148,7 @@ const matchTransaction = (newTr, existingTrs, options = {}) => {
  */
 const matchTransactionToGroup = function* (newTrs, existingTrs, options = {}) {
   const toMatch = Array.isArray(existingTrs) ? [...existingTrs] : []
-  for (let newTr of newTrs) {
+  for (const newTr of newTrs) {
     const res = {
       transaction: newTr
     }
@@ -176,11 +178,11 @@ const matchTransactions = function* (newTrs, existingTrs) {
   const unmatchedNew = new Set(newTrs)
   const unmatchedExisting = new Set(existingTrs)
   // eslint-disable-next-line no-unused-vars
-  for (let [date, [newGroup, existingGroup]] of zipGroup(
+  for (const [date, [newGroup, existingGroup]] of zipGroup(
     [newTrs, existingTrs],
     getDateTransaction
   )) {
-    for (let result of matchTransactionToGroup(newGroup, existingGroup)) {
+    for (const result of matchTransactionToGroup(newGroup, existingGroup)) {
       if (result.match) {
         unmatchedExisting.delete(result.match)
         unmatchedNew.delete(result.transaction)
@@ -190,8 +192,8 @@ const matchTransactions = function* (newTrs, existingTrs) {
   }
 
   const deltas = [3, 4, 5]
-  for (let delta of deltas) {
-    for (let result of matchTransactionToGroup(
+  for (const delta of deltas) {
+    for (const result of matchTransactionToGroup(
       Array.from(unmatchedNew),
       Array.from(unmatchedExisting),
       {

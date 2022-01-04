@@ -29,6 +29,7 @@ import {
 
 class Overview extends React.Component {
   realtime = null
+
   destinationFolderId = null
 
   state = {

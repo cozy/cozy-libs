@@ -4,11 +4,10 @@
 export const prefix = 'flag__'
 export const getKey = name => prefix + name
 
-const listFlagLocalStorage = () => {
-  return Object.keys(localStorage)
+const listFlagLocalStorage = () =>
+  Object.keys(localStorage)
     .filter(x => x.indexOf(prefix) === 0)
     .map(x => x.replace(prefix, ''))
-}
 
 /**
  * Gets a flag from localStorage, parses value from JSON
@@ -37,9 +36,7 @@ const setItem = (flag, value) => {
  *
  * @param  {String} flag
  */
-const removeItem = flag => {
-  return localStorage.removeItem(getKey(flag))
-}
+const removeItem = flag => localStorage.removeItem(getKey(flag))
 
 /**
  * Returns all stored flags as an object

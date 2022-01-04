@@ -27,9 +27,6 @@ import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
-import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
-
 import CozyClient, {
   Q,
   queryConnect,
@@ -37,19 +34,19 @@ import CozyClient, {
   hasQueryBeenLoaded,
   RealTimeQueries
 } from 'cozy-client'
+import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
+import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
 
 import { getFileIcon } from './mime-utils'
 
-const LoadingFileListItem = ({ divider }) => {
-  return (
-    <ListItem divider={divider}>
-      <ListItemIcon>
-        <Skeleton variant="circle" />
-      </ListItemIcon>
-      <ListItemText primary={<Skeleton height={30.5} />} />
-    </ListItem>
-  )
-}
+const LoadingFileListItem = ({ divider }) => (
+  <ListItem divider={divider}>
+    <ListItemIcon>
+      <Skeleton variant="circle" />
+    </ListItemIcon>
+    <ListItemText primary={<Skeleton height={30.5} />} />
+  </ListItem>
+)
 
 const FileListItem = ({ divider, file, onClick, style }) => {
   const { t, f } = useI18n()
@@ -79,13 +76,11 @@ const FileListItem = ({ divider, file, onClick, style }) => {
   )
 }
 
-const TransitionWrapper = ({ children }) => {
-  return (
-    <Slide direction="left" in={true}>
-      <div>{children}</div>
-    </Slide>
-  )
-}
+const TransitionWrapper = ({ children }) => (
+  <Slide direction="left" in>
+    <div>{children}</div>
+  </Slide>
+)
 
 const FileCard = ({ files, loading, konnector, trigger }) => {
   const { t } = useI18n()
@@ -149,7 +144,7 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
       </List>
       {viewerIndex !== null && (
         <Portal into="body">
-          <Modal open={true}>
+          <Modal open>
             <Viewer
               files={files}
               currentIndex={viewerIndex}
@@ -215,14 +210,16 @@ const FileDataCard = ({
   const isLoading =
     isQueryLoading(folderToSaveFiles) || isQueryLoading(sourceAccountFiles)
 
-  const files = useMemo(() => {
-    return sortBy(
-      uniq([...files1, ...files2], x => x._id),
-      x => get(x, 'cozyMetadata.createdAt')
-    )
-      .reverse()
-      .slice(0, 5)
-  }, [files1, files2])
+  const files = useMemo(
+    () =>
+      sortBy(
+        uniq([...files1, ...files2], x => x._id),
+        x => get(x, 'cozyMetadata.createdAt')
+      )
+        .reverse()
+        .slice(0, 5),
+    [files1, files2]
+  )
   return (
     <>
       <RealTimeQueries doctype="io.cozy.files" />

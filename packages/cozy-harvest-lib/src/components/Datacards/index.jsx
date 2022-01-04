@@ -1,11 +1,10 @@
 import React, { useMemo } from 'react'
 import { useDatacardOptions } from './DatacardOptionsContext'
 
-const findSuitableDataCards = (datacardOptions, datacardContext) => {
-  return datacardOptions.datacards
+const findSuitableDataCards = (datacardOptions, datacardContext) =>
+  datacardOptions.datacards
     .filter(({ match }) => match(datacardContext))
     .map(x => x.component)
-}
 
 const Datacards = ({ konnector, account, trigger }) => {
   const datacardOptions = useDatacardOptions()

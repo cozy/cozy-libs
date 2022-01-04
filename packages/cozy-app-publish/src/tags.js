@@ -25,26 +25,25 @@ const parse = tag => {
   const match = tag.match(COMPLETE)
   if (!match) {
     return null
-  } else {
-    const prefix = match[1]
-    const version = match[2]
-    const beta = match[3]
-    const dev = match[4]
-    if (beta && dev) {
-      throw new Error(`Invalid tag ${tag}, beta and dev are present`)
-    }
-    const channel = dev ? 'dev' : beta ? 'beta' : 'stable'
-    return {
-      prefix,
-      channel: channel,
-      beta: beta ? parseInt(beta) : null,
-      dev: dev || null,
-      version, // 1.0.17
-      fullVersion: `${version}${
-        channel !== 'stable' ? `-${channel}.${beta || dev}` : ''
-      }`, // 1.0.17-beta.2
-      tag
-    }
+  }
+  const prefix = match[1]
+  const version = match[2]
+  const beta = match[3]
+  const dev = match[4]
+  if (beta && dev) {
+    throw new Error(`Invalid tag ${tag}, beta and dev are present`)
+  }
+  const channel = dev ? 'dev' : beta ? 'beta' : 'stable'
+  return {
+    prefix,
+    channel,
+    beta: beta ? parseInt(beta) : null,
+    dev: dev || null,
+    version, // 1.0.17
+    fullVersion: `${version}${
+      channel !== 'stable' ? `-${channel}.${beta || dev}` : ''
+    }`, // 1.0.17-beta.2
+    tag
   }
 }
 

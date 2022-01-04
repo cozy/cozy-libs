@@ -43,7 +43,7 @@ import {
   getAccountOwners
 } from './bankAccountHelpers'
 
-const EditContractContactPicker = function (props, ref) {
+const EditContractContactPicker = (props, ref) => {
   const { t } = useI18n()
   return (
     <BaseContactPicker
@@ -70,22 +70,20 @@ const DeleteConfirm = ({
   description,
   secondaryText,
   primaryText
-}) => {
-  return (
-    <ConfirmDialog
-      open
-      onClose={onCancel}
-      title={title}
-      content={<div dangerouslySetInnerHTML={{ __html: description }} />}
-      actions={
-        <>
-          <Button theme="secondary" label={secondaryText} onClick={onCancel} />
-          <Button theme="danger" label={primaryText} onClick={onConfirm} />
-        </>
-      }
-    />
-  )
-}
+}) => (
+  <ConfirmDialog
+    open
+    onClose={onCancel}
+    title={title}
+    content={<div dangerouslySetInnerHTML={{ __html: description }} />}
+    actions={
+      <>
+        <Button theme="secondary" label={secondaryText} onClick={onCancel} />
+        <Button theme="danger" label={primaryText} onClick={onConfirm} />
+      </>
+    }
+  />
+)
 
 const EditContract = props => {
   const { t } = useI18n()

@@ -27,22 +27,26 @@ const payload = { type, doc, id }
 
 const defaultClientUri = 'https://cozy.tools/'
 const defaultClientToken = 'MY-TOKEN'
-const defaultWebsocketURI =
-  defaultClientUri.replace(/^http/, 'ws') + 'realtime/'
+const defaultWebsocketURI = `${defaultClientUri.replace(
+  /^http/,
+  'ws'
+)}realtime/`
 
 class TaskQueue {
   constructor() {
     this.tasks = []
   }
+
   registerLast(task) {
     this.tasks.push(task)
   }
+
   registerFirst(task) {
     this.tasks.unshift(task)
   }
 
   async flush() {
-    for (let task of this.tasks) {
+    for (const task of this.tasks) {
       try {
         await task()
       } catch (e) {
@@ -129,14 +133,13 @@ function createSocketServer({
   server.on('connection', server.onconnect)
   // the mock-socket server doesn't seem to dispath the 'close' event
   // on server side despite what the doc is saying, so we cheat…
-  server.hasClosedLastSocket = () => {
-    return server.lastOpenedSocket.readyState === 3
-  }
-  cleaner.registerLast(() => {
-    return new Promise(resolve => {
-      server.stop(resolve)
-    })
-  })
+  server.hasClosedLastSocket = () => server.lastOpenedSocket.readyState === 3
+  cleaner.registerLast(
+    () =>
+      new Promise(resolve => {
+        server.stop(resolve)
+      })
+  )
   return server
 }
 
@@ -152,7 +155,7 @@ describe('CozyRealtime', () => {
   describe('sendNotification', () => {
     it('posts a message to the stack', async () => {
       const client = createCozyClient()
-      const fetchJSON = client.getStackClient().fetchJSON
+      const { fetchJSON } = client.getStackClient()
       const realtime = createRealtime({ client })
       await realtime.sendNotification(doctype, id, message)
       const route = `/realtime/${doctype}/${id}`

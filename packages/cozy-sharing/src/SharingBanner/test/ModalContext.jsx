@@ -2,7 +2,7 @@ import React, { useState, useCallback, useContext } from 'react'
 
 export const ModalContext = React.createContext()
 
-export const ModalContextProvider = ({ children }) => {
+export var ModalContextProvider = ({ children }) => {
   const [modalStack, setModalStack] = useState([])
   const pushModal = useCallback(
     modal => {
@@ -23,9 +23,9 @@ export const ModalContextProvider = ({ children }) => {
   )
 }
 
-export const ModalStack = () => {
+export var ModalStack = () => {
   const { modalStack } = useContext(ModalContext)
 
   if (modalStack.length === 0) return null
-  else return modalStack[modalStack.length - 1]
+  return modalStack[modalStack.length - 1]
 }

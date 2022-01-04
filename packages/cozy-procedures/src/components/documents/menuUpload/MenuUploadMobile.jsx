@@ -14,10 +14,10 @@ import {
 
 import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import { isAndroidApp } from 'cozy-device-helper'
-import UploadInputLabel from '../UploadInputLabel'
 
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+import UploadInputLabel from '../UploadInputLabel'
 
 class MenuUploadMobile extends Component {
   state = {
@@ -27,6 +27,7 @@ class MenuUploadMobile extends Component {
   showMenu() {
     this.setState({ menuDisplayed: true })
   }
+
   hideMenu() {
     this.setState({ menuDisplayed: false })
   }
@@ -79,7 +80,7 @@ class MenuUploadMobile extends Component {
                */
               onClick={e => e.stopPropagation()}
             >
-              <FileInput onChange={file => onChange(file)} hidden={true}>
+              <FileInput onChange={file => onChange(file)} hidden>
                 <UploadInputLabel />
               </FileInput>
             </MenuItem>

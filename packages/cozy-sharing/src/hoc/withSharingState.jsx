@@ -7,13 +7,11 @@ function getDisplayName(WrappedComponent) {
 }
 
 const withSharingState = Wrapped => {
-  const WithSharingState = props => {
-    return (
-      <SharingContext.Consumer>
-        {sharingState => <Wrapped sharingState={sharingState} {...props} />}
-      </SharingContext.Consumer>
-    )
-  }
+  const WithSharingState = props => (
+    <SharingContext.Consumer>
+      {sharingState => <Wrapped sharingState={sharingState} {...props} />}
+    </SharingContext.Consumer>
+  )
 
   WithSharingState.displayName = `WithSharingState(${getDisplayName(Wrapped)})`
   return WithSharingState

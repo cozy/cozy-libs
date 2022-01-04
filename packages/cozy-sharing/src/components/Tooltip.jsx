@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import ReactTooltip from 'react-tooltip'
 import styles from './tooltip.styl'
 
-export const SharingTooltip = props => (
+export var SharingTooltip = props => (
   <ReactTooltip
     place="bottom"
     effect="solid"
@@ -19,6 +19,7 @@ export class TooltipRecipientList extends React.Component {
   static contextTypes = {
     t: PropTypes.func.isRequired
   }
+
   render() {
     const { t } = this.context
     const { recipientNames, cutoff = 4 } = this.props

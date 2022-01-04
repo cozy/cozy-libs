@@ -2,9 +2,9 @@ import Intents from './intents'
 import { mockAPI, sleep } from './testUtils'
 
 describe('Interapp', () => {
-  let cozyClient,
-    intents,
-    api = mockAPI()
+  let cozyClient
+  let intents
+  const api = mockAPI()
 
   beforeEach(() => {
     api.reset()
@@ -84,7 +84,10 @@ describe('Interapp', () => {
   })
 
   describe('existing service', () => {
-    let intent, element, iframe, prom
+    let intent
+    let element
+    let iframe
+    let prom
 
     const mkMessage = (type, data, _intent = intent) => {
       const ev = new Event('message')

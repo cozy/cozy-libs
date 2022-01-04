@@ -8,18 +8,16 @@ import CozyClient from 'cozy-client'
 import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
 import fixtures from '../../test/fixtures'
 import AppLike from '../../test/AppLike'
-import ConnectionFlow from '../../src/models/ConnectionFlow'
+import ConnectionFlow from '../models/ConnectionFlow'
 import { findKonnectorPolicy } from '../konnector-policies'
 
 const { findKonnectorPolicy: originalFindKonnectorPolicy } = jest.requireActual(
   '../konnector-policies'
 )
 
-jest.mock('../konnector-policies', () => {
-  return {
-    findKonnectorPolicy: jest.fn()
-  }
-})
+jest.mock('../konnector-policies', () => ({
+  findKonnectorPolicy: jest.fn()
+}))
 
 jest.mock('cozy-keys-lib', () => {
   const actual = jest.requireActual('cozy-keys-lib')

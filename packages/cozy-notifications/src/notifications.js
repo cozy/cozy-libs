@@ -1,7 +1,7 @@
+import get from 'lodash/get'
 import { renderer } from './templates'
 import { renderMJML } from './mjmlUtils'
 import { generateUniversalLink, generateWebLink } from './urls'
-import get from 'lodash/get'
 import enLocale from './locales/en.json'
 import frLocale from './locales/fr.json'
 
@@ -13,9 +13,8 @@ const builtInLocales = {
 const result = (fn, defaultValue, ...args) => {
   if (fn && typeof fn === 'function') {
     return fn(...args)
-  } else {
-    return defaultValue
   }
+  return defaultValue
 }
 
 const getBuiltInHelpersForView = notifView => {
@@ -28,12 +27,9 @@ const getBuiltInHelpersForView = notifView => {
       const locale = builtInLocales[notifView.lang]
       return get(locale, key)
     },
-    universalLink: hOpts => {
-      return generateUniversalLink({ ...hOpts.hash, ...linkHelperOptions })
-    },
-    webLink: hOpts => {
-      return generateWebLink({ ...hOpts.hash, ...linkHelperOptions })
-    }
+    universalLink: hOpts =>
+      generateUniversalLink({ ...hOpts.hash, ...linkHelperOptions }),
+    webLink: hOpts => generateWebLink({ ...hOpts.hash, ...linkHelperOptions })
   }
 }
 

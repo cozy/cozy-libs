@@ -7,9 +7,9 @@ describe('Balance history', () => {
 
   beforeAll(() => {
     Document.registerClient(cozyClientJS)
-    cozyClientJS.data.query.mockImplementation(() => {
-      return Promise.resolve(queryResult)
-    })
+    cozyClientJS.data.query.mockImplementation(() =>
+      Promise.resolve(queryResult)
+    )
   })
 
   const doc = {

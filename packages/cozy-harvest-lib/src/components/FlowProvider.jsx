@@ -122,7 +122,7 @@ export class FlowProvider extends Component {
       this.dismissTwoFAModal()
     }
     const { onSuccess } = this.props
-    const flow = this.flow
+    const { flow } = this
     if (typeof onSuccess === 'function') onSuccess(flow.trigger)
   }
 
@@ -132,7 +132,7 @@ export class FlowProvider extends Component {
       this.dismissTwoFAModal()
     }
     const { onLoginSuccess } = this.props
-    const flow = this.flow
+    const { flow } = this
 
     // Handlers expect to be passed a trigger, but it is not
     // guaranteed that the trigger is ready when receiving a LOGIN_SUCCESS
@@ -150,7 +150,7 @@ export class FlowProvider extends Component {
 
   render() {
     const { showTwoFAModal } = this.state
-    const flow = this.flow
+    const { flow } = this
     const { children } = this.props
     return (
       <>

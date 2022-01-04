@@ -11,9 +11,7 @@ const getTravisVariables = require('./utils/getTravisVariables')
 
 jest.mock('./publish', () => jest.fn())
 jest.mock('./prepublish', () =>
-  jest.fn(options => {
-    return Object.assign({}, options, { sha256Sum: 'fakeshasum5644545' })
-  })
+  jest.fn(options => ({ ...options, sha256Sum: 'fakeshasum5644545' }))
 )
 jest.mock('./postpublish', () => jest.fn())
 

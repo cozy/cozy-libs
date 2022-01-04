@@ -24,11 +24,11 @@ function devFormat(type, message, label, namespace) {
     formatmessage = util.inspect(formatmessage)
   }
 
-  let formatlabel = label ? ` : "${label}" ` : ''
-  let formatnamespace = namespace ? chalk.magenta(`${namespace}: `) : ''
+  const formatlabel = label ? ` : "${label}" ` : ''
+  const formatnamespace = namespace ? chalk.magenta(`${namespace}: `) : ''
 
-  let color = type2color[type]
-  let formattype = color ? chalk[color](type) : type
+  const color = type2color[type]
+  const formattype = color ? chalk[color](type) : type
 
   return `${formatnamespace}${formattype}${formatlabel} : ${formatmessage}`
 }

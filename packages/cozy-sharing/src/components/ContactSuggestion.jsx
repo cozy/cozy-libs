@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import { models } from 'cozy-client'
-const ContactModel = models.contact
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
@@ -11,9 +10,13 @@ import styles from './recipient.styl'
 import { Contact, Group, getDisplayName, getInitials } from '../models'
 import Identity from './Identity'
 
-export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
+const ContactModel = models.contact
+
+export var ContactSuggestion = ({ contactOrGroup, contacts }) => {
   const { t } = useI18n()
-  let avatarText, name, details
+  let avatarText
+  let name
+  let details
   if (contactOrGroup._type === Group.doctype) {
     name = contactOrGroup.name
     const membersCount = contacts
@@ -40,7 +43,7 @@ export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
   }
 
   return (
-    <div className={styles['recipient']}>
+    <div className={styles.recipient}>
       <Avatar text={avatarText} size="small" />
       <Identity name={name} details={details === '' ? undefined : details} />
     </div>

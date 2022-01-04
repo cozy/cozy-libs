@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { translate, Bold } from 'cozy-ui/transpiled/react'
 
-export const CompletedFromDriveStatus = ({ completed, total, t }) => {
+export function CompletedFromDriveStatus({ completed, total, t }) {
   if (completed === 0) {
     return null
   }

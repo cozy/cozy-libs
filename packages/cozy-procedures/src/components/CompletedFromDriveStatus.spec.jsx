@@ -2,9 +2,7 @@ import React from 'react'
 
 import { CompletedFromDriveStatus } from './CompletedFromDriveStatus'
 
-const fakeT = (msgId, args) => {
-  return `${msgId} ${JSON.stringify(args)}`
-}
+const fakeT = (msgId, args) => `${msgId} ${JSON.stringify(args)}`
 
 describe('CompletedFromDriveStatus component', () => {
   it('should display nothing if no document has been gathered', () => {

@@ -1,9 +1,8 @@
 import get from 'lodash/get'
 import has from 'lodash/has'
 import trim from 'lodash/trim'
-import { getBoundT } from '../locales'
-
 import { Q, fetchPolicies } from 'cozy-client'
+import { getBoundT } from '../locales'
 
 import * as accounts from './accounts'
 
@@ -195,9 +194,8 @@ export const getErrorLocaleBound = (
  * @param  {Object} konnector
  * @return {string}           Account type
  */
-export const getAccountType = konnector => {
-  return get(konnector, 'oauth.account_type', konnector.slug)
-}
+export const getAccountType = konnector =>
+  get(konnector, 'oauth.account_type', konnector.slug)
 
 /**
  * Returns true if the konnector has a new version available and can be updated
@@ -214,12 +212,9 @@ export const hasNewVersionAvailable = (konnector = {}) =>
  * @param  {Object} konnector
  * @return {bool}   `true` if the konnector needs a folder
  */
-export const needsFolder = konnector => {
-  return (
-    has(konnector, 'fields.advancedFields.folderPath') ||
-    has(konnector, 'folders')
-  )
-}
+export const needsFolder = konnector =>
+  has(konnector, 'fields.advancedFields.folderPath') ||
+  has(konnector, 'folders')
 
 /**
  * Base directories are directory where konnector may copy their data.
@@ -271,11 +266,8 @@ const renderSubDir = (path, variables = {}) => {
  * @param {String} path
  * @return {Boolean}
  */
-const hasBaseDir = path => {
-  return allowedBaseDirVariables.some(baseDirVar => {
-    return path.startsWith(baseDirVar)
-  })
-}
+const hasBaseDir = path =>
+  allowedBaseDirVariables.some(baseDirVar => path.startsWith(baseDirVar))
 /**
  * This method creates the subDir. We can't have an empty subDir, so we set
  * it to our default '$konnector/$account'
@@ -324,7 +316,7 @@ export const buildFolderPath = (konnector, account, folders = {}) => {
   let sanitizedPath = trim(fullPath.replace(/(\/+)/g, '/'), '/')
   // If the konnector doesn't have any of our base dir, we set it to $administrative
   if (!hasBaseDir(sanitizedPath)) {
-    sanitizedPath = '$administrative/' + sanitizedPath
+    sanitizedPath = `$administrative/${sanitizedPath}`
   }
   /**
    * Now that we have our sanitizedPath, we can split it in two strings
@@ -352,16 +344,14 @@ export const buildFolderPath = (konnector, account, folders = {}) => {
  * @param  {Object} folder    The folder which the konnector should have access
  * @return {Object}           Permission object
  */
-export const buildFolderPermission = folder => {
-  return {
-    // Legacy name
-    saveFolder: {
-      type: 'io.cozy.files',
-      values: [folder._id],
-      verbs: ['GET', 'PATCH', 'POST']
-    }
+export const buildFolderPermission = folder => ({
+  // Legacy name
+  saveFolder: {
+    type: 'io.cozy.files',
+    values: [folder._id],
+    verbs: ['GET', 'PATCH', 'POST']
   }
-}
+})
 
 /**
  * Get's the launcher in the current environment if any
@@ -369,9 +359,8 @@ export const buildFolderPermission = folder => {
  * @param {Object} win The window object in the current environment
  * @returns {Object}
  */
-export const getLauncher = ({ win }) => {
-  return get(win, 'cozy.ClientConnectorLauncher', null)
-}
+export const getLauncher = ({ win }) =>
+  get(win, 'cozy.ClientConnectorLauncher', null)
 
 /**
  * Define if it is possible to run a konnector in the current environment
@@ -380,9 +369,8 @@ export const getLauncher = ({ win }) => {
  * @param {Object} konnector The io.cozy.konnectors object for the current konnector
  * @returns {Boolean}
  */
-export const isRunnable = ({ win, konnector = {} }) => {
-  return Boolean(!konnector.clientSide || getLauncher({ win }))
-}
+export const isRunnable = ({ win, konnector = {} }) =>
+  Boolean(!konnector.clientSide || getLauncher({ win }))
 
 export default {
   KonnectorJobError,

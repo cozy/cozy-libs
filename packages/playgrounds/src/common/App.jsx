@@ -11,8 +11,8 @@ import IconSprite from 'cozy-ui/transpiled/react/Icon/Sprite'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import { getUniversalLinkDomain } from 'cozy-ui/transpiled/react/AppLinker'
-import icon from './icon.png'
 import { MobileRouter } from 'cozy-authentication'
+import icon from './icon.png'
 
 const styles = {
   error: {

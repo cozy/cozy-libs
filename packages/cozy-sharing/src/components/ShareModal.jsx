@@ -5,7 +5,8 @@ import { contactsResponseType, groupsResponseType } from '../propTypes'
 
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
-export const ShareModal = ({
+
+export var ShareModal = ({
   contacts,
   createContact,
   document,

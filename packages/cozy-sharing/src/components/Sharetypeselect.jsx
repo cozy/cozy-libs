@@ -6,12 +6,11 @@ import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { Icon } from 'cozy-ui/transpiled/react'
 
+import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
+import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
 import styles from '../share.styl'
 
 import logger from '../logger'
-
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
-import CheckIcon from 'cozy-ui/transpiled/react/Icons/Check'
 
 const DropdownIndicator = props => (
   <components.DropdownIndicator {...props}>
@@ -58,7 +57,7 @@ const ShareTypeSelect = ({ options, onChange }) => (
         onChange(option.value)
       }}
       options={options}
-      menuPosition={'fixed'}
+      menuPosition="fixed"
     />
   </div>
 )

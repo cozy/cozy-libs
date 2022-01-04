@@ -20,7 +20,7 @@ class Intents {
     createPromise.start = (element, onReadyCallback) => {
       const options = {
         filteredServices: data.filteredServices,
-        onReadyCallback: onReadyCallback
+        onReadyCallback
       }
 
       delete data.filteredServices

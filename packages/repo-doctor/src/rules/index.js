@@ -1,8 +1,8 @@
+const validate = require('schema-utils')
 const { DepUpToDate, NoForbiddenDep } = require('./dependencies')
 const DepSameVersion = require('./depSameVersion')
 const { LocalesInRepo } = require('./locales')
 const { TravisIsOK } = require('./travis')
-const validate = require('schema-utils')
 
 const ruleFns = {
   DepUpToDate,
@@ -28,7 +28,7 @@ const setupRules = (config, args) => {
         ruleConfig = {}
       }
 
-      let Rule = ruleFns[ruleName]
+      const Rule = ruleFns[ruleName]
       if (!Rule) {
         // eslint-disable-next-line no-console
         console.warn('Unknown rule', rule)

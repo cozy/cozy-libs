@@ -28,9 +28,7 @@ export const mockAPI = () => {
     return route.response
   }
 
-  const reset = () => {
-    return routes.splice(0, routes.length)
-  }
+  const reset = () => routes.splice(0, routes.length)
 
   return {
     respond,
@@ -39,8 +37,7 @@ export const mockAPI = () => {
   }
 }
 
-export const sleep = async delay => {
-  return new Promise(resolve => {
+export const sleep = async delay =>
+  new Promise(resolve => {
     setTimeout(resolve, delay)
   })
-}

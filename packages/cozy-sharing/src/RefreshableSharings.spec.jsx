@@ -7,17 +7,13 @@ import AppLike from '../test/AppLike'
 import { RefreshableSharings } from './RefreshableSharings'
 import { SharingProvider } from './SharingProvider'
 
-const DumbComponent = () => {
-  return <div>test </div>
-}
+const DumbComponent = () => <div>test </div>
 
-const AppWrapper = ({ children, client }) => {
-  return (
-    <AppLike client={client}>
-      <SharingProvider client={client}>{children}</SharingProvider>
-    </AppLike>
-  )
-}
+const AppWrapper = ({ children, client }) => (
+  <AppLike client={client}>
+    <SharingProvider client={client}>{children}</SharingProvider>
+  </AppLike>
+)
 
 describe('RefreshableSharings', () => {
   it('should test', () => {

@@ -24,7 +24,7 @@ function isDifferent(o1, o2) {
   // This is not supposed to happen
   if (Object.keys(o1).length === 0) return true
 
-  for (let key in o1) {
+  for (const key in o1) {
     if (o1[key] !== o2[key]) {
       return true
     }
@@ -62,7 +62,7 @@ function updateCreatedByApp(cozyMetadata, appSlug) {
 
 const withoutUndefined = x => omitBy(x, isUndefined)
 
-const flagForDeletion = x => Object.assign({}, x, { _deleted: true })
+const flagForDeletion = x => ({ ...x, _deleted: true })
 
 const getDocumentUpdateDate = doc => {
   const d = doc.cozyMetadata && doc.cozyMetadata.updatedAt
@@ -221,25 +221,23 @@ class Document {
       })
 
       return updatedDoc
-    } else {
-      log(
-        'debug',
-        `[updateIfDifferent] No need to update ${update._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
-      )
-      return doc
     }
+    log(
+      'debug',
+      `[updateIfDifferent] No need to update ${update._id} because its \`checkedAttributes\` (${this.checkAttributes}) didn't change.`
+    )
+    return doc
   }
 
   static getHandleDuplicateStrategy(name) {
     if (Document.duplicateHandlingStrategies[name]) {
       return Document.duplicateHandlingStrategies[name]
-    } else {
-      throw new Error(
-        `${name} is not a know duplication handling strategy. Known strategies are ${Object.keys(
-          Document.duplicateHandlingStrategies
-        )}`
-      )
     }
+    throw new Error(
+      `${name} is not a know duplication handling strategy. Known strategies are ${Object.keys(
+        Document.duplicateHandlingStrategies
+      )}`
+    )
   }
 
   static async handleDuplicates(strategyNameOrFnArg, duplicates, selector) {
@@ -268,20 +266,18 @@ class Document {
 
     if (results.length === 0) {
       return this.create(this.addCozyMetadata(attributes))
-    } else {
-      results = sortBy(results, newestDocumentComparisonFunc)
-      if (results.length > 1) {
-        await this.handleDuplicates(options.handleDuplicates, results, selector)
-      }
-      const doc = results[0]
-      const update = omit(attributes, userAttributes)
-      const updatedDoc = this.applyUpdateIfDifferent(doc, update)
-      if (updatedDoc !== doc) {
-        return this.cozyClient.save(updatedDoc)
-      } else {
-        return updatedDoc
-      }
     }
+    results = sortBy(results, newestDocumentComparisonFunc)
+    if (results.length > 1) {
+      await this.handleDuplicates(options.handleDuplicates, results, selector)
+    }
+    const doc = results[0]
+    const update = omit(attributes, userAttributes)
+    const updatedDoc = this.applyUpdateIfDifferent(doc, update)
+    if (updatedDoc !== doc) {
+      return this.cozyClient.save(updatedDoc)
+    }
+    return updatedDoc
   }
 
   static async createOrUpdateViaOldClient(attributes, options) {
@@ -303,25 +299,23 @@ class Document {
         this.doctype,
         this.addCozyMetadata(attributes)
       )
-    } else {
-      results = sortBy(results, newestDocumentComparisonFunc)
-      if (results.length > 1) {
-        await this.handleDuplicates(options.handleDuplicates, results, selector)
-      }
-
-      const doc = results[0]
-      const update = omit(attributes, userAttributes)
-      const updatedDoc = this.applyUpdateIfDifferent(doc, update)
-      if (updatedDoc !== doc) {
-        return this.cozyClient.data.updateAttributes(
-          this.doctype,
-          updatedDoc._id,
-          updatedDoc
-        )
-      } else {
-        return doc
-      }
     }
+    results = sortBy(results, newestDocumentComparisonFunc)
+    if (results.length > 1) {
+      await this.handleDuplicates(options.handleDuplicates, results, selector)
+    }
+
+    const doc = results[0]
+    const update = omit(attributes, userAttributes)
+    const updatedDoc = this.applyUpdateIfDifferent(doc, update)
+    if (updatedDoc !== doc) {
+      return this.cozyClient.data.updateAttributes(
+        this.doctype,
+        updatedDoc._id,
+        updatedDoc
+      )
+    }
+    return doc
   }
 
   static create(attributes) {
@@ -388,9 +382,8 @@ class Document {
         } catch (e) {
           if (options.onCreateOrUpdateError) {
             return options.onCreateOrUpdateError(e, doc)
-          } else {
-            throw e
           }
+          throw e
         }
       },
       concurrency
@@ -425,9 +418,8 @@ class Document {
     } catch (e) {
       if (e && e.response && e.response.status && e.response.status === 404) {
         return []
-      } else {
-        return []
       }
+      return []
     }
   }
 
@@ -458,9 +450,8 @@ class Document {
         const resp = await this.updateAll(docs.slice(1))
         resp.unshift({ ok: true, id: firstDoc._id, rev: firstDoc._rev })
         return resp
-      } else {
-        throw e
       }
+      throw e
     }
   }
 
@@ -481,12 +472,9 @@ class Document {
    */
   static findDuplicates(docs) {
     const fieldSeparator = '#$$$$#'
-    const idAttributes = this.idAttributes
-    const key = doc => {
-      return idAttributes
-        .map(idAttrPath => get(doc, idAttrPath))
-        .join(fieldSeparator)
-    }
+    const { idAttributes } = this
+    const key = doc =>
+      idAttributes.map(idAttrPath => get(doc, idAttrPath)).join(fieldSeparator)
     const groups = pickBy(groupBy(docs, key), group => group.length > 1)
     const duplicates = flatMap(groups, group => group.slice(1))
     return duplicates
@@ -650,16 +638,15 @@ class Document {
 Document.defaultDuplicateHandling = 'throw'
 
 Document.duplicateHandlingStrategies = {
-  throw: function (duplicates, selector) {
+  throw(duplicates, selector) {
     throw new Error(
-      'Create or update with selectors that returns more than 1 result\n' +
-        JSON.stringify(selector) +
-        '\n' +
-        JSON.stringify(duplicates)
+      `Create or update with selectors that returns more than 1 result\n${JSON.stringify(
+        selector
+      )}\n${JSON.stringify(duplicates)}`
     )
   },
 
-  remove: async function (duplicates) {
+  async remove(duplicates) {
     const docsToRemove = duplicates.slice(1)
     if (docsToRemove.length > 0) {
       log(

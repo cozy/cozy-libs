@@ -55,12 +55,11 @@ export default class IntentListener {
       this.state.handshaken = true
     }
 
-    const handler = this.options['on' + capitalize(subtype)]
+    const handler = this.options[`on${capitalize(subtype)}`]
     if (handler) {
       return handler(event)
-    } else {
-      console.warn(`intents: Unhandled event ${subtype}`)
     }
+    console.warn(`intents: Unhandled event ${subtype}`)
   }
 
   /**
@@ -93,6 +92,4 @@ const assert = (cond, msg, extraMsg) => {
   }
 }
 
-const capitalize = str => {
-  return str[0].toUpperCase() + str.slice(1)
-}
+const capitalize = str => str[0].toUpperCase() + str.slice(1)

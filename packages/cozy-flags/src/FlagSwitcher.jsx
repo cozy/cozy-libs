@@ -2,33 +2,29 @@ import React from 'react'
 import flag from './flag'
 import connect from './connect'
 
-const FlagInput = ({ name, onChange }) => {
-  return (
-    <input
-      type="checkbox"
-      checked={flag(name)}
-      onChange={ev =>
-        flag(name, JSON.parse(ev.target.checked)) && onChange && onChange()
-      }
-    />
-  )
-}
+const FlagInput = ({ name, onChange }) => (
+  <input
+    type="checkbox"
+    checked={flag(name)}
+    onChange={ev =>
+      flag(name, JSON.parse(ev.target.checked)) && onChange && onChange()
+    }
+  />
+)
 
-const FoldButton = ({ children, onClick }) => {
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      style={{
-        position: 'absolute',
-        top: '100%',
-        left: '0'
-      }}
-    >
-      {children}
-    </button>
-  )
-}
+const FoldButton = ({ children, onClick }) => (
+  <button
+    type="button"
+    onClick={onClick}
+    style={{
+      position: 'absolute',
+      top: '100%',
+      left: '0'
+    }}
+  >
+    {children}
+  </button>
+)
 
 const getStyle = state => ({
   borderBottomLeftRadius: '.5rem',
@@ -42,21 +38,18 @@ const getStyle = state => ({
   transform: `translateY(${state.folded ? '-100%' : '0'})`
 })
 
-const human = name => {
-  return name.replace(/[a-z][A-Z]/g, str => str[0] + ' ' + str[1].toLowerCase())
-}
+const human = name =>
+  name.replace(/[a-z][A-Z]/g, str => `${str[0]} ${str[1].toLowerCase()}`)
 
 const FlagList = connect(() => {
   const allFlags = flag.list()
   return (
     <div>
-      {allFlags.map(name => {
-        return (
-          <div key={name}>
-            {human(name)} : <FlagInput onChange={() => {}} name={name} />
-          </div>
-        )
-      })}
+      {allFlags.map(name => (
+        <div key={name}>
+          {human(name)} : <FlagInput onChange={() => {}} name={name} />
+        </div>
+      ))}
     </div>
   )
 })

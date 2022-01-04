@@ -25,9 +25,9 @@ const openUriWithHiddenFrame = (uri, failCb) => {
     .replace(/[^a-z]+/g, '')
     .substr(0, 5)
   window.addEventListener('blur', onBlur)
-  let iframe = _createHiddenIframe(document.body, 'about:blank', randomId)
+  const iframe = _createHiddenIframe(document.body, 'about:blank', randomId)
 
-  const timeout = setTimeout(function () {
+  const timeout = setTimeout(() => {
     failCb()
     window.removeEventListener('blur', onBlur)
     iframe.parentElement.removeChild(iframe)
@@ -43,7 +43,7 @@ const openUriWithHiddenFrame = (uri, failCb) => {
 }
 
 const openUriWithTimeoutHack = (uri, failCb) => {
-  const timeout = setTimeout(function () {
+  const timeout = setTimeout(() => {
     failCb()
     target.removeEventListener('blur', onBlur)
   }, 500)

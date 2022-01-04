@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
-import { useVaultClient } from 'cozy-keys-lib'
+import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -25,7 +25,6 @@ import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import { useVaultUnlockContext } from 'cozy-keys-lib'
 
 import { deleteAccount } from '../../../connections/accounts'
 import { unshareCipher } from '../../../models/cipherUtils'
@@ -172,7 +171,7 @@ const ConfigurationTab = ({
               onClick={() => pushHistory(`/accounts/${account._id}/edit`)}
             >
               <ListItemIcon>
-                <Icon icon={KeyIcon} color={palette['slateGrey']} />
+                <Icon icon={KeyIcon} color={palette.slateGrey} />
               </ListItemIcon>
               <ListItemText
                 primary={t('modal.updateAccount.identifiers')}
@@ -184,7 +183,7 @@ const ConfigurationTab = ({
                   <Icon
                     className="u-mr-1"
                     icon={RightIcon}
-                    color={palette['coolGrey']}
+                    color={palette.coolGrey}
                   />
                 </div>
               </ListItemSecondaryAction>

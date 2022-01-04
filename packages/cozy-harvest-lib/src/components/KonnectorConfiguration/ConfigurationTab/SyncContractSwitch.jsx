@@ -51,9 +51,7 @@ export class DumbSyncContractSwitch extends React.Component {
         if (relSyncStatus !== null) {
           return { syncStatus: relSyncStatus }
         }
-      } catch (e) {
-        return
-      }
+      } catch (e) {}
     }
   }
 

@@ -175,15 +175,15 @@ describe('manifest', () => {
       'new_identifier',
       'email'
     ]
-    for (let name of legacyLoginFieldsTest) {
-      let inputLegacy = {
+    for (const name of legacyLoginFieldsTest) {
+      const inputLegacy = {
         fields: {
           password: { type: 'password' },
           plop: { type: 'text' }
         }
       }
       inputLegacy.fields[name] = { type: 'text' }
-      it('should set role=identifier to ' + name, () => {
+      it(`should set role=identifier to ${name}`, () => {
         const result = manifest.sanitize(inputLegacy)
         expect(result.fields[name].role).toBe('identifier')
         expect(result.fields.plop.role).not.toBe('identifier')
@@ -309,8 +309,8 @@ describe('manifest', () => {
       'appSecret'
     ]
 
-    for (let name of legacyEncryptedFieldsTest) {
-      let legacyManifest = {
+    for (const name of legacyEncryptedFieldsTest) {
+      const legacyManifest = {
         fields: {
           [name]: { type: 'text' },
           password: { type: 'password' },
@@ -318,7 +318,7 @@ describe('manifest', () => {
         }
       }
 
-      it('should set encrypted=true to ' + name, () => {
+      it(`should set encrypted=true to ${name}`, () => {
         const result = manifest.sanitize(legacyManifest)
         expect(result.fields[name].encrypted).toBe(true)
       })

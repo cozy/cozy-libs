@@ -49,13 +49,10 @@ export const isTwoFARetry = status => {
   return status.split('.')[0] === TWOFA_NEEDED_RETRY_STATUS
 }
 
-export const isLoginSuccessHandled = status => {
-  return status === HANDLE_LOGIN_SUCCESS_STATE
-}
+export const isLoginSuccessHandled = status =>
+  status === HANDLE_LOGIN_SUCCESS_STATE
 
-export const isLoginSuccess = status => {
-  return status === LOGIN_SUCCESS_STATE
-}
+export const isLoginSuccess = status => status === LOGIN_SUCCESS_STATE
 
 /**
  * Return the status object key matching the status value
@@ -67,9 +64,8 @@ export const getTwoFACodeProvider = account => {
   const codeParts = account.state ? account.state.split('.') : []
   if (codeParts.length > 1) {
     return TWOFA_PROVIDERS[codeParts[1]] || DEFAULT_TWOFA_CODE_PROVIDER_TYPE
-  } else {
-    return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
   }
+  return DEFAULT_TWOFA_CODE_PROVIDER_TYPE
 }
 
 export const updateTwoFAState = (account_, { retry, type }) => {
@@ -138,7 +134,6 @@ export const mergeAuth = (account, authData) => ({
 export const getVaultCipherId = account => {
   const relationshipData = get(account, 'relationships.vaultCipher.data')
   if (!relationshipData) {
-    return
   } else if (Array.isArray(relationshipData)) {
     // Support for bug from cipher migration. See link below for context.
     // https://github.com/cozy/cozy-stack/pull/2535#discussion_r433986611

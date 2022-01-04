@@ -44,7 +44,7 @@ const mappings = {
 module.exports = function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
-  let toImport = {}
+  const toImport = {}
 
   Object.entries(mappings).forEach(([oldComponent, newSpec]) => {
     // Replace JSX opening elements
@@ -54,7 +54,7 @@ module.exports = function transformer(file, api) {
         path.node.name = j.jsxIdentifier(newSpec.componentName)
         toImport[newSpec.componentName] = true
 
-        for (let [propName, propValue] of Object.entries(newSpec.props)) {
+        for (const [propName, propValue] of Object.entries(newSpec.props)) {
           path.node.attributes.push(
             j.jsxAttribute(j.jsxIdentifier(propName), j.literal(propValue))
           )

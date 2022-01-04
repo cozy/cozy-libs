@@ -1,5 +1,5 @@
-import FlagStore from './store'
 import { Q } from 'cozy-client/dist/queries/dsl'
+import FlagStore from './store'
 
 const store = new FlagStore()
 
@@ -10,16 +10,13 @@ const flag = function () {
   const args = [].slice.call(arguments)
   if (args.length === 1) {
     return store.get(args[0])
-  } else {
-    store.set(args[0], args[1])
-    return args[1]
   }
+  store.set(args[0], args[1])
+  return args[1]
 }
 
 /** List all flags from the store */
-export const listFlags = () => {
-  return store.keys().sort()
-}
+export const listFlags = () => store.keys().sort()
 
 /** Resets all the flags */
 export const resetFlags = () => {
@@ -79,15 +76,15 @@ export const getTemplateData = attr => {
   try {
     if (allDataNode) {
       return JSON.parse(allDataNode.dataset.cozy)[attr]
-    } else if (attrNode) {
+    }
+    if (attrNode) {
       // eslint-disable-next-line no-console
       console.warn(
         'Prefer to use [data-cozy] to store template data. <div data-cozy="{{.CozyData}}></div>. "'
       )
       return JSON.parse(attrNode.dataset[`cozy${capitalize(attr)}`])
-    } else {
-      return null
     }
+    return null
   } catch (e) {
     return null
   }

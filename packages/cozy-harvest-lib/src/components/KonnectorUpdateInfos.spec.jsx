@@ -2,8 +2,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from '../../test/AppLike'
 import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
+import AppLike from '../../test/AppLike'
 
 // Default props
 const intents = {
@@ -36,7 +36,7 @@ describe('KonnectorUpdateInfos', () => {
   it('should render as blocking', () => {
     const root = render(
       <AppLike>
-        <KonnectorUpdateInfos {...props} isBlocking={true} />
+        <KonnectorUpdateInfos {...props} isBlocking />
       </AppLike>
     )
     expect(

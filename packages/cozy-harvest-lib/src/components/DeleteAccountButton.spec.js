@@ -2,7 +2,7 @@ import React from 'react'
 import { shallow } from 'enzyme'
 
 import { DeleteAccountButton } from 'components/DeleteAccountButton'
-import { deleteAccount } from '../../src/connections/accounts'
+import { deleteAccount } from '../connections/accounts'
 
 jest.mock('../../src/connections/accounts', () => ({
   deleteAccount: jest.fn()

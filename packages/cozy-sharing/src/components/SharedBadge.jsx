@@ -1,10 +1,10 @@
 import React from 'react'
 import classNames from 'classnames'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import styles from './badge.styl'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
+import styles from './badge.styl'
 
 const SharedBadge = ({ byMe, className, small, xsmall }) => (
   <div

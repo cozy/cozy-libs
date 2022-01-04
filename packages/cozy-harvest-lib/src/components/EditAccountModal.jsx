@@ -16,6 +16,7 @@ import {
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 
+import { withRouter } from 'react-router'
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
@@ -23,7 +24,6 @@ import { withMountPointPushHistory } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
-import { withRouter } from 'react-router'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
@@ -92,7 +92,7 @@ const DumbEditAccountModal = withRouter(
               konnector={konnector}
               initialTrigger={trigger}
               onSuccess={redirectToAccount}
-              showError={true}
+              showError
               onVaultDismiss={redirectToAccount}
               fieldOptions={fieldOptions}
             />
@@ -135,6 +135,7 @@ export class EditAccountModal extends Component {
 
     this.props.trackPage('editer_identifiants')
   }
+
   /**
    * TODO use queryConnect to know if we're fecthing or not
    */

@@ -44,7 +44,7 @@ class DepUpToDate {
     const results = await bluebird.map(this.config.dependencies, runForDep, {
       concurrency: 10
     })
-    for (let result of results) {
+    for (const result of results) {
       if (!result) {
         continue
       }
@@ -74,7 +74,7 @@ class NoForbiddenDep {
   }
 
   async *run(repositoryInfo) {
-    for (let dep of repositoryInfo.dependencies) {
+    for (const dep of repositoryInfo.dependencies) {
       const forbiddenDep = this.config.dependencies.find(
         optionDep => optionDep.name == dep.name
       )

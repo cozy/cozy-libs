@@ -7,7 +7,7 @@ const githubGitRepo = /url = git@github.com:([a-z-\\/]+)/
 const detectRegexes = [githubHttpRepo, githubGitRepo]
 
 const matchFirst = (string, regexes) => {
-  for (let rx of regexes) {
+  for (const rx of regexes) {
     const match = rx.exec(string)
     if (match) {
       return match
@@ -23,9 +23,8 @@ const autoDetectRepository = async () => {
     const match = matchFirst(gitConfig, detectRegexes)
     if (match) {
       return match[1]
-    } else {
-      return null
     }
+    return null
   } catch (e) {
     return null
   }

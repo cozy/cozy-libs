@@ -152,7 +152,7 @@ class RetryManager {
     } else {
       this.wait = Math.min(this.wait * 2, this.maxWaitBetweenRetries)
     }
-    this.retries = this.retries + 1
+    this.retries += 1
   }
 
   /**

@@ -2,8 +2,8 @@ import CozyClient from 'cozy-client'
 import merge from 'lodash/merge'
 
 /** Use this to quickly get a custom client */
-const getClient = customOptions => {
-  return new CozyClient(
+const getClient = customOptions =>
+  new CozyClient(
     merge(
       {
         scope: [
@@ -55,7 +55,6 @@ const getClient = customOptions => {
       customOptions
     )
   )
-}
 
 /** A generic CozyClient meant to be used by all examples  */
 export default getClient()

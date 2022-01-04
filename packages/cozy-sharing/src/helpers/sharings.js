@@ -11,9 +11,8 @@ import { fetchFilesPaths } from './files'
 export const getSharingObject = (internalSharing, sharing) => {
   if (internalSharing) {
     return updateInternalObjectFromRealtime(internalSharing, sharing)
-  } else {
-    return normalizeDocFromRealtime(sharing, 'io.cozy.sharings')
   }
+  return normalizeDocFromRealtime(sharing, 'io.cozy.sharings')
 }
 
 export const createSharingInStore = (

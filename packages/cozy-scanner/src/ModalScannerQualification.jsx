@@ -4,12 +4,12 @@ import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
-import DocumentQualification from './DocumentQualification'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 
 import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
+import DocumentQualification from './DocumentQualification'
 
 const pushAnalytics = qualification => {
   const tracker = getTracker()
@@ -47,7 +47,7 @@ class ModalScannerQualification extends Component {
     const { qualification, filename } = this.state
     return (
       <FixedDialog
-        open={true}
+        open
         onClose={dismissAction}
         title={t('Scan.save_doc')}
         content={
@@ -58,7 +58,7 @@ class ModalScannerQualification extends Component {
             onFileNameChanged={filename => {
               this.setState({ filename })
             }}
-            allowEditFileName={true}
+            allowEditFileName
             title={t('Scan.qualify')}
           />
         }

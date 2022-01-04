@@ -65,9 +65,7 @@ export default otherHoc(Component2)
 
 const j = require('jscodeshift')
 
-const isClientProp = prop => {
-  return prop.key && prop.key.name === 'client'
-}
+const isClientProp = prop => prop.key && prop.key.name === 'client'
 
 const findClientProps = objPattern => {
   if (!objPattern) {
@@ -81,9 +79,7 @@ const findClientProps = objPattern => {
     : []
 }
 
-const isBreakpointProp = prop => {
-  return prop.key && prop.key.name === 'breakpoints'
-}
+const isBreakpointProp = prop => prop.key && prop.key.name === 'breakpoints'
 
 const findBreakpointsProp = objPattern => {
   if (!objPattern) {
@@ -124,21 +120,17 @@ describe('HOC replacer', () => {
     const replaceBreakpointsHOC = hocToHookReplacer({
       propsFilter: isBreakpointProp,
       propsFinder: findBreakpointsProp,
-      hookUsage: foundProps => {
-        return `const ${foundProps
+      hookUsage: foundProps =>
+        `const ${foundProps
           .map(p => j(p.value).toSource())
-          .join(', ')} = useBreakpoints()`
-      },
+          .join(', ')} = useBreakpoints()`,
       hocName: 'withBreakpoints',
       j,
       noOptionsHOC: false,
       importOptions: {
-        filter: x => {
-          return (
-            x.source.value == 'cozy-ui/transpiled/react' ||
-            x.source.value == 'cozy-ui/react'
-          )
-        },
+        filter: x =>
+          x.source.value == 'cozy-ui/transpiled/react' ||
+          x.source.value == 'cozy-ui/react',
         specifiers: {
           useBreakpoints: true
         },

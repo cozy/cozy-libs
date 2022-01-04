@@ -8,8 +8,8 @@ const transformComponent = (root, options) => {
     res = true
     path.node.name.name = newName
 
-    for (let prop of path.node.attributes) {
-      let newProp = propsMapping && propsMapping[prop.name && prop.name.name]
+    for (const prop of path.node.attributes) {
+      const newProp = propsMapping && propsMapping[prop.name && prop.name.name]
       if (newProp) {
         if (typeof newProp === 'string') {
           prop.name.name = newProp
@@ -60,7 +60,7 @@ module.exports = function transformer(file, api) {
   const j = api.jscodeshift
   const root = j(file.source)
 
-  let shouldImport = {}
+  const shouldImport = {}
   shouldImport.Dialog = transformComponent(root, {
     oldName: 'Modal',
     newName: 'Dialog',
@@ -84,10 +84,10 @@ module.exports = function transformer(file, api) {
     },
     onOpeningElement: path => {
       const propsByName = {}
-      for (let attr of path.node.attributes) {
+      for (const attr of path.node.attributes) {
         propsByName[attr.name.name] = attr
       }
-      const onClose = propsByName.onClose
+      const { onClose } = propsByName
       if (onClose) {
         const selfClosing = true
         path.parent.node.children.unshift(
@@ -102,12 +102,12 @@ module.exports = function transformer(file, api) {
 
       // Save actions
       const actions = []
-      const primaryAction = propsByName.primaryAction
-      const primaryText = propsByName.primaryText
-      const primaryType = propsByName.primaryType
-      const secondaryAction = propsByName.secondaryAction
-      const secondaryText = propsByName.secondaryText
-      const secondaryType = propsByName.secondaryType
+      const { primaryAction } = propsByName
+      const { primaryText } = propsByName
+      const { primaryType } = propsByName
+      const { secondaryAction } = propsByName
+      const { secondaryText } = propsByName
+      const { secondaryType } = propsByName
 
       const buttonAttrs = [
         'primaryAction',
@@ -157,7 +157,7 @@ module.exports = function transformer(file, api) {
 
       // Remove button attributes
       path.node.attributes = path.node.attributes.filter(attr => {
-        const name = attr.name.name
+        const { name } = attr.name
         return buttonAttrs.indexOf(name) === -1
       })
     }

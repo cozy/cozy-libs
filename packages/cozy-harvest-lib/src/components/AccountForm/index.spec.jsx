@@ -372,7 +372,7 @@ describe('AccountForm', () => {
             konnector={fixtures.konnector}
             onSubmit={onSubmit}
             account={accountWithCipher}
-            readOnlyIdentifier={true}
+            readOnlyIdentifier
             fieldOptions={{}}
           />
         </I18n>,
@@ -400,7 +400,7 @@ describe('AccountForm', () => {
             konnector={fixtures.konnectorWithIdendifierAndSecret}
             onSubmit={onSubmit}
             account={fixtures.account}
-            readOnlyIdentifier={true}
+            readOnlyIdentifier
             fieldOptions={fieldOptions}
           />
         </I18n>,

@@ -1,10 +1,14 @@
 import { PageFooter } from 'cozy-ui/transpiled/react'
-import { optionsProvider, optionsConsumer } from './ProcedureOptions'
 import React from 'react'
+import { optionsProvider, optionsConsumer } from './ProcedureOptions'
 
 describe('options', () => {
-  const DumbWrapper = ({ children }) => <div>{children}</div>
-  const DumbItem = ({ children }) => <div>{children}</div>
+  function DumbWrapper({ children }) {
+    return <div>{children}</div>
+  }
+  function DumbItem({ children }) {
+    return <div>{children}</div>
+  }
   const Item = optionsConsumer(DumbItem)
 
   it('should work with default options', () => {
@@ -18,11 +22,15 @@ describe('options', () => {
   })
 
   it('should work with passed options', () => {
-    const CustomPageFooter = () => <div />
+    function CustomPageFooter() {
+      return <div />
+    }
     const Wrapper = optionsProvider(DumbWrapper, {
       components: { PageFooter: CustomPageFooter }
     })
-    const DumbItem = ({ children }) => <div>{children}</div>
+    function DumbItem({ children }) {
+      return <div>{children}</div>
+    }
     const Item = optionsConsumer(DumbItem)
 
     const root = mount(

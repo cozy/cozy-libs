@@ -8,6 +8,11 @@ import {
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 
+import {
+  useVaultUnlockContext,
+  VaultUnlockProvider,
+  VaultUnlockPlaceholder
+} from 'cozy-keys-lib'
 import KonnectorAccounts from './KonnectorAccounts'
 import AccountModal from './AccountModal'
 import NewAccountModal from './NewAccountModal'
@@ -18,11 +23,6 @@ import HarvestVaultProvider from './HarvestVaultProvider'
 import { MountPointProvider } from './MountPointContext'
 import DialogContext from './DialogContext'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
-import {
-  useVaultUnlockContext,
-  VaultUnlockProvider,
-  VaultUnlockPlaceholder
-} from 'cozy-keys-lib'
 
 /**
  * Dialog will not be centered vertically since we need the modal to "stay in place"
@@ -112,16 +112,14 @@ const Routes = ({ konnectorRoot, konnector, onDismiss, datacardOptions }) => {
                       <Route
                         path={`${konnectorRoot}/accounts/:accountId/success`}
                         exact
-                        render={({ match }) => {
-                          return (
-                            <KonnectorSuccess
-                              konnector={konnector}
-                              accountId={match.params.accountId}
-                              accounts={accountsAndTriggers}
-                              onDismiss={onDismiss}
-                            />
-                          )
-                        }}
+                        render={({ match }) => (
+                          <KonnectorSuccess
+                            konnector={konnector}
+                            accountId={match.params.accountId}
+                            accounts={accountsAndTriggers}
+                            onDismiss={onDismiss}
+                          />
+                        )}
                       />
                       <Redirect
                         from={`${konnectorRoot}/*`}

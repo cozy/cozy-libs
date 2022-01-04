@@ -110,17 +110,15 @@ const DumbContracts = ({ contracts, account, konnector }) => {
         </NavigationListHeader>
         <NavigationListSection>
           {contractData &&
-            contractData.map((contract, i) => {
-              return (
-                <ContractItem
-                  key={contract._id}
-                  konnector={konnector}
-                  accountId={account ? account._id : null}
-                  contract={contract}
-                  divider={i !== contractData.length - 1}
-                />
-              )
-            })}
+            contractData.map((contract, i) => (
+              <ContractItem
+                key={contract._id}
+                konnector={konnector}
+                accountId={account ? account._id : null}
+                contract={contract}
+                divider={i !== contractData.length - 1}
+              />
+            ))}
         </NavigationListSection>
       </NavigationList>
     </MuiCozyTheme>

@@ -8,12 +8,12 @@ const HarvestModalRoot = ({ accounts, konnector }) => {
   if (accounts.length === 0) {
     pushHistory('/new')
     return null
-  } else if (accounts.length === 1) {
+  }
+  if (accounts.length === 1) {
     pushHistory(`/accounts/${accounts[0].account._id}`)
     return null
-  } else {
-    return <AccountsListModal konnector={konnector} accounts={accounts} />
   }
+  return <AccountsListModal konnector={konnector} accounts={accounts} />
 }
 
 HarvestModalRoot.propTypes = {

@@ -1,5 +1,6 @@
-import ConnectionFlow from './ConnectionFlow'
 import cronHelpers from 'helpers/cron'
+import CozyRealtime from 'cozy-realtime'
+import ConnectionFlow from './ConnectionFlow'
 import { saveAccount } from '../connections/accounts'
 import {
   createTrigger,
@@ -7,7 +8,6 @@ import {
   prepareTriggerAccount,
   launchTrigger
 } from '../connections/triggers'
-import CozyRealtime from 'cozy-realtime'
 import KonnectorJobWatcher from './konnector/KonnectorJobWatcher'
 import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
 import fixtures from '../../test/fixtures'
@@ -49,14 +49,12 @@ jest.mock('../connections/accounts', () => ({
   fetchReusableAccount: jest.fn()
 }))
 
-jest.mock('../connections/triggers', () => {
-  return {
-    createTrigger: jest.fn(),
-    ensureTrigger: jest.fn(),
-    prepareTriggerAccount: jest.fn(),
-    launchTrigger: jest.fn()
-  }
-})
+jest.mock('../connections/triggers', () => ({
+  createTrigger: jest.fn(),
+  ensureTrigger: jest.fn(),
+  prepareTriggerAccount: jest.fn(),
+  launchTrigger: jest.fn()
+}))
 
 beforeEach(() => {
   createTrigger.mockClear()
@@ -100,20 +98,17 @@ const setup = ({ trigger } = {}) => {
   return { flow, client }
 }
 
-const setupSubmit = (flow, submitOptions) => {
-  return flow.handleFormSubmit({
+const setupSubmit = (flow, submitOptions) =>
+  flow.handleFormSubmit({
     vaultClient: mockVaultClient,
     konnector: fixtures.konnector,
     userCredentials: fixtures.credentials,
     ...submitOptions
   })
-}
 
 describe('ConnectionFlow', () => {
   describe('handleFormSubmit', () => {
-    const isSubmitting = flow => {
-      return flow.getState().running === true
-    }
+    const isSubmitting = flow => flow.getState().running === true
 
     it('should render as submitting when there is no account', async () => {
       const { flow } = setup()

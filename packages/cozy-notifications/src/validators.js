@@ -30,7 +30,7 @@ export const isArray = validators.and(
 )
 
 export const validateAgainst = (obj, types) => {
-  for (let [name, validator] of Object.entries(types)) {
+  for (const [name, validator] of Object.entries(types)) {
     if (!validator.fn(obj[name])) {
       throw new Error(
         `ValidationError: ${name} attribute (value: ${JSON.stringify(

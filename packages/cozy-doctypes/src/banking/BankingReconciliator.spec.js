@@ -4,7 +4,8 @@ const { Document, BankAccount, BankTransaction } = require('..')
 describe('banking reconciliator', () => {
   let reconciliator
 
-  let existingAccounts, existingTransactions
+  let existingAccounts
+  let existingTransactions
 
   beforeEach(() => {
     let _id = 1

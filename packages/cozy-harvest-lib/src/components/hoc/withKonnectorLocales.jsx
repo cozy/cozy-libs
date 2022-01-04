@@ -19,6 +19,7 @@ export const withKonnectorLocales = Component => {
         extend(locales[lang])
       }
     }
+
     render() {
       return <Component {...this.props} />
     }

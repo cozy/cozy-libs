@@ -37,6 +37,7 @@ class Application extends Document {
       app => app.attributes && app.attributes.slug === wantedApp.slug
     )
   }
+
   /**
    *
    * @param {Object} app io.cozy.app object

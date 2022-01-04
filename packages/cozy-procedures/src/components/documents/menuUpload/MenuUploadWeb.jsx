@@ -11,10 +11,9 @@ import {
   FileInput
 } from 'cozy-ui/transpiled/react'
 
-import UploadInputLabel from '../UploadInputLabel'
-
 import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
+import UploadInputLabel from '../UploadInputLabel'
 
 class MenuUploadWeb extends Component {
   render() {
@@ -34,7 +33,7 @@ class MenuUploadWeb extends Component {
           </Button>
         }
         className="u-db"
-        position={'right'}
+        position="right"
         /**
          * We need to specifiy an onSelect props that return false in order
          * to not close the menu when the user clicks on a MenuItem.
@@ -51,7 +50,7 @@ class MenuUploadWeb extends Component {
           <Caption>{t('documents.upload.soon_available')}</Caption>
         </MenuItem>
         <MenuItem icon={<Icon icon={FileIcon} />}>
-          <FileInput onChange={file => onChange(file)} hidden={true}>
+          <FileInput onChange={file => onChange(file)} hidden>
             <UploadInputLabel />
           </FileInput>
         </MenuItem>

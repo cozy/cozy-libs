@@ -8,9 +8,8 @@ const appTypeLabelMap = {
   konnector: 'Connector'
 }
 
-const makeGithubCommitsURL = (repoSlug, commitSha) => {
-  return `https://github.com/${repoSlug}/commits/${commitSha}`
-}
+const makeGithubCommitsURL = (repoSlug, commitSha) =>
+  `https://github.com/${repoSlug}/commits/${commitSha}`
 
 const getMessage = options => {
   const { appSlug, appVersion, spaceName, appType } = options
@@ -34,7 +33,7 @@ const getMessage = options => {
   const message = `${
     appTypeLabelMap[appType] || ''
   } __${appSlug}__ version \`${appVersion}\` has been published${spaceMessage}.${
-    infos.length > 0 ? '\n\n' + infos : ''
+    infos.length > 0 ? `\n\n${infos}` : ''
   }`
   return message
 }
@@ -49,9 +48,9 @@ const sendMattermostMessage = options => {
       `↳ ℹ️  Sending to mattermost channel ${channel} the following message: "${message}"`
     )
     const postData = JSON.stringify({
-      channel: channel,
+      channel,
       icon_url: iconURL,
-      username: username,
+      username,
       text: message
     })
 

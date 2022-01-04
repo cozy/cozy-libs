@@ -4,7 +4,7 @@ export const nativeLinkOpen = async ({ url }) => {
   if ((await hasSafariPlugin()) && window.SafariViewController) {
     window.SafariViewController.show(
       {
-        url: url,
+        url,
         transition: 'curl'
       },
       result => {

@@ -12,7 +12,6 @@ const saveFromClient = async client => {
 const get = async () => {
   const saved = await localforage.getItem(KEY)
   if (!saved) {
-    return
   } else {
     return saved
   }

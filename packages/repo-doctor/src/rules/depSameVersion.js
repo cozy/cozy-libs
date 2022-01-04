@@ -11,13 +11,13 @@ class DepSameVersion {
 
   async *run(repositoryInfo) {
     const repDepsByName = keyBy(repositoryInfo.dependencies, dep => dep.name)
-    for (let depGroup of this.config.dependencyGroups) {
+    for (const depGroup of this.config.dependencyGroups) {
       const repoDeps = depGroup
         .map(depName => repDepsByName[depName])
         .filter(Boolean)
-      const versions = repoDeps.map(depInfo => {
-        return depInfo ? depInfo.version : null
-      })
+      const versions = repoDeps.map(depInfo =>
+        depInfo ? depInfo.version : null
+      )
       const notSameVersion =
         versions.slice(1).filter(x => x !== versions[0]).length > 0
       if (notSameVersion) {

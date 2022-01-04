@@ -73,7 +73,7 @@ const main = async () => {
     }
   }
 
-  let repositories = config.repositories
+  let { repositories } = config
 
   const filterRepo = args.repo || (await autoDetectRepository())
   if (filterRepo) {

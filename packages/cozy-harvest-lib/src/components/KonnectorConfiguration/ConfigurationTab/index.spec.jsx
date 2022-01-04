@@ -1,19 +1,19 @@
 /* eslint no-console: off */
 
 import { render, fireEvent, act } from '@testing-library/react'
-import ConfigurationTab from './index'
 import React from 'react'
-import { MountPointProvider } from '../../../components/MountPointContext'
 import { createMockClient } from 'cozy-client/dist/mock'
-import { deleteAccount } from '../../../connections/accounts'
-import { KonnectorJobError } from '../../../helpers/konnectors'
-import AppLike from '../../../../test/AppLike'
 import {
   VaultProvider,
   VaultUnlockPlaceholder,
   VaultUnlockProvider,
   useVaultClient
 } from 'cozy-keys-lib'
+import ConfigurationTab from './index'
+import { MountPointProvider } from '../../MountPointContext'
+import { deleteAccount } from '../../../connections/accounts'
+import { KonnectorJobError } from '../../../helpers/konnectors'
+import AppLike from '../../../../test/AppLike'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
 jest.mock('../../../konnector-policies', () => ({
@@ -28,9 +28,9 @@ jest.mock('../../../models/cipherUtils', () => ({
   unshareCipher: jest.fn()
 }))
 
-const SimpleVaultUnlocker = ({ onUnlock }) => {
-  return <button onClick={onUnlock}>Unlock</button>
-}
+const SimpleVaultUnlocker = ({ onUnlock }) => (
+  <button onClick={onUnlock}>Unlock</button>
+)
 
 jest.mock('cozy-keys-lib', () => {
   const actual = jest.requireActual('cozy-keys-lib')

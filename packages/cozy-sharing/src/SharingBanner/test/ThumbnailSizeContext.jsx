@@ -2,7 +2,7 @@ import React, { useState, useCallback } from 'react'
 
 export const ThumbnailSizeContext = React.createContext()
 
-export const ThumbnailSizeContextProvider = ({ children }) => {
+export var ThumbnailSizeContextProvider = ({ children }) => {
   const [isBigThumbnail, setIsBigThumbnail] = useState(false)
   const toggleThumbnailSize = useCallback(
     () => setIsBigThumbnail(!isBigThumbnail),

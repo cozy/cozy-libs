@@ -3,11 +3,11 @@ const groupBy = require('lodash/groupBy')
 const maxBy = require('lodash/maxBy')
 const addDays = require('date-fns/add_days')
 const isAfter = require('date-fns/is_after')
+const cloneDeep = require('lodash/cloneDeep')
 const Document = require('../Document')
 const log = require('../log')
 const BankAccount = require('./BankAccount')
 const { matchTransactions } = require('./matching-transactions')
-const cloneDeep = require('lodash/cloneDeep')
 
 const maxValue = (iterable, fn) => {
   const res = maxBy(iterable, fn)
@@ -39,9 +39,8 @@ const getSplitDate = stackTransactions => {
 const ensureISOString = date => {
   if (date instanceof Date) {
     return date.toISOString()
-  } else {
-    return date
   }
+  return date
 }
 
 class Transaction extends Document {
@@ -52,37 +51,35 @@ class Transaction extends Document {
   isAfter(minDate) {
     if (!minDate) {
       return true
-    } else {
-      const day = ensureISOString(this.date).slice(0, 10)
-      if (day !== 'NaN') {
-        return day > minDate
-      } else {
-        log(
-          'warn',
-          'transaction date could not be parsed. transaction: ' +
-            JSON.stringify(this)
-        )
-        return false
-      }
     }
+    const day = ensureISOString(this.date).slice(0, 10)
+    if (day !== 'NaN') {
+      return day > minDate
+    }
+    log(
+      'warn',
+      `transaction date could not be parsed. transaction: ${JSON.stringify(
+        this
+      )}`
+    )
+    return false
   }
 
   isBeforeOrSame(maxDate) {
     if (!maxDate) {
       return true
-    } else {
-      const day = ensureISOString(this.date).slice(0, 10)
-      if (day !== 'NaN') {
-        return day <= maxDate
-      } else {
-        log(
-          'warn',
-          'transaction date could not be parsed. transaction: ' +
-            JSON.stringify(this)
-        )
-        return false
-      }
     }
+    const day = ensureISOString(this.date).slice(0, 10)
+    if (day !== 'NaN') {
+      return day <= maxDate
+    }
+    log(
+      'warn',
+      `transaction date could not be parsed. transaction: ${JSON.stringify(
+        this
+      )}`
+    )
+    return false
   }
 
   /**
@@ -121,7 +118,7 @@ class Transaction extends Document {
       .filter(result => !result.match)
       .map(result => result.transaction)
 
-    const trackEvent = options.trackEvent
+    const { trackEvent } = options
     if (typeof trackEvent === 'function') {
       try {
         const nbMissed = missedTransactions.length
@@ -242,7 +239,7 @@ class Transaction extends Document {
         sort: [{ date: 'desc' }]
       }
       const transactions = await Document.query(index, options)
-      log('info', 'last transactions length: ' + transactions.length)
+      log('info', `last transactions length: ${transactions.length}`)
 
       return transactions
     } catch (e) {

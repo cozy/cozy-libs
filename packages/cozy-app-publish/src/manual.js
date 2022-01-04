@@ -5,14 +5,12 @@ const tags = require('./tags')
 const publisher = require('./publisher')
 const logger = require('./utils/logger')
 
-const getManifestManual = ctx => {
-  return getManifestAsObject(
-    path.join(fs.realpathSync(process.cwd()), ctx.buildDir)
-  )
-}
+const getManifestManual = ctx =>
+  getManifestAsObject(path.join(fs.realpathSync(process.cwd()), ctx.buildDir))
 
 const getAppVersionManual = async ctx => {
-  let tagVersion, devVersion
+  let tagVersion
+  let devVersion
   if (!ctx.manualVersion) {
     const versionTags = (await tags.getVersionTags()).filter(tag =>
       ctx.tagPrefix ? ctx.tagPrefix === tag.prefix : true

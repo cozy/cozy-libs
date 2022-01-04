@@ -6,15 +6,12 @@ import {
 } from 'connections/triggers'
 import CozyClient from 'cozy-client'
 
-import {
-  statDirectoryByPath,
-  createDirectoryByPath
-} from '../../src/connections/files'
-
-import fixtures from '../../test/fixtures'
-import en from '../../src/locales/en.json'
 import Polyglot from 'node-polyglot'
 import { CozyFolder } from 'cozy-doctypes'
+import { statDirectoryByPath, createDirectoryByPath } from './files'
+
+import fixtures from '../../test/fixtures'
+import en from '../locales/en.json'
 
 jest.mock('../../src/connections/files', () => ({
   statDirectoryByPath: jest.fn(),
@@ -60,9 +57,11 @@ const setup = () => {
   jest.spyOn(CozyClient.prototype, 'collection').mockImplementation(doctype => {
     if (doctype == 'io.cozy.triggers') {
       return triggerCollection
-    } else if (doctype == 'io.cozy.permissions') {
+    }
+    if (doctype == 'io.cozy.permissions') {
       return permissionCollection
-    } else if (doctype == 'io.cozy.files') {
+    }
+    if (doctype == 'io.cozy.files') {
       return fileCollection
     }
   })
@@ -120,7 +119,7 @@ describe('when konnector needs folder', () => {
       fixtures.folderPermission
     )
 
-    const addReferencesTo = fileCollection.addReferencesTo
+    const { addReferencesTo } = fileCollection
     expect(addReferencesTo).toHaveBeenCalledTimes(1)
     expect(addReferencesTo).toHaveBeenCalledWith(fixtures.konnectorWithFolder, [
       fixtures.folder
@@ -147,7 +146,7 @@ describe('when konnector needs folder', () => {
       fixtures.folderPermission
     )
 
-    const addReferencesTo = fileCollection.addReferencesTo
+    const { addReferencesTo } = fileCollection
     expect(addReferencesTo).toHaveBeenCalledTimes(1)
     expect(addReferencesTo).toHaveBeenCalledWith(fixtures.konnectorWithFolder, [
       fixtures.folder

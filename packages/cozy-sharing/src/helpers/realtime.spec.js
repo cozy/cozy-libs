@@ -8,6 +8,7 @@ import {
   SHARINGS_DOCTYPE,
   SHARING1_FROM_INTERNAL_STORE
 } from '../../test/fixtures/realtimesharing'
+
 describe('realtime helpers', () => {
   it('test if the object is well formated if received from the realtime', () => {
     const createdFakeObjectFromRealtime = normalizeDocFromRealtime(

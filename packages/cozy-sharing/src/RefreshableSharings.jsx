@@ -2,7 +2,7 @@ import React from 'react'
 
 import SharingContext from './context'
 
-export const RefreshableSharings = ({ children }) => (
+export var RefreshableSharings = ({ children }) => (
   <SharingContext.Consumer>
     {({ refresh }) =>
       children({

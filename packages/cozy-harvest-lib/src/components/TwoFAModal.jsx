@@ -6,6 +6,7 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import Field from 'cozy-ui/transpiled/react/Field'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
+import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import KonnectorIcon from './KonnectorIcon'
 import withLocales from './hoc/withLocales'
 
@@ -15,8 +16,6 @@ import accounts, {
 } from '../helpers/accounts'
 
 import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/flowEvents'
-
-import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 /**
  * Displayed during connection creation when the konnector detects
@@ -33,13 +32,13 @@ export class TwoFAModal extends PureComponent {
   }
 
   componentDidMount() {
-    const flow = this.props.flow
+    const { flow } = this.props
     flow.on(UPDATE_EVENT, this.handleFlowUpdate)
     flow.on(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
   }
 
   componentWillUnmount() {
-    const flow = this.props.flow
+    const { flow } = this.props
     flow.removeListener(UPDATE_EVENT, this.handleFlowUpdate)
     flow.removeListener(TWO_FA_REQUEST_EVENT, this.handleTwoFARequest)
   }

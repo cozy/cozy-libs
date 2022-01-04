@@ -7,9 +7,8 @@ const getUniversalLinkDomain = cozyUrl => {
   const url = new URL(cozyUrl)
   if (url.host.includes('.mycozy.cloud')) {
     return 'https://links.mycozy.cloud'
-  } else {
-    throw new Error('Unknown universal domain for ' + url.host)
   }
+  throw new Error(`Unknown universal domain for ${url.host}`)
 }
 
 export const generateWebLink = ({
@@ -21,7 +20,7 @@ export const generateWebLink = ({
   const url = new URL(cozyUrl)
   url.host = url.host
     .split('.')
-    .map((x, i) => (i === 0 ? x + '-' + slug : x))
+    .map((x, i) => (i === 0 ? `${x}-${slug}` : x))
     .join('.')
   url.hash = nativePath
   return url.toString()
@@ -30,9 +29,8 @@ export const generateWebLink = ({
 const ensureFirstSlash = path => {
   if (!path) {
     return '/'
-  } else {
-    return path.startsWith('/') ? path : '/' + path
   }
+  return path.startsWith('/') ? path : `/${path}`
 }
 
 /**
@@ -57,7 +55,7 @@ export const generateUniversalLink = options => {
   if (cozyUrl && !fallbackUrl) {
     fallbackUrl = generateWebLink({ cozyUrl, nativePath, slug })
   }
-  let url = getUniversalLinkDomain(cozyUrl) + '/' + slug + nativePath
+  const url = `${getUniversalLinkDomain(cozyUrl)}/${slug}${nativePath}`
   const urlObj = new URL(url)
   urlObj.searchParams.append('fallback', fallbackUrl)
   return urlObj.toString()

@@ -2,6 +2,7 @@ import { createSlice } from 'redux-starter-kit'
 import get from 'lodash/get'
 import { creditApplicationTemplate } from 'cozy-procedures'
 import { models } from 'cozy-client'
+
 const { fetchFilesByQualificationRules } = models.file
 
 const documentsSlice = createSlice({
@@ -25,35 +26,33 @@ const documentsSlice = createSlice({
   },
   slice: 'documents',
   reducers: {
-    init: (state, action) => {
-      return {
-        completedFromDrive: 0,
-        data: Object.keys(action.payload).reduce((acc, fieldId) => {
-          // init files with undefined value
-          acc[fieldId] = {
-            files: Array.from(Array(action.payload[fieldId].count))
-          }
-          return acc
-        }, {}),
-        ui: Object.keys(action.payload).reduce(
-          (acc, fieldId) => {
-            const count = action.payload[fieldId].count
-            acc[fieldId] = Array.from(Array(count))
-            for (let i = 0; i < count; i++) {
-              acc[fieldId][i] = {
-                loading: false,
-                error: false
-              }
+    init: (state, action) => ({
+      completedFromDrive: 0,
+      data: Object.keys(action.payload).reduce((acc, fieldId) => {
+        // init files with undefined value
+        acc[fieldId] = {
+          files: Array.from(Array(action.payload[fieldId].count))
+        }
+        return acc
+      }, {}),
+      ui: Object.keys(action.payload).reduce(
+        (acc, fieldId) => {
+          const { count } = action.payload[fieldId]
+          acc[fieldId] = Array.from(Array(count))
+          for (let i = 0; i < count; i++) {
+            acc[fieldId][i] = {
+              loading: false,
+              error: false
             }
-
-            return acc
-          },
-          {
-            initiated: false
           }
-        )
-      }
-    },
+
+          return acc
+        },
+        {
+          initiated: false
+        }
+      )
+    }),
 
     setDocumentLoading: (state, action) => {
       const { idDoctemplate, index } = action.payload
@@ -102,14 +101,12 @@ const selectors = {
   getCompletedFromDrive: state =>
     get(state, [documentsSlice.slice, 'completedFromDrive'], 0),
   getCompletedDocumentsCount: getCompletedCount,
-  getDocumentsTotal: () => {
+  getDocumentsTotal: () =>
     // FIXME: don't use the template directly here
-    return Object.values(creditApplicationTemplate.documents).reduce(
+    Object.values(creditApplicationTemplate.documents).reduce(
       (acc, { count }) => acc + count,
       0
-    )
-  },
-
+    ),
   getFilesStatus: state => get(state, [documentsSlice.slice, 'ui'], {})
 }
 
@@ -142,7 +139,7 @@ export function fetchDocumentsByCategory(client, documentTemplate) {
         files.data.map((file, index) => {
           dispatch(
             fetchDocumentSuccess({
-              file: file,
+              file,
               idDoctemplate: documentTemplate,
               index
             })

@@ -7,8 +7,8 @@ import distanceInWords from 'date-fns/distance_in_words'
 
 export const collectFeaturesByOid = geojson => {
   const res = {}
-  for (let item of geojson) {
-    for (let feature of item.features) {
+  for (const item of geojson) {
+    for (const feature of item.features) {
       res[feature.id] = feature
     }
   }
@@ -26,10 +26,10 @@ export const transformSingleTimeSeriesToTrips = singleTimeseries => {
   return merge({}, singleTimeseries, {
     properties: {
       start_place: {
-        data: featureIndex[properties.start_place['$oid']]
+        data: featureIndex[properties.start_place.$oid]
       },
       end_place: {
-        data: featureIndex[properties.end_place['$oid']]
+        data: featureIndex[properties.end_place.$oid]
       }
     }
   })
@@ -40,33 +40,29 @@ export const transformTimeSeriesToTrips = geojsonTimeseries => {
   return allSeries.map(transformSingleTimeSeriesToTrips)
 }
 
-export const getStartPlaceDisplayName = trip => {
-  return get(trip, 'properties.start_place.data.properties.display_name')
-}
+export const getStartPlaceDisplayName = trip =>
+  get(trip, 'properties.start_place.data.properties.display_name')
 
-export const getEndPlaceDisplayName = trip => {
-  return get(trip, 'properties.end_place.data.properties.display_name')
-}
+export const getEndPlaceDisplayName = trip =>
+  get(trip, 'properties.end_place.data.properties.display_name')
 export const getFormattedDuration = trip => {
   const startDate = new Date(trip.properties.start_fmt_time)
   const endDate = new Date(trip.properties.end_fmt_time)
   return distanceInWords(endDate, startDate)
 }
 
-export const getModes = trip => {
-  return uniq(
+export const getModes = trip =>
+  uniq(
     flatten(
       trip.features.map(feature => {
         if (feature.features) {
           return feature.features.map(feature =>
             get(feature, 'properties.sensed_mode')
           )
-        } else {
-          return get(feature, 'properties.sensed_mode')
         }
+        return get(feature, 'properties.sensed_mode')
       })
     )
       .map(x => (x ? x.split('PredictedModeTypes.')[1] : null))
       .filter(Boolean)
   )
-}

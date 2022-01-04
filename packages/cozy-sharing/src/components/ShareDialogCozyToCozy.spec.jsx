@@ -1,9 +1,9 @@
 import React from 'react'
+import { createMockClient } from 'cozy-client'
+import { act, render, fireEvent } from '@testing-library/react'
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
 import AppLike from '../../test/AppLike'
-import { createMockClient } from 'cozy-client'
-import { act, render, fireEvent } from '@testing-library/react'
 
 describe('ShareDialogCozyToCozy', () => {
   const client = createMockClient({})
@@ -11,16 +11,15 @@ describe('ShareDialogCozyToCozy', () => {
     uri: 'foo.mycozy.cloud'
   }
 
-  const setup = props => {
-    return render(
+  const setup = props =>
+    render(
       <AppLike client={client}>
         <ShareDialogCozyToCozy {...props} />
       </AppLike>
     )
-  }
 
   it('should show sharing dialog directly when no twoStepsConfirmationMethods are provided', () => {
-    let props = {
+    const props = {
       ...getMockProps()
     }
 
@@ -32,7 +31,7 @@ describe('ShareDialogCozyToCozy', () => {
   it('should show loading while calling getRecipientsToBeConfirmed', async () => {
     const { promise, resolve } = deferablePromise()
 
-    let props = {
+    const props = {
       ...getMockProps(),
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
@@ -61,7 +60,7 @@ describe('ShareDialogCozyToCozy', () => {
   it('should ask to confirm 1 contact if 1 contact is waiting for confirmation', async () => {
     const { promise, resolve } = deferablePromise()
 
-    let props = {
+    const props = {
       ...getMockProps(),
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
@@ -91,7 +90,7 @@ describe('ShareDialogCozyToCozy', () => {
   it('should ask to confirm 2 contacts if 2 contacts are waiting for confirmation', async () => {
     const { promise, resolve } = deferablePromise()
 
-    let props = {
+    const props = {
       ...getMockProps(),
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
@@ -126,7 +125,7 @@ describe('ShareDialogCozyToCozy', () => {
   it('should not ask to confirm contacts if no contacts are waiting for confirmation', async () => {
     const { promise, resolve } = deferablePromise()
 
-    let props = {
+    const props = {
       ...getMockProps(),
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
@@ -152,7 +151,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     const rejectRecipient = jest.fn(() => Promise.resolve())
 
-    let props = {
+    const props = {
       ...getMockProps(),
       twoStepsConfirmationMethods: {
         getRecipientsToBeConfirmed: jest.fn(() => promise),
@@ -230,10 +229,10 @@ const recipientClaude = {
 }
 
 const deferablePromise = () => {
-  let resolvePointer = undefined
-  let rejectPointer = undefined
+  let resolvePointer
+  let rejectPointer
 
-  let promise = new Promise((resolve, reject) => {
+  const promise = new Promise((resolve, reject) => {
     resolvePointer = resolve
     rejectPointer = reject
   })
@@ -245,184 +244,182 @@ const deferablePromise = () => {
   }
 }
 
-const getMockProps = () => {
-  return {
-    contacts: {
-      id: 'contacts',
-      definition: {
-        doctype: 'io.cozy.contacts',
-        selector: {
-          _id: {
-            $gt: null
-          }
-        },
-        indexedFields: ['_id'],
-        partialFilter: {
-          trashed: {
-            $or: [
-              {
-                $eq: false
-              },
-              {
-                $exists: false
-              }
-            ]
-          },
+const getMockProps = () => ({
+  contacts: {
+    id: 'contacts',
+    definition: {
+      doctype: 'io.cozy.contacts',
+      selector: {
+        _id: {
+          $gt: null
+        }
+      },
+      indexedFields: ['_id'],
+      partialFilter: {
+        trashed: {
           $or: [
             {
-              cozy: {
-                $not: {
-                  $size: 0
-                }
-              }
+              $eq: false
             },
             {
-              email: {
-                $not: {
-                  $size: 0
-                }
-              }
+              $exists: false
             }
           ]
         },
-        limit: 1000
-      },
-      fetchStatus: 'pending',
-      lastFetch: null,
-      lastUpdate: null,
-      lastErrorUpdate: null,
-      lastError: null,
-      hasMore: false,
-      count: 0,
-      data: [],
-      bookmark: null,
-      options: null
-    },
-    document: {
-      id: 'SOME_DOCUMENT_ID',
-      name: 'SOME_DOCUMENT_NAME',
-      _type: 'com.bitwarden.organizations',
-      _id: 'SOME_DOCUMENT_ID'
-    },
-    documentType: 'Organizations',
-    groups: {
-      id: 'groups',
-      definition: {
-        doctype: 'io.cozy.contacts.groups'
-      },
-      fetchStatus: 'pending',
-      lastFetch: null,
-      lastUpdate: null,
-      lastErrorUpdate: null,
-      lastError: null,
-      hasMore: false,
-      count: 0,
-      data: [],
-      bookmark: null,
-      options: null
-    },
-    hasSharedParent: null,
-    isOwner: true,
-    link: null,
-    permissions: [],
-    recipients: [
-      recipientAlice,
-      recipientBob,
-      recipientClaude,
-      {
-        status: 'pending',
-        email: 'me@ben.cozy.localhost',
-        type: 'two-way',
-        sharingId: 'SOME_SHARING_ID',
-        index: 3,
-        avatarPath: '/sharings/SOME_SHARING_ID/recipients/3/avatar'
-      }
-    ],
-    sharing: {
-      id: 'SOME_SHARING_ID',
-      _id: 'SOME_SHARING_ID',
-      _type: 'io.cozy.sharings',
-      type: 'io.cozy.sharings',
-      attributes: {
-        triggers: {
-          track_id: 'SOME_TRACK_ID',
-          replicate_id: 'SOME_REPLICATE_ID'
-        },
-        active: true,
-        owner: true,
-        open_sharing: true,
-        description: 'SOME_DOCUMENT_NAME',
-        app_slug: 'password',
-        created_at: '2021-08-13T16:51:28.562668+02:00',
-        updated_at: '2021-08-13T16:51:28.562668+02:00',
-        rules: [
+        $or: [
           {
-            title: 'SOME_DOCUMENT_NAME',
-            doctype: 'com.bitwarden.organizations',
-            values: ['SOME_DOCUMENT_ID'],
-            add: 'sync',
-            update: 'sync',
-            remove: 'sync'
+            cozy: {
+              $not: {
+                $size: 0
+              }
+            }
           },
           {
-            title: 'Ciphers',
-            doctype: 'com.bitwarden.ciphers',
-            selector: 'organization_id',
-            values: ['SOME_DOCUMENT_ID'],
-            add: 'sync',
-            update: 'sync',
-            remove: 'sync'
-          }
-        ],
-        members: [
-          {
-            status: 'owner',
-            public_name: 'Alice',
-            email: 'me@alice.cozy.localhost',
-            instance: 'http://alice.cozy.localhost:8080'
-          },
-          {
-            status: 'ready',
-            public_name: 'Claude',
-            email: 'me@claude.cozy.localhost',
-            instance: 'http://claude.cozy.localhost:8080'
-          },
-          {
-            status: 'ready',
-            public_name: 'Bob',
-            email: 'me@bob.cozy.localhost',
-            instance: 'http://bob.cozy.localhost:8080'
-          },
-          {
-            status: 'pending',
-            email: 'me@ben.cozy.localhost'
+            email: {
+              $not: {
+                $size: 0
+              }
+            }
           }
         ]
       },
-      meta: {
-        rev: '12-136ad05bd33a80b6a1829a9ec3d918f0'
-      },
-      links: {
-        self: '/sharings/SOME_SHARING_ID'
-      },
-      relationships: {
-        shared_docs: {
-          data: [
-            {
-              id: 'SOME_DOCUMENT_ID',
-              type: 'com.bitwarden.organizations'
-            }
-          ]
-        }
-      }
+      limit: 1000
     },
-    sharingDesc: 'SOME_DOCUMENT_NAME',
-    showShareByEmail: true,
-    showShareByLink: false,
-    showShareOnlyByLink: null,
-    showWhoHasAccess: true,
-    onRevoke: jest.fn(),
-    onShare: jest.fn(),
-    createContact: jest.fn()
-  }
-}
+    fetchStatus: 'pending',
+    lastFetch: null,
+    lastUpdate: null,
+    lastErrorUpdate: null,
+    lastError: null,
+    hasMore: false,
+    count: 0,
+    data: [],
+    bookmark: null,
+    options: null
+  },
+  document: {
+    id: 'SOME_DOCUMENT_ID',
+    name: 'SOME_DOCUMENT_NAME',
+    _type: 'com.bitwarden.organizations',
+    _id: 'SOME_DOCUMENT_ID'
+  },
+  documentType: 'Organizations',
+  groups: {
+    id: 'groups',
+    definition: {
+      doctype: 'io.cozy.contacts.groups'
+    },
+    fetchStatus: 'pending',
+    lastFetch: null,
+    lastUpdate: null,
+    lastErrorUpdate: null,
+    lastError: null,
+    hasMore: false,
+    count: 0,
+    data: [],
+    bookmark: null,
+    options: null
+  },
+  hasSharedParent: null,
+  isOwner: true,
+  link: null,
+  permissions: [],
+  recipients: [
+    recipientAlice,
+    recipientBob,
+    recipientClaude,
+    {
+      status: 'pending',
+      email: 'me@ben.cozy.localhost',
+      type: 'two-way',
+      sharingId: 'SOME_SHARING_ID',
+      index: 3,
+      avatarPath: '/sharings/SOME_SHARING_ID/recipients/3/avatar'
+    }
+  ],
+  sharing: {
+    id: 'SOME_SHARING_ID',
+    _id: 'SOME_SHARING_ID',
+    _type: 'io.cozy.sharings',
+    type: 'io.cozy.sharings',
+    attributes: {
+      triggers: {
+        track_id: 'SOME_TRACK_ID',
+        replicate_id: 'SOME_REPLICATE_ID'
+      },
+      active: true,
+      owner: true,
+      open_sharing: true,
+      description: 'SOME_DOCUMENT_NAME',
+      app_slug: 'password',
+      created_at: '2021-08-13T16:51:28.562668+02:00',
+      updated_at: '2021-08-13T16:51:28.562668+02:00',
+      rules: [
+        {
+          title: 'SOME_DOCUMENT_NAME',
+          doctype: 'com.bitwarden.organizations',
+          values: ['SOME_DOCUMENT_ID'],
+          add: 'sync',
+          update: 'sync',
+          remove: 'sync'
+        },
+        {
+          title: 'Ciphers',
+          doctype: 'com.bitwarden.ciphers',
+          selector: 'organization_id',
+          values: ['SOME_DOCUMENT_ID'],
+          add: 'sync',
+          update: 'sync',
+          remove: 'sync'
+        }
+      ],
+      members: [
+        {
+          status: 'owner',
+          public_name: 'Alice',
+          email: 'me@alice.cozy.localhost',
+          instance: 'http://alice.cozy.localhost:8080'
+        },
+        {
+          status: 'ready',
+          public_name: 'Claude',
+          email: 'me@claude.cozy.localhost',
+          instance: 'http://claude.cozy.localhost:8080'
+        },
+        {
+          status: 'ready',
+          public_name: 'Bob',
+          email: 'me@bob.cozy.localhost',
+          instance: 'http://bob.cozy.localhost:8080'
+        },
+        {
+          status: 'pending',
+          email: 'me@ben.cozy.localhost'
+        }
+      ]
+    },
+    meta: {
+      rev: '12-136ad05bd33a80b6a1829a9ec3d918f0'
+    },
+    links: {
+      self: '/sharings/SOME_SHARING_ID'
+    },
+    relationships: {
+      shared_docs: {
+        data: [
+          {
+            id: 'SOME_DOCUMENT_ID',
+            type: 'com.bitwarden.organizations'
+          }
+        ]
+      }
+    }
+  },
+  sharingDesc: 'SOME_DOCUMENT_NAME',
+  showShareByEmail: true,
+  showShareByLink: false,
+  showShareOnlyByLink: null,
+  showWhoHasAccess: true,
+  onRevoke: jest.fn(),
+  onShare: jest.fn(),
+  createContact: jest.fn()
+})

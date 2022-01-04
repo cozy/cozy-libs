@@ -55,7 +55,7 @@ function getInstanceUri(client) {
 export function getUrl(client) {
   const url = getInstanceUri(client)
   const protocol = isSecureUrl(url) ? 'wss:' : 'ws:'
-  const host = new URL(url).host
+  const { host } = new URL(url)
   return `${protocol}//${host}/realtime/`
 }
 

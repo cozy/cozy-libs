@@ -1,5 +1,3 @@
-const tMock = (msgId, args) => {
-  return `${msgId} ${args ? JSON.stringify(args) : ''}`
-}
+const tMock = (msgId, args) => `${msgId} ${args ? JSON.stringify(args) : ''}`
 
 export default tMock

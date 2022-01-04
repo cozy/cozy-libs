@@ -1,7 +1,6 @@
-module.exports = options => {
-  return Object.assign({}, options, {
-    shouldnotbehere: 'no',
-    nothingtodohere: true,
-    cpatchane: 'nice'
-  })
-}
+module.exports = options => ({
+  ...options,
+  shouldnotbehere: 'no',
+  nothingtodohere: true,
+  cpatchane: 'nice'
+})

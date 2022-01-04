@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import Topbar from './Topbar'
 import {
   translate,
   Title,
@@ -13,6 +12,7 @@ import {
 import Slider from '@material-ui/lab/Slider'
 import { withRouter } from 'react-router'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import Topbar from './Topbar'
 import ProcedureComponentsPropType from './ProcedureComponentsPropType'
 
 class Duration extends React.PureComponent {
@@ -47,7 +47,7 @@ class Duration extends React.PureComponent {
     const rate = 3.2 + (simulationDuration * 0.2) / 60
     const actualRate = rate / 100 / simulationDuration
     const installment =
-      (actualRate / (1 - Math.pow(1 + actualRate, -simulationDuration))) *
+      (actualRate / (1 - (1 + actualRate) ** -simulationDuration)) *
       simulationAmount
     return (
       <PageLayout>

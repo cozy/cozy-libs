@@ -3,9 +3,9 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router'
 import { Title, translate, Label, Button } from 'cozy-ui/transpiled/react/'
 
-import Topbar from './Topbar'
-import DocumentsGroup from '../components/documents/DocumentsGroup'
 import { creditApplicationTemplate } from 'cozy-procedures'
+import Topbar from './Topbar'
+import DocumentsGroup from './documents/DocumentsGroup'
 import DocumentsContainer from '../containers/DocumentsDataForm'
 import CompletedFromDriveStatus from '../containers/CompletedFromDriveStatus'
 import ProcedureComponentsPropType from './ProcedureComponentsPropType'
@@ -25,11 +25,9 @@ export const mergeDocsFromStoreAndTemplate = (
   docsFromStore,
   documentsTemplate
 ) => {
-  let sorted = {}
+  const sorted = {}
   Object.keys(documentsTemplate)
-    .sort(function (a, b) {
-      return documentsTemplate[a].order - documentsTemplate[b].order
-    })
+    .sort((a, b) => documentsTemplate[a].order - documentsTemplate[b].order)
     .forEach(key => {
       sorted[key] = documentsTemplate[key]
       if (docsFromStore[key] && docsFromStore[key].files) {

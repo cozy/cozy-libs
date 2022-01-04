@@ -11,6 +11,7 @@ import clone from 'lodash/clone'
 import set from 'lodash/set'
 import defaults from 'lodash/defaults'
 
+import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { waitForRealtimeEvent } from './jobUtils'
 import {
   getBIConnection,
@@ -21,7 +22,6 @@ import {
   setBIConnectionSyncStatus
 } from './bi-http'
 import assert from '../assert'
-import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import logger from '../logger'
@@ -61,12 +61,9 @@ const convertBIErrortoKonnectorJobError = error => {
   throw err
 }
 
-export const isBudgetInsightConnector = konnector => {
-  return (
-    konnector.partnership &&
-    konnector.partnership.domain.includes('budget-insight')
-  )
-}
+export const isBudgetInsightConnector = konnector =>
+  konnector.partnership &&
+  konnector.partnership.domain.includes('budget-insight')
 
 const createTemporaryToken = async ({ client, konnector, account }) => {
   assert(
@@ -190,9 +187,7 @@ export const setBIConnectionId = (originalAccount, biConnectionId) => {
   return account
 }
 
-export const getBIConnectionId = account => {
-  return get(account, 'data.auth.bi.connId')
-}
+export const getBIConnectionId = account => get(account, 'data.auth.bi.connId')
 
 /**
  * Handles webauth connection
@@ -245,12 +240,11 @@ export const handleOAuthAccount = async ({
  *
  * @return {Integer} Connection Id
  */
-const getWebauthBIConnectionId = account => {
-  return Number(get(account, 'oauth.query.id_connection[0]'))
-}
+const getWebauthBIConnectionId = account =>
+  Number(get(account, 'oauth.query.id_connection[0]'))
 
 export const updateBIConnectionFromFlow = async (flow, connectionData) => {
-  const account = flow.account
+  const { account } = flow
 
   const connId = getBIConnectionIdFromAccount(account)
   const { code: temporaryToken, ...config } = getBIConfig(flow)
@@ -267,13 +261,11 @@ export const updateBIConnectionFromFlow = async (flow, connectionData) => {
   flow.setData({ biConnection: updatedConnection })
 }
 
-export const sendAdditionalInformation = (flow, fields) => {
-  return updateBIConnectionFromFlow(flow, fields)
-}
+export const sendAdditionalInformation = (flow, fields) =>
+  updateBIConnectionFromFlow(flow, fields)
 
-export const resumeBIConnection = flow => {
-  return updateBIConnectionFromFlow(flow, { resume: 'true' })
-}
+export const resumeBIConnection = flow =>
+  updateBIConnectionFromFlow(flow, { resume: 'true' })
 
 /**
  * @typedef biConnection
@@ -396,7 +388,7 @@ export const sendTwoFACode = (flow, code) => {
 }
 
 export const getAdditionalInformationNeeded = flow => {
-  const biConnection = flow.getData().biConnection
+  const { biConnection } = flow.getData()
   assert(
     biConnection,
     'No BI connection saved in connection flow, cannot determine additional fields'
@@ -499,20 +491,17 @@ export const fetchExtraOAuthUrlParams = async ({
  * @param  {string} err - connection error string
  * @return {bool}
  */
-const shouldResumeConnection = error => {
-  return (
-    error === DECOUPLED_ERROR || error === ADDITIONAL_INFORMATION_NEEDED_ERROR
-  )
-}
+const shouldResumeConnection = error =>
+  error === DECOUPLED_ERROR || error === ADDITIONAL_INFORMATION_NEEDED_ERROR
 
 export const konnectorPolicy = {
   name: 'budget-insight',
   match: isBudgetInsightConnector,
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
-  sendAdditionalInformation: sendAdditionalInformation,
-  sendTwoFACode: sendTwoFACode,
-  fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
+  sendAdditionalInformation,
+  sendTwoFACode,
+  fetchExtraOAuthUrlParams,
   getAdditionalInformationNeeded,
   handleOAuthAccount,
   setSync

@@ -2,8 +2,8 @@ import React from 'react'
 import { shallow } from 'enzyme'
 import { KonnectorAccounts } from 'components/KonnectorAccounts'
 import CozyClient from 'cozy-client'
-import { fetchAccountsFromTriggers } from '../../src/connections/accounts'
-import { fetchTrigger } from '../../src/connections/triggers'
+import { fetchAccountsFromTriggers } from '../connections/accounts'
+import { fetchTrigger } from '../connections/triggers'
 
 jest.mock(
   'cozy-realtime',

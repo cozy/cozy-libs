@@ -1,7 +1,7 @@
 /* eslint-disable node/no-unsupported-features/es-syntax */
-const Document = require('./Document')
 const pickBy = require('lodash/pickBy')
 const get = require('lodash/get')
+const Document = require('./Document')
 
 const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
@@ -20,9 +20,8 @@ class Account extends Document {
       return (
         account.auth.accountName || this.getAccountLogin(account) || account._id
       )
-    } else {
-      return account._id
     }
+    return account._id
   }
 
   static getAccountLogin(account) {

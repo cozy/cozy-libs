@@ -1,17 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-const ObjectFieldTemplate = props => (
-  <div>
-    {props.properties.map(element => {
-      return (
+function ObjectFieldTemplate(props) {
+  return (
+    <div>
+      {props.properties.map(element => (
         <div className="property-wrapper" key={element.name}>
           {element.content}
         </div>
-      )
-    })}
-  </div>
-)
+      ))}
+    </div>
+  )
+}
 
 ObjectFieldTemplate.propTypes = {
   properties: PropTypes.arrayOf(

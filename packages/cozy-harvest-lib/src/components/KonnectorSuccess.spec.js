@@ -34,7 +34,7 @@ describe('KonnectorSuccess', () => {
               account: { _id: 'account-1' },
               trigger: {
                 _id: 'trigger-1',
-                message: message
+                message
               }
             },
             {

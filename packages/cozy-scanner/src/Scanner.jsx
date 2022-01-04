@@ -7,7 +7,7 @@ import { isAndroidApp } from 'cozy-device-helper'
 import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
-import { ModalScannerQualification } from './'
+import { ModalScannerQualification } from '.'
 import { doUpload } from './ScannerUpload'
 
 export const SCANNER_IDLE = 'idle'
@@ -39,6 +39,7 @@ class Scanner extends React.Component {
     imageURI: '',
     loadingScreen: false
   }
+
   constructor(props) {
     super(props)
     if (!CozyFile.cozyClient) CozyFile.registerClient(this.props.client)
@@ -55,6 +56,7 @@ class Scanner extends React.Component {
       imageURI
     })
   }
+
   /**
    * @param {String} message
    */
@@ -96,7 +98,7 @@ class Scanner extends React.Component {
         quality: isAndroidApp() ? 100 : 80,
         destinationType: window.navigator.camera.DestinationType.FILE_URI,
         sourceTypes: window.navigator.camera.PictureSourceType.CAMERA,
-        correctOrientation: isAndroidApp() ? false : true,
+        correctOrientation: !isAndroidApp(),
         saveToPhotoAlbum: false
       }
       window.navigator.camera.getPicture(this.onSuccess, this.onFail, {
@@ -111,6 +113,7 @@ class Scanner extends React.Component {
   onClear = () => {
     this.setState({ filename: undefined })
   }
+
   /**
    * Si pas de dirId => FilePicker
    */

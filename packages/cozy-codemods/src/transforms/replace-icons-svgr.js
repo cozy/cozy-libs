@@ -1,11 +1,8 @@
 const { imports } = require('..')
 
-const iconNameToComponentName = iconName => {
-  return (
-    iconName[0].toUpperCase() +
-    iconName.slice(1).replace(/-([a-z])/g, x => x[1].toUpperCase())
-  )
-}
+const iconNameToComponentName = iconName =>
+  iconName[0].toUpperCase() +
+  iconName.slice(1).replace(/-([a-z])/g, x => x[1].toUpperCase())
 
 module.exports = function replaceSvgrIcons(file, api) {
   const j = api.jscodeshift
@@ -32,7 +29,7 @@ module.exports = function replaceSvgrIcons(file, api) {
     }
   }
 
-  for (let componentName of ['Avatar', 'Icon', 'Button', 'ButtonLink']) {
+  for (const componentName of ['Avatar', 'Icon', 'Button', 'ButtonLink']) {
     root
       .find(j.JSXOpeningElement, {
         name: {

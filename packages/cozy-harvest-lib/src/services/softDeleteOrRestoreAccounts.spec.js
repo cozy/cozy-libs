@@ -1,5 +1,3 @@
-import softDeleteOrRestoreAccounts from './softDeleteOrRestoreAccounts'
-
 import {
   decryptString,
   getOrganizationKey,
@@ -9,6 +7,7 @@ import {
   updateAccountsAuth,
   getT
 } from 'services/utils'
+import softDeleteOrRestoreAccounts from './softDeleteOrRestoreAccounts'
 
 import { ensureTrigger } from '../connections/triggers'
 

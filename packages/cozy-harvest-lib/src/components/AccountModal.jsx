@@ -9,6 +9,7 @@ import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
+import DialogContent from '@material-ui/core/DialogContent'
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
@@ -16,7 +17,6 @@ import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointPushHistory } from './MountPointContext'
 import withLocales from './hoc/withLocales'
-import DialogContent from '@material-ui/core/DialogContent'
 
 /**
  * Takes an accountId and a list of accounts containing their respecting triggers
@@ -49,6 +49,7 @@ export class AccountModal extends Component {
     fetching: true,
     error: null
   }
+
   async componentDidMount() {
     await this.loadSelectedAccountId()
   }

@@ -217,6 +217,7 @@ class CozyRealtime {
         data
       })
   }
+
   send(...args) {
     if (!this.sendDeprecationNoticeSent) {
       this.sendDeprecationNoticeSent = true
@@ -402,7 +403,7 @@ class CozyRealtime {
   normalizeSubscription(event, type, id, handler) {
     return {
       event: event ? event.toUpperCase() : event,
-      type: type,
+      type,
       id: handler ? id : null,
       handler: handler || id
     }

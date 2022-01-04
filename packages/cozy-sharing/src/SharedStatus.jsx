@@ -9,7 +9,7 @@ export const SharedStatus = withLocales(
     <SharingContext.Consumer>
       {({ byDocId, getRecipients, getSharingLink, isOwner } = {}) =>
         !byDocId || !byDocId[docId] ? (
-          <span className={className + ' ' + noSharedClassName}>—</span>
+          <span className={`${className} ${noSharedClassName}`}>—</span>
         ) : (
           <RecipientsAvatars
             className={className}

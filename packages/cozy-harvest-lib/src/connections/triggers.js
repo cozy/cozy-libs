@@ -64,13 +64,11 @@ export const prepareTriggerAccount = async (client, trigger) => {
  * @param  {Object} client CozyClient
  * @return {Object}        Object containing mutations
  */
-export const triggersMutations = client => {
-  return {
-    createTrigger: createTrigger.bind(null, client),
-    fetchTrigger: fetchTrigger.bind(null, client),
-    launchTrigger: launchTrigger.bind(null, client)
-  }
-}
+export const triggersMutations = client => ({
+  createTrigger: createTrigger.bind(null, client),
+  fetchTrigger: fetchTrigger.bind(null, client),
+  launchTrigger: launchTrigger.bind(null, client)
+})
 
 const ensureKonnectorFolder = async (client, { konnector, account, t }) => {
   const permissions = client.collection(PERMISSIONS_DOCTYPE)

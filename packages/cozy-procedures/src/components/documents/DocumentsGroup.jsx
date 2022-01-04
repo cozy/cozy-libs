@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import DocumentHolder from './DocumentHolder'
 import EmptyDocumentHolder from './EmptyDocumentHolder'
 import LoadingDocumentHolder from './LoadingDocumentHolder'
+
 const DocumentsGroup = ({
   files,
   templateDocumentsCount,

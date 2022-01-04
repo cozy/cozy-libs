@@ -1,8 +1,8 @@
 const logger = require('./utils/logger')
 
 const requireHook = (hook, type) => {
-  const builtInHookPath = `${__dirname}/hooks/${type}/` + hook + '.js'
-  const customHookPath = process.cwd() + '/' + hook
+  const builtInHookPath = `${__dirname}/hooks/${type}/${hook}.js`
+  const customHookPath = `${process.cwd()}/${hook}`
   try {
     return require(builtInHookPath)
   } catch (err1) {

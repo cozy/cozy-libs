@@ -5,13 +5,13 @@ import { translate } from 'cozy-ui/transpiled/react'
 
 import getInputProps from './getInputProps'
 
-export const SelectBoxAdapter = ({
+export function SelectBoxAdapter({
   onChange,
   options,
   t,
   value,
   ...otherProps
-}) => {
+}) {
   const { enumOptions, ...otherOptions } = options
   const currentValue = enumOptions.find(o => o.value === value)
   let translatedCurrentValue

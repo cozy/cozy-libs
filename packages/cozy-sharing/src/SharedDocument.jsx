@@ -2,7 +2,7 @@ import React from 'react'
 
 import SharingContext from './context'
 
-export const SharedDocument = ({ docId, children }) => (
+export var SharedDocument = ({ docId, children }) => (
   <SharingContext.Consumer>
     {({
       hasWriteAccess,

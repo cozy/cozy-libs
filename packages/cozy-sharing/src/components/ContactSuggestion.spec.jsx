@@ -4,6 +4,7 @@ import { mount } from 'enzyme'
 import AppLike from '../../test/AppLike'
 
 import { ContactSuggestion } from './ContactSuggestion'
+
 const WrappingComponent = ({ children }) => <AppLike>{children}</AppLike>
 
 describe('ContactSuggestion component', () => {

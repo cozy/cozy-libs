@@ -12,14 +12,13 @@ import Dialog, {
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
 import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
+import withMobileDialog from '@material-ui/core/withMobileDialog'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import Illustration from './Illustration'
 
 import DataTypes from './DataTypes'
 import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
 import { getSuggestionReason } from '../../helpers/appSuggestions'
-import withMobileDialog from '@material-ui/core/withMobileDialog'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const KonnectorSuggestionModal = ({
   t,

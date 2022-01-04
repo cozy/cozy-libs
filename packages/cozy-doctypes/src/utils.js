@@ -12,7 +12,7 @@ const parallelMap = (iterable, fn, concurrencyArg) => {
   const concurrency = concurrencyArg || 30
   const res = []
   const pool = new PromisePool(function* () {
-    for (let item of iterable) {
+    for (const item of iterable) {
       yield fn(item).then(x => res.push(x))
     }
   }, concurrency)

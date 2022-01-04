@@ -22,15 +22,13 @@ export const useTrackPage = pageName => {
 }
 
 export const withTracker = Component => {
-  const Wrapped = props => {
-    return (
-      <TrackingContext.Consumer>
-        {({ trackPage, trackEvent }) => (
-          <Component {...props} trackPage={trackPage} trackEvent={trackEvent} />
-        )}
-      </TrackingContext.Consumer>
-    )
-  }
+  const Wrapped = props => (
+    <TrackingContext.Consumer>
+      {({ trackPage, trackEvent }) => (
+        <Component {...props} trackPage={trackPage} trackEvent={trackEvent} />
+      )}
+    </TrackingContext.Consumer>
+  )
   Wrapped.displayName = `withTracker(${
     Component.name || Component.displayName
   })`

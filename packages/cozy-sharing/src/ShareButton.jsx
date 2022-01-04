@@ -15,8 +15,8 @@ export const ShareButton = withLocales(({ docId, useShortLabel, ...rest }) => {
   const restProps = { ...rest, t: null, f: null, lang: null }
   return (
     <SharingContext.Consumer>
-      {({ byDocId, documentType, isOwner }) => {
-        return !byDocId[docId] ? (
+      {({ byDocId, documentType, isOwner }) =>
+        !byDocId[docId] ? (
           <DumbShareButton
             label={t(`${documentType}.share.cta`)}
             {...restProps}
@@ -40,7 +40,7 @@ export const ShareButton = withLocales(({ docId, useShortLabel, ...rest }) => {
             {...restProps}
           />
         )
-      }}
+      }
     </SharingContext.Consumer>
   )
 })

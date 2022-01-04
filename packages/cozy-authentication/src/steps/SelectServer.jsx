@@ -12,7 +12,6 @@ import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import 'cozy-ui/assets/icons/ui/previous.svg'
 import 'cozy-ui/assets/icons/ui/next.svg'
 import 'cozy-ui/assets/icons/ui/lock.svg'
-import ButtonLinkRegistration from './ButtonLinkRegistration'
 import {
   Wizard,
   WizardMain,
@@ -33,6 +32,7 @@ import {
 
 import LockIcon from 'cozy-ui/transpiled/react/Icons/Lock'
 import NextIcon from 'cozy-ui/transpiled/react/Icons/Next'
+import ButtonLinkRegistration from './ButtonLinkRegistration'
 
 require('url-polyfill')
 
@@ -95,18 +95,16 @@ export class SelectServer extends Component {
         this.setState({
           selectValue: cozyDomain
         })
+      } else if (value.includes('.')) {
+        this.setState({
+          selectValue: customValue,
+          isCustomDomain: true
+        })
       } else {
-        if (value.includes('.')) {
-          this.setState({
-            selectValue: customValue,
-            isCustomDomain: true
-          })
-        } else {
-          this.setState({
-            selectValue: cozyDomain,
-            isCustomDomain: false
-          })
-        }
+        this.setState({
+          selectValue: cozyDomain,
+          isCustomDomain: false
+        })
       }
     }
     if (this.state.error) {
@@ -117,7 +115,7 @@ export class SelectServer extends Component {
 
   onSubmit = async e => {
     e.preventDefault()
-    const value = this.state.value
+    const { value } = this.state
     let error
 
     if (this.hasAtSign(value)) {
@@ -161,9 +159,8 @@ export class SelectServer extends Component {
     try {
       if (client.isV2) {
         return await client.isV2(url)
-      } else {
-        return false
       }
+      return false
     } catch (err) {
       this.props.onException(err, {
         tentativeUrl: url,
@@ -174,23 +171,25 @@ export class SelectServer extends Component {
     }
   }
 
-  isValideCozyName = value => {
-    return (
-      /^[a-zA-Z0-9-]*$/.test(value) && value.length > 0 && value.length < 63
-    )
-  }
+  isValideCozyName = value =>
+    /^[a-zA-Z0-9-]*$/.test(value) && value.length > 0 && value.length < 63
+
   hasMispelledCozy = value => /\..*cosy.*\./.test(value)
+
   hasAtSign = value => /.*@.*/.test(value)
 
   appendDomain = (value, domain) =>
     /\./.test(value) ? value : `${value}${domain}`
+
   prependProtocol = value =>
     /^http(s)?:\/\//.test(value) ? value : `https://${value}`
+
   removeAppSlug = value => {
     const matchedSlugs = /^https?:\/\/\w+(-\w+)\./gi.exec(value)
 
     return matchedSlugs ? value.replace(matchedSlugs[1], '') : value
   }
+
   normalizeURL = (value, defaultDomain) => {
     const valueWithProtocol = this.prependProtocol(value)
     const valueWithProtocolAndDomain = this.appendDomain(
@@ -224,11 +223,12 @@ export class SelectServer extends Component {
     }
     return value
   }
+
   selectOnChange = e => {
     this.setState({
       selectValue: e.target.value,
-      isCustomDomain: e.target.value === customValue ? true : false,
-      manuallySelected: e.target.value === customValue ? true : false,
+      isCustomDomain: e.target.value === customValue,
+      manuallySelected: e.target.value === customValue,
       value:
         e.target.value !== customValue
           ? this.getSubDomain(this.state.value)
@@ -348,8 +348,8 @@ export class SelectServer extends Component {
               className={classNames('wizard-buttonlink')}
               label={t('mobile.onboarding.welcome.no_account_link')}
               size={isTiny ? 'normal' : 'large'}
-              subtle={true}
-              type={'button'}
+              subtle
+              type="button"
               theme="text"
               onboarding={onboarding}
             />

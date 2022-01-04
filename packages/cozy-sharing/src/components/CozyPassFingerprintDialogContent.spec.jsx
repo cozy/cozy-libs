@@ -12,16 +12,15 @@ describe('CozyPassFingerprintDialogContent', () => {
     uri: 'foo.mycozy.cloud'
   }
 
-  const setup = props => {
-    return render(
+  const setup = props =>
+    render(
       <AppLike client={client}>
         <CozyPassFingerprintDialogContent {...props} />
       </AppLike>
     )
-  }
 
   it('shoud show the fingerprint from recipientConfirmationData', async () => {
-    let props = {
+    const props = {
       recipientConfirmationData: {
         name: 'SOME_NAME',
         email: 'SOME_EMAIL',

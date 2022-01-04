@@ -18,17 +18,15 @@ const SharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
         {t(`ConfirmRecipientModal.intruction`)}
       </Typography>
 
-      {recipientsToBeConfirmed.map(recipientConfirmationData => {
-        return (
-          <Recipient
-            {...recipientConfirmationData}
-            key={`key_r_${recipientConfirmationData.id}`}
-            isOwner={false}
-            recipientConfirmationData={recipientConfirmationData}
-            verifyRecipient={verifyRecipient}
-          />
-        )
-      })}
+      {recipientsToBeConfirmed.map(recipientConfirmationData => (
+        <Recipient
+          {...recipientConfirmationData}
+          key={`key_r_${recipientConfirmationData.id}`}
+          isOwner={false}
+          recipientConfirmationData={recipientConfirmationData}
+          verifyRecipient={verifyRecipient}
+        />
+      ))}
     </>
   )
 }
@@ -46,15 +44,13 @@ const SharingTitle = ({ recipientsToBeConfirmed }) => {
   return title
 }
 
-const ConfirmTrustedRecipientsDialog = ({ ...props }) => {
-  return (
-    <ShareDialogTwoStepsConfirmationContainer
-      {...props}
-      dialogContentOnShare={SharingContent}
-      dialogActionsOnShare={null}
-      dialogTitleOnShare={SharingTitle}
-    />
-  )
-}
+const ConfirmTrustedRecipientsDialog = ({ ...props }) => (
+  <ShareDialogTwoStepsConfirmationContainer
+    {...props}
+    dialogContentOnShare={SharingContent}
+    dialogActionsOnShare={null}
+    dialogTitleOnShare={SharingTitle}
+  />
+)
 
 export default ConfirmTrustedRecipientsDialog

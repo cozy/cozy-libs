@@ -4,9 +4,8 @@ import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
-import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
-
 import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
+import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 
 const DriveLink = memo(({ folderId, client, t }) => {
   const slug = 'drive'
@@ -28,18 +27,17 @@ const DriveLink = memo(({ folderId, client, t }) => {
         )}
       </AppLinker>
     )
-  } else {
-    return (
-      <ButtonLink
-        icon={OpenwithIcon}
-        label={t('account.success.banksLinkText', {
-          appName: name
-        })}
-        busy
-        subtle
-      />
-    )
   }
+  return (
+    <ButtonLink
+      icon={OpenwithIcon}
+      label={t('account.success.banksLinkText', {
+        appName: name
+      })}
+      busy
+      subtle
+    />
+  )
 })
 
 DriveLink.displayName = 'DriveLink'

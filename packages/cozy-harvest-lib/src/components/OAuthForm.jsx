@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import OAuthWindow from './OAuthWindow'
 import compose from 'lodash/flowRight'
+import OAuthWindow from './OAuthWindow'
 import withConnectionFlow from '../models/withConnectionFlow'
 import { findKonnectorPolicy } from '../konnector-policies'
 
@@ -45,7 +45,7 @@ export class OAuthForm extends PureComponent {
   }
 
   handleExtraParams(extraParams) {
-    this.setState({ extraParams: extraParams })
+    this.setState({ extraParams })
   }
 
   handleAccountId(accountId) {

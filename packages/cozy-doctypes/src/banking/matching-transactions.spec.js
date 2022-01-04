@@ -15,20 +15,18 @@ const fmtMatchResult = result => {
   const displayDate = getDisplayDate(result)
   if (result.match) {
     return `✅ ${displayDate}: ${result.transaction.label} (${result.transaction.amount}) -> ${result.match.label} (${result.match.amount}) via ${result.method}`
-  } else {
-    return `❌ ${displayDate}: ${result.transaction.label} ${result.transaction.amount}`
   }
+  return `❌ ${displayDate}: ${result.transaction.label} ${result.transaction.amount}`
 }
-const matchFiles = (filename1, filename2) => {
-  return matchTransactions(readOperations(filename1), readOperations(filename2))
-}
+const matchFiles = (filename1, filename2) =>
+  matchTransactions(readOperations(filename1), readOperations(filename2))
 
 const fixturePath = path.join(__dirname, 'fixtures')
 
 const fnDescribe = fs.existsSync(fixturePath) ? describe : xdescribe
 
 fnDescribe('transactions matching', () => {
-  for (let bank of [
+  for (const bank of [
     'axa',
     'banquepostale',
     'creditagricole',

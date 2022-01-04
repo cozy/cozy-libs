@@ -37,7 +37,7 @@ const makeSureUseNewPath = source => {
   const newPath = oldToNewPaths[iconPath]
 
   if (newPath) {
-    source.value = iconRoot + '/' + newPath
+    source.value = `${iconRoot}/${newPath}`
   }
 }
 

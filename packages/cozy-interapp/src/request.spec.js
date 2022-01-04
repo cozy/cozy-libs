@@ -1,7 +1,8 @@
 import Request from './request'
 
 describe('[Interapp] Request', () => {
-  let request, cozyClient
+  let request
+  let cozyClient
 
   beforeEach(() => {
     cozyClient = {

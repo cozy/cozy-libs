@@ -20,9 +20,8 @@ jest.mock(
 jest.mock('cozy-flags', () => name => {
   if (name == 'harvest.toggle-contract-sync') {
     return true
-  } else {
-    return false
   }
+  return false
 })
 
 describe('EditContract', () => {

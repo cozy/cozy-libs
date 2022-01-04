@@ -30,14 +30,12 @@ export const normalizeDocFromRealtime = (object, type) => {
 export const updateInternalObjectFromRealtime = (
   internalSharingFromStore,
   sharingFromRealtime
-) => {
-  return {
-    ...internalSharingFromStore,
-    meta: {
-      rev: sharingFromRealtime._rev
-    },
-    attributes: {
-      ...sharingFromRealtime
-    }
+) => ({
+  ...internalSharingFromStore,
+  meta: {
+    rev: sharingFromRealtime._rev
+  },
+  attributes: {
+    ...sharingFromRealtime
   }
-}
+})

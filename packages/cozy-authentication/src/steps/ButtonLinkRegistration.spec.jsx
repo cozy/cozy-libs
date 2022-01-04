@@ -1,17 +1,18 @@
-jest.mock('cozy-device-helper', () => ({
-  getPlatform: () => 'testing-platform',
-  nativeLinkOpen: jest.fn(),
-  isAndroidApp: () => false
-}))
-
 import React from 'react'
 import CozyClient from 'cozy-client'
 import { nativeLinkOpen } from 'cozy-device-helper'
 import { mount } from 'enzyme'
 import { ButtonLinkRegistration } from './ButtonLinkRegistration'
 
+jest.mock('cozy-device-helper', () => ({
+  getPlatform: () => 'testing-platform',
+  nativeLinkOpen: jest.fn(),
+  isAndroidApp: () => false
+}))
+
 describe('ButtonLinkRegistration', () => {
-  let uut, instance
+  let uut
+  let instance
 
   const setup = () => {
     const client = new CozyClient({

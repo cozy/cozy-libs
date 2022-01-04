@@ -1,9 +1,9 @@
 import uuid from 'uuid/v4'
 
-import * as konnectors from './konnectors'
 import CozyClient from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
 import get from 'lodash/get'
+import * as konnectors from './konnectors'
 
 export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
 
@@ -51,9 +51,9 @@ export const checkOAuthData = (konnector, data) => {
  * @return {boolean} `true` if an OAuth response has been handled, `false` otherwise
  */
 export const handleOAuthResponse = (options = {}) => {
-  let realtime = options.realtime
+  let { realtime } = options
   if (!realtime) {
-    let client = options.client
+    let { client } = options
     if (!client) {
       const root = document.querySelector('[role=application]')
       client = new CozyClient({
@@ -130,9 +130,7 @@ export const getOAuthUrl = ({
   return oAuthUrl
 }
 
-const getAppSlug = client => {
-  return get(client, 'appMetadata.slug')
-}
+const getAppSlug = client => get(client, 'appMetadata.slug')
 
 /**
  * Initializes client OAuth workflow by storing the current information about

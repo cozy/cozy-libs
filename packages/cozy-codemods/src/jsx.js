@@ -1,8 +1,7 @@
 const j = require('jscodeshift')
 
-const isJsxElementOfClass = (element, klass) => {
-  return element.openingElement && element.openingElement.name.name === klass
-}
+const isJsxElementOfClass = (element, klass) =>
+  element.openingElement && element.openingElement.name.name === klass
 
 const addJsxAttribute = (element, name, value) => {
   element.openingElement.attributes.push(

@@ -7,14 +7,14 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import DialogContent from '@material-ui/core/DialogContent'
+import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import TriggerManager from './TriggerManager'
 import KonnectorIcon from './KonnectorIcon'
 import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
 import { MountPointContext } from './MountPointContext'
-import DialogContent from '@material-ui/core/DialogContent'
-import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import { useDialogContext } from './DialogContext'
 
 /**

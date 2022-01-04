@@ -7,7 +7,7 @@ const prompt = question =>
       output: process.stdout
     })
 
-    rl.question(question + ' ', answer => {
+    rl.question(`${question} `, answer => {
       resolve(answer)
       rl.close()
     })
@@ -15,7 +15,7 @@ const prompt = question =>
 
 export const multiPrompt = async fields => {
   const responses = {}
-  for (let f of fields) {
+  for (const f of fields) {
     responses[f.name] = await prompt(f.label)
   }
   return responses

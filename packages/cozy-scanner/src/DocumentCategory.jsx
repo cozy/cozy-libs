@@ -12,11 +12,10 @@ import ActionMenu, {
 import palette from 'cozy-ui/transpiled/react/palette'
 import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import CategoryGridItem from './CategoryGridItem'
 
 import styles from './stylesheet.css'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 /**
  *
@@ -46,6 +45,7 @@ class DocumentCategory extends Component {
     const { onSelect } = this.props
     if (onSelect) onSelect(item)
   }
+
   render() {
     const { isMenuDisplayed } = this.state
     const { category, isSelected, selectedItem, t } = this.props
@@ -76,41 +76,39 @@ class DocumentCategory extends Component {
                       <Icon
                         icon={category.icon}
                         color={palette.dodgerBlue}
-                        size={'16'}
+                        size="16"
                         className={classNames(styles['icon-absolute-centered'])}
                       />
                     }
                     background={
                       <Icon
-                        icon={'file-duotone'}
-                        size={'32'}
+                        icon="file-duotone"
+                        size="32"
                         color={palette.dodgerBlue}
                       />
                     }
                   />
                 </Img>
-                <Bd className={'u-ml-1'}>
+                <Bd className="u-ml-1">
                   <Typography tag="span" ellipsis variant="h6">
                     {t(`Scan.themes.${category.label}`)}
                   </Typography>
                 </Bd>
               </Media>
             </ActionMenuHeader>
-            {category.items.map(item => {
-              return (
-                <ActionMenuItem
-                  onClick={() => {
-                    this.onSelect({
-                      categoryLabel: category.label,
-                      item: item
-                    })
-                  }}
-                  key={item.label}
-                >
-                  {t(`Scan.items.${item.label}`)}
-                </ActionMenuItem>
-              )
-            })}
+            {category.items.map(item => (
+              <ActionMenuItem
+                onClick={() => {
+                  this.onSelect({
+                    categoryLabel: category.label,
+                    item
+                  })
+                }}
+                key={item.label}
+              >
+                {t(`Scan.items.${item.label}`)}
+              </ActionMenuItem>
+            ))}
           </ActionMenu>
         )}
       </>

@@ -71,7 +71,7 @@ class BankingReconciliator {
           'warn',
           `Transaction without account, vendorAccountIdAttr: ${BankTransaction.vendorAccountIdAttr}`
         )
-        log('warn', 'transaction: ' + JSON.stringify(tr))
+        log('warn', `transaction: ${JSON.stringify(tr)}`)
         throw new Error('Transaction without account.')
       }
     })

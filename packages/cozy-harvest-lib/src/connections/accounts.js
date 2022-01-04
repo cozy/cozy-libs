@@ -1,8 +1,8 @@
 import { Q } from 'cozy-client'
-import * as triggersModel from '../helpers/triggers'
 
 import merge from 'lodash/merge'
 import keyBy from 'lodash/keyBy'
+import * as triggersModel from '../helpers/triggers'
 import assert from '../assert'
 import logger from '../logger'
 
@@ -135,9 +135,8 @@ export const updateAccount = async (client, account) => {
       delete account._rev
       const { data } = await client.save(merge(upToDateAccount, account))
       return data
-    } else {
-      throw error
     }
+    throw error
   }
 }
 

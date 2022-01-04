@@ -82,7 +82,7 @@ describe('Publish script (helper)', () => {
       await publish(options)
 
       expect(fetch.mock.calls[0][0]).toBe(
-        options.registryUrl + '/registry/' + options.appSlug
+        `${options.registryUrl}/registry/${options.appSlug}`
       )
     })
   })

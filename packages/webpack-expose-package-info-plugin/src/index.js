@@ -6,7 +6,7 @@ const pluginName = 'PackageInfoPlugin'
 
 const pick = (obj, fields) => {
   const res = {}
-  for (let field of fields) {
+  for (const field of fields) {
     res[field] = obj[field]
   }
   return res
@@ -18,6 +18,7 @@ class PackageInfoPlugin {
     this.packages = options.packages
     this.fields = options.fields || ['version']
   }
+
   async apply(compiler) {
     // Create a resolver with the same options as the compiler
     const resolver = ResolverFactory.createResolver({
@@ -34,7 +35,7 @@ class PackageInfoPlugin {
       async (params, callback) => {
         // Collect info of all packages specified in options
         const info = {}
-        for (let pkg of this.packages) {
+        for (const pkg of this.packages) {
           const path = await resolvePromise(resolver, `${pkg}/package.json`)
           const data = JSON.parse(fs.readFileSync(path))
           info[pkg] = pick(data, this.fields)

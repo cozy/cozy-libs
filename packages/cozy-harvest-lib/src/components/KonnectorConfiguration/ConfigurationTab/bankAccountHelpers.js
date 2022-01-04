@@ -32,9 +32,8 @@ export const accountTypesWithTranslation = [
   'Savings'
 ]
 
-export const getAccountOwners = account => {
-  return get(account, 'owners.data', []).filter(Boolean)
-}
+export const getAccountOwners = account =>
+  get(account, 'owners.data', []).filter(Boolean)
 
 const transformDocToRelationship = doc => ({
   _id: doc._id,

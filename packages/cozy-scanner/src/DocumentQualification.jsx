@@ -10,16 +10,14 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Grid from 'cozy-ui/transpiled/react/MuiCozyTheme/Grid'
 
+import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
+import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import CategoryGridItem from './CategoryGridItem'
 import DocumentCategory from './DocumentCategory'
 
 import { themes } from './DocumentTypeData'
-import GridItem from 'cozy-ui/transpiled/react/Labs/GridItem'
 import styles from './stylesheet.css'
-
-import QualifyIcon from 'cozy-ui/transpiled/react/Icons/Qualify'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const fileExtension = '.jpg'
 const idFileInput = 'filename_input'
@@ -53,9 +51,8 @@ export class DocumentQualification extends Component {
       return `${name.replace(/ /g, '-')}_${new Date()
         .toISOString()
         .substr(0, 10)}`
-    } else {
-      return this.defaultFilename
     }
+    return this.defaultFilename
   }
 
   onSelect = selected => {
@@ -86,6 +83,7 @@ export class DocumentQualification extends Component {
       }
     }
   }
+
   /**
    * Method used to synchronize our internal state and
    * our parent state if needed
@@ -166,18 +164,16 @@ export class DocumentQualification extends Component {
             />
           </GridItem>
 
-          {themes.map((category, i) => {
-            return (
-              <DocumentCategory
-                onSelect={selected => this.onSelect(selected)}
-                category={category}
-                key={i}
-                isSelected={selected.categoryLabel === category.label}
-                selectedItem={selected.item || {}}
-                t={t}
-              />
-            )
-          })}
+          {themes.map((category, i) => (
+            <DocumentCategory
+              onSelect={selected => this.onSelect(selected)}
+              category={category}
+              key={i}
+              isSelected={selected.categoryLabel === category.label}
+              selectedItem={selected.item || {}}
+              t={t}
+            />
+          ))}
         </Grid>
       </MuiCozyTheme>
     )

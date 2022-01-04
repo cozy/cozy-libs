@@ -3,11 +3,11 @@ import { Router } from 'react-router'
 import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 
+import Modal from 'cozy-ui/transpiled/react/Modal'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Authentication from './Authentication'
 import Revoked from './Revoked'
 import * as onboarding from './utils/onboarding'
-import Modal from 'cozy-ui/transpiled/react/Modal'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import deeplink from './utils/deeplink'
 import credentials from './utils/credentials'
@@ -18,7 +18,7 @@ window.handleOpenURL = deeplink.save
 
 const clientUpdateEvents = ['login', 'logout', 'revoked', 'unrevoked']
 
-export const LoggingInViaOnboarding = () => null
+export var LoggingInViaOnboarding = () => null
 
 const centeredFullscreen = {
   justifyContent: 'center',
@@ -28,15 +28,13 @@ const centeredFullscreen = {
   flexDirection: 'column'
 }
 
-export const LoginInComponent = () => {
-  return (
-    <Modal into="body" mobileFullscreen closable={false}>
-      <div style={centeredFullscreen}>
-        <Spinner size="xxlarge" />
-      </div>
-    </Modal>
-  )
-}
+export var LoginInComponent = () => (
+  <Modal into="body" mobileFullscreen closable={false}>
+    <div style={centeredFullscreen}>
+      <Spinner size="xxlarge" />
+    </div>
+  </Modal>
+)
 
 export class MobileRouter extends Component {
   constructor(props) {
@@ -66,7 +64,7 @@ export class MobileRouter extends Component {
   }
 
   async tryToReconnect() {
-    const client = this.props.client
+    const { client } = this.props
     const saved = await credentials.get()
     try {
       if (saved && saved.oauthOptions) {
@@ -83,7 +81,7 @@ export class MobileRouter extends Component {
 
   startListeningToClient() {
     const { client } = this.props
-    for (let ev of clientUpdateEvents) {
+    for (const ev of clientUpdateEvents) {
       client.on(ev, this.update)
     }
     client.on('beforeLogin', this.handleBeforeLogin)
@@ -94,7 +92,7 @@ export class MobileRouter extends Component {
 
   stopListeningToClient() {
     const { client } = this.props
-    for (let ev of clientUpdateEvents) {
+    for (const ev of clientUpdateEvents) {
       client.removeListener(ev, this.update)
     }
     client.removeListener('beforeLogin', this.handleBeforeLogin)
@@ -176,7 +174,7 @@ export class MobileRouter extends Component {
       universalLinkDomain
     }
     const path = deeplink.generateRoute(url, appInfos)
-    this.props.history.replace('/' + path)
+    this.props.history.replace(`/${path}`)
     if (path.startsWith('auth')) {
       this.handleAuth()
     }
@@ -259,16 +257,16 @@ export class MobileRouter extends Component {
           appTitle={appTitle}
         />
       )
-    } else if (client.isRevoked) {
+    }
+    if (client.isRevoked) {
       return (
         <Revoked
           onLogBackIn={this.handleLogBackIn}
           onLogout={this.handleRequestLogout}
         />
       )
-    } else {
-      return <Router history={history}>{appRoutes || children}</Router>
     }
+    return <Router history={history}>{appRoutes || children}</Router>
   }
 
   async handleLogBackIn() {

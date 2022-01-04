@@ -9,12 +9,7 @@ import ContactsAndGroupsDataLoader from './ContactsAndGroupsDataLoader'
 import { default as DumbShareModal } from './ShareModal'
 import { useFetchDocumentPath } from './useFetchDocumentPath'
 
-export const EditableSharingModal = ({
-  contacts,
-  document,
-  groups,
-  ...rest
-}) => {
+export var EditableSharingModal = ({ contacts, document, groups, ...rest }) => {
   const client = useClient()
   const documentPath = useFetchDocumentPath(client, document)
   return (
@@ -35,31 +30,29 @@ export const EditableSharingModal = ({
           share,
           shareByLink,
           updateDocumentPermissions
-        }) => {
-          return (
-            <DumbShareModal
-              contacts={contacts}
-              createContact={contact => client.create(Contact.doctype, contact)}
-              document={document}
-              documentType={documentType}
-              groups={groups}
-              hasSharedChild={documentPath && hasSharedChild(documentPath)}
-              hasSharedParent={documentPath && hasSharedParent(documentPath)}
-              isOwner={isOwner(document.id)}
-              link={getSharingLink(document.id)}
-              onRevoke={revoke}
-              onRevokeLink={revokeSharingLink}
-              onRevokeSelf={revokeSelf}
-              onShare={share}
-              onShareByLink={shareByLink}
-              onUpdateShareLinkPermissions={updateDocumentPermissions}
-              permissions={getDocumentPermissions(document.id)}
-              recipients={getRecipients(document.id)}
-              sharing={getSharingForSelf(document.id)}
-              {...rest}
-            />
-          )
-        }}
+        }) => (
+          <DumbShareModal
+            contacts={contacts}
+            createContact={contact => client.create(Contact.doctype, contact)}
+            document={document}
+            documentType={documentType}
+            groups={groups}
+            hasSharedChild={documentPath && hasSharedChild(documentPath)}
+            hasSharedParent={documentPath && hasSharedParent(documentPath)}
+            isOwner={isOwner(document.id)}
+            link={getSharingLink(document.id)}
+            onRevoke={revoke}
+            onRevokeLink={revokeSharingLink}
+            onRevokeSelf={revokeSelf}
+            onShare={share}
+            onShareByLink={shareByLink}
+            onUpdateShareLinkPermissions={updateDocumentPermissions}
+            permissions={getDocumentPermissions(document.id)}
+            recipients={getRecipients(document.id)}
+            sharing={getSharingForSelf(document.id)}
+            {...rest}
+          />
+        )}
       </SharingContext.Consumer>
     </ContactsAndGroupsDataLoader>
   )

@@ -1,3 +1,4 @@
+import get from 'lodash/get'
 import logger from './logger'
 import {
   decryptString,
@@ -8,7 +9,6 @@ import {
   updateAccountsAuth,
   getT
 } from './utils'
-import get from 'lodash/get'
 import { ensureTrigger } from '../connections/triggers'
 
 const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>

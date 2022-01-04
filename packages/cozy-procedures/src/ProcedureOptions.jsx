@@ -13,7 +13,7 @@ const DEFAULT_OPTIONS = {
 
 export const optionsProvider = (Component, procedureOptions) => {
   const options = { ...DEFAULT_OPTIONS, ...procedureOptions }
-  const Wrapped = props => {
+  function Wrapped(props) {
     return (
       <ProcedureOptionsContext.Provider value={options}>
         <Component {...props} />
@@ -27,11 +27,13 @@ export const optionsProvider = (Component, procedureOptions) => {
 }
 
 export const optionsConsumer = Component => {
-  const Wrapped = props => (
-    <ProcedureOptionsContext.Consumer>
-      {options => <Component {...options} {...props} />}
-    </ProcedureOptionsContext.Consumer>
-  )
+  function Wrapped(props) {
+    return (
+      <ProcedureOptionsContext.Consumer>
+        {options => <Component {...options} {...props} />}
+      </ProcedureOptionsContext.Consumer>
+    )
+  }
   Wrapped.displayName = `procedureOptionsConsumer(${
     Component.displayName || Component.name
   })`

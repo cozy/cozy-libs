@@ -7,31 +7,30 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
-import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
+import DialogContent from '@material-ui/core/DialogContent'
+import DriveLink from './KonnectorConfiguration/Success/DriveLink'
+import BanksLink from './KonnectorConfiguration/Success/BanksLink'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import Markdown from './Markdown'
 import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
-import DialogContent from '@material-ui/core/DialogContent'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
-export const DescriptionContent = ({ title, message, children }) => {
-  return (
-    <>
-      <Typography variant="h4" className="u-mb-1">
-        {title}
-      </Typography>
-      <Markdown source={message} />
-      {children}
-    </>
-  )
-}
+export var DescriptionContent = ({ title, message, children }) => (
+  <>
+    <Typography variant="h4" className="u-mb-1">
+      {title}
+    </Typography>
+    <Markdown source={message} />
+    {children}
+  </>
+)
 
 export class KonnectorSuccess extends Component {
   state = {
     trigger: null
   }
+
   componentDidMount() {
     const { accountId, accounts } = this.props
     const matchingTrigger = get(
@@ -40,6 +39,7 @@ export class KonnectorSuccess extends Component {
     )
     this.setState({ trigger: matchingTrigger })
   }
+
   render() {
     const { t } = this.props
     const relatedApps = getRelatedAppsSlugs({
@@ -69,12 +69,10 @@ export class KonnectorSuccess extends Component {
             )}
           </DescriptionContent>
 
-          <>
-            {relatedApps.length > 0
-              ? // Should always pass context, since it's used for customisation
-                relatedApps[0].footerLink(this.state, this.props, this.context)
-              : null}
-          </>
+          {relatedApps.length > 0
+            ? // Should always pass context, since it's used for customisation
+              relatedApps[0].footerLink(this.state, this.props, this.context)
+            : null}
         </div>
       </DialogContent>
     )
@@ -84,11 +82,9 @@ export class KonnectorSuccess extends Component {
 KonnectorSuccess.apps = {
   drive: {
     // eslint-disable-next-line react/display-name
-    successLink: (state, props, context, i) => {
-      return (
-        <DriveLink key={i} folderId={state.trigger.message.folder_to_save} />
-      )
-    },
+    successLink: (state, props, context, i) => (
+      <DriveLink key={i} folderId={state.trigger.message.folder_to_save} />
+    ),
     // eslint-disable-next-line react/display-name
     footerLink: (state, props) => {
       const { t, successButtonLabel } = props
@@ -105,9 +101,7 @@ KonnectorSuccess.apps = {
   },
   banks: {
     // eslint-disable-next-line react/display-name
-    successLink: (state, props, context, i) => {
-      return <BanksLink key={i} />
-    },
+    successLink: (state, props, context, i) => <BanksLink key={i} />,
     footerLink: () => null
   }
 }

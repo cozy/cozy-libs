@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import activityIcon from '../../assets/datatypes/icon-activity.svg'
 
 import appointmentIcon from '../../assets/datatypes/icon-appointment.svg'
@@ -35,7 +36,6 @@ import travelDateIcon from '../../assets/datatypes/icon-travelDate.svg'
 import tweetIcon from '../../assets/datatypes/icon-tweet.svg'
 import videostreamIcon from '../../assets/datatypes/icon-videostream.svg'
 import weightIcon from '../../assets/datatypes/icon-weight.svg'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const icons = {
   activity: activityIcon,
@@ -72,8 +72,8 @@ const icons = {
   weight: weightIcon
 }
 
-const DataTypes = ({ t, dataTypes, konnectorName }) => {
-  return dataTypes.length > 0 ? (
+const DataTypes = ({ t, dataTypes, konnectorName }) =>
+  dataTypes.length > 0 ? (
     <>
       <Typography className="u-ta-center" variant="body1">
         {t('suggestions.data', { name: konnectorName })}
@@ -93,7 +93,6 @@ const DataTypes = ({ t, dataTypes, konnectorName }) => {
       </ul>
     </>
   ) : null
-}
 
 DataTypes.propTypes = {
   t: PropTypes.func.isRequired,

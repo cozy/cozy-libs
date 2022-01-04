@@ -9,13 +9,11 @@ import { useSafeState } from '../helpers/hooks'
 /**
  * Displays a loader that can be used when ShareDialogTwoStepsConfirmationContainer is in loading state
  */
-const LoadingContent = () => {
-  return (
-    <div className={'u-ta-center'}>
-      <Spinner size="xxlarge" loadingType="sharing" />
-    </div>
-  )
-}
+const LoadingContent = () => (
+  <div className="u-ta-center">
+    <Spinner size="xxlarge" loadingType="sharing" />
+  </div>
+)
 
 /**
  * Displays an error message that can be used when ShareDialogTwoStepsConfirmationContainer is in error state
@@ -280,7 +278,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   return (
     <FixedDialog
       disableEnforceFocus
-      open={true}
+      open
       onClose={onClose}
       onBack={onBack}
       title={dialogTitle}

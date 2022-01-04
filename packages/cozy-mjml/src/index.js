@@ -11,7 +11,7 @@ try {
     process.argv.push('-s')
   }
 } catch (err) {
-  process.stderr.write('err: ' + err + '\n')
+  process.stderr.write(`err: ${err}\n`)
 }
 
 // XXX We need to do the requires in this order if we want to have the default
@@ -19,6 +19,7 @@ try {
 require('mjml')
 const registerComponents = require('./components').register
 const run = require('mjml-cli/lib/client')
+
 registerComponents()
 
 run()

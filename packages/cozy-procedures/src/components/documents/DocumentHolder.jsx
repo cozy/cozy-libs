@@ -10,10 +10,10 @@ import {
 } from 'cozy-ui/transpiled/react/'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { CozyFile } from 'cozy-doctypes'
-import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 import flow from 'lodash/flow'
 
 import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
+import DocumentsDataFormContainer from '../../containers/DocumentsDataForm'
 
 class DocumentHolder extends Component {
   state = {

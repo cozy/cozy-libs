@@ -5,12 +5,12 @@ import { Button, Chip, translate } from 'cozy-ui/transpiled/react'
 
 import PenIcon from 'cozy-ui/transpiled/react/Icons/Pen'
 
-const DocumentsNotFullyCompleted = ({
+function DocumentsNotFullyCompleted({
   documentsCompleted,
   documentsTotal,
   navigateTo,
   t
-}) => {
+}) {
   return (
     <Button
       label={t('overview.complete')}

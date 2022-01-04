@@ -46,7 +46,7 @@ import {
 } from './trips'
 
 const setupMap = node => {
-  var map = L.map(node).setView([51.505, -0.09], 13)
+  const map = L.map(node).setView([51.505, -0.09], 13)
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
@@ -72,13 +72,12 @@ const geojsonMarkerOptions = {
   fillOpacity: 0.8
 }
 
-const pointToLayer = (feature, latlng) => {
-  return L.circleMarker(latlng, {
+const pointToLayer = (feature, latlng) =>
+  L.circleMarker(latlng, {
     ...geojsonMarkerOptions,
     fillColor:
       feature.properties.feature_type == 'end_place' ? POMEGRANATE : EMERALD
   })
-}
 
 const geojsonOptions = { pointToLayer }
 
@@ -89,7 +88,7 @@ const TripsMap = ({ trips, index }) => {
 
   useEffect(() => {
     mapRef.current = setupMap(nodeRef.current, trips)
-    for (let trip of trips) {
+    for (const trip of trips) {
       const feature = L.geoJSON(trip, geojsonOptions)
       tripsRef.current.push(feature)
     }
@@ -97,7 +96,7 @@ const TripsMap = ({ trips, index }) => {
 
   useEffect(() => {
     if (mapRef.current) {
-      for (let feature of tripsRef.current) {
+      for (const feature of tripsRef.current) {
         mapRef.current.removeLayer(feature)
       }
       mapRef.current.fitBounds(tripsRef.current[index].getBounds())
@@ -112,14 +111,12 @@ const formatDistance = (t, argDistance) => {
   let distance = argDistance
   if (distance > 1000) {
     unit = 'km'
-    distance = distance / 1000
+    distance /= 1000
   }
   return `${Math.round(distance)} ${unit}`
 }
 
-const MiddleDot = () => {
-  return <span className="u-mh-half">·</span>
-}
+const MiddleDot = () => <span className="u-mh-half">·</span>
 
 const infoIconStyle = { marginRight: '0.3125rem' }
 
@@ -188,12 +185,11 @@ const getSwiperTitle = (trip, format) => {
       endDate,
       'HH:mm'
     )}`
-  } else {
-    return `${format(startDate, 'D MMM YYYY, HH:mm')} - ${format(
-      endDate,
-      'D MM YYYY, HH:mm'
-    )}`
   }
+  return `${format(startDate, 'D MMM YYYY, HH:mm')} - ${format(
+    endDate,
+    'D MM YYYY, HH:mm'
+  )}`
 }
 
 const TripSwiperTitle = ({ trip }) => {
@@ -248,9 +244,9 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
               <TripInfoSlide loading />
             ) : (
               <SwipeableViews index={index} disabled>
-                {trips.map(trip => {
-                  return <TripInfoSlide key={trip.id} trip={trip} />
-                })}
+                {trips.map(trip => (
+                  <TripInfoSlide key={trip.id} trip={trip} />
+                ))}
               </SwipeableViews>
             )}
           </Box>
@@ -282,13 +278,13 @@ const DataGeoDataCard = ({ timeseriesCol, konnector }) => {
   const trips = useMemo(() => {
     if (!timeseries || !timeseries.length) {
       return []
-    } else {
-      return transformTimeSeriesToTrips(timeseries)
     }
+    return transformTimeSeriesToTrips(timeseries)
   }, [timeseries])
-  const ascendingTrips = useMemo(() => {
-    return sortBy(trips, t => t.properties.enter_fmt_time).reverse()
-  }, [trips])
+  const ascendingTrips = useMemo(
+    () => sortBy(trips, t => t.properties.enter_fmt_time).reverse(),
+    [trips]
+  )
   const noTimeseries =
     hasQueryBeenLoaded(timeseriesCol) && timeseries.length == 0
   const isLoading = isQueryLoading(timeseriesCol)

@@ -30,22 +30,16 @@ const KonnectorUpdateLinker = ({ label, isBlocking, konnector }) => {
 
   return isReady ? (
     <AppLinker slug="store" href={konnectorUpdateUrl}>
-      {({ href }) => {
-        return (
-          <KonnectorUpdateButton
-            href={href}
-            isBlocking={isBlocking}
-            label={label}
-          />
-        )
-      }}
+      {({ href }) => (
+        <KonnectorUpdateButton
+          href={href}
+          isBlocking={isBlocking}
+          label={label}
+        />
+      )}
     </AppLinker>
   ) : (
-    <KonnectorUpdateButton
-      disabled={true}
-      label={label}
-      isBlocking={isBlocking}
-    />
+    <KonnectorUpdateButton disabled label={label} isBlocking={isBlocking} />
   )
 }
 
