@@ -4,7 +4,7 @@ const basics = require('./basics')
 
 module.exports = {
   plugins: basics.plugins.concat(['react-hooks']),
-  extends: basics.extends.concat(['plugin:react/recommended']),
+  extends: basics.extends.concat(['airbnb/hooks', 'plugin:react/recommended']),
   parser: basics.parser,
   parserOptions: { ecmaFeatures: { jsx: true } },
   env: basics.env,
