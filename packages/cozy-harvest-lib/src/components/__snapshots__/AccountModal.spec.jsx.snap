@@ -177,3 +177,105 @@ exports[`AccountModal with an account should display the AccountSelect & Content
   </ForwardRef(WithStyles)>
 </React.Fragment>
 `;
+
+exports[`AccountModal with an account should not display the AccountSelect & Account creation button if the konnector is clientSide 1`] = `
+<React.Fragment>
+  <KonnectorModalHeader
+    konnector={Object {}}
+  >
+    <AccountSelectBox
+      accountsAndTriggers={
+        Array [
+          Object {
+            "account": Object {
+              "_id": "123",
+              "name": "account 1",
+            },
+            "trigger": Object {
+              "current_state": Object {},
+              "id": "triggerid",
+            },
+          },
+          Object {
+            "account": Object {
+              "_id": "account_2",
+              "name": "account_2",
+            },
+            "trigger": Object {
+              "id": "trigger_account2",
+            },
+          },
+        ]
+      }
+      loading={false}
+      onChange={[Function]}
+      onCreate={[Function]}
+      selectedAccount={
+        Object {
+          "_id": "account_2",
+          "name": "account_2",
+        }
+      }
+    />
+  </KonnectorModalHeader>
+  <ForwardRef(WithStyles)
+    className="u-p-0"
+  >
+    <KonnectorAccountTabs
+      account={
+        Object {
+          "_id": "account_2",
+          "name": "account_2",
+        }
+      }
+      addAccount={[Function]}
+      initialTrigger={
+        Object {
+          "id": "trigger_account2",
+        }
+      }
+      konnector={Object {}}
+      onAccountDeleted={[MockFunction]}
+      showNewAccountButton={true}
+    />
+  </ForwardRef(WithStyles)>
+</React.Fragment>
+`;
+
+exports[`AccountModal with an account should not display the AccountSelect & Account creation button if the konnector is clientSide 2`] = `
+<React.Fragment>
+  <KonnectorModalHeader
+    konnector={
+      Object {
+        "clientSide": true,
+      }
+    }
+  />
+  <ForwardRef(WithStyles)
+    className="u-p-0"
+  >
+    <KonnectorAccountTabs
+      account={
+        Object {
+          "_id": "account_2",
+          "name": "account_2",
+        }
+      }
+      addAccount={[Function]}
+      initialTrigger={
+        Object {
+          "current_state": Object {},
+          "id": "triggerid",
+        }
+      }
+      konnector={
+        Object {
+          "clientSide": true,
+        }
+      }
+      onAccountDeleted={[MockFunction]}
+      showNewAccountButton={false}
+    />
+  </ForwardRef(WithStyles)>
+</React.Fragment>
+`;
