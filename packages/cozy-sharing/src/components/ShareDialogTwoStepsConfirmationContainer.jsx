@@ -173,6 +173,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
   }
 
   const onConfirmRecipient = () => {
+    // eslint-disable-next-line promise/catch-or-return,promise/always-return
     confirmRecipient(recipientConfirmationData).then(() => {
       getRecipientsToBeConfirmed()
     })
@@ -180,6 +181,7 @@ const ShareDialogTwoStepsConfirmationContainer = ({
 
   const onRejectRecipient = () => {
     setStatus('loading')
+    // eslint-disable-next-line promise/catch-or-return,promise/always-return
     rejectRecipient(recipientConfirmationData).then(() => {
       getRecipientsToBeConfirmed()
     })

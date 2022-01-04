@@ -201,11 +201,13 @@ const main = async () => {
   await args.handler(args, client)
 }
 
+// eslint-disable-next-line promise/catch-or-return
 main()
   .catch(e => {
     logger.error(e)
     process.exit(1)
   })
+  // eslint-disable-next-line promise/always-return
   .then(() => {
     process.exit(0)
   })
