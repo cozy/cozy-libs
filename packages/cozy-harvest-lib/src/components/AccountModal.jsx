@@ -118,7 +118,7 @@ export class AccountModal extends Component {
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
-          {showAccountSelection ? (
+          {showAccountSelection && !konnector.clientSide ? (
             <AccountSelectBox
               loading={!account}
               selectedAccount={account}
@@ -165,7 +165,9 @@ export class AccountModal extends Component {
               account={account}
               onAccountDeleted={onDismiss}
               addAccount={() => pushHistory('/new')}
-              showNewAccountButton={showNewAccountButton}
+              showNewAccountButton={
+                showNewAccountButton && !konnector.clientSide
+              }
             />
           </DialogContent>
         )}
