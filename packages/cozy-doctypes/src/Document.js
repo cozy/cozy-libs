@@ -1,4 +1,3 @@
-/* eslint-disable node/no-unsupported-features/es-syntax */
 const omit = require('lodash/omit')
 const pick = require('lodash/pick')
 const size = require('lodash/size')

@@ -17,13 +17,13 @@ jest.mock(
       return null
     }
 )
+
 jest.mock('./DialogContext', () => ({
   useDialogContext: () => ({
-        dialogTitleProps: {
-          className: 'class'
-        }
-      })
-  }
+    dialogTitleProps: {
+      className: 'class'
+    }
+  })
 }))
 
 describe('NewAccountModal', () => {

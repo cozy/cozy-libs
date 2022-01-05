@@ -64,7 +64,7 @@ describe('Document', () => {
     })
     expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
     expect(cozyClientJS.data.updateAttributes).toHaveBeenCalledTimes(0)
-    // eslint-disable-next-line node/no-unsupported-features/es-syntax
+
     queryResult = [{ _id: 5, ...marge }]
     await Simpson.createOrUpdate(marge)
     expect(cozyClientJS.data.create).toHaveBeenCalledTimes(1)
@@ -776,7 +776,7 @@ describe('bulk save', () => {
     class Todo extends Document {}
     jest
       .spyOn(Todo, 'createOrUpdate')
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
+
       .mockImplementation(doc => ({ ...doc, rev: 1 }))
     const newTodos = await Todo.bulkSave(todos)
     expect(newTodos).toEqual([
@@ -793,7 +793,7 @@ describe('bulk save', () => {
       if (doc.id === 2) {
         throw new Error('409: conflict')
       }
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
+
       return { ...doc, rev: 1 }
     })
     const onCreateOrUpdateError = jest.fn(error => error)

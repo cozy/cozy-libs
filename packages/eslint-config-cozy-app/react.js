@@ -18,7 +18,8 @@ module.exports = {
         namedComponents: 'arrow-function',
         unnamedComponents: 'arrow-function'
       }
-    ]
+    ],
+    'prefer-const': 'off'
   },
   overrides: [
     {
