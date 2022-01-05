@@ -3,27 +3,27 @@
   "rules": {
     "array-callback-return": "off",
     "camelcase": "off",
-    "class-methods-use-this": "off",                    // 18
-    "consistent-return": "off",                         // 30
+    "class-methods-use-this": "off",                    // 18 - off only for script, config, mocks files
+    "consistent-return": "off",                         // 30 - ✅
     "default-param-last": "off",                        // 11
     "eqeqeq": "off",                                    // 27
     "func-names": "off",                                // 23
-    "global-require": "off",                            // 17
+    "global-require": "off",                            // 17 - off only for script, config, mocks files
     "guard-for-in": "off",
 
     "import/extensions": "off",
     "import/named": "off",
     "import/no-cycle": "off",
-    "import/no-dynamic-require": "off",
-    "import/no-extraneous-dependencies": "off",                         // 55
+    "import/no-dynamic-require": "off",                       // - off only for script, config, mocks files
+    "import/no-extraneous-dependencies": "off",                         // 55 - off only for script, config, mocks files
     "import/no-mutable-exports": "off",                                 // 47
-    "import/no-unresolved": "off",                                      // 52
+    "import/no-unresolved": "off",                                      // 52  - off only for script, config, mocks files
     "import/no-named-default": "off",                   // 12
     "import/no-named-as-default": "off",
     "import/no-named-as-default-member": "off",         // 14
     "import/no-relative-packages": "off",
     "import/order": "off",
-    "import/prefer-default-export": "off",                            // 39
+    "import/prefer-default-export": "off",                            // 39 - ✅
 
     "jsx-a11y/anchor-is-valid": "off",
     "jsx-a11y/aria-role": "off",
@@ -38,7 +38,7 @@
     "no-bitwise": "off",
     "no-case-declarations": "off",
     "no-cond-assign": "off",
-    "no-console": "off",
+    "no-console": "off",                                    //  - off only for script, config, mocks files
     "no-constructor-return": "off",
     "no-continue": "off",
     "no-empty": "off",
@@ -49,17 +49,17 @@
     "no-param-reassign": "off",
     "no-plusplus": "off",
     "no-promise-executor-return": "off",
-    "no-restricted-syntax": "off",                                         // 68
     "no-restricted-exports": "off",
     "no-restricted-globals": "off",
+    "no-restricted-syntax": "off",                                         // 68 - ✅
     "no-return-assign": "off",
     "no-return-await": "off",
-    "no-shadow": "off",                                                       // 79
+    "no-shadow": "off",                                                       // 79 - ✅
     "no-throw-literal": "off",
-    "no-undef": "off",                              // 11
+    "no-undef": "off",                              // 11  - off only for script, config, mocks files
     "no-underscore-dangle": "off",                                                          // 118
     "no-unused-expressions": "off",
-    "no-use-before-define": "off",                                                          // 118
+    "no-use-before-define": "off",                                                          // 118 - ✅
     "no-var": "off",                                                            // 39
 
     "prefer-const ": "off",
@@ -76,12 +76,12 @@
     "react/forbid-foreign-prop-types": "off",
     "react/forbid-prop-types": "off",                                                               // 112
     "react/function-component-definition": "off",
-    "react/jsx-filename-extension": "off",
+    "react/jsx-filename-extension": "off",          // 11
     "react/jsx-fragments": "off",
     "react/jsx-no-bind": "off",
     "react/jsx-no-constructed-context-values": "off",
     "react/jsx-no-useless-fragment": "off",
-    "react/jsx-props-no-spreading": "off",                                                              // 121
+    "react/jsx-props-no-spreading": "off",                                                              // 121 - ✅
     "react/no-access-state-in-setstate": "off",
     "react/no-array-index-key": "off",
     "react/no-danger": "off",
