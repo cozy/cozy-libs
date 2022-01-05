@@ -80,7 +80,7 @@ export class SharingProvider extends Component {
         hasSharedParent(this.state, documentPath),
       hasSharedChild: documentPath => hasSharedChild(this.state, documentPath),
       share: this.share,
-      onShared: onShared,
+      onShared,
       revoke: this.revoke,
       revokeSelf: this.revokeSelf,
       shareByLink: this.shareByLink,
@@ -101,9 +101,6 @@ export class SharingProvider extends Component {
 
     this.fetchAllSharings = this.fetchAllSharings.bind(this)
   }
-
-  dispatch = action =>
-    this.setState(state => ({ ...state, ...reducer(state, action) }))
 
   componentDidMount() {
     const { client } = this.props
@@ -129,6 +126,9 @@ export class SharingProvider extends Component {
       )
     }
   }
+
+  dispatch = action =>
+    this.setState(state => ({ ...state, ...reducer(state, action) }))
 
   initialize = () => {
     if (this.isInitialized) return
