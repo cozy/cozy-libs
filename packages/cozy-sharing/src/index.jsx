@@ -1,8 +1,8 @@
 import SharingContext from './context'
 import withLocales from './withLocales'
-import SharingProvider from './SharingProvider'
+import SharingProviderWithClient from './SharingProvider'
 
-export default SharingProvider
+export default SharingProviderWithClient
 
 export { SharingContext, withLocales }
 
