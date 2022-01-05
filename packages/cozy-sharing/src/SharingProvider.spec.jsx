@@ -9,7 +9,7 @@ import AppLike from '../test/AppLike'
 
 import { receiveSharings } from './state'
 
-const AppWrapper = ({ children, client }) => {
+function AppWrapper({ children, client }) {
   return (
     <AppLike client={client}>
       <SharingProvider client={client}>{children}</SharingProvider>
@@ -22,9 +22,6 @@ describe('allLoaded', () => {
   client.isLogged = true
   client.collection = () => ({
     findByDoctype: jest.fn().mockResolvedValue({
-      data: []
-    }),
-    findLinksByDoctype: jest.fn().mockResolvedValue({
       data: []
     }),
     findApps: jest.fn().mockResolvedValue({
@@ -44,7 +41,9 @@ describe('allLoaded', () => {
     expect(component.find('div').text()).toBe('allLoaded: false')
 
     await act(async () => {
-      await new Promise(resolve => setTimeout(resolve, 100))
+      await new Promise(resolve => {
+        setTimeout(resolve, 100)
+      })
     })
 
     expect(component.find('div').text()).toBe('allLoaded: true')

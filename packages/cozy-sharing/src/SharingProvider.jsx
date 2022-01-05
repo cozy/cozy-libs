@@ -29,7 +29,6 @@ import reducer, {
   hasSharedParent,
   hasSharedChild
 } from './state'
-import { fetchNextPermissions } from './fetchNextPermissions'
 import { fetchFilesPaths } from './helpers/files'
 import {
   getSharingObject,
@@ -171,23 +170,18 @@ export class SharingProvider extends Component {
 
   async fetchAllSharings() {
     const { doctype, client } = this.props
-    const [sharings, permissions, apps] = await Promise.all([
+    const [sharings, apps] = await Promise.all([
       this.sharingCol.findByDoctype(doctype),
-      this.permissionCol.findLinksByDoctype(doctype),
       this.permissionCol.findApps()
     ])
     this.dispatch(
       receiveSharings({
         instanceUri: client.options.uri,
         sharings: sharings.data,
-        permissions: permissions.data,
         apps: apps.data
       })
     )
     this.setState({ hasLoadedAtLeastOnePage: true })
-    fetchNextPermissions(permissions, this.dispatch, client).then(() =>
-      this.setState({ allLoaded: true })
-    )
     if (doctype !== 'io.cozy.files') return
     const sharedDocIds = getSharedDocIdsBySharings(sharings)
     const resp = await client.collection(doctype).all({ keys: sharedDocIds })
