@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.14.0...cozy-device-helper@1.15.0) (2022-01-06)
+
+
+### Features
+
+* Add a manual typescript declaration file ([cbdb01e](https://github.com/cozy/cozy-libs/commit/cbdb01e))
+
+
+
+
+
 # [1.14.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.13.2...cozy-device-helper@1.14.0) (2021-12-28)
 
 
