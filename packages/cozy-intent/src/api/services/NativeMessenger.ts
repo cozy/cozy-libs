@@ -1,9 +1,9 @@
-import { Strings } from 'api/constants'
 import { Messenger } from 'post-me'
 
-import { WebviewRef } from '../models/environments'
-import { NativeEvent } from '../models/events'
 import { MessageListener, ListenerRemover } from '../models/messengers'
+import { NativeEvent } from '../models/events'
+import { Strings } from '../constants'
+import { WebviewRef } from '../models/environments'
 
 export class NativeMessenger implements Messenger {
   private injectJavaScript: (data: string) => void
