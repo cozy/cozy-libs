@@ -1,0 +1,4 @@
+{
+  "maxAttempts": 50,
+  "attemptsInterval": 100
+}
