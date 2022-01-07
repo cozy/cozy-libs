@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.15.0...cozy-device-helper@1.16.0) (2022-01-07)
+
+
+### Features
+
+* Add types property in package.json ([69f717b](https://github.com/cozy/cozy-libs/commit/69f717b))
+
+
+
+
+
 # [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.14.0...cozy-device-helper@1.15.0) (2022-01-06)
 
 
