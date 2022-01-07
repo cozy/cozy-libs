@@ -3,6 +3,41 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@3.0.1...eslint-config-cozy-app@4.0.0) (2022-01-07)
+
+
+### Features
+
+* **eslint:** Propose Eslint plugin promise ([1fded18](https://github.com/cozy/cozy-libs/commit/1fded18))
+
+
+### BREAKING CHANGES
+
+* **eslint:** Most errors are not auto fixable,
+if needed, use // disable-next-line
+
+Or insert in .eslintrc:
+{
+  "rules": {
+    "promise/always-return": "warn",
+    "promise/no-return-wrap": "warn",
+    "promise/param-names": "warn",
+    "promise/catch-or-return": "warn",
+    "promise/no-native": "warn",
+    "promise/no-nesting": "warn",
+    "promise/no-promise-in-callback": "warn",
+    "promise/no-callback-in-promise": "warn",
+    "promise/avoid-new": "warn",
+    "promise/no-new-statics": "warn",
+    "promise/no-return-in-finally": "warn",
+    "promise/valid-params": "warn"
+  }
+}
+
+
+
+
+
 ## [3.0.1](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@3.0.0...eslint-config-cozy-app@3.0.1) (2022-01-01)
 
 
