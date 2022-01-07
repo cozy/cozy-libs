@@ -1,0 +1,8 @@
+{
+  "webviewNoProviderFound": "Your component must be in a <WebviewIntentProvider /> in order to call useWebviewIntent",
+  "nativeNoProviderFound": "Your component must be in a <NativeIntentProvider /> in order to call useNativeIntent",
+  "remoteHandleNotFound": "Remote handle returned undefined, could not call method",
+  "postMeSignature": "post-me",
+  "flagshipButNoRNAPI": "<WebviewIntentProvider /> can not instantiate its service. The application was detected as running in a Flagship webview but has no access to `window.ReactNativeWebView`, which is contradictory.",
+  "noListenerFound": "Could not handle event, this `NativeMessenger` instance does not have a listener."
+}
