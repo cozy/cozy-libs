@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.1.0...cozy-intent@1.1.1) (2022-01-07)
+
+
+### Bug Fixes
+
+* Incorrect import path ([8af44e7](https://github.com/cozy/cozy-libs/commit/8af44e7))
+
+
+
+
+
 # 1.1.0 (2022-01-07)
 
 
