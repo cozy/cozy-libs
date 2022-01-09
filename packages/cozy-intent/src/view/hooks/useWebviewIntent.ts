@@ -1,13 +1,16 @@
 import { useContext } from 'react'
 
-import { WebviewService } from '../../api/services/WebviewService'
-import { WebviewContext } from '../contexts/WebviewContext'
-import { Strings } from '../../api/constants'
+import { isFlagshipApp } from 'cozy-device-helper'
 
-export const useWebviewIntent = (): WebviewService => {
+import { Strings } from '../../api/constants'
+import { WebviewContext } from '../contexts/WebviewContext'
+import { WebviewService } from '../../api/services/WebviewService'
+
+export const useWebviewIntent = (): WebviewService | void => {
   const context = useContext(WebviewContext)
 
-  if (!context) throw new Error(Strings.webviewNoProviderFound)
+  if (isFlagshipApp() && !context)
+    throw new Error(Strings.webviewNoProviderFound)
 
   return context
 }
