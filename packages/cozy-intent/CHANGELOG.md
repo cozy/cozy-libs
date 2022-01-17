@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.1.2...cozy-intent@1.2.0) (2022-01-17)
+
+
+### Features
+
+* Secure initial handshake ([5176a03](https://github.com/cozy/cozy-libs/commit/5176a03))
+
+
+
+
+
 ## [1.1.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.1.1...cozy-intent@1.1.2) (2022-01-09)
 
 
