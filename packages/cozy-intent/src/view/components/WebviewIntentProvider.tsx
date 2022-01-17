@@ -4,18 +4,15 @@ import { ChildHandshake, Connection, EventsType, MethodsType } from 'post-me'
 import { isFlagshipApp } from 'cozy-device-helper'
 
 import { NativeMethodsRegister } from '../../api/models/methods'
+import { StaticService } from '../../api/services/StaticService'
 import { Strings } from '../../api/constants'
+import { TypeguardService } from '../../api/services/TypeguardService'
 import { WebviewContext } from '../contexts/WebviewContext'
 import { WebviewMessenger } from '../../api/services/WebviewMessenger'
 import { WebviewService } from '../../api/services/WebviewService'
-import { WebviewWindow } from '../../api/models/environments'
 
 interface Props {
   children: React.ReactChild
-}
-
-function isWebviewWindow(window: Window): window is WebviewWindow {
-  return (window as WebviewWindow).ReactNativeWebView !== undefined
 }
 
 export const WebviewIntentProvider = ({ children }: Props): ReactElement => {
@@ -25,8 +22,13 @@ export const WebviewIntentProvider = ({ children }: Props): ReactElement => {
     >()
 
   useEffect(() => {
+    if (connection) return
+
     const init = async (): Promise<void> => {
-      if (!isWebviewWindow(window)) throw new Error(Strings.flagshipButNoRNAPI)
+      if (!TypeguardService.isWebviewWindow(window))
+        throw new Error(Strings.flagshipButNoRNAPI)
+
+      StaticService.sendSyncMessage(Strings.webviewIsRendered)
 
       const result = await ChildHandshake(new WebviewMessenger(window))
 

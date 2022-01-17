@@ -7410,13 +7410,6 @@ cozy-client@23.19.1:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-device-helper@1.15.0:
-  version "1.15.0"
-  resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.15.0.tgz#1e2436b6459544cc68b0a87a66ed9eb65277a345"
-  integrity sha512-nDWXofI/dHoqVkiWFqib4W4hyRPOyTi5BfSyaiIhK1qt6niY6m0PVYDu/oI27goR+poCzlByApqShXbxXvOVyA==
-  dependencies:
-    lodash "^4.17.19"
-
 cozy-doctypes@1.67.0:
   version "1.67.0"
   resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.67.0.tgz#2e26cf43556cff298d0eec2f06091d15dc1758da"
