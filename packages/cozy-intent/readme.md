@@ -24,7 +24,7 @@ The library needs to be installed both in the parent and the children applicatio
 
 ### Parent
 
-First, we need to provide a React context to our application. This requires no configuration at this moment.
+First, we need to provide a React context to our application. This requires a method object that will be available to all Webview children.
 
 ```tsx
 import React from 'react'
@@ -33,13 +33,15 @@ import { NativeIntentProvider } from 'cozy-webview'
 import { ReactNativeApp } from 'react-native-app'
 
 const MyNativeApp = () => (
-  <NativeIntentProvider>
+  <NativeIntentProvider localMethods={{
+    ping: () => console.log('pong'),
+  }}>
     <ReactNativeApp />
   </NativeIntentProvider>
 )
 ```
 
-Later, in a webview, we need to register a messenger and give it access to some methods. We need a ref object to the webview first.
+Later, in a webview, we need to register a messenger. We need a ref object to the webview first.
 
 ```tsx
 import React, { useEffect, useState } from 'react'
@@ -53,9 +55,7 @@ const MyWebview = () => {
 
   useEffect(() => {
     if (ref) {
-      nativeIntent.registerWebview(ref, {
-        ping: () => console.log('pong'),
-      })
+      nativeIntent.registerWebview(ref)
     }
   }, [ref, nativeIntent])
 

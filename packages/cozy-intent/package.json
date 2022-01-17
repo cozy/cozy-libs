@@ -10,15 +10,15 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "dependencies": {
-    "cozy-device-helper": "^1.16.0",
-    "post-me": "0.4.5",
-    "typescript": "^4.5.2"
+    "cozy-device-helper": "1.16.0",
+    "post-me": "0.4.5"
   },
   "devDependencies": {
-    "@babel/core": "7.12.3",
-    "babel-preset-cozy-app": "2.0.1",
-    "eslint-config-cozy-app": "3.0.1",
-    "react": "17.0.2"
+    "@babel/core": "^7.12.3",
+    "babel-preset-cozy-app": "^2.0.1",
+    "eslint-config-cozy-app": "^4.0.0",
+    "react": "17.0.2",
+    "typescript": "^4.5.2"
   },
   "files": [
     "dist"
