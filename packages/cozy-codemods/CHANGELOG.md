@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.12.2...@cozy/codemods@1.13.0) (2022-01-19)
+
+
+### Features
+
+* Add codemods for Radio ([6dbc6e5](https://github.com/cozy/cozy-libs/commit/6dbc6e5))
+
+
+
+
+
 ## [1.12.2](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.12.1...@cozy/codemods@1.12.2) (2022-01-07)
 
 **Note:** Version bump only for package @cozy/codemods
