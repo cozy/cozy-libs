@@ -10,7 +10,7 @@ In a nutshell, one end says what it wants to an other end, and the other end han
 
 The library needs to be installed both in the parent and the children application.
 
-- `yarn add cozy-webview-intent`
+- `yarn add cozy-intent`
 
 ## API
 
@@ -29,7 +29,7 @@ First, we need to provide a React context to our application. This requires a me
 ```tsx
 import React from 'react'
 
-import { NativeIntentProvider } from 'cozy-webview'
+import { NativeIntentProvider } from 'cozy-intent'
 import { ReactNativeApp } from 'react-native-app'
 
 const MyNativeApp = () => (
@@ -47,7 +47,7 @@ Later, in a webview, we need to register a messenger. We need a ref object to th
 import React, { useEffect, useState } from 'react'
 import { WebView } from 'react-native-webview'
 
-import { useNativeIntent } from 'cozy-webview'
+import { useNativeIntent } from 'cozy-intent'
 
 const MyWebview = () => {
   const [ref, setRef] = useState('')
@@ -70,7 +70,7 @@ First, we need to provide a React context to our application. This requires a re
 ```tsx
 import React from 'react'
 
-import { WebviewIntentProvider } from 'cozy-webview'
+import { WebviewIntentProvider } from 'cozy-intent'
 import { ReactApp } from 'react-app'
 
 const MyWebApp = () => (
@@ -85,7 +85,7 @@ Later on, we can use the service in a component and call a registered method. He
 ```tsx
 import React from 'react'
 
-import { useWebviewIntent } from 'cozy-webview'
+import { useWebviewIntent } from 'cozy-intent'
 
 const MyComponent = () => {
   const webviewIntent = useWebviewIntent()
