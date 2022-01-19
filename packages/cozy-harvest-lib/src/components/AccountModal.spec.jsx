@@ -83,36 +83,6 @@ describe('AccountModal', () => {
       expect(component.getElement()).toMatchSnapshot()
     })
 
-    it('should not display the AccountSelect & Account creation button if the konnector is clientSide', async () => {
-      const clientSideComponent = shallow(
-        <AccountModal
-          konnector={{ clientSide: true }}
-          t={x => x}
-          accountId={accountIdMock}
-          accountsAndTriggers={accountsAndTriggersMock}
-          pushHistory={mockHistoryPush}
-          breakpoints={{ isMobile: true }}
-          onDismiss={jest.fn()}
-        />
-      )
-      await clientSideComponent.instance().componentDidMount()
-
-      fetchAccount.mockResolvedValue({
-        _id: 'account_2',
-        name: 'account_2'
-      })
-
-      expect(component.getElement()).toMatchSnapshot()
-      component.setProps({
-        accountId: 'account_2'
-      })
-
-      await clientSideComponent
-        .instance()
-        .componentDidUpdate({ accountId: accountIdMock })
-      expect(clientSideComponent.getElement()).toMatchSnapshot()
-    })
-
     it('should redirect to the correct locations', async () => {
       await component.instance().componentDidMount()
 

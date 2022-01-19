@@ -85,6 +85,8 @@ const Routes = ({ konnectorRoot, konnector, onDismiss, datacardOptions }) => {
                             accountId={match.params.accountId}
                             accountsAndTriggers={accountsAndTriggers}
                             onDismiss={onDismiss}
+                            showNewAccountButton={!konnector.clientSide}
+                            showAccountSelection={!konnector.clientSide}
                           />
                         )}
                       />
