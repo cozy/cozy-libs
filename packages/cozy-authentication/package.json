@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "2.7.5",
+  "version": "2.7.6",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
