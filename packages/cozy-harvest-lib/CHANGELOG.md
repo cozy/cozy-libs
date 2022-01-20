@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.0.1...cozy-harvest-lib@7.1.0) (2022-01-20)
+
+
+### Bug Fixes
+
+* Setup visibility in the router ([8d67b3d](https://github.com/cozy/cozy-libs/commit/8d67b3d))
+
+
+### Features
+
+* Do not allow multi accounts features for clientSide konnectors ([1a9d157](https://github.com/cozy/cozy-libs/commit/1a9d157))
+
+
+
+
+
 ## [7.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.0.0...cozy-harvest-lib@7.0.1) (2022-01-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
