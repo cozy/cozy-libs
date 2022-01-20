@@ -19,6 +19,7 @@
         }
       ],
       "timezone": "Europe/Paris",
+      "addLabels": ["dependencies"],
       "updateNotScheduled": false
     }
   },
