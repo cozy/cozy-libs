@@ -13,6 +13,7 @@ yarn global add renovate
 cd cozy-banks # Go to the repo where you want to test the changes
 vim renovate.json # Edit the config inside your repo
 export RENOVATE_CONFIG_FILE=renovate.json # By default, renovate uses config.js
+export GITHUB_TOKEN=XXXXXXXXXXXXXXXXX # Personal Github token to get: https://github.com/settings/tokens
 renovate --token $GITHUB_TOKEN cozy/cozy-banks --schedule "at any time" --base-dir /tmp/banks --skip-installs --force-cli --pr-hourly-limit 0
 # Everything works well
 vim cozy-libs/packages/renovate-config-cozy/package.json # Backport the changes
