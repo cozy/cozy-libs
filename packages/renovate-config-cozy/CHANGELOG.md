@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.1 (2022-01-21)
+
+
+### Bug Fixes
+
+* Handle undefined this.konnector for OAuth connectors ([9bea259](https://github.com/cozy/cozy-libs/commit/9bea259))
+
+
+
+
+
 # 0.7.0 (2021-02-12)
 
 
