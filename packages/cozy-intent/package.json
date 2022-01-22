@@ -14,7 +14,7 @@
     "post-me": "0.4.5"
   },
   "devDependencies": {
-    "@babel/core": "^7.12.3",
+    "@babel/core": "7.12.3",
     "babel-preset-cozy-app": "^2.0.1",
     "eslint-config-cozy-app": "^4.0.0",
     "react": "17.0.2",
