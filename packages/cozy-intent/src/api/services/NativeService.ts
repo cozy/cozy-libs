@@ -21,7 +21,11 @@ export class NativeService {
   public registerWebview = (webviewRef: WebviewRef): void => {
     const uri = StaticService.getUri(webviewRef)
 
-    if (this.messengerRegister[uri]) return
+    if (this.messengerRegister[uri]) {
+      throw new Error(
+        `Cannot register webview. A webview is already registered into cozy-intent with the uri: ${uri}`
+      )
+    }
 
     this.messengerRegister = {
       ...this.messengerRegister,
