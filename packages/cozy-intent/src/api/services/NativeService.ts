@@ -33,6 +33,18 @@ export class NativeService {
     }
   }
 
+  public unregisterWebview = (webviewRef: WebviewRef): void => {
+    const uri = StaticService.getUri(webviewRef)
+
+    if (!this.messengerRegister[uri]) {
+      throw new Error(
+        `Cannot unregister webview. No webview is registered into cozy-intent with the uri: ${uri}`
+      )
+    }
+
+    delete this.messengerRegister[uri]
+  }
+
   private initWebview = async (
     messenger: NativeMessenger
   ): Promise<Connection> => await ParentHandshake(messenger, this.localMethods)
