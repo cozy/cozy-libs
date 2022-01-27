@@ -5,7 +5,8 @@
   "renovate-config": {
     "default": {
       "extends": [
-        "config:base"
+        "config:base",
+        ":semanticCommitTypeAll(fix)"
       ],
       "rangeStrategy": "pin",
       "packageRules": [
