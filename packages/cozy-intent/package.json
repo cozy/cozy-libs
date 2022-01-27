@@ -15,9 +15,12 @@
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
+    "@testing-library/react": "10.4.9",
     "babel-preset-cozy-app": "^2.0.1",
     "eslint-config-cozy-app": "^4.0.0",
-    "react": "17.0.2",
+    "jest": "26.2.2",
+    "mutationobserver-shim": "^0.3.7",
+    "react": "^16.12.0",
     "typescript": "^4.5.2"
   },
   "files": [
@@ -45,7 +48,8 @@
     "build:watch": "yarn build --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix",
-    "prepublishOnly": "yarn build"
+    "prepublishOnly": "yarn build",
+    "test": "jest"
   },
   "types": "./dist/index.d.ts"
 }
