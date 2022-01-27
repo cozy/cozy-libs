@@ -12,10 +12,14 @@ import { WebviewMessenger } from '../../api/services/WebviewMessenger'
 import { WebviewService } from '../../api/services/WebviewService'
 
 interface Props {
-  children: React.ReactChild
+  children?: React.ReactChild
+  webviewService?: WebviewService
 }
 
-export const WebviewIntentProvider = ({ children }: Props): ReactElement => {
+export const WebviewIntentProvider = ({
+  children,
+  webviewService
+}: Props): ReactElement => {
   const [connection, setConnection] =
     useState<
       Connection<MethodsType, EventsType, NativeMethodsRegister, EventsType>
@@ -29,21 +33,19 @@ export const WebviewIntentProvider = ({ children }: Props): ReactElement => {
         throw new Error(Strings.flagshipButNoRNAPI)
 
       StaticService.sendSyncMessage(Strings.webviewIsRendered)
-
       const result = await ChildHandshake(new WebviewMessenger(window))
-
       setConnection(result)
     }
 
-    isFlagshipApp() && init()
-  }, [connection])
+    !webviewService && isFlagshipApp() && init()
+  }, [connection, webviewService])
 
   if (!isFlagshipApp()) return <>{children}</>
 
-  if (!connection) return <></>
-
   return (
-    <WebviewContext.Provider value={new WebviewService(connection)}>
+    <WebviewContext.Provider
+      value={webviewService || (connection && new WebviewService(connection))}
+    >
       {children}
     </WebviewContext.Provider>
   )
