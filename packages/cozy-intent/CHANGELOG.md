@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.3.2...cozy-intent@1.4.0) (2022-01-28)
+
+
+### Features
+
+* Add injection option for WebContext ([993e6b4](https://github.com/cozy/cozy-libs/commit/993e6b4))
+* Improve build config ([a3381ff](https://github.com/cozy/cozy-libs/commit/a3381ff))
+
+
+
+
+
 ## [1.3.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.3.1...cozy-intent@1.3.2) (2022-01-28)
 
 **Note:** Version bump only for package cozy-intent
