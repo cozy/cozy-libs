@@ -9,9 +9,9 @@ import { Strings } from '../constants'
 import { WebviewRef } from '../models/environments'
 
 export class NativeService {
-  private messengerService: typeof NativeMessenger
+  private readonly messengerService: typeof NativeMessenger
 
-  private localMethods: NativeMethodsRegister
+  private readonly localMethods: NativeMethodsRegister
   private messengerRegister = {} as MessengerRegister
 
   constructor(
