@@ -43,8 +43,8 @@
     "directory": "packages/cozy-intent"
   },
   "scripts": {
-    "build": "rm -rf ./dist && yarn build:types && babel --extensions .ts,.tsx ./src -d ./dist --copy-files",
-    "build:types": "tsc -p tsconfig.json",
+    "build": "rm -rf ./dist && yarn build:types && babel --extensions .ts,.tsx --ignore 'src/tests','**/*.spec.tsx','**/*.spec.ts' ./src -d ./dist",
+    "build:types": "tsc -p tsconfig-build.json",
     "build:watch": "yarn build --watch",
     "lint": "eslint . --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix",
