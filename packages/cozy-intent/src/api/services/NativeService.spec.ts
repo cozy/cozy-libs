@@ -59,7 +59,9 @@ describe('NativeMessenger', () => {
       nativeService.tryEmit({
         nativeEvent: { data: '{"source": "post-me"}', url: 'http://SOME_URI' }
       })
-    ).rejects.toThrow()
+    ).rejects.toThrow(
+      `Cannot emit message. No webview is registered with uri: some_uri`
+    )
   })
 
   describe('registerWebview', () => {
