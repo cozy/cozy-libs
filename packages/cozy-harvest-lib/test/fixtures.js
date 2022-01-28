@@ -125,6 +125,20 @@ const fixtures = {
       }
     }
   },
+  createdTriggerWithFolder: {
+    id: 'created-trigger-id',
+    _type: 'io.cozy.triggers',
+    attributes: {
+      arguments: '0 0 0 * * 0',
+      type: '@cron',
+      worker: 'konnector',
+      message: {
+        account: 'updated-account-id',
+        konnector: 'konnectest',
+        folder_to_save: 'folder-id'
+      }
+    }
+  },
   launchedJob: {
     type: 'io.cozy.jobs',
     _id: 'lauched-job-id',

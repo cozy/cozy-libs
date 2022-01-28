@@ -90,6 +90,7 @@ const mockVaultClient = {
 
 const setup = ({ trigger } = {}) => {
   const client = {
+    query: jest.fn(),
     collection: jest.fn().mockReturnValue({
       all: jest.fn().mockReturnValue({
         data: []
@@ -386,6 +387,34 @@ describe('ConnectionFlow', () => {
         trigger: fixtures.existingTrigger
       })
       expect(flow.account).toEqual(fixtures.updatedAccount)
+    })
+
+    it('should add the defaultFolderPath to the account', async () => {
+      const { flow, client } = setup()
+      prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
+
+      ensureTrigger.mockImplementation(
+        async () => fixtures.createdTriggerWithFolder.attributes
+      )
+      client.query.mockImplementation(async () => ({
+        data: {
+          path: '/default/folder/path'
+        }
+      }))
+      await flow.ensureTriggerAndLaunch(client, {
+        account: fixtures.existingAccount,
+        trigger: fixtures.existingTrigger,
+        konnector: fixtures.konnectorWithFolder
+      })
+      expect(flow.account).toEqual(fixtures.updatedAccount)
+      expect(saveAccount).toHaveBeenCalledWith(
+        client,
+        fixtures.konnectorWithFolder,
+        {
+          ...fixtures.existingAccount,
+          defaultFolderPath: '/default/folder/path'
+        }
+      )
     })
 
     it('should call the launcher when needed', async () => {
