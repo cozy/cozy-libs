@@ -492,7 +492,7 @@ export class ConnectionFlow {
    * Add a default folder path to the account if any folder is needed by the connector
    * and/or the account does not have it yet.
    * The account is saved if any change is done to it.
-   * This defaultFolderPath is needed by the stack te recreate the destination folder this
+   * This defaultFolderPath is needed by the stack to recreate the destination folder.
    * had beed removed by any mean : drive application, desktop application etc
    *
    * @param  {CozyClient} client - A cozy client
