@@ -476,7 +476,7 @@ export class ConnectionFlow {
       t
     })
 
-    await this.addDefaultFolderPath(client, {
+    await this.ensureDefaultFolderPathInAccount(client, {
       trigger: ensuredTrigger,
       account,
       konnector
@@ -489,26 +489,43 @@ export class ConnectionFlow {
   }
 
   /**
-   * Add a default folder path to the account if any folder is needed by the connector
-   * and/or the account does not have it yet.
+   * Ensures there is a defaultFolderPath attribute in the account
+   * if any folder is needed by the connector.
    * The account is saved if any change is done to it.
-   * This defaultFolderPath is needed by the stack to recreate the destination folder.
-   * had beed removed by any mean : drive application, desktop application etc
+   * This defaultFolderPath is needed by the stack to recreate the
+   * destination folder if removed by any mean : drive application,
+   * desktop application etc
    *
    * @param  {CozyClient} client - A cozy client
    * @param  {io.cozy.triggers} options.trigger
    * @param  {io.cozy.accounts} options.account
-   * @param  {io.cozy.konnector} options.konnector
+   * @param  {io.cozy.konnectors} options.konnector
    */
-  async addDefaultFolderPath(client, { trigger, account, konnector }) {
+  async ensureDefaultFolderPathInAccount(
+    client,
+    { trigger, account, konnector }
+  ) {
     const folderId = get(trigger, 'message.folder_to_save')
-    if (folderId && !account.defaultFolderPath) {
-      const { data: folder } = await client.query(
-        Q('io.cozy.files').getById(folderId)
-      )
-      account.defaultFolderPath = folder.path
-      await saveAccount(client, konnector, account)
+    if (!folderId) {
+      return account
     }
+
+    let folder
+    try {
+      const result = await client.query(Q('io.cozy.files').getById(folderId))
+      folder = result.data
+    } catch (err) {
+      logger.warn(
+        `ConnectionFlow.ensureDefaultFolderPath: folder ${folderId} does not exist. Could not ensure defaultFolderPath. ${err.message}`
+      )
+      return account
+    }
+    if (folder.path !== account.defaultFolderPath) {
+      account.defaultFolderPath = folder.path
+      const savedAccount = await saveAccount(client, konnector, account)
+      return savedAccount
+    }
+    return account
   }
 
   /**
