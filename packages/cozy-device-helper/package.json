@@ -34,5 +34,5 @@
     "prepublishOnly": "yarn run build",
     "test": "jest src/**"
   },
-  "types": "dist/index.d.ts"
+  "types": "index.d.ts"
 }
