@@ -11,7 +11,7 @@ export class MockWebviewService extends WebviewService {}
 
 type JestWindow = Window & typeof globalThis & WebviewWindow
 
-export const getMockWebviewWindow = (): JestWindow => {
+export const mockWebviewWindow = (): JestWindow => {
   const win = window
 
   return Object.assign(win, {

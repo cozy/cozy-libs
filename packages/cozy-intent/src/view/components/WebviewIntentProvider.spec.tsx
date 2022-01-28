@@ -4,7 +4,7 @@ import 'mutationobserver-shim'
 
 import { WebviewIntentProvider } from './WebviewIntentProvider'
 import {
-  getMockWebviewWindow,
+  mockWebviewWindow,
   mockChildHandshake,
   mockConnection,
   mockIsFlagshipApp,
@@ -12,7 +12,7 @@ import {
 } from '../../tests/mocks'
 
 // eslint-disable-next-line no-global-assign
-window = getMockWebviewWindow()
+window = mockWebviewWindow()
 
 jest.mock('cozy-device-helper', () => ({
   isFlagshipApp: jest.fn()
@@ -24,7 +24,7 @@ jest.mock('post-me', () => ({
 
 describe('WebviewIntentProvider', () => {
   beforeEach(() => {
-    mockIsFlagshipApp.mockImplementation(() => true)
+    mockIsFlagshipApp.mockReturnValue(true)
   })
 
   afterEach(() => {
@@ -32,19 +32,21 @@ describe('WebviewIntentProvider', () => {
     mockIsFlagshipApp.mockClear()
   })
 
-  it('renders with no AA context', async () => {
-    mockIsFlagshipApp.mockImplementation(() => false)
+  it('renders with no AA context', () => {
+    mockIsFlagshipApp.mockReturnValue(false)
 
-    render(<WebviewIntentProvider>Hello</WebviewIntentProvider>)
+    const { queryByText } = render(
+      <WebviewIntentProvider>Hello</WebviewIntentProvider>
+    )
 
-    expect(await screen.findByText('Hello')).toBeDefined()
+    expect(queryByText('Hello')).toBeDefined()
   })
 
   it('renders without injection', async () => {
     render(<WebviewIntentProvider>Hello</WebviewIntentProvider>)
 
     expect(await screen.findByText('Hello')).toBeDefined()
-    expect(mockChildHandshake).toBeCalledTimes(1)
+    expect(mockChildHandshake).toHaveBeenCalled()
   })
 
   it('renders with injection', async () => {
@@ -55,6 +57,6 @@ describe('WebviewIntentProvider', () => {
     )
 
     expect(await screen.findByText('Hello')).toBeDefined()
-    expect(mockChildHandshake).toBeCalledTimes(0)
+    expect(mockChildHandshake).not.toHaveBeenCalled()
   })
 })
