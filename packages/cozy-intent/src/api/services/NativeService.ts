@@ -58,11 +58,19 @@ export class NativeService {
 
     const { message, uri } = StaticService.parseNativeEvent(event)
 
-    if (message === Strings.webviewIsRendered)
+    if (message === Strings.webviewIsRendered) {
       await this.initWebview(this.messengerRegister[uri].messenger)
-    else
-      this.messengerRegister[StaticService.getUri(event)].messenger.onMessage(
-        event
-      )
+    } else {
+      const webviewUri = StaticService.getUri(event)
+      const registeredWebview = this.messengerRegister[webviewUri]
+
+      if (registeredWebview === undefined) {
+        throw new Error(
+          `Cannot emit message. No webview is registered with uri: ${webviewUri}`
+        )
+      }
+
+      this.messengerRegister[webviewUri].messenger.onMessage(event)
+    }
   }
 }
