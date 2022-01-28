@@ -12,6 +12,7 @@ import KonnectorJobWatcher from './konnector/KonnectorJobWatcher'
 import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
 import fixtures from '../../test/fixtures'
 import sentryHub from '../sentry'
+import { Q } from 'cozy-client'
 
 jest.mock('../sentry', () => {
   const mockScope = {
@@ -389,7 +390,7 @@ describe('ConnectionFlow', () => {
       expect(flow.account).toEqual(fixtures.updatedAccount)
     })
 
-    it('should add the defaultFolderPath to the account', async () => {
+    it('should add the defaultFolderPath to the account when needed', async () => {
       const { flow, client } = setup()
       prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
 
@@ -414,6 +415,33 @@ describe('ConnectionFlow', () => {
           ...fixtures.existingAccount,
           defaultFolderPath: '/default/folder/path'
         }
+      )
+      expect(client.query).toHaveBeenCalledWith(
+        Q('io.cozy.files').getById(
+          fixtures.createdTriggerWithFolder.attributes.message.folder_to_save
+        )
+      )
+    })
+
+    it('should return unmodified account trigger folder does not exist', async () => {
+      const { flow, client } = setup()
+      prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
+
+      ensureTrigger.mockResolvedValue(
+        fixtures.createdTriggerWithFolder.attributes
+      )
+      client.query.mockRejectedValue(new Error('404'))
+      await flow.ensureTriggerAndLaunch(client, {
+        account: fixtures.existingAccount,
+        trigger: fixtures.existingTrigger,
+        konnector: fixtures.konnectorWithFolder
+      })
+      expect(flow.account).toEqual(fixtures.updatedAccount)
+      expect(saveAccount).not.toHaveBeenCalled()
+      expect(client.query).toHaveBeenCalledWith(
+        Q('io.cozy.files').getById(
+          fixtures.createdTriggerWithFolder.attributes.message.folder_to_save
+        )
       )
     })
 
