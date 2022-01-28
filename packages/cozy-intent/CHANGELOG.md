@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.4.0...cozy-intent@1.5.0) (2022-01-28)
+
+
+### Features
+
+* Copy json files ([fe116a4](https://github.com/cozy/cozy-libs/commit/fe116a4))
+
+
+
+
+
 # [1.4.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.3.2...cozy-intent@1.4.0) (2022-01-28)
 
 
