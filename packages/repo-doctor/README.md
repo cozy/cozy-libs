@@ -9,7 +9,7 @@ to gather error and warnings. Think "linting" for your repositories.
 ### Rules
 
 Rules can be implemented and can be controlled through a configuration
-file, and can be overrided through the command line.
+file, and can be overridden through the command line.
 
 Example of rules:
 

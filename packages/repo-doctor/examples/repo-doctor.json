@@ -51,11 +51,12 @@
         }
       ]
     }],
-    "LocalesInRepo"
+    "LocalesInRepo",
+    "LibYear"
   ],
   "reporters": {
     "mattermost": {
-      "channel": "@patrick"
+      "channel": "@pierre.trolle"
     }
   }
 }
