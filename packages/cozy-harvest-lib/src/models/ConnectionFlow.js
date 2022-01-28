@@ -3,6 +3,7 @@ import get from 'lodash/get'
 
 import Realtime from 'cozy-realtime'
 import flag from 'cozy-flags'
+import { Q } from 'cozy-client'
 
 import {
   fetchReusableAccount,
@@ -474,10 +475,40 @@ export class ConnectionFlow {
       konnector,
       t
     })
+
+    await this.addDefaultFolderPath(client, {
+      trigger: ensuredTrigger,
+      account,
+      konnector
+    })
+
     logger.info(`Trigger is ${ensuredTrigger._id}`)
     this.trigger = ensuredTrigger
     this.emit(UPDATE_EVENT)
     await this.launch()
+  }
+
+  /**
+   * Add a default folder path to the account if any folder is needed by the connector
+   * and/or the account does not have it yet.
+   * The account is saved if any change is done to it.
+   * This defaultFolderPath is needed by the stack te recreate the destination folder this
+   * had beed removed by any mean : drive application, desktop application etc
+   *
+   * @param  {CozyClient} client - A cozy client
+   * @param  {io.cozy.triggers} options.trigger
+   * @param  {io.cozy.accounts} options.account
+   * @param  {io.cozy.konnector} options.konnector
+   */
+  async addDefaultFolderPath(client, { trigger, account, konnector }) {
+    const folderId = get(trigger, 'message.folder_to_save')
+    if (folderId && !account.defaultFolderPath) {
+      const { data: folder } = await client.query(
+        Q('io.cozy.files').getById(folderId)
+      )
+      account.defaultFolderPath = folder.path
+      await saveAccount(client, konnector, account)
+    }
   }
 
   /**
