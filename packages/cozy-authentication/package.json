@@ -1,6 +1,6 @@
 {
   "name": "cozy-authentication",
-  "version": "2.7.6",
+  "version": "2.7.7",
   "description": "Component providing login to a Cozy",
   "main": "dist/index.js",
   "files": [
@@ -38,7 +38,7 @@
     "react-router": "3"
   },
   "dependencies": {
-    "cozy-device-helper": "^1.16.0",
+    "cozy-device-helper": "^1.16.1",
     "localforage": "1.7.3",
     "prop-types": "15.7.2",
     "snarkdown": "1.2.2",

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.1](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.16.0...cozy-device-helper@1.16.1) (2022-01-28)
+
+
+### Bug Fixes
+
+* Update device helper typings location ([d874d8f](https://github.com/cozy/cozy-libs/commit/d874d8f))
+
+
+
+
+
 # [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.15.0...cozy-device-helper@1.16.0) (2022-01-07)
 
 
