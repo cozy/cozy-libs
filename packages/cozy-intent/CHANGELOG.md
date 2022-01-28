@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.5.0...cozy-intent@1.6.0) (2022-01-28)
+
+
+### Features
+
+* Add unregisterWebview method in cozy-intent NativeServices ([f72b76e](https://github.com/cozy/cozy-libs/commit/f72b76e))
+* Throw an error when registerWebview detects a duplicate uri ([41716ea](https://github.com/cozy/cozy-libs/commit/41716ea))
+* Throw an error when trying to emit a message with no listener ([fd6139e](https://github.com/cozy/cozy-libs/commit/fd6139e))
+
+
+
+
+
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.4.0...cozy-intent@1.5.0) (2022-01-28)
 
 
