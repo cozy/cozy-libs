@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.6.0...cozy-intent@1.7.0) (2022-01-31)
+
+
+### Features
+
+* Update device-help management ([ef7ddcf](https://github.com/cozy/cozy-libs/commit/ef7ddcf))
+
+
+
+
+
 # [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.5.0...cozy-intent@1.6.0) (2022-01-28)
 
 
