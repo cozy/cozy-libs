@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.1.1...cozy-harvest-lib@7.2.0) (2022-01-31)
+
+
+### Features
+
+* Add the defaultFolderPath attribute to the account ([1e80f81](https://github.com/cozy/cozy-libs/commit/1e80f81))
+* Some naming improvements + unit tests ([bc7e10d](https://github.com/cozy/cozy-libs/commit/bc7e10d))
+
+
+
+
+
 ## [7.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.1.0...cozy-harvest-lib@7.1.1) (2022-01-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
