@@ -10,13 +10,13 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "dependencies": {
-    "cozy-device-helper": "^1.16.1",
     "post-me": "0.4.5"
   },
   "devDependencies": {
     "@babel/core": "7.12.3",
     "@testing-library/react": "10.4.9",
     "babel-preset-cozy-app": "^2.0.1",
+    "cozy-device-helper": "^1.16.1",
     "eslint-config-cozy-app": "^4.0.0",
     "jest": "26.2.2",
     "mutationobserver-shim": "^0.3.7",
@@ -35,6 +35,7 @@
   "license": "MIT",
   "main": "./dist/index.js",
   "peerDependencies": {
+    "cozy-device-helper": ">=1.16.1",
     "react": ">=16"
   },
   "repository": {
