@@ -8,7 +8,7 @@
     "start": "parcel src/*.html"
   },
   "dependencies": {
-    "@babel/runtime": "7.12.5",
+    "@babel/runtime": "7.16.7",
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "cozy-authentication": "^2.7.7",

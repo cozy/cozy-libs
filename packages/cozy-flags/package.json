@@ -23,7 +23,7 @@
     "test": "jest"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
+    "@babel/cli": "7.16.8",
     "@testing-library/react-hooks": "^3.2.1",
     "babel-preset-cozy-app": "^2.0.1",
     "cozy-client": "22.2.0",
