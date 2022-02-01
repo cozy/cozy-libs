@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.4](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.7.3...commitlint-config-cozy@0.7.4) (2022-02-01)
+
+
+### Bug Fixes
+
+* **deps:** update commitlint monorepo ([d3f4f27](https://github.com/cozy/cozy-libs/commit/d3f4f270bc5129fed8d49f9a19f03a96292c5039))
+
+
+
+
+
 ## 0.7.3 (2022-02-01)
 
 
