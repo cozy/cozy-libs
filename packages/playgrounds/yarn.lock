@@ -1739,12 +1739,12 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-authentication@^2.7.7:
-  version "2.7.7"
-  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.7.7.tgz#9ce48188b5a0c4d02baf3e06add22954c5f2415a"
-  integrity sha512-nHzZH+qRju7wzHx875sZ2B3jq7JlZRcl0AQYBaqGvTMQfRqv6XSCH1XGym4SBslYrNgBbhcF7mWBujW7DkyJOw==
+cozy-authentication@^2.7.8:
+  version "2.7.8"
+  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.7.8.tgz#b515036fbf4bd5d66c861b7a4a86027c24c5262b"
+  integrity sha512-agqqLG1/4wKe9C2kJD4EWxFdh3Ntttgf88MAK3H8+BkPFm++ILR4G5didbDX9+JDNAVyBAiQkx47JfpGUTRWbw==
   dependencies:
-    cozy-device-helper "^1.16.1"
+    cozy-device-helper "^1.16.2"
     localforage "1.7.3"
     prop-types "15.7.2"
     snarkdown "1.2.2"
@@ -1772,10 +1772,10 @@ cozy-client@13.21.0:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-device-helper@^1.16.1:
-  version "1.16.1"
-  resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.16.1.tgz#559b6c3f104541b53603590ccd6fc89296878f26"
-  integrity sha512-20IZGl7O1+J9qft+zMElL5nrSakAgqOx00IDsbbnJSFDLYtbA6wW6tIKOahYB+YLsDXEwiw6bzccqjiBXU0JAQ==
+cozy-device-helper@^1.16.2:
+  version "1.16.2"
+  resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.16.2.tgz#37e2e23d6636c5d8e7037e65e93d1decca63e117"
+  integrity sha512-dUFsMYbrfkCBoPYwoAKtaPHXaxsjiDe7pVuzG/I8Z/+uFlxEWmAr0d6HUTmDY0lsvxS0aGKIMDUzhFc8fl1xDg==
   dependencies:
     lodash "^4.17.19"
 
@@ -1786,10 +1786,10 @@ cozy-device-helper@^1.7.3:
   dependencies:
     lodash "4.17.15"
 
-cozy-doctypes@^1.83.3:
-  version "1.83.3"
-  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.83.3.tgz#d777c124f98e93c350cb1be39c1c095bb3ebd390"
-  integrity sha512-LvuEVRvAcsi141h5lDIeozGO9E5bQmwx2vTiQ5n7/du3gl33LAtwPy44dOZ2awE4Z2+CzZfqb9QvSontPN9ScA==
+cozy-doctypes@^1.83.4:
+  version "1.83.4"
+  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.83.4.tgz#a8826d5e81c210f273f926e9b2f05fff15192f87"
+  integrity sha512-yWPwZQS8tvPWFSN8NRPz138hoGDbpf9rJMLdh3jUVoz50MoH+rHRqdR6BlPsBHfdoAqaQEsukuH7Z6QscI/oiQ==
   dependencies:
     cozy-logger "^1.8.0"
     date-fns "^1.30.1"
@@ -1818,24 +1818,24 @@ cozy-logger@^1.8.0:
     chalk "^2.4.2"
     json-stringify-safe "5.0.1"
 
-cozy-realtime@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/cozy-realtime/-/cozy-realtime-4.0.2.tgz#a70b388994cc63c0b336df0a91ab74d643b2bf4b"
-  integrity sha512-8BMlFadG6oUMELzKkFTpBl7d/HEE6JuoDYO3l93E6zyq0zFAAZVo4OraVO8kziPOz4FVNuO/ZYMwhEjEqSz0EQ==
+cozy-realtime@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/cozy-realtime/-/cozy-realtime-4.0.3.tgz#212bd771c63d3febb270e17361e4accf769eb691"
+  integrity sha512-/Jy/hr5tRfe/hqysIvbjOKCw92D3O8bn9VtUNraTVKzCb3FIRjRskQ6EnW0PngZqSGUL/5JBzWGZteyueF9k/g==
   dependencies:
     "@cozy/minilog" "^1.0.0"
-    cozy-device-helper "^1.16.1"
+    cozy-device-helper "^1.16.2"
 
-cozy-sharing@^4.0.2:
-  version "4.0.2"
-  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-4.0.2.tgz#7a29dfac7378114eb614c17762894cbb36f7e1c0"
-  integrity sha512-orWa2a3egqscLtBiwQ/vfLmTp8t6GncSa3Mx25+Y8E5qpFWHXDWwI7GFQzmRTKJGKRTZRhvtdm0la/mGjmMapQ==
+cozy-sharing@^4.0.3:
+  version "4.0.3"
+  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-4.0.3.tgz#c2b7e3f020192aa064d97a0820202fc35a1f1fd3"
+  integrity sha512-cdfpzE4K4hJDlFIirQp8eWLAB5KwhQM+QB+aPAktNzLJ+sqaUgYQVXnHqsB+hRv0Rt6nm3sBgtklezDK0kBr9A==
   dependencies:
     "@cozy/minilog" "^1.0.0"
     classnames "^2.2.6"
     copy-text-to-clipboard "^2.1.1"
-    cozy-device-helper "^1.16.1"
-    cozy-doctypes "^1.83.3"
+    cozy-device-helper "^1.16.2"
+    cozy-doctypes "^1.83.4"
     lodash "^4.17.19"
     react-autosuggest "^9.4.3"
     react-tooltip "^3.11.1"
@@ -4457,9 +4457,9 @@ path-key@^2.0.1:
   integrity sha1-QRyttXTFoUDTpLGRDUDYDMn0C0A=
 
 path-parse@^1.0.6:
-  version "1.0.6"
-  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.6.tgz#d62dbb5679405d72c4737ec58600e9ddcf06d24c"
-  integrity sha512-GSmOT2EbHrINBf9SR7CDELwlJ8AENk3Qn7OikK4nFYAu3Ote2+JYNVvkpAEQm3/TLNEJFD/xZJjzyxg3KBWOzw==
+  version "1.0.7"
+  resolved "https://registry.yarnpkg.com/path-parse/-/path-parse-1.0.7.tgz#fbc114b60ca42b30d9daf5858e4bd68bbedb6735"
+  integrity sha512-LDJzPVEEEPR+y48z93A0Ed0yXb8pAByGWo/k5YYdYgpY2/2EsOsksJrq7lOHxryrVOn1ejG6oAp8ahvOIQD8sw==
 
 pbkdf2@^3.0.3:
   version "3.0.17"
