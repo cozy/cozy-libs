@@ -15,8 +15,8 @@
     "prop-types": "^15.7.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
-    "@babel/core": "7.12.3",
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.12",
     "babel-preset-cozy-app": "^2.0.1",
     "btoa": "1.2.1",
     "cozy-client": "13.21.0",

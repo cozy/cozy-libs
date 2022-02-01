@@ -31,7 +31,7 @@
     "snarkdown": "^1.2.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
+    "@babel/cli": "7.16.8",
     "@material-ui/core": "3.9.4",
     "@material-ui/lab": "^3.0.0-alpha.30",
     "babel-plugin-inline-react-svg": "^1.1.0",

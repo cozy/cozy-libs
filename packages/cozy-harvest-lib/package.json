@@ -41,9 +41,9 @@
     "uuid": "^3.3.2"
   },
   "devDependencies": {
-    "@babel/cli": "7.12.1",
-    "@babel/core": "7.12.3",
-    "@babel/register": "^7.8.3",
+    "@babel/cli": "7.16.8",
+    "@babel/core": "7.16.12",
+    "@babel/register": "7.16.9",
     "@cozy/cli-tree": "^0.4.0",
     "@material-ui/core": "4",
     "@material-ui/lab": "^4.0.0-alpha.57",
