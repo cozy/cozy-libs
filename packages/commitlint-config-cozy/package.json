@@ -21,7 +21,7 @@
     "@commitlint/lint": "16.0.0",
     "babel-jest": "26.6.3",
     "babel-preset-cozy-app": "^2.0.2",
-    "jest": "26.2.2"
+    "jest": "26.6.3"
   },
   "dependencies": {
     "@commitlint/cli": "16.1.0"
