@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.7.0...cozy-intent@1.7.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([dcc215a](https://github.com/cozy/cozy-libs/commit/dcc215a0478db2cb3175b09d759bce8153ad4000))
+
+
+
+
+
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.6.0...cozy-intent@1.7.0) (2022-01-31)
 
 

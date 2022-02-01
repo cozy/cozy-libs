@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.51](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.50...cozy-playgrounds@1.18.51) (2022-02-01)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([dcc215a](https://github.com/cozy/cozy-libs/commit/dcc215a0478db2cb3175b09d759bce8153ad4000))
+
+
+
+
+
 ## [1.18.50](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.49...cozy-playgrounds@1.18.50) (2022-01-28)
 
 **Note:** Version bump only for package cozy-playgrounds

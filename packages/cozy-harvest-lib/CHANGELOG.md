@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.0...cozy-harvest-lib@7.2.1) (2022-02-01)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([dcc215a](https://github.com/cozy/cozy-libs/commit/dcc215a0478db2cb3175b09d759bce8153ad4000))
+
+
+
+
+
 # [7.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.1.1...cozy-harvest-lib@7.2.0) (2022-01-31)
 
 

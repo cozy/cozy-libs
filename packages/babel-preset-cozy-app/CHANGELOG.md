@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.0.2 (2022-02-01)
+
+
+### Bug Fixes
+
+* **deps:** update babel monorepo ([dcc215a](https://github.com/cozy/cozy-libs/commit/dcc215a0478db2cb3175b09d759bce8153ad4000))
+* Handle empty context ([6258e12](https://github.com/cozy/cozy-libs/commit/6258e12eb17125777f34e4b4ee217748059a2e6e))
+
+
+
+
+
 ## [2.0.1](https://github.com/cozy/cozy-libs/compare/babel-preset-cozy-app@2.0.0...babel-preset-cozy-app@2.0.1) (2021-12-20)
 
 
