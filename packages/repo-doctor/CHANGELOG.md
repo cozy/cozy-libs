@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.6.0 (2022-02-02)
+
+
+### Bug Fixes
+
+* **deps:** Bump lodash in /packages/repo-doctor ([7807680](https://github.com/cozy/cozy-libs/commit/78076803d4d494df39ddbcfbcd169376f4865ddd))
+
+
+### Features
+
+* Do not allow multi accounts features for clientSide konnectors ([1a9d157](https://github.com/cozy/cozy-libs/commit/1a9d157af6f79a2d1c30b5ee3d9956ee7ce668bd))
+
+
+
+
+
 # 0.5.0 (2021-12-02)
 
 
