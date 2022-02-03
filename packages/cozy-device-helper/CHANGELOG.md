@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.16.3](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.16.2...cozy-device-helper@1.16.3) (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest to v26.6.3 ([f442fff](https://github.com/cozy/cozy-libs/commit/f442fff5f594f04f910046d971950023fcbdd958))
+
+
+
+
+
 ## [1.16.2](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.16.1...cozy-device-helper@1.16.2) (2022-02-01)
 
 

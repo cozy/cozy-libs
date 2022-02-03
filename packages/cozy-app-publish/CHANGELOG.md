@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.29.0 (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest to v26.6.3 ([f442fff](https://github.com/cozy/cozy-libs/commit/f442fff5f594f04f910046d971950023fcbdd958))
+
+
+### Features
+
+* Add `app` parameter to `cozy-intent`'s `openApp` method ([58e0797](https://github.com/cozy/cozy-libs/commit/58e079738cf4c588616912922ae0586876aa8d37))
+
+
+
+
+
 ## [0.28.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.28.0...cozy-app-publish@0.28.1) (2021-12-02)
 
 **Note:** Version bump only for package cozy-app-publish

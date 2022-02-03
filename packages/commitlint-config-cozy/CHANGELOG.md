@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.5](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.7.4...commitlint-config-cozy@0.7.5) (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest to v26.6.3 ([f442fff](https://github.com/cozy/cozy-libs/commit/f442fff5f594f04f910046d971950023fcbdd958))
+
+
+
+
+
 ## [0.7.4](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.7.3...commitlint-config-cozy@0.7.4) (2022-02-01)
 
 

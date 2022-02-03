@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.1...cozy-harvest-lib@7.2.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest to v26.6.3 ([f442fff](https://github.com/cozy/cozy-libs/commit/f442fff5f594f04f910046d971950023fcbdd958))
+
+
+
+
+
 ## [7.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.0...cozy-harvest-lib@7.2.1) (2022-02-01)
 
 

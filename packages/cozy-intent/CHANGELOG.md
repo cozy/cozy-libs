@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.7.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.7.1...cozy-intent@1.7.2) (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest to v26.6.3 ([f442fff](https://github.com/cozy/cozy-libs/commit/f442fff5f594f04f910046d971950023fcbdd958))
+
+
+
+
+
 ## [1.7.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.7.0...cozy-intent@1.7.1) (2022-02-01)
 
 

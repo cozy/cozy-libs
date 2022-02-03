@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.83.5](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.83.4...cozy-doctypes@1.83.5) (2022-02-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest to v26.6.3 ([f442fff](https://github.com/cozy/cozy-libs/commit/f442fff5f594f04f910046d971950023fcbdd958))
+
+
+
+
+
 ## 1.83.4 (2022-02-01)
 
 
