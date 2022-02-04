@@ -1,7 +1,10 @@
-import { Strings } from '../../api/constants'
-import { WebviewRef } from '../../api/models/environments'
+import { Connection, ChildHandshake } from 'post-me'
+
 import { NativeEvent } from '../../api/models/events'
+import { Strings } from '../../api/constants'
 import { TypeguardService } from './TypeguardService'
+import { WebviewMessenger } from './WebviewMessenger'
+import { WebviewRef } from '../../api/models/environments'
 
 export const StaticService = {
   sendSyncMessage(message: string): void {
@@ -29,5 +32,18 @@ export const StaticService = {
 
   isPostMeMessage({ nativeEvent }: NativeEvent): boolean {
     return nativeEvent.data.includes(Strings.postMeSignature)
+  },
+
+  async getConnection(
+    callBack: (connection: Connection) => void
+  ): Promise<void> {
+    if (!TypeguardService.isWebviewWindow(window))
+      throw new Error(Strings.flagshipButNoRNAPI)
+
+    StaticService.sendSyncMessage(Strings.webviewIsRendered)
+
+    const result = await ChildHandshake(new WebviewMessenger(window))
+
+    callBack(result)
   }
 }

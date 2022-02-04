@@ -1,3 +1,7 @@
+import { Connection, EventsType, MethodsType } from 'post-me'
+
+import { NativeMethodsRegister } from './methods'
+
 export interface WebviewRef {
   injectJavaScript: (data: string) => void
   props: {
@@ -12,3 +16,10 @@ export interface WebviewWindow extends Window {
     postMessage: (message: string) => void
   }
 }
+
+export type WebviewConnection = Connection<
+  MethodsType,
+  EventsType,
+  NativeMethodsRegister,
+  EventsType
+>

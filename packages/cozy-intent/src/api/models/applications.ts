@@ -1,3 +1,5 @@
+import { WebviewService } from '../../api/services/WebviewService'
+
 /** App's description resulting of its manifest.webapp file */
 export interface AppManifest {
   /** The app's slug */
@@ -17,4 +19,10 @@ export interface AppManifestMobileInfo {
 
   /** The app's id on Apple AppStore */
   id_appstore: string
+}
+
+export interface CozyBar {
+  bar?: {
+    setWebviewContext?: (webviewContext: WebviewService) => void
+  }
 }
