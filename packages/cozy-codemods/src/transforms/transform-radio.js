@@ -27,14 +27,14 @@ export default function transformRadio(file, api) {
   var j = api.jscodeshift
   const root = j(file.source)
 
-  imports.ensure(
-    root,
-    { default: 'FormControlLabel' },
-    'cozy-ui/transpiled/react/FormControlLabel'
-  )
-
   root.find(j.ImportDeclaration).forEach(nodePath => {
     if (nodePath.value.source.value === 'cozy-ui/transpiled/react/Radio') {
+      imports.ensure(
+        root,
+        { default: 'FormControlLabel' },
+        'cozy-ui/transpiled/react/FormControlLabel'
+      )
+
       nodePath.value.source.value = 'cozy-ui/transpiled/react/Radios'
       nodePath.value.source.raw = 'cozy-ui/transpiled/react/Radios'
     }
