@@ -1,9 +1,10 @@
-import { isFlagshipApp } from 'cozy-device-helper'
 import { ChildHandshake } from 'post-me'
 
-import { WebviewWindow } from '../api/models/environments'
+import { isFlagshipApp } from 'cozy-device-helper'
+
 import { WebviewMessenger } from '../api/services/WebviewMessenger'
 import { WebviewService } from '../api/services/WebviewService'
+import { WebviewWindow } from '../api/models/environments'
 
 export class MockWebviewMessenger extends WebviewMessenger {}
 
@@ -32,3 +33,11 @@ export const mockWebviewService = new MockWebviewService(mockConnection)
 export const mockIsFlagshipApp = isFlagshipApp as jest.Mock
 
 export const mockChildHandshake = ChildHandshake as jest.Mock
+
+export const mockSetWebviewContext = jest.fn()
+
+export const mockCozyBar = {
+  bar: {
+    setWebviewContext: mockSetWebviewContext
+  }
+}
