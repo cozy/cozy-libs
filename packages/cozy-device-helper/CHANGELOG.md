@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.16.3...cozy-device-helper@1.17.0) (2022-02-04)
+
+
+### Features
+
+* Ensure isFlagshipApp returns a boolean value ([78e7d82](https://github.com/cozy/cozy-libs/commit/78e7d82441d66d9decbad5226a73c43d9594fc8e))
+
+
+
+
+
 ## [1.16.3](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.16.2...cozy-device-helper@1.16.3) (2022-02-03)
 
 

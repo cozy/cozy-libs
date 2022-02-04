@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.7.2...cozy-intent@1.8.0) (2022-02-04)
+
+
+### Features
+
+* Add new method signature ([6e78ceb](https://github.com/cozy/cozy-libs/commit/6e78ceb6122c1d41c3f0713324800bed18615107))
+* Send context to cozy-bar if it exists ([e651879](https://github.com/cozy/cozy-libs/commit/e65187964d0d5494005789223daea4a3532498db))
+
+
+
+
+
 ## [1.7.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.7.1...cozy-intent@1.7.2) (2022-02-03)
 
 
