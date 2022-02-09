@@ -59,7 +59,16 @@ export class NativeService {
     const { message, uri } = StaticService.parseNativeEvent(event)
 
     if (message === Strings.webviewIsRendered) {
-      await this.initWebview(this.messengerRegister[uri].messenger)
+      if (this.messengerRegister[uri].connection)
+        throw new Error(`
+          Cannot init handshake for Webview with uri: "${uri}".
+          The handshake was already made and succeeded.
+          You probably remounted WebviewIntentProvider and lost its state, or you forgot to call unregisterWebview on parent-side.
+        `)
+
+      this.messengerRegister[uri].connection = await this.initWebview(
+        this.messengerRegister[uri].messenger
+      )
     } else {
       const webviewUri = StaticService.getUri(event)
       const registeredWebview = this.messengerRegister[webviewUri]

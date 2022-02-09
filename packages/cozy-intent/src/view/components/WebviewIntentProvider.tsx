@@ -2,13 +2,10 @@ import React, { ReactElement, useEffect, useState } from 'react'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 
-import { CozyBar } from '../../api/models/applications'
 import { StaticService } from '../../api/services/StaticService'
 import { WebviewConnection } from '../../api/models/environments'
 import { WebviewContext } from '../contexts/WebviewContext'
 import { WebviewService } from '../../api/services/WebviewService'
-
-declare let cozy: CozyBar | undefined
 
 interface Props {
   children?: React.ReactChild
@@ -21,17 +18,18 @@ export const WebviewIntentProvider = ({
 }: Props): ReactElement => {
   const [connection, setConnection] = useState<WebviewConnection>()
   const [service, setService] = useState<WebviewService | void>(webviewService)
-  const setBarWebviewContext = cozy?.bar?.setWebviewContext
+  const setBarWebviewContext = StaticService.getBarInitAPI()
 
   useEffect(() => {
-    !webviewService &&
+    !connection &&
+      !webviewService &&
       isFlagshipApp() &&
       StaticService.getConnection(setConnection)
-  }, [webviewService])
+  }, [connection, webviewService])
 
   useEffect(() => {
-    connection && setService(new WebviewService(connection))
-  }, [connection])
+    !service && connection && setService(new WebviewService(connection))
+  }, [service, connection])
 
   useEffect(() => {
     setBarWebviewContext && service && setBarWebviewContext(service)

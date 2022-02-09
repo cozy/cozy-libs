@@ -1,10 +1,14 @@
 import { Connection, ChildHandshake } from 'post-me'
 
+import { CozyBar } from '../../api/models/applications'
 import { NativeEvent } from '../../api/models/events'
 import { Strings } from '../../api/constants'
 import { TypeguardService } from './TypeguardService'
 import { WebviewMessenger } from './WebviewMessenger'
 import { WebviewRef } from '../../api/models/environments'
+import { WebviewService } from './WebviewService'
+
+declare const cozy: CozyBar | undefined
 
 export const StaticService = {
   sendSyncMessage(message: string): void {
@@ -32,6 +36,14 @@ export const StaticService = {
 
   isPostMeMessage({ nativeEvent }: NativeEvent): boolean {
     return nativeEvent.data.includes(Strings.postMeSignature)
+  },
+
+  getBarInitAPI(): ((webviewContext: WebviewService) => void) | undefined {
+    try {
+      return cozy?.bar?.setWebviewContext
+    } catch (err) {
+      return undefined
+    }
   },
 
   async getConnection(
