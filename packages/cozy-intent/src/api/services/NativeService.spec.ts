@@ -1,5 +1,5 @@
 import { WebviewRef } from '../models/environments'
-import { NativeEvent } from '../models/events'
+import { ParsedNativeEvent } from '../models/events'
 import { NativeMethodsRegister } from '../models/methods'
 import { NativeMessenger } from '../services/NativeMessenger'
 import { NativeService } from './NativeService'
@@ -16,7 +16,7 @@ class MockNativeMessenger extends NativeMessenger {
 
   public addMessageListener = jest.fn()
 
-  public onMessage = (event: NativeEvent): void => {
+  public onMessage = (event: ParsedNativeEvent): void => {
     onMessageMock(event)
   }
 }
@@ -28,6 +28,7 @@ describe('NativeMessenger', () => {
 
   it('Should allow to register and unregister webviews', async () => {
     const nativeMethods: NativeMethodsRegister = {
+      backToHome: jest.fn(),
       logout: jest.fn(),
       openApp: jest.fn()
     }
@@ -49,9 +50,7 @@ describe('NativeMessenger', () => {
       nativeEvent: { data: '{"source": "post-me"}', url: 'http://SOME_URI' }
     })
 
-    expect(onMessageMock).toHaveBeenNthCalledWith(1, {
-      nativeEvent: { data: '{"source": "post-me"}', url: 'http://SOME_URI' }
-    })
+    expect(onMessageMock).toHaveBeenNthCalledWith(1, { source: 'post-me' })
 
     nativeService.unregisterWebview(webviewRef)
 
@@ -67,6 +66,7 @@ describe('NativeMessenger', () => {
   describe('registerWebview', () => {
     it('Should allow to register a webview', () => {
       const nativeMethods: NativeMethodsRegister = {
+        backToHome: jest.fn(),
         logout: jest.fn(),
         openApp: jest.fn()
       }
@@ -89,6 +89,7 @@ describe('NativeMessenger', () => {
 
     it('Should throw if registering two times the same webview', () => {
       const nativeMethods: NativeMethodsRegister = {
+        backToHome: jest.fn(),
         logout: jest.fn(),
         openApp: jest.fn()
       }
@@ -117,6 +118,7 @@ describe('NativeMessenger', () => {
   describe('unregisterWebview', () => {
     it('Should throw if unregistering not registered webview', () => {
       const nativeMethods: NativeMethodsRegister = {
+        backToHome: jest.fn(),
         logout: jest.fn(),
         openApp: jest.fn()
       }
