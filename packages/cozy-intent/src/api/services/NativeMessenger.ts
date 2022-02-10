@@ -1,9 +1,8 @@
 import { Messenger } from 'post-me'
 
 import { MessageListener, ListenerRemover } from '../models/messengers'
-import { NativeEvent } from '../models/events'
-import { StaticService } from './StaticService'
-import { Strings } from '../constants'
+import { ParsedNativeEvent } from '../models/events'
+import { strings } from '../constants'
 import { WebviewRef } from '../models/environments'
 
 export class NativeMessenger implements Messenger {
@@ -27,10 +26,8 @@ export class NativeMessenger implements Messenger {
     return removeListener
   }
 
-  public onMessage = (event: NativeEvent): void => {
-    const data = StaticService.parseNativeEvent(event)
-
-    if (!this.listener) throw new Error(Strings.noListenerFound)
+  public onMessage = (data: ParsedNativeEvent): void => {
+    if (!this.listener) throw new Error(strings.noListenerFound)
 
     this.listener({ data } as MessageEvent)
   }

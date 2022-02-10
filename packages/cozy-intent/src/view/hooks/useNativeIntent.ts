@@ -2,12 +2,12 @@ import { useContext } from 'react'
 
 import { NativeService } from '../../api/services/NativeService'
 import { NativeContext } from '../contexts/NativeContext'
-import { Strings } from '../../api/constants'
+import { strings } from '../../api/constants'
 
 export const useNativeIntent = (): NativeService => {
   const context = useContext(NativeContext)
 
-  if (!context) throw new Error(Strings.nativeNoProviderFound)
+  if (!context) throw new Error(strings.nativeNoProviderFound)
 
   return context
 }

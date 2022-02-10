@@ -1,12 +1,13 @@
 import { Connection, ParentHandshake } from 'post-me'
 
 import { MessengerRegister } from '../models/messengers'
-import { NativeEvent } from '../models/events'
+import { NativeEvent, ParsedNativeEvent } from '../models/events'
 import { NativeMessenger } from '../services/NativeMessenger'
 import { NativeMethodsRegister } from '../models/methods'
-import { StaticService } from './StaticService'
-import { Strings } from '../constants'
+import { TypeguardService } from './TypeguardService'
 import { WebviewRef } from '../models/environments'
+import { interpolate } from '../../utils'
+import { strings } from '../constants'
 
 export class NativeService {
   private readonly messengerService: typeof NativeMessenger
@@ -22,13 +23,25 @@ export class NativeService {
     this.localMethods = localMethods
   }
 
+  private getUri = (source: WebviewRef | NativeEvent): string => {
+    return TypeguardService.isWebviewRef(source)
+      ? new URL(source.props.source.uri).hostname
+      : new URL(source.nativeEvent.url).hostname
+  }
+
+  private parseNativeEvent = ({
+    nativeEvent
+  }: NativeEvent): ParsedNativeEvent =>
+    <ParsedNativeEvent>JSON.parse(nativeEvent.data)
+
+  private isPostMeMessage = ({ nativeEvent }: NativeEvent): boolean =>
+    nativeEvent.data.includes(strings.postMeSignature)
+
   public registerWebview = (webviewRef: WebviewRef): void => {
-    const uri = StaticService.getUri(webviewRef)
+    const uri = this.getUri(webviewRef)
 
     if (this.messengerRegister[uri]) {
-      throw new Error(
-        `Cannot register webview. A webview is already registered into cozy-intent with the uri: ${uri}`
-      )
+      throw new Error(interpolate(strings.errorRegisterWebview, { uri }))
     }
 
     this.messengerRegister = {
@@ -38,12 +51,10 @@ export class NativeService {
   }
 
   public unregisterWebview = (webviewRef: WebviewRef): void => {
-    const uri = StaticService.getUri(webviewRef)
+    const uri = this.getUri(webviewRef)
 
     if (!this.messengerRegister[uri]) {
-      throw new Error(
-        `Cannot unregister webview. No webview is registered into cozy-intent with the uri: ${uri}`
-      )
+      throw new Error(interpolate(strings.errorUnregisterWebview, { uri }))
     }
 
     delete this.messengerRegister[uri]
@@ -54,32 +65,27 @@ export class NativeService {
   ): Promise<Connection> => await ParentHandshake(messenger, this.localMethods)
 
   public tryEmit = async (event: NativeEvent): Promise<void> => {
-    if (!StaticService.isPostMeMessage(event)) return
+    if (!this.isPostMeMessage(event)) return
 
-    const { message, uri } = StaticService.parseNativeEvent(event)
+    const parsedEvent = this.parseNativeEvent(event)
+    const { message, uri } = parsedEvent
 
-    if (message === Strings.webviewIsRendered) {
+    if (message === strings.webviewIsRendered) {
       if (this.messengerRegister[uri].connection)
-        throw new Error(`
-          Cannot init handshake for Webview with uri: "${uri}".
-          The handshake was already made and succeeded.
-          You probably remounted WebviewIntentProvider and lost its state, or you forgot to call unregisterWebview on parent-side.
-        `)
+        throw new Error(interpolate(strings.errorInitWebview, { uri }))
 
       this.messengerRegister[uri].connection = await this.initWebview(
         this.messengerRegister[uri].messenger
       )
     } else {
-      const webviewUri = StaticService.getUri(event)
+      const webviewUri = this.getUri(event)
       const registeredWebview = this.messengerRegister[webviewUri]
 
       if (registeredWebview === undefined) {
-        throw new Error(
-          `Cannot emit message. No webview is registered with uri: ${webviewUri}`
-        )
+        throw new Error(interpolate(strings.errorEmitMessage, { webviewUri }))
       }
 
-      this.messengerRegister[webviewUri].messenger.onMessage(event)
+      this.messengerRegister[webviewUri].messenger.onMessage(parsedEvent)
     }
   }
 }
