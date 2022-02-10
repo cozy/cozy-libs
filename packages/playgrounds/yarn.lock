@@ -1739,12 +1739,12 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-authentication@^2.7.8:
-  version "2.7.8"
-  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.7.8.tgz#b515036fbf4bd5d66c861b7a4a86027c24c5262b"
-  integrity sha512-agqqLG1/4wKe9C2kJD4EWxFdh3Ntttgf88MAK3H8+BkPFm++ILR4G5didbDX9+JDNAVyBAiQkx47JfpGUTRWbw==
+cozy-authentication@^2.7.10:
+  version "2.7.10"
+  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.7.10.tgz#5c55056c585fd1375f63bfb8b564adf052ffa1ef"
+  integrity sha512-RQRVZkQ+kb0dokbju2DxnHkbc0lYhHfiPxzykt1mZHr7BYtpR9gNaTC3Kgd4VSAHWT4I+MBiIwxsmkBHg685nw==
   dependencies:
-    cozy-device-helper "^1.16.2"
+    cozy-device-helper "^1.17.0"
     localforage "1.7.3"
     prop-types "15.7.2"
     snarkdown "1.2.2"
@@ -1772,10 +1772,10 @@ cozy-client@13.21.0:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-device-helper@^1.16.2:
-  version "1.16.2"
-  resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.16.2.tgz#37e2e23d6636c5d8e7037e65e93d1decca63e117"
-  integrity sha512-dUFsMYbrfkCBoPYwoAKtaPHXaxsjiDe7pVuzG/I8Z/+uFlxEWmAr0d6HUTmDY0lsvxS0aGKIMDUzhFc8fl1xDg==
+cozy-device-helper@^1.17.0:
+  version "1.17.0"
+  resolved "https://registry.yarnpkg.com/cozy-device-helper/-/cozy-device-helper-1.17.0.tgz#fbce9737ea83c67969b2b173163b37299a36283c"
+  integrity sha512-G61i75dPe/JwLUxN0foWG34lnm+0iybMu05AjoXv/UU2fRsTPfNnsHH4ZRi5JS6OPK4ccuj+ffRmabdywo23TA==
   dependencies:
     lodash "^4.17.19"
 
@@ -1786,10 +1786,10 @@ cozy-device-helper@^1.7.3:
   dependencies:
     lodash "4.17.15"
 
-cozy-doctypes@^1.83.4:
-  version "1.83.4"
-  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.83.4.tgz#a8826d5e81c210f273f926e9b2f05fff15192f87"
-  integrity sha512-yWPwZQS8tvPWFSN8NRPz138hoGDbpf9rJMLdh3jUVoz50MoH+rHRqdR6BlPsBHfdoAqaQEsukuH7Z6QscI/oiQ==
+cozy-doctypes@^1.83.5:
+  version "1.83.5"
+  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.83.5.tgz#2608bbedfbf0d28efa0695423a2ea7c5137f5ef7"
+  integrity sha512-r4YEMoEuLTwl5iJ//rkxjpylkqAvZVIrUhdIHTtEdiFkJ7Oo4vpNQznzOAqP3Jdw8tfZkWE3rR3TE/wk1Elseg==
   dependencies:
     cozy-logger "^1.8.0"
     date-fns "^1.30.1"
@@ -1818,24 +1818,24 @@ cozy-logger@^1.8.0:
     chalk "^2.4.2"
     json-stringify-safe "5.0.1"
 
-cozy-realtime@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/cozy-realtime/-/cozy-realtime-4.0.3.tgz#212bd771c63d3febb270e17361e4accf769eb691"
-  integrity sha512-/Jy/hr5tRfe/hqysIvbjOKCw92D3O8bn9VtUNraTVKzCb3FIRjRskQ6EnW0PngZqSGUL/5JBzWGZteyueF9k/g==
+cozy-realtime@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/cozy-realtime/-/cozy-realtime-4.0.5.tgz#61115917229092353264e8a94791f8a7219ec08c"
+  integrity sha512-ZsoEtnqneABu7+J/lTtCTFgNCNnXbruJo5LWKXZq0T6B2FFAH5AwbJCHSoOFftk3IUYEqAaZaLSdTmxalO06SQ==
   dependencies:
     "@cozy/minilog" "^1.0.0"
-    cozy-device-helper "^1.16.2"
+    cozy-device-helper "^1.17.0"
 
-cozy-sharing@^4.0.3:
-  version "4.0.3"
-  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-4.0.3.tgz#c2b7e3f020192aa064d97a0820202fc35a1f1fd3"
-  integrity sha512-cdfpzE4K4hJDlFIirQp8eWLAB5KwhQM+QB+aPAktNzLJ+sqaUgYQVXnHqsB+hRv0Rt6nm3sBgtklezDK0kBr9A==
+cozy-sharing@^4.0.5:
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-4.0.5.tgz#c65d3719f548fcfc34891bffc38213e7894eb75b"
+  integrity sha512-UzedSKS+LhPrzYES7OXH7do9BgOL5YOP9le/ApUnR9OmTaVw/JZhsWA8tODa+yrAtls0gr3m6QNBKHRF9oflYA==
   dependencies:
     "@cozy/minilog" "^1.0.0"
     classnames "^2.2.6"
     copy-text-to-clipboard "^2.1.1"
-    cozy-device-helper "^1.16.2"
-    cozy-doctypes "^1.83.4"
+    cozy-device-helper "^1.17.0"
+    cozy-doctypes "^1.83.5"
     lodash "^4.17.19"
     react-autosuggest "^9.4.3"
     react-tooltip "^3.11.1"
@@ -6213,9 +6213,9 @@ typedarray@^0.0.6:
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
 
 ua-parser-js@^0.7.18:
-  version "0.7.19"
-  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.19.tgz#94151be4c0a7fb1d001af7022fdaca4642659e4b"
-  integrity sha512-T3PVJ6uz8i0HzPxOF9SWzWAlfN/DavlpQqepn22xgve/5QecC+XMCAtmUNnY7C9StehaV6exjUCI801lOI7QlQ==
+  version "0.7.31"
+  resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.31.tgz#649a656b191dffab4f21d5e053e27ca17cbff5c6"
+  integrity sha512-qLK/Xe9E2uzmYI3qLeOmI0tEOt+TBBQyUIAh4aAgU05FVYzeZrKUdkAZfBNVGRaHVgV0TDkdEngJSw/SyQchkQ==
 
 uncss@^0.16.2:
   version "0.16.2"
