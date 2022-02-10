@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.8.0...cozy-intent@1.9.0) (2022-02-10)
+
+
+### Features
+
+* Improve cozy-intent edge cases handling ([7fd3952](https://github.com/cozy/cozy-libs/commit/7fd39520106f69fc768a72797bcd685747fd54bb))
+
+
+
+
+
 # [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.7.2...cozy-intent@1.8.0) (2022-02-04)
 
 
