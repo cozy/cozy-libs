@@ -4,6 +4,7 @@ const config = {
   collectCoverage: true,
   collectCoverageFrom: ['./**/*.{ts,tsx}'],
   coverageDirectory: './tests/coverage',
+  coveragePathIgnorePatterns: ['./tests'],
   rootDir: '../',
   testMatch: ['./**/*.spec.{ts,tsx}'],
   coverageThreshold: {
