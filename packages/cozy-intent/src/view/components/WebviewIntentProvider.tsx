@@ -18,23 +18,15 @@ interface Props {
   webviewService?: WebviewService
 }
 
-/* eslint-disable no-console */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
   try {
-    if (cozy!.bar!.setWebviewContext === undefined) {
-      return console.warn(strings.errorCozyBarAPIMissing)
-    }
-
     return cozy!.bar!.setWebviewContext
   } catch (err) {
-    console.warn((err as Error).stack)
-
-    return console.warn(strings.errorGetCozyBarAPI)
+    return
   }
 }
 /* eslint-enable @typescript-eslint/no-non-null-assertion */
-/* eslint-enable no-console */
 
 const sendSyncMessage = (message: string): void => {
   if (!TypeguardService.hasReactNativeAPI(window))
