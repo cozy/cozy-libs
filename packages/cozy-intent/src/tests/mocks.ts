@@ -1,4 +1,4 @@
-import { ChildHandshake } from 'post-me'
+import { ChildHandshake, Messenger } from 'post-me'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 
@@ -39,5 +39,26 @@ export const mockSetWebviewContext = jest.fn()
 export const mockCozyBar = {
   bar: {
     setWebviewContext: mockSetWebviewContext
+  }
+}
+
+export const mockWebviewRef = {
+  injectJavaScript: jest.fn(),
+  props: {
+    source: {
+      uri: 'mockUri'
+    }
+  }
+}
+
+export class MockDispatcher {
+  private messenger: Messenger
+
+  constructor(messenger: Messenger) {
+    this.messenger = messenger
+  }
+
+  public emitToRemote(message: string): void {
+    this.messenger.postMessage(message)
   }
 }
