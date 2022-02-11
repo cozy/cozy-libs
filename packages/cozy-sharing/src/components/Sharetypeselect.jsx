@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 
 import SelectBox, { components } from 'cozy-ui/transpiled/react/SelectBox'
 import palette from 'cozy-ui/transpiled/react/palette'
-import { Icon } from 'cozy-ui/transpiled/react'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import styles from '../share.styl'
 

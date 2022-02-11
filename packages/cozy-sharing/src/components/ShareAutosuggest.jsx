@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
 
-import { Spinner } from 'cozy-ui/transpiled/react'
+import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
 
 import styles from './autosuggest.styl'

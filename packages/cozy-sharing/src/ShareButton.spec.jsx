@@ -2,7 +2,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import { ShareButton } from './ShareButton'
 
-jest.mock('cozy-ui/transpiled/react', () => ({
+jest.mock('cozy-ui/transpiled/react/Button', () => ({
   Button: props => {
     if (props.t || props.t || props.lang) {
       throw 'do not pass html button invalid props'
