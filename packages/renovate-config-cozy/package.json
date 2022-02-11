@@ -14,8 +14,8 @@
           "excludePackageNames": [
             "^cozy-"
           ],
-          "extends": [
-            "schedule:monthly"
+          "schedule": [
+            "on Saturday every month"
           ]
         }
       ],
