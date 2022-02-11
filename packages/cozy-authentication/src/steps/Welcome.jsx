@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import { Button } from 'cozy-ui/transpiled/react'
+import { Button } from 'cozy-ui/transpiled/react/Button'
 import 'cozy-ui/assets/icons/ui/cloud.svg'
 import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 
