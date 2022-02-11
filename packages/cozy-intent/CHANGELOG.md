@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.9.0...cozy-intent@1.9.1) (2022-02-11)
+
+
+### Bug Fixes
+
+* **cozy-intent:** Stricter null-check for cozy-bar ([f5aac85](https://github.com/cozy/cozy-libs/commit/f5aac85a8b34a6416e1ef2f26854d514e6741558))
+
+
+
+
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.8.0...cozy-intent@1.9.0) (2022-02-10)
 
 
