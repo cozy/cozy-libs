@@ -23,6 +23,7 @@
       "addLabels": [
         "dependencies"
       ],
+      "prHourlyLimit": 1,
       "updateNotScheduled": false
     }
   },
