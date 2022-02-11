@@ -10,5 +10,7 @@
   "errorRegisterWebview": "Cannot register webview. A webview is already registered into cozy-intent with the uri: ${uri}",
   "errorUnregisterWebview": "Cannot unregister webview. No webview is registered into cozy-intent with the uri: ${uri}",
   "errorInitWebview": "Cannot init handshake for Webview with uri: '${uri}'. The handshake was already made and succeeded. You probably remounted WebviewIntentProvider and lost its state, or you forgot to call unregisterWebview on parent-side.",
-  "errorEmitMessage": "Cannot emit message. No webview is registered with uri: ${webviewUri}"
+  "errorEmitMessage": "Cannot emit message. No webview is registered with uri: ${webviewUri}",
+  "errorGetCozyBarAPI": "The above error occured while trying to get the setWebviewContext() API from cozy-bar. Cozy-bar webview intents will not work. Your cozy-bar might be outdated or unreachable.",
+  "errorCozyBarAPIMissing": "Cozy-bar was detected by WebviewIntentProvider but the required setWebviewContext() API was not found. Cozy-bar webview intents will not work. Your cozy-bar version is most likely outdated."
 }

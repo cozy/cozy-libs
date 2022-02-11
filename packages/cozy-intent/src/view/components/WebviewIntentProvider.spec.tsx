@@ -35,6 +35,7 @@ jest.mock('post-me', () => ({
 
 describe('WebviewIntentProvider', () => {
   beforeEach(() => {
+    jest.spyOn(console, 'warn').mockImplementation(() => null)
     mockIsFlagshipApp.mockReturnValue(true)
   })
 
