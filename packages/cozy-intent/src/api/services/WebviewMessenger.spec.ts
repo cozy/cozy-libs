@@ -1,6 +1,5 @@
 import { WebviewMessenger } from './WebviewMessenger'
 import { mockWebviewRef, mockWebviewWindow } from '../../tests/mocks'
-import { strings } from '../../api/constants'
 
 describe('WebviewMessenger', () => {
   afterEach(() => {
