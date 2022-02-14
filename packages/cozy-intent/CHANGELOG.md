@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.10.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.9.1...cozy-intent@1.10.0) (2022-02-14)
+
+
+### Bug Fixes
+
+* Handle linting issues ([64fa1e0](https://github.com/cozy/cozy-libs/commit/64fa1e004d3b654b9a405f645e992dd5764d439c))
+
+
+### Features
+
+* Reach desired 80% overall coverage ([ac1cd54](https://github.com/cozy/cozy-libs/commit/ac1cd5473b84b76bdeb7ffd4076070808c5e20fc))
+
+
+
+
+
 ## [1.9.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.9.0...cozy-intent@1.9.1) (2022-02-11)
 
 

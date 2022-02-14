@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.1.0](https://github.com/cozy/cozy-libs/compare/cozy-scanner@2.0.9...cozy-scanner@2.1.0) (2022-02-14)
+
+
+### Features
+
+* **sharing:** Upgrade cozy-ui to benefit of new component ([db7490b](https://github.com/cozy/cozy-libs/commit/db7490ba5f1585e2a925f5c054aa611c93617bdc))
+
+
+
+
+
 ## [2.0.9](https://github.com/cozy/cozy-libs/compare/cozy-scanner@2.0.8...cozy-scanner@2.0.9) (2022-02-04)
 
 **Note:** Version bump only for package cozy-scanner

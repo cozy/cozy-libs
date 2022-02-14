@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.1](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.6.0...@cozy/repo-doctor@0.6.1) (2022-02-14)
+
+
+### Bug Fixes
+
+* **deps:** Bump node-fetch in /packages/repo-doctor ([5e5a844](https://github.com/cozy/cozy-libs/commit/5e5a844cf529964d4d95c32bbcf1e9eb638dad0a))
+
+
+
+
+
 # 0.6.0 (2022-02-02)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.7.10...cozy-authentication@2.8.0) (2022-02-14)
+
+
+### Features
+
+* **sharing:** Upgrade cozy-ui to benefit of new component ([db7490b](https://github.com/cozy/cozy-libs/commit/db7490ba5f1585e2a925f5c054aa611c93617bdc))
+
+
+
+
+
 ## [2.7.10](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.7.9...cozy-authentication@2.7.10) (2022-02-04)
 
 **Note:** Version bump only for package cozy-authentication

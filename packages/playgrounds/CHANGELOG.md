@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.18.54](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.53...cozy-playgrounds@1.18.54) (2022-02-14)
+
+
+### Bug Fixes
+
+* **deps:** bump ajv from 6.10.0 to 6.12.6 in /packages/playgrounds ([afac8b4](https://github.com/cozy/cozy-libs/commit/afac8b436b2fc78d562321a93ab1f4f7f84937e3))
+
+
+
+
+
 ## [1.18.53](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.52...cozy-playgrounds@1.18.53) (2022-02-04)
 
 **Note:** Version bump only for package cozy-playgrounds
