@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.4](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.3...renovate-config-cozy@0.8.4) (2022-02-14)
+
+
+### Bug Fixes
+
+* **renovate:** Limit to 1 PRs by hour ([fe891d7](https://github.com/cozy/cozy-libs/commit/fe891d757be881be9a8a7f9521eb67163cfb4714))
+
+
+
+
+
 ## [0.8.3](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.2...renovate-config-cozy@0.8.3) (2022-02-14)
 
 
