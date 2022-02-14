@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.8.3](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.2...renovate-config-cozy@0.8.3) (2022-02-14)
+
+
+### Bug Fixes
+
+* **renovate:** Revert Schedule on Sunday every month ([bcee81b](https://github.com/cozy/cozy-libs/commit/bcee81ba320e4eb20ef210ffc4390343a9fde02a))
+
+
+
+
+
 ## [0.8.2](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.1...renovate-config-cozy@0.8.2) (2022-02-11)
 
 
