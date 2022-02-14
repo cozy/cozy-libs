@@ -1,8 +1,17 @@
-import { WebviewRef } from '../models/environments'
-import { ParsedNativeEvent } from '../models/events'
-import { NativeMethodsRegister } from '../models/methods'
+import { ParentHandshake } from 'post-me'
+
 import { NativeMessenger } from '../services/NativeMessenger'
+import { NativeMethodsRegister } from '../models/methods'
 import { NativeService } from './NativeService'
+import { ParsedNativeEvent } from '../models/events'
+import { WebviewRef } from '../models/environments'
+import { interpolate } from '../../utils'
+import { mockNativeMethods } from '../../tests/mocks'
+import { strings } from '../constants'
+
+jest.mock('post-me', () => ({
+  ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
+}))
 
 jest.mock('../services/NativeMessenger')
 
@@ -21,7 +30,7 @@ class MockNativeMessenger extends NativeMessenger {
   }
 }
 
-describe('NativeMessenger', () => {
+describe('NativeService', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
@@ -138,6 +147,54 @@ describe('NativeMessenger', () => {
         nativeService.unregisterWebview(webviewRef)
       }).toThrow(
         'Cannot unregister webview. No webview is registered into cozy-intent with the uri: some_uri'
+      )
+    })
+  })
+
+  describe('TryEmit', () => {
+    const nativeService = new NativeService(
+      mockNativeMethods,
+      MockNativeMessenger
+    )
+
+    it('Should do nothing on non post-me messages', async () => {
+      await nativeService.tryEmit({
+        nativeEvent: { data: '{"not":"postme"}', url: '//bar' }
+      })
+
+      expect(onMessageMock).not.toHaveBeenCalled()
+    })
+
+    it('Should try to init a webview', async () => {
+      nativeService.registerWebview({
+        injectJavaScript: jest.fn(),
+        props: {
+          source: {
+            uri: 'http://bar.com'
+          }
+        }
+      })
+
+      await nativeService.tryEmit({
+        nativeEvent: {
+          data: `{"go":"post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
+          url: 'http://bar.com'
+        }
+      })
+
+      expect(ParentHandshake).toHaveBeenCalledTimes(1)
+    })
+
+    it('Should throw when init an existing webview', async () => {
+      await expect(
+        nativeService.tryEmit({
+          nativeEvent: {
+            data: `{"go":"post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
+            url: 'http://bar.com'
+          }
+        })
+      ).rejects.toThrow(
+        interpolate(strings.errorInitWebview, { uri: 'bar.com' })
       )
     })
   })

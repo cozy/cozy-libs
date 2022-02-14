@@ -37,6 +37,9 @@ export class NativeService {
   private isPostMeMessage = ({ nativeEvent }: NativeEvent): boolean =>
     nativeEvent.data.includes(strings.postMeSignature)
 
+  private isInitMessage = (event: NativeEvent): boolean =>
+    this.parseNativeEvent(event).message === strings.webviewIsRendered
+
   public registerWebview = (webviewRef: WebviewRef): void => {
     const uri = this.getUri(webviewRef)
 
@@ -67,25 +70,31 @@ export class NativeService {
   public tryEmit = async (event: NativeEvent): Promise<void> => {
     if (!this.isPostMeMessage(event)) return
 
+    return this.isInitMessage(event)
+      ? await this.tryInit(event)
+      : this.tryOnMessage(event)
+  }
+
+  private tryInit = async (event: NativeEvent): Promise<void> => {
+    const uri = this.getUri(event)
+
+    if (this.messengerRegister[uri].connection)
+      throw new Error(interpolate(strings.errorInitWebview, { uri }))
+
+    this.messengerRegister[uri].connection = await this.initWebview(
+      this.messengerRegister[uri].messenger
+    )
+  }
+
+  private tryOnMessage = (event: NativeEvent): void => {
     const parsedEvent = this.parseNativeEvent(event)
-    const { message, uri } = parsedEvent
+    const webviewUri = this.getUri(event)
+    const registeredWebview = this.messengerRegister[webviewUri]
 
-    if (message === strings.webviewIsRendered) {
-      if (this.messengerRegister[uri].connection)
-        throw new Error(interpolate(strings.errorInitWebview, { uri }))
-
-      this.messengerRegister[uri].connection = await this.initWebview(
-        this.messengerRegister[uri].messenger
-      )
-    } else {
-      const webviewUri = this.getUri(event)
-      const registeredWebview = this.messengerRegister[webviewUri]
-
-      if (registeredWebview === undefined) {
-        throw new Error(interpolate(strings.errorEmitMessage, { webviewUri }))
-      }
-
-      this.messengerRegister[webviewUri].messenger.onMessage(parsedEvent)
+    if (registeredWebview === undefined) {
+      throw new Error(interpolate(strings.errorEmitMessage, { webviewUri }))
     }
+
+    this.messengerRegister[webviewUri].messenger.onMessage(parsedEvent)
   }
 }

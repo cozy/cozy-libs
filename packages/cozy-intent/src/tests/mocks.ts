@@ -1,10 +1,11 @@
-import { ChildHandshake, Messenger } from 'post-me'
+import { ChildHandshake, RemoteHandle } from 'post-me'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 
 import { WebviewMessenger } from '../api/services/WebviewMessenger'
 import { WebviewService } from '../api/services/WebviewService'
 import { WebviewWindow } from '../api/models/environments'
+import { NativeMethodsRegister } from 'api/models/methods'
 
 export class MockWebviewMessenger extends WebviewMessenger {}
 
@@ -22,9 +23,18 @@ export const mockWebviewWindow = (): JestWindow => {
   })
 }
 
+const mockCall = jest.fn()
+
 export const mockConnection = {
   localHandle: jest.fn(),
-  remoteHandle: jest.fn(),
+  remoteHandle: (): RemoteHandle => ({
+    call: mockCall,
+    customCall: jest.fn(),
+    setCallTransfer: jest.fn(),
+    addEventListener: jest.fn(),
+    removeEventListener: jest.fn(),
+    once: jest.fn()
+  }),
   close: jest.fn()
 }
 
@@ -51,14 +61,8 @@ export const mockWebviewRef = {
   }
 }
 
-export class MockDispatcher {
-  private messenger: Messenger
-
-  constructor(messenger: Messenger) {
-    this.messenger = messenger
-  }
-
-  public emitToRemote(message: string): void {
-    this.messenger.postMessage(message)
-  }
+export const mockNativeMethods: NativeMethodsRegister = {
+  backToHome: jest.fn(),
+  logout: jest.fn(),
+  openApp: jest.fn()
 }

@@ -15,6 +15,7 @@
   "devDependencies": {
     "@babel/core": "7.16.12",
     "@testing-library/react": "10.4.9",
+    "@testing-library/react-hooks": "^7.0.2",
     "babel-preset-cozy-app": "^2.0.2",
     "cozy-device-helper": "^1.17.0",
     "eslint-config-cozy-app": "^4.0.0",
