@@ -8,6 +8,7 @@ describe('WebviewService', () => {
 
     await webviewService.call('logout')
 
+    // eslint-disable-next-line @typescript-eslint/unbound-method
     expect(remote.call).toHaveBeenCalledWith('logout')
   })
 
