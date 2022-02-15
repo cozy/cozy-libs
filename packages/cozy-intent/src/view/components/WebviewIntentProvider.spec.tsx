@@ -5,7 +5,8 @@ import { render } from '@testing-library/react'
 import { CozyBar } from '../../api/models/applications'
 import { WebviewIntentProvider } from './WebviewIntentProvider'
 import { WebviewService } from '../../api/services/WebviewService'
-
+import { WebviewWindow } from '../../api/models/environments'
+import { strings } from '../../api/constants'
 import {
   mockChildHandshake,
   mockConnection,
@@ -123,5 +124,33 @@ describe('WebviewIntentProvider', () => {
     expect(await findByText('Hello')).toBeTruthy()
     expect(mockSetWebviewContext).toBeCalledWith(expect.any(WebviewService))
     expect(mockSetWebviewContext).toBeCalledTimes(1)
+  })
+
+  it('does not throw if cozy-bar api is outdated', async () => {
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    global.cozy!.bar!.setWebviewContext = undefined
+
+    const { findByText } = render(
+      <WebviewIntentProvider>Hello</WebviewIntentProvider>
+    )
+
+    expect(await findByText('Hello')).toBeTruthy()
+  })
+
+  it('throws in a flagship app context that has no RN API available', () => {
+    expect.assertions(1)
+    mockIsFlagshipApp.mockReturnValue(true)
+    ;((window as unknown as WebviewWindow).ReactNativeWebView as unknown) =
+      undefined
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation()
+
+    try {
+      render(<WebviewIntentProvider>Hello</WebviewIntentProvider>)
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        expect(error.message).toBe(strings.flagshipButNoRNAPI)
+        consoleSpy.mockRestore()
+      }
+    }
   })
 })
