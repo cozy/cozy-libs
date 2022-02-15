@@ -297,6 +297,7 @@ describe('createOrUpdateBIConnection', () => {
         }
       }
     })
+    jest.spyOn(client, 'query').mockImplementation(async () => ({ data: [] }))
 
     createBIConnection
       .mockReset()
@@ -599,6 +600,127 @@ describe('createOrUpdateBIConnection', () => {
         auth: {
           bi: {
             connId: 'created-bi-connection-id'
+          }
+        }
+      }
+    })
+  })
+
+  it('should refuse to create an account with a bi connection id which already exists', async () => {
+    const { client, flow } = setup()
+
+    const account = {
+      auth: {
+        login: '1234',
+        password: '4567',
+        dob: '20/12/1890',
+        bankId: '100000'
+      }
+    }
+
+    const konnector = {
+      slug: 'bankingconnectortest'
+    }
+
+    jest.spyOn(flow, 'saveAccount').mockImplementation(account => ({
+      _id: 'created-account-id',
+      ...account
+    }))
+
+    jest.spyOn(client, 'query').mockImplementation(async ({ doctype }) => {
+      if (doctype === 'io.cozy.accounts') {
+        return {
+          data: [
+            {
+              _id: 'account_id',
+              auth: { bi: { connId: 12 } }
+            }
+          ]
+        }
+      } else if (doctype === 'io.cozy.triggers') {
+        return {
+          data: [
+            {
+              message: { account: 'account_id' }
+            }
+          ]
+        }
+      } else {
+        throw new Error('unexpected doctype ' + doctype)
+      }
+    })
+
+    await expect(
+      onBIAccountCreation({
+        client,
+        flow,
+        account,
+        konnector
+      })
+    ).rejects.toEqual(new Error('ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'))
+  })
+
+  it('should create an account if bi connection is not already used', async () => {
+    const { client, flow } = setup()
+
+    const account = {
+      auth: {
+        login: '1234',
+        password: '4567',
+        dob: '20/12/1890',
+        bankId: '100000'
+      }
+    }
+
+    const konnector = {
+      slug: 'bankingconnectortest'
+    }
+
+    jest.spyOn(flow, 'saveAccount').mockImplementation(account => ({
+      _id: 'created-account-id',
+      ...account
+    }))
+
+    jest.spyOn(client, 'query').mockImplementation(async ({ doctype }) => {
+      if (doctype === 'io.cozy.accounts') {
+        return {
+          data: [
+            {
+              _id: 'account_id',
+              auth: { bi: { connId: 12 } }
+            }
+          ]
+        }
+      } else if (doctype === 'io.cozy.triggers') {
+        return {
+          data: [
+            {
+              message: { account: 'other_account_id' }
+            }
+          ]
+        }
+      } else {
+        throw new Error('unexpected doctype ' + doctype)
+      }
+    })
+
+    await expect(
+      onBIAccountCreation({
+        client,
+        flow,
+        account,
+        konnector
+      })
+    ).resolves.toEqual({
+      _id: 'created-account-id',
+      auth: {
+        bankId: '100000',
+        login: '1234'
+      },
+      data: {
+        auth: {
+          bi: {
+            connId: 'created-bi-connection-id-789'
           }
         }
       }

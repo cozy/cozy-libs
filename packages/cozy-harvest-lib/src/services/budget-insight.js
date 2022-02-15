@@ -9,7 +9,9 @@ import get from 'lodash/get'
 import omit from 'lodash/omit'
 import clone from 'lodash/clone'
 import set from 'lodash/set'
+import keyBy from 'lodash/keyBy'
 import defaults from 'lodash/defaults'
+import { Q } from 'cozy-client'
 
 import { waitForRealtimeEvent } from './jobUtils'
 import {
@@ -42,7 +44,9 @@ const getBIIdFromContract = bankAccount => bankAccount.vendorId
  * front-end.
  */
 const extraBIErrorMap = {
-  config: 'LOGIN_FAILED'
+  config: 'LOGIN_FAILED',
+  ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED:
+    'ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'
 }
 
 /**
@@ -166,9 +170,25 @@ export const createOrUpdateBIConnection = async ({
       }
     }
     logger.info('Creating or updating connection...')
-    const connection = await (connId
+    const isUpdate = Boolean(connId)
+    const connection = await (isUpdate
       ? updateBIConnection(config, connId, credsToSend, tempToken)
       : createBIConnection(config, credsToSend, tempToken))
+
+    if (!isUpdate) {
+      const sameAccount = await findAccountWithBiConnection({
+        client,
+        konnector,
+        connectionId: connection.id
+      })
+      if (sameAccount) {
+        const err = new KonnectorJobError(
+          'ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'
+        )
+        err.accountId = sameAccount._id
+        throw err
+      }
+    }
 
     logger.info(`Created or updated connection ${connection.id}`)
     return connection
@@ -505,6 +525,44 @@ const shouldResumeConnection = error => {
   )
 }
 
+/**
+ * Tries to find an existing account, associated to an existing trigger
+ * with the given bi connection id
+ *
+ * @param  {CozyClient} options.client - Cozy client
+ * @param  {Object} options.konnector - Konnector manifest
+ * @param  {Integer} options.connectionId - BI connection id
+ * @return {Account|null} An account with a trigger with the same identifier if any
+ */
+export const findAccountWithBiConnection = async ({
+  client,
+  konnector,
+  connectionId
+}) => {
+  const [accountsResult, triggersResult] = await Promise.all([
+    client.query(
+      Q('io.cozy.accounts')
+        .where({ data: { auth: { bi: { connId: connectionId } } } })
+        .indexFields(['data.auth.bi.connId'])
+    ),
+    client.query(
+      Q('io.cozy.triggers')
+        .where({
+          message: {
+            konnector: konnector.slug
+          }
+        })
+        .indexFields(['message.konnector'])
+    )
+  ])
+
+  const accountsIndex = keyBy(accountsResult.data, '_id')
+  const trigger = triggersResult.data.find(
+    t => accountsIndex[get(t, 'message.account')]
+  )
+  return trigger ? accountsIndex[trigger.message.account] : null
+}
+
 export const konnectorPolicy = {
   name: 'budget-insight',
   match: isBudgetInsightConnector,
@@ -515,5 +573,6 @@ export const konnectorPolicy = {
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   getAdditionalInformationNeeded,
   handleOAuthAccount,
-  setSync
+  setSync,
+  findAccountWithBiConnection
 }
