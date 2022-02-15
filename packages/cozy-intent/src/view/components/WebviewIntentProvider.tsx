@@ -4,18 +4,23 @@ import { Connection, ChildHandshake } from 'post-me'
 import { isFlagshipApp } from 'cozy-device-helper'
 
 import { CozyBar } from '../../api/models/applications'
-import { strings } from '../../api/constants'
-import { TypeguardService } from '../../api/services/TypeguardService'
-import { WebviewConnection } from '../../api/models/environments'
+import { WebviewConnection, WebviewWindow } from '../../api/models/environments'
 import { WebviewContext } from '../contexts/WebviewContext'
 import { WebviewMessenger } from '../../api/services/WebviewMessenger'
 import { WebviewService } from '../../api/services/WebviewService'
+import { strings } from '../../api/constants'
 
 declare const cozy: CozyBar | undefined
 
 interface Props {
   children?: React.ReactChild
   webviewService?: WebviewService
+}
+
+const assumeWebviewWindow = window as unknown as WebviewWindow
+
+function isWebviewWindow(window: Window): window is WebviewWindow {
+  return (window as WebviewWindow).ReactNativeWebView !== undefined
 }
 
 /* eslint-disable no-console */
@@ -37,10 +42,7 @@ const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
 /* eslint-enable no-console */
 
 const sendSyncMessage = (message: string): void => {
-  if (!TypeguardService.hasReactNativeAPI(window))
-    throw new Error(strings.noRNAPIFound)
-
-  return window.ReactNativeWebView.postMessage(
+  return assumeWebviewWindow.ReactNativeWebView.postMessage(
     JSON.stringify({
       signature: strings.postMeSignature,
       uri: window.location.hostname,
@@ -52,14 +54,21 @@ const sendSyncMessage = (message: string): void => {
 const getConnection = async (
   callBack: (connection: Connection) => void
 ): Promise<void> => {
-  if (!TypeguardService.isWebviewWindow(window))
-    throw new Error(strings.flagshipButNoRNAPI)
-
   sendSyncMessage(strings.webviewIsRendered)
 
-  const result = await ChildHandshake(new WebviewMessenger(window))
+  const result = await ChildHandshake(new WebviewMessenger(assumeWebviewWindow))
 
   callBack(result)
+}
+
+const isValidEnv = (): boolean => {
+  const flagshipApp = isFlagshipApp()
+
+  if (!flagshipApp) return false
+
+  if (!isWebviewWindow(window)) throw new Error(strings.flagshipButNoRNAPI)
+
+  return flagshipApp
 }
 
 export const WebviewIntentProvider = ({
@@ -73,7 +82,7 @@ export const WebviewIntentProvider = ({
   useEffect(() => {
     !connection &&
       !webviewService &&
-      isFlagshipApp() &&
+      isValidEnv() &&
       getConnection(setConnection)
   }, [connection, webviewService])
 

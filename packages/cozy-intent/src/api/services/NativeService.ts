@@ -4,7 +4,6 @@ import { MessengerRegister } from '../models/messengers'
 import { NativeEvent, ParsedNativeEvent } from '../models/events'
 import { NativeMessenger } from '../services/NativeMessenger'
 import { NativeMethodsRegister } from '../models/methods'
-import { TypeguardService } from './TypeguardService'
 import { WebviewRef } from '../models/environments'
 import { interpolate } from '../../utils'
 import { strings } from '../constants'
@@ -23,8 +22,12 @@ export class NativeService {
     this.localMethods = localMethods
   }
 
+  private isWebviewRef(object: unknown): object is WebviewRef {
+    return (object as WebviewRef).injectJavaScript !== undefined
+  }
+
   private getUri = (source: WebviewRef | NativeEvent): string => {
-    return TypeguardService.isWebviewRef(source)
+    return this.isWebviewRef(source)
       ? new URL(source.props.source.uri).hostname
       : new URL(source.nativeEvent.url).hostname
   }
