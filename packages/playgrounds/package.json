@@ -26,6 +26,6 @@
   },
   "devDependencies": {
     "@babel/polyfill": "7.12.1",
-    "parcel": "^1.12.3"
+    "parcel": "1.12.3"
   }
 }
