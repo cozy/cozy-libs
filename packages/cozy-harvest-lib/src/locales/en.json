@@ -204,6 +204,10 @@
       "VENDOR_DOWN.LINXO_DOWN": {
         "title": "Unavailable service",
         "description": "It seems that we are experiencing overload with our bank konnectors at the moment. Please rerun the connector later."
+      },
+      "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
+        "title": "This account already exists",
+        "description": "You already have configured an account with these identifiers."
       }
     }
   },

@@ -204,6 +204,10 @@
       "VENDOR_DOWN.LINXO_DOWN": {
         "title": "Service non disponible",
         "description": "Il semble que le service [%{name}](%{link}) ne nous ait pas répondu dans les temps. Vous pouvez tenter de le relancer manuellement maintenant ou ultérieurement."
+      },
+      "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
+        "title": "Ce compte est déjà configuré",
+        "description": "Vous avez déjà configuré un compte avec ces identifiants."
       }
     }
   },
