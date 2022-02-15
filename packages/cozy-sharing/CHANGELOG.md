@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.0...cozy-sharing@4.1.1) (2022-02-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency babel-plugin-inline-react-svg to v1.1.2 ([2c66da8](https://github.com/cozy/cozy-libs/commit/2c66da822e24b0d30714d7fa4cd79c26696adcc6))
+* **deps:** update dependency enzyme-to-json to v3.6.2 ([4b90ff6](https://github.com/cozy/cozy-libs/commit/4b90ff66bcf692886eb197727eed1d7dd7a41cb1))
+
+
+
+
+
 # [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.0.5...cozy-sharing@4.1.0) (2022-02-14)
 
 

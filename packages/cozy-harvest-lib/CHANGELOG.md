@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.2.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.3...cozy-harvest-lib@7.2.4) (2022-02-15)
+
+
+### Bug Fixes
+
+* **deps:** update dependency babel-plugin-inline-react-svg to v1.1.2 ([2c66da8](https://github.com/cozy/cozy-libs/commit/2c66da822e24b0d30714d7fa4cd79c26696adcc6))
+
+
+
+
+
 ## [7.2.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.2...cozy-harvest-lib@7.2.3) (2022-02-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
