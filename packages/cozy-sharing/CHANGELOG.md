@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.1...cozy-sharing@4.1.2) (2022-02-18)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([e53d065](https://github.com/cozy/cozy-libs/commit/e53d065090224ea340b2c25c3afd14f223f4d119))
+
+
+
+
+
 ## [4.1.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.0...cozy-sharing@4.1.1) (2022-02-15)
 
 

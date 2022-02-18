@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.4...cozy-harvest-lib@7.3.0) (2022-02-18)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([e53d065](https://github.com/cozy/cozy-libs/commit/e53d065090224ea340b2c25c3afd14f223f4d119))
+
+
+### Features
+
+* Do not allow multiple accounts with same BI connection ID ([55b5f23](https://github.com/cozy/cozy-libs/commit/55b5f23f0adbc308c3b70fa287c3938ee1b0a4cc))
+
+
+
+
+
 ## [7.2.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.3...cozy-harvest-lib@7.2.4) (2022-02-15)
 
 

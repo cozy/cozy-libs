@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.8.1 (2022-02-18)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([e53d065](https://github.com/cozy/cozy-libs/commit/e53d065090224ea340b2c25c3afd14f223f4d119))
+
+
+
+
+
 # 1.8.0 (2021-12-02)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.8.0...cozy-authentication@2.8.1) (2022-02-18)
+
+
+### Bug Fixes
+
+* **deps:** pin dependencies ([e53d065](https://github.com/cozy/cozy-libs/commit/e53d065090224ea340b2c25c3afd14f223f4d119))
+
+
+
+
+
 # [2.8.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.7.10...cozy-authentication@2.8.0) (2022-02-14)
 
 
