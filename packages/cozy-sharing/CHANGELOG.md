@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.2...cozy-sharing@4.1.3) (2022-02-21)
+
+
+### Bug Fixes
+
+* **sharing:** Escape public name in public cozy2cozy view ([b5af978](https://github.com/cozy/cozy-libs/commit/b5af978e6f349819b8f76e097f328a87a6c18912))
+
+
+
+
+
 ## [4.1.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.1...cozy-sharing@4.1.2) (2022-02-18)
 
 
