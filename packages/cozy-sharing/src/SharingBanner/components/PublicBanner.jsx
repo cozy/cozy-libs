@@ -30,24 +30,28 @@ const PublicBannerCozyToCozyContent = ({
     <a
       href="https://cozy.io"
       target="_blank"
-      className={'u-link'}
+      className="u-link"
       rel="noopener noreferrer"
     >
       {t('Share.banner.know_more')}
     </a>
   )
+
   const withAvatar = snarkdown(
     t('Share.banner.shared_from', {
       name: name,
       image: avatarURL
     })
   )
+  const beginning = withAvatar.split('<img src')
+  const translated = beginning[1].split('alt="avatar">')
   return (
     <>
-      <span
-        className={styles['bannermarkdown']}
-        dangerouslySetInnerHTML={{ __html: withAvatar }}
-      />
+      <span className={styles['bannermarkdown']}>
+        {beginning[0]}
+        <img src={avatarURL} alt="avatar" />
+        {translated[1]}
+      </span>
       <span>
         {' '}
         {text} {knowMore}
