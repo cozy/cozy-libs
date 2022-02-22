@@ -4,7 +4,6 @@ import { renderHook } from '@testing-library/react-hooks'
 import { WebviewContext } from '../contexts/WebviewContext'
 import { WebviewService } from '../../api/services/WebviewService'
 import { mockConnection } from '../../tests/mocks'
-import { strings } from '../../api/constants'
 import { useWebviewIntent } from './useWebviewIntent'
 
 jest.mock('cozy-device-helper', () => ({
@@ -12,9 +11,10 @@ jest.mock('cozy-device-helper', () => ({
 }))
 
 describe('useNativeIntent', () => {
-  it('Should throw if the context does not exist in a Flagship app', () => {
+  it('Should not throw if the context does not exist in a Flagship app', () => {
     const { result } = renderHook(() => useWebviewIntent())
-    expect(result?.error?.message).toBe(strings.webviewNoProviderFound)
+
+    expect(result.current).toBeUndefined()
   })
 
   it('Should return the context if it exists', () => {
