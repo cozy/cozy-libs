@@ -27,14 +27,12 @@ function isWebviewWindow(window: Window): window is WebviewWindow {
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
   try {
-    if (cozy!.bar!.setWebviewContext === undefined) {
+    if (cozy!.bar && cozy!.bar.setWebviewContext === undefined) {
       return console.warn(strings.errorCozyBarAPIMissing)
     }
 
     return cozy!.bar!.setWebviewContext
   } catch (err) {
-    console.warn((err as Error).stack)
-
     return console.warn(strings.errorGetCozyBarAPI)
   }
 }
