@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.10.3](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.10.2...cozy-intent@1.10.3) (2022-02-22)
+
+
+### Bug Fixes
+
+* **cozy-intent:** Allow undefined hook return ([7237826](https://github.com/cozy/cozy-libs/commit/7237826c76289ea1ae399e471f42de5360ca4375))
+
+
+
+
+
 ## [1.10.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.10.1...cozy-intent@1.10.2) (2022-02-18)
 
 
