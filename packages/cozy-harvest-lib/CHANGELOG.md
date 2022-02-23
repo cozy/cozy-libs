@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.3.0...cozy-harvest-lib@7.3.1) (2022-02-23)
+
+
+### Bug Fixes
+
+* **Harvest:** Launch Banking Konnector in manual mode ([082b53d](https://github.com/cozy/cozy-libs/commit/082b53d5048cd5841977422ba298a472ca538a8f))
+
+
+
+
+
 # [7.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.2.4...cozy-harvest-lib@7.3.0) (2022-02-18)
 
 
