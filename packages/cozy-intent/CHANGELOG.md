@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.10.3...cozy-intent@1.11.0) (2022-02-25)
+
+
+### Features
+
+* **cozy-intent:** Add new method signatures ([226dc40](https://github.com/cozy/cozy-libs/commit/226dc4074cceea55c0a759b5d54ef7753b313754))
+
+
+
+
+
 ## [1.10.3](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.10.2...cozy-intent@1.10.3) (2022-02-22)
 
 
