@@ -58,6 +58,7 @@ exports[`ContactSuggestion component should display contact suggestion for a con
     <Avatar
       className=""
       disabled={false}
+      ghost={false}
       icon={[Function]}
       image=""
       size="small"
@@ -143,6 +144,7 @@ exports[`ContactSuggestion component should display contact suggestion for a con
     <Avatar
       className=""
       disabled={false}
+      ghost={false}
       icon={[Function]}
       image=""
       size="small"
@@ -279,6 +281,7 @@ exports[`ContactSuggestion component should display contact suggestion for a gro
     <Avatar
       className=""
       disabled={false}
+      ghost={false}
       icon={[Function]}
       image=""
       size="small"
