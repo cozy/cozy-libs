@@ -14,6 +14,7 @@ declare const cozy: CozyBar | undefined
 
 interface Props {
   children?: React.ReactChild
+  setBarContext?: (webviewContext: WebviewService) => void
   webviewService?: WebviewService
 }
 
@@ -71,11 +72,12 @@ const isValidEnv = (): boolean => {
 
 export const WebviewIntentProvider = ({
   children,
+  setBarContext,
   webviewService
 }: Props): ReactElement => {
   const [connection, setConnection] = useState<WebviewConnection>()
   const [service, setService] = useState<WebviewService | void>(webviewService)
-  const setBarWebviewContext = getBarInitAPI()
+  const setBarWebviewContext = setBarContext || getBarInitAPI()
 
   useEffect(() => {
     !connection &&

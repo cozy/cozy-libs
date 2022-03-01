@@ -137,6 +137,19 @@ describe('WebviewIntentProvider', () => {
     expect(await findByText('Hello')).toBeTruthy()
   })
 
+  it('should allow cozy-bar v8 to inject callback', async () => {
+    const mockSetBarContext = jest.fn()
+    const { findByText } = render(
+      <WebviewIntentProvider setBarContext={mockSetBarContext}>
+        Hello
+      </WebviewIntentProvider>
+    )
+
+    expect(await findByText('Hello')).toBeTruthy()
+    expect(mockSetBarContext).toBeCalledWith(expect.any(WebviewService))
+    expect(mockSetBarContext).toBeCalledTimes(1)
+  })
+
   it('throws in a flagship app context that has no RN API available', () => {
     expect.assertions(1)
     mockIsFlagshipApp.mockReturnValue(true)
