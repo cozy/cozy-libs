@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.6](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.8.5...cozy-flags@2.8.6) (2022-03-01)
+
+
+### Bug Fixes
+
+* **flags:** Don't log when flags.enable called with empty array ([96ea387](https://github.com/cozy/cozy-libs/commit/96ea387d4db7360f283e8af7c6d5a4a3c94640a7))
+
+
+
+
+
 ## 2.8.5 (2022-02-18)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.3...cozy-sharing@4.1.4) (2022-03-01)
+
+
+### Bug Fixes
+
+* **sharing:** Upgrade cozy-ui to remove justifyContent warning ([eb6318f](https://github.com/cozy/cozy-libs/commit/eb6318f0d0cd2e39e47b80b35e30efb766d6e553))
+
+
+
+
+
 ## [4.1.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.1.2...cozy-sharing@4.1.3) (2022-02-21)
 
 
