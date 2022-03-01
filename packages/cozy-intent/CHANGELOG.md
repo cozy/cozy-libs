@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.11.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.11.0...cozy-intent@1.11.1) (2022-03-01)
+
+
+### Bug Fixes
+
+* **cozy-intent:** Allow cozy-bar V8 to inject callback ([77d4a63](https://github.com/cozy/cozy-libs/commit/77d4a6318c5c93f5588140a8b4fe0446a3a77b15))
+
+
+
+
+
 # [1.11.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.10.3...cozy-intent@1.11.0) (2022-02-25)
 
 
