@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.11.1...cozy-intent@1.12.0) (2022-03-04)
+
+
+### Features
+
+* **intent:** Add  hide and show SplashScreen native methods in types ([2c8f33c](https://github.com/cozy/cozy-libs/commit/2c8f33cc7c5f5d877cdb1ce3a839746eed209e6f))
+
+
+
+
+
 ## [1.11.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.11.0...cozy-intent@1.11.1) (2022-03-01)
 
 
