@@ -26,3 +26,18 @@ export interface CozyBar {
     setWebviewContext?: (webviewContext: WebviewService) => void
   }
 }
+
+export enum NativeThemes {
+  Dark = 'dark',
+  Light = 'light'
+}
+
+export interface FlagshipUI {
+  /** Has to be a valid React Native color string or will be ignored */
+  statusBarBackground?: string
+  statusBarIcons?: NativeThemes
+
+  /** Has to be a valid React Native color string or will be ignored */
+  navbarBackground?: string
+  navbarIcons?: NativeThemes
+}
