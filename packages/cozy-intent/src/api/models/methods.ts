@@ -1,11 +1,10 @@
-import { AppManifest } from './applications'
+import { AppManifest, FlagshipUI } from './applications'
 
 export type NativeMethodsRegister = {
   backToHome: () => void
-  logout: () => Promise<void>
-  openApp: (href: string, app: AppManifest) => Promise<void>
-  setNavBarColor: (color: string) => void
-  setStatusBarColor: (color: string) => void
   hideSplashScreen: () => void
+  logout: () => void
+  openApp: (href: string, app: AppManifest) => void
+  setFlagshipUI: (flagshipUI: FlagshipUI) => void
   showSplashScreen: () => void
 }
