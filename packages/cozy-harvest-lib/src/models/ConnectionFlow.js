@@ -381,7 +381,7 @@ export class ConnectionFlow {
       )
 
       let cipher
-      if (konnectorPolicy.saveInVault) {
+      if (konnectorPolicy.saveInVault && !konnector.clientSide) {
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
           account,
           konnector,
