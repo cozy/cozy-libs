@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.13.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.12.0...cozy-intent@1.13.0) (2022-03-10)
+
+
+### Bug Fixes
+
+* Remove a throw and console warns in dev ([c122d1e](https://github.com/cozy/cozy-libs/commit/c122d1e92a2fd6c5087d877f0829f9dfc20cdb8d))
+
+
+### Features
+
+* Implement simpler API signature ([2a70ff1](https://github.com/cozy/cozy-libs/commit/2a70ff142315f08112cb3ee2e933050ededfef8f))
+
+
+
+
+
 # [1.12.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.11.1...cozy-intent@1.12.0) (2022-03-04)
 
 
