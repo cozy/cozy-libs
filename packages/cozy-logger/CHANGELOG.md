@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.8.1...cozy-logger@1.9.0) (2022-03-10)
+
+
+### Features
+
+* **cozy-logger:** Add basic typing ([d0aed16](https://github.com/cozy/cozy-libs/commit/d0aed164e90e05530c91a56d8de72ad370edd3ed))
+
+
+
+
+
 ## 1.8.1 (2022-02-18)
 
 
