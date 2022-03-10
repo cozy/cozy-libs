@@ -7,6 +7,7 @@
   },
   "scripts": {
     "start": "src/index.js",
+    "start:mattermost": "src/index.js --reporter mattermost --configFile examples/repo-doctor.json",
     "lint": "cd ..; yarn eslint --ext js,jsx packages/repo-doctor"
   },
   "dependencies": {
