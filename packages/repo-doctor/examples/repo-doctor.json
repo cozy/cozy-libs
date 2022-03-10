@@ -55,7 +55,7 @@
   ],
   "reporters": {
     "mattermost": {
-      "channel": "@patrick"
+      "channel": "front"
     }
   }
 }
