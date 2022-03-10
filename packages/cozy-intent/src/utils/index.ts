@@ -1,3 +1,5 @@
+import logger from 'cozy-logger'
+
 export const interpolate = (
   str: string,
   params: Record<string, string>
@@ -18,3 +20,5 @@ export const interpolate = (
     return str
   }
 }
+
+export const log = logger.namespace('cozy-intent')

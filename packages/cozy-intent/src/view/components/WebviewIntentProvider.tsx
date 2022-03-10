@@ -8,6 +8,7 @@ import { WebviewConnection, WebviewWindow } from '../../api/models/environments'
 import { WebviewContext } from '../contexts/WebviewContext'
 import { WebviewMessenger } from '../../api/services/WebviewMessenger'
 import { WebviewService } from '../../api/services/WebviewService'
+import { log } from '../../utils'
 import { strings } from '../../api/constants'
 
 declare const cozy: CozyBar | undefined
@@ -29,12 +30,12 @@ function isWebviewWindow(window: Window): window is WebviewWindow {
 const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
   try {
     if (cozy!.bar && cozy!.bar.setWebviewContext === undefined) {
-      return console.warn(strings.errorCozyBarAPIMissing)
+      return log('warn', strings.errorCozyBarAPIMissing)
     }
 
     return cozy!.bar!.setWebviewContext
   } catch (err) {
-    return console.warn(strings.errorGetCozyBarAPI)
+    return log('warn', strings.errorGetCozyBarAPI)
   }
 }
 /* eslint-enable @typescript-eslint/no-non-null-assertion */
@@ -65,9 +66,13 @@ const isValidEnv = (): boolean => {
 
   if (!flagshipApp) return false
 
-  if (!isWebviewWindow(window)) throw new Error(strings.flagshipButNoRNAPI)
+  if (!isWebviewWindow(window)) {
+    log('warn', strings.flagshipButNoRNAPI)
 
-  return flagshipApp
+    return false
+  }
+
+  return true
 }
 
 export const WebviewIntentProvider = ({
