@@ -18,6 +18,7 @@
     "@testing-library/react-hooks": "7.0.2",
     "babel-preset-cozy-app": "^2.0.2",
     "cozy-device-helper": "^1.17.0",
+    "cozy-logger": "^1.9.0",
     "eslint-config-cozy-app": "^4.0.0",
     "jest": "26.6.3",
     "mutationobserver-shim": "0.3.7",
@@ -37,6 +38,7 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "cozy-device-helper": ">=1.16.1",
+    "cozy-logger": ">=1",
     "react": ">=16"
   },
   "repository": {
