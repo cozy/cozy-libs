@@ -19,5 +19,6 @@
   },
   "devDependencies": {
     "babel-plugin-import-redirect": "1.1.1"
-  }
+  },
+  "types": "index.d.ts"
 }
