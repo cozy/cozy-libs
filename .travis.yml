@@ -23,6 +23,12 @@ deploy:
     on:
       branch: master
       repo: cozy/cozy-libs
+
+jobs:
+  include:
+    - name: 'Repo Doctor'
+      script: cd ./packages/repo-doctor && yarn start:mattermost
+
 env:
   global:
     # GITHUB_TOKEN
