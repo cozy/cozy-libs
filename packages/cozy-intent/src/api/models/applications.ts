@@ -33,11 +33,14 @@ export enum NativeThemes {
 }
 
 export interface FlagshipUI {
-  /** Has to be a valid React Native color string or will be ignored */
-  statusBarBackground?: string
-  statusBarIcons?: NativeThemes
-
-  /** Has to be a valid React Native color string or will be ignored */
-  navbarBackground?: string
-  navbarIcons?: NativeThemes
+  /** Has to be a <color> CSS data type */
+  bottomBackground?: string
+  bottomColor?: NativeThemes
+  /** Has to be 'rgba(R, G, B[, A])' to enable, 'transparent' to disable */
+  bottomOverlay?: string
+  /** Has to be a <color> CSS data type */
+  topBackground?: string
+  topColor?: NativeThemes
+  /** Has to be 'rgba(R, G, B[, A])' to enable, 'transparent' to disable */
+  topOverlay?: string
 }
