@@ -1739,10 +1739,10 @@ cosmiconfig@^5.0.0:
     js-yaml "^3.13.1"
     parse-json "^4.0.0"
 
-cozy-authentication@^2.7.10:
-  version "2.7.10"
-  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.7.10.tgz#5c55056c585fd1375f63bfb8b564adf052ffa1ef"
-  integrity sha512-RQRVZkQ+kb0dokbju2DxnHkbc0lYhHfiPxzykt1mZHr7BYtpR9gNaTC3Kgd4VSAHWT4I+MBiIwxsmkBHg685nw==
+cozy-authentication@^2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/cozy-authentication/-/cozy-authentication-2.8.1.tgz#c36d693b4e87df9997d24a7efe2ddb824bbecc7b"
+  integrity sha512-o0qlMioXKNv55sGf2296alCYaeptoeHVKfFtx7GxGPyDhSkj31xnZlox+KOFvGgHQV7u4C/aX14b+zgz43bNuQ==
   dependencies:
     cozy-device-helper "^1.17.0"
     localforage "1.7.3"
@@ -1786,12 +1786,12 @@ cozy-device-helper@^1.7.3:
   dependencies:
     lodash "4.17.15"
 
-cozy-doctypes@^1.83.5:
-  version "1.83.5"
-  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.83.5.tgz#2608bbedfbf0d28efa0695423a2ea7c5137f5ef7"
-  integrity sha512-r4YEMoEuLTwl5iJ//rkxjpylkqAvZVIrUhdIHTtEdiFkJ7Oo4vpNQznzOAqP3Jdw8tfZkWE3rR3TE/wk1Elseg==
+cozy-doctypes@^1.83.7:
+  version "1.83.7"
+  resolved "https://registry.yarnpkg.com/cozy-doctypes/-/cozy-doctypes-1.83.7.tgz#258448aa5fa8f76d557c7635c148d9bfe54bbe33"
+  integrity sha512-sAMZ/xajc2rXWmBFB0fP4NWQmUDh6FmStRE2KFpMrq7UGM6wIBouVl1CYD7grdlompBh3/1kBNmAb5PuWRMnBQ==
   dependencies:
-    cozy-logger "^1.8.0"
+    cozy-logger "^1.9.0"
     date-fns "^1.30.1"
     es6-promise-pool "^2.5.0"
     lodash "^4.17.19"
@@ -1810,10 +1810,10 @@ cozy-logger@^1.6.0:
     chalk "^2.4.2"
     json-stringify-safe "5.0.1"
 
-cozy-logger@^1.8.0:
-  version "1.8.0"
-  resolved "https://registry.yarnpkg.com/cozy-logger/-/cozy-logger-1.8.0.tgz#8d37f8e52c0de02a65ca0606ad60b0ebf3a60ed6"
-  integrity sha512-0sBNsfwCwO/r23vrOncvj/EGRjDh/0Emh2WqWL0cYriPbOiidWrsULmh11Q9ykCB1IxBZ3z8PEpaqGTvAas2ug==
+cozy-logger@^1.9.0:
+  version "1.9.0"
+  resolved "https://registry.yarnpkg.com/cozy-logger/-/cozy-logger-1.9.0.tgz#e3a2323d9a2945ca10da5c318ff2f63544a54415"
+  integrity sha512-x/iFwFuNTbG4lwgeKPv6HtdixY+CcJm47sRd2za09aS1zZMHnN3HX7fFgoSSgEqFhpnIO/PpP2pVqJ4orSCp0g==
   dependencies:
     chalk "^2.4.2"
     json-stringify-safe "5.0.1"
@@ -1826,16 +1826,16 @@ cozy-realtime@^4.0.5:
     "@cozy/minilog" "^1.0.0"
     cozy-device-helper "^1.17.0"
 
-cozy-sharing@^4.0.5:
-  version "4.0.5"
-  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-4.0.5.tgz#c65d3719f548fcfc34891bffc38213e7894eb75b"
-  integrity sha512-UzedSKS+LhPrzYES7OXH7do9BgOL5YOP9le/ApUnR9OmTaVw/JZhsWA8tODa+yrAtls0gr3m6QNBKHRF9oflYA==
+cozy-sharing@^4.1.5:
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/cozy-sharing/-/cozy-sharing-4.1.5.tgz#37a47c6372f243ed46c2560dadbd803f7ac9315d"
+  integrity sha512-YgUozo6LHRa4OuMp+LjkcEkypLCFHK2ak/5BMGMoFawVue5hcirQ5ZV5PjDGwSMt9nHw1uamWWuKnNq5g76AIg==
   dependencies:
     "@cozy/minilog" "^1.0.0"
     classnames "^2.2.6"
     copy-text-to-clipboard "^2.1.1"
     cozy-device-helper "^1.17.0"
-    cozy-doctypes "^1.83.5"
+    cozy-doctypes "^1.83.7"
     lodash "^4.17.19"
     react-autosuggest "^9.4.3"
     react-tooltip "^3.11.1"
@@ -3690,9 +3690,9 @@ localforage@1.7.3:
     lie "3.1.1"
 
 lodash-es@^4.2.1:
-  version "4.17.15"
-  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.15.tgz#21bd96839354412f23d7a10340e5eac6ee455d78"
-  integrity sha512-rlrc3yU3+JNOpZ9zj5pQtxnx2THmvRykwL4Xlxoa8I9lHBlVbbyPhgyPMioxVZ4NqyxaVVtaJnzsyOidQIhyyQ==
+  version "4.17.21"
+  resolved "https://registry.yarnpkg.com/lodash-es/-/lodash-es-4.17.21.tgz#43e626c46e6591b7750beb2b50117390c609e3ee"
+  integrity sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==
 
 lodash.camelcase@^4.3.0:
   version "4.3.0"
@@ -4326,7 +4326,7 @@ pako@~1.0.5:
   resolved "https://registry.yarnpkg.com/pako/-/pako-1.0.10.tgz#4328badb5086a426aa90f541977d4955da5c9732"
   integrity sha512-0DTvPVU3ed8+HNXOu5Bs+o//Mbdj9VNQMUOe9oKCwh8l0GNwpTDMKCWbRjgtD291AWnkAgkqA/LOnQS8AmS1tw==
 
-parcel@^1.12.3:
+parcel@1.12.3:
   version "1.12.3"
   resolved "https://registry.yarnpkg.com/parcel/-/parcel-1.12.3.tgz#1f1341589380f20be924f1dd67c7fed193b346ec"
   integrity sha512-j9XCVLeol9qZvGemRKt2z8bptbXq9LVy8/IzjqWQKMiKd8DR0NpDAlRHV0zyF72/J/UUTsdsrhnw6UGo9nGI+Q==
