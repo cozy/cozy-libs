@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.2](https://github.com/cozy/cozy-libs/compare/cozy-scanner@2.1.1...cozy-scanner@2.1.2) (2022-03-15)
+
+
+### Bug Fixes
+
+* Correct fr locales 'factures d'énergie' in cozy-scanner ([0ee2ef6](https://github.com/cozy/cozy-libs/commit/0ee2ef69b63b7425360792753e69db209c6a77f8))
+
+
+
+
+
 ## [2.1.1](https://github.com/cozy/cozy-libs/compare/cozy-scanner@2.1.0...cozy-scanner@2.1.1) (2022-02-18)
 
 
