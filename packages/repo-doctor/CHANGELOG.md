@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.6.3](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.6.2...@cozy/repo-doctor@0.6.3) (2022-03-18)
+
+
+### Bug Fixes
+
+* **deps:** update dependency eslint to v7.32.0 ([f8cda95](https://github.com/cozy/cozy-libs/commit/f8cda95fe3884fde1d98d53863f94e7371d0baf4))
+
+
+
+
+
 ## [0.6.2](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.6.1...@cozy/repo-doctor@0.6.2) (2022-02-18)
 
 
