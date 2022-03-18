@@ -32,7 +32,11 @@ class MattermostReporter {
       text: this.messages
         .map(x => {
           const symbol = symbolBySeverity[x.severity]
-          return `${x.type || ''} ${symbol || ''} ${x.message}`
+          if(!x.type || !symbol) {
+            return '\n' + `## ${x.message}` + '\n'+ '\n' + ' Rule | Symbol | State of the rule'
+            + '\n' + ' ---|:----:| -----'
+          }
+          return `${x.type || ''} | ${symbol || ''} | ${x.message}`
         })
         .join('\n')
     }
