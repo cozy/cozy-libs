@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.6.3...@cozy/repo-doctor@0.7.0) (2022-03-21)
+
+
+### Bug Fixes
+
+* **repo-doctor:** Send mattermost notif to front ([fb2163c](https://github.com/cozy/cozy-libs/commit/fb2163c5edac3dceb70005a78728926b77056e71))
+
+
+### Features
+
+* **repo-doctor:** Use table markdown to display mattermost report ([475aa0c](https://github.com/cozy/cozy-libs/commit/475aa0c982a2ee0a0a0e0c33fdfe4bdce75512fa))
+
+
+
+
+
 ## [0.6.3](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.6.2...@cozy/repo-doctor@0.6.3) (2022-03-18)
 
 
