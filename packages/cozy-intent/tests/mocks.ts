@@ -2,10 +2,12 @@ import { ChildHandshake, RemoteHandle } from 'post-me'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 
-import { WebviewMessenger } from '../api/services/WebviewMessenger'
-import { WebviewService } from '../api/services/WebviewService'
-import { WebviewWindow } from '../api/models/environments'
-import { NativeMethodsRegister } from 'api/models/methods'
+import {
+  NativeMethodsRegister,
+  WebviewMessenger,
+  WebviewService,
+  WebviewWindow
+} from '@api'
 
 export class MockWebviewMessenger extends WebviewMessenger {}
 
@@ -63,6 +65,9 @@ export const mockWebviewRef = {
 
 export const mockNativeMethods: NativeMethodsRegister = {
   backToHome: jest.fn(),
+  hideSplashScreen: jest.fn(),
   logout: jest.fn(),
-  openApp: jest.fn()
+  openApp: jest.fn(),
+  setFlagshipUI: jest.fn(),
+  showSplashScreen: jest.fn()
 }

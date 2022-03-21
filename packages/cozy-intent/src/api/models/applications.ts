@@ -1,4 +1,4 @@
-import { WebviewService } from '../../api/services/WebviewService'
+import { WebviewService } from '@api'
 
 /** App's description resulting of its manifest.webapp file */
 export interface AppManifest {

@@ -1,13 +1,15 @@
 import { ParentHandshake } from 'post-me'
 
-import { NativeMessenger } from '../services/NativeMessenger'
-import { NativeMethodsRegister } from '../models/methods'
-import { NativeService } from './NativeService'
-import { ParsedNativeEvent } from '../models/events'
-import { WebviewRef } from '../models/environments'
-import { interpolate } from '../../utils'
-import { mockNativeMethods } from '../../tests/mocks'
-import { strings } from '../constants'
+import {
+  NativeMessenger,
+  NativeMethodsRegister,
+  NativeService,
+  ParsedNativeEvent,
+  WebviewRef,
+  strings
+} from '@api'
+import { interpolate } from '@utils'
+import { mockNativeMethods } from '@tests'
 
 jest.mock('post-me', () => ({
   ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
@@ -39,7 +41,10 @@ describe('NativeService', () => {
     const nativeMethods: NativeMethodsRegister = {
       backToHome: jest.fn(),
       logout: jest.fn(),
-      openApp: jest.fn()
+      openApp: jest.fn(),
+      hideSplashScreen: jest.fn(),
+      setFlagshipUI: jest.fn(),
+      showSplashScreen: jest.fn()
     }
 
     const webviewRef: WebviewRef = {
@@ -77,7 +82,10 @@ describe('NativeService', () => {
       const nativeMethods: NativeMethodsRegister = {
         backToHome: jest.fn(),
         logout: jest.fn(),
-        openApp: jest.fn()
+        openApp: jest.fn(),
+        hideSplashScreen: jest.fn(),
+        setFlagshipUI: jest.fn(),
+        showSplashScreen: jest.fn()
       }
 
       const webviewRef: WebviewRef = {
@@ -100,7 +108,10 @@ describe('NativeService', () => {
       const nativeMethods: NativeMethodsRegister = {
         backToHome: jest.fn(),
         logout: jest.fn(),
-        openApp: jest.fn()
+        openApp: jest.fn(),
+        hideSplashScreen: jest.fn(),
+        setFlagshipUI: jest.fn(),
+        showSplashScreen: jest.fn()
       }
 
       const webviewRef: WebviewRef = {
@@ -129,7 +140,10 @@ describe('NativeService', () => {
       const nativeMethods: NativeMethodsRegister = {
         backToHome: jest.fn(),
         logout: jest.fn(),
-        openApp: jest.fn()
+        openApp: jest.fn(),
+        hideSplashScreen: jest.fn(),
+        setFlagshipUI: jest.fn(),
+        showSplashScreen: jest.fn()
       }
 
       const webviewRef: WebviewRef = {

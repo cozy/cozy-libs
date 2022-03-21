@@ -1,6 +1,7 @@
 {
   "include": [
-    "src/**/*"
+    "src/**/*",
+    "tests"
   ],
   "exclude": [
     "node_modules",
@@ -25,6 +26,12 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
+    "paths": {
+      "@api": ["api"],
+      "@utils": ["utils"],
+      "@view": ["view"],
+      "@tests": ["../tests"]
+    },
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true,

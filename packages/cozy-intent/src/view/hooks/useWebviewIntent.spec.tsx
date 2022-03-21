@@ -1,10 +1,9 @@
 import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { WebviewContext } from '../contexts/WebviewContext'
-import { WebviewService } from '../../api/services/WebviewService'
-import { mockConnection } from '../../tests/mocks'
-import { useWebviewIntent } from './useWebviewIntent'
+import { WebviewContext, useWebviewIntent } from '@view'
+import { WebviewService } from '@api'
+import { mockConnection } from '@tests'
 
 jest.mock('cozy-device-helper', () => ({
   isFlagshipApp: jest.fn(() => true)

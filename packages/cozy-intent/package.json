@@ -16,6 +16,7 @@
     "@babel/core": "7.16.12",
     "@testing-library/react": "10.4.9",
     "@testing-library/react-hooks": "7.0.2",
+    "babel-plugin-module-resolver": "^4.1.0",
     "babel-preset-cozy-app": "^2.0.2",
     "cozy-device-helper": "^1.17.0",
     "cozy-logger": "^1.9.0",
@@ -47,13 +48,12 @@
     "directory": "packages/cozy-intent"
   },
   "scripts": {
-    "build": "rm -rf ./dist && yarn build:types && babel --extensions .ts,.tsx --ignore 'src/tests','**/*.spec.tsx','**/*.spec.ts' ./src -d ./dist --copy-files --no-copy-ignored",
+    "build": "yarn build:clean && yarn build:types && babel --extensions .ts,.tsx --ignore '**/*.spec.tsx','**/*.spec.ts' ./src -d ./dist --copy-files --no-copy-ignored",
+    "build:clean": "rm -rf ./dist",
     "build:types": "tsc -p tsconfig-build.json",
     "build:watch": "yarn build --watch",
-    "lint": "eslint . --ext .ts,.tsx",
-    "lint:fix": "yarn lint --fix",
     "prepublishOnly": "yarn build",
-    "test": "jest --config=./src/tests/jest.config.js",
+    "test": "jest --config=./tests/jest.config.js",
     "test:watch": "yarn test --watchAll"
   },
   "types": "./dist/index.d.ts"

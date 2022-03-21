@@ -1,6 +1,6 @@
 import { Connection, EventsType, MethodsType, RemoteHandle } from 'post-me'
 
-import { NativeMethodsRegister } from '../models/methods'
+import { NativeMethodsRegister } from '@api'
 
 export class WebviewService {
   private close: () => void
