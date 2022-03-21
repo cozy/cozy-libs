@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.8.7](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.8.6...cozy-flags@2.8.7) (2022-03-21)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jest-localstorage-mock to v2.4.19 ([361279c](https://github.com/cozy/cozy-libs/commit/361279c40191fb635682cf40221cead8e34ebc51))
+
+
+
+
+
 ## [2.8.6](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.8.5...cozy-flags@2.8.6) (2022-03-01)
 
 
