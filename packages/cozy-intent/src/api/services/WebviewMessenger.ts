@@ -1,7 +1,6 @@
 import { Messenger } from 'post-me'
 
-import { MessageListener, ListenerRemover } from '../models/messengers'
-import { WebviewWindow } from '../models/environments'
+import { ListenerRemover, MessageListener, WebviewWindow } from '@api'
 
 export class WebviewMessenger implements Messenger {
   private windowRef: WebviewWindow

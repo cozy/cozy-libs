@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { WebviewService } from '../../api/services/WebviewService'
+import { WebviewService } from '@api'
 
-export const WebviewContext = React.createContext<WebviewService | void>(
+export const WebviewContext = React.createContext<WebviewService | undefined>(
   undefined
 )

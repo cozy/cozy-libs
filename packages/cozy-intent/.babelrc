@@ -1,3 +1,13 @@
 {
-  "presets": ["cozy-app"]
+  "presets": ["cozy-app"],
+  "plugins": [
+    ["module-resolver", {
+      "root": ["./src"],
+      "alias": {
+        "api": "./api",
+        "utils": "./utils",
+        "view": "./view"
+      }
+    }]
+  ]
 }

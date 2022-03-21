@@ -1,12 +1,15 @@
 import { Connection, ParentHandshake } from 'post-me'
 
-import { MessengerRegister } from '../models/messengers'
-import { NativeEvent, ParsedNativeEvent } from '../models/events'
-import { NativeMessenger } from '../services/NativeMessenger'
-import { NativeMethodsRegister } from '../models/methods'
-import { WebviewRef } from '../models/environments'
-import { interpolate } from '../../utils'
-import { strings } from '../constants'
+import {
+  MessengerRegister,
+  NativeEvent,
+  NativeMessenger,
+  NativeMethodsRegister,
+  ParsedNativeEvent,
+  WebviewRef,
+  strings
+} from '@api'
+import { interpolate } from '@utils'
 
 export class NativeService {
   private readonly messengerService: typeof NativeMessenger

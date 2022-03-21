@@ -2,10 +2,8 @@ import 'mutationobserver-shim'
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import { CozyBar } from '../../api/models/applications'
-import { WebviewIntentProvider } from './WebviewIntentProvider'
-import { WebviewService } from '../../api/services/WebviewService'
-import { WebviewWindow } from '../../api/models/environments'
+import { CozyBar, WebviewService, WebviewWindow } from '@api'
+import { WebviewIntentProvider } from '@view'
 import {
   mockChildHandshake,
   mockConnection,
@@ -14,7 +12,10 @@ import {
   mockSetWebviewContext,
   mockWebviewService,
   mockWebviewWindow
-} from '../../tests/mocks'
+} from '@tests'
+
+// We don't want to see logs in node console
+jest.mock('../../utils', () => ({ log: jest.fn() }))
 
 // eslint-disable-next-line no-global-assign
 window = mockWebviewWindow()

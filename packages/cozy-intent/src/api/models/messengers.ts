@@ -1,5 +1,6 @@
 import { Connection } from 'post-me'
-import { NativeMessenger } from '../services/NativeMessenger'
+
+import { NativeMessenger } from '@api'
 
 export interface MessengerRegister {
   id: { connection: Connection; messenger: NativeMessenger }

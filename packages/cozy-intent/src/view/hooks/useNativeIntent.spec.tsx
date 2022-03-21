@@ -1,11 +1,9 @@
 import React from 'react'
 import { renderHook } from '@testing-library/react-hooks'
 
-import { NativeContext } from '../contexts/NativeContext'
-import { NativeService } from '../../api/services/NativeService'
-import { mockNativeMethods } from '../../tests/mocks'
-import { strings } from '../../api/constants'
-import { useNativeIntent } from './useNativeIntent'
+import { NativeContext, useNativeIntent } from '@view'
+import { NativeService, strings } from '@api'
+import { mockNativeMethods } from '@tests'
 
 describe('useNativeIntent', () => {
   it('Should throw if the context does not exist', () => {

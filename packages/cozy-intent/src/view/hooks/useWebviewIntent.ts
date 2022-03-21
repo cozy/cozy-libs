@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
-import { WebviewContext } from '../contexts/WebviewContext'
-import { WebviewService } from '../../api/services/WebviewService'
+import { WebviewContext } from '@view'
+import { WebviewService } from '@api'
 
-export const useWebviewIntent = (): WebviewService | void =>
+export const useWebviewIntent = (): WebviewService | undefined =>
   useContext(WebviewContext)

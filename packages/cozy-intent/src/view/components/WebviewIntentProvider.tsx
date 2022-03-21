@@ -3,13 +3,16 @@ import { Connection, ChildHandshake } from 'post-me'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 
-import { CozyBar } from '../../api/models/applications'
-import { WebviewConnection, WebviewWindow } from '../../api/models/environments'
-import { WebviewContext } from '../contexts/WebviewContext'
-import { WebviewMessenger } from '../../api/services/WebviewMessenger'
-import { WebviewService } from '../../api/services/WebviewService'
-import { log } from '../../utils'
-import { strings } from '../../api/constants'
+import {
+  CozyBar,
+  WebviewConnection,
+  WebviewMessenger,
+  WebviewService,
+  WebviewWindow,
+  strings
+} from '@api'
+import { WebviewContext } from '@view'
+import { log } from '@utils'
 
 declare const cozy: CozyBar | undefined
 
@@ -81,7 +84,9 @@ export const WebviewIntentProvider = ({
   webviewService
 }: Props): ReactElement => {
   const [connection, setConnection] = useState<WebviewConnection>()
-  const [service, setService] = useState<WebviewService | void>(webviewService)
+  const [service, setService] = useState<WebviewService | undefined>(
+    webviewService
+  )
   const setBarWebviewContext = setBarContext || getBarInitAPI()
 
   useEffect(() => {
