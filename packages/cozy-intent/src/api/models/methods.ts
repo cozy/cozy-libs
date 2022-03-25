@@ -4,7 +4,7 @@ export type NativeMethodsRegister = {
   backToHome: () => void
   hideSplashScreen: () => void
   logout: () => void
-  openApp: (href: string, app: AppManifest) => void
+  openApp: (href: string, app: AppManifest, iconParams?: DOMRect) => void
   setFlagshipUI: (flagshipUI: FlagshipUI) => void
   showSplashScreen: () => void
 }
