@@ -7,9 +7,9 @@ import {
   ParsedNativeEvent,
   WebviewRef,
   strings
-} from '@api'
-import { interpolate } from '@utils'
-import { mockNativeMethods } from '@tests'
+} from '../../api'
+import { interpolate } from '../../utils'
+import { mockNativeMethods } from '../../../tests'
 
 jest.mock('post-me', () => ({
   ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))

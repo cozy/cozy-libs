@@ -7,7 +7,7 @@ import {
   WebviewMessenger,
   WebviewService,
   WebviewWindow
-} from '@api'
+} from '../src/api'
 
 export class MockWebviewMessenger extends WebviewMessenger {}
 

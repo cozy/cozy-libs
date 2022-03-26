@@ -1,6 +1,6 @@
 import { Connection, EventsType, MethodsType } from 'post-me'
 
-import { NativeMethodsRegister } from '@api'
+import { NativeMethodsRegister } from '../../api'
 
 export interface WebviewRef {
   injectJavaScript: (data: string) => void
