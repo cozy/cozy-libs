@@ -8,8 +8,8 @@ import {
   ParsedNativeEvent,
   WebviewRef,
   strings
-} from '@api'
-import { interpolate } from '@utils'
+} from '../../api'
+import { interpolate } from '../../utils'
 
 export class NativeService {
   private readonly messengerService: typeof NativeMessenger

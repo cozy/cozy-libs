@@ -1,7 +1,7 @@
 import React, { ReactElement } from 'react'
 
-import { NativeContext } from '@view'
-import { NativeMethodsRegister, NativeService } from '@api'
+import { NativeContext } from '../../view'
+import { NativeMethodsRegister, NativeService } from '../../api'
 
 interface Props {
   children: React.ReactChild

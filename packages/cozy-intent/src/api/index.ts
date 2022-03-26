@@ -1,4 +1,5 @@
-export * from './constants'
+export * from './constants/numbers'
+export * from './constants/strings'
 export * from './models/applications'
 export * from './models/environments'
 export * from './models/events'

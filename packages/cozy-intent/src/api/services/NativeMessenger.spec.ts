@@ -1,5 +1,5 @@
-import { NativeMessenger, strings } from '@api'
-import { mockWebviewRef } from '@tests'
+import { NativeMessenger, strings } from '../../api'
+import { mockWebviewRef } from '../../../tests'
 
 describe('NativeMessenger', () => {
   afterEach(() => {

@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 
-import { NativeContext } from '@view'
-import { NativeService, strings } from '@api'
+import { NativeContext } from '../../view'
+import { NativeService, strings } from '../../api'
 
 export const useNativeIntent = (): NativeService => {
   const context = useContext(NativeContext)

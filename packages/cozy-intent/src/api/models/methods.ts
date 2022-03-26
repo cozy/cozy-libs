@@ -1,4 +1,4 @@
-import { AppManifest, FlagshipUI } from '@api'
+import { AppManifest, FlagshipUI } from '../../api'
 
 export type NativeMethodsRegister = {
   backToHome: () => void

@@ -10,9 +10,9 @@ import {
   WebviewService,
   WebviewWindow,
   strings
-} from '@api'
-import { WebviewContext } from '@view'
-import { log } from '@utils'
+} from '../../api'
+import { WebviewContext } from '../../view'
+import { log } from '../../utils'
 
 declare const cozy: CozyBar | undefined
 

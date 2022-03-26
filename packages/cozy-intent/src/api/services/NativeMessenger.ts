@@ -6,7 +6,7 @@ import {
   ParsedNativeEvent,
   WebviewRef,
   strings
-} from '@api'
+} from '../../api'
 
 export class NativeMessenger implements Messenger {
   private injectJavaScript: (data: string) => void
