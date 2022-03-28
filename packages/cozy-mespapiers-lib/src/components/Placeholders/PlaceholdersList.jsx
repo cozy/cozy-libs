@@ -2,6 +2,7 @@ import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { useHistory } from 'react-router-dom'
+import { makeStyles } from '@material-ui/core/styles'
 
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -18,7 +19,27 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
-import './PlaceholdersList.styl'
+
+const useStyles = makeStyles(() => ({
+  placeholderList: {
+    minHeight: '15rem'
+  },
+  actionMenu: {
+    position: 'absolute',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+
+    '& >div:first-child': {
+      position: 'relative !important',
+      transform: 'none !important'
+    }
+  }
+}))
 
 const PlaceholdersList = ({ currentQualifItems }) => {
   const [isImportDropdownDisplayed, setIsImportDropdownDisplayed] =
@@ -26,6 +47,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const [placeholderSelected, setPlaceholderSelected] = useState(null)
   const { papersDefinitions } = usePapersDefinitions()
   const history = useHistory()
+  const styles = useStyles()
 
   const scannerT = useScannerI18n()
   const allPlaceholders = useMemo(
@@ -52,7 +74,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
   return (
     <>
-      <List className="placeholder-list">
+      <List className={styles.placeholderList}>
         {allPlaceholders.map((placeholder, idx) => {
           const stepsExists =
             placeholder.acquisitionSteps.length > 0 ||
@@ -92,7 +114,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
         })}
       </List>
       <ActionMenuImportDropdown
-        className={'action-menu'}
+        className={styles.actionMenu}
         isOpened={shouldDisplayImportDropdown()}
         placeholder={placeholderSelected}
         onClose={hideImportDropdown}
