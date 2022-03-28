@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.13.5](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.13.4...cozy-intent@1.13.5) (2022-03-28)
+
+
+### Bug Fixes
+
+* Rollback path aliases ([7099de3](https://github.com/cozy/cozy-libs/commit/7099de30a0ddf708f188a24a4bfa502e4a255644))
+
+
+
+
+
 ## [1.13.4](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.13.3...cozy-intent@1.13.4) (2022-03-25)
 
 **Note:** Version bump only for package cozy-intent
