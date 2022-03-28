@@ -5,7 +5,7 @@ import flag from 'cozy-flags'
 import FlagSwitcher from 'cozy-flags/dist/FlagSwitcher'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n, I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import { StepperDialogProvider } from './Contexts/StepperDialogProvider'
@@ -46,17 +46,21 @@ const App = () => {
   )
 }
 
-const MesPapiersLib = () => {
+const MesPapiersLib = ({ lang }) => {
+  const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
+
   return (
-    <ScannerI18nProvider>
-      <PapersDefinitionsProvider>
-        <StepperDialogProvider>
-          <ModalProvider>
-            <App />
-          </ModalProvider>
-        </StepperDialogProvider>
-      </PapersDefinitionsProvider>
-    </ScannerI18nProvider>
+    <I18n lang={lang} polyglot={polyglot}>
+      <ScannerI18nProvider>
+        <PapersDefinitionsProvider>
+          <StepperDialogProvider>
+            <ModalProvider>
+              <App />
+            </ModalProvider>
+          </StepperDialogProvider>
+        </PapersDefinitionsProvider>
+      </ScannerI18nProvider>
+    </I18n>
   )
 }
 
