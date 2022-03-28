@@ -16,7 +16,8 @@ import {
   raiseErrorAfterAttempts,
   timeBeforeSuccessful,
   baseWaitAfterFirstFailure,
-  maxWaitBetweenRetries
+  maxWaitBetweenRetries,
+  closeIfHiddenFor
 } from './config'
 
 /**
@@ -659,7 +660,19 @@ class CozyRealtime {
   onVisibilityChange() {
     if (document.visibilityState && document.visibilityState === 'visible') {
       // if we have a reconnect waiting, do it immediatly
+      if (this.visibilityTimeout) {
+        clearTimeout(this.visibilityTimeout)
+        this.visibilityTimeout = null
+      }
       this.retryManager.stopCurrentAttemptWaitingTime()
+    } else {
+      if (!this.visibilityTimeout) {
+        this.visibilityTimeout = setTimeout(() => {
+          if (this.hasWebSocket()) {
+            this.revokeWebSocket()
+          }
+        }, closeIfHiddenFor)
+      }
     }
   }
 }
