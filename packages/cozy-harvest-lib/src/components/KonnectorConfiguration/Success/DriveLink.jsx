@@ -15,7 +15,7 @@ const DriveLink = memo(({ folderId, client, t }) => {
 
   if (fetchStatus === 'loaded') {
     return (
-      <AppLinker slug={slug} href={url} nativePath={path}>
+      <AppLinker app={{ slug }} href={url} nativePath={path}>
         {({ href, name }) => (
           <ButtonLink
             icon={OpenwithIcon}

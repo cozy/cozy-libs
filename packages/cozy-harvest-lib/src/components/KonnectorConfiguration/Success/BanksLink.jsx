@@ -15,7 +15,7 @@ const BanksLinkRedirectStore = ({ client, t }) => {
 
   if (fetchStatus === 'loaded') {
     return (
-      <AppLinker slug={slug} href={url}>
+      <AppLinker app={{ slug }} href={url}>
         {({ href, name }) => (
           <ButtonLink
             icon={OpenwithIcon}
