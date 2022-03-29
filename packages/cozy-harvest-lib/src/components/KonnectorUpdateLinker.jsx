@@ -9,11 +9,18 @@ import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 import { Application } from 'cozy-doctypes'
 import { appsConn } from '../connections/apps'
 
-const KonnectorUpdateButton = ({ disabled, isBlocking, href, label }) => (
+const KonnectorUpdateButton = ({
+  disabled,
+  isBlocking,
+  href,
+  onClick,
+  label
+}) => (
   <ButtonLink
     disabled={disabled}
     className="u-m-0"
     href={href}
+    onClick={onClick}
     icon={EyeIcon}
     label={label}
     theme={isBlocking ? 'danger' : 'secondary'}
@@ -30,12 +37,13 @@ const KonnectorUpdateLinker = ({ label, isBlocking, konnector }) => {
 
   return isReady ? (
     <AppLinker app={{ slug: 'store' }} href={konnectorUpdateUrl}>
-      {({ href }) => {
+      {({ onClick, href }) => {
         return (
           <KonnectorUpdateButton
             href={href}
             isBlocking={isBlocking}
             label={label}
+            onClick={onClick}
           />
         )
       }}

@@ -16,13 +16,14 @@ const DriveLink = memo(({ folderId, client, t }) => {
   if (fetchStatus === 'loaded') {
     return (
       <AppLinker app={{ slug }} href={url} nativePath={path}>
-        {({ href, name }) => (
+        {({ href, name, onClick }) => (
           <ButtonLink
             icon={OpenwithIcon}
             href={href}
             label={t('account.success.driveLinkText', {
               appName: name
             })}
+            onClick={onClick}
             subtle
           />
         )}
