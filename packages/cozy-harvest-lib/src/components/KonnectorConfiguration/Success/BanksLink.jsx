@@ -16,13 +16,14 @@ const BanksLinkRedirectStore = ({ client, t }) => {
   if (fetchStatus === 'loaded') {
     return (
       <AppLinker app={{ slug }} href={url}>
-        {({ href, name }) => (
+        {({ href, name, onClick }) => (
           <ButtonLink
             icon={OpenwithIcon}
             href={href}
             label={t('account.success.banksLinkText', {
               appName: name
             })}
+            onClick={onClick}
             subtle
           />
         )}
