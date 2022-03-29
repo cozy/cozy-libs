@@ -25,7 +25,7 @@ export const AppLinkButton = ({ slug, path }) => {
     path
   )
   return (
-    <AppLinker slug={slug} nativePath={path} href={url || '#'}>
+    <AppLinker app={{ slug }} nativePath={path} href={url || '#'}>
       {({ onClick, href }) => (
         <ButtonLink
           onClick={fetchStatus !== 'loaded' ? onClick : null}

@@ -29,7 +29,7 @@ const KonnectorUpdateLinker = ({ label, isBlocking, konnector }) => {
   const isReady = isLoaded && konnectorUpdateUrl
 
   return isReady ? (
-    <AppLinker slug="store" href={konnectorUpdateUrl}>
+    <AppLinker app={{ slug: 'store' }} href={konnectorUpdateUrl}>
       {({ href }) => {
         return (
           <KonnectorUpdateButton

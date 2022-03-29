@@ -85,7 +85,7 @@ const KonnectorSuggestionModal = ({
               </Typography>
             )}
             <AppLinker
-              slug={storeAppName}
+              app={{ slug: storeAppName }}
               nativePath={nativePath}
               href={generateWebLink({
                 cozyUrl: cozyURL.origin,
