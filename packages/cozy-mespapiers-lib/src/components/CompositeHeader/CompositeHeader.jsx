@@ -1,4 +1,4 @@
-import React, { useState, useEffect, isValidElement } from 'react'
+import React, { isValidElement } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import isArray from 'lodash/isArray'
@@ -7,6 +7,52 @@ import { makeStyles } from '@material-ui/core/styles'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
+
+import IlluCovidVaccineCertificate from '../../assets/images/IlluCovidVaccineCertificate.png'
+import IlluDiploma from '../../assets/images/IlluDiploma.png'
+import IlluDriverLicenseBack from '../../assets/images/IlluDriverLicenseBack.png'
+import IlluDriverLicenseFront from '../../assets/images/IlluDriverLicenseFront.png'
+import IlluDriverLicenseNumberHelp from '../../assets/images/IlluDriverLicenseNumberHelp.png'
+import IlluDriverLicenseObtentionDateHelp from '../../assets/images/IlluDriverLicenseObtentionDateHelp.png'
+import IlluIBAN from '../../assets/images/IlluIBAN.png'
+import IlluIdCardBack from '../../assets/images/IlluIdCardBack.png'
+import IlluIdCardExpirationDateHelp from '../../assets/images/IlluIdCardExpirationDateHelp.png'
+import IlluIdCardFront from '../../assets/images/IlluIdCardFront.png'
+import IlluIdCardNumberHelp from '../../assets/images/IlluIdCardNumberHelp.png'
+import IlluInvoice from '../../assets/images/IlluInvoice.png'
+import IlluResidencePermitBack from '../../assets/images/IlluResidencePermitBack.png'
+import IlluResidencePermitExpirationDateHelp from '../../assets/images/IlluResidencePermitExpirationDateHelp.png'
+import IlluResidencePermitFront from '../../assets/images/IlluResidencePermitFront.png'
+import IlluResidencePermitNumberHelp from '../../assets/images/IlluResidencePermitNumberHelp.png'
+import IlluVehicleRegistration from '../../assets/images/IlluVehicleRegistration.png'
+import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
+import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
+import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
+import Account from '../../assets/icons/Account.svg'
+
+const images = {
+  IlluCovidVaccineCertificate,
+  IlluDiploma,
+  IlluDriverLicenseBack,
+  IlluDriverLicenseFront,
+  IlluDriverLicenseNumberHelp,
+  IlluDriverLicenseObtentionDateHelp,
+  IlluIBAN,
+  IlluIdCardBack,
+  IlluIdCardExpirationDateHelp,
+  IlluIdCardFront,
+  IlluIdCardNumberHelp,
+  IlluInvoice,
+  IlluResidencePermitBack,
+  IlluResidencePermitExpirationDateHelp,
+  IlluResidencePermitFront,
+  IlluResidencePermitNumberHelp,
+  IlluVehicleRegistration,
+  IlluGenericInputDate,
+  IlluGenericInputText,
+  IlluGenericNewPage,
+  Account
+}
 
 const useStyles = makeStyles(() => ({
   container: {
@@ -38,13 +84,20 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const CompositeHeaderImage = ({ isBitmap, src, iconSize }) => {
+const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize }) => {
   const styles = useStyles()
 
-  return isBitmap ? (
-    <img src={src} alt="illustration" />
-  ) : (
+  const iconName = icon.split('.')[0]
+  const src = images[iconName] || fallbackIcon
+  const isBitmap = typeof src === 'string' && !src.endsWith('.svg')
+
+  if (isBitmap) {
+    return <img data-testid={src} src={src} alt="illustration" />
+  }
+
+  return (
     <div
+      data-testid={src}
       className={cx('u-pb-1', {
         [`${styles.image}--${iconSize}`]: iconSize
       })}
@@ -64,36 +117,16 @@ const CompositeHeader = ({
   className,
   ...restProps
 }) => {
-  const [imgScr, setImgSrc] = useState(null)
   const { isMobile } = useBreakpoints()
   const styles = useStyles()
 
-  const isPNG = icon && icon.endsWith('.png')
-  const subFolder = isPNG ? 'images' : 'icons'
-
-  useEffect(() => {
-    let isMounted = true
-    ;(async () => {
-      let src = await import(`../../assets/${subFolder}/${icon}`).catch(() => ({
-        default: fallbackIcon
-      }))
-      isMounted && setImgSrc(src.default)
-    })()
-
-    return () => {
-      isMounted = false
-    }
-  }, [icon, fallbackIcon, subFolder])
-
   return (
     <div className={cx(styles.container, className)} {...restProps}>
-      {imgScr && (
-        <CompositeHeaderImage
-          isBitmap={isPNG}
-          src={imgScr}
-          iconSize={iconSize}
-        />
-      )}
+      <CompositeHeaderImage
+        icon={icon}
+        fallbackIcon={fallbackIcon}
+        iconSize={iconSize}
+      />
       {Title &&
         (isValidElement(Title) ? (
           Title
@@ -123,7 +156,7 @@ const CompositeHeader = ({
 }
 
 CompositeHeader.propTypes = {
-  icon: iconPropType,
+  icon: iconPropType.isRequired,
   fallbackIcon: iconPropType,
   iconSize: PropTypes.oneOf(['small', 'medium', 'large']),
   title: PropTypes.oneOfType([PropTypes.string, PropTypes.object]).isRequired,
