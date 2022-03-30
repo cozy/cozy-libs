@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react'
 
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import StepperDialog from '../StepperDialog/StepperDialog'
 import StepperDialogContent from '../StepperDialog/StepperDialogContent'
 
 const StepperDialogWrapper = ({ onClose }) => {
+  const { isMobile } = useBreakpoints()
   const scannerT = useScannerI18n()
   const {
     allCurrentSteps,
@@ -21,11 +24,18 @@ const StepperDialogWrapper = ({ onClose }) => {
     }
   }, [resetStepperDialog])
 
+  const handleBack = () => {
+    if (currentStepIndex > 1) {
+      return previousStep
+    }
+    return isMobile ? onClose : undefined
+  }
+
   return (
     <StepperDialog
       open
       onClose={onClose}
-      onBack={currentStepIndex > 1 ? previousStep : undefined}
+      onBack={handleBack()}
       title={stepperDialogTitle && scannerT(`items.${stepperDialogTitle}`)}
       content={<StepperDialogContent onClose={onClose} />}
       stepper={`${currentStepIndex}/${allCurrentSteps.length}`}
