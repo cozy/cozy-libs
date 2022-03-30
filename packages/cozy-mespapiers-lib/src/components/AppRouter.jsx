@@ -1,5 +1,11 @@
 import React from 'react'
-import { Switch, Redirect, HashRouter } from 'react-router-dom'
+import {
+  Switch,
+  Route,
+  Redirect,
+  HashRouter,
+  useLocation
+} from 'react-router-dom'
 
 import Home from './Home/Home'
 import Onboarding from './Onboarding/Onboarding'
@@ -25,41 +31,60 @@ const routes = [
   {
     path: '/paper/onboarding',
     component: Onboarding
-  },
-  {
-    path: '/paper/create',
-    component: PlaceholderThemesListModal
-  },
-  {
-    path: '/paper/create/:qualificationLabel',
-    render: props => {
-      const {
-        location: { search },
-        history
-      } = props
-      const isDeepBack = search.includes('deepBack')
-      const onClose = () => history.go(isDeepBack ? -2 : -1)
-
-      return <CreatePaperModal {...props} onClose={onClose} />
-    }
   }
 ]
 
-export const AppRouter = () => {
+const Routes = () => {
+  const location = useLocation()
+  const backgroundPath = new URLSearchParams(location.search).get(
+    'backgroundPath'
+  )
+  const background = backgroundPath ? { pathname: backgroundPath } : null
+
   return (
-    <HashRouter>
-      <Switch>
+    <>
+      <Switch location={background || location}>
         {routes.map((route, idx) => (
           <OnboardedGuardedRoute
             key={idx}
             exact
             path={route.path}
             component={route.component}
-            render={route.render}
           />
         ))}
         <Redirect from="*" to="/paper" />
       </Switch>
+      {background && (
+        <>
+          <Route
+            exact
+            path={'/paper/create'}
+            component={PlaceholderThemesListModal}
+          />
+          <Route
+            exact
+            path={'/paper/create/:qualificationLabel'}
+            render={props => {
+              const {
+                location: { search },
+                history
+              } = props
+              const isDeepBack = search.includes('deepBack')
+              const onClose = () => history.go(isDeepBack ? -2 : -1)
+
+              return <CreatePaperModal {...props} onClose={onClose} />
+            }}
+          />
+        </>
+      )}
+    </>
+  )
+}
+
+export const AppRouter = () => {
+  return (
+    <HashRouter>
+      <Routes />
     </HashRouter>
   )
 }
