@@ -6,7 +6,7 @@ import AppLike from '../../../test/components/AppLike'
 import Contact from './Contact'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 
-const mockCurrentStep = { illustration: 'illu.svg', text: 'text of step' }
+const mockCurrentStep = { illustration: 'Account.svg', text: 'text of step' }
 
 const setup = () => {
   const client = {
