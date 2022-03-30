@@ -7,7 +7,6 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import PaperGroup from '../Papers/PaperGroup'
-import { PapersFab } from '../PapersFab/PapersFab'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { getAllQualificationLabel } from '../../helpers/queries'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
@@ -68,7 +67,6 @@ const Home = () => {
         <PaperGroup allPapersByCategories={allPapersByCategories} />
       )}
       <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
-      <PapersFab />
     </>
   ) : (
     <Spinner

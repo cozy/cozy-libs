@@ -19,7 +19,6 @@ import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import { getContactByIds, getPapersByLabel } from '../../helpers/queries'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
-import { PapersFab } from '../PapersFab/PapersFab'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildPaperslistByContact } from '../../helpers/buildPaperslistByContact'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
@@ -120,7 +119,6 @@ const PapersListWrapper = ({ history, match }) => {
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
         />
       )}
-      <PapersFab />
     </>
   )
 }
