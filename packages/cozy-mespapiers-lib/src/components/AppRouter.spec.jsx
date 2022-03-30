@@ -31,6 +31,7 @@ jest.mock('./Viewer/FileViewerWithQuery', () => () => (
   <div data-testid="FileViewerWithQuery" />
 ))
 jest.mock('react-router-dom', () => ({
+  useLocation: jest.fn(() => ({ search: '' })),
   useHistory: jest.fn(() => ({ goBack: jest.fn() })),
   HashRouter: ({ children }) => <div data-testid="HashRouter">{children}</div>,
   Redirect: ({ children }) => <div data-testid="Redirect">{children}</div>,

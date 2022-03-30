@@ -2,6 +2,7 @@ import React from 'react'
 import { useHistory } from 'react-router-dom'
 import { makeStyles } from '@material-ui/styles'
 
+import { useLocation } from 'react-router-dom'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -22,10 +23,12 @@ export const PapersFab = () => {
   const { isDesktop } = useBreakpoints()
   const classes = useStyles(isDesktop)
   const history = useHistory()
+  const { pathname } = useLocation()
 
   const handleClick = () => {
     history.push({
-      pathname: `/paper/create`
+      pathname: `/paper/create`,
+      search: `backgroundPath=${pathname}`
     })
   }
 

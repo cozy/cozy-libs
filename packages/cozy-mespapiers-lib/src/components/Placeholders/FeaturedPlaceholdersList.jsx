@@ -1,7 +1,7 @@
 import React, { useCallback, useState, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -24,6 +24,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   const [isImportDropdownDisplayed, setIsImportDropdownDisplayed] =
     useState(false)
   const history = useHistory()
+  const location = useLocation()
   const hideImportDropdown = useCallback(
     () => setIsImportDropdownDisplayed(false),
     []
@@ -57,7 +58,10 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
           onClose={hideImportDropdown}
           anchorElRef={actionBtnRef}
           onClick={() =>
-            history.push({ pathname: `/paper/create/${placeholder.label}` })
+            history.push({
+              pathname: `/paper/create/${placeholder.label}`,
+              search: `backgroundPath=${location.pathname}`
+            })
           }
         />
       </div>
