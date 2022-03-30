@@ -17,6 +17,7 @@ const useStyles = makeStyles({
 
 const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   const [placeholder, setPlaceholder] = useState(null)
+  const actionBtnRefs = useRef([])
   const actionBtnRef = useRef()
   const classes = useStyles()
   const { isMobile } = useBreakpoints()
@@ -30,7 +31,8 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
     []
   )
 
-  const showImportDropdown = placeholder => {
+  const showImportDropdown = idx => placeholder => {
+    actionBtnRef.current = actionBtnRefs.current[idx]
     setIsImportDropdownDisplayed(true)
     setPlaceholder(placeholder)
   }
@@ -46,10 +48,10 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
         {featuredPlaceholders.map((placeholder, idx) => (
           <Placeholder
             key={idx}
-            ref={actionBtnRef}
+            ref={el => (actionBtnRefs.current[idx] = el)}
             placeholder={placeholder}
             divider={idx !== featuredPlaceholders.length - 1}
-            onClick={showImportDropdown}
+            onClick={showImportDropdown(idx)}
           />
         ))}
         <ActionMenuImportDropdown
