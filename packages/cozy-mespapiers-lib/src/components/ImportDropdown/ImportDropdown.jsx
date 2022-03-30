@@ -1,5 +1,7 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
+import { makeStyles } from '@material-ui/core/styles'
 
 import { useClient, generateWebLink } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -19,6 +21,21 @@ import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import Konnector from '../../assets/icons/Konnectors.svg'
 
+const useStyles = makeStyles(theme => ({
+  disabledItem: {
+    cursor: 'default',
+    '&:hover': {
+      backgroundColor: 'initial'
+    }
+  },
+  disabledIcon: {
+    fill: theme.palette.text.disabled
+  },
+  disabledTypography: {
+    color: theme.palette.text.disabled
+  }
+}))
+
 const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
   const { t } = useI18n()
   const client = useClient()
@@ -26,6 +43,7 @@ const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
   const { currentDefinition } = useStepperDialog()
   const konnectorCategory = currentDefinition?.connectorCriteria?.category
   const konnectorName = currentDefinition?.connectorCriteria?.name
+  const styles = useStyles()
 
   const goToStore = () => {
     let hash
@@ -85,28 +103,64 @@ const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
         </Media>
       </ActionMenuHeader>
       <ActionMenuItem
-        className="u-flex-items-center"
-        onClick={handleClick}
-        left={<Icon icon={Camera} size={16} />}
-        disabled={!hasSteps}
+        className={cx('u-flex-items-center', {
+          [styles.disabledItem]: !hasSteps
+        })}
+        onClick={hasSteps ? handleClick : null}
+        left={
+          <Icon
+            className={!hasSteps && styles.disabledIcon}
+            icon={Camera}
+            size={16}
+          />
+        }
       >
-        <Typography variant="body1" gutterBottom>
+        <Typography
+          className={!hasSteps && styles.disabledTypography}
+          variant="body1"
+          gutterBottom
+        >
           {t('ImportDropdown.scanPicture.title')}
         </Typography>
-        <Typography variant="caption" color="textSecondary">
+        <Typography
+          className={!hasSteps && styles.disabledTypography}
+          variant="caption"
+          color="textSecondary"
+        >
           {t('ImportDropdown.scanPicture.text')}
         </Typography>
       </ActionMenuItem>
       <ActionMenuItem
-        className="u-flex-items-center"
-        left={<Icon icon={Konnector} size={24} />}
+        className={cx('u-flex-items-center', {
+          [styles.disabledItem]: !konnectorCategory && !konnectorName
+        })}
+        left={
+          <Icon
+            className={
+              !konnectorCategory && !konnectorName && styles.disabledIcon
+            }
+            icon={Konnector}
+            size={24}
+          />
+        }
         onClick={konnectorCategory || konnectorName ? goToStore : null}
-        disabled={konnectorCategory || konnectorName ? false : true}
       >
-        <Typography variant="body1" gutterBottom>
+        <Typography
+          className={
+            !konnectorCategory && !konnectorName && styles.disabledTypography
+          }
+          variant="body1"
+          gutterBottom
+        >
           {t('ImportDropdown.importAuto.title')}
         </Typography>
-        <Typography variant="caption" color="textSecondary">
+        <Typography
+          className={
+            !konnectorCategory && !konnectorName && styles.disabledTypography
+          }
+          variant="caption"
+          color="textSecondary"
+        >
           {t('ImportDropdown.importAuto.text')}
         </Typography>
       </ActionMenuItem>
