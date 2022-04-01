@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.14.3 (2022-04-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdoc-to-markdown to v5.0.3 ([ebf2f36](https://github.com/cozy/cozy-libs/commit/ebf2f36cbe50c80ac53d2ed3cd68a5bf92d993ea))
+
+
+
+
+
 ## [1.14.2](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.14.1...@cozy/codemods@1.14.2) (2022-02-18)
 
 
