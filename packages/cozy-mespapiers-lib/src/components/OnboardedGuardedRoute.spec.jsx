@@ -24,67 +24,69 @@ const setup = ({ result, isLoaded = true, history }) => {
   return render(
     <AppLike history={history}>
       <Switch>
-        <OnboardedGuardedRoute exact path="/" component={ComponentOnboarded} />
         <OnboardedGuardedRoute
           exact
-          path="/onboarding"
+          path="/paper"
+          component={ComponentOnboarded}
+        />
+        <OnboardedGuardedRoute
+          exact
+          path="/paper/onboarding"
           component={ComponentOnboarding}
         />
 
-        <Redirect from="*" to="/" />
+        <Redirect from="*" to="/paper" />
       </Switch>
     </AppLike>
   )
 }
 
-describe('AppRouter', () => {
-  describe('OnboardedGuardedRoute', () => {
-    it('should display Spinner when query is not loaded', () => {
-      const { getByRole } = setup({ result: undefined, isLoaded: false })
+describe('OnboardedGuardedRoute', () => {
+  it('should display Spinner when query is not loaded', () => {
+    const { getByRole } = setup({ result: undefined, isLoaded: false })
 
-      expect(getByRole('progressbar')).toBeDefined()
-    })
+    expect(getByRole('progressbar')).toBeDefined()
+  })
 
-    it('should display route when onboarded = true', () => {
-      const { getByText } = setup({ result: [{ onboarded: true }] })
+  it('should display route when onboarded = true', () => {
+    const { getByText } = setup({ result: [{ onboarded: true }] })
 
-      expect(getByText('ONBOARDED')).toBeDefined()
-    })
+    expect(getByText('ONBOARDED')).toBeDefined()
+  })
 
-    it('should redirect to /onboarding route when onboarded = false', () => {
-      const { getByText } = setup({ result: [{ onboarded: false }] })
+  it('should redirect to /paper/onboarding route when onboarded = false', () => {
+    const { getByText } = setup({ result: [{ onboarded: false }] })
 
-      expect(getByText('ONBOARDING')).toBeDefined()
-    })
+    expect(getByText('ONBOARDING')).toBeDefined()
+  })
 
-    it('should redirect to /onboarding route when onboarded is undefined', () => {
-      const { getByText } = setup({ result: undefined })
+  it('should redirect to /paper/onboarding route when onboarded is undefined', () => {
+    const { getByText } = setup({ result: undefined })
 
-      expect(getByText('ONBOARDING')).toBeDefined()
-    })
+    expect(getByText('ONBOARDING')).toBeDefined()
+  })
 
-    it('should redirect to /onboarding route when onboarded is empty array', () => {
-      const { getByText } = setup({ result: [] })
+  it('should redirect to /paper/onboarding route when onboarded is empty array', () => {
+    const { getByText } = setup({ result: [] })
 
-      expect(getByText('ONBOARDING')).toBeDefined()
-    })
+    expect(getByText('ONBOARDING')).toBeDefined()
+  })
 
-    it('should display route route when onboarded is false', () => {
-      const history = createHashHistory()
-      history.push('/onboarding')
+  it('should display route when onboarded is false', () => {
+    const history = createHashHistory()
+    history.push('/paper/onboarding')
 
-      const { getByText } = setup({ result: [{ onboarded: false, history }] })
+    const { getByText } = setup({ result: [{ onboarded: false, history }] })
 
-      expect(getByText('ONBOARDING')).toBeDefined()
-    })
+    expect(getByText('ONBOARDING')).toBeDefined()
+  })
 
-    it('should redirect to / route when onboarded is true', () => {
-      const history = createHashHistory()
-      history.push('/onboarding')
+  it('should redirect to /paper route when onboarded is true', () => {
+    const history = createHashHistory()
+    history.push('/paper/onboarding')
 
-      const { getByText } = setup({ result: [{ onboarded: true, history }] })
+    const { getByText } = setup({ result: [{ onboarded: true, history }] })
 
-      expect(getByText('ONBOARDED')).toBeDefined()
-    })
+    expect(getByText('ONBOARDED')).toBeDefined()
   })
 })

@@ -57,7 +57,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
           onClose={hideImportDropdown}
           anchorElRef={actionBtnRef}
           onClick={() =>
-            history.push({ pathname: `/create/${placeholder.label}` })
+            history.push({ pathname: `/paper/create/${placeholder.label}` })
           }
         />
       </div>
