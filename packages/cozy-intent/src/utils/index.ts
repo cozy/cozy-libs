@@ -22,3 +22,12 @@ export const interpolate = (
 }
 
 export const log = logger.namespace('cozy-intent')
+
+declare const __DEV__: boolean
+export const isNativeDevMode = (): boolean => {
+  try {
+    return !!__DEV__
+  } catch {
+    return false
+  }
+}

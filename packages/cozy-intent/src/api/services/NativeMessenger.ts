@@ -1,4 +1,4 @@
-import { Messenger } from 'post-me'
+import { Messenger, debug } from 'post-me'
 
 import {
   ListenerRemover,
@@ -9,7 +9,7 @@ import {
 } from '../../api'
 
 export class NativeMessenger implements Messenger {
-  private injectJavaScript: (data: string) => void
+  private injectJavaScript?: (data: string) => void
   private listener?: MessageListener
 
   constructor(webviewRef: WebviewRef) {
@@ -18,7 +18,7 @@ export class NativeMessenger implements Messenger {
 
   public postMessage = (message: unknown): void => {
     const script = `window.postMessage(${JSON.stringify(message)})`
-    this.injectJavaScript(script)
+    this.injectJavaScript?.(script)
   }
 
   public addMessageListener = (listener: MessageListener): ListenerRemover => {
@@ -33,5 +33,24 @@ export class NativeMessenger implements Messenger {
     if (!this.listener) throw new Error(strings.noListenerFound)
 
     this.listener({ data } as MessageEvent)
+  }
+}
+
+export const DebugNativeMessenger = (
+  messenger: NativeMessenger
+): NativeMessenger => {
+  const log = debug('native-messenger')
+
+  return {
+    postMessage: (message: unknown): void => {
+      log('➡️ sending message', message)
+      messenger.postMessage(message)
+    },
+    addMessageListener: (listener: MessageListener): ListenerRemover =>
+      messenger.addMessageListener(listener),
+    onMessage: (data: ParsedNativeEvent): void => {
+      log('⬅️ received message', data)
+      messenger.onMessage(data)
+    }
   }
 }
