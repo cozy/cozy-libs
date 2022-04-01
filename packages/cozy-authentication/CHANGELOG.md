@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.8.2 (2022-04-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cssnano-preset-advanced to v4.0.8 ([9594a5c](https://github.com/cozy/cozy-libs/commit/9594a5c3cfa7800eee3bea2c5002b848d2b5e1af))
+* **sharing:** Upgrade cozy-ui to remove justifyContent warning ([eb6318f](https://github.com/cozy/cozy-libs/commit/eb6318f0d0cd2e39e47b80b35e30efb766d6e553))
+
+
+
+
+
 ## [2.8.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.8.0...cozy-authentication@2.8.1) (2022-02-18)
 
 
