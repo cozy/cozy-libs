@@ -1,0 +1,236 @@
+{
+  "Acquisition": {
+    "repeat": "Scan an additional page",
+    "retry": "Take over",
+    "success": "The picture was taken."
+  },
+  "action": {
+    "download": "Download",
+    "forward": "Forward",
+    "moveTo": "Move to…",
+    "open": "Open…",
+    "phoneDownload": "Make available offline",
+    "qualify": "Qualify",
+    "rename": "Rename",
+    "share": "Share",
+    "trash": "Remove",
+    "version": "Versions",
+    "viewInDrive": "View in Drive"
+  },
+  "common": {
+    "cancel": "Cancel",
+    "downloadFile": {
+      "error": {
+        "offline": "You should be connected to download this file",
+        "missing": "This file is missing"
+      }
+    },
+    "next": "Next",
+    "removeQualification": {
+      "error": "An error has occurred, please try again in a moment.",
+      "success": "The document has been removed from My Papers."
+    },
+    "replace": "Replace",
+    "saveFile": {
+      "error": "An error has occurred, please try again later",
+      "success": "Successfully saved file"
+    },
+    "trashFile": {
+      "error": "An error has occurred, please try again in a moment.",
+      "success": "The selection has been moved to the Trash."
+    }
+  },
+  "FeaturedPlaceholdersList": {
+    "subheader": "Suggestions"
+  },
+  "folder": {
+    "administrative": "Administrative",
+    "papers": "My papers"
+  },
+  "ConfirmReplaceFile": {
+    "content": "Your new document will be stored in the <b>Drive/Administrative/My Papers</b> folder.",
+    "question": "Do you want to keep the original file from your drive that was used to generate the document? |||| Do you want to keep the original files from your drive that were used to generate the document?",
+    "keep": "Keep",
+    "title": "Keep the original file? |||| Keep the original files?",
+    "replace": "No, thanks"
+  },
+  "ContactStep": {
+    "me": "Me",
+    "onLoad": "Document generation",
+    "other": "Someone else",
+    "save": "Save",
+    "contactModal": {
+      "placeholder": "Search a contact",
+      "addContactLabel": "Add a contact",
+      "emptyContact": "No contact"
+    }
+  },
+  "DeleteConfirm": {
+    "cancel": "Cancel",
+    "choice": "Do not delete the picture.",
+    "delete": "Remove",
+    "title": "Delete this file?",
+    "text": "The item is associated with the file \"%{name}\" in your drive."
+  },
+  "Home": {
+    "Empty": {
+      "text": "Always keep them with you in a secure space to simplify your administrative procedures. They will never be used without your explicit consent.",
+      "title": "Add your personal documents"
+    },
+    "Fab": {
+      "ariaLabel": "Open the menu of all suggestions"
+    }
+  },
+  "ImportDropdown": {
+    "importAuto": {
+      "text": "Retrieve this document from its website, your paper will then be kept updated automatically",
+      "title": "Auto import"
+    },
+    "scanPicture": {
+      "text": "Use your camera or an existing document",
+      "title": "Take or select pictures"
+    },
+    "title": "Add: %{name}"
+  },
+  "InputDateAdapter": {
+    "invalidDateMessage": "Invalid Date"
+  },
+  "InputTextAdapter": {
+    "invalidTextMessage": "%{smart_count} number is missing |||| %{smart_count} numbers are missings"
+  },
+  "Onboarding": {
+    "cta": "Let's go!"
+  },
+  "PapersDefinitionsProvider": {
+    "customPapersDefinitions": {
+      "error": "%{name} not found in %{path}",
+      "warning": "File \"%{name}\" loaded from your Drive"
+    }
+  },
+  "PaperJSON": {
+    "generic": {
+      "back": {
+        "text": "Add back side"
+      },
+      "cover": {
+        "text": "Ajouter la couverture"
+      },
+      "content": {
+        "text": "Ajouter la page intérieure"
+      },
+      "date": {
+        "inputLabel": "Document date",
+        "text": "What is the date of this document?"
+      },
+      "expirationDate": {
+        "inputLabel": "Expiration date",
+        "text": "When does this document expires?"
+      },
+      "front": {
+        "text": "Add front side"
+      },
+      "issueDate": {
+        "inputLabel": "Issued on",
+        "text": "When was the document issued?"
+      },
+      "multiPages": {
+        "text": "Add a page to the document"
+      },
+      "owner": {
+        "inputLabel": "Owner",
+        "text": "Who is the owner of this document?"
+      },
+      "referencedDate": {
+        "inputLabel": "Referenced date",
+        "text": "Start date of the period covered by this document?"
+      },
+      "renameFile": {
+        "inputLabel": "Name of the document",
+        "text": "What is the name of your document?"
+      },
+      "shootingDate": {
+        "inputLabel": "Shooting date",
+        "text": "What is the shooting date of this picture? (optional)"
+      },
+      "singlePage": {
+        "text": "Capture the image of the document"
+      },
+      "addressLabel": {
+        "text": "Choose a short label for this accommodation",
+        "inputLabel": "accommodation label (10 letters max.)"
+      },
+      "fileLabel": {
+        "text": "Choose a name for this document",
+        "inputLabel": "Document name (40 letters max.)"
+      }
+    },
+    "driverLicence": {
+      "BObtentionDate": {
+        "inputLabel": "Car"
+      },
+      "AObtentionDate": {
+        "inputLabel": "Moto"
+      },
+      "number": {
+        "inputLabel": "Your license number",
+        "text": "What is your license number?"
+      },
+      "obtentionDate": {
+        "text": "Fill in the date of each category obtained"
+      },
+      "CObtentionDate": {
+        "inputLabel": "Truck"
+      },
+      "DObtentionDate": {
+        "inputLabel": "Bus"
+      }
+    },
+    "card": {
+      "back": {
+        "text": "Take a picture of the back of your ID card"
+      },
+      "expirationDate": {
+        "inputLabel": "Expiration date",
+        "text": "When was your card issued? (written on the back)"
+      },
+      "front": {
+        "text": "Take a picture of the front of your ID card"
+      },
+      "number": {
+        "inputLabel": "Card number",
+        "text": "What is your credit card number? (written on the front)"
+      }
+    }
+  },
+  "PapersList": {
+    "defaultName": "Contact not specified",
+    "label": {
+      "back": "Back side",
+      "front": "Front side"
+    },
+    "subheader": "Existing",
+    "PapersListByContact": {
+      "seeMore": "See more (%{number})"
+    }
+  },
+  "PlaceholdersList": {
+    "title": "New paper%{name}"
+  },
+  "Scan": {
+    "divider": "or",
+    "importPicFromMobile": "Select from my phone",
+    "importPicFromDesktop": "Select from my desktop",
+    "modal": {
+      "validFileType": "Accepted formats: image or pdf"
+    },
+    "selectPicFromCozy": "Select from my Cozy",
+    "takePic": "Take a picture"
+  },
+  "viewer": {
+    "shareData": {
+      "error": "Problem with link recovery: %{error}",
+      "text": "Link to my document %{name}: ",
+      "title": "Link to my document %{name}"
+    }
+  }
+}
