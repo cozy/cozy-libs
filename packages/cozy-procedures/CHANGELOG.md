@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.49.7 (2022-04-01)
+
+
+### Bug Fixes
+
+* bump @material-ui/lab from 4.0.0-alpha.57 to 4.0.0-alpha.60 ([660bc7c](https://github.com/cozy/cozy-libs/commit/660bc7ca64223028894eaa4639460cf5d1e6a8e9))
+* **cozy-intent:** Allow cozy-bar V8 to inject callback ([77d4a63](https://github.com/cozy/cozy-libs/commit/77d4a6318c5c93f5588140a8b4fe0446a3a77b15))
+
+
+
+
+
 ## [0.49.6](https://github.com/cozy/cozy-libs/compare/cozy-procedures@0.49.5...cozy-procedures@0.49.6) (2022-02-18)
 
 

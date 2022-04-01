@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [7.3.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.3.6...cozy-harvest-lib@7.3.7) (2022-04-01)
+
+
+### Bug Fixes
+
+* bump @material-ui/lab from 4.0.0-alpha.57 to 4.0.0-alpha.60 ([660bc7c](https://github.com/cozy/cozy-libs/commit/660bc7ca64223028894eaa4639460cf5d1e6a8e9))
+
+
+
+
+
 ## [7.3.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.3.5...cozy-harvest-lib@7.3.6) (2022-03-21)
 
 **Note:** Version bump only for package cozy-harvest-lib
