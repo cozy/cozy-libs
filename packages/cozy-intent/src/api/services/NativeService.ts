@@ -1,6 +1,7 @@
 import { Connection, ParentHandshake } from 'post-me'
 
 import {
+  DebugNativeMessenger,
   MessengerRegister,
   NativeEvent,
   NativeMessenger,
@@ -9,7 +10,7 @@ import {
   WebviewRef,
   strings
 } from '../../api'
-import { interpolate } from '../../utils'
+import { interpolate, isNativeDevMode } from '../../utils'
 
 export class NativeService {
   private readonly messengerService: typeof NativeMessenger
@@ -53,9 +54,15 @@ export class NativeService {
       throw new Error(interpolate(strings.errorRegisterWebview, { uri }))
     }
 
+    const messenger = new this.messengerService(webviewRef)
+
     this.messengerRegister = {
       ...this.messengerRegister,
-      [uri]: { messenger: new this.messengerService(webviewRef) }
+      [uri]: {
+        messenger: isNativeDevMode()
+          ? DebugNativeMessenger(messenger)
+          : messenger
+      }
     }
   }
 
