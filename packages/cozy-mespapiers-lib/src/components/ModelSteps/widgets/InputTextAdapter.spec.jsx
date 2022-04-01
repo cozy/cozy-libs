@@ -2,8 +2,8 @@
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
-import InputTextAdapter from 'src/components/ModelSteps/widgets/InputTextAdapter'
+import AppLike from '../../../../test/components/AppLike'
+import InputTextAdapter from './InputTextAdapter'
 
 jest.mock('cozy-client/dist/models/document/locales', () => ({
   getBoundT: jest.fn(() => jest.fn())

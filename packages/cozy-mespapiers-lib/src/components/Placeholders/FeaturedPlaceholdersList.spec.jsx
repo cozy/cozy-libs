@@ -2,13 +2,14 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
 import { useQuery, models } from 'cozy-client'
+
+import AppLike from '../../../test/components/AppLike'
+import FeaturedPlaceholdersList from './FeaturedPlaceholdersList'
+
 const {
   locales: { getBoundT }
 } = models.document
-
-import FeaturedPlaceholdersList from 'src/components/Placeholders/FeaturedPlaceholdersList'
 
 const fakePapers = [
   {

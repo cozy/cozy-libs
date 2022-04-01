@@ -1,21 +1,17 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
-import StepperDialogContent from 'src/components/StepperDialog/StepperDialogContent'
-import { useStepperDialog } from 'src/components/Hooks/useStepperDialog'
+import AppLike from '../../../test/components/AppLike'
+import StepperDialogContent from './StepperDialogContent'
+import { useStepperDialog } from '../Hooks/useStepperDialog'
 
 /* eslint-disable react/display-name */
-jest.mock('src/components/ModelSteps/Scan', () => () => (
-  <div data-testid="Scan" />
-))
-jest.mock('src/components/ModelSteps/Information', () => () => (
+jest.mock('../ModelSteps/Scan', () => () => <div data-testid="Scan" />)
+jest.mock('../ModelSteps/Information', () => () => (
   <div data-testid="Information" />
 ))
-jest.mock('src/components/ModelSteps/Contact', () => () => (
-  <div data-testid="Contact" />
-))
-jest.mock('src/components/Hooks/useStepperDialog')
+jest.mock('../ModelSteps/Contact', () => () => <div data-testid="Contact" />)
+jest.mock('../Hooks/useStepperDialog')
 /* eslint-enable react/display-name */
 
 const mockAllCurrentSteps = [

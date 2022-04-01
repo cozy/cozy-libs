@@ -2,8 +2,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
-import PapersListByContact from 'src/components/Papers/PapersListByContact'
+import AppLike from '../../../test/components/AppLike'
+import PapersListByContact from './PapersListByContact'
 
 const mockPaperslistByContact = [
   {

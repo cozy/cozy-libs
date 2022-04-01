@@ -5,8 +5,8 @@ import { createHashHistory } from 'history'
 
 import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 
-import AppLike from 'test/components/AppLike'
-import OnboardedGuardedRoute from 'src/components/OnboardedGuardedRoute'
+import AppLike from '../../test/components/AppLike'
+import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 
 jest.mock('cozy-client/dist/hooks/useQuery')
 jest.mock('cozy-client/dist/utils', () => ({

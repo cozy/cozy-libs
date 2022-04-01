@@ -1,4 +1,4 @@
-import { buildFilename } from 'src/helpers/buildFilename'
+import { buildFilename } from './buildFilename'
 
 describe('buildFilename', () => {
   it('should replace "/" by "_" in qualificationName', () => {

@@ -1,8 +1,8 @@
 import {
   getFeaturedPlaceholders,
   findPlaceholdersByQualification
-} from 'src/helpers/findPlaceholders'
-import * as PaperJSON from 'src/constants/papersDefinitions.json'
+} from './findPlaceholders'
+import * as PaperJSON from '../constants/papersDefinitions.json'
 const { papersDefinitions } = PaperJSON
 
 const fakePapers = [

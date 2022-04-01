@@ -7,10 +7,10 @@ const {
   locales: { getBoundT }
 } = models.document
 
-import AppLike from 'test/components/AppLike'
+import AppLike from '../../../test/components/AppLike'
 import People from 'cozy-ui/transpiled/react/Icons/People'
 
-import ImportDropdown from 'src/components/ImportDropdown/ImportDropdown'
+import ImportDropdown from './ImportDropdown'
 
 jest.mock('cozy-client/dist/models/document/locales', () => ({
   getBoundT: jest.fn(() => jest.fn())

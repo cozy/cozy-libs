@@ -7,11 +7,11 @@ import I18n from 'cozy-ui/transpiled/react/I18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { WebviewIntentProvider } from 'cozy-intent'
 
-import { StepperDialogProvider } from 'src/components/Contexts/StepperDialogProvider'
-import { ModalProvider } from 'src/components/Contexts/ModalProvider'
-import { ScannerI18nProvider } from 'src/components/Contexts/ScannerI18nProvider'
-import { PapersDefinitionsProvider } from 'src/components/Contexts/PapersDefinitionsProvider'
-import enLocale from 'src/locales/en.json'
+import { StepperDialogProvider } from '../../src/components/Contexts/StepperDialogProvider'
+import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
+import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
+import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
+import enLocale from '../../src/locales/en.json'
 
 jest.mock('cozy-client/dist/models/document/documentTypeData', () => ({
   themes: [{}]

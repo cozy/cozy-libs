@@ -1,4 +1,4 @@
-import { fetchContentFileToJson } from 'src/utils/fetchContentFileToJson'
+import { fetchContentFileToJson } from './fetchContentFileToJson'
 
 describe('fetchContentFileToJson', () => {
   const mockClient = expected => {
