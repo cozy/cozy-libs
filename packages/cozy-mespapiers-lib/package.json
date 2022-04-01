@@ -2,10 +2,12 @@
   "name": "cozy-mespapiers-lib",
   "version": "0.1.0",
   "description": "Cozy Mes papiers lib",
+  "license": "AGPL-3.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "babel src -d dist --copy-files --verbose",
     "start": "yarn build --watch",
+    "test": "jest",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-mespapiers-lib"
   },
   "devDependencies": {
@@ -15,7 +17,14 @@
     "eslint-config-cozy-app": "^4.0.0",
     "git-directory-deploy": "1.5.1",
     "react-test-renderer": "16.14.0",
-    "redux-mock-store": "1.5.4"
+    "redux-mock-store": "1.5.4",
+    "cozy-client": "^27.22.0",
+    "react-router-dom": "5.2.0",
+    "cozy-ui": "^62.0.0",
+    "cozy-intent": "^1.13.5",
+    "cozy-realtime": "^4.0.2",
+    "jest-environment-jsdom-sixteen": "2.0.0",
+    "jest-resolve-cached": "1.1.1"
   },
   "dependencies": {
     "@date-io/date-fns": "1",
@@ -31,9 +40,10 @@
     "node-polyglot": "^2.4.0"
   },
   "peerDependencies": {
-    "cozy-intent": ">=1.13.0",
+    "cozy-intent": ">=1.13.5",
     "cozy-client": ">=27.22.0",
     "cozy-realtime": ">=4.0.2",
-    "cozy-ui": ">=62.0.0"
+    "cozy-ui": ">=62.0.0",
+    "react-router-dom": ">=5.2.0"
   }
 }
