@@ -1,4 +1,4 @@
-import { makeBlobWithCustomAttrs } from 'src/helpers/makeBlobWithCustomAttrs'
+import { makeBlobWithCustomAttrs } from './makeBlobWithCustomAttrs'
 
 describe('makeBlobWithCustomAttrs', () => {
   const blob = new Blob(['{data: "value"}'], { type: 'application/json' })

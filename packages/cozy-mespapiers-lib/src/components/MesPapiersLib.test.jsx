@@ -3,32 +3,32 @@ import { render } from '@testing-library/react'
 
 import flag from 'cozy-flags'
 
-import { useStepperDialog } from 'src/components/Hooks/useStepperDialog'
-import { usePapersDefinitions } from 'src/components/Hooks/usePapersDefinitions'
-import MesPapiersLib from 'src/components/MesPapiersLib'
-import AppLike from 'test/components/AppLike'
+import { useStepperDialog } from './Hooks/useStepperDialog'
+import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
+import MesPapiersLib from './MesPapiersLib'
+import AppLike from '../../test/components/AppLike'
 
 /* eslint-disable react/display-name */
 jest.mock('cozy-ui/transpiled/react/Alerter', () => () => (
   <div data-testid="Alerter" />
 ))
-jest.mock('src/components/Contexts/ModalProvider', () => ({
-  ...jest.requireActual('src/components/Contexts/ModalProvider'),
+jest.mock('./Contexts/ModalProvider', () => ({
+  ...jest.requireActual('./Contexts/ModalProvider'),
   ModalStack: () => <div data-testid="ModalStack" />
 }))
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
   RealTimeQueries: () => <div data-testid="RealTimeQueries" />
 }))
-jest.mock('src/components/AppRouter', () => ({
+jest.mock('./AppRouter', () => ({
   AppRouter: () => <div data-testid="AppRouter" />
 }))
 jest.mock('cozy-flags')
 jest.mock('cozy-flags/dist/FlagSwitcher', () => () => (
   <div data-testid="FlagSwitcher" />
 ))
-jest.mock('src/components/Hooks/useStepperDialog')
-jest.mock('src/components/Hooks/usePapersDefinitions')
+jest.mock('./Hooks/useStepperDialog')
+jest.mock('./Hooks/usePapersDefinitions')
 /* eslint-enable react/display-name */
 
 const setup = ({

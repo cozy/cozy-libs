@@ -1,6 +1,6 @@
-import * as addFileToPdf from 'src/utils/addFileToPdf'
-import * as buildFilename from 'src/helpers/buildFilename'
-import { createPdfAndSave } from 'src/helpers/createPdfAndSave'
+import * as addFileToPdf from '../utils/addFileToPdf'
+import * as buildFilename from './buildFilename'
+import { createPdfAndSave } from './createPdfAndSave'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),

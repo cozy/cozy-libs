@@ -3,7 +3,7 @@ import { fireEvent, render } from '@testing-library/react'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import StepperDialog from 'src/components/StepperDialog/StepperDialog'
+import StepperDialog from './StepperDialog'
 
 /* eslint-disable react/display-name */
 jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () =>

@@ -2,9 +2,9 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
-import Contact from 'src/components/ModelSteps/Contact'
-import { FormDataProvider } from 'src/components/Contexts/FormDataProvider'
+import AppLike from '../../../test/components/AppLike'
+import Contact from './Contact'
+import { FormDataProvider } from '../Contexts/FormDataProvider'
 
 const mockCurrentStep = { illustration: 'illu.svg', text: 'text of step' }
 

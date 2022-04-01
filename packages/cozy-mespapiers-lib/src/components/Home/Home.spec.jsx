@@ -4,8 +4,8 @@ import { render, waitFor } from '@testing-library/react'
 
 import { isQueryLoading, hasQueryBeenLoaded, useQuery } from 'cozy-client'
 
-import AppLike from 'test/components/AppLike'
-import Home from 'src/components/Home/Home'
+import AppLike from '../../../test/components/AppLike'
+import Home from './Home'
 
 jest.mock('cozy-client/dist/hooks', () => ({
   ...jest.requireActual('cozy-client/dist/hooks'),

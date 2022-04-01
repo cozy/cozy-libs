@@ -1,7 +1,7 @@
-import { fetchCustomPaperDefinitions } from 'src/utils/fetchCustomPaperDefinitions'
-import getOrCreateAppFolderWithReference from 'src/helpers/getFolderWithReference'
+import { fetchCustomPaperDefinitions } from './fetchCustomPaperDefinitions'
+import getOrCreateAppFolderWithReference from '../helpers/getFolderWithReference'
 
-jest.mock('src/helpers/getFolderWithReference', () => jest.fn())
+jest.mock('../helpers/getFolderWithReference', () => jest.fn())
 
 describe('fetchCustomPaperDefinitions', () => {
   const t = jest.fn()

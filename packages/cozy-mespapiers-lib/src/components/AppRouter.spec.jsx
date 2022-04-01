@@ -1,37 +1,33 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import { AppRouter } from 'src/components/AppRouter'
-import AppLike from 'test/components/AppLike'
+import { AppRouter } from './AppRouter'
+import AppLike from '../../test/components/AppLike'
 
 /* eslint-disable react/display-name */
-jest.mock(
-  'src/components/OnboardedGuardedRoute',
-  () =>
-    ({ component, render }) => {
-      return (
-        <div data-testid="OnboardedGuardedRoute">
-          {render
-            ? render({
-                location: { search: '' },
-                history: jest.fn(() => ({ go: jest.fn() }))
-              })
-            : component()}
-        </div>
-      )
-    }
-)
-jest.mock('src/components/StepperDialog/CreatePaperModal', () => () => (
+jest.mock('./OnboardedGuardedRoute', () => ({ component, render }) => {
+  return (
+    <div data-testid="OnboardedGuardedRoute">
+      {render
+        ? render({
+            location: { search: '' },
+            history: jest.fn(() => ({ go: jest.fn() }))
+          })
+        : component()}
+    </div>
+  )
+})
+jest.mock('./StepperDialog/CreatePaperModal', () => () => (
   <div data-testid="CreatePaperModal" />
 ))
-jest.mock('src/components/Home/Home', () => () => <div data-testid="Home" />)
-jest.mock('src/components/Onboarding/Onboarding', () => () => (
+jest.mock('./Home/Home', () => () => <div data-testid="Home" />)
+jest.mock('./Onboarding/Onboarding', () => () => (
   <div data-testid="Onboarding" />
 ))
-jest.mock('src/components/Papers/PapersListWrapper', () => () => (
+jest.mock('./Papers/PapersListWrapper', () => () => (
   <div data-testid="PapersListWrapper" />
 ))
-jest.mock('src/components/Viewer/FileViewerWithQuery', () => () => (
+jest.mock('./Viewer/FileViewerWithQuery', () => () => (
   <div data-testid="FileViewerWithQuery" />
 ))
 jest.mock('react-router-dom', () => ({

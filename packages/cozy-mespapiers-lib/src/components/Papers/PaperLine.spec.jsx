@@ -2,13 +2,14 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
 import { models } from 'cozy-client'
+
+import AppLike from '../../../test/components/AppLike'
+import PaperLine from './PaperLine'
+
 const {
   locales: { getBoundT }
 } = models.document
-
-import PaperLine from 'src/components/Papers/PaperLine'
 
 const mockPapers = [
   { id: '00', name: 'ID card' },

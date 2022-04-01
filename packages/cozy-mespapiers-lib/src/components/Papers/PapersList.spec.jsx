@@ -2,8 +2,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
-import PapersList from 'src/components/Papers/PapersList'
+import AppLike from '../../../test/components/AppLike'
+import PapersList from './PapersList'
 
 const mockPapers = {
   maxDisplay: 2,

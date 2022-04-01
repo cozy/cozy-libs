@@ -2,8 +2,8 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from 'test/components/AppLike'
-import PlaceholdersList from 'src/components/Placeholders/PlaceholdersList'
+import AppLike from '../../../test/components/AppLike'
+import PlaceholdersList from './PlaceholdersList'
 
 const fakeQualificationItems = [
   {

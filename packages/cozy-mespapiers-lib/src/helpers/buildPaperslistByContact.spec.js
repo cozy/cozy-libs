@@ -1,4 +1,4 @@
-import { buildPaperslistByContact } from 'src/helpers/buildPaperslistByContact'
+import { buildPaperslistByContact } from './buildPaperslistByContact'
 
 const mockContactsList = [
   { _id: 'contactId01', displayName: 'Bob' },

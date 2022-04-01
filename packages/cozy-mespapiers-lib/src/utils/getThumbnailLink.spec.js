@@ -1,4 +1,4 @@
-import { getThumbnailLink } from 'src/utils/getThumbnailLink'
+import { getThumbnailLink } from './getThumbnailLink'
 
 const mockClient = {
   getStackClient: jest.fn().mockReturnValue({ uri: 'abcd/' })
