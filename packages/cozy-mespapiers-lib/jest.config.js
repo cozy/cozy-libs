@@ -1,20 +1,21 @@
 module.exports = {
+  browser: true,
+  collectCoverageFrom: [
+    'src/**/*.{js,jsx}',
+    '!**/node_modules/**',
+    '!**/vendor/**'
+  ],
+  roots: ['src'],
+  resolver: 'jest-resolve-cached',
+  testPathIgnorePatterns: ['node_modules', 'dist'],
+  testEnvironment: 'jest-environment-jsdom-sixteen',
   testURL: 'http://localhost/',
   moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
-  setupFiles: ['<rootDir>/test/jestLib/setup.js'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
-    // identity-obj-proxy module is installed by cozy-scripts
-    '.styl$': 'identity-obj-proxy',
-    '^cozy-client$': 'cozy-client/dist/index',
-    '^src/(.*)': '<rootDir>/src/$1',
-    '^test/(.*)': '<rootDir>/test/$1'
+    '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js'
   },
   transformIgnorePatterns: ['node_modules/(?!cozy-ui)'],
-  globals: {
-    __ALLOW_HTTP__: false,
-    __TARGET__: 'browser',
-    cozy: {}
-  }
+  setupFiles: ['<rootDir>/test/jestLib/setup.js']
 }
