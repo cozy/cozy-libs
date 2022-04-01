@@ -98,7 +98,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
         onClose={hideImportDropdown}
         onClick={() =>
           history.push({
-            pathname: `/create/${placeholderSelected.label}`,
+            pathname: `/paper/create/${placeholderSelected.label}`,
             search: 'deepBack'
           })
         }

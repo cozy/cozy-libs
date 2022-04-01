@@ -25,7 +25,7 @@ export const PapersFab = () => {
 
   const handleClick = () => {
     history.push({
-      pathname: `/create`
+      pathname: `/paper/create`
     })
   }
 

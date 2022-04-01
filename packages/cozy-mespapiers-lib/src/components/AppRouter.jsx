@@ -11,27 +11,27 @@ import CreatePaperModal from './StepperDialog/CreatePaperModal'
 
 const routes = [
   {
-    path: '/',
+    path: '/paper',
     component: Home
   },
   {
-    path: '/files/:fileCategory',
+    path: '/paper/files/:fileCategory',
     component: PapersListWrapper
   },
   {
-    path: '/file/:fileId',
+    path: '/paper/file/:fileId',
     component: FilesViewerWithQuery
   },
   {
-    path: '/onboarding',
+    path: '/paper/onboarding',
     component: Onboarding
   },
   {
-    path: '/create',
+    path: '/paper/create',
     component: PlaceholderThemesListModal
   },
   {
-    path: '/create/:qualificationLabel',
+    path: '/paper/create/:qualificationLabel',
     render: props => {
       const {
         location: { search },
@@ -58,7 +58,7 @@ export const AppRouter = () => {
             render={route.render}
           />
         ))}
-        <Redirect from="*" to="/" />
+        <Redirect from="*" to="/paper" />
       </Switch>
     </HashRouter>
   )

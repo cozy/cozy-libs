@@ -23,12 +23,12 @@ const OnboardedGuardedRoute = ({ component: Component, render, ...rest }) => {
     <Route
       {...rest}
       render={props => {
-        const isOnboardingPage = rest?.path === '/onboarding'
+        const isOnboardingPage = rest?.path === '/paper/onboarding'
 
         if (isOnboardingPage && onboarded === true) {
-          return <Redirect to="/" />
+          return <Redirect to="/paper" />
         } else if (!isOnboardingPage && onboarded !== true) {
-          return <Redirect to="/onboarding" />
+          return <Redirect to="/paper/onboarding" />
         } else if (Component) {
           return <Component {...props} />
         } else {
