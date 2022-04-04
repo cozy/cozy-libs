@@ -164,7 +164,7 @@
         "inputLabel": "Document name (40 letters max.)"
       }
     },
-    "driverLicence": {
+    "driverLicense": {
       "BObtentionDate": {
         "inputLabel": "Car"
       },
