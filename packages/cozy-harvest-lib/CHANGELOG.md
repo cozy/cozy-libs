@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.3.7...cozy-harvest-lib@8.0.0) (2022-04-04)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Correctly handle AppLinker's onClick ([b45b2e9](https://github.com/cozy/cozy-libs/commit/b45b2e9942635bf36a78bcbf9ac3f8eacdd1fde2)), closes [cozy/cozy-ui#2015](https://github.com/cozy/cozy-ui/issues/2015)
+* **cozy-harvest-lib:** Replace deprecated usage of slug in AppLinker ([24b33d7](https://github.com/cozy/cozy-libs/commit/24b33d7cf3fe26339a00d6f5279d5e92adc71bc5)), closes [cozy/cozy-ui#2015](https://github.com/cozy/cozy-ui/issues/2015)
+
+
+### BREAKING CHANGES
+
+* **cozy-harvest-lib:** `cozy-harvest-lib` now requires `cozy-ui` version `60.6.0` or superior
+
+
+
+
+
 ## [7.3.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.3.6...cozy-harvest-lib@7.3.7) (2022-04-01)
 
 
