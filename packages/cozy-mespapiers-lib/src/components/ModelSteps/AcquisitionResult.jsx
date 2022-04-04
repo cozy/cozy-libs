@@ -1,5 +1,7 @@
-import React, { useMemo, memo, useCallback } from 'react'
+import React, { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { makeStyles } from '@material-ui/core/styles'
+import cx from 'classnames'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
@@ -20,7 +22,20 @@ import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsP
 
 const isPDF = file => file.type === 'application/pdf'
 
+const useStyles = makeStyles(() => ({
+  img: {
+    maxWidth: '100%',
+    maxHeight: 'inherit'
+  },
+  avatar: {
+    color: 'var(--paperBackgroundColor)',
+    backgroundColor: 'var(--successColor)',
+    marginBottom: '1rem'
+  }
+}))
+
 const AcquisitionResult = ({ file, setFile, currentStep }) => {
+  const styles = useStyles()
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const { nextStep } = useStepperDialog()
@@ -57,32 +72,30 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
 
   useEventListener(window, 'keydown', handleKeyDown)
 
-  const style = useMemo(
-    () => ({
-      img: {
-        maxWidth: '100%',
-        maxHeight: 'inherit'
-      },
-      avatar: {
-        color: 'var(--paperBackgroundColor)',
-        backgroundColor: 'var(--successColor)'
-      }
-    }),
-    []
-  )
-
   return (
     <>
-      <div className={'u-h-100 u-flex u-flex-column u-flex-justify-center'}>
-        <div className={!isMobile ? 'u-mh-2' : ''}>
-          <div className={'u-flex u-flex-column u-flex-items-center u-mb-2'}>
-            <Avatar
-              icon={Check}
-              size="xlarge"
-              style={style.avatar}
-              className={'u-mb-1'}
-            />
-            <Typography variant={'h5'}>{t('Acquisition.success')}</Typography>
+      <div
+        className={cx(
+          'u-h-100 u-mb-2 u-flex u-flex-column u-flex-justify-center',
+          {
+            ['u-mt-2 u-mh-1']: !isMobile
+          }
+        )}
+      >
+        <div className={'u-flex u-flex-column u-flex-items-center u-mb-2'}>
+          <Avatar icon={Check} size="xlarge" className={styles.avatar} />
+          <Typography variant={'h5'}>{t('Acquisition.success')}</Typography>
+        </div>
+        <Card className={'u-ta-center u-p-1 u-pb-half'}>
+          <div className={'u-mah-5'}>
+            {!isPDF(file) ? (
+              <img src={URL.createObjectURL(file)} className={styles.img} />
+            ) : (
+              <>
+                <Icon icon={FileTypePdfIcon} size={80} />
+                <Typography variant={'body1'}>{file.name}</Typography>
+              </>
+            )}
           </div>
           <Button
             className={'u-mt-half'}
@@ -95,7 +108,10 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
       </div>
       <DialogActions
         disableSpacing
-        className={'columnLayout u-mh-0 u-mb-1 cozyDialogActions'}
+        className={cx('columnLayout u-mb-1-half u-mt-0 cozyDialogActions', {
+          'u-mh-1': !isMobile,
+          'u-mh-0': isMobile
+        })}
       >
         <Button
           className="u-db"
