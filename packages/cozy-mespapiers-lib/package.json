@@ -8,7 +8,9 @@
     "build": "babel src -d dist --copy-files --verbose",
     "start": "yarn build --watch",
     "test": "jest",
-    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-mespapiers-lib"
+    "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-mespapiers-lib",
+    "check-locales": "./scripts/check-locales.sh",
+    "prepublishOnly": "yarn check-locales && yarn build"
   },
   "devDependencies": {
     "@testing-library/react": "11.2.7",
