@@ -1,6 +1,6 @@
 {
   "name": "commitlint-config-cozy",
-  "version": "0.7.5",
+  "version": "0.7.6",
   "description": "Shareable commitlint config enforcing the cozy commit convention",
   "main": "index.js",
   "author": "Cozy",

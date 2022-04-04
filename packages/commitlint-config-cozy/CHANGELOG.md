@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.6 (2022-04-04)
+
+
+### Bug Fixes
+
+* bump @commitlint/cli from 16.1.0 to 16.2.3 ([2167d5b](https://github.com/cozy/cozy-libs/commit/2167d5b68bc7bbd5c04a3ee7f964f400c9697754))
+
+
+
+
+
 ## [0.7.5](https://github.com/cozy/cozy-libs/compare/commitlint-config-cozy@0.7.4...commitlint-config-cozy@0.7.5) (2022-02-03)
 
 
