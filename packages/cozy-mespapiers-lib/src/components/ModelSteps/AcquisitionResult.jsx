@@ -1,4 +1,4 @@
-import React, { useMemo, memo } from 'react'
+import React, { useMemo, memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -12,6 +12,7 @@ import FileTypePdfIcon from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Check from 'cozy-ui/transpiled/react/Icons/Check'
 import Camera from 'cozy-ui/transpiled/react/Icons/Camera'
+import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useFormData } from '../Hooks/useFormData'
@@ -26,23 +27,35 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
   const { setFormData } = useFormData()
   const { page, multipage } = currentStep
 
-  const onValid = (repeat = false) => {
-    setFormData(prev => ({
-      ...prev,
-      data: [
-        ...prev.data,
-        {
-          file,
-          fileMetadata: {
-            page: !multipage ? page : '',
-            multipage
+  const onValid = useCallback(
+    (repeat = false) => {
+      setFormData(prev => ({
+        ...prev,
+        data: [
+          ...prev.data,
+          {
+            file,
+            fileMetadata: {
+              page: !multipage ? page : '',
+              multipage
+            }
           }
-        }
-      ]
-    }))
-    if (!repeat) nextStep()
-    else setFile(null)
-  }
+        ]
+      }))
+      if (!repeat) nextStep()
+      else setFile(null)
+    },
+    [multipage, page, nextStep, setFile, setFormData, file]
+  )
+
+  const handleKeyDown = useCallback(
+    ({ key }) => {
+      if (key === 'Enter') onValid()
+    },
+    [onValid]
+  )
+
+  useEventListener(window, 'keydown', handleKeyDown)
 
   const style = useMemo(
     () => ({
@@ -71,25 +84,14 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
             />
             <Typography variant={'h5'}>{t('Acquisition.success')}</Typography>
           </div>
-          <Card className={'u-ta-center u-p-1 u-pb-half'}>
-            <div className={'u-mah-5'}>
-              {!isPDF(file) ? (
-                <img src={URL.createObjectURL(file)} style={style.img} />
-              ) : (
-                <>
-                  <Icon icon={FileTypePdfIcon} size={80} />
-                  <Typography variant={'body1'}>{file.name}</Typography>
-                </>
-              )}
-            </div>
-            <Button
-              className={'u-mt-half'}
-              label={t('Acquisition.retry')}
-              theme={'text'}
-              onClick={() => setFile(null)}
-            />
-          </Card>
-        </div>
+          <Button
+            className={'u-mt-half'}
+            data-testid="retry-button"
+            label={t('Acquisition.retry')}
+            theme={'text'}
+            onClick={() => setFile(null)}
+          />
+        </Card>
       </div>
       <DialogActions
         disableSpacing
@@ -97,6 +99,7 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
       >
         <Button
           className="u-db"
+          data-testid="next-button"
           extension="full"
           label={t('common.next')}
           onClick={() => onValid(false)}
@@ -104,6 +107,7 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
         {multipage && (
           <ButtonLink
             className={'u-ml-0 u-mb-half'}
+            data-testid="repeat-button"
             extension="full"
             theme={'secondary'}
             icon={Camera}
