@@ -185,7 +185,8 @@
           "attributes": [
             {
               "name": "number",
-              "type": "Number:12",
+              "type": "number",
+              "maxLength": 12,
               "inputLabel": "PaperJSON.driverLicense.number.inputLabel"
             }
           ]
@@ -480,7 +481,8 @@
           "attributes": [
             {
               "name": "cardNumber",
-              "type": "Number:12",
+              "type": "number",
+              "maxLength": 12,
               "inputLabel": "PaperJSON.card.number.inputLabel"
             }
           ]
