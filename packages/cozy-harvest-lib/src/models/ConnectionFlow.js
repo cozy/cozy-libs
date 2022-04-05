@@ -344,7 +344,8 @@ export class ConnectionFlow {
   }
 
   handleLoginSuccess() {
-    this.jobWatcher.handleSuccess()
+    this.jobWatcher.handleLoginSuccess()
+    this.triggerEvent(LOGIN_SUCCESS_EVENT)
   }
 
   handleLoginSuccessHandled() {
