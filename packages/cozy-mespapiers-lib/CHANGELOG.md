@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.2.5...cozy-mespapiers-lib@0.2.6) (2022-04-05)
+
+
+### Bug Fixes
+
+* bump pdf-lib from 1.17.0 to 1.17.1 ([2914ed9](https://github.com/cozy/cozy-libs/commit/2914ed91c7b3508c842f0a3c1de18b1f59941b06))
+
+
+
+
+
 ## [0.2.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.2.4...cozy-mespapiers-lib@0.2.5) (2022-04-05)
 
 
