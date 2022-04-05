@@ -66,6 +66,11 @@ export class KonnectorJobWatcher {
     this.emit('error', new KonnectorJobError(error))
   }
 
+  handleLoginSuccess() {
+    logger.info(`KonnectorJobWatcher: login success`)
+    this.disableSuccessTimer()
+  }
+
   handleSuccess() {
     logger.info(`KonnectorJobWatcher: Job has succeeded`)
     this.disableSuccessTimer()
