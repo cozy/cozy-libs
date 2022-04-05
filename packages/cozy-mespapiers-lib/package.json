@@ -39,7 +39,7 @@
     "date-fns": "2.23.0",
     "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
     "node-polyglot": "^2.4.0",
-    "pdf-lib": "1.17.0"
+    "pdf-lib": "1.17.1"
   },
   "peerDependencies": {
     "cozy-client": ">=27.22.0",
