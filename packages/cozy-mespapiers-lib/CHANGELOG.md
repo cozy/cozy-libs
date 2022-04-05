@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.2.6...cozy-mespapiers-lib@0.3.0) (2022-04-05)
+
+
+### Bug Fixes
+
+* Fix style on Acquisition step ([f2f2e7d](https://github.com/cozy/cozy-libs/commit/f2f2e7d02d51e34ecaa2efd7f89dc123dd6fe70d))
+
+
+### Features
+
+* Add listener on acquisition step ([25500c5](https://github.com/cozy/cozy-libs/commit/25500c58f664e89bd429f0b29a70cbcdda548145))
+
+
+
+
+
 ## [0.2.6](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.2.5...cozy-mespapiers-lib@0.2.6) (2022-04-05)
 
 
