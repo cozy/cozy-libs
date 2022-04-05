@@ -125,6 +125,23 @@ const fixtures = {
       }
     }
   },
+  runningTrigger: {
+    id: 'running-trigger-id',
+    _type: 'io.cozy.triggers',
+    current_state: {
+      status: 'running',
+      last_executed_job_id: 'runningjobid'
+    },
+    attributes: {
+      arguments: '0 0 0 * * 0',
+      type: '@cron',
+      worker: 'konnector',
+      message: {
+        account: 'updated-account-id',
+        konnector: 'konnectest'
+      }
+    }
+  },
   createdTriggerWithFolder: {
     id: 'created-trigger-id',
     _type: 'io.cozy.triggers',
