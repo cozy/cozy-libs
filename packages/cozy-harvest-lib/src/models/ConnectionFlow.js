@@ -175,6 +175,8 @@ export class ConnectionFlow {
     this.twoFAWaiters = this.twoFAWaiters || []
 
     this.realtime = new Realtime({ client })
+
+    this.watchCurrentJobIfTriggerIsAlreadyRunning()
   }
 
   getTwoFACodeProvider() {
@@ -577,16 +579,29 @@ export class ConnectionFlow {
         logger.info('Found no client connector launcher')
       }
     }
+    this.watchJob({ autoSuccessTimer: computedAutoSuccessTimer })
+  }
 
+  /**
+   * If the trigger we display is already running, subscribe to the associated job
+   */
+  watchCurrentJobIfTriggerIsAlreadyRunning() {
+    if (get(this, 'trigger.current_state.status') === 'running') {
+      this.job = {
+        _id: get(this, 'trigger.current_state.last_executed_job_id')
+      }
+      this.watchJob()
+    }
+  }
+
+  watchJob(options = {autoSuccessTimer: false}) {
     this.realtime.subscribe(
       'updated',
       JOBS_DOCTYPE,
       this.job._id,
       this.handleJobUpdated.bind(this)
     )
-    this.jobWatcher = watchKonnectorJob(this.client, this.job, {
-      autoSuccessTimer: computedAutoSuccessTimer
-    })
+    this.jobWatcher = watchKonnectorJob(this.client, this.job, options)
     logger.info(`ConnectionFlow: Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
 
     for (const ev of JOB_EVENTS) {
@@ -622,7 +637,9 @@ export class ConnectionFlow {
     const { status, accountError } = this.state
     const triggerError = triggersModel.getKonnectorJobError(trigger)
     return {
-      running: ![ERRORED, IDLE, SUCCESS].includes(status),
+      running:
+        get(trigger, 'current_state.status') === 'running' ||
+        ![ERRORED, IDLE, SUCCESS].includes(status),
       twoFARunning: status === RUNNING_TWOFA,
       twoFARetry: status == TWO_FA_MISMATCH,
       triggerError: triggerError,
