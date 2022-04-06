@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 
@@ -6,34 +5,54 @@ import AppLike from '../../../test/components/AppLike'
 import AcquisitionResult from './AcquisitionResult'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
+import { useFormData } from '../Hooks/useFormData'
 
-const mockCurrentStep = { page: '', multipage: false }
-const mockFile = { type: '' }
+const mockCurrentStep = ({
+  page = '',
+  multipage = false,
+  stepIndex = 0
+} = {}) => ({ page, multipage, stepIndex })
+const mockFile = ({ type = '', name = '' } = {}) => ({ type, name })
+const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
+  metadata,
+  data,
+  contacts
+})
+jest.mock('../Hooks/useStepperDialog')
+jest.mock('../Hooks/useFormData')
 
 const setup = ({
   nextStep = jest.fn(),
-  setFile = jest.fn(),
-  file = mockFile,
-  currentStep = mockCurrentStep
+  setFormData = jest.fn(),
+  setCurrentFile = jest.fn(),
+  formData = mockFormData(),
+  currentFile = mockFile(),
+  currentStep = mockCurrentStep()
 } = {}) => {
   useStepperDialog.mockReturnValue({ nextStep })
+  useFormData.mockReturnValue({
+    setFormData,
+    formData
+  })
 
   return render(
     <AppLike>
       <FormDataProvider>
         <AcquisitionResult
-          setFile={setFile}
-          file={file}
+          setCurrentFile={setCurrentFile}
+          currentFile={currentFile}
           currentStep={currentStep}
         />
       </FormDataProvider>
     </AppLike>
   )
 }
-jest.mock('../Hooks/useStepperDialog')
 
 describe('AcquisitionResult component:', () => {
-  window.URL.createObjectURL = jest.fn()
+  beforeEach(() => {
+    window.URL.createObjectURL = jest.fn()
+    jest.resetAllMocks()
+  })
 
   it('should be rendered correctly', () => {
     const { container } = setup()
@@ -41,52 +60,126 @@ describe('AcquisitionResult component:', () => {
     expect(container).toBeDefined()
   })
 
-  it('should setFile must be called once with null when restarting the file selection', () => {
-    const mockSetFile = jest.fn()
-    const { getByTestId } = setup({ setFile: mockSetFile })
+  it('repeat button should not exist if the step is not multipage', () => {
+    const { container } = setup({
+      currentStep: mockCurrentStep({ multipage: false })
+    })
+    const btn = container.querySelector('[data-testid="repeat-button"]')
 
-    const btn = getByTestId('retry-button')
-
-    fireEvent.click(btn)
-
-    expect(mockSetFile).toHaveBeenCalledWith(null)
-    expect(mockSetFile).toHaveBeenCalledTimes(1)
+    expect(btn).toBeNull()
   })
 
-  it('should setFile must be called once with null when add more files', () => {
-    const mockSetFile = jest.fn()
-    const { getByTestId } = setup({
-      setFile: mockSetFile,
-      currentStep: { page: '', multipage: true }
+  it('repeat button should exist if the step is multipage', () => {
+    const { container } = setup({
+      currentStep: mockCurrentStep({ multipage: true })
+    })
+    const btn = container.querySelector('[data-testid="repeat-button"]')
+
+    expect(btn).toBeDefined()
+  })
+
+  describe('setCurrentFile', () => {
+    it('should setCurrentFile must be called once with null when restarting the file selection', () => {
+      const mockSetCurrentFile = jest.fn()
+      const { getByTestId } = setup({ setCurrentFile: mockSetCurrentFile })
+
+      const btn = getByTestId('retry-button')
+
+      fireEvent.click(btn)
+
+      expect(mockSetCurrentFile).toHaveBeenCalledWith(null)
+      expect(mockSetCurrentFile).toHaveBeenCalledTimes(1)
     })
 
-    const btn = getByTestId('repeat-button')
+    it('should setCurrentFile must be called once with null when add more files', () => {
+      const mockSetCurrentFile = jest.fn()
+      const mockNextStep = jest.fn()
+      const { getByTestId } = setup({
+        nextStep: mockNextStep,
+        setCurrentFile: mockSetCurrentFile,
+        currentStep: mockCurrentStep({ multipage: true })
+      })
 
-    fireEvent.click(btn)
+      const btn = getByTestId('repeat-button')
 
-    expect(mockSetFile).toHaveBeenCalledWith(null)
-    expect(mockSetFile).toHaveBeenCalledTimes(1)
+      fireEvent.click(btn)
+
+      expect(mockSetCurrentFile).toHaveBeenCalledWith(null)
+      expect(mockSetCurrentFile).toHaveBeenCalledTimes(1)
+      expect(mockNextStep).toHaveBeenCalledTimes(0)
+    })
   })
 
-  it('should nextStep must be called when next button is clicked', () => {
-    const nextStep = jest.fn()
-    const { getByTestId } = setup({
-      nextStep
+  describe('nextStep', () => {
+    it('should nextStep does not be called when add more files', () => {
+      const mockNextStep = jest.fn()
+      const { getByTestId } = setup({
+        nextStep: mockNextStep,
+        currentStep: mockCurrentStep({ multipage: true })
+      })
+
+      const btn = getByTestId('repeat-button')
+
+      fireEvent.click(btn)
+
+      expect(mockNextStep).toHaveBeenCalledTimes(0)
     })
 
-    const btn = getByTestId('next-button')
+    it('should nextStep must be called when next button is clicked', () => {
+      const nextStep = jest.fn()
+      const { getByTestId } = setup({
+        nextStep
+      })
 
-    fireEvent.click(btn)
+      const btn = getByTestId('next-button')
 
-    expect(nextStep).toHaveBeenCalledTimes(1)
+      fireEvent.click(btn)
+
+      expect(nextStep).toHaveBeenCalledTimes(1)
+    })
+
+    it('should nextStep must be called when Enter key is pressed', () => {
+      const nextStep = jest.fn()
+      setup({ nextStep })
+
+      fireEvent.keyDown(window, { key: 'Enter', code: 'Enter', keyCode: 13 })
+
+      expect(nextStep).toHaveBeenCalledTimes(1)
+    })
   })
 
-  it('should nextStep must be called when Enter key is pressed', () => {
-    const nextStep = jest.fn()
-    setup({ nextStep })
+  describe('setFormData', () => {
+    it('should setFormData must be called once when component is mounted', () => {
+      const mockSetFormData = jest.fn()
+      setup({ setFormData: mockSetFormData })
 
-    fireEvent.keyDown(window, { key: 'Enter', code: 'Enter', keyCode: 13 })
+      expect(mockSetFormData).toHaveBeenCalledTimes(1)
+    })
 
-    expect(nextStep).toHaveBeenCalledTimes(1)
+    it('should setFormData must not be called when component is mounted if file already exists on same stepIndex', () => {
+      const mockSetFormData = jest.fn()
+      setup({
+        setFormData: mockSetFormData,
+        currentFile: mockFile({ name: 'test.pdf' }),
+        currentStep: mockCurrentStep({ stepIndex: 1 }),
+        formData: mockFormData({
+          data: [{ stepIndex: 1, file: { name: 'test.pdf' } }]
+        })
+      })
+
+      expect(mockSetFormData).toHaveBeenCalledTimes(0)
+    })
+
+    it('should setFormData must be called once when restarting the file selection', () => {
+      const mockSetFormData = jest.fn()
+      const { getByTestId } = setup({ setFormData: mockSetFormData })
+
+      expect(mockSetFormData).toHaveBeenCalledTimes(1)
+
+      const btn = getByTestId('retry-button')
+      fireEvent.click(btn)
+
+      expect(mockSetFormData).toHaveBeenCalledTimes(2)
+    })
   })
 })
