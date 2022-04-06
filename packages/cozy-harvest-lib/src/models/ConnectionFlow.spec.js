@@ -125,9 +125,6 @@ describe('ConnectionFlow', () => {
       jest.clearAllMocks()
     })
 
-    afterAll(() => {
-      jest.restoreAllMocks()
-    })
 
     it('should render as submitting when there is no account', async () => {
       const { flow } = setup()
@@ -337,10 +334,6 @@ describe('ConnectionFlow', () => {
       jest.clearAllMocks()
     })
 
-    afterAll(() => {
-      jest.restoreAllMocks()
-    })
-
     it('should launch trigger without account', async () => {
       const { flow, client } = setup()
       await flow.ensureTriggerAndLaunch(client, {
@@ -499,7 +492,7 @@ describe('ConnectionFlow', () => {
     delete window.ReactNativeWebView
   })
 
-  describe('contructor', () => {
+  describe('constructor', () => {
     beforeAll(() => {
       watchKonnectorJob.mockReturnValue({on: () => ({})})
     })
@@ -508,9 +501,6 @@ describe('ConnectionFlow', () => {
       jest.clearAllMocks()
     })
 
-    afterAll(() => {
-      jest.restoreAllMocks()
-    })
     it('should watch a running trigger', () => {
       setup({trigger: fixtures.runningTrigger})
       expect(watchKonnectorJob).toHaveBeenCalledWith(expect.any(Object), {_id: 'runningjobid'}, {autoSuccessTimer: false})
