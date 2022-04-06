@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.3.0...cozy-mespapiers-lib@0.4.0) (2022-04-06)
+
+
+### Features
+
+* Use 62.5.0 of cozy-ui to get updates on ContactsList ([32d339b](https://github.com/cozy/cozy-libs/commit/32d339b7374074e7a6f3cac9884b3671a513a0e9))
+
+
+
+
+
 # [0.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.2.6...cozy-mespapiers-lib@0.3.0) (2022-04-05)
 
 
