@@ -1,4 +1,4 @@
-import React, { memo, useCallback } from 'react'
+import React, { memo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { makeStyles } from '@material-ui/core/styles'
 import cx from 'classnames'
@@ -34,22 +34,26 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const AcquisitionResult = ({ file, setFile, currentStep }) => {
+const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
   const styles = useStyles()
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const { nextStep } = useStepperDialog()
-  const { setFormData } = useFormData()
-  const { page, multipage } = currentStep
+  const { setFormData, formData } = useFormData()
+  const { page, multipage, stepIndex } = currentStep
 
-  const onValid = useCallback(
-    (repeat = false) => {
+  useEffect(() => {
+    const hasAlreadyFile = formData.data.some(
+      d => d.stepIndex === stepIndex && d.file.name === currentFile.name
+    )
+    if (!hasAlreadyFile) {
       setFormData(prev => ({
         ...prev,
         data: [
           ...prev.data,
           {
-            file,
+            file: currentFile,
+            stepIndex,
             fileMetadata: {
               page: !multipage ? page : '',
               multipage
@@ -57,10 +61,28 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
           }
         ]
       }))
+    }
+  }, [formData.data, stepIndex, currentFile, multipage, page, setFormData])
+
+  const changeSelectedFile = () => {
+    const newData = formData.data.filter(
+      data => data.file.name !== currentFile.name
+    )
+
+    setFormData(prev => ({
+      ...prev,
+      data: newData
+    }))
+
+    setCurrentFile(null)
+  }
+
+  const onValid = useCallback(
+    (repeat = false) => {
       if (!repeat) nextStep()
-      else setFile(null)
+      else setCurrentFile(null)
     },
-    [multipage, page, nextStep, setFile, setFormData, file]
+    [nextStep, setCurrentFile]
   )
 
   const handleKeyDown = useCallback(
@@ -88,12 +110,15 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
         </div>
         <Card className={'u-ta-center u-p-1 u-pb-half'}>
           <div className={'u-mah-5'}>
-            {!isPDF(file) ? (
-              <img src={URL.createObjectURL(file)} className={styles.img} />
+            {!isPDF(currentFile) ? (
+              <img
+                src={URL.createObjectURL(currentFile)}
+                className={styles.img}
+              />
             ) : (
               <>
                 <Icon icon={FileTypePdfIcon} size={80} />
-                <Typography variant={'body1'}>{file.name}</Typography>
+                <Typography variant={'body1'}>{currentFile.name}</Typography>
               </>
             )}
           </div>
@@ -102,7 +127,7 @@ const AcquisitionResult = ({ file, setFile, currentStep }) => {
             data-testid="retry-button"
             label={t('Acquisition.retry')}
             theme={'text'}
-            onClick={() => setFile(null)}
+            onClick={changeSelectedFile}
           />
         </Card>
       </div>

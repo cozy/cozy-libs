@@ -1,7 +1,7 @@
 {
   "Acquisition": {
     "repeat": "Scan an additional page",
-    "retry": "Take over",
+    "retry": "Cancel picture",
     "success": "The picture was taken."
   },
   "action": {

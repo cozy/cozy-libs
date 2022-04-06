@@ -13,6 +13,7 @@ import ScanMobileActions from '../ModelSteps/ScanMobileActions'
 import ScanDesktopActions from '../ModelSteps/ScanDesktopActions'
 import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
 import { makeBlobWithCustomAttrs } from '../../helpers/makeBlobWithCustomAttrs'
+import { useFormData } from '../Hooks/useFormData'
 
 const { fetchBlobFileById } = models.file
 
@@ -26,15 +27,16 @@ const validFileType = file => {
 const Scan = ({ currentStep }) => {
   const { t } = useI18n()
   const client = useClient()
-  const { illustration, text } = currentStep
-  const [file, setFile] = useState(null)
+  const { formData } = useFormData()
+  const { illustration, text, stepIndex } = currentStep
+  const [currentFile, setCurrentFile] = useState(null)
 
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
   const [cozyFileId, setCozyFileId] = useState('')
 
   const onChangeFile = useCallback(file => {
     if (file) {
-      setFile(file)
+      setCurrentFile(file)
     }
   }, [])
 
@@ -42,6 +44,15 @@ const Scan = ({ currentStep }) => {
   const closeFilePickerModal = () => setIsFilePickerModalOpen(false)
 
   const onChangeFilePicker = fileId => setCozyFileId(fileId)
+
+  useEffect(() => {
+    const data = formData.data.filter(data => data.stepIndex === stepIndex)
+    const { file } = data[data.length - 1] || {}
+
+    if (file) {
+      setCurrentFile(file)
+    }
+  }, [formData.data, stepIndex])
 
   useEffect(() => {
     ;(async () => {
@@ -61,10 +72,10 @@ const Scan = ({ currentStep }) => {
     })()
   }, [client, cozyFileId, onChangeFile])
 
-  return file ? (
+  return currentFile ? (
     <AcquisitionResult
-      file={file}
-      setFile={setFile}
+      currentFile={currentFile}
+      setCurrentFile={setCurrentFile}
       currentStep={currentStep}
     />
   ) : (
