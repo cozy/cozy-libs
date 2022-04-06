@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.4.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.4.0...cozy-mespapiers-lib@0.4.1) (2022-04-06)
+
+
+### Bug Fixes
+
+* Back to Scan step must be displayed file already selected ([0b99eab](https://github.com/cozy/cozy-libs/commit/0b99eabe472e929b2d3186cbea7fe9a9d2e6ddf0))
+
+
+
+
+
 # [0.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.3.0...cozy-mespapiers-lib@0.4.0) (2022-04-06)
 
 
