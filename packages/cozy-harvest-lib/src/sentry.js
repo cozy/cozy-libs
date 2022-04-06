@@ -6,7 +6,7 @@ import * as Sentry from '@sentry/browser'
  * @param {SentryClient}
  */
 export const client = new Sentry.BrowserClient({
-  dsn: 'https://888abd94993a47a39e751598fc6be803@sentry.cozycloud.cc/145',
+  dsn: 'https://1f8d191bad884bf98ae8cdcb6f6abb72@errors.cozycloud.cc/39',
   integrations: Sentry.defaultIntegrations,
   beforeSend(event) {
     if (process.env.NODE_ENV !== 'production') {
