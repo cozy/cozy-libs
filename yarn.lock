@@ -8346,7 +8346,7 @@ cozy-ui@60.6.0:
     filesize "8.0.7"
     hammerjs "^2.0.8"
     intersection-observer "0.11.0"
-    mui-bottom-sheet "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.6"
+    mui-bottom-sheet "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6"
     node-polyglot "^2.2.2"
     normalize.css "^7.0.0"
     react-markdown "^4.0.8"
@@ -8379,10 +8379,10 @@ cozy-ui@62.1.2:
     react-select "^4.3.0"
     react-swipeable-views "^0.13.3"
 
-cozy-ui@^62.0.0:
-  version "62.4.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-62.4.1.tgz#3e38d31e708de57cc367d8a30cb3d578dfefa7af"
-  integrity sha512-f6OyxPIHHhk3T75vED3477vfwIto9PWhzANJ7UqsIB3A+ie7Sbc+dw8PB6MFAVs03gfVOgKYfrDDTMhdZVbRuw==
+cozy-ui@^62.5.2:
+  version "62.5.2"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-62.5.2.tgz#c221e1a3ea179a4429356855974f45246200ec54"
+  integrity sha512-kmgLdJ97rkK8nTXvJDUO64foh+KIfhS/TBQFx1Y74ykicLyK9DcuQkKPnpE2FQWJ6Q0L+10zQtH7b5SkMD+1dw==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@popperjs/core" "^2.4.4"
@@ -8394,7 +8394,7 @@ cozy-ui@^62.0.0:
     intersection-observer "0.11.0"
     mui-bottom-sheet "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6"
     node-polyglot "^2.2.2"
-    normalize.css "^7.0.0"
+    normalize.css "^8.0.0"
     react-markdown "^4.0.8"
     react-pdf "^4.0.5"
     react-popper "^2.2.3"
@@ -16224,6 +16224,11 @@ normalize-url@^3.0.0, normalize-url@^3.3.0:
 normalize.css@^7.0.0:
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-7.0.0.tgz#abfb1dd82470674e0322b53ceb1aaf412938e4bf"
+
+normalize.css@^8.0.0:
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/normalize.css/-/normalize.css-8.0.1.tgz#9b98a208738b9cc2634caacbc42d131c97487bf3"
+  integrity sha512-qizSNPO93t1YUuUhP22btGOo3chcvDFqFaj2TRybP0DMxkHOCTYwp3n34fel4a31ORXy4m1Xq0Gyqpb5m33qIg==
 
 npm-bundled@^1.0.1:
   version "1.0.6"
