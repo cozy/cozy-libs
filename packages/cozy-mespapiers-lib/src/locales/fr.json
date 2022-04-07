@@ -187,14 +187,14 @@
     },
     "card": {
       "back": {
-        "text": "Photographier la face arrière de votre carte"
+        "text": "Ajouter la face arrière de votre carte"
       },
       "expirationDate": {
         "inputLabel": "Valable jusqu'au",
         "text": "Quelle est la date d'expiration de cette carte ?"
       },
       "front": {
-        "text": "Photographier la face avant de votre carte"
+        "text": "Ajouter la face avant de votre carte"
       },
       "number": {
         "inputLabel": "Numéro de la carte",

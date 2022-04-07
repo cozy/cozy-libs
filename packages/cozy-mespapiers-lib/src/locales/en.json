@@ -187,14 +187,14 @@
     },
     "card": {
       "back": {
-        "text": "Take a picture of the back of your ID card"
+        "text": "Add the back of your ID card"
       },
       "expirationDate": {
         "inputLabel": "Expiration date",
         "text": "When was your card issued? (written on the back)"
       },
       "front": {
-        "text": "Take a picture of the front of your ID card"
+        "text": "Add the front of your ID card"
       },
       "number": {
         "inputLabel": "Card number",
