@@ -163,8 +163,8 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
 }
 
 AcquisitionResult.propTypes = {
-  file: PropTypes.object.isRequired,
-  setFile: PropTypes.func.isRequired,
+  currentFile: PropTypes.object.isRequired,
+  setCurrentFile: PropTypes.func.isRequired,
   currentStep: PaperDefinitionsStepPropTypes
 }
 
