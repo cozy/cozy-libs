@@ -16,6 +16,7 @@ import InputTextAdapter from '../ModelSteps/widgets/InputTextAdapter'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import { hasNextvalue } from '../../utils/hasNextvalue'
+import { KEYS } from '../../constants/const'
 
 const Information = ({ currentStep }) => {
   const { t } = useI18n()
@@ -41,7 +42,7 @@ const Information = ({ currentStep }) => {
 
   const handleKeyDown = useCallback(
     evt => {
-      if (evt.key === 'Enter') submit()
+      if (evt.key === KEYS.ENTER) submit()
     },
     [submit]
   )

@@ -19,6 +19,7 @@ import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useFormData } from '../Hooks/useFormData'
 import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
+import { KEYS } from '../../constants/const'
 
 const isPDF = file => file.type === 'application/pdf'
 
@@ -87,7 +88,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
 
   const handleKeyDown = useCallback(
     ({ key }) => {
-      if (key === 'Enter') onValid()
+      if (key === KEYS.ENTER) onValid()
     },
     [onValid]
   )

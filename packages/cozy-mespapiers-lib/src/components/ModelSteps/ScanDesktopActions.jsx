@@ -1,4 +1,4 @@
-import React, { useCallback, createRef } from 'react'
+import React, { createRef } from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -8,20 +8,19 @@ import FolderMoveto from 'cozy-ui/transpiled/react/Icons/FolderMoveto'
 import PhoneUpload from 'cozy-ui/transpiled/react/Icons/PhoneUpload'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
+import { KEYS } from '../../constants/const'
+
 const styleBtn = { color: 'var(--primaryTextColor)' }
 
 const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
   const { t } = useI18n()
   const buttonRef = createRef()
 
-  const handleKeyDown = useCallback(
-    ({ key }) => {
-      if (key === 'Enter' && buttonRef.current) {
-        buttonRef.current.click()
-      }
-    },
-    [buttonRef]
-  )
+  const handleKeyDown = ({ key }) => {
+    if (key === KEYS.ENTER && buttonRef.current) {
+      buttonRef.current.click()
+    }
+  }
 
   useEventListener(window, 'keydown', handleKeyDown)
 

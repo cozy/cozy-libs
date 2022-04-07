@@ -24,6 +24,7 @@ import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import ConfirmReplaceFile from './widgets/ConfirmReplaceFile'
 import { FILES_DOCTYPE } from '../../doctypes'
+import { KEYS } from '../../constants/const'
 
 const { getFullname } = models.contact
 
@@ -181,7 +182,7 @@ const ContactWrapper = ({ currentStep, onClose }) => {
 
   const handleKeyDown = useCallback(
     ({ key }) => {
-      if (key === 'Enter') handleClick()
+      if (key === KEYS.ENTER) handleClick()
     },
     [handleClick]
   )
