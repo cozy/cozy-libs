@@ -109,21 +109,27 @@ const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
         onClick={hasSteps ? handleClick : null}
         left={
           <Icon
-            className={!hasSteps && styles.disabledIcon}
+            className={cx({
+              [styles.disabledIcon]: !hasSteps
+            })}
             icon={Camera}
             size={16}
           />
         }
       >
         <Typography
-          className={!hasSteps && styles.disabledTypography}
+          className={cx({
+            [styles.disabledTypography]: !hasSteps
+          })}
           variant="body1"
           gutterBottom
         >
           {t('ImportDropdown.scanPicture.title')}
         </Typography>
         <Typography
-          className={!hasSteps && styles.disabledTypography}
+          className={cx({
+            [styles.disabledTypography]: !hasSteps
+          })}
           variant="caption"
           color="textSecondary"
         >
@@ -136,9 +142,9 @@ const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
         })}
         left={
           <Icon
-            className={
-              !konnectorCategory && !konnectorName && styles.disabledIcon
-            }
+            className={cx({
+              [styles.disabledIcon]: !konnectorCategory && !konnectorName
+            })}
             icon={Konnector}
             size={24}
           />
@@ -146,18 +152,18 @@ const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
         onClick={konnectorCategory || konnectorName ? goToStore : null}
       >
         <Typography
-          className={
-            !konnectorCategory && !konnectorName && styles.disabledTypography
-          }
+          className={cx({
+            [styles.disabledTypography]: !konnectorCategory && !konnectorName
+          })}
           variant="body1"
           gutterBottom
         >
           {t('ImportDropdown.importAuto.title')}
         </Typography>
         <Typography
-          className={
-            !konnectorCategory && !konnectorName && styles.disabledTypography
-          }
+          className={cx({
+            [styles.disabledTypography]: !konnectorCategory && !konnectorName
+          })}
           variant="caption"
           color="textSecondary"
         >
