@@ -12,40 +12,49 @@
     "check-locales": "./scripts/check-locales.sh",
     "prepublishOnly": "yarn check-locales && yarn build"
   },
+  "dependencies": {
+    "@date-io/date-fns": "1",
+    "date-fns": "2.23.0",
+    "pdf-lib": "1.17.1",
+    "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
+    "node-polyglot": "^2.4.0",
+    "react-router-dom": "5.2.0"
+  },
   "devDependencies": {
+    "@material-ui/core": "4.12.3",
+    "@material-ui/pickers": "3.3.10",
     "@testing-library/react": "11.2.7",
     "babel-preset-cozy-app": "2.0.1",
     "cozy-bar": "7.16.0",
     "cozy-client": "^27.22.0",
+    "cozy-device-helper": "^1.17.0",
+    "cozy-doctypes": "^1.83.3",
+    "cozy-harvest-lib": "^8.0.0",
     "cozy-intent": "^1.13.5",
     "cozy-realtime": "^4.0.2",
+    "cozy-sharing": "^4.0.2",
     "cozy-ui": "^62.5.2",
     "eslint-config-cozy-app": "^4.0.0",
     "git-directory-deploy": "1.5.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
     "jest-resolve-cached": "1.1.1",
-    "react-router-dom": "5.2.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-test-renderer": "16.14.0",
     "redux-mock-store": "1.5.4"
   },
-  "dependencies": {
-    "@date-io/date-fns": "1",
+  "peerDependencies": {
     "@material-ui/core": "4.12.3",
     "@material-ui/pickers": "3.3.10",
-    "cozy-device-helper": "^1.17.0",
-    "cozy-doctypes": "^1.83.3",
-    "cozy-harvest-lib": "^8.0.0",
-    "cozy-sharing": "^4.0.2",
-    "date-fns": "2.23.0",
-    "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
-    "node-polyglot": "^2.4.0",
-    "pdf-lib": "1.17.1"
-  },
-  "peerDependencies": {
     "cozy-client": ">=27.22.0",
     "cozy-intent": ">=1.13.5",
     "cozy-realtime": ">=4.0.2",
     "cozy-ui": ">=62.5.2",
-    "react-router-dom": ">=5.2.0"
+    "cozy-device-helper": ">=1.17.0",
+    "cozy-doctypes": ">=1.83.3",
+    "cozy-harvest-lib": ">=8.0.0",
+    "cozy-sharing": ">=4.0.2",
+    "react": "17.0.2",
+    "react-dom": "17.0.2"
   }
 }
