@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.4.1...cozy-mespapiers-lib@0.5.0) (2022-04-07)
+
+
+### Features
+
+* Add listener on Scan step ([7c84085](https://github.com/cozy/cozy-libs/commit/7c840859dcd9070c079e372f7d17371b689e65d1))
+* Change of the wording to suit all devices ([9eb9218](https://github.com/cozy/cozy-libs/commit/9eb9218d3b8e96e7f9d492197f890b06e43ac283))
+* Update cozy-ui to 62.5.2 ([324038c](https://github.com/cozy/cozy-libs/commit/324038c25d9c1f99dcc803e42e7993a45e163e07))
+
+
+
+
+
 ## [0.4.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.4.0...cozy-mespapiers-lib@0.4.1) (2022-04-06)
 
 
