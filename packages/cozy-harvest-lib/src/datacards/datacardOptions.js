@@ -7,7 +7,6 @@
  * all dependencies that are necessary for all types of data card.
  */
 
-import flag from 'cozy-flags'
 import get from 'lodash/get'
 import GeoDataCard from './GeoDataCard'
 import FileDataCard from './FileDataCard'
@@ -22,8 +21,7 @@ const timeseriesGeoJSONDatacard = {
 
 const filesDatacard = {
   component: FileDataCard,
-  match: ({ trigger }) =>
-    flag('harvest.datacards.files') && get(trigger, 'message.folder_to_save')
+  match: ({ trigger }) => get(trigger, 'message.folder_to_save')
 }
 
 const options = {

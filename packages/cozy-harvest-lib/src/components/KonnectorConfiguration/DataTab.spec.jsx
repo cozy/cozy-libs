@@ -62,23 +62,6 @@ describe('DataTab', () => {
   })
 
   describe('links to other apps', () => {
-    it('should show the link to drive when the konnector saves files', () => {
-      const withoutFolder = setup({ trigger: { message: {} } })
-      expect(withoutFolder.find(AppLinkCard).length).toEqual(0)
-
-      const withEmptyFolder = setup({
-        trigger: { message: { folder_to_save: '' } }
-      })
-      expect(withEmptyFolder.find(AppLinkCard).length).toEqual(0)
-
-      const withFolder = setup({
-        trigger: { message: { folder_to_save: '123' } }
-      })
-      expect(withFolder.find(AppLinkCard).length).toEqual(1)
-      expect(withFolder.find(AppLinkCard).prop('slug')).toEqual('drive')
-      expect(withFolder.find(AppLinkCard).prop('path')).toEqual('#/files/123')
-    })
-
     it('should show the link to banks', () => {
       const withoutAccounts = setup({
         konnector: { data_types: ['something', 'else'], attributes: {} }
@@ -132,7 +115,7 @@ describe('DataTab', () => {
         konnector: { data_types: ['contact', 'bankAccounts'], attributes: {} },
         trigger: { message: { folder_to_save: '123' } }
       })
-      expect(withEverything.find(AppLinkCard).length).toEqual(3)
+      expect(withEverything.find(AppLinkCard).length).toEqual(2)
     })
   })
 })

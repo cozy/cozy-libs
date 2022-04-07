@@ -1,6 +1,4 @@
-import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
-import flag from 'cozy-flags'
 
 /**
  * Exporting relatedAppsConfiguration is useful for overrides
@@ -24,16 +22,6 @@ export const relatedAppsConfiguration = [
         Array.isArray(konnectorManifest.data_types) &&
         konnectorManifest.data_types.includes('contact')
       )
-    }
-  },
-  {
-    slug: 'drive',
-    priority: 0,
-    predicate: ({ trigger }) => {
-      if (flag('harvest.datacards.files')) {
-        return false
-      }
-      return !!get(trigger, 'message.folder_to_save')
     }
   }
 ]

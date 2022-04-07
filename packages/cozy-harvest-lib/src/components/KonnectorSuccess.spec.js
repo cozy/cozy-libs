@@ -67,11 +67,6 @@ describe('KonnectorSuccess', () => {
     expect(root.find(KonnectorSuccess).dive().find(DriveLink).length).toBe(0)
   })
 
-  it('should show drive if trigger has a folder_to_save', () => {
-    setup({ folder_to_save: 'jjj' })
-    expect(root.find(KonnectorSuccess).dive().find(DriveLink).length).toBe(1)
-  })
-
   it('should show banks if connector has datatypes with bankAccounts', () => {
     setup({ isBankingKonnector: true })
     expect(root.find(KonnectorSuccess).dive().find(DriveLink).length).toBe(0)
@@ -80,7 +75,6 @@ describe('KonnectorSuccess', () => {
 
   it('should show apps in the correct order', () => {
     setup({ isBankingKonnector: true, folder_to_save: '123' })
-    expect(root.find(KonnectorSuccess).dive().find(DriveLink).length).toBe(1)
     expect(root.find(KonnectorSuccess).dive().find(BanksLink).length).toBe(1)
     expect(
       root.find(KonnectorSuccess).dive().find(DescriptionContent).getElement()
