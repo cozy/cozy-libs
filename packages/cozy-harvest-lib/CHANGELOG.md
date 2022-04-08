@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.0.0...cozy-harvest-lib@8.1.0) (2022-04-08)
+
+
+### Bug Fixes
+
+* Remove unused restoreAllMocks ([6dd376a](https://github.com/cozy/cozy-libs/commit/6dd376a2a7f4393a9446375383d6b77510f87d95))
+
+
+### Features
+
+* Do not mark a job as succeeded on login success ([39e6d01](https://github.com/cozy/cozy-libs/commit/39e6d0161839a6d00ef0dcf24eb6aa0ddeff5f78))
+* Watch job changes when the trigger is already running ([ca01663](https://github.com/cozy/cozy-libs/commit/ca01663eb41bbbcfed5d1f146c9cd68956faa9df))
+
+
+
+
+
 # [8.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@7.3.7...cozy-harvest-lib@8.0.0) (2022-04-04)
 
 
