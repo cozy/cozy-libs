@@ -28,6 +28,7 @@ export const AppLinkButton = ({ slug, path }) => {
     <AppLinker app={{ slug }} nativePath={path} href={url || '#'}>
       {({ onClick, href }) => (
         <ButtonLink
+          disabled={fetchStatus !== 'loaded'}
           onClick={fetchStatus === 'loaded' ? onClick : null}
           href={href}
           icon={
