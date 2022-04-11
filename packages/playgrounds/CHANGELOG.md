@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.18.61 (2022-04-11)
+
+
+### Bug Fixes
+
+* bump react-router from 3.2.4 to 6.3.0 ([a1adf7b](https://github.com/cozy/cozy-libs/commit/a1adf7bf4db360b67b2804f7e04e08ef3d202a03))
+* Open modal with background content ([4f670ca](https://github.com/cozy/cozy-libs/commit/4f670ca38939df94973f391a1cc9318ff419b6a0))
+* set react-router exact version in playgrounds ([36cbf51](https://github.com/cozy/cozy-libs/commit/36cbf5106294c8fad451118034f2e7e89835bbf9))
+
+
+
+
+
 ## [1.18.60](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.59...cozy-playgrounds@1.18.60) (2022-04-01)
 
 **Note:** Version bump only for package cozy-playgrounds

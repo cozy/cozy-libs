@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.8.3 (2022-04-11)
+
+
+### Bug Fixes
+
+* bump react-router from 3.2.4 to 6.3.0 ([a1adf7b](https://github.com/cozy/cozy-libs/commit/a1adf7bf4db360b67b2804f7e04e08ef3d202a03))
+* Open modal with background content ([4f670ca](https://github.com/cozy/cozy-libs/commit/4f670ca38939df94973f391a1cc9318ff419b6a0))
+
+
+
+
+
 ## 2.8.2 (2022-04-01)
 
 
