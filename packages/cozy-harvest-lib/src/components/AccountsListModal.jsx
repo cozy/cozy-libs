@@ -8,7 +8,7 @@ import { MountPointContext } from './MountPointContext'
 import DialogContent from '@material-ui/core/DialogContent'
 
 const AccountsListModal = ({ konnector, accounts, t }) => {
-  const { pushHistory } = useContext(MountPointContext)
+  const { pushHistory, replaceHistory } = useContext(MountPointContext)
   return (
     <>
       <DialogContent>
@@ -23,7 +23,7 @@ const AccountsListModal = ({ konnector, accounts, t }) => {
         <AccountsList
           accounts={accounts}
           konnector={konnector}
-          onPick={option => pushHistory(`/accounts/${option.account._id}`)}
+          onPick={option => replaceHistory(`/accounts/${option.account._id}`)}
           addAccount={() => pushHistory('/new')}
         />
       </DialogContent>

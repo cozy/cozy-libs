@@ -5,10 +5,10 @@ import RedirectToAccountFormButton from './RedirectToAccountFormButton'
 import AppLike from '../../test/AppLike'
 
 describe('redirect to account form button', () => {
-  it('should use pushHistory to navigate', () => {
-    const pushHistory = jest.fn()
+  it('should use replaceHistory to navigate', () => {
+    const replaceHistory = jest.fn()
     const mountPointContextValue = {
-      pushHistory
+      replaceHistory
     }
     const trigger = {
       message: {
@@ -23,7 +23,7 @@ describe('redirect to account form button', () => {
       </AppLike>
     )
     fireEvent.click(root.getByText('Reconnect'))
-    expect(pushHistory).toHaveBeenCalledWith(
+    expect(replaceHistory).toHaveBeenCalledWith(
       '/accounts/account-id-1337/edit?reconnect'
     )
   })

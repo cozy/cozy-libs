@@ -26,7 +26,7 @@ import { useDialogContext } from './DialogContext'
 const NewAccountModal = ({ konnector, onDismiss }) => {
   const { t } = useI18n()
   const client = useClient()
-  const { pushHistory } = useContext(MountPointContext)
+  const { replaceHistory } = useContext(MountPointContext)
   const {
     fetchStatus,
     data: { isInMaintenance, messages: maintenanceMessages }
@@ -74,7 +74,7 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
               if (trigger.worker !== 'client') {
                 path += '/success'
               }
-              pushHistory(path)
+              replaceHistory(path)
             }}
             onSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
@@ -82,7 +82,7 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
               if (trigger.worker !== 'client') {
                 path += '/success'
               }
-              pushHistory(path)
+              replaceHistory(path)
             }}
             onVaultDismiss={onDismiss}
             fieldOptions={fieldOptions}

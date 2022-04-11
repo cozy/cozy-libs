@@ -7,10 +7,10 @@ import { MountPointContext } from './MountPointContext'
 const RedirectToAccountFormButton = ({ trigger }) => {
   const { t } = useI18n()
   const accountId = getAccountId(trigger)
-  const { pushHistory } = useContext(MountPointContext)
+  const { replaceHistory } = useContext(MountPointContext)
   const handleClick = useCallback(() => {
-    pushHistory(`/accounts/${accountId}/edit?reconnect`)
-  }, [accountId, pushHistory])
+    replaceHistory(`/accounts/${accountId}/edit?reconnect`)
+  }, [accountId, replaceHistory])
   return (
     <Button
       className="u-ml-0"
