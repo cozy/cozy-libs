@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.1.0...cozy-harvest-lib@8.1.1) (2022-04-11)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Correctly handle onClick on AppLinkCard ([c9068c5](https://github.com/cozy/cozy-libs/commit/c9068c53a1ec2e1f6b9b7636f6b25aadec69900f))
+* **cozy-harvest-lib:** Disable AppLink button until fallback is resolved ([bedc90d](https://github.com/cozy/cozy-libs/commit/bedc90d80c899bb93a2be70d6963d62742fb600b))
+
+
+
+
+
 # [8.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.0.0...cozy-harvest-lib@8.1.0) (2022-04-08)
 
 
