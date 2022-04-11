@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { RawMountPointProvider } from 'components/MountPointContext'
 
 describe('MountPointProvider', () => {
-  const historyMock = { push: jest.fn() }
+  const historyMock = { replace: jest.fn() }
 
   beforeEach(() => {
     jest.resetAllMocks()
@@ -14,17 +14,17 @@ describe('MountPointProvider', () => {
       <RawMountPointProvider baseRoute="/root" history={historyMock} />
     )
 
-    component.instance().pushHistory('/one')
-    expect(historyMock.push).toHaveBeenCalledWith('/root/one')
+    component.instance().replaceHistory('/one')
+    expect(historyMock.replace).toHaveBeenCalledWith('/root/one')
 
-    component.instance().pushHistory('/one/two')
-    expect(historyMock.push).toHaveBeenCalledWith('/root/one/two')
+    component.instance().replaceHistory('/one/two')
+    expect(historyMock.replace).toHaveBeenCalledWith('/root/one/two')
 
-    component.instance().pushHistory('no/slash')
-    expect(historyMock.push).toHaveBeenCalledWith('/root/no/slash')
+    component.instance().replaceHistory('no/slash')
+    expect(historyMock.replace).toHaveBeenCalledWith('/root/no/slash')
 
-    component.instance().pushHistory('too/many///slashes')
-    expect(historyMock.push).toHaveBeenCalledWith('/root/too/many/slashes')
+    component.instance().replaceHistory('too/many///slashes')
+    expect(historyMock.replace).toHaveBeenCalledWith('/root/too/many/slashes')
   })
 
   it('should handle a trailing slash in the base route', () => {
@@ -32,11 +32,11 @@ describe('MountPointProvider', () => {
       <RawMountPointProvider baseRoute="/root/" history={historyMock} />
     )
 
-    component.instance().pushHistory('/one')
-    expect(historyMock.push).toHaveBeenCalledWith('/root/one')
+    component.instance().replaceHistory('/one')
+    expect(historyMock.replace).toHaveBeenCalledWith('/root/one')
 
-    component.instance().pushHistory('no/slash')
-    expect(historyMock.push).toHaveBeenCalledWith('/root/no/slash')
+    component.instance().replaceHistory('no/slash')
+    expect(historyMock.replace).toHaveBeenCalledWith('/root/no/slash')
   })
 
   it('should handle a base route with multiple segments', () => {
@@ -44,10 +44,10 @@ describe('MountPointProvider', () => {
       <RawMountPointProvider baseRoute="/base/route/" history={historyMock} />
     )
 
-    component.instance().pushHistory('/one')
-    expect(historyMock.push).toHaveBeenCalledWith('/base/route/one')
+    component.instance().replaceHistory('/one')
+    expect(historyMock.replace).toHaveBeenCalledWith('/base/route/one')
 
-    component.instance().pushHistory('/one/two')
-    expect(historyMock.push).toHaveBeenCalledWith('/base/route/one/two')
+    component.instance().replaceHistory('/one/two')
+    expect(historyMock.replace).toHaveBeenCalledWith('/base/route/one/two')
   })
 })

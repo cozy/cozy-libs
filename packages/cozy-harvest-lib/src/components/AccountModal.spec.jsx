@@ -37,6 +37,8 @@ const accountIdMock = '123'
 describe('AccountModal', () => {
   const setup = () => {
     const mockHistoryPush = jest.fn()
+    const mockHistoryReplace = jest.fn()
+
     const component = shallow(
       <AccountModal
         konnector={{}}
@@ -44,11 +46,12 @@ describe('AccountModal', () => {
         accountId={accountIdMock}
         accountsAndTriggers={accountsAndTriggersMock}
         pushHistory={mockHistoryPush}
+        replaceHistory={mockHistoryReplace}
         breakpoints={{ isMobile: true }}
         onDismiss={jest.fn()}
       />
     )
-    return { component, mockHistoryPush }
+    return { component, mockHistoryPush, mockHistoryReplace }
   }
 
   it('should display the fetching state by default', () => {
@@ -62,7 +65,9 @@ describe('AccountModal', () => {
       name: 'account 1'
     })
 
-    const { component, mockHistoryPush } = setup({ fetchAccount })
+    const { component, mockHistoryPush } = setup({
+      fetchAccount
+    })
 
     it('should display the AccountSelect & Content if an account is there and we can change the selectedAccount', async () => {
       await component.instance().componentDidMount()

@@ -9,21 +9,31 @@ export class RawMountPointProvider extends React.Component {
     super(props)
 
     this.pushHistory = this.pushHistory.bind(this)
+    this.replaceHistory = this.replaceHistory.bind(this)
 
     this.state = {
       baseRoute: props.baseRoute || '/',
-      pushHistory: this.pushHistory
+      pushHistory: this.pushHistory,
+      replaceHistory: this.replaceHistory
     }
   }
 
-  pushHistory(route) {
+  historyAction(route, method) {
     const { history } = this.props
     const { baseRoute } = this.state
-    const segments = baseRoute
-      .split('/')
-      .concat(route.split('/'))
-      .filter(Boolean)
-    history.push(`/${segments.join('/')}`)
+    const segments = '/'.concat(
+      baseRoute.split('/').concat(route.split('/')).filter(Boolean).join('/')
+    )
+
+    history[method](segments)
+  }
+
+  pushHistory(route) {
+    this.historyAction(route, 'push')
+  }
+
+  replaceHistory(route) {
+    this.historyAction(route, 'replace')
   }
 
   render() {
@@ -40,13 +50,20 @@ RawMountPointProvider.propTypes = {
   history: PropTypes.object
 }
 
-const withMountPointPushHistory = BaseComponent => {
+const withMountPointHistory = BaseComponent => {
   const Component = props => {
-    const { pushHistory } = useContext(MountPointContext)
-    return <BaseComponent pushHistory={pushHistory} {...props} />
+    const { pushHistory, replaceHistory } = useContext(MountPointContext)
+
+    return (
+      <BaseComponent
+        pushHistory={pushHistory}
+        replaceHistory={replaceHistory}
+        {...props}
+      />
+    )
   }
 
-  Component.displayName = `withMountPointPushHistory(${
+  Component.displayName = `withMountPointHistory(${
     BaseComponent.displayName || BaseComponent.name
   })`
 
@@ -54,4 +71,4 @@ const withMountPointPushHistory = BaseComponent => {
 }
 
 const MountPointProvider = withRouter(RawMountPointProvider)
-export { MountPointContext, MountPointProvider, withMountPointPushHistory }
+export { MountPointContext, MountPointProvider, withMountPointHistory }

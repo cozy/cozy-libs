@@ -19,7 +19,7 @@ import {
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
-import { withMountPointPushHistory } from './MountPointContext'
+import { withMountPointHistory } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
@@ -164,7 +164,7 @@ export class EditAccountModal extends Component {
   redirectToAccount() {
     const { account } = this.state
     if (account) {
-      this.props.pushHistory(`/accounts/${account._id}`)
+      this.props.replaceHistory(`/accounts/${account._id}`)
     } else {
       this.props.pushHistory(`/accounts`)
     }
@@ -203,6 +203,6 @@ EditAccountModal.propTypes = {
 
 export default flow(
   withClient,
-  withMountPointPushHistory,
+  withMountPointHistory,
   withTracker
 )(EditAccountModal)

@@ -26,9 +26,9 @@ jest.mock('./DialogContext', () => {
 })
 
 describe('NewAccountModal', () => {
-  const pushHistory = jest.fn()
+  const replaceHistory = jest.fn()
   const mountPointContextValue = {
-    pushHistory
+    replaceHistory
   }
   const konnectorTrigger = {
     worker: 'konnector',
@@ -58,7 +58,7 @@ describe('NewAccountModal', () => {
       </AppLike>
     )
     onLoginSuccessFn(konnectorTrigger)
-    expect(pushHistory).toHaveBeenCalledWith('/accounts/accountNumber/success')
+    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumber/success')
   })
   it('should redirect to route without success on login success for client triggers', () => {
     render(
@@ -71,7 +71,7 @@ describe('NewAccountModal', () => {
       </AppLike>
     )
     onLoginSuccessFn(clientTrigger)
-    expect(pushHistory).toHaveBeenCalledWith('/accounts/accountNumberClient')
+    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumberClient')
   })
 
   it('should redirect to success route on success for non client triggers', () => {
@@ -85,7 +85,7 @@ describe('NewAccountModal', () => {
       </AppLike>
     )
     onSuccessFn(konnectorTrigger)
-    expect(pushHistory).toHaveBeenCalledWith('/accounts/accountNumber/success')
+    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumber/success')
   })
   it('should redirect to route without success on success for client triggers', () => {
     render(
@@ -98,6 +98,6 @@ describe('NewAccountModal', () => {
       </AppLike>
     )
     onSuccessFn(clientTrigger)
-    expect(pushHistory).toHaveBeenCalledWith('/accounts/accountNumberClient')
+    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumberClient')
   })
 })

@@ -14,7 +14,7 @@ import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
-import { withMountPointPushHistory } from './MountPointContext'
+import { withMountPointHistory } from './MountPointContext'
 import withLocales from './hoc/withLocales'
 import DialogContent from '@material-ui/core/DialogContent'
 
@@ -109,6 +109,7 @@ export class AccountModal extends Component {
       accountsAndTriggers,
       t,
       pushHistory,
+      replaceHistory,
       initialActiveTab,
       breakpoints: { isMobile },
       showAccountSelection,
@@ -164,7 +165,7 @@ export class AccountModal extends Component {
               initialTrigger={trigger}
               account={account}
               onAccountDeleted={onDismiss}
-              addAccount={() => pushHistory('/new')}
+              addAccount={() => replaceHistory('/new')}
               showNewAccountButton={showNewAccountButton}
             />
           </DialogContent>
@@ -197,7 +198,7 @@ AccountModal.propTypes = {
     })
   ).isRequired,
   t: PropTypes.func.isRequired,
-  pushHistory: PropTypes.func.isRequired,
+  replaceHistory: PropTypes.func.isRequired,
   accountId: PropTypes.string.isRequired,
 
   /** @type {string} Can be set to force the initial active tab */
@@ -213,6 +214,6 @@ AccountModal.propTypes = {
 export default flow(
   withClient,
   withLocales,
-  withMountPointPushHistory,
+  withMountPointHistory,
   withBreakpoints()
 )(AccountModal)
