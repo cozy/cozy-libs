@@ -50,6 +50,10 @@
           "reason": "Used through cozy-scripts"
         },
         {
+          "name": "material-ui",
+          "reason": "Used through cozy-ui"
+        },
+        {
           "name": "moment",
           "reason": "Used Intl/DateTimeFormat or date-fns"
         }
