@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.2.0...cozy-harvest-lib@8.2.1) (2022-04-13)
+
+
+### Bug Fixes
+
+* Get correct bi mapping for bnp_es and cic_es ([f304f89](https://github.com/cozy/cozy-libs/commit/f304f8978f1857f3f1d1e74c0c19385ab96dde24))
+
+
+
+
+
 # [8.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.1.1...cozy-harvest-lib@8.2.0) (2022-04-13)
 
 

@@ -1,6 +1,6 @@
 {
   "name": "cozy-mespapiers-lib",
-  "version": "0.5.4",
+  "version": "0.5.5",
   "description": "Cozy Mes papiers lib",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
@@ -34,7 +34,7 @@
     "@material-ui/pickers": "3.3.10",
     "cozy-device-helper": "^1.17.0",
     "cozy-doctypes": "^1.83.3",
-    "cozy-harvest-lib": "^8.2.0",
+    "cozy-harvest-lib": "^8.2.1",
     "cozy-sharing": "^4.0.2",
     "date-fns": "2.23.0",
     "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
