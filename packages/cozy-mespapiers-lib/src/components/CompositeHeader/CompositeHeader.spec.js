@@ -4,36 +4,63 @@ import { render } from '@testing-library/react'
 import CompositeHeader from './CompositeHeader'
 import AppLike from '../../../test/components/AppLike'
 
-const setup = ({ icon } = {}) => {
+const mockStringTitle = 'String Title'
+const mockStringText = 'String Text'
+const MockComponentTitle = () => {
+  return <div>Component Title</div>
+}
+const MockComponentText = ({ n }) => {
+  return <div>Component Text {n}</div>
+}
+
+const setup = ({ text, title } = {}) => {
   return render(
     <AppLike>
       <CompositeHeader
-        icon={icon}
+        icon={'IlluIBAN.png'}
         fallbackIcon={'fallback.svg'}
-        iconSize={16}
-        title="Title"
-        text="Text"
+        iconSize={'medium'}
+        title={title}
+        text={text}
       />
     </AppLike>
   )
 }
 
 describe('CompositeHeader', () => {
-  it('should use fallbackIcon if icon is undefined', () => {
-    const { getByTestId } = setup({ fallbackIcon: 'fallback.svg' })
+  it('should return string title', () => {
+    const { getByText } = setup({ title: mockStringTitle })
 
-    expect(getByTestId('fallback.svg'))
+    expect(getByText('String Title'))
   })
 
-  it('should use fallback icon for not supported png', () => {
-    const { getByTestId } = setup({ icon: 'illustration.png' })
+  it('should return string text', () => {
+    const { getByText } = setup({ text: mockStringText })
 
-    expect(getByTestId('fallback.svg'))
+    expect(getByText('String Text'))
   })
 
-  it('should use png if supported', () => {
-    const { getByTestId } = setup({ icon: 'IlluIBAN.png' })
+  it('should return Component title', () => {
+    const { getByText } = setup({ title: <MockComponentTitle /> })
 
-    expect(getByTestId('test-file-stub'))
+    expect(getByText('Component Title'))
+  })
+
+  it('should return Component text', () => {
+    const { getByText } = setup({ text: <MockComponentText /> })
+
+    expect(getByText('Component Text'))
+  })
+
+  it('should return Component text', () => {
+    const { getByText } = setup({
+      text: [
+        <MockComponentText key={0} n={0} />,
+        <MockComponentText key={1} n={1} />
+      ]
+    })
+
+    expect(getByText('Component Text 0'))
+    expect(getByText('Component Text 1'))
   })
 })
