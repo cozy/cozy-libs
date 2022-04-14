@@ -60,6 +60,20 @@ The following permissions are required in the application `manifest.webapp` file
 
 ## Importing
 
+You need to import `Sprite` and add it to the root of your application
+
+```jsx
+import IconSprite from 'cozy-ui/transpiled/react/Icon/Sprite'
+
+const App = () => {
+  return (
+    ...
+    <IconSprite />
+    ...
+  )
+}
+```
+
 You have to create a `/paper` route (the name is important) in your application routeur and add a background location:
 
 ```jsx
