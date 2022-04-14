@@ -49,6 +49,19 @@ const fixtures = {
       }
     }
   },
+  konnectorWithAdvancedField: {
+    fields: {
+      advancedFields: {
+        folderPath: {
+          advanced: true,
+          isRequired: false
+        }
+      },
+      username: {
+        type: 'text'
+      }
+    }
+  },
   account: {
     auth: {
       username: 'Toto',
@@ -370,6 +383,42 @@ describe('AccountForm', () => {
             flowState={flowState}
             t={t}
             konnector={fixtures.konnector}
+            onSubmit={onSubmit}
+            account={accountWithCipher}
+            readOnlyIdentifier={true}
+            fieldOptions={{}}
+          />
+        </I18n>,
+        {
+          context: { t },
+          childContextTypes: {
+            t: PropTypes.func
+          }
+        }
+      )
+
+      const hiddenInput = wrapper.find('input[type="hidden"][name="username"]')
+
+      expect(hiddenInput).toHaveLength(1)
+    })
+    it('should render a read-only identifier field even with advancedFields field in the manifest', () => {
+      const accountWithCipher = {
+        ...fixtures.account,
+        relationships: {
+          vaultCipher: {
+            _id: 'fake-cipher-id',
+            _type: 'com.bitwarden.ciphers',
+            _protocol: 'bitwarden'
+          }
+        }
+      }
+      const flowState = {}
+      const wrapper = mount(
+        <I18n lang="en" dictRequire={() => {}}>
+          <AccountForm
+            flowState={flowState}
+            t={t}
+            konnector={fixtures.konnectorWithAdvancedField}
             onSubmit={onSubmit}
             account={accountWithCipher}
             readOnlyIdentifier={true}
