@@ -19,6 +19,12 @@ const setup = ({ icon } = {}) => {
 }
 
 describe('CompositeHeader', () => {
+  it('should use fallbackIcon if icon is undefined', () => {
+    const { getByTestId } = setup({ fallbackIcon: 'fallback.svg' })
+
+    expect(getByTestId('fallback.svg'))
+  })
+
   it('should use fallback icon for not supported png', () => {
     const { getByTestId } = setup({ icon: 'illustration.png' })
 

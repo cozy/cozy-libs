@@ -87,7 +87,7 @@ const useStyles = makeStyles(() => ({
 const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize }) => {
   const styles = useStyles()
 
-  const iconName = icon.split('.')[0]
+  const iconName = icon && icon.split('.')[0]
   const src = images[iconName] || fallbackIcon
   const isBitmap = typeof src === 'string' && !src.endsWith('.svg')
 
