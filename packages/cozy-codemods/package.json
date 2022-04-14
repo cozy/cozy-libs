@@ -1,6 +1,6 @@
 {
   "name": "@cozy/codemods",
-  "version": "1.14.3",
+  "version": "1.14.4",
   "description": "Codeshifts used inside Cozies",
   "main": "index.js",
   "repository": "https://github.com/cozy/cozy-libs",
@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "@cozy/cli-tree": "^0.5.0",
-    "eslint-config-cozy-app": "^4.0.0",
+    "eslint-config-cozy-app": "^4.0.1",
     "jscodeshift": "^0.11.0"
   },
   "devDependencies": {

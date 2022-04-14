@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.0.1 (2022-04-14)
+
+
+### Bug Fixes
+
+* **eslint-config:** Upgrade dependencies ([7a3111a](https://github.com/cozy/cozy-libs/commit/7a3111abb41b5c34a8a8c63fe925c2e41e6a1039))
+
+
+
+
+
 # [4.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@3.0.1...eslint-config-cozy-app@4.0.0) (2022-01-07)
 
 
