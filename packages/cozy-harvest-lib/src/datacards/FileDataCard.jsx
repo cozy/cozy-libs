@@ -1,8 +1,6 @@
-import React, { useState, useMemo } from 'react'
+import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import sortBy from 'lodash/sortBy'
-import uniq from 'lodash/uniq'
 import keyBy from 'lodash/keyBy'
 
 import 'leaflet/dist/leaflet.css'
@@ -12,15 +10,13 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Slide from '@material-ui/core/Slide'
-import Modal from '@material-ui/core/Modal'
 
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
+import { RealTimeQueries } from 'cozy-client'
 import palette from 'cozy-ui/transpiled/react/palette'
 import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
 import Circle from 'cozy-ui/transpiled/react/Circle'
-import Portal from 'cozy-ui/transpiled/react/Portal'
-import Viewer from 'cozy-ui/transpiled/react/Viewer'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import FileIcon from 'cozy-ui/transpiled/react/Icons/File'
@@ -29,16 +25,9 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import AppLinkCard, { AppLinkButton } from '../components/cards/AppLinkCard'
 import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
-
-import CozyClient, {
-  Q,
-  queryConnect,
-  isQueryLoading,
-  hasQueryBeenLoaded,
-  RealTimeQueries
-} from 'cozy-client'
-
+import { MountPointContext } from '../components/MountPointContext'
 import { getFileIcon } from './mime-utils'
+import { useDataCardFiles } from './useDataCardFiles'
 
 const LoadingFileListItem = ({ divider }) => {
   return (
@@ -87,17 +76,15 @@ const TransitionWrapper = ({ children }) => {
   )
 }
 
-const FileCard = ({ files, loading, konnector, trigger }) => {
+const FileCard = ({ files, loading, konnector, trigger, accountId }) => {
   const { t } = useI18n()
+  const { pushHistory } = useContext(MountPointContext)
 
   // Remember files that were there initially so that we do not
   // animate their ListItem.
   // Only files coming from realtime and that are added to files
   // while the component is mounted will be animated.
   const [initialFilesById] = useState(() => keyBy(files, x => x._id))
-  const [viewerIndex, setViewerIndex] = useState(null)
-  const handleCloseViewer = () => setViewerIndex(null)
-  const handleFileChange = (file, newIndex) => setViewerIndex(newIndex)
 
   return (
     <Card className="u-ph-0 u-pb-0 u-ov-hidden">
@@ -138,7 +125,14 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
             return (
               <ItemWrapper key={file._id}>
                 <FileListItem
-                  onClick={() => setViewerIndex(i)}
+                  onClick={() => {
+                    pushHistory(
+                      `/viewer/${accountId}/${get(
+                        trigger,
+                        'message.folder_to_save'
+                      )}/${i}`
+                    )
+                  }}
                   file={file}
                   divider={i !== files.length - 1}
                 />
@@ -147,18 +141,6 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
           })
         )}
       </List>
-      {viewerIndex !== null && (
-        <Portal into="body">
-          <Modal open={true}>
-            <Viewer
-              files={files}
-              currentIndex={viewerIndex}
-              onCloseRequest={handleCloseViewer}
-              onChangeRequest={handleFileChange}
-            />
-          </Modal>
-        </Portal>
-      )}
       <div className="u-ta-right u-mv-half u-mh-1">
         <AppLinkButton
           slug="drive"
@@ -169,60 +151,14 @@ const FileCard = ({ files, loading, konnector, trigger }) => {
   )
 }
 
-const makeFolderToSaveQueryFromProps = ({ trigger }) => ({
-  query: Q('io.cozy.files')
-    .where({
-      dir_id: trigger.message.folder_to_save,
-      trashed: false
-    })
-    .indexFields(['dir_id', 'cozyMetadata.createdAt'])
-    .sortBy([{ dir_id: 'desc' }, { 'cozyMetadata.createdAt': 'desc' }])
-    .limitBy(5),
-  as: `fileDataCard_io.cozy.files/${trigger.message.folder_to_save}/io.cozy.files`,
-  fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
-})
+const FileDataCard = ({ accountId, konnector, trigger }) => {
+  const { data, fetchStatus } = useDataCardFiles(
+    accountId,
+    trigger.message.folder_to_save
+  )
+  const isLoading = fetchStatus === 'loading'
+  const noFiles = fetchStatus === 'empty' || fetchStatus === 'failed'
 
-const makeSourceAccountQueryFromProps = ({ accountId }) => ({
-  query: Q('io.cozy.files')
-    .where({
-      'cozyMetadata.sourceAccount': accountId,
-      trashed: false
-    })
-    .indexFields(['cozyMetadata.sourceAccount', 'cozyMetadata.createdAt'])
-    .sortBy([
-      { 'cozyMetadata.sourceAccount': 'desc' },
-      { 'cozyMetadata.createdAt': 'desc' }
-    ])
-    .limitBy(5),
-  as: `fileDataCard_io.cozy.accounts/${accountId}/io.cozy.files`,
-  fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
-})
-
-const FileDataCard = ({
-  folderToSaveFiles,
-  sourceAccountFiles,
-  konnector,
-  trigger
-}) => {
-  const { data: files1 } = folderToSaveFiles
-  const { data: files2 } = sourceAccountFiles
-
-  const noFiles =
-    hasQueryBeenLoaded(folderToSaveFiles) &&
-    files1.length === 0 &&
-    hasQueryBeenLoaded(sourceAccountFiles) &&
-    files2.length === 0
-  const isLoading =
-    isQueryLoading(folderToSaveFiles) || isQueryLoading(sourceAccountFiles)
-
-  const files = useMemo(() => {
-    return sortBy(
-      uniq([...files1, ...files2], x => x._id),
-      x => get(x, 'cozyMetadata.createdAt')
-    )
-      .reverse()
-      .slice(0, 5)
-  }, [files1, files2])
   return (
     <>
       <RealTimeQueries doctype="io.cozy.files" />
@@ -230,10 +166,11 @@ const FileDataCard = ({
         <AppLinkCard {...appLinksProps.drive({ trigger })} />
       ) : (
         <FileCard
-          files={files}
+          files={data}
           loading={isLoading}
           konnector={konnector}
           trigger={trigger}
+          accountId={accountId}
         />
       )}
     </>
@@ -246,7 +183,4 @@ FileDataCard.propTypes = {
   trigger: PropTypes.object.isRequired
 }
 
-export default queryConnect({
-  folderToSaveFiles: props => makeFolderToSaveQueryFromProps(props),
-  sourceAccountFiles: props => makeSourceAccountQueryFromProps(props)
-})(FileDataCard)
+export default FileDataCard

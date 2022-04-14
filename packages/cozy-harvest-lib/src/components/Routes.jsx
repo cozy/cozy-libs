@@ -7,6 +7,11 @@ import {
   DialogCloseButton,
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import {
+  useVaultUnlockContext,
+  VaultUnlockProvider,
+  VaultUnlockPlaceholder
+} from 'cozy-keys-lib'
 
 import KonnectorAccounts from './KonnectorAccounts'
 import AccountModal from './AccountModal'
@@ -18,11 +23,8 @@ import HarvestVaultProvider from './HarvestVaultProvider'
 import { MountPointProvider } from './MountPointContext'
 import DialogContext from './DialogContext'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
-import {
-  useVaultUnlockContext,
-  VaultUnlockProvider,
-  VaultUnlockPlaceholder
-} from 'cozy-keys-lib'
+
+import { ViewerModal } from '../datacards/ViewerModal'
 
 /**
  * Dialog will not be centered vertically since we need the modal to "stay in place"
@@ -99,6 +101,13 @@ const Routes = ({ konnectorRoot, konnector, onDismiss, datacardOptions }) => {
                             accountId={match.params.accountId}
                             accounts={accountsAndTriggers}
                           />
+                        )}
+                      />
+                      <Route
+                        path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
+                        exact
+                        render={routeComponentProps => (
+                          <ViewerModal {...routeComponentProps} />
                         )}
                       />
                       <Route
