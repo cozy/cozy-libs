@@ -9,7 +9,7 @@ to gather error and warnings. Think "linting" for your repositories.
 ### Rules
 
 Rules can be implemented and can be controlled through a configuration
-file, and can be overrided through the command line.
+file, and can be overridden through the command line.
 
 Example of rules:
 
@@ -24,7 +24,7 @@ to mattermost.
 
 ## Usage
 
-- Repo doctor needs a config to work so you need to download a config (the code sample below downloads a sample config from the repository).
+- Repo doctor needs a config to work, so you need to download a config (the code sample below downloads a sample config from the repository).
 - It will try to detect the current folder repository
 - If no repository is detected, it will run repo-doctor on all the repositories
   of the config
