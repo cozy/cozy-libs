@@ -48,6 +48,10 @@
         {
           "name": "eslint-loader",
           "reason": "Used through cozy-scripts"
+        },
+        {
+          "name": "moment",
+          "reason": "Used Intl/DateTimeFormat or date-fns"
         }
       ]
     }],
