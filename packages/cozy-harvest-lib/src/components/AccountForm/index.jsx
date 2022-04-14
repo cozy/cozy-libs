@@ -132,7 +132,7 @@ export class AccountForm extends PureComponent {
   handleSubmit(values, form) {
     const { account, konnector } = this.props
 
-    const identifier = manifest.getIdentifier(konnector.fields)
+    const identifier = manifest.getIdentifier(manifest.sanitizeFields(konnector.fields))
     if (
       account &&
       account.auth[identifier] &&
@@ -228,7 +228,7 @@ export class AccountForm extends PureComponent {
       this.props.readOnlyIdentifier
 
     if (isReadOnlyIdentifier) {
-      const identifier = manifest.getIdentifier(fields)
+      const identifier = manifest.getIdentifier(sanitizedFields)
       sanitizedFields[identifier].type = 'hidden'
     }
 
@@ -268,7 +268,7 @@ export class AccountForm extends PureComponent {
                 konnector={konnector}
                 identifier={get(
                   account,
-                  `auth.${manifest.getIdentifier(konnector.fields)}`
+                  `auth.${manifest.getIdentifier(sanitizedFields)}`
                 )}
               />
             )}
