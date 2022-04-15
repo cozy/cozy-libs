@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.3.0...cozy-harvest-lib@8.3.1) (2022-04-15)
+
+
+### Bug Fixes
+
+* Avoid to have not sanitized fields as identifier fields ([c6ed9ec](https://github.com/cozy/cozy-libs/commit/c6ed9ec194685e5eeb9f81e5c620d17beabf0289))
+
+
+
+
+
 # [8.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.2.1...cozy-harvest-lib@8.3.0) (2022-04-15)
 
 
