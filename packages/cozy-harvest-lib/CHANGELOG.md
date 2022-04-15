@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.2.1...cozy-harvest-lib@8.3.0) (2022-04-15)
+
+
+### Features
+
+* Implement ViewerModal as Route ([bdb6e88](https://github.com/cozy/cozy-libs/commit/bdb6e88e4c70217654f3b72828dee964aa2a4d1b))
+
+
+
+
+
 ## [8.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.2.0...cozy-harvest-lib@8.2.1) (2022-04-13)
 
 
