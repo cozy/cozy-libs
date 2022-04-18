@@ -14,9 +14,6 @@ import {
   mockWebviewWindow
 } from '../../../tests'
 
-// We don't want to see logs in node console
-jest.mock('../../utils', () => ({ log: jest.fn() }))
-
 // eslint-disable-next-line no-global-assign
 window = mockWebviewWindow()
 
@@ -31,12 +28,13 @@ jest.mock('cozy-device-helper', () => ({
 }))
 
 jest.mock('post-me', () => ({
+  ...jest.requireActual('post-me'),
+  debug: (): jest.Mock => jest.fn(),
   ChildHandshake: jest.fn(() => Promise.resolve(mockConnection))
 }))
 
 describe('WebviewIntentProvider', () => {
   beforeEach(() => {
-    jest.spyOn(console, 'warn').mockImplementation(() => null)
     mockIsFlagshipApp.mockReturnValue(true)
   })
 

@@ -6,7 +6,7 @@ import {
   NativeEvent,
   NativeMessenger,
   NativeMethodsRegister,
-  ParsedNativeEvent,
+  PostMeMessage,
   WebviewRef,
   strings
 } from '../../api'
@@ -36,16 +36,14 @@ export class NativeService {
       : new URL(source.nativeEvent.url).hostname
   }
 
-  private parseNativeEvent = ({
-    nativeEvent
-  }: NativeEvent): ParsedNativeEvent =>
-    <ParsedNativeEvent>JSON.parse(nativeEvent.data)
+  private parseNativeEvent = ({ nativeEvent }: NativeEvent): PostMeMessage =>
+    <PostMeMessage>JSON.parse(nativeEvent.data)
 
-  private isPostMeMessage = ({ nativeEvent }: NativeEvent): boolean =>
-    nativeEvent.data.includes(strings.postMeSignature)
+  private isPostMeMessage = (message: PostMeMessage): boolean =>
+    message.type === strings.postMeSignature
 
-  private isInitMessage = (event: NativeEvent): boolean =>
-    this.parseNativeEvent(event).message === strings.webviewIsRendered
+  private isInitMessage = (message: PostMeMessage): boolean =>
+    message.message === strings.webviewIsRendered
 
   public registerWebview = (webviewRef: WebviewRef): void => {
     const uri = this.getUri(webviewRef)
@@ -81,11 +79,13 @@ export class NativeService {
   ): Promise<Connection> => await ParentHandshake(messenger, this.localMethods)
 
   public tryEmit = async (event: NativeEvent): Promise<void> => {
-    if (!this.isPostMeMessage(event)) return
+    const parsedEvent = this.parseNativeEvent(event)
 
-    return this.isInitMessage(event)
+    if (!this.isPostMeMessage(parsedEvent)) return
+
+    return this.isInitMessage(parsedEvent)
       ? await this.tryInit(event)
-      : this.tryOnMessage(event)
+      : this.tryOnMessage(event, parsedEvent)
   }
 
   private tryInit = async (event: NativeEvent): Promise<void> => {
@@ -99,8 +99,7 @@ export class NativeService {
     )
   }
 
-  private tryOnMessage = (event: NativeEvent): void => {
-    const parsedEvent = this.parseNativeEvent(event)
+  private tryOnMessage = (event: NativeEvent, message: PostMeMessage): void => {
     const webviewUri = this.getUri(event)
     const registeredWebview = this.messengerRegister[webviewUri]
 
@@ -108,6 +107,6 @@ export class NativeService {
       throw new Error(interpolate(strings.errorEmitMessage, { webviewUri }))
     }
 
-    this.messengerRegister[webviewUri].messenger.onMessage(parsedEvent)
+    this.messengerRegister[webviewUri].messenger.onMessage(message)
   }
 }

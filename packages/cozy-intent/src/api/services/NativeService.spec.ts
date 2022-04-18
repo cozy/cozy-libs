@@ -4,7 +4,7 @@ import {
   NativeMessenger,
   NativeMethodsRegister,
   NativeService,
-  ParsedNativeEvent,
+  PostMeMessage,
   WebviewRef,
   strings
 } from '../../api'
@@ -12,6 +12,7 @@ import { interpolate } from '../../utils'
 import { mockNativeMethods } from '../../../tests'
 
 jest.mock('post-me', () => ({
+  ...jest.requireActual('post-me'),
   ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
 }))
 
@@ -27,7 +28,7 @@ class MockNativeMessenger extends NativeMessenger {
 
   public addMessageListener = jest.fn()
 
-  public onMessage = (event: ParsedNativeEvent): void => {
+  public onMessage = (event: PostMeMessage): void => {
     onMessageMock(event)
   }
 }
@@ -61,16 +62,16 @@ describe('NativeService', () => {
     nativeService.registerWebview(webviewRef)
 
     await nativeService.tryEmit({
-      nativeEvent: { data: '{"source": "post-me"}', url: 'http://SOME_URI' }
+      nativeEvent: { data: '{"type":"@post-me"}', url: 'http://SOME_URI' }
     })
 
-    expect(onMessageMock).toHaveBeenNthCalledWith(1, { source: 'post-me' })
+    expect(onMessageMock).toHaveBeenNthCalledWith(1, { type: '@post-me' })
 
     nativeService.unregisterWebview(webviewRef)
 
     await expect(
       nativeService.tryEmit({
-        nativeEvent: { data: '{"source": "post-me"}', url: 'http://SOME_URI' }
+        nativeEvent: { data: '{"type":"@post-me"}', url: 'http://SOME_URI' }
       })
     ).rejects.toThrow(
       `Cannot emit message. No webview is registered with uri: some_uri`
@@ -191,7 +192,7 @@ describe('NativeService', () => {
 
       await nativeService.tryEmit({
         nativeEvent: {
-          data: `{"go":"post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
+          data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
           url: 'http://bar.com'
         }
       })
@@ -203,7 +204,7 @@ describe('NativeService', () => {
       await expect(
         nativeService.tryEmit({
           nativeEvent: {
-            data: `{"go":"post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
+            data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://bar.com"}`,
             url: 'http://bar.com'
           }
         })

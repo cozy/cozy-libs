@@ -7,7 +7,7 @@ export const strings = {
     'Could not handle event, this `NativeMessenger` instance does not have a listener.',
   noRNAPIFound:
     'You tried to send a synchronous message to a React Native listener, but no React Native API was found in the DOM. Are you in a webview?',
-  postMeSignature: 'post-me',
+  postMeSignature: '@post-me',
   remoteHandleNotFound:
     'Remote handle returned undefined, could not call method',
   webviewIsRendered: 'webviewIsRendered',
@@ -21,8 +21,6 @@ export const strings = {
     "Cannot init handshake for Webview with uri: '${uri}'. The handshake was already made and succeeded. You probably remounted WebviewIntentProvider and lost its state, or you forgot to call unregisterWebview on parent-side.",
   errorEmitMessage:
     'Cannot emit message. No webview is registered with uri: ${webviewUri}',
-  errorGetCozyBarAPI:
-    'An error occured while trying to get the setWebviewContext() API from cozy-bar. Cozy-bar webview intents will not work. Your cozy-bar is most likely unreachable.',
   errorCozyBarAPIMissing:
     'Cozy-bar was detected by WebviewIntentProvider but the required setWebviewContext() API was not found. Cozy-bar webview intents will not work. Your cozy-bar version is most likely outdated.'
 }

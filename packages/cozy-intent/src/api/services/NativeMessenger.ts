@@ -3,7 +3,7 @@ import { Messenger, debug } from 'post-me'
 import {
   ListenerRemover,
   MessageListener,
-  ParsedNativeEvent,
+  PostMeMessage,
   WebviewRef,
   strings
 } from '../../api'
@@ -16,7 +16,7 @@ export class NativeMessenger implements Messenger {
     this.injectJavaScript = webviewRef.injectJavaScript
   }
 
-  public postMessage = (message: unknown): void => {
+  public postMessage = (message: Record<string, unknown>): void => {
     const script = `window.postMessage(${JSON.stringify(message)})`
     this.injectJavaScript?.(script)
   }
@@ -29,7 +29,7 @@ export class NativeMessenger implements Messenger {
     return removeListener
   }
 
-  public onMessage = (data: ParsedNativeEvent): void => {
+  public onMessage = (data: PostMeMessage): void => {
     if (!this.listener) throw new Error(strings.noListenerFound)
 
     this.listener({ data } as MessageEvent)
@@ -39,17 +39,17 @@ export class NativeMessenger implements Messenger {
 export const DebugNativeMessenger = (
   messenger: NativeMessenger
 ): NativeMessenger => {
-  const log = debug('native-messenger')
+  const log = debug('NativeMessenger')
 
   return {
-    postMessage: (message: unknown): void => {
-      log('➡️ sending message', message)
+    postMessage: (message: Record<string, unknown>): void => {
+      message.action !== 'response' && log('- OUT', message)
       messenger.postMessage(message)
     },
     addMessageListener: (listener: MessageListener): ListenerRemover =>
       messenger.addMessageListener(listener),
-    onMessage: (data: ParsedNativeEvent): void => {
-      log('⬅️ received message', data)
+    onMessage: (data: PostMeMessage): void => {
+      log('- IN', data)
       messenger.onMessage(data)
     }
   }
