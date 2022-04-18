@@ -1,5 +1,3 @@
-import logger from 'cozy-logger'
-
 export const interpolate = (
   str: string,
   params: Record<string, string>
@@ -21,12 +19,19 @@ export const interpolate = (
   }
 }
 
-export const log = logger.namespace('cozy-intent')
-
 declare const __DEV__: boolean
 export const isNativeDevMode = (): boolean => {
   try {
     return !!__DEV__
+  } catch {
+    return false
+  }
+}
+
+declare const __DEVELOPMENT__: boolean
+export const isWebDevMode = (): boolean => {
+  try {
+    return !!__DEVELOPMENT__
   } catch {
     return false
   }

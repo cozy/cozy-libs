@@ -1,5 +1,5 @@
 import React, { ReactElement, useEffect, useState } from 'react'
-import { Connection, ChildHandshake } from 'post-me'
+import { Connection, ChildHandshake, debug } from 'post-me'
 
 import { isFlagshipApp } from 'cozy-device-helper'
 
@@ -9,12 +9,15 @@ import {
   WebviewMessenger,
   WebviewService,
   WebviewWindow,
-  strings
+  strings,
+  DebugWebviewMessenger
 } from '../../api'
 import { WebviewContext } from '../../view'
-import { log } from '../../utils'
+import { isWebDevMode } from '../../utils'
 
 declare const cozy: CozyBar | undefined
+
+const log = debug('WebviewIntentProvider')
 
 interface Props {
   children?: React.ReactChild
@@ -33,12 +36,12 @@ function isWebviewWindow(window: Window): window is WebviewWindow {
 const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
   try {
     if (cozy!.bar && cozy!.bar.setWebviewContext === undefined) {
-      return log('warn', strings.errorCozyBarAPIMissing)
+      return log(strings.errorCozyBarAPIMissing)
     }
 
     return cozy!.bar!.setWebviewContext
   } catch (err) {
-    return log('warn', strings.errorGetCozyBarAPI)
+    return undefined
   }
 }
 /* eslint-enable @typescript-eslint/no-non-null-assertion */
@@ -47,7 +50,7 @@ const getBarInitAPI = (): ((webviewContext: WebviewService) => void) | void => {
 const sendSyncMessage = (message: string): void => {
   return assumeWebviewWindow.ReactNativeWebView.postMessage(
     JSON.stringify({
-      signature: strings.postMeSignature,
+      type: strings.postMeSignature,
       uri: window.location.hostname,
       message
     })
@@ -59,7 +62,11 @@ const getConnection = async (
 ): Promise<void> => {
   sendSyncMessage(strings.webviewIsRendered)
 
-  const result = await ChildHandshake(new WebviewMessenger(assumeWebviewWindow))
+  const messenger = new WebviewMessenger(assumeWebviewWindow)
+
+  const result = await ChildHandshake(
+    isWebDevMode() ? DebugWebviewMessenger(messenger) : messenger
+  )
 
   callBack(result)
 }
@@ -70,7 +77,7 @@ const isValidEnv = (): boolean => {
   if (!flagshipApp) return false
 
   if (!isWebviewWindow(window)) {
-    log('warn', strings.flagshipButNoRNAPI)
+    log(strings.flagshipButNoRNAPI)
 
     return false
   }

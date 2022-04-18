@@ -37,7 +37,6 @@
   "main": "./dist/index.js",
   "peerDependencies": {
     "cozy-device-helper": ">=1.16.1",
-    "cozy-logger": ">=1",
     "react": ">=16"
   },
   "repository": {
