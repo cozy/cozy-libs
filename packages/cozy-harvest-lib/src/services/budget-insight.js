@@ -72,7 +72,7 @@ export const isBudgetInsightConnector = konnector => {
   )
 }
 
-const createTemporaryToken = async ({ client, konnector, account }) => {
+export const createTemporaryToken = async ({ client, konnector, account }) => {
   assert(
     konnector.slug,
     'createTemporaryToken: konnector passed in options has no slug'
@@ -213,10 +213,6 @@ export const setBIConnectionId = (originalAccount, biConnectionId) => {
   const account = clone(originalAccount)
   set(account, 'data.auth.bi.connId', biConnectionId)
   return account
-}
-
-export const getBIConnectionId = account => {
-  return get(account, 'data.auth.bi.connId')
 }
 
 /**

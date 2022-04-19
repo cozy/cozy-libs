@@ -101,7 +101,7 @@ export const getOAuthUrl = ({
   cozyUrl,
   accountType,
   oAuthStateKey,
-  oAuthConf,
+  oAuthConf = {},
   nonce,
   redirectSlug,
   extraParams
