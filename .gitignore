@@ -1,6 +1,7 @@
-node_modules
 *.log
-dist
-coverage
-docs/build
 .idea
+.vscode
+coverage
+dist
+docs/build
+node_modules
