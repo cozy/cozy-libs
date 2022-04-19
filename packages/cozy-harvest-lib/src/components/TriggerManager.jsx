@@ -326,8 +326,9 @@ export class DumbTriggerManager extends Component {
     const showSpinner = submitting && selectedCipher && step === 'ciphersList'
     const showCiphersList = step === 'ciphersList'
     const showAccountForm = step === 'accountForm'
+    const konnectorPolicy = findKonnectorPolicy(konnector)
 
-    if (oauth) {
+    if (oauth || konnectorPolicy.isWebView) {
       return (
         <OAuthForm
           client={client}
