@@ -17,7 +17,6 @@ import {
 } from 'cozy-ui/transpiled/react/ActionMenu'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
-import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import Konnector from '../../assets/icons/Konnectors.svg'
 
@@ -36,13 +35,17 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
+const ImportDropdown = ({ placeholder, onClick, onClose }) => {
   const { t } = useI18n()
   const client = useClient()
   const scannerT = useScannerI18n()
-  const { currentDefinition } = useStepperDialog()
-  const konnectorCategory = currentDefinition?.connectorCriteria?.category
-  const konnectorName = currentDefinition?.connectorCriteria?.name
+  const {
+    label,
+    icon,
+    acquisitionSteps: { length: acquisitionStepsLength },
+    connectorCriteria: { category: konnectorCategory, name: konnectorName } = {}
+  } = placeholder
+  const hasSteps = acquisitionStepsLength > 0
   const styles = useStyles()
 
   const goToStore = () => {
@@ -175,11 +178,17 @@ const ImportDropdown = ({ label, icon, hasSteps, onClick, onClose }) => {
 }
 
 ImportDropdown.propTypes = {
-  label: PropTypes.string.isRequired,
-  icon: iconPropType.isRequired,
-  hasSteps: PropTypes.bool,
+  placeholder: PropTypes.shape({
+    label: PropTypes.string.isRequired,
+    icon: iconPropType.isRequired,
+    acquisitionSteps: PropTypes.array.isRequired,
+    connectorCriteria: PropTypes.shape({
+      name: PropTypes.string,
+      category: PropTypes.string
+    })
+  }).isRequired,
   onClose: PropTypes.func,
   onClick: PropTypes.func
 }
 
-export default React.memo(ImportDropdown)
+export default ImportDropdown

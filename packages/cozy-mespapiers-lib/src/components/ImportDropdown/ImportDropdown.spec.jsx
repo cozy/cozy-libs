@@ -17,9 +17,10 @@ jest.mock('cozy-client/dist/models/document/locales', () => ({
 }))
 
 const setup = (label = 'national_id_card') => {
+  const placeholder = { label, icon: People, acquisitionSteps: [] }
   return render(
     <AppLike>
-      <ImportDropdown label={label} icon={People} />
+      <ImportDropdown placeholder={placeholder} />
     </AppLike>
   )
 }
