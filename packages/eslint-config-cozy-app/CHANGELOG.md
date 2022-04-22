@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.0.2](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@4.0.1...eslint-config-cozy-app@4.0.2) (2022-04-22)
+
+
+### Bug Fixes
+
+* **eslint-config:** Add rule for Windows user ([58918cf](https://github.com/cozy/cozy-libs/commit/58918cfa666d898f565845299cf8c669318b8740))
+
+
+
+
+
 ## 4.0.1 (2022-04-14)
 
 

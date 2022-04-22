@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.14.0 (2022-04-22)
+
+
+### Features
+
+* Add native-messenger debugger ([ea16430](https://github.com/cozy/cozy-libs/commit/ea16430c3913eccf44519b54ea14fbbecdfdadba))
+* Implement Webview debugger ([288442c](https://github.com/cozy/cozy-libs/commit/288442c2ff2481d32338c8bd08711aa21580c823))
+
+
+
+
+
 ## [1.13.5](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.13.4...cozy-intent@1.13.5) (2022-03-28)
 
 

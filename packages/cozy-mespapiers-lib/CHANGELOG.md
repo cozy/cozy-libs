@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.10](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.5.9...cozy-mespapiers-lib@0.5.10) (2022-04-22)
+
+
+### Bug Fixes
+
+* Import choice via connector ([ecacb23](https://github.com/cozy/cozy-libs/commit/ecacb23018a552494df62fa79afc75818a2aa8c2))
+
+
+
+
+
 ## [0.5.9](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.5.8...cozy-mespapiers-lib@0.5.9) (2022-04-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib

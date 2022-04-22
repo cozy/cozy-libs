@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [8.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.3.1...cozy-harvest-lib@8.4.0) (2022-04-22)
+
+
+### Features
+
+* Change harvest sentry url to errors.cozycloud.cc ([582f1f5](https://github.com/cozy/cozy-libs/commit/582f1f5ad85fae9b8a7e290d12717ead8cfb7438))
+
+
+
+
+
 ## [8.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.3.0...cozy-harvest-lib@8.3.1) (2022-04-15)
 
 
