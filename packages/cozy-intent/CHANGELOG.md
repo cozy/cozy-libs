@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.14.0...cozy-intent@1.15.0) (2022-04-22)
+
+
+### Features
+
+* Remove useless infos on readMe ([bfd8464](https://github.com/cozy/cozy-libs/commit/bfd8464b18db5ed0ad0982cc5954afd284d7efe1))
+
+
+
+
+
 # 1.14.0 (2022-04-22)
 
 
