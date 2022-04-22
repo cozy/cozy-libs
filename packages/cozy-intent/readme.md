@@ -106,17 +106,3 @@ Will logout the user from the react-native application. Will not touch webview s
 ##### `NativeService.call('openWebview', href)`
 
 Will open a new webview in a Native app with the href provided.
-
-#### Events
-
-N/A
-
-### Browser intents
-
-#### Methods
-
-N/A
-
-#### Events
-
-N/A
