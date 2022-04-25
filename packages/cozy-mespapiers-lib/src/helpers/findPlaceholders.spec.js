@@ -2,49 +2,67 @@ import {
   getFeaturedPlaceholders,
   findPlaceholdersByQualification
 } from './findPlaceholders'
-import * as PaperJSON from '../constants/papersDefinitions.json'
-const { papersDefinitions } = PaperJSON
+import { mockPapersDefinitions } from '../../test/mockPaperDefinitions'
 
-const fakePapers = [
+const fakeIspInvoiceFile = [
   {
     metadata: {
       qualification: {
-        label: 'national_id_card'
+        label: 'isp_invoice'
       }
     }
   }
 ]
 const fakeQualificationItems = [
   {
-    label: 'national_id_card'
+    label: 'isp_invoice'
   }
 ]
 
 describe('getPlaceholders', () => {
   describe('getFeaturedPlaceholders', () => {
-    it('should return list of placeholders whitout param', () => {
-      const featuredPlaceholders = getFeaturedPlaceholders(papersDefinitions)
+    it('should return list of placeholders', () => {
+      const featuredPlaceholders = getFeaturedPlaceholders(
+        mockPapersDefinitions
+      )
 
-      expect(featuredPlaceholders.length).toBeGreaterThan(0)
+      expect(featuredPlaceholders).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'isp_invoice'
+          })
+        ]),
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'tax_notice'
+          })
+        ]),
+        expect.arrayContaining([
+          expect.not.objectContaining({
+            label: 'health_certificate'
+          })
+        ])
+      )
+      expect(featuredPlaceholders.length).toBe(2)
     })
 
-    it('should return correct list of placeholders with param', () => {
+    it('should return correct list of placeholders with file constraint', () => {
       const featuredPlaceholders = getFeaturedPlaceholders(
-        papersDefinitions,
-        fakePapers
+        mockPapersDefinitions,
+        fakeIspInvoiceFile
       )
 
       expect(featuredPlaceholders).toEqual(
         expect.arrayContaining([
           expect.not.objectContaining({
-            label: 'national_id_card'
+            label: 'isp_invoice'
           })
         ])
       )
       expect(featuredPlaceholders).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            label: 'driver_license'
+            label: 'tax_notice'
           })
         ])
       )
@@ -53,21 +71,23 @@ describe('getPlaceholders', () => {
 
   describe('findPlaceholdersByQualification', () => {
     it('should return an empty list', () => {
-      const placeholders = findPlaceholdersByQualification(papersDefinitions)
+      const placeholders = findPlaceholdersByQualification(
+        mockPapersDefinitions
+      )
 
       expect(placeholders).toHaveLength(0)
     })
 
     it('should return correct list of placeholders with param', () => {
       const placeholders = findPlaceholdersByQualification(
-        papersDefinitions,
+        mockPapersDefinitions,
         fakeQualificationItems
       )
 
       expect(placeholders).toEqual(
         expect.arrayContaining([
           expect.objectContaining({
-            label: 'national_id_card'
+            label: 'isp_invoice'
           })
         ])
       )
