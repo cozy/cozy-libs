@@ -1,6 +1,5 @@
 import React, { useState, useMemo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
 
@@ -67,9 +66,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
     return !!isImportDropdownDisplayed && !!placeholderSelected
   }
 
-  const selectPlaceholder = useCallback((placeholder, stepsExists) => {
-    stepsExists ? setPlaceholderSelected(placeholder) : undefined
-  }, [])
+  const selectPlaceholder = (placeholder, validPlaceholder) => {
+    validPlaceholder ? setPlaceholderSelected(placeholder) : undefined
+  }
 
   useEffect(() => {
     if (placeholderSelected) setIsImportDropdownDisplayed(true)
@@ -79,7 +78,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
     <>
       <List className={styles.placeholderList}>
         {allPlaceholders.map((placeholder, idx) => {
-          const stepsExists =
+          const validPlaceholder =
             placeholder.acquisitionSteps.length > 0 ||
             placeholder.connectorCriteria
 
@@ -87,11 +86,9 @@ const PlaceholdersList = ({ currentQualifItems }) => {
             <ListItem
               button
               disableGutters
+              disabled={!validPlaceholder}
               key={idx}
-              onClick={() => selectPlaceholder(placeholder, stepsExists)}
-              className={cx({
-                ['u-o-50']: !stepsExists
-              })}
+              onClick={() => selectPlaceholder(placeholder, validPlaceholder)}
             >
               <ListItemIcon>
                 <IconStack
