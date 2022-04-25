@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.5.14...cozy-mespapiers-lib@0.6.0) (2022-04-25)
+
+
+### Features
+
+* Add prop to config for redirect to Store ([b7e6aaa](https://github.com/cozy/cozy-libs/commit/b7e6aaa7f2114963eea3f221cf88bba219d87a51))
+
+
+
+
+
 ## [0.5.14](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.5.13...cozy-mespapiers-lib@0.5.14) (2022-04-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
