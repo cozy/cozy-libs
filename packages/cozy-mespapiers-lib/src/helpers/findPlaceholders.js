@@ -23,22 +23,27 @@ import get from 'lodash/get'
  * @property {number} maxDisplay - Number of document beyond which a "see more" button is displayed.
  */
 
+const getPaperDefinitionByLabel = (paperDefinition, files) => {
+  return !files.some(
+    paper =>
+      get(paper, 'metadata.qualification.label') === paperDefinition.label
+  )
+}
+
 /**
- * Filters and sorts the list of featured PlaceHolders
+ * Filters and sorts the list of featured Placeholders.
  * @param {PaperDefinition[]} papersDefinitions Array of PapersDefinition
- * @param {IOCozyFile[]} papers Array of IOCozyFile
- * @returns {PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex",
- * which does not already exist in DB and
- * which sorted with the prop "placeholderIndex"
+ * @param {IOCozyFile[]} files Array of IOCozyFile
+ * @returns {PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
  */
-export const getFeaturedPlaceholders = (papersDefinitions, papers = []) => {
+export const getFeaturedPlaceholders = (papersDefinitions, files = []) => {
   return papersDefinitions
     .filter(
       paperDefinition =>
-        !papers.some(
-          paper =>
-            get(paper, 'metadata.qualification.label') === paperDefinition.label
-        ) && paperDefinition.placeholderIndex
+        getPaperDefinitionByLabel(paperDefinition, files) &&
+        paperDefinition.placeholderIndex &&
+        (paperDefinition.acquisitionSteps.length > 0 ||
+          paperDefinition.connectorCriteria)
     )
     .sort((a, b) => a.placeholderIndex - b.placeholderIndex)
 }
