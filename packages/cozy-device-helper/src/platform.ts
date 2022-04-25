@@ -28,5 +28,3 @@ export const isIOS = (): boolean =>
 
 // isMobile checks if the user is on a smartphone : native app or browser
 export const isMobile = (): boolean => isAndroid() || isIOS()
-
-export const isFlagshipApp = (): boolean => Boolean(window.cozy?.isFlagshipApp)
