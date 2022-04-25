@@ -10,10 +10,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import FileTypePdfIcon from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import Check from 'cozy-ui/transpiled/react/Icons/Check'
-import Camera from 'cozy-ui/transpiled/react/Icons/Camera'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import { useStepperDialog } from '../Hooks/useStepperDialog'
@@ -106,7 +103,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
         )}
       >
         <div className={'u-flex u-flex-column u-flex-items-center u-mb-2'}>
-          <Avatar icon={Check} size="xlarge" className={styles.avatar} />
+          <Avatar icon={'check'} size="xlarge" className={styles.avatar} />
           <Typography variant={'h5'}>{t('Acquisition.success')}</Typography>
         </div>
         <Card className={'u-ta-center u-p-1 u-pb-half'}>
@@ -118,7 +115,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
               />
             ) : (
               <>
-                <Icon icon={FileTypePdfIcon} size={80} />
+                <Icon icon="file-type-pdf" size={80} />
                 <Typography variant={'body1'}>{currentFile.name}</Typography>
               </>
             )}
@@ -152,7 +149,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
             data-testid="repeat-button"
             extension="full"
             theme={'secondary'}
-            icon={Camera}
+            icon={'camera'}
             label={t('Acquisition.repeat')}
             onClick={() => onValid(true)}
           />

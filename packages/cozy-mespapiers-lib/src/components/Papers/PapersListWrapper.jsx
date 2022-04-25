@@ -14,7 +14,6 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
-import Previous from 'cozy-ui/transpiled/react/Icons/Previous'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import { getContactByIds, getPapersByLabel } from '../../helpers/queries'
@@ -101,7 +100,7 @@ const PapersListWrapper = ({ history, match }) => {
     <>
       <BarLeft>
         <IconButton className={'u-mr-half'} onClick={backButtonAction}>
-          <Icon icon={Previous} size={16} />
+          <Icon icon={'previous'} size={16} />
         </IconButton>
       </BarLeft>
       <BarCenter>

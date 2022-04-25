@@ -8,8 +8,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import InfosBadge from 'cozy-ui/transpiled/react/InfosBadge'
-import FileDuotoneIcon from 'cozy-ui/transpiled/react/Icons/FileDuotone'
-import Plus from 'cozy-ui/transpiled/react/Icons/Plus'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { PaperDefinitionsPropTypes } from '../../constants/PaperDefinitionsPropTypes'
@@ -23,14 +21,14 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
         <ListItemIcon>
           <InfosBadge
             badgeContent={
-              <Icon icon={Plus} size={10} color="var(--primaryTextColor)" />
+              <Icon icon={'plus'} size={10} color="var(--primaryTextColor)" />
             }
           >
             <IconStack
               backgroundClassName={'u-o-50'}
               backgroundIcon={
                 <Icon
-                  icon={FileDuotoneIcon}
+                  icon={'file-duotone'}
                   color="var(--primaryColor)"
                   size={32}
                 />

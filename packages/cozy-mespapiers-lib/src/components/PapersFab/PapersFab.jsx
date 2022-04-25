@@ -6,7 +6,6 @@ import cx from 'classnames'
 import { useLocation } from 'react-router-dom'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import PlusIcon from 'cozy-ui/transpiled/react/Icons/Plus'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import withLocales from '../../locales/withLocales'
@@ -41,7 +40,7 @@ const PapersFab = ({ t, className, ...props }) => {
       onClick={handleClick}
       {...props}
     >
-      <Icon icon={PlusIcon} />
+      <Icon icon={'plus'} />
     </Fab>
   )
 }

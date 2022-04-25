@@ -14,8 +14,6 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import FileTypeImage from 'cozy-ui/transpiled/react/Icons/FileTypeImage'
-import Right from 'cozy-ui/transpiled/react/Icons/Right'
 import MuiCardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 
@@ -74,13 +72,13 @@ const PaperGroup = ({ allPapersByCategories }) => {
                       />
                     )}
                     renderFallback={() => (
-                      <Icon icon={FileTypeImage} size={32} />
+                      <Icon icon={'file-type-image'} size={32} />
                     )}
                   />
                 </ListItemIcon>
                 <ListItemText primary={scannerT(`items.${category}`)} />
                 <Icon
-                  icon={Right}
+                  icon={'right'}
                   size={16}
                   color={'var(--secondaryTextColor)'}
                 />
