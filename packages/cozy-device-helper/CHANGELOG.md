@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.18.0 (2022-04-25)
+
+
+### Features
+
+* Add new flagship api file ([1ef8b2d](https://github.com/cozy/cozy-libs/commit/1ef8b2d76b3fafe1aed83811e9cb1d5c78e43bc0))
+
+
+
+
+
 # [1.17.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.16.3...cozy-device-helper@1.17.0) (2022-02-04)
 
 
