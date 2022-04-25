@@ -22,5 +22,7 @@ export const strings = {
   errorEmitMessage:
     'Cannot emit message. No webview is registered with uri: ${webviewUri}',
   errorCozyBarAPIMissing:
-    'Cozy-bar was detected by WebviewIntentProvider but the required setWebviewContext() API was not found. Cozy-bar webview intents will not work. Your cozy-bar version is most likely outdated.'
+    'Cozy-bar was detected by WebviewIntentProvider but the required setWebviewContext() API was not found. Cozy-bar webview intents will not work. Your cozy-bar version is most likely outdated.',
+  errorParentHandshake:
+    'Handshake failed for uri: "${uri}". ConcreteConnection will not be available for this uri\'s messenger, but messages should still work.'
 }

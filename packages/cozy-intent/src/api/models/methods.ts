@@ -5,6 +5,6 @@ export type NativeMethodsRegister = {
   hideSplashScreen: () => void
   logout: () => void
   openApp: (href: string, app: AppManifest, iconParams?: DOMRect) => void
-  setFlagshipUI: (flagshipUI: FlagshipUI) => void
+  setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => void
   showSplashScreen: () => void
 }

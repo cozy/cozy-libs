@@ -1,4 +1,4 @@
-import { NativeMessenger, strings } from '../../api'
+import { NativeMessenger, PostMeMessage, strings } from '../../api'
 import { mockWebviewRef } from '../../../tests'
 
 describe('NativeMessenger', () => {
@@ -14,44 +14,71 @@ describe('NativeMessenger', () => {
   it('Should handle postMessage', () => {
     const nativeMessenger = new NativeMessenger(mockWebviewRef)
 
-    nativeMessenger.postMessage('foo')
+    nativeMessenger.postMessage({ foo: 'bar' })
 
     expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
-      'window.postMessage("foo")'
+      'window.postMessage({"foo":"bar"})'
     )
   })
 
   it('Should handle onMessage', () => {
     const nativeMessenger = new NativeMessenger(mockWebviewRef)
 
-    nativeMessenger.addMessageListener(event => {
-      nativeMessenger.postMessage(event)
+    nativeMessenger.addMessageListener(({ data }) => {
+      nativeMessenger.postMessage(data as PostMeMessage)
     })
 
-    nativeMessenger.onMessage({ foo: 'bar' })
+    nativeMessenger.onMessage({
+      action: 'string',
+      args: 'string',
+      message: 'string',
+      methodName: 'string',
+      requestId: 0,
+      sessionId: 0,
+      type: 'string',
+      uri: 'string'
+    })
 
     expect(mockWebviewRef.injectJavaScript).toBeCalledWith(
-      'window.postMessage({"data":{"foo":"bar"}})'
+      'window.postMessage({"action":"string","args":"string","message":"string","methodName":"string","requestId":0,"sessionId":0,"type":"string","uri":"string"})'
     )
   })
 
   it('Should throw if no listener is injected', () => {
     const nativeMessenger = new NativeMessenger(mockWebviewRef)
 
-    expect(() => nativeMessenger.onMessage({ foo: 'bar' })).toThrowError(
-      strings.noListenerFound
-    )
+    expect(() =>
+      nativeMessenger.onMessage({
+        action: 'string',
+        args: 'string',
+        message: 'string',
+        methodName: 'string',
+        requestId: 0,
+        sessionId: 0,
+        type: 'string',
+        uri: 'string'
+      })
+    ).toThrowError(strings.noListenerFound)
   })
 
   it('Should remove listener', () => {
     const nativeMessenger = new NativeMessenger(mockWebviewRef)
 
-    nativeMessenger.addMessageListener(event => {
-      nativeMessenger.postMessage(event)
+    nativeMessenger.addMessageListener(({ data }) => {
+      nativeMessenger.postMessage(data as PostMeMessage)
     })()
 
-    expect(() => nativeMessenger.onMessage({ foo: 'bar' })).toThrowError(
-      strings.noListenerFound
-    )
+    expect(() =>
+      nativeMessenger.onMessage({
+        action: 'string',
+        args: 'string',
+        message: 'string',
+        methodName: 'string',
+        requestId: 0,
+        sessionId: 0,
+        type: 'string',
+        uri: 'string'
+      })
+    ).toThrowError(strings.noListenerFound)
   })
 })

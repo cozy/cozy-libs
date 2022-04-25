@@ -1,4 +1,4 @@
-import { Connection, ParentHandshake } from 'post-me'
+import { Connection, debug, ParentHandshake } from 'post-me'
 
 import {
   DebugNativeMessenger,
@@ -81,11 +81,9 @@ export class NativeService {
   public tryEmit = async (event: NativeEvent): Promise<void> => {
     const parsedEvent = this.parseNativeEvent(event)
 
-    if (!this.isPostMeMessage(parsedEvent)) return
+    if (this.isInitMessage(parsedEvent)) return await this.tryInit(event)
 
-    return this.isInitMessage(parsedEvent)
-      ? await this.tryInit(event)
-      : this.tryOnMessage(event, parsedEvent)
+    if (this.isPostMeMessage(parsedEvent)) this.tryOnMessage(event, parsedEvent)
   }
 
   private tryInit = async (event: NativeEvent): Promise<void> => {
@@ -94,9 +92,13 @@ export class NativeService {
     if (this.messengerRegister[uri].connection)
       throw new Error(interpolate(strings.errorInitWebview, { uri }))
 
-    this.messengerRegister[uri].connection = await this.initWebview(
-      this.messengerRegister[uri].messenger
-    )
+    try {
+      this.messengerRegister[uri].connection = await this.initWebview(
+        this.messengerRegister[uri].messenger
+      )
+    } catch {
+      debug('NativeService')(interpolate(strings.errorParentHandshake, { uri }))
+    }
   }
 
   private tryOnMessage = (event: NativeEvent, message: PostMeMessage): void => {
