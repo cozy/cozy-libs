@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.16.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.15.0...cozy-intent@1.16.0) (2022-04-25)
+
+
+### Features
+
+* Handle handshake failure ([2b64868](https://github.com/cozy/cozy-libs/commit/2b6486840f8274ea266b5e3595406bf5b30ec915))
+
+
+
+
+
 # [1.15.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.14.0...cozy-intent@1.15.0) (2022-04-22)
 
 
