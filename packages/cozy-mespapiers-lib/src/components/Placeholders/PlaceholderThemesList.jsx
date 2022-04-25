@@ -5,7 +5,6 @@ import { models } from 'cozy-client'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FileDuotoneIcon from 'cozy-ui/transpiled/react/Icons/FileDuotone'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
@@ -14,7 +13,6 @@ import ListItemIcon, {
   largeSize
 } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 const {
   themes: { themesList }
 } = models.document
@@ -67,7 +65,7 @@ const PlaceholderThemesList = ({ title, onClose }) => {
                   <IconStack
                     backgroundIcon={
                       <Icon
-                        icon={FileDuotoneIcon}
+                        icon={'file-duotone'}
                         color="var(--primaryColor)"
                         size={largeSize}
                       />
@@ -83,7 +81,7 @@ const PlaceholderThemesList = ({ title, onClose }) => {
                 </ListItemIcon>
                 <ListItemText primary={scannerT(`themes.${theme.label}`)} />
                 <Icon
-                  icon={RightIcon}
+                  icon={'right'}
                   size={smallSize}
                   color={'var(--secondaryTextColor)'}
                 />

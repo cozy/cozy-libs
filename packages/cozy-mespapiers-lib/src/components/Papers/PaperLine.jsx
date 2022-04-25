@@ -9,7 +9,6 @@ import ActionMenu, {
   ActionMenuHeader
 } from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
-import FileTypePdfIcon from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
@@ -17,8 +16,6 @@ import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListI
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import IconPdf from 'cozy-ui/transpiled/react/Icons/FileTypePdf'
 import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 
@@ -81,7 +78,7 @@ const PaperLine = ({ paper, divider, actions }) => {
                 />
               )
             }}
-            renderFallback={() => <Icon icon={IconPdf} size={32} />}
+            renderFallback={() => <Icon icon={'file-type-pdf'} size={32} />}
           />
         </ListItemIcon>
         <ListItemText
@@ -99,7 +96,7 @@ const PaperLine = ({ paper, divider, actions }) => {
             onClick={toggleActionsMenu}
             ref={actionBtnRef}
           >
-            <Icon icon={DotsIcon} size={16} />
+            <Icon icon={'dots'} size={16} />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
@@ -110,7 +107,7 @@ const PaperLine = ({ paper, divider, actions }) => {
           {isMobile && (
             <ActionMenuHeader>
               <Filename
-                icon={FileTypePdfIcon}
+                icon={'file-type-pdf'}
                 filename={filename}
                 extension={extension}
               />

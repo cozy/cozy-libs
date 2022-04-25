@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useCallback, memo } from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { useClient, models } from 'cozy-client'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
@@ -12,7 +12,6 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import Right from 'cozy-ui/transpiled/react/Icons/Right'
 import Radio from 'cozy-ui/transpiled/react/Radio'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
@@ -121,7 +120,7 @@ const Contact = () => {
               <Avatar size={'small'} style={styleAvatar} />
             </ListItemIcon>
             <ListItemText primary={t('ContactStep.other')} />
-            <Icon icon={Right} size={16} color={'var(--secondaryTextColor)'} />
+            <Icon icon="right" size={16} color={'var(--secondaryTextColor)'} />
           </ListItem>
         </List>
       </Paper>

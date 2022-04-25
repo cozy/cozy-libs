@@ -6,7 +6,6 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FileDuotoneIcon from 'cozy-ui/transpiled/react/Icons/FileDuotone'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon, {
@@ -98,7 +97,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                 <IconStack
                   backgroundIcon={
                     <Icon
-                      icon={FileDuotoneIcon}
+                      icon={'file-duotone'}
                       color="var(--primaryColor)"
                       size={largeSize}
                     />

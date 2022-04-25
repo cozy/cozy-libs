@@ -4,8 +4,6 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FolderMoveto from 'cozy-ui/transpiled/react/Icons/FolderMoveto'
-import PhoneUpload from 'cozy-ui/transpiled/react/Icons/PhoneUpload'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
 
 import { KEYS } from '../../constants/const'
@@ -30,7 +28,7 @@ const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
         variant="secondary"
         style={styleBtn}
         onClick={openFilePickerModal}
-        startIcon={<Icon icon={FolderMoveto} />}
+        startIcon={<Icon icon="folder-moveto" />}
         label={t('Scan.selectPicFromCozy')}
         data-testid="selectPicFromCozy-btn"
       />
@@ -42,7 +40,7 @@ const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
         data-testid="importPicFromDesktop-btn"
       >
         <Button
-          startIcon={<Icon icon={PhoneUpload} />}
+          startIcon={<Icon icon="phone-upload" />}
           component={'a'}
           ref={buttonRef}
           className={'u-w-100 u-m-0 u-mb-1'}

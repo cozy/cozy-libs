@@ -1,12 +1,9 @@
 import React from 'react'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Camera from 'cozy-ui/transpiled/react/Icons/Camera'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import FileInput from 'cozy-ui/transpiled/react/FileInput'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FolderMoveto from 'cozy-ui/transpiled/react/Icons/FolderMoveto'
-import PhoneUpload from 'cozy-ui/transpiled/react/Icons/PhoneUpload'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 const styleBtn = { color: 'var(--primaryTextColor)' }
@@ -24,7 +21,7 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
           variant="secondary"
           style={styleBtn}
           onClick={openFilePickerModal}
-          startIcon={<Icon icon={FolderMoveto} />}
+          startIcon={<Icon icon="folder-moveto" />}
           label={t('Scan.selectPicFromCozy')}
           data-testid="selectPicFromCozy-btn"
         />
@@ -39,7 +36,7 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
             variant={'secondary'}
             component={'a'}
             style={styleBtn}
-            startIcon={<Icon icon={PhoneUpload} />}
+            startIcon={<Icon icon="phone-upload" />}
             fullWidth
             className={'u-m-0'}
             label={t('Scan.importPicFromMobile')}
@@ -55,7 +52,7 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
         data-testid="takePic-btn"
       >
         <Button
-          startIcon={<Icon icon={Camera} />}
+          startIcon={<Icon icon="camera" />}
           component={'a'}
           fullWidth
           className={'u-m-0'}

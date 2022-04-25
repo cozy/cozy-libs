@@ -8,7 +8,6 @@ const {
 } = models.document
 
 import AppLike from '../../../test/components/AppLike'
-import People from 'cozy-ui/transpiled/react/Icons/People'
 
 import ImportDropdown from './ImportDropdown'
 
@@ -17,7 +16,7 @@ jest.mock('cozy-client/dist/models/document/locales', () => ({
 }))
 
 const setup = (label = 'national_id_card') => {
-  const placeholder = { label, icon: People, acquisitionSteps: [] }
+  const placeholder = { label, icon: 'people', acquisitionSteps: [] }
   return render(
     <AppLike>
       <ImportDropdown placeholder={placeholder} />

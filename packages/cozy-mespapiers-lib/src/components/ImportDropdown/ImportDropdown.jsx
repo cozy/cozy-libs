@@ -8,9 +8,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 import IconStack from 'cozy-ui/transpiled/react/IconStack'
-import FileDuotoneIcon from 'cozy-ui/transpiled/react/Icons/FileDuotone'
-import Camera from 'cozy-ui/transpiled/react/Icons/Camera'
-import Close from 'cozy-ui/transpiled/react/Icons/CrossMedium'
 import {
   ActionMenuHeader,
   ActionMenuItem
@@ -77,7 +74,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
             <IconStack
               backgroundIcon={
                 <Icon
-                  icon={FileDuotoneIcon}
+                  icon="file-duotone"
                   color="var(--primaryColor)"
                   size={32}
                 />
@@ -96,7 +93,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
             {onClose && (
               <div className="u-flex">
                 <Icon
-                  icon={Close}
+                  icon="cross-medium"
                   className="u-c-pointer u-pl-half"
                   onClick={onClose}
                 />
@@ -115,7 +112,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
             className={cx({
               [styles.disabledIcon]: !hasSteps
             })}
-            icon={Camera}
+            icon="camera"
             size={16}
           />
         }
