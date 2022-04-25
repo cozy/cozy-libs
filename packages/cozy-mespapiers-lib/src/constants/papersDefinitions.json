@@ -1289,7 +1289,10 @@
           "model": "owner",
           "text": "PaperJSON.generic.owner.text"
         }
-      ]
+      ],
+      "connectorCriteria": {
+        "name": "impots"
+      }
     },
     {
       "label": "tax_timetable",
