@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback, memo } from 'react'
+import cx from 'classnames'
 
 import { useClient, models } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -16,6 +17,7 @@ import Radio from 'cozy-ui/transpiled/react/Radio'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { useFormData } from '../Hooks/useFormData'
 import { useSessionstorage } from '../Hooks/useSessionstorage'
@@ -144,6 +146,7 @@ const ContactWrapper = ({ currentStep, onClose }) => {
   const { formSubmit, formData } = useFormData()
   const [onLoad, setOnLoad] = useState(false)
   const [confirmReplaceFileModal, setConfirmReplaceFileModal] = useState(false)
+  const { isMobile } = useBreakpoints()
 
   const cozyFiles = formData.data.filter(d => d.file.constructor === Blob)
 
@@ -196,7 +199,13 @@ const ContactWrapper = ({ currentStep, onClose }) => {
         title={t(text)}
         text={<Contact />}
       />
-      <DialogActions className={'u-w-100 u-mh-0 u-mb-1 cozyDialogActions'}>
+      <DialogActions
+        disableSpacing
+        className={cx('columnLayout u-mb-1-half u-mt-0 cozyDialogActions', {
+          'u-mh-1': !isMobile,
+          'u-mh-0': isMobile
+        })}
+      >
         <Button
           fullWidth
           label={t(!onLoad ? 'ContactStep.save' : 'ContactStep.onLoad')}

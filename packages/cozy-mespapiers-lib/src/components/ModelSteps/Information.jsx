@@ -7,6 +7,7 @@ import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useEventListener from 'cozy-ui/transpiled/react/hooks/useEventListener'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
@@ -26,6 +27,7 @@ const Information = ({ currentStep }) => {
   const [value, setValue] = useState({})
   const [validInput, setValidInput] = useState({})
   const [isFocus, setIsFocus] = useState(false)
+  const { isMobile } = useBreakpoints()
 
   const submit = throttle(() => {
     if (value && allInputsValid) {
@@ -119,7 +121,13 @@ const Information = ({ currentStep }) => {
           </div>
         ))}
       />
-      <DialogActions disableSpacing className={'u-mh-0 u-mb-1'}>
+      <DialogActions
+        disableSpacing
+        className={cx('columnLayout u-mb-1-half u-mt-0 cozyDialogActions', {
+          'u-mh-1': !isMobile,
+          'u-mh-0': isMobile
+        })}
+      >
         <Button
           label={t('common.next')}
           onClick={submit}
