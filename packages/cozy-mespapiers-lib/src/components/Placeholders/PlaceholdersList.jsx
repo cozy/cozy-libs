@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useEffect } from 'react'
+import React, { useState, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
 import { makeStyles } from '@material-ui/core/styles'
@@ -57,22 +57,30 @@ const PlaceholdersList = ({ currentQualifItems }) => {
       findPlaceholdersByQualification(papersDefinitions, currentQualifItems),
     [currentQualifItems, papersDefinitions]
   )
-  const hideImportDropdown = useCallback(() => {
+  const hideImportDropdown = () => {
     setIsImportDropdownDisplayed(false)
     setPlaceholderSelected(undefined)
-  }, [])
+  }
 
   const shouldDisplayImportDropdown = () => {
     return !!isImportDropdownDisplayed && !!placeholderSelected
   }
 
-  const selectPlaceholder = (placeholder, validPlaceholder) => {
-    validPlaceholder ? setPlaceholderSelected(placeholder) : undefined
+  const redirectPaperCreation = placeholder => {
+    return history.push({
+      pathname: `/paper/create/${placeholder.label}`,
+      search: `deepBack&backgroundPath=${backgroundPath}`
+    })
   }
 
-  useEffect(() => {
-    if (placeholderSelected) setIsImportDropdownDisplayed(true)
-  }, [placeholderSelected])
+  const showImportDropdown = placeholder => {
+    if (placeholder.connectorCriteria) {
+      setIsImportDropdownDisplayed(true)
+      setPlaceholderSelected(placeholder)
+    } else {
+      redirectPaperCreation(placeholder)
+    }
+  }
 
   return (
     <>
@@ -84,11 +92,12 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
           return (
             <ListItem
+              key={idx}
               button
               disableGutters
               disabled={!validPlaceholder}
-              key={idx}
-              onClick={() => selectPlaceholder(placeholder, validPlaceholder)}
+              onClick={() => showImportDropdown(placeholder)}
+              data-testid="PlaceholdersList-ListItem"
             >
               <ListItemIcon>
                 <IconStack
@@ -118,12 +127,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
         isOpened={shouldDisplayImportDropdown()}
         placeholder={placeholderSelected}
         onClose={hideImportDropdown}
-        onClick={() =>
-          history.push({
-            pathname: `/paper/create/${placeholderSelected.label}`,
-            search: `deepBack&backgroundPath=${backgroundPath}`
-          })
-        }
+        onClick={() => redirectPaperCreation(placeholderSelected)}
       />
     </>
   )

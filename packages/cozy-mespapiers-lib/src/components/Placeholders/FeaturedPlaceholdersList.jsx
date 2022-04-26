@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react'
+import React, { useState, useRef } from 'react'
 import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 import { useHistory, useLocation } from 'react-router-dom'
@@ -26,15 +26,27 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
     useState(false)
   const history = useHistory()
   const location = useLocation()
-  const hideImportDropdown = useCallback(
-    () => setIsImportDropdownDisplayed(false),
-    []
-  )
+
+  const hideImportDropdown = () => {
+    setIsImportDropdownDisplayed(false)
+    setPlaceholder(null)
+  }
+
+  const redirectPaperCreation = placeholder => {
+    return history.push({
+      pathname: `/paper/create/${placeholder.label}`,
+      search: `backgroundPath=${location.pathname}`
+    })
+  }
 
   const showImportDropdown = idx => placeholder => {
-    actionBtnRef.current = actionBtnRefs.current[idx]
-    setIsImportDropdownDisplayed(true)
-    setPlaceholder(placeholder)
+    if (placeholder.connectorCriteria) {
+      actionBtnRef.current = actionBtnRefs.current[idx]
+      setIsImportDropdownDisplayed(true)
+      setPlaceholder(placeholder)
+    } else {
+      redirectPaperCreation(placeholder)
+    }
   }
 
   return (
@@ -59,12 +71,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
           placeholder={placeholder}
           onClose={hideImportDropdown}
           anchorElRef={actionBtnRef}
-          onClick={() =>
-            history.push({
-              pathname: `/paper/create/${placeholder.label}`,
-              search: `backgroundPath=${location.pathname}`
-            })
-          }
+          onClick={() => redirectPaperCreation(placeholder)}
         />
       </div>
     </List>
