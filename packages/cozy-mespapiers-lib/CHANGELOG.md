@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.7.0...cozy-mespapiers-lib@0.7.1) (2022-04-26)
+
+
+### Bug Fixes
+
+* Next button position on contact and information paper creation step ([b340dd5](https://github.com/cozy/cozy-libs/commit/b340dd5d3450a67a728a992a761ee8804ab0a68e))
+
+
+
+
+
 # [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.6.2...cozy-mespapiers-lib@0.7.0) (2022-04-26)
 
 
