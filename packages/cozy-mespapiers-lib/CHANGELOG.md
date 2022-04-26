@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.6.2...cozy-mespapiers-lib@0.7.0) (2022-04-26)
+
+
+### Bug Fixes
+
+* Disable Placeholder correctly in list ([fa1d324](https://github.com/cozy/cozy-libs/commit/fa1d3243feee184ca89511eb7235371429862b50))
+
+
+### Features
+
+* Bypass choices before paper creation ([59e7815](https://github.com/cozy/cozy-libs/commit/59e78151db5464ab732bbee5045e79d7ecff9aaa))
+* Hide useless featured placeholders ([eb16941](https://github.com/cozy/cozy-libs/commit/eb169410dfd7f0bf2fe7221e4564a0b405b9cb27))
+* On mobile, add download action in paper line option ([6023cb0](https://github.com/cozy/cozy-libs/commit/6023cb0e2fd8237077d68f62e7588be3b9ba6a0f))
+
+
+
+
+
 ## [0.6.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.6.1...cozy-mespapiers-lib@0.6.2) (2022-04-26)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
