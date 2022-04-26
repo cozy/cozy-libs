@@ -1434,10 +1434,7 @@
           "model": "owner",
           "text": "PaperJSON.generic.owner.text"
         }
-      ],
-      "connectorCriteria": {
-        "qualification_labels": "water_invoice"
-      }
+      ]
     },
     {
       "label": "work_disability_recognition",
