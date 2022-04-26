@@ -8,14 +8,8 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import PaperLine from '../Papers/PaperLine'
 import makeActions from '../Actions/makeActions'
 import { useModal } from '../Hooks/useModal'
-import {
-  download,
-  forward,
-  hr,
-  trash,
-  open,
-  viewInDrive
-} from '../Actions/Actions'
+import { hr, trash, open, viewInDrive } from '../Actions/Actions'
+import { makeActionVariant } from '../Actions/utils'
 
 const PapersList = ({ papers }) => {
   const client = useClient()
@@ -23,10 +17,10 @@ const PapersList = ({ papers }) => {
   const { pushModal, popModal } = useModal()
   const [maxDisplay, setMaxDisplay] = useState(papers.maxDisplay)
 
-  const actionVariant = navigator.share ? forward : download
+  const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
-      makeActions([actionVariant, viewInDrive, open, hr, trash], {
+      makeActions([...actionVariant, viewInDrive, open, hr, trash], {
         client,
         pushModal,
         popModal

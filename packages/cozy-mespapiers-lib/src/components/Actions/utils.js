@@ -5,6 +5,11 @@ import { isReferencedBy } from 'cozy-client'
 
 import { FILES_DOCTYPE } from '../../doctypes'
 import { getSharingLink } from '../../utils/getSharingLink'
+import { download, forward } from './Actions'
+
+export const makeActionVariant = () => {
+  return navigator.share ? [download, forward] : [download]
+}
 
 export const isAnyFileReferencedBy = (files, doctype) => {
   for (let i = 0, l = files.length; i < l; ++i) {
