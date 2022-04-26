@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.4.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.4.1...cozy-harvest-lib@8.4.2) (2022-04-26)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @testing-library/jest-dom to v5.16.4 ([779af97](https://github.com/cozy/cozy-libs/commit/779af972e7821ae0043215f0f6f24b4823ca087b))
+
+
+
+
+
 ## [8.4.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.4.0...cozy-harvest-lib@8.4.1) (2022-04-25)
 
 **Note:** Version bump only for package cozy-harvest-lib
