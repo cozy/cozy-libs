@@ -1,5 +1,15 @@
-import { NativeMessenger, PostMeMessage, strings } from '../../api'
+import { NativeMessenger, PostMeMessage } from '../../api'
 import { mockWebviewRef } from '../../../tests'
+
+const mockDebug = jest.fn()
+
+jest.mock('post-me', () => ({
+  ...jest.requireActual('post-me'),
+  debug:
+    (nameSpace = 'NativeService') =>
+    (): unknown =>
+      mockDebug(nameSpace)
+}))
 
 describe('NativeMessenger', () => {
   afterEach(() => {
@@ -44,7 +54,7 @@ describe('NativeMessenger', () => {
     )
   })
 
-  it('Should throw if no listener is injected', () => {
+  it('Should bail out and log if no listener is injected', () => {
     const nativeMessenger = new NativeMessenger(mockWebviewRef)
 
     expect(() =>
@@ -58,7 +68,9 @@ describe('NativeMessenger', () => {
         type: 'string',
         uri: 'string'
       })
-    ).toThrowError(strings.noListenerFound)
+    ).not.toThrow()
+
+    expect(mockDebug).toHaveBeenCalled()
   })
 
   it('Should remove listener', () => {
@@ -79,6 +91,8 @@ describe('NativeMessenger', () => {
         type: 'string',
         uri: 'string'
       })
-    ).toThrowError(strings.noListenerFound)
+    ).not.toThrow()
+
+    expect(mockDebug).toHaveBeenCalled()
   })
 })
