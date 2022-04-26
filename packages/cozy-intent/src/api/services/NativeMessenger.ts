@@ -8,6 +8,8 @@ import {
   strings
 } from '../../api'
 
+const log = debug('NativeMessenger')
+
 export class NativeMessenger implements Messenger {
   private injectJavaScript?: (data: string) => void
   private listener?: MessageListener
@@ -30,7 +32,7 @@ export class NativeMessenger implements Messenger {
   }
 
   public onMessage = (data: PostMeMessage): void => {
-    if (!this.listener) throw new Error(strings.noListenerFound)
+    if (!this.listener) return log(strings.noListenerFound)
 
     this.listener({ data } as MessageEvent)
   }
@@ -39,8 +41,6 @@ export class NativeMessenger implements Messenger {
 export const DebugNativeMessenger = (
   messenger: NativeMessenger
 ): NativeMessenger => {
-  const log = debug('NativeMessenger')
-
   return {
     postMessage: (message: Record<string, unknown>): void => {
       message.action !== 'response' && log('- OUT', message)

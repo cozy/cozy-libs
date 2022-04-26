@@ -51,7 +51,6 @@ const sendSyncMessage = (message: string): void => {
   return assumeWebviewWindow.ReactNativeWebView.postMessage(
     JSON.stringify({
       type: strings.postMeSignature,
-      uri: window.location.hostname,
       message
     })
   )

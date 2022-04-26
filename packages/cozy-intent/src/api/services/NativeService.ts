@@ -10,7 +10,9 @@ import {
   WebviewRef,
   strings
 } from '../../api'
-import { interpolate, isNativeDevMode } from '../../utils'
+import { getErrorMessage, interpolate, isNativeDevMode } from '../../utils'
+
+const log = debug('NativeService')
 
 export class NativeService {
   private readonly messengerService: typeof NativeMessenger
@@ -26,14 +28,18 @@ export class NativeService {
     this.localMethods = localMethods
   }
 
+  private isNativeEvent(object: unknown): object is NativeEvent {
+    return (object as NativeEvent).nativeEvent?.data !== undefined
+  }
+
   private isWebviewRef(object: unknown): object is WebviewRef {
     return (object as WebviewRef).injectJavaScript !== undefined
   }
 
   private getUri = (source: WebviewRef | NativeEvent): string => {
     return this.isWebviewRef(source)
-      ? new URL(source.props.source.uri).hostname
-      : new URL(source.nativeEvent.url).hostname
+      ? new URL(source.props.source.uri).hostname.toLowerCase()
+      : new URL(source.nativeEvent.url).hostname.toLowerCase()
   }
 
   private parseNativeEvent = ({ nativeEvent }: NativeEvent): PostMeMessage =>
@@ -49,7 +55,7 @@ export class NativeService {
     const uri = this.getUri(webviewRef)
 
     if (this.messengerRegister[uri]) {
-      throw new Error(interpolate(strings.errorRegisterWebview, { uri }))
+      return log(interpolate(strings.errorRegisterWebview, { uri }))
     }
 
     const messenger = new this.messengerService(webviewRef)
@@ -68,7 +74,7 @@ export class NativeService {
     const uri = this.getUri(webviewRef)
 
     if (!this.messengerRegister[uri]) {
-      throw new Error(interpolate(strings.errorUnregisterWebview, { uri }))
+      return log(interpolate(strings.errorUnregisterWebview, { uri }))
     }
 
     delete this.messengerRegister[uri]
@@ -79,6 +85,8 @@ export class NativeService {
   ): Promise<Connection> => await ParentHandshake(messenger, this.localMethods)
 
   public tryEmit = async (event: NativeEvent): Promise<void> => {
+    if (!this.isNativeEvent(event)) return
+
     const parsedEvent = this.parseNativeEvent(event)
 
     if (this.isInitMessage(parsedEvent)) return await this.tryInit(event)
@@ -88,16 +96,25 @@ export class NativeService {
 
   private tryInit = async (event: NativeEvent): Promise<void> => {
     const uri = this.getUri(event)
-
-    if (this.messengerRegister[uri].connection)
-      throw new Error(interpolate(strings.errorInitWebview, { uri }))
+    const messengerToInit = this.messengerRegister[uri]
 
     try {
-      this.messengerRegister[uri].connection = await this.initWebview(
-        this.messengerRegister[uri].messenger
+      if (!messengerToInit)
+        throw new Error(interpolate(strings.errorNoMessengerToInit, { uri }))
+
+      if (messengerToInit.connection)
+        throw new Error(interpolate(strings.errorInitWebview, { uri }))
+
+      messengerToInit.connection = await this.initWebview(
+        messengerToInit.messenger
       )
-    } catch {
-      debug('NativeService')(interpolate(strings.errorParentHandshake, { uri }))
+    } catch (error) {
+      log(
+        interpolate(strings.errorParentHandshake, {
+          uri,
+          errorMessage: getErrorMessage(error)
+        })
+      )
     }
   }
 
@@ -106,9 +123,9 @@ export class NativeService {
     const registeredWebview = this.messengerRegister[webviewUri]
 
     if (registeredWebview === undefined) {
-      throw new Error(interpolate(strings.errorEmitMessage, { webviewUri }))
+      return log(interpolate(strings.errorEmitMessage, { webviewUri }))
     }
 
-    this.messengerRegister[webviewUri].messenger.onMessage(message)
+    registeredWebview.messenger.onMessage(message)
   }
 }

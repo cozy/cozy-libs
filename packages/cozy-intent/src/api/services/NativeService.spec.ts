@@ -1,5 +1,6 @@
 import { ParentHandshake } from 'post-me'
 
+import { mockNativeMethods } from '../../../tests'
 import {
   NativeMessenger,
   NativeMethodsRegister,
@@ -8,17 +9,11 @@ import {
   WebviewRef,
   strings
 } from '../../api'
-import { interpolate } from '../../utils'
-import { mockNativeMethods } from '../../../tests'
 
-jest.mock('post-me', () => ({
-  ...jest.requireActual('post-me'),
-  ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
-}))
-
-jest.mock('../services/NativeMessenger')
+const mockDebug = jest.fn()
 
 const onMessageMock = jest.fn()
+
 class MockNativeMessenger extends NativeMessenger {
   constructor(webviewRef: WebviewRef) {
     super(webviewRef)
@@ -33,12 +28,23 @@ class MockNativeMessenger extends NativeMessenger {
   }
 }
 
+jest.mock('post-me', () => ({
+  ...jest.requireActual('post-me'),
+  debug:
+    (nameSpace = 'NativeService') =>
+    (): unknown =>
+      mockDebug(nameSpace),
+  ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
+}))
+
+jest.mock('../services/NativeMessenger')
+
 describe('NativeService', () => {
   afterEach(() => {
     jest.clearAllMocks()
   })
 
-  it('Should allow to register and unregister webviews', async () => {
+  it('Should allow to register and unregister webviews, regardless of casing', async () => {
     const nativeMethods: NativeMethodsRegister = {
       backToHome: jest.fn(),
       logout: jest.fn(),
@@ -62,7 +68,7 @@ describe('NativeService', () => {
     nativeService.registerWebview(webviewRef)
 
     await nativeService.tryEmit({
-      nativeEvent: { data: '{"type":"@post-me"}', url: 'http://SOME_URI' }
+      nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
     })
 
     expect(onMessageMock).toHaveBeenNthCalledWith(1, { type: '@post-me' })
@@ -71,11 +77,12 @@ describe('NativeService', () => {
 
     await expect(
       nativeService.tryEmit({
-        nativeEvent: { data: '{"type":"@post-me"}', url: 'http://SOME_URI' }
+        nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
       })
-    ).rejects.toThrow(
-      `Cannot emit message. No webview is registered with uri: some_uri`
-    )
+    ).resolves.not.toThrow()
+
+    expect(mockDebug).toHaveBeenCalled()
+    expect(onMessageMock).toHaveBeenCalledTimes(1)
   })
 
   describe('registerWebview', () => {
@@ -105,7 +112,7 @@ describe('NativeService', () => {
       expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
     })
 
-    it('Should throw if registering two times the same webview', () => {
+    it('Should bail out and log if registering two times the same webview', () => {
       const nativeMethods: NativeMethodsRegister = {
         backToHome: jest.fn(),
         logout: jest.fn(),
@@ -130,14 +137,14 @@ describe('NativeService', () => {
 
       expect(() => {
         nativeService.registerWebview(webviewRef)
-      }).toThrow(
-        'Cannot register webview. A webview is already registered into cozy-intent with the uri: some_uri'
-      )
+      }).not.toThrow()
+
+      expect(mockDebug).toHaveBeenCalled()
     })
   })
 
   describe('unregisterWebview', () => {
-    it('Should throw if unregistering not registered webview', () => {
+    it('Should bail out and log if unregistering not registered webview', () => {
       const nativeMethods: NativeMethodsRegister = {
         backToHome: jest.fn(),
         logout: jest.fn(),
@@ -160,9 +167,9 @@ describe('NativeService', () => {
 
       expect(() => {
         nativeService.unregisterWebview(webviewRef)
-      }).toThrow(
-        'Cannot unregister webview. No webview is registered into cozy-intent with the uri: some_uri'
-      )
+      }).not.toThrow()
+
+      expect(mockDebug).toHaveBeenCalled()
     })
   })
 
@@ -200,7 +207,7 @@ describe('NativeService', () => {
       expect(ParentHandshake).toHaveBeenCalledTimes(1)
     })
 
-    it('Should throw when init an existing webview', async () => {
+    it('Should bail out when init an existing webview', async () => {
       await expect(
         nativeService.tryEmit({
           nativeEvent: {
@@ -208,9 +215,24 @@ describe('NativeService', () => {
             url: 'http://bar.com'
           }
         })
-      ).rejects.toThrow(
-        interpolate(strings.errorInitWebview, { uri: 'bar.com' })
-      )
+      ).resolves.not.toThrow()
+
+      expect(mockDebug).toHaveBeenCalled()
+      expect(ParentHandshake).toHaveBeenCalledTimes(0)
+    })
+
+    it('Should bail out when init an undefined messenger', async () => {
+      await expect(
+        nativeService.tryEmit({
+          nativeEvent: {
+            data: `{"type": "@post-me", "message": "${strings.webviewIsRendered}", "uri": "http://taz.com"}`,
+            url: 'http://zat.com'
+          }
+        })
+      ).resolves.not.toThrow()
+
+      expect(mockDebug).toHaveBeenCalled()
+      expect(ParentHandshake).toHaveBeenCalledTimes(0)
     })
   })
 })
