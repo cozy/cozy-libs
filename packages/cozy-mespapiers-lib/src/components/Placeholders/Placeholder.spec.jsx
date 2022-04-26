@@ -1,26 +1,52 @@
 'use strict'
 import React from 'react'
-import { render } from '@testing-library/react'
-
-import { models } from 'cozy-client'
+import { fireEvent, render } from '@testing-library/react'
 
 import AppLike from '../../../test/components/AppLike'
-import paperJSON from '../../constants/papersDefinitions.json'
 import Placeholder from './Placeholder'
 
-const {
-  locales: { getBoundT }
-} = models.document
-const papersList = paperJSON.papersDefinitions
+const fakePlaceholders = [
+  {
+    label: 'tax_notice',
+    placeholderIndex: 6,
+    icon: 'bank',
+    featureDate: 'referencedDate',
+    maxDisplay: 3,
+    acquisitionSteps: [],
+    connectorCriteria: {
+      name: 'impots'
+    }
+  },
+  {
+    label: 'driver_license',
+    placeholderIndex: 2,
+    icon: 'car',
+    featureDate: 'carObtentionDate',
+    maxDisplay: 2,
+    acquisitionSteps: [
+      {
+        stepIndex: 1,
+        model: 'scan',
+        page: 'front',
+        illustration: 'IlluDriverLicenseFront.png',
+        text: 'PaperJSON.generic.front.text'
+      }
+    ]
+  }
+]
 
-jest.mock('cozy-client/dist/models/document/locales', () => ({
-  getBoundT: jest.fn(() => jest.fn())
-}))
-
-const setup = (placeholder = papersList[0]) => {
+const setup = ({
+  placeholder = fakePlaceholders[0],
+  divider = false,
+  onClick = jest.fn()
+} = {}) => {
   return render(
     <AppLike>
-      <Placeholder placeholder={placeholder} divider={true} />
+      <Placeholder
+        placeholder={placeholder}
+        divider={divider}
+        onClick={onClick}
+      />
     </AppLike>
   )
 }
@@ -32,17 +58,37 @@ describe('Placeholder components:', () => {
     expect(container).toBeDefined()
   })
 
-  it('should display ID card', () => {
-    getBoundT.mockReturnValueOnce(() => 'ID card')
-    const { getByText } = setup(papersList[0])
+  it('should display label of placeholder', () => {
+    const { getByText } = setup({ placeholder: fakePlaceholders[0] })
 
-    expect(getByText('ID card'))
+    expect(getByText('Tax notice'))
   })
 
-  it('should display Passeport', () => {
-    getBoundT.mockReturnValueOnce(() => 'Passport')
-    const { getByText } = setup(papersList[1])
+  it('should display an divider', () => {
+    const { getByRole } = setup({
+      divider: true
+    })
 
-    expect(getByText('Passport'))
+    expect(getByRole('separator'))
+  })
+
+  it('should not display an divider', () => {
+    const { queryByRole } = setup({
+      divider: false
+    })
+
+    expect(queryByRole('separator')).toBeNull()
+  })
+
+  it('should call onClick when placeholder line is clicked', () => {
+    const mockOnClick = jest.fn()
+    const { getByTestId } = setup({
+      onClick: mockOnClick
+    })
+
+    const placeholderLine = getByTestId('Placeholder-ListItem')
+    fireEvent.click(placeholderLine)
+
+    expect(mockOnClick).toBeCalledTimes(1)
   })
 })
