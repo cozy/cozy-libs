@@ -17,7 +17,12 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
 
   return (
     <>
-      <ListItem button onClick={() => onClick(placeholder)} ref={ref}>
+      <ListItem
+        button
+        onClick={() => onClick(placeholder)}
+        ref={ref}
+        data-testid="Placeholder-ListItem"
+      >
         <ListItemIcon>
           <InfosBadge
             badgeContent={
