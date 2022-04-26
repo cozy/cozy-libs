@@ -1,83 +1,95 @@
 'use strict'
 import React from 'react'
-import { render } from '@testing-library/react'
-
-import { useQuery, models } from 'cozy-client'
+import { fireEvent, render } from '@testing-library/react'
 
 import AppLike from '../../../test/components/AppLike'
 import FeaturedPlaceholdersList from './FeaturedPlaceholdersList'
 
-const {
-  locales: { getBoundT }
-} = models.document
-
-const fakePapers = [
+const fakePlaceholders = [
   {
-    metadata: {
-      qualification: {
-        label: 'national_id_card'
-      }
+    label: 'tax_notice',
+    placeholderIndex: 6,
+    icon: 'bank',
+    featureDate: 'referencedDate',
+    maxDisplay: 3,
+    acquisitionSteps: [],
+    connectorCriteria: {
+      name: 'impots'
     }
   },
   {
-    metadata: {
-      qualification: {
-        label: 'passport'
+    label: 'driver_license',
+    placeholderIndex: 2,
+    icon: 'car',
+    featureDate: 'carObtentionDate',
+    maxDisplay: 2,
+    acquisitionSteps: [
+      {
+        stepIndex: 1,
+        model: 'scan',
+        page: 'front',
+        illustration: 'IlluDriverLicenseFront.png',
+        text: 'PaperJSON.generic.front.text'
       }
-    }
+    ]
   }
 ]
 
-jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
-jest.mock('cozy-client/dist/models/document/locales', () => ({
-  getBoundT: jest.fn(() => jest.fn())
-}))
+/* eslint-disable react/display-name */
+jest.mock('../Placeholders/Placeholder', () => ({ onClick }) => {
+  const fakePlaceholder = {
+    label: 'tax_notice',
+    placeholderIndex: 6,
+    icon: 'bank',
+    featureDate: 'referencedDate',
+    maxDisplay: 3,
+    acquisitionSteps: [],
+    connectorCriteria: {
+      name: 'impots'
+    }
+  }
+  return (
+    <div data-testid="Placeholder" onClick={() => onClick(fakePlaceholder)} />
+  )
+})
+/* eslint-enable react/display-name */
 
-const setup = ({ data = [], hasFeaturedPlaceholders = true } = {}) => {
-  useQuery.mockReturnValue({ data })
-
+const setup = ({ data = [] } = {}) => {
   return render(
     <AppLike>
-      <FeaturedPlaceholdersList
-        featuredPlaceholders={
-          hasFeaturedPlaceholders
-            ? [{ label: 'Label', icon: 'icon', acquisitionSteps: [] }]
-            : []
-        }
-      />
+      <FeaturedPlaceholdersList featuredPlaceholders={data} />
     </AppLike>
   )
 }
 
 describe('FeaturedPlaceholdersList components:', () => {
-  beforeEach(() => {
-    jest.clearAllMocks()
-  })
-
-  it('should be rendered correctly', () => {
-    const { container } = setup()
-
-    expect(container).toBeDefined()
-  })
-
   it('should not display Suggestions header', () => {
-    const { queryByText } = setup({ hasFeaturedPlaceholders: false })
+    const { queryByText } = setup({ data: [] })
 
     expect(queryByText('Suggestions')).toBeNull()
   })
 
   it('should display Suggestions', () => {
-    getBoundT.mockReturnValueOnce(() => 'Others...')
-    const { getByText } = setup({ data: fakePapers })
+    const { getByText } = setup({ data: fakePlaceholders })
 
     expect(getByText('Suggestions'))
   })
 
-  it('should display Suggestions & list of placeholder filtered', () => {
-    getBoundT.mockReturnValueOnce(() => 'ID card')
-    const { getByText, getAllByText } = setup({ data: fakePapers[1] })
+  it('should display ActionMenu modale when placeholder line is clicked', () => {
+    const { getByTestId, getByText } = setup({ data: [fakePlaceholders[0]] })
 
-    expect(getByText('Suggestions'))
-    expect(getAllByText('ID card'))
+    const placeholderComp = getByTestId('Placeholder')
+    fireEvent.click(placeholderComp)
+
+    expect(getByText('Add: Tax notice'))
+  })
+
+  it('should not display ActionMenu modale by default', () => {
+    const { getByTestId, getByText } = setup({ data: [fakePlaceholders[0]] })
+
+    const placeholderComp = getByTestId('Placeholder')
+    fireEvent.click(placeholderComp)
+
+    expect(getByText('Add: Tax notice'))
   })
 })
