@@ -3,6 +3,36 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.7.1...cozy-mespapiers-lib@0.8.0) (2022-04-26)
+
+
+### Features
+
+* Move all cozy packages to devDeps & peerDeps ([8f37e7e](https://github.com/cozy/cozy-libs/commit/8f37e7ed13930ec531e0acdca2228143eca1d643))
+* Update cozy-client and cozy-ui libs ([f929d97](https://github.com/cozy/cozy-libs/commit/f929d9773d27b09672943a52bcadca90726d839c))
+
+
+### BREAKING CHANGES
+
+* The following packages
+must be installed on the applications:
+```
+  "cozy-device-helper": ">=1.18.0",
+  "cozy-doctypes": ">=1.83.3",
+  "cozy-harvest-lib": ">=8.4.2",
+  "cozy-sharing": ">=4.1.6"
+```
+* The following packages
+must be installed on the applications:
+```
+  "cozy-ui": ">=64.0.0",
+  "cozy-client": ">=28.2.1"
+```
+
+
+
+
+
 ## [0.7.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.7.0...cozy-mespapiers-lib@0.7.1) (2022-04-26)
 
 
