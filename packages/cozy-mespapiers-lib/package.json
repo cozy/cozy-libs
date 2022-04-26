@@ -16,10 +16,10 @@
     "@testing-library/react": "11.2.7",
     "babel-preset-cozy-app": "2.0.1",
     "cozy-bar": "7.16.0",
-    "cozy-client": "^27.22.0",
+    "cozy-client": "^28.2.1",
     "cozy-intent": "^1.17.0",
     "cozy-realtime": "^4.0.7",
-    "cozy-ui": "^62.5.2",
+    "cozy-ui": "^64.0.0",
     "eslint-config-cozy-app": "^4.0.2",
     "git-directory-deploy": "1.5.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
@@ -42,10 +42,10 @@
     "pdf-lib": "1.17.1"
   },
   "peerDependencies": {
-    "cozy-client": ">=27.22.0",
+    "cozy-client": ">=28.2.1",
     "cozy-intent": ">=1.13.5",
     "cozy-realtime": ">=4.0.2",
-    "cozy-ui": ">=62.5.2",
+    "cozy-ui": ">=64.0.0",
     "react-router-dom": ">=5.2.0"
   }
 }
