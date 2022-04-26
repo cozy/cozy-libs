@@ -137,36 +137,14 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
         </Typography>
       </ActionMenuItem>
       <ActionMenuItem
-        className={cx('u-flex-items-center', {
-          [styles.disabledItem]: !konnectorCategory && !konnectorName
-        })}
-        left={
-          <Icon
-            className={cx({
-              [styles.disabledIcon]: !konnectorCategory && !konnectorName
-            })}
-            icon={Konnector}
-            size={24}
-          />
-        }
-        onClick={konnectorCategory || konnectorName ? goToStore : null}
+        className={cx('u-flex-items-center')}
+        left={<Icon icon={Konnector} size={24} />}
+        onClick={goToStore}
       >
-        <Typography
-          className={cx({
-            [styles.disabledTypography]: !konnectorCategory && !konnectorName
-          })}
-          variant="body1"
-          gutterBottom
-        >
+        <Typography variant="body1" gutterBottom>
           {t('ImportDropdown.importAuto.title')}
         </Typography>
-        <Typography
-          className={cx({
-            [styles.disabledTypography]: !konnectorCategory && !konnectorName
-          })}
-          variant="caption"
-          color="textSecondary"
-        >
+        <Typography variant="caption" color="textSecondary">
           {t('ImportDropdown.importAuto.text')}
         </Typography>
       </ActionMenuItem>
