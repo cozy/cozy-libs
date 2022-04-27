@@ -17,6 +17,13 @@ export interface FlagshipMetadata {
   version?: string
 }
 
-export const flagshipMetadata = window.cozy?.flagship || {}
+export const flagshipMetadata = getWindowIfAny()?.cozy?.flagship || {}
 
-export const isFlagshipApp = (): boolean => window.cozy?.flagship !== undefined
+export const isFlagshipApp = (): boolean => getWindowIfAny()?.cozy?.flagship !== undefined
+
+/**
+ * Check window object existence without raising any error
+ */
+function getWindowIfAny() {
+ return typeof window === 'undefined' ? null : window
+}
