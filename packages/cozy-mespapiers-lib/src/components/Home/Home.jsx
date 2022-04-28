@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import uniqBy from 'lodash/uniqBy'
 
-import { isQueryLoading, useQuery } from 'cozy-client'
+import { isQueryLoading, useQueryAll } from 'cozy-client'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -19,14 +19,12 @@ const Home = () => {
   const labels = papersDefinitions.map(paper => paper.label)
   const filesQueryByLabels = buildFilesQueryByLabels(labels)
 
-  const {
-    data: filesByLabels,
-    hasMore,
-    fetchMore,
-    ...queryResult
-  } = useQuery(filesQueryByLabels.definition, filesQueryByLabels.options)
+  const { data: filesByLabels, ...queryResult } = useQueryAll(
+    filesQueryByLabels.definition,
+    filesQueryByLabels.options
+  )
 
-  const isLoading = isQueryLoading(queryResult) || hasMore
+  const isLoading = isQueryLoading(queryResult) || queryResult.hasMore
 
   const allPapersByCategories = useMemo(
     () => uniqBy(filesByLabels, 'metadata.qualification.label'),
@@ -37,8 +35,6 @@ const Home = () => {
     () => getFeaturedPlaceholders(papersDefinitions, filesByLabels),
     [papersDefinitions, filesByLabels]
   )
-
-  if (hasMore) fetchMore()
 
   if (isLoading) {
     return (

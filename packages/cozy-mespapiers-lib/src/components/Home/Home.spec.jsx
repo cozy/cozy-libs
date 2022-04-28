@@ -2,20 +2,20 @@
 import React from 'react'
 import { render, waitFor } from '@testing-library/react'
 
-import { isQueryLoading, hasQueryBeenLoaded, useQuery } from 'cozy-client'
+import { isQueryLoading, hasQueryBeenLoaded, useQueryAll } from 'cozy-client'
 
 import AppLike from '../../../test/components/AppLike'
 import Home from './Home'
 
 jest.mock('cozy-client/dist/hooks', () => ({
   ...jest.requireActual('cozy-client/dist/hooks'),
-  useQuery: jest.fn()
+  useQueryAll: jest.fn()
 }))
 jest.mock('cozy-client/dist/utils', () => ({
   ...jest.requireActual('cozy-client/dist/utils'),
   isQueryLoading: jest.fn(),
   hasQueryBeenLoaded: jest.fn(),
-  useQuery: jest.fn()
+  useQueryAll: jest.fn()
 }))
 
 const setup = ({
@@ -25,7 +25,7 @@ const setup = ({
 } = {}) => {
   isQueryLoading.mockReturnValue(isLoading)
   hasQueryBeenLoaded.mockReturnValue(isLoaded)
-  useQuery.mockReturnValue({
+  useQueryAll.mockReturnValue({
     data: withData
       ? [{ metadata: { qualification: { label: 'LabelQualif' } } }]
       : [],
