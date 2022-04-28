@@ -39,7 +39,7 @@ export const getPaperDefinitionByLabel = (files, paperDefinition) => {
  * @param {IOCozyFile[]} files Array of IOCozyFile
  * @returns {PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
  */
-export const getFeaturedPlaceholders = (papersDefinitions, files = []) => {
+export const getFeaturedPlaceholders = ({ papersDefinitions, files = [] }) => {
   return papersDefinitions
     .filter(
       paperDefinition =>

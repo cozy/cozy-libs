@@ -23,9 +23,9 @@ const fakeQualificationItems = [
 describe('getPlaceholders', () => {
   describe('getFeaturedPlaceholders', () => {
     it('should return list of placeholders', () => {
-      const featuredPlaceholders = getFeaturedPlaceholders(
-        mockPapersDefinitions
-      )
+      const featuredPlaceholders = getFeaturedPlaceholders({
+        papersDefinitions: mockPapersDefinitions
+      })
 
       expect(featuredPlaceholders).toEqual(
         expect.arrayContaining([
@@ -48,10 +48,10 @@ describe('getPlaceholders', () => {
     })
 
     it('should return correct list of placeholders with file constraint', () => {
-      const featuredPlaceholders = getFeaturedPlaceholders(
-        mockPapersDefinitions,
-        fakeIspInvoiceFile
-      )
+      const featuredPlaceholders = getFeaturedPlaceholders({
+        papersDefinitions: mockPapersDefinitions,
+        files: fakeIspInvoiceFile
+      })
 
       expect(featuredPlaceholders).toEqual(
         expect.arrayContaining([
