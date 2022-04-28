@@ -132,7 +132,9 @@ export class AccountForm extends PureComponent {
   handleSubmit(values, form) {
     const { account, konnector } = this.props
 
-    const identifier = manifest.getIdentifier(manifest.sanitizeFields(konnector.fields))
+    const identifier = manifest.getIdentifier(
+      manifest.sanitizeFields(konnector.fields)
+    )
     if (
       account &&
       account.auth[identifier] &&

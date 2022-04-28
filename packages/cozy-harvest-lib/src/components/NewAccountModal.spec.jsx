@@ -58,7 +58,9 @@ describe('NewAccountModal', () => {
       </AppLike>
     )
     onLoginSuccessFn(konnectorTrigger)
-    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumber/success')
+    expect(replaceHistory).toHaveBeenCalledWith(
+      '/accounts/accountNumber/success'
+    )
   })
   it('should redirect to route without success on login success for client triggers', () => {
     render(
@@ -85,7 +87,9 @@ describe('NewAccountModal', () => {
       </AppLike>
     )
     onSuccessFn(konnectorTrigger)
-    expect(replaceHistory).toHaveBeenCalledWith('/accounts/accountNumber/success')
+    expect(replaceHistory).toHaveBeenCalledWith(
+      '/accounts/accountNumber/success'
+    )
   })
   it('should redirect to route without success on success for client triggers', () => {
     render(

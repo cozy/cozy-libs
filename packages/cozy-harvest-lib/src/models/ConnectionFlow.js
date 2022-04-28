@@ -594,7 +594,7 @@ export class ConnectionFlow {
     }
   }
 
-  watchJob(options = {autoSuccessTimer: false}) {
+  watchJob(options = { autoSuccessTimer: false }) {
     this.realtime.subscribe(
       'updated',
       JOBS_DOCTYPE,

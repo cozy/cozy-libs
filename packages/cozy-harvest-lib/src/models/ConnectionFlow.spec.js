@@ -8,7 +8,9 @@ import {
   launchTrigger
 } from '../connections/triggers'
 import CozyRealtime from 'cozy-realtime'
-import KonnectorJobWatcher, { watchKonnectorJob } from './konnector/KonnectorJobWatcher'
+import KonnectorJobWatcher, {
+  watchKonnectorJob
+} from './konnector/KonnectorJobWatcher'
 import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
 import fixtures from '../../test/fixtures'
 import sentryHub from '../sentry'
@@ -118,13 +120,12 @@ describe('ConnectionFlow', () => {
       return flow.getState().running === true
     }
     beforeAll(() => {
-      watchKonnectorJob.mockReturnValue({on: () => ({})})
+      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
     })
 
     afterEach(() => {
       jest.clearAllMocks()
     })
-
 
     it('should render as submitting when there is no account', async () => {
       const { flow } = setup()
@@ -327,7 +328,7 @@ describe('ConnectionFlow', () => {
   describe('ensureTriggerAndLaunch', () => {
     beforeAll(() => {
       jest.spyOn(cronHelpers, 'fromFrequency').mockReturnValue('0 0 0 * * 0')
-      watchKonnectorJob.mockReturnValue({on: () => ({})})
+      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
     })
 
     afterEach(() => {
@@ -494,7 +495,7 @@ describe('ConnectionFlow', () => {
 
   describe('constructor', () => {
     beforeAll(() => {
-      watchKonnectorJob.mockReturnValue({on: () => ({})})
+      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
     })
 
     afterEach(() => {
@@ -502,8 +503,12 @@ describe('ConnectionFlow', () => {
     })
 
     it('should watch a running trigger', () => {
-      setup({trigger: fixtures.runningTrigger})
-      expect(watchKonnectorJob).toHaveBeenCalledWith(expect.any(Object), {_id: 'runningjobid'}, {autoSuccessTimer: false})
+      setup({ trigger: fixtures.runningTrigger })
+      expect(watchKonnectorJob).toHaveBeenCalledWith(
+        expect.any(Object),
+        { _id: 'runningjobid' },
+        { autoSuccessTimer: false }
+      )
     })
   })
 })
