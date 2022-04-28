@@ -415,7 +415,29 @@ DumbTriggerManager.propTypes = {
    * Whether the vault will be closable or not.
    * @type {Boolean}
    */
-  vaultClosable: PropTypes.bool
+  vaultClosable: PropTypes.bool,
+  /**
+   *
+   */
+  vaultClient: PropTypes.object,
+  client: PropTypes.object,
+  onError: PropTypes.func,
+  showUnlockForm: PropTypes.func,
+  onVaultDismiss: PropTypes.func,
+  error: PropTypes.any,
+   /**
+   * Indicates if the AccountForm has to show errors. Sometimes errors may be
+   * displayed elsewhere. However, a KonnectorJobError corresponding to a login
+   * error is always displayed.
+   * @type {Boolean}
+   */
+    showError: PropTypes.bool,
+  /**
+   * Used to have options on fields (forceEncryptedPlaceholder or focus)
+   */
+  fieldOptions: PropTypes.object,
+  flow: PropTypes.object,
+  flowState: PropTypes.object
 }
 
 const TriggerManager = compose(
