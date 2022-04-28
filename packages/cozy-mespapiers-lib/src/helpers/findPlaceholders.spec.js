@@ -98,7 +98,7 @@ describe('getPlaceholders', () => {
 
 describe('getPaperDefinitionByLabel', () => {
   it('should handle empty files', () => {
-    const res = getPaperDefinitionByLabel(mockPapersDefinitions, null)
+    const res = getPaperDefinitionByLabel(null, mockPapersDefinitions)
 
     expect(res).toBe(null)
   })
