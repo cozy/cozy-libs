@@ -1,4 +1,4 @@
-import React, { useState, useCallback, memo } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
@@ -30,41 +30,33 @@ const ContactWrapper = ({ currentStep, onClose }) => {
   const closeConfirmReplaceFileModal = () => setConfirmReplaceFileModal(false)
   const openConfirmReplaceFileModal = () => setConfirmReplaceFileModal(true)
 
-  const submit = useCallback(async () => {
+  const submit = async () => {
     setOnLoad(true)
     await formSubmit()
     onClose()
-  }, [onClose, formSubmit])
+  }
 
-  const onClickReplace = useCallback(
-    isFileReplaced => {
-      ;(async () => {
-        if (isFileReplaced) {
-          for (const { file } of cozyFiles) {
-            await client.destroy({ _id: file.id, _type: FILES_DOCTYPE })
-          }
-        }
-        submit()
-      })()
-    },
-    [client, cozyFiles, submit]
-  )
+  const onClickReplace = async isFileReplaced => {
+    if (isFileReplaced) {
+      for (const { file } of cozyFiles) {
+        await client.destroy({ _id: file.id, _type: FILES_DOCTYPE })
+      }
+    }
+    submit()
+  }
 
-  const handleClick = useCallback(() => {
+  const handleClick = () => {
     if (cozyFiles.length > 0) {
       if (!confirmReplaceFileModal) openConfirmReplaceFileModal()
       else onClickReplace(true)
     } else {
       submit()
     }
-  }, [cozyFiles.length, confirmReplaceFileModal, onClickReplace, submit])
+  }
 
-  const handleKeyDown = useCallback(
-    ({ key }) => {
-      if (key === KEYS.ENTER) handleClick()
-    },
-    [handleClick]
-  )
+  const handleKeyDown = ({ key }) => {
+    if (key === KEYS.ENTER) handleClick()
+  }
 
   useEventListener(window, 'keydown', handleKeyDown)
 
@@ -111,4 +103,4 @@ ContactWrapper.propTypes = {
   onClose: PropTypes.func.isRequired
 }
 
-export default memo(ContactWrapper)
+export default ContactWrapper
