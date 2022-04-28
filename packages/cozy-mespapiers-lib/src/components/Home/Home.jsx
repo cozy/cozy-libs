@@ -8,7 +8,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import PaperGroup from '../Papers/PaperGroup'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
-import { getAllQualificationLabel } from '../../helpers/queries'
+import { buildFilesQueryByLabels } from '../../helpers/queries'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
@@ -16,16 +16,15 @@ import HomeCloud from '../../assets/icons/HomeCloud.svg'
 const Home = () => {
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
-  const allQualificationLabel = useMemo(
-    () => getAllQualificationLabel(papersDefinitions),
-    [papersDefinitions]
-  )
+  const labels = papersDefinitions.map(paper => paper.label)
+  const filesQueryByLabels = buildFilesQueryByLabels(labels)
+
   const {
     data: allPapers,
     hasMore: hasMorePapers,
     fetchMore: fetchMorePapers,
     ...restPapers
-  } = useQuery(allQualificationLabel.definition, allQualificationLabel.options)
+  } = useQuery(filesQueryByLabels.definition, filesQueryByLabels.options)
 
   const isQueryOver = useMemo(
     () =>
