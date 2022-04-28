@@ -23,10 +23,13 @@ import get from 'lodash/get'
  * @property {number} maxDisplay - Number of document beyond which a "see more" button is displayed.
  */
 
-const getPaperDefinitionByLabel = (paperDefinition, files) => {
-  return !files.some(
-    paper =>
-      get(paper, 'metadata.qualification.label') === paperDefinition.label
+export const getPaperDefinitionByLabel = (paperDefinition, files) => {
+  return (
+    files &&
+    !files.some(
+      paper =>
+        get(paper, 'metadata.qualification.label') === paperDefinition.label
+    )
   )
 }
 
