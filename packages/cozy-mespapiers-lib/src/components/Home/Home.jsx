@@ -47,9 +47,10 @@ const Home = () => {
     () =>
       getFeaturedPlaceholders({
         papersDefinitions,
-        filesByLabels
+        files: filesByLabels,
+        selectedTheme
       }),
-    [papersDefinitions, filesByLabels]
+    [papersDefinitions, filesByLabels, selectedTheme]
   )
 
   const handleThemeSelection = nextValue => {

@@ -1,4 +1,5 @@
 import get from 'lodash/get'
+import { hasItemByLabel } from '../components/Home/helpers'
 
 /**
  * @typedef {Object} StepAttributes
@@ -37,18 +38,35 @@ export const getPaperDefinitionByLabel = (files, paperDefinition) => {
  * Filters and sorts the list of featured Placeholders.
  * @param {PaperDefinition[]} papersDefinitions Array of PapersDefinition
  * @param {IOCozyFile[]} files Array of IOCozyFile
+ * @param {object} selectedTheme Theme selected
  * @returns {PaperDefinition[]} Array of PapersDefinition filtered with the prop "placeholderIndex"
  */
-export const getFeaturedPlaceholders = ({ papersDefinitions, files = [] }) => {
-  return papersDefinitions
-    .filter(
+export const getFeaturedPlaceholders = ({
+  papersDefinitions,
+  files = [],
+  selectedTheme = ''
+}) => {
+  let featuredPlaceholders
+
+  if (selectedTheme) {
+    featuredPlaceholders = papersDefinitions.filter(
+      paperDefinition =>
+        hasItemByLabel(selectedTheme, paperDefinition.label) &&
+        getPaperDefinitionByLabel(files, paperDefinition)
+    )
+  } else {
+    featuredPlaceholders = papersDefinitions.filter(
       paperDefinition =>
         getPaperDefinitionByLabel(files, paperDefinition) &&
         paperDefinition.placeholderIndex &&
         (paperDefinition.acquisitionSteps.length > 0 ||
           paperDefinition.connectorCriteria)
     )
-    .sort((a, b) => a.placeholderIndex - b.placeholderIndex)
+  }
+
+  return featuredPlaceholders.sort(
+    (a, b) => a.placeholderIndex - b.placeholderIndex
+  )
 }
 
 /**

@@ -68,6 +68,65 @@ describe('getPlaceholders', () => {
         ])
       )
     })
+
+    describe('with theme selected', () => {
+      it('should return list of placeholders', () => {
+        const featuredPlaceholders = getFeaturedPlaceholders({
+          papersDefinitions: mockPapersDefinitions,
+          selectedTheme: {
+            items: [{ label: 'isp_invoice' }, { label: 'tax_notice' }]
+          }
+        })
+
+        expect(featuredPlaceholders).toEqual(
+          expect.arrayContaining([
+            expect.objectContaining({
+              label: 'isp_invoice'
+            })
+          ]),
+          expect.arrayContaining([
+            expect.objectContaining({
+              label: 'tax_notice'
+            })
+          ]),
+          expect.arrayContaining([
+            expect.not.objectContaining({
+              label: 'health_certificate'
+            })
+          ])
+        )
+        expect(featuredPlaceholders.length).toBe(2)
+      })
+
+      it('should return correct list of placeholders with file constraint', () => {
+        const featuredPlaceholders = getFeaturedPlaceholders({
+          papersDefinitions: mockPapersDefinitions,
+          files: fakeIspInvoiceFile,
+          selectedTheme: {
+            items: [{ label: 'isp_invoice' }, { label: 'tax_notice' }]
+          }
+        })
+
+        expect(featuredPlaceholders).toEqual(
+          expect.arrayContaining([
+            expect.not.objectContaining({
+              label: 'isp_invoice'
+            })
+          ]),
+          expect.arrayContaining([
+            expect.objectContaining({
+              label: 'tax_notice'
+            })
+          ]),
+          expect.arrayContaining([
+            expect.not.objectContaining({
+              label: 'health_certificate'
+            })
+          ])
+        )
+        expect(featuredPlaceholders.length).toBe(1)
+      })
+    })
   })
 
   describe('findPlaceholdersByQualification', () => {
