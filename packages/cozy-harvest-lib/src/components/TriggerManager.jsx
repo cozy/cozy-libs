@@ -10,7 +10,14 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 
-import { CipherType } from 'cozy-keys-lib'
+import {
+  CipherType,
+  withVaultUnlockContext,
+  VaultUnlockPlaceholder,
+  VaultUnlockProvider,
+  useVaultClient,
+  CozyUtils
+} from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
@@ -21,11 +28,6 @@ import manifest from '../helpers/manifest'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
-import {
-  withVaultUnlockContext,
-  VaultUnlockPlaceholder,
-  VaultUnlockProvider
-} from 'cozy-keys-lib'
 import HarvestVaultProvider from './HarvestVaultProvider'
 
 const IDLE = 'IDLE'
@@ -210,7 +212,8 @@ export class DumbTriggerManager extends Component {
       showUnlockForm,
       onVaultDismiss,
       vaultClosable,
-      vaultClient
+      vaultClient,
+      client
     } = this.props
     const konnectorPolicy = findKonnectorPolicy(konnector)
     if (konnectorPolicy.saveInVault) {
@@ -224,7 +227,9 @@ export class DumbTriggerManager extends Component {
         showUnlockForm({
           onDismiss: onVaultDismiss,
           closable: vaultClosable,
-          onUnlock: this.handleVaultUnlock
+          onUnlock: this.handleVaultUnlock,
+          addCheckShouldUnlock: () =>
+            CozyUtils.checkHasInstalledExtension(client)
         })
       } else {
         this.handleVaultUnlock()
