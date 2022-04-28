@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.18.0...cozy-device-helper@2.0.0) (2022-04-28)
+
+
+### Bug Fixes
+
+* FlagshipMetadata is now a getter ([11948ad](https://github.com/cozy/cozy-libs/commit/11948ad9b554996800c6b8d08cf0f30e43043084))
+
+
+### BREAKING CHANGES
+
+* flagshipMetadata reference has been replaced with
+getFlagshipMetadata().
+It returns the same information but adds safety at file init
+
+
+
+
+
 # 1.18.0 (2022-04-25)
 
 
