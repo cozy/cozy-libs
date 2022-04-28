@@ -4,7 +4,7 @@ import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
-import { useVaultClient } from 'cozy-keys-lib'
+import { useVaultClient, CozyUtils } from 'cozy-keys-lib'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -96,7 +96,8 @@ const ConfigurationTab = ({
     if (konnectorPolicy.saveInVault) {
       showUnlockForm({
         closable: true,
-        onUnlock: handleUnlockForDeletion
+        onUnlock: handleUnlockForDeletion,
+        addCheckShouldUnlock: () => CozyUtils.checkHasInstalledExtension(client)
       })
     } else {
       await handleDeleteAccount()
