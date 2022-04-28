@@ -81,6 +81,7 @@ const ContactWrapper = ({ currentStep, onClose }) => {
           onClick={handleClick}
           disabled={onLoad}
           busy={onLoad}
+          data-testid="ButtonSave"
         />
       </DialogActions>
 
