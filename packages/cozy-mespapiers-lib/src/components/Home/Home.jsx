@@ -20,36 +20,36 @@ const Home = () => {
   const filesQueryByLabels = buildFilesQueryByLabels(labels)
 
   const {
-    data: allPapers,
-    hasMore: hasMorePapers,
-    fetchMore: fetchMorePapers,
-    ...restPapers
+    data: filesByLabels,
+    hasMore,
+    fetchMore,
+    ...queryResult
   } = useQuery(filesQueryByLabels.definition, filesQueryByLabels.options)
 
   const isQueryOver = useMemo(
     () =>
-      !isQueryLoading(restPapers) &&
-      hasQueryBeenLoaded(restPapers) &&
-      !hasMorePapers,
-    [hasMorePapers, restPapers]
+      !isQueryLoading(queryResult) &&
+      hasQueryBeenLoaded(queryResult) &&
+      !hasMore,
+    [hasMore, queryResult]
   )
 
-  if (hasMorePapers) fetchMorePapers()
+  if (hasMore) fetchMore()
 
   const featuredPlaceholders = useMemo(
     () =>
-      Array.isArray(allPapers) && isQueryOver
-        ? getFeaturedPlaceholders(papersDefinitions, allPapers)
+      Array.isArray(filesByLabels) && isQueryOver
+        ? getFeaturedPlaceholders(papersDefinitions, filesByLabels)
         : [],
-    [allPapers, isQueryOver, papersDefinitions]
+    [filesByLabels, isQueryOver, papersDefinitions]
   )
 
   const allPapersByCategories = useMemo(
     () =>
-      allPapers?.length > 0 && isQueryOver
-        ? uniqBy(allPapers, 'metadata.qualification.label')
+      filesByLabels?.length > 0 && isQueryOver
+        ? uniqBy(filesByLabels, 'metadata.qualification.label')
         : [],
-    [allPapers, isQueryOver]
+    [filesByLabels, isQueryOver]
   )
 
   return isQueryOver ? (
