@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import CozyRealtime from 'cozy-realtime'
+import { isFlagshipApp } from 'cozy-device-helper'
 
 import {
   prepareOAuth,
@@ -13,6 +14,7 @@ import {
 } from '../helpers/oauth'
 // TODO use PopUp from cozy-ui
 import Popup from './Popup'
+import InAppBrowser from './InAppBrowser'
 
 const OAUTH_POPUP_HEIGHT = 800
 const OAUTH_POPUP_WIDTH = 800
@@ -141,7 +143,8 @@ export class OAuthWindow extends PureComponent {
     const { oAuthUrl, succeed } = this.state
     return (
       oAuthUrl &&
-      !succeed && (
+      !succeed &&
+      (!isFlagshipApp() ? (
         <Popup
           url={oAuthUrl}
           height={OAUTH_POPUP_HEIGHT}
@@ -150,7 +153,9 @@ export class OAuthWindow extends PureComponent {
           onUrlChange={this.handleUrlChange}
           title={t(`oauth.window.title`)}
         />
-      )
+      ) : (
+        <InAppBrowser url={oAuthUrl} onClose={this.handleClose} />
+      ))
     )
   }
 }

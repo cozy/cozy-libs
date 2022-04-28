@@ -5,6 +5,7 @@ import compose from 'lodash/flowRight'
 
 import { withClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
+import { WebviewIntentProvider } from 'cozy-intent'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -349,7 +350,7 @@ export class DumbTriggerManager extends Component {
     }
 
     return (
-      <>
+      <WebviewIntentProvider>
         {showCiphersList && (
           <VaultCiphersList
             konnector={konnector}
@@ -381,7 +382,7 @@ export class DumbTriggerManager extends Component {
             />
           </>
         )}
-      </>
+      </WebviewIntentProvider>
     )
   }
 }
