@@ -23,7 +23,7 @@ import get from 'lodash/get'
  * @property {number} maxDisplay - Number of document beyond which a "see more" button is displayed.
  */
 
-export const getPaperDefinitionByLabel = (paperDefinition, files) => {
+export const getPaperDefinitionByLabel = (files, paperDefinition) => {
   return (
     files &&
     !files.some(
@@ -43,7 +43,7 @@ export const getFeaturedPlaceholders = (papersDefinitions, files = []) => {
   return papersDefinitions
     .filter(
       paperDefinition =>
-        getPaperDefinitionByLabel(paperDefinition, files) &&
+        getPaperDefinitionByLabel(files, paperDefinition) &&
         paperDefinition.placeholderIndex &&
         (paperDefinition.acquisitionSteps.length > 0 ||
           paperDefinition.connectorCriteria)
