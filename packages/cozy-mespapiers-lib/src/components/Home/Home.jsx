@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react'
 import uniqBy from 'lodash/uniqBy'
 
-import { hasQueryBeenLoaded, isQueryLoading, useQuery } from 'cozy-client'
+import { isQueryLoading, useQuery } from 'cozy-client'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -26,33 +26,30 @@ const Home = () => {
     ...queryResult
   } = useQuery(filesQueryByLabels.definition, filesQueryByLabels.options)
 
-  const isQueryOver = useMemo(
-    () =>
-      !isQueryLoading(queryResult) &&
-      hasQueryBeenLoaded(queryResult) &&
-      !hasMore,
-    [hasMore, queryResult]
+  const isLoading = isQueryLoading(queryResult) || hasMore
+
+  const allPapersByCategories = useMemo(
+    () => uniqBy(filesByLabels, 'metadata.qualification.label'),
+    [filesByLabels]
+  )
+
+  const featuredPlaceholders = useMemo(
+    () => getFeaturedPlaceholders(papersDefinitions, filesByLabels),
+    [papersDefinitions, filesByLabels]
   )
 
   if (hasMore) fetchMore()
 
-  const featuredPlaceholders = useMemo(
-    () =>
-      Array.isArray(filesByLabels) && isQueryOver
-        ? getFeaturedPlaceholders(papersDefinitions, filesByLabels)
-        : [],
-    [filesByLabels, isQueryOver, papersDefinitions]
-  )
+  if (isLoading) {
+    return (
+      <Spinner
+        size="xxlarge"
+        className="u-flex u-flex-justify-center u-mt-2 u-h-5"
+      />
+    )
+  }
 
-  const allPapersByCategories = useMemo(
-    () =>
-      filesByLabels?.length > 0 && isQueryOver
-        ? uniqBy(filesByLabels, 'metadata.qualification.label')
-        : [],
-    [filesByLabels, isQueryOver]
-  )
-
-  return isQueryOver ? (
+  return (
     <>
       {allPapersByCategories.length === 0 ? (
         <Empty
@@ -67,11 +64,6 @@ const Home = () => {
       )}
       <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
     </>
-  ) : (
-    <Spinner
-      size="xxlarge"
-      className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-    />
   )
 }
 

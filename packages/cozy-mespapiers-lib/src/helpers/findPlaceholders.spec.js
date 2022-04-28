@@ -1,6 +1,7 @@
 import {
   getFeaturedPlaceholders,
-  findPlaceholdersByQualification
+  findPlaceholdersByQualification,
+  getPaperDefinitionByLabel
 } from './findPlaceholders'
 import { mockPapersDefinitions } from '../../test/mockPaperDefinitions'
 
@@ -92,5 +93,13 @@ describe('getPlaceholders', () => {
         ])
       )
     })
+  })
+})
+
+describe('getPaperDefinitionByLabel', () => {
+  it('should handle empty files', () => {
+    const res = getPaperDefinitionByLabel(mockPapersDefinitions, null)
+
+    expect(res).toBe(null)
   })
 })
