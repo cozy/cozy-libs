@@ -1,4 +1,4 @@
-import { filterPapersByTheme } from './helpers'
+import { filterPapersByTheme, hasItemByLabel } from './helpers'
 
 const files = [
   { _id: 'file01', metadata: { qualification: { label: 'isp_invoice' } } },
@@ -24,5 +24,25 @@ describe('filterPapersByTheme', () => {
     expect(res).toHaveLength(2)
     expect(res).toContain(files[0])
     expect(res).toContain(files[2])
+  })
+})
+
+describe('hasItemByLabel', () => {
+  it('should return true', () => {
+    const res = hasItemByLabel(
+      { items: [{ label: 'isp_invoice' }] },
+      'isp_invoice'
+    )
+
+    expect(res).toBe(true)
+  })
+
+  it('should return false', () => {
+    const res = hasItemByLabel(
+      { items: [{ label: 'isp_invoice' }] },
+      'phone_invoice'
+    )
+
+    expect(res).toBe(false)
   })
 })
