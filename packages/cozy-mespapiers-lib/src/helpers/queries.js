@@ -4,14 +4,13 @@ import { CONTACTS_DOCTYPE, FILES_DOCTYPE, SETTINGS_DOCTYPE } from '../doctypes'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(30 * 1000)
 
-export const getAllQualificationLabel = papersDefinitions => {
-  const papersLabel = papersDefinitions.map(paper => paper.label)
+export const buildFilesQueryByLabels = labels => {
   return {
     definition: () =>
       Q(FILES_DOCTYPE)
         .where({
           'metadata.qualification.label': {
-            $in: papersLabel
+            $in: labels
           }
         })
         .partialIndex({
@@ -20,7 +19,7 @@ export const getAllQualificationLabel = papersDefinitions => {
         })
         .indexFields(['metadata.qualification.label']),
     options: {
-      as: `getAllQualificationLabel`,
+      as: `${FILES_DOCTYPE}/${JSON.stringify(labels)}`,
       fetchPolicy: defaultFetchPolicy
     }
   }
