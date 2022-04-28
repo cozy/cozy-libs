@@ -17,7 +17,9 @@ export const buildFilesQueryByLabels = labels => {
           type: 'file',
           trashed: false
         })
-        .indexFields(['metadata.qualification.label']),
+        .indexFields(['metadata.qualification.label'])
+        .select(['metadata.qualification.label'])
+        .limitBy(1000),
     options: {
       as: `${FILES_DOCTYPE}/${JSON.stringify(labels)}`,
       fetchPolicy: defaultFetchPolicy
