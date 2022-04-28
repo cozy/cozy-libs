@@ -422,6 +422,15 @@ const TriggerManager = compose(
 
 // TriggerManager is exported wrapped in FlowProvider to avoid breaking changes.
 const LegacyTriggerManager = props => {
+  // Since the 4.1.0 of cozy-keys-lib, we
+  // render children even if vaultClient is
+  // not defined yet. In that case we we were
+  // displaying TriggerManager without vaultClient.
+  // It was raising an error.
+  // The current fix, is to not display the
+  // TriggerManager when vaultClient is null.
+  const vaultClient = useVaultClient()
+  if (!vaultClient) return null
   const {
     onLaunch,
     onSuccess,
