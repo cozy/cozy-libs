@@ -7,7 +7,7 @@ import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-import Radio from 'cozy-ui/transpiled/react/Radio'
+import Radio from 'cozy-ui/transpiled/react/Radios'
 
 const { getFullname } = models.contact
 
