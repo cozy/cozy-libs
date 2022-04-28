@@ -44,7 +44,11 @@ const Home = () => {
   )
 
   const featuredPlaceholders = useMemo(
-    () => getFeaturedPlaceholders(papersDefinitions, filesByLabels),
+    () =>
+      getFeaturedPlaceholders({
+        papersDefinitions,
+        filesByLabels
+      }),
     [papersDefinitions, filesByLabels]
   )
 
