@@ -52,7 +52,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   return (
     <List>
       {featuredPlaceholders.length > 0 && (
-        <ListSubheader classes={isMobile && classes}>
+        <ListSubheader classes={isMobile ? classes : undefined}>
           {t('FeaturedPlaceholdersList.subheader')}
         </ListSubheader>
       )}
