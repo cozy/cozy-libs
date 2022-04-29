@@ -18,7 +18,7 @@
     "levn": "^0.4.1",
     "lodash": "^4.17.21",
     "node-fetch": "^2.6.7",
-    "schema-utils": "^2.7.0",
+    "schema-utils": "^4.0.0",
     "semver-diff": "^3.1.1"
   },
   "devDependencies": {
