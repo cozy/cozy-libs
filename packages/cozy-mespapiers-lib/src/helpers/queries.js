@@ -26,22 +26,21 @@ export const getAllQualificationLabel = papersDefinitions => {
   }
 }
 
-export const getPapersByLabel = label => ({
-  definition: () =>
-    Q(FILES_DOCTYPE)
-      .where({
-        'metadata.qualification': {
-          label: label
-        }
-      })
-      .partialIndex({
-        type: 'file',
-        trashed: false
-      })
-      .indexFields(['created_at', 'metadata.qualification'])
-      .sortBy([{ created_at: 'desc' }]),
+export const buildFilesQueryByLabel = label => ({
+  definition: Q(FILES_DOCTYPE)
+    .where({
+      'metadata.qualification': {
+        label: label
+      }
+    })
+    .partialIndex({
+      type: 'file',
+      trashed: false
+    })
+    .indexFields(['created_at', 'metadata.qualification'])
+    .sortBy([{ created_at: 'desc' }]),
   options: {
-    as: `getPapersByLabel:${label}`,
+    as: `${FILES_DOCTYPE}/${label}`,
     fetchPolicy: defaultFetchPolicy
   }
 })

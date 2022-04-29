@@ -16,7 +16,7 @@ import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
-import { getContactByIds, getPapersByLabel } from '../../helpers/queries'
+import { getContactByIds, buildFilesQueryByLabel } from '../../helpers/queries'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildPaperslistByContact } from '../../helpers/buildPaperslistByContact'
@@ -34,14 +34,14 @@ const PapersListWrapper = ({ history, match }) => {
     [match]
   )
   const categoryLabel = scannerT(`items.${currentFileCategory}`)
-  const buildPapersByLabel = getPapersByLabel(currentFileCategory)
+  const filesQueryByLabel = buildFilesQueryByLabel(currentFileCategory)
 
   const {
     data: papersList,
     hasMore: hasMorePapers,
     fetchMore: fetchMorepapers,
     ...restPapers
-  } = useQuery(buildPapersByLabel.definition, buildPapersByLabel.options)
+  } = useQuery(filesQueryByLabel.definition, filesQueryByLabel.options)
 
   if (hasMorePapers) fetchMorepapers()
 
