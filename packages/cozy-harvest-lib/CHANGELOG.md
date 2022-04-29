@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.4.3...cozy-harvest-lib@9.0.0) (2022-04-29)
+
+
+### Bug Fixes
+
+* Check if we need to display the unlock form ([fe230ce](https://github.com/cozy/cozy-libs/commit/fe230ce0791c511c31098be47e633408bceb9c30))
+* Upgrade cozy-keys-lib requirement ([c4eb57f](https://github.com/cozy/cozy-libs/commit/c4eb57f22b4a86d42c4422619a158605d894edcf))
+* VaultClient can be undefined at first ([8a6f02b](https://github.com/cozy/cozy-libs/commit/8a6f02b9e9c161622afedff88ba4805468ee6f59))
+
+
+### BREAKING CHANGES
+
+* cozy-keys-lib >= 4.1.9 is now
+required.
+
+
+
+
+
 ## [8.4.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.4.2...cozy-harvest-lib@8.4.3) (2022-04-28)
 
 **Note:** Version bump only for package cozy-harvest-lib
