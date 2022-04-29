@@ -21,7 +21,7 @@ const PapersListByContact = ({ paperslistByContact }) => {
       {paperslistByContact.map(({ withHeader, contact, papers }, idx) => (
         <Fragment key={idx}>
           {withHeader && (
-            <ListSubheader classes={isMobile && classes}>
+            <ListSubheader classes={isMobile ? classes : undefined}>
               {contact}
             </ListSubheader>
           )}

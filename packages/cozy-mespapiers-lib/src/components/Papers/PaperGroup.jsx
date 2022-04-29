@@ -48,7 +48,7 @@ const PaperGroup = ({ allPapersByCategories }) => {
 
   return (
     <List>
-      <ListSubheader classes={isMobile && classes}>
+      <ListSubheader classes={isMobile ? classes : undefined}>
         {t('PapersList.subheader')}
       </ListSubheader>
       <div className={'u-pv-half'}>
