@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.7.3](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.7.2...@cozy/repo-doctor@0.7.3) (2022-04-29)
+
+
+### Bug Fixes
+
+* bump schema-utils from 2.7.0 to 4.0.0 ([bfedbe8](https://github.com/cozy/cozy-libs/commit/bfedbe88eb6f5f786aace93794d5f15d64cbc692))
+
+
+
+
+
 ## 0.7.2 (2022-04-22)
 
 
