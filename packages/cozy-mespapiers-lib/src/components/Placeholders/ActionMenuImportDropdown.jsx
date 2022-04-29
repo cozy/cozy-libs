@@ -48,7 +48,7 @@ ActionMenuImportDropdown.propTypes = {
       name: PropTypes.string,
       category: PropTypes.string
     })
-  }).isRequired,
+  }),
   onClose: PropTypes.func,
   onClick: PropTypes.func
 }
