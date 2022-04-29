@@ -269,8 +269,22 @@ const simplify = (root, options) => {
   mergeImports(root)
 }
 
+const getAttributeName = attribute => attribute?.name?.name
+
+const getAttributeValue = attribute => attribute?.value?.expression?.value
+
+const getAttributeByName = ({ attributes, name }) =>
+  attributes.find(attribute => getAttributeName(attribute) === name)
+
+const makeAttribute = ({ name, value }) =>
+  j.jsxAttribute(j.jsxIdentifier(name), j.literal(value))
+
 module.exports = {
   simplify,
   ensure,
-  removeUnused
+  removeUnused,
+  getAttributeName,
+  getAttributeValue,
+  getAttributeByName,
+  makeAttribute
 }
