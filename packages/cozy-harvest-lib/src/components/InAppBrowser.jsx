@@ -10,7 +10,7 @@ const InAppBrowser = ({ url, onClose }) => {
     async function insideEffect() {
       if (webviewIntent) {
         const result = await webviewIntent.call('showInAppBrowser', { url })
-        if (result?.type === 'cancel') {
+        if (result?.type === 'cancel' && onClose) {
           onClose()
         } else if (result?.type !== 'dismiss') {
           logger.error('Unexpected InAppBrowser result', result)
