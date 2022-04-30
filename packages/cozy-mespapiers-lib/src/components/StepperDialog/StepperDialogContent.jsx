@@ -3,7 +3,7 @@ import React from 'react'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import Scan from '../ModelSteps/Scan'
 import Information from '../ModelSteps/Information'
-import Contact from '../ModelSteps/Contact'
+import ContactWrapper from '../ModelSteps/ContactWrapper'
 
 const StepperDialogContent = ({ onClose }) => {
   const { allCurrentSteps, currentStepIndex } = useStepperDialog()
@@ -23,7 +23,7 @@ const StepperDialogContent = ({ onClose }) => {
           )
         case 'contact':
           return (
-            <Contact
+            <ContactWrapper
               key={currentStep.stepIndex}
               currentStep={currentStep}
               onClose={onClose}

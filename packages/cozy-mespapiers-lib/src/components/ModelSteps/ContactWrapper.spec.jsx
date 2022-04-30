@@ -3,7 +3,7 @@ import React from 'react'
 import { render } from '@testing-library/react'
 
 import AppLike from '../../../test/components/AppLike'
-import Contact from './Contact'
+import ContactWrapper from './ContactWrapper'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 
 const mockCurrentStep = { illustration: 'Account.svg', text: 'text of step' }
@@ -17,7 +17,7 @@ const setup = () => {
   return render(
     <AppLike client={client}>
       <FormDataProvider>
-        <Contact currentStep={mockCurrentStep} />
+        <ContactWrapper currentStep={mockCurrentStep} />
       </FormDataProvider>
     </AppLike>
   )
