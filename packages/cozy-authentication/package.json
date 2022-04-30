@@ -25,7 +25,7 @@
     "cozy-client": "13.21.0",
     "cozy-ui": "40.9.1",
     "cssnano-preset-advanced": "4.0.8",
-    "date-fns": "1.30.1",
+    "date-fns": "2.28.0",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
     "eslint-cli": "1.1.1",

@@ -19,7 +19,7 @@
     "lint": "cd ..; yarn eslint --ext js,jsx packages/cozy-procedures"
   },
   "dependencies": {
-    "date-fns": "^1.30.1",
+    "date-fns": "^2.0.0",
     "lodash": "^4.17.19",
     "prop-types": "^15.7.2",
     "react-jsonschema-form": "^1.8.0",
