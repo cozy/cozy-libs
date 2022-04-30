@@ -7,7 +7,6 @@ import { addFileToPdf } from '../utils/addFileToPdf'
 import { buildFilename } from '../helpers/buildFilename'
 
 const {
-  contact: { getFullname },
   file: { uploadFileWithConflictStrategy }
 } = models
 
@@ -95,7 +94,7 @@ export const createPdfAndSave = async ({
       pageName: fileMetadata.page
         ? t(`PapersList.label.${fileMetadata.page}`)
         : null,
-      contactName: getFullname(contacts[0]),
+      contacts,
       formatedDate: date
     })
 
