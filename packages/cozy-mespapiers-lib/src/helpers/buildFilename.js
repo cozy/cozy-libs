@@ -1,8 +1,4 @@
-import { models } from 'cozy-client'
-
-const {
-  contact: { getFullname }
-} = models
+import { harmonizeContactsNames } from '../components/Papers/helpers'
 
 /**
  * Builded Paper name with qualification name & without use filename original
@@ -20,7 +16,8 @@ export const buildFilename = ({
   filenameModel,
   metadata,
   pageName,
-  formatedDate
+  formatedDate,
+  t
 }) => {
   /*
     Calling the stack's file creation method would trigger a `status: "422", title: "Invalid Parameter"` error if filename contains`/`.
@@ -29,14 +26,7 @@ export const buildFilename = ({
   const safeFileName = qualificationName.replaceAll('/', '_')
 
   const filename = []
-  let contactName = ''
-  if (contacts.length > 0) {
-    contactName += `${getFullname(contacts[0])}`
-    if (contacts.length > 1) {
-      contactName += `, ${getFullname(contacts[1])}`
-      if (contacts.length > 2) contactName += ', ... '
-    }
-  }
+  let contactName = harmonizeContactsNames(contacts, t)
 
   filename.push(safeFileName)
   if (pageName) filename.push(pageName)
