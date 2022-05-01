@@ -17,7 +17,7 @@ import {
 } from '../../helpers/queries'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
-import { buildPaperslistByContact } from '../../helpers/buildPaperslistByContact'
+import { buildFilesByContacts } from './helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersListByContact from '../Papers/PapersListByContact'
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
@@ -74,7 +74,7 @@ const PapersListWrapper = ({ history, match }) => {
 
   const paperslistByContact = useMemo(() => {
     if (!isLoadingFiles && !isLoadingContacts) {
-      return buildPaperslistByContact({
+      return buildFilesByContacts({
         files,
         contacts,
         maxDisplay:

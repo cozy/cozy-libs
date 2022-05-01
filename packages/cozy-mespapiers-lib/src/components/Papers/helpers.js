@@ -3,8 +3,11 @@ import groupBy from 'lodash/groupBy'
 import { models, getReferencedBy } from 'cozy-client'
 
 import { CONTACTS_DOCTYPE } from '../../doctypes'
+import { filterWithRemaining } from '../../helpers/filterWithRemaining'
 
 const { getDisplayName } = models.contact
+
+const hasContactsInFile = file => file.contacts.length > 0
 
 const getContactsRefIds = file => {
   return getReferencedBy(file, CONTACTS_DOCTYPE).map(
@@ -66,4 +69,50 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
       }
     }
   )
+}
+
+/**
+ * @property {object[]} files - Array of IOCozyFile
+ * @property {object[]} contacts - Array of IOCozyContact
+ * @property {number} maxDisplay - Number of displayed files
+ * @property {Function} t - i18n function
+ * @returns {{ withHeader: boolean, contact: string, papers: { maxDisplay: number, list: IOCozyFile[] } }[]}
+ */
+export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
+  const filesByContacts = groupFilesByContacts(files, contacts)
+
+  const {
+    itemsFound: filesWithContacts,
+    remainingItems: filesWithoutContacts
+  } = filterWithRemaining(filesByContacts, hasContactsInFile)
+
+  const withHeader = !(
+    filesWithoutContacts[0]?.files.length === files.length && files.length > 0
+  )
+
+  const result = filesWithContacts.map(fileWithContact => ({
+    withHeader,
+    contact: harmonizeContactsNames(fileWithContact.contacts, t),
+    papers: {
+      maxDisplay,
+      list: fileWithContact.files
+    }
+  }))
+
+  const resultSorted = result.sort((a, b) => a.contact.localeCompare(b.contact))
+
+  if (filesWithoutContacts.length > 0) {
+    resultSorted.push({
+      withHeader,
+      contact: t('PapersList.defaultName'),
+      papers: {
+        maxDisplay,
+        list: filesWithoutContacts.flatMap(
+          fileWithoutContact => fileWithoutContact.files
+        )
+      }
+    })
+  }
+
+  return resultSorted
 }
