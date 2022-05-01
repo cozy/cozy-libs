@@ -95,7 +95,8 @@ export const createPdfAndSave = async ({
         ? t(`PapersList.label.${fileMetadata.page}`)
         : null,
       contacts,
-      formatedDate: date
+      formatedDate: date,
+      t
     })
 
     // Created metadata for pdf file

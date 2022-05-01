@@ -1,23 +1,8 @@
 import { buildFilename } from './buildFilename'
 
-const mockSameFamilyNameContacts = [
-  { _id: 'contactId01', name: { givenName: 'Bob', familyName: 'Durand' } },
-  { _id: 'contactId02', name: { givenName: 'Alice', familyName: 'Durand' } }
-]
 const mockOneContact = [
   { _id: 'contactId01', name: { givenName: 'Bernard', familyName: 'Chabert' } }
 ]
-const mockTwoContacts = [
-  { _id: 'contactId01', name: { givenName: 'Bernard', familyName: 'Chabert' } },
-  { _id: 'contactId02', name: { givenName: 'Clair', familyName: 'Guillot' } }
-]
-const mockThreeContacts = [
-  { _id: 'contactId01', name: { givenName: 'Bernard', familyName: 'Chabert' } },
-  { _id: 'contactId02', name: { givenName: 'Clair', familyName: 'Guillot' } },
-  { _id: 'contactId03', name: { givenName: 'Jean', familyName: 'Rossi' } }
-]
-
-// TODO Build le nom comme "buildSubheaderName" & merger dans le commit "25efe0de6bbabb633da3a8d10c98dab5a35c97b6"
 
 describe('buildFilename', () => {
   it('should replace "/" by "_" in qualificationName', () => {
