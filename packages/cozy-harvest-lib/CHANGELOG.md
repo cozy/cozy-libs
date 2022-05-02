@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.0.0...cozy-harvest-lib@9.1.0) (2022-05-02)
+
+
+### Bug Fixes
+
+* Multiple fixes after review ([0351500](https://github.com/cozy/cozy-libs/commit/0351500e1845df6ef4a31211aec6061090ccf66e))
+
+
+### Features
+
+* Open InAppBrowser via cozy-intent when in flaghip app ([5ee31ea](https://github.com/cozy/cozy-libs/commit/5ee31eafcb62e23a6242386bb6b09312f778e871))
+
+
+
+
+
 # [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@8.4.3...cozy-harvest-lib@9.0.0) (2022-04-29)
 
 
