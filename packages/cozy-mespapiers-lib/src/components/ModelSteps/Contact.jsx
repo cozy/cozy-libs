@@ -8,6 +8,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Radio from 'cozy-ui/transpiled/react/Radios'
+import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 
 const { getFullname } = models.contact
 
@@ -16,16 +17,35 @@ const styleAvatar = {
   backgroundColor: 'var(--primaryColorLightest)'
 }
 
-const Contact = ({ contact, contactIdSelected, setContactIdSelected }) => {
+const Contact = ({
+  contact,
+  multiple,
+  contactIdsSelected,
+  setContactIdsSelected
+}) => {
   const { t } = useI18n()
 
-  const onChangeRadio = evt => setContactIdSelected(evt.target.value)
+  const onClickContactLine = val => {
+    const newValue = val?.target?.value || val
+
+    if (multiple) {
+      const newContactIdSelected = [...contactIdsSelected]
+      const find = newContactIdSelected.indexOf(newValue)
+
+      if (find > -1) newContactIdSelected.splice(find, 1)
+      else newContactIdSelected.push(newValue)
+
+      setContactIdsSelected(newContactIdSelected)
+    } else {
+      setContactIdsSelected([newValue])
+    }
+  }
 
   return (
     <ListItem
       button
       key={contact._id}
-      onClick={() => setContactIdSelected(contact._id)}
+      onClick={() => onClickContactLine(contact._id)}
     >
       <ListItemIcon>
         <Avatar size={'small'} style={styleAvatar} />
@@ -36,12 +56,21 @@ const Contact = ({ contact, contactIdSelected, setContactIdSelected }) => {
         }`}
       />
       <ListItemSecondaryAction className={'u-mr-half'}>
-        <Radio
-          checked={contactIdSelected === contact._id}
-          onChange={onChangeRadio}
-          value={contact._id}
-          name="radio-contactsList"
-        />
+        {multiple ? (
+          <Checkbox
+            checked={contactIdsSelected.includes(contact._id)}
+            onChange={onClickContactLine}
+            value={contact._id}
+            name="checkbox-contactsList"
+          />
+        ) : (
+          <Radio
+            checked={contactIdsSelected.includes(contact._id)}
+            onChange={onClickContactLine}
+            value={contact._id}
+            name="radio-contactsList"
+          />
+        )}
       </ListItemSecondaryAction>
     </ListItem>
   )

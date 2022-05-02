@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
@@ -15,14 +15,17 @@ import { KEYS } from '../../constants/const'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
 import ConfirmReplaceFile from './widgets/ConfirmReplaceFile'
 import ContactList from './ContactList'
+import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 
 const ContactWrapper = ({ currentStep, onClose }) => {
   const { t } = useI18n()
   const client = useClient()
-  const { illustration, text } = currentStep
+  const { illustration, text, multiple } = currentStep
   const { formSubmit, formData } = useFormData()
   const [onLoad, setOnLoad] = useState(false)
   const [confirmReplaceFileModal, setConfirmReplaceFileModal] = useState(false)
+  const [currentUser, setCurrentUser] = useState(null)
+  const [contactIdsSelected, setContactIdsSelected] = useState([])
   const { isMobile } = useBreakpoints()
 
   const cozyFiles = formData.data.filter(d => d.file.constructor === Blob)
@@ -60,13 +63,30 @@ const ContactWrapper = ({ currentStep, onClose }) => {
 
   useEventListener(window, 'keydown', handleKeyDown)
 
+  useEffect(() => {
+    const init = async () => {
+      const myself = await fetchCurrentUser(client)
+      setCurrentUser(myself)
+    }
+    init()
+  }, [client])
+
   return (
     <>
       <CompositeHeader
         icon={illustration}
         iconSize={'small'}
         title={t(text)}
-        text={<ContactList />}
+        text={
+          currentUser && (
+            <ContactList
+              multiple={multiple}
+              currentUser={currentUser}
+              contactIdsSelected={contactIdsSelected}
+              setContactIdsSelected={setContactIdsSelected}
+            />
+          )
+        }
       />
       <DialogActions
         disableSpacing
