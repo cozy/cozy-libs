@@ -212,7 +212,8 @@
     "subheader": "Existants",
     "PapersListByContact": {
       "seeMore": "Voir plus (%{number})"
-    }
+    },
+    "empty": "Vous n'avez aucun papier dans ce thème."
   },
   "PlaceholdersList": {
     "title": "Nouveau papier%{name}"
@@ -225,7 +226,11 @@
       "validFileType": "Format acceptés : image ou pdf"
     },
     "selectPicFromCozy": "Sélectionner dans mon Cozy",
-    "takePic": "Prendre en photo"
+    "takePic": "Prendre en photo",
+    "themes": {
+      "work_study": "Travail",
+      "activity": "Loisirs"
+    }
   },
   "viewer": {
     "shareData": {
