@@ -5,6 +5,7 @@ import AppLike from '../../../test/components/AppLike'
 import ContactWrapper from './ContactWrapper'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { useFormData } from '../Hooks/useFormData'
+import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 
 const mockCurrentStep = { illustration: 'Account.svg', text: 'text of step' }
 const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
@@ -14,6 +15,9 @@ const mockFormData = ({ metadata = {}, data = [], contacts = [] } = {}) => ({
 })
 
 jest.mock('../Hooks/useFormData')
+jest.mock('../../helpers/fetchCurrentUser', () => ({
+  fetchCurrentUser: jest.fn()
+}))
 /* eslint-disable react/display-name */
 jest.mock('./widgets/ConfirmReplaceFile', () => () => (
   <div data-testid="ConfirmReplaceFile" />
@@ -24,8 +28,10 @@ jest.mock('./ContactList', () => () => <div data-testid="ContactList" />)
 const setup = ({
   formData = mockFormData(),
   formSubmit = jest.fn(),
-  onClose = jest.fn()
+  onClose = jest.fn(),
+  mockFetchCurrentUser = jest.fn()
 } = {}) => {
+  fetchCurrentUser.mockImplementation(mockFetchCurrentUser)
   useFormData.mockReturnValue({
     formData,
     formSubmit
@@ -67,6 +73,13 @@ describe('ContactWrapper', () => {
     fireEvent.click(btn)
 
     expect(mockFormSubmit).toBeCalledTimes(0)
+  })
+
+  it('should call fetchCurrentUser once at mount', () => {
+    const mockFetchCurrentUser = jest.fn()
+    setup({ mockFetchCurrentUser })
+
+    expect(mockFetchCurrentUser).toBeCalledTimes(1)
   })
 
   it('should not diplay ConfirmReplaceFile modal when save button is clicked, if the file is from User Device', () => {

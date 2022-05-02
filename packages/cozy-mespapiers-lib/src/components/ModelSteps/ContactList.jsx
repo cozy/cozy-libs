@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 
-import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -14,7 +13,6 @@ import ContactsListModal from 'cozy-ui/transpiled/react/ContactsListModal'
 
 import { useFormData } from '../Hooks/useFormData'
 import { useSessionstorage } from '../Hooks/useSessionstorage'
-import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
 import Contact from './Contact'
 
 const styleAvatar = {
@@ -22,43 +20,43 @@ const styleAvatar = {
   backgroundColor: 'var(--primaryColorLightest)'
 }
 
-const ContactList = () => {
-  const client = useClient()
+const ContactList = ({
+  multiple,
+  currentUser,
+  contactIdsSelected,
+  setContactIdsSelected
+}) => {
   const { t } = useI18n()
   const { setFormData } = useFormData()
   const [contactModalOpened, setContactModalOpened] = useState(false)
-  const [contactsList, setContactsList] = useState([])
-  const [contactIdSelected, setContactIdSelected] = useState(null)
   const [contactsLocalSession, setContactLocalSession] = useSessionstorage(
     'contactList',
     []
   )
+  const [contactsList, setContactsList] = useState([
+    currentUser,
+    ...contactsLocalSession
+  ])
 
   useEffect(() => {
-    let isMounted = true
-    ;(async () => {
-      const myself = await fetchCurrentUser(client)
-      if (isMounted) {
-        setContactsList([myself, ...contactsLocalSession])
-        !contactIdSelected && setContactIdSelected(myself._id)
-      }
-    })()
-
-    return () => {
-      isMounted = false
-    }
-  }, [client, contactIdSelected, contactsLocalSession])
+    contactIdsSelected.length === 0 &&
+      !multiple &&
+      setContactIdsSelected([currentUser._id])
+  }, [
+    contactIdsSelected.length,
+    multiple,
+    setContactIdsSelected,
+    currentUser._id
+  ])
 
   useEffect(() => {
-    if (contactIdSelected) {
-      setFormData(prev => ({
-        ...prev,
-        contacts: contactsList.filter(
-          contact => contact._id === contactIdSelected
-        )
-      }))
-    }
-  }, [contactIdSelected, contactsList, setFormData])
+    setFormData(prev => ({
+      ...prev,
+      contacts: contactsList.filter(contact =>
+        contactIdsSelected.includes(contact._id)
+      )
+    }))
+  }, [contactIdsSelected, contactsList, setFormData])
 
   const onClickContactsListModal = contact => {
     const contactAlreadyListed = contactsList.some(cl => cl._id === contact._id)
@@ -66,7 +64,9 @@ const ContactList = () => {
       setContactsList(prev => [...prev, contact])
       setContactLocalSession(prev => [...prev, contact])
     }
-    setContactIdSelected(contact._id)
+    setContactIdsSelected(prev =>
+      multiple ? [...prev, contact._id] : [contact._id]
+    )
     setContactModalOpened(false)
   }
 
@@ -79,8 +79,9 @@ const ContactList = () => {
               <Contact
                 key={contact._id}
                 contact={contact}
-                contactIdSelected={contactIdSelected}
-                setContactIdSelected={setContactIdSelected}
+                multiple={multiple}
+                contactIdsSelected={contactIdsSelected}
+                setContactIdsSelected={setContactIdsSelected}
               />
             ))}
           </div>
