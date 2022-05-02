@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.1.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.1.0...cozy-harvest-lib@9.1.1) (2022-05-02)
+
+
+### Bug Fixes
+
+* bump form-data from 3.0.0 to 4.0.0 ([0a8546f](https://github.com/cozy/cozy-libs/commit/0a8546f2712a8164ff2bd08dfb60230bf97e1b85))
+
+
+
+
+
 # [9.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.0.0...cozy-harvest-lib@9.1.0) (2022-05-02)
 
 
