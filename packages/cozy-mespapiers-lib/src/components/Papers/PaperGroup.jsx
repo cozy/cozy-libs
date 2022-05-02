@@ -16,6 +16,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import MuiCardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
@@ -52,43 +53,53 @@ const PaperGroup = ({ allPapersByCategories }) => {
         {t('PapersList.subheader')}
       </ListSubheader>
       <div className={'u-pv-half'}>
-        {allPapersByCategories.map((paper, idx) => {
-          const category = get(paper, 'metadata.qualification.label')
+        {allPapersByCategories.length === 0 ? (
+          <Typography
+            className="u-ml-1 u-mv-1"
+            variant="body2"
+            color="textSecondary"
+          >
+            {t('PapersList.empty')}
+          </Typography>
+        ) : (
+          allPapersByCategories.map((paper, idx) => {
+            const category = get(paper, 'metadata.qualification.label')
 
-          return (
-            <Fragment key={idx}>
-              <ListItem button onClick={() => goPapersList(category)}>
-                <ListItemIcon>
-                  <FileImageLoader
-                    client={client}
-                    file={paper}
-                    linkType={getLinkType(paper)}
-                    render={src => (
-                      <MuiCardMedia
-                        component={'img'}
-                        width={32}
-                        height={32}
-                        image={src}
-                      />
-                    )}
-                    renderFallback={() => (
-                      <Icon icon={'file-type-image'} size={32} />
-                    )}
+            return (
+              <Fragment key={idx}>
+                <ListItem button onClick={() => goPapersList(category)}>
+                  <ListItemIcon>
+                    <FileImageLoader
+                      client={client}
+                      file={paper}
+                      linkType={getLinkType(paper)}
+                      render={src => (
+                        <MuiCardMedia
+                          component={'img'}
+                          width={32}
+                          height={32}
+                          image={src}
+                        />
+                      )}
+                      renderFallback={() => (
+                        <Icon icon={'file-type-image'} size={32} />
+                      )}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={scannerT(`items.${category}`)} />
+                  <Icon
+                    icon={'right'}
+                    size={16}
+                    color={'var(--secondaryTextColor)'}
                   />
-                </ListItemIcon>
-                <ListItemText primary={scannerT(`items.${category}`)} />
-                <Icon
-                  icon={'right'}
-                  size={16}
-                  color={'var(--secondaryTextColor)'}
-                />
-              </ListItem>
-              {idx !== allPapersByCategories.length - 1 && (
-                <Divider variant="inset" component="li" />
-              )}
-            </Fragment>
-          )
-        })}
+                </ListItem>
+                {idx !== allPapersByCategories.length - 1 && (
+                  <Divider variant="inset" component="li" />
+                )}
+              </Fragment>
+            )
+          })
+        )}
       </div>
     </List>
   )
