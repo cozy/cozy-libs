@@ -212,7 +212,8 @@
     "subheader": "Existing",
     "PapersListByContact": {
       "seeMore": "See more (%{number})"
-    }
+    },
+    "empty": "You do not have any papers yet in this topic."
   },
   "PlaceholdersList": {
     "title": "New paper%{name}"
@@ -225,7 +226,11 @@
       "validFileType": "Accepted formats: image or pdf"
     },
     "selectPicFromCozy": "Select from my Cozy",
-    "takePic": "Take a picture"
+    "takePic": "Take a picture",
+    "themes": {
+      "work_study": "Work",
+      "activity": "Activity"
+    }
   },
   "viewer": {
     "shareData": {
