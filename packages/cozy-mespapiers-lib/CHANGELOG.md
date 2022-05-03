@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.9.4...cozy-mespapiers-lib@0.10.0) (2022-05-03)
+
+
+### Bug Fixes
+
+* The buildFilename function needs all the contacts ([4dcd523](https://github.com/cozy/cozy-libs/commit/4dcd523a147d822d11bbb873cfd6b788466961de))
+
+
+### Features
+
+* Add multiple choice to Contact step ([fd71460](https://github.com/cozy/cozy-libs/commit/fd714605cd9379835cdaa631b0e02a4eccb87aea))
+* Add the ability to display multiple contacts per file ([fc1297e](https://github.com/cozy/cozy-libs/commit/fc1297e34048cb9691179f7317995dfa7b21b524))
+* Use new Radios button ([af5f545](https://github.com/cozy/cozy-libs/commit/af5f5456657de4d27fd30c0e9a5938f1b147a85c))
+
+
+
+
+
 ## [0.9.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.9.3...cozy-mespapiers-lib@0.9.4) (2022-05-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
