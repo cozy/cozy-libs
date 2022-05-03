@@ -3,12 +3,7 @@ import React, { useMemo, useCallback } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import {
-  useQuery,
-  getReferencedBy,
-  isQueryLoading,
-  hasQueryBeenLoaded
-} from 'cozy-client'
+import { useQuery, getReferencedBy, isQueryLoading } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -40,40 +35,40 @@ const PapersListWrapper = ({ history, match }) => {
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileCategory)
 
   const {
-    data: papersList,
-    hasMore: hasMorePapers,
-    fetchMore: fetchMorepapers,
-    ...restPapers
+    data: fileList,
+    hasMore: hasMoreFiles,
+    fetchMore: fetchMoreFiles,
+    ...fileQueryResult
   } = useQuery(filesQueryByLabel.definition, filesQueryByLabel.options)
 
-  if (hasMorePapers) fetchMorepapers()
+  if (hasMoreFiles) fetchMoreFiles()
 
-  const contactsIds = Array.isArray(papersList)
-    ? papersList.flatMap(paper =>
+  const isLoadingFiles = isQueryLoading(fileQueryResult) || hasMoreFiles
+
+  const contactIdList = !isLoadingFiles
+    ? fileList.flatMap(paper =>
         getReferencedBy(paper, CONTACTS_DOCTYPE).map(
           contactRef => contactRef.id
         )
       )
     : []
-  const contactsQueryByIds = buildContactsQueryByIds(contactsIds)
-  const { data: contactsList, ...restContacts } = useQuery(
-    contactsQueryByIds.definition,
-    {
-      ...contactsQueryByIds.options,
-      enabled: !hasMorePapers
-    }
-  )
+  const contactsQueryByIds = buildContactsQueryByIds(contactIdList)
+  const {
+    data: contactsList,
+    hasMore: hasMoreContacts,
+    ...contactQueryResult
+  } = useQuery(contactsQueryByIds.definition, {
+    ...contactsQueryByIds.options,
+    enabled: !isLoadingFiles
+  })
+
+  const isLoadingContacts =
+    isQueryLoading(contactQueryResult) || hasMoreContacts
 
   const paperslistByContact = useMemo(() => {
-    if (
-      !isQueryLoading(restPapers) &&
-      hasQueryBeenLoaded(restPapers) &&
-      !isQueryLoading(restContacts) &&
-      hasQueryBeenLoaded(restContacts) &&
-      !hasMorePapers
-    ) {
+    if (!isLoadingFiles && !isLoadingContacts) {
       return buildPaperslistByContact({
-        papersList,
+        papersList: fileList,
         contactsList,
         defaultName: t('PapersList.defaultName'),
         papersDefinitions,
@@ -82,24 +77,22 @@ const PapersListWrapper = ({ history, match }) => {
     }
     return []
   }, [
-    restPapers,
-    restContacts,
-    hasMorePapers,
-    papersList,
+    isLoadingFiles,
+    isLoadingContacts,
+    fileList,
     contactsList,
     t,
     papersDefinitions,
     currentFileCategory
   ])
 
-  const hasNoPapers =
-    papersList?.length === 0 &&
-    !isQueryLoading(restPapers) &&
-    hasQueryBeenLoaded(restPapers)
+  const hasNoFiles = !isLoadingFiles && fileList.length === 0
 
-  return hasNoPapers ? (
-    <Redirect to={'/paper'} />
-  ) : (
+  if (hasNoFiles) {
+    return <Redirect to={'/paper'} />
+  }
+
+  return (
     <>
       <BarLeft>
         <IconButton className={'u-mr-half'} onClick={backButtonAction}>
