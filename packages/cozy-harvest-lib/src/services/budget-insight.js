@@ -52,7 +52,7 @@ const extraBIErrorMap = {
 /**
  * Converts and chains error
  */
-const convertBIErrortoKonnectorJobError = error => {
+export const convertBIErrortoKonnectorJobError = error => {
   const errorCode = error ? error.code : null
   const cozyErrorMessage = errorCode
     ? biErrorMap[errorCode] || extraBIErrorMap[errorCode] || null

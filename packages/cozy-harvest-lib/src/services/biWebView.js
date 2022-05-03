@@ -5,8 +5,8 @@
  */
 
 import get from 'lodash/get'
-import clone from 'lodash/clone'
 import set from 'lodash/set'
+import clone from 'lodash/clone'
 
 import { getBIConnection } from './bi-http'
 import assert from '../assert'
@@ -22,14 +22,20 @@ import {
 } from './budget-insight'
 import { KonnectorJobError } from '../helpers/konnectors'
 
-export const isBiWebViewConnector = konnector => {
-  return (
-    flag('harvest.bi.webview') &&
-    konnector.partnership &&
-    konnector.partnership.domain.includes('budget-insight')
-  )
-}
+export const isBiWebViewConnector = konnector =>
+  flag('harvest.bi.webview') &&
+  get(konnector, 'partnership.domain') === 'budget-insight.com'
 
+/**
+ * Runs multiple checks on the bi connection referenced in the given account
+ *
+ * @param {Object} options.account The account content
+ * @param {Object} options.flow
+ * @param {Object} options.konnector connector manifest content
+ * @param {Object} options.client CozyClient object
+ *
+ * @return {Integer} Connection Id
+ */
 export const checkBIConnection = async ({
   account,
   client,
