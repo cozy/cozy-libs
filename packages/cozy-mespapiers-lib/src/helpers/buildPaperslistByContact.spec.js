@@ -83,7 +83,7 @@ describe('buildPaperslistByContact', () => {
       papersList: mockPapersList,
       contactsList: mockContactsList,
       papersDefinitions: mockPapersDefinitions,
-      currentFileCategory: 'passport'
+      currentFileTheme: 'passport'
     })
 
     expect(result).toEqual(expected)

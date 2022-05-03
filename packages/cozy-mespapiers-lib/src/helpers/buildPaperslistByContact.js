@@ -16,7 +16,7 @@ const DEFAULT_MAX_DISPLAY = 3
  * @property {object[]} contactsList - Array of cozy contact object
  * @property {object[]} defaultName - Name of header of papers without contact
  * @property {Paper[]} [papersDefinitions=[]] Array of Papers
- * @property {string} [currentFileCategory=''] - Category of qualification
+ * @property {string} [currentFileTheme=''] - Category of qualification
  */
 
 /**
@@ -28,12 +28,12 @@ export const buildPaperslistByContact = ({
   contactsList,
   defaultName,
   papersDefinitions = [],
-  currentFileCategory = ''
+  currentFileTheme = ''
 }) => {
   let result = []
   const paperWithoutContact = getPaperWithoutContact(papersList)
   const currentDef = papersDefinitions.find(
-    paperDef => paperDef.label === currentFileCategory
+    paperDef => paperDef.label === currentFileTheme
   )
   const maxDisplay = currentDef?.maxDisplay || DEFAULT_MAX_DISPLAY
   const withHeader = !(

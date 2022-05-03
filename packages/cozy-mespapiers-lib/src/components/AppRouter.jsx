@@ -21,7 +21,7 @@ const routes = [
     component: Home
   },
   {
-    path: '/paper/files/:fileCategory',
+    path: '/paper/files/:fileTheme',
     component: PapersListWrapper
   },
   {
