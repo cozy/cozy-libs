@@ -27,12 +27,12 @@ const PapersListWrapper = ({ history, match }) => {
   const { papersDefinitions } = usePapersDefinitions()
   const { BarLeft, BarCenter } = cozy.bar
   const backButtonAction = useCallback(() => history.push('/paper'), [history])
-  const currentFileCategory = useMemo(
-    () => match?.params?.fileCategory || null,
+  const currentFileTheme = useMemo(
+    () => match?.params?.fileTheme || null,
     [match]
   )
-  const categoryLabel = scannerT(`items.${currentFileCategory}`)
-  const filesQueryByLabel = buildFilesQueryByLabel(currentFileCategory)
+  const themeLabel = scannerT(`items.${currentFileTheme}`)
+  const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
   const {
     data: fileList,
@@ -72,7 +72,7 @@ const PapersListWrapper = ({ history, match }) => {
         contactsList,
         defaultName: t('PapersList.defaultName'),
         papersDefinitions,
-        currentFileCategory
+        currentFileTheme
       })
     }
     return []
@@ -83,7 +83,7 @@ const PapersListWrapper = ({ history, match }) => {
     contactsList,
     t,
     papersDefinitions,
-    currentFileCategory
+    currentFileTheme
   ])
 
   const hasNoFiles = !isLoadingFiles && fileList.length === 0
@@ -102,7 +102,7 @@ const PapersListWrapper = ({ history, match }) => {
       <BarCenter>
         {/* Need to repeat the theme since the bar is in another react portal */}
         <CozyTheme variant="normal">
-          <UIBarTitle>{categoryLabel}</UIBarTitle>
+          <UIBarTitle>{themeLabel}</UIBarTitle>
         </CozyTheme>
       </BarCenter>
 
@@ -122,7 +122,7 @@ PapersListWrapper.propTypes = {
   history: PropTypes.object,
   match: PropTypes.shape({
     params: PropTypes.shape({
-      fileCategory: PropTypes.string.isRequired
+      fileTheme: PropTypes.string.isRequired
     })
   })
 }
