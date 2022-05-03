@@ -1,65 +1,55 @@
-import { models, isReferencedById, isReferencedBy } from 'cozy-client'
+import { filterWithRemaining } from './filterWithRemaining'
+import {
+  harmonizeContactsNames,
+  groupFilesByContacts
+} from '../components/Papers/helpers'
 
-import { CONTACTS_DOCTYPE } from '../doctypes'
-
-const { getDisplayName } = models.contact
-
-const getPaperWithoutContact = papersList => {
-  return papersList.filter(paper => !isReferencedBy(paper, CONTACTS_DOCTYPE))
-}
-
-const DEFAULT_MAX_DISPLAY = 3
+const hasContactsInFile = file => file.contacts.length > 0
 
 /**
- * @typedef {object} BuildPaperslistByContactParam
- * @property {object[]} papersList - Array of IOCozyFile
- * @property {object[]} contactsList - Array of cozy contact object
- * @property {object[]} defaultName - Name of header of papers without contact
- * @property {Paper[]} [papersDefinitions=[]] Array of Papers
- * @property {string} [currentFileTheme=''] - Category of qualification
- */
-
-/**
- * @param {BuildPaperslistByContactParam} param
- * @returns {{ withHeader: boolean, contact: string, papers: {maxDisplay: number, list: IOCozyFile[]} }[]}
+ * @property {object[]} files - Array of IOCozyFile
+ * @property {object[]} contacts - Array of IOCozyContact
+ * @property {number} maxDisplay - Number of displayed files
+ * @property {Function} t - i18n function
+ * @returns {{ withHeader: boolean, contact: string, papers: { maxDisplay: number, list: IOCozyFile[] } }[]}
  */
 export const buildPaperslistByContact = ({
-  papersList,
-  contactsList,
-  defaultName,
-  papersDefinitions = [],
-  currentFileTheme = ''
+  files,
+  contacts,
+  maxDisplay,
+  t
 }) => {
-  let result = []
-  const paperWithoutContact = getPaperWithoutContact(papersList)
-  const currentDef = papersDefinitions.find(
-    paperDef => paperDef.label === currentFileTheme
-  )
-  const maxDisplay = currentDef?.maxDisplay || DEFAULT_MAX_DISPLAY
+  const filesByContacts = groupFilesByContacts(files, contacts)
+
+  const {
+    itemsFound: filesWithContacts,
+    remainingItems: filesWithoutContacts
+  } = filterWithRemaining(filesByContacts, hasContactsInFile)
+
   const withHeader = !(
-    paperWithoutContact.length === papersList.length && papersList.length > 0
+    filesWithoutContacts[0]?.files.length === files.length && files.length > 0
   )
 
-  result = contactsList.map(contact => ({
+  const result = filesWithContacts.map(fileWithContact => ({
     withHeader,
-    contact: getDisplayName(contact),
+    contact: harmonizeContactsNames(fileWithContact.contacts, t),
     papers: {
       maxDisplay,
-      list: papersList.filter(paper =>
-        isReferencedById(paper, CONTACTS_DOCTYPE, contact._id)
-      )
+      list: fileWithContact.files
     }
   }))
 
   const resultSorted = result.sort((a, b) => a.contact.localeCompare(b.contact))
 
-  if (paperWithoutContact.length > 0) {
+  if (filesWithoutContacts.length > 0) {
     resultSorted.push({
       withHeader,
-      contact: defaultName,
+      contact: t('PapersList.defaultName'),
       papers: {
         maxDisplay,
-        list: paperWithoutContact
+        list: filesWithoutContacts.flatMap(
+          fileWithoutContact => fileWithoutContact.files
+        )
       }
     })
   }

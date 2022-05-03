@@ -1,8 +1,8 @@
-import { buildPaperslistByContact } from './buildPaperslistByContact'
+import { buildFilesByContacts } from './buildFilesByContacts'
 
 const mockContactsList = [
-  { _id: 'contactId01', displayName: 'Bob' },
-  { _id: 'contactId02', displayName: 'Alice' }
+  { _id: 'contactId01', name: { givenName: 'Bob', familyName: 'Durand' } },
+  { _id: 'contactId02', name: { givenName: 'Alice', familyName: 'Durand' } }
 ]
 const mockPapersList = [
   {
@@ -23,20 +23,39 @@ const mockPapersList = [
     _id: 'fileId03',
     name: 'file03.pdf',
     relationships: {
-      referenced_by: { data: [{ id: 'contactId01', type: 'io.cozy.contacts' }] }
+      referenced_by: {
+        data: [
+          { id: 'contactId01', type: 'io.cozy.contacts' },
+          { id: 'contactId02', type: 'io.cozy.contacts' }
+        ]
+      }
     }
+  },
+  {
+    _id: 'fileId04',
+    name: 'file04.pdf'
   }
 ]
-const mockPapersDefinitions = [{ label: 'passport', maxDisplay: 2 }]
 
-describe('buildPaperslistByContact', () => {
+const mockPapersListWithoutContact = [
+  {
+    _id: 'fileId01',
+    name: 'file01.pdf'
+  },
+  {
+    _id: 'fileId02',
+    name: 'file02.pdf'
+  }
+]
+
+describe('buildFilesByContacts', () => {
   it('should return object with all papers filtered by contacts', () => {
     const expected = [
       {
         withHeader: true,
-        contact: 'Alice',
+        contact: 'Alice Durand',
         papers: {
-          maxDisplay: 2,
+          maxDisplay: 3,
           list: [
             {
               _id: 'fileId02',
@@ -52,9 +71,9 @@ describe('buildPaperslistByContact', () => {
       },
       {
         withHeader: true,
-        contact: 'Bob',
+        contact: 'Bob Durand',
         papers: {
-          maxDisplay: 2,
+          maxDisplay: 3,
           list: [
             {
               _id: 'fileId01',
@@ -64,28 +83,84 @@ describe('buildPaperslistByContact', () => {
                   data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
                 }
               }
-            },
+            }
+          ]
+        }
+      },
+      {
+        withHeader: true,
+        contact: 'PapersList.contactMerged',
+        papers: {
+          maxDisplay: 3,
+          list: [
             {
               _id: 'fileId03',
               name: 'file03.pdf',
               relationships: {
                 referenced_by: {
-                  data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
+                  data: [
+                    { id: 'contactId01', type: 'io.cozy.contacts' },
+                    { id: 'contactId02', type: 'io.cozy.contacts' }
+                  ]
                 }
               }
+            }
+          ]
+        }
+      },
+      {
+        withHeader: true,
+        contact: 'PapersList.defaultName',
+        papers: {
+          maxDisplay: 3,
+          list: [
+            {
+              _id: 'fileId04',
+              name: 'file04.pdf'
             }
           ]
         }
       }
     ]
 
-    const result = buildPaperslistByContact({
-      papersList: mockPapersList,
-      contactsList: mockContactsList,
-      papersDefinitions: mockPapersDefinitions,
-      currentFileTheme: 'passport'
+    const result = buildFilesByContacts({
+      files: mockPapersList,
+      contacts: mockContactsList,
+      maxDisplay: 3,
+      t: jest.fn(key => key)
     })
 
-    expect(result).toEqual(expected)
+    expect(result).toStrictEqual(expected)
+  })
+
+  it('should have not header if there are only files without contact', () => {
+    const expected = [
+      {
+        withHeader: false,
+        contact: 'PapersList.defaultName',
+        papers: {
+          maxDisplay: 3,
+          list: [
+            {
+              _id: 'fileId01',
+              name: 'file01.pdf'
+            },
+            {
+              _id: 'fileId02',
+              name: 'file02.pdf'
+            }
+          ]
+        }
+      }
+    ]
+
+    const result = buildFilesByContacts({
+      files: mockPapersListWithoutContact,
+      contacts: mockContactsList,
+      maxDisplay: 3,
+      t: jest.fn(key => key)
+    })
+
+    expect(result).toStrictEqual(expected)
   })
 })

@@ -203,6 +203,7 @@
     }
   },
   "PapersList": {
+    "contactMerged": "%{firstGivenName} et %{secondGivenName} %{familyName}",
     "defaultName": "Contact non spécifié",
     "label": {
       "back": "Face arrière",

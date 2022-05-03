@@ -20,6 +20,7 @@ import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildPaperslistByContact } from '../../helpers/buildPaperslistByContact'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersListByContact from '../Papers/PapersListByContact'
+import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 
 const PapersListWrapper = ({ history, match }) => {
   const scannerT = useScannerI18n()
@@ -35,7 +36,7 @@ const PapersListWrapper = ({ history, match }) => {
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
   const {
-    data: fileList,
+    data: files,
     hasMore: hasMoreFiles,
     fetchMore: fetchMoreFiles,
     ...fileQueryResult
@@ -45,16 +46,16 @@ const PapersListWrapper = ({ history, match }) => {
 
   const isLoadingFiles = isQueryLoading(fileQueryResult) || hasMoreFiles
 
-  const contactIdList = !isLoadingFiles
-    ? fileList.flatMap(paper =>
-        getReferencedBy(paper, CONTACTS_DOCTYPE).map(
+  const contactIds = !isLoadingFiles
+    ? files.flatMap(file => {
+        return getReferencedBy(file, CONTACTS_DOCTYPE).map(
           contactRef => contactRef.id
         )
-      )
+      })
     : []
-  const contactsQueryByIds = buildContactsQueryByIds(contactIdList)
+  const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const {
-    data: contactsList,
+    data: contacts,
     hasMore: hasMoreContacts,
     ...contactQueryResult
   } = useQuery(contactsQueryByIds.definition, {
@@ -65,28 +66,26 @@ const PapersListWrapper = ({ history, match }) => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || hasMoreContacts
 
+  const currentDefinition = useMemo(
+    () =>
+      papersDefinitions.find(paperDef => paperDef.label === currentFileTheme),
+    [papersDefinitions, currentFileTheme]
+  )
+
   const paperslistByContact = useMemo(() => {
     if (!isLoadingFiles && !isLoadingContacts) {
       return buildPaperslistByContact({
-        papersList: fileList,
-        contactsList,
-        defaultName: t('PapersList.defaultName'),
-        papersDefinitions,
-        currentFileTheme
+        files,
+        contacts,
+        maxDisplay:
+          currentDefinition?.maxDisplay || DEFAULT_MAX_FILES_DISPLAYED,
+        t
       })
     }
     return []
-  }, [
-    isLoadingFiles,
-    isLoadingContacts,
-    fileList,
-    contactsList,
-    t,
-    papersDefinitions,
-    currentFileTheme
-  ])
+  }, [isLoadingFiles, isLoadingContacts, files, contacts, currentDefinition, t])
 
-  const hasNoFiles = !isLoadingFiles && fileList.length === 0
+  const hasNoFiles = !isLoadingFiles && files.length === 0
 
   if (hasNoFiles) {
     return <Redirect to={'/paper'} />
