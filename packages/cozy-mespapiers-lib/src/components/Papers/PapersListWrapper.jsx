@@ -3,7 +3,7 @@ import React, { useMemo, useCallback } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { useQuery, getReferencedBy, isQueryLoading } from 'cozy-client'
+import { getReferencedBy, isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -35,16 +35,13 @@ const PapersListWrapper = ({ history, match }) => {
   const themeLabel = scannerT(`items.${currentFileTheme}`)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
-  const {
-    data: files,
-    hasMore: hasMoreFiles,
-    fetchMore: fetchMoreFiles,
-    ...fileQueryResult
-  } = useQuery(filesQueryByLabel.definition, filesQueryByLabel.options)
+  const { data: files, ...fileQueryResult } = useQueryAll(
+    filesQueryByLabel.definition,
+    filesQueryByLabel.options
+  )
 
-  if (hasMoreFiles) fetchMoreFiles()
-
-  const isLoadingFiles = isQueryLoading(fileQueryResult) || hasMoreFiles
+  const isLoadingFiles =
+    isQueryLoading(fileQueryResult) || fileQueryResult.hasMore
 
   const contactIds = !isLoadingFiles
     ? files.flatMap(file => {
@@ -54,17 +51,16 @@ const PapersListWrapper = ({ history, match }) => {
       })
     : []
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
-  const {
-    data: contacts,
-    hasMore: hasMoreContacts,
-    ...contactQueryResult
-  } = useQuery(contactsQueryByIds.definition, {
-    ...contactsQueryByIds.options,
-    enabled: !isLoadingFiles
-  })
+  const { data: contacts, ...contactQueryResult } = useQueryAll(
+    contactsQueryByIds.definition,
+    {
+      ...contactsQueryByIds.options,
+      enabled: !isLoadingFiles
+    }
+  )
 
   const isLoadingContacts =
-    isQueryLoading(contactQueryResult) || hasMoreContacts
+    isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
   const currentDefinition = useMemo(
     () =>
