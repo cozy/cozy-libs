@@ -16,7 +16,10 @@ import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
-import { getContactByIds, buildFilesQueryByLabel } from '../../helpers/queries'
+import {
+  buildContactsQueryByIds,
+  buildFilesQueryByLabel
+} from '../../helpers/queries'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildPaperslistByContact } from '../../helpers/buildPaperslistByContact'
@@ -52,11 +55,11 @@ const PapersListWrapper = ({ history, match }) => {
         )
       )
     : []
-  const contactsByIdsQuery = getContactByIds(contactsIds)
+  const contactsQueryByIds = buildContactsQueryByIds(contactsIds)
   const { data: contactsList, ...restContacts } = useQuery(
-    contactsByIdsQuery.definition,
+    contactsQueryByIds.definition,
     {
-      ...contactsByIdsQuery.options,
+      ...contactsQueryByIds.options,
       enabled: !hasMorePapers
     }
   )

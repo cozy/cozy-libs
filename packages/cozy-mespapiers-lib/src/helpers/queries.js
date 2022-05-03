@@ -53,10 +53,10 @@ export const getOnboardingStatus = {
   }
 }
 
-export const getContactByIds = (ids = []) => ({
-  definition: () => Q(CONTACTS_DOCTYPE).getByIds(ids),
+export const buildContactsQueryByIds = (ids = []) => ({
+  definition: Q(CONTACTS_DOCTYPE).getByIds(ids),
   options: {
-    as: `getContactByIds/${ids.join('')}`,
+    as: `${CONTACTS_DOCTYPE}/${ids.join('')}`,
     fetchPolicy: defaultFetchPolicy
   }
 })
