@@ -1,0 +1,118 @@
+import { harmonizeContactsNames, groupFilesByContacts } from './helpers'
+
+const mockContacts00 = [
+  { _id: 'contactId01', name: { givenName: 'Bob', familyName: 'Durand' } },
+  { _id: 'contactId02', name: { givenName: 'Alice', familyName: 'Durand' } }
+]
+const mockContacts01 = [
+  { _id: 'contactId01', name: { givenName: 'Bernard', familyName: 'Chabert' } }
+]
+const mockContacts02 = [
+  { _id: 'contactId01', name: { givenName: 'Bernard', familyName: 'Chabert' } },
+  { _id: 'contactId02', name: { givenName: 'Clair', familyName: 'Guillot' } }
+]
+const mockContacts03 = [
+  { _id: 'contactId01', name: { givenName: 'Bernard', familyName: 'Chabert' } },
+  { _id: 'contactId02', name: { givenName: 'Clair', familyName: 'Guillot' } },
+  { _id: 'contactId03', name: { givenName: 'Jean', familyName: 'Rossi' } }
+]
+
+const mockFiles = [
+  {
+    _id: 'fileId01',
+    name: 'file01.pdf',
+    relationships: {
+      referenced_by: { data: [{ id: 'contactId01', type: 'io.cozy.contacts' }] }
+    }
+  },
+  {
+    _id: 'fileId02',
+    name: 'file02.pdf',
+    relationships: {
+      referenced_by: { data: [{ id: 'contactId02', type: 'io.cozy.contacts' }] }
+    }
+  },
+  {
+    _id: 'fileId03',
+    name: 'file03.pdf',
+    relationships: {
+      referenced_by: {
+        data: [
+          { id: 'contactId01', type: 'io.cozy.contacts' },
+          { id: 'contactId02', type: 'io.cozy.contacts' }
+        ]
+      }
+    }
+  },
+  {
+    _id: 'fileId04',
+    name: 'file04.pdf'
+  }
+]
+
+describe('helpers Papers', () => {
+  describe('harmonizeContactsNames', () => {
+    it('should return the names of the merged contacts', () => {
+      const res = harmonizeContactsNames(
+        mockContacts00,
+        jest.fn(key => key)
+      )
+
+      expect(res).toBe('PapersList.contactMerged')
+    })
+
+    it('should return the name of the contact', () => {
+      const res = harmonizeContactsNames(
+        mockContacts01,
+        jest.fn(key => key)
+      )
+
+      expect(res).toBe('Bernard Chabert')
+    })
+
+    it('should return the names of the contacts separated by a comma', () => {
+      const res = harmonizeContactsNames(
+        mockContacts02,
+        jest.fn(key => key)
+      )
+
+      expect(res).toBe('Bernard Chabert, Clair Guillot')
+    })
+
+    it('should return the names of the contacts separated by a comma and ... ', () => {
+      const res = harmonizeContactsNames(
+        mockContacts03,
+        jest.fn(key => key)
+      )
+
+      expect(res).toBe('Bernard Chabert, Clair Guillot, ... ')
+    })
+  })
+
+  describe('groupFilesByContacts', () => {
+    it('should return an object that groups the files with their contacts', () => {
+      const expected = [
+        {
+          contacts: [mockContacts00[0]],
+          files: [mockFiles[0]]
+        },
+        {
+          contacts: [mockContacts00[1]],
+          files: [mockFiles[1]]
+        },
+        {
+          contacts: [mockContacts00[0], mockContacts00[1]],
+          files: [mockFiles[2]]
+        },
+        {
+          contacts: [],
+          files: [mockFiles[3]]
+        }
+      ]
+
+      const res = groupFilesByContacts(mockFiles, mockContacts00)
+
+      expect(res).toStrictEqual(expected)
+    })
+  })
+})
