@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.15.0 (2022-05-03)
+
+
+### Features
+
+* Add codemods for iconButton ([b4368f6](https://github.com/cozy/cozy-libs/commit/b4368f6101374f339177b8e375f99ad382ae7cb3))
+
+
+
+
+
 ## [1.14.5](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.14.4...@cozy/codemods@1.14.5) (2022-04-22)
 
 **Note:** Version bump only for package @cozy/codemods
