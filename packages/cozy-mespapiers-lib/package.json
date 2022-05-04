@@ -40,7 +40,8 @@
     "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
     "node-polyglot": "^2.4.0",
     "pdf-lib": "1.17.1",
-    "react-input-mask": "3.0.0-alpha.2"
+    "react-input-mask": "3.0.0-alpha.2",
+    "fuse.js": "6.6.0"
   },
   "peerDependencies": {
     "cozy-client": ">=28.2.1",
