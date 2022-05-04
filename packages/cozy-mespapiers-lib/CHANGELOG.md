@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.11.0...cozy-mespapiers-lib@0.12.0) (2022-05-04)
+
+
+### Features
+
+* Add hasItemByLabel helper ([9b468e5](https://github.com/cozy/cozy-libs/commit/9b468e52e284051208eee5b2632530beacf3155f))
+* Add limitBy(1000) and select on buildFilesQueryByLabels query ([d7983d2](https://github.com/cozy/cozy-libs/commit/d7983d228d080be2bffd7bdb734c546ca4b1ce85))
+* Add locales to manage filter on Home ([c6294e7](https://github.com/cozy/cozy-libs/commit/c6294e78ecd6b5670ff8707b06553017f29e4f91))
+* Add papers filter on Home ([fd839dc](https://github.com/cozy/cozy-libs/commit/fd839dc6d2538799d8dafc1905d423410c251df6))
+* Add theme in getFeaturedPlaceholders filter on Home ([73c4ace](https://github.com/cozy/cozy-libs/commit/73c4acedab93953fa365f0ca5c16db48122d4b81))
+* PaperGroup displays string when empty ([d9253f6](https://github.com/cozy/cozy-libs/commit/d9253f6357128bd5096824b2df50232604bd76d5))
+* Upgrade cozy-ui to 66.2.0 ([7128646](https://github.com/cozy/cozy-libs/commit/712864672eea34f2942a74bf5f0a641914f7af1d))
+
+
+
+
+
 # [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.10.0...cozy-mespapiers-lib@0.11.0) (2022-05-04)
 
 
