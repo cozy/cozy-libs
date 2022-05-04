@@ -70,7 +70,7 @@ const konnector = {
     bankId: TEST_BANK_COZY_ID
   },
   partnership: {
-    domain: 'https://budget-insight.com'
+    domain: 'budget-insight.com'
   }
 }
 

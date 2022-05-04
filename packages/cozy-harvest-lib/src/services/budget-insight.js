@@ -65,12 +65,8 @@ export const convertBIErrortoKonnectorJobError = error => {
   throw err
 }
 
-export const isBudgetInsightConnector = konnector => {
-  return (
-    konnector.partnership &&
-    konnector.partnership.domain.includes('budget-insight')
-  )
-}
+export const isBudgetInsightConnector = konnector =>
+  konnector?.partnership?.domain === 'budget-insight.com'
 
 export const createTemporaryToken = async ({ client, konnector, account }) => {
   assert(
