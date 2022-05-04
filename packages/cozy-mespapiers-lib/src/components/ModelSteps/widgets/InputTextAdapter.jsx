@@ -110,7 +110,7 @@ const InputTextAdapter = ({
     ? t('InputTextAdapter.invalidTextMessage', {
         smart_count: expectedLength.min - currentValue.length
       })
-    : ''
+    : ' '
 
   if (mask) {
     return (
