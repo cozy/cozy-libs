@@ -170,7 +170,7 @@ describe('isBiWebViewConnector', () => {
   const notBIConnector = {
     slug: 'otherconnector'
   }
-  it('should return true if the connector is a BI connector and if the and the "harvest.bi.webview" is activated', () => {
+  it('should return true if the connector is a BI connector and if the  "harvest.bi.webview" is activated', () => {
     flag('harvest.bi.webview', true)
     expect(isBiWebViewConnector(BIConnector)).toEqual(true)
   })
