@@ -328,7 +328,7 @@ export class DumbTriggerManager extends Component {
     const showAccountForm = step === 'accountForm'
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
-    if (oauth || konnectorPolicy.isWebView) {
+    if (oauth || konnectorPolicy.isBIWebView) {
       return (
         <OAuthForm
           client={client}

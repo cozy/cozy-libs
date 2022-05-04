@@ -4,10 +4,6 @@
  * - Deals with the konnector to get temporary tokens
  */
 
-import get from 'lodash/get'
-import set from 'lodash/set'
-import clone from 'lodash/clone'
-
 import { getBIConnection } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
@@ -18,21 +14,21 @@ import {
   setBIConnectionId,
   saveBIConfig,
   findAccountWithBiConnection,
-  convertBIErrortoKonnectorJobError
+  convertBIErrortoKonnectorJobError,
+  isBudgetInsightConnector
 } from './budget-insight'
 import { KonnectorJobError } from '../helpers/konnectors'
 
 export const isBiWebViewConnector = konnector =>
-  flag('harvest.bi.webview') &&
-  get(konnector, 'partnership.domain') === 'budget-insight.com'
+  flag('harvest.bi.webview') && isBudgetInsightConnector(konnector)
 
 /**
  * Runs multiple checks on the bi connection referenced in the given account
  *
- * @param {Object} options.account The account content
- * @param {Object} options.flow
- * @param {Object} options.konnector connector manifest content
- * @param {Object} options.client CozyClient object
+ * @param {io.cozy.accounts} options.account The account content
+ * @param {ConnectionFlow} options.flow
+ * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {CozyClient} options.client CozyClient object
  *
  * @return {Integer} Connection Id
  */
@@ -84,10 +80,10 @@ export const checkBIConnection = async ({
 /**
  * Handles webview connection
  *
- * @param {Object} options.account The account content
- * @param {Object} options.flow
- * @param {Object} options.konnector connector manifest content
- * @param {Object} options.client CozyClient object
+ * @param {io.cozy.accounts} options.account The account content
+ * @param {ConnectionFlow} options.flow
+ * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {CozyClient} options.client CozyClient object
  *
  * @return {Integer} Connection Id
  */
@@ -98,10 +94,10 @@ export const handleOAuthAccount = async ({
   client,
   t
 }) => {
-  let biWebviewAccount = clone(account)
   const cozyBankId = getCozyBankId({ konnector, account })
-  if (cozyBankId) {
-    set(biWebviewAccount, 'auth.bankId', cozyBankId)
+  let biWebviewAccount = {
+    ...account,
+    ...(cozyBankId ? { auth: { bankId: cozyBankId } } : {})
   }
 
   const connectionId = getWebviewBIConnectionId(biWebviewAccount)
@@ -133,18 +129,26 @@ export const handleOAuthAccount = async ({
  * @return {Integer} Connection Id
  */
 const getWebviewBIConnectionId = account => {
-  return Number(get(account, 'oauth.query.connection_id[0]'))
+  return Number(account?.oauth?.query?.connection_id?.[0] || null)
 }
 
+/**
+ * Hook from ConnectionFlow after account creation
+ *
+ * @param {io.cozy.accounts} options.account - created account
+ * @param {io.cozy.konnectors} options.konnector  - manifest of the konnector for which the account is created
+ * @param {ConnectionFlow} options.flow - current ConnectionFlow instance
+ * @param {CozyClient} options.client - current CozyClient instance
+ *
+ * @returns {Promise<io.cozy.accounts>}
+ */
 export const onBIAccountCreation = async ({
   account: fullAccount,
   client,
   flow,
   konnector
 }) => {
-  let account = clone(fullAccount)
-
-  account = await flow.saveAccount(account)
+  const account = await flow.saveAccount(fullAccount)
 
   const biConnection = await checkBIConnection({
     account: {
@@ -163,17 +167,22 @@ export const onBIAccountCreation = async ({
   return await flow.saveAccount(setBIConnectionId(account, biConnection.id))
 }
 
+/**
+ * Finds the current bankIid in a given konnector or account
+ *
+ * @param {io.cozy.accounts} options.account The account content
+ * @param {io.cozy.konnectors} options.konnector connector manifest content
+ */
 export const getCozyBankId = ({ konnector, account }) => {
-  const cozyBankId =
-    get(konnector, 'parameters.bankId') || get(account, 'auth.bankId')
+  const cozyBankId = konnector?.parameters?.bankId || account?.auth?.bankId
   if (!cozyBankId) {
-    throw new Error('Could not find any bank id')
+    logger.error('Could not find any bank id')
   }
   return cozyBankId
 }
 
 export const konnectorPolicy = {
-  isWebView: true,
+  isBIWebView: true,
   name: 'budget-insight-webview',
   match: isBiWebViewConnector,
   saveInVault: false,

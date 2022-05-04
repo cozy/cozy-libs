@@ -92,7 +92,7 @@ export const handleOAuthResponse = (options = {}) => {
  * @param  {string} cozyUrl cozy url
  * @param  {string} accountType connector slug
  * @param  {string} oAuthStateKey localStorage key
- * @param  {Object} oAuthConf connector manifest oauth configuration
+ * @param  {Object} [oAuthConf={}]  connector manifest oauth configuration
  * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
  * @param  {string} nonce unique nonce string
  * @param  {Object} extraParams some extra parameters to add to the query string
