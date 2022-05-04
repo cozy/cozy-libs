@@ -8,10 +8,12 @@ import {
 import { makeStyles } from '@material-ui/styles'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 const useStyles = makeStyles(() => ({
   overrides: {
     width: '100%',
+    height: isDesktop => (isDesktop ? '5rem' : 'inehrit'),
     MuiOutlinedInput: {
       '&:focused': {
         notchedOutline: {
@@ -32,7 +34,8 @@ const InputDateAdapter = ({
 }) => {
   const { name, inputLabel } = attrs
   const { t, lang } = useI18n()
-  const classes = useStyles()
+  const { isDesktop } = useBreakpoints()
+  const classes = useStyles(isDesktop)
   const [locales, setLocales] = useState('')
   const [isValidDate, setIsValidDate] = useState(true)
   const [selectedDate, setSelectedDate] = useState(defaultValue || null)
