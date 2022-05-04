@@ -12,7 +12,6 @@ import CarIcon from 'cozy-ui/transpiled/react/Icons/Car'
 import CompassIcon from 'cozy-ui/transpiled/react/Icons/Compass'
 import BankIcon from 'cozy-ui/transpiled/react/Icons/Bank'
 import BillIcon from 'cozy-ui/transpiled/react/Icons/Bill'
-import Box from 'cozy-ui/transpiled/react/Box'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
@@ -41,7 +40,7 @@ const ThemesFilter = ({ items, selectedTheme, handleThemeSelection }) => {
   const { t } = useI18n()
 
   return (
-    <Box className="u-flex u-flex-justify-center u-mv-1" flexWrap="wrap">
+    <>
       {items.map(item => (
         <CircleButton
           key={item.id}
@@ -52,7 +51,7 @@ const ThemesFilter = ({ items, selectedTheme, handleThemeSelection }) => {
           <Icon icon={itemIconToSvg[item.icon]} />
         </CircleButton>
       ))}
-    </Box>
+    </>
   )
 }
 

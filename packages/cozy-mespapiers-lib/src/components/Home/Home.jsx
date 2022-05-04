@@ -4,22 +4,25 @@ import uniqBy from 'lodash/uniqBy'
 import { isQueryLoading, useQueryAll, models } from 'cozy-client'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Box from 'cozy-ui/transpiled/react/Box'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import ThemesFilter from '../ThemesFilter'
+import SearchInput from '../SearchInput'
 import PaperGroup from '../Papers/PaperGroup'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { buildFilesQueryByLabels } from '../../helpers/queries'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
-import { filterPapersByTheme } from './helpers'
+import { filterPapersByThemeAndSearchValue } from './helpers'
 
 const {
   themes: { themesList }
 } = models.document
 
 const Home = () => {
+  const [searchValue, setSearchValue] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
@@ -38,10 +41,11 @@ const Home = () => {
     [filesByLabels]
   )
 
-  const filteredPapersByTheme = filterPapersByTheme(
-    allPapersByCategories,
-    selectedTheme
-  )
+  const filteredPapers = filterPapersByThemeAndSearchValue({
+    files: allPapersByCategories,
+    theme: selectedTheme,
+    search: searchValue
+  })
 
   const featuredPlaceholders = useMemo(
     () =>
@@ -68,11 +72,18 @@ const Home = () => {
 
   return (
     <>
-      <ThemesFilter
-        items={themesList}
-        selectedTheme={selectedTheme}
-        handleThemeSelection={handleThemeSelection}
-      />
+      <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
+        <Box className="u-flex u-flex-items-center u-mb-half-s" flex="1 1 auto">
+          <SearchInput setSearchValue={setSearchValue} />
+        </Box>
+        <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
+          <ThemesFilter
+            items={themesList}
+            selectedTheme={selectedTheme}
+            handleThemeSelection={handleThemeSelection}
+          />
+        </Box>
+      </div>
       {allPapersByCategories.length === 0 ? (
         <Empty
           icon={HomeCloud}
@@ -82,7 +93,7 @@ const Home = () => {
           className={'u-ph-1'}
         />
       ) : (
-        <PaperGroup allPapersByCategories={filteredPapersByTheme} />
+        <PaperGroup allPapersByCategories={filteredPapers} />
       )}
       <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
     </>
