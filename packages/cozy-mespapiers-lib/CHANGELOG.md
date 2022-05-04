@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.10.0...cozy-mespapiers-lib@0.11.0) (2022-05-04)
+
+
+### Features
+
+* Add multiple prop for select multiple contact if needed ([f7ed408](https://github.com/cozy/cozy-libs/commit/f7ed408db30e1530f78e521e5e40dd99ec494f50))
+
+
+
+
+
 # [0.10.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.9.4...cozy-mespapiers-lib@0.10.0) (2022-05-03)
 
 
