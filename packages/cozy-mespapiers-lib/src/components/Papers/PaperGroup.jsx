@@ -62,11 +62,11 @@ const PaperGroup = ({ allPapersByCategories }) => {
             {t('PapersList.empty')}
           </Typography>
         ) : (
-          allPapersByCategories.map((paper, idx) => {
+          allPapersByCategories.map((paper, index) => {
             const category = get(paper, 'metadata.qualification.label')
 
             return (
-              <Fragment key={idx}>
+              <Fragment key={paper.id}>
                 <ListItem button onClick={() => goPapersList(category)}>
                   <ListItemIcon>
                     <FileImageLoader
@@ -93,7 +93,7 @@ const PaperGroup = ({ allPapersByCategories }) => {
                     color={'var(--secondaryTextColor)'}
                   />
                 </ListItem>
-                {idx !== allPapersByCategories.length - 1 && (
+                {index !== allPapersByCategories.length - 1 && (
                   <Divider variant="inset" component="li" />
                 )}
               </Fragment>

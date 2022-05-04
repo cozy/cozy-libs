@@ -42,9 +42,9 @@ const ThemesFilter = ({ items, selectedTheme, handleThemeSelection }) => {
 
   return (
     <Box className="u-flex u-flex-justify-center u-mv-1" flexWrap="wrap">
-      {items.map((item, index) => (
+      {items.map(item => (
         <CircleButton
-          key={index}
+          key={item.id}
           label={makeLabel({ scannerT, t, label: `themes.${item.label}` })}
           variant={selectedTheme.id === item.id ? 'active' : 'default'}
           onClick={() => handleThemeSelection(item)}
