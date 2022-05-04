@@ -26,7 +26,7 @@ const InputTextAdapter = ({
   const { name, inputLabel, ...otherInputProps } = attrs
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
-  const [isError, setIsError] = useState(false)
+  const [isTooShort, setIsTooShort] = useState(false)
 
   const { inputType, expectedLength, isRequired } = useMemo(
     () => makeConstraintsOfInput(otherInputProps),
@@ -78,26 +78,27 @@ const InputTextAdapter = ({
 
   const handleOnFocus = () => {
     setIsFocus(true)
-    setIsError(false)
+    setIsTooShort(false)
   }
 
   const handleOnBlur = () => {
     setIsFocus(false)
     if (currentValue.length > 0) {
-      setIsError(expectedLength > 0 && currentValue.length !== expectedLength)
-    } else setIsError(false)
+      setIsTooShort(
+        expectedLength.min > 0 && currentValue.length < expectedLength.min
   }
 
-  const helperText = isError
+  const helperText = isTooShort
     ? t('InputTextAdapter.invalidTextMessage', {
-        smart_count: expectedLength - currentValue.length
+        smart_count: expectedLength.min - currentValue.length
       })
     : ''
 
   return (
     <TextField
       value={currentValue}
-      error={isError}
+      inputType={inputType}
+      error={isTooShort}
       onBlur={handleOnBlur}
       onFocus={handleOnFocus}
       helperText={helperText}
