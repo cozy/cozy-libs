@@ -141,6 +141,33 @@ describe('NativeService', () => {
 
       expect(mockDebug).toHaveBeenCalled()
     })
+
+    it('Should allow to register a webview with a baseUrl instead of an uri', () => {
+      const nativeMethods: NativeMethodsRegister = {
+        backToHome: jest.fn(),
+        logout: jest.fn(),
+        openApp: jest.fn(),
+        hideSplashScreen: jest.fn(),
+        setFlagshipUI: jest.fn(),
+        showSplashScreen: jest.fn()
+      }
+
+      const webviewRef: WebviewRef = {
+        injectJavaScript: jest.fn(),
+        props: {
+          source: {
+            html: 'SOME HTML',
+            baseUrl: 'http://SOME_BASE_URL'
+          }
+        }
+      }
+
+      const nativeService = new NativeService(nativeMethods)
+
+      nativeService.registerWebview(webviewRef)
+
+      expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
+    })
   })
 
   describe('unregisterWebview', () => {

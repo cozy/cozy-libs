@@ -2,6 +2,7 @@ import { Connection, debug, ParentHandshake } from 'post-me'
 
 import {
   DebugNativeMessenger,
+  isWebviewSourceBaseUrl,
   MessengerRegister,
   NativeEvent,
   NativeMessenger,
@@ -38,7 +39,11 @@ export class NativeService {
 
   private getUri = (source: WebviewRef | NativeEvent): string => {
     return this.isWebviewRef(source)
-      ? new URL(source.props.source.uri).hostname.toLowerCase()
+      ? new URL(
+          isWebviewSourceBaseUrl(source.props.source)
+            ? source.props.source.baseUrl
+            : source.props.source.uri
+        ).hostname.toLowerCase()
       : new URL(source.nativeEvent.url).hostname.toLowerCase()
   }
 
