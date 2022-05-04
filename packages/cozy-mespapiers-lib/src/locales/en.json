@@ -96,7 +96,7 @@
     "invalidDateMessage": "Invalid Date"
   },
   "InputTextAdapter": {
-    "invalidTextMessage": "%{smart_count} number is missing |||| %{smart_count} numbers are missings"
+    "invalidTextMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
   },
   "Onboarding": {
     "cta": "Let's go!"
