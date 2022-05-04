@@ -107,7 +107,7 @@ export const handleOAuthAccount = async ({
   const connectionId = getWebviewBIConnectionId(biWebviewAccount)
 
   if (connectionId) {
-    logger.info(`Found a bi webview connection id: ${connectionId}`)
+    logger.info(`Found a BI webview connection id: ${connectionId}`)
     flow.konnector = konnector
     biWebviewAccount = await flow.saveAccount(
       setBIConnectionId(biWebviewAccount, connectionId)
