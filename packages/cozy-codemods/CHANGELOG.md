@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.15.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.15.0...@cozy/codemods@1.15.1) (2022-05-04)
+
+
+### Bug Fixes
+
+* **deps:** Eslint-config-cozy-app not needed as dependencies of codemods ([99dd607](https://github.com/cozy/cozy-libs/commit/99dd607341fb49d6010ae4956107abe75dcc47cd))
+
+
+
+
+
 # 1.15.0 (2022-05-03)
 
 
