@@ -1,7 +1,7 @@
 import {
   getFeaturedPlaceholders,
   findPlaceholdersByQualification,
-  getPaperDefinitionByLabel
+  hasNoFileWithSameQualificationLabel
 } from './findPlaceholders'
 import { mockPapersDefinitions } from '../../test/mockPaperDefinitions'
 
@@ -174,9 +174,9 @@ describe('getPlaceholders', () => {
   })
 })
 
-describe('getPaperDefinitionByLabel', () => {
+describe('hasNoFileWithSameQualificationLabel', () => {
   it('should handle empty files', () => {
-    const res = getPaperDefinitionByLabel(null, mockPapersDefinitions)
+    const res = hasNoFileWithSameQualificationLabel(null, mockPapersDefinitions)
 
     expect(res).toBe(null)
   })
