@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.13.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.12.0...cozy-mespapiers-lib@0.13.0) (2022-05-05)
+
+
+### Bug Fixes
+
+* Display of the helperText under the fields of the creation steps ([b1d8610](https://github.com/cozy/cozy-libs/commit/b1d8610edf0cdf1e641695e2998e8ea7492a1d29))
+
+
+### Features
+
+* Add react-input-mask package ([422544c](https://github.com/cozy/cozy-libs/commit/422544c3cb5206e916873e5979e36746994e7432))
+* Implement InputMask in InputTextAdapter ([2ba5091](https://github.com/cozy/cozy-libs/commit/2ba509135c8b3aa6cd61a8ad3915ba8091715666))
+* Rename "number" to "character" to make it more generic ([d63512c](https://github.com/cozy/cozy-libs/commit/d63512cc05b4fd92797908b9fd1bc636c234d267))
+* Rename isError to isTooShort & fix it ([09416f9](https://github.com/cozy/cozy-libs/commit/09416f9ecfae63dfe4bf0a8e6ea784390fd1c169))
+
+
+
+
+
 # [0.12.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.11.0...cozy-mespapiers-lib@0.12.0) (2022-05-04)
 
 
