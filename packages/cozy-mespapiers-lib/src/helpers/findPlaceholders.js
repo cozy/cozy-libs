@@ -61,7 +61,8 @@ export const getFeaturedPlaceholders = ({
     featuredPlaceholders = papersDefinitions.filter(
       paperDefinition =>
         hasItemByLabel(selectedTheme, paperDefinition.label) &&
-        getPaperDefinitionByLabel(files, paperDefinition)
+        getPaperDefinitionByLabel(files, paperDefinition) &&
+        isPaperEnabled(paperDefinition)
     )
   } else {
     featuredPlaceholders = papersDefinitions.filter(
