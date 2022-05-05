@@ -9,22 +9,19 @@ export interface WebviewSourceUri {
   html?: never
 }
 
-export interface WebiewSourceBaseUrl {
+export interface WebviewSourceBaseUrl {
   baseUrl: string
   html: string
 
   uri?: never
 }
 
-export type WebviewSource = WebviewSourceUri | WebiewSourceBaseUrl
+export type WebviewSource = WebviewSourceUri | WebviewSourceBaseUrl
 
 export function isWebviewSourceBaseUrl(
   webviewSource: WebviewSource
-): webviewSource is WebiewSourceBaseUrl {
-  if ((webviewSource as WebiewSourceBaseUrl).html) {
-    return true
-  }
-  return false
+): webviewSource is WebviewSourceBaseUrl {
+  return Boolean((webviewSource as WebviewSourceBaseUrl).html)
 }
 
 export interface WebviewRef {
