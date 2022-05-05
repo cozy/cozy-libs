@@ -24,7 +24,13 @@ import { hasItemByLabel } from '../components/Home/helpers'
  * @property {number} maxDisplay - Number of document beyond which a "see more" button is displayed.
  */
 
-export const getPaperDefinitionByLabel = (files, paperDefinition) => {
+/**
+ * Checks if a file in a list has a qualification label equal to the label in the paper definition
+ * @param {IOCozyFile[]} files - Array of IOCozyFile
+ * @param {PaperDefinition} paperDefinition - PapersDefinition
+ * @returns {boolean}
+ */
+export const hasNoFileWithSameQualificationLabel = (files, paperDefinition) => {
   return (
     files &&
     !files.some(
@@ -58,7 +64,7 @@ export const getFeaturedPlaceholders = ({
   return papersDefinitions
     .filter(
       paperDefinition =>
-        getPaperDefinitionByLabel(files, paperDefinition) &&
+        hasNoFileWithSameQualificationLabel(files, paperDefinition) &&
         isPaperEnabled(paperDefinition) &&
         (selectedTheme
           ? hasItemByLabel(selectedTheme, paperDefinition.label)
