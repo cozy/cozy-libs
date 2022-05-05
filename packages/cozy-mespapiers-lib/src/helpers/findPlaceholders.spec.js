@@ -126,6 +126,25 @@ describe('getPlaceholders', () => {
         )
         expect(featuredPlaceholders.length).toBe(1)
       })
+
+      it('should not return unsupported paper', () => {
+        const featuredPlaceholders = getFeaturedPlaceholders({
+          papersDefinitions: mockPapersDefinitions,
+          files: fakeIspInvoiceFile,
+          selectedTheme: {
+            items: [{ label: 'health_certificate' }]
+          }
+        })
+
+        expect(featuredPlaceholders).toEqual(
+          expect.not.arrayContaining([
+            expect.objectContaining({
+              label: 'health_certificate'
+            })
+          ])
+        )
+        expect(featuredPlaceholders.length).toBe(0)
+      })
     })
   })
 
