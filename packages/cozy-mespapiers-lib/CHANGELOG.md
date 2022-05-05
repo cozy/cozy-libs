@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.16.0...cozy-mespapiers-lib@0.16.1) (2022-05-05)
+
+
+### Bug Fixes
+
+* Remove suggestions for unsupported papers when filtered by theme ([ded24fb](https://github.com/cozy/cozy-libs/commit/ded24fbeab95ed4aeb4ca6e7f7aa4a6ac746d44d))
+
+
+
+
+
 # [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.15.1...cozy-mespapiers-lib@0.16.0) (2022-05-05)
 
 
