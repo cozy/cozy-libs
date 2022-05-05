@@ -32,20 +32,18 @@ jest.mock('post-me', () => ({
   ...jest.requireActual('post-me'),
   debug:
     (nameSpace = 'NativeService') =>
-    (): unknown =>
-      mockDebug(nameSpace),
+    (str: string) =>
+      mockDebug(nameSpace, str),
   ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
 }))
 
 jest.mock('../services/NativeMessenger')
 
 describe('NativeService', () => {
-  afterEach(() => {
-    jest.clearAllMocks()
-  })
+  let nativeMethods: NativeMethodsRegister
 
-  it('Should allow to register and unregister webviews, regardless of casing', async () => {
-    const nativeMethods: NativeMethodsRegister = {
+  beforeEach(() => {
+    nativeMethods = {
       backToHome: jest.fn(),
       logout: jest.fn(),
       openApp: jest.fn(),
@@ -53,7 +51,13 @@ describe('NativeService', () => {
       setFlagshipUI: jest.fn(),
       showSplashScreen: jest.fn()
     }
+  })
 
+  afterEach(() => {
+    jest.clearAllMocks()
+  })
+
+  it('Should allow to register and unregister webviews, regardless of casing', async () => {
     const webviewRef: WebviewRef = {
       injectJavaScript: jest.fn(),
       props: {
@@ -87,15 +91,6 @@ describe('NativeService', () => {
 
   describe('registerWebview', () => {
     it('Should allow to register a webview', () => {
-      const nativeMethods: NativeMethodsRegister = {
-        backToHome: jest.fn(),
-        logout: jest.fn(),
-        openApp: jest.fn(),
-        hideSplashScreen: jest.fn(),
-        setFlagshipUI: jest.fn(),
-        showSplashScreen: jest.fn()
-      }
-
       const webviewRef: WebviewRef = {
         injectJavaScript: jest.fn(),
         props: {
@@ -113,15 +108,6 @@ describe('NativeService', () => {
     })
 
     it('Should bail out and log if registering two times the same webview', () => {
-      const nativeMethods: NativeMethodsRegister = {
-        backToHome: jest.fn(),
-        logout: jest.fn(),
-        openApp: jest.fn(),
-        hideSplashScreen: jest.fn(),
-        setFlagshipUI: jest.fn(),
-        showSplashScreen: jest.fn()
-      }
-
       const webviewRef: WebviewRef = {
         injectJavaScript: jest.fn(),
         props: {
@@ -143,15 +129,6 @@ describe('NativeService', () => {
     })
 
     it('Should allow to register a webview with a baseUrl instead of an uri', () => {
-      const nativeMethods: NativeMethodsRegister = {
-        backToHome: jest.fn(),
-        logout: jest.fn(),
-        openApp: jest.fn(),
-        hideSplashScreen: jest.fn(),
-        setFlagshipUI: jest.fn(),
-        showSplashScreen: jest.fn()
-      }
-
       const webviewRef: WebviewRef = {
         injectJavaScript: jest.fn(),
         props: {
@@ -168,19 +145,33 @@ describe('NativeService', () => {
 
       expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
     })
+
+    it('Should use correct uri with WebviewSourceBaseUrl', () => {
+      const webviewRef: WebviewRef = {
+        injectJavaScript: jest.fn(),
+        props: {
+          source: {
+            html: 'SOME HTML',
+            baseUrl: 'http://SOME_BASE_URL'
+          }
+        }
+      }
+
+      const nativeService = new NativeService(nativeMethods)
+
+      nativeService.registerWebview(webviewRef)
+      nativeService.registerWebview(webviewRef)
+
+      const baseUrlFromWebview = "some_base_url";
+      expect(mockDebug).toHaveBeenCalledWith(
+        "NativeService",
+        `Cannot register webview. A webview is already registered into cozy-intent with the uri: ${baseUrlFromWebview}`
+      )
+    })
   })
 
   describe('unregisterWebview', () => {
     it('Should bail out and log if unregistering not registered webview', () => {
-      const nativeMethods: NativeMethodsRegister = {
-        backToHome: jest.fn(),
-        logout: jest.fn(),
-        openApp: jest.fn(),
-        hideSplashScreen: jest.fn(),
-        setFlagshipUI: jest.fn(),
-        showSplashScreen: jest.fn()
-      }
-
       const webviewRef: WebviewRef = {
         injectJavaScript: jest.fn(),
         props: {
