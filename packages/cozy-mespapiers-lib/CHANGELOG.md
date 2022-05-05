@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.15.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.14.0...cozy-mespapiers-lib@0.15.0) (2022-05-05)
+
+
+### Features
+
+* Synchronize the versions of cozy packages on devDeps/peerDeps ([cdbce11](https://github.com/cozy/cozy-libs/commit/cdbce118830db467c71b7988ad8ec5a76745c321))
+
+
+
+
+
 # [0.14.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.13.0...cozy-mespapiers-lib@0.14.0) (2022-05-05)
 
 
