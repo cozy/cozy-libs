@@ -238,5 +238,6 @@
       "text": "Link to my document %{name}: ",
       "title": "Link to my document %{name}"
     }
-  }
+  },
+  "search": "Search"
 }

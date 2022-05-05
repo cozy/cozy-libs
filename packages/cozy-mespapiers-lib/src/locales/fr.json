@@ -238,5 +238,6 @@
       "text": "Voici un lien vers mon document %{name} : ",
       "title": "Lien vers mon document %{name}"
     }
-  }
+  },
+  "search": "Rechercher"
 }
