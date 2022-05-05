@@ -39,15 +39,12 @@ const ContactList = ({
   ])
 
   useEffect(() => {
-    contactIdsSelected.length === 0 &&
-      !multiple &&
-      setContactIdsSelected([currentUser._id])
-  }, [
-    contactIdsSelected.length,
-    multiple,
-    setContactIdsSelected,
-    currentUser._id
-  ])
+    setContactIdsSelected(prev => {
+      if (prev.length === 0) {
+        return [currentUser._id]
+      }
+    })
+  }, [setContactIdsSelected, currentUser._id])
 
   useEffect(() => {
     setFormData(prev => ({
