@@ -55,27 +55,16 @@ export const getFeaturedPlaceholders = ({
   files = [],
   selectedTheme = ''
 }) => {
-  let featuredPlaceholders
-
-  if (selectedTheme) {
-    featuredPlaceholders = papersDefinitions.filter(
-      paperDefinition =>
-        hasItemByLabel(selectedTheme, paperDefinition.label) &&
-        getPaperDefinitionByLabel(files, paperDefinition) &&
-        isPaperEnabled(paperDefinition)
-    )
-  } else {
-    featuredPlaceholders = papersDefinitions.filter(
+  return papersDefinitions
+    .filter(
       paperDefinition =>
         getPaperDefinitionByLabel(files, paperDefinition) &&
-        paperDefinition.placeholderIndex &&
-        isPaperEnabled(paperDefinition)
+        isPaperEnabled(paperDefinition) &&
+        (selectedTheme
+          ? hasItemByLabel(selectedTheme, paperDefinition.label)
+          : paperDefinition.placeholderIndex)
     )
-  }
-
-  return featuredPlaceholders.sort(
-    (a, b) => a.placeholderIndex - b.placeholderIndex
-  )
+    .sort((a, b) => a.placeholderIndex - b.placeholderIndex)
 }
 
 /**
