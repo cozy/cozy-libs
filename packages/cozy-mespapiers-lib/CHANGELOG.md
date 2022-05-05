@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.16.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.15.1...cozy-mespapiers-lib@0.16.0) (2022-05-05)
+
+
+### Bug Fixes
+
+* Select current user by default on contact step ([10401bc](https://github.com/cozy/cozy-libs/commit/10401bc87435cad53d028e640e76e578d0d083b7))
+
+
+### Features
+
+* Add a mask for the ID card number field ([54adc30](https://github.com/cozy/cozy-libs/commit/54adc3056c68f1e36506558ab1666151eed31a9c))
+* Update cozy-ui for fix ActionMenu on Desktop view ([8b861f8](https://github.com/cozy/cozy-libs/commit/8b861f8a2929eb04fd3a4fbdf28b311d06cd20f4)), closes [cozy/cozy-ui#2130](https://github.com/cozy/cozy-ui/issues/2130)
+
+
+
+
+
 ## [0.15.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.15.0...cozy-mespapiers-lib@0.15.1) (2022-05-05)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
