@@ -5,11 +5,7 @@ const fuse = new Fuse([], {
   threshold: 0.3,
   ignoreLocation: true,
   ignoreFieldNorm: true,
-  keys: [
-    {
-      name: 'name'
-    }
-  ]
+  keys: ['name', 'tranlatedQualificationLabel']
 })
 
 // TODO: hasItemByLabel should be in cozy-client : https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js
@@ -18,17 +14,39 @@ export const hasItemByLabel = (theme, label) => {
   return theme.items.some(item => item.label === label)
 }
 
-export const filterPapersByThemeAndSearchValue = ({ files, theme, search }) => {
+export const filterPapersByThemeAndSearchValue = ({
+  files,
+  theme,
+  search,
+  scannerT
+}) => {
   let filteredFiles = files
 
-  if (search) {
-    fuse.setCollection(files)
-    filteredFiles = fuse.search(search).map(result => result.item)
-  }
+  if (search || theme) {
+    const simpleFiles = files.map(file => ({
+      _id: file._id,
+      name: file.name,
+      qualifiationLabel: file.metadata.qualification.label,
+      tranlatedQualificationLabel: scannerT(
+        `items.${file.metadata.qualification.label}`
+      )
+    }))
 
-  if (theme) {
-    filteredFiles = filteredFiles.filter(file =>
-      hasItemByLabel(theme, file.metadata.qualification.label)
+    let filteredSimplesFiles = simpleFiles
+
+    if (search) {
+      fuse.setCollection(simpleFiles)
+      filteredSimplesFiles = fuse.search(search).map(result => result.item)
+    }
+
+    if (theme) {
+      filteredSimplesFiles = filteredSimplesFiles.filter(simpleFile =>
+        hasItemByLabel(theme, simpleFile.qualifiationLabel)
+      )
+    }
+
+    filteredFiles = files.filter(file =>
+      filteredSimplesFiles.some(simpleFile => simpleFile._id === file._id)
     )
   }
 

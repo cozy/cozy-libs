@@ -1,4 +1,16 @@
+import get from 'lodash/get'
+
 import { filterPapersByThemeAndSearchValue, hasItemByLabel } from './helpers'
+
+const locales = {
+  items: {
+    isp_invoice: 'Facture internet',
+    driver_license: 'Permis de conduire',
+    phone_invoice: 'Facture téléphonique'
+  }
+}
+
+const scannerT = x => get(locales, x)
 
 const files = [
   {
@@ -13,33 +25,35 @@ const files = [
   },
   {
     _id: 'file03',
-    name: 'Facture téléphonique',
+    name: 'Facture minitel',
     metadata: { qualification: { label: 'phone_invoice' } }
   }
 ]
 
 describe('filterPapersByThemeAndSearchValue', () => {
   describe('with only theme selected', () => {
-    it('should return only the correct files with one qualification label', () => {
+    test('when one qualification label matches', () => {
       const res = filterPapersByThemeAndSearchValue({
         files,
         theme: {
           items: [{ label: 'isp_invoice' }]
         },
-        search: ''
+        search: '',
+        scannerT
       })
 
       expect(res).toHaveLength(1)
       expect(res).toContain(files[0])
     })
 
-    it('should return only the correct files with two qualifiation labels', () => {
+    test('when two qualifiation labels matches', () => {
       const res = filterPapersByThemeAndSearchValue({
         files,
         theme: {
           items: [{ label: 'isp_invoice' }, { label: 'phone_invoice' }]
         },
-        search: ''
+        search: '',
+        scannerT
       })
 
       expect(res).toHaveLength(2)
@@ -49,15 +63,28 @@ describe('filterPapersByThemeAndSearchValue', () => {
   })
 
   describe('with only search value', () => {
-    it('should return only the correct files with search value', () => {
+    test('when names matches', () => {
       const res = filterPapersByThemeAndSearchValue({
         files,
         theme: '',
-        search: 'facture'
+        search: 'facture',
+        scannerT
       })
 
       expect(res).toHaveLength(2)
       expect(res).toContain(files[0])
+      expect(res).toContain(files[2])
+    })
+
+    test('when qualification labels matches', () => {
+      const res = filterPapersByThemeAndSearchValue({
+        files,
+        theme: '',
+        search: 'téléphonique',
+        scannerT
+      })
+
+      expect(res).toHaveLength(1)
       expect(res).toContain(files[2])
     })
   })
@@ -69,7 +96,8 @@ describe('filterPapersByThemeAndSearchValue', () => {
         theme: {
           items: [{ label: 'isp_invoice' }]
         },
-        search: 'facture'
+        search: 'facture',
+        scannerT
       })
 
       expect(res).toHaveLength(1)

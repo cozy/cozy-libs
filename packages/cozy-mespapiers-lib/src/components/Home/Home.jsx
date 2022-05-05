@@ -15,6 +15,7 @@ import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { buildFilesQueryByLabels } from '../../helpers/queries'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 
 const {
@@ -25,6 +26,7 @@ const Home = () => {
   const [searchValue, setSearchValue] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
   const { t } = useI18n()
+  const scannerT = useScannerI18n()
   const { papersDefinitions } = usePapersDefinitions()
   const labels = papersDefinitions.map(paper => paper.label)
   const filesQueryByLabels = buildFilesQueryByLabels(labels)
@@ -44,7 +46,8 @@ const Home = () => {
   const filteredPapers = filterPapersByThemeAndSearchValue({
     files: allPapersByCategories,
     theme: selectedTheme,
-    search: searchValue
+    search: searchValue,
+    scannerT
   })
 
   const featuredPlaceholders = useMemo(
