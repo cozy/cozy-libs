@@ -492,7 +492,7 @@
             {
               "name": "cardNumber",
               "type": "number",
-              "maxLength": 12,
+              "mask": "9 9 9 9 9 9 9 9 9 9 9 9",
               "inputLabel": "PaperJSON.card.number.inputLabel"
             }
           ]
