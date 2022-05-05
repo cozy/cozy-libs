@@ -35,6 +35,15 @@ export const getPaperDefinitionByLabel = (files, paperDefinition) => {
 }
 
 /**
+ * Whether a paper is supported and creatable
+ * @param {PaperDefinition} paperDefinition - PapersDefinition
+ * @returns {boolean}
+ */
+export const isPaperEnabled = paperDefinition =>
+  paperDefinition.acquisitionSteps.length > 0 ||
+  paperDefinition.connectorCriteria
+
+/**
  * Filters and sorts the list of featured Placeholders.
  * @param {PaperDefinition[]} papersDefinitions Array of PapersDefinition
  * @param {IOCozyFile[]} files Array of IOCozyFile
@@ -59,8 +68,7 @@ export const getFeaturedPlaceholders = ({
       paperDefinition =>
         getPaperDefinitionByLabel(files, paperDefinition) &&
         paperDefinition.placeholderIndex &&
-        (paperDefinition.acquisitionSteps.length > 0 ||
-          paperDefinition.connectorCriteria)
+        isPaperEnabled(paperDefinition)
     )
   }
 
