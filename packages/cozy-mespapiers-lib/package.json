@@ -1,6 +1,6 @@
 {
   "name": "cozy-mespapiers-lib",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Cozy Mes papiers lib",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
@@ -37,11 +37,11 @@
     "@material-ui/core": "4.12.3",
     "@material-ui/pickers": "3.3.10",
     "date-fns": "2.23.0",
+    "fuse.js": "6.6.0",
     "mui-bottom-sheet": "https://github.com/cozy/mui-bottom-sheet.git#v1.0.6",
     "node-polyglot": "^2.4.0",
     "pdf-lib": "1.17.1",
-    "react-input-mask": "3.0.0-alpha.2",
-    "fuse.js": "6.6.0"
+    "react-input-mask": "3.0.0-alpha.2"
   },
   "peerDependencies": {
     "cozy-client": ">=28.2.1",

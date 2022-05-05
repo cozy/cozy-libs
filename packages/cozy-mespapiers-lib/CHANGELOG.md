@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.14.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.13.0...cozy-mespapiers-lib@0.14.0) (2022-05-05)
+
+
+### Features
+
+* Add `name` in attributes selected for buildFilesQueryByLabels ([d66c975](https://github.com/cozy/cozy-libs/commit/d66c975670761343032c72af23590c691a0b89c1))
+* Add fuse.js to handle search ([5b33432](https://github.com/cozy/cozy-libs/commit/5b334320441c915b2f5ed7c10ebcd7c0f81d3ad0))
+* Add search by qualification name ([133f4ee](https://github.com/cozy/cozy-libs/commit/133f4eef98db818bc05ec93d32abb4c86e49fd54))
+* Add search input to filter files by name ([f8db24b](https://github.com/cozy/cozy-libs/commit/f8db24b1ef048168d31b6ee1299757b90b56ff6d))
+* Add SearchInput ([f7bc7f5](https://github.com/cozy/cozy-libs/commit/f7bc7f5710d7c8f6feab4ebc9a3b9a60ef0a9b1f))
+
+
+
+
+
 # [0.13.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.12.0...cozy-mespapiers-lib@0.13.0) (2022-05-05)
 
 
