@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
+import InputMask from 'react-input-mask'
 
 import TextField from 'cozy-ui/transpiled/react/MuiCozyTheme/TextField'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -9,10 +10,17 @@ import {
   makeConstraintsOfInput
 } from '../../../utils/input'
 
-const acceptEntry = (value, expectedLength) => {
-  return expectedLength.max >= expectedLength.min && expectedLength.max > 0
-    ? value.length <= expectedLength.max
-    : true
+const styleFontMono = 'Segoe UI Mono, SF Mono, Roboto Mono, Courier'
+
+const getInputMode = (inputType, mask) => {
+  if (mask) {
+    // If the mask attribute contains "*" or "a", it can contain text
+    // So on mobile, we want to display the text keyboard
+    const hasText = ['*', 'a'].some(t => mask.includes(t))
+    return hasText ? 'text' : 'numeric'
+  }
+
+  return inputType === 'number' ? 'numeric' : 'text'
 }
 
 const InputTextAdapter = ({
@@ -23,14 +31,21 @@ const InputTextAdapter = ({
   setIsFocus,
   idx
 }) => {
-  const { name, inputLabel, ...otherInputProps } = attrs
+  const {
+    name,
+    inputLabel,
+    mask,
+    maskPlaceholder = '_',
+    maxLength,
+    minLength
+  } = attrs
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
 
   const { inputType, expectedLength, isRequired } = useMemo(
-    () => makeConstraintsOfInput(otherInputProps),
-    [otherInputProps]
+    () => makeConstraintsOfInput(attrs),
+    [attrs]
   )
   const isValidInputValue = useMemo(
     () =>
@@ -56,25 +71,26 @@ const InputTextAdapter = ({
     - Avoid poor integration of the "number" field (control arrows on the right in the field)
   The "inputMode" is important to trigger the right keyboard on iOS > 12.1
   */
-  const handleOnChange = useCallback(
-    evt => {
-      const { value: targetValue } = evt.target
+  const handleOnChange = evt => {
+    const { value: targetValue } = evt.target
+    let currentValue = targetValue
 
-      if (inputType === 'number') {
-        const parseIntValue = parseInt(targetValue, 10)
-        if (/^[0-9]*$/.test(parseIntValue)) {
-          if (acceptEntry(targetValue, expectedLength)) {
-            setCurrentValue(parseIntValue.toString())
-          }
-        } else if (targetValue === '') setCurrentValue(targetValue)
-      } else {
-        if (acceptEntry(targetValue, expectedLength)) {
-          setCurrentValue(targetValue)
-        }
+    if (mask) {
+      const toReplace = new RegExp(`\\s|${maskPlaceholder}`, 'g')
+      currentValue = targetValue.replaceAll(toReplace, '')
+    }
+
+    if (inputType === 'number' && !mask) {
+      const parseIntValue = parseInt(currentValue, 10)
+      if (/^[0-9]*$/.test(parseIntValue)) {
+        setCurrentValue(parseIntValue.toString())
+      } else if (currentValue === '') {
+        setCurrentValue(currentValue)
       }
-    },
-    [expectedLength, inputType]
-  )
+    } else {
+      setCurrentValue(currentValue)
+    }
+  }
 
   const handleOnFocus = () => {
     setIsFocus(true)
@@ -86,6 +102,8 @@ const InputTextAdapter = ({
     if (currentValue.length > 0) {
       setIsTooShort(
         expectedLength.min > 0 && currentValue.length < expectedLength.min
+      )
+    } else setIsTooShort(false)
   }
 
   const helperText = isTooShort
@@ -94,22 +112,53 @@ const InputTextAdapter = ({
       })
     : ''
 
+  if (mask) {
+    return (
+      <InputMask
+        mask={mask}
+        maskPlaceholder={maskPlaceholder}
+        value={currentValue}
+        onChange={handleOnChange}
+        onFocus={handleOnFocus}
+        onBlur={handleOnBlur}
+      >
+        <TextField
+          type="text"
+          variant="outlined"
+          label={inputLabel ? t(inputLabel) : ''}
+          error={isTooShort}
+          helperText={helperText}
+          inputProps={{
+            style: { fontFamily: styleFontMono },
+            inputMode: getInputMode(inputType, mask),
+            'data-testid': 'InputMask-TextField-input'
+          }}
+          required={isRequired}
+          fullWidth
+        />
+      </InputMask>
+    )
+  }
+
   return (
     <TextField
-      value={currentValue}
-      inputType={inputType}
+      type="text"
+      variant="outlined"
+      label={inputLabel ? t(inputLabel) : ''}
       error={isTooShort}
-      onBlur={handleOnBlur}
-      onFocus={handleOnFocus}
       helperText={helperText}
+      value={currentValue}
       inputProps={{
-        inputMode: inputType === 'number' ? 'numeric' : 'text'
+        maxLength: maxLength,
+        minLength: minLength,
+        inputMode: getInputMode(inputType),
+        'data-testid': 'TextField-input'
       }}
       onChange={handleOnChange}
-      variant={'outlined'}
-      label={inputLabel ? t(inputLabel) : ''}
-      fullWidth
+      onFocus={handleOnFocus}
+      onBlur={handleOnBlur}
       required={isRequired}
+      fullWidth
     />
   )
 }
@@ -120,7 +169,9 @@ const attrsProptypes = PropTypes.shape({
   type: PropTypes.string,
   required: PropTypes.bool,
   minLength: PropTypes.number,
-  maxLength: PropTypes.number
+  maxLength: PropTypes.number,
+  mask: PropTypes.string,
+  maskPlaceholder: PropTypes.string
 })
 
 InputTextAdapter.propTypes = {
