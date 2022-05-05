@@ -1,6 +1,7 @@
 'use strict'
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { fireEvent, render } from '@testing-library/react'
+import '@testing-library/jest-dom'
 
 import AppLike from '../../../../test/components/AppLike'
 import InputTextAdapter from './InputTextAdapter'
@@ -14,64 +15,167 @@ const mockAttrs = ({
   maxLength = 0,
   minLength = 0,
   required = false,
-  defaultValue = 'fakeValue'
-}) => ({
-  name: 'name01',
-  inputLabel: 'PaperJSON.IDCard.number.inputLabel',
-  defaultValue,
-  required,
-  minLength,
-  maxLength,
-  type
-})
-
-const setup = (attrs = mockAttrs({})) => {
-  const value = attrs.defaultValue
-  const container = render(
-    <AppLike>
-      <InputTextAdapter
-        attrs={attrs}
-        defaultValue={value}
-        setValue={jest.fn()}
-        setValidInput={jest.fn()}
-      />
-    </AppLike>
-  )
-  const input = container.getByDisplayValue(value)
-
+  mask = null,
+  maskPlaceholder = '_'
+} = {}) => {
   return {
-    input,
-    ...container
+    name: 'name01',
+    inputLabel: 'PaperJSON.IDCard.number.inputLabel',
+    required,
+    minLength,
+    maxLength,
+    type,
+    mask,
+    maskPlaceholder
   }
 }
 
+const setup = ({ attrs = mockAttrs(), defaultValue = '' } = {}) => {
+  return render(
+    <AppLike>
+      <InputTextAdapter
+        attrs={attrs}
+        defaultValue={defaultValue}
+        setValue={jest.fn()}
+        setValidInput={jest.fn()}
+        setIsFocus={jest.fn()}
+        idx={0}
+      />
+    </AppLike>
+  )
+}
+
 describe('InputTextAdapter components:', () => {
-  it('should be rendered correctly', () => {
-    const { container } = setup()
+  describe('With "mask" attribute', () => {
+    it('should have the "minlength" property at 0', () => {
+      const { getByTestId } = setup({ attrs: { minLength: 2, mask: '** **' } })
+      const input = getByTestId('InputMask-TextField-input')
 
-    expect(container).toBeDefined()
+      expect(input).not.toHaveAttribute('minLength')
+    })
+
+    it('should have the "maxlength" property equal to max length default', () => {
+      const { getByTestId } = setup({
+        attrs: { minLength: 2, maxLength: 5, mask: '** **' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+
+      expect(input).not.toHaveAttribute('maxLength')
+    })
+
+    it('should have a correctly formatted value', () => {
+      const { getByTestId } = setup({
+        attrs: { mask: '** **' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+      fireEvent.change(input, { target: { value: 'text value' } })
+
+      expect(input).toHaveAttribute('value', 'te xt')
+    })
+
+    it('should have a value with text and numbers', () => {
+      const { getByTestId } = setup({
+        attrs: { mask: '****' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+      fireEvent.change(input, { target: { value: 'aB12' } })
+
+      expect(input).toHaveAttribute('value', 'aB12')
+    })
+
+    it('should have no value if you type letters with the "mask" property accepts only numbers', () => {
+      const { getByTestId } = setup({
+        attrs: { mask: '9999' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+      fireEvent.change(input, { target: { value: 'text' } })
+
+      expect(input).toHaveAttribute('value', '')
+    })
+
+    it('should have no value if you type numbers with the "mask" property accepts only letters', () => {
+      const { getByTestId } = setup({
+        attrs: { mask: 'aaaa' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+      fireEvent.change(input, { target: { value: '1234' } })
+
+      expect(input).toHaveAttribute('value', '')
+    })
+
+    it('should have a "maskPlaceholder" defined to "_" by default', () => {
+      const { getByTestId } = setup({
+        attrs: { mask: '**' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+      fireEvent.change(input, { target: { value: 'a' } })
+
+      expect(input).toHaveAttribute('value', 'a_')
+    })
+
+    it('should have a "-" like "maskPlaceholder"', () => {
+      const { getByTestId } = setup({
+        attrs: { mask: '**', maskPlaceholder: '-' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+      fireEvent.change(input, { target: { value: 'a' } })
+
+      expect(input).toHaveAttribute('value', 'a-')
+    })
+
+    it('should have the "inputMode" property at "numeric" if mask cannot contain text', () => {
+      const { getByTestId } = setup({
+        attrs: { type: 'text', mask: '9999' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+
+      expect(input).toHaveAttribute('inputMode', 'numeric')
+    })
+
+    it('should have the "inputMode" property at "text" if mask can contain text', () => {
+      const { getByTestId } = setup({
+        attrs: { type: 'number', mask: '99aa' }
+      })
+      const input = getByTestId('InputMask-TextField-input')
+
+      expect(input).toHaveAttribute('inputMode', 'text')
+    })
   })
 
-  it('should have a value of 5 letters', () => {
-    const { input } = setup(mockAttrs({ maxLength: 5 }))
-    fireEvent.change(input, { target: { value: 'abcde' } })
+  describe('Without "mask" attribute', () => {
+    it('should have the "minlength" property at 2', () => {
+      const { getByTestId } = setup({ attrs: { minLength: 2 } })
+      const input = getByTestId('TextField-input')
 
-    expect(input.value).toBe('abcde')
-  })
+      expect(input).toHaveAttribute('minLength', '2')
+    })
 
-  it('should have a maximum of 5 characters', () => {
-    const { input } = setup(mockAttrs({ maxLength: 5 }))
-    fireEvent.change(input, { target: { value: 'abcdefgh' } })
-    expect(input.value).toBe('fakeValue')
+    it('should have the "maxlength" property at 5', () => {
+      const { getByTestId } = setup({ attrs: { maxLength: 5 } })
+      const input = getByTestId('TextField-input')
 
-    fireEvent.change(input, { target: { value: '123456789' } })
-    expect(input.value).toBe('fakeValue')
-  })
+      expect(input).toHaveAttribute('maxLength', '5')
+    })
 
-  it('should have a value of 5 digits', () => {
-    const { input } = setup(mockAttrs({ type: 'number', maxLength: 5 }))
-    fireEvent.change(input, { target: { value: '12345' } })
+    it('should have the "inputMode" property at "numeric"', () => {
+      const { getByTestId } = setup({ attrs: { type: 'number' } })
+      const input = getByTestId('TextField-input')
 
-    expect(parseInt(input.value, 10)).toBe(12345)
+      expect(input).toHaveAttribute('inputMode', 'numeric')
+    })
+
+    it('should have the "inputMode" property at "text"', () => {
+      const { getByTestId } = setup({ attrs: { type: 'text' } })
+      const input = getByTestId('TextField-input')
+
+      expect(input).toHaveAttribute('inputMode', 'text')
+    })
+
+    it('should have the "inputMode" property at "text" by default', () => {
+      const { getByTestId } = setup({ attrs: { type: '' } })
+      const input = getByTestId('TextField-input')
+
+      expect(input).toHaveAttribute('inputMode', 'text')
+    })
   })
 })
