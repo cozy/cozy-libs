@@ -99,7 +99,7 @@ const ContactWrapper = ({ currentStep, onClose }) => {
           fullWidth
           label={t(!onLoad ? 'ContactStep.save' : 'ContactStep.onLoad')}
           onClick={handleClick}
-          disabled={onLoad}
+          disabled={onLoad || contactIdsSelected.length === 0}
           busy={onLoad}
           data-testid="ButtonSave"
         />
