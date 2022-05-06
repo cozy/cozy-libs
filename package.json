@@ -18,7 +18,7 @@
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:md": "remark . -o",
     "test": "lerna run --concurrency 1 test",
-    "build": "lerna run --parallel build",
+    "build": "lerna run --scope cozy-device-helper build && lerna run --parallel --ignore cozy-device-helper build",
     "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js",
     "check-constraints": "node scripts/check-packages-constraints.js"
   },
