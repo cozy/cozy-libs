@@ -117,6 +117,7 @@ const InputTextAdapter = ({
       <InputMask
         mask={mask}
         maskPlaceholder={maskPlaceholder}
+        alwaysShowMask
         value={currentValue}
         onChange={handleOnChange}
         onFocus={handleOnFocus}
@@ -129,7 +130,14 @@ const InputTextAdapter = ({
           error={isTooShort}
           helperText={helperText}
           inputProps={{
-            style: { fontFamily: styleFontMono },
+            style: {
+              fontFamily: styleFontMono,
+              caretColor: 'var(--primaryTextColor)',
+              transition: 'color 0.5s',
+              color: currentValue
+                ? 'var(--primaryTextColor)'
+                : 'var(--hintTextColor)'
+            },
             inputMode: getInputMode(inputType, mask),
             'data-testid': 'InputMask-TextField-input'
           }}
