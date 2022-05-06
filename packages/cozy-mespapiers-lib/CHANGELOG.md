@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.17.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.16.1...cozy-mespapiers-lib@0.17.0) (2022-05-06)
+
+
+### Features
+
+* **cozy-mespapiers-lib:** Always Display the maskPlaceholder ([3cdd0ec](https://github.com/cozy/cozy-libs/commit/3cdd0ec3b61d3b3d5aef2eefcacedf79830d187f))
+
+
+
+
+
 ## [0.16.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.16.0...cozy-mespapiers-lib@0.16.1) (2022-05-05)
 
 
