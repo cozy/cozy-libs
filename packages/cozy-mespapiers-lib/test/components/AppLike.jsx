@@ -6,6 +6,7 @@ import { CozyProvider, createMockClient } from 'cozy-client'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { WebviewIntentProvider } from 'cozy-intent'
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 
 import { StepperDialogProvider } from '../../src/components/Contexts/StepperDialogProvider'
 import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
@@ -30,15 +31,17 @@ const AppLike = ({ children, client, history }) => {
       <CozyProvider client={client || mockClient}>
         <I18n dictRequire={() => enLocale} lang={'en'}>
           <ScannerI18nProvider lang={'en'}>
-            <BreakpointsProvider>
-              <PapersDefinitionsProvider>
-                <StepperDialogProvider>
-                  <ModalProvider>
-                    <HashRouter history={hashHistory}>{children}</HashRouter>
-                  </ModalProvider>
-                </StepperDialogProvider>
-              </PapersDefinitionsProvider>
-            </BreakpointsProvider>
+            <MuiCozyTheme>
+              <BreakpointsProvider>
+                <PapersDefinitionsProvider>
+                  <StepperDialogProvider>
+                    <ModalProvider>
+                      <HashRouter history={hashHistory}>{children}</HashRouter>
+                    </ModalProvider>
+                  </StepperDialogProvider>
+                </PapersDefinitionsProvider>
+              </BreakpointsProvider>
+            </MuiCozyTheme>
           </ScannerI18nProvider>
         </I18n>
       </CozyProvider>
