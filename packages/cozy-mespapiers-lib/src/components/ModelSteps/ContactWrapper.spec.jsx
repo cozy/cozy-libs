@@ -22,7 +22,6 @@ jest.mock('../../helpers/fetchCurrentUser', () => ({
 jest.mock('./widgets/ConfirmReplaceFile', () => () => (
   <div data-testid="ConfirmReplaceFile" />
 ))
-jest.mock('./ContactList', () => () => <div data-testid="ContactList" />)
 /* eslint-enable react/display-name */
 
 const setup = ({
@@ -34,6 +33,7 @@ const setup = ({
   fetchCurrentUser.mockImplementation(mockFetchCurrentUser)
   useFormData.mockReturnValue({
     formData,
+    setFormData: jest.fn(),
     formSubmit
   })
 
@@ -47,15 +47,17 @@ const setup = ({
 }
 
 describe('ContactWrapper', () => {
-  it('should submit when save button is clicked, if the file is from Cozy Drive', () => {
+  it('should submit when save button is clicked, if the file is from user device', async () => {
     const mockFormSubmit = jest.fn()
+    const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
     const userDeviceFile = new File([{}], 'userDeviceFile')
-    const { getByTestId } = setup({
+    const { findByTestId } = setup({
       formData: mockFormData({ data: [{ file: userDeviceFile }] }),
-      formSubmit: mockFormSubmit
+      formSubmit: mockFormSubmit,
+      mockFetchCurrentUser
     })
 
-    const btn = getByTestId('ButtonSave')
+    const btn = await findByTestId('ButtonSave')
     fireEvent.click(btn)
 
     expect(mockFormSubmit).toBeCalledTimes(1)
@@ -83,9 +85,11 @@ describe('ContactWrapper', () => {
   })
 
   it('should not diplay ConfirmReplaceFile modal when save button is clicked, if the file is from User Device', () => {
+    const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
     const userDeviceFile = new File([{}], 'userDeviceFile')
     const { getByTestId, queryByTestId } = setup({
-      formData: mockFormData({ data: [{ file: userDeviceFile }] })
+      formData: mockFormData({ data: [{ file: userDeviceFile }] }),
+      mockFetchCurrentUser
     })
 
     const btn = getByTestId('ButtonSave')
@@ -94,13 +98,15 @@ describe('ContactWrapper', () => {
     expect(queryByTestId('ConfirmReplaceFile')).toBeNull()
   })
 
-  it('should diplay ConfirmReplaceFile modal when save button is clicked, if the file is from Cozy Drive', () => {
+  it('should diplay ConfirmReplaceFile modal when save button is clicked, if the file is from Cozy Drive', async () => {
+    const mockFetchCurrentUser = jest.fn(() => ({ _id: '1234' }))
     const cozyFile = new Blob()
-    const { getByTestId } = setup({
-      formData: mockFormData({ data: [{ file: cozyFile }] })
+    const { findByTestId, getByTestId } = setup({
+      formData: mockFormData({ data: [{ file: cozyFile }] }),
+      mockFetchCurrentUser
     })
 
-    const btn = getByTestId('ButtonSave')
+    const btn = await findByTestId('ButtonSave')
     fireEvent.click(btn)
 
     expect(getByTestId('ConfirmReplaceFile'))

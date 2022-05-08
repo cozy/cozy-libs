@@ -83,24 +83,24 @@ describe('InputTextAdapter components:', () => {
       expect(input).toHaveAttribute('value', 'aB12')
     })
 
-    it('should have no value if you type letters with the "mask" property accepts only numbers', () => {
+    it('should have only maskPlaceholder value if you type letters with the "mask" property accepts only numbers', () => {
       const { getByTestId } = setup({
         attrs: { mask: '9999' }
       })
       const input = getByTestId('InputMask-TextField-input')
       fireEvent.change(input, { target: { value: 'text' } })
 
-      expect(input).toHaveAttribute('value', '')
+      expect(input).toHaveAttribute('value', '____')
     })
 
-    it('should have no value if you type numbers with the "mask" property accepts only letters', () => {
+    it('should have only maskPlaceholder if you type numbers with the "mask" property accepts only letters', () => {
       const { getByTestId } = setup({
         attrs: { mask: 'aaaa' }
       })
       const input = getByTestId('InputMask-TextField-input')
       fireEvent.change(input, { target: { value: '1234' } })
 
-      expect(input).toHaveAttribute('value', '')
+      expect(input).toHaveAttribute('value', '____')
     })
 
     it('should have a "maskPlaceholder" defined to "_" by default', () => {
