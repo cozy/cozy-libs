@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.2.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.2.0...cozy-harvest-lib@9.2.1) (2022-05-09)
+
+
+### Bug Fixes
+
+* bump react-dom from 16.12.0 to 16.13.0 ([2a5b850](https://github.com/cozy/cozy-libs/commit/2a5b8509555f061b136a4b5f2e38b36eb75ea0be))
+
+
+
+
+
 # [9.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.1.2...cozy-harvest-lib@9.2.0) (2022-05-09)
 
 

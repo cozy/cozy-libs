@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.19.0 (2022-05-09)
+
+
+### Features
+
+* Add papers filter on Home ([fd839dc](https://github.com/cozy/cozy-libs/commit/fd839dc6d2538799d8dafc1905d423410c251df6))
+
+
+
+
+
 ## [1.18.64](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.18.63...cozy-playgrounds@1.18.64) (2022-04-28)
 
 **Note:** Version bump only for package cozy-playgrounds

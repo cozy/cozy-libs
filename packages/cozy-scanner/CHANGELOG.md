@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.2.0 (2022-05-09)
+
+
+### Bug Fixes
+
+* bump react-dom from 16.12.0 to 16.13.0 ([2a5b850](https://github.com/cozy/cozy-libs/commit/2a5b8509555f061b136a4b5f2e38b36eb75ea0be))
+
+
+### Features
+
+* Add papers filter on Home ([fd839dc](https://github.com/cozy/cozy-libs/commit/fd839dc6d2538799d8dafc1905d423410c251df6))
+
+
+
+
+
 ## [2.1.5](https://github.com/cozy/cozy-libs/compare/cozy-scanner@2.1.4...cozy-scanner@2.1.5) (2022-05-03)
 
 
