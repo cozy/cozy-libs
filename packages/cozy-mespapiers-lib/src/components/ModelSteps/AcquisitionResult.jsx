@@ -1,8 +1,8 @@
 import React, { memo, useCallback, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { makeStyles } from '@material-ui/core/styles'
 import cx from 'classnames'
 
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import Card from 'cozy-ui/transpiled/react/Card'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
 import Typography from 'cozy-ui/transpiled/react/Typography'

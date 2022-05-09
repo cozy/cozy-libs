@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { makeStyles } from '@material-ui/styles'
 
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import {
   useCozyDialog,
   DialogBackButton,

@@ -1,8 +1,8 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
-import { makeStyles } from '@material-ui/styles'
 import cx from 'classnames'
 
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import { useLocation } from 'react-router-dom'
 import Fab from 'cozy-ui/transpiled/react/Fab'
 import Icon from 'cozy-ui/transpiled/react/Icon'

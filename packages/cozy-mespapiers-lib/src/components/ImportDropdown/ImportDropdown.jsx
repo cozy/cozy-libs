@@ -1,9 +1,9 @@
 import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { makeStyles } from '@material-ui/core/styles'
 
 import { useClient, generateWebLink } from 'cozy-client'
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'

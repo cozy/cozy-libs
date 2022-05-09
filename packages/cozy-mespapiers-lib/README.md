@@ -102,9 +102,9 @@ Here an example with overrided style of `PapersFab`:
 /* global cozy */
 
 import React from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 
 import MesPapiers, { PapersFab } from 'cozy-mespapiers-lib'
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'

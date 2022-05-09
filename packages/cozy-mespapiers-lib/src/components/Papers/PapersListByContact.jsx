@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react'
-import { makeStyles } from '@material-ui/core/styles'
 import PropTypes from 'prop-types'
 
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
