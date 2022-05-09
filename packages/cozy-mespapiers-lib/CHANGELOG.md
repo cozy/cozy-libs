@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.17.4...cozy-mespapiers-lib@0.18.0) (2022-05-09)
+
+
+### Features
+
+* Add the documentation for papersDefinitions configuration file ([3a29932](https://github.com/cozy/cozy-libs/commit/3a299321a335c2bb0f04f04d819807f5a6f474e6))
+
+
+
+
+
 ## [0.17.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.17.3...cozy-mespapiers-lib@0.17.4) (2022-05-09)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
