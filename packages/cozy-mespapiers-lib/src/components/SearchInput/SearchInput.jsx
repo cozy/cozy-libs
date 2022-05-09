@@ -8,14 +8,22 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
   input: {
     borderRadius: '25px',
+    height: '40px',
+    boxShadow: theme.shadows[1],
+    border: '1px solid transparent',
+    '&:hover, &:focus, &:active': {
+      border: '1px solid transparent',
+      boxShadow: theme.shadows[6]
+    },
     '& input': {
-      borderRadius: '25px'
+      borderRadius: '25px',
+      height: '38px'
     }
   }
-})
+}))
 
 const SearchInput = ({ setSearchValue }) => {
   const { t } = useI18n()
@@ -37,7 +45,7 @@ const SearchInput = ({ setSearchValue }) => {
         <Icon
           className="u-pl-1"
           icon={MagnifierIcon}
-          color="var(--iconTextColor)"
+          color="var(--secondaryTextColor)"
         />
       }
     >
