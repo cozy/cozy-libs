@@ -1,4 +1,4 @@
-const validate = require('schema-utils')
+const { validate } = require('schema-utils')
 
 const { ConfigError } = require('./errors')
 
