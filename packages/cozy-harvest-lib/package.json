@@ -37,7 +37,7 @@
     "microee": "^0.0.6",
     "node-polyglot": "^2.4.0",
     "react-final-form": "^3.7.0",
-    "react-markdown": "^4.2.2",
+    "react-markdown": "^8.0.3",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
