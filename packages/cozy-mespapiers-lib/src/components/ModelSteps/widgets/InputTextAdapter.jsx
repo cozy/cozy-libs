@@ -35,7 +35,7 @@ const InputTextAdapter = ({
     name,
     inputLabel,
     mask,
-    maskPlaceholder = '_',
+    maskPlaceholder = 'ˍ',
     maxLength,
     minLength
   } = attrs
