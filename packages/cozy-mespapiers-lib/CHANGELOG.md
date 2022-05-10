@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.19.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.18.1...cozy-mespapiers-lib@0.19.0) (2022-05-10)
+
+
+### Bug Fixes
+
+* Remove mask on national id card ([a017342](https://github.com/cozy/cozy-libs/commit/a01734261650fc321334a773f327cba947cb85c5))
+
+
+### Features
+
+* Align text value in inputMask ([e029877](https://github.com/cozy/cozy-libs/commit/e029877d194310fdbdc3703d4b4b48e1e179f09f))
+* Change type of input on driver license ([a23f84f](https://github.com/cozy/cozy-libs/commit/a23f84fcba30f3aacb25bf56ec103328c6fe55d3))
+
+
+
+
+
 ## [0.18.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.18.0...cozy-mespapiers-lib@0.18.1) (2022-05-10)
 
 
