@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.18.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.18.0...cozy-mespapiers-lib@0.18.1) (2022-05-10)
+
+
+### Bug Fixes
+
+* Shadow and style of SearchInput ([cee019b](https://github.com/cozy/cozy-libs/commit/cee019bdd5950105fc124936f72ff4af7535ad93))
+
+
+
+
+
 # [0.18.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.17.4...cozy-mespapiers-lib@0.18.0) (2022-05-09)
 
 
