@@ -90,8 +90,8 @@ const PapersListWrapper = ({ history, match }) => {
   return (
     <>
       <BarLeft>
-        <IconButton className={'u-mr-half'} onClick={backButtonAction}>
-          <Icon icon={'previous'} size={16} />
+        <IconButton onClick={backButtonAction}>
+          <Icon icon={'previous'} />
         </IconButton>
       </BarLeft>
       <BarCenter>

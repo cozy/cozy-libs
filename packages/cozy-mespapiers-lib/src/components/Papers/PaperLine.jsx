@@ -91,12 +91,8 @@ const PaperLine = ({ paper, divider, actions }) => {
           className={'u-mr-1'}
         />
         <ListItemSecondaryAction>
-          <IconButton
-            className={'u-pr-1'}
-            onClick={toggleActionsMenu}
-            ref={actionBtnRef}
-          >
-            <Icon icon={'dots'} size={16} />
+          <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
+            <Icon icon={'dots'} />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
