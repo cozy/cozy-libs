@@ -164,6 +164,12 @@
         "inputLabel": "Document name (40 letters max.)"
       }
     },
+    "bankDetails": {
+      "ibanNumber": {
+        "inputLabel": "IBAN",
+        "text": "Enter your IBAN number"
+      }
+    },
     "driverLicense": {
       "BObtentionDate": {
         "inputLabel": "Car"

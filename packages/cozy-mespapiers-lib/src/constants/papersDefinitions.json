@@ -65,6 +65,19 @@
         },
         {
           "stepIndex": 2,
+          "model": "information",
+          "text": "PaperJSON.bankDetails.ibanNumber.text",
+          "attributes": [
+            {
+              "name": "ibanNumber",
+              "type": "text",
+              "mask": "aa** **** **** **** **** **** ***",
+              "inputLabel": "PaperJSON.bankDetails.ibanNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
           "model": "owner",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
