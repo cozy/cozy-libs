@@ -190,7 +190,7 @@
           "attributes": [
             {
               "name": "number",
-              "type": "number",
+              "type": "text",
               "maxLength": 12,
               "inputLabel": "PaperJSON.driverLicense.number.inputLabel"
             }
