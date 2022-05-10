@@ -48,7 +48,7 @@ const SearchInput = ({ setSearchValue }) => {
         />
       }
     >
-      <Input placeholder={t('search')} onChange={handleOnChange} />
+      <Input placeholder={t('common.search')} onChange={handleOnChange} />
     </InputGroup>
   )
 }

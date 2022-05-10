@@ -42,7 +42,8 @@
     "trashFile": {
       "error": "An error has occurred, please try again in a moment.",
       "success": "The selection has been moved to the Trash."
-    }
+    },
+    "search": "Search"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"
@@ -254,6 +255,5 @@
       "text": "Link to my document %{name}: ",
       "title": "Link to my document %{name}"
     }
-  },
-  "search": "Search"
+  }
 }

@@ -42,7 +42,8 @@
     "trashFile": {
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
       "success": "Le document a été déplacé vers la corbeille."
-    }
+    },
+    "search": "Rechercher"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"
@@ -254,6 +255,5 @@
       "text": "Voici un lien vers mon document %{name} : ",
       "title": "Lien vers mon document %{name}"
     }
-  },
-  "search": "Rechercher"
+  }
 }
