@@ -113,7 +113,8 @@ const Information = ({ currentStep }) => {
         text={inputs.map((Input, idx) => (
           <div
             key={idx}
-            className={cx('u-mh-1', {
+            className={cx({
+              'u-mh-1': !isMobile,
               ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
             })}
           >
