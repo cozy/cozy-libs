@@ -133,6 +133,7 @@ const InputTextAdapter = ({
             style: {
               fontFamily: styleFontMono,
               caretColor: 'var(--primaryTextColor)',
+              textAlign: 'center',
               transition: 'color 0.5s',
               color: currentValue
                 ? 'var(--primaryTextColor)'
