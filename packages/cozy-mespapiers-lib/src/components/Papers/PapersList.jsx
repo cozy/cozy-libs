@@ -6,10 +6,9 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import PaperLine from '../Papers/PaperLine'
-import makeActions from '../Actions/makeActions'
 import { useModal } from '../Hooks/useModal'
 import { hr, trash, open, viewInDrive } from '../Actions/Actions'
-import { makeActionVariant } from '../Actions/utils'
+import { makeActionVariant, makeActions } from '../Actions/utils'
 
 const PapersList = ({ papers }) => {
   const client = useClient()

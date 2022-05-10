@@ -7,6 +7,22 @@ import { FILES_DOCTYPE } from '../../doctypes'
 import { getSharingLink } from '../../utils/getSharingLink'
 import { download, forward } from './Actions'
 
+/**
+ * Make array of actions for ActionsItems component
+ *
+ * @param {Function[]} actionCreators - Array of function to create ActionMenuItem components with associated actions and conditions
+ * @param {object} actionOptions - Options that need to be passed on Actions
+ * @returns {object[]} Array of actions
+ */
+export const makeActions = (actionCreators = [], actionOptions = {}) => {
+  return actionCreators.map(createAction => {
+    const actionMenu = createAction(actionOptions)
+    const name = actionMenu.name || createAction.name
+
+    return { [name]: actionMenu }
+  })
+}
+
 export const makeActionVariant = () => {
   return navigator.share ? [download, forward] : [download]
 }
