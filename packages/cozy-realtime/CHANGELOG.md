@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.1.0 (2022-05-10)
+
+
+### Features
+
+* Add `name` in attributes selected for buildFilesQueryByLabels ([d66c975](https://github.com/cozy/cozy-libs/commit/d66c975670761343032c72af23590c691a0b89c1))
+
+
+
+
+
 ## [4.0.8](https://github.com/cozy/cozy-libs/compare/cozy-realtime@4.0.7...cozy-realtime@4.0.8) (2022-04-28)
 
 **Note:** Version bump only for package cozy-realtime

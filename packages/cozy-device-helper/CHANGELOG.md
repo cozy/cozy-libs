@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2022-05-10)
+
+
+### Bug Fixes
+
+* **cozy-device-helper:** Remove type import ([401d654](https://github.com/cozy/cozy-libs/commit/401d654ca7ddb1553ec6039ddb5b4f7708ef5869))
+
+
+### Features
+
+* Add `name` in attributes selected for buildFilesQueryByLabels ([d66c975](https://github.com/cozy/cozy-libs/commit/d66c975670761343032c72af23590c691a0b89c1))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@1.18.0...cozy-device-helper@2.0.0) (2022-04-28)
 
 

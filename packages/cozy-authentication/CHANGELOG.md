@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.9.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.9.0...cozy-authentication@2.9.1) (2022-05-10)
+
+**Note:** Version bump only for package cozy-authentication
+
+
+
+
+
 # 2.9.0 (2022-05-09)
 
 
