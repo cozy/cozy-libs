@@ -1433,6 +1433,19 @@
         },
         {
           "stepIndex": 2,
+          "model": "information",
+          "text": "PaperJSON.vehicleRegistration.vinNumber.text",
+          "attributes": [
+            {
+              "name": "vinNumber",
+              "type": "text",
+              "mask": "aa9 ****** *******",
+              "inputLabel": "PaperJSON.vehicleRegistration.vinNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
           "model": "owner",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
