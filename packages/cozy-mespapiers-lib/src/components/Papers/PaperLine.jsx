@@ -18,6 +18,8 @@ import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
+import FileTypePdfIcon from 'cozy-ui/transpiled/react/icons/FileTypePdf'
+import DotsIcon from 'cozy-ui/transpiled/react/icons/Dots'
 
 import { ActionsItems } from '../Actions/ActionsItems'
 
@@ -55,7 +57,6 @@ const PaperLine = ({ paper, divider, actions }) => {
   return (
     <>
       <ListItem
-        key={paper.id}
         button
         onClick={() =>
           history.push({
@@ -70,32 +71,28 @@ const PaperLine = ({ paper, divider, actions }) => {
             linkType={linkType}
             render={src => {
               return (
-                <CardMedia
-                  component={'img'}
-                  width={32}
-                  height={32}
-                  image={src}
-                />
+                <CardMedia component="img" width={32} height={32} image={src} />
               )
             }}
-            renderFallback={() => <Icon icon={'file-type-pdf'} size={32} />}
+            renderFallback={() => <Icon icon={FileTypePdfIcon} size={32} />}
           />
         </ListItemIcon>
         <ListItemText
+          className="u-mr-1"
           primary={
             validPageName(paperLabel)
               ? t(`PapersList.label.${paperLabel}`)
               : paper.name
           }
           secondary={paperDate}
-          className={'u-mr-1'}
         />
         <ListItemSecondaryAction>
           <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
-            <Icon icon={'dots'} />
+            <Icon icon={DotsIcon} />
           </IconButton>
         </ListItemSecondaryAction>
       </ListItem>
+
       {divider && <Divider variant="inset" component="li" />}
 
       {optionFile && (
@@ -103,7 +100,7 @@ const PaperLine = ({ paper, divider, actions }) => {
           {isMobile && (
             <ActionMenuHeader>
               <Filename
-                icon={'file-type-pdf'}
+                icon={FileTypePdfIcon}
                 filename={filename}
                 extension={extension}
               />
@@ -122,7 +119,8 @@ const PaperLine = ({ paper, divider, actions }) => {
 
 PaperLine.propTypes = {
   paper: PropTypes.object.isRequired,
-  divider: PropTypes.bool
+  divider: PropTypes.bool,
+  actions: PropTypes.array
 }
 
 export default memo(PaperLine)

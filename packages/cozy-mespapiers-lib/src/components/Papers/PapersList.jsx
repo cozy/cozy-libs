@@ -38,7 +38,7 @@ const PapersList = ({ papers }) => {
         (paper, idx) =>
           idx + 1 <= maxDisplay && (
             <PaperLine
-              key={idx}
+              key={paper.id}
               paper={paper}
               divider={idx !== papers.list.length - 1}
               actions={actions}
