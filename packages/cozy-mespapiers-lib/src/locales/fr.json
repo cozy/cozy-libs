@@ -170,6 +170,12 @@
         "text": "Saisissez votre numéro d'IBAN"
       }
     },
+    "vehicleRegistration": {
+      "vinNumber": {
+        "inputLabel": "Numéro en position E. de votre carte crise",
+        "text": "Saisissez le Numéro d'identification du véhicule (VIN)"
+      }
+    },
     "driverLicense": {
       "BObtentionDate": {
         "inputLabel": "Voiture (B)"
