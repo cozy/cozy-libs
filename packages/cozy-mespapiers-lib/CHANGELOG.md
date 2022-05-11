@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.21.1...cozy-mespapiers-lib@0.22.0) (2022-05-11)
+
+
+### Bug Fixes
+
+* Adjust input size for information step ([ec3d6a3](https://github.com/cozy/cozy-libs/commit/ec3d6a3eed9ebc7d11b021cbab01ada3bfe8c4e8))
+
+
+### Features
+
+* Add information step to bank_details paper ([34d8f0d](https://github.com/cozy/cozy-libs/commit/34d8f0d35f0275ca4ce3e55103a20318a3ca14cd))
+* Add information step to vehicle_registration paper ([783b589](https://github.com/cozy/cozy-libs/commit/783b5891d01eea4769f36145720d7dd510a1a69f))
+* Change character by default for the maskPlaceholder ([5769d31](https://github.com/cozy/cozy-libs/commit/5769d31062e5efd109c74cdcebb678be30f0185b))
+
+
+
+
+
 ## [0.21.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.21.0...cozy-mespapiers-lib@0.21.1) (2022-05-10)
 
 **Note:** Version bump only for package cozy-mespapiers-lib

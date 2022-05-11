@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.4 (2022-05-11)
+
+
+### Bug Fixes
+
+* **cozy-intent:** Allow to register webviews with baseUrl and no uri ([73e882c](https://github.com/cozy/cozy-libs/commit/73e882c739d643b72d5c1da4c4a510761c5678ea)), closes [/github.com/react-native-webview/react-native-webview/blob/a36394f598944c1ffe288f739b7441830249dc1e/apple/RNCWebView.m#L679-L686](https://github.com//github.com/react-native-webview/react-native-webview/blob/a36394f598944c1ffe288f739b7441830249dc1e/apple/RNCWebView.m/issues/L679-L686) [/github.com/react-native-webview/react-native-webview/blob/a36394f598944c1ffe288f739b7441830249dc1e/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManager.java#L513-L518](https://github.com//github.com/react-native-webview/react-native-webview/blob/a36394f598944c1ffe288f739b7441830249dc1e/android/src/main/java/com/reactnativecommunity/webview/RNCWebViewManager.java/issues/L513-L518)
+* **repo-doctor:** Dep schema-utils breaks job ([7f5a5da](https://github.com/cozy/cozy-libs/commit/7f5a5daa6ccf91e6c9027e58dbb49ff9176e17df))
+
+
+
+
+
 ## [0.7.3](https://github.com/cozy/cozy-libs/compare/@cozy/repo-doctor@0.7.2...@cozy/repo-doctor@0.7.3) (2022-04-29)
 
 
