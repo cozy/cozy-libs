@@ -71,7 +71,7 @@
             {
               "name": "ibanNumber",
               "type": "text",
-              "mask": "aa** **** **** **** **** **** ***",
+              "mask": "aa** 9999 9999 99** **** **** *99",
               "inputLabel": "PaperJSON.bankDetails.ibanNumber.inputLabel"
             }
           ]
