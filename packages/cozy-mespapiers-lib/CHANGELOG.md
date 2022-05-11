@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.22.0...cozy-mespapiers-lib@0.23.0) (2022-05-11)
+
+
+### Features
+
+* Create PaperCardItem ([ee866ef](https://github.com/cozy/cozy-libs/commit/ee866ef7c486f9a30d7c712f78b616a9abcd0956))
+* Use new Buttons on PapersList ([daa4bc7](https://github.com/cozy/cozy-libs/commit/daa4bc739b0f204e2af6b4fcdb9ad3e575647c83))
+
+
+
+
+
 # [0.22.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.21.1...cozy-mespapiers-lib@0.22.0) (2022-05-11)
 
 
