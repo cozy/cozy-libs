@@ -14,6 +14,7 @@ import { ModalProvider, ModalStack } from './Contexts/ModalProvider'
 import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
 import { AppRouter } from './AppRouter'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
+import MoreOptions from './MoreOptions/MoreOptions'
 
 const App = () => {
   const { t } = useI18n()
@@ -36,7 +37,10 @@ const App = () => {
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
         />
       ) : (
-        <AppRouter />
+        <>
+          <MoreOptions />
+          <AppRouter />
+        </>
       )}
       <RealTimeQueries doctype="io.cozy.files" />
       <RealTimeQueries doctype="io.cozy.mespapiers.settings" />
