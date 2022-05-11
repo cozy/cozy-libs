@@ -7,7 +7,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import PaperLine from '../Papers/PaperLine'
 import { useModal } from '../Hooks/useModal'
-import { hr, trash, open, viewInDrive } from '../Actions/Actions'
+import { select, hr, trash, open, viewInDrive } from '../Actions/Actions'
 import { makeActionVariant, makeActions } from '../Actions/utils'
 
 const PapersList = ({ papers }) => {
@@ -19,11 +19,14 @@ const PapersList = ({ papers }) => {
   const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
-      makeActions([...actionVariant, viewInDrive, open, hr, trash], {
-        client,
-        pushModal,
-        popModal
-      }),
+      makeActions(
+        [select, hr, ...actionVariant, open, hr, viewInDrive, hr, trash],
+        {
+          client,
+          pushModal,
+          popModal
+        }
+      ),
     [actionVariant, client, popModal, pushModal]
   )
 

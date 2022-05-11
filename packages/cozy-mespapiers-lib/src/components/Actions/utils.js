@@ -72,7 +72,7 @@ export const makeActions = (actionCreators = [], actionOptions = {}) => {
 }
 
 export const makeActionVariant = () => {
-  return navigator.share ? [download, forward] : [download]
+  return navigator.share ? [forward, download] : [download]
 }
 
 export const isAnyFileReferencedBy = (files, doctype) => {
