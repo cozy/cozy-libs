@@ -506,6 +506,7 @@
               "name": "cardNumber",
               "type": "text",
               "minLength": 9,
+              "maxLength": 12,
               "inputLabel": "PaperJSON.card.number.inputLabel"
             }
           ]
