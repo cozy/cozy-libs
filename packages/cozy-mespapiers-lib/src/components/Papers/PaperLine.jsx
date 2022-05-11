@@ -3,14 +3,13 @@ import PropTypes from 'prop-types'
 
 import { models } from 'cozy-client'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import ActionMenu, {
-  ActionMenuHeader
-} from 'cozy-ui/transpiled/react/ActionMenu'
+import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import { ActionsItems } from '../Actions/ActionsItems'
+import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import PaperItem from '../Papers/PaperItem'
 
 const { splitFilename } = models.file
@@ -38,7 +37,7 @@ const PaperLine = ({ paper, divider, actions }) => {
       </PaperItem>
 
       {optionFile && (
-        <ActionMenu onClose={hideActionsMenu} anchorElRef={actionBtnRef}>
+        <ActionMenuWrapper onClose={hideActionsMenu} ref={actionBtnRef}>
           {isMobile && (
             <ActionMenuHeader>
               <Filename
@@ -48,12 +47,8 @@ const PaperLine = ({ paper, divider, actions }) => {
               />
             </ActionMenuHeader>
           )}
-          <ActionsItems
-            actions={actions}
-            file={paper}
-            onClose={hideActionsMenu}
-          />
-        </ActionMenu>
+          <ActionsItems actions={actions} file={paper} />
+        </ActionMenuWrapper>
       )}
     </>
   )

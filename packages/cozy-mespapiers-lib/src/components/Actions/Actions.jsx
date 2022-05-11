@@ -1,20 +1,77 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
+import cx from 'classnames'
 
 import { generateWebLink, isReferencedBy } from 'cozy-client'
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Link from 'cozy-ui/transpiled/react/Link'
-import { CONTACTS_DOCTYPE } from '../../doctypes'
 
+import { CONTACTS_DOCTYPE } from '../../doctypes'
 import DeleteConfirm from './DeleteConfirm'
 import { downloadFiles, forwardFile } from './utils'
 
+const useStyles = makeStyles(theme => ({
+  disabledItem: {
+    cursor: 'default',
+    '&:hover': {
+      backgroundColor: 'initial'
+    }
+  },
+  disabledIcon: {
+    fill: theme.palette.text.disabled
+  },
+  disabledTypography: {
+    color: theme.palette.text.disabled
+  }
+}))
+
+const ActionMenuItemWrapper = ({
+  icon,
+  children,
+  className = '',
+  onClick = undefined,
+  isEnabled = true,
+  iconProps = {},
+  typographyProps = {}
+}) => {
+  const styles = useStyles()
+
+  return (
+    <ActionMenuItem
+      onClick={onClick}
+      className={cx(`u-flex-items-center ${className}`, {
+        [styles.disabledItem]: !isEnabled
+      })}
+      left={
+        <Icon
+          icon={icon}
+          className={cx({
+            [styles.disabledIcon]: !isEnabled
+          })}
+          {...iconProps}
+        />
+      }
+    >
+      <Typography
+        className={cx({
+          [styles.disabledTypography]: !isEnabled
+        })}
+        variant="body1"
+        {...typographyProps}
+      >
+        {children}
+      </Typography>
+    </ActionMenuItem>
+  )
+}
+
 export const hr = () => {
   return {
-    icon: 'hr',
+    name: 'hr',
     displayInSelectionBar: false,
     Component: function hr() {
       return <hr />
@@ -24,22 +81,22 @@ export const hr = () => {
 
 export const open = () => {
   return {
-    icon: 'open',
     Component: function Open({ className, files }) {
       const { t } = useI18n()
       const history = useHistory()
+
       return (
-        <ActionMenuItem
+        <ActionMenuItemWrapper
+          className={className}
+          icon="openwith"
           onClick={() =>
             history.push({
               pathname: `/paper/file/${files[0]._id}`
             })
           }
-          className={className}
-          left={<Icon icon="openwith" />}
         >
           {t('action.open')}
-        </ActionMenuItem>
+        </ActionMenuItemWrapper>
       )
     }
   }
@@ -47,18 +104,18 @@ export const open = () => {
 
 export const forward = ({ client }) => {
   return {
-    icon: 'forward',
     action: (files, t) => forwardFile(client, files, t),
     Component: function Forward({ onClick, className }) {
       const { t } = useI18n()
+
       return (
-        <ActionMenuItem
-          onClick={onClick}
+        <ActionMenuItemWrapper
           className={className}
-          left={<Icon icon="reply" />}
+          icon="reply"
+          onClick={onClick}
         >
           {t('action.forward')}
-        </ActionMenuItem>
+        </ActionMenuItemWrapper>
       )
     }
   }
@@ -66,18 +123,18 @@ export const forward = ({ client }) => {
 
 export const download = ({ client }) => {
   return {
-    icon: 'download',
     action: files => downloadFiles(client, files),
     Component: function Download({ onClick, className }) {
       const { t } = useI18n()
+
       return (
-        <ActionMenuItem
-          onClick={onClick}
+        <ActionMenuItemWrapper
           className={className}
-          left={<Icon icon="download" />}
+          icon="download"
+          onClick={onClick}
         >
           {t('action.download')}
-        </ActionMenuItem>
+        </ActionMenuItemWrapper>
       )
     }
   }
@@ -85,7 +142,6 @@ export const download = ({ client }) => {
 
 export const trash = ({ pushModal, popModal }) => {
   return {
-    icon: 'trash',
     action: files =>
       pushModal(
         <DeleteConfirm
@@ -98,15 +154,15 @@ export const trash = ({ pushModal, popModal }) => {
       const { t } = useI18n()
 
       return (
-        <ActionMenuItem
-          onClick={onClick}
+        <ActionMenuItemWrapper
           className={className}
-          left={<Icon icon="trash" color="var(--errorColor)" />}
+          icon="trash"
+          iconProps={{ color: 'var(--errorColor)' }}
+          typographyProps={{ color: 'error' }}
+          onClick={onClick}
         >
-          <Typography variant="body1" color="error">
-            {t('action.trash')}
-          </Typography>
-        </ActionMenuItem>
+          {t('action.trash')}
+        </ActionMenuItemWrapper>
       )
     }
   }
@@ -114,7 +170,6 @@ export const trash = ({ pushModal, popModal }) => {
 
 export const viewInDrive = ({ client }) => {
   return {
-    icon: 'folder',
     Component: function ViewInDrive({ onClick, className, files }) {
       const { t } = useI18n()
       const dirId = files[0].dir_id
@@ -128,15 +183,16 @@ export const viewInDrive = ({ client }) => {
       })
 
       return (
-        <ActionMenuItem
-          onClick={onClick}
+        <ActionMenuItemWrapper
           className={className}
-          left={<Icon icon="folder" />}
+          icon="folder"
+          text={t('action.viewInDrive')}
+          onClick={onClick}
         >
           <Link href={webLink} target="_blank" className={'u-p-0'}>
             {t('action.viewInDrive')}
           </Link>
-        </ActionMenuItem>
+        </ActionMenuItemWrapper>
       )
     }
   }
