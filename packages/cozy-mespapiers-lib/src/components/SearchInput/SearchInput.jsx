@@ -5,7 +5,6 @@ import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
 import Input from 'cozy-ui/transpiled/react/Input'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import MagnifierIcon from 'cozy-ui/transpiled/react/Icons/Magnifier'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
 const useStyles = makeStyles(theme => ({
@@ -44,7 +43,7 @@ const SearchInput = ({ setSearchValue }) => {
       prepend={
         <Icon
           className="u-pl-1"
-          icon={MagnifierIcon}
+          icon="magnifier"
           color="var(--secondaryTextColor)"
         />
       }

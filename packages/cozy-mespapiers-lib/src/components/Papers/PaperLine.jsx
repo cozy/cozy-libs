@@ -9,8 +9,6 @@ import ActionMenu, {
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import FileTypePdfIcon from 'cozy-ui/transpiled/react/icons/FileTypePdf'
-import DotsIcon from 'cozy-ui/transpiled/react/icons/Dots'
 
 import { ActionsItems } from '../Actions/ActionsItems'
 import PaperItem from '../Papers/PaperItem'
@@ -35,7 +33,7 @@ const PaperLine = ({ paper, divider, actions }) => {
     <>
       <PaperItem paper={paper} divider={divider}>
         <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
-          <Icon icon={DotsIcon} />
+          <Icon icon="dots" />
         </IconButton>
       </PaperItem>
 
@@ -44,7 +42,7 @@ const PaperLine = ({ paper, divider, actions }) => {
           {isMobile && (
             <ActionMenuHeader>
               <Filename
-                icon={FileTypePdfIcon}
+                icon="file-type-pdf"
                 filename={filename}
                 extension={extension}
               />

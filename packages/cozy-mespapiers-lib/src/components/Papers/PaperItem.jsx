@@ -12,7 +12,6 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
-import FileTypePdfIcon from 'cozy-ui/transpiled/react/icons/FileTypePdf'
 
 const validPageName = page => page === 'front' || page === 'back'
 
@@ -52,7 +51,7 @@ const PaperItem = ({ paper, divider, children }) => {
                 <CardMedia component="img" width={32} height={32} image={src} />
               )
             }}
-            renderFallback={() => <Icon icon={FileTypePdfIcon} size={32} />}
+            renderFallback={() => <Icon icon="file-type-pdf" size={32} />}
           />
         </ListItemIcon>
         <ListItemText
