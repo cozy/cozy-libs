@@ -7,7 +7,11 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import PaperLine from '../Papers/PaperLine'
 import { useModal } from '../Hooks/useModal'
-import { select, hr, trash, open, viewInDrive } from '../Actions/Actions'
+import { select } from '../Actions/Items/select'
+import { hr } from '../Actions/Items/hr'
+import { trash } from '../Actions/Items/trash'
+import { open } from '../Actions/Items/open'
+import { viewInDrive } from '../Actions/Items/viewInDrive'
 import { makeActionVariant, makeActions } from '../Actions/utils'
 
 const PapersList = ({ papers }) => {
