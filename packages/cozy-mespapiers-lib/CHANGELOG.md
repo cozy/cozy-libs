@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.25.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.24.0...cozy-mespapiers-lib@0.25.0) (2022-05-11)
+
+
+### Features
+
+* Remove minimum length rule on national_id_card paper ([c3bcda9](https://github.com/cozy/cozy-libs/commit/c3bcda94fe41d1830d99e7662551106218b0ca8c))
+
+
+
+
+
 # [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.23.0...cozy-mespapiers-lib@0.24.0) (2022-05-11)
 
 
