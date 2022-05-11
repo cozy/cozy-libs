@@ -1,12 +1,18 @@
-const makeActions = (actionCreators, actionOptions = {}) => {
-  let actions = []
-  actionCreators.forEach(createAction => {
+/**
+ * Make array of actions
+ * (to be consumed by the ActionsItems component)
+ *
+ * @param {Function[]} actionCreators - Array of function to create ActionMenuItem components with associated actions and conditions
+ * @param {object} actionOptions - Options that need to be passed on Actions
+ * @returns {object[]} Array of actions
+ */
+const makeActions = (actionCreators = [], actionOptions = {}) => {
+  return actionCreators.map(createAction => {
     const actionMenu = createAction(actionOptions)
-    const name = actionMenu.label || actionMenu.icon
+    const name = actionMenu.name || createAction.name
 
-    actions = [...actions, { [name]: actionMenu }]
+    return { [name]: actionMenu }
   })
-  return actions
 }
 
 export default makeActions

@@ -19,27 +19,36 @@ export const getOnlyNeededActions = (actions, file) => {
   let previousAction = ''
   const displayableActions = actions.filter(actionObject => {
     const actionDefinition = Object.values(actionObject)[0]
+
     return (
       !actionDefinition.displayCondition ||
       actionDefinition.displayCondition([file])
     )
   })
-  let cleanedActions = []
-  displayableActions.map(actionObject => {
-    const actionName = getActionName(actionObject)
-    if (previousAction === actionName) {
-      previousAction = actionName
-      return null
-    } else {
-      previousAction = actionName
-    }
-    cleanedActions.push(actionObject)
-  })
-  // We don't want to have an hr as the latest actions available
-  while (getActionName(cleanedActions[cleanedActions.length - 1]) === 'hr') {
-    cleanedActions.pop()
-  }
-  return cleanedActions
+
+  return (
+    displayableActions
+      .map(actionObject => {
+        const actionName = getActionName(actionObject)
+
+        if (previousAction === actionName) {
+          previousAction = actionName
+          return null
+        } else {
+          previousAction = actionName
+        }
+
+        return actionObject
+      })
+      .filter(Boolean)
+      // We don't want to have an hr as the latest actions available
+      .filter((cleanedAction, idx, cleanedActions) => {
+        return !(
+          getActionName(cleanedAction) === 'hr' &&
+          idx === cleanedActions.length - 1
+        )
+      })
+  )
 }
 
 /**
@@ -54,27 +63,24 @@ export const ActionsItems = ({ actions, file, onClose }) => {
     [actions, file]
   )
 
-  return cleanedActions.map((actionObject, i) => {
+  return cleanedActions.map((actionObject, idx) => {
     const actionName = getActionName(actionObject)
     const actionDefinition = Object.values(actionObject)[0]
 
     const { Component, action, isEnabled } = actionDefinition
 
-    const onClick = action
-      ? () => {
-          action([file], t)
-          onClose()
-        }
-      : null
+    const onClick = () => {
+      action && action([file], t)
+      onClose()
+    }
 
     return (
       <Component
-        key={actionName + i}
+        key={actionName + idx}
         onClick={onClick}
-        className={cx('u-flex-items-center', {
-          ['u-o-50']: isEnabled === false
-        })}
-        files={[file]}
+        isEnabled={isEnabled}
+        className={cx('u-flex-items-center')}
+        files={file ? [file] : []}
       />
     )
   })
