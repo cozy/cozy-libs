@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.24.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.23.0...cozy-mespapiers-lib@0.24.0) (2022-05-11)
+
+
+### Features
+
+* Change mask of IBAN paper ([ab818b6](https://github.com/cozy/cozy-libs/commit/ab818b6766d6c33ed6221cd01690bdfbd87e2b82))
+
+
+
+
+
 # [0.23.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.22.0...cozy-mespapiers-lib@0.23.0) (2022-05-11)
 
 
