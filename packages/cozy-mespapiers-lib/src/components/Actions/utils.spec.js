@@ -4,7 +4,7 @@ import { download, forward } from './Actions'
 jest.mock('./Actions')
 
 describe('Actions utils', () => {
-  fdescribe('makeActions', () => {
+  describe('makeActions', () => {
     it('should have empty actions array', () => {
       const actions = makeActions()
 
@@ -51,7 +51,7 @@ describe('Actions utils', () => {
     it('should have "download" & "Forward" action (in this order) on mobile', () => {
       global.navigator.share = () => {}
 
-      expect(makeActionVariant()).toStrictEqual([download, forward])
+      expect(makeActionVariant()).toStrictEqual([forward, download])
     })
   })
 })
