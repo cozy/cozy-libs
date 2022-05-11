@@ -197,3 +197,65 @@ export const viewInDrive = ({ client }) => {
     }
   }
 }
+
+export const select = ({ hideActionsMenu }) => {
+  return {
+    Component: function Select({ className, files }) {
+      const { t } = useI18n()
+      const history = useHistory()
+
+      return (
+        <ActionMenuItemWrapper
+          className={className}
+          icon="select-all"
+          onClick={() => {
+            history.push({
+              pathname: `/paper`
+            })
+            hideActionsMenu()
+          }}
+        >
+          {files.length === 0 ? t('action.selectPapers') : t('action.select')}
+        </ActionMenuItemWrapper>
+      )
+    }
+  }
+}
+
+export const help = () => {
+  return {
+    isEnabled: false,
+    Component: function Help({ className, isEnabled }) {
+      const { t } = useI18n()
+
+      return (
+        <ActionMenuItemWrapper
+          className={className}
+          icon="help"
+          isEnabled={isEnabled}
+        >
+          {t('action.help')}
+        </ActionMenuItemWrapper>
+      )
+    }
+  }
+}
+
+export const installHomepage = () => {
+  return {
+    isEnabled: false,
+    Component: function InstallHomepage({ className, isEnabled }) {
+      const { t } = useI18n()
+
+      return (
+        <ActionMenuItemWrapper
+          className={className}
+          icon="openwith"
+          isEnabled={isEnabled}
+        >
+          {t('action.installHomepage')}
+        </ActionMenuItemWrapper>
+      )
+    }
+  }
+}
