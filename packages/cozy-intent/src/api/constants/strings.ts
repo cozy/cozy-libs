@@ -3,6 +3,8 @@ export const strings = {
     '<WebviewIntentProvider /> can not instantiate its service. The application was detected as running in a Flagship webview but has no access to `window.ReactNativeWebView`, which is contradictory.',
   noListenerFound:
     'Could not handle event, this `NativeMessenger` instance does not have a listener.',
+  noWebviewFound:
+    'error: no WebView was found when trying to post message. This might mean we exited a CozyApp without waiting the call("backToHome") response.',
   postMeSignature: '@post-me',
   webviewIsRendered: 'webviewIsRendered',
   errorRegisterWebview:
@@ -18,5 +20,11 @@ export const strings = {
   errorParentHandshake:
     'Handshake failed for uri: "${uri}". ConcreteConnection will not be available for this uri\'s messenger, but messages should still work. Error was: "${errorMessage}".',
   errorNoMessengerToInit:
-    'Could not initialise messenger for uri: "${uri}. No WebView has been registered from react-native with this uri. Please use NativeService.registerWebview(WebviewRef).'
+    'Could not initialise messenger for uri: "${uri}. No WebView has been registered from react-native with this uri. Please use NativeService.registerWebview(WebviewRef).',
+  logging: {
+    registering: (uri: string): string => `- REGISTERING ▶️ "${uri}"`,
+    registered: (uri: string): string => `- REGISTERED ▶️ "${uri}"`,
+    unregistering: (uri: string): string => `- UNREGISTERING ▶️ "${uri}"`,
+    unregistered: (uri: string): string => `- UNREGISTERED ▶️ "${uri}"`
+  }
 }

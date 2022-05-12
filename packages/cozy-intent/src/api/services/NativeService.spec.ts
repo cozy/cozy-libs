@@ -10,7 +10,7 @@ import {
   strings
 } from '../../api'
 
-const mockDebug = jest.fn()
+const mockDebug = jest.fn<void, string[]>()
 
 const onMessageMock = jest.fn()
 
@@ -32,7 +32,7 @@ jest.mock('post-me', () => ({
   ...jest.requireActual('post-me'),
   debug:
     (nameSpace = 'NativeService') =>
-    (str: string) =>
+    (str: string): void =>
       mockDebug(nameSpace, str),
   ParentHandshake: jest.fn(() => Promise.resolve({ foo: 'bar' }))
 }))
@@ -69,7 +69,7 @@ describe('NativeService', () => {
 
     const nativeService = new NativeService(nativeMethods, MockNativeMessenger)
 
-    nativeService.registerWebview(webviewRef)
+    nativeService.registerWebview('some_uri', webviewRef)
 
     await nativeService.tryEmit({
       nativeEvent: { data: '{"type":"@post-me"}', url: 'http://some_uri' }
@@ -77,7 +77,7 @@ describe('NativeService', () => {
 
     expect(onMessageMock).toHaveBeenNthCalledWith(1, { type: '@post-me' })
 
-    nativeService.unregisterWebview(webviewRef)
+    nativeService.unregisterWebview('some_uri')
 
     await expect(
       nativeService.tryEmit({
@@ -102,7 +102,7 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview(webviewRef)
+      nativeService.registerWebview('some_uri', webviewRef)
 
       expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
     })
@@ -119,10 +119,10 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview(webviewRef)
+      nativeService.registerWebview('some_uri', webviewRef)
 
       expect(() => {
-        nativeService.registerWebview(webviewRef)
+        nativeService.registerWebview('some_uri', webviewRef)
       }).not.toThrow()
 
       expect(mockDebug).toHaveBeenCalled()
@@ -141,7 +141,7 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview(webviewRef)
+      nativeService.registerWebview('some_uri', webviewRef)
 
       expect(NativeMessenger).toHaveBeenNthCalledWith(1, webviewRef)
     })
@@ -159,12 +159,12 @@ describe('NativeService', () => {
 
       const nativeService = new NativeService(nativeMethods)
 
-      nativeService.registerWebview(webviewRef)
-      nativeService.registerWebview(webviewRef)
+      nativeService.registerWebview('some_uri', webviewRef)
+      nativeService.registerWebview('some_uri', webviewRef)
 
-      const baseUrlFromWebview = "some_base_url";
-      expect(mockDebug).toHaveBeenCalledWith(
-        "NativeService",
+      const baseUrlFromWebview = 'some_uri'
+      expect(mockDebug).toHaveBeenLastCalledWith(
+        'NativeService',
         `Cannot register webview. A webview is already registered into cozy-intent with the uri: ${baseUrlFromWebview}`
       )
     })
@@ -172,19 +172,10 @@ describe('NativeService', () => {
 
   describe('unregisterWebview', () => {
     it('Should bail out and log if unregistering not registered webview', () => {
-      const webviewRef: WebviewRef = {
-        injectJavaScript: jest.fn(),
-        props: {
-          source: {
-            uri: 'http://SOME_URI'
-          }
-        }
-      }
-
       const nativeService = new NativeService(nativeMethods)
 
       expect(() => {
-        nativeService.unregisterWebview(webviewRef)
+        nativeService.unregisterWebview('some_uri')
       }).not.toThrow()
 
       expect(mockDebug).toHaveBeenCalled()
@@ -206,7 +197,7 @@ describe('NativeService', () => {
     })
 
     it('Should try to init a webview', async () => {
-      nativeService.registerWebview({
+      nativeService.registerWebview('bar.com', {
         injectJavaScript: jest.fn(),
         props: {
           source: {
