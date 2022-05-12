@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.27.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.26.0...cozy-mespapiers-lib@0.27.0) (2022-05-12)
+
+
+### Features
+
+* Add MoreOptions component ([9498c18](https://github.com/cozy/cozy-libs/commit/9498c1897fc4c2fe1018fe504a7fc98dc34fd572))
+* Add new actions ([65a5d6a](https://github.com/cozy/cozy-libs/commit/65a5d6ac65ab2d0c9ee0baa525b4f4137a655d58))
+* Add the MoreOptions component to the root of the app ([633f194](https://github.com/cozy/cozy-libs/commit/633f194bdb17fa12694663b67c3edeef3b5b787a))
+* Add the select option in the options of each line of paper ([f91b397](https://github.com/cozy/cozy-libs/commit/f91b397def9e1a99ae3a11f1112664f268d8a181))
+
+
+
+
+
 # [0.26.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.25.0...cozy-mespapiers-lib@0.26.0) (2022-05-11)
 
 
