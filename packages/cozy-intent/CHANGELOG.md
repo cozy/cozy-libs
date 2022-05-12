@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.17.3...cozy-intent@2.0.0) (2022-05-12)
+
+
+### Bug Fixes
+
+* App Amirale browsing ([bef060c](https://github.com/cozy/cozy-libs/commit/bef060c7dd80b82f1ad9246668e7678d9d04c70b))
+
+
+### BREAKING CHANGES
+
+* registerWebview is now
+(uri: string, ref: WebviewRef). unregisterWebview is now (uri: string).
+
+
+
+
+
 ## [1.17.3](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.17.2...cozy-intent@1.17.3) (2022-05-10)
 
 **Note:** Version bump only for package cozy-intent
