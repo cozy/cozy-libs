@@ -19,8 +19,12 @@ export class NativeMessenger implements Messenger {
   }
 
   public postMessage = (message: Record<string, unknown>): void => {
-    const script = `window.postMessage(${JSON.stringify(message)})`
-    this.injectJavaScript?.(script)
+    try {
+      const script = `window.postMessage(${JSON.stringify(message)})`
+      this.injectJavaScript?.(script)
+    } catch (error) {
+      log(strings.noWebviewFound)
+    }
   }
 
   public addMessageListener = (listener: MessageListener): ListenerRemover => {
