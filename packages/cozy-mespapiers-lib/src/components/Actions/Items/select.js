@@ -23,7 +23,7 @@ export const select = ({ hideActionsMenu }) => {
               pathname: `/paper/multiselect`,
               search: `backgroundPath=${pathname}`
             })
-            hideActionsMenu()
+            hideActionsMenu && hideActionsMenu()
             files.length > 0 && addMultiSelectionFile(files[0])
           }}
         >
