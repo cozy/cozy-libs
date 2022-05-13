@@ -10,7 +10,6 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "dependencies": {
-    "cozy-device-helper": "^2.1.0",
     "post-me": "0.4.5"
   },
   "devDependencies": {
@@ -34,7 +33,7 @@
     "cozy-react-native"
   ],
   "license": "MIT",
-  "main": "./dist/index.js",
+  "main": "dist/index.js",
   "peerDependencies": {
     "react": ">=16"
   },
@@ -53,5 +52,5 @@
     "test:watch": "yarn test --watchAll",
     "start": "yarn build:watch"
   },
-  "types": "./dist/index.d.ts"
+  "types": "dist/index.d.ts"
 }

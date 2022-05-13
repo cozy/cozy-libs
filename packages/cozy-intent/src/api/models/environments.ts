@@ -32,6 +32,9 @@ export interface WebviewRef {
 }
 
 export interface WebviewWindow extends Window {
+  cozy?: {
+    flagship?: boolean
+  }
   ReactNativeWebView: {
     postMessage: (message: string) => void
   }

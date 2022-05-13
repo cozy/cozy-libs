@@ -5,10 +5,6 @@ import { WebviewContext, useWebviewIntent } from '../../view'
 import { WebviewService } from '../../api'
 import { mockConnection } from '../../../tests'
 
-jest.mock('cozy-device-helper', () => ({
-  isFlagshipApp: jest.fn(() => true)
-}))
-
 describe('useNativeIntent', () => {
   it('Should not throw if the context does not exist in a Flagship app', () => {
     const { result } = renderHook(() => useWebviewIntent())
