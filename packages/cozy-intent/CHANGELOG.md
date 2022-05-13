@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.0.1...cozy-intent@2.0.2) (2022-05-13)
+
+
+### Bug Fixes
+
+* Decouple cozy-intent from cozy-device-helper ([091c611](https://github.com/cozy/cozy-libs/commit/091c6119d43ae119d56f17357d66704400a89c7d))
+
+
+
+
+
 ## [2.0.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.0.0...cozy-intent@2.0.1) (2022-05-13)
 
 
