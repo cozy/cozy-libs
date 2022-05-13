@@ -2,13 +2,12 @@ import 'mutationobserver-shim'
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import { CozyBar, WebviewService, WebviewWindow } from '../../api'
+import { CozyBar, WebviewService } from '../../api'
 import { WebviewIntentProvider } from '../../view'
 import {
   mockChildHandshake,
   mockConnection,
   mockCozyBar,
-  mockIsFlagshipApp,
   mockSetWebviewContext,
   mockWebviewService,
   mockWebviewWindow
@@ -18,14 +17,11 @@ import {
 window = mockWebviewWindow()
 
 declare const global: {
-  cozy?: CozyBar
+  cozy: { bar: CozyBar['bar']; flagship: boolean }
+  ReactNativeWebView: unknown
 }
 
-global.cozy = mockCozyBar
-
-jest.mock('cozy-device-helper', () => ({
-  isFlagshipApp: jest.fn()
-}))
+global.cozy = { bar: mockCozyBar, flagship: true }
 
 jest.mock('post-me', () => ({
   ...jest.requireActual('post-me'),
@@ -34,18 +30,14 @@ jest.mock('post-me', () => ({
 }))
 
 describe('WebviewIntentProvider', () => {
-  beforeEach(() => {
-    mockIsFlagshipApp.mockReturnValue(true)
-  })
-
   afterEach(() => {
     mockChildHandshake.mockClear()
-    mockIsFlagshipApp.mockClear()
     mockSetWebviewContext.mockClear()
+    global.cozy.flagship = true
   })
 
   it('renders with no AA context', async () => {
-    mockIsFlagshipApp.mockReturnValue(false)
+    global.cozy.flagship = false
 
     const { findByText } = render(
       <WebviewIntentProvider>Hello</WebviewIntentProvider>
@@ -75,7 +67,7 @@ describe('WebviewIntentProvider', () => {
   })
 
   it('does not try to set cozy-bar context if cozy-bar does not exist when provided with a context', async () => {
-    global.cozy = undefined
+    global.cozy.bar = undefined
 
     const { findByText } = render(
       <WebviewIntentProvider webviewService={mockWebviewService}>
@@ -88,7 +80,7 @@ describe('WebviewIntentProvider', () => {
   })
 
   it('does not try to set cozy-bar context if cozy-bar does not exist when not provided with a context', async () => {
-    global.cozy = undefined
+    global.cozy.bar = undefined
 
     const { findByText } = render(
       <WebviewIntentProvider>Hello</WebviewIntentProvider>
@@ -99,7 +91,7 @@ describe('WebviewIntentProvider', () => {
   })
 
   it('sets cozy-bar context if cozy-bar does exist when provided with a context', async () => {
-    global.cozy = mockCozyBar
+    global.cozy.bar = mockCozyBar
 
     const { findByText } = render(
       <WebviewIntentProvider webviewService={mockWebviewService}>
@@ -113,7 +105,7 @@ describe('WebviewIntentProvider', () => {
   })
 
   it('sets cozy-bar context if cozy-bar does exist when not provided with a context', async () => {
-    global.cozy = mockCozyBar
+    global.cozy.bar = mockCozyBar
 
     const { findByText } = render(
       <WebviewIntentProvider>Hello</WebviewIntentProvider>
@@ -125,8 +117,7 @@ describe('WebviewIntentProvider', () => {
   })
 
   it('does not throw if cozy-bar api is outdated', async () => {
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    global.cozy!.bar!.setWebviewContext = undefined
+    global.cozy.bar = { setWebviewContext: undefined }
 
     const { findByText } = render(
       <WebviewIntentProvider>Hello</WebviewIntentProvider>
@@ -149,9 +140,7 @@ describe('WebviewIntentProvider', () => {
   })
 
   it('does not throw in a flagship app context that has no RN API available', async () => {
-    mockIsFlagshipApp.mockReturnValue(true)
-    ;((window as unknown as WebviewWindow).ReactNativeWebView as unknown) =
-      undefined
+    global.ReactNativeWebView = undefined
 
     const { findByText } = render(
       <WebviewIntentProvider>Hello</WebviewIntentProvider>

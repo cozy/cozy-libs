@@ -1,8 +1,6 @@
 import React, { ReactElement, useEffect, useState } from 'react'
 import { Connection, ChildHandshake, debug } from 'post-me'
 
-import { isFlagshipApp } from 'cozy-device-helper'
-
 import {
   CozyBar,
   WebviewConnection,
@@ -71,7 +69,7 @@ const getConnection = async (
 }
 
 const isValidEnv = (): boolean => {
-  const flagshipApp = isFlagshipApp()
+  const flagshipApp = assumeWebviewWindow.cozy?.flagship
 
   if (!flagshipApp) return false
 

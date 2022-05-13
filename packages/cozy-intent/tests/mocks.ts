@@ -1,7 +1,5 @@
 import { ChildHandshake, RemoteHandle } from 'post-me'
 
-import { isFlagshipApp } from 'cozy-device-helper'
-
 import {
   NativeMethodsRegister,
   WebviewMessenger,
@@ -42,16 +40,12 @@ export const mockConnection = {
 
 export const mockWebviewService = new MockWebviewService(mockConnection)
 
-export const mockIsFlagshipApp = isFlagshipApp as jest.Mock
-
 export const mockChildHandshake = ChildHandshake as jest.Mock
 
 export const mockSetWebviewContext = jest.fn()
 
 export const mockCozyBar = {
-  bar: {
-    setWebviewContext: mockSetWebviewContext
-  }
+  setWebviewContext: mockSetWebviewContext
 }
 
 export const mockWebviewRef = {
