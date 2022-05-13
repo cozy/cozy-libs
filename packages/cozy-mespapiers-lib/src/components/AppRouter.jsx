@@ -9,6 +9,7 @@ import {
 
 import Home from './Home/Home'
 import Onboarding from './Onboarding/Onboarding'
+import MultiselectView from './Multiselect/MultiselectView'
 import PapersListWrapper from './Papers/PapersListWrapper'
 import FilesViewerWithQuery from './Viewer/FileViewerWithQuery'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
@@ -56,6 +57,11 @@ const Routes = () => {
       </Switch>
       {background && (
         <>
+          <Route
+            exact
+            path={'/paper/multiselect'}
+            component={MultiselectView}
+          />
           <Route
             exact
             path={'/paper/create'}
