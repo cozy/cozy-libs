@@ -27,6 +27,7 @@ import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import logger from '../logger'
+import '../types'
 
 const DECOUPLED_ERROR = 'decoupled'
 const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
@@ -291,19 +292,6 @@ export const sendAdditionalInformation = (flow, fields) => {
 export const resumeBIConnection = flow => {
   return updateBIConnectionFromFlow(flow, { resume: 'true' })
 }
-
-/**
- * @typedef biConnection
- * @property {number} id
- * @property {number} id_user
- * @property {number} id_connector
- * @property {string|null} state  - ( wrongpass | additionalInformationNeeded | websiteUnavailable | actionNeeded | SCARequired | decoupled | passwordExpired | webauthRequired | rateLimiting | bug). Null indicates a success
- * @property {string|null} last_update - Date string: Last successful update.
- * @property {string|null} created - Date string: Creation date
- * @property {boolean} active - Whether this connection is active and will be automatically synced.
- * @property {string|null} last_push - Date string: Last successfull push
- * @property {string|null} next_try - Date string: Date of next synchronization.
- */
 
 /**
  * Checks for any number 2FA and/or decoupled requests

@@ -9,8 +9,6 @@ import assert from '../assert'
 import logger from '../logger'
 import flag from 'cozy-flags'
 import {
-  fetchExtraOAuthUrlParams,
-  createTemporaryToken,
   setBIConnectionId,
   saveBIConfig,
   findAccountWithBiConnection,
@@ -18,6 +16,10 @@ import {
   isBudgetInsightConnector
 } from './budget-insight'
 import { KonnectorJobError } from '../helpers/konnectors'
+import { waitForRealtimeEvent } from './jobUtils'
+import '../types'
+
+const TEMP_TOKEN_TIMOUT_S = 60
 
 export const isBiWebViewConnector = konnector =>
   flag('harvest.bi.webview') && isBudgetInsightConnector(konnector)
@@ -94,10 +96,10 @@ export const handleOAuthAccount = async ({
   client,
   t
 }) => {
-  const cozyBankId = getCozyBankId({ konnector, account })
+  const cozyBankIds = getCozyBankIds({ konnector, account })
   let biWebviewAccount = {
     ...account,
-    ...(cozyBankId ? { auth: { bankId: cozyBankId } } : {})
+    ...(cozyBankIds ? { auth: { bankIds: cozyBankIds } } : {})
   }
 
   const connectionId = getWebviewBIConnectionId(biWebviewAccount)
@@ -167,18 +169,81 @@ export const onBIAccountCreation = async ({
   return await flow.saveAccount(setBIConnectionId(account, biConnection.id))
 }
 
+export const fetchExtraOAuthUrlParams = async ({
+  client,
+  konnector,
+  account
+}) => {
+  const {
+    code: token,
+    biBankId,
+    biBankIds
+  } = await createTemporaryToken({
+    client,
+    konnector,
+    account
+  })
+
+  return { id_connector: biBankId || biBankIds, token }
+}
+
 /**
  * Finds the current bankIid in a given konnector or account
  *
  * @param {io.cozy.accounts} options.account The account content
  * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @return {Array<String>} - list of bank ids
  */
-export const getCozyBankId = ({ konnector, account }) => {
+export const getCozyBankIds = ({ konnector, account }) => {
   const cozyBankId = konnector?.parameters?.bankId || account?.auth?.bankId
-  if (!cozyBankId) {
+
+  if (cozyBankId) {
+    return [cozyBankId]
+  }
+
+  const cozyBankIds = konnector?.fields?.bankId?.options.map(opt => opt?.value)
+  if (!cozyBankIds?.length) {
     logger.error('Could not find any bank id')
   }
-  return cozyBankId
+  return cozyBankIds
+}
+
+/**
+ * Gets a temporary token corresponding to the current BI user
+ *
+ * @param {CozyClient} options.client - CozyClient instance
+ * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {io.cozy.accounts} options.account The account content
+ *
+ * @returns {createTemporaryTokenResponse}
+ */
+export const createTemporaryToken = async ({ client, konnector, account }) => {
+  assert(
+    konnector.slug,
+    'createTemporaryToken: konnector passed in options has no slug'
+  )
+  const cozyBankIds = getCozyBankIds({ konnector, account })
+  assert(
+    cozyBankIds.length,
+    'createTemporaryToken: Could not determine cozyBankId from account or konnector'
+  )
+  const jobResponse = await client.stackClient.jobs.create(
+    'konnector',
+    {
+      mode: 'getTemporaryToken',
+      konnector: konnector.slug,
+      bankIds: cozyBankIds
+    },
+    {},
+    true
+  )
+  const event = await waitForRealtimeEvent(
+    client,
+    jobResponse.data.attributes,
+    'result',
+    TEMP_TOKEN_TIMOUT_S * 1000
+  )
+  return event.data.result
 }
 
 export const konnectorPolicy = {

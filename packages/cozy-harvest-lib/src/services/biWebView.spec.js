@@ -69,7 +69,7 @@ describe('handleOAuthAccount', () => {
       t,
       account: {
         ...account,
-        ...{ auth: { bankId: TEST_BANK_COZY_ID } },
+        ...{ auth: { bankIds: [TEST_BANK_COZY_ID] } },
         ...{ data: { auth: { bi: { connId: 12 } } } }
       }
     })
