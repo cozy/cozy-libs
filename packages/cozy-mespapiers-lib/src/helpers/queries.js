@@ -41,8 +41,7 @@ export const buildFilesQueryByLabel = label => ({
     .indexFields(['created_at', 'metadata.qualification'])
     .sortBy([{ created_at: 'desc' }]),
   options: {
-    as: `${FILES_DOCTYPE}/${label}`,
-    fetchPolicy: defaultFetchPolicy
+    as: `${FILES_DOCTYPE}/${label}`
   }
 })
 
