@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.1](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.0.0...cozy-intent@2.0.1) (2022-05-13)
+
+
+### Bug Fixes
+
+* Add cozy-device-helper as real dependency ([f123989](https://github.com/cozy/cozy-libs/commit/f123989fce39b1928b46625f5306e28b118eb7b4))
+
+
+
+
+
 # [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@1.17.3...cozy-intent@2.0.0) (2022-05-12)
 
 
