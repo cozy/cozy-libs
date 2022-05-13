@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useHistory, useLocation } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -10,6 +10,7 @@ export const select = ({ hideActionsMenu }) => {
     Component: function Select({ className, files }) {
       const { t } = useI18n()
       const history = useHistory()
+      const { pathname } = useLocation()
 
       return (
         <ActionMenuItemWrapper
@@ -17,7 +18,8 @@ export const select = ({ hideActionsMenu }) => {
           icon="select-all"
           onClick={() => {
             history.push({
-              pathname: `/paper`
+              pathname: `/paper/multiselect`,
+              search: `backgroundPath=${pathname}`
             })
             hideActionsMenu()
           }}
