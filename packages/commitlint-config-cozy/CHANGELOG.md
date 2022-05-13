@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.7.7 (2022-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update commitlint monorepo to v16.2.4 ([6b17ecb](https://github.com/cozy/cozy-libs/commit/6b17ecb23d5c16a31422cff636cc2e4f9a7c1ae9))
+
+
+
+
+
 ## 0.7.6 (2022-04-04)
 
 

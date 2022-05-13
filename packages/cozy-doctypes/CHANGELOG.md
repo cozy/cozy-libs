@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.83.8 (2022-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-stack-client to v13.20.2 ([bed93bb](https://github.com/cozy/cozy-libs/commit/bed93bb7195f777cf4d77395879866fa0742cd74))
+
+
+
+
+
 ## [1.83.7](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.83.6...cozy-doctypes@1.83.7) (2022-03-10)
 
 **Note:** Version bump only for package cozy-doctypes

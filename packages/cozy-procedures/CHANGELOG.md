@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.49.9 (2022-05-13)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-client to v16.19.0 ([84df410](https://github.com/cozy/cozy-libs/commit/84df410946d5e445e504033b00a134b76c8f96e3))
+
+
+
+
+
 ## 0.49.8 (2022-04-11)
 
 
