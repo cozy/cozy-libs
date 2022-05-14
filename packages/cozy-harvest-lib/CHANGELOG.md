@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.2.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.2.6...cozy-harvest-lib@9.2.7) (2022-05-14)
+
+
+### Bug Fixes
+
+* bump leaflet from 1.7.1 to 1.8.0 ([e4ae32d](https://github.com/cozy/cozy-libs/commit/e4ae32d7610a5e969147354405cfdde5e913bf34))
+
+
+
+
+
 ## [9.2.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.2.5...cozy-harvest-lib@9.2.6) (2022-05-13)
 
 **Note:** Version bump only for package cozy-harvest-lib

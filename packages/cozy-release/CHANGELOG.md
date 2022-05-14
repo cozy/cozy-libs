@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.12.0 (2022-05-14)
+
+
+### Bug Fixes
+
+* bump exec-sh from 0.3.2 to 0.4.0 ([8bb2874](https://github.com/cozy/cozy-libs/commit/8bb2874351a3eea8448d704460c46c90ca6c8ccf))
+
+
+### Features
+
+* Align text value in inputMask ([e029877](https://github.com/cozy/cozy-libs/commit/e029877d194310fdbdc3703d4b4b48e1e179f09f))
+
+
+
+
+
 # 1.11.0 (2021-02-12)
 
 
