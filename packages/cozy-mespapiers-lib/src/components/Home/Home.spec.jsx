@@ -1,12 +1,26 @@
-'use strict'
 import React from 'react'
-import { render, waitFor } from '@testing-library/react'
+import { render } from '@testing-library/react'
 
-import { isQueryLoading, hasQueryBeenLoaded, useQueryAll } from 'cozy-client'
+import { isQueryLoading, useQueryAll } from 'cozy-client'
 
 import AppLike from '../../../test/components/AppLike'
 import Home from './Home'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
+/* eslint-disable react/display-name */
+jest.mock('./HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
+jest.mock('../ThemesFilter', () => () => <div data-testid="ThemesFilter" />)
+jest.mock('../SearchInput', () => () => <div data-testid="SearchInput" />)
+jest.mock('../Papers/PaperGroup', () => () => <div data-testid="PaperGroup" />)
+jest.mock('cozy-ui/transpiled/react/Empty', () => () => (
+  <div data-testid="Empty" />
+))
+jest.mock('../Placeholders/FeaturedPlaceholdersList', () => () => (
+  <div data-testid="FeaturedPlaceholdersList" />
+))
+/* eslint-enable react/display-name */
+
+jest.mock('../Hooks/useMultiSelection')
 jest.mock('cozy-client/dist/hooks', () => ({
   ...jest.requireActual('cozy-client/dist/hooks'),
   useQueryAll: jest.fn()
@@ -20,11 +34,11 @@ jest.mock('cozy-client/dist/utils', () => ({
 
 const setup = ({
   isLoading = true,
-  isLoaded = false,
-  withData = false
+  withData = false,
+  multiSelectionState = false
 } = {}) => {
+  useMultiSelection.mockReturnValue({ multiSelectionState })
   isQueryLoading.mockReturnValue(isLoading)
-  hasQueryBeenLoaded.mockReturnValue(isLoaded)
   useQueryAll.mockReturnValue({
     data: withData
       ? [{ metadata: { qualification: { label: 'LabelQualif' } } }]
@@ -49,41 +63,45 @@ describe('Home components:', () => {
     expect(container).toBeDefined()
   })
 
-  it('should display Spinner when all data are not loaded', async () => {
-    const { container } = setup()
-
-    await waitFor(() => {
-      expect(container.querySelector('[role="progressbar"]')).toBeDefined()
-    })
-  })
-
-  it('should not display Spinner when all data are loaded', async () => {
-    const { container } = setup({ isLoading: false, isLoaded: true })
-
-    await waitFor(() => {
-      expect(container.querySelector('[role="progressbar"]')).toBeNull()
-    })
-  })
-
-  it('should display Empty text & Placeholder when no data exists', async () => {
-    const { getByText } = setup({ isLoading: false, isLoaded: true })
-
-    await waitFor(() => {
-      expect(getByText('Add your personal documents'))
-    })
-  })
-
-  it('should display Existing label when data exists', async () => {
-    const { container, getByText } = setup({
+  it('should display only paperGroup in multi-selection mode', () => {
+    const { queryByTestId, getByTestId } = setup({
       isLoading: false,
-      isLoaded: true,
+      withData: true,
+      multiSelectionState: true
+    })
+
+    expect(queryByTestId('ThemesFilter')).toBeNull()
+    expect(queryByTestId('SearchInput')).toBeNull()
+    expect(queryByTestId('FeaturedPlaceholdersList')).toBeNull()
+    expect(getByTestId('PaperGroup'))
+  })
+
+  it('should display Spinner when all data are not loaded', () => {
+    const { getByRole } = setup()
+
+    expect(getByRole('progressbar'))
+  })
+
+  it('should not display Spinner when all data are loaded', () => {
+    const { queryByRole } = setup({ isLoading: false })
+
+    expect(queryByRole('progressbar')).toBeNull()
+  })
+
+  it('should display Empty when no data exists', () => {
+    const { getByTestId, queryByTestId } = setup({ isLoading: false })
+
+    expect(getByTestId('Empty'))
+    expect(queryByTestId('PaperGroup')).toBeNull()
+  })
+
+  it('should display PaperGroup when data exists', () => {
+    const { getByTestId, queryByTestId } = setup({
+      isLoading: false,
       withData: true
     })
 
-    await waitFor(() => {
-      expect(container.querySelector('[role="progressbar"]')).toBeNull()
-      expect(getByText('Existing'))
-      expect(getByText('Scan.items.LabelQualif'))
-    })
+    expect(getByTestId('PaperGroup'))
+    expect(queryByTestId('Empty')).toBeNull()
   })
 })
