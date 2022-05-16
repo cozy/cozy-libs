@@ -3,6 +3,7 @@ export const CONTACTS_DOCTYPE = 'io.cozy.contacts'
 export const FILES_DOCTYPE = 'io.cozy.files'
 export const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'
 export const SETTINGS_DOCTYPE = 'io.cozy.mespapiers.settings'
+export const JOBS_DOCTYPE = 'io.cozy.jobs'
 
 // the documents schema, necessary for CozyClient
 export default {
