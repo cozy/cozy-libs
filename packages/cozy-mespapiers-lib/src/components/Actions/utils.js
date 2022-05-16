@@ -3,9 +3,10 @@
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { isReferencedBy } from 'cozy-client'
 
-import { FILES_DOCTYPE } from '../../doctypes'
+import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
 import { getSharingLink } from '../../utils/getSharingLink'
 import { download, forward } from './Actions'
+import { handleConflictFilename } from '../../utils/handleConflictFilename'
 
 export const getActionName = actionObject => {
   return Object.keys(actionObject)[0]
@@ -88,6 +89,39 @@ const downloadFileError = error => {
   return isMissingFileError(error)
     ? 'common.downloadFile.error.missing'
     : 'common.downloadFile.error.offline'
+}
+
+/**
+ * @typedef {object} MakeZipFolderParam
+ * @property {CozyClient} client - Instance of CozyClient
+ * @property {IOCozyFile[]} files - List of files to zip
+ * @property {string} zipFolderName - Desired name of the Zip folder
+ * @property {string} dirId - Id of the destination folder of the zip
+ */
+
+/**
+ * Create a zip folder with the list of files and save it in a desired folder in Drive
+ *
+ * @param {MakeZipFolderParam} param0
+ * @returns {Promise<string>} - Final name of the zip folder
+ */
+export const makeZipFolder = async ({
+  client,
+  files,
+  zipFolderName,
+  dirId
+}) => {
+  const filename = await handleConflictFilename(client, dirId, zipFolderName)
+  const zipData = {
+    files: Object.fromEntries(files.map(file => [file.name, file._id])),
+    dir_id: dirId,
+    filename
+  }
+
+  const jobCollection = client.collection(JOBS_DOCTYPE)
+  await jobCollection.create('zip', zipData, {}, true)
+
+  return filename
 }
 
 /**
