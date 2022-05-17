@@ -27,7 +27,11 @@ const MoreOptions = () => {
   return (
     <>
       <BarRight>
-        <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
+        <IconButton
+          ref={actionBtnRef}
+          onClick={toggleActionsMenu}
+          style={{ paddingRight: 0 }}
+        >
           <Icon icon={'dots'} />
         </IconButton>
       </BarRight>
