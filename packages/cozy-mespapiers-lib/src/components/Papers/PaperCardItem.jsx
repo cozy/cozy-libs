@@ -7,6 +7,7 @@ import Paper from 'cozy-ui/transpiled/react/Paper'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
 import PaperItem from '../Papers/PaperItem'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -21,11 +22,15 @@ const useStyles = makeStyles(theme => ({
 
 const PaperCardItem = ({ paper, divider, className, square = false }) => {
   const classes = useStyles(square)
+  const { removeMultiSelectionFile } = useMultiSelection()
 
   return (
     <Paper className={`u-h-3 ${className}`} square={square}>
       <PaperItem paper={paper} divider={divider} classes={classes}>
-        <IconButton color="secondary" onClick={() => {}}>
+        <IconButton
+          color="secondary"
+          onClick={() => removeMultiSelectionFile(paper)}
+        >
           <Icon icon="cross-circle" />
         </IconButton>
       </PaperItem>

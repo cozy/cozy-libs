@@ -1,14 +1,9 @@
-/* global cozy */
-import React, { useMemo, useCallback } from 'react'
+import React, { useMemo } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { getReferencedBy, isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
-import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import {
@@ -21,13 +16,15 @@ import { buildFilesByContacts } from './helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersListByContact from '../Papers/PapersListByContact'
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
+import PapersListToolbar from './PapersListToolbar'
 
 const PapersListWrapper = ({ history, match }) => {
   const scannerT = useScannerI18n()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
-  const { BarLeft, BarCenter } = cozy.bar
-  const backButtonAction = useCallback(() => history.push('/paper'), [history])
+  const { setMultiSelectionState } = useMultiSelection()
+
   const currentFileTheme = useMemo(
     () => match?.params?.fileTheme || null,
     [match]
@@ -89,17 +86,11 @@ const PapersListWrapper = ({ history, match }) => {
 
   return (
     <>
-      <BarLeft>
-        <IconButton onClick={backButtonAction}>
-          <Icon icon={'previous'} />
-        </IconButton>
-      </BarLeft>
-      <BarCenter>
-        {/* Need to repeat the theme since the bar is in another react portal */}
-        <CozyTheme variant="normal">
-          <UIBarTitle>{themeLabel}</UIBarTitle>
-        </CozyTheme>
-      </BarCenter>
+      <PapersListToolbar
+        title={themeLabel}
+        onBack={() => history.push('/paper')}
+        onClose={() => setMultiSelectionState(false)}
+      />
 
       {paperslistByContact.length > 0 ? (
         <PapersListByContact paperslistByContact={paperslistByContact} />
