@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
@@ -15,8 +14,14 @@ import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 
 const validPageName = page => page === 'front' || page === 'back'
 
-const PaperItem = ({ paper, divider, children }) => {
-  const history = useHistory()
+const PaperItem = ({
+  paper,
+  divider,
+  className = '',
+  classes = {},
+  onClick,
+  children
+}) => {
   const { f, t } = useI18n()
   const client = useClient()
 
@@ -35,11 +40,9 @@ const PaperItem = ({ paper, divider, children }) => {
     <>
       <ListItem
         button
-        onClick={() =>
-          history.push({
-            pathname: `/paper/file/${paper.id}`
-          })
-        }
+        className={className}
+        classes={classes}
+        onClick={onClick}
       >
         <ListItemIcon>
           <FileImageLoader
@@ -76,7 +79,9 @@ const PaperItem = ({ paper, divider, children }) => {
 PaperItem.propTypes = {
   paper: PropTypes.object.isRequired,
   divider: PropTypes.bool,
-  children: PropTypes.node
+  children: PropTypes.node,
+  className: PropTypes.string,
+  classes: PropTypes.object
 }
 
 export default PaperItem
