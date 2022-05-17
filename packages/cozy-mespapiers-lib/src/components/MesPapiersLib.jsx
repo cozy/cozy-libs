@@ -12,6 +12,7 @@ import { StepperDialogProvider } from './Contexts/StepperDialogProvider'
 import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
 import { ModalProvider, ModalStack } from './Contexts/ModalProvider'
 import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
+import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { AppRouter } from './AppRouter'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 import MoreOptions from './MoreOptions/MoreOptions'
@@ -55,15 +56,17 @@ const MesPapiersLib = ({ lang }) => {
 
   return (
     <I18n lang={lang} polyglot={polyglot}>
-      <ScannerI18nProvider>
-        <PapersDefinitionsProvider>
-          <StepperDialogProvider>
-            <ModalProvider>
-              <App />
-            </ModalProvider>
-          </StepperDialogProvider>
-        </PapersDefinitionsProvider>
-      </ScannerI18nProvider>
+      <MultiSelectionProvider>
+        <ScannerI18nProvider>
+          <PapersDefinitionsProvider>
+            <StepperDialogProvider>
+              <ModalProvider>
+                <App />
+              </ModalProvider>
+            </StepperDialogProvider>
+          </PapersDefinitionsProvider>
+        </ScannerI18nProvider>
+      </MultiSelectionProvider>
     </I18n>
   )
 }
