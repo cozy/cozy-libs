@@ -90,7 +90,7 @@ describe('InputTextAdapter components:', () => {
       const input = getByTestId('InputMask-TextField-input')
       fireEvent.change(input, { target: { value: 'text' } })
 
-      expect(input).toHaveAttribute('value', '____')
+      expect(input).toHaveAttribute('value', 'ˍˍˍˍ')
     })
 
     it('should have only maskPlaceholder if you type numbers with the "mask" property accepts only letters', () => {
@@ -100,17 +100,17 @@ describe('InputTextAdapter components:', () => {
       const input = getByTestId('InputMask-TextField-input')
       fireEvent.change(input, { target: { value: '1234' } })
 
-      expect(input).toHaveAttribute('value', '____')
+      expect(input).toHaveAttribute('value', 'ˍˍˍˍ')
     })
 
-    it('should have a "maskPlaceholder" defined to "_" by default', () => {
+    it('should have a "maskPlaceholder" defined to "ˍ" by default', () => {
       const { getByTestId } = setup({
         attrs: { mask: '**' }
       })
       const input = getByTestId('InputMask-TextField-input')
       fireEvent.change(input, { target: { value: 'a' } })
 
-      expect(input).toHaveAttribute('value', 'a_')
+      expect(input).toHaveAttribute('value', 'aˍ')
     })
 
     it('should have a "-" like "maskPlaceholder"', () => {
