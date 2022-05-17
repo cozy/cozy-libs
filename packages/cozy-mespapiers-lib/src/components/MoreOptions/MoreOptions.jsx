@@ -5,10 +5,10 @@ import { useClient } from 'cozy-client'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 
-import { makeActions } from '../ActionMenuOptions/utils'
+import { makeActions } from '../Actions/utils'
 import { select } from '../Actions/Items/select'
-import ActionMenuWrapper from '../ActionMenuOptions/ActionMenuWrapper'
-import { ActionsItems } from '../ActionMenuOptions/ActionsItems'
+import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
+import { ActionsItems } from '../Actions/ActionsItems'
 
 const MoreOptions = () => {
   const [generalOptions, setGeneralOptions] = useState(false)
