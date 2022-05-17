@@ -1,4 +1,5 @@
 import React, { useState, useRef, memo } from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { models } from 'cozy-client'
@@ -15,6 +16,7 @@ import PaperItem from '../Papers/PaperItem'
 const { splitFilename } = models.file
 
 const PaperLine = ({ paper, divider, actions }) => {
+  const history = useHistory()
   const { isMobile } = useBreakpoints()
   const actionBtnRef = useRef()
 
@@ -28,9 +30,23 @@ const PaperLine = ({ paper, divider, actions }) => {
     type: 'file'
   })
 
+  const handleClick = () => {
+    if (multiSelectionState) {
+      addMultiSelectionFile(paper)
+      history.push({
+        pathname: `/paper/multiselect`,
+        search: `backgroundPath=/paper`
+      })
+    } else {
+      history.push({
+        pathname: `/paper/file/${paper.id}`
+      })
+    }
+  }
+
   return (
     <>
-      <PaperItem paper={paper} divider={divider}>
+      <PaperItem paper={paper} divider={divider} onClick={handleClick}>
         <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
           <Icon icon="dots" />
         </IconButton>
