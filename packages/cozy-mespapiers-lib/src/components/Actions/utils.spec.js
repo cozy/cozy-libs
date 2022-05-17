@@ -1,7 +1,9 @@
 import { makeActions, makeActionVariant } from './utils'
-import { download, forward } from './Actions'
+import { download } from './Items/download'
+import { forward } from './Items/forward'
 
-jest.mock('./Actions')
+jest.mock('./Items/download')
+jest.mock('./Items/forward')
 
 describe('Actions utils', () => {
   describe('makeActions', () => {

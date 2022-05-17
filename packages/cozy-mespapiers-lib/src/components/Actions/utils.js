@@ -5,7 +5,8 @@ import { isReferencedBy } from 'cozy-client'
 
 import { FILES_DOCTYPE, JOBS_DOCTYPE } from '../../doctypes'
 import { getSharingLink } from '../../utils/getSharingLink'
-import { download, forward } from './Actions'
+import { forward } from './Items/forward'
+import { download } from './Items/download'
 import { handleConflictFilename } from '../../utils/handleConflictFilename'
 
 export const getActionName = actionObject => {
