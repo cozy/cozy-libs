@@ -12,11 +12,13 @@ import SearchInput from '../SearchInput'
 import PaperGroup from '../Papers/PaperGroup'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { buildFilesQueryByLabels } from '../../helpers/queries'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { filterPapersByThemeAndSearchValue } from './helpers'
+import HomeToolbar from './HomeToolbar'
 
 const {
   themes: { themesList }
@@ -27,7 +29,9 @@ const Home = () => {
   const [selectedTheme, setSelectedTheme] = useState('')
   const { t } = useI18n()
   const scannerT = useScannerI18n()
+  const { multiSelectionState } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
+
   const labels = papersDefinitions.map(paper => paper.label)
   const filesQueryByLabels = buildFilesQueryByLabels(labels)
 
@@ -75,18 +79,26 @@ const Home = () => {
 
   return (
     <>
-      <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
-        <Box className="u-flex u-flex-items-center u-mb-half-s" flex="1 1 auto">
-          <SearchInput setSearchValue={setSearchValue} />
-        </Box>
-        <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
-          <ThemesFilter
-            items={themesList}
-            selectedTheme={selectedTheme}
-            handleThemeSelection={handleThemeSelection}
-          />
-        </Box>
-      </div>
+      {isMultiselectionActive && <HomeToolbar />}
+
+      {!multiSelectionState && (
+        <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
+          <Box
+            className="u-flex u-flex-items-center u-mb-half-s"
+            flex="1 1 auto"
+          >
+            <SearchInput setSearchValue={setSearchValue} />
+          </Box>
+          <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
+            <ThemesFilter
+              items={themesList}
+              selectedTheme={selectedTheme}
+              handleThemeSelection={handleThemeSelection}
+            />
+          </Box>
+        </div>
+      )}
+
       {allPapersByCategories.length === 0 ? (
         <Empty
           icon={HomeCloud}
@@ -98,7 +110,10 @@ const Home = () => {
       ) : (
         <PaperGroup allPapersByCategories={filteredPapers} />
       )}
-      <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
+
+      {!multiSelectionState && (
+        <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
+      )}
     </>
   )
 }
