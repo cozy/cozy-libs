@@ -423,15 +423,7 @@ DumbTriggerManager.propTypes = {
   client: PropTypes.object,
   onError: PropTypes.func,
   showUnlockForm: PropTypes.func,
-  onVaultDismiss: PropTypes.func,
   error: PropTypes.any,
-   /**
-   * Indicates if the AccountForm has to show errors. Sometimes errors may be
-   * displayed elsewhere. However, a KonnectorJobError corresponding to a login
-   * error is always displayed.
-   * @type {Boolean}
-   */
-    showError: PropTypes.bool,
   /**
    * Used to have options on fields (forceEncryptedPlaceholder or focus)
    */
