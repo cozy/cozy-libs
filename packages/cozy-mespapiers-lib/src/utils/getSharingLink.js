@@ -6,7 +6,7 @@ export const getSharingLink = async (client, file, isFlatDomain) => {
   const PERMS = {
     _type: PERMISSIONS_DOCTYPE,
     permissions: {
-      files: { type: FILES_DOCTYPE, values: [file.id], verbs: ['GET'] }
+      files: { type: FILES_DOCTYPE, values: [file._id], verbs: ['GET'] }
     }
   }
   const { data: sharedLink } = await client.save(PERMS)
