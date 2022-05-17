@@ -255,5 +255,10 @@
       "text": "Voici un lien vers mon document %{name} : ",
       "title": "Lien vers mon document %{name}"
     }
+  },
+  "Multiselect": {
+    "title": "Sélectionner des papiers",
+    "empty": "Sélectionner des papiers pour effectuer un téléchargement ou un transfert groupé.",
+    "select": "Sélectionner un papier"
   }
 }

@@ -255,5 +255,10 @@
       "text": "Link to my document %{name}: ",
       "title": "Link to my document %{name}"
     }
+  },
+  "Multiselect": {
+    "title": "Select papers",
+    "empty": "Select papers to perform a bulk upload or download.",
+    "select": "Select a papier"
   }
 }
