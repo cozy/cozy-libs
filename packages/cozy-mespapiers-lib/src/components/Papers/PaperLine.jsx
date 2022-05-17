@@ -8,10 +8,12 @@ import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import Radio from 'cozy-ui/transpiled/react/Radios'
 
 import { ActionsItems } from '../Actions/ActionsItems'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import PaperItem from '../Papers/PaperItem'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { splitFilename } = models.file
 
@@ -22,6 +24,7 @@ const PaperLine = ({ paper, divider, actions }) => {
 
   const [optionFile, setOptionFile] = useState(false)
 
+  const { multiSelectionState, addMultiSelectionFile } = useMultiSelection()
   const hideActionsMenu = () => setOptionFile(false)
   const toggleActionsMenu = () => setOptionFile(prev => !prev)
 
@@ -47,9 +50,13 @@ const PaperLine = ({ paper, divider, actions }) => {
   return (
     <>
       <PaperItem paper={paper} divider={divider} onClick={handleClick}>
-        <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
-          <Icon icon="dots" />
-        </IconButton>
+        {multiSelectionState ? (
+          <Radio />
+        ) : (
+          <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
+            <Icon icon="dots" />
+          </IconButton>
+        )}
       </PaperItem>
 
       {optionFile && (
