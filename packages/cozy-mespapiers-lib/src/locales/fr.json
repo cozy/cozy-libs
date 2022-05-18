@@ -259,6 +259,7 @@
   "Multiselect": {
     "title": "Sélectionner des papiers",
     "empty": "Sélectionner des papiers pour effectuer un téléchargement ou un transfert groupé.",
-    "select": "Sélectionner un papier"
+    "select": "Sélectionner un papier",
+    "folderZipName": "%{contactName} - papiers - %{date}.zip"
   }
 }
