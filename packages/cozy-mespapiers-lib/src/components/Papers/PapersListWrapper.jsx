@@ -23,7 +23,7 @@ const PapersListWrapper = ({ history, match }) => {
   const scannerT = useScannerI18n()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
-  const { setMultiSelectionState } = useMultiSelection()
+  const { setIsMultiSelectionActive } = useMultiSelection()
 
   const currentFileTheme = useMemo(
     () => match?.params?.fileTheme || null,
@@ -89,7 +89,7 @@ const PapersListWrapper = ({ history, match }) => {
       <PapersListToolbar
         title={themeLabel}
         onBack={() => history.push('/paper')}
-        onClose={() => setMultiSelectionState(false)}
+        onClose={() => setIsMultiSelectionActive(false)}
       />
 
       {paperslistByContact.length > 0 ? (

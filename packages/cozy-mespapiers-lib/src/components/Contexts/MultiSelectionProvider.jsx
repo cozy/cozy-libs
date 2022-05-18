@@ -3,7 +3,7 @@ import React, { createContext, useState, useEffect } from 'react'
 const MultiSelectionContext = createContext()
 
 const MultiSelectionProvider = ({ children }) => {
-  const [multiSelectionState, setMultiSelectionState] = useState(false)
+  const [isMultiSelectionActive, setIsMultiSelectionActive] = useState(false)
   const [multiSelectionFiles, setMultiSelectionFiles] = useState([])
 
   const addMultiSelectionFile = fileToAdd => {
@@ -22,14 +22,14 @@ const MultiSelectionProvider = ({ children }) => {
 
   useEffect(() => {
     // Resets the context by exiting the multi-selection mode
-    if (!multiSelectionState) {
+    if (!isMultiSelectionActive) {
       removeAllMultiSelectionFiles()
     }
-  }, [multiSelectionState])
+  }, [isMultiSelectionActive])
 
   const value = {
-    multiSelectionState,
-    setMultiSelectionState,
+    isMultiSelectionActive,
+    setIsMultiSelectionActive,
     addMultiSelectionFile,
     removeMultiSelectionFile,
     removeAllMultiSelectionFiles,

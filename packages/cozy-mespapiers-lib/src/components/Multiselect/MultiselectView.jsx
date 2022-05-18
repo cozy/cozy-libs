@@ -26,18 +26,18 @@ const MultiselectView = () => {
   const classes = useStyles()
   const history = useHistory()
   const location = useLocation()
-  const { setMultiSelectionState } = useMultiSelection()
+  const { setIsMultiSelectionActive } = useMultiSelection()
 
   const backgroundPath = new URLSearchParams(location.search).get(
     'backgroundPath'
   )
   useEffect(() => {
-    setMultiSelectionState(true)
-  }, [setMultiSelectionState, history])
+    setIsMultiSelectionActive(true)
+  }, [setIsMultiSelectionActive, history])
 
   const handleClose = () => {
     history.push(backgroundPath || '/paper')
-    setMultiSelectionState(false)
+    setIsMultiSelectionActive(false)
   }
 
   return (

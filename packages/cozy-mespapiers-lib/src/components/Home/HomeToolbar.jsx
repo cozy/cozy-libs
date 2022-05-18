@@ -14,7 +14,7 @@ const HomeToolbar = () => {
   const { t } = useI18n()
   const { isDesktop } = useBreakpoints()
   const history = useHistory()
-  const { setMultiSelectionState } = useMultiSelection()
+  const { setIsMultiSelectionActive } = useMultiSelection()
   const { BarRight, BarLeft, BarCenter } = cozy.bar
 
   return (
@@ -27,7 +27,7 @@ const HomeToolbar = () => {
       <BarRight>
         {!isDesktop ? (
           <IconButton
-            onClick={() => setMultiSelectionState(false)}
+            onClick={() => setIsMultiSelectionActive(false)}
             style={{ paddingRight: 0 }}
           >
             <Icon icon={'cross-medium'} />
