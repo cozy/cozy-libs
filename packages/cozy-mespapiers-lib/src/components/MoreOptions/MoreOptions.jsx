@@ -4,6 +4,7 @@ import React, { useState, useRef } from 'react'
 import { useClient } from 'cozy-client'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 
 import { makeActions } from '../Actions/utils'
 import { select } from '../Actions/Items/select'
@@ -27,13 +28,11 @@ const MoreOptions = () => {
   return (
     <>
       <BarRight>
-        <IconButton
-          ref={actionBtnRef}
-          onClick={toggleActionsMenu}
-          style={{ paddingRight: 0 }}
-        >
-          <Icon icon={'dots'} />
-        </IconButton>
+        <CozyTheme>
+          <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
+            <Icon icon={'dots'} />
+          </IconButton>
+        </CozyTheme>
       </BarRight>
 
       {generalOptions && (
