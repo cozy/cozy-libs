@@ -1,9 +1,11 @@
 import uuid from 'uuid/v4'
+import get from 'lodash/get'
 
-import * as konnectors from './konnectors'
 import CozyClient from 'cozy-client'
 import CozyRealtime from 'cozy-realtime'
-import get from 'lodash/get'
+import { readCozyDataFromDOM } from 'cozy-ui/transpiled/react/helpers/appDataset'
+
+import * as konnectors from './konnectors'
 
 export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
 
@@ -55,10 +57,12 @@ export const handleOAuthResponse = (options = {}) => {
   if (!realtime) {
     let client = options.client
     if (!client) {
-      const root = document.querySelector('[role=application]')
+      const domain = readCozyDataFromDOM('domain')
+      const token = readCozyDataFromDOM('token')
+
       client = new CozyClient({
-        uri: `${window.location.protocol}//${root.dataset.cozyDomain}`,
-        token: root.dataset.cozyToken
+        uri: `${window.location.protocol}//${domain}`,
+        token: token
       })
     }
     realtime = new CozyRealtime({ client })
