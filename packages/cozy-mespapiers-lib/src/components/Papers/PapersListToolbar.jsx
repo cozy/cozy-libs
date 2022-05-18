@@ -11,7 +11,7 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PapersListToolbar = ({ title, onBack, onClose }) => {
-  const { multiSelectionState } = useMultiSelection()
+  const { isMultiSelectionActive } = useMultiSelection()
   const { isDesktop } = useBreakpoints()
   const { BarLeft, BarRight, BarCenter } = cozy.bar
 
@@ -30,7 +30,7 @@ const PapersListToolbar = ({ title, onBack, onClose }) => {
         </CozyTheme>
       </BarCenter>
 
-      {multiSelectionState && (
+      {isMultiSelectionActive && (
         <BarRight>
           {!isDesktop && (
             <IconButton onClick={onClose} style={{ paddingRight: 0 }}>

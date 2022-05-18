@@ -35,9 +35,9 @@ jest.mock('cozy-client/dist/utils', () => ({
 const setup = ({
   isLoading = true,
   withData = false,
-  multiSelectionState = false
+  isMultiSelectionActive = false
 } = {}) => {
-  useMultiSelection.mockReturnValue({ multiSelectionState })
+  useMultiSelection.mockReturnValue({ isMultiSelectionActive })
   isQueryLoading.mockReturnValue(isLoading)
   useQueryAll.mockReturnValue({
     data: withData
@@ -67,7 +67,7 @@ describe('Home components:', () => {
     const { queryByTestId, getByTestId } = setup({
       isLoading: false,
       withData: true,
-      multiSelectionState: true
+      isMultiSelectionActive: true
     })
 
     expect(queryByTestId('ThemesFilter')).toBeNull()

@@ -24,7 +24,7 @@ const PaperLine = ({ paper, divider, actions }) => {
 
   const [optionFile, setOptionFile] = useState(false)
 
-  const { multiSelectionState, addMultiSelectionFile } = useMultiSelection()
+  const { isMultiSelectionActive, addMultiSelectionFile } = useMultiSelection()
   const hideActionsMenu = () => setOptionFile(false)
   const toggleActionsMenu = () => setOptionFile(prev => !prev)
 
@@ -34,7 +34,7 @@ const PaperLine = ({ paper, divider, actions }) => {
   })
 
   const handleClick = () => {
-    if (multiSelectionState) {
+    if (isMultiSelectionActive) {
       addMultiSelectionFile(paper)
       history.push({
         pathname: `/paper/multiselect`,
@@ -50,7 +50,7 @@ const PaperLine = ({ paper, divider, actions }) => {
   return (
     <>
       <PaperItem paper={paper} divider={divider} onClick={handleClick}>
-        {multiSelectionState ? (
+        {isMultiSelectionActive ? (
           <Radio />
         ) : (
           <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>

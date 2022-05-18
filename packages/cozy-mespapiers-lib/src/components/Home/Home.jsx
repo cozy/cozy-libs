@@ -29,7 +29,7 @@ const Home = () => {
   const [selectedTheme, setSelectedTheme] = useState('')
   const { t } = useI18n()
   const scannerT = useScannerI18n()
-  const { multiSelectionState } = useMultiSelection()
+  const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
 
   const labels = papersDefinitions.map(paper => paper.label)
@@ -79,9 +79,9 @@ const Home = () => {
 
   return (
     <>
-      {isMultiselectionActive && <HomeToolbar />}
+      {isMultiSelectionActive && <HomeToolbar />}
 
-      {!multiSelectionState && (
+      {!isMultiSelectionActive && (
         <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
           <Box
             className="u-flex u-flex-items-center u-mb-half-s"
@@ -111,7 +111,7 @@ const Home = () => {
         <PaperGroup allPapersByCategories={filteredPapers} />
       )}
 
-      {!multiSelectionState && (
+      {!isMultiSelectionActive && (
         <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
       )}
     </>
