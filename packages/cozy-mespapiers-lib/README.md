@@ -55,6 +55,13 @@ The following permissions are required in the application `manifest.webapp` file
   "description": "Used to manage your papers settings",
   "type": "io.cozy.mespapiers.settings",
   "verbs": ["GET", "POST", "PUT"]
+},
+"create-a-zip-archive": {
+  "description": "Required to create a zip archive inside the cozy",
+  "type": "io.cozy.jobs",
+  "verbs": ["POST"],
+  "selector": "worker",
+  "values": ["zip"]
 }
 ```
 
