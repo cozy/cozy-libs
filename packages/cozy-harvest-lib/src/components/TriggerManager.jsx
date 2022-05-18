@@ -312,8 +312,16 @@ export class DumbTriggerManager extends Component {
   }
 
   render() {
-    const { konnector, showError, t, fieldOptions, flow, flowState, client } =
-      this.props
+    const {
+      konnector,
+      showError,
+      t,
+      fieldOptions,
+      flow,
+      flowState,
+      client,
+      OAuthFormWrapperComp
+    } = this.props
 
     const submitting = flowState.running
 
@@ -328,14 +336,19 @@ export class DumbTriggerManager extends Component {
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
     if (oauth || konnectorPolicy.isBIWebView) {
+      const Wrapper = OAuthFormWrapperComp
+        ? OAuthFormWrapperComp
+        : React.Fragment
       return (
-        <OAuthForm
-          client={client}
-          flow={flow}
-          account={account}
-          konnector={konnector}
-          onSuccess={this.handleOAuthAccountId}
-        />
+        <Wrapper>
+          <OAuthForm
+            client={client}
+            flow={flow}
+            account={account}
+            konnector={konnector}
+            onSuccess={this.handleOAuthAccountId}
+          />
+        </Wrapper>
       )
     }
 
@@ -429,7 +442,9 @@ DumbTriggerManager.propTypes = {
    */
   fieldOptions: PropTypes.object,
   flow: PropTypes.object,
-  flowState: PropTypes.object
+  flowState: PropTypes.object,
+  // Used to inject a component around OAuthForm, and so customize the UI from the app
+  OAuthFormWrapperComp: PropTypes.node
 }
 
 const TriggerManager = compose(
