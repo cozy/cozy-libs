@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.3.0...cozy-harvest-lib@9.4.0) (2022-05-18)
+
+
+### Features
+
+* **harvest:** HandleOAuthResponse can deal with cozy-data from DOM ([7c6ac1a](https://github.com/cozy/cozy-libs/commit/7c6ac1a8de7dd2b136530d0aafdb1e3f9e28fa56))
+* **harvest:** OAuthFormWrapperComp can be passed to TriggerManager ([76ee8b7](https://github.com/cozy/cozy-libs/commit/76ee8b74d9314d3c66593dfe925880e6a296b420))
+
+
+
+
+
 # [9.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.2.7...cozy-harvest-lib@9.3.0) (2022-05-17)
 
 
