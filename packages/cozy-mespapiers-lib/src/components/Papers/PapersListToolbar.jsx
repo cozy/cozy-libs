@@ -33,7 +33,7 @@ const PapersListToolbar = ({ title, onBack, onClose }) => {
       {isMultiSelectionActive && (
         <BarRight>
           {!isDesktop && (
-            <IconButton onClick={onClose} style={{ paddingRight: 0 }}>
+            <IconButton onClick={onClose}>
               <Icon icon={'cross-medium'} />
             </IconButton>
           )}

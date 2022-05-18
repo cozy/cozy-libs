@@ -26,10 +26,7 @@ const HomeToolbar = () => {
       </BarLeft>
       <BarRight>
         {!isDesktop ? (
-          <IconButton
-            onClick={() => setIsMultiSelectionActive(false)}
-            style={{ paddingRight: 0 }}
-          >
+          <IconButton onClick={() => setIsMultiSelectionActive(false)}>
             <Icon icon={'cross-medium'} />
           </IconButton>
         ) : (
