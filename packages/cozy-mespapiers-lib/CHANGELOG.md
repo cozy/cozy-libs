@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.28.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.27.6...cozy-mespapiers-lib@0.28.0) (2022-05-18)
+
+
+### Bug Fixes
+
+* Id attribute is not always defined ([e1beb2b](https://github.com/cozy/cozy-libs/commit/e1beb2bd357b150e6c2daaaec5bcf2579f3c184b))
+* Import actions on utils file ([c1964e1](https://github.com/cozy/cozy-libs/commit/c1964e1464cbf29b6f38a554e1a0feae3b69cf1c))
+* Import on MoreOptions component ([68d5db2](https://github.com/cozy/cozy-libs/commit/68d5db2a6efff53e71690bfa71ccdf63603434dd))
+* MoreOptions style ([18087f7](https://github.com/cozy/cozy-libs/commit/18087f7b9b4863cffe13cca7e66f206ae3f514d8))
+* Style of IconButton on cozy bar right ([ed0a0cb](https://github.com/cozy/cozy-libs/commit/ed0a0cb3e3744e99e4eb32f403396b8edc343f5a))
+
+
+### Features
+
+* Add "io.cozy.jobs" constant ([3fcdeeb](https://github.com/cozy/cozy-libs/commit/3fcdeebcd4dc61f055f1988dd7ed505c7cd1cd43))
+* Add className & onClick props to PaperItem component ([7469843](https://github.com/cozy/cozy-libs/commit/746984327ca08e215b7abbcae21f858298a9a2af))
+* Add functions to MultiSelectViewActions component ([49c06d8](https://github.com/cozy/cozy-libs/commit/49c06d8c5a888761501625cec65a0eb3e873927b))
+* Add GhostButton component ([35894ce](https://github.com/cozy/cozy-libs/commit/35894cecaf0e73c7ef095679360c8de47187d08a))
+* Add helper to make zip folder and save it to Drive ([c82bebb](https://github.com/cozy/cozy-libs/commit/c82bebbf4c974524ac9eed6f9e355a93328edf9a))
+* Add helper to manage conflict filename ([45f1002](https://github.com/cozy/cozy-libs/commit/45f10023612bd8d5b850874e2d2ad2ea11b47ca0))
+* Add Multipapers SVG ([dd31a0c](https://github.com/cozy/cozy-libs/commit/dd31a0c87c55d8b9c68bad922d5b3e4cbb8d6ed3))
+* Add Multiselect components ([4537db6](https://github.com/cozy/cozy-libs/commit/4537db6684a3866922d75335f7fa37f98b9feece))
+* Add MultiSelectionProvider ([c57231d](https://github.com/cozy/cozy-libs/commit/c57231d15c0db7f354f584880bd54823d0509d56))
+* Add route for MultiSelectView component ([af26c9d](https://github.com/cozy/cozy-libs/commit/af26c9d1716d13a4966f057c4971676fc3fa7a02))
+* Add to multiSelect list the current file selected ([e1981de](https://github.com/cozy/cozy-libs/commit/e1981de292b43fe2b08a9c81cd2867ef70ffbe09))
+* Change path for select action ([a9875a4](https://github.com/cozy/cozy-libs/commit/a9875a49139245375144559ba17c90c77fd665ee))
+* Improve PaperCardItem ([20a418f](https://github.com/cozy/cozy-libs/commit/20a418fb2143013f00a77f7ddcb8a16bcf49dc6b))
+* Layout of the Home component view with the multi-selection mode ([ae41fa5](https://github.com/cozy/cozy-libs/commit/ae41fa503c8358f9e4eb611c1a2cd90a4b468331))
+* Layout of the MultiSelect components with the multi-select mode ([e0a2de6](https://github.com/cozy/cozy-libs/commit/e0a2de644960659767d24831cb0350c344544418))
+* Layout of the Papers components views with the multi-select mode ([2a11144](https://github.com/cozy/cozy-libs/commit/2a111444c7c81241d06d2dae0b2fdedec54f9f12))
+* Manage multiple file on forward button ([df4e8b7](https://github.com/cozy/cozy-libs/commit/df4e8b71effec567e6484916923463f8cadbba5c))
+* The hideActionMenu function is not always defined ([8abcb1d](https://github.com/cozy/cozy-libs/commit/8abcb1da8e145ca5ac0f8ca4d9ea3109df00d61f))
+
+
+
+
+
 ## [0.27.6](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.27.5...cozy-mespapiers-lib@0.27.6) (2022-05-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
