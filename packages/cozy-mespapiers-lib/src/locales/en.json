@@ -259,6 +259,7 @@
   "Multiselect": {
     "title": "Select papers",
     "empty": "Select papers to perform a bulk upload or download.",
-    "select": "Select a papier"
+    "select": "Select a papier",
+    "folderZipName": "%{contactName} - papers - %{date}.zip"
   }
 }

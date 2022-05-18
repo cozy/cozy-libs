@@ -48,7 +48,7 @@ const MultiselectView = () => {
       onClose={handleClose}
       title={t('Multiselect.title')}
       content={<MultiselectContent />}
-      actions={<MultiselectViewActions />}
+      actions={<MultiselectViewActions onClose={handleClose} />}
     />
   )
 }
