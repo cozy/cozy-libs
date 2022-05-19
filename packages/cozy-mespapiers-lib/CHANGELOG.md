@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.29.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.28.1...cozy-mespapiers-lib@0.29.0) (2022-05-19)
+
+
+### Features
+
+* Add one permission exemple in the documentation ([74b3b29](https://github.com/cozy/cozy-libs/commit/74b3b29f002f5f3cb867460ed44372e08a1b0e4f))
+
+
+### BREAKING CHANGES
+
+* Adding the Multi-select feature requires adding a permission in the applications
+Add this permission in your app:
+```
+"create-a-zip-archive": {
+  "description": "Required to create a zip archive inside the cozy",
+  "type": "io.cozy.jobs",
+  "verbs": ["POST"],
+  "selector": "worker",
+  "values": ["zip"]
+}
+```
+(The BC should have been on this commit: c82bebb )
+
+
+
+
+
 ## [0.28.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.28.0...cozy-mespapiers-lib@0.28.1) (2022-05-18)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
