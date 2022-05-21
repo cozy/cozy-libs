@@ -11,7 +11,7 @@
     "lint": "cd ..; yarn eslint --ext js,jsx packages/repo-doctor"
   },
   "dependencies": {
-    "argparse": "^1.0.10",
+    "argparse": "^2.0.1",
     "bluebird": "^3.5.5",
     "chalk": "^4.1.0",
     "colorette": "^1.2.1",
