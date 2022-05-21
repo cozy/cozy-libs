@@ -20,7 +20,7 @@
     "cozy-app-publish": "./src/cozy-app-publish.js"
   },
   "dependencies": {
-    "argparse": "^1.0.10",
+    "argparse": "^2.0.1",
     "chalk": "^2.4.2",
     "cross-spawn": "^6.0.5",
     "fs-extra": "^7.0.1",
