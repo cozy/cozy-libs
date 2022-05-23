@@ -4,8 +4,11 @@ import { Q, useClient } from 'cozy-client'
 import { isIOSApp } from 'cozy-device-helper'
 import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
+import FooterActionButtons from 'cozy-ui/transpiled/react/Viewer/Footer/FooterActionButtons'
+import ForwardOrDownloadButton from 'cozy-ui/transpiled/react/Viewer/Footer/ForwardOrDownloadButton'
 
 import FileViewerLoading from './FileViewerLoading'
+import SelectFileButton from './SelectFileButton'
 
 const styleStatusBar = switcher => {
   if (window.StatusBar && isIOSApp()) {
@@ -135,9 +138,13 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
         files={viewerFiles}
         currentIndex={viewerIndex}
         onChangeRequest={handleOnChange}
-        disableSharing={true}
         onCloseRequest={handleOnClose}
-      />
+      >
+        <FooterActionButtons>
+          <ForwardOrDownloadButton />
+          <SelectFileButton file={viewerFiles[viewerIndex]} />
+        </FooterActionButtons>
+      </Viewer>
     </Overlay>
   )
 }
