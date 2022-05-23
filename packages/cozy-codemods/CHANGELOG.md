@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.16.0 (2022-05-23)
+
+
+### Features
+
+* Add codemods for Viewer ([13a5a82](https://github.com/cozy/cozy-libs/commit/13a5a82133936e114b6e44c25308a5f03b185b6a))
+* **cozy-codemods:** Add helper for make JSX element ([9790a77](https://github.com/cozy/cozy-libs/commit/9790a77cf62afec5832e27ac7a9b67ec9ada97d9))
+
+
+
+
+
 ## [1.15.1](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.15.0...@cozy/codemods@1.15.1) (2022-05-04)
 
 
