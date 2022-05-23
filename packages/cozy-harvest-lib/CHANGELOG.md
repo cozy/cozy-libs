@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.4.0...cozy-harvest-lib@9.5.0) (2022-05-23)
+
+
+### Features
+
+* Handle banks with mulitple bank ids ([a944201](https://github.com/cozy/cozy-libs/commit/a944201ca5752766a49689f42531c84f03798002))
+
+
+
+
+
 # [9.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.3.0...cozy-harvest-lib@9.4.0) (2022-05-18)
 
 
