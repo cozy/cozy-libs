@@ -279,6 +279,35 @@ const getAttributeByName = ({ attributes, name }) =>
 const makeAttribute = ({ name, value }) =>
   j.jsxAttribute(j.jsxIdentifier(name), j.literal(value))
 
+/**
+ * Make an JSXElement easily with different options
+ *
+ * @param {object} param
+ * @param {string} param.name - Name of the element
+ * @param {object[]} [param.attributes] - Attributes of the element
+ * @param {object[]} [param.children] - Children of the element
+ * @param {boolean} [param.autoClose] - If the element should auto close
+ * @returns {namedTypes.JSXElement}
+ */
+const makeJSXElement = ({
+  name,
+  attributes = [],
+  children = [],
+  autoClose = true
+}) => {
+  if (autoClose && children.length === 0) {
+    return j.jsxElement(
+      j.jsxOpeningElement(j.jsxIdentifier(name), attributes, true)
+    )
+  }
+
+  return j.jsxElement(
+    j.jsxOpeningElement(j.jsxIdentifier(name), attributes),
+    j.jsxClosingElement(j.jsxIdentifier(name)),
+    children
+  )
+}
+
 module.exports = {
   simplify,
   ensure,
@@ -286,5 +315,6 @@ module.exports = {
   getAttributeName,
   getAttributeValue,
   getAttributeByName,
-  makeAttribute
+  makeAttribute,
+  makeJSXElement
 }
