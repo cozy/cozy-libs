@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.30.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.29.1...cozy-mespapiers-lib@0.30.0) (2022-05-24)
+
+
+### Features
+
+* Add SelectFileButton to be used in the mobile viewer actions ([d482dab](https://github.com/cozy/cozy-libs/commit/d482dab50d8e2ce9c56f5b45c4544d873ce39532))
+* Update cozy-ui to 68.0.0 ([3c809ac](https://github.com/cozy/cozy-libs/commit/3c809ac0182dfe71021f5bfa3bacc6ce5b2b4c69))
+* Update Viewer with new implementation ([f3d7f37](https://github.com/cozy/cozy-libs/commit/f3d7f373cc08486d3494b9055c47986ff2ac292f))
+
+
+
+
+
 ## [0.29.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.29.0...cozy-mespapiers-lib@0.29.1) (2022-05-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
