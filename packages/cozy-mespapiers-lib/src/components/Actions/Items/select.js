@@ -8,6 +8,7 @@ import { useMultiSelection } from '../../Hooks/useMultiSelection'
 
 export const select = ({ hideActionsMenu }) => {
   return {
+    name: 'select',
     Component: function Select({ className, files }) {
       const { t } = useI18n()
       const history = useHistory()

@@ -7,6 +7,7 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const forward = ({ client }) => {
   return {
+    name: 'forward',
     action: (files, t) => forwardFile(client, files, t),
     Component: function Forward({ onClick, className }) {
       const { t } = useI18n()
