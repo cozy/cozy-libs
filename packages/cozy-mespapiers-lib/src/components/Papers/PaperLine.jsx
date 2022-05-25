@@ -51,7 +51,7 @@ const PaperLine = ({ paper, divider, actions }) => {
     <>
       <PaperItem paper={paper} divider={divider} onClick={handleClick}>
         {isMultiSelectionActive ? (
-          <Radio />
+          <Radio onClick={handleClick} />
         ) : (
           <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
             <Icon icon="dots" />
