@@ -18,6 +18,7 @@ import {
 import { KonnectorJobError } from '../helpers/konnectors'
 import { waitForRealtimeEvent } from './jobUtils'
 import '../types'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 const TEMP_TOKEN_TIMOUT_S = 60
 
@@ -166,7 +167,13 @@ export const onBIAccountCreation = async ({
     biConnection
   })
 
-  return await flow.saveAccount(setBIConnectionId(account, biConnection.id))
+  const updatedAccount = await flow.saveAccount(
+    setBIConnectionId(account, biConnection.id)
+  )
+
+  flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+
+  return updatedAccount
 }
 
 export const fetchExtraOAuthUrlParams = async ({
