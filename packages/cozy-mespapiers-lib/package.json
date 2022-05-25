@@ -23,7 +23,7 @@
     "cozy-intent": "^2.0.2",
     "cozy-realtime": "^4.1.0",
     "cozy-sharing": "^4.2.2",
-    "cozy-ui": "^68.0.0",
+    "cozy-ui": "^68.1.1",
     "eslint-config-cozy-app": "^4.0.2",
     "git-directory-deploy": "1.5.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
@@ -49,7 +49,7 @@
     "cozy-intent": ">=1.17.1",
     "cozy-realtime": ">=4.0.8",
     "cozy-sharing": ">=4.1.7",
-    "cozy-ui": ">=68.0.0",
+    "cozy-ui": ">=68.1.1",
     "react-router-dom": ">=5.2.0"
   }
 }
