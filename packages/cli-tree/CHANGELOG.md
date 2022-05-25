@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.6.0 (2022-05-25)
+
+
+### Bug Fixes
+
+* bump argparse from 1.0.10 to 2.0.1 ([832b3db](https://github.com/cozy/cozy-libs/commit/832b3dbdfe774061357a3fc451976574b1d653fd))
+
+
+### Features
+
+* Remove useVaultClient call in LegacyTriggerManager ([439e603](https://github.com/cozy/cozy-libs/commit/439e603cef915e9fede72ae293ae35ca330347eb))
+
+
+
+
+
 # 0.5.0 (2022-02-03)
 
 
