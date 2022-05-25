@@ -2,7 +2,9 @@ import CozyClient from 'cozy-client'
 import {
   handleOAuthAccount,
   checkBIConnection,
-  isBiWebViewConnector
+  isBiWebViewConnector,
+  fetchContractSynchronizationUrl,
+  refreshContracts
 } from './biWebView'
 import ConnectionFlow from '../models/ConnectionFlow'
 import { waitForRealtimeEvent } from './jobUtils'
@@ -14,10 +16,11 @@ jest.mock('./bi-http', () => ({
     .fn()
     .mockResolvedValue({ text: Promise.resolve('{}') }),
   updateBIConnection: jest.fn(),
-  getBIConnection: jest.fn()
+  getBIConnection: jest.fn(),
+  getBIConnectionAccountsList: jest.fn()
 }))
 
-import { getBIConnection } from './bi-http'
+import { getBIConnection, getBIConnectionAccountsList } from './bi-http'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
@@ -181,5 +184,133 @@ describe('isBiWebViewConnector', () => {
   it('should return false if the "harvest.bi.webview" flag is not activated', () => {
     flag('harvest.bi.webview', false)
     expect(isBiWebViewConnector(BIConnector)).toEqual(false)
+  })
+})
+
+describe('fetchContractSynchronizationUrl', () => {
+  it('should provide a proper bi manage webview url', async () => {
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            mode: 'prod',
+            url: 'https://cozy.biapi.pro/2.0',
+            clientId: 'test-client-id',
+            code: 'bi-temporary-access-token-145613'
+          }
+        }
+      }
+    })
+
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+
+    const url = await fetchContractSynchronizationUrl({
+      account,
+      client,
+      konnector
+    })
+    expect(url).toEqual(
+      'https://cozy.biapi.pro/2.0/auth/webview/manage?client_id=test-client-id&code=bi-temporary-access-token-145613'
+    )
+  })
+})
+
+describe('refreshContracts', () => {
+  it('update current contracts with values from BI', async () => {
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            mode: 'prod',
+            url: 'https://cozy.biapi.pro/2.0',
+            clientId: 'test-client-id',
+            code: 'bi-temporary-access-token-145613'
+          }
+        }
+      }
+    })
+
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    client.save = jest.fn()
+    const accountWithContracts = {
+      _id: 'testaccount',
+      relationships: {
+        contracts: {
+          data: [
+            { metadata: { vendorId: '1', imported: true } },
+            {
+              metadata: {
+                vendorId: '2',
+                imported: false,
+                disabledAt: '2022-05-24T12:00:00'
+              }
+            },
+            { metadata: { vendorId: '3', imported: true } },
+            {
+              metadata: {
+                vendorId: '4',
+                imported: false,
+                disabledAt: '2022-05-23T13:00:00'
+              }
+            }
+          ]
+        }
+      }
+    }
+    getBIConnectionAccountsList.mockResolvedValue({
+      accounts: [
+        { id: 1, disabled: '2022-05-25 12:00:00' },
+        { id: 2, disabled: null },
+        { id: 3, disabled: '2022-05-25 12:01:00' },
+        { id: 4, disabled: null }
+      ]
+    })
+
+    await refreshContracts({ client, konnector, account: accountWithContracts })
+    expect(client.save).toHaveBeenCalledWith({
+      _id: 'testaccount',
+      relationships: {
+        contracts: {
+          data: [
+            {
+              metadata: {
+                vendorId: '1',
+                imported: false,
+                disabledAt: '2022-05-25T12:00:00'
+              }
+            },
+            { metadata: { vendorId: '2', imported: true } },
+            {
+              metadata: {
+                vendorId: '3',
+                imported: false,
+                disabledAt: '2022-05-25T12:01:00'
+              }
+            },
+            { metadata: { vendorId: '4', imported: true } }
+          ]
+        }
+      }
+    })
   })
 })

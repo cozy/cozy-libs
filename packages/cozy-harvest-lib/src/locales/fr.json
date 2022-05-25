@@ -29,7 +29,8 @@
       "default": "Contrats"
     },
     "deleted": "Supprimé",
-    "no-contracts": "Vous n'avez plus de contrats"
+    "no-contracts": "Vous n'avez plus de contrats",
+    "handle-synchronization": "Gérer mes synchronisations"
   },
   "contractForm": {
     "details": "Détails",
