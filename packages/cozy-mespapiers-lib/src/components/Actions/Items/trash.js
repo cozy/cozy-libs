@@ -9,6 +9,7 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const trash = ({ pushModal, popModal }) => {
   return {
+    name: 'trash',
     action: files =>
       pushModal(
         <DeleteConfirm

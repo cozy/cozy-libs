@@ -8,6 +8,7 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const viewInDrive = ({ client }) => {
   return {
+    name: 'viewInDrive',
     Component: function ViewInDrive({ onClick, className, files }) {
       const { t } = useI18n()
       const dirId = files[0].dir_id

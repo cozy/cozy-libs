@@ -7,6 +7,7 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const open = () => {
   return {
+    name: 'open',
     Component: function Open({ className, files }) {
       const { t } = useI18n()
       const history = useHistory()

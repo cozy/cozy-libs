@@ -7,6 +7,7 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 
 export const download = ({ client }) => {
   return {
+    name: 'download',
     action: files => downloadFiles(client, files),
     Component: function Download({ onClick, className }) {
       const { t } = useI18n()
