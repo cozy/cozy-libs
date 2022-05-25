@@ -212,3 +212,22 @@ export const setBIConnectionSyncStatus = async (
     biAccessToken
   )
 }
+
+export const getBIConnectionAccountsList = async (
+  config,
+  connId,
+  biAccessToken
+) => {
+  assert(
+    connId,
+    `Must pass connection id to getBIConnectionAccountList (${connId} was passed)`
+  )
+
+  return await biRequest(
+    'GET',
+    `/users/me/connections/${connId}/accounts?all`,
+    config,
+    null,
+    biAccessToken
+  )
+}

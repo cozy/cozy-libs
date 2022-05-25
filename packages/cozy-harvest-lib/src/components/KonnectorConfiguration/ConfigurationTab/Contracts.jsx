@@ -22,6 +22,7 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import withLocales from '../../hoc/withLocales'
 import { getAccountLabel } from './bankAccountHelpers'
 import EditContract from './EditContract'
+import BIContractActivationWindow from './BiContractActivationWindow'
 
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
@@ -121,6 +122,7 @@ const DumbContracts = ({ contracts, account, konnector }) => {
                 />
               )
             })}
+          <BIContractActivationWindow konnector={konnector} account={account} />
         </NavigationListSection>
       </NavigationList>
     </MuiCozyTheme>

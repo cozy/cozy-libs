@@ -10,7 +10,7 @@ describe('InAppBrowser', () => {
     const webviewService = {
       call: intentCall
     }
-    intentCall.mockResolvedValue({type: 'dismiss'})
+    intentCall.mockResolvedValue({ type: 'dismiss' })
     render(
       <WebviewIntentProvider webviewService={webviewService}>
         <InAppBrowser url={url} />
@@ -29,7 +29,7 @@ describe('InAppBrowser', () => {
     }
     const onClose = jest.fn()
 
-    intentCall.mockResolvedValue({type: 'cancel'})
+    intentCall.mockResolvedValue({ type: 'cancel' })
     render(
       <WebviewIntentProvider webviewService={webviewService}>
         <InAppBrowser url={url} onClose={onClose} />
@@ -38,8 +38,6 @@ describe('InAppBrowser', () => {
 
     await waitFor(() => expect(onClose).toHaveBeenCalledTimes(1))
     expect(onClose).toHaveBeenCalledWith()
-
-
   })
   it('should call closeInAppBrowser when the component is unmounted', async () => {
     const url = 'https://test.url'
@@ -47,7 +45,7 @@ describe('InAppBrowser', () => {
     const webviewService = {
       call: intentCall
     }
-    intentCall.mockResolvedValue({type: 'dismiss'})
+    intentCall.mockResolvedValue({ type: 'dismiss' })
     const { unmount } = render(
       <WebviewIntentProvider webviewService={webviewService}>
         <InAppBrowser url={url} />

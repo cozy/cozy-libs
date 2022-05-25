@@ -4,7 +4,7 @@
  * - Deals with the konnector to get temporary tokens
  */
 
-import { getBIConnection } from './bi-http'
+import { getBIConnection, getBIConnectionAccountsList } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import flag from 'cozy-flags'
@@ -78,6 +78,19 @@ export const checkBIConnection = async ({
   } catch (err) {
     return convertBIErrortoKonnectorJobError(err)
   }
+}
+
+export const fetchContractSynchronizationUrl = async ({
+  account,
+  client,
+  konnector
+}) => {
+  const { code, url, clientId } = await createTemporaryToken({
+    client,
+    konnector,
+    account
+  })
+  return `${url}/auth/webview/manage?client_id=${clientId}&code=${code}`
 }
 
 /**
@@ -216,6 +229,46 @@ export const getCozyBankIds = ({ konnector, account }) => {
 }
 
 /**
+ * Update imported state of contracts in the given account, according to current state of the accounts on the BI side.
+ *
+ * @param {CozyClient} options.client - CozyClient instance
+ * @param {io.cozy.accounts} options.account The account content
+ * @param {io.cozy.konnectors} options.konnector connector manifest content
+ */
+export const refreshContracts = async ({ client, konnector, account }) => {
+  const biConfig = await createTemporaryToken({
+    client,
+    konnector,
+    account
+  })
+  const { code, ...config } = biConfig
+  const connectionId = getWebviewBIConnectionId(account)
+  const { accounts: contracts } = await getBIConnectionAccountsList(
+    config,
+    connectionId,
+    code
+  )
+
+  const contractsById = contracts.reduce(
+    (memo, contract) => ({ ...memo, [contract.id + '']: contract.disabled }),
+    {}
+  )
+  const currentContractsList = account?.relationships?.contracts?.data || []
+  for (const currentContract of currentContractsList) {
+    const disabledValue = convertBIDateToStandardDate(
+      contractsById[currentContract.metadata.vendorId]
+    )
+    currentContract.metadata.imported = !disabledValue
+    currentContract.metadata.disabledAt = disabledValue
+  }
+  await client.save(account)
+}
+
+function convertBIDateToStandardDate(biDate) {
+  return biDate?.replace(' ', 'T')
+}
+
+/**
  * Gets a temporary token corresponding to the current BI user
  *
  * @param {CozyClient} options.client - CozyClient instance
@@ -260,5 +313,7 @@ export const konnectorPolicy = {
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
-  handleOAuthAccount
+  handleOAuthAccount,
+  fetchContractSynchronizationUrl,
+  refreshContracts
 }
