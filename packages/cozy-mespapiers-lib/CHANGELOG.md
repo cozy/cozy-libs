@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.31.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.31.0...cozy-mespapiers-lib@0.31.1) (2022-05-31)
+
+
+### Bug Fixes
+
+* **cozy-mespapiers-lib:** Radio button on multiselect mode ([4ef3b15](https://github.com/cozy/cozy-libs/commit/4ef3b15c15e105a1fe1e031fec41c817332d7dfd))
+
+
+
+
+
 # [0.31.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.30.1...cozy-mespapiers-lib@0.31.0) (2022-05-25)
 
 
