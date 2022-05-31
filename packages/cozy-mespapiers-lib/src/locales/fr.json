@@ -77,6 +77,10 @@
     "title": "Supprimer cet élément ?",
     "text": "L’élément est associé au fichier <strong>\"%{name}\"</strong> dans votre drive."
   },
+  "ForwardModal": {
+    "action": "Sélectionner un destinataire",
+    "content": "Vos papiers on bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi."
+  },
   "Home": {
     "Empty": {
       "text": "Gardez les toujours sur vous dans un espace sécurisé pour simplifier vos démarches administratives. Ils ne seront jamais utilisés sans votre consentement explicite.",
@@ -257,6 +261,7 @@
     }
   },
   "Multiselect": {
+    "backdrop": "Rassemblement de vos papiers...",
     "title": "Sélectionner des papiers",
     "empty": "Sélectionner des papiers pour effectuer un téléchargement ou un transfert groupé.",
     "select": "Sélectionner un papier",

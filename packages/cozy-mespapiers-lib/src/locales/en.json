@@ -77,6 +77,10 @@
     "title": "Delete this file?",
     "text": "The item is associated with the file \"%{name}\" in your drive."
   },
+  "ForwardModal": {
+    "action": "Select a recipient",
+    "content": "Your papers have been collected. Select a recipient to proceed with the forwarding."
+  },
   "Home": {
     "Empty": {
       "text": "Always keep them with you in a secure space to simplify your administrative procedures. They will never be used without your explicit consent.",
@@ -257,6 +261,7 @@
     }
   },
   "Multiselect": {
+    "backdrop": "Gather your papers...",
     "title": "Select papers",
     "empty": "Select papers to perform a bulk upload or download.",
     "select": "Select a papier",
