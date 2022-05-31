@@ -7,7 +7,13 @@ const MultiSelectionProvider = ({ children }) => {
   const [multiSelectionFiles, setMultiSelectionFiles] = useState([])
 
   const addMultiSelectionFile = fileToAdd => {
-    setMultiSelectionFiles(files => [...files, fileToAdd])
+    const fileAlreadySelected = multiSelectionFiles.some(
+      file => file._id === fileToAdd._id
+    )
+
+    if (!fileAlreadySelected) {
+      setMultiSelectionFiles(files => [...files, fileToAdd])
+    }
   }
 
   const removeMultiSelectionFile = fileToRemove => {
