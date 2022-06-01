@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.5.1...cozy-harvest-lib@9.6.0) (2022-06-01)
+
+
+### Features
+
+* Trigger success sooner for BI webviews ([b0dbd39](https://github.com/cozy/cozy-libs/commit/b0dbd396552cfa3cc7ae2972e500c449331ba83b))
+
+
+
+
+
 ## [9.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.5.0...cozy-harvest-lib@9.5.1) (2022-05-25)
 
 **Note:** Version bump only for package cozy-harvest-lib
