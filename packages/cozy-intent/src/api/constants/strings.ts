@@ -11,8 +11,6 @@ export const strings = {
     'Cannot register webview. A webview is already registered into cozy-intent with the uri: ${uri}',
   errorUnregisterWebview:
     'Cannot unregister webview. No webview is registered into cozy-intent with the uri: ${uri}',
-  errorInitWebview:
-    "Cannot init handshake for Webview with uri: '${uri}'. The handshake was already made and succeeded. You probably remounted WebviewIntentProvider and lost its state, or you forgot to call unregisterWebview on parent-side.",
   errorEmitMessage:
     'Cannot emit message. No webview is registered with uri: ${webviewUri}',
   errorCozyBarAPIMissing:

@@ -99,9 +99,6 @@ export class NativeService {
       if (!messengerToInit)
         throw new Error(interpolate(strings.errorNoMessengerToInit, { uri }))
 
-      if (messengerToInit.connection)
-        throw new Error(interpolate(strings.errorInitWebview, { uri }))
-
       messengerToInit.connection = await this.initWebview(
         messengerToInit.messenger
       )
