@@ -45,6 +45,7 @@ const MultiselectViewActions = ({ onClose }) => {
   const [zipFolder, setZipFolder] = useState({ name: '', dirId: '' })
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false)
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
+  const [fileToForward, setFileToForward] = useState(null)
 
   const onFileCreate = async file => {
     if (
@@ -54,6 +55,7 @@ const MultiselectViewActions = ({ onClose }) => {
     ) {
       setIsBackdropOpen(false)
       setIsForwardModalOpen(true)
+      setFileToForward(file)
     }
   }
 
@@ -128,6 +130,7 @@ const MultiselectViewActions = ({ onClose }) => {
         <ForwardModal
           onClose={() => setIsForwardModalOpen(false)}
           onForward={onClose}
+          fileToForward={fileToForward}
         />
       )}
     </>
