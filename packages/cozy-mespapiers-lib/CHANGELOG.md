@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.32.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.31.2...cozy-mespapiers-lib@0.32.0) (2022-06-01)
+
+
+### Bug Fixes
+
+* Add selected file only if it is not already present ([51deefd](https://github.com/cozy/cozy-libs/commit/51deefd6f733be761900f9ace7ebc6cef1e040e1))
+
+
+### Features
+
+* Add ForwardModal component ([f524fce](https://github.com/cozy/cozy-libs/commit/f524fce1d57455ea4a67fa9f48ae468188d45c8a))
+* Change process for forward multiple files ([935d86b](https://github.com/cozy/cozy-libs/commit/935d86b5f08f12aaaf4cf4ced982e3fde9ac4a1a))
+
+
+
+
+
 ## [0.31.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.31.1...cozy-mespapiers-lib@0.31.2) (2022-06-01)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
