@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.1.0 (2022-06-01)
+
+
+### Bug Fixes
+
+* **cozy-intent:** Allow overriding existing connection ([f01051c](https://github.com/cozy/cozy-libs/commit/f01051c3f59ea1d2c07f909c64fc5f8d3b48a74b))
+
+
+### Features
+
+* Add functions to MultiSelectViewActions component ([49c06d8](https://github.com/cozy/cozy-libs/commit/49c06d8c5a888761501625cec65a0eb3e873927b))
+
+
+
+
+
 ## [2.0.2](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.0.1...cozy-intent@2.0.2) (2022-05-13)
 
 
