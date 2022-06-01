@@ -216,7 +216,7 @@ describe('NativeService', () => {
       expect(ParentHandshake).toHaveBeenCalledTimes(1)
     })
 
-    it('Should bail out when init an existing webview', async () => {
+    it('Should override existing connection when init existing webview', async () => {
       await expect(
         nativeService.tryEmit({
           nativeEvent: {
@@ -226,8 +226,8 @@ describe('NativeService', () => {
         })
       ).resolves.not.toThrow()
 
-      expect(mockDebug).toHaveBeenCalled()
-      expect(ParentHandshake).toHaveBeenCalledTimes(0)
+      expect(mockDebug).not.toHaveBeenCalled()
+      expect(ParentHandshake).toHaveBeenCalledTimes(1)
     })
 
     it('Should bail out when init an undefined messenger', async () => {
