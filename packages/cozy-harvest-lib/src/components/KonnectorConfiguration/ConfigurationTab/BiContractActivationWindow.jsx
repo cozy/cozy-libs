@@ -8,16 +8,19 @@ import { findKonnectorPolicy } from '../../../konnector-policies'
 import { isFlagshipApp } from 'cozy-device-helper'
 import InAppBrowser from '../../InAppBrowser'
 import withLocales from '../../hoc/withLocales'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-const BIContractActivationWindow = ({ konnector, account }) => {
+const BIContractActivationWindow = ({ konnector, account, t }) => {
   const [initialUrl, setInitialUrl] = useState(null)
   const [isWindowVisible, setWindowVisible] = useState(false)
   const [shouldRefreshContracts, setShouldRefreshContracts] = useState(false)
 
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const client = useClient()
-  const { t } = useI18n()
+
+  const onPopupClosed = () => {
+    setWindowVisible(false)
+    setShouldRefreshContracts(true)
+  }
 
   useEffect(() => {
     async function refreshContracts() {
@@ -28,11 +31,6 @@ const BIContractActivationWindow = ({ konnector, account }) => {
       refreshContracts()
     }
   }, [account, client, konnectorPolicy, shouldRefreshContracts, konnector])
-
-  const onPopupClosed = () => {
-    setWindowVisible(false)
-    setShouldRefreshContracts(true)
-  }
 
   useEffect(() => {
     async function handleLinkFetch() {
@@ -48,28 +46,30 @@ const BIContractActivationWindow = ({ konnector, account }) => {
     }
   }, [konnector, account, client, konnectorPolicy])
 
-  return konnectorPolicy.fetchContractSynchronizationUrl ? (
-    <ListItem>
-      <Button disabled={!initialUrl} onClick={() => setWindowVisible(true)}>
-        {t('contracts.handle-synchronization')}
-      </Button>
-      {isWindowVisible ? (
-        isFlagshipApp() ? (
-          <InAppBrowser url={initialUrl} onClose={onPopupClosed} />
-        ) : (
-          <Popup
-            initialUrl={initialUrl}
-            width="800"
-            height="800"
-            onClose={onPopupClosed}
-          />
-        )
-      ) : null}
-    </ListItem>
-  ) : null
+  return (
+    konnectorPolicy.fetchContractSynchronizationUrl && (
+      <ListItem>
+        <Button disabled={!initialUrl} onClick={() => setWindowVisible(true)}>
+          {t('contracts.handle-synchronization')}
+        </Button>
+        {isWindowVisible &&
+          (isFlagshipApp() ? (
+            <InAppBrowser url={initialUrl} onClose={onPopupClosed} />
+          ) : (
+            <Popup
+              initialUrl={initialUrl}
+              width="800"
+              height="800"
+              onClose={onPopupClosed}
+            />
+          ))}
+      </ListItem>
+    )
+  )
 }
 
 BIContractActivationWindow.propTypes = {
+  t: PropTypes.func,
   account: PropTypes.object,
   konnector: PropTypes.object
 }
