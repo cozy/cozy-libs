@@ -10,12 +10,12 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import { forwardFile } from '../Actions/utils'
 
-const ForwardModal = ({ onClose, onForward }) => {
+const ForwardModal = ({ onClose, onForward, fileToForward }) => {
   const client = useClient()
   const { t } = useI18n()
 
-  const handleClick = async file => {
-    await forwardFile(client, [file], t)
+  const handleClick = async () => {
+    await forwardFile(client, [fileToForward], t)
     onForward && onForward()
   }
 
@@ -32,10 +32,7 @@ const ForwardModal = ({ onClose, onForward }) => {
         </>
       }
       actions={
-        <Button
-          label={t('ForwardModal.action')}
-          onClick={handleClick}
-        />
+        <Button label={t('ForwardModal.action')} onClick={handleClick} />
       }
     />
   )
@@ -43,7 +40,8 @@ const ForwardModal = ({ onClose, onForward }) => {
 
 ForwardModal.propTypes = {
   onForward: PropTypes.func,
-  onClose: PropTypes.func
+  onClose: PropTypes.func,
+  fileToForward: PropTypes.object
 }
 
 export default ForwardModal
