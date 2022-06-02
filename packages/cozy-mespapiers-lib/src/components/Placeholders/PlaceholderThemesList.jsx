@@ -50,14 +50,14 @@ const PlaceholderThemesList = ({ title, onClose }) => {
       onClose={onClose}
       title={title}
       transitionDuration={state.onBack ? 0 : undefined}
-      open={true}
+      disableGutters
+      open
       content={
-        <List>
+        <List className="u-mv-half">
           {themesList.map((theme, idx) => {
             return (
               <ListItem
                 button
-                disableGutters
                 key={idx}
                 onClick={() => setQualifByTheme(theme)}
               >
@@ -99,7 +99,8 @@ const PlaceholderThemesList = ({ title, onClose }) => {
       title={t('PlaceholdersList.title', {
         name: ` - ${scannerT(`themes.${state.qualificationLabel}`)}`
       })}
-      open={true}
+      disableGutters
+      open
       content={
         <PlaceholdersList currentQualifItems={state.currentQualifItems} />
       }
