@@ -20,7 +20,8 @@ import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 
 const useStyles = makeStyles(() => ({
   placeholderList: {
-    minHeight: '15rem'
+    minHeight: '15rem',
+    margin: '0.5rem 0'
   },
   actionMenu: {
     position: 'absolute',
@@ -94,7 +95,6 @@ const PlaceholdersList = ({ currentQualifItems }) => {
             <ListItem
               key={idx}
               button
-              disableGutters
               disabled={!validPlaceholder}
               onClick={() => showImportDropdown(placeholder)}
               data-testid="PlaceholdersList-ListItem"
