@@ -2,7 +2,7 @@
 
 ## Cozy codeshifts
 
-A collection of utils and transforms for [jscodeshift][].
+A collection of utils and transforms for [jscodeshift](https://github.com/facebook/jscodeshift).
 
 Codeshifts are automatic transformations of Javascript code. They can be used
 for
@@ -11,11 +11,13 @@ for
 - flag removal
 - general automatic code changes...
 
-See [here][jscodeshift-docs] for more information on codeshifts.
+### Documentation
 
-[jscodeshift]: https://github.com/facebook/jscodeshift
+See [jscodeshift-docs](https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation) for more information on codeshifts.
 
-[jscodeshift-docs]: https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation
+Here are nice exemples about [import manipulation](https://www.codeshiftcommunity.com/docs/import-manipulation/) and [React & JSX manipulation](https://www.codeshiftcommunity.com/docs/react).
+
+The [API doc](https://npmdoc.github.io/node-npmdoc-jscodeshift/build/apidoc.html) can be usefull too.
 
 ### Installation
 
