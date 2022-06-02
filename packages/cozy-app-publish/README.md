@@ -194,6 +194,7 @@ To print more logs when using tool (useful for debug).
 #### Release workflow
 
 - A new branch is created from the current state of `master`. Let's say we want to deploy version `1.0.0` of the app.
+- Since we created a new branch, we have to bump the version of `master`, so we have to create a PR to bump to `1.1.0` everywhere is necessary
 - The only type of commits allowed on this release branch are bug fixes.
 - Every time one or more bugs are fixed and the version is considered for release, the latest commit is tagged with a prerelease version number, eg. `1.0.0-beta.1`, `1.0.0-beta.2`, etc…
 - Each of these prereleases is automatically uploaded on downcloud and deployed on instances that are on the `beta` channel.
