@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.2...cozy-mespapiers-lib@0.32.3) (2022-06-02)
+
+
+### Bug Fixes
+
+* The `file` parameter of the `forwardFile` function is undefined ([c3d7409](https://github.com/cozy/cozy-libs/commit/c3d7409ba22e4ad0803142b7c50401eb8446a859))
+
+
+
+
+
 ## [0.32.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.1...cozy-mespapiers-lib@0.32.2) (2022-06-01)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
