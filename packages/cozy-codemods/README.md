@@ -15,7 +15,7 @@ for
 
 See [jscodeshift-docs](https://github.com/facebook/jscodeshift/wiki/jscodeshift-Documentation) for more information on codeshifts.
 
-Here are nice exemples about [import manipulation](https://www.codeshiftcommunity.com/docs/import-manipulation/) and [React & JSX manipulation](https://www.codeshiftcommunity.com/docs/react).
+Here are nice examples about [import manipulation](https://www.codeshiftcommunity.com/docs/import-manipulation/) and [React & JSX manipulation](https://www.codeshiftcommunity.com/docs/react).
 
 The [API doc](https://npmdoc.github.io/node-npmdoc-jscodeshift/build/apidoc.html) can be usefull too.
 
