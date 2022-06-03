@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 
-import AppLike from '../../../test/components/AppLike'
+import AppLike from '../../../../test/components/AppLike'
 import PlaceholdersList from './PlaceholdersList'
 
 const fakeQualificationItems = [

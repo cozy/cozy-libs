@@ -5,10 +5,10 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
-import PlaceholdersList from '../Placeholders/PlaceholdersList'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
+import PlaceholdersList from '../PlaceholdersList'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
 
-import PlaceholderThemesList from './PlaceholderThemesList'
+import PlaceholderThemesList from '../PlaceholderThemesList'
 
 const defaultState = {
   onBack: false,
