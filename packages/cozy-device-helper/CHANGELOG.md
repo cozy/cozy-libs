@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.2.0 (2022-06-03)
+
+
+### Bug Fixes
+
+* **deps:** update dependency @types/react-native to v0.67.7 ([e60dd0d](https://github.com/cozy/cozy-libs/commit/e60dd0de3d247123fb494c0cd650c6f54a665c29))
+
+
+### Features
+
+* **harvest:** HandleOAuthResponse can deal with cozy-data from DOM ([7c6ac1a](https://github.com/cozy/cozy-libs/commit/7c6ac1a8de7dd2b136530d0aafdb1e3f9e28fa56))
+
+
+
+
+
 # 2.1.0 (2022-05-10)
 
 

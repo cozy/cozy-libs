@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.3...cozy-mespapiers-lib@0.32.4) (2022-06-03)
+
+
+### Bug Fixes
+
+* Style of PlaceholderList ([212f4c8](https://github.com/cozy/cozy-libs/commit/212f4c8fc587037661788812d8deb8fc9d6b5fe1))
+
+
+
+
+
 ## [0.32.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.2...cozy-mespapiers-lib@0.32.3) (2022-06-02)
 
 

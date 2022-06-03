@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.9.0 (2022-06-03)
+
+
+### Bug Fixes
+
+* bump jest-localstorage-mock from 2.4.19 to 2.4.21 ([9792e2e](https://github.com/cozy/cozy-libs/commit/9792e2e5e5bc0138808e7bac16d660b102cb71b0))
+
+
+### Features
+
+* **harvest:** HandleOAuthResponse can deal with cozy-data from DOM ([7c6ac1a](https://github.com/cozy/cozy-libs/commit/7c6ac1a8de7dd2b136530d0aafdb1e3f9e28fa56))
+
+
+
+
+
 ## [2.8.7](https://github.com/cozy/cozy-libs/compare/cozy-flags@2.8.6...cozy-flags@2.8.7) (2022-03-21)
 
 

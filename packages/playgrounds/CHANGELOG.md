@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.20.0 (2022-06-03)
+
+
+### Bug Fixes
+
+* bump @babel/runtime from 7.16.7 to 7.18.3 ([ab63f75](https://github.com/cozy/cozy-libs/commit/ab63f75066b47c295a9b81a211eb8e8afd8b317a))
+
+
+### Features
+
+* **harvest:** HandleOAuthResponse can deal with cozy-data from DOM ([7c6ac1a](https://github.com/cozy/cozy-libs/commit/7c6ac1a8de7dd2b136530d0aafdb1e3f9e28fa56))
+
+
+
+
+
 ## [1.19.2](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.19.1...cozy-playgrounds@1.19.2) (2022-05-13)
 
 **Note:** Version bump only for package cozy-playgrounds
