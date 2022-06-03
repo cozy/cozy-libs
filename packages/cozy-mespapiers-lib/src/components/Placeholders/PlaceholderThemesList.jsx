@@ -22,9 +22,13 @@ const PlaceholderThemesList = ({ setQualifByTheme }) => {
 
   return (
     <List className="u-mv-half">
-      {themesList.map((theme, idx) => {
+      {themesList.map(theme => {
         return (
-          <ListItem button key={idx} onClick={() => setQualifByTheme(theme)}>
+          <ListItem
+            button
+            key={theme.id}
+            onClick={() => setQualifByTheme(theme)}
+          >
             <ListItemIcon>
               <IconStack
                 backgroundIcon={
