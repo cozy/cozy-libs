@@ -13,7 +13,7 @@ import MultiselectView from './Multiselect/MultiselectView'
 import PapersListWrapper from './Papers/PapersListWrapper'
 import FilesViewerWithQuery from './Viewer/FileViewerWithQuery'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
-import PlaceholderThemesListModal from './Placeholders/PlaceholderThemesListModal'
+import PlaceholderListModal from './Placeholders/PlaceholderListModal'
 import CreatePaperModal from './StepperDialog/CreatePaperModal'
 
 const routes = [
@@ -65,7 +65,7 @@ const Routes = () => {
           <Route
             exact
             path={'/paper/create'}
-            component={PlaceholderThemesListModal}
+            component={PlaceholderListModal}
           />
           <Route
             exact
