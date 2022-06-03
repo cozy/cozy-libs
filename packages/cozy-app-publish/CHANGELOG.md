@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.30.2](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.30.1...cozy-app-publish@0.30.2) (2022-06-03)
+
+
+### Bug Fixes
+
+* bump tar from 4.4.19 to 6.1.11 ([128c4a3](https://github.com/cozy/cozy-libs/commit/128c4a39aa8c4f019d84725fa5199627da231588))
+
+
+
+
+
 ## [0.30.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.30.0...cozy-app-publish@0.30.1) (2022-06-02)
 
 **Note:** Version bump only for package cozy-app-publish
