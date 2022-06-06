@@ -47,7 +47,7 @@ const BIContractActivationWindow = ({ konnector, account, t }) => {
   }, [konnector, account, client, konnectorPolicy])
 
   return (
-    konnectorPolicy.fetchContractSynchronizationUrl && (
+    konnectorPolicy.fetchContractSynchronizationUrl ? (
       <ListItem>
         <Button disabled={!initialUrl} onClick={() => setWindowVisible(true)}>
           {t('contracts.handle-synchronization')}
@@ -64,7 +64,7 @@ const BIContractActivationWindow = ({ konnector, account, t }) => {
             />
           ))}
       </ListItem>
-    )
+    ) : null
   )
 }
 
