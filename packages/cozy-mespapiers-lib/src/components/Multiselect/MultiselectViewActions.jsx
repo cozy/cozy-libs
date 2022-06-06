@@ -10,7 +10,7 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
-import { downloadFiles, makeZipFolder } from '../Actions/utils'
+import { downloadFiles, forwardFile, makeZipFolder } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { FILES_DOCTYPE } from '../../doctypes'
 import { fetchCurrentUser } from '../../helpers/fetchCurrentUser'
@@ -71,26 +71,30 @@ const MultiselectViewActions = ({ onClose }) => {
   }
 
   const forward = async () => {
-    setIsBackdropOpen(true)
+    if (multiSelectionFiles.length === 1) {
+      await forwardFile(client, multiSelectionFiles, t)
+    } else {
+      setIsBackdropOpen(true)
 
-    const currentUser = await fetchCurrentUser(client)
-    const defaultZipFolderName = t('Multiselect.folderZipName', {
-      contactName: getDisplayName(currentUser),
-      date: f(Date.now(), 'YYYY.MM.DD')
-    })
+      const currentUser = await fetchCurrentUser(client)
+      const defaultZipFolderName = t('Multiselect.folderZipName', {
+        contactName: getDisplayName(currentUser),
+        date: f(Date.now(), 'YYYY.MM.DD')
+      })
 
-    const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(
-      client,
-      t
-    )
+      const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(
+        client,
+        t
+      )
 
-    const zipName = await makeZipFolder({
-      client,
-      files: multiSelectionFiles,
-      zipFolderName: defaultZipFolderName,
-      dirId: parentFolderId
-    })
-    setZipFolder({ name: zipName, dirId: parentFolderId })
+      const zipName = await makeZipFolder({
+        client,
+        files: multiSelectionFiles,
+        zipFolderName: defaultZipFolderName,
+        dirId: parentFolderId
+      })
+      setZipFolder({ name: zipName, dirId: parentFolderId })
+    }
   }
 
   return (
