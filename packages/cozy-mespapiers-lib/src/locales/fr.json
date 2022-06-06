@@ -14,7 +14,7 @@
     "phoneDownload": "Rendre accessible hors-ligne",
     "qualify": "Qualifier",
     "rename": "Renommer",
-    "selectPapers": "Sélectionner des papiers",
+    "selectPapers": "Sélectionner des papiers…",
     "select": "Sélectionner",
     "share": "Partager",
     "trash": "Supprimer",
@@ -256,15 +256,15 @@
   "viewer": {
     "shareData": {
       "error": "Problème avec la récupération du lien : %{error}",
-      "text": "Voici un lien vers mon document %{name} : ",
-      "title": "Lien vers mon document %{name}"
+      "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
+      "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
     }
   },
   "Multiselect": {
     "backdrop": "Rassemblement de vos papiers...",
     "title": "Sélectionner des papiers",
     "empty": "Sélectionner des papiers pour effectuer un téléchargement ou un transfert groupé.",
-    "select": "Sélectionner un papier",
+    "select": "Sélectionner ou créer un papier",
     "folderZipName": "%{contactName} - papiers - %{date}.zip"
   }
 }

@@ -136,9 +136,16 @@ export const forwardFile = async (client, files, t) => {
     // We currently support only one file at a time
     const file = files[0]
     const url = await getSharingLink(client, file, true)
+    const isZipFile = file.class === 'zip'
     const shareData = {
-      title: t('viewer.shareData.title', { name: file.name }),
-      text: t('viewer.shareData.text', { name: file.name }),
+      title: t('viewer.shareData.title', {
+        name: file.name,
+        smart_count: isZipFile ? 2 : 1
+      }),
+      text: t('viewer.shareData.text', {
+        name: file.name,
+        smart_count: isZipFile ? 2 : 1
+      }),
       url
     }
     navigator.share(shareData)

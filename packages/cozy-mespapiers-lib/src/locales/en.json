@@ -14,7 +14,7 @@
     "phoneDownload": "Make available offline",
     "qualify": "Qualify",
     "rename": "Rename",
-    "selectPapers": "Select papers",
+    "selectPapers": "Select papers…",
     "select": "Select",
     "share": "Share",
     "trash": "Remove",
@@ -256,15 +256,15 @@
   "viewer": {
     "shareData": {
       "error": "Problem with link recovery: %{error}",
-      "text": "Link to my document %{name}: ",
-      "title": "Link to my document %{name}"
+      "text": "Link to my document %{name}: |||| Link to my documents %{name}: ",
+      "title": "Link to my document %{name} |||| Link to my documents %{name}"
     }
   },
   "Multiselect": {
     "backdrop": "Gather your papers...",
     "title": "Select papers",
     "empty": "Select papers to perform a bulk upload or download.",
-    "select": "Select a papier",
+    "select": "Select or create a paper",
     "folderZipName": "%{contactName} - papers - %{date}.zip"
   }
 }
