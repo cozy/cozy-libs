@@ -13,10 +13,10 @@ import ListItemIcon, {
 } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-import { useScannerI18n } from '../Hooks/useScannerI18n'
-import { findPlaceholdersByQualification } from '../../helpers/findPlaceholders'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
+import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
+import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
+import ActionMenuImportDropdown from '../ActionMenuImportDropdown'
 
 const useStyles = makeStyles(() => ({
   placeholderList: {

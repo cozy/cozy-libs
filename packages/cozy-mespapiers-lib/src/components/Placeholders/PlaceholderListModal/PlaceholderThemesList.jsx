@@ -15,7 +15,7 @@ const {
   themes: { themesList }
 } = models.document
 
-import { useScannerI18n } from '../Hooks/useScannerI18n'
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
 
 const PlaceholderThemesList = ({ setQualifByTheme }) => {
   const scannerT = useScannerI18n()
