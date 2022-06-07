@@ -9,7 +9,8 @@ import {
   PostMeMessage,
   WebviewRef,
   strings,
-  numbers
+  numbers,
+  WebviewMethods
 } from '../../api'
 import { getErrorMessage, interpolate, isNativeDevMode } from '../../utils'
 
@@ -122,4 +123,21 @@ export class NativeService {
 
     registeredWebview.messenger.onMessage(message)
   }
+
+  private getHostname = (uri: string): string => {
+    try {
+      return new URL(uri).hostname.toLowerCase()
+    } catch {
+      return uri
+    }
+  }
+
+  public call = (
+    uri: string,
+    methodName: keyof WebviewMethods,
+    ...args: Parameters<NativeMethodsRegister[keyof NativeMethodsRegister]>
+  ): Promise<void> | void =>
+    this.messengerRegister[this.getHostname(uri)]?.connection
+      ?.remoteHandle()
+      .call(methodName, ...args)
 }
