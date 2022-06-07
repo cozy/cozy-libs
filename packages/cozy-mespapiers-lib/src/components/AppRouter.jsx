@@ -13,7 +13,7 @@ import MultiselectView from './Multiselect/MultiselectView'
 import PapersListWrapper from './Papers/PapersListWrapper'
 import FilesViewerWithQuery from './Viewer/FileViewerWithQuery'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
-import PlaceholderListModal from './Placeholders/PlaceholderListModal'
+import PlaceholderListModal from './Placeholders/PlaceholderListModal/PlaceholderListModal'
 import CreatePaperModal from './StepperDialog/CreatePaperModal'
 
 const routes = [
