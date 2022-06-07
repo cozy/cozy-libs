@@ -8,7 +8,8 @@ import {
   WebviewService,
   WebviewWindow,
   strings,
-  DebugWebviewMessenger
+  DebugWebviewMessenger,
+  WebviewMethods
 } from '../../api'
 import { WebviewContext } from '../../view'
 import { isWebDevMode } from '../../utils'
@@ -19,6 +20,7 @@ const log = debug('WebviewIntentProvider')
 
 interface Props {
   children?: React.ReactChild
+  methods?: WebviewMethods
   setBarContext?: (webviewContext: WebviewService) => void
   webviewService?: WebviewService
 }
@@ -55,14 +57,16 @@ const sendSyncMessage = (message: string): void => {
 }
 
 const getConnection = async (
-  callBack: (connection: Connection) => void
+  callBack: (connection: Connection) => void,
+  methods?: WebviewMethods
 ): Promise<void> => {
   sendSyncMessage(strings.webviewIsRendered)
 
   const messenger = new WebviewMessenger(assumeWebviewWindow)
 
   const result = await ChildHandshake(
-    isWebDevMode() ? DebugWebviewMessenger(messenger) : messenger
+    isWebDevMode() ? DebugWebviewMessenger(messenger) : messenger,
+    methods
   )
 
   callBack(result)
@@ -84,6 +88,7 @@ const isValidEnv = (): boolean => {
 
 export const WebviewIntentProvider = ({
   children,
+  methods,
   setBarContext,
   webviewService
 }: Props): ReactElement => {
@@ -97,7 +102,7 @@ export const WebviewIntentProvider = ({
     !connection &&
       !webviewService &&
       isValidEnv() &&
-      getConnection(setConnection)
+      getConnection(setConnection, methods)
   }, [connection, webviewService])
 
   useEffect(() => {

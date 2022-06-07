@@ -8,3 +8,5 @@ export type NativeMethodsRegister = {
   setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => void
   showSplashScreen: () => void
 }
+
+export type WebviewMethods = Record<string, () => unknown>
