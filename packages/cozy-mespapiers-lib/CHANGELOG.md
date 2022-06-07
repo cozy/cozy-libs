@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.9](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.8...cozy-mespapiers-lib@0.32.9) (2022-06-07)
+
+
+### Bug Fixes
+
+* Import of PlaceholderModal in AppRouter ([6e036bf](https://github.com/cozy/cozy-libs/commit/6e036bf1a43849b9eaea76ef24186b1c4ded0e78))
+
+
+
+
+
 ## [0.32.8](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.7...cozy-mespapiers-lib@0.32.8) (2022-06-07)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
