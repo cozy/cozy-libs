@@ -1,4 +1,3 @@
-'use strict'
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 
@@ -36,7 +35,7 @@ const fakePlaceholders = [
 ]
 
 /* eslint-disable react/display-name */
-jest.mock('../Placeholders/Placeholder', () => ({ onClick }) => {
+jest.mock('./Placeholder', () => ({ onClick }) => {
   const fakePlaceholder = {
     label: 'tax_notice',
     placeholderIndex: 6,
