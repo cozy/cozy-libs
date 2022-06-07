@@ -320,7 +320,8 @@ export class DumbTriggerManager extends Component {
       flow,
       flowState,
       client,
-      OAuthFormWrapperComp
+      OAuthFormWrapperComp,
+      reconnect
     } = this.props
 
     const submitting = flowState.running
@@ -345,6 +346,7 @@ export class DumbTriggerManager extends Component {
             client={client}
             flow={flow}
             account={account}
+            reconnect={reconnect}
             konnector={konnector}
             onSuccess={this.handleOAuthAccountId}
           />

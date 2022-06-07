@@ -95,8 +95,10 @@ const DumbEditAccountModal = withRouter(
               showError={true}
               onVaultDismiss={redirectToAccount}
               fieldOptions={fieldOptions}
+              reconnect={fromReconnect}
             />
           )}
+          <div className="u-mb-2" />
         </DialogContent>
       </Dialog>
     )

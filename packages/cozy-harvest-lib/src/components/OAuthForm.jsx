@@ -72,30 +72,31 @@ export class OAuthForm extends PureComponent {
   }
 
   render() {
-    const { konnector, t, flowState } = this.props
-    const { initialValues, showOAuthWindow, needExtraParams, extraParams } =
-      this.state
+    const { konnector, t, flowState, reconnect, account } = this.props
+    const { showOAuthWindow, needExtraParams, extraParams } = this.state
     const isBusy =
       showOAuthWindow === true ||
       flowState.running ||
       (needExtraParams && !extraParams)
 
-    return initialValues ? null : (
+    return (
       <>
         <Button
           className="u-mt-1"
           busy={isBusy}
           disabled={isBusy}
           extension="full"
-          label={t('oauth.connect.label')}
+          label={t(`oauth.${reconnect ? 'reconnect' : 'connect'}.label`)}
           onClick={this.handleConnect}
         />
         {showOAuthWindow && (
           <OAuthWindow
             extraParams={extraParams}
             konnector={konnector}
+            reconnect={reconnect}
             onSuccess={this.handleAccountId}
             onCancel={this.handleOAuthCancel}
+            account={account}
           />
         )}
       </>

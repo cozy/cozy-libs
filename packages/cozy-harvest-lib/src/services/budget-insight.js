@@ -33,8 +33,8 @@ const DECOUPLED_ERROR = 'decoupled'
 const ADDITIONAL_INFORMATION_NEEDED_ERROR = 'additionalInformationNeeded'
 const TEMP_TOKEN_TIMOUT_S = 60
 
-const getBIConnectionIdFromAccount = account =>
-  get(account, 'data.auth.bi.connId')
+export const getBIConnectionIdFromAccount = account =>
+  account?.data?.auth?.bi?.connId
 
 const getBIIdFromContract = bankAccount => bankAccount.vendorId
 
