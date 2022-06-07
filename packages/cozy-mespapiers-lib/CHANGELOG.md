@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.10](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.9...cozy-mespapiers-lib@0.32.10) (2022-06-07)
+
+
+### Bug Fixes
+
+* Imports of Placeholders components ([1532e90](https://github.com/cozy/cozy-libs/commit/1532e906cf1db87d43668b7b5b83e5d3358bca97))
+
+
+
+
+
 ## [0.32.9](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.8...cozy-mespapiers-lib@0.32.9) (2022-06-07)
 
 
