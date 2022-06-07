@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.1.0...cozy-intent@2.2.0) (2022-06-07)
+
+
+### Features
+
+* Expose webview methods ([6088787](https://github.com/cozy/cozy-libs/commit/6088787c9c0f83ac7162b0f26f82969b0e5bcc49))
+
+
+
+
+
 # 2.1.0 (2022-06-01)
 
 
