@@ -29,16 +29,17 @@ describe('OAuthForm', () => {
     expect(component).toMatchSnapshot()
   })
 
-  it('should not render button when update', () => {
+  it('should render reconnect button when update', () => {
     const component = shallow(
       <OAuthForm
         flowState={{}}
         account={{ oauth: { access_token: '1234abcd' } }}
         konnector={fixtures.konnector}
+        reconnect={true}
         t={t}
       />
     ).getElement()
-    expect(component).toBeNull()
+    expect(component).toMatchSnapshot()
   })
   it('should call policy fetchExtraOAuthUrlParams with proper params', () => {
     shallow(

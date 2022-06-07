@@ -13,7 +13,8 @@ import {
   saveBIConfig,
   findAccountWithBiConnection,
   convertBIErrortoKonnectorJobError,
-  isBudgetInsightConnector
+  isBudgetInsightConnector,
+  getBIConnectionIdFromAccount
 } from './budget-insight'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { waitForRealtimeEvent } from './jobUtils'
@@ -189,6 +190,19 @@ export const onBIAccountCreation = async ({
   return updatedAccount
 }
 
+const getReconnectExtraOAuthUrlParams = async ({
+  biBankId,
+  biBankIds,
+  token,
+  connId
+}) => {
+  return {
+    id_connector: biBankId || biBankIds,
+    code: token,
+    connection_id: connId
+  }
+}
+
 export const fetchExtraOAuthUrlParams = async ({
   client,
   konnector,
@@ -204,7 +218,23 @@ export const fetchExtraOAuthUrlParams = async ({
     account
   })
 
-  return { id_connector: biBankId || biBankIds, token }
+  const connId = getBIConnectionIdFromAccount(account)
+
+  const isReconnect = Boolean(connId)
+
+  if (isReconnect) {
+    return getReconnectExtraOAuthUrlParams({
+      biBankId,
+      biBankIds,
+      token,
+      connId
+    })
+  } else {
+    return {
+      id_connector: biBankId || biBankIds,
+      token
+    }
+  }
 }
 
 /**

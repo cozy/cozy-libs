@@ -4,7 +4,8 @@ import {
   checkBIConnection,
   isBiWebViewConnector,
   fetchContractSynchronizationUrl,
-  refreshContracts
+  refreshContracts,
+  fetchExtraOAuthUrlParams
 } from './biWebView'
 import ConnectionFlow from '../models/ConnectionFlow'
 import { waitForRealtimeEvent } from './jobUtils'
@@ -312,5 +313,153 @@ describe('refreshContracts', () => {
         }
       }
     })
+  })
+})
+
+describe('fetchExtraOAuthUrlParams', () => {
+  it('should asynchroneously fetch BI token', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            code: 'bi-temporary-access-token-123'
+          }
+        }
+      }
+    })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector,
+      account
+    })
+    expect(result).toMatchObject({ token: 'bi-temporary-access-token-123' })
+  })
+
+  it('should add id_connector param for mono bankId', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            biBankId: 12
+          }
+        }
+      }
+    })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector,
+      account
+    })
+    expect(result).toMatchObject({ id_connector: 12 })
+  })
+
+  it('should add id_connector param for multiple bank ids', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            biBankIds: [1, 2, 3, 4]
+          }
+        }
+      }
+    })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector,
+      account
+    })
+    expect(result).toMatchObject({ id_connector: [1, 2, 3, 4] })
+  })
+
+  it('should fetch reconnect params if any connection id in the account', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            code: 'bi-temporary-access-token-12'
+          }
+        }
+      }
+    })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector,
+      account: { ...account, data: { auth: { bi: { connId: 15 } } } }
+    })
+    expect(result).toMatchObject({
+      connection_id: 15,
+      code: 'bi-temporary-access-token-12'
+    })
+  })
+
+  it('should not add connection_id param if not connection_id', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {}
+        }
+      }
+    })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector,
+      account
+    })
+    expect(result).not.toHaveProperty('connection_id')
   })
 })

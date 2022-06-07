@@ -386,6 +386,9 @@
     }
   },
   "oauth": {
+    "reconnect": {
+      "label": "Se reconnecter"
+    },
     "connect": {
       "label": "Connecter"
     },

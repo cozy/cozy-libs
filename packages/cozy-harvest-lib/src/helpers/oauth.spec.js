@@ -76,6 +76,21 @@ describe('Oauth helper', () => {
         'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&token=thetoken&id_connector=40'
       )
     })
+    it('should return reconnect url with account id if reconnect', () => {
+      const url = getOAuthUrl({
+        ...defaultConf,
+        oAuthConf: {},
+        account: { _id: 'accountid' },
+        reconnect: true,
+        extraParams: {
+          code: 'thecode',
+          connection_id: 12345
+        }
+      })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/accountid/reconnect?state=statekey&nonce=1234&code=thecode&connection_id=12345'
+      )
+    })
   })
   describe('handleOAuthResponse', () => {
     let originalLocation

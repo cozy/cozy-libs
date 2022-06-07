@@ -12,3 +12,16 @@ exports[`OAuthForm should render 1`] = `
   />
 </React.Fragment>
 `;
+
+exports[`OAuthForm should render reconnect button when update 1`] = `
+<React.Fragment>
+  <DefaultButton
+    busy={true}
+    className="u-mt-1"
+    disabled={true}
+    extension="full"
+    label="oauth.reconnect.label"
+    onClick={[Function]}
+  />
+</React.Fragment>
+`;

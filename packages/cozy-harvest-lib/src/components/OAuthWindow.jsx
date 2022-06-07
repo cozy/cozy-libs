@@ -45,7 +45,7 @@ export class OAuthWindow extends PureComponent {
   }
 
   componentDidMount() {
-    const { client, konnector, redirectSlug, extraParams } = this.props
+    const { client, konnector, redirectSlug, extraParams, reconnect, account } = this.props
     this.realtime = new CozyRealtime({ client })
     this.realtime.subscribe(
       'notified',
@@ -57,7 +57,9 @@ export class OAuthWindow extends PureComponent {
       client,
       konnector,
       redirectSlug,
-      extraParams
+      extraParams,
+      reconnect,
+      account
     )
     this.setState({ oAuthStateKey, oAuthUrl, succeed: false })
   }
