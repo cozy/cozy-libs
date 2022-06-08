@@ -19,7 +19,7 @@ const PapersListToolbar = ({ title, onBack, onClose }) => {
     <>
       <BarLeft>
         <IconButton onClick={onBack}>
-          <Icon icon={'previous'} />
+          <Icon icon="previous" />
         </IconButton>
       </BarLeft>
 
@@ -34,7 +34,7 @@ const PapersListToolbar = ({ title, onBack, onClose }) => {
         <BarRight>
           {!isDesktop && (
             <IconButton onClick={onClose}>
-              <Icon icon={'cross-medium'} />
+              <Icon icon="cross-medium" />
             </IconButton>
           )}
         </BarRight>

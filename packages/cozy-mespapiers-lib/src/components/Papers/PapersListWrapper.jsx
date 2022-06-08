@@ -81,7 +81,7 @@ const PapersListWrapper = ({ history, match }) => {
   const hasNoFiles = !isLoadingFiles && files.length === 0
 
   if (hasNoFiles) {
-    return <Redirect to={'/paper'} />
+    return <Redirect to="/paper" />
   }
 
   return (

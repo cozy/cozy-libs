@@ -17,9 +17,9 @@ const setup = ({ text, title } = {}) => {
   return render(
     <AppLike>
       <CompositeHeader
-        icon={'IlluIBAN.png'}
-        fallbackIcon={'fallback.svg'}
-        iconSize={'medium'}
+        icon="IlluIBAN.png"
+        fallbackIcon="fallback.svg"
+        iconSize="medium"
         title={title}
         text={text}
       />

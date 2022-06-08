@@ -75,7 +75,7 @@ const ContactWrapper = ({ currentStep, onClose }) => {
     <>
       <CompositeHeader
         icon={illustration}
-        iconSize={'small'}
+        iconSize="small"
         title={t(text)}
         text={
           currentUser && (

@@ -30,7 +30,7 @@ const MoreOptions = () => {
       <BarRight>
         <CozyTheme>
           <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
-            <Icon icon={'dots'} />
+            <Icon icon="dots" />
           </IconButton>
         </CozyTheme>
       </BarRight>

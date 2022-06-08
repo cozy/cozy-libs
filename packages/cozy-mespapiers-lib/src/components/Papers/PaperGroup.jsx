@@ -52,7 +52,7 @@ const PaperGroup = ({ allPapersByCategories }) => {
       <ListSubheader classes={isMobile ? classes : undefined}>
         {t('PapersList.subheader')}
       </ListSubheader>
-      <div className={'u-pv-half'}>
+      <div className="u-pv-half">
         {allPapersByCategories.length === 0 ? (
           <Typography
             className="u-ml-1 u-mv-1"
@@ -75,22 +75,22 @@ const PaperGroup = ({ allPapersByCategories }) => {
                       linkType={getLinkType(paper)}
                       render={src => (
                         <MuiCardMedia
-                          component={'img'}
+                          component="img"
                           width={32}
                           height={32}
                           image={src}
                         />
                       )}
                       renderFallback={() => (
-                        <Icon icon={'file-type-image'} size={32} />
+                        <Icon icon="file-type-image" size={32} />
                       )}
                     />
                   </ListItemIcon>
                   <ListItemText primary={scannerT(`items.${category}`)} />
                   <Icon
-                    icon={'right'}
+                    icon="right"
                     size={16}
-                    color={'var(--secondaryTextColor)'}
+                    color="var(--secondaryTextColor)"
                   />
                 </ListItem>
                 {index !== allPapersByCategories.length - 1 && (

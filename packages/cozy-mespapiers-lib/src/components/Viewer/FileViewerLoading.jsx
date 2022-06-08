@@ -9,7 +9,7 @@ const FileViewerLoading = () => (
       size="xxlarge"
       middle
       noMargin
-      color={'var(--primaryContrastTextColor)'}
+      color="var(--primaryContrastTextColor)"
     />
   </Overlay>
 )

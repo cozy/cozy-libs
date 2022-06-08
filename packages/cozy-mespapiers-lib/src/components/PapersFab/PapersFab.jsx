@@ -40,7 +40,7 @@ const PapersFab = ({ t, className, ...props }) => {
       onClick={handleClick}
       {...props}
     >
-      <Icon icon={'plus'} />
+      <Icon icon="plus" />
     </Fab>
   )
 }

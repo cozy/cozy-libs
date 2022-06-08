@@ -86,10 +86,10 @@ const InputDateAdapter = ({
     <MuiPickersUtilsProvider
       utils={DateFnsUtils}
       locale={locales}
-      className={'TEST'}
+      className="TEST"
     >
       <KeyboardDatePicker
-        placeholder={'01/01/2022'}
+        placeholder="01/01/2022"
         className={classes.overrides}
         error={displayHelper && !isValidDate}
         inputProps={{
@@ -105,7 +105,7 @@ const InputDateAdapter = ({
         onChange={handleDateChange}
         onFocus={handleOnFocus}
         onBlur={handleOnBlur}
-        inputVariant={'outlined'}
+        inputVariant="outlined"
         cancelLabel={t('common.cancel')}
         format={lang === 'fr' ? 'dd/MM/yyyy' : 'MM/dd/yyyy'}
       />

@@ -14,7 +14,7 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
   return (
     <>
       <div>
-        <Divider textAlign="center" className={'u-mv-1'}>
+        <Divider textAlign="center" className="u-mv-1">
           {t('Scan.divider')}
         </Divider>
         <Button
@@ -27,35 +27,35 @@ const ScanMobileActions = ({ openFilePickerModal, onChangeFile }) => {
         />
         <FileInput
           onChange={onChangeFile}
-          className={'u-w-100 u-ml-0'}
+          className="u-w-100 u-ml-0"
           onClick={e => e.stopPropagation()}
           accept={'image/*,.pdf'}
           data-testid="importPicFromMobile-btn"
         >
           <Button
-            variant={'secondary'}
-            component={'a'}
+            variant="secondary"
+            component="a"
             style={styleBtn}
             startIcon={<Icon icon="phone-upload" />}
             fullWidth
-            className={'u-m-0'}
+            className="u-m-0"
             label={t('Scan.importPicFromMobile')}
           />
         </FileInput>
       </div>
       <FileInput
         onChange={onChangeFile}
-        className={'u-w-100 u-ta-center u-ml-0'}
+        className="u-w-100 u-ta-center u-ml-0"
         onClick={e => e.stopPropagation()}
-        capture={'environment'}
+        capture="environment"
         accept={'image/*'}
         data-testid="takePic-btn"
       >
         <Button
           startIcon={<Icon icon="camera" />}
-          component={'a'}
+          component="a"
           fullWidth
-          className={'u-m-0'}
+          className="u-m-0"
           label={t('Scan.takePic')}
         />
       </FileInput>

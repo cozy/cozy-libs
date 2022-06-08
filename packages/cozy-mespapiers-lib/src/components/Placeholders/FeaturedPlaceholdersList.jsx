@@ -56,7 +56,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
           {t('FeaturedPlaceholdersList.subheader')}
         </ListSubheader>
       )}
-      <div className={'u-pv-half'}>
+      <div className="u-pv-half">
         {featuredPlaceholders.map((placeholder, idx) => (
           <Placeholder
             key={idx}

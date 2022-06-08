@@ -9,7 +9,7 @@ const setup = ({ icon, fallbackIcon } = {}) => {
     <CompositeHeaderImage
       icon={icon}
       fallbackIcon={fallbackIcon}
-      iconSize={'medium'}
+      iconSize="medium"
       title="Title"
       text="Text"
     />

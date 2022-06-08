@@ -21,13 +21,13 @@ const HomeToolbar = () => {
     <>
       <BarLeft>
         <IconButton onClick={() => history.goBack()}>
-          <Icon icon={'previous'} />
+          <Icon icon="previous" />
         </IconButton>
       </BarLeft>
       <BarRight>
         {!isDesktop ? (
           <IconButton onClick={() => setIsMultiSelectionActive(false)}>
-            <Icon icon={'cross-medium'} />
+            <Icon icon="cross-medium" />
           </IconButton>
         ) : (
           <></>

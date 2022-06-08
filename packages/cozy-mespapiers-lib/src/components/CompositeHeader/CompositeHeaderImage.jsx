@@ -87,7 +87,7 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
         [`${styles.image}--${iconSize}`]: iconSize
       })}
     >
-      <Icon icon={src} size={'100%'} />
+      <Icon icon={src} size="100%" />
     </div>
   )
 }

@@ -34,16 +34,16 @@ const ScanDesktopActions = ({ openFilePickerModal, onChangeFile }) => {
       />
       <FileInput
         onChange={onChangeFile}
-        className={'u-w-100 u-ml-0'}
+        className="u-w-100 u-ml-0"
         onClick={e => e.stopPropagation()}
         accept={'image/*,.pdf'}
         data-testid="importPicFromDesktop-btn"
       >
         <Button
           startIcon={<Icon icon="phone-upload" />}
-          component={'a'}
+          component="a"
           ref={buttonRef}
-          className={'u-w-100 u-m-0 u-mb-1'}
+          className="u-w-100 u-m-0 u-mb-1"
           label={t('Scan.importPicFromDesktop')}
         />
       </FileInput>

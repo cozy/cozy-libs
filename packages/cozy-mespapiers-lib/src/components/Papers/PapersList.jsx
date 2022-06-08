@@ -39,7 +39,7 @@ const PapersList = ({ papers }) => {
   }
 
   return (
-    <div className={'u-pv-half'}>
+    <div className="u-pv-half">
       {papers.list.map(
         (paper, idx) =>
           idx + 1 <= maxDisplay && (

@@ -48,14 +48,14 @@ const Contact = ({
       onClick={() => onClickContactLine(contact._id)}
     >
       <ListItemIcon>
-        <Avatar size={'small'} style={styleAvatar} />
+        <Avatar size="small" style={styleAvatar} />
       </ListItemIcon>
       <ListItemText
         primary={`${getFullname(contact)} ${
           contact.me ? `(${t('ContactStep.me')})` : ''
         }`}
       />
-      <ListItemSecondaryAction className={'u-mr-half'}>
+      <ListItemSecondaryAction className="u-mr-half">
         {multiple ? (
           <Checkbox
             checked={contactIdsSelected.includes(contact._id)}

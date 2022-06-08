@@ -52,7 +52,7 @@ const CompositeHeader = ({
         (isValidElement(Title) ? (
           Title
         ) : (
-          <Typography variant="h5" color="textPrimary" className={'u-mh-2'}>
+          <Typography variant="h5" color="textPrimary" className="u-mh-2">
             {Title}
           </Typography>
         ))}
@@ -68,7 +68,7 @@ const CompositeHeader = ({
             {Text}
           </div>
         ) : (
-          <Typography variant="body1" className={'u-mt-1'}>
+          <Typography variant="body1" className="u-mt-1">
             {Text}
           </Typography>
         ))}

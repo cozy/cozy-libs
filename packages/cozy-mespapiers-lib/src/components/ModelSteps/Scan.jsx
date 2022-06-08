@@ -82,13 +82,13 @@ const Scan = ({ currentStep }) => {
     <>
       <CompositeHeader
         icon={illustration}
-        iconSize={'large'}
+        iconSize="large"
         fallbackIcon={IlluGenericNewPage}
         title={t(text)}
       />
       <DialogActions
         disableSpacing
-        className={'columnLayout u-mh-0 u-mb-1 cozyDialogActions'}
+        className="columnLayout u-mh-0 u-mb-1 cozyDialogActions"
       >
         {isMobile() ? (
           <ScanMobileActions
