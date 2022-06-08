@@ -52,7 +52,6 @@ const ActionMenuItemWrapper = ({
         className={cx({
           [styles.disabledTypography]: !isEnabled
         })}
-        variant="body1"
         {...typographyProps}
       >
         {children}

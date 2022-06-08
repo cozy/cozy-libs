@@ -27,12 +27,11 @@ const ConfirmReplaceFile = ({ onReplace, onClose, cozyFilesCount }) => {
       content={
         <>
           <Typography
-            variant="body1"
             dangerouslySetInnerHTML={{
               __html: t('ConfirmReplaceFile.content')
             }}
           />
-          <Typography variant="body1">
+          <Typography>
             {t('ConfirmReplaceFile.question', {
               smart_count: cozyFilesCount
             })}
