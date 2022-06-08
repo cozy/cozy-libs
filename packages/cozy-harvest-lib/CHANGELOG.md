@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.7.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.7.2...cozy-harvest-lib@9.7.3) (2022-06-08)
+
+
+### Bug Fixes
+
+* Avoid React error message when not in BI webview mode ([413853d](https://github.com/cozy/cozy-libs/commit/413853da26b5d580f5454d7cf6c6069c3b2880b0))
+
+
+
+
+
 ## [9.7.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.7.1...cozy-harvest-lib@9.7.2) (2022-06-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
