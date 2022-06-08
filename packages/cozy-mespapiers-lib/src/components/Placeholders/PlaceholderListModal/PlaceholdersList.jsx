@@ -103,7 +103,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                 <IconStack
                   backgroundIcon={
                     <Icon
-                      icon={'file-duotone'}
+                      icon="file-duotone"
                       color="var(--primaryColor)"
                       size={largeSize}
                     />

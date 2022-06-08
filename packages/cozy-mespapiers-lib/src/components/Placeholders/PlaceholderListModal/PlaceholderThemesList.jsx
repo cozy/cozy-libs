@@ -33,7 +33,7 @@ const PlaceholderThemesList = ({ setQualifByTheme }) => {
               <IconStack
                 backgroundIcon={
                   <Icon
-                    icon={'file-duotone'}
+                    icon="file-duotone"
                     color="var(--primaryColor)"
                     size={largeSize}
                   />
@@ -49,9 +49,9 @@ const PlaceholderThemesList = ({ setQualifByTheme }) => {
             </ListItemIcon>
             <ListItemText primary={scannerT(`themes.${theme.label}`)} />
             <Icon
-              icon={'right'}
+              icon="right"
               size={smallSize}
-              color={'var(--secondaryTextColor)'}
+              color="var(--secondaryTextColor)"
             />
           </ListItem>
         )

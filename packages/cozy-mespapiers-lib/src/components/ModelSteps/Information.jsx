@@ -106,7 +106,7 @@ const Information = ({ currentStep }) => {
     <>
       <CompositeHeader
         icon={illustration}
-        iconSize={'medium'}
+        iconSize="medium"
         className={isFocus && isIOS() ? 'is-focused' : ''}
         fallbackIcon={fallbackIcon}
         title={t(text)}

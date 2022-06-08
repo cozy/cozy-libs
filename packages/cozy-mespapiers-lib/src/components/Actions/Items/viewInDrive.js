@@ -28,7 +28,7 @@ export const viewInDrive = ({ client }) => {
           text={t('action.viewInDrive')}
           onClick={onClick}
         >
-          <Link href={webLink} target="_blank" className={'u-p-0'}>
+          <Link href={webLink} target="_blank" className="u-p-0">
             {t('action.viewInDrive')}
           </Link>
         </ActionMenuItemWrapper>

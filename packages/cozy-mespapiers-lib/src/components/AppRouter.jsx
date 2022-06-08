@@ -57,19 +57,11 @@ const Routes = () => {
       </Switch>
       {background && (
         <>
+          <Route exact path="/paper/multiselect" component={MultiselectView} />
+          <Route exact path="/paper/create" component={PlaceholderListModal} />
           <Route
             exact
-            path={'/paper/multiselect'}
-            component={MultiselectView}
-          />
-          <Route
-            exact
-            path={'/paper/create'}
-            component={PlaceholderListModal}
-          />
-          <Route
-            exact
-            path={'/paper/create/:qualificationLabel'}
+            path="/paper/create/:qualificationLabel"
             render={props => {
               const {
                 location: { search },

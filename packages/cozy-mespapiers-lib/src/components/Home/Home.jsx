@@ -102,10 +102,10 @@ const Home = () => {
       {allPapersByCategories.length === 0 ? (
         <Empty
           icon={HomeCloud}
-          iconSize={'large'}
+          iconSize="large"
           title={t('Home.Empty.title')}
           text={t('Home.Empty.text')}
-          className={'u-ph-1'}
+          className="u-ph-1"
         />
       ) : (
         <PaperGroup allPapersByCategories={filteredPapers} />

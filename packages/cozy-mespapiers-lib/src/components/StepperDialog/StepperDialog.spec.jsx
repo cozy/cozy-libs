@@ -29,7 +29,7 @@ jest.mock('cozy-ui/transpiled/react/CozyDialogs', () => ({
 
 describe('StepperDialog', () => {
   it('should display "stepper" content', () => {
-    const { getByText } = render(<StepperDialog stepper={'1/2'} />)
+    const { getByText } = render(<StepperDialog stepper="1/2" />)
 
     expect(getByText('1/2')).toBeTruthy()
   })

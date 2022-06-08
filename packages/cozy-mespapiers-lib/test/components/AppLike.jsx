@@ -30,9 +30,9 @@ const AppLike = ({ children, client, history }) => {
   return (
     <WebviewIntentProvider>
       <CozyProvider client={client || mockClient}>
-        <I18n dictRequire={() => enLocale} lang={'en'}>
+        <I18n dictRequire={() => enLocale} lang="en">
           <MultiSelectionProvider>
-            <ScannerI18nProvider lang={'en'}>
+            <ScannerI18nProvider lang="en">
               <MuiCozyTheme>
                 <BreakpointsProvider>
                   <PapersDefinitionsProvider>

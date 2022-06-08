@@ -29,7 +29,7 @@ const Onboarding = () => {
         'u-flex-justify-start': isDesktop
       })}
       icon={HomeCloud}
-      iconSize={'large'}
+      iconSize="large"
       title={t('Home.Empty.title')}
       text={t('Home.Empty.text')}
       layout={false}
@@ -38,7 +38,7 @@ const Onboarding = () => {
         theme="primary"
         onClick={onClick}
         label={t('Onboarding.cta')}
-        className={'u-mb-1'}
+        className="u-mb-1"
       />
     </Empty>
   )

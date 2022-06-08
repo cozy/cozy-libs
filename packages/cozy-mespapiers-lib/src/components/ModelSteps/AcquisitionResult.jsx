@@ -102,12 +102,12 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
           }
         )}
       >
-        <div className={'u-flex u-flex-column u-flex-items-center u-mb-2'}>
-          <Avatar icon={'check'} size="xlarge" className={styles.avatar} />
-          <Typography variant={'h5'}>{t('Acquisition.success')}</Typography>
+        <div className="u-flex u-flex-column u-flex-items-center u-mb-2">
+          <Avatar icon="check" size="xlarge" className={styles.avatar} />
+          <Typography variant="h5">{t('Acquisition.success')}</Typography>
         </div>
-        <Card className={'u-ta-center u-p-1 u-pb-half'}>
-          <div className={'u-mah-5'}>
+        <Card className="u-ta-center u-p-1 u-pb-half">
+          <div className="u-mah-5">
             {!isPDF(currentFile) ? (
               <img
                 src={URL.createObjectURL(currentFile)}
@@ -116,15 +116,15 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
             ) : (
               <>
                 <Icon icon="file-type-pdf" size={80} />
-                <Typography variant={'body1'}>{currentFile.name}</Typography>
+                <Typography variant="body1">{currentFile.name}</Typography>
               </>
             )}
           </div>
           <Button
-            className={'u-mt-half'}
+            className="u-mt-half"
             data-testid="retry-button"
             label={t('Acquisition.retry')}
-            theme={'text'}
+            theme="text"
             onClick={changeSelectedFile}
           />
         </Card>
@@ -145,11 +145,11 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
         />
         {multipage && (
           <ButtonLink
-            className={'u-ml-0 u-mb-half'}
+            className="u-ml-0 u-mb-half"
             data-testid="repeat-button"
             extension="full"
-            theme={'secondary'}
-            icon={'camera'}
+            theme="secondary"
+            icon="camera"
             label={t('Acquisition.repeat')}
             onClick={() => onValid(true)}
           />

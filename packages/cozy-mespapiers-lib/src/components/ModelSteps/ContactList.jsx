@@ -69,9 +69,9 @@ const ContactList = ({
 
   return (
     <>
-      <Paper elevation={2} className={'u-mt-1 u-mh-half'}>
+      <Paper elevation={2} className="u-mt-1 u-mh-half">
         <List>
-          <div className={'u-mah-5 u-ov-auto'}>
+          <div className="u-mah-5 u-ov-auto">
             {contactsList.map(contact => (
               <Contact
                 key={contact._id}
@@ -87,10 +87,10 @@ const ContactList = ({
 
           <ListItem button onClick={() => setContactModalOpened(true)}>
             <ListItemIcon>
-              <Avatar size={'small'} style={styleAvatar} />
+              <Avatar size="small" style={styleAvatar} />
             </ListItemIcon>
             <ListItemText primary={t('ContactStep.other')} />
-            <Icon icon="right" size={16} color={'var(--secondaryTextColor)'} />
+            <Icon icon="right" size={16} color="var(--secondaryTextColor)" />
           </ListItem>
         </List>
       </Paper>

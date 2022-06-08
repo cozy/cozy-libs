@@ -26,14 +26,14 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
         <ListItemIcon>
           <InfosBadge
             badgeContent={
-              <Icon icon={'plus'} size={10} color="var(--primaryTextColor)" />
+              <Icon icon="plus" size={10} color="var(--primaryTextColor)" />
             }
           >
             <IconStack
-              backgroundClassName={'u-o-50'}
+              backgroundClassName="u-o-50"
               backgroundIcon={
                 <Icon
-                  icon={'file-duotone'}
+                  icon="file-duotone"
                   color="var(--primaryColor)"
                   size={32}
                 />
