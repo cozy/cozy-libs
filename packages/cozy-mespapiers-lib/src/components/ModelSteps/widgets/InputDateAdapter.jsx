@@ -83,11 +83,7 @@ const InputDateAdapter = ({
   }
 
   return (
-    <MuiPickersUtilsProvider
-      utils={DateFnsUtils}
-      locale={locales}
-      className="TEST"
-    >
+    <MuiPickersUtilsProvider utils={DateFnsUtils} locale={locales}>
       <KeyboardDatePicker
         placeholder="01/01/2022"
         className={classes.overrides}
