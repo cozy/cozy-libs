@@ -20,14 +20,12 @@ export class OAuthForm extends PureComponent {
     this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
     this.handleExtraParams = this.handleExtraParams.bind(this)
     this.state = {
-      initialValues: null,
       showingOAuthModal: false
     }
   }
 
   componentDidMount() {
     const { account, konnector, flow, client } = this.props
-    this.setState({ initialValues: account ? account.oauth : null })
 
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
@@ -79,6 +77,8 @@ export class OAuthForm extends PureComponent {
       flowState.running ||
       (needExtraParams && !extraParams)
 
+    const buttonLabel = reconnect ? 'oauth.reconnect.label' : 'oauth.connect.label'
+
     return (
       <>
         <Button
@@ -86,7 +86,7 @@ export class OAuthForm extends PureComponent {
           busy={isBusy}
           disabled={isBusy}
           extension="full"
-          label={t(`oauth.${reconnect ? 'reconnect' : 'connect'}.label`)}
+          label={t(buttonLabel)}
           onClick={this.handleConnect}
         />
         {showOAuthWindow && (
@@ -112,7 +112,9 @@ OAuthForm.propTypes = {
   /** Success callback, takes account as parameter */
   onSuccess: PropTypes.func,
   /** Translation function */
-  t: PropTypes.func.isRequired
+  t: PropTypes.func.isRequired,
+  /** Is it a reconnection or not */
+  reconnect: PropTypes.bool
 }
 
 export default compose(translate(), withConnectionFlow())(OAuthForm)
