@@ -317,7 +317,7 @@ describe('refreshContracts', () => {
 })
 
 describe('fetchExtraOAuthUrlParams', () => {
-  it('should asynchroneously fetch BI token', async () => {
+  it('should asynchronously fetch BI token', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
