@@ -116,7 +116,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
             ) : (
               <>
                 <Icon icon="file-type-pdf" size={80} />
-                <Typography variant="body1">{currentFile.name}</Typography>
+                <Typography>{currentFile.name}</Typography>
               </>
             )}
           </div>

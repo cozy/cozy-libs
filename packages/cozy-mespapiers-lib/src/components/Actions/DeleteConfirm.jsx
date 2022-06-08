@@ -38,7 +38,6 @@ const DeleteConfirm = ({ files, onClose, children }) => {
       content={
         <Stack>
           <Typography
-            variant="body1"
             dangerouslySetInnerHTML={{
               __html: t('DeleteConfirm.text', {
                 name: files[0].name

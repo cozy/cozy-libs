@@ -48,7 +48,7 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
             />
           </InfosBadge>
         </ListItemIcon>
-        <Typography variant="body1" color="textSecondary">
+        <Typography color="textSecondary">
           {scannerT(`items.${placeholder.label}`)}
         </Typography>
       </ListItem>

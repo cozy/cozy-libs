@@ -121,7 +121,6 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
           className={cx({
             [styles.disabledTypography]: !hasSteps
           })}
-          variant="body1"
           gutterBottom
         >
           {t('ImportDropdown.scanPicture.title')}
@@ -141,7 +140,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
         left={<Icon icon={Konnector} size={24} />}
         onClick={goToStore}
       >
-        <Typography variant="body1" gutterBottom>
+        <Typography gutterBottom>
           {t('ImportDropdown.importAuto.title')}
         </Typography>
         <Typography variant="caption" color="textSecondary">

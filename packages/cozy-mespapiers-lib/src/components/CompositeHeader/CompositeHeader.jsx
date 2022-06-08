@@ -68,9 +68,7 @@ const CompositeHeader = ({
             {Text}
           </div>
         ) : (
-          <Typography variant="body1" className="u-mt-1">
-            {Text}
-          </Typography>
+          <Typography className="u-mt-1">{Text}</Typography>
         ))}
     </div>
   )
