@@ -4,21 +4,26 @@ import InAppBrowser from './InAppBrowser'
 import { WebviewIntentProvider } from 'cozy-intent'
 
 describe('InAppBrowser', () => {
-  it('should call showInAppBrowser', async () => {
+  it('should call fetchSessionCode and showInAppBrowser', async () => {
     const url = 'https://test.url'
     const intentCall = jest.fn()
     const webviewService = {
       call: intentCall
     }
-    intentCall.mockResolvedValue({ type: 'dismiss' })
+    intentCall
+      .mockResolvedValueOnce('sessioncode')
+      .mockResolvedValueOnce({ type: 'dismiss' })
     render(
       <WebviewIntentProvider webviewService={webviewService}>
         <InAppBrowser url={url} />
       </WebviewIntentProvider>
     )
 
-    expect(webviewService.call).toHaveBeenNthCalledWith(1, 'showInAppBrowser', {
-      url
+    await waitFor(() => expect(webviewService.call).toHaveBeenCalled())
+
+    expect(webviewService.call).toHaveBeenNthCalledWith(1, 'fetchSessionCode')
+    expect(webviewService.call).toHaveBeenNthCalledWith(2, 'showInAppBrowser', {
+      url: url + '/?session_code=sessioncode'
     })
   })
   it('should call onClose when user closes the inAppBrowser in app', async () => {
