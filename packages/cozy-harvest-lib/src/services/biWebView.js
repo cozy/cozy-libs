@@ -190,6 +190,15 @@ export const onBIAccountCreation = async ({
   return updatedAccount
 }
 
+/**
+ * Create OAuth extra parameters specific to reconnect webview
+ *
+ * @param {Number} options.biBankId - Connector bank id (compatible with non webview bi connectors)
+ * @param {Array<Number>} options.biBankIds - connector bank ids (for webview connectors)
+ * @param {String} options.token - BI temporary token
+ * @param {Number} options.connId - BI bi connection id
+ * @return {Object}
+ */
 const getReconnectExtraOAuthUrlParams = async ({
   biBankId,
   biBankIds,
@@ -203,6 +212,14 @@ const getReconnectExtraOAuthUrlParams = async ({
   }
 }
 
+/**
+ * Create OAuth extra parameters
+ *
+ * @param {CozyClient} options.client - CozyClient instance
+ * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {io.cozy.accounts} options.account The account content
+ * @return {Promise<Object>}
+ */
 export const fetchExtraOAuthUrlParams = async ({
   client,
   konnector,

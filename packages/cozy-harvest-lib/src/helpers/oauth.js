@@ -100,6 +100,9 @@ export const handleOAuthResponse = (options = {}) => {
  * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
  * @param  {string} nonce unique nonce string
  * @param  {Object} extraParams some extra parameters to add to the query string
+ * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
+ * @param  {io.cozy.accounts} account targeted account if any
+ * @returns {String} final OAuth url string
  */
 export const getOAuthUrl = ({
   cozyUrl,
@@ -114,7 +117,12 @@ export const getOAuthUrl = ({
 }) => {
   const startOrReconnect = reconnect ? 'reconnect' : 'start'
   const accountIdParam = reconnect ? account._id + '/' : ''
-  let oAuthUrl = `${cozyUrl}/accounts/${accountType}/${accountIdParam}${startOrReconnect}?state=${oAuthStateKey}&nonce=${nonce}`
+  const oAuthUrl = new URL(
+    `${cozyUrl}/accounts/${accountType}/${accountIdParam}${startOrReconnect}`
+  )
+  oAuthUrl.searchParams.set('state', oAuthStateKey)
+  oAuthUrl.searchParams.set('nonce', nonce)
+
   if (
     oAuthConf.scope !== undefined &&
     oAuthConf.scope !== null &&
@@ -123,19 +131,19 @@ export const getOAuthUrl = ({
     const urlScope = Array.isArray(oAuthConf.scope)
       ? oAuthConf.scope.join('+')
       : oAuthConf.scope
-    oAuthUrl += `&scope=${urlScope}`
+    oAuthUrl.searchParams.set('scope', urlScope)
   }
   if (redirectSlug) {
-    oAuthUrl += `&slug=${redirectSlug}`
+    oAuthUrl.searchParams.set('slug', redirectSlug)
   }
 
   if (extraParams) {
-    for (const key in extraParams) {
-      oAuthUrl += `&${key}=${extraParams[key]}`
-    }
+    Object.entries(extraParams).forEach(([key, value]) =>
+      oAuthUrl.searchParams.set(key, value)
+    )
   }
 
-  return oAuthUrl
+  return oAuthUrl.toString()
 }
 
 const getAppSlug = client => {
@@ -149,8 +157,10 @@ const getAppSlug = client => {
  * @param  {string} domain    Cozy domain
  * @param  {Object} konnector
  * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
- * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack
- * OAuth endpoint) and `oAuthStateKey` (localStorage key)
+ * @param  {Object} extraParams some extra parameters to add to the query string
+ * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
+ * @param  {io.cozy.accounts} account targetted account if any
+ * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
 export const prepareOAuth = (
   client,

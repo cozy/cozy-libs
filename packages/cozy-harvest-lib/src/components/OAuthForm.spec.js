@@ -29,7 +29,7 @@ describe('OAuthForm', () => {
     expect(component).toMatchSnapshot()
   })
 
-  it('should render reconnect button when update', () => {
+  it('should render reconnect button when updating an account', () => {
     const component = shallow(
       <OAuthForm
         flowState={{}}
