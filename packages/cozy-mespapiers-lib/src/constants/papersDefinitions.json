@@ -16,7 +16,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.png",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
@@ -100,7 +100,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -134,7 +134,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
@@ -260,7 +260,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -330,7 +330,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.shootingDate.text",
           "attributes": [
             {
@@ -364,7 +364,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -413,7 +413,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -450,7 +450,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
@@ -546,7 +546,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -594,7 +594,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -642,7 +642,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -691,7 +691,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -740,7 +740,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -788,7 +788,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -837,7 +837,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -885,7 +885,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -934,7 +934,7 @@
         {
           "stepIndex": 3,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -968,7 +968,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1002,7 +1002,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -1035,7 +1035,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
@@ -1072,7 +1072,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1109,7 +1109,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
@@ -1142,7 +1142,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1188,7 +1188,8 @@
           "attributes": [
             {
               "name": "cardNumber",
-              "type": "Number:12",
+              "type": "number",
+              "maxLength": 12,
               "inputLabel": "PaperJSON.card.number.inputLabel"
             }
           ]
@@ -1229,7 +1230,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1262,7 +1263,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1306,7 +1307,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
             {
@@ -1350,7 +1351,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1387,7 +1388,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
@@ -1467,7 +1468,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
@@ -1501,7 +1502,7 @@
         {
           "stepIndex": 2,
           "model": "information",
-          "illustration": "IlluGenericDate.svg",
+          "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
             {
