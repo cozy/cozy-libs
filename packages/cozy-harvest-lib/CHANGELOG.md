@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.7.3...cozy-harvest-lib@9.8.0) (2022-06-09)
+
+
+### Bug Fixes
+
+* Small fixes after review ([d4f50ba](https://github.com/cozy/cozy-libs/commit/d4f50ba114cd4f8d43fac8545f6356c380edd262))
+
+
+### Features
+
+* Add BI webview reconnection ([d0f9c9e](https://github.com/cozy/cozy-libs/commit/d0f9c9e556d847e072063eb877d5d4e57ee8cca0))
+
+
+
+
+
 ## [9.7.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.7.2...cozy-harvest-lib@9.7.3) (2022-06-08)
 
 
