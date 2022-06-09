@@ -173,7 +173,11 @@ OAuthWindow.propTypes = {
   an account id */
   onCancel: PropTypes.func,
   /** The app we want to redirect the user on, after the OAuth flow. It used by the stack */
-  redirectSlug: PropTypes.string
+  redirectSlug: PropTypes.string,
+  /** Is it a reconnection or not */
+  reconnect: PropTypes.bool,
+  /** Existing account */
+  account: PropTypes.object
 }
 
 export default translate()(withClient(OAuthWindow))

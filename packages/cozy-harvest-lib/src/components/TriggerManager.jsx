@@ -446,7 +446,9 @@ DumbTriggerManager.propTypes = {
   flow: PropTypes.object,
   flowState: PropTypes.object,
   // Used to inject a component around OAuthForm, and so customize the UI from the app
-  OAuthFormWrapperComp: PropTypes.node
+  OAuthFormWrapperComp: PropTypes.node,
+  /** Is it a reconnection or not */
+  reconnect: PropTypes.bool,
 }
 
 const TriggerManager = compose(
