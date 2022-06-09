@@ -1,0 +1,527 @@
+{
+  "close": "Sluiten",
+  "back": "Ga terug",
+  "badges": {
+    "warning": "Waarschuwing"
+  },
+  "accountForm": {
+    "submit": {
+      "label": "Koppelen"
+    },
+    "fields": {
+      "optional": "(optioneel)"
+    },
+    "password": {
+      "show": "Tonen",
+      "hide": "Verbergen"
+    },
+    "disconnect": {
+      "button": "Rekening loskoppelen"
+    },
+    "installFlagship": {
+      "label": "Installeer Cozy op je telefoon"
+    },
+    "notClientSide": "%{name} maakt gebruik van een hagelnieuw efficiënt systeem om gegevens op te vragen op je Cozy. Deze action is alleen te gebruiken via de Cozy-smartphone-app."
+  },
+  "contracts": {
+    "headers": {
+      "bankAccounts": "Bankrekeningen",
+      "default": "Contracten"
+    },
+    "deleted": "Verwijderd",
+    "no-contracts": "Er zijn geen contracten meer",
+    "handle-synchronization": "Synchronisaties beheren"
+  },
+  "contractForm": {
+    "details": "Details",
+    "sharing": "Delen",
+    "back-to-accounts": "Terug naar rekeningen",
+    "update": "Bijwerken",
+    "delete": "Standaardwaarden",
+    "deleting": "Bezig met herstellen…",
+    "confirm-deletion": {
+      "description": "Hiermee worden tevens je transacties en rekeningkoppelingen verwijderd. Als je je bankgegevens niet opnieuw wilt importeren tijdens de volgende geplande synchronisatie, verwijder dan de koppeling.",
+      "confirm": "Rekeningverwijdering bevestigen",
+      "title": "Weet je het zeker?"
+    },
+    "deletion_error": "Er is een fout opgetreden tijdens het verwijderen van de groep.",
+    "label": "Label",
+    "owner": "Eigenaar",
+    "addOwnerBtn": "Eigenaar toevoegen",
+    "removeOwnerBtn": "Eigenaar verwijderen",
+    "ownerPlaceholder": "Kies een eigenaar",
+    "bank": "Bank",
+    "number": "Nummer",
+    "type": "Soort",
+    "apply": "Toepassen",
+    "success": "De rekening is bijgewerkt",
+    "failure": "Fout tijdens bijwerken van rekening",
+    "removeAccountBtn": "Rekening verwijderen",
+    "listPlaceholder": "Zoeken naar contactpersoon",
+    "listEmptyMessage": "Geen contactpersoon gevonden",
+    "addContactLabel": "Contactpersoon toevoegen",
+    "cancel": "Annuleren",
+    "imported": "Gesynchroniseerd account"
+  },
+  "card": {
+    "launchTrigger": {
+      "button": {
+        "label": "Opnieuw uitvoeren"
+      },
+      "error": "Er is een fout opgetreden.",
+      "frequency": {
+        "label": "Frequentie:",
+        "hourly": "Elk uur",
+        "daily": "Elke dag",
+        "weekly": "Elke week",
+        "monthly": "Elke maand",
+        "undefined": "Handmatig"
+      },
+      "lastSync": {
+        "label": "Bijwerken:",
+        "syncing": "Bezig met uitvoeren…",
+        "unknown": "Onbekend",
+        "format": "D MMMM YYYY [om] HH[:]mm"
+      }
+    },
+    "appLink": {
+      "drive": {
+        "title": "Mijn documenten",
+        "description": "Deze dienst haalt je recentste documenten op en maakt er een volledige back-up van.",
+        "button": "Documenten openen",
+        "install": "Ontdek Cozy Schijf"
+      },
+      "contacts": {
+        "title": "Mijn contactpersonen",
+        "description": "Deze dienst synchroniseert al je contactpersonen.",
+        "button": "Contactpersonen tonen",
+        "install": "Ontdek Cozy Contactpersonen"
+      },
+      "banks": {
+        "title": "Mijn bankgegevens",
+        "description": "Deze dienst haalt al je bankgegevens op en maakt er een handig overzicht van.",
+        "button": "Bankrekeningen tonen",
+        "install": "Ontdek Cozy Banken"
+      },
+      "coachco2": {
+        "title": "Apps die verdergaan",
+        "description": "De volgende apps maken gebruik van je anonieme Cozy-gegevens.",
+        "button": "Coach CO2",
+        "install": "Ontdek CoachCO2"
+      }
+    },
+    "websiteLink": {
+      "title": "Nuttige informatie",
+      "description": "Website van dienst"
+    }
+  },
+  "default": {
+    "dateFormat": "DD-MM-YYYY",
+    "baseDir": "/Administratief"
+  },
+  "error": {
+    "reconnect-via-form": "Opnieuw koppelen",
+    "job": {
+      "DISK_QUOTA_EXCEEDED": {
+        "title": "Geen vrije ruimte meer",
+        "description": "De dienst kan je documenten momenteel niet ophalen. Verwijder enkele bestanden of ga naar **Instellingen --> Opslag** om meer vrije ruimte te verkrijgen."
+      },
+      "CHALLENGE_ASKED": {
+        "title": "Tweede stap vereist",
+        "description": "Deze website vereist een tweede authenticatiemethode. Doorloop het proces opnieuw om de code op te geven en je gegevens op te halen."
+      },
+      "LOGIN_FAILED": {
+        "title": "Onjuiste of verouderde inloggegevens",
+        "description": "Je inloggegevens zijn onjuist of verlopen. Controleer je inloggegevens op [%{name}](%{link}) voordat je ze bijwerkt."
+      },
+      "LOGIN_FAILED.NEEDS_SECRET": {
+        "title": "Aanvullende informatie benodigd",
+        "description": "Er is een aanvullende stap gevraagd om de dienst te koppelen. Doorloop het proces opnieuw om de gevraagde gegevens in te voeren."
+      },
+      "LOGIN_FAILED.TOO_MANY_ATTEMPTS": {
+        "title": "Tijdelijk geblokkeerd",
+        "description": "Te veel pogingen. Werk je gegevens bij op [%{name}](%{link}) en werk de connector later bij."
+      },
+      "MAINTENANCE": {
+        "title": "Website is niet beschikbaar",
+        "description": "Het lijkt er op dat [%{name}](%{link}) niet beschikbaar is of de verbinding moet worden bijgewerkt. Doorloop het proces later opnieuw of bekijk onze online-hulp."
+      },
+      "NOT_EXISTING_DIRECTORY": {
+        "title": "Bestemming ontbreekt",
+        "description": "Het lijkt er op dat de map niet aanwezig is op de bestemming. Herstel deze door je account opnieuw te koppelen."
+      },
+      "TERMS_VERSION_MISMATCH": {
+        "title": "Recentste algemene voorwaarden niet geaccepteerd",
+        "description": "Het lijkt er op dat %{name} haar algemene voorwaarden heeft bijgewerkt. Controleer of de dienst is bijgewerkt. Als de fout blijft optreden, neem dan contact met ons op via [%{supportMail}](mailto:%{supportMail})."
+      },
+      "UNKNOWN_ERROR": {
+        "title": "Verbindingsfout",
+        "description": "Er is een onbekende fout opgetreden. Probeer of het helpt om je gegevens bij te werken. Als dat niet helpt, neem dan contact met ons op via [%{supportMail}](mailto:%{supportMail})."
+      },
+      "USER_ACTION_NEEDED": {
+        "title": "Actie benodigd op website van dienst",
+        "description": "Het lijkt er op dat [%{name}](%{link}) vereist dat je inlogt en een specifieke actie uitvoert. Verhelp het probleem en doorloop het proces opnieuw."
+      },
+      "USER_ACTION_NEEDED.OAUTH_OUTDATED": {
+        "title": "Nieuwe goedkeuring vereist",
+        "description": "[%{name}](%{link}) vereist dat je de toegang opnieuw goedkeurt. Koppel je account '%{name}' opnieuw - er gaan geen gegevens verloren."
+      },
+      "USER_ACTION_NEEDED.ACCOUNT_REMOVED": {
+        "title": "Account is niet beschikbaar",
+        "description": "Het lijkt er op dat je account niet meer beschikbaar is. Controleer je account op [%{name}](%{link}) voordat je het opnieuw probeert."
+      },
+      "USER_ACTION_NEEDED.CHANGE_PASSWORD": {
+        "title": "Wachtwoord moet worden bijgewerkt",
+        "description": "Het lijkt er op dat [%{name}](%{link}) vereist dat je wachtwoord moet worden bijgewerkt. Verhelp het probleem en doorloop het proces opnieuw."
+      },
+      "USER_ACTION_NEEDED.PERMISSIONS_CHANGED": {
+        "title": "Nieuwe machtigingen benodigd",
+        "description": "De connector is bijgewerkt en heeft nieuwe machtigingen nodig. Keur deze goed en doorloop het proces opnieuw."
+      },
+      "USER_ACTION_NEEDED.SCA_REQUIRED": {
+        "title": "Nieuwe goedkeuring vereist",
+        "description": "Het lijkt er op dat [%{name}](%{link}) vereist dat je inlogt om te kunnen synchroniseren. Verhelp het probleem en doorloop het proces opnieuw."
+      },
+      "USER_ACTION_NEEDED.TWOFA_EXPIRED": {
+        "title": "Nieuwe goedkeuring vereist",
+        "description": "De recentste verbindingspoging is mislukt. Probeer het opnieuw en geef desgewenst een goedkeuringscode op."
+      },
+      "USER_ACTION_NEEDED.WEBAUTH_REQUIRED": {
+        "title": "Goedkeuring op website van dienst vereist",
+        "description": "Het lijkt er op dat [%{name}](%{link}) vereist dat je inlogt om te kunnen synchroniseren. Verhelp het probleem en doorloop het proces opnieuw."
+      },
+      "USER_ACTION_NEEDED.WRONG_TWOFA_CODE": {
+        "title": "Onjuiste authenticatiecode",
+        "description": "De opgegeven authenticatiecode is onjuist. Probeer het opnieuw."
+      },
+      "VENDOR_DOWN": {
+        "title": "Dienst is niet beschikbaar",
+        "description": "Het lijkt er op dat [%{name}](%{link}) niet beschikbaar is. Doorloop het proces later opnieuw."
+      },
+      "VENDOR_DOWN.BANK_DOWN": {
+        "title": "Banksite is niet beschikbaar",
+        "description": "Het lijkt er op dat [%{name}](%{link}) niet beschikbaar is. Doorloop het proces later opnieuw."
+      },
+      "VENDOR_DOWN.LINXO_DOWN": {
+        "title": "Dienst is niet beschikbaar",
+        "description": "Het lijkt er op dat de bankconnectors overbelast zijn. Doorloop het proces later opnieuw."
+      },
+      "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
+        "title": "Dit account is al toegevoegd",
+        "description": "Je hebt al een account met deze identificaties ingesteld."
+      }
+    }
+  },
+  "fields": {
+    "answer": {
+      "label": "Geheim antwoord"
+    },
+    "birthdate": {
+      "label": "Geboortedatum",
+      "placeholder": "dd-mm-yyyy"
+    },
+    "code": {
+      "label": "Geheime code"
+    },
+    "date": {
+      "label": "Datum",
+      "placeholder": "dd-mm-yyyy"
+    },
+    "email": {
+      "label": "E-mailadres"
+    },
+    "firstname": {
+      "label": "Voornaam"
+    },
+    "lastname": {
+      "label": "Achternaam"
+    },
+    "login": {
+      "label": "Gebruikersnaam"
+    },
+    "password": {
+      "label": "Wachtwoord"
+    },
+    "phone": {
+      "label": "Telefoonnummer"
+    },
+    "two_fa_code": {
+      "label": "Authenticatiecode"
+    }
+  },
+  "folder": {
+    "administrative": "Administratief",
+    "photos": "Foto's"
+  },
+  "infos": {
+    "konnectorUpdate": {
+      "title": "Er is een update beschikbaar voor deze dienst.",
+      "body": {
+        "regular": "Voer de update uit om je gegevens op te kunnen blijven halen en over de nieuwste functies te beschikken:",
+        "blocking": "Voer de update uit om je gegevens op te kunnen blijven halen:"
+      },
+      "button": {
+        "label": "Update bekijken"
+      }
+    }
+  },
+  "legacy": {
+    "fields": {
+      "access_token": {
+        "label": "Toegangssleutel"
+      },
+      "accessTokenSecret": {
+        "label": "Toegangssleutelgeheim"
+      },
+      "accountName": {
+        "label": "Accountnaam"
+      },
+      "agreement": {
+        "label": "Ik ga akkoord"
+      },
+      "apikey": {
+        "label": "API-sleutel"
+      },
+      "appKey": {
+        "label": "Appsleutel"
+      },
+      "appSecret": {
+        "label": "Appgeheim"
+      },
+      "authCode": {
+        "label": "Auth.code"
+      },
+      "bank_identifier": {
+        "label": "Bankidentificatie (optioneel)"
+      },
+      "branchName": {
+        "label": "Filiaal"
+      },
+      "cardNumber": {
+        "label": "Kaartnummer"
+      },
+      "consumerKey": {
+        "label": "Klantsleutel"
+      },
+      "consumerSecret": {
+        "label": "Klantgeheim"
+      },
+      "dob": {
+        "label": "Geboortedatum"
+      },
+      "folderPath": {
+        "label": "Mappad"
+      },
+      "identifier": {
+        "label": "Identificatie"
+      },
+      "loginUrl": {
+        "label": "Inlog-url"
+      },
+      "namePath": {
+        "label": "Mapnaam"
+      },
+      "new_identifier": {
+        "label": "Identificatie"
+      },
+      "phoneNumber": {
+        "label": "Telefoonnummer"
+      },
+      "profileName": {
+        "label": "Profielnaam"
+      },
+      "refreshToken": {
+        "label": "Toegangssleutel vernieuwen"
+      },
+      "secret": {
+        "label": "Wachtwoord"
+      },
+      "timeout": {
+        "label": "Vertraging (in ms)"
+      },
+      "token": {
+        "label": "Toegangssleutel"
+      },
+      "tricountUrl": {
+        "label": "Tricount-url"
+      }
+    }
+  },
+  "modal": {
+    "aria-label": "Connector instellen",
+    "konnector": {
+      "error": {
+        "title": "Je account kan niet worden opgehaald",
+        "description": "Je account kan niet worden opgehaald (%{message}).",
+        "button": "Sluiten"
+      }
+    },
+    "accounts": {
+      "title": "Kies een %{name}-account",
+      "error": {
+        "title": "Fout",
+        "description": "Je account(s) kan/kunnen niet worden opgehaald",
+        "retry": "Opnieuw proberen"
+      }
+    },
+    "tabs": {
+      "data": "Gegevens",
+      "configuration": "Instellen"
+    },
+    "addAccount": {
+      "title": "%{name} koppelen",
+      "button": "Account toevoegen"
+    },
+    "deleteAccount": {
+      "title": "Loskoppelen",
+      "description": "Je account wordt losgekoppeld, maar belangrijke gegevens worden bewaard",
+      "confirm": "Loskoppelen",
+      "cancel": "Annuleren"
+    },
+    "updateAccount": {
+      "general-subheader": "Algemeen",
+      "identifiers": "Identificaties",
+      "delete-account-success": "Het account is losgekoppeld",
+      "delete-account-error": "Het account kan niet worden losgekoppeld. Probeer het later opnieuw of neem contact op met ons ondersteuningsteam."
+    }
+  },
+  "oauth": {
+    "reconnect": {
+      "label": "Opnieuw koppelen"
+    },
+    "connect": {
+      "label": "Koppelen"
+    },
+    "window": {
+      "title": "OAuth"
+    }
+  },
+  "triggerSuccessMessage": {
+    "button": {
+      "label": "Sluiten"
+    },
+    "description": "Je gegevens zijn over een paar minuten beschikbaar op je Cozy en worden voortaan automatisch bijgewerkt.",
+    "figure": {
+      "alt": "gekoppeld"
+    },
+    "title": "Instellen voltooid!"
+  },
+  "twoFAForm": {
+    "modal-label": "Authenticatie in twee stappen",
+    "providers": {
+      "default": "Voer de code in die je per e-mail of sms hebt ontvangen",
+      "email": "Voer de code in die je per e-mail hebt ontvangen",
+      "sms": "Voer de code in die je per sms hebt ontvangen",
+      "app_code": "Voer de eenmalige code in die je kunt aanmaken in ${name}",
+      "app": "Open de app van de dienst om de koppeling goed te keuren."
+    },
+    "desc-2fa": "Open de app van de dienst om de koppeling goed te keuren. In sommige gevallen moet je twee keer toestemming geven.",
+    "desc_1": "Met deze code kun je de koppeling bevestigen.",
+    "desc_2": "De tweede code, om de koppeling te bevestigen, ontvang je op je telefoon of per e-mail.",
+    "code": {
+      "label_1": "code",
+      "label_2": "Tweede code"
+    },
+    "retry": "Ongeldige code - probeer het opnieuw.",
+    "CTA": "Verifiëren"
+  },
+  "account": {
+    "success": {
+      "title": "Instellen voltooid!",
+      "connect": "Je gegevens zijn over een paar minuten beschikbaar op je Cozy en worden voortaan automatisch bijgewerkt.",
+      "banksLinkText": "Accounts bekijken in %{appName}",
+      "driveLinkText": "Map openen in Cozy Schijf",
+      "button": "Sluiten"
+    }
+  },
+  "maintenance": {
+    "noService": "Dienst is onderbroken",
+    "explanationTitle": "Wat gebeurt er allemaal?"
+  },
+  "suggestions": {
+    "title": "Gegevens importeren uit %{name}",
+    "data": "Door %{name} te installeren worden de volgende gegevens automatisch geïmporteerd:",
+    "why": "Waarom is %{name} aanbevolen?",
+    "reason_bank": "%{name} is aangetroffen in één van je bankoverschrijvingen. Geen zorgen: niemand anders heeft toegang tot deze informatie.",
+    "install": "Installeren",
+    "silence": "Niet meer aanbevelen"
+  },
+  "dataType": {
+    "none": "%{name} heeft geen toegang tot je persoonlijke gegevens",
+    "activity": "Mijn activiteiten",
+    "appointment": "Mijn afspraken",
+    "bankTransactions": "Mijn bankoverschrijvingen",
+    "bankAccounts": "Mijn bankrekeningen",
+    "bill": "Mijn rekeningen",
+    "bloodPressure": "Mijn bloeddruk",
+    "calendar": "Mijn agenda's",
+    "certificate": "Mijn certificaten",
+    "commit": "Mijn commits",
+    "consumption": "Mijn consumpties",
+    "contact": "Mijn contactpersonen",
+    "contract": "Mijn contracten",
+    "courseMaterial": "Mijn cursusmateriaal",
+    "document": "Mijn documenten",
+    "event": "Mijn gebeurtenissen",
+    "family": "Mijn gezinsinformatie",
+    "geopoint": "Mijn geolocaties",
+    "heartbeat": "Mijn hartslagen",
+    "home": "Mijn woninginformatie",
+    "phonecommunicationlog": "Mijn oproepgeschiedenis",
+    "picture": "Mijn afbeeldingen",
+    "podcast": "Mijn podcasts",
+    "profile": "Mijn klantprofiel",
+    "refund": "Mijn terugbetalingen",
+    "sinister": "Mijn sinisters",
+    "sleepTime": "Mijn slaaptijd",
+    "stepsNumber": "Mijn wandelstappen",
+    "temperature": "Mijn temperatuurgegevens",
+    "travelDate": "Mijn reisdatums",
+    "tweet": "Mijn tweets",
+    "videostream": "Mijn video's",
+    "weight": "Mijn gewicht"
+  },
+  "vaultCiphersList": {
+    "title": "Vanuit welk account wil je je gegevens importeren?",
+    "otherAccount": "Uit ander account…"
+  },
+  "triggerManager": {
+    "connecting": "Bezig met koppelen…",
+    "confirmationModal": {
+      "title": "Inloggegevens bijwerken?",
+      "description": "Je vorige inloggegevens worden gewist - voeg een nieuw account toe om ze te bewaren.",
+      "primaryText": "Bijwerken",
+      "secondaryText": "Annuleren"
+    }
+  },
+  "disconnectedAccountModal": {
+    "disconnected-help": "Dit account is losgekoppeld, maar je gegevens zijn bewaard. Als je opnieuw wilt synchroniseren, stel dan je account opnieuw in middels de knop 'Bank toevoegen'."
+  },
+  "konnectorBlock": {
+    "account": "Klantaccount",
+    "disconnected": "Losgekoppeld",
+    "inMaintenance": "Onderhoudswerkzaamheden",
+    "hasNewVersionAvailable": "Nieuwe versie beschikbaar",
+    "fatalError": "Er is een fout opgetreden bij het herstellen van de dienst. Als het probleem zich blijft voordoen, neem dan contact met ons op via [%{name}](%{link})"
+  },
+  "datacards": {
+    "trips": {
+      "title": "Recente reizen",
+      "caption": "Bekijk je 5 recentste reizen van %{konnectorName}",
+      "modes": {
+        "AIR_OR_HSR": "Vliegtuig",
+        "BICYCLING": "Fiets",
+        "CAR": "Auto",
+        "SUBWAY": "Metro",
+        "TRAIN": "Trein",
+        "UNKNOWN": "",
+        "WALKING": "Wandelen"
+      }
+    },
+    "files": {
+      "title": "Mijn documenten",
+      "imported": "Geïmporteerd op %{date}",
+      "caption": "Deze dienst haalt je recentste documenten op en maakt er een volledige back-up van."
+    }
+  }
+}
