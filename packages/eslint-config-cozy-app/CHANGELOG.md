@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.1.0 (2022-06-09)
+
+
+### Features
+
+* **eslint-config:** Add `react/jsx-curly-brace-presence` rule ([be2e0a9](https://github.com/cozy/cozy-libs/commit/be2e0a9d9b520dee7fbcce8939a07444d75c0f2c)), closes [#1549](https://github.com/cozy/cozy-libs/issues/1549)
+
+
+
+
+
 ## [4.0.2](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@4.0.1...eslint-config-cozy-app@4.0.2) (2022-04-22)
 
 
