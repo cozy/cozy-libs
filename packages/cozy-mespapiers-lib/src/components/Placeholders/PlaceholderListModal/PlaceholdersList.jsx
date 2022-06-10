@@ -3,16 +3,12 @@ import { useHistory, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
-import IconStack from 'cozy-ui/transpiled/react/IconStack'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon, {
-  smallSize,
-  largeSize
-} from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
+import FileIcon from '../../Icons/FileIcon'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
 import { findPlaceholdersByQualification } from '../../../helpers/findPlaceholders'
@@ -100,22 +96,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
               data-testid="PlaceholdersList-ListItem"
             >
               <ListItemIcon>
-                <IconStack
-                  backgroundIcon={
-                    <Icon
-                      icon="file-duotone"
-                      color="#E049BF"
-                      size={largeSize}
-                    />
-                  }
-                  foregroundIcon={
-                    <Icon
-                      icon={placeholder.icon}
-                      color="#E049BF"
-                      size={smallSize}
-                    />
-                  }
-                />
+                <FileIcon icon={placeholder.icon} />
               </ListItemIcon>
               <ListItemText primary={scannerT(`items.${placeholder.label}`)} />
             </ListItem>
