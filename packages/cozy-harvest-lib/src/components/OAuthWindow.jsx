@@ -141,7 +141,7 @@ export class OAuthWindow extends PureComponent {
   }
 
   render() {
-    const { t } = this.props
+    const { t, intentsApi } = this.props
     const { oAuthUrl, succeed } = this.state
     return (
       oAuthUrl &&
@@ -156,7 +156,11 @@ export class OAuthWindow extends PureComponent {
           title={t(`oauth.window.title`)}
         />
       ) : (
-        <InAppBrowser url={oAuthUrl} onClose={this.handleClose} />
+        <InAppBrowser
+          url={oAuthUrl}
+          onClose={this.handleClose}
+          intentsApi={intentsApi}
+        />
       ))
     )
   }
@@ -177,7 +181,9 @@ OAuthWindow.propTypes = {
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
   /** Existing account */
-  account: PropTypes.object
+  account: PropTypes.object,
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: PropTypes.object
 }
 
 export default translate()(withClient(OAuthWindow))

@@ -70,8 +70,11 @@ export class OAuthForm extends PureComponent {
   }
 
   render() {
-    const { konnector, t, flowState, reconnect, account } = this.props
+    const { konnector, t, flowState, reconnect, account, intentsApi } = this.props
     const { showOAuthWindow, needExtraParams, extraParams } = this.state
+    const { konnector, t, flowState, intentsApi } = this.props
+    const { initialValues, showOAuthWindow, needExtraParams, extraParams } =
+      this.state
     const isBusy =
       showOAuthWindow === true ||
       flowState.running ||
@@ -97,6 +100,7 @@ export class OAuthForm extends PureComponent {
             onSuccess={this.handleAccountId}
             onCancel={this.handleOAuthCancel}
             account={account}
+            intentsApi={intentsApi}
           />
         )}
       </>
@@ -114,7 +118,9 @@ OAuthForm.propTypes = {
   /** Translation function */
   t: PropTypes.func.isRequired,
   /** Is it a reconnection or not */
-  reconnect: PropTypes.bool
+  reconnect: PropTypes.bool,
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: PropTypes.object
 }
 
 export default compose(translate(), withConnectionFlow())(OAuthForm)

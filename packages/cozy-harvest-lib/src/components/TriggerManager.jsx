@@ -321,7 +321,8 @@ export class DumbTriggerManager extends Component {
       flowState,
       client,
       OAuthFormWrapperComp,
-      reconnect
+      reconnect,
+      intentsApi
     } = this.props
 
     const submitting = flowState.running
@@ -349,6 +350,7 @@ export class DumbTriggerManager extends Component {
             reconnect={reconnect}
             konnector={konnector}
             onSuccess={this.handleOAuthAccountId}
+            intentsApi={intentsApi}
           />
         </Wrapper>
       )
@@ -449,6 +451,8 @@ DumbTriggerManager.propTypes = {
   OAuthFormWrapperComp: PropTypes.node,
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
+  // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
+  intentsApi: PropTypes.object
 }
 
 const TriggerManager = compose(
