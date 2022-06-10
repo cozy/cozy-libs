@@ -2,9 +2,13 @@ import React, { useState } from 'react'
 import PropTypes from 'prop-types'
 import startCase from 'lodash/startCase'
 import compose from 'lodash/flowRight'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
+import dateFnsLocalefr from 'date-fns/locale/fr'
+import dateFnsLocaleEn from 'date-fns/locale/en'
 
 import CozyClient, { Q, queryConnect } from 'cozy-client'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
@@ -25,6 +29,8 @@ import EditContract from './EditContract'
 import BIContractActivationWindow from './BiContractActivationWindow'
 import { intentsApiProptype } from '../../../helpers/proptypes'
 
+const dateFnsLocales = { en: dateFnsLocaleEn, fr: dateFnsLocalefr }
+
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
   return {
@@ -44,9 +50,39 @@ const getPrimaryTextPerDoctype = {
 
 const getPrimaryTextDefault = contract => contract.label
 
+const SecondaryText = ({ contract }) => {
+  const { t, lang } = useI18n()
+
+  if (contract._deleted) return t('contracts.deleted')
+  if (contract.metadata.error) {
+    return (
+      <>
+        <Icon icon={SyncIcon} size={8} color="#FE952A" />{' '}
+        <span style={{ color: '#EFA82D' }}>
+          {distanceInWordsToNow(contract.metadata.updatedAt, {
+            addSuffix: true,
+            locale: dateFnsLocales[lang]
+          })}
+        </span>
+      </>
+    )
+  }
+  if (contract.metadata.imported) {
+    return (
+      <>
+        <Icon icon={SyncIcon} size={8} />{' '}
+        {distanceInWordsToNow(contract.metadata.updatedAt, {
+          addSuffix: true,
+          locale: dateFnsLocales[lang]
+        })}
+      </>
+    )
+  }
+  return null
+}
+
 const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
-  const { t } = useI18n()
   const getPrimaryText =
     getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
 
@@ -65,7 +101,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         </ListItemIcon>
         <ListItemText
           primary={startCase(getPrimaryText(contract).toLowerCase())}
-          secondary={contract._deleted ? t('contracts.deleted') : null}
+          secondary={<SecondaryText contract={contract} />}
         />
         <ListItemSecondaryAction>
           <Icon icon={RightIcon} className="u-coolGrey u-mr-1" />
