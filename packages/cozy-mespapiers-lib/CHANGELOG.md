@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.33.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.16...cozy-mespapiers-lib@0.33.0) (2022-06-10)
+
+
+### Features
+
+* Change color of file icon to pink ([241a9c5](https://github.com/cozy/cozy-libs/commit/241a9c5fb32c7a039f3f9c13a020064c5896b66d))
+
+
+
+
+
 ## [0.32.16](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.32.15...cozy-mespapiers-lib@0.32.16) (2022-06-10)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
