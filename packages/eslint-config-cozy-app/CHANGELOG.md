@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.1.1](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@4.1.0...eslint-config-cozy-app@4.1.1) (2022-06-10)
+
+
+### Bug Fixes
+
+* **eslint-config-cozy-app:** Settings for react ([37dbedb](https://github.com/cozy/cozy-libs/commit/37dbedb6885f5b29d0d1dbc93ff73de4e278308e))
+
+
+
+
+
 # 4.1.0 (2022-06-09)
 
 
