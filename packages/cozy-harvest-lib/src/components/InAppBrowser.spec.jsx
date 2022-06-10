@@ -60,4 +60,27 @@ describe('InAppBrowser', () => {
     unmount()
     expect(webviewService.call).toHaveBeenNthCalledWith(2, 'closeInAppBrowser')
   })
+
+  it('should work with custom intents api', async () => {
+    const url = 'https://test.url'
+    const intentsApi = {
+      fetchSessionCode: jest.fn().mockResolvedValue('custom_api_session_code'),
+      showInAppBrowser: jest.fn(),
+      closeInAppBrowser: jest.fn()
+    }
+    const { unmount } = render(
+      <InAppBrowser url={url} intentsApi={intentsApi} />
+    )
+
+    await waitFor(() => expect(intentsApi.showInAppBrowser).toHaveBeenCalled())
+
+    unmount()
+
+    await waitFor(() => expect(intentsApi.closeInAppBrowser).toHaveBeenCalled())
+    expect(intentsApi.fetchSessionCode).toHaveBeenCalledTimes(1)
+    expect(intentsApi.showInAppBrowser).toHaveBeenNthCalledWith(
+      1,
+      'https://test.url/?session_code=custom_api_session_code'
+    )
+  })
 })
