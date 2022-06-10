@@ -7,13 +7,13 @@ import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
-import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import {
   ActionMenuHeader,
   ActionMenuItem
 } from 'cozy-ui/transpiled/react/ActionMenu'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
+import FileIcon from '../Icons/FileIcon'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import Konnector from '../../assets/icons/Konnectors.svg'
 
@@ -71,12 +71,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
       <ActionMenuHeader>
         <Media>
           <Img>
-            <IconStack
-              backgroundIcon={
-                <Icon icon="file-duotone" color="#E049BF" size={32} />
-              }
-              foregroundIcon={<Icon icon={icon} color="#E049BF" size={16} />}
-            />
+            <FileIcon icon={icon} />
           </Img>
           <Bd className="u-ml-1 u-flex u-flex-items-center u-flex-justify-between">
             <Typography variant="h6">

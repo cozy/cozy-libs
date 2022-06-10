@@ -2,19 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { models } from 'cozy-client'
-import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon, {
-  smallSize,
-  largeSize
+  smallSize
 } from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 const {
   themes: { themesList }
 } = models.document
 
+import FileIcon from '../../Icons/FileIcon'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 
 const PlaceholderThemesList = ({ setQualifByTheme }) => {
@@ -30,14 +29,7 @@ const PlaceholderThemesList = ({ setQualifByTheme }) => {
             onClick={() => setQualifByTheme(theme)}
           >
             <ListItemIcon>
-              <IconStack
-                backgroundIcon={
-                  <Icon icon="file-duotone" color="#E049BF" size={largeSize} />
-                }
-                foregroundIcon={
-                  <Icon icon={theme.icon} color="#E049BF" size={smallSize} />
-                }
-              />
+              <FileIcon icon={theme.icon} />
             </ListItemIcon>
             <ListItemText primary={scannerT(`themes.${theme.label}`)} />
             <Icon

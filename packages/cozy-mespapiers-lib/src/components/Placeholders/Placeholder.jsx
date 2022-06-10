@@ -5,10 +5,10 @@ import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import IconStack from 'cozy-ui/transpiled/react/IconStack'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import InfosBadge from 'cozy-ui/transpiled/react/InfosBadge'
 
+import FileIcon from '../Icons/FileIcon'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { PaperDefinitionsPropTypes } from '../../constants/PaperDefinitionsPropTypes'
 
@@ -29,15 +29,7 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
               <Icon icon="plus" size={10} color="var(--primaryTextColor)" />
             }
           >
-            <IconStack
-              backgroundClassName="u-o-50"
-              backgroundIcon={
-                <Icon icon="file-duotone" color="#E049BF" size={32} />
-              }
-              foregroundIcon={
-                <Icon icon={placeholder.icon} color="#E049BF" size={16} />
-              }
-            />
+            <FileIcon icon={placeholder.icon} faded />
           </InfosBadge>
         </ListItemIcon>
         <Typography color="textSecondary">
