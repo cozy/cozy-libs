@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@4.1.1...eslint-config-cozy-app@4.2.0) (2022-06-10)
+
+
+### Features
+
+* Upgrade eslint-plugin-react-hooks ([b8d3895](https://github.com/cozy/cozy-libs/commit/b8d38952ed2c00e085bb67d9b0db3b20a00b32d2))
+
+
+
+
+
 ## [4.1.1](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@4.1.0...eslint-config-cozy-app@4.1.1) (2022-06-10)
 
 
