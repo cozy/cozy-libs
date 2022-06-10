@@ -73,15 +73,9 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
           <Img>
             <IconStack
               backgroundIcon={
-                <Icon
-                  icon="file-duotone"
-                  color="var(--primaryColor)"
-                  size={32}
-                />
+                <Icon icon="file-duotone" color="#E049BF" size={32} />
               }
-              foregroundIcon={
-                <Icon icon={icon} color="var(--primaryColor)" size={16} />
-              }
+              foregroundIcon={<Icon icon={icon} color="#E049BF" size={16} />}
             />
           </Img>
           <Bd className="u-ml-1 u-flex u-flex-items-center u-flex-justify-between">

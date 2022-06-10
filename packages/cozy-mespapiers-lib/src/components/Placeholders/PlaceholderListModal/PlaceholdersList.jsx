@@ -104,14 +104,14 @@ const PlaceholdersList = ({ currentQualifItems }) => {
                   backgroundIcon={
                     <Icon
                       icon="file-duotone"
-                      color="var(--primaryColor)"
+                      color="#E049BF"
                       size={largeSize}
                     />
                   }
                   foregroundIcon={
                     <Icon
                       icon={placeholder.icon}
-                      color="var(--primaryColor)"
+                      color="#E049BF"
                       size={smallSize}
                     />
                   }

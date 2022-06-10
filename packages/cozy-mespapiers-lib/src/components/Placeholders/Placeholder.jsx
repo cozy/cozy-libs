@@ -32,18 +32,10 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
             <IconStack
               backgroundClassName="u-o-50"
               backgroundIcon={
-                <Icon
-                  icon="file-duotone"
-                  color="var(--primaryColor)"
-                  size={32}
-                />
+                <Icon icon="file-duotone" color="#E049BF" size={32} />
               }
               foregroundIcon={
-                <Icon
-                  icon={placeholder.icon}
-                  color="var(--primaryColor)"
-                  size={16}
-                />
+                <Icon icon={placeholder.icon} color="#E049BF" size={16} />
               }
             />
           </InfosBadge>
