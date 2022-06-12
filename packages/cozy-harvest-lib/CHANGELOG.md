@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.8.0...cozy-harvest-lib@9.8.1) (2022-06-12)
+
+
+### Bug Fixes
+
+* Update french locale ([902ae96](https://github.com/cozy/cozy-libs/commit/902ae967a14c106c7cc3adc0543d479d94e2f07e))
+
+
+
+
+
 # [9.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.7.3...cozy-harvest-lib@9.8.0) (2022-06-09)
 
 
