@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.33.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.33.1...cozy-mespapiers-lib@0.33.2) (2022-06-12)
+
+
+### Bug Fixes
+
+* Implement openApp() for Amiral ([9a190de](https://github.com/cozy/cozy-libs/commit/9a190de4e74698949ff13c90be927e05cf23e94a))
+
+
+
+
+
 ## [0.33.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.33.0...cozy-mespapiers-lib@0.33.1) (2022-06-12)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
