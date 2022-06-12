@@ -12,6 +12,7 @@ import {
   ActionMenuItem
 } from 'cozy-ui/transpiled/react/ActionMenu'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import { useWebviewIntent } from 'cozy-intent'
 
 import FileIcon from '../Icons/FileIcon'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
@@ -44,6 +45,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
   } = placeholder
   const hasSteps = acquisitionStepsLength > 0
   const styles = useStyles()
+  const webviewIntent = useWebviewIntent()
 
   const goToStore = () => {
     let hash
@@ -56,8 +58,9 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
       pathname: '/',
       hash
     })
-    // TODO Do not use window.open for redirect, prefer use a link (href)
-    window.open(webLink, '_blank')
+
+    webviewIntent?.call('openApp', webLink, { slug: webLink.slug }) || // TODO Prefer <AppLinker />
+      window.open(webLink, '_blank') // TODO Do not use window.open for redirect, prefer use a link (href)
   }
 
   const handleClick = useCallback(() => {
