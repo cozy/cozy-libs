@@ -390,7 +390,7 @@
       "label": "Se reconnecter"
     },
     "connect": {
-      "label": "Connecter"
+      "label": "Ajouter un compte"
     },
     "window": {
       "title": "OAuth"
