@@ -12,7 +12,7 @@ import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 
 import { getPrimaryTextPerDoctype, getPrimaryTextDefault } from './helpers'
 import EditContract from './EditContract'
-import SecondaryText from './SecondaryText'
+import ContractItemSecondaryText from './ContractItemSecondaryText'
 
 const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
@@ -36,7 +36,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         </ListItemIcon>
         <ListItemText
           primary={startCase(getPrimaryText(contract).toLowerCase())}
-          secondary={<SecondaryText contract={contract} />}
+          secondary={<ContractItemSecondaryText contract={contract} />}
         />
         <ListItemSecondaryAction>
           <Icon

@@ -13,7 +13,7 @@ import { CollectionPropType } from './Contracts'
 
 const dateFnsLocales = { en: dateFnsLocaleEn, fr: dateFnsLocalefr }
 
-const SecondaryText = ({ contract }) => {
+const ContractItemSecondaryText = ({ contract }) => {
   const { t, f, lang } = useI18n()
 
   if (contract._deleted) return t('contracts.deleted')
@@ -57,8 +57,8 @@ const SecondaryText = ({ contract }) => {
   return null
 }
 
-SecondaryText.propTypes = {
+ContractItemSecondaryText.propTypes = {
   contracts: PropTypes.oneOfType([CollectionPropType, PropTypes.array])
 }
 
-export default SecondaryText
+export default ContractItemSecondaryText
