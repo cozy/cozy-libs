@@ -13,4 +13,10 @@ function getMutationsProptypes(mutations) {
   }
 }
 
-export { getMutationsProptypes }
+const intentsApiProptype = PropTypes.shape({
+  fetchSessionCode: PropTypes.func,
+  showInAppBrowser: PropTypes.func,
+  closeInAppBrowser: PropTypes.func
+})
+
+export { getMutationsProptypes, intentsApiProptype }

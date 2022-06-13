@@ -2,6 +2,7 @@ import { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useWebviewIntent } from 'cozy-intent'
 import logger from '../logger'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
   const webviewIntent = useWebviewIntent()
@@ -53,7 +54,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
 InAppBrowser.propTypes = {
   url: PropTypes.string.isRequired,
   onClose: PropTypes.func,
-  intentsApi: PropTypes.object
+  intentsApi: intentsApiProptype
 }
 
 export default InAppBrowser
