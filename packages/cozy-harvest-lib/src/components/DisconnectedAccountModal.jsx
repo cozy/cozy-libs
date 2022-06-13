@@ -49,6 +49,11 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
   const [activeTab, setActiveTab] = useState(initialActiveTab)
 
   const { dialogProps } = useCozyDialog({ onClose, open: true })
+
+  if (!konnectorRef.current) {
+    return null
+  }
+
   return (
     <Dialog aria-label={t('modal.aria-label')} {...dialogProps}>
       <DialogCloseButton onClick={onClose} />
@@ -71,7 +76,10 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
         <>
           {accounts.length ? (
             <DialogContent className={isMobile ? 'u-ph-0' : 'u-pt-1-half'}>
-              <Contracts contracts={accounts} />
+              <Contracts
+                contracts={accounts}
+                konnector={konnectorRef.current}
+              />
             </DialogContent>
           ) : (
             <DialogContent className="u-pb-1-half">
