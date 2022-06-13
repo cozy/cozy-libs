@@ -8,8 +8,9 @@ import { findKonnectorPolicy } from '../../../konnector-policies'
 import { isFlagshipApp } from 'cozy-device-helper'
 import InAppBrowser from '../../InAppBrowser'
 import withLocales from '../../hoc/withLocales'
+import { intentsApiProptype } from '../../../helpers/proptypes'
 
-const BIContractActivationWindow = ({ konnector, account, t }) => {
+const BIContractActivationWindow = ({ konnector, account, t, intentsApi }) => {
   const [initialUrl, setInitialUrl] = useState(null)
   const [isWindowVisible, setWindowVisible] = useState(false)
   const [shouldRefreshContracts, setShouldRefreshContracts] = useState(false)
@@ -46,32 +47,36 @@ const BIContractActivationWindow = ({ konnector, account, t }) => {
     }
   }, [konnector, account, client, konnectorPolicy])
 
-  return (
-    konnectorPolicy.fetchContractSynchronizationUrl ? (
-      <ListItem>
-        <Button disabled={!initialUrl} onClick={() => setWindowVisible(true)}>
-          {t('contracts.handle-synchronization')}
-        </Button>
-        {isWindowVisible &&
-          (isFlagshipApp() ? (
-            <InAppBrowser url={initialUrl} onClose={onPopupClosed} />
-          ) : (
-            <Popup
-              initialUrl={initialUrl}
-              width="800"
-              height="800"
-              onClose={onPopupClosed}
-            />
-          ))}
-      </ListItem>
-    ) : null
-  )
+  return konnectorPolicy.fetchContractSynchronizationUrl ? (
+    <ListItem>
+      <Button disabled={!initialUrl} onClick={() => setWindowVisible(true)}>
+        {t('contracts.handle-synchronization')}
+      </Button>
+      {isWindowVisible &&
+        (isFlagshipApp() ? (
+          <InAppBrowser
+            url={initialUrl}
+            onClose={onPopupClosed}
+            intentsApi={intentsApi}
+          />
+        ) : (
+          <Popup
+            initialUrl={initialUrl}
+            width="800"
+            height="800"
+            onClose={onPopupClosed}
+          />
+        ))}
+    </ListItem>
+  ) : null
 }
 
 BIContractActivationWindow.propTypes = {
   t: PropTypes.func,
   account: PropTypes.object,
-  konnector: PropTypes.object
+  konnector: PropTypes.object,
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: intentsApiProptype
 }
 
 export default withLocales(BIContractActivationWindow)

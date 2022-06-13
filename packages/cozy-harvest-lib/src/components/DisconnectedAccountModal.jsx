@@ -20,6 +20,7 @@ import {
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 import DialogContent from '@material-ui/core/DialogContent'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 const createDummyKonnectorFromAccount = account => {
   return {
@@ -36,7 +37,12 @@ const createDummyKonnectorFromAccount = account => {
  * we lack a lot of data to show an AccountModal (no trigger, no konnector,
  * no account), it was implemented as a separate component.
  */
-const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
+const DisconnectedModal = ({
+  accounts,
+  onClose,
+  initialActiveTab,
+  intentsApi
+}) => {
   const { t } = useI18n()
   // We keep the konnector in a ref so that when we remove all accounts,
   // we still have a konnector to show the icon
@@ -79,6 +85,7 @@ const DisconnectedModal = ({ accounts, onClose, initialActiveTab }) => {
               <Contracts
                 contracts={accounts}
                 konnector={konnectorRef.current}
+                intentsApi={intentsApi}
               />
             </DialogContent>
           ) : (
@@ -97,7 +104,9 @@ DisconnectedModal.defaultProps = {
 }
 
 DisconnectedModal.propTypes = {
-  accounts: PropTypes.array.isRequired
+  accounts: PropTypes.array.isRequired,
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: intentsApiProptype
 }
 
 export default withLocales(DisconnectedModal)

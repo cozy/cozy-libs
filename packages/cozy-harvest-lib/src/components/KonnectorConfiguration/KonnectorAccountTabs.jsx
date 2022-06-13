@@ -12,6 +12,7 @@ import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 const tabIndexes = {
   data: 0,
@@ -51,15 +52,16 @@ const DumbKonnectorAccountTabs = props => {
     // TODO rename to onAddAccount
     addAccount,
     showNewAccountButton,
-    flow
+    flow,
+    intentsApi
   } = props
   const { isMobile } = useBreakpoints()
   const [tab, setTab] = useState(
     initialActiveTab
       ? tabIndexes[initialActiveTab]
       : hasLoginError
-      ? tabIndexes.configuration
-      : tabIndexes.data
+        ? tabIndexes.configuration
+        : tabIndexes.data
   )
   const handleTabChange = (ev, newTab) => setTab(newTab)
 
@@ -107,6 +109,7 @@ const DumbKonnectorAccountTabs = props => {
           addAccount={addAccount}
           onAccountDeleted={onAccountDeleted}
           showNewAccountButton={showNewAccountButton}
+          intentsApi={intentsApi}
         />
       </SwipeableViews>
     </div>
@@ -132,7 +135,9 @@ KonnectorAccountTabs.propTypes = {
   addAccount: PropTypes.func.isRequired,
 
   /** @type {string} Can be used to force the initial tab */
-  initialActiveTab: PropTypes.oneOf(['configuration', 'data'])
+  initialActiveTab: PropTypes.oneOf(['configuration', 'data']),
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: intentsApiProptype
 }
 
 export default KonnectorAccountTabs
