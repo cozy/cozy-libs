@@ -39,6 +39,7 @@ import { useTrackPage, useTracker } from '../../hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
 import { ContractsForAccount } from './Contracts'
+import { intentsApiProptype } from '../../helpers/proptypes'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
@@ -74,7 +75,8 @@ const ConfigurationTab = ({
   addAccount,
   onAccountDeleted,
   showNewAccountButton,
-  flow
+  flow,
+  intentsApi
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -214,7 +216,11 @@ const ConfigurationTab = ({
           ) : null}
         </NavigationListSection>
 
-        <ContractsForAccount konnector={konnector} account={account} />
+        <ContractsForAccount
+          konnector={konnector}
+          account={account}
+          intentsApi={intentsApi}
+        />
       </NavigationList>
       {showNewAccountButton ? (
         <div
@@ -238,7 +244,9 @@ ConfigurationTab.propTypes = {
   account: PropTypes.object.isRequired,
   error: PropTypes.object,
   addAccount: PropTypes.func.isRequired,
-  onAccountDeleted: PropTypes.func.isRequired
+  onAccountDeleted: PropTypes.func.isRequired,
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: intentsApiProptype
 }
 
 export default ConfigurationTab

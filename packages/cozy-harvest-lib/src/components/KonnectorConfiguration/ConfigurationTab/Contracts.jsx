@@ -23,6 +23,7 @@ import withLocales from '../../hoc/withLocales'
 import { getAccountLabel } from './bankAccountHelpers'
 import EditContract from './EditContract'
 import BIContractActivationWindow from './BiContractActivationWindow'
+import { intentsApiProptype } from '../../../helpers/proptypes'
 
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
@@ -94,7 +95,7 @@ const customHeaderPerDoctype = {
   'io.cozy.bank.accounts': 'bankAccounts'
 }
 
-const DumbContracts = ({ contracts, account, konnector }) => {
+const DumbContracts = ({ contracts, account, konnector, intentsApi }) => {
   const { t } = useI18n()
   const contractData = contracts.data ? contracts.data : contracts
 
@@ -122,7 +123,11 @@ const DumbContracts = ({ contracts, account, konnector }) => {
                 />
               )
             })}
-          <BIContractActivationWindow konnector={konnector} account={account} />
+          <BIContractActivationWindow
+            konnector={konnector}
+            account={account}
+            intentsApi={intentsApi}
+          />
         </NavigationListSection>
       </NavigationList>
     </MuiCozyTheme>
@@ -139,7 +144,9 @@ DumbContracts.propTypes = {
   /** Can be present if showing contracts still linked to an account/konnector/trigger */
   account: PropTypes.object,
   /** Can be present if showing contracts still linked to an account/konnector/trigger */
-  konnector: PropTypes.object
+  konnector: PropTypes.object,
+  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
+  intentsApi: intentsApiProptype
 }
 
 export const ContractsForAccount = compose(

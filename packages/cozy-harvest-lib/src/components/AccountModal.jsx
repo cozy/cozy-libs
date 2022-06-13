@@ -17,6 +17,7 @@ import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointHistory } from './MountPointContext'
 import withLocales from './hoc/withLocales'
 import DialogContent from '@material-ui/core/DialogContent'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 /**
  * Takes an accountId and a list of accounts containing their respecting triggers
@@ -113,7 +114,8 @@ export class AccountModal extends Component {
       initialActiveTab,
       breakpoints: { isMobile },
       showAccountSelection,
-      showNewAccountButton
+      showNewAccountButton,
+      intentsApi
     } = this.props
     const { trigger, account, fetching, error } = this.state
     return (
@@ -167,6 +169,7 @@ export class AccountModal extends Component {
               onAccountDeleted={onDismiss}
               addAccount={() => replaceHistory('/new')}
               showNewAccountButton={showNewAccountButton}
+              intentsApi={intentsApi}
             />
           </DialogContent>
         )}
@@ -208,7 +211,10 @@ AccountModal.propTypes = {
   showAccountSelection: PropTypes.bool,
 
   /** @type {Boolean} Whether to show the button to add a new account */
-  showNewAccountButton: PropTypes.bool
+  showNewAccountButton: PropTypes.bool,
+
+  // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
+  intentsApi: intentsApiProptype
 }
 
 export default flow(
