@@ -12,7 +12,8 @@ import {
   ActionMenuItem
 } from 'cozy-ui/transpiled/react/ActionMenu'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
-import { useWebviewIntent } from 'cozy-intent'
+import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import Link from 'cozy-ui/transpiled/react/Link'
 
 import FileIcon from '../Icons/FileIcon'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
@@ -24,6 +25,9 @@ const useStyles = makeStyles(theme => ({
     '&:hover': {
       backgroundColor: 'initial'
     }
+  },
+  icon: {
+    margin: '0 4px'
   },
   disabledIcon: {
     fill: theme.palette.text.disabled
@@ -45,7 +49,6 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
   } = placeholder
   const hasSteps = acquisitionStepsLength > 0
   const styles = useStyles()
-  const webviewIntent = useWebviewIntent()
 
   const goToStore = () => {
     let hash
@@ -59,8 +62,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
       hash
     })
 
-    webviewIntent?.call('openApp', webLink, { slug: webLink.slug }) || // TODO Prefer <AppLinker />
-      window.open(webLink, '_blank') // TODO Do not use window.open for redirect, prefer use a link (href)
+    return webLink
   }
 
   const handleClick = useCallback(() => {
@@ -101,7 +103,7 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
         onClick={hasSteps ? handleClick : null}
         left={
           <Icon
-            className={cx({
+            className={cx(styles.icon, {
               [styles.disabledIcon]: !hasSteps
             })}
             icon="camera"
@@ -127,18 +129,30 @@ const ImportDropdown = ({ placeholder, onClick, onClose }) => {
           {t('ImportDropdown.scanPicture.text')}
         </Typography>
       </ActionMenuItem>
-      <ActionMenuItem
-        className={cx('u-flex-items-center')}
-        left={<Icon icon={Konnector} size={24} />}
-        onClick={goToStore}
-      >
-        <Typography gutterBottom>
-          {t('ImportDropdown.importAuto.title')}
-        </Typography>
-        <Typography variant="caption" color="textSecondary">
-          {t('ImportDropdown.importAuto.text')}
-        </Typography>
-      </ActionMenuItem>
+      <AppLinker app={{ slug: 'store' }} href={goToStore()}>
+        {({ href, onClick }) => {
+          return (
+            <ActionMenuItem
+              className={cx('u-flex-items-center')}
+              left={<Icon icon={Konnector} size={24} />}
+            >
+              <Link
+                href={href}
+                onClick={onClick}
+                target="_blank"
+                style={{ padding: 0, whiteSpace: 'normal' }}
+              >
+                <Typography gutterBottom>
+                  {t('ImportDropdown.importAuto.title')}
+                </Typography>
+                <Typography variant="caption" color="textSecondary">
+                  {t('ImportDropdown.importAuto.text')}
+                </Typography>
+              </Link>
+            </ActionMenuItem>
+          )
+        }}
+      </AppLinker>
     </>
   )
 }
