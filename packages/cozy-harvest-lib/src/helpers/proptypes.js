@@ -16,7 +16,8 @@ function getMutationsProptypes(mutations) {
 const intentsApiProptype = PropTypes.shape({
   fetchSessionCode: PropTypes.func,
   showInAppBrowser: PropTypes.func,
-  closeInAppBrowser: PropTypes.func
+  closeInAppBrowser: PropTypes.func,
+  tokenParamName: PropTypes.string
 })
 
 export { getMutationsProptypes, intentsApiProptype }
