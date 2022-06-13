@@ -24,13 +24,8 @@
     "cozy-realtime": "^4.2.0",
     "cozy-sharing": "^4.3.0",
     "cozy-ui": "^68.1.1",
-    "eslint-config-cozy-app": "^4.2.0",
-    "git-directory-deploy": "1.5.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
-    "jest-resolve-cached": "1.1.1",
-    "react-router-dom": "5.2.0",
-    "react-test-renderer": "16.14.0",
-    "redux-mock-store": "1.5.4"
+    "react-router-dom": "5.2.0"
   },
   "dependencies": {
     "@date-io/date-fns": "1",
