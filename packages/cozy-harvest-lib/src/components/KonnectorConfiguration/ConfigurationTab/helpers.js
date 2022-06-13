@@ -1,5 +1,8 @@
 import set from 'lodash/set'
-import { setFields as setBankAccountFields } from './bankAccountHelpers'
+import {
+  setFields as setBankAccountFields,
+  getAccountLabel
+} from './bankAccountHelpers'
 
 const setFieldsPerDoctype = {
   'io.cozy.bank.accounts': setBankAccountFields,
@@ -20,3 +23,9 @@ export const updateContract = async (client, contract, options) => {
     onError(err)
   }
 }
+
+export const getPrimaryTextPerDoctype = {
+  'io.cozy.bank.accounts': getAccountLabel
+}
+
+export const getPrimaryTextDefault = contract => contract.label
