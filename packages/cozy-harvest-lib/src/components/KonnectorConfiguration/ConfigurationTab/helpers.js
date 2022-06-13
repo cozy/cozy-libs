@@ -24,8 +24,21 @@ export const updateContract = async (client, contract, options) => {
   }
 }
 
-export const getPrimaryTextPerDoctype = {
+const getPrimaryTextPerDoctype = {
   'io.cozy.bank.accounts': getAccountLabel
 }
 
-export const getPrimaryTextDefault = contract => contract.label
+const getPrimaryTextDefault = contract => contract.label
+
+export const getPrimaryText = contract => {
+  const fn = getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
+  return fn(contract)
+}
+
+export const isDisabled = contract => Boolean(contract.metadata.disabledAt)
+
+export const isDeleted = contract => contract._deleted
+
+export const isErrored = contract => Boolean(contract.metadata.error)
+
+export const isImported = contract => Boolean(contract.metadata.imported)

@@ -10,14 +10,15 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import { CollectionPropType } from './Contracts'
+import { isDeleted, isDisabled, isErrored, isImported } from './helpers'
 
 const dateFnsLocales = { en: dateFnsLocaleEn, fr: dateFnsLocalefr }
 
 const ContractItemSecondaryText = ({ contract }) => {
   const { t, f, lang } = useI18n()
 
-  if (contract._deleted) return t('contracts.deleted')
-  if (contract.metadata.error) {
+  if (isDeleted(contract)) return t('contracts.deleted')
+  if (isErrored(contract)) {
     return (
       <>
         <Icon icon={SyncIcon} size={8} color="#FE952A" />{' '}
@@ -30,7 +31,7 @@ const ContractItemSecondaryText = ({ contract }) => {
       </>
     )
   }
-  if (contract.metadata.disabledAt) {
+  if (isDisabled(contract)) {
     return (
       <>
         <Icon icon={UnlinkIcon} size={8} />{' '}
@@ -43,7 +44,7 @@ const ContractItemSecondaryText = ({ contract }) => {
       </>
     )
   }
-  if (contract.metadata.imported) {
+  if (isImported(contract)) {
     return (
       <>
         <Icon icon={SyncIcon} size={8} />{' '}
