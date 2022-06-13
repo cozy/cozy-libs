@@ -66,7 +66,8 @@ describe('InAppBrowser', () => {
     const intentsApi = {
       fetchSessionCode: jest.fn().mockResolvedValue('custom_api_session_code'),
       showInAppBrowser: jest.fn(),
-      closeInAppBrowser: jest.fn()
+      closeInAppBrowser: jest.fn(),
+      tokenParamName: 'custom_token_name'
     }
     const { unmount } = render(
       <InAppBrowser url={url} intentsApi={intentsApi} />
@@ -80,7 +81,7 @@ describe('InAppBrowser', () => {
     expect(intentsApi.fetchSessionCode).toHaveBeenCalledTimes(1)
     expect(intentsApi.showInAppBrowser).toHaveBeenNthCalledWith(
       1,
-      'https://test.url/?session_code=custom_api_session_code'
+      'https://test.url/?custom_token_name=custom_api_session_code'
     )
   })
 })

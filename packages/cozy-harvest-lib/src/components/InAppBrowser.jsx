@@ -16,6 +16,10 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
     ? intentsApi?.closeInAppBrowser
     : () => webviewIntent.call('closeInAppBrowser')
 
+  const tokenParamName = intentsApi?.tokenParamName
+    ? intentsApi?.tokenParamName
+    : 'session_code'
+
   const ready = Boolean(
     webviewIntent ||
       (intentsApi?.fetchSessionCode &&
@@ -30,7 +34,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
           const sessionCode = await fetchSessionCode()
           logger.debug('got session code', sessionCode)
           const iabUrl = new URL(url)
-          iabUrl.searchParams.append('session_code', sessionCode)
+          iabUrl.searchParams.append(tokenParamName, sessionCode)
           const result = await showInAppBrowser(iabUrl.toString())
           if (result?.type !== 'dismiss' && result?.type !== 'cancel') {
             logger.error('Unexpected InAppBrowser result', result)
