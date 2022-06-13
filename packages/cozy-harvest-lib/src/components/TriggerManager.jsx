@@ -28,6 +28,7 @@ import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
 import HarvestVaultProvider from './HarvestVaultProvider'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
@@ -452,7 +453,7 @@ DumbTriggerManager.propTypes = {
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
   // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
-  intentsApi: PropTypes.object
+  intentsApi: intentsApiProptype
 }
 
 const TriggerManager = compose(

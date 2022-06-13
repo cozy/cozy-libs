@@ -15,6 +15,7 @@ import {
 // TODO use PopUp from cozy-ui
 import Popup from './Popup'
 import InAppBrowser from './InAppBrowser'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 const OAUTH_POPUP_HEIGHT = 800
 const OAUTH_POPUP_WIDTH = 800
@@ -45,7 +46,8 @@ export class OAuthWindow extends PureComponent {
   }
 
   componentDidMount() {
-    const { client, konnector, redirectSlug, extraParams, reconnect, account } = this.props
+    const { client, konnector, redirectSlug, extraParams, reconnect, account } =
+      this.props
     this.realtime = new CozyRealtime({ client })
     this.realtime.subscribe(
       'notified',
@@ -183,7 +185,7 @@ OAuthWindow.propTypes = {
   /** Existing account */
   account: PropTypes.object,
   /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
-  intentsApi: PropTypes.object
+  intentsApi: intentsApiProptype
 }
 
 export default translate()(withClient(OAuthWindow))

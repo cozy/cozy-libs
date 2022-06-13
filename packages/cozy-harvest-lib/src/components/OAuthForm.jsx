@@ -7,6 +7,7 @@ import OAuthWindow from './OAuthWindow'
 import compose from 'lodash/flowRight'
 import withConnectionFlow from '../models/withConnectionFlow'
 import { findKonnectorPolicy } from '../konnector-policies'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -70,17 +71,17 @@ export class OAuthForm extends PureComponent {
   }
 
   render() {
-    const { konnector, t, flowState, reconnect, account, intentsApi } = this.props
+    const { konnector, t, flowState, reconnect, account, intentsApi } =
+      this.props
     const { showOAuthWindow, needExtraParams, extraParams } = this.state
-    const { konnector, t, flowState, intentsApi } = this.props
-    const { initialValues, showOAuthWindow, needExtraParams, extraParams } =
-      this.state
     const isBusy =
       showOAuthWindow === true ||
       flowState.running ||
       (needExtraParams && !extraParams)
 
-    const buttonLabel = reconnect ? 'oauth.reconnect.label' : 'oauth.connect.label'
+    const buttonLabel = reconnect
+      ? 'oauth.reconnect.label'
+      : 'oauth.connect.label'
 
     return (
       <>
@@ -120,7 +121,7 @@ OAuthForm.propTypes = {
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
   /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
-  intentsApi: PropTypes.object
+  intentsApi: intentsApiProptype
 }
 
 export default compose(translate(), withConnectionFlow())(OAuthForm)
