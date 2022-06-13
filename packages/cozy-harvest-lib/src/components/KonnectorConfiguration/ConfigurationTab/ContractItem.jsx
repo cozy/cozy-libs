@@ -10,15 +10,12 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 
-import { getPrimaryTextPerDoctype, getPrimaryTextDefault } from './helpers'
+import { getPrimaryText, isDisabled } from './helpers'
 import EditContract from './EditContract'
 import ContractItemSecondaryText from './ContractItemSecondaryText'
 
 const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
-  const getPrimaryText =
-    getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
-  const isDisabled = Boolean(contract.metadata.disabledAt)
 
   return (
     <>
@@ -29,7 +26,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         onClick={() => {
           setShowingEditModal(true)
         }}
-        disabled={isDisabled}
+        disabled={isDisabled(contract)}
       >
         <ListItemIcon>
           <Icon icon={WalletIcon} color="var(--iconTextColor)" />
@@ -41,7 +38,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         <ListItemSecondaryAction>
           <Icon
             icon={RightIcon}
-            className={`u-mr-1 ${isDisabled ? 'u-o-50' : ''}`}
+            className={`u-mr-1 ${isDisabled(contract) ? 'u-o-50' : ''}`}
             color="var(--secondaryTextColor)"
           />
         </ListItemSecondaryAction>
