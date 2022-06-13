@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.9.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.9.0...cozy-harvest-lib@9.9.1) (2022-06-13)
+
+
+### Bug Fixes
+
+* Do not try to display Contract without konnector available ([fe2010b](https://github.com/cozy/cozy-libs/commit/fe2010bdcd7302b1014dbe3d25de6d937c252c83))
+
+
+
+
+
 # [9.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.8.1...cozy-harvest-lib@9.9.0) (2022-06-13)
 
 
