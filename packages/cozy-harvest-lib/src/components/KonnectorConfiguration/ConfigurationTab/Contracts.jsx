@@ -112,7 +112,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         disabled={isDisabled}
       >
         <ListItemIcon>
-          <Icon icon={WalletIcon} className="u-slateGrey" />
+          <Icon icon={WalletIcon} color="var(--iconTextColor)" />
         </ListItemIcon>
         <ListItemText
           primary={startCase(getPrimaryText(contract).toLowerCase())}
@@ -121,7 +121,8 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         <ListItemSecondaryAction>
           <Icon
             icon={RightIcon}
-            className={`u-coolGrey u-mr-1 ${isDisabled ? 'u-o-50' : ''}`}
+            className={`u-mr-1 ${isDisabled ? 'u-o-50' : ''}`}
+            color="var(--secondaryTextColor)"
           />
         </ListItemSecondaryAction>
       </ListItem>
