@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
-import { generateWebLink, useClient } from 'cozy-client'
+import { useClient } from 'cozy-client'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -12,6 +12,7 @@ import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import Link from 'cozy-ui/transpiled/react/Link'
 
 import Konnector from '../../assets/icons/Konnectors.svg'
+import { getStoreWebLinkByKonnector } from '../../helpers/getStoreWebLinkByKonnector'
 
 const useStyles = makeStyles(theme => ({
   disabledItem: {
@@ -40,21 +41,6 @@ const ImportDropdownItems = ({ placeholder, onClick }) => {
     connectorCriteria: { category: konnectorCategory, name: konnectorName } = {}
   } = placeholder
   const hasSteps = acquisitionStepsLength > 0
-
-  const goToStore = () => {
-    let hash
-    if (konnectorName) hash = `discover/${konnectorName}`
-    else hash = `discover?type=konnector&category=${konnectorCategory}`
-    const webLink = generateWebLink({
-      slug: 'store',
-      cozyUrl: client.getStackClient().uri,
-      subDomainType: client.getInstanceOptions().subdomain,
-      pathname: '/',
-      hash
-    })
-
-    return webLink
-  }
 
   return (
     <>
@@ -91,7 +77,14 @@ const ImportDropdownItems = ({ placeholder, onClick }) => {
           {t('ImportDropdown.scanPicture.text')}
         </Typography>
       </ActionMenuItem>
-      <AppLinker app={{ slug: 'store' }} href={goToStore()}>
+      <AppLinker
+        app={{ slug: 'store' }}
+        href={getStoreWebLinkByKonnector({
+          konnectorName,
+          konnectorCategory,
+          client
+        })}
+      >
         {({ href, onClick }) => {
           return (
             <ActionMenuItem
