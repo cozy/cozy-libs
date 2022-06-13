@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.9.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.8.1...cozy-harvest-lib@9.9.0) (2022-06-13)
+
+
+### Features
+
+* Add session code inAppBrowser url ([e2037ef](https://github.com/cozy/cozy-libs/commit/e2037efabd73d93106d2f88bb122f75e783afb6e))
+
+
+
+
+
 ## [9.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.8.0...cozy-harvest-lib@9.8.1) (2022-06-12)
 
 
