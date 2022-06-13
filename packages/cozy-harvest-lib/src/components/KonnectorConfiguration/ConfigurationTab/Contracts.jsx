@@ -1,35 +1,19 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import startCase from 'lodash/startCase'
 import compose from 'lodash/flowRight'
-import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
-import dateFnsLocalefr from 'date-fns/locale/fr'
-import dateFnsLocaleEn from 'date-fns/locale/en'
 
 import CozyClient, { Q, queryConnect } from 'cozy-client'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
-import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 
 import withLocales from '../../hoc/withLocales'
-import { getAccountLabel } from './bankAccountHelpers'
-import EditContract from './EditContract'
 import BIContractActivationWindow from './BiContractActivationWindow'
 import { intentsApiProptype } from '../../../helpers/proptypes'
-
-const dateFnsLocales = { en: dateFnsLocaleEn, fr: dateFnsLocalefr }
+import ContractItem from './ContractItem'
 
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'
@@ -42,108 +26,6 @@ const makeContractsConn = ({ account }) => {
     as: `connection-${account._id}/contracts`,
     fetchPolicy: CozyClient.fetchPolicies.olderThan(30 * 1000)
   }
-}
-
-const getPrimaryTextPerDoctype = {
-  'io.cozy.bank.accounts': getAccountLabel
-}
-
-const getPrimaryTextDefault = contract => contract.label
-
-const SecondaryText = ({ contract }) => {
-  const { t, f, lang } = useI18n()
-
-  if (contract._deleted) return t('contracts.deleted')
-  if (contract.metadata.error) {
-    return (
-      <>
-        <Icon icon={SyncIcon} size={8} color="#FE952A" />{' '}
-        <span style={{ color: '#EFA82D' }}>
-          {distanceInWordsToNow(contract.metadata.updatedAt, {
-            addSuffix: true,
-            locale: dateFnsLocales[lang]
-          })}
-        </span>
-      </>
-    )
-  }
-  if (contract.metadata.disabledAt) {
-    return (
-      <>
-        <Icon icon={UnlinkIcon} size={8} />{' '}
-        {t('contracts.desynchronized.message', {
-          date: f(
-            new Date(contract.metadata.disabledAt),
-            t('contracts.desynchronized.dateFormat')
-          )
-        })}
-      </>
-    )
-  }
-  if (contract.metadata.imported) {
-    return (
-      <>
-        <Icon icon={SyncIcon} size={8} />{' '}
-        {distanceInWordsToNow(contract.metadata.updatedAt, {
-          addSuffix: true,
-          locale: dateFnsLocales[lang]
-        })}
-      </>
-    )
-  }
-  return null
-}
-
-const ContractItem = ({ contract, konnector, accountId, divider }) => {
-  const [showingEditModal, setShowingEditModal] = useState(false)
-  const getPrimaryText =
-    getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
-  const isDisabled = Boolean(contract.metadata.disabledAt)
-
-  return (
-    <>
-      <ListItem
-        button
-        divider={divider}
-        className="u-c-pointer"
-        onClick={() => {
-          setShowingEditModal(true)
-        }}
-        disabled={isDisabled}
-      >
-        <ListItemIcon>
-          <Icon icon={WalletIcon} color="var(--iconTextColor)" />
-        </ListItemIcon>
-        <ListItemText
-          primary={startCase(getPrimaryText(contract).toLowerCase())}
-          secondary={<SecondaryText contract={contract} />}
-        />
-        <ListItemSecondaryAction>
-          <Icon
-            icon={RightIcon}
-            className={`u-mr-1 ${isDisabled ? 'u-o-50' : ''}`}
-            color="var(--secondaryTextColor)"
-          />
-        </ListItemSecondaryAction>
-      </ListItem>
-      {showingEditModal && (
-        <EditContract
-          konnector={konnector}
-          accountId={accountId}
-          contract={contract}
-          onSuccess={() => {
-            setShowingEditModal(false)
-          }}
-          onClose={() => {
-            setShowingEditModal(false)
-          }}
-          onAfterRemove={() => {
-            setShowingEditModal(false)
-          }}
-        />
-      )}
-    </>
-  )
 }
 
 const customHeaderPerDoctype = {
@@ -189,7 +71,7 @@ const DumbContracts = ({ contracts, account, konnector, intentsApi }) => {
   )
 }
 
-const CollectionPropType = PropTypes.shape({
+export const CollectionPropType = PropTypes.shape({
   fetchStatus: PropTypes.string.isRequired,
   data: PropTypes.array.isRequired
 })
