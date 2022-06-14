@@ -12,7 +12,7 @@ import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
-import { intentsApiProptype } from '../helpers/proptypes'
+import { intentsApiProptype } from '../../helpers/proptypes'
 
 const tabIndexes = {
   data: 0,
