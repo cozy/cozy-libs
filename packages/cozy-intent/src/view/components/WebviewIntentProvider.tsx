@@ -103,7 +103,7 @@ export const WebviewIntentProvider = ({
       !webviewService &&
       isValidEnv() &&
       getConnection(setConnection, methods)
-  }, [connection, webviewService])
+  }, [connection, webviewService, methods])
 
   useEffect(() => {
     !service && connection && setService(new WebviewService(connection))
