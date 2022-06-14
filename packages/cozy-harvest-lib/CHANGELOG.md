@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.10.1...cozy-harvest-lib@9.11.0) (2022-06-14)
+
+
+### Bug Fixes
+
+* Icon colors on ContractItem ([03a628d](https://github.com/cozy/cozy-libs/commit/03a628d54df3dc7e1caec2fb6935bbf699f256e6))
+
+
+### Features
+
+* Add desync date on ContractItem ([ecfd742](https://github.com/cozy/cozy-libs/commit/ecfd74232c7e5c200c18d031bc06ba8182ee0027))
+* Add innerAccountModalOverrides prop to AccountModal ([d920436](https://github.com/cozy/cozy-libs/commit/d92043674a8498571f35bd7b155464bb41413989))
+* Add last sync date on ContractItem ([71d2849](https://github.com/cozy/cozy-libs/commit/71d28497718e1ec71acb82be3ac3a4a68508ff52))
+* Add support of ES lang in ContractItemSecondaryText ([6213621](https://github.com/cozy/cozy-libs/commit/6213621e87476a9ed8eaf910817b0e8b420551e3))
+
+
+
+
+
 ## [9.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.10.0...cozy-harvest-lib@9.10.1) (2022-06-14)
 
 
