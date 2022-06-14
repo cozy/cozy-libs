@@ -39,7 +39,7 @@ import { useTrackPage, useTracker } from '../../hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
 import { ContractsForAccount } from './Contracts'
-import { intentsApiProptype } from '../../helpers/proptypes'
+import { intentsApiProptype } from '../../../helpers/proptypes'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
