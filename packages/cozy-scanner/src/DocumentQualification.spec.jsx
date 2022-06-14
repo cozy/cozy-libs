@@ -31,7 +31,7 @@ describe('DocumentQualification', () => {
           allowEditFileName={true}
           onDescribed={onDescribed}
           onFileNameChanged={onFileNameChanged}
-          title={'Edit'}
+          title="Edit"
           // initialSelected={{ itemId: 1, categoryLabel: 'Label1' }}
           t={text => text}
         />

@@ -69,12 +69,12 @@ const DumbKonnectorDialog = ({
             )}
           </div>
           <Button
-            icon={<Icon icon={CrossIcon} size={'24'} />}
+            icon={<Icon icon={CrossIcon} size="24" />}
             onClick={onClose}
             iconOnly
             label={t('close')}
             subtle
-            theme={'secondary'}
+            theme="secondary"
           />
         </div>
       </DialogTitle>

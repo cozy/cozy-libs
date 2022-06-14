@@ -62,11 +62,11 @@ describe('mattermost', () => {
       // Then
       expect(fetch).toHaveBeenCalledTimes(1)
       expect(fetch).toHaveBeenCalledWith(mattermostHook, {
-        "body": "{\"channel\":\"~front\",\"text\":\"\\n## Repository: cozy/cozy-drive\\n\\n Rule | Symbol | State of the rule\\n ---|:----:| -----\\ndep-up-to-date | ℹ️ | cozy-ui: 62.1.2, last is 62.1.4\\ndep-up-to-date | ⚠️ | cozy-client: ^27.19.4, last is 27.22.0\\ndep-up-to-date | 🚩 | cozy-realtime: 3.13.0, last is 4.0.5\\n\\n## Repository: cozy/cozy-banks\\n\\n Rule | Symbol | State of the rule\\n ---|:----:| -----\\ndep-up-to-date | ✅ | cozy-ui: ^62.1.4, last is 62.1.4\\ndep-up-to-date | ⚠️ | cozy-client: ^27.17.0, last is 27.22.0\\ndep-up-to-date | 🚩 | cozy-realtime: 3.11.0, last is 4.0.5\"}",
+        body: '{"channel":"~front","text":"\\n## Repository: cozy/cozy-drive\\n\\n Rule | Symbol | State of the rule\\n ---|:----:| -----\\ndep-up-to-date | ℹ️ | cozy-ui: 62.1.2, last is 62.1.4\\ndep-up-to-date | ⚠️ | cozy-client: ^27.19.4, last is 27.22.0\\ndep-up-to-date | 🚩 | cozy-realtime: 3.13.0, last is 4.0.5\\n\\n## Repository: cozy/cozy-banks\\n\\n Rule | Symbol | State of the rule\\n ---|:----:| -----\\ndep-up-to-date | ✅ | cozy-ui: ^62.1.4, last is 62.1.4\\ndep-up-to-date | ⚠️ | cozy-client: ^27.17.0, last is 27.22.0\\ndep-up-to-date | 🚩 | cozy-realtime: 3.11.0, last is 4.0.5"}',
         headers: {
           'Content-Type': 'application/json'
         },
-        method: 'POST',
+        method: 'POST'
       })
     })
   })
