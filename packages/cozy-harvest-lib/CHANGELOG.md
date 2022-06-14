@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.10.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.10.0...cozy-harvest-lib@9.10.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* Wrong proptypes file path ([767ec99](https://github.com/cozy/cozy-libs/commit/767ec995076817ed0feab38f28df346761b0d867))
+
+
+
+
+
 # [9.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.9.1...cozy-harvest-lib@9.10.0) (2022-06-14)
 
 
