@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.34.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.33.9...cozy-mespapiers-lib@0.34.0) (2022-06-14)
+
+
+### Bug Fixes
+
+* The fields must all be in the searched attributes ([bbc1704](https://github.com/cozy/cozy-libs/commit/bbc1704fd29e85ebacd66e4b4bbca5e91af7b0ff))
+
+
+### Features
+
+* Sync peerDeps ([044366d](https://github.com/cozy/cozy-libs/commit/044366d6c84f8962e3c9ead0cef1e66c49f95c30))
+* Update cozy-client ([11fc802](https://github.com/cozy/cozy-libs/commit/11fc802b42db7122f0fbb550e22050b856d58a75))
+* Update cozy-ui ([217765e](https://github.com/cozy/cozy-libs/commit/217765ef44404c10bc41a497072e370eaf24d4d3))
+
+
+### BREAKING CHANGES
+
+* see
+https://github.com/cozy/cozy-client/releases/tag/v30.0.0
+
+
+
+
+
 ## [0.33.9](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.33.8...cozy-mespapiers-lib@0.33.9) (2022-06-14)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
