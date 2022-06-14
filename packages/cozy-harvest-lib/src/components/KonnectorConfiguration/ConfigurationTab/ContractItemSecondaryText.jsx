@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import dateFnsLocalefr from 'date-fns/locale/fr'
 import dateFnsLocaleEn from 'date-fns/locale/en'
+import dateFnsLocaleEs from 'date-fns/locale/es'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
@@ -12,7 +13,11 @@ import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import { CollectionPropType } from './Contracts'
 import { isDeleted, isDisabled, isErrored, isImported } from './helpers'
 
-const dateFnsLocales = { en: dateFnsLocaleEn, fr: dateFnsLocalefr }
+const dateFnsLocales = {
+  en: dateFnsLocaleEn,
+  fr: dateFnsLocalefr,
+  es: dateFnsLocaleEs
+}
 
 const ContractItemSecondaryText = ({ contract }) => {
   const { t, f, lang } = useI18n()
