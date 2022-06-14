@@ -35,10 +35,10 @@ export const getPrimaryText = contract => {
   return fn(contract)
 }
 
-export const isDisabled = contract => Boolean(contract.metadata.disabledAt)
+export const isDisabled = contract => Boolean(contract?.metadata?.disabledAt)
 
 export const isDeleted = contract => contract._deleted
 
-export const isErrored = contract => Boolean(contract.metadata.error)
+export const isErrored = contract => Boolean(contract?.metadata?.error)
 
-export const isImported = contract => Boolean(contract.metadata.imported)
+export const isImported = contract => Boolean(contract?.metadata?.imported)
