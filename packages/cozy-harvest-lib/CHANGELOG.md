@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.11.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.11.0...cozy-harvest-lib@9.11.1) (2022-06-14)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Add optionnal chain in some helpers for Contract ([dd3b9be](https://github.com/cozy/cozy-libs/commit/dd3b9bee498cdd29559ee726bf6d56c9281fd255))
+
+
+
+
+
 # [9.11.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.10.1...cozy-harvest-lib@9.11.0) (2022-06-14)
 
 
