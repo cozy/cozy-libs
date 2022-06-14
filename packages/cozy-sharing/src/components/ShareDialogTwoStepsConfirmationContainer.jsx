@@ -11,7 +11,7 @@ import { useSafeState } from '../helpers/hooks'
  */
 const LoadingContent = () => {
   return (
-    <div className={'u-ta-center'}>
+    <div className="u-ta-center">
       <Spinner size="xxlarge" loadingType="sharing" />
     </div>
   )

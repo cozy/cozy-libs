@@ -68,7 +68,7 @@ export class SelectServer extends Component {
 
     this.input.focus()
   }
-
+  // eslint-disable-next-line
   componentWillReceiveProps(nextProps) {
     const error =
       nextProps.externalError &&
@@ -130,6 +130,7 @@ export class SelectServer extends Component {
     const url = this.getUrl(value)
     if (
       url === '' ||
+      // eslint-disable-next-line
       (/^http:/.test(url) && typeof __ALLOW_HTTP__ === undefined)
     ) {
       error = ERR_WRONG_ADDRESS
@@ -349,7 +350,7 @@ export class SelectServer extends Component {
               label={t('mobile.onboarding.welcome.no_account_link')}
               size={isTiny ? 'normal' : 'large'}
               subtle={true}
-              type={'button'}
+              type="button"
               theme="text"
               onboarding={onboarding}
             />

@@ -137,7 +137,7 @@ class ShareByLink extends React.Component {
         </div>
         {checked && (
           <CompositeRow
-            className={'u-ph-0'}
+            className="u-ph-0"
             primaryText={
               <Typography
                 onClick={this.copyLinkToClipboard}

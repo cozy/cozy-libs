@@ -8,9 +8,9 @@ describe('CategoryGridItem', () => {
     const { asFragment } = render(
       <CategoryGridItem
         isSelected={true}
-        label={'test'}
-        theme={'toto'}
-        icon={'car'}
+        label="test"
+        theme="toto"
+        icon="car"
       />
     )
     expect(asFragment()).toMatchSnapshot()
