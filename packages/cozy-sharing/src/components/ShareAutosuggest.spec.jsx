@@ -10,7 +10,7 @@ describe('ShareAutosuggest', () => {
     const { getByPlaceholderText } = render(
       <ShareAutosuggest
         contactsAndGroups={[]}
-        placeholder={'myPlaceHolder'}
+        placeholder="myPlaceHolder"
         onPick={onPick}
         onFocus={onFocus}
         recipients={[]}

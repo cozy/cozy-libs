@@ -76,20 +76,20 @@ class DocumentCategory extends Component {
                       <Icon
                         icon={category.icon}
                         color={palette.dodgerBlue}
-                        size={'16'}
+                        size="16"
                         className={classNames(styles['icon-absolute-centered'])}
                       />
                     }
                     background={
                       <Icon
-                        icon={'file-duotone'}
-                        size={'32'}
+                        icon="file-duotone"
+                        size="32"
                         color={palette.dodgerBlue}
                       />
                     }
                   />
                 </Img>
-                <Bd className={'u-ml-1'}>
+                <Bd className="u-ml-1">
                   <Typography tag="span" ellipsis variant="h6">
                     {t(`Scan.themes.${category.label}`)}
                   </Typography>

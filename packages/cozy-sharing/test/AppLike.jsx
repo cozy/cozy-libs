@@ -8,7 +8,7 @@ import langEn from '../locales/en.json'
 
 const AppLike = ({ children, client }) => (
   <BreakpointsProvider>
-    <I18n lang={'en'} dictRequire={() => langEn}>
+    <I18n lang="en" dictRequire={() => langEn}>
       <CozyProvider client={client || createMockClient({})}>
         {children}
       </CozyProvider>

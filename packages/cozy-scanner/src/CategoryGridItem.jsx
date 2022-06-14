@@ -26,14 +26,14 @@ const CategoryGridItem = ({ isSelected, icon, theme, label }) => {
             <Icon
               icon={icon}
               color={isSelected ? palette.dodgerBlue : palette.coolGrey}
-              size={'16'}
+              size="16"
             />
           ) : null
         }
         background={
           <Icon
-            icon={'file-duotone'}
-            size={'32'}
+            icon="file-duotone"
+            size="32"
             color={isSelected ? palette.dodgerBlue : palette.coolGrey}
           />
         }
