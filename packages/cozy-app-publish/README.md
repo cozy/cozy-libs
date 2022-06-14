@@ -196,6 +196,7 @@ To print more logs when using tool (useful for debug).
 - A new branch is created from the current state of `master`. Let's say we want to deploy version `1.0.0` of the app.
 - Since we created a new branch, we have to bump the version of `master`, so we have to create a PR to bump to `1.1.0` everywhere is necessary
 - The only type of commits allowed on this release branch are bug fixes.
+- To release a stable or beta version, generally we use directly github and the release creation interface. In this interface, don't forget to fill in the changelog and to check "prelease" for a beta version. The title of the release must be the released version (ex.: `1.40.0-beta.1`)
 - Every time one or more bugs are fixed and the version is considered for release, the latest commit is tagged with a prerelease version number, eg. `1.0.0-beta.1`, `1.0.0-beta.2`, etc…
 - Each of these prereleases is automatically uploaded on downcloud and deployed on instances that are on the `beta` channel.
 - Once the branch is deemed ready for release, the last commit is tagged with the final version — `1.0.0` in our example. It is then, again, uploaded on downcloud, published on the registry and deployed on specific instances as needed.
