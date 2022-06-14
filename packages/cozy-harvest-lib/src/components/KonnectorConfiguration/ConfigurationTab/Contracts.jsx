@@ -9,7 +9,6 @@ import dateFnsLocaleEn from 'date-fns/locale/en'
 import CozyClient, { Q, queryConnect } from 'cozy-client'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
-
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -22,6 +21,7 @@ import NavigationList, {
 } from 'cozy-ui/transpiled/react/NavigationList'
 import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 
 import withLocales from '../../hoc/withLocales'
 import { getAccountLabel } from './bankAccountHelpers'
@@ -51,7 +51,7 @@ const getPrimaryTextPerDoctype = {
 const getPrimaryTextDefault = contract => contract.label
 
 const SecondaryText = ({ contract }) => {
-  const { t, lang } = useI18n()
+  const { t, f, lang } = useI18n()
 
   if (contract._deleted) return t('contracts.deleted')
   if (contract.metadata.error) {
@@ -64,6 +64,19 @@ const SecondaryText = ({ contract }) => {
             locale: dateFnsLocales[lang]
           })}
         </span>
+      </>
+    )
+  }
+  if (contract.metadata.disabledAt) {
+    return (
+      <>
+        <Icon icon={UnlinkIcon} size={8} />{' '}
+        {t('contracts.desynchronized.message', {
+          date: f(
+            new Date(contract.metadata.disabledAt),
+            t('contracts.desynchronized.dateFormat')
+          )
+        })}
       </>
     )
   }
@@ -85,6 +98,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
   const getPrimaryText =
     getPrimaryTextPerDoctype[contract._type] || getPrimaryTextDefault
+  const isDisabled = Boolean(contract.metadata.disabledAt)
 
   return (
     <>
@@ -95,6 +109,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         onClick={() => {
           setShowingEditModal(true)
         }}
+        disabled={isDisabled}
       >
         <ListItemIcon>
           <Icon icon={WalletIcon} className="u-slateGrey" />
@@ -104,7 +119,10 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
           secondary={<SecondaryText contract={contract} />}
         />
         <ListItemSecondaryAction>
-          <Icon icon={RightIcon} className="u-coolGrey u-mr-1" />
+          <Icon
+            icon={RightIcon}
+            className={`u-coolGrey u-mr-1 ${isDisabled ? 'u-o-50' : ''}`}
+          />
         </ListItemSecondaryAction>
       </ListItem>
       {showingEditModal && (

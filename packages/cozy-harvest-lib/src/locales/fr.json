@@ -30,7 +30,11 @@
     },
     "deleted": "Supprimé",
     "no-contracts": "Vous n'avez plus de contrats",
-    "handle-synchronization": "Gérer mes synchronisations"
+    "handle-synchronization": "Gérer mes synchronisations",
+    "desynchronized": {
+      "message": "vous avez désynchronisé ce compte le %{date}",
+      "dateFormat": "DD/MM/YY"
+    }
   },
   "contractForm": {
     "details": "Détails",
