@@ -21,10 +21,10 @@ deploy:
       branch: master
       repo: cozy/cozy-libs
 
-jobs:
-  include:
-    - name: 'Repo Doctor'
-      script: '[ $TRAVIS_EVENT_TYPE = "cron" ] && pushd ./packages/repo-doctor && yarn start:mattermost && popd || true'
+# jobs:
+#   include:
+#     - name: 'Repo Doctor'
+#       script: '[ $TRAVIS_EVENT_TYPE = "cron" ] && pushd ./packages/repo-doctor && yarn start:mattermost && popd || true'
 
 env:
   global:
