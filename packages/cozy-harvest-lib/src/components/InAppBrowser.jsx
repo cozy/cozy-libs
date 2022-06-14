@@ -56,7 +56,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
     return function cleanup() {
       closeInAppBrowser()
     }
-  }, [isReady, url, onClose])
+  }, [isReady, url, onClose, closeInAppBrowser, fetchSessionCode, showInAppBrowser, tokenParamName])
   return null
 }
 
