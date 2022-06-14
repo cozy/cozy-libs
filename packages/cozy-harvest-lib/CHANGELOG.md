@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.10.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.9.1...cozy-harvest-lib@9.10.0) (2022-06-14)
+
+
+### Bug Fixes
+
+* Better proptypes ([08937b2](https://github.com/cozy/cozy-libs/commit/08937b26928e84441d08d90e956771d26e511c83))
+* Update snapshot ([3ca44b9](https://github.com/cozy/cozy-libs/commit/3ca44b9521acb7a3fa15fb297085db8861095c10))
+
+
+### Features
+
+* Add intentsApi for contract activation window ([79ad6df](https://github.com/cozy/cozy-libs/commit/79ad6df7848db3be6d793948afde22f059db231b))
+* Add intentsApi prop to TriggerManager ([c0b78d5](https://github.com/cozy/cozy-libs/commit/c0b78d5711263a5b197908beeb17495cffe987ba))
+* Add tokenParamName in intentApi ([7b2c00c](https://github.com/cozy/cozy-libs/commit/7b2c00cdd5a6600199621d99a1b1887244ac465d))
+
+
+
+
+
 ## [9.9.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.9.0...cozy-harvest-lib@9.9.1) (2022-06-13)
 
 
