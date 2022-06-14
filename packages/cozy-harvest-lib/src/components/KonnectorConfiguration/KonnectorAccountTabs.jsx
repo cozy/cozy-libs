@@ -12,7 +12,10 @@ import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
-import { intentsApiProptype } from '../../helpers/proptypes'
+import {
+  intentsApiProptype,
+  innerAccountModalOverridesProptype
+} from '../../helpers/proptypes'
 
 const tabIndexes = {
   data: 0,
@@ -53,15 +56,16 @@ const DumbKonnectorAccountTabs = props => {
     addAccount,
     showNewAccountButton,
     flow,
-    intentsApi
+    intentsApi,
+    innerAccountModalOverrides
   } = props
   const { isMobile } = useBreakpoints()
   const [tab, setTab] = useState(
     initialActiveTab
       ? tabIndexes[initialActiveTab]
       : hasLoginError
-        ? tabIndexes.configuration
-        : tabIndexes.data
+      ? tabIndexes.configuration
+      : tabIndexes.data
   )
   const handleTabChange = (ev, newTab) => setTab(newTab)
 
@@ -110,6 +114,7 @@ const DumbKonnectorAccountTabs = props => {
           onAccountDeleted={onAccountDeleted}
           showNewAccountButton={showNewAccountButton}
           intentsApi={intentsApi}
+          innerAccountModalOverrides={innerAccountModalOverrides}
         />
       </SwipeableViews>
     </div>
@@ -133,11 +138,10 @@ KonnectorAccountTabs.propTypes = {
   account: PropTypes.object.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
   addAccount: PropTypes.func.isRequired,
-
   /** @type {string} Can be used to force the initial tab */
   initialActiveTab: PropTypes.oneOf(['configuration', 'data']),
-  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default KonnectorAccountTabs

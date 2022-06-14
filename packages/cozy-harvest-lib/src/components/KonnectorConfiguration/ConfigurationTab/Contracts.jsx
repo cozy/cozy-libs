@@ -12,7 +12,10 @@ import NavigationList, {
 
 import withLocales from '../../hoc/withLocales'
 import BIContractActivationWindow from './BiContractActivationWindow'
-import { intentsApiProptype } from '../../../helpers/proptypes'
+import {
+  intentsApiProptype,
+  innerAccountModalOverridesProptype
+} from '../../../helpers/proptypes'
 import ContractItem from './ContractItem'
 
 const makeContractsConn = ({ account }) => {
@@ -32,7 +35,13 @@ const customHeaderPerDoctype = {
   'io.cozy.bank.accounts': 'bankAccounts'
 }
 
-const DumbContracts = ({ contracts, account, konnector, intentsApi }) => {
+const DumbContracts = ({
+  contracts,
+  account,
+  konnector,
+  intentsApi,
+  innerAccountModalOverrides
+}) => {
   const { t } = useI18n()
   const contractData = contracts.data ? contracts.data : contracts
 
@@ -64,6 +73,7 @@ const DumbContracts = ({ contracts, account, konnector, intentsApi }) => {
             konnector={konnector}
             account={account}
             intentsApi={intentsApi}
+            innerAccountModalOverrides={innerAccountModalOverrides}
           />
         </NavigationListSection>
       </NavigationList>
@@ -82,8 +92,8 @@ DumbContracts.propTypes = {
   account: PropTypes.object,
   /** Can be present if showing contracts still linked to an account/konnector/trigger */
   konnector: PropTypes.object,
-  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export const ContractsForAccount = compose(

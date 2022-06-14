@@ -20,4 +20,13 @@ const intentsApiProptype = PropTypes.shape({
   tokenParamName: PropTypes.string
 })
 
-export { getMutationsProptypes, intentsApiProptype }
+const innerAccountModalOverridesProptype = PropTypes.shape({
+  SyncButtonWrapperComp: PropTypes.func,
+  deleteAccountLabel: PropTypes.string
+})
+
+export {
+  getMutationsProptypes,
+  intentsApiProptype,
+  innerAccountModalOverridesProptype
+}

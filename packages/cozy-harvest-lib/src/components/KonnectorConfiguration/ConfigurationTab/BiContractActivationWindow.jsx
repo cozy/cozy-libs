@@ -8,9 +8,18 @@ import { findKonnectorPolicy } from '../../../konnector-policies'
 import { isFlagshipApp } from 'cozy-device-helper'
 import InAppBrowser from '../../InAppBrowser'
 import withLocales from '../../hoc/withLocales'
-import { intentsApiProptype } from '../../../helpers/proptypes'
+import {
+  intentsApiProptype,
+  innerAccountModalOverridesProptype
+} from '../../../helpers/proptypes'
 
-const BIContractActivationWindow = ({ konnector, account, t, intentsApi }) => {
+const BIContractActivationWindow = ({
+  konnector,
+  account,
+  t,
+  intentsApi,
+  innerAccountModalOverrides
+}) => {
   const [initialUrl, setInitialUrl] = useState(null)
   const [isWindowVisible, setWindowVisible] = useState(false)
   const [shouldRefreshContracts, setShouldRefreshContracts] = useState(false)
@@ -47,11 +56,24 @@ const BIContractActivationWindow = ({ konnector, account, t, intentsApi }) => {
     }
   }, [konnector, account, client, konnectorPolicy])
 
-  return konnectorPolicy.fetchContractSynchronizationUrl ? (
+  if (!konnectorPolicy.fetchContractSynchronizationUrl) return null
+
+  const ButtonWrapper = innerAccountModalOverrides?.SyncButtonWrapperComp
+    ? innerAccountModalOverrides.SyncButtonWrapperComp
+    : React.Fragment
+
+  return (
     <ListItem>
-      <Button disabled={!initialUrl} onClick={() => setWindowVisible(true)}>
-        {t('contracts.handle-synchronization')}
-      </Button>
+      <ButtonWrapper>
+        <Button
+          variant="text"
+          color="primary"
+          disabled={!initialUrl}
+          onClick={() => setWindowVisible(true)}
+        >
+          {t('contracts.handle-synchronization')}
+        </Button>
+      </ButtonWrapper>
       {isWindowVisible &&
         (isFlagshipApp() ? (
           <InAppBrowser
@@ -68,15 +90,14 @@ const BIContractActivationWindow = ({ konnector, account, t, intentsApi }) => {
           />
         ))}
     </ListItem>
-  ) : null
+  )
 }
 
 BIContractActivationWindow.propTypes = {
   t: PropTypes.func,
   account: PropTypes.object,
-  konnector: PropTypes.object,
-  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default withLocales(BIContractActivationWindow)

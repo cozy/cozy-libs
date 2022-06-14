@@ -17,7 +17,10 @@ import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointHistory } from './MountPointContext'
 import withLocales from './hoc/withLocales'
 import DialogContent from '@material-ui/core/DialogContent'
-import { intentsApiProptype } from '../helpers/proptypes'
+import {
+  intentsApiProptype,
+  innerAccountModalOverridesProptype
+} from '../helpers/proptypes'
 
 /**
  * Takes an accountId and a list of accounts containing their respecting triggers
@@ -115,8 +118,10 @@ export class AccountModal extends Component {
       breakpoints: { isMobile },
       showAccountSelection,
       showNewAccountButton,
-      intentsApi
+      intentsApi,
+      innerAccountModalOverrides
     } = this.props
+
     const { trigger, account, fetching, error } = this.state
     return (
       <>
@@ -170,6 +175,7 @@ export class AccountModal extends Component {
               addAccount={() => replaceHistory('/new')}
               showNewAccountButton={showNewAccountButton}
               intentsApi={intentsApi}
+              innerAccountModalOverrides={innerAccountModalOverrides}
             />
           </DialogContent>
         )}
@@ -213,8 +219,8 @@ AccountModal.propTypes = {
   /** @type {Boolean} Whether to show the button to add a new account */
   showNewAccountButton: PropTypes.bool,
 
-  // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default flow(
