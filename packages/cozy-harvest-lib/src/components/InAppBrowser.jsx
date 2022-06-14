@@ -20,7 +20,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
     ? intentsApi?.tokenParamName
     : 'session_code'
 
-  const ready = Boolean(
+  const isReady = Boolean(
     webviewIntent ||
       (intentsApi?.fetchSessionCode &&
         intentsApi?.showInAppBrowser &&
@@ -29,7 +29,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
 
   useEffect(() => {
     async function insideEffect() {
-      if (ready) {
+      if (isReady) {
         try {
           const sessionCode = await fetchSessionCode()
           logger.debug('got session code', sessionCode)
@@ -51,7 +51,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
     return function cleanup() {
       closeInAppBrowser()
     }
-  }, [ready, url, onClose])
+  }, [isReady, url, onClose])
   return null
 }
 
