@@ -39,7 +39,10 @@ import { useTrackPage, useTracker } from '../../hoc/tracking'
 import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
 import { ContractsForAccount } from './Contracts'
-import { intentsApiProptype } from '../../../helpers/proptypes'
+import {
+  intentsApiProptype,
+  innerAccountModalOverridesProptype
+} from '../../../helpers/proptypes'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 
@@ -76,7 +79,8 @@ const ConfigurationTab = ({
   onAccountDeleted,
   showNewAccountButton,
   flow,
-  intentsApi
+  intentsApi,
+  innerAccountModalOverrides
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -200,7 +204,9 @@ const ConfigurationTab = ({
             <ListItemText
               primary={
                 <span className="u-error">
-                  {t('accountForm.disconnect.button')}
+                  {innerAccountModalOverrides?.deleteAccountLabel
+                    ? innerAccountModalOverrides.deleteAccountLabel
+                    : t('accountForm.disconnect.button')}
                 </span>
               }
             />
@@ -220,6 +226,7 @@ const ConfigurationTab = ({
           konnector={konnector}
           account={account}
           intentsApi={intentsApi}
+          innerAccountModalOverrides={innerAccountModalOverrides}
         />
       </NavigationList>
       {showNewAccountButton ? (
@@ -245,8 +252,8 @@ ConfigurationTab.propTypes = {
   error: PropTypes.object,
   addAccount: PropTypes.func.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
-  /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
-  intentsApi: intentsApiProptype
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default ConfigurationTab
