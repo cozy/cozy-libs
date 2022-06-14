@@ -2,10 +2,10 @@ import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'cozy-ui/transpiled/react/Button'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import OAuthWindow from './OAuthWindow'
 import compose from 'lodash/flowRight'
 import withConnectionFlow from '../models/withConnectionFlow'
+import withLocales from './hoc/withLocales'
 import { findKonnectorPolicy } from '../konnector-policies'
 import { intentsApiProptype } from '../helpers/proptypes'
 
@@ -124,4 +124,4 @@ OAuthForm.propTypes = {
   intentsApi: intentsApiProptype
 }
 
-export default compose(translate(), withConnectionFlow())(OAuthForm)
+export default compose(withLocales, withConnectionFlow())(OAuthForm)
