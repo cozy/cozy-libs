@@ -17,8 +17,7 @@ const KonnectorModalHeader = ({ konnector, children }) => {
       <Media>
         <Img
           className={cx('u-mr-1', {
-            'u-w-3 u-h-3': children,
-            'u-w-2 u-h-2': !children
+            [children === null ? 'u-w-2 u-h-2' : 'u-w-3 u-h-3']: true
           })}
         >
           <KonnectorIcon konnector={konnector} />
