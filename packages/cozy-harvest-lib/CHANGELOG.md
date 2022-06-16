@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.11.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.11.1...cozy-harvest-lib@9.11.2) (2022-06-16)
+
+
+### Bug Fixes
+
+* Get proper locale in banks using withLocales ([c7a1ecc](https://github.com/cozy/cozy-libs/commit/c7a1eccf71af55c7114f7e7a8789f837a7c69449))
+
+
+
+
+
 ## [9.11.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.11.0...cozy-harvest-lib@9.11.1) (2022-06-14)
 
 
