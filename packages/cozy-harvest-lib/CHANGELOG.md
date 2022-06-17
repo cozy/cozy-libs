@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.11.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.11.2...cozy-harvest-lib@9.11.3) (2022-06-17)
+
+
+### Bug Fixes
+
+* Fix width flickering in ModalHeader ([66c78b4](https://github.com/cozy/cozy-libs/commit/66c78b4d35953376eac522c3dd91707f0b51c6dd))
+
+
+
+
+
 ## [9.11.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.11.1...cozy-harvest-lib@9.11.2) (2022-06-16)
 
 
