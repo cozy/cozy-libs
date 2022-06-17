@@ -148,7 +148,7 @@ export class OAuthWindow extends PureComponent {
     return (
       oAuthUrl &&
       !succeed &&
-      (!isFlagshipApp() ? (
+      (!isFlagshipApp() && !intentsApi ? (
         <Popup
           url={oAuthUrl}
           height={OAUTH_POPUP_HEIGHT}
