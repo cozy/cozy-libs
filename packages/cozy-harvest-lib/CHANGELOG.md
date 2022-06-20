@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.12.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.12.0...cozy-harvest-lib@9.12.1) (2022-06-20)
+
+
+### Bug Fixes
+
+* Do not show popup when intentsApi is given ([2b39abe](https://github.com/cozy/cozy-libs/commit/2b39abe6c808ea5ec12c5404c43ee698c4d49fd3))
+
+
+
+
+
 # [9.12.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.11.3...cozy-harvest-lib@9.12.0) (2022-06-17)
 
 
