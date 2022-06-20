@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.12.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.12.1...cozy-harvest-lib@9.12.2) (2022-06-20)
+
+
+### Bug Fixes
+
+* Do not encode oauth url ([263e119](https://github.com/cozy/cozy-libs/commit/263e1192dc1d123585936119386acb8426d2676b))
+
+
+
+
+
 ## [9.12.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.12.0...cozy-harvest-lib@9.12.1) (2022-06-20)
 
 
