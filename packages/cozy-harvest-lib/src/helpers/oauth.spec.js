@@ -50,7 +50,7 @@ describe('Oauth helper', () => {
         oAuthConf: { scope: ['thescope', 'thescope2'] }
       })
       expect(url).toEqual(
-        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope%2Bthescope2'
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope+thescope2'
       )
     })
     it('should use redirectSlug if present', () => {
@@ -89,6 +89,21 @@ describe('Oauth helper', () => {
       })
       expect(url).toEqual(
         'https://cozyurl/accounts/testslug/accountid/reconnect?state=statekey&nonce=1234&code=thecode&connection_id=12345'
+      )
+    })
+    it('should not encode url params', () => {
+      const url = getOAuthUrl({
+        ...defaultConf,
+        oAuthConf: {},
+        account: { _id: 'accountid' },
+        reconnect: true,
+        extraParams: {
+          code: 'e/b',
+          connection_id: 12345
+        }
+      })
+      expect(url).toEqual(
+        'https://cozyurl/accounts/testslug/accountid/reconnect?state=statekey&nonce=1234&code=e/b&connection_id=12345'
       )
     })
   })

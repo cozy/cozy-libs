@@ -143,7 +143,7 @@ export const getOAuthUrl = ({
     )
   }
 
-  return oAuthUrl.toString()
+  return decodeURIComponent(oAuthUrl.toString())
 }
 
 const getAppSlug = client => {
