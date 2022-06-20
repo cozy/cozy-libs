@@ -75,7 +75,7 @@ const BIContractActivationWindow = ({
         </Button>
       </ButtonWrapper>
       {isWindowVisible &&
-        (isFlagshipApp() ? (
+        (isFlagshipApp() || intentsApi ? (
           <InAppBrowser
             url={initialUrl}
             onClose={onPopupClosed}
