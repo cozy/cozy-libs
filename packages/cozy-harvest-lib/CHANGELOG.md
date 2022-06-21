@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.13.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.12.3...cozy-harvest-lib@9.13.0) (2022-06-21)
+
+
+### Features
+
+* **cozy-harvest-lib:** Remove sync contract switch for BI webview ([fb1d46e](https://github.com/cozy/cozy-libs/commit/fb1d46ef327350b656ccbe43650fdbf35d7470fb))
+
+
+
+
+
 ## [9.12.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.12.2...cozy-harvest-lib@9.12.3) (2022-06-21)
 
 
