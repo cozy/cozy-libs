@@ -1,4 +1,4 @@
-# Cozy libs
+# Cozy-libs
 
 > Sharing Helpers for Cozy Application Development
 
