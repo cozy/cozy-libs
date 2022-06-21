@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.11](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.34.10...cozy-mespapiers-lib@0.34.11) (2022-06-21)
+
+
+### Bug Fixes
+
+* **mespapiers:** Typo ([0c097fa](https://github.com/cozy/cozy-libs/commit/0c097fa31f144e3ffd220c9565c8d8396af73757))
+
+
+
+
+
 ## [0.34.10](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.34.9...cozy-mespapiers-lib@0.34.10) (2022-06-21)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
