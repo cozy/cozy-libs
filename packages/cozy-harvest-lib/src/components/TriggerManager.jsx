@@ -448,8 +448,11 @@ DumbTriggerManager.propTypes = {
   fieldOptions: PropTypes.object,
   flow: PropTypes.object,
   flowState: PropTypes.object,
-  // Used to inject a component around OAuthForm, and so customize the UI from the app
-  OAuthFormWrapperComp: PropTypes.node,
+  /** Used to inject a component around OAuthForm, and so customize the UI from the app */
+  OAuthFormWrapperComp: PropTypes.oneOfType([
+    PropTypes.element,
+    PropTypes.func
+  ]),
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
   // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
