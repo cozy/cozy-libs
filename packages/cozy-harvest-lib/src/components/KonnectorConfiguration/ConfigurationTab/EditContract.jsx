@@ -30,6 +30,7 @@ import Dialog, {
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+import flag from 'cozy-flags'
 
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import { buildAppsByIdQuery } from '../../../helpers/queries'
@@ -256,7 +257,7 @@ const EditContract = props => {
         </NonGrowingDialogContent>
       )}
       <Divider />
-      {policy && policy.setSync ? (
+      {policy && policy.setSync && !flag('harvest.bi.webview') ? (
         <>
           <NonGrowingDialogContent className="u-pv-1">
             <SyncContractSwitch
