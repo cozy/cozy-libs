@@ -17,7 +17,6 @@ const RedirectToAccountFormButton = ({ trigger }) => {
       theme="secondary"
       label={t('error.reconnect-via-form')}
       onClick={handleClick}
-      extension="full"
     />
   )
 }

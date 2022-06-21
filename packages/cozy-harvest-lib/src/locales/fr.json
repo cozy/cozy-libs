@@ -124,7 +124,7 @@
     "baseDir": "/Administratif"
   },
   "error": {
-    "reconnect-via-form": "Régler la connexion",
+    "reconnect-via-form": "Se reconnecter",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
         "title": "Espace Disque plein",
