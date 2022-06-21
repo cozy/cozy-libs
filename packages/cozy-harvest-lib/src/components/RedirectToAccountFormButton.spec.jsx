@@ -22,7 +22,7 @@ describe('redirect to account form button', () => {
         </MountPointContext.Provider>
       </AppLike>
     )
-    fireEvent.click(root.getByText('Reconnect'))
+    fireEvent.click(root.getByText('Set the connection'))
     expect(replaceHistory).toHaveBeenCalledWith(
       '/accounts/account-id-1337/edit?reconnect'
     )
