@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.14.1...cozy-harvest-lib@9.15.0) (2022-06-21)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** TriggerManager proptypes for OAuthFormWrapperComp ([c3592aa](https://github.com/cozy/cozy-libs/commit/c3592aa9cbdc953b12f3a2f715c781c054cad616))
+
+
+### Features
+
+* Change wording for adding oauth bank account ([31cd0fe](https://github.com/cozy/cozy-libs/commit/31cd0fecf17f03b8125a08a007cac1ba006fc194))
+
+
+
+
+
 ## [9.14.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.14.0...cozy-harvest-lib@9.14.1) (2022-06-21)
 
 
