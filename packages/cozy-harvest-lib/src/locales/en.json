@@ -124,7 +124,7 @@
     "baseDir": "/Administrative"
   },
   "error": {
-    "reconnect-via-form": "Reconnect",
+    "reconnect-via-form": "Set the connection",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
         "title": "Storage full",
