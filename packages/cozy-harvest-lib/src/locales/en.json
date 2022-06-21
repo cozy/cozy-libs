@@ -394,7 +394,7 @@
       "label": "Reconnect"
     },
     "connect": {
-      "label": "Connect"
+      "label": "Add your bank"
     },
     "window": {
       "title": "OAuth"
