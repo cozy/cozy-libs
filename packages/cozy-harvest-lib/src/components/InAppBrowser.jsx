@@ -31,11 +31,16 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
     async function insideEffect() {
       if (isReady) {
         try {
+          logger.debug('url at the beginning: ', url)
           const sessionCode = await fetchSessionCode()
           logger.debug('got session code', sessionCode)
           const iabUrl = new URL(url)
           iabUrl.searchParams.append(tokenParamName, sessionCode)
-          const result = await showInAppBrowser(iabUrl.toString())
+          // we need to decodeURIComponent since toString() encodes URL
+          // but native browser will also encode them.
+          const urlToOpen = decodeURIComponent(iabUrl.toString())
+          logger.debug('url to open: ', urlToOpen)
+          const result = await showInAppBrowser(urlToOpen)
           if (result?.type !== 'dismiss' && result?.type !== 'cancel') {
             logger.error('Unexpected InAppBrowser result', result)
           }
