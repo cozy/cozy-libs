@@ -250,6 +250,7 @@ ConfigurationTab.propTypes = {
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
   error: PropTypes.object,
+  flow: PropTypes.object,
   addAccount: PropTypes.func.isRequired,
   onAccountDeleted: PropTypes.func.isRequired,
   intentsApi: intentsApiProptype,

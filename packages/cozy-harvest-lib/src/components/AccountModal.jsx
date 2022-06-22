@@ -58,7 +58,18 @@ export class AccountModal extends Component {
   }
 
   async componentDidUpdate(prevProps) {
-    if (this.props.accountId !== prevProps.accountId) {
+
+    const { accountId, accountsAndTriggers } = this.props
+    const matchingTrigger = get(
+      accountsAndTriggers.find(
+        accountAndTrigger => accountAndTrigger.account._id === accountId
+      ),
+      'trigger'
+    )
+
+    const hasTriggerStatusChanged = matchingTrigger && matchingTrigger.current_state.status !== this.trigger.current_state.status
+
+    if (this.props.accountId !== prevProps.accountId || hasTriggerStatusChanged) {
       return await this.loadSelectedAccountId()
     }
   }

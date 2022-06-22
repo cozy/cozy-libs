@@ -27,7 +27,7 @@ export const createTrigger = async (client, attributes) => {
  * Fetch the trigger based on its id
  * @param  {Object} client CozyClient
  * @param  {string} id
- * @return {Object} Fetched trigger
+ * @return {Object} Fetched trigger data
  */
 export const fetchTrigger = async (client, id) => {
   const { data } = await client.collection(TRIGGERS_DOCTYPE).get(id)
