@@ -138,7 +138,7 @@ export class EditAccountModal extends Component {
     this.props.trackPage('editer_identifiants')
   }
   /**
-   * TODO use queryConnect to know if we're fecthing or not
+   * TODO use queryConnect to know if we're fetching or not
    */
   async fetchAccount(trigger) {
     const { client } = this.props
