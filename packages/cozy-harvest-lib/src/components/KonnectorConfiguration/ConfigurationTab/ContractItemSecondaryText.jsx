@@ -10,7 +10,6 @@ import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
-import { CollectionPropType } from './Contracts'
 import { isDeleted, isDisabled, isErrored, isImported } from './helpers'
 
 const dateFnsLocales = {
@@ -64,7 +63,7 @@ const ContractItemSecondaryText = ({ contract }) => {
 }
 
 ContractItemSecondaryText.propTypes = {
-  contracts: PropTypes.oneOfType([CollectionPropType, PropTypes.array])
+  contract: PropTypes.object
 }
 
 export default ContractItemSecondaryText
