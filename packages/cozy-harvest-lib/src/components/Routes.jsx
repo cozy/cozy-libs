@@ -1,5 +1,5 @@
 import React from 'react'
-import { Switch, Route, Redirect } from 'react-router'
+import { Switch, Route, Redirect } from 'react-router-dom'
 import { withStyles } from '@material-ui/core/styles'
 
 import Dialog from 'cozy-ui/transpiled/react/Dialog'

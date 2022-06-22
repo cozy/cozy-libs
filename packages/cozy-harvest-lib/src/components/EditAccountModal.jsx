@@ -23,7 +23,7 @@ import { withMountPointHistory } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }

@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import compose from 'lodash/flowRight'
-import { withRouter } from 'react-router'
+import { withRouter } from 'react-router-dom'
 
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
