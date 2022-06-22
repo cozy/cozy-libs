@@ -17,13 +17,7 @@ const isComponentWillMountOrWillUpdateWarning = message => {
   )
 }
 
-const isWarningForComponent = (message, Component) => {
-  return message.endsWith(
-    `Please update the following components: ${Component}`
-  )
-}
-
-const shouldIgnoreWarning = message => {
+const shouldIgnoreWarning = (message, component) => {
   /**
    * We cannot control ReactFinalForm, ReactSwipableView and Select
    * thus we ignore their warnings, this can be
@@ -32,9 +26,9 @@ const shouldIgnoreWarning = message => {
    */
   return (
     isComponentWillMountOrWillUpdateWarning(message) &&
-    (isWarningForComponent(message, 'ReactSwipableView') ||
-      isWarningForComponent(message, 'ReactFinalForm') ||
-      isWarningForComponent(message, 'Select'))
+    (component === 'ReactSwipableView' ||
+      component === 'ReactFinalForm' ||
+      component === 'Select')
   )
 }
 
@@ -42,8 +36,8 @@ const originalConsoleWarn = console.warn // eslint-disable-line no-console
 const originalConsoleError = console.error // eslint-disable-line no-console
 
 // eslint-disable-next-line no-console
-console.warn = function (message) {
-  if (shouldIgnoreWarning(message)) {
+console.warn = function (message, component) {
+  if (shouldIgnoreWarning(message, component)) {
     return
   } else {
     originalConsoleWarn.apply(this, arguments)
