@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.15.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.0...cozy-harvest-lib@9.15.1) (2022-06-23)
+
+
+### Bug Fixes
+
+* **account:** Update trigger while status changed ([f3b37dc](https://github.com/cozy/cozy-libs/commit/f3b37dc37b63df591fcafe691020f23c4bea460c))
+
+
+
+
+
 # [9.15.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.14.1...cozy-harvest-lib@9.15.0) (2022-06-21)
 
 
