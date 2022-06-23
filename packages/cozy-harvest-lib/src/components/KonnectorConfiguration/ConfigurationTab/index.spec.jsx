@@ -76,6 +76,7 @@ describe('ConfigurationTab', () => {
       getState: jest.fn().mockReturnValue(flowState)
     }
     const mockClient = createMockClient({ queries: {} })
+    mockClient.stackClient.fetchJSON.mockResolvedValue({ rows: [] })
     const unlockFormProps = {
       checkShouldUnlock,
       UnlockForm: SimpleVaultUnlocker
