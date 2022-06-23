@@ -12,11 +12,11 @@ jest.mock('cozy-client/dist/models/document/locales', () => ({
 
 const mockAttrs = ({
   type = '',
-  maxLength = 0,
-  minLength = 0,
+  maxLength,
+  minLength,
   required = false,
   mask = null,
-  maskPlaceholder = '_'
+  maskPlaceholder = 'ˍ'
 } = {}) => {
   return {
     name: 'name01',
