@@ -31,14 +31,7 @@ const InputTextAdapter = ({
   setIsFocus,
   idx
 }) => {
-  const {
-    name,
-    inputLabel,
-    mask,
-    maskPlaceholder = 'ˍ',
-    maxLength,
-    minLength
-  } = attrs
+  const { name, inputLabel, mask, maskPlaceholder = 'ˍ' } = attrs
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
@@ -160,8 +153,8 @@ const InputTextAdapter = ({
       helperText={helperText}
       value={currentValue}
       inputProps={{
-        maxLength: maxLength,
-        minLength: minLength,
+        maxLength: expectedLength.max,
+        minLength: expectedLength.min,
         inputMode: getInputMode(inputType),
         'data-testid': 'TextField-input'
       }}
