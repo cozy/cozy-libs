@@ -24,17 +24,16 @@ import log from 'cozy-logger'
 export const makeConstraintsOfInput = attrs => {
   const { type = '', required = false, mask } = attrs || {}
 
-  const maskLength = mask ? mask.replaceAll(' ', '').length : null
-  const minLength = maskLength || attrs?.minLength || 0
-  const maxLength = maskLength || attrs?.maxLength || 0
-
+  const maskLength = mask?.replaceAll(/\s/g, '')?.length
+  const minLength = (required && maskLength) || (attrs?.minLength ?? null)
+  const maxLength = maskLength ?? attrs?.maxLength ?? null
   const acceptedTypes = ['number', 'text']
 
   const result = {
     inputType: '',
     expectedLength: {
-      min: maxLength > 0 ? Math.min(minLength, maxLength) : minLength,
-      max: maxLength > 0 ? Math.max(minLength, maxLength) : maxLength
+      min: minLength,
+      max: maxLength
     },
     isRequired: required
   }
