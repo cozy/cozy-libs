@@ -73,6 +73,7 @@ export const handleOAuthResponse = (options = {}) => {
   const queryParams = new URLSearchParams(window.location.search)
 
   const accountId = queryParams.get('account')
+  const errorMsg = queryParams.get('error')
 
   /**
    * Key for localStorage, used at the beginning of the OAuth process to store
@@ -84,6 +85,7 @@ export const handleOAuthResponse = (options = {}) => {
 
   realtime.sendNotification('io.cozy.accounts', OAUTH_REALTIME_CHANNEL, {
     key: accountId,
+    error: errorMsg,
     oAuthStateKey
   })
 

@@ -16,6 +16,7 @@ import {
 import Popup from './Popup'
 import InAppBrowser from './InAppBrowser'
 import { intentsApiProptype } from '../helpers/proptypes'
+import logger from '../logger'
 
 const OAUTH_POPUP_HEIGHT = 800
 const OAUTH_POPUP_WIDTH = 800
@@ -90,6 +91,12 @@ export class OAuthWindow extends PureComponent {
   handleOAuthData(data) {
     const { konnector, onSuccess } = this.props
     if (!checkOAuthData(konnector, data)) return
+
+    if (data.error) {
+      logger.info('OAuthWindow: oauth error message', data.error)
+      this.handleClose()
+      return
+    }
     this.setState({ succeed: true })
 
     if (typeof onSuccess !== 'function') return
