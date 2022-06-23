@@ -126,11 +126,31 @@ describe('Oauth helper', () => {
 
     afterEach(() => {
       window.location = originalLocation
+      jest.resetAllMocks()
     })
 
     it('should send message with query string data', () => {
       const expectedOAuthData = {
+        error: null,
         key: 'bc2aca6566cf4a72afe6c615aa1e3d31',
+        oAuthStateKey: '70720eb0-6204-484d'
+      }
+
+      handleOAuthResponse({ realtime })
+      expect(realtime.sendNotification).toHaveBeenCalledWith(
+        'io.cozy.accounts',
+        OAUTH_REALTIME_CHANNEL,
+        expectedOAuthData
+      )
+    })
+
+    it('should send message with error if any', () => {
+      window.location = {
+        search: 'error=dismissed&state=70720eb0-6204-484d'
+      }
+      const expectedOAuthData = {
+        error: 'dismissed',
+        key: null,
         oAuthStateKey: '70720eb0-6204-484d'
       }
 
