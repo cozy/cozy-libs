@@ -4,8 +4,8 @@ import log from 'cozy-logger'
  * @typedef {object} MakeConstraintsOfInputParam
  * @property {'text'|'number'} [type] - A string specifying the type of input
  * @property {boolean} [required] - Indicates that the user must specify a value for the input
- * @property {object} [minLength] - Defines the minimum number of characters can enter into the input
- * @property {string} [maxLength] - Defines the maximum number of characters can enter into the input
+ * @property {number} [minLength] - Defines the minimum number of characters can enter into the input
+ * @property {number} [maxLength] - Defines the maximum number of characters can enter into the input
  */
 
 /**
