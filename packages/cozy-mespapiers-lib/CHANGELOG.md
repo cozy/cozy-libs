@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.34.14](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.34.13...cozy-mespapiers-lib@0.34.14) (2022-06-24)
+
+
+### Bug Fixes
+
+* Make the filling of the `mask` mandatory only if it's required ([6777f90](https://github.com/cozy/cozy-libs/commit/6777f9086c052b9b20eab5114338ebd90c62e38d))
+* Types of parameters ([0806597](https://github.com/cozy/cozy-libs/commit/080659719932e455f09af3bab8548dbc71d7b057))
+* Use correct value for minLength & maxLength ([3dfe5cd](https://github.com/cozy/cozy-libs/commit/3dfe5cd5937eeac48a551d1bc67059043ba2b6e0))
+
+
+
+
+
 ## [0.34.13](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.34.12...cozy-mespapiers-lib@0.34.13) (2022-06-23)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
