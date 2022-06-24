@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.2.1 (2022-06-24)
+
+
+### Bug Fixes
+
+* Make isFlagshipApp and getFlagshipMetadata work on node environment ([636ad93](https://github.com/cozy/cozy-libs/commit/636ad93748b9f0cfd90fa2c2316bf914a71ab326))
+
+
+
+
+
 # 2.2.0 (2022-06-03)
 
 
