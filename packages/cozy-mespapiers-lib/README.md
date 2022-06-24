@@ -149,7 +149,7 @@ export default MesPapiersView
 ```
 # Call modal with URL
 In your application, if you want to call a modal to create a Paper, you just have to call the `/paper/create` or `/paper/create/:qualificationLabel` route with the query parameter `backgroundPath=<currentPath>`
-Exemple:
+Example:
 ```jsx
 const { pathname } = useLocation()
 
