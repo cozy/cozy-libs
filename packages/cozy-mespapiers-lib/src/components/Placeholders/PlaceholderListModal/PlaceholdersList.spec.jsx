@@ -12,6 +12,11 @@ const fakeQualificationItems = [
     label: 'isp_invoice'
   }
 ]
+/* eslint-disable react/display-name */
+jest.mock('../../ImportDropdown/ImportDropdownItems', () => () => {
+  return <div data-testid="ImportDropdownItems" />
+})
+/* eslint-enable react/display-name */
 
 const setup = () => {
   return render(
