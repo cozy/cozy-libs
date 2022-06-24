@@ -81,8 +81,8 @@ describe('ConfigurationTab', () => {
       UnlockForm: SimpleVaultUnlocker
     }
     const root = render(
-      <MountPointProvider baseRoute="/">
-        <AppLike client={mockClient}>
+      <AppLike client={mockClient}>
+        <MountPointProvider baseRoute="/">
           <VaultProvider instance="http://cozy.tools:8080">
             <VaultUnlockProvider checkShouldUnlock={checkShouldUnlock}>
               <ConfigurationTab
@@ -95,8 +95,8 @@ describe('ConfigurationTab', () => {
               <VaultUnlockPlaceholder unlockFormProps={unlockFormProps} />
             </VaultUnlockProvider>
           </VaultProvider>
-        </AppLike>
-      </MountPointProvider>
+        </MountPointProvider>
+      </AppLike>
     )
     return { root }
   }
