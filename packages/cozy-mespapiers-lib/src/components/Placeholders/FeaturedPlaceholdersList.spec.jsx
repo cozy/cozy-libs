@@ -35,6 +35,9 @@ const fakePlaceholders = [
 ]
 
 /* eslint-disable react/display-name */
+jest.mock('../ImportDropdown/ImportDropdownItems', () => () => {
+  return <div data-testid="ImportDropdownItems" />
+})
 jest.mock('./Placeholder', () => ({ onClick }) => {
   const fakePlaceholder = {
     label: 'tax_notice',
