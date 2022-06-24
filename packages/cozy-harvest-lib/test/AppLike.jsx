@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import I18n from 'cozy-ui/transpiled/react/I18n'
 import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
@@ -21,7 +22,9 @@ const AppLike = ({
     <CozyClientProvider client={client}>
       <BreakpointsProvider>
         <I18n lang="en" dictRequire={() => locale || enLocale}>
-          <ReduxProvider store={store}>{children}</ReduxProvider>
+          <ReduxProvider store={store}>
+            <Router>{children}</Router>
+          </ReduxProvider>
         </I18n>
       </BreakpointsProvider>
     </CozyClientProvider>
