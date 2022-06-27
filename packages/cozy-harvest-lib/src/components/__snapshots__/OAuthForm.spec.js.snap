@@ -1,5 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`OAuthForm should handle oauth cancelation 1`] = `
+<React.Fragment>
+  <withI18n(withClient(withKonnectorLocales(TriggerErrorInfo))
+    className="u-mb-1"
+    error={[Error: OAUTH_CANCELED]}
+    konnector={
+      Object {
+        "slug": "test-konnector",
+      }
+    }
+  />
+  <DefaultButton
+    busy={true}
+    className="u-mt-1"
+    disabled={true}
+    extension="full"
+    label="oauth.connect.label"
+    onClick={[Function]}
+  />
+</React.Fragment>
+`;
+
 exports[`OAuthForm should render 1`] = `
 <React.Fragment>
   <DefaultButton

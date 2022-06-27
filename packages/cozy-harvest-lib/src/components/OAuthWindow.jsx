@@ -85,16 +85,20 @@ export class OAuthWindow extends PureComponent {
    * Handles OAuth data. OAuth data may be provided by different way:
    * * realtime message from web apps (see handleMessage)
    * * url changes from mobile apps
-   * @param  {string} data.key `io.cozy.accounts` id The created OAuth account
-   * @param  {string} data.oAuthStateKey key for localStorage
+   *
+   * @param  {String} data.key - `io.cozy.accounts` id The created OAuth account
+   * @param  {String} data.error - error message
+   * @param  {String} data.oAuthStateKey - key for localStorage
    */
   handleOAuthData(data) {
-    const { konnector, onSuccess } = this.props
+    const { konnector, onSuccess, onCancel } = this.props
     if (!checkOAuthData(konnector, data)) return
 
     if (data.error) {
       logger.info('OAuthWindow: oauth error message', data.error)
-      this.handleClose()
+      if (onCancel) {
+        onCancel(data.error)
+      }
       return
     }
     this.setState({ succeed: true })
@@ -131,9 +135,11 @@ export class OAuthWindow extends PureComponent {
   handleUrlChange(url) {
     const account = url.searchParams.get('account')
     const state = url.searchParams.get('state')
+    const error = url.searchParams.get('error')
     if (account && state) {
       return this.handleOAuthData({
         key: account,
+        error,
         oAuthStateKey: state
       })
     }
@@ -142,8 +148,10 @@ export class OAuthWindow extends PureComponent {
       const testedURL = new URL(redirect)
       const accountInRedirect = testedURL.searchParams.get('account')
       const stateInRedirect = testedURL.searchParams.get('state')
+      const errorInRedirect = testedURL.searchParams.get('error')
       return this.handleOAuthData({
         key: accountInRedirect,
+        error: errorInRedirect,
         oAuthStateKey: stateInRedirect
       })
     }

@@ -8,6 +8,9 @@ import withConnectionFlow from '../models/withConnectionFlow'
 import withLocales from './hoc/withLocales'
 import { findKonnectorPolicy } from '../konnector-policies'
 import { intentsApiProptype } from '../helpers/proptypes'
+import TriggerErrorInfo from './infos/TriggerErrorInfo'
+import { ERROR_EVENT } from '../models/flowEvents'
+import { KonnectorJobError } from '../helpers/konnectors'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -58,7 +61,22 @@ export class OAuthForm extends PureComponent {
     this.showOAuthWindow()
   }
 
-  handleOAuthCancel() {
+  /**
+   *  Translates errors from oauth redirection url to harvest know error messages
+   *
+   * @param {String} err - original error message in redirection url
+   * @returns {KonnectorJobError|String}
+   */
+  translateOauthError(err) {
+    if (err === 'access_denied') {
+      return new KonnectorJobError('OAUTH_CANCELED')
+    } else {
+      return err
+    }
+  }
+
+  handleOAuthCancel(err) {
+    this.props.flow.triggerEvent(ERROR_EVENT, this.translateOauthError(err))
     this.hideOAuthWindow()
   }
 
@@ -74,6 +92,9 @@ export class OAuthForm extends PureComponent {
     const { konnector, t, flowState, reconnect, account, intentsApi } =
       this.props
     const { showOAuthWindow, needExtraParams, extraParams } = this.state
+
+    const error = flowState.error
+
     const isBusy =
       showOAuthWindow === true ||
       flowState.running ||
@@ -85,6 +106,13 @@ export class OAuthForm extends PureComponent {
 
     return (
       <>
+        {error && (
+          <TriggerErrorInfo
+            className="u-mb-1"
+            error={error}
+            konnector={konnector}
+          />
+        )}
         <Button
           className="u-mt-1"
           busy={isBusy}
