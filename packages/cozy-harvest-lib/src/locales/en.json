@@ -134,6 +134,10 @@
         "title": "Challenge required",
         "description": "The website requires a second authentification factor. You may re-run the connector manually to provide the code and continue to retrieve your data."
       },
+      "OAUTH_CANCELED": {
+        "title": "Canceled",
+        "description": "We could not add your bank since you canceled the connection. Click \"Add your bank\" one more time to try again."
+      },
       "LOGIN_FAILED": {
         "title": "Incorrect or expired credentials",
         "description": "Sorry, your login or password are invalid or are expired. You may check your credentials on [%{name}](%{link}) website before updating."

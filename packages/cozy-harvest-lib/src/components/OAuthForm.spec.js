@@ -4,6 +4,7 @@ import { shallow } from 'enzyme'
 
 import { OAuthForm } from 'components/OAuthForm'
 import { findKonnectorPolicy } from '../konnector-policies'
+import { KonnectorJobError } from '../helpers/konnectors'
 jest.mock('../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
 }))
@@ -58,5 +59,15 @@ describe('OAuthForm', () => {
       flow: undefined,
       konnector: { slug: 'test-konnector' }
     })
+  })
+  it('should handle oauth cancelation', () => {
+    const component = shallow(
+      <OAuthForm
+        flowState={{ error: new KonnectorJobError('OAUTH_CANCELED') }}
+        konnector={fixtures.konnector}
+        t={t}
+      />
+    ).getElement()
+    expect(component).toMatchSnapshot()
   })
 })

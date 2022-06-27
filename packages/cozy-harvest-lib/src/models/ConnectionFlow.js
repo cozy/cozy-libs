@@ -219,6 +219,7 @@ export class ConnectionFlow {
       this.setState({ status: eventToStatus[eventName] })
     }
     if (eventName === ERROR_EVENT) {
+      this.setState({ accountError: args[0] })
       this.refetchTrigger()
     }
     this.emit(eventName, ...args)

@@ -134,6 +134,10 @@
         "title": "Second facteur d’authentification demandé",
         "description": "Le site demande une authentification forte à deux facteurs. Vous devez relancer le connecteur manuellement pour vous authentifier et continuer à récupérer vos données."
       },
+      "OAUTH_CANCELED": {
+        "title": "Annulé",
+        "description": "Nous n'avons pas pu ajouter votre banque car vous avez annulé la connexion. Cliquez sur \"Ajouter votre banque\" encore une fois pour faire un nouvel essai."
+      },
       "LOGIN_FAILED": {
         "title": "Identifiants erronés ou expirés",
         "description": "Votre identifiant et/ou mot de passe ne semblent pas corrects. Merci de les vérifier sur le site [%{name}](%{link}) avant de réessayer."
