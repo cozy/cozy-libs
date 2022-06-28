@@ -14,7 +14,7 @@
     "phoneDownload": "Make available offline",
     "qualify": "Qualify",
     "rename": "Rename",
-    "selectPapers": "Select papers…",
+    "forwardPapers": "Forward papers…",
     "select": "Select",
     "share": "Share",
     "trash": "Remove",
@@ -262,9 +262,9 @@
   },
   "Multiselect": {
     "backdrop": "Gather your papers...",
-    "title": "Select papers",
-    "empty": "Select papers to perform a bulk upload or download.",
-    "select": "Select or create a paper",
+    "title": "My Selection",
+    "empty": "Select the papers to be forwarded",
+    "select": "Add to my selection",
     "folderZipName": "%{contactName} - papers - %{date}.zip"
   }
 }
