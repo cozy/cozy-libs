@@ -13,12 +13,14 @@ import { trash } from '../Actions/Items/trash'
 import { open } from '../Actions/Items/open'
 import { viewInDrive } from '../Actions/Items/viewInDrive'
 import { makeActionVariant, makeActions } from '../Actions/utils'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PapersList = ({ papers }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
   const [maxDisplay, setMaxDisplay] = useState(papers.maxDisplay)
+  const { addMultiSelectionFile } = useMultiSelection()
 
   const actionVariant = makeActionVariant()
   const actions = useMemo(
@@ -27,11 +29,12 @@ const PapersList = ({ papers }) => {
         [select, hr, ...actionVariant, open, hr, viewInDrive, hr, trash],
         {
           client,
+          addMultiSelectionFile,
           pushModal,
           popModal
         }
       ),
-    [actionVariant, client, popModal, pushModal]
+    [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
   )
 
   const handleClick = () => {
