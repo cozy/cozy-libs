@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.15.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.2...cozy-harvest-lib@9.15.3) (2022-06-28)
+
+
+### Bug Fixes
+
+* **deps:** update dependency jsdom to v16.5.0 [security] ([d9f1689](https://github.com/cozy/cozy-libs/commit/d9f16896f2c071c87bb6e04f2c029affd7d513e9))
+
+
+
+
+
 ## [9.15.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.1...cozy-harvest-lib@9.15.2) (2022-06-24)
 
 **Note:** Version bump only for package cozy-harvest-lib
