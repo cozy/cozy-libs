@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.15.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.3...cozy-harvest-lib@9.15.4) (2022-06-28)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Revert RedirectToAccountFormButton label & size ([b942dce](https://github.com/cozy/cozy-libs/commit/b942dcef733a295e2334c8fdd3906f2f66318e70))
+
+
+
+
+
 ## [9.15.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.2...cozy-harvest-lib@9.15.3) (2022-06-28)
 
 
