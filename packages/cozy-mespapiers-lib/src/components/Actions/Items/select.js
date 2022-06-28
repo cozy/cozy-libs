@@ -16,7 +16,7 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
       return (
         <ActionMenuItemWrapper
           className={className}
-          icon="select-all"
+          icon="paperplane"
           onClick={() => {
             history.push({
               pathname: `/paper/multiselect`,
