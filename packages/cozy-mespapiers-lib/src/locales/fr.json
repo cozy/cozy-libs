@@ -6,7 +6,7 @@
   },
   "action": {
     "download": "Télécharger",
-    "forward": "Transférer",
+    "forward": "Transmettre",
     "help": "Aides",
     "installHomepage": "Installer sur l’accueil de mon mobile",
     "moveTo": "Déplacer vers…",
@@ -14,7 +14,7 @@
     "phoneDownload": "Rendre accessible hors-ligne",
     "qualify": "Qualifier",
     "rename": "Renommer",
-    "selectPapers": "Sélectionner des papiers…",
+    "forwardPapers": "Transmettre des papiers",
     "select": "Sélectionner",
     "share": "Partager",
     "trash": "Supprimer",
@@ -262,9 +262,9 @@
   },
   "Multiselect": {
     "backdrop": "Rassemblement de vos papiers...",
-    "title": "Sélectionner des papiers",
-    "empty": "Sélectionner des papiers pour effectuer un téléchargement ou un transfert groupé.",
-    "select": "Sélectionner ou créer un papier",
+    "title": "Ma Sélection",
+    "empty": "Sélectionner les papiers à transmettre",
+    "select": "Ajouter à ma sélection",
     "folderZipName": "%{contactName} - papiers - %{date}.zip"
   }
 }

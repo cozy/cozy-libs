@@ -28,7 +28,7 @@ export const select = ({ hideActionsMenu }) => {
             files.length > 0 && addMultiSelectionFile(files[0])
           }}
         >
-          {files.length === 0 ? t('action.selectPapers') : t('action.select')}
+          {files.length === 0 ? t('action.forwardPapers') : t('action.select')}
         </ActionMenuItemWrapper>
       )
     }
