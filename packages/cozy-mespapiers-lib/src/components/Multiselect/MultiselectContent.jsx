@@ -1,5 +1,4 @@
-import React from 'react'
-import { useHistory } from 'react-router-dom'
+import React, { useState } from 'react'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -8,10 +7,11 @@ import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import GhostButton from './GhostButton'
 import PaperCardItem from '../Papers/PaperCardItem'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import MultiselectPaperList from './MultiselectPaperList'
 
 const MultiselectContent = () => {
+  const [isActive, setIsActive] = useState(false)
   const { t } = useI18n()
-  const history = useHistory()
   const { multiSelectionFiles } = useMultiSelection()
 
   return (
@@ -34,8 +34,10 @@ const MultiselectContent = () => {
       <GhostButton
         label={t('Multiselect.select')}
         fullWidth
-        onClick={() => history.push(`/paper`)}
+        onClick={() => setIsActive(true)}
       />
+
+      {isActive && <MultiselectPaperList setIsActive={setIsActive} />}
     </div>
   )
 }
