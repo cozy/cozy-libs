@@ -21,11 +21,25 @@ import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 import HomeToolbar from './HomeToolbar'
 
+import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
+import PaperItem from '../Papers/PaperItem'
+
 const {
   themes: { themesList }
 } = models.document
 
-const Home = ({ setSelectedThemeLabel }) => {
+const SearchResult = ({ filteredPapers }) => {
+  return (
+    <List>
+      {filteredPapers.map(paper => {
+        return <PaperItem key={paper._id} paper={paper} />
+      })}
+    </List>
+  )
+}
+
+const Home = () => {
   const [searchValue, setSearchValue] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
   const { t } = useI18n()
@@ -49,7 +63,10 @@ const Home = ({ setSelectedThemeLabel }) => {
   )
 
   const filteredPapers = filterPapersByThemeAndSearchValue({
-    files: allPapersByCategories,
+    files:
+      searchValue.length > 0 || selectedTheme
+        ? filesByLabels
+        : allPapersByCategories,
     theme: selectedTheme,
     search: searchValue,
     scannerT
@@ -108,11 +125,23 @@ const Home = ({ setSelectedThemeLabel }) => {
           text={t('Home.Empty.text')}
           className="u-ph-1"
         />
+      ) : searchValue.length > 0 || selectedTheme ? (
+        filteredPapers.length > 0 ? (
+          <>
+            <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
+            <SearchResult filteredPapers={filteredPapers} />
+          </>
+        ) : (
+          <Empty
+            icon={HomeCloud}
+            iconSize="large"
+            title={t('Home.Empty.title')}
+            text={t('Home.Empty.text')}
+            className="u-ph-1"
+          />
+        )
       ) : (
-        <PaperGroup
-          allPapersByCategories={filteredPapers}
-          setSelectedThemeLabel={setSelectedThemeLabel}
-        />
+        <PaperGroup allPapersByCategories={filteredPapers} />
       )}
 
       {!isMultiSelectionActive && (
