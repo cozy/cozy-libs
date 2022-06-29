@@ -24,6 +24,7 @@ const PaperItem = ({
   divider,
   className = '',
   classes = {},
+  withoutCheckbox,
   children
 }) => {
   const { f, t } = useI18n()
@@ -63,6 +64,12 @@ const PaperItem = ({
         classes={classes}
         onClick={handleClick}
       >
+        {!withoutCheckbox && isMultiSelectionActive && (
+          <Checkbox
+            checked={multiSelectionFiles.some(file => file._id === paper._id)}
+            value={paper._id}
+          />
+        )}
         <ListItemIcon>
           <FileImageLoader
             client={client}
