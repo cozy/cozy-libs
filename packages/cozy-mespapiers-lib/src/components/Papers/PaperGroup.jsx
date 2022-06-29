@@ -1,4 +1,4 @@
-import React, { Fragment, useCallback } from 'react'
+import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import { useHistory } from 'react-router-dom'
@@ -19,29 +19,31 @@ import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { getLinksType } from '../../utils/getLinksType'
 
 const useStyles = makeStyles({
   root: { textIndent: '1rem' }
 })
 
-const PaperGroup = ({ allPapersByCategories }) => {
+const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
   const classes = useStyles()
   const client = useClient()
   const { isMobile } = useBreakpoints()
   const history = useHistory()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
+  const { isMultiSelectionActive } = useMultiSelection()
 
-  const goPapersList = useCallback(
-    category => {
+  const goPapersList = category => {
+    if (isMultiSelectionActive) {
+      setSelectedThemeLabel(category)
+    } else {
       history.push({
         pathname: `/paper/files/${category}`
       })
-    },
-    [history]
-  )
-
+    }
+  }
 
   return (
     <List>
@@ -102,7 +104,8 @@ const PaperGroup = ({ allPapersByCategories }) => {
 }
 
 PaperGroup.propTypes = {
-  allPapersByCategories: PropTypes.arrayOf(PropTypes.object)
+  allPapersByCategories: PropTypes.arrayOf(PropTypes.object),
+  setSelectedThemeLabel: PropTypes.func
 }
 
 export default PaperGroup
