@@ -91,7 +91,8 @@ export const fetchContractSynchronizationUrl = async ({
     konnector,
     account
   })
-  return `${url}/auth/webview/manage?client_id=${clientId}&code=${code}`
+  const connId = getBIConnectionIdFromAccount(account)
+  return `${url}/auth/webview/manage?client_id=${clientId}&code=${code}&connection_id=${connId}`
 }
 
 /**
