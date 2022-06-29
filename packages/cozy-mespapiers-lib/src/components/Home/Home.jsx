@@ -1,4 +1,5 @@
 import React, { useMemo, useState } from 'react'
+import PropTypes from 'prop-types'
 import uniqBy from 'lodash/uniqBy'
 
 import { isQueryLoading, useQueryAll, models } from 'cozy-client'
@@ -24,7 +25,7 @@ const {
   themes: { themesList }
 } = models.document
 
-const Home = () => {
+const Home = ({ setSelectedThemeLabel }) => {
   const [searchValue, setSearchValue] = useState('')
   const [selectedTheme, setSelectedTheme] = useState('')
   const { t } = useI18n()
@@ -108,7 +109,10 @@ const Home = () => {
           className="u-ph-1"
         />
       ) : (
-        <PaperGroup allPapersByCategories={filteredPapers} />
+        <PaperGroup
+          allPapersByCategories={filteredPapers}
+          setSelectedThemeLabel={setSelectedThemeLabel}
+        />
       )}
 
       {!isMultiSelectionActive && (
@@ -116,6 +120,10 @@ const Home = () => {
       )}
     </>
   )
+}
+
+Home.propTypes = {
+  setSelectedThemeLabel: PropTypes.func
 }
 
 export default Home
