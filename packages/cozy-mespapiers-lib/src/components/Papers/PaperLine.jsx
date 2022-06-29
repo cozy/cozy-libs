@@ -8,7 +8,6 @@ import { ActionMenuHeader } from 'cozy-ui/transpiled/react/ActionMenu'
 import Filename from 'cozy-ui/transpiled/react/Filename'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import Radio from 'cozy-ui/transpiled/react/Radios'
 
 import { ActionsItems } from '../Actions/ActionsItems'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
@@ -50,9 +49,7 @@ const PaperLine = ({ paper, divider, actions }) => {
   return (
     <>
       <PaperItem paper={paper} divider={divider} onClick={handleClick}>
-        {isMultiSelectionActive ? (
-          <Radio onClick={handleClick} />
-        ) : (
+        {!isMultiSelectionActive && (
           <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
             <Icon icon="dots" />
           </IconButton>
