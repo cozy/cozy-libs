@@ -15,6 +15,7 @@ import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 
 import { getLinksType } from '../../utils/getLinksType'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const validPageName = page => page === 'front' || page === 'back'
 
@@ -23,16 +24,36 @@ const PaperItem = ({
   divider,
   className = '',
   classes = {},
-  onClick,
   children
 }) => {
   const { f, t } = useI18n()
   const client = useClient()
+  const history = useHistory()
+  const {
+    multiSelectionFiles,
+    isMultiSelectionActive,
+    removeMultiSelectionFile,
+    addMultiSelectionFile
+  } = useMultiSelection()
 
   const paperLabel = paper?.metadata?.qualification?.page
   const paperDate = paper?.metadata?.datetime
     ? f(paper?.metadata?.datetime, 'DD/MM/YYYY')
     : null
+
+  const handleClick = () => {
+    if (isMultiSelectionActive) {
+      const paperAlreadySelected = multiSelectionFiles.some(
+        file => file._id === paper._id
+      )
+      if (paperAlreadySelected) removeMultiSelectionFile(paper)
+      else addMultiSelectionFile(paper)
+    } else {
+      history.push({
+        pathname: `/paper/file/${paper.id}`
+      })
+    }
+  }
 
   return (
     <>
@@ -40,7 +61,7 @@ const PaperItem = ({
         button
         className={className}
         classes={classes}
-        onClick={onClick}
+        onClick={handleClick}
       >
         <ListItemIcon>
           <FileImageLoader
