@@ -216,12 +216,12 @@ describe('fetchContractSynchronizationUrl', () => {
     })
 
     const url = await fetchContractSynchronizationUrl({
-      account,
+      account: { ...account, data: { auth: { bi: { connId: 1337 } } } },
       client,
       konnector
     })
     expect(url).toEqual(
-      'https://cozy.biapi.pro/2.0/auth/webview/manage?client_id=test-client-id&code=bi-temporary-access-token-145613'
+      'https://cozy.biapi.pro/2.0/auth/webview/manage?client_id=test-client-id&code=bi-temporary-access-token-145613&connection_id=1337'
     )
   })
 })
