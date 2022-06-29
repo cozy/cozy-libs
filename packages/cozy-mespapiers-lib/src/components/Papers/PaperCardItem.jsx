@@ -26,7 +26,12 @@ const PaperCardItem = ({ paper, divider, className, square = false }) => {
 
   return (
     <Paper className={`u-h-3 ${className}`} square={square}>
-      <PaperItem paper={paper} divider={divider} classes={classes}>
+      <PaperItem
+        paper={paper}
+        divider={divider}
+        classes={classes}
+        withoutCheckbox
+      >
         <IconButton
           color="secondary"
           onClick={() => removeMultiSelectionFile(paper)}
