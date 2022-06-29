@@ -8,6 +8,7 @@ import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 
 import { makeActions } from '../Actions/utils'
 import { select } from '../Actions/Items/select'
+import { createPaper } from '../Actions/Items/createPaper'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import { ActionsItems } from '../Actions/ActionsItems'
 
@@ -20,7 +21,7 @@ const MoreOptions = () => {
   const hideActionsMenu = () => setGeneralOptions(false)
   const toggleActionsMenu = () => setGeneralOptions(prev => !prev)
 
-  const actions = makeActions([select], {
+  const actions = makeActions([createPaper, select], {
     client,
     hideActionsMenu
   })
