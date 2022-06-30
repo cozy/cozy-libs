@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.35.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.34.18...cozy-mespapiers-lib@0.35.0) (2022-06-30)
+
+
+### Bug Fixes
+
+* Change icon of select action ([ecd2a4b](https://github.com/cozy/cozy-libs/commit/ecd2a4be3e0e2d659a20a4205c81b08f47cb27e8))
+* Update translations ([61b1809](https://github.com/cozy/cozy-libs/commit/61b180933c743d6c08429e6869a57a3389d4556d))
+
+
+### Features
+
+* Add `createPaper` action ([5442371](https://github.com/cozy/cozy-libs/commit/544237173ff36c845ef13f09ef528c5a81511177))
+* Add createPaper action to the general options ([bbc6769](https://github.com/cozy/cozy-libs/commit/bbc67692a839dc2b3a466b3f1a388a38f3c0ed50))
+* Add MultiselectPaperList component ([d4e3d72](https://github.com/cozy/cozy-libs/commit/d4e3d72f16d7717fa2a872dc433a5cb70d8b5de3))
+* Add prop for manage the presence of Checkbox on PaperItem ([9e02631](https://github.com/cozy/cozy-libs/commit/9e026317334ca5297c029bf796e433d6e4fa4804))
+* Change style of Multiselect components ([97751e9](https://github.com/cozy/cozy-libs/commit/97751e9e3ae24935e8516b68206211d244b4e17e))
+* Remove Radio button ([25531f9](https://github.com/cozy/cozy-libs/commit/25531f9c093d72fa86f7d191a5dd70e2e23fde46))
+* Update cozy-ui ([d9c49fe](https://github.com/cozy/cozy-libs/commit/d9c49fece963b2f0c778d4e7427ff57050eda821))
+* Update Home to be used also by the MultiselectPaperList ([ab0cadc](https://github.com/cozy/cozy-libs/commit/ab0cadc9f240da7d473ee95126023e64227e3d53))
+* Update MultiselectContent to be use the MultiselectPaperList ([c758d8f](https://github.com/cozy/cozy-libs/commit/c758d8ff84fd1260a37743802fbf41d784bd1655))
+* Update PaperFab ([ecb11c5](https://github.com/cozy/cozy-libs/commit/ecb11c53b2a0c11933f927da9a1f2e7affb3f6cd))
+* Update PaperGroup to be used also by the MultiselectPaperList ([511b4ef](https://github.com/cozy/cozy-libs/commit/511b4ef940330abaa838e0ecb07508b69e21f367))
+* Update PapersListWrapper to be used also by MultiselectPaperList ([0e6baef](https://github.com/cozy/cozy-libs/commit/0e6baef3f1359d6505ba5ef1a26239b19caa7e13))
+
+
+
+
+
 ## [0.34.18](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.34.17...cozy-mespapiers-lib@0.34.18) (2022-06-28)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
