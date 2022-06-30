@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import get from 'lodash/get'
 
 import { getReferencedBy, isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -19,16 +20,14 @@ import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PapersListToolbar from './PapersListToolbar'
 
-const PapersListWrapper = ({ history, match }) => {
+const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
   const scannerT = useScannerI18n()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
-  const { setIsMultiSelectionActive } = useMultiSelection()
+  const { setIsMultiSelectionActive, isMultiSelectionActive } =
+    useMultiSelection()
 
-  const currentFileTheme = useMemo(
-    () => match?.params?.fileTheme || null,
-    [match]
-  )
+  const currentFileTheme = get(match, 'params.fileTheme', selectedThemeLabel)
   const themeLabel = scannerT(`items.${currentFileTheme}`)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
@@ -86,11 +85,13 @@ const PapersListWrapper = ({ history, match }) => {
 
   return (
     <>
-      <PapersListToolbar
-        title={themeLabel}
-        onBack={() => history.push('/paper')}
-        onClose={() => setIsMultiSelectionActive(false)}
-      />
+      {!isMultiSelectionActive && (
+        <PapersListToolbar
+          title={themeLabel}
+          onBack={() => history.push('/paper')}
+          onClose={() => setIsMultiSelectionActive(false)}
+        />
+      )}
 
       {paperslistByContact.length > 0 ? (
         <PapersListByContact paperslistByContact={paperslistByContact} />
@@ -110,7 +111,8 @@ PapersListWrapper.propTypes = {
     params: PropTypes.shape({
       fileTheme: PropTypes.string.isRequired
     })
-  })
+  }),
+  selectedThemeLabel: PropTypes.string
 }
 
 export default PapersListWrapper
