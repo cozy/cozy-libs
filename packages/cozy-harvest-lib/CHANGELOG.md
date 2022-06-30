@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.4...cozy-harvest-lib@9.16.0) (2022-06-30)
+
+
+### Bug Fixes
+
+* Lint ([c47501c](https://github.com/cozy/cozy-libs/commit/c47501c22dd080f75232acea66e47e4c3376fb82))
+
+
+### Features
+
+* Allow EditAccountModal to have intentsApi ([43c5910](https://github.com/cozy/cozy-libs/commit/43c5910aba989fa09534cdfab8933512da606b2e))
+* Now open the BI manage webview to the correct connection id ([2f3da74](https://github.com/cozy/cozy-libs/commit/2f3da74213710a06ad8877dd350bcd04b86d5e64))
+
+
+
+
+
 ## [9.15.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.3...cozy-harvest-lib@9.15.4) (2022-06-28)
 
 
