@@ -21,8 +21,8 @@ export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
 export const checkOAuthData = (konnector, data) => {
   if (!data) return false
 
-  const { key, oAuthStateKey } = data
-  if (!key || !oAuthStateKey) return false
+  const { oAuthStateKey } = data
+  if (!oAuthStateKey) return false
 
   const accountType = konnectors.getAccountType(konnector)
 
@@ -41,10 +41,10 @@ export const checkOAuthData = (konnector, data) => {
  * @param  {Object} options.realtime (optional) : cozy-realtime instance used to notify the
  * resulting accountId to the origin harvest window after OAuth redirect
  *
- * We are supposed here to be in the OAuth popup, at the end of the process.
+ * We are supposed here to be in the OAuth popup or OAuth inAppBrowser, at the end of the process.
  *
  * We first check that we are actually getting the response we were expecting
- * for, and then we sent the account Id with postMessage
+ * for, and then we sent the account Id with postMessage if any
  *
  * This handler should be typically used in the OAuth popup the following way:
  * ```js
@@ -73,7 +73,6 @@ export const handleOAuthResponse = (options = {}) => {
   const queryParams = new URLSearchParams(window.location.search)
 
   const accountId = queryParams.get('account')
-  if (!accountId) return false
 
   /**
    * Key for localStorage, used at the beginning of the OAuth process to store
