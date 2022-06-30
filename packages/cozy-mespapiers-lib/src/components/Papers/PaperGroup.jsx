@@ -19,6 +19,7 @@ import { FileImageLoader } from 'cozy-ui/transpiled/react/FileImageLoader'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
+import { getLinksType } from '../../utils/getLinksType'
 
 const useStyles = makeStyles({
   root: { textIndent: '1rem' }
@@ -41,11 +42,6 @@ const PaperGroup = ({ allPapersByCategories }) => {
     [history]
   )
 
-  const getLinkType = useCallback(paper => {
-    const isImage = paper.class === 'image'
-    const isPdf = paper.class === 'pdf'
-    return isImage ? 'small' : isPdf ? 'icon' : undefined
-  }, [])
 
   return (
     <List>
@@ -72,7 +68,7 @@ const PaperGroup = ({ allPapersByCategories }) => {
                     <FileImageLoader
                       client={client}
                       file={paper}
-                      linkType={getLinkType(paper)}
+                      linkType={getLinksType(paper)}
                       render={src => (
                         <MuiCardMedia
                           component="img"
