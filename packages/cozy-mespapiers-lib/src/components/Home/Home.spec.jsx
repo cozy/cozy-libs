@@ -1,5 +1,5 @@
 import React from 'react'
-import { render } from '@testing-library/react'
+import { render, fireEvent } from '@testing-library/react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 
@@ -10,7 +10,6 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 /* eslint-disable react/display-name */
 jest.mock('./HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
 jest.mock('../ThemesFilter', () => () => <div data-testid="ThemesFilter" />)
-jest.mock('../SearchInput', () => () => <div data-testid="SearchInput" />)
 jest.mock('../Papers/PaperGroup', () => () => <div data-testid="PaperGroup" />)
 jest.mock('cozy-ui/transpiled/react/Empty', () => () => (
   <div data-testid="Empty" />
@@ -57,25 +56,6 @@ describe('Home components:', () => {
     jest.clearAllMocks()
   })
 
-  it('should be rendered correctly', () => {
-    const { container } = setup()
-
-    expect(container).toBeDefined()
-  })
-
-  it('should display only paperGroup in multi-selection mode', () => {
-    const { queryByTestId, getByTestId } = setup({
-      isLoading: false,
-      withData: true,
-      isMultiSelectionActive: true
-    })
-
-    expect(queryByTestId('ThemesFilter')).toBeNull()
-    expect(queryByTestId('SearchInput')).toBeNull()
-    expect(queryByTestId('FeaturedPlaceholdersList')).toBeNull()
-    expect(getByTestId('PaperGroup'))
-  })
-
   it('should display Spinner when all data are not loaded', () => {
     const { getByRole } = setup()
 
@@ -103,5 +83,103 @@ describe('Home components:', () => {
 
     expect(getByTestId('PaperGroup'))
     expect(queryByTestId('Empty')).toBeNull()
+  })
+
+  it('should display PaperGroup, SearchInput, ThemesFilter & FeaturedPlaceholdersList', () => {
+    const { getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    expect(getByTestId('PaperGroup'))
+    expect(getByTestId('SearchInput'))
+    expect(getByTestId('ThemesFilter'))
+    expect(getByTestId('FeaturedPlaceholdersList'))
+  })
+
+  it('should display ThemesFilter by default', () => {
+    const { getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    expect(getByTestId('ThemesFilter'))
+  })
+
+  it('should not display SwitchButton by default', () => {
+    const { queryByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    expect(queryByTestId('SwitchButton')).toBeNull()
+  })
+
+  it('should hide ThemesFilter when SearchInput is focused', () => {
+    const { queryByTestId, getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    expect(getByTestId('ThemesFilter'))
+    fireEvent.focus(getByTestId('SearchInput'))
+    expect(queryByTestId('ThemesFilter')).toBeNull()
+  })
+
+  it('should display ThemesFilter when click on SwitchButton', () => {
+    const { queryByTestId, getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+    fireEvent.focus(getByTestId('SearchInput'))
+    expect(queryByTestId('ThemesFilter')).toBeNull()
+    fireEvent.click(getByTestId('SwitchButton'))
+    expect(getByTestId('ThemesFilter'))
+  })
+
+  it('should hide SwitchButton when click on it', () => {
+    const { queryByTestId, getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    fireEvent.focus(getByTestId('SearchInput'))
+    expect(getByTestId('SwitchButton'))
+    fireEvent.click(getByTestId('SwitchButton'))
+    expect(queryByTestId('SwitchButton')).toBeNull()
+  })
+
+  describe('multi-selection mode', () => {
+    it('should display PaperGroup, SearchInput & SwitchButton', () => {
+      const { getByTestId } = setup({
+        isLoading: false,
+        withData: true,
+        isMultiSelectionActive: true
+      })
+
+      expect(getByTestId('PaperGroup'))
+      expect(getByTestId('SearchInput'))
+      expect(getByTestId('SwitchButton'))
+    })
+
+    it('should not display ThemesFilter by default', () => {
+      const { queryByTestId } = setup({
+        isLoading: false,
+        withData: true,
+        isMultiSelectionActive: true
+      })
+
+      expect(queryByTestId('ThemesFilter')).toBeNull()
+    })
+
+    it('should not display FeaturedPlaceholdersList', () => {
+      const { queryByTestId } = setup({
+        isLoading: false,
+        withData: true,
+        isMultiSelectionActive: true
+      })
+
+      expect(queryByTestId('FeaturedPlaceholdersList')).toBeNull()
+    })
   })
 })

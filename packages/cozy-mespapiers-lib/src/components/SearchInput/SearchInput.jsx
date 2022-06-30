@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+import PropTypes from 'prop-types'
 import debounce from 'lodash/debounce'
 
 import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
@@ -24,7 +25,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const SearchInput = ({ setSearchValue }) => {
+const SearchInput = ({ setSearchValue, setIsSearchValueFocus }) => {
   const { t } = useI18n()
   const styles = useStyles()
 
@@ -48,9 +49,19 @@ const SearchInput = ({ setSearchValue }) => {
         />
       }
     >
-      <Input placeholder={t('common.search')} onChange={handleOnChange} />
+      <Input
+        data-testid="SearchInput"
+        placeholder={t('common.search')}
+        onChange={handleOnChange}
+        onFocus={() => setIsSearchValueFocus(true)}
+      />
     </InputGroup>
   )
+}
+
+SearchInput.propTypes = {
+  setSearchValue: PropTypes.func,
+  setIsSearchValueFocus: PropTypes.func
 }
 
 export default SearchInput

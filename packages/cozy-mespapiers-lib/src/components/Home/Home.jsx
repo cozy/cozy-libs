@@ -7,6 +7,10 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Box from 'cozy-ui/transpiled/react/Box'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import Badge from 'cozy-ui/transpiled/react/Badge'
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
 import ThemesFilter from '../ThemesFilter'
 import SearchInput from '../SearchInput'
@@ -21,16 +25,29 @@ import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 import HomeToolbar from './HomeToolbar'
 
+const useStyles = makeStyles(theme => ({
+  iconButton: {
+    color: theme.palette.text.icon,
+    boxShadow: theme.shadows[2],
+    backgroundColor: theme.palette.background.paper,
+    marginLeft: '1rem'
+  }
+}))
+
 const {
   themes: { themesList }
 } = models.document
 
 const Home = ({ setSelectedThemeLabel }) => {
+  const { isMultiSelectionActive } = useMultiSelection()
   const [searchValue, setSearchValue] = useState('')
+  const [isSearchValueFocus, setIsSearchValueFocus] = useState(
+    isMultiSelectionActive
+  )
   const [selectedTheme, setSelectedTheme] = useState('')
+  const styles = useStyles()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
-  const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
 
   const labels = papersDefinitions.map(paper => paper.label)
@@ -82,23 +99,41 @@ const Home = ({ setSelectedThemeLabel }) => {
     <>
       {isMultiSelectionActive && <HomeToolbar />}
 
-      {!isMultiSelectionActive && (
-        <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
-          <Box
-            className="u-flex u-flex-items-center u-mb-half-s"
-            flex="1 1 auto"
-          >
-            <SearchInput setSearchValue={setSearchValue} />
-          </Box>
-          <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
+      <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
+        <Box className="u-flex u-flex-items-center u-mb-half-s" flex="1 1 auto">
+          <SearchInput
+            setSearchValue={setSearchValue}
+            setIsSearchValueFocus={setIsSearchValueFocus}
+          />
+          {isSearchValueFocus && (
+            <Badge
+              badgeContent={selectedTheme ? 1 : 0}
+              showZero={false}
+              color="primary"
+              variant="standard"
+              size="medium"
+            >
+              <IconButton
+                data-testid="SwitchButton"
+                className={styles.iconButton}
+                size="medium"
+                onClick={() => setIsSearchValueFocus(false)}
+              >
+                <Icon icon="setting" />
+              </IconButton>
+            </Badge>
+          )}
+        </Box>
+        <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
+          {!isSearchValueFocus && (
             <ThemesFilter
               items={themesList}
               selectedTheme={selectedTheme}
               handleThemeSelection={handleThemeSelection}
             />
-          </Box>
-        </div>
-      )}
+          )}
+        </Box>
+      </div>
 
       {allPapersByCategories.length === 0 ? (
         <Empty
