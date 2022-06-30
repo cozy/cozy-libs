@@ -23,6 +23,7 @@
     "viewInDrive": "View in Drive"
   },
   "common": {
+    "add": "Add",
     "cancel": "Cancel",
     "downloadFile": {
       "error": {
@@ -263,7 +264,10 @@
   },
   "Multiselect": {
     "backdrop": "Gather your papers...",
-    "title": "My Selection",
+    "title": {
+      "default": "My selection",
+      "nbSelected": "%{smart_count} selected item |||| %{smart_count} selected items"
+    },
     "empty": "Select the papers to be forwarded",
     "select": "Add to my selection",
     "folderZipName": "%{contactName} - papers - %{date}.zip"
