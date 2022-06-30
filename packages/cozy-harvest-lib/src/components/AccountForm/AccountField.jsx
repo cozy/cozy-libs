@@ -132,7 +132,7 @@ export class AccountField extends PureComponent {
         )
       case 'dropdown':
         return (
-          <Field {...sanitizeSelectProps(fieldProps)} menuPosition={'fixed'} />
+          <Field {...sanitizeSelectProps(fieldProps)} menuPosition="fixed" />
         )
       case 'password':
         return (

@@ -13,8 +13,8 @@ const CreateAccount = translate()(({ createAction, t }) => {
   return (
     <Button
       subtle
-      size={'small'}
-      className={'u-m-half'}
+      size="small"
+      className="u-m-half"
       onClick={createAction}
       onTouchEnd={createAction}
       label={t('modal.addAccount.button')}
