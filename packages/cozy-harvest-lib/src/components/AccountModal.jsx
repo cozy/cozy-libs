@@ -66,9 +66,16 @@ export class AccountModal extends Component {
       'trigger'
     )
 
-    const hasTriggerStatusChanged = matchingTrigger && this.state.trigger && matchingTrigger.current_state.status !== this.state.trigger.current_state.status
+    const hasTriggerStatusChanged =
+      matchingTrigger &&
+      this.state.trigger &&
+      matchingTrigger.current_state.status !==
+        this.state.trigger.current_state.status
 
-    if (this.props.accountId !== prevProps.accountId || hasTriggerStatusChanged) {
+    if (
+      this.props.accountId !== prevProps.accountId ||
+      hasTriggerStatusChanged
+    ) {
       return await this.loadSelectedAccountId()
     }
   }
