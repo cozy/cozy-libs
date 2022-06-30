@@ -9,6 +9,8 @@ import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import { downloadFiles, forwardFile, makeZipFolder } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
@@ -42,6 +44,7 @@ const MultiselectViewActions = ({ onClose }) => {
   const client = useClient()
   const classes = useStyles()
   const { multiSelectionFiles } = useMultiSelection()
+  const { isMobile } = useBreakpoints()
   const [zipFolder, setZipFolder] = useState({ name: '', dirId: '' })
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false)
   const [isBackdropOpen, setIsBackdropOpen] = useState(false)
@@ -114,17 +117,22 @@ const MultiselectViewActions = ({ onClose }) => {
         </div>
       </Backdrop>
 
-      <Button
-        variant="secondary"
-        label={t('action.download')}
-        onClick={download}
-        disabled={multiSelectionFiles.length === 0}
-      />
+      {!isMobile ||
+        (isMobile && !navigator.share && (
+          <Button
+            variant="secondary"
+            label={t('action.download')}
+            startIcon={<Icon icon="download" />}
+            onClick={download}
+            disabled={multiSelectionFiles.length === 0}
+          />
+        ))}
 
-      {navigator.share && (
+      {isMobile && navigator.share && (
         <Button
           variant="secondary"
           label={t('action.forward')}
+          startIcon={<Icon icon="paperplane" />}
           onClick={forward}
           disabled={multiSelectionFiles.length === 0}
         />
