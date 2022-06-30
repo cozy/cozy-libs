@@ -23,6 +23,7 @@
     "viewInDrive": "Voir dans Drive"
   },
   "common": {
+    "add": "Ajouter",
     "cancel": "Annuler",
     "downloadFile": {
       "error": {
@@ -263,7 +264,10 @@
   },
   "Multiselect": {
     "backdrop": "Rassemblement de vos papiers...",
-    "title": "Ma Sélection",
+    "title": {
+      "default": "Ma sélection",
+      "nbSelected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés"
+    },
     "empty": "Sélectionner les papiers à transmettre",
     "select": "Ajouter à ma sélection",
     "folderZipName": "%{contactName} - papiers - %{date}.zip"

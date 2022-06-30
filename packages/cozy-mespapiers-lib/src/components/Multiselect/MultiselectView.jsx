@@ -31,7 +31,7 @@ const MultiselectView = () => {
       open
       transitionDuration={0}
       onClose={handleClose}
-      title={t('Multiselect.title')}
+      title={t('Multiselect.title.default')}
       content={<MultiselectContent />}
       actions={<MultiselectViewActions onClose={handleClose} />}
     />
