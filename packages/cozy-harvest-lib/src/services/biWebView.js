@@ -109,8 +109,14 @@ export const handleOAuthAccount = async ({
   flow,
   konnector,
   client,
+  reconnect,
   t
 }) => {
+  if (reconnect) {
+    // No need for specific action here. The trigger will be launched by the trigger manager
+    const connId = getBIConnectionIdFromAccount(account)
+    return connId
+  }
   const cozyBankIds = getCozyBankIds({ konnector, account })
   let biWebviewAccount = {
     ...account,

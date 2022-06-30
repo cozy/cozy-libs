@@ -87,8 +87,10 @@ export class DumbTriggerManager extends Component {
    * @param  {string}  accountId
    */
   async handleOAuthAccountId(accountId) {
-    const { client, flow, konnector, t } = this.props
-    let oAuthAccount = await fetchAccount(client, accountId)
+    const { client, flow, konnector, t, reconnect } = this.props
+    let oAuthAccount = reconnect
+      ? flow.account
+      : await fetchAccount(client, accountId)
 
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
@@ -99,6 +101,7 @@ export class DumbTriggerManager extends Component {
         flow,
         konnector,
         client,
+        reconnect,
         t
       })
     }
