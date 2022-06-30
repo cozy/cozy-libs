@@ -78,6 +78,28 @@ describe('handleOAuthAccount', () => {
       }
     })
   })
+  it('should handle reconnection', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    const flow = new ConnectionFlow(client, null, konnector)
+    flow.account = account
+    flow.handleFormSubmit = jest.fn()
+    flow.saveAccount = jest.fn()
+    const account = { data: { auth: { bi: { connId: 15 } } } }
+    const t = jest.fn()
+    const result = await handleOAuthAccount({
+      account,
+      flow,
+      client,
+      konnector,
+      reconnect: true,
+      t
+    })
+    expect(flow.handleFormSubmit).not.toHaveBeenCalled()
+    expect(flow.saveAccount).not.toHaveBeenCalled()
+    expect(result).toEqual(15)
+  })
 })
 
 describe('checkBIConnection', () => {
