@@ -15,6 +15,7 @@ import {
   useVaultClient
 } from 'cozy-keys-lib'
 import { findKonnectorPolicy } from '../../../konnector-policies'
+import flag from 'cozy-flags'
 
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
@@ -211,11 +212,23 @@ describe('ConfigurationTab', () => {
     })
   })
 
-  it('should not render identifiers for oauth konnectors', () => {
+  it('should not render identifiers for oauthkonnectors', () => {
     useVaultClient.mockReturnValue({
       isLocked: jest.fn().mockResolvedValue(false)
     })
     const { root } = setup({ konnector: { oauth: true } })
     expect(root.queryByText('Identifiers')).toBe(null)
+  })
+
+  it('should not render identifiers for bi webview konnectors', () => {
+    useVaultClient.mockReturnValue({
+      isLocked: jest.fn().mockResolvedValue(false)
+    })
+    flag('harvest.bi.webview', true)
+    const { root } = setup({
+      konnector: { partnership: { domain: 'budget-insight.com' } }
+    })
+    expect(root.queryByText('Identifiers')).toBe(null)
+    flag('harvest.bi.webview', null)
   })
 })

@@ -142,6 +142,8 @@ const ConfigurationTab = ({
     await unshareCipher(vaultClient, account)
   }
 
+  const konnectorPolicy = findKonnectorPolicy(konnector)
+
   return (
     <div className={isMobile ? '' : 'u-pt-1 u-pb-1-half'}>
       {/**
@@ -172,7 +174,7 @@ const ConfigurationTab = ({
           {t('modal.updateAccount.general-subheader')}
         </NavigationListHeader>
         <NavigationListSection>
-          {konnector.oauth ? null : (
+          {konnector.oauth || konnectorPolicy.isBIWebView ? null : (
             <ListItem
               button
               divider
