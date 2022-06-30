@@ -24,6 +24,7 @@ import logger from '../logger'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
 import { withRouter } from 'react-router'
+import { intentsApiProptype } from '../helpers/proptypes'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
@@ -36,7 +37,8 @@ const DumbEditAccountModal = withRouter(
     fetching,
     redirectToAccount,
     location,
-    reconnect
+    reconnect,
+    intentsApi
   }) => {
     const { dialogProps, dialogTitleProps } = useCozyDialog({
       open: true,
@@ -96,6 +98,7 @@ const DumbEditAccountModal = withRouter(
               onVaultDismiss={redirectToAccount}
               fieldOptions={fieldOptions}
               reconnect={fromReconnect}
+              intentsApi={intentsApi}
             />
           )}
           <div className="u-mb-2" />
@@ -200,7 +203,8 @@ EditAccountModal.propTypes = {
   konnector: PropTypes.object.isRequired,
   accountId: PropTypes.string.isRequired,
   accounts: PropTypes.array.isRequired,
-  reconnect: PropTypes.bool
+  reconnect: PropTypes.bool,
+  intentsApi: intentsApiProptype
 }
 
 export default flow(
