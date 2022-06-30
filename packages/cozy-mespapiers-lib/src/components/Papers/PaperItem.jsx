@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react'
+import React from 'react'
+import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
@@ -11,6 +12,9 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
+import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
+
+import { getLinksType } from '../../utils/getLinksType'
 
 const validPageName = page => page === 'front' || page === 'back'
 
@@ -30,12 +34,6 @@ const PaperItem = ({
     ? f(paper?.metadata?.datetime, 'DD/MM/YYYY')
     : null
 
-  const linkType = useMemo(() => {
-    const isImage = paper.class === 'image'
-    const isPdf = paper.class === 'pdf'
-    return isImage ? 'small' : isPdf ? 'icon' : undefined
-  }, [paper.class])
-
   return (
     <>
       <ListItem
@@ -48,7 +46,7 @@ const PaperItem = ({
           <FileImageLoader
             client={client}
             file={paper}
-            linkType={linkType}
+            linkType={getLinksType(paper)}
             render={src => {
               return (
                 <CardMedia component="img" width={32} height={32} image={src} />
