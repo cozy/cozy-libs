@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.35.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.35.2...cozy-mespapiers-lib@0.35.3) (2022-07-01)
+
+
+### Bug Fixes
+
+* **deps:** update dependency fuse.js to v6.6.2 ([8619f64](https://github.com/cozy/cozy-libs/commit/8619f64f7c432c5601334b239c16cbbb094e1935))
+
+
+
+
+
 ## [0.35.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.35.1...cozy-mespapiers-lib@0.35.2) (2022-07-01)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
