@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.16.0...cozy-harvest-lib@9.17.0) (2022-07-01)
+
+
+### Bug Fixes
+
+* Still run the connector after a full reconnect ([07b0444](https://github.com/cozy/cozy-libs/commit/07b04443942e2c2bc9229b9fe0f143c3f7fa95e4))
+
+
+### Features
+
+* All oauth methods to handle reconection case ([b1a6033](https://github.com/cozy/cozy-libs/commit/b1a6033b393b1732d985807328ea83e1c87e5373))
+* Do not show identifiers with bi Webviews ([58e1bb1](https://github.com/cozy/cozy-libs/commit/58e1bb16c7703590c7396c33d50c1c17ec58e512))
+
+
+
+
+
 # [9.16.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.15.4...cozy-harvest-lib@9.16.0) (2022-06-30)
 
 
