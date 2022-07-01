@@ -69,8 +69,8 @@ export class AccountModal extends Component {
     const hasTriggerStatusChanged =
       matchingTrigger &&
       this.state.trigger &&
-      matchingTrigger.current_state.status !==
-        this.state.trigger.current_state.status
+      matchingTrigger?.current_state?.status !==
+        this.state.trigger?.current_state?.status
 
     if (
       this.props.accountId !== prevProps.accountId ||
