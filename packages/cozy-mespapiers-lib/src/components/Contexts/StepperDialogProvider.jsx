@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useEffect, useState } from 'react'
+import React, { createContext, useEffect, useState } from 'react'
 import { filterWithRemaining } from '../../helpers/filterWithRemaining'
 
 const isOwner = item => item === 'owner'
@@ -11,12 +11,12 @@ const StepperDialogProvider = ({ children }) => {
   const [currentStepIndex, setCurrentStepIndex] = useState(1)
   const [currentDefinition, setCurrentDefinition] = useState(null)
 
-  const resetStepperDialog = useCallback(() => {
+  const resetStepperDialog = () => {
     setCurrentDefinition(null)
     setStepperDialogTitle('')
     setAllCurrentSteps([])
     setCurrentStepIndex(1)
-  }, [])
+  }
 
   useEffect(() => {
     if (currentDefinition) {
@@ -50,38 +50,27 @@ const StepperDialogProvider = ({ children }) => {
     }
   }, [currentDefinition])
 
-  const previousStep = useCallback(() => {
+  const previousStep = () => {
     if (currentStepIndex > 1) {
       setCurrentStepIndex(prev => prev - 1)
     }
-  }, [currentStepIndex])
+  }
 
-  const nextStep = useCallback(() => {
+  const nextStep = () => {
     allCurrentSteps.length > currentStepIndex &&
       setCurrentStepIndex(prev => prev + 1)
-  }, [allCurrentSteps.length, currentStepIndex])
+  }
 
-  const stepperDialog = React.useMemo(
-    () => ({
-      allCurrentSteps,
-      currentStepIndex,
-      stepperDialogTitle,
-      currentDefinition,
-      setCurrentDefinition,
-      previousStep,
-      nextStep,
-      resetStepperDialog
-    }),
-    [
-      allCurrentSteps,
-      currentStepIndex,
-      stepperDialogTitle,
-      currentDefinition,
-      previousStep,
-      nextStep,
-      resetStepperDialog
-    ]
-  )
+  const stepperDialog = {
+    allCurrentSteps,
+    currentStepIndex,
+    stepperDialogTitle,
+    currentDefinition,
+    setCurrentDefinition,
+    previousStep,
+    nextStep,
+    resetStepperDialog
+  }
 
   return (
     <StepperDialogContext.Provider value={stepperDialog}>
