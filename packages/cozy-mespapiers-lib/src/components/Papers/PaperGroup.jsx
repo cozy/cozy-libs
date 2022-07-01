@@ -4,8 +4,6 @@ import get from 'lodash/get'
 import { useHistory } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
@@ -22,14 +20,8 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { getLinksType } from '../../utils/getLinksType'
 
-const useStyles = makeStyles({
-  root: { textIndent: '1rem' }
-})
-
 const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
-  const classes = useStyles()
   const client = useClient()
-  const { isMobile } = useBreakpoints()
   const history = useHistory()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
@@ -47,9 +39,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
 
   return (
     <List>
-      <ListSubheader classes={isMobile ? classes : undefined}>
-        {t('PapersList.subheader')}
-      </ListSubheader>
+      <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <div className="u-pv-half">
         {allPapersByCategories.length === 0 ? (
           <Typography
