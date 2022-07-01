@@ -1,7 +1,6 @@
 import React, { useMemo } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
 
 import { getReferencedBy, isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -27,7 +26,7 @@ const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
   const { setIsMultiSelectionActive, isMultiSelectionActive } =
     useMultiSelection()
 
-  const currentFileTheme = get(match, 'params.fileTheme', selectedThemeLabel)
+  const currentFileTheme = match?.params?.fileTheme ?? selectedThemeLabel
   const themeLabel = scannerT(`items.${currentFileTheme}`)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 

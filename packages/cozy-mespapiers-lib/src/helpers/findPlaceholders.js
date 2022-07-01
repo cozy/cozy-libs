@@ -1,4 +1,3 @@
-import get from 'lodash/get'
 import { hasItemByLabel } from '../components/Home/helpers'
 
 /**
@@ -34,8 +33,7 @@ export const hasNoFileWithSameQualificationLabel = (files, paperDefinition) => {
   return (
     files &&
     !files.some(
-      paper =>
-        get(paper, 'metadata.qualification.label') === paperDefinition.label
+      paper => paper?.metadata?.qualification?.label === paperDefinition.label
     )
   )
 }
