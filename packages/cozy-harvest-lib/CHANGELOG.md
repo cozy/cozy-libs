@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.18.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.17.0...cozy-harvest-lib@9.18.0) (2022-07-01)
+
+
+### Features
+
+* Add error message display in OAuthForm component ([f29b3c4](https://github.com/cozy/cozy-libs/commit/f29b3c4d8357b3f58b37dfe1a50233ceddd42ff7))
+* Handle user dismiss in Oauth window ([a6dcba8](https://github.com/cozy/cozy-libs/commit/a6dcba86de227d9c5a3271554b31598e3611ebf9))
+
+
+
+
+
 # [9.17.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.16.0...cozy-harvest-lib@9.17.0) (2022-07-01)
 
 
