@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
@@ -14,15 +14,8 @@ const StepperDialogWrapper = ({ onClose }) => {
     allCurrentSteps,
     currentStepIndex,
     previousStep,
-    stepperDialogTitle,
-    resetStepperDialog
+    stepperDialogTitle
   } = useStepperDialog()
-
-  useEffect(() => {
-    return () => {
-      resetStepperDialog()
-    }
-  }, [resetStepperDialog])
 
   const handleBack = () => {
     if (currentStepIndex > 1) {
