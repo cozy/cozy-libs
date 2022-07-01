@@ -15,6 +15,7 @@ import FilesViewerWithQuery from './Viewer/FileViewerWithQuery'
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import PlaceholderListModal from './Placeholders/PlaceholderListModal/PlaceholderListModal'
 import CreatePaperModal from './StepperDialog/CreatePaperModal'
+import { StepperDialogProvider } from './Contexts/StepperDialogProvider'
 
 const routes = [
   {
@@ -70,7 +71,11 @@ const Routes = () => {
               const isDeepBack = search.includes('deepBack')
               const onClose = () => history.go(isDeepBack ? -2 : -1)
 
-              return <CreatePaperModal {...props} onClose={onClose} />
+              return (
+                <StepperDialogProvider>
+                  <CreatePaperModal {...props} onClose={onClose} />
+                </StepperDialogProvider>
+              )
             }}
           />
         </>

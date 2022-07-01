@@ -8,7 +8,6 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n, I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
-import { StepperDialogProvider } from './Contexts/StepperDialogProvider'
 import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
 import { ModalProvider, ModalStack } from './Contexts/ModalProvider'
 import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
@@ -59,11 +58,9 @@ const MesPapiersLib = ({ lang }) => {
       <MultiSelectionProvider>
         <ScannerI18nProvider>
           <PapersDefinitionsProvider>
-            <StepperDialogProvider>
-              <ModalProvider>
-                <App />
-              </ModalProvider>
-            </StepperDialogProvider>
+            <ModalProvider>
+              <App />
+            </ModalProvider>
           </PapersDefinitionsProvider>
         </ScannerI18nProvider>
       </MultiSelectionProvider>
