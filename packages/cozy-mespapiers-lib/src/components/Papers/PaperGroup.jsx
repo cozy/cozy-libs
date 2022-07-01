@@ -1,6 +1,5 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
 import { useHistory } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
@@ -51,7 +50,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
           </Typography>
         ) : (
           allPapersByCategories.map((paper, index) => {
-            const category = get(paper, 'metadata.qualification.label')
+            const category = paper?.metadata?.qualification?.label
 
             return (
               <Fragment key={paper.id}>

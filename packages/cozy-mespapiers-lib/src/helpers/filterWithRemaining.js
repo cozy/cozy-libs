@@ -1,5 +1,3 @@
-import get from 'lodash/get'
-
 /**
  * @typedef {object} FilterWithRemainingResponse
  * @property {Array} itemsFound - Array with the items that pass the test.
@@ -20,7 +18,7 @@ export const filterWithRemaining = (array, callback) => {
   const [itemsFound, remainingItems] = [[], []]
 
   array.forEach((arr, index) => {
-    const currentItem = get(arr, 'model', arr)
+    const currentItem = arr?.model ?? arr
 
     if (callback(currentItem, index)) itemsFound.push(arr)
     else remainingItems.push(arr)
