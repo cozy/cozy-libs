@@ -134,7 +134,7 @@ describe('TriggerManager', () => {
           <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
         </AppLike>
       )
-      await expect(root.findByText('Connect')).resolves.toBeDefined()
+      await expect(root.findByText('Add your bank')).resolves.toBeDefined()
       expect(root.queryByLabelText('username')).toBeFalsy()
       expect(root.queryByLabelText('passphrase')).toBeFalsy()
     })
