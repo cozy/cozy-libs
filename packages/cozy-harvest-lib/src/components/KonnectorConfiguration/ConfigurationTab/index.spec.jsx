@@ -14,9 +14,8 @@ import {
   VaultUnlockProvider,
   useVaultClient
 } from 'cozy-keys-lib'
-import { findKonnectorPolicy } from '../../../konnector-policies'
-import flag from 'cozy-flags'
 
+import { findKonnectorPolicy } from '../../../konnector-policies'
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
 }))
@@ -44,6 +43,7 @@ jest.mock('cozy-keys-lib', () => {
 describe('ConfigurationTab', () => {
   let originalWarn
   beforeEach(() => {
+    findKonnectorPolicy.mockImplementation(() => ({}))
     originalWarn = console.warn
     console.warn = function (msg) {
       if (msg && msg.includes && msg.includes('componentWillReceiveProps')) {
@@ -153,7 +153,7 @@ describe('ConfigurationTab', () => {
     })
 
     it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy does not save in vault)', async () => {
-      findKonnectorPolicy.mockReturnValue({ saveInVault: false })
+      findKonnectorPolicy.mockImplementation(() => ({ saveInVault: false }))
       const { root } = setup({
         checkShouldUnlock: jest.fn().mockResolvedValue(true)
       })
@@ -222,14 +222,13 @@ describe('ConfigurationTab', () => {
   })
 
   it('should not render identifiers for bi webview konnectors', () => {
+    findKonnectorPolicy.mockImplementation(() => ({ isBIWebView: true }))
     useVaultClient.mockReturnValue({
       isLocked: jest.fn().mockResolvedValue(false)
     })
-    flag('harvest.bi.webview', true)
     const { root } = setup({
       konnector: { partnership: { domain: 'budget-insight.com' } }
     })
     expect(root.queryByText('Identifiers')).toBe(null)
-    flag('harvest.bi.webview', null)
   })
 })
