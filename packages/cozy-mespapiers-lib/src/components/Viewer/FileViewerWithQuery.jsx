@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 
 import { useQuery, useClient } from 'cozy-client'
 import { SharingProvider } from 'cozy-sharing/dist/SharingProvider'
@@ -13,12 +13,9 @@ const FilesViewerWithQuery = props => {
   const { history, match } = props
   const client = useClient()
 
-  const currentFileId = useMemo(() => match?.params?.fileId ?? null, [match])
+  const currentFileId = match?.params?.fileId ?? null
   const currentFileTheme = match?.params?.fileTheme
-  const buildedFilesQuery = useMemo(
-    () => buildViewerFileQuery(currentFileId),
-    [currentFileId]
-  )
+  const buildedFilesQuery = buildViewerFileQuery(currentFileId)
   const filesQuery = useQuery(
     buildedFilesQuery.definition,
     buildedFilesQuery.options

@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState, useMemo } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import { Q, useClient } from 'cozy-client'
 import { isIOSApp } from 'cozy-device-helper'
@@ -27,35 +27,20 @@ const styleStatusBar = switcher => {
 const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   const [currentFile, setCurrentFile] = useState(null)
   const [fetchingMore, setFetchingMore] = useState(false)
-
   const client = useClient()
 
-  const handleOnClose = useCallback(() => {
+  const handleOnClose = () => {
     if (onClose) onClose()
-  }, [onClose])
+  }
 
-  const handleOnChange = useCallback(
-    nextFile => {
-      if (onChange) onChange(nextFile.id)
-    },
-    [onChange]
-  )
+  const handleOnChange = nextFile => {
+    if (onChange) onChange(nextFile.id)
+  }
 
-  const currentIndex = useMemo(
-    () => files.findIndex(f => f.id === fileId),
-    [files, fileId]
-  )
-  const hasCurrentIndex = useMemo(() => currentIndex != -1, [currentIndex])
-
-  const viewerFiles = useMemo(
-    () => (hasCurrentIndex ? files : [currentFile]),
-    [hasCurrentIndex, files, currentFile]
-  )
-
-  const viewerIndex = useMemo(
-    () => (hasCurrentIndex ? currentIndex : 0),
-    [hasCurrentIndex, currentIndex]
-  )
+  const currentIndex = files.findIndex(f => f.id === fileId)
+  const hasCurrentIndex = () => currentIndex != -1
+  const viewerFiles = hasCurrentIndex ? files : [currentFile]
+  const viewerIndex = hasCurrentIndex ? currentIndex : 0
 
   useEffect(() => {
     styleStatusBar(true)
@@ -82,7 +67,7 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
         const { data } = await client.query(Q('io.cozy.files').getById(fileId))
         isMounted && setCurrentFile(data)
       } catch (e) {
-        handleOnClose()
+        onClose && onClose()
       }
     }
 
@@ -91,7 +76,7 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
     return () => {
       isMounted = false
     }
-  }, [client, currentFile, fileId, currentIndex, handleOnClose])
+  }, [client, currentFile, fileId, currentIndex, onClose])
 
   useEffect(() => {
     let isMounted = true
