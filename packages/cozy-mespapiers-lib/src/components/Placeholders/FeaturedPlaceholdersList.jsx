@@ -2,8 +2,6 @@ import React, { useState, useRef } from 'react'
 import { useHistory, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -11,16 +9,10 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Placeholder from './Placeholder'
 import ActionMenuImportDropdown from './ActionMenuImportDropdown'
 
-const useStyles = makeStyles({
-  root: { textIndent: '1rem' }
-})
-
 const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   const [placeholder, setPlaceholder] = useState(null)
   const actionBtnRefs = useRef([])
   const actionBtnRef = useRef()
-  const classes = useStyles()
-  const { isMobile } = useBreakpoints()
   const { t } = useI18n()
   const [isImportDropdownDisplayed, setIsImportDropdownDisplayed] =
     useState(false)
@@ -52,9 +44,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   return (
     <List>
       {featuredPlaceholders.length > 0 && (
-        <ListSubheader classes={isMobile ? classes : undefined}>
-          {t('FeaturedPlaceholdersList.subheader')}
-        </ListSubheader>
+        <ListSubheader>{t('FeaturedPlaceholdersList.subheader')}</ListSubheader>
       )}
       <div className="u-pv-half">
         {featuredPlaceholders.map((placeholder, idx) => (
