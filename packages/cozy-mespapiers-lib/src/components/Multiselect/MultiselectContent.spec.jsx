@@ -26,19 +26,17 @@ const setup = ({ multiSelectionFiles }) => {
 }
 
 describe('MultiselectContent', () => {
-  it('should display Empty when no files are selected', () => {
-    const { getByTestId, queryByTestId } = setup({ multiSelectionFiles: [] })
+  it('should not display PaperCardItem when no files are selected', () => {
+    const { queryByTestId } = setup({ multiSelectionFiles: [] })
 
-    expect(getByTestId('Empty'))
     expect(queryByTestId('PaperCardItem')).toBeNull()
   })
 
   it('should display PaperCardItem when files are selected', () => {
-    const { getByTestId, queryByTestId } = setup({
+    const { getByTestId } = setup({
       multiSelectionFiles: [{ _id: '123' }]
     })
 
     expect(getByTestId('PaperCardItem'))
-    expect(queryByTestId('Empty')).toBeNull()
   })
 })
