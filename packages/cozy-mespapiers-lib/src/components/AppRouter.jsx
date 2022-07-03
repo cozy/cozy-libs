@@ -26,7 +26,7 @@ const routes = [
     component: PapersListWrapper
   },
   {
-    path: '/paper/file/:fileId',
+    path: '/paper/file/:fileTheme/:fileId',
     component: FilesViewerWithQuery
   },
   {

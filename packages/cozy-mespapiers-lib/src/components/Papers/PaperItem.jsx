@@ -37,6 +37,7 @@ const PaperItem = ({
     addMultiSelectionFile
   } = useMultiSelection()
 
+  const paperTheme = paper?.metadata?.qualification?.label
   const paperLabel = paper?.metadata?.qualification?.page
   const paperDate = paper?.metadata?.datetime
     ? f(paper?.metadata?.datetime, 'DD/MM/YYYY')
@@ -51,7 +52,7 @@ const PaperItem = ({
       else addMultiSelectionFile(paper)
     } else {
       history.push({
-        pathname: `/paper/file/${paper.id}`
+        pathname: `/paper/file/${paperTheme}/${paper.id}`
       })
     }
   }

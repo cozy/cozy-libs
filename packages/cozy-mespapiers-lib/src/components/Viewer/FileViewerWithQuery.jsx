@@ -18,6 +18,7 @@ const FilesViewerWithQuery = props => {
     () => get(match, 'params.fileId', null),
     [match]
   )
+  const currentFileTheme = match?.params?.fileTheme
   const buildedFilesQuery = useMemo(
     () => buildViewerFileQuery(currentFileId),
     [currentFileId]
@@ -38,12 +39,8 @@ const FilesViewerWithQuery = props => {
           fileId={currentFileId}
           files={filesQuery.data}
           filesQuery={filesQuery}
-          onClose={() => history.goBack()}
-          onChange={fileId =>
-            history.push({
-              pathname: `/paper/file/${fileId}`
-            })
-          }
+          onClose={() => history.push(`/paper/files/${currentFileTheme}`)}
+          onChange={fileId => history.push(`/paper/file/${fileId}`)}
         />
       </SharingProvider>
     )
