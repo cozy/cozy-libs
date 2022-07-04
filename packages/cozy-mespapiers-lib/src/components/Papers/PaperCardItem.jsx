@@ -20,7 +20,13 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const PaperCardItem = ({ paper, divider, className, square = false }) => {
+const PaperCardItem = ({
+  paper,
+  paperIndex,
+  divider,
+  className,
+  square = false
+}) => {
   const classes = useStyles(square)
   const { removeMultiSelectionFile } = useMultiSelection()
 
@@ -34,7 +40,7 @@ const PaperCardItem = ({ paper, divider, className, square = false }) => {
       >
         <IconButton
           color="secondary"
-          onClick={() => removeMultiSelectionFile(paper)}
+          onClick={() => removeMultiSelectionFile(paperIndex)}
         >
           <Icon icon="cross-circle" />
         </IconButton>
