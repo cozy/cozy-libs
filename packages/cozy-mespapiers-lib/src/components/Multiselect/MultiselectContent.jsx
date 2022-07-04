@@ -22,9 +22,10 @@ const MultiselectContent = () => {
         </Typography>
       ) : (
         <List className="u-flex u-flex-column u-flex-justify-center">
-          {multiSelectionFiles.map(file => (
+          {multiSelectionFiles.map((file, idx) => (
             <PaperCardItem
-              key={file._id}
+              key={`${file._id}${idx}`}
+              paperIndex={idx}
               paper={file}
               className="u-mb-half u-w-100"
             />
