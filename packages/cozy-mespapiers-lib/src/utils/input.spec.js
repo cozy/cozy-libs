@@ -54,10 +54,10 @@ describe('Input Utils', () => {
       ${0}        | ${{ min: 0, max: 0 }}       | ${true}    | ${false}
       ${0}        | ${{ min: null, max: 20 }}   | ${false}   | ${true}
       ${0}        | ${{ min: null, max: 20 }}   | ${true}    | ${false}
-      ${0}        | ${{ min: 20, max: null }}   | ${false}   | ${false}
+      ${0}        | ${{ min: 20, max: null }}   | ${false}   | ${true}
       ${0}        | ${{ min: 20, max: null }}   | ${true}    | ${false}
-      ${0}        | ${{ min: 10, max: 30 }}     | ${false}   | ${false}
-      ${0}        | ${{ min: 30, max: 10 }}     | ${false}   | ${false}
+      ${0}        | ${{ min: 10, max: 30 }}     | ${false}   | ${true}
+      ${0}        | ${{ min: 30, max: 10 }}     | ${false}   | ${true}
       ${0}        | ${{ min: 10, max: 30 }}     | ${true}    | ${false}
       ${0}        | ${{ min: 30, max: 10 }}     | ${true}    | ${false}
       ${10}       | ${{ min: 10, max: 30 }}     | ${true}    | ${true}
