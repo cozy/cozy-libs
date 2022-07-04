@@ -63,8 +63,8 @@ export const checkConstraintsOfIinput = (
   const { min, max } = expectedLength
 
   return [
-    valueLength >= min,
-    max > 0 ? valueLength <= max : true,
-    isRequired ? valueLength > 0 : true
+    valueLength !== 0 || !isRequired,
+    valueLength === 0 || min == null || valueLength >= min,
+    valueLength === 0 || max == null || valueLength <= max
   ].every(Boolean)
 }
