@@ -31,10 +31,9 @@ const PaperItem = ({
   const client = useClient()
   const history = useHistory()
   const {
-    multiSelectionFiles,
     isMultiSelectionActive,
-    removeMultiSelectionFile,
-    addMultiSelectionFile
+    changeCurrentMultiSelectionFile,
+    currentMultiSelectionFiles
   } = useMultiSelection()
 
   const paperTheme = paper?.metadata?.qualification?.label
@@ -45,16 +44,16 @@ const PaperItem = ({
 
   const handleClick = () => {
     if (isMultiSelectionActive) {
-      const paperAlreadySelected = multiSelectionFiles.some(
-        file => file._id === paper._id
-      )
-      if (paperAlreadySelected) removeMultiSelectionFile(paper)
-      else addMultiSelectionFile(paper)
+      changeCurrentMultiSelectionFile(paper)
     } else {
       history.push({
         pathname: `/paper/file/${paperTheme}/${paper.id}`
       })
     }
+  }
+
+  const isChecked = () => {
+    return currentMultiSelectionFiles.some(file => file._id === paper._id)
   }
 
   return (
@@ -63,13 +62,10 @@ const PaperItem = ({
         button
         className={className}
         classes={classes}
-        onClick={handleClick}
+        onClick={!withoutCheckbox ? handleClick : undefined}
       >
         {!withoutCheckbox && isMultiSelectionActive && (
-          <Checkbox
-            checked={multiSelectionFiles.some(file => file._id === paper._id)}
-            value={paper._id}
-          />
+          <Checkbox checked={isChecked()} value={paper._id} />
         )}
         <ListItemIcon>
           <FileImageLoader
