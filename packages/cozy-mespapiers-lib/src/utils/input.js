@@ -12,12 +12,12 @@ import log from 'cozy-logger'
  * Make type and length properties
  * @param {MakeConstraintsOfInputParam} attrs - Definition of type & length of the input
  * @example
- * // For make input number with contraint length to 12
+ * // For make input number with contraint length to 0 or 12
  * makeConstraintsOfInput({ type: 'number', minLength: 12, maxLength: 12 })
  * // For make input text with no contraint length
  * makeConstraintsOfInput()
- * // For make input number with contraint length to 12 & required & size to 15
- * makeConstraintsOfInput({ type: 'number', required: true, minLength: 12, maxLength: 12, size: 15 })
+ * // For make input number with contraint length to 12
+ * makeConstraintsOfInput({ type: 'number', required: true, minLength: 12, maxLength: 12 })
  *
  * @returns {{ inputType: string, expectedLength: { min: number, max: number }, isRequired: boolean }}
  */
