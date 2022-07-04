@@ -25,7 +25,7 @@ export const makeConstraintsOfInput = attrs => {
   const { type = '', required = false, mask } = attrs || {}
 
   const maskLength = mask?.replaceAll(/\s/g, '')?.length
-  const minLength = (required && maskLength) || (attrs?.minLength ?? null)
+  const minLength = maskLength ?? attrs?.minLength ?? null
   const maxLength = maskLength ?? attrs?.maxLength ?? null
   const acceptedTypes = ['number', 'text']
 
