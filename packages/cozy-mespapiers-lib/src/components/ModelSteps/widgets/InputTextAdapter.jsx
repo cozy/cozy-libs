@@ -92,9 +92,9 @@ const InputTextAdapter = ({
 
   const handleOnBlur = () => {
     setIsFocus(false)
-    if (currentValue.length > 0) {
+    if (isRequired || currentValue.length !== 0) {
       setIsTooShort(
-        expectedLength.min > 0 && currentValue.length < expectedLength.min
+        expectedLength.min != null && currentValue.length < expectedLength.min
       )
     } else setIsTooShort(false)
   }
