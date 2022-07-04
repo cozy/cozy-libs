@@ -14,29 +14,36 @@ const MultiselectPaperList = ({ setIsActive }) => {
   const history = useHistory()
   const [selectedThemeLabel, setSelectedThemeLabel] = useState(null)
   const { t } = useI18n()
-  const { multiSelectionFiles, removeAllMultiSelectionFiles } =
-    useMultiSelection()
+  const {
+    removeAllCurrentMultiSelectionFiles,
+    confirmCurrentMultiSelectionFiles,
+    currentMultiSelectionFiles
+  } = useMultiSelection()
 
   const title =
-    multiSelectionFiles.length > 0
+    currentMultiSelectionFiles.length > 0
       ? t('Multiselect.title.nbSelected', {
-          smart_count: multiSelectionFiles.length
+          smart_count: currentMultiSelectionFiles.length
         })
       : t('Multiselect.title.default')
 
-  const cancelSelection = () => {
-    removeAllMultiSelectionFiles()
+  const closeMultiSelection = () => {
     setIsActive(false)
     setSelectedThemeLabel(null)
+  }
+
+  const cancelSelection = () => {
+    removeAllCurrentMultiSelectionFiles()
+    closeMultiSelection()
   }
 
   const goToCurrentSelectionList = () => {
-    setIsActive(false)
-    setSelectedThemeLabel(null)
+    confirmCurrentMultiSelectionFiles()
+    closeMultiSelection()
   }
 
   const handleBack = () => {
-    selectedThemeLabel ? setSelectedThemeLabel(null) : setIsActive(false)
+    selectedThemeLabel ? setSelectedThemeLabel(null) : cancelSelection()
   }
 
   return (
@@ -62,7 +69,7 @@ const MultiselectPaperList = ({ setIsActive }) => {
           <Button
             label={t('common.add')}
             onClick={goToCurrentSelectionList}
-            disabled={multiSelectionFiles.length === 0}
+            disabled={currentMultiSelectionFiles.length === 0}
           />
           <Button
             label={t('common.cancel')}
