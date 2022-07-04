@@ -5,20 +5,42 @@ const MultiSelectionContext = createContext()
 const MultiSelectionProvider = ({ children }) => {
   const [isMultiSelectionActive, setIsMultiSelectionActive] = useState(false)
   const [multiSelectionFiles, setMultiSelectionFiles] = useState([])
+  const [currentMultiSelectionFiles, setCurrentMultiSelectionFiles] = useState(
+    []
+  )
 
-  const addMultiSelectionFile = fileToAdd => {
-    const fileAlreadySelected = multiSelectionFiles.some(
-      file => file._id === fileToAdd._id
-    )
-
-    if (!fileAlreadySelected) {
-      setMultiSelectionFiles(files => [...files, fileToAdd])
+  const confirmCurrentMultiSelectionFiles = () => {
+    removeAllCurrentMultiSelectionFiles()
+    for (const file of currentMultiSelectionFiles) {
+      addMultiSelectionFile(file)
     }
   }
 
-  const removeMultiSelectionFile = fileToRemove => {
-    setMultiSelectionFiles(files => {
+  const changeCurrentMultiSelectionFile = fileToAdd => {
+    const fileAlreadySelected = currentMultiSelectionFiles.some(
+      file => file._id === fileToAdd._id
+    )
+    if (fileAlreadySelected) removeCurrentMultiSelectionFile(fileToAdd)
+    else setCurrentMultiSelectionFiles(files => [...files, fileToAdd])
+  }
+
+  const removeCurrentMultiSelectionFile = fileToRemove => {
+    setCurrentMultiSelectionFiles(files => {
       return files.filter(file => file._id !== fileToRemove._id)
+    })
+  }
+
+  const removeAllCurrentMultiSelectionFiles = () => {
+    setCurrentMultiSelectionFiles([])
+  }
+
+  const addMultiSelectionFile = fileToAdd => {
+    setMultiSelectionFiles(files => [...files, fileToAdd])
+  }
+
+  const removeMultiSelectionFile = fileToRemoveIndex => {
+    setMultiSelectionFiles(files => {
+      return files.filter((_, idx) => fileToRemoveIndex !== idx)
     })
   }
 
@@ -30,16 +52,23 @@ const MultiSelectionProvider = ({ children }) => {
     // Resets the context by exiting the multi-selection mode
     if (!isMultiSelectionActive) {
       removeAllMultiSelectionFiles()
+      removeAllCurrentMultiSelectionFiles()
     }
   }, [isMultiSelectionActive])
 
   const value = {
     isMultiSelectionActive,
+    multiSelectionFiles,
     setIsMultiSelectionActive,
     addMultiSelectionFile,
     removeMultiSelectionFile,
     removeAllMultiSelectionFiles,
-    multiSelectionFiles
+
+    currentMultiSelectionFiles,
+    removeAllCurrentMultiSelectionFiles,
+    confirmCurrentMultiSelectionFiles,
+    changeCurrentMultiSelectionFile,
+    removeCurrentMultiSelectionFile
   }
 
   return (
