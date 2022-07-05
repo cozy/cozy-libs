@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.37.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.3...cozy-mespapiers-lib@0.37.0) (2022-07-05)
+
+
+### Features
+
+* Add index prop to PaperCardItem ([062270e](https://github.com/cozy/cozy-libs/commit/062270e8e210df708bb6e9a1dd579dd04bd7975c))
+* Improve MultiSelectionProvider ([16672ec](https://github.com/cozy/cozy-libs/commit/16672ec6f91e404fd9626ec62996b4c923e54b83))
+* Use currentMultiSelectionFiles instead multiSelectionFiles ([575c087](https://github.com/cozy/cozy-libs/commit/575c087cb6f4ec390349fa58c3a70cf5e00fb215))
+
+
+
+
+
 ## [0.36.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.2...cozy-mespapiers-lib@0.36.3) (2022-07-05)
 
 
