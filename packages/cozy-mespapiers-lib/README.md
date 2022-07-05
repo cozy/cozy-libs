@@ -12,6 +12,7 @@ yarn add cozy-intent cozy-realtime
 ```
 
 ## Realtime
+
 `cozy-mespapiers-lib` uses realtime on `io.cozy.files` & `io.cozy.mespapiers.settings` doctypes via the `RealTimeQueries` components of `cozy-client`.
 Therefore, the application must register the plugin.
 
@@ -147,9 +148,12 @@ const MesPapiersView = props => {
 
 export default MesPapiersView
 ```
+
 # Call modal with URL
+
 In your application, if you want to call a modal to create a Paper, you just have to call the `/paper/create` or `/paper/create/:qualificationLabel` route with the query parameter `backgroundPath=<currentPath>`
 Example:
+
 ```jsx
 const { pathname } = useLocation()
 
