@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.36.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.0...cozy-mespapiers-lib@0.36.1) (2022-07-05)
+
+
+### Bug Fixes
+
+* Change path of FileViewer view and use it ([0d9ff87](https://github.com/cozy/cozy-libs/commit/0d9ff879c72f7e796ebb272d655ff5d5852e4ceb))
+
+
+
+
+
 # [0.36.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.35.5...cozy-mespapiers-lib@0.36.0) (2022-07-05)
 
 
