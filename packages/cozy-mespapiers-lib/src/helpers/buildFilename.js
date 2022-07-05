@@ -23,7 +23,7 @@ export const buildFilename = ({
     Calling the stack's file creation method would trigger a `status: "422", title: "Invalid Parameter"` error if filename contains`/`.
     So we need to remove any occurrence of this character from the filename.
   */
-  const safeFileName = qualificationName.replaceAll('/', '_')
+  const safeFileName = qualificationName.replace(/\//g, '_')
 
   const filename = []
   let contactName = harmonizeContactsNames(contacts, t)

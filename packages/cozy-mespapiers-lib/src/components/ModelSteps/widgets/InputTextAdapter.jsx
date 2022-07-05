@@ -70,7 +70,7 @@ const InputTextAdapter = ({
 
     if (mask) {
       const toReplace = new RegExp(`\\s|${maskPlaceholder}`, 'g')
-      currentValue = targetValue.replaceAll(toReplace, '')
+      currentValue = targetValue.replace(toReplace, '')
     }
 
     if (inputType === 'number' && !mask) {
