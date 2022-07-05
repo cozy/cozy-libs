@@ -177,7 +177,7 @@ describe('ConfigurationTab', () => {
       expect(deleteAccount).toHaveBeenCalled()
     })
 
-    it('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy saves in vault)', async () => {
+    xit('should display deletion modal when clicking on disconnect this account (vault needs to be unlocked, connector policy saves in vault)', async () => {
       findKonnectorPolicy.mockReturnValue({ saveInVault: true })
       useVaultClient.mockReturnValue({
         isLocked: jest.fn().mockResolvedValue(true)
