@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2022-07-05)
+
+
+### Bug Fixes
+
+* Dep array ([a0022bc](https://github.com/cozy/cozy-libs/commit/a0022bc7e20a09712323348f4390558617acd328))
+* Lint issue ([8523d7a](https://github.com/cozy/cozy-libs/commit/8523d7accbe7ee83b6a2fe7abf4cc629fcd76e61))
+
+
+### Features
+
+* All oauth methods to handle reconection case ([b1a6033](https://github.com/cozy/cozy-libs/commit/b1a6033b393b1732d985807328ea83e1c87e5373))
+
+
+
+
+
 # [2.2.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.1.0...cozy-intent@2.2.0) (2022-06-07)
 
 

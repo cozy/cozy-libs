@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.19.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.18.1...cozy-harvest-lib@9.19.0) (2022-07-05)
+
+
+### Bug Fixes
+
+* AccountModal tests ([bb447b4](https://github.com/cozy/cozy-libs/commit/bb447b41e560617e1426e7c18553a207fee0475a))
+* Component warning interception ([8b99138](https://github.com/cozy/cozy-libs/commit/8b991385e2b1f64270dcb2c8b2027907faafbf6a))
+* ConfigurationTab unit tests ([808c8ca](https://github.com/cozy/cozy-libs/commit/808c8ca802fca3b372ca2740c1804d4f5a424b75))
+* Dep array ([787c26a](https://github.com/cozy/cozy-libs/commit/787c26a78500ab8b7310aafcd09382bfb7e3a06e))
+* **harvest:** Organization of the components in the test setup ([ebc136e](https://github.com/cozy/cozy-libs/commit/ebc136ef7fe151134b1454a8f9f65cd195378080))
+* Lint issue ([8523d7a](https://github.com/cozy/cozy-libs/commit/8523d7accbe7ee83b6a2fe7abf4cc629fcd76e61))
+* One ConfigurationTab unit test ([d240e72](https://github.com/cozy/cozy-libs/commit/d240e725bd4b6ce6e2d73b92ff588ca47feb5b7e))
+* TriggerManager unit tests ([6cb75d9](https://github.com/cozy/cozy-libs/commit/6cb75d94ff048a7bf647bb11825f6271c6772972))
+* Wrong proptype for ContractItemSecondaryText ([7cc2680](https://github.com/cozy/cozy-libs/commit/7cc2680841deb84e1bd72bb6004834808ed05a23))
+
+
+### Features
+
+* **sharing:** Add `react-router` to devDeps & peerDeps ([f561717](https://github.com/cozy/cozy-libs/commit/f561717529f9945971fc88a30ad8cb1bd6cf9f97))
+
+
+
+
+
 ## [9.18.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.18.0...cozy-harvest-lib@9.18.1) (2022-07-04)
 
 **Note:** Version bump only for package cozy-harvest-lib

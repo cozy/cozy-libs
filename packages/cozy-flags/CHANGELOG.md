@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.10.0 (2022-07-05)
+
+
+### Features
+
+* All oauth methods to handle reconection case ([b1a6033](https://github.com/cozy/cozy-libs/commit/b1a6033b393b1732d985807328ea83e1c87e5373))
+* **flags:** Upgrade devDep `cozy-client` ([8870271](https://github.com/cozy/cozy-libs/commit/88702718ff5e71e2cbc0212190e06a99684ab84d))
+
+
+
+
+
 # 2.9.0 (2022-06-03)
 
 

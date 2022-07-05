@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.31.0 (2022-07-05)
+
+
+### Features
+
+* All oauth methods to handle reconection case ([b1a6033](https://github.com/cozy/cozy-libs/commit/b1a6033b393b1732d985807328ea83e1c87e5373))
+
+
+
+
+
 ## [0.30.4](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.30.3...cozy-app-publish@0.30.4) (2022-06-14)
 
 **Note:** Version bump only for package cozy-app-publish

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.9.0 (2022-07-05)
+
+
+### Bug Fixes
+
+* Lint issue ([8523d7a](https://github.com/cozy/cozy-libs/commit/8523d7accbe7ee83b6a2fe7abf4cc629fcd76e61))
+
+
+### Features
+
+* All oauth methods to handle reconection case ([b1a6033](https://github.com/cozy/cozy-libs/commit/b1a6033b393b1732d985807328ea83e1c87e5373))
+
+
+
+
+
 # 0.8.0 (2022-05-25)
 
 

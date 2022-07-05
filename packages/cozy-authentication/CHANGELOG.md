@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.3](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.10.2...cozy-authentication@2.10.3) (2022-07-05)
+
+
+### Bug Fixes
+
+* Lint issue ([8523d7a](https://github.com/cozy/cozy-libs/commit/8523d7accbe7ee83b6a2fe7abf4cc629fcd76e61))
+
+
+
+
+
 ## [2.10.2](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.10.1...cozy-authentication@2.10.2) (2022-07-01)
 
 

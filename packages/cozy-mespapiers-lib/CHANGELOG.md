@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.36.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.2...cozy-mespapiers-lib@0.36.3) (2022-07-05)
+
+
+### Bug Fixes
+
+* **mespapiers:** MultiselectContent unit tests ([f062faa](https://github.com/cozy/cozy-libs/commit/f062faaa090d9e9b5280d32ac35e432020ade875))
+
+
+
+
+
 ## [0.36.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.1...cozy-mespapiers-lib@0.36.2) (2022-07-05)
 
 

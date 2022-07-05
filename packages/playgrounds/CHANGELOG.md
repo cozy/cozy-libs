@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.21.0](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.20.2...cozy-playgrounds@1.21.0) (2022-07-05)
+
+
+### Features
+
+* Update @babel/runtime to 7.18.6 ([154dcc5](https://github.com/cozy/cozy-libs/commit/154dcc5ad98e26791b5004e585199b3a737d6cf7)), closes [#1631](https://github.com/cozy/cozy-libs/issues/1631)
+
+
+
+
+
 ## [1.20.2](https://github.com/cozy/cozy-libs/compare/cozy-playgrounds@1.20.1...cozy-playgrounds@1.20.2) (2022-07-01)
 
 
