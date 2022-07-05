@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.36.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.1...cozy-mespapiers-lib@0.36.2) (2022-07-05)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Always allow empty string in optional inputs ([b962ceb](https://github.com/cozy/cozy-libs/commit/b962ceb812ed3392d6fdeead1b78df761e96d75b))
+* **mespapiers-lib:** Force the minimum length to be the mask one ([85e6de8](https://github.com/cozy/cozy-libs/commit/85e6de878b66531a6b0fb16afdbd11bd3672e4d6))
+* **mespapiers-lib:** Invalidate empty but required masked inputs ([961982d](https://github.com/cozy/cozy-libs/commit/961982d1b48f49373318d2ed3c70bd55c84cba9a))
+
+
+
+
+
 ## [0.36.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.36.0...cozy-mespapiers-lib@0.36.1) (2022-07-05)
 
 
