@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.36.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.35.5...cozy-mespapiers-lib@0.36.0) (2022-07-05)
+
+
+### Features
+
+* Manage of the display of filters by theme ([67d8654](https://github.com/cozy/cozy-libs/commit/67d865497aa7ee6b75c2fd725b712c7bdcd5e0f5))
+* Reuse of the Fetchpolicy on buildFilesQueryByLabel query ([2a0a65d](https://github.com/cozy/cozy-libs/commit/2a0a65de7e8652885e81477ea7f14606a2cbc4a1))
+* Update cozy-client to 32.2.0 ([52f37b0](https://github.com/cozy/cozy-libs/commit/52f37b030f39a84a436287127d5aec3e9389ada6)), closes [cozy/cozy-client#1175](https://github.com/cozy/cozy-client/issues/1175)
+* Update cozy-ui ([ca59042](https://github.com/cozy/cozy-libs/commit/ca590424957acef7ea8918644e27e7e835d1eae6))
+
+
+
+
+
 ## [0.35.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.35.4...cozy-mespapiers-lib@0.35.5) (2022-07-04)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
