@@ -12,17 +12,17 @@ import MultiselectPaperList from './MultiselectPaperList'
 const MultiselectContent = () => {
   const [isActive, setIsActive] = useState(false)
   const { t } = useI18n()
-  const { multiSelectionFiles } = useMultiSelection()
+  const { allMultiSelectionFiles } = useMultiSelection()
 
   return (
     <div className="u-mb-2 u-w-100">
-      {multiSelectionFiles.length === 0 ? (
+      {allMultiSelectionFiles.length === 0 ? (
         <Typography variant="h6" className="u-mb-1">
           {t('Multiselect.empty')}
         </Typography>
       ) : (
         <List className="u-flex u-flex-column u-flex-justify-center">
-          {multiSelectionFiles.map((file, idx) => (
+          {allMultiSelectionFiles.map((file, idx) => (
             <PaperCardItem
               key={`${file._id}${idx}`}
               paperIndex={idx}

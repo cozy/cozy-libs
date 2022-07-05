@@ -43,7 +43,7 @@ const MultiselectViewActions = ({ onClose }) => {
   const { t, f } = useI18n()
   const client = useClient()
   const classes = useStyles()
-  const { multiSelectionFiles } = useMultiSelection()
+  const { allMultiSelectionFiles } = useMultiSelection()
   const { isMobile } = useBreakpoints()
   const [zipFolder, setZipFolder] = useState({ name: '', dirId: '' })
   const [isForwardModalOpen, setIsForwardModalOpen] = useState(false)
@@ -69,13 +69,13 @@ const MultiselectViewActions = ({ onClose }) => {
   })
 
   const download = async () => {
-    await downloadFiles(client, multiSelectionFiles)
+    await downloadFiles(client, allMultiSelectionFiles)
     onClose()
   }
 
   const forward = async () => {
-    if (multiSelectionFiles.length === 1) {
-      await forwardFile(client, multiSelectionFiles, t)
+    if (allMultiSelectionFiles.length === 1) {
+      await forwardFile(client, allMultiSelectionFiles, t)
     } else {
       setIsBackdropOpen(true)
 
@@ -92,7 +92,7 @@ const MultiselectViewActions = ({ onClose }) => {
 
       const zipName = await makeZipFolder({
         client,
-        files: multiSelectionFiles,
+        files: allMultiSelectionFiles,
         zipFolderName: defaultZipFolderName,
         dirId: parentFolderId
       })
@@ -124,7 +124,7 @@ const MultiselectViewActions = ({ onClose }) => {
             label={t('action.download')}
             startIcon={<Icon icon="download" />}
             onClick={download}
-            disabled={multiSelectionFiles.length === 0}
+            disabled={allMultiSelectionFiles.length === 0}
           />
         ))}
 
@@ -134,7 +134,7 @@ const MultiselectViewActions = ({ onClose }) => {
           label={t('action.forward')}
           startIcon={<Icon icon="paperplane" />}
           onClick={forward}
-          disabled={multiSelectionFiles.length === 0}
+          disabled={allMultiSelectionFiles.length === 0}
         />
       )}
 

@@ -15,8 +15,8 @@ jest.mock('cozy-ui/transpiled/react/Empty', () => () => (
 /* eslint-enable react/display-name */
 jest.mock('../Hooks/useMultiSelection')
 
-const setup = ({ multiSelectionFiles }) => {
-  useMultiSelection.mockReturnValue({ multiSelectionFiles })
+const setup = ({ allMultiSelectionFiles }) => {
+  useMultiSelection.mockReturnValue({ allMultiSelectionFiles })
 
   return render(
     <AppLike>
@@ -27,14 +27,14 @@ const setup = ({ multiSelectionFiles }) => {
 
 describe('MultiselectContent', () => {
   it('should not display PaperCardItem when no files are selected', () => {
-    const { queryByTestId } = setup({ multiSelectionFiles: [] })
+    const { queryByTestId } = setup({ allMultiSelectionFiles: [] })
 
     expect(queryByTestId('PaperCardItem')).toBeNull()
   })
 
   it('should display PaperCardItem when files are selected', () => {
     const { getByTestId } = setup({
-      multiSelectionFiles: [{ _id: '123' }]
+      allMultiSelectionFiles: [{ _id: '123' }]
     })
 
     expect(getByTestId('PaperCardItem'))
