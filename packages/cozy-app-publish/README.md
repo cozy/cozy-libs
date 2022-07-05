@@ -213,17 +213,19 @@ We apply the semver convention:
 ### Hot Fix
 
 If you need to quickly fix a bug in production, then you have to:
-- fetch the latest branch release 
+
+- fetch the latest branch release
 - create a new release branch from there (since this is a bug fix, this is a patch version)
-- fix the bug 
+- fix the bug
 - Make a beta
 - Publish
 - Merge it on master
 
-Exemple: You have to hot fix Drive. The current `stable` version of Drive is : 1.45.0. Master is on 1.47.0. 
-- Then you need to fetch release/1.45.0 
+Exemple: You have to hot fix Drive. The current `stable` version of Drive is : 1.45.0. Master is on 1.47.0.
+
+- Then you need to fetch release/1.45.0
 - Create a branch from this release: git checkout -b release/1.45.1
 - git commit -m "fix: Bug fix.."
 - git push
-- git tag 
-...
+- git tag
+  ...

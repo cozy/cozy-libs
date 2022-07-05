@@ -4,13 +4,13 @@ Let's see how it is built:
 
 *Properties surrounded by `[]` are optional.*
 
-- `papersDefinitions`: {object[]} Contains all possible paper definitions.
+- `papersDefinitions`: {object\[]} Contains all possible paper definitions.
 
   - `label`: {string} Equal a label of [qualification](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/assets/qualifications.json).
   - `icon`: {string} Name of the [icon](https://docs.cozy.io/cozy-ui/react/#!/Icon/11) to use in the suggestion display (placeholder).
   - `[placeholderIndex]`: {number} Presence and position in suggestion (without filter).
   - `[featureDate]`: {string} Date to be highlighted, when several date steps are present.
-  - *`[filenameModel]`: {string[]} Allows to structure the final name of the paper.*
+  - *`[filenameModel]`: {string\[]} Allows to structure the final name of the paper.*
     - *The accepted values are:*
       - *`label`: Reference to the qualification label.*
       - *`featureDate`: Reference to the highlighted date.*
@@ -20,12 +20,12 @@ Let's see how it is built:
   - `connectorCriteria`: {object} Allows to propose the installation of a connector before the steps of creation of a paper.
     - `[name]`: {string} Name of the connector.
     - `[category]`: {string} Connector category.
-  - [`acquisitionSteps`](#steps-of-the-acquisitionsteps-property): {object[]} Contains the steps of the creation process.
+  - [`acquisitionSteps`](#steps-of-the-acquisitionsteps-property): {object\[]} Contains the steps of the creation process.
     - [`scan`](#step-scan) {object} Step to select a file (image/pdf).
     - [`[information]`](#step-information) {object} Step to get more informations about this file.
     - [`owner`](step-owner) {object} Step to select one or more contacts linked to this file.
 
-___
+***
 
 ## Steps of the `acquisitionSteps` property:
 
@@ -55,7 +55,7 @@ ___
   - `text`: {string} Translation key for the text of the step.
   - `[multiple]`: {boolean} Allows you to add multiple contacts.
 
-___
+***
 
 ## Information field attributes:
 
