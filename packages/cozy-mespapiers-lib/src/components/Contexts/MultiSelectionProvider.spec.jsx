@@ -14,7 +14,7 @@ const setup = ({ filesToAdd, removeFile }) => {
       addMultiSelectionFile,
       removeMultiSelectionFile,
       removeAllMultiSelectionFiles,
-      multiSelectionFiles,
+      allMultiSelectionFiles,
       changeCurrentMultiSelectionFile,
       removeCurrentMultiSelectionFile,
       removeAllCurrentMultiSelectionFiles,
@@ -25,7 +25,7 @@ const setup = ({ filesToAdd, removeFile }) => {
     return (
       <>
         <div data-testid="multiSelectionFilesState">
-          {JSON.stringify(multiSelectionFiles)}
+          {JSON.stringify(allMultiSelectionFiles)}
         </div>
         <div data-testid="currentMultiSelectionFilesState">
           {JSON.stringify(currentMultiSelectionFiles)}

@@ -4,7 +4,7 @@ const MultiSelectionContext = createContext()
 
 const MultiSelectionProvider = ({ children }) => {
   const [isMultiSelectionActive, setIsMultiSelectionActive] = useState(false)
-  const [multiSelectionFiles, setMultiSelectionFiles] = useState([])
+  const [allMultiSelectionFiles, setAllMultiSelectionFiles] = useState([])
   const [currentMultiSelectionFiles, setCurrentMultiSelectionFiles] = useState(
     []
   )
@@ -35,17 +35,17 @@ const MultiSelectionProvider = ({ children }) => {
   }
 
   const addMultiSelectionFile = fileToAdd => {
-    setMultiSelectionFiles(files => [...files, fileToAdd])
+    setAllMultiSelectionFiles(files => [...files, fileToAdd])
   }
 
   const removeMultiSelectionFile = fileToRemoveIndex => {
-    setMultiSelectionFiles(files => {
+    setAllMultiSelectionFiles(files => {
       return files.filter((_, idx) => fileToRemoveIndex !== idx)
     })
   }
 
   const removeAllMultiSelectionFiles = () => {
-    setMultiSelectionFiles([])
+    setAllMultiSelectionFiles([])
   }
 
   useEffect(() => {
@@ -58,7 +58,7 @@ const MultiSelectionProvider = ({ children }) => {
 
   const value = {
     isMultiSelectionActive,
-    multiSelectionFiles,
+    allMultiSelectionFiles,
     setIsMultiSelectionActive,
     addMultiSelectionFile,
     removeMultiSelectionFile,
