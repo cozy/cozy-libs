@@ -1,7 +1,8 @@
 import {
   harmonizeContactsNames,
   groupFilesByContacts,
-  buildFilesByContacts
+  buildFilesByContacts,
+  getContactsRefIdsByFiles
 } from './helpers'
 
 const mockContacts00 = [
@@ -66,6 +67,20 @@ const mockFilesWithoutContact = [
 ]
 
 describe('helpers Papers', () => {
+  describe('getContactsRefIdsByFiles', () => {
+    it('should return list of contact ids', () => {
+      const res = getContactsRefIdsByFiles(mockFiles)
+
+      expect(res).toStrictEqual(['contactId01', 'contactId02'])
+    })
+
+    it('should return empty array if has no param', () => {
+      const res = getContactsRefIdsByFiles()
+
+      expect(res).toStrictEqual([])
+    })
+  })
+
   describe('harmonizeContactsNames', () => {
     it('should return the names of the merged contacts', () => {
       const res = harmonizeContactsNames(
