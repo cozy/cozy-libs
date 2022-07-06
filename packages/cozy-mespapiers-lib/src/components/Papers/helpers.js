@@ -9,10 +9,22 @@ const { getDisplayName } = models.contact
 
 const hasContactsInFile = file => file.contacts.length > 0
 
-const getContactsRefIds = file => {
-  return getReferencedBy(file, CONTACTS_DOCTYPE).map(
-    contactRef => contactRef.id
-  )
+/**
+ * Get all contact ids referenced on files
+ *
+ * @param {IOCozyFile[]} files - Array of IOCozyFile
+ * @returns {string[]} - Array of contact ids
+ */
+export const getContactsRefIdsByFiles = (files = []) => {
+  return [
+    ...new Set(
+      files.flatMap(file => {
+        return getReferencedBy(file, CONTACTS_DOCTYPE).map(
+          contactRef => contactRef.id
+        )
+      })
+    )
+  ]
 }
 
 /**
@@ -57,18 +69,18 @@ export const harmonizeContactsNames = (contacts, t) => {
  * @returns {{ contacts: IOCozyContact[], files: IOCozyFile[] }}
  */
 export const groupFilesByContacts = (filesArg, contactsArg) => {
-  return Object.entries(groupBy(filesArg, getContactsRefIds)).map(
-    ([contactStringIds, files]) => {
-      const contactListFiltered = contactsArg.filter(contact =>
-        contactStringIds.includes(contact._id)
-      )
+  return Object.entries(
+    groupBy(filesArg, file => getContactsRefIdsByFiles([file]))
+  ).map(([contactStringIds, files]) => {
+    const contactListFiltered = contactsArg.filter(contact =>
+      contactStringIds.includes(contact._id)
+    )
 
-      return {
-        contacts: contactListFiltered,
-        files
-      }
+    return {
+      contacts: contactListFiltered,
+      files
     }
-  )
+  })
 }
 
 /**
