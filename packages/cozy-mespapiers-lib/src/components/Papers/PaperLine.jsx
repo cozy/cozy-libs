@@ -32,7 +32,11 @@ const PaperLine = ({ paper, divider, actions }) => {
 
   return (
     <>
-      <PaperItem paper={paper} divider={divider}>
+      <PaperItem
+        paper={paper}
+        divider={divider}
+        {...(isMultiSelectionActive && { withCheckbox: true })}
+      >
         {!isMultiSelectionActive && (
           <IconButton ref={actionBtnRef} onClick={toggleActionsMenu}>
             <Icon icon="dots" />

@@ -24,7 +24,7 @@ const PaperItem = ({
   divider,
   className = '',
   classes = {},
-  withoutCheckbox,
+  withCheckbox,
   children
 }) => {
   const { f, t } = useI18n()
@@ -62,9 +62,9 @@ const PaperItem = ({
         button
         className={className}
         classes={classes}
-        onClick={!withoutCheckbox ? handleClick : undefined}
+        onClick={withCheckbox ? handleClick : undefined}
       >
-        {!withoutCheckbox && isMultiSelectionActive && (
+        {withCheckbox && isMultiSelectionActive && (
           <Checkbox checked={isChecked()} value={paper._id} />
         )}
         <ListItemIcon>
