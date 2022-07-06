@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { isQueryLoading, useQueryAll, getReferencedBy } from 'cozy-client'
+import { isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -9,19 +9,16 @@ import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import PaperItem from '../Papers/PaperItem'
-import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildContactsQueryByIds } from '../../helpers/queries'
-import { buildFilesByContacts } from '../Papers/helpers'
+import {
+  buildFilesByContacts,
+  getContactsRefIdsByFiles
+} from '../Papers/helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 
 const SearchResult = ({ filteredPapers }) => {
   const { t } = useI18n()
-
-  const contactIds = filteredPapers.flatMap(file => {
-    return getReferencedBy(file, CONTACTS_DOCTYPE).map(
-      contactRef => contactRef.id
-    )
-  })
+  const contactIds = getContactsRefIdsByFiles(filteredPapers)
 
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
