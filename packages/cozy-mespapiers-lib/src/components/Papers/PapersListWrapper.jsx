@@ -2,7 +2,7 @@ import React, { useMemo } from 'react'
 import { Redirect } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
-import { getReferencedBy, isQueryLoading, useQueryAll } from 'cozy-client'
+import { isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
@@ -11,8 +11,7 @@ import {
   buildFilesQueryByLabel
 } from '../../helpers/queries'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
-import { CONTACTS_DOCTYPE } from '../../doctypes'
-import { buildFilesByContacts } from './helpers'
+import { buildFilesByContacts, getContactsRefIdsByFiles } from './helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersListByContact from '../Papers/PapersListByContact'
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
@@ -38,13 +37,7 @@ const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
   const isLoadingFiles =
     isQueryLoading(fileQueryResult) || fileQueryResult.hasMore
 
-  const contactIds = !isLoadingFiles
-    ? files.flatMap(file => {
-        return getReferencedBy(file, CONTACTS_DOCTYPE).map(
-          contactRef => contactRef.id
-        )
-      })
-    : []
+  const contactIds = !isLoadingFiles ? getContactsRefIdsByFiles(files) : []
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
     contactsQueryByIds.definition,
