@@ -141,13 +141,13 @@ describe('PaperItem components', () => {
   })
 
   describe('handleClick', () => {
-    it('should not call when withCheckbox is not defined', () => {
+    it('should call "history.push" by default', () => {
       const historyPush = jest.fn()
       const { getByTestId } = setup({ historyPush })
 
       fireEvent.click(getByTestId('ListItem'))
 
-      expect(historyPush).toBeCalledTimes(0)
+      expect(historyPush).toBeCalledTimes(1)
     })
     it('should call "history.push" one time when withCheckbox is true & is not on multiselection context', () => {
       const historyPush = jest.fn()
