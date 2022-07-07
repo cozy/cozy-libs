@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.38.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.37.1...cozy-mespapiers-lib@0.38.0) (2022-07-07)
+
+
+### Features
+
+* Add SearchResult to Home component ([efeb604](https://github.com/cozy/cozy-libs/commit/efeb60482408f728f40ea3d539b498ba251eb2cf))
+* Create SearchResult component ([7d68584](https://github.com/cozy/cozy-libs/commit/7d6858463de9dca4a9d70753f19c284c044b519b))
+
+
+
+
+
 ## [0.37.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.37.0...cozy-mespapiers-lib@0.37.1) (2022-07-07)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
