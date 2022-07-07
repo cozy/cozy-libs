@@ -24,6 +24,7 @@ import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 import HomeToolbar from './HomeToolbar'
+import SearchResult from '../SearchResult/SearchResult'
 
 const useStyles = makeStyles(theme => ({
   iconButton: {
@@ -59,6 +60,7 @@ const Home = ({ setSelectedThemeLabel }) => {
   )
 
   const isLoading = isQueryLoading(queryResult) || queryResult.hasMore
+  const isSearching = searchValue.length > 0 || selectedTheme
 
   const allPapersByCategories = useMemo(
     () => uniqBy(filesByLabels, 'metadata.qualification.label'),
@@ -66,7 +68,7 @@ const Home = ({ setSelectedThemeLabel }) => {
   )
 
   const filteredPapers = filterPapersByThemeAndSearchValue({
-    files: allPapersByCategories,
+    files: isSearching ? filesByLabels : allPapersByCategories,
     theme: selectedTheme,
     search: searchValue,
     scannerT
@@ -135,18 +137,22 @@ const Home = ({ setSelectedThemeLabel }) => {
         </Box>
       </div>
 
-      {allPapersByCategories.length === 0 ? (
+      {allPapersByCategories.length > 0 ? (
+        !isSearching ? (
+          <PaperGroup
+            allPapersByCategories={filteredPapers}
+            setSelectedThemeLabel={setSelectedThemeLabel}
+          />
+        ) : (
+          <SearchResult filteredPapers={filteredPapers} />
+        )
+      ) : (
         <Empty
           icon={HomeCloud}
           iconSize="large"
           title={t('Home.Empty.title')}
           text={t('Home.Empty.text')}
           className="u-ph-1"
-        />
-      ) : (
-        <PaperGroup
-          allPapersByCategories={filteredPapers}
-          setSelectedThemeLabel={setSelectedThemeLabel}
         />
       )}
 

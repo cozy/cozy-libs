@@ -21,6 +21,7 @@ const validPageName = page => page === 'front' || page === 'back'
 
 const PaperItem = ({
   paper,
+  contactNames,
   divider,
   className = '',
   classes = {},
@@ -47,7 +48,7 @@ const PaperItem = ({
       changeCurrentMultiSelectionFile(paper)
     } else {
       history.push({
-        pathname: `/paper/file/${paperTheme}/${paper.id}`
+        pathname: `/paper/file/${paperTheme}/${paper._id}`
       })
     }
   }
@@ -56,6 +57,10 @@ const PaperItem = ({
     return currentMultiSelectionFiles.some(file => file._id === paper._id)
   }
 
+  const secondaryText = `${contactNames ? contactNames : ''}${
+    contactNames && paperDate ? ' · ' : ''
+  }${paperDate ? paperDate : ''}`
+
   return (
     <>
       <ListItem
@@ -63,9 +68,15 @@ const PaperItem = ({
         className={className}
         classes={classes}
         onClick={withCheckbox ? handleClick : undefined}
+        disableGutters={withCheckbox && isMultiSelectionActive}
+        data-testid="ListItem"
       >
         {withCheckbox && isMultiSelectionActive && (
-          <Checkbox checked={isChecked()} value={paper._id} />
+          <Checkbox
+            checked={isChecked()}
+            value={paper._id}
+            data-testid="Checkbox"
+          />
         )}
         <ListItemIcon>
           <FileImageLoader
@@ -87,24 +98,30 @@ const PaperItem = ({
               ? t(`PapersList.label.${paperLabel}`)
               : paper.name
           }
-          secondary={paperDate}
+          secondary={secondaryText}
         />
         {children && (
-          <ListItemSecondaryAction>{children}</ListItemSecondaryAction>
+          <ListItemSecondaryAction data-testid="ListItemSecondaryAction">
+            {children}
+          </ListItemSecondaryAction>
         )}
       </ListItem>
 
-      {divider && <Divider variant="inset" component="li" />}
+      {divider && (
+        <Divider variant="inset" component="li" data-testid="Divider" />
+      )}
     </>
   )
 }
 
 PaperItem.propTypes = {
   paper: PropTypes.object.isRequired,
+  contactNames: PropTypes.string,
   divider: PropTypes.bool,
   children: PropTypes.node,
   className: PropTypes.string,
-  classes: PropTypes.object
+  classes: PropTypes.object,
+  withCheckbox: PropTypes.bool
 }
 
 export default PaperItem

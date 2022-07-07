@@ -18,7 +18,14 @@ export const buildFilesQueryByLabels = labels => {
           trashed: false
         })
         .indexFields(['metadata.qualification.label'])
-        .select(['name', 'metadata.qualification.label', 'type', 'trashed'])
+        .select([
+          'name',
+          'metadata.datetime',
+          'referenced_by',
+          'metadata.qualification.label',
+          'type',
+          'trashed'
+        ])
         .limitBy(1000),
     options: {
       as: `${FILES_DOCTYPE}/${JSON.stringify(labels)}`,

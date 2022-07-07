@@ -26,6 +26,7 @@ const ThemesFilter = ({ items, selectedTheme, handleThemeSelection }) => {
           label={makeLabel({ scannerT, t, label: `themes.${item.label}` })}
           variant={selectedTheme.id === item.id ? 'active' : 'default'}
           onClick={() => handleThemeSelection(item)}
+          data-testid="ThemesFilter"
         >
           <Icon icon={item.icon} />
         </CircleButton>
