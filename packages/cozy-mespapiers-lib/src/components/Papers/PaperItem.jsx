@@ -44,7 +44,7 @@ const PaperItem = ({
     : null
 
   const handleClick = () => {
-    if (isMultiSelectionActive) {
+    if (isMultiSelectionActive && withCheckbox) {
       changeCurrentMultiSelectionFile(paper)
     } else {
       history.push({
@@ -67,7 +67,7 @@ const PaperItem = ({
         button
         className={className}
         classes={classes}
-        onClick={withCheckbox ? handleClick : undefined}
+        onClick={handleClick}
         disableGutters={withCheckbox && isMultiSelectionActive}
         data-testid="ListItem"
       >
