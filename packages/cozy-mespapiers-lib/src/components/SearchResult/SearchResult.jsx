@@ -56,7 +56,12 @@ const SearchResult = ({ filteredPapers }) => {
         {filesWithContacts.map(({ contact, papers }) => {
           return papers.list.map(paper => {
             return (
-              <PaperItem key={paper._id} paper={paper} contactNames={contact} />
+              <PaperItem
+                key={paper._id}
+                paper={paper}
+                contactNames={contact}
+                withCheckbox
+              />
             )
           })
         })}
