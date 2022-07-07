@@ -1,5 +1,5 @@
 import React from 'react'
-import { render, fireEvent } from '@testing-library/react'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 
@@ -9,8 +9,10 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 /* eslint-disable react/display-name */
 jest.mock('./HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
-jest.mock('../ThemesFilter', () => () => <div data-testid="ThemesFilter" />)
 jest.mock('../Papers/PaperGroup', () => () => <div data-testid="PaperGroup" />)
+jest.mock('../SearchResult/SearchResult', () => () => (
+  <div data-testid="SearchResult" />
+))
 jest.mock('cozy-ui/transpiled/react/Empty', () => () => (
   <div data-testid="Empty" />
 ))
@@ -86,24 +88,24 @@ describe('Home components:', () => {
   })
 
   it('should display PaperGroup, SearchInput, ThemesFilter & FeaturedPlaceholdersList', () => {
-    const { getByTestId } = setup({
+    const { getByTestId, queryAllByTestId } = setup({
       isLoading: false,
       withData: true
     })
 
     expect(getByTestId('PaperGroup'))
     expect(getByTestId('SearchInput'))
-    expect(getByTestId('ThemesFilter'))
+    expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
     expect(getByTestId('FeaturedPlaceholdersList'))
   })
 
   it('should display ThemesFilter by default', () => {
-    const { getByTestId } = setup({
+    const { queryAllByTestId } = setup({
       isLoading: false,
       withData: true
     })
 
-    expect(getByTestId('ThemesFilter'))
+    expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
   })
 
   it('should not display SwitchButton by default', () => {
@@ -116,25 +118,25 @@ describe('Home components:', () => {
   })
 
   it('should hide ThemesFilter when SearchInput is focused', () => {
-    const { queryByTestId, getByTestId } = setup({
+    const { queryAllByTestId, getByTestId } = setup({
       isLoading: false,
       withData: true
     })
 
-    expect(getByTestId('ThemesFilter'))
+    expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
     fireEvent.focus(getByTestId('SearchInput'))
-    expect(queryByTestId('ThemesFilter')).toBeNull()
+    expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
   })
 
   it('should display ThemesFilter when click on SwitchButton', () => {
-    const { queryByTestId, getByTestId } = setup({
+    const { queryAllByTestId, getByTestId } = setup({
       isLoading: false,
       withData: true
     })
     fireEvent.focus(getByTestId('SearchInput'))
-    expect(queryByTestId('ThemesFilter')).toBeNull()
+    expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
     fireEvent.click(getByTestId('SwitchButton'))
-    expect(getByTestId('ThemesFilter'))
+    expect(queryAllByTestId('ThemesFilter')).not.toHaveLength(0)
   })
 
   it('should hide SwitchButton when click on it', () => {
@@ -147,6 +149,57 @@ describe('Home components:', () => {
     expect(getByTestId('SwitchButton'))
     fireEvent.click(getByTestId('SwitchButton'))
     expect(queryByTestId('SwitchButton')).toBeNull()
+  })
+
+  it('should not display SearchResult by default', () => {
+    const { queryByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    expect(queryByTestId('SearchResult')).toBeNull()
+  })
+
+  it('should display SearchResult instead PaperGroup when ThemesFilter is clicked', () => {
+    const { queryByTestId, queryAllByTestId, getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    fireEvent.click(queryAllByTestId('ThemesFilter')[0])
+    expect(getByTestId('SearchResult'))
+    expect(queryByTestId('PaperGroup')).toBeNull()
+  })
+
+  it('should display PaperGroup instead SearchResult when same ThemesFilter is clicked again', () => {
+    const { queryByTestId, queryAllByTestId, getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    fireEvent.click(queryAllByTestId('ThemesFilter')[0])
+    fireEvent.click(queryAllByTestId('ThemesFilter')[0])
+    expect(getByTestId('PaperGroup'))
+    expect(queryByTestId('SearchResult')).toBeNull()
+  })
+
+  it('should display SearchResult instead PaperGroup when SearchInput is filled', async () => {
+    const { queryByTestId, getByTestId } = setup({
+      isLoading: false,
+      withData: true
+    })
+
+    expect(getByTestId('PaperGroup'))
+    expect(queryByTestId('SearchResult')).toBeNull()
+    fireEvent.change(getByTestId('SearchInput'), { target: { value: 'cozy' } })
+
+    await waitFor(
+      () => {
+        expect(getByTestId('SearchResult'))
+        expect(queryByTestId('PaperGroup')).toBeNull()
+      },
+      { timeout: 400 }
+    )
   })
 
   describe('multi-selection mode', () => {
@@ -163,13 +216,13 @@ describe('Home components:', () => {
     })
 
     it('should not display ThemesFilter by default', () => {
-      const { queryByTestId } = setup({
+      const { queryAllByTestId } = setup({
         isLoading: false,
         withData: true,
         isMultiSelectionActive: true
       })
 
-      expect(queryByTestId('ThemesFilter')).toBeNull()
+      expect(queryAllByTestId('ThemesFilter')).toHaveLength(0)
     })
 
     it('should not display FeaturedPlaceholdersList', () => {
