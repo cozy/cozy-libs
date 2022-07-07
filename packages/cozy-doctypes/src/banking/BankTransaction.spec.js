@@ -1,17 +1,25 @@
 const BankTransaction = require('./BankTransaction')
+const flag = require('cozy-flags').default
+jest.mock('../Document')
+const Document = require('../Document')
+jest.mock('../log')
+const log = require('../log')
 
 const testTransactions = [
   {
+    _id: 'testid37',
     amount: -10,
     originalBankLabel: 'Test 01',
     date: '2018-10-02'
   },
   {
+    _id: 'testid378',
     amount: -20,
     originalBankLabel: 'Test 02',
     date: '2018-10-05'
   },
   {
+    _id: 'testid30',
     amount: -30,
     originalBankLabel: 'Test 03',
     date: '2018-10-06'
@@ -190,6 +198,24 @@ describe('reconciliation', () => {
     expect(trackEvent).not.toHaveBeenCalledWith({
       e_a: 'ReconciliateSplitDate'
     })
+  })
+})
+
+describe('deleteAll', () => {
+  it('should log a warning with id of deleted documents', () => {
+    log.mockReset()
+    flag('banking.warn-on-delete', true)
+    BankTransaction.deleteAll(testTransactions)
+    flag('banking.warn-on-delete', null)
+    expect(Document.deleteAll).toHaveBeenCalledTimes(1)
+    expect(log).toHaveBeenCalledWith(
+      'warn',
+      `OPERATION_DELETE: removing operations with _id : ${JSON.stringify([
+        'testid37',
+        'testid378',
+        'testid30'
+      ])}`
+    )
   })
 })
 
