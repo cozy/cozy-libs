@@ -8,6 +8,7 @@ const log = require('../log')
 const BankAccount = require('./BankAccount')
 const { matchTransactions } = require('./matching-transactions')
 const cloneDeep = require('lodash/cloneDeep')
+const flag = require('cozy-flags').default
 
 const maxValue = (iterable, fn) => {
   const res = maxBy(iterable, fn)
@@ -45,6 +46,17 @@ const ensureISOString = date => {
 }
 
 class Transaction extends Document {
+  static async deleteAll(docs) {
+    if (flag('banking.warn-on-delete')) {
+      log(
+        'warn',
+        `OPERATION_DELETE: removing operations with _id : ${JSON.stringify(
+          docs.map(doc => doc._id)
+        )}`
+      )
+    }
+    return super.deleteAll(docs)
+  }
   static getDate(transaction) {
     return transaction
   }
@@ -261,6 +273,10 @@ class Transaction extends Document {
     log('info', `Total number of orphan operations: ${orphanOperations.length}`)
     log('info', `Deleting ${orphanOperations.length} orphan operations...`)
     if (orphanOperations.length > 0) {
+      log(
+        flag('banking.warn-on-delete') ? 'warn' : 'info',
+        `OPERATION_DELETE: removing ${orphanOperations.length} orphan operations`
+      )
       return this.deleteAll(orphanOperations)
     }
   }
