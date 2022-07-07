@@ -21,6 +21,12 @@ const FilesViewerWithQuery = props => {
     buildedFilesQuery.options
   )
 
+  const handleClose = () => {
+    return history.length > 0
+      ? history.goBack()
+      : history.push(`/paper/files/${currentFileTheme}`)
+  }
+
   if (filesQuery.data?.length > 0) {
     return (
       <SharingProvider
@@ -32,7 +38,7 @@ const FilesViewerWithQuery = props => {
           fileId={currentFileId}
           files={filesQuery.data}
           filesQuery={filesQuery}
-          onClose={() => history.push(`/paper/files/${currentFileTheme}`)}
+          onClose={handleClose}
           onChange={fileId => history.push(`/paper/file/${fileId}`)}
         />
       </SharingProvider>
