@@ -42,8 +42,8 @@ const {
 const Home = ({ setSelectedThemeLabel }) => {
   const { isMultiSelectionActive } = useMultiSelection()
   const [searchValue, setSearchValue] = useState('')
-  const [isSearchValueFocus, setIsSearchValueFocus] = useState(
-    isMultiSelectionActive
+  const [isThemesFilterDisplayed, setIsThemesFilterDisplayed] = useState(
+    !isMultiSelectionActive
   )
   const [selectedTheme, setSelectedTheme] = useState('')
   const styles = useStyles()
@@ -88,6 +88,10 @@ const Home = ({ setSelectedThemeLabel }) => {
     setSelectedTheme(oldValue => (nextValue === oldValue ? '' : nextValue))
   }
 
+  const handleThemesFilterDisplayed = isDisplayed => {
+    setIsThemesFilterDisplayed(isDisplayed)
+  }
+
   if (isLoading) {
     return (
       <Spinner
@@ -104,10 +108,11 @@ const Home = ({ setSelectedThemeLabel }) => {
       <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
         <Box className="u-flex u-flex-items-center u-mb-half-s" flex="1 1 auto">
           <SearchInput
-            setSearchValue={setSearchValue}
-            setIsSearchValueFocus={setIsSearchValueFocus}
+            value={searchValue}
+            onChange={ev => setSearchValue(ev.target.value)}
+            onFocus={() => handleThemesFilterDisplayed(false)}
           />
-          {isSearchValueFocus && (
+          {!isThemesFilterDisplayed && (
             <Badge
               badgeContent={selectedTheme ? 1 : 0}
               showZero={false}
@@ -119,7 +124,7 @@ const Home = ({ setSelectedThemeLabel }) => {
                 data-testid="SwitchButton"
                 className={styles.iconButton}
                 size="medium"
-                onClick={() => setIsSearchValueFocus(false)}
+                onClick={() => handleThemesFilterDisplayed(true)}
               >
                 <Icon icon="setting" />
               </IconButton>
@@ -127,7 +132,7 @@ const Home = ({ setSelectedThemeLabel }) => {
           )}
         </Box>
         <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
-          {!isSearchValueFocus && (
+          {isThemesFilterDisplayed && (
             <ThemesFilter
               items={themesList}
               selectedTheme={selectedTheme}
