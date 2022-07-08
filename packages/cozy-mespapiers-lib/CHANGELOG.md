@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.39.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.38.0...cozy-mespapiers-lib@0.39.0) (2022-07-08)
+
+
+### Bug Fixes
+
+* Add Checkbox to PaperItem during search on multiselection context ([f92fb08](https://github.com/cozy/cozy-libs/commit/f92fb086ec5b73077077d365a121e4b74afd30aa))
+* Click on a file during a search ([8f0c7c5](https://github.com/cozy/cozy-libs/commit/8f0c7c5d6c7f1dd929978441cabaa10139416b8c))
+
+
+### Features
+
+* Go back in the history if possible in the FileViewer ([63513e7](https://github.com/cozy/cozy-libs/commit/63513e7368381ed39102cbe54bd027a678cab5b2))
+
+
+
+
+
 # [0.38.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.37.1...cozy-mespapiers-lib@0.38.0) (2022-07-07)
 
 
