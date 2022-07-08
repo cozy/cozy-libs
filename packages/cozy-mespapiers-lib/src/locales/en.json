@@ -271,5 +271,11 @@
     "empty": "Select the papers to be forwarded",
     "select": "Add to my selection",
     "folderZipName": "%{contactName} - papers - %{date}.zip"
+  },
+  "Search": {
+    "empty": {
+      "title": "No results",
+      "text": "Try to shorten or rephrase your search"
+    }
   }
 }
