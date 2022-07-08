@@ -1,0 +1,275 @@
+{
+  "Acquisition": {
+    "repeat": "Scanner une page supplémentaire",
+    "retry": "Annuler la photo",
+    "success": "La photo a bien été prise."
+  },
+  "action": {
+    "createPaper": "Ajouter un papier",
+    "download": "Télécharger",
+    "forward": "Transmettre",
+    "help": "Aides",
+    "installHomepage": "Installer sur l’accueil de mon mobile",
+    "moveTo": "Déplacer vers…",
+    "open": "Ouvrir…",
+    "phoneDownload": "Rendre accessible hors-ligne",
+    "qualify": "Qualifier",
+    "rename": "Renommer",
+    "forwardPapers": "Transmettre des papiers",
+    "select": "Sélectionner",
+    "share": "Partager",
+    "trash": "Supprimer",
+    "version": "Versions",
+    "viewInDrive": "Voir dans Drive"
+  },
+  "common": {
+    "add": "Ajouter",
+    "cancel": "Annuler",
+    "downloadFile": {
+      "error": {
+        "offline": "Vous devez être connecté pour pouvoir télécharger ce fichier",
+        "missing": "Ce fichier est manquant"
+      }
+    },
+    "next": "Suivant",
+    "removeQualification": {
+      "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
+      "success": "Le document a été retiré de Mes papiers."
+    },
+    "replace": "Remplacer",
+    "saveFile": {
+      "error": "Une erreur est survenue, veuillez réessayer ultérieurement",
+      "success": "Fichier enregistré avec succès"
+    },
+    "trashFile": {
+      "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
+      "success": "Le document a été déplacé vers la corbeille."
+    },
+    "search": "Rechercher"
+  },
+  "FeaturedPlaceholdersList": {
+    "subheader": "Suggestions"
+  },
+  "folder": {
+    "administrative": "Administratif",
+    "papers": "Mes papiers"
+  },
+  "ConfirmReplaceFile": {
+    "content": "Votre nouveau document sera rangé dans le dossier <b>Drive/Administratif/Mes Papiers</b>.",
+    "question": "Souhaitez-vous conserver le fichier original de votre drive ayant servi à générer le document ? |||| Souhaitez-vous conserver les fichiers originaux de votre drive ayant servi à générer le document ?",
+    "keep": "Conserver",
+    "title": "Conserver le fichier original ? |||| Conserver les fichiers originaux ?",
+    "replace": "Non, merci"
+  },
+  "ContactStep": {
+    "me": "Moi",
+    "onLoad": "Génération du document",
+    "other": "Une autre personne",
+    "save": "Sauvegarder",
+    "contactModal": {
+      "placeholder": "Rechercher un contact",
+      "addContactLabel": "Ajouter un contact",
+      "emptyContact": "Aucun contact"
+    }
+  },
+  "DeleteConfirm": {
+    "cancel": "Annuler",
+    "choice": "Ne pas supprimer l'image.",
+    "delete": "Supprimer",
+    "title": "Supprimer cet élément ?",
+    "text": "L’élément est associé au fichier <strong>\"%{name}\"</strong> dans votre drive."
+  },
+  "ForwardModal": {
+    "action": "Sélectionner un destinataire",
+    "content": "Vos papiers ont bien été rassemblés. Sélectionner un destinataire pour procéder à l’envoi."
+  },
+  "Home": {
+    "Empty": {
+      "text": "Gardez les toujours sur vous dans un espace sécurisé pour simplifier vos démarches administratives. Ils ne seront jamais utilisés sans votre consentement explicite.",
+      "title": "Ajoutez vos documents personnels"
+    },
+    "Fab": {
+      "ariaLabel": "Ouvrir la menu de toutes les suggestions"
+    }
+  },
+  "ImportDropdown": {
+    "importAuto": {
+      "text": "Récupérer ce document grâce à son site internet, votre papier sera ensuite maintenu à jour automatiquement",
+      "title": "Importer automatiquement"
+    },
+    "scanPicture": {
+      "text": "Utiliser votre appareil photo ou un document existant",
+      "title": "Prendre ou sélectionner des photos"
+    },
+    "title": "Ajout : %{name}"
+  },
+  "InputDateAdapter": {
+    "invalidDateMessage": "Date invalide"
+  },
+  "InputTextAdapter": {
+    "invalidTextMessage": "Il manque %{smart_count} caractère |||| Il manque %{smart_count} caractères"
+  },
+  "Onboarding": {
+    "cta": "C'est parti !"
+  },
+  "PapersDefinitionsProvider": {
+    "customPapersDefinitions": {
+      "error": "%{name} introuvable dans %{path}",
+      "warning": "Fichier \"%{name}\" chargé depuis votre Drive"
+    }
+  },
+  "PaperJSON": {
+    "generic": {
+      "back": {
+        "text": "Ajouter la face arrière"
+      },
+      "cover": {
+        "text": "Ajouter la couverture"
+      },
+      "content": {
+        "text": "Ajouter la page intérieure"
+      },
+      "date": {
+        "inputLabel": "Date du document",
+        "text": "Quelle est la date de ce document ?"
+      },
+      "expirationDate": {
+        "inputLabel": "Valable jusqu'au",
+        "text": "Quelle est la date d'expiration de ce document ?"
+      },
+      "front": {
+        "text": "Ajouter la face avant"
+      },
+      "issueDate": {
+        "inputLabel": "Délivré le",
+        "text": "Quelle est la date d'émission de ce document ?"
+      },
+      "multiPages": {
+        "text": "Ajouter une page du document"
+      },
+      "owner": {
+        "inputLabel": "Détenteur",
+        "text": "Qui est le détenteur de ce document ?"
+      },
+      "referencedDate": {
+        "inputLabel": "Date de référence",
+        "text": "Date de début de la période couverte par ce document ?"
+      },
+      "renameFile": {
+        "inputLabel": "Nom du document",
+        "text": "Quel est le nom de votre document ?"
+      },
+      "shootingDate": {
+        "inputLabel": "Date de prise de vue",
+        "text": "Quand cette photo a-t-elle été prise ? (optionnelle)"
+      },
+      "singlePage": {
+        "text": "Ajouter l'image du document"
+      },
+      "addressLabel": {
+        "text": "Choisissez un libelé court pour ce logement",
+        "inputLabel": "Libellé du logement (10 caractères max.)"
+      },
+      "fileLabel": {
+        "text": "Choisissez un nom pour ce document",
+        "inputLabel": "Nom du document (40 caractères max.)"
+      }
+    },
+    "bankDetails": {
+      "ibanNumber": {
+        "inputLabel": "IBAN",
+        "text": "Saisissez votre numéro d'IBAN"
+      }
+    },
+    "vehicleRegistration": {
+      "vinNumber": {
+        "inputLabel": "Numéro en position E. de votre carte crise",
+        "text": "Saisissez le Numéro d'identification du véhicule (VIN)"
+      }
+    },
+    "driverLicense": {
+      "BObtentionDate": {
+        "inputLabel": "Voiture (B)"
+      },
+      "AObtentionDate": {
+        "inputLabel": "Moto (A)"
+      },
+      "number": {
+        "inputLabel": "Numéro de votre permis",
+        "text": "Quel est le numéro de votre permis ?"
+      },
+      "obtentionDate": {
+        "text": "Renseignez les dates d'obtention des catégories valables."
+      },
+      "CObtentionDate": {
+        "inputLabel": "Camion (C)"
+      },
+      "DObtentionDate": {
+        "inputLabel": "Bus (D)"
+      }
+    },
+    "card": {
+      "back": {
+        "text": "Ajouter la face arrière de votre carte"
+      },
+      "expirationDate": {
+        "inputLabel": "Valable jusqu'au",
+        "text": "Quelle est la date d'expiration de cette carte ?"
+      },
+      "front": {
+        "text": "Ajouter la face avant de votre carte"
+      },
+      "number": {
+        "inputLabel": "Numéro de la carte",
+        "text": "Saisir le numéro de votre carte"
+      }
+    }
+  },
+  "PapersList": {
+    "contactMerged": "%{firstGivenName} et %{secondGivenName} %{familyName}",
+    "defaultName": "Contact non spécifié",
+    "label": {
+      "back": "Face arrière",
+      "front": "Face avant"
+    },
+    "subheader": "Existants",
+    "PapersListByContact": {
+      "seeMore": "Voir plus (%{number})"
+    },
+    "empty": "Vous n'avez aucun papier dans ce thème."
+  },
+  "PlaceholdersList": {
+    "title": "Nouveau papier%{name}"
+  },
+  "Scan": {
+    "divider": "ou",
+    "importPicFromMobile": "Sélectionner depuis mon téléphone",
+    "importPicFromDesktop": "Sélectionner depuis mon ordinateur",
+    "modal": {
+      "validFileType": "Format acceptés : image ou pdf"
+    },
+    "selectPicFromCozy": "Sélectionner dans mon Cozy",
+    "takePic": "Prendre en photo",
+    "themes": {
+      "work_study": "Travail",
+      "activity": "Loisirs"
+    }
+  },
+  "viewer": {
+    "shareData": {
+      "error": "Problème avec la récupération du lien : %{error}",
+      "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
+      "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
+    }
+  },
+  "Multiselect": {
+    "backdrop": "Rassemblement de vos papiers...",
+    "title": {
+      "default": "Ma sélection",
+      "nbSelected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés"
+    },
+    "empty": "Sélectionner les papiers à transmettre",
+    "select": "Ajouter à ma sélection",
+    "folderZipName": "%{contactName} - papiers - %{date}.zip"
+  }
+}
