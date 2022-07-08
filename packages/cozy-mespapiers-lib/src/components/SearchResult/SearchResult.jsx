@@ -42,8 +42,8 @@ const SearchResult = ({ filteredPapers }) => {
       <Empty
         icon={HomeCloud}
         iconSize="large"
-        title={t('Home.Empty.title')}
-        text={t('Home.Empty.text')}
+        title={t('Search.empty.title')}
+        text={t('Search.empty.text')}
         className="u-ph-1"
       />
     )

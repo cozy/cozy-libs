@@ -271,5 +271,11 @@
     "empty": "Sélectionner les papiers à transmettre",
     "select": "Ajouter à ma sélection",
     "folderZipName": "%{contactName} - papiers - %{date}.zip"
+  },
+  "Search": {
+    "empty": {
+      "title": "Aucun résultat",
+      "text": "Essayez de raccourcir ou de reformuler votre recherche."
+    }
   }
 }
