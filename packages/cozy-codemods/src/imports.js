@@ -279,6 +279,13 @@ const getAttributeByName = ({ attributes, name }) =>
 const makeAttribute = ({ name, value }) =>
   j.jsxAttribute(j.jsxIdentifier(name), j.literal(value))
 
+const renameAttributeByName = ({ oldName, newName, attributes }) => {
+  const attrToRename = getAttributeByName({ name: oldName, attributes })
+  if (attrToRename) {
+    attrToRename.name.name = newName
+  }
+}
+
 /**
  * Make an JSXElement easily with different options
  *
@@ -316,5 +323,6 @@ module.exports = {
   getAttributeValue,
   getAttributeByName,
   makeAttribute,
-  makeJSXElement
+  makeJSXElement,
+  renameAttributeByName
 }
