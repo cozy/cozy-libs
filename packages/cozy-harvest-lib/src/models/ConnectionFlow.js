@@ -637,16 +637,17 @@ export class ConnectionFlow {
     const trigger = this.trigger
     const { status, accountError } = this.state
     const triggerError = triggersModel.getKonnectorJobError(trigger)
+    const running =
+      get(trigger, 'current_state.status') === 'running' ||
+      ![ERRORED, IDLE, SUCCESS].includes(status)
     return {
-      running:
-        get(trigger, 'current_state.status') === 'running' ||
-        ![ERRORED, IDLE, SUCCESS].includes(status),
+      running,
       twoFARunning: status === RUNNING_TWOFA,
       twoFARetry: status == TWO_FA_MISMATCH,
       triggerError: triggerError,
       trigger,
       accountError,
-      error: this.getMockError() || accountError || triggerError,
+      error: !running && (this.getMockError() || accountError || triggerError),
       konnectorRunning: triggersModel.isKonnectorRunning(trigger)
     }
   }

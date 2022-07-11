@@ -125,6 +125,23 @@ const fixtures = {
       }
     }
   },
+  erroredTrigger: {
+    id: 'errored-trigger-id',
+    _type: 'io.cozy.triggers',
+    current_state: {
+      status: 'errored',
+      last_error: 'last error message'
+    },
+    attributes: {
+      arguments: '0 0 0 * * 0',
+      type: '@cron',
+      worker: 'konnector',
+      message: {
+        account: 'updated-account-id',
+        konnector: 'konnectest'
+      }
+    }
+  },
   runningTrigger: {
     id: 'running-trigger-id',
     _type: 'io.cozy.triggers',

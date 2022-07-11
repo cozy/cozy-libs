@@ -15,6 +15,7 @@ import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight
 import fixtures from '../../test/fixtures'
 import sentryHub from '../sentry'
 import { Q } from 'cozy-client'
+import { KonnectorJobError } from '../helpers/konnectors'
 
 jest.mock('./konnector/KonnectorJobWatcher')
 jest.mock('../sentry', () => {
@@ -115,6 +116,26 @@ const setupSubmit = (flow, submitOptions) => {
 }
 
 describe('ConnectionFlow', () => {
+  describe('getState', () => {
+    beforeAll(() => {
+      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
+    })
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+    it('should return error if not running', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+      const { error } = flow.getState()
+
+      expect(error).toEqual(new KonnectorJobError('last error message'))
+    })
+    it('should not return error while running', () => {
+      const { flow } = setup({ trigger: fixtures.runningTrigger })
+      flow.setState({ accountError: 'error to hide' })
+      const { error } = flow.getState()
+      expect(error).toBe(false)
+    })
+  })
   describe('handleFormSubmit', () => {
     const isSubmitting = flow => {
       return flow.getState().running === true
