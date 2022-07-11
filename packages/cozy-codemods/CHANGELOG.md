@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.17.0 (2022-07-11)
+
+
+### Features
+
+* **cozy-codemods:** Add codemods for Input ([39292fc](https://github.com/cozy/cozy-libs/commit/39292fc47ecc1703f74a0f517b075f623a280446))
+* **cozy-codemods:** Add helper for rename attribute ([c2e75b7](https://github.com/cozy/cozy-libs/commit/c2e75b7981315b665e4767477a9c60c97abd6b0e))
+* Update @babel/runtime to 7.18.6 ([154dcc5](https://github.com/cozy/cozy-libs/commit/154dcc5ad98e26791b5004e585199b3a737d6cf7)), closes [#1631](https://github.com/cozy/cozy-libs/issues/1631)
+
+
+
+
+
 ## [1.16.5](https://github.com/cozy/cozy-libs/compare/@cozy/codemods@1.16.4...@cozy/codemods@1.16.5) (2022-06-10)
 
 **Note:** Version bump only for package @cozy/codemods
