@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.40.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.39.0...cozy-mespapiers-lib@0.40.0) (2022-07-11)
+
+
+### Features
+
+* Change the wording of the unsuccessful search ([fb0781b](https://github.com/cozy/cozy-libs/commit/fb0781b589433998ea2926df139f1724ddffd9ea))
+* Update SearchInput component ([77a114f](https://github.com/cozy/cozy-libs/commit/77a114f3132b5e5b1f2f82fd6f416e0905f12918))
+
+
+
+
+
 # [0.39.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.38.0...cozy-mespapiers-lib@0.39.0) (2022-07-08)
 
 
