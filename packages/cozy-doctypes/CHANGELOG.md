@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.84.0 (2022-07-11)
+
+
+### Bug Fixes
+
+* Cozy-doctypes unit test environment ([4dd9589](https://github.com/cozy/cozy-libs/commit/4dd9589621a5d4e19612729635703bbb4917a239))
+
+
+### Features
+
+* Add warning logs when banking.warn-on-delete flag is activated ([3586b99](https://github.com/cozy/cozy-libs/commit/3586b999e1725221daedc312c5db4a1e78dc816d))
+
+
+
+
+
 ## 1.83.8 (2022-05-13)
 
 
