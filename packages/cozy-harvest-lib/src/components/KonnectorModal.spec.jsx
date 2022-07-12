@@ -73,7 +73,7 @@ describe('KonnectorModal', () => {
 
   it('should show a spinner while loading', async () => {
     const { root } = setup()
-    waitFor(() => root.getByRole('progressbar'))
+    return waitFor(() => root.getByRole('progressbar'))
   })
 
   it('should show an error view', async () => {

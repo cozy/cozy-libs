@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-  - '12'
+  - '16'
 cache:
   yarn: true
   directories:
@@ -26,7 +26,7 @@ jobs:
     - name: 'Repo Doctor'
       script: '[ $TRAVIS_EVENT_TYPE = "cron" ] && pushd ./packages/repo-doctor && yarn start:mattermost && popd || true'
     - name: 'Tests'
-      script: 
+      script:
         - ./scripts/travis.sh
 
 env:
