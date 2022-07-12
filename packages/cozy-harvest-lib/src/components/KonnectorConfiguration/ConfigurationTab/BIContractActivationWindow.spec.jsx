@@ -63,7 +63,7 @@ describe('BIContractActivationWindow', () => {
     const { getByRole } = setup()
     await act(async () => {
       await waitFor(() => {
-        expect(getByRole('button').getAttribute('class')).not.toContain(
+        return expect(getByRole('button').getAttribute('class')).not.toContain(
           'Mui-disabled'
         )
       })
@@ -72,7 +72,7 @@ describe('BIContractActivationWindow', () => {
     await act(async () => {
       fireEvent.click(getByRole('button'))
       await waitFor(() => {
-        expect(refreshContracts).toHaveBeenCalled()
+        return expect(refreshContracts).toHaveBeenCalled()
       })
     })
 
@@ -91,7 +91,7 @@ describe('BIContractActivationWindow', () => {
     const { getByRole } = setup()
     await act(async () => {
       await waitFor(() => {
-        expect(getByRole('button').getAttribute('class')).not.toContain(
+        return expect(getByRole('button').getAttribute('class')).not.toContain(
           'Mui-disabled'
         )
       })
@@ -100,7 +100,7 @@ describe('BIContractActivationWindow', () => {
     await act(async () => {
       fireEvent.click(getByRole('button'))
       await waitFor(() => {
-        expect(refreshContracts).toHaveBeenCalled()
+        return expect(refreshContracts).toHaveBeenCalled()
       })
     })
 

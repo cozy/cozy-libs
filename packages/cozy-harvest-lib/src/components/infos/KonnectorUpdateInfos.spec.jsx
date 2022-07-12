@@ -2,8 +2,22 @@
 import React from 'react'
 import { render } from '@testing-library/react'
 
-import AppLike from '../../test/AppLike'
+import AppLike from '../../../test/AppLike'
 import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
+
+jest.mock(
+  '../KonnectorUpdateLinker',
+  () =>
+    ({ konnector, label, isBlocking }) =>
+      (
+        <div
+          data-testtid="KonnectorUpdateLinker"
+          data-label={label}
+          data-konnector={konnector}
+          data-is-blocking={isBlocking}
+        />
+      )
+)
 
 // Default props
 const intents = {
