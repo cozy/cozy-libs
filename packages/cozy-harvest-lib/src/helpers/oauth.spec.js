@@ -50,7 +50,7 @@ describe('Oauth helper', () => {
         oAuthConf: { scope: ['thescope', 'thescope2'] }
       })
       expect(url).toEqual(
-        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope+thescope2'
+        'https://cozyurl/accounts/testslug/start?state=statekey&nonce=1234&scope=thescope%2Bthescope2'
       )
     })
     it('should use redirectSlug if present', () => {
