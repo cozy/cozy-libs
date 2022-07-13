@@ -6,6 +6,7 @@
  * @property {String} biBankId - BI bank id corresponding to the bankId translated by the connector (deprecated once bi webviews are in production)
  * @property {Array<String>} bankIds - Cozy bank ids corresponding to the current connector
  * @property {Array<String>} biBankIds - BI bank ids corresponding to the bankIds translated by the connector
+ * @property {Object} biMapping - Association table of any cozy bank id to corresponding bi bank id
  */
 
 /**
