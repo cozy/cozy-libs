@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.19.1...cozy-harvest-lib@9.20.0) (2022-07-13)
+
+
+### Bug Fixes
+
+* Revert f3b37dc37b63df591fcafe691020f23c4bea460c ([61d204c](https://github.com/cozy/cozy-libs/commit/61d204c3caca04713dac7543b3e4913ae2513f17))
+
+
+### Features
+
+* Do not show an error message when the trigger is running ([0c617ff](https://github.com/cozy/cozy-libs/commit/0c617ff1d2d1a26900ec23dbb86357f8ef971301))
+
+
+
+
+
 ## [9.19.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.19.0...cozy-harvest-lib@9.19.1) (2022-07-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
