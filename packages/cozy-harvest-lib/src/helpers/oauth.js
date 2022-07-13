@@ -130,7 +130,7 @@ export const getOAuthUrl = ({
     oAuthConf.scope !== false
   ) {
     const urlScope = Array.isArray(oAuthConf.scope)
-      ? oAuthConf.scope.join('+')
+      ? oAuthConf.scope.join('%2B')
       : oAuthConf.scope
     oAuthUrl.searchParams.set('scope', urlScope)
   }
