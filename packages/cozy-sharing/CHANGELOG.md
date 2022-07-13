@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.5.0...cozy-sharing@4.5.1) (2022-07-13)
+
+
+### Bug Fixes
+
+* Handle old react-routers in ShareModal ([b6fe5cb](https://github.com/cozy/cozy-libs/commit/b6fe5cb40492a7a3e71b7e6652a2f95f4c63b39d))
+* Revert ShareByEmail for Notes ([e5daeb9](https://github.com/cozy/cozy-libs/commit/e5daeb96455ed35cf6ca38b87f7c2d812c03a83e))
+
+
+
+
+
 # [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.4.1...cozy-sharing@4.5.0) (2022-07-13)
 
 
