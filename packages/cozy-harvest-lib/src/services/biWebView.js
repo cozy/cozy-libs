@@ -7,6 +7,7 @@
 import { getBIConnection, getBIConnectionAccountsList } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
+import { Q } from 'cozy-client'
 import flag from 'cozy-flags'
 import {
   setBIConnectionId,
@@ -322,6 +323,49 @@ function convertBIDateToStandardDate(biDate) {
   return biDate?.replace(' ', 'T')
 }
 
+async function getTokenFromCache({ client }) {
+  const queryResult = await client.query(
+    Q('io.cozy.bank.settings').getById('bi')
+  )
+  return queryResult?.data || {}
+}
+
+function isCacheExpired({ cache }) {
+  const cacheAge = Date.now() - Number(cache?.timestamp)
+  logger.debug('cache age', cacheAge / 1000 / 60, 'minutes')
+  const MAX_CACHE_AGE = 29 * 60 * 1000
+  if (cache && cacheAge < MAX_CACHE_AGE) {
+    return false
+  }
+  return true
+}
+
+async function updateCache({ client, konnector, cache }) {
+  const jobResponse = await client.stackClient.jobs.create(
+    'konnector',
+    {
+      mode: 'getTemporaryToken',
+      konnector: konnector.slug
+    },
+    {},
+    true
+  )
+  const event = await waitForRealtimeEvent(
+    client,
+    jobResponse.data.attributes,
+    'result',
+    TEMP_TOKEN_TIMOUT_S * 1000
+  )
+  const saveResult = await client.save({
+    _type: 'io.cozy.bank.settings',
+    _id: 'bi',
+    ...(cache?._rev ? { _rev: cache._rev } : {}),
+    timestamp: Date.now(),
+    ...event.data.result
+  })
+  return saveResult.data
+}
+
 /**
  * Gets a temporary token corresponding to the current BI user
  *
@@ -336,28 +380,29 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
     konnector.slug,
     'createTemporaryToken: konnector passed in options has no slug'
   )
+
+  let cache = await getTokenFromCache({ client })
+  if (isCacheExpired({ cache })) {
+    logger.debug('temporaryToken cache is expired. Updating')
+    cache = await updateCache({ client, konnector, cache })
+  }
+
   const cozyBankIds = getCozyBankIds({ konnector, account })
+
   assert(
     cozyBankIds.length,
-    'createTemporaryToken: Could not determine cozyBankId from account or konnector'
+    'createTemporaryToken: Could not determine cozyBankIds from account or konnector'
   )
-  const jobResponse = await client.stackClient.jobs.create(
-    'konnector',
-    {
-      mode: 'getTemporaryToken',
-      konnector: konnector.slug,
-      bankIds: cozyBankIds
-    },
-    {},
-    true
+
+  assert(
+    cache?.biMapping,
+    'createTemporaryToken: could not find a BI mapping in createTemporaryToken response, you should update your konnector to the last version'
   )
-  const event = await waitForRealtimeEvent(
-    client,
-    jobResponse.data.attributes,
-    'result',
-    TEMP_TOKEN_TIMOUT_S * 1000
-  )
-  return event.data.result
+  const { biMapping } = cache
+
+  cache.biBankIds = cozyBankIds.map(id => biMapping[id])
+
+  return cache
 }
 
 export const konnectorPolicy = {
