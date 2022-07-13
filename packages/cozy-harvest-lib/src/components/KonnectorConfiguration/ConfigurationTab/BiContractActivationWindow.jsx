@@ -54,7 +54,7 @@ const BIContractActivationWindow = ({
     if (konnectorPolicy.fetchContractSynchronizationUrl) {
       handleLinkFetch()
     }
-  }, [konnector, account, client, konnectorPolicy])
+  }, [konnector.slug, account, client, konnectorPolicy])
 
   if (!konnectorPolicy.fetchContractSynchronizationUrl) return null
 
