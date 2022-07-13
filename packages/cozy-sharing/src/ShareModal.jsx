@@ -30,8 +30,8 @@ const SharingModal = ({ document, ...rest }) => (
 )
 
 export const ShareModal = withLocales(props => {
-  const location = useLocation()
-  const locationProps = location.state?.modalProps
+  const location = useLocation?.()
+  const locationProps = location?.state?.modalProps
   const document = locationProps?.document || props.document
   const rest = omit(locationProps || props, 'document')
 
