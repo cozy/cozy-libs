@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.5.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.4.1...cozy-sharing@4.5.0) (2022-07-13)
+
+
+### Features
+
+* Allow sharemodal to use Location ([032f963](https://github.com/cozy/cozy-libs/commit/032f963c7296dcd296c5ef21a8814407ef9cf2cf))
+
+
+
+
+
 ## [4.4.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.4.0...cozy-sharing@4.4.1) (2022-07-11)
 
 **Note:** Version bump only for package cozy-sharing
