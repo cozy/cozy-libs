@@ -1,9 +1,11 @@
 import React from 'react'
+import omit from 'lodash/omit'
+import { useLocation } from 'react-router'
 
+import EditableSharingModal from './components/EditableSharingModal'
 import SharingContext from './context'
 import withLocales from './withLocales'
 import { SharingDetailsModal } from './SharingDetailsModal'
-import EditableSharingModal from './components/EditableSharingModal'
 
 const SharingModal = ({ document, ...rest }) => (
   <SharingContext.Consumer>
@@ -27,16 +29,23 @@ const SharingModal = ({ document, ...rest }) => (
   </SharingContext.Consumer>
 )
 
-export const ShareModal = withLocales(({ document, ...rest }) => (
-  <SharingContext.Consumer>
-    {({ byDocId, isOwner, canReshare }) =>
-      !byDocId[document.id] ||
-      isOwner(document.id) ||
-      canReshare(document.id) ? (
-        <EditableSharingModal document={document} {...rest} />
-      ) : (
-        <SharingModal document={document} {...rest} />
-      )
-    }
-  </SharingContext.Consumer>
-))
+export const ShareModal = withLocales(props => {
+  const location = useLocation()
+  const locationProps = location.state?.modalProps
+  const document = locationProps?.document || props.document
+  const rest = omit(locationProps || props, 'document')
+
+  return (
+    <SharingContext.Consumer>
+      {({ byDocId, isOwner, canReshare }) =>
+        !byDocId[document.id] ||
+        isOwner(document.id) ||
+        canReshare(document.id) ? (
+          <EditableSharingModal document={document} {...rest} />
+        ) : (
+          <SharingModal document={document} {...rest} />
+        )
+      }
+    </SharingContext.Consumer>
+  )
+})
