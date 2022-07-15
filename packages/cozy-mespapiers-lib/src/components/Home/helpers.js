@@ -45,9 +45,11 @@ export const filterPapersByThemeAndSearchValue = ({
       )
     }
 
-    filteredFiles = files.filter(file =>
-      filteredSimplesFiles.some(simpleFile => simpleFile._id === file._id)
-    )
+    filteredFiles = files
+      .filter(file =>
+        filteredSimplesFiles.some(simpleFile => simpleFile._id === file._id)
+      )
+      .sort((a, b) => b.updated_at.localeCompare(a.updated_at))
   }
 
   return filteredFiles

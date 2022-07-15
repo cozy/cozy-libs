@@ -23,6 +23,7 @@ export const buildFilesQueryWithQualificationLabel = () => {
           'metadata.datetime',
           'referenced_by',
           'metadata.qualification.label',
+          'updated_at',
           'type',
           'trashed'
         ])
