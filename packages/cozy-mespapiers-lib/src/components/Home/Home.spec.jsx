@@ -42,7 +42,7 @@ const setup = ({
   isQueryLoading.mockReturnValue(isLoading)
   useQueryAll.mockReturnValue({
     data: withData
-      ? [{ metadata: { qualification: { label: 'LabelQualif' } } }]
+      ? [{ metadata: { qualification: { label: 'driver_license' } } }]
       : [],
     hasMore: false
   })
