@@ -11,7 +11,7 @@ import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 import PaperItem from '../Papers/PaperItem'
 import { buildContactsQueryByIds } from '../../helpers/queries'
 import {
-  buildFilesByContacts,
+  buildFilesWithContacts,
   getContactsRefIdsByFiles
 } from '../Papers/helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
@@ -30,7 +30,7 @@ const SearchResult = ({ filteredPapers }) => {
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
   const filesWithContacts = !isLoadingContacts
-    ? buildFilesByContacts({
+    ? buildFilesWithContacts({
         files: filteredPapers,
         contacts,
         t
@@ -53,17 +53,15 @@ const SearchResult = ({ filteredPapers }) => {
     <>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <List>
-        {filesWithContacts.map(({ contact, papers }) => {
-          return papers.list.map(paper => {
-            return (
-              <PaperItem
-                key={paper._id}
-                paper={paper}
-                contactNames={contact}
+        {filesWithContacts.map(({ contact, file }) => {
+          return (
+            <PaperItem
+              key={file._id}
+              paper={file}
+              contactNames={contact}
                 withCheckbox
               />
             )
-          })
         })}
       </List>
     </>
