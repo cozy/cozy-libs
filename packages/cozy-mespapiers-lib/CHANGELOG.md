@@ -3,6 +3,32 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.42.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.41.0...cozy-mespapiers-lib@0.42.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* Add ref to PaperFab ([5559211](https://github.com/cozy/cozy-libs/commit/55592114267a5f55e6221798b61639924746d91d))
+* Adjust horizontal margin of search box ([171739e](https://github.com/cozy/cozy-libs/commit/171739ec8f93421f1c6ad68578bd1ca43b81d8cb))
+* Invert of MultiselectpaperList buttons ([09738e5](https://github.com/cozy/cozy-libs/commit/09738e525bc5b19bc14506f385d87cf1e07de21a))
+* Move MultiselectPaperList component ([83d0df1](https://github.com/cozy/cozy-libs/commit/83d0df149b384ee48df71f29a8adc81c1a5748a2))
+* Style of paperItem component ([0ac8469](https://github.com/cozy/cozy-libs/commit/0ac8469e4389477c472d6de0db64d3825389438b))
+* Style of PapersList component ([58e9354](https://github.com/cozy/cozy-libs/commit/58e9354c24cf37a6d72f6ea9cb0683802bdba2ac))
+* The prop `withCheckbox` is not always true ([c1d3969](https://github.com/cozy/cozy-libs/commit/c1d39694f5d4af8e64c42589cafc4b88558aa204))
+
+
+### Features
+
+* Add buildFilesWithContacts function ([fa39e05](https://github.com/cozy/cozy-libs/commit/fa39e053908b4c6ad2e250a119056a7859bce652))
+* Change default size on multiselect modals ([941cb56](https://github.com/cozy/cozy-libs/commit/941cb560c0d5b819a631735836d721825573fbe8))
+* Change wording of creation of paper button ([8695b17](https://github.com/cozy/cozy-libs/commit/8695b1739ba25271019452f6438dfc19f8385bcc))
+* Sort filtered files result ([303663c](https://github.com/cozy/cozy-libs/commit/303663c57da56eb32d509fa4da191214400b8bd9))
+* Use buildFilesWithContacts ([3cf2f0e](https://github.com/cozy/cozy-libs/commit/3cf2f0e5f64542fe68541bd9baf6c7cb527cff9f))
+
+
+
+
+
 # [0.41.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.40.4...cozy-mespapiers-lib@0.41.0) (2022-07-15)
 
 
