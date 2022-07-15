@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -7,10 +7,8 @@ import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import GhostButton from './GhostButton'
 import PaperCardItem from '../Papers/PaperCardItem'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import MultiselectPaperList from './MultiselectPaperList'
 
-const MultiselectContent = () => {
-  const [isActive, setIsActive] = useState(false)
+const MultiselectContent = ({ setIsFilePickerActive }) => {
   const { t } = useI18n()
   const { allMultiSelectionFiles } = useMultiSelection()
 
@@ -35,10 +33,8 @@ const MultiselectContent = () => {
       <GhostButton
         label={t('Multiselect.select')}
         fullWidth
-        onClick={() => setIsActive(true)}
+        onClick={() => setIsFilePickerActive(true)}
       />
-
-      {isActive && <MultiselectPaperList setIsActive={setIsActive} />}
     </div>
   )
 }
