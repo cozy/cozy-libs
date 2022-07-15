@@ -128,3 +128,25 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
 
   return resultSorted
 }
+
+/**
+ * Group an IOCozyFiles with the names of the associated contacts
+ *
+ * @param {object} param
+ * @param {object[]} param.files - Array of IOCozyFile
+ * @param {object[]} param.contacts - Array of IOCozyContact
+ * @param {Function} param.t - i18n function
+ * @returns {{ file: object, contacts: string }}
+ */
+export const buildFilesWithContacts = ({ files, contacts, t }) => {
+  const filesByContacts = groupFilesByContacts(files, contacts)
+
+  return filesByContacts.flatMap(fileByContacts => {
+    return fileByContacts.files.map(file => {
+      return {
+        file,
+        contact: harmonizeContactsNames(fileByContacts.contacts, t)
+      }
+    })
+  })
+}

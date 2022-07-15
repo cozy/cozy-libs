@@ -2,7 +2,8 @@ import {
   harmonizeContactsNames,
   groupFilesByContacts,
   buildFilesByContacts,
-  getContactsRefIdsByFiles
+  getContactsRefIdsByFiles,
+  buildFilesWithContacts
 } from './helpers'
 
 const mockContacts00 = [
@@ -256,6 +257,67 @@ describe('helpers Papers', () => {
         files: mockFilesWithoutContact,
         contacts: mockContacts00,
         maxDisplay: 3,
+        t: jest.fn(key => key)
+      })
+
+      expect(result).toStrictEqual(expected)
+    })
+  })
+
+  describe('buildFilesWithContacts', () => {
+    it('should return an array of objects grouping the files with the associated contact names', () => {
+      const expected = [
+        {
+          file: {
+            _id: 'fileId01',
+            name: 'file01.pdf',
+            relationships: {
+              referenced_by: {
+                data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
+              }
+            }
+          },
+          contact: 'Bob Durand'
+        },
+        {
+          file: {
+            _id: 'fileId02',
+            name: 'file02.pdf',
+            relationships: {
+              referenced_by: {
+                data: [{ id: 'contactId02', type: 'io.cozy.contacts' }]
+              }
+            }
+          },
+          contact: 'Alice Durand'
+        },
+        {
+          file: {
+            _id: 'fileId03',
+            name: 'file03.pdf',
+            relationships: {
+              referenced_by: {
+                data: [
+                  { id: 'contactId01', type: 'io.cozy.contacts' },
+                  { id: 'contactId02', type: 'io.cozy.contacts' }
+                ]
+              }
+            }
+          },
+          contact: 'PapersList.contactMerged'
+        },
+        {
+          file: {
+            _id: 'fileId04',
+            name: 'file04.pdf'
+          },
+          contact: undefined
+        }
+      ]
+
+      const result = buildFilesWithContacts({
+        files: mockFiles,
+        contacts: mockContacts00,
         t: jest.fn(key => key)
       })
 
