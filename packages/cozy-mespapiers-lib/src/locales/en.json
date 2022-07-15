@@ -5,7 +5,7 @@
     "success": "The picture was taken."
   },
   "action": {
-    "createPaper": "Add a paper",
+    "createPaper": "Create a paper",
     "download": "Download",
     "forward": "Forward",
     "help": "Help",
