@@ -44,6 +44,7 @@ const PapersFab = ({ t, className, ...props }) => {
         aria-label={t('Home.Fab.ariaLabel')}
         className={cx(classes.fab, className)}
         onClick={toggleActionsMenu}
+        ref={actionBtnRef}
         {...props}
       >
         <Icon icon="plus" />
