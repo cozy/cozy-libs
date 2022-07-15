@@ -10,7 +10,7 @@ import Home from '../Home/Home'
 import PapersListWrapper from '../Papers/PapersListWrapper'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const MultiselectPaperList = ({ setIsActive }) => {
+const MultiselectPaperList = ({ setIsFilePickerActive }) => {
   const history = useHistory()
   const [selectedThemeLabel, setSelectedThemeLabel] = useState(null)
   const { t } = useI18n()
@@ -28,7 +28,7 @@ const MultiselectPaperList = ({ setIsActive }) => {
       : t('Multiselect.title.default')
 
   const closeMultiSelection = () => {
-    setIsActive(false)
+    setIsFilePickerActive(false)
     setSelectedThemeLabel(null)
   }
 
@@ -51,7 +51,7 @@ const MultiselectPaperList = ({ setIsActive }) => {
       open
       transitionDuration={0}
       disableGutters
-      onClose={() => setIsActive(false)}
+      onClose={() => setIsFilePickerActive(false)}
       onBack={handleBack}
       title={title}
       content={
@@ -83,7 +83,7 @@ const MultiselectPaperList = ({ setIsActive }) => {
 }
 
 MultiselectPaperList.propTypes = {
-  setIsActive: PropTypes.func
+  setIsFilePickerActive: PropTypes.func
 }
 
 export default MultiselectPaperList
