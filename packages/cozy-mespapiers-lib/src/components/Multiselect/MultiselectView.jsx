@@ -33,6 +33,7 @@ const MultiselectView = () => {
       open
       transitionDuration={0}
       onClose={handleClose}
+      size="large"
       title={t('Multiselect.title.default')}
       content={
         <>
