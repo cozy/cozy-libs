@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     color: theme.palette.text.icon,
     boxShadow: theme.shadows[2],
     backgroundColor: theme.palette.background.paper,
-    marginLeft: '1rem'
+    marginLeft: '0.5rem'
   }
 }))
 
@@ -119,7 +119,7 @@ const Home = ({ setSelectedThemeLabel }) => {
     <>
       {isMultiSelectionActive && <HomeToolbar />}
 
-      <div className="u-flex u-flex-column-s u-mv-1 u-ph-1">
+      <div className="u-flex u-flex-column-s u-mv-1 u-ph-half">
         <Box className="u-flex u-flex-items-center u-mb-half-s" flex="1 1 auto">
           <SearchInput
             value={searchValue}
