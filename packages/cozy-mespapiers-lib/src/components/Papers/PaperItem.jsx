@@ -1,6 +1,7 @@
 import React from 'react'
 import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -13,9 +14,19 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
+import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
 import { getLinksType } from '../../utils/getLinksType'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+
+const useStyles = makeStyles(() => ({
+  checkbox: {
+    padding: 0
+  },
+  divider: {
+    marginLeft: '6.5rem'
+  }
+}))
 
 const validPageName = page => page === 'front' || page === 'back'
 
@@ -28,6 +39,7 @@ const PaperItem = ({
   withCheckbox,
   children
 }) => {
+  const style = useStyles()
   const { f, t } = useI18n()
   const client = useClient()
   const history = useHistory()
@@ -68,17 +80,17 @@ const PaperItem = ({
         className={className}
         classes={classes}
         onClick={handleClick}
-        disableGutters={withCheckbox && isMultiSelectionActive}
         data-testid="ListItem"
       >
         {withCheckbox && isMultiSelectionActive && (
           <Checkbox
             checked={isChecked()}
             value={paper._id}
+            className={style.checkbox}
             data-testid="Checkbox"
           />
         )}
-        <ListItemIcon>
+        <ListItemIcon className={cx({ 'u-mh-1': withCheckbox })}>
           <FileImageLoader
             client={client}
             file={paper}
@@ -108,7 +120,12 @@ const PaperItem = ({
       </ListItem>
 
       {divider && (
-        <Divider variant="inset" component="li" data-testid="Divider" />
+        <Divider
+          variant="inset"
+          component="li"
+          data-testid="Divider"
+          className={withCheckbox && style.divider}
+        />
       )}
     </>
   )
