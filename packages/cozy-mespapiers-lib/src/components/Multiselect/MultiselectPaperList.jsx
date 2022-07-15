@@ -52,6 +52,7 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
       transitionDuration={0}
       disableGutters
       onClose={() => setIsFilePickerActive(false)}
+      size="medium"
       onBack={handleBack}
       title={title}
       content={
