@@ -15,10 +15,12 @@ import {
   getContactsRefIdsByFiles
 } from '../Papers/helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const SearchResult = ({ filteredPapers }) => {
   const { t } = useI18n()
   const contactIds = getContactsRefIdsByFiles(filteredPapers)
+  const { isMultiSelectionActive } = useMultiSelection()
 
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
@@ -59,9 +61,9 @@ const SearchResult = ({ filteredPapers }) => {
               key={file._id}
               paper={file}
               contactNames={contact}
-                withCheckbox
-              />
-            )
+              {...(isMultiSelectionActive && { withCheckbox: true })}
+            />
+          )
         })}
       </List>
     </>
