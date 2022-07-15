@@ -19,7 +19,7 @@ import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import { buildFilesQueryByLabels } from '../../helpers/queries'
+import { buildFilesQueryWithQualificationLabel } from '../../helpers/queries'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { filterPapersByThemeAndSearchValue } from './helpers'
@@ -51,24 +51,38 @@ const Home = ({ setSelectedThemeLabel }) => {
   const scannerT = useScannerI18n()
   const { papersDefinitions } = usePapersDefinitions()
 
-  const labels = papersDefinitions.map(paper => paper.label)
-  const filesQueryByLabels = buildFilesQueryByLabels(labels)
+  const papersDefinitionsLabels = useMemo(
+    () => papersDefinitions.map(paper => paper.label),
+    [papersDefinitions]
+  )
+  const filesQueryByLabels = buildFilesQueryWithQualificationLabel()
 
-  const { data: filesByLabels, ...queryResult } = useQueryAll(
+  const { data: filesWithQualificationLabel, ...queryResult } = useQueryAll(
     filesQueryByLabels.definition,
     filesQueryByLabels.options
+  )
+
+  const filesWithPapersDefinitionsLabels = useMemo(
+    () =>
+      filesWithQualificationLabel?.filter(file =>
+        papersDefinitionsLabels.includes(file?.metadata?.qualification?.label)
+      ) || [],
+    [filesWithQualificationLabel, papersDefinitionsLabels]
   )
 
   const isLoading = isQueryLoading(queryResult) || queryResult.hasMore
   const isSearching = searchValue.length > 0 || selectedTheme
 
   const allPapersByCategories = useMemo(
-    () => uniqBy(filesByLabels, 'metadata.qualification.label'),
-    [filesByLabels]
+    () =>
+      uniqBy(filesWithPapersDefinitionsLabels, 'metadata.qualification.label'),
+    [filesWithPapersDefinitionsLabels]
   )
 
   const filteredPapers = filterPapersByThemeAndSearchValue({
-    files: isSearching ? filesByLabels : allPapersByCategories,
+    files: isSearching
+      ? filesWithPapersDefinitionsLabels
+      : allPapersByCategories,
     theme: selectedTheme,
     search: searchValue,
     scannerT
@@ -78,10 +92,10 @@ const Home = ({ setSelectedThemeLabel }) => {
     () =>
       getFeaturedPlaceholders({
         papersDefinitions,
-        files: filesByLabels,
+        files: filesWithPapersDefinitionsLabels,
         selectedTheme
       }),
-    [papersDefinitions, filesByLabels, selectedTheme]
+    [papersDefinitions, filesWithPapersDefinitionsLabels, selectedTheme]
   )
 
   const handleThemeSelection = nextValue => {

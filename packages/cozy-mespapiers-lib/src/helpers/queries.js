@@ -4,18 +4,18 @@ import { CONTACTS_DOCTYPE, FILES_DOCTYPE, SETTINGS_DOCTYPE } from '../doctypes'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(30 * 1000)
 
-export const buildFilesQueryByLabels = labels => {
+export const buildFilesQueryWithQualificationLabel = () => {
   return {
     definition: () =>
       Q(FILES_DOCTYPE)
         .where({
-          'metadata.qualification.label': {
-            $in: labels
-          }
-        })
-        .partialIndex({
           type: 'file',
           trashed: false
+        })
+        .partialIndex({
+          'metadata.qualification.label': {
+            $exists: true
+          }
         })
         .indexFields(['metadata.qualification.label'])
         .select([
@@ -28,7 +28,7 @@ export const buildFilesQueryByLabels = labels => {
         ])
         .limitBy(1000),
     options: {
-      as: `${FILES_DOCTYPE}/${JSON.stringify(labels)}`,
+      as: `${FILES_DOCTYPE}/metadata_qualification_label`,
       fetchPolicy: defaultFetchPolicy
     }
   }
