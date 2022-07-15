@@ -25,6 +25,7 @@ import DialogContext from './DialogContext'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 
 import { ViewerModal } from '../datacards/ViewerModal'
+import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 
 /**
  * Dialog will not be centered vertically since we need the modal to "stay in place"
@@ -60,101 +61,115 @@ const Routes = ({
     open: true,
     onClose: onDismiss
   })
-  return (
-    <DatacardOptions options={datacardOptions}>
-      <MountPointProvider baseRoute={konnectorRoot}>
-        <DialogContext.Provider value={dialogContext}>
-          <HarvestVaultProvider>
-            <VaultUnlockProvider>
-              <HarvestDialog
-                {...dialogContext.dialogProps}
-                aria-label={konnector.name}
-              >
-                <DialogCloseButton onClick={onDismiss} />
-                <KonnectorAccounts konnector={konnector}>
-                  {accountsAndTriggers => (
-                    <Switch>
-                      <Route
-                        path={`${konnectorRoot}/`}
-                        exact
-                        render={() => (
-                          <HarvestModalRoot
-                            accounts={accountsAndTriggers}
-                            konnector={konnector}
-                          />
-                        )}
-                      />
-                      <Route
-                        path={`${konnectorRoot}/accounts/:accountId`}
-                        exact
-                        render={({ match }) => (
-                          <AccountModal
-                            konnector={konnector}
-                            accountId={match.params.accountId}
-                            accountsAndTriggers={accountsAndTriggers}
-                            onDismiss={onDismiss}
-                            showNewAccountButton={!konnector.clientSide}
-                            showAccountSelection={!konnector.clientSide}
-                          />
-                        )}
-                      />
-                      <Route
-                        path={`${konnectorRoot}/accounts/:accountId/edit`}
-                        exact
-                        render={({ match }) => (
-                          <EditAccountModal
-                            konnector={konnector}
-                            accountId={match.params.accountId}
-                            accounts={accountsAndTriggers}
-                          />
-                        )}
-                      />
-                      <Route
-                        path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
-                        exact
-                        render={routeComponentProps => (
-                          <ViewerModal {...routeComponentProps} />
-                        )}
-                      />
-                      <Route
-                        path={`${konnectorRoot}/new`}
-                        exact
-                        render={() => (
-                          <NewAccountModal
-                            konnector={konnector}
-                            onDismiss={onDismiss}
-                          />
-                        )}
-                      />
-                      <Route
-                        path={`${konnectorRoot}/accounts/:accountId/success`}
-                        exact
-                        render={({ match }) => {
-                          return (
-                            <KonnectorSuccess
-                              konnector={konnector}
+
+  const { konnectorWithTriggers, fetching } = useKonnectorWithTriggers(
+    konnectorSlug,
+    konnector
+  )
+
+  if (fetching) {
+    return <p></p>
+  } else {
+    return (
+      <DatacardOptions options={datacardOptions}>
+        <MountPointProvider baseRoute={konnectorRoot}>
+          <DialogContext.Provider value={dialogContext}>
+            <HarvestVaultProvider>
+              <VaultUnlockProvider>
+                <HarvestDialog
+                  {...dialogContext.dialogProps}
+                  aria-label={konnectorWithTriggers.name}
+                >
+                  <DialogCloseButton onClick={onDismiss} />
+                  <KonnectorAccounts konnector={konnectorWithTriggers}>
+                    {accountsAndTriggers => (
+                      <Switch>
+                        <Route
+                          path={`${konnectorRoot}/`}
+                          exact
+                          render={() => (
+                            <HarvestModalRoot
+                              accounts={accountsAndTriggers}
+                              konnector={konnectorWithTriggers}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${konnectorRoot}/accounts/:accountId`}
+                          exact
+                          render={({ match }) => (
+                            <AccountModal
+                              konnector={konnectorWithTriggers}
+                              accountId={match.params.accountId}
+                              accountsAndTriggers={accountsAndTriggers}
+                              onDismiss={onDismiss}
+                              showNewAccountButton={
+                                !konnectorWithTriggers.clientSide
+                              }
+                              showAccountSelection={
+                                !konnectorWithTriggers.clientSide
+                              }
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${konnectorRoot}/accounts/:accountId/edit`}
+                          exact
+                          render={({ match }) => (
+                            <EditAccountModal
+                              konnector={konnectorWithTriggers}
                               accountId={match.params.accountId}
                               accounts={accountsAndTriggers}
+                            />
+                          )}
+                        />
+                        <Route
+                          path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
+                          exact
+                          render={routeComponentProps => (
+                            <ViewerModal {...routeComponentProps} />
+                          )}
+                        />
+                        <Route
+                          path={`${konnectorRoot}/new`}
+                          exact
+                          render={() => (
+                            <NewAccountModal
+                              konnector={konnectorWithTriggers}
                               onDismiss={onDismiss}
                             />
-                          )
-                        }}
-                      />
-                      <Redirect
-                        from={`${konnectorRoot}/*`}
-                        to={`${konnectorRoot}/`}
-                      />
-                    </Switch>
-                  )}
-                </KonnectorAccounts>
-              </HarvestDialog>
-              <VaultUnlockPlaceholder />
-            </VaultUnlockProvider>
-          </HarvestVaultProvider>
-        </DialogContext.Provider>
-      </MountPointProvider>
-    </DatacardOptions>
-  )
+                          )}
+                        />
+                        <Route
+                          path={`${konnectorRoot}/accounts/:accountId/success`}
+                          exact
+                          render={({ match }) => {
+                            return (
+                              <KonnectorSuccess
+                                konnector={konnectorWithTriggers}
+                                accountId={match.params.accountId}
+                                accounts={accountsAndTriggers}
+                                onDismiss={onDismiss}
+                              />
+                            )
+                          }}
+                        />
+                        <Redirect
+                          from={`${konnectorRoot}/*`}
+                          to={`${konnectorRoot}/`}
+                        />
+                      </Switch>
+                    )}
+                  </KonnectorAccounts>
+                </HarvestDialog>
+                <VaultUnlockPlaceholder />
+              </VaultUnlockProvider>
+            </HarvestVaultProvider>
+          </DialogContext.Provider>
+        </MountPointProvider>
+      </DatacardOptions>
+    )
+  }
 }
 
 export default Routes
