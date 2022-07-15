@@ -16,17 +16,20 @@ const files = [
   {
     _id: 'file01',
     name: 'Facture internet',
-    metadata: { qualification: { label: 'isp_invoice' } }
+    metadata: { qualification: { label: 'isp_invoice' } },
+    updated_at: '2021-01-01:09:00.000000+01:00'
   },
   {
     _id: 'file02',
     name: 'Permis de conduire',
-    metadata: { qualification: { label: 'driver_license' } }
+    metadata: { qualification: { label: 'driver_license' } },
+    updated_at: '2021-05-01:09:00.000000+01:00'
   },
   {
     _id: 'file03',
     name: 'Facture minitel',
-    metadata: { qualification: { label: 'phone_invoice' } }
+    metadata: { qualification: { label: 'phone_invoice' } },
+    updated_at: '2021-11-01:09:00.000000+01:00'
   }
 ]
 
