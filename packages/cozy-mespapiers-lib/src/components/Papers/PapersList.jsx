@@ -56,7 +56,7 @@ const PapersList = ({ papers }) => {
       )}
       {maxDisplay < papers.list.length && (
         <Button
-          className="u-mh-0 u-mv-half"
+          className="u-mh-1 u-mv-half"
           variant="text"
           label={t(`PapersList.PapersListByContact.seeMore`, {
             number: papers.list.length - maxDisplay
