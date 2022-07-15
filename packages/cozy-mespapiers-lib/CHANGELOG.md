@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.41.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.40.4...cozy-mespapiers-lib@0.41.0) (2022-07-15)
+
+
+### Bug Fixes
+
+* Tests Home component ([9ad0f4e](https://github.com/cozy/cozy-libs/commit/9ad0f4e4be1abb19c73d8319087f029ac7bb64bc))
+
+
+### Features
+
+* Change buildFilesQueryByLabels query ([5f6c392](https://github.com/cozy/cozy-libs/commit/5f6c392cf9fefa151f6e9a721ad656613b784486))
+* Increase fetchPolicies to 24 hours ([81b7577](https://github.com/cozy/cozy-libs/commit/81b75771b38baada971a200b5200e63166be56bb))
+
+
+
+
+
 ## [0.40.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.40.3...cozy-mespapiers-lib@0.40.4) (2022-07-13)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
