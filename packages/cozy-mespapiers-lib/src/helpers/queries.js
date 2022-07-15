@@ -2,7 +2,7 @@ import { Q, fetchPolicies } from 'cozy-client'
 
 import { CONTACTS_DOCTYPE, FILES_DOCTYPE, SETTINGS_DOCTYPE } from '../doctypes'
 
-const defaultFetchPolicy = fetchPolicies.olderThan(30 * 1000)
+const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
 
 export const buildFilesQueryWithQualificationLabel = () => {
   return {
