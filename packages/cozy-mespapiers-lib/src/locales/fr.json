@@ -5,7 +5,7 @@
     "success": "La photo a bien été prise."
   },
   "action": {
-    "createPaper": "Ajouter un papier",
+    "createPaper": "Créer un papier",
     "download": "Télécharger",
     "forward": "Transmettre",
     "help": "Aides",
