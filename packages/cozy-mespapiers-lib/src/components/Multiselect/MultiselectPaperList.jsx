@@ -67,14 +67,14 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
       actions={
         <>
           <Button
-            label={t('common.add')}
-            onClick={goToCurrentSelectionList}
-            disabled={currentMultiSelectionFiles.length === 0}
-          />
-          <Button
             label={t('common.cancel')}
             variant="secondary"
             onClick={cancelSelection}
+          />
+          <Button
+            label={t('common.add')}
+            onClick={goToCurrentSelectionList}
+            disabled={currentMultiSelectionFiles.length === 0}
           />
         </>
       }
