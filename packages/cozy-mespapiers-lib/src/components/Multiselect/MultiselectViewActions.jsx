@@ -127,6 +127,7 @@ const MultiselectViewActions = ({ onClose }) => {
           startIcon={<Icon icon="download" />}
           onClick={download}
           disabled={allMultiSelectionFiles.length === 0}
+          data-testid="downloadButton"
         />
       )}
 
@@ -137,6 +138,7 @@ const MultiselectViewActions = ({ onClose }) => {
           startIcon={<Icon icon="paperplane" />}
           onClick={forward}
           disabled={allMultiSelectionFiles.length === 0}
+          data-testid="forwardButton"
         />
       )}
 
