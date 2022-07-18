@@ -201,20 +201,18 @@ export const onBIAccountCreation = async ({
 /**
  * Create OAuth extra parameters specific to reconnect webview
  *
- * @param {Number} options.biBankId - Connector bank id (compatible with non webview bi connectors)
  * @param {Array<Number>} options.biBankIds - connector bank ids (for webview connectors)
  * @param {String} options.token - BI temporary token
  * @param {Number} options.connId - BI bi connection id
  * @return {Object}
  */
 const getReconnectExtraOAuthUrlParams = async ({
-  biBankId,
   biBankIds,
   token,
   connId
 }) => {
   return {
-    id_connector: biBankId || biBankIds,
+    id_connector: biBankIds,
     code: token,
     connection_id: connId
   }
@@ -233,11 +231,7 @@ export const fetchExtraOAuthUrlParams = async ({
   konnector,
   account
 }) => {
-  const {
-    code: token,
-    biBankId,
-    biBankIds
-  } = await createTemporaryToken({
+  const { code: token, biBankIds } = await createTemporaryToken({
     client,
     konnector,
     account
@@ -249,14 +243,13 @@ export const fetchExtraOAuthUrlParams = async ({
 
   if (isReconnect) {
     return getReconnectExtraOAuthUrlParams({
-      biBankId,
       biBankIds,
       token,
       connId
     })
   } else {
     return {
-      id_connector: biBankId || biBankIds,
+      id_connector: biBankIds,
       token
     }
   }
@@ -420,7 +413,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
   )
   const { biMapping } = tokenCache
 
-  tokenCache.biBankIds = cozyBankIds.map(id => biMapping[id])
+  tokenCache.biBankIds = [...new Set(cozyBankIds.map(id => biMapping[id]))]
 
   return tokenCache
 }
