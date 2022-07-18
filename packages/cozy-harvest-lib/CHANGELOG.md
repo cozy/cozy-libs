@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.20.0...cozy-harvest-lib@9.21.0) (2022-07-18)
+
+
+### Bug Fixes
+
+* Avoid a perpetual rerender un home application ([83bce0e](https://github.com/cozy/cozy-libs/commit/83bce0e59f46fe4ff79f61f4e8e9f8953bb224c6))
+* Various update after review ([b9ef18c](https://github.com/cozy/cozy-libs/commit/b9ef18c9e9b91d196da09cb4b27832f506079e04))
+
+
+### Features
+
+* Add a cache to BI temporary token ([86877ed](https://github.com/cozy/cozy-libs/commit/86877edf3fffe5a48c92fddca2d560530f52cb1c))
+
+
+
+
+
 # [9.20.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.19.1...cozy-harvest-lib@9.20.0) (2022-07-13)
 
 
