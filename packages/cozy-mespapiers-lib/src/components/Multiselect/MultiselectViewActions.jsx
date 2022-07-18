@@ -100,6 +100,9 @@ const MultiselectViewActions = ({ onClose }) => {
     }
   }
 
+  const isDesktopOrMobileWithoutShareAPI =
+    (isMobile && !navigator.share) || !isMobile
+
   return (
     <>
       <Backdrop classes={{ root: classes.backdropRoot }} open={isBackdropOpen}>
@@ -117,18 +120,17 @@ const MultiselectViewActions = ({ onClose }) => {
         </div>
       </Backdrop>
 
-      {!isMobile ||
-        (isMobile && !navigator.share && (
-          <Button
-            variant="secondary"
-            label={t('action.download')}
-            startIcon={<Icon icon="download" />}
-            onClick={download}
-            disabled={allMultiSelectionFiles.length === 0}
-          />
-        ))}
+      {isDesktopOrMobileWithoutShareAPI && (
+        <Button
+          variant="secondary"
+          label={t('action.zipDownload')}
+          startIcon={<Icon icon="download" />}
+          onClick={download}
+          disabled={allMultiSelectionFiles.length === 0}
+        />
+      )}
 
-      {isMobile && navigator.share && (
+      {!isDesktopOrMobileWithoutShareAPI && (
         <Button
           variant="secondary"
           label={t('action.forward')}
