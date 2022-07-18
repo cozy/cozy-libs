@@ -17,7 +17,6 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import { getLinksType } from '../../utils/getLinksType'
 
 const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
   const client = useClient()
@@ -59,7 +58,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
                     <FileImageLoader
                       client={client}
                       file={paper}
-                      linkType={getLinksType(paper)}
+                      linkType="tiny"
                       render={src => (
                         <MuiCardMedia
                           component="img"
