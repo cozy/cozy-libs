@@ -262,7 +262,7 @@ ShareByLink.propTypes = {
   checked: PropTypes.bool.isRequired,
   documentType: PropTypes.string.isRequired,
   document: PropTypes.object.isRequired,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   onEnable: PropTypes.func.isRequired,
   onDisable: PropTypes.func.isRequired
 }

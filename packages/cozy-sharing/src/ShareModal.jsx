@@ -1,5 +1,4 @@
 import React from 'react'
-import omit from 'lodash/omit'
 import { useLocation } from 'react-router'
 
 import EditableSharingModal from './components/EditableSharingModal'
@@ -30,10 +29,9 @@ const SharingModal = ({ document, ...rest }) => (
 )
 
 export const ShareModal = withLocales(props => {
-  const location = useLocation?.()
-  const locationProps = location?.state?.modalProps
-  const document = locationProps?.document || props.document
-  const rest = omit(locationProps || props, 'document')
+  const location = useLocation()
+  const modalProps = location.state?.modalProps
+  const document = modalProps?.document || props.document
 
   return (
     <SharingContext.Consumer>
@@ -41,9 +39,9 @@ export const ShareModal = withLocales(props => {
         !byDocId[document.id] ||
         isOwner(document.id) ||
         canReshare(document.id) ? (
-          <EditableSharingModal document={document} {...rest} />
+          <EditableSharingModal {...props} {...modalProps} />
         ) : (
-          <SharingModal document={document} {...rest} />
+          <SharingModal {...props} {...modalProps} />
         )
       }
     </SharingContext.Consumer>
