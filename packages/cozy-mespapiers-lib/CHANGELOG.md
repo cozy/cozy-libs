@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.42.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.42.0...cozy-mespapiers-lib@0.42.1) (2022-07-18)
+
+
+### Bug Fixes
+
+* Display Download button on Desktop or old mobile ([8a5f0c6](https://github.com/cozy/cozy-libs/commit/8a5f0c6dce60edd68ab1b6d885fb895f122f1c85))
+
+
+
+
+
 # [0.42.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.41.0...cozy-mespapiers-lib@0.42.0) (2022-07-15)
 
 
