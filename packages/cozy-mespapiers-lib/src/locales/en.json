@@ -7,6 +7,7 @@
   "action": {
     "createPaper": "Create a paper",
     "download": "Download",
+    "zipDownload": "Download a .zip file",
     "forward": "Forward",
     "help": "Help",
     "installHomepage": "Install on my mobile's homepage",
