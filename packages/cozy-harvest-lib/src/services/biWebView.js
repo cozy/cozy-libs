@@ -330,17 +330,17 @@ async function getTokenFromCache({ client }) {
   return queryResult?.data || {}
 }
 
-function isCacheExpired({ cache }) {
-  const cacheAge = Date.now() - Number(cache?.timestamp)
-  logger.debug('cache age', cacheAge / 1000 / 60, 'minutes')
-  const MAX_CACHE_AGE = 29 * 60 * 1000
-  if (cache && cacheAge < MAX_CACHE_AGE) {
+function isCacheExpired({ tokenCache }) {
+  const cacheAge = Date.now() - Number(tokenCache?.timestamp)
+  logger.debug('tokenCache age', cacheAge / 1000 / 60, 'minutes')
+  const MAX_TOKEN_CACHE_AGE = 29 * 60 * 1000
+  if (tokenCache && cacheAge < MAX_TOKEN_CACHE_AGE) {
     return false
   }
   return true
 }
 
-async function updateCache({ client, konnector, cache }) {
+async function updateCache({ client, konnector, tokenCache }) {
   const jobResponse = await client.stackClient.jobs.create(
     'konnector',
     {
@@ -359,7 +359,7 @@ async function updateCache({ client, konnector, cache }) {
   const saveResult = await client.save({
     _type: 'io.cozy.bank.settings',
     _id: 'bi',
-    ...(cache?._rev ? { _rev: cache._rev } : {}),
+    ...(tokenCache?._rev ? { _rev: tokenCache._rev } : {}),
     timestamp: Date.now(),
     ...event.data.result
   })
@@ -381,10 +381,10 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
     'createTemporaryToken: konnector passed in options has no slug'
   )
 
-  let cache = await getTokenFromCache({ client })
-  if (isCacheExpired({ cache })) {
+  let tokenCache = await getTokenFromCache({ client })
+  if (isCacheExpired({ tokenCache })) {
     logger.debug('temporaryToken cache is expired. Updating')
-    cache = await updateCache({ client, konnector, cache })
+    tokenCache = await updateCache({ client, konnector, tokenCache })
   }
 
   const cozyBankIds = getCozyBankIds({ konnector, account })
@@ -395,14 +395,14 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
   )
 
   assert(
-    cache?.biMapping,
+    tokenCache?.biMapping,
     'createTemporaryToken: could not find a BI mapping in createTemporaryToken response, you should update your konnector to the last version'
   )
-  const { biMapping } = cache
+  const { biMapping } = tokenCache
 
-  cache.biBankIds = cozyBankIds.map(id => biMapping[id])
+  tokenCache.biBankIds = cozyBankIds.map(id => biMapping[id])
 
-  return cache
+  return tokenCache
 }
 
 export const konnectorPolicy = {
