@@ -16,7 +16,6 @@ import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
-import { getLinksType } from '../../utils/getLinksType'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const useStyles = makeStyles(() => ({
@@ -94,7 +93,7 @@ const PaperItem = ({
           <FileImageLoader
             client={client}
             file={paper}
-            linkType={getLinksType(paper)}
+            linkType="tiny"
             render={src => {
               return (
                 <CardMedia component="img" width={32} height={32} image={src} />
