@@ -323,13 +323,25 @@ function convertBIDateToStandardDate(biDate) {
   return biDate?.replace(' ', 'T')
 }
 
-async function getTokenFromCache({ client }) {
+/**
+ * Get the BI temporary token cache from Cozy doctype
+ *
+ * @param {CozyClient} options.client CozyClient instance
+ * @return {createTemporaryTokenResponse}
+ */
+async function getBiTemporaryTokenFromCache({ client }) {
   const queryResult = await client.query(
     Q('io.cozy.bank.settings').getById('bi')
   )
   return queryResult?.data || {}
 }
 
+/**
+ * Check if BI temporary token cache is expired or not
+ *
+ * @param {createTemporaryTokenResponse} options.tokenCache
+ * @return {Boolean}
+ */
 function isCacheExpired({ tokenCache }) {
   const cacheAge = Date.now() - Number(tokenCache?.timestamp)
   logger.debug('tokenCache age', cacheAge / 1000 / 60, 'minutes')
@@ -340,6 +352,14 @@ function isCacheExpired({ tokenCache }) {
   return true
 }
 
+/**
+ * Update the BI temporary token cache from BI itself
+ *
+ * @param {CozyClient} options.client CozyClient instance
+ * @param {io.cozy.konnectors} options.konnector
+ * @param {createTemporaryTokenResponse} options.tokenCache Previous version of BI temporary token cache
+ * @return {createTemporaryTokenResponse}
+ */
 async function updateCache({ client, konnector, tokenCache }) {
   const jobResponse = await client.stackClient.jobs.create(
     'konnector',
@@ -381,7 +401,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
     'createTemporaryToken: konnector passed in options has no slug'
   )
 
-  let tokenCache = await getTokenFromCache({ client })
+  let tokenCache = await getBiTemporaryTokenFromCache({ client })
   if (isCacheExpired({ tokenCache })) {
     logger.debug('temporaryToken cache is expired. Updating')
     tokenCache = await updateCache({ client, konnector, tokenCache })
