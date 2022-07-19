@@ -369,14 +369,20 @@ async function updateCache({ client, konnector, tokenCache }) {
     'result',
     TEMP_TOKEN_TIMOUT_S * 1000
   )
-  const saveResult = await client.save({
-    _type: 'io.cozy.bank.settings',
-    _id: 'bi',
-    ...(tokenCache?._rev ? { _rev: tokenCache._rev } : {}),
-    timestamp: Date.now(),
-    ...event.data.result
-  })
-  return saveResult.data
+  try {
+    const saveOptions = {
+      _type: 'io.cozy.bank.settings',
+      _id: 'bi',
+      ...(tokenCache?._rev ? { _rev: tokenCache._rev } : {}),
+      timestamp: Date.now(),
+      ...event.data.result
+    }
+    const saveResult = await client.save(saveOptions)
+    return saveResult.data
+  } catch (err) {
+    logger.warn('error while saving temporary token cache', err)
+    return event.data.result
+  }
 }
 
 /**

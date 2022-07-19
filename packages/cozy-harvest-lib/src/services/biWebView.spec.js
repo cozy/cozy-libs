@@ -429,4 +429,39 @@ describe('fetchExtraOAuthUrlParams', () => {
     })
     expect(result).not.toHaveProperty('connection_id')
   })
+
+  it('should not fail on 409 conflict while saving cache', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.query = jest.fn().mockResolvedValue(null)
+    client.stackClient.jobs.create = jest.fn().mockReturnValue({
+      data: {
+        attributes: {
+          _id: 'job-id-1337'
+        }
+      }
+    })
+    waitForRealtimeEvent.mockImplementation(async () => {
+      sleep(2)
+      return {
+        data: {
+          result: {
+            code: 'bi-temporary-access-token-123',
+            biMapping: { [TEST_BANK_COZY_ID]: 2 }
+          }
+        }
+      }
+    })
+    client.save = jest.fn().mockRejectedValue({ status: 409 })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector,
+      account
+    })
+    expect(result).toEqual({
+      id_connector: [2],
+      token: 'bi-temporary-access-token-123'
+    })
+  })
 })
