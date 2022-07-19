@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.43.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.42.3...cozy-mespapiers-lib@0.43.0) (2022-07-19)
+
+
+### Features
+
+* Remove getLinksType function ([832cd4e](https://github.com/cozy/cozy-libs/commit/832cd4e9945c9ddf0f655eac9d8f2c3614a03a34))
+* Use tiny thumbnail for all images and pdf files ([447e15a](https://github.com/cozy/cozy-libs/commit/447e15a0047ca35865ae6612a5c194256e379032))
+
+
+
+
+
 ## [0.42.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.42.2...cozy-mespapiers-lib@0.42.3) (2022-07-19)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
