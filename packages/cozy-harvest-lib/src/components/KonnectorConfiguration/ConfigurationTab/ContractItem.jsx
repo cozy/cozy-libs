@@ -17,6 +17,10 @@ import ContractItemSecondaryText from './ContractItemSecondaryText'
 const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)
 
+  const disabledColorWhenNeeded = isDisabled(contract)
+    ? 'var(--disabledTextColor)'
+    : null
+
   return (
     <>
       <ListItem
@@ -26,19 +30,22 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
         onClick={() => {
           setShowingEditModal(true)
         }}
-        disabled={isDisabled(contract)}
       >
         <ListItemIcon>
-          <Icon icon={WalletIcon} color="var(--iconTextColor)" />
+          <Icon icon={WalletIcon} color={disabledColorWhenNeeded} />
         </ListItemIcon>
         <ListItemText
-          primary={startCase(getPrimaryText(contract).toLowerCase())}
+          primary={
+            <span style={{ color: disabledColorWhenNeeded }}>
+              {startCase(getPrimaryText(contract).toLowerCase())}
+            </span>
+          }
           secondary={<ContractItemSecondaryText contract={contract} />}
         />
         <ListItemSecondaryAction>
           <Icon
             icon={RightIcon}
-            className={`u-mr-1 ${isDisabled(contract) ? 'u-o-50' : ''}`}
+            className="u-mr-1"
             color="var(--secondaryTextColor)"
           />
         </ListItemSecondaryAction>
