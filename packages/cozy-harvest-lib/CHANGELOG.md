@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.22.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.21.1...cozy-harvest-lib@9.22.0) (2022-07-19)
+
+
+### Features
+
+* Now allow disabled bank accounts to be clickable ([b33f214](https://github.com/cozy/cozy-libs/commit/b33f2141af6e46eaf87c9139d63ff6ca504e96b2))
+
+
+
+
+
 ## [9.21.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.21.0...cozy-harvest-lib@9.21.1) (2022-07-19)
 
 
