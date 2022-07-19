@@ -101,52 +101,52 @@ const AppRouter = () => {
 }
 ```
 
-Then inside your route component, you have to import exposed components from `cozy-mespapiers-lib`.
-:warning: You have to pass the `lang` prop of the application so that it uses the right locales files.
+Then inside your route component, you have to import exposed component from `cozy-mespapiers-lib`.
+:warning: You must pass it the `lang` prop of the application so that it uses the right locales files.
 
-Here an example with overrided style of `PapersFab`:
+You can also overload some components (currently only the `PapersFab` component) or not use them.
+
+Here some examples:
+
+***
+
+- Default usage
 
 ```jsx
-/* global cozy */
+<MesPapiers {...props} lang={lang} />
+```
 
-import React from 'react'
+***
 
-import MesPapiers, { PapersFab } from 'cozy-mespapiers-lib'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import BarTitle from 'cozy-ui/transpiled/react/BarTitle'
+- PapersFab overloaded
 
-const useStyles = makeStyles({
-  root: {
-    bottom: ({ isDesktop }) =>
-      isDesktop ? '1rem' : 'calc(var(--sidebarHeight) + 1rem)'
-  }
-})
-
-const MesPapiersView = props => {
-  const { lang } = useI18n()
-  const { isDesktop, isMobile } = useBreakpoints()
-  const styles = useStyles({ isDesktop })
-  const { BarCenter } = cozy.bar
-
+```jsx
+const CustomFab = ({ onClick }) => {
   return (
-    <>
-      {isMobile && (
-        <BarCenter>
-          <MuiCozyTheme>
-            <BarTitle>My Title</BarTitle>
-          </MuiCozyTheme>
-        </BarCenter>
-      )}
-      <MesPapiers {...props} lang={lang} />
-      <PapersFab classes={{ root: styles.root }} />
-    </>
+    <Button
+      label="Custom btn"
+      onClick={onClick}
+    />
   )
 }
 
-export default MesPapiersView
+<MesPapiers
+  {...props}
+  lang={lang}
+  components={{ PapersFab: CustomFab }}
+/>
+```
+
+***
+
+- PapersFab unused
+
+```jsx
+<MesPapiers
+  {...props}
+  lang={lang}
+  components={{ PapersFab: null }}
+/>
 ```
 
 # Call modal with URL
@@ -164,6 +164,8 @@ const handleClick = () => {
   })
 }
 ```
+
+***
 
 ## Development
 
