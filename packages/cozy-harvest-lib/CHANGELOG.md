@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.21.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.21.0...cozy-harvest-lib@9.21.1) (2022-07-19)
+
+
+### Bug Fixes
+
+* Do not use biBankId from cache ([c33996c](https://github.com/cozy/cozy-libs/commit/c33996c9d21eeba80883e3dbb75831dec602690d))
+
+
+
+
+
 # [9.21.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.20.0...cozy-harvest-lib@9.21.0) (2022-07-18)
 
 
