@@ -15,6 +15,8 @@ import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { AppRouter } from './AppRouter'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 import MoreOptions from './MoreOptions/MoreOptions'
+import { getComponents } from '../helpers/defaultComponent'
+import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 
 const App = () => {
   const { t } = useI18n()
@@ -50,8 +52,9 @@ const App = () => {
   )
 }
 
-const MesPapiersLib = ({ lang }) => {
+const MesPapiersLib = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
+  const { PapersFab } = getComponents(components)
 
   return (
     <I18n lang={lang} polyglot={polyglot}>
@@ -60,6 +63,11 @@ const MesPapiersLib = ({ lang }) => {
           <PapersDefinitionsProvider>
             <ModalProvider>
               <App />
+              {PapersFab && (
+                <PapersFabWrapper>
+                  <PapersFab />
+                </PapersFabWrapper>
+              )}
             </ModalProvider>
           </PapersDefinitionsProvider>
         </ScannerI18nProvider>

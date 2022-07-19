@@ -20,6 +20,9 @@ jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
   RealTimeQueries: () => <div data-testid="RealTimeQueries" />
 }))
+jest.mock('./PapersFab/PapersFabWrapper', () => () => (
+  <div data-testid="PapersFabWrapper" />
+))
 jest.mock('./AppRouter', () => ({
   AppRouter: () => <div data-testid="AppRouter" />
 }))
@@ -35,7 +38,8 @@ const setup = ({
   isFlag = false,
   papersDefinitions = [],
   customPapersDefinitions = { isLoaded: true, name: '' },
-  isStepperDialogOpen = false
+  isStepperDialogOpen = false,
+  components
 } = {}) => {
   flag.mockReturnValue(isFlag)
   useStepperDialog.mockReturnValue({ isStepperDialogOpen })
@@ -46,7 +50,7 @@ const setup = ({
 
   return render(
     <AppLike>
-      <MesPapiersLib />
+      <MesPapiersLib {...(components && { components: components })} />
     </AppLike>
   )
 }
@@ -88,5 +92,17 @@ describe('MesPapiersLib', () => {
     expect(queryAllByTestId('RealTimeQueries')).toHaveLength(2)
     expect(queryByTestId('Alerter')).toBeTruthy()
     expect(queryByTestId('ModalStack')).toBeTruthy()
+  })
+
+  it('should display PapersFabWrapper & PapersFab by default', () => {
+    const { getByTestId } = setup()
+
+    expect(getByTestId('PapersFabWrapper'))
+  })
+
+  it('should not display PapersFabWrapper & PapersFab', () => {
+    const { queryByTestId } = setup({ components: { PapersFab: null } })
+
+    expect(queryByTestId('PapersFabWrapper')).toBeNull()
   })
 })
