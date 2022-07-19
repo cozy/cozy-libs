@@ -19,7 +19,7 @@ const ContractItem = ({ contract, konnector, accountId, divider }) => {
 
   const disabledColorWhenNeeded = isDisabled(contract)
     ? 'var(--disabledTextColor)'
-    : null
+    : 'var(--iconTextColor)'
 
   return (
     <>
