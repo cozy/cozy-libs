@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.44.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.43.0...cozy-mespapiers-lib@0.44.0) (2022-07-19)
+
+
+### Features
+
+* Add helpers for manage default components ([29ec257](https://github.com/cozy/cozy-libs/commit/29ec25747aa0f3541b9423332464b43cc207957c))
+* Add PaperFabWrapper component ([4d25094](https://github.com/cozy/cozy-libs/commit/4d250949ba2f57e5670ccc4f03d8658ada38fd8c))
+* Implement PapersFabWrapper ([ed9cb23](https://github.com/cozy/cozy-libs/commit/ed9cb23629766a6bb872cdd8aa28bfd19f25aa4d))
+
+
+
+
+
 # [0.43.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@0.42.3...cozy-mespapiers-lib@0.43.0) (2022-07-19)
 
 
