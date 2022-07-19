@@ -1,7 +1,7 @@
 {
   "name": "cozy-mjml",
   "version": "0.13.0",
-  "description": "Use MJML custom components for Cozy emails",
+  "description": "Bundle mjml as a single file",
   "author": "Cozy",
   "license": "MIT",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mjml/README.md",
@@ -13,15 +13,11 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "devDependencies": {
-    "jest-cli": "24.9.0",
-    "mjml": "4.3.1",
-    "shebang-loader": "0.0.1",
-    "webpack": "4.41.2",
-    "webpack-cli": "3.3.8"
+	"@vercel/ncc": "0.34.0",
+    "mjml": "4.13.0"
   },
   "scripts": {
-    "build": "webpack",
-    "watch": "webpack --watch",
+	"build": "mkdir -p tmp dist && ncc build node_modules/.bin/mjml -o tmp/ncc && cp tmp/ncc/index.js dist/main.js && rm -rf tmp",
     "test": "jest"
   },
   "bin": {
