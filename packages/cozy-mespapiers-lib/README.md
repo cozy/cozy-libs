@@ -104,11 +104,11 @@ const AppRouter = () => {
 Then inside your route component, you have to import exposed component from `cozy-mespapiers-lib`.
 :warning: You must pass it the `lang` prop of the application so that it uses the right locales files.
 
-You can also overload some components (currently only the `PapersFab` component) or not use them.
+# Components Overload
+
+You can also overload some components (currently only the `PapersFab` & `Onboarding` components) or not use them (with `null` value).
 
 Here some examples:
-
-***
 
 - Default usage
 
@@ -118,7 +118,7 @@ Here some examples:
 
 ***
 
-- PapersFab overloaded
+- Components overloaded or disabled
 
 ```jsx
 const CustomFab = ({ onClick }) => {
@@ -133,21 +133,11 @@ const CustomFab = ({ onClick }) => {
 <MesPapiers
   {...props}
   lang={lang}
-  components={{ PapersFab: CustomFab }}
+  components={{ PapersFab: CustomFab, Onboarding: null }}
 />
 ```
 
 ***
-
-- PapersFab unused
-
-```jsx
-<MesPapiers
-  {...props}
-  lang={lang}
-  components={{ PapersFab: null }}
-/>
-```
 
 # Call modal with URL
 
