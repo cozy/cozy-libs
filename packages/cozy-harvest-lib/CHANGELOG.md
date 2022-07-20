@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.22.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.22.0...cozy-harvest-lib@9.22.1) (2022-07-20)
+
+
+### Bug Fixes
+
+* Add bankIds in createTemporaryToken params ([3cfae1d](https://github.com/cozy/cozy-libs/commit/3cfae1d7a6ad34e948e77117529943de19c56ec5))
+
+
+
+
+
 # [9.22.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.21.1...cozy-harvest-lib@9.22.0) (2022-07-19)
 
 
