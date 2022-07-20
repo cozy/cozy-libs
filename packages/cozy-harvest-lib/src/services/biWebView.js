@@ -350,15 +350,17 @@ function isCacheExpired({ tokenCache }) {
  *
  * @param {CozyClient} options.client CozyClient instance
  * @param {io.cozy.konnectors} options.konnector
+ * @param {Array<Number>} options.cozyBankIds List of cozy bank identifiers
  * @param {createTemporaryTokenResponse} options.tokenCache Previous version of BI temporary token cache
  * @return {createTemporaryTokenResponse}
  */
-async function updateCache({ client, konnector, tokenCache }) {
+async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
   const jobResponse = await client.stackClient.jobs.create(
     'konnector',
     {
       mode: 'getTemporaryToken',
-      konnector: konnector.slug
+      konnector: konnector.slug,
+      bankIds: cozyBankIds
     },
     {},
     true
@@ -395,12 +397,16 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
   )
 
   let tokenCache = await getBiTemporaryTokenFromCache({ client })
+  const cozyBankIds = getCozyBankIds({ konnector, account })
   if (isCacheExpired({ tokenCache })) {
     logger.debug('temporaryToken cache is expired. Updating')
-    tokenCache = await updateCache({ client, konnector, tokenCache })
+    tokenCache = await updateCache({
+      client,
+      konnector,
+      tokenCache,
+      cozyBankIds
+    })
   }
-
-  const cozyBankIds = getCozyBankIds({ konnector, account })
 
   assert(
     cozyBankIds.length,
