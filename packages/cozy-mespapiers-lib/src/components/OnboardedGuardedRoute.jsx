@@ -5,14 +5,15 @@ import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { getOnboardingStatus } from '../helpers/queries'
+import { useOnboarding } from './Hooks/useOnboarding'
 
 const OnboardedGuardedRoute = ({ component: Component, render, ...rest }) => {
   const { data: settingsData, ...settingsQuery } = useQuery(
     getOnboardingStatus.definition,
     getOnboardingStatus.options
   )
-
   const onboarded = settingsData?.[0]?.onboarded
+  const { OnboardingComponent } = useOnboarding()
 
   return !hasQueryBeenLoaded(settingsQuery) ? (
     <Spinner
@@ -25,9 +26,16 @@ const OnboardedGuardedRoute = ({ component: Component, render, ...rest }) => {
       render={props => {
         const isOnboardingPage = rest?.path === '/paper/onboarding'
 
-        if (isOnboardingPage && onboarded === true) {
+        if (
+          (isOnboardingPage && onboarded === true) ||
+          (isOnboardingPage && !OnboardingComponent)
+        ) {
           return <Redirect to="/paper" />
-        } else if (!isOnboardingPage && onboarded !== true) {
+        } else if (
+          !isOnboardingPage &&
+          onboarded !== true &&
+          OnboardingComponent
+        ) {
           return <Redirect to="/paper/onboarding" />
         } else if (Component) {
           return <Component {...props} />

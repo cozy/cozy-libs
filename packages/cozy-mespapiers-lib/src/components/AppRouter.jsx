@@ -8,7 +8,6 @@ import {
 } from 'react-router-dom'
 
 import Home from './Home/Home'
-import Onboarding from './Onboarding/Onboarding'
 import MultiselectView from './Multiselect/MultiselectView'
 import PapersListWrapper from './Papers/PapersListWrapper'
 import FilesViewerWithQuery from './Viewer/FileViewerWithQuery'
@@ -16,6 +15,7 @@ import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import PlaceholderListModal from './Placeholders/PlaceholderListModal/PlaceholderListModal'
 import CreatePaperModal from './StepperDialog/CreatePaperModal'
 import { StepperDialogProvider } from './Contexts/StepperDialogProvider'
+import OnboardingWrapper from './Onboarding/OnboardingWrapper'
 
 const routes = [
   {
@@ -32,7 +32,7 @@ const routes = [
   },
   {
     path: '/paper/onboarding',
-    component: Onboarding
+    component: OnboardingWrapper
   }
 ]
 
