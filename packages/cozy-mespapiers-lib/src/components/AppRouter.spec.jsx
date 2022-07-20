@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 
 import { AppRouter } from './AppRouter'
 import AppLike from '../../test/components/AppLike'
+import { OnboardingProvider } from './Contexts/OnboardingProvider'
 
 /* eslint-disable react/display-name */
 jest.mock('./OnboardedGuardedRoute', () => ({ component, render }) => {
@@ -21,8 +22,8 @@ jest.mock('./StepperDialog/CreatePaperModal', () => () => (
   <div data-testid="CreatePaperModal" />
 ))
 jest.mock('./Home/Home', () => () => <div data-testid="Home" />)
-jest.mock('./Onboarding/Onboarding', () => () => (
-  <div data-testid="Onboarding" />
+jest.mock('./Onboarding/OnboardingWrapper', () => () => (
+  <div data-testid="OnboardingWrapper" />
 ))
 jest.mock('./Papers/PapersListWrapper', () => () => (
   <div data-testid="PapersListWrapper" />
@@ -40,15 +41,17 @@ jest.mock('react-router-dom', () => ({
 /* eslint-enable react/display-name */
 
 describe('AppRouter', () => {
-  it('should render home, onboarding, papersListWrapper, fileViewerWithQuery components', () => {
+  it('should render home, OnboardingWrapper, papersListWrapper, fileViewerWithQuery components', () => {
     const { queryByTestId } = render(
       <AppLike>
-        <AppRouter />
+        <OnboardingProvider OnboardingComponent={null}>
+          <AppRouter />
+        </OnboardingProvider>
       </AppLike>
     )
 
     expect(queryByTestId('Home')).toBeTruthy()
-    expect(queryByTestId('Onboarding')).toBeTruthy()
+    expect(queryByTestId('OnboardingWrapper')).toBeTruthy()
     expect(queryByTestId('PapersListWrapper')).toBeTruthy()
     expect(queryByTestId('FileViewerWithQuery')).toBeTruthy()
   })
