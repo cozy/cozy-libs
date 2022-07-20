@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import { RealTimeQueries } from 'cozy-client'
 import flag from 'cozy-flags'
@@ -17,6 +18,7 @@ import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 import MoreOptions from './MoreOptions/MoreOptions'
 import { getComponents } from '../helpers/defaultComponent'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
+import { OnboardingProvider } from './Contexts/OnboardingProvider'
 
 const App = () => {
   const { t } = useI18n()
@@ -54,7 +56,7 @@ const App = () => {
 
 const MesPapiersLib = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
-  const { PapersFab } = getComponents(components)
+  const { PapersFab, Onboarding } = getComponents(components)
 
   return (
     <I18n lang={lang} polyglot={polyglot}>
@@ -62,7 +64,9 @@ const MesPapiersLib = ({ lang, components }) => {
         <ScannerI18nProvider>
           <PapersDefinitionsProvider>
             <ModalProvider>
-              <App />
+              <OnboardingProvider OnboardingComponent={Onboarding}>
+                <App />
+              </OnboardingProvider>
               {PapersFab && (
                 <PapersFabWrapper>
                   <PapersFab />
@@ -74,6 +78,11 @@ const MesPapiersLib = ({ lang, components }) => {
       </MultiSelectionProvider>
     </I18n>
   )
+}
+
+MesPapiersLib.propTypes = {
+  lang: PropTypes.string,
+  components: PropTypes.objectOf(PropTypes.node)
 }
 
 export default MesPapiersLib
