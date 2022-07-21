@@ -29,36 +29,52 @@ npm install --save cozy-realtime`
 yarn add cozy-realtime
 ```
 
-### Example
+### Setup
 
-CozyRealtime comes with a plugin for CozyClient. This is the recommended way to use it:
+CozyRealtime comes with a plugin for [cozy-client](https://github.com/cozy/cozy-client).
+This is the recommended way to setup:
 
 ```js
+// setup.js
 import CozyClient from 'cozy-client'
 import { RealtimePlugin } from 'cozy-realtime'
 
 const client = new CozyClient({})
 client.registerPlugin(RealtimePlugin)
+```
+
+Then, you can listen for a whole doctype, thanks to the `<RealTimeQueries>` component, provided by [cozy-client](https://github.com/cozy/cozy-client).
+This will automatically subscribe to all the events occuring on the specified doctype and accordingly update the store, so your app will reflect the data changes in realtime.
+
+```js
+// App.js
+import { RealTimeQueries } from 'cozy-client'
+
+<App>
+  <RealTimeQueries doctype="io.cozy.files" />
+  ...
+</App>
+
+```
+
+Simple, isn't it?
+
+### Manual subscribe
+
+If your app needs to handle specific events on the data, you need to subscribe/unsubscribe like this:
+
+```js
+const realtime = client.plugins.realtime
 realtime.subscribe('created', 'io.cozy.bank.accounts', handleBankAccountCreated)
 realtime.unsubscribe('created', 'io.cozy.bank.accounts', handleBankAccountCreated)
 ```
 
-### Inside a component
+#### Example
 
 It is important to unsubscribe when unmounting React components.
 
 ```js
-
-// Instantiation
-import React, { Component } from 'react'
-import { RealtimePlugin } from 'cozy-realtime'
-import CozyClient, { withClient } from 'cozy-client'
-
-const client = new CozyClient({})
-
-client.registerPlugin(RealtimePlugin)
-
-// Usage
+// some-component.js
 
 const handleCreate = accounts => {
   console.log(`A new 'io.cozy.accounts' is created with id '${accounts._id}'.`)
