@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.0.2...cozy-mespapiers-lib@1.1.0) (2022-07-21)
+
+
+### Features
+
+* Add Onboarding component in the possible components ([a405e86](https://github.com/cozy/cozy-libs/commit/a405e86d71151f76f927c5e045e71591b82bed6c))
+* Add OnboardingComponent to existing conditions ([6db8f77](https://github.com/cozy/cozy-libs/commit/6db8f773b15ee7127de83dc57e9ec0dbd4bcd28a))
+* Add OnboardingProvider ([f7a55f3](https://github.com/cozy/cozy-libs/commit/f7a55f3ef3152fbbcd00edebb1c3e146df130094))
+* Add OnboardingProvider to MesPapiersLib component ([59d3786](https://github.com/cozy/cozy-libs/commit/59d3786110fa2b2326f42d618fb711cf18931ca4))
+* Add OnboardingWrapper component ([c307765](https://github.com/cozy/cozy-libs/commit/c307765c4654d62912d7f63ce6e929efc0b8062a))
+
+
+
+
+
 ## [1.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.0.1...cozy-mespapiers-lib@1.0.2) (2022-07-20)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
