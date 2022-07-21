@@ -82,7 +82,7 @@ const MesPapiersLib = ({ lang, components }) => {
 
 MesPapiersLib.propTypes = {
   lang: PropTypes.string,
-  components: PropTypes.objectOf(PropTypes.node)
+  components: PropTypes.objectOf(PropTypes.func)
 }
 
 export default MesPapiersLib
