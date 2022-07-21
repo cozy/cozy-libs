@@ -1,3 +1,4 @@
+// @ts-check
 /**
  * Interface between Budget Insight and Cozy using BI's webview
  *
@@ -8,7 +9,9 @@ import { getBIConnection, getBIConnectionAccountsList } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import { Q } from 'cozy-client'
+// @ts-ignore (its a peerDep and I don't know how to configure ts for that)
 import flag from 'cozy-flags'
+
 import {
   setBIConnectionId,
   saveBIConfig,
@@ -22,6 +25,12 @@ import { waitForRealtimeEvent } from './jobUtils'
 import '../types'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
+/**
+ * @typedef {import("../models/ConnectionFlow").default} ConnectionFlow
+ * @typedef {object} CozyClient
+
+ */
+
 const TEMP_TOKEN_TIMOUT_S = 60
 export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
@@ -30,13 +39,13 @@ export const isBiWebViewConnector = konnector =>
 
 /**
  * Runs multiple checks on the bi connection referenced in the given account
- *
- * @param {io.cozy.accounts} options.account The account content
- * @param {ConnectionFlow} options.flow
- * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {object} options
+ * @param {IoCozyAccount} options.account The account content
+ * @param {KonnectorManifest} options.konnector konnector manifest content
+ * @param {ConnectionFlow} options.flow The flow
  * @param {CozyClient} options.client CozyClient object
  *
- * @return {Integer} Connection Id
+ * @return {Promise<biConnection>} Connection Id
  */
 export const checkBIConnection = async ({
   account,
@@ -74,7 +83,6 @@ export const checkBIConnection = async ({
       const err = new KonnectorJobError(
         'ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED'
       )
-      err.accountId = sameAccount._id
       throw err
     }
     return connection
@@ -100,12 +108,14 @@ export const fetchContractSynchronizationUrl = async ({
 /**
  * Handles webview connection
  *
- * @param {io.cozy.accounts} options.account The account content
- * @param {ConnectionFlow} options.flow
- * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {object} options
+ * @param {IoCozyAccount} options.account The account content
+ * @param {KonnectorManifest} options.konnector konnector manifest content
+ * @param {ConnectionFlow} options.flow The flow
  * @param {CozyClient} options.client CozyClient object
- *
- * @return {Integer} Connection Id
+ * @param {Boolean} options.reconnect If this is a reconnexion
+ * @param {Function} options.t Translation fonction
+ * @return {Promise<Number>} Connection Id
  */
 export const handleOAuthAccount = async ({
   account,
@@ -151,7 +161,7 @@ export const handleOAuthAccount = async ({
 /**
  * Return the bi aggregator parent relationship configuration for a given konnector
  *
- * @param {io.cozy.konnectors} konnector connector manifest content
+ * @param {KonnectorManifest} konnector connector manifest content
  *
  * @return {Object}
  */
@@ -176,9 +186,9 @@ const getBiAggregatorParentRelationship = konnector => {
  * Gets BI webview connection id which is returned in the account by the stack
  * via oauth callback url
  *
- * @param {io.cozy.accounts} The account content created by the stack
+ * @param {IoCozyAccount} account The account content created by the stack
  *
- * @return {Integer} Connection Id
+ * @return {Number|null} Connection Id or null if no connexion
  */
 const getWebviewBIConnectionId = account => {
   return Number(account?.oauth?.query?.connection_id?.[0] || null)
@@ -186,13 +196,13 @@ const getWebviewBIConnectionId = account => {
 
 /**
  * Hook from ConnectionFlow after account creation
- *
- * @param {io.cozy.accounts} options.account - created account
- * @param {io.cozy.konnectors} options.konnector  - manifest of the konnector for which the account is created
+ * @param {object} options
+ * @param {IoCozyAccount} options.account - created account
+ * @param {KonnectorManifest} options.konnector konnector manifest content
  * @param {ConnectionFlow} options.flow - current ConnectionFlow instance
  * @param {CozyClient} options.client - current CozyClient instance
  *
- * @returns {Promise<io.cozy.accounts>}
+ * @returns {Promise<IoCozyAccount>}
  */
 export const onBIAccountCreation = async ({
   account: fullAccount,
@@ -227,17 +237,13 @@ export const onBIAccountCreation = async ({
 
 /**
  * Create OAuth extra parameters specific to reconnect webview
- *
- * @param {Array<Number>} options.biBankIds - connector bank ids (for webview connectors)
+ * @param {object} options
+ * @param {Array<String>} options.biBankIds - connector bank ids (for webview connectors)
  * @param {String} options.token - BI temporary token
  * @param {Number} options.connId - BI bi connection id
  * @return {Object}
  */
-const getReconnectExtraOAuthUrlParams = async ({
-  biBankIds,
-  token,
-  connId
-}) => {
+const getReconnectExtraOAuthUrlParams = ({ biBankIds, token, connId }) => {
   return {
     id_connector: biBankIds,
     code: token,
@@ -247,10 +253,10 @@ const getReconnectExtraOAuthUrlParams = async ({
 
 /**
  * Create OAuth extra parameters
- *
+ * @param {object} options
  * @param {CozyClient} options.client - CozyClient instance
- * @param {io.cozy.konnectors} options.konnector connector manifest content
- * @param {io.cozy.accounts} options.account The account content
+ * @param {KonnectorManifest} options.konnector konnector manifest content
+ * @param {IoCozyAccount} options.account The account content
  * @return {Promise<Object>}
  */
 export const fetchExtraOAuthUrlParams = async ({
@@ -284,9 +290,9 @@ export const fetchExtraOAuthUrlParams = async ({
 
 /**
  * Finds the current bankIid in a given konnector or account
- *
- * @param {io.cozy.accounts} options.account The account content
- * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {object} options
+ * @param {IoCozyAccount} options.account The account content
+ * @param {KonnectorManifest} options.konnector konnector manifest content
  * @return {Array<String>} - list of bank ids
  */
 export const getCozyBankIds = ({ konnector, account }) => {
@@ -305,10 +311,10 @@ export const getCozyBankIds = ({ konnector, account }) => {
 
 /**
  * Update imported state of contracts in the given account, according to current state of the accounts on the BI side.
- *
+ * @param {object} options
  * @param {CozyClient} options.client - CozyClient instance
- * @param {io.cozy.accounts} options.account The account content
- * @param {io.cozy.konnectors} options.konnector connector manifest content
+ * @param {IoCozyAccount} options.account The account content
+ * @param {KonnectorManifest} options.konnector konnector manifest content
  */
 export const refreshContracts = async ({ client, konnector, account }) => {
   const biConfig = await createTemporaryToken({
@@ -347,7 +353,7 @@ function convertBIDateToStandardDate(biDate) {
  * Get the BI temporary token cache from Cozy doctype
  *
  * @param {CozyClient} options.client CozyClient instance
- * @return {createTemporaryTokenResponse}
+ * @return {Promise<createTemporaryTokenResponse>}
  */
 async function getBiTemporaryTokenFromCache({ client }) {
   const queryResult = await client.query(
@@ -358,11 +364,10 @@ async function getBiTemporaryTokenFromCache({ client }) {
 
 /**
  * Check if BI temporary token cache is expired or not
- *
- * @param {createTemporaryTokenResponse} options.tokenCache
+ * @param {createTemporaryTokenResponse} tokenCache
  * @return {Boolean}
  */
-export function isCacheExpired({ tokenCache, biUser }) {
+export function isCacheExpired(tokenCache, biUser) {
   const cacheAge = Date.now() - Number(tokenCache?.timestamp)
   logger.debug('tokenCache age', cacheAge / 1000 / 60, 'minutes')
   const MAX_TOKEN_CACHE_AGE = 29 * 60 * 1000
@@ -381,12 +386,12 @@ export function isCacheExpired({ tokenCache, biUser }) {
 
 /**
  * Update the BI temporary token cache from BI itself
- *
+ * @param {object} options
  * @param {CozyClient} options.client CozyClient instance
- * @param {io.cozy.konnectors} options.konnector
- * @param {Array<Number>} options.cozyBankIds List of cozy bank identifiers
+ * @param {KonnectorManifest} options.konnector konnector manifest content
+ * @param {Array<String>} options.cozyBankIds List of cozy bank identifiers
  * @param {createTemporaryTokenResponse} options.tokenCache Previous version of BI temporary token cache
- * @return {createTemporaryTokenResponse}
+ * @return {Promise<createTemporaryTokenResponse>}
  */
 async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
   const jobResponse = await client.stackClient.jobs.create(
@@ -417,12 +422,12 @@ async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
 
 /**
  * Gets a temporary token corresponding to the current BI user
- *
+ * @param {object} options
  * @param {CozyClient} options.client - CozyClient instance
- * @param {io.cozy.konnectors} options.konnector connector manifest content
- * @param {io.cozy.accounts} options.account The account content
+ * @param {KonnectorManifest} options.konnector konnector manifest content
+ * @param {IoCozyAccount} options.account The account content
  *
- * @returns {createTemporaryTokenResponse}
+ * @returns {Promise<createTemporaryTokenResponse>}
  */
 export const createTemporaryToken = async ({ client, konnector, account }) => {
   assert(
@@ -437,7 +442,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
     Q('io.cozy.accounts').getById('bi-aggregator-user')
   )
 
-  if (isCacheExpired({ tokenCache, biUser })) {
+  if (isCacheExpired(tokenCache, biUser)) {
     logger.debug('temporaryToken cache is expired. Updating')
     tokenCache = await updateCache({
       client,

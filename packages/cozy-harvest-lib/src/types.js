@@ -7,6 +7,12 @@
  * @property {Array<String>} bankIds - Cozy bank ids corresponding to the current connector
  * @property {Array<String>} biBankIds - BI bank ids corresponding to the bankIds translated by the connector
  * @property {Object} biMapping - Association table of any cozy bank id to corresponding bi bank id
+ * @property {String?} _rev
+ * @property {String} publicKey
+ * @property {String} clientId
+ * @property {String} mode
+ * @property {timestamp?} timestamp
+ * @property {String} userId - BI User id used to create the tmp token
  */
 
 /**
@@ -20,4 +26,20 @@
  * @property {boolean} active - Whether this connection is active and will be automatically synced.
  * @property {string|null} last_push - Date string: Last successfull push
  * @property {string|null} next_try - Date string: Date of next synchronization.
+ */
+
+/**
+ * @typedef {import("../../node_modules/cozy-client/types/types").CozyClientDocument} CozyClientDocument
+ */
+/**
+ * @typedef KonnectorManifest
+ * @property {String} slug
+ * @property {object} parameters
+ * @property {object} fields
+ * @property {object} aggregator
+ */
+
+/**
+ * @typedef {CozyClientDocument} IoCozyAccount
+ *
  */

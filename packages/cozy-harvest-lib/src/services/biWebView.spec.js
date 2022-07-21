@@ -335,27 +335,27 @@ describe('isCacheExpired', () => {
   it('should not be marked as expired when userId did not change and cache is not old', () => {
     const tokenCache = { timestamp: Date.now(), userId: 666 }
     const biUser = { userId: 666 }
-    expect(isCacheExpired({ tokenCache, biUser })).toBe(false)
+    expect(isCacheExpired(tokenCache, biUser)).toBe(false)
   })
   it('should be marked as expired when userId did not change and cache is old', () => {
     const tokenCache = { timestamp: 0, userId: 666 }
     const biUser = { userId: 666 }
-    expect(isCacheExpired({ tokenCache, biUser })).toBe(true)
+    expect(isCacheExpired(tokenCache, biUser)).toBe(true)
   })
   it('should be marked as expired when userId did change and cache is old', () => {
     const tokenCache = { timestamp: 0, userId: 666 }
     const biUser = { userId: 667 }
-    expect(isCacheExpired({ tokenCache, biUser })).toBe(true)
+    expect(isCacheExpired(tokenCache, biUser)).toBe(true)
   })
   it('should be marked as expired when userId did change and cache is not old', () => {
     const tokenCache = { timestamp: Date.now(), userId: 666 }
     const biUser = { userId: 667 }
-    expect(isCacheExpired({ tokenCache, biUser })).toBe(true)
+    expect(isCacheExpired(tokenCache, biUser)).toBe(true)
   })
   it('should be marked as expired when cache has no user id', () => {
     const tokenCache = { timestamp: Date.now() }
     const biUser = { userId: 666 }
-    expect(isCacheExpired({ tokenCache, biUser })).toBe(true)
+    expect(isCacheExpired(tokenCache, biUser)).toBe(true)
   })
 })
 
