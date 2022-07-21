@@ -26,7 +26,8 @@ const PapersFabWrapper = ({ children }) => {
   if (!children) return null
 
   const PapersFabOverrided = cloneElement(children, {
-    onClick: toggleActionsMenu
+    onClick: toggleActionsMenu,
+    innerRef: actionBtnRef
   })
 
   return (
