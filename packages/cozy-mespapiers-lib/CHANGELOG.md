@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.1...cozy-mespapiers-lib@1.1.2) (2022-07-21)
+
+
+### Bug Fixes
+
+* Add innerRef props to cloned papersFab button ([9712621](https://github.com/cozy/cozy-libs/commit/971262196127af2d2bf2bc87a56dc300b7269856))
+* Proptype "components" ([cb75c1f](https://github.com/cozy/cozy-libs/commit/cb75c1f46a9efe7d18e3daa7900012f23600141f))
+
+
+
+
+
 ## [1.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.0...cozy-mespapiers-lib@1.1.1) (2022-07-21)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
