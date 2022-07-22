@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.2...cozy-mespapiers-lib@1.1.3) (2022-07-22)
+
+
+### Bug Fixes
+
+* Close the multi-selector returns to the homepage ([570f386](https://github.com/cozy/cozy-libs/commit/570f3869907179c6884100affdfdc91d64e39951))
+
+
+
+
+
 ## [1.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.1...cozy-mespapiers-lib@1.1.2) (2022-07-21)
 
 
