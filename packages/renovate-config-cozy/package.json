@@ -11,12 +11,19 @@
       "rangeStrategy": "pin",
       "packageRules": [
         {
-          "excludePackageNames": [
-            "^cozy-"
+          "excludePackagePrefixes": [
+            "cozy-"
           ],
           "extends": [
             "schedule:monthly"
-          ]
+          ],
+          "rangeStrategy": "pin"
+        },
+        {
+          "matchPackagePrefixes": [
+            "cozy-"
+          ],
+          "rangeStrategy": "bump"
         }
       ],
       "timezone": "Europe/Paris",
