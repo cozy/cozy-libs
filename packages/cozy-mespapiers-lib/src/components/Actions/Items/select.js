@@ -12,11 +12,12 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
       const { t } = useI18n()
       const history = useHistory()
       const { pathname } = useLocation()
+      const selectFromFile = files.length === 1
 
       return (
         <ActionMenuItemWrapper
           className={className}
-          icon="paperplane"
+          icon={selectFromFile ? 'select-all' : 'paperplane'}
           onClick={() => {
             history.push({
               pathname: `/paper/multiselect`,
@@ -28,7 +29,7 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
               addMultiSelectionFile(files[0])
           }}
         >
-          {files.length === 0 ? t('action.forwardPapers') : t('action.select')}
+          {selectFromFile ? t('action.select') : t('action.forwardPapers')}
         </ActionMenuItemWrapper>
       )
     }
