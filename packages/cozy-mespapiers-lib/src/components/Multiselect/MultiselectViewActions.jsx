@@ -76,6 +76,7 @@ const MultiselectViewActions = ({ onClose }) => {
   const forward = async () => {
     if (allMultiSelectionFiles.length === 1) {
       await forwardFile(client, allMultiSelectionFiles, t)
+      onClose()
     } else {
       setIsBackdropOpen(true)
 
