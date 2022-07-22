@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -10,7 +10,6 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 const SelectFileButton = ({ file }) => {
   const { t } = useI18n()
   const history = useHistory()
-  const { pathname } = useLocation()
   const { addMultiSelectionFile } = useMultiSelection()
 
   return (
@@ -21,7 +20,7 @@ const SelectFileButton = ({ file }) => {
       onClick={() => {
         history.push({
           pathname: `/paper/multiselect`,
-          search: `backgroundPath=${pathname}`
+          search: `backgroundPath=/paper`
         })
         addMultiSelectionFile(file)
       }}
