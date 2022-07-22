@@ -171,6 +171,27 @@ describe('MultiselectContent', () => {
 
       expect(mockForwardFiles).toBeCalledTimes(1)
     })
+    it('should call "onClose" after "forwardFile" when click forward Button if there are one file', async () => {
+      const mockOnClose = jest.fn()
+      const mockForwardFiles = jest.fn()
+      const mockNavigatorShareFunc = jest.fn()
+      const { getByTestId } = setup({
+        allMultiSelectionFiles: [{ _id: '00', name: 'File00' }],
+        mockForwardFiles,
+        isMobile: true,
+        mockNavigatorShareFunc,
+        onClose: mockOnClose
+      })
+
+      const forwardBtn = getByTestId('forwardButton')
+      fireEvent.click(forwardBtn)
+
+      expect(mockOnClose).toBeCalledTimes(0)
+      expect(mockForwardFiles).toBeCalledTimes(1)
+      await waitFor(() => {
+        expect(mockOnClose).toBeCalledTimes(1)
+      })
+    })
 
     it('should call "makeZipFolder" when click forward Button if there is more than one files', async () => {
       const mockMakeZipFolder = jest.fn()
