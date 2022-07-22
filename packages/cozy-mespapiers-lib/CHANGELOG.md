@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.3...cozy-mespapiers-lib@1.1.4) (2022-07-22)
+
+
+### Bug Fixes
+
+* Close multiselect after forward one file ([61025ea](https://github.com/cozy/cozy-libs/commit/61025ea08740ce035e37a4ce37aaaadb2c9e38d0))
+
+
+
+
+
 ## [1.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.2...cozy-mespapiers-lib@1.1.3) (2022-07-22)
 
 
