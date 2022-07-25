@@ -13,6 +13,7 @@ const get = require('lodash/get')
 const { parallelMap } = require('./utils')
 const CozyClient = require('cozy-client/dist/CozyClient').default
 const Q = require('cozy-client/dist/queries/dsl').Q
+
 const log = require('cozy-logger').namespace('Document')
 const querystring = require('querystring')
 
@@ -172,7 +173,7 @@ class Document {
       throw new Error('doctype is not defined')
     }
 
-    const resp = await this.cozyClient.collection(this.doctype).get(id)
+    const resp = await this.cozyClient.query(Q(this.doctype).getById(id))
     return resp.data
   }
 

@@ -1,3 +1,4 @@
+const { Q } = require('cozy-client/dist/queries/dsl')
 const Application = require('./Application')
 const CozyFile = require('./File')
 
@@ -21,7 +22,9 @@ class CozyFolder extends CozyFile {
       }
     ])
 
-    const { data: dirInfos } = await collection.get(dirId)
+    const { data: dirInfos } = await this.cozyClient.query(
+      Q(CozyFile.doctype).getById(dirId)
+    )
 
     return dirInfos
   }
