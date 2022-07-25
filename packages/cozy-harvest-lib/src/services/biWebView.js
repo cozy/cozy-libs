@@ -23,6 +23,7 @@ import '../types'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 const TEMP_TOKEN_TIMOUT_S = 60
+export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
 export const isBiWebViewConnector = konnector =>
   flag('harvest.bi.webview') && isBudgetInsightConnector(konnector)
@@ -130,9 +131,11 @@ export const handleOAuthAccount = async ({
   if (connectionId) {
     logger.info(`Found a BI webview connection id: ${connectionId}`)
     flow.konnector = konnector
-    biWebviewAccount = await flow.saveAccount(
-      setBIConnectionId(biWebviewAccount, connectionId)
-    )
+
+    biWebviewAccount = await flow.saveAccount({
+      ...setBIConnectionId(biWebviewAccount, connectionId),
+      ...getBiAggregatorParentRelationship(konnector)
+    })
 
     await flow.handleFormSubmit({
       client,
@@ -143,6 +146,30 @@ export const handleOAuthAccount = async ({
   }
 
   return connectionId
+}
+
+/**
+ * Return the bi aggregator parent relationship configuration for a given konnector
+ *
+ * @param {io.cozy.konnectors} konnector connector manifest content
+ *
+ * @return {Object}
+ */
+const getBiAggregatorParentRelationship = konnector => {
+  const biAggregatorId = konnector?.aggregator?.accountId
+  if (!biAggregatorId) {
+    return {}
+  }
+  return {
+    relationships: {
+      parent: {
+        data: {
+          _id: biAggregatorId,
+          _type: ACCOUNTS_DOCTYPE
+        }
+      }
+    }
+  }
 }
 
 /**
