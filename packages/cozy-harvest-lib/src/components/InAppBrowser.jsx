@@ -1,30 +1,73 @@
-import { useEffect } from 'react'
+import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useWebviewIntent } from 'cozy-intent'
 import logger from '../logger'
 import { intentsApiProptype } from '../helpers/proptypes'
 
-const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
-  const webviewIntent = useWebviewIntent()
-  const fetchSessionCode = intentsApi?.fetchSessionCode
-    ? intentsApi?.fetchSessionCode
-    : () => webviewIntent.call('fetchSessionCode')
-  const showInAppBrowser = intentsApi?.showInAppBrowser
-    ? intentsApi?.showInAppBrowser
-    : url => webviewIntent.call('showInAppBrowser', { url })
-  const closeInAppBrowser = intentsApi?.closeInAppBrowser
-    ? intentsApi?.closeInAppBrowser
-    : () => webviewIntent.call('closeInAppBrowser')
+const InAppBrowser = ({ url, onClose, intentsApi }) => {
+  if (intentsApi) {
+    return (
+      <InAppBrowserWithIntentsApi
+        url={url}
+        onClose={onClose}
+        intentsApi={intentsApi}
+      />
+    )
+  } else {
+    return <InAppBrowserWithWebviewIntent url={url} onClose={onClose} />
+  }
+}
 
-  const tokenParamName = intentsApi?.tokenParamName
-    ? intentsApi?.tokenParamName
-    : 'session_code'
+const InAppBrowserWithWebviewIntent = ({ url, onClose }) => {
+  const webviewIntent = useWebviewIntent()
+  const isReady = Boolean(webviewIntent)
+  useEffect(() => {
+    async function insideEffect() {
+      if (isReady) {
+        try {
+          logger.debug('url at the beginning: ', url)
+          const sessionCode = await webviewIntent.call('fetchSessionCode')
+          logger.debug('got session code', sessionCode)
+          const iabUrl = new URL(url)
+          iabUrl.searchParams.append('session_code', sessionCode)
+          // we need to decodeURIComponent since toString() encodes URL
+          // but native browser will also encode them.
+          const urlToOpen = decodeURIComponent(iabUrl.toString())
+          logger.debug('url to open: ', urlToOpen)
+          const result = await webviewIntent.call('showInAppBrowser', {
+            url: urlToOpen
+          })
+          if (result?.type !== 'dismiss' && result?.type !== 'cancel') {
+            logger.error('Unexpected InAppBrowser result', result)
+          }
+        } catch (err) {
+          logger.error('unexpected fetchSessionCode result', err)
+        }
+        if (onClose) {
+          onClose()
+        }
+      }
+    }
+    insideEffect()
+    return function cleanup() {
+      webviewIntent.call('closeInAppBrowser')
+    }
+  }, [isReady, url, onClose, webviewIntent])
+  return null
+}
+
+const InAppBrowserWithIntentsApi = ({ url, onClose, intentsApi = {} }) => {
+  const {
+    fetchSessionCode,
+    showInAppBrowser,
+    closeInAppBrowser,
+    tokenParamName = 'session_code'
+  } = intentsApi
 
   const isReady = Boolean(
-    webviewIntent ||
-      (intentsApi?.fetchSessionCode &&
-        intentsApi?.showInAppBrowser &&
-        intentsApi?.closeInAppBrowser)
+    intentsApi?.fetchSessionCode &&
+      intentsApi?.showInAppBrowser &&
+      intentsApi?.closeInAppBrowser
   )
 
   useEffect(() => {
@@ -52,6 +95,7 @@ const InAppBrowser = ({ url, onClose, intentsApi = {} }) => {
         }
       }
     }
+
     insideEffect()
     return function cleanup() {
       closeInAppBrowser()
