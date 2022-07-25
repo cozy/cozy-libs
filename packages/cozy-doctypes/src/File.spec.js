@@ -37,7 +37,10 @@ describe('File model', () => {
       getSpy.mockImplementation(() =>
         Promise.resolve({
           data: {
-            path: parentDirPath
+            path: parentDirPath,
+            _type: 'io.cozy.files',
+            id: '1',
+            _id: 1
           }
         })
       )
@@ -259,7 +262,10 @@ describe('File model', () => {
       getSpy.mockImplementation(() =>
         Promise.resolve({
           data: {
-            path: '/GrandParent/Parent'
+            path: '/GrandParent/Parent',
+            _type: 'io.cozy.files',
+            id: '1',
+            _id: '1'
           }
         })
       )
