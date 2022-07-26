@@ -7,6 +7,7 @@ import {
   DialogCloseButton,
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import {
   useVaultUnlockContext,
   VaultUnlockProvider,
@@ -67,20 +68,22 @@ const Routes = ({
     konnector
   )
 
-  if (fetching) {
-    return <p></p>
-  } else {
-    return (
-      <DatacardOptions options={datacardOptions}>
-        <MountPointProvider baseRoute={konnectorRoot}>
-          <DialogContext.Provider value={dialogContext}>
-            <HarvestVaultProvider>
-              <VaultUnlockProvider>
-                <HarvestDialog
-                  {...dialogContext.dialogProps}
-                  aria-label={konnectorWithTriggers.name}
-                >
-                  <DialogCloseButton onClick={onDismiss} />
+  return (
+    <DatacardOptions options={datacardOptions}>
+      <MountPointProvider baseRoute={konnectorRoot}>
+        <DialogContext.Provider value={dialogContext}>
+          <HarvestVaultProvider>
+            <VaultUnlockProvider>
+              <HarvestDialog
+                {...dialogContext.dialogProps}
+                aria-label={konnectorWithTriggers.name}
+              >
+                <DialogCloseButton onClick={onDismiss} />
+                {fetching ? (
+                  <div className="u-pv-2 u-ta-center">
+                    <Spinner size="xxlarge" />
+                  </div>
+                ) : (
                   <KonnectorAccounts konnector={konnectorWithTriggers}>
                     {accountsAndTriggers => (
                       <Switch>
@@ -161,15 +164,15 @@ const Routes = ({
                       </Switch>
                     )}
                   </KonnectorAccounts>
-                </HarvestDialog>
-                <VaultUnlockPlaceholder />
-              </VaultUnlockProvider>
-            </HarvestVaultProvider>
-          </DialogContext.Provider>
-        </MountPointProvider>
-      </DatacardOptions>
-    )
-  }
+                )}
+              </HarvestDialog>
+              <VaultUnlockPlaceholder />
+            </VaultUnlockProvider>
+          </HarvestVaultProvider>
+        </DialogContext.Provider>
+      </MountPointProvider>
+    </DatacardOptions>
+  )
 }
 
 export default Routes
