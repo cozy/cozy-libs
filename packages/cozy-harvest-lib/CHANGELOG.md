@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.23.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.0...cozy-harvest-lib@9.23.1) (2022-07-26)
+
+
+### Bug Fixes
+
+* Google connector in web mode ([1777fcc](https://github.com/cozy/cozy-libs/commit/1777fccc6b9e1e581189ca4563f851b341a60644))
+* OauthWindowInAppBrowser re-render ([334e7d8](https://github.com/cozy/cozy-libs/commit/334e7d8b7d777bf265803f81583a65f39fb0cabb))
+
+
+
+
+
 # [9.23.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.22.3...cozy-harvest-lib@9.23.0) (2022-07-26)
 
 
