@@ -1,27 +1,123 @@
 <mjml>
-  <mj-head>
-    <mj-defaults />
-  </mj-head>
-  <mj-body background-color="#f5f6f7">
-    <mj-header></mj-header>
-    <mj-header locale="fr" mycozy="true"></mj-header>
-    <mj-wrapper background-color="#fff" border-radius="8px" padding="0">
-      <mj-section>
-        <mj-column>
-          <mj-text mj-class="title content-small">✉️ Main title</mj-text>
-          <mj-text mj-class="title-h2 content-small">Level 2 title</mj-text>
-          <mj-text mj-class="content-small">Content with a small bottom space (8px)</mj-text>
-          <mj-text mj-class="content-medium">Content with a medium bottom space (16px)</mj-text>
-          <mj-text mj-class="content-large">Content with a large bottom space (24px)</mj-text>
-          <mj-text mj-class="content-xlarge">Content with a extra large bottom space (32px)</mj-text>
-          <mj-text mj-class="highlight">Highlighted text</mj-text>
-          <mj-button mj-class="primary-button" href="https://cozy.io">Primary button</mj-button>
-          <mj-button mj-class="primary-link" href="https://cozy.io">Primary link</mj-button>
-          <mj-button mj-class="primary-link" font-size="12px" href="https://cozy.io">Smaller primary link for long links for example</mj-button>
-        </mj-column>
-      </mj-section>
-    </mj-wrapper>
-    <mj-footer></mj-footer>
-    <mj-footer locale="fr" instance="https://isabelledurand.mycozy.cloud"></mj-footer>
-  </mj-body>
+	<mj-head>
+		<mj-font name="Lato" href="https://fonts.googleapis.com/css?family=Lato"/>
+		<mj-attributes>
+			<mj-class name="content-small" padding="0 24px 8px"/>
+			<mj-class name="content-medium" padding="0 24px 16px"/>
+			<mj-class name="content-large" padding="0 24px 24px"/>
+			<mj-class name="content-xlarge" padding="0 24px 32px"/>
+			<mj-class name="highlight" color="#297ef2" font-weight="bold"/>
+			<mj-class name="title" color="#95999d" text-transform="uppercase"
+				font-size="12px" font-weight="bold"/>
+			<mj-class name="title-h2" font-size="18px" font-weight="bold"/>
+			<mj-class name="primary-button" inner-padding="10px 16px"
+				background-color="#297ef2" border-radius="2px"
+				color="#fff" text-transform="uppercase" font-size="14px"
+				font-weight="bold" line-height="1.43"/>
+			<mj-class name="primary-link" background-color="transparent"
+				color="#297ef2" text-decoration="none" font-weight="bold"
+				padding="0" inner-padding="10px 8px"/>
+			<mj-all font-family="Lato,Arial" color="#32363f" font-size="16px"
+				line-height="1.5"/>
+		</mj-attributes>
+	</mj-head>
+
+	<mj-body background-color="#f5f6f7">
+		<mj-section padding="0">
+			<mj-column>
+				<mj-image padding="16px 0" align="left"
+					width="122px"
+					src="https://files.cozycloud.cc/cozy-mjml/cozycloud.png"
+					alt="Cozy Cloud"/>
+			</mj-column>
+		</mj-section>
+
+		<mj-wrapper background-color="#fff" border-radius="8px" padding="0">
+			<mj-section padding="24px 0 8px">
+				<mj-column>
+					<mj-text mj-class="title content-medium">
+						✉️ Confirmation de votre inscription
+					</mj-text>
+					<mj-text mj-class="content-medium">
+						Nous sommes ravis de vous compter parmi nous !<br />
+						Cliquez sur le bouton ci-dessous pour continuer :
+					</mj-text>
+				</mj-column>
+			</mj-section>
+		</mj-wrapper>
+
+		<mj-wrapper padding="0">
+			<mj-section padding="16px 0">
+				<mj-column vertical-align="middle">
+					<mj-button href="https://isabelledurand.mycozy.cloud/" background-color="#fff"
+						font-size="14px" color="#297ef2" text-decoration="none"
+						font-weight="bold" padding="0" inner-padding="4px 16px"
+						vertical-align="middle" border-radius="16px">
+						<img width="24" height="24"
+							src="https://files.cozycloud.cc/cozy-mjml/cozy-logo-round.png"
+							style="vertical-align:middle;"/>
+							&nbsp;https://isabelledurand.mycozy.cloud/
+					</mj-button>
+				</mj-column>
+			</mj-section>
+			<mj-section padding="0">
+				<mj-column>
+					<mj-text padding="0" align="center" mj-class="highlight">
+						Cozy Cloud héberge votre domicile numérique, Cozy
+					</mj-text>
+					<mj-text align="center" font-size="14px" color="#95999d">
+						Hébergé en France • Respectueux de votre vie privée • Sécurisé
+					</mj-text>
+				</mj-column>
+			</mj-section>
+			<mj-section padding="0">
+				<mj-group>
+					<mj-column width="49.5%" padding="0">
+						<mj-button href="https://blog.cozy.io" mj-class="primary-link"
+							font-size="12px" align="right">Blog de Cozy Cloud</mj-button>
+					</mj-column>
+					<mj-column width="1%" padding="0">
+						<mj-text align="center" padding="5px 0" color="#95999d"
+							font-size="16px">|</mj-text>
+					</mj-column>
+					<mj-column width="49.5%" padding="0">
+						<mj-button href="https://support.cozy.io"
+							mj-class="primary-link" font-size="12px"
+							align="left">Aide et support</mj-button>
+					</mj-column>
+				</mj-group>
+			</mj-section>
+			<mj-section padding-bottom="5px">
+				<mj-group>
+					<mj-column width="50%">
+						<mj-image align="right" alt="Appstore" padding="4px"
+							width="130px"
+							src="https://files.cozycloud.cc/cozy-mjml/appstore-fr.png"
+							href="https://itunes.apple.com/fr/developer/cozy-cloud/id1131616091?mt=8"/>
+					</mj-column>
+					<mj-column width="50%">
+						<mj-image align="left" alt="Play Store" padding="4px"
+							width="130px"
+							src="https://files.cozycloud.cc/cozy-mjml/playstore-fr.png"
+							href="https://play.google.com/store/apps/developer?id=Cozy+Cloud"/>
+					</mj-column>
+					<mj-column width="100%">
+						<mj-image align="center" alt="Cozy Desktop" padding="4px"
+							width="130px"
+							src="https://files.cozycloud.cc/cozy-mjml/desktop-fr.png"
+							href="https://cozy.io/fr/download/#desktop"/>
+					</mj-column>
+				</mj-group>
+			</mj-section>
+			<mj-section padding="0">
+				<mj-column>
+					<mj-text align="center" font-size="12px">
+						<a href="https://cozy.io/fr/legal/" style="color:#5d6165;">
+							Mentions légales
+						</a>
+					</mj-text>
+				</mj-column>
+			</mj-section>
+		</mj-wrapper>
+	</mj-body>
 </mjml>

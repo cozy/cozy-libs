@@ -1,14 +1,8 @@
-const fs = require('fs')
-const path = require('path')
-const mjml2html = require('mjml')
-const registerComponents = require('../src/components').register
+const child_process = require('child_process')
 
 describe('The example', () => {
   it('works', () => {
-    registerComponents()
-    const filename = path.resolve(__dirname, '../example.mjml')
-    const data = fs.readFileSync(filename, 'utf8')
-    const html = mjml2html(data)
+    const html = child_process.execSync('node dist/main.js -r example.mjml -s')
     expect(html).toMatchSnapshot()
   })
 })
