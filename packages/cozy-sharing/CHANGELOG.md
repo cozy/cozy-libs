@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.5.2 (2022-07-26)
+
+
+### Bug Fixes
+
+* Style of paperItem component ([0ac8469](https://github.com/cozy/cozy-libs/commit/0ac8469e4389477c472d6de0db64d3825389438b))
+
+
+
+
+
 ## [4.5.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.5.0...cozy-sharing@4.5.1) (2022-07-13)
 
 

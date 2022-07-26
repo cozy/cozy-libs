@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.23.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.22.3...cozy-harvest-lib@9.23.0) (2022-07-26)
+
+
+### Features
+
+* Add BI aggregator releationship to BI accounts ([cb7a79c](https://github.com/cozy/cozy-libs/commit/cb7a79c6cd72a9f8e95ae71307f27f04b68f0e94))
+
+
+
+
+
 ## [9.22.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.22.2...cozy-harvest-lib@9.22.3) (2022-07-26)
 
 **Note:** Version bump only for package cozy-harvest-lib

@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.85.0 (2022-07-26)
+
+
+### Bug Fixes
+
+* Style of paperItem component ([0ac8469](https://github.com/cozy/cozy-libs/commit/0ac8469e4389477c472d6de0db64d3825389438b))
+
+
+### Features
+
+* Ignore disabled bank accounts when needed ([86e7104](https://github.com/cozy/cozy-libs/commit/86e7104606e9240672e54b319be3fab86c6c5964))
+
+
+
+
+
 # 1.84.0 (2022-07-11)
 
 
