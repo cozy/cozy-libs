@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.8.5 (2022-07-26)
+
+
+### Bug Fixes
+
+* **renovate:** Set caret on cozy-libs, pin on other dependencies ([db40fd8](https://github.com/cozy/cozy-libs/commit/db40fd81b005fa95870cb53233fb1460f1c3eb7a))
+
+
+
+
+
 ## [0.8.4](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.3...renovate-config-cozy@0.8.4) (2022-02-14)
 
 
