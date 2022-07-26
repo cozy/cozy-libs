@@ -77,6 +77,7 @@
   "peerDependencies": {
     "@babel/runtime": ">=7.12.5",
     "@material-ui/core": ">=4",
+    "@material-ui/lab": "4.0.0-alpha.60",
     "cozy-client": ">=27.17.0",
     "cozy-device-helper": ">=1.10.2",
     "cozy-flags": ">=2.3.5",
