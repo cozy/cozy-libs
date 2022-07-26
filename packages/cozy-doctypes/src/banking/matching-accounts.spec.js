@@ -237,3 +237,55 @@ describe('approxNumberMatch', () => {
     ).toBe(true)
   })
 })
+
+describe('matchAccounts', () => {
+  it('should ignore disabled accounts if no matching accounts', () => {
+    const fetchedAccounts = [{ metadata: { disabledAt: '2022-07-26' } }]
+    const existingAccounts = []
+    const result = matchAccounts(fetchedAccounts, existingAccounts)
+    expect(result).toEqual([])
+  })
+  it('should update an enabled account if fetched account is disabled', () => {
+    const fetchedAccounts = [{ metadata: { disabledAt: '2022-07-26' } }]
+    const existingAccounts = [{ metadata: { disabledAt: null } }]
+    const result = matchAccounts(fetchedAccounts, existingAccounts)
+    expect(result).toEqual([
+      {
+        account: {
+          metadata: {
+            disabledAt: '2022-07-26'
+          }
+        },
+        match: {
+          metadata: {
+            disabledAt: null
+          }
+        },
+        method: 'no-number-attr-same-type'
+      }
+    ])
+  })
+  it('should update enabled accounts as usual', () => {
+    const fetchedAccounts = [
+      { newAttr: 'value', metadata: { disabledAt: null } }
+    ]
+    const existingAccounts = [{ metadata: { disabledAt: null } }]
+    const result = matchAccounts(fetchedAccounts, existingAccounts)
+    expect(result).toEqual([
+      {
+        account: {
+          newAttr: 'value',
+          metadata: {
+            disabledAt: null
+          }
+        },
+        match: {
+          metadata: {
+            disabledAt: null
+          }
+        },
+        method: 'no-number-attr-same-type'
+      }
+    ])
+  })
+})
