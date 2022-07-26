@@ -362,12 +362,19 @@ async function getBiTemporaryTokenFromCache({ client }) {
  * @param {createTemporaryTokenResponse} options.tokenCache
  * @return {Boolean}
  */
-function isCacheExpired({ tokenCache }) {
+export function isCacheExpired({ tokenCache, biUser }) {
   const cacheAge = Date.now() - Number(tokenCache?.timestamp)
   logger.debug('tokenCache age', cacheAge / 1000 / 60, 'minutes')
   const MAX_TOKEN_CACHE_AGE = 29 * 60 * 1000
-  if (tokenCache && cacheAge < MAX_TOKEN_CACHE_AGE) {
+  const isSameUserId = tokenCache.userId === biUser?.userId
+  if (tokenCache && cacheAge < MAX_TOKEN_CACHE_AGE && isSameUserId) {
     return false
+  }
+
+  if (!isSameUserId) {
+    logger.warn(
+      `BI user id in cache ${tokenCache.userId} is different than current user id ${biUser?.userId}`
+    )
   }
   return true
 }
@@ -425,7 +432,12 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
 
   let tokenCache = await getBiTemporaryTokenFromCache({ client })
   const cozyBankIds = getCozyBankIds({ konnector, account })
-  if (isCacheExpired({ tokenCache })) {
+
+  const { data: biUser } = await client.query(
+    Q('io.cozy.accounts').getById('bi-aggregator-user')
+  )
+
+  if (isCacheExpired({ tokenCache, biUser })) {
     logger.debug('temporaryToken cache is expired. Updating')
     tokenCache = await updateCache({
       client,
