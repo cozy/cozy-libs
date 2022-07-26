@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.23.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.1...cozy-harvest-lib@9.23.2) (2022-07-26)
+
+
+### Bug Fixes
+
+* Invalidate temporary token cache when there is a change of BI user ([0fa3893](https://github.com/cozy/cozy-libs/commit/0fa3893bb6ac3c02bc88d15dae79e3772a6aef97))
+
+
+
+
+
 ## [9.23.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.0...cozy-harvest-lib@9.23.1) (2022-07-26)
 
 
