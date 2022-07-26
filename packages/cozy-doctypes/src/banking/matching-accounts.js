@@ -1,4 +1,5 @@
 const sortBy = require('lodash/sortBy')
+const get = require('lodash/get')
 const { eitherIncludes } = require('./matching-tools')
 const { getSlugFromInstitutionLabel } = require('./slug-account')
 
@@ -266,10 +267,17 @@ const matchAccounts = (fetchedAccountsArg, existingAccounts) => {
     if (matchResult) {
       const i = toMatch.indexOf(matchResult.match)
       toMatch.splice(i, 1)
-      // eslint-disable-next-line node/no-unsupported-features/es-syntax
-      results.push({ account: fetchedAccount, ...matchResult })
+      if (
+        !get(fetchedAccount, 'metadata.disabledAt') ||
+        !get(matchResult, 'metadata.disabledAt')
+      ) {
+        // eslint-disable-next-line node/no-unsupported-features/es-syntax
+        results.push({ account: fetchedAccount, ...matchResult })
+      }
     } else {
-      results.push({ account: fetchedAccount })
+      if (!get(fetchedAccount, 'metadata.disabledAt')) {
+        results.push({ account: fetchedAccount })
+      }
     }
   }
   return results
