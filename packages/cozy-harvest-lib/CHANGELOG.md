@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.24.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.4...cozy-harvest-lib@9.24.0) (2022-07-27)
+
+
+### Features
+
+* **cozy-harvest-app:** Add `konnectorSlug` prop in Routes.jsx ([e7e656e](https://github.com/cozy/cozy-libs/commit/e7e656e5527df108dbed86c2c74543adaa928f34))
+* **cozy-harvest-app:** Display a spinner while connector is fetched ([6c6079b](https://github.com/cozy/cozy-libs/commit/6c6079b2d5dc4d1d993bd5c72d48b18dcbba5377))
+* **cozy-harvest-app:** Fetch connector from cozy-stack if undefined ([5433f97](https://github.com/cozy/cozy-libs/commit/5433f97df552262d6de71eb112e59d81b62c0451))
+
+
+
+
+
 ## [9.23.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.3...cozy-harvest-lib@9.23.4) (2022-07-27)
 
 
