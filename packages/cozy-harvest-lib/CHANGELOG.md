@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.23.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.3...cozy-harvest-lib@9.23.4) (2022-07-27)
+
+
+### Bug Fixes
+
+* Bank words are reserved for banking konnector ([5d91695](https://github.com/cozy/cozy-libs/commit/5d916957a41a172b34acbc9604c875c695443a09))
+
+
+
+
+
 ## [9.23.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.2...cozy-harvest-lib@9.23.3) (2022-07-27)
 
 
