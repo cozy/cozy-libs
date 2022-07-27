@@ -20,6 +20,15 @@
           "rangeStrategy": "pin"
         },
         {
+          "matchPackageNames": [
+            "cozy-client",
+            "cozy-stack-client",
+            "cozy-pouch-link"
+          ],
+          "groupName": "Cozy Client Packages",
+          "rangeStrategy": "bump"
+        },
+        {
           "matchPackagePrefixes": [
             "cozy-"
           ],
