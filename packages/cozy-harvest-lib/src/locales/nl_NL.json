@@ -394,11 +394,19 @@
     }
   },
   "oauth": {
+    "banking": {
+      "connect": {
+        "label": "Bank toevoegen"
+      },
+      "reconnect": {
+        "label": "Opnieuw koppelen"
+      }
+    },
     "reconnect": {
       "label": "Opnieuw koppelen"
     },
     "connect": {
-      "label": "Bank toevoegen"
+      "label": "Koppelen"
     },
     "window": {
       "title": "OAuth"
