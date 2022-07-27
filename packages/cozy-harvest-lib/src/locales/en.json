@@ -394,11 +394,19 @@
     }
   },
   "oauth": {
+    "banking": {
+      "connect": {
+        "label": "Add your bank"
+      },
+      "reconnect": {
+        "label": "Reconnect"
+      }
+    },
     "reconnect": {
       "label": "Reconnect"
     },
     "connect": {
-      "label": "Add your bank"
+      "label": "Connect"
     },
     "window": {
       "title": "OAuth"

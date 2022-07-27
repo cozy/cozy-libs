@@ -99,9 +99,13 @@ export class OAuthForm extends PureComponent {
       showOAuthWindow === true ||
       flowState.running ||
       (needExtraParams && !extraParams)
-
+    const isBankingKonnector = konnector.categories?.includes('banking')
     const buttonLabel = reconnect
-      ? 'oauth.reconnect.label'
+      ? isBankingKonnector
+        ? 'oauth.banking.reconnect.label'
+        : 'oauth.reconnect.label'
+      : isBankingKonnector
+      ? 'oauth.banking.connect.label'
       : 'oauth.connect.label'
 
     return (
