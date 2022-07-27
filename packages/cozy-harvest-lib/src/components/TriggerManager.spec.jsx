@@ -104,6 +104,13 @@ const oAuthKonnector = {
     scope: 'test'
   }
 }
+
+const bankingKonnector = {
+  oauth: {
+    scope: 'test'
+  },
+  categories: ['banking']
+}
 const oAuthProps = {
   ...props,
   konnector: oAuthKonnector,
@@ -132,6 +139,18 @@ describe('TriggerManager', () => {
       const root = render(
         <AppLike>
           <TriggerManager {...oAuthProps} konnector={oAuthKonnector} />
+        </AppLike>
+      )
+      await expect(root.findByText('Connect')).resolves.toBeDefined()
+      expect(root.queryByLabelText('username')).toBeFalsy()
+      expect(root.queryByLabelText('passphrase')).toBeFalsy()
+    })
+
+    it('should should not show a form but only a button to connect with a banking konnector', async () => {
+      mockVaultClient.getAll.mockResolvedValue([])
+      const root = render(
+        <AppLike>
+          <TriggerManager {...oAuthProps} konnector={bankingKonnector} />
         </AppLike>
       )
       await expect(root.findByText('Add your bank')).resolves.toBeDefined()
