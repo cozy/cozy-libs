@@ -365,6 +365,7 @@ async function getBiTemporaryTokenFromCache({ client }) {
 /**
  * Check if BI temporary token cache is expired or not
  * @param {createTemporaryTokenResponse} tokenCache
+ * @param {Object} biUser the bi user
  * @return {Boolean}
  */
 export function isCacheExpired(tokenCache, biUser) {
