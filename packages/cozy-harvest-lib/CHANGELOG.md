@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.23.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.2...cozy-harvest-lib@9.23.3) (2022-07-27)
+
+
+### Bug Fixes
+
+* Add ts-check on biWebview ([1920474](https://github.com/cozy/cozy-libs/commit/1920474b85ad342adbd12a363612918db1665bca))
+
+
+
+
+
 ## [9.23.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.23.1...cozy-harvest-lib@9.23.2) (2022-07-26)
 
 
