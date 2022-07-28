@@ -25,12 +25,18 @@
             "cozy-stack-client",
             "cozy-pouch-link"
           ],
+          "schedule": [
+            "on saturday"
+          ],
           "groupName": "Cozy Client Packages",
           "rangeStrategy": "bump"
         },
         {
           "matchPackagePrefixes": [
             "cozy-"
+          ],
+          "schedule": [
+            "on saturday"
           ],
           "rangeStrategy": "bump"
         }
