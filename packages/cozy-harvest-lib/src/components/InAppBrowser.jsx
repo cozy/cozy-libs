@@ -84,7 +84,7 @@ const InAppBrowserWithIntentsApi = ({ url, onClose, intentsApi = {} }) => {
           const urlToOpen = decodeURIComponent(iabUrl.toString())
           logger.debug('url to open: ', urlToOpen)
           const result = await showInAppBrowser(urlToOpen)
-          if (result?.type !== 'dismiss' && result?.type !== 'cancel') {
+          if (result?.state !== 'dismiss' && result?.state !== 'cancel') {
             logger.error('Unexpected InAppBrowser result', result)
           }
         } catch (err) {
