@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.5...renovate-config-cozy@0.9.0) (2022-07-28)
+
+
+### Features
+
+* **renovate:** Group cozy-client subpackages ([8f23f12](https://github.com/cozy/cozy-libs/commit/8f23f120292adfaa1b5419374e0c3b1453cc55af))
+
+
+
+
+
 ## 0.8.5 (2022-07-26)
 
 
