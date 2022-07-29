@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.9.1](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.9.0...renovate-config-cozy@0.9.1) (2022-07-29)
+
+**Note:** Version bump only for package renovate-config-cozy
+
+
+
+
+
 # [0.9.0](https://github.com/cozy/cozy-libs/compare/renovate-config-cozy@0.8.5...renovate-config-cozy@0.9.0) (2022-07-28)
 
 
