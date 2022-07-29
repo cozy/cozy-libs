@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.24.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.1...cozy-harvest-lib@9.24.2) (2022-07-29)
+
+
+### Bug Fixes
+
+* Expect a state attribute in showInAppBrowser result ([4d79905](https://github.com/cozy/cozy-libs/commit/4d799052aa4bb2d15bdf7a8c927c875b0484800a))
+
+
+
+
+
 ## [9.24.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.0...cozy-harvest-lib@9.24.1) (2022-07-27)
 
 **Note:** Version bump only for package cozy-harvest-lib
