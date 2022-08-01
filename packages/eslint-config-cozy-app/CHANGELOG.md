@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.2.1 (2022-08-01)
+
+
+### Bug Fixes
+
+* **node:** Upgrade to Node 16 ([3a82521](https://github.com/cozy/cozy-libs/commit/3a825217b4a55d6434b20660d73df44ab17e7bd0))
+
+
+
+
+
 # [4.2.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@4.1.1...eslint-config-cozy-app@4.2.0) (2022-06-10)
 
 

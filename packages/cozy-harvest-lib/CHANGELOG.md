@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.24.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.2...cozy-harvest-lib@9.24.3) (2022-08-01)
+
+
+### Bug Fixes
+
+* **node:** Upgrade to Node 16 ([3a82521](https://github.com/cozy/cozy-libs/commit/3a825217b4a55d6434b20660d73df44ab17e7bd0))
+
+
+
+
+
 ## [9.24.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.1...cozy-harvest-lib@9.24.2) (2022-07-29)
 
 
