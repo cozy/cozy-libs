@@ -23,18 +23,19 @@ export class OAuthForm extends PureComponent {
     this.handleConnect = this.handleConnect.bind(this)
     this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
     this.handleExtraParams = this.handleExtraParams.bind(this)
-    this.state = {
-      showingOAuthModal: false
-    }
+    this.state = {}
   }
 
   componentDidMount() {
-    const { account, konnector, flow, client } = this.props
+    const { account, konnector, flow, client, reconnect } = this.props
 
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
     if (konnectorPolicy.fetchExtraOAuthUrlParams) {
       this.setState({ needExtraParams: true })
+      if (reconnect) {
+        this.showOAuthWindow()
+      }
       // eslint-disable-next-line promise/catch-or-return
       konnectorPolicy
         .fetchExtraOAuthUrlParams({
@@ -117,15 +118,17 @@ export class OAuthForm extends PureComponent {
             konnector={konnector}
           />
         )}
-        <Button
-          className="u-mt-1"
-          busy={isBusy}
-          disabled={isBusy}
-          extension="full"
-          label={t(buttonLabel)}
-          onClick={this.handleConnect}
-        />
-        {showOAuthWindow && (
+        {!reconnect && (
+          <Button
+            className="u-mt-1"
+            busy={isBusy}
+            disabled={isBusy}
+            extension="full"
+            label={t(buttonLabel)}
+            onClick={this.handleConnect}
+          />
+        )}
+        {showOAuthWindow && extraParams && (
           <OAuthWindow
             extraParams={extraParams}
             konnector={konnector}
