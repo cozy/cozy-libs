@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`OAuthForm should bypass reconnect button when updating an account 1`] = `<React.Fragment />`;
+
 exports[`OAuthForm should handle oauth cancelation 1`] = `
 <React.Fragment>
   <withI18n(withClient(withKonnectorLocales(TriggerErrorInfo))
@@ -30,19 +32,6 @@ exports[`OAuthForm should render 1`] = `
     disabled={true}
     extension="full"
     label="oauth.connect.label"
-    onClick={[Function]}
-  />
-</React.Fragment>
-`;
-
-exports[`OAuthForm should render reconnect button when updating an account 1`] = `
-<React.Fragment>
-  <DefaultButton
-    busy={true}
-    className="u-mt-1"
-    disabled={true}
-    extension="full"
-    label="oauth.reconnect.label"
     onClick={[Function]}
   />
 </React.Fragment>
