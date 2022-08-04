@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.1.15](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.14...cozy-mespapiers-lib@1.1.15) (2022-08-04)
+
+
+### Bug Fixes
+
+* Select action icon ([033fce7](https://github.com/cozy/cozy-libs/commit/033fce74758d1b1a546505c154db9d2822e8c38e))
+
+
+
+
+
 ## [1.1.14](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.13...cozy-mespapiers-lib@1.1.14) (2022-08-01)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
