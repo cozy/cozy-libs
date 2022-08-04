@@ -77,7 +77,14 @@ const CompositeHeaderImage = ({ icon, fallbackIcon, iconSize = 'large' }) => {
   const isBitmap = typeof src === 'string' && src.endsWith('.png')
 
   if (isBitmap) {
-    return <img data-testid={src} src={src} alt="illustration" />
+    return (
+      <img
+        data-testid={src}
+        src={src}
+        alt="illustration"
+        style={{ maxWidth: '16.25rem' }}
+      />
+    )
   }
 
   return (
