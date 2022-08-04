@@ -5,7 +5,7 @@
  * - Deals with the konnector to get temporary tokens
  */
 
-import { getBIConnection, getBIConnectionAccountsList } from './bi-http'
+import { getBIConnectionAccountsList } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import { Q } from 'cozy-client'
@@ -14,7 +14,6 @@ import flag from 'cozy-flags'
 
 import {
   setBIConnectionId,
-  saveBIConfig,
   findAccountWithBiConnection,
   convertBIErrortoKonnectorJobError,
   isBudgetInsightConnector,
@@ -40,44 +39,21 @@ export const isBiWebViewConnector = konnector =>
 /**
  * Runs multiple checks on the bi connection referenced in the given account
  * @param {object} options
- * @param {IoCozyAccount} options.account The account content
+ * @param {number} options.connId The BI connection identifier
  * @param {KonnectorManifest} options.konnector konnector manifest content
- * @param {ConnectionFlow} options.flow The flow
  * @param {CozyClient} options.client CozyClient object
  *
- * @return {Promise<biConnection>} Connection Id
+ * @return {Promise}
+ * @throws KonnectorJobError
  */
-export const checkBIConnection = async ({
-  account,
-  client,
-  konnector,
-  flow
-}) => {
+export const checkBIConnection = async ({ connId, client, konnector }) => {
   try {
-    let connId = getWebviewBIConnectionId(account)
-
     logger.info('Creating temporary token...')
-
-    const biConfig = await createTemporaryToken({
-      client,
-      konnector,
-      account
-    })
-    saveBIConfig(flow, biConfig)
-
-    const { code: tempToken, ...config } = biConfig
-
-    logger.info('Created temporary token')
-    assert(tempToken, 'No temporary token')
-
-    logger.info(`fetch connection ${connId}...`)
-
-    const connection = await getBIConnection(config, connId, tempToken)
 
     const sameAccount = await findAccountWithBiConnection({
       client,
       konnector,
-      connectionId: connection.id
+      connectionId: connId
     })
     if (sameAccount) {
       const err = new KonnectorJobError(
@@ -85,7 +61,7 @@ export const checkBIConnection = async ({
       )
       throw err
     }
-    return connection
+    return
   } catch (err) {
     return convertBIErrortoKonnectorJobError(err)
   }
@@ -115,7 +91,7 @@ export const fetchContractSynchronizationUrl = async ({
  * @param {CozyClient} options.client CozyClient object
  * @param {Boolean} options.reconnect If this is a reconnexion
  * @param {Function} options.t Translation fonction
- * @return {Promise<Number>} Connection Id
+ * @return {Promise<Number|null>} Connection Id
  */
 export const handleOAuthAccount = async ({
   account,
@@ -211,23 +187,22 @@ export const onBIAccountCreation = async ({
   konnector
 }) => {
   const account = await flow.saveAccount(fullAccount)
+  const connId = getWebviewBIConnectionId(account)
 
-  const biConnection = await checkBIConnection({
-    account: {
-      ...fullAccount,
-      _id: account._id
-    },
+  if (connId === null) {
+    throw new Error(
+      'onBIAccountCreation: bi connection id should not be null on creation'
+    )
+  }
+
+  await checkBIConnection({
+    connId,
     client,
-    konnector,
-    flow
-  })
-
-  flow.setData({
-    biConnection
+    konnector
   })
 
   const updatedAccount = await flow.saveAccount(
-    setBIConnectionId(account, biConnection.id)
+    setBIConnectionId(account, connId)
   )
 
   flow.triggerEvent(LOGIN_SUCCESS_EVENT)

@@ -9,8 +9,6 @@ import {
   isCacheExpired
 } from './biWebView'
 import ConnectionFlow from '../models/ConnectionFlow'
-import { waitForRealtimeEvent } from './jobUtils'
-import biPublicKeyProd from './bi-public-key-prod.json'
 import flag from 'cozy-flags'
 
 jest.mock('./bi-http', () => ({
@@ -18,11 +16,10 @@ jest.mock('./bi-http', () => ({
     .fn()
     .mockResolvedValue({ text: Promise.resolve('{}') }),
   updateBIConnection: jest.fn(),
-  getBIConnection: jest.fn(),
   getBIConnectionAccountsList: jest.fn()
 }))
 
-import { getBIConnection, getBIConnectionAccountsList } from './bi-http'
+import { getBIConnectionAccountsList } from './bi-http'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
@@ -31,8 +28,6 @@ jest.mock('cozy-logger', () => ({
 jest.mock('./jobUtils', () => ({
   waitForRealtimeEvent: jest.fn()
 }))
-
-const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 
 const TEST_BANK_COZY_ID = '100000'
 
@@ -109,47 +104,13 @@ describe('checkBIConnection', () => {
       uri: 'http://testcozy.mycozy.cloud'
     })
     const flow = new ConnectionFlow(client, { konnector, account })
-    waitForRealtimeEvent.mockImplementation(async () => {
-      sleep(2)
-      return {
-        data: {
-          result: {
-            mode: 'prod',
-            url: 'https://cozy.biapi.pro/2.0',
-            publicKey: biPublicKeyProd,
-            code: 'bi-temporary-access-token-145613'
-          }
-        }
-      }
-    })
     jest.spyOn(client, 'query').mockImplementation(async () => ({ data: [] }))
-    client.save = jest.fn().mockResolvedValue({
-      data: {
-        mode: 'prod',
-        url: 'https://cozy.biapi.pro/2.0',
-        publicKey: biPublicKeyProd,
-        code: 'bi-temporary-access-token-145613',
-        biMapping: {}
-      }
-    })
-    client.query = jest.fn()
-    client.stackClient.jobs.create = jest.fn().mockReturnValue({
-      data: {
-        attributes: {
-          _id: 'job-id-1337'
-        }
-      }
-    })
 
     return { client, flow }
   }
 
   it('should refuse to create an account with a bi connection id which already exists', async () => {
     const { client, flow } = setup()
-
-    getBIConnection.mockReset().mockResolvedValue({
-      id: 12
-    })
 
     const account = {}
 
