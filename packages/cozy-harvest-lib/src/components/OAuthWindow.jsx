@@ -104,7 +104,6 @@ export class OAuthWindow extends PureComponent {
     this.setState({ succeed: true })
 
     if (typeof onSuccess !== 'function') return
-    this.setState({ succeed: true })
     onSuccess(data.key)
   }
 
@@ -159,10 +158,9 @@ export class OAuthWindow extends PureComponent {
 
   render() {
     const { t, intentsApi } = this.props
-    const { oAuthUrl, succeed } = this.state
+    const { oAuthUrl } = this.state
     return (
       oAuthUrl &&
-      !succeed &&
       (!isFlagshipApp() && !intentsApi ? (
         <Popup
           url={oAuthUrl}
