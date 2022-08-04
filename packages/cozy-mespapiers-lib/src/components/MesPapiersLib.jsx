@@ -15,7 +15,6 @@ import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
 import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { AppRouter } from './AppRouter'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
-import MoreOptions from './MoreOptions/MoreOptions'
 import { getComponents } from '../helpers/defaultComponent'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
@@ -41,10 +40,7 @@ const App = () => {
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
         />
       ) : (
-        <>
-          <MoreOptions />
-          <AppRouter />
-        </>
+        <AppRouter />
       )}
       <RealTimeQueries doctype="io.cozy.files" />
       <RealTimeQueries doctype="io.cozy.mespapiers.settings" />

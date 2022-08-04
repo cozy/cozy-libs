@@ -12,6 +12,10 @@ import { createPaper } from '../Actions/Items/createPaper'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import { ActionsItems } from '../Actions/ActionsItems'
 
+/**
+ * This component is no longer used temporarily,
+ * it will be used as soon as it offers more options than the PapersFab component
+ */
 const MoreOptions = () => {
   const [generalOptions, setGeneralOptions] = useState(false)
   const actionBtnRef = useRef()
