@@ -9,7 +9,7 @@ import withLocales from './hoc/withLocales'
 import { findKonnectorPolicy } from '../konnector-policies'
 import { intentsApiProptype } from '../helpers/proptypes'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
-import { ERROR_EVENT } from '../models/flowEvents'
+import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import { KonnectorJobError } from '../helpers/konnectors'
 
 /**
@@ -23,6 +23,7 @@ export class OAuthForm extends PureComponent {
     this.handleConnect = this.handleConnect.bind(this)
     this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
     this.handleExtraParams = this.handleExtraParams.bind(this)
+    this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
     this.state = {}
   }
 
@@ -46,6 +47,11 @@ export class OAuthForm extends PureComponent {
         })
         .then(this.handleExtraParams)
     }
+    flow.on(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
+  }
+
+  handleLoginSuccess() {
+    this.hideOAuthWindow()
   }
 
   handleExtraParams(extraParams) {
@@ -54,12 +60,16 @@ export class OAuthForm extends PureComponent {
 
   handleAccountId(accountId) {
     const { onSuccess } = this.props
-    this.hideOAuthWindow()
     if (typeof onSuccess === 'function') onSuccess(accountId)
   }
 
   handleConnect() {
     this.showOAuthWindow()
+  }
+
+  componentWillUnmount() {
+    const { flow } = this.props
+    flow.removeListener(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
   }
 
   /**
