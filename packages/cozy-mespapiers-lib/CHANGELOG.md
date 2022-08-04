@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.2.0...cozy-mespapiers-lib@1.3.0) (2022-08-04)
+
+
+### Bug Fixes
+
+* Image showing the position of the expiration date of a National ID ([7d9a296](https://github.com/cozy/cozy-libs/commit/7d9a296a62fd4ef7145ac4d7b5209ea759109e0b))
+
+
+### Features
+
+* Do not use the MoreOptions component anymore ([e51b29c](https://github.com/cozy/cozy-libs/commit/e51b29cede0672830f982c1ec0bd57fd5f85eece))
+* Limit max width of bitmap images ([507a52b](https://github.com/cozy/cozy-libs/commit/507a52b271aa5d99c4b0c81ee14f7143da395164))
+
+
+
+
+
 # [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.15...cozy-mespapiers-lib@1.2.0) (2022-08-04)
 
 
