@@ -13,4 +13,4 @@ packages/eslint-config-cozy-app/     @acezard @trollepierre
 packages/renovate-config-cozy/       @doubleface @trollepierre
 packages/renovate-config-cozy-libs/  @doubleface @trollepierre
 packages/cozy-sharing/               @Ldoppea @acezard @trollepierre
-packages/cozy-mespapiers-lib/        @Merkur39 @JF-Cozy
+packages/cozy-mespapiers-lib/        @Merkur39 @JF-Cozy @PolariTOON
