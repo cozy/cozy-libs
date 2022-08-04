@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.15...cozy-mespapiers-lib@1.2.0) (2022-08-04)
+
+
+### Features
+
+* Prevent duplicate files during selection ([73859b5](https://github.com/cozy/cozy-libs/commit/73859b50acc59d668011d003a29216fa8d7c119f))
+
+
+
+
+
 ## [1.1.15](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.1.14...cozy-mespapiers-lib@1.1.15) (2022-08-04)
 
 
