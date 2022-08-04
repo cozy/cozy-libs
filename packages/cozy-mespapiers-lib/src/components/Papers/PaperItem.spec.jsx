@@ -31,12 +31,14 @@ const setup = ({
   divider,
   withCheckbox,
   withChildren,
+  allMultiSelectionFiles = [],
   isMultiSelectionActive = false,
   currentMultiSelectionFiles = [],
   changeCurrentMultiSelectionFile = jest.fn(),
   historyPush = jest.fn()
 } = {}) => {
   useMultiSelection.mockReturnValue({
+    allMultiSelectionFiles,
     isMultiSelectionActive,
     currentMultiSelectionFiles,
     changeCurrentMultiSelectionFile
@@ -125,6 +127,18 @@ describe('PaperItem components', () => {
 
       expect(inputCheckbox).toHaveAttribute('checked')
     })
+    it('should already checked & disabled if is in allMultiSelectionFiles', () => {
+      const { container } = setup({
+        isMultiSelectionActive: true,
+        withCheckbox: true,
+        allMultiSelectionFiles: [{ _id: 'fileId01' }]
+      })
+
+      const inputCheckbox = container.querySelector('input[type="checkbox"]')
+
+      expect(inputCheckbox).toHaveAttribute('checked')
+      expect(inputCheckbox).toHaveAttribute('disabled')
+    })
   })
 
   describe('ListItemText', () => {
@@ -177,6 +191,22 @@ describe('PaperItem components', () => {
 
       expect(historyPush).toBeCalledTimes(0)
       expect(changeCurrentMultiSelectionFile).toBeCalledTimes(1)
+    })
+    it('should not call "handleClick" when withCheckbox is true & is on multiselection context but the file is already in allMultiSelectionFiles', () => {
+      const historyPush = jest.fn()
+      const changeCurrentMultiSelectionFile = jest.fn()
+      const { getByTestId } = setup({
+        withCheckbox: true,
+        isMultiSelectionActive: true,
+        historyPush,
+        changeCurrentMultiSelectionFile,
+        allMultiSelectionFiles: [{ _id: 'fileId01' }]
+      })
+
+      fireEvent.click(getByTestId('ListItem'))
+
+      expect(historyPush).toBeCalledTimes(0)
+      expect(changeCurrentMultiSelectionFile).toBeCalledTimes(0)
     })
   })
 })

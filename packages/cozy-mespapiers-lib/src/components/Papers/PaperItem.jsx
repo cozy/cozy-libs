@@ -43,11 +43,13 @@ const PaperItem = ({
   const client = useClient()
   const history = useHistory()
   const {
+    allMultiSelectionFiles,
     isMultiSelectionActive,
     changeCurrentMultiSelectionFile,
     currentMultiSelectionFiles
   } = useMultiSelection()
 
+  const isMultiSelectionChoice = withCheckbox && isMultiSelectionActive
   const paperTheme = paper?.metadata?.qualification?.label
   const paperLabel = paper?.metadata?.qualification?.page
   const paperDate = paper?.metadata?.datetime
@@ -55,7 +57,7 @@ const PaperItem = ({
     : null
 
   const handleClick = () => {
-    if (isMultiSelectionActive && withCheckbox) {
+    if (isMultiSelectionChoice) {
       changeCurrentMultiSelectionFile(paper)
     } else {
       history.push({
@@ -65,7 +67,17 @@ const PaperItem = ({
   }
 
   const isChecked = () => {
-    return currentMultiSelectionFiles.some(file => file._id === paper._id)
+    return (
+      currentMultiSelectionFiles.some(file => file._id === paper._id) ||
+      allMultiSelectionFiles.some(file => file._id === paper._id)
+    )
+  }
+
+  const isAlreadySelected = () => {
+    return (
+      isMultiSelectionChoice &&
+      allMultiSelectionFiles.some(file => file._id === paper._id)
+    )
   }
 
   const secondaryText = `${contactNames ? contactNames : ''}${
@@ -78,12 +90,14 @@ const PaperItem = ({
         button
         className={className}
         classes={classes}
-        onClick={handleClick}
+        onClick={!isAlreadySelected() ? handleClick : undefined}
         data-testid="ListItem"
+        disabled={isAlreadySelected()}
       >
-        {withCheckbox && isMultiSelectionActive && (
+        {isMultiSelectionChoice && (
           <Checkbox
             checked={isChecked()}
+            disabled={isAlreadySelected()}
             value={paper._id}
             className={style.checkbox}
             data-testid="Checkbox"
