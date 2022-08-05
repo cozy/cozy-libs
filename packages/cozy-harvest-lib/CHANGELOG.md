@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.4...cozy-harvest-lib@9.25.0) (2022-08-05)
+
+
+### Bug Fixes
+
+* Let OAuthForm component decide when to remove the OAuth window ([59a132f](https://github.com/cozy/cozy-libs/commit/59a132f71d528cb311d436041951aaae811aed6e))
+
+
+### Features
+
+* Close OAuthWindow only on login success ([a8cf6a3](https://github.com/cozy/cozy-libs/commit/a8cf6a37a9c76bf2702c1d73d292a4d337f7dc5a))
+
+
+
+
+
 ## [9.24.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.3...cozy-harvest-lib@9.24.4) (2022-08-05)
 
 
