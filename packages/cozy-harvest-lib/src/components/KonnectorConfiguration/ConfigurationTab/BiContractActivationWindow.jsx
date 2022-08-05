@@ -2,11 +2,9 @@ import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/MuiCozyTheme/Buttons'
-import Popup from 'cozy-ui/transpiled/react/Popup'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import { findKonnectorPolicy } from '../../../konnector-policies'
-import { isFlagshipApp } from 'cozy-device-helper'
-import InAppBrowser from '../../InAppBrowser'
+import OAuthWindow from '../../OAuthWindow'
 import withLocales from '../../hoc/withLocales'
 import {
   intentsApiProptype,
@@ -20,7 +18,7 @@ const BIContractActivationWindow = ({
   intentsApi,
   innerAccountModalOverrides
 }) => {
-  const [initialUrl, setInitialUrl] = useState(null)
+  const [extraParams, setExtraParams] = useState(null)
   const [isWindowVisible, setWindowVisible] = useState(false)
   const [shouldRefreshContracts, setShouldRefreshContracts] = useState(false)
 
@@ -44,19 +42,19 @@ const BIContractActivationWindow = ({
 
   useEffect(() => {
     async function handleLinkFetch() {
-      const result = await konnectorPolicy.fetchContractSynchronizationUrl({
+      const result = await konnectorPolicy.fetchExtraOAuthUrlParams({
         client,
         account,
         konnector
       })
-      setInitialUrl(result)
+      setExtraParams(result)
     }
-    if (konnectorPolicy.fetchContractSynchronizationUrl) {
+    if (konnectorPolicy.fetchExtraOAuthUrlParams) {
       handleLinkFetch()
     }
   }, [konnector.slug, account, client, konnectorPolicy])
 
-  if (!konnectorPolicy.fetchContractSynchronizationUrl) return null
+  if (!konnectorPolicy.fetchExtraOAuthUrlParams) return null
 
   const ButtonWrapper = innerAccountModalOverrides?.SyncButtonWrapperComp
     ? innerAccountModalOverrides.SyncButtonWrapperComp
@@ -68,27 +66,22 @@ const BIContractActivationWindow = ({
         <Button
           variant="text"
           color="primary"
-          disabled={!initialUrl}
+          disabled={!extraParams}
           onClick={() => setWindowVisible(true)}
         >
           {t('contracts.handle-synchronization')}
         </Button>
       </ButtonWrapper>
-      {isWindowVisible &&
-        (isFlagshipApp() || intentsApi ? (
-          <InAppBrowser
-            url={initialUrl}
-            onClose={onPopupClosed}
-            intentsApi={intentsApi}
-          />
-        ) : (
-          <Popup
-            initialUrl={initialUrl}
-            width="800"
-            height="800"
-            onClose={onPopupClosed}
-          />
-        ))}
+      {isWindowVisible && (
+        <OAuthWindow
+          extraParams={extraParams}
+          konnector={konnector}
+          account={account}
+          intentsApi={intentsApi}
+          onSuccess={onPopupClosed}
+          onCancel={onPopupClosed}
+        />
+      )}
     </ListItem>
   )
 }

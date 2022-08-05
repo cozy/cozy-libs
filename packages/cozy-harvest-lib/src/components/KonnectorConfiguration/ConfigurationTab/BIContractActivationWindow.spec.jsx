@@ -4,13 +4,12 @@ import { render, fireEvent, act, waitFor } from '@testing-library/react'
 
 import AppLike from '../../../../test/AppLike'
 
-import BIContractActivationWindow from './BiContractActivationWindow'
-const fetchContractSynchronizationUrl = jest.fn()
+const fetchExtraOAuthUrlParams = jest.fn()
 const refreshContracts = jest.fn()
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
 }))
-jest.mock('cozy-ui/transpiled/react/Popup', () => {
+jest.mock('../../Popup', () => {
   return jest.fn().mockImplementation(({ onClose }) => {
     setTimeout(onClose, 1)
     return null
@@ -22,14 +21,17 @@ jest.mock('../../InAppBrowser', () => {
     return null
   })
 })
-
+jest.mock('../../../helpers/oauth')
+jest.mock('cozy-realtime')
 jest.mock('cozy-device-helper')
+import BIContractActivationWindow from './BiContractActivationWindow'
 import { findKonnectorPolicy } from '../../../konnector-policies'
-import Popup from 'cozy-ui/transpiled/react/Popup'
+import Popup from '../../Popup'
 import InAppBrowser from '../../InAppBrowser'
 import { isFlagshipApp } from 'cozy-device-helper'
+import { prepareOAuth } from '../../../helpers/oauth'
 findKonnectorPolicy.mockImplementation(() => ({
-  fetchContractSynchronizationUrl,
+  fetchExtraOAuthUrlParams,
   refreshContracts
 }))
 
@@ -58,8 +60,9 @@ describe('BIContractActivationWindow', () => {
   })
 
   it('should display popup with url from policy and update contract after popup is closed', async () => {
+    prepareOAuth.mockImplementation(() => ({ oAuthUrl: 'https://test.url' }))
     isFlagshipApp.mockImplementation(() => false)
-    fetchContractSynchronizationUrl.mockResolvedValue('bi url')
+    fetchExtraOAuthUrlParams.mockResolvedValue({})
     const { getByRole } = setup()
     await act(async () => {
       await waitFor(() => {
@@ -76,18 +79,19 @@ describe('BIContractActivationWindow', () => {
       })
     })
 
-    expect(fetchContractSynchronizationUrl).toHaveBeenCalled()
+    expect(fetchExtraOAuthUrlParams).toHaveBeenCalled()
     expect(refreshContracts).toHaveBeenCalledTimes(1)
     expect(Popup).toHaveBeenCalledWith(
       expect.objectContaining({
-        initialUrl: 'bi url'
+        url: 'https://test.url'
       }),
-      expect.anything()
+      {}
     )
   })
   it('should call InAppBrowser display if in flagship app context', async () => {
     isFlagshipApp.mockImplementation(() => true)
-    fetchContractSynchronizationUrl.mockResolvedValue('bi url')
+    prepareOAuth.mockImplementation(() => ({ oAuthUrl: 'https://testiab.url' }))
+    fetchExtraOAuthUrlParams.mockResolvedValue({})
     const { getByRole } = setup()
     await act(async () => {
       await waitFor(() => {
@@ -104,11 +108,11 @@ describe('BIContractActivationWindow', () => {
       })
     })
 
-    expect(fetchContractSynchronizationUrl).toHaveBeenCalled()
+    expect(fetchExtraOAuthUrlParams).toHaveBeenCalled()
     expect(refreshContracts).toHaveBeenCalledTimes(1)
     expect(InAppBrowser).toHaveBeenCalledWith(
       expect.objectContaining({
-        url: 'bi url'
+        url: 'https://testiab.url'
       }),
       expect.anything()
     )
