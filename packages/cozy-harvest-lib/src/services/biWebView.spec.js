@@ -393,7 +393,8 @@ describe('fetchExtraOAuthUrlParams', () => {
     const result = await fetchExtraOAuthUrlParams({
       client,
       konnector,
-      account: { ...account, data: { auth: { bi: { connId: 15 } } } }
+      account: { ...account, data: { auth: { bi: { connId: 15 } } } },
+      reconnect: true
     })
     expect(result).toMatchObject({
       connection_id: 15,

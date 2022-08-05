@@ -89,7 +89,7 @@ export const fetchContractSynchronizationUrl = async ({
  * @param {KonnectorManifest} options.konnector konnector manifest content
  * @param {ConnectionFlow} options.flow The flow
  * @param {CozyClient} options.client CozyClient object
- * @param {Boolean} options.reconnect If this is a reconnexion
+ * @param {Boolean} options.reconnect If this is a reconnection
  * @param {Function} options.t Translation fonction
  * @return {Promise<Number|null>} Connection Id
  */
@@ -232,12 +232,14 @@ const getReconnectExtraOAuthUrlParams = ({ biBankIds, token, connId }) => {
  * @param {CozyClient} options.client - CozyClient instance
  * @param {KonnectorManifest} options.konnector konnector manifest content
  * @param {IoCozyAccount} options.account The account content
+ * @param {Boolean} options.reconnect If this is a reconnection
  * @return {Promise<Object>}
  */
 export const fetchExtraOAuthUrlParams = async ({
   client,
   konnector,
-  account
+  account,
+  reconnect = false
 }) => {
   const { code: token, biBankIds } = await createTemporaryToken({
     client,
@@ -247,9 +249,7 @@ export const fetchExtraOAuthUrlParams = async ({
 
   const connId = getBIConnectionIdFromAccount(account)
 
-  const isReconnect = Boolean(connId)
-
-  if (isReconnect) {
+  if (reconnect) {
     return getReconnectExtraOAuthUrlParams({
       biBankIds,
       token,

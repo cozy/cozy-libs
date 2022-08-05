@@ -67,7 +67,6 @@ describe('OAuthForm', () => {
         oauth: { access_token: '1234abcd' }
       },
       client: undefined,
-      flow,
       konnector: { slug: 'test-konnector' }
     })
   })
