@@ -7,10 +7,6 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Box from 'cozy-ui/transpiled/react/Box'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import Badge from 'cozy-ui/transpiled/react/Badge'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import ThemesFilter from '../ThemesFilter'
@@ -26,15 +22,7 @@ import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 import HomeToolbar from './HomeToolbar'
 import SearchResult from '../SearchResult/SearchResult'
-
-const useStyles = makeStyles(theme => ({
-  iconButton: {
-    color: theme.palette.text.icon,
-    boxShadow: theme.shadows[2],
-    backgroundColor: theme.palette.background.paper,
-    marginLeft: '0.5rem'
-  }
-}))
+import FilterButton from './FilterButton'
 
 const {
   themes: { themesList }
@@ -48,7 +36,6 @@ const Home = ({ setSelectedThemeLabel }) => {
     !isMultiSelectionActive
   )
   const [selectedTheme, setSelectedTheme] = useState('')
-  const styles = useStyles()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
   const { papersDefinitions } = usePapersDefinitions()
@@ -129,34 +116,13 @@ const Home = ({ setSelectedThemeLabel }) => {
             onFocus={() => handleThemesFilterDisplayed(false)}
           />
           {(!isThemesFilterDisplayed || isMobile) && (
-            <>
-              {!isThemesFilterDisplayed ? (
-                <Badge
-                  badgeContent={selectedTheme ? 1 : 0}
-                  color="primary"
-                  variant="standard"
-                  size="medium"
-                >
-                  <IconButton
-                    data-testid="SwitchButton"
-                    className={styles.iconButton}
-                    size="medium"
-                    onClick={() => handleThemesFilterDisplayed(prev => !prev)}
-                  >
-                    <Icon icon="setting" />
-                  </IconButton>
-                </Badge>
-              ) : (
-                <IconButton
-                  data-testid="SwitchButton"
-                  className={styles.iconButton}
-                  size="medium"
-                  onClick={() => handleThemesFilterDisplayed(prev => !prev)}
-                >
-                  <Icon icon="setting" />
-                </IconButton>
-              )}
-            </>
+            <FilterButton
+              badge={{
+                active: !isThemesFilterDisplayed,
+                content: selectedTheme ? 1 : 0
+              }}
+              onClick={() => handleThemesFilterDisplayed(prev => !prev)}
+            />
           )}
         </Box>
         <Box className="u-flex u-flex-justify-center" flexWrap="wrap">
