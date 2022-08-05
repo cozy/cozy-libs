@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.24.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.3...cozy-harvest-lib@9.24.4) (2022-08-05)
+
+
+### Bug Fixes
+
+* Remove a reconnection step ([05d2cb6](https://github.com/cozy/cozy-libs/commit/05d2cb674d9ce69164cf0a099059520cbf4f1722))
+* Remove unused request to BI connection ([be09798](https://github.com/cozy/cozy-libs/commit/be09798e3c551fd9628d15e6f79b9de77b3d1aa5))
+
+
+
+
+
 ## [9.24.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.2...cozy-harvest-lib@9.24.3) (2022-08-01)
 
 
