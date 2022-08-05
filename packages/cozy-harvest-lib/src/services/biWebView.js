@@ -5,7 +5,7 @@
  * - Deals with the konnector to get temporary tokens
  */
 
-import { getBIConnectionAccountsList } from './bi-http'
+import { getBIConnectionAccountsList, getBIConnection } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import { Q } from 'cozy-client'
@@ -227,7 +227,11 @@ export const fetchExtraOAuthUrlParams = async ({
   account,
   reconnect = false
 }) => {
-  const { code: token, biBankIds } = await createTemporaryToken({
+  const {
+    code: token,
+    biBankIds,
+    ...config
+  } = await createTemporaryToken({
     client,
     konnector,
     account
@@ -242,8 +246,15 @@ export const fetchExtraOAuthUrlParams = async ({
       connId
     })
   } else {
+    let bankId
+    if (connId && biBankIds.length > 1) {
+      // we want to get the bi bank id of the connection. This way, the user does not need
+      // to choose his bank each time he want to update his synchronizations
+      const connection = await getBIConnection(config, connId, token)
+      bankId = connection.id_bank
+    }
     return {
-      id_connector: biBankIds,
+      id_connector: bankId ? bankId : biBankIds,
       token
     }
   }
