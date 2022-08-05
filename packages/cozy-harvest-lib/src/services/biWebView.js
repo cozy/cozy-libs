@@ -67,20 +67,6 @@ export const checkBIConnection = async ({ connId, client, konnector }) => {
   }
 }
 
-export const fetchContractSynchronizationUrl = async ({
-  account,
-  client,
-  konnector
-}) => {
-  const { code, url, clientId } = await createTemporaryToken({
-    client,
-    konnector,
-    account
-  })
-  const connId = getBIConnectionIdFromAccount(account)
-  return `${url}/auth/webview/manage?client_id=${clientId}&code=${code}&connection_id=${connId}`
-}
-
 /**
  * Handles webview connection
  *
@@ -452,6 +438,5 @@ export const konnectorPolicy = {
   onAccountCreation: onBIAccountCreation,
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
   handleOAuthAccount,
-  fetchContractSynchronizationUrl,
   refreshContracts
 }

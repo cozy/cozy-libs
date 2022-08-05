@@ -3,7 +3,6 @@ import {
   handleOAuthAccount,
   checkBIConnection,
   isBiWebViewConnector,
-  fetchContractSynchronizationUrl,
   refreshContracts,
   fetchExtraOAuthUrlParams,
   isCacheExpired
@@ -183,33 +182,6 @@ describe('isBiWebViewConnector', () => {
   it('should return false if the "harvest.bi.webview" flag is not activated', () => {
     flag('harvest.bi.webview', false)
     expect(isBiWebViewConnector(BIConnector)).toEqual(false)
-  })
-})
-
-describe('fetchContractSynchronizationUrl', () => {
-  it('should provide a proper bi manage webview url', async () => {
-    const client = new CozyClient({
-      uri: 'http://testcozy.mycozy.cloud'
-    })
-    client.query = jest.fn().mockResolvedValue({
-      data: {
-        mode: 'prod',
-        timestamp: Date.now(),
-        biMapping: {},
-        url: 'https://cozy.biapi.pro/2.0',
-        clientId: 'test-client-id',
-        code: 'bi-temporary-access-token-145613'
-      }
-    })
-
-    const url = await fetchContractSynchronizationUrl({
-      account: { ...account, data: { auth: { bi: { connId: 1337 } } } },
-      client,
-      konnector
-    })
-    expect(url).toEqual(
-      'https://cozy.biapi.pro/2.0/auth/webview/manage?client_id=test-client-id&code=bi-temporary-access-token-145613&connection_id=1337'
-    )
   })
 })
 
