@@ -40,10 +40,10 @@ export class OAuthForm extends PureComponent {
       // eslint-disable-next-line promise/catch-or-return
       konnectorPolicy
         .fetchExtraOAuthUrlParams({
-          flow,
           account,
           konnector,
-          client
+          client,
+          reconnect
         })
         .then(this.handleExtraParams)
     }
