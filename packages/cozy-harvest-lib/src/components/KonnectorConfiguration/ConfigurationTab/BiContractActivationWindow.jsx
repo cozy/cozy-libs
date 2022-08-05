@@ -31,12 +31,9 @@ const BIContractActivationWindow = ({
   }
 
   useEffect(() => {
-    async function refreshContracts() {
-      await konnectorPolicy.refreshContracts({ client, account, konnector })
-      setShouldRefreshContracts(false)
-    }
     if (shouldRefreshContracts) {
-      refreshContracts()
+      setShouldRefreshContracts(false)
+      konnectorPolicy.refreshContracts({ client, account, konnector })
     }
   }, [account, client, konnectorPolicy, shouldRefreshContracts, konnector])
 
