@@ -15,10 +15,11 @@ jest.mock('./bi-http', () => ({
     .fn()
     .mockResolvedValue({ text: Promise.resolve('{}') }),
   updateBIConnection: jest.fn(),
-  getBIConnectionAccountsList: jest.fn()
+  getBIConnectionAccountsList: jest.fn(),
+  getBIConnection: jest.fn()
 }))
 
-import { getBIConnectionAccountsList } from './bi-http'
+import { getBIConnectionAccountsList, getBIConnection } from './bi-http'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
@@ -37,6 +38,26 @@ const konnector = {
   },
   partnership: {
     domain: 'https://budget-insight.com'
+  }
+}
+
+const konnectorWithMultipleBankIds = {
+  slug: 'cic45',
+  fields: {
+    bankId: {
+      type: 'dropdown',
+      label: 'branchName',
+      options: [
+        {
+          name: 'Autre',
+          value: '45'
+        },
+        {
+          name: 'Bretagne (Particuliers)',
+          value: '46'
+        }
+      ]
+    }
   }
 }
 
@@ -374,7 +395,7 @@ describe('fetchExtraOAuthUrlParams', () => {
     })
   })
 
-  it('should not add connection_id param if not connection_id', async () => {
+  it('should not add connection_id param if no connection_id', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
@@ -391,5 +412,30 @@ describe('fetchExtraOAuthUrlParams', () => {
       account
     })
     expect(result).not.toHaveProperty('connection_id')
+  })
+
+  it('should get bi connection bank id if multiple biBankIds are in the mapping', async () => {
+    const client = new CozyClient({
+      uri: 'http://testcozy.mycozy.cloud'
+    })
+    client.query = jest.fn().mockResolvedValue({
+      data: {
+        timestamp: Date.now(),
+        code: 'bi-temporary-access-token-12',
+        biMapping: { [TEST_BANK_COZY_ID]: 2, 12: 2, 45: 3, 46: 4 }
+      }
+    })
+    getBIConnection.mockResolvedValueOnce({
+      id_bank: 4
+    })
+    const result = await fetchExtraOAuthUrlParams({
+      client,
+      konnector: konnectorWithMultipleBankIds,
+      account: { ...account, data: { auth: { bi: { connId: 15 } } } }
+    })
+    expect(result).toEqual({
+      id_connector: 4,
+      token: 'bi-temporary-access-token-12'
+    })
   })
 })
