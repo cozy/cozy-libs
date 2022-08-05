@@ -306,15 +306,24 @@ export const refreshContracts = async ({ client, konnector, account }) => {
     (memo, contract) => ({ ...memo, [contract.id + '']: contract.disabled }),
     {}
   )
-  const currentContractsList = account?.relationships?.contracts?.data || []
+  const { data: currentContractsList } = await client.query(
+    Q('io.cozy.bank.accounts')
+      .where({ 'relationships.connection.data._id': account._id })
+      .include(['owners'])
+      .indexFields(['relationships.connection.data._id'])
+  )
   for (const currentContract of currentContractsList) {
     const disabledValue = convertBIDateToStandardDate(
-      contractsById[currentContract.metadata.vendorId]
+      contractsById[currentContract.vendorId]
     )
-    currentContract.metadata.imported = !disabledValue
-    currentContract.metadata.disabledAt = disabledValue
+    const hasChanged = currentContract.metadata.disabledAt !== disabledValue
+    if (hasChanged) {
+      currentContract.metadata.disabledAt = disabledValue
+      currentContract.metadata.imported = !disabledValue
+      // FIXME bulk save via client.collection().updateAll does not show update of accounts in realtime
+      await client.save(currentContract)
+    }
   }
-  await client.save(account)
 }
 
 function convertBIDateToStandardDate(biDate) {

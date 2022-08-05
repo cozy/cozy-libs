@@ -212,41 +212,32 @@ describe('refreshContracts', () => {
       uri: 'http://testcozy.mycozy.cloud'
     })
     client.save = jest.fn()
-    client.query = jest.fn().mockResolvedValue({
-      data: {
-        mode: 'prod',
-        timestamp: Date.now(),
-        biMapping: {},
-        url: 'https://cozy.biapi.pro/2.0',
-        clientId: 'test-client-id',
-        code: 'bi-temporary-access-token-145613'
-      }
-    })
-    const accountWithContracts = {
-      _id: 'testaccount',
-      relationships: {
-        contracts: {
-          data: [
-            { metadata: { vendorId: '1', imported: true } },
-            {
-              metadata: {
-                vendorId: '2',
-                imported: false,
-                disabledAt: '2022-05-24T12:00:00'
-              }
-            },
-            { metadata: { vendorId: '3', imported: true } },
-            {
-              metadata: {
-                vendorId: '4',
-                imported: false,
-                disabledAt: '2022-05-23T13:00:00'
-              }
-            }
-          ]
+    client.query = jest
+      .fn()
+      .mockResolvedValueOnce({
+        data: {
+          mode: 'prod',
+          timestamp: Date.now(),
+          biMapping: {},
+          url: 'https://cozy.biapi.pro/2.0',
+          clientId: 'test-client-id',
+          code: 'bi-temporary-access-token-145613'
         }
-      }
-    }
+      })
+      .mockResolvedValue({
+        data: [
+          { vendorId: '1', metadata: { imported: true } },
+          {
+            vendorId: '2',
+            metadata: { imported: false, disabledAt: '2022-08-05 12:00:00' }
+          },
+          { vendorId: '3', metadata: { imported: true } },
+          {
+            vendorId: '4',
+            metadata: { imported: false, disabledAt: '2022-08-05 12:01:00' }
+          }
+        ]
+      })
     getBIConnectionAccountsList.mockResolvedValue({
       accounts: [
         { id: 1, disabled: '2022-05-25 12:00:00' },
@@ -256,31 +247,23 @@ describe('refreshContracts', () => {
       ]
     })
 
-    await refreshContracts({ client, konnector, account: accountWithContracts })
-    expect(client.save).toHaveBeenCalledWith({
-      _id: 'testaccount',
-      relationships: {
-        contracts: {
-          data: [
-            {
-              metadata: {
-                vendorId: '1',
-                imported: false,
-                disabledAt: '2022-05-25T12:00:00'
-              }
-            },
-            { metadata: { vendorId: '2', imported: true } },
-            {
-              metadata: {
-                vendorId: '3',
-                imported: false,
-                disabledAt: '2022-05-25T12:01:00'
-              }
-            },
-            { metadata: { vendorId: '4', imported: true } }
-          ]
-        }
-      }
+    await refreshContracts({ client, konnector, account: {} })
+    expect(client.save).toHaveBeenCalledTimes(4)
+    expect(client.save).toHaveBeenNthCalledWith(1, {
+      metadata: { disabledAt: '2022-05-25T12:00:00', imported: false },
+      vendorId: '1'
+    })
+    expect(client.save).toHaveBeenNthCalledWith(2, {
+      metadata: { disabledAt: undefined, imported: true },
+      vendorId: '2'
+    })
+    expect(client.save).toHaveBeenNthCalledWith(3, {
+      metadata: { disabledAt: '2022-05-25T12:01:00', imported: false },
+      vendorId: '3'
+    })
+    expect(client.save).toHaveBeenNthCalledWith(4, {
+      metadata: { disabledAt: undefined, imported: true },
+      vendorId: '4'
     })
   })
 })
