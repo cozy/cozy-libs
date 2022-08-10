@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.5.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.5.0...cozy-mespapiers-lib@1.5.1) (2022-08-10)
+
+
+### Bug Fixes
+
+* Use correct image size ([d290c39](https://github.com/cozy/cozy-libs/commit/d290c39a26edfdd7e35fbe3f6822ac7e3dc5f769))
+
+
+
+
+
 # [1.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.4.0...cozy-mespapiers-lib@1.5.0) (2022-08-09)
 
 
