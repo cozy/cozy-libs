@@ -37,13 +37,21 @@ export const getContactsRefIdsByFiles = (files = []) => {
  * @returns {string} Names of the contacts
  */
 export const harmonizeContactsNames = (contacts, t) => {
-  const contactNameList = contacts.map(contact => getDisplayName(contact))
-
-  if (contactNameList.length === 2) {
+  if (contacts.length === 0) {
+    return
+  }
+  if (contacts.length === 2) {
     const firstContactName = contacts[0].name
     const secondContactName = contacts[1].name
 
-    if (firstContactName.familyName === secondContactName.familyName) {
+    if (
+      firstContactName != null &&
+      secondContactName != null &&
+      firstContactName.givenName !== '' &&
+      secondContactName.givenName !== '' &&
+      firstContactName.familyName !== '' &&
+      firstContactName.familyName === secondContactName.familyName
+    ) {
       return t('PapersList.contactMerged', {
         firstGivenName: firstContactName.givenName,
         secondGivenName: secondContactName.givenName,
@@ -52,10 +60,10 @@ export const harmonizeContactsNames = (contacts, t) => {
     }
   }
 
-  let validatedContactName = contactNameList[0]
-  if (contactNameList.length > 1) {
+  let validatedContactName = getDisplayName(contacts[0])
+  if (contacts.length > 1) {
     validatedContactName += `, ${getDisplayName(contacts[1])}`
-    if (contactNameList.length > 2) validatedContactName += ', ... '
+    if (contacts.length > 2) validatedContactName += ', ... '
   }
 
   return validatedContactName
