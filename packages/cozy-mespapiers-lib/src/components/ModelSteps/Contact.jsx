@@ -10,7 +10,7 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 
-const { getFullname } = models.contact
+const { getDisplayName } = models.contact
 
 const styleAvatar = {
   color: 'var(--primaryColor)',
@@ -51,7 +51,7 @@ const Contact = ({
         <Avatar size="small" style={styleAvatar} />
       </ListItemIcon>
       <ListItemText
-        primary={`${getFullname(contact)} ${
+        primary={`${getDisplayName(contact)} ${
           contact.me ? `(${t('ContactStep.me')})` : ''
         }`}
       />
