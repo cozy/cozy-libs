@@ -13,7 +13,7 @@
     "prepublishOnly": "yarn check-locales && yarn build"
   },
   "devDependencies": {
-    "@testing-library/react": "11.2.7",
+    "@testing-library/react": "13.3.0",
     "babel-preset-cozy-app": "2.0.1",
     "cozy-bar": "7.16.0",
     "cozy-client": "^32.2.0",
@@ -24,7 +24,10 @@
     "cozy-realtime": "^4.2.3",
     "cozy-sharing": "^4.5.3",
     "cozy-ui": "^70.5.1",
-    "jest-environment-jsdom-sixteen": "2.0.0",
+    "jest": "28.1.3",
+    "jest-environment-jsdom": "28.1.3",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "5.2.0"
   },
   "dependencies": {
@@ -45,6 +48,8 @@
     "cozy-realtime": ">=4.2.0",
     "cozy-sharing": ">=4.3.0",
     "cozy-ui": ">=70.5.1",
-    "react-router-dom": ">=5.2.0"
+    "react-router-dom": ">=5.2.0",
+    "react-dom": "18.2.0",
+    "react": "18.2.0"
   }
 }
