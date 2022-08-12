@@ -28,29 +28,29 @@ mockClient.plugins.realtime = {
 const AppLike = ({ children, client, history }) => {
   const hashHistory = history || createHashHistory()
   return (
-    <WebviewIntentProvider>
-      <CozyProvider client={client || mockClient}>
-        <I18n dictRequire={() => enLocale} lang="en">
-          <MultiSelectionProvider>
-            <ScannerI18nProvider lang="en">
-              <MuiCozyTheme>
-                <BreakpointsProvider>
-                  <PapersDefinitionsProvider>
-                    <StepperDialogProvider>
-                      <ModalProvider>
+    // <WebviewIntentProvider>
+    //   <CozyProvider client={client || mockClient}>
+    //     <I18n dictRequire={() => enLocale} lang="en">
+    //       <MultiSelectionProvider>
+    //         <ScannerI18nProvider lang="en">
+    //           <MuiCozyTheme>
+    //             <BreakpointsProvider>
+    //               <PapersDefinitionsProvider>
+    //                 <StepperDialogProvider>
+    //                   <ModalProvider>
                         <HashRouter history={hashHistory}>
                           {children}
-                        </HashRouter>
-                      </ModalProvider>
-                    </StepperDialogProvider>
-                  </PapersDefinitionsProvider>
-                </BreakpointsProvider>
-              </MuiCozyTheme>
-            </ScannerI18nProvider>
-          </MultiSelectionProvider>
-        </I18n>
-      </CozyProvider>
-    </WebviewIntentProvider>
+                         </HashRouter>
+                      // </ModalProvider>
+                    // </StepperDialogProvider>
+                  // </PapersDefinitionsProvider>
+    //             </BreakpointsProvider>
+    //           </MuiCozyTheme>
+    //         </ScannerI18nProvider>
+    //       </MultiSelectionProvider>
+    //     </I18n>
+    //   </CozyProvider>
+    // </WebviewIntentProvider>
   )
 }
 

@@ -1,5 +1,4 @@
 module.exports = {
-  browser: true,
   collectCoverageFrom: [
     'src/**/*.{js,jsx}',
     '!**/node_modules/**',
@@ -19,5 +18,10 @@ module.exports = {
     '^cozy-client$': '<rootDir>/node_modules/cozy-client/dist/index.js'
   },
   transformIgnorePatterns: ['node_modules/(?!cozy-ui)'],
-  setupFilesAfterEnv: ['<rootDir>/test/jestLib/setup.js']
+  setupFilesAfterEnv: ['<rootDir>/test/jestLib/setup.js'],
+  globals: {
+    __ALLOW_HTTP__: false,
+    __TARGET__: 'browser',
+    cozy: {}
+  }
 }

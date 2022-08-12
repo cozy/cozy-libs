@@ -26,8 +26,8 @@
     "cozy-ui": "^70.5.1",
     "jest": "28.1.3",
     "jest-environment-jsdom": "28.1.3",
-    "react": "18.2.0",
-    "react-dom": "18.2.0",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
     "react-router-dom": "5.2.0"
   },
   "dependencies": {
@@ -49,7 +49,11 @@
     "cozy-sharing": ">=4.3.0",
     "cozy-ui": ">=70.5.1",
     "react-router-dom": ">=5.2.0",
-    "react-dom": "18.2.0",
-    "react": "18.2.0"
+    "react-dom": "18.0.0",
+    "react": "18.0.0"
+  },
+  "resolutions": {
+    "cozy-authentication/react-dom": "18.0.0",
+    "react": "18.0.0"
   }
 }

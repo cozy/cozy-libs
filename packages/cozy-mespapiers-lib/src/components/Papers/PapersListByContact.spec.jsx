@@ -38,10 +38,15 @@ const setup = contact => {
     ? mockPaperslistByContact.filter(paper => paper.contact === contact)
     : mockPaperslistByContact
 
+  const Toto = ({ children }) => {
+    return (<>{children}</>)
+  }
   return render(
-    <AppLike>
-      <PapersListByContact paperslistByContact={paperList} />
-    </AppLike>
+    // <AppLike>
+      <Toto>
+        <PapersListByContact paperslistByContact={paperList}/>
+      </Toto>
+    // </AppLike>
   )
 }
 

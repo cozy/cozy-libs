@@ -2,7 +2,7 @@ const { TestEnvironment } = require('jest-environment-jsdom')
 
 module.exports = class CustomTestEnvironment extends TestEnvironment {
   constructor(config, context) {
-    super({ projectConfig: config }, context)
+    super(config, context)
   }
 
   async setup() {
