@@ -25,8 +25,8 @@
     "cozy-stack-client": "13.20.2",
     "eslint-plugin-node": "10.0.0",
     "fs-extra": "8.1.0",
-    "jest": "26.6.3",
-    "jest-environment-jsdom-sixteen": "1.0.3",
+    "jest": "28.1.3",
+    "jest-environment-jsdom": "28.1.3",
     "mockdate": "2.0.5"
   },
   "peerDependencies": {
