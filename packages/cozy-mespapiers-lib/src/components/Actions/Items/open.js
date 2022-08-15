@@ -11,6 +11,8 @@ export const open = () => {
     Component: function Open({ className, files }) {
       const { t } = useI18n()
       const history = useHistory()
+      const fileId = files[0]?._id
+      const fileTheme = files[0]?.metadata?.qualification?.label
 
       return (
         <ActionMenuItemWrapper
@@ -18,7 +20,7 @@ export const open = () => {
           icon="openwith"
           onClick={() =>
             history.push({
-              pathname: `/paper/file/${files[0]._id}`
+              pathname: `/paper/file/${fileTheme}/${fileId}`
             })
           }
         >
