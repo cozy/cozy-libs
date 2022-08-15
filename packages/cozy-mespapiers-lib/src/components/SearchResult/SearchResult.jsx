@@ -1,14 +1,13 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
 
-import { isQueryLoading, useQueryAll } from 'cozy-client'
+import { isQueryLoading, useClient, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
-import PaperItem from '../Papers/PaperItem'
 import { buildContactsQueryByIds } from '../../helpers/queries'
 import {
   buildFilesWithContacts,
@@ -16,11 +15,36 @@ import {
 } from '../Papers/helpers'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import { useModal } from '../Hooks/useModal'
+import { makeActions, makeActionVariant } from '../Actions/utils'
+import { select } from '../Actions/Items/select'
+import { hr } from '../Actions/Items/hr'
+import { viewInDrive } from '../Actions/Items/viewInDrive'
+import { trash } from '../Actions/Items/trash'
+import { open } from '../Actions/Items/open'
+import SearchResultLine from './SearchResultLine'
 
 const SearchResult = ({ filteredPapers }) => {
+  const client = useClient()
   const { t } = useI18n()
+  const { pushModal, popModal } = useModal()
+  const { addMultiSelectionFile } = useMultiSelection()
+
+  const actionVariant = makeActionVariant()
+  const actions = useMemo(
+    () =>
+      makeActions(
+        [select, hr, ...actionVariant, open, hr, viewInDrive, hr, trash],
+        {
+          client,
+          addMultiSelectionFile,
+          pushModal,
+          popModal
+        }
+      ),
+    [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
+  )
   const contactIds = getContactsRefIdsByFiles(filteredPapers)
-  const { isMultiSelectionActive } = useMultiSelection()
 
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
@@ -57,11 +81,11 @@ const SearchResult = ({ filteredPapers }) => {
       <List>
         {filesWithContacts.map(({ contact, file }) => {
           return (
-            <PaperItem
+            <SearchResultLine
               key={file._id}
-              paper={file}
+              actions={actions}
+              file={file}
               contactNames={contact}
-              {...(isMultiSelectionActive && { withCheckbox: true })}
             />
           )
         })}
