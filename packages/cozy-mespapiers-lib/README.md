@@ -157,7 +157,13 @@ const handleClick = () => {
 
 ***
 
-## Development
+# Development
 
 For development purpose, you can link the lib in your application, but you don't need to run `yarn install` in the lib before. The packages of the application will be used.
 However you need to run `yarn install` to run the tests in the lib with `yarn test`.
+
+## Papers definitions
+
+The definitions of the papers is in the file [`papersDefinitions.json`](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/src/constants/papersDefinitions.json)
+
+- [Documentation](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/docs/papersDefinitions.md)
