@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.6.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.5.2...cozy-mespapiers-lib@1.6.0) (2022-08-16)
+
+
+### Bug Fixes
+
+* Open file action ([2272ac3](https://github.com/cozy/cozy-libs/commit/2272ac3ca8cf338c52de58f0b9b7172193ff75d1))
+
+
+### Features
+
+* Add SearchResultLine component ([d4c160c](https://github.com/cozy/cozy-libs/commit/d4c160c4883fa55635a6ab810d7f00653cf95da1))
+* Build of actions for the SearchResultLine component ([fdf384d](https://github.com/cozy/cozy-libs/commit/fdf384d97b5979ff1f9c44cf3bc8f231b1af9f97))
+
+
+
+
+
 ## [1.5.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.5.1...cozy-mespapiers-lib@1.5.2) (2022-08-11)
 
 
