@@ -67,6 +67,10 @@ Let's see how it is built:
   - `[minLength]`: {number} Requires a minimum number of characters
   - `[maxLength]`: {number} Requires a maximum number of characters
   - `[mask]`: {string} Formats and forces a type (see [here](https://github.com/sanniassin/react-input-mask#properties) for more details)
+    - Varation with the `mask` attribute:
+      - `[required]`: {boolean} Make all Mask mandatory (**high priority**)
+      - `[minLength]`: {number} Requires a minimum number of characters
+      - `[maxLength]`: {number} Ignored, always the length of the Mask
   - `[placeholderMask]`: {string} Choice of placeholder for the mask (default `ˍ`)
 
 <br>
