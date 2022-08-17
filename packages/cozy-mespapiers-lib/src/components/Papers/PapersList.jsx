@@ -11,6 +11,7 @@ import { select } from '../Actions/Items/select'
 import { hr } from '../Actions/Items/hr'
 import { trash } from '../Actions/Items/trash'
 import { open } from '../Actions/Items/open'
+import { rename } from '../Actions/Items/rename'
 import { viewInDrive } from '../Actions/Items/viewInDrive'
 import { makeActionVariant, makeActions } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
@@ -21,17 +22,30 @@ const PapersList = ({ papers }) => {
   const { pushModal, popModal } = useModal()
   const [maxDisplay, setMaxDisplay] = useState(papers.maxDisplay)
   const { addMultiSelectionFile } = useMultiSelection()
+  const [paperBeingRenamedId, setPaperBeingRenamedId] = useState(null)
 
   const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
       makeActions(
-        [select, hr, ...actionVariant, open, hr, viewInDrive, hr, trash],
+        [
+          select,
+          hr,
+          ...actionVariant,
+          open,
+          hr,
+          rename,
+          hr,
+          viewInDrive,
+          hr,
+          trash
+        ],
         {
           client,
           addMultiSelectionFile,
           pushModal,
-          popModal
+          popModal,
+          setPaperBeingRenamedId
         }
       ),
     [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
@@ -51,6 +65,10 @@ const PapersList = ({ papers }) => {
               paper={paper}
               divider={idx !== papers.list.length - 1}
               actions={actions}
+              isRenaming={paper.id === paperBeingRenamedId}
+              setIsRenaming={isRenaming =>
+                setPaperBeingRenamedId(isRenaming ? paper.id : null)
+              }
             />
           )
       )}
