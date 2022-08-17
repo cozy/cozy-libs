@@ -12,6 +12,7 @@ const sortBy = require('lodash/sortBy')
 const get = require('lodash/get')
 const { parallelMap } = require('./utils')
 const CozyClient = require('cozy-client/dist/CozyClient').default
+const Q = require('cozy-client/dist/queries/dsl').Q
 const log = require('cozy-logger').namespace('Document')
 const querystring = require('querystring')
 
@@ -579,12 +580,24 @@ class Document {
       return this.fetchAll()
     }
 
-    const result = []
+    let query
+    // let's deal with very old cozy-client where Q doesn't exist.
+    if (Q !== undefined) {
+      query = Q(this.doctype).where(selector)
+    } else {
+      query = this.cozyClient.find(this.doctype).where(selector)
+    }
 
-    const query = this.cozyClient.find(this.doctype).where(selector)
-    let resp = { next: true }
+    let resp = await this.cozyClient.query(query)
+    let result = resp.data
+
     while (resp && resp.next) {
-      resp = await this.cozyClient.query(query.offset(result.length))
+      if (resp.bookmark && query.offsetBookmark) {
+        resp = await this.cozyClient.query(query.offsetBookmark(resp.bookmark))
+      } else {
+        resp = await this.cozyClient.query(query.offset(result.length))
+      }
+
       result.push(...resp.data)
     }
 
