@@ -17,6 +17,7 @@ import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import RenameInput from './Renaming/RenameInput'
 
 const useStyles = makeStyles(() => ({
   checkbox: {
@@ -36,7 +37,9 @@ const PaperItem = ({
   className = '',
   classes = {},
   withCheckbox,
-  children
+  children,
+  isRenaming,
+  setIsRenaming
 }) => {
   const style = useStyles()
   const { f, t } = useI18n()
@@ -87,10 +90,10 @@ const PaperItem = ({
   return (
     <>
       <ListItem
-        button
+        button={!isRenaming}
         className={className}
         classes={classes}
-        onClick={!isAlreadySelected() ? handleClick : undefined}
+        onClick={!isRenaming && !isAlreadySelected() ? handleClick : undefined}
         data-testid="ListItem"
         disabled={isAlreadySelected()}
       >
@@ -116,15 +119,19 @@ const PaperItem = ({
             renderFallback={() => <Icon icon="file-type-pdf" size={32} />}
           />
         </ListItemIcon>
-        <ListItemText
-          className="u-mr-1"
-          primary={
-            validPageName(paperLabel)
-              ? t(`PapersList.label.${paperLabel}`)
-              : paper.name
-          }
-          secondary={secondaryText}
-        />
+        {isRenaming ? (
+          <RenameInput file={paper} onClose={() => setIsRenaming(false)} />
+        ) : (
+          <ListItemText
+            className="u-mr-1"
+            primary={
+              validPageName(paperLabel)
+                ? t(`PapersList.label.${paperLabel}`)
+                : paper.name
+            }
+            secondary={secondaryText}
+          />
+        )}
         {children && (
           <ListItemSecondaryAction data-testid="ListItemSecondaryAction">
             {children}
@@ -151,7 +158,9 @@ PaperItem.propTypes = {
   children: PropTypes.node,
   className: PropTypes.string,
   classes: PropTypes.object,
-  withCheckbox: PropTypes.bool
+  withCheckbox: PropTypes.bool,
+  isRenaming: PropTypes.bool,
+  setIsRenaming: PropTypes.func
 }
 
 export default PaperItem
