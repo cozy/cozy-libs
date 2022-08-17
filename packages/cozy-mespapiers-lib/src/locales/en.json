@@ -284,5 +284,11 @@
     "filenameMissing": "The file name is missing, please choose a new name.",
     "filenameIllegalName": "The file name %{name} is invalid, please choose a new name.",
     "filenameIllegalCharacters": "The file name %{name} contains invalid characters: %{characters}"
+  },
+  "RenameModal": {
+    "title": "Rename",
+    "content": "You are about to change the file extension. Do you want to continue?",
+    "cancel": "Cancel",
+    "submit": "Continue"
   }
 }
