@@ -15,7 +15,7 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { splitFilename } = models.file
 
-const PaperLine = ({ paper, divider, actions }) => {
+const PaperLine = ({ paper, divider, actions, isRenaming, setIsRenaming }) => {
   const { isMobile } = useBreakpoints()
   const actionBtnRef = useRef()
 
@@ -35,6 +35,8 @@ const PaperLine = ({ paper, divider, actions }) => {
       <PaperItem
         paper={paper}
         divider={divider}
+        isRenaming={isRenaming}
+        setIsRenaming={setIsRenaming}
         {...(isMultiSelectionActive && { withCheckbox: true })}
       >
         {!isMultiSelectionActive && (
@@ -65,7 +67,9 @@ const PaperLine = ({ paper, divider, actions }) => {
 PaperLine.propTypes = {
   paper: PropTypes.object.isRequired,
   divider: PropTypes.bool,
-  actions: PropTypes.array
+  actions: PropTypes.array,
+  isRenaming: PropTypes.bool,
+  setIsRenaming: PropTypes.func
 }
 
 export default memo(PaperLine)

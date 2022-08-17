@@ -15,7 +15,13 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { splitFilename } = models.file
 
-const SearchResultLine = ({ file, contactNames, actions }) => {
+const SearchResultLine = ({
+  file,
+  contactNames,
+  actions,
+  isRenaming,
+  setIsRenaming
+}) => {
   const { isMobile } = useBreakpoints()
   const actionBtnRef = useRef()
   const [optionFile, setOptionFile] = useState(false)
@@ -35,6 +41,8 @@ const SearchResultLine = ({ file, contactNames, actions }) => {
         key={file._id}
         paper={file}
         contactNames={contactNames}
+        isRenaming={isRenaming}
+        setIsRenaming={setIsRenaming}
         {...(isMultiSelectionActive && { withCheckbox: true })}
       >
         {!isMultiSelectionActive && (
@@ -65,7 +73,9 @@ const SearchResultLine = ({ file, contactNames, actions }) => {
 SearchResultLine.propTypes = {
   file: PropTypes.object,
   contactNames: PropTypes.string,
-  actions: PropTypes.arrayOf(PropTypes.object)
+  actions: PropTypes.arrayOf(PropTypes.object),
+  isRenaming: PropTypes.bool,
+  setIsRenaming: PropTypes.func
 }
 
 export default SearchResultLine
