@@ -278,5 +278,11 @@
       "title": "No results",
       "text": "Try to shorten or rephrase your search"
     }
+  },
+  "RenameInput": {
+    "fileExisting": "The element %{name} already exists, please choose a new name.",
+    "filenameMissing": "The file name is missing, please choose a new name.",
+    "filenameIllegalName": "The file name %{name} is invalid, please choose a new name.",
+    "filenameIllegalCharacters": "The file name %{name} contains invalid characters: %{characters}"
   }
 }
