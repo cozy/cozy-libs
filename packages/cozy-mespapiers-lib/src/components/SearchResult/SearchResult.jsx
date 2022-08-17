@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import { isQueryLoading, useClient, useQueryAll } from 'cozy-client'
@@ -22,6 +22,7 @@ import { hr } from '../Actions/Items/hr'
 import { viewInDrive } from '../Actions/Items/viewInDrive'
 import { trash } from '../Actions/Items/trash'
 import { open } from '../Actions/Items/open'
+import { rename } from '../Actions/Items/rename'
 import SearchResultLine from './SearchResultLine'
 
 const SearchResult = ({ filteredPapers }) => {
@@ -29,17 +30,30 @@ const SearchResult = ({ filteredPapers }) => {
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
   const { addMultiSelectionFile } = useMultiSelection()
+  const [paperBeingRenamedId, setPaperBeingRenamedId] = useState(null)
 
   const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
       makeActions(
-        [select, hr, ...actionVariant, open, hr, viewInDrive, hr, trash],
+        [
+          select,
+          hr,
+          ...actionVariant,
+          open,
+          hr,
+          rename,
+          hr,
+          viewInDrive,
+          hr,
+          trash
+        ],
         {
           client,
           addMultiSelectionFile,
           pushModal,
-          popModal
+          popModal,
+          setPaperBeingRenamedId
         }
       ),
     [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
@@ -86,6 +100,10 @@ const SearchResult = ({ filteredPapers }) => {
               actions={actions}
               file={file}
               contactNames={contact}
+              isRenaming={file.id === paperBeingRenamedId}
+              setIsRenaming={isRenaming =>
+                setPaperBeingRenamedId(isRenaming ? file.id : null)
+              }
             />
           )
         })}
