@@ -14,22 +14,38 @@ const scannerT = x => get(locales, x)
 
 const files = [
   {
-    _id: 'file01',
-    name: 'Facture internet',
-    metadata: { qualification: { label: 'isp_invoice' } },
-    updated_at: '2021-01-01:09:00.000000+01:00'
+    file: {
+      _id: 'file01',
+      name: 'Facture internet',
+      metadata: { qualification: { label: 'isp_invoice' } },
+      updated_at: '2021-01-01:09:00.000000+01:00'
+    }
   },
   {
-    _id: 'file02',
-    name: 'Permis de conduire',
-    metadata: { qualification: { label: 'driver_license' } },
-    updated_at: '2021-05-01:09:00.000000+01:00'
+    file: {
+      _id: 'file02',
+      name: 'Permis de conduire',
+      metadata: { qualification: { label: 'driver_license' } },
+      updated_at: '2021-05-01:09:00.000000+01:00'
+    },
+    contact: 'Alice Durand'
   },
   {
-    _id: 'file03',
-    name: 'Facture minitel',
-    metadata: { qualification: { label: 'phone_invoice' } },
-    updated_at: '2021-11-01:09:00.000000+01:00'
+    file: {
+      _id: 'file03',
+      name: 'Facture minitel',
+      metadata: { qualification: { label: 'phone_invoice' } },
+      updated_at: '2021-11-01:09:00.000000+01:00'
+    }
+  },
+  {
+    file: {
+      _id: 'file04',
+      name: "Dernier avis d'imposition",
+      metadata: { qualification: { label: 'tax_notice' } },
+      updated_at: '2022-07-01:09:00.000000+01:00'
+    },
+    contact: 'Alice et Bob Durand'
   }
 ]
 
@@ -89,6 +105,19 @@ describe('filterPapersByThemeAndSearchValue', () => {
 
       expect(res).toHaveLength(1)
       expect(res).toContain(files[2])
+    })
+
+    test('when contact matches', () => {
+      const res = filterPapersByThemeAndSearchValue({
+        files,
+        theme: '',
+        search: 'alice d',
+        scannerT
+      })
+
+      expect(res).toHaveLength(2)
+      expect(res).toContain(files[1])
+      expect(res).toContain(files[3])
     })
   })
 
