@@ -11,6 +11,11 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import ThemesFilter from '../ThemesFilter'
 import SearchInput from '../SearchInput'
+import { buildContactsQueryByIds } from '../../helpers/queries'
+import {
+  buildFilesWithContacts,
+  getContactsRefIdsByFiles
+} from '../Papers/helpers'
 import PaperGroup from '../Papers/PaperGroup'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
@@ -59,7 +64,7 @@ const Home = ({ setSelectedThemeLabel }) => {
     [filesWithQualificationLabel, papersDefinitionsLabels]
   )
 
-  const isLoading = isQueryLoading(queryResult) || queryResult.hasMore
+  const isLoadingFiles = isQueryLoading(queryResult) || queryResult.hasMore
   const isSearching = searchValue.length > 0 || selectedTheme
 
   const allPapersByCategories = useMemo(
@@ -68,14 +73,37 @@ const Home = ({ setSelectedThemeLabel }) => {
     [filesWithPapersDefinitionsLabels]
   )
 
+  const contactIds = getContactsRefIdsByFiles(filesWithPapersDefinitionsLabels)
+
+  const contactsQueryByIds = buildContactsQueryByIds(contactIds)
+  const { data: contacts, ...contactQueryResult } = useQueryAll(
+    contactsQueryByIds.definition,
+    {
+      ...contactsQueryByIds.options,
+      enabled: isSearching && !isLoadingFiles
+    }
+  )
+
+  const isLoadingContacts =
+    isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
+
+  const filesWithContacts =
+    isSearching && !isLoadingFiles && !isLoadingContacts
+      ? buildFilesWithContacts({
+          files: filesWithPapersDefinitionsLabels,
+          contacts,
+          t
+        })
+      : []
+
   const filteredPapers = filterPapersByThemeAndSearchValue({
     files: isSearching
-      ? filesWithPapersDefinitionsLabels
-      : allPapersByCategories,
+      ? filesWithContacts
+      : allPapersByCategories.map(file => ({ file })),
     theme: selectedTheme,
     search: searchValue,
     scannerT
-  })
+  }).map(({ file }) => file)
 
   const featuredPlaceholders = useMemo(
     () =>
@@ -95,7 +123,7 @@ const Home = ({ setSelectedThemeLabel }) => {
     setIsThemesFilterDisplayed(isDisplayed)
   }
 
-  if (isLoading) {
+  if (isLoadingFiles || isLoadingContacts) {
     return (
       <Spinner
         size="xxlarge"

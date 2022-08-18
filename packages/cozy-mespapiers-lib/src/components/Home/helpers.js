@@ -5,7 +5,7 @@ const fuse = new Fuse([], {
   threshold: 0.3,
   ignoreLocation: true,
   ignoreFieldNorm: true,
-  keys: ['name', 'tranlatedQualificationLabel']
+  keys: ['name', 'tranlatedQualificationLabel', 'contact']
 })
 
 // TODO: hasItemByLabel should be in cozy-client : https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/models/document/documentTypeDataHelpers.js
@@ -23,13 +23,14 @@ export const filterPapersByThemeAndSearchValue = ({
   let filteredFiles = files
 
   if (search || theme) {
-    const simpleFiles = files.map(file => ({
+    const simpleFiles = files.map(({ file, contact }) => ({
       _id: file._id,
       name: file.name,
       qualifiationLabel: file.metadata.qualification.label,
       tranlatedQualificationLabel: scannerT(
         `items.${file.metadata.qualification.label}`
-      )
+      ),
+      contact
     }))
 
     let filteredSimplesFiles = simpleFiles
@@ -46,10 +47,10 @@ export const filterPapersByThemeAndSearchValue = ({
     }
 
     filteredFiles = files
-      .filter(file =>
+      .filter(({ file }) =>
         filteredSimplesFiles.some(simpleFile => simpleFile._id === file._id)
       )
-      .sort((a, b) => b.updated_at.localeCompare(a.updated_at))
+      .sort((a, b) => b.file.updated_at.localeCompare(a.file.updated_at))
   }
 
   return filteredFiles
