@@ -46,7 +46,7 @@
       "error": "An error has occurred, please try again in a moment.",
       "success": "The selection has been moved to the Trash."
     },
-    "search": "Search"
+    "search": "Name of the paper or owner"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"

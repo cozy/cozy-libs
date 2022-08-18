@@ -46,7 +46,7 @@
       "error": "Une erreur s'est produite, veuillez réessayer dans un moment.",
       "success": "Le document a été déplacé vers la corbeille."
     },
-    "search": "Rechercher"
+    "search": "Nom du papier ou titulaire"
   },
   "FeaturedPlaceholdersList": {
     "subheader": "Suggestions"
