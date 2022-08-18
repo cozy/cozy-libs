@@ -6,10 +6,10 @@ describe('Input Utils', () => {
       attrs                                                                | result
       ${{ type: 'number' }}                                                | ${{ inputType: 'number', expectedLength: { min: null, max: null }, isRequired: false }}
       ${{ type: 'number', mask: '99999' }}                                 | ${{ inputType: 'number', expectedLength: { min: 5, max: 5 }, isRequired: false }}
-      ${{ type: 'number', mask: '99999', minLength: 3, maxLength: 7 }}     | ${{ inputType: 'number', expectedLength: { min: 5, max: 5 }, isRequired: false }}
+      ${{ type: 'number', mask: '99999', minLength: 3, maxLength: 7 }}     | ${{ inputType: 'number', expectedLength: { min: 3, max: 5 }, isRequired: false }}
       ${{ type: 'number', mask: '99999', required: true }}                 | ${{ inputType: 'number', expectedLength: { min: 5, max: 5 }, isRequired: true }}
       ${{ type: 'number', mask: '99 99 99 99 99', required: true }}        | ${{ inputType: 'number', expectedLength: { min: 10, max: 10 }, isRequired: true }}
-      ${{ type: 'number', mask: '99999', required: true, minLength: 3 }}   | ${{ inputType: 'number', expectedLength: { min: 5, max: 5 }, isRequired: true }}
+      ${{ type: 'number', mask: '99999', required: true, minLength: 3 }}   | ${{ inputType: 'number', expectedLength: { min: 3, max: 5 }, isRequired: true }}
       ${{ type: 'number', mask: '99999', required: true, maxLength: 7 }}   | ${{ inputType: 'number', expectedLength: { min: 5, max: 5 }, isRequired: true }}
       ${{ type: 'number', required: false, minLength: 0, maxLength: 0 }}   | ${{ inputType: 'number', expectedLength: { min: 0, max: 0 }, isRequired: false }}
       ${{ type: 'number', required: false, minLength: 10, maxLength: 0 }}  | ${{ inputType: 'number', expectedLength: { min: 10, max: 0 }, isRequired: false }}
@@ -17,14 +17,14 @@ describe('Input Utils', () => {
       ${{ type: 'number', required: false, minLength: 5, maxLength: 10 }}  | ${{ inputType: 'number', expectedLength: { min: 5, max: 10 }, isRequired: false }}
       ${{ type: 'number', required: false, minLength: 10, maxLength: 10 }} | ${{ inputType: 'number', expectedLength: { min: 10, max: 10 }, isRequired: false }}
       ${{ type: 'number', required: true, minLength: 0, maxLength: 0 }}    | ${{ inputType: 'number', expectedLength: { min: 0, max: 0 }, isRequired: true }}
-      ${{ type: 'number', required: true, minLength: 20, maxLength: 10 }}  | ${{ inputType: 'number', expectedLength: { min: 20, max: 10 }, isRequired: true }}
+      ${{ type: 'number', required: true, minLength: 20, maxLength: 10 }}  | ${{ inputType: 'number', expectedLength: { min: 10, max: 10 }, isRequired: true }}
       ${undefined}                                                         | ${{ inputType: 'text', expectedLength: { min: null, max: null }, isRequired: false }}
       ${{ type: 'text' }}                                                  | ${{ inputType: 'text', expectedLength: { min: null, max: null }, isRequired: false }}
       ${{ type: 'text', mask: 'aaaaa' }}                                   | ${{ inputType: 'text', expectedLength: { min: 5, max: 5 }, isRequired: false }}
-      ${{ type: 'text', mask: 'aaaaa', minLength: 3, maxLength: 7 }}       | ${{ inputType: 'text', expectedLength: { min: 5, max: 5 }, isRequired: false }}
+      ${{ type: 'text', mask: 'aaaaa', minLength: 3, maxLength: 7 }}       | ${{ inputType: 'text', expectedLength: { min: 3, max: 5 }, isRequired: false }}
       ${{ type: 'text', mask: 'aaaaa', required: true }}                   | ${{ inputType: 'text', expectedLength: { min: 5, max: 5 }, isRequired: true }}
       ${{ type: 'text', mask: 'aa aa aa aa aa', required: true }}          | ${{ inputType: 'text', expectedLength: { min: 10, max: 10 }, isRequired: true }}
-      ${{ type: 'text', mask: 'aaaaa', required: true, minLength: 3 }}     | ${{ inputType: 'text', expectedLength: { min: 5, max: 5 }, isRequired: true }}
+      ${{ type: 'text', mask: 'aaaaa', required: true, minLength: 3 }}     | ${{ inputType: 'text', expectedLength: { min: 3, max: 5 }, isRequired: true }}
       ${{ type: 'text', mask: 'aaaaa', required: true, maxLength: 7 }}     | ${{ inputType: 'text', expectedLength: { min: 5, max: 5 }, isRequired: true }}
       ${{ type: 'text', required: false, minLength: 0, maxLength: 0 }}     | ${{ inputType: 'text', expectedLength: { min: 0, max: 0 }, isRequired: false }}
       ${{ type: 'text', required: false, minLength: 10, maxLength: 0 }}    | ${{ inputType: 'text', expectedLength: { min: 10, max: 0 }, isRequired: false }}
@@ -32,7 +32,7 @@ describe('Input Utils', () => {
       ${{ type: 'text', required: false, minLength: 5, maxLength: 10 }}    | ${{ inputType: 'text', expectedLength: { min: 5, max: 10 }, isRequired: false }}
       ${{ type: 'text', required: false, minLength: 10, maxLength: 10 }}   | ${{ inputType: 'text', expectedLength: { min: 10, max: 10 }, isRequired: false }}
       ${{ type: 'text', required: true, minLength: 0, maxLength: 0 }}      | ${{ inputType: 'text', expectedLength: { min: 0, max: 0 }, isRequired: true }}
-      ${{ type: 'text', required: true, minLength: 20, maxLength: 10 }}    | ${{ inputType: 'text', expectedLength: { min: 20, max: 10 }, isRequired: true }}
+      ${{ type: 'text', required: true, minLength: 20, maxLength: 10 }}    | ${{ inputType: 'text', expectedLength: { min: 10, max: 10 }, isRequired: true }}
     `(
       `should return $result when passed argument: $attrs`,
       ({ attrs, result }) => {
