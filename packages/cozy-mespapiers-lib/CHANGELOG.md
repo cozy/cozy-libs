@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.6.1...cozy-mespapiers-lib@1.7.0) (2022-08-18)
+
+
+### Features
+
+* Add minLength constraint to InputMask ([de6b122](https://github.com/cozy/cozy-libs/commit/de6b122e11267e7eaebd65b0fd67e137ef8b6af2))
+* **mespapiers-lib:** Add a component to rename a paper ([69220bf](https://github.com/cozy/cozy-libs/commit/69220bf69f128512cbe9b041a86ed534ec7c9967))
+* **mespapiers-lib:** Add a helper for renaming a file ([574e142](https://github.com/cozy/cozy-libs/commit/574e142744a684d05a4a25446dd5745c4df6c571))
+* **mespapiers-lib:** Add the "Rename" action to paper context menus ([5580a69](https://github.com/cozy/cozy-libs/commit/5580a699cb899f3da3218de2529b203919d623ed))
+* **mespapiers-lib:** Define a "Rename" action ([53fc761](https://github.com/cozy/cozy-libs/commit/53fc7613d3fee231a58d406fe5e8b2632de7675e))
+* **mespapiers-lib:** Show the input instead of the name when renaming ([0692e64](https://github.com/cozy/cozy-libs/commit/0692e642890e2dbfb02d18142f3d517241aae01c))
+
+
+
+
+
 ## [1.6.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.6.0...cozy-mespapiers-lib@1.6.1) (2022-08-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
