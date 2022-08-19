@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [1.8.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.7.0...cozy-mespapiers-lib@1.8.0) (2022-08-19)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Update the placeholder in the search field ([a0d85b1](https://github.com/cozy/cozy-libs/commit/a0d85b1054ee0d775feaee44e216b3ba8b05851b))
+
+
+### Features
+
+* **mespapiers-lib:** Allow to search papers by owner ([75f17ec](https://github.com/cozy/cozy-libs/commit/75f17ec69f98dbd3d6334611d22c148c063113e9))
+
+
+
+
+
 # [1.7.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.6.1...cozy-mespapiers-lib@1.7.0) (2022-08-18)
 
 
