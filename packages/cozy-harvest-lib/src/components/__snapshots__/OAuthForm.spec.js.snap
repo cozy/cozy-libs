@@ -14,9 +14,9 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
     }
   />
   <DefaultButton
-    busy={true}
+    busy={false}
     className="u-mt-1"
-    disabled={true}
+    disabled={false}
     extension="full"
     label="oauth.connect.label"
     onClick={[Function]}
@@ -27,9 +27,9 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
 exports[`OAuthForm should render 1`] = `
 <React.Fragment>
   <DefaultButton
-    busy={true}
+    busy={false}
     className="u-mt-1"
-    disabled={true}
+    disabled={false}
     extension="full"
     label="oauth.connect.label"
     onClick={[Function]}

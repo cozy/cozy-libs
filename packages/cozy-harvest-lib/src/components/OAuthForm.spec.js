@@ -1,6 +1,7 @@
 /* eslint-env jest */
 import React from 'react'
-import { shallow } from 'enzyme'
+import { mount, shallow } from 'enzyme'
+import { act } from '@testing-library/react'
 
 import { OAuthForm } from 'components/OAuthForm'
 import { findKonnectorPolicy } from '../konnector-policies'
@@ -52,8 +53,9 @@ describe('OAuthForm', () => {
     ).getElement()
     expect(component).toMatchSnapshot()
   })
-  it('should call policy fetchExtraOAuthUrlParams with proper params', () => {
-    shallow(
+
+  it('should call policy fetchExtraOAuthUrlParams with proper params', async () => {
+    const wrapper = mount(
       <OAuthForm
         flow={flow}
         flowState={{}}
@@ -62,6 +64,10 @@ describe('OAuthForm', () => {
         t={t}
       />
     )
+    // Wait for next tick so the effects called when mounting the form are called
+    await act(() => new Promise(setImmediate))
+    // Synchronise the mounted React component tree so we get the updated DOM
+    wrapper.update()
     expect(fetchExtraOAuthUrlParams).toHaveBeenCalledWith({
       account: {
         oauth: { access_token: '1234abcd' }
@@ -70,6 +76,7 @@ describe('OAuthForm', () => {
       konnector: { slug: 'test-konnector' }
     })
   })
+
   it('should handle oauth cancelation', () => {
     const component = shallow(
       <OAuthForm

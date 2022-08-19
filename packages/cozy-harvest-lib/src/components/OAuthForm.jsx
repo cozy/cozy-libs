@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
 import Button from 'cozy-ui/transpiled/react/Button'
@@ -16,26 +16,65 @@ import { KonnectorJobError } from '../helpers/konnectors'
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
  * starts the OAuth process
  */
-export class OAuthForm extends PureComponent {
-  constructor(props, context) {
-    super(props, context)
-    this.handleAccountId = this.handleAccountId.bind(this)
-    this.handleConnect = this.handleConnect.bind(this)
-    this.handleOAuthCancel = this.handleOAuthCancel.bind(this)
-    this.handleExtraParams = this.handleExtraParams.bind(this)
-    this.handleLoginSuccess = this.handleLoginSuccess.bind(this)
-    this.state = {}
+export const OAuthForm = props => {
+  const {
+    account,
+    client,
+    flow,
+    flowState,
+    intentsApi,
+    konnector,
+    onSuccess,
+    reconnect,
+    t
+  } = props
+
+  const [needsExtraParams, setNeedsExtraParams] = useState(false)
+  const [extraParams, setExtraParams] = useState(null)
+  const [showOAuthWindow, setShowOAuthWindow] = useState(false)
+
+  // Helpers
+
+  /**
+   *  Translates errors from oauth redirection url to harvest know error messages
+   *
+   * @param {String} err - original error message in redirection url
+   * @returns {KonnectorJobError|String}
+   */
+  const translateOauthError = err => {
+    if (err === 'access_denied') {
+      return new KonnectorJobError('OAUTH_CANCELED')
+    } else {
+      return err
+    }
   }
 
-  componentDidMount() {
-    const { account, konnector, flow, client, reconnect } = this.props
+  // Callbacks
 
+  const handleAccountId = accountId => {
+    if (typeof onSuccess === 'function') onSuccess(accountId)
+  }
+
+  const handleConnect = () => {
+    setShowOAuthWindow(true)
+  }
+
+  const handleOAuthCancel = err => {
+    flow.triggerEvent(ERROR_EVENT, translateOauthError(err))
+    setShowOAuthWindow(false)
+  }
+
+  const handleLoginSuccess = () => {
+    setShowOAuthWindow(false)
+  }
+
+  useEffect(() => {
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
     if (konnectorPolicy.fetchExtraOAuthUrlParams) {
-      this.setState({ needExtraParams: true })
+      setNeedsExtraParams(true)
       if (reconnect) {
-        this.showOAuthWindow()
+        setShowOAuthWindow(true)
       }
       // eslint-disable-next-line promise/catch-or-return
       konnectorPolicy
@@ -45,113 +84,59 @@ export class OAuthForm extends PureComponent {
           client,
           reconnect
         })
-        .then(this.handleExtraParams)
+        .then(setExtraParams)
     }
-    flow.on(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
-  }
+    flow.on(LOGIN_SUCCESS_EVENT, handleLoginSuccess)
 
-  handleLoginSuccess() {
-    this.hideOAuthWindow()
-  }
-
-  handleExtraParams(extraParams) {
-    this.setState({ extraParams: extraParams })
-  }
-
-  handleAccountId(accountId) {
-    const { onSuccess } = this.props
-    if (typeof onSuccess === 'function') onSuccess(accountId)
-  }
-
-  handleConnect() {
-    this.showOAuthWindow()
-  }
-
-  componentWillUnmount() {
-    const { flow } = this.props
-    flow.removeListener(LOGIN_SUCCESS_EVENT, this.handleLoginSuccess)
-  }
-
-  /**
-   *  Translates errors from oauth redirection url to harvest know error messages
-   *
-   * @param {String} err - original error message in redirection url
-   * @returns {KonnectorJobError|String}
-   */
-  translateOauthError(err) {
-    if (err === 'access_denied') {
-      return new KonnectorJobError('OAUTH_CANCELED')
-    } else {
-      return err
+    return () => {
+      flow.removeListener(LOGIN_SUCCESS_EVENT, handleLoginSuccess)
     }
-  }
+  }, [])
 
-  handleOAuthCancel(err) {
-    this.props.flow.triggerEvent(ERROR_EVENT, this.translateOauthError(err))
-    this.hideOAuthWindow()
-  }
+  const { error } = flowState
+  const isBusy =
+    showOAuthWindow || flowState.running || (needsExtraParams && !extraParams)
+  const isBankingKonnector = konnector.categories?.includes('banking')
+  const buttonLabel = reconnect
+    ? isBankingKonnector
+      ? 'oauth.banking.reconnect.label'
+      : 'oauth.reconnect.label'
+    : isBankingKonnector
+    ? 'oauth.banking.connect.label'
+    : 'oauth.connect.label'
 
-  hideOAuthWindow() {
-    this.setState({ showOAuthWindow: false })
-  }
-
-  showOAuthWindow() {
-    this.setState({ showOAuthWindow: true })
-  }
-
-  render() {
-    const { konnector, t, flowState, reconnect, account, intentsApi } =
-      this.props
-    const { showOAuthWindow, needExtraParams, extraParams } = this.state
-
-    const error = flowState.error
-
-    const isBusy =
-      showOAuthWindow === true ||
-      flowState.running ||
-      (needExtraParams && !extraParams)
-    const isBankingKonnector = konnector.categories?.includes('banking')
-    const buttonLabel = reconnect
-      ? isBankingKonnector
-        ? 'oauth.banking.reconnect.label'
-        : 'oauth.reconnect.label'
-      : isBankingKonnector
-      ? 'oauth.banking.connect.label'
-      : 'oauth.connect.label'
-
-    return (
-      <>
-        {error && (
-          <TriggerErrorInfo
-            className="u-mb-1"
-            error={error}
-            konnector={konnector}
-          />
-        )}
-        {!reconnect && (
-          <Button
-            className="u-mt-1"
-            busy={isBusy}
-            disabled={isBusy}
-            extension="full"
-            label={t(buttonLabel)}
-            onClick={this.handleConnect}
-          />
-        )}
-        {showOAuthWindow && (!needExtraParams || extraParams) && (
-          <OAuthWindow
-            extraParams={extraParams}
-            konnector={konnector}
-            reconnect={reconnect}
-            onSuccess={this.handleAccountId}
-            onCancel={this.handleOAuthCancel}
-            account={account}
-            intentsApi={intentsApi}
-          />
-        )}
-      </>
-    )
-  }
+  return (
+    <>
+      {error && (
+        <TriggerErrorInfo
+          className="u-mb-1"
+          error={error}
+          konnector={konnector}
+        />
+      )}
+      {!reconnect && (
+        <Button
+          className="u-mt-1"
+          busy={isBusy}
+          disabled={isBusy}
+          extension="full"
+          label={t(buttonLabel)}
+          onClick={handleConnect}
+        />
+      )}
+      {showOAuthWindow && (!needsExtraParams || extraParams) && (
+        <OAuthWindow
+          extraParams={extraParams}
+          konnector={konnector}
+          reconnect={reconnect}
+          onSuccess={handleAccountId}
+          onCancel={handleOAuthCancel}
+          account={account}
+          intentsApi={intentsApi}
+        />
+      )}
+    </>
+  )
 }
 
 OAuthForm.propTypes = {
