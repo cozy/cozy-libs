@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.0...cozy-harvest-lib@9.26.1) (2022-08-22)
+
+
+### Bug Fixes
+
+* RefreshContracts now updates contracts in realtime ([463e716](https://github.com/cozy/cozy-libs/commit/463e7169d78ce633308229257bd262d01842fdc1))
+
+
+
+
+
 # [9.26.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.25.0...cozy-harvest-lib@9.26.0) (2022-08-22)
 
 
