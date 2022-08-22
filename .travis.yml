@@ -25,7 +25,7 @@ jobs:
   include:
     - name: 'Repo Doctor'
       script: '[ $TRAVIS_EVENT_TYPE = "cron" ] && pushd ./packages/repo-doctor && yarn start:mattermost && popd || true'
-    - name: 'Tests'
+    - name: 'Build'
       script:
         - ./scripts/travis.sh
 
