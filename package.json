@@ -17,8 +17,8 @@
     "deploy:doc": "git-directory-deploy --directory docs/build/ --branch gh-pages",
     "lint": "eslint --ext js,jsx,ts,tsx .",
     "lint:md": "remark . -o",
-    "test": "lerna run --concurrency 1 --ignore cozy-procedures test",
-    "build": "lerna run --scope cozy-device-helper build && lerna run --parallel --ignore cozy-device-helper build",
+    "test": "turbo run test --concurrency 1 --ignore cozy-procedures",
+    "build": "turbo run build --filter cozy-device-helper  && turbo run build --ignore cozy-device-helper",
     "watch:doc:react": "styleguidist server --config docs/styleguidist.config.js",
     "check-constraints": "node scripts/check-packages-constraints.js"
   },
@@ -37,6 +37,7 @@
     "remark-cli": "9.0.0",
     "stylus": "0.57.0",
     "stylus-loader": "3.0.2",
+    "turbo": "^1.4.3",
     "webpack": "4.41.2"
   },
   "husky": {
