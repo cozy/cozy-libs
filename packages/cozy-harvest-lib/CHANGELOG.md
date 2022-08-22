@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.26.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.25.0...cozy-harvest-lib@9.26.0) (2022-08-22)
+
+
+### Features
+
+* Detect reconnect explicitely ([b092392](https://github.com/cozy/cozy-libs/commit/b0923923727bdb08123bd78073a0dda238361f02))
+* Handle cas with multiple bank ids ([9729626](https://github.com/cozy/cozy-libs/commit/97296267e941265a08ad052f1e5a62c3830566f2))
+* Use BI account creation webview to handle accounts synchonization ([1b5e5ff](https://github.com/cozy/cozy-libs/commit/1b5e5ff06b6c98b14d0d8c388d31970ae36bfac0))
+
+
+
+
+
 # [9.25.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.24.4...cozy-harvest-lib@9.25.0) (2022-08-05)
 
 
