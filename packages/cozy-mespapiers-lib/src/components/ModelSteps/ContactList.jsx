@@ -24,11 +24,12 @@ const ContactList = ({
   multiple,
   currentUser,
   contactIdsSelected,
-  setContactIdsSelected
+  setContactIdsSelected,
+  contactModalOpened,
+  setContactModalOpened
 }) => {
   const { t } = useI18n()
   const { setFormData } = useFormData()
-  const [contactModalOpened, setContactModalOpened] = useState(false)
   const [contactsLocalSession, setContactLocalSession] = useSessionstorage(
     'contactList',
     []

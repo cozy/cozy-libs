@@ -26,9 +26,12 @@ const ContactWrapper = ({ currentStep, onClose }) => {
   const [confirmReplaceFileModal, setConfirmReplaceFileModal] = useState(false)
   const [currentUser, setCurrentUser] = useState(null)
   const [contactIdsSelected, setContactIdsSelected] = useState([])
+  const [contactModalOpened, setContactModalOpened] = useState(false)
   const { isMobile } = useBreakpoints()
 
   const cozyFiles = formData.data.filter(d => d.file.constructor === Blob)
+  const saveButtonDisabled =
+    onLoad || contactIdsSelected.length === 0 || contactModalOpened
 
   const closeConfirmReplaceFileModal = () => setConfirmReplaceFileModal(false)
   const openConfirmReplaceFileModal = () => setConfirmReplaceFileModal(true)
@@ -58,7 +61,12 @@ const ContactWrapper = ({ currentStep, onClose }) => {
   }
 
   const handleKeyDown = ({ key }) => {
-    if (key === KEYS.ENTER) handleClick()
+    if (saveButtonDisabled) {
+      return
+    }
+    if (key === KEYS.ENTER) {
+      handleClick()
+    }
   }
 
   useEventListener(window, 'keydown', handleKeyDown)
@@ -84,6 +92,8 @@ const ContactWrapper = ({ currentStep, onClose }) => {
               currentUser={currentUser}
               contactIdsSelected={contactIdsSelected}
               setContactIdsSelected={setContactIdsSelected}
+              contactModalOpened={contactModalOpened}
+              setContactModalOpened={setContactModalOpened}
             />
           )
         }
@@ -99,7 +109,7 @@ const ContactWrapper = ({ currentStep, onClose }) => {
           fullWidth
           label={t(!onLoad ? 'ContactStep.save' : 'ContactStep.onLoad')}
           onClick={handleClick}
-          disabled={onLoad || contactIdsSelected.length === 0}
+          disabled={saveButtonDisabled}
           busy={onLoad}
           data-testid="ButtonSave"
         />
