@@ -15,7 +15,6 @@ const SelectFileButton = ({ file }) => {
   return (
     <Button
       label={t('action.select')}
-      className="u-ml-half"
       fullWidth
       onClick={() => {
         history.push({
