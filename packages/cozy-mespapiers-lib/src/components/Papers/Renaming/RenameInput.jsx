@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import { useClient, models } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Input from 'cozy-ui/transpiled/react/Input'
 import InputGroup from 'cozy-ui/transpiled/react/InputGroup'

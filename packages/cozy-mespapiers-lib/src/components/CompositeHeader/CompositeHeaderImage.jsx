@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 
 import IlluCovidVaccineCertificate from '../../assets/images/IlluCovidVaccineCertificate.png'

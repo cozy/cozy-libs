@@ -1,7 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
 
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import Buttons from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles({
   buttonStartIcon: {
