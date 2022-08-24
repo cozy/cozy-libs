@@ -11,7 +11,10 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import ThemesFilter from '../ThemesFilter'
 import SearchInput from '../SearchInput'
-import { buildContactsQueryByIds } from '../../helpers/queries'
+import {
+  buildContactsQueryByIds,
+  buildFilesQueryWithQualificationLabel
+} from '../../helpers/queries'
 import {
   buildFilesWithContacts,
   getContactsRefIdsByFiles
@@ -21,7 +24,6 @@ import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import { buildFilesQueryWithQualificationLabel } from '../../helpers/queries'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { filterPapersByThemeAndSearchValue } from './helpers'
