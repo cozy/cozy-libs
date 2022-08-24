@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.18.0 (2022-08-24)
+
+
+### Features
+
+* Add codemods for mui styles imports ([4522034](https://github.com/cozy/cozy-libs/commit/4522034de4bf09ec448d62c3d84e2a1571f9005a)), closes [cozy/cozy-ui#2204](https://github.com/cozy/cozy-ui/issues/2204)
+
+
+
+
+
 ## 1.17.1 (2022-08-01)
 
 **Note:** Version bump only for package @cozy/codemods
