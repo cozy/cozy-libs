@@ -124,6 +124,7 @@
     "baseDir": "/Administratif"
   },
   "error": {
+    "application-not-found": "Cette application n'existe pas",
     "reconnect-via-form": "Se reconnecter",
     "job": {
       "DISK_QUOTA_EXCEEDED": {

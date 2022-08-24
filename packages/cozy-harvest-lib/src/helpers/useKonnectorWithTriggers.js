@@ -50,7 +50,11 @@ export const useKonnectorWithTriggers = (slug, injectedKonnector) => {
     ...konnector,
     triggers
   }
-  return { konnectorWithTriggers, fetching: isFetching }
+  return {
+    konnectorWithTriggers,
+    fetching: isFetching,
+    notFoundError: !isFetching && !konnector
+  }
 }
 
 function isKonnectorTrigger(doc) {
