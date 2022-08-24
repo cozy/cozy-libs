@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router'
 import { withStyles } from '@material-ui/core/styles'
 
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import {
   DialogCloseButton,
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import {
   useVaultUnlockContext,
@@ -57,16 +59,22 @@ const Routes = ({
   onDismiss,
   datacardOptions
 }) => {
+  const { t } = useI18n()
   const dialogContext = useCozyDialog({
     size: 'l',
     open: true,
     onClose: onDismiss
   })
 
-  const { konnectorWithTriggers, fetching } = useKonnectorWithTriggers(
-    konnectorSlug,
-    konnector
-  )
+  const { konnectorWithTriggers, fetching, notFoundError } =
+    useKonnectorWithTriggers(konnectorSlug, konnector)
+
+  useEffect(() => {
+    if (notFoundError) {
+      onDismiss()
+      Alerter.error(t('error.application-not-found'))
+    }
+  }, [notFoundError, onDismiss, t])
 
   return (
     <DatacardOptions options={datacardOptions}>
