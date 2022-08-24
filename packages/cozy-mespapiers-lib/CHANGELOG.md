@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.8.2...cozy-mespapiers-lib@1.8.3) (2022-08-24)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Prevent implicit submission for disabled buttons ([8fd6eb2](https://github.com/cozy/cozy-libs/commit/8fd6eb27b9d69db23bceb1b59d705a5c4dd0f7ae))
+
+
+
+
+
 ## [1.8.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.8.1...cozy-mespapiers-lib@1.8.2) (2022-08-22)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
