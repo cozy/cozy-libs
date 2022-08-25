@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import compose from 'lodash/flowRight'
 
 import Button from 'cozy-ui/transpiled/react/Button'
+
 import OAuthWindow from './OAuthWindow'
-import compose from 'lodash/flowRight'
-import withConnectionFlow from '../models/withConnectionFlow'
+import { useFlowState } from '../models/withConnectionFlow'
+import useOAuthExtraParams from './hooks/useOAuthExtraParams'
 import withLocales from './hoc/withLocales'
-import { findKonnectorPolicy } from '../konnector-policies'
 import { intentsApiProptype } from '../helpers/proptypes'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
@@ -21,16 +22,19 @@ export const OAuthForm = props => {
     account,
     client,
     flow,
-    flowState,
     intentsApi,
     konnector,
     onSuccess,
     reconnect,
     t
   } = props
-
-  const [needsExtraParams, setNeedsExtraParams] = useState(false)
-  const [extraParams, setExtraParams] = useState(null)
+  const flowState = useFlowState(flow)
+  const { extraParams, needsExtraParams } = useOAuthExtraParams({
+    account,
+    client,
+    konnector,
+    reconnect
+  })
   const [showOAuthWindow, setShowOAuthWindow] = useState(false)
 
   // Helpers
@@ -69,29 +73,15 @@ export const OAuthForm = props => {
   }
 
   useEffect(() => {
-    const konnectorPolicy = findKonnectorPolicy(konnector)
-
-    if (konnectorPolicy.fetchExtraOAuthUrlParams) {
-      setNeedsExtraParams(true)
-      if (reconnect) {
-        setShowOAuthWindow(true)
-      }
-      // eslint-disable-next-line promise/catch-or-return
-      konnectorPolicy
-        .fetchExtraOAuthUrlParams({
-          account,
-          konnector,
-          client,
-          reconnect
-        })
-        .then(setExtraParams)
+    if (reconnect && extraParams) {
+      handleConnect()
     }
     flow.on(LOGIN_SUCCESS_EVENT, handleLoginSuccess)
 
     return () => {
       flow.removeListener(LOGIN_SUCCESS_EVENT, handleLoginSuccess)
     }
-  }, [])
+  }, [extraParams, flow, reconnect])
 
   const { error } = flowState
   const isBusy =
@@ -154,4 +144,4 @@ OAuthForm.propTypes = {
   intentsApi: intentsApiProptype
 }
 
-export default compose(withLocales, withConnectionFlow())(OAuthForm)
+export default compose(withLocales)(OAuthForm)

@@ -1,38 +1,54 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`OAuthForm should bypass reconnect button when updating an account 1`] = `<React.Fragment />`;
+exports[`OAuthForm should bypass reconnect button when updating an account 1`] = `<div />`;
 
 exports[`OAuthForm should handle oauth cancelation 1`] = `
-<React.Fragment>
-  <withI18n(withClient(withKonnectorLocales(TriggerErrorInfo))
-    className="u-mb-1"
-    error={[Error: OAUTH_CANCELED]}
-    konnector={
-      Object {
-        "slug": "test-konnector",
-      }
-    }
-  />
-  <DefaultButton
-    busy={false}
-    className="u-mt-1"
-    disabled={false}
-    extension="full"
-    label="oauth.connect.label"
-    onClick={[Function]}
-  />
-</React.Fragment>
+<div>
+  <div
+    class="styles__Infos___2ZZVs styles__Infos--danger___3wKYc u-mb-1"
+  >
+    <div
+      class="styles__Stack--m___1tSpV"
+    >
+      <div
+        class="styles__Infos-description___7P1NP"
+      >
+        <div
+          class="styles__Stack--xs___2R5lW"
+        >
+          <h6
+            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-gutterBottom"
+          >
+            Canceled
+          </h6>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button
+    class="styles__c-btn___-2Vnj styles__c-btn--full___2VmR1 styles__c-btn--center___16_Xh u-mt-1"
+    type="submit"
+  >
+    <span>
+      <span>
+        oauth.connect.label
+      </span>
+    </span>
+  </button>
+</div>
 `;
 
 exports[`OAuthForm should render 1`] = `
-<React.Fragment>
-  <DefaultButton
-    busy={false}
-    className="u-mt-1"
-    disabled={false}
-    extension="full"
-    label="oauth.connect.label"
-    onClick={[Function]}
-  />
-</React.Fragment>
+<div>
+  <button
+    class="styles__c-btn___-2Vnj styles__c-btn--full___2VmR1 styles__c-btn--center___16_Xh u-mt-1"
+    type="submit"
+  >
+    <span>
+      <span>
+        oauth.connect.label
+      </span>
+    </span>
+  </button>
+</div>
 `;
