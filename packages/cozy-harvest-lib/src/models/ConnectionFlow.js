@@ -43,7 +43,8 @@ import {
   WAITING_TWOFA,
   CREATING_ACCOUNT,
   PENDING,
-  JOB_EVENTS
+  JOB_EVENTS,
+  EXPECTING_TRIGGER_LAUNCH
 } from './flowEvents'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
@@ -293,6 +294,27 @@ export class ConnectionFlow {
         handleAccountUpdate
       )
     })
+  }
+
+  expectTriggerLaunch() {
+    logger.info(
+      `ConnectionFlow: Expecting trigger launch for konnector ${this.konnector.slug}`
+    )
+
+    this.setState({ status: EXPECTING_TRIGGER_LAUNCH, accountError: null })
+
+    const handleTriggerLaunch = job => {
+      if (
+        job.worker !== 'konnector' ||
+        job.message.konnector !== this.konnector.slug
+      )
+        return
+
+      this.realtime.unsubscribe('created', JOBS_DOCTYPE, handleTriggerLaunch)
+      this.job = job
+      this.watchJob({ autoSuccessTimer: false })
+    }
+    this.realtime.subscribe('created', JOBS_DOCTYPE, handleTriggerLaunch)
   }
 
   /**
@@ -640,6 +662,11 @@ export class ConnectionFlow {
     const running =
       get(trigger, 'current_state.status') === 'running' ||
       ![ERRORED, IDLE, SUCCESS].includes(status)
+    const expectingTriggerLaunch = status === EXPECTING_TRIGGER_LAUNCH
+    const error =
+      !running &&
+      !expectingTriggerLaunch &&
+      (this.getMockError() || accountError || triggerError)
     return {
       running,
       twoFARunning: status === RUNNING_TWOFA,
@@ -647,8 +674,9 @@ export class ConnectionFlow {
       triggerError: triggerError,
       trigger,
       accountError,
-      error: !running && (this.getMockError() || accountError || triggerError),
-      konnectorRunning: triggersModel.isKonnectorRunning(trigger)
+      error,
+      konnectorRunning: triggersModel.isKonnectorRunning(trigger),
+      expectingTriggerLaunch
     }
   }
 

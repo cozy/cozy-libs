@@ -1,3 +1,4 @@
+import EventEmitter from 'events'
 import ConnectionFlow from './ConnectionFlow'
 import cronHelpers from 'helpers/cron'
 import { saveAccount } from '../connections/accounts'
@@ -16,6 +17,7 @@ import fixtures from '../../test/fixtures'
 import sentryHub from '../sentry'
 import { Q } from 'cozy-client'
 import { KonnectorJobError } from '../helpers/konnectors'
+import { ERRORED, EXPECTING_TRIGGER_LAUNCH } from './flowEvents'
 
 jest.mock('./konnector/KonnectorJobWatcher')
 jest.mock('../sentry', () => {
@@ -46,8 +48,37 @@ jest.mock('../services/budget-insight', () => {
 KonnectorJobWatcher.prototype.watch = jest.fn()
 
 jest.mock('date-fns')
-CozyRealtime.prototype.subscribe = jest.fn()
-CozyRealtime.prototype.unsubscribe = jest.fn()
+const realtimeMock = {
+  clear: () => {
+    for (const [key] of realtimeMock.subscribtions) {
+      const [doctype, action] = key.split(':')
+      realtimeMock.unsubscribe(action, doctype)
+    }
+  },
+  events: new EventEmitter(),
+  key: (action, doctype) => `${doctype}:${action}`,
+  subscribtions: new Map(),
+  subscribe: jest.fn().mockImplementation((action, doctype, callback) => {
+    const { events, key, subscribtions } = realtimeMock
+    const subscribtionKey = key(action, doctype)
+    subscribtions.set(subscribtionKey, data => callback(data))
+    events.on(
+      subscribtionKey,
+      realtimeMock.subscribtions.get(key(action, doctype))
+    )
+  }),
+  unsubscribe: jest.fn().mockImplementation((action, doctype) => {
+    const { events, key, subscribtions } = realtimeMock
+    const subscribtionKey = key(action, doctype)
+    const subscribtion = subscribtions.get(subscribtionKey)
+    if (subscribtion) {
+      events.off(subscribtionKey, subscribtion)
+      subscribtions.delete(key(action, doctype))
+    }
+  })
+}
+CozyRealtime.prototype.subscribe = realtimeMock.subscribe
+CozyRealtime.prototype.unsubscribe = realtimeMock.unsubscribe
 
 jest.mock('../connections/accounts', () => ({
   saveAccount: jest.fn(),
@@ -68,6 +99,9 @@ beforeEach(() => {
   ensureTrigger.mockClear()
   prepareTriggerAccount.mockClear()
   launchTrigger.mockClear()
+})
+afterEach(() => {
+  realtimeMock.clear()
 })
 
 createTrigger.mockImplementation(async () => fixtures.createdTrigger)
@@ -116,6 +150,25 @@ const setupSubmit = (flow, submitOptions) => {
 }
 
 describe('ConnectionFlow', () => {
+  describe('constructor', () => {
+    beforeAll(() => {
+      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    it('should watch a running trigger', () => {
+      setup({ trigger: fixtures.runningTrigger })
+      expect(watchKonnectorJob).toHaveBeenCalledWith(
+        expect.any(Object),
+        { _id: 'runningjobid' },
+        { autoSuccessTimer: false }
+      )
+    })
+  })
+
   describe('getState', () => {
     beforeAll(() => {
       watchKonnectorJob.mockReturnValue({ on: () => ({}) })
@@ -123,19 +176,43 @@ describe('ConnectionFlow', () => {
     afterEach(() => {
       jest.clearAllMocks()
     })
+
     it('should return error if not running', () => {
       const { flow } = setup({ trigger: fixtures.erroredTrigger })
       const { error } = flow.getState()
 
       expect(error).toEqual(new KonnectorJobError('last error message'))
     })
+
     it('should not return error while running', () => {
       const { flow } = setup({ trigger: fixtures.runningTrigger })
       flow.setState({ accountError: 'error to hide' })
       const { error } = flow.getState()
       expect(error).toBe(false)
     })
+
+    it('should not return error while expecting a trigger launch', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+      flow.setState({ status: EXPECTING_TRIGGER_LAUNCH })
+      const { error } = flow.getState()
+      expect(error).toBe(false)
+    })
+
+    it('should return expectingTriggerLaunch while expecting a trigger launch', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+      flow.setState({ status: EXPECTING_TRIGGER_LAUNCH })
+      const { expectingTriggerLaunch } = flow.getState()
+      expect(expectingTriggerLaunch).toBe(true)
+    })
+
+    it('should not return expectingTriggerLaunch if not expecting a trigger launch', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+      flow.setState({ status: ERRORED })
+      const { expectingTriggerLaunch } = flow.getState()
+      expect(expectingTriggerLaunch).toBe(false)
+    })
   })
+
   describe('handleFormSubmit', () => {
     const isSubmitting = flow => {
       return flow.getState().running === true
@@ -514,22 +591,80 @@ describe('ConnectionFlow', () => {
     delete window.ReactNativeWebView
   })
 
-  describe('constructor', () => {
-    beforeAll(() => {
-      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
+  describe('expectTriggerLaunch', () => {
+    it('removes account errors', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+      flow.setState({ accountError: 'error to hide' })
+
+      flow.expectTriggerLaunch()
+
+      const { accountError } = flow.getState()
+      expect(accountError).toBe(null)
     })
 
-    afterEach(() => {
-      jest.clearAllMocks()
+    it('sets the flow status to EXPECTING_TRIGGER_LAUNCH', () => {
+      const { flow } = setup({ trigger: fixtures.runningTrigger })
+
+      flow.expectTriggerLaunch()
+
+      const { status } = flow.getState()
+      expect(status).toBe(EXPECTING_TRIGGER_LAUNCH)
     })
 
-    it('should watch a running trigger', () => {
-      setup({ trigger: fixtures.runningTrigger })
-      expect(watchKonnectorJob).toHaveBeenCalledWith(
-        expect.any(Object),
-        { _id: 'runningjobid' },
-        { autoSuccessTimer: false }
+    it('starts watching for konnector jobs creation', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+
+      flow.expectTriggerLaunch()
+
+      expect(realtimeMock.subscribe).toHaveBeenCalledWith(
+        'created',
+        'io.cozy.jobs',
+        expect.anything() // This is the subscribed callback
       )
+    })
+
+    describe(`when a job for the flow's konnector has been created`, () => {
+      const konnectorJob = flow => ({
+        _id: 'job-id',
+        worker: 'konnector',
+        message: { konnector: flow.konnector.slug }
+      })
+
+      it('stops watching for konnector jobs creation', async () => {
+        const { flow } = setup({ trigger: fixtures.erroredTrigger })
+        flow.expectTriggerLaunch()
+
+        const job = konnectorJob(flow)
+        realtimeMock.events.emit(
+          realtimeMock.key('created', 'io.cozy.jobs'),
+          job
+        )
+
+        expect(realtimeMock.unsubscribe).toHaveBeenCalledWith(
+          'created',
+          'io.cozy.jobs',
+          expect.anything()
+        )
+      })
+
+      it('starts watching for updates on the job itself', () => {
+        const { flow } = setup({ trigger: fixtures.erroredTrigger })
+        flow.expectTriggerLaunch()
+
+        const watchJobSpy = jest.spyOn(flow, 'watchJob')
+        try {
+          const job = konnectorJob(flow)
+          realtimeMock.events.emit(
+            realtimeMock.key('created', 'io.cozy.jobs'),
+            job
+          )
+
+          expect(flow.job).toEqual(job)
+          expect(flow.watchJob).toHaveBeenCalled()
+        } finally {
+          watchJobSpy.mockRestore()
+        }
+      })
     })
   })
 })
