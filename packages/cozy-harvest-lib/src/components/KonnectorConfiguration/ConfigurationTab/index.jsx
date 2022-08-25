@@ -32,11 +32,8 @@ import { unshareCipher } from '../../../models/cipherUtils'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 
 import useSafeState from '../../useSafeState'
-import TriggerErrorInfo from '../../infos/TriggerErrorInfo'
 import { MountPointContext } from '../../MountPointContext'
 import { useTrackPage, useTracker } from '../../hoc/tracking'
-
-import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 
 import { ContractsForAccount } from './Contracts'
 import {
@@ -90,8 +87,7 @@ const ConfigurationTab = ({
   const [deleting, setDeleting] = useSafeState(false)
   const [requestingDeletion, setRequestDeletion] = useState(false)
   const tracker = useTracker()
-  const flowState = flow.getState()
-  const { error, running } = flowState
+  const { running } = flow.getState()
   const { showUnlockForm } = useVaultUnlockContext()
 
   useTrackPage('configuration')
@@ -152,23 +148,6 @@ const ConfigurationTab = ({
        * cropped since SwipeableViews uses the offsetHeight of the first slide children when
        * computing the height of the slide wrapper.
        */}
-      {error && (
-        <div className={isMobile ? 'u-p-1' : 'u-pb-2'}>
-          <TriggerErrorInfo
-            error={error}
-            konnector={konnector}
-            trigger={flow.trigger}
-            action={
-              error.isSolvableViaReconnect() ? (
-                <RedirectToAccountFormButton
-                  konnector={konnector}
-                  trigger={flow.trigger}
-                />
-              ) : null
-            }
-          />
-        </div>
-      )}
       <NavigationList style={isMobile ? tabMobileNavListStyle : null}>
         <NavigationListHeader>
           {t('modal.updateAccount.general-subheader')}

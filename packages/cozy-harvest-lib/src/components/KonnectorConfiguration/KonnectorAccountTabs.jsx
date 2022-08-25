@@ -1,5 +1,7 @@
 import React, { useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import { makeStyles } from '@material-ui/core/styles'
 import { Tab as UITab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
@@ -12,6 +14,9 @@ import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
 import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
+import TriggerErrorInfo from '../infos/TriggerErrorInfo'
+import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
+import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
@@ -59,6 +64,9 @@ const DumbKonnectorAccountTabs = props => {
     intentsApi,
     innerAccountModalOverrides
   } = props
+
+  const client = useClient()
+  const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const [tab, setTab] = useState(
     initialActiveTab
@@ -67,6 +75,10 @@ const DumbKonnectorAccountTabs = props => {
       ? tabIndexes.configuration
       : tabIndexes.data
   )
+  const {
+    data: { isInMaintenance }
+  } = useMaintenanceStatus(client, konnector)
+
   const handleTabChange = (ev, newTab) => setTab(newTab)
 
   const flowState = flow.getState()
@@ -91,6 +103,23 @@ const DumbKonnectorAccountTabs = props => {
         flowState={flowState}
       />
       <Divider />
+
+      {error && !isInMaintenance && (
+        <TriggerErrorInfo
+          error={error}
+          konnector={konnector}
+          action={
+            error.isSolvableViaReconnect() ? (
+              <RedirectToAccountFormButton
+                konnector={konnector}
+                trigger={initialTrigger}
+              />
+            ) : null
+          }
+          className="u-mt-1"
+        />
+      )}
+
       <SwipeableViews
         animateHeight={true}
         index={tab}
