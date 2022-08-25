@@ -141,7 +141,7 @@ const client = new CozyClient({
 
 ReactDOM.render(
   <CozyProvider client={client}>
-    <Query query={()=> Q('io.cozy.apps').getById('my-konnector-id')}>
+    <Query query={()=> Q('io.cozy.konnectors').getById('my-konnector-id')}>
       {({ data: konnector }) => (
         <TriggerManager
           konnector={konnector}
