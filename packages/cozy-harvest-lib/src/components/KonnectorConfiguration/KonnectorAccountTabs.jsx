@@ -9,6 +9,7 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import SwipeableViews from 'react-swipeable-views'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 
 import useDOMMutations from '../hooks/useDOMMutations'
 import FlowProvider from '../FlowProvider'
@@ -16,6 +17,9 @@ import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
+import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
+import OAuthWindow from '../OAuthWindow'
+import { findKonnectorPolicy } from '../../konnector-policies'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 import {
   intentsApiProptype,
@@ -95,6 +99,39 @@ const DumbKonnectorAccountTabs = props => {
   )
   useDOMMutations(nodeRef.current, domMutationsConfig, updateSwiperHeight)
 
+  const konnectorPolicy = findKonnectorPolicy(konnector)
+  const { extraParams } = useOAuthExtraParams({
+    account,
+    client,
+    konnector,
+    reconnect: true
+  })
+
+  const [showBIWebView, setShowBIWebView] = useState(false)
+  const hideBIWebView = useCallback(() => {
+    setShowBIWebView(false)
+  }, [])
+
+  const handleClick = useCallback(() => {
+    setShowBIWebView(true)
+    flow.expectTriggerLaunch()
+  }, [flow])
+  const errorActionButton = konnectorPolicy.isBIWebView ? (
+    <Button
+      className="u-ml-0"
+      variant="secondary"
+      label={t('error.reconnect-via-form')}
+      onClick={handleClick}
+      disabled={!extraParams}
+      busy={!extraParams}
+    />
+  ) : (
+    <RedirectToAccountFormButton
+      konnector={konnector}
+      trigger={initialTrigger}
+    />
+  )
+
   return (
     <div ref={nodeRef}>
       <KonnectorAccountTabsTabs
@@ -108,15 +145,19 @@ const DumbKonnectorAccountTabs = props => {
         <TriggerErrorInfo
           error={error}
           konnector={konnector}
-          action={
-            error.isSolvableViaReconnect() ? (
-              <RedirectToAccountFormButton
-                konnector={konnector}
-                trigger={initialTrigger}
-              />
-            ) : null
-          }
+          action={error.isSolvableViaReconnect() ? errorActionButton : null}
           className="u-mt-1"
+        />
+      )}
+      {showBIWebView && (
+        <OAuthWindow
+          extraParams={extraParams}
+          konnector={konnector}
+          reconnect={true}
+          onSuccess={hideBIWebView}
+          onCancel={hideBIWebView}
+          account={account}
+          intentsApi={intentsApi}
         />
       )}
 

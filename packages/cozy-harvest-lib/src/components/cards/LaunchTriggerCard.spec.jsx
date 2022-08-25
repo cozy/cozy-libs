@@ -9,9 +9,30 @@ import CozyClient, { CozyProvider } from 'cozy-client'
 import ConnectionFlow from '../../models/ConnectionFlow'
 import enLocale from '../../locales/en.json'
 
+jest.mock('cozy-realtime')
+jest.mock('../../models/ConnectionFlow', () => {
+  // Require the original module to not be mocked...
+  const { default: mockConnectionFlow } = jest.requireActual(
+    '../../models/ConnectionFlow'
+  )
+
+  mockConnectionFlow.prototype.watchJob = jest.fn()
+
+  return mockConnectionFlow
+})
+
 const triggerFixture = {
   _id: 'd861818b62204988bf0bb78c182a9149',
   arguments: '0 0 0 * * 0'
+}
+const konnectorFixture = {
+  slug: 'boursorama83',
+  parameters: {
+    bankId: '100000'
+  },
+  partnership: {
+    domain: 'https://budget-insight.com'
+  }
 }
 
 describe('LaunchTriggerCard', () => {
@@ -83,5 +104,35 @@ describe('LaunchTriggerCard', () => {
       }
     })
     expect(root.html()).toMatchSnapshot()
+  })
+
+  it('should display a syncing message when the trigger is running', () => {
+    const flow = new ConnectionFlow(
+      client,
+      {
+        ...triggerFixture,
+        current_state: { status: 'running' }
+      },
+      konnectorFixture
+    )
+
+    const { root } = setup({
+      props: {
+        flow
+      }
+    })
+    expect(root.html()).toContain('Running…')
+  })
+
+  it('should display a syncing message when a trigger launch is expected', async () => {
+    const flow = new ConnectionFlow(client, triggerFixture, konnectorFixture)
+    flow.expectTriggerLaunch()
+
+    const { root } = setup({
+      props: {
+        flow
+      }
+    })
+    expect(root.html()).toContain('Running…')
   })
 })

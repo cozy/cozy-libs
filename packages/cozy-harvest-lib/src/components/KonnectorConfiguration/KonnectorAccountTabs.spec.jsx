@@ -20,6 +20,20 @@ jest.mock('components/infos/TriggerErrorInfo', () => ({ action }) => (
 jest.mock('components/RedirectToAccountFormButton', () => () => (
   <button>Reconnect</button>
 ))
+jest.mock('../hooks/useOAuthExtraParams', () => ({ konnector }) => {
+  const needsExtraParams =
+    konnector?.partnership?.domain === 'budget-insight.com'
+
+  return {
+    fetchStatus: 'loaded',
+    needsExtraParams,
+    extraParams: needsExtraParams ? {} : null
+  }
+})
+
+const accountFixture = {
+  _id: '123account'
+}
 
 describe('Konnector account tabs header', () => {
   const setup = () => {
@@ -53,7 +67,8 @@ describe('Konnector account tabs content', () => {
   const setup = async ({
     isError = false,
     isInMaintenance = false,
-    initialActiveTab = 'data'
+    initialActiveTab = 'data',
+    isBIWebViewKonnector = false
   } = {}) => {
     useMaintenanceStatus.mockReturnValue({
       data: { isInMaintenance, message: '' }
@@ -65,13 +80,16 @@ describe('Konnector account tabs content', () => {
         ? { current_state: { status: 'errored', last_error: 'LOGIN_FAILED' } }
         : {})
     }
+    const konnector = isBIWebViewKonnector
+      ? { partnership: { domain: 'budget-insight.com' } }
+      : {}
 
     const root = await render(
       <AppLike>
         <KonnectorAccountTabs
-          konnector={{}}
+          konnector={konnector}
           initialTrigger={trigger}
-          account={{}}
+          account={accountFixture}
           onAccountDeleted={() => {}}
           addAccount={() => {}}
           initialActiveTab={initialActiveTab}
@@ -106,8 +124,21 @@ describe('Konnector account tabs content', () => {
     await expect(root.getByText('Login error')).toBeInTheDocument()
   })
 
-  it('should show a reconnect button if error is solvable by reconnecting through form', async () => {
-    const { root } = await setup({ isError: true, isInMaintenance: false })
-    expect(root.getByText('Reconnect')).toBeInTheDocument()
+  describe('for a konnector using a Cozy form', () => {
+    it('should show a reconnect button if error is solvable by reconnecting through form', async () => {
+      const { root } = await setup({ isError: true, isInMaintenance: false })
+      expect(root.getByText('Reconnect')).toBeInTheDocument()
+    })
+  })
+
+  describe('for a konnector using BI webviews', () => {
+    it('should show a reconnect button if error is solvable by reconnecting through BI webview', async () => {
+      const { root } = await setup({
+        isError: true,
+        isInMaintenance: false,
+        isBIWebViewKonnector: true
+      })
+      expect(root.getByText('Reconnect')).toBeInTheDocument()
+    })
   })
 })
