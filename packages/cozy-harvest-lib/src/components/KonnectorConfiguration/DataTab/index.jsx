@@ -10,24 +10,21 @@ import LaunchTriggerCard from '../../../components/cards/LaunchTriggerCard'
 import KonnectorMaintenance from '../../../components/Maintenance'
 import AppLinkCard from '../../../components/cards/AppLinkCard'
 import WebsiteLinkCard from '../../../components/cards/WebsiteLinkCard'
-import TriggerErrorInfo from '../../../components/infos/TriggerErrorInfo'
 import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
 import { useTrackPage } from '../../../components/hoc/tracking'
-import RedirectToAccountFormButton from '../../RedirectToAccountFormButton'
 import Datacards from '../../Datacards'
 
 export const DataTab = ({ konnector, trigger, client, flow, account }) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState
-  const hasError = !!error
 
   useTrackPage('donnees')
 
   const hasTermsVersionMismatchError =
-    hasError && error.isTermsVersionMismatchError()
+    !!error && error.isTermsVersionMismatchError()
   const appLinks = getRelatedAppsSlugs({
     konnectorManifest: konnector,
     trigger
@@ -52,20 +49,6 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
           <KonnectorUpdateInfos
             konnector={konnector}
             isBlocking={hasTermsVersionMismatchError}
-          />
-        )}
-        {hasError && !isInMaintenance && (
-          <TriggerErrorInfo
-            error={error}
-            konnector={konnector}
-            action={
-              error.isSolvableViaReconnect() ? (
-                <RedirectToAccountFormButton
-                  konnector={konnector}
-                  trigger={trigger}
-                />
-              ) : null
-            }
           />
         )}
         <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />

@@ -6,7 +6,6 @@ import React from 'react'
 import { MountPointProvider } from '../../../components/MountPointContext'
 import { createMockClient } from 'cozy-client/dist/mock'
 import { deleteAccount } from '../../../connections/accounts'
-import { KonnectorJobError } from '../../../helpers/konnectors'
 import AppLike from '../../../../test/AppLike'
 import {
   VaultProvider,
@@ -109,24 +108,6 @@ describe('ConfigurationTab', () => {
   it('should render', () => {
     const { root } = setup()
     expect(root.getByText('Identifiers')).toBeTruthy()
-  })
-
-  describe('reconnect button', () => {
-    it('should show a reconnect button if error is solvable by reconnecting through form', () => {
-      const { root } = setup({
-        checkShouldUnlock: jest.fn().mockResolvedValue(false),
-        trigger: {
-          message: {
-            account: 'account-id-123',
-            konnector: 'konnector-slug'
-          }
-        },
-        flowState: {
-          error: new KonnectorJobError('LOGIN_FAILED')
-        }
-      })
-      expect(root.getByText('Reconnect')).toBeTruthy()
-    })
   })
 
   describe('deletion modal', () => {
