@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.2...cozy-harvest-lib@9.26.3) (2022-08-26)
+
+
+### Bug Fixes
+
+* **harvest:** Handle not existing applications ([2e6c7f6](https://github.com/cozy/cozy-libs/commit/2e6c7f6f3558019f3d6ce915a91afd2c4870773e))
+
+
+
+
+
 ## [9.26.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.1...cozy-harvest-lib@9.26.2) (2022-08-26)
 
 **Note:** Version bump only for package cozy-harvest-lib
