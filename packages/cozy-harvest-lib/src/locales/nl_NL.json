@@ -124,6 +124,7 @@
     "baseDir": "/Administratief"
   },
   "error": {
+    "application-not-found": "Deze app bestaat niet",
     "reconnect-via-form": "Opnieuw koppelen",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
