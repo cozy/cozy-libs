@@ -12,6 +12,7 @@
   "scripts": {
     "docs": "jsdoc2md -f 'src/**/*.js' -t .README.md.template > README.md",
     "build": "babel src -d dist --verbose",
+    "prepublishOnly": "yarn build",
     "test": "jest",
     "cli": "node src/cli.js"
   },

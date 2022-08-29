@@ -11,7 +11,8 @@
   },
   "scripts": {
     "test": "yarn jest",
-    "build": "babel src/ --out-dir dist"
+    "build": "babel src/ --out-dir dist",
+    "prepublishOnly": "yarn build"
   },
   "prettier": {
     "semi": false,

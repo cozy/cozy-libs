@@ -11,6 +11,7 @@
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist",
+    "prepublishOnly": "yarn build",
     "watch": "yarn build -w",
     "test": "yarn jest src",
     "copy-files": "cp -r src/locales/ dist/locales/",
