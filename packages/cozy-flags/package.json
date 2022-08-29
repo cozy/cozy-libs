@@ -4,6 +4,7 @@
   "description": "Flag library used in Cozy",
   "main": "dist/index.js",
   "browser": "dist/index.browser.js",
+  "types": "dist/index.d.ts",
   "author": "Cozy",
   "license": "MIT",
   "homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-flags/README.md",
@@ -18,7 +19,7 @@
     "cozy-flags": "./bin/cozy-flags"
   },
   "scripts": {
-    "build": "babel src -d dist --verbose",
+    "build": "babel src -d dist --verbose && cp ./src/index.d.ts ./dist",
     "prepublishOnly": "yarn build",
     "test": "jest"
   },
