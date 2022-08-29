@@ -1,6 +1,6 @@
 {
   "name": "cozy-mespapiers-lib",
-  "version": "1.8.5",
+  "version": "1.8.6",
   "description": "Cozy Mes papiers lib",
   "license": "AGPL-3.0",
   "main": "dist/index.js",
@@ -18,11 +18,11 @@
     "cozy-bar": "7.16.0",
     "cozy-client": "^32.2.0",
     "cozy-device-helper": "^2.2.2",
-    "cozy-doctypes": "^1.85.1",
-    "cozy-harvest-lib": "^9.26.3",
+    "cozy-doctypes": "^1.85.2",
+    "cozy-harvest-lib": "^9.26.4",
     "cozy-intent": "^2.3.1",
     "cozy-realtime": "^4.2.3",
-    "cozy-sharing": "^4.5.3",
+    "cozy-sharing": "^4.5.4",
     "cozy-ui": "^70.5.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
     "react-router-dom": "5.2.0"

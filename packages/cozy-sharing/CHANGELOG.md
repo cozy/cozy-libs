@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.5.4 (2022-08-29)
+
+
+### Bug Fixes
+
+* Remove a reconnection step ([05d2cb6](https://github.com/cozy/cozy-libs/commit/05d2cb674d9ce69164cf0a099059520cbf4f1722))
+
+
+
+
+
 ## [4.5.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.5.2...cozy-sharing@4.5.3) (2022-08-01)
 
 **Note:** Version bump only for package cozy-sharing
