@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.4.2 (2022-08-29)
+
+
+### Bug Fixes
+
+* Add prepublish script ([30a26e5](https://github.com/cozy/cozy-libs/commit/30a26e5109dcdfc636c76e6cdd20fdec313359ee))
+
+
+
+
+
 ## 2.4.1 (2022-08-01)
 
 **Note:** Version bump only for package cozy-scanner

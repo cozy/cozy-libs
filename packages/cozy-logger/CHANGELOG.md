@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.9.1 (2022-08-29)
+
+
+### Bug Fixes
+
+* Add prepublish script ([30a26e5](https://github.com/cozy/cozy-libs/commit/30a26e5109dcdfc636c76e6cdd20fdec313359ee))
+
+
+
+
+
 # [1.9.0](https://github.com/cozy/cozy-libs/compare/cozy-logger@1.8.1...cozy-logger@1.9.0) (2022-03-10)
 
 
