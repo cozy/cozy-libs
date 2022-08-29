@@ -1439,7 +1439,7 @@
             {
               "name": "vinNumber",
               "type": "text",
-              "mask": "aa9 ****** *******",
+              "mask": "*** ****** ********",
               "inputLabel": "PaperJSON.vehicleRegistration.vinNumber.inputLabel"
             }
           ]
