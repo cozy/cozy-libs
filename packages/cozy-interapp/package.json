@@ -15,7 +15,8 @@
   },
   "scripts": {
     "test": "jest",
-    "build": "babel src -d dist --ignore *.spec.js"
+    "build": "babel src -d dist --ignore *.spec.js",
+    "prepublishOnly": "yarn build"
   },
   "devDependencies": {
     "@babel/cli": "7.16.8",

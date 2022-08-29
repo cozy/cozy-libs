@@ -15,6 +15,7 @@
   "scripts": {
     "prepare": "yarn build; yarn copy-files",
     "build": "env BABEL_ENV=transpilation yarn babel src/ --out-dir dist --copy-files --verbose",
+    "prepublishOnly": "yarn build",
     "copy-files": "cp -rf src/locales dist/",
     "test": "jest src/",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-scanner",

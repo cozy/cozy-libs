@@ -21,6 +21,7 @@
   },
   "scripts": {
     "build": "webpack",
+    "prepublishOnly": "yarn build",
     "watch": "webpack --watch",
     "test": "jest"
   },
