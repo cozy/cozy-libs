@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.8.8](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.8.7...cozy-mespapiers-lib@1.8.8) (2022-08-30)
+
+
+### Bug Fixes
+
+* Mask of vehicle registration ([5368316](https://github.com/cozy/cozy-libs/commit/5368316eeefc6b027cf5a5b4c3591e1a14a8acd5))
+
+
+
+
+
 ## [1.8.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.8.6...cozy-mespapiers-lib@1.8.7) (2022-08-29)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
