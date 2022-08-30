@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
 
-import CozyClient, { Q, queryConnect } from 'cozy-client'
+import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import NavigationList, {
@@ -52,6 +52,7 @@ const DumbContracts = ({
 
   return (
     <MuiCozyTheme>
+      <RealTimeQueries doctype="io.cozy.bank.accounts" />
       <NavigationList>
         <NavigationListHeader>
           {t(`contracts.headers.${headerKey}`)}
