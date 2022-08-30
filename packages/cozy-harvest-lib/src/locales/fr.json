@@ -217,7 +217,7 @@
       },
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "Ce compte est déjà configuré",
-        "description": "Vous avez déjà configuré un compte avec ces identifiants."
+        "description": "Votre éventuelle modification de la liste des comptes synchronisés sera prise en compte sous quelques minutes."
       }
     }
   },

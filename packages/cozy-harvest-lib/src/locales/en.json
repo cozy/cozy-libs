@@ -217,7 +217,7 @@
       },
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "This account already exists",
-        "description": "You already have configured an account with these identifiers."
+        "description": "Your possible modification of the list of synchronized accounts will be taken into account within a few minutes."
       }
     }
   },
