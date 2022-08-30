@@ -8,6 +8,13 @@ import bankAccounts from './KonnectorConfiguration/ConfigurationTab/bank-account
 describe('DisconnectedAccountModal', () => {
   const setup = () => {
     const mockClient = {}
+    mockClient.plugins = {
+      realtime: {
+        subscribe: jest.fn(),
+        unsubscribe: jest.fn()
+      }
+    }
+    mockClient.dispatch = jest.fn()
     const root = render(
       <AppLike client={mockClient}>
         <DisconnectedAccountModal
