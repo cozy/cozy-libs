@@ -329,7 +329,7 @@ describe('TriggerManager', () => {
       mockVaultClient.getAllDecrypted.mockResolvedValue([])
     })
     const setupForm = async ({ account } = {}) => {
-      const flow = new ConnectionFlow(client)
+      const flow = new ConnectionFlow(client, null, fixtures.konnector)
       jest.spyOn(flow, 'handleFormSubmit').mockImplementation(() => {})
       const utils = render(
         <AppLike>

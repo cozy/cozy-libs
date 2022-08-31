@@ -123,7 +123,7 @@ describe('checkBIConnection', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    const flow = new ConnectionFlow(client, { konnector, account })
+    const flow = new ConnectionFlow(client, null, konnector)
     jest.spyOn(client, 'query').mockImplementation(async () => ({ data: [] }))
 
     return { client, flow }

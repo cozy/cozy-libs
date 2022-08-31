@@ -38,7 +38,8 @@ describe('OAuthForm', () => {
     reconnect = false
   } = {}) => {
     const client = new CozyClient({ uri: 'http://cozy.localhost:8080' })
-    const flow = new ConnectionFlow(client)
+    const konnector = {}
+    const flow = new ConnectionFlow(client, null, konnector)
     flow.getState = jest.fn().mockReturnValue(flowState)
 
     const root = await render(
