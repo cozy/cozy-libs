@@ -14,7 +14,10 @@ describe('TwoFAModal', () => {
     }
 
     const trigger = {}
-    const flow = new ConnectionFlow(client, trigger)
+    const konnector = {
+      slug: konnectorSlug
+    }
+    const flow = new ConnectionFlow(client, trigger, konnector)
 
     flow.getAccount = () => account
     flow.getKonnectorSlug = () => konnectorSlug

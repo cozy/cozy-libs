@@ -32,7 +32,8 @@ describe('LaunchTriggerCard', () => {
     const { root } = setup({
       props: {
         flowProps: {
-          initialTrigger: triggerFixture
+          initialTrigger: triggerFixture,
+          konnector: konnectorFixture
         }
       }
     })
@@ -42,10 +43,10 @@ describe('LaunchTriggerCard', () => {
     )
   })
 
-  it('should pass props.flow downstream is passed from above', () => {
+  it('should pass props.flow downstream if passed from above', () => {
     const { root } = setup({
       props: {
-        flow: new ConnectionFlow(client, triggerFixture)
+        flow: new ConnectionFlow(client, triggerFixture, konnectorFixture)
       }
     })
     expect(root.find(DumbLaunchTriggerCard).props().flow).toBeDefined()
@@ -57,11 +58,16 @@ describe('LaunchTriggerCard', () => {
   it('should render impossible to run message when konnector is clientSide without an accessible launcher', () => {
     const { root } = setup({
       props: {
-        flow: new ConnectionFlow(client, triggerFixture, {
-          slug: 'test',
-          name: 'testname',
-          clientSide: true
-        })
+        flow: new ConnectionFlow(
+          client,
+          triggerFixture,
+          {
+            slug: 'test',
+            name: 'testname',
+            clientSide: true
+          },
+          konnectorFixture
+        )
       }
     })
     expect(root.html()).toMatchSnapshot()
