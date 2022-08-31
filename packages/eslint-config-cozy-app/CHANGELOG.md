@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.0.0 (2022-08-31)
+
+
+### Features
+
+* **mespapiers-lib:** Update `cozy-ui` dependency to v70.5.1 ([ce13857](https://github.com/cozy/cozy-libs/commit/ce13857943ea887c7d30d82c20f0b538c9f7139f))
+* Update eslint-config-cozy-app ([d86a9ec](https://github.com/cozy/cozy-libs/commit/d86a9ec688527778829aa33688194c6487fbaebe))
+
+
+### BREAKING CHANGES
+
+* - Removing Vue linting
+
+We were a bit behind in versions, bugs started to leak in our lints.
+These version upgrades should fix them,
+but they also have a small chance to detect new lint errors.
+
+
+
+
+
 ## 4.2.1 (2022-08-01)
 
 
