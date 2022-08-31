@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.5...cozy-harvest-lib@9.26.6) (2022-08-31)
+
+
+### Bug Fixes
+
+* Add realtime on bank accounts ([3a03448](https://github.com/cozy/cozy-libs/commit/3a03448e0a371377023f9ec1c856dbdb53fd3e68))
+* Better msg on ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED error ([afc1f1c](https://github.com/cozy/cozy-libs/commit/afc1f1c84cb7a8c16a0d84942c6a6bbd68bd50ba))
+
+
+
+
+
 ## [9.26.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.4...cozy-harvest-lib@9.26.5) (2022-08-29)
 
 **Note:** Version bump only for package cozy-harvest-lib
