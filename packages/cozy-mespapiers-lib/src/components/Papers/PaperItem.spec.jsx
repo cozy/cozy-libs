@@ -1,7 +1,7 @@
 import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import AppLike from '../../../test/components/AppLike'
 import PaperItem from './PaperItem'
@@ -9,7 +9,7 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 jest.mock('react-router-dom', () => ({
   ...jest.requireActual('react-router-dom'),
-  useHistory: jest.fn()
+  useNavigate: jest.fn()
 }))
 jest.mock('../Hooks/useMultiSelection')
 const mockFile = {
@@ -35,7 +35,7 @@ const setup = ({
   isMultiSelectionActive = false,
   currentMultiSelectionFiles = [],
   changeCurrentMultiSelectionFile = jest.fn(),
-  historyPush = jest.fn()
+  mockNav = jest.fn()
 } = {}) => {
   useMultiSelection.mockReturnValue({
     allMultiSelectionFiles,
@@ -43,7 +43,7 @@ const setup = ({
     currentMultiSelectionFiles,
     changeCurrentMultiSelectionFile
   })
-  useHistory.mockReturnValue({ push: historyPush })
+  useNavigate.mockReturnValue(mockNav)
 
   return render(
     <AppLike>
@@ -156,56 +156,56 @@ describe('PaperItem components', () => {
 
   describe('handleClick', () => {
     it('should call "history.push" by default', () => {
-      const historyPush = jest.fn()
-      const { getByTestId } = setup({ historyPush })
+      const mockNav = jest.fn()
+      const { getByTestId } = setup({ mockNav })
 
       fireEvent.click(getByTestId('ListItem'))
 
-      expect(historyPush).toBeCalledTimes(1)
+      expect(mockNav).toBeCalledTimes(1)
     })
     it('should call "history.push" one time when withCheckbox is true & is not on multiselection context', () => {
-      const historyPush = jest.fn()
+      const mockNav = jest.fn()
       const changeCurrentMultiSelectionFile = jest.fn()
       const { getByTestId } = setup({
         withCheckbox: true,
-        historyPush,
+        mockNav,
         changeCurrentMultiSelectionFile
       })
 
       fireEvent.click(getByTestId('ListItem'))
 
-      expect(historyPush).toBeCalledTimes(1)
+      expect(mockNav).toBeCalledTimes(1)
       expect(changeCurrentMultiSelectionFile).toBeCalledTimes(0)
     })
     it('should call "changeCurrentMultiSelectionFile" one time when withCheckbox is true & is on multiselection context', () => {
-      const historyPush = jest.fn()
+      const mockNav = jest.fn()
       const changeCurrentMultiSelectionFile = jest.fn()
       const { getByTestId } = setup({
         withCheckbox: true,
         isMultiSelectionActive: true,
-        historyPush,
+        mockNav,
         changeCurrentMultiSelectionFile
       })
 
       fireEvent.click(getByTestId('ListItem'))
 
-      expect(historyPush).toBeCalledTimes(0)
+      expect(mockNav).toBeCalledTimes(0)
       expect(changeCurrentMultiSelectionFile).toBeCalledTimes(1)
     })
     it('should not call "handleClick" when withCheckbox is true & is on multiselection context but the file is already in allMultiSelectionFiles', () => {
-      const historyPush = jest.fn()
+      const mockNav = jest.fn()
       const changeCurrentMultiSelectionFile = jest.fn()
       const { getByTestId } = setup({
         withCheckbox: true,
         isMultiSelectionActive: true,
-        historyPush,
+        mockNav,
         changeCurrentMultiSelectionFile,
         allMultiSelectionFiles: [{ _id: 'fileId01' }]
       })
 
       fireEvent.click(getByTestId('ListItem'))
 
-      expect(historyPush).toBeCalledTimes(0)
+      expect(mockNav).toBeCalledTimes(0)
       expect(changeCurrentMultiSelectionFile).toBeCalledTimes(0)
     })
   })
