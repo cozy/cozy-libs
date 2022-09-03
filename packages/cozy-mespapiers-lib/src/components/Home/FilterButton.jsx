@@ -59,13 +59,11 @@ FilterButton.defaultProps = {
 
 FilterButton.propTypes = {
   onClick: PropTypes.func,
-  badge: PropTypes.objectOf(
-    PropTypes.shape({
-      active: PropTypes.bool,
-      content: PropTypes.number,
-      showZero: PropTypes.bool
-    })
-  )
+  badge: PropTypes.shape({
+    active: PropTypes.bool,
+    content: PropTypes.number,
+    showZero: PropTypes.bool
+  })
 }
 
 export default FilterButton
