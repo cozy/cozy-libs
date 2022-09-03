@@ -18,7 +18,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const PapersFab = ({ t, className, ...props }) => {
+const PapersFab = ({ t, className, innerRef, onClick }) => {
   const { isDesktop } = useBreakpoints()
   const classes = useStyles(isDesktop)
 
@@ -27,7 +27,8 @@ const PapersFab = ({ t, className, ...props }) => {
       color="primary"
       aria-label={t('Home.Fab.ariaLabel')}
       className={cx(classes.fab, className)}
-      {...props}
+      innerRef={innerRef}
+      onClick={onClick}
     >
       <Icon icon="plus" />
     </Fab>
