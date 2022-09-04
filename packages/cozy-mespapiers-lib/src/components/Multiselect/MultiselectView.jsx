@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -11,7 +11,7 @@ import MultiselectPaperList from './MultiselectPaperList'
 
 const MultiselectView = () => {
   const { t } = useI18n()
-  const history = useHistory()
+  const navigate = useNavigate()
   const location = useLocation()
   const [isFilePickerActive, setIsFilePickerActive] = useState(false)
   const { setIsMultiSelectionActive } = useMultiSelection()
@@ -21,10 +21,10 @@ const MultiselectView = () => {
   )
   useEffect(() => {
     setIsMultiSelectionActive(true)
-  }, [setIsMultiSelectionActive, history])
+  }, [setIsMultiSelectionActive])
 
   const handleClose = () => {
-    history.push(backgroundPath || '/paper')
+    navigate(backgroundPath || '/paper')
     setIsMultiSelectionActive(false)
   }
 

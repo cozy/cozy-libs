@@ -1,50 +1,50 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Navigate, Outlet, useLocation } from 'react-router-dom'
 
 import { useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { getOnboardingStatus } from '../helpers/queries'
+
 import { useOnboarding } from './Hooks/useOnboarding'
 
-const OnboardedGuardedRoute = ({ component: Component, render, ...rest }) => {
+const OnboardedGuardedRoute = () => {
+  const location = useLocation()
+  const { OnboardingComponent } = useOnboarding()
+  const isOnboardingPage = location.pathname === '/paper/onboarding'
+
   const { data: settingsData, ...settingsQuery } = useQuery(
     getOnboardingStatus.definition,
     getOnboardingStatus.options
   )
+
+  if (!hasQueryBeenLoaded(settingsQuery)) {
+    return (
+      <Spinner
+        size="xxlarge"
+        className="u-flex u-flex-justify-center u-mt-2 u-h-5"
+      />
+    )
+  }
+
   const onboarded = settingsData?.[0]?.onboarded
-  const { OnboardingComponent } = useOnboarding()
 
-  return !hasQueryBeenLoaded(settingsQuery) ? (
-    <Spinner
-      size="xxlarge"
-      className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-    />
-  ) : (
-    <Route
-      {...rest}
-      render={props => {
-        const isOnboardingPage = rest?.path === '/paper/onboarding'
+  const isAlreadyOnboarded =
+    (isOnboardingPage && onboarded === true) ||
+    (isOnboardingPage && !OnboardingComponent)
 
-        if (
-          (isOnboardingPage && onboarded === true) ||
-          (isOnboardingPage && !OnboardingComponent)
-        ) {
-          return <Redirect to="/paper" />
-        } else if (
-          !isOnboardingPage &&
-          onboarded !== true &&
-          OnboardingComponent
-        ) {
-          return <Redirect to="/paper/onboarding" />
-        } else if (Component) {
-          return <Component {...props} />
-        } else {
-          return render(props)
-        }
-      }}
-    />
-  )
+  const isNotOnboarded =
+    !isOnboardingPage && onboarded !== true && OnboardingComponent
+
+  if (isAlreadyOnboarded) {
+    return <Navigate to="/" replace />
+  }
+
+  if (isNotOnboarded) {
+    return <Navigate to="onboarding" replace />
+  }
+
+  return <Outlet />
 }
 
 export default OnboardedGuardedRoute

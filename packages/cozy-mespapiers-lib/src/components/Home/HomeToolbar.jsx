@@ -1,6 +1,7 @@
 /* global cozy */
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
+
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -13,14 +14,14 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 const HomeToolbar = () => {
   const { t } = useI18n()
   const { isDesktop } = useBreakpoints()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { setIsMultiSelectionActive } = useMultiSelection()
   const { BarRight, BarLeft, BarCenter } = cozy.bar
 
   return (
     <>
       <BarLeft>
-        <IconButton onClick={() => history.goBack()}>
+        <IconButton onClick={() => navigate(-1)}>
           <Icon icon="previous" />
         </IconButton>
       </BarLeft>

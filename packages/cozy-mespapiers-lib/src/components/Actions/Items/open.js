@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -10,7 +10,7 @@ export const open = () => {
     name: 'open',
     Component: function Open({ className, files }) {
       const { t } = useI18n()
-      const history = useHistory()
+      const navigate = useNavigate()
       const fileId = files[0]?._id
       const fileTheme = files[0]?.metadata?.qualification?.label
 
@@ -19,7 +19,7 @@ export const open = () => {
           className={className}
           icon="openwith"
           onClick={() =>
-            history.push({
+            navigate({
               pathname: `/paper/file/${fileTheme}/${fileId}`
             })
           }

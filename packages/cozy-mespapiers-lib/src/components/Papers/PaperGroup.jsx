@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import PropTypes from 'prop-types'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -19,8 +19,8 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
+  const navigate = useNavigate()
   const client = useClient()
-  const history = useHistory()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
   const { isMultiSelectionActive } = useMultiSelection()
@@ -29,9 +29,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
     if (isMultiSelectionActive) {
       setSelectedThemeLabel(category)
     } else {
-      history.push({
-        pathname: `/paper/files/${category}`
-      })
+      navigate(`files/${category}`)
     }
   }
 

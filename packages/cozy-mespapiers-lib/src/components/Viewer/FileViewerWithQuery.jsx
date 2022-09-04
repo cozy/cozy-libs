@@ -8,24 +8,19 @@ import FileViewerLoading from './FileViewerLoading'
 import FilesViewer from './FilesViewer'
 
 import 'cozy-sharing/dist/stylesheet.css'
+import { useNavigate, useParams } from 'react-router-dom'
 
-const FilesViewerWithQuery = props => {
-  const { history, match } = props
+const FilesViewerWithQuery = () => {
+  const navigate = useNavigate()
+  const params = useParams()
   const client = useClient()
 
-  const currentFileId = match?.params?.fileId ?? null
-  const currentFileTheme = match?.params?.fileTheme
+  const currentFileId = params?.fileId ?? null
   const buildedFilesQuery = buildViewerFileQuery(currentFileId)
   const filesQuery = useQuery(
     buildedFilesQuery.definition,
     buildedFilesQuery.options
   )
-
-  const handleClose = () => {
-    return history.length > 0
-      ? history.goBack()
-      : history.push(`/paper/files/${currentFileTheme}`)
-  }
 
   if (filesQuery.data?.length > 0) {
     return (
@@ -38,8 +33,8 @@ const FilesViewerWithQuery = props => {
           fileId={currentFileId}
           files={filesQuery.data}
           filesQuery={filesQuery}
-          onClose={handleClose}
-          onChange={fileId => history.push(`/paper/file/${fileId}`)}
+          onClose={() => navigate(-1)}
+          onChange={fileId => navigate(`/paper/file/${fileId}`)}
         />
       </SharingProvider>
     )

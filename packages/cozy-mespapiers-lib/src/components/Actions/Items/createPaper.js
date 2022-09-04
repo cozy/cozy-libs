@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -10,7 +10,7 @@ export const createPaper = ({ hideActionsMenu }) => {
     name: 'createPaper',
     Component: function CreatePaper({ className }) {
       const { t } = useI18n()
-      const history = useHistory()
+      const navigate = useNavigate()
       const { pathname } = useLocation()
 
       return (
@@ -18,7 +18,7 @@ export const createPaper = ({ hideActionsMenu }) => {
           className={className}
           icon="paper"
           onClick={() => {
-            history.push({
+            navigate({
               pathname: `/paper/create`,
               search: `backgroundPath=${pathname}`
             })

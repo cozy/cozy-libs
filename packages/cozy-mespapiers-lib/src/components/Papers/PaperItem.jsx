@@ -1,5 +1,5 @@
 import React from 'react'
-import { useHistory } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
@@ -44,7 +44,7 @@ const PaperItem = ({
   const style = useStyles()
   const { f, t } = useI18n()
   const client = useClient()
-  const history = useHistory()
+  const navigate = useNavigate()
   const {
     allMultiSelectionFiles,
     isMultiSelectionActive,
@@ -63,7 +63,7 @@ const PaperItem = ({
     if (isMultiSelectionChoice) {
       changeCurrentMultiSelectionFile(paper)
     } else {
-      history.push({
+      navigate({
         pathname: `/paper/file/${paperTheme}/${paper._id}`
       })
     }
