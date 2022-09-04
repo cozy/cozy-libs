@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react'
-import { Redirect } from 'react-router-dom'
+import { Navigate, useNavigate, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
@@ -18,14 +18,16 @@ import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PapersListToolbar from './PapersListToolbar'
 
-const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
+const PapersListWrapper = ({ selectedThemeLabel = null }) => {
+  const params = useParams()
+  const navigate = useNavigate()
   const scannerT = useScannerI18n()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
   const { setIsMultiSelectionActive, isMultiSelectionActive } =
     useMultiSelection()
 
-  const currentFileTheme = match?.params?.fileTheme ?? selectedThemeLabel
+  const currentFileTheme = params?.fileTheme ?? selectedThemeLabel
   const themeLabel = scannerT(`items.${currentFileTheme}`)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
@@ -72,7 +74,7 @@ const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
   const hasNoFiles = !isLoadingFiles && files.length === 0
 
   if (hasNoFiles) {
-    return <Redirect to="/paper" />
+    return <Navigate to="/" replace />
   }
 
   return (
@@ -80,7 +82,7 @@ const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
       {!isMultiSelectionActive && (
         <PapersListToolbar
           title={themeLabel}
-          onBack={() => history.push('/paper')}
+          onBack={() => navigate('/')}
           onClose={() => setIsMultiSelectionActive(false)}
         />
       )}
@@ -98,12 +100,6 @@ const PapersListWrapper = ({ history, match, selectedThemeLabel = null }) => {
 }
 
 PapersListWrapper.propTypes = {
-  history: PropTypes.object,
-  match: PropTypes.shape({
-    params: PropTypes.shape({
-      fileTheme: PropTypes.string.isRequired
-    })
-  }),
   selectedThemeLabel: PropTypes.string
 }
 

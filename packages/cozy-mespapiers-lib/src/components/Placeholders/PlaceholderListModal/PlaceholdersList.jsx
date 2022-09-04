@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
@@ -41,7 +41,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
     useState(false)
   const [placeholderSelected, setPlaceholderSelected] = useState(null)
   const { papersDefinitions } = usePapersDefinitions()
-  const history = useHistory()
+  const navigate = useNavigate()
   const { search } = useLocation()
   const styles = useStyles()
   const scannerT = useScannerI18n()
@@ -64,7 +64,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   }
 
   const redirectPaperCreation = placeholder => {
-    return history.push({
+    return navigate({
       pathname: `/paper/create/${placeholder.label}`,
       search: `deepBack&backgroundPath=${backgroundPath}`
     })

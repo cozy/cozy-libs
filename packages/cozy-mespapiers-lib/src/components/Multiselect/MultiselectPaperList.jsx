@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -11,7 +10,6 @@ import PapersListWrapper from '../Papers/PapersListWrapper'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const MultiselectPaperList = ({ setIsFilePickerActive }) => {
-  const history = useHistory()
   const [selectedThemeLabel, setSelectedThemeLabel] = useState(null)
   const { t } = useI18n()
   const {
@@ -59,10 +57,7 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
         !selectedThemeLabel ? (
           <Home setSelectedThemeLabel={setSelectedThemeLabel} />
         ) : (
-          <PapersListWrapper
-            history={history}
-            selectedThemeLabel={selectedThemeLabel}
-          />
+          <PapersListWrapper selectedThemeLabel={selectedThemeLabel} />
         )
       }
       actions={

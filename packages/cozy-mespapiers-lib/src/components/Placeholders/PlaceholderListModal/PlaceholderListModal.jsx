@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
-import { useHistory } from 'react-router-dom'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
@@ -16,7 +16,7 @@ const defaultState = {
 
 const PlaceholderListModal = () => {
   const { t } = useI18n()
-  const history = useHistory()
+  const navigate = useNavigate()
   const scannerT = useScannerI18n()
   const [state, setState] = useState(defaultState)
 
@@ -36,7 +36,7 @@ const PlaceholderListModal = () => {
     <FixedDialog
       open
       disableGutters
-      onClose={history.goBack}
+      onClose={() => navigate(-1)}
       transitionDuration={state.onBack ? 0 : undefined}
       title={t('PlaceholdersList.title', { name: '' })}
       content={<PlaceholderThemesList setQualifByTheme={setQualifByTheme} />}
@@ -45,7 +45,7 @@ const PlaceholderListModal = () => {
     <FixedDialog
       open
       disableGutters
-      onClose={history.goBack}
+      onClose={() => navigate(-1)}
       onBack={resetCurrentQualif}
       transitionDuration={0}
       title={t('PlaceholdersList.title', {

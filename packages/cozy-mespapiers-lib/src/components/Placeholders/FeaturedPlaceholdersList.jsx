@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react'
-import { useHistory, useLocation } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
@@ -16,7 +16,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   const { t } = useI18n()
   const [isImportDropdownDisplayed, setIsImportDropdownDisplayed] =
     useState(false)
-  const history = useHistory()
+  const navigate = useNavigate()
   const location = useLocation()
 
   const hideImportDropdown = () => {
@@ -25,7 +25,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   }
 
   const redirectPaperCreation = placeholder => {
-    return history.push({
+    return navigate({
       pathname: `/paper/create/${placeholder.label}`,
       search: `backgroundPath=${location.pathname}`
     })
