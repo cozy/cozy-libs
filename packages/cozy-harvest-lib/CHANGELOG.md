@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.7...cozy-harvest-lib@9.26.8) (2022-09-06)
+
+
+### Bug Fixes
+
+* Open oauth window for oauth connectors ([e8293f6](https://github.com/cozy/cozy-libs/commit/e8293f659d3d9bb643fb528b4328885ba451e79e))
+
+
+
+
+
 ## [9.26.7](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.6...cozy-harvest-lib@9.26.7) (2022-09-06)
 
 **Note:** Version bump only for package cozy-harvest-lib
