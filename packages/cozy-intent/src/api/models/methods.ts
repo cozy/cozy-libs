@@ -1,12 +1,17 @@
 import { AppManifest, FlagshipUI } from '../../api'
 
 export type NativeMethodsRegister = {
-  backToHome: () => void
-  hideSplashScreen: () => void
-  logout: () => void
-  openApp: (href: string, app: AppManifest, iconParams?: DOMRect) => void
-  setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => void
-  showSplashScreen: () => void
+  backToHome: () => Promise<null>
+  hideSplashScreen: () => Promise<null>
+  logout: () => Promise<null>
+  openApp: (
+    href: string,
+    app: AppManifest,
+    iconParams?: DOMRect
+  ) => Promise<null>
+  openSettingBiometry: () => Promise<boolean>
+  setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => Promise<null>
+  showSplashScreen: () => Promise<null>
 }
 
 export type WebviewMethods = Record<string, () => unknown>

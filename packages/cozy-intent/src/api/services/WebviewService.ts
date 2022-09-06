@@ -21,7 +21,7 @@ export class WebviewService {
   public call = (
     methodName: keyof NativeMethodsRegister,
     ...args: Parameters<NativeMethodsRegister[keyof NativeMethodsRegister]>
-  ): Promise<void> => this.remoteHandle.call(methodName, ...args)
+  ): Promise<boolean | null> => this.remoteHandle.call(methodName, ...args)
 
   public closeMessenger = (): void => this.close()
 }
