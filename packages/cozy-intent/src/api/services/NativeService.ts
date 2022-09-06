@@ -136,7 +136,7 @@ export class NativeService {
     uri: string,
     methodName: keyof WebviewMethods,
     ...args: Parameters<NativeMethodsRegister[keyof NativeMethodsRegister]>
-  ): Promise<void> | void =>
+  ): ReturnType<NativeMethodsRegister[keyof NativeMethodsRegister]> | void =>
     this.messengerRegister[this.getHostname(uri)]?.connection
       ?.remoteHandle()
       .call(methodName, ...args)
