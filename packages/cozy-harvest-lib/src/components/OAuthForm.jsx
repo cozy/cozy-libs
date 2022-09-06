@@ -138,7 +138,7 @@ export class OAuthForm extends PureComponent {
             onClick={this.handleConnect}
           />
         )}
-        {showOAuthWindow && extraParams && (
+        {showOAuthWindow && (!needExtraParams || extraParams) && (
           <OAuthWindow
             extraParams={extraParams}
             konnector={konnector}
