@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.3.0 (2022-09-06)
+
+
+### Bug Fixes
+
+* Use correct image size ([d290c39](https://github.com/cozy/cozy-libs/commit/d290c39a26edfdd7e35fbe3f6822ac7e3dc5f769))
+
+
+### Features
+
+* Update FlagshipMetadata interface ([d8da519](https://github.com/cozy/cozy-libs/commit/d8da519be2a54602d856ba3eecb4b2a6e18b74e5))
+
+
+
+
+
 ## 2.2.2 (2022-08-01)
 
 **Note:** Version bump only for package cozy-device-helper
