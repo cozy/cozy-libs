@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.10](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.9...cozy-harvest-lib@9.26.10) (2022-09-07)
+
+
+### Bug Fixes
+
+* Hide BIContractActivationWindow begin the bi webview flag ([3f7e374](https://github.com/cozy/cozy-libs/commit/3f7e374d7ee7e60f1d25f965e75f50e994b4dc68))
+
+
+
+
+
 ## [9.26.9](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.8...cozy-harvest-lib@9.26.9) (2022-09-07)
 
 **Note:** Version bump only for package cozy-harvest-lib
