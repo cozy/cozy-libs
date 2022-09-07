@@ -9,6 +9,7 @@ import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
+import flag from 'cozy-flags'
 
 import withLocales from '../../hoc/withLocales'
 import BIContractActivationWindow from './BiContractActivationWindow'
@@ -70,12 +71,14 @@ const DumbContracts = ({
                 />
               )
             })}
-          <BIContractActivationWindow
-            konnector={konnector}
-            account={account}
-            intentsApi={intentsApi}
-            innerAccountModalOverrides={innerAccountModalOverrides}
-          />
+          {flag('harvest.bi.webview') && (
+            <BIContractActivationWindow
+              konnector={konnector}
+              account={account}
+              intentsApi={intentsApi}
+              innerAccountModalOverrides={innerAccountModalOverrides}
+            />
+          )}
         </NavigationListSection>
       </NavigationList>
     </MuiCozyTheme>
