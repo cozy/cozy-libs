@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.3.2...cozy-intent@2.4.0) (2022-09-07)
+
+
+### Features
+
+* Update methods interface for biometry ([a8a3062](https://github.com/cozy/cozy-libs/commit/a8a30624b33250c4b306c51f428bbec2c0325be9))
+
+
+
+
+
 ## 2.3.2 (2022-08-29)
 
 **Note:** Version bump only for package cozy-intent
