@@ -28,7 +28,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -47,7 +48,8 @@
         },
         {
           "stepIndex": 2,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -78,7 +80,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -112,7 +115,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -146,7 +150,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -168,7 +173,8 @@
         },
         {
           "stepIndex": 2,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -239,7 +245,8 @@
         },
         {
           "stepIndex": 5,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -272,7 +279,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -295,7 +303,8 @@
         },
         {
           "stepIndex": 2,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -342,7 +351,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -389,8 +399,9 @@
           ]
         },
         {
-          "stepIndex": 3,
-          "model": "owner",
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -425,7 +436,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -462,7 +474,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -525,7 +538,8 @@
         },
         {
           "stepIndex": 5,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -558,7 +572,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -606,7 +621,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -654,7 +670,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -703,7 +720,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -752,7 +770,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -800,7 +819,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -849,7 +869,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -897,7 +918,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -946,7 +968,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -980,7 +1003,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1014,7 +1038,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -1047,7 +1072,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1084,7 +1110,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1121,7 +1148,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -1154,7 +1182,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1209,7 +1238,8 @@
         },
         {
           "stepIndex": 5,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -1242,7 +1272,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -1275,7 +1306,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -1319,7 +1351,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1363,7 +1396,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ],
@@ -1414,7 +1448,8 @@
         },
         {
           "stepIndex": 4,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1446,7 +1481,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1480,7 +1516,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
@@ -1514,7 +1551,8 @@
         },
         {
           "stepIndex": 3,
-          "model": "owner",
+          "illustration": "Account.svg",
+          "model": "contact",
           "text": "PaperJSON.generic.owner.text"
         }
       ]

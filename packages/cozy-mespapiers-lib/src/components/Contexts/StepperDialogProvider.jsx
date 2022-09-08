@@ -1,7 +1,4 @@
 import React, { createContext, useEffect, useState } from 'react'
-import { filterWithRemaining } from '../../helpers/filterWithRemaining'
-
-const isOwner = item => item === 'owner'
 
 const StepperDialogContext = createContext()
 
@@ -26,26 +23,7 @@ const StepperDialogProvider = ({ children }) => {
         const allCurrentStepsDefinitionsSorted =
           allCurrentStepsDefinitions.sort((a, b) => a.stepIndex - b.stepIndex)
 
-        // Despite its presence in the PapersDefinitions.json, it is not yet expected that the Contact step will be anywhere but in the last position
-        const {
-          itemsFound: contactStep,
-          remainingItems: allStepsWithoutContact
-        } = filterWithRemaining(allCurrentStepsDefinitionsSorted, isOwner)
-
-        const { stepIndex: lastStepIndex } = allStepsWithoutContact
-          .slice(-1)
-          .pop()
-
-        setAllCurrentSteps([
-          ...allStepsWithoutContact,
-          {
-            stepIndex: lastStepIndex + 1,
-            multiple: contactStep[0]?.multiple || false,
-            illustration: 'Account.svg',
-            text: 'PaperJSON.generic.owner.text',
-            model: 'contact'
-          }
-        ])
+        setAllCurrentSteps(allCurrentStepsDefinitionsSorted)
       }
     }
   }, [currentDefinition])
