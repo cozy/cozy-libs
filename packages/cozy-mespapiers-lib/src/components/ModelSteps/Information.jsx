@@ -12,12 +12,11 @@ import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { useFormData } from '../Hooks/useFormData'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
 import CompositeHeader from '../CompositeHeader/CompositeHeader'
-import InputDateAdapter from '../ModelSteps/widgets/InputDateAdapter'
-import InputTextAdapter from '../ModelSteps/widgets/InputTextAdapter'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import { hasNextvalue } from '../../utils/hasNextvalue'
 import { KEYS } from '../../constants/const'
+import { getInputsInformationStep } from '../../helpers/getInputsInformationStep'
 
 const Information = ({ currentStep }) => {
   const { t } = useI18n()
@@ -51,42 +50,7 @@ const Information = ({ currentStep }) => {
 
   useEventListener(window, 'keydown', handleKeyDown)
 
-  const inputs = useMemo(
-    () =>
-      attributes
-        ? attributes.map(attrs => {
-            switch (attrs.type) {
-              case 'date':
-                return function InputDate(props) {
-                  return (
-                    <InputDateAdapter
-                      attrs={attrs}
-                      defaultValue={formData.metadata[attrs.name]}
-                      setValue={setValue}
-                      setValidInput={setValidInput}
-                      setIsFocus={setIsFocus}
-                      {...props}
-                    />
-                  )
-                }
-              default:
-                return function InputText(props) {
-                  return (
-                    <InputTextAdapter
-                      attrs={attrs}
-                      defaultValue={formData.metadata[attrs.name]}
-                      setValue={setValue}
-                      setValidInput={setValidInput}
-                      setIsFocus={setIsFocus}
-                      {...props}
-                    />
-                  )
-                }
-            }
-          })
-        : [],
-    [attributes, formData.metadata]
-  )
+  const inputs = getInputsInformationStep(attributes)
 
   const hasMarginBottom = useCallback(
     idx => hasNextvalue(idx, inputs),
@@ -110,7 +74,7 @@ const Information = ({ currentStep }) => {
         className={isFocus && isIOS() ? 'is-focused' : ''}
         fallbackIcon={fallbackIcon}
         title={t(text)}
-        text={inputs.map((Input, idx) => (
+        text={inputs.map(({ Component, attrs }, idx) => (
           <div
             key={idx}
             className={cx({
@@ -118,7 +82,14 @@ const Information = ({ currentStep }) => {
               ['u-h-3 u-pb-1-half']: hasMarginBottom(idx)
             })}
           >
-            <Input idx={idx} />
+            <Component
+              attrs={attrs}
+              defaultValue={formData.metadata[attrs.name]}
+              setValue={setValue}
+              setValidInput={setValidInput}
+              setIsFocus={setIsFocus}
+              idx={idx}
+            />
           </div>
         ))}
       />
