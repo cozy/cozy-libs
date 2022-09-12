@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@2.3.0...cozy-device-helper@2.4.0) (2022-09-12)
+
+
+### Features
+
+* Update FlagshipMetadata interface ([b82cf89](https://github.com/cozy/cozy-libs/commit/b82cf899534edade60f5e1157d614becebe6c5e7))
+
+
+
+
+
 # 2.3.0 (2022-09-06)
 
 
