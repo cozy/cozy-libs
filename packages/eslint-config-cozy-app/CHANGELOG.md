@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.1.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@5.0.0...eslint-config-cozy-app@5.1.0) (2022-09-12)
+
+
+### Features
+
+* Add new extend for TS files in lint conf ([70c0370](https://github.com/cozy/cozy-libs/commit/70c03703827ce7a2951c78c23636d8ae8510a3f4))
+
+
+
+
+
 # 5.0.0 (2022-08-31)
 
 
