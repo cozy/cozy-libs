@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.4.0...cozy-intent@2.5.0) (2022-09-12)
+
+
+### Features
+
+* **cozy-intent:** Update cozy-settings switch API ([5b0337c](https://github.com/cozy/cozy-libs/commit/5b0337c3c89e806e307d1429c1a02a434426c41c))
+
+
+
+
+
 # [2.4.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.3.2...cozy-intent@2.4.0) (2022-09-07)
 
 
