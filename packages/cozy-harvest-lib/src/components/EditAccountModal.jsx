@@ -184,11 +184,12 @@ export class EditAccountModal extends Component {
      * When we are on mobile, we display a back button
      * On desktop we display a cross
      */
-    const { konnector, reconnect } = this.props
+    const { konnector, reconnect, intentsApi } = this.props
     const { trigger, account, fetching } = this.state
     return (
       <DumbEditAccountModal
         konnector={konnector}
+        intentsApi={intentsApi}
         account={account}
         trigger={trigger}
         fetching={fetching}
