@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.8.15...cozy-mespapiers-lib@2.0.0) (2022-09-14)
+
+
+### Bug Fixes
+
+* FilterButton proptypes ([3a82091](https://github.com/cozy/cozy-libs/commit/3a82091ef074a1e2aee6fec8dbb775fc1e5103f9))
+* Pass only the necessary props on PaperFab component ([8ef36cc](https://github.com/cozy/cozy-libs/commit/8ef36cc4dfbec768b9a0a70e6857fb2b4f41425c))
+
+
+### Features
+
+* Upgrade react-router-dom to 6.3.0 ([abafcb5](https://github.com/cozy/cozy-libs/commit/abafcb5bcf044b336168ab25f60f0f9fffcf8bf1))
+
+
+### BREAKING CHANGES
+
+* See https://reactrouter.com/en/v6.3.0/upgrading/v5
+for update your router
+
+
+
+
+
 ## [1.8.15](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@1.8.14...cozy-mespapiers-lib@1.8.15) (2022-09-12)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
