@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.13](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.12...cozy-harvest-lib@9.26.13) (2022-09-15)
+
+
+### Bug Fixes
+
+* Add missing intentsApi prop in DumbEditAccountModal ([bc4ac01](https://github.com/cozy/cozy-libs/commit/bc4ac01b734f51091c24091e543d55315a4a24f1))
+
+
+
+
+
 ## [9.26.12](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.11...cozy-harvest-lib@9.26.12) (2022-09-12)
 
 **Note:** Version bump only for package cozy-harvest-lib
