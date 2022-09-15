@@ -66,7 +66,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const redirectPaperCreation = placeholder => {
     return navigate({
       pathname: `/paper/create/${placeholder.label}`,
-      search: `deepBack&backgroundPath=${backgroundPath}`
+      search: `backgroundPath=${backgroundPath}`
     })
   }
 
