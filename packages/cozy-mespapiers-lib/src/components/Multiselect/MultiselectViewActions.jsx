@@ -8,7 +8,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { LinearProgress } from 'cozy-ui/transpiled/react/Progress'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 

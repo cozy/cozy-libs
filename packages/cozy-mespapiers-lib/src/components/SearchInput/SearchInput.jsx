@@ -6,7 +6,7 @@ import InputGroup from 'cozy-ui/transpiled/react/InputGroup'
 import Input from 'cozy-ui/transpiled/react/Input'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles(theme => ({
   input: {

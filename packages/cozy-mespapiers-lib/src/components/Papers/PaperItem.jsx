@@ -14,7 +14,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import CardMedia from 'cozy-ui/transpiled/react/CardMedia'
 import FileImageLoader from 'cozy-ui/transpiled/react/FileImageLoader'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
-import makeStyles from 'cozy-ui/transpiled/react/helpers/makeStyles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import RenameInput from './Renaming/RenameInput'
