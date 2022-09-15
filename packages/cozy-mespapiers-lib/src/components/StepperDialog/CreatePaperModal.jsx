@@ -11,10 +11,10 @@ import StepperDialogWrapper from './StepperDialogWrapper'
 const CreatePaperModal = () => {
   const { search } = useLocation()
   const navigate = useNavigate()
-  const isDeepBack = search.includes('deepBack')
   const { qualificationLabel } = useParams()
   const { papersDefinitions } = usePapersDefinitions()
   const { setCurrentDefinition, currentDefinition } = useStepperDialog()
+  const backgroundPath = new URLSearchParams(search).get('backgroundPath')
   const allPlaceholders = useMemo(
     () =>
       findPlaceholdersByQualification(papersDefinitions, [
@@ -26,7 +26,7 @@ const CreatePaperModal = () => {
   )
 
   const formModel = allPlaceholders[0]
-  const onClose = () => navigate(isDeepBack ? -2 : -1)
+  const onClose = () => navigate(backgroundPath)
 
   useEffect(() => {
     if (formModel && currentDefinition !== formModel) {

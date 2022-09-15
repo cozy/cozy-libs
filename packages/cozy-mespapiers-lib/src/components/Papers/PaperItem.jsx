@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
@@ -45,6 +45,7 @@ const PaperItem = ({
   const { f, t } = useI18n()
   const client = useClient()
   const navigate = useNavigate()
+  const { pathname, search } = useLocation()
   const {
     allMultiSelectionFiles,
     isMultiSelectionActive,
@@ -63,8 +64,8 @@ const PaperItem = ({
     if (isMultiSelectionChoice) {
       changeCurrentMultiSelectionFile(paper)
     } else {
-      navigate({
-        pathname: `/paper/file/${paperTheme}/${paper._id}`
+      navigate(`/paper/file/${paperTheme}/${paper._id}`, {
+        state: { background: `${pathname}${search}` }
       })
     }
   }
