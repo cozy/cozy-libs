@@ -9,6 +9,8 @@ import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 import PlaceholderListModal from './Placeholders/PlaceholderListModal/PlaceholderListModal'
 import CreatePaperModal from './StepperDialog/CreatePaperModal'
 import OnboardingWrapper from './Onboarding/OnboardingWrapper'
+import InformationEditWrapper from './ModelSteps/Edit/InformationEditWrapper'
+import PageEdit from './ModelSteps/Edit/PageEdit'
 
 export const AppRouter = () => {
   const location = useLocation()
@@ -39,6 +41,11 @@ export const AppRouter = () => {
             path="create/:qualificationLabel"
             element={<CreatePaperModal />}
           />
+          <Route
+            path="edit/information/:fileId"
+            element={<InformationEditWrapper />}
+          />
+          <Route path="edit/page/:fileId" element={<PageEdit />} />
         </Routes>
       )}
     </>
