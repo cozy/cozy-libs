@@ -9,6 +9,7 @@ import ForwardOrDownloadButton from 'cozy-ui/transpiled/react/Viewer/Footer/Forw
 
 import FileViewerLoading from './FileViewerLoading'
 import SelectFileButton from './SelectFileButton'
+import { useLocation } from 'react-router-dom'
 
 const styleStatusBar = switcher => {
   if (window.StatusBar && isIOSApp()) {
@@ -28,6 +29,12 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
   const [currentFile, setCurrentFile] = useState(null)
   const [fetchingMore, setFetchingMore] = useState(false)
   const client = useClient()
+  const { pathname } = useLocation()
+
+  const editPathByModelProps = {
+    information: `#/paper/edit/information/${fileId}?metadata=__NAME__&backgroundPath=${pathname}`,
+    page: `#/paper/edit/page/${fileId}?backgroundPath=${pathname}`
+  }
 
   const handleOnClose = () => {
     if (onClose) onClose()
@@ -124,6 +131,7 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
         currentIndex={viewerIndex}
         onChangeRequest={handleOnChange}
         onCloseRequest={handleOnClose}
+        editPathByModelProps={editPathByModelProps}
       >
         <FooterActionButtons>
           <ForwardOrDownloadButton />
