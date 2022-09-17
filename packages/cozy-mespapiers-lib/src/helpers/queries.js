@@ -69,3 +69,11 @@ export const buildContactsQueryByIds = (ids = []) => ({
     fetchPolicy: defaultFetchPolicy
   }
 })
+
+export const buildFilesQueryById = id => ({
+  definition: Q(FILES_DOCTYPE).getById(id),
+  options: {
+    as: `${FILES_DOCTYPE}/${id}`,
+    fetchPolicy: defaultFetchPolicy
+  }
+})
