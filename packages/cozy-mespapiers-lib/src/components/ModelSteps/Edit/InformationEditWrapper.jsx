@@ -15,7 +15,7 @@ import { FILES_DOCTYPE } from '../../../doctypes'
 import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
 import IlluGenericInputText from '../../../assets/icons/IlluGenericInputText.svg'
-import { getInputsInformationStep } from '../../../helpers/getInputsInformationStep'
+import { makeInputsInformationStep } from '../../../helpers/makeInputsInformationStep'
 import { useCurrentEditInformation } from './useCurrentEditInformation'
 import { isInformationEditPermitted, updateFileMetadata } from './helpers'
 

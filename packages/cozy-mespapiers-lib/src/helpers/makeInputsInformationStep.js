@@ -25,7 +25,7 @@ const inputInformationSpecs = {
  * @param {Object[]} attributes - Array of PapersDefinitions attributes
  * @returns {{ Component: Object, attrs: Object }[]}
  */
-export const getInputsInformationStep = (attributes = []) => {
+export const makeInputsInformationStep = (attributes = []) => {
   const inputs = []
 
   for (const attrs of attributes) {
