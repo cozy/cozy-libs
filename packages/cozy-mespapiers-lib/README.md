@@ -104,6 +104,16 @@ const AppRouter = () => {
 Then inside your route component, you have to import exposed component from `cozy-mespapiers-lib`.
 :warning: You must pass it the `lang` prop of the application so that it uses the right locales files.
 
+## Styles
+
+You need to add the following import to the base of your application:
+
+```
+import 'cozy-mespapiers-lib/dist/stylesheet.css'
+```
+
+***
+
 # Components Overload
 
 You can also overload some components (currently only the `PapersFab` & `Onboarding` components) or not use them (with `null` value).
