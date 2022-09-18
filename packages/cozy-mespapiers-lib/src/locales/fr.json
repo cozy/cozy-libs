@@ -26,6 +26,7 @@
   "common": {
     "add": "Ajouter",
     "cancel": "Annuler",
+    "apply": "Appliquer",
     "downloadFile": {
       "error": {
         "offline": "Vous devez être connecté pour pouvoir télécharger ce fichier",
