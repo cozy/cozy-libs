@@ -291,5 +291,10 @@
     "content": "Vous êtes sur le point de changer l'extension du fichier. Voulez-vous continuer ?",
     "cancel": "Annuler",
     "submit": "Continuer"
+  },
+  "PageEdit": {
+    "title": "Face du document",
+    "back": "Face arrière",
+    "front": "Face avant"
   }
 }

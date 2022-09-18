@@ -291,5 +291,10 @@
     "content": "You are about to change the file extension. Do you want to continue?",
     "cancel": "Cancel",
     "submit": "Continue"
+  },
+  "PageEdit": {
+    "title": "Face of the document",
+    "back": "Back",
+    "front": "Front"
   }
 }
