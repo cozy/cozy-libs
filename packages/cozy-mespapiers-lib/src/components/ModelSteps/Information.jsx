@@ -16,7 +16,7 @@ import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import { hasNextvalue } from '../../utils/hasNextvalue'
 import { KEYS } from '../../constants/const'
-import { getInputsInformationStep } from '../../helpers/getInputsInformationStep'
+import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
 
 const Information = ({ currentStep }) => {
   const { t } = useI18n()
@@ -50,7 +50,7 @@ const Information = ({ currentStep }) => {
 
   useEventListener(window, 'keydown', handleKeyDown)
 
-  const inputs = getInputsInformationStep(attributes)
+  const inputs = makeInputsInformationStep(attributes)
 
   const hasMarginBottom = useCallback(
     idx => hasNextvalue(idx, inputs),

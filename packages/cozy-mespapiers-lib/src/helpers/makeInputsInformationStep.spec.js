@@ -1,6 +1,6 @@
 import InputDateAdapter from '../components/ModelSteps/widgets/InputDateAdapter'
 import InputTextAdapter from '../components/ModelSteps/widgets/InputTextAdapter'
-import { getInputsInformationStep } from './getInputsInformationStep'
+import { makeInputsInformationStep } from './makeInputsInformationStep'
 
 const attributes = [
   {
@@ -34,22 +34,22 @@ const inputDateExpected = {
   }
 }
 
-describe('getInputsInformationStep', () => {
+describe('makeInputsInformationStep', () => {
   it('should return empty array', () => {
-    const res = getInputsInformationStep()
+    const res = makeInputsInformationStep()
     expect(res).toEqual([])
   })
 
   it('should return a array of Input of type text', () => {
-    const res = getInputsInformationStep([attributes[0]])
+    const res = makeInputsInformationStep([attributes[0]])
     expect(res).toEqual([inputTextExpected])
   })
   it('should return a array of Input of type date', () => {
-    const res = getInputsInformationStep([attributes[1]])
+    const res = makeInputsInformationStep([attributes[1]])
     expect(res).toEqual([inputDateExpected])
   })
   it('should return a array of Input of type text & date', () => {
-    const res = getInputsInformationStep(attributes)
+    const res = makeInputsInformationStep(attributes)
     expect(res).toEqual([inputTextExpected, inputDateExpected])
   })
 })
