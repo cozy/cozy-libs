@@ -63,6 +63,21 @@ describe('decryptString', () => {
       orgKey
     )
   })
+
+  it('should return empty if the encrypted string is empty', async () => {
+    const res = await decryptString(
+      '',
+      mockVaultClient,
+      new SymmetricCryptoKey('123', 2)
+    )
+    expect(res).toEqual('')
+  })
+
+  it('should throw if the encrypted string is empty', async () => {
+    await expect(
+      decryptString('|', mockVaultClient, new SymmetricCryptoKey('123', 2))
+    ).rejects.toThrowError()
+  })
 })
 
 describe('getOrganizationKey', () => {

@@ -5,9 +5,25 @@ import Polyglot from 'node-polyglot'
 import { Q } from 'cozy-client'
 import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
+import logger from './logger'
 
-export const decryptString = (encryptedString, vaultClient, orgKey) => {
+/**
+ * Decrypt the given string with the organization key
+ *
+ * @param {string} encryptedString - The encrypted string
+ * @param {object} vaultClient - The vault client
+ * @param {ArrayBuffer} orgKey - The organization key
+ * @returns {Promise<string>} The decrypted string
+ */
+export const decryptString = async (encryptedString, vaultClient, orgKey) => {
+  if (!encryptedString) {
+    return ''
+  }
   const [encTypeAndIv, data, mac] = encryptedString.split('|')
+  if (!encTypeAndIv) {
+    logger.error('Encrypted string is malformed')
+    throw new Error('DECRYPT_FAILED')
+  }
   const [encTypeString, iv] = encTypeAndIv.split('.')
   const encType = parseInt(encTypeString, 10)
 
