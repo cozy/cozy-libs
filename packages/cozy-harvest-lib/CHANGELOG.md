@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.26.14](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.13...cozy-harvest-lib@9.26.14) (2022-09-19)
+
+
+### Bug Fixes
+
+* Deal with empty and malformed encrypted values ([b4a6406](https://github.com/cozy/cozy-libs/commit/b4a6406be80cec7d3b7246dc42c19a419e442224))
+
+
+
+
+
 ## [9.26.13](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.12...cozy-harvest-lib@9.26.13) (2022-09-15)
 
 
