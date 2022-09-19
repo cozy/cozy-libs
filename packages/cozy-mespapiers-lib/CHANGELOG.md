@@ -3,6 +3,39 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@3.0.0...cozy-mespapiers-lib@4.0.0) (2022-09-19)
+
+
+### Bug Fixes
+
+* **mespapiers:** Manage breaking change of cozy-ui 71.0.0 ([0fb2557](https://github.com/cozy/cozy-libs/commit/0fb255742d1a6aadf831786edecf87ea2ed803c7))
+
+
+### Features
+
+* **mespapiers:** Add helper to manage which input to display ([a71d0e0](https://github.com/cozy/cozy-libs/commit/a71d0e03ff4e7d528240d98be3c58c33428a6321))
+* **mespapiers:** Add InformationEditWrapper component ([9023793](https://github.com/cozy/cozy-libs/commit/9023793881740ed362588fce0e8fb4d4ee9b8122))
+* **mespapiers:** Add PageEditDesktop component ([6cb34ff](https://github.com/cozy/cozy-libs/commit/6cb34ff6e37545d59810d31ecc35847b7f09cd95))
+* **mespapiers:** Add PageEditItems component ([ca2501e](https://github.com/cozy/cozy-libs/commit/ca2501eb4707a5b0ec8cf9633e6472bdd6c23e6b))
+* **mespapiers:** Add PageEditMobile component ([49b7e8c](https://github.com/cozy/cozy-libs/commit/49b7e8cfecde005bbb49c9c25c3f72fa3b31d7fb))
+* **mespapiers:** Add PageEditWrapper component ([532c5c7](https://github.com/cozy/cozy-libs/commit/532c5c793b8900e55f0ed9f70170b744bd8ceb35))
+* **mespapiers:** Add two routes for edit file attributes ([aabe281](https://github.com/cozy/cozy-libs/commit/aabe281a32f27a2ba1f02afc5225be9ed5f9af97))
+* **mespapiers:** Add useCurrentEditInformation hook ([6a67638](https://github.com/cozy/cozy-libs/commit/6a676386ac7cd2643696531434c2001a641b2c3a))
+* **mespapiers:** Create paths  and use editPathByModelProps of Viewer ([79a7839](https://github.com/cozy/cozy-libs/commit/79a783965d5b0fc92925857d18e0503fe0ba0a44))
+* **mespapiers:** Update cozy-client to 33.0.6 ([48f4e81](https://github.com/cozy/cozy-libs/commit/48f4e818cb6a05a00853a96dee8073aa01610937))
+* **mespapiers:** Update cozy-ui to 74.7.0 ([ed9c039](https://github.com/cozy/cozy-libs/commit/ed9c0393d1cfe17c550cee08d8fe8f451f1a5b51))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** Needed in v73.0.0 of cozy-ui
+* **mespapiers:** To get the latest changes in the Viewer
+https://github.com/cozy/cozy-ui/pull/2246
+
+
+
+
+
 # [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@2.0.1...cozy-mespapiers-lib@3.0.0) (2022-09-19)
 
 
