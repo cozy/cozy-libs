@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [3.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@2.0.1...cozy-mespapiers-lib@3.0.0) (2022-09-19)
+
+
+### Features
+
+* **mespapiers:** Add stylus configuration ([d8c7f15](https://github.com/cozy/cozy-libs/commit/d8c7f15d9505e6262d3c65b029b207a3dafd8012))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** In order to have the css styles specific to some components of `cozy-mespapiers-lib`,
+you need to add the following import to the base of your application:
+`import 'cozy-mespapiers-lib/dist/stylesheet.css'`
+
+
+
+
+
 ## [2.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@2.0.0...cozy-mespapiers-lib@2.0.1) (2022-09-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
