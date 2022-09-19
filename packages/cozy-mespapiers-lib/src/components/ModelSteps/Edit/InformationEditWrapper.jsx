@@ -6,7 +6,6 @@ import { isIOS } from 'cozy-device-helper'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -19,28 +18,12 @@ import { makeInputsInformationStep } from '../../../helpers/makeInputsInformatio
 import { useCurrentEditInformation } from './useCurrentEditInformation'
 import { isInformationEditPermitted, updateFileMetadata } from './helpers'
 
-const useStyles = makeStyles(() => ({
-  container: {
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    textAlign: 'center',
-    margin: '3rem 1rem',
-    '&.is-focused': {
-      height: 'initial'
-    },
-    '& img': {
-      width: 'fit-content',
-      margin: '0 auto'
-    }
-  }
-}))
+import styles from './styles.styl'
 
 const InformationEditWrapper = () => {
   const { fileId } = useParams()
   const client = useClient()
   const { t } = useI18n()
-  const styles = useStyles()
   const { isMobile } = useBreakpoints()
   const scannerT = useScannerI18n()
   const navigate = useNavigate()
@@ -95,7 +78,7 @@ const InformationEditWrapper = () => {
       title={dialogTitle}
       content={
         <div
-          className={cx(styles.container, {
+          className={cx(styles['InformationEditWrapper-Dialog-container'], {
             'is-focused': isFocus && isIOS()
           })}
         >
