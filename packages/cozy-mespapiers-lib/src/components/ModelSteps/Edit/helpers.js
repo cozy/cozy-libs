@@ -52,5 +52,7 @@ export const makeCurrentStep = (currentPaperDef, model, metadataName) => {
       return makeCurrentInformationStep(currentPaperDef, metadataName)
     case 'page':
       return null
+    default:
+      return null
   }
 }
