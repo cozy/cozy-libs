@@ -1,6 +1,6 @@
 import { isInformationEditPermitted, updateFileMetadata } from './helpers'
 
-const currentStep = {
+const informationStep = {
   stepIndex: 4,
   model: 'information',
   illustration: 'IlluDriverLicenseObtentionDateHelp.png',
@@ -13,11 +13,15 @@ const currentStep = {
     }
   ]
 }
-const setup = ({ metadataName, currentStep } = {}) => {
+const makeFakeCurrentEditInformation = ({
+  metadataName,
+  currentStep,
+  fileMetadataName
+} = {}) => {
   return {
     file: {
       metadata: {
-        AObtentionDate: '2022-08-28T18:01:00.000Z'
+        [fileMetadataName]: '2022-08-28T18:01:00.000Z'
       }
     },
     currentStep,
@@ -38,28 +42,41 @@ describe('isInformationEditPermitted', () => {
     expect(res).toBe(false)
   })
   it('should return True if editing is permitted', () => {
-    const res = isInformationEditPermitted(
-      setup({ metadataName: 'AObtentionDate', currentStep })
-    )
+    const fakeCurrentEditInformation = makeFakeCurrentEditInformation({
+      metadataName: 'AObtentionDate',
+      currentStep: informationStep,
+      fileMetadataName: 'AObtentionDate'
+    })
+    const res = isInformationEditPermitted(fakeCurrentEditInformation)
 
     expect(res).toBe(true)
   })
   it('should return False if try editing "datetime" metadata', () => {
-    const res = isInformationEditPermitted(
-      setup({ metadataName: 'datetime', currentStep })
-    )
+    const fakeCurrentEditInformation = makeFakeCurrentEditInformation({
+      metadataName: 'datetime',
+      currentStep: informationStep,
+      fileMetadataName: 'AObtentionDate'
+    })
+    const res = isInformationEditPermitted(fakeCurrentEditInformation)
 
     expect(res).toBe(false)
   })
   it('should return False if the paper has no "currentStep"', () => {
-    const res = isInformationEditPermitted(setup({ metadataName: 'datetime' }))
+    const fakeCurrentEditInformation = makeFakeCurrentEditInformation({
+      metadataName: 'datetime',
+      fileMetadataName: 'AObtentionDate'
+    })
+    const res = isInformationEditPermitted(fakeCurrentEditInformation)
 
     expect(res).toBe(false)
   })
   it('should return False if tries to edit a metadata that does not exist on current file', () => {
-    const res = isInformationEditPermitted(
-      setup({ metadataName: 'expirationDate' })
-    )
+    const fakeCurrentEditInformation = makeFakeCurrentEditInformation({
+      metadataName: 'expirationDate',
+      currentStep: informationStep,
+      fileMetadataName: 'AObtentionDate'
+    })
+    const res = isInformationEditPermitted(fakeCurrentEditInformation)
 
     expect(res).toBe(false)
   })
