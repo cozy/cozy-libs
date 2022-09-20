@@ -46,12 +46,21 @@ const makeCurrentInformationStep = (currentPaperDef, metadataName) => {
   return currentInformationStep?.[0] ?? null
 }
 
+const getCurrentContactStep = currentPaperDef => {
+  return (
+    currentPaperDef?.acquisitionSteps?.find(step => step.model === 'contact') ??
+    null
+  )
+}
+
 export const makeCurrentStep = (currentPaperDef, model, metadataName) => {
   switch (model) {
     case 'information':
       return makeCurrentInformationStep(currentPaperDef, metadataName)
     case 'page':
       return null
+    case 'contact':
+      return getCurrentContactStep(currentPaperDef)
     default:
       return null
   }
