@@ -1,4 +1,8 @@
-import { isInformationEditPermitted, updateFileMetadata } from './helpers'
+import {
+  isInformationEditPermitted,
+  updateFileMetadata,
+  makeCurrentStep
+} from './helpers'
 
 const informationStep = {
   stepIndex: 4,
@@ -30,6 +34,40 @@ const makeFakeCurrentEditInformation = ({
     }
   }
 }
+
+const makeCurrentPaperDefinition = () => ({
+  acquisitionSteps: [
+    {
+      model: 'scan',
+      illustration: 'scan.png'
+    },
+    {
+      model: 'information',
+      illustration: 'illuNumber.png',
+      attributes: [
+        {
+          name: 'cardNumber',
+          type: 'text'
+        }
+      ]
+    },
+    {
+      model: 'information',
+      illustration: 'illuDate.png',
+      attributes: [
+        {
+          name: 'expirationDate',
+          type: 'date'
+        }
+      ]
+    },
+    {
+      model: 'contact',
+      illustration: 'contact.png'
+    }
+  ]
+})
+
 describe('isInformationEditPermitted', () => {
   it('should return False if has not param', () => {
     const res = isInformationEditPermitted()
@@ -138,5 +176,50 @@ describe('updateFileMetadata', () => {
       expirationDate: newExpirationDate,
       page: 'front'
     })
+  })
+})
+describe('makeCurrentStep', () => {
+  it('should return "information" step with "cardNumber" attribute name', () => {
+    const currentPaperDef = makeCurrentPaperDefinition()
+    const res = makeCurrentStep(currentPaperDef, 'information', 'cardNumber')
+
+    expect(res).toEqual({
+      attributes: [{ name: 'cardNumber', type: 'text' }],
+      illustration: 'illuNumber.png',
+      model: 'information'
+    })
+  })
+  it('should return "information" step with "expirationDate" attribute name', () => {
+    const currentPaperDef = makeCurrentPaperDefinition()
+    const res = makeCurrentStep(
+      currentPaperDef,
+      'information',
+      'expirationDate'
+    )
+
+    expect(res).toEqual({
+      attributes: [{ name: 'expirationDate', type: 'date' }],
+      illustration: 'illuDate.png',
+      model: 'information'
+    })
+  })
+
+  it('should return "null" if model is "page', () => {
+    const currentPaperDef = makeCurrentPaperDefinition()
+    const res = makeCurrentStep(currentPaperDef, 'page')
+
+    expect(res).toBe(null)
+  })
+  it('should return "null" if model doesn\'t exist', () => {
+    const currentPaperDef = makeCurrentPaperDefinition()
+    const res = makeCurrentStep(currentPaperDef, 'other', 'expirationDate')
+
+    expect(res).toBe(null)
+  })
+  it('should return "null" if attribute name doesn\'t exist', () => {
+    const currentPaperDef = makeCurrentPaperDefinition()
+    const res = makeCurrentStep(currentPaperDef, 'information', 'other')
+
+    expect(res).toBe(null)
   })
 })
