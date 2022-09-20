@@ -978,6 +978,7 @@
     {
       "label": "other_revenue",
       "icon": "bank",
+      "filenameModel": ["labelGivenByUser"],
       "featureDate": "referencedDate",
       "maxDisplay": 3,
       "acquisitionSteps": [
@@ -991,6 +992,20 @@
         {
           "stepIndex": 2,
           "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 40,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
@@ -1002,7 +1017,7 @@
           ]
         },
         {
-          "stepIndex": 3,
+          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
