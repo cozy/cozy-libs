@@ -28,3 +28,29 @@ export const updateFileMetadata = ({ file, type, metadataName, value }) => {
   }
   return newMetadata
 }
+
+const makeCurrentInformationStep = (currentPaperDef, metadataName) => {
+  const currentInformationStep = currentPaperDef?.acquisitionSteps
+    ?.filter(
+      step =>
+        step.model === 'information' &&
+        step.attributes.some(attr => attr.name === metadataName)
+    )
+    ?.map(step => {
+      return {
+        ...step,
+        attributes: step.attributes.filter(attr => attr.name === metadataName)
+      }
+    })
+
+  return currentInformationStep?.[0] ?? null
+}
+
+export const makeCurrentStep = (currentPaperDef, model, metadataName) => {
+  switch (model) {
+    case 'information':
+      return makeCurrentInformationStep(currentPaperDef, metadataName)
+    case 'page':
+      return null
+  }
+}
