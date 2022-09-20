@@ -5,7 +5,7 @@ import { useLocation } from 'react-router-dom'
 import { useQuery, isQueryLoading } from 'cozy-client'
 
 import AppLike from '../../../../test/components/AppLike'
-import { useCurrentEditInformation } from './useCurrentEditInformation'
+import { useCurrentEditInformations } from './useCurrentEditInformations'
 
 jest.mock('cozy-client/dist/utils', () => ({
   ...jest.requireActual('cozy-client/dist/utils'),
@@ -29,7 +29,7 @@ const setup = ({ mockedData, searchParams = '', currentEditModel } = {}) => {
   const wrapper = ({ children }) => <AppLike>{children}</AppLike>
 
   return renderHook(
-    () => useCurrentEditInformation('fileId', currentEditModel),
+    () => useCurrentEditInformations('fileId', currentEditModel),
     {
       wrapper
     }
