@@ -3,30 +3,7 @@ import { isQueryLoading, useQuery } from 'cozy-client'
 
 import { buildFilesQueryById } from '../../../helpers/queries'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
-
-const makeCurrentInformationStep = (currentPaperDef, metadataName) => {
-  return currentPaperDef?.acquisitionSteps
-    ?.filter(
-      step =>
-        step.model === 'information' &&
-        step.attributes.some(attr => attr.name === metadataName)
-    )
-    ?.map(step => {
-      return {
-        ...step,
-        attributes: step.attributes.filter(attr => attr.name === metadataName)
-      }
-    })[0]
-}
-
-const makeCurrentStep = (currentPaperDef, model, metadataName) => {
-  switch (model) {
-    case 'information':
-      return makeCurrentInformationStep(currentPaperDef, metadataName)
-    case 'page':
-      return null
-  }
-}
+import { makeCurrentStep } from './helpers'
 
 /**
  * @param {string} fileId
