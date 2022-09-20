@@ -21,7 +21,7 @@ const PageEditWrapper = () => {
   const [isBusy, setIsBusy] = useState(false)
   const [value, setValue] = useState('')
 
-  const currentEditInformation = useCurrentEditInformation(fileId)
+  const currentEditInformation = useCurrentEditInformation(fileId, 'page')
   const currentPage = currentEditInformation?.file?.metadata?.page
 
   useEffect(() => {
