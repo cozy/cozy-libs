@@ -33,7 +33,10 @@ const InformationEditWrapper = () => {
   const [isFocus, setIsFocus] = useState(false)
   const [isBusy, setIsBusy] = useState(false)
 
-  const currentEditInformation = useCurrentEditInformation(fileId)
+  const currentEditInformation = useCurrentEditInformation(
+    fileId,
+    'information'
+  )
 
   const onClose = () => {
     navigate(currentEditInformation.searchParams.backgroundPath)

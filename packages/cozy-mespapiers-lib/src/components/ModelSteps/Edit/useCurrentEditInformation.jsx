@@ -19,8 +19,23 @@ const makeCurrentInformationStep = (currentPaperDef, metadataName) => {
     })[0]
 }
 
-export const useCurrentEditInformation = fileId => {
+const makeCurrentStep = (currentPaperDef, model, metadataName) => {
+  switch (model) {
+    case 'information':
+      return makeCurrentInformationStep(currentPaperDef, metadataName)
+    case 'page':
+      return null
+  }
+}
+
+/**
+ * @param {string} fileId
+ * @param {'information'|'page'|'contact'} model
+ * @returns {{ file: IOCozyFile, paperDef: object, currentStep: object, searchParams: { backgroundPath: string, metadataName: string }, isLoading: boolean }}
+ */
+export const useCurrentEditInformation = (fileId, model) => {
   const location = useLocation()
+
   const { papersDefinitions } = usePapersDefinitions()
   const backgroundPath = new URLSearchParams(location.search).get(
     'backgroundPath'
@@ -28,7 +43,8 @@ export const useCurrentEditInformation = fileId => {
   const metadataName = new URLSearchParams(location.search).get('metadata')
 
   const isFilesQueryByIdEnabled = !!fileId
-  const buildedFilesQuery = buildFilesQueryById(fileId)
+  const buildedFilesQuery =
+    isFilesQueryByIdEnabled && buildFilesQueryById(fileId)
   const { data: files, ...filesQueryResult } = useQuery(
     buildedFilesQuery.definition,
     {
@@ -36,25 +52,24 @@ export const useCurrentEditInformation = fileId => {
       enabled: isFilesQueryByIdEnabled
     }
   )
-  const isLoadingFiles =
+  const isLoadingFiles = !!(
     isFilesQueryByIdEnabled &&
     (isQueryLoading(filesQueryResult) || filesQueryResult.hasMore)
-
-  const currentPaperDef =
-    !isLoadingFiles &&
-    papersDefinitions.find(
-      paper => paper.label === files?.[0]?.metadata?.qualification?.label
-    )
-
-  const currentInformationStep = makeCurrentInformationStep(
-    currentPaperDef,
-    metadataName
   )
+
+  const paperDef =
+    (!isLoadingFiles &&
+      papersDefinitions.find(
+        paper => paper.label === files?.[0]?.metadata?.qualification?.label
+      )) ||
+    null
+
+  const currentStep = makeCurrentStep(paperDef, model, metadataName)
 
   return {
     file: files?.[0],
-    paperDef: currentPaperDef,
-    currentStep: currentInformationStep,
+    paperDef,
+    currentStep,
     searchParams: { backgroundPath, metadataName },
     isLoading: isLoadingFiles
   }
