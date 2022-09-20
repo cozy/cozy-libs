@@ -10,7 +10,7 @@ import { makeCurrentStep } from './helpers'
  * @param {'information'|'page'|'contact'} model
  * @returns {{ file: IOCozyFile, paperDef: object, currentStep: object, searchParams: { backgroundPath: string, metadataName: string }, isLoading: boolean }}
  */
-export const useCurrentEditInformation = (fileId, model) => {
+export const useCurrentEditInformations = (fileId, model) => {
   const location = useLocation()
 
   const { papersDefinitions } = usePapersDefinitions()

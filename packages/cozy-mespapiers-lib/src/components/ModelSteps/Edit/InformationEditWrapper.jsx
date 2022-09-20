@@ -15,7 +15,7 @@ import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
 import IlluGenericInputText from '../../../assets/icons/IlluGenericInputText.svg'
 import { makeInputsInformationStep } from '../../../helpers/makeInputsInformationStep'
-import { useCurrentEditInformation } from './useCurrentEditInformation'
+import { useCurrentEditInformations } from './useCurrentEditInformations'
 import { isInformationEditPermitted, updateFileMetadata } from './helpers'
 
 import styles from './styles.styl'
@@ -33,7 +33,7 @@ const InformationEditWrapper = () => {
   const [isFocus, setIsFocus] = useState(false)
   const [isBusy, setIsBusy] = useState(false)
 
-  const currentEditInformation = useCurrentEditInformation(
+  const currentEditInformation = useCurrentEditInformations(
     fileId,
     'information'
   )

@@ -5,7 +5,7 @@ import { useClient } from 'cozy-client'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { FILES_DOCTYPE } from '../../../../doctypes'
-import { useCurrentEditInformation } from '../useCurrentEditInformation'
+import { useCurrentEditInformations } from '../useCurrentEditInformations'
 import PageEditMobile from './PageEditMobile'
 import PageEditDesktop from './PageEditDesktop'
 import PageEditItems from './PageEditItems'
@@ -21,7 +21,7 @@ const PageEditWrapper = () => {
   const [isBusy, setIsBusy] = useState(false)
   const [value, setValue] = useState('')
 
-  const currentEditInformation = useCurrentEditInformation(fileId, 'page')
+  const currentEditInformation = useCurrentEditInformations(fileId, 'page')
   const currentPage = currentEditInformation?.file?.metadata?.page
 
   useEffect(() => {
