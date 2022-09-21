@@ -109,7 +109,8 @@
     "invalidDateMessage": "Invalid Date"
   },
   "InputTextAdapter": {
-    "invalidTextMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings"
+    "invalidTextMessage": "%{smart_count} character is missing |||| %{smart_count} characters are missings",
+    "onlySpaces": "The name contains only spaces"
   },
   "Onboarding": {
     "cta": "Let's go!"

@@ -35,6 +35,7 @@ const InputTextAdapter = ({
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
+  const [hasOnlySpaces, setHasOnlySpaces] = useState(false)
 
   const { inputType, expectedLength, isRequired } = useMemo(
     () => makeConstraintsOfInput(attrs),
@@ -81,6 +82,12 @@ const InputTextAdapter = ({
         setCurrentValue(currentValue)
       }
     } else {
+      // regex: contains only spaces
+      if (currentValue.length !== 0 && currentValue.match(/^\s*$/)) {
+        setHasOnlySpaces(true)
+      } else {
+        setHasOnlySpaces(false)
+      }
       setCurrentValue(currentValue)
     }
   }
@@ -96,13 +103,17 @@ const InputTextAdapter = ({
       setIsTooShort(
         expectedLength.min != null && currentValue.length < expectedLength.min
       )
-    } else setIsTooShort(false)
+    } else {
+      setIsTooShort(false)
+    }
   }
 
   const helperText = isTooShort
     ? t('InputTextAdapter.invalidTextMessage', {
         smart_count: expectedLength.min - currentValue.length
       })
+    : hasOnlySpaces
+    ? t('InputTextAdapter.onlySpaces')
     : ' '
 
   if (mask) {
@@ -120,7 +131,7 @@ const InputTextAdapter = ({
           type="text"
           variant="outlined"
           label={inputLabel ? t(inputLabel) : ''}
-          error={isTooShort}
+          error={isTooShort || hasOnlySpaces}
           helperText={helperText}
           inputProps={{
             style: {
@@ -149,7 +160,7 @@ const InputTextAdapter = ({
       type="text"
       variant="outlined"
       label={inputLabel ? t(inputLabel) : ''}
-      error={isTooShort}
+      error={isTooShort || hasOnlySpaces}
       helperText={helperText}
       value={currentValue}
       inputProps={{
