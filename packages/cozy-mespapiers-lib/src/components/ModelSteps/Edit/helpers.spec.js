@@ -1,7 +1,8 @@
 import {
   isInformationEditPermitted,
   updateFileMetadata,
-  makeCurrentStep
+  makeCurrentStep,
+  updateReferencedContact
 } from './helpers'
 
 const informationStep = {
@@ -230,5 +231,114 @@ describe('makeCurrentStep', () => {
     const res = makeCurrentStep(currentPaperDef, 'information', 'other')
 
     expect(res).toBe(null)
+  })
+})
+describe('updateReferencedContact', () => {
+  const mockFile = {
+    _id: 'fileId01',
+    name: 'file01.pdf',
+    relationships: {
+      referenced_by: {
+        data: [
+          { id: 'contactId01', type: 'io.cozy.contacts' },
+          { id: 'contactId02', type: 'io.cozy.contacts' }
+        ]
+      }
+    }
+  }
+
+  const mockClient = ({
+    mockaAddReferencedBy = jest.fn(),
+    mockRemoveReferencedBy = jest.fn(),
+    mockSave = jest.fn()
+  } = {}) => {
+    return {
+      collection: jest.fn().mockReturnValue({
+        addReferencedBy: mockaAddReferencedBy,
+        removeReferencedBy: mockRemoveReferencedBy
+      }),
+      save: mockSave
+    }
+  }
+  it('should early return if the list of the contacts has no changed', async () => {
+    const mockaAddReferencedBy = jest.fn()
+    const mockRemoveReferencedBy = jest.fn()
+    const mockSave = jest.fn()
+    const mockedClient = mockClient({
+      mockaAddReferencedBy,
+      mockRemoveReferencedBy,
+      mockSave
+    })
+
+    await updateReferencedContact({
+      client: mockedClient,
+      currentFile: mockFile,
+      contactIdsSelected: ['contactId01', 'contactId02']
+    })
+
+    expect(mockaAddReferencedBy).toBeCalledTimes(0)
+    expect(mockRemoveReferencedBy).toBeCalledTimes(0)
+    expect(mockSave).toBeCalledTimes(0)
+  })
+
+  it('should update & save the document if the contacts list has changed (same size)', async () => {
+    const mockaAddReferencedBy = jest.fn()
+    const mockRemoveReferencedBy = jest.fn()
+    const mockSave = jest.fn()
+    const mockedClient = mockClient({
+      mockaAddReferencedBy,
+      mockRemoveReferencedBy,
+      mockSave
+    })
+
+    await updateReferencedContact({
+      client: mockedClient,
+      currentFile: mockFile,
+      contactIdsSelected: ['contactId01', 'contactId03']
+    })
+
+    expect(mockaAddReferencedBy).toBeCalledTimes(1)
+    expect(mockRemoveReferencedBy).toBeCalledTimes(1)
+    expect(mockSave).toBeCalledTimes(1)
+  })
+  it('should update & save the document if the contacts list has changed (bigger)', async () => {
+    const mockaAddReferencedBy = jest.fn()
+    const mockRemoveReferencedBy = jest.fn()
+    const mockSave = jest.fn()
+    const mockedClient = mockClient({
+      mockaAddReferencedBy,
+      mockRemoveReferencedBy,
+      mockSave
+    })
+
+    await updateReferencedContact({
+      client: mockedClient,
+      currentFile: mockFile,
+      contactIdsSelected: ['contactId01', 'contactId02', 'contactId03']
+    })
+
+    expect(mockaAddReferencedBy).toBeCalledTimes(1)
+    expect(mockRemoveReferencedBy).toBeCalledTimes(1)
+    expect(mockSave).toBeCalledTimes(1)
+  })
+  it('should update & save the document if the contacts list has changed (Smaller)', async () => {
+    const mockaAddReferencedBy = jest.fn()
+    const mockRemoveReferencedBy = jest.fn()
+    const mockSave = jest.fn()
+    const mockedClient = mockClient({
+      mockaAddReferencedBy,
+      mockRemoveReferencedBy,
+      mockSave
+    })
+
+    await updateReferencedContact({
+      client: mockedClient,
+      currentFile: mockFile,
+      contactIdsSelected: ['contactId01']
+    })
+
+    expect(mockaAddReferencedBy).toBeCalledTimes(1)
+    expect(mockRemoveReferencedBy).toBeCalledTimes(1)
+    expect(mockSave).toBeCalledTimes(1)
   })
 })
