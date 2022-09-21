@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.1.0...cozy-mespapiers-lib@4.2.0) (2022-09-21)
+
+
+### Features
+
+* Prohibits putting only spaces in a document name ([5568408](https://github.com/cozy/cozy-libs/commit/55684088da1f6c086596e156825a5999c60421db))
+* Show error when putting only spaces in a document name ([58f0c26](https://github.com/cozy/cozy-libs/commit/58f0c26731b35e732fbae0ae3cd2df9721d8a979))
+
+
+
+
+
 # [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.0.1...cozy-mespapiers-lib@4.1.0) (2022-09-21)
 
 
