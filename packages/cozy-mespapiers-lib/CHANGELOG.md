@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.0.1...cozy-mespapiers-lib@4.1.0) (2022-09-21)
+
+
+### Features
+
+* **mesPapiers:** Add step to define paper name for other revenue ([665027a](https://github.com/cozy/cozy-libs/commit/665027ab279fb820f440c8232cdbea885bfba465))
+
+
+
+
+
 ## [4.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.0.0...cozy-mespapiers-lib@4.0.1) (2022-09-19)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
