@@ -36,15 +36,22 @@ const InputTextAdapter = ({
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
   const [hasOnlySpaces, setHasOnlySpaces] = useState(false)
+  const isError = isTooShort || hasOnlySpaces
 
   const { inputType, expectedLength, isRequired } = useMemo(
     () => makeConstraintsOfInput(attrs),
     [attrs]
   )
+
   const isValidInputValue = useMemo(
     () =>
-      checkConstraintsOfIinput(currentValue.length, expectedLength, isRequired),
-    [currentValue.length, expectedLength, isRequired]
+      checkConstraintsOfIinput({
+        valueLength: currentValue.length,
+        expectedLength,
+        isRequired,
+        isError
+      }),
+    [currentValue.length, expectedLength, isRequired, isError]
   )
 
   useEffect(() => {
@@ -131,7 +138,7 @@ const InputTextAdapter = ({
           type="text"
           variant="outlined"
           label={inputLabel ? t(inputLabel) : ''}
-          error={isTooShort || hasOnlySpaces}
+          error={isError}
           helperText={helperText}
           inputProps={{
             style: {
@@ -160,7 +167,7 @@ const InputTextAdapter = ({
       type="text"
       variant="outlined"
       label={inputLabel ? t(inputLabel) : ''}
-      error={isTooShort || hasOnlySpaces}
+      error={isError}
       helperText={helperText}
       value={currentValue}
       inputProps={{

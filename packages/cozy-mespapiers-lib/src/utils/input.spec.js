@@ -43,42 +43,47 @@ describe('Input Utils', () => {
 
   describe('checkInputConstraints', () => {
     it.each`
-      valueLength | expectedLength              | isRequired | result
-      ${0}        | ${{ min: null, max: null }} | ${false}   | ${true}
-      ${0}        | ${{ min: null, max: null }} | ${true}    | ${false}
-      ${0}        | ${{ min: null, max: 0 }}    | ${false}   | ${true}
-      ${0}        | ${{ min: null, max: 0 }}    | ${true}    | ${false}
-      ${0}        | ${{ min: 0, max: null }}    | ${false}   | ${true}
-      ${0}        | ${{ min: 0, max: null }}    | ${true}    | ${false}
-      ${0}        | ${{ min: 0, max: 0 }}       | ${false}   | ${true}
-      ${0}        | ${{ min: 0, max: 0 }}       | ${true}    | ${false}
-      ${0}        | ${{ min: null, max: 20 }}   | ${false}   | ${true}
-      ${0}        | ${{ min: null, max: 20 }}   | ${true}    | ${false}
-      ${0}        | ${{ min: 20, max: null }}   | ${false}   | ${true}
-      ${0}        | ${{ min: 20, max: null }}   | ${true}    | ${false}
-      ${0}        | ${{ min: 10, max: 30 }}     | ${false}   | ${true}
-      ${0}        | ${{ min: 30, max: 10 }}     | ${false}   | ${true}
-      ${0}        | ${{ min: 10, max: 30 }}     | ${true}    | ${false}
-      ${0}        | ${{ min: 30, max: 10 }}     | ${true}    | ${false}
-      ${10}       | ${{ min: 10, max: 30 }}     | ${true}    | ${true}
-      ${10}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false}
-      ${20}       | ${{ min: 10, max: 30 }}     | ${true}    | ${true}
-      ${20}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false}
-      ${30}       | ${{ min: 10, max: 30 }}     | ${true}    | ${true}
-      ${30}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false}
-      ${40}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false}
-      ${40}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false}
-      ${20}       | ${{ min: null, max: 10 }}   | ${false}   | ${false}
-      ${20}       | ${{ min: null, max: 20 }}   | ${false}   | ${true}
-      ${20}       | ${{ min: null, max: 30 }}   | ${false}   | ${true}
-      ${20}       | ${{ min: 10, max: null }}   | ${false}   | ${true}
-      ${20}       | ${{ min: 20, max: null }}   | ${false}   | ${true}
-      ${20}       | ${{ min: 30, max: null }}   | ${false}   | ${false}
+      valueLength | expectedLength              | isRequired | isError  | result
+      ${0}        | ${{ min: null, max: null }} | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: null, max: null }} | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: null, max: 0 }}    | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: null, max: 0 }}    | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: 0, max: null }}    | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: 0, max: null }}    | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: 0, max: 0 }}       | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: 0, max: 0 }}       | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: null, max: 20 }}   | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: null, max: 20 }}   | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: 20, max: null }}   | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: 20, max: null }}   | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: 10, max: 30 }}     | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: 30, max: 10 }}     | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${false}
+      ${0}        | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
+      ${10}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${true}
+      ${10}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
+      ${20}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${true}
+      ${20}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
+      ${30}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${true}
+      ${30}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
+      ${40}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${false}
+      ${40}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
+      ${20}       | ${{ min: null, max: 10 }}   | ${false}   | ${false} | ${false}
+      ${20}       | ${{ min: null, max: 20 }}   | ${false}   | ${false} | ${true}
+      ${20}       | ${{ min: null, max: 30 }}   | ${false}   | ${false} | ${true}
+      ${20}       | ${{ min: 10, max: null }}   | ${false}   | ${false} | ${true}
+      ${20}       | ${{ min: 20, max: null }}   | ${false}   | ${false} | ${true}
+      ${20}       | ${{ min: 30, max: null }}   | ${false}   | ${false} | ${false}
     `(
       `should return $result when passed argument: ($valueLength, $expectedLength, $isRequired)`,
-      ({ valueLength, expectedLength, isRequired, result }) => {
+      ({ valueLength, expectedLength, isRequired, isError, result }) => {
         expect(
-          checkConstraintsOfIinput(valueLength, expectedLength, isRequired)
+          checkConstraintsOfIinput({
+            valueLength,
+            expectedLength,
+            isRequired,
+            isError
+          })
         ).toEqual(result)
       }
     )

@@ -71,14 +71,16 @@ export const makeConstraintsOfInput = attrs => {
  * @param {boolean} isRequired - If value is required
  * @returns {boolean}
  */
-export const checkConstraintsOfIinput = (
+export const checkConstraintsOfIinput = ({
   valueLength,
   expectedLength,
-  isRequired
-) => {
+  isRequired,
+  isError
+}) => {
   const { min, max } = expectedLength
 
   return [
+    !isError,
     valueLength !== 0 || !isRequired,
     valueLength === 0 || min == null || valueLength >= min,
     valueLength === 0 || max == null || valueLength <= max
