@@ -45,12 +45,15 @@ describe('Input Utils', () => {
     it.each`
       valueLength | expectedLength              | isRequired | isError  | result
       ${0}        | ${{ min: null, max: null }} | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: null, max: null }} | ${false}   | ${true}  | ${false}
       ${0}        | ${{ min: null, max: null }} | ${true}    | ${false} | ${false}
       ${0}        | ${{ min: null, max: 0 }}    | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: null, max: 0 }}    | ${false}   | ${true}  | ${false}
       ${0}        | ${{ min: null, max: 0 }}    | ${true}    | ${false} | ${false}
       ${0}        | ${{ min: 0, max: null }}    | ${false}   | ${false} | ${true}
       ${0}        | ${{ min: 0, max: null }}    | ${true}    | ${false} | ${false}
       ${0}        | ${{ min: 0, max: 0 }}       | ${false}   | ${false} | ${true}
+      ${0}        | ${{ min: 0, max: 0 }}       | ${false}   | ${true}  | ${false}
       ${0}        | ${{ min: 0, max: 0 }}       | ${true}    | ${false} | ${false}
       ${0}        | ${{ min: null, max: 20 }}   | ${false}   | ${false} | ${true}
       ${0}        | ${{ min: null, max: 20 }}   | ${true}    | ${false} | ${false}
@@ -61,6 +64,7 @@ describe('Input Utils', () => {
       ${0}        | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${false}
       ${0}        | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
       ${10}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${true}
+      ${10}       | ${{ min: 10, max: 30 }}     | ${true}    | ${true}  | ${false}
       ${10}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
       ${20}       | ${{ min: 10, max: 30 }}     | ${true}    | ${false} | ${true}
       ${20}       | ${{ min: 30, max: 10 }}     | ${true}    | ${false} | ${false}
@@ -71,6 +75,7 @@ describe('Input Utils', () => {
       ${20}       | ${{ min: null, max: 10 }}   | ${false}   | ${false} | ${false}
       ${20}       | ${{ min: null, max: 20 }}   | ${false}   | ${false} | ${true}
       ${20}       | ${{ min: null, max: 30 }}   | ${false}   | ${false} | ${true}
+      ${20}       | ${{ min: null, max: 30 }}   | ${false}   | ${true}  | ${false}
       ${20}       | ${{ min: 10, max: null }}   | ${false}   | ${false} | ${true}
       ${20}       | ${{ min: 20, max: null }}   | ${false}   | ${false} | ${true}
       ${20}       | ${{ min: 30, max: null }}   | ${false}   | ${false} | ${false}
