@@ -33,7 +33,8 @@ const FilesViewer = ({ filesQuery, files, fileId, onClose, onChange }) => {
 
   const editPathByModelProps = {
     information: `#/paper/edit/information/${fileId}?metadata=__NAME__&backgroundPath=${pathname}`,
-    page: `#/paper/edit/page/${fileId}?backgroundPath=${pathname}`
+    page: `#/paper/edit/page/${fileId}?backgroundPath=${pathname}`,
+    contact: `#/paper/edit/contact/${fileId}?backgroundPath=${pathname}`
   }
 
   const handleOnClose = () => {
