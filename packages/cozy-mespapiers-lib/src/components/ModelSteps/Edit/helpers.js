@@ -1,3 +1,6 @@
+import { getReferencedBy } from 'cozy-client'
+import { CONTACTS_DOCTYPE, FILES_DOCTYPE } from '../../../doctypes'
+
 /**
  * Checks if the edition of the metadata of type "Information" is permitted
  */
@@ -64,4 +67,37 @@ export const makeCurrentStep = (currentPaperDef, model, metadataName) => {
     default:
       return null
   }
+}
+
+export const updateReferencedContact = async ({
+  client,
+  currentFile,
+  contactIdsSelected
+}) => {
+  const contactsReferenced = getReferencedBy(currentFile, CONTACTS_DOCTYPE)
+  if (contactIdsSelected.length === contactsReferenced.length) {
+    const unchangedContacts = contactIdsSelected.every(contactId =>
+      contactsReferenced.some(contactRef => contactRef.id === contactId)
+    )
+    if (unchangedContacts) return
+  }
+
+  const fileCollection = client.collection(FILES_DOCTYPE)
+
+  const contactsReferencedNormalized = contactsReferenced.map(c => ({
+    _id: c.id,
+    _type: c.type
+  }))
+  await fileCollection.removeReferencedBy(
+    currentFile,
+    contactsReferencedNormalized
+  )
+
+  const newContactReferences = contactIdsSelected.map(contactId => ({
+    _id: contactId,
+    _type: CONTACTS_DOCTYPE
+  }))
+  await fileCollection.addReferencedBy(currentFile, newContactReferences)
+
+  await client.save(currentFile)
 }
