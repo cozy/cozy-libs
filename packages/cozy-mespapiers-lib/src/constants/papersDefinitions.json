@@ -182,6 +182,7 @@
     },
     {
       "label": "driver_license",
+      "country": "fr",
       "placeholderIndex": 2,
       "icon": "car",
       "featureDate": "carObtentionDate",
@@ -490,6 +491,7 @@
     },
     {
       "label": "national_id_card",
+      "country": "fr",
       "placeholderIndex": 1,
       "icon": "people",
       "featureDate": "expirationDate",
