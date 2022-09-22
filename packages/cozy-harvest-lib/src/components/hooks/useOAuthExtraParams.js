@@ -27,7 +27,14 @@ const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
     if (needsExtraParams) {
       load()
     }
-  })
+  }, [
+    account,
+    client,
+    konnector.slug,
+    konnectorPolicy,
+    needsExtraParams,
+    reconnect
+  ])
 
   return {
     fetchStatus,
