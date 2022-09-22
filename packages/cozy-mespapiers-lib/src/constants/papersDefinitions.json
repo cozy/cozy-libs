@@ -253,6 +253,54 @@
       ]
     },
     {
+      "label": "driver_license",
+      "country": "stranger",
+      "icon": "car",
+      "featureDate": "obtentionDate",
+      "maxDisplay": 2,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluDriverLicenseNumberHelp.png",
+          "text": "PaperJSON.driverLicense.stranger.country.text",
+          "attributes": [
+            {
+              "name": "country",
+              "type": "text",
+              "inputLabel": "PaperJSON.driverLicense.stranger.country.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluDriverLicenseObtentionDateHelp.png",
+          "text": "PaperJSON.driverLicense.stranger.obtentionDate.text",
+          "attributes": [
+            {
+              "name": "obtentionDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.driverLicense.stranger.obtentionDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
       "label": "energy_invoice",
       "icon": "bill",
       "featureDate": "referencedDate",
