@@ -33,21 +33,21 @@ const InformationEditWrapper = () => {
   const [isFocus, setIsFocus] = useState(false)
   const [isBusy, setIsBusy] = useState(false)
 
-  const currentEditInformation = useCurrentEditInformations(
+  const currentEditInformations = useCurrentEditInformations(
     fileId,
     'information'
   )
 
   const onClose = () => {
-    navigate(currentEditInformation.searchParams.backgroundPath)
+    navigate(currentEditInformations.searchParams.backgroundPath)
   }
 
   const onConfirm = async () => {
     setIsBusy(true)
     let newMetadata = updateFileMetadata({
-      file: currentEditInformation.file,
-      type: currentEditInformation.currentStep.attributes[0].type,
-      metadataName: currentEditInformation.searchParams.metadataName,
+      file: currentEditInformations.file,
+      type: currentEditInformations.currentStep.attributes[0].type,
+      metadataName: currentEditInformations.searchParams.metadataName,
       value
     })
 
@@ -55,23 +55,23 @@ const InformationEditWrapper = () => {
       .collection(FILES_DOCTYPE)
       .updateMetadataAttribute(fileId, newMetadata)
 
-    navigate(currentEditInformation.searchParams.backgroundPath || '/paper')
+    navigate(currentEditInformations.searchParams.backgroundPath || '/paper')
   }
 
-  const currentAttributes = currentEditInformation?.currentStep?.attributes
+  const currentAttributes = currentEditInformations?.currentStep?.attributes
 
   const { Component, attrs } =
     makeInputsInformationStep(currentAttributes)[0] || {}
 
-  const dialogTitle = currentEditInformation?.paperDef?.label
-    ? scannerT(`items.${currentEditInformation.paperDef.label}`)
+  const dialogTitle = currentEditInformations?.paperDef?.label
+    ? scannerT(`items.${currentEditInformations.paperDef.label}`)
     : ''
 
   if (
-    !currentEditInformation.isLoading &&
-    !isInformationEditPermitted(currentEditInformation)
+    !currentEditInformations.isLoading &&
+    !isInformationEditPermitted(currentEditInformations)
   ) {
-    return <Navigate to={currentEditInformation.searchParams.backgroundPath} />
+    return <Navigate to={currentEditInformations.searchParams.backgroundPath} />
   }
 
   return (
@@ -85,12 +85,12 @@ const InformationEditWrapper = () => {
             'is-focused': isFocus && isIOS()
           })}
         >
-          {currentEditInformation.isLoading ? (
+          {currentEditInformations.isLoading ? (
             <Spinner size="xlarge" />
           ) : (
             <>
               <CompositeHeaderImage
-                icon={currentEditInformation.currentStep?.illustration}
+                icon={currentEditInformations.currentStep?.illustration}
                 fallbackIcon={IlluGenericInputText}
                 iconSize="medium"
               />
@@ -103,8 +103,8 @@ const InformationEditWrapper = () => {
                   <Component
                     attrs={attrs}
                     defaultValue={
-                      currentEditInformation.file.metadata[
-                        currentEditInformation.searchParams.metadataName
+                      currentEditInformations.file.metadata[
+                        currentEditInformations.searchParams.metadataName
                       ]
                     }
                     setValue={setValue}

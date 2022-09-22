@@ -180,10 +180,14 @@ describe('updateFileMetadata', () => {
   })
 })
 describe('makeCurrentStep', () => {
-  const currentPaperDef = makeCurrentPaperDefinition()
+  const paperDef = makeCurrentPaperDefinition()
   describe('information model', () => {
     it('should return "information" step with "cardNumber" attribute name', () => {
-      const res = makeCurrentStep(currentPaperDef, 'information', 'cardNumber')
+      const res = makeCurrentStep({
+        paperDef,
+        model: 'information',
+        metadataName: 'cardNumber'
+      })
 
       expect(res).toEqual({
         attributes: [{ name: 'cardNumber', type: 'text' }],
@@ -192,11 +196,11 @@ describe('makeCurrentStep', () => {
       })
     })
     it('should return "information" step with "expirationDate" attribute name', () => {
-      const res = makeCurrentStep(
-        currentPaperDef,
-        'information',
-        'expirationDate'
-      )
+      const res = makeCurrentStep({
+        paperDef,
+        model: 'information',
+        metadataName: 'expirationDate'
+      })
 
       expect(res).toEqual({
         attributes: [{ name: 'expirationDate', type: 'date' }],
@@ -207,14 +211,14 @@ describe('makeCurrentStep', () => {
   })
   describe('page model', () => {
     it('should return "null" if model is "page', () => {
-      const res = makeCurrentStep(currentPaperDef, 'page')
+      const res = makeCurrentStep({ paperDef, model: 'page' })
 
       expect(res).toBe(null)
     })
   })
   describe('contact', () => {
     it('should return "contact" step', () => {
-      const res = makeCurrentStep(currentPaperDef, 'contact')
+      const res = makeCurrentStep({ paperDef, model: 'contact' })
 
       expect(res).toEqual({
         illustration: 'contact.png',
@@ -223,12 +227,20 @@ describe('makeCurrentStep', () => {
     })
   })
   it('should return "null" if model doesn\'t exist', () => {
-    const res = makeCurrentStep(currentPaperDef, 'other', 'expirationDate')
+    const res = makeCurrentStep({
+      paperDef,
+      model: 'other',
+      metadataName: 'expirationDate'
+    })
 
     expect(res).toBe(null)
   })
   it('should return "null" if attribute name doesn\'t exist', () => {
-    const res = makeCurrentStep(currentPaperDef, 'information', 'other')
+    const res = makeCurrentStep({
+      paperDef,
+      model: 'information',
+      metadataName: 'other'
+    })
 
     expect(res).toBe(null)
   })

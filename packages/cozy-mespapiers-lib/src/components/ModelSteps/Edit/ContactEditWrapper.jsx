@@ -48,7 +48,11 @@ const ContactEditWrapper = () => {
     return <Navigate to={currentEditInformation.searchParams.backgroundPath} />
   }
 
-  return !isLoading ? (
+  return isLoading ? (
+    <Backdrop open classes={{ root: classes.backdropRoot }}>
+      <Spinner size="xlarge" />
+    </Backdrop>
+  ) : (
     <ContactEditDialog
       contacts={contacts}
       currentEditInformation={currentEditInformation}
@@ -56,10 +60,6 @@ const ContactEditWrapper = () => {
       onClose={onClose}
       isBusy={isBusy}
     />
-  ) : (
-    <Backdrop open classes={{ root: classes.backdropRoot }}>
-      <Spinner size="xlarge" />
-    </Backdrop>
   )
 }
 
