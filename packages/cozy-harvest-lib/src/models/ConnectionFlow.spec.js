@@ -8,7 +8,6 @@ import {
   prepareTriggerAccount,
   launchTrigger
 } from '../connections/triggers'
-import CozyRealtime from 'cozy-realtime'
 import KonnectorJobWatcher, {
   watchKonnectorJob
 } from './konnector/KonnectorJobWatcher'
@@ -75,10 +74,9 @@ const realtimeMock = {
       events.off(subscribtionKey, subscribtion)
       subscribtions.delete(key(action, doctype))
     }
-  })
+  }),
+  sendNotification: jest.fn()
 }
-CozyRealtime.prototype.subscribe = realtimeMock.subscribe
-CozyRealtime.prototype.unsubscribe = realtimeMock.unsubscribe
 
 jest.mock('../connections/accounts', () => ({
   saveAccount: jest.fn(),
@@ -135,6 +133,9 @@ const setup = ({ trigger } = {}) => {
         data: []
       })
     })
+  }
+  client.plugins = {
+    realtime: realtimeMock
   }
   const flow = new ConnectionFlow(client, trigger, fixtures.konnector)
   return { flow, client }
@@ -436,7 +437,8 @@ describe('ConnectionFlow', () => {
     it('should launch trigger without account', async () => {
       const { flow, client } = setup()
       await flow.ensureTriggerAndLaunch(client, {
-        trigger: fixtures.createdTrigger
+        trigger: fixtures.createdTrigger,
+        konnector: fixtures.konnector
       })
       expect(launchTrigger).toHaveBeenCalledTimes(1)
       expect(launchTrigger).toHaveBeenCalledWith(
@@ -450,7 +452,8 @@ describe('ConnectionFlow', () => {
       ensureTrigger.mockResolvedValue(fixtures.existingTrigger)
       await flow.ensureTriggerAndLaunch(client, {
         account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger
+        trigger: fixtures.existingTrigger,
+        konnector: fixtures.konnector
       })
       expect(launchTrigger).toHaveBeenCalledTimes(1)
       expect(launchTrigger).toHaveBeenCalledWith(client, {
@@ -463,7 +466,8 @@ describe('ConnectionFlow', () => {
       const trigger = { ...fixtures.existingTrigger }
       ensureTrigger.mockResolvedValue(trigger)
       await flow.ensureTriggerAndLaunch(client, {
-        account: fixtures.createdAccount
+        account: fixtures.createdAccount,
+        konnector: fixtures.konnector
       })
       expect(ensureTrigger).toHaveBeenCalledTimes(1)
       expect(ensureTrigger).toHaveBeenCalledWith(
@@ -479,7 +483,8 @@ describe('ConnectionFlow', () => {
       const { flow, client } = setup()
       await flow.ensureTriggerAndLaunch(client, {
         trigger: fixtures.existingTrigger,
-        account: fixtures.updatedAccount
+        account: fixtures.updatedAccount,
+        konnector: fixtures.konnector
       })
       expect(ensureTrigger).toHaveBeenCalledWith(
         client,
@@ -494,7 +499,8 @@ describe('ConnectionFlow', () => {
       prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
       await flow.ensureTriggerAndLaunch(client, {
         account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger
+        trigger: fixtures.existingTrigger,
+        konnector: fixtures.konnector
       })
       expect(flow.account).toEqual(fixtures.updatedAccount)
     })
@@ -572,7 +578,8 @@ describe('ConnectionFlow', () => {
 
       await flow.ensureTriggerAndLaunch(client, {
         account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger
+        trigger: fixtures.existingTrigger,
+        konnector: fixtures.konnector
       })
       expect(flow.account).toEqual(fixtures.updatedAccount)
       expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
@@ -596,7 +603,7 @@ describe('ConnectionFlow', () => {
       const { flow } = setup({ trigger: fixtures.erroredTrigger })
       flow.setState({ accountError: 'error to hide' })
 
-      flow.expectTriggerLaunch()
+      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
       const { accountError } = flow.getState()
       expect(accountError).toBe(null)
@@ -605,7 +612,7 @@ describe('ConnectionFlow', () => {
     it('sets the flow status to EXPECTING_TRIGGER_LAUNCH', () => {
       const { flow } = setup({ trigger: fixtures.runningTrigger })
 
-      flow.expectTriggerLaunch()
+      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
       const { status } = flow.getState()
       expect(status).toBe(EXPECTING_TRIGGER_LAUNCH)
@@ -614,7 +621,7 @@ describe('ConnectionFlow', () => {
     it('starts watching for konnector jobs creation', () => {
       const { flow } = setup({ trigger: fixtures.erroredTrigger })
 
-      flow.expectTriggerLaunch()
+      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
       expect(realtimeMock.subscribe).toHaveBeenCalledWith(
         'created',
@@ -632,7 +639,7 @@ describe('ConnectionFlow', () => {
 
       it('stops watching for konnector jobs creation', async () => {
         const { flow } = setup({ trigger: fixtures.erroredTrigger })
-        flow.expectTriggerLaunch()
+        flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
         const job = konnectorJob(flow)
         realtimeMock.events.emit(
@@ -649,7 +656,7 @@ describe('ConnectionFlow', () => {
 
       it('starts watching for updates on the job itself', () => {
         const { flow } = setup({ trigger: fixtures.erroredTrigger })
-        flow.expectTriggerLaunch()
+        flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
         const watchJobSpy = jest.spyOn(flow, 'watchJob')
         try {

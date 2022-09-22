@@ -9,7 +9,6 @@ import CozyClient, { CozyProvider } from 'cozy-client'
 import ConnectionFlow from '../../models/ConnectionFlow'
 import enLocale from '../../locales/en.json'
 
-jest.mock('cozy-realtime')
 jest.mock('../../models/ConnectionFlow', () => {
   // Require the original module to not be mocked...
   const { default: mockConnectionFlow } = jest.requireActual(
@@ -37,6 +36,12 @@ const konnectorFixture = {
 
 describe('LaunchTriggerCard', () => {
   const client = new CozyClient({})
+  client.plugins = {
+    realtime: {
+      sendNotification: jest.fn(),
+      subscribe: jest.fn()
+    }
+  }
 
   const setup = ({ props }) => {
     const root = mount(
@@ -126,7 +131,7 @@ describe('LaunchTriggerCard', () => {
 
   it('should display a syncing message when a trigger launch is expected', async () => {
     const flow = new ConnectionFlow(client, triggerFixture, konnectorFixture)
-    flow.expectTriggerLaunch()
+    flow.expectTriggerLaunch({ konnector: konnectorFixture })
 
     const { root } = setup({
       props: {

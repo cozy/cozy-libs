@@ -1,7 +1,6 @@
 import MicroEE from 'microee'
 import get from 'lodash/get'
 
-import Realtime from 'cozy-realtime'
 import flag from 'cozy-flags'
 import { Q } from 'cozy-client'
 
@@ -46,6 +45,7 @@ import {
   JOB_EVENTS,
   EXPECTING_TRIGGER_LAUNCH
 } from './flowEvents'
+import { sendRealtimeNotification } from '../services/jobUtils'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
@@ -175,7 +175,7 @@ export class ConnectionFlow {
 
     this.twoFAWaiters = this.twoFAWaiters || []
 
-    this.realtime = new Realtime({ client })
+    this.realtime = client.plugins.realtime
 
     this.watchCurrentJobIfTriggerIsAlreadyRunning()
   }
@@ -296,10 +296,16 @@ export class ConnectionFlow {
     })
   }
 
-  expectTriggerLaunch() {
+  expectTriggerLaunch({ konnector }) {
+    this.konnector = konnector
     logger.info(
       `ConnectionFlow: Expecting trigger launch for konnector ${this.konnector.slug}`
     )
+
+    sendRealtimeNotification({
+      client: this.client,
+      data: { slug: this.konnector.slug }
+    })
 
     this.setState({ status: EXPECTING_TRIGGER_LAUNCH, accountError: null })
 
