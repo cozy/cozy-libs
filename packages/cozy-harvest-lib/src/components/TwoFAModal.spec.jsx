@@ -10,7 +10,10 @@ jest.mock('./KonnectorIcon', () => () => null)
 describe('TwoFAModal', () => {
   const setup = ({ konnectorSlug, account }) => {
     const client = {
-      on: jest.fn()
+      on: jest.fn(),
+      plugins: {
+        realtime: jest.fn()
+      }
     }
 
     const trigger = {}

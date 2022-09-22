@@ -1,5 +1,3 @@
-import CozyRealtime from 'cozy-realtime'
-
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
 export const waitForRealtimeEvent = (
@@ -9,7 +7,7 @@ export const waitForRealtimeEvent = (
   timeout = 15 * 1000
 ) =>
   new Promise((resolve, reject) => {
-    const rt = new CozyRealtime({ client })
+    const rt = client.plugins.realtime
 
     const handleUpdate = jobAttributes => {
       if (jobAttributes.state == 'errored') {
@@ -30,3 +28,8 @@ export const waitForRealtimeEvent = (
       reject(new Error('Timeout for waitForRealtimeResult'))
     }, timeout)
   })
+
+export const sendRealtimeNotification = ({ client, data }) => {
+  const rt = client.plugins.realtime
+  rt.sendNotification(JOBS_DOCTYPE, 'sendRealtimeNotification', data)
+}

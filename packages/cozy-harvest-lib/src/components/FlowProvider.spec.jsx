@@ -13,6 +13,9 @@ const client = {
   on: jest.fn(),
   stackClient: {
     uri: 'https://cozy.tools:8080'
+  },
+  plugins: {
+    realtime: jest.fn()
   }
 }
 const trigger = {

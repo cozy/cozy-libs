@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
 
@@ -12,6 +12,7 @@ import { intentsApiProptype } from '../helpers/proptypes'
 import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import { KonnectorJobError } from '../helpers/konnectors'
+import { findKonnectorPolicy } from '../konnector-policies'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -59,9 +60,13 @@ export const OAuthForm = props => {
     if (typeof onSuccess === 'function') onSuccess(accountId)
   }
 
-  const handleConnect = () => {
+  const handleConnect = useCallback(() => {
     setShowOAuthWindow(true)
-  }
+    const konnectorPolicy = findKonnectorPolicy(konnector)
+    if (konnectorPolicy.isBIWebView) {
+      flow.expectTriggerLaunch({ konnector })
+    }
+  }, [client, flow, konnector.slug])
 
   const handleOAuthCancel = err => {
     flow.triggerEvent(ERROR_EVENT, translateOauthError(err))
@@ -81,7 +86,7 @@ export const OAuthForm = props => {
     return () => {
       flow.removeListener(LOGIN_SUCCESS_EVENT, handleLoginSuccess)
     }
-  }, [extraParams, flow, reconnect])
+  }, [extraParams, flow, handleConnect, reconnect])
 
   const { error } = flowState
   const isBusy =
