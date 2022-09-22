@@ -13,7 +13,10 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 
 import ContactEditItem from './ContactEditItem'
 
-import styles from './styles.styl'
+const AvatarStyle = {
+  color: 'var(--primaryColor)',
+  backgroundColor: 'var(--primaryColorLightest)'
+}
 
 const ContactEditList = ({
   setContactsList,
@@ -57,10 +60,7 @@ const ContactEditList = ({
 
           <ListItem button onClick={() => setContactModalOpened(true)}>
             <ListItemIcon>
-              <Avatar
-                size="small"
-                className={styles['ContactEditList-Avatar']}
-              />
+              <Avatar size="small" style={AvatarStyle} />
             </ListItemIcon>
             <ListItemText primary={t('ContactStep.other')} />
             <Icon icon="right" size={16} color="var(--secondaryTextColor)" />

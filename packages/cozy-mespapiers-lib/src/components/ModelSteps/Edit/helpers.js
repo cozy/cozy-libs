@@ -56,14 +56,14 @@ const getCurrentContactStep = currentPaperDef => {
   )
 }
 
-export const makeCurrentStep = (currentPaperDef, model, metadataName) => {
+export const makeCurrentStep = ({ paperDef, model, metadataName }) => {
   switch (model) {
     case 'information':
-      return makeCurrentInformationStep(currentPaperDef, metadataName)
+      return makeCurrentInformationStep(paperDef, metadataName)
     case 'page':
       return null
     case 'contact':
-      return getCurrentContactStep(currentPaperDef)
+      return getCurrentContactStep(paperDef)
     default:
       return null
   }

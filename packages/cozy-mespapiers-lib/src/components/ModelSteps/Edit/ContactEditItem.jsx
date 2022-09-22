@@ -10,9 +10,12 @@ import Avatar from 'cozy-ui/transpiled/react/Avatar'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 
-import styles from './styles.styl'
-
 const { getDisplayName } = models.contact
+
+const AvatarStyle = {
+  color: 'var(--primaryColor)',
+  backgroundColor: 'var(--primaryColorLightest)'
+}
 
 const ContactEditItem = ({
   contactIdsSelected,
@@ -45,7 +48,7 @@ const ContactEditItem = ({
       onClick={() => onClickContactLine(contact._id)}
     >
       <ListItemIcon>
-        <Avatar size="small" className={styles['ContactEditList-Avatar']} />
+        <Avatar size="small" style={AvatarStyle} />
       </ListItemIcon>
       <ListItemText
         primary={`${getDisplayName(contact)} ${

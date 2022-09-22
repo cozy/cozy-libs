@@ -20,7 +20,8 @@ jest.mock('react-router-dom', () => ({
 const setup = ({ mockedData, searchParams = '', currentEditModel } = {}) => {
   const { queryDataResult = [], isLoadingQuery = false } = mockedData || {}
   useQuery.mockReturnValue({
-    data: queryDataResult
+    data: queryDataResult,
+    hasMore: isLoadingQuery
   })
   isQueryLoading.mockReturnValue(isLoadingQuery)
   useLocation.mockImplementation(() => {
