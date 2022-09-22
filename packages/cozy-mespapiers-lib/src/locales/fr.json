@@ -209,6 +209,16 @@
       },
       "DObtentionDate": {
         "inputLabel": "Bus (D)"
+      },
+      "stranger": {
+        "country": {
+          "inputLabel": "Pays de délivrance",
+          "text": "Quel est le pays de délivrance ?"
+        },
+        "obtentionDate": {
+          "inputLabel": "Date d'obtention",
+          "text": "Renseignez la date d'obtention"
+        }
       }
     },
     "card": {

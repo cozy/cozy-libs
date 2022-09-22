@@ -209,6 +209,16 @@
       },
       "DObtentionDate": {
         "inputLabel": "Bus"
+      },
+      "stranger": {
+        "country": {
+          "inputLabel": "Country of delivery",
+          "text": "What is the country of delivery?"
+        },
+        "obtentionDate": {
+          "inputLabel": "Date of obtaining",
+          "text": "Fill in the date of obtaining"
+        }
       }
     },
     "card": {
