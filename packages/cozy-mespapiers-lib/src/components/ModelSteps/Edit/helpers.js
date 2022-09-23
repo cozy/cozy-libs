@@ -101,3 +101,16 @@ export const updateReferencedContact = async ({
 
   await client.save(currentFile)
 }
+
+export const getPaperDefinitionByFile = (papersDefinitions, file) => {
+  return papersDefinitions.find(paper => {
+    const countryCondition =
+      file.metadata.country && paper.country
+        ? file.metadata.country === 'fr'
+          ? paper.country === 'fr'
+          : paper.country === 'stranger'
+        : true
+
+    return paper.label === file.metadata.qualification.label && countryCondition
+  })
+}
