@@ -13,10 +13,7 @@ const ScannerI18nProvider = ({ children }) => {
   const { lang } = useI18n()
   const scannerI18n = getBoundT(lang || 'fr')
 
-  const scannerT = React.useCallback(
-    key => scannerI18n(`${prefix}.${key}`),
-    [scannerI18n]
-  )
+  const scannerT = (key, country) => scannerI18n(`${prefix}.${key}`, country)
 
   return (
     <ScannerI18nContext.Provider value={scannerT}>
