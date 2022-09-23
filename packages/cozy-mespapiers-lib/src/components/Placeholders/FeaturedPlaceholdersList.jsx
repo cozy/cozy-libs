@@ -25,9 +25,13 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   }
 
   const redirectPaperCreation = placeholder => {
+    hideImportDropdown()
+    const countrySearchParam = `${
+      placeholder.country ? `country=${placeholder.country}&` : ''
+    }`
     return navigate({
       pathname: `/paper/create/${placeholder.label}`,
-      search: `backgroundPath=${location.pathname}`
+      search: `${countrySearchParam}backgroundPath=${location.pathname}`
     })
   }
 
