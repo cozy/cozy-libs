@@ -6791,10 +6791,10 @@ cozy-ui@62.1.2:
     react-select "^4.3.0"
     react-swipeable-views "^0.13.3"
 
-cozy-ui@^75.1.0:
-  version "75.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-75.1.0.tgz#50c85361cba3b398eaeae69fe638cc5f61a4665a"
-  integrity sha512-ouTYbWgRJB8Aaf0SVOZ6o4aCPZ2TAxDNAHS+L9ZNOlDtwImyieeT0IgfIvilGQIt2yI7rGxoZW2IkxvqCtb7og==
+cozy-ui@^75.3.0:
+  version "75.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-75.3.0.tgz#013a3fbd0a879d28722d3d3025b61ad934b50ba3"
+  integrity sha512-6QgjQQjRYqIFx05a1zKOo4gx7vPsZZpz6Jg8S7BBxlTFYbNgi9Dck57CQtGEvtLoGY03UVQ0CAb9j2AIgAp+aQ==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
