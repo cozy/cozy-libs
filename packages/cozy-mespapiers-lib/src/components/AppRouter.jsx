@@ -11,7 +11,7 @@ import CreatePaperModal from './StepperDialog/CreatePaperModal'
 import OnboardingWrapper from './Onboarding/OnboardingWrapper'
 import InformationEditWrapper from './ModelSteps/Edit/InformationEditWrapper'
 import PageEdit from './ModelSteps/Edit/PageEdit'
-import ContactEditWrapper from './ModelSteps/Edit/contactEditWrapper'
+import ContactEditWrapper from './ModelSteps/Edit/ContactEditWrapper'
 
 export const AppRouter = () => {
   const location = useLocation()
