@@ -12,6 +12,7 @@ const StepperDialogWrapper = ({ onClose }) => {
   const scannerT = useScannerI18n()
   const {
     allCurrentSteps,
+    currentDefinition,
     currentStepIndex,
     previousStep,
     stepperDialogTitle
@@ -29,7 +30,10 @@ const StepperDialogWrapper = ({ onClose }) => {
       open
       onClose={onClose}
       onBack={handleBack()}
-      title={stepperDialogTitle && scannerT(`items.${stepperDialogTitle}`)}
+      title={
+        Boolean(stepperDialogTitle) &&
+        scannerT(`items.${stepperDialogTitle}`, currentDefinition.country)
+      }
       content={<StepperDialogContent onClose={onClose} />}
       stepper={`${currentStepIndex}/${allCurrentSteps.length}`}
     />

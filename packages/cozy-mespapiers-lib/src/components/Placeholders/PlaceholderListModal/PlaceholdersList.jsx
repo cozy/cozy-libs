@@ -98,7 +98,12 @@ const PlaceholdersList = ({ currentQualifItems }) => {
               <ListItemIcon>
                 <FileIcon icon={placeholder.icon} />
               </ListItemIcon>
-              <ListItemText primary={scannerT(`items.${placeholder.label}`)} />
+              <ListItemText
+                primary={scannerT(
+                  `items.${placeholder.label}`,
+                  placeholder.country
+                )}
+              />
             </ListItem>
           )
         })}
