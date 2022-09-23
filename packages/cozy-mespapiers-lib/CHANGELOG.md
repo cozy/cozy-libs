@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [5.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@5.0.0...cozy-mespapiers-lib@5.0.1) (2022-09-23)
+
+
+### Bug Fixes
+
+* **mespapiers:** Path of import ContactEditWrapper  component ([8a73b35](https://github.com/cozy/cozy-libs/commit/8a73b3535cab66c5f52a457a8d86e511f1e85aae))
+
+
+
+
+
 # [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.2.0...cozy-mespapiers-lib@5.0.0) (2022-09-23)
 
 
