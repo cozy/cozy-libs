@@ -1,7 +1,8 @@
 import {
   getFeaturedPlaceholders,
   findPlaceholdersByQualification,
-  hasNoFileWithSameQualificationLabel
+  hasNoFileWithSameQualificationLabel,
+  findPlaceholderByLabelAndCountry
 } from './findPlaceholders'
 import { mockPapersDefinitions } from '../../test/mockPaperDefinitions'
 
@@ -20,7 +21,7 @@ const fakeQualificationItems = [
   }
 ]
 
-describe('getPlaceholders', () => {
+describe('findPlaceholders', () => {
   describe('getFeaturedPlaceholders', () => {
     it('should return list of placeholders', () => {
       const featuredPlaceholders = getFeaturedPlaceholders({
@@ -172,12 +173,100 @@ describe('getPlaceholders', () => {
       )
     })
   })
-})
+  describe('hasNoFileWithSameQualificationLabel', () => {
+    it('should handle empty files', () => {
+      const res = hasNoFileWithSameQualificationLabel(
+        null,
+        mockPapersDefinitions
+      )
 
-describe('hasNoFileWithSameQualificationLabel', () => {
-  it('should handle empty files', () => {
-    const res = hasNoFileWithSameQualificationLabel(null, mockPapersDefinitions)
+      expect(res).toBe(null)
+    })
+  })
+  describe('findPlaceholderByLabelAndCountry', () => {
+    it('should return an empty list', () => {
+      const placeholders = findPlaceholderByLabelAndCountry(
+        mockPapersDefinitions
+      )
 
-    expect(res).toBe(null)
+      expect(placeholders).toHaveLength(0)
+    })
+    it('should return correct paperDefinition with no country param & paperDefinition has no country', () => {
+      const placeholders = findPlaceholderByLabelAndCountry(
+        mockPapersDefinitions,
+        'isp_invoice'
+      )
+
+      expect(placeholders).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'isp_invoice'
+          })
+        ])
+      )
+    })
+    it('should return FR paperDefinition by default', () => {
+      const placeholders = findPlaceholderByLabelAndCountry(
+        mockPapersDefinitions,
+        'driver_license'
+      )
+
+      expect(placeholders).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'driver_license',
+            country: 'fr'
+          })
+        ])
+      )
+    })
+    it('should return FR paperDefinition', () => {
+      const placeholders = findPlaceholderByLabelAndCountry(
+        mockPapersDefinitions,
+        'driver_license',
+        'fr'
+      )
+
+      expect(placeholders).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'driver_license',
+            country: 'fr'
+          })
+        ])
+      )
+    })
+    it('should return Stranger paperDefinition', () => {
+      const placeholders = findPlaceholderByLabelAndCountry(
+        mockPapersDefinitions,
+        'driver_license',
+        'stranger'
+      )
+
+      expect(placeholders).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'driver_license',
+            country: 'stranger'
+          })
+        ])
+      )
+    })
+    it("should return Stranger paperDefinition if country is defined but value doesn't exist", () => {
+      const placeholders = findPlaceholderByLabelAndCountry(
+        mockPapersDefinitions,
+        'driver_license',
+        'en'
+      )
+
+      expect(placeholders).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            label: 'driver_license',
+            country: 'stranger'
+          })
+        ])
+      )
+    })
   })
 })

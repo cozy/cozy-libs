@@ -84,3 +84,35 @@ export const findPlaceholdersByQualification = (
     qualificationItems.some(item => item.label === paperDefinition.label)
   )
 }
+
+const filterPlaceholderByLabelAndCountry = ({
+  paperDefinition,
+  label,
+  country
+}) => {
+  const countryCondition = paperDefinition.country
+    ? country == null
+      ? paperDefinition.country === 'fr'
+      : paperDefinition.country === country ||
+        paperDefinition.country === 'stranger'
+    : true
+
+  return label === paperDefinition.label && countryCondition
+}
+
+/**
+ * Find placeholders by Qualification
+ * @param {Object[]} papersDefinitions - Object of qualification
+ * @param {string} label - Label of qualification
+ * @param {string} country - country of document
+ * @returns {PaperDefinition[]} - Array of PapersDefinition
+ */
+export const findPlaceholderByLabelAndCountry = (
+  papersDefinitions,
+  label,
+  country
+) => {
+  return papersDefinitions.filter(paperDefinition =>
+    filterPlaceholderByLabelAndCountry({ paperDefinition, label, country })
+  )
+}
