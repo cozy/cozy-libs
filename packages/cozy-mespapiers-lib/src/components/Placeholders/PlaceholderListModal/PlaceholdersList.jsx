@@ -64,9 +64,12 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   }
 
   const redirectPaperCreation = placeholder => {
+    const countrySearchParam = `${
+      placeholder.country ? `country=${placeholder.country}&` : ''
+    }`
     return navigate({
       pathname: `/paper/create/${placeholder.label}`,
-      search: `backgroundPath=${backgroundPath}`
+      search: `${countrySearchParam}backgroundPath=${backgroundPath}`
     })
   }
 
