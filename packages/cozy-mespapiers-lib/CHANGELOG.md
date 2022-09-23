@@ -3,6 +3,43 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [5.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.2.0...cozy-mespapiers-lib@5.0.0) (2022-09-23)
+
+
+### Features
+
+* **mespapiers:** Add ContactEditDialog components ([50c8d52](https://github.com/cozy/cozy-libs/commit/50c8d524ab293094e1d4cee869836e0890a8c4a8))
+* **mespapiers:** Add ContactEditWrapper component ([22cbf3a](https://github.com/cozy/cozy-libs/commit/22cbf3a3f4c3fffb2f0c400a67086f95d4c8b95b))
+* **mespapiers:** Add country key to national_id_car & driver_license ([3424589](https://github.com/cozy/cozy-libs/commit/3424589fd0d869bf941726893b0f353459bd559b))
+* **mespapiers:** Add Country parameter ([dba071d](https://github.com/cozy/cozy-libs/commit/dba071d9dfb33eb1bcf9bc5cffb28da2f8cad5e4))
+* **mespapiers:** Add country searchParam to creation of paper route ([e65e9d1](https://github.com/cozy/cozy-libs/commit/e65e9d11fbf123ff1d1f01fd2a75cf47043b4142))
+* **mespapiers:** Add findPlaceholderByLabelAndCountry helper ([31baa18](https://github.com/cozy/cozy-libs/commit/31baa189343eced7239b1c2d4f2aab9567eca74a))
+* **mespapiers:** Add getPaperDefinitionByFile helper ([83c87e2](https://github.com/cozy/cozy-libs/commit/83c87e22f7ea5b7de2ca2aff1633d9ba95d542cb))
+* **mespapiers:** Add helper for et contact step ([e58dc04](https://github.com/cozy/cozy-libs/commit/e58dc044d7ade6ca96a94804f29ec85bd0e5c488))
+* **mespapiers:** Add new translations for stranger driver license ([e29d734](https://github.com/cozy/cozy-libs/commit/e29d734d98c96cd8323ecab6881688f95e3ef880))
+* **mespapiers:** Add path for edit contact to the prop of the Viewer ([0637fa9](https://github.com/cozy/cozy-libs/commit/0637fa92c91285a38e777a540e44f62cdfeaf420))
+* **mespapiers:** Add route for edit contact ([299312f](https://github.com/cozy/cozy-libs/commit/299312f2bc7a58db8ec0b139013a516506540965))
+* **mespapiers:** Add stranger driver license paper ([a3aca60](https://github.com/cozy/cozy-libs/commit/a3aca60c0abec2d9a7a63ad4141e0aac0d3030e2))
+* **mespapiers:** Add updateReferencedContact helper ([456fb94](https://github.com/cozy/cozy-libs/commit/456fb94cd440165ff281a103c3e256e15ea52a1b))
+* **mespapiers:** Add useReferencedContact hook ([4a61aaf](https://github.com/cozy/cozy-libs/commit/4a61aafc00ea15aa4c7815e5083f22c9092234bd))
+* **mespapiers:** Update cozy-client to 33.1.0 ([7d8bb35](https://github.com/cozy/cozy-libs/commit/7d8bb352ba97797daa0e91e5608e23bf453c8837))
+* **mespapiers:** Update cozy-ui to 75.1.0 ([290d548](https://github.com/cozy/cozy-libs/commit/290d548d769442e0959235b60f201975e7182f9f))
+* **mespapiers:** Update cozy-ui to 75.3.0 ([63dc83c](https://github.com/cozy/cozy-libs/commit/63dc83c00233342e650a573d67220f3ac1f84c81))
+* Processing of PR returns ([46a2b19](https://github.com/cozy/cozy-libs/commit/46a2b1985b49524ff190ec270512bb59508238ed))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** See cozy/cozy-ui@95ba1f5
+* **mespapiers:** See https://github.com/cozy/cozy-client/releases/tag/v33.1.0
+* **mespapiers:** See https://github.com/cozy/cozy-ui/releases/tag/v75.0.0
+
+Display edit menu for contact
+
+
+
+
+
 # [4.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@4.1.0...cozy-mespapiers-lib@4.2.0) (2022-09-21)
 
 
