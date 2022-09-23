@@ -1,8 +1,10 @@
+import { mockPapersDefinitions } from '../../../../test/mockPaperDefinitions'
 import {
   isInformationEditPermitted,
   updateFileMetadata,
   makeCurrentStep,
-  updateReferencedContact
+  updateReferencedContact,
+  getPaperDefinitionByFile
 } from './helpers'
 
 const informationStep = {
@@ -36,7 +38,9 @@ const makeFakeCurrentEditInformation = ({
   }
 }
 
-const makeCurrentPaperDefinition = () => ({
+const makeCurrentPaperDefinition = ({ label, country } = {}) => ({
+  label,
+  ...(country && { country }),
   acquisitionSteps: [
     {
       model: 'scan',
@@ -67,6 +71,22 @@ const makeCurrentPaperDefinition = () => ({
       illustration: 'contact.png'
     }
   ]
+})
+
+const makeFakeFile = ({ country, qualificationLabel } = {}) => ({
+  id: '123456',
+  name: 'fake file',
+  metadata: {
+    cardNumber: '454654876789',
+    datetime: '2022-09-29T11:53:00.000Z',
+    datetimeLabel: 'expirationDate',
+    expirationDate: '2022-09-29T11:53:00.000Z',
+    page: 'front',
+    ...(country && { country }),
+    qualification: {
+      label: qualificationLabel
+    }
+  }
 })
 
 describe('isInformationEditPermitted', () => {
@@ -352,5 +372,44 @@ describe('updateReferencedContact', () => {
     expect(mockaAddReferencedBy).toBeCalledTimes(1)
     expect(mockRemoveReferencedBy).toBeCalledTimes(1)
     expect(mockSave).toBeCalledTimes(1)
+  })
+})
+describe('getPaperDefinitionByFile', () => {
+  describe('paperDefinition has no country defined', () => {
+    it('should return the paperDefinition "isp_invoice"', () => {
+      const fakeFile = makeFakeFile({ qualificationLabel: 'isp_invoice' })
+      const res = getPaperDefinitionByFile(mockPapersDefinitions, fakeFile)
+
+      expect(res).toMatchObject({ label: 'isp_invoice' })
+    })
+    it('should return the paperDefinition "isp_invoice", even if the file has a country metadata defined', () => {
+      const fakeFile = makeFakeFile({
+        qualificationLabel: 'isp_invoice',
+        country: 'fr'
+      })
+      const res = getPaperDefinitionByFile(mockPapersDefinitions, fakeFile)
+
+      expect(res).not.toMatchObject({ label: 'isp_invoice', country: 'fr' })
+    })
+  })
+  describe('paperDefinition has a country defined', () => {
+    it('should return the paperDefinition "driver_license", with the country "fr" as default', () => {
+      const fakeFile = makeFakeFile({ qualificationLabel: 'driver_license' })
+      const res = getPaperDefinitionByFile(mockPapersDefinitions, fakeFile)
+
+      expect(res).toMatchObject({ label: 'driver_license', country: 'fr' })
+    })
+    it('should return the paperDefinition "driver_license", with the country "stranger" if defined & not "fr"', () => {
+      const fakeFile = makeFakeFile({
+        qualificationLabel: 'driver_license',
+        country: 'en'
+      })
+      const res = getPaperDefinitionByFile(mockPapersDefinitions, fakeFile)
+
+      expect(res).toMatchObject({
+        label: 'driver_license',
+        country: 'stranger'
+      })
+    })
   })
 })

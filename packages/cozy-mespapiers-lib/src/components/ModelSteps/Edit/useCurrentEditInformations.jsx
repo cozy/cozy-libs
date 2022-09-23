@@ -3,7 +3,7 @@ import { isQueryLoading, useQuery } from 'cozy-client'
 
 import { buildFilesQueryById } from '../../../helpers/queries'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
-import { makeCurrentStep } from './helpers'
+import { getPaperDefinitionByFile, makeCurrentStep } from './helpers'
 
 /**
  * @param {string} fileId
@@ -29,9 +29,7 @@ export const useCurrentEditInformations = (fileId, model) => {
 
   const paperDef =
     (!isLoadingFiles &&
-      papersDefinitions.find(
-        paper => paper.label === files?.[0]?.metadata?.qualification?.label
-      )) ||
+      getPaperDefinitionByFile(papersDefinitions, files[0])) ||
     null
 
   const currentStep = makeCurrentStep({ paperDef, model, metadataName })
