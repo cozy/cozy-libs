@@ -98,8 +98,6 @@ export class SharingProvider extends Component {
     const { client } = props
     this.sharingCol = client.collection(SHARING_DOCTYPE)
     this.permissionCol = client.collection(PERMISSION_DOCTYPE)
-
-    this.fetchAllSharings = this.fetchAllSharings.bind(this)
   }
 
   dispatch = action =>
@@ -169,7 +167,7 @@ export class SharingProvider extends Component {
     }
   }
 
-  async fetchAllSharings() {
+  fetchAllSharings = async () => {
     const { doctype, client } = this.props
     const [sharings, permissions, apps] = await Promise.all([
       this.sharingCol.findByDoctype(doctype),
