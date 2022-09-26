@@ -9,10 +9,7 @@ export const isInformationEditPermitted = currentEditInformation => {
 
   return !!(
     currentEditInformation?.searchParams?.metadataName !== 'datetime' &&
-    currentEditInformation?.currentStep &&
-    currentEditInformation?.file?.metadata[
-      currentEditInformation?.searchParams?.metadataName
-    ]
+    currentEditInformation?.currentStep
   )
 }
 
