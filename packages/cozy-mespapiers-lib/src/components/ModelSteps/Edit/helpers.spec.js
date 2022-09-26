@@ -129,7 +129,7 @@ describe('isInformationEditPermitted', () => {
 
     expect(res).toBe(false)
   })
-  it('should return False if tries to edit a metadata that does not exist on current file', () => {
+  it('should return True if tries to edit a metadata that is not filled in the current file', () => {
     const fakeCurrentEditInformation = makeFakeCurrentEditInformation({
       metadataName: 'expirationDate',
       currentStep: informationStep,
@@ -137,7 +137,7 @@ describe('isInformationEditPermitted', () => {
     })
     const res = isInformationEditPermitted(fakeCurrentEditInformation)
 
-    expect(res).toBe(false)
+    expect(res).toBe(true)
   })
 })
 describe('updateFileMetadata', () => {
