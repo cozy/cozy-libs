@@ -325,6 +325,7 @@ export class DumbTriggerManager extends Component {
       flowState,
       client,
       OAuthFormWrapperComp,
+      OAuthFormWrapperCompProps = {},
       reconnect,
       intentsApi
     } = this.props
@@ -346,7 +347,7 @@ export class DumbTriggerManager extends Component {
         ? OAuthFormWrapperComp
         : React.Fragment
       return (
-        <Wrapper>
+        <Wrapper {...OAuthFormWrapperCompProps}>
           <OAuthForm
             client={client}
             flow={flow}
