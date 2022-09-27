@@ -13,6 +13,7 @@ import TriggerErrorInfo from './infos/TriggerErrorInfo'
 import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { findKonnectorPolicy } from '../konnector-policies'
+import flag from 'cozy-flags'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -63,7 +64,7 @@ export const OAuthForm = props => {
   const handleConnect = useCallback(() => {
     setShowOAuthWindow(true)
     const konnectorPolicy = findKonnectorPolicy(konnector)
-    if (konnectorPolicy.isBIWebView) {
+    if (konnectorPolicy.isBIWebView && flag('harvest.bi.fullwebhooks')) {
       flow.expectTriggerLaunch({ konnector })
     }
   }, [client, flow, konnector.slug])
