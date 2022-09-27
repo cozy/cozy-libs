@@ -95,9 +95,9 @@ export class DumbTriggerManager extends Component {
 
     const konnectorPolicy = findKonnectorPolicy(konnector)
 
-    let foundOAuthConnection = false
+    let needsTriggerCreation = true
     if (konnectorPolicy.handleOAuthAccount) {
-      foundOAuthConnection = await konnectorPolicy.handleOAuthAccount({
+      needsTriggerCreation = await konnectorPolicy.handleOAuthAccount({
         account: oAuthAccount,
         flow,
         konnector,
@@ -108,7 +108,7 @@ export class DumbTriggerManager extends Component {
     }
 
     // for "normal" OAuth connectors
-    if (!foundOAuthConnection) {
+    if (needsTriggerCreation) {
       flow.ensureTriggerAndLaunch(client, {
         account: oAuthAccount,
         konnector: konnector,

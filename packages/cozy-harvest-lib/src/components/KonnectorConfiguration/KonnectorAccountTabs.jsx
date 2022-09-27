@@ -114,7 +114,9 @@ const DumbKonnectorAccountTabs = props => {
 
   const handleClick = useCallback(() => {
     setShowBIWebView(true)
-    flow.expectTriggerLaunch()
+    if (flag('harvest.bi.fullwebhooks')) {
+      flow.expectTriggerLaunch()
+    }
   }, [flow])
   const errorActionButton = konnectorPolicy.isBIWebView ? (
     <Button

@@ -114,7 +114,7 @@ describe('handleOAuthAccount', () => {
     })
     expect(flow.handleFormSubmit).not.toHaveBeenCalled()
     expect(flow.saveAccount).not.toHaveBeenCalled()
-    expect(result).toEqual(15)
+    expect(result).toEqual(true)
   })
 })
 

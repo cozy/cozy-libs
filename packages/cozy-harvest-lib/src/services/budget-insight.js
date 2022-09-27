@@ -220,7 +220,7 @@ export const setBIConnectionId = (originalAccount, biConnectionId) => {
  * @param {Object} options.konnector connector manifest content
  * @param {Object} options.client CozyClient object
  *
- * @return {Integer} Connection Id
+ * @return {Promise<Boolean>} true if the trigger manager should create the trigger itself
  */
 export const handleOAuthAccount = async ({
   account,
@@ -252,7 +252,7 @@ export const handleOAuthAccount = async ({
     })
   }
 
-  return connectionId
+  return Boolean(connectionId)
 }
 
 /**

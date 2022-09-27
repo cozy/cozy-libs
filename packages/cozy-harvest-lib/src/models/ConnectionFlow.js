@@ -441,12 +441,14 @@ export class ConnectionFlow {
 
       logger.info(`ConnectionFlow: Saved account ${account._id}`)
 
-      await this.ensureTriggerAndLaunch(client, {
-        trigger,
-        account,
-        konnector,
-        t
-      })
+      if (!konnectorPolicy.needsTriggerCreation) {
+        await this.ensureTriggerAndLaunch(client, {
+          trigger,
+          account,
+          konnector,
+          t
+        })
+      }
       this.setState({ accountError: null })
     } catch (e) {
       logger.error(e)

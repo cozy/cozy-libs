@@ -77,7 +77,7 @@ export const checkBIConnection = async ({ connId, client, konnector }) => {
  * @param {CozyClient} options.client CozyClient object
  * @param {Boolean} options.reconnect If this is a reconnection
  * @param {Function} options.t Translation fonction
- * @return {Promise<Number|null>} Connection Id
+ * @return {Promise<Boolean>} true if the trigger manager should create the trigger itself
  */
 export const handleOAuthAccount = async ({
   account,
@@ -87,10 +87,14 @@ export const handleOAuthAccount = async ({
   reconnect,
   t
 }) => {
+  if (flag('harvest.bi.fullwebhooks')) {
+    flow.triggerEvent(LOGIN_SUCCESS_EVENT)
+    return false
+  }
   if (reconnect) {
     // No need for specific action here. The trigger will be launched by the trigger manager
     const connId = getBIConnectionIdFromAccount(account)
-    return connId
+    return Boolean(connId)
   }
   const cozyBankIds = getCozyBankIds({ konnector, account })
   let biWebviewAccount = {
@@ -117,7 +121,7 @@ export const handleOAuthAccount = async ({
     })
   }
 
-  return connectionId
+  return Boolean(connectionId)
 }
 
 /**
@@ -452,6 +456,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
 
 export const konnectorPolicy = {
   isBIWebView: true,
+  needsTriggerCreation: flag('harvest.bi.fullwebhook'),
   name: 'budget-insight-webview',
   match: isBiWebViewConnector,
   saveInVault: false,
