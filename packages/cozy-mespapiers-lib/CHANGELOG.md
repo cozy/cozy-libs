@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@5.0.1...cozy-mespapiers-lib@6.0.0) (2022-09-27)
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-ui from 75.3.0 to 75.4.0 ([79535b0](https://github.com/cozy/cozy-libs/commit/79535b0523b927893cad17fe57e43329f035be10))
+* **mespapiers:** We can now edit a metadata even if it didn't exist ([a5f272d](https://github.com/cozy/cozy-libs/commit/a5f272d5a2edd69c72d9b68d6e577b83dafe6e83))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** cozy-ui package need to be `>= 75.4.0`
+
+
+
+
+
 ## [5.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@5.0.0...cozy-mespapiers-lib@5.0.1) (2022-09-23)
 
 
