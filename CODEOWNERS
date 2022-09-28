@@ -1,16 +1,16 @@
 # General code owners
-*       @trollepierre @acezard
+*       @acezard
 
 # Based on the Paper of the Technical maintainers of 2022
-packages/cozy-harvest-lib            @doubleface @trollepierre
-packages/cozy-doctypes/              @doubleface @trollepierre
-packages/cozy-flags/                 @acezard @trollepierre @Ldoppea
-packages/cozy-app-publish/           @acezard @doubleface @trollepierre
-packages/cozy-interapp/              @Ldoppea @acezard @trollepierre
+packages/cozy-harvest-lib            @doubleface
+packages/cozy-doctypes/              @doubleface
+packages/cozy-flags/                 @acezard @Ldoppea
+packages/cozy-app-publish/           @acezard @doubleface
+packages/cozy-interapp/              @Ldoppea @acezard
 packages/cozy-intent/                @Ldoppea @acezard
-packages/cozy-realtime/              @Ldoppea @trollepierre
-packages/eslint-config-cozy-app/     @acezard @trollepierre
-packages/renovate-config-cozy/       @doubleface @trollepierre
-packages/renovate-config-cozy-libs/  @doubleface @trollepierre
-packages/cozy-sharing/               @Ldoppea @acezard @trollepierre
+packages/cozy-realtime/              @Ldoppea
+packages/eslint-config-cozy-app/     @acezard
+packages/renovate-config-cozy/       @doubleface
+packages/renovate-config-cozy-libs/  @doubleface
+packages/cozy-sharing/               @Ldoppea @acezard
 packages/cozy-mespapiers-lib/        @Merkur39 @JF-Cozy @PolariTOON
