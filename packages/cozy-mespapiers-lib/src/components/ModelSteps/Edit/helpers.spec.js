@@ -82,7 +82,7 @@ const makeFakeFile = ({ country, qualificationLabel } = {}) => ({
     datetimeLabel: 'expirationDate',
     expirationDate: '2022-09-29T11:53:00.000Z',
     page: 'front',
-    ...(country && { country }),
+    ...(country !== undefined && { country }),
     qualification: {
       label: qualificationLabel
     }
@@ -403,6 +403,18 @@ describe('getPaperDefinitionByFile', () => {
       const fakeFile = makeFakeFile({
         qualificationLabel: 'driver_license',
         country: 'en'
+      })
+      const res = getPaperDefinitionByFile(mockPapersDefinitions, fakeFile)
+
+      expect(res).toMatchObject({
+        label: 'driver_license',
+        country: 'stranger'
+      })
+    })
+    it('should return the paperDefinition "driver_license", with the country "stranger" if it empty in file', () => {
+      const fakeFile = makeFakeFile({
+        qualificationLabel: 'driver_license',
+        country: ''
       })
       const res = getPaperDefinitionByFile(mockPapersDefinitions, fakeFile)
 
