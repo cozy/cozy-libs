@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@6.0.0...cozy-mespapiers-lib@7.0.0) (2022-09-30)
+
+
+### Bug Fixes
+
+* **mespapiers:** The getPaperDefinitionByFile helper ([05d0547](https://github.com/cozy/cozy-libs/commit/05d05471d4b73f4f550b18d113fe57a388c5d78c))
+
+
+### Features
+
+* Update cozy-ui to 75.6.0 ([de75146](https://github.com/cozy/cozy-libs/commit/de751460d2a4cfeeda59dbf836eb68ca23b3b0da))
+
+
+### BREAKING CHANGES
+
+* See https://github.com/cozy/cozy-ui/releases/tag/v75.6.0
+
+
+
+
+
 # [6.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@5.0.1...cozy-mespapiers-lib@6.0.0) (2022-09-27)
 
 
