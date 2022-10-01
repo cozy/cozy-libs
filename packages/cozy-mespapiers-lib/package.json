@@ -31,6 +31,7 @@
     "@date-io/date-fns": "1",
     "@material-ui/core": "4.12.3",
     "@material-ui/pickers": "3.3.10",
+    "compare-versions": "5.0.1",
     "date-fns": "2.23.0",
     "fuse.js": "6.6.2",
     "pdf-lib": "1.17.1",
