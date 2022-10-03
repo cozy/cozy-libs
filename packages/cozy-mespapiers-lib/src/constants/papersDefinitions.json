@@ -254,6 +254,7 @@
     },
     {
       "label": "driver_license",
+      "placeholderIndex": 3,
       "country": "stranger",
       "icon": "car",
       "featureDate": "obtentionDate",

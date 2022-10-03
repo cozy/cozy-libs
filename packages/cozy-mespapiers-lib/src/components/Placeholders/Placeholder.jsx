@@ -33,7 +33,7 @@ const Placeholder = forwardRef(({ placeholder, divider, onClick }, ref) => {
           </InfosBadge>
         </ListItemIcon>
         <Typography color="textSecondary">
-          {scannerT(`items.${placeholder.label}`)}
+          {scannerT(`items.${placeholder.label}`, placeholder.country)}
         </Typography>
       </ListItem>
       {divider && <Divider variant="inset" component="li" />}
