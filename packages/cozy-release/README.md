@@ -77,7 +77,7 @@ git tag -a x.y.z
 
 You can reach the Cozy Community by:
 
-- Chatting with us on IRC [#cozycloud on Freenode][freenode]
+- Chatting with us on IRC [#cozycloud on Libera.Chat][libera]
 - Posting on our [Forum][forum]
 - Posting issues on the [Github repos][github]
 - Say Hi! on [Twitter][twitter]
@@ -92,7 +92,7 @@ The maintainers for Cozy Release are [Gregory](https://github.com/gregorylegarec
 
 [cozy]: https://cozy.io "Cozy Cloud"
 
-[freenode]: http://webchat.freenode.net/?randomnick=1&channels=%23cozycloud&uio=d4
+[libera]: https://web.libera.chat/#cozycloud
 
 [forum]: https://forum.cozy.io/
 
