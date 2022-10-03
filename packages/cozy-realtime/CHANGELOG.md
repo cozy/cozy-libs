@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.2.8](https://github.com/cozy/cozy-libs/compare/cozy-realtime@4.2.7...cozy-realtime@4.2.8) (2022-10-03)
+
+
+### Bug Fixes
+
+* Expose sendNotification from cozy-client realtime plugin ([82500b4](https://github.com/cozy/cozy-libs/commit/82500b4b344862734df8556a74c93b458626b55e))
+
+
+
+
+
 ## [4.2.7](https://github.com/cozy/cozy-libs/compare/cozy-realtime@4.2.6...cozy-realtime@4.2.7) (2022-10-03)
 
 **Note:** Version bump only for package cozy-realtime
