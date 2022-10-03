@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@2.4.1...cozy-device-helper@2.5.0) (2022-10-03)
+
+
+### Features
+
+* Update device-helper interface ([ba87e8e](https://github.com/cozy/cozy-libs/commit/ba87e8ec6d48f7fd9d333965b4af6e527ce53c8b))
+
+
+
+
+
 ## 2.4.1 (2022-10-03)
 
 **Note:** Version bump only for package cozy-device-helper
