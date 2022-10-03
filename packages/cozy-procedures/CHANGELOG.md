@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.50.3 (2022-10-03)
+
+**Note:** Version bump only for package cozy-procedures
+
+
+
+
+
 ## 0.50.2 (2022-08-29)
 
 

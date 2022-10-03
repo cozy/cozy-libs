@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 5.1.1 (2022-10-03)
+
+**Note:** Version bump only for package eslint-config-cozy-app
+
+
+
+
+
 # [5.1.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@5.0.0...eslint-config-cozy-app@5.1.0) (2022-09-12)
 
 

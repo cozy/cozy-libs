@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 2.5.1 (2022-10-03)
+
+**Note:** Version bump only for package cozy-intent
+
+
+
+
+
 # [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.4.0...cozy-intent@2.5.0) (2022-09-12)
 
 
