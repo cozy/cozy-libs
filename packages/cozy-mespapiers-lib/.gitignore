@@ -30,6 +30,8 @@ ehthumbs.db
 Thumbs.db
 desktop.ini
 
+# scripts generated folder
+temp/
 
 # Mobile
 targets/mobile/hooks

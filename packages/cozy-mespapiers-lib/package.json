@@ -10,7 +10,8 @@
     "test": "jest",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-mespapiers-lib",
     "check-locales": "./scripts/check-locales.sh",
-    "prepublishOnly": "yarn check-locales && yarn build"
+    "prepublishOnly": "yarn check-locales && yarn build",
+    "update:consumingapp": "node ./scripts/update_consuming_apps.js"
   },
   "devDependencies": {
     "@testing-library/react": "11.2.7",
