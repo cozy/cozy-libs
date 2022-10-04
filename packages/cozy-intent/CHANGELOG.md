@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.5.1...cozy-intent@2.6.0) (2022-10-04)
+
+
+### Features
+
+* Add possibility to use params in toggleSetting() ([b3ef6f2](https://github.com/cozy/cozy-libs/commit/b3ef6f20117729d7366a61433ffa6a1e87b0946f))
+
+
+
+
+
 ## 2.5.1 (2022-10-03)
 
 **Note:** Version bump only for package cozy-intent
