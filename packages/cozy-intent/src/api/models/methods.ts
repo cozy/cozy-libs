@@ -15,7 +15,8 @@ interface _NativeMethodsRegister {
   setFlagshipUI: (flagshipUI: FlagshipUI, caller?: string) => Promise<null>
   showSplashScreen: () => Promise<null>
   toggleSetting: (
-    settingName: 'biometryLock' | 'PINLock' | 'autoLock'
+    settingName: 'biometryLock' | 'PINLock' | 'autoLock',
+    params?: Record<string, unknown>
   ) => Promise<boolean | null>
 }
 
