@@ -325,6 +325,7 @@ export class DumbTriggerManager extends Component {
       flowState,
       client,
       OAuthFormWrapperComp,
+      OAuthFormWrapperCompProps = {},
       reconnect,
       intentsApi
     } = this.props
@@ -346,7 +347,7 @@ export class DumbTriggerManager extends Component {
         ? OAuthFormWrapperComp
         : React.Fragment
       return (
-        <Wrapper>
+        <Wrapper {...OAuthFormWrapperCompProps}>
           <OAuthForm
             client={client}
             flow={flow}
@@ -456,6 +457,8 @@ DumbTriggerManager.propTypes = {
     PropTypes.element,
     PropTypes.func
   ]),
+  /** Used to pass props to OAuthFormWrapperComp without causing a rerender of TriggerManager */
+  OAuthFormWrapperCompProps: PropTypes.object,
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
   // custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment
