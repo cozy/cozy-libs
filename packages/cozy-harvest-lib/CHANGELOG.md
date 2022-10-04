@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.27.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.18...cozy-harvest-lib@9.27.0) (2022-10-04)
+
+
+### Features
+
+* Allow to pass custom Properties to OAuthForm wrapper ([c2461a3](https://github.com/cozy/cozy-libs/commit/c2461a312fd75dff29452fc99ac968d40e040c83))
+
+
+
+
+
 ## [9.26.18](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.17...cozy-harvest-lib@9.26.18) (2022-10-04)
 
 **Note:** Version bump only for package cozy-harvest-lib
