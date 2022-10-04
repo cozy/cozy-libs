@@ -193,11 +193,11 @@ To print more logs when using tool (useful for debug).
 
 #### Release workflow
 
-- A new branch is created from the current state of `master`. Let's say we want to deploy version `1.0.0` of the app.
-- Since we created a new branch, we have to bump the version of `master`, so we have to create a PR to bump to `1.1.0` everywhere is necessary
-- The only type of commits allowed on this release branch are bug fixes.
+- A new release branch is created from the current state of `master`. Let's say we want to deploy version `1.0.0` of the app, we will create `release/1.0.0`.
+- Since we created a new branch, we have to bump the version of `master`, so we have to create a PR to bump to `1.1.0` everywhere it is necessary. This depends on the app, but most of the time it requires to change the `package.json` and `manifest.webapp` versions.
+- The only type of commits allowed on this release branch are bug fixes, that should be made on the release branch.
 - To release a stable or beta version, generally we use directly github and the release creation interface. In this interface, don't forget to fill in the changelog and to check "prelease" for a beta version. The title of the release must be the released version (ex.: `1.40.0-beta.1`)
-- Every time one or more bugs are fixed and the version is considered for release, the latest commit is tagged with a prerelease version number, eg. `1.0.0-beta.1`, `1.0.0-beta.2`, etc…
+- Every time bugs are fixed and the version is considered for release, the latest commit is tagged with a prerelease version number, eg. `1.0.0-beta.1`, `1.0.0-beta.2`, etc…
 - Each of these prereleases is automatically uploaded on downcloud and deployed on instances that are on the `beta` channel.
 - Once the branch is deemed ready for release, the last commit is tagged with the final version — `1.0.0` in our example. It is then, again, uploaded on downcloud, published on the registry and deployed on specific instances as needed.
 - The release branch is merged back into `master` so that all the bugfixes aren't lost.
@@ -221,7 +221,7 @@ If you need to quickly fix a bug in production, then you have to:
 - Publish
 - Merge it on master
 
-Exemple: You have to hot fix Drive. The current `stable` version of Drive is : 1.45.0. Master is on 1.47.0.
+Example: You have to hot fix Drive. The current `stable` version of Drive is : 1.45.0. Master is on 1.47.0.
 
 - Then you need to fetch release/1.45.0
 - Create a branch from this release: git checkout -b release/1.45.1
