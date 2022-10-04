@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [8.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@8.0.4...cozy-mespapiers-lib@8.0.5) (2022-10-04)
+
+
+### Bug Fixes
+
+* Wording of driver_license suggestion ([e77afb5](https://github.com/cozy/cozy-libs/commit/e77afb53e68f5d87816c42071b958b23dfffd69c))
+
+
+
+
+
 ## [8.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@8.0.3...cozy-mespapiers-lib@8.0.4) (2022-10-04)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
