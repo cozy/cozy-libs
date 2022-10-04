@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.32.0 (2022-10-04)
+
+
+### Features
+
+* Prohibits putting only spaces in a document name ([5568408](https://github.com/cozy/cozy-libs/commit/55684088da1f6c086596e156825a5999c60421db))
+
+
+
+
+
 # 0.31.0 (2022-07-05)
 
 
