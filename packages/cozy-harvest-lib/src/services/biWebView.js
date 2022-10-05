@@ -201,14 +201,19 @@ export const onBIAccountCreation = async ({
 }
 
 /**
- * Create OAuth extra parameters specific to reconnect webview
+ * Create OAuth extra parameters specific to reconnect or manage webview (which need the same parameters)
+ *
  * @param {object} options
  * @param {Array<String>} options.biBankIds - connector bank ids (for webview connectors)
  * @param {String} options.token - BI temporary token
  * @param {Number} options.connId - BI bi connection id
  * @return {Object}
  */
-const getReconnectExtraOAuthUrlParams = ({ biBankIds, token, connId }) => {
+const getReconnectOrManageExtraOAuthUrlParams = ({
+  biBankIds,
+  token,
+  connId
+}) => {
   return {
     id_connector: biBankIds,
     code: token,
@@ -218,18 +223,21 @@ const getReconnectExtraOAuthUrlParams = ({ biBankIds, token, connId }) => {
 
 /**
  * Create OAuth extra parameters
+ *
  * @param {object} options
  * @param {CozyClient} options.client - CozyClient instance
  * @param {KonnectorManifest} options.konnector konnector manifest content
  * @param {IoCozyAccount} options.account The account content
  * @param {Boolean} options.reconnect If this is a reconnection
+ * @param {Boolean} options.manage If this is a manage
  * @return {Promise<Object>}
  */
 export const fetchExtraOAuthUrlParams = async ({
   client,
   konnector,
   account,
-  reconnect = false
+  reconnect = false,
+  manage = false
 }) => {
   const {
     code: token,
@@ -243,8 +251,8 @@ export const fetchExtraOAuthUrlParams = async ({
 
   const connId = getBIConnectionIdFromAccount(account)
 
-  if (reconnect) {
-    return getReconnectExtraOAuthUrlParams({
+  if (reconnect || manage) {
+    return getReconnectOrManageExtraOAuthUrlParams({
       biBankIds,
       token,
       connId

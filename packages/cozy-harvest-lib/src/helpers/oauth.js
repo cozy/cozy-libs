@@ -102,6 +102,7 @@ export const handleOAuthResponse = (options = {}) => {
  * @param  {string} nonce unique nonce string
  * @param  {Object} extraParams some extra parameters to add to the query string
  * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
+ * @param  {Boolean} manage Are we trying to manage an existing account ?
  * @param  {io.cozy.accounts} account targeted account if any
  * @returns {String} final OAuth url string
  */
@@ -113,13 +114,19 @@ export const getOAuthUrl = ({
   nonce,
   redirectSlug,
   extraParams,
+  manage,
   reconnect,
   account
 }) => {
-  const startOrReconnect = reconnect ? 'reconnect' : 'start'
-  const accountIdParam = reconnect ? account._id + '/' : ''
+  let command = 'start'
+  if (manage) {
+    command = 'manage'
+  } else if (reconnect) {
+    command = 'reconnect'
+  }
+  const accountIdParam = reconnect || manage ? account._id + '/' : ''
   const oAuthUrl = new URL(
-    `${cozyUrl}/accounts/${accountType}/${accountIdParam}${startOrReconnect}`
+    `${cozyUrl}/accounts/${accountType}/${accountIdParam}${command}`
   )
   oAuthUrl.searchParams.set('state', oAuthStateKey)
   oAuthUrl.searchParams.set('nonce', nonce)
@@ -160,6 +167,7 @@ const getAppSlug = client => {
  * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
  * @param  {Object} extraParams some extra parameters to add to the query string
  * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
+ * @param  {Boolean} manage Are we trying to manage an existing account ?
  * @param  {io.cozy.accounts} account targetted account if any
  * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
@@ -169,6 +177,7 @@ export const prepareOAuth = (
   redirectSlug,
   extraParams,
   reconnect = false,
+  manage = false,
   account
 ) => {
   const { oauth } = konnector
@@ -192,6 +201,7 @@ export const prepareOAuth = (
     redirectSlug: redirectSlug || getAppSlug(client),
     extraParams,
     reconnect,
+    manage,
     account
   })
 

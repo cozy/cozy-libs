@@ -47,8 +47,15 @@ export class OAuthWindow extends PureComponent {
   }
 
   componentDidMount() {
-    const { client, konnector, redirectSlug, extraParams, reconnect, account } =
-      this.props
+    const {
+      client,
+      konnector,
+      redirectSlug,
+      extraParams,
+      reconnect = false,
+      manage = false,
+      account
+    } = this.props
     this.realtime = new CozyRealtime({ client })
     this.realtime.subscribe(
       'notified',
@@ -62,6 +69,7 @@ export class OAuthWindow extends PureComponent {
       redirectSlug,
       extraParams,
       reconnect,
+      manage,
       account
     )
     this.setState({ oAuthStateKey, oAuthUrl, succeed: false })
@@ -195,6 +203,8 @@ OAuthWindow.propTypes = {
   redirectSlug: PropTypes.string,
   /** Is it a reconnection or not */
   reconnect: PropTypes.bool,
+  /** Are we trying to edit an existing account (without reconnection) */
+  manage: PropTypes.bool,
   /** Existing account */
   account: PropTypes.object,
   /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */

@@ -355,7 +355,7 @@ describe('fetchExtraOAuthUrlParams', () => {
     expect(result).toMatchObject({ id_connector: [2] })
   })
 
-  it('should fetch reconnect params if any connection id in the account', async () => {
+  it('should fetch reconnect params', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
@@ -378,23 +378,27 @@ describe('fetchExtraOAuthUrlParams', () => {
     })
   })
 
-  it('should not add connection_id param if no connection_id', async () => {
+  it('should fetch manage params', async () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
     client.query = jest.fn().mockResolvedValue({
       data: {
         timestamp: Date.now(),
-        code: 'bi-temporary-access-token-12',
+        code: 'bi-temporary-access-token-12-manage',
         biMapping: { [TEST_BANK_COZY_ID]: 2 }
       }
     })
     const result = await fetchExtraOAuthUrlParams({
       client,
       konnector,
-      account
+      account: { ...account, data: { auth: { bi: { connId: 15 } } } },
+      manage: true
     })
-    expect(result).not.toHaveProperty('connection_id')
+    expect(result).toMatchObject({
+      connection_id: 15,
+      code: 'bi-temporary-access-token-12-manage'
+    })
   })
 
   it('should get bi connection bank id if multiple biBankIds are in the mapping', async () => {
