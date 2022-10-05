@@ -42,7 +42,8 @@ const BIContractActivationWindow = ({
       const result = await konnectorPolicy.fetchExtraOAuthUrlParams({
         client,
         account,
-        konnector
+        konnector,
+        manage: true
       })
       setExtraParams(result)
     }
@@ -77,6 +78,7 @@ const BIContractActivationWindow = ({
           intentsApi={intentsApi}
           onSuccess={onPopupClosed}
           onCancel={onPopupClosed}
+          manage={true}
         />
       )}
     </ListItem>
