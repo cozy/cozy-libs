@@ -14,6 +14,7 @@ import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { findKonnectorPolicy } from '../konnector-policies'
 import flag from 'cozy-flags'
+import isEqual from 'lodash/isEqual'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -67,7 +68,7 @@ export const OAuthForm = props => {
     if (konnectorPolicy.isBIWebView && flag('harvest.bi.fullwebhooks')) {
       flow.expectTriggerLaunch({ konnector })
     }
-  }, [client, flow, konnector.slug])
+  }, [flow, konnector])
 
   const handleOAuthCancel = err => {
     flow.triggerEvent(ERROR_EVENT, translateOauthError(err))
@@ -150,4 +151,6 @@ OAuthForm.propTypes = {
   intentsApi: intentsApiProptype
 }
 
-export default compose(withLocales)(OAuthForm)
+// use isEqual to avoid an infinite rerender since the konnector object is a new one on each render
+// when used in the home application
+export default React.memo(compose(withLocales)(OAuthForm), isEqual)
