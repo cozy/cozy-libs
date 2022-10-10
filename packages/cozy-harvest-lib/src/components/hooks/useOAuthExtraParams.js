@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 
 import { findKonnectorPolicy } from '../../konnector-policies'
+
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
 const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)
@@ -9,7 +11,9 @@ const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
   const [fetchStatus, setFetchStatus] = useState('loading')
   const [extraParams, setExtraParams] = useState(null)
 
-  useEffect(() => {
+  // use useDeepCompareEffect to avoid an infinite rerender since the konnector object is a new one
+  // on each render when used in the home application
+  useDeepCompareEffect(() => {
     const load = async () => {
       try {
         const extraParams = await konnectorPolicy.fetchExtraOAuthUrlParams({
@@ -27,14 +31,7 @@ const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
     if (needsExtraParams) {
       load()
     }
-  }, [
-    account,
-    client,
-    konnector.slug,
-    konnectorPolicy,
-    needsExtraParams,
-    reconnect
-  ])
+  }, [account, client, konnector, konnectorPolicy, needsExtraParams, reconnect])
 
   return {
     fetchStatus,

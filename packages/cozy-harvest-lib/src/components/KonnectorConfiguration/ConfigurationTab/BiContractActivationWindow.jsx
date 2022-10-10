@@ -10,6 +10,7 @@ import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../../helpers/proptypes'
+import isEqual from 'lodash/isEqual'
 
 const BIContractActivationWindow = ({
   konnector,
@@ -49,7 +50,7 @@ const BIContractActivationWindow = ({
     if (konnectorPolicy.fetchExtraOAuthUrlParams) {
       handleLinkFetch()
     }
-  }, [konnector.slug, account, client, konnectorPolicy])
+  }, [konnector, account, client, konnectorPolicy])
 
   if (!konnectorPolicy.fetchExtraOAuthUrlParams) return null
 
@@ -90,4 +91,6 @@ BIContractActivationWindow.propTypes = {
   innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
-export default withLocales(BIContractActivationWindow)
+// use isEqual to avoid an infinite rerender since the konnector object is a new one on each render
+// when used in the home application
+export default React.memo(withLocales(BIContractActivationWindow), isEqual)

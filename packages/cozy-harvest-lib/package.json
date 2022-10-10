@@ -38,6 +38,7 @@
     "node-polyglot": "^2.4.0",
     "react-final-form": "^3.7.0",
     "react-markdown": "^4.2.2",
+    "use-deep-compare-effect": "^1.8.1",
     "uuid": "^3.3.2"
   },
   "devDependencies": {
