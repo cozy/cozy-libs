@@ -65,8 +65,6 @@ export class SelectServer extends Component {
         'Cozy-Authentication needs a cozy/cordova-plugin-keyboard plugin to work better.'
       )
     }
-
-    this.input.focus()
   }
   // eslint-disable-next-line
   componentWillReceiveProps(nextProps) {
