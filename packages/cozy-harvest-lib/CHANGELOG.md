@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.27.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.27.0...cozy-harvest-lib@9.27.1) (2022-10-11)
+
+
+### Bug Fixes
+
+* Add explicit blocked popup message ([5e6f93c](https://github.com/cozy/cozy-libs/commit/5e6f93cbe43cecc51089304ad3808fbc07793f8f))
+
+
+
+
+
 # [9.27.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.26.18...cozy-harvest-lib@9.27.0) (2022-10-04)
 
 
