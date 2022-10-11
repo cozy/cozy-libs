@@ -100,6 +100,12 @@ export class Popup extends PureComponent {
       `scrollbars=yes, width=${w}, height=${h}, top=${top}, left=${left}`
     )
 
+    if (!popup) {
+      throw new Error(
+        'Popup was blocked by browser. Be sure to not call showPopup asynchronously'
+      )
+    }
+
     // Puts focus on the newWindow
     if (popup.focus) {
       popup.focus()
