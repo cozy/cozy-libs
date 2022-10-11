@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import { RealTimeQueries } from 'cozy-client'
 import flag from 'cozy-flags'
 import FlagSwitcher from 'cozy-flags/dist/FlagSwitcher'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -42,8 +41,6 @@ const App = () => {
       ) : (
         <AppRouter />
       )}
-      <RealTimeQueries doctype="io.cozy.files" />
-      <RealTimeQueries doctype="io.cozy.mespapiers.settings" />
       <Alerter t={t} />
       <ModalStack />
     </>
