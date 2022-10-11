@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.10.10](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.10.9...cozy-authentication@2.10.10) (2022-10-11)
+
+
+### Bug Fixes
+
+* This.input is not defined ([1ba6a4d](https://github.com/cozy/cozy-libs/commit/1ba6a4d97d898e0f43f7ca9bd53aba6aff1405af))
+
+
+
+
+
 ## [2.10.9](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.10.8...cozy-authentication@2.10.9) (2022-10-03)
 
 **Note:** Version bump only for package cozy-authentication
