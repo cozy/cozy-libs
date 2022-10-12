@@ -74,7 +74,7 @@ const PapersListWrapper = ({ selectedThemeLabel = null }) => {
   const hasNoFiles = !isLoadingFiles && files.length === 0
 
   if (hasNoFiles) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/paper" replace />
   }
 
   return (
@@ -82,7 +82,7 @@ const PapersListWrapper = ({ selectedThemeLabel = null }) => {
       {!isMultiSelectionActive && (
         <PapersListToolbar
           title={themeLabel}
-          onBack={() => navigate('/')}
+          onBack={() => navigate('/paper')}
           onClose={() => setIsMultiSelectionActive(false)}
         />
       )}

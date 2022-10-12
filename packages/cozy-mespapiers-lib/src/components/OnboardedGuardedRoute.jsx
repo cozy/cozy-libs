@@ -37,7 +37,7 @@ const OnboardedGuardedRoute = () => {
     !isOnboardingPage && onboarded !== true && OnboardingComponent
 
   if (isAlreadyOnboarded) {
-    return <Navigate to="/" replace />
+    return <Navigate to="/paper" replace />
   }
 
   if (isNotOnboarded) {
