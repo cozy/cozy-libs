@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@8.0.7...cozy-mespapiers-lib@9.0.0) (2022-10-12)
+
+
+### Bug Fixes
+
+* **mespapiers:** Default route for the lib ([2f4fdfc](https://github.com/cozy/cozy-libs/commit/2f4fdfc68406e19ee866287d1ce353bd5205e813))
+* **mespapiers:** Redirections to homepage ([84ac23a](https://github.com/cozy/cozy-libs/commit/84ac23a052a4ee8d4b342d62f96c0c3bea4eeac5))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** Since the router update, applications were no longer forced
+to use the `/paper` route to consume lib.
+This change was not intended.
+With this fix we get back the old expected behavior.
+Unlike adding the `/*` like this `/paper/*` required with the new router.
+```
+<Route path="/paper/*" element={<PaperView />} />
+``` 
+
+
+
+
+
 ## [8.0.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@8.0.6...cozy-mespapiers-lib@8.0.7) (2022-10-11)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
