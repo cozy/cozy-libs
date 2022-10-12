@@ -82,21 +82,28 @@ const App = () => {
 }
 ```
 
-You have to create a `/paper` route (the name is important) in your application routeur and add a background location:
+You have to create a `/paper/*` route (the name is important) in your application routeur and add a background location:
 
 ```jsx
-import { Route, Switch, useLocation } from 'react-router-dom'
+import { HashRouter, Route, Routes } from 'react-router-dom'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import MesPapiers from 'cozy-mespapiers-lib'
+
+const PaperView = props => {
+  const { lang } = useI18n()
+
+  return <MesPapiers {...props} lang={lang} />
+}
 
 const AppRouter = () => {
-  const location = useLocation()
-  const background = location?.state?.background
-
   return (
-    <Switch location={background || location}>
-      <Route ... />
-      <Route path="/paper" component={MesPapiersView} />
-      <Route ... />
-    </Switch>
+    <HashRouter>
+      <Routes>
+        <Route ... />
+        <Route path="/paper/*" component={PaperView} />
+        <Route ... />
+      </Routes>
+    </HashRouter>
   )
 }
 ```
