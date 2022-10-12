@@ -24,7 +24,7 @@ export const AppRouter = () => {
     <>
       <Routes location={background || location}>
         <Route element={<OnboardedGuardedRoute />}>
-          <Route index element={<Home />} />
+          <Route path="/" element={<Home />} />
           <Route path="files/:fileTheme" element={<PapersListWrapper />} />
           <Route
             path="file/:fileTheme/:fileId"
@@ -32,7 +32,7 @@ export const AppRouter = () => {
           />
           <Route path="onboarding" element={<OnboardingWrapper />} />
         </Route>
-        <Route path="*" element={<Navigate to="/" />} />
+        <Route path="/paper" element={<Navigate to="/" />} />
       </Routes>
       {background && (
         <Routes>
