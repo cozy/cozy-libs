@@ -5,6 +5,7 @@ import compose from 'lodash/flowRight'
 
 import { withClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
+import { useVaultClient } from 'cozy-keys-lib'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -482,6 +483,17 @@ const LegacyTriggerManager = props => {
     initialTrigger,
     ...otherProps
   } = props
+
+  // Since the 4.1.0 of cozy-keys-lib, we
+  // render children even if vaultClient is
+  // not defined yet. In that case we we were
+  // displaying TriggerManager without vaultClient.
+  // It was raising an error.
+  // The current fix, is to not display the
+  // TriggerManager when vaultClient is null.
+  const vaultClient = useVaultClient()
+  if (!vaultClient) return null
+
   return (
     <FlowProvider
       onLaunch={onLaunch}
