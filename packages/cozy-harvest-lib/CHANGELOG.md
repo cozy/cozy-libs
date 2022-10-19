@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.27.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.27.1...cozy-harvest-lib@9.27.2) (2022-10-19)
+
+
+### Bug Fixes
+
+* Reapply useVaultClient hook call in LegacyTriggerManager ([bbfb20b](https://github.com/cozy/cozy-libs/commit/bbfb20b559660d04f8a4e1c21ebc3c11cc2cc88b))
+
+
+
+
+
 ## [9.27.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.27.0...cozy-harvest-lib@9.27.1) (2022-10-11)
 
 
