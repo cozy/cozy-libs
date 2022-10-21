@@ -7,7 +7,9 @@ const defaultKonnectorPolicy = {
   saveInVault: true,
   onAccountCreation: null,
   match: () => true,
-  name: 'default'
+  name: 'default',
+  fetchExtraOAuthUrlParams: null,
+  refreshContracts: null
 }
 
 const policies = [
@@ -18,6 +20,12 @@ const policies = [
 
 logger.info('Available konnector policies', policies)
 
+/**
+ * Find the konnector policy corresponding to the given konnector
+ *
+ * @param {KonnectorManifest} konnector
+ * @returns {KonnectorPolicy}
+ */
 export const findKonnectorPolicy = konnector => {
   const policy = policies.find(policy => policy.match(konnector))
   logger.info(`Using ${policy.name} konnector policy for ${konnector.slug}`)
