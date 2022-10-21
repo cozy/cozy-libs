@@ -38,6 +38,7 @@ describe('OAuthForm', () => {
     reconnect = false
   } = {}) => {
     const client = new CozyClient({ uri: 'http://cozy.localhost:8080' })
+    client.fetchQueryAndGetFromState = jest.fn()
     const konnector = {}
     const flow = new ConnectionFlow(client, null, konnector)
     flow.getState = jest.fn().mockReturnValue(flowState)
@@ -84,8 +85,19 @@ describe('OAuthForm', () => {
 
   it('should handle oauth cancelation', async () => {
     const { root } = await setup({
-      flowState: { error: new KonnectorJobError('OAUTH_CANCELED') }
+      flowState: {
+        running: true,
+        error: new KonnectorJobError('OAUTH_CANCELED')
+      }
     })
     expect(root.container).toMatchSnapshot()
+
+    const result = await setup({
+      flowState: {
+        running: false,
+        error: new KonnectorJobError('OAUTH_CANCELED')
+      }
+    })
+    expect(result.root.container).toMatchSnapshot()
   })
 })
