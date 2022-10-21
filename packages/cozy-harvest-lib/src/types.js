@@ -40,6 +40,17 @@
  */
 
 /**
+ * @typedef KonnectorPolicy
+ * @property {Boolean} accountContainsAuth
+ * @property {Boolean} saveInVault
+ * @property {Function} onAccountCreation
+ * @property {Function} match
+ * @property {String} name
+ * @property {Function} refreshContracts
+ * @property {Function} fetchExtraOAuthUrlParams
+ */
+
+/**
  * @typedef {CozyClientDocument} IoCozyAccount
  *
  */
