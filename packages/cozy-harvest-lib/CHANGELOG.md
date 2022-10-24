@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.28.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.27.2...cozy-harvest-lib@9.28.0) (2022-10-24)
+
+
+### Bug Fixes
+
+* Add useEffect dependencies to useOAuthExtraParams hook ([fb046e4](https://github.com/cozy/cozy-libs/commit/fb046e4034754075a65f5dd4ffd184ba6e180941))
+* Do not depend only on konnector.slug for useEffect dependencies ([65869cf](https://github.com/cozy/cozy-libs/commit/65869cfd154a8e925c6b1ef6ee084883e4484cdf))
+
+
+### Features
+
+* Do not create trigger with full webhooks flag ([8ce5e78](https://github.com/cozy/cozy-libs/commit/8ce5e786e30e48fa46e0d31a912560740c5206a3))
+* Reconnection with BI webviews & webhooks ([591047b](https://github.com/cozy/cozy-libs/commit/591047b0143dab480952d67787451ffeddb57632))
+* Send realtime notifications when expecting a trigger ([b76da3d](https://github.com/cozy/cozy-libs/commit/b76da3d5ec184c6dcc4c2555f92aec6aa523b294))
+* Use BI manage url to update contract synchronization ([fad2994](https://github.com/cozy/cozy-libs/commit/fad2994458e3c0c1f4ee1833855b60ea590fab49))
+
+
+
+
+
 ## [9.27.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.27.1...cozy-harvest-lib@9.27.2) (2022-10-19)
 
 
