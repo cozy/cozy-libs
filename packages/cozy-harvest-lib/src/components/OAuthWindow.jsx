@@ -64,7 +64,7 @@ export class OAuthWindow extends PureComponent {
       OAUTH_REALTIME_CHANNEL,
       this.handleMessage
     )
-    const { oAuthStateKey, oAuthUrl } = prepareOAuth(
+    const { oAuthStateKey, oAuthUrl } = prepareOAuth({
       client,
       konnector,
       redirectSlug,
@@ -72,7 +72,7 @@ export class OAuthWindow extends PureComponent {
       reconnect,
       manage,
       account
-    )
+    })
     this.setState({ oAuthStateKey, oAuthUrl, succeed: false })
   }
 
