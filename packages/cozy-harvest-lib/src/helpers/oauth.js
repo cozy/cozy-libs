@@ -1,3 +1,4 @@
+// @ts-check
 import uuid from 'uuid/v4'
 import get from 'lodash/get'
 
@@ -13,8 +14,7 @@ export const OAUTH_REALTIME_CHANNEL = 'oauth-popup'
  * Checks that the given data for the given konnector is consistent with the
  * information stored in localStorage in prepareOAuth method.
  * @param  {Object} konnector
- * @return {Object} response.oAuthUrl -  URL of cozy stack OAuth endpoint
- * @return {Object} response.oAuthStateKey -  Random key saved in localStorage
+ * @param  {import('../components/OAuthWindow').OAuthData} data
  * @return {boolean} `true` if data is consistent and OAuth workflow can
  * be validated, `false` otherwise
  */
@@ -26,9 +26,8 @@ export const checkOAuthData = (konnector, data) => {
 
   const accountType = konnectors.getAccountType(konnector)
 
-  const state =
-    localStorage.getItem(oAuthStateKey) &&
-    JSON.parse(localStorage.getItem(oAuthStateKey))
+  const item = localStorage.getItem(oAuthStateKey)
+  const state = item && JSON.parse(item)
 
   return state.accountType === accountType
 }
@@ -36,9 +35,10 @@ export const checkOAuthData = (konnector, data) => {
 /**
  * Handler to be called at the top level of an application.
  * Aimed to handle an OAuth redirect with data in query string.
- * @param  {Object} options.client (optional) : cozy-client instance which will be used to create
+ * @param  {Object} options
+ * @param  {Object} [options.client] - cozy-client instance which will be used to create
  * cozy-realtime instance if not specified
- * @param  {Object} options.realtime (optional) : cozy-realtime instance used to notify the
+ * @param  {CozyRealtime} [options.realtime] - cozy-realtime instance used to notify the
  * resulting accountId to the origin harvest window after OAuth redirect
  *
  * We are supposed here to be in the OAuth popup or OAuth inAppBrowser, at the end of the process.
@@ -52,10 +52,10 @@ export const checkOAuthData = (konnector, data) => {
  * ```
  * @return {boolean} `true` if an OAuth response has been handled, `false` otherwise
  */
-export const handleOAuthResponse = (options = {}) => {
-  let realtime = options.realtime
+export const handleOAuthResponse = options => {
+  let realtime = options?.realtime
   if (!realtime) {
-    let client = options.client
+    let client = options?.client
     if (!client) {
       const domain = readCozyDataFromDOM('domain')
       const token = readCozyDataFromDOM('token')
@@ -94,16 +94,17 @@ export const handleOAuthResponse = (options = {}) => {
 
 /**
  * Generate oauth popup url
- * @param  {string} cozyUrl cozy url
- * @param  {string} accountType connector slug
- * @param  {string} oAuthStateKey localStorage key
- * @param  {Object} [oAuthConf={}]  connector manifest oauth configuration
- * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
- * @param  {string} nonce unique nonce string
- * @param  {Object} extraParams some extra parameters to add to the query string
- * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
- * @param  {Boolean} manage Are we trying to manage an existing account ?
- * @param  {io.cozy.accounts} account targeted account if any
+ * @param  {Object} options
+ * @param  {String} options.cozyUrl cozy url
+ * @param  {String} options.accountType connector slug
+ * @param  {String} options.oAuthStateKey localStorage key
+ * @param  {Object} options.oAuthConf  connector manifest oauth configuration
+ * @param  {String} options.redirectSlug The app we want to redirect the user on after the end of the flow
+ * @param  {String} options.nonce unique nonce string
+ * @param  {Object} options.extraParams some extra parameters to add to the query string
+ * @param  {Boolean} options.reconnect Are we trying to reconnect an existing account ?
+ * @param  {Boolean} options.manage Are we trying to manage an existing account ?
+ * @param  {IoCozyAccount} options.account targeted account if any
  * @returns {String} final OAuth url string
  */
 export const getOAuthUrl = ({
@@ -162,13 +163,13 @@ const getAppSlug = client => {
  * Initializes client OAuth workflow by storing the current information about
  * account type in localStorage. Generates the OAuth URL to stack endpoint,
  * passing the localStorage key as state in query string.
- * @param  {string} domain    Cozy domain
+ * @param  {CozyClient} client
  * @param  {Object} konnector
  * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
  * @param  {Object} extraParams some extra parameters to add to the query string
  * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
  * @param  {Boolean} manage Are we trying to manage an existing account ?
- * @param  {io.cozy.accounts} account targetted account if any
+ * @param  {IoCozyAccount} account targetted account if any
  * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
 export const prepareOAuth = (
@@ -197,7 +198,7 @@ export const prepareOAuth = (
     accountType,
     oAuthStateKey,
     oAuthConf: oauth,
-    nonce: Date.now(),
+    nonce: String(Date.now()),
     redirectSlug: redirectSlug || getAppSlug(client),
     extraParams,
     reconnect,

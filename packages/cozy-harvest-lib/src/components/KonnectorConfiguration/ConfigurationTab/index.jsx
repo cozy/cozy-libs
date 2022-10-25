@@ -1,10 +1,10 @@
+// @ts-check
 import React, { useContext, useState } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
-import { useVaultClient, CozyUtils } from 'cozy-keys-lib'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -25,7 +25,8 @@ import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import { useVaultUnlockContext } from 'cozy-keys-lib'
+// @ts-ignore peerDep
+import { useVaultClient, CozyUtils, useVaultUnlockContext } from 'cozy-keys-lib'
 
 import { deleteAccount } from '../../../connections/accounts'
 import { unshareCipher } from '../../../models/cipherUtils'
@@ -111,7 +112,9 @@ const ConfigurationTab = ({
     try {
       onAccountDeleted(account)
       await deleteAccount(client, account)
+      // @ts-ignore La propriété 'success' n'existe pas sur le type '(...args: any[]) => any'.
       Alerter.success(t('modal.updateAccount.delete-account-success'))
+      // @ts-ignore 0 arguments attendus, mais 1 reçus.
       tracker.trackEvent({
         name: 'compte_bancaire_supprime',
         connectorSlug: account.account_type
@@ -119,6 +122,7 @@ const ConfigurationTab = ({
     } catch (error) {
       // eslint-disable-next-line no-console
       console.warn('Error while deleting account', error)
+      // @ts-ignore La propriété 'error' n'existe pas sur le type '(...args: any[]) => any'.
       Alerter.error(t('modal.updateAccount.delete-account-error'))
     } finally {
       setDeleting(false)

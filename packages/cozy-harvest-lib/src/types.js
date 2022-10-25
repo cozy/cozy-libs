@@ -48,6 +48,7 @@
  * @property {String} name
  * @property {Function} refreshContracts
  * @property {Function} fetchExtraOAuthUrlParams
+ * @property {Boolean} isBIWebView
  */
 
 /**

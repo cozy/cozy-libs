@@ -34,7 +34,7 @@ const BIContractActivationWindow = ({
   /**
    * Detects if a BI connection has been removed
    *
-   * @param {String} finalLocation - url search param string from the final oauth location
+   * @param {String} [finalLocation] - url search param string from the final oauth location
    * @returns {Boolean}
    */
   const isBIConnectionRemoved = finalLocation => {
@@ -52,7 +52,7 @@ const BIContractActivationWindow = ({
   /**
    *
    * @param {String} key - OAuth key
-   * @param {FinalOAuthRealtimeMessage} oauthData
+   * @param {FinalOAuthRealtimeMessage} [oauthData]
    */
   const onPopupClosed = (key, oauthData) => {
     setWindowVisible(false)
