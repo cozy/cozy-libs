@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/MuiCozyTheme/Buttons'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import OAuthWindow from '../../OAuthWindow'
 import withLocales from '../../hoc/withLocales'
@@ -18,18 +19,48 @@ const BIContractActivationWindow = ({
   account,
   t,
   intentsApi,
-  innerAccountModalOverrides
+  innerAccountModalOverrides,
+  onAccountDeleted
 }) => {
   const [extraParams, setExtraParams] = useState(null)
   const [isWindowVisible, setWindowVisible] = useState(false)
+  const [isDeleteConnectionDialogVisible, setDeleteConnectionDialogVisible] =
+    useState(false)
   const [shouldRefreshContracts, setShouldRefreshContracts] = useState(false)
 
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const client = useClient()
 
-  const onPopupClosed = () => {
+  /**
+   * Detects if a BI connection has been removed
+   *
+   * @param {String} finalLocation - url search param string from the final oauth location
+   * @returns {Boolean}
+   */
+  const isBIConnectionRemoved = finalLocation => {
+    const queryParams = new URLSearchParams(finalLocation)
+    return queryParams.get('connection_deleted') === 'true'
+  }
+
+  /**
+   * @typedef FinalOAuthRealtimeMessage
+   * @property {String} finalLocation - url search param string from the final oauth location
+   * @property {String|null} err - OAuth error message
+   * @property {String} oAuthStateKey - OAuth key
+   */
+
+  /**
+   *
+   * @param {String} key - OAuth key
+   * @param {FinalOAuthRealtimeMessage} oauthData
+   */
+  const onPopupClosed = (key, oauthData) => {
     setWindowVisible(false)
-    setShouldRefreshContracts(true)
+    if (oauthData && isBIConnectionRemoved(oauthData.finalLocation)) {
+      setDeleteConnectionDialogVisible(true)
+    } else {
+      setShouldRefreshContracts(true)
+    }
   }
 
   useEffect(() => {
@@ -72,6 +103,24 @@ const BIContractActivationWindow = ({
           {t('contracts.handle-synchronization')}
         </Button>
       </ButtonWrapper>
+      <Dialog
+        open={isDeleteConnectionDialogVisible}
+        title={t('modal.deleteBIConnection.title')}
+        content={t('modal.deleteAccount.description')}
+        onClose={onAccountDeleted}
+        actions={
+          <>
+            <Button
+              variant="text"
+              color="primary"
+              aria-label="Close dialog"
+              onClick={onAccountDeleted}
+            >
+              {t('close')}
+            </Button>
+          </>
+        }
+      />
       {isWindowVisible && (
         <OAuthWindow
           extraParams={extraParams}
@@ -91,7 +140,9 @@ BIContractActivationWindow.propTypes = {
   t: PropTypes.func,
   account: PropTypes.object,
   intentsApi: intentsApiProptype,
-  innerAccountModalOverrides: innerAccountModalOverridesProptype
+  innerAccountModalOverrides: innerAccountModalOverridesProptype,
+  /** What to do when the current account is deleted */
+  onAccountDeleted: PropTypes.func
 }
 
 // use isEqual to avoid an infinite rerender since the konnector object is a new one on each render

@@ -208,6 +208,7 @@ const ConfigurationTab = ({
           account={account}
           intentsApi={intentsApi}
           innerAccountModalOverrides={innerAccountModalOverrides}
+          onAccountDeleted={onAccountDeleted}
         />
       </NavigationList>
       {showNewAccountButton ? (

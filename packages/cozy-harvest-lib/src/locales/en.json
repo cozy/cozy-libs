@@ -381,6 +381,10 @@
       "title": "Connect to %{name}",
       "button": "Add an account"
     },
+    "deleteBIConnection": {
+      "title": "Bank disconnect",
+      "description": "Your request has been recorded. It will be effective in a short moment. Previously imported data will not be deleted."
+    },
     "deleteAccount": {
       "title": "Disconnection",
       "description": "Your account will be disconnected, but already imported data will be kept.",

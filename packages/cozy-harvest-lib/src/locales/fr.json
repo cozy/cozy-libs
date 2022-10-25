@@ -381,6 +381,10 @@
       "title": "Connexion à %{name}",
       "button": "Ajouter un compte"
     },
+    "deleteBIConnection": {
+      "title": "Déconnexion de votre banque",
+      "description": "La déconnexion de votre banque a bien été prise en compte et sera effective dans quelques instants. Les données précédemment importées seront conservées."
+    },
     "deleteAccount": {
       "title": "Déconnexion",
       "description": "Vous serez déconnecté de ce compte, mais les données déjà importées seront conservées.",

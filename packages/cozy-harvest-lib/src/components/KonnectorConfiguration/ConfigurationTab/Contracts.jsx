@@ -41,7 +41,8 @@ const DumbContracts = ({
   account,
   konnector,
   intentsApi,
-  innerAccountModalOverrides
+  innerAccountModalOverrides,
+  onAccountDeleted
 }) => {
   const { t } = useI18n()
   const contractData = contracts.data ? contracts.data : contracts
@@ -77,6 +78,7 @@ const DumbContracts = ({
               account={account}
               intentsApi={intentsApi}
               innerAccountModalOverrides={innerAccountModalOverrides}
+              onAccountDeleted={onAccountDeleted}
             />
           )}
         </NavigationListSection>
@@ -97,7 +99,9 @@ DumbContracts.propTypes = {
   /** Can be present if showing contracts still linked to an account/konnector/trigger */
   konnector: PropTypes.object,
   intentsApi: intentsApiProptype,
-  innerAccountModalOverrides: innerAccountModalOverridesProptype
+  innerAccountModalOverrides: innerAccountModalOverridesProptype,
+  /** What to do when the current account is deleted */
+  onAccountDeleted: PropTypes.func
 }
 
 export const ContractsForAccount = compose(

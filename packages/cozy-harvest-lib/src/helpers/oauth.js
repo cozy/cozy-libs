@@ -71,9 +71,8 @@ export const handleOAuthResponse = (options = {}) => {
   // eslint-disable-next-line no-redeclare
   /* global URLSearchParams */
   const queryParams = new URLSearchParams(window.location.search)
-
-  const accountId = queryParams.get('account')
-  const errorMsg = queryParams.get('error')
+  const key = queryParams.get('account')
+  const error = queryParams.get('error')
 
   /**
    * Key for localStorage, used at the beginning of the OAuth process to store
@@ -84,8 +83,9 @@ export const handleOAuthResponse = (options = {}) => {
   if (!oAuthStateKey) return false
 
   realtime.sendNotification('io.cozy.accounts', OAUTH_REALTIME_CHANNEL, {
-    key: accountId,
-    error: errorMsg,
+    finalLocation: queryParams.toString(),
+    key,
+    error,
     oAuthStateKey
   })
 

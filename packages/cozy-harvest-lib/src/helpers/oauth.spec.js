@@ -132,6 +132,8 @@ describe('Oauth helper', () => {
     it('should send message with query string data', () => {
       const expectedOAuthData = {
         error: null,
+        finalLocation:
+          'account=bc2aca6566cf4a72afe6c615aa1e3d31&state=70720eb0-6204-484d',
         key: 'bc2aca6566cf4a72afe6c615aa1e3d31',
         oAuthStateKey: '70720eb0-6204-484d'
       }
@@ -151,7 +153,8 @@ describe('Oauth helper', () => {
       const expectedOAuthData = {
         error: 'dismissed',
         key: null,
-        oAuthStateKey: '70720eb0-6204-484d'
+        oAuthStateKey: '70720eb0-6204-484d',
+        finalLocation: 'error=dismissed&state=70720eb0-6204-484d'
       }
 
       handleOAuthResponse({ realtime })
