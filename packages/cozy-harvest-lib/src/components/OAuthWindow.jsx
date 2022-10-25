@@ -1,3 +1,4 @@
+// @ts-check
 import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
 
@@ -112,7 +113,7 @@ export class OAuthWindow extends PureComponent {
     this.setState({ succeed: true })
 
     if (typeof onSuccess !== 'function') return
-    onSuccess(data.key)
+    onSuccess(data.key, data)
   }
 
   /**

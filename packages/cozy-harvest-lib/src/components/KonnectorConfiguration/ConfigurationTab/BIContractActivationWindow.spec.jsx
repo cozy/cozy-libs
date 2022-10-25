@@ -117,4 +117,38 @@ describe('BIContractActivationWindow', () => {
       expect.anything()
     )
   })
+  it('should show account delete dialog after BI connection removed and close harvest', async () => {
+    prepareOAuth.mockImplementation(() => ({ oAuthUrl: 'https://test.url' }))
+    isFlagshipApp.mockImplementation(() => false)
+    fetchExtraOAuthUrlParams.mockResolvedValue({})
+    const { getByRole } = setup()
+    await act(async () => {
+      await waitFor(() => {
+        return expect(getByRole('button').getAttribute('class')).not.toContain(
+          'Mui-disabled'
+        )
+      })
+    })
+
+    await act(async () => {
+      fireEvent.click(getByRole('button'))
+    })
+
+    checkOAuthData.mockImplementation(() => true)
+    await act(async () => {
+      sendMessageFn({
+        data: {
+          oAuthStateKey: 'statekey',
+          finalLocation: 'connection_deleted=true'
+        }
+      })
+      await waitFor(() =>
+        expect(
+          getByRole('button', { name: 'Close dialog' })
+        ).toBeInTheDocument()
+      )
+      fireEvent.click(getByRole('button', { name: 'Close dialog' }))
+    })
+    expect(onAccountDeleted).toHaveBeenCalled()
+  })
 })
