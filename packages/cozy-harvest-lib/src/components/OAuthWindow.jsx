@@ -78,7 +78,9 @@ export class OAuthWindow extends PureComponent {
 
   componentWillUnmount() {
     const { oAuthStateKey } = this.state
-    terminateOAuth(oAuthStateKey)
+    if (oAuthStateKey) {
+      terminateOAuth(oAuthStateKey)
+    }
     this.realtime.unsubscribeAll()
   }
 
@@ -95,9 +97,10 @@ export class OAuthWindow extends PureComponent {
    * * realtime message from web apps (see handleMessage)
    * * url changes from mobile apps
    *
-   * @param  {String} data.key - `io.cozy.accounts` id The created OAuth account
-   * @param  {String} data.error - error message
-   * @param  {String} data.oAuthStateKey - key for localStorage
+   * @param  {Object} data
+   * @param  {String|null} data.key - `io.cozy.accounts` id The created OAuth account
+   * @param  {String|null} data.error - error message
+   * @param  {String|null} data.oAuthStateKey - key for localStorage
    */
   handleOAuthData(data) {
     const { konnector, onSuccess, onCancel } = this.props
@@ -212,4 +215,5 @@ OAuthWindow.propTypes = {
   intentsApi: intentsApiProptype
 }
 
+// @ts-ignore L'argument de type 'typeof OAuthWindow' n'est pas attribuable au paramètre de type 'Component<{}, {}, any>' ?
 export default translate()(withClient(OAuthWindow))

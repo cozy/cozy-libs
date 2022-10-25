@@ -1,3 +1,4 @@
+// @ts-check
 import React from 'react'
 import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
@@ -106,6 +107,7 @@ DumbContracts.propTypes = {
 
 export const ContractsForAccount = compose(
   withLocales,
+  // @ts-ignore Aucune surcharge ne correspond à cet appel
   queryConnect({
     contracts: makeContractsConn
   })
