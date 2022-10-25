@@ -163,16 +163,17 @@ const getAppSlug = client => {
  * Initializes client OAuth workflow by storing the current information about
  * account type in localStorage. Generates the OAuth URL to stack endpoint,
  * passing the localStorage key as state in query string.
- * @param  {CozyClient} client
- * @param  {Object} konnector
- * @param  {string} redirectSlug The app we want to redirect the user on after the end of the flow
- * @param  {Object} extraParams some extra parameters to add to the query string
- * @param  {Boolean} reconnect Are we trying to reconnect an existing account ?
- * @param  {Boolean} manage Are we trying to manage an existing account ?
- * @param  {IoCozyAccount} account targetted account if any
+ * @param  {Object} options
+ * @param  {CozyClient} options.client
+ * @param  {Object} options.konnector
+ * @param  {string} options.redirectSlug The app we want to redirect the user on after the end of the flow
+ * @param  {Object} options.extraParams some extra parameters to add to the query string
+ * @param  {Boolean} options.reconnect Are we trying to reconnect an existing account ?
+ * @param  {Boolean} options.manage Are we trying to manage an existing account ?
+ * @param  {IoCozyAccount} options.account targetted account if any
  * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
-export const prepareOAuth = (
+export const prepareOAuth = ({
   client,
   konnector,
   redirectSlug,
@@ -180,7 +181,7 @@ export const prepareOAuth = (
   reconnect = false,
   manage = false,
   account
-) => {
+}) => {
   const { oauth } = konnector
   const accountType = konnectors.getAccountType(konnector)
 
