@@ -9,12 +9,7 @@ const refreshContracts = jest.fn()
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
 }))
-jest.mock('../../Popup', () => {
-  return jest.fn().mockImplementation(({ onClose }) => {
-    setTimeout(onClose, 1)
-    return null
-  })
-})
+jest.mock('../../Popup', () => jest.fn())
 jest.mock('../../InAppBrowser', () => {
   return jest.fn().mockImplementation(({ onClose }) => {
     setTimeout(onClose, 1)
@@ -22,21 +17,34 @@ jest.mock('../../InAppBrowser', () => {
   })
 })
 jest.mock('../../../helpers/oauth')
-jest.mock('cozy-realtime')
 jest.mock('cozy-device-helper')
 import BIContractActivationWindow from './BiContractActivationWindow'
 import { findKonnectorPolicy } from '../../../konnector-policies'
 import Popup from '../../Popup'
 import InAppBrowser from '../../InAppBrowser'
 import { isFlagshipApp } from 'cozy-device-helper'
-import { prepareOAuth } from '../../../helpers/oauth'
+import { prepareOAuth, checkOAuthData } from '../../../helpers/oauth'
+import CozyRealtime from 'cozy-realtime'
 findKonnectorPolicy.mockImplementation(() => ({
   fetchExtraOAuthUrlParams,
   refreshContracts
 }))
+jest.mock('cozy-realtime', () => {
+  const result = function Realtime() {}
+  result.prototype.subscribe = jest.fn()
+  result.prototype.unsubscribeAll = jest.fn()
+  return result
+})
 
 const mockKonnector = { slug: 'mockkonnector' }
 const mockAccount = {}
+
+let sendMessageFn = null
+CozyRealtime.prototype.subscribe = (notified, doctype, channel, callback) => {
+  sendMessageFn = callback
+}
+
+const onAccountDeleted = jest.fn()
 
 const setup = () => {
   const client = new CozyClient({})
@@ -45,6 +53,7 @@ const setup = () => {
       <BIContractActivationWindow
         konnector={mockKonnector}
         account={mockAccount}
+        onAccountDeleted={onAccountDeleted}
       />
     </AppLike>
   )
@@ -60,6 +69,10 @@ describe('BIContractActivationWindow', () => {
   })
 
   it('should display popup with url from policy and update contract after popup is closed', async () => {
+    Popup.mockImplementation(({ onClose }) => {
+      setTimeout(onClose, 1)
+      return null
+    })
     prepareOAuth.mockImplementation(() => ({ oAuthUrl: 'https://test.url' }))
     isFlagshipApp.mockImplementation(() => false)
     fetchExtraOAuthUrlParams.mockResolvedValue({})
@@ -89,6 +102,10 @@ describe('BIContractActivationWindow', () => {
     )
   })
   it('should call InAppBrowser display if in flagship app context', async () => {
+    Popup.mockImplementation(({ onClose }) => {
+      setTimeout(onClose, 1)
+      return null
+    })
     isFlagshipApp.mockImplementation(() => true)
     prepareOAuth.mockImplementation(() => ({ oAuthUrl: 'https://testiab.url' }))
     fetchExtraOAuthUrlParams.mockResolvedValue({})
@@ -118,6 +135,7 @@ describe('BIContractActivationWindow', () => {
     )
   })
   it('should show account delete dialog after BI connection removed and close harvest', async () => {
+    Popup.mockImplementation(() => null)
     prepareOAuth.mockImplementation(() => ({ oAuthUrl: 'https://test.url' }))
     isFlagshipApp.mockImplementation(() => false)
     fetchExtraOAuthUrlParams.mockResolvedValue({})
