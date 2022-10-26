@@ -20,7 +20,8 @@ const BIContractActivationWindow = ({
   t,
   intentsApi,
   innerAccountModalOverrides,
-  onAccountDeleted
+  onAccountDeleted,
+  realtime
 }) => {
   const [extraParams, setExtraParams] = useState(null)
   const [isWindowVisible, setWindowVisible] = useState(false)
@@ -130,6 +131,7 @@ const BIContractActivationWindow = ({
           onSuccess={onPopupClosed}
           onCancel={onPopupClosed}
           manage={true}
+          realtime={realtime}
         />
       )}
     </ListItem>
