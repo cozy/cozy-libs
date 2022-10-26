@@ -55,10 +55,9 @@ export class OAuthWindow extends PureComponent {
       extraParams,
       reconnect = false,
       manage = false,
-      account,
-      realtime
+      account
     } = this.props
-    this.realtime = realtime || new CozyRealtime({ client })
+    this.realtime = new CozyRealtime({ client })
     this.realtime.subscribe(
       'notified',
       'io.cozy.accounts',
