@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.32.0...cozy-app-publish@0.32.1) (2022-10-27)
+
+**Note:** Version bump only for package cozy-app-publish
+
+
+
+
+
 # 0.32.0 (2022-10-04)
 
 
