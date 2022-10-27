@@ -42,6 +42,11 @@ yarn cozy-app-publish \
 --build-commit $BUILD_COMMIT
 ```
 
+Published version is inferred from the tag set on current commit or the version defined in the manifest `version` property:
+
+- If the current commit has no tag associated, then this is a dev version in the form `<manifest_version>-dev.<commit_sha><date>`
+- If the current commit has a beta tag `x.y.z-beta.n` or a stable tag `x.y.z`, then this is a beta or stable version and the tag value is used as the version
+
 ### Manual usage (not recommended)
 
 First of all, don't forget to build the application:
@@ -58,6 +63,43 @@ yarn cozy-app-publish \
 --token $REGISTRY_TOKEN \
 --build-url https://github.com/cozy/cozy-collect/archive/042cef26d9d33ea604fe4364eaab569980b500c9.tar.gz \
 --manual-version 1.0.2-dev.042cef26d9d33ea604fe4364eaab569980b500c9
+```
+
+#### Publishing a beta version
+
+Beta versions are only available through beta channel of the registry and are not automatically deployable on production instances. However a beta tester can
+force deployment of beta versions of a given (installed) app from Cozy store. Ask your Cozy representative to explain you how to do this.
+
+Let's say you plan to publish version `1.0.2` of your application and want to test it before publishing it to stable. Then you will publish a `1.0.2-beta.1` version,
+test it, publish other beta versions if some adjustement are needed and when you're satisfied with the version you will publish a stable version.
+
+To publish a beta version:
+
+- Have the target stable version as the `version` in your manifest file (eg `1.0.2` in our example). The manifest file always reference stable version.
+- Publish with `cozy-app-publish` using the beta version like `1.0.2-beta.1`
+
+```
+yarn cozy-app-publish \
+--token $REGISTRY_TOKEN \
+--build-url https://github.com/cozy/cozy-collect/archive/042cef26d9d33ea604fe4364eaab569980b500c9.tar.gz \
+--manual-version 1.0.2-beta.1
+```
+
+#### Publishing a stable version
+
+Instances auto-update app versions as soon as they are published as stable. Publishing a new stable version will make it available immediately to all instances
+(existing and new ones) unless permission changes requiring user's validation.
+
+To publish a stable version, simply use a version in the form `x.y.z` and it will be considered as stable.
+
+Because manifest's `version` doesn't need to be changed between beta and stable, you don't need to rebuild the application and can publish the exact same app package
+you built for beta publication
+
+```
+yarn cozy-app-publish \
+--token $REGISTRY_TOKEN \
+--build-url https://github.com/cozy/cozy-collect/archive/042cef26d9d33ea604fe4364eaab569980b500c9.tar.gz \
+--manual-version 1.0.2
 ```
 
 ### Options
