@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.29.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.28.0...cozy-harvest-lib@9.29.0) (2022-10-28)
+
+
+### Features
+
+* Close Harvest when BI connection is removed in webview ([45d9e20](https://github.com/cozy/cozy-libs/commit/45d9e20042923b8cab14b8371ea9a596c9e4dea8))
+
+
+
+
+
 # [9.28.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.27.2...cozy-harvest-lib@9.28.0) (2022-10-24)
 
 
