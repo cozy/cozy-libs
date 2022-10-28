@@ -97,10 +97,7 @@ export class OAuthWindow extends PureComponent {
    * * realtime message from web apps (see handleMessage)
    * * url changes from mobile apps
    *
-   * @param  {Object} data
-   * @param  {String|null} data.key - `io.cozy.accounts` id The created OAuth account
-   * @param  {String|null} data.error - error message
-   * @param  {String|null} data.oAuthStateKey - key for localStorage
+   * @param  {OAuthData} data
    */
   handleOAuthData(data) {
     const { konnector, onSuccess, onCancel } = this.props
@@ -144,27 +141,16 @@ export class OAuthWindow extends PureComponent {
    * init it and search if we have inside this url an account and state params
    */
   handleUrlChange(url) {
-    const account = url.searchParams.get('account')
-    const state = url.searchParams.get('state')
-    const error = url.searchParams.get('error')
-    if (account && state) {
-      return this.handleOAuthData({
-        key: account,
-        error,
-        oAuthStateKey: state
-      })
+    const oAuthData = extractOAuthDataFromUrl(url)
+    if (oAuthData) {
+      return this.handleOAuthData(oAuthData)
     }
     const redirect = url.searchParams.get('redirect')
     if (redirect) {
-      const testedURL = new URL(redirect)
-      const accountInRedirect = testedURL.searchParams.get('account')
-      const stateInRedirect = testedURL.searchParams.get('state')
-      const errorInRedirect = testedURL.searchParams.get('error')
-      return this.handleOAuthData({
-        key: accountInRedirect,
-        error: errorInRedirect,
-        oAuthStateKey: stateInRedirect
-      })
+      const redirectOAuthData = extractOAuthDataFromUrl(new URL(redirect))
+      if (redirectOAuthData) {
+        return this.handleOAuthData(redirectOAuthData)
+      }
     }
   }
 
@@ -213,6 +199,33 @@ OAuthWindow.propTypes = {
   account: PropTypes.object,
   /** custom intents api. Can have fetchSessionCode, showInAppBrowser, closeInAppBrowser at the moment */
   intentsApi: intentsApiProptype
+}
+
+/**
+ * @typedef OAuthData
+ * @property  {String} key - `io.cozy.accounts` id The created OAuth account
+ * @property  {String} [error] - error message
+ * @property  {String} oAuthStateKey - key for localStorage
+ */
+
+/**
+ * Extract OAuthData from url search params if any
+ *
+ * @param {URL} url
+ * @returns {OAuthData|null} OAuthData
+ */
+function extractOAuthDataFromUrl(url) {
+  const account = url.searchParams.get('account')
+  const state = url.searchParams.get('state')
+  const error = url.searchParams.get('error')
+  if (account && state) {
+    const oAuthData = { key: account, oAuthStateKey: state }
+    if (error) {
+      oAuthData.error = error
+    }
+    return oAuthData
+  }
+  return null
 }
 
 // @ts-ignore L'argument de type 'typeof OAuthWindow' n'est pas attribuable au paramètre de type 'Component<{}, {}, any>' ?
