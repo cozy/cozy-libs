@@ -106,7 +106,7 @@ const BIContractActivationWindow = ({
       <Dialog
         open={isDeleteConnectionDialogVisible}
         title={t('modal.deleteBIConnection.title')}
-        content={t('modal.deleteAccount.description')}
+        content={t('modal.deleteBIConnection.description')}
         onClose={onAccountDeleted}
         actions={
           <>
