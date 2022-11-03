@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.29.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.0...cozy-harvest-lib@9.29.1) (2022-11-03)
+
+
+### Bug Fixes
+
+* Wrong locale on BI connection removal ([ed2f352](https://github.com/cozy/cozy-libs/commit/ed2f352467da5f36ef1753de5578f156bb2a1ffb))
+
+
+
+
+
 # [9.29.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.28.0...cozy-harvest-lib@9.29.0) (2022-10-28)
 
 
