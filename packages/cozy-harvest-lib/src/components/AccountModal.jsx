@@ -164,7 +164,7 @@ export class AccountModal extends Component {
                 actionButton={
                   <Button
                     theme="danger"
-                    onClick={this.loadSelectedAccountId.bind(this)}
+                    onClick={onDismiss}
                     label={t('modal.konnector.error.button')}
                   />
                 }
