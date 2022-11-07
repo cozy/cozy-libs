@@ -18,6 +18,7 @@ interface _NativeMethodsRegister {
     settingName: 'biometryLock' | 'PINLock' | 'autoLock',
     params?: Record<string, unknown>
   ) => Promise<boolean | null>
+  isBiometryDenied: () => Promise<boolean>
   openAppOSSettings: () => Promise<null>
 }
 
