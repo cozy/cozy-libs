@@ -236,6 +236,21 @@
         "inputLabel": "Card number",
         "text": "What is your credit card number? (written on the front)"
       }
+    },
+    "passport": {
+      "scan": {
+        "text": "Take a picture of your passport"
+      },
+      "information": {
+        "passportNumber": {
+          "inputLabel": "Passport number",
+          "text": "Enter your passport number"
+        },
+        "expirationDate": {
+          "inputLabel": "Expiration date",
+          "text": "What is the expiry date of the passport?"
+        }
+      }
     }
   },
   "PapersList": {

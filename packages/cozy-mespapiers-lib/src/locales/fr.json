@@ -236,6 +236,21 @@
         "inputLabel": "Numéro de la carte",
         "text": "Saisir le numéro de votre carte"
       }
+    },
+    "passport": {
+      "scan": {
+        "text": "Photographier votre passeport"
+      },
+      "information": {
+        "passportNumber": {
+          "inputLabel": "Numéro du passeport",
+          "text": "Saisir le numéro de votre passeport"
+        },
+        "expirationDate": {
+          "inputLabel": "Valable jusqu'au",
+          "text": "Quelle est la date d'expiration du passeport ?"
+        }
+      }
     }
   },
   "PapersList": {
