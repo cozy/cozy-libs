@@ -96,7 +96,7 @@ export const handleOAuthAccount = async ({
     const connId = getBIConnectionIdFromAccount(account)
     return Boolean(connId)
   }
-  const cozyBankIds = getCozyBankIds({ konnector, account })
+  const cozyBankIds = getCozyBankIds({ konnector })
   let biWebviewAccount = {
     ...account,
     ...(cozyBankIds ? { auth: { bankIds: cozyBankIds } } : {})
@@ -275,12 +275,11 @@ export const fetchExtraOAuthUrlParams = async ({
 /**
  * Finds the current bankIid in a given konnector or account
  * @param {object} options
- * @param {IoCozyAccount} options.account The account content
  * @param {KonnectorManifest} options.konnector konnector manifest content
  * @return {Array<String>} - list of bank ids
  */
-export const getCozyBankIds = ({ konnector, account }) => {
-  const cozyBankId = konnector?.parameters?.bankId || account?.auth?.bankId
+export const getCozyBankIds = ({ konnector }) => {
+  const cozyBankId = konnector?.parameters?.bankId
 
   if (cozyBankId) {
     return [cozyBankId]
@@ -423,14 +422,14 @@ async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
  *
  * @returns {Promise<createTemporaryTokenResponse>}
  */
-export const createTemporaryToken = async ({ client, konnector, account }) => {
+export const createTemporaryToken = async ({ client, konnector }) => {
   assert(
     konnector.slug,
     'createTemporaryToken: konnector passed in options has no slug'
   )
 
   let tokenCache = await getBiTemporaryTokenFromCache({ client })
-  const cozyBankIds = getCozyBankIds({ konnector, account })
+  const cozyBankIds = getCozyBankIds({ konnector })
 
   const { data: biUser } = await client.query(
     Q('io.cozy.accounts').getById('bi-aggregator-user')
