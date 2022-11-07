@@ -1622,6 +1622,53 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ]
+    },
+    {
+      "label": "passport",
+      "icon": "people",
+      "featureDate": "issueDate",
+      "maxDisplay": 3,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluPassport.png",
+          "text": "PaperJSON.passport.scan.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluPassportNumber.png",
+          "text": "PaperJSON.passport.information.passportNumber.text",
+          "attributes": [
+            {
+              "name": "passportNumber",
+              "type": "text",
+              "maxLength": 12,
+              "inputLabel": "PaperJSON.passport.information.passportNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluPassportDate.png",
+          "text": "PaperJSON.passport.information.expirationDate.text",
+          "attributes": [
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.passport.information.expirationDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     }
   ]
 }
