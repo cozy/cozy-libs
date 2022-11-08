@@ -20,7 +20,7 @@ const PlaceholderThemesList = ({ setQualifByTheme }) => {
   const scannerT = useScannerI18n()
 
   return (
-    <List className="u-mv-half">
+    <List className="u-mv-half u-pv-0">
       {themesList.map(theme => {
         return (
           <ListItem

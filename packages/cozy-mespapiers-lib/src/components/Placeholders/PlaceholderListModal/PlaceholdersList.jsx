@@ -17,7 +17,8 @@ import ActionMenuImportDropdown from '../ActionMenuImportDropdown'
 const useStyles = makeStyles(() => ({
   placeholderList: {
     minHeight: '15rem',
-    margin: '0.5rem 0'
+    margin: '0.5rem 0',
+    padding: 0
   },
   actionMenu: {
     position: 'absolute',

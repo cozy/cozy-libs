@@ -8,7 +8,7 @@ import PapersList from '../Papers/PapersList'
 
 const PapersListByContact = ({ paperslistByContact }) => {
   return (
-    <List>
+    <List className="u-pv-0">
       {paperslistByContact.map(({ withHeader, contact, papers }, idx) => (
         <Fragment key={idx}>
           {withHeader && <ListSubheader>{contact}</ListSubheader>}

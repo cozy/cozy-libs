@@ -92,7 +92,7 @@ const SearchResult = ({ filteredPapers }) => {
   return filesWithContacts.length > 0 ? (
     <>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
-      <List>
+      <List className="u-pv-0">
         {filesWithContacts.map(({ contact, file }) => {
           return (
             <SearchResultLine

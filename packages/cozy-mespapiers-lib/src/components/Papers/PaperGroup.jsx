@@ -34,7 +34,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
   }
 
   return (
-    <List>
+    <List className="u-pv-0">
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <div className="u-pv-half">
         {allPapersByCategories.length === 0 ? (

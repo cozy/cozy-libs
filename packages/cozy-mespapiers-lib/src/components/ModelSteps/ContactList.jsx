@@ -71,7 +71,7 @@ const ContactList = ({
   return (
     <>
       <Paper elevation={2} className="u-mt-1 u-mh-half">
-        <List>
+        <List className="u-pv-0">
           <div className="u-mah-5 u-ov-auto">
             {contactsList.map(contact => (
               <Contact

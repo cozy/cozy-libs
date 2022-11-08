@@ -19,7 +19,7 @@ const MultiselectContent = ({ setIsFilePickerActive }) => {
           {t('Multiselect.empty')}
         </Typography>
       ) : (
-        <List className="u-flex u-flex-column u-flex-justify-center">
+        <List className="u-flex u-flex-column u-flex-justify-center u-pv-0">
           {allMultiSelectionFiles.map((file, idx) => (
             <PaperCardItem
               key={`${file._id}${idx}`}
