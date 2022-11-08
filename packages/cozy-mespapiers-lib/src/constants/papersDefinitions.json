@@ -1625,6 +1625,7 @@
     },
     {
       "label": "passport",
+      "placeholderIndex": 4,
       "icon": "people",
       "featureDate": "issueDate",
       "maxDisplay": 3,
