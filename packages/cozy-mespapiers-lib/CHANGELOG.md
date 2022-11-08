@@ -82,7 +82,7 @@ Unlike adding the `/*` like this `/paper/*` required with the new router.
 
 ```
 <Route path="/paper/*" element={<PaperView />} />
-``` 
+```
 
 
 
