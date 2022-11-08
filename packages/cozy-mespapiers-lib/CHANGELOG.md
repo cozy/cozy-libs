@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.1.1...cozy-mespapiers-lib@9.2.0) (2022-11-08)
+
+
+### Features
+
+* Add passport to suggestion list ([b7c8d9f](https://github.com/cozy/cozy-libs/commit/b7c8d9f6a73a3a86fdb8fb9fc961bf0e96f3b904))
+
+
+
+
+
 ## [9.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.1.0...cozy-mespapiers-lib@9.1.1) (2022-11-08)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
