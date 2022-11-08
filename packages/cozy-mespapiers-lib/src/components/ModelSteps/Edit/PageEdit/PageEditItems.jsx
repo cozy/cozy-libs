@@ -13,7 +13,7 @@ const PageEditItems = ({ items, onChange, value }) => {
   const { isMobile } = useBreakpoints()
 
   return (
-    <List>
+    <List className="u-pv-0">
       {items.map((item, idx) => (
         <ListItem
           key={idx}

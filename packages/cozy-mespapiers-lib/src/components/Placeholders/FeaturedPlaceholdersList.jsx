@@ -46,7 +46,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   }
 
   return (
-    <List>
+    <List className="u-pv-0">
       {featuredPlaceholders.length > 0 && (
         <ListSubheader>{t('FeaturedPlaceholdersList.subheader')}</ListSubheader>
       )}
