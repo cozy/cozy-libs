@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.0.5...cozy-mespapiers-lib@9.1.0) (2022-11-08)
+
+
+### Bug Fixes
+
+* **mespapiers:** Breaking change of cozy-ui 77 ([be3098e](https://github.com/cozy/cozy-libs/commit/be3098e4acb8d5781cb5444ee82e77c38d2db01d))
+
+
+### Features
+
+* **mespapiers:** Add passport definition ([5770b83](https://github.com/cozy/cozy-libs/commit/5770b83bd320d55801af4ac3f29f2226c36f6ad2))
+* **mespapiers:** Update cozy-ui to 77.2.0 ([e1ba03e](https://github.com/cozy/cozy-libs/commit/e1ba03e94c522e6ab4d04f0026785cb1ed07ed4f))
+
+
+
+
+
 ## [9.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.0.4...cozy-mespapiers-lib@9.0.5) (2022-11-03)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
