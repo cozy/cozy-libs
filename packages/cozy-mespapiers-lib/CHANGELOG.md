@@ -79,6 +79,7 @@ to use the `/paper` route to consume lib.
 This change was not intended.
 With this fix we get back the old expected behavior.
 Unlike adding the `/*` like this `/paper/*` required with the new router.
+
 ```
 <Route path="/paper/*" element={<PaperView />} />
 ``` 
