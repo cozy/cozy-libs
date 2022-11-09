@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 4.5.10 (2022-11-09)
+
+
+### Bug Fixes
+
+* Paginated permission were not normalized ([eac18f4](https://github.com/cozy/cozy-libs/commit/eac18f4cc90bf4b06d91b7e59343bb4efcf81dcd))
+
+
+
+
+
 ## [4.5.9](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.5.8...cozy-sharing@4.5.9) (2022-10-03)
 
 **Note:** Version bump only for package cozy-sharing
