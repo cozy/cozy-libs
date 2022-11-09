@@ -6,12 +6,14 @@ import { addSharingLink } from './state'
  * @param {Function} dispatch
  * @param {Object} client
  */
-export const fetchNextPermissions = async (permissions, dispatch, client) => {
+export const fetchNextPermissions = async (
+  permissions,
+  dispatch,
+  permissionCol
+) => {
   if (permissions.links && permissions.links.next) {
-    const resp = await client
-      .getStackClient()
-      .fetchJSON('GET', permissions.links.next)
+    const resp = await permissionCol.fetchPermissionsByLink(permissions)
     dispatch(addSharingLink(resp.data))
-    return fetchNextPermissions(resp, dispatch, client)
+    return fetchNextPermissions(resp, dispatch, permissionCol)
   }
 }
