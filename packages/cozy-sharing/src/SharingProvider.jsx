@@ -186,7 +186,7 @@ export class SharingProvider extends Component {
     )
     this.setState({ hasLoadedAtLeastOnePage: true })
     // eslint-disable-next-line promise/catch-or-return
-    fetchNextPermissions(permissions, this.dispatch, client).then(() =>
+    fetchNextPermissions(permissions, this.dispatch, this.permissionCol).then(
       this.setState({ allLoaded: true })
     )
     if (doctype !== 'io.cozy.files') return
