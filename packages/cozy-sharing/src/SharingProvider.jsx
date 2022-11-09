@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
@@ -308,7 +309,11 @@ export class SharingProvider extends Component {
    * @return {Array}
    */
   updateDocumentPermissions = async (document, newVerbs) => {
+    console.log('updateDocumentPermissions')
+    console.log(document)
+    console.log(newVerbs)
     const permissions = getDocumentPermissions(this.state, document.id)
+    console.log(permissions)
 
     const responses = await Promise.all(
       permissions.map(async permissionDocument => {
