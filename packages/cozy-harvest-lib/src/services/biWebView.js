@@ -16,8 +16,7 @@ import {
   setBIConnectionId,
   findAccountWithBiConnection,
   convertBIErrortoKonnectorJobError,
-  isBudgetInsightConnector,
-  getBIConnectionIdFromAccount
+  isBudgetInsightConnector
 } from './budget-insight'
 import { KonnectorJobError } from '../helpers/konnectors'
 import { waitForRealtimeEvent } from './jobUtils'
@@ -93,7 +92,7 @@ export const handleOAuthAccount = async ({
   }
   if (reconnect) {
     // No need for specific action here. The trigger will be launched by the trigger manager
-    const connId = getBIConnectionIdFromAccount(account)
+    const connId = getWebviewBIConnectionId(account)
     return Boolean(connId)
   }
   const cozyBankIds = getCozyBankIds({ konnector, account })
@@ -149,15 +148,24 @@ const getBiAggregatorParentRelationship = konnector => {
 }
 
 /**
- * Gets BI webview connection id which is returned in the account by the stack
- * via oauth callback url
+ * Gets BI webview connection id from the account. The connection id can be in different places depending on context :
+ * - after connection creation : in account.oauth.query.connection_id. The account is created by the stack after webview return
+ * - after connection manage : in account.data.auth.bi.connId. The account is created by the stack after webview return
  *
- * @param {IoCozyAccount} account The account content created by the stack
+ * @param {IoCozyAccount} account The account content
  *
  * @return {Number|null} Connection Id or null if no connexion
  */
 const getWebviewBIConnectionId = account => {
-  return Number(account?.oauth?.query?.connection_id?.[0] || null)
+  if (flag('harvest.bi.fullwebhooks')) {
+    return Number(account?.data?.auth?.bi?.connId || null)
+  } else {
+    return Number(
+      account?.oauth?.query?.connection_id?.[0] ||
+        account?.data?.auth?.bi?.connId ||
+        null
+    )
+  }
 }
 
 /**
@@ -206,7 +214,7 @@ export const onBIAccountCreation = async ({
  * @param {object} options
  * @param {Array<String>} options.biBankIds - connector bank ids (for webview connectors)
  * @param {String} options.token - BI temporary token
- * @param {Number} options.connId - BI bi connection id
+ * @param {Number|null} options.connId - BI bi connection id
  * @return {Object}
  */
 const getReconnectOrManageExtraOAuthUrlParams = ({
@@ -249,7 +257,7 @@ export const fetchExtraOAuthUrlParams = async ({
     account
   })
 
-  const connId = getBIConnectionIdFromAccount(account)
+  const connId = getWebviewBIConnectionId(account)
 
   if (reconnect || manage) {
     return getReconnectOrManageExtraOAuthUrlParams({
