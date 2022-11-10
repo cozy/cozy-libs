@@ -186,22 +186,24 @@ export class SharingProvider extends Component {
     )
     this.setState({ hasLoadedAtLeastOnePage: true })
     // eslint-disable-next-line promise/catch-or-return
-    fetchNextPermissions(permissions, this.dispatch, this.permissionCol).then(
-      this.setState({ allLoaded: true })
-    )
-    if (doctype !== 'io.cozy.files') return
-    const sharedDocIds = getSharedDocIdsBySharings(sharings)
-    const resp = await client.collection(doctype).all({ keys: sharedDocIds })
-    const folderPaths = resp.data
-      .filter(f => f.type === 'directory' && !f.trashed)
-      .map(f => f.path)
-    const filePaths = await fetchFilesPaths(
-      client,
-      doctype,
-      resp.data.filter(f => f.type !== 'directory' && !f.trashed)
-    )
+    await fetchNextPermissions(permissions, this.dispatch, this.permissionCol)
 
-    this.dispatch(receivePaths([...folderPaths, ...filePaths]))
+    if (doctype === 'io.cozy.files') {
+      const sharedDocIds = getSharedDocIdsBySharings(sharings)
+      const resp = await client.collection(doctype).all({ keys: sharedDocIds })
+      const folderPaths = resp.data
+        .filter(f => f.type === 'directory' && !f.trashed)
+        .map(f => f.path)
+      const filePaths = await fetchFilesPaths(
+        client,
+        doctype,
+        resp.data.filter(f => f.type !== 'directory' && !f.trashed)
+      )
+
+      this.dispatch(receivePaths([...folderPaths, ...filePaths]))
+    }
+
+    this.setState({ allLoaded: true })
   }
 
   share = async ({
