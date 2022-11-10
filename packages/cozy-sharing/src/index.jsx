@@ -20,3 +20,4 @@ export { CozyPassFingerprintDialogContent } from './components/CozyPassFingerpri
 export { SharingBannerPlugin } from './SharingBanner'
 export { useSharingInfos } from './SharingBanner/hooks/useSharingInfos'
 export { ConfirmTrustedRecipientsDialog } from './ConfirmTrustedRecipientsDialog'
+export { ShareButtonWithRecipients } from './ShareButtonWithRecipients'
