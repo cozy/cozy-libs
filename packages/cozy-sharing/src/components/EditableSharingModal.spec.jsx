@@ -44,7 +44,11 @@ describe('EditableSharingModal', () => {
   }
 
   it('will set to false the shared parent / child if the document has no path', () => {
-    const { component } = setup({ document: {} })
+    const { component } = setup({
+      document: {
+        attributes: {}
+      }
+    })
 
     const mod = component.find(DumbShareModal)
     expect(mod.length).toBe(1)
@@ -54,7 +58,12 @@ describe('EditableSharingModal', () => {
 
   it('will set to true the sharedChild if a child is shared and document has path from the beginning', () => {
     useFetchDocumentPath.mockReturnValue(['/a'])
-    const { component } = setup({ document: { path: '/a' } })
+    const { component } = setup({
+      document: {
+        path: '/a',
+        attributes: {}
+      }
+    })
 
     const provider = component.find(SharingProvider)
     provider.instance().dispatch(receivePaths(['/a/b']))
@@ -68,7 +77,11 @@ describe('EditableSharingModal', () => {
   })
 
   it('will set to true the sharedChild if a child is shared and the document path fetched latter', () => {
-    const { component } = setup({ document: {} })
+    const { component } = setup({
+      document: {
+        attributes: {}
+      }
+    })
     useFetchDocumentPath.mockReturnValue(['/a'])
 
     const provider = component.find(SharingProvider)
