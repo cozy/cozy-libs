@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.6.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.5.10...cozy-sharing@4.6.0) (2022-11-10)
+
+
+### Features
+
+* Reactivate sharing cozy to cozy for notes ([d54138e](https://github.com/cozy/cozy-libs/commit/d54138e29ed2d966f8b1da4b4b4caae2b17a3264))
+
+
+
+
+
 ## 4.5.10 (2022-11-09)
 
 
