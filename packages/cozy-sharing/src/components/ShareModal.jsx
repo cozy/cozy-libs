@@ -1,5 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import flag from 'cozy-flags'
 
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 
@@ -29,8 +30,13 @@ export const ShareModal = ({
   sharingDesc,
   twoStepsConfirmationMethods
 }) => {
+  const showShareCozyToCozyForNotes =
+    flag('notes.sharing-cozy-to-cozy') !== null &&
+    flag('notes.sharing-cozy-to-cozy') &&
+    documentType === 'Notes'
+
   const showShareByEmail =
-    documentType !== 'Notes' &&
+    showShareCozyToCozyForNotes &&
     documentType !== 'Albums' &&
     !hasSharedParent &&
     !hasSharedChild
@@ -40,7 +46,7 @@ export const ShareModal = ({
 
   return (
     <>
-      {(documentType === 'Notes' || documentType === 'Albums') && (
+      {(!showShareCozyToCozyForNotes || documentType === 'Albums') && (
         <ShareDialogOnlyByLink
           document={document}
           documentType={documentType}
@@ -52,7 +58,7 @@ export const ShareModal = ({
           permissions={permissions}
         />
       )}
-      {documentType !== 'Notes' && documentType !== 'Albums' && (
+      {showShareCozyToCozyForNotes && documentType !== 'Albums' && (
         <ShareDialogCozyToCozy
           contacts={contacts}
           createContact={createContact}
