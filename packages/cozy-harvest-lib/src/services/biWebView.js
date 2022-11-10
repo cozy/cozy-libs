@@ -472,7 +472,7 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
 
 export const konnectorPolicy = {
   isBIWebView: true,
-  needsTriggerCreation: flag('harvest.bi.fullwebhook'),
+  needsTriggerCreation: flag('harvest.bi.fullwebhooks'),
   name: 'budget-insight-webview',
   match: isBiWebViewConnector,
   saveInVault: false,
