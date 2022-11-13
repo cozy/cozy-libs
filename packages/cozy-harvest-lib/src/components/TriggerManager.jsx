@@ -14,8 +14,7 @@ import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 import {
   CipherType,
   withVaultUnlockContext,
-  VaultUnlockPlaceholder,
-  CozyUtils
+  VaultUnlockPlaceholder
 } from 'cozy-keys-lib'
 
 import AccountForm from './AccountForm'
@@ -216,8 +215,7 @@ export class DumbTriggerManager extends Component {
       showUnlockForm,
       onVaultDismiss,
       vaultClosable,
-      vaultClient,
-      client
+      vaultClient
     } = this.props
     const konnectorPolicy = findKonnectorPolicy(konnector)
     if (konnectorPolicy.saveInVault) {
@@ -231,9 +229,7 @@ export class DumbTriggerManager extends Component {
         showUnlockForm({
           onDismiss: onVaultDismiss,
           closable: vaultClosable,
-          onUnlock: this.handleVaultUnlock,
-          addCheckShouldUnlock: () =>
-            CozyUtils.checkHasInstalledExtension(client)
+          onUnlock: this.handleVaultUnlock
         })
       } else {
         this.handleVaultUnlock()
