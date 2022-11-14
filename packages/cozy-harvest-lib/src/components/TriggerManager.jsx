@@ -15,7 +15,6 @@ import {
   CipherType,
   withVaultUnlockContext,
   VaultUnlockPlaceholder,
-  VaultUnlockProvider,
   CozyUtils
 } from 'cozy-keys-lib'
 
@@ -29,6 +28,7 @@ import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
 import withConnectionFlow from '../models/withConnectionFlow'
 import HarvestVaultProvider from './HarvestVaultProvider'
+import VaultUnlockProvider from './VaultUnlockProvider'
 import { intentsApiProptype } from '../helpers/proptypes'
 
 const IDLE = 'IDLE'
