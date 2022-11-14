@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.6.0 (2022-11-14)
+
+
+### Features
+
+* **cozy-device-helper:** Add `biometry_authorisation_denied` interface ([d6eb024](https://github.com/cozy/cozy-libs/commit/d6eb02483bc368a7a14bc5a9df4c1256ad4725ed))
+
+
+
+
+
 # [2.5.0](https://github.com/cozy/cozy-libs/compare/cozy-device-helper@2.4.1...cozy-device-helper@2.5.0) (2022-10-03)
 
 

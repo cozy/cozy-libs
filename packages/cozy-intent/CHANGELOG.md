@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.7.0 (2022-11-14)
+
+
+### Features
+
+* **cozy-intent:** Add `isBiometryDenied` on API methods ([fd0354a](https://github.com/cozy/cozy-libs/commit/fd0354a2c9251c7784d89fb164e5f28802f25f24))
+* **cozy-intent:** Add `openAppOSSettings` on API methods ([9c430e7](https://github.com/cozy/cozy-libs/commit/9c430e7785aaf179bedd0b6db8f6c34862769421))
+
+
+
+
+
 # [2.6.0](https://github.com/cozy/cozy-libs/compare/cozy-intent@2.5.1...cozy-intent@2.6.0) (2022-10-04)
 
 
