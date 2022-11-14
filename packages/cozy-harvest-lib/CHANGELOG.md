@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.29.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.1...cozy-harvest-lib@9.29.2) (2022-11-14)
+
+
+### Bug Fixes
+
+* **cozy-harvest-lib:** Correctly instantiate `VaultUnlockProvider` ([f92da60](https://github.com/cozy/cozy-libs/commit/f92da602578142b5fdd4a072031010d1b2c8e015))
+* **cozy-harvest-lib:** Re-enable skipped `ConfigurationTab` unit test ([b815eab](https://github.com/cozy/cozy-libs/commit/b815eabd692abc3d83eb0d558ae1afcfe2cb4b95))
+* **cozy-harvest-lib:** Remove addCheckShouldUnlock from showUnlockForm ([691d47b](https://github.com/cozy/cozy-libs/commit/691d47b360ef83c50fdb576a9ef1b6bf916db009))
+
+
+
+
+
 ## [9.29.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.0...cozy-harvest-lib@9.29.1) (2022-11-03)
 
 
