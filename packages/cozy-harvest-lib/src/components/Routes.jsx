@@ -10,11 +10,7 @@ import {
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import {
-  useVaultUnlockContext,
-  VaultUnlockProvider,
-  VaultUnlockPlaceholder
-} from 'cozy-keys-lib'
+import { useVaultUnlockContext, VaultUnlockPlaceholder } from 'cozy-keys-lib'
 
 import KonnectorAccounts from './KonnectorAccounts'
 import AccountModal from './AccountModal'
@@ -23,6 +19,7 @@ import EditAccountModal from './EditAccountModal'
 import KonnectorSuccess from './KonnectorSuccess'
 import HarvestModalRoot from './HarvestModalRoot'
 import HarvestVaultProvider from './HarvestVaultProvider'
+import VaultUnlockProvider from './VaultUnlockProvider'
 import { MountPointProvider } from './MountPointContext'
 import DialogContext from './DialogContext'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
