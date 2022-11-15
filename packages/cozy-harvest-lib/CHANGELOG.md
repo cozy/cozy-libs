@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.29.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.3...cozy-harvest-lib@9.29.4) (2022-11-15)
+
+
+### Bug Fixes
+
+* Dispatch account deletion after BI connection deletion ([2055a5e](https://github.com/cozy/cozy-libs/commit/2055a5e04e23594279eacd30979f54ad0b80a25c))
+
+
+
+
+
 ## [9.29.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.2...cozy-harvest-lib@9.29.3) (2022-11-14)
 
 **Note:** Version bump only for package cozy-harvest-lib
