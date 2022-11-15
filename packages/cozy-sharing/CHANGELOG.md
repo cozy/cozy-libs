@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.6.1...cozy-sharing@4.7.0) (2022-11-15)
+
+
+### Bug Fixes
+
+* **SharingProvider:** Wait until all request finish to rise allLoaded ([05b14c4](https://github.com/cozy/cozy-libs/commit/05b14c4af3b572c919f944a3b2b5ef5ec7b51257))
+
+
+### Features
+
+* Add ShareButtonWithRecipients ([b1f99b3](https://github.com/cozy/cozy-libs/commit/b1f99b3f3ea6ed00b3c11e87042434239c83d94d))
+
+
+
+
+
 ## [4.6.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.6.0...cozy-sharing@4.6.1) (2022-11-14)
 
 **Note:** Version bump only for package cozy-sharing
