@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.29.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.4...cozy-harvest-lib@9.29.5) (2022-11-16)
+
+
+### Bug Fixes
+
+* BiWebview handle accounts created after bi webhooks ([3715fe7](https://github.com/cozy/cozy-libs/commit/3715fe70aa334fb10fc0fc40bf9633d24e7ddfd7))
+* Mistake on harvest.bi.fullwebhooks flag ([6a068a8](https://github.com/cozy/cozy-libs/commit/6a068a8cc2e18bf027415bcf456ef61e2dc22506))
+
+
+
+
+
 ## [9.29.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.3...cozy-harvest-lib@9.29.4) (2022-11-15)
 
 
