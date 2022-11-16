@@ -6,7 +6,7 @@ import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 
 import Home from '../Home/Home'
-import PapersListWrapper from '../Papers/PapersListWrapper'
+import PapersListWrapper from '../Views/PapersListWrapper'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const MultiselectPaperList = ({ setIsFilePickerActive }) => {

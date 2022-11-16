@@ -4,10 +4,11 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import MultiselectContent from './MultiselectContent'
-import MultiselectViewActions from './MultiselectViewActions'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import MultiselectPaperList from './MultiselectPaperList'
+
+import MultiselectContent from '../Multiselect/MultiselectContent'
+import MultiselectViewActions from '../Multiselect/MultiselectViewActions'
+import MultiselectPaperList from '../Multiselect/MultiselectPaperList'
 
 const MultiselectView = () => {
   const { t } = useI18n()

@@ -1,17 +1,18 @@
 import React from 'react'
 import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
-import Home from './Home/Home'
-import MultiselectView from './Multiselect/MultiselectView'
-import PapersListWrapper from './Papers/PapersListWrapper'
-import FilesViewerWithQuery from './Viewer/FileViewerWithQuery'
+import Home from './Views/Home'
+import MultiselectView from './Views/MultiselectView'
+import PapersListWrapper from './Views/PapersListWrapper'
+import FilesViewerWithQuery from './Views/FileViewerWithQuery'
+import PlaceholderListModal from './Views/PlaceholderListModal'
+import CreatePaperModal from './Views/CreatePaperModal'
+import OnboardingWrapper from './Views/OnboardingWrapper'
+import InformationEditWrapper from './Views/InformationEditWrapper'
+import PageEdit from './Views/PageEdit'
+import ContactEditWrapper from './Views/ContactEditWrapper'
+
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
-import PlaceholderListModal from './Placeholders/PlaceholderListModal/PlaceholderListModal'
-import CreatePaperModal from './StepperDialog/CreatePaperModal'
-import OnboardingWrapper from './Onboarding/OnboardingWrapper'
-import InformationEditWrapper from './ModelSteps/Edit/InformationEditWrapper'
-import PageEdit from './ModelSteps/Edit/PageEdit'
-import ContactEditWrapper from './ModelSteps/Edit/ContactEditWrapper'
 
 export const AppRouter = () => {
   const location = useLocation()
