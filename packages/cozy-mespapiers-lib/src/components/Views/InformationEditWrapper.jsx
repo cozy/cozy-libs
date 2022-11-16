@@ -10,15 +10,18 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { FILES_DOCTYPE } from '../../../doctypes'
-import { useScannerI18n } from '../../Hooks/useScannerI18n'
-import CompositeHeaderImage from '../../CompositeHeader/CompositeHeaderImage'
-import IlluGenericInputText from '../../../assets/icons/IlluGenericInputText.svg'
-import { makeInputsInformationStep } from '../../../helpers/makeInputsInformationStep'
-import { useCurrentEditInformations } from './useCurrentEditInformations'
-import { isInformationEditPermitted, updateFileMetadata } from './helpers'
+import { FILES_DOCTYPE } from '../../doctypes'
+import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
+import { makeInputsInformationStep } from '../../helpers/makeInputsInformationStep'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
+import CompositeHeaderImage from '../CompositeHeader/CompositeHeaderImage'
 
-import styles from './styles.styl'
+import { useCurrentEditInformations } from '../ModelSteps/Edit/useCurrentEditInformations'
+import {
+  isInformationEditPermitted,
+  updateFileMetadata
+} from '../ModelSteps/Edit/helpers'
+import styles from '../ModelSteps/Edit/styles.styl'
 
 const InformationEditWrapper = () => {
   const { fileId } = useParams()

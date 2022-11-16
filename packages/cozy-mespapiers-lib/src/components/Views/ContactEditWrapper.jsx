@@ -6,10 +6,11 @@ import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { useClient } from 'cozy-client'
 
-import { useCurrentEditInformations } from './useCurrentEditInformations'
-import useReferencedContact from '../../Hooks/useReferencedContact'
-import ContactEditDialog from './ContactEditDialog'
-import { updateReferencedContact } from './helpers'
+import useReferencedContact from '../Hooks/useReferencedContact'
+
+import ContactEditDialog from '../ModelSteps/Edit/ContactEditDialog'
+import { useCurrentEditInformations } from '../ModelSteps/Edit/useCurrentEditInformations'
+import { updateReferencedContact } from '../ModelSteps/Edit/helpers'
 
 const useStyles = makeStyles({
   backdropRoot: {

@@ -1,12 +1,13 @@
 import React, { useMemo, useEffect } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
+import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
 import { FormDataProvider } from '../Contexts/FormDataProvider'
 import { StepperDialogProvider } from '../Contexts/StepperDialogProvider'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useStepperDialog } from '../Hooks/useStepperDialog'
-import StepperDialogWrapper from './StepperDialogWrapper'
-import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
+
+import StepperDialogWrapper from '../StepperDialog/StepperDialogWrapper'
 
 const CreatePaperModal = () => {
   const { search } = useLocation()

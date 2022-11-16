@@ -4,9 +4,9 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom'
 import { useQuery, useClient, hasQueryBeenLoaded } from 'cozy-client'
 import { SharingProvider } from 'cozy-sharing/dist/SharingProvider'
 
-import { buildViewerFileQuery } from './queries'
-import FileViewerLoading from './FileViewerLoading'
-import FilesViewer from './FilesViewer'
+import { buildViewerFileQuery } from '../Viewer/queries'
+import FileViewerLoading from '../Viewer/FileViewerLoading'
+import FilesViewer from '../Viewer/FilesViewer'
 
 import 'cozy-sharing/dist/stylesheet.css'
 

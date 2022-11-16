@@ -11,12 +11,15 @@ import {
   buildFilesQueryByLabel
 } from '../../helpers/queries'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
-import { buildFilesByContacts, getContactsRefIdsByFiles } from './helpers'
+import {
+  buildFilesByContacts,
+  getContactsRefIdsByFiles
+} from '../Papers/helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PapersListByContact from '../Papers/PapersListByContact'
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
-import PapersListToolbar from './PapersListToolbar'
+import PapersListToolbar from '../Papers/PapersListToolbar'
 
 const PapersListWrapper = ({ selectedThemeLabel = null }) => {
   const params = useParams()

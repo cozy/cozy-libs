@@ -8,7 +8,7 @@ import Home from './Home'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 /* eslint-disable react/display-name */
-jest.mock('./HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
+jest.mock('../Home/HomeToolbar', () => () => <div data-testid="HomeToolbar" />)
 jest.mock('../Papers/PaperGroup', () => () => <div data-testid="PaperGroup" />)
 jest.mock('../SearchResult/SearchResult', () => () => (
   <div data-testid="SearchResult" />

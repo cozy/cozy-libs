@@ -4,11 +4,11 @@ import { useParams, useNavigate, Navigate } from 'react-router-dom'
 import { useClient } from 'cozy-client'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { FILES_DOCTYPE } from '../../../../doctypes'
-import { useCurrentEditInformations } from '../useCurrentEditInformations'
-import PageEditMobile from './PageEditMobile'
-import PageEditDesktop from './PageEditDesktop'
-import PageEditItems from './PageEditItems'
+import { FILES_DOCTYPE } from '../../doctypes'
+import { useCurrentEditInformations } from '../ModelSteps/Edit/useCurrentEditInformations'
+import PageEditMobile from '../ModelSteps/Edit/PageEdit/PageEditMobile'
+import PageEditDesktop from '../ModelSteps/Edit/PageEdit/PageEditDesktop'
+import PageEditItems from '../ModelSteps/Edit/PageEdit/PageEditItems'
 
 const pageItems = ['front', 'back']
 
