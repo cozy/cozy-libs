@@ -56,7 +56,7 @@ const PapersList = ({ papers }) => {
   }
 
   return (
-    <div className="u-pv-half">
+    <>
       {papers.list.map(
         (paper, idx) =>
           idx + 1 <= maxDisplay && (
@@ -83,7 +83,7 @@ const PapersList = ({ papers }) => {
           onClick={handleClick}
         />
       )}
-    </div>
+    </>
   )
 }
 
