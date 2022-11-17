@@ -1,7 +1,7 @@
 /* global cozy */
 import React from 'react'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -11,12 +11,16 @@ import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 
-const PapersListToolbar = ({ currentFileTheme }) => {
+import { getCurrentFileTheme } from './helpers'
+
+const PapersListToolbar = ({ selectedThemeLabel }) => {
   const { BarLeft, BarCenter } = cozy.bar
+  const params = useParams()
   const navigate = useNavigate()
   const { isMultiSelectionActive } = useMultiSelection()
   const scannerT = useScannerI18n()
 
+  const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
   const themeLabel = scannerT(`items.${currentFileTheme}`)
   const onBack = () => navigate('/paper')
 
@@ -43,7 +47,7 @@ const PapersListToolbar = ({ currentFileTheme }) => {
 }
 
 PapersListToolbar.propTypes = {
-  currentFileTheme: PropTypes.string
+  selectedThemeLabel: PropTypes.string
 }
 
 export default PapersListToolbar

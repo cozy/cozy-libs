@@ -14,7 +14,8 @@ import {
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import {
   buildFilesByContacts,
-  getContactsRefIdsByFiles
+  getContactsRefIdsByFiles,
+  getCurrentFileTheme
 } from '../Papers/helpers'
 import PapersListToolbar from '../Papers/PapersListToolbar'
 import PapersListByContact from '../Papers/PapersListByContact'
@@ -24,7 +25,7 @@ const PapersList = ({ selectedThemeLabel = null }) => {
   const { papersDefinitions } = usePapersDefinitions()
   const params = useParams()
 
-  const currentFileTheme = params?.fileTheme ?? selectedThemeLabel
+  const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
   const { data: files, ...fileQueryResult } = useQueryAll(
@@ -76,7 +77,7 @@ const PapersList = ({ selectedThemeLabel = null }) => {
   if (paperslistByContact.length === 0) {
     return (
       <>
-        <PapersListToolbar currentFileTheme={currentFileTheme} />
+        <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
         <Spinner
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
           size="xxlarge"
@@ -87,7 +88,7 @@ const PapersList = ({ selectedThemeLabel = null }) => {
 
   return (
     <>
-      <PapersListToolbar currentFileTheme={currentFileTheme} />
+      <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
       <PapersListByContact paperslistByContact={paperslistByContact} />
     </>
   )
