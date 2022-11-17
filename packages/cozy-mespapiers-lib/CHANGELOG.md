@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.2.7...cozy-mespapiers-lib@9.3.0) (2022-11-17)
+
+
+### Bug Fixes
+
+* **mespapiers:** Fix spaces in and around paper list ([d86f78c](https://github.com/cozy/cozy-libs/commit/d86f78c84d45e9a68a423d79a324ff207a32a2c8))
+
+
+### Features
+
+* **mespapiers:** Move entry point comp into `Views` folder ([283e893](https://github.com/cozy/cozy-libs/commit/283e8933dd4684d9148021b20975af3dbedc1c49))
+
+
+
+
+
 ## [9.2.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.2.6...cozy-mespapiers-lib@9.2.7) (2022-11-16)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
