@@ -1,37 +1,28 @@
 import React, { useMemo } from 'react'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
+import { Navigate, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel
 } from '../../helpers/queries'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import {
   buildFilesByContacts,
   getContactsRefIdsByFiles
 } from '../Papers/helpers'
+import PapersListByContactLayout from '../Papers/PapersListByContactLayout'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import PapersListByContact from '../Papers/PapersListByContact'
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
-import PapersListToolbar from '../Papers/PapersListToolbar'
 
 const PapersList = ({ selectedThemeLabel = null }) => {
-  const params = useParams()
-  const navigate = useNavigate()
-  const scannerT = useScannerI18n()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
-  const { setIsMultiSelectionActive, isMultiSelectionActive } =
-    useMultiSelection()
+  const params = useParams()
 
   const currentFileTheme = params?.fileTheme ?? selectedThemeLabel
-  const themeLabel = scannerT(`items.${currentFileTheme}`)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
 
   const { data: files, ...fileQueryResult } = useQueryAll(
@@ -81,24 +72,10 @@ const PapersList = ({ selectedThemeLabel = null }) => {
   }
 
   return (
-    <>
-      {!isMultiSelectionActive && (
-        <PapersListToolbar
-          title={themeLabel}
-          onBack={() => navigate('/paper')}
-          onClose={() => setIsMultiSelectionActive(false)}
-        />
-      )}
-
-      {paperslistByContact.length > 0 ? (
-        <PapersListByContact paperslistByContact={paperslistByContact} />
-      ) : (
-        <Spinner
-          size="xxlarge"
-          className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-        />
-      )}
-    </>
+    <PapersListByContactLayout
+      currentFileTheme={currentFileTheme}
+      paperslistByContact={paperslistByContact}
+    />
   )
 }
 
