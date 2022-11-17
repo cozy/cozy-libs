@@ -4,18 +4,20 @@ import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
+import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel
 } from '../../helpers/queries'
+import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import {
   buildFilesByContacts,
   getContactsRefIdsByFiles
 } from '../Papers/helpers'
-import PapersListByContactLayout from '../Papers/PapersListByContactLayout'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
+import PapersListToolbar from '../Papers/PapersListToolbar'
+import PapersListByContact from '../Papers/PapersListByContact'
 
 const PapersList = ({ selectedThemeLabel = null }) => {
   const { t } = useI18n()
@@ -71,11 +73,23 @@ const PapersList = ({ selectedThemeLabel = null }) => {
     return <Navigate to="/paper" replace />
   }
 
+  if (paperslistByContact.length === 0) {
+    return (
+      <>
+        <PapersListToolbar currentFileTheme={currentFileTheme} />
+        <Spinner
+          className="u-flex u-flex-justify-center u-mt-2 u-h-5"
+          size="xxlarge"
+        />
+      </>
+    )
+  }
+
   return (
-    <PapersListByContactLayout
-      currentFileTheme={currentFileTheme}
-      paperslistByContact={paperslistByContact}
-    />
+    <>
+      <PapersListToolbar currentFileTheme={currentFileTheme} />
+      <PapersListByContact paperslistByContact={paperslistByContact} />
+    </>
   )
 }
 
