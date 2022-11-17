@@ -3,7 +3,8 @@ import {
   groupFilesByContacts,
   buildFilesByContacts,
   getContactsRefIdsByFiles,
-  buildFilesWithContacts
+  buildFilesWithContacts,
+  getCurrentFileTheme
 } from './helpers'
 
 const mockContacts00 = [
@@ -323,5 +324,40 @@ describe('helpers Papers', () => {
 
       expect(result).toStrictEqual(expected)
     })
+  })
+})
+
+describe('getCurrentFileTheme', () => {
+  it('should be fileTheme event with selectedThemeLabel', () => {
+    const res = getCurrentFileTheme(
+      { fileTheme: 'fileTheme' },
+      'selectedThemeLabel'
+    )
+
+    expect(res).toBe('fileTheme')
+  })
+
+  it('should fileTheme with null selectedThemeLabel', () => {
+    const res = getCurrentFileTheme({ fileTheme: 'fileTheme' }, null)
+
+    expect(res).toBe('fileTheme')
+  })
+
+  it('should be selectedThemeLabel for null fileTheme', () => {
+    const res = getCurrentFileTheme({ fileTheme: null }, 'selectedThemeLabel')
+
+    expect(res).toBe('selectedThemeLabel')
+  })
+
+  it('should be selectedThemeLabel fro null param', () => {
+    const res = getCurrentFileTheme(null, 'selectedThemeLabel')
+
+    expect(res).toBe('selectedThemeLabel')
+  })
+
+  it('should be null', () => {
+    const res = getCurrentFileTheme(null, null)
+
+    expect(res).toBe(null)
   })
 })

@@ -158,3 +158,6 @@ export const buildFilesWithContacts = ({ files, contacts, t }) => {
     })
   })
 }
+
+export const getCurrentFileTheme = (params, selectedThemeLabel) =>
+  params?.fileTheme ?? selectedThemeLabel
