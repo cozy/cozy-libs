@@ -1,19 +1,28 @@
 /* global cozy */
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
 
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import UIBarTitle from 'cozy-ui/transpiled/react/BarTitle'
 import CozyTheme from 'cozy-ui/transpiled/react/CozyTheme'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import { useScannerI18n } from '../Hooks/useScannerI18n'
 
-const PapersListToolbar = ({ title, onBack, onClose }) => {
+const PapersListToolbar = ({ currentFileTheme }) => {
+  const { BarLeft, BarCenter } = cozy.bar
+  const navigate = useNavigate()
   const { isMultiSelectionActive } = useMultiSelection()
-  const { isDesktop } = useBreakpoints()
-  const { BarLeft, BarRight, BarCenter } = cozy.bar
+  const scannerT = useScannerI18n()
+
+  const themeLabel = scannerT(`items.${currentFileTheme}`)
+  const onBack = () => navigate('/paper')
+
+  if (isMultiSelectionActive) {
+    return null
+  }
 
   return (
     <>
@@ -26,27 +35,15 @@ const PapersListToolbar = ({ title, onBack, onClose }) => {
       <BarCenter>
         {/* Need to repeat the theme since the bar is in another react portal */}
         <CozyTheme variant="normal">
-          <UIBarTitle>{title}</UIBarTitle>
+          <UIBarTitle>{themeLabel}</UIBarTitle>
         </CozyTheme>
       </BarCenter>
-
-      {isMultiSelectionActive && (
-        <BarRight>
-          {!isDesktop && (
-            <IconButton onClick={onClose}>
-              <Icon icon="cross-medium" />
-            </IconButton>
-          )}
-        </BarRight>
-      )}
     </>
   )
 }
 
 PapersListToolbar.propTypes = {
-  title: PropTypes.string,
-  onBack: PropTypes.func,
-  onClose: PropTypes.func
+  currentFileTheme: PropTypes.string
 }
 
 export default PapersListToolbar
