@@ -3,14 +3,14 @@ import { Routes, Route, Navigate, useLocation } from 'react-router-dom'
 
 import Home from './Views/Home'
 import MultiselectView from './Views/MultiselectView'
-import PapersListWrapper from './Views/PapersListWrapper'
+import PapersList from './Views/PapersList'
 import FilesViewerWithQuery from './Views/FileViewerWithQuery'
 import PlaceholderListModal from './Views/PlaceholderListModal'
 import CreatePaperModal from './Views/CreatePaperModal'
-import OnboardingWrapper from './Views/OnboardingWrapper'
-import InformationEditWrapper from './Views/InformationEditWrapper'
+import Onboarding from './Views/Onboarding'
+import InformationEdit from './Views/InformationEdit'
 import PageEdit from './Views/PageEdit'
-import ContactEditWrapper from './Views/ContactEditWrapper'
+import ContactEdit from './Views/ContactEdit'
 
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 
@@ -26,12 +26,12 @@ export const AppRouter = () => {
       <Routes location={background || location}>
         <Route element={<OnboardedGuardedRoute />}>
           <Route path="/" element={<Home />} />
-          <Route path="files/:fileTheme" element={<PapersListWrapper />} />
+          <Route path="files/:fileTheme" element={<PapersList />} />
           <Route
             path="file/:fileTheme/:fileId"
             element={<FilesViewerWithQuery />}
           />
-          <Route path="onboarding" element={<OnboardingWrapper />} />
+          <Route path="onboarding" element={<Onboarding />} />
         </Route>
         <Route path="/paper" element={<Navigate to="/" />} />
       </Routes>
@@ -45,10 +45,10 @@ export const AppRouter = () => {
           />
           <Route
             path="edit/information/:fileId"
-            element={<InformationEditWrapper />}
+            element={<InformationEdit />}
           />
           <Route path="edit/page/:fileId" element={<PageEdit />} />
-          <Route path="edit/contact/:fileId" element={<ContactEditWrapper />} />
+          <Route path="edit/contact/:fileId" element={<ContactEdit />} />
         </Routes>
       )}
     </>

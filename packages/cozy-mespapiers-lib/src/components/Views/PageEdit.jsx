@@ -12,7 +12,7 @@ import PageEditItems from '../ModelSteps/Edit/PageEdit/PageEditItems'
 
 const pageItems = ['front', 'back']
 
-const PageEditWrapper = () => {
+const PageEdit = () => {
   const { fileId } = useParams()
   const client = useClient()
   const { isMobile } = useBreakpoints()
@@ -70,4 +70,4 @@ const PageEditWrapper = () => {
   )
 }
 
-export default PageEditWrapper
+export default PageEdit

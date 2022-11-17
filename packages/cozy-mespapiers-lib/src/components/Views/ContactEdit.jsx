@@ -18,7 +18,7 @@ const useStyles = makeStyles({
   }
 })
 
-const ContactEditWrapper = () => {
+const ContactEdit = () => {
   const { fileId } = useParams()
   const navigate = useNavigate()
   const client = useClient()
@@ -64,4 +64,4 @@ const ContactEditWrapper = () => {
   )
 }
 
-export default ContactEditWrapper
+export default ContactEdit
