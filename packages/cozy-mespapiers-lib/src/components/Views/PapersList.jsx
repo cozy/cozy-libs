@@ -21,7 +21,7 @@ import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import PapersListToolbar from '../Papers/PapersListToolbar'
 
-const PapersListWrapper = ({ selectedThemeLabel = null }) => {
+const PapersList = ({ selectedThemeLabel = null }) => {
   const params = useParams()
   const navigate = useNavigate()
   const scannerT = useScannerI18n()
@@ -102,8 +102,8 @@ const PapersListWrapper = ({ selectedThemeLabel = null }) => {
   )
 }
 
-PapersListWrapper.propTypes = {
+PapersList.propTypes = {
   selectedThemeLabel: PropTypes.string
 }
 
-export default PapersListWrapper
+export default PapersList

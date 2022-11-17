@@ -57,7 +57,7 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
         !selectedThemeLabel ? (
           <Home setSelectedThemeLabel={setSelectedThemeLabel} />
         ) : (
-          <PapersListWrapper selectedThemeLabel={selectedThemeLabel} />
+          <PapersList selectedThemeLabel={selectedThemeLabel} />
         )
       }
       actions={

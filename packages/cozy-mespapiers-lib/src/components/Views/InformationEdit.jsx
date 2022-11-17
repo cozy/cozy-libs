@@ -23,7 +23,7 @@ import {
 } from '../ModelSteps/Edit/helpers'
 import styles from '../ModelSteps/Edit/styles.styl'
 
-const InformationEditWrapper = () => {
+const InformationEdit = () => {
   const { fileId } = useParams()
   const client = useClient()
   const { t } = useI18n()
@@ -84,7 +84,7 @@ const InformationEditWrapper = () => {
       title={dialogTitle}
       content={
         <div
-          className={cx(styles['InformationEditWrapper-Dialog-container'], {
+          className={cx(styles['InformationEdit-Dialog-container'], {
             'is-focused': isFocus && isIOS()
           })}
         >
@@ -134,4 +134,4 @@ const InformationEditWrapper = () => {
   )
 }
 
-export default InformationEditWrapper
+export default InformationEdit
