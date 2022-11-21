@@ -358,6 +358,48 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
+          contact: 'Account 1',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId05',
+                name: 'file05.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorOne',
+                  sourceAccountIdentifier: 'Account 1'
+                }
+              },
+              {
+                _id: 'fileId06',
+                name: 'file06.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorOne',
+                  sourceAccountIdentifier: 'Account 1'
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'Account 2',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId07',
+                name: 'file07.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorTwo',
+                  sourceAccountIdentifier: 'Account 2'
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
           contact: 'Alice Durand',
           papers: {
             maxDisplay: 3,
@@ -408,48 +450,6 @@ describe('helpers Papers', () => {
                       { id: 'contactId02', type: 'io.cozy.contacts' }
                     ]
                   }
-                }
-              }
-            ]
-          }
-        },
-        {
-          withHeader: true,
-          contact: 'Account 1',
-          papers: {
-            maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId05',
-                name: 'file05.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorOne',
-                  sourceAccountIdentifier: 'Account 1'
-                }
-              },
-              {
-                _id: 'fileId06',
-                name: 'file06.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorOne',
-                  sourceAccountIdentifier: 'Account 1'
-                }
-              }
-            ]
-          }
-        },
-        {
-          withHeader: true,
-          contact: 'Account 2',
-          papers: {
-            maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId07',
-                name: 'file07.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorTwo',
-                  sourceAccountIdentifier: 'Account 2'
                 }
               }
             ]
