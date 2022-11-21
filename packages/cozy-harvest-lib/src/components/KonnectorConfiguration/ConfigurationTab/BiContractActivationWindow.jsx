@@ -13,20 +13,23 @@ import {
 import isEqual from 'lodash/isEqual'
 import { openOAuthWindow } from '../../OAuthService'
 import { useWebviewIntent } from 'cozy-intent'
-import logger from '../../services/logger'
+import { useCozyConfirmDialog } from '../../CozyConfirmDialogProvider'
+import logger from '../../../logger'
 
 const BIContractActivationWindow = ({
   konnector,
   account,
   t,
   intentsApi,
-  innerAccountModalOverrides
+  innerAccountModalOverrides,
+  onAccountDeleted
 }) => {
   const [extraParams, setExtraParams] = useState(null)
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const client = useClient()
 
   const webviewIntent = useWebviewIntent()
+  const cozyConfirmDialog = useCozyConfirmDialog()
 
   /**
    * Detects if a BI connection has been removed
@@ -39,7 +42,20 @@ const BIContractActivationWindow = ({
     return queryParams.get('connection_deleted') === 'true'
   }
 
-  const afterOAuthWindow = async () => {
+  /**
+   * Actions run after OAuthService has been resolved
+   *
+   * @param {import('../../OAuthService').OAuthServiceResult} result
+   */
+  const afterOAuthWindow = async result => {
+    if (isBIConnectionRemoved(result?.data?.finalLocation)) {
+      await cozyConfirmDialog.showDialog({
+        title: t('modal.deleteBIConnection.title'),
+        closeLabel: t('close'),
+        description: t('modal.deleteBIConnection.description')
+      })
+      onAccountDeleted()
+    }
     konnectorPolicy.refreshContracts({ client, account, konnector })
   }
 
@@ -78,20 +94,21 @@ const BIContractActivationWindow = ({
           variant="text"
           color="primary"
           disabled={!extraParams}
-          onClick={() => {
-            openOAuthWindow({
-              client,
-              konnector,
-              account,
-              extraParams,
-              intentsApi,
-              webviewIntent,
-              manage: true
-            })
-              .then(afterOAuthWindow)
-              .catch(err => {
-                logger.error('openOAuthWindow error', err)
+          onClick={async () => {
+            try {
+              const result = await openOAuthWindow({
+                client,
+                konnector,
+                account,
+                extraParams,
+                intentsApi,
+                webviewIntent,
+                manage: true
               })
+              await afterOAuthWindow(result)
+            } catch (err) {
+              logger.error('openOAuthWindow error', err)
+            }
           }}
         >
           {t('contracts.handle-synchronization')}
@@ -105,7 +122,8 @@ BIContractActivationWindow.propTypes = {
   t: PropTypes.func,
   account: PropTypes.object,
   intentsApi: intentsApiProptype,
-  innerAccountModalOverrides: innerAccountModalOverridesProptype
+  innerAccountModalOverrides: innerAccountModalOverridesProptype,
+  onAccountDeleted: PropTypes.func
 }
 
 // use isEqual to avoid an infinite rerender since the konnector object is a new one on each render
