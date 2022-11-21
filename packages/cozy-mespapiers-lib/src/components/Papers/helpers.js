@@ -8,6 +8,7 @@ import { filterWithRemaining } from '../../helpers/filterWithRemaining'
 const { getDisplayName } = models.contact
 
 const hasContactsInFile = file => file.contacts.length > 0
+const isFromConnector = file => Boolean(file.cozyMetadata?.sourceAccount)
 
 /**
  * Get all contact ids referenced on files
@@ -92,6 +93,10 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
 }
 
 /**
+ * Group files together if they come from the same contact
+ * or the same list of contacts,
+ * or the same sourceAccountIdentifier of the same Connector.
+ * The rest is grouped together at the end in the same list.
  * @property {object[]} files - Array of IOCozyFile
  * @property {object[]} contacts - Array of IOCozyContact
  * @property {number} maxDisplay - Number of displayed files
@@ -108,12 +113,8 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
 
   const filesWithoutContacts = remainingItems[0]?.files || []
 
-  const withHeader = !(
-    filesWithoutContacts.length === files.length && files.length > 0
-  )
-
   const result = filesWithContacts.map(fileWithContact => ({
-    withHeader,
+    withHeader: true,
     contact: harmonizeContactsNames(fileWithContact.contacts, t),
     papers: {
       maxDisplay,
@@ -124,14 +125,40 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
   const resultSorted = result.sort((a, b) => a.contact.localeCompare(b.contact))
 
   if (filesWithoutContacts.length > 0) {
-    resultSorted.push({
-      withHeader,
-      contact: t('PapersList.defaultName'),
-      papers: {
-        maxDisplay,
-        list: filesWithoutContacts
-      }
-    })
+    const {
+      itemsFound: filesCreatedByConnectors,
+      remainingItems: filesNotCreatedByConnectors
+    } = filterWithRemaining(filesWithoutContacts, isFromConnector)
+
+    if (filesCreatedByConnectors.length > 0) {
+      const filesByConnectors = groupBy(
+        filesCreatedByConnectors,
+        file => file.cozyMetadata.sourceAccount
+      )
+
+      Object.values(filesByConnectors).map(value => {
+        resultSorted.push({
+          withHeader: true,
+          contact: value[0].cozyMetadata.sourceAccountIdentifier,
+          papers: {
+            maxDisplay,
+            list: value
+          }
+        })
+      })
+    }
+
+    if (filesNotCreatedByConnectors.length > 0) {
+      resultSorted.push({
+        withHeader:
+          filesWithContacts.length > 0 || filesCreatedByConnectors.length > 0,
+        contact: t('PapersList.defaultName'),
+        papers: {
+          maxDisplay,
+          list: filesNotCreatedByConnectors
+        }
+      })
+    }
   }
 
   return resultSorted
