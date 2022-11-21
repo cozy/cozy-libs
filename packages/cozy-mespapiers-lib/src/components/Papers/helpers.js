@@ -101,13 +101,15 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
 export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
   const filesByContacts = groupFilesByContacts(files, contacts)
 
-  const {
-    itemsFound: filesWithContacts,
-    remainingItems: filesWithoutContacts
-  } = filterWithRemaining(filesByContacts, hasContactsInFile)
+  const { itemsFound: filesWithContacts, remainingItems } = filterWithRemaining(
+    filesByContacts,
+    hasContactsInFile
+  )
+
+  const filesWithoutContacts = remainingItems[0]?.files || []
 
   const withHeader = !(
-    filesWithoutContacts[0]?.files.length === files.length && files.length > 0
+    filesWithoutContacts.length === files.length && files.length > 0
   )
 
   const result = filesWithContacts.map(fileWithContact => ({
@@ -127,9 +129,7 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
       contact: t('PapersList.defaultName'),
       papers: {
         maxDisplay,
-        list: filesWithoutContacts.flatMap(
-          fileWithoutContact => fileWithoutContact.files
-        )
+        list: filesWithoutContacts
       }
     })
   }
