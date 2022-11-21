@@ -68,6 +68,33 @@ const mockFilesWithoutContact = [
   }
 ]
 
+const mockFilesWithSourceAccount = [
+  {
+    _id: 'fileId05',
+    name: 'file05.pdf',
+    cozyMetadata: {
+      sourceAccount: 'ConnectorOne',
+      sourceAccountIdentifier: 'Account 1'
+    }
+  },
+  {
+    _id: 'fileId06',
+    name: 'file06.pdf',
+    cozyMetadata: {
+      sourceAccount: 'ConnectorOne',
+      sourceAccountIdentifier: 'Account 1'
+    }
+  },
+  {
+    _id: 'fileId07',
+    name: 'file07.pdf',
+    cozyMetadata: {
+      sourceAccount: 'ConnectorTwo',
+      sourceAccountIdentifier: 'Account 2'
+    }
+  }
+]
+
 describe('helpers Papers', () => {
   describe('getContactsRefIdsByFiles', () => {
     it('should return list of contact ids', () => {
@@ -260,6 +287,183 @@ describe('helpers Papers', () => {
         maxDisplay: 3,
         t: jest.fn(key => key)
       })
+
+      expect(result).toStrictEqual(expected)
+    })
+
+    it('should filter files without contact by sourceAccount', () => {
+      const result = buildFilesByContacts({
+        files: mockFilesWithSourceAccount,
+        contacts: [],
+        maxDisplay: 3,
+        t: jest.fn(key => key)
+      })
+
+      const expected = [
+        {
+          withHeader: true,
+          contact: 'Account 1',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId05',
+                name: 'file05.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorOne',
+                  sourceAccountIdentifier: 'Account 1'
+                }
+              },
+              {
+                _id: 'fileId06',
+                name: 'file06.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorOne',
+                  sourceAccountIdentifier: 'Account 1'
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'Account 2',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId07',
+                name: 'file07.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorTwo',
+                  sourceAccountIdentifier: 'Account 2'
+                }
+              }
+            ]
+          }
+        }
+      ]
+
+      expect(result).toStrictEqual(expected)
+    })
+
+    it('should filter files with contact and without contact', () => {
+      const result = buildFilesByContacts({
+        files: [...mockFiles, ...mockFilesWithSourceAccount],
+        contacts: mockContacts00,
+        maxDisplay: 3,
+        t: jest.fn(key => key)
+      })
+
+      const expected = [
+        {
+          withHeader: true,
+          contact: 'Alice Durand',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId02',
+                name: 'file02.pdf',
+                relationships: {
+                  referenced_by: {
+                    data: [{ id: 'contactId02', type: 'io.cozy.contacts' }]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'Bob Durand',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId01',
+                name: 'file01.pdf',
+                relationships: {
+                  referenced_by: {
+                    data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'PapersList.contactMerged',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId03',
+                name: 'file03.pdf',
+                relationships: {
+                  referenced_by: {
+                    data: [
+                      { id: 'contactId01', type: 'io.cozy.contacts' },
+                      { id: 'contactId02', type: 'io.cozy.contacts' }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'Account 1',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId05',
+                name: 'file05.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorOne',
+                  sourceAccountIdentifier: 'Account 1'
+                }
+              },
+              {
+                _id: 'fileId06',
+                name: 'file06.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorOne',
+                  sourceAccountIdentifier: 'Account 1'
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'Account 2',
+          papers: {
+            maxDisplay: 3,
+            list: [
+              {
+                _id: 'fileId07',
+                name: 'file07.pdf',
+                cozyMetadata: {
+                  sourceAccount: 'ConnectorTwo',
+                  sourceAccountIdentifier: 'Account 2'
+                }
+              }
+            ]
+          }
+        },
+        {
+          withHeader: true,
+          contact: 'PapersList.defaultName',
+          papers: {
+            maxDisplay: 3,
+            list: [{ _id: 'fileId04', name: 'file04.pdf' }]
+          }
+        }
+      ]
 
       expect(result).toStrictEqual(expected)
     })
