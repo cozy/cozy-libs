@@ -1,19 +1,15 @@
-import React, { useMemo } from 'react'
+import React from 'react'
 import { Navigate, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
-import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel
 } from '../../helpers/queries'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import {
-  buildFilesByContacts,
   getContactsRefIdsByFiles,
   getCurrentFileTheme
 } from '../Papers/helpers'
@@ -21,8 +17,6 @@ import PapersListToolbar from '../Papers/PapersListToolbar'
 import PapersListByContact from '../Papers/PapersListByContact'
 
 const PapersList = ({ selectedThemeLabel = null }) => {
-  const { t } = useI18n()
-  const { papersDefinitions } = usePapersDefinitions()
   const params = useParams()
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
@@ -49,32 +43,14 @@ const PapersList = ({ selectedThemeLabel = null }) => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  const currentDefinition = useMemo(
-    () =>
-      papersDefinitions.find(paperDef => paperDef.label === currentFileTheme),
-    [papersDefinitions, currentFileTheme]
-  )
-
-  const paperslistByContact = useMemo(() => {
-    if (!isLoadingFiles && !isLoadingContacts) {
-      return buildFilesByContacts({
-        files,
-        contacts,
-        maxDisplay:
-          currentDefinition?.maxDisplay || DEFAULT_MAX_FILES_DISPLAYED,
-        t
-      })
-    }
-    return []
-  }, [isLoadingFiles, isLoadingContacts, files, contacts, currentDefinition, t])
-
+  const isLoading = isLoadingFiles || isLoadingContacts
   const hasNoFiles = !isLoadingFiles && files.length === 0
 
   if (hasNoFiles) {
     return <Navigate to="/paper" replace />
   }
 
-  if (paperslistByContact.length === 0) {
+  if (isLoading) {
     return (
       <>
         <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
@@ -89,7 +65,11 @@ const PapersList = ({ selectedThemeLabel = null }) => {
   return (
     <>
       <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
-      <PapersListByContact paperslistByContact={paperslistByContact} />
+      <PapersListByContact
+        selectedThemeLabel={selectedThemeLabel}
+        files={files}
+        contacts={contacts}
+      />
     </>
   )
 }

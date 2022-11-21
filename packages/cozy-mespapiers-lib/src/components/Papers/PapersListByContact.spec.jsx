@@ -5,6 +5,13 @@ import { render } from '@testing-library/react'
 import AppLike from '../../../test/components/AppLike'
 import PapersListByContact from './PapersListByContact'
 
+import { buildFilesByContacts } from '../Papers/helpers'
+
+jest.mock('../Papers/helpers', () => ({
+  getCurrentFileTheme: jest.fn(),
+  buildFilesByContacts: jest.fn()
+}))
+
 const mockPaperslistByContact = [
   {
     withHeader: true,
@@ -33,19 +40,23 @@ const mockPaperslistByContact = [
   }
 ]
 
-const setup = contact => {
-  const paperList = contact
-    ? mockPaperslistByContact.filter(paper => paper.contact === contact)
-    : mockPaperslistByContact
-
+const setup = () => {
   return render(
     <AppLike>
-      <PapersListByContact paperslistByContact={paperList} />
+      <PapersListByContact
+        selectedThemeLabel={null}
+        files={[{}]}
+        contacts={[{}]}
+      />
     </AppLike>
   )
 }
 
 describe('PapersList components:', () => {
+  beforeEach(() => {
+    buildFilesByContacts.mockReturnValue(mockPaperslistByContact)
+  })
+
   it('should be rendered correctly', () => {
     const { container } = setup()
 
@@ -60,7 +71,7 @@ describe('PapersList components:', () => {
       ${'File06'}
       ${'File07'}
     `(`should display "$data"`, ({ data }) => {
-      const { getByText } = setup('Alice')
+      const { getByText } = setup()
       expect(getByText(data))
     })
   })
@@ -73,7 +84,7 @@ describe('PapersList components:', () => {
       ${'File02'}
       ${'See more (2)'}
     `(`should display "$data"`, ({ data }) => {
-      const { getByText } = setup('Bob')
+      const { getByText } = setup()
       expect(getByText(data))
     })
   })
