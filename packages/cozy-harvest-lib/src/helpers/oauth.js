@@ -166,10 +166,10 @@ const getAppSlug = client => {
  * @param  {Object} options
  * @param  {CozyClient} options.client
  * @param  {Object} options.konnector
- * @param  {string} options.redirectSlug The app we want to redirect the user on after the end of the flow
+ * @param  {string} [options.redirectSlug] The app we want to redirect the user on after the end of the flow
  * @param  {Object} options.extraParams some extra parameters to add to the query string
- * @param  {Boolean} options.reconnect Are we trying to reconnect an existing account ?
- * @param  {Boolean} options.manage Are we trying to manage an existing account ?
+ * @param  {Boolean} [options.reconnect] Are we trying to reconnect an existing account ?
+ * @param  {Boolean} [options.manage] Are we trying to manage an existing account ?
  * @param  {IoCozyAccount} options.account targetted account if any
  * @return {Object}           Object containing: `oAuthUrl` (URL of cozy stack OAuth endpoint) and `oAuthStateKey` (localStorage key)
  */
