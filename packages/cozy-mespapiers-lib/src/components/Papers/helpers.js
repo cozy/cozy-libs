@@ -104,6 +104,7 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
  * @returns {{ withHeader: boolean, contact: string, papers: { maxDisplay: number, list: IOCozyFile[] } }[]}
  */
 export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
+  let result = []
   const filesByContacts = groupFilesByContacts(files, contacts)
 
   const { itemsFound: filesWithContacts, remainingItems } = filterWithRemaining(
@@ -113,7 +114,7 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
 
   const filesWithoutContacts = remainingItems[0]?.files || []
 
-  const result = filesWithContacts.map(fileWithContact => ({
+  const unsortedListByContacts = filesWithContacts.map(fileWithContact => ({
     withHeader: true,
     contact: harmonizeContactsNames(fileWithContact.contacts, t),
     papers: {
@@ -122,7 +123,11 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
     }
   }))
 
-  const resultSorted = result.sort((a, b) => a.contact.localeCompare(b.contact))
+  const listByContacts = unsortedListByContacts.sort((a, b) =>
+    a.contact.localeCompare(b.contact)
+  )
+
+  result = [...listByContacts]
 
   if (filesWithoutContacts.length > 0) {
     const {
@@ -136,8 +141,8 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
         file => file.cozyMetadata.sourceAccount
       )
 
-      Object.values(filesByConnectors).map(value => {
-        resultSorted.push({
+      const unsortedlistByConnector = Object.values(filesByConnectors).map(
+        value => ({
           withHeader: true,
           contact: value[0].cozyMetadata.sourceAccountIdentifier,
           papers: {
@@ -145,11 +150,17 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
             list: value
           }
         })
-      })
+      )
+
+      const listByConnector = unsortedlistByConnector.sort((a, b) =>
+        a.contact.localeCompare(b.contact)
+      )
+
+      result = [...listByConnector, ...listByContacts]
     }
 
     if (filesNotCreatedByConnectors.length > 0) {
-      resultSorted.push({
+      result.push({
         withHeader:
           filesWithContacts.length > 0 || filesCreatedByConnectors.length > 0,
         contact: t('PapersList.defaultName'),
@@ -161,7 +172,7 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
     }
   }
 
-  return resultSorted
+  return result
 }
 
 /**
