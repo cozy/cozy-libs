@@ -1,7 +1,7 @@
 // @ts-check
-import React, { useState, useEffect, useCallback } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useClient, Mutations } from 'cozy-client'
+import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/MuiCozyTheme/Buttons'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
@@ -30,16 +30,6 @@ const BIContractActivationWindow = ({
 
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const client = useClient()
-
-  const onClose = useCallback(async () => {
-    client.dispatch({
-      type: 'RECEIVE_MUTATION_RESULT',
-      mutationId: client.generateRandomId(),
-      response: { data: { ...account, _deleted: true } },
-      definition: Mutations.deleteDocument({ ...account, _deleted: true })
-    })
-    onAccountDeleted()
-  }, [onAccountDeleted, account, client])
 
   /**
    * Detects if a BI connection has been removed
@@ -117,14 +107,14 @@ const BIContractActivationWindow = ({
         open={isDeleteConnectionDialogVisible}
         title={t('modal.deleteBIConnection.title')}
         content={t('modal.deleteBIConnection.description')}
-        onClose={onClose}
+        onClose={onAccountDeleted}
         actions={
           <>
             <Button
               variant="text"
               color="primary"
               aria-label="Close dialog"
-              onClick={onClose}
+              onClick={onAccountDeleted}
             >
               {t('close')}
             </Button>
