@@ -51,7 +51,7 @@ const BIContractActivationWindow = ({
     if (isBIConnectionRemoved(result?.data?.finalLocation)) {
       await cozyConfirmDialog.showDialog({
         title: t('modal.deleteBIConnection.title'),
-        closeLabel: t('close'),
+        closeLabel: t('modal.deleteBIConnection.confirm-deletion'),
         description: t('modal.deleteBIConnection.description')
       })
       onAccountDeleted()
