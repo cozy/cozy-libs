@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.4.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.3.0...cozy-mespapiers-lib@9.4.0) (2022-11-23)
+
+
+### Bug Fixes
+
+* **mespapiers:** Home path in MultiselectPaperList ([ad71614](https://github.com/cozy/cozy-libs/commit/ad716145bec7fb34a6aeca85d07b19f14d849e49))
+
+
+### Features
+
+* **mespapiers:** Files from connector are on top of the list of papers ([d49cb1b](https://github.com/cozy/cozy-libs/commit/d49cb1bc70ff71392e142a1aee758c0c186c91b6))
+* **mespapiers:** Group files by connector in papers list ([7cb6a9a](https://github.com/cozy/cozy-libs/commit/7cb6a9a8ddee5d2395634f7dd0f482aea6703c9f))
+
+
+
+
+
 # [9.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.2.7...cozy-mespapiers-lib@9.3.0) (2022-11-17)
 
 
