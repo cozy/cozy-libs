@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.5...cozy-harvest-lib@9.30.0) (2022-11-23)
+
+
+### Features
+
+* Add independent confirm dialog ([8b85b76](https://github.com/cozy/cozy-libs/commit/8b85b761c3d79f4eb1dfb0ec97fc25a788d41fe4))
+* Use independant OAuth window ([65c58be](https://github.com/cozy/cozy-libs/commit/65c58be4cff64e21ee87d0dc48effc20cd1b8bd1))
+
+
+### Reverts
+
+* Revert "fix: Dispatch account deletion after BI connection deletion" ([7cedcb2](https://github.com/cozy/cozy-libs/commit/7cedcb2e96ccd5781f6fa782ec743b59a0ca3947))
+
+
+
+
+
 ## [9.29.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.4...cozy-harvest-lib@9.29.5) (2022-11-16)
 
 
