@@ -47,17 +47,15 @@ function CozyRealtimeMock() {
 MicroEE.mixin(CozyRealtimeMock)
 
 const mockCozyRealtime = new CozyRealtimeMock()
-jest.mock('cozy-realtime', () => {
-  return function CozyRealtime() {
-    return mockCozyRealtime
-  }
-})
 
 const client = {
   stackClient: {
     uri: 'https://claud.mycozy.cloud'
   },
-  appMetadata: { slug: 'home' }
+  appMetadata: { slug: 'home' },
+  plugins: {
+    realtime: mockCozyRealtime
+  }
 }
 
 jest.mock('cozy-device-helper', () => ({

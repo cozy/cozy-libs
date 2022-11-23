@@ -1,6 +1,5 @@
 // @ts-check
 import { isFlagshipApp } from 'cozy-device-helper'
-import CozyRealtime from 'cozy-realtime'
 import {
   prepareOAuth,
   checkOAuthData,
@@ -245,7 +244,7 @@ function openIntentsApiInAppBrowser({
  */
 function registerRealtime({ client, konnector }) {
   return resolve => {
-    const realtime = new CozyRealtime({ client })
+    const realtime = client.plugins.realtime
     realtime.subscribe(
       'notified',
       'io.cozy.accounts',
