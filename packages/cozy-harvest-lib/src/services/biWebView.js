@@ -236,26 +236,18 @@ const getReconnectOrManageExtraOAuthUrlParams = ({
  * @param {CozyClient} options.client - CozyClient instance
  * @param {KonnectorManifest} options.konnector konnector manifest content
  * @param {IoCozyAccount} options.account The account content
+ * @param {createTemporaryTokenResponse} options.tokenResponse
  * @param {Boolean} options.reconnect If this is a reconnection
  * @param {Boolean} options.manage If this is a manage
  * @return {Promise<Object>}
  */
 export const fetchExtraOAuthUrlParams = async ({
-  client,
-  konnector,
   account,
+  tokenResponse,
   reconnect = false,
   manage = false
 }) => {
-  const {
-    code: token,
-    biBankIds,
-    ...config
-  } = await createTemporaryToken({
-    client,
-    konnector,
-    account
-  })
+  const { code: token, biBankIds, ...config } = tokenResponse
 
   const connId = getWebviewBIConnectionId(account)
 
@@ -478,6 +470,7 @@ export const konnectorPolicy = {
   saveInVault: false,
   onAccountCreation: onBIAccountCreation,
   fetchExtraOAuthUrlParams: fetchExtraOAuthUrlParams,
+  createTemporaryToken: createTemporaryToken,
   handleOAuthAccount,
   refreshContracts
 }

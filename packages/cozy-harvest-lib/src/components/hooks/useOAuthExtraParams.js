@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { findKonnectorPolicy } from '../../konnector-policies'
 
 import useDeepCompareEffect from 'use-deep-compare-effect'
+import useBITemporaryToken from './useBITemporaryToken'
 import logger from '../../logger'
 
 const useOAuthExtraParams = ({
@@ -13,11 +14,12 @@ const useOAuthExtraParams = ({
   manage = false
 }) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)
-  const needsExtraParams = konnectorPolicy.fetchExtraOAuthUrlParams
+  const needsExtraParams = Boolean(konnectorPolicy.fetchExtraOAuthUrlParams)
 
   const [fetchStatus, setFetchStatus] = useState('loading')
   const [extraParams, setExtraParams] = useState(null)
 
+  const { tokenResponse } = useBITemporaryToken({ account, client, konnector })
   // use useDeepCompareEffect to avoid an infinite rerender since the konnector object is a new one
   // on each render when used in the home application
   useDeepCompareEffect(() => {
@@ -36,7 +38,7 @@ const useOAuthExtraParams = ({
         setFetchStatus('errored')
       }
     }
-    if (needsExtraParams) {
+    if (needsExtraParams && tokenResponse) {
       load()
     }
   }, [
@@ -45,6 +47,7 @@ const useOAuthExtraParams = ({
     konnector,
     konnectorPolicy,
     needsExtraParams,
+    tokenResponse,
     reconnect,
     manage
   ])
