@@ -4,7 +4,13 @@ import { findKonnectorPolicy } from '../../konnector-policies'
 
 import useDeepCompareEffect from 'use-deep-compare-effect'
 
-const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
+const useOAuthExtraParams = ({
+  account,
+  client,
+  konnector,
+  reconnect = false,
+  manage = false
+}) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const needsExtraParams = konnectorPolicy.fetchExtraOAuthUrlParams
 
@@ -18,9 +24,9 @@ const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
       try {
         const extraParams = await konnectorPolicy.fetchExtraOAuthUrlParams({
           account,
-          konnector,
-          client,
-          reconnect
+          tokenResponse,
+          reconnect,
+          manage
         })
         setExtraParams(extraParams)
         setFetchStatus('loaded')
@@ -31,7 +37,15 @@ const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
     if (needsExtraParams) {
       load()
     }
-  }, [account, client, konnector, konnectorPolicy, needsExtraParams, reconnect])
+  }, [
+    account,
+    client,
+    konnector,
+    konnectorPolicy,
+    needsExtraParams,
+    reconnect,
+    manage
+  ])
 
   return {
     fetchStatus,

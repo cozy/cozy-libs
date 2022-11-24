@@ -1,5 +1,5 @@
 // @ts-check
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 import { useClient } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/MuiCozyTheme/Buttons'
@@ -15,6 +15,7 @@ import { openOAuthWindow } from '../../OAuthService'
 import { useWebviewIntent } from 'cozy-intent'
 import { useCozyConfirmDialog } from '../../CozyConfirmDialogProvider'
 import logger from '../../../logger'
+import useOAuthExtraParams from '../../hooks/useOAuthExtraParams'
 
 const BIContractActivationWindow = ({
   konnector,
@@ -24,12 +25,18 @@ const BIContractActivationWindow = ({
   innerAccountModalOverrides,
   onAccountDeleted
 }) => {
-  const [extraParams, setExtraParams] = useState(null)
   const konnectorPolicy = findKonnectorPolicy(konnector)
   const client = useClient()
 
   const webviewIntent = useWebviewIntent()
   const cozyConfirmDialog = useCozyConfirmDialog()
+
+  const { extraParams } = useOAuthExtraParams({
+    client,
+    account,
+    konnector,
+    manage: true
+  })
 
   /**
    * Detects if a BI connection has been removed
@@ -65,23 +72,6 @@ const BIContractActivationWindow = ({
    * @property {String|null} err - OAuth error message
    * @property {String} oAuthStateKey - OAuth key
    */
-
-  useEffect(() => {
-    async function handleLinkFetch() {
-      const result = await konnectorPolicy.fetchExtraOAuthUrlParams({
-        client,
-        account,
-        konnector,
-        manage: true
-      })
-      setExtraParams(result)
-    }
-    if (konnectorPolicy.fetchExtraOAuthUrlParams) {
-      handleLinkFetch()
-    }
-  }, [konnector, account, client, konnectorPolicy])
-
-  if (!konnectorPolicy.fetchExtraOAuthUrlParams) return null
 
   const ButtonWrapper = innerAccountModalOverrides?.SyncButtonWrapperComp
     ? innerAccountModalOverrides.SyncButtonWrapperComp
