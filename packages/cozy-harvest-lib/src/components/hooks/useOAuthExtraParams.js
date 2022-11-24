@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { findKonnectorPolicy } from '../../konnector-policies'
 
 import useDeepCompareEffect from 'use-deep-compare-effect'
+import logger from '../../logger'
 
 const useOAuthExtraParams = ({
   account,
@@ -30,7 +31,8 @@ const useOAuthExtraParams = ({
         })
         setExtraParams(extraParams)
         setFetchStatus('loaded')
-      } catch {
+      } catch (err) {
+        logger.error('useOAuthExtraParams error', err)
         setFetchStatus('errored')
       }
     }
