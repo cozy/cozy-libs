@@ -589,6 +589,20 @@
         },
         {
           "stepIndex": 5,
+          "model": "information",
+          "illustration": "IlluNoticePeriod.png",
+          "text": "PaperJSON.generic.noticePeriod.text",
+          "attributes": [
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "maxLength": 2,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1304,6 +1318,20 @@
         },
         {
           "stepIndex": 5,
+          "model": "information",
+          "illustration": "IlluNoticePeriod.png",
+          "text": "PaperJSON.generic.noticePeriod.text",
+          "attributes": [
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "maxLength": 2,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 6,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
