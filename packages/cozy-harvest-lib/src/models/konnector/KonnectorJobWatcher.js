@@ -1,5 +1,4 @@
 import MicroEE from 'microee'
-import CozyRealtime from 'cozy-realtime'
 import { Q } from 'cozy-client'
 
 import { KonnectorJobError } from '../../helpers/konnectors'
@@ -34,7 +33,7 @@ export class KonnectorJobWatcher {
    */
   constructor(client, job, options = {}) {
     this.client = client
-    this.realtime = new CozyRealtime({ client })
+    this.realtime = client.plugins.realtime
     this.job = job
     assert(this.job._id, 'No job id')
 
@@ -144,7 +143,12 @@ export class KonnectorJobWatcher {
   }
 
   unsubscribeAll() {
-    this.realtime.unsubscribeAll()
+    this.realtime.unsubscribe(
+      'updated',
+      JOBS_DOCTYPE,
+      this.job._id,
+      this.handleJobUpdated
+    )
   }
 }
 
