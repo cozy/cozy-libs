@@ -2,7 +2,9 @@ import React, { useState, useEffect, useMemo } from 'react'
 import PropTypes from 'prop-types'
 import InputMask from 'react-input-mask'
 
+import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
 import TextField from 'cozy-ui/transpiled/react/MuiCozyTheme/TextField'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import {
@@ -23,6 +25,22 @@ const getInputMode = (inputType, mask) => {
   return inputType === 'number' ? 'numeric' : 'text'
 }
 
+const makeInputAdornment = (adornment, currentValue, t) => {
+  const result = {}
+  Object.entries(adornment).map(([adornmentPosition, adornmentValue]) => {
+    if (!['start', 'end'].includes(adornmentPosition)) return
+
+    result[`${adornmentPosition}Adornment`] = (
+      <InputAdornment position={adornmentPosition}>
+        <Typography>
+          {t(adornmentValue, { smart_count: currentValue })}
+        </Typography>
+      </InputAdornment>
+    )
+  })
+  return result
+}
+
 const InputTextAdapter = ({
   attrs,
   defaultValue,
@@ -31,7 +49,7 @@ const InputTextAdapter = ({
   setIsFocus,
   idx
 }) => {
-  const { name, inputLabel, mask, maskPlaceholder = 'ˍ' } = attrs
+  const { name, inputLabel, mask, withAdornment, maskPlaceholder = 'ˍ' } = attrs
   const { t } = useI18n()
   const [currentValue, setCurrentValue] = useState(defaultValue || '')
   const [isTooShort, setIsTooShort] = useState(false)
@@ -170,6 +188,11 @@ const InputTextAdapter = ({
       error={isError}
       helperText={helperText}
       value={currentValue}
+      {...(withAdornment && {
+        InputProps: {
+          ...makeInputAdornment(withAdornment, currentValue, t)
+        }
+      })}
       inputProps={{
         maxLength: expectedLength.max,
         minLength: expectedLength.min,
