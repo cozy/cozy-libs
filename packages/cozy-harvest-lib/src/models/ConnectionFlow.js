@@ -1,5 +1,4 @@
 import MicroEE from 'microee'
-import get from 'lodash/get'
 
 import flag from 'cozy-flags'
 import { Q } from 'cozy-client'
@@ -539,7 +538,7 @@ export class ConnectionFlow {
     client,
     { trigger, account, konnector }
   ) {
-    const folderId = get(trigger, 'message.folder_to_save')
+    const folderId = trigger?.message?.folder_to_save
     if (!folderId) {
       return account
     }
@@ -567,7 +566,7 @@ export class ConnectionFlow {
    */
   async launch({ autoSuccessTimer = true } = {}) {
     const computedAutoSuccessTimer =
-      autoSuccessTimer && !get(this, 'konnector.clientSide')
+      autoSuccessTimer && !this.konnector?.clientSide
 
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
@@ -585,7 +584,7 @@ export class ConnectionFlow {
 
     this.job = await launchTrigger(this.client, this.trigger)
 
-    if (get(this, 'konnector.clientSide')) {
+    if (this.konnector?.clientSide) {
       logger.info(
         'This connector can be run by the launcher',
         this.konnector.slug
@@ -617,9 +616,9 @@ export class ConnectionFlow {
    * If the trigger we display is already running, subscribe to the associated job
    */
   watchCurrentJobIfTriggerIsAlreadyRunning() {
-    if (get(this, 'trigger.current_state.status') === 'running') {
+    if (this.trigger?.current_state?.status === 'running') {
       this.job = {
-        _id: get(this, 'trigger.current_state.last_executed_job_id')
+        _id: this.trigger?.current_state?.last_executed_job_id
       }
       this.watchJob()
     }
@@ -668,7 +667,7 @@ export class ConnectionFlow {
     const { status, accountError } = this.state
     const triggerError = triggersModel.getKonnectorJobError(trigger)
     const running =
-      get(trigger, 'current_state.status') === 'running' ||
+      trigger?.current_state?.status === 'running' ||
       ![ERRORED, IDLE, SUCCESS].includes(status)
     const expectingTriggerLaunch = status === EXPECTING_TRIGGER_LAUNCH
     const error =
