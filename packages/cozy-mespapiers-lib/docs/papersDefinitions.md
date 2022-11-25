@@ -63,6 +63,9 @@ Let's see how it is built:
   - `name`: {string} Used for `filenameModel` attributes
   - `inputLabel`: {string} Translation key for the label
   - `[type]`: {`text`|`number`} Type of field (if no mask)
+  - `[withAdornment]`: {`start`|`end`} Add a text as a prefix or suffix
+    - `[start]`: {string} Add a text as a prefix
+    - `[end]`: {string} Add a text as a suffix
   - `[required]`: {boolean} Make the field mandatory
   - `[minLength]`: {number} Requires a minimum number of characters
   - `[maxLength]`: {number} Requires a maximum number of characters

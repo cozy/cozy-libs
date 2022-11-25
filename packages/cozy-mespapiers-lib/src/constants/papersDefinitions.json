@@ -596,6 +596,9 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
               "maxLength": 2,
               "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
             }
@@ -1325,6 +1328,9 @@
             {
               "name": "noticePeriod",
               "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
               "maxLength": 2,
               "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
             }
