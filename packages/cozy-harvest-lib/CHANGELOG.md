@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.30.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.30.0...cozy-harvest-lib@9.30.1) (2022-11-25)
+
+
+### Bug Fixes
+
+* Better locale for delete BI connection confirmation button ([8a30056](https://github.com/cozy/cozy-libs/commit/8a300567b5b707dd9f56cfd225488034bd1496b9))
+
+
+
+
+
 # [9.30.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.29.5...cozy-harvest-lib@9.30.0) (2022-11-23)
 
 
