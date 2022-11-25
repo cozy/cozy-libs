@@ -4,6 +4,7 @@ import { Q } from 'cozy-client'
 import { KonnectorJobError } from '../../helpers/konnectors'
 import assert from '../../assert'
 import logger from '../../logger'
+import { ERROR_EVENT, LOGIN_SUCCESS_EVENT, SUCCESS_EVENT } from '../flowEvents'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'
 
@@ -62,7 +63,7 @@ export class KonnectorJobWatcher {
     logger.info(`KonnectorJobWatcher: Job has encountered an error`)
     this.disableSuccessTimer()
     this._error = error
-    this.emit('error', new KonnectorJobError(error))
+    this.emit(ERROR_EVENT, new KonnectorJobError(error))
   }
 
   handleLoginSuccess() {
@@ -75,7 +76,7 @@ export class KonnectorJobWatcher {
     this.disableSuccessTimer()
     if (this._error || this._succeed) return
     this._succeed = true
-    this.emit('success', this.job)
+    this.emit(SUCCESS_EVENT, this.job)
   }
 
   handleSuccessDelay() {
@@ -85,7 +86,7 @@ export class KonnectorJobWatcher {
     this.disableSuccessTimer()
     if (this._error || this._succeed) return
 
-    this.emit('loginSuccess', this.job)
+    this.emit(LOGIN_SUCCESS_EVENT, this.job)
   }
 
   disableSuccessTimer() {
