@@ -9,6 +9,7 @@ import { getBIConnectionAccountsList, getBIConnection } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import { Q } from 'cozy-client'
+import PromiseCache from 'cozy-client/dist/promise-cache'
 // @ts-ignore (its a peerDep and I don't know how to configure ts for that)
 import flag from 'cozy-flags'
 
@@ -22,6 +23,8 @@ import { KonnectorJobError } from '../helpers/konnectors'
 import { waitForRealtimeEvent } from './jobUtils'
 import '../types'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
+
+const promiseCache = new PromiseCache()
 
 /**
  * @typedef {import("../models/ConnectionFlow").default} ConnectionFlow
@@ -432,42 +435,47 @@ async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
  * @returns {Promise<createTemporaryTokenResponse>}
  */
 export const createTemporaryToken = async ({ client, konnector, account }) => {
-  assert(
-    konnector.slug,
-    'createTemporaryToken: konnector passed in options has no slug'
+  return await promiseCache.exec(
+    async () => {
+      assert(
+        konnector.slug,
+        'createTemporaryToken: konnector passed in options has no slug'
+      )
+
+      let tokenCache = await getBiTemporaryTokenFromCache({ client })
+      const cozyBankIds = getCozyBankIds({ konnector, account })
+
+      const { data: biUser } = await client.query(
+        Q('io.cozy.accounts').getById('bi-aggregator-user')
+      )
+
+      if (isCacheExpired(tokenCache, biUser)) {
+        logger.debug('temporaryToken cache is expired. Updating')
+        tokenCache = await updateCache({
+          client,
+          konnector,
+          tokenCache,
+          cozyBankIds
+        })
+      }
+
+      assert(
+        cozyBankIds.length,
+        'createTemporaryToken: Could not determine cozyBankIds from account or konnector'
+      )
+
+      assert(
+        tokenCache?.biMapping,
+        'createTemporaryToken: could not find a BI mapping in createTemporaryToken response, you should update your konnector to the last version'
+      )
+      const { biMapping } = tokenCache
+
+      tokenCache.biBankIds = [...new Set(cozyBankIds.map(id => biMapping[id]))]
+
+      return tokenCache
+    },
+    () => 'createTemporaryToken'
   )
-
-  let tokenCache = await getBiTemporaryTokenFromCache({ client })
-  const cozyBankIds = getCozyBankIds({ konnector, account })
-
-  const { data: biUser } = await client.query(
-    Q('io.cozy.accounts').getById('bi-aggregator-user')
-  )
-
-  if (isCacheExpired(tokenCache, biUser)) {
-    logger.debug('temporaryToken cache is expired. Updating')
-    tokenCache = await updateCache({
-      client,
-      konnector,
-      tokenCache,
-      cozyBankIds
-    })
-  }
-
-  assert(
-    cozyBankIds.length,
-    'createTemporaryToken: Could not determine cozyBankIds from account or konnector'
-  )
-
-  assert(
-    tokenCache?.biMapping,
-    'createTemporaryToken: could not find a BI mapping in createTemporaryToken response, you should update your konnector to the last version'
-  )
-  const { biMapping } = tokenCache
-
-  tokenCache.biBankIds = [...new Set(cozyBankIds.map(id => biMapping[id]))]
-
-  return tokenCache
 }
 
 export const konnectorPolicy = {
