@@ -176,6 +176,11 @@
       "fileLabel": {
         "text": "Choisissez un nom pour ce document",
         "inputLabel": "Nom du document (40 caractères max.)"
+      },
+      "noticePeriod": {
+        "inputLabel": "Délai avant l’alerte d’expiration (defaut: 90J)",
+        "text": "À quel moment souhaitez-vous recevoir une alerte d'expiration du document ?",
+        "endAdornment": "jour |||| jours"
       }
     },
     "bankDetails": {
