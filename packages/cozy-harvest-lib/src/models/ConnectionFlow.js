@@ -1,8 +1,11 @@
 // @ts-check
+// @ts-ignore
 import MicroEE from 'microee'
 
+// @ts-ignore
 import flag from 'cozy-flags'
 import { Q } from 'cozy-client'
+import '../types'
 
 import {
   fetchReusableAccount,
@@ -61,14 +64,14 @@ const isStepEvent = eventName => stepEvents.includes(eventName)
  * Creates or updates an io.cozy.accounts from user submitted data
  * Used as a form submit handler
  *
- * @param  {io.cozy.account} options.account - Existing io.cozy.account or object
- * @param  {Cipher} options.cipher - Vault cipher if vault has been unlocked
- * @param  {CozyClient} options.client - A cozy client
- * @param  {io.cozy.konnector} options.konnector - Konnector to which the account is linked
- * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts
- * and if auth is saved into the vault
- * @param  {function} options.saveAccount
- * @param  {object} options.userCredentials
+ * @param  {Object} options
+ * @param  {IoCozyAccount} options.account - Existing io.cozy.account or object
+ * @param  {Object} options.cipher - Vault cipher if vault has been unlocked
+ * @param  {ConnectionFlow} options.flow - Current connection flow
+ * @param  {CozyClient} options.client - A CozyClient instance
+ * @param  {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - Konnector to which the account is linked
+ * @param  {KonnectorPolicy} options.konnectorPolicy - Controls if auth is saved in io.cozy.accounts and if auth is saved into the vault
+ * @param  {Object} options.userCredentials
  */
 export const createOrUpdateAccount = async ({
   account,
@@ -205,9 +208,11 @@ export class ConnectionFlow {
     }
     if (accounts.isTwoFANeeded(state)) {
       this.setState({ status: TWO_FA_REQUEST })
+      // @ts-ignore
       this.emit(TWO_FA_REQUEST_EVENT)
     } else if (accounts.isTwoFARetry(state)) {
       this.setState({ status: TWO_FA_MISMATCH })
+      // @ts-ignore
       this.emit(TWO_FA_MISMATCH_EVENT)
     }
   }
@@ -225,6 +230,7 @@ export class ConnectionFlow {
       this.setState({ accountError: args[0] })
       this.refetchTrigger()
     }
+    // @ts-ignore
     this.emit(eventName, ...args)
   }
 
@@ -255,6 +261,7 @@ export class ConnectionFlow {
    * - Subscribes a "manual" waiter for when the 2FA is done completely in-browser (budget-insight
    *   for example)
    *
+   * @returns {Promise<void>}
    */
   waitForTwoFA() {
     logger.info('ConnectionFlow: Waiting for two FA')
@@ -262,31 +269,29 @@ export class ConnectionFlow {
       this.jobWatcher.disableSuccessTimer()
     }
 
-    // eslint-disable-next-line promise/param-names
-    return new Promise(rawResolve => {
+    return new Promise(resolve => {
       const accountId = this.account._id
       assert(accountId, 'Cannot wait for two fa on account without id')
-
-      const resolve = () => {
+      const resolveWithUnsubscribe = () => {
         this.realtime.unsubscribe(
           'updated',
           ACCOUNTS_DOCTYPE,
           accountId,
           handleAccountUpdate
         )
-        rawResolve()
+        resolve()
       }
 
       const handleAccountUpdate = account => {
         if (account && account.twoFACode) {
-          resolve()
+          resolveWithUnsubscribe()
         }
       }
 
       const updateFromCustomPolicy = () => {
-        resolve()
+        resolveWithUnsubscribe()
       }
-
+      // @ts-ignore l'argument de type () => void n'est pas attribuable au paramètre de type 'never'
       this.twoFAWaiters.push(updateFromCustomPolicy)
 
       this.realtime.subscribe(
@@ -351,6 +356,7 @@ export class ConnectionFlow {
       `ConnectionFlow: Flushing ${this.twoFAWaiters.length} two fa waiters`
     )
     for (const callback of this.twoFAWaiters) {
+      // @ts-ignore l'argument de type never n'a aucune signature d'appel
       callback()
     }
     this.twoFAWaiters = []
@@ -498,6 +504,11 @@ export class ConnectionFlow {
     this.refetchTrigger()
   }
 
+  /**
+   * Will update the current trigger if a new job related to the current trigger is updated
+   *
+   * @param {IoCozyJob} job
+   */
   handleTriggerJobUpdated(job) {
     if (job.trigger_id !== this.trigger?._id) return // filter out jobs associated to other triggers
     if (job._id === this.job?._id) return // if the event is associated to a job we are already watchin, ignore it. No need to refetch the current trigger in this case
@@ -505,6 +516,9 @@ export class ConnectionFlow {
     this.refetchTrigger()
   }
 
+  /**
+   * Fetch the current trigger from the database and watch it
+   */
   async refetchTrigger() {
     if (!this.trigger) {
       return null
@@ -516,6 +530,7 @@ export class ConnectionFlow {
 
     this.watchCurrentJobIfTriggerIsAlreadyRunning()
 
+    // @ts-ignore
     this.emit(UPDATE_EVENT)
   }
 
@@ -537,6 +552,7 @@ export class ConnectionFlow {
 
     logger.info(`Trigger is ${ensuredTrigger._id}`)
     this.trigger = ensuredTrigger
+    // @ts-ignore
     this.emit(UPDATE_EVENT)
     await this.launch()
   }
@@ -549,15 +565,17 @@ export class ConnectionFlow {
    * destination folder if removed by any mean : drive application,
    * desktop application etc
    *
-   * @param  {CozyClient} client - A cozy client
-   * @param  {io.cozy.triggers} options.trigger
-   * @param  {io.cozy.accounts} options.account
-   * @param  {io.cozy.konnectors} options.konnector
+   * @param  {CozyClient} client - A cozy client instance
+   * @param  {Object} options
+   * @param  {import('cozy-client/types/types').TriggersDoctype} options.trigger
+   * @param  {IoCozyAccount} options.account
+   * @param  {import('cozy-client/types/types').KonnectorsDoctype} options.konnector
    */
   async ensureDefaultFolderPathInAccount(
     client,
     { trigger, account, konnector }
   ) {
+    // @ts-ignore the message property does not exist in TriggersDoctype
     const folderId = trigger?.message?.folder_to_save
     if (!folderId) {
       return account
@@ -614,6 +632,7 @@ export class ConnectionFlow {
         logger.info('Found a launcher', launcher)
       }
       if (launcher === 'react-native') {
+        // @ts-ignore ReactNativeWebview is injected by react-native launcher
         window.ReactNativeWebView.postMessage(
           JSON.stringify({
             message: 'startLauncher',
@@ -644,8 +663,10 @@ export class ConnectionFlow {
     }
   }
 
+  /**
+   * Watch all jobs related to the current trigger
+   */
   watchTriggerJobs() {
-    // can happen when the current trigger comes from realtime
     if (this.trigger) {
       // When the trigger comes from realtime, cozy-stack does not add the current_state to the object. So we need to request the stack to get it
       if (!this.trigger?.current_state) {
@@ -659,6 +680,12 @@ export class ConnectionFlow {
     }
   }
 
+  /**
+   * Watches updates of the job given in this.job using watchKonnectorJob
+   *
+   * @param {Object} options
+   * @param {Boolean} options.autoSuccessTimer - if true, suppose the login is sucessfull after 8 seconds
+   */
   watchJob(options = { autoSuccessTimer: false }) {
     if (this.job?._id === this.jobWatcher?.job?._id) {
       // no need to rewatch a job we are already watching
@@ -696,6 +723,7 @@ export class ConnectionFlow {
   reset() {
     this.trigger = null
     this.job = null
+    // @ts-ignore
     this.emit(UPDATE_EVENT)
   }
 
@@ -739,6 +767,7 @@ export class ConnectionFlow {
 
   setState(update) {
     this.state = { ...this.state, ...update }
+    // @ts-ignore
     this.emit(UPDATE_EVENT)
   }
 
