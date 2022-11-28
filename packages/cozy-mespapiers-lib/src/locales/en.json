@@ -176,6 +176,11 @@
       "fileLabel": {
         "text": "Choose a name for this document",
         "inputLabel": "Document name (40 letters max.)"
+      },
+      "noticePeriod": {
+        "inputLabel": "Time to expiration alert (default: 90D)",
+        "text": "When do you want to receive a document expiration alert?",
+        "endAdornment": "day |||| days"
       }
     },
     "bankDetails": {
