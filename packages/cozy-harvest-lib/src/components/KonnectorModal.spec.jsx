@@ -37,7 +37,14 @@ describe('KonnectorModal', () => {
       attributes: {},
       triggers: {
         data: [
-          { _id: 784, doctype: 'io.cozy.triggers', arguments: '* * * * *' }
+          {
+            _id: 784,
+            doctype: 'io.cozy.triggers',
+            arguments: '* * * * *',
+            current_state: {
+              last_executed_job_id: 'jobid784'
+            }
+          }
         ]
       }
     }
@@ -62,6 +69,12 @@ describe('KonnectorModal', () => {
       ...extraProps
     }
     const client = new CozyClient()
+    client.plugins = {
+      realtime: {
+        subscribe: jest.fn(),
+        unsubscribe: jest.fn()
+      }
+    }
     const root = render(
       <AppLike client={client}>
         <KonnectorModal {...finalProps} />
@@ -91,8 +104,22 @@ describe('KonnectorModal', () => {
 
   it('should render the selected account via a prop', async () => {
     mockKonnector.triggers.data = [
-      { _id: '784', doctype: 'io.cozy.triggers', arguments: '* * * * *' },
-      { _id: '872', doctype: 'io.cozy.triggers', arguments: '* * 1 1 1' }
+      {
+        _id: '784',
+        doctype: 'io.cozy.triggers',
+        arguments: '* * * * *',
+        current_state: {
+          last_executed_job_id: 'job_trigger_784'
+        }
+      },
+      {
+        _id: '872',
+        doctype: 'io.cozy.triggers',
+        arguments: '* * 1 1 1',
+        current_state: {
+          last_executed_job_id: 'job_trigger_872'
+        }
+      }
     ]
     const { root } = await setup({
       accountId: '123'
@@ -102,8 +129,20 @@ describe('KonnectorModal', () => {
 
   it('should show the list of accounts', async () => {
     mockKonnector.triggers.data = [
-      { _id: '784', doctype: 'io.cozy.triggers' },
-      { _id: '872', doctype: 'io.cozy.triggers' }
+      {
+        _id: '784',
+        doctype: 'io.cozy.triggers',
+        current_state: {
+          last_executed_job_id: 'job_trigger_784'
+        }
+      },
+      {
+        _id: '872',
+        doctype: 'io.cozy.triggers',
+        current_state: {
+          last_executed_job_id: 'job_trigger_872'
+        }
+      }
     ]
     const { root } = setup()
 
@@ -112,8 +151,20 @@ describe('KonnectorModal', () => {
 
   it('should request account creation', async () => {
     mockKonnector.triggers.data = [
-      { _id: '784', doctype: 'io.cozy.triggers' },
-      { _id: '872', doctype: 'io.cozy.triggers' }
+      {
+        _id: '784',
+        doctype: 'io.cozy.triggers',
+        current_state: {
+          last_executed_job_id: 'job_trigger_784'
+        }
+      },
+      {
+        _id: '872',
+        doctype: 'io.cozy.triggers',
+        current_state: {
+          last_executed_job_id: 'job_trigger_872'
+        }
+      }
     ]
     const createAction = jest.fn()
     const { root } = setup({

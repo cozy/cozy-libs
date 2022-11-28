@@ -77,6 +77,10 @@ const mockVaultClient = {
 const tMock = jest.fn()
 
 const client = new CozyClient({})
+client.plugins.realtime = {
+  subscribe: jest.fn(),
+  unsubscribe: jest.fn()
+}
 const props = {
   konnector: fixtures.konnector,
   flow: new ConnectionFlow(client, undefined, fixtures.konnector),

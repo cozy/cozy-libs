@@ -103,6 +103,9 @@ const fixtures = {
         account: 'existing-account-id',
         konnector: 'konnectest'
       }
+    },
+    current_state: {
+      last_executed_job_id: 'testjobid'
     }
   },
   bankingKonnectorAccountAttributes: {
@@ -114,7 +117,12 @@ const fixtures = {
   },
   createdTrigger: {
     id: 'created-trigger-id',
+    _id: 'created-trigger-id',
     _type: 'io.cozy.triggers',
+    current_state: {
+      status: 'done',
+      last_executed_job_id: 'old-job-id'
+    },
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
@@ -144,10 +152,11 @@ const fixtures = {
   },
   runningTrigger: {
     id: 'running-trigger-id',
+    _id: 'running-trigger-id',
     _type: 'io.cozy.triggers',
     current_state: {
       status: 'running',
-      last_executed_job_id: 'runningjobid'
+      last_executed_job_id: 'running-job-id'
     },
     attributes: {
       arguments: '0 0 0 * * 0',
@@ -190,6 +199,8 @@ const fixtures = {
   runningJob: {
     type: 'io.cozy.jobs',
     id: 'running-job-id',
+    _id: 'running-job-id',
+    trigger_id: 'running-trigger-id',
     domain: 'cozy.tools:8080',
     worker: 'konnector',
     state: 'running',

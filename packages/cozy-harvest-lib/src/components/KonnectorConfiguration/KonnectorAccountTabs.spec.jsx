@@ -5,6 +5,7 @@ import KonnectorAccountTabs, {
   KonnectorAccountTabsTabs
 } from './KonnectorAccountTabs'
 import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
+import CozyClient from 'cozy-client/dist/CozyClient'
 
 jest.mock('components/hooks/useMaintenanceStatus')
 jest.mock(
@@ -84,8 +85,16 @@ describe('Konnector account tabs content', () => {
       ? { partnership: { domain: 'budget-insight.com' } }
       : {}
 
+    const client = new CozyClient()
+    client.plugins = {
+      realtime: {
+        subscribe: jest.fn(),
+        unsubscribe: jest.fn()
+      }
+    }
+
     const root = await render(
-      <AppLike>
+      <AppLike client={client}>
         <KonnectorAccountTabs
           konnector={konnector}
           initialTrigger={trigger}

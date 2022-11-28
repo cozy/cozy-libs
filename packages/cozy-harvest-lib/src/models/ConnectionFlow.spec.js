@@ -5,6 +5,7 @@ import { saveAccount } from '../connections/accounts'
 import {
   createTrigger,
   ensureTrigger,
+  fetchTrigger,
   prepareTriggerAccount,
   launchTrigger
 } from '../connections/triggers'
@@ -57,10 +58,11 @@ const realtimeMock = {
   events: new EventEmitter(),
   key: (action, doctype) => `${doctype}:${action}`,
   subscribtions: new Map(),
-  subscribe: jest.fn().mockImplementation((action, doctype, callback) => {
+  subscribe: jest.fn().mockImplementation((action, doctype, id, callback) => {
+    const finalcallback = callback === undefined ? id : callback
     const { events, key, subscribtions } = realtimeMock
     const subscribtionKey = key(action, doctype)
-    subscribtions.set(subscribtionKey, data => callback(data))
+    subscribtions.set(subscribtionKey, data => finalcallback(data))
     events.on(
       subscribtionKey,
       realtimeMock.subscribtions.get(key(action, doctype))
@@ -88,7 +90,8 @@ jest.mock('../connections/triggers', () => {
     createTrigger: jest.fn(),
     ensureTrigger: jest.fn(),
     prepareTriggerAccount: jest.fn(),
-    launchTrigger: jest.fn()
+    launchTrigger: jest.fn(),
+    fetchTrigger: jest.fn()
   }
 })
 
@@ -164,9 +167,39 @@ describe('ConnectionFlow', () => {
       setup({ trigger: fixtures.runningTrigger })
       expect(watchKonnectorJob).toHaveBeenCalledWith(
         expect.any(Object),
-        { _id: 'runningjobid' },
+        { _id: 'running-job-id' },
         { autoSuccessTimer: false }
       )
+    })
+
+    it('should watch all jobs related to the current trigger', async () => {
+      setup({ trigger: fixtures.createdTrigger })
+      expect(fetchTrigger).not.toHaveBeenCalled()
+      realtimeMock.events.emit(realtimeMock.key('updated', 'io.cozy.jobs'), {
+        ...fixtures.runningJob,
+        trigger_id: 'created-trigger-id'
+      })
+      await new Promise(process.nextTick) // await all promises to be resolved
+      expect(fetchTrigger).toHaveBeenLastCalledWith(
+        expect.anything(),
+        'created-trigger-id'
+      )
+    })
+
+    it('should watch watch future jobs for a trigger if new fetched trigger is running', async () => {
+      const { flow } = setup({ trigger: fixtures.createdTrigger })
+      expect(fetchTrigger).not.toHaveBeenCalled()
+      fetchTrigger.mockResolvedValueOnce(fixtures.runningTrigger)
+      expect(flow.job).toBeUndefined()
+      realtimeMock.events.emit(realtimeMock.key('updated', 'io.cozy.jobs'), {
+        ...fixtures.runningJob,
+        trigger_id: 'created-trigger-id'
+      })
+      await new Promise(process.nextTick) // await all promises to be resolved
+      expect(fetchTrigger).toHaveBeenCalledTimes(1)
+      expect(flow.job).toStrictEqual({
+        _id: 'running-job-id'
+      })
     })
   })
 
@@ -675,6 +708,3 @@ describe('ConnectionFlow', () => {
     })
   })
 })
-
-// it should have running false on trigger updates
-// it should set error on trigger updates

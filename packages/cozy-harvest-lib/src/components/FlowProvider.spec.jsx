@@ -15,11 +15,14 @@ const client = {
     uri: 'https://cozy.tools:8080'
   },
   plugins: {
-    realtime: jest.fn()
+    realtime: { subscribe: jest.fn(), unsubscribe: jest.fn() }
   }
 }
 const trigger = {
-  _id: 'trigger-id'
+  _id: 'trigger-id',
+  current_state: {
+    last_executed_job_id: 'testjobid'
+  }
 }
 
 const triggersMutationsMock = {
