@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.5.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.4.2...cozy-mespapiers-lib@9.5.0) (2022-11-28)
+
+
+### Features
+
+* **mespapiers:** Add alert illustration for notice period step ([5cda37b](https://github.com/cozy/cozy-libs/commit/5cda37bfcdecf7e4dff400a5b0ffaa52772476a3))
+* **mespapiers:** Add locales for notice period step ([2c24614](https://github.com/cozy/cozy-libs/commit/2c246143d88d9d997b55fa13e7df182cee4566bf))
+* **mespapiers:** Add makeInputAdornment function ([5be77b8](https://github.com/cozy/cozy-libs/commit/5be77b8e6c8f56233d0f74595a4ef77907809e5f))
+* **mespapiers:** Add notice period step ([f2e9f63](https://github.com/cozy/cozy-libs/commit/f2e9f63277133df62ce425a522721ab9786c8538))
+* **mespapiers:** Add withAdornment attribute to notice period step ([72cd180](https://github.com/cozy/cozy-libs/commit/72cd180119bf63dbdf08ebf2b66e5963cd66a73f))
+* Update cozy-ui to 77.8.0 ([d4ac6e7](https://github.com/cozy/cozy-libs/commit/d4ac6e728beaf677be5eef2160f73a1c9f2c345a))
+
+
+
+
+
 ## [9.4.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.4.1...cozy-mespapiers-lib@9.4.2) (2022-11-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
