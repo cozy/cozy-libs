@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.18.5 (2022-11-28)
+
+
+### Bug Fixes
+
+* **mespapiers:** Breaking change of cozy-ui 77 ([be3098e](https://github.com/cozy/cozy-libs/commit/be3098e4acb8d5781cb5444ee82e77c38d2db01d))
+
+
+
+
+
 ## 1.18.4 (2022-10-03)
 
 **Note:** Version bump only for package @cozy/codemods

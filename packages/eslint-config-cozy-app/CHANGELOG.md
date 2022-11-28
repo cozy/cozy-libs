@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.2.0 (2022-11-28)
+
+
+### Bug Fixes
+
+* **mespapiers:** Breaking change of cozy-ui 77 ([be3098e](https://github.com/cozy/cozy-libs/commit/be3098e4acb8d5781cb5444ee82e77c38d2db01d))
+
+
+### Features
+
+* Update eslint-config-cozy-app ([a0a55db](https://github.com/cozy/cozy-libs/commit/a0a55dbd95477bc99d9a927c65cffc08c824e80b))
+
+
+
+
+
 ## 5.1.1 (2022-10-03)
 
 **Note:** Version bump only for package eslint-config-cozy-app
