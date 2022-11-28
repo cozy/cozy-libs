@@ -7,7 +7,6 @@ import TriggerManagerWithoutLocales, {
 } from './components/TriggerManager'
 import FlowProviderWithLocales from './components/FlowProvider'
 import RoutesWithoutLocales from './components/Routes'
-import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
 import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
 import deprecated from './deprecated'
 
@@ -29,7 +28,6 @@ import { FlowProvider } from "cozy-harvest-lib"
 `
 )(FlowProvider)
 export const Routes = withLocales(RoutesWithoutLocales)
-export const withKonnectorModal = withLocales(withKonnectorModalWithoutLocales)
 export const KonnectorSuggestionModal = withLocales(
   KonnectorSuggestionModalWithoutLocales
 )
