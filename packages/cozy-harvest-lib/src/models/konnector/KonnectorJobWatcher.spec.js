@@ -14,6 +14,9 @@ describe('watchKonnectorJob', () => {
     const client = new CozyClient({
       uri: 'http://cozy.tools:8080'
     })
+    client.plugins = {
+      realtime: { subscribe: jest.fn(), unsubscribe: jest.fn() }
+    }
     client.on = jest.fn()
     const result = await watchKonnectorJob(client, job)
     expect(result instanceof KonnectorJobWatcher).toBe(true)

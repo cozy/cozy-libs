@@ -12,11 +12,19 @@ describe('TwoFAModal', () => {
     const client = {
       on: jest.fn(),
       plugins: {
-        realtime: jest.fn()
+        realtime: {
+          subscribe: jest.fn(),
+          unsubscribe: jest.fn()
+        }
       }
     }
 
-    const trigger = {}
+    const trigger = {
+      _id: 'triggerid',
+      current_state: {
+        last_executed_job_id: 'testjobid'
+      }
+    }
     const konnector = {
       slug: konnectorSlug
     }

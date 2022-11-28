@@ -89,11 +89,17 @@ const account = {
 
 const sleep = duration => new Promise(resolve => setTimeout(resolve, duration))
 
+const realtimeMock = {
+  subscribe: jest.fn(),
+  unsubscribe: jest.fn()
+}
+
 describe('finishConnection', () => {
   const setup = () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, { konnector, account })
     return { flow }
   }
@@ -276,6 +282,7 @@ describe('createOrUpdateBIConnection', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, { konnector, account })
     client.stackClient.jobs.create = jest.fn().mockReturnValue({
       data: {

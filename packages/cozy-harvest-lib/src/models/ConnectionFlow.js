@@ -1,3 +1,4 @@
+// @ts-check
 import MicroEE from 'microee'
 
 import flag from 'cozy-flags'
@@ -158,7 +159,8 @@ export class ConnectionFlow {
     this.getTwoFACodeProvider = this.getTwoFACodeProvider.bind(this)
     this.getKonnectorSlug = this.getKonnectorSlug.bind(this)
     this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
-    this.handleJobUpdated = this.handleJobUpdated.bind(this)
+    this.handleCurrentJobUpdated = this.handleCurrentJobUpdated.bind(this)
+    this.handleTriggerJobUpdated = this.handleTriggerJobUpdated.bind(this)
     this.handleAccountTwoFA = this.handleAccountTwoFA.bind(this)
     this.launch = this.launch.bind(this)
     this.sendTwoFACode = this.sendTwoFACode.bind(this)
@@ -177,6 +179,7 @@ export class ConnectionFlow {
     this.realtime = client.plugins.realtime
 
     this.watchCurrentJobIfTriggerIsAlreadyRunning()
+    this.watchTriggerJobs()
   }
 
   getTwoFACodeProvider() {
@@ -295,6 +298,13 @@ export class ConnectionFlow {
     })
   }
 
+  /**
+   * Set a state to the flow to show that the current trigger is running while the job is not
+   * created yet (the job will be created by a webhook)
+   *
+   * @param {Object} options
+   * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector
+   */
   expectTriggerLaunch({ konnector }) {
     this.konnector = konnector
     logger.info(
@@ -483,9 +493,16 @@ export class ConnectionFlow {
     }
   }
 
-  async handleJobUpdated() {
+  handleCurrentJobUpdated() {
     logger.debug('ConnectionFlow: Handling update from job')
-    await this.refetchTrigger()
+    this.refetchTrigger()
+  }
+
+  handleTriggerJobUpdated(job) {
+    if (job.trigger_id !== this.trigger?._id) return // filter out jobs associated to other triggers
+    if (job._id === this.job?._id) return // if the event is associated to a job we are already watchin, ignore it. No need to refetch the current trigger in this case
+
+    this.refetchTrigger()
   }
 
   async refetchTrigger() {
@@ -496,6 +513,9 @@ export class ConnectionFlow {
     const trigger = await fetchTrigger(this.client, this.trigger._id)
     logger.debug(`Refetched trigger`, trigger)
     this.trigger = trigger
+
+    this.watchCurrentJobIfTriggerIsAlreadyRunning()
+
     this.emit(UPDATE_EVENT)
   }
 
@@ -624,12 +644,35 @@ export class ConnectionFlow {
     }
   }
 
+  watchTriggerJobs() {
+    // can happen when the current trigger comes from realtime
+    if (this.trigger) {
+      // When the trigger comes from realtime, cozy-stack does not add the current_state to the object. So we need to request the stack to get it
+      if (!this.trigger?.current_state) {
+        this.refetchTrigger()
+      }
+      this.realtime.subscribe(
+        'updated',
+        JOBS_DOCTYPE,
+        this.handleTriggerJobUpdated
+      )
+    }
+  }
+
   watchJob(options = { autoSuccessTimer: false }) {
+    if (this.job?._id === this.jobWatcher?.job?._id) {
+      // no need to rewatch a job we are already watching
+      return
+    }
+    if (this.jobWatcher) {
+      // if no job has been watched yet, there is not jobWatcher yet.
+      this.jobWatcher.unsubscribeAll()
+    }
     this.realtime.subscribe(
       'updated',
       JOBS_DOCTYPE,
       this.job._id,
-      this.handleJobUpdated.bind(this)
+      this.handleCurrentJobUpdated.bind(this)
     )
     this.jobWatcher = watchKonnectorJob(this.client, this.job, options)
     logger.info(`ConnectionFlow: Subscribed to ${JOBS_DOCTYPE}:${this.job._id}`)
