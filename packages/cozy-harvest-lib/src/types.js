@@ -31,6 +31,11 @@
 /**
  * @typedef {import("../../node_modules/cozy-client/types/types").CozyClientDocument} CozyClientDocument
  */
+
+/**
+ * @typedef {import("cozy-client/dist/index").CozyClient} CozyClient
+ */
+
 /**
  * @typedef KonnectorManifest
  * @property {String} slug
@@ -49,9 +54,16 @@
  * @property {Function} refreshContracts
  * @property {Function} fetchExtraOAuthUrlParams
  * @property {Boolean} isBIWebView
+ * @property {Function} sendAdditionalInformation
+ * @property {Function} getAdditionalInformationNeeded
+ * @property {Boolean} needsTriggerCreation
  */
 
 /**
  * @typedef {CozyClientDocument} IoCozyAccount
  *
+ */
+
+/**
+ * @typedef{CozyClientDocument} IoCozyJob
  */
