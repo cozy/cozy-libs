@@ -61,7 +61,7 @@ const KonnectorBlock = ({ file }) => {
   if (!konnector) {
     return (
       <div data-testid="KonnectorBlock-spinner">
-        <Spinner className="u-flex u-flex-justify-center u-p-2" size="large" />
+        <Spinner className="u-flex u-flex-justify-center u-p-1" size="large" />
       </div>
     )
   }
@@ -70,16 +70,16 @@ const KonnectorBlock = ({ file }) => {
 
   if (fatalError) {
     return (
-      <Typography className="u-pv-1-half u-ph-2" variant="body1">
+      <Typography className="u-p-1" variant="body1">
         <Markdown source={fatalError} />
       </Typography>
     )
   }
 
   return (
-    <List>
+    <List className="u-pv-0">
       <ListItem
-        className="u-ph-2 u-h-3"
+        className="u-ph-1 u-h-3"
         button
         component="a"
         href={link}
@@ -113,7 +113,7 @@ const KonnectorBlock = ({ file }) => {
 
       <Divider component="li" />
 
-      <ListItem className="u-ph-2" button {...vendorLink}>
+      <ListItem className="u-ph-1" button {...vendorLink}>
         <ListItemIcon>
           <Icon icon={GlobeIcon} color="var(--primaryTextColor)" />
         </ListItemIcon>
