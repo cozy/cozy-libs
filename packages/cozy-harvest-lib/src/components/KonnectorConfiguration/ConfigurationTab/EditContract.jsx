@@ -16,7 +16,7 @@ import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from 'cozy-ui/transpiled/react/styles'
 import {
   DialogCloseButton,
   DialogBackButton,

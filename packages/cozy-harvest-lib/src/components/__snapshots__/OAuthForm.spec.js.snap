@@ -17,12 +17,12 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
           class="styles__Stack--xs___2R5lW"
         >
           <h6
-            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-gutterBottom"
+            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
           >
             Canceled
           </h6>
           <div
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
           >
             <span
               class="u-db u-mv-0"
@@ -83,12 +83,12 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
           class="styles__Stack--xs___2R5lW"
         >
           <h6
-            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-gutterBottom"
+            class="MuiTypography-root u-error MuiTypography-h6 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
           >
             Canceled
           </h6>
           <div
-            class="MuiTypography-root MuiTypography-body1"
+            class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextPrimary"
           >
             <span
               class="u-db u-mv-0"

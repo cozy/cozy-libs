@@ -5,7 +5,6 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
 import Box from '@material-ui/core/Box'
-import Skeleton from '@material-ui/lab/Skeleton'
 import IconButton from '@material-ui/core/IconButton'
 import SwipeableViews from 'react-swipeable-views'
 
@@ -21,6 +20,7 @@ import CozyClient, {
 } from 'cozy-client'
 import flag from 'cozy-flags'
 
+import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import ClockIcon from 'cozy-ui/transpiled/react/Icons/Clock'
@@ -221,7 +221,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
       </div>
       <Media>
         <Img className="u-pl-half">
-          <IconButton onClick={setPrev}>
+          <IconButton onClick={setPrev} size="medium">
             <Icon icon={LeftIcon} />
           </IconButton>
         </Img>
@@ -236,7 +236,7 @@ const GeoDataCard = ({ trips, loading, konnector }) => {
           </Typography>
         </Bd>
         <Img className="u-pr-half">
-          <IconButton onClick={setNext}>
+          <IconButton onClick={setNext} size="medium">
             <Icon icon={RightIcon} />
           </IconButton>
         </Img>

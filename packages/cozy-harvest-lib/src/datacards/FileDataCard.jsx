@@ -5,12 +5,12 @@ import keyBy from 'lodash/keyBy'
 
 import 'leaflet/dist/leaflet.css'
 
-import Skeleton from '@material-ui/lab/Skeleton'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemIcon from '@material-ui/core/ListItemIcon'
 import Slide from '@material-ui/core/Slide'
 
+import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import { RealTimeQueries } from 'cozy-client'

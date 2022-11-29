@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
 
-import { makeStyles } from '@material-ui/core/styles'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { Tab as UITab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'

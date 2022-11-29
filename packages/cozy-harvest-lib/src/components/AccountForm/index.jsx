@@ -10,18 +10,20 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+
 import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
-
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
-import { getEncryptedFieldName } from '../../helpers/fields'
+import fieldHelpers, {
+  getEncryptedFieldName,
+  SECRET
+} from '../../helpers/fields'
 import { KonnectorJobError, isRunnable } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
-import fieldHelpers, { SECRET } from '../../helpers/fields'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
