@@ -1,6 +1,7 @@
 import React from 'react'
 import CozyClient from 'cozy-client'
 import { render, fireEvent, act, waitFor } from '@testing-library/react'
+import { WebviewIntentProvider } from 'cozy-intent'
 
 import AppLike from '../../../../test/AppLike'
 
@@ -28,14 +29,23 @@ const onAccountDeleted = jest.fn()
 
 const setup = () => {
   const client = new CozyClient({})
+  const webviewService = {
+    call: jest
+      .fn()
+      .mockResolvedValueOnce('sessioncode')
+      .mockResolvedValueOnce({ type: 'dismiss' })
+  }
+
   return render(
     <AppLike client={client}>
       <CozyConfirmDialogProvider>
-        <BIContractActivationWindow
-          konnector={mockKonnector}
-          account={mockAccount}
-          onAccountDeleted={onAccountDeleted}
-        />
+        <WebviewIntentProvider webviewService={webviewService}>
+          <BIContractActivationWindow
+            konnector={mockKonnector}
+            account={mockAccount}
+            onAccountDeleted={onAccountDeleted}
+          />
+        </WebviewIntentProvider>
       </CozyConfirmDialogProvider>
     </AppLike>
   )
@@ -54,6 +64,7 @@ describe('BIContractActivationWindow', () => {
     openOAuthWindow.mockResolvedValue({})
     fetchExtraOAuthUrlParams.mockResolvedValue({})
     const { getByRole } = setup()
+
     await act(async () => {
       await waitFor(() => {
         return expect(getByRole('button').getAttribute('class')).not.toContain(
@@ -79,6 +90,7 @@ describe('BIContractActivationWindow', () => {
       })
     )
   })
+
   it('should show account delete dialog after BI connection removed and close harvest', async () => {
     openOAuthWindow.mockResolvedValue({
       data: { finalLocation: 'connection_deleted=true' }

@@ -172,11 +172,11 @@ exports[`AccountForm should render with specific message when client side konnec
       <Bd
         className="u-m-1"
       >
-        <ForwardRef(WithStyles)
+        <ForwardRef
           variant="body1"
         >
           The testkonnector application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app.
-        </ForwardRef(WithStyles)>
+        </ForwardRef>
       </Bd>
     </Media>
     <ButtonLink

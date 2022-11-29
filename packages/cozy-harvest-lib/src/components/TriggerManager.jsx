@@ -5,17 +5,16 @@ import compose from 'lodash/flowRight'
 
 import { withClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
-import { useVaultClient } from 'cozy-keys-lib'
-
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
-
 import {
+  useVaultClient,
   CipherType,
   withVaultUnlockContext,
   VaultUnlockPlaceholder
 } from 'cozy-keys-lib'
+
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
 
 import AccountForm from './AccountForm'
 import OAuthForm from './OAuthForm'
