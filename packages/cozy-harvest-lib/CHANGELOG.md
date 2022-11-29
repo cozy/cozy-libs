@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.31.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.30.1...cozy-harvest-lib@9.31.0) (2022-11-29)
+
+
+### Bug Fixes
+
+* Prevent createTemporaryToken to updateCache twice at the same time ([f02177d](https://github.com/cozy/cozy-libs/commit/f02177d102cd7d97e677cd20ecdbea7a1c2fb625))
+* Use flowEvent events ([d8a165b](https://github.com/cozy/cozy-libs/commit/d8a165b4c604727b24d991766fca9555e3b93bb3))
+
+
+### Features
+
+* Follow current trigger jobs even after the first load ([563f270](https://github.com/cozy/cozy-libs/commit/563f270299cee6dcdc866eea099b8efc2820a64c))
+
+
+
+
+
 ## [9.30.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.30.0...cozy-harvest-lib@9.30.1) (2022-11-25)
 
 
