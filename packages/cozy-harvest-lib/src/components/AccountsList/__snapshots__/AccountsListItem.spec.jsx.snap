@@ -8,12 +8,12 @@ exports[`AccountsListItem should not render the caption since accountLogin is un
   <div
     className="u-flex-grow-1 u-flex-shrink-1 u-ov-hidden u-mr-1"
   >
-    <ForwardRef(WithStyles)
+    <ForwardRef
       className="u-ellipsis"
       variant="body1"
     >
       account-1
-    </ForwardRef(WithStyles)>
+    </ForwardRef>
   </div>
   <withI18n(Status)
     konnector={
@@ -35,20 +35,20 @@ exports[`AccountsListItem should render the caption since accountName !== login 
   <div
     className="u-flex-grow-1 u-flex-shrink-1 u-ov-hidden u-mr-1"
   >
-    <ForwardRef(WithStyles)
+    <ForwardRef
       className="u-ellipsis"
       gutterBottom={true}
       variant="body1"
     >
       myAccountName
-    </ForwardRef(WithStyles)>
-    <ForwardRef(WithStyles)
+    </ForwardRef>
+    <ForwardRef
       className="u-ellipsis"
       color="textSecondary"
       variant="caption"
     >
       mylogin
-    </ForwardRef(WithStyles)>
+    </ForwardRef>
   </div>
   <withI18n(Status)
     konnector={
