@@ -1,8 +1,11 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+
+import flag from 'cozy-flags'
 import { withClient } from 'cozy-client'
 import Stack from 'cozy-ui/transpiled/react/Stack'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import * as konnectorsModel from '../../../helpers/konnectors'
 import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos'
@@ -15,6 +18,13 @@ import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
 import { useTrackPage } from '../../../components/hoc/tracking'
 import Datacards from '../../Datacards'
+
+const styles = {
+  divider: {
+    height: '12px',
+    backgroundColor: 'var(--defaultBackgroundColor)'
+  }
+}
 
 export const DataTab = ({ konnector, trigger, client, flow, account }) => {
   const { isMobile } = useBreakpoints()
@@ -39,6 +49,12 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
 
   return (
     <div>
+      {flag('harvest.inappconnectors.enabled') && (
+        <>
+          <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
+          {isMobile && <Divider style={styles.divider} />}
+        </>
+      )}
       <div className={isMobile ? 'u-p-1' : 'u-pt-1 u-pb-1-half'}>
         <Stack>
           {isInMaintenance && (
@@ -52,7 +68,9 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
               isBlocking={hasTermsVersionMismatchError}
             />
           )}
-          <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
+          {!flag('harvest.inappconnectors.enabled') && (
+            <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
+          )}
           {appLinks.map(({ slug, ...otherProps }) => (
             <AppLinkCard key={slug} slug={slug} {...otherProps} />
           ))}

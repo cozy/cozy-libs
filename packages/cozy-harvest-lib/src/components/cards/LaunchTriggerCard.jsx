@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
+import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Card from 'cozy-ui/transpiled/react/Card'
@@ -10,6 +11,7 @@ import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
+import LaunchTriggerAlert from './LaunchTriggerAlert'
 import * as triggers from '../../helpers/triggers'
 import { isRunnable } from '../../helpers/konnectors'
 import FlowProvider from '../FlowProvider'
@@ -106,6 +108,10 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   )
 }
 
+const DumbComponent = flag('harvest.inappconnectors.enabled')
+  ? LaunchTriggerAlert
+  : DumbLaunchTriggerCard
+
 /**
  * Shows the state of the trigger and provides the ability to
  * relaunch a trigger
@@ -114,7 +120,7 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
  */
 const LaunchTriggerCard = props => {
   if (props.flow) {
-    return <DumbLaunchTriggerCard {...props} />
+    return <DumbComponent {...props} />
   }
 
   const normalizedProps = { ...props }
@@ -125,10 +131,11 @@ const LaunchTriggerCard = props => {
     )
     normalizedProps.flowProps = { initialTrigger: props.initialTrigger }
   }
+
   return (
     <FlowProvider {...normalizedProps.flowProps}>
       {({ flow }) => {
-        return <DumbLaunchTriggerCard {...props} flow={flow} />
+        return <DumbComponent {...props} flow={flow} />
       }}
     </FlowProvider>
   )
