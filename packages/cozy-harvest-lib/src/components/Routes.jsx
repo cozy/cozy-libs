@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { Switch, Route, Redirect } from 'react-router'
-import { withStyles } from '@material-ui/core/styles'
+import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
