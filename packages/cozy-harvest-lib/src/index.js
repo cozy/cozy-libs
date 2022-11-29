@@ -10,6 +10,7 @@ import RoutesWithoutLocales from './components/Routes'
 import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
 import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
 import deprecated from './deprecated'
+import LaunchTriggerCardWithoutLocales from './components/cards/LaunchTriggerCard'
 
 // All entry point files need to be exported wrapped with the translation context of harvest
 export const DeleteAccountButton = withLocales(
@@ -21,6 +22,7 @@ export const IntentTriggerManager = withLocales(
   IntentTriggerManagerWithoutLocales
 )
 export const FlowProvider = withLocales(FlowProviderWithLocales)
+export const LaunchTriggerCard = withLocales(LaunchTriggerCardWithoutLocales)
 export const TriggerLauncher = deprecated(
   `TriggerLauncher is deprecated, please use FlowProvider now.
 The API has not changed, only the name and import call.
