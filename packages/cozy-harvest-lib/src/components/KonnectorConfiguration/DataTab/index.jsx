@@ -38,28 +38,34 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
   } = useMaintenanceStatus(client, konnector)
 
   return (
-    <div className={isMobile ? 'u-p-1' : 'u-pt-1 u-pb-1-half'}>
-      <Stack>
-        {isInMaintenance && (
-          <div className="u-bg-paleGrey u-p-1">
-            <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
-          </div>
-        )}
-        {konnectorsModel.hasNewVersionAvailable(konnector) && (
-          <KonnectorUpdateInfos
+    <div>
+      <div className={isMobile ? 'u-p-1' : 'u-pt-1 u-pb-1-half'}>
+        <Stack>
+          {isInMaintenance && (
+            <div className="u-bg-paleGrey u-p-1">
+              <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
+            </div>
+          )}
+          {konnectorsModel.hasNewVersionAvailable(konnector) && (
+            <KonnectorUpdateInfos
+              konnector={konnector}
+              isBlocking={hasTermsVersionMismatchError}
+            />
+          )}
+          <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
+          {appLinks.map(({ slug, ...otherProps }) => (
+            <AppLinkCard key={slug} slug={slug} {...otherProps} />
+          ))}
+          <Datacards
+            account={account}
+            trigger={trigger}
             konnector={konnector}
-            isBlocking={hasTermsVersionMismatchError}
           />
-        )}
-        <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
-        {appLinks.map(({ slug, ...otherProps }) => (
-          <AppLinkCard key={slug} slug={slug} {...otherProps} />
-        ))}
-        <Datacards account={account} trigger={trigger} konnector={konnector} />
-        {konnector.vendor_link && (
-          <WebsiteLinkCard link={konnector.vendor_link} />
-        )}
-      </Stack>
+          {konnector.vendor_link && (
+            <WebsiteLinkCard link={konnector.vendor_link} />
+          )}
+        </Stack>
+      </div>
     </div>
   )
 }
