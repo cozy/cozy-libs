@@ -1814,6 +1814,41 @@
       "connectorCriteria": {
         "name": "impots"
       }
+    },
+    {
+      "label": "other_invoice",
+      "icon": "bill",
+      "featureDate": "referencedDate",
+      "maxDisplay": 4,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluInvoice.png",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     }
   ]
 }
