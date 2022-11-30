@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.5.1...cozy-mespapiers-lib@10.0.0) (2022-11-30)
+
+
+### Features
+
+* **mespapiers:** Add "health insurance card" paper support ([083dbc5](https://github.com/cozy/cozy-libs/commit/083dbc56dd4732ca4db62288bf18466039682aee))
+* **mespapiers:** Add "other invoice" paper support ([a9f27ca](https://github.com/cozy/cozy-libs/commit/a9f27caa6f116a7d8579b15efb97b1154c6b2eb9))
+* **mespapiers:** Add "resume" paper support ([7948dee](https://github.com/cozy/cozy-libs/commit/7948dee15288ccba8d6e62fca56e666a6e065b47))
+* **mespapiers:** Add "tax timetable" paper support ([9458f9d](https://github.com/cozy/cozy-libs/commit/9458f9dd56ff27f0c80ebb4d38009154e5ab771c))
+* **mespapiers:** Upgrade cozy-client 33.1.0 to 34.2.0 ([b41bc94](https://github.com/cozy/cozy-libs/commit/b41bc94b56af99e9f407c700e40702732229c3d1))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you need to upgrade `cozy-client >= 34.2.0`
+update needed to get https://github.com/cozy/cozy-client/pull/1275 for "other invoice" support
+
+
+
+
+
 ## [9.5.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@9.5.0...cozy-mespapiers-lib@9.5.1) (2022-11-29)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
