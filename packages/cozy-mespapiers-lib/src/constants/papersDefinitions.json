@@ -1704,6 +1704,42 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ]
+    },
+    {
+      "label": "resume",
+      "placeholderIndex": 7,
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "maxDisplay": 3,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": false,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     }
   ]
 }
