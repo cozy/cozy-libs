@@ -141,7 +141,8 @@ export class FlowProvider extends Component {
     // created, this is why a trigger like object is created here
     const triggerLike = {
       message: {
-        account: flow?.account?._id
+        account: flow?.account?._id,
+        konnector: flow?.konnector?.slug
       },
       ...flow.trigger
     }

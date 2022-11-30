@@ -127,7 +127,8 @@ describe('FlowProvider', () => {
     expect(onLoginSuccess).toHaveBeenCalledWith(
       expect.objectContaining({
         message: {
-          account: 'account-id'
+          account: 'account-id',
+          konnector: 'konnectorslug'
         }
       })
     )
