@@ -39,6 +39,12 @@ describe('OAuthForm', () => {
   } = {}) => {
     const client = new CozyClient({ uri: 'http://cozy.localhost:8080' })
     client.fetchQueryAndGetFromState = jest.fn()
+    client.plugins = {
+      realtime: {
+        subscribe: jest.fn(),
+        unsubscribe: jest.fn()
+      }
+    }
     const konnector = {}
     const flow = new ConnectionFlow(client, null, konnector)
     flow.getState = jest.fn().mockReturnValue(flowState)
@@ -57,7 +63,7 @@ describe('OAuthForm', () => {
     // Wait for next tick so the effects of useOAuthExtraParams are done
     await act(() => new Promise(setImmediate))
 
-    return { root }
+    return { root, client }
   }
 
   it('should render', async () => {
@@ -74,10 +80,10 @@ describe('OAuthForm', () => {
   })
 
   it('should call policy fetchExtraOAuthUrlParams with proper params', async () => {
-    await setup({ account: fixtures.account })
+    const { client } = await setup({ account: fixtures.account })
     expect(fetchExtraOAuthUrlParams).toHaveBeenCalledWith({
       account: fixtures.account,
-      client: undefined,
+      client,
       konnector: fixtures.konnector,
       reconnect: false
     })
