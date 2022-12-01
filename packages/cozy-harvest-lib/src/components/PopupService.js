@@ -5,7 +5,7 @@ import { windowOpen } from '../helpers/windowWrapper'
 
 /**
  * @typedef OpenWindowResult
- * @property {"CLOSED"|"DISMISSED"} result
+ * @property {"CLOSED"} result
  */
 
 /**
