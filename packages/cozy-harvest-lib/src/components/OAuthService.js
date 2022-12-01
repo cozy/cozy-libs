@@ -12,6 +12,10 @@ import { openWindow } from './PopupService'
 const OAUTH_POPUP_HEIGHT = 800
 const OAUTH_POPUP_WIDTH = 800
 
+export const OAUTH_SERVICE_CLOSED = 'CLOSED'
+export const OAUTH_SERVICE_ERROR = 'ERROR'
+export const OAUTH_SERVICE_OK = 'OK'
+
 /**
  * Monitor URL changes for mobile apps and in app browsers
  * @param  {import('cozy-client/types/types').KonnectorsDoctype} konnector
@@ -70,7 +74,7 @@ function handleOAuthData(data, konnector, resolve) {
   }
 
   resolve({
-    result: 'OK',
+    result: OAUTH_SERVICE_OK,
     key: data.key,
     data
   })
@@ -106,7 +110,8 @@ function extractOAuthDataFromUrl(url) {
 
 /**
  * @typedef OAuthServiceResult
- * @property {"OK"|"CLOSED"|"DISMISSED"|"ERROR"} result
+ * @property {"OK"|"CLOSED"|"ERROR"} result
+ * @property {String} [error]
  * @property {OAuthData} [data]
  */
 
@@ -151,16 +156,16 @@ async function openWebviewIntentInAppBrowser({
         // @ts-ignore wrong return type associated to webviewIntent.call
         if (result?.type !== 'dismiss' && result?.type !== 'cancel') {
           // @ts-ignore wrong return type associated to webviewIntent.call
-          resolve({ result: 'ERROR', error: result })
+          resolve({ result: OAUTH_SERVICE_ERROR, error: result })
           return
         }
 
         webviewIntent.call('closeInAppBrowser')
-        resolve({ result: 'CLOSED' })
+        resolve({ result: OAUTH_SERVICE_CLOSED })
         return
       } catch (err) {
         webviewIntent.call('closeInAppBrowser')
-        resolve({ result: 'ERROR', error: err })
+        resolve({ result: OAUTH_SERVICE_ERROR, error: err })
         return
       }
     }
@@ -223,9 +228,9 @@ function openIntentsApiInAppBrowser({
         logger.debug('url to open: ', urlToOpen)
         const result = await showInAppBrowser(urlToOpen)
         if (result?.state !== 'dismiss' && result?.state !== 'cancel') {
-          return resolve({ result: 'ERROR', error: result })
+          return resolve({ result: OAUTH_SERVICE_ERROR, error: result })
         }
-        return resolve({ result: 'CLOSED' })
+        return resolve({ result: OAUTH_SERVICE_CLOSED })
       } catch (err) {
         return resolve({ result: 'ERROR', error: err })
       }

@@ -1,6 +1,6 @@
 import MicroEE from 'microee'
 import util from 'util'
-import { openOAuthWindow } from 'components/OAuthService'
+import { openOAuthWindow, OAUTH_SERVICE_OK } from 'components/OAuthService'
 import { isMobileApp, isFlagshipApp } from 'cozy-device-helper'
 
 import PopupMock from '../helpers/windowWrapperMocks'
@@ -120,7 +120,7 @@ describe('OAuthService', () => {
         )
         const result = await promise
         expect(result).toStrictEqual({
-          result: 'OK',
+          result: OAUTH_SERVICE_OK,
           key: null,
           data: {
             error: null,
@@ -179,7 +179,7 @@ describe('OAuthService', () => {
         )
         const result = await promise
         expect(result).toStrictEqual({
-          result: 'OK',
+          result: OAUTH_SERVICE_OK,
           key: null,
           data: {
             error: null,
@@ -231,7 +231,7 @@ describe('OAuthService', () => {
         )
         const result = await promise
         expect(result).toStrictEqual({
-          result: 'OK',
+          result: OAUTH_SERVICE_OK,
           key: null,
           data: {
             error: null,
