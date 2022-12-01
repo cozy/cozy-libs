@@ -18,8 +18,6 @@ import {
   getBIConnection,
   createBIConnection,
   updateBIConnection,
-  getBIUserConfig,
-  updateBIUserConfig,
   setBIConnectionSyncStatus
 } from './bi-http'
 import assert from '../assert'
@@ -448,31 +446,6 @@ export const setSync = async ({
     syncStatus,
     temporaryToken
   )
-}
-
-export const getUserConfig = async ({ client, konnector, account }) => {
-  const { code: temporaryToken, ...config } = await createTemporaryToken({
-    client,
-    konnector,
-    account
-  })
-  const data = await getBIUserConfig(config, temporaryToken)
-  return data
-}
-
-export const updateUserConfig = async ({
-  client,
-  konnector,
-  userConfig,
-  account
-}) => {
-  const { code: temporaryToken, ...config } = await createTemporaryToken({
-    client,
-    konnector,
-    account
-  })
-  const data = await updateBIUserConfig(config, userConfig, temporaryToken)
-  return data
 }
 
 export const getCozyBankId = ({ konnector, account }) => {
