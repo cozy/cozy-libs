@@ -18,13 +18,14 @@ import ConfigurationTab from './ConfigurationTab'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
 import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
-import OAuthWindow from '../OAuthWindow'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../helpers/proptypes'
+import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
+import { useWebviewIntent } from 'cozy-intent'
 
 const tabIndexes = {
   data: 0,
@@ -83,6 +84,8 @@ const DumbKonnectorAccountTabs = props => {
     data: { isInMaintenance }
   } = useMaintenanceStatus(client, konnector)
 
+  const webviewIntent = useWebviewIntent()
+
   const handleTabChange = (ev, newTab) => setTab(newTab)
 
   const flowState = flow.getState()
@@ -107,17 +110,24 @@ const DumbKonnectorAccountTabs = props => {
     reconnect: true
   })
 
-  const [showBIWebView, setShowBIWebView] = useState(false)
-  const hideBIWebView = useCallback(() => {
-    setShowBIWebView(false)
-  }, [])
+  const handleClick = useCallback(async () => {
+    const response = await openOAuthWindow({
+      client,
+      konnector,
+      account,
+      extraParams,
+      intentsApi,
+      webviewIntent,
+      reconnect: true
+    })
 
-  const handleClick = useCallback(() => {
-    setShowBIWebView(true)
-    if (flag('harvest.bi.fullwebhooks')) {
+    if (
+      response.result === OAUTH_SERVICE_OK &&
+      flag('harvest.bi.fullwebhooks')
+    ) {
       flow.expectTriggerLaunch()
     }
-  }, [flow])
+  }, [account, client, extraParams, flow, intentsApi, konnector, webviewIntent])
   const errorActionButton = konnectorPolicy.isBIWebView ? (
     <Button
       className="u-ml-0"
@@ -151,18 +161,6 @@ const DumbKonnectorAccountTabs = props => {
           className="u-mt-1"
         />
       )}
-      {showBIWebView && (
-        <OAuthWindow
-          extraParams={extraParams}
-          konnector={konnector}
-          reconnect={true}
-          onSuccess={hideBIWebView}
-          onCancel={hideBIWebView}
-          account={account}
-          intentsApi={intentsApi}
-        />
-      )}
-
       <SwipeableViews
         animateHeight={true}
         index={tab}
