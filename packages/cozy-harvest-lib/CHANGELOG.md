@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.31.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.31.0...cozy-harvest-lib@9.31.1) (2022-12-01)
+
+
+### Bug Fixes
+
+* Add konnector slug in fake trigger passed to onLoginSuccess ([205af03](https://github.com/cozy/cozy-libs/commit/205af0327a48c17d8f08fdd2ba0767501302690d))
+
+
+
+
+
 # [9.31.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.30.1...cozy-harvest-lib@9.31.0) (2022-11-29)
 
 
