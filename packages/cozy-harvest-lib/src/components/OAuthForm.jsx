@@ -4,7 +4,6 @@ import compose from 'lodash/flowRight'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 
-import OAuthWindow from './OAuthWindow'
 import { useFlowState } from '../models/withConnectionFlow'
 import useOAuthExtraParams from './hooks/useOAuthExtraParams'
 import withLocales from './hoc/withLocales'
@@ -15,23 +14,24 @@ import { KonnectorJobError } from '../helpers/konnectors'
 import { findKonnectorPolicy } from '../konnector-policies'
 import flag from 'cozy-flags'
 import isEqual from 'lodash/isEqual'
+import { useClient } from 'cozy-client'
+import {
+  OAUTH_SERVICE_ERROR,
+  OAUTH_SERVICE_OK,
+  openOAuthWindow
+} from './OAuthService'
+import { useWebviewIntent } from 'cozy-intent'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
  * starts the OAuth process
  */
 export const OAuthForm = props => {
-  const {
-    account,
-    client,
-    flow,
-    intentsApi,
-    konnector,
-    onSuccess,
-    reconnect,
-    t
-  } = props
+  const { account, flow, intentsApi, konnector, onSuccess, reconnect, t } =
+    props
+  const client = useClient()
   const flowState = useFlowState(flow)
+  const webviewIntent = useWebviewIntent()
   const { extraParams, needsExtraParams } = useOAuthExtraParams({
     account,
     client,
@@ -58,22 +58,39 @@ export const OAuthForm = props => {
 
   // Callbacks
 
-  const handleAccountId = accountId => {
-    if (typeof onSuccess === 'function') onSuccess(accountId)
-  }
-
-  const handleConnect = useCallback(() => {
+  const handleConnect = useCallback(async () => {
     setShowOAuthWindow(true)
-    const konnectorPolicy = findKonnectorPolicy(konnector)
-    if (konnectorPolicy.isBIWebView && flag('harvest.bi.fullwebhooks')) {
-      flow.expectTriggerLaunch({ konnector })
-    }
-  }, [flow, konnector])
-
-  const handleOAuthCancel = err => {
-    flow.triggerEvent(ERROR_EVENT, translateOauthError(err))
+    const response = await openOAuthWindow({
+      client,
+      konnector,
+      account,
+      extraParams,
+      intentsApi,
+      webviewIntent,
+      reconnect
+    })
     setShowOAuthWindow(false)
-  }
+    if (response.result === OAUTH_SERVICE_OK) {
+      const konnectorPolicy = findKonnectorPolicy(konnector)
+      if (konnectorPolicy.isBIWebView && flag('harvest.bi.fullwebhooks')) {
+        flow.expectTriggerLaunch({ konnector })
+      }
+      const accountId = response.key
+      if (typeof onSuccess === 'function') onSuccess(accountId)
+    } else if (response.result === OAUTH_SERVICE_ERROR) {
+      flow.triggerEvent(ERROR_EVENT, translateOauthError(response.error))
+    }
+  }, [
+    account,
+    client,
+    extraParams,
+    flow,
+    intentsApi,
+    konnector,
+    onSuccess,
+    reconnect,
+    webviewIntent
+  ])
 
   const handleLoginSuccess = () => {
     setShowOAuthWindow(false)
@@ -119,17 +136,6 @@ export const OAuthForm = props => {
           extension="full"
           label={t(buttonLabel)}
           onClick={handleConnect}
-        />
-      )}
-      {showOAuthWindow && (!needsExtraParams || extraParams) && (
-        <OAuthWindow
-          extraParams={extraParams}
-          konnector={konnector}
-          reconnect={reconnect}
-          onSuccess={handleAccountId}
-          onCancel={handleOAuthCancel}
-          account={account}
-          intentsApi={intentsApi}
         />
       )}
     </>
