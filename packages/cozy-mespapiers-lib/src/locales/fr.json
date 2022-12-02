@@ -178,8 +178,8 @@
         "inputLabel": "Nom du document (40 caractères max.)"
       },
       "noticePeriod": {
-        "inputLabel": "Délai avant l’alerte d’expiration (defaut: 90J)",
-        "text": "À quel moment souhaitez-vous recevoir une alerte d'expiration du document ?",
+        "inputLabel": "Délai avant l'alerte d'expiration",
+        "text": "Une alerte vous sera envoyé pour vous prévenir de l'expiration proche de votre document.",
         "endAdornment": "jour |||| jours"
       }
     },
