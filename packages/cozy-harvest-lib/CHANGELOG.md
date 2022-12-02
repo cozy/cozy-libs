@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.0...cozy-harvest-lib@9.32.1) (2022-12-02)
+
+
+### Bug Fixes
+
+* **harvest:** Update wording for Bank disconnect dialog close button ([effd631](https://github.com/cozy/cozy-libs/commit/effd631fba78d76d899ba4c17d9d1283ac832224))
+
+
+
+
+
 # [9.32.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.31.1...cozy-harvest-lib@9.32.0) (2022-12-02)
 
 
