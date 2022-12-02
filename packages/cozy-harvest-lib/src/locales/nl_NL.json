@@ -124,6 +124,7 @@
     "baseDir": "/Administratief"
   },
   "error": {
+    "application-not-found": "Deze app bestaat niet",
     "reconnect-via-form": "Opnieuw koppelen",
     "job": {
       "DISK_QUOTA_EXCEEDED": {
@@ -216,7 +217,7 @@
       },
       "ACCOUNT_WITH_SAME_IDENTIFIER_ALREADY_DEFINED": {
         "title": "Dit account is al toegevoegd",
-        "description": "Je hebt al een account met deze identificaties ingesteld."
+        "description": "Je mogelijke aanpassing aan de accountlijst wordt binnen een paar minuten doorgevoerd."
       }
     }
   },
@@ -379,6 +380,11 @@
     "addAccount": {
       "title": "%{name} koppelen",
       "button": "Account toevoegen"
+    },
+    "deleteBIConnection": {
+      "title": "Loskoppelen",
+      "description": "Je verzoek is genoteerd en wordt over enkele ogenblikken uitgevoerd. Eerder geïmporteerde gegevens worden niet verwijderd.",
+      "confirm-deletion": "Sluiten"
     },
     "deleteAccount": {
       "title": "Loskoppelen",
