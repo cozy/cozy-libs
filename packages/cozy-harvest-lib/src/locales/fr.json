@@ -384,7 +384,7 @@
     "deleteBIConnection": {
       "title": "Déconnexion de votre banque",
       "description": "La déconnexion de votre banque a bien été prise en compte et sera effective dans quelques instants. Les données précédemment importées seront conservées.",
-      "confirm-deletion": "Confirmer la suppression"
+      "confirm-deletion": "Fermer"
     },
     "deleteAccount": {
       "title": "Déconnexion",

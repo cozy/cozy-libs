@@ -384,7 +384,7 @@
     "deleteBIConnection": {
       "title": "Bank disconnect",
       "description": "Your request has been recorded. It will be effective in a short moment. Previously imported data will not be deleted.",
-      "confirm-deletion": "Confirm deletion"
+      "confirm-deletion": "Close"
     },
     "deleteAccount": {
       "title": "Disconnection",
