@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.1...cozy-harvest-lib@9.32.2) (2022-12-02)
+
+
+### Bug Fixes
+
+* Only update cozy-client store when refreshing contracts ([85822d8](https://github.com/cozy/cozy-libs/commit/85822d8f12ba6578aae238e480bf7788349e875a))
+
+
+
+
+
 ## [9.32.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.0...cozy-harvest-lib@9.32.1) (2022-12-02)
 
 
