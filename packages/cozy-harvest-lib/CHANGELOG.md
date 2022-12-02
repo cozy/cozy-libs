@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [9.32.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.31.1...cozy-harvest-lib@9.32.0) (2022-12-02)
+
+
+### Features
+
+* Use OAuthService in KonnectorAccountTabs ([e81e45f](https://github.com/cozy/cozy-libs/commit/e81e45f3a1db60b6d97f10975a2224257842a180))
+* Use OAuthService in OAuthForm ([503b988](https://github.com/cozy/cozy-libs/commit/503b98879b8d8ba4c286c3eb9a287d1ec97f148e))
+
+
+
+
+
 ## [9.31.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.31.0...cozy-harvest-lib@9.31.1) (2022-12-01)
 
 
