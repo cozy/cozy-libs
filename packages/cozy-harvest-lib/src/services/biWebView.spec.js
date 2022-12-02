@@ -211,7 +211,7 @@ describe('refreshContracts', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
-    client.save = jest.fn()
+    client.store.dispatch = jest.fn()
     client.query = jest
       .fn()
       .mockResolvedValueOnce({
@@ -226,12 +226,18 @@ describe('refreshContracts', () => {
       })
       .mockResolvedValue({
         data: [
-          { vendorId: '1', metadata: { imported: true } },
+          {
+            vendorId: '1',
+            metadata: { imported: true }
+          },
           {
             vendorId: '2',
             metadata: { imported: false, disabledAt: '2022-08-05 12:00:00' }
           },
-          { vendorId: '3', metadata: { imported: true } },
+          {
+            vendorId: '3',
+            metadata: { imported: true }
+          },
           {
             vendorId: '4',
             metadata: { imported: false, disabledAt: '2022-08-05 12:01:00' }
@@ -248,22 +254,64 @@ describe('refreshContracts', () => {
     })
 
     await refreshContracts({ client, konnector, account: {} })
-    expect(client.save).toHaveBeenCalledTimes(4)
-    expect(client.save).toHaveBeenNthCalledWith(1, {
-      metadata: { disabledAt: '2022-05-25T12:00:00', imported: false },
-      vendorId: '1'
+    expect(client.store.dispatch).toHaveBeenCalledTimes(4)
+    expect(client.store.dispatch).toHaveBeenNthCalledWith(1, {
+      definition: {},
+      mutationId: 'contract-memory-update',
+      response: {
+        data: [
+          {
+            metadata: {
+              disabledAt: '2022-05-25T12:00:00',
+              imported: false
+            },
+            vendorId: '1'
+          }
+        ]
+      },
+      type: 'RECEIVE_MUTATION_RESULT'
     })
-    expect(client.save).toHaveBeenNthCalledWith(2, {
-      metadata: { disabledAt: undefined, imported: true },
-      vendorId: '2'
+    expect(client.store.dispatch).toHaveBeenNthCalledWith(2, {
+      definition: {},
+      mutationId: 'contract-memory-update',
+      response: {
+        data: [
+          {
+            metadata: {
+              disabledAt: undefined,
+              imported: true
+            },
+            vendorId: '2'
+          }
+        ]
+      },
+      type: 'RECEIVE_MUTATION_RESULT'
     })
-    expect(client.save).toHaveBeenNthCalledWith(3, {
-      metadata: { disabledAt: '2022-05-25T12:01:00', imported: false },
-      vendorId: '3'
+    expect(client.store.dispatch).toHaveBeenNthCalledWith(3, {
+      definition: {},
+      mutationId: 'contract-memory-update',
+      response: {
+        data: [
+          {
+            metadata: { disabledAt: '2022-05-25T12:01:00', imported: false },
+            vendorId: '3'
+          }
+        ]
+      },
+      type: 'RECEIVE_MUTATION_RESULT'
     })
-    expect(client.save).toHaveBeenNthCalledWith(4, {
-      metadata: { disabledAt: undefined, imported: true },
-      vendorId: '4'
+    expect(client.store.dispatch).toHaveBeenNthCalledWith(4, {
+      definition: {},
+      mutationId: 'contract-memory-update',
+      response: {
+        data: [
+          {
+            metadata: { disabledAt: undefined, imported: true },
+            vendorId: '4'
+          }
+        ]
+      },
+      type: 'RECEIVE_MUTATION_RESULT'
     })
   })
 })
