@@ -178,8 +178,8 @@
         "inputLabel": "Document name (40 letters max.)"
       },
       "noticePeriod": {
-        "inputLabel": "Time to expiration alert (default: 90D)",
-        "text": "When do you want to receive a document expiration alert?",
+        "inputLabel": "Time to expiration alert",
+        "text": "An alert will be sent to you when your document is about to expire.",
         "endAdornment": "day |||| days"
       }
     },
