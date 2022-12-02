@@ -9,6 +9,7 @@ import { getBIConnectionAccountsList, getBIConnection } from './bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import { Q } from 'cozy-client'
+import { receiveMutationResult } from 'cozy-client/dist/store'
 import PromiseCache from 'cozy-client/dist/promise-cache'
 // @ts-ignore (its a peerDep and I don't know how to configure ts for that)
 import flag from 'cozy-flags'
@@ -341,10 +342,22 @@ export const refreshContracts = async ({ client, konnector, account }) => {
     )
     const hasChanged = currentContract.metadata.disabledAt !== disabledValue
     if (hasChanged) {
-      currentContract.metadata.disabledAt = disabledValue
-      currentContract.metadata.imported = !disabledValue
-      // FIXME bulk save via client.collection().updateAll does not show update of accounts in realtime
-      await client.save(currentContract)
+      const newMetadata = {
+        disabledAt: disabledValue,
+        imported: !disabledValue
+      }
+      // update the cozy-client store only to let the use see the result of the update fast
+      // but without creating conflict with the update which will come from the BI webhooks
+      client.store.dispatch(
+        receiveMutationResult('contract-memory-update', {
+          data: [
+            {
+              ...currentContract,
+              metadata: { ...currentContract.metadata, ...newMetadata }
+            }
+          ]
+        })
+      )
     }
   }
 }
