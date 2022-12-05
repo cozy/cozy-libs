@@ -256,7 +256,13 @@ function registerRealtime({ client, konnector }) {
       OAUTH_REALTIME_CHANNEL,
       handleRealtime(konnector, resolve)
     )
-    return () => realtime.unsubscribeAll()
+    return () =>
+      realtime.unsubscribe(
+        'notified',
+        'io.cozy.accounts',
+        OAUTH_REALTIME_CHANNEL,
+        handleRealtime(konnector, resolve)
+      )
   }
 }
 

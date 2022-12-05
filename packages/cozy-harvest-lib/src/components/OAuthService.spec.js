@@ -30,7 +30,7 @@ function CozyRealtimeMock() {
     .mockImplementation((eventType, doctype, channel, fn) => {
       this.on(eventType + doctype + channel, fn)
     })
-  this.unsubscribeAll = jest.fn().mockImplementation(() => {
+  this.unsubscribe = jest.fn().mockImplementation(() => {
     this.removeAllListeners()
   })
 
@@ -41,7 +41,7 @@ function CozyRealtimeMock() {
   this.clear = () => {
     this.removeAllListeners()
     this.subscribe.mockClear()
-    this.unsubscribeAll.mockClear()
+    this.unsubscribe.mockClear()
   }
 }
 MicroEE.mixin(CozyRealtimeMock)
