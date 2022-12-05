@@ -368,13 +368,6 @@
       "acquisitionSteps": []
     },
     {
-      "label": "health_insurance_card",
-      "icon": "heart",
-      "featureDate": "expirationDate",
-      "maxDisplay": 2,
-      "acquisitionSteps": []
-    },
-    {
       "label": "identity_photo",
       "icon": "people",
       "featureDate": "shootingDate",
@@ -1460,13 +1453,6 @@
       "connectorCriteria": {
         "name": "impots"
       }
-    },
-    {
-      "label": "tax_timetable",
-      "icon": "bank",
-      "featureDate": "referencedDate",
-      "maxDisplay": 3,
-      "acquisitionSteps": []
     },
     {
       "label": "unemployment_benefit",
