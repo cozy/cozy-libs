@@ -73,24 +73,33 @@ const mockFilesWithSourceAccount = [
     _id: 'fileId05',
     name: 'file05.pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorOne',
-      sourceAccountIdentifier: 'Account 1'
+      sourceAccount: 'ConnectorAccountId01',
+      sourceAccountIdentifier: 'Account 1',
+      uploadedBy: {
+        slug: 'ConnectorOne'
+      }
     }
   },
   {
     _id: 'fileId06',
     name: 'file06.pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorOne',
-      sourceAccountIdentifier: 'Account 1'
+      sourceAccount: 'ConnectorAccountId01',
+      sourceAccountIdentifier: 'Account 1',
+      uploadedBy: {
+        slug: 'ConnectorOne'
+      }
     }
   },
   {
     _id: 'fileId07',
     name: 'file07.pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorTwo',
-      sourceAccountIdentifier: 'Account 2'
+      sourceAccount: 'ConnectorAccountId02',
+      sourceAccountIdentifier: 'Account 2',
+      uploadedBy: {
+        slug: 'ConnectorTwo'
+      }
     }
   }
 ]
@@ -291,7 +300,7 @@ describe('helpers Papers', () => {
       expect(result).toStrictEqual(expected)
     })
 
-    it('should filter files without contact by sourceAccount', () => {
+    it('should filter files without contact by connectors', () => {
       const result = buildFilesByContacts({
         files: mockFilesWithSourceAccount,
         contacts: [],
@@ -310,16 +319,22 @@ describe('helpers Papers', () => {
                 _id: 'fileId05',
                 name: 'file05.pdf',
                 cozyMetadata: {
-                  sourceAccount: 'ConnectorOne',
-                  sourceAccountIdentifier: 'Account 1'
+                  sourceAccount: 'ConnectorAccountId01',
+                  sourceAccountIdentifier: 'Account 1',
+                  uploadedBy: {
+                    slug: 'ConnectorOne'
+                  }
                 }
               },
               {
                 _id: 'fileId06',
                 name: 'file06.pdf',
                 cozyMetadata: {
-                  sourceAccount: 'ConnectorOne',
-                  sourceAccountIdentifier: 'Account 1'
+                  sourceAccount: 'ConnectorAccountId01',
+                  sourceAccountIdentifier: 'Account 1',
+                  uploadedBy: {
+                    slug: 'ConnectorOne'
+                  }
                 }
               }
             ]
@@ -335,8 +350,11 @@ describe('helpers Papers', () => {
                 _id: 'fileId07',
                 name: 'file07.pdf',
                 cozyMetadata: {
-                  sourceAccount: 'ConnectorTwo',
-                  sourceAccountIdentifier: 'Account 2'
+                  sourceAccount: 'ConnectorAccountId02',
+                  sourceAccountIdentifier: 'Account 2',
+                  uploadedBy: {
+                    slug: 'ConnectorTwo'
+                  }
                 }
               }
             ]
@@ -366,16 +384,22 @@ describe('helpers Papers', () => {
                 _id: 'fileId05',
                 name: 'file05.pdf',
                 cozyMetadata: {
-                  sourceAccount: 'ConnectorOne',
-                  sourceAccountIdentifier: 'Account 1'
+                  sourceAccount: 'ConnectorAccountId01',
+                  sourceAccountIdentifier: 'Account 1',
+                  uploadedBy: {
+                    slug: 'ConnectorOne'
+                  }
                 }
               },
               {
                 _id: 'fileId06',
                 name: 'file06.pdf',
                 cozyMetadata: {
-                  sourceAccount: 'ConnectorOne',
-                  sourceAccountIdentifier: 'Account 1'
+                  sourceAccount: 'ConnectorAccountId01',
+                  sourceAccountIdentifier: 'Account 1',
+                  uploadedBy: {
+                    slug: 'ConnectorOne'
+                  }
                 }
               }
             ]
@@ -391,8 +415,11 @@ describe('helpers Papers', () => {
                 _id: 'fileId07',
                 name: 'file07.pdf',
                 cozyMetadata: {
-                  sourceAccount: 'ConnectorTwo',
-                  sourceAccountIdentifier: 'Account 2'
+                  sourceAccount: 'ConnectorAccountId02',
+                  sourceAccountIdentifier: 'Account 2',
+                  uploadedBy: {
+                    slug: 'ConnectorTwo'
+                  }
                 }
               }
             ]
