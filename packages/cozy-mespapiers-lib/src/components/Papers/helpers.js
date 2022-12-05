@@ -138,7 +138,8 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
     if (filesCreatedByConnectors.length > 0) {
       const filesByConnectors = groupBy(
         filesCreatedByConnectors,
-        file => file.cozyMetadata.sourceAccount
+        file =>
+          `${file.cozyMetadata.uploadedBy.slug}-${file.cozyMetadata.sourceAccountIdentifier}`
       )
 
       const unsortedlistByConnector = Object.values(filesByConnectors).map(
