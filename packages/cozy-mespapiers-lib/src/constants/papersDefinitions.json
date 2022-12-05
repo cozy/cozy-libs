@@ -794,48 +794,7 @@
       "filenameModel": ["labelGivenByUser"],
       "featureDate": "date",
       "maxDisplay": 10,
-      "acquisitionSteps": [
-        {
-          "stepIndex": 1,
-          "model": "scan",
-          "multipage": true,
-          "illustration": "IlluGenericNewPage.svg",
-          "text": "PaperJSON.generic.singlePage.text"
-        },
-        {
-          "stepIndex": 2,
-          "model": "information",
-          "text": "PaperJSON.generic.fileLabel.text",
-          "attributes": [
-            {
-              "name": "labelGivenByUser",
-              "type": "text",
-              "required": true,
-              "maxLength": 40,
-              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 3,
-          "model": "information",
-          "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.date.text",
-          "attributes": [
-            {
-              "name": "date",
-              "type": "date",
-              "inputLabel": "PaperJSON.generic.date.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 4,
-          "illustration": "Account.svg",
-          "model": "contact",
-          "text": "PaperJSON.generic.owner.text"
-        }
-      ]
+      "acquisitionSteps": []
     },
     {
       "label": "other_house_document",
@@ -1201,34 +1160,7 @@
       "icon": "heart",
       "featureDate": "issueDate",
       "maxDisplay": 3,
-      "acquisitionSteps": [
-        {
-          "stepIndex": 1,
-          "model": "scan",
-          "multipage": true,
-          "illustration": "IlluGenericNewPage.svg",
-          "text": "PaperJSON.generic.multiPages.text"
-        },
-        {
-          "stepIndex": 2,
-          "model": "information",
-          "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.issueDate.text",
-          "attributes": [
-            {
-              "name": "issueDate",
-              "type": "date",
-              "inputLabel": "PaperJSON.generic.issueDate.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 3,
-          "illustration": "Account.svg",
-          "model": "contact",
-          "text": "PaperJSON.generic.owner.text"
-        }
-      ]
+      "acquisitionSteps": []
     },
     {
       "label": "rent_receipt",
@@ -1614,34 +1546,7 @@
       "icon": "carbonCopy",
       "featureDate": "issueDate",
       "maxDisplay": 3,
-      "acquisitionSteps": [
-        {
-          "stepIndex": 1,
-          "model": "scan",
-          "multipage": true,
-          "illustration": "IlluGenericNewPage.svg",
-          "text": "PaperJSON.generic.multiPages.text"
-        },
-        {
-          "stepIndex": 2,
-          "model": "information",
-          "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.issueDate.text",
-          "attributes": [
-            {
-              "name": "issueDate",
-              "type": "date",
-              "inputLabel": "PaperJSON.generic.issueDate.inputLabel"
-            }
-          ]
-        },
-        {
-          "stepIndex": 3,
-          "illustration": "Account.svg",
-          "model": "contact",
-          "text": "PaperJSON.generic.owner.text"
-        }
-      ]
+      "acquisitionSteps": []
     },
     {
       "label": "passport",
