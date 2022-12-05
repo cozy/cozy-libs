@@ -178,9 +178,9 @@
         "inputLabel": "Document name (40 letters max.)"
       },
       "noticePeriod": {
-        "inputLabel": "Time to expiration alert",
-        "text": "An alert will be sent to you when your document is about to expire.",
-        "endAdornment": "day |||| days"
+        "inputLabel": "Expiration alert",
+        "text": "Be alerted before the document expires",
+        "endAdornment": "day before |||| days before"
       }
     },
     "bankDetails": {

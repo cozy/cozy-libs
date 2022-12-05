@@ -25,6 +25,7 @@ import IlluVehicleRegistration from '../../assets/images/IlluVehicleRegistration
 import IlluPassport from '../../assets/images/IlluPassport.png'
 import IlluPassportNumber from '../../assets/images/IlluPassportNumber.png'
 import IlluPassportDate from '../../assets/images/IlluPassportDate.png'
+import IlluGenericAlert from '../../assets/icons/IlluGenericAlert.svg'
 import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
@@ -48,6 +49,7 @@ const images = {
   IlluResidencePermitFront,
   IlluResidencePermitNumberHelp,
   IlluVehicleRegistration,
+  IlluGenericAlert,
   IlluGenericInputDate,
   IlluGenericInputText,
   IlluGenericNewPage,
