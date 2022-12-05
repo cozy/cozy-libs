@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.0.7...cozy-mespapiers-lib@10.1.0) (2022-12-05)
+
+
+### Bug Fixes
+
+* **mespapiers:** Remove duplicate paper support ([e5b19b2](https://github.com/cozy/cozy-libs/commit/e5b19b284caccd7b723748e8450b6109a05f079f))
+
+
+### Features
+
+* **mespapiers:** Remove some health paper support ([7bfb7eb](https://github.com/cozy/cozy-libs/commit/7bfb7eba38f1e21f766e21ece24f0828afbde16e))
+
+
+
+
+
 ## [10.0.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.0.6...cozy-mespapiers-lib@10.0.7) (2022-12-05)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
