@@ -42,6 +42,7 @@ Let's see how it is built:
   - `stepIndex`: {number} Position of the step.
   - `model`: {string} Model used for the step (`information`).
   - `illustration`: {string} Name of the illustration used on the step (with extension).
+  - `[illustrationSize]`: {`small`|`medium`|`large`}(`4rem`|`6rem`|`8rem`) Size of the illustration (default `medium`)
   - `text`: {string} Translation key for the text of the step.
   - `attributes`: {object} Type of fields.
     - [`text|number`](#information-field-attributes) : {object} Fields used to fill in more information about the paper.
