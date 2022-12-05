@@ -20,7 +20,12 @@ import { makeInputsInformationStep } from '../../helpers/makeInputsInformationSt
 
 const Information = ({ currentStep }) => {
   const { t } = useI18n()
-  const { illustration, text, attributes } = currentStep
+  const {
+    illustration,
+    illustrationSize = 'medium',
+    text,
+    attributes
+  } = currentStep
   const { formData, setFormData } = useFormData()
   const { nextStep } = useStepperDialog()
   const [value, setValue] = useState({})
@@ -70,7 +75,7 @@ const Information = ({ currentStep }) => {
     <>
       <CompositeHeader
         icon={illustration}
-        iconSize="medium"
+        iconSize={illustrationSize}
         className={isFocus && isIOS() ? 'is-focused' : ''}
         fallbackIcon={fallbackIcon}
         title={t(text)}

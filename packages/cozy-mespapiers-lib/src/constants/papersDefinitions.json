@@ -591,6 +591,7 @@
           "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
+          "illustrationSize": "small",
           "text": "PaperJSON.generic.noticePeriod.text",
           "attributes": [
             {
@@ -1323,6 +1324,7 @@
           "stepIndex": 5,
           "model": "information",
           "illustration": "IlluGenericAlert.svg",
+          "illustrationSize": "small",
           "text": "PaperJSON.generic.noticePeriod.text",
           "attributes": [
             {
