@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [10.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.1.0...cozy-mespapiers-lib@10.1.1) (2022-12-05)
+
+
+### Bug Fixes
+
+* **mespapiers:** Group papers by connector identifier ([b9d7d2b](https://github.com/cozy/cozy-libs/commit/b9d7d2b195a9836a66b0f02b810e282b24dd67f0))
+
+
+
+
+
 # [10.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.0.7...cozy-mespapiers-lib@10.1.0) (2022-12-05)
 
 
