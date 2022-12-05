@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.32.4](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.3...cozy-harvest-lib@9.32.4) (2022-12-05)
+
+
+### Bug Fixes
+
+* Do not use CozyRealtime.unsubscribeAll anymore ([dc6d942](https://github.com/cozy/cozy-libs/commit/dc6d9423a4b49d5e11ddb6c7620cca9541c22519))
+
+
+
+
+
 ## [9.32.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.2...cozy-harvest-lib@9.32.3) (2022-12-05)
 
 
