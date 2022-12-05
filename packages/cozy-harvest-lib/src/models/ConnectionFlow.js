@@ -710,8 +710,23 @@ export class ConnectionFlow {
 
     this.unsubscribeAllRealtime = () => {
       this.jobWatcher.unsubscribeAll()
-      this.realtime.unsubscribeAll()
+      this.unsubscribeAllConnectionFlowRealtime()
     }
+  }
+
+  unsubscribeAllConnectionFlowRealtime() {
+    this.realtime.unsubscribe(
+      'updated',
+      JOBS_DOCTYPE,
+      this.handleTriggerJobUpdated
+    )
+
+    this.realtime.unsubscribe(
+      'updated',
+      JOBS_DOCTYPE,
+      this.job._id,
+      this.handleCurrentJobUpdated.bind(this)
+    )
   }
 
   unwatch() {
