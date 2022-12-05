@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.32.3](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.2...cozy-harvest-lib@9.32.3) (2022-12-05)
+
+
+### Bug Fixes
+
+* **harvest:** Use correct button to close CozyConfirmDialog ([cd7e22b](https://github.com/cozy/cozy-libs/commit/cd7e22bdb9c5f7addacb1230e788b4a3a03c1126))
+
+
+
+
+
 ## [9.32.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.1...cozy-harvest-lib@9.32.2) (2022-12-02)
 
 
