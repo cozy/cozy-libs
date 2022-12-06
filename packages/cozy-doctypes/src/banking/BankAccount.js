@@ -1,5 +1,6 @@
 const groupBy = require('lodash/groupBy')
 const get = require('lodash/get')
+const keyBy = require('lodash/keyBy')
 const merge = require('lodash/merge')
 const Document = require('../Document')
 const matching = require('./matching-accounts')
@@ -11,7 +12,8 @@ class BankAccount extends Document {
    * Adds _id of existing accounts to fetched accounts
    */
   static reconciliate(fetchedAccounts, localAccounts) {
-    const matchings = matching.matchAccounts(fetchedAccounts, localAccounts)
+    let matchings = matching.matchAccounts(fetchedAccounts, localAccounts)
+    matchings = BankAccount.addForcedReplaceMatchings(matchings, localAccounts)
     return matchings.map(matching => {
       log(
         'info',
@@ -19,6 +21,13 @@ class BankAccount extends Document {
           ? `${matching.account.label} matched with ${matching.match.label} via ${matching.method}`
           : `${matching.account.label} did not match with an existing account`
       )
+      if (matching.forcedReplace) {
+        log('info', `${matching.account.label} forced disabled state`)
+      }
+      const matchingMatchId = matching.match ? matching.match._id : undefined
+      const forcedReplaceId = matching.forcedReplace
+        ? matching.account._id
+        : undefined
       return {
         // eslint-disable-next-line node/no-unsupported-features/es-syntax
         ...matching.account,
@@ -27,9 +36,78 @@ class BankAccount extends Document {
           matching.match ? matching.match.relationships : null,
           matching.account.relationships
         ),
-        _id: matching.match ? matching.match._id : undefined
+        _id: forcedReplaceId || matchingMatchId
       }
     })
+  }
+
+  /**
+   * Finds existing local bank accounts which are disabled and force their association to the new cozy account id
+   * which can be found in the other updated bank accounts
+   *
+   * @param {Array} previousMatchings
+   * @param {Array} localAccounts
+   * @returns {Array} matchings array with added disabled bank accounts to update with new cozy account id
+   */
+  static addForcedReplaceMatchings(previousMatchings, localAccounts) {
+    const replacedCozyAccountIds =
+      BankAccount.findReplacedCozyAccountIdsMatchings(previousMatchings)
+
+    if (!Object.keys(replacedCozyAccountIds).length > 0) {
+      return previousMatchings
+    }
+
+    const matchings = [...previousMatchings]
+    const matchedAccountIds = keyBy(matchings, 'match._id')
+    for (const localAccount of localAccounts) {
+      const foundInMatchedAccounts = Boolean(
+        matchedAccountIds[localAccount._id]
+      )
+      const newAccountId =
+        replacedCozyAccountIds[localAccount.relationships.connection.data._id]
+      if (foundInMatchedAccounts || !newAccountId) {
+        continue
+      }
+      matchings.push({
+        forcedReplace: true,
+        account: {
+          // eslint-disable-next-line node/no-unsupported-features/es-syntax
+          ...localAccount,
+          metadata: merge({}, localAccount.metadata, {
+            disabledAt: localAccount.metadata?.updatedAt
+          }),
+          relationships: merge({}, localAccount.relationships, {
+            connection: {
+              data: {
+                _id: newAccountId
+              }
+            }
+          })
+        }
+      })
+    }
+    return matchings
+  }
+
+  /**
+   * Find any bank account which cozy account id has been changed
+   *
+   * @param {Array} matchings
+   * @returns {Object} mapping from old cozy account id to new cozy account id
+   */
+  static findReplacedCozyAccountIdsMatchings(matchings) {
+    const result = {}
+    for (const matching of matchings) {
+      if (
+        matching.match &&
+        matching?.account?.relationships?.connection?.data?._id !==
+          matching?.match?.relationships?.connection?.data?._id
+      ) {
+        result[matching?.match?.relationships?.connection?.data?._id] =
+          matching?.account?.relationships?.connection?.data?._id
+      }
+    }
+    return result
   }
 
   static findDuplicateAccountsWithNoOperations(accounts, operations) {

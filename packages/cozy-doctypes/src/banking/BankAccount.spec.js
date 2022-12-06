@@ -1,29 +1,122 @@
 const BankAccount = require('./BankAccount')
 
 describe('account reconciliation', () => {
-  const newAccounts = [
-    {
-      number: '1',
-      balance: 100,
-      relationships: {
-        aRelationship: { _id: 'fake-id', _type: 'fake-type' },
-        anotherRelationship: { _id: 'fake-id2', _type: 'fake-type2' }
+  it('should update relationship of disabled accounts associated to the same relationship as updated anabled accounts', () => {
+    const newAccounts = [
+      {
+        number: '1',
+        balance: 100,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountnew',
+              _type: 'io.cozy.accounts'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2020-11-30'
+        }
       }
-    },
-    { number: '2', balance: 200 }
-  ]
-  const currentAccounts = [
-    {
-      _id: 'a1',
-      number: '1',
-      balance: 50,
-      relationships: {
-        aRelationship: { _id: 'old-fake-id', _type: 'old-fake-type' }
+    ]
+    const currentAccounts = [
+      {
+        _id: 'a1',
+        number: '1',
+        balance: 50,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountold',
+              _type: 'io.cozy.accounts'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2020-11-30'
+        }
+      },
+      {
+        _id: 'a2',
+        number: '2',
+        balance: 300,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountold',
+              _type: 'io.cozy.accounts'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2020-11-30'
+        }
       }
-    }
-  ]
+    ]
+    const matchedAccounts = BankAccount.reconciliate(
+      newAccounts,
+      currentAccounts
+    )
 
+    expect(matchedAccounts).toEqual([
+      {
+        _id: 'a1',
+        number: '1',
+        rawNumber: '1',
+        balance: 100,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountnew',
+              _type: 'io.cozy.accounts'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2020-11-30'
+        }
+      },
+      {
+        _id: 'a2',
+        number: '2',
+        balance: 300,
+        relationships: {
+          connection: {
+            data: {
+              _id: 'cozyaccountnew',
+              _type: 'io.cozy.accounts'
+            }
+          }
+        },
+        metadata: {
+          disabledAt: '2020-11-30',
+          updatedAt: '2020-11-30'
+        }
+      }
+    ])
+  })
   it('should correctly match linxo accounts to cozy accounts through number', () => {
+    const newAccounts = [
+      {
+        number: '1',
+        balance: 100,
+        relationships: {
+          aRelationship: { _id: 'fake-id', _type: 'fake-type' },
+          anotherRelationship: { _id: 'fake-id2', _type: 'fake-type2' }
+        }
+      },
+      { number: '2', balance: 200 }
+    ]
+    const currentAccounts = [
+      {
+        _id: 'a1',
+        number: '1',
+        balance: 50,
+        relationships: {
+          aRelationship: { _id: 'old-fake-id', _type: 'old-fake-type' }
+        }
+      }
+    ]
     const matchedAccounts = BankAccount.reconciliate(
       newAccounts,
       currentAccounts
