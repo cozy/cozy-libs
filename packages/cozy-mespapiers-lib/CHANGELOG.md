@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.3.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.2.0...cozy-mespapiers-lib@10.3.0) (2022-12-06)
+
+
+### Features
+
+* Add noticePeriod step on health_insurance_card & passport ([d2edd09](https://github.com/cozy/cozy-libs/commit/d2edd09665335817a64b657f386149c52032512c))
+
+
+
+
+
 # [10.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.1.1...cozy-mespapiers-lib@10.2.0) (2022-12-06)
 
 
