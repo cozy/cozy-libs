@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.8.0 (2022-12-06)
+
+
+### Features
+
+* Update eslint-config-cozy-app ([a0a55db](https://github.com/cozy/cozy-libs/commit/a0a55dbd95477bc99d9a927c65cffc08c824e80b))
+
+
+
+
+
 # [4.7.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.6.1...cozy-sharing@4.7.0) (2022-11-15)
 
 

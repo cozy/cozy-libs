@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.86.0 (2022-12-06)
+
+
+### Bug Fixes
+
+* Also update disabled bank accounts with new cozy account id ([48d1e7e](https://github.com/cozy/cozy-libs/commit/48d1e7e80f2572348c6260ce1b2f56aa430c9b30))
+
+
+### Features
+
+* Update eslint-config-cozy-app ([a0a55db](https://github.com/cozy/cozy-libs/commit/a0a55dbd95477bc99d9a927c65cffc08c824e80b))
+
+
+
+
+
 ## 1.85.4 (2022-10-03)
 
 **Note:** Version bump only for package cozy-doctypes
