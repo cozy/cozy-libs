@@ -593,7 +593,7 @@
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
-              "maxLength": 2,
+              "maxLength": 3,
               "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
             }
           ]
@@ -1258,7 +1258,7 @@
               "withAdornment": {
                 "end": "PaperJSON.generic.noticePeriod.endAdornment"
               },
-              "maxLength": 2,
+              "maxLength": 3,
               "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
             }
           ]
@@ -1592,6 +1592,24 @@
         },
         {
           "stepIndex": 4,
+          "model": "information",
+          "illustration": "IlluGenericAlert.svg",
+          "illustrationSize": "small",
+          "text": "PaperJSON.generic.noticePeriod.text",
+          "attributes": [
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 5,
           "illustration": "Account.svg",
           "model": "contact",
           "text": "PaperJSON.generic.owner.text"
@@ -1663,6 +1681,24 @@
         },
         {
           "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericAlert.svg",
+          "illustrationSize": "small",
+          "text": "PaperJSON.generic.noticePeriod.text",
+          "attributes": [
+            {
+              "name": "noticePeriod",
+              "type": "number",
+              "withAdornment": {
+                "end": "PaperJSON.generic.noticePeriod.endAdornment"
+              },
+              "maxLength": 3,
+              "inputLabel": "PaperJSON.generic.noticePeriod.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": false,
