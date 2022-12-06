@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.1.1...cozy-mespapiers-lib@10.2.0) (2022-12-06)
+
+
+### Bug Fixes
+
+* Wording and illustration for notice step ([142f10f](https://github.com/cozy/cozy-libs/commit/142f10f682a7ea2cf3520c89bbee25d2baab95ab))
+
+
+### Features
+
+* Add `illustrationSize` prop to paperConfiguration ([d0b8524](https://github.com/cozy/cozy-libs/commit/d0b852479ff95100a6c1c0b7d3f6271e8859cc40))
+
+
+
+
+
 ## [10.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.1.0...cozy-mespapiers-lib@10.1.1) (2022-12-05)
 
 
