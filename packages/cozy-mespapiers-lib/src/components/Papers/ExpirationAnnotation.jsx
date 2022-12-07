@@ -1,0 +1,38 @@
+import React from 'react'
+import PropTypes from 'prop-types'
+
+import { models } from 'cozy-client'
+
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
+
+const { computeExpirationDate, isExpired } = models.paper
+
+const ExpirationAnnotation = ({ file }) => {
+  const { t } = useI18n()
+
+  if (isExpired(file)) {
+    return (
+      <Typography component="span" variant="inherit" color="error">
+        {t('PapersList.expired')}
+      </Typography>
+    )
+  }
+
+  const expirationDate = computeExpirationDate(file)
+
+  return (
+    <Typography component="span" variant="inherit" className="u-warning">
+      {t('PapersList.expiresIn', {
+        duration: formatLocallyDistanceToNow(expirationDate)
+      })}
+    </Typography>
+  )
+}
+
+ExpirationAnnotation.propTypes = {
+  file: PropTypes.object.isRequired
+}
+
+export default ExpirationAnnotation

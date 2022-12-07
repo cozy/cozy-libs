@@ -269,7 +269,9 @@
     "PapersListByContact": {
       "seeMore": "See more (%{number})"
     },
-    "empty": "You do not have any papers yet in this topic."
+    "empty": "You do not have any papers yet in this topic.",
+    "expired": "Expired",
+    "expiresIn": "Expires in %{duration}"
   },
   "PlaceholdersList": {
     "title": "New paper%{name}"
