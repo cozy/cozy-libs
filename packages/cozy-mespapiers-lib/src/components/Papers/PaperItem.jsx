@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
-import { useClient } from 'cozy-client'
+import { models, useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
@@ -18,6 +18,9 @@ import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import RenameInput from './Renaming/RenameInput'
+import ExpirationAnnotation from './ExpirationAnnotation'
+
+const { isExpired, isExpiringSoon } = models.paper
 
 const useStyles = makeStyles(() => ({
   checkbox: {
@@ -84,9 +87,19 @@ const PaperItem = ({
     )
   }
 
-  const secondaryText = `${contactNames ? contactNames : ''}${
-    contactNames && paperDate ? ' · ' : ''
-  }${paperDate ? paperDate : ''}`
+  const secondaryText = (
+    <>
+      {contactNames ? contactNames : ''}
+      {contactNames && paperDate ? ' · ' : ''}
+      {paperDate ? paperDate : ''}
+      {(isExpired(paper) || isExpiringSoon(paper)) && (
+        <>
+          {contactNames || paperDate ? ' · ' : ''}
+          <ExpirationAnnotation file={paper} />
+        </>
+      )}
+    </>
+  )
 
   return (
     <>
