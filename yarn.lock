@@ -6976,16 +6976,17 @@ cozy-client@^32.2.0:
     sift "^6.0.0"
     url-search-params-polyfill "^8.0.0"
 
-cozy-client@^34.2.0:
-  version "34.2.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-34.2.0.tgz#d5af57b638b46dc640653e4bc603534353239632"
-  integrity sha512-t4YYXuGlrStQPEmReJm6nrrVWeKh4Jxrwuh4XSEuHCApH775wPGZZfDs1RdtYx/wCFPfI5PVM0BmvCosGju/bw==
+cozy-client@^34.4.0:
+  version "34.4.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-34.4.0.tgz#7d72aa3a38c08de4f3597c5fc68998553dd29f2f"
+  integrity sha512-Vh50SGKVHaxT1pDlmXn5AtEd8W2dzPFczXLOm4A9HuBttNUzS8cT2/MXfo9Xs7YV7nU/PhPlKtyvdrZqo9RxXQ==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
     "@types/lodash" "^4.14.170"
     btoa "^1.2.1"
     cozy-stack-client "^34.1.5"
+    date-fns "2.29.3"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.13"
     microee "^0.0.6"
@@ -7114,16 +7115,7 @@ cozy-stack-client@^32.2.0:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-stack-client@^34.1.0:
-  version "34.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-34.1.0.tgz#2ff134ad3717947c669e49489da3bd1dedae12d0"
-  integrity sha512-Xg5yqtJTpJtxLVEHJbtrEdIpA/yNePHI4k9jFkoHII72Rb/sW71aWihQHuOhm+7fKyYDeV5hi7cHg82BB6+cAQ==
-  dependencies:
-    detect-node "^2.0.4"
-    mime "^2.4.0"
-    qs "^6.7.0"
-
-cozy-stack-client@^34.1.5:
+cozy-stack-client@^34.1.0, cozy-stack-client@^34.1.5:
   version "34.1.5"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-34.1.5.tgz#28fbc22b72f6343d968d4899d91c70f0261252f4"
   integrity sha512-i0GsaaHNI2XmXUncbNPzuFY+DDC4/io3m7mwCmhAFyI/REHPdqOi3Oo5Mb7Euuky4A6iZjAWn5t0F69itv3rvg==
@@ -7761,6 +7753,11 @@ date-fns@2.23.0:
   version "2.23.0"
   resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.23.0.tgz#4e886c941659af0cf7b30fafdd1eaa37e88788a9"
   integrity sha512-5ycpauovVyAk0kXNZz6ZoB9AYMZB4DObse7P3BPWmyEjXNORTI8EJ6X0uaSAq4sCHzM1uajzrkr6HnsLQpxGXA==
+
+date-fns@2.29.3:
+  version "2.29.3"
+  resolved "https://registry.yarnpkg.com/date-fns/-/date-fns-2.29.3.tgz#27402d2fc67eb442b511b70bbdf98e6411cd68a8"
+  integrity sha512-dDCnyH2WnnKusqvZZ6+jA1O51Ibt8ZMRNkDZdyAyK4YfbDwa/cEmuztzG5pk6hqlp9aSBPYcjOlktquahGwGeA==
 
 date-now@^0.1.4:
   version "0.1.4"
