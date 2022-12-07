@@ -250,18 +250,19 @@ function openIntentsApiInAppBrowser({
 function registerRealtime({ client, konnector }) {
   return resolve => {
     const realtime = client.plugins.realtime
+    const handler = handleRealtime(konnector, resolve)
     realtime.subscribe(
       'notified',
       'io.cozy.accounts',
       OAUTH_REALTIME_CHANNEL,
-      handleRealtime(konnector, resolve)
+      handler
     )
     return () =>
       realtime.unsubscribe(
         'notified',
         'io.cozy.accounts',
         OAUTH_REALTIME_CHANNEL,
-        handleRealtime(konnector, resolve)
+        handler
       )
   }
 }
