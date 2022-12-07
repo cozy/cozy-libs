@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.3.1...cozy-mespapiers-lib@11.0.0) (2022-12-07)
+
+
+### Features
+
+* **mespapiers:** Add an `ExpirationAnnotation` component ([fa51486](https://github.com/cozy/cozy-libs/commit/fa51486c2a24d9264486fced8f6db7ec93b986cd))
+* **mespapiers:** Add expiration annotations to paper items ([4c53cb3](https://github.com/cozy/cozy-libs/commit/4c53cb3256d4ecdff07158e4949e3cee84c31535))
+* Update `cozy-client` to 34.4.0 ([9cd3208](https://github.com/cozy/cozy-libs/commit/9cd32080acab5fda5eacfbb953566b23053eafc7))
+* Update `cozy-client` to 34.5.0 ([4a489c6](https://github.com/cozy/cozy-libs/commit/4a489c69053b74e55f58805ef7d40ce61fcc3787))
+* Update `cozy-ui` to 78.0.0 ([47e84ac](https://github.com/cozy/cozy-libs/commit/47e84ace0dc7595019b42d575d0c6b8b7f738960))
+
+
+### BREAKING CHANGES
+
+* You need to update `cozy-client` to `>34.5.0`.
+* You need to update `cozy-client` to `>34.4.0`.
+
+
+
+
+
 ## [10.3.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@10.3.0...cozy-mespapiers-lib@10.3.1) (2022-12-06)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
