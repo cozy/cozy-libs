@@ -269,7 +269,9 @@
     "PapersListByContact": {
       "seeMore": "Voir plus (%{number})"
     },
-    "empty": "Vous n'avez aucun papier dans ce thème."
+    "empty": "Vous n'avez aucun papier dans ce thème.",
+    "expired": "Expiré",
+    "expiresIn": "Expire dans %{duration}"
   },
   "PlaceholdersList": {
     "title": "Nouveau papier%{name}"
