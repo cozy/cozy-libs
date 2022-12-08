@@ -74,7 +74,7 @@ export const createPdfAndSave = async ({
   const { data, metadata, contacts } = { ...formData }
   const fileCollection = client.collection(FILES_DOCTYPE)
   const { featureDate, label, filenameModel } = currentDefinition
-  const date = metadata[featureDate] && f(metadata[featureDate], 'YYYY.MM.DD')
+  const date = metadata[featureDate] && f(metadata[featureDate], 'yyyy.MM.dd')
 
   // If all files are to be considered as one.
   const isMultiPage = data.some(({ fileMetadata }) => fileMetadata.multipage)

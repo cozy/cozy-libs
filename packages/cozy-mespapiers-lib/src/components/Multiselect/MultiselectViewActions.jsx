@@ -83,7 +83,7 @@ const MultiselectViewActions = ({ onClose }) => {
       const currentUser = await fetchCurrentUser(client)
       const defaultZipFolderName = t('Multiselect.folderZipName', {
         contactName: getDisplayName(currentUser),
-        date: f(Date.now(), 'YYYY.MM.DD')
+        date: f(Date.now(), 'yyyy.MM.dd')
       })
 
       const { _id: parentFolderId } = await getOrCreateAppFolderWithReference(

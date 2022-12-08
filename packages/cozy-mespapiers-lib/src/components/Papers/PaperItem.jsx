@@ -60,7 +60,7 @@ const PaperItem = ({
   const paperTheme = paper?.metadata?.qualification?.label
   const paperLabel = paper?.metadata?.qualification?.page
   const paperDate = paper?.metadata?.datetime
-    ? f(paper?.metadata?.datetime, 'DD/MM/YYYY')
+    ? f(paper?.metadata?.datetime, 'dd/MM/yyyy')
     : null
 
   const handleClick = () => {
