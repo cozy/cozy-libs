@@ -20,9 +20,14 @@ export const buildFilesQueryWithQualificationLabel = () => {
         .indexFields(['metadata.qualification.label'])
         .select([
           'name',
-          'metadata.datetime',
           'referenced_by',
+          'metadata.country',
+          'metadata.datetime',
+          'metadata.expirationDate',
+          'metadata.noticePeriod',
           'metadata.qualification.label',
+          'metadata.referencedDate',
+          'created_at',
           'updated_at',
           'type',
           'trashed'
