@@ -137,7 +137,7 @@
         "text": "Quelle est la date de ce document ?"
       },
       "expirationDate": {
-        "inputLabel": "Valable jusqu'au",
+        "inputLabel": "Date d'expiration",
         "text": "Quelle est la date d'expiration de ce document ?"
       },
       "front": {
@@ -179,7 +179,7 @@
       },
       "noticePeriod": {
         "inputLabel": "Alerte d'expiration",
-        "text": "Etre alerté avant l'expiration du document",
+        "text": "Être alerté avant l'expiration du document",
         "endAdornment": "jour avant |||| jours avant"
       }
     },
@@ -231,7 +231,7 @@
         "text": "Ajouter la face arrière de votre carte"
       },
       "expirationDate": {
-        "inputLabel": "Valable jusqu'au",
+        "inputLabel": "Date d'expiration",
         "text": "Quelle est la date d'expiration de cette carte ?"
       },
       "front": {
@@ -252,7 +252,7 @@
           "text": "Saisir le numéro de votre passeport"
         },
         "expirationDate": {
-          "inputLabel": "Valable jusqu'au",
+          "inputLabel": "Date d'expiration",
           "text": "Quelle est la date d'expiration du passeport ?"
         }
       }
