@@ -138,7 +138,7 @@
       },
       "expirationDate": {
         "inputLabel": "Expiration date",
-        "text": "When does this document expires?"
+        "text": "When does this document expire?"
       },
       "front": {
         "text": "Add front side"
@@ -228,18 +228,18 @@
     },
     "card": {
       "back": {
-        "text": "Add the back of your ID card"
+        "text": "Add the back of your card"
       },
       "expirationDate": {
         "inputLabel": "Expiration date",
-        "text": "When was your card issued? (written on the back)"
+        "text": "When does your card expire?"
       },
       "front": {
-        "text": "Add the front of your ID card"
+        "text": "Add the front of your card"
       },
       "number": {
         "inputLabel": "Card number",
-        "text": "What is your credit card number? (written on the front)"
+        "text": "What is your card number?"
       }
     },
     "passport": {
@@ -253,7 +253,7 @@
         },
         "expirationDate": {
           "inputLabel": "Expiration date",
-          "text": "What is the expiry date of the passport?"
+          "text": "When does your passport expire?"
         }
       }
     }
