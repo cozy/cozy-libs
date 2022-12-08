@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [9.32.6](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.5...cozy-harvest-lib@9.32.6) (2022-12-08)
+
+
+### Bug Fixes
+
+* Realtime unsubscribe error on OAuthService ([30551dc](https://github.com/cozy/cozy-libs/commit/30551dca65c21d8f982592fa5e197d2744911e81))
+
+
+
+
+
 ## [9.32.5](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.4...cozy-harvest-lib@9.32.5) (2022-12-06)
 
 **Note:** Version bump only for package cozy-harvest-lib
