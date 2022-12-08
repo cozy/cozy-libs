@@ -5,7 +5,7 @@ import { models } from 'cozy-client'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
+import { formatLocallyDistanceToNowStrict } from 'cozy-ui/transpiled/react/I18n/format'
 
 const { computeExpirationDate, isExpired } = models.paper
 
@@ -25,7 +25,7 @@ const ExpirationAnnotation = ({ file }) => {
   return (
     <Typography component="span" variant="inherit" className="u-warning">
       {t('PapersList.expiresIn', {
-        duration: formatLocallyDistanceToNow(expirationDate)
+        duration: formatLocallyDistanceToNowStrict(expirationDate)
       })}
     </Typography>
   )
