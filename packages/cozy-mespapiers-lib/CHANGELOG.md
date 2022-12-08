@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.0.1...cozy-mespapiers-lib@11.0.2) (2022-12-08)
+
+
+### Bug Fixes
+
+* **mespapiers:** Update expiration date and notice period wordings ([ec266cd](https://github.com/cozy/cozy-libs/commit/ec266cd037d6906cb33a578be07cb47769a552e0))
+
+
+
+
+
 ## [11.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.0.0...cozy-mespapiers-lib@11.0.1) (2022-12-08)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
