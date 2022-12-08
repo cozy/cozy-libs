@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [11.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.0.2...cozy-mespapiers-lib@11.0.3) (2022-12-08)
+
+
+### Bug Fixes
+
+* **mespapiers:** Query expiration attributes for search and theme ([e0f167e](https://github.com/cozy/cozy-libs/commit/e0f167e93e099452b36244be7efe387c7ee94b8c))
+
+
+
+
+
 ## [11.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.0.1...cozy-mespapiers-lib@11.0.2) (2022-12-08)
 
 
