@@ -64,7 +64,9 @@ class BankAccount extends Document {
         matchedAccountIds[localAccount._id]
       )
       const newAccountId =
-        replacedCozyAccountIds[localAccount.relationships.connection.data._id]
+        replacedCozyAccountIds[
+          localAccount?.relationships?.connection?.data?._id
+        ]
       if (foundInMatchedAccounts || !newAccountId) {
         continue
       }
