@@ -1,7 +1,7 @@
 const BankAccount = require('./BankAccount')
 
 describe('account reconciliation', () => {
-  it('should update relationship of disabled accounts associated to the same relationship as updated anabled accounts', () => {
+  it('should update relationship of disabled accounts associated to the same relationship as updated anabled accounts even with accounts without connection relationship', () => {
     const newAccounts = [
       {
         number: '1',
@@ -50,6 +50,21 @@ describe('account reconciliation', () => {
         },
         metadata: {
           updatedAt: '2020-11-30'
+        }
+      },
+      {
+        _id: 'oldaccountnorelationship',
+        number: '10',
+        balance: 0,
+        relationships: {
+          other: {
+            data: {
+              some: 'data'
+            }
+          }
+        },
+        metadata: {
+          updatedAt: '2012-11-30'
         }
       }
     ]
