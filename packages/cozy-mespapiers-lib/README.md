@@ -66,6 +66,7 @@ The following permissions are required in the application `manifest.webapp` file
 }
 ```
 
+
 ## Importing
 
 You need to import `Sprite` and add it to the root of your application
