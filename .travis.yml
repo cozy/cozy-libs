@@ -8,18 +8,6 @@ cache:
 before_install:
   - curl -o- -L https://yarnpkg.com/install.sh | bash -s -- --version 1.16.0
   - export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-script:
-  - ./scripts/travis.sh
-before_deploy:
-  - git config --global user.email "npm@cozycloud.cc"
-  - git config --global user.name "Cozy Bot"
-deploy:
-  - provider: script
-    skip-cleanup: true
-    script: 'git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes -m "[skip ci] Publish"'
-    on:
-      branch: master
-      repo: cozy/cozy-libs
 
 jobs:
   include:
@@ -28,6 +16,16 @@ jobs:
     - name: 'Build'
       script:
         - ./scripts/travis.sh
+      before_deploy:
+        - git config --global user.email "npm@cozycloud.cc"
+        - git config --global user.name "Cozy Bot"
+      deploy:
+        - provider: script
+          skip-cleanup: true
+          script: 'git checkout master && git remote set-url origin https://cozy-bot:$GITHUB_TOKEN@github.com/cozy/cozy-libs.git && echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc && yarn lerna publish --yes -m "[skip ci] Publish"'
+          on:
+            branch: master
+            repo: cozy/cozy-libs
 
 env:
   global:
