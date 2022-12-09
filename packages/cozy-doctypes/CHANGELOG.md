@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.86.1](https://github.com/cozy/cozy-libs/compare/cozy-doctypes@1.86.0...cozy-doctypes@1.86.1) (2022-12-09)
+
+
+### Bug Fixes
+
+* Error on bank accounts without connection relationship ([f7c46ab](https://github.com/cozy/cozy-libs/commit/f7c46ab18ce83e0d939851077cfa442598f2adfd))
+
+
+
+
+
 # 1.86.0 (2022-12-06)
 
 
