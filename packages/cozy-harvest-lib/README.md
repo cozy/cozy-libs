@@ -9,7 +9,7 @@ With Harvest components, an app is able to:
 - configure konnectors
 - setup authentification informations
 - check for synchronized data
-- ..and much more in the future
+- ...and much more in the future
 
 # Current version
 
@@ -158,7 +158,6 @@ ReactDOM.render(
 # API
 
 See the [Styleguidist](https://docs.cozy.io/cozy-libs/cozy-harvest-lib/).
-
 
 # Doc and example about manifests
 
