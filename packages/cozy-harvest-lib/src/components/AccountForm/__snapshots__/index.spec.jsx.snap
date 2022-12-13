@@ -27,12 +27,23 @@ exports[`AccountForm should not render error 1`] = `
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <DefaultButton
+    <ForwardRef>
+      <ForwardRef(WithStyles)
+        className="u-mt-1"
+        component="button"
+        onClick={[Function]}
+      >
+        I can't connect
+      </ForwardRef(WithStyles)>
+    </ForwardRef>
+    <ForwardRef
       className="u-mt-2 u-mb-1-half"
+      data-testid="submit-btn"
       disabled={false}
-      extension="full"
+      fullWidth={true}
       label="Connect"
       onClick={[Function]}
+      variant="primary"
     />
   </React.Fragment>
 </div>
@@ -64,12 +75,23 @@ exports[`AccountForm should render 1`] = `
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <DefaultButton
+    <ForwardRef>
+      <ForwardRef(WithStyles)
+        className="u-mt-1"
+        component="button"
+        onClick={[Function]}
+      >
+        I can't connect
+      </ForwardRef(WithStyles)>
+    </ForwardRef>
+    <ForwardRef
       className="u-mt-2 u-mb-1-half"
+      data-testid="submit-btn"
       disabled={true}
-      extension="full"
+      fullWidth={true}
       label="Connect"
       onClick={[Function]}
+      variant="primary"
     />
   </React.Fragment>
 </div>
@@ -118,12 +140,23 @@ exports[`AccountForm should render error 1`] = `
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <DefaultButton
+    <ForwardRef>
+      <ForwardRef(WithStyles)
+        className="u-mt-1"
+        component="button"
+        onClick={[Function]}
+      >
+        I can't connect
+      </ForwardRef(WithStyles)>
+    </ForwardRef>
+    <ForwardRef
       className="u-mt-2 u-mb-1-half"
+      data-testid="submit-btn"
       disabled={false}
-      extension="full"
+      fullWidth={true}
       label="Connect"
       onClick={[Function]}
+      variant="primary"
     />
   </React.Fragment>
 </div>
@@ -141,12 +174,23 @@ exports[`AccountForm should render normally when client side konnector with laun
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <DefaultButton
+    <ForwardRef>
+      <ForwardRef(WithStyles)
+        className="u-mt-1"
+        component="button"
+        onClick={[Function]}
+      >
+        I can't connect
+      </ForwardRef(WithStyles)>
+    </ForwardRef>
+    <ForwardRef
       className="u-mt-2 u-mb-1-half"
+      data-testid="submit-btn"
       disabled={false}
-      extension="full"
+      fullWidth={true}
       label="Connect"
       onClick={[Function]}
+      variant="primary"
     />
   </React.Fragment>
 </div>
@@ -172,19 +216,17 @@ exports[`AccountForm should render with specific message when client side konnec
       <Bd
         className="u-m-1"
       >
-        <ForwardRef
-          variant="body1"
-        >
+        <ForwardRef>
           The testkonnector application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app.
         </ForwardRef>
       </Bd>
     </Media>
-    <ButtonLink
+    <ForwardRef
       className="u-mt-2 u-mb-1-half"
-      extension="full"
-      href="#"
+      fullWidth={true}
       label="Install Cozy on mobile"
-      tag="a"
+      onClick={[Function]}
+      variant="primary"
     />
   </React.Fragment>
 </div>
