@@ -1,11 +1,12 @@
 import React, { PureComponent } from 'react'
+import { withRouter } from 'react-router'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
-import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
+import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
@@ -293,9 +294,10 @@ export class AccountForm extends PureComponent {
                     submitting ||
                     !this.isSubmittable({ dirty, error, initialValues, valid })
                   }
-                  extension="full"
+                  fullWidth
                   label={t('accountForm.submit.label')}
                   onClick={() => this.handleSubmit(values, form)}
+                  data-testid="submit-btn"
                 />
               </>
             ) : (
@@ -305,16 +307,16 @@ export class AccountForm extends PureComponent {
                     <Icon icon={Info} />
                   </Img>
                   <Bd className="u-m-1">
-                    <Typography variant="body1">
+                    <Typography>
                       {t('accountForm.notClientSide', { name })}
                     </Typography>
                   </Bd>
                 </Media>
-                <ButtonLink
+                <Button
                   className="u-mt-2 u-mb-1-half"
-                  extension="full"
+                  fullWidth
                   label={t('accountForm.installFlagship.label')}
-                  href="#"
+                  onClick={() => this.props.history.push('/')}
                 />
               </>
             )}
@@ -323,13 +325,12 @@ export class AccountForm extends PureComponent {
                 title={t('triggerManager.confirmationModal.title')}
                 description={t('triggerManager.confirmationModal.description')}
                 onClose={this.hideConfirmationModal}
-                open={true}
+                open
                 actions={
                   <>
                     <Button
                       label={t('triggerManager.confirmationModal.primaryText')}
                       onClick={() => this.doSubmit(values, form)}
-                      variant="primary"
                     />
                     <Button
                       label={t(
@@ -394,6 +395,7 @@ AccountForm.defaultProps = {
 }
 
 export default compose(
+  withRouter,
   withConnectionFlow(),
   withLocales,
   withKonnectorLocales
