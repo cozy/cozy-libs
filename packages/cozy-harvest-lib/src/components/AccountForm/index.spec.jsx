@@ -180,13 +180,22 @@ describe('AccountForm', () => {
 
   describe('Submit Button', () => {
     const getButtonDisabledValue = wrapper =>
-      wrapper.dive().find('DefaultButton').props().disabled
+      wrapper.dive().find('[data-testid="submit-btn"]').props().disabled
 
     const assertButtonDisabled = wrapper =>
       expect(getButtonDisabledValue(wrapper)).toBe(true)
 
     const assertButtonEnabled = wrapper =>
       expect(getButtonDisabledValue(wrapper)).toBe(false)
+
+    it('should call onSubmit on click', () => {
+      const { wrapper } = setup({
+        konnector: fixtures.konnectorWithOptionalFields
+      })
+      wrapper.dive().find('[data-testid="submit-btn"]').simulate('click')
+
+      expect(onSubmit).toHaveBeenCalled()
+    })
 
     it('should be disabled if there is required field empty', () => {
       const konnector = {
@@ -262,15 +271,6 @@ describe('AccountForm', () => {
       const { wrapper } = setup({ account, error })
       assertButtonEnabled(wrapper)
     })
-  })
-
-  it('should call onSubmit on click', () => {
-    const { wrapper } = setup({
-      konnector: fixtures.konnectorWithOptionalFields
-    })
-    wrapper.dive().find('DefaultButton').simulate('click')
-
-    expect(onSubmit).toHaveBeenCalled()
   })
 
   describe('focusNext', () => {
