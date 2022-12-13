@@ -7,11 +7,12 @@ import compose from 'lodash/flowRight'
 
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import Link from 'cozy-ui/transpiled/react/Link'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { Dialog, ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
@@ -43,7 +44,8 @@ export class AccountForm extends PureComponent {
     super(props)
 
     this.state = {
-      showConfirmationModal: false
+      showConfirmationModal: false,
+      showCannotConnectModal: false
     }
 
     this.inputs = {}
@@ -55,6 +57,8 @@ export class AccountForm extends PureComponent {
     this.focusNext = this.focusNext.bind(this)
     this.showConfirmationModal = this.showConfirmationModal.bind(this)
     this.hideConfirmationModal = this.hideConfirmationModal.bind(this)
+    this.showCannotConnectModal = this.showCannotConnectModal.bind(this)
+    this.hideCannotConnectModal = this.hideCannotConnectModal.bind(this)
   }
 
   /**
@@ -188,11 +192,19 @@ export class AccountForm extends PureComponent {
   }
 
   showConfirmationModal() {
-    this.setState({ showConfirmationModal: true })
+    this.setState(prev => ({ ...prev, showConfirmationModal: true }))
   }
 
   hideConfirmationModal() {
-    this.setState({ showConfirmationModal: false })
+    this.setState(prev => ({ ...prev, showConfirmationModal: false }))
+  }
+
+  showCannotConnectModal() {
+    this.setState(prev => ({ ...prev, showCannotConnectModal: true }))
+  }
+
+  hideCannotConnectModal() {
+    this.setState(prev => ({ ...prev, showCannotConnectModal: false }))
   }
 
   manageSecretFieldOptions = () => {
@@ -221,7 +233,7 @@ export class AccountForm extends PureComponent {
     const submitting = flowState.running
     const error = flowState.error
 
-    const { fields, name } = konnector
+    const { fields, name, vendor_link } = konnector
     const sanitizedFields = manifest.sanitizeFields(fields)
     fieldHelpers.addForceEncryptedPlaceholder(sanitizedFields, fieldOptions)
 
@@ -287,6 +299,16 @@ export class AccountForm extends PureComponent {
                   inputRefByName={this.inputRefByName}
                   t={t}
                 />
+                <Typography>
+                  <Link
+                    className="u-mt-1"
+                    component="button"
+                    onClick={this.showCannotConnectModal}
+                  >
+                    {t('accountForm.cannotConnectLink')}
+                  </Link>
+                </Typography>
+
                 <Button
                   busy={submitting}
                   className="u-mt-2 u-mb-1-half"
@@ -340,6 +362,29 @@ export class AccountForm extends PureComponent {
                     />
                   </>
                 }
+              />
+            )}
+            {this.state.showCannotConnectModal && (
+              <ConfirmDialog
+                open
+                content={
+                  <>
+                    <Typography variant="h4" className="u-mb-1">
+                      {t('accountForm.cannotConnectModal.title')}
+                    </Typography>
+                    <Typography className="u-mb-1">
+                      {t('accountForm.cannotConnectModal.content')}
+                      <Link
+                        href={vendor_link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        {name}
+                      </Link>
+                    </Typography>
+                  </>
+                }
+                onClose={this.hideCannotConnectModal}
               />
             )}
           </div>
