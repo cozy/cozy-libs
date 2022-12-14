@@ -12,7 +12,7 @@ import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { Dialog, ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
@@ -26,6 +26,7 @@ import { KonnectorJobError, isRunnable } from '../../helpers/konnectors'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
+import CannotConnectModal from './CannotConnectModal'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -365,26 +366,10 @@ export class AccountForm extends PureComponent {
               />
             )}
             {this.state.showCannotConnectModal && (
-              <ConfirmDialog
-                open
-                content={
-                  <>
-                    <Typography variant="h4" className="u-mb-1">
-                      {t('accountForm.cannotConnectModal.title')}
-                    </Typography>
-                    <Typography className="u-mb-1">
-                      {t('accountForm.cannotConnectModal.content')}
-                      <Link
-                        href={vendor_link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        {name}
-                      </Link>
-                    </Typography>
-                  </>
-                }
+              <CannotConnectModal
                 onClose={this.hideCannotConnectModal}
+                vendorName={name}
+                vendorLink={vendor_link}
               />
             )}
           </div>
