@@ -259,6 +259,7 @@
     }
   },
   "PapersList": {
+    "accountName": "Account %{name} : %{identifier}",
     "contactMerged": "%{firstGivenName} and %{secondGivenName} %{familyName}",
     "defaultName": "Contact not specified",
     "label": {
