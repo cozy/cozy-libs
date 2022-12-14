@@ -311,7 +311,7 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
-          contact: 'Account 1',
+          contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
             list: [
@@ -342,7 +342,7 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
-          contact: 'Account 2',
+          contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
             list: [
@@ -376,7 +376,7 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
-          contact: 'Account 1',
+          contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
             list: [
@@ -407,7 +407,7 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
-          contact: 'Account 2',
+          contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
             list: [

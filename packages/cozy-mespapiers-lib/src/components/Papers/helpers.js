@@ -145,7 +145,10 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
       const unsortedlistByConnector = Object.values(filesByConnectors).map(
         value => ({
           withHeader: true,
-          contact: value[0].cozyMetadata.sourceAccountIdentifier,
+          contact: t('PapersList.accountName', {
+            name: value[0].cozyMetadata.createdByApp,
+            identifier: value[0].cozyMetadata.sourceAccountIdentifier
+          }),
           papers: {
             maxDisplay,
             list: value
