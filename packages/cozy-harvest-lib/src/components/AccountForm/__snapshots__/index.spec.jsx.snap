@@ -27,15 +27,6 @@ exports[`AccountForm should not render error 1`] = `
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <ForwardRef>
-      <ForwardRef(WithStyles)
-        className="u-mt-1"
-        component="button"
-        onClick={[Function]}
-      >
-        I can't connect
-      </ForwardRef(WithStyles)>
-    </ForwardRef>
     <ForwardRef
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
@@ -75,15 +66,6 @@ exports[`AccountForm should render 1`] = `
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <ForwardRef>
-      <ForwardRef(WithStyles)
-        className="u-mt-1"
-        component="button"
-        onClick={[Function]}
-      >
-        I can't connect
-      </ForwardRef(WithStyles)>
-    </ForwardRef>
     <ForwardRef
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
@@ -140,15 +122,6 @@ exports[`AccountForm should render error 1`] = `
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <ForwardRef>
-      <ForwardRef(WithStyles)
-        className="u-mt-1"
-        component="button"
-        onClick={[Function]}
-      >
-        I can't connect
-      </ForwardRef(WithStyles)>
-    </ForwardRef>
     <ForwardRef
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
@@ -174,15 +147,6 @@ exports[`AccountForm should render normally when client side konnector with laun
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <ForwardRef>
-      <ForwardRef(WithStyles)
-        className="u-mt-1"
-        component="button"
-        onClick={[Function]}
-      >
-        I can't connect
-      </ForwardRef(WithStyles)>
-    </ForwardRef>
     <ForwardRef
       className="u-mt-2 u-mb-1-half"
       data-testid="submit-btn"
