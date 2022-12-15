@@ -6,8 +6,11 @@ import Link from 'cozy-ui/transpiled/react/Link'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import { useComponentsProps } from '../Providers/ComponentsPropsProvider'
+
 const CannotConnectModal = ({ vendorName, vendorLink, onClose }) => {
   const { t } = useI18n()
+  const { ComponentsProps } = useComponentsProps()
 
   return (
     <ConfirmDialog
@@ -23,6 +26,7 @@ const CannotConnectModal = ({ vendorName, vendorLink, onClose }) => {
               {vendorName}
             </Link>
           </Typography>
+          {ComponentsProps?.CannotConnectModal?.extraContent}
         </>
       }
       onClose={onClose}
