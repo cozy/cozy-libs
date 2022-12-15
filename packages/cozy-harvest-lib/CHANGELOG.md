@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.8...cozy-harvest-lib@10.0.0) (2022-12-15)
+
+
+### Features
+
+* Add a modal to help the user to connect ([1f2aab2](https://github.com/cozy/cozy-libs/commit/1f2aab25d525d6e7816850bac8c3de7d2d04273e))
+* Add CannotConnectModal feature behind a flag ([b6f6669](https://github.com/cozy/cozy-libs/commit/b6f6669c4d625dc9ca1d1f64b961232a5e729533))
+* **harvest:** Add LaunchTriggerAlert ([4bca6bc](https://github.com/cozy/cozy-libs/commit/4bca6bc90d7590896a688f1ca40b677c298e811a))
+* **harvest:** Add OverloadComponentsProvider component ([76648f2](https://github.com/cozy/cozy-libs/commit/76648f20849ed6a7fc5520f15881cf997551fb56))
+* **harvest:** Expose LaunchTriggerCard ([1f85c89](https://github.com/cozy/cozy-libs/commit/1f85c89475c30a989f61f83f0225827a1f835e94))
+* **harvest:** Simply add a div around DataTab ([72b7635](https://github.com/cozy/cozy-libs/commit/72b76350658b3bc04cbec56d171fbf55b7fe582c))
+* **harvest:** Update cozy-ui 60.6.0 to 77.9.0 + cozy-client to 34.2.0 ([d48e7d7](https://github.com/cozy/cozy-libs/commit/d48e7d736e706bcae9b4c9a5cc47e9f91c97fafd))
+* **harvest:** Use new LaunchTriggerAlert (behind flag) ([48c869a](https://github.com/cozy/cozy-libs/commit/48c869a94a6e76d6c8408ede043de096ca440a30))
+
+
+### BREAKING CHANGES
+
+* **harvest:** You must have `cozy-ui >= 77.9.0`,  `cozy-client >= 34.2.0`, `cozy-device-helper >= 2.6.0` and `@material-u/core >= 4.12.4` when using cozy-harvest-lib. `@material-ui/lab` can be removed, it is no longer required.
+
+
+
+
+
 ## [9.32.8](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.7...cozy-harvest-lib@9.32.8) (2022-12-09)
 
 **Note:** Version bump only for package cozy-harvest-lib
