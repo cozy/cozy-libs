@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.0.5...cozy-mespapiers-lib@11.1.0) (2022-12-15)
+
+
+### Features
+
+* **mesPapiers:** Change the wording of the parpersList header ([f7d95ba](https://github.com/cozy/cozy-libs/commit/f7d95ba9718329215609f080941f9efd8bc62eca))
+
+
+
+
+
 ## [11.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.0.4...cozy-mespapiers-lib@11.0.5) (2022-12-09)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
