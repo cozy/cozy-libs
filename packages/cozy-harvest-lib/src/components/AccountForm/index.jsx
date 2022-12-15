@@ -5,6 +5,7 @@ import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import compose from 'lodash/flowRight'
 
+import flag from 'cozy-flags'
 import { isMobile } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Link from 'cozy-ui/transpiled/react/Link'
@@ -300,15 +301,18 @@ export class AccountForm extends PureComponent {
                   inputRefByName={this.inputRefByName}
                   t={t}
                 />
-                <Typography>
-                  <Link
-                    className="u-mt-1"
-                    component="button"
-                    onClick={this.showCannotConnectModal}
-                  >
-                    {t('accountForm.cannotConnectLink')}
-                  </Link>
-                </Typography>
+
+                {flag('harvest.inappconnectors.enabled') && (
+                  <Typography>
+                    <Link
+                      className="u-mt-1"
+                      component="button"
+                      onClick={this.showCannotConnectModal}
+                    >
+                      {t('accountForm.cannotConnectLink')}
+                    </Link>
+                  </Typography>
+                )}
 
                 <Button
                   busy={submitting}
