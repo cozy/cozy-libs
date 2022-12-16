@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { Router } from 'react-router'
+import { HashRouter, useLocation, useNavigate } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { withClient } from 'cozy-client'
 
@@ -328,7 +329,7 @@ MobileRouter.defaultProps = {
 }
 
 MobileRouter.propTypes = {
-  history: PropTypes.object.isRequired,
+  history: PropTypes.object,
 
   appRoutes: PropTypes.node,
   children: PropTypes.node,
@@ -368,7 +369,27 @@ const MobileRouterV3 = ({ children, history, ...props }) => {
   )
 }
 
+const MobileRouterDomV6 = ({ children, ...props }) => {
+  const location = useLocation()
+  const navigate = useNavigate()
+  const history = {
+    replace: path => {
+      navigate(path, { replace: true })
+    },
+    getCurrentLocation: () => {
+      return location
+    }
+  }
+  return (
+    <MobileRouter history={history} {...props}>
+      {children}
+    </MobileRouter>
+  )
+}
+
 const MobileRouterWrapper = ({ children, history, ...props }) => {
+  if (history) {
+    // react-router@3
     return (
       <Router history={history}>
         <MobileRouterV3 history={history} {...props}>
@@ -376,6 +397,14 @@ const MobileRouterWrapper = ({ children, history, ...props }) => {
         </MobileRouterV3>
       </Router>
     )
+  } else {
+    // react-router-dom@6
+    return (
+      <HashRouter>
+        <MobileRouterDomV6 {...props}>{children}</MobileRouterDomV6>
+      </HashRouter>
+    )
+  }
 }
 
 export const DumbMobileRouter = MobileRouter
