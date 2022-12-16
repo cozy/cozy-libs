@@ -124,7 +124,7 @@ export class MobileRouter extends Component {
   }
 
   handleUniversalLink(eventData) {
-    /* 
+    /*
     @TODO: openUniversalLink seems to be called only on iOS.
     android uses handleOpenURL by default ?!
    */
@@ -213,7 +213,6 @@ export class MobileRouter extends Component {
 
   render() {
     const {
-      history,
       appIcon,
       appTitle,
       appRoutes,
@@ -267,7 +266,7 @@ export class MobileRouter extends Component {
         />
       )
     } else {
-      return <Router history={history}>{appRoutes || children}</Router>
+      return <>{appRoutes || children}</>
     }
   }
 
@@ -361,6 +360,24 @@ MobileRouter.propTypes = {
   initialTriedToReconnect: PropTypes.bool
 }
 
+const MobileRouterV3 = ({ children, history, ...props }) => {
+  return (
+    <MobileRouter history={history} {...props}>
+      {children}
+    </MobileRouter>
+  )
+}
+
+const MobileRouterWrapper = ({ children, history, ...props }) => {
+    return (
+      <Router history={history}>
+        <MobileRouterV3 history={history} {...props}>
+          {children}
+        </MobileRouterV3>
+      </Router>
+    )
+}
+
 export const DumbMobileRouter = MobileRouter
 
-export default withClient(MobileRouter)
+export default withClient(MobileRouterWrapper)
