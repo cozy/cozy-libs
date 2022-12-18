@@ -25,7 +25,7 @@
     "cozy-sharing": "^4.8.1",
     "cozy-ui": "^78.0.0",
     "jest-environment-jsdom-sixteen": "2.0.0",
-    "react-router-dom": "6.3.0"
+    "react-router-dom": "6.4.5"
   },
   "dependencies": {
     "@date-io/date-fns": "1",
@@ -45,6 +45,6 @@
     "cozy-realtime": ">=4.2.0",
     "cozy-sharing": ">=4.3.0",
     "cozy-ui": ">=78.0.0",
-    "react-router-dom": ">=6.3.0"
+    "react-router-dom": ">=6.4.5"
   }
 }
