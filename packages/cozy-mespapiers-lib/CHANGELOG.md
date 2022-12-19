@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.1.1...cozy-mespapiers-lib@11.2.0) (2022-12-19)
+
+
+### Features
+
+* Update react-router-dom to 6.4.5 ([acd5b63](https://github.com/cozy/cozy-libs/commit/acd5b63e928c49f5405f5c48f42e3ab238b30918))
+
+
+
+
+
 ## [11.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.1.0...cozy-mespapiers-lib@11.1.1) (2022-12-15)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
