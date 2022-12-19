@@ -30,64 +30,54 @@ export const ShareModal = ({
   sharingDesc,
   twoStepsConfirmationMethods
 }) => {
-  const showShareCozyToCozyForNotes =
-    flag('notes.sharing-cozy-to-cozy') !== null &&
-    flag('notes.sharing-cozy-to-cozy') &&
-    documentType === 'Notes'
+  const shareDialogOnlyByLink =
+    (documentType === 'Notes' && !flag('notes.sharing-cozy-to-cozy')) ||
+    documentType === 'Albums'
 
-  const showShareByEmail =
-    showShareCozyToCozyForNotes &&
-    documentType !== 'Albums' &&
-    !hasSharedParent &&
-    !hasSharedChild
+  const showShareByEmail = !hasSharedParent && !hasSharedChild
   const showShareByLink = documentType !== 'Organizations'
   const showShareOnlyByLink = hasSharedParent || hasSharedChild
   const showWhoHasAccess = documentType !== 'Albums'
 
-  return (
-    <>
-      {(!showShareCozyToCozyForNotes || documentType === 'Albums') && (
-        <ShareDialogOnlyByLink
-          document={document}
-          documentType={documentType}
-          link={link}
-          onClose={onClose}
-          onRevokeLink={onRevokeLink}
-          onShareByLink={onShareByLink}
-          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
-          permissions={permissions}
-        />
-      )}
-      {showShareCozyToCozyForNotes && documentType !== 'Albums' && (
-        <ShareDialogCozyToCozy
-          contacts={contacts}
-          createContact={createContact}
-          document={document}
-          documentType={documentType}
-          groups={groups}
-          hasSharedParent={hasSharedParent}
-          isOwner={isOwner}
-          link={link}
-          needsContactsPermission={needsContactsPermission}
-          onClose={onClose}
-          onRevoke={onRevoke}
-          onRevokeLink={onRevokeLink}
-          onRevokeSelf={onRevokeSelf}
-          onShare={onShare}
-          onShareByLink={onShareByLink}
-          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
-          permissions={permissions}
-          recipients={recipients}
-          sharing={sharing}
-          sharingDesc={sharingDesc}
-          showShareByEmail={showShareByEmail}
-          showShareByLink={showShareByLink}
-          showShareOnlyByLink={showShareOnlyByLink}
-          showWhoHasAccess={showWhoHasAccess}
-          twoStepsConfirmationMethods={twoStepsConfirmationMethods}
-        />
-      )}
-    </>
+  return shareDialogOnlyByLink ? (
+    <ShareDialogOnlyByLink
+      document={document}
+      documentType={documentType}
+      link={link}
+      onClose={onClose}
+      onRevokeLink={onRevokeLink}
+      onShareByLink={onShareByLink}
+      onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+      permissions={permissions}
+    />
+  ) : (
+    <ShareDialogCozyToCozy
+      contacts={contacts}
+      createContact={createContact}
+      document={document}
+      documentType={documentType}
+      groups={groups}
+      hasSharedParent={hasSharedParent}
+      isOwner={isOwner}
+      link={link}
+      needsContactsPermission={needsContactsPermission}
+      onClose={onClose}
+      onRevoke={onRevoke}
+      onRevokeLink={onRevokeLink}
+      onRevokeSelf={onRevokeSelf}
+      onShare={onShare}
+      onShareByLink={onShareByLink}
+      onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+      permissions={permissions}
+      recipients={recipients}
+      sharing={sharing}
+      sharingDesc={sharingDesc}
+      showShareByEmail={showShareByEmail}
+      showShareByLink={showShareByLink}
+      showShareOnlyByLink={showShareOnlyByLink}
+      showWhoHasAccess={showWhoHasAccess}
+      twoStepsConfirmationMethods={twoStepsConfirmationMethods}
+    />
   )
 }
 
