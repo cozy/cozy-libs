@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
-import { Switch, Route, Redirect } from 'react-router'
-import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
+import { useVaultUnlockContext, VaultUnlockPlaceholder } from 'cozy-keys-lib'
+import { withStyles } from 'cozy-ui/transpiled/react/styles'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import {
@@ -10,23 +10,16 @@ import {
 } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { useVaultUnlockContext, VaultUnlockPlaceholder } from 'cozy-keys-lib'
 
+import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
+import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
+import { DatacardOptions } from './Datacards/DatacardOptionsContext'
+import RoutesV4 from './Routes/RoutesV4'
 import KonnectorAccounts from './KonnectorAccounts'
-import AccountModal from './AccountModal'
-import NewAccountModal from './NewAccountModal'
-import EditAccountModal from './EditAccountModal'
-import KonnectorSuccess from './KonnectorSuccess'
-import HarvestModalRoot from './HarvestModalRoot'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import VaultUnlockProvider from './VaultUnlockProvider'
 import { MountPointProvider } from './MountPointContext'
 import DialogContext from './DialogContext'
-import { DatacardOptions } from './Datacards/DatacardOptionsContext'
-
-import { ViewerModal } from '../datacards/ViewerModal'
-import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
-import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 
 /**
  * Dialog will not be centered vertically since we need the modal to "stay in place"
@@ -94,82 +87,12 @@ const Routes = ({
                   ) : (
                     <KonnectorAccounts konnector={konnectorWithTriggers}>
                       {accountsAndTriggers => (
-                        <Switch>
-                          <Route
-                            path={`${konnectorRoot}/`}
-                            exact
-                            render={() => (
-                              <HarvestModalRoot
-                                accounts={accountsAndTriggers}
-                                konnector={konnectorWithTriggers}
-                              />
-                            )}
-                          />
-                          <Route
-                            path={`${konnectorRoot}/accounts/:accountId`}
-                            exact
-                            render={({ match }) => (
-                              <AccountModal
-                                konnector={konnectorWithTriggers}
-                                accountId={match.params.accountId}
-                                accountsAndTriggers={accountsAndTriggers}
-                                onDismiss={onDismiss}
-                                showNewAccountButton={
-                                  !konnectorWithTriggers.clientSide
-                                }
-                                showAccountSelection={
-                                  !konnectorWithTriggers.clientSide
-                                }
-                              />
-                            )}
-                          />
-                          <Route
-                            path={`${konnectorRoot}/accounts/:accountId/edit`}
-                            exact
-                            render={({ match }) => (
-                              <EditAccountModal
-                                konnector={konnectorWithTriggers}
-                                accountId={match.params.accountId}
-                                accounts={accountsAndTriggers}
-                              />
-                            )}
-                          />
-                          <Route
-                            path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
-                            exact
-                            render={routeComponentProps => (
-                              <ViewerModal {...routeComponentProps} />
-                            )}
-                          />
-                          <Route
-                            path={`${konnectorRoot}/new`}
-                            exact
-                            render={() => (
-                              <NewAccountModal
-                                konnector={konnectorWithTriggers}
-                                onDismiss={onDismiss}
-                              />
-                            )}
-                          />
-                          <Route
-                            path={`${konnectorRoot}/accounts/:accountId/success`}
-                            exact
-                            render={({ match }) => {
-                              return (
-                                <KonnectorSuccess
-                                  konnector={konnectorWithTriggers}
-                                  accountId={match.params.accountId}
-                                  accounts={accountsAndTriggers}
-                                  onDismiss={onDismiss}
-                                />
-                              )
-                            }}
-                          />
-                          <Redirect
-                            from={`${konnectorRoot}/*`}
-                            to={`${konnectorRoot}/`}
-                          />
-                        </Switch>
+                        <RoutesV4
+                          konnectorRoot={konnectorRoot}
+                          konnectorWithTriggers={konnectorWithTriggers}
+                          accountsAndTriggers={accountsAndTriggers}
+                          onDismiss={onDismiss}
+                        />
                       )}
                     </KonnectorAccounts>
                   )}
