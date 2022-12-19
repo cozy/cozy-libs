@@ -28,6 +28,7 @@ import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
 import CannotConnectModal from './CannotConnectModal'
+import ConnectionBackdrop from './ConnectionBackdrop'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -47,7 +48,8 @@ export class AccountForm extends PureComponent {
 
     this.state = {
       showConfirmationModal: false,
-      showCannotConnectModal: false
+      showCannotConnectModal: false,
+      showConnectionBackdrop: false
     }
 
     this.inputs = {}
@@ -61,6 +63,8 @@ export class AccountForm extends PureComponent {
     this.hideConfirmationModal = this.hideConfirmationModal.bind(this)
     this.showCannotConnectModal = this.showCannotConnectModal.bind(this)
     this.hideCannotConnectModal = this.hideCannotConnectModal.bind(this)
+    this.showConnectionBackdrop = this.showConnectionBackdrop.bind(this)
+    this.hideConnectionBackdrop = this.hideConnectionBackdrop.bind(this)
   }
 
   /**
@@ -162,6 +166,7 @@ export class AccountForm extends PureComponent {
     form.reset(values)
     onSubmit(values)
     this.hideConfirmationModal()
+    this.showConnectionBackdrop()
   }
 
   /**
@@ -207,6 +212,14 @@ export class AccountForm extends PureComponent {
 
   hideCannotConnectModal() {
     this.setState(prev => ({ ...prev, showCannotConnectModal: false }))
+  }
+
+  showConnectionBackdrop() {
+    this.setState(prev => ({ ...prev, showConnectionBackdrop: true }))
+  }
+
+  hideConnectionBackdrop() {
+    this.setState(prev => ({ ...prev, showConnectionBackdrop: false }))
   }
 
   manageSecretFieldOptions = () => {
@@ -302,7 +315,6 @@ export class AccountForm extends PureComponent {
                   inputRefByName={this.inputRefByName}
                   t={t}
                 />
-
                 {flag('harvest.inappconnectors.enabled') && (
                   <Typography>
                     <Link
@@ -314,9 +326,12 @@ export class AccountForm extends PureComponent {
                     </Link>
                   </Typography>
                 )}
-
                 <Button
-                  busy={submitting}
+                  busy={
+                    submitting &&
+                    (!flag('harvest.inappconnectors.enabled') ||
+                      !this.state.showConnectionBackdrop)
+                  }
                   className="u-mt-2 u-mb-1-half"
                   disabled={
                     submitting ||
@@ -327,6 +342,14 @@ export class AccountForm extends PureComponent {
                   onClick={() => this.handleSubmit(values, form)}
                   data-testid="submit-btn"
                 />
+                {submitting &&
+                  flag('harvest.inappconnectors.enabled') &&
+                  this.state.showConnectionBackdrop && (
+                    <ConnectionBackdrop
+                      name={name}
+                      onClose={this.hideConnectionBackdrop}
+                    />
+                  )}
               </>
             ) : (
               <>
