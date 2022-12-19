@@ -1,5 +1,5 @@
 import React from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom'
+import { Outlet, useNavigate, useParams } from 'react-router-dom'
 
 import { useQuery, useClient, hasQueryBeenLoaded } from 'cozy-client'
 import { SharingProvider } from 'cozy-sharing/dist/SharingProvider'
@@ -12,8 +12,7 @@ import 'cozy-sharing/dist/stylesheet.css'
 
 const FilesViewerWithQuery = () => {
   const navigate = useNavigate()
-  const { fileId, fileTheme } = useParams()
-  const { state } = useLocation()
+  const { fileId } = useParams()
   const client = useClient()
 
   const currentFileId = fileId ?? null
@@ -28,23 +27,21 @@ const FilesViewerWithQuery = () => {
   }
 
   return (
-    <SharingProvider
-      client={client}
-      doctype="io.cozy.files"
-      documentType="Files"
-    >
-      <FilesViewer
-        fileId={currentFileId}
-        files={filesQuery.data}
-        filesQuery={filesQuery}
-        onClose={() =>
-          navigate(
-            state?.background ? state.background : `/paper/files/${fileTheme}`
-          )
-        }
-        onChange={fileId => navigate(`/paper/file/${fileId}`)}
-      />
-    </SharingProvider>
+    <>
+      <SharingProvider
+        client={client}
+        doctype="io.cozy.files"
+        documentType="Files"
+      >
+        <FilesViewer
+          fileId={currentFileId}
+          files={filesQuery.data}
+          filesQuery={filesQuery}
+          onClose={() => navigate('..')}
+        />
+      </SharingProvider>
+      <Outlet />
+    </>
   )
 }
 

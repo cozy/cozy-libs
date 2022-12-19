@@ -36,7 +36,7 @@ const PlaceholderListModal = () => {
     <FixedDialog
       open
       disableGutters
-      onClose={() => navigate(-1)}
+      onClose={() => navigate('..')}
       transitionDuration={state.onBack ? 0 : undefined}
       title={t('PlaceholdersList.title', { name: '' })}
       content={<PlaceholderThemesList setQualifByTheme={setQualifByTheme} />}
@@ -45,7 +45,7 @@ const PlaceholderListModal = () => {
     <FixedDialog
       open
       disableGutters
-      onClose={() => navigate(-1)}
+      onClose={() => navigate('..')}
       onBack={resetCurrentQualif}
       transitionDuration={0}
       title={t('PlaceholdersList.title', {

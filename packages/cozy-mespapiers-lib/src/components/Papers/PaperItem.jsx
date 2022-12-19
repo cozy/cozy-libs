@@ -67,7 +67,7 @@ const PaperItem = ({
     if (isMultiSelectionChoice) {
       changeCurrentMultiSelectionFile(paper)
     } else {
-      navigate(`/paper/file/${paperTheme}/${paper._id}`, {
+      navigate(`/paper/files/${paperTheme}/${paper._id}`, {
         state: { background: `${pathname}${search}` }
       })
     }

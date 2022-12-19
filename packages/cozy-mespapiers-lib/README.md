@@ -158,19 +158,7 @@ const CustomFab = ({ onClick }) => {
 
 # Call modal with URL
 
-In your application, if you want to call a modal to create a Paper, you just have to call the `/paper/create` or `/paper/create/:qualificationLabel` route with the query parameter `backgroundPath=<currentPath>`
-Example:
-
-```jsx
-const { pathname } = useLocation()
-
-const handleClick = () => {
-  history.push({
-    pathname: `/paper/create`,
-    search: `backgroundPath=${pathname}`
-  })
-}
-```
+In your application, if you want to call a modal to create a Paper, you just have to call the `/paper/create` or `/paper/create/:qualificationLabel` route as a child of your current route (and add the `<Outlet />` component to the component of this parent route. see [official documentation](https://reactrouter.com/en/main/components/outlet)).
 
 ***
 

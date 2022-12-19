@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, useParams } from 'react-router-dom'
+import { Navigate, Outlet, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
@@ -70,6 +70,7 @@ const PapersList = ({ selectedThemeLabel = null }) => {
         files={files}
         contacts={contacts}
       />
+      <Outlet />
     </>
   )
 }

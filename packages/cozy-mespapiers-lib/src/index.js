@@ -1,1 +1,1 @@
-export { MesPapiersLibProviders as default } from './components/MesPapiersLibProviders'
+export { default } from './components/MesPapiersLibRoutes'

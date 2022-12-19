@@ -12,11 +12,7 @@ import { getPaperDefinitionByFile, makeCurrentStep } from './helpers'
  */
 export const useCurrentEditInformations = (fileId, model) => {
   const location = useLocation()
-
   const { papersDefinitions } = usePapersDefinitions()
-  const backgroundPath = new URLSearchParams(location.search).get(
-    'backgroundPath'
-  )
   const metadataName = new URLSearchParams(location.search).get('metadata')
 
   const buildedFilesQuery = buildFilesQueryById(fileId)
@@ -38,7 +34,7 @@ export const useCurrentEditInformations = (fileId, model) => {
     file: files?.[0],
     paperDef,
     currentStep,
-    searchParams: { backgroundPath, metadataName },
+    searchParams: { metadataName },
     isLoading: isLoadingFiles
   }
 }

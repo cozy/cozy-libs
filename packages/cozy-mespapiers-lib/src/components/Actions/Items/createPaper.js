@@ -18,10 +18,7 @@ export const createPaper = ({ hideActionsMenu }) => {
           className={className}
           icon="paper"
           onClick={() => {
-            navigate({
-              pathname: `/paper/create`,
-              search: `backgroundPath=${pathname}`
-            })
+            navigate(`${pathname}/create`)
             hideActionsMenu && hideActionsMenu()
           }}
         >

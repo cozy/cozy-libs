@@ -42,7 +42,7 @@ const InformationEdit = () => {
   )
 
   const onClose = () => {
-    navigate(currentEditInformations.searchParams.backgroundPath)
+    navigate('..')
   }
 
   const onConfirm = async () => {
@@ -58,7 +58,7 @@ const InformationEdit = () => {
       .collection(FILES_DOCTYPE)
       .updateMetadataAttribute(fileId, newMetadata)
 
-    navigate(currentEditInformations.searchParams.backgroundPath || '/paper')
+    navigate('..')
   }
 
   const currentAttributes = currentEditInformations?.currentStep?.attributes
@@ -74,7 +74,7 @@ const InformationEdit = () => {
     !currentEditInformations.isLoading &&
     !isInformationEditPermitted(currentEditInformations)
   ) {
-    return <Navigate to={currentEditInformations.searchParams.backgroundPath} />
+    return <Navigate to=".." />
   }
 
   return (

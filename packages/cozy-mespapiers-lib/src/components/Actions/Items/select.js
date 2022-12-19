@@ -19,10 +19,7 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
           className={className}
           icon={selectFromFile ? 'select-all' : 'paperplane'}
           onClick={() => {
-            navigate({
-              pathname: `/paper/multiselect`,
-              search: `backgroundPath=${pathname}`
-            })
+            navigate(`${pathname}/multiselect`)
             hideActionsMenu && hideActionsMenu()
             files.length > 0 &&
               addMultiSelectionFile &&

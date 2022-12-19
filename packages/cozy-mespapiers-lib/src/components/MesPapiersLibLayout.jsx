@@ -1,4 +1,5 @@
 import React from 'react'
+import { Outlet } from 'react-router-dom'
 
 import { RealTimeQueries } from 'cozy-client'
 import flag from 'cozy-flags'
@@ -9,7 +10,6 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import { ModalStack } from './Contexts/ModalProvider'
-import { MesPapiersLibRoutes } from './MesPapiersLibRoutes'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 
 export const MesPapiersLibLayout = () => {
@@ -33,7 +33,7 @@ export const MesPapiersLibLayout = () => {
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
         />
       ) : (
-        <MesPapiersLibRoutes />
+        <Outlet />
       )}
       <RealTimeQueries doctype="io.cozy.files" />
       <RealTimeQueries doctype="io.cozy.mespapiers.settings" />

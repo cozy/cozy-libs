@@ -52,7 +52,6 @@ describe('useCurrentEditInformations', () => {
     expect(result.current.paperDef).toBe(null)
     expect(result.current.currentStep).toBe(null)
     expect(result.current.searchParams).toEqual({
-      backgroundPath: null,
       metadataName: 'issueDate'
     })
   })
@@ -74,7 +73,6 @@ describe('useCurrentEditInformations', () => {
     expect(result.current.currentStep.attributes).toHaveLength(1)
     expect(result.current.currentStep.attributes[0].name).toBe('issueDate')
     expect(result.current.searchParams).toEqual({
-      backgroundPath: null,
       metadataName: 'issueDate'
     })
   })
@@ -93,7 +91,6 @@ describe('useCurrentEditInformations', () => {
     expect(result.current.paperDef).toHaveProperty('label', 'caf')
     expect(result.current.currentStep).toBe(null)
     expect(result.current.searchParams).toEqual({
-      backgroundPath: null,
       metadataName: null
     })
   })
@@ -114,7 +111,6 @@ describe('useCurrentEditInformations', () => {
     expect(result.current.paperDef).toBe(null)
     expect(result.current.currentStep).toBe(null)
     expect(result.current.searchParams).toEqual({
-      backgroundPath: null,
       metadataName: 'issueDate'
     })
   })
