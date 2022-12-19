@@ -13,13 +13,13 @@ import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
 import { ModalProvider, ModalStack } from './Contexts/ModalProvider'
 import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
 import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
-import { AppRouter } from './AppRouter'
+import { MesPapiersLibRoutes } from './AppRouter'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 import { getComponents } from '../helpers/defaultComponent'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
 
-const App = () => {
+const MesPapiersLibLayout = () => {
   const { t } = useI18n()
   const { customPapersDefinitions, papersDefinitions } = usePapersDefinitions()
 
@@ -40,7 +40,7 @@ const App = () => {
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
         />
       ) : (
-        <AppRouter />
+        <MesPapiersLibRoutes />
       )}
       <RealTimeQueries doctype="io.cozy.files" />
       <RealTimeQueries doctype="io.cozy.mespapiers.settings" />
@@ -50,7 +50,7 @@ const App = () => {
   )
 }
 
-const MesPapiersLib = ({ lang, components }) => {
+const MesPapiersLibProviders = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
   const { PapersFab, Onboarding } = getComponents(components)
 
@@ -61,7 +61,7 @@ const MesPapiersLib = ({ lang, components }) => {
           <PapersDefinitionsProvider>
             <ModalProvider>
               <OnboardingProvider OnboardingComponent={Onboarding}>
-                <App />
+                <MesPapiersLibLayout />
               </OnboardingProvider>
               {PapersFab && (
                 <PapersFabWrapper>
@@ -76,9 +76,9 @@ const MesPapiersLib = ({ lang, components }) => {
   )
 }
 
-MesPapiersLib.propTypes = {
+MesPapiersLibProviders.propTypes = {
   lang: PropTypes.string,
   components: PropTypes.objectOf(PropTypes.func)
 }
 
-export default MesPapiersLib
+export default MesPapiersLibProviders

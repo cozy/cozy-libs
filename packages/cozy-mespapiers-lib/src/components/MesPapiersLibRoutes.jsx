@@ -14,7 +14,7 @@ import ContactEdit from './Views/ContactEdit'
 
 import OnboardedGuardedRoute from './OnboardedGuardedRoute'
 
-export const AppRouter = () => {
+export const MesPapiersLibRoutes = () => {
   const location = useLocation()
   const backgroundPath = new URLSearchParams(location.search).get(
     'backgroundPath'
