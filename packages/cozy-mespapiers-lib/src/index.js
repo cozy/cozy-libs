@@ -1,1 +1,1 @@
-export { default } from './components/MesPapiersLib'
+export { MesPapiersLibProviders as default } from './components/MesPapiersLibProviders'
