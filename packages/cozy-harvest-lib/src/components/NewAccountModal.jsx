@@ -2,6 +2,7 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -71,7 +72,10 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
             onLoginSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
               let path = `/accounts/${accountId}`
-              if (trigger.worker !== 'client') {
+              if (
+                !flag('harvest.inappconnectors.enabled') &&
+                trigger.worker !== 'client'
+              ) {
                 path += '/success'
               }
               replaceHistory(path)
@@ -79,7 +83,10 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
             onSuccess={trigger => {
               const accountId = triggersModel.getAccountId(trigger)
               let path = `/accounts/${accountId}`
-              if (trigger.worker !== 'client') {
+              if (
+                !flag('harvest.inappconnectors.enabled') &&
+                trigger.worker !== 'client'
+              ) {
                 path += '/success'
               }
               replaceHistory(path)

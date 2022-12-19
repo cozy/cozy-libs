@@ -1,6 +1,8 @@
 import React from 'react'
 import { Routes, Route, Navigate, useParams } from 'react-router-dom'
 
+import flag from 'cozy-flags'
+
 import { ViewerModal } from '../../datacards/ViewerModal'
 import AccountModal from '../AccountModal'
 import NewAccountModal from '../NewAccountModal'
@@ -71,21 +73,23 @@ const RoutesV6 = ({
           </HarvestParamsWrapper>
         }
       />
-      <Route
-        path="accounts/:accountId/success"
-        element={
-          <HarvestParamsWrapper>
-            {params => (
-              <KonnectorSuccess
-                konnector={konnectorWithTriggers}
-                accountId={params.accountId}
-                accounts={accountsAndTriggers}
-                onDismiss={onDismiss}
-              />
-            )}
-          </HarvestParamsWrapper>
-        }
-      />
+      {!flag('harvest.inappconnectors.enabled') && (
+        <Route
+          path="accounts/:accountId/success"
+          element={
+            <HarvestParamsWrapper>
+              {params => (
+                <KonnectorSuccess
+                  konnector={konnectorWithTriggers}
+                  accountId={params.accountId}
+                  accounts={accountsAndTriggers}
+                  onDismiss={onDismiss}
+                />
+              )}
+            </HarvestParamsWrapper>
+          }
+        />
+      )}
 
       <Route
         path="viewer/:accountId/:folderToSaveId/:fileIndex"
