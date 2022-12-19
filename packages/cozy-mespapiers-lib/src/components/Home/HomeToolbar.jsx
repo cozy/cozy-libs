@@ -21,7 +21,7 @@ const HomeToolbar = () => {
   return (
     <>
       <BarLeft>
-        <IconButton onClick={() => navigate(-1)}>
+        <IconButton onClick={() => navigate('..')}>
           <Icon icon="previous" />
         </IconButton>
       </BarLeft>

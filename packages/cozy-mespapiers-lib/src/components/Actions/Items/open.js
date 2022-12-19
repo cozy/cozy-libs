@@ -19,8 +19,9 @@ export const open = () => {
           className={className}
           icon="openwith"
           onClick={() =>
+            // The path is absolute because this link can be present on the route "/", which does not have "fileTheme".
             navigate({
-              pathname: `/paper/file/${fileTheme}/${fileId}`
+              pathname: `/paper/files/${fileTheme}/${fileId}`
             })
           }
         >

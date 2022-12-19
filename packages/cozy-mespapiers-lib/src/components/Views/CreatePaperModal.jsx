@@ -15,7 +15,6 @@ const CreatePaperModal = () => {
   const { qualificationLabel } = useParams()
   const { papersDefinitions } = usePapersDefinitions()
   const { setCurrentDefinition, currentDefinition } = useStepperDialog()
-  const backgroundPath = new URLSearchParams(search).get('backgroundPath')
   const country = new URLSearchParams(search).get('country')
   const allPlaceholders = useMemo(
     () =>
@@ -28,7 +27,7 @@ const CreatePaperModal = () => {
   )
 
   const formModel = allPlaceholders[0]
-  const onClose = () => navigate(backgroundPath)
+  const onClose = () => navigate('..')
 
   useEffect(() => {
     if (formModel && currentDefinition !== formModel) {

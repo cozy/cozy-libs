@@ -31,7 +31,7 @@ const ContactEdit = () => {
   const [isBusy, setIsBusy] = useState(false)
 
   const onClose = () => {
-    navigate(currentEditInformation.searchParams.backgroundPath)
+    navigate('..')
   }
 
   const onConfirm = async contactIdsSelected => {
@@ -46,7 +46,7 @@ const ContactEdit = () => {
   const isLoading = currentEditInformation.isLoading || isLoadingContacts
 
   if (!isLoading && !currentEditInformation.file) {
-    return <Navigate to={currentEditInformation.searchParams.backgroundPath} />
+    return <Navigate to=".." />
   }
 
   return isLoading ? (

@@ -31,7 +31,7 @@ const PageEdit = () => {
   }, [value, currentPage])
 
   const onClose = () => {
-    navigate(currentEditInformation.searchParams.backgroundPath || '/paper')
+    navigate('..')
   }
 
   const onConfirm = async newValue => {
@@ -56,7 +56,7 @@ const PageEdit = () => {
   }
 
   if (!currentEditInformation.isLoading && !currentEditInformation.file) {
-    return <Navigate to={currentEditInformation.searchParams.backgroundPath} />
+    return <Navigate to=".." />
   }
 
   return isMobile ? (

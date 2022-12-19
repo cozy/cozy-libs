@@ -22,7 +22,7 @@ const PapersListToolbar = ({ selectedThemeLabel }) => {
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
   const themeLabel = scannerT(`items.${currentFileTheme}`)
-  const onBack = () => navigate('/paper')
+  const onBack = () => navigate('..')
 
   if (isMultiSelectionActive) {
     return null

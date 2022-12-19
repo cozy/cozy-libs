@@ -43,13 +43,10 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   const [placeholderSelected, setPlaceholderSelected] = useState(null)
   const { papersDefinitions } = usePapersDefinitions()
   const navigate = useNavigate()
-  const { search } = useLocation()
+  const { pathname } = useLocation()
   const styles = useStyles()
   const scannerT = useScannerI18n()
 
-  // Get the backgroundPath to pass it to the next modal
-  // Otherwise the next modal will have the url of this modal in backgroundPath
-  const backgroundPath = new URLSearchParams(search).get('backgroundPath')
   const allPlaceholders = useMemo(
     () =>
       findPlaceholdersByQualification(papersDefinitions, currentQualifItems),
@@ -66,11 +63,11 @@ const PlaceholdersList = ({ currentQualifItems }) => {
 
   const redirectPaperCreation = placeholder => {
     const countrySearchParam = `${
-      placeholder.country ? `country=${placeholder.country}&` : ''
+      placeholder.country ? `country=${placeholder.country}` : ''
     }`
     return navigate({
-      pathname: `/paper/create/${placeholder.label}`,
-      search: `${countrySearchParam}backgroundPath=${backgroundPath}`
+      pathname: `${pathname}/${placeholder.label}`,
+      search: `${countrySearchParam}`
     })
   }
 
