@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 
-import { getPlatform, nativeLinkOpen } from 'cozy-device-helper'
+import { nativeLinkOpen } from 'cozy-device-helper'
 import Button from 'cozy-ui/transpiled/react/Button'
 import { withClient } from 'cozy-client'
 
 import { generateOnboardingQueryPart } from '../utils/onboarding'
+
+const MANAGER_URL = 'https://manager.cozycloud.cc/cozy/create'
 
 export class ButtonLinkRegistration extends Component {
   constructor(props) {
@@ -16,16 +18,11 @@ export class ButtonLinkRegistration extends Component {
   state = {
     url: ''
   }
-  static getManagerUrl() {
-    return `https://manager.cozycloud.cc/cozy/create?pk_campaign=drive-`
-  }
   async generateUrl() {
     const oauthOptions = await generateOnboardingQueryPart(
       this.props.client.options.oauth
     )
-    const url = `${ButtonLinkRegistration.getManagerUrl()}${
-      getPlatform() || 'browser'
-    }&onboarding=${oauthOptions}`
+    const url = `${MANAGER_URL}?onboarding=${oauthOptions}`
     this.setState({ url })
     return url
   }
