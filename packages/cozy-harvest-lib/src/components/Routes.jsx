@@ -15,11 +15,13 @@ import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
 import RoutesV4 from './Routes/RoutesV4'
+import RoutesV6 from './Routes/RoutesV6'
 import KonnectorAccounts from './KonnectorAccounts'
 import HarvestVaultProvider from './HarvestVaultProvider'
 import VaultUnlockProvider from './VaultUnlockProvider'
 import { MountPointProvider } from './MountPointContext'
 import DialogContext from './DialogContext'
+import { isRouterV6 } from './hoc/withRouter'
 
 /**
  * Dialog will not be centered vertically since we need the modal to "stay in place"
@@ -51,6 +53,8 @@ const Routes = ({
   datacardOptions,
   ComponentsProps
 }) => {
+  const RoutesV4orV6 = isRouterV6 ? RoutesV6 : RoutesV4
+
   const { t } = useI18n()
   const dialogContext = useCozyDialog({
     size: 'l',
@@ -87,7 +91,7 @@ const Routes = ({
                   ) : (
                     <KonnectorAccounts konnector={konnectorWithTriggers}>
                       {accountsAndTriggers => (
-                        <RoutesV4
+                        <RoutesV4orV6
                           konnectorRoot={konnectorRoot}
                           konnectorWithTriggers={konnectorWithTriggers}
                           accountsAndTriggers={accountsAndTriggers}
