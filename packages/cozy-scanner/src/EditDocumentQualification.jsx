@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { withClient } from 'cozy-client'
-import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import withOffline from 'cozy-ui/transpiled/react/helpers/withOffline'
 
@@ -12,15 +11,6 @@ import Button from 'cozy-ui/transpiled/react/Button'
 import DocumentQualification from './DocumentQualification'
 import { getThemeByItem } from './DocumentTypeDataHelpers'
 
-const pushAnalytics = item => {
-  const tracker = getTracker()
-  if (tracker) {
-    tracker.push(['trackEvent', 'Drive', 'Scanner', 'Edit Qualification'])
-    if (item && item.label) {
-      tracker.push(['trackEvent', 'Drive', 'Qualification', item.label])
-    }
-  }
-}
 /**
  * Display the Modal to Edit the category of the selected files
  */
@@ -74,7 +64,6 @@ class EditDocumentQualification extends Component {
                         document._id,
                         { qualification }
                       )
-                    pushAnalytics(item)
                     if (onDescribed) onDescribed(updatedFile.data)
                     onClose()
                     Alerter.success(t('Scan.successful.qualified_ok'))

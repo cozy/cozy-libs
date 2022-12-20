@@ -9,22 +9,6 @@ import { FixedDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 import Button from 'cozy-ui/transpiled/react/Button'
 
-import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
-
-const pushAnalytics = qualification => {
-  const tracker = getTracker()
-  if (tracker) {
-    tracker.push(['trackEvent', 'Drive', 'Scanner', 'Add Qualification'])
-    if (qualification && qualification.label) {
-      tracker.push([
-        'trackEvent',
-        'Drive',
-        'Qualification',
-        qualification.label
-      ])
-    }
-  }
-}
 /**
  * ModalScannerQualification component
  *
@@ -73,7 +57,6 @@ class ModalScannerQualification extends Component {
               theme="primary"
               label={t('Scan.save')}
               onClick={async () => {
-                pushAnalytics(qualification)
                 try {
                   await onSave(qualification, filename)
                 } catch (error) {
