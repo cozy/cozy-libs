@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
-import { getTracker } from 'cozy-ui/transpiled/react/helpers/tracker'
 
 import SharingContext from './context'
 import reducer, {
@@ -36,21 +35,6 @@ import {
   createSharingInStore,
   updateSharingInStore
 } from './helpers/sharings'
-
-const isFile = ({ _type }) => _type === 'io.cozy.files'
-const track = (document, action) => {
-  const tracker = getTracker()
-  if (!tracker) {
-    return
-  }
-  tracker.push([
-    'trackEvent',
-    isFile(document) ? 'Drive' : 'Photos',
-    action,
-    `${action}${isFile(document) ? 'File' : 'Album'}`
-  ])
-}
-const trackSharingByLink = document => track(document, 'shareByLink')
 
 const SHARING_DOCTYPE = 'io.cozy.sharings'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'
@@ -295,7 +279,6 @@ export class SharingProvider extends Component {
   }
 
   shareByLink = async document => {
-    trackSharingByLink(document)
     const resp = await this.permissionCol.createSharingLink(document)
     this.dispatch(addSharingLink(resp.data))
     return resp
