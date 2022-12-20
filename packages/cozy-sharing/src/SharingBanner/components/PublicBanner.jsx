@@ -8,9 +8,10 @@ import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
-import getHomeLinkHref from './getHomeLinkHref'
 
 import styles from './publicBanner.styl'
+
+const HOME_LINK_HREF = 'https://manager.cozycloud.cc/cozy/create'
 
 const getPublicNameFromSharing = sharing =>
   sharing.attributes.members[0].public_name
@@ -146,7 +147,7 @@ const SharingBannerByLink = ({ onClose }) => {
           theme="text"
           label={t('Share.create-cozy')}
           icon={CozyHomeLinkIcon}
-          href={getHomeLinkHref('sharing')}
+          href={HOME_LINK_HREF}
         />
       }
       buttonTwo={
