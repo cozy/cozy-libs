@@ -86,7 +86,7 @@
     "cozy-ui": ">=77.9.0",
     "leaflet": "^1.7.1",
     "react-router": "3.2.6",
-    "react-router-dom": "^5.0.1"
+    "react-router-dom": ">=4.3.1"
   },
   "sideEffects": false
 }
