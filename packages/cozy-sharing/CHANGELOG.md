@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [4.8.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.8.1...cozy-sharing@4.8.2) (2022-12-20)
+
+
+### Bug Fixes
+
+* Reactive share modal for all apps ([7ff734b](https://github.com/cozy/cozy-libs/commit/7ff734b7506fc74aa3740de6bec7b1f89b21f505))
+
+
+
+
+
 ## [4.8.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.8.0...cozy-sharing@4.8.1) (2022-12-09)
 
 **Note:** Version bump only for package cozy-sharing
