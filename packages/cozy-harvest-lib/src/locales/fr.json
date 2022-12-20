@@ -88,9 +88,10 @@
       },
       "lastSync": {
         "label": "Mise à jour :",
-        "syncing": "En cours...",
+        "syncing": "Récupération des données…",
         "unknown": "Indéterminée",
-        "format": "Le D MMMM YYYY [à] HH[:]mm"
+        "afterSomeTimes": "Sync. il y a %{times}",
+        "justNow": "Sync. à l'instant"
       }
     },
     "appLink": {

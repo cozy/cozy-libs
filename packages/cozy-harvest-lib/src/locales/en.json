@@ -88,9 +88,10 @@
       },
       "lastSync": {
         "label": "Update:",
-        "syncing": "Running…",
+        "syncing": "Data recovery…",
         "unknown": "Unknown",
-        "format": "MMMM D[,] YYYY [at] HH[:]mm"
+        "afterSomeTimes": "Sync. %{times} ago",
+        "justNow": "Sync. just now"
       }
     },
     "appLink": {

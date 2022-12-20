@@ -68,6 +68,7 @@
     "jest-resolve-cached": "1.0.0",
     "jsdom": "16.5.0",
     "leaflet": "1.8.0",
+    "mockdate": "^3.0.5",
     "prop-types": "15.7.2",
     "react": "16.12.0",
     "react-dom": "16.13.0",
