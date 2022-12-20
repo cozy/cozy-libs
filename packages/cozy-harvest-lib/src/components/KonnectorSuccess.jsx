@@ -1,18 +1,18 @@
 import get from 'lodash/get'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
+import DialogContent from '@material-ui/core/DialogContent'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import DriveLink from '../components/KonnectorConfiguration/Success/DriveLink'
-import BanksLink from '../components/KonnectorConfiguration/Success/BanksLink'
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
-import Markdown from './Markdown'
 import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'
-import DialogContent from '@material-ui/core/DialogContent'
+import DriveLink from './KonnectorConfiguration/Success/DriveLink'
+import BanksLink from './KonnectorConfiguration/Success/BanksLink'
+import withAdaptiveRouter from './hoc/withRouter'
+import Markdown from './Markdown'
 
 const SuccessImage = () => <ConnectingIllu className="u-w-4 u-h-4" />
 
@@ -123,4 +123,4 @@ KonnectorSuccess.propTypes = {
 
 export { SuccessImage, BanksLink, DriveLink }
 
-export default withRouter(translate()(KonnectorSuccess))
+export default withAdaptiveRouter(translate()(KonnectorSuccess))

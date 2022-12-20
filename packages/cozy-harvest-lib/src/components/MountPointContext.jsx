@@ -1,8 +1,9 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
-import { withRouter } from 'react-router'
 
-const MountPointContext = React.createContext()
+import withAdaptiveRouter from './hoc/withRouter'
+
+export const MountPointContext = React.createContext()
 
 export class RawMountPointProvider extends React.Component {
   constructor(props) {
@@ -14,26 +15,17 @@ export class RawMountPointProvider extends React.Component {
     this.state = {
       baseRoute: props.baseRoute || '/',
       pushHistory: this.pushHistory,
-      replaceHistory: this.replaceHistory
+      replaceHistory: this.replaceHistory,
+      location: props.location
     }
   }
 
-  historyAction(route, method) {
-    const { history } = this.props
-    const { baseRoute } = this.state
-    const segments = '/'.concat(
-      baseRoute.split('/').concat(route.split('/')).filter(Boolean).join('/')
-    )
-
-    history[method](segments)
-  }
-
   pushHistory(route) {
-    this.historyAction(route, 'push')
+    this.props.historyAction(route, 'push')
   }
 
   replaceHistory(route) {
-    this.historyAction(route, 'replace')
+    this.props.historyAction(route, 'replace')
   }
 
   render() {
@@ -50,25 +42,26 @@ RawMountPointProvider.propTypes = {
   history: PropTypes.object
 }
 
-const withMountPointHistory = BaseComponent => {
+export const withMountPointProps = BaseComponent => {
   const Component = props => {
-    const { pushHistory, replaceHistory } = useContext(MountPointContext)
+    const { pushHistory, replaceHistory, location } =
+      useContext(MountPointContext)
 
     return (
       <BaseComponent
         pushHistory={pushHistory}
         replaceHistory={replaceHistory}
+        location={location}
         {...props}
       />
     )
   }
 
-  Component.displayName = `withMountPointHistory(${
+  Component.displayName = `withMountPointProps(${
     BaseComponent.displayName || BaseComponent.name
   })`
 
   return Component
 }
 
-const MountPointProvider = withRouter(RawMountPointProvider)
-export { MountPointContext, MountPointProvider, withMountPointHistory }
+export const MountPointProvider = withAdaptiveRouter(RawMountPointProvider)

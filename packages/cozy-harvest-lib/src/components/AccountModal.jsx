@@ -14,7 +14,7 @@ import * as triggersModel from '../helpers/triggers'
 import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from './KonnectorModalHeader'
-import { withMountPointHistory } from './MountPointContext'
+import { withMountPointProps } from './MountPointContext'
 import withLocales from './hoc/withLocales'
 import DialogContent from '@material-ui/core/DialogContent'
 import {
@@ -53,6 +53,7 @@ export class AccountModal extends Component {
     fetching: true,
     error: null
   }
+
   async componentDidMount() {
     await this.loadSelectedAccountId()
   }
@@ -121,12 +122,12 @@ export class AccountModal extends Component {
       intentsApi,
       innerAccountModalOverrides
     } = this.props
-
     const { trigger, account, fetching, error } = this.state
+
     return (
       <>
         <KonnectorModalHeader konnector={konnector}>
-          {showAccountSelection ? (
+          {showAccountSelection && (
             <AccountSelectBox
               loading={!account}
               selectedAccount={account}
@@ -138,9 +139,9 @@ export class AccountModal extends Component {
                 pushHistory('/new')
               }}
             />
-          ) : null}
+          )}
         </KonnectorModalHeader>
-        {error || fetching ? (
+        {(error || fetching) && (
           <DialogContent className="u-pb-2">
             {error && (
               <Infos
@@ -163,7 +164,7 @@ export class AccountModal extends Component {
               </div>
             )}
           </DialogContent>
-        ) : null}
+        )}
         {!error && !fetching && (
           <DialogContent className={isMobile ? 'u-p-0' : 'u-pt-0'}>
             <KonnectorAccountTabs
@@ -226,6 +227,6 @@ AccountModal.propTypes = {
 export default flow(
   withClient,
   withLocales,
-  withMountPointHistory,
+  withMountPointProps,
   withBreakpoints()
 )(AccountModal)
