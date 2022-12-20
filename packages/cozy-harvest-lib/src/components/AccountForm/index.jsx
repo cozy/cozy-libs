@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { withRouter } from 'react-router'
 import { Form } from 'react-final-form'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
@@ -15,6 +14,7 @@ import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
+import withAdaptiveRouter from '../hoc/withRouter'
 import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
@@ -230,6 +230,7 @@ export class AccountForm extends PureComponent {
       showError,
       t,
       fieldOptions,
+      historyAction,
       flowState
     } = this.props
     const submitting = flowState.running
@@ -343,7 +344,7 @@ export class AccountForm extends PureComponent {
                   className="u-mt-2 u-mb-1-half"
                   fullWidth
                   label={t('accountForm.installFlagship.label')}
-                  onClick={() => this.props.history.push('/')}
+                  onClick={() => historyAction('/', 'push')}
                 />
               </>
             )}
@@ -429,7 +430,7 @@ AccountForm.defaultProps = {
 }
 
 export default compose(
-  withRouter,
+  withAdaptiveRouter,
   withConnectionFlow(),
   withLocales,
   withKonnectorLocales

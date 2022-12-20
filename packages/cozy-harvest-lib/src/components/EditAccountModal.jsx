@@ -19,17 +19,16 @@ import {
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 import TriggerManager from './TriggerManager'
-import { withMountPointHistory } from './MountPointContext'
+import { withMountPointProps } from './MountPointContext'
 import logger from '../logger'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
-import { withRouter } from 'react-router'
 import { intentsApiProptype } from '../helpers/proptypes'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }
 
-const DumbEditAccountModal = withRouter(
+const DumbEditAccountModal = withMountPointProps(
   ({
     konnector,
     account,
@@ -210,6 +209,6 @@ EditAccountModal.propTypes = {
 
 export default flow(
   withClient,
-  withMountPointHistory,
+  withMountPointProps,
   withTracker
 )(EditAccountModal)

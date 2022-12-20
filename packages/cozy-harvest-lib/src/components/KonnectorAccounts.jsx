@@ -2,21 +2,21 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 import compose from 'lodash/flowRight'
-import { withRouter } from 'react-router'
+import DialogContent from '@material-ui/core/DialogContent'
 
+import CozyRealtime from 'cozy-realtime'
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import CozyRealtime from 'cozy-realtime'
-import { fetchAccountsFromTriggers } from '../connections/accounts'
 
+import { fetchAccountsFromTriggers } from '../connections/accounts'
 import { fetchTrigger } from '../connections/triggers'
-import KonnectorModalHeader from './KonnectorModalHeader'
 import logger from '../logger'
-import DialogContent from '@material-ui/core/DialogContent'
+import withAdaptiveRouter from './hoc/withRouter'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 export class KonnectorAccounts extends React.Component {
   constructor(props) {
@@ -162,4 +162,8 @@ KonnectorAccounts.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default compose(withRouter, translate(), withClient)(KonnectorAccounts)
+export default compose(
+  withAdaptiveRouter,
+  translate(),
+  withClient
+)(KonnectorAccounts)
