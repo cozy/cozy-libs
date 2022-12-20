@@ -126,7 +126,7 @@ describe('LaunchTriggerCard', () => {
         flow
       }
     })
-    expect(root.html()).toContain('Running…')
+    expect(root.html()).toContain('Data recovery…')
   })
 
   it('should display a syncing message when a trigger launch is expected', async () => {
@@ -138,6 +138,6 @@ describe('LaunchTriggerCard', () => {
         flow
       }
     })
-    expect(root.html()).toContain('Running…')
+    expect(root.html()).toContain('Data recovery…')
   })
 })

@@ -85,7 +85,8 @@
         "label": "Bijwerken:",
         "syncing": "Bezig met uitvoeren…",
         "unknown": "Onbekend",
-        "format": "D MMMM YYYY [om] HH[:]mm"
+        "afterSomeTimes": "Sync. %{times} geleden",
+        "justNow": "Sync. onmiddellijk"
       }
     },
     "appLink": {
