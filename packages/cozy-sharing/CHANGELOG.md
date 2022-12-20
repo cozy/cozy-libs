@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [4.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.8.2...cozy-sharing@4.9.0) (2022-12-20)
+
+
+### Features
+
+* Remove getHomeLinkHref ([57bf707](https://github.com/cozy/cozy-libs/commit/57bf707de15c2db76964c115e50481f1204c1ca1))
+* Remove tracker calls for cozy-sharing ([46728c2](https://github.com/cozy/cozy-libs/commit/46728c259e4bd1a93913d5d30fb3a78b23a2aab4))
+
+
+
+
+
 ## [4.8.2](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.8.1...cozy-sharing@4.8.2) (2022-12-20)
 
 

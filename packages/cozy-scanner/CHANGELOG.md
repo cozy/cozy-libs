@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.5.0 (2022-12-20)
+
+
+### Features
+
+* Add `illustrationSize` prop to paperConfiguration ([d0b8524](https://github.com/cozy/cozy-libs/commit/d0b852479ff95100a6c1c0b7d3f6271e8859cc40))
+* Remove Matomo from cozy-scanner ([8509f87](https://github.com/cozy/cozy-libs/commit/8509f87e37933256db98576ce62360930aa4c668))
+
+
+
+
+
 ## 2.4.7 (2022-11-14)
 
 **Note:** Version bump only for package cozy-scanner

@@ -1,6 +1,6 @@
 {
   "name": "cozy-sharing",
-  "version": "4.8.2",
+  "version": "4.9.0",
   "description": "Provides sharing login for React applications.",
   "main": "dist/index.js",
   "author": "Cozy",

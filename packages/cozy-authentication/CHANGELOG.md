@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.11.0 (2022-12-20)
+
+
+### Features
+
+* Add `illustrationSize` prop to paperConfiguration ([d0b8524](https://github.com/cozy/cozy-libs/commit/d0b852479ff95100a6c1c0b7d3f6271e8859cc40))
+* Remove pk_campaign query string in links ([86cac7e](https://github.com/cozy/cozy-libs/commit/86cac7e6c76e036b459b48e3aabe0ecd5f8d1e8e))
+
+
+
+
+
 ## 2.10.11 (2022-11-14)
 
 **Note:** Version bump only for package cozy-authentication
