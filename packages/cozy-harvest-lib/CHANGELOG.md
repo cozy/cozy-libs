@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.0.0...cozy-harvest-lib@11.1.0) (2022-12-21)
+
+
+### Features
+
+* **Harvest:** See the different states of a connector ([a0fbf15](https://github.com/cozy/cozy-libs/commit/a0fbf156f514255f85ec22c191460ee87ddfb8cb))
+
+
+
+
+
 # [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@10.0.0...cozy-harvest-lib@11.0.0) (2022-12-21)
 
 
