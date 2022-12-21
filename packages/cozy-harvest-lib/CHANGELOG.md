@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@10.0.0...cozy-harvest-lib@11.0.0) (2022-12-21)
+
+
+### Features
+
+* **harvest:** Add routes v6 ([9927d78](https://github.com/cozy/cozy-libs/commit/9927d782bd1608225537c4062090cb104e40ee27))
+* **harvest:** Replace router dependency in component by context dep ([e66ef79](https://github.com/cozy/cozy-libs/commit/e66ef79a3df464b7625baad11683b6776cfd5c30))
+* **harvest:** Update router packages ([3f08dd2](https://github.com/cozy/cozy-libs/commit/3f08dd2a99fb516c45ff938ca528dece63d10ca3))
+
+
+### BREAKING CHANGES
+
+* **harvest:** `react-router-dom` is `>=4` as peer dependencies.
+
+
+
+
+
 # [10.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@9.32.8...cozy-harvest-lib@10.0.0) (2022-12-15)
 
 
