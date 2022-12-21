@@ -12,6 +12,10 @@ jest.mock('../Papers/helpers', () => ({
   buildFilesByContacts: jest.fn()
 }))
 
+jest.mock('cozy-harvest-lib', () => ({
+  LaunchTriggerCard: () => <div>LaunchTriggerCard</div>
+}))
+
 const mockPaperslistByContact = [
   {
     withHeader: true,

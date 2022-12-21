@@ -5,6 +5,10 @@ import { render } from '@testing-library/react'
 import AppLike from '../../../test/components/AppLike'
 import PapersList from './PapersList'
 
+jest.mock('cozy-harvest-lib', () => ({
+  LaunchTriggerCard: () => <div>LaunchTriggerCard</div>
+}))
+
 const mockPapers = {
   maxDisplay: 2,
   list: [

@@ -1,9 +1,13 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useNavigate } from 'react-router-dom'
+import flag from 'cozy-flags'
 
-import { useClient } from 'cozy-client'
+import { LaunchTriggerCard } from 'cozy-harvest-lib'
+import { useClient, useQuery } from 'cozy-client'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import PaperLine from '../Papers/PaperLine'
 import { useModal } from '../Hooks/useModal'
@@ -15,6 +19,55 @@ import { rename } from '../Actions/Items/rename'
 import { viewInDrive } from '../Actions/Items/viewInDrive'
 import { makeActionVariant, makeActions } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
+import {
+  buildTriggersQueryByConnectorSlug,
+  buildConnectorsQueryById
+} from '../../helpers/queries'
+
+const ConnectorItem = ({ papers }) => {
+  const navigate = useNavigate()
+
+  const connectorSlug = papers?.list?.[0]?.cozyMetadata?.createdByApp
+  const queryTriggers = buildTriggersQueryByConnectorSlug(
+    connectorSlug,
+    Boolean(connectorSlug)
+  )
+  const { data: triggers } = useQuery(
+    queryTriggers.definition,
+    queryTriggers.options
+  )
+  const trigger = triggers?.[0]
+
+  const queryKonnector = buildConnectorsQueryById(
+    `io.cozy.konnectors/${connectorSlug}`,
+    Boolean(trigger)
+  )
+
+  const { data: konnectors } = useQuery(
+    queryKonnector.definition,
+    queryKonnector.options
+  )
+  const konnector = konnectors?.[0]
+
+  if (!konnector) return null
+
+  return (
+    <>
+      <LaunchTriggerCard flowProps={{ initialTrigger: trigger }} />
+      <Divider />
+      <button
+        onClick={() => {
+          navigate({
+            pathname: `harvest/${connectorSlug}`
+          })
+        }}
+      >
+        Open Harvest for this connector
+      </button>
+      <Divider />
+    </>
+  )
+}
 
 const PapersList = ({ papers }) => {
   const client = useClient()
@@ -57,6 +110,9 @@ const PapersList = ({ papers }) => {
 
   return (
     <>
+      {flag('harvest.inappconnectors.enabled') && (
+        <ConnectorItem papers={papers} />
+      )}
       {papers.list.map(
         (paper, idx) =>
           idx + 1 <= maxDisplay && (
