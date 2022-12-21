@@ -330,5 +330,11 @@
     "title": "Face of the document",
     "back": "Back",
     "front": "Front"
+  },
+  "Harvest": {
+    "cannotConnectModal": {
+      "extraContent": "In case of problem, you can always add your documents manually by taking a photo of them or by selecting them from your Cozy or your mobile.",
+      "button": "Add manually"
+    }
   }
 }
