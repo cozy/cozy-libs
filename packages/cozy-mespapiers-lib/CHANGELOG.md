@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.2.3...cozy-mespapiers-lib@12.0.0) (2022-12-21)
+
+
+### Features
+
+* **mespapiers:** Add harvest routes ([0207f6f](https://github.com/cozy/cozy-libs/commit/0207f6f0824369d59306ba8fd7e994c01567b843))
+* **mespapiers:** Add temporary harvest integration ([ec2c2f5](https://github.com/cozy/cozy-libs/commit/ec2c2f53148ab2dcfd2d4978a95a23d7248bde50))
+* **mespapiers:** Update dep and peerDep ([29dc933](https://github.com/cozy/cozy-libs/commit/29dc933764a48b2c55a8215774bb08ff57f2c84e))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you need to use `cozy-device-helper >= 2.6.0`, `cozy-harvest-lib >= 11.0.0`
+
+
+
+
+
 ## [11.2.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@11.2.2...cozy-mespapiers-lib@11.2.3) (2022-12-21)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
