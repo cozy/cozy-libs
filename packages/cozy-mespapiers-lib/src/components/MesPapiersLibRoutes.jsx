@@ -14,6 +14,7 @@ import Onboarding from './Views/Onboarding'
 import InformationEdit from './Views/InformationEdit'
 import PageEdit from './Views/PageEdit'
 import ContactEdit from './Views/ContactEdit'
+import HarvestRoutes from './Views/HarvestRoutes'
 
 const MesPapiersLibRoutes = ({ lang, components }) => {
   return (
@@ -42,6 +43,10 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
               <Route path="edit/page" element={<PageEdit />} />
               <Route path="edit/contact" element={<ContactEdit />} />
             </Route>
+            <Route
+              path="harvest/:connectorSlug/*"
+              element={<HarvestRoutes />}
+            />
           </Route>
           <Route path="onboarding" element={<Onboarding />} />
         </Route>

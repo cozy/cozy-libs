@@ -1,6 +1,12 @@
 import { Q, fetchPolicies } from 'cozy-client'
 
-import { CONTACTS_DOCTYPE, FILES_DOCTYPE, SETTINGS_DOCTYPE } from '../doctypes'
+import {
+  CONTACTS_DOCTYPE,
+  FILES_DOCTYPE,
+  SETTINGS_DOCTYPE,
+  TRIGGERS_DOCTYPE,
+  KONNECTORS_DOCTYPE
+} from '../doctypes'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
 
@@ -80,5 +86,27 @@ export const buildFilesQueryById = id => ({
   options: {
     as: `${FILES_DOCTYPE}/${id}`,
     fetchPolicy: defaultFetchPolicy
+  }
+})
+
+export const buildTriggersQueryByConnectorSlug = (slug, enabled) => ({
+  definition: Q(TRIGGERS_DOCTYPE)
+    .where({
+      'message.konnector': slug
+    })
+    .indexFields(['message.konnector']),
+  options: {
+    as: `${TRIGGERS_DOCTYPE}/slug/${slug}`,
+    fetchPolicy: defaultFetchPolicy,
+    enabled
+  }
+})
+
+export const buildConnectorsQueryById = (id, enabled) => ({
+  definition: Q(KONNECTORS_DOCTYPE).getById(id),
+  options: {
+    as: `${KONNECTORS_DOCTYPE}/id/${id}`,
+    fetchPolicy: defaultFetchPolicy,
+    enabled
   }
 })
