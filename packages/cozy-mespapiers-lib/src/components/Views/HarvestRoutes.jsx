@@ -9,6 +9,7 @@ import {
   buildTriggersQueryByConnectorSlug,
   buildConnectorsQueryById
 } from '../../helpers/queries'
+import ExtraContent from '../Harvest/CannotConnectModal/ExtraContent'
 
 const HarvestRoutes = () => {
   const { connectorSlug } = useParams()
@@ -44,6 +45,9 @@ const HarvestRoutes = () => {
       konnectorSlug={connectorSlug}
       datacardOptions={datacardOptions}
       onDismiss={() => navigate('..')}
+      ComponentsProps={{
+        CannotConnectModal: { extraContent: <ExtraContent /> }
+      }}
     />
   )
 }
