@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@12.0.1...cozy-mespapiers-lib@13.0.0) (2022-12-22)
+
+
+### Bug Fixes
+
+* Use `formatLocallyDistanceToNowStrict` for expiration annotations ([a86a299](https://github.com/cozy/cozy-libs/commit/a86a2993cfdc85201fd8e8baee7dbcda0b8ab164))
+
+
+### Features
+
+* **mespapiers:** Add ExtraContent component ([c1a5be4](https://github.com/cozy/cozy-libs/commit/c1a5be479034006d4017275a92528ddb39df6134))
+* Update `cozy-ui` to 79.1.0 ([347a048](https://github.com/cozy/cozy-libs/commit/347a048d8489ed9aeb71d8e4d843a8cd006d23d6))
+
+
+### BREAKING CHANGES
+
+* You need to update `cozy-ui` to `>79.1.0`.
+
+
+
+
+
 ## [12.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@12.0.0...cozy-mespapiers-lib@12.0.1) (2022-12-21)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
