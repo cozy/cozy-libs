@@ -183,6 +183,12 @@
         "endAdornment": "day before |||| days before"
       }
     },
+    "otherInvoice": {
+      "referencedDate": {
+        "inputLabel": "Referenced date",
+        "text": "What is the date of this document?"
+      }
+    },
     "bankDetails": {
       "ibanNumber": {
         "inputLabel": "IBAN",

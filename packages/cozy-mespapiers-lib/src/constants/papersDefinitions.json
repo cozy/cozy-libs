@@ -1560,6 +1560,7 @@
         {
           "stepIndex": 1,
           "model": "scan",
+          "multipage": true,
           "illustration": "IlluPassport.png",
           "text": "PaperJSON.passport.scan.text"
         },
@@ -1633,6 +1634,20 @@
         {
           "stepIndex": 2,
           "model": "information",
+          "text": "PaperJSON.generic.fileLabel.text",
+          "attributes": [
+            {
+              "name": "labelGivenByUser",
+              "type": "text",
+              "required": true,
+              "maxLength": 40,
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.date.text",
           "attributes": [
@@ -1644,7 +1659,7 @@
           ]
         },
         {
-          "stepIndex": 3,
+          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": false,
@@ -1701,7 +1716,7 @@
           "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
-          "multiple": false,
+          "multiple": true,
           "text": "PaperJSON.generic.owner.text"
         }
       ]
@@ -1761,12 +1776,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.referencedDate.text",
+          "text": "PaperJSON.otherInvoice.referencedDate.text",
           "attributes": [
             {
               "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+              "inputLabel": "PaperJSON.otherInvoice.referencedDate.inputLabel"
             }
           ]
         },
