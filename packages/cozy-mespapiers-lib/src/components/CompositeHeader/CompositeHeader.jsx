@@ -60,7 +60,8 @@ const CompositeHeader = ({
         (isValidElement(Text) || isArray(Text) ? (
           <div
             className={cx({
-              ['u-mt-1']: !isMobile || (isArray(Text) && Text.length <= 1),
+              ['u-mt-1 u-mh-1']:
+                !isMobile || (isArray(Text) && Text.length <= 1),
               ['u-mt-1 u-mah-5 u-pv-1 u-ov-scroll']:
                 isMobile && isArray(Text) && Text.length > 1
             })}
