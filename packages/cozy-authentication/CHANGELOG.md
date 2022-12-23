@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [2.12.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.11.0...cozy-authentication@2.12.0) (2022-12-23)
+
+
+### Features
+
+* **authentication:** Add an alternate implementation for `MobileRouter` ([07436c0](https://github.com/cozy/cozy-libs/commit/07436c045a49c8cbb484fd0126be8596a838f986))
+* **authentication:** Add react-router-dom 6.4.1 as a dependency ([491f723](https://github.com/cozy/cozy-libs/commit/491f72375c7e6793a7360cbd3bc9f5b6421777e0))
+
+
+
+
+
 # 2.11.0 (2022-12-20)
 
 

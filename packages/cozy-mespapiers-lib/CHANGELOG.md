@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.0.0...cozy-mespapiers-lib@13.1.0) (2022-12-23)
+
+
+### Features
+
+* **mespapiers:** Add horizontal margin for the container ([0dd7cd0](https://github.com/cozy/cozy-libs/commit/0dd7cd0eaca22cc75a5047da9d49e42e27f886c1))
+* **mespapiers:** Update cozy-packages ([76fc384](https://github.com/cozy/cozy-libs/commit/76fc384423a8251f82ce76d3c5ac3c064ab8c520))
+* **mespapiers:** Update papersDefinitions file ([1b71683](https://github.com/cozy/cozy-libs/commit/1b71683e7b05c508648c3cea38efd8cbd0f8840d))
+
+
+
+
+
 # [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@12.0.1...cozy-mespapiers-lib@13.0.0) (2022-12-22)
 
 
