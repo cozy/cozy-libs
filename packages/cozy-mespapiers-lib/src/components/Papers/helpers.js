@@ -106,34 +106,10 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
 export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
   const result = []
 
-  const filesByContacts = groupFilesByContacts(files, contacts)
-
-  const { itemsFound: filesWithContacts, remainingItems } = filterWithRemaining(
-    filesByContacts,
-    hasContactsInFile
-  )
-
-  const filesWithoutContacts = remainingItems[0]?.files || []
-
-  const unsortedListByContacts = filesWithContacts.map(fileWithContact => ({
-    withHeader: true,
-    contact: harmonizeContactsNames(fileWithContact.contacts, t),
-    papers: {
-      maxDisplay,
-      list: fileWithContact.files
-    }
-  }))
-
-  const listByContacts = unsortedListByContacts.sort((a, b) =>
-    a.contact.localeCompare(b.contact)
-  )
-
-  result.push(...listByContacts)
-
   const {
     itemsFound: filesCreatedByConnectors,
     remainingItems: filesNotCreatedByConnectors
-  } = filterWithRemaining(filesWithoutContacts, isFromConnector)
+  } = filterWithRemaining(files, isFromConnector)
 
   if (filesCreatedByConnectors.length > 0) {
     const filesByConnectors = groupBy(
@@ -160,16 +136,45 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
       a.contact.localeCompare(b.contact)
     )
 
-    result.unshift(...listByConnector)
+    result.push(...listByConnector)
   }
 
-  if (filesNotCreatedByConnectors.length > 0) {
+  const filesByContacts = groupFilesByContacts(
+    filesNotCreatedByConnectors,
+    contacts
+  )
+
+  const {
+    itemsFound: filesByContactsWithContacts,
+    remainingItems: filesByContactsWithoutContacts
+  } = filterWithRemaining(filesByContacts, hasContactsInFile)
+
+  if (filesByContactsWithContacts.length > 0) {
+    const unsortedListByContacts = filesByContactsWithContacts.map(value => ({
+      withHeader: true,
+      contact: harmonizeContactsNames(value.contacts, t),
+      papers: {
+        maxDisplay,
+        list: value.files
+      }
+    }))
+
+    const listByContacts = unsortedListByContacts.sort((a, b) =>
+      a.contact.localeCompare(b.contact)
+    )
+
+    result.push(...listByContacts)
+  }
+
+  const unspecifiedFiles = filesByContactsWithoutContacts[0]?.files || []
+
+  if (unspecifiedFiles.length > 0) {
     const unspecified = {
       withHeader: result.length > 0,
       contact: t('PapersList.defaultName'),
       papers: {
         maxDisplay,
-        list: filesNotCreatedByConnectors
+        list: unspecifiedFiles
       }
     }
 
