@@ -104,7 +104,8 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
  * @returns {{ withHeader: boolean, contact: string, papers: { maxDisplay: number, list: IOCozyFile[] } }[]}
  */
 export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
-  let result = []
+  const result = []
+
   const filesByContacts = groupFilesByContacts(files, contacts)
 
   const { itemsFound: filesWithContacts, remainingItems } = filterWithRemaining(
@@ -127,7 +128,7 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
     a.contact.localeCompare(b.contact)
   )
 
-  result = [...listByContacts]
+  result.push(...listByContacts)
 
   if (filesWithoutContacts.length > 0) {
     const {
@@ -160,19 +161,20 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
         a.contact.localeCompare(b.contact)
       )
 
-      result = [...listByConnector, ...listByContacts]
+      result.unshift(...listByConnector)
     }
 
     if (filesNotCreatedByConnectors.length > 0) {
-      result.push({
-        withHeader:
-          filesWithContacts.length > 0 || filesCreatedByConnectors.length > 0,
+      const unspecified = {
+        withHeader: result.length > 0,
         contact: t('PapersList.defaultName'),
         papers: {
           maxDisplay,
           list: filesNotCreatedByConnectors
         }
-      })
+      }
+
+      result.push(unspecified)
     }
   }
 
