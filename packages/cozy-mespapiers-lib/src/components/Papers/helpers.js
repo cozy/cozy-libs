@@ -130,52 +130,50 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
 
   result.push(...listByContacts)
 
-  if (filesWithoutContacts.length > 0) {
-    const {
-      itemsFound: filesCreatedByConnectors,
-      remainingItems: filesNotCreatedByConnectors
-    } = filterWithRemaining(filesWithoutContacts, isFromConnector)
+  const {
+    itemsFound: filesCreatedByConnectors,
+    remainingItems: filesNotCreatedByConnectors
+  } = filterWithRemaining(filesWithoutContacts, isFromConnector)
 
-    if (filesCreatedByConnectors.length > 0) {
-      const filesByConnectors = groupBy(
-        filesCreatedByConnectors,
-        file =>
-          `${file.cozyMetadata.uploadedBy.slug}-${file.cozyMetadata.sourceAccountIdentifier}`
-      )
+  if (filesCreatedByConnectors.length > 0) {
+    const filesByConnectors = groupBy(
+      filesCreatedByConnectors,
+      file =>
+        `${file.cozyMetadata.uploadedBy.slug}-${file.cozyMetadata.sourceAccountIdentifier}`
+    )
 
-      const unsortedlistByConnector = Object.values(filesByConnectors).map(
-        value => ({
-          withHeader: true,
-          contact: t('PapersList.accountName', {
-            name: value[0].cozyMetadata.createdByApp,
-            identifier: value[0].cozyMetadata.sourceAccountIdentifier
-          }),
-          papers: {
-            maxDisplay,
-            list: value
-          }
-        })
-      )
-
-      const listByConnector = unsortedlistByConnector.sort((a, b) =>
-        a.contact.localeCompare(b.contact)
-      )
-
-      result.unshift(...listByConnector)
-    }
-
-    if (filesNotCreatedByConnectors.length > 0) {
-      const unspecified = {
-        withHeader: result.length > 0,
-        contact: t('PapersList.defaultName'),
+    const unsortedlistByConnector = Object.values(filesByConnectors).map(
+      value => ({
+        withHeader: true,
+        contact: t('PapersList.accountName', {
+          name: value[0].cozyMetadata.createdByApp,
+          identifier: value[0].cozyMetadata.sourceAccountIdentifier
+        }),
         papers: {
           maxDisplay,
-          list: filesNotCreatedByConnectors
+          list: value
         }
-      }
+      })
+    )
 
-      result.push(unspecified)
+    const listByConnector = unsortedlistByConnector.sort((a, b) =>
+      a.contact.localeCompare(b.contact)
+    )
+
+    result.unshift(...listByConnector)
+  }
+
+  if (filesNotCreatedByConnectors.length > 0) {
+    const unspecified = {
+      withHeader: result.length > 0,
+      contact: t('PapersList.defaultName'),
+      papers: {
+        maxDisplay,
+        list: filesNotCreatedByConnectors
+      }
     }
+
+    result.push(unspecified)
   }
 
   return result
