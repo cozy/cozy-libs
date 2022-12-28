@@ -192,17 +192,7 @@ describe('helpers Papers', () => {
           contact: 'Alice Durand',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId02',
-                name: 'file02.pdf',
-                relationships: {
-                  referenced_by: {
-                    data: [{ id: 'contactId02', type: 'io.cozy.contacts' }]
-                  }
-                }
-              }
-            ]
+            list: [mockFiles[1]]
           }
         },
         {
@@ -210,17 +200,7 @@ describe('helpers Papers', () => {
           contact: 'Bob Durand',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId01',
-                name: 'file01.pdf',
-                relationships: {
-                  referenced_by: {
-                    data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
-                  }
-                }
-              }
-            ]
+            list: [mockFiles[0]]
           }
         },
         {
@@ -228,20 +208,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.contactMerged',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId03',
-                name: 'file03.pdf',
-                relationships: {
-                  referenced_by: {
-                    data: [
-                      { id: 'contactId01', type: 'io.cozy.contacts' },
-                      { id: 'contactId02', type: 'io.cozy.contacts' }
-                    ]
-                  }
-                }
-              }
-            ]
+            list: [mockFiles[2]]
           }
         },
         {
@@ -249,12 +216,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.defaultName',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId04',
-                name: 'file04.pdf'
-              }
-            ]
+            list: [mockFiles[3]]
           }
         }
       ]
@@ -276,16 +238,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.defaultName',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId01',
-                name: 'file01.pdf'
-              },
-              {
-                _id: 'fileId02',
-                name: 'file02.pdf'
-              }
-            ]
+            list: [mockFilesWithoutContact[0], mockFilesWithoutContact[1]]
           }
         }
       ]
@@ -314,30 +267,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId05',
-                name: 'file05.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorAccountId01',
-                  sourceAccountIdentifier: 'Account 1',
-                  uploadedBy: {
-                    slug: 'ConnectorOne'
-                  }
-                }
-              },
-              {
-                _id: 'fileId06',
-                name: 'file06.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorAccountId01',
-                  sourceAccountIdentifier: 'Account 1',
-                  uploadedBy: {
-                    slug: 'ConnectorOne'
-                  }
-                }
-              }
-            ]
+            list: [mockFilesWithSourceAccount[0], mockFilesWithSourceAccount[1]]
           }
         },
         {
@@ -345,19 +275,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId07',
-                name: 'file07.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorAccountId02',
-                  sourceAccountIdentifier: 'Account 2',
-                  uploadedBy: {
-                    slug: 'ConnectorTwo'
-                  }
-                }
-              }
-            ]
+            list: [mockFilesWithSourceAccount[2]]
           }
         }
       ]
@@ -379,30 +297,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId05',
-                name: 'file05.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorAccountId01',
-                  sourceAccountIdentifier: 'Account 1',
-                  uploadedBy: {
-                    slug: 'ConnectorOne'
-                  }
-                }
-              },
-              {
-                _id: 'fileId06',
-                name: 'file06.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorAccountId01',
-                  sourceAccountIdentifier: 'Account 1',
-                  uploadedBy: {
-                    slug: 'ConnectorOne'
-                  }
-                }
-              }
-            ]
+            list: [mockFilesWithSourceAccount[0], mockFilesWithSourceAccount[1]]
           }
         },
         {
@@ -410,19 +305,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId07',
-                name: 'file07.pdf',
-                cozyMetadata: {
-                  sourceAccount: 'ConnectorAccountId02',
-                  sourceAccountIdentifier: 'Account 2',
-                  uploadedBy: {
-                    slug: 'ConnectorTwo'
-                  }
-                }
-              }
-            ]
+            list: [mockFilesWithSourceAccount[2]]
           }
         },
         {
@@ -430,17 +313,7 @@ describe('helpers Papers', () => {
           contact: 'Alice Durand',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId02',
-                name: 'file02.pdf',
-                relationships: {
-                  referenced_by: {
-                    data: [{ id: 'contactId02', type: 'io.cozy.contacts' }]
-                  }
-                }
-              }
-            ]
+            list: [mockFiles[1]]
           }
         },
         {
@@ -448,17 +321,7 @@ describe('helpers Papers', () => {
           contact: 'Bob Durand',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId01',
-                name: 'file01.pdf',
-                relationships: {
-                  referenced_by: {
-                    data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
-                  }
-                }
-              }
-            ]
+            list: [mockFiles[0]]
           }
         },
         {
@@ -466,20 +329,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.contactMerged',
           papers: {
             maxDisplay: 3,
-            list: [
-              {
-                _id: 'fileId03',
-                name: 'file03.pdf',
-                relationships: {
-                  referenced_by: {
-                    data: [
-                      { id: 'contactId01', type: 'io.cozy.contacts' },
-                      { id: 'contactId02', type: 'io.cozy.contacts' }
-                    ]
-                  }
-                }
-              }
-            ]
+            list: [mockFiles[2]]
           }
         },
         {
@@ -487,7 +337,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.defaultName',
           papers: {
             maxDisplay: 3,
-            list: [{ _id: 'fileId04', name: 'file04.pdf' }]
+            list: [mockFiles[3]]
           }
         }
       ]
@@ -500,49 +350,19 @@ describe('helpers Papers', () => {
     it('should return an array of objects grouping the files with the associated contact names', () => {
       const expected = [
         {
-          file: {
-            _id: 'fileId01',
-            name: 'file01.pdf',
-            relationships: {
-              referenced_by: {
-                data: [{ id: 'contactId01', type: 'io.cozy.contacts' }]
-              }
-            }
-          },
+          file: mockFiles[0],
           contact: 'Bob Durand'
         },
         {
-          file: {
-            _id: 'fileId02',
-            name: 'file02.pdf',
-            relationships: {
-              referenced_by: {
-                data: [{ id: 'contactId02', type: 'io.cozy.contacts' }]
-              }
-            }
-          },
+          file: mockFiles[1],
           contact: 'Alice Durand'
         },
         {
-          file: {
-            _id: 'fileId03',
-            name: 'file03.pdf',
-            relationships: {
-              referenced_by: {
-                data: [
-                  { id: 'contactId01', type: 'io.cozy.contacts' },
-                  { id: 'contactId02', type: 'io.cozy.contacts' }
-                ]
-              }
-            }
-          },
+          file: mockFiles[2],
           contact: 'PapersList.contactMerged'
         },
         {
-          file: {
-            _id: 'fileId04',
-            name: 'file04.pdf'
-          },
+          file: mockFiles[3],
           contact: undefined
         }
       ]
