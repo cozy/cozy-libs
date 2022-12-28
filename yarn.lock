@@ -6904,16 +6904,17 @@ cozy-client@16.19.0:
     sift "^6.0.0"
     url-search-params-polyfill "^7.0.0"
 
-cozy-client@34.1.0:
-  version "34.1.0"
-  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-34.1.0.tgz#5528b67f941cbb434459dca75a1d157d9d7ef2ab"
-  integrity sha512-2F6c7Y6cnrfDHdh9EIz13g0ylO2vaTKQslhbiUZWxQbWTlnEqgRqcFgtn3hYfi4VOeTW1gBT9HnJxcM+kVVYjg==
+cozy-client@34.6.0:
+  version "34.6.0"
+  resolved "https://registry.yarnpkg.com/cozy-client/-/cozy-client-34.6.0.tgz#ca320e72c84a7f423685a315fd526be5861eacee"
+  integrity sha512-TKuyRHN7xu8pXqC+cSX1WtC6MLwTbL3KtgbHKEsDh4XBkV3GLtgwtyZvUx6jA6uouAEhRr/Qkb6zG5UsB9XF/A==
   dependencies:
     "@cozy/minilog" "1.0.0"
     "@types/jest" "^26.0.20"
     "@types/lodash" "^4.14.170"
     btoa "^1.2.1"
-    cozy-stack-client "^34.1.0"
+    cozy-stack-client "^34.1.5"
+    date-fns "2.29.3"
     json-stable-stringify "^1.0.1"
     lodash "^4.17.13"
     microee "^0.0.6"
@@ -7099,7 +7100,7 @@ cozy-stack-client@^32.2.0:
     mime "^2.4.0"
     qs "^6.7.0"
 
-cozy-stack-client@^34.1.0, cozy-stack-client@^34.1.5:
+cozy-stack-client@^34.1.5:
   version "34.1.5"
   resolved "https://registry.yarnpkg.com/cozy-stack-client/-/cozy-stack-client-34.1.5.tgz#28fbc22b72f6343d968d4899d91c70f0261252f4"
   integrity sha512-i0GsaaHNI2XmXUncbNPzuFY+DDC4/io3m7mwCmhAFyI/REHPdqOi3Oo5Mb7Euuky4A6iZjAWn5t0F69itv3rvg==
@@ -7177,10 +7178,10 @@ cozy-ui@44.1.0:
     react-select "2.2.0"
     react-swipeable-views "0.13.3"
 
-cozy-ui@77.6.0:
-  version "77.6.0"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-77.6.0.tgz#52a0fdd90b96dbeff9e75b54b4b533ea153b9ba5"
-  integrity sha512-efu+Q/wie57NeElWOvP5455N8F7Y/olYWmhbzB/wnbwA61PmxXkWeLXeXRacEx+KMHXPg/IE6EGK+9vR+JZwhw==
+cozy-ui@79.2.2:
+  version "79.2.2"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-79.2.2.tgz#e06e92f3505de0ec3aa5c263983179bf44c53a86"
+  integrity sha512-tCplhMb4RVgg+ahfMB/PjagaEb7ufGICTQRsXNsyUToA9H2eLHi6VKmHVSM+aWBEHt+b3dGEwakngE/62QymPA==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
