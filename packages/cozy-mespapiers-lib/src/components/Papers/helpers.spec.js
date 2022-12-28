@@ -24,7 +24,7 @@ const mockContacts03 = [
   { _id: 'contactId03', name: { givenName: 'Jean', familyName: 'Rossi' } }
 ]
 
-const mockFiles = [
+const mockFilesWithContacts = [
   {
     _id: 'fileId01',
     name: 'file01.pdf',
@@ -50,21 +50,17 @@ const mockFiles = [
         ]
       }
     }
-  },
-  {
-    _id: 'fileId04',
-    name: 'file04.pdf'
   }
 ]
 
-const mockFilesWithoutContact = [
+const mockUnspecifiedFiles = [
   {
-    _id: 'fileId01',
-    name: 'file01.pdf'
+    _id: 'fileId04',
+    name: 'file04.pdf'
   },
   {
-    _id: 'fileId02',
-    name: 'file02.pdf'
+    _id: 'fileId08',
+    name: 'file08.pdf'
   }
 ]
 
@@ -104,10 +100,32 @@ const mockFilesWithSourceAccount = [
   }
 ]
 
+const mockFilesWithContactsAndSourceAccount = [
+  {
+    _id: 'fileId09',
+    name: 'file09pdf',
+    cozyMetadata: {
+      sourceAccount: 'ConnectorAccountId02',
+      sourceAccountIdentifier: 'Account 2',
+      uploadedBy: {
+        slug: 'ConnectorTwo'
+      }
+    },
+    relationships: {
+      referenced_by: {
+        data: [
+          { id: 'contactId01', type: 'io.cozy.contacts' },
+          { id: 'contactId02', type: 'io.cozy.contacts' }
+        ]
+      }
+    }
+  }
+]
+
 describe('helpers Papers', () => {
   describe('getContactsRefIdsByFiles', () => {
     it('should return list of contact ids', () => {
-      const res = getContactsRefIdsByFiles(mockFiles)
+      const res = getContactsRefIdsByFiles(mockFilesWithContacts)
 
       expect(res).toStrictEqual(['contactId01', 'contactId02'])
     })
@@ -162,23 +180,26 @@ describe('helpers Papers', () => {
       const expected = [
         {
           contacts: [mockContacts00[0]],
-          files: [mockFiles[0]]
+          files: [mockFilesWithContacts[0]]
         },
         {
           contacts: [mockContacts00[1]],
-          files: [mockFiles[1]]
+          files: [mockFilesWithContacts[1]]
         },
         {
           contacts: [mockContacts00[0], mockContacts00[1]],
-          files: [mockFiles[2]]
+          files: [mockFilesWithContacts[2]]
         },
         {
           contacts: [],
-          files: [mockFiles[3]]
+          files: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
         }
       ]
 
-      const res = groupFilesByContacts(mockFiles, mockContacts00)
+      const res = groupFilesByContacts(
+        [...mockFilesWithContacts, ...mockUnspecifiedFiles],
+        mockContacts00
+      )
 
       expect(res).toStrictEqual(expected)
     })
@@ -192,7 +213,7 @@ describe('helpers Papers', () => {
           contact: 'Alice Durand',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[1]]
+            list: [mockFilesWithContacts[1]]
           }
         },
         {
@@ -200,7 +221,7 @@ describe('helpers Papers', () => {
           contact: 'Bob Durand',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[0]]
+            list: [mockFilesWithContacts[0]]
           }
         },
         {
@@ -208,7 +229,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.contactMerged',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[2]]
+            list: [mockFilesWithContacts[2]]
           }
         },
         {
@@ -216,13 +237,13 @@ describe('helpers Papers', () => {
           contact: 'PapersList.defaultName',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[3]]
+            list: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
           }
         }
       ]
 
       const result = buildFilesByContacts({
-        files: mockFiles,
+        files: [...mockFilesWithContacts, ...mockUnspecifiedFiles],
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -238,13 +259,13 @@ describe('helpers Papers', () => {
           contact: 'PapersList.defaultName',
           papers: {
             maxDisplay: 3,
-            list: [mockFilesWithoutContact[0], mockFilesWithoutContact[1]]
+            list: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
           }
         }
       ]
 
       const result = buildFilesByContacts({
-        files: mockFilesWithoutContact,
+        files: mockUnspecifiedFiles,
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -253,9 +274,9 @@ describe('helpers Papers', () => {
       expect(result).toStrictEqual(expected)
     })
 
-    it('should filter files without contact by connectors', () => {
+    it('should return object with all papers filtered by connector', () => {
       const result = buildFilesByContacts({
-        files: mockFilesWithSourceAccount,
+        files: [...mockFilesWithSourceAccount, ...mockUnspecifiedFiles],
         contacts: [],
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -277,6 +298,14 @@ describe('helpers Papers', () => {
             maxDisplay: 3,
             list: [mockFilesWithSourceAccount[2]]
           }
+        },
+        {
+          withHeader: true,
+          contact: 'PapersList.defaultName',
+          papers: {
+            maxDisplay: 3,
+            list: [mockUnspecifiedFiles[0], mockUnspecifiedFiles[1]]
+          }
         }
       ]
 
@@ -285,7 +314,11 @@ describe('helpers Papers', () => {
 
     it('should filter files with contact and without contact', () => {
       const result = buildFilesByContacts({
-        files: [...mockFiles, ...mockFilesWithSourceAccount],
+        files: [
+          ...mockFilesWithContacts,
+          ...mockFilesWithSourceAccount,
+          ...mockFilesWithContactsAndSourceAccount
+        ],
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -305,7 +338,10 @@ describe('helpers Papers', () => {
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
-            list: [mockFilesWithSourceAccount[2]]
+            list: [
+              mockFilesWithSourceAccount[2],
+              mockFilesWithContactsAndSourceAccount[0]
+            ]
           }
         },
         {
@@ -313,7 +349,7 @@ describe('helpers Papers', () => {
           contact: 'Alice Durand',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[1]]
+            list: [mockFilesWithContacts[1]]
           }
         },
         {
@@ -321,7 +357,7 @@ describe('helpers Papers', () => {
           contact: 'Bob Durand',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[0]]
+            list: [mockFilesWithContacts[0]]
           }
         },
         {
@@ -329,15 +365,7 @@ describe('helpers Papers', () => {
           contact: 'PapersList.contactMerged',
           papers: {
             maxDisplay: 3,
-            list: [mockFiles[2]]
-          }
-        },
-        {
-          withHeader: true,
-          contact: 'PapersList.defaultName',
-          papers: {
-            maxDisplay: 3,
-            list: [mockFiles[3]]
+            list: [mockFilesWithContacts[2]]
           }
         }
       ]
@@ -350,25 +378,29 @@ describe('helpers Papers', () => {
     it('should return an array of objects grouping the files with the associated contact names', () => {
       const expected = [
         {
-          file: mockFiles[0],
+          file: mockFilesWithContacts[0],
           contact: 'Bob Durand'
         },
         {
-          file: mockFiles[1],
+          file: mockFilesWithContacts[1],
           contact: 'Alice Durand'
         },
         {
-          file: mockFiles[2],
+          file: mockFilesWithContacts[2],
           contact: 'PapersList.contactMerged'
         },
         {
-          file: mockFiles[3],
+          file: mockUnspecifiedFiles[0],
+          contact: undefined
+        },
+        {
+          file: mockUnspecifiedFiles[1],
           contact: undefined
         }
       ]
 
       const result = buildFilesWithContacts({
-        files: mockFiles,
+        files: [...mockFilesWithContacts, ...mockUnspecifiedFiles],
         contacts: mockContacts00,
         t: jest.fn(key => key)
       })
