@@ -1,6 +1,20 @@
-import { Q } from 'cozy-client'
+import { Q, fetchPolicies } from 'cozy-client'
 
 import { Contact, Group } from '../models'
+
+const DEFAULT_CACHE_TIMEOUT_QUERIES = 9 * 60 * 1000
+
+const defaultFetchPolicy = fetchPolicies.olderThan(
+  DEFAULT_CACHE_TIMEOUT_QUERIES
+)
+
+export const buildSharingsByIdQuery = sharingId => ({
+  definition: Q('io.cozy.sharings').getById(sharingId),
+  options: {
+    as: `io.cozy.sharings/${sharingId}`,
+    fetchPolicy: defaultFetchPolicy
+  }
+})
 
 export const buildContactsQuery = () => ({
   definition: Q(Contact.doctype)
