@@ -105,8 +105,7 @@
       },
       "shareByEmail": {
         "subtitle": "Par email",
-        "email": "Envoyer à :",
-        "emailPlaceholder": "Saisissez le courriel ou le nom du destinataire.",
+        "emailPlaceholder": "Ajouter des contacts ou des groupes",
         "send": "Envoyer",
         "genericSuccess": "Vous avez invité %{count} contacts.",
         "success": "Vous avez envoyé une invitation à %{email}.",
