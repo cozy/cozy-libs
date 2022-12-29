@@ -31,21 +31,17 @@ describe('ShareByEmailComponent', () => {
     )
 
     act(() => {
-      fireEvent.change(
-        root.getByPlaceholderText(
-          'Enter the email address or name of the recipient'
-        ),
-        { target: { value: 'quentin@cozycloud.cc' } }
-      )
+      fireEvent.change(root.getByPlaceholderText('Add contacts or groups'), {
+        target: { value: 'quentin@cozycloud.cc' }
+      })
     })
 
     act(() => {
-      fireEvent.keyPress(
-        root.getByPlaceholderText(
-          'Enter the email address or name of the recipient'
-        ),
-        { key: 'Enter', code: 'Enter', charCode: 13 }
-      )
+      fireEvent.keyPress(root.getByPlaceholderText('Add contacts or groups'), {
+        key: 'Enter',
+        code: 'Enter',
+        charCode: 13
+      })
     })
 
     act(() => {
