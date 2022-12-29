@@ -4,7 +4,7 @@ import { useClient, models } from 'cozy-client'
 
 import getQueryParameter from '../helpers/QueryParameter'
 import logger from '../../logger'
-import { buildSharingsByIdQuery } from '../helpers/queries'
+import { buildSharingsByIdQuery } from '../../queries/queries'
 
 const getSharingId = permission => {
   const sourceId = permission.data.attributes.source_id
