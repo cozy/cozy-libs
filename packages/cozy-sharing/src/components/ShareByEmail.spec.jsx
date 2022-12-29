@@ -1,6 +1,12 @@
 import React from 'react'
-import { mount } from 'enzyme'
+import { render, fireEvent, waitFor } from '@testing-library/react'
 import { ShareByEmail } from './ShareByEmail'
+import AppLike from '../../test/AppLike'
+import { act } from 'react-dom/test-utils'
+
+jest.mock('../helpers/contacts', () => ({
+  getOrCreateFromArray: (client, recipients) => recipients
+}))
 
 describe('ShareByEmailComponent', () => {
   it('shoud call share if submited', async () => {
@@ -9,7 +15,6 @@ describe('ShareByEmailComponent', () => {
       contacts: {
         data: []
       },
-      t: x => x,
       groups: { data: [] },
       documentType: 'Files',
       onShare: onShare,
@@ -19,15 +24,42 @@ describe('ShareByEmailComponent', () => {
       sharingDesc: 'test',
       createContact: jest.fn()
     }
-    const comp = mount(<ShareByEmail {...props} />)
-    comp.instance().onRecipientPick({ id: 1, email: 'quentin@cozycloud.cc' })
-    await comp.instance().share()
-    expect(onShare).toHaveBeenCalledWith({
-      description: props.sharingDesc,
-      document: props.document,
-      openSharing: true,
-      readOnlyRecipients: [],
-      recipients: [{ id: 1, email: 'quentin@cozycloud.cc' }]
+    const root = render(
+      <AppLike>
+        <ShareByEmail {...props} />
+      </AppLike>
+    )
+
+    act(() => {
+      fireEvent.change(
+        root.getByPlaceholderText(
+          'Enter the email address or name of the recipient'
+        ),
+        { target: { value: 'quentin@cozycloud.cc' } }
+      )
+    })
+
+    act(() => {
+      fireEvent.keyPress(
+        root.getByPlaceholderText(
+          'Enter the email address or name of the recipient'
+        ),
+        { key: 'Enter', code: 'Enter', charCode: 13 }
+      )
+    })
+
+    act(() => {
+      fireEvent.click(root.getByRole('button', { name: 'Send' }))
+    })
+
+    await waitFor(() => {
+      expect(onShare).toHaveBeenCalledWith({
+        description: props.sharingDesc,
+        document: props.document,
+        openSharing: true,
+        readOnlyRecipients: [],
+        recipients: [{ email: 'quentin@cozycloud.cc' }]
+      })
     })
   })
 })
