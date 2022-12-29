@@ -3,13 +3,11 @@ import PropTypes from 'prop-types'
 
 import { contactsResponseType, groupsResponseType } from '../propTypes'
 import ShareAutosuggest from './ShareAutosuggest'
-import styles from '../share.styl'
 
 const ShareRecipientsInput = ({
   contacts,
   groups,
   recipients,
-  label,
   placeholder,
   onPick,
   onRemove
@@ -49,25 +47,19 @@ const ShareRecipientsInput = ({
   }
 
   return (
-    <div>
-      <label className={styles['coz-form-label']} htmlFor="email">
-        {label}
-      </label>
-      <ShareAutosuggest
-        loading={loading}
-        contactsAndGroups={getContactsAndGroups()}
-        recipients={recipients}
-        onFocus={onFocus}
-        onPick={onPick}
-        onRemove={onRemove}
-        placeholder={placeholder}
-      />
-    </div>
+    <ShareAutosuggest
+      loading={loading}
+      contactsAndGroups={getContactsAndGroups()}
+      recipients={recipients}
+      onFocus={onFocus}
+      onPick={onPick}
+      onRemove={onRemove}
+      placeholder={placeholder}
+    />
   )
 }
 
 ShareRecipientsInput.propTypes = {
-  label: PropTypes.string,
   contacts: contactsResponseType.isRequired,
   groups: groupsResponseType.isRequired,
   recipients: PropTypes.array,
@@ -77,7 +69,6 @@ ShareRecipientsInput.propTypes = {
 }
 
 ShareRecipientsInput.defaultProps = {
-  label: 'To:',
   recipients: []
 }
 
