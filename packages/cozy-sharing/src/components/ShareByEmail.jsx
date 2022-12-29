@@ -141,7 +141,6 @@ export const ShareByEmail = ({
     <div className={styles['coz-form-group']}>
       <div className={styles['coz-form']}>
         <ShareRecipientsInput
-          label={t(`${documentType}.share.shareByEmail.email`)}
           placeholder={
             recipients.length === 0
               ? t(`${documentType}.share.shareByEmail.emailPlaceholder`)
