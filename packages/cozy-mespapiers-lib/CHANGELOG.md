@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.1.0...cozy-mespapiers-lib@13.1.1) (2022-12-30)
+
+
+### Bug Fixes
+
+* Group papers under their source account, even if they have an owner ([3fb4912](https://github.com/cozy/cozy-libs/commit/3fb49123f8c8607e52f90d762cbb33e88e2a5695))
+
+
+
+
+
 # [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.0.0...cozy-mespapiers-lib@13.1.0) (2022-12-23)
 
 
