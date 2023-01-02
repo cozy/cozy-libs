@@ -33,6 +33,7 @@ export const ShareByEmail = ({
   const [recipients, setRecipients] = useState([])
   const [loading, setLoading] = useState(false)
   const [selectedOption, setSelectedOption] = useState()
+  const [shareAutosuggestFocused, setShareAutosuggestFocused] = useState(false)
 
   const reset = () => {
     setRecipients([])
@@ -137,6 +138,8 @@ export const ShareByEmail = ({
     return isSharingReadOnly ? [readOnly] : [readWrite, readOnly]
   }
 
+  const showShareControl = shareAutosuggestFocused || recipients.length > 0
+
   return (
     <div className={styles['coz-form-group']}>
       <div className={styles['coz-form']}>
@@ -148,20 +151,24 @@ export const ShareByEmail = ({
           }
           onPick={recipient => onRecipientPick(recipient)}
           onRemove={recipient => onRecipientRemove(recipient)}
+          onFocus={() => setShareAutosuggestFocused(true)}
+          onBlur={() => setShareAutosuggestFocused(false)}
           contacts={contacts}
           groups={groups}
           recipients={recipients}
         />
       </div>
-      <div className={styles['share-type-control']}>
-        <ShareTypeSelect options={getSharingOptions()} onChange={onChange} />
-        <ShareSubmit
-          label={t(`${documentType}.share.shareByEmail.send`)}
-          onSubmit={share}
-          loading={loading}
-          disabled={recipients.length === 0}
-        />
-      </div>
+      {showShareControl && (
+        <div className={styles['share-type-control']}>
+          <ShareTypeSelect options={getSharingOptions()} onChange={onChange} />
+          <ShareSubmit
+            label={t(`${documentType}.share.shareByEmail.send`)}
+            onSubmit={share}
+            loading={loading}
+            disabled={recipients.length === 0}
+          />
+        </div>
+      )}
     </div>
   )
 }
