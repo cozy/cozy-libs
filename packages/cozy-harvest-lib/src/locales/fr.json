@@ -522,6 +522,10 @@
       "secondaryText": "Annuler"
     }
   },
+  "connectionBackdrop": {
+    "connecting": "Connexion en cours",
+    "progress": "Nous interrogeons %{name}, cela peut prendre jusqu'à 30 secondes..."
+  },
   "disconnectedAccountModal": {
     "disconnected-help": "Vous avez déconnecté votre compte. Vous conservez l'historique de vos données déjà importées. Si vous souhaitez reprendre la connexion, reconfigurez votre compte depuis le bouton \"Ajouter une banque\"."
   },

@@ -522,6 +522,10 @@
       "secondaryText": "Cancel"
     }
   },
+  "connectionBackdrop": {
+    "connecting": "Connection in progress",
+    "progress": "We are requesting %{name}, this can take up to 30 seconds..."
+  },
   "disconnectedAccountModal": {
     "disconnected-help": "This account is disconnected. Your data has been kept. If you want to restart the synchronisation, please reconfigure your account with the \"Add a bank\" button."
   },
