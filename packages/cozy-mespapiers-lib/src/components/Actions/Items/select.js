@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
@@ -11,7 +11,6 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
     Component: function Select({ className, files }) {
       const { t } = useI18n()
       const navigate = useNavigate()
-      const { pathname } = useLocation()
       const selectFromFile = files.length === 1
 
       return (
@@ -19,7 +18,7 @@ export const select = ({ hideActionsMenu, addMultiSelectionFile }) => {
           className={className}
           icon={selectFromFile ? 'select-all' : 'paperplane'}
           onClick={() => {
-            navigate(`${pathname}/multiselect`)
+            navigate(`/paper/multiselect`)
             hideActionsMenu && hideActionsMenu()
             files.length > 0 &&
               addMultiSelectionFile &&

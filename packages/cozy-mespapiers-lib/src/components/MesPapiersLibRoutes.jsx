@@ -33,7 +33,6 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
           </Route>
           <Route path="files/:fileTheme" element={<PapersList />}>
             <Route path="create" element={<PlaceholderListModal />} />
-            <Route path="multiselect" element={<MultiselectView />} />
             <Route
               path="create/:qualificationLabel"
               element={<CreatePaperModal />}
