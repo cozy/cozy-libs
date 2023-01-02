@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.1.0...cozy-harvest-lib@11.2.0) (2023-01-02)
+
+
+### Features
+
+* **harvest:** Create a `ConnectionBackdrop` component ([3eb0909](https://github.com/cozy/cozy-libs/commit/3eb0909fd95975a0c3486ae9489aa0a88b469eee))
+* **harvest:** Stop redirecting to the success screen once logged ([441e789](https://github.com/cozy/cozy-libs/commit/441e78969ebd506c4f090f1a2b877e403b0e6d69))
+* **harvest:** Use the new connection backdrop, behind a flag ([43cbfa3](https://github.com/cozy/cozy-libs/commit/43cbfa3d270975566e5ad0d1136310731dd7b29d))
+
+
+
+
+
 # [11.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.0.0...cozy-harvest-lib@11.1.0) (2022-12-21)
 
 
