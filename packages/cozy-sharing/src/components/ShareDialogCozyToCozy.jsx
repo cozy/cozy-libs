@@ -1,5 +1,6 @@
 import React from 'react'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { default as DumbShareByLink } from './ShareByLink'
 import { default as DumbShareByEmail } from './ShareByEmail'
@@ -56,6 +57,9 @@ const SharingContent = ({
           </strong>
         </div>
       )}
+      <Typography variant="h6" className="u-mb-1-half">
+        {t('Share.contacts.whoHasAccess')}
+      </Typography>
       {showShareByEmail && (
         <DumbShareByEmail
           contacts={contacts}
