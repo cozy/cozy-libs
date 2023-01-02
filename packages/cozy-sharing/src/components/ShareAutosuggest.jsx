@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
 import Autosuggest from 'react-autosuggest'
 
@@ -18,24 +18,22 @@ import {
 import ContactSuggestion from './ContactSuggestion'
 import { extractEmails, validateEmail } from '../helpers/email'
 
-export default class ShareAutocomplete extends Component {
-  state = {
-    inputValue: '',
-    suggestions: []
-  }
+const ShareAutocomplete = ({
+  loading,
+  contactsAndGroups,
+  recipients,
+  onFocus,
+  onPick,
+  onRemove,
+  placeholder
+}) => {
+  const [inputValue, setInputValue] = useState('')
+  const [suggestions, setSuggestions] = useState([])
+  const [isPasted, setIsPasted] = useState(false)
 
-  componentDidUpdate(prevProps) {
-    if (
-      this.props.contactsAndGroups.length !== prevProps.contactsAndGroups.length
-    ) {
-      this.onSuggestionsFetchRequested({
-        value: this.state.inputValue
-      })
-    }
-  }
+  const autosuggestRef = useRef(null)
 
-  computeSuggestions(value) {
-    const { contactsAndGroups } = this.props
+  const computeSuggestions = value => {
     const inputValue = value.trim().toLowerCase()
 
     return inputValue.length === 0
@@ -49,81 +47,73 @@ export default class ShareAutocomplete extends Component {
         )
   }
 
-  onSuggestionsFetchRequested = ({ value }) => {
-    this.setState(state => ({
-      ...state,
-      suggestions: this.computeSuggestions(value)
-    }))
+  const onSuggestionsFetchRequested = ({ value }) => {
+    setSuggestions(computeSuggestions(value))
   }
 
-  onSuggestionsClearRequested = () => {
-    this.setState(state => ({ ...state, suggestions: [] }))
-  }
-  onPaste = () => {
-    this.isPasted = true
+  const onSuggestionsClearRequested = () => {
+    setSuggestions([])
   }
 
-  onChange = (event, { newValue, method }) => {
-    if (this.isPasted) {
+  const onAutosuggestPaste = () => {
+    setIsPasted(true)
+  }
+
+  const onAutosuggestChange = (event, { newValue, method }) => {
+    if (isPasted) {
       const emails = extractEmails(newValue)
       if (emails) {
         emails.map(email => {
-          this.onPick({ email })
+          onAutosuggestPick({ email })
         })
       }
-      this.isPasted = false
+      setIsPasted(false)
     } else {
       if (typeof newValue !== 'object') {
-        this.setState(state => ({ ...state, inputValue: newValue }))
+        setInputValue(newValue)
       } else if (method === 'click' || method === 'enter') {
         // A suggestion has been picked
-        this.onPick(newValue)
+        onAutosuggestPick(newValue)
       }
     }
   }
 
-  onKeyPress = event => {
+  const onKeyPress = event => {
     // The user wants to add an unknown email
     if (
       ((event.key === 'Enter' || event.keyCode === 13) &&
-        validateEmail(this.state.inputValue)) ||
+        validateEmail(inputValue)) ||
       ((event.key === 'Space' || event.keyCode === 32) &&
-        validateEmail(this.state.inputValue))
+        validateEmail(inputValue))
     ) {
-      this.onPick({ email: this.state.inputValue })
+      onAutosuggestPick({ email: inputValue })
     }
   }
 
-  onFocus = () => {
-    this.props.onFocus()
+  const onAutosuggestFocus = () => {
+    onFocus()
   }
 
-  onBlur = (event, { highlightedSuggestion }) => {
+  const onAutosuggestBlur = (event, { highlightedSuggestion }) => {
     if (highlightedSuggestion) {
-      this.props.onPick(highlightedSuggestion)
-      this.setState(state => ({ ...state, inputValue: '' }))
-    } else if (
-      this.state.inputValue !== '' &&
-      this.state.inputValue.match(/\S+@\S+/)
-    ) {
-      this.props.onPick({ email: this.state.inputValue })
-      this.setState(state => ({ ...state, inputValue: '' }))
+      onAutosuggestPick(highlightedSuggestion)
+    } else if (inputValue !== '' && inputValue.match(/\S+@\S+/)) {
+      onAutosuggestPick({ email: inputValue })
     }
   }
 
-  onPick = value => {
-    this.props.onPick(value)
-    this.setState(state => ({ ...state, inputValue: '' }))
-    requestAnimationFrame(() => this.input && this.input.focus(), 1) // don't ask...
+  const onAutosuggestPick = value => {
+    onPick(value)
+    setInputValue('')
+    autosuggestRef?.current?.input?.focus()
   }
 
-  onRemove = value => {
-    this.props.onRemove(value)
-    requestAnimationFrame(() => this.input && this.input.focus(), 1)
+  const onAutosuggestRemove = value => {
+    onRemove(value)
+    autosuggestRef?.current?.input?.focus()
   }
 
-  renderInput(inputProps) {
-    const { loading, recipients } = this.props
+  const renderInput = inputProps => {
     return (
       <div className={styles['recipientsContainer']}>
         {recipients.map((recipient, idx) => {
@@ -136,14 +126,14 @@ export default class ShareAutocomplete extends Component {
               <span>{value}</span>
               <button
                 className={styles['removeRecipient']}
-                onClick={() => this.onRemove(recipient)}
+                onClick={() => onAutosuggestRemove(recipient)}
               >
                 <BoldCross />
               </button>
             </div>
           )
         })}
-        <input {...inputProps} onKeyPress={this.onKeyPress} />
+        <input {...inputProps} onKeyPress={onKeyPress} />
         {loading && (
           <Spinner
             color={palette.dodgerBlue}
@@ -154,49 +144,45 @@ export default class ShareAutocomplete extends Component {
     )
   }
 
-  render() {
-    const { inputValue, suggestions } = this.state
-    const { contactsAndGroups, placeholder } = this.props
-    return (
-      <Autosuggest
-        ref={self => {
-          this.input = self ? self.input : null
-        }}
-        theme={styles}
-        suggestions={suggestions.slice(0, 20)}
-        getSuggestionValue={contact => contact}
-        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-        renderSuggestion={contactOrGroup => (
-          <ContactSuggestion
-            contacts={contactsAndGroups.filter(
-              item => item._type === Contact.doctype
-            )}
-            contactOrGroup={contactOrGroup}
-          />
-        )}
-        renderInputComponent={props => this.renderInput(props)}
-        highlightFirstSuggestion
-        inputProps={{
-          onFocus: this.onFocus,
-          onChange: this.onChange,
-          onPaste: this.onPaste,
-          onBlur: this.onBlur,
-          value: inputValue,
-          type: 'email',
-          placeholder
-        }}
-      />
-    )
-  }
+  return (
+    <Autosuggest
+      ref={autosuggestRef}
+      theme={styles}
+      suggestions={suggestions.slice(0, 20)}
+      getSuggestionValue={contact => contact}
+      onSuggestionsFetchRequested={onSuggestionsFetchRequested}
+      onSuggestionsClearRequested={onSuggestionsClearRequested}
+      renderSuggestion={contactOrGroup => (
+        <ContactSuggestion
+          contacts={contactsAndGroups.filter(
+            item => item._type === Contact.doctype
+          )}
+          contactOrGroup={contactOrGroup}
+        />
+      )}
+      renderInputComponent={props => renderInput(props)}
+      highlightFirstSuggestion
+      inputProps={{
+        onFocus: onAutosuggestFocus,
+        onChange: onAutosuggestChange,
+        onPaste: onAutosuggestPaste,
+        onBlur: onAutosuggestBlur,
+        value: inputValue,
+        type: 'email',
+        placeholder
+      }}
+    />
+  )
 }
 
 ShareAutocomplete.propTypes = {
+  loading: PropTypes.bool,
   contactsAndGroups: PropTypes.array,
-  placeholder: PropTypes.string,
+  recipients: PropTypes.array.isRequired,
   onFocus: PropTypes.func.isRequired,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
-  recipients: PropTypes.array.isRequired
+  placeholder: PropTypes.string
 }
+
+export default ShareAutocomplete
