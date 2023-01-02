@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.1.2...cozy-mespapiers-lib@13.1.3) (2023-01-02)
+
+
+### Bug Fixes
+
+* **mespapiers:** Multiselect route ([3fcf736](https://github.com/cozy/cozy-libs/commit/3fcf736bf4c4f70f70bba25667f836e244c76816))
+
+
+
+
+
 ## [13.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.1.1...cozy-mespapiers-lib@13.1.2) (2023-01-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
