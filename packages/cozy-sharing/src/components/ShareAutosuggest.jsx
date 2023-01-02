@@ -23,6 +23,7 @@ const ShareAutocomplete = ({
   contactsAndGroups,
   recipients,
   onFocus,
+  onBlur,
   onPick,
   onRemove,
   placeholder
@@ -95,6 +96,7 @@ const ShareAutocomplete = ({
   }
 
   const onAutosuggestBlur = (event, { highlightedSuggestion }) => {
+    onBlur()
     if (highlightedSuggestion) {
       onAutosuggestPick(highlightedSuggestion)
     } else if (inputValue !== '' && inputValue.match(/\S+@\S+/)) {
@@ -180,6 +182,7 @@ ShareAutocomplete.propTypes = {
   contactsAndGroups: PropTypes.array,
   recipients: PropTypes.array.isRequired,
   onFocus: PropTypes.func.isRequired,
+  onBlur: PropTypes.func.isRequired,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired,
   placeholder: PropTypes.string
