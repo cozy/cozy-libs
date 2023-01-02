@@ -1,5 +1,5 @@
 import React from 'react'
-import { useNavigate, useLocation } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -10,7 +10,6 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 const SelectFileButton = ({ file }) => {
   const { t } = useI18n()
   const navigate = useNavigate()
-  const { pathname } = useLocation()
   const { addMultiSelectionFile } = useMultiSelection()
 
   return (
@@ -19,7 +18,7 @@ const SelectFileButton = ({ file }) => {
       className="u-ml-half"
       fullWidth
       onClick={() => {
-        navigate(`${pathname}/multiselect`)
+        navigate(`/paper/multiselect`)
         addMultiSelectionFile(file)
       }}
       variant="secondary"
