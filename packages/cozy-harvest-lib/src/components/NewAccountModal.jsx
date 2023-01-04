@@ -24,7 +24,7 @@ import { useDialogContext } from './DialogContext'
  * few konnectors know if the login is success or not.
  *
  */
-const NewAccountModal = ({ konnector, onDismiss }) => {
+const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
   const { t } = useI18n()
   const client = useClient()
   const { replaceHistory } = useContext(MountPointContext)
@@ -41,6 +41,10 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
   }
 
   const handleSuccess = trigger => {
+    if (onSuccess) {
+      return onSuccess()
+    }
+
     const accountId = triggersModel.getAccountId(trigger)
     if (
       !flag('harvest.inappconnectors.enabled') &&

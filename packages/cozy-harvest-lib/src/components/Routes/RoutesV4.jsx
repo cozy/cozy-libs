@@ -14,6 +14,7 @@ const RoutesV4 = ({
   konnectorRoot,
   konnectorWithTriggers,
   accountsAndTriggers,
+  onSuccess,
   onDismiss
 }) => {
   return (
@@ -64,6 +65,7 @@ const RoutesV4 = ({
         render={() => (
           <NewAccountModal
             konnector={konnectorWithTriggers}
+            onSuccess={onSuccess}
             onDismiss={onDismiss}
           />
         )}
