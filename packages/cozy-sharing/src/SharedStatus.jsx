@@ -2,7 +2,7 @@ import React from 'react'
 
 import SharingContext from './context'
 import withLocales from './withLocales'
-import { RecipientsAvatars } from './components/Recipient'
+import RecipientsAvatars from './components/Recipient/RecipientsAvatars'
 
 export const SharedStatus = withLocales(
   ({ docId, className, noSharedClassName, onClick, showMeAsOwner }) => (
