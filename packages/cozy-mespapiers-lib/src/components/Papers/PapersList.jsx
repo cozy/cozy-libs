@@ -122,6 +122,7 @@ const PapersList = ({ papers }) => {
               divider={idx !== papers.list.length - 1}
               actions={actions}
               isRenaming={paper.id === paperBeingRenamedId}
+              isLast={papers.list.length === 1}
               setIsRenaming={isRenaming =>
                 setPaperBeingRenamedId(isRenaming ? paper.id : null)
               }

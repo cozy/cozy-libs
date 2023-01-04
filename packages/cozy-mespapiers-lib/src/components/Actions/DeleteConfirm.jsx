@@ -9,12 +9,14 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import Checkbox from 'cozy-ui/transpiled/react/Checkbox'
 
 import { trashFiles, removeQualification } from './utils'
+import { useNavigate } from 'react-router-dom'
 
-const DeleteConfirm = ({ files, onClose, children }) => {
+const DeleteConfirm = ({ files, isLast, onClose, children }) => {
   const { t } = useI18n()
   const client = useClient()
   const [isDeleting, setDeleting] = useState(false)
   const [clearQualification, setClearQualification] = useState(false)
+  const navigate = useNavigate()
 
   const onDelete = useCallback(async () => {
     setDeleting(true)
@@ -24,7 +26,8 @@ const DeleteConfirm = ({ files, onClose, children }) => {
       await trashFiles(client, files)
     }
     onClose()
-  }, [clearQualification, client, files, onClose])
+    isLast && navigate('/paper', { replace: true })
+  }, [clearQualification, client, files, isLast, navigate, onClose])
 
   const handleOnChange = () => {
     setClearQualification(prev => !prev)

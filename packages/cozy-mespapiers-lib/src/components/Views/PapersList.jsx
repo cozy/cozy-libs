@@ -1,5 +1,5 @@
 import React from 'react'
-import { Navigate, Outlet, useParams } from 'react-router-dom'
+import { Outlet, useParams } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
@@ -44,11 +44,6 @@ const PapersList = ({ selectedThemeLabel = null }) => {
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
   const isLoading = isLoadingFiles || isLoadingContacts
-  const hasNoFiles = !isLoadingFiles && files.length === 0
-
-  if (hasNoFiles) {
-    return <Navigate to="/paper" replace />
-  }
 
   if (isLoading) {
     return (
