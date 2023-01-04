@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import Recipient from './Recipient'
+import Recipient from './Recipient/Recipient'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 /**

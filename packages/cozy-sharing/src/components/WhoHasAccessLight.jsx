@@ -1,6 +1,7 @@
 import React from 'react'
 import cx from 'classnames'
-import { RecipientWithoutStatus, RecipientPlusX } from './Recipient'
+import RecipientWithoutStatus from './Recipient/RecipientWithoutStatus'
+import RecipientPlusX from './Recipient/RecipientPlusX'
 
 import styles from './recipient.styl'
 

@@ -6,10 +6,10 @@ const ContactModel = models.contact
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
-import styles from './recipient.styl'
+import styles from './Recipient/recipient.styl'
 
 import { Contact, Group, getDisplayName, getInitials } from '../models'
-import Identity from './Identity'
+import Identity from './Recipient/Identity'
 
 export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
   const { t } = useI18n()
