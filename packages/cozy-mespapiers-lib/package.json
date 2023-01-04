@@ -40,7 +40,7 @@
     "cozy-client": ">=34.6.0",
     "cozy-device-helper": ">=2.6.0",
     "cozy-doctypes": ">=1.83.8",
-    "cozy-harvest-lib": ">=11.0.0",
+    "cozy-harvest-lib": ">=11.3.0",
     "cozy-intent": ">=2.2.0",
     "cozy-realtime": ">=4.2.0",
     "cozy-sharing": ">=4.3.0",
