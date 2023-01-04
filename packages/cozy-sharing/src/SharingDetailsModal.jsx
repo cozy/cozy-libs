@@ -6,7 +6,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
-import { OwnerIdentity } from './components/Recipient'
+import OwnerIdentity from './components/Recipient/OwnerIdentity'
 import WhoHasAccess from './components/WhoHasAccess'
 import { getDisplayName } from './models'
 

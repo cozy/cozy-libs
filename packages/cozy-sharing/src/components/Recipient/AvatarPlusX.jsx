@@ -4,7 +4,7 @@ import uniqueId from 'lodash/uniqueId'
 
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
-import { SharingTooltip, TooltipRecipientList } from './Tooltip'
+import { SharingTooltip, TooltipRecipientList } from '../Tooltip'
 
 const AvatarPlusX = ({ className, size, extraRecipients = [] }) => {
   const sharingTooltipId = uniqueId('extra-recipients-avatar-')
