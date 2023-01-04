@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import cx from 'classnames'
 
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import CompositeRow from 'cozy-ui/transpiled/react/CompositeRow'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
-import styles from './recipient.styl'
 import { getDisplayName } from '../../models'
 import RecipientConfirm from './RecipientConfirm'
 import RecipientPermissions from './RecipientPermissions'
@@ -45,20 +45,22 @@ const Recipient = props => {
   )
 
   return (
-    <CompositeRow
-      dense
-      className={cx(styles['recipient'], 'u-ph-0')}
-      primaryText={
-        <Typography className="u-ellipsis" variant="body1">
-          {isMe ? t('Share.recipients.you') : name}
-        </Typography>
-      }
-      secondaryText={
-        <RecipientStatus status={status} isMe={isMe} instance={instance} />
-      }
-      image={<RecipientAvatar recipient={props} />}
-      right={RightPart}
-    />
+    <ListItem disableGutters>
+      <ListItemIcon>
+        <RecipientAvatar size="small" recipient={props} />
+      </ListItemIcon>
+      <ListItemText
+        primary={
+          <Typography className="u-ellipsis" variant="body1">
+            {isMe ? t('Share.recipients.you') : name}
+          </Typography>
+        }
+        secondary={
+          <RecipientStatus status={status} isMe={isMe} instance={instance} />
+        }
+      />
+      {RightPart}
+    </ListItem>
   )
 }
 
