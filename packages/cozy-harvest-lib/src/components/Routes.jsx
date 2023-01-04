@@ -49,6 +49,7 @@ const Routes = ({
   konnectorRoot,
   konnector,
   konnectorSlug,
+  onSuccess,
   onDismiss,
   datacardOptions,
   ComponentsProps
@@ -95,6 +96,7 @@ const Routes = ({
                           konnectorRoot={konnectorRoot}
                           konnectorWithTriggers={konnectorWithTriggers}
                           accountsAndTriggers={accountsAndTriggers}
+                          onSuccess={onSuccess}
                           onDismiss={onDismiss}
                         />
                       )}

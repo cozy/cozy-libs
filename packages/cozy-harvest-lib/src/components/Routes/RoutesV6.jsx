@@ -18,6 +18,7 @@ const HarvestParamsWrapper = props => {
 const RoutesV6 = ({
   konnectorWithTriggers,
   accountsAndTriggers,
+  onSuccess,
   onDismiss
 }) => {
   return (
@@ -37,6 +38,7 @@ const RoutesV6 = ({
         element={
           <NewAccountModal
             konnector={konnectorWithTriggers}
+            onSuccess={onSuccess}
             onDismiss={onDismiss}
           />
         }
