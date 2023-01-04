@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.2.0...cozy-harvest-lib@11.3.0) (2023-01-04)
+
+
+### Features
+
+* **harvest:** Add onSuccess in Routes API ([5f41164](https://github.com/cozy/cozy-libs/commit/5f411642d0ac325375925cad157f66275e64db67))
+
+
+
+
+
 # [11.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.1.0...cozy-harvest-lib@11.2.0) (2023-01-02)
 
 
