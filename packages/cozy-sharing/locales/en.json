@@ -62,6 +62,13 @@
       "sync_to_mine": "Synchronise in my Cozy",
       "add_to_mine": "Add to my Cozy",
       "close": "Close"
+    },
+    "permissionLink": {
+      "title": "Allow anyone with the link to:",
+      "read": "See file",
+      "write": "Modify file",
+      "cancel": "Cancel",
+      "confirm": "OK"
     }
   },
   "Sharings": {
@@ -90,19 +97,11 @@
       "sharedBy": "Shared by %{name}",
       "sharedByLink": "Shared by link",
       "shareByLink": {
-        "subtitle": "Or share by link",
         "create": "Generate a link",
-        "activated": "Link activated",
-        "copy": "Copy link",
+        "send": "Send link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "ro": "Can read",
-        "rw": "Can change",
-        "desc": {
-          "ro": "Link holders can only read or download content.",
-          "rw": "Link holders can alter and delete content."
-        },
-        "deactivate": "Deactivate link"
+        "permserror": "An error occurred while changing the permissions of the link, please try again."
       },
       "shareByEmail": {
         "subtitle": "By email",
@@ -170,20 +169,11 @@
       "sharedWithMe": "Shared with me",
       "sharedBy": "Shared by %{name}",
       "shareByLink": {
-        "subtitle": "Share by link",
         "create": "Generate a link",
-        "activated": "Link activated",
-        "copy": "Copy link",
+        "send": "Send link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "permserror": "An error occurred while changing the permissions of the link, please try again.",
-        "ro": "Can read",
-        "rw": "Can change",
-        "desc": {
-          "ro": "Link holders can only read or download content.",
-          "rw": "Link holders can alter and delete content."
-        },
-        "deactivate": "Deactivate link"
+        "permserror": "An error occurred while changing the permissions of the link, please try again."
       },
       "shareByEmail": {
         "subtitle": "By email",
@@ -251,20 +241,12 @@
       "shared": "Shared",
       "sharedWithMe": "Shared with me",
       "shareByLink": {
-        "subtitle": "Share by link",
-        "fetchFailed": "Woops! It seems your connectivity is limited, try again later when it gets better.",
         "create": "Generate a link",
-        "activated": "Link activated",
-        "copy": "Copy link",
+        "send": "Send link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "ro": "Can read",
-        "rw": "Can change",
-        "desc": {
-          "ro": "Link holders can only read or download content.",
-          "rw": "Link holders can change and delete content."
-        },
-        "deactivate": "Deactivate link"
+        "permserror": "An error occurred while changing the permissions of the link, please try again.",
+        "fetchFailed": "Woops! It seems your connectivity is limited, try again later when it gets better."
       },
       "shareByEmail": {
         "title": "By email",
@@ -320,19 +302,11 @@
       "sharedBy": "Shared by %{name}",
       "sharedByLink": "Shared by link",
       "shareByLink": {
-        "subtitle": "Or share by link",
         "create": "Generate a link",
-        "activated": "Link activated",
-        "copy": "Copy link",
+        "send": "Send link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "ro": "Can read",
-        "rw": "Can change",
-        "desc": {
-          "ro": "Link holders can only read or download content.",
-          "rw": "Link holders can alter and delete content."
-        },
-        "deactivate": "Deactivate link"
+        "permserror": "An error occurred while changing the permissions of the link, please try again."
       },
       "shareByEmail": {
         "subtitle": "By email",
