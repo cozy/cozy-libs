@@ -35,6 +35,7 @@ import {
   createSharingInStore,
   updateSharingInStore
 } from './helpers/sharings'
+import { fetchApps } from './queries/queries'
 
 const SHARING_DOCTYPE = 'io.cozy.sharings'
 const PERMISSION_DOCTYPE = 'io.cozy.permissions'
@@ -158,7 +159,7 @@ export class SharingProvider extends Component {
     const [sharings, permissions, apps] = await Promise.all([
       this.sharingCol.findByDoctype(doctype),
       this.permissionCol.findLinksByDoctype(doctype),
-      this.permissionCol.findApps()
+      client.query(fetchApps().definition, fetchApps().options)
     ])
     this.dispatch(
       receiveSharings({
