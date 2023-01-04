@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { withClient } from 'cozy-client'
+import CozyClient, { withClient, Q } from 'cozy-client'
 
 import SharingContext from './context'
 import reducer, {
@@ -158,7 +158,10 @@ export class SharingProvider extends Component {
     const [sharings, permissions, apps] = await Promise.all([
       this.sharingCol.findByDoctype(doctype),
       this.permissionCol.findLinksByDoctype(doctype),
-      this.permissionCol.findApps()
+      client.query(Q('io.cozy.apps'), {
+        as: 'io.cozy.apps',
+        fetchPolicy: CozyClient.fetchPolicies.olderThan(9 * 60 * 1000)
+      })
     ])
     this.dispatch(
       receiveSharings({
