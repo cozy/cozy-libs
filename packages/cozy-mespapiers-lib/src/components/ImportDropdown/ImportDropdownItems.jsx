@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
+import flag from 'cozy-flags'
 import { useClient } from 'cozy-client'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -38,7 +39,11 @@ const ImportDropdownItems = ({ placeholder, onClick }) => {
   const styles = useStyles()
   const {
     acquisitionSteps: { length: acquisitionStepsLength },
-    connectorCriteria: { category: konnectorCategory, name: konnectorName } = {}
+    connectorCriteria: {
+      category: konnectorCategory,
+      name: konnectorName
+    } = {},
+    label
   } = placeholder
   const hasSteps = acquisitionStepsLength > 0
 
@@ -80,9 +85,12 @@ const ImportDropdownItems = ({ placeholder, onClick }) => {
       <AppLinker
         app={{ slug: 'store' }}
         href={getStoreWebLinkByKonnector({
+          client,
           konnectorName,
           konnectorCategory,
-          client
+          redirectionPath: flag('harvest.inappconnectors.enabled')
+            ? `/paper/files/${label}/harvest/${konnectorName || ''}`
+            : undefined
         })}
       >
         {({ href, onClick }) => {
@@ -94,7 +102,9 @@ const ImportDropdownItems = ({ placeholder, onClick }) => {
               <Link
                 href={href}
                 onClick={onClick}
-                target="_blank"
+                target={
+                  flag('harvest.inappconnectors.enabled') ? undefined : '_blank'
+                }
                 style={{ padding: 0, whiteSpace: 'normal' }}
               >
                 <Typography gutterBottom>

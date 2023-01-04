@@ -1,5 +1,11 @@
 import React from 'react'
-import { Routes, Route } from 'react-router-dom'
+import {
+  Routes,
+  Route,
+  useSearchParams,
+  Navigate,
+  useLocation
+} from 'react-router-dom'
 import PropTypes from 'prop-types'
 
 import { MesPapiersLibProviders } from './MesPapiersLibProviders'
@@ -17,6 +23,16 @@ import ContactEdit from './Views/ContactEdit'
 import HarvestRoutes from './Views/HarvestRoutes'
 
 const MesPapiersLibRoutes = ({ lang, components }) => {
+  const location = useLocation()
+  const [searchParams] = useSearchParams()
+  const connectorSlug = searchParams.get('connectorSlug')
+
+  // usefull when getting connectorSlug from Store after rerouting process
+  // because of redirectAfterInstall
+  if (connectorSlug) {
+    return <Navigate replace to={`${location.pathname}${connectorSlug}`} />
+  }
+
   return (
     <Routes>
       <Route
