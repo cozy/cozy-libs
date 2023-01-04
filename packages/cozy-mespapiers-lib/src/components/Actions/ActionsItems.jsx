@@ -4,7 +4,7 @@ import cx from 'classnames'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { getActionName, getOnlyNeededActions } from './utils'
 
-export const ActionsItems = ({ actions, file, onClose }) => {
+export const ActionsItems = ({ actions, file, isLast, onClose }) => {
   const { t } = useI18n()
   const cleanedActions = useMemo(
     () => getOnlyNeededActions(actions, file),
@@ -18,7 +18,7 @@ export const ActionsItems = ({ actions, file, onClose }) => {
     const { Component, action, isEnabled } = actionDefinition
 
     const onClick = () => {
-      action && action([file], t)
+      action && action([file], t, isLast)
       onClose()
     }
 

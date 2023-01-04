@@ -10,11 +10,12 @@ import ActionMenuItemWrapper from '../ActionMenuItemWrapper'
 export const trash = ({ pushModal, popModal }) => {
   return {
     name: 'trash',
-    action: files =>
+    action: (files, _, isLast) =>
       pushModal(
         <DeleteConfirm
           files={files}
           referenced={isReferencedBy(files, CONTACTS_DOCTYPE)}
+          isLast={isLast}
           onClose={popModal}
         />
       ),

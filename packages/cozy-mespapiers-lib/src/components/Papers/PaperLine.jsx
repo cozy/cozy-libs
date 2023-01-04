@@ -15,7 +15,14 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const { splitFilename } = models.file
 
-const PaperLine = ({ paper, divider, actions, isRenaming, setIsRenaming }) => {
+const PaperLine = ({
+  paper,
+  divider,
+  actions,
+  isRenaming,
+  setIsRenaming,
+  isLast
+}) => {
   const { isMobile } = useBreakpoints()
   const actionBtnRef = useRef()
 
@@ -57,7 +64,7 @@ const PaperLine = ({ paper, divider, actions, isRenaming, setIsRenaming }) => {
               />
             </ActionMenuHeader>
           )}
-          <ActionsItems actions={actions} file={paper} />
+          <ActionsItems actions={actions} file={paper} isLast={isLast} />
         </ActionMenuWrapper>
       )}
     </>
