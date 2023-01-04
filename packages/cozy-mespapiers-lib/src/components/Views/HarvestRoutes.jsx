@@ -39,12 +39,15 @@ const HarvestRoutes = () => {
     ? { ...konnector, triggers: { data: triggers } }
     : undefined
 
+  const onDismiss = () => navigate('..')
+
   return (
     <Routes
       konnector={konnectorWithTriggers}
       konnectorSlug={connectorSlug}
       datacardOptions={datacardOptions}
-      onDismiss={() => navigate('..')}
+      onSuccess={onDismiss}
+      onDismiss={onDismiss}
       ComponentsProps={{
         CannotConnectModal: { extraContent: <ExtraContent /> }
       }}
