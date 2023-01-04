@@ -8,6 +8,14 @@ const defaultFetchPolicy = fetchPolicies.olderThan(
   DEFAULT_CACHE_TIMEOUT_QUERIES
 )
 
+export const fetchApps = () => ({
+  definition: Q('io.cozy.apps'),
+  options: {
+    as: 'io.cozy.apps',
+    fetchPolicy: defaultFetchPolicy
+  }
+})
+
 export const buildSharingsByIdQuery = sharingId => ({
   definition: Q('io.cozy.sharings').getById(sharingId),
   options: {
