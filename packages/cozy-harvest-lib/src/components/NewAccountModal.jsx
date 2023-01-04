@@ -1,12 +1,14 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import { useClient } from 'cozy-client'
-import flag from 'cozy-flags'
+import DialogContent from '@material-ui/core/DialogContent'
 
+import flag from 'cozy-flags'
+import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 
 import TriggerManager from './TriggerManager'
 import KonnectorIcon from './KonnectorIcon'
@@ -14,8 +16,6 @@ import * as triggersModel from '../helpers/triggers'
 import KonnectorMaintenance from './Maintenance'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
 import { MountPointContext } from './MountPointContext'
-import DialogContent from '@material-ui/core/DialogContent'
-import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import { useDialogContext } from './DialogContext'
 
 /**
@@ -38,6 +38,18 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
   const { dialogTitleProps } = useDialogContext()
   const fieldOptions = {
     displaySecretPlaceholder: false
+  }
+
+  const handleSuccess = trigger => {
+    const accountId = triggersModel.getAccountId(trigger)
+    let path = `/accounts/${accountId}`
+    if (
+      !flag('harvest.inappconnectors.enabled') &&
+      trigger.worker !== 'client'
+    ) {
+      path += '/success'
+    }
+    replaceHistory(path)
   }
 
   return (
@@ -69,28 +81,8 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
         <DialogContent className="u-pt-0">
           <TriggerManager
             konnector={konnector}
-            onLoginSuccess={trigger => {
-              const accountId = triggersModel.getAccountId(trigger)
-              let path = `/accounts/${accountId}`
-              if (
-                !flag('harvest.inappconnectors.enabled') &&
-                trigger.worker !== 'client'
-              ) {
-                path += '/success'
-              }
-              replaceHistory(path)
-            }}
-            onSuccess={trigger => {
-              const accountId = triggersModel.getAccountId(trigger)
-              let path = `/accounts/${accountId}`
-              if (
-                !flag('harvest.inappconnectors.enabled') &&
-                trigger.worker !== 'client'
-              ) {
-                path += '/success'
-              }
-              replaceHistory(path)
-            }}
+            onLoginSuccess={handleSuccess}
+            onSuccess={handleSuccess}
             onVaultDismiss={onDismiss}
             fieldOptions={fieldOptions}
           />
