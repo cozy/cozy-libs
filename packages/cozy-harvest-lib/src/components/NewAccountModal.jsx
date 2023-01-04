@@ -42,14 +42,13 @@ const NewAccountModal = ({ konnector, onDismiss }) => {
 
   const handleSuccess = trigger => {
     const accountId = triggersModel.getAccountId(trigger)
-    let path = `/accounts/${accountId}`
     if (
       !flag('harvest.inappconnectors.enabled') &&
       trigger.worker !== 'client'
     ) {
-      path += '/success'
+      replaceHistory(`/accounts/${accountId}/success`)
     }
-    replaceHistory(path)
+    replaceHistory(`/accounts/${accountId}`)
   }
 
   return (
