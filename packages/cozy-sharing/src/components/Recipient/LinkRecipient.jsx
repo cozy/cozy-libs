@@ -7,10 +7,12 @@ import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
+import Circle from 'cozy-ui/transpiled/react/Circle'
 import RecipientConfirm from './RecipientConfirm'
 import LinkRecipientPermissions from './LinkRecipientPermissions'
 
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import styles from './recipient.styl'
 
 const LinkRecipient = props => {
   const { t } = useI18n()
@@ -29,7 +31,9 @@ const LinkRecipient = props => {
   return (
     <ListItem disableGutters>
       <ListItemIcon>
-        <Icon icon={LinkIcon} />
+        <Circle size="small" className={styles['link-recipient-icon-circle']}>
+          <Icon icon={LinkIcon} />
+        </Circle>
       </ListItemIcon>
       <ListItemText
         primary={
