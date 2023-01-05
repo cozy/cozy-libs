@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import copy from 'copy-text-to-clipboard'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
@@ -21,16 +21,20 @@ const ShareByLink = ({
 }) => {
   const { t } = useI18n()
   const [loading, setLoading] = useState(false)
+  const [shouldCopyToClipboard, setShouldCopyToClipboard] = useState(false)
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
-  const copyLinkToClipboard = ({ isAutomaticCopy }) => {
-    if (copy(link))
-      Alerter.success(t(`${documentType}.share.shareByLink.copied`))
-    else if (!isAutomaticCopy)
-      // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
-      Alerter.error(t(`${documentType}.share.shareByLink.failed`))
-  }
+  const copyLinkToClipboard = useCallback(
+    ({ isAutomaticCopy }) => {
+      if (copy(link))
+        Alerter.success(t(`${documentType}.share.shareByLink.copied`))
+      else if (!isAutomaticCopy)
+        // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
+        Alerter.error(t(`${documentType}.share.shareByLink.failed`))
+    },
+    [documentType, link, t]
+  )
 
   const createShareLink = async () => {
     try {
@@ -47,8 +51,15 @@ const ShareByLink = ({
   const onCreate = async () => {
     await createShareLink()
     setIsEditDialogOpen(true)
-    copyLinkToClipboard({ isAutomaticCopy: true })
+    setShouldCopyToClipboard(true)
   }
+
+  useEffect(() => {
+    if (link && shouldCopyToClipboard) {
+      copyLinkToClipboard({ isAutomaticCopy: true })
+      setShouldCopyToClipboard(false)
+    }
+  }, [link, shouldCopyToClipboard, copyLinkToClipboard])
 
   const onClose = () => {
     setIsEditDialogOpen(false)
