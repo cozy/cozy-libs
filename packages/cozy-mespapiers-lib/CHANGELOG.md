@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.1.4...cozy-mespapiers-lib@14.0.0) (2023-01-05)
+
+
+### Features
+
+* **mespapiers:** Close harvest modal after login ([64e8391](https://github.com/cozy/cozy-libs/commit/64e839199d543e27ca0b2cd2ae96350e22a2156f))
+* **mespapiers:** Redirection to root is no longer because of no files ([9e09eba](https://github.com/cozy/cozy-libs/commit/9e09eba475c1186adef9621c92581c00661a1a86))
+* **mespapiers:** Upgrade cozy-harvest-lib from 11.0.0 to 11.3.0 ([575c6b2](https://github.com/cozy/cozy-libs/commit/575c6b2c8e3348383a5cf4cb33d4f6141654480f))
+* **mespapiers:** Use `redirectAfterInstall` to get Store redirection ([68c9b8c](https://github.com/cozy/cozy-libs/commit/68c9b8c129ca29591f42be72025c57df2517d266))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** `cozy-harvest-lib` must be `>=11.3.0`
+
+
+
+
+
 ## [13.1.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.1.3...cozy-mespapiers-lib@13.1.4) (2023-01-04)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
