@@ -25,6 +25,7 @@
     "locked-type-folder": "Coming soon: you will be able to change permissions you grant on the folder.",
     "recipients": {
       "you": "You",
+      "anyoneWithTheLink": "Anyone with the link",
       "accessCount": "%{count} people have access"
     },
     "create-cozy": "Create my cozy",
@@ -67,6 +68,9 @@
       "title": "Allow anyone with the link to:",
       "read": "See file",
       "write": "Modify file",
+      "readDescription": "Link holders can only read or download content.",
+      "writeDescription": "Link holders can alter and delete content.",
+      "deactivate": "Deactivate link",
       "cancel": "Cancel",
       "confirm": "OK"
     }

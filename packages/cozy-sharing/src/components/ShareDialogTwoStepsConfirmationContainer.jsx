@@ -228,6 +228,10 @@ const ShareDialogTwoStepsConfirmationContainer = ({
         showWhoHasAccess={showWhoHasAccess}
         recipientsToBeConfirmed={recipientsToBeConfirmed}
         verifyRecipient={showConfirmationDialog}
+        link={link}
+        permissions={permissions}
+        onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+        onRevokeLink={onRevokeLink}
       />
     )
 

@@ -25,6 +25,7 @@
     "locked-type-folder": "Bientôt : vous pourrez changer la permission donnée sur le dossier.",
     "recipients": {
       "you": "Vous",
+      "anyoneWithTheLink": "N'importe qui avec le lien",
       "accessCount": "%{count} personnes y ont accès"
     },
     "create-cozy": "Créer mon Cozy",
@@ -67,6 +68,9 @@
       "title": "Autoriser n'importe qui avec le lien à :",
       "read": "Voir le fichier",
       "write": "Modifier le fichier",
+      "readDescription": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
+      "writeDescription": "Les détenteurs du lien peuvent modifier et supprimer le contenu.",
+      "deactivate": "Désactiver le lien",
       "cancel": "Annuler",
       "confirm": "OK"
     }

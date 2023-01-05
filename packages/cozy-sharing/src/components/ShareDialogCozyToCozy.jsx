@@ -33,7 +33,11 @@ const SharingContent = ({
   showShareOnlyByLink,
   showWhoHasAccess,
   recipientsToBeConfirmed,
-  verifyRecipient
+  verifyRecipient,
+  link,
+  permissions,
+  onUpdateShareLinkPermissions,
+  onRevokeLink
 }) => {
   const { t } = useI18n()
 
@@ -85,6 +89,10 @@ const SharingContent = ({
           recipients={recipients}
           recipientsToBeConfirmed={recipientsToBeConfirmed}
           verifyRecipient={verifyRecipient}
+          link={link}
+          permissions={permissions}
+          onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+          onRevokeLink={onRevokeLink}
         />
       )}
     </div>
