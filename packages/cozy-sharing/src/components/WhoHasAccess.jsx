@@ -1,9 +1,9 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Recipient from './Recipient/Recipient'
+import LinkRecipient from './Recipient/LinkRecipient'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
  *
@@ -30,14 +30,30 @@ const WhoHasAccess = ({
   onRevoke,
   className,
   onRevokeSelf,
-  verifyRecipient
+  verifyRecipient,
+  link,
+  permissions,
+  onUpdateShareLinkPermissions,
+  onRevokeLink
 }) => (
   <div className={className}>
     <RecipientWaitingForConfirmationAlert
       recipientsToBeConfirmed={recipientsToBeConfirmed}
     />
-
     <List disablePadding>
+      {link && (
+        <LinkRecipient
+          document={document}
+          documentType={documentType}
+          onRevoke={onRevoke}
+          onRevokeSelf={onRevokeSelf}
+          link={link}
+          permissions={permissions}
+          onChangePermissions={onUpdateShareLinkPermissions}
+          onDisable={onRevokeLink}
+        />
+      )}
+
       {recipients.map(recipient => {
         const recipientConfirmationData = recipientsToBeConfirmed.find(
           user => user.email === recipient.email
