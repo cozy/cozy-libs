@@ -92,7 +92,7 @@ ShareModal.propTypes = {
   hasSharedChild: PropTypes.bool,
   hasSharedParent: PropTypes.bool,
   isOwner: PropTypes.bool,
-  link: PropTypes.string.isRequired,
+  link: PropTypes.string,
   needsContactsPermission: PropTypes.bool,
   onClose: PropTypes.func.isRequired,
   onRevoke: PropTypes.func.isRequired,
