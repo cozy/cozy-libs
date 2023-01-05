@@ -41,6 +41,10 @@ export const ShareModal = ({
 
   return shareDialogOnlyByLink ? (
     <ShareDialogOnlyByLink
+      isOwner={isOwner}
+      onRevoke={onRevoke}
+      onRevokeSelf={onRevokeSelf}
+      recipients={recipients}
       document={document}
       documentType={documentType}
       link={link}

@@ -3,9 +3,14 @@ import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import { default as DumbShareByLink } from './ShareByLink'
+import WhoHasAccess from './WhoHasAccess'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const ShareDialogOnlyByLink = ({
+  isOwner,
+  onRevoke,
+  onRevokeSelf,
+  recipients,
   document,
   documentType,
   link,
@@ -29,6 +34,19 @@ const ShareDialogOnlyByLink = ({
           <Typography variant="h6" className="u-mb-1-half">
             {t('Share.contacts.whoHasAccess')}
           </Typography>
+          <WhoHasAccess
+            className="u-mt-1"
+            document={document}
+            documentType={documentType}
+            isOwner={isOwner}
+            onRevoke={onRevoke}
+            onRevokeSelf={onRevokeSelf}
+            recipients={recipients}
+            link={link}
+            permissions={permissions}
+            onUpdateShareLinkPermissions={onUpdateShareLinkPermissions}
+            onRevokeLink={onRevokeLink}
+          />
           <DumbShareByLink
             checked={link !== null}
             document={document}
