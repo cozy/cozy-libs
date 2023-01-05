@@ -70,7 +70,7 @@ describe('Recipient component', () => {
       onRevokeSelf
     })
 
-    fireEvent.click(getByText('Can Change'))
+    fireEvent.click(getByText('can change'))
     fireEvent.click(getByText('Remove me from sharing'))
     expect(onRevoke).not.toBeCalled()
     expect(onRevokeSelf).toBeCalled()
@@ -90,7 +90,7 @@ describe('Recipient component', () => {
       onRevokeSelf
     })
 
-    fireEvent.click(getByText('Can Change'))
+    fireEvent.click(getByText('can change'))
     fireEvent.click(getByText('Remove from sharing'))
     expect(onRevoke).toBeCalled()
     expect(onRevokeSelf).not.toBeCalled()
