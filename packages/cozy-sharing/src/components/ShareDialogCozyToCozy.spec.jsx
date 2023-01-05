@@ -26,7 +26,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { getByText } = setup(props)
 
-    expect(getByText('Owner')).toBeTruthy()
+    expect(getByText('owner')).toBeTruthy()
   })
 
   it('should show loading while calling getRecipientsToBeConfirmed', async () => {

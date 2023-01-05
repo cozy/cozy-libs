@@ -14,8 +14,8 @@
       "unregistered": "Error"
     },
     "type": {
-      "one-way": "Can View",
-      "two-way": "Can Change",
+      "one-way": "Can view",
+      "two-way": "Can change",
       "desc": {
         "one-way": "Contacts can view, download, and add the content to their Cozy. If they add the content to their Cozy, they will get updates you make to the content, but they won't be able to update it.",
         "two-way": "Contacts can update, delete and add the content to their Cozy. Updates on the content will be seen on other Cozies."
