@@ -11,8 +11,6 @@ import RenameIcon from 'cozy-ui/transpiled/react/Icons/Rename'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 
-import modalStyles from '../share.styl'
-
 const RecipientPermissions = ({
   isOwner,
   status,
@@ -59,16 +57,18 @@ const RecipientPermissions = ({
     <div className={className}>
       {revoking && <Spinner />}
       {!shouldShowMenu && !revoking && (
-        <span>{t(`Share.status.${status}`)}</span>
+        <Typography variant="body2">
+          {t(`Share.status.${status}`).toLowerCase()}
+        </Typography>
       )}
       {shouldShowMenu && (
         <>
           <DropdownButton
             onClick={showMenu}
             ref={buttonRef}
-            className={modalStyles['aligned-dropdown-button']}
+            textVariant="body2"
           >
-            <Typography variant="body1">{t(`Share.type.${type}`)}</Typography>
+            {t(`Share.type.${type}`).toLowerCase()}
           </DropdownButton>
           {isMenuDisplayed && (
             <ActionMenu
