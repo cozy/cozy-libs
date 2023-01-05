@@ -1,30 +1,16 @@
 import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import get from 'lodash/get'
-import { models } from 'cozy-client'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import RadioGroup from 'cozy-ui/transpiled/react/RadioGroup'
 import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import logger from '../logger'
 
-const checkIsReadOnlyPermissions = permissions => {
-  const permissionCategories = get(
-    permissions,
-    '[0].attributes.permissions',
-    {}
-  )
-  return (
-    Object.values(permissionCategories).filter(permissionCategory =>
-      models.permission.isReadOnly(permissionCategory)
-    ).length > 0
-  )
-}
+import logger from '../logger'
+import { checkIsReadOnlyPermissions } from '../helpers/permissions'
 
 const EditLinkPermissionDialog = ({
   open,
