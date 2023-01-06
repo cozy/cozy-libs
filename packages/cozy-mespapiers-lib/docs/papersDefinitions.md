@@ -2,6 +2,23 @@ The `papersDefinitions.json` file is the configuration file that controls part o
 
 Let's see how it is built:
 
+# Suggestions order
+
+| Label | PlaceholderIndex |
+| :---: | :---: |
+| `national_id_card` | 1 |
+| `driver_license(FR)` | 2 |
+| `driver_license` | 3 |
+| `passport` | 4 |
+| `isp_invoice` | 5 |
+| `tax_notice` | 6 |
+| `resume` | 7 |
+| `health_insurance_card` | 8 |
+
+***
+
+# Attributes of the `papersDefinitions`:
+
 *Properties surrounded by `[]` are optional.*
 
 - `papersDefinitions`: {object\[]} Contains all possible paper definitions.
@@ -16,6 +33,7 @@ Let's see how it is built:
       - *`featureDate`: Reference to the highlighted date.*
       - *`contactName`: Reference to the names of contacts referenced on the paper.*
       - *`name`: Value of the attribute present in the [`information`](#information-field-attributes) step.*
+      - *`labelGivenByUser`: Value of the attribute present in the [`information`](#information-field-attributes) step.*
   - `maxDisplay`: {number} Specifies the number of this type of paper to be displayed once created.
   - `connectorCriteria`: {object} Allows to propose the installation of a connector before the steps of creation of a paper.
     - `[name]`: {string} Name of the connector.
