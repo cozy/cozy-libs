@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.0...cozy-mespapiers-lib@14.0.1) (2023-01-06)
+
+
+### Bug Fixes
+
+* **mespapiers:** Missing attribute for Resume paper ([d5cd9b9](https://github.com/cozy/cozy-libs/commit/d5cd9b9647be35bfb7926ec0efb3f5b0eaa477f6))
+
+
+
+
+
 # [14.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@13.1.4...cozy-mespapiers-lib@14.0.0) (2023-01-05)
 
 
