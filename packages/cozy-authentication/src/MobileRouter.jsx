@@ -283,7 +283,7 @@ export class MobileRouter extends Component {
 
   async afterAuthentication() {
     if (this.props.onAuthenticated) {
-      await this.props.onAuthenticated()
+      await this.props.onAuthenticated({ history: this.props.history })
     }
 
     await credentials.saveFromClient(this.props.client)
@@ -303,7 +303,7 @@ export class MobileRouter extends Component {
     this.props.history.replace(this.props.logoutPath)
     await credentials.clear()
     if (this.props.onLogout) {
-      this.props.onLogout()
+      this.props.onLogout({ history: this.props.history })
     }
   }
 
