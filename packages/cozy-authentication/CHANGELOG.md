@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.12.1](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.12.0...cozy-authentication@2.12.1) (2023-01-06)
+
+
+### Bug Fixes
+
+* **authentication:** Pass the `history` object back to `onAuthenticated` ([4b4d066](https://github.com/cozy/cozy-libs/commit/4b4d0667afbec6328588db301a5150ab03596fff))
+
+
+
+
+
 # [2.12.0](https://github.com/cozy/cozy-libs/compare/cozy-authentication@2.11.0...cozy-authentication@2.12.0) (2022-12-23)
 
 
