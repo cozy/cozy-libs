@@ -316,15 +316,14 @@ export class AccountForm extends PureComponent {
                   t={t}
                 />
                 {flag('harvest.inappconnectors.enabled') && (
-                  <Typography>
-                    <Link
-                      className="u-mt-1"
-                      component="button"
-                      onClick={this.showCannotConnectModal}
-                    >
-                      {t('accountForm.cannotConnectLink')}
-                    </Link>
-                  </Typography>
+                  <Link
+                    className="u-mt-1"
+                    variant="body1"
+                    component="button"
+                    onClick={this.showCannotConnectModal}
+                  >
+                    {t('accountForm.cannotConnectLink')}
+                  </Link>
                 )}
                 <Button
                   busy={
