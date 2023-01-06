@@ -1622,6 +1622,7 @@
       "placeholderIndex": 7,
       "icon": "people",
       "featureDate": "referencedDate",
+      "filenameModel": ["labelGivenByUser"],
       "maxDisplay": 3,
       "acquisitionSteps": [
         {
