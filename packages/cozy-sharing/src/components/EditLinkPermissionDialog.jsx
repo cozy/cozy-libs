@@ -62,12 +62,20 @@ const EditLinkPermissionDialog = ({
         >
           <FormControlLabel
             value="true"
-            label={t('Share.permissionLink.read')}
+            label={
+              document?.type === 'directory'
+                ? t(`Share.permissionLink.seeFolder`)
+                : t(`Share.permissionLink.seeFile`)
+            }
             control={<Radio />}
           />
           <FormControlLabel
             value="false"
-            label={t('Share.permissionLink.write')}
+            label={
+              document?.type === 'directory'
+                ? t(`Share.permissionLink.modifyFolder`)
+                : t(`Share.permissionLink.modifyFile`)
+            }
             control={<Radio />}
           />
         </RadioGroup>
