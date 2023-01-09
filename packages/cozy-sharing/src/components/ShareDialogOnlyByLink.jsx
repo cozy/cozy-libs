@@ -31,11 +31,11 @@ const ShareDialogOnlyByLink = ({
       })}
       content={
         <>
-          <Typography variant="h6" className="u-mb-1-half">
+          <Typography variant="h6">
             {t('Share.contacts.whoHasAccess')}
           </Typography>
           <WhoHasAccess
-            className="u-mt-1"
+            className="u-mt-half"
             document={document}
             documentType={documentType}
             isOwner={isOwner}
