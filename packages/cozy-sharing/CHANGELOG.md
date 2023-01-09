@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 5.0.0 (2023-01-09)
+
+
+### Bug Fixes
+
+* Color for badge with me ([bd7def0](https://github.com/cozy/cozy-libs/commit/bd7def03e0db9d8771a1e96965684d8785f6c91b))
+
+
+### Features
+
+* **harvest:** Update router packages ([3f08dd2](https://github.com/cozy/cozy-libs/commit/3f08dd2a99fb516c45ff938ca528dece63d10ca3))
+
+
+### BREAKING CHANGES
+
+* **harvest:** `react-router-dom` is `>=4` as peer dependencies.
+
+
+
+
+
 # [4.9.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@4.8.2...cozy-sharing@4.9.0) (2022-12-20)
 
 
