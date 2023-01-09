@@ -9,8 +9,6 @@ const ShareRecipientsInput = ({
   groups,
   recipients,
   placeholder,
-  onFocus,
-  onBlur,
   onPick,
   onRemove
 }) => {
@@ -29,7 +27,6 @@ const ShareRecipientsInput = ({
   }, [contacts, groups, loading])
 
   const onShareAutosuggestFocus = () => {
-    onFocus()
     if (
       contacts.hasMore ||
       contacts.fetchStatus === 'loading' ||
@@ -55,7 +52,6 @@ const ShareRecipientsInput = ({
       contactsAndGroups={getContactsAndGroups()}
       recipients={recipients}
       onFocus={onShareAutosuggestFocus}
-      onBlur={onBlur}
       onPick={onPick}
       onRemove={onRemove}
       placeholder={placeholder}
@@ -68,8 +64,6 @@ ShareRecipientsInput.propTypes = {
   groups: groupsResponseType.isRequired,
   recipients: PropTypes.array,
   placeholder: PropTypes.string,
-  onFocus: PropTypes.func.isRequired,
-  onBlur: PropTypes.func.isRequired,
   onPick: PropTypes.func.isRequired,
   onRemove: PropTypes.func.isRequired
 }
