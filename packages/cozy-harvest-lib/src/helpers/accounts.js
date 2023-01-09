@@ -4,6 +4,8 @@ import clone from 'lodash/clone'
 
 import assert from '../assert'
 import manifest from './manifest'
+import { fetchAccount } from '../connections/accounts'
+import * as triggersModel from '../helpers/triggers'
 
 const DEFAULT_TWOFA_CODE_PROVIDER_TYPE = 'default'
 
@@ -205,6 +207,39 @@ export const setSessionResetIfNecessary = (account, changedFields = {}) => {
         state: RESET_SESSION_STATE
       }
     : account
+}
+
+/**
+ * @param {CozyClient} client - Instance of CozyClient
+ * @param {string} accountId - id of the account to fetch
+ * @param {{ account: 'io.cozy.accounts', trigger: 'io.cozy.triggers' }[]} accountsAndTriggers - list of accounts and triggers
+ * @returns {Promise<io.cozy.accounts>} - io.cozy.accounts document
+ */
+export const loadSelectedAccountId = async (
+  client,
+  accountId,
+  accountsAndTriggers
+) => {
+  const matchingTrigger = get(
+    accountsAndTriggers.find(
+      accountAndTrigger => accountAndTrigger.account._id === accountId
+    ),
+    'trigger'
+  )
+  if (matchingTrigger) {
+    return fetchAccountProcess(client, matchingTrigger)
+  } else {
+    return null
+  }
+}
+
+/**
+ * @param {CozyClient} client - Instance of CozyClient
+ * @param {'io.cozy.triggers'} trigger - io.cozy.triggers document
+ * @returns {Promise<io.cozy.accounts>} - io.cozy.accounts document
+ */
+export const fetchAccountProcess = async (client, trigger) => {
+  return fetchAccount(client, triggersModel.getAccountId(trigger))
 }
 
 export default {
