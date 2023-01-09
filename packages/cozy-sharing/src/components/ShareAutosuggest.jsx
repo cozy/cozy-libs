@@ -48,7 +48,19 @@ const ShareAutocomplete = ({
   }
 
   const onSuggestionsFetchRequested = ({ value }) => {
-    setSuggestions(computeSuggestions(value))
+    const computedSuggestions = computeSuggestions(value)
+
+    const newSuggestions =
+      computedSuggestions.length === 0 && validateEmail(value)
+        ? [
+            {
+              email: value,
+              _type: Contact.doctype
+            }
+          ]
+        : computedSuggestions
+
+    setSuggestions(newSuggestions)
   }
 
   const onSuggestionsClearRequested = () => {

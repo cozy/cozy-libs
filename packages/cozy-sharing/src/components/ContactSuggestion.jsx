@@ -47,9 +47,17 @@ export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
   )
 }
 
+const newUnknownContactProptypes = PropTypes.shape({
+  _type: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
+})
+
 ContactSuggestion.propTypes = {
-  contactOrGroup: PropTypes.oneOfType([Contact.propType, Group.propType])
-    .isRequired,
+  contactOrGroup: PropTypes.oneOfType([
+    Contact.propType,
+    Group.propType,
+    newUnknownContactProptypes
+  ]).isRequired,
   contacts: PropTypes.arrayOf(Contact.propType)
 }
 
