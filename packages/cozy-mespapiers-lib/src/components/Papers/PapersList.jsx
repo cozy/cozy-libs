@@ -69,7 +69,7 @@ const ConnectorItem = ({ papers }) => {
   )
 }
 
-const PapersList = ({ papers }) => {
+const PapersList = ({ papers, isLast }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
@@ -122,7 +122,7 @@ const PapersList = ({ papers }) => {
               divider={idx !== papers.list.length - 1}
               actions={actions}
               isRenaming={paper.id === paperBeingRenamedId}
-              isLast={papers.list.length === 1}
+              isLast={isLast}
               setIsRenaming={isRenaming =>
                 setPaperBeingRenamedId(isRenaming ? paper.id : null)
               }
@@ -148,7 +148,8 @@ PapersList.propTypes = {
   papers: PropTypes.shape({
     maxDisplay: PropTypes.number,
     list: PropTypes.arrayOf(PropTypes.object)
-  })
+  }),
+  isLast: PropTypes.bool
 }
 
 export default PapersList
