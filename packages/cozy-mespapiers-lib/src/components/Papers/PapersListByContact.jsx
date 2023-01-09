@@ -40,7 +40,7 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
       subheader={withHeader && <ListSubheader>{contact}</ListSubheader>}
       key={idx}
     >
-      <PapersList papers={papers} />
+      <PapersList papers={papers} isLast={files.length === 1} />
     </List>
   ))
 }
