@@ -66,8 +66,10 @@
     },
     "permissionLink": {
       "title": "Allow anyone with the link to:",
-      "read": "See file",
-      "write": "Modify file",
+      "seeFile": "See file",
+      "modifyFile": "Modify file",
+      "seeFolder": "See folder",
+      "modifyFolder": "Modify folder",
       "readDescription": "Link holders can only read or download content.",
       "writeDescription": "Link holders can alter and delete content.",
       "deactivate": "Deactivate link",

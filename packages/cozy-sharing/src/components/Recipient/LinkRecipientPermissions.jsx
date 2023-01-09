@@ -86,7 +86,9 @@ const LinkRecipientPermissions = ({
                 }}
               >
                 <>
-                  {t('Share.permissionLink.read')}
+                  {document?.type === 'directory'
+                    ? t(`Share.permissionLink.seeFolder`)
+                    : t(`Share.permissionLink.seeFile`)}
                   <Typography
                     className="u-mt-half"
                     variant="caption"
@@ -110,7 +112,9 @@ const LinkRecipientPermissions = ({
                 }}
               >
                 <>
-                  {t('Share.permissionLink.write')}
+                  {document?.type === 'directory'
+                    ? t(`Share.permissionLink.modifyFolder`)
+                    : t(`Share.permissionLink.modifyFile`)}
                   <Typography
                     className="u-mt-half"
                     variant="caption"
