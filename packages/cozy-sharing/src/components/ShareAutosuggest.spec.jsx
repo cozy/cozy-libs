@@ -2,20 +2,24 @@ import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
 
 import ShareAutosuggest from './ShareAutosuggest'
+import AppLike from '../../test/AppLike'
+
 describe('ShareAutosuggest', () => {
   it('tests if ShareAutosuggest calls onFocus and onPick', () => {
     const onPick = jest.fn()
     const onFocus = jest.fn()
     const onRemove = jest.fn()
     const { getByPlaceholderText } = render(
-      <ShareAutosuggest
-        contactsAndGroups={[]}
-        placeholder="myPlaceHolder"
-        onPick={onPick}
-        onFocus={onFocus}
-        recipients={[]}
-        onRemove={onRemove}
-      />
+      <AppLike>
+        <ShareAutosuggest
+          contactsAndGroups={[]}
+          placeholder="myPlaceHolder"
+          onPick={onPick}
+          onFocus={onFocus}
+          recipients={[]}
+          onRemove={onRemove}
+        />
+      </AppLike>
     )
     const inputNode = getByPlaceholderText('myPlaceHolder')
     inputNode.focus()
