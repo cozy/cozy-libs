@@ -80,7 +80,7 @@ const SharingContent = ({
       )}
       {showWhoHasAccess && (
         <WhoHasAccess
-          className="u-mt-1"
+          className="u-mt-half"
           document={document}
           documentType={documentType}
           isOwner={isOwner}
