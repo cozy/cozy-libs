@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.4...cozy-mespapiers-lib@14.0.5) (2023-01-10)
+
+
+### Bug Fixes
+
+* **mespapiers:** Lists header were on several lines ([ab75a84](https://github.com/cozy/cozy-libs/commit/ab75a8488106ccd73908a9c38905eaf1529ee725))
+
+
+
+
+
 ## [14.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.3...cozy-mespapiers-lib@14.0.4) (2023-01-10)
 
 
