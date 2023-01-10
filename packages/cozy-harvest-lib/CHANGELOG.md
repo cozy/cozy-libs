@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [11.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.3.0...cozy-harvest-lib@11.4.0) (2023-01-10)
+
+
+### Features
+
+* **harvest:** Add success snackbar after successful synchronization ([242544e](https://github.com/cozy/cozy-libs/commit/242544ef5717062c76ae2a23b8326739bce57369))
+
+
+
+
+
 # [11.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.2.0...cozy-harvest-lib@11.3.0) (2023-01-04)
 
 

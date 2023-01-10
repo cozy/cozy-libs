@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [14.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.3...cozy-mespapiers-lib@14.0.4) (2023-01-10)
+
+
+### Bug Fixes
+
+* **mespapiers:** A list's last paper's deletion came back on the home ([795e9ca](https://github.com/cozy/cozy-libs/commit/795e9caba4b6e9acd36ec162cc7f6fc231ac397c))
+
+
+
+
+
 ## [14.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.2...cozy-mespapiers-lib@14.0.3) (2023-01-09)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
