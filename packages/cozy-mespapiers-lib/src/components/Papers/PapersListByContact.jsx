@@ -37,7 +37,13 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
 
   return paperslistByContact.map(({ withHeader, contact, papers }, idx) => (
     <List
-      subheader={withHeader && <ListSubheader>{contact}</ListSubheader>}
+      subheader={
+        withHeader && (
+          <ListSubheader>
+            <div className="u-ellipsis">{contact}</div>
+          </ListSubheader>
+        )
+      }
       key={idx}
     >
       <PapersList papers={papers} isLast={files.length === 1} />
