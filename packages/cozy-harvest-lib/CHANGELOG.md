@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.1.0...cozy-harvest-lib@12.2.0) (2023-01-11)
+
+
+### Features
+
+* **harvest:** Add AccountModalContentWrapper component ([748939e](https://github.com/cozy/cozy-libs/commit/748939e8cb20ef5b79c6a8e0b68dbd8afacec417))
+* **harvest:** Add AccountModalHeader component ([7d17627](https://github.com/cozy/cozy-libs/commit/7d1762776000f78815ea00ff96b750e52e10649a))
+* **harvest:** Add AccountModalWithoutTabs component ([afcf7f2](https://github.com/cozy/cozy-libs/commit/afcf7f28e94ad0f0685a515ecfdda4724b12bbaa))
+* **harvest:** Add Error component ([4dd2c27](https://github.com/cozy/cozy-libs/commit/4dd2c273884619d158ee2d2d2d1376c073b4a336))
+* **harvest:** Add Routes in RoutesV6 component ([59e37c3](https://github.com/cozy/cozy-libs/commit/59e37c3bc53b3b07e59e2517f0163d40981deca0))
+* **harvest:** Add TriggerError component ([3a3866a](https://github.com/cozy/cozy-libs/commit/3a3866abfd88dcd1424187f408d10c308186100d))
+
+
+
+
+
 # [12.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.0.0...cozy-harvest-lib@12.1.0) (2023-01-11)
 
 
