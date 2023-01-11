@@ -1345,7 +1345,35 @@
       "icon": "bank",
       "featureDate": "referencedDate",
       "maxDisplay": 3,
-      "acquisitionSteps": [],
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.multiPages.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ],
       "connectorCriteria": {
         "name": "impots"
       }
