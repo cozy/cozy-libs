@@ -105,6 +105,7 @@
       "shareByLink": {
         "create": "Generate a link",
         "send": "Send link",
+        "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again."
@@ -177,6 +178,7 @@
       "shareByLink": {
         "create": "Generate a link",
         "send": "Send link",
+        "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again."
@@ -249,6 +251,7 @@
       "shareByLink": {
         "create": "Generate a link",
         "send": "Send link",
+        "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again.",
@@ -310,6 +313,7 @@
       "shareByLink": {
         "create": "Generate a link",
         "send": "Send link",
+        "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again."

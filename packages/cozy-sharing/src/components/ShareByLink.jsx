@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import copy from 'copy-text-to-clipboard'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
@@ -20,6 +21,7 @@ const ShareByLink = ({
   checked
 }) => {
   const { t } = useI18n()
+  const { isMobile } = useBreakpoints()
   const [loading, setLoading] = useState(false)
   const [shouldCopyToClipboard, setShouldCopyToClipboard] = useState(false)
 
@@ -79,7 +81,7 @@ const ShareByLink = ({
           onClick={onCreate}
         />
       )}
-      {checked && (
+      {checked && isMobile && (
         <>
           <Button
             label={t(`${documentType}.share.shareByLink.send`)}
@@ -95,6 +97,16 @@ const ShareByLink = ({
             onClick={copyLinkToClipboard}
           />
         </>
+      )}
+      {checked && !isMobile && (
+        <Button
+          label={t(`${documentType}.share.shareByLink.copy`)}
+          variant="secondary"
+          size="medium"
+          startIcon={<Icon icon={LinkIcon} />}
+          className="u-flex-auto u-mr-half"
+          onClick={copyLinkToClipboard}
+        />
       )}
       {isEditDialogOpen && checked && (
         <EditLinkPermissionDialog
