@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.4.0...cozy-harvest-lib@12.0.0) (2023-01-11)
+
+
+### Features
+
+* Remove mui/core and use cozy-ui instead ([500cb9c](https://github.com/cozy/cozy-libs/commit/500cb9c8be564e4f6daadaccbb965704a419b7da))
+
+
+### BREAKING CHANGES
+
+* you can remove `@material-ui/core` as dependency
+
+
+
+
+
 # [11.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.3.0...cozy-harvest-lib@11.4.0) (2023-01-10)
 
 
