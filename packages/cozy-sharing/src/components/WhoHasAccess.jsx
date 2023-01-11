@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 import Recipient from './Recipient/Recipient'
 import LinkRecipient from './Recipient/LinkRecipient'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import { buildInstanceSettingsQuery } from '../queries/queries'
+
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
  *
@@ -35,47 +38,70 @@ const WhoHasAccess = ({
   permissions,
   onUpdateShareLinkPermissions,
   onRevokeLink
-}) => (
-  <div className={className}>
-    <RecipientWaitingForConfirmationAlert
-      recipientsToBeConfirmed={recipientsToBeConfirmed}
-    />
-    <List disablePadding>
-      {link && (
-        <LinkRecipient
-          document={document}
-          documentType={documentType}
-          onRevoke={onRevoke}
-          onRevokeSelf={onRevokeSelf}
-          link={link}
-          permissions={permissions}
-          onChangePermissions={onUpdateShareLinkPermissions}
-          onDisable={onRevokeLink}
-        />
-      )}
+}) => {
+  const client = useClient()
 
-      {recipients.map(recipient => {
-        const recipientConfirmationData = recipientsToBeConfirmed.find(
-          user => user.email === recipient.email
-        )
+  const instanceSettingsQuery = buildInstanceSettingsQuery()
+  const instanceSettingsResult = useQuery(
+    instanceSettingsQuery.definition,
+    instanceSettingsQuery.options
+  )
 
-        return (
-          <Recipient
-            {...recipient}
-            key={`key_r_${recipient.index}`}
-            isOwner={isOwner}
+  const public_name = instanceSettingsResult?.data?.attributes?.public_name
+
+  return (
+    <div className={className}>
+      <RecipientWaitingForConfirmationAlert
+        recipientsToBeConfirmed={recipientsToBeConfirmed}
+      />
+      <List disablePadding>
+        {link && (
+          <LinkRecipient
             document={document}
             documentType={documentType}
             onRevoke={onRevoke}
             onRevokeSelf={onRevokeSelf}
-            recipientConfirmationData={recipientConfirmationData}
-            verifyRecipient={verifyRecipient}
+            link={link}
+            permissions={permissions}
+            onChangePermissions={onUpdateShareLinkPermissions}
+            onDisable={onRevokeLink}
           />
-        )
-      })}
-    </List>
-  </div>
-)
+        )}
+
+        {hasQueryBeenLoaded(instanceSettingsResult) && (
+          <Recipient
+            isOwner={true}
+            status="owner"
+            instance={client.options.uri}
+            public_name={public_name}
+          />
+        )}
+
+        {recipients
+          .filter(recipient => recipient.status !== 'owner')
+          .map(recipient => {
+            const recipientConfirmationData = recipientsToBeConfirmed.find(
+              user => user.email === recipient.email
+            )
+
+            return (
+              <Recipient
+                {...recipient}
+                key={`key_r_${recipient.index}`}
+                isOwner={isOwner}
+                document={document}
+                documentType={documentType}
+                onRevoke={onRevoke}
+                onRevokeSelf={onRevokeSelf}
+                recipientConfirmationData={recipientConfirmationData}
+                verifyRecipient={verifyRecipient}
+              />
+            )
+          })}
+      </List>
+    </div>
+  )
+}
 
 WhoHasAccess.propTypes = {
   isOwner: PropTypes.bool,

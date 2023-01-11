@@ -5,6 +5,12 @@ import AppLike from '../../test/AppLike'
 import { createMockClient } from 'cozy-client'
 import { act, render, fireEvent } from '@testing-library/react'
 
+jest.mock('cozy-client', () => ({
+  ...jest.requireActual('cozy-client'),
+  useQuery: jest.fn().mockReturnValue({ data: { public_name: 'Alice' } }),
+  hasQueryBeenLoaded: jest.fn().mockReturnValue(true)
+}))
+
 describe('ShareDialogCozyToCozy', () => {
   const client = createMockClient({})
   client.options = {
@@ -26,6 +32,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     const { getByText } = setup(props)
 
+    expect(getByText('You')).toBeTruthy()
     expect(getByText('owner')).toBeTruthy()
   })
 

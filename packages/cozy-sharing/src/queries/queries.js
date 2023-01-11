@@ -65,3 +65,11 @@ export const buildGroupsQuery = () => ({
     as: 'io.cozy.contacts.groups'
   }
 })
+
+export const buildInstanceSettingsQuery = () => ({
+  definition: Q('io.cozy.settings').getById('instance'),
+  options: {
+    as: 'io.cozy.settings/instance',
+    singleDocData: true
+  }
+})
