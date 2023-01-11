@@ -48,7 +48,6 @@ const ShareDialogOnlyByLink = ({
             onRevokeLink={onRevokeLink}
           />
           <DumbShareByLink
-            checked={link !== null}
             document={document}
             documentType={documentType}
             link={link}
