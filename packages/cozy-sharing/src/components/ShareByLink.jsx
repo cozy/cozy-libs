@@ -17,8 +17,7 @@ const ShareByLink = ({
   document,
   permissions,
   onChangePermissions,
-  onEnable,
-  checked
+  onEnable
 }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
@@ -69,7 +68,7 @@ const ShareByLink = ({
 
   return (
     <div className="u-w-100 u-flex u-flex-justify-center">
-      {!checked && (
+      {!link && (
         <Button
           label={t(`${documentType}.share.shareByLink.create`)}
           variant="secondary"
@@ -81,7 +80,7 @@ const ShareByLink = ({
           onClick={onCreate}
         />
       )}
-      {checked && isMobile && (
+      {link && isMobile && (
         <>
           <Button
             label={t(`${documentType}.share.shareByLink.send`)}
@@ -98,7 +97,7 @@ const ShareByLink = ({
           />
         </>
       )}
-      {checked && !isMobile && (
+      {link && !isMobile && (
         <Button
           label={t(`${documentType}.share.shareByLink.copy`)}
           variant="secondary"
@@ -108,7 +107,7 @@ const ShareByLink = ({
           onClick={copyLinkToClipboard}
         />
       )}
-      {isEditDialogOpen && checked && (
+      {isEditDialogOpen && link && (
         <EditLinkPermissionDialog
           open
           onClose={onClose}
@@ -124,7 +123,6 @@ const ShareByLink = ({
 
 ShareByLink.propTypes = {
   permissions: PropTypes.array.isRequired,
-  checked: PropTypes.bool.isRequired,
   documentType: PropTypes.string.isRequired,
   document: PropTypes.object.isRequired,
   link: PropTypes.string,
