@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.6...cozy-mespapiers-lib@15.0.0) (2023-01-11)
+
+
+### Features
+
+* Remove mui/core since no longer required in any peerDep ([7d99791](https://github.com/cozy/cozy-libs/commit/7d9979103f530862d0daf7df4f46f6b7aba69d7f))
+
+
+### BREAKING CHANGES
+
+* `cozy-harvest-lib` must be `>=12.0.0`
+
+
+
+
+
 ## [14.0.6](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@14.0.5...cozy-mespapiers-lib@14.0.6) (2023-01-11)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
