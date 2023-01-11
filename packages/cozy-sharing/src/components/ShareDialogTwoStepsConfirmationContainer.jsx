@@ -237,7 +237,6 @@ const ShareDialogTwoStepsConfirmationContainer = ({
 
     dialogActions = DialogActionsOnShare ? (
       <DialogActionsOnShare
-        checked={link !== null}
         document={document}
         documentType={documentType}
         link={link}
