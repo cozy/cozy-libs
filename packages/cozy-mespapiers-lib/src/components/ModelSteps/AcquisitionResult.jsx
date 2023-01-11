@@ -42,7 +42,10 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
 
   useEffect(() => {
     const hasAlreadyFile = formData.data.some(
-      d => d.stepIndex === stepIndex && d.file.name === currentFile.name
+      d =>
+        d.stepIndex === stepIndex &&
+        d.file.name === currentFile.name &&
+        d.file.lastModified === currentFile.lastModified
     )
     if (!hasAlreadyFile) {
       setFormData(prev => ({
