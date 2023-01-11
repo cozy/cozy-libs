@@ -1,11 +1,11 @@
 import get from 'lodash/get'
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import DialogContent from '@material-ui/core/DialogContent'
 
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Button from 'cozy-ui/transpiled/react/Button'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 
 import ConnectingIllu from '../assets/connecting-data-in-progress.svg'
 import getRelatedAppsSlugs from '../models/getRelatedAppsSlugs'

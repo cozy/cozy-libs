@@ -1,7 +1,6 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import DialogContent from '@material-ui/core/DialogContent'
 
 import flag from 'cozy-flags'
 import { useClient } from 'cozy-client'
@@ -9,6 +8,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 
 import TriggerManager from './TriggerManager'
 import KonnectorIcon from './KonnectorIcon'
