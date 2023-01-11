@@ -8,6 +8,7 @@ import Card from 'cozy-ui/transpiled/react/Card'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 
 import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
 import KonnectorModalHeader from './KonnectorModalHeader'
@@ -19,7 +20,6 @@ import {
   useCozyDialog,
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/CozyDialogs'
-import DialogContent from '@material-ui/core/DialogContent'
 import { intentsApiProptype } from '../helpers/proptypes'
 
 const createDummyKonnectorFromAccount = account => {

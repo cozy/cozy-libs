@@ -4,8 +4,6 @@ import PropTypes from 'prop-types'
 import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 
-import Box from '@material-ui/core/Box'
-import IconButton from '@material-ui/core/IconButton'
 import SwipeableViews from 'react-swipeable-views'
 
 import sortBy from 'lodash/sortBy'
@@ -20,6 +18,8 @@ import CozyClient, {
 } from 'cozy-client'
 import flag from 'cozy-flags'
 
+import Box from 'cozy-ui/transpiled/react/Box'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'

@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import logger from '../../logger'
 import Card from 'cozy-ui/transpiled/react/Card'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Link from '@material-ui/core/Link'
+import Link from 'cozy-ui/transpiled/react/Link'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import GlobeIcon from 'cozy-ui/transpiled/react/Icons/Globe'
+
+import logger from '../../logger'
 
 const linkStyle = { textTransform: 'lowercase' }
 

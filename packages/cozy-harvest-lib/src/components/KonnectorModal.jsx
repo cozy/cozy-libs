@@ -28,7 +28,7 @@ import {
   useCozyDialog,
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/CozyDialogs'
-import DialogContent from '@material-ui/core/DialogContent'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 
 const DumbKonnectorDialog = ({
   onClose,

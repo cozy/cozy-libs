@@ -4,7 +4,6 @@ import cx from 'classnames'
 
 import get from 'lodash/get'
 import flow from 'lodash/flow'
-import DialogContent from '@material-ui/core/DialogContent'
 
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -15,6 +14,7 @@ import {
   DialogCloseButton,
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
 
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'

@@ -6,20 +6,18 @@ import { translate } from 'cozy-ui/transpiled/react/I18n'
 import AppLinker, { generateWebLink } from 'cozy-ui/transpiled/react/AppLinker'
 import { Button, ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import Dialog, {
   DialogActions,
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
 import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
-import Illustration from './Illustration'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
+import Illustration from './Illustration'
 import DataTypes from './DataTypes'
 import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
 import { getSuggestionReason } from '../../helpers/appSuggestions'
-import withMobileDialog from '@material-ui/core/withMobileDialog'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const KonnectorSuggestionModal = ({
   t,
@@ -27,9 +25,9 @@ const KonnectorSuggestionModal = ({
   konnectorAppSuggestion,
   konnectorManifest,
   onClose,
-  onSilence,
-  fullScreen
+  onSilence
 }) => {
+  const { isMobile } = useBreakpoints()
   const { slug } = konnectorAppSuggestion
   const cozyURL = new URL(client.getStackClient().uri)
   const storeAppName = 'store'
@@ -56,7 +54,7 @@ const KonnectorSuggestionModal = ({
       <Dialog
         open
         onClose={onClose}
-        fullScreen={fullScreen}
+        fullScreen={isMobile}
         fullWidth
         maxWidth="sm"
         scroll="body"
@@ -137,6 +135,4 @@ KonnectorSuggestionModal.propTypes = {
   onSilence: PropTypes.func.isRequired
 }
 
-export default withClient(
-  translate()(withMobileDialog()(KonnectorSuggestionModal))
-)
+export default withClient(translate()(KonnectorSuggestionModal))

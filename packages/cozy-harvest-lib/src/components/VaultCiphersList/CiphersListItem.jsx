@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
 
-import ListItem from '@material-ui/core/ListItem'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
-import ListItemIcon from '@material-ui/core/ListItemIcon'
 
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
 
