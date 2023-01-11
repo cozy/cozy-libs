@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@15.0.2...cozy-mespapiers-lib@15.1.0) (2023-01-11)
+
+
+### Features
+
+* Add tax_notice aquisitionSteps ([7dc2ce6](https://github.com/cozy/cozy-libs/commit/7dc2ce63b3271208ad45283bbee0f0e116e9a187))
+
+
+
+
+
 ## [15.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@15.0.1...cozy-mespapiers-lib@15.0.2) (2023-01-11)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
