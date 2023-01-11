@@ -104,6 +104,7 @@
       "shareByLink": {
         "create": "Générer un lien",
         "send": "Envoyer le lien",
+        "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer."
@@ -176,6 +177,7 @@
       "shareByLink": {
         "create": "Générer un lien",
         "send": "Envoyer le lien",
+        "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer."
@@ -248,6 +250,7 @@
       "shareByLink": {
         "create": "Générer un lien",
         "send": "Envoyer le lien",
+        "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papier",
         "failed": "Impossible de copier dans le presse-papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
@@ -308,6 +311,7 @@
       "shareByLink": {
         "create": "Générer un lien",
         "send": "Envoyer le lien",
+        "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer."
