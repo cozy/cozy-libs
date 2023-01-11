@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.0.0...cozy-harvest-lib@12.1.0) (2023-01-11)
+
+
+### Bug Fixes
+
+* **harvest:** Font size of the help link in the account login modal ([0da0d51](https://github.com/cozy/cozy-libs/commit/0da0d51e865c3aea4358463843d736dcdb9a4f7a))
+
+
+### Features
+
+* Add `LaunchTriggerAlert` menu with the first action ([ad410d9](https://github.com/cozy/cozy-libs/commit/ad410d9cf91d21e96f84e3f5430cacd1f2b4e669))
+
+
+
+
+
 # [12.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@11.4.0...cozy-harvest-lib@12.0.0) (2023-01-11)
 
 
