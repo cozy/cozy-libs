@@ -10,6 +10,7 @@ import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import { isOnlyReadOnlyLinkAllowed } from '../helpers/link'
 import EditLinkPermissionDialog from './EditLinkPermissionDialog'
 import logger from '../logger'
 
@@ -60,7 +61,11 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
   }
 
   const onCreate = async () => {
-    setIsEditDialogOpen(true)
+    if (isOnlyReadOnlyLinkAllowed({ documentType })) {
+      onPermissionsSelected({ verbs: ['GET'] })
+    } else {
+      setIsEditDialogOpen(true)
+    }
   }
 
   useEffect(() => {
