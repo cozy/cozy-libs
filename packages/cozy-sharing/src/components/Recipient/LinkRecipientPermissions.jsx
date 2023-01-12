@@ -13,6 +13,8 @@ import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
+import { isOnlyReadOnlyLinkAllowed } from '../../helpers/link'
+
 import logger from '../../logger'
 
 const LinkRecipientPermissions = ({
@@ -98,32 +100,34 @@ const LinkRecipientPermissions = ({
                   </Typography>
                 </>
               </ActionMenuItem>
-              <ActionMenuItem
-                left={
-                  <ActionMenuRadio
-                    name="permissionLinkMenu"
-                    value="false"
-                    checked={!isReadOnlyPermissions}
-                  />
-                }
-                onClick={() => {
-                  toggleMenu()
-                  updateLinkPermissions({ isReadOnly: false })
-                }}
-              >
-                <>
-                  {document?.type === 'directory'
-                    ? t(`Share.permissionLink.modifyFolder`)
-                    : t(`Share.permissionLink.modifyFile`)}
-                  <Typography
-                    className="u-mt-half"
-                    variant="caption"
-                    color="textSecondary"
-                  >
-                    {t('Share.permissionLink.writeDescription')}
-                  </Typography>
-                </>
-              </ActionMenuItem>
+              {!isOnlyReadOnlyLinkAllowed({ documentType }) && (
+                <ActionMenuItem
+                  left={
+                    <ActionMenuRadio
+                      name="permissionLinkMenu"
+                      value="false"
+                      checked={!isReadOnlyPermissions}
+                    />
+                  }
+                  onClick={() => {
+                    toggleMenu()
+                    updateLinkPermissions({ isReadOnly: false })
+                  }}
+                >
+                  <>
+                    {document?.type === 'directory'
+                      ? t(`Share.permissionLink.modifyFolder`)
+                      : t(`Share.permissionLink.modifyFile`)}
+                    <Typography
+                      className="u-mt-half"
+                      variant="caption"
+                      color="textSecondary"
+                    >
+                      {t('Share.permissionLink.writeDescription')}
+                    </Typography>
+                  </>
+                </ActionMenuItem>
+              )}
               <hr />
               <ActionMenuItem
                 left={<Icon icon={TrashIcon} color="var(--errorColor)" />}
