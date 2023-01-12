@@ -1,15 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
+
 import { models } from 'cozy-client'
-const ContactModel = models.contact
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Avatar from 'cozy-ui/transpiled/react/Avatar'
-
-import styles from './Recipient/recipient.styl'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 
 import { Contact, Group, getDisplayName, getInitials } from '../models'
-import Identity from './Recipient/Identity'
+
+const ContactModel = models.contact
 
 export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
   const { t } = useI18n()
@@ -40,10 +42,15 @@ export const ContactSuggestion = ({ contactOrGroup, contacts }) => {
   }
 
   return (
-    <div className={styles['recipient']}>
-      <Avatar text={avatarText} size="small" />
-      <Identity name={name} details={details === '' ? undefined : details} />
-    </div>
+    <ListItem button>
+      <ListItemIcon>
+        <Avatar text={avatarText} size="small" />
+      </ListItemIcon>
+      <ListItemText
+        primary={name}
+        secondary={details && details !== '' ? details : '-'}
+      />
+    </ListItem>
   )
 }
 
