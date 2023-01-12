@@ -4,11 +4,12 @@ import Autosuggest from 'react-autosuggest'
 
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
+import Chip from 'cozy-ui/transpiled/react/Chips'
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
 import styles from './autosuggest.styl'
-import BoldCross from '../../assets/icons/icon-cross-bold.svg'
 
-import { getDisplayName, Contact } from '../models'
+import { getDisplayName, getInitials, Contact } from '../models'
 import {
   cozyUrlMatch,
   emailMatch,
@@ -91,6 +92,19 @@ const ShareAutocomplete = ({
     }
   }
 
+  const onKeyUp = ({ key, keyCode }) => {
+    if (
+      recipients.length > 0 &&
+      inputValue === '' &&
+      (key === 'Backspace' ||
+        keyCode === 8 ||
+        key === 'Delete' ||
+        keyCode === 46)
+    ) {
+      document.getElementById(`recipient_${recipients.length - 1}`).focus()
+    }
+  }
+
   const onAutosuggestFocus = () => {
     onFocus()
   }
@@ -119,23 +133,22 @@ const ShareAutocomplete = ({
     return (
       <div className={styles['recipientsContainer']}>
         {recipients.map((recipient, idx) => {
-          const value = getDisplayName(recipient)
+          const avatarText = getInitials(recipient)
+          const name = getDisplayName(recipient)
           return (
-            <div
-              className={styles['recipientChip']}
+            <Chip
+              id={`recipient_${idx}`}
               key={`key_recipient_${idx}`}
-            >
-              <span>{value}</span>
-              <button
-                className={styles['removeRecipient']}
-                onClick={() => onAutosuggestRemove(recipient)}
-              >
-                <BoldCross />
-              </button>
-            </div>
+              avatar={<Avatar text={avatarText} size="xsmall" />}
+              label={name}
+              onDelete={() => {
+                onAutosuggestRemove(recipient)
+              }}
+              className={styles['recipientChip']}
+            />
           )
         })}
-        <input {...inputProps} onKeyPress={onKeyPress} />
+        <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
         {loading && (
           <Spinner
             color={palette.dodgerBlue}
