@@ -11,14 +11,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import EditLinkPermissionDialog from './EditLinkPermissionDialog'
 import logger from '../logger'
 
-const ShareByLink = ({
-  link,
-  documentType,
-  document,
-  permissions,
-  onChangePermissions,
-  onEnable
-}) => {
+const ShareByLink = ({ link, document, documentType, onEnable }) => {
   const { t } = useI18n()
   const { isMobile } = useBreakpoints()
   const [loading, setLoading] = useState(false)
@@ -37,22 +30,21 @@ const ShareByLink = ({
     [documentType, link, t]
   )
 
-  const createShareLink = async () => {
+  const onPermissionsSelected = async options => {
     try {
       setLoading(true)
-      await onEnable(document)
+      await onEnable(document, options)
     } catch (e) {
       Alerter.error(t(`${documentType}.share.error.generic`))
       logger.log(e)
     } finally {
       setLoading(false)
+      setShouldCopyToClipboard(true)
     }
   }
 
   const onCreate = async () => {
-    await createShareLink()
     setIsEditDialogOpen(true)
-    setShouldCopyToClipboard(true)
   }
 
   useEffect(() => {
@@ -107,14 +99,13 @@ const ShareByLink = ({
           onClick={copyLinkToClipboard}
         />
       )}
-      {isEditDialogOpen && link && (
+      {isEditDialogOpen && (
         <EditLinkPermissionDialog
           open
           onClose={onClose}
           document={document}
           documentType={documentType}
-          permissions={permissions}
-          onChangePermissions={onChangePermissions}
+          onPermissionsSelected={onPermissionsSelected}
         />
       )}
     </div>
@@ -122,12 +113,10 @@ const ShareByLink = ({
 }
 
 ShareByLink.propTypes = {
-  permissions: PropTypes.array.isRequired,
-  documentType: PropTypes.string.isRequired,
-  document: PropTypes.object.isRequired,
   link: PropTypes.string,
-  onEnable: PropTypes.func.isRequired,
-  onDisable: PropTypes.func.isRequired
+  document: PropTypes.object.isRequired,
+  documentType: PropTypes.string.isRequired,
+  onEnable: PropTypes.func.isRequired
 }
 
 export default ShareByLink
