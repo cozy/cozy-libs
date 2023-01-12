@@ -42,7 +42,8 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
 
   const changeSelectedFile = () => {
     const newData = formData.data.filter(
-      data => data.file.name !== currentFile.name
+      data =>
+        data.file.name !== currentFile.name || data.file.id !== currentFile.id
     )
 
     setFormData(prev => ({
