@@ -237,13 +237,10 @@ const ShareDialogTwoStepsConfirmationContainer = ({
 
     dialogActions = DialogActionsOnShare ? (
       <DialogActionsOnShare
+        link={link}
         document={document}
         documentType={documentType}
-        link={link}
-        onChangePermissions={onUpdateShareLinkPermissions}
-        onDisable={onRevokeLink}
         onEnable={onShareByLink}
-        permissions={permissions}
       />
     ) : null
   } else if (status === 'confirmingRecipient') {
