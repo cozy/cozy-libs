@@ -279,8 +279,8 @@ export class SharingProvider extends Component {
     this.dispatch(revokeSelf(sharing))
   }
 
-  shareByLink = async document => {
-    const resp = await this.permissionCol.createSharingLink(document)
+  shareByLink = async (document, options) => {
+    const resp = await this.permissionCol.createSharingLink(document, options)
     this.dispatch(addSharingLink(resp.data))
     return resp
   }
