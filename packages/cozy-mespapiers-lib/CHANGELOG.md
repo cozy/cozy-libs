@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [15.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@15.1.0...cozy-mespapiers-lib@15.2.0) (2023-01-12)
+
+
+### Bug Fixes
+
+* **mes-papiers-lib:** Blob file do not have the same attributes as File ([14a99ec](https://github.com/cozy/cozy-libs/commit/14a99ec132bf5c18fdd5d41247542c9e0a6f6174))
+* **mes-papiers-lib:** Changing file removes all Blob type files ([813e410](https://github.com/cozy/cozy-libs/commit/813e410a5fee17911a9e101899b15a2e987d7ef2))
+* **mes-papiers-lib:** Check file's `lastModified` field on file upload ([46a2b8b](https://github.com/cozy/cozy-libs/commit/46a2b8b50b3a0a86cfad3cae1f49aeac6a7059bb))
+
+
+### Features
+
+* **mes-papiers-lib:** Use isSameFile helper for more consistency ([3973604](https://github.com/cozy/cozy-libs/commit/3973604e08ee02fde8e24b5a505214be75ef209c))
+
+
+
+
+
 # [15.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@15.0.2...cozy-mespapiers-lib@15.1.0) (2023-01-11)
 
 
