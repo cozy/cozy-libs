@@ -139,35 +139,42 @@ const ShareAutocomplete = ({
     autosuggestRef?.current?.input?.focus()
   }
 
-  const renderInput = inputProps => {
-    return (
-      <div className={styles['recipientsContainer']}>
-        {recipients.map((recipient, idx) => {
-          const avatarText = getInitials(recipient)
-          const name = getDisplayName(recipient)
-          return (
-            <Chip
-              id={`recipient_${idx}`}
-              key={`key_recipient_${idx}`}
-              avatar={<Avatar text={avatarText} size="xsmall" />}
-              label={name}
-              onDelete={() => {
-                onAutosuggestRemove(recipient)
-              }}
-              className={styles['recipientChip']}
-            />
-          )
-        })}
-        <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
-        {loading && (
-          <Spinner
-            color={palette.dodgerBlue}
-            className="u-flex u-flex-items-center"
+  const renderInput = inputProps => (
+    <div className={styles['recipientsContainer']}>
+      {recipients.map((recipient, idx) => {
+        const avatarText = getInitials(recipient)
+        const name = getDisplayName(recipient)
+        return (
+          <Chip
+            id={`recipient_${idx}`}
+            key={`key_recipient_${idx}`}
+            avatar={<Avatar text={avatarText} size="xsmall" />}
+            label={name}
+            onDelete={() => {
+              onAutosuggestRemove(recipient)
+            }}
+            className={styles['recipientChip']}
           />
-        )}
-      </div>
-    )
-  }
+        )
+      })}
+      <input {...inputProps} onKeyPress={onKeyPress} onKeyUp={onKeyUp} />
+      {loading && (
+        <Spinner
+          color={palette.dodgerBlue}
+          className="u-flex u-flex-items-center"
+        />
+      )}
+    </div>
+  )
+
+  const renderSuggestion = contactOrGroup => (
+    <ContactSuggestion
+      contacts={contactsAndGroups.filter(
+        item => item._type === Contact.doctype
+      )}
+      contactOrGroup={contactOrGroup}
+    />
+  )
 
   return (
     <Autosuggest
@@ -177,15 +184,8 @@ const ShareAutocomplete = ({
       getSuggestionValue={contact => contact}
       onSuggestionsFetchRequested={onSuggestionsFetchRequested}
       onSuggestionsClearRequested={onSuggestionsClearRequested}
-      renderSuggestion={contactOrGroup => (
-        <ContactSuggestion
-          contacts={contactsAndGroups.filter(
-            item => item._type === Contact.doctype
-          )}
-          contactOrGroup={contactOrGroup}
-        />
-      )}
-      renderInputComponent={props => renderInput(props)}
+      renderSuggestion={renderSuggestion}
+      renderInputComponent={renderInput}
       highlightFirstSuggestion
       inputProps={{
         onFocus: onAutosuggestFocus,
