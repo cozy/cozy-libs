@@ -9,6 +9,13 @@ export const isFileAlreadySelected = (formData, stepIndex, currentFile) => {
   for (const data of formData.data) {
     if (data.stepIndex === stepIndex) {
       if (
+        currentFile.constructor.name === 'Blob' &&
+        data.file.id === currentFile.id
+      ) {
+        return true
+      }
+      if (
+        currentFile.constructor.name === 'File' &&
         data.file.name === currentFile.name &&
         data.file.lastModified === currentFile.lastModified
       ) {
