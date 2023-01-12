@@ -17,6 +17,7 @@ import { useStepperDialog } from '../Hooks/useStepperDialog'
 import { useFormData } from '../Hooks/useFormData'
 import { PaperDefinitionsStepPropTypes } from '../../constants/PaperDefinitionsPropTypes'
 import { KEYS } from '../../constants/const'
+import { isSameFile } from './helpers'
 
 const isPDF = file => file.type === 'application/pdf'
 
@@ -42,8 +43,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
 
   const changeSelectedFile = () => {
     const newData = formData.data.filter(
-      data =>
-        data.file.name !== currentFile.name || data.file.id !== currentFile.id
+      data => !isSameFile(currentFile, data.file)
     )
 
     setFormData(prev => ({
