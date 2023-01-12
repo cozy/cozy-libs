@@ -5,22 +5,6 @@ import { createMockClient } from 'cozy-client'
 import AppLike from '../../test/AppLike'
 import EditLinkPermissionDialog from './EditLinkPermissionDialog'
 
-const READ_ONLY_PERMISSIONS = [
-  {
-    attributes: {
-      type: 'share',
-      source_id: 'io.cozy.apps/drive',
-      permissions: {
-        files: {
-          type: 'io.cozy.files',
-          verbs: ['GET'],
-          values: ['777491f11a567fb45e8b091fe109aa9c']
-        }
-      }
-    }
-  }
-]
-
 describe('EditLinkPermissionDialog', () => {
   const client = createMockClient({})
 
@@ -32,16 +16,27 @@ describe('EditLinkPermissionDialog', () => {
     )
   }
 
-  it('should update permissions', () => {
-    const onChangePermissions = jest.fn()
+  it('should select read permissions', () => {
+    const onPermissionsSelected = jest.fn()
 
     const props = {
-      document: {
-        _id: '777491f11a567fb45e8b091fe109aa9c'
-      },
-      documentType: 'Files',
-      permissions: READ_ONLY_PERMISSIONS,
-      onChangePermissions
+      onPermissionsSelected
+    }
+
+    const { getByText } = setup(props)
+
+    fireEvent.click(getByText('OK'))
+
+    expect(onPermissionsSelected).toHaveBeenCalledWith({
+      verbs: ['GET']
+    })
+  })
+
+  it('should select write permissions', () => {
+    const onPermissionsSelected = jest.fn()
+
+    const props = {
+      onPermissionsSelected
     }
 
     const { getByText } = setup(props)
@@ -50,30 +45,8 @@ describe('EditLinkPermissionDialog', () => {
 
     fireEvent.click(getByText('OK'))
 
-    expect(onChangePermissions).toHaveBeenCalledWith(props.document, [
-      'GET',
-      'POST',
-      'PUT',
-      'PATCH'
-    ])
-  })
-
-  it('should not change permissions if nothing done', () => {
-    const onChangePermissions = jest.fn()
-
-    const props = {
-      document: {
-        _id: '777491f11a567fb45e8b091fe109aa9c'
-      },
-      documentType: 'Files',
-      permissions: READ_ONLY_PERMISSIONS,
-      onChangePermissions
-    }
-
-    const { getByText } = setup(props)
-
-    fireEvent.click(getByText('OK'))
-
-    expect(onChangePermissions).not.toHaveBeenCalled()
+    expect(onPermissionsSelected).toHaveBeenCalledWith({
+      verbs: ['GET', 'POST', 'PUT', 'PATCH']
+    })
   })
 })

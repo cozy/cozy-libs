@@ -48,16 +48,10 @@ const ShareDialogOnlyByLink = ({
             onRevokeLink={onRevokeLink}
           />
           <DumbShareByLink
+            link={link}
             document={document}
             documentType={documentType}
-            link={link}
-            onChangePermissions={onUpdateShareLinkPermissions}
-            onDisable={onRevokeLink}
             onEnable={onShareByLink}
-            permissions={permissions}
-            popperOptions={{
-              strategy: 'fixed'
-            }}
           />
         </>
       }

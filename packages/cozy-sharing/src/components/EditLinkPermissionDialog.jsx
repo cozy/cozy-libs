@@ -10,41 +10,31 @@ import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
 import logger from '../logger'
-import { checkIsReadOnlyPermissions } from '../helpers/permissions'
 
 const EditLinkPermissionDialog = ({
   open,
   onClose,
   document,
   documentType,
-  permissions,
-  onChangePermissions
+  onPermissionsSelected
 }) => {
   const { t } = useI18n()
 
-  const isReadOnlyPermissionsInitial = checkIsReadOnlyPermissions(permissions)
-
-  const [isReadOnlyPermissions, setIsReadOnlyPermissions] = useState(
-    isReadOnlyPermissionsInitial
-  )
-
-  const updateLinkPermissions = ({ isReadOnly }) => {
-    const verbs = isReadOnly ? ['GET'] : ['GET', 'POST', 'PUT', 'PATCH']
-    try {
-      onChangePermissions(document, verbs)
-    } catch (err) {
-      Alerter.error(t(`${documentType}.share.shareByLink.permserror`))
-      logger.log(err)
-    }
-  }
+  const [isReadOnlyPermissions, setIsReadOnlyPermissions] = useState(true)
 
   const onChange = event => {
     setIsReadOnlyPermissions(event.target.value === 'true')
   }
 
   const onConfirm = () => {
-    if (isReadOnlyPermissions !== isReadOnlyPermissionsInitial) {
-      updateLinkPermissions({ isReadOnly: isReadOnlyPermissions })
+    const verbs = isReadOnlyPermissions
+      ? ['GET']
+      : ['GET', 'POST', 'PUT', 'PATCH']
+    try {
+      onPermissionsSelected({ verbs })
+    } catch (err) {
+      Alerter.error(t(`${documentType}.share.shareByLink.permserror`))
+      logger.log(err)
     }
     onClose()
   }
@@ -103,8 +93,7 @@ EditLinkPermissionDialog.propTypes = {
   onClose: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
   documentType: PropTypes.string.isRequired,
-  permissions: PropTypes.array.isRequired,
-  onChangePermissions: PropTypes.func.isRequired
+  onPermissionsSelected: PropTypes.func.isRequired
 }
 
 export default EditLinkPermissionDialog
