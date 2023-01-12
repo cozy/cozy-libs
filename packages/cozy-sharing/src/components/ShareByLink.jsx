@@ -2,12 +2,14 @@ import React, { useState, useEffect, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import copy from 'copy-text-to-clipboard'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import LinkIcon from 'cozy-ui/transpiled/react/Icons/Link'
 import CopyIcon from 'cozy-ui/transpiled/react/Icons/Copy'
+import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
+import Alert from 'cozy-ui/transpiled/react/Alert'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
 import EditLinkPermissionDialog from './EditLinkPermissionDialog'
 import logger from '../logger'
 
@@ -16,16 +18,26 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
   const { isMobile } = useBreakpoints()
   const [loading, setLoading] = useState(false)
   const [shouldCopyToClipboard, setShouldCopyToClipboard] = useState(false)
+  const [alert, setAlert] = useState(false)
 
   const [isEditDialogOpen, setIsEditDialogOpen] = useState(false)
 
   const copyLinkToClipboard = useCallback(
     ({ isAutomaticCopy }) => {
-      if (copy(link))
-        Alerter.success(t(`${documentType}.share.shareByLink.copied`))
-      else if (!isAutomaticCopy)
+      if (copy(link)) {
+        setAlert({
+          open: true,
+          severity: 'success',
+          message: t(`${documentType}.share.shareByLink.copied`)
+        })
+      } else if (!isAutomaticCopy) {
         // In case of automatic copy, the browser can block the copy request. This is not shown to the user since it is expected and can be circumvented by clicking directly on the copy link
-        Alerter.error(t(`${documentType}.share.shareByLink.failed`))
+        setAlert({
+          open: true,
+          severity: 'error',
+          message: t(`${documentType}.share.shareByLink.failed`)
+        })
+      }
     },
     [documentType, link, t]
   )
@@ -35,7 +47,11 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
       setLoading(true)
       await onEnable(document, options)
     } catch (e) {
-      Alerter.error(t(`${documentType}.share.error.generic`))
+      setAlert({
+        open: true,
+        severity: 'error',
+        message: t(`${documentType}.share.error.generic`)
+      })
       logger.log(e)
     } finally {
       setLoading(false)
@@ -56,6 +72,10 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
 
   const onClose = () => {
     setIsEditDialogOpen(false)
+  }
+
+  const onCloseAlert = () => {
+    setAlert({ ...alert, open: false })
   }
 
   return (
@@ -104,10 +124,18 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
           open
           onClose={onClose}
           document={document}
-          documentType={documentType}
           onPermissionsSelected={onPermissionsSelected}
         />
       )}
+      <Snackbar open={alert.open} onClose={onCloseAlert}>
+        <Alert
+          variant="filled"
+          severity={alert.severity}
+          onClose={onCloseAlert}
+        >
+          {alert.message}
+        </Alert>
+      </Snackbar>
     </div>
   )
 }
