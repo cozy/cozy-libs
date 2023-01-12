@@ -1,4 +1,4 @@
-import React, { memo, useCallback, useEffect } from 'react'
+import React, { memo, useCallback } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
 
@@ -38,32 +38,7 @@ const AcquisitionResult = ({ currentFile, setCurrentFile, currentStep }) => {
   const { isMobile } = useBreakpoints()
   const { nextStep } = useStepperDialog()
   const { setFormData, formData } = useFormData()
-  const { page, multipage, stepIndex } = currentStep
-
-  useEffect(() => {
-    const hasAlreadyFile = formData.data.some(
-      d =>
-        d.stepIndex === stepIndex &&
-        d.file.name === currentFile.name &&
-        d.file.lastModified === currentFile.lastModified
-    )
-    if (!hasAlreadyFile) {
-      setFormData(prev => ({
-        ...prev,
-        data: [
-          ...prev.data,
-          {
-            file: currentFile,
-            stepIndex,
-            fileMetadata: {
-              page: !multipage ? page : '',
-              multipage
-            }
-          }
-        ]
-      }))
-    }
-  }, [formData.data, stepIndex, currentFile, multipage, page, setFormData])
+  const { multipage } = currentStep
 
   const changeSelectedFile = () => {
     const newData = formData.data.filter(
