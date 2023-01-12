@@ -7,15 +7,11 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import RadioGroup from 'cozy-ui/transpiled/react/RadioGroup'
 import FormControlLabel from 'cozy-ui/transpiled/react/FormControlLabel'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
-
-import logger from '../logger'
 
 const EditLinkPermissionDialog = ({
   open,
   onClose,
   document,
-  documentType,
   onPermissionsSelected
 }) => {
   const { t } = useI18n()
@@ -30,12 +26,7 @@ const EditLinkPermissionDialog = ({
     const verbs = isReadOnlyPermissions
       ? ['GET']
       : ['GET', 'POST', 'PUT', 'PATCH']
-    try {
-      onPermissionsSelected({ verbs })
-    } catch (err) {
-      Alerter.error(t(`${documentType}.share.shareByLink.permserror`))
-      logger.log(err)
-    }
+    onPermissionsSelected({ verbs })
     onClose()
   }
 
@@ -92,7 +83,6 @@ EditLinkPermissionDialog.propTypes = {
   open: PropTypes.bool.isRequired,
   onClose: PropTypes.func.isRequired,
   document: PropTypes.object.isRequired,
-  documentType: PropTypes.string.isRequired,
   onPermissionsSelected: PropTypes.func.isRequired
 }
 
