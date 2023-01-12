@@ -1,4 +1,4 @@
-import React, { useState, useEffect, memo, useCallback } from 'react'
+import React, { useState, useEffect, memo } from 'react'
 
 import { useClient, models } from 'cozy-client'
 import DialogActions from 'cozy-ui/transpiled/react/DialogActions'
@@ -14,6 +14,7 @@ import ScanDesktopActions from '../ModelSteps/ScanDesktopActions'
 import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
 import { makeBlobWithCustomAttrs } from '../../helpers/makeBlobWithCustomAttrs'
 import { useFormData } from '../Hooks/useFormData'
+import { isFileAlreadySelected } from './helpers'
 
 const { fetchBlobFileById } = models.file
 
@@ -27,23 +28,50 @@ const validFileType = file => {
 const Scan = ({ currentStep }) => {
   const { t } = useI18n()
   const client = useClient()
-  const { formData } = useFormData()
-  const { illustration, text, stepIndex } = currentStep
+  const { formData, setFormData } = useFormData()
+  const { illustration, text, stepIndex, multipage, page } = currentStep
   const [currentFile, setCurrentFile] = useState(null)
 
   const [isFilePickerModalOpen, setIsFilePickerModalOpen] = useState(false)
-  const [cozyFileId, setCozyFileId] = useState('')
 
-  const onChangeFile = useCallback(file => {
+  const onChangeFile = file => {
     if (file) {
       setCurrentFile(file)
+      if (!isFileAlreadySelected(formData, stepIndex, file)) {
+        setFormData(prev => ({
+          ...prev,
+          data: [
+            ...prev.data,
+            {
+              file: file,
+              stepIndex,
+              fileMetadata: {
+                page: !multipage ? page : '',
+                multipage
+              }
+            }
+          ]
+        }))
+      }
     }
-  }, [])
+  }
 
   const openFilePickerModal = () => setIsFilePickerModalOpen(true)
   const closeFilePickerModal = () => setIsFilePickerModalOpen(false)
 
-  const onChangeFilePicker = fileId => setCozyFileId(fileId)
+  const onChangeFilePicker = async cozyFileId => {
+    const blobFile = await fetchBlobFileById(client, cozyFileId)
+    if (validFileType(blobFile)) {
+      const blobFileCustom = makeBlobWithCustomAttrs(blobFile, {
+        id: cozyFileId
+      })
+      onChangeFile(blobFileCustom)
+    } else {
+      Alerter.error('Scan.modal.validFileType', {
+        duration: 3000
+      })
+    }
+  }
 
   useEffect(() => {
     const data = formData.data.filter(data => data.stepIndex === stepIndex)
@@ -53,24 +81,6 @@ const Scan = ({ currentStep }) => {
       setCurrentFile(file)
     }
   }, [formData.data, stepIndex])
-
-  useEffect(() => {
-    ;(async () => {
-      if (cozyFileId) {
-        const blobFile = await fetchBlobFileById(client, cozyFileId)
-        if (validFileType(blobFile)) {
-          const blobFileCustom = makeBlobWithCustomAttrs(blobFile, {
-            id: cozyFileId
-          })
-          onChangeFile(blobFileCustom)
-        } else {
-          Alerter.error('Scan.modal.validFileType', {
-            duration: 3000
-          })
-        }
-      }
-    })()
-  }, [client, cozyFileId, onChangeFile])
 
   return currentFile ? (
     <AcquisitionResult

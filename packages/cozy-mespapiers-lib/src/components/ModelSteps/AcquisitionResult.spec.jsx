@@ -149,13 +149,6 @@ describe('AcquisitionResult component:', () => {
   })
 
   describe('setFormData', () => {
-    it('should setFormData must be called once when component is mounted', () => {
-      const mockSetFormData = jest.fn()
-      setup({ setFormData: mockSetFormData })
-
-      expect(mockSetFormData).toHaveBeenCalledTimes(1)
-    })
-
     it('should setFormData must not be called when component is mounted if file already exists on same stepIndex', () => {
       const mockSetFormData = jest.fn()
       setup({
@@ -174,12 +167,12 @@ describe('AcquisitionResult component:', () => {
       const mockSetFormData = jest.fn()
       const { getByTestId } = setup({ setFormData: mockSetFormData })
 
-      expect(mockSetFormData).toHaveBeenCalledTimes(1)
+      expect(mockSetFormData).toHaveBeenCalledTimes(0)
 
       const btn = getByTestId('retry-button')
       fireEvent.click(btn)
 
-      expect(mockSetFormData).toHaveBeenCalledTimes(2)
+      expect(mockSetFormData).toHaveBeenCalledTimes(1)
     })
   })
 })
