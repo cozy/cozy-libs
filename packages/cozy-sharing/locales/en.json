@@ -108,7 +108,8 @@
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "permserror": "An error occurred while changing the permissions of the link, please try again."
+        "permserror": "An error occurred while changing the permissions of the link, please try again.",
+        "shareDescription": "Here is the link to the document %{name}:"
       },
       "shareByEmail": {
         "subtitle": "By email",
@@ -181,7 +182,8 @@
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "permserror": "An error occurred while changing the permissions of the link, please try again."
+        "permserror": "An error occurred while changing the permissions of the link, please try again.",
+        "shareDescription": "Here is the link to the document %{name}:"
       },
       "shareByEmail": {
         "subtitle": "By email",
@@ -255,7 +257,8 @@
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
         "permserror": "An error occurred while changing the permissions of the link, please try again.",
-        "fetchFailed": "Woops! It seems your connectivity is limited, try again later when it gets better."
+        "fetchFailed": "Woops! It seems your connectivity is limited, try again later when it gets better.",
+        "shareDescription": "Here is the link to the album %{name}:"
       },
       "shareByEmail": {
         "title": "By email",
@@ -316,7 +319,8 @@
         "copy": "Copy link",
         "copied": "Link has been copied to clipboard",
         "failed": "Unable to copy to clipboard",
-        "permserror": "An error occurred while changing the permissions of the link, please try again."
+        "permserror": "An error occurred while changing the permissions of the link, please try again.",
+        "shareDescription": "Here is the link to the document %{name}:"
       },
       "shareByEmail": {
         "subtitle": "By email",

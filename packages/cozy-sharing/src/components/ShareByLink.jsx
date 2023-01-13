@@ -78,6 +78,28 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
     setAlert({ ...alert, open: false })
   }
 
+  const showCopyAndSendButtons = link && isMobile && navigator.share
+  const showOnlyCopyButton =
+    (link && !isMobile) || (link && isMobile && !navigator.share)
+
+  const shareLink = async () => {
+    try {
+      const shareData = {
+        text: t(`${documentType}.share.shareByLink.shareDescription`, {
+          name: document.name || ''
+        }),
+        url: link
+      }
+      await navigator.share(shareData)
+    } catch (error) {
+      setAlert({
+        open: true,
+        severity: 'error',
+        message: t(`${documentType}.share.error.generic`)
+      })
+    }
+  }
+
   return (
     <div className="u-w-100 u-flex u-flex-justify-center">
       {!link && (
@@ -92,7 +114,7 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
           onClick={onCreate}
         />
       )}
-      {link && isMobile && (
+      {showCopyAndSendButtons && (
         <>
           <Button
             label={t(`${documentType}.share.shareByLink.send`)}
@@ -100,6 +122,7 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
             size="medium"
             startIcon={<Icon icon={LinkIcon} />}
             className="u-flex-auto u-mr-half"
+            onClick={shareLink}
           />
           <Button
             label={<Icon icon={CopyIcon} />}
@@ -109,7 +132,7 @@ const ShareByLink = ({ link, document, documentType, onEnable }) => {
           />
         </>
       )}
-      {link && !isMobile && (
+      {showOnlyCopyButton && (
         <Button
           label={t(`${documentType}.share.shareByLink.copy`)}
           variant="secondary"
