@@ -107,7 +107,8 @@
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
-        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer."
+        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
+        "shareDescription": "Voici le lien de partage du document %{name} :"
       },
       "shareByEmail": {
         "subtitle": "Par email",
@@ -180,7 +181,8 @@
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
-        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer."
+        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
+        "shareDescription": "Voici le lien de partage du document %{name} :"
       },
       "shareByEmail": {
         "subtitle": "Par email",
@@ -254,7 +256,8 @@
         "copied": "Lien copié dans le presse-papier",
         "failed": "Impossible de copier dans le presse-papier",
         "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
-        "fetchFailed": "Oups ! Il semblerait que votre connexion internet soit limitée, réessayez plus tard quand le réseau sera meilleur."
+        "fetchFailed": "Oups ! Il semblerait que votre connexion internet soit limitée, réessayez plus tard quand le réseau sera meilleur.",
+        "shareDescription": "Voici le lien de partage de l'album %{name} :"
       },
       "shareByEmail": {
         "title": "Par e-mail",
@@ -314,7 +317,8 @@
         "copy": "Copier le lien",
         "copied": "Lien copié dans le presse-papiers.",
         "failed": "Impossible de copier dans le presse papier",
-        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer."
+        "permserror": "Une erreur est survenue lors du changement de permissions du lien, merci de réessayer.",
+        "shareDescription": "Voici le lien de partage du document %{name} :"
       },
       "shareByEmail": {
         "subtitle": "Par email",
