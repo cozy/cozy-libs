@@ -1,2 +1,4 @@
+import { DOCUMENT_TYPE } from './documentType'
+
 export const isOnlyReadOnlyLinkAllowed = ({ documentType }) =>
-  documentType === 'Albums'
+  documentType === DOCUMENT_TYPE.ALBUMS
