@@ -96,7 +96,7 @@ const LinkRecipientPermissions = ({
                     variant="caption"
                     color="textSecondary"
                   >
-                    {t(t('Share.permissionLink.readDescription'))}
+                    {t('Share.permissionLink.readDescription')}
                   </Typography>
                 </>
               </ActionMenuItem>
