@@ -6,14 +6,15 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import Fade from 'cozy-ui/transpiled/react/Fade'
 
+import { FADE_IN_DURATION } from '../../helpers/recipients'
 import { getDisplayName } from '../../models'
 import RecipientConfirm from './RecipientConfirm'
 import RecipientPermissions from './RecipientPermissions'
 import RecipientAvatar from './RecipientAvatar'
 import RecipientStatus from './RecipientStatus'
-
-import Typography from 'cozy-ui/transpiled/react/Typography'
 
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 
@@ -27,6 +28,7 @@ const Recipient = props => {
     status,
     recipientConfirmationData,
     verifyRecipient,
+    fadeIn,
     ...rest
   } = props
 
@@ -45,22 +47,24 @@ const Recipient = props => {
   )
 
   return (
-    <ListItem disableGutters>
-      <ListItemIcon>
-        <RecipientAvatar size="small" recipient={props} />
-      </ListItemIcon>
-      <ListItemText
-        primary={
-          <Typography className="u-ellipsis" variant="body1">
-            {isMe ? t('Share.recipients.you') : name}
-          </Typography>
-        }
-        secondary={
-          <RecipientStatus status={status} isMe={isMe} instance={instance} />
-        }
-      />
-      {RightPart}
-    </ListItem>
+    <Fade in timeout={fadeIn ? FADE_IN_DURATION : 0}>
+      <ListItem disableGutters>
+        <ListItemIcon>
+          <RecipientAvatar size="small" recipient={props} />
+        </ListItemIcon>
+        <ListItemText
+          primary={
+            <Typography className="u-ellipsis" variant="body1">
+              {isMe ? t('Share.recipients.you') : name}
+            </Typography>
+          }
+          secondary={
+            <RecipientStatus status={status} isMe={isMe} instance={instance} />
+          }
+        />
+        {RightPart}
+      </ListItem>
+    </Fade>
   )
 }
 

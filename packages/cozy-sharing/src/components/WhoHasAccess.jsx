@@ -5,7 +5,10 @@ import Recipient from './Recipient/Recipient'
 import LinkRecipient from './Recipient/LinkRecipient'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+
 import { buildInstanceSettingsQuery } from '../queries/queries'
+import { filterAndReworkRecipients } from '../helpers/recipients'
+import { usePrevious } from '../helpers/hooks'
 
 /**
  * Displays a warning if some contacts are waiting for confirmation of their sharing
@@ -47,6 +50,16 @@ const WhoHasAccess = ({
     instanceSettingsQuery.options
   )
 
+  const previousLink = usePrevious(link)
+  const previousRecipients = usePrevious(recipients)
+
+  const linkHasBeenJustCreated = link && previousLink === null
+
+  const recipientsToDisplay = filterAndReworkRecipients(
+    recipients,
+    previousRecipients
+  )
+
   const public_name = instanceSettingsResult?.data?.attributes?.public_name
 
   return (
@@ -65,6 +78,7 @@ const WhoHasAccess = ({
             permissions={permissions}
             onChangePermissions={onUpdateShareLinkPermissions}
             onDisable={onRevokeLink}
+            fadeIn={linkHasBeenJustCreated}
           />
         )}
 
@@ -77,27 +91,26 @@ const WhoHasAccess = ({
           />
         )}
 
-        {recipients
-          .filter(recipient => recipient.status !== 'owner')
-          .map(recipient => {
-            const recipientConfirmationData = recipientsToBeConfirmed.find(
-              user => user.email === recipient.email
-            )
+        {recipientsToDisplay.map(recipient => {
+          const recipientConfirmationData = recipientsToBeConfirmed.find(
+            user => user.email === recipient.email
+          )
 
-            return (
-              <Recipient
-                {...recipient}
-                key={`key_r_${recipient.index}`}
-                isOwner={isOwner}
-                document={document}
-                documentType={documentType}
-                onRevoke={onRevoke}
-                onRevokeSelf={onRevokeSelf}
-                recipientConfirmationData={recipientConfirmationData}
-                verifyRecipient={verifyRecipient}
-              />
-            )
-          })}
+          return (
+            <Recipient
+              {...recipient}
+              key={`key_r_${recipient.index}`}
+              isOwner={isOwner}
+              document={document}
+              documentType={documentType}
+              onRevoke={onRevoke}
+              onRevokeSelf={onRevokeSelf}
+              recipientConfirmationData={recipientConfirmationData}
+              verifyRecipient={verifyRecipient}
+              fadeIn={recipient.hasBeenJustAdded}
+            />
+          )
+        })}
       </List>
     </div>
   )
