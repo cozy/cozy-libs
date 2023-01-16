@@ -92,6 +92,7 @@
         "syncing": "Data recovery…",
         "unknown": "Unknown",
         "afterSomeTimes": "Sync. %{times} ago",
+        "format": "MM/DD/YYYY",
         "justNow": "Sync. just now"
       }
     },
