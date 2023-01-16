@@ -9,11 +9,17 @@ import NewAccountModal from '../NewAccountModal'
 import EditAccountModal from '../EditAccountModal'
 import KonnectorSuccess from '../KonnectorSuccess'
 import HarvestModalRoot from '../HarvestModalRoot'
+import AccountModalWithoutTabs from '../AccountModalWithoutTabs/FovV4Router/AccountModalWithoutTabs'
+import AccountModalContentWrapper from '../AccountModalWithoutTabs/FovV4Router/AccountModalContentWrapper'
+import DataTab from '../KonnectorConfiguration/DataTab'
+import ConfigurationTab from '../KonnectorConfiguration/ConfigurationTab'
+import withAdaptiveRouter from '../hoc/withRouter'
 
 const RoutesV4 = ({
   konnectorRoot,
   konnectorWithTriggers,
   accountsAndTriggers,
+  historyAction,
   onSuccess,
   onDismiss
 }) => {
@@ -29,20 +35,74 @@ const RoutesV4 = ({
           />
         )}
       />
-      <Route
-        path={`${konnectorRoot}/accounts/:accountId`}
-        exact
-        render={({ match }) => (
-          <AccountModal
-            konnector={konnectorWithTriggers}
-            accountId={match.params.accountId}
-            accountsAndTriggers={accountsAndTriggers}
-            onDismiss={onDismiss}
-            showNewAccountButton={!konnectorWithTriggers.clientSide}
-            showAccountSelection={!konnectorWithTriggers.clientSide}
+      {flag('harvest.inappconnectors.enabled') ? (
+        <>
+          <Route
+            path={`${konnectorRoot}/accounts/:accountId`}
+            exact
+            render={({ match }) => (
+              <AccountModalWithoutTabs
+                konnector={konnectorWithTriggers}
+                accountId={match.params.accountId}
+                accountsAndTriggers={accountsAndTriggers}
+                showNewAccountButton={!konnectorWithTriggers.clientSide}
+                showAccountSelection={!konnectorWithTriggers.clientSide}
+                onDismiss={onDismiss}
+              >
+                <AccountModalContentWrapper>
+                  <DataTab
+                    konnectorRoot={`${konnectorRoot}/accounts/${match.params.accountId}`}
+                    konnector={konnectorWithTriggers}
+                    showNewAccountButton={!konnectorWithTriggers.clientSide}
+                    onDismiss={onDismiss}
+                  />
+                </AccountModalContentWrapper>
+              </AccountModalWithoutTabs>
+            )}
           />
-        )}
-      />
+          <Route
+            path={`${konnectorRoot}/accounts/:accountId/config`}
+            exact
+            render={({ match }) => (
+              <AccountModalWithoutTabs
+                konnector={konnectorWithTriggers}
+                accountId={match.params.accountId}
+                accountsAndTriggers={accountsAndTriggers}
+                showNewAccountButton={!konnectorWithTriggers.clientSide}
+                showAccountSelection={!konnectorWithTriggers.clientSide}
+                onDismiss={onDismiss}
+              >
+                <AccountModalContentWrapper>
+                  <ConfigurationTab
+                    konnector={konnectorWithTriggers}
+                    showNewAccountButton={!konnectorWithTriggers.clientSide}
+                    onAccountDeleted={onDismiss}
+                    addAccount={() =>
+                      historyAction(`${konnectorRoot}/new`, 'replace')
+                    }
+                  />
+                </AccountModalContentWrapper>
+              </AccountModalWithoutTabs>
+            )}
+          />
+        </>
+      ) : (
+        <Route
+          path={`${konnectorRoot}/accounts/:accountId`}
+          exact
+          render={({ match }) => (
+            <AccountModal
+              konnector={konnectorWithTriggers}
+              accountId={match.params.accountId}
+              accountsAndTriggers={accountsAndTriggers}
+              onDismiss={onDismiss}
+              showNewAccountButton={!konnectorWithTriggers.clientSide}
+              showAccountSelection={!konnectorWithTriggers.clientSide}
+            />
+          )}
+        />
+      )}
+
       <Route
         path={`${konnectorRoot}/accounts/:accountId/edit`}
         exact
@@ -91,4 +151,4 @@ const RoutesV4 = ({
   )
 }
 
-export default RoutesV4
+export default withAdaptiveRouter(RoutesV4)
