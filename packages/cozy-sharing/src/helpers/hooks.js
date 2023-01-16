@@ -1,6 +1,16 @@
-import React, { useCallback, useRef } from 'react'
+import React, { useCallback, useRef, useEffect } from 'react'
 
 export const isServer = typeof window === 'undefined'
+
+export function usePrevious(value) {
+  const ref = useRef()
+
+  useEffect(() => {
+    ref.current = value
+  }, [value])
+
+  return ref.current
+}
 
 /**
  * based on : https://github.com/tannerlinsley/react-query/blob/79ad5a9ccbce1486c10e7e364d8fc28bef3fa19f/src/devtools/utils.ts#L61
