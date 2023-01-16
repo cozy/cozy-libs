@@ -16,8 +16,9 @@ export const historyAction = (props, historyOrNavigate) => (route, method) => {
     return historyOrNavigate(path, { replace: method === 'replace' })
   }
 
+  const splitBaseRoute = baseRoute?.split('/') || []
   const segments = '/'.concat(
-    baseRoute.split('/').concat(route.split('/')).filter(Boolean).join('/')
+    splitBaseRoute.concat(route.split('/')).filter(Boolean).join('/')
   )
 
   return historyOrNavigate[method](segments)

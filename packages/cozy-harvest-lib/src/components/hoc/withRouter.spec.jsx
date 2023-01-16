@@ -48,4 +48,10 @@ describe('historyAction', () => {
     expect(historyMock.replace).toHaveBeenCalledWith('/base/route/one/two')
     historyMock.replace.mockReset()
   })
+
+  it('should handle even if no base route', () => {
+    setup({ baseRoute: undefined, route: '/one' })
+    expect(historyMock.replace).toHaveBeenCalledWith('/one')
+    historyMock.replace.mockReset()
+  })
 })
