@@ -1,5 +1,11 @@
 import React from 'react'
-import { Routes, Route, Navigate, useParams } from 'react-router-dom'
+import {
+  Routes,
+  Route,
+  Navigate,
+  useParams,
+  useNavigate
+} from 'react-router-dom'
 
 import flag from 'cozy-flags'
 
@@ -25,6 +31,8 @@ const RoutesV6 = ({
   onSuccess,
   onDismiss
 }) => {
+  const navigate = useNavigate()
+
   return (
     <Routes>
       <Route
@@ -85,7 +93,8 @@ const RoutesV6 = ({
                 <ConfigurationTab
                   konnector={konnectorWithTriggers}
                   showNewAccountButton={!konnectorWithTriggers.clientSide}
-                  onDismiss={onDismiss}
+                  onAccountDeleted={onDismiss}
+                  addAccount={() => navigate('new', { replace: true })}
                 />
               </AccountModalContentWrapper>
             }
