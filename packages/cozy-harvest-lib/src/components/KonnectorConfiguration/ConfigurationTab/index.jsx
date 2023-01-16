@@ -233,7 +233,7 @@ const ConfigurationTab = ({
 
 ConfigurationTab.propTypes = {
   konnector: PropTypes.object.isRequired,
-  account: PropTypes.object.isRequired,
+  account: PropTypes.object,
   error: PropTypes.object,
   flow: PropTypes.object,
   addAccount: PropTypes.func.isRequired,
