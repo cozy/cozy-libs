@@ -26,7 +26,14 @@ const styles = {
   }
 }
 
-export const DataTab = ({ konnector, trigger, client, flow, account }) => {
+export const DataTab = ({
+  konnector,
+  konnectorRoot,
+  trigger,
+  client,
+  flow,
+  account
+}) => {
   const { isMobile } = useBreakpoints()
   const flowState = flow.getState()
   const { error } = flowState
@@ -51,7 +58,11 @@ export const DataTab = ({ konnector, trigger, client, flow, account }) => {
     <div>
       {flag('harvest.inappconnectors.enabled') && (
         <>
-          <LaunchTriggerCard flow={flow} disabled={isInMaintenance} />
+          <LaunchTriggerCard
+            konnectorRoot={konnectorRoot}
+            flow={flow}
+            disabled={isInMaintenance}
+          />
           {isMobile && <Divider style={styles.divider} />}
         </>
       )}

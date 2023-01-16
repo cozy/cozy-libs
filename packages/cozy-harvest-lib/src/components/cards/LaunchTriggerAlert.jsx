@@ -10,15 +10,30 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
+import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 
 import { getLastSuccessDate, getKonnectorSlug } from '../../helpers/triggers'
 import { isRunnable } from '../../helpers/konnectors'
 import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
+import withAdaptiveRouter from '../hoc/withRouter'
 import KonnectorIcon from '../KonnectorIcon'
 import { makeLabel } from './helpers'
 
-export const LaunchTriggerAlert = ({ flow, f, t, disabled }) => {
+const styles = {
+  // tricks to put 48px wide button inside 32px height container
+  // without enlarging the container
+  iconButtonWrapper: { height: 32, width: 46 }
+}
+
+export const LaunchTriggerAlert = ({
+  flow,
+  f,
+  t,
+  disabled,
+  konnectorRoot,
+  historyAction
+}) => {
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
   const { trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
@@ -38,6 +53,7 @@ export const LaunchTriggerAlert = ({ flow, f, t, disabled }) => {
   return (
     <>
       <Alert
+        className="u-pr-half"
         color="var(--paperBackground)"
         icon={
           running ? (
@@ -59,13 +75,17 @@ export const LaunchTriggerAlert = ({ flow, f, t, disabled }) => {
                 label={t('card.launchTrigger.button.label')}
                 onClick={() => launch({ autoSuccessTimer: false })}
               />
-              <IconButton
-                ref={anchorRef}
-                onClick={() => setShowOptions(true)}
-                className="u-p-half"
+              <div
+                className="u-flex u-flex-items-center"
+                style={styles.iconButtonWrapper}
               >
-                <Icon icon={DotsIcon} />
-              </IconButton>
+                <IconButton
+                  ref={anchorRef}
+                  onClick={() => setShowOptions(true)}
+                >
+                  <Icon icon={DotsIcon} />
+                </IconButton>
+              </div>
               {showOptions && (
                 <ActionMenu
                   anchorElRef={anchorRef}
@@ -83,6 +103,14 @@ export const LaunchTriggerAlert = ({ flow, f, t, disabled }) => {
                       {t('card.launchTrigger.button.label')}
                     </ActionMenuItem>
                   )}
+                  <ActionMenuItem
+                    left={<Icon icon={GearIcon} />}
+                    onClick={() =>
+                      historyAction(`${konnectorRoot}/config`, 'push')
+                    }
+                  >
+                    {t('card.launchTrigger.configure')}
+                  </ActionMenuItem>
                 </ActionMenu>
               )}
             </>
@@ -116,4 +144,8 @@ export const LaunchTriggerAlert = ({ flow, f, t, disabled }) => {
   )
 }
 
-export default LaunchTriggerAlert
+LaunchTriggerAlert.defaultProps = {
+  konnectorRoot: ''
+}
+
+export default withAdaptiveRouter(LaunchTriggerAlert)
