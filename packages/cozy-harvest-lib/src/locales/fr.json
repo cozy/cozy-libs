@@ -92,6 +92,7 @@
         "syncing": "Récupération des données…",
         "unknown": "Indéterminée",
         "afterSomeTimes": "Sync. il y a %{times}",
+        "format": "DD/MM/YYYY",
         "justNow": "Sync. à l'instant"
       }
     },
