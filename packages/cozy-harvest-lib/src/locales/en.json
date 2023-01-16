@@ -77,6 +77,7 @@
       "button": {
         "label": "Run again now"
       },
+      "configure": "Configure",
       "success": "Successful synchronization",
       "error": "An error occured.",
       "frequency": {

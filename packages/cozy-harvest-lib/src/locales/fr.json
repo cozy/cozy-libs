@@ -77,6 +77,7 @@
       "button": {
         "label": "Mettre à jour"
       },
+      "configure": "Configurer",
       "success": "Synchronisation réussie",
       "error": "Une erreur est survenue.",
       "frequency": {
