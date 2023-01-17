@@ -1,4 +1,5 @@
 import React, { useRef, useState, useEffect } from 'react'
+import PropTypes from 'prop-types'
 
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Alert from 'cozy-ui/transpiled/react/Alert'
@@ -146,6 +147,15 @@ export const LaunchTriggerAlert = ({
 
 LaunchTriggerAlert.defaultProps = {
   konnectorRoot: ''
+}
+
+LaunchTriggerAlert.propTypes = {
+  flow: PropTypes.object,
+  f: PropTypes.function,
+  t: PropTypes.function,
+  disabled: PropTypes.bool,
+  konnectorRoot: PropTypes.string,
+  historyAction: PropTypes.function
 }
 
 export default withAdaptiveRouter(LaunchTriggerAlert)

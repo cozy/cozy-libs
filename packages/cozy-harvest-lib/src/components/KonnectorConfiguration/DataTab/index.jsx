@@ -101,8 +101,11 @@ export const DataTab = ({
 
 DataTab.propTypes = {
   konnector: PropTypes.object.isRequired,
+  konnectorRoot: PropTypes.string,
   trigger: PropTypes.object.isRequired,
-  client: PropTypes.object.isRequired
+  client: PropTypes.object.isRequired,
+  flow: PropTypes.object,
+  account: PropTypes.object
 }
 
 export default withClient(DataTab)
