@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@15.2.1...cozy-mespapiers-lib@16.0.0) (2023-01-17)
+
+
+### Features
+
+* **mespapiers:** Pass konnectorRoot to LaunchTriggerCard ([0f99bf1](https://github.com/cozy/cozy-libs/commit/0f99bf18eef07ff7fc7cbddc44f048c42f6c824b))
+* **mespapiers:** Upgrade harvest from 12.0.0 to 12.3.0 ([edf8d89](https://github.com/cozy/cozy-libs/commit/edf8d89756d3a7976ea3c6f7e42f6430e609a857))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** `cozy-harvest-lib` must be `>=12.3.0`
+
+
+
+
+
 ## [15.2.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@15.2.0...cozy-mespapiers-lib@15.2.1) (2023-01-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
