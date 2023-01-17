@@ -37,6 +37,7 @@ const ConnectorItem = ({ papers }) => {
     queryTriggers.options
   )
   const trigger = triggers?.[0]
+  const connectorAccount = trigger?.message?.account
 
   const queryKonnector = buildConnectorsQueryById(
     `io.cozy.konnectors/${connectorSlug}`,
@@ -53,7 +54,10 @@ const ConnectorItem = ({ papers }) => {
 
   return (
     <>
-      <LaunchTriggerCard flowProps={{ initialTrigger: trigger }} />
+      <LaunchTriggerCard
+        flowProps={{ initialTrigger: trigger }}
+        konnectorRoot={`harvest/${connectorSlug}/accounts/${connectorAccount}`}
+      />
       <Divider />
       <button
         onClick={() => {
