@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.3.0...cozy-harvest-lib@12.3.1) (2023-01-17)
+
+
+### Bug Fixes
+
+* **harvest:** LaunchTriggerAlert text vertical alignement ([70e3f10](https://github.com/cozy/cozy-libs/commit/70e3f10c524ca320832c31c8a25d3379e9fe638d))
+
+
+
+
+
 # [12.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.2.0...cozy-harvest-lib@12.3.0) (2023-01-17)
 
 
