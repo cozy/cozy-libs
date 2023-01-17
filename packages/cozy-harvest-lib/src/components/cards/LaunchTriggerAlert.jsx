@@ -24,7 +24,9 @@ import { makeLabel } from './helpers'
 const styles = {
   // tricks to put 48px wide button inside 32px height container
   // without enlarging the container
-  iconButtonWrapper: { height: 32, width: 46 }
+  iconButtonWrapper: { height: 32, width: 46 },
+  // Alert is not designed to use 12px text, so this is necessary for now
+  typography: { paddingTop: 2 }
 }
 
 export const LaunchTriggerAlert = ({
@@ -118,7 +120,7 @@ export const LaunchTriggerAlert = ({
           )
         }
       >
-        <Typography variant="caption">
+        <Typography style={styles.typography} variant="caption">
           {makeLabel({
             t,
             f,
