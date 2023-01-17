@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.2.0...cozy-harvest-lib@12.3.0) (2023-01-17)
+
+
+### Bug Fixes
+
+* **harvest:** Add missing props for ConfigurationTab ([b80b961](https://github.com/cozy/cozy-libs/commit/b80b961e4643e4b246686961e7001f61e04f31ac))
+* **harvest:** Add missing translation for launchTrigger lastSync format ([b8fe298](https://github.com/cozy/cozy-libs/commit/b8fe298a514fccefb396ed2211a785d32b4901e1))
+* **harvest:** WithRouter now handles route even without baseRoute ([6486e7f](https://github.com/cozy/cozy-libs/commit/6486e7ffa1ca61551ee8f59aed3e350b559f093e))
+
+
+### Features
+
+* **harvest:** Add `/config` route on routerV4 and remove tabs ([79c6947](https://github.com/cozy/cozy-libs/commit/79c694721e23678238b3a06c06601ebf476314f1))
+* **harvest:** Add `configure` option in LaunchTriggerAlert menu ([a3be41c](https://github.com/cozy/cozy-libs/commit/a3be41c0816b10166cfaabdeadfd53df6e72ec92))
+
+
+
+
+
 # [12.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.1.0...cozy-harvest-lib@12.2.0) (2023-01-11)
 
 
