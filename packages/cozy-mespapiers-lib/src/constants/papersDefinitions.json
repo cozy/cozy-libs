@@ -318,12 +318,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.referencedDate.text",
+          "text": "PaperJSON.invoice.referencedDate.text",
           "attributes": [
             {
               "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+              "inputLabel": "PaperJSON.invoice.referencedDate.inputLabel"
             }
           ]
         },
@@ -468,12 +468,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.referencedDate.text",
+          "text": "PaperJSON.invoice.referencedDate.text",
           "attributes": [
             {
               "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+              "inputLabel": "PaperJSON.invoice.referencedDate.inputLabel"
             }
           ]
         },
@@ -1135,12 +1135,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.referencedDate.text",
+          "text": "PaperJSON.invoice.referencedDate.text",
           "attributes": [
             {
               "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+              "inputLabel": "PaperJSON.invoice.referencedDate.inputLabel"
             }
           ]
         },
@@ -1553,12 +1553,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.generic.referencedDate.text",
+          "text": "PaperJSON.invoice.referencedDate.text",
           "attributes": [
             {
               "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+              "inputLabel": "PaperJSON.invoice.referencedDate.inputLabel"
             }
           ]
         },
@@ -1805,12 +1805,12 @@
           "stepIndex": 2,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.otherInvoice.referencedDate.text",
+          "text": "PaperJSON.invoice.referencedDate.text",
           "attributes": [
             {
               "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.otherInvoice.referencedDate.inputLabel"
+              "inputLabel": "PaperJSON.invoice.referencedDate.inputLabel"
             }
           ]
         },

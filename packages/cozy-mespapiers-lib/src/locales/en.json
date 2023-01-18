@@ -183,7 +183,7 @@
         "endAdornment": "day before |||| days before"
       }
     },
-    "otherInvoice": {
+    "invoice": {
       "referencedDate": {
         "inputLabel": "Referenced date",
         "text": "What is the date of this document?"
