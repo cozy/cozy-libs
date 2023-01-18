@@ -1,6 +1,5 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
-import { useNavigate } from 'react-router-dom'
 import flag from 'cozy-flags'
 
 import { LaunchTriggerCard } from 'cozy-harvest-lib'
@@ -25,8 +24,6 @@ import {
 } from '../../helpers/queries'
 
 const ConnectorItem = ({ papers }) => {
-  const navigate = useNavigate()
-
   const connectorSlug = papers?.list?.[0]?.cozyMetadata?.createdByApp
   const queryTriggers = buildTriggersQueryByConnectorSlug(
     connectorSlug,
@@ -58,16 +55,6 @@ const ConnectorItem = ({ papers }) => {
         flowProps={{ initialTrigger: trigger }}
         konnectorRoot={`harvest/${connectorSlug}/accounts/${connectorAccount}`}
       />
-      <Divider />
-      <button
-        onClick={() => {
-          navigate({
-            pathname: `harvest/${connectorSlug}`
-          })
-        }}
-      >
-        Open Harvest for this connector
-      </button>
       <Divider />
     </>
   )
