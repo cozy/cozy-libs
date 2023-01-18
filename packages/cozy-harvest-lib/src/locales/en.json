@@ -75,7 +75,7 @@
   "card": {
     "launchTrigger": {
       "button": {
-        "label": "Run again now"
+        "label": "Synchronize"
       },
       "configure": "Configure",
       "success": "Successful synchronization",
