@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.3.1...cozy-harvest-lib@12.4.0) (2023-01-18)
+
+
+### Bug Fixes
+
+* **harvest-lib:** Add disableTitleAutoPadding prop on dialogContext ([a5d9014](https://github.com/cozy/cozy-libs/commit/a5d901468d4993c4c5cbeb90d5ae1b1a233daeb1))
+
+
+### Features
+
+* **harvest-lib:** Update launchTrigger button locales ([6c3bdc6](https://github.com/cozy/cozy-libs/commit/6c3bdc6873e3f115ab84797068bcfc5a9e16ebe4))
+
+
+
+
+
 ## [12.3.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.3.0...cozy-harvest-lib@12.3.1) (2023-01-17)
 
 

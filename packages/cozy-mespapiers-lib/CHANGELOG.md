@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [16.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@16.0.1...cozy-mespapiers-lib@16.1.0) (2023-01-18)
+
+
+### Features
+
+* **mespapiers-lib:** Add realtime for `io.cozy.triggers` ([32d2f28](https://github.com/cozy/cozy-libs/commit/32d2f280a755bf8b45cc060cab847646274b3baa))
+* **mespapiers-lib:** Remove dev button to open harvest modal ([a5e6d82](https://github.com/cozy/cozy-libs/commit/a5e6d822e9a0c8b2b57427ee994fee8c25f6de8d))
+
+
+
+
+
 ## [16.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@16.0.0...cozy-mespapiers-lib@16.0.1) (2023-01-17)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
