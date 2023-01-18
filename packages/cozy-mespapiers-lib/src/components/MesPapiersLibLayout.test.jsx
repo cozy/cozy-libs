@@ -68,7 +68,7 @@ describe('MesPapiersLibLayout', () => {
   it('should contain RealTimeQueries(2), Alerter & ModalStack components', () => {
     const { queryByTestId, queryAllByTestId } = setup()
 
-    expect(queryAllByTestId('RealTimeQueries')).toHaveLength(2)
+    expect(queryAllByTestId('RealTimeQueries')).toHaveLength(3)
     expect(queryByTestId('Alerter')).toBeTruthy()
   })
 })
