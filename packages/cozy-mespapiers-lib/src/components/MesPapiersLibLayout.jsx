@@ -36,6 +36,7 @@ export const MesPapiersLibLayout = () => {
         <Outlet />
       )}
       <RealTimeQueries doctype="io.cozy.files" />
+      <RealTimeQueries doctype="io.cozy.triggers" />
       <RealTimeQueries doctype="io.cozy.mespapiers.settings" />
       <Alerter t={t} />
       <ModalStack />
