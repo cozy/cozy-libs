@@ -60,7 +60,8 @@ const Routes = ({
   const dialogContext = useCozyDialog({
     size: 'l',
     open: true,
-    onClose: onDismiss
+    onClose: onDismiss,
+    disableTitleAutoPadding: true
   })
 
   const { konnectorWithTriggers, fetching, notFoundError } =
