@@ -75,7 +75,7 @@
   "card": {
     "launchTrigger": {
       "button": {
-        "label": "Mettre à jour"
+        "label": "Synchroniser"
       },
       "configure": "Configurer",
       "success": "Synchronisation réussie",
