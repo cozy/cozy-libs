@@ -54,7 +54,7 @@ const ConnectorItem = ({ papers }) => {
   return (
     <>
       <LaunchTriggerCard
-        flowProps={{ initialTrigger: trigger }}
+        flowProps={{ initialTrigger: trigger, konnector }}
         konnectorRoot={`harvest/${connectorSlug}/accounts/${connectorAccount}`}
       />
       <Divider />
