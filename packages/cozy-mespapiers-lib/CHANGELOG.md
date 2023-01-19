@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@16.1.0...cozy-mespapiers-lib@17.0.0) (2023-01-19)
+
+
+### Features
+
+* Upgrade cozy-client 34.6.0 to 34.8.0 and cozy-ui 79.2.2 to 80.0.2 ([ae50421](https://github.com/cozy/cozy-libs/commit/ae504214eef84287bf74d60728ffb163da9307d2))
+
+
+### BREAKING CHANGES
+
+* `cozy-client` must be `>=34.8.0` and `cozy-ui` must be `>=80.0.2`
+
+
+
+
+
 # [16.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@16.0.1...cozy-mespapiers-lib@16.1.0) (2023-01-18)
 
 
