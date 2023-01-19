@@ -30,6 +30,7 @@ import reducer, {
 } from './state'
 import { fetchNextPermissions } from './fetchNextPermissions'
 import { fetchFilesPaths } from './helpers/files'
+import { SynchronousJobQueue } from './helpers/synchronousJobQueue'
 import {
   getSharingObject,
   createSharingInStore,
@@ -79,6 +80,8 @@ export class SharingProvider extends Component {
     }
     this.realtime = null
     this.isInitialized = false
+
+    this.synchronousJobQueue = new SynchronousJobQueue()
 
     const { client } = props
     this.sharingCol = client.collection(SHARING_DOCTYPE)
@@ -150,7 +153,16 @@ export class SharingProvider extends Component {
       updateSharingInStore(this.dispatch, newSharing)
     } else {
       const docsId = getSharingDocIds(newSharing)
-      createSharingInStore(client, doctype, this.dispatch, docsId, newSharing)
+      this.synchronousJobQueue.push({
+        function: createSharingInStore,
+        arguments: {
+          client,
+          doctype,
+          dispatch: this.dispatch,
+          docsId,
+          sharing: newSharing
+        }
+      })
     }
   }
 
