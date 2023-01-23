@@ -69,7 +69,7 @@ const Home = ({ setSelectedThemeLabel }) => {
   )
 
   const isLoadingFiles = isQueryLoading(queryResult) || queryResult.hasMore
-  const isSearching = searchValue.length > 0 || selectedTheme
+  const isSearching = searchValue.length > 0 || !!selectedTheme
 
   const allPapersByCategories = useMemo(
     () =>
@@ -127,7 +127,7 @@ const Home = ({ setSelectedThemeLabel }) => {
     setIsThemesFilterDisplayed(isDisplayed)
   }
 
-  if (isLoadingFiles || isLoadingContacts) {
+  if (isLoadingFiles || (isSearching && isLoadingContacts)) {
     return (
       <Spinner
         size="xxlarge"
