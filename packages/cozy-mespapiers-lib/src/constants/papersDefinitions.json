@@ -1822,6 +1822,357 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ]
+    },
+    {
+      "label": "school_insurance_certificate",
+      "icon": "contract",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "transport_invoice",
+      "icon": "bill",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "employment_center_certificate",
+      "icon": "collect",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ],
+      "connectorCriteria": {
+        "name": "poleemploi"
+      }
+    },
+    {
+      "label": "electoral_card",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "transport_card",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "page": "front",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.front.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "scan",
+          "page": "back",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.back.text"
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.card.expirationDate.text",
+          "attributes": [
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "pacs",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "single_parent_benefit",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "fidelity_card",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "page": "front",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.front.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "scan",
+          "page": "back",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.back.text"
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "library_card",
+      "icon": "people",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "page": "front",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.front.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "scan",
+          "page": "back",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.card.back.text"
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.card.expirationDate.text",
+          "attributes": [
+            {
+              "name": "expirationDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "real_estate_tax",
+      "icon": "bill",
+      "featureDate": "referencedDate",
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.referencedDate.text",
+          "attributes": [
+            {
+              "name": "referencedDate",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
     }
   ]
 }
