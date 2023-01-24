@@ -4,7 +4,8 @@ import {
   Route,
   useSearchParams,
   Navigate,
-  useLocation
+  useLocation,
+  Outlet
 } from 'react-router-dom'
 import PropTypes from 'prop-types'
 
@@ -21,6 +22,13 @@ import InformationEdit from './Views/InformationEdit'
 import PageEdit from './Views/PageEdit'
 import ContactEdit from './Views/ContactEdit'
 import HarvestRoutes from './Views/HarvestRoutes'
+
+const OutletWrapper = ({ Component }) => (
+  <>
+    <Component />
+    <Outlet />
+  </>
+)
 
 const MesPapiersLibRoutes = ({ lang, components }) => {
   const location = useLocation()
@@ -39,7 +47,7 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
         element={<MesPapiersLibProviders lang={lang} components={components} />}
       >
         <Route element={<OnboardedGuardedRoute />}>
-          <Route path="/" element={<Home />}>
+          <Route path="/" element={<OutletWrapper Component={Home} />}>
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
@@ -47,13 +55,19 @@ const MesPapiersLibRoutes = ({ lang, components }) => {
             />
             <Route path="multiselect" element={<MultiselectView />} />
           </Route>
-          <Route path="files/:fileTheme" element={<PapersList />}>
+          <Route
+            path="files/:fileTheme"
+            element={<OutletWrapper Component={PapersList} />}
+          >
             <Route path="create" element={<PlaceholderListModal />} />
             <Route
               path="create/:qualificationLabel"
               element={<CreatePaperModal />}
             />
-            <Route path=":fileId" element={<FilesViewerWithQuery />}>
+            <Route
+              path=":fileId"
+              element={<OutletWrapper Component={FilesViewerWithQuery} />}
+            >
               <Route path="edit/information" element={<InformationEdit />} />
               <Route path="edit/page" element={<PageEdit />} />
               <Route path="edit/contact" element={<ContactEdit />} />

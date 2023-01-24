@@ -31,7 +31,6 @@ import SearchResult from '../SearchResult/SearchResult'
 import { filterPapersByThemeAndSearchValue } from '../Home/helpers'
 import HomeToolbar from '../Home/HomeToolbar'
 import FilterButton from '../Home/FilterButton'
-import { Outlet } from 'react-router-dom'
 
 const {
   themes: { themesList }
@@ -190,8 +189,6 @@ const Home = ({ setSelectedThemeLabel }) => {
       {!isMultiSelectionActive && (
         <FeaturedPlaceholdersList featuredPlaceholders={featuredPlaceholders} />
       )}
-
-      <Outlet />
     </>
   )
 }
