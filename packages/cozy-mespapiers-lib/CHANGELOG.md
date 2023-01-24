@@ -3,6 +3,31 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@17.1.0...cozy-mespapiers-lib@18.0.0) (2023-01-24)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Condition of contact query at Home component ([4e9d480](https://github.com/cozy/cozy-libs/commit/4e9d48035bcedb3865eed068e32edfa07f71f9e9))
+
+
+### Features
+
+* **mespapiers-lib:** Update cozy client peerDeps ([8b9e9f2](https://github.com/cozy/cozy-libs/commit/8b9e9f2d4c1795d5b7c2fb93e1e81e1fc1a558ec))
+
+
+### BREAKING CHANGES
+
+* **mespapiers-lib:** `cozy-client` must be `>=34.9.0`,
+for benefit news qualifications
+
+Cozy-client to devDeps is useless,
+cozy-mespapiers-lib is not standalone, let's remove it
+
+
+
+
+
 # [17.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@17.0.0...cozy-mespapiers-lib@17.1.0) (2023-01-24)
 
 
