@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [17.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@17.0.0...cozy-mespapiers-lib@17.1.0) (2023-01-24)
+
+
+### Features
+
+* **mespapiers-lib:** Change wording on information step for invoices ([595ed4f](https://github.com/cozy/cozy-libs/commit/595ed4fff39ae8891697616541255f5b2eb8ac1c))
+
+
+
+
+
 # [17.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@16.1.0...cozy-mespapiers-lib@17.0.0) (2023-01-19)
 
 
