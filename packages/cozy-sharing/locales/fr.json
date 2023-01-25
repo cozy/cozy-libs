@@ -66,9 +66,9 @@
     },
     "permissionLink": {
       "title": "Autoriser n'importe qui avec le lien à :",
-      "seeFile": "Voir le fichier",
+      "seeFile": "Consulter le fichier",
       "modifyFile": "Modifier le fichier",
-      "seeFolder": "Voir le dossier",
+      "seeFolder": "Consulter le dossier",
       "modifyFolder": "Modifier le dossier",
       "readDescription": "Les détenteurs du lien peuvent uniquement consulter ou télécharger le contenu.",
       "writeDescription": "Les détenteurs du lien peuvent modifier et supprimer le contenu.",
