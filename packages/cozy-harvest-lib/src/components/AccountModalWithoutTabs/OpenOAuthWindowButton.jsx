@@ -5,13 +5,16 @@ import flag from 'cozy-flags'
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import { Button } from 'cozy-ui/transpiled/react/Button'
+import { useWebviewIntent } from 'cozy-intent'
 
 import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
 import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
+import { intentsApiProptype } from '../../helpers/proptypes'
 
-const OpenOAuthWindowButton = ({ flow, account, konnector }) => {
+const OpenOAuthWindowButton = ({ flow, account, konnector, intentsApi }) => {
   const { t } = useI18n()
   const client = useClient()
+  const webviewIntent = useWebviewIntent()
 
   const { extraParams } = useOAuthExtraParams({
     account,
@@ -26,6 +29,8 @@ const OpenOAuthWindowButton = ({ flow, account, konnector }) => {
       konnector,
       account,
       extraParams,
+      intentsApi,
+      webviewIntent,
       reconnect: true
     })
 
@@ -35,7 +40,7 @@ const OpenOAuthWindowButton = ({ flow, account, konnector }) => {
     ) {
       flow.expectTriggerLaunch()
     }
-  }, [account, client, extraParams, flow, konnector])
+  }, [account, client, extraParams, flow, konnector, webviewIntent, intentsApi])
 
   return (
     <Button
@@ -52,7 +57,8 @@ const OpenOAuthWindowButton = ({ flow, account, konnector }) => {
 OpenOAuthWindowButton.propTypes = {
   flow: PropTypes.object.isRequired,
   account: PropTypes.object.isRequired,
-  konnector: PropTypes.object.isRequired
+  konnector: PropTypes.object.isRequired,
+  intentsApi: intentsApiProptype
 }
 
 export default OpenOAuthWindowButton

@@ -9,7 +9,13 @@ import TriggerError from './TriggerError'
 
 const AccountModalContentWrapper = ({ children }) => {
   const { isMobile } = useBreakpoints()
-  const { trigger, account, konnector } = useOutletContext()
+  const {
+    konnector,
+    account,
+    trigger,
+    intentsApi,
+    innerAccountModalOverrides
+  } = useOutletContext()
 
   return (
     <DialogContent className={isMobile ? 'u-p-0' : 'u-pt-0'}>
@@ -21,10 +27,17 @@ const AccountModalContentWrapper = ({ children }) => {
               konnector={konnector}
               account={account}
               trigger={trigger}
+              intentsApi={intentsApi}
             />
             {React.Children.map(children, child =>
               React.isValidElement(child)
-                ? React.cloneElement(child, { flow, trigger, account })
+                ? React.cloneElement(child, {
+                    flow,
+                    account,
+                    trigger,
+                    intentsApi,
+                    innerAccountModalOverrides
+                  })
                 : null
             )}
           </>

@@ -4,8 +4,16 @@ import PropTypes from 'prop-types'
 import { findKonnectorPolicy } from '../../konnector-policies'
 import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
 import OpenOAuthWindowButton from './OpenOAuthWindowButton'
+import { intentsApiProptype } from '../../helpers/proptypes'
 
-const TriggerErrorAction = ({ flow, konnector, account, trigger, error }) => {
+const TriggerErrorAction = ({
+  flow,
+  konnector,
+  account,
+  trigger,
+  error,
+  intentsApi
+}) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)
 
   if (!error.isSolvableViaReconnect()) return null
@@ -16,6 +24,7 @@ const TriggerErrorAction = ({ flow, konnector, account, trigger, error }) => {
         flow={flow}
         account={account}
         konnector={konnector}
+        intentsApi={intentsApi}
       />
     )
 
@@ -27,7 +36,8 @@ TriggerErrorAction.propTypes = {
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object,
   trigger: PropTypes.object,
-  error: PropTypes.object.isRequired
+  error: PropTypes.object.isRequired,
+  intentsApi: intentsApiProptype
 }
 
 export default TriggerErrorAction

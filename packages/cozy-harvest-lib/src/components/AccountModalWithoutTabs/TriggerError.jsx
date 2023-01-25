@@ -6,8 +6,9 @@ import { useClient } from 'cozy-client'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import TriggerErrorAction from './TriggerErrorAction'
+import { intentsApiProptype } from '../../helpers/proptypes'
 
-const TriggerError = ({ flow, konnector, account, trigger }) => {
+const TriggerError = ({ flow, konnector, account, trigger, intentsApi }) => {
   const client = useClient()
   const flowState = flow.getState()
   const { error } = flowState
@@ -29,6 +30,7 @@ const TriggerError = ({ flow, konnector, account, trigger }) => {
           konnector={konnector}
           account={account}
           trigger={trigger}
+          intentsApi={intentsApi}
         />
       }
       className="u-mt-1"
@@ -42,5 +44,6 @@ TriggerError.propTypes = {
   flow: PropTypes.object.isRequired,
   konnector: PropTypes.object.isRequired,
   account: PropTypes.object,
-  trigger: PropTypes.object
+  trigger: PropTypes.object,
+  intentsApi: intentsApiProptype
 }
