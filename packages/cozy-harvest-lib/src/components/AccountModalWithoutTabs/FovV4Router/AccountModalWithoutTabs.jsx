@@ -10,11 +10,17 @@ import { withMountPointProps } from '../../MountPointContext'
 import { getMatchingTrigger } from '../helpers'
 import AccountModalHeader from '../AccountModalHeader'
 import Error from '../Error'
+import {
+  innerAccountModalOverridesProptype,
+  intentsApiProptype
+} from '../../../helpers/proptypes'
 
 const AccountModalWithoutTabs = ({
   accountsAndTriggers,
   konnector,
   accountId,
+  intentsApi,
+  innerAccountModalOverrides,
   children
 }) => {
   const matchingTrigger = getMatchingTrigger(accountsAndTriggers, accountId)
@@ -63,7 +69,9 @@ const AccountModalWithoutTabs = ({
             ? React.cloneElement(child, {
                 trigger: matchingTrigger,
                 account,
-                konnector
+                konnector,
+                intentsApi,
+                innerAccountModalOverrides
               })
             : null
         )}
@@ -82,7 +90,9 @@ AccountModalWithoutTabs.propTypes = {
       trigger: PropTypes.object.isRequired
     })
   ).isRequired,
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string.isRequired,
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default withMountPointProps(AccountModalWithoutTabs)

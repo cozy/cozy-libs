@@ -1,16 +1,23 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import DialogContent from '@material-ui/core/DialogContent'
 
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import FlowProvider from '../../FlowProvider'
 import TriggerError from '../TriggerError'
+import {
+  innerAccountModalOverridesProptype,
+  intentsApiProptype
+} from '../../../helpers/proptypes'
 
 const AccountModalContentWrapper = ({
   children,
   trigger,
   account,
-  konnector
+  konnector,
+  intentsApi,
+  innerAccountModalOverrides
 }) => {
   const { isMobile } = useBreakpoints()
 
@@ -24,10 +31,17 @@ const AccountModalContentWrapper = ({
               konnector={konnector}
               account={account}
               trigger={trigger}
+              intentsApi={intentsApi}
             />
             {React.Children.map(children, child =>
               React.isValidElement(child)
-                ? React.cloneElement(child, { flow, trigger, account })
+                ? React.cloneElement(child, {
+                    flow,
+                    account,
+                    trigger,
+                    intentsApi,
+                    innerAccountModalOverrides
+                  })
                 : null
             )}
           </>
@@ -35,6 +49,14 @@ const AccountModalContentWrapper = ({
       </FlowProvider>
     </DialogContent>
   )
+}
+
+AccountModalContentWrapper.propTypes = {
+  konnector: PropTypes.object.isRequired,
+  trigger: PropTypes.object.isRequired,
+  account: PropTypes.object.isRequired,
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default AccountModalContentWrapper

@@ -11,11 +11,17 @@ import { withMountPointProps } from '../MountPointContext'
 import { getMatchingTrigger } from './helpers'
 import AccountModalHeader from './AccountModalHeader'
 import Error from './Error'
+import {
+  innerAccountModalOverridesProptype,
+  intentsApiProptype
+} from '../../helpers/proptypes'
 
 const AccountModalWithoutTabs = ({
   accountsAndTriggers,
   konnector,
-  accountId
+  accountId,
+  intentsApi,
+  innerAccountModalOverrides
 }) => {
   const matchingTrigger = getMatchingTrigger(accountsAndTriggers, accountId)
   const matchingAccountId = matchingTrigger ? accountId : undefined
@@ -57,7 +63,15 @@ const AccountModalWithoutTabs = ({
         </DialogContent>
       )}
       {!isError && !isLoading && (
-        <Outlet context={{ trigger: matchingTrigger, account, konnector }} />
+        <Outlet
+          context={{
+            trigger: matchingTrigger,
+            account,
+            konnector,
+            intentsApi,
+            innerAccountModalOverrides
+          }}
+        />
       )}
     </>
   )
@@ -74,7 +88,9 @@ AccountModalWithoutTabs.propTypes = {
       trigger: PropTypes.object.isRequired
     })
   ).isRequired,
-  accountId: PropTypes.string.isRequired
+  accountId: PropTypes.string.isRequired,
+  intentsApi: intentsApiProptype,
+  innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
 
 export default withMountPointProps(AccountModalWithoutTabs)
