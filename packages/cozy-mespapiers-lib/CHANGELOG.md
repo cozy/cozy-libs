@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.0.2...cozy-mespapiers-lib@18.0.3) (2023-01-25)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Use the trigger corresponding to the account ([d24533d](https://github.com/cozy/cozy-libs/commit/d24533d92a88ae88b53e4732eae4fe9088786ae2))
+
+
+
+
+
 ## [18.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.0.1...cozy-mespapiers-lib@18.0.2) (2023-01-25)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
