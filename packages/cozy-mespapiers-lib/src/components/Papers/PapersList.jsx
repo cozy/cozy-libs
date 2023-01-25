@@ -24,7 +24,8 @@ import {
 } from '../../helpers/queries'
 
 const ConnectorItem = ({ papers }) => {
-  const connectorSlug = papers?.list?.[0]?.cozyMetadata?.createdByApp
+  const { createdByApp: connectorSlug, sourceAccount: connectorAccount } =
+    papers?.list?.[0]?.cozyMetadata || {}
   const queryTriggers = buildTriggersQueryByConnectorSlug(
     connectorSlug,
     Boolean(connectorSlug)
@@ -33,8 +34,9 @@ const ConnectorItem = ({ papers }) => {
     queryTriggers.definition,
     queryTriggers.options
   )
-  const trigger = triggers?.[0]
-  const connectorAccount = trigger?.message?.account
+  const trigger = triggers?.find(
+    trigger => trigger.message.account === connectorAccount
+  )
 
   const queryKonnector = buildConnectorsQueryById(
     `io.cozy.konnectors/${connectorSlug}`,
