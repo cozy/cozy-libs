@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.4.0...cozy-harvest-lib@12.5.0) (2023-01-25)
+
+
+### Features
+
+* **harvest-lib:** Add missing props to new Account modal ([6e23453](https://github.com/cozy/cozy-libs/commit/6e234537c413aecea46c5f3ad979af9f547ffcbb))
+
+
+
+
+
 # [12.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.3.1...cozy-harvest-lib@12.4.0) (2023-01-18)
 
 
