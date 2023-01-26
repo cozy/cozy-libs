@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [18.0.5](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.0.4...cozy-mespapiers-lib@18.0.5) (2023-01-26)
+
+
+### Bug Fixes
+
+* **mespapiers-lib:** Non-breaking space ([8ed7c13](https://github.com/cozy/cozy-libs/commit/8ed7c13fa0698fe9efd6de556bd13732c9fc423f))
+
+
+
+
+
 ## [18.0.4](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.0.3...cozy-mespapiers-lib@18.0.4) (2023-01-26)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
