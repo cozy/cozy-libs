@@ -75,11 +75,7 @@ const RecipientPermissions = ({
               onClose={hideMenu}
               popperOptions={{
                 placement: 'bottom-end',
-                modifiers: [
-                  {
-                    name: 'preventOverflow'
-                  }
-                ]
+                strategy: 'fixed'
               }}
               anchorElRef={buttonRef}
             >
