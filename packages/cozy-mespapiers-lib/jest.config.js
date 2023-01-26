@@ -1,7 +1,7 @@
 module.exports = {
   browser: true,
   collectCoverageFrom: [
-    'src/**/*.{js,jsx}',
+    'src/**/*.{js,jsx,ts,tsx}',
     '!**/node_modules/**',
     '!**/vendor/**'
   ],
@@ -10,7 +10,7 @@ module.exports = {
   testPathIgnorePatterns: ['node_modules', 'dist'],
   testEnvironment: 'jest-environment-jsdom-sixteen',
   testURL: 'http://localhost/',
-  moduleFileExtensions: ['js', 'jsx', 'json', 'styl'],
+  moduleFileExtensions: ['js', 'jsx', 'ts', 'tsx', 'json', 'styl'],
   moduleDirectories: ['src', 'node_modules'],
   moduleNameMapper: {
     '\\.(png|gif|jpe?g|svg)$': '<rootDir>/test/__mocks__/fileMock.js',
