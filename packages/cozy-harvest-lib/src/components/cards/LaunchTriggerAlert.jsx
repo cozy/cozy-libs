@@ -153,11 +153,11 @@ LaunchTriggerAlert.defaultProps = {
 
 LaunchTriggerAlert.propTypes = {
   flow: PropTypes.object,
-  f: PropTypes.function,
-  t: PropTypes.function,
+  f: PropTypes.func,
+  t: PropTypes.func,
   disabled: PropTypes.bool,
   konnectorRoot: PropTypes.string,
-  historyAction: PropTypes.function
+  historyAction: PropTypes.func
 }
 
 export default withAdaptiveRouter(LaunchTriggerAlert)
