@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.5.0...cozy-harvest-lib@12.5.1) (2023-01-26)
+
+
+### Bug Fixes
+
+* **harvest:** Some propTypes was incorrect on LaunchTriggerAlert and ([eb5f8c1](https://github.com/cozy/cozy-libs/commit/eb5f8c1be7ab7420a59e4c3cad6c8aca09ac30eb))
+
+
+
+
+
 # [12.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.4.0...cozy-harvest-lib@12.5.0) (2023-01-25)
 
 
