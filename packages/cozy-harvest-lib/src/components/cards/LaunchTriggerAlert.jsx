@@ -7,6 +7,7 @@ import Button from 'cozy-ui/transpiled/react/Buttons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { getLastSuccessDate, getKonnectorSlug } from '../../helpers/triggers'
 import { isRunnable } from '../../helpers/konnectors'
@@ -19,6 +20,21 @@ import KonnectorIcon from '../KonnectorIcon'
 import { makeLabel } from './helpers'
 import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+
+const useStyles = makeStyles({
+  root: {
+    padding: '.5rem 1rem'
+  },
+  message: {
+    maxWidth: ({ block }) => block && 'calc(100% - 16px - .5rem)' // 16px is the size of the icon
+  },
+  action: {
+    marginRight: '-.5rem'
+  },
+  icon: {
+    marginRight: '.5rem'
+  }
+})
 
 export const LaunchTriggerAlert = ({
   flow,
@@ -38,6 +54,7 @@ export const LaunchTriggerAlert = ({
   } = useMaintenanceStatus(client, konnector)
   const isInError = !!error
   const block = withDescription && (isInError || isInMaintenance)
+  const styles = useStyles({ block })
 
   const lastSuccessDate = getLastSuccessDate(trigger)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
@@ -93,6 +110,7 @@ export const LaunchTriggerAlert = ({
             </>
           )
         }
+        classes={styles}
       >
         <div
           className="u-flex-auto u-flex u-flex-column"
