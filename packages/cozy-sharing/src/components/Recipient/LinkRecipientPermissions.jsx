@@ -73,7 +73,14 @@ const LinkRecipientPermissions = ({
             ).toLowerCase()}
           </DropdownButton>
           {menuIsOpen && (
-            <ActionMenu onClose={toggleMenu} anchorElRef={buttonRef}>
+            <ActionMenu
+              onClose={toggleMenu}
+              popperOptions={{
+                placement: 'bottom-end',
+                strategy: 'fixed'
+              }}
+              anchorElRef={buttonRef}
+            >
               <ActionMenuItem
                 left={
                   <ActionMenuRadio
