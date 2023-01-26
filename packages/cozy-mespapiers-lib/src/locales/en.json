@@ -305,7 +305,7 @@
     }
   },
   "Multiselect": {
-    "backdrop": "Gather your papers...",
+    "backdrop": "Gather your papers…",
     "title": {
       "default": "My selection",
       "nbSelected": "%{smart_count} selected item |||| %{smart_count} selected items"
