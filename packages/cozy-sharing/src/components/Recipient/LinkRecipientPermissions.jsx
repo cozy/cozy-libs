@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
@@ -26,6 +26,7 @@ const LinkRecipientPermissions = ({
   onDisable
 }) => {
   const { t } = useI18n()
+  const buttonRef = useRef()
   const [menuIsOpen, setMenuIsOpen] = useState(false)
   const [loading, setLoading] = useState(false)
 
@@ -56,8 +57,6 @@ const LinkRecipientPermissions = ({
       logger.log(err)
     }
   }
-  const buttonRef = React.createRef()
-
   return (
     <div className={className}>
       {loading && <Spinner />}

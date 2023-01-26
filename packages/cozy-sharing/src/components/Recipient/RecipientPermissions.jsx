@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from 'react'
+import React, { useState, useRef, useCallback } from 'react'
 import { useClient } from 'cozy-client'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -25,6 +25,7 @@ const RecipientPermissions = ({
   index
 }) => {
   const { t } = useI18n()
+  const buttonRef = useRef()
   const client = useClient()
   const [revoking, setRevoking] = useState(false)
   const [isMenuDisplayed, setIsMenuDisplayed] = useState(false)
@@ -50,7 +51,6 @@ const RecipientPermissions = ({
     setRevoking(false)
   }, [isOwner, onRevoke, onRevokeSelf, document, sharingId, index])
 
-  const buttonRef = React.createRef()
   const PermissionIcon = type === 'two-way' ? RenameIcon : EyeIcon
 
   return (
