@@ -52,9 +52,9 @@ const AccountModalContentWrapper = ({
 }
 
 AccountModalContentWrapper.propTypes = {
-  konnector: PropTypes.object.isRequired,
-  trigger: PropTypes.object.isRequired,
-  account: PropTypes.object.isRequired,
+  konnector: PropTypes.object,
+  trigger: PropTypes.object,
+  account: PropTypes.object,
   intentsApi: intentsApiProptype,
   innerAccountModalOverrides: innerAccountModalOverridesProptype
 }
