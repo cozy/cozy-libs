@@ -58,9 +58,9 @@
   },
   "ConfirmReplaceFile": {
     "content": "Votre nouveau document sera rangé dans le dossier <b>Drive/Administratif/Mes Papiers</b>.",
-    "question": "Souhaitez-vous conserver le fichier original de votre drive ayant servi à générer le document ? |||| Souhaitez-vous conserver les fichiers originaux de votre drive ayant servi à générer le document ?",
+    "question": "Souhaitez-vous conserver le fichier original de votre drive ayant servi à générer le document ? |||| Souhaitez-vous conserver les fichiers originaux de votre drive ayant servi à générer le document ?",
     "keep": "Conserver",
-    "title": "Conserver le fichier original ? |||| Conserver les fichiers originaux ?",
+    "title": "Conserver le fichier original ? |||| Conserver les fichiers originaux ?",
     "replace": "Non, merci"
   },
   "ContactStep": {
@@ -78,7 +78,7 @@
     "cancel": "Annuler",
     "choice": "Ne pas supprimer l'image.",
     "delete": "Supprimer",
-    "title": "Supprimer cet élément ?",
+    "title": "Supprimer cet élément ?",
     "text": "L’élément est associé au fichier <strong>\"%{name}\"</strong> dans votre drive."
   },
   "ForwardModal": {
@@ -103,7 +103,7 @@
       "text": "Utiliser votre appareil photo ou un document existant",
       "title": "Prendre ou sélectionner des photos"
     },
-    "title": "Ajout : %{name}"
+    "title": "Ajout : %{name}"
   },
   "InputDateAdapter": {
     "invalidDateMessage": "Date invalide"
@@ -134,37 +134,37 @@
       },
       "date": {
         "inputLabel": "Date du document",
-        "text": "Quelle est la date de ce document ?"
+        "text": "Quelle est la date de ce document ?"
       },
       "expirationDate": {
         "inputLabel": "Date d'expiration",
-        "text": "Quelle est la date d'expiration de ce document ?"
+        "text": "Quelle est la date d'expiration de ce document ?"
       },
       "front": {
         "text": "Ajouter la face avant"
       },
       "issueDate": {
         "inputLabel": "Délivré le",
-        "text": "Quelle est la date d'émission de ce document ?"
+        "text": "Quelle est la date d'émission de ce document ?"
       },
       "multiPages": {
         "text": "Ajouter une page du document"
       },
       "owner": {
         "inputLabel": "Détenteur",
-        "text": "Qui est le détenteur de ce document ?"
+        "text": "Qui est le détenteur de ce document ?"
       },
       "referencedDate": {
         "inputLabel": "Date de référence",
-        "text": "Date de début de la période couverte par ce document ?"
+        "text": "Date de début de la période couverte par ce document ?"
       },
       "renameFile": {
         "inputLabel": "Nom du document",
-        "text": "Quel est le nom de votre document ?"
+        "text": "Quel est le nom de votre document ?"
       },
       "shootingDate": {
         "inputLabel": "Date de prise de vue",
-        "text": "Quand cette photo a-t-elle été prise ? (optionnelle)"
+        "text": "Quand cette photo a-t-elle été prise ? (optionnelle)"
       },
       "singlePage": {
         "text": "Ajouter l'image du document"
@@ -186,7 +186,7 @@
     "invoice": {
       "referencedDate": {
         "inputLabel": "Date de référence",
-        "text": "Quelle est la date de ce document ?"
+        "text": "Quelle est la date de ce document ?"
       }
     },
     "bankDetails": {
@@ -210,7 +210,7 @@
       },
       "number": {
         "inputLabel": "Numéro de votre permis",
-        "text": "Quel est le numéro de votre permis ?"
+        "text": "Quel est le numéro de votre permis ?"
       },
       "obtentionDate": {
         "text": "Renseignez les dates d'obtention des catégories valables."
@@ -238,7 +238,7 @@
       },
       "expirationDate": {
         "inputLabel": "Date d'expiration",
-        "text": "Quelle est la date d'expiration de cette carte ?"
+        "text": "Quelle est la date d'expiration de cette carte ?"
       },
       "front": {
         "text": "Ajouter la face avant de votre carte"
@@ -265,7 +265,7 @@
     }
   },
   "PapersList": {
-    "accountName": "Compte %{name} : %{identifier}",
+    "accountName": "Compte %{name} : %{identifier}",
     "contactMerged": "%{firstGivenName} et %{secondGivenName} %{familyName}",
     "defaultName": "Contact non spécifié",
     "label": {
@@ -288,7 +288,7 @@
     "importPicFromMobile": "Sélectionner depuis mon téléphone",
     "importPicFromDesktop": "Sélectionner depuis mon ordinateur",
     "modal": {
-      "validFileType": "Format acceptés : image ou pdf"
+      "validFileType": "Format acceptés : image ou pdf"
     },
     "selectPicFromCozy": "Sélectionner dans mon Cozy",
     "takePic": "Prendre en photo",
@@ -299,13 +299,13 @@
   },
   "viewer": {
     "shareData": {
-      "error": "Problème avec la récupération du lien : %{error}",
-      "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
+      "error": "Problème avec la récupération du lien : %{error}",
+      "text": "Voici un lien vers mon document %{name} : |||| Voici un lien contenant mes documents %{name} : ",
       "title": "Lien vers mon document %{name} |||| Lien vers mes documents %{name}"
     }
   },
   "Multiselect": {
-    "backdrop": "Rassemblement de vos papiers...",
+    "backdrop": "Rassemblement de vos papiers…",
     "title": {
       "default": "Ma sélection",
       "nbSelected": "%{smart_count} élément sélectionné |||| %{smart_count} éléments sélectionnés"
@@ -324,11 +324,11 @@
     "fileExisting": "L'élément %{name} existe déjà, veuillez choisir un nouveau nom.",
     "filenameMissing": "Le nom de fichier est absent, veuillez choisir un nouveau nom.",
     "filenameIllegalName": "Le nom de fichier %{name} est invalide, veuillez choisir un nouveau nom.",
-    "filenameIllegalCharacters": "Le nom de fichier %{name} contient des caractères invalides : %{characters}"
+    "filenameIllegalCharacters": "Le nom de fichier %{name} contient des caractères invalides : %{characters}"
   },
   "RenameModal": {
     "title": "Renommer",
-    "content": "Vous êtes sur le point de changer l'extension du fichier. Voulez-vous continuer ?",
+    "content": "Vous êtes sur le point de changer l'extension du fichier. Voulez-vous continuer ?",
     "cancel": "Annuler",
     "submit": "Continuer"
   },
