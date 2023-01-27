@@ -61,7 +61,6 @@ export const DataTab = ({
           <LaunchTriggerCard
             konnectorRoot={konnectorRoot}
             flow={flow}
-            disabled={isInMaintenance}
             withDescription
           />
           {isMobile && <Divider style={styles.divider} />}
@@ -69,7 +68,7 @@ export const DataTab = ({
       )}
       <div className={isMobile ? 'u-p-1' : 'u-pt-1 u-pb-1-half'}>
         <Stack>
-          {isInMaintenance && (
+          {!flag('harvest.inappconnectors.enabled') && isInMaintenance && (
             <div className="u-bg-paleGrey u-p-1">
               <KonnectorMaintenance maintenanceMessages={maintenanceMessages} />
             </div>
