@@ -14,7 +14,7 @@ export const ViewerModal = ({
   const { pushHistory, replaceHistory } = useContext(MountPointContext)
   const { data, fetchStatus } = useDataCardFiles(accountId, folderToSaveId)
 
-  const handleCloseViewer = () => replaceHistory(`/accounts`)
+  const handleCloseViewer = () => replaceHistory(`/accounts/${accountId}`)
   const handleFileChange = (_file, newIndex) =>
     pushHistory(`/viewer/${accountId}/${folderToSaveId}/${newIndex}`)
 
