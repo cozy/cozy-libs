@@ -35,6 +35,33 @@ const RoutesV4 = ({
           />
         )}
       />
+      <Route
+        path={`${konnectorRoot}/accounts/:accountId/edit`}
+        exact
+        render={({ match }) => (
+          <EditAccountModal
+            konnector={konnectorWithTriggers}
+            accountId={match.params.accountId}
+            accounts={accountsAndTriggers}
+          />
+        )}
+      />
+      <Route
+        path={`${konnectorRoot}/new`}
+        exact
+        render={() => (
+          <NewAccountModal
+            konnector={konnectorWithTriggers}
+            onSuccess={onSuccess}
+            onDismiss={onDismiss}
+          />
+        )}
+      />
+      <Route
+        path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
+        exact
+        render={routeComponentProps => <ViewerModal {...routeComponentProps} />}
+      />
       {flag('harvest.inappconnectors.enabled') ? (
         <>
           <Route
@@ -103,33 +130,6 @@ const RoutesV4 = ({
         />
       )}
 
-      <Route
-        path={`${konnectorRoot}/accounts/:accountId/edit`}
-        exact
-        render={({ match }) => (
-          <EditAccountModal
-            konnector={konnectorWithTriggers}
-            accountId={match.params.accountId}
-            accounts={accountsAndTriggers}
-          />
-        )}
-      />
-      <Route
-        path={`${konnectorRoot}/viewer/:accountId/:folderToSaveId/:fileIndex`}
-        exact
-        render={routeComponentProps => <ViewerModal {...routeComponentProps} />}
-      />
-      <Route
-        path={`${konnectorRoot}/new`}
-        exact
-        render={() => (
-          <NewAccountModal
-            konnector={konnectorWithTriggers}
-            onSuccess={onSuccess}
-            onDismiss={onDismiss}
-          />
-        )}
-      />
       {!flag('harvest.inappconnectors.enabled') && (
         <Route
           path={`${konnectorRoot}/accounts/:accountId/success`}
