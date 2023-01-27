@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.19.0 (2023-01-27)
+
+
+### Features
+
+* Add tax_notice aquisitionSteps ([7dc2ce6](https://github.com/cozy/cozy-libs/commit/7dc2ce63b3271208ad45283bbee0f0e116e9a187))
+
+
+
+
+
 ## 1.18.5 (2022-11-28)
 
 
