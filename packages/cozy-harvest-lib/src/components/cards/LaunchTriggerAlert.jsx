@@ -12,6 +12,7 @@ import { isRunnable } from '../../helpers/konnectors'
 import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
 import withAdaptiveRouter from '../hoc/withRouter'
+import TriggerErrorDescription from '../infos/TriggerErrorDescription'
 import KonnectorIcon from '../KonnectorIcon'
 import { makeLabel } from './helpers'
 import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
@@ -26,10 +27,11 @@ export const LaunchTriggerAlert = ({
   withDescription
 }) => {
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
-  const { trigger, running, expectingTriggerLaunch, status } =
+  const { error, trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
   const { launch, konnector } = flow
-  const block = withDescription
+  const isInError = !!error
+  const block = withDescription && isInError
 
   const lastSuccessDate = getLastSuccessDate(trigger)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
@@ -114,6 +116,9 @@ export const LaunchTriggerAlert = ({
               </div>
             )}
           </div>
+          {block && isInError && (
+            <TriggerErrorDescription error={error} konnector={konnector} />
+          )}
         </div>
       </Alert>
       <Snackbar
