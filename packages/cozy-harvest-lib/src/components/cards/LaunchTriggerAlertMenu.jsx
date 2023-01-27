@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
 
+import { useClient } from 'cozy-client'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
@@ -10,16 +11,15 @@ import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 
 import { useFlowState } from '../../models/withConnectionFlow'
 import withAdaptiveRouter from '../hoc/withRouter'
+import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
-const LaunchTriggerAlertMenu = ({
-  flow,
-  t,
-  disabled,
-  konnectorRoot,
-  historyAction
-}) => {
+const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
+  const client = useClient()
   const { running } = useFlowState(flow)
-  const { launch } = flow
+  const { launch, konnector } = flow
+  const {
+    data: { isInMaintenance }
+  } = useMaintenanceStatus(client, konnector)
 
   const anchorRef = useRef()
   const [showOptions, setShowOptions] = useState(false)
@@ -35,7 +35,7 @@ const LaunchTriggerAlertMenu = ({
           autoclose={true}
           onClose={() => setShowOptions(false)}
         >
-          {!running && !disabled && (
+          {!running && !isInMaintenance && (
             <ActionMenuItem
               left={<Icon icon={SyncIcon} />}
               onClick={() => {
@@ -65,7 +65,6 @@ LaunchTriggerAlertMenu.defaultProps = {
 LaunchTriggerAlertMenu.propTypes = {
   flow: PropTypes.object,
   t: PropTypes.func,
-  disabled: PropTypes.bool,
   konnectorRoot: PropTypes.string,
   historyAction: PropTypes.func
 }

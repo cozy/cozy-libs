@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
+import { useClient } from 'cozy-client'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import Typography from 'cozy-ui/transpiled/react/Typography'
@@ -13,25 +14,30 @@ import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
 import withAdaptiveRouter from '../hoc/withRouter'
 import TriggerErrorDescription from '../infos/TriggerErrorDescription'
+import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescription'
 import KonnectorIcon from '../KonnectorIcon'
 import { makeLabel } from './helpers'
 import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
+import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
 export const LaunchTriggerAlert = ({
   flow,
   f,
   t,
-  disabled,
   konnectorRoot,
   historyAction,
   withDescription
 }) => {
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
+  const client = useClient()
   const { error, trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
   const { launch, konnector } = flow
+  const {
+    data: { isInMaintenance, messages: maintenanceMessages }
+  } = useMaintenanceStatus(client, konnector)
   const isInError = !!error
-  const block = withDescription && isInError
+  const block = withDescription && (isInError || isInMaintenance)
 
   const lastSuccessDate = getLastSuccessDate(trigger)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
@@ -60,13 +66,15 @@ export const LaunchTriggerAlert = ({
         action={
           isKonnectorRunnable && (
             <>
-              <Button
-                variant="text"
-                size="small"
-                disabled={running || disabled}
-                label={t('card.launchTrigger.button.label')}
-                onClick={() => launch({ autoSuccessTimer: false })}
-              />
+              {!isInMaintenance && (
+                <Button
+                  variant="text"
+                  size="small"
+                  disabled={running}
+                  label={t('card.launchTrigger.button.label')}
+                  onClick={() => launch({ autoSuccessTimer: false })}
+                />
+              )}
               {!block && (
                 <div
                   style={{
@@ -76,7 +84,7 @@ export const LaunchTriggerAlert = ({
                   <LaunchTriggerAlertMenu
                     flow={flow}
                     t={t}
-                    disabled={disabled}
+                    isInMaintenance={isInMaintenance}
                     konnectorRoot={konnectorRoot}
                     historyAction={historyAction}
                   />
@@ -109,7 +117,7 @@ export const LaunchTriggerAlert = ({
                 <LaunchTriggerAlertMenu
                   flow={flow}
                   t={t}
-                  disabled={disabled}
+                  isInMaintenance={isInMaintenance}
                   konnectorRoot={konnectorRoot}
                   historyAction={historyAction}
                 />
@@ -118,6 +126,11 @@ export const LaunchTriggerAlert = ({
           </div>
           {block && isInError && (
             <TriggerErrorDescription error={error} konnector={konnector} />
+          )}
+          {block && isInMaintenance && (
+            <TriggerMaintenanceDescription
+              maintenanceMessages={maintenanceMessages}
+            />
           )}
         </div>
       </Alert>
@@ -146,7 +159,6 @@ LaunchTriggerAlert.propTypes = {
   flow: PropTypes.object,
   f: PropTypes.func,
   t: PropTypes.func,
-  disabled: PropTypes.bool,
   konnectorRoot: PropTypes.string,
   historyAction: PropTypes.func,
   withDescription: PropTypes.bool
