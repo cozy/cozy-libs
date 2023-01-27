@@ -1,17 +1,11 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 
-import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
-import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
-import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 
 import { getLastSuccessDate, getKonnectorSlug } from '../../helpers/triggers'
 import { isRunnable } from '../../helpers/konnectors'
@@ -20,11 +14,9 @@ import { SUCCESS } from '../../models/flowEvents'
 import withAdaptiveRouter from '../hoc/withRouter'
 import KonnectorIcon from '../KonnectorIcon'
 import { makeLabel } from './helpers'
+import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
 
 const styles = {
-  // tricks to put 48px wide button inside 32px height container
-  // without enlarging the container
-  iconButtonWrapper: { height: 32, width: 46 },
   // Alert is not designed to use 12px text, so this is necessary for now
   typography: { paddingTop: 2 }
 }
@@ -44,8 +36,6 @@ export const LaunchTriggerAlert = ({
 
   const lastSuccessDate = getLastSuccessDate(trigger)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
-  const anchorRef = useRef()
-  const [showOptions, setShowOptions] = useState(false)
 
   useEffect(() => {
     if (status === SUCCESS) {
@@ -78,44 +68,13 @@ export const LaunchTriggerAlert = ({
                 label={t('card.launchTrigger.button.label')}
                 onClick={() => launch({ autoSuccessTimer: false })}
               />
-              <div
-                className="u-flex u-flex-items-center"
-                style={styles.iconButtonWrapper}
-              >
-                <IconButton
-                  ref={anchorRef}
-                  onClick={() => setShowOptions(true)}
-                >
-                  <Icon icon={DotsIcon} />
-                </IconButton>
-              </div>
-              {showOptions && (
-                <ActionMenu
-                  anchorElRef={anchorRef}
-                  autoclose={true}
-                  onClose={() => setShowOptions(false)}
-                >
-                  {!running && !disabled && (
-                    <ActionMenuItem
-                      left={<Icon icon={SyncIcon} />}
-                      onClick={() => {
-                        launch({ autoSuccessTimer: false })
-                        setShowOptions(false)
-                      }}
-                    >
-                      {t('card.launchTrigger.button.label')}
-                    </ActionMenuItem>
-                  )}
-                  <ActionMenuItem
-                    left={<Icon icon={GearIcon} />}
-                    onClick={() =>
-                      historyAction(`${konnectorRoot}/config`, 'push')
-                    }
-                  >
-                    {t('card.launchTrigger.configure')}
-                  </ActionMenuItem>
-                </ActionMenu>
-              )}
+              <LaunchTriggerAlertMenu
+                flow={flow}
+                t={t}
+                disabled={disabled}
+                konnectorRoot={konnectorRoot}
+                historyAction={historyAction}
+              />
             </>
           )
         }
