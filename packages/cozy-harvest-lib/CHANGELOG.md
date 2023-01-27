@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.5.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.5.1...cozy-harvest-lib@12.5.2) (2023-01-27)
+
+
+### Bug Fixes
+
+* **harvest-lib:** Redirect when close viewer modal ([48445b4](https://github.com/cozy/cozy-libs/commit/48445b4613df85fc702f5f649711a751ff9fca81))
+* **harvest-lib:** Routes order in RoutesV4 component ([a9052c0](https://github.com/cozy/cozy-libs/commit/a9052c0fa27b68aaa33f6c371f23020ee91e37da))
+
+
+
+
+
 ## [12.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.5.0...cozy-harvest-lib@12.5.1) (2023-01-26)
 
 
