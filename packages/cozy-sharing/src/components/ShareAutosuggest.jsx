@@ -120,10 +120,8 @@ const ShareAutocomplete = ({
     onFocus()
   }
 
-  const onAutosuggestBlur = (event, { highlightedSuggestion }) => {
-    if (highlightedSuggestion) {
-      onAutosuggestPick(highlightedSuggestion)
-    } else if (inputValue !== '' && inputValue.match(/\S+@\S+/)) {
+  const onAutosuggestBlur = () => {
+    if (inputValue !== '' && inputValue.match(/\S+@\S+/)) {
       onAutosuggestPick({ email: inputValue })
     }
   }
