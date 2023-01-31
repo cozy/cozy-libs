@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.5.2...cozy-harvest-lib@12.6.0) (2023-01-31)
+
+
+### Features
+
+* Remove the ability to close the connection backdrop ([22ab2d2](https://github.com/cozy/cozy-libs/commit/22ab2d27a46c9ea68f5007b77f340594f5283025))
+
+
+
+
+
 ## [12.5.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.5.1...cozy-harvest-lib@12.5.2) (2023-01-27)
 
 
