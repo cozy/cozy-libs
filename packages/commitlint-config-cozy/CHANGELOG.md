@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.8.0 (2023-01-31)
+
+
+### Features
+
+* Update cozy-client and cozy-ui ([6ae3b04](https://github.com/cozy/cozy-libs/commit/6ae3b04925ae64fa30f3ec8b6e716453d0a630fe))
+
+
+
+
+
 ## 0.7.9 (2022-10-03)
 
 **Note:** Version bump only for package commitlint-config-cozy

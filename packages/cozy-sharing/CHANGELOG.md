@@ -3,6 +3,75 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 6.0.0 (2023-01-31)
+
+
+### Bug Fixes
+
+* ActionMenu could not be closed after closing and reopening modal ([f9c638f](https://github.com/cozy/cozy-libs/commit/f9c638f11eec4c618985e70a6764c6c22c3ed0b0))
+* Allow content to go full size in share by email select box ([6dc210e](https://github.com/cozy/cozy-libs/commit/6dc210edecefe7dbddc79c6b64a1b8b03797fdc0))
+* Copy to clipboard when link is created ([517ce10](https://github.com/cozy/cozy-libs/commit/517ce10e76beee9067132a2323260c38fb3aec3e))
+* Don't call PermissionCol.findApps ([08073da](https://github.com/cozy/cozy-libs/commit/08073da3271c906fd45e74928efe7e742ed7dc35)), closes [cozy/cozy-client#1293](https://github.com/cozy/cozy-client/issues/1293)
+* Highlight again current suggestion in grey ([122491a](https://github.com/cozy/cozy-libs/commit/122491a75b8104e78a75587ec91579d1f2bbe6b1))
+* Realtime order issue caused invalid recipient status ([8ec1f4b](https://github.com/cozy/cozy-libs/commit/8ec1f4b68298530241cd3119402a60c1f29cf6f5))
+* Remove duplicate use of t causing translation warnings ([8aef46d](https://github.com/cozy/cozy-libs/commit/8aef46d3421d8506e2ee63d9952c0f2d7371e022))
+* Remove pick on input blur when a suggestion is highlighted ([5f5cc21](https://github.com/cozy/cozy-libs/commit/5f5cc21eb7b4da6e116d18dd60c128a4d2525ed2))
+* Update wording to see file/folder ([b815daa](https://github.com/cozy/cozy-libs/commit/b815daa7964437f4129d512867e5c3dc26022397))
+* Use strategy: fixed in popper options to show overflow ([73b159a](https://github.com/cozy/cozy-libs/commit/73b159aa91fd4feb84b2377d10001774c30ad7df))
+
+
+### Code Refactoring
+
+* Move Recipient related components in a Recipient folder ([518bff1](https://github.com/cozy/cozy-libs/commit/518bff1748f9e8466203ec5f3152ac653253b439))
+
+
+### Features
+
+* Accept options argument in shareByLink function ([93d75d8](https://github.com/cozy/cozy-libs/commit/93d75d8cb80a630dd1160899015916fff9fc1828))
+* Add "Who has access?" title in Dialog ([33cb6b3](https://github.com/cozy/cozy-libs/commit/33cb6b320220e239cc030c98729d984deae62ab8))
+* Add and export DOCUMENT_TYPE constant ([959881a](https://github.com/cozy/cozy-libs/commit/959881a654d7605267914dde14d038877bfd412f))
+* Add SynchronousJobQueue ([b654c40](https://github.com/cozy/cozy-libs/commit/b654c40c9f81a7931476bab82fe54033a24fbaf0))
+* Add usePrevious hook ([32e4a26](https://github.com/cozy/cozy-libs/commit/32e4a2624fb8865c42209164f7fba66470ac19b2))
+* Align horizontally share by email buttons on mobile ([bd212b6](https://github.com/cozy/cozy-libs/commit/bd212b61ab9ee40f97bd3386f93b1629727640e9))
+* **ContactSuggestion:** Use ListItemText from cozy-ui ([2680feb](https://github.com/cozy/cozy-libs/commit/2680febce956d0b1cfdfbfa92bf7e7bc17208d87))
+* Create sharing link after choosing permission in modal ([554b912](https://github.com/cozy/cozy-libs/commit/554b9120ee4396259c6d22107b2eaa1ee3a2b36c))
+* Display only one button to copy link in desktop ([8ef090b](https://github.com/cozy/cozy-libs/commit/8ef090b91ab13f747b2190212006254686756d13))
+* Display owner recipient everytime in WhoHasAccess list ([f680913](https://github.com/cozy/cozy-libs/commit/f6809138eff78d6c5a617840914387fea7d59b8e))
+* Display share by email buttons only when recipients not empty ([139b6ad](https://github.com/cozy/cozy-libs/commit/139b6ad8fc0735565e7c5897bc8be1ff4c723c6b))
+* Display sharing link in WhoHasAccess ([8eaa8ee](https://github.com/cozy/cozy-libs/commit/8eaa8ee5b313195e6334b920d0f349d381cb4827))
+* Fade in recipient when link created or recipient added ([d6d84b0](https://github.com/cozy/cozy-libs/commit/d6d84b0c4c5b10243cb08760e6c6e5bf1bec17f1))
+* Hide ShareByEmail controls when input not focused or empty ([7feb150](https://github.com/cozy/cozy-libs/commit/7feb1502ca755b7cea5df252f3333d327f8f1d2f))
+* Improve spacing between Who has access title and components ([14d4619](https://github.com/cozy/cozy-libs/commit/14d46196435f1b96401317f903a8e74a27467372))
+* Link icon in a circle in WhoHasAccess ([513efff](https://github.com/cozy/cozy-libs/commit/513efff434676dd3350797f80b56ad70bbcd5568))
+* Modify share by link creation and edit ([56b2bb4](https://github.com/cozy/cozy-libs/commit/56b2bb465a42db4c4bda076d01375988d01db245))
+* Prevent apps with only read only link to create read write link ([94094dd](https://github.com/cozy/cozy-libs/commit/94094ddc6afabf99dbc2ad231d23e430a1698756))
+* Propose in autosuggest unknown email ([85ad899](https://github.com/cozy/cozy-libs/commit/85ad899cc4ce0d5611cc526a238878ba0f24c87c))
+* Remove ShareByEmail label and update placeholder ([772dc5c](https://github.com/cozy/cozy-libs/commit/772dc5c2e04b090ce0fcf0f275aa1eba0c216eb4))
+* **ShareAutosuggest:** Add Chip and keyboard delete mechanism ([b6edd71](https://github.com/cozy/cozy-libs/commit/b6edd713b925be2b3ea430c34bfe1012ae8b6751))
+* Update and lowercase text in RecipientPermissions ([073c600](https://github.com/cozy/cozy-libs/commit/073c600affe7f6e5fcceefb69b4e34eb79f2fc17))
+* Update cozy-client and cozy-ui ([6ae3b04](https://github.com/cozy/cozy-libs/commit/6ae3b04925ae64fa30f3ec8b6e716453d0a630fe))
+* Update react-autosuggest package ([92abd2c](https://github.com/cozy/cozy-libs/commit/92abd2c87d809b71e7e229d5abde1d0aa4b629a0))
+* Update wording when modifying file or folder ([e9e12aa](https://github.com/cozy/cozy-libs/commit/e9e12aaa4593bf11fada3cf83931d86e8abe0987))
+* Use List instead of CompositeRow for WhoHasAccess ([d9f7cc6](https://github.com/cozy/cozy-libs/commit/d9f7cc6610255b9b4ce202428c4777320dfba7a7))
+* Use navigator.share in mobile to share link ([9da57c6](https://github.com/cozy/cozy-libs/commit/9da57c65e91c43df1b5f2a4c1546c5461eaf057a))
+
+
+### BREAKING CHANGES
+
+* If you imported component directly from
+'cozy-sharing/dist/components/... '
+especially from ' 'cozy-sharing/dist/components/Recipient',
+you will need to update your import.
+
+Drive example (the only one I found) :
+`import { RecipientsAvatars } from 'cozy-sharing/dist/components/Recipient'`
+=>
+`import RecipientsAvatars from 'cozy-sharing/dist/components/Recipient/RecipientsAvatars'`
+
+
+
+
+
 # 5.0.0 (2023-01-09)
 
 

@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 0.33.0 (2023-01-31)
+
+
+### Features
+
+* Update cozy-client and cozy-ui ([6ae3b04](https://github.com/cozy/cozy-libs/commit/6ae3b04925ae64fa30f3ec8b6e716453d0a630fe))
+
+
+
+
+
 ## [0.32.1](https://github.com/cozy/cozy-libs/compare/cozy-app-publish@0.32.0...cozy-app-publish@0.32.1) (2022-10-27)
 
 **Note:** Version bump only for package cozy-app-publish
