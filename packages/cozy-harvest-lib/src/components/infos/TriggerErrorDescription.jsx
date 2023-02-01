@@ -1,48 +1,30 @@
-import React, { PureComponent } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
+import { useClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { withClient } from 'cozy-client'
 
-import { getErrorLocale, fetchSupportMail } from '../../helpers/konnectors'
+import useSupportMail from '../hooks/useSupportMail'
+import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
 
-export class TriggerErrorDescription extends PureComponent {
-  state = {
-    supportMail: null
-  }
-  async componentDidMount() {
-    await this.loadSupportMail()
-  }
-  async loadSupportMail() {
-    const { client } = this.props
-    const supportMail = await fetchSupportMail(client)
-    this.setState({ supportMail })
-  }
-  render() {
-    const { error, konnector, t } = this.props
-    const { supportMail } = this.state
+const TriggerErrorDescription = ({ error, konnector, t }) => {
+  const client = useClient()
+  const { fetchStatus, supportMail } = useSupportMail(client)
 
-    if (!supportMail) {
-      return null
-    }
-
-    return (
-      <Typography variant="body1" component="div">
-        <Markdown
-          source={getErrorLocale(
-            error,
-            konnector,
-            t,
-            'description',
-            supportMail
-          )}
-        />
-      </Typography>
-    )
+  if (fetchStatus !== 'loaded' || !supportMail) {
+    return null
   }
+
+  return (
+    <Typography variant="body1" component="div">
+      <Markdown
+        source={getErrorLocale(error, konnector, t, 'description', supportMail)}
+      />
+    </Typography>
+  )
 }
 
 TriggerErrorDescription.propTypes = {
@@ -51,6 +33,4 @@ TriggerErrorDescription.propTypes = {
   t: PropTypes.func.isRequired
 }
 
-export default translate()(
-  withClient(withKonnectorLocales(TriggerErrorDescription))
-)
+export default translate()(withKonnectorLocales(TriggerErrorDescription))
