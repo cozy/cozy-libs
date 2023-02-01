@@ -1,12 +1,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import Markdown from '../Markdown'
 
-const TriggerMaintenanceDescription = ({ maintenanceMessages, lang }) => {
+const TriggerMaintenanceDescription = ({ maintenanceMessages }) => {
+  const { lang } = useI18n()
   const longMessage = get(maintenanceMessages, [lang, 'long_message'])
 
   if (!longMessage) {
@@ -30,8 +31,7 @@ TriggerMaintenanceDescription.propTypes = {
       long_message: PropTypes.string,
       short_message: PropTypes.string
     })
-  }),
-  lang: PropTypes.string.isRequired
+  })
 }
 
-export default translate()(TriggerMaintenanceDescription)
+export default TriggerMaintenanceDescription

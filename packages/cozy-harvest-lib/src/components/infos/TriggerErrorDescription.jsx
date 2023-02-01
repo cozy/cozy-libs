@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import useSupportMail from '../hooks/useSupportMail'
@@ -10,7 +10,8 @@ import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
 
-const TriggerErrorDescription = ({ error, konnector, t }) => {
+const TriggerErrorDescription = ({ error, konnector }) => {
+  const { t } = useI18n()
   const client = useClient()
   const { fetchStatus, supportMail } = useSupportMail(client)
 
@@ -29,8 +30,21 @@ const TriggerErrorDescription = ({ error, konnector, t }) => {
 
 TriggerErrorDescription.propTypes = {
   error: PropTypes.object.isRequired,
-  konnector: PropTypes.object.isRequired,
-  t: PropTypes.func.isRequired
+  konnector: PropTypes.object.isRequired
 }
 
-export default translate()(withKonnectorLocales(TriggerErrorDescription))
+const TriggerErrorDescriptionWrapper = withKonnectorLocales(
+  TriggerErrorDescription
+)
+
+const TriggerErrorDescriptionWrapperWrapper = ({ children, ...props }) => {
+  const { lang } = useI18n()
+
+  return (
+    <TriggerErrorDescriptionWrapper lang={lang} {...props}>
+      {children}
+    </TriggerErrorDescriptionWrapper>
+  )
+}
+
+export default TriggerErrorDescriptionWrapperWrapper
