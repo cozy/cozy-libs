@@ -26,7 +26,7 @@
     "cozy-intent": "^2.8.0",
     "cozy-realtime": "^4.3.0",
     "cozy-sharing": "^6.0.1",
-    "cozy-ui": "^80.0.2",
+    "cozy-ui": "^80.1.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
     "react-router-dom": "6.4.5"
   },
@@ -46,7 +46,7 @@
     "cozy-intent": ">=2.2.0",
     "cozy-realtime": ">=4.2.0",
     "cozy-sharing": ">=4.3.0",
-    "cozy-ui": ">=80.0.2",
+    "cozy-ui": ">=80.1.1",
     "react-router-dom": ">=6.4.5"
   }
 }
