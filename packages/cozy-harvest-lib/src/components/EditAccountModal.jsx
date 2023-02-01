@@ -5,6 +5,7 @@ import cx from 'classnames'
 import get from 'lodash/get'
 import flow from 'lodash/flow'
 
+import flag from 'cozy-flags'
 import { withClient } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
@@ -168,7 +169,9 @@ export class EditAccountModal extends Component {
   redirectToAccount() {
     const { account } = this.state
     if (account) {
-      this.props.replaceHistory(`/accounts/${account._id}`)
+      flag('harvest.inappconnectors.enabled')
+        ? this.props.replaceHistory(`/accounts/${account._id}/config`)
+        : this.props.replaceHistory(`/accounts/${account._id}`)
     } else {
       this.props.pushHistory(`/accounts`)
     }
