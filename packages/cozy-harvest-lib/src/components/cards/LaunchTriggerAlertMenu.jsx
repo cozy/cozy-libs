@@ -11,12 +11,6 @@ import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 import { useFlowState } from '../../models/withConnectionFlow'
 import withAdaptiveRouter from '../hoc/withRouter'
 
-const styles = {
-  // tricks to put 48px wide button inside 32px height container
-  // without enlarging the container
-  iconButtonWrapper: { height: 32, width: 46 }
-}
-
 const LaunchTriggerAlertMenu = ({
   flow,
   t,
@@ -32,14 +26,9 @@ const LaunchTriggerAlertMenu = ({
 
   return (
     <>
-      <div
-        className="u-flex u-flex-items-center"
-        style={styles.iconButtonWrapper}
-      >
-        <IconButton ref={anchorRef} onClick={() => setShowOptions(true)}>
-          <Icon icon={DotsIcon} />
-        </IconButton>
-      </div>
+      <IconButton ref={anchorRef} onClick={() => setShowOptions(true)}>
+        <Icon icon={DotsIcon} />
+      </IconButton>
       {showOptions && (
         <ActionMenu
           anchorElRef={anchorRef}

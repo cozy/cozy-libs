@@ -16,23 +16,20 @@ import KonnectorIcon from '../KonnectorIcon'
 import { makeLabel } from './helpers'
 import LaunchTriggerAlertMenu from './LaunchTriggerAlertMenu'
 
-const styles = {
-  // Alert is not designed to use 12px text, so this is necessary for now
-  typography: { paddingTop: 2 }
-}
-
 export const LaunchTriggerAlert = ({
   flow,
   f,
   t,
   disabled,
   konnectorRoot,
-  historyAction
+  historyAction,
+  withDescription
 }) => {
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
   const { trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
   const { launch, konnector } = flow
+  const block = withDescription
 
   const lastSuccessDate = getLastSuccessDate(trigger)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
@@ -46,8 +43,8 @@ export const LaunchTriggerAlert = ({
   return (
     <>
       <Alert
-        className="u-pr-half"
         color="var(--paperBackground)"
+        block={block}
         icon={
           running ? (
             <Spinner className="u-flex" noMargin />
@@ -68,26 +65,56 @@ export const LaunchTriggerAlert = ({
                 label={t('card.launchTrigger.button.label')}
                 onClick={() => launch({ autoSuccessTimer: false })}
               />
-              <LaunchTriggerAlertMenu
-                flow={flow}
-                t={t}
-                disabled={disabled}
-                konnectorRoot={konnectorRoot}
-                historyAction={historyAction}
-              />
+              {!block && (
+                <div
+                  style={{
+                    margin: '-.5rem -.5rem -.5rem 0'
+                  }}
+                >
+                  <LaunchTriggerAlertMenu
+                    flow={flow}
+                    t={t}
+                    disabled={disabled}
+                    konnectorRoot={konnectorRoot}
+                    historyAction={historyAction}
+                  />
+                </div>
+              )}
             </>
           )
         }
       >
-        <Typography style={styles.typography} variant="caption">
-          {makeLabel({
-            t,
-            f,
-            running,
-            expectingTriggerLaunch,
-            lastSuccessDate
-          })}
-        </Typography>
+        <div
+          className="u-flex-auto u-flex u-flex-column"
+          style={{ gap: '.5rem' }}
+        >
+          <div className="u-flex u-flex-items-center">
+            <Typography variant="caption" className="u-flex-auto">
+              {makeLabel({
+                t,
+                f,
+                running,
+                expectingTriggerLaunch,
+                lastSuccessDate
+              })}
+            </Typography>
+            {block && (
+              <div
+                style={{
+                  margin: '-1rem -1rem -1rem 0'
+                }}
+              >
+                <LaunchTriggerAlertMenu
+                  flow={flow}
+                  t={t}
+                  disabled={disabled}
+                  konnectorRoot={konnectorRoot}
+                  historyAction={historyAction}
+                />
+              </div>
+            )}
+          </div>
+        </div>
       </Alert>
       <Snackbar
         open={showSuccessSnackbar}
@@ -116,7 +143,8 @@ LaunchTriggerAlert.propTypes = {
   t: PropTypes.func,
   disabled: PropTypes.bool,
   konnectorRoot: PropTypes.string,
-  historyAction: PropTypes.func
+  historyAction: PropTypes.func,
+  withDescription: PropTypes.bool
 }
 
 export default withAdaptiveRouter(LaunchTriggerAlert)
