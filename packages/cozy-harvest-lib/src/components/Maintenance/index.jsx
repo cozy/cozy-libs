@@ -5,8 +5,7 @@ import Stack from 'cozy-ui/transpiled/react/Stack'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import MaintenanceHeader from './MaintenanceHeader'
-
-import Markdown from '../Markdown'
+import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescription'
 
 const KonnectorMaintenance = ({ maintenanceMessages, lang, t }) => {
   const longMessage = get(maintenanceMessages, [lang, 'long_message'])
@@ -19,9 +18,9 @@ const KonnectorMaintenance = ({ maintenanceMessages, lang, t }) => {
           <Typography variant="h5">
             {t('maintenance.explanationTitle')}
           </Typography>
-          <Typography variant="body1" component="div">
-            <Markdown source={longMessage} />
-          </Typography>
+          <TriggerMaintenanceDescription
+            maintenanceMessages={maintenanceMessages}
+          />
         </Stack>
       )}
     </div>
