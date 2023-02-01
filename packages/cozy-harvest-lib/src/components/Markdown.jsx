@@ -1,16 +1,23 @@
 import React from 'react'
 import ReactMarkdown from 'react-markdown'
 
-export const reactMarkdownRendererOptions = {
-  // eslint-disable-next-line react/display-name
-  paragraph: props => <span className="u-db u-mv-0">{props.children}</span>
-}
+import Link from 'cozy-ui/transpiled/react/Link'
 
-export const Markdown = ({ source }) => (
+const reactMarkdownRendererOptions = ({ linkProps }) => ({
+  // eslint-disable-next-line react/display-name
+  paragraph: props => <span className="u-db u-mv-0">{props.children}</span>,
+  link: props => (
+    <Link href={props.href} rel="noreferrer" target="_blank" {...linkProps}>
+      {props.children}
+    </Link>
+  )
+})
+
+export const Markdown = ({ source, linkProps }) => (
   <ReactMarkdown
     source={source}
     linkTarget="_blank"
-    renderers={reactMarkdownRendererOptions}
+    renderers={reactMarkdownRendererOptions({ linkProps })}
   />
 )
 

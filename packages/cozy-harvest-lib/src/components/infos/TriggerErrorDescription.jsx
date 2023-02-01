@@ -10,7 +10,7 @@ import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
 
-const TriggerErrorDescription = ({ error, konnector }) => {
+const TriggerErrorDescription = ({ error, konnector, linkProps }) => {
   const { t } = useI18n()
   const client = useClient()
   const { fetchStatus, supportMail } = useSupportMail(client)
@@ -23,6 +23,7 @@ const TriggerErrorDescription = ({ error, konnector }) => {
     <Typography variant="body1" component="div">
       <Markdown
         source={getErrorLocale(error, konnector, t, 'description', supportMail)}
+        linkProps={linkProps}
       />
     </Typography>
   )
@@ -30,7 +31,8 @@ const TriggerErrorDescription = ({ error, konnector }) => {
 
 TriggerErrorDescription.propTypes = {
   error: PropTypes.object.isRequired,
-  konnector: PropTypes.object.isRequired
+  konnector: PropTypes.object.isRequired,
+  linkProps: PropTypes.object
 }
 
 const TriggerErrorDescriptionWrapper = withKonnectorLocales(
