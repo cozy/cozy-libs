@@ -4,9 +4,11 @@ import PropTypes from 'prop-types'
 import { useClient } from 'cozy-client'
 import Alert from 'cozy-ui/transpiled/react/Alert'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
+import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { getLastSuccessDate, getKonnectorSlug } from '../../helpers/triggers'
@@ -68,10 +70,22 @@ export const LaunchTriggerAlert = ({
   return (
     <>
       <Alert
-        color="var(--paperBackground)"
+        color={
+          isInError
+            ? undefined
+            : isInMaintenance
+            ? 'var(--grey50)'
+            : 'var(--paperBackgroundColor)'
+        }
+        severity={isInError ? 'error' : undefined}
         block={block}
         icon={
-          running ? (
+          isInError ? undefined : isInMaintenance ? (
+            <Icon
+              icon={WrenchCircleIcon}
+              color={isInMaintenance ? 'var(--secondaryTextColor)' : undefined}
+            />
+          ) : running ? (
             <Spinner className="u-flex" noMargin />
           ) : (
             <KonnectorIcon
@@ -86,6 +100,7 @@ export const LaunchTriggerAlert = ({
               {!isInMaintenance && (
                 <Button
                   variant="text"
+                  color={isInError ? 'error' : undefined}
                   size="small"
                   disabled={running}
                   label={t('card.launchTrigger.button.label')}
@@ -117,7 +132,17 @@ export const LaunchTriggerAlert = ({
           style={{ gap: '.5rem' }}
         >
           <div className="u-flex u-flex-items-center">
-            <Typography variant="caption" className="u-flex-auto">
+            <Typography
+              variant="caption"
+              className="u-flex-auto"
+              color={
+                isInError
+                  ? 'error'
+                  : isInMaintenance
+                  ? 'textSecondary'
+                  : undefined
+              }
+            >
               {makeLabel({
                 t,
                 f,
@@ -143,7 +168,11 @@ export const LaunchTriggerAlert = ({
             )}
           </div>
           {block && isInError && (
-            <TriggerErrorDescription error={error} konnector={konnector} />
+            <TriggerErrorDescription
+              error={error}
+              konnector={konnector}
+              linkProps={{ className: 'u-error' }}
+            />
           )}
           {block && isInMaintenance && (
             <TriggerMaintenanceDescription
