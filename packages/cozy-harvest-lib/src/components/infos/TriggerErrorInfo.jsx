@@ -6,9 +6,9 @@ import Infos from 'cozy-ui/transpiled/react/Infos'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { withClient } from 'cozy-client'
 
-import { getErrorLocale, fetchSupportMail } from '../../helpers/konnectors'
+import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
-import Markdown from '../Markdown'
+import TriggerErrorDescription from './TriggerErrorDescription'
 
 /**
  * Component used to show an error related to an account or to a konnector job
@@ -19,20 +19,8 @@ import Markdown from '../Markdown'
  * deals mainly with translation concerns.
  */
 export class TriggerErrorInfo extends PureComponent {
-  state = {
-    supportMail: null
-  }
-  async componentDidMount() {
-    await this.loadSupportMail()
-  }
-  async loadSupportMail() {
-    const { client } = this.props
-    const supportMail = await fetchSupportMail(client)
-    this.setState({ supportMail })
-  }
   render() {
     const { className, error, konnector, t, action } = this.props
-    const { supportMail } = this.state
     return (
       <Infos
         className={className}
@@ -43,19 +31,7 @@ export class TriggerErrorInfo extends PureComponent {
             <Typography className="u-error" variant="h6" gutterBottom>
               {getErrorLocale(error, konnector, t, 'title')}
             </Typography>
-            {supportMail ? (
-              <Typography variant="body1" component="div">
-                <Markdown
-                  source={getErrorLocale(
-                    error,
-                    konnector,
-                    t,
-                    'description',
-                    supportMail
-                  )}
-                />
-              </Typography>
-            ) : null}
+            <TriggerErrorDescription error={error} konnector={konnector} />
           </>
         }
       />
@@ -63,7 +39,7 @@ export class TriggerErrorInfo extends PureComponent {
   }
 }
 
-TriggerErrorInfo.proptTypes = {
+TriggerErrorInfo.propTypes = {
   error: PropTypes.object.isRequired,
   konnector: PropTypes.object.isRequired,
   t: PropTypes.func.isRequired
