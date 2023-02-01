@@ -90,6 +90,7 @@ export const LaunchTriggerAlert = ({
           ) : (
             <KonnectorIcon
               className="u-w-1 u-h-1"
+              konnector={konnector}
               konnectorSlug={getKonnectorSlug(trigger)}
             />
           )
