@@ -62,6 +62,7 @@ export const DataTab = ({
             konnectorRoot={konnectorRoot}
             flow={flow}
             disabled={isInMaintenance}
+            withDescription
           />
           {isMobile && <Divider style={styles.divider} />}
         </>
