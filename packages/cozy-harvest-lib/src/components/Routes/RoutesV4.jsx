@@ -78,7 +78,7 @@ const RoutesV4 = ({
               >
                 <AccountModalContentWrapper>
                   <DataTab
-                    konnectorRoot={`${konnectorRoot}/accounts/${match.params.accountId}`}
+                    konnectorRoot={konnectorRoot}
                     konnector={konnectorWithTriggers}
                     showNewAccountButton={!konnectorWithTriggers.clientSide}
                     onDismiss={onDismiss}

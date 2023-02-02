@@ -10,6 +10,7 @@ import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 
 import { useFlowState } from '../../models/withConnectionFlow'
+import { getAccountId } from '../../helpers/triggers'
 import { isDisconnected } from '../../helpers/konnectors'
 import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
@@ -51,7 +52,16 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
           {!isKonnectorDisconnected && (
             <ActionMenuItem
               left={<Icon icon={GearIcon} />}
-              onClick={() => historyAction(`${konnectorRoot}/config`, 'push')}
+              onClick={() =>
+                historyAction(
+                  konnectorRoot
+                    ? `${konnectorRoot}/accounts/${getAccountId(
+                        trigger
+                      )}/config`
+                    : '/config',
+                  'push'
+                )
+              }
             >
               {t('card.launchTrigger.configure')}
             </ActionMenuItem>
