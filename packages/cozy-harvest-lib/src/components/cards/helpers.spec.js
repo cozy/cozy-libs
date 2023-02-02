@@ -97,5 +97,16 @@ describe('makeLabel', () => {
 
       expect(res).toBe('Unknown')
     })
+
+    it('should return "Disconnected" if no trigger but a konnector', () => {
+      const res = makeLabel({
+        t,
+        konnector: {},
+        running: false,
+        expectingTriggerLaunch: false
+      })
+
+      expect(res).toBe('Disconnected')
+    })
   })
 })

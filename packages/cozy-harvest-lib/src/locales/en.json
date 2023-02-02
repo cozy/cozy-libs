@@ -94,6 +94,7 @@
         "unknown": "Unknown",
         "afterSomeTimes": "Sync. %{times} ago",
         "format": "MM/DD/YYYY",
+        "disconnected": "Disconnected",
         "justNow": "Sync. just now"
       }
     },

@@ -144,6 +144,7 @@ export const LaunchTriggerAlert = ({
             >
               {makeLabel({
                 t,
+                konnector,
                 trigger,
                 running,
                 expectingTriggerLaunch
