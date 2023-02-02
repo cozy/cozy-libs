@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.1](https://github.com/cozy/cozy-libs/compare/cozy-sharing@6.0.0...cozy-sharing@6.0.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* Recipient import path not updated in last update ([56b9cfd](https://github.com/cozy/cozy-libs/commit/56b9cfdab402813527982d0ddf857f1e963850b1))
+
+
+
+
+
 # 6.0.0 (2023-01-31)
 
 
