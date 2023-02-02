@@ -448,6 +448,7 @@ async function updateCache({ client, konnector, tokenCache, cozyBankIds }) {
  * @returns {Promise<createTemporaryTokenResponse>}
  */
 export const createTemporaryToken = async ({ client, konnector, account }) => {
+  // @ts-ignore La propriété 'exec' n'existe pas sur le type 'PromiseCache'.
   return await promiseCache.exec(
     async () => {
       assert(
