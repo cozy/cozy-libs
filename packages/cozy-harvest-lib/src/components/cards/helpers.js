@@ -11,13 +11,20 @@ const getDifferenceInMinutes = date => {
 /**
  * @param {object} options
  * @param {object} options.t - i18n function
+ * @param {object} options.konnector - Associated Connector
  * @param {object} options.trigger - Associated trigger
  * @param {object} options.running - If the connector is running
  * @param {object} options.expectingTriggerLaunch - If the trigger is waiting to be launched
  * @param {object} options.lastSuccessDate - The last date when the trigger was successfully executed
  * @returns {string}
  */
-export const makeLabel = ({ t, trigger, running, expectingTriggerLaunch }) => {
+export const makeLabel = ({
+  t,
+  konnector,
+  trigger,
+  running,
+  expectingTriggerLaunch
+}) => {
   const lastSuccessDate = getLastSuccessDate(trigger)
 
   if (running || expectingTriggerLaunch) {
@@ -32,6 +39,10 @@ export const makeLabel = ({ t, trigger, running, expectingTriggerLaunch }) => {
     return t('card.launchTrigger.lastSync.afterSomeTimes', {
       times: formatLocallyDistanceToNow(lastSuccessDate)
     })
+  }
+
+  if (konnector && !trigger) {
+    return t('card.launchTrigger.lastSync.disconnected')
   }
 
   return t('card.launchTrigger.lastSync.unknown')

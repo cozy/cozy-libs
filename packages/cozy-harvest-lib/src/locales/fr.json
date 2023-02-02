@@ -94,6 +94,7 @@
         "unknown": "Indéterminée",
         "afterSomeTimes": "Sync. il y a %{times}",
         "format": "DD/MM/YYYY",
+        "disconnected": "Déconnecté",
         "justNow": "Sync. à l'instant"
       }
     },
