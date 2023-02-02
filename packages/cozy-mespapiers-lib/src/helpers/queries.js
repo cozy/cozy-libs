@@ -102,7 +102,7 @@ export const buildTriggersQueryByConnectorSlug = (slug, enabled) => ({
   }
 })
 
-export const buildConnectorsQueryById = (id, enabled) => ({
+export const buildConnectorsQueryById = (id, enabled = true) => ({
   definition: Q(KONNECTORS_DOCTYPE).getById(id),
   options: {
     as: `${KONNECTORS_DOCTYPE}/id/${id}`,

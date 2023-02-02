@@ -24,8 +24,7 @@ const HarvestBanner = ({ papers }) => {
   )
 
   const queryKonnector = buildConnectorsQueryById(
-    `io.cozy.konnectors/${connectorSlug}`,
-    Boolean(trigger)
+    `io.cozy.konnectors/${connectorSlug}`
   )
 
   const { data: konnectors } = useQuery(
