@@ -12,7 +12,7 @@ import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { getKonnectorSlug } from '../../helpers/triggers'
-import { isRunnable } from '../../helpers/konnectors'
+import { isRunnable, isDisconnected } from '../../helpers/konnectors'
 import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
 import withAdaptiveRouter from '../hoc/withRouter'
@@ -49,15 +49,16 @@ export const LaunchTriggerAlert = ({
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
   const { error, trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
+  const { launch, konnector } = flow
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
   const styles = useStyles({ block })
 
-  const { launch, konnector } = flow
   const isInError = !!error
   const block = withDescription && (isInError || isInMaintenance)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
+  const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
   useEffect(() => {
     if (status === SUCCESS) {
@@ -96,7 +97,7 @@ export const LaunchTriggerAlert = ({
         action={
           isKonnectorRunnable && (
             <>
-              {!isInMaintenance && (
+              {!isInMaintenance && !isKonnectorDisconnected && (
                 <Button
                   variant="text"
                   color={isInError ? 'error' : undefined}
@@ -115,7 +116,6 @@ export const LaunchTriggerAlert = ({
                   <LaunchTriggerAlertMenu
                     flow={flow}
                     t={t}
-                    isInMaintenance={isInMaintenance}
                     konnectorRoot={konnectorRoot}
                     historyAction={historyAction}
                   />
@@ -159,7 +159,6 @@ export const LaunchTriggerAlert = ({
                 <LaunchTriggerAlertMenu
                   flow={flow}
                   t={t}
-                  isInMaintenance={isInMaintenance}
                   konnectorRoot={konnectorRoot}
                   historyAction={historyAction}
                 />

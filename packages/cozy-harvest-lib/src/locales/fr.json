@@ -78,6 +78,7 @@
         "label": "Synchroniser"
       },
       "configure": "Configurer",
+      "connect": "Se connecter",
       "success": "Synchronisation réussie",
       "error": "Une erreur est survenue.",
       "frequency": {

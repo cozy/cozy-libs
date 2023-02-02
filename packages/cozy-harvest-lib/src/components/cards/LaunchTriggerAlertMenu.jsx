@@ -10,16 +10,18 @@ import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
 
 import { useFlowState } from '../../models/withConnectionFlow'
+import { isDisconnected } from '../../helpers/konnectors'
 import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
 const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
   const client = useClient()
-  const { running } = useFlowState(flow)
+  const { running, trigger } = useFlowState(flow)
   const { launch, konnector } = flow
   const {
     data: { isInMaintenance }
   } = useMaintenanceStatus(client, konnector)
+  const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
   const anchorRef = useRef()
   const [showOptions, setShowOptions] = useState(false)
@@ -35,7 +37,7 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
           autoclose={true}
           onClose={() => setShowOptions(false)}
         >
-          {!running && !isInMaintenance && (
+          {!running && !isInMaintenance && !isKonnectorDisconnected && (
             <ActionMenuItem
               left={<Icon icon={SyncIcon} />}
               onClick={() => {
@@ -46,12 +48,22 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
               {t('card.launchTrigger.button.label')}
             </ActionMenuItem>
           )}
-          <ActionMenuItem
-            left={<Icon icon={GearIcon} />}
-            onClick={() => historyAction(`${konnectorRoot}/config`, 'push')}
-          >
-            {t('card.launchTrigger.configure')}
-          </ActionMenuItem>
+          {!isKonnectorDisconnected && (
+            <ActionMenuItem
+              left={<Icon icon={GearIcon} />}
+              onClick={() => historyAction(`${konnectorRoot}/config`, 'push')}
+            >
+              {t('card.launchTrigger.configure')}
+            </ActionMenuItem>
+          )}
+          {isKonnectorDisconnected && (
+            <ActionMenuItem
+              left={<Icon icon={GearIcon} />}
+              onClick={() => historyAction(`${konnectorRoot}/new`, 'push')}
+            >
+              {t('card.launchTrigger.connect')}
+            </ActionMenuItem>
+          )}
         </ActionMenu>
       )}
     </>

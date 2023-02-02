@@ -90,8 +90,6 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
         </ul>
         {isKonnectorRunnable && (
           <div>
-            {/* TODO: Extract this directly in Cozy-UI
-            (either with an utility class or a Button prop) */}
             <Button
               label={t('card.launchTrigger.button.label')}
               icon={<Icon focusable="false" icon={SyncIcon} spin={running} />}

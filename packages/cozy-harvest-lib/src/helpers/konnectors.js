@@ -387,6 +387,17 @@ export const isRunnable = ({ win, konnector = {} }) => {
   return Boolean(!konnector.clientSide || getLauncher({ win }))
 }
 
+/**
+ * Define if konnector is disconnected or not
+ *
+ * @param {Object} konnector - The io.cozy.konnectors object for the current konnector
+ * @param {Object} trigger - Associated trigger
+ * @returns {Boolean}
+ */
+export const isDisconnected = (konnector, trigger) => {
+  return !!konnector && !trigger
+}
+
 export default {
   KonnectorJobError,
   buildFolderPath,
