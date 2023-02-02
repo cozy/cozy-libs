@@ -1,6 +1,7 @@
 import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
 
 import { getLastSuccessDate } from '../../helpers/triggers'
+import { isDisconnected } from '../../helpers/konnectors'
 
 const DEFAULT_TIME = 300_000 // To milliseconds (5 minutes)
 
@@ -41,7 +42,7 @@ export const makeLabel = ({
     })
   }
 
-  if (konnector && !trigger) {
+  if (isDisconnected(konnector, trigger)) {
     return t('card.launchTrigger.lastSync.disconnected')
   }
 
