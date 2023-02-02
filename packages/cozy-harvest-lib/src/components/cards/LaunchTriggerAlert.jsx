@@ -53,10 +53,10 @@ export const LaunchTriggerAlert = ({
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
-  const styles = useStyles({ block })
-
   const isInError = !!error
   const block = withDescription && (isInError || isInMaintenance)
+  const styles = useStyles({ block })
+
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
