@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [12.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.7.0...cozy-harvest-lib@12.8.0) (2023-02-02)
+
+
+### Bug Fixes
+
+* Adjust some horizontal margins in `LaunchTriggerAlert` ([bcf7d91](https://github.com/cozy/cozy-libs/commit/bcf7d91754460a6b53a94871c546c67dfe173afb))
+* Make `withKonnectorLocales`' return value extends `React.Component` ([ee7c550](https://github.com/cozy/cozy-libs/commit/ee7c5503a5fce634c647f603cf268e35af6895f9))
+
+
+### Features
+
+* Add a `withDescription` prop to `LaunchTriggerAlert` ([d8c947c](https://github.com/cozy/cozy-libs/commit/d8c947c9d3a38fa1bd6c0ad477fb677a06c7d19c))
+* Display a maintenance message in `LaunchTriggerAlert` ([8bb35d0](https://github.com/cozy/cozy-libs/commit/8bb35d04148afd50851506a6b9634e41369b711d))
+* Display an error message in `LaunchTriggerAlert` ([00d9964](https://github.com/cozy/cozy-libs/commit/00d99645a4c6769270ae206fd3015e67828d5185))
+* Theme `LaunchTriggerAlert` when there is an error or a maintenance ([61ff378](https://github.com/cozy/cozy-libs/commit/61ff378077cdb3c2162562b638c64c8d3262ebc4))
+* Update `cozy-client` to `34.10.1` and `cozy-ui` to `80.1.1` ([c08ce9a](https://github.com/cozy/cozy-libs/commit/c08ce9ab8dc903376f8e9c57bd26bdaa248c4d93))
+
+
+
+
+
 # 12.7.0 (2023-01-31)
 
 

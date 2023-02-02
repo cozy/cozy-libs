@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [18.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.1.1...cozy-mespapiers-lib@18.2.0) (2023-02-02)
+
+
+### Bug Fixes
+
+* Pass `flowProps.konnector` to `LaunchTriggerCard` in Mes Papiers ([dfdbefb](https://github.com/cozy/cozy-libs/commit/dfdbefb3e48a3bc72010824c6a1f1dd508487150))
+
+
+### Features
+
+* Update `cozy-client` to `34.10.1` and `cozy-ui` to `80.1.1` ([c08ce9a](https://github.com/cozy/cozy-libs/commit/c08ce9ab8dc903376f8e9c57bd26bdaa248c4d93))
+
+
+
+
+
 ## [18.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.1.0...cozy-mespapiers-lib@18.1.1) (2023-02-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
