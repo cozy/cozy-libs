@@ -11,7 +11,7 @@ import {
 import KonnectorJobWatcher, {
   watchKonnectorJob
 } from './konnector/KonnectorJobWatcher'
-import { konnectorPolicy as biKonnectorPolicy } from '../services/budget-insight'
+import { konnectorPolicy as biKonnectorPolicy } from '../policies/budget-insight'
 import fixtures from '../../test/fixtures'
 import sentryHub from '../sentry'
 import { Q } from 'cozy-client'
@@ -34,8 +34,8 @@ jest.mock('../connections/files', () => ({
   createDirectoryByPath: jest.fn()
 }))
 
-jest.mock('../services/budget-insight', () => {
-  const originalBudgetInsight = jest.requireActual('../services/budget-insight')
+jest.mock('../policies/budget-insight', () => {
+  const originalBudgetInsight = jest.requireActual('../policies/budget-insight')
   return {
     konnectorPolicy: {
       ...originalBudgetInsight.konnectorPolicy,

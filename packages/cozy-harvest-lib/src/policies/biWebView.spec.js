@@ -10,7 +10,7 @@ import {
 import ConnectionFlow from '../models/ConnectionFlow'
 import flag from 'cozy-flags'
 
-jest.mock('./bi-http', () => ({
+jest.mock('../services/bi-http', () => ({
   createBIConnection: jest
     .fn()
     .mockResolvedValue({ text: Promise.resolve('{}') }),
@@ -19,13 +19,16 @@ jest.mock('./bi-http', () => ({
   getBIConnection: jest.fn()
 }))
 
-import { getBIConnectionAccountsList, getBIConnection } from './bi-http'
+import {
+  getBIConnectionAccountsList,
+  getBIConnection
+} from '../services/bi-http'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}
 }))
 
-jest.mock('./jobUtils', () => ({
+jest.mock('../services/jobUtils', () => ({
   waitForRealtimeEvent: jest.fn()
 }))
 

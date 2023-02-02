@@ -11,15 +11,15 @@ import {
   updateBIConnectionFromFlow,
   sendTwoFACode
 } from './budget-insight'
-import { waitForRealtimeEvent } from './jobUtils'
+import { waitForRealtimeEvent } from '../services/jobUtils'
 import {
   getBIConnection,
   createBIConnection,
   updateBIConnection
-} from './bi-http'
+} from '../services/bi-http'
 import merge from 'lodash/merge'
 import ConnectionFlow from '../models/ConnectionFlow'
-import biPublicKeyProd from './bi-public-key-prod.json'
+import biPublicKeyProd from '../services/bi-public-key-prod.json'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 jest.mock('cozy-logger', () => ({
@@ -28,11 +28,11 @@ jest.mock('cozy-logger', () => ({
 jest.mock('../connections/accounts', () => ({
   saveAccount: jest.fn().mockImplementation(async account => account)
 }))
-jest.mock('./jobUtils', () => ({
+jest.mock('../services/jobUtils', () => ({
   waitForRealtimeEvent: jest.fn()
 }))
 
-jest.mock('./bi-http', () => ({
+jest.mock('../services/bi-http', () => ({
   createBIConnection: jest
     .fn()
     .mockResolvedValue({ text: Promise.resolve('{}') }),

@@ -49,9 +49,9 @@ jest.mock('cozy-doctypes', () => {
   }
 })
 
-jest.mock('../../src/services/budget-insight', () => {
+jest.mock('../../src/policies/budget-insight', () => {
   const originalBudgetInsight = jest.requireActual(
-    '../../src/services/budget-insight'
+    '../../src/policies/budget-insight'
   )
   return {
     konnectorPolicy: {

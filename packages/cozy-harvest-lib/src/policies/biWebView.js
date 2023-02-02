@@ -5,7 +5,10 @@
  * - Deals with the konnector to get temporary tokens
  */
 
-import { getBIConnectionAccountsList, getBIConnection } from './bi-http'
+import {
+  getBIConnectionAccountsList,
+  getBIConnection
+} from '../services/bi-http'
 import assert from '../assert'
 import logger from '../logger'
 import { Q } from 'cozy-client'
