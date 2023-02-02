@@ -26,7 +26,7 @@
     "cozy-intent": "^2.8.0",
     "cozy-realtime": "^4.3.0",
     "cozy-sharing": "^6.0.1",
-    "cozy-ui": "^80.1.1",
+    "cozy-ui": "^80.2.1",
     "jest-environment-jsdom-sixteen": "2.0.0",
     "react-router-dom": "6.4.5"
   },
@@ -42,11 +42,11 @@
     "cozy-client": ">=34.10.1",
     "cozy-device-helper": ">=2.6.0",
     "cozy-doctypes": ">=1.83.8",
-    "cozy-harvest-lib": ">=12.3.0",
+    "cozy-harvest-lib": ">=13.0.0",
     "cozy-intent": ">=2.2.0",
     "cozy-realtime": ">=4.2.0",
     "cozy-sharing": ">=4.3.0",
-    "cozy-ui": ">=80.1.1",
+    "cozy-ui": ">=80.2.1",
     "react-router-dom": ">=6.4.5"
   }
 }
