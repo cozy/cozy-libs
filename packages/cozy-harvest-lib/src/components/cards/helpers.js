@@ -24,22 +24,27 @@ export const makeLabel = ({
   konnector,
   trigger,
   running,
-  expectingTriggerLaunch
+  expectingTriggerLaunch,
+  isInMaintenance
 }) => {
   const lastSuccessDate = getLastSuccessDate(trigger)
 
+  const mantenanceSuffix = isInMaintenance
+    ? ` · ${t('konnectorBlock.inMaintenance')}`
+    : ''
+
   if (running || expectingTriggerLaunch) {
-    return t('card.launchTrigger.lastSync.syncing')
+    return `${t('card.launchTrigger.lastSync.syncing')}${mantenanceSuffix}`
   }
 
   if (lastSuccessDate) {
     if (getDifferenceInMinutes(lastSuccessDate) < DEFAULT_TIME) {
-      return t('card.launchTrigger.lastSync.justNow')
+      return `${t('card.launchTrigger.lastSync.justNow')}${mantenanceSuffix}`
     }
 
-    return t('card.launchTrigger.lastSync.afterSomeTimes', {
+    return `${t('card.launchTrigger.lastSync.afterSomeTimes', {
       times: formatLocallyDistanceToNow(lastSuccessDate)
-    })
+    })}${mantenanceSuffix}`
   }
 
   if (isDisconnected(konnector, trigger)) {
