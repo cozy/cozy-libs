@@ -33,8 +33,5 @@ logger.info('Available konnector policies', policies)
  * @param {KonnectorManifest} konnector
  * @returns {KonnectorPolicy}
  */
-export const findKonnectorPolicy = konnector => {
-  const policy = policies.find(policy => policy.match(konnector))
-  logger.info(`Using ${policy.name} konnector policy for ${konnector.slug}`)
-  return policy
-}
+export const findKonnectorPolicy = konnector =>
+  policies.find(policy => policy.match(konnector))
