@@ -6,6 +6,7 @@ export const SETTINGS_DOCTYPE = 'io.cozy.mespapiers.settings'
 export const JOBS_DOCTYPE = 'io.cozy.jobs'
 export const TRIGGERS_DOCTYPE = 'io.cozy.triggers'
 export const KONNECTORS_DOCTYPE = 'io.cozy.konnectors'
+export const ACCOUNTS_DOCTYPE = 'io.cozy.accounts'
 
 // the documents schema, necessary for CozyClient
 export default {

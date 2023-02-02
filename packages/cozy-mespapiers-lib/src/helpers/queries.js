@@ -5,7 +5,8 @@ import {
   FILES_DOCTYPE,
   SETTINGS_DOCTYPE,
   TRIGGERS_DOCTYPE,
-  KONNECTORS_DOCTYPE
+  KONNECTORS_DOCTYPE,
+  ACCOUNTS_DOCTYPE
 } from '../doctypes'
 
 const defaultFetchPolicy = fetchPolicies.olderThan(86_400_000) // 24 hours
@@ -106,6 +107,25 @@ export const buildConnectorsQueryById = (id, enabled = true) => ({
   definition: Q(KONNECTORS_DOCTYPE).getById(id),
   options: {
     as: `${KONNECTORS_DOCTYPE}/id/${id}`,
+    fetchPolicy: defaultFetchPolicy,
+    enabled
+  }
+})
+
+// There is a limit to this approach of retrieving an account based on the `auth.login` field.
+// This does not cover all cases. Indeed, sometimes we have to refer to the `identifier` key first
+// to know which attribute to retrieve from `auth`. Sometimes this identifier is itself an attribute of `auth`.
+// There is a known concern of lack of homogeneity with connectors, we use here a simple approach which
+// covers most cases. Reference documentation: https://github.com/cozy/cozy-doctypes/blob/master/docs/io.cozy.accounts.md
+export const buildAccountsQueryByLoginAndSlug = ({ login, slug, enabled }) => ({
+  definition: Q(ACCOUNTS_DOCTYPE)
+    .where({
+      'auth.login': login,
+      account_type: slug
+    })
+    .indexFields(['auth.login', 'account_type']),
+  options: {
+    as: `${ACCOUNTS_DOCTYPE}/login/${login}/slug/${slug}`,
     fetchPolicy: defaultFetchPolicy,
     enabled
   }
