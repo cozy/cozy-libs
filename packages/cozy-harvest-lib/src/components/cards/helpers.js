@@ -1,5 +1,7 @@
 import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
 
+import { getLastSuccessDate } from '../../helpers/triggers'
+
 const DEFAULT_TIME = 300_000 // To milliseconds (5 minutes)
 
 const getDifferenceInMinutes = date => {
@@ -9,17 +11,15 @@ const getDifferenceInMinutes = date => {
 /**
  * @param {object} options
  * @param {object} options.t - i18n function
+ * @param {object} options.trigger - Associated trigger
  * @param {object} options.running - If the connector is running
  * @param {object} options.expectingTriggerLaunch - If the trigger is waiting to be launched
  * @param {object} options.lastSuccessDate - The last date when the trigger was successfully executed
  * @returns {string}
  */
-export const makeLabel = ({
-  t,
-  running,
-  expectingTriggerLaunch,
-  lastSuccessDate
-}) => {
+export const makeLabel = ({ t, trigger, running, expectingTriggerLaunch }) => {
+  const lastSuccessDate = getLastSuccessDate(trigger)
+
   if (running || expectingTriggerLaunch) {
     return t('card.launchTrigger.lastSync.syncing')
   }

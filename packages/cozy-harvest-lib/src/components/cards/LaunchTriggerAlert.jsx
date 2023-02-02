@@ -11,7 +11,7 @@ import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
 import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { getLastSuccessDate, getKonnectorSlug } from '../../helpers/triggers'
+import { getKonnectorSlug } from '../../helpers/triggers'
 import { isRunnable } from '../../helpers/konnectors'
 import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
@@ -40,25 +40,23 @@ const useStyles = makeStyles({
 
 export const LaunchTriggerAlert = ({
   flow,
-  f,
   t,
   konnectorRoot,
   historyAction,
   withDescription
 }) => {
-  const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
   const client = useClient()
+  const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
   const { error, trigger, running, expectingTriggerLaunch, status } =
     useFlowState(flow)
-  const { launch, konnector } = flow
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
-  const isInError = !!error
-  const block = withDescription && (isInError || isInMaintenance)
   const styles = useStyles({ block })
 
-  const lastSuccessDate = getLastSuccessDate(trigger)
+  const { launch, konnector } = flow
+  const isInError = !!error
+  const block = withDescription && (isInError || isInMaintenance)
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
 
   useEffect(() => {
@@ -146,10 +144,9 @@ export const LaunchTriggerAlert = ({
             >
               {makeLabel({
                 t,
-                f,
+                trigger,
                 running,
-                expectingTriggerLaunch,
-                lastSuccessDate
+                expectingTriggerLaunch
               })}
             </Typography>
             {block && (
@@ -205,7 +202,6 @@ LaunchTriggerAlert.defaultProps = {
 
 LaunchTriggerAlert.propTypes = {
   flow: PropTypes.object,
-  f: PropTypes.func,
   t: PropTypes.func,
   konnectorRoot: PropTypes.string,
   historyAction: PropTypes.func,

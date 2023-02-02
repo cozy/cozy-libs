@@ -5,17 +5,14 @@ import enLocales from '../../locales/en.json'
 import { makeLabel } from './helpers'
 
 const t = x => get(enLocales, x)
-const f = x => x
 
 describe('makeLabel', () => {
   describe('it should return "Data recovery…"', () => {
     it('when running is true', () => {
       const res = makeLabel({
         t,
-        f,
         running: true,
-        expectingTriggerLaunch: false,
-        lastSuccessDate: '2021'
+        expectingTriggerLaunch: false
       })
 
       expect(res).toBe('Data recovery…')
@@ -24,10 +21,8 @@ describe('makeLabel', () => {
     it('when runggin and expectingTriggerLaunch are true', () => {
       const res = makeLabel({
         t,
-        f,
         running: true,
-        expectingTriggerLaunch: true,
-        lastSuccessDate: '2021'
+        expectingTriggerLaunch: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -36,10 +31,8 @@ describe('makeLabel', () => {
     it('when expectingTriggerLaunch is true', () => {
       const res = makeLabel({
         t,
-        f,
         running: false,
-        expectingTriggerLaunch: true,
-        lastSuccessDate: '2021'
+        expectingTriggerLaunch: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -48,10 +41,8 @@ describe('makeLabel', () => {
     it('when lastSuccessDate is null', () => {
       const res = makeLabel({
         t,
-        f,
         running: true,
-        expectingTriggerLaunch: true,
-        lastSuccessDate: null
+        expectingTriggerLaunch: true
       })
 
       expect(res).toBe('Data recovery…')
@@ -69,10 +60,11 @@ describe('makeLabel', () => {
     it('should return "Sync. ago..." if lastSuccessDate is defined and > 5 minutes', () => {
       const res = makeLabel({
         t,
-        f,
+        trigger: {
+          current_state: { last_success: '2020-12-25T11:55:00.000Z' }
+        },
         running: false,
-        expectingTriggerLaunch: false,
-        lastSuccessDate: '2020-12-25T11:55:00.000Z'
+        expectingTriggerLaunch: false
       })
 
       expect(res).toContain(
@@ -83,10 +75,11 @@ describe('makeLabel', () => {
     it('should return "Sync. just now" if lastSuccessDate is defined and < 5 minutes', () => {
       const res = makeLabel({
         t,
-        f,
+        trigger: {
+          current_state: { last_success: '2020-12-25T11:55:01.000Z' }
+        },
         running: false,
-        expectingTriggerLaunch: false,
-        lastSuccessDate: '2020-12-25T11:55:01.000Z'
+        expectingTriggerLaunch: false
       })
 
       expect(res).toBe(`${t('card.launchTrigger.lastSync.justNow')}`)
@@ -95,10 +88,11 @@ describe('makeLabel', () => {
     it('should return "Unknown" if lastSuccessDate is null', () => {
       const res = makeLabel({
         t,
-        f,
+        trigger: {
+          current_state: { last_success: null }
+        },
         running: false,
-        expectingTriggerLaunch: false,
-        lastSuccessDate: null
+        expectingTriggerLaunch: false
       })
 
       expect(res).toBe('Unknown')
