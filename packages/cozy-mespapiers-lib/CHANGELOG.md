@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [19.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.2.2...cozy-mespapiers-lib@19.0.0) (2023-02-02)
+
+
+### Bug Fixes
+
+* **mespapiers:** HarvestBanner wasn't showing connector if disconnected ([c5dc2d1](https://github.com/cozy/cozy-libs/commit/c5dc2d1929eab534dc941d52be0025843a9d0cb4))
+
+
+### Features
+
+* **mespapiers:** Upgrade cozy-harvest-lib to 13.0.0 and cozy-ui 80.2.1 ([dca72cd](https://github.com/cozy/cozy-libs/commit/dca72cdfb6f97379cdf28cf34abd205f481d1df2))
+* **mespapiers:** Use identifier and accounts to get trigger instead of ([3c29138](https://github.com/cozy/cozy-libs/commit/3c29138a71325fe83718c45170495c134b75ff2e))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** `cozy-harvest-lib` must be `>=13.0.0` and `cozy-ui` must be `>=80.2.1`
+
+
+
+
+
 ## [18.2.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@18.2.1...cozy-mespapiers-lib@18.2.2) (2023-02-02)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
