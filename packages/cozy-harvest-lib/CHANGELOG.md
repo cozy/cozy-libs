@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [12.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.8.0...cozy-harvest-lib@12.8.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* Vertically center harvest dialog when not using tabs ([bb11971](https://github.com/cozy/cozy-libs/commit/bb1197113d85bf80154909a43b9cbd200d51b6e4))
+
+
+
+
+
 # [12.8.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.7.0...cozy-harvest-lib@12.8.0) (2023-02-02)
 
 
