@@ -1,7 +1,7 @@
 import logger from './logger'
-import { konnectorPolicy as biKonnectorPolicy } from './services/budget-insight'
-import { konnectorPolicy as biWebViewPolicy } from './services/biWebView'
-import { konnectorPolicy as cccPolicy } from './services/cccPolicy'
+import { konnectorPolicy as biKonnectorPolicy } from './policies/budget-insight'
+import { konnectorPolicy as biWebViewPolicy } from './policies/biWebView'
+import { konnectorPolicy as cliskPolicy } from './policies/clisk'
 
 const defaultKonnectorPolicy = {
   accountContainsAuth: true,
@@ -19,7 +19,7 @@ const defaultKonnectorPolicy = {
 }
 
 const policies = [
-  cccPolicy,
+  cliskPolicy,
   biWebViewPolicy,
   biKonnectorPolicy,
   defaultKonnectorPolicy

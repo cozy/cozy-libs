@@ -13,7 +13,7 @@ import keyBy from 'lodash/keyBy'
 import defaults from 'lodash/defaults'
 import { Q } from 'cozy-client'
 
-import { waitForRealtimeEvent } from './jobUtils'
+import { waitForRealtimeEvent } from '../services/jobUtils'
 import {
   getBIConnection,
   createBIConnection,
@@ -21,7 +21,7 @@ import {
   getBIUserConfig,
   updateBIUserConfig,
   setBIConnectionSyncStatus
-} from './bi-http'
+} from '../services/bi-http'
 import assert from '../assert'
 import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { KonnectorJobError } from '../helpers/konnectors'
