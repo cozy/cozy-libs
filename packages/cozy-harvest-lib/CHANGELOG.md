@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.8.1...cozy-harvest-lib@13.0.0) (2023-02-02)
+
+
+### Bug Fixes
+
+* **harvest:** LaunchTriggerAlert wasn't showing connector icon when ([505beff](https://github.com/cozy/cozy-libs/commit/505beffbf6400c77bed74d0287b43d9857f3849a))
+* **harvest:** Routes for /config with LaunchTriggerAlert was incorrect ([c67f5a6](https://github.com/cozy/cozy-libs/commit/c67f5a6961516d3d89b1d5b7a6a43a0596b21e21))
+
+
+### Features
+
+* **harvest:** LaunchTriggerAlert show "disconnected" when expected ([4d616e5](https://github.com/cozy/cozy-libs/commit/4d616e576ec9ba3dbe85ce3290f58bed816475cc))
+* **harvest:** LaunchTriggerAlert show disconnected content ([b3a7ca9](https://github.com/cozy/cozy-libs/commit/b3a7ca9899c656e94fd3ef0cb8d04c973ddd48a0))
+
+
+### BREAKING CHANGES
+
+* **harvest:** `konnectorRoot` must be the route to the connector, not the account in it. You have to change something like `konnectorRoot="/harvest/connectorName/accounts/accountId"` in something like `konnectorRoot="/harvest/connectorName"`
+
+
+
+
+
 ## [12.8.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.8.0...cozy-harvest-lib@12.8.1) (2023-02-02)
 
 
