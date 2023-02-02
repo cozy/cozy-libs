@@ -13,7 +13,7 @@ import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
 import LaunchTriggerAlert from './LaunchTriggerAlert'
 import * as triggers from '../../helpers/triggers'
-import { isRunnable } from '../../helpers/konnectors'
+import { findKonnectorPolicy } from '../../konnector-policies'
 import FlowProvider from '../FlowProvider'
 import { useFlowState } from '../../models/withConnectionFlow'
 
@@ -24,7 +24,7 @@ export const DumbLaunchTriggerCard = ({ flow, className, f, t, disabled }) => {
   const { launch, konnector } = flow
   const { trigger, running, expectingTriggerLaunch } = flowState
   const lastSuccessDate = triggers.getLastSuccessDate(trigger)
-  const isKonnectorRunnable = isRunnable({ win: window, konnector })
+  const isKonnectorRunnable = findKonnectorPolicy(konnector).isRunnable()
 
   return (
     <Card className={className}>

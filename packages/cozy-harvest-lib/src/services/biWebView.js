@@ -21,7 +21,7 @@ import {
   isBudgetInsightConnector
 } from './budget-insight'
 import { KonnectorJobError } from '../helpers/konnectors'
-import { waitForRealtimeEvent } from './jobUtils'
+import { waitForRealtimeEvent } from '../services/jobUtils'
 import '../types'
 import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
@@ -493,7 +493,9 @@ export const createTemporaryToken = async ({ client, konnector, account }) => {
 
 export const konnectorPolicy = {
   isBIWebView: true,
-  needsTriggerCreation: flag('harvest.bi.fullwebhooks'),
+  needsAccountAndTriggerCreation: flag('harvest.bi.fullwebhooks'),
+  needsTriggerLaunch: true,
+  isRunnable: () => true,
   name: 'budget-insight-webview',
   match: isBiWebViewConnector,
   saveInVault: false,

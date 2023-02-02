@@ -1,18 +1,25 @@
 import logger from './logger'
 import { konnectorPolicy as biKonnectorPolicy } from './services/budget-insight'
 import { konnectorPolicy as biWebViewPolicy } from './services/biWebView'
+import { konnectorPolicy as cccPolicy } from './services/cccPolicy'
 
 const defaultKonnectorPolicy = {
   accountContainsAuth: true,
   saveInVault: true,
   onAccountCreation: null,
-  match: () => true,
+  // eslint-disable-next-line no-unused-vars
+  match: konnector => true,
   name: 'default',
   fetchExtraOAuthUrlParams: null,
-  refreshContracts: null
+  refreshContracts: null,
+  needsTriggerLaunch: true,
+  needsAccountAndTriggerCreation: true,
+  onLaunch: null,
+  isRunnable: () => true
 }
 
 const policies = [
+  cccPolicy,
   biWebViewPolicy,
   biKonnectorPolicy,
   defaultKonnectorPolicy

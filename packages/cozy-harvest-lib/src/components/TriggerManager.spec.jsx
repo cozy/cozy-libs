@@ -192,7 +192,10 @@ describe('TriggerManager', () => {
       })
 
       it('should show the new account form without any warning', async () => {
-        findKonnectorPolicy.mockReturnValue({ saveInVault: false })
+        findKonnectorPolicy.mockReturnValue({
+          saveInVault: false,
+          isRunnable: () => true
+        })
         const { findByLabelText, findByTitle } = render(
           <AppLike>
             <TriggerManager {...omit(props, 'vaultClient')} />

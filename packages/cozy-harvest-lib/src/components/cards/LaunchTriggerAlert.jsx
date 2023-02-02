@@ -12,7 +12,8 @@ import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 import { getAccountId, getKonnectorSlug } from '../../helpers/triggers'
-import { isRunnable, isDisconnected } from '../../helpers/konnectors'
+import { isDisconnected } from '../../helpers/konnectors'
+import { findKonnectorPolicy } from '../../konnector-policies'
 import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
 import withAdaptiveRouter from '../hoc/withRouter'
@@ -58,7 +59,7 @@ export const LaunchTriggerAlert = ({
   const isInError = !!error
   const block = isInError || (!!withMaintenanceDescription && isInMaintenance)
   const styles = useStyles({ block })
-  const isKonnectorRunnable = isRunnable({ win: window, konnector })
+  const isKonnectorRunnable = findKonnectorPolicy(konnector).isRunnable()
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
   useEffect(() => {

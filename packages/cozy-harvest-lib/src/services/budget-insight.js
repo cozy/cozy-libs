@@ -559,5 +559,8 @@ export const konnectorPolicy = {
   getAdditionalInformationNeeded,
   handleOAuthAccount,
   setSync,
-  findAccountWithBiConnection
+  findAccountWithBiConnection,
+  needsTriggerLaunch: true,
+  needsAccountAndTriggerCreation: true,
+  isRunnable: () => true
 }

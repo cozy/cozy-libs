@@ -19,7 +19,7 @@ import {
   fetchTrigger,
   ensureTrigger
 } from '../connections/triggers'
-import { KonnectorJobError, getLauncher } from '../helpers/konnectors'
+import { KonnectorJobError } from '../helpers/konnectors'
 import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
 import logger from '../logger'
 import { findKonnectorPolicy } from '../konnector-policies'
@@ -431,7 +431,7 @@ export class ConnectionFlow {
       )
 
       let cipher
-      if (konnectorPolicy.saveInVault && !konnector.clientSide) {
+      if (konnectorPolicy.saveInVault) {
         cipher = await createOrUpdateCipher(vaultClient, cipherId, {
           account,
           konnector,
@@ -443,30 +443,43 @@ export class ConnectionFlow {
         )
       }
 
-      logger.debug('ConnectionFlow: Creating/updating account...', account)
+      if (konnectorPolicy.needsAccountAndTriggerCreation) {
+        logger.debug('ConnectionFlow: Creating/updating account...', account)
+        account = await createOrUpdateAccount({
+          account,
+          cipher,
+          client,
+          flow: this,
+          konnector,
+          konnectorPolicy,
+          userCredentials
+        })
 
-      account = await createOrUpdateAccount({
-        account,
-        cipher,
-        client,
-        flow: this,
-        konnector,
-        konnectorPolicy,
-        userCredentials
-      })
+        this.account = account
 
-      this.account = account
+        logger.info(`ConnectionFlow: Saved account ${account._id}`)
 
-      logger.info(`ConnectionFlow: Saved account ${account._id}`)
-
-      if (!konnectorPolicy.needsTriggerCreation) {
-        await this.ensureTriggerAndLaunch(client, {
+        logger.debug('ConnectionFlow: Ensuring trigger...')
+        trigger = await ensureTrigger(client, {
           trigger,
           account,
           konnector,
           t
         })
+
+        await this.ensureDefaultFolderPathInAccount(client, {
+          trigger,
+          account,
+          konnector
+        })
+
+        logger.info(`Trigger is ${trigger._id}`)
+        this.trigger = trigger
+        // @ts-ignore
+        this.emit(UPDATE_EVENT)
       }
+
+      await this.launch()
       this.setState({ accountError: null })
     } catch (e) {
       logger.error(e)
@@ -558,29 +571,6 @@ export class ConnectionFlow {
     this.emit(UPDATE_EVENT)
   }
 
-  async ensureTriggerAndLaunch(client, { trigger, account, konnector, t }) {
-    logger.debug('ConnectionFlow: Ensuring trigger...')
-    this.t = t
-    const ensuredTrigger = await ensureTrigger(client, {
-      trigger,
-      account,
-      konnector,
-      t
-    })
-
-    await this.ensureDefaultFolderPathInAccount(client, {
-      trigger: ensuredTrigger,
-      account,
-      konnector
-    })
-
-    logger.info(`Trigger is ${ensuredTrigger._id}`)
-    this.trigger = ensuredTrigger
-    // @ts-ignore
-    this.emit(UPDATE_EVENT)
-    await this.launch()
-  }
-
   /**
    * Ensures there is a defaultFolderPath attribute in the account
    * if any folder is needed by the connector.
@@ -609,16 +599,15 @@ export class ConnectionFlow {
     try {
       const result = await client.query(Q('io.cozy.files').getById(folderId))
       folder = result.data
+      if (folder.path !== account.defaultFolderPath) {
+        account.defaultFolderPath = folder.path
+        const savedAccount = await saveAccount(client, konnector, account)
+        return savedAccount
+      }
     } catch (err) {
       logger.warn(
         `ConnectionFlow.ensureDefaultFolderPath: folder ${folderId} does not exist. Could not ensure defaultFolderPath. ${err.message}`
       )
-      return account
-    }
-    if (folder.path !== account.defaultFolderPath) {
-      account.defaultFolderPath = folder.path
-      const savedAccount = await saveAccount(client, konnector, account)
-      return savedAccount
     }
     return account
   }
@@ -627,8 +616,19 @@ export class ConnectionFlow {
    * Launches the job and sets everything up to follow execution.
    */
   async launch({ autoSuccessTimer = true } = {}) {
-    const computedAutoSuccessTimer =
-      autoSuccessTimer && !this.konnector?.clientSide
+    const konnectorPolicy = findKonnectorPolicy(this.konnector)
+    if (konnectorPolicy.onLaunch) {
+      konnectorPolicy.onLaunch({
+        konnector: this.konnector,
+        trigger: this.trigger,
+        account: this.account
+      })
+    }
+    if (!konnectorPolicy.needsTriggerLaunch) {
+      return
+    }
+
+    const computedAutoSuccessTimer = autoSuccessTimer
 
     logger.info('ConnectionFlow: Launching job...')
     this.setState({ status: PENDING })
@@ -645,33 +645,6 @@ export class ConnectionFlow {
     )
 
     this.job = await launchTrigger(this.client, this.trigger)
-
-    if (this.konnector?.clientSide) {
-      logger.info(
-        'This connector can be run by the launcher',
-        this.konnector.slug
-      )
-      const launcher = getLauncher({ win: window })
-      if (launcher) {
-        logger.info('Found a launcher', launcher)
-      }
-      if (launcher === 'react-native') {
-        // @ts-ignore ReactNativeWebview is injected by react-native launcher
-        window.ReactNativeWebView.postMessage(
-          JSON.stringify({
-            message: 'startLauncher',
-            value: {
-              connector: this.konnector,
-              account: this.account,
-              trigger: this.trigger,
-              job: this.job
-            }
-          })
-        )
-      } else {
-        logger.info('Found no client connector launcher')
-      }
-    }
     this.watchJob({ autoSuccessTimer: computedAutoSuccessTimer })
   }
 

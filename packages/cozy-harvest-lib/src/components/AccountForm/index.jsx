@@ -23,7 +23,8 @@ import fieldHelpers, {
   getEncryptedFieldName,
   SECRET
 } from '../../helpers/fields'
-import { KonnectorJobError, isRunnable } from '../../helpers/konnectors'
+import { KonnectorJobError } from '../../helpers/konnectors'
+import { findKonnectorPolicy } from '../../konnector-policies'
 import manifest from '../../helpers/manifest'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import withConnectionFlow from '../../models/withConnectionFlow'
@@ -293,7 +294,7 @@ export class AccountForm extends PureComponent {
                 )}
               />
             )}
-            {isRunnable({ win: window, konnector }) ? (
+            {findKonnectorPolicy(konnector).isRunnable() ? (
               <>
                 <AccountFields
                   disabled={submitting}

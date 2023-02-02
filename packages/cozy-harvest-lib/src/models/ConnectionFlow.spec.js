@@ -1,6 +1,5 @@
 import EventEmitter from 'events'
 import ConnectionFlow from './ConnectionFlow'
-import cronHelpers from 'helpers/cron'
 import { saveAccount } from '../connections/accounts'
 import {
   createTrigger,
@@ -463,11 +462,12 @@ describe('ConnectionFlow', () => {
       )
     })
 
-    it('should call ensureTriggerAndLaunch with account', async () => {
+    it('should call ensureTrigger and ensureDefaultFolderPathInAccount with account', async () => {
       const { flow, client } = setup()
-      jest
-        .spyOn(flow, 'ensureTriggerAndLaunch')
-        .mockResolvedValue(fixtures.launchedJob)
+      const ensureDefaultFolderPathInAccount = jest.spyOn(
+        flow,
+        'ensureDefaultFolderPathInAccount'
+      )
 
       await setupSubmit(flow, {
         account: fixtures.existingAccount,
@@ -475,7 +475,11 @@ describe('ConnectionFlow', () => {
         userCredentials: fixtures.credentials
       })
 
-      expect(flow.ensureTriggerAndLaunch).toHaveBeenCalledWith(
+      expect(ensureTrigger).toHaveBeenCalledWith(
+        client,
+        expect.objectContaining({ account: fixtures.updatedAccount })
+      )
+      expect(ensureDefaultFolderPathInAccount).toHaveBeenCalledWith(
         client,
         expect.objectContaining({ account: fixtures.updatedAccount })
       )
@@ -483,118 +487,69 @@ describe('ConnectionFlow', () => {
 
     it('should call ensureTriggerAndLaunch without account', async () => {
       const { flow, client } = setup()
-      jest
-        .spyOn(flow, 'ensureTriggerAndLaunch')
-        .mockResolvedValue(fixtures.launchedJob)
 
       await setupSubmit(flow, {
         userCredentials: fixtures.credentials
       })
 
-      expect(flow.ensureTriggerAndLaunch).toHaveBeenCalledWith(
+      expect(ensureTrigger).toHaveBeenCalledWith(
         client,
         expect.objectContaining({ account: fixtures.createdAccount })
       )
     })
 
-    describe('custom konnector policy', () => {
-      const bankingKonnector = {
-        ...fixtures.konnector,
-        partnership: {
-          domain: 'budget-insight.com'
-        }
-      }
-
-      const bankingAccount = {
-        ...fixtures.existingAccount,
-        ...fixtures.bankingKonnectorAccountAttributes
-      }
-
-      const onAccountCreationResult = {
-        auth: {
-          bi: {
-            connId: 7
-          }
-        }
-      }
-
-      it('should use custom konnector policy', async () => {
-        saveAccount.mockReset().mockImplementation((konnector, acc) => ({
-          ...acc,
-          _id: fixtures.updatedAccount._id
-        }))
-
-        biKonnectorPolicy.onAccountCreation
-          .mockReset()
-          .mockReturnValue(onAccountCreationResult)
-
-        const { flow, client } = setup()
-
-        jest
-          .spyOn(flow, 'ensureTriggerAndLaunch')
-          .mockResolvedValue(fixtures.launchedJob)
-
-        await setupSubmit(flow, {
-          konnector: bankingKonnector,
-          account: bankingAccount,
-          userCredentials: fixtures.bankingKonnectorAccountAttributes.auth
-        })
-
-        expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
-        expect(flow.ensureTriggerAndLaunch).toHaveBeenCalledTimes(1)
-        expect(saveAccount).toHaveBeenCalledWith(
-          client,
-          flow.konnector,
-          onAccountCreationResult
-        )
-      })
-    })
-  })
-
-  describe('ensureTriggerAndLaunch', () => {
-    beforeAll(() => {
-      jest.spyOn(cronHelpers, 'fromFrequency').mockReturnValue('0 0 0 * * 0')
-      watchKonnectorJob.mockReturnValue({ on: () => ({}) })
-    })
-
-    afterEach(() => {
-      jest.clearAllMocks()
-    })
-
-    it('should launch trigger without account', async () => {
-      const { flow, client } = setup()
-      await flow.ensureTriggerAndLaunch(client, {
-        trigger: fixtures.createdTrigger,
-        konnector: fixtures.konnector
-      })
-      expect(launchTrigger).toHaveBeenCalledTimes(1)
-      expect(launchTrigger).toHaveBeenCalledWith(
+    it('should call the launcher when needed', async () => {
+      const { client } = setup()
+      const flow = new ConnectionFlow(
         client,
-        fixtures.createdTrigger
+        fixtures.existingTrigger,
+        fixtures.clientKonnector
       )
+      window.cozy = {
+        ClientConnectorLauncher: 'react-native'
+      }
+      window.ReactNativeWebView = {
+        postMessage: jest.fn()
+      }
+
+      await flow.handleFormSubmit({ konnector: fixtures.clientKonnector })
+      expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
+        JSON.stringify({
+          message: 'startLauncher',
+          value: {
+            connector: fixtures.clientKonnector
+          }
+        })
+      )
+      expect(launchTrigger).not.toHaveBeenCalled()
+
+      delete window.cozy
+      delete window.ReactNativeWebView
     })
 
-    it('should launch trigger with account', async () => {
-      const { flow, client } = setup()
-      ensureTrigger.mockResolvedValue(fixtures.existingTrigger)
-      await flow.ensureTriggerAndLaunch(client, {
-        account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger,
-        konnector: fixtures.konnector
+    it('should not fail when no launcher is available', async () => {
+      const { client } = setup()
+      const flow = new ConnectionFlow(
+        client,
+        fixtures.existingTrigger,
+        fixtures.clientKonnector
+      )
+
+      const promise = flow.handleFormSubmit({
+        konnector: fixtures.clientKonnector
       })
-      expect(launchTrigger).toHaveBeenCalledTimes(1)
-      expect(launchTrigger).toHaveBeenCalledWith(client, {
-        ...fixtures.existingTrigger
-      })
+      expect(launchTrigger).not.toHaveBeenCalled()
+      expect(async () => await promise).not.toThrow()
     })
 
     it('should keep internal trigger up-to-date', async () => {
       const { flow, client } = setup()
       const trigger = { ...fixtures.existingTrigger }
       ensureTrigger.mockResolvedValue(trigger)
-      await flow.ensureTriggerAndLaunch(client, {
-        account: fixtures.createdAccount,
-        konnector: fixtures.konnector
+
+      await setupSubmit(flow, {
+        konnector: fixtures.konnector,
+        account: fixtures.createdAccount
       })
       expect(ensureTrigger).toHaveBeenCalledTimes(1)
       expect(ensureTrigger).toHaveBeenCalledWith(
@@ -608,10 +563,10 @@ describe('ConnectionFlow', () => {
 
     it('should not create trigger when one is passed as prop', async () => {
       const { flow, client } = setup()
-      await flow.ensureTriggerAndLaunch(client, {
-        trigger: fixtures.existingTrigger,
+      await setupSubmit(flow, {
+        konnector: fixtures.konnector,
         account: fixtures.updatedAccount,
-        konnector: fixtures.konnector
+        trigger: fixtures.existingTrigger
       })
       expect(ensureTrigger).toHaveBeenCalledWith(
         client,
@@ -622,9 +577,9 @@ describe('ConnectionFlow', () => {
     })
 
     it('should keep updated account in state', async () => {
-      const { flow, client } = setup()
+      const { flow } = setup()
       prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
-      await flow.ensureTriggerAndLaunch(client, {
+      await setupSubmit(flow, {
         account: fixtures.existingAccount,
         trigger: fixtures.existingTrigger,
         konnector: fixtures.konnector
@@ -644,17 +599,18 @@ describe('ConnectionFlow', () => {
           path: '/default/folder/path'
         }
       }))
-      await flow.ensureTriggerAndLaunch(client, {
+      await setupSubmit(flow, {
         account: fixtures.existingAccount,
         trigger: fixtures.existingTrigger,
         konnector: fixtures.konnectorWithFolder
       })
       expect(flow.account).toEqual(fixtures.updatedAccount)
-      expect(saveAccount).toHaveBeenCalledWith(
+      expect(saveAccount).toHaveBeenNthCalledWith(
+        2,
         client,
         fixtures.konnectorWithFolder,
         {
-          ...fixtures.existingAccount,
+          ...fixtures.updatedAccount,
           defaultFolderPath: '/default/folder/path'
         }
       )
@@ -665,7 +621,7 @@ describe('ConnectionFlow', () => {
       )
     })
 
-    it('should return unmodified account trigger folder does not exist', async () => {
+    it('should return unmodified account trigger when folder does not exist', async () => {
       const { flow, client } = setup()
       prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
 
@@ -673,132 +629,144 @@ describe('ConnectionFlow', () => {
         fixtures.createdTriggerWithFolder.attributes
       )
       client.query.mockRejectedValue(new Error('404'))
-      await flow.ensureTriggerAndLaunch(client, {
+      await setupSubmit(flow, {
         account: fixtures.existingAccount,
         trigger: fixtures.existingTrigger,
         konnector: fixtures.konnectorWithFolder
       })
       expect(flow.account).toEqual(fixtures.updatedAccount)
-      expect(saveAccount).not.toHaveBeenCalled()
+      expect(saveAccount).toHaveBeenCalledTimes(1)
       expect(client.query).toHaveBeenCalledWith(
         Q('io.cozy.files').getById(
           fixtures.createdTriggerWithFolder.attributes.message.folder_to_save
         )
       )
     })
-
-    it('should call the launcher when needed', async () => {
-      const { client } = setup()
-      const flow = new ConnectionFlow(
-        client,
-        fixtures.existingTrigger,
-        fixtures.clientKonnector
-      )
-      window.cozy = {
-        ClientConnectorLauncher: 'react-native'
-      }
-      window.ReactNativeWebView = {
-        postMessage: jest.fn()
-      }
-      ensureTrigger.mockImplementation(async () => fixtures.existingTrigger)
-      prepareTriggerAccount.mockResolvedValue(fixtures.updatedAccount)
-
-      await flow.ensureTriggerAndLaunch(client, {
-        account: fixtures.existingAccount,
-        trigger: fixtures.existingTrigger,
-        konnector: fixtures.konnector
-      })
-      expect(flow.account).toEqual(fixtures.updatedAccount)
-      expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
-        JSON.stringify({
-          message: 'startLauncher',
-          value: {
-            connector: fixtures.clientKonnector,
-            account: fixtures.updatedAccount,
-            trigger: fixtures.existingTrigger,
-            job: fixtures.launchedJob
-          }
-        })
-      )
-    })
-    delete window.cozy
-    delete window.ReactNativeWebView
   })
 
-  describe('expectTriggerLaunch', () => {
-    it('removes account errors', () => {
-      const { flow } = setup({ trigger: fixtures.erroredTrigger })
-      flow.setState({ accountError: 'error to hide' })
+  describe('custom konnector policy', () => {
+    const bankingKonnector = {
+      ...fixtures.konnector,
+      partnership: {
+        domain: 'budget-insight.com'
+      }
+    }
 
-      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+    const bankingAccount = {
+      ...fixtures.existingAccount,
+      ...fixtures.bankingKonnectorAccountAttributes
+    }
 
-      const { accountError } = flow.getState()
-      expect(accountError).toBe(null)
+    const onAccountCreationResult = {
+      auth: {
+        bi: {
+          connId: 7
+        }
+      }
+    }
+
+    it('should use custom konnector policy', async () => {
+      saveAccount.mockReset().mockImplementation((konnector, acc) => ({
+        ...acc,
+        _id: fixtures.updatedAccount._id
+      }))
+
+      biKonnectorPolicy.onAccountCreation
+        .mockReset()
+        .mockReturnValue(onAccountCreationResult)
+
+      const { flow, client } = setup()
+
+      jest.spyOn(flow, 'launch')
+
+      await setupSubmit(flow, {
+        konnector: bankingKonnector,
+        account: bankingAccount,
+        userCredentials: fixtures.bankingKonnectorAccountAttributes.auth
+      })
+
+      expect(biKonnectorPolicy.onAccountCreation).toHaveBeenCalledTimes(1)
+      expect(ensureTrigger).toHaveBeenCalledTimes(1)
+      expect(flow.launch).toHaveBeenCalledTimes(1)
+      expect(saveAccount).toHaveBeenCalledWith(
+        client,
+        flow.konnector,
+        onAccountCreationResult
+      )
+    })
+  })
+})
+
+describe('expectTriggerLaunch', () => {
+  it('removes account errors', () => {
+    const { flow } = setup({ trigger: fixtures.erroredTrigger })
+    flow.setState({ accountError: 'error to hide' })
+
+    flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+
+    const { accountError } = flow.getState()
+    expect(accountError).toBe(null)
+  })
+
+  it('sets the flow status to EXPECTING_TRIGGER_LAUNCH', () => {
+    const { flow } = setup({ trigger: fixtures.runningTrigger })
+
+    flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+
+    const { status } = flow.getState()
+    expect(status).toBe(EXPECTING_TRIGGER_LAUNCH)
+  })
+
+  it('starts watching for konnector jobs creation', () => {
+    const { flow } = setup({ trigger: fixtures.erroredTrigger })
+
+    flow.expectTriggerLaunch({ konnector: fixtures.konnector })
+
+    expect(realtimeMock.subscribe).toHaveBeenCalledWith(
+      'created',
+      'io.cozy.jobs',
+      expect.anything() // This is the subscribed callback
+    )
+  })
+
+  describe(`when a job for the flow's konnector has been created`, () => {
+    const konnectorJob = flow => ({
+      _id: 'job-id',
+      worker: 'konnector',
+      message: { konnector: flow.konnector.slug }
     })
 
-    it('sets the flow status to EXPECTING_TRIGGER_LAUNCH', () => {
-      const { flow } = setup({ trigger: fixtures.runningTrigger })
-
-      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
-
-      const { status } = flow.getState()
-      expect(status).toBe(EXPECTING_TRIGGER_LAUNCH)
-    })
-
-    it('starts watching for konnector jobs creation', () => {
+    it('stops watching for konnector jobs creation', async () => {
       const { flow } = setup({ trigger: fixtures.erroredTrigger })
-
       flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
-      expect(realtimeMock.subscribe).toHaveBeenCalledWith(
+      const job = konnectorJob(flow)
+      realtimeMock.events.emit(realtimeMock.key('created', 'io.cozy.jobs'), job)
+
+      expect(realtimeMock.unsubscribe).toHaveBeenCalledWith(
         'created',
         'io.cozy.jobs',
-        expect.anything() // This is the subscribed callback
+        expect.anything()
       )
     })
 
-    describe(`when a job for the flow's konnector has been created`, () => {
-      const konnectorJob = flow => ({
-        _id: 'job-id',
-        worker: 'konnector',
-        message: { konnector: flow.konnector.slug }
-      })
+    it('starts watching for updates on the job itself', () => {
+      const { flow } = setup({ trigger: fixtures.erroredTrigger })
+      flow.expectTriggerLaunch({ konnector: fixtures.konnector })
 
-      it('stops watching for konnector jobs creation', async () => {
-        const { flow } = setup({ trigger: fixtures.erroredTrigger })
-        flow.expectTriggerLaunch({ konnector: fixtures.konnector })
-
+      const watchJobSpy = jest.spyOn(flow, 'watchJob')
+      try {
         const job = konnectorJob(flow)
         realtimeMock.events.emit(
           realtimeMock.key('created', 'io.cozy.jobs'),
           job
         )
 
-        expect(realtimeMock.unsubscribe).toHaveBeenCalledWith(
-          'created',
-          'io.cozy.jobs',
-          expect.anything()
-        )
-      })
-
-      it('starts watching for updates on the job itself', () => {
-        const { flow } = setup({ trigger: fixtures.erroredTrigger })
-        flow.expectTriggerLaunch({ konnector: fixtures.konnector })
-
-        const watchJobSpy = jest.spyOn(flow, 'watchJob')
-        try {
-          const job = konnectorJob(flow)
-          realtimeMock.events.emit(
-            realtimeMock.key('created', 'io.cozy.jobs'),
-            job
-          )
-
-          expect(flow.job).toEqual(job)
-          expect(flow.watchJob).toHaveBeenCalled()
-        } finally {
-          watchJobSpy.mockRestore()
-        }
-      })
+        expect(flow.job).toEqual(job)
+        expect(flow.watchJob).toHaveBeenCalled()
+      } finally {
+        watchJobSpy.mockRestore()
+      }
     })
   })
 })

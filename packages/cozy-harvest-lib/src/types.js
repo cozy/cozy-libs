@@ -56,7 +56,10 @@
  * @property {Boolean} isBIWebView
  * @property {Function} sendAdditionalInformation
  * @property {Function} getAdditionalInformationNeeded
- * @property {Boolean} needsTriggerCreation
+ * @property {Boolean} needsAccountAndTriggerCreation
+ * @property {Boolean} needsTriggerLaunch
+ * @property {Function} onLaunch
+ * @property {Boolean} isRunnable
  */
 
 /**

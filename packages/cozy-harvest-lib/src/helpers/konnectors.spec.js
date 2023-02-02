@@ -6,8 +6,6 @@ import {
   KonnectorJobError,
   needsFolder,
   getErrorLocale,
-  getLauncher,
-  isRunnable,
   getErrorLocaleBound
 } from 'helpers/konnectors'
 
@@ -267,34 +265,6 @@ describe('Konnectors Helpers', () => {
       )
       expect(error.code).toBe('NOT_YET_IMPLEMENTED.AT_LEAST_IN_HARVEST')
       expect(error.type).toBe('UNKNOWN_ERROR')
-    })
-  })
-
-  describe('getLauncher', () => {
-    it('should get the current Launcher from the given window object', () => {
-      const cozy = {
-        ClientConnectorLauncher: 'test-react-native'
-      }
-      expect(getLauncher({ win: { cozy } })).toEqual('test-react-native')
-    })
-    it('should should return null if no launcher is available', () => {
-      expect(getLauncher({ win: {} })).toBe(null)
-    })
-  })
-
-  describe('isRunnable', () => {
-    const cozy = {
-      ClientConnectorLauncher: 'test-react-native'
-    }
-    const konnector = { clientSide: true }
-    it('should return true if konnector is clientSide and a launcher is available', () => {
-      expect(isRunnable({ win: { cozy }, konnector })).toBe(true)
-    })
-    it('should should return true if not ClientSide', () => {
-      expect(isRunnable({ win: {}, konnector: {} })).toBe(true)
-    })
-    it('should should return false in other case', () => {
-      expect(isRunnable({ win: {}, konnector })).toBe(false)
     })
   })
 })
