@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.0.0...cozy-harvest-lib@13.0.1) (2023-02-02)
+
+
+### Bug Fixes
+
+* **harvest-lib:** Redirection when close EditAccountModal ([3b0dc42](https://github.com/cozy/cozy-libs/commit/3b0dc420d7b3b37f8bebeedfccba87ff8a6b027f))
+
+
+
+
+
 # [13.0.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@12.8.1...cozy-harvest-lib@13.0.0) (2023-02-02)
 
 
