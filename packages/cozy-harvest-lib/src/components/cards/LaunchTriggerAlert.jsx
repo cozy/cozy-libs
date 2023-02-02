@@ -148,7 +148,8 @@ export const LaunchTriggerAlert = ({
                 konnector,
                 trigger,
                 running,
-                expectingTriggerLaunch
+                expectingTriggerLaunch,
+                isInMaintenance
               })}
             </Typography>
             {block && (
