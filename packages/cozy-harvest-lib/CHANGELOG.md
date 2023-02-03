@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.0.1...cozy-harvest-lib@13.1.0) (2023-02-03)
+
+
+### Bug Fixes
+
+* **harvest:** Move variables before use ([1aea052](https://github.com/cozy/cozy-libs/commit/1aea052824f2c5247531eb1e54ac71888655dd75))
+
+
+### Features
+
+* **harvest:** Add a maintenance message as a suffix ([fad4f45](https://github.com/cozy/cozy-libs/commit/fad4f458edac5d5ef7863e23da014753e6a68b7e))
+* The sync button must redirect to the connection modal ([20ac4f8](https://github.com/cozy/cozy-libs/commit/20ac4f8d81c9823c40b376f439e3a49f9214456e))
+
+
+
+
+
 ## [13.0.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.0.0...cozy-harvest-lib@13.0.1) (2023-02-02)
 
 
