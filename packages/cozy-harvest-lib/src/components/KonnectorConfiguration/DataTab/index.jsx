@@ -61,7 +61,7 @@ export const DataTab = ({
           <LaunchTriggerCard
             konnectorRoot={konnectorRoot}
             flow={flow}
-            withDescription
+            withMaintenanceDescription
           />
           {isMobile && <Divider style={styles.divider} />}
         </>
