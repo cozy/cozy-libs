@@ -17,7 +17,7 @@ import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 
 const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
   const client = useClient()
-  const { running, trigger } = useFlowState(flow)
+  const { running, trigger, error } = useFlowState(flow)
   const { launch, konnector } = flow
   const {
     data: { isInMaintenance }
@@ -26,6 +26,17 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
 
   const anchorRef = useRef()
   const [showOptions, setShowOptions] = useState(false)
+
+  const isInError = !!error
+  const SyncButtonAction = isInError
+    ? () =>
+        historyAction(
+          konnectorRoot
+            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+            : '/edit',
+          'push'
+        )
+    : () => launch({ autoSuccessTimer: false })
 
   return (
     <>
@@ -42,7 +53,7 @@ const LaunchTriggerAlertMenu = ({ flow, t, konnectorRoot, historyAction }) => {
             <ActionMenuItem
               left={<Icon icon={SyncIcon} />}
               onClick={() => {
-                launch({ autoSuccessTimer: false })
+                SyncButtonAction()
                 setShowOptions(false)
               }}
             >
