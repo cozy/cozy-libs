@@ -278,7 +278,12 @@
     },
     "empty": "Vous n'avez aucun papier dans ce thème.",
     "expired": "Expiré",
-    "expiresIn": "Expire dans %{duration}"
+    "expiresIn": "Expire dans %{duration}",
+    "noPaperSync": {
+      "title": "Aucun papier",
+      "text": "Le fournisseur n'a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement ou à la prochaine synchronisation lorsque il sera publié.",
+      "button": "Ajouter manuellement"
+    }
   },
   "PlaceholdersList": {
     "title": "Nouveau papier%{name}"
