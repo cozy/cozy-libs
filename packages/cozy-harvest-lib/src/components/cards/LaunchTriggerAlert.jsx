@@ -27,9 +27,10 @@ const useStyles = makeStyles({
   root: {
     padding: '.5rem 1rem'
   },
-  message: {
-    maxWidth: ({ block }) => block && 'calc(100% - 16px - .5rem)' // 16px is the size of the icon
-  },
+  message: ({ block }) =>
+    block && {
+      maxWidth: 'calc(100% - 16px - .5rem)' // 16px is the size of the icon
+    },
   action: {
     marginRight: '-.5rem'
   },
@@ -43,7 +44,7 @@ export const LaunchTriggerAlert = ({
   t,
   konnectorRoot,
   historyAction,
-  withDescription
+  withMaintenanceDescription
 }) => {
   const client = useClient()
   const [showSuccessSnackbar, setShowSuccessSnackbar] = useState(false)
@@ -53,10 +54,10 @@ export const LaunchTriggerAlert = ({
   const {
     data: { isInMaintenance, messages: maintenanceMessages }
   } = useMaintenanceStatus(client, konnector)
-  const styles = useStyles({ block })
 
   const isInError = !!error
-  const block = withDescription && (isInError || isInMaintenance)
+  const block = isInError || (!!withMaintenanceDescription && isInMaintenance)
+  const styles = useStyles({ block })
   const isKonnectorRunnable = isRunnable({ win: window, konnector })
   const isKonnectorDisconnected = isDisconnected(konnector, trigger)
 
