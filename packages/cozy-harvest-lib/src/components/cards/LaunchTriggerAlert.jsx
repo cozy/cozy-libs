@@ -11,7 +11,7 @@ import Snackbar from 'cozy-ui/transpiled/react/Snackbar'
 import WrenchCircleIcon from 'cozy-ui/transpiled/react/Icons/WrenchCircle'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { getKonnectorSlug } from '../../helpers/triggers'
+import { getAccountId, getKonnectorSlug } from '../../helpers/triggers'
 import { isRunnable, isDisconnected } from '../../helpers/konnectors'
 import { useFlowState } from '../../models/withConnectionFlow'
 import { SUCCESS } from '../../models/flowEvents'
@@ -67,6 +67,16 @@ export const LaunchTriggerAlert = ({
     }
   }, [status])
 
+  const SyncButtonAction = isInError
+    ? () =>
+        historyAction(
+          konnectorRoot
+            ? `${konnectorRoot}/accounts/${getAccountId(trigger)}/edit`
+            : '/edit',
+          'push'
+        )
+    : () => launch({ autoSuccessTimer: false })
+
   return (
     <>
       <Alert
@@ -105,7 +115,7 @@ export const LaunchTriggerAlert = ({
                   size="small"
                   disabled={running}
                   label={t('card.launchTrigger.button.label')}
-                  onClick={() => launch({ autoSuccessTimer: false })}
+                  onClick={SyncButtonAction}
                 />
               )}
               {!block && (
