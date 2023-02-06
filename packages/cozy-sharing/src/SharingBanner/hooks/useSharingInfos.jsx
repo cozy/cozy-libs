@@ -12,7 +12,7 @@ const getSharingId = permission => {
   return sharingId
 }
 
-export const useSharingInfos = () => {
+export const useSharingInfos = (previewPath = '/preview') => {
   const client = useClient()
 
   const [discoveryLink, setDiscoveryLink] = useState()
@@ -52,12 +52,12 @@ export const useSharingInfos = () => {
       }
     }
 
-    if (window.location.pathname === '/preview') {
+    if (window.location.pathname === previewPath) {
       loadSharingDiscoveryLink()
     } else {
       setLoading(false)
     }
-  }, [client])
+  }, [client, previewPath])
 
   return {
     sharing,
