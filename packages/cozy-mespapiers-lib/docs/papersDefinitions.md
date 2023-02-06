@@ -1,22 +1,3 @@
-The `papersDefinitions.json` file is the configuration file that controls part of the display and all the creation of a paper.
-
-Let's see how it is built:
-
-# Suggestions order
-
-| Label | PlaceholderIndex |
-| :---: | :---: |
-| `national_id_card` | 1 |
-| `driver_license(FR)` | 2 |
-| `driver_license` | 3 |
-| `passport` | 4 |
-| `isp_invoice` | 5 |
-| `tax_notice` | 6 |
-| `resume` | 7 |
-| `health_insurance_card` | 8 |
-
-***
-
 # Attributes of the `papersDefinitions`:
 
 *Properties surrounded by `[]` are optional.*
@@ -25,9 +6,9 @@ Let's see how it is built:
 
   - `label`: {string} Equal a label of [qualification](https://github.com/cozy/cozy-client/blob/master/packages/cozy-client/src/assets/qualifications.json).
   - `icon`: {string} Name of the [icon](https://docs.cozy.io/cozy-ui/react/#!/Icon/11) to use in the suggestion display (placeholder).
-  - `[placeholderIndex]`: {number} Presence and position in suggestion (without filter).
+  - `[placeholderIndex]`: {number} Presence and position in suggestion (without filter), see [here](./placeholderIndex) for more information.
   - `[featureDate]`: {string} Date to be highlighted, when several date steps are present.
-  - *`[filenameModel]`: {string\[]} Allows to structure the final name of the paper.*
+  - *`[filenameModel]`: {string\[]} Allows to build the final name of the paper.*
     - *The accepted values are:*
       - *`label`: Reference to the qualification label.*
       - *`featureDate`: Reference to the highlighted date.*
@@ -35,9 +16,10 @@ Let's see how it is built:
       - *`name`: Value of the attribute present in the [`information`](#information-field-attributes) step.*
       - *`labelGivenByUser`: Value of the attribute present in the [`information`](#information-field-attributes) step.*
   - `maxDisplay`: {number} Specifies the number of this type of paper to be displayed once created.
-  - `connectorCriteria`: {object} Allows to propose the installation of a connector before the steps of creation of a paper.
-    - `[name]`: {string} Name of the connector.
-    - `[category]`: {string} Connector category.
+  - `[connectorCriteria]`: {object} Allows to propose the installation of a connector before the steps of creation of a paper.
+    - - *Only one of the following properties is accepted:*
+      - `name`: {string} Name of the connector.
+      - `category`: {string} Connector category.
   - [`acquisitionSteps`](#steps-of-the-acquisitionsteps-property): {object\[]} Contains the steps of the creation process.
     - [`scan`](#step-scan) {object} Step to select a file (image/pdf).
     - [`[information]`](#step-information) {object} Step to get more informations about this file.
