@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.0.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@20.0.1...cozy-mespapiers-lib@20.0.2) (2023-02-06)
+
+
+### Bug Fixes
+
+* **mespapiers:** Harvest banner wasn't refresh after deco or reconnect ([79b67b4](https://github.com/cozy/cozy-libs/commit/79b67b4a861ca7fbe77c9b8d555ee97e9bb73a38))
+
+
+
+
+
 ## [20.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@20.0.0...cozy-mespapiers-lib@20.0.1) (2023-02-06)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
