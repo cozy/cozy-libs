@@ -169,6 +169,14 @@ However you need to run `yarn install` to run the tests in the lib with `yarn te
 
 ## Papers definitions
 
-The definitions of the papers is in the file [`papersDefinitions.json`](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/src/constants/papersDefinitions.json)
+- The [`papersDefinitions.json`][papersDefinitionsJSONLink] file is the configuration file that controls part of the display and all the creation of a paper.
 
-- [Documentation](https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/docs/papersDefinitions.md)
+  Let's see how it is built: [PapersDefinitions.md][papersDefinitionsDOCLink]
+
+- To add a new paper configuration, you can follow these [guidelines][addPaperGuidelinesDOCLink]
+
+[papersDefinitionsJSONLink]: https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/src/constants/papersDefinitions.json
+
+[papersDefinitionsDOCLink]: https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/docs/papersDefinitions.md
+
+[addPaperGuidelinesDOCLink]: https://github.com/cozy/cozy-libs/blob/master/packages/cozy-mespapiers-lib/doc/addPaperGuidelines.md
