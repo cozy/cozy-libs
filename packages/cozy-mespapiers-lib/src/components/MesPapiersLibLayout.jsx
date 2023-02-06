@@ -9,6 +9,7 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 
+import { FILES_DOCTYPE, TRIGGERS_DOCTYPE, SETTINGS_DOCTYPE } from '../doctypes'
 import { ModalStack } from './Contexts/ModalProvider'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
 
@@ -35,9 +36,9 @@ export const MesPapiersLibLayout = () => {
       ) : (
         <Outlet />
       )}
-      <RealTimeQueries doctype="io.cozy.files" />
-      <RealTimeQueries doctype="io.cozy.triggers" />
-      <RealTimeQueries doctype="io.cozy.mespapiers.settings" />
+      <RealTimeQueries doctype={FILES_DOCTYPE} />
+      <RealTimeQueries doctype={TRIGGERS_DOCTYPE} />
+      <RealTimeQueries doctype={SETTINGS_DOCTYPE} />
       <Alerter t={t} />
       <ModalStack />
     </>
