@@ -789,6 +789,7 @@ describe('handleOAuthAccount', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnector)
     flow.account = account
     flow.handleFormSubmit = jest.fn()
@@ -820,6 +821,7 @@ describe('setSync', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnector)
     flow.account = account
     flow.handleFormSubmit = jest.fn()
@@ -857,6 +859,7 @@ describe('updateBIConnectionFromFlow', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const biConnId = 'conn-1337'
     const account = { data: { auth: { bi: { connId: biConnId } } } }
     const flow = new ConnectionFlow(client, null, konnector)
@@ -886,6 +889,7 @@ describe('sendTwoFACode', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const biConnId = 'conn-1337'
     const account = { data: { auth: { bi: { connId: biConnId } } } }
     const flow = new ConnectionFlow(client, null, konnector)
@@ -899,6 +903,7 @@ describe('sendTwoFACode', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const biConnId = 'conn-1337'
     const account = { data: { auth: { bi: { connId: biConnId } } } }
     const flow = new ConnectionFlow(client, null, konnector)

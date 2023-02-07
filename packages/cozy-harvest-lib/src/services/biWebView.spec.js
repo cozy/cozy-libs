@@ -29,6 +29,11 @@ jest.mock('./jobUtils', () => ({
   waitForRealtimeEvent: jest.fn()
 }))
 
+const realtimeMock = {
+  subscribe: jest.fn(),
+  unsubscribe: jest.fn()
+}
+
 const TEST_BANK_COZY_ID = '100000'
 
 const konnector = {
@@ -70,6 +75,7 @@ describe('handleOAuthAccount', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnector)
     flow.account = account
     flow.handleFormSubmit = jest.fn()
@@ -98,6 +104,7 @@ describe('handleOAuthAccount', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnector)
     flow.account = account
     flow.handleFormSubmit = jest.fn()
@@ -123,6 +130,7 @@ describe('checkBIConnection', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnector)
     jest.spyOn(client, 'query').mockImplementation(async () => ({ data: [] }))
 
@@ -211,6 +219,7 @@ describe('refreshContracts', () => {
     const client = new CozyClient({
       uri: 'http://testcozy.mycozy.cloud'
     })
+    client.plugins = { realtime: realtimeMock }
     client.store.dispatch = jest.fn()
     client.query = jest
       .fn()
