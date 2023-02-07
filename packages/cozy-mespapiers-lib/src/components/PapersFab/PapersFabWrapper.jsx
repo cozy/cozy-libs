@@ -13,8 +13,8 @@ import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import PaperFabUI from './PaperFabUI'
 
 const PapersFabWrapper = ({ children }) => {
-  const [showGeneralMenuOptions, setGeneralMenuOptions] = useState(false)
-  const [showConnectorActionMenu, setShowConnectorActionMenu] = useState(false)
+  const [showGeneralMenu, setShowGeneralMenu] = useState(false)
+  const [showConnectorMenu, setShowConnectorMenu] = useState(false)
   const actionBtnRef = useRef()
   const client = useClient()
   const { fileTheme } = useParams()
@@ -22,9 +22,9 @@ const PapersFabWrapper = ({ children }) => {
   const { search, pathname } = useLocation()
   const country = new URLSearchParams(search).get('country')
 
-  const hideGeneralMenuOption = () => setGeneralMenuOptions(false)
+  const hideGeneralMenu = () => setShowGeneralMenu(false)
   const toggleActionsMenu = () => {
-    setGeneralMenuOptions(prev => !prev)
+    setShowGeneralMenu(prev => !prev)
   }
 
   const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
@@ -46,11 +46,11 @@ const PapersFabWrapper = ({ children }) => {
 
   const showImportDropdown = paperDefinition => {
     if (paperDefinition.connectorCriteria) {
-      setShowConnectorActionMenu(true)
+      setShowConnectorMenu(true)
     } else {
       redirectPaperCreation(paperDefinition)
     }
-    hideGeneralMenuOption()
+    hideGeneralMenu()
   }
 
   const actionList = []
@@ -59,7 +59,7 @@ const PapersFabWrapper = ({ children }) => {
 
   const actions = makeActions(actionList, {
     client,
-    hideActionsMenu: hideGeneralMenuOption,
+    hideActionsMenu: hideGeneralMenu,
     showImportDropdown,
     fileTheme,
     country
@@ -74,16 +74,16 @@ const PapersFabWrapper = ({ children }) => {
 
   const props = {
     PapersFabOverrided,
-    generalMenuOptions: {
-      showGeneralMenuOptions,
+    generalMenuProps: {
+      showGeneralMenu,
       actions,
-      hideGeneralMenuOption
+      onClose: hideGeneralMenu
     },
-    connectorActionMenuOptions: {
-      showConnectorActionMenu,
-      paperDefinition,
-      hideConnectorActionMenu: () => setShowConnectorActionMenu(false),
-      onClickConnectorActionMenu: () => redirectPaperCreation(paperDefinition)
+    connectorMenuProps: {
+      showConnectorMenu,
+      placeholder: paperDefinition,
+      onClose: () => setShowConnectorMenu(false),
+      onClick: () => redirectPaperCreation(paperDefinition)
     }
   }
 
