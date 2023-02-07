@@ -3,24 +3,24 @@ import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
 
-import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
-import { ActionsItems } from '../Actions/ActionsItems'
 import { makeActions } from '../Actions/utils'
 import { createPaper } from '../Actions/Items/createPaper'
 import { select } from '../Actions/Items/select'
+import PaperFabUI from './PaperFabUI'
 
 const PapersFabWrapper = ({ children }) => {
-  const [generalOptions, setGeneralOptions] = useState(false)
+  const [showGeneralMenuOptions, setGeneralMenuOptions] = useState(false)
   const actionBtnRef = useRef()
   const client = useClient()
 
-  const hideActionsMenu = () => setGeneralOptions(false)
+  const hideGeneralMenuOption = () => setGeneralMenuOptions(false)
   const toggleActionsMenu = () => {
-    setGeneralOptions(prev => !prev)
+    setGeneralMenuOptions(prev => !prev)
   }
+
   const actions = makeActions([createPaper, select], {
     client,
-    hideActionsMenu
+    hideActionsMenu: hideGeneralMenuOption
   })
 
   if (!children) return null
@@ -30,17 +30,16 @@ const PapersFabWrapper = ({ children }) => {
     innerRef: actionBtnRef
   })
 
-  return (
-    <>
-      {PapersFabOverrided}
+  const props = {
+    PapersFabOverrided,
+    generalMenuOptions: {
+      showGeneralMenuOptions,
+      actions,
+      hideGeneralMenuOption
+    }
+  }
 
-      {generalOptions && (
-        <ActionMenuWrapper onClose={hideActionsMenu} ref={actionBtnRef}>
-          <ActionsItems actions={actions} />
-        </ActionMenuWrapper>
-      )}
-    </>
-  )
+  return <PaperFabUI {...props} ref={actionBtnRef} />
 }
 
 PapersFabWrapper.propTypes = {
