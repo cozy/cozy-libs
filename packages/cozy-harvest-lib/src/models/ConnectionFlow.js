@@ -164,6 +164,8 @@ export class ConnectionFlow {
     this.handleAccountUpdated = this.handleAccountUpdated.bind(this)
     this.handleCurrentJobUpdated = this.handleCurrentJobUpdated.bind(this)
     this.handleTriggerJobUpdated = this.handleTriggerJobUpdated.bind(this)
+    this.handleTriggerDeleted = this.handleTriggerDeleted.bind(this)
+    this.handleTriggerCreated = this.handleTriggerCreated.bind(this)
     this.handleAccountTwoFA = this.handleAccountTwoFA.bind(this)
     this.launch = this.launch.bind(this)
     this.sendTwoFACode = this.sendTwoFACode.bind(this)
@@ -183,6 +185,7 @@ export class ConnectionFlow {
 
     this.watchCurrentJobIfTriggerIsAlreadyRunning()
     this.watchTriggerJobs()
+    this.watchTriggers()
   }
 
   getTwoFACodeProvider() {
@@ -479,6 +482,27 @@ export class ConnectionFlow {
     }
   }
 
+  handleTriggerCreated(trigger) {
+    if (
+      this.konnector.slug !== trigger?.message?.konnector ||
+      this.trigger !== null
+    ) {
+      return // filter out trigger associated to konnector or if a current trigger already exists
+    }
+
+    this.trigger = trigger
+    // @ts-ignore
+    this.emit(UPDATE_EVENT)
+  }
+
+  handleTriggerDeleted(trigger) {
+    if (this.trigger?._id !== trigger?._id) return // filter out trigger associated to current trigger
+
+    this.reset()
+    // @ts-ignore
+    this.emit(UPDATE_EVENT)
+  }
+
   handleAccountUpdated(account) {
     const prevAccount = this.account
 
@@ -664,6 +688,22 @@ export class ConnectionFlow {
   }
 
   /**
+   * Watch all triggers
+   */
+  watchTriggers() {
+    this.realtime.subscribe(
+      'deleted',
+      'io.cozy.triggers',
+      this.handleTriggerDeleted
+    )
+    this.realtime.subscribe(
+      'created',
+      'io.cozy.triggers',
+      this.handleTriggerCreated
+    )
+  }
+
+  /**
    * Watch all jobs related to the current trigger
    */
   watchTriggerJobs() {
@@ -726,6 +766,16 @@ export class ConnectionFlow {
       JOBS_DOCTYPE,
       this.job._id,
       this.handleCurrentJobUpdated.bind(this)
+    )
+    this.realtime.unsubscribe(
+      'deleted',
+      'io.cozy.triggers',
+      this.handleTriggerDeleted
+    )
+    this.realtime.unsubscribe(
+      'created',
+      'io.cozy.triggers',
+      this.handleTriggerCreated
     )
   }
 
