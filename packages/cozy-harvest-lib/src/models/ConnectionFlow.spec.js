@@ -201,6 +201,100 @@ describe('ConnectionFlow', () => {
         _id: 'running-job-id'
       })
     })
+
+    describe('handleTriggerCreated', () => {
+      it('should add a new trigger if there is no current trigger and the trigger parameter is associated with the current connector', () => {
+        const { flow } = setup({ trigger: null })
+        const { trigger: initialTrigger } = flow.getState()
+
+        expect(initialTrigger).toBeNull()
+
+        realtimeMock.events.emit(
+          realtimeMock.key('created', 'io.cozy.triggers'),
+          {
+            ...fixtures.createdTrigger
+          }
+        )
+        const { trigger } = flow.getState()
+
+        expect(trigger).toEqual(fixtures.createdTrigger)
+      })
+
+      it('should not add a new trigger if there is no current trigger and the trigger parameter is not associated with the current connector', () => {
+        const { flow } = setup({ trigger: null })
+        const { trigger: initialTrigger } = flow.getState()
+
+        expect(initialTrigger).toBeNull()
+
+        realtimeMock.events.emit(
+          realtimeMock.key('created', 'io.cozy.triggers'),
+          {
+            ...fixtures.createdTrigger,
+            message: {
+              ...fixtures.createdTrigger.message,
+              konnector: 'other-connector-slug'
+            }
+          }
+        )
+        const { trigger } = flow.getState()
+
+        expect(trigger).toEqual(null)
+      })
+
+      it('should not overwrite the current trigger if it already exists, even if the trigger parameter is associated with the current connector', () => {
+        const { flow } = setup({ trigger: fixtures.createdTrigger })
+        const { trigger: initialTrigger } = flow.getState()
+
+        expect(initialTrigger).toEqual(fixtures.createdTrigger)
+
+        realtimeMock.events.emit(
+          realtimeMock.key('created', 'io.cozy.triggers'),
+          {
+            ...fixtures.createdTriggerWithFolder
+          }
+        )
+        const { trigger } = flow.getState()
+
+        expect(trigger).toEqual(fixtures.createdTrigger)
+      })
+    })
+
+    describe('handleTriggerDeleted', () => {
+      it('should remove the trigger if it has the same current trigger', () => {
+        const { flow } = setup({ trigger: fixtures.createdTrigger })
+        const { trigger: initialTrigger } = flow.getState()
+
+        expect(initialTrigger).toEqual(fixtures.createdTrigger)
+
+        realtimeMock.events.emit(
+          realtimeMock.key('deleted', 'io.cozy.triggers'),
+          {
+            ...fixtures.createdTrigger
+          }
+        )
+        const { trigger } = flow.getState()
+
+        expect(trigger).toBeNull()
+      })
+
+      it('should not delete the trigger if it does not have the same current trigger', () => {
+        const { flow } = setup({ trigger: fixtures.createdTrigger })
+        const { trigger: initialTrigger } = flow.getState()
+
+        expect(initialTrigger).toEqual(fixtures.createdTrigger)
+
+        realtimeMock.events.emit(
+          realtimeMock.key('deleted', 'io.cozy.triggers'),
+          {
+            ...fixtures.createdTrigger,
+            _id: 'another-created-trigger-id'
+          }
+        )
+        const { trigger } = flow.getState()
+
+        expect(trigger).toEqual(fixtures.createdTrigger)
+      })
+    })
   })
 
   describe('getState', () => {

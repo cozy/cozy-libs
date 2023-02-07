@@ -123,6 +123,10 @@ const fixtures = {
       status: 'done',
       last_executed_job_id: 'old-job-id'
     },
+    message: {
+      account: 'updated-account-id',
+      konnector: 'konnectest'
+    },
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
@@ -139,6 +143,10 @@ const fixtures = {
     current_state: {
       status: 'errored',
       last_error: 'last error message'
+    },
+    message: {
+      account: 'updated-account-id',
+      konnector: 'konnectest'
     },
     attributes: {
       arguments: '0 0 0 * * 0',
@@ -158,6 +166,10 @@ const fixtures = {
       status: 'running',
       last_executed_job_id: 'running-job-id'
     },
+    message: {
+      account: 'updated-account-id',
+      konnector: 'konnectest'
+    },
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
@@ -171,6 +183,11 @@ const fixtures = {
   createdTriggerWithFolder: {
     id: 'created-trigger-id',
     _type: 'io.cozy.triggers',
+    message: {
+      account: 'updated-account-id',
+      konnector: 'konnectest',
+      folder_to_save: 'folder-id'
+    },
     attributes: {
       arguments: '0 0 0 * * 0',
       type: '@cron',
