@@ -35,6 +35,7 @@ const PapersFabWrapper = ({ children }) => {
   )[0]
 
   const redirectPaperCreation = placeholder => {
+    setShowConnectorMenu(false)
     const countrySearchParam = `${
       placeholder.country ? `country=${placeholder.country}` : ''
     }`
