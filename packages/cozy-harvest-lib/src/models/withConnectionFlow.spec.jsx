@@ -15,6 +15,11 @@ const konnectorFixture = {
   }
 }
 
+const realtimeMock = {
+  subscribe: jest.fn(),
+  unsubscribe: jest.fn()
+}
+
 const DumbTriggerStatus = ({ flowState }) => {
   return <div>{flowState.status.toString()}</div>
 }
@@ -24,6 +29,7 @@ const TriggerStatus = withConnectionFlow()(DumbTriggerStatus)
 describe('with connection flow', () => {
   it('should update correctly', () => {
     const client = new CozyClient({})
+    client.plugins = { realtime: realtimeMock }
     const flow = new ConnectionFlow(client, null, konnectorFixture)
     const root = mount(<TriggerStatus flow={flow} />)
     expect(root.find('div').text()).toBe('IDLE')
