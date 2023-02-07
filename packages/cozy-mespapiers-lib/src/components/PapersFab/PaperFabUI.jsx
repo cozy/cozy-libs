@@ -6,35 +6,24 @@ import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import { ActionsItems } from '../Actions/ActionsItems'
 
 const PaperFabUI = React.forwardRef(
-  (
-    { PapersFabOverrided, generalMenuOptions, connectorActionMenuOptions },
-    ref
-  ) => {
-    const { showGeneralMenuOptions, hideGeneralMenuOption, actions } =
-      generalMenuOptions
-    const {
-      showConnectorActionMenu,
-      paperDefinition,
-      onClickConnectorActionMenu,
-      hideConnectorActionMenu
-    } = connectorActionMenuOptions
+  ({ PapersFabOverrided, generalMenuProps, connectorMenuProps }, ref) => {
+    const { showGeneralMenu, onClose, actions } = generalMenuProps
+    const { showConnectorMenu } = connectorMenuProps
 
     return (
       <>
         {PapersFabOverrided}
 
-        {showGeneralMenuOptions && (
-          <ActionMenuWrapper onClose={hideGeneralMenuOption} ref={ref}>
+        {showGeneralMenu && (
+          <ActionMenuWrapper onClose={onClose} ref={ref}>
             <ActionsItems actions={actions} />
           </ActionMenuWrapper>
         )}
-        {showConnectorActionMenu && (
+        {showConnectorMenu && (
           <ActionMenuImportDropdown
             isOpened
-            placeholder={paperDefinition}
-            onClick={onClickConnectorActionMenu}
-            onClose={hideConnectorActionMenu}
             anchorElRef={ref}
+            {...connectorMenuProps}
           />
         )}
       </>
@@ -45,16 +34,16 @@ PaperFabUI.displayName = 'PaperFabUI'
 
 PaperFabUI.propTypes = {
   PapersFabOverrided: PropTypes.node,
-  generalMenuOptions: PropTypes.shape({
-    showGeneralMenuOptions: PropTypes.bool,
+  generalMenuProps: PropTypes.shape({
+    showGeneralMenu: PropTypes.bool,
     actions: PropTypes.arrayOf(PropTypes.object),
-    hideGeneralMenuOption: PropTypes.func
+    onClose: PropTypes.func
   }),
-  connectorActionMenuOptions: PropTypes.shape({
-    showConnectorActionMenu: PropTypes.bool,
-    paperDefinition: PropTypes.arrayOf(PropTypes.object),
-    hideConnectorActionMenu: PropTypes.func,
-    onClickConnectorActionMenu: PropTypes.func
+  connectorMenuProps: PropTypes.shape({
+    showConnectorMenu: PropTypes.bool,
+    placeholder: PropTypes.object,
+    onClose: PropTypes.func,
+    onClick: PropTypes.func
   })
 }
 
