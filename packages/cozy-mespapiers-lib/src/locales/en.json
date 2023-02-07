@@ -6,6 +6,7 @@
   },
   "action": {
     "createPaper": "Add a paper",
+    "createPaperByTheme": "Add: %{theme}",
     "download": "Download",
     "zipDownload": "Download a .zip file",
     "forward": "Forward",

@@ -6,6 +6,7 @@
   },
   "action": {
     "createPaper": "Ajouter un papier",
+    "createPaperByTheme": "Ajouter : %{theme}",
     "download": "Télécharger",
     "zipDownload": "Télécharger un .zip",
     "forward": "Transmettre",
