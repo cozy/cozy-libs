@@ -262,6 +262,18 @@
           "text": "Quelle est la date d'expiration du passeport ?"
         }
       }
+    },
+    "work_contract": {
+      "contract_type": {
+        "text": "Sélectionnez le type de contrat"
+      },
+      "options": {
+        "cdi": "CDI",
+        "cdd": "CDD",
+        "alternate": "Alternance",
+        "internship": "Stage",
+        "other": "Autre"
+      }
     }
   },
   "PapersList": {

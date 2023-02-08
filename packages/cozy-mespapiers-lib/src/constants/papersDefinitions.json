@@ -848,6 +848,42 @@
       ]
     },
     {
+      "label": "lease",
+      "icon": "home",
+      "filenameModel": ["labelGivenByUser"],
+      "featureDate": "date",
+      "maxDisplay": 10,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluGenericNewPage.svg",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "date",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
       "label": "other_identity_document",
       "icon": "personal-data",
       "filenameModel": ["labelGivenByUser"],
@@ -992,6 +1028,57 @@
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
+          "text": "PaperJSON.generic.owner.text"
+        }
+      ]
+    },
+    {
+      "label": "work_contract",
+      "icon": "company",
+      "filenameModel": ["labelGivenByUser"],
+      "featureDate": "date",
+      "maxDisplay": 10,
+      "acquisitionSteps": [
+        {
+          "stepIndex": 1,
+          "model": "scan",
+          "multipage": true,
+          "illustration": "IlluWorkContract.png",
+          "text": "PaperJSON.generic.singlePage.text"
+        },
+        {
+          "stepIndex": 2,
+          "model": "information",
+          "illustration": "Contract.svg",
+          "text": "PaperJSON.work_contract.contract_type.text",
+          "attributes": [
+            {
+              "name": "contractType",
+              "type": "radio",
+              "required": true,
+              "options": ["cdi", "cdd", "alternate", "internship"],
+              "inputLabel": "PaperJSON.generic.fileLabel.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
+          "illustration": "IlluGenericInputDate.svg",
+          "text": "PaperJSON.generic.date.text",
+          "attributes": [
+            {
+              "name": "date",
+              "type": "date",
+              "inputLabel": "PaperJSON.generic.date.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 4,
+          "illustration": "Account.svg",
+          "model": "contact",
+          "multiple": false,
           "text": "PaperJSON.generic.owner.text"
         }
       ]
