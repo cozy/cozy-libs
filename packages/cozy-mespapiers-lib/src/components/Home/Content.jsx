@@ -13,8 +13,7 @@ import HomeCloud from '../../assets/icons/HomeCloud.svg'
 
 import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
-import HomeSearchResult from './HomeSearchResult'
-import Result from './Result'
+import PapersList from './PapersList'
 
 const Content = ({
   contacts,
@@ -57,21 +56,15 @@ const Content = ({
         setSearchValue={setSearchValue}
       />
       {hasResult ? (
-        isSearching ? (
-          <HomeSearchResult
-            contacts={contacts}
-            filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
-            selectedTheme={selectedTheme}
-            searchValue={searchValue}
-          />
-        ) : (
-          <Result
-            allPapersByCategories={allPapersByCategories}
-            selectedTheme={selectedTheme}
-            searchValue={searchValue}
-            setSelectedThemeLabel={setSelectedThemeLabel}
-          />
-        )
+        <PapersList
+          contacts={contacts}
+          isSearching={isSearching}
+          selectedTheme={selectedTheme}
+          searchValue={searchValue}
+          filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
+          allPapersByCategories={allPapersByCategories}
+          setSelectedThemeLabel={setSelectedThemeLabel}
+        />
       ) : (
         <Empty
           icon={HomeCloud}
