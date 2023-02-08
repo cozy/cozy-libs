@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 1.88.0 (2023-02-08)
+
+
+### Features
+
+* Update label-slugs.js file ([a17b551](https://github.com/cozy/cozy-libs/commit/a17b5511b80a3c81bb7766893be5551a69d89953))
+
+
+
+
+
 # 1.87.0 (2023-01-31)
 
 

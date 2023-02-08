@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.5.1 (2023-02-08)
+
+
+### Bug Fixes
+
+* Migrate transifex from client to cli ([d88f57d](https://github.com/cozy/cozy-libs/commit/d88f57db1d2eb3458b64a230c4947c4b1d0f4699))
+
+
+
+
+
 # 0.5.0 (2023-01-31)
 
 
