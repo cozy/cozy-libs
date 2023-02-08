@@ -5,7 +5,7 @@ import PaperGroup from '../Papers/PaperGroup'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 
-const Result = ({
+const ResultWithoutSearch = ({
   allPapersByCategories,
   selectedTheme,
   searchValue,
@@ -28,11 +28,11 @@ const Result = ({
   )
 }
 
-Result.propTypes = {
+ResultWithoutSearch.propTypes = {
   allPapersByCategories: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   setSelectedThemeLabel: PropTypes.string,
   searchValue: PropTypes.string
 }
 
-export default Result
+export default ResultWithoutSearch

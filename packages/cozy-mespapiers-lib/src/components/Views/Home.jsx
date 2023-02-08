@@ -10,7 +10,7 @@ import {
 } from '../../helpers/queries'
 import { getContactsRefIdsByFiles } from '../Papers/helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import Content from '../Home/Content'
+import HomeLayout from '../Home/HomeLayout'
 
 const Home = ({ setSelectedThemeLabel }) => {
   const [searchValue, setSearchValue] = useState('')
@@ -60,7 +60,7 @@ const Home = ({ setSelectedThemeLabel }) => {
   }
 
   return (
-    <Content
+    <HomeLayout
       contacts={contacts}
       filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
       isSearching={isSearching}
