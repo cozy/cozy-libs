@@ -1,6 +1,5 @@
 #!/bin/bash
 
-curl -fsSL https://bootstrap.pypa.io/get-pip.py | python - --user
-pip install --user transifex-client==0.12.5
+curl -o- https://raw.githubusercontent.com/transifex/cli/master/install.sh | bash
 install -m0644 .transifexrc.tpl ~/.transifexrc
 echo "password = $TX_PASSWD" >> ~/.transifexrc
