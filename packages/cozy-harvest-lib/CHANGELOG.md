@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.2.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.1.0...cozy-harvest-lib@13.2.0) (2023-02-08)
+
+
+### Features
+
+* Add triggers realtime to ConnectionFlow ([b46616e](https://github.com/cozy/cozy-libs/commit/b46616ee9212af7609d8497eae7027cf50c7a63d))
+
+
+
+
+
 # [13.1.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.0.1...cozy-harvest-lib@13.1.0) (2023-02-03)
 
 

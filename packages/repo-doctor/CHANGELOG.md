@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 0.10.1 (2023-02-08)
+
+
+### Bug Fixes
+
+* Recipient import path not updated in last update ([56b9cfd](https://github.com/cozy/cozy-libs/commit/56b9cfdab402813527982d0ddf857f1e963850b1))
+* **repo-doctor:** Moment and Material-UI should not be dependencies ([94c9e19](https://github.com/cozy/cozy-libs/commit/94c9e1922a89f47a1948421e8f7f0dd776a0168a))
+
+
+
+
+
 # 0.10.0 (2023-01-31)
 
 
