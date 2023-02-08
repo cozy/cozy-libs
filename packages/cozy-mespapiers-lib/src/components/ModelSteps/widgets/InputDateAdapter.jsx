@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react'
 import DateFnsUtils from '@date-io/date-fns'
-import PropTypes from 'prop-types'
 import {
   MuiPickersUtilsProvider,
   KeyboardDatePicker
@@ -9,6 +8,8 @@ import {
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+
+import { defaultProptypes } from './proptypes'
 
 const useStyles = makeStyles(() => ({
   overrides: {
@@ -109,22 +110,6 @@ const InputDateAdapter = ({
   )
 }
 
-const attrsProptypes = PropTypes.shape({
-  name: PropTypes.string,
-  inputLabel: PropTypes.string,
-  type: PropTypes.string,
-  required: PropTypes.bool,
-  minLength: PropTypes.number,
-  maxLength: PropTypes.number
-})
-
-InputDateAdapter.propTypes = {
-  attrs: attrsProptypes.isRequired,
-  defaultValue: PropTypes.string,
-  setValue: PropTypes.func.isRequired,
-  setValidInput: PropTypes.func.isRequired,
-  setIsFocus: PropTypes.func.isRequired,
-  idx: PropTypes.number
-}
+InputDateAdapter.propTypes = defaultProptypes
 
 export default InputDateAdapter
