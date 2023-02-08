@@ -1,11 +1,15 @@
 import InputDateAdapter from '../components/ModelSteps/widgets/InputDateAdapter'
 import InputTextAdapter from '../components/ModelSteps/widgets/InputTextAdapter'
+import RadioAdapter from '../components/ModelSteps/widgets/RadioAdapter'
 
 const hasInputDate = ({ attrs }) => {
   return attrs.type === 'date'
 }
 const hasInputText = ({ attrs }) => {
   return attrs.type === 'text' || attrs.type === 'number'
+}
+const hasRadio = ({ attrs }) => {
+  return attrs.type === 'radio'
 }
 
 const inputInformationSpecs = {
@@ -16,6 +20,10 @@ const inputInformationSpecs = {
   text: {
     condition: hasInputText,
     component: InputTextAdapter
+  },
+  radio: {
+    condition: hasRadio,
+    component: RadioAdapter
   }
 }
 

@@ -5,6 +5,7 @@ const attrsProptypes = PropTypes.shape({
   inputLabel: PropTypes.string,
   type: PropTypes.string,
   required: PropTypes.bool,
+  options: PropTypes.array,
   minLength: PropTypes.number,
   maxLength: PropTypes.number,
   mask: PropTypes.string,
