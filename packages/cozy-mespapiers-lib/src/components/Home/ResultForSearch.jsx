@@ -8,7 +8,7 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import SearchResult from '../SearchResult/SearchResult'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 
-const HomeSearchResult = ({
+const ResultForSearch = ({
   contacts,
   filesWithPapersDefinitionsLabels,
   selectedTheme,
@@ -33,11 +33,11 @@ const HomeSearchResult = ({
   return <SearchResult filteredPapers={filteredPapers} />
 }
 
-HomeSearchResult.propTypes = {
+ResultForSearch.propTypes = {
   contacts: PropTypes.array,
   filesWithPapersDefinitionsLabels: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string
 }
 
-export default HomeSearchResult
+export default ResultForSearch
