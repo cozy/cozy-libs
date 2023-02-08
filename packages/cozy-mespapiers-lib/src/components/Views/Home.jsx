@@ -63,8 +63,6 @@ const Home = ({ setSelectedThemeLabel }) => {
     <Content
       contacts={contacts}
       filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
-      isLoadingFiles={isLoadingFiles}
-      isLoadingContacts={isLoadingContacts}
       isSearching={isSearching}
       selectedTheme={selectedTheme}
       setSelectedTheme={setSelectedTheme}

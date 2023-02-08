@@ -32,8 +32,6 @@ const Content = ({
   contacts,
   filesWithPapersDefinitionsLabels,
   isSearching,
-  isLoadingFiles,
-  isLoadingContacts,
   selectedTheme,
   setSelectedTheme,
   setSelectedThemeLabel,
@@ -63,14 +61,13 @@ const Content = ({
     [filesWithPapersDefinitionsLabels]
   )
 
-  const filesWithContacts =
-    isSearching && !isLoadingFiles && !isLoadingContacts
-      ? buildFilesWithContacts({
-          files: filesWithPapersDefinitionsLabels,
-          contacts,
-          t
-        })
-      : []
+  const filesWithContacts = isSearching
+    ? buildFilesWithContacts({
+        files: filesWithPapersDefinitionsLabels,
+        contacts,
+        t
+      })
+    : []
 
   const featuredPlaceholders = useMemo(
     () =>
@@ -153,8 +150,6 @@ Content.propTypes = {
   contacts: PropTypes.array,
   filesWithPapersDefinitionsLabels: PropTypes.array,
   isSearching: PropTypes.bool,
-  isLoadingFiles: PropTypes.bool,
-  isLoadingContacts: PropTypes.bool,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   setSelectedTheme: PropTypes.func,
   setSelectedThemeLabel: PropTypes.string,
