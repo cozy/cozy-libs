@@ -1,0 +1,153 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`account matching should correctly match axa 1`] = `
+Array [
+  "✅ Compte Courant 6272 Visa Premier -> Visa Premier (x7865) via same-type-credit-card-number",
+  "✅ Compte Courant 6272 Liquidités -> Compte Courant 6272 via number-exact",
+  "✅ Livret AXA Banque 2672 -> Livret AXA Banque 2672 via approx-number-same-type",
+]
+`;
+
+exports[`account matching should correctly match banquepopulaire 1`] = `
+Array [
+  "✅ Compte De Cheques Mlle Marie Andropov -> Compte De Cheques - Mlle Marie Andropov (x1887) via iban-exact",
+  "✅ Parts Sociales Bpri Ord... Mlle Marie Andropov -> Parts Sociales Bpri Ordinaires - Mlle Marie Andropov (x8377) via number-exact",
+  "✅ Depot Solidarite Casden Mlle Marie Andropov -> Depot Solidarite Casden - Mlle Marie Andropov (x6699) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match banquepopulaire2 1`] = `
+Array [
+  "✅ Livret De Developpement... M Tommy Mountson -> Livret De Developpement Durable Solidaire - M Tommy Mountson (x3817) via number-exact",
+  "✅ Compte Cheques M Tommy Mountson -> Compte Cheques - M Tommy Mountson (x2661) via iban-exact",
+  "✅ Depot Solidarite Pp M Philip Mountson -> Depot Solidarite Pp - M Philip Mountson (x8861) via number-exact",
+  "✅ Plan Epargne Logement M Tommy Mountson -> Plan Epargne Logement - M Tommy Mountson (x1039) via number-exact",
+  "✅ Part Sociale Bp Ordinaire M Philip Mountson -> Part Sociale Bp Ordinaire - M Philip Mountson (x9377) via number-exact",
+  "✅ Compte Cheques M Philip Mountson -> Compte Cheques - M Philip Mountson (x0161) via iban-exact",
+  "✅ Depot Solidarite Pp Mr Ou Mme Mountson Philip -> Depot Solidarite Pp - Mr Ou Mme Mountson Philip (x7932) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match banquepostale 1`] = `
+Array [
+  "✅ LIVRET A -> LIVRET A - MR SILVA SERAPHIN (x5559B) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match banquepostale2 1`] = `
+Array [
+  "⚠️ LIVRET A unmatched",
+  "⚠️ COMPTE BANCAIRE unmatched",
+  "✅ COMPTE BANCAIRE -> COMPTE BANCAIRE - MR DREVET ERIC OU (x7J748) via originalNumber-exact",
+  "⚠️ PRÊT PERSONNEL AUTO unmatched",
+  "⚠️ ASSURANCE VIE GMO ASSURANCE VIE unmatched",
+  "⚠️ LIVRET A unmatched",
+]
+`;
+
+exports[`account matching should correctly match bnp 1`] = `
+Array [
+  "✅ CEL -> CEL - Mlle LE GAEC ROMANE (****3590) via iban-exact",
+  "✅ Livret A -> Livret A - Mlle LE GAEC ROMANE (****7548) via iban-exact",
+  "✅ PEL -> PEL - Mlle LE GAEC ROMANE (****1251) via iban-exact",
+  "✅ Compte de chèques -> Compte de chèques - Mlle LE GAEC ROMANE (****9596) via iban-exact",
+  "✅ Compte Epargne -> Compte Epargne via iban-exact",
+]
+`;
+
+exports[`account matching should correctly match boursorama 1`] = `
+Array [
+  "✅ BOURSORAMA BANQUE -> BOURSORAMA BANQUE (x8103) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match caissedepargne 1`] = `
+Array [
+  "✅ CPT DEPOT PART. -> CPT DEPOT PART. - Mr Wonder Sean (x4404) via number-exact",
+  "✅ CPT PARTS SOCIALES -> CPT PARTS SOCIALES - Mr Wonder Sean (x3079) via number-exact",
+  "✅ LIVRET A -> LIVRET A - Mr Wonder Sean (x4447) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match creditagricoleaquitaine 1`] = `
+Array [
+  "✅ CCHQ -> CCHQ (x9777) via iban-exact",
+  "✅ PEL -> PEL (x3349) via number-exact",
+  "✅ CODEBIS -> CODEBIS (x3313) via number-exact",
+  "✅ LDD -> LDD (x7128) via number-exact",
+  "✅ LIV A -> LIV A (x7863) via number-exact",
+  "✅ PRED -> PRED (x1955) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match creditmutuel 1`] = `
+Array [
+  "✅ C/C Eurocompte Confort M Franz Mueller -> Compte Courant JEUNE ACTIF - M FRANZ MUELLER (x3676) via number-exact",
+  "✅ Livret Bleu M Franz Mueller -> LIVRET BLEU - M FRANZ MUELLER (x3697) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match fortuneo 1`] = `
+Array [
+  "✅ Compte courant n° 761866060707 M MUELLER FRANZ -> Compte courant (x0707) via number-exact",
+  "✅ Assurance-vie n° 761866060736-76 M MUELLER FRANZ -> Assurance-vie (x36-76) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match fortuneo2 1`] = `
+Array [
+  "✅ Test account 1 -> Test account 1 via rawNumber-exact-currency-type",
+  "✅ Test account 2 -> Test account 2 via number-exact",
+]
+`;
+
+exports[`account matching should correctly match hellobank 1`] = `
+Array [
+  "⚠️ Crédit immobilier unmatched",
+  "✅ Livret A -> Livret A - M. LOISEL LAURENT (****3222) via iban-exact",
+  "✅ Compte de chèques -> Compte de chèques - M. LOISEL LAURENT (****0752) via iban-exact",
+]
+`;
+
+exports[`account matching should correctly match hsbc 1`] = `
+Array [
+  "✅ Ldds -> LDDS (x2295) via number-exact",
+  "✅ Compte Mle Gentil Amelie -> COMPTE MLE GENTIL AMELIE (x2229) via iban-exact",
+]
+`;
+
+exports[`account matching should correctly match hsbc2 1`] = `
+Array [
+  "✅ Carte Visa Infinite -> CARTE VISA INFINITE (x1862) via number-exact",
+  "⚠️ Pret Immobilier unmatched",
+  "✅ Compte M/M M. Ou Mme Ribereau -> COMPTE M/M M. OU MME RIBEREAU (x4160) via iban-exact",
+  "✅ Compte M. Ribereau Julien -> COMPTE M. RIBEREAU JULIEN (x5904) via iban-exact",
+  "✅ Compte Mme Ribereau Emeline -> COMPTE MME RIBEREAU EMELINE (x5918) via number-exact",
+  "✅ Ct Tit Pea Gere Act (Titres+Espèces) -> CT TIT PEA GERE ACT (titres+espèces) (x0019) via number-exact",
+]
+`;
+
+exports[`account matching should correctly match ing 1`] = `
+Array [
+  "✅ Compte Courant -> Compte Courant - NATHAN EDMOND (x7527) via iban-exact",
+  "✅ Livret Epargne Orange -> Livret Epargne Orange - NATHAN EDMOND (x5672) via iban-exact",
+  "✅ Livret A -> Livret A - NATHAN EDMOND (x1562) via iban-exact",
+]
+`;
+
+exports[`account matching should correctly match milleis 1`] = `
+Array [
+  "✅ C.COURANT -> C.COURANT - MR OU MME FABIEN BASSEREAU (x0101EUR) via approx-number-same-type-currency",
+  "✅ PREMIER -> PREMIER - BASSEREAU CARINE (x7703) via approx-number-same-type",
+  "⚠️ BANQUE PRIVILEGE unmatched",
+  "✅ PREM LIFE -> PREM LIFE - MR OU MME FABIEN BASSEREAU (x5402EUR) via number-exact",
+  "✅ Titres -> Titres - MR OU MME FABIEN BASSEREAU (x0101EUR) via approx-number-currency",
+  "✅ P.E.L -> P.E.L - MR ADRIEN BASSEREAU SS/ADM LEGAL (x3901EUR) via number-exact",
+  "⚠️ E VIE MILLEIS unmatched",
+  "✅ VISAINFINITE -> VISAINFINITE - BASSEREAU FABIEN (x7566) via approx-number-same-type",
+  "✅ P.E.L -> P.E.L - MONSIEUR DIMITRI BASSEREAU (x3901EUR) via number-exact",
+  "✅ C.COURANT -> C.COURANT - MR OU MME FABIEN BASSEREAU (x0101USD) via approx-number-same-type-currency",
+  "✅ Titres -> Titres - MR OU MME FABIEN BASSEREAU (x0101USD) via number-exact",
+  "✅ P.E.L -> P.E.L - MR GAUTHIER BASSEREAU SS/ADM LEG (x3901EUR) via number-exact",
+]
+`;

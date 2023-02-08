@@ -183,14 +183,14 @@ describe('deleteDuplicateBankAccountsWithNoOperations', () => {
 
 describe('incoherences', () => {
   const incoherent = {
-    institutionLabel: "Caisse d'épargne",
+    institutionLabel: "Caisse d'Épargne Particuliers",
     cozyMetadata: {
       createdByApp: 'boursorama'
     }
   }
 
   const coherent = {
-    institutionLabel: "Caisse d'épargne",
+    institutionLabel: "Caisse d'Épargne Particuliers",
     cozyMetadata: {
       createdByApp: 'caissedepargne1'
     }
@@ -204,11 +204,11 @@ describe('incoherences', () => {
   }
 
   const noMetadata = {
-    institutionLabel: "Caisse d'épargne"
+    institutionLabel: "Caisse d'Épargne Particuliers"
   }
 
   const noCreatedByApp = {
-    institutionLabel: "Caisse d'épargne",
+    institutionLabel: "Caisse d'Épargne Particuliers",
     cozyMetadata: {}
   }
 
