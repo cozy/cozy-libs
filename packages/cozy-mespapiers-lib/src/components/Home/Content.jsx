@@ -5,18 +5,16 @@ import uniqBy from 'lodash/uniqBy'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import { buildFilesWithContacts } from '../Papers/helpers'
-import PaperGroup from '../Papers/PaperGroup'
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
-import SearchResult from '../SearchResult/SearchResult'
-import { filterPapersByThemeAndSearchValue } from './helpers'
+
 import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
+import HomeSearchResult from './HomeSearchResult'
+import Result from './Result'
 
 const Content = ({
   contacts,
@@ -29,23 +27,13 @@ const Content = ({
   setSearchValue
 }) => {
   const { t } = useI18n()
-  const scannerT = useScannerI18n()
   const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
-
   const allPapersByCategories = useMemo(
     () =>
       uniqBy(filesWithPapersDefinitionsLabels, 'metadata.qualification.label'),
     [filesWithPapersDefinitionsLabels]
   )
-
-  const filesWithContacts = isSearching
-    ? buildFilesWithContacts({
-        files: filesWithPapersDefinitionsLabels,
-        contacts,
-        t
-      })
-    : []
 
   const featuredPlaceholders = useMemo(
     () =>
@@ -57,14 +45,7 @@ const Content = ({
     [papersDefinitions, filesWithPapersDefinitionsLabels, selectedTheme]
   )
 
-  const filteredPapers = filterPapersByThemeAndSearchValue({
-    files: isSearching
-      ? filesWithContacts
-      : allPapersByCategories.map(file => ({ file })),
-    theme: selectedTheme,
-    search: searchValue,
-    scannerT
-  }).map(({ file }) => file)
+  const hasResult = allPapersByCategories.length > 0
 
   return (
     <>
@@ -75,14 +56,21 @@ const Content = ({
         searchValue={searchValue}
         setSearchValue={setSearchValue}
       />
-      {allPapersByCategories.length > 0 ? (
-        !isSearching ? (
-          <PaperGroup
-            allPapersByCategories={filteredPapers}
-            setSelectedThemeLabel={setSelectedThemeLabel}
+      {hasResult ? (
+        isSearching ? (
+          <HomeSearchResult
+            contacts={contacts}
+            filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
+            selectedTheme={selectedTheme}
+            searchValue={searchValue}
           />
         ) : (
-          <SearchResult filteredPapers={filteredPapers} />
+          <Result
+            allPapersByCategories={allPapersByCategories}
+            selectedTheme={selectedTheme}
+            searchValue={searchValue}
+            setSelectedThemeLabel={setSelectedThemeLabel}
+          />
         )
       ) : (
         <Empty
