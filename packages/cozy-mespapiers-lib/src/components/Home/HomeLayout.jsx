@@ -81,7 +81,7 @@ const HomeLayout = ({
 HomeLayout.propTypes = {
   contacts: PropTypes.array,
   filesWithPapersDefinitionsLabels: PropTypes.array,
-  setSelectedThemeLabel: PropTypes.string
+  setSelectedThemeLabel: PropTypes.func
 }
 
 export default HomeLayout

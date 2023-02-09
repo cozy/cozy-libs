@@ -40,7 +40,7 @@ Content.propTypes = {
   searchValue: PropTypes.string,
   filesWithPapersDefinitionsLabels: PropTypes.array,
   allPapersByCategories: PropTypes.array,
-  setSelectedThemeLabel: PropTypes.string
+  setSelectedThemeLabel: PropTypes.func
 }
 
 export default Content
