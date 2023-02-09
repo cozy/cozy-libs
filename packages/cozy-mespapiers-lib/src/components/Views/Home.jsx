@@ -17,7 +17,6 @@ const Home = ({ setSelectedThemeLabel }) => {
   const [selectedTheme, setSelectedTheme] = useState('')
   const { papersDefinitions } = usePapersDefinitions()
 
-  const isSearching = searchValue.length > 0 || !!selectedTheme
   const papersDefinitionsLabels = useMemo(
     () => papersDefinitions.map(paper => paper.label),
     [papersDefinitions]
@@ -44,13 +43,13 @@ const Home = ({ setSelectedThemeLabel }) => {
     contactsQueryByIds.definition,
     {
       ...contactsQueryByIds.options,
-      enabled: isSearching && !isLoadingFiles
+      enabled: !isLoadingFiles
     }
   )
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  if (isLoadingFiles || (isSearching && isLoadingContacts)) {
+  if (isLoadingFiles || isLoadingContacts) {
     return (
       <Spinner
         size="xxlarge"
@@ -63,7 +62,6 @@ const Home = ({ setSelectedThemeLabel }) => {
     <HomeLayout
       contacts={contacts}
       filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
-      isSearching={isSearching}
       selectedTheme={selectedTheme}
       setSelectedTheme={setSelectedTheme}
       setSelectedThemeLabel={setSelectedThemeLabel}
