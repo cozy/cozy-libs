@@ -9,8 +9,7 @@ const Content = ({
   filesWithPapersDefinitionsLabels,
   selectedTheme,
   searchValue,
-  allPapersByCategories,
-  setSelectedThemeLabel
+  allPapersByCategories
 }) => {
   const isSearching = searchValue.length > 0 || Boolean(selectedTheme)
 
@@ -29,7 +28,6 @@ const Content = ({
       allPapersByCategories={allPapersByCategories}
       selectedTheme={selectedTheme}
       searchValue={searchValue}
-      setSelectedThemeLabel={setSelectedThemeLabel}
     />
   )
 }
@@ -39,8 +37,7 @@ Content.propTypes = {
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string,
   filesWithPapersDefinitionsLabels: PropTypes.array,
-  allPapersByCategories: PropTypes.array,
-  setSelectedThemeLabel: PropTypes.func
+  allPapersByCategories: PropTypes.array
 }
 
 export default Content

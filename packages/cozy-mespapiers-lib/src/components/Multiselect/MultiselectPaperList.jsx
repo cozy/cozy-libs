@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -10,12 +10,13 @@ import PapersList from '../Views/PapersList'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const MultiselectPaperList = ({ setIsFilePickerActive }) => {
-  const [selectedThemeLabel, setSelectedThemeLabel] = useState(null)
   const { t } = useI18n()
   const {
     removeAllCurrentMultiSelectionFiles,
     confirmCurrentMultiSelectionFiles,
-    currentMultiSelectionFiles
+    currentMultiSelectionFiles,
+    selectedThemeLabel,
+    setSelectedThemeLabel
   } = useMultiSelection()
 
   const title =
@@ -53,13 +54,7 @@ const MultiselectPaperList = ({ setIsFilePickerActive }) => {
       size="medium"
       onBack={handleBack}
       title={title}
-      content={
-        !selectedThemeLabel ? (
-          <Home setSelectedThemeLabel={setSelectedThemeLabel} />
-        ) : (
-          <PapersList selectedThemeLabel={selectedThemeLabel} />
-        )
-      }
+      content={!selectedThemeLabel ? <Home /> : <PapersList />}
       actions={
         <>
           <Button

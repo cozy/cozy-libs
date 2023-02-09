@@ -8,8 +8,7 @@ import { filterPapersByThemeAndSearchValue } from './helpers'
 const ResultWithoutSearch = ({
   allPapersByCategories,
   selectedTheme,
-  searchValue,
-  setSelectedThemeLabel
+  searchValue
 }) => {
   const scannerT = useScannerI18n()
 
@@ -20,18 +19,12 @@ const ResultWithoutSearch = ({
     scannerT
   }).map(({ file }) => file)
 
-  return (
-    <PaperGroup
-      allPapersByCategories={filteredPapers}
-      setSelectedThemeLabel={setSelectedThemeLabel}
-    />
-  )
+  return <PaperGroup allPapersByCategories={filteredPapers} />
 }
 
 ResultWithoutSearch.propTypes = {
   allPapersByCategories: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  setSelectedThemeLabel: PropTypes.func,
   searchValue: PropTypes.string
 }
 

@@ -1,6 +1,5 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
-import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
@@ -15,9 +14,11 @@ import {
 } from '../Papers/helpers'
 import PapersListToolbar from '../Papers/PapersListToolbar'
 import PapersListByContact from '../Papers/PapersListByContact'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const PapersList = ({ selectedThemeLabel = null }) => {
+const PapersList = () => {
   const params = useParams()
+  const { selectedThemeLabel } = useMultiSelection()
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
@@ -67,10 +68,6 @@ const PapersList = ({ selectedThemeLabel = null }) => {
       />
     </>
   )
-}
-
-PapersList.propTypes = {
-  selectedThemeLabel: PropTypes.string
 }
 
 export default PapersList
