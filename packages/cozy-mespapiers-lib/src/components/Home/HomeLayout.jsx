@@ -15,30 +15,29 @@ import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
 import Content from './Content'
 
-const HomeLayout = ({ contacts, filesWithPapersDefinitionsLabels }) => {
+const HomeLayout = ({ contacts, papers }) => {
   const { t } = useI18n()
   const [selectedTheme, setSelectedTheme] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
 
-  const allPapersByCategories = useMemo(
-    () =>
-      uniqBy(filesWithPapersDefinitionsLabels, 'metadata.qualification.label'),
-    [filesWithPapersDefinitionsLabels]
+  const papersByCategories = useMemo(
+    () => uniqBy(papers, 'metadata.qualification.label'),
+    [papers]
   )
 
   const featuredPlaceholders = useMemo(
     () =>
       getFeaturedPlaceholders({
         papersDefinitions,
-        files: filesWithPapersDefinitionsLabels,
+        files: papers,
         selectedTheme
       }),
-    [papersDefinitions, filesWithPapersDefinitionsLabels, selectedTheme]
+    [papersDefinitions, papers, selectedTheme]
   )
 
-  const hasResult = allPapersByCategories.length > 0
+  const hasResult = papersByCategories.length > 0
 
   return (
     <>
@@ -52,10 +51,10 @@ const HomeLayout = ({ contacts, filesWithPapersDefinitionsLabels }) => {
       {hasResult ? (
         <Content
           contacts={contacts}
-          filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
+          papers={papers}
           selectedTheme={selectedTheme}
           searchValue={searchValue}
-          allPapersByCategories={allPapersByCategories}
+          papersByCategories={papersByCategories}
         />
       ) : (
         <Empty
@@ -75,7 +74,7 @@ const HomeLayout = ({ contacts, filesWithPapersDefinitionsLabels }) => {
 
 HomeLayout.propTypes = {
   contacts: PropTypes.array,
-  filesWithPapersDefinitionsLabels: PropTypes.array
+  papers: PropTypes.array
 }
 
 export default HomeLayout

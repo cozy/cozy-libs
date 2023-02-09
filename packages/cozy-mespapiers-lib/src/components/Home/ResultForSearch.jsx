@@ -8,17 +8,12 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import SearchResult from '../SearchResult/SearchResult'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 
-const ResultForSearch = ({
-  contacts,
-  filesWithPapersDefinitionsLabels,
-  selectedTheme,
-  searchValue
-}) => {
+const ResultForSearch = ({ contacts, papers, selectedTheme, searchValue }) => {
   const { t } = useI18n()
   const scannerT = useScannerI18n()
 
   const filesWithContacts = buildFilesWithContacts({
-    files: filesWithPapersDefinitionsLabels,
+    files: papers,
     contacts,
     t
   })
@@ -35,7 +30,7 @@ const ResultForSearch = ({
 
 ResultForSearch.propTypes = {
   contacts: PropTypes.array,
-  filesWithPapersDefinitionsLabels: PropTypes.array,
+  papers: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string
 }

@@ -6,10 +6,10 @@ import ResultWithoutSearch from './ResultWithoutSearch'
 
 const Content = ({
   contacts,
-  filesWithPapersDefinitionsLabels,
+  papers,
+  papersByCategories,
   selectedTheme,
-  searchValue,
-  allPapersByCategories
+  searchValue
 }) => {
   const isSearching = searchValue.length > 0 || Boolean(selectedTheme)
 
@@ -17,7 +17,7 @@ const Content = ({
     return (
       <ResultForSearch
         contacts={contacts}
-        filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
+        papers={papers}
         selectedTheme={selectedTheme}
         searchValue={searchValue}
       />
@@ -25,7 +25,7 @@ const Content = ({
 
   return (
     <ResultWithoutSearch
-      allPapersByCategories={allPapersByCategories}
+      papersByCategories={papersByCategories}
       selectedTheme={selectedTheme}
       searchValue={searchValue}
     />
@@ -34,10 +34,10 @@ const Content = ({
 
 Content.propTypes = {
   contacts: PropTypes.array,
+  papers: PropTypes.array,
+  papersByCategories: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  searchValue: PropTypes.string,
-  filesWithPapersDefinitionsLabels: PropTypes.array,
-  allPapersByCategories: PropTypes.array
+  searchValue: PropTypes.string
 }
 
 export default Content
