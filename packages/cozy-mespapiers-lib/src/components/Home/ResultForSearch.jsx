@@ -25,7 +25,7 @@ const ResultForSearch = ({ contacts, papers, selectedTheme, searchValue }) => {
     scannerT
   }).map(({ file }) => file)
 
-  return <SearchResult filteredPapers={filteredPapers} />
+  return <SearchResult filteredPapers={filteredPapers} contacts={contacts} />
 }
 
 ResultForSearch.propTypes = {
