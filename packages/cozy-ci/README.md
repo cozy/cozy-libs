@@ -16,9 +16,7 @@ Requires a file named `.transifexrc.tpl` at the root of the project. The usual c
 
 ```
 [https://www.transifex.com]
-hostname = https://www.transifex.com
-username = cozy
-token =
+rest_hostname = https://rest.api.transifex.com
 ```
 
-Also requires an env var named `TX_PASSWD` which contains the password/token for the account referenced in the `.transifexrc.tpl` file.
+Also requires an env var named `TX_TOKEN` which contains the token for your transifex accound in the `.transifexrc.tpl` file.
