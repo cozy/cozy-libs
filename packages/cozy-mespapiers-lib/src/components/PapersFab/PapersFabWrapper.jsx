@@ -23,7 +23,7 @@ const PapersFabWrapper = ({ children }) => {
   const country = new URLSearchParams(search).get('country')
 
   const hideGeneralMenu = () => setShowGeneralMenu(false)
-  const toggleActionsMenu = () => {
+  const toggleGeneralMenu = () => {
     setShowGeneralMenu(prev => !prev)
   }
 
@@ -54,9 +54,8 @@ const PapersFabWrapper = ({ children }) => {
     hideGeneralMenu()
   }
 
-  const actionList = []
-  if (fileTheme) actionList.push(createPaperByTheme)
-  actionList.push(createPaper, select)
+  const actionList = [createPaper, select]
+  if (fileTheme) actionList.unshift(createPaperByTheme)
 
   const actions = makeActions(actionList, {
     client,
@@ -69,19 +68,19 @@ const PapersFabWrapper = ({ children }) => {
   if (!children) return null
 
   const PapersFabOverrided = cloneElement(children, {
-    onClick: toggleActionsMenu,
+    onClick: toggleGeneralMenu,
     innerRef: actionBtnRef
   })
 
   const props = {
     PapersFabOverrided,
     generalMenuProps: {
-      showGeneralMenu,
+      show: showGeneralMenu,
       actions,
       onClose: hideGeneralMenu
     },
     connectorMenuProps: {
-      showConnectorMenu,
+      show: showConnectorMenu,
       placeholder: paperDefinition,
       onClose: () => setShowConnectorMenu(false),
       onClick: () => redirectPaperCreation(paperDefinition)
