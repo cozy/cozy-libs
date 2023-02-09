@@ -1,17 +1,34 @@
-import React from 'react'
+import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import uniqBy from 'lodash/uniqBy'
 
+import Empty from 'cozy-ui/transpiled/react/Empty'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
+import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import ResultForSearch from './ResultForSearch'
 import PaperGroup from '../Papers/PaperGroup'
 
-const Content = ({
-  contacts,
-  papers,
-  papersByCategories,
-  selectedTheme,
-  searchValue
-}) => {
+const Content = ({ contacts, papers, selectedTheme, searchValue }) => {
+  const { t } = useI18n()
+
+  const papersByCategories = useMemo(
+    () => uniqBy(papers, 'metadata.qualification.label'),
+    [papers]
+  )
+  const hasResult = papersByCategories.length > 0
   const isSearching = searchValue.length > 0 || Boolean(selectedTheme)
+
+  if (!hasResult)
+    return (
+      <Empty
+        icon={HomeCloud}
+        iconSize="large"
+        title={t('Home.Empty.title')}
+        text={t('Home.Empty.text')}
+        className="u-ph-1"
+      />
+    )
 
   if (isSearching)
     return (
@@ -29,7 +46,6 @@ const Content = ({
 Content.propTypes = {
   contacts: PropTypes.array,
   papers: PropTypes.array,
-  papersByCategories: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string
 }
