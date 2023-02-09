@@ -1,14 +1,12 @@
 import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import { isQueryLoading, useClient, useQueryAll } from 'cozy-client'
+import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Empty from 'cozy-ui/transpiled/react/Empty'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
-import { buildContactsQueryByIds } from '../../helpers/queries'
 import {
   buildFilesWithContacts,
   getContactsRefIdsByFiles
@@ -25,7 +23,7 @@ import { open } from '../Actions/Items/open'
 import { rename } from '../Actions/Items/rename'
 import SearchResultLine from './SearchResultLine'
 
-const SearchResult = ({ filteredPapers }) => {
+const SearchResult = ({ filteredPapers, contacts }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
@@ -59,25 +57,17 @@ const SearchResult = ({ filteredPapers }) => {
     [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
   )
   const contactIds = getContactsRefIdsByFiles(filteredPapers)
-
-  const contactsQueryByIds = buildContactsQueryByIds(contactIds)
-  const { data: contacts, ...contactQueryResult } = useQueryAll(
-    contactsQueryByIds.definition,
-    contactsQueryByIds.options
+  const contactsByIds = contacts.filter(contact =>
+    contactIds.includes(contact._id)
   )
 
-  const isLoadingContacts =
-    isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
+  const filesWithContacts = buildFilesWithContacts({
+    files: filteredPapers,
+    contacts: contactsByIds,
+    t
+  })
 
-  const filesWithContacts = !isLoadingContacts
-    ? buildFilesWithContacts({
-        files: filteredPapers,
-        contacts,
-        t
-      })
-    : []
-
-  if (filesWithContacts.length === 0 && !isLoadingContacts) {
+  if (filesWithContacts.length === 0) {
     return (
       <Empty
         icon={HomeCloud}
@@ -89,7 +79,7 @@ const SearchResult = ({ filteredPapers }) => {
     )
   }
 
-  return filesWithContacts.length > 0 ? (
+  return (
     <>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <List className="u-pv-0">
@@ -109,16 +99,12 @@ const SearchResult = ({ filteredPapers }) => {
         })}
       </List>
     </>
-  ) : (
-    <Spinner
-      size="xxlarge"
-      className="u-flex u-flex-justify-center u-mt-2 u-h-5"
-    />
   )
 }
 
 SearchResult.propTypes = {
-  filteredPapers: PropTypes.arrayOf(PropTypes.object)
+  filteredPapers: PropTypes.arrayOf(PropTypes.object),
+  contacts: PropTypes.array
 }
 
 export default SearchResult
