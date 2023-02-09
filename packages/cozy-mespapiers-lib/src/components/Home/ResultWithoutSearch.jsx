@@ -31,7 +31,7 @@ const ResultWithoutSearch = ({
 ResultWithoutSearch.propTypes = {
   allPapersByCategories: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  setSelectedThemeLabel: PropTypes.string,
+  setSelectedThemeLabel: PropTypes.func,
   searchValue: PropTypes.string
 }
 
