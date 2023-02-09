@@ -15,11 +15,7 @@ import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
 import Content from './Content'
 
-const HomeLayout = ({
-  contacts,
-  filesWithPapersDefinitionsLabels,
-  setSelectedThemeLabel
-}) => {
+const HomeLayout = ({ contacts, filesWithPapersDefinitionsLabels }) => {
   const { t } = useI18n()
   const [selectedTheme, setSelectedTheme] = useState('')
   const [searchValue, setSearchValue] = useState('')
@@ -60,7 +56,6 @@ const HomeLayout = ({
           selectedTheme={selectedTheme}
           searchValue={searchValue}
           allPapersByCategories={allPapersByCategories}
-          setSelectedThemeLabel={setSelectedThemeLabel}
         />
       ) : (
         <Empty
@@ -80,8 +75,7 @@ const HomeLayout = ({
 
 HomeLayout.propTypes = {
   contacts: PropTypes.array,
-  filesWithPapersDefinitionsLabels: PropTypes.array,
-  setSelectedThemeLabel: PropTypes.func
+  filesWithPapersDefinitionsLabels: PropTypes.array
 }
 
 export default HomeLayout

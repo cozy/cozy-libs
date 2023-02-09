@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react'
-import PropTypes from 'prop-types'
 
 import { isQueryLoading, useQueryAll } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
@@ -12,7 +11,7 @@ import { getContactsRefIdsByFiles } from '../Papers/helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import HomeLayout from '../Home/HomeLayout'
 
-const Home = ({ setSelectedThemeLabel }) => {
+const Home = () => {
   const { papersDefinitions } = usePapersDefinitions()
 
   const papersDefinitionsLabels = useMemo(
@@ -60,13 +59,8 @@ const Home = ({ setSelectedThemeLabel }) => {
     <HomeLayout
       contacts={contacts}
       filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
-      setSelectedThemeLabel={setSelectedThemeLabel}
     />
   )
-}
-
-Home.propTypes = {
-  setSelectedThemeLabel: PropTypes.func
 }
 
 export default Home

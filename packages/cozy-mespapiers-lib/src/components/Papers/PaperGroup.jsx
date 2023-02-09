@@ -18,12 +18,12 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
+const PaperGroup = ({ allPapersByCategories }) => {
   const navigate = useNavigate()
   const client = useClient()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
-  const { isMultiSelectionActive } = useMultiSelection()
+  const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
 
   const goPapersList = category => {
     if (isMultiSelectionActive) {
@@ -90,8 +90,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
 }
 
 PaperGroup.propTypes = {
-  allPapersByCategories: PropTypes.arrayOf(PropTypes.object),
-  setSelectedThemeLabel: PropTypes.func
+  allPapersByCategories: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default PaperGroup
