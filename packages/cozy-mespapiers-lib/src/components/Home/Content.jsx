@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import ResultForSearch from './ResultForSearch'
-import ResultWithoutSearch from './ResultWithoutSearch'
+import PaperGroup from '../Papers/PaperGroup'
 
 const Content = ({
   contacts,
@@ -23,13 +23,7 @@ const Content = ({
       />
     )
 
-  return (
-    <ResultWithoutSearch
-      papersByCategories={papersByCategories}
-      selectedTheme={selectedTheme}
-      searchValue={searchValue}
-    />
-  )
+  return <PaperGroup papersByCategories={papersByCategories} />
 }
 
 Content.propTypes = {
