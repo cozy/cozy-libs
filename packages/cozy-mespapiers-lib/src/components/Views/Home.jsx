@@ -26,7 +26,7 @@ const Home = () => {
   )
   const isLoadingFiles = isQueryLoading(queryResult) || queryResult.hasMore
 
-  const filesWithPapersDefinitionsLabels = useMemo(
+  const papers = useMemo(
     () =>
       filesWithQualificationLabel?.filter(file =>
         papersDefinitionsLabels.includes(file?.metadata?.qualification?.label)
@@ -34,7 +34,7 @@ const Home = () => {
     [filesWithQualificationLabel, papersDefinitionsLabels]
   )
 
-  const contactIds = getContactsRefIdsByFiles(filesWithPapersDefinitionsLabels)
+  const contactIds = getContactsRefIdsByFiles(papers)
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
     contactsQueryByIds.definition,
@@ -55,12 +55,7 @@ const Home = () => {
     )
   }
 
-  return (
-    <HomeLayout
-      contacts={contacts}
-      filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
-    />
-  )
+  return <HomeLayout contacts={contacts} papers={papers} />
 }
 
 export default Home

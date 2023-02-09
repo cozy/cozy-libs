@@ -6,24 +6,24 @@ import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { filterPapersByThemeAndSearchValue } from './helpers'
 
 const ResultWithoutSearch = ({
-  allPapersByCategories,
+  papersByCategories,
   selectedTheme,
   searchValue
 }) => {
   const scannerT = useScannerI18n()
 
   const filteredPapers = filterPapersByThemeAndSearchValue({
-    files: allPapersByCategories.map(file => ({ file })),
+    files: papersByCategories.map(file => ({ file })),
     theme: selectedTheme,
     search: searchValue,
     scannerT
   }).map(({ file }) => file)
 
-  return <PaperGroup allPapersByCategories={filteredPapers} />
+  return <PaperGroup papersByCategories={filteredPapers} />
 }
 
 ResultWithoutSearch.propTypes = {
-  allPapersByCategories: PropTypes.array,
+  papersByCategories: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string
 }
