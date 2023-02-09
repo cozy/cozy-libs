@@ -6,13 +6,14 @@ import ResultWithoutSearch from './ResultWithoutSearch'
 
 const Content = ({
   contacts,
-  isSearching,
   selectedTheme,
   searchValue,
   filesWithPapersDefinitionsLabels,
   allPapersByCategories,
   setSelectedThemeLabel
 }) => {
+  const isSearching = searchValue.length > 0 || Boolean(selectedTheme)
+
   if (isSearching)
     return (
       <ResultForSearch
@@ -35,7 +36,6 @@ const Content = ({
 
 Content.propTypes = {
   contacts: PropTypes.array,
-  isSearching: PropTypes.bool,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string,
   filesWithPapersDefinitionsLabels: PropTypes.array,

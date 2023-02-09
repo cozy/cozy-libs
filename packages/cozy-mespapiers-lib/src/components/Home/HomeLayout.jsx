@@ -18,7 +18,6 @@ import Content from './Content'
 const HomeLayout = ({
   contacts,
   filesWithPapersDefinitionsLabels,
-  isSearching,
   selectedTheme,
   setSelectedTheme,
   setSelectedThemeLabel,
@@ -58,7 +57,6 @@ const HomeLayout = ({
       {hasResult ? (
         <Content
           contacts={contacts}
-          isSearching={isSearching}
           selectedTheme={selectedTheme}
           searchValue={searchValue}
           filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
@@ -84,7 +82,6 @@ const HomeLayout = ({
 HomeLayout.propTypes = {
   contacts: PropTypes.array,
   filesWithPapersDefinitionsLabels: PropTypes.array,
-  isSearching: PropTypes.bool,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   setSelectedTheme: PropTypes.func,
   setSelectedThemeLabel: PropTypes.string,
