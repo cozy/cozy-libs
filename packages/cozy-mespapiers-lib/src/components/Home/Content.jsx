@@ -6,9 +6,9 @@ import ResultWithoutSearch from './ResultWithoutSearch'
 
 const Content = ({
   contacts,
+  filesWithPapersDefinitionsLabels,
   selectedTheme,
   searchValue,
-  filesWithPapersDefinitionsLabels,
   allPapersByCategories,
   setSelectedThemeLabel
 }) => {

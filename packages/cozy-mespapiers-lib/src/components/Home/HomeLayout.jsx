@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react'
+import React, { useMemo, useState } from 'react'
 import PropTypes from 'prop-types'
 import uniqBy from 'lodash/uniqBy'
 
@@ -18,15 +18,14 @@ import Content from './Content'
 const HomeLayout = ({
   contacts,
   filesWithPapersDefinitionsLabels,
-  selectedTheme,
-  setSelectedTheme,
-  setSelectedThemeLabel,
-  searchValue,
-  setSearchValue
+  setSelectedThemeLabel
 }) => {
   const { t } = useI18n()
+  const [selectedTheme, setSelectedTheme] = useState('')
+  const [searchValue, setSearchValue] = useState('')
   const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
+
   const allPapersByCategories = useMemo(
     () =>
       uniqBy(filesWithPapersDefinitionsLabels, 'metadata.qualification.label'),
@@ -57,9 +56,9 @@ const HomeLayout = ({
       {hasResult ? (
         <Content
           contacts={contacts}
+          filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
           selectedTheme={selectedTheme}
           searchValue={searchValue}
-          filesWithPapersDefinitionsLabels={filesWithPapersDefinitionsLabels}
           allPapersByCategories={allPapersByCategories}
           setSelectedThemeLabel={setSelectedThemeLabel}
         />
@@ -82,11 +81,7 @@ const HomeLayout = ({
 HomeLayout.propTypes = {
   contacts: PropTypes.array,
   filesWithPapersDefinitionsLabels: PropTypes.array,
-  selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
-  setSelectedTheme: PropTypes.func,
-  setSelectedThemeLabel: PropTypes.string,
-  searchValue: PropTypes.string,
-  setSearchValue: PropTypes.func
+  setSelectedThemeLabel: PropTypes.string
 }
 
 export default HomeLayout
