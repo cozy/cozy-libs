@@ -47,6 +47,7 @@
   - `attributes`: {object} Type of fields.
     - [`text|number`](#information-field-attributes) : {object} Fields used to fill in more information about the paper.
     - [`date`](#information-field-attributes): {object} Fields used to enter a date (reference, expiration date, etc).
+    - [`radio`](#information-field-attributes): {object} Fields used to enter a radio list.
 
 <br>
 
@@ -83,3 +84,8 @@
   - `name`: {string} Used for `featureDate` attribute
   - `inputLabel`: {boolean} Translation key for the label
   - `[type]`: {`date`} Type of field
+
+<br>
+
+- Properties of the object to define a field of type `radio`:
+  - `options`: {string\[]} Option values
