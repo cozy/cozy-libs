@@ -7,8 +7,8 @@ import { ActionsItems } from '../Actions/ActionsItems'
 
 const PaperFabUI = React.forwardRef(
   ({ PapersFabOverrided, generalMenuProps, connectorMenuProps }, ref) => {
-    const { showGeneralMenu, onClose, actions } = generalMenuProps
-    const { showConnectorMenu } = connectorMenuProps
+    const { show: showGeneralMenu, onClose, actions } = generalMenuProps
+    const { show: showConnectorMenu } = connectorMenuProps
 
     return (
       <>
@@ -35,12 +35,12 @@ PaperFabUI.displayName = 'PaperFabUI'
 PaperFabUI.propTypes = {
   PapersFabOverrided: PropTypes.node,
   generalMenuProps: PropTypes.shape({
-    showGeneralMenu: PropTypes.bool,
+    show: PropTypes.bool,
     actions: PropTypes.arrayOf(PropTypes.object),
     onClose: PropTypes.func
   }),
   connectorMenuProps: PropTypes.shape({
-    showConnectorMenu: PropTypes.bool,
+    show: PropTypes.bool,
     placeholder: PropTypes.object,
     onClose: PropTypes.func,
     onClick: PropTypes.func
