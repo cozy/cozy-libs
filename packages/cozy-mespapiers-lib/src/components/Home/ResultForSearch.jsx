@@ -5,10 +5,7 @@ import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
-import {
-  buildFilesWithContacts,
-  getContactsRefIdsByFiles
-} from '../Papers/helpers'
+import { buildFilesWithContacts } from '../Papers/helpers'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import SearchResult from '../SearchResult/SearchResult'
 import { filterPapersByThemeAndSearchValue } from './helpers'
@@ -28,20 +25,9 @@ const ResultForSearch = ({ contacts, papers, selectedTheme, searchValue }) => {
     theme: selectedTheme,
     search: searchValue,
     scannerT
-  }).map(({ file }) => file)
-
-  const contactIds = getContactsRefIdsByFiles(filteredPapers)
-  const contactsByIds = contacts.filter(contact =>
-    contactIds.includes(contact._id)
-  )
-
-  const result = buildFilesWithContacts({
-    files: filteredPapers,
-    contacts: contactsByIds,
-    t
   })
 
-  if (result.length === 0) {
+  if (filteredPapers.length === 0) {
     return (
       <Empty
         className="u-ph-1"
@@ -53,7 +39,7 @@ const ResultForSearch = ({ contacts, papers, selectedTheme, searchValue }) => {
     )
   }
 
-  return <SearchResult result={result} />
+  return <SearchResult filteredPapers={filteredPapers} />
 }
 
 ResultForSearch.propTypes = {

@@ -17,7 +17,7 @@ import { open } from '../Actions/Items/open'
 import { rename } from '../Actions/Items/rename'
 import SearchResultLine from './SearchResultLine'
 
-const SearchResult = ({ result }) => {
+const SearchResult = ({ filteredPapers }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
@@ -55,7 +55,7 @@ const SearchResult = ({ result }) => {
     <>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <List className="u-pv-0">
-        {result.map(({ contact, file }) => {
+        {filteredPapers.map(({ contact, file }) => {
           return (
             <SearchResultLine
               key={file._id}
@@ -75,7 +75,7 @@ const SearchResult = ({ result }) => {
 }
 
 SearchResult.propTypes = {
-  result: PropTypes.arrayOf(PropTypes.object)
+  filteredPapers: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default SearchResult
