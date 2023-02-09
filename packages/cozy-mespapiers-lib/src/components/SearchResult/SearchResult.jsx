@@ -3,15 +3,9 @@ import PropTypes from 'prop-types'
 
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Empty from 'cozy-ui/transpiled/react/Empty'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
-import {
-  buildFilesWithContacts,
-  getContactsRefIdsByFiles
-} from '../Papers/helpers'
-import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { useModal } from '../Hooks/useModal'
 import { makeActions, makeActionVariant } from '../Actions/utils'
@@ -23,7 +17,7 @@ import { open } from '../Actions/Items/open'
 import { rename } from '../Actions/Items/rename'
 import SearchResultLine from './SearchResultLine'
 
-const SearchResult = ({ filteredPapers, contacts }) => {
+const SearchResult = ({ result }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
@@ -56,34 +50,12 @@ const SearchResult = ({ filteredPapers, contacts }) => {
       ),
     [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
   )
-  const contactIds = getContactsRefIdsByFiles(filteredPapers)
-  const contactsByIds = contacts.filter(contact =>
-    contactIds.includes(contact._id)
-  )
-
-  const filesWithContacts = buildFilesWithContacts({
-    files: filteredPapers,
-    contacts: contactsByIds,
-    t
-  })
-
-  if (filesWithContacts.length === 0) {
-    return (
-      <Empty
-        icon={HomeCloud}
-        iconSize="large"
-        title={t('Search.empty.title')}
-        text={t('Search.empty.text')}
-        className="u-ph-1"
-      />
-    )
-  }
 
   return (
     <>
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <List className="u-pv-0">
-        {filesWithContacts.map(({ contact, file }) => {
+        {result.map(({ contact, file }) => {
           return (
             <SearchResultLine
               key={file._id}
@@ -103,8 +75,7 @@ const SearchResult = ({ filteredPapers, contacts }) => {
 }
 
 SearchResult.propTypes = {
-  filteredPapers: PropTypes.arrayOf(PropTypes.object),
-  contacts: PropTypes.array
+  result: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default SearchResult
