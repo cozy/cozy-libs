@@ -138,6 +138,19 @@
         {
           "stepIndex": 2,
           "model": "information",
+          "illustration": "IlluCafNumberHelp.png",
+          "text": "PaperJSON.caf.cafFileNumber.text",
+          "attributes": [
+            {
+              "name": "cafFileNumber",
+              "type": "text",
+              "inputLabel": "PaperJSON.caf.cafFileNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
@@ -149,7 +162,7 @@
           ]
         },
         {
-          "stepIndex": 3,
+          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1183,6 +1196,19 @@
         {
           "stepIndex": 2,
           "model": "information",
+          "illustration": "IlluCafNumberHelp.png",
+          "text": "PaperJSON.payment_proof_family_allowance.cafFileNumber.text",
+          "attributes": [
+            {
+              "name": "cafFileNumber",
+              "type": "text",
+              "inputLabel": "PaperJSON.payment_proof_family_allowance.cafFileNumber.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.issueDate.text",
           "attributes": [
@@ -1194,7 +1220,7 @@
           ]
         },
         {
-          "stepIndex": 3,
+          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,
@@ -1443,6 +1469,19 @@
         {
           "stepIndex": 2,
           "model": "information",
+          "illustration": "IlluGenericInputText.svg",
+          "text": "PaperJSON.tax_notice.refTaxIncome.text",
+          "attributes": [
+            {
+              "name": "refTaxIncome",
+              "type": "number",
+              "inputLabel": "PaperJSON.tax_notice.refTaxIncome.inputLabel"
+            }
+          ]
+        },
+        {
+          "stepIndex": 3,
+          "model": "information",
           "illustration": "IlluGenericInputDate.svg",
           "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
@@ -1454,7 +1493,7 @@
           ]
         },
         {
-          "stepIndex": 3,
+          "stepIndex": 4,
           "illustration": "Account.svg",
           "model": "contact",
           "multiple": true,

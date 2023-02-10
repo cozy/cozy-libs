@@ -275,6 +275,24 @@
         "internship": "Stage",
         "other": "Autre"
       }
+    },
+    "caf": {
+      "cafFileNumber": {
+        "inputLabel": "Numéro de dossier CAF",
+        "text": "Saisissez votre numéro de dossier CAF"
+      }
+    },
+    "payment_proof_family_allowance": {
+      "cafFileNumber": {
+        "inputLabel": "Numéro de dossier CAF",
+        "text": "Saisissez votre numéro de dossier CAF"
+      }
+    },
+    "tax_notice": {
+      "refTaxIncome": {
+        "inputLabel": "Revenu fiscal de référence",
+        "text": "Ajoutez votre revenu fiscal de référence"
+      }
     }
   },
   "PapersList": {

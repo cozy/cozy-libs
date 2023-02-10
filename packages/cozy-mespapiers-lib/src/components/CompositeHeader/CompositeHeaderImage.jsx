@@ -5,6 +5,7 @@ import cx from 'classnames'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 
+import IlluCafNumberHelp from '../../assets/images/IlluCafNumberHelp.png'
 import IlluCovidVaccineCertificate from '../../assets/images/IlluCovidVaccineCertificate.png'
 import IlluDiploma from '../../assets/images/IlluDiploma.png'
 import IlluDriverLicenseBack from '../../assets/images/IlluDriverLicenseBack.png'
@@ -34,6 +35,7 @@ import Account from '../../assets/icons/Account.svg'
 import Contract from '../../assets/icons/Contract.svg'
 
 const images = {
+  IlluCafNumberHelp,
   IlluCovidVaccineCertificate,
   IlluDiploma,
   IlluDriverLicenseBack,
