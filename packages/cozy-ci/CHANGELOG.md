@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.5.2](https://github.com/cozy/cozy-libs/compare/cozy-ci@0.5.1...cozy-ci@0.5.2) (2023-02-10)
+
+
+### Bug Fixes
+
+* **cozy-ci:** Use token instead password into .transifexrc ([f3739e8](https://github.com/cozy/cozy-libs/commit/f3739e875a19baba2c3032baa5c938397a7ed7b2))
+
+
+
+
+
 ## 0.5.1 (2023-02-08)
 
 
