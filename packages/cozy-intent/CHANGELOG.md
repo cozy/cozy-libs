@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 2.9.0 (2023-02-11)
+
+
+### Features
+
+* Upgrade eslint cozy config ([414c1ef](https://github.com/cozy/cozy-libs/commit/414c1efbb316267baa3d5ff615d4b690e34c26de))
+
+
+
+
+
 # 2.8.0 (2023-01-31)
 
 
