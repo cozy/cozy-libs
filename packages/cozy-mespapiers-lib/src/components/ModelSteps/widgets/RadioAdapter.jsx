@@ -1,6 +1,5 @@
 import React, { Fragment, useState, useEffect } from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Paper from 'cozy-ui/transpiled/react/Paper'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
@@ -9,6 +8,7 @@ import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Radio from 'cozy-ui/transpiled/react/Radios'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
+import { useScannerI18n } from '../../Hooks/useScannerI18n'
 import { defaultProptypes } from './proptypes'
 
 const RadioAdapter = ({
@@ -18,7 +18,7 @@ const RadioAdapter = ({
   setValidInput,
   setValue
 }) => {
-  const { t } = useI18n()
+  const scannerT = useScannerI18n()
   const [currentValue, setCurrentValue] = useState(() => defaultValue || '')
 
   const isChecked = inputValue => {
@@ -53,7 +53,7 @@ const RadioAdapter = ({
               <ListItemText
                 primary={
                   <div value={option}>
-                    {t(`PaperJSON.work_contract.options.${option}`)}
+                    {scannerT(`attributes.contractType.${option}`)}
                   </div>
                 }
               />

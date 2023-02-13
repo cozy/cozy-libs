@@ -267,13 +267,6 @@
     "work_contract": {
       "contract_type": {
         "text": "Select the type of contract"
-      },
-      "options": {
-        "cdi": "CDI",
-        "cdd": "CDD",
-        "alternate": "Alternate",
-        "internship": "Internship",
-        "other": "Other"
       }
     },
     "caf": {
