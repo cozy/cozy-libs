@@ -19,14 +19,14 @@
     "@testing-library/react": "11.2.7",
     "babel-preset-cozy-app": "2.0.1",
     "cozy-bar": "7.16.0",
-    "cozy-client": "^34.10.1",
+    "cozy-client": "^35.2.0",
     "cozy-device-helper": "^2.7.0",
     "cozy-doctypes": "^1.88.0",
     "cozy-harvest-lib": "^13.2.1",
     "cozy-intent": "^2.8.0",
     "cozy-realtime": "^4.3.0",
     "cozy-sharing": "^6.0.3",
-    "cozy-ui": "^80.2.1",
+    "cozy-ui": "^81.0.0",
     "jest-environment-jsdom-sixteen": "2.0.0",
     "react-router-dom": "6.4.5"
   },
@@ -39,14 +39,14 @@
     "react-input-mask": "3.0.0-alpha.2"
   },
   "peerDependencies": {
-    "cozy-client": ">=34.10.1",
+    "cozy-client": ">=35.2.0",
     "cozy-device-helper": ">=2.6.0",
     "cozy-doctypes": ">=1.83.8",
     "cozy-harvest-lib": ">=13.1.0",
     "cozy-intent": ">=2.2.0",
     "cozy-realtime": ">=4.2.0",
     "cozy-sharing": ">=4.3.0",
-    "cozy-ui": ">=80.2.1",
+    "cozy-ui": ">=81.0.0",
     "react-router-dom": ">=6.4.5"
   }
 }
