@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.2.2...cozy-harvest-lib@13.3.0) (2023-02-16)
+
+
+### Bug Fixes
+
+* Avoid ts error ([25f577d](https://github.com/cozy/cozy-libs/commit/25f577d22c9eca08d34cf15edb4c4529ba8b0766))
+* Remove findKonnectorPolicy log ([e26b0d0](https://github.com/cozy/cozy-libs/commit/e26b0d000c9d10a27e436949eb321949716d8d90))
+
+
+### Features
+
+* Extract clisk policy and do not create triggers and accounts ([b137453](https://github.com/cozy/cozy-libs/commit/b137453509fd65f2f538c1852154a3f85b01fb71))
+
+
+
+
+
 ## [13.2.2](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.2.1...cozy-harvest-lib@13.2.2) (2023-02-11)
 
 **Note:** Version bump only for package cozy-harvest-lib
