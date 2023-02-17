@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [20.0.8](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@20.0.7...cozy-mespapiers-lib@20.0.8) (2023-02-17)
+
+
+### Bug Fixes
+
+* **deps:** update dependency cozy-bar to v7.25.0 ([5ffaf95](https://github.com/cozy/cozy-libs/commit/5ffaf95e96aeafdd7d37b367ca4267beac4d7498))
+
+
+
+
+
 ## [20.0.7](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@20.0.6...cozy-mespapiers-lib@20.0.7) (2023-02-16)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
