@@ -15,8 +15,7 @@ Lightweight client & server-side logging with Stream-API backends
   - Browser: Console, LocalStorage, jQuery.ajax
 - In Chrome, we support theming the dev console output.
 
-
-See the docs at [http://mixu.net/minilog/](http://mixu.net/minilog/).
+See the docs at <http://mixu.net/minilog/>.
 
 # Upgrading from 2.x to 3.x
 
@@ -28,41 +27,50 @@ minilog is more convention than code. The logger is a [EventEmitter](http://node
 
 minilog works in Node, and in the browser:
 
-    // logs are scoped to a namespace for easy filtering (here, the namespace is "app")
-    var log = require('minilog')('app');
-    require('minilog').enable();
+```
+// logs are scoped to a namespace for easy filtering (here, the namespace is "app")
+var log = require('minilog')('app');
+require('minilog').enable();
+```
 
-in the browser (via a single exported global ```window.Minilog```):
+in the browser (via a single exported global `window.Minilog`):
 
-    <script src="dist/minilog.js"></script>
-    <script>
-    var log = Minilog('app');
-    Minilog.enable();
-    </script>
+```
+<script src="dist/minilog.js"></script>
+<script>
+var log = Minilog('app');
+Minilog.enable();
+</script>
+```
 
 Usage:
 
-    // assuming you've done the two things above
-    log
-      .debug('debug message')
-      .info('info message')
-      .log('info message')
-      .warn('warning')
-      .error('this is an error message');
+```
+// assuming you've done the two things above
+log
+  .debug('debug message')
+  .info('info message')
+  .log('info message')
+  .warn('warning')
+  .error('this is an error message');
+```
 
 Output:
 
 ![screenshot3](https://github.com/mixu/minilog/raw/master/test/example/screenshot3.png)
 
-
 To log to the console:
 
-    require('minilog').enable();
-    // or .pipe(process.stdout), if you don't want the default formatting and filtering
+```
+require('minilog').enable();
+// or .pipe(process.stdout), if you don't want the default formatting and filtering
+```
 
 To log into a file:
 
-    require('minilog').pipe(fs.createWriteStream('./temp.log'));
+```
+require('minilog').pipe(fs.createWriteStream('./temp.log'));
+```
 
 You can also log to Redis and over HTTP to a RESTful API, see the backends at the end of this page.
 
@@ -72,9 +80,9 @@ You can pipe to more than one endpoint if you want.
 
 For Node:
 
-````shell
+```shell
 $ npm install minilog
-````
+```
 
 You can find a ready-made file for the web in [`./dist/minilog.js`](https://raw.github.com/mixu/minilog/master/dist/minilog.js).
 
@@ -82,16 +90,20 @@ You can find a ready-made file for the web in [`./dist/minilog.js`](https://raw.
 
 Everything is now a pipe, which means that the `.format()` and `.filter()` functions are deprecated. Check out [the new filter mechanism docs](http://mixu.net/minilog/filter.html). To apply a formatter, you should pipe the input into the formatter, and then pipe it to the desired backend:
 
-    var Minilog = require('minilog');
+```
+var Minilog = require('minilog');
 
-    Minilog.pipe(Minilog.backends.console.formatWithStack)
-           .pipe(Minilog.backends.console);
+Minilog.pipe(Minilog.backends.console.formatWithStack)
+       .pipe(Minilog.backends.console);
+```
 
 ## Enabling logging
 
 Minilog output is suppressed by default. To enable logging, append `minilog=1` to the page URL:
 
-    http://www.example.com/index.html?minilog=1
+```
+http://www.example.com/index.html?minilog=1
+```
 
 or call `Minilog.enable()` from the dev console or in code. On the browser, this also sets a value in LocalStorage so that logging is enabled on subsequent reloads. Call `Minilog.disable()` (*new in v2*) to stop logging.
 
@@ -109,13 +121,15 @@ Minilog supports themes and custom formatters, and comes several with built-in t
 
 To enable a specific theme, pipe to the formatter and then to the console:
 
-    var Minilog = require('minilog');
+```
+var Minilog = require('minilog');
 
-    Minilog
-        // formatter
-        .pipe(Minilog.backends.console.formatClean)
-        // backend
-        .pipe(Minilog.backends.console);
+Minilog
+    // formatter
+    .pipe(Minilog.backends.console.formatClean)
+    // backend
+    .pipe(Minilog.backends.console);
+```
 
 Have a look at [./test/examples/themes_example.js](https://github.com/mixu/minilog/blob/master/test/example/themes_example.js).
 
@@ -152,17 +166,19 @@ Backends are Writable streams which handle stringification.
 
 The console backend is literally this (plus code for pretty printing log lines in various ways):
 
-    {
-      write: function(str) { process.stdout.write(str); }
-    }
+```
+{
+  write: function(str) { process.stdout.write(str); }
+}
+```
 
-The Redis backend is almost equally simple - it accepts ```client``` (an instance of node-redis) and ```key``` and uses rpush() to add to the list at the specified key.
+The Redis backend is almost equally simple - it accepts `client` (an instance of node-redis) and `key` and uses rpush() to add to the list at the specified key.
 
 ### Browser: Array, Console, jQuery, localStorage
 
-The Array backend stores the log lines into an array. This is useful if you want to keep a list of all the log lines, e.g. for error reporting. Call ```.get()``` to get the array, and ```.clear()``` to empty it.
+The Array backend stores the log lines into an array. This is useful if you want to keep a list of all the log lines, e.g. for error reporting. Call `.get()` to get the array, and `.clear()` to empty it.
 
-The Console backend makes sure that ```console.log``` is available. On IE8 and IE9, it tries to make the console a bit less aweful by using JSON.stringify to convert objects into strings (rather than "[Object object]").
+The Console backend makes sure that `console.log` is available. On IE8 and IE9, it tries to make the console a bit less aweful by using JSON.stringify to convert objects into strings (rather than "\[Object object]").
 
 The jQuery backend is useful for logging client-side log lines on the server side:
 
@@ -171,6 +187,6 @@ The jQuery backend is useful for logging client-side log lines on the server sid
 - Unsent logs from localStorage are sent the next time the backend is activated (on your domain, localStorage is isolated).
 - No errors, even if localStorage is not available or jQuery is not defined (though no POST requests if no jQuery).
 
-The localStorage backend just writes logs to the given ```key``` in localstorage.
+The localStorage backend just writes logs to the given `key` in localstorage.
 
 Have a look at the example server setup in `./test/examples/jquery_server.js`.
