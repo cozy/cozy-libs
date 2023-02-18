@@ -29,5 +29,10 @@
     "sysadmin",
     "tools"
   ],
-  "browser": "./lib/web/index.js"
+  "browser": "./lib/web/index.js",
+  "scripts": {
+    "build": "babel --ignore '**/*.test.js' ./lib -d ./dist",
+    "formatters": "node ./test/example/themes_example.js",
+    "test": "yarn mocha --ui exports --reporter spec --slow 2000ms --bail"
+  }
 }
