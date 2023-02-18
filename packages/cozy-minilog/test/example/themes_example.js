@@ -1,28 +1,28 @@
+/* eslint-disable no-console */
 var log = require('minilog')('app'),
-    ConsoleBackend = require('minilog').backends.console;
+  ConsoleBackend = require('minilog').backends.console
 
 function out() {
   log
     .debug('debug message')
     .info('info message')
     .warn('warning')
-    .error('this is an error message');
-};
+    .error('this is an error message')
+}
 
-var minilog = require('minilog');
+var minilog = require('minilog')
 
-console.log('\n== Default style\n');
+console.log('\n== Default style\n')
 
-minilog.enable();
-out();
-minilog.disable();
+minilog.enable()
+out()
+minilog.disable()
 
-ConsoleBackend.formatters.forEach(function(name) {
-  console.log('\n== Theme: '+name+'\n');
+ConsoleBackend.formatters.forEach(function (name) {
+  console.log('\n== Theme: ' + name + '\n')
 
-  minilog.pipe(ConsoleBackend[name])
-         .pipe(ConsoleBackend);
+  minilog.pipe(ConsoleBackend[name]).pipe(ConsoleBackend)
 
-  out();
-  minilog.unpipe();
-});
+  out()
+  minilog.unpipe()
+})

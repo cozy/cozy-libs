@@ -1,14 +1,18 @@
 var Transform = require('../common/transform.js'),
-    cache = [ ];
+  cache = []
 
-var logger = new Transform();
+var logger = new Transform()
 
-logger.write = function(name, level, args) {
-  cache.push([ name, level, args ]);
-};
+logger.write = function (name, level, args) {
+  cache.push([name, level, args])
+}
 
 // utility functions
-logger.get = function() { return cache; };
-logger.empty = function() { cache = []; };
+logger.get = function () {
+  return cache
+}
+logger.empty = function () {
+  cache = []
+}
 
-module.exports = logger;
+module.exports = logger
