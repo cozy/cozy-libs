@@ -3,10 +3,9 @@
   "description": "Lightweight client & server-side logging with Stream-API backends and counting, timing support",
   "license": "MIT",
   "version": "3.1.0",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "files": [
-    "/dist",
-    "/lib"
+    "dist"
   ],
   "dependencies": {
     "microee": "0.0.6"
@@ -29,10 +28,13 @@
     "sysadmin",
     "tools"
   ],
-  "browser": "./lib/web/index.js",
+  "browser": "dist/web/index.js",
   "scripts": {
-    "build": "babel --ignore '**/*.test.js' ./lib -d ./dist",
+    "build": "yarn build:types && yarn build:js",
+    "build:js": "babel --ignore '**/*.test.js' ./src -d ./dist",
+    "build:types": "tsc",
     "formatters": "node ./test/example/themes_example.js",
     "test": "yarn mocha --ui exports --reporter spec --slow 2000ms --bail"
-  }
+  },
+  "types": "dist/index.d.ts"
 }
