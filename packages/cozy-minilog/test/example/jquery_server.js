@@ -52,10 +52,10 @@ http
         new Glue()
           .set('verbose', true)
           .basepath('../../')
-          .include('./lib/web')
-          .include('./lib/common')
+          .include('./src/web')
+          .include('./src/common')
           .include('./node_modules/microee/')
-          .main('lib/web/index.js')
+          .main('src/web/index.js')
           .replace({ jquery: 'window.$' })
           .export('Minilog')
           .render(function (err, txt) {

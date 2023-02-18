@@ -1,5 +1,5 @@
 var assert = require('assert'),
-  Filter = require('../lib/common/filter.js')
+  Filter = require('../src/common/filter.js')
 
 var f = new Filter()
 

@@ -1,8 +1,8 @@
 var fs = require('fs'),
   assert = require('assert'),
-  MiniLog = require('../lib/index.js'),
-  Stringifier = require('../lib/node/stringify.js'),
-  Transform = require('../lib/common/transform.js')
+  MiniLog = require('../src/index.js'),
+  Stringifier = require('../src/node/stringify.js'),
+  Transform = require('../src/common/transform.js')
 
 function WriteStream() {
   // eslint-disable-next-line no-unused-vars

@@ -40,4 +40,5 @@ e.formatMinilog = new (require('./formatters/minilog.js'))()
 e.formatWithStack = new (require('./formatters/withstack.js'))()
 e.formatTime = new (require('./formatters/time.js'))()
 
+exports.ConsoleBackend = ConsoleBackend
 module.exports = e
