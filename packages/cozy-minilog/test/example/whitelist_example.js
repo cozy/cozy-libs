@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 var MiniLog = require('../../minilog'),
-  ConsoleBackend = require('../../lib/node/console')
+  ConsoleBackend = require('../../src/node/console')
 
 console.log('Try running this with:')
 console.log('export MYENV=app && node whitelist_example.js')
