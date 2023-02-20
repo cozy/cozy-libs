@@ -1,11 +1,13 @@
-import React, { useMemo, useState } from 'react'
+import React, { useMemo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+
+import flag from 'cozy-flags'
 
 import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
-
+import { useSearch } from '../Contexts/SearchProvider'
 import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
 import Content from './Content'
@@ -15,6 +17,13 @@ const HomeLayout = ({ contacts, papers }) => {
   const [searchValue, setSearchValue] = useState('')
   const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
+  const { add } = useSearch()
+
+  useEffect(() => {
+    if (flag('mespapiers.flexsearch.enabled')) {
+      add([...contacts, ...papers])
+    }
+  }, [add, contacts, papers])
 
   const featuredPlaceholders = useMemo(
     () =>

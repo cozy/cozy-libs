@@ -10,6 +10,7 @@ import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { getComponents } from '../helpers/defaultComponent'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
+import SearchProvider from './Contexts/SearchProvider'
 import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 
 export const MesPapiersLibProviders = ({ lang, components }) => {
@@ -20,18 +21,20 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
     <I18n lang={lang} polyglot={polyglot}>
       <MultiSelectionProvider>
         <ScannerI18nProvider>
-          <PapersDefinitionsProvider>
-            <ModalProvider>
-              <OnboardingProvider OnboardingComponent={Onboarding}>
-                <MesPapiersLibLayout />
-              </OnboardingProvider>
-              {PapersFab && (
-                <PapersFabWrapper>
-                  <PapersFab />
-                </PapersFabWrapper>
-              )}
-            </ModalProvider>
-          </PapersDefinitionsProvider>
+          <SearchProvider>
+            <PapersDefinitionsProvider>
+              <ModalProvider>
+                <OnboardingProvider OnboardingComponent={Onboarding}>
+                  <MesPapiersLibLayout />
+                </OnboardingProvider>
+                {PapersFab && (
+                  <PapersFabWrapper>
+                    <PapersFab />
+                  </PapersFabWrapper>
+                )}
+              </ModalProvider>
+            </PapersDefinitionsProvider>
+          </SearchProvider>
         </ScannerI18nProvider>
       </MultiSelectionProvider>
     </I18n>
