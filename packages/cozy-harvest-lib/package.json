@@ -14,14 +14,15 @@
     "url": "https://github.com/cozy/cozy-libs/issues"
   },
   "scripts": {
-    "build": "babel src -d dist --copy-files --verbose",
+    "build": "babel --extensions .js,.jsx,.ts,.tsx --ignore '**/*.spec.tsx','**/*.spec.ts' ./src -d ./dist  --copy-files --verbose",
+    "build:watch": "yarn build --watch",
     "build:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn build:doc:react)",
     "deploy:doc": "(cd ../.. && yarn deploy:doc)",
     "prepublishOnly": "yarn check-locales && yarn build",
     "check-locales": "./scripts/check-locales.sh",
     "test": "jest --runInBand",
     "lint": "cd .. && yarn eslint --ext js,jsx packages/cozy-harvest-lib",
-    "start": "yarn build --watch",
+    "start": "yarn build:watch",
     "cli": "env BABEL_ENV=es5 node src/cli/index.js",
     "watch:doc:react": "(cd ../.. && TARGET=cozy-harvest-lib yarn watch:doc:react)"
   },
@@ -57,6 +58,7 @@
     "cozy-intent": "^2.9.0",
     "cozy-keys-lib": "^4.1.9",
     "cozy-realtime": "^4.3.0",
+    "cozy-tsconfig": "^1.0.0",
     "cozy-ui": "^80.1.1",
     "enzyme": "3.11.0",
     "enzyme-adapter-react-16": "1.15.6",
