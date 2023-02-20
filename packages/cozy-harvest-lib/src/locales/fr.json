@@ -27,7 +27,12 @@
       "noAccount": "Si vous n'avez pas de compte il vous faudra en créer sur le site [%{vendorName}](%{vendorLink})."
     },
     "cannotConnectLink": "Je ne parviens pas à me connecter",
-    "notClientSide": "L'application %{name} utilise un nouveau système plus efficace pour la récupération de vos données dans votre Cozy. Cette action est uniquement accessible depuis l’application mobile Cozy."
+    "notClientSide": "L'application %{name} utilise un nouveau système plus efficace pour la récupération de vos données dans votre Cozy. Cette action est uniquement accessible depuis l’application mobile Cozy.",
+    "clientSide": {
+      "title": "Connecter à mon Cozy",
+      "submit": "Connecter",
+      "description": "Connectez %{name} à votre Cozy pour synchroniser votre compte et récupérer automatiquement vos données."
+    }
   },
   "contracts": {
     "headers": {
@@ -424,7 +429,10 @@
       "label": "Se reconnecter"
     },
     "connect": {
-      "label": "Ajouter un compte"
+      "description": "Connectez %{name} à votre Cozy pour synchroniser votre compte et récupérer automatiquement vos données.",
+      "label": "Ajouter un compte",
+      "submit": "Connecter",
+      "title": "Connecter à mon Cozy"
     },
     "window": {
       "title": "OAuth"

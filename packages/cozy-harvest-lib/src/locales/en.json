@@ -27,7 +27,12 @@
       "noAccount": "If you do not have an account you will need to create one on the [%{vendorName}](%{vendorLink})'s website."
     },
     "cannotConnectLink": "I can't connect",
-    "notClientSide": "The %{name} application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app."
+    "notClientSide": "The %{name} application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app.",
+    "clientSide": {
+      "title": "Connect to your Cozy",
+      "submit": "Connect",
+      "description": "Connect %{name} to your Cozy to synchronize your account and automatically retrieve all your data. "
+    }
   },
   "contracts": {
     "headers": {
@@ -424,7 +429,10 @@
       "label": "Reconnect"
     },
     "connect": {
-      "label": "Connect"
+      "description": "Connect %{slug} to your Cozy to synchronize your account and automatically retrieve all your data.",
+      "label": "Connect",
+      "submit": "Connect",
+      "title": "Connect to your Cozy"
     },
     "window": {
       "title": "OAuth"
