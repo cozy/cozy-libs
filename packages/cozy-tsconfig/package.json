@@ -1,0 +1,39 @@
+{
+	"name": "cozy-tsconfig",
+	"version": "1.0.0",
+	"description": "Shared TypeScript config for Cozy Cloud projects",
+	"license": "MIT",
+	"author": "Cozy (https://cozy.io)",
+	"contributors": [
+		"Antonin Cezard <antonin.cezard@cozycloud.cc>"
+	],
+	"homepage": "https://github.com/cozy/cozy-libs/blob/master/packages/cozy-tsconfig/readme.md",
+	"repository": {
+		"directory": "packages/cozy-tsconfig",
+		"type": "git",
+		"url": "git+https://github.com/cozy/cozy-libs.git"
+	},
+	"bugs": {
+		"url": "https://github.com/cozy/cozy-libs/issues"
+	},
+	"main": "tsconfig.json",
+	"peerDependencies": {
+		"typescript": ">=4.5.0"
+	},
+	"peerDependenciesMeta": {
+		"typescript": {
+			"optional": false
+		}
+	},
+	"keywords": [
+		"config",
+		"configuration",
+		"cozy",
+		"ts",
+		"tsconfig",
+		"typescript"
+	],
+	"engines": {
+		"node": ">=16.0.0"
+	}
+}
