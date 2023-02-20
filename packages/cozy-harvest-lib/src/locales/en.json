@@ -23,7 +23,8 @@
     },
     "cannotConnectModal": {
       "title": "You can't connect?",
-      "content": "You can check your login or reset your password on the website "
+      "content": "You can check your login or reset your password on the [%{vendorName}](%{vendorLink})'s website.",
+      "noAccount": "If you do not have an account you will need to create one on the [%{vendorName}](%{vendorLink})'s website."
     },
     "cannotConnectLink": "I can't connect",
     "notClientSide": "The %{name} application uses a brand-new and efficient system for retrieving your data from your Cozy. This action is only accessible from the Cozy mobile app."
