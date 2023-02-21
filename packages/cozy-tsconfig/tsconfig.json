@@ -12,7 +12,7 @@
     "allowJs": true, // Disable if you don't have any .js files or if you have too many errors
     "allowSyntheticDefaultImports": true,
     "declaration": true,
-    // "declarationDir": "./dist", - Paths related properties don't work when extending from a package
+    "declarationDir": "dist", // Included by default but won't emit anything as long as `tsc` is not run, can be overwritten
     "emitDeclarationOnly": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
@@ -26,6 +26,7 @@
     "module": "esnext",
     "moduleResolution": "node",
     "noFallthroughCasesInSwitch": true,
+    "outDir": "dist", // Best to include it by default to avoid errors like "Cannot write file 'src/foobar.d.ts' because it would overwrite input file."
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": true, // Disable if you have too many errors

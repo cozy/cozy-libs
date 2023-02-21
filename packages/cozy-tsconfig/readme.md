@@ -60,6 +60,8 @@ If you want to use TypeScript in your CI/CD pipeline (for instance if you just r
 
 To emit declaration files, create a **new** file in the root of your project, for instance `tsconfig-build.json`.<br/>
 
+By default, this configuration will emit declaration files in the `dist` directory, but you can overwrite it by providing a `declarationDir` option in the `compilerOptions` field.<br/>
+
 This file will be used to emit declarations, it will extend the base config but only include the files you want to actually emit declarations for.<br/>
 
 Here is a basic example of what you can do:
@@ -80,7 +82,10 @@ Here is a basic example of what you can do:
     "**/*.test.ts",
     "**/*.test.tsx",
     "tests"
-  ]
+  ],
+  "compilerOptions": {
+    "declarationDir": "build" // If your lib directory is not named `dist`, you can overwrite it here
+  }
 }
 ```
 
