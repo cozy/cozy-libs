@@ -13,8 +13,9 @@ const reactMarkdownRendererOptions = ({ linkProps }) => ({
   )
 })
 
-export const Markdown = ({ source, linkProps }) => (
+export const Markdown = ({ source, linkProps, ...props }) => (
   <ReactMarkdown
+    {...props}
     source={source}
     linkTarget="_blank"
     renderers={reactMarkdownRendererOptions({ linkProps })}
