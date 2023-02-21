@@ -5,7 +5,7 @@ import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Empty from 'cozy-ui/transpiled/react/Empty'
 
-import { useSearch } from '../Contexts/SearchProvider'
+import { useSearch } from '../Search/SearchProvider'
 import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import { buildFilesWithContacts } from '../Papers/helpers'
 import { useScannerI18n } from '../Hooks/useScannerI18n'

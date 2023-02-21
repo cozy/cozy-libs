@@ -13,7 +13,7 @@ import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
 import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
 import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
 import { MultiSelectionProvider } from '../../src/components/Contexts/MultiSelectionProvider'
-import SearchProvider from '../../src/components/Contexts/SearchProvider'
+import SearchProvider from '../../src/components/Search/SearchProvider'
 import enLocale from '../../src/locales/en.json'
 
 jest.mock('cozy-client/dist/models/document/documentTypeData', () => ({

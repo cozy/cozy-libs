@@ -1,5 +1,5 @@
-import { index, addDocs } from '../../utils/search'
 import { FILES_DOCTYPE } from '../../doctypes'
+import { index, addDocs } from './search'
 
 const updateFile = doc => {
   if (doc.trashed) {

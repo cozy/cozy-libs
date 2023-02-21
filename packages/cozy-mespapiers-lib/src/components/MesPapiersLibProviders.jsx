@@ -10,7 +10,7 @@ import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
 import { getComponents } from '../helpers/defaultComponent'
 import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
-import SearchProvider from './Contexts/SearchProvider'
+import SearchProvider from './Search/SearchProvider'
 import { MesPapiersLibLayout } from './MesPapiersLibLayout'
 
 export const MesPapiersLibProviders = ({ lang, components }) => {

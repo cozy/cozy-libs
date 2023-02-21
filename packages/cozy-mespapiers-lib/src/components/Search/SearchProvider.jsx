@@ -1,6 +1,8 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
+
 import useRealtime from 'cozy-realtime/dist/useRealtime'
 import { useClient } from 'cozy-client'
+
 import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../../doctypes'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { onCreate, onUpdate, add, search } from './helpers'

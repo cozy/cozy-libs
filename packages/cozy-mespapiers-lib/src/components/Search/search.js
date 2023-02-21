@@ -2,7 +2,7 @@ import { Document } from 'flexsearch'
 
 import { models } from 'cozy-client'
 
-import { CONTACTS_DOCTYPE } from '../doctypes'
+import { CONTACTS_DOCTYPE } from '../../doctypes'
 
 const {
   document: {
