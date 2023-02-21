@@ -1,6 +1,6 @@
 {
 	"name": "cozy-tsconfig",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "Shared TypeScript config for Cozy Cloud projects",
 	"license": "MIT",
 	"author": "Cozy (https://cozy.io)",
