@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.3.0...cozy-harvest-lib@13.4.0) (2023-02-21)
+
+
+### Features
+
+* **harvest:** Add create account wording in CannotConnectModal ([1d78356](https://github.com/cozy/cozy-libs/commit/1d78356b441b70c4da0a0ad06df3250edfe5ae52))
+* **harvest:** Add props propagation on Markdown component ([f76f9a6](https://github.com/cozy/cozy-libs/commit/f76f9a6a22c6bbe23169638973b68ecfb7842257))
+
+
+
+
+
 # [13.3.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.2.2...cozy-harvest-lib@13.3.0) (2023-02-16)
 
 
