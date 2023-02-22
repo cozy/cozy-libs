@@ -24,5 +24,5 @@ export const PaperDefinitionsPropTypes = PropTypes.shape({
     PropTypes.arrayOf(PaperDefinitionsStepPropTypes).isRequired
   ]),
   featureDate: PropTypes.string,
-  maxDisplay: PropTypes.number.isRequired
+  maxDisplay: PropTypes.number
 })

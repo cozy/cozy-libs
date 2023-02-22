@@ -13,6 +13,7 @@ import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
 import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
 import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
 import { MultiSelectionProvider } from '../../src/components/Contexts/MultiSelectionProvider'
+import SearchProvider from '../../src/components/Search/SearchProvider'
 import enLocale from '../../src/locales/en.json'
 
 jest.mock('cozy-client/dist/models/document/documentTypeData', () => ({
@@ -33,19 +34,21 @@ const AppLike = ({ children, client, history }) => {
         <I18n dictRequire={() => enLocale} lang="en">
           <MultiSelectionProvider>
             <ScannerI18nProvider lang="en">
-              <MuiCozyTheme>
-                <BreakpointsProvider>
-                  <PapersDefinitionsProvider>
-                    <StepperDialogProvider>
-                      <ModalProvider>
-                        <HashRouter history={hashHistory}>
-                          {children}
-                        </HashRouter>
-                      </ModalProvider>
-                    </StepperDialogProvider>
-                  </PapersDefinitionsProvider>
-                </BreakpointsProvider>
-              </MuiCozyTheme>
+              <SearchProvider>
+                <MuiCozyTheme>
+                  <BreakpointsProvider>
+                    <PapersDefinitionsProvider>
+                      <StepperDialogProvider>
+                        <ModalProvider>
+                          <HashRouter history={hashHistory}>
+                            {children}
+                          </HashRouter>
+                        </ModalProvider>
+                      </StepperDialogProvider>
+                    </PapersDefinitionsProvider>
+                  </BreakpointsProvider>
+                </MuiCozyTheme>
+              </SearchProvider>
             </ScannerI18nProvider>
           </MultiSelectionProvider>
         </I18n>

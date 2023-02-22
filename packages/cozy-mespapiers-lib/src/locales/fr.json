@@ -6,6 +6,7 @@
   },
   "action": {
     "createPaper": "Ajouter un papier",
+    "createPaperByTheme": "Ajouter : %{theme}",
     "download": "Télécharger",
     "zipDownload": "Télécharger un .zip",
     "forward": "Transmettre",
@@ -261,6 +262,29 @@
           "inputLabel": "Date d'expiration",
           "text": "Quelle est la date d'expiration du passeport ?"
         }
+      }
+    },
+    "work_contract": {
+      "contract_type": {
+        "text": "Sélectionnez le type de contrat"
+      }
+    },
+    "caf": {
+      "cafFileNumber": {
+        "inputLabel": "Numéro de dossier CAF",
+        "text": "Saisissez votre numéro de dossier CAF"
+      }
+    },
+    "payment_proof_family_allowance": {
+      "cafFileNumber": {
+        "inputLabel": "Numéro de dossier CAF",
+        "text": "Saisissez votre numéro de dossier CAF"
+      }
+    },
+    "tax_notice": {
+      "refTaxIncome": {
+        "inputLabel": "Revenu fiscal de référence",
+        "text": "Ajoutez votre revenu fiscal de référence"
       }
     }
   },
