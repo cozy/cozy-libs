@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@21.0.0...cozy-mespapiers-lib@22.0.0) (2023-02-22)
+
+
+### Features
+
+* Upgrade harvest in peerDep to 13.4.0 ([b166e44](https://github.com/cozy/cozy-libs/commit/b166e44882330313bee081bf7567913477b8625b))
+
+
+### BREAKING CHANGES
+
+* you should have `cozy-harvest-lib >= 13.4.0`
+
+
+
+
+
 # [21.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@20.0.9...cozy-mespapiers-lib@21.0.0) (2023-02-22)
 
 
