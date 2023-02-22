@@ -12,7 +12,7 @@ import KonnectorUpdateInfos from '../../../components/infos/KonnectorUpdateInfos
 import LaunchTriggerCard from '../../../components/cards/LaunchTriggerCard'
 import KonnectorMaintenance from '../../../components/Maintenance'
 import AppLinkCard from '../../../components/cards/AppLinkCard'
-import WebsiteLinkCard from '../../../components/cards/WebsiteLinkCard'
+import { InformationsCard } from '../../../components/cards/InformationsCard'
 import useMaintenanceStatus from '../../../components/hooks/useMaintenanceStatus'
 import getRelatedAppsSlugs from '../../../models/getRelatedAppsSlugs'
 import appLinksProps from '../../../components/KonnectorConfiguration/DataTab/appLinksProps'
@@ -91,7 +91,7 @@ export const DataTab = ({
             konnector={konnector}
           />
           {konnector.vendor_link && (
-            <WebsiteLinkCard link={konnector.vendor_link} />
+            <InformationsCard link={konnector.vendor_link} />
           )}
         </Stack>
       </div>

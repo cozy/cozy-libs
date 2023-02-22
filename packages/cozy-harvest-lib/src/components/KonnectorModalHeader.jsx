@@ -10,10 +10,14 @@ import KonnectorIcon from './KonnectorIcon'
 import { useDialogContext } from './DialogContext'
 
 const resetFontStyles = { fontSize: '1rem', fontWeight: 'normal' }
-const KonnectorModalHeader = ({ konnector, children }) => {
+const KonnectorModalHeader = ({ konnector, children, className }) => {
   const { dialogTitleProps } = useDialogContext()
   return (
-    <DialogTitle {...dialogTitleProps} className="u-pb-half" disableTypography>
+    <DialogTitle
+      {...dialogTitleProps}
+      className={cx('u-pb-half', className)}
+      disableTypography
+    >
       <Media>
         <Img
           className={cx('u-mr-1', {

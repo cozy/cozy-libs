@@ -34,37 +34,59 @@ exports[`OAuthForm should handle oauth cancelation 1`] = `
       </div>
     </div>
   </div>
-  <button
-    aria-busy="true"
-    aria-disabled="true"
-    class="styles__c-btn___-2Vnj styles__c-btn--full___2VmR1 styles__c-btn--center___16_Xh u-mt-1"
-    disabled=""
-    type="submit"
+  <div
+    class="styles__c-card___YgP7B u-flex u-flex-wrap"
   >
-    <span>
-      <span>
-        oauth.connect.label
-      </span>
-      <svg
-        aria-busy="true"
-        aria-hidden="true"
-        class="u-ml-half styles__icon___23x3R styles__icon--spin___ybfC1"
-        focusable="false"
-        height="16"
-        role="progressbar"
-        viewBox="0 0 32 32"
-        width="16"
+    <div
+      class="styles__c-empty___3w5oV"
+    >
+      CloudSync2
+      <h3
+        class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
       >
-        <path
-          d="M16 0a16 16 0 000 32 16 16 0 000-32m0 4a12 12 0 010 24 12 12 0 010-24"
-          opacity="0.25"
-        />
-        <path
-          d="M16 0a16 16 0 0116 16h-4A12 12 0 0016 4z"
-        />
-      </svg>
-    </span>
-  </button>
+        oauth.connect.title
+      </h3>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+      >
+        oauth.connect.description
+      </p>
+      <div
+        class="styles__c-empty-text___3HnvR"
+      />
+    </div>
+    <button
+      aria-busy="true"
+      aria-disabled="true"
+      class="styles__c-btn___-2Vnj styles__c-btn--center___16_Xh u-mh-auto"
+      disabled=""
+      type="submit"
+    >
+      <span>
+        <span>
+          oauth.connect.submit
+        </span>
+        <svg
+          aria-busy="true"
+          aria-hidden="true"
+          class="u-ml-half styles__icon___23x3R styles__icon--spin___ybfC1"
+          focusable="false"
+          height="16"
+          role="progressbar"
+          viewBox="0 0 32 32"
+          width="16"
+        >
+          <path
+            d="M16 0a16 16 0 000 32 16 16 0 000-32m0 4a12 12 0 010 24 12 12 0 010-24"
+            opacity="0.25"
+          />
+          <path
+            d="M16 0a16 16 0 0116 16h-4A12 12 0 0016 4z"
+          />
+        </svg>
+      </span>
+    </button>
+  </div>
 </div>
 `;
 
@@ -100,30 +122,74 @@ exports[`OAuthForm should handle oauth cancelation 2`] = `
       </div>
     </div>
   </div>
-  <button
-    class="styles__c-btn___-2Vnj styles__c-btn--full___2VmR1 styles__c-btn--center___16_Xh u-mt-1"
-    type="submit"
+  <div
+    class="styles__c-card___YgP7B u-flex u-flex-wrap"
   >
-    <span>
+    <div
+      class="styles__c-empty___3w5oV"
+    >
+      CloudSync2
+      <h3
+        class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
+      >
+        oauth.connect.title
+      </h3>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+      >
+        oauth.connect.description
+      </p>
+      <div
+        class="styles__c-empty-text___3HnvR"
+      />
+    </div>
+    <button
+      class="styles__c-btn___-2Vnj styles__c-btn--center___16_Xh u-mh-auto"
+      type="submit"
+    >
       <span>
-        oauth.connect.label
+        <span>
+          oauth.connect.submit
+        </span>
       </span>
-    </span>
-  </button>
+    </button>
+  </div>
 </div>
 `;
 
 exports[`OAuthForm should render 1`] = `
 <div>
-  <button
-    class="styles__c-btn___-2Vnj styles__c-btn--full___2VmR1 styles__c-btn--center___16_Xh u-mt-1"
-    type="submit"
+  <div
+    class="styles__c-card___YgP7B u-flex u-flex-wrap"
   >
-    <span>
+    <div
+      class="styles__c-empty___3w5oV"
+    >
+      CloudSync2
+      <h3
+        class="MuiTypography-root MuiTypography-h3 MuiTypography-colorTextPrimary MuiTypography-gutterBottom"
+      >
+        oauth.connect.title
+      </h3>
+      <p
+        class="MuiTypography-root MuiTypography-body1 MuiTypography-colorTextSecondary MuiTypography-gutterBottom"
+      >
+        oauth.connect.description
+      </p>
+      <div
+        class="styles__c-empty-text___3HnvR"
+      />
+    </div>
+    <button
+      class="styles__c-btn___-2Vnj styles__c-btn--center___16_Xh u-mh-auto"
+      type="submit"
+    >
       <span>
-        oauth.connect.label
+        <span>
+          oauth.connect.submit
+        </span>
       </span>
-    </span>
-  </button>
+    </button>
+  </div>
 </div>
 `;

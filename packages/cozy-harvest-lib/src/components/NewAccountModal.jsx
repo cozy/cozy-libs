@@ -17,6 +17,8 @@ import KonnectorMaintenance from './Maintenance'
 import useMaintenanceStatus from './hooks/useMaintenanceStatus'
 import { MountPointContext } from './MountPointContext'
 import { useDialogContext } from './DialogContext'
+import { InformationsCard } from './cards/InformationsCard'
+import KonnectorModalHeader from './KonnectorModalHeader'
 
 /**
  * We need to deal with `onLoginSuccess` and `onSucess` because we
@@ -34,7 +36,7 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
   } = useMaintenanceStatus(client, konnector)
   const isMaintenanceLoaded =
     fetchStatus === 'loaded' || fetchStatus === 'failed'
-
+  const serverSideKonnector = !(konnector.oauth || konnector.clientSide)
   const { dialogTitleProps } = useDialogContext()
   const fieldOptions = {
     displaySecretPlaceholder: false
@@ -57,21 +59,29 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
 
   return (
     <>
-      <DialogTitle
-        {...dialogTitleProps}
-        className={cx(
-          dialogTitleProps.className,
-          'u-ta-center u-flex-column u-stack-m u-pb-1'
-        )}
-        disableTypography
-      >
-        <KonnectorIcon className="u-w-3 u-h-3" konnector={konnector} />
-        <div>
-          <Typography variant="h5">
-            {t('modal.addAccount.title', { name: konnector.name })}
-          </Typography>
-        </div>
-      </DialogTitle>
+      {serverSideKonnector ? (
+        <DialogTitle
+          {...dialogTitleProps}
+          className={cx(
+            dialogTitleProps.className,
+            'u-ta-center u-flex-column u-stack-m u-pb-1'
+          )}
+          disableTypography
+        >
+          <KonnectorIcon className="u-w-3 u-h-3" konnector={konnector} />
+          <div>
+            <Typography variant="h5">
+              {t('modal.addAccount.title', { name: konnector.name })}
+            </Typography>
+          </div>
+        </DialogTitle>
+      ) : (
+        <KonnectorModalHeader
+          className="u-elevation-1 u-mb-1"
+          konnector={konnector}
+        />
+      )}
+
       {!isMaintenanceLoaded ? (
         <DialogContent className="u-ta-center u-pt-1 u-pb-3">
           <Spinner size="xxlarge" />
@@ -89,6 +99,11 @@ const NewAccountModal = ({ konnector, onSuccess, onDismiss }) => {
             onVaultDismiss={onDismiss}
             fieldOptions={fieldOptions}
           />
+
+          {!serverSideKonnector && (
+            <InformationsCard className="u-mt-1" link={konnector.vendor_link} />
+          )}
+
           {/*
             Necessary for correct padding-bottom in the DialogContent scroll
             container. u-pb-2 on DialogContent would not work in Firefox.

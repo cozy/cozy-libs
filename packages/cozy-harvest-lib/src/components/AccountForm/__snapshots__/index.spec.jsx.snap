@@ -147,14 +147,18 @@ exports[`AccountForm should render normally when client side konnector with laun
       inputRefByName={[Function]}
       t={[Function]}
     />
-    <ForwardRef
-      className="u-mt-2 u-mb-1-half"
-      data-testid="submit-btn"
-      disabled={false}
-      fullWidth={true}
-      label="Connect"
-      onClick={[Function]}
-      variant="primary"
+    <ConnectCard
+      buttonProps={
+        Object {
+          "busy": undefined,
+          "data-testid": "submit-btn",
+          "disabled": false,
+          "label": "Connect",
+          "onClick": [Function],
+        }
+      }
+      description="Connect testkonnector to your Cozy to synchronize your account and automatically retrieve all your data. "
+      title="Connect to your Cozy"
     />
   </React.Fragment>
 </div>

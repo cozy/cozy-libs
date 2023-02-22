@@ -14,22 +14,23 @@ import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 import { Dialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
-import withAdaptiveRouter from '../hoc/withRouter'
-import withLocales from '../hoc/withLocales'
 import AccountFields from './AccountFields'
+import CannotConnectModal from './CannotConnectModal'
+import ConnectionBackdrop from './ConnectionBackdrop'
 import ReadOnlyIdentifier from './ReadOnlyIdentifier'
 import TriggerErrorInfo from '../infos/TriggerErrorInfo'
+import manifest from '../../helpers/manifest'
+import withAdaptiveRouter from '../hoc/withRouter'
+import withConnectionFlow from '../../models/withConnectionFlow'
+import withKonnectorLocales from '../hoc/withKonnectorLocales'
+import withLocales from '../hoc/withLocales'
+import { ConnectCard } from '../cards/ConnectCard'
+import { KonnectorJobError } from '../../helpers/konnectors'
+import { findKonnectorPolicy } from '../../konnector-policies'
 import fieldHelpers, {
   getEncryptedFieldName,
   SECRET
 } from '../../helpers/fields'
-import { KonnectorJobError } from '../../helpers/konnectors'
-import { findKonnectorPolicy } from '../../konnector-policies'
-import manifest from '../../helpers/manifest'
-import withKonnectorLocales from '../hoc/withKonnectorLocales'
-import withConnectionFlow from '../../models/withConnectionFlow'
-import CannotConnectModal from './CannotConnectModal'
-import ConnectionBackdrop from './ConnectionBackdrop'
 
 const VALIDATION_ERROR_REQUIRED_FIELD = 'VALIDATION_ERROR_REQUIRED_FIELD'
 
@@ -314,18 +315,49 @@ export class AccountForm extends PureComponent {
                     {t('accountForm.cannotConnectLink')}
                   </Link>
                 )}
-                <Button
-                  busy={submitting && !flag('harvest.inappconnectors.enabled')}
-                  className="u-mt-2 u-mb-1-half"
-                  disabled={
-                    submitting ||
-                    !this.isSubmittable({ dirty, error, initialValues, valid })
-                  }
-                  fullWidth
-                  label={t('accountForm.submit.label')}
-                  onClick={() => this.handleSubmit(values, form)}
-                  data-testid="submit-btn"
-                />
+                {konnector.clientSide ? (
+                  <ConnectCard
+                    title={t('accountForm.clientSide.title')}
+                    description={t('accountForm.clientSide.description', {
+                      name: konnector.name
+                    })}
+                    buttonProps={{
+                      busy:
+                        submitting && !flag('harvest.inappconnectors.enabled'),
+                      disabled:
+                        submitting ||
+                        !this.isSubmittable({
+                          dirty,
+                          error,
+                          initialValues,
+                          valid
+                        }),
+                      label: t('accountForm.clientSide.submit'),
+                      onClick: () => this.handleSubmit(values, form),
+                      ['data-testid']: 'submit-btn'
+                    }}
+                  />
+                ) : (
+                  <Button
+                    busy={
+                      submitting && !flag('harvest.inappconnectors.enabled')
+                    }
+                    className="u-mt-2 u-mb-1-half"
+                    disabled={
+                      submitting ||
+                      !this.isSubmittable({
+                        dirty,
+                        error,
+                        initialValues,
+                        valid
+                      })
+                    }
+                    fullWidth
+                    label={t('accountForm.submit.label')}
+                    onClick={() => this.handleSubmit(values, form)}
+                    data-testid="submit-btn"
+                  />
+                )}
                 {submitting && flag('harvest.inappconnectors.enabled') && (
                   <ConnectionBackdrop name={name} />
                 )}
