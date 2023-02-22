@@ -2,8 +2,6 @@ import React, { useCallback, useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
 
-import Button from 'cozy-ui/transpiled/react/Button'
-
 import { useFlowState } from '../models/withConnectionFlow'
 import useOAuthExtraParams from './hooks/useOAuthExtraParams'
 import withLocales from './hoc/withLocales'
@@ -21,6 +19,7 @@ import {
   openOAuthWindow
 } from './OAuthService'
 import { useWebviewIntent } from 'cozy-intent'
+import { ConnectCard } from './cards/ConnectCard'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It
@@ -117,7 +116,7 @@ export const OAuthForm = props => {
       : 'oauth.reconnect.label'
     : isBankingKonnector
     ? 'oauth.banking.connect.label'
-    : 'oauth.connect.label'
+    : 'oauth.connect.submit'
 
   return (
     <>
@@ -129,13 +128,17 @@ export const OAuthForm = props => {
         />
       )}
       {!reconnect && (
-        <Button
-          className="u-mt-1"
-          busy={isBusy}
-          disabled={isBusy}
-          extension="full"
-          label={t(buttonLabel)}
-          onClick={handleConnect}
+        <ConnectCard
+          title={t('oauth.connect.title')}
+          description={t('oauth.connect.description', {
+            name: konnector.name
+          })}
+          buttonProps={{
+            busy: isBusy,
+            disabled: isBusy,
+            label: t(buttonLabel),
+            onClick: handleConnect
+          }}
         />
       )}
     </>

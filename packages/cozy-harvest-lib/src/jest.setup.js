@@ -50,3 +50,12 @@ console.error = function () {
   originalConsoleError.apply(this, arguments)
   throw new Error('console.error should not be called during tests')
 }
+
+// Needed for now because `cozy-ui` can't be updated to the latest version in devDependencies
+jest.mock(
+  'cozy-ui/transpiled/react/Icons/CloudSync2',
+  () => () => 'CloudSync2',
+  {
+    virtual: true
+  }
+)
