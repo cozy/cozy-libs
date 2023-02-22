@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import PropTypes from 'prop-types'
 import InputMask from 'react-input-mask'
 
 import InputAdornment from 'cozy-ui/transpiled/react/InputAdornment'
@@ -11,6 +10,7 @@ import {
   checkConstraintsOfIinput,
   makeConstraintsOfInput
 } from '../../../utils/input'
+import { defaultProptypes } from './proptypes'
 
 const styleFontMono = 'Segoe UI Mono, SF Mono, Roboto Mono, Courier'
 
@@ -208,24 +208,6 @@ const InputTextAdapter = ({
   )
 }
 
-const attrsProptypes = PropTypes.shape({
-  name: PropTypes.string,
-  inputLabel: PropTypes.string,
-  type: PropTypes.string,
-  required: PropTypes.bool,
-  minLength: PropTypes.number,
-  maxLength: PropTypes.number,
-  mask: PropTypes.string,
-  maskPlaceholder: PropTypes.string
-})
-
-InputTextAdapter.propTypes = {
-  attrs: attrsProptypes.isRequired,
-  defaultValue: PropTypes.string,
-  setValue: PropTypes.func.isRequired,
-  setValidInput: PropTypes.func.isRequired,
-  setIsFocus: PropTypes.func.isRequired,
-  idx: PropTypes.number
-}
+InputTextAdapter.propTypes = defaultProptypes
 
 export default InputTextAdapter

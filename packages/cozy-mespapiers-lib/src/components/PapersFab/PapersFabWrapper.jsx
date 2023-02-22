@@ -1,46 +1,93 @@
 import React, { cloneElement, useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import { useLocation, useNavigate, useParams } from 'react-router-dom'
 
 import { useClient } from 'cozy-client'
 
-import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
-import { ActionsItems } from '../Actions/ActionsItems'
 import { makeActions } from '../Actions/utils'
 import { createPaper } from '../Actions/Items/createPaper'
 import { select } from '../Actions/Items/select'
+import { createPaperByTheme } from '../Actions/Items/createPaperByTheme'
+import { findPlaceholderByLabelAndCountry } from '../../helpers/findPlaceholders'
+import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
+import PaperFabUI from './PaperFabUI'
 
 const PapersFabWrapper = ({ children }) => {
-  const [generalOptions, setGeneralOptions] = useState(false)
+  const [showGeneralMenu, setShowGeneralMenu] = useState(false)
+  const [showConnectorMenu, setShowConnectorMenu] = useState(false)
   const actionBtnRef = useRef()
   const client = useClient()
+  const { fileTheme } = useParams()
+  const navigate = useNavigate()
+  const { search, pathname } = useLocation()
+  const country = new URLSearchParams(search).get('country')
 
-  const hideActionsMenu = () => setGeneralOptions(false)
-  const toggleActionsMenu = () => {
-    setGeneralOptions(prev => !prev)
+  const hideGeneralMenu = () => setShowGeneralMenu(false)
+  const toggleGeneralMenu = () => {
+    setShowGeneralMenu(prev => !prev)
   }
-  const actions = makeActions([createPaper, select], {
+
+  const { papersDefinitions: paperDefinitionsList } = usePapersDefinitions()
+  const paperDefinition = findPlaceholderByLabelAndCountry(
+    paperDefinitionsList,
+    fileTheme,
+    country
+  )[0]
+
+  const redirectPaperCreation = placeholder => {
+    setShowConnectorMenu(false)
+    const countrySearchParam = `${
+      placeholder.country ? `country=${placeholder.country}` : ''
+    }`
+    return navigate({
+      pathname: `${pathname}/create/${placeholder.label}`,
+      search: `${countrySearchParam}`
+    })
+  }
+
+  const showImportDropdown = paperDefinition => {
+    if (paperDefinition.connectorCriteria) {
+      setShowConnectorMenu(true)
+    } else {
+      redirectPaperCreation(paperDefinition)
+    }
+    hideGeneralMenu()
+  }
+
+  const actionList = [createPaper, select]
+  if (fileTheme) actionList.unshift(createPaperByTheme)
+
+  const actions = makeActions(actionList, {
     client,
-    hideActionsMenu
+    hideActionsMenu: hideGeneralMenu,
+    showImportDropdown,
+    fileTheme,
+    country
   })
 
   if (!children) return null
 
   const PapersFabOverrided = cloneElement(children, {
-    onClick: toggleActionsMenu,
+    onClick: toggleGeneralMenu,
     innerRef: actionBtnRef
   })
 
-  return (
-    <>
-      {PapersFabOverrided}
+  const props = {
+    PapersFabOverrided,
+    generalMenuProps: {
+      show: showGeneralMenu,
+      actions,
+      onClose: hideGeneralMenu
+    },
+    connectorMenuProps: {
+      show: showConnectorMenu,
+      placeholder: paperDefinition,
+      onClose: () => setShowConnectorMenu(false),
+      onClick: () => redirectPaperCreation(paperDefinition)
+    }
+  }
 
-      {generalOptions && (
-        <ActionMenuWrapper onClose={hideActionsMenu} ref={actionBtnRef}>
-          <ActionsItems actions={actions} />
-        </ActionMenuWrapper>
-      )}
-    </>
-  )
+  return <PaperFabUI {...props} ref={actionBtnRef} />
 }
 
 PapersFabWrapper.propTypes = {

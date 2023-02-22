@@ -37,6 +37,7 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
 
   return paperslistByContact.map(({ withHeader, contact, papers }, idx) => (
     <List
+      key={idx}
       subheader={
         withHeader && (
           <ListSubheader>
@@ -44,7 +45,6 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
           </ListSubheader>
         )
       }
-      key={idx}
     >
       <PapersList papers={papers} isLast={files.length === 1} />
     </List>
@@ -52,7 +52,7 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
 }
 
 PapersListByContact.propTypes = {
-  selectedThemeLabel: PropTypes.arrayOf(PropTypes.object),
+  selectedThemeLabel: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object),
   contacts: PropTypes.arrayOf(PropTypes.object)
 }

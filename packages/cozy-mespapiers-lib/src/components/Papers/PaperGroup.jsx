@@ -18,12 +18,12 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 import { useScannerI18n } from '../Hooks/useScannerI18n'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
-const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
+const PaperGroup = ({ papersByCategories }) => {
   const navigate = useNavigate()
   const client = useClient()
   const { t } = useI18n()
   const scannerT = useScannerI18n()
-  const { isMultiSelectionActive } = useMultiSelection()
+  const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
 
   const goPapersList = category => {
     if (isMultiSelectionActive) {
@@ -37,7 +37,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
     <List className="u-pv-0">
       <ListSubheader>{t('PapersList.subheader')}</ListSubheader>
       <div className="u-pv-half">
-        {allPapersByCategories.length === 0 ? (
+        {papersByCategories.length === 0 ? (
           <Typography
             className="u-ml-1 u-mv-1"
             variant="body2"
@@ -46,7 +46,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
             {t('PapersList.empty')}
           </Typography>
         ) : (
-          allPapersByCategories.map((paper, index) => {
+          papersByCategories.map((paper, index) => {
             const category = paper?.metadata?.qualification?.label
 
             return (
@@ -77,7 +77,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
                     color="var(--secondaryTextColor)"
                   />
                 </ListItem>
-                {index !== allPapersByCategories.length - 1 && (
+                {index !== papersByCategories.length - 1 && (
                   <Divider variant="inset" component="li" />
                 )}
               </Fragment>
@@ -90,8 +90,7 @@ const PaperGroup = ({ allPapersByCategories, setSelectedThemeLabel }) => {
 }
 
 PaperGroup.propTypes = {
-  allPapersByCategories: PropTypes.arrayOf(PropTypes.object),
-  setSelectedThemeLabel: PropTypes.func
+  papersByCategories: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default PaperGroup

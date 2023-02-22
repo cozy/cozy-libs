@@ -5,6 +5,7 @@ import cx from 'classnames'
 import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 import Icon, { iconPropType } from 'cozy-ui/transpiled/react/Icon'
 
+import IlluCafNumberHelp from '../../assets/images/IlluCafNumberHelp.png'
 import IlluCovidVaccineCertificate from '../../assets/images/IlluCovidVaccineCertificate.png'
 import IlluDiploma from '../../assets/images/IlluDiploma.png'
 import IlluDriverLicenseBack from '../../assets/images/IlluDriverLicenseBack.png'
@@ -22,6 +23,7 @@ import IlluResidencePermitExpirationDateHelp from '../../assets/images/IlluResid
 import IlluResidencePermitFront from '../../assets/images/IlluResidencePermitFront.png'
 import IlluResidencePermitNumberHelp from '../../assets/images/IlluResidencePermitNumberHelp.png'
 import IlluVehicleRegistration from '../../assets/images/IlluVehicleRegistration.png'
+import IlluWorkContract from '../../assets/images/IlluWorkContract.png'
 import IlluPassport from '../../assets/images/IlluPassport.png'
 import IlluPassportNumber from '../../assets/images/IlluPassportNumber.png'
 import IlluPassportDate from '../../assets/images/IlluPassportDate.png'
@@ -30,8 +32,10 @@ import IlluGenericInputDate from '../../assets/icons/IlluGenericInputDate.svg'
 import IlluGenericInputText from '../../assets/icons/IlluGenericInputText.svg'
 import IlluGenericNewPage from '../../assets/icons/IlluGenericNewPage.svg'
 import Account from '../../assets/icons/Account.svg'
+import Contract from '../../assets/icons/Contract.svg'
 
 const images = {
+  IlluCafNumberHelp,
   IlluCovidVaccineCertificate,
   IlluDiploma,
   IlluDriverLicenseBack,
@@ -49,6 +53,7 @@ const images = {
   IlluResidencePermitFront,
   IlluResidencePermitNumberHelp,
   IlluVehicleRegistration,
+  IlluWorkContract,
   IlluGenericAlert,
   IlluGenericInputDate,
   IlluGenericInputText,
@@ -56,7 +61,8 @@ const images = {
   IlluPassport,
   IlluPassportNumber,
   IlluPassportDate,
-  Account
+  Account,
+  Contract
 }
 
 const useStyles = makeStyles(() => ({
