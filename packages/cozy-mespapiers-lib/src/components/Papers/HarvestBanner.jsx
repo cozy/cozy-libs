@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import { useQuery, isQueryLoading } from 'cozy-client'
 import { LaunchTriggerCard } from 'cozy-harvest-lib'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
@@ -10,8 +10,6 @@ import {
 } from '../../helpers/queries'
 
 const HarvestBanner = ({ papers }) => {
-  const [triggerId, setTriggerId] = useState(undefined)
-  const [hasTriggerChanged, setHasTriggerChanged] = useState(false)
   const {
     createdByApp: connectorSlug,
     sourceAccountIdentifier: connectorAccountIdentifier
@@ -52,19 +50,8 @@ const HarvestBanner = ({ papers }) => {
   const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
   const konnector = konnectors?.[0]
 
-  useEffect(() => {
-    setTriggerId(trigger?._id)
-
-    if (trigger?._id !== triggerId) {
-      setHasTriggerChanged(true)
-    } else {
-      setHasTriggerChanged(false)
-    }
-  }, [trigger, triggerId, hasTriggerChanged])
-
   if (
     !konnector ||
-    hasTriggerChanged ||
     isAccountsLoading ||
     isTriggersLoading ||
     isKonnectorsLoading
