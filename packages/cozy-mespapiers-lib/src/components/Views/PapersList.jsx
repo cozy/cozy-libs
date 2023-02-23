@@ -16,6 +16,7 @@ import {
 } from '../Papers/helpers'
 import PapersListToolbar from '../Papers/PapersListToolbar'
 import PapersListByContact from '../Papers/PapersListByContact'
+import Empty from '../Papers/Empty/Empty'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PapersList = () => {
@@ -30,8 +31,9 @@ const PapersList = () => {
   )
   const isLoadingFiles =
     isQueryLoading(fileQueryResult) || fileQueryResult.hasMore
+  const hasFiles = files?.length > 0
 
-  const contactIds = !isLoadingFiles ? getContactsRefIdsByFiles(files) : []
+  const contactIds = getContactsRefIdsByFiles(files)
   const contactsQueryByIds = buildContactsQueryByIds(contactIds)
   const { data: contacts, ...contactQueryResult } = useQueryAll(
     contactsQueryByIds.definition,
@@ -70,28 +72,29 @@ const PapersList = () => {
     isConnectorsLoading ||
     isAccountsLoading
 
-  if (isLoading) {
-    return (
-      <>
-        <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
+  return (
+    <>
+      <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
+      {isLoading && (
         <Spinner
           className="u-flex u-flex-justify-center u-mt-2 u-h-5"
           size="xxlarge"
         />
-      </>
-    )
-  }
-
-  return (
-    <>
-      <PapersListToolbar selectedThemeLabel={selectedThemeLabel} />
-      <PapersListByContact
-        selectedThemeLabel={selectedThemeLabel}
-        files={files}
-        contacts={contacts}
-        connector={connector}
-        accounts={accounts}
-      />
+      )}
+      {!isLoading && (
+        <>
+          {hasFiles && (
+            <PapersListByContact
+              selectedThemeLabel={selectedThemeLabel}
+              files={files}
+              contacts={contacts}
+              connector={connector}
+              accounts={accounts}
+            />
+          )}
+          {!hasFiles && <Empty connector={connector} accounts={accounts} />}
+        </>
+      )}
     </>
   )
 }
