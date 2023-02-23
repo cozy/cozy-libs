@@ -9,23 +9,12 @@ import Empty from 'cozy-ui/transpiled/react/Empty'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import PapersIcon from 'cozy-ui/transpiled/react/Icons/Papers'
 
-import { findPlaceholderByLabelAndCountry } from '../../../helpers/findPlaceholders'
 import { useMultiSelection } from '../../Hooks/useMultiSelection'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
+import { makeCountrySearchParam } from './helpers'
 import { getCurrentFileTheme } from '../helpers'
 import HarvestBanner from '../HarvestBanner'
 import styles from './styles.styl'
-
-const makeCountrySearchParam = ({ papersDefinitions, params, search }) => {
-  const country = new URLSearchParams(search).get('country')
-  const paperDefinition = findPlaceholderByLabelAndCountry(
-    papersDefinitions,
-    params.fileTheme,
-    country
-  )[0]
-
-  return paperDefinition.country ? `country=${paperDefinition.country}` : ''
-}
 
 const EmptyNoHeader = ({ connector, accounts }) => {
   const { t } = useI18n()

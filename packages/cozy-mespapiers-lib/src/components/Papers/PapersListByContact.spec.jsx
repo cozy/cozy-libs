@@ -8,6 +8,7 @@ import PapersListByContact from './PapersListByContact'
 import { buildFilesByContacts } from '../Papers/helpers'
 
 jest.mock('../Papers/helpers', () => ({
+  ...jest.requireActual('../Papers/helpers'),
   getCurrentFileTheme: jest.fn(),
   buildFilesByContacts: jest.fn()
 }))
