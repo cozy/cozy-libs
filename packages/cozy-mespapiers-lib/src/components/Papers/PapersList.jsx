@@ -17,6 +17,7 @@ import { viewInDrive } from '../Actions/Items/viewInDrive'
 import { makeActionVariant, makeActions } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import HarvestBanner from './HarvestBanner'
+import { makeAccountFromPapers } from './helpers'
 
 const PapersList = ({ papers, connector, accounts, isLast }) => {
   const client = useClient()
@@ -26,6 +27,7 @@ const PapersList = ({ papers, connector, accounts, isLast }) => {
   const { addMultiSelectionFile } = useMultiSelection()
   const [paperBeingRenamedId, setPaperBeingRenamedId] = useState(null)
 
+  const account = makeAccountFromPapers(papers, accounts)
   const actionVariant = makeActionVariant()
   const actions = useMemo(
     () =>
@@ -51,10 +53,6 @@ const PapersList = ({ papers, connector, accounts, isLast }) => {
         }
       ),
     [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
-  )
-  const accountLogin = papers?.list?.[0]?.cozyMetadata?.sourceAccountIdentifier
-  const account = accounts?.find(
-    account => account?.auth?.login === accountLogin
   )
 
   const handleClick = () => {
