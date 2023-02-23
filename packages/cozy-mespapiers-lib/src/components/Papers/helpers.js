@@ -16,7 +16,9 @@ const isFromConnector = file => Boolean(file.cozyMetadata?.sourceAccount)
  * @param {IOCozyFile[]} files - Array of IOCozyFile
  * @returns {string[]} - Array of contact ids
  */
-export const getContactsRefIdsByFiles = (files = []) => {
+export function getContactsRefIdsByFiles(files) {
+  if (!files) return []
+
   return [
     ...new Set(
       files.flatMap(file => {
