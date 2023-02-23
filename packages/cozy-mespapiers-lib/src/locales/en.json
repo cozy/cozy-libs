@@ -366,5 +366,12 @@
       "extraContent": "In case of problem, you can always add your documents manually by taking a photo of them or by selecting them from your Cozy or your mobile.",
       "button": "Add manually"
     }
+  },
+  "Empty": {
+    "connector": {
+      "title": "No paper",
+      "text": "%{connectorSlug} has not yet published the paper on its site. It will be retrieved here automatically once published by %{connectorSlug}.",
+      "button": "Add manually"
+    }
   }
 }

@@ -366,5 +366,12 @@
       "extraContent": "En cas de problème, il vous est toujours possible d’ajouter manuellement vos documents en les prenant en photo ou en les sélectionnant depuis votre Cozy ou votre mobile.",
       "button": "Ajouter manuellement"
     }
+  },
+  "Empty": {
+    "connector": {
+      "title": "Aucun papier",
+      "text": "%{connectorSlug} n’a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{connectorSlug}.",
+      "button": "Ajouter manuellement"
+    }
   }
 }
