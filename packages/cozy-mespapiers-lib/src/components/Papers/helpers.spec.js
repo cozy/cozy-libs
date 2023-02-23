@@ -4,7 +4,8 @@ import {
   buildFilesByContacts,
   getContactsRefIdsByFiles,
   buildFilesWithContacts,
-  getCurrentFileTheme
+  getCurrentFileTheme,
+  makeAccountFromPapers
 } from './helpers'
 
 const mockContacts00 = [
@@ -448,5 +449,64 @@ describe('getCurrentFileTheme', () => {
     const res = getCurrentFileTheme(null, null)
 
     expect(res).toBe(null)
+  })
+})
+
+describe('makeAccountFromPapers', () => {
+  it('should be undefined if no argument', () => {
+    const res = makeAccountFromPapers()
+
+    expect(res).toBe(undefined)
+  })
+
+  it('should be undefined if no papers', () => {
+    const res = makeAccountFromPapers(undefined, [
+      { auth: { login: 'myLogin' } }
+    ])
+
+    expect(res).toBe(undefined)
+  })
+
+  it('should be undefined if papers with no list', () => {
+    const res = makeAccountFromPapers({ list: undefined }, [
+      { auth: { login: 'myLogin' } }
+    ])
+
+    expect(res).toBe(undefined)
+  })
+
+  it('should be undefined if papers with empty list', () => {
+    const res = makeAccountFromPapers({ list: [] }, [
+      { auth: { login: 'myLogin' } }
+    ])
+
+    expect(res).toBe(undefined)
+  })
+
+  it('should be undefined if no accounts', () => {
+    const res = makeAccountFromPapers(
+      { list: [{ cozyMetadata: { sourceAccountIdentifier: 'myLogin' } }] },
+      undefined
+    )
+
+    expect(res).toBe(undefined)
+  })
+
+  it('should be undefined if no match', () => {
+    const res = makeAccountFromPapers(
+      { list: [{ cozyMetadata: { sourceAccountIdentifier: 'myLogin' } }] },
+      [{ auth: { login: 'myOtherLogin' } }]
+    )
+
+    expect(res).toBe(undefined)
+  })
+
+  it('should return the account', () => {
+    const res = makeAccountFromPapers(
+      { list: [{ cozyMetadata: { sourceAccountIdentifier: 'myLogin' } }] },
+      [{ auth: { login: 'myLogin' } }]
+    )
+
+    expect(res).toStrictEqual({ auth: { login: 'myLogin' } })
   })
 })

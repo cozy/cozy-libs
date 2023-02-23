@@ -210,3 +210,12 @@ export const buildFilesWithContacts = ({ files, contacts, t }) => {
 
 export const getCurrentFileTheme = (params, selectedThemeLabel) =>
   params?.fileTheme ?? selectedThemeLabel
+
+export const makeAccountFromPapers = (papers, accounts) => {
+  const accountLogin = papers?.list?.[0]?.cozyMetadata?.sourceAccountIdentifier
+  const account = accountLogin
+    ? accounts?.find(account => account?.auth?.login === accountLogin)
+    : undefined
+
+  return account
+}
