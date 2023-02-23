@@ -3,6 +3,23 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.0.0...cozy-mespapiers-lib@22.1.0) (2023-02-23)
+
+
+### Bug Fixes
+
+* **mespapiers:** GetContactsRefIdsByFiles crashed for null argument ([3ce0924](https://github.com/cozy/cozy-libs/commit/3ce09244d89d0a2c9665957ac54d7c8aaf2650be))
+
+
+### Features
+
+* **mespapiers:** Add Emptys component to deal with empty content ([44f90c3](https://github.com/cozy/cozy-libs/commit/44f90c3f4f9ad10daa7eb7de7c4c8a7ab5b49d47))
+* **mespapiers:** Use Empty on paper result ([0984c3f](https://github.com/cozy/cozy-libs/commit/0984c3f688d6395eacf7ad8c6234d428cc459b28))
+
+
+
+
+
 # [22.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@21.0.0...cozy-mespapiers-lib@22.0.0) (2023-02-22)
 
 
