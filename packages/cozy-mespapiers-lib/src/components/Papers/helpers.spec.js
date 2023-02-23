@@ -130,8 +130,14 @@ describe('helpers Papers', () => {
       expect(res).toStrictEqual(['contactId01', 'contactId02'])
     })
 
-    it('should return empty array if has no param', () => {
+    it('should return empty array if param is undefined', () => {
       const res = getContactsRefIdsByFiles()
+
+      expect(res).toStrictEqual([])
+    })
+
+    it('should return empty array if param is null', () => {
+      const res = getContactsRefIdsByFiles(null)
 
       expect(res).toStrictEqual([])
     })
