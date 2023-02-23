@@ -18,7 +18,7 @@ import { makeActionVariant, makeActions } from '../Actions/utils'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import HarvestBanner from './HarvestBanner'
 
-const PapersList = ({ papers, isLast }) => {
+const PapersList = ({ papers, connector, accounts, isLast }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
@@ -52,6 +52,10 @@ const PapersList = ({ papers, isLast }) => {
       ),
     [actionVariant, client, addMultiSelectionFile, popModal, pushModal]
   )
+  const accountLogin = papers?.list?.[0]?.cozyMetadata?.sourceAccountIdentifier
+  const account = accounts?.find(
+    account => account?.auth?.login === accountLogin
+  )
 
   const handleClick = () => {
     setMaxDisplay(papers.list.length)
@@ -60,7 +64,7 @@ const PapersList = ({ papers, isLast }) => {
   return (
     <>
       {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner papers={papers} />
+        <HarvestBanner connector={connector} account={account} />
       )}
       {papers.list.map(
         (paper, idx) =>
@@ -98,6 +102,8 @@ PapersList.propTypes = {
     maxDisplay: PropTypes.number,
     list: PropTypes.arrayOf(PropTypes.object)
   }),
+  connector: PropTypes.object,
+  accounts: PropTypes.array,
   isLast: PropTypes.bool
 }
 
