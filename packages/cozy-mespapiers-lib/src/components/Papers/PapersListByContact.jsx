@@ -11,7 +11,13 @@ import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import { buildFilesByContacts, getCurrentFileTheme } from '../Papers/helpers'
 import PapersList from '../Papers/PapersList'
 
-const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
+const PapersListByContact = ({
+  selectedThemeLabel,
+  files,
+  connector,
+  accounts,
+  contacts
+}) => {
   const params = useParams()
   const { t } = useI18n()
   const { papersDefinitions } = usePapersDefinitions()
@@ -46,7 +52,12 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
         )
       }
     >
-      <PapersList papers={papers} isLast={files.length === 1} />
+      <PapersList
+        papers={papers}
+        connector={connector}
+        accounts={accounts}
+        isLast={files.length === 1}
+      />
     </List>
   ))
 }
@@ -54,6 +65,8 @@ const PapersListByContact = ({ selectedThemeLabel, files, contacts }) => {
 PapersListByContact.propTypes = {
   selectedThemeLabel: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object),
+  connector: PropTypes.object,
+  accounts: PropTypes.array,
   contacts: PropTypes.arrayOf(PropTypes.object)
 }
 

@@ -1,12 +1,14 @@
 import React from 'react'
 import { useParams } from 'react-router-dom'
 
-import { isQueryLoading, useQueryAll } from 'cozy-client'
+import { isQueryLoading, useQueryAll, useQuery } from 'cozy-client'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 
 import {
   buildContactsQueryByIds,
-  buildFilesQueryByLabel
+  buildFilesQueryByLabel,
+  buildConnectorsQueryByQualificationLabel,
+  buildAccountsQueryBySlug
 } from '../../helpers/queries'
 import {
   getContactsRefIdsByFiles,
@@ -22,12 +24,10 @@ const PapersList = () => {
 
   const currentFileTheme = getCurrentFileTheme(params, selectedThemeLabel)
   const filesQueryByLabel = buildFilesQueryByLabel(currentFileTheme)
-
   const { data: files, ...fileQueryResult } = useQueryAll(
     filesQueryByLabel.definition,
     filesQueryByLabel.options
   )
-
   const isLoadingFiles =
     isQueryLoading(fileQueryResult) || fileQueryResult.hasMore
 
@@ -40,11 +40,35 @@ const PapersList = () => {
       enabled: !isLoadingFiles
     }
   )
-
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  const isLoading = isLoadingFiles || isLoadingContacts
+  const queryConnector =
+    buildConnectorsQueryByQualificationLabel(currentFileTheme)
+  const { data: connectors, ...connectorsQueryLeft } = useQuery(
+    queryConnector.definition,
+    queryConnector.options
+  )
+  const isConnectorsLoading = isQueryLoading(connectorsQueryLeft)
+  const connector = connectors?.[0]
+  const connectorSlug = connector?.slug
+
+  const queryAccounts = buildAccountsQueryBySlug(
+    connectorSlug,
+    Boolean(connectorSlug)
+  )
+  const { data: accounts, ...accountsQueryLeft } = useQuery(
+    queryAccounts.definition,
+    queryAccounts.options
+  )
+  const isAccountsLoading =
+    Boolean(connectorSlug) && isQueryLoading(accountsQueryLeft)
+
+  const isLoading =
+    isLoadingFiles ||
+    isLoadingContacts ||
+    isConnectorsLoading ||
+    isAccountsLoading
 
   if (isLoading) {
     return (
@@ -65,6 +89,8 @@ const PapersList = () => {
         selectedThemeLabel={selectedThemeLabel}
         files={files}
         contacts={contacts}
+        connector={connector}
+        accounts={accounts}
       />
     </>
   )
