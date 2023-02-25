@@ -7253,10 +7253,10 @@ cozy-ui@79.2.2:
     react-swipeable-views "^0.13.3"
     rooks "^5.11.2"
 
-cozy-ui@^80.1.1:
-  version "80.1.1"
-  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-80.1.1.tgz#c9be72fb103c9f3ee9cd89ed1d88b528acccf27e"
-  integrity sha512-d2DrLMvUT4Yn1ce6W7ALkIqYdmF3fv1dBGpKx2moSmsPUX0Z/8ft9kVgAUoSrnjyh4+RCpG04RaqBiEcm/1SUQ==
+cozy-ui@^80.3.0:
+  version "80.3.0"
+  resolved "https://registry.yarnpkg.com/cozy-ui/-/cozy-ui-80.3.0.tgz#dd57f1d51d31095b0495f995c89158ac53e3971a"
+  integrity sha512-fusnCZAYB9CIbXc4N7Vo8+CaEsLQtujWwlZdAn7cNVGKE/sVM5rTlef1OyXWBu4eNBKSMkM08ha/GU6flsLOHw==
   dependencies:
     "@babel/runtime" "^7.3.4"
     "@material-ui/core" "4.12.3"
@@ -7271,7 +7271,7 @@ cozy-ui@^80.1.1:
     hammerjs "^2.0.8"
     intersection-observer "0.11.0"
     mime-types "2.1.35"
-    mui-bottom-sheet "https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
+    mui-bottom-sheet "git+https://github.com/cozy/mui-bottom-sheet.git#v1.0.9"
     node-polyglot "^2.2.2"
     normalize.css "^8.0.0"
     piwik-react-router "0.12.1"
