@@ -21,6 +21,7 @@ yarn add --dev cozy-tsconfig
 - \[x] Only emit declaration files, no transpiling, you need Babel or another transpiler to do that.
 - \[x] JavaScript files are not ignored, meaning automatic declaration files *will* be emitted for them.
 - \[x] `jsx` is supported and set to `react`.
+- \[x] `src` directory is aliased by default to `/`. For example, you can import `src/components/MyComponent` by doing `import MyComponent from '/components/MyComponent'`. Please note that you need to configure your bundler to support this.
 
 ## 🚀 Usage
 
@@ -51,7 +52,7 @@ If you want to use TypeScript in your CI/CD pipeline (for instance if you just r
 ```json
 {
   "scripts": {
-    "typecheck": "yarn tsc --noEmit"
+    "typecheck": "yarn tsc"
   }
 }
 ```
