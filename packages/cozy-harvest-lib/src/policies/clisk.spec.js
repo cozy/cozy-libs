@@ -27,3 +27,54 @@ describe('isRunnable', () => {
     expect(konnectorPolicy.isRunnable()).toBe(false)
   })
 })
+
+describe('onLaunch', () => {
+  const cozy = {
+    ClientConnectorLauncher: 'react-native'
+  }
+  beforeEach(() => {
+    window.cozy = cozy
+    window.ReactNativeWebView = {
+      postMessage: jest.fn()
+    }
+  })
+  afterEach(() => {
+    delete window.cozy
+    jest.clearAllMocks()
+    delete window.ReactNativeWebView
+  })
+
+  it('should send konnector when launcher is react-native', () => {
+    konnectorPolicy.onLaunch({
+      konnector: { slug: 'testkonnectorslug' }
+    })
+    expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
+      JSON.stringify({
+        message: 'startLauncher',
+        value: {
+          connector: { slug: 'testkonnectorslug' }
+        }
+      })
+    )
+  })
+
+  it('should also send account and trigger when available when launcher is react-native', () => {
+    konnectorPolicy.onLaunch({
+      konnector: {
+        slug: 'testkonnectorslug'
+      },
+      account: { _id: 'testaccountid' },
+      trigger: { _id: 'testtriggerid' }
+    })
+    expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
+      JSON.stringify({
+        message: 'startLauncher',
+        value: {
+          connector: { slug: 'testkonnectorslug' },
+          account: { _id: 'testaccountid' },
+          trigger: { _id: 'testtriggerid' }
+        }
+      })
+    )
+  })
+})

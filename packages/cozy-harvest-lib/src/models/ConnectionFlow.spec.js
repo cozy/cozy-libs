@@ -340,6 +340,46 @@ describe('ConnectionFlow', () => {
     })
   })
 
+  describe('launch', () => {
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    it('should call the launcher when needed with existing account and trigger', async () => {
+      prepareTriggerAccount.mockImplementation(
+        async () => fixtures.existingAccount
+      )
+      const { client } = setup()
+      const flow = new ConnectionFlow(
+        client,
+        fixtures.existingTrigger,
+        fixtures.clientKonnector
+      )
+      window.cozy = {
+        ClientConnectorLauncher: 'react-native'
+      }
+      window.ReactNativeWebView = {
+        postMessage: jest.fn()
+      }
+
+      await flow.launch()
+      expect(window.ReactNativeWebView.postMessage).toHaveBeenCalledWith(
+        JSON.stringify({
+          message: 'startLauncher',
+          value: {
+            connector: fixtures.clientKonnector,
+            account: fixtures.existingAccount,
+            trigger: fixtures.existingTrigger
+          }
+        })
+      )
+      expect(launchTrigger).not.toHaveBeenCalled()
+
+      delete window.cozy
+      delete window.ReactNativeWebView
+    })
+  })
+
   describe('handleFormSubmit', () => {
     const isSubmitting = flow => {
       return flow.getState().running === true
