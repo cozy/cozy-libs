@@ -617,6 +617,15 @@ export class ConnectionFlow {
    */
   async launch({ autoSuccessTimer = true } = {}) {
     const konnectorPolicy = findKonnectorPolicy(this.konnector)
+
+    const computedAutoSuccessTimer = autoSuccessTimer
+
+    logger.info('ConnectionFlow: Launching job...')
+    this.setState({ status: PENDING })
+
+    if (this.trigger) {
+      this.account = await prepareTriggerAccount(this.client, this.trigger)
+    }
     if (konnectorPolicy.onLaunch) {
       konnectorPolicy.onLaunch({
         konnector: this.konnector,
@@ -627,13 +636,6 @@ export class ConnectionFlow {
     if (!konnectorPolicy.needsTriggerLaunch) {
       return
     }
-
-    const computedAutoSuccessTimer = autoSuccessTimer
-
-    logger.info('ConnectionFlow: Launching job...')
-    this.setState({ status: PENDING })
-
-    this.account = await prepareTriggerAccount(this.client, this.trigger)
     this.realtime.subscribe(
       'updated',
       ACCOUNTS_DOCTYPE,

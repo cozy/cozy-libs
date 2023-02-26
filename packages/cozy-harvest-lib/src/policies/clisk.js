@@ -31,7 +31,7 @@ function isRunnable() {
  * @param {Object} options - options object
  * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - konnector object
  */
-function onLaunch({ konnector }) {
+function onLaunch({ konnector, account, trigger }) {
   const launcher = getLauncher()
   if (launcher) {
     logger.debug('Found a launcher', launcher)
@@ -44,7 +44,9 @@ function onLaunch({ konnector }) {
       JSON.stringify({
         message: 'startLauncher',
         value: {
-          connector: konnector
+          connector: konnector,
+          account,
+          trigger
         }
       })
     )
