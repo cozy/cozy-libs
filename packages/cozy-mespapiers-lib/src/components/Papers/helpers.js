@@ -219,3 +219,28 @@ export const makeAccountFromPapers = (papers, accounts) => {
 
   return account
 }
+
+export const addAccountsToKonnectors = ({
+  konnectorsWithAccounts,
+  konnector,
+  accounts
+}) => {
+  const konnectorWithAccounts = konnectorsWithAccounts.find(
+    konnectorWithAccounts => konnectorWithAccounts._id === konnector._id
+  )
+  konnectorWithAccounts.accounts = accounts
+}
+
+export const makeIsLast = (konnectorsWithAccounts, konnector) => {
+  const konnectorsWithAccountsFilteredByAccounts =
+    konnectorsWithAccounts.filter(konnectorWithAccount =>
+      Boolean(konnectorWithAccount.account)
+    )
+
+  return (
+    konnectorsWithAccountsFilteredByAccounts.findIndex(
+      el => el._id === konnector._id
+    ) ===
+    konnectorsWithAccountsFilteredByAccounts.length - 1
+  )
+}
