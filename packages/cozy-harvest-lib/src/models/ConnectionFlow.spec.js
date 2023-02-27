@@ -356,7 +356,7 @@ describe('ConnectionFlow', () => {
         fixtures.clientKonnector
       )
       window.cozy = {
-        ClientConnectorLauncher: 'react-native'
+        ClientKonnectorLauncher: 'react-native'
       }
       window.ReactNativeWebView = {
         postMessage: jest.fn()
@@ -368,6 +368,7 @@ describe('ConnectionFlow', () => {
           message: 'startLauncher',
           value: {
             connector: fixtures.clientKonnector,
+            konnector: fixtures.clientKonnector,
             account: fixtures.existingAccount,
             trigger: fixtures.existingTrigger
           }
@@ -546,7 +547,7 @@ describe('ConnectionFlow', () => {
         fixtures.clientKonnector
       )
       window.cozy = {
-        ClientConnectorLauncher: 'react-native'
+        ClientKonnectorLauncher: 'react-native'
       }
       window.ReactNativeWebView = {
         postMessage: jest.fn()
@@ -557,7 +558,8 @@ describe('ConnectionFlow', () => {
         JSON.stringify({
           message: 'startLauncher',
           value: {
-            connector: fixtures.clientKonnector
+            connector: fixtures.clientKonnector,
+            konnector: fixtures.clientKonnector
           }
         })
       )
