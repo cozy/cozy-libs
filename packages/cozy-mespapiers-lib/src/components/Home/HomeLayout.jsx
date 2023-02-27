@@ -12,7 +12,7 @@ import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
 import Content from './Content'
 
-const HomeLayout = ({ contacts, papers }) => {
+const HomeLayout = ({ contacts, papers, konnectors }) => {
   const [selectedTheme, setSelectedTheme] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const { isMultiSelectionActive } = useMultiSelection()
@@ -47,6 +47,7 @@ const HomeLayout = ({ contacts, papers }) => {
       <Content
         contacts={contacts}
         papers={papers}
+        konnectors={konnectors}
         selectedTheme={selectedTheme}
         searchValue={searchValue}
       />
@@ -59,7 +60,8 @@ const HomeLayout = ({ contacts, papers }) => {
 
 HomeLayout.propTypes = {
   contacts: PropTypes.array,
-  papers: PropTypes.array
+  papers: PropTypes.array,
+  konnectors: PropTypes.array
 }
 
 export default HomeLayout

@@ -9,13 +9,15 @@ import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import CategoryItemByPaper from './CategoryItemByPaper'
+import CategoryItemByKonnector from './CategoryItemByKonnector'
 
-const PaperGroup = ({ papersByCategories }) => {
+const PaperGroup = ({ papersByCategories, konnectors }) => {
   const navigate = useNavigate()
   const { t } = useI18n()
   const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
 
   const hasPapers = papersByCategories.length > 0
+  const konnectorsWithAccounts = JSON.parse(JSON.stringify(konnectors))
 
   const goPapersList = category => {
     if (isMultiSelectionActive) {
@@ -43,16 +45,27 @@ const PaperGroup = ({ papersByCategories }) => {
           <CategoryItemByPaper
             key={paper.id}
             paper={paper}
-            isLast={index === papersByCategories.length - 1}
+            isLast={
+              index === papersByCategories.length - 1 && konnectors.length === 0
+            }
             onClick={goPapersList}
           />
         ))}
+      {konnectorsWithAccounts.map((konnector, index) => (
+        <CategoryItemByKonnector
+          key={index}
+          konnectorsWithAccounts={konnectorsWithAccounts}
+          konnector={konnector}
+          onClick={goPapersList}
+        />
+      ))}
     </List>
   )
 }
 
 PaperGroup.propTypes = {
-  papersByCategories: PropTypes.arrayOf(PropTypes.object)
+  papersByCategories: PropTypes.arrayOf(PropTypes.object),
+  konnectors: PropTypes.arrayOf(PropTypes.object)
 }
 
 export default PaperGroup

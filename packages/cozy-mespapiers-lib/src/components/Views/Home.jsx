@@ -5,7 +5,8 @@ import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import {
   buildContactsQueryByIds,
-  buildFilesQueryWithQualificationLabel
+  buildFilesQueryWithQualificationLabel,
+  buildKonnectorsQueryByQualificationLabels
 } from '../../helpers/queries'
 import { getContactsRefIdsByFiles } from '../Papers/helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
@@ -46,7 +47,24 @@ const Home = () => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  if (isLoadingFiles || isLoadingContacts) {
+  const qualificationLabelWithoutFiles = papersDefinitionsLabels.filter(
+    paperDefinitionLabel =>
+      !papers.some(
+        paper =>
+          paper.attributes?.metadata?.qualification?.label ===
+          paperDefinitionLabel
+      )
+  )
+  const konnectorsQueryByQualificationLabels =
+    buildKonnectorsQueryByQualificationLabels(qualificationLabelWithoutFiles)
+  const { data: konnectors, ...konnectorsQueryResult } = useQueryAll(
+    konnectorsQueryByQualificationLabels.definition,
+    konnectorsQueryByQualificationLabels.options
+  )
+  const isLoadingKonnectors =
+    isQueryLoading(konnectorsQueryResult) || konnectorsQueryResult.hasMore
+
+  if (isLoadingFiles || isLoadingContacts || isLoadingKonnectors) {
     return (
       <Spinner
         size="xxlarge"
@@ -55,7 +73,9 @@ const Home = () => {
     )
   }
 
-  return <HomeLayout contacts={contacts} papers={papers} />
+  return (
+    <HomeLayout contacts={contacts} papers={papers} konnectors={konnectors} />
+  )
 }
 
 export default Home

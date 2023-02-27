@@ -112,6 +112,20 @@ export const buildConnectorsQueryById = (id, enabled = true) => ({
   }
 })
 
+export const buildKonnectorsQueryByQualificationLabels = (
+  labels,
+  enabled = true
+) => ({
+  definition: Q(KONNECTORS_DOCTYPE)
+    .where({ qualification_labels: { $in: labels } })
+    .indexFields(['qualification_labels']),
+  options: {
+    as: `${KONNECTORS_DOCTYPE}/qualificationLabels/${JSON.stringify(labels)}`,
+    fetchPolicy: defaultFetchPolicy,
+    enabled
+  }
+})
+
 export const buildConnectorsQueryByQualificationLabel = label => ({
   definition: Q(KONNECTORS_DOCTYPE)
     .where({ qualification_labels: { $in: [label] } })

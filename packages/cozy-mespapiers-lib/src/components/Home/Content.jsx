@@ -9,7 +9,13 @@ import HomeCloud from '../../assets/icons/HomeCloud.svg'
 import ResultForSearch from './ResultForSearch'
 import PaperGroup from '../Papers/PaperGroup'
 
-const Content = ({ contacts, papers, selectedTheme, searchValue }) => {
+const Content = ({
+  contacts,
+  papers,
+  konnectors,
+  selectedTheme,
+  searchValue
+}) => {
   const { t } = useI18n()
 
   const papersByCategories = useMemo(
@@ -40,12 +46,18 @@ const Content = ({ contacts, papers, selectedTheme, searchValue }) => {
       />
     )
 
-  return <PaperGroup papersByCategories={papersByCategories} />
+  return (
+    <PaperGroup
+      papersByCategories={papersByCategories}
+      konnectors={konnectors}
+    />
+  )
 }
 
 Content.propTypes = {
   contacts: PropTypes.array,
   papers: PropTypes.array,
+  konnectors: PropTypes.array,
   selectedTheme: PropTypes.oneOfType([PropTypes.string, PropTypes.object]),
   searchValue: PropTypes.string
 }
