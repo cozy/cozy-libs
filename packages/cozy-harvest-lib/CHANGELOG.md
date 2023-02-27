@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.5.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.4.0...cozy-harvest-lib@13.5.0) (2023-02-27)
+
+
+### Features
+
+* Add k konnector ([038a1f1](https://github.com/cozy/cozy-libs/commit/038a1f193057a2386b4c99ecc96f09bc00dfa1dc))
+* **cozy-harvest:** Add locales for new account ([0476351](https://github.com/cozy/cozy-libs/commit/0476351a0220985cd5cd48483987158201c2a6db))
+* **cozy-harvest:** Implement new account modal ([a1a2d97](https://github.com/cozy/cozy-libs/commit/a1a2d97639fb2c8c6f4066add6bfbcc1e47d8592))
+* Enable TS on cozy-harvest ([0eb444b](https://github.com/cozy/cozy-libs/commit/0eb444b6265b27f88b057c1f79777b8cdc1fd86a))
+* Send account and trigger to the launcher ([5d54d14](https://github.com/cozy/cozy-libs/commit/5d54d14aed91574f05de0a067bc93797cf841f99))
+
+
+
+
+
 # [13.4.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.3.0...cozy-harvest-lib@13.4.0) (2023-02-21)
 
 
