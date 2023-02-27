@@ -15,7 +15,7 @@ const Home = () => {
   const { papersDefinitions } = usePapersDefinitions()
 
   const papersDefinitionsLabels = useMemo(
-    () => papersDefinitions.map(paper => paper.label),
+    () => papersDefinitions.map(paperDefinition => paperDefinition.label),
     [papersDefinitions]
   )
 
