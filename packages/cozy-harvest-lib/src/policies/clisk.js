@@ -6,7 +6,7 @@
 import logger from '../logger'
 
 /**
- * Check if the given konnector is a client side connector
+ * Check if the given konnector is a client side konnector
  * @param {import('cozy-client/types/types').KonnectorsDoctype} konnector - konnector object
  * @returns {Boolean}
  */
@@ -19,7 +19,9 @@ const isCCC = konnector => Boolean(konnector.clientSide)
  */
 export const getLauncher = () =>
   // @ts-ignore
-  window?.cozy?.ClientConnectorLauncher || null
+  window?.cozy?.ClientConnectorLauncher ||
+  window?.cozy?.ClientKonnectorLauncher ||
+  null
 
 function isRunnable() {
   return Boolean(getLauncher())
@@ -44,7 +46,8 @@ function onLaunch({ konnector, account, trigger }) {
       JSON.stringify({
         message: 'startLauncher',
         value: {
-          connector: konnector,
+          connector: konnector, // deprecated
+          konnector,
           account,
           trigger
         }

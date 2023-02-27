@@ -3,7 +3,7 @@ import { getLauncher, konnectorPolicy } from './clisk'
 describe('getLauncher', () => {
   it('should get the current Launcher from the given window object', () => {
     const cozy = {
-      ClientConnectorLauncher: 'test-react-native'
+      ClientKonnectorLauncher: 'test-react-native'
     }
     window.cozy = cozy
     expect(getLauncher()).toEqual('test-react-native')
@@ -16,7 +16,7 @@ describe('getLauncher', () => {
 
 describe('isRunnable', () => {
   const cozy = {
-    ClientConnectorLauncher: 'test-react-native'
+    ClientKonnectorLauncher: 'test-react-native'
   }
   it('should return true if a launcher is available', () => {
     window.cozy = cozy
@@ -30,7 +30,7 @@ describe('isRunnable', () => {
 
 describe('onLaunch', () => {
   const cozy = {
-    ClientConnectorLauncher: 'react-native'
+    ClientKonnectorLauncher: 'react-native'
   }
   beforeEach(() => {
     window.cozy = cozy
@@ -52,7 +52,8 @@ describe('onLaunch', () => {
       JSON.stringify({
         message: 'startLauncher',
         value: {
-          connector: { slug: 'testkonnectorslug' }
+          connector: { slug: 'testkonnectorslug' },
+          konnector: { slug: 'testkonnectorslug' }
         }
       })
     )
@@ -71,6 +72,7 @@ describe('onLaunch', () => {
         message: 'startLauncher',
         value: {
           connector: { slug: 'testkonnectorslug' },
+          konnector: { slug: 'testkonnectorslug' },
           account: { _id: 'testaccountid' },
           trigger: { _id: 'testtriggerid' }
         }
