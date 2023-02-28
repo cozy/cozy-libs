@@ -47,14 +47,14 @@ const StepperDialog = ({
       {onBack && <DialogBackButton onClick={onBack} />}
       <DialogTitle
         {...dialogTitleProps}
-        className={cx('u-ellipsis u-pl-3', {
+        className={cx('u-pl-3', {
           ['u-flex u-flex-justify-between u-flex-items-center']: stepper
         })}
       >
         <Typography
           variant="h4"
           classes={{ h4: classes.typography }}
-          className={cx({
+          className={cx('u-ellipsis', {
             'u-ml-1': !isMobile
           })}
         >
