@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [22.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.1.1...cozy-mespapiers-lib@22.1.2) (2023-02-28)
+
+
+### Bug Fixes
+
+* **mespapiers:** Ellipsis on step modal title was removed ([62d4381](https://github.com/cozy/cozy-libs/commit/62d4381dbf5c20d3531d24902ea8b74d06cf5f1d))
+
+
+
+
+
 ## [22.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.1.0...cozy-mespapiers-lib@22.1.1) (2023-02-27)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
