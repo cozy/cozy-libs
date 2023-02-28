@@ -11,6 +11,7 @@ import {
 import { getContactsRefIdsByFiles } from '../Papers/helpers'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import HomeLayout from '../Home/HomeLayout'
+import { makePapers, makeQualificationLabelWithoutFiles } from './helpers'
 
 const Home = () => {
   const { papersDefinitions } = usePapersDefinitions()
@@ -28,11 +29,8 @@ const Home = () => {
   const isLoadingFiles = isQueryLoading(queryResult) || queryResult.hasMore
 
   const papers = useMemo(
-    () =>
-      filesWithQualificationLabel?.filter(file =>
-        papersDefinitionsLabels.includes(file?.metadata?.qualification?.label)
-      ) || [],
-    [filesWithQualificationLabel, papersDefinitionsLabels]
+    () => makePapers(papersDefinitionsLabels, filesWithQualificationLabel),
+    [papersDefinitionsLabels, filesWithQualificationLabel]
   )
 
   const contactIds = getContactsRefIdsByFiles(papers)
@@ -47,13 +45,9 @@ const Home = () => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  const qualificationLabelWithoutFiles = papersDefinitionsLabels.filter(
-    paperDefinitionLabel =>
-      !papers.some(
-        paper =>
-          paper.attributes?.metadata?.qualification?.label ===
-          paperDefinitionLabel
-      )
+  const qualificationLabelWithoutFiles = useMemo(
+    () => makeQualificationLabelWithoutFiles(papersDefinitionsLabels, papers),
+    [papersDefinitionsLabels, papers]
   )
   const konnectorsQueryByQualificationLabels =
     buildKonnectorsQueryByQualificationLabels(qualificationLabelWithoutFiles)
