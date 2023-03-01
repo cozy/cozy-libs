@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@6.0.3...cozy-sharing@6.0.4) (2023-03-01)
+
+
+### Bug Fixes
+
+* Colors for shared withMe ([17795d5](https://github.com/cozy/cozy-libs/commit/17795d586dea2b1202e9215d8a9ab745fee37f55))
+
+
+
+
+
 ## [6.0.3](https://github.com/cozy/cozy-libs/compare/cozy-sharing@6.0.2...cozy-sharing@6.0.3) (2023-02-08)
 
 **Note:** Version bump only for package cozy-sharing
