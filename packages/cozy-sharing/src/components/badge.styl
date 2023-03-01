@@ -1,4 +1,4 @@
-@require 'settings/palette.styl'
+palette=json('settings/palette.json', { hash: true })
 
 .shared-badge
     display flex
@@ -8,7 +8,8 @@
     background-clip padding-box
 
     &.--small
-        border .125rem solid var(--white)
+        border .125rem solid 
+        border-color: palette['white']
         width 1.5rem
         height 1.5rem
 
@@ -17,7 +18,8 @@
             height .75rem
 
     &.--xsmall
-        border .0625rem solid var(--white)
+        border .0625rem solid 
+        border-color: palette['white']
         width .75rem
         height .75rem
 
@@ -26,7 +28,7 @@
             height .375rem
 
     &.--by-me
-        background-color var(--emerald)
+        background-color: palette['emerald']
 
     &.--with-me
-        background-color #9169F2
+        background-color: palette['portage']
