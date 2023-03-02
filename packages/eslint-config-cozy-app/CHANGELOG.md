@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@5.5.0...eslint-config-cozy-app@6.0.0) (2023-03-02)
+
+
+### Features
+
+* Add new rules to the config ([84c3157](https://github.com/cozy/cozy-libs/commit/84c31577f58a1a26dbdde0e56d1954ad54dbe2c1))
+* Remove Vue rules ([a61e28d](https://github.com/cozy/cozy-libs/commit/a61e28dd551c708530467968fde86a48fa4ada50))
+* Update dependencies to peerDeps ([a556dcb](https://github.com/cozy/cozy-libs/commit/a556dcb275292c1c23c406955566c74959a4e93d))
+
+
+### BREAKING CHANGES
+
+* As eslint flat config is still experimental,
+it's better to rely on the peerDep patterns.
+When using this config, it will be needed to install the peerDeps.
+
+
+
+
+
 # 5.5.0 (2023-02-11)
 
 
