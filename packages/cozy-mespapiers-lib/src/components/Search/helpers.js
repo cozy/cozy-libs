@@ -1,5 +1,5 @@
-import { FILES_DOCTYPE } from '../../doctypes'
 import { index, addDocs } from './search'
+import { FILES_DOCTYPE } from '../../doctypes'
 
 const updateFile = doc => {
   if (doc.trashed) {
@@ -7,19 +7,19 @@ const updateFile = doc => {
   }
 }
 
-export const onUpdate = doctype => async doc => {
+const onUpdate = doctype => async doc => {
   if (doctype === FILES_DOCTYPE) {
     return updateFile(doc)
   }
 }
 
-export const onCreate = (doctype, scannerT) => async doc => {
-  addDocs({ index, docs: [{ ...doc, _type: doctype }], scannerT })
+const onCreate = (doctype, t) => async doc => {
+  addDocs({ index, docs: [{ ...doc, _type: doctype }], t })
 }
 
-export const add = (isInit, scannerT, setIsInit) => docs => {
+export const add = (isInit, t, setIsInit) => docs => {
   if (!isInit) {
-    addDocs({ index, docs, scannerT })
+    addDocs({ index, docs, t })
     setIsInit(true)
   }
 }
@@ -38,3 +38,15 @@ export const search = ({ docs, value, tag }) => {
 
   return resultDocs
 }
+
+export const makeRealtimeConnection = (doctypes, t) =>
+  doctypes.reduce(
+    (acc, curr) => ({
+      ...acc,
+      [`${curr}`]: {
+        created: onCreate(curr, t),
+        updated: onUpdate(curr)
+      }
+    }),
+    {}
+  )

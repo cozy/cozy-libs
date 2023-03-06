@@ -1,17 +1,18 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { I18n, initTranslation } from 'cozy-ui/transpiled/react/I18n'
 
-import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
 import { ModalProvider } from './Contexts/ModalProvider'
-import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
 import { MultiSelectionProvider } from './Contexts/MultiSelectionProvider'
-import { getComponents } from '../helpers/defaultComponent'
-import PapersFabWrapper from './PapersFab/PapersFabWrapper'
 import { OnboardingProvider } from './Contexts/OnboardingProvider'
-import SearchProvider from './Search/SearchProvider'
+import { PapersDefinitionsProvider } from './Contexts/PapersDefinitionsProvider'
+import { ScannerI18nProvider } from './Contexts/ScannerI18nProvider'
+import SearchProvider from './Contexts/SearchProvider'
 import { MesPapiersLibLayout } from './MesPapiersLibLayout'
+import PapersFabWrapper from './PapersFab/PapersFabWrapper'
+import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../doctypes'
+import { getComponents } from '../helpers/defaultComponent'
 
 export const MesPapiersLibProviders = ({ lang, components }) => {
   const polyglot = initTranslation(lang, lang => require(`../locales/${lang}`))
@@ -21,7 +22,7 @@ export const MesPapiersLibProviders = ({ lang, components }) => {
     <I18n lang={lang} polyglot={polyglot}>
       <MultiSelectionProvider>
         <ScannerI18nProvider>
-          <SearchProvider>
+          <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
             <PapersDefinitionsProvider>
               <ModalProvider>
                 <OnboardingProvider OnboardingComponent={Onboarding}>

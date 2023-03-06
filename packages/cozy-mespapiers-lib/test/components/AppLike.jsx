@@ -1,19 +1,20 @@
+import { createHashHistory } from 'history'
 import React from 'react'
 import { HashRouter } from 'react-router-dom'
-import { createHashHistory } from 'history'
 
 import { CozyProvider, createMockClient } from 'cozy-client'
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 import { WebviewIntentProvider } from 'cozy-intent'
+import I18n from 'cozy-ui/transpiled/react/I18n'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import { StepperDialogProvider } from '../../src/components/Contexts/StepperDialogProvider'
 import { ModalProvider } from '../../src/components/Contexts/ModalProvider'
-import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
-import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
 import { MultiSelectionProvider } from '../../src/components/Contexts/MultiSelectionProvider'
-import SearchProvider from '../../src/components/Search/SearchProvider'
+import { PapersDefinitionsProvider } from '../../src/components/Contexts/PapersDefinitionsProvider'
+import { ScannerI18nProvider } from '../../src/components/Contexts/ScannerI18nProvider'
+import SearchProvider from '../../src/components/Contexts/SearchProvider'
+import { StepperDialogProvider } from '../../src/components/Contexts/StepperDialogProvider'
+import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../../src/doctypes'
 import enLocale from '../../src/locales/en.json'
 
 jest.mock('cozy-client/dist/models/document/documentTypeData', () => ({
@@ -34,7 +35,7 @@ const AppLike = ({ children, client, history }) => {
         <I18n dictRequire={() => enLocale} lang="en">
           <MultiSelectionProvider>
             <ScannerI18nProvider lang="en">
-              <SearchProvider>
+              <SearchProvider doctypes={[FILES_DOCTYPE, CONTACTS_DOCTYPE]}>
                 <MuiCozyTheme>
                   <BreakpointsProvider>
                     <PapersDefinitionsProvider>

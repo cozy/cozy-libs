@@ -1,11 +1,9 @@
 import React, { createContext, useContext, useMemo, useState } from 'react'
 
-import useRealtime from 'cozy-realtime/dist/useRealtime'
 import { useClient } from 'cozy-client'
+import useRealtime from 'cozy-realtime/dist/useRealtime'
 
-import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../../doctypes'
-import { useScannerI18n } from '../Hooks/useScannerI18n'
-import { onCreate, onUpdate, add, search } from './helpers'
+import { add, search, makeRealtimeConnection } from './helpers'
 
 const SearchContext = createContext()
 
@@ -18,28 +16,22 @@ export const useSearch = () => {
   return context
 }
 
-const SearchProvider = ({ children }) => {
+const SearchProvider = ({ doctypes, t, children }) => {
   const [isInit, setIsInit] = useState(false)
   const client = useClient()
-  const scannerT = useScannerI18n()
 
-  useRealtime(client, {
-    [FILES_DOCTYPE]: {
-      created: onCreate(FILES_DOCTYPE, scannerT),
-      updated: onUpdate(FILES_DOCTYPE)
-    },
-    [CONTACTS_DOCTYPE]: {
-      created: onCreate(CONTACTS_DOCTYPE),
-      updated: onUpdate(CONTACTS_DOCTYPE)
-    }
-  })
+  const realtimeConnection = useMemo(
+    () => makeRealtimeConnection(doctypes, t),
+    [doctypes, t]
+  )
+  useRealtime(client, realtimeConnection)
 
   const value = useMemo(() => {
     return {
-      add: add(isInit, scannerT, setIsInit),
+      add: add(isInit, t, setIsInit),
       search
     }
-  }, [isInit, scannerT])
+  }, [isInit, t])
 
   return (
     <SearchContext.Provider value={value}>{children}</SearchContext.Provider>
