@@ -4,14 +4,18 @@ import { isQueryLoading, useQueryAll } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import {
+  makePapers,
+  makeQualificationLabelWithoutFiles,
+  makeKonnectorsAndQualificationLabelWithoutFiles
+} from './helpers'
+import {
   buildContactsQueryByIds,
   buildFilesQueryWithQualificationLabel,
   buildKonnectorsQueryByQualificationLabels
 } from '../../helpers/queries'
-import { getContactsRefIdsByFiles } from '../Papers/helpers'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
 import HomeLayout from '../Home/HomeLayout'
-import { makePapers, makeQualificationLabelWithoutFiles } from './helpers'
+import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
+import { getContactsRefIdsByFiles } from '../Papers/helpers'
 
 const Home = () => {
   const { papersDefinitions } = usePapersDefinitions()
@@ -67,8 +71,18 @@ const Home = () => {
     )
   }
 
+  const konnectorsAndQualificationLabelWithoutFiles =
+    makeKonnectorsAndQualificationLabelWithoutFiles(
+      konnectors,
+      qualificationLabelWithoutFiles
+    )
+
   return (
-    <HomeLayout contacts={contacts} papers={papers} konnectors={konnectors} />
+    <HomeLayout
+      contacts={contacts}
+      papers={papers}
+      konnectors={konnectorsAndQualificationLabelWithoutFiles}
+    />
   )
 }
 

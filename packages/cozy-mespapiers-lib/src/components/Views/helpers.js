@@ -16,3 +16,15 @@ export const makeQualificationLabelWithoutFiles = (
         paper => paper.metadata?.qualification?.label === paperDefinitionLabel
       )
   )
+
+export const makeKonnectorsAndQualificationLabelWithoutFiles = (
+  konnectors,
+  qualificationLabelWithoutFiles
+) =>
+  konnectors.map(konnector => ({
+    konnector,
+    konnectorQualifLabelsWithoutFile:
+      konnector.qualification_labels?.filter(qualificationLabel =>
+        qualificationLabelWithoutFiles.includes(qualificationLabel)
+      ) || []
+  }))

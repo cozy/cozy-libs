@@ -1,15 +1,15 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
 import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { useMultiSelection } from '../Hooks/useMultiSelection'
 import CategoryItemByPaper from './CategoryItemByPaper'
-import CategoryItemByKonnector from './CategoryItemByKonnector'
+import KonnectorsCategories from './KonnectorsCategories'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PaperGroup = ({ papersByCategories, konnectors }) => {
   const navigate = useNavigate()
@@ -17,7 +17,6 @@ const PaperGroup = ({ papersByCategories, konnectors }) => {
   const { isMultiSelectionActive, setSelectedThemeLabel } = useMultiSelection()
 
   const hasPapers = papersByCategories.length > 0
-  const konnectorsWithAccounts = JSON.parse(JSON.stringify(konnectors))
 
   const goPapersList = category => {
     if (isMultiSelectionActive) {
@@ -51,14 +50,7 @@ const PaperGroup = ({ papersByCategories, konnectors }) => {
             onClick={goPapersList}
           />
         ))}
-      {konnectorsWithAccounts.map((konnector, index) => (
-        <CategoryItemByKonnector
-          key={index}
-          konnectorsWithAccounts={konnectorsWithAccounts}
-          konnector={konnector}
-          onClick={goPapersList}
-        />
-      ))}
+      <KonnectorsCategories konnectors={konnectors} onClick={goPapersList} />
     </List>
   )
 }

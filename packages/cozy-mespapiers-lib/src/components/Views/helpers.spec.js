@@ -1,4 +1,8 @@
-import { makePapers, makeQualificationLabelWithoutFiles } from './helpers'
+import {
+  makePapers,
+  makeQualificationLabelWithoutFiles,
+  makeKonnectorsAndQualificationLabelWithoutFiles
+} from './helpers'
 
 const papersDefinitionsLabels = ['caf', 'isp_invoice', 'resume']
 
@@ -52,5 +56,52 @@ describe('makeQualificationLabelWithoutFiles', () => {
     )
 
     expect(res).toStrictEqual([])
+  })
+})
+
+describe('makeKonnectorsAndQualificationLabelWithoutFiles', () => {
+  it('should return konnectors with their qualification labels for which there is no file', () => {
+    const konnectors = [
+      { qualification_labels: ['caf', 'isp_invoice'] },
+      { qualification_labels: ['lease'] }
+    ]
+    const qualificationLabelWithoutFiles = ['caf', 'phone_invoice']
+
+    const res = makeKonnectorsAndQualificationLabelWithoutFiles(
+      konnectors,
+      qualificationLabelWithoutFiles
+    )
+
+    expect(res).toStrictEqual([
+      {
+        konnector: { qualification_labels: ['caf', 'isp_invoice'] },
+        konnectorQualifLabelsWithoutFile: ['caf']
+      },
+      {
+        konnector: { qualification_labels: ['lease'] },
+        konnectorQualifLabelsWithoutFile: []
+      }
+    ])
+  })
+
+  it('should return empty array in konnectorQualifLabelsWithoutFile if no qualification_labels attributes on konnectors', () => {
+    const konnectors = [{ _id: '01' }, { _id: '02' }]
+    const qualificationLabelWithoutFiles = ['caf', 'phone_invoice']
+
+    const res = makeKonnectorsAndQualificationLabelWithoutFiles(
+      konnectors,
+      qualificationLabelWithoutFiles
+    )
+
+    expect(res).toStrictEqual([
+      {
+        konnector: { _id: '01' },
+        konnectorQualifLabelsWithoutFile: []
+      },
+      {
+        konnector: { _id: '02' },
+        konnectorQualifLabelsWithoutFile: []
+      }
+    ])
   })
 })
