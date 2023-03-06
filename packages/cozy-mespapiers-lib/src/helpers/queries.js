@@ -48,18 +48,19 @@ export const buildFilesQueryWithQualificationLabel = () => {
 }
 
 export const buildFilesQueryByLabel = label => ({
-  definition: Q(FILES_DOCTYPE)
-    .where({
-      'metadata.qualification': {
-        label: label
-      }
-    })
-    .partialIndex({
-      type: 'file',
-      trashed: false
-    })
-    .indexFields(['created_at', 'metadata.qualification'])
-    .sortBy([{ created_at: 'desc' }]),
+  definition: () =>
+    Q(FILES_DOCTYPE)
+      .where({
+        'metadata.qualification': {
+          label: label
+        }
+      })
+      .partialIndex({
+        type: 'file',
+        trashed: false
+      })
+      .indexFields(['created_at', 'metadata.qualification'])
+      .sortBy([{ created_at: 'desc' }]),
   options: {
     as: `${FILES_DOCTYPE}/${label}`,
     fetchPolicy: defaultFetchPolicy
@@ -75,7 +76,7 @@ export const getOnboardingStatus = {
 }
 
 export const buildContactsQueryByIds = (ids = []) => ({
-  definition: Q(CONTACTS_DOCTYPE).getByIds(ids),
+  definition: () => Q(CONTACTS_DOCTYPE).getByIds(ids),
   options: {
     as: `${CONTACTS_DOCTYPE}/${ids.join('')}`,
     fetchPolicy: defaultFetchPolicy
@@ -83,7 +84,7 @@ export const buildContactsQueryByIds = (ids = []) => ({
 })
 
 export const buildFilesQueryById = id => ({
-  definition: Q(FILES_DOCTYPE).getById(id),
+  definition: () => Q(FILES_DOCTYPE).getById(id),
   options: {
     as: `${FILES_DOCTYPE}/${id}`,
     fetchPolicy: defaultFetchPolicy
@@ -91,11 +92,12 @@ export const buildFilesQueryById = id => ({
 })
 
 export const buildTriggersQueryByConnectorSlug = (slug, enabled) => ({
-  definition: Q(TRIGGERS_DOCTYPE)
-    .where({
-      'message.konnector': slug
-    })
-    .indexFields(['message.konnector']),
+  definition: () =>
+    Q(TRIGGERS_DOCTYPE)
+      .where({
+        'message.konnector': slug
+      })
+      .indexFields(['message.konnector']),
   options: {
     as: `${TRIGGERS_DOCTYPE}/slug/${slug}`,
     fetchPolicy: defaultFetchPolicy,
@@ -104,7 +106,7 @@ export const buildTriggersQueryByConnectorSlug = (slug, enabled) => ({
 })
 
 export const buildConnectorsQueryById = (id, enabled = true) => ({
-  definition: Q(KONNECTORS_DOCTYPE).getById(id),
+  definition: () => Q(KONNECTORS_DOCTYPE).getById(id),
   options: {
     as: `${KONNECTORS_DOCTYPE}/id/${id}`,
     fetchPolicy: defaultFetchPolicy,
@@ -116,9 +118,10 @@ export const buildKonnectorsQueryByQualificationLabels = (
   labels,
   enabled = true
 ) => ({
-  definition: Q(KONNECTORS_DOCTYPE)
-    .where({ qualification_labels: { $in: labels } })
-    .indexFields(['qualification_labels']),
+  definition: () =>
+    Q(KONNECTORS_DOCTYPE)
+      .where({ qualification_labels: { $in: labels } })
+      .indexFields(['qualification_labels']),
   options: {
     as: `${KONNECTORS_DOCTYPE}/qualificationLabels/${JSON.stringify(labels)}`,
     fetchPolicy: defaultFetchPolicy,
@@ -127,9 +130,10 @@ export const buildKonnectorsQueryByQualificationLabels = (
 })
 
 export const buildConnectorsQueryByQualificationLabel = label => ({
-  definition: Q(KONNECTORS_DOCTYPE)
-    .where({ qualification_labels: { $in: [label] } })
-    .indexFields(['qualification_labels']),
+  definition: () =>
+    Q(KONNECTORS_DOCTYPE)
+      .where({ qualification_labels: { $in: [label] } })
+      .indexFields(['qualification_labels']),
   options: {
     as: `${KONNECTORS_DOCTYPE}/qualificationLabel/${label}`,
     fetchPolicy: defaultFetchPolicy
@@ -137,11 +141,12 @@ export const buildConnectorsQueryByQualificationLabel = label => ({
 })
 
 export const buildAccountsQueryBySlug = (slug, enabled = true) => ({
-  definition: Q(ACCOUNTS_DOCTYPE)
-    .where({
-      account_type: slug
-    })
-    .indexFields(['account_type']),
+  definition: () =>
+    Q(ACCOUNTS_DOCTYPE)
+      .where({
+        account_type: slug
+      })
+      .indexFields(['account_type']),
   options: {
     as: `${ACCOUNTS_DOCTYPE}/slug/${slug}`,
     fetchPolicy: defaultFetchPolicy,
@@ -150,7 +155,7 @@ export const buildAccountsQueryBySlug = (slug, enabled = true) => ({
 })
 
 export const queryAccounts = {
-  definition: Q(ACCOUNTS_DOCTYPE),
+  definition: () => Q(ACCOUNTS_DOCTYPE),
   options: {
     as: `accounts`,
     fetchPolicy: defaultFetchPolicy
