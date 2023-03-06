@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [6.1.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@6.0.0...eslint-config-cozy-app@6.1.0) (2023-03-06)
+
+
+### Features
+
+* **eslint-config-cozy-app:** Update rules ([1fffa41](https://github.com/cozy/cozy-libs/commit/1fffa418a9546dc0a40fbf9451f08a48344d1b7e))
+
+
+
+
+
 # [6.0.0](https://github.com/cozy/cozy-libs/compare/eslint-config-cozy-app@5.5.0...eslint-config-cozy-app@6.0.0) (2023-03-02)
 
 
