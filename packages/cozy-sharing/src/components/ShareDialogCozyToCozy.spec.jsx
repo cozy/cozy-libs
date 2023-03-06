@@ -8,7 +8,8 @@ import { act, render, fireEvent } from '@testing-library/react'
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),
   useQuery: jest.fn().mockReturnValue({ data: { public_name: 'Alice' } }),
-  hasQueryBeenLoaded: jest.fn().mockReturnValue(true)
+  hasQueryBeenLoaded: jest.fn().mockReturnValue(true),
+  useClient: () => ({ options: { uri: mockRecipientAlice.instance } })
 }))
 
 describe('ShareDialogCozyToCozy', () => {
@@ -54,9 +55,9 @@ describe('ShareDialogCozyToCozy', () => {
     await act(async () => {
       resolve([
         {
-          name: recipientBob.public_name,
+          name: mockRecipientBob.public_name,
           id: 'SOME_ID',
-          email: recipientBob.email
+          email: mockRecipientBob.email
         }
       ])
       await promise
@@ -81,9 +82,9 @@ describe('ShareDialogCozyToCozy', () => {
     await act(async () => {
       resolve([
         {
-          name: recipientBob.public_name,
+          name: mockRecipientBob.public_name,
           id: 'SOME_ID',
-          email: recipientBob.email
+          email: mockRecipientBob.email
         }
       ])
       await promise
@@ -111,14 +112,14 @@ describe('ShareDialogCozyToCozy', () => {
     await act(async () => {
       resolve([
         {
-          name: recipientBob.public_name,
+          name: mockRecipientBob.public_name,
           id: 'SOME_ID',
-          email: recipientBob.email
+          email: mockRecipientBob.email
         },
         {
-          name: recipientClaude.public_name,
+          name: mockRecipientClaude.public_name,
           id: 'SOME_OTHER_ID',
-          email: recipientClaude.email
+          email: mockRecipientClaude.email
         }
       ])
       await promise
@@ -173,9 +174,9 @@ describe('ShareDialogCozyToCozy', () => {
     await act(async () => {
       resolve([
         {
-          name: recipientBob.public_name,
+          name: mockRecipientBob.public_name,
           id: 'SOME_ID',
-          email: recipientBob.email,
+          email: mockRecipientBob.email,
           fingerprintPhrase: 'SOME_FINGERPRINT_PHRASE'
         }
       ])
@@ -192,7 +193,7 @@ describe('ShareDialogCozyToCozy', () => {
 
     expect(
       getByText(
-        `Do you really want to reject contact ${recipientBob.public_name} (${recipientBob.email})?`
+        `Do you really want to reject contact ${mockRecipientBob.public_name} (${mockRecipientBob.email})?`
       )
     ).toBeTruthy()
 
@@ -203,7 +204,7 @@ describe('ShareDialogCozyToCozy', () => {
   })
 })
 
-const recipientAlice = {
+const mockRecipientAlice = {
   status: 'owner',
   public_name: 'Alice',
   email: 'me@alice.cozy.localhost',
@@ -214,7 +215,7 @@ const recipientAlice = {
   avatarPath: '/sharings/SOME_SHARING_ID/recipients/0/avatar'
 }
 
-const recipientBob = {
+const mockRecipientBob = {
   status: 'ready',
   public_name: 'Claude',
   email: 'me@claude.cozy.localhost',
@@ -225,7 +226,7 @@ const recipientBob = {
   avatarPath: '/sharings/SOME_SHARING_ID/recipients/1/avatar'
 }
 
-const recipientClaude = {
+const mockRecipientClaude = {
   status: 'ready',
   public_name: 'Bob',
   email: 'me@bob.cozy.localhost',
@@ -333,9 +334,9 @@ const getMockProps = () => {
     link: null,
     permissions: [],
     recipients: [
-      recipientAlice,
-      recipientBob,
-      recipientClaude,
+      mockRecipientAlice,
+      mockRecipientBob,
+      mockRecipientClaude,
       {
         status: 'pending',
         email: 'me@ben.cozy.localhost',

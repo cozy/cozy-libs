@@ -1,31 +1,23 @@
 import React from 'react'
-
-import { useClient, useQuery, hasQueryBeenLoaded } from 'cozy-client'
+import PropTypes from 'prop-types'
 
 import Recipient from './Recipient'
-import { buildInstanceSettingsQuery } from '../../queries/queries'
+import OwnerRecipientDefault from './OwnerRecipientDefault'
 
-const OwnerRecipient = () => {
-  const client = useClient()
-
-  const instanceSettingsQuery = buildInstanceSettingsQuery()
-  const instanceSettingsResult = useQuery(
-    instanceSettingsQuery.definition,
-    instanceSettingsQuery.options
+const OwnerRecipient = ({ recipients }) => {
+  const ownerRecipient = recipients.find(
+    recipient => recipient.status === 'owner'
   )
 
-  const public_name = instanceSettingsResult?.data?.attributes?.public_name
+  if (ownerRecipient) {
+    return <Recipient {...ownerRecipient} />
+  }
 
-  return (
-    hasQueryBeenLoaded(instanceSettingsResult) && (
-      <Recipient
-        isOwner={true}
-        status="owner"
-        instance={client.options.uri}
-        public_name={public_name}
-      />
-    )
-  )
+  return <OwnerRecipientDefault />
+}
+
+OwnerRecipient.propTypes = {
+  recipients: PropTypes.array.isRequired
 }
 
 export default OwnerRecipient

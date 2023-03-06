@@ -71,7 +71,7 @@ const WhoHasAccess = ({
           />
         )}
 
-        <OwnerRecipient />
+        <OwnerRecipient recipients={recipients} />
 
         {recipientsToDisplay.map(recipient => {
           const recipientConfirmationData = recipientsToBeConfirmed.find(
