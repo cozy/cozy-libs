@@ -1,10 +1,12 @@
-import React, { Component } from 'react'
 import PropTypes from 'prop-types'
+import React, { Component } from 'react'
+
 import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
 import TwoFAModal from './TwoFAModal'
 import logger from '../logger'
+import ConnectionFlow from '../models/ConnectionFlow'
 import {
   ERROR_EVENT,
   SUCCESS_EVENT,
@@ -13,7 +15,6 @@ import {
   TRIGGER_LAUNCH_EVENT,
   UPDATE_EVENT
 } from '../models/flowEvents'
-import ConnectionFlow from '../models/ConnectionFlow'
 
 /**
  * FlowProvider instantiates a ConnectionFlow and provides it to its children.
