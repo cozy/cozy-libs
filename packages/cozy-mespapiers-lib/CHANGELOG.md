@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [22.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.1.3...cozy-mespapiers-lib@22.2.0) (2023-03-06)
+
+
+### Features
+
+* **mespapiers:** Add CategoryItemByKonnector ([91870ac](https://github.com/cozy/cozy-libs/commit/91870ac0b482467b09909e5dce02f443aa76b144))
+* **mespapiers:** Show CategoryItemByKonnector on Home ([185ada0](https://github.com/cozy/cozy-libs/commit/185ada093bd1b71e947ad085bcebe8f50782f8b7))
+
+
+
+
+
 ## [22.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.1.2...cozy-mespapiers-lib@22.1.3) (2023-03-01)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
