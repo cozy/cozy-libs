@@ -148,3 +148,11 @@ export const buildAccountsQueryBySlug = (slug, enabled = true) => ({
     enabled
   }
 })
+
+export const queryAccounts = {
+  definition: Q(ACCOUNTS_DOCTYPE),
+  options: {
+    as: `accounts`,
+    fetchPolicy: defaultFetchPolicy
+  }
+}
