@@ -14,7 +14,7 @@ const RecipientStatus = ({ status, isMe, instance }) => {
   const { t } = useI18n()
 
   const isSendingEmail = !isMe && status === 'mail-not-sent'
-  const isReady = isMe || status === 'ready'
+  const isReady = isMe || status === 'ready' || status === 'owner'
   let text, icon
   if (isReady) {
     text = instance
