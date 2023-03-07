@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [6.0.5](https://github.com/cozy/cozy-libs/compare/cozy-sharing@6.0.4...cozy-sharing@6.0.5) (2023-03-07)
+
+
+### Bug Fixes
+
+* Display always instance address as secondary text for owner ([f6c89cf](https://github.com/cozy/cozy-libs/commit/f6c89cf54d723d695f0afe0a9fe9ab44f236376e))
+* Display correctly owner recipient when receiving sharing ([49a1c5a](https://github.com/cozy/cozy-libs/commit/49a1c5ac6aa029be3217fef93ce3f7bce6e21019))
+
+
+
+
+
 ## [6.0.4](https://github.com/cozy/cozy-libs/compare/cozy-sharing@6.0.3...cozy-sharing@6.0.4) (2023-03-01)
 
 
