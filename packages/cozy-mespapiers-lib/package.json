@@ -41,12 +41,12 @@
   },
   "peerDependencies": {
     "cozy-client": ">=35.3.0",
-    "cozy-device-helper": ">=2.6.0",
-    "cozy-doctypes": ">=1.83.8",
-    "cozy-harvest-lib": ">=13.4.0",
-    "cozy-intent": ">=2.2.0",
-    "cozy-realtime": ">=4.2.0",
-    "cozy-sharing": ">=4.3.0",
+    "cozy-device-helper": ">=2.7.0",
+    "cozy-doctypes": ">=1.88.0",
+    "cozy-harvest-lib": ">=13.5.0",
+    "cozy-intent": ">=2.9.0",
+    "cozy-realtime": ">=4.3.0",
+    "cozy-sharing": ">=6.0.4",
     "cozy-ui": ">=81.2.0",
     "react-router-dom": ">=6.4.5"
   }
