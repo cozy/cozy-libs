@@ -32,6 +32,12 @@ describe('makeFileTags', () => {
 
     expect(res).toStrictEqual(['identity', 'transport'])
   })
+
+  it('should return empty array if no qualification', () => {
+    const res = makeFileTags({ metadata: {} })
+
+    expect(res).toStrictEqual([])
+  })
 })
 
 describe('makeContactTags', () => {

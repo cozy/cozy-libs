@@ -31,10 +31,10 @@ export const index = new Document({
 })
 
 export const makeFileTags = file => {
-  const item = file.metadata.qualification
+  const item = file.metadata?.qualification
   const tags = themesList
     .filter(theme => {
-      return theme.items.some(it => it.label === item.label)
+      return theme.items.some(it => it.label === item?.label)
     })
     .map(x => x.label)
   return tags
