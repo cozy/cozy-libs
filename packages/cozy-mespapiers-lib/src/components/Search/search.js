@@ -76,6 +76,7 @@ export const addFileDoc = (index, doc, t) => {
   if (hasQualifications(doc)) {
     return index.add({
       ...doc,
+      _type: doc._type || doc.type,
       flexsearchProps: {
         tag: makeFileTags(doc),
         translatedQualificationLabel: t(
@@ -89,6 +90,7 @@ export const addFileDoc = (index, doc, t) => {
 export const addContactDoc = (index, doc) => {
   return index.add({
     ...doc,
+    _type: doc._type || doc.type,
     flexsearchProps: {
       tag: makeContactTags(doc),
       email: doc.email?.[0]?.address
