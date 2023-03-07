@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.2.0...cozy-mespapiers-lib@23.0.0) (2023-03-07)
+
+
+### Features
+
+* Upgrade peer dep to be consistent with dev dep ([328eb7c](https://github.com/cozy/cozy-libs/commit/328eb7c0ad56cf822cdb80d93de5cbc33a5d5915))
+
+
+### BREAKING CHANGES
+
+* You must have `cozy-device-helper >=2.7.0`,
+`cozy-doctypes >=1.88.0`, `cozy-harvest-lib >=13.5.0`,
+`cozy-intent >=2.9.0`, `cozy-realtime >=4.3.0`, `cozy-sharing >=6.0.4`
+
+
+
+
+
 # [22.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@22.1.3...cozy-mespapiers-lib@22.2.0) (2023-03-06)
 
 
