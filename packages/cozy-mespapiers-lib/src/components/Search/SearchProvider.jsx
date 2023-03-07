@@ -3,7 +3,7 @@ import React, { createContext, useContext, useMemo, useState } from 'react'
 import { useClient } from 'cozy-client'
 import useRealtime from 'cozy-realtime/dist/useRealtime'
 
-import { add, search, makeRealtimeConnection } from './helpers'
+import { addAllOnce, search, makeRealtimeConnection } from './helpers'
 
 const SearchContext = createContext()
 
@@ -28,7 +28,7 @@ const SearchProvider = ({ doctypes, t, children }) => {
 
   const value = useMemo(() => {
     return {
-      add: add(isInit, t, setIsInit),
+      addAllOnce: addAllOnce(t, isInit, setIsInit),
       search
     }
   }, [isInit, t])
