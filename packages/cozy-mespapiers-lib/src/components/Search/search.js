@@ -16,15 +16,15 @@ export const index = new Document({
     id: '_id',
     tag: 'flexsearchProps:tag',
     index: [
-      'flexsearchProps:name',
-      'flexsearchProps:translatedQualificationLabel',
-      'flexsearchProps:fullname',
-      'flexsearchProps:birthday',
-      'flexsearchProps:birthcity',
-      'flexsearchProps:email',
-      'flexsearchProps:civility',
-      'flexsearchProps:company',
-      'flexsearchProps:jobTitle'
+      'name', // io.cozy.files, io.cozy.contacts
+      'flexsearchProps:translatedQualificationLabel', // io.cozy.files
+      'fullname', // io.cozy.contacts
+      'birthday', // io.cozy.contacts
+      'birthcity', // io.cozy.contacts
+      'flexsearchProps:email', // io.cozy.contacts
+      'civility', // io.cozy.contacts
+      'company', // io.cozy.contacts
+      'jobTitle' // io.cozy.contacts
     ],
     store: ['_id', '_type']
   }
@@ -83,7 +83,6 @@ export const addFileDoc = (index, doc, t) => {
     ...doc,
     flexsearchProps: {
       tag: makeFileTags(doc),
-      name: doc.name,
       translatedQualificationLabel: t(
         `items.${doc.metadata.qualification.label}`
       )
@@ -96,13 +95,7 @@ export const addContactDoc = (index, doc) => {
     ...doc,
     flexsearchProps: {
       tag: makeContactTags(doc),
-      fullname: doc.fullname,
-      birthday: doc.birthday,
-      birthcity: doc.birthcity,
-      email: doc.email?.[0]?.address,
-      civility: doc.civility,
-      company: doc.company,
-      jobTitle: doc.jobTitle
+      email: doc.email?.[0]?.address
     }
   })
 }

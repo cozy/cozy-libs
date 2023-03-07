@@ -77,7 +77,6 @@ describe('addFileDoc', () => {
       name: 'file01.ext',
       metadata: { qualification: { label: 'tax_return' } },
       flexsearchProps: {
-        name: 'file01.ext',
         tag: ['finance'],
         translatedQualificationLabel: 'Impôts - Déclaration de revenus'
       }
@@ -115,13 +114,7 @@ describe('addContactDoc', () => {
       jobTitle: 'Facilitator',
       flexsearchProps: {
         tag: ['identity', 'work_study'],
-        fullname: 'Jason Bourne',
-        birthday: '1959-05-15',
-        birthcity: 'Chicago',
-        email: 'jason.bourne@aol.com',
-        civility: 'male',
-        company: 'CIA',
-        jobTitle: 'Facilitator'
+        email: 'jason.bourne@aol.com'
       }
     })
   })
