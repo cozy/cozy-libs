@@ -105,3 +105,13 @@ export const addDoc = ({ index, doc, t }) => {
     addContactDoc(index, doc)
   }
 }
+
+export const updateDoc = ({ index, doc, t }) => {
+  if (isFile(doc)) {
+    if (doc.trashed) {
+      index.remove(doc._id)
+    } else {
+      addDoc({ index, doc, t }) // will perform update if id already indexed, see https://github.com/nextapps-de/flexsearch#append-contents
+    }
+  }
+}
