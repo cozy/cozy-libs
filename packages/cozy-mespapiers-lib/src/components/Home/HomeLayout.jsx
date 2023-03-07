@@ -1,29 +1,29 @@
-import React, { useMemo, useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import React, { useMemo, useState, useEffect } from 'react'
 
 import flag from 'cozy-flags'
 
-import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
-import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
-import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
-import { useSearch } from '../Search/SearchProvider'
+import Content from './Content'
 import HomeToolbar from './HomeToolbar'
 import SearchHeader from './SearchHeader'
-import Content from './Content'
+import { getFeaturedPlaceholders } from '../../helpers/findPlaceholders'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
+import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
+import FeaturedPlaceholdersList from '../Placeholders/FeaturedPlaceholdersList'
+import { useSearch } from '../Search/SearchProvider'
 
 const HomeLayout = ({ contacts, papers, konnectors }) => {
   const [selectedTheme, setSelectedTheme] = useState('')
   const [searchValue, setSearchValue] = useState('')
   const { isMultiSelectionActive } = useMultiSelection()
   const { papersDefinitions } = usePapersDefinitions()
-  const { add } = useSearch()
+  const { addAllOnce } = useSearch()
 
   useEffect(() => {
     if (flag('mespapiers.flexsearch.enabled')) {
-      add([...contacts, ...papers])
+      addAllOnce([...contacts, ...papers])
     }
-  }, [add, contacts, papers])
+  }, [addAllOnce, contacts, papers])
 
   const featuredPlaceholders = useMemo(
     () =>

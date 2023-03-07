@@ -17,10 +17,10 @@ const onCreate = (doctype, t) => async doc => {
   addDocs({ index, docs: [{ ...doc, _type: doctype }], t })
 }
 
-export const add = (isInit, t, setIsInit) => docs => {
-  if (!isInit) {
+export const addAllOnce = (t, isAdded, setIsAdded) => docs => {
+  if (!isAdded) {
     addDocs({ index, docs, t })
-    setIsInit(true)
+    setIsAdded(true)
   }
 }
 
