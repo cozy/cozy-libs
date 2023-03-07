@@ -96,12 +96,16 @@ export const addContactDoc = (index, doc) => {
   })
 }
 
+export const addDoc = ({ index, doc, t }) => {
+  if (isFile(doc)) {
+    addFileDoc(index, doc, t)
+  } else if (doc._type === CONTACTS_DOCTYPE) {
+    addContactDoc(index, doc)
+  }
+}
+
 export const addDocs = ({ index, docs, t }) => {
   for (const doc of docs) {
-    if (isFile(doc)) {
-      addFileDoc(index, doc, t)
-    } else if (doc._type === CONTACTS_DOCTYPE) {
-      addContactDoc(index, doc)
-    }
+    addDoc({ index, doc, t })
   }
 }
