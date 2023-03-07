@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 
+import ConnectionBackdrop from './AccountForm/ConnectionBackdrop'
 import TwoFAModal from './TwoFAModal'
 import logger from '../logger'
 import ConnectionFlow from '../models/ConnectionFlow'
@@ -151,20 +152,29 @@ export class FlowProvider extends Component {
   }
 
   render() {
-    const { showTwoFAModal } = this.state
+    const { showTwoFAModal, flowState } = this.state
     const flow = this.flow
     const { children } = this.props
+    const showConnectionBackdrop =
+      flowState?.running &&
+      (flow.konnector?.clientSide || flow.konnector?.oauth)
+
     return (
       <>
         {children({
           flow
         })}
+
         {showTwoFAModal && (
           <TwoFAModal
             flow={flow}
             dismissAction={this.dismissTwoFAModal}
             into="coz-harvest-modal-place"
           />
+        )}
+
+        {showConnectionBackdrop && (
+          <ConnectionBackdrop name={flow.konnector.name} />
         )}
       </>
     )
