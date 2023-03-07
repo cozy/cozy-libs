@@ -103,9 +103,3 @@ export const addDoc = ({ index, doc, t }) => {
     addContactDoc(index, doc)
   }
 }
-
-export const addDocs = ({ index, docs, t }) => {
-  for (const doc of docs) {
-    addDoc({ index, doc, t })
-  }
-}
