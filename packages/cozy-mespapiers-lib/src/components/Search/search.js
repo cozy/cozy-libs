@@ -1,15 +1,9 @@
 import { Document } from 'flexsearch'
 
-import { models } from 'cozy-client'
+import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
+import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
 
 import { CONTACTS_DOCTYPE } from '../../doctypes'
-
-const {
-  document: {
-    themes: { themesList }
-  },
-  file: { isFile }
-} = models
 
 export const index = new Document({
   document: {
@@ -79,15 +73,17 @@ export const makeContactTags = contact => {
 }
 
 export const addFileDoc = (index, doc, t) => {
-  return index.add({
-    ...doc,
-    flexsearchProps: {
-      tag: makeFileTags(doc),
-      translatedQualificationLabel: t(
-        `items.${doc.metadata.qualification.label}`
-      )
-    }
-  })
+  if (hasQualifications(doc)) {
+    return index.add({
+      ...doc,
+      flexsearchProps: {
+        tag: makeFileTags(doc),
+        translatedQualificationLabel: t(
+          `items.${doc.metadata.qualification.label}`
+        )
+      }
+    })
+  }
 }
 
 export const addContactDoc = (index, doc) => {
