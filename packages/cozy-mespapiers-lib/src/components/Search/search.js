@@ -3,7 +3,9 @@ import { Document } from 'flexsearch'
 import { themesList } from 'cozy-client/dist/models/document/documentTypeData'
 import { isFile, hasQualifications } from 'cozy-client/dist/models/file'
 
-import { FILES_DOCTYPE, CONTACTS_DOCTYPE } from '../../doctypes'
+import { CONTACTS_DOCTYPE } from '../../doctypes'
+
+const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
 /** The index document will store (_id, _type) couples for each document having the declared indexed fields,
  * coming from both `io.cozy.files` and `io.cozy.contacts`.
@@ -92,7 +94,6 @@ export const addFileDoc = (index, doc, t) => {
   if (hasQualifications(doc)) {
     return index.add({
       ...doc,
-      _type: doc._type || doc.type || FILES_DOCTYPE, // should be useless after solving https://github.com/cozy/cozy-libs/issues/2023
       flexsearchProps: {
         tag: makeFileTags(doc),
         translatedQualificationLabel: t(
@@ -106,7 +107,6 @@ export const addFileDoc = (index, doc, t) => {
 export const addContactDoc = (index, doc) => {
   return index.add({
     ...doc,
-    _type: doc._type || doc.type || CONTACTS_DOCTYPE, // should be useless after solving https://github.com/cozy/cozy-libs/issues/2023
     flexsearchProps: {
       tag: makeContactTags(doc)
     }
@@ -116,8 +116,7 @@ export const addContactDoc = (index, doc) => {
 export const addDoc = ({ index, doc, t }) => {
   if (isFile(doc)) {
     addFileDoc(index, doc, t)
-  } else {
-    // ⚠️ io.cozy.contacts is implicit here, we should solve https://github.com/cozy/cozy-libs/issues/2023
+  } else if (isContact(doc)) {
     addContactDoc(index, doc)
   }
 }
