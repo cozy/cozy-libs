@@ -45,7 +45,7 @@
     "cozy-doctypes": ">=1.88.0",
     "cozy-harvest-lib": ">=13.5.0",
     "cozy-intent": ">=2.9.0",
-    "cozy-realtime": ">=4.3.0",
+    "cozy-realtime": ">=4.4.0",
     "cozy-sharing": ">=6.0.4",
     "cozy-ui": ">=81.2.0",
     "react-router-dom": ">=6.4.5"
