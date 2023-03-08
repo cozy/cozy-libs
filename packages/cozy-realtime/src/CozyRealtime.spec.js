@@ -21,7 +21,7 @@ const doctype = 'io.cozy.files'
 const type = doctype
 const id = 'my-document-id'
 const message = { message: 'hello' }
-const doc = message
+const doc = { ...message, _type: type }
 const event = 'UPDATED'
 const payload = { type, doc, id }
 
