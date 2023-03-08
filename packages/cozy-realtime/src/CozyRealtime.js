@@ -456,7 +456,7 @@ class CozyRealtime {
     )
     for (const handler of handlers) {
       try {
-        handler(payload.doc)
+        handler({ ...payload.doc, _type: payload.type })
       } catch (e) {
         logger.error(
           `handler did throw for ${event}, ${payload.type}, ${payload.id}`

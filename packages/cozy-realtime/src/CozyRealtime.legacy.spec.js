@@ -64,7 +64,7 @@ describe('CozyRealtime', () => {
 
   const type = 'io.cozy.bank.accounts'
   const id = 'doc_id'
-  const fakeDoc = { _id: id, title: 'title1' }
+  const fakeDoc = { _id: id, title: 'title1', _type: type }
 
   describe('subscribe', () => {
     it('should launch handler when document is created', async done => {
