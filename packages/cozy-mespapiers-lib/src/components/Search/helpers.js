@@ -17,9 +17,8 @@ export const search = ({ docs, value, tag }) => {
 
   const resultsIds = filteredDocs?.[0]?.result?.map(doc => doc.id)
 
-  const resultDocs = resultsIds.map(resultIds =>
-    docs.find(doc => doc._id === resultIds)
-  )
+  const resultDocs =
+    resultsIds?.map(resultId => docs.find(doc => doc._id === resultId)) || []
 
   return resultDocs
 }
