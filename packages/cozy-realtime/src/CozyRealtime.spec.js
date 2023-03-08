@@ -1,12 +1,12 @@
-import { Server } from 'mock-socket'
 import MicroEE from 'microee'
+import { Server } from 'mock-socket'
 
 import CozyRealtime from './CozyRealtime'
-import logger from './logger'
 import {
   allowDoubleSubscriptions,
   requireDoubleUnsubscriptions
 } from './config'
+import logger from './logger'
 
 const testLogger = logger.minilog('test/cozy-realtime')
 
