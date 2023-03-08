@@ -119,8 +119,7 @@ describe('addContactDoc', () => {
       company: 'CIA',
       jobTitle: 'Facilitator',
       flexsearchProps: {
-        tag: ['identity', 'work_study'],
-        email: 'jason.bourne@aol.com'
+        tag: ['identity', 'work_study']
       }
     })
   })

@@ -4,14 +4,19 @@ import { Outlet } from 'react-router-dom'
 import { RealTimeQueries } from 'cozy-client'
 import flag from 'cozy-flags'
 import FlagSwitcher from 'cozy-flags/dist/FlagSwitcher'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { FILES_DOCTYPE, TRIGGERS_DOCTYPE, SETTINGS_DOCTYPE } from '../doctypes'
 import { ModalStack } from './Contexts/ModalProvider'
 import { usePapersDefinitions } from './Hooks/usePapersDefinitions'
+import {
+  FILES_DOCTYPE,
+  TRIGGERS_DOCTYPE,
+  SETTINGS_DOCTYPE,
+  CONTACTS_DOCTYPE
+} from '../doctypes'
 
 export const MesPapiersLibLayout = () => {
   const { t } = useI18n()
@@ -37,6 +42,7 @@ export const MesPapiersLibLayout = () => {
         <Outlet />
       )}
       <RealTimeQueries doctype={FILES_DOCTYPE} />
+      <RealTimeQueries doctype={CONTACTS_DOCTYPE} />
       <RealTimeQueries doctype={TRIGGERS_DOCTYPE} />
       <RealTimeQueries doctype={SETTINGS_DOCTYPE} />
       <Alerter t={t} />
