@@ -18,11 +18,20 @@ export const index = new Document({
     tag: 'flexsearchProps:tag',
     index: [
       'name', // io.cozy.files, io.cozy.contacts
+      'metadata:ibanNumber', // io.cozy.files
+      'metadata:number', // io.cozy.files
+      'metadata:AObtentionDate', // io.cozy.files
+      'metadata:BObtentionDate', // io.cozy.files
+      'metadata:CObtentionDate', // io.cozy.files
+      'metadata:DObtentionDate', // io.cozy.files
+      'metadata:passportNumber', // io.cozy.files
+      'metadata:vinNumber', // io.cozy.files
       'flexsearchProps:translatedQualificationLabel', // io.cozy.files
       'fullname', // io.cozy.contacts
       'birthday', // io.cozy.contacts
       'birthcity', // io.cozy.contacts
       'email[]:address', // io.cozy.contacts
+      'phone[]:number', // io.cozy.contacts
       'civility', // io.cozy.contacts
       'company', // io.cozy.contacts
       'jobTitle' // io.cozy.contacts
