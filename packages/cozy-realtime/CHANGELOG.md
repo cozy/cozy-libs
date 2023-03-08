@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# 4.4.0 (2023-03-08)
+
+
+### Features
+
+* **realtime:** Add _type on returned doc by the handlers ([759cdb3](https://github.com/cozy/cozy-libs/commit/759cdb3802d5472d47a9b8b5194504e98b8ddbd6))
+
+
+
+
+
 # 4.3.0 (2023-01-31)
 
 

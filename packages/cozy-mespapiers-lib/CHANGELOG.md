@@ -3,6 +3,26 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [23.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@23.0.1...cozy-mespapiers-lib@23.1.0) (2023-03-08)
+
+
+### Bug Fixes
+
+* **mespapiers:** Add file into search index only for qualified one ([d529282](https://github.com/cozy/cozy-libs/commit/d52928298c15ba42b8fbac2c6e60986a9372a701))
+* **mespapiers:** Ensure _type on document for flexsearch ([efd27d3](https://github.com/cozy/cozy-libs/commit/efd27d302cc48bf59e932ac58e7dab1efc559c96))
+* **mespapiers:** Rewrite flexsearch index to be more based on doc ([c446d3f](https://github.com/cozy/cozy-libs/commit/c446d3f58c141ca23e55a393dd44d3a4187dd7d9))
+* **mespapiers:** Search tags wasn't created if no qualification ([00f84c7](https://github.com/cozy/cozy-libs/commit/00f84c7e557d3889ef41458493de9c6794f2a03f))
+
+
+### Features
+
+* **mespapiers:** Add file realtime update event support for searchflex ([6b48619](https://github.com/cozy/cozy-libs/commit/6b486190ebc2a5c91f7cb5595616a6ca37fcc699))
+* **mespapiers:** Add realtime on Contacts and modify email index ([1193ba1](https://github.com/cozy/cozy-libs/commit/1193ba1a5db2db4656ef4415f70252781f37124b))
+
+
+
+
+
 ## [23.0.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@23.0.0...cozy-mespapiers-lib@23.0.1) (2023-03-07)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
