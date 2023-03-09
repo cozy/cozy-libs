@@ -9,15 +9,24 @@ export const addAllOnce = (t, isAdded, setIsAdded) => docs => {
   }
 }
 
+export const makeReducedResultIds = flexsearchResult =>
+  flexsearchResult?.reduce((acc, curr) => {
+    curr?.result?.forEach(id => {
+      const isAlreadyReturned = acc.findIndex(el => el === id) !== -1
+      if (!isAlreadyReturned) {
+        acc.push(id)
+      }
+    })
+    return acc
+  }, [])
+
 export const search = ({ docs, value, tag }) => {
   const filteredDocs = index.search(value, { tag })
+  const resultsIds = makeReducedResultIds(filteredDocs)
 
-  const resultsIds = filteredDocs?.[0]?.result?.map(doc => doc.id)
-
-  const resultDocs =
+  return (
     resultsIds?.map(resultId => docs.find(doc => doc._id === resultId)) || []
-
-  return resultDocs
+  )
 }
 
 const onCreate = t => async doc => {
