@@ -1,4 +1,5 @@
 import { getReferencedBy, useQuery, isQueryLoading } from 'cozy-client'
+
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { buildContactsQueryByIds } from '../../helpers/queries'
 
@@ -10,13 +11,13 @@ const useReferencedContact = file => {
   const contactIds = contactsReferenced.map(ref => ref.id)
   const isContactByIdsQueryEnabled = contactIds.length > 0
 
-  const contactsQueryByIds = buildContactsQueryByIds(contactIds)
+  const contactsQueryByIds = buildContactsQueryByIds(
+    contactIds,
+    isContactByIdsQueryEnabled
+  )
   const { data: contacts, ...contactsQueryResult } = useQuery(
     contactsQueryByIds.definition,
-    {
-      ...contactsQueryByIds.options,
-      enabled: isContactByIdsQueryEnabled
-    }
+    contactsQueryByIds.options
   )
 
   const isLoadingContacts =
