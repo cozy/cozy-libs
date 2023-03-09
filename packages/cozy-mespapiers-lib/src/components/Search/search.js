@@ -19,7 +19,7 @@ export const index = new Document({
     id: '_id',
     tag: 'flexsearchProps:tag',
     index: [
-      'name', // io.cozy.files, io.cozy.contacts
+      'flexsearchProps:translatedQualificationLabel', // io.cozy.files
       'metadata:ibanNumber', // io.cozy.files
       'metadata:number', // io.cozy.files
       'metadata:AObtentionDate', // io.cozy.files
@@ -28,8 +28,8 @@ export const index = new Document({
       'metadata:DObtentionDate', // io.cozy.files
       'metadata:passportNumber', // io.cozy.files
       'metadata:vinNumber', // io.cozy.files
-      'flexsearchProps:translatedQualificationLabel', // io.cozy.files
       'fullname', // io.cozy.contacts
+      'name', // io.cozy.files, io.cozy.contacts
       'birthday', // io.cozy.contacts
       'birthcity', // io.cozy.contacts
       'email[]:address', // io.cozy.contacts
