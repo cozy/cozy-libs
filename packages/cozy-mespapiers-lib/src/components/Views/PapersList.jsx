@@ -10,14 +10,14 @@ import {
   buildConnectorsQueryByQualificationLabel,
   buildAccountsQueryBySlug
 } from '../../helpers/queries'
+import { useMultiSelection } from '../Hooks/useMultiSelection'
+import Empty from '../Papers/Empty/Empty'
+import PapersListByContact from '../Papers/PapersListByContact'
+import PapersListToolbar from '../Papers/PapersListToolbar'
 import {
   getContactsRefIdsByFiles,
   getCurrentFileTheme
 } from '../Papers/helpers'
-import PapersListToolbar from '../Papers/PapersListToolbar'
-import PapersListByContact from '../Papers/PapersListByContact'
-import Empty from '../Papers/Empty/Empty'
-import { useMultiSelection } from '../Hooks/useMultiSelection'
 
 const PapersList = () => {
   const params = useParams()
@@ -34,13 +34,13 @@ const PapersList = () => {
   const hasFiles = files?.length > 0
 
   const contactIds = getContactsRefIdsByFiles(files)
-  const contactsQueryByIds = buildContactsQueryByIds(contactIds)
+  const contactsQueryByIds = buildContactsQueryByIds(
+    contactIds,
+    !isLoadingFiles
+  )
   const { data: contacts, ...contactQueryResult } = useQueryAll(
     contactsQueryByIds.definition,
-    {
-      ...contactsQueryByIds.options,
-      enabled: !isLoadingFiles
-    }
+    contactsQueryByIds.options
   )
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
