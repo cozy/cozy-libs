@@ -37,8 +37,7 @@ export const index = new Document({
       'civility', // io.cozy.contacts
       'company', // io.cozy.contacts
       'jobTitle' // io.cozy.contacts
-    ],
-    store: ['_id', '_type']
+    ]
   }
 })
 
