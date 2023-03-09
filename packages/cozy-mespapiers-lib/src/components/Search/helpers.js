@@ -10,10 +10,7 @@ export const addAllOnce = (t, isAdded, setIsAdded) => docs => {
 }
 
 export const search = ({ docs, value, tag }) => {
-  const filteredDocs = index.search(value, {
-    tag,
-    enrich: true
-  })
+  const filteredDocs = index.search(value, { tag })
 
   const resultsIds = filteredDocs?.[0]?.result?.map(doc => doc.id)
 
