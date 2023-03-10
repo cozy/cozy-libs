@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.5.1...cozy-harvest-lib@13.6.0) (2023-03-10)
+
+
+### Features
+
+* **harvest:** Beautify files ([8f141a7](https://github.com/cozy/cozy-libs/commit/8f141a748dbd7e9c9daa8c3691ef9ab7ac42de92))
+* **harvest:** Make ConnectionBackdrop global ([cdd5b22](https://github.com/cozy/cozy-libs/commit/cdd5b2201c5991e8f9c5d6b56aa19ee411761ab7))
+
+
+
+
+
 ## [13.5.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.5.0...cozy-harvest-lib@13.5.1) (2023-03-08)
 
 **Note:** Version bump only for package cozy-harvest-lib
