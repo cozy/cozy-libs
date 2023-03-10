@@ -1,12 +1,11 @@
-var fs = require('fs'),
-  assert = require('assert'),
-  MiniLog = require('../src/index.js'),
-  Stringifier = require('../src/node/stringify.js'),
-  Transform = require('../src/common/transform.js')
+var assert = require('assert')
+var fs = require('fs')
+
+var Transform = require('../src/common/transform.js')
+var MiniLog = require('../src/index.js')
+var Stringifier = require('../src/node/stringify.js')
 
 function WriteStream() {
-  // eslint-disable-next-line no-unused-vars
-  var self = this
   this.writable = true
   this.content = []
 }
@@ -145,7 +144,7 @@ exports['given a minilog'] = {
   },
 
   "logging a buffer doesn't look horrible": function () {
-    this.log(new Buffer('Hello world'))
+    this.log(Buffer.from('Hello world'))
     assert.equal(this.stream.content[0], 'Hello world\n')
   },
 
