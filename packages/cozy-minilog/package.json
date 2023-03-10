@@ -2,7 +2,7 @@
   "name": "cozy-minilog",
   "description": "Lightweight client & server-side logging with Stream-API backends and counting, timing support",
   "license": "MIT",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "main": "dist/index.js",
   "files": [
     "dist"
@@ -11,8 +11,8 @@
     "microee": "0.0.6"
   },
   "devDependencies": {
-    "mocha": "*",
-    "gluejs": "2.x"
+    "gluejs": "2.x",
+    "mocha": "*"
   },
   "repository": {
     "type": "git",
