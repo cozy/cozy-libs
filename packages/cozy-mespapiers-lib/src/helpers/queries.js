@@ -93,7 +93,7 @@ export const buildContactsQueryByIds = (ids = [], enabled = true) => ({
 })
 
 export const buildContactsQuery = (enabled = true) => ({
-  definition: () => Q(CONTACTS_DOCTYPE),
+  definition: () => Q(CONTACTS_DOCTYPE).limitBy(1000),
   options: {
     as: CONTACTS_DOCTYPE,
     fetchPolicy: defaultFetchPolicy,

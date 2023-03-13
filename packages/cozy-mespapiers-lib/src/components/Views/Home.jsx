@@ -39,7 +39,9 @@ const Home = () => {
     [papersDefinitionsLabels, filesWithQualificationLabel]
   )
 
-  const contactIds = getContactsRefIdsByFiles(papers)
+  const contactIds = flag('mespapiers.flexsearch.enabled')
+    ? null
+    : getContactsRefIdsByFiles(papers)
   const contactsQuery = flag('mespapiers.flexsearch.enabled')
     ? buildContactsQuery(!isLoadingFiles)
     : buildContactsQueryByIds(contactIds, !isLoadingFiles)
