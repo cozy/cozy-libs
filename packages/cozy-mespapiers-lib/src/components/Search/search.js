@@ -7,12 +7,13 @@ import { CONTACTS_DOCTYPE } from '../../doctypes'
 
 const isContact = doc => doc._type === CONTACTS_DOCTYPE
 
-/** The index document will store (_id, _type) couples for each document having the declared indexed fields,
+/** The index document will store _id for each document having the declared indexed fields,
  * coming from both `io.cozy.files` and `io.cozy.contacts`.
  * Note some special fields are prefixed with `flexsearchProps` as they are not actual doc attributes,
  * but they are dynamically built when a doc is added to the index.
  * `tag` is a special concept allowing to search by category, i.e. "identity", "family", etc.
  * We use _id of doc as index ids, the risk of having the same id between two inter doctype documents is considered to be sufficiently low
+ * The order of indexes declaration impact the order of the resulting documents.
  */
 export const index = new Document({
   document: {
