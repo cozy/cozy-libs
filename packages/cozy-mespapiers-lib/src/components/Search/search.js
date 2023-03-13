@@ -23,10 +23,6 @@ export const index = new Document({
       'flexsearchProps:translatedQualificationLabel', // io.cozy.files
       'metadata:ibanNumber', // io.cozy.files
       'metadata:number', // io.cozy.files
-      'metadata:AObtentionDate', // io.cozy.files
-      'metadata:BObtentionDate', // io.cozy.files
-      'metadata:CObtentionDate', // io.cozy.files
-      'metadata:DObtentionDate', // io.cozy.files
       'metadata:passportNumber', // io.cozy.files
       'metadata:vinNumber', // io.cozy.files
       'fullname', // io.cozy.contacts
