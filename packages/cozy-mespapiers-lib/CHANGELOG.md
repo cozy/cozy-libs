@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.1.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.0.0...cozy-mespapiers-lib@24.1.0) (2023-03-13)
+
+
+### Features
+
+* **mespapiers:** Adjust ponderation of flexsearch result ([80b75bf](https://github.com/cozy/cozy-libs/commit/80b75bfdb451cedbd7cc1952d12402e21b5bc4d5))
+* **mespapiers:** Get all contacts if flexsearch is activated ([24bc523](https://github.com/cozy/cozy-libs/commit/24bc523a0b3461c07fc9df9dc5ecc7f2af12282d))
+* **mespapiers:** Modify result for flexsearch to get all docs ([7a78ca2](https://github.com/cozy/cozy-libs/commit/7a78ca24386da169f6f1925e51c03ad8eba92ae5))
+* **mespapiers:** Remove some indexes in flexsearch ([2514d28](https://github.com/cozy/cozy-libs/commit/2514d28fcd49b507d00684a7dc90d8b085b080ad))
+* **mespapiers:** Remove store usage for flexsearch ([7275cf3](https://github.com/cozy/cozy-libs/commit/7275cf3fca2bf114f12cb313aa996fb476f8a21d))
+
+
+
+
+
 # [24.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@23.1.1...cozy-mespapiers-lib@24.0.0) (2023-03-13)
 
 
