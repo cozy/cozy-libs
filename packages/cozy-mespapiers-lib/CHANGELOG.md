@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.0.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@23.1.1...cozy-mespapiers-lib@24.0.0) (2023-03-13)
+
+
+### Features
+
+* **mespapiers:** Add some indexes in flexsearch ([fef0a93](https://github.com/cozy/cozy-libs/commit/fef0a93a103016b0a3ad31527a9153c938d1921e))
+* **mespapiers:** Update cozy-realtime from 4.3.0 to 4.4.0 ([2d58608](https://github.com/cozy/cozy-libs/commit/2d586085cd768b10a480ce7b27cd512d14a32c49))
+* **mespapiers:** Use _type from realtime to check doc doctype ([ec54dbc](https://github.com/cozy/cozy-libs/commit/ec54dbc479a4e18f2f38cfd6f50da1eb9f49cf50))
+
+
+### BREAKING CHANGES
+
+* **mespapiers:** you must have `cozy-realtime >= 4.4.0`
+
+
+
+
+
 ## [23.1.1](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@23.1.0...cozy-mespapiers-lib@23.1.1) (2023-03-10)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
