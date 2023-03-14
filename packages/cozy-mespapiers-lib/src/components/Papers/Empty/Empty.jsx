@@ -1,11 +1,11 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import UiEmpty from 'cozy-ui/transpiled/react/Empty'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
+import EmptyWithKonnector from './EmptyWithKonnector'
 import HomeCloud from '../../../assets/icons/HomeCloud.svg'
-import EmptyWithConnector from './EmptyWithConnector'
 
 const Empty = ({ connector, accounts }) => {
   const { t } = useI18n()
@@ -22,7 +22,7 @@ const Empty = ({ connector, accounts }) => {
     )
   }
 
-  return <EmptyWithConnector connector={connector} accounts={accounts} />
+  return <EmptyWithKonnector connector={connector} accounts={accounts} />
 }
 
 Empty.propTypes = {

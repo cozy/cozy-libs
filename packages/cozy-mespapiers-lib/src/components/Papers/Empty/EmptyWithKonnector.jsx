@@ -1,10 +1,10 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import EmptyWithHeader from './EmptyWithHeader'
 import EmptyNoHeader from './EmptyNoHeader'
+import EmptyWithHeader from './EmptyWithHeader'
 
-const EmptyWithConnector = ({ connector, accounts }) => {
+const EmptyWithKonnector = ({ connector, accounts }) => {
   if (accounts?.length > 1) {
     return accounts.map((account, index) => (
       <EmptyWithHeader key={index} connector={connector} account={account} />
@@ -14,9 +14,9 @@ const EmptyWithConnector = ({ connector, accounts }) => {
   return <EmptyNoHeader connector={connector} accounts={accounts} />
 }
 
-EmptyWithConnector.propTypes = {
+EmptyWithKonnector.propTypes = {
   connector: PropTypes.object,
   accounts: PropTypes.array
 }
 
-export default EmptyWithConnector
+export default EmptyWithKonnector
