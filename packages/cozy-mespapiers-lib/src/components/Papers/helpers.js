@@ -1,6 +1,7 @@
 import groupBy from 'lodash/groupBy'
 
 import { models, getReferencedBy } from 'cozy-client'
+import { getAccountName } from 'cozy-client/dist/models/account'
 
 import { CONTACTS_DOCTYPE } from '../../doctypes'
 import { filterWithRemaining } from '../../helpers/filterWithRemaining'
@@ -223,7 +224,7 @@ export const getCurrentFileTheme = (params, selectedThemeLabel) =>
 export const makeAccountFromPapers = (papers, accounts) => {
   const accountLogin = papers?.list?.[0]?.cozyMetadata?.sourceAccountIdentifier
   const account = accountLogin
-    ? accounts?.find(account => account?.auth?.login === accountLogin)
+    ? accounts?.find(account => getAccountName(account) === accountLogin)
     : undefined
 
   return account
