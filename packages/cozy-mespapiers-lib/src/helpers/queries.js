@@ -154,15 +154,15 @@ export const buildConnectorsQueryByQualificationLabel = label => ({
   }
 })
 
-export const buildAccountsQueryBySlug = (slug, enabled = true) => ({
+export const buildAccountsQueryBySlugs = (slugs, enabled = true) => ({
   definition: () =>
     Q(ACCOUNTS_DOCTYPE)
       .where({
-        account_type: slug
+        account_type: { $in: slugs }
       })
       .indexFields(['account_type']),
   options: {
-    as: `${ACCOUNTS_DOCTYPE}/slug/${slug}`,
+    as: `${ACCOUNTS_DOCTYPE}/slugs/${JSON.stringify(slugs)}`,
     fetchPolicy: defaultFetchPolicy,
     enabled
   }

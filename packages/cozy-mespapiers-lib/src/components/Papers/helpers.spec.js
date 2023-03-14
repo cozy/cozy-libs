@@ -251,6 +251,7 @@ describe('helpers Papers', () => {
 
       const result = buildFilesByContacts({
         files: [...mockFilesWithContacts, ...mockUnspecifiedFiles],
+        konnectors: undefined,
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -273,6 +274,7 @@ describe('helpers Papers', () => {
 
       const result = buildFilesByContacts({
         files: mockUnspecifiedFiles,
+        konnector: undefined,
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -284,6 +286,7 @@ describe('helpers Papers', () => {
     it('should return object with all papers filtered by konnector', () => {
       const result = buildFilesByContacts({
         files: [...mockFilesWithSourceAccount, ...mockUnspecifiedFiles],
+        konnectors: [{ slug: 'ConnectorOne' }, { slug: 'ConnectorTwo' }],
         contacts: [],
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -292,6 +295,7 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
+          konnector: { slug: 'ConnectorOne' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
@@ -300,6 +304,7 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
+          konnector: { slug: 'ConnectorTwo' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
@@ -326,6 +331,7 @@ describe('helpers Papers', () => {
           ...mockFilesWithSourceAccount,
           ...mockFilesWithContactsAndSourceAccount
         ],
+        konnectors: [{ slug: 'ConnectorOne' }, { slug: 'ConnectorTwo' }],
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -334,6 +340,7 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
+          konnector: { slug: 'ConnectorOne' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
@@ -342,6 +349,7 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
+          konnector: { slug: 'ConnectorTwo' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,

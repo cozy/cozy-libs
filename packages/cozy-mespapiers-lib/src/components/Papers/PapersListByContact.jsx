@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react'
 import PropTypes from 'prop-types'
+import React, { useMemo } from 'react'
 import { useParams } from 'react-router-dom'
 
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
@@ -8,13 +8,13 @@ import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import { DEFAULT_MAX_FILES_DISPLAYED } from '../../constants/const'
 import { usePapersDefinitions } from '../Hooks/usePapersDefinitions'
-import { buildFilesByContacts, getCurrentFileTheme } from '../Papers/helpers'
 import PapersList from '../Papers/PapersList'
+import { buildFilesByContacts, getCurrentFileTheme } from '../Papers/helpers'
 
 const PapersListByContact = ({
   selectedThemeLabel,
   files,
-  konnector,
+  konnectors,
   accounts,
   contacts
 }) => {
@@ -33,33 +33,36 @@ const PapersListByContact = ({
     () =>
       buildFilesByContacts({
         files,
+        konnectors,
         contacts,
         maxDisplay:
           currentDefinition?.maxDisplay || DEFAULT_MAX_FILES_DISPLAYED,
         t
       }),
-    [contacts, currentDefinition, files, t]
+    [contacts, konnectors, currentDefinition, files, t]
   )
 
-  return paperslistByContact.map(({ withHeader, contact, papers }, idx) => (
-    <List
-      key={idx}
-      subheader={
-        withHeader && (
-          <ListSubheader>
-            <div className="u-ellipsis">{contact}</div>
-          </ListSubheader>
-        )
-      }
-    >
-      <PapersList
-        papers={papers}
-        konnector={konnector}
-        accounts={accounts}
-        isLast={files.length === 1}
-      />
-    </List>
-  ))
+  return paperslistByContact.map(
+    ({ withHeader, contact, konnector, papers }, idx) => (
+      <List
+        key={idx}
+        subheader={
+          withHeader && (
+            <ListSubheader>
+              <div className="u-ellipsis">{contact}</div>
+            </ListSubheader>
+          )
+        }
+      >
+        <PapersList
+          papers={papers}
+          konnector={konnector}
+          accounts={accounts}
+          isLast={files.length === 1}
+        />
+      </List>
+    )
+  )
 }
 
 PapersListByContact.propTypes = {

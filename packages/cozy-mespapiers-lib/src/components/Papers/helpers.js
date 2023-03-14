@@ -105,7 +105,13 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
  * @property {Function} t - i18n function
  * @returns {{ withHeader: boolean, contact: string, papers: { maxDisplay: number, list: IOCozyFile[] } }[]}
  */
-export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
+export const buildFilesByContacts = ({
+  files,
+  contacts,
+  konnectors = [],
+  maxDisplay,
+  t
+}) => {
   const result = []
 
   const {
@@ -123,6 +129,9 @@ export const buildFilesByContacts = ({ files, contacts, maxDisplay, t }) => {
     const unsortedlistByConnector = Object.values(filesByConnectors).map(
       value => ({
         withHeader: true,
+        konnector: konnectors?.find(
+          konnector => konnector.slug === value[0].cozyMetadata.uploadedBy.slug
+        ),
         contact: t('PapersList.accountName', {
           name: value[0].cozyMetadata.createdByApp,
           identifier: value[0].cozyMetadata.sourceAccountIdentifier
