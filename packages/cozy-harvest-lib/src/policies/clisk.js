@@ -32,8 +32,11 @@ function isRunnable() {
  *
  * @param {Object} options - options object
  * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - konnector object
+ * @param {import('cozy-client/types/types').AccountsDoctype} options.account - account object
+ * @param {import('cozy-client/types/types').TriggersDoctype} options.trigger - trigger object
+ * @returns {Promise<StartLauncherResult> | void}
  */
-function onLaunch({ konnector, account, trigger }) {
+async function onLaunch({ konnector, account, trigger }) {
   const launcher = getLauncher()
   if (launcher) {
     logger.debug('Found a launcher', launcher)
@@ -41,6 +44,44 @@ function onLaunch({ konnector, account, trigger }) {
     logger.warn('Found no launcher')
   }
   if (launcher === 'react-native') {
+    return startLauncher({ konnector, account, trigger })
+  }
+  return
+}
+
+/**
+ * @typedef StartLauncherResult
+ * @property {string} message - startLauncher result message
+ */
+
+/**
+ * Run the current clisk launcher with postMessage. Will wait for a return message the be sent to
+ * resolve the promise
+ *
+ * @param {Object} options - options object
+ * @param {import('cozy-client/types/types').KonnectorsDoctype} options.konnector - konnector object
+ * @param {import('cozy-client/types/types').AccountsDoctype} options.account - account object
+ * @param {import('cozy-client/types/types').TriggersDoctype} options.trigger - trigger object
+ * @returns {Promise<StartLauncherResult>}
+ */
+function startLauncher({ konnector, account, trigger }) {
+  return new Promise(resolve => {
+    addMessageListener(rawData => {
+      if (typeof rawData !== 'string') {
+        return
+      }
+
+      const dataPayload = JSON.parse(rawData)
+
+      if (
+        dataPayload.type !== 'Clisk' ||
+        dataPayload.message !== 'launchResult'
+      ) {
+        return
+      }
+
+      resolve(dataPayload.param)
+    })
     // @ts-ignore ReactNativeWebview is injected by react-native launcher
     window.ReactNativeWebView.postMessage(
       JSON.stringify({
@@ -53,7 +94,23 @@ function onLaunch({ konnector, account, trigger }) {
         }
       })
     )
-  }
+  })
+}
+
+/**
+ * Listens to postMessage event. Compatible with android and ios webviews
+ *
+ * @param {Function} callback - callback function
+ */
+function addMessageListener(callback) {
+  // Android's WebView messaging interface
+  window.document?.addEventListener?.('message', function (e) {
+    callback(e.data)
+  })
+  // iOS's WebView messaging interface
+  window?.addEventListener?.('message', function (e) {
+    callback(e.data)
+  })
 }
 
 export const konnectorPolicy = {
