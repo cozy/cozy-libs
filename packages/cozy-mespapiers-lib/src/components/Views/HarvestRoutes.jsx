@@ -6,8 +6,8 @@ import { Routes } from 'cozy-harvest-lib'
 import datacardOptions from 'cozy-harvest-lib/dist/datacards/datacardOptions'
 
 import {
-  buildTriggersQueryByConnectorSlug,
-  buildConnectorsQueryById
+  buildTriggersQueryByKonnectorSlug,
+  buildKonnectorsQueryById
 } from '../../helpers/queries'
 import ExtraContent from '../Harvest/CannotConnectModal/ExtraContent'
 
@@ -15,7 +15,7 @@ const HarvestRoutes = () => {
   const { connectorSlug } = useParams()
   const navigate = useNavigate()
 
-  const queryTriggers = buildTriggersQueryByConnectorSlug(
+  const queryTriggers = buildTriggersQueryByKonnectorSlug(
     connectorSlug,
     Boolean(connectorSlug)
   )
@@ -25,7 +25,7 @@ const HarvestRoutes = () => {
   )
   const trigger = triggers?.[0]
 
-  const queryKonnector = buildConnectorsQueryById(
+  const queryKonnector = buildKonnectorsQueryById(
     `io.cozy.konnectors/${connectorSlug}`,
     Boolean(trigger)
   )

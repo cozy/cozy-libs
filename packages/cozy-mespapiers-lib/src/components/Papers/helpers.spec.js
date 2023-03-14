@@ -70,10 +70,10 @@ const mockFilesWithSourceAccount = [
     _id: 'fileId05',
     name: 'file05.pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorAccountId01',
+      sourceAccount: 'KonnectorAccountId01',
       sourceAccountIdentifier: 'Account 1',
       uploadedBy: {
-        slug: 'ConnectorOne'
+        slug: 'KonnectorOne'
       }
     }
   },
@@ -81,10 +81,10 @@ const mockFilesWithSourceAccount = [
     _id: 'fileId06',
     name: 'file06.pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorAccountId01',
+      sourceAccount: 'KonnectorAccountId01',
       sourceAccountIdentifier: 'Account 1',
       uploadedBy: {
-        slug: 'ConnectorOne'
+        slug: 'KonnectorOne'
       }
     }
   },
@@ -92,10 +92,10 @@ const mockFilesWithSourceAccount = [
     _id: 'fileId07',
     name: 'file07.pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorAccountId02',
+      sourceAccount: 'KonnectorAccountId02',
       sourceAccountIdentifier: 'Account 2',
       uploadedBy: {
-        slug: 'ConnectorTwo'
+        slug: 'KonnectorTwo'
       }
     }
   }
@@ -106,10 +106,10 @@ const mockFilesWithContactsAndSourceAccount = [
     _id: 'fileId09',
     name: 'file09pdf',
     cozyMetadata: {
-      sourceAccount: 'ConnectorAccountId02',
+      sourceAccount: 'KonnectorAccountId02',
       sourceAccountIdentifier: 'Account 2',
       uploadedBy: {
-        slug: 'ConnectorTwo'
+        slug: 'KonnectorTwo'
       }
     },
     relationships: {
@@ -286,7 +286,7 @@ describe('helpers Papers', () => {
     it('should return object with all papers filtered by konnector', () => {
       const result = buildFilesByContacts({
         files: [...mockFilesWithSourceAccount, ...mockUnspecifiedFiles],
-        konnectors: [{ slug: 'ConnectorOne' }, { slug: 'ConnectorTwo' }],
+        konnectors: [{ slug: 'KonnectorOne' }, { slug: 'KonnectorTwo' }],
         contacts: [],
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -295,7 +295,7 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
-          konnector: { slug: 'ConnectorOne' },
+          konnector: { slug: 'KonnectorOne' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
@@ -304,7 +304,7 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
-          konnector: { slug: 'ConnectorTwo' },
+          konnector: { slug: 'KonnectorTwo' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
@@ -331,7 +331,7 @@ describe('helpers Papers', () => {
           ...mockFilesWithSourceAccount,
           ...mockFilesWithContactsAndSourceAccount
         ],
-        konnectors: [{ slug: 'ConnectorOne' }, { slug: 'ConnectorTwo' }],
+        konnectors: [{ slug: 'KonnectorOne' }, { slug: 'KonnectorTwo' }],
         contacts: mockContacts00,
         maxDisplay: 3,
         t: jest.fn(key => key)
@@ -340,7 +340,7 @@ describe('helpers Papers', () => {
       const expected = [
         {
           withHeader: true,
-          konnector: { slug: 'ConnectorOne' },
+          konnector: { slug: 'KonnectorOne' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,
@@ -349,7 +349,7 @@ describe('helpers Papers', () => {
         },
         {
           withHeader: true,
-          konnector: { slug: 'ConnectorTwo' },
+          konnector: { slug: 'KonnectorTwo' },
           contact: 'PapersList.accountName',
           papers: {
             maxDisplay: 3,

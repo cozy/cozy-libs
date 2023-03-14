@@ -1,20 +1,19 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import { useNavigate, useParams, useLocation } from 'react-router-dom'
 
 import flag from 'cozy-flags'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-
-import Empty from 'cozy-ui/transpiled/react/Empty'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import Empty from 'cozy-ui/transpiled/react/Empty'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import PapersIcon from 'cozy-ui/transpiled/react/Icons/Papers'
 
+import { makeCountrySearchParam } from './helpers'
+import styles from './styles.styl'
 import { useMultiSelection } from '../../Hooks/useMultiSelection'
 import { usePapersDefinitions } from '../../Hooks/usePapersDefinitions'
-import { makeCountrySearchParam } from './helpers'
-import { getCurrentFileTheme } from '../helpers'
 import HarvestBanner from '../HarvestBanner'
-import styles from './styles.styl'
+import { getCurrentFileTheme } from '../helpers'
 
 const EmptyNoHeader = ({ konnector, accounts }) => {
   const { t } = useI18n()
@@ -44,7 +43,7 @@ const EmptyNoHeader = ({ konnector, accounts }) => {
         <HarvestBanner konnector={konnector} account={accounts?.[0]} />
       )}
       <Empty
-        className={`${styles['emptyWithConnector']} u-ph-1`}
+        className={`${styles['emptyWithKonnector']} u-ph-1`}
         icon={PapersIcon}
         iconSize="normal"
         title={t('Empty.konnector.title')}
