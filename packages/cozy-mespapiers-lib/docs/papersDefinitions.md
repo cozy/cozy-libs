@@ -16,9 +16,9 @@
       - *`name`: Value of the attribute present in the [`information`](#information-field-attributes) step.*
       - *`labelGivenByUser`: Value of the attribute present in the [`information`](#information-field-attributes) step.*
   - `maxDisplay`: {number} Specifies the number of this type of paper to be displayed once created.
-  - `[connectorCriteria]`: {object} Allows to propose the installation of a connector before the steps of creation of a paper.
+  - `[konnectorCriteria]`: {object} Allows to propose the installation of a konnector before the steps of creation of a paper.
     - - *Only one of the following properties is accepted:*
-      - `name`: {string} Name of the connector.
+      - `name`: {string} Name of the konnector.
       - `category`: {string} Connector category.
   - [`acquisitionSteps`](#steps-of-the-acquisitionsteps-property): {object\[]} Contains the steps of the creation process.
     - [`scan`](#step-scan) {object} Step to select a file (image/pdf).

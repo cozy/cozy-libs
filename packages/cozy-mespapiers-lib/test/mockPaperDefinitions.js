@@ -32,7 +32,7 @@ export const mockPapersDefinitions = [
         text: 'PaperJSON.generic.owner.text'
       }
     ],
-    connectorCriteria: {
+    konnectorCriteria: {
       category: 'isp'
     }
   },
@@ -68,7 +68,7 @@ export const mockPapersDefinitions = [
         text: 'PaperJSON.generic.owner.text'
       }
     ],
-    connectorCriteria: {
+    konnectorCriteria: {
       name: 'impots'
     }
   },
@@ -87,7 +87,7 @@ export const mockPapersDefinitions = [
     featureDate: 'referencedDate',
     maxDisplay: 3,
     acquisitionSteps: [],
-    connectorCriteria: {
+    konnectorCriteria: {
       name: 'impots'
     }
   },

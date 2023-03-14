@@ -1,14 +1,14 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 import ActionMenuWrapper from '../Actions/ActionMenuWrapper'
 import { ActionsItems } from '../Actions/ActionsItems'
+import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 
 const PaperFabUI = React.forwardRef(
-  ({ PapersFabOverrided, generalMenuProps, connectorMenuProps }, ref) => {
+  ({ PapersFabOverrided, generalMenuProps, konnectorMenuProps }, ref) => {
     const { show: showGeneralMenu, onClose, actions } = generalMenuProps
-    const { show: showConnectorMenu } = connectorMenuProps
+    const { show: showConnectorMenu } = konnectorMenuProps
 
     return (
       <>
@@ -23,7 +23,7 @@ const PaperFabUI = React.forwardRef(
           <ActionMenuImportDropdown
             isOpened
             anchorElRef={ref}
-            {...connectorMenuProps}
+            {...konnectorMenuProps}
           />
         )}
       </>
@@ -39,7 +39,7 @@ PaperFabUI.propTypes = {
     actions: PropTypes.arrayOf(PropTypes.object),
     onClose: PropTypes.func
   }),
-  connectorMenuProps: PropTypes.shape({
+  konnectorMenuProps: PropTypes.shape({
     show: PropTypes.bool,
     placeholder: PropTypes.object,
     onClose: PropTypes.func,

@@ -281,7 +281,7 @@ describe('helpers Papers', () => {
       expect(result).toStrictEqual(expected)
     })
 
-    it('should return object with all papers filtered by connector', () => {
+    it('should return object with all papers filtered by konnector', () => {
       const result = buildFilesByContacts({
         files: [...mockFilesWithSourceAccount, ...mockUnspecifiedFiles],
         contacts: [],

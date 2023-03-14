@@ -72,7 +72,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
   }
 
   const showImportDropdown = placeholder => {
-    if (placeholder.connectorCriteria) {
+    if (placeholder.konnectorCriteria) {
       setIsImportDropdownDisplayed(true)
       setPlaceholderSelected(placeholder)
     } else {
@@ -86,7 +86,7 @@ const PlaceholdersList = ({ currentQualifItems }) => {
         {allPlaceholders.map((placeholder, idx) => {
           const validPlaceholder =
             placeholder.acquisitionSteps.length > 0 ||
-            placeholder.connectorCriteria
+            placeholder.konnectorCriteria
 
           return (
             <ListItem

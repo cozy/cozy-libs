@@ -51,7 +51,7 @@ ImportDropdown.propTypes = {
     label: PropTypes.string.isRequired,
     icon: iconPropType.isRequired,
     acquisitionSteps: PropTypes.array.isRequired,
-    connectorCriteria: PropTypes.shape({
+    konnectorCriteria: PropTypes.shape({
       name: PropTypes.string,
       category: PropTypes.string
     })

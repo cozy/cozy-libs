@@ -35,7 +35,7 @@ const FeaturedPlaceholdersList = ({ featuredPlaceholders }) => {
   }
 
   const showImportDropdown = idx => placeholder => {
-    if (placeholder.connectorCriteria) {
+    if (placeholder.konnectorCriteria) {
       actionBtnRef.current = actionBtnRefs.current[idx]
       setIsImportDropdownDisplayed(true)
       setPlaceholder(placeholder)

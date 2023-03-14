@@ -11,7 +11,7 @@ import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import HarvestBanner from '../HarvestBanner'
 
-const EmptyWithHeader = ({ connector, account }) => {
+const EmptyWithHeader = ({ konnector, account }) => {
   const { t } = useI18n()
 
   return (
@@ -23,14 +23,14 @@ const EmptyWithHeader = ({ connector, account }) => {
       }
     >
       {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner connector={connector} account={account} />
+        <HarvestBanner konnector={konnector} account={account} />
       )}
       <ListItem>
         <ListItemText
           ellipsis={false}
-          primary={t('Empty.connector.title')}
-          secondary={t('Empty.connector.text', {
-            connectorSlug: connector?.slug?.toUpperCase()
+          primary={t('Empty.konnector.title')}
+          secondary={t('Empty.konnector.text', {
+            konnectorSlug: konnector?.slug?.toUpperCase()
           })}
         />
       </ListItem>
@@ -39,7 +39,7 @@ const EmptyWithHeader = ({ connector, account }) => {
 }
 
 EmptyWithHeader.propTypes = {
-  connector: PropTypes.object,
+  konnector: PropTypes.object,
   account: PropTypes.object.isRequired
 }
 

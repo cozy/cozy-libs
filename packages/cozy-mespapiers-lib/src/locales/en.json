@@ -368,9 +368,9 @@
     }
   },
   "Empty": {
-    "connector": {
+    "konnector": {
       "title": "No paper",
-      "text": "%{connectorSlug} has not yet published the paper on its site. It will be retrieved here automatically once published by %{connectorSlug}.",
+      "text": "%{konnectorSlug} has not yet published the paper on its site. It will be retrieved here automatically once published by %{konnectorSlug}.",
       "button": "Add manually"
     }
   }

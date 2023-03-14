@@ -4,18 +4,18 @@ import React from 'react'
 import EmptyNoHeader from './EmptyNoHeader'
 import EmptyWithHeader from './EmptyWithHeader'
 
-const EmptyWithKonnector = ({ connector, accounts }) => {
+const EmptyWithKonnector = ({ konnector, accounts }) => {
   if (accounts?.length > 1) {
     return accounts.map((account, index) => (
-      <EmptyWithHeader key={index} connector={connector} account={account} />
+      <EmptyWithHeader key={index} konnector={konnector} account={account} />
     ))
   }
 
-  return <EmptyNoHeader connector={connector} accounts={accounts} />
+  return <EmptyNoHeader konnector={konnector} accounts={accounts} />
 }
 
 EmptyWithKonnector.propTypes = {
-  connector: PropTypes.object,
+  konnector: PropTypes.object,
   accounts: PropTypes.array
 }
 
