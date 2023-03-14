@@ -8,7 +8,7 @@ import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel,
   buildConnectorsQueryByQualificationLabel,
-  buildAccountsQueryBySlug
+  buildAccountsQueryBySlugs
 } from '../../helpers/queries'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
 import Empty from '../Papers/Empty/Empty'
@@ -52,19 +52,15 @@ const PapersList = () => {
     queryKonnector.options
   )
   const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
-  const konnector = konnectors?.[0]
-  const konnectorSlug = konnector?.slug
+  const hasKonnector = konnectors?.length > 0
+  const konnectorSlugs = konnectors?.map(konnector => konnector.slug)
 
-  const queryAccounts = buildAccountsQueryBySlug(
-    konnectorSlug,
-    Boolean(konnectorSlug)
-  )
+  const queryAccounts = buildAccountsQueryBySlugs(konnectorSlugs, hasKonnector)
   const { data: accounts, ...accountsQueryLeft } = useQuery(
     queryAccounts.definition,
     queryAccounts.options
   )
-  const isAccountsLoading =
-    Boolean(konnectorSlug) && isQueryLoading(accountsQueryLeft)
+  const isAccountsLoading = hasKonnector && isQueryLoading(accountsQueryLeft)
 
   const isLoading =
     isLoadingFiles ||
@@ -88,11 +84,11 @@ const PapersList = () => {
               selectedThemeLabel={selectedThemeLabel}
               files={files}
               contacts={contacts}
-              konnector={konnector}
+              konnectors={konnectors}
               accounts={accounts}
             />
           )}
-          {!hasFiles && <Empty konnector={konnector} accounts={accounts} />}
+          {!hasFiles && <Empty konnector={konnectors[0]} accounts={accounts} />}
         </>
       )}
     </>
