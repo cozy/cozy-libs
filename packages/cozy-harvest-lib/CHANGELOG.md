@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [13.6.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.6.0...cozy-harvest-lib@13.6.1) (2023-03-14)
+
+
+### Bug Fixes
+
+* `TriggerErrorDescription` component ([911a589](https://github.com/cozy/cozy-libs/commit/911a589f159cdc3dbc1806c317d8929bcaf57322))
+* Konnector error alert display ([1de2b07](https://github.com/cozy/cozy-libs/commit/1de2b07bcd7a3817c5896f8656deefdedd694773))
+
+
+
+
+
 # [13.6.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.5.1...cozy-harvest-lib@13.6.0) (2023-03-10)
 
 
