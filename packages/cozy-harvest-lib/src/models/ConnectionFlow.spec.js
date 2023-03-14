@@ -1,5 +1,15 @@
 import EventEmitter from 'events'
+
+import { waitFor } from '@testing-library/react'
+
+import { Q } from 'cozy-client'
+
 import ConnectionFlow from './ConnectionFlow'
+import { ERRORED, EXPECTING_TRIGGER_LAUNCH } from './flowEvents'
+import KonnectorJobWatcher, {
+  watchKonnectorJob
+} from './konnector/KonnectorJobWatcher'
+import fixtures from '../../test/fixtures'
 import { saveAccount } from '../connections/accounts'
 import {
   createTrigger,
@@ -8,15 +18,9 @@ import {
   prepareTriggerAccount,
   launchTrigger
 } from '../connections/triggers'
-import KonnectorJobWatcher, {
-  watchKonnectorJob
-} from './konnector/KonnectorJobWatcher'
-import { konnectorPolicy as biKonnectorPolicy } from '../policies/budget-insight'
-import fixtures from '../../test/fixtures'
-import sentryHub from '../sentry'
-import { Q } from 'cozy-client'
 import { KonnectorJobError } from '../helpers/konnectors'
-import { ERRORED, EXPECTING_TRIGGER_LAUNCH } from './flowEvents'
+import { konnectorPolicy as biKonnectorPolicy } from '../policies/budget-insight'
+import sentryHub from '../sentry'
 
 jest.mock('./konnector/KonnectorJobWatcher')
 jest.mock('../sentry', () => {
@@ -185,7 +189,7 @@ describe('ConnectionFlow', () => {
       )
     })
 
-    it('should watch watch future jobs for a trigger if new fetched trigger is running', async () => {
+    it('should watch future jobs for a trigger if new fetched trigger is running', async () => {
       const { flow } = setup({ trigger: fixtures.createdTrigger })
       expect(fetchTrigger).not.toHaveBeenCalled()
       fetchTrigger.mockResolvedValueOnce(fixtures.runningTrigger)
@@ -375,6 +379,42 @@ describe('ConnectionFlow', () => {
         })
       )
       expect(launchTrigger).not.toHaveBeenCalled()
+
+      delete window.cozy
+      delete window.ReactNativeWebView
+    })
+
+    it('should set the flow status to idle if the launcher aborts', async () => {
+      prepareTriggerAccount.mockImplementation(
+        async () => fixtures.existingAccount
+      )
+      const { client } = setup()
+      const flow = new ConnectionFlow(
+        client,
+        fixtures.existingTrigger,
+        fixtures.clientKonnector
+      )
+      window.cozy = {
+        ClientKonnectorLauncher: 'react-native'
+      }
+      window.ReactNativeWebView = {
+        postMessage: jest.fn()
+      }
+
+      await flow.launch()
+      await waitFor(() =>
+        expect(flow.getState().status).toStrictEqual('PENDING')
+      )
+
+      window.postMessage(
+        JSON.stringify({
+          type: 'Clisk',
+          message: 'launchResult',
+          param: { message: 'abort' }
+        }),
+        '*'
+      )
+      await waitFor(() => expect(flow.getState().status).toStrictEqual('IDLE'))
 
       delete window.cozy
       delete window.ReactNativeWebView

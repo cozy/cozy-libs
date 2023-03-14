@@ -627,11 +627,16 @@ export class ConnectionFlow {
       this.account = await prepareTriggerAccount(this.client, this.trigger)
     }
     if (konnectorPolicy.onLaunch) {
-      konnectorPolicy.onLaunch({
-        konnector: this.konnector,
-        trigger: this.trigger,
-        account: this.account
-      })
+      konnectorPolicy
+        .onLaunch({
+          konnector: this.konnector,
+          trigger: this.trigger,
+          account: this.account
+        })
+        .then(() => this.setState({ status: IDLE }))
+        .catch(err =>
+          logger.error(`Error while launching policy : ${err.message}`)
+        )
     }
     if (!konnectorPolicy.needsTriggerLaunch) {
       return
