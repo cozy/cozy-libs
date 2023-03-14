@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react'
-import { Registry } from 'cozy-client'
 import get from 'lodash/get'
 import memoize from 'lodash/memoize'
+import { useState, useEffect } from 'react'
+
+import { Registry } from 'cozy-client'
 
 const memoizedFetchApp = memoize(
   (registry, slug) => {

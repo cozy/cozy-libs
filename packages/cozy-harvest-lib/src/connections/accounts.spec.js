@@ -1,7 +1,5 @@
 /* eslint-env jest */
 
-import omit from 'lodash/omit'
-import CozyClient from 'cozy-client'
 import {
   createAccount,
   updateAccount,
@@ -9,6 +7,10 @@ import {
   deleteAccount,
   fetchReusableAccount
 } from 'connections/accounts'
+import omit from 'lodash/omit'
+
+import CozyClient from 'cozy-client'
+
 import fixtureFile from '../../test/fixtures'
 
 const client = {

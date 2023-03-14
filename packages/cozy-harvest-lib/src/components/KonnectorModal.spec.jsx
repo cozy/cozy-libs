@@ -1,10 +1,11 @@
 /* eslint-env jest */
-import React from 'react'
 import { render, waitFor, fireEvent } from '@testing-library/react'
-import CozyClient from 'cozy-client'
-
 import { KonnectorModal } from 'components/KonnectorModal'
 import { fetchAccount } from 'connections/accounts'
+import React from 'react'
+
+import CozyClient from 'cozy-client'
+
 import AppLike from '../../test/AppLike'
 
 jest.mock(

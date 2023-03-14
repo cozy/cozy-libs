@@ -1,10 +1,10 @@
-import _flow from 'lodash/flow'
 import _cloneDeep from 'lodash/cloneDeep'
 import findKey from 'lodash/findKey'
-import _mapValues from 'lodash/mapValues'
-import _pickBy from 'lodash/pickBy'
+import _flow from 'lodash/flow'
 import _get from 'lodash/get'
 import intersection from 'lodash/intersection'
+import _mapValues from 'lodash/mapValues'
+import _pickBy from 'lodash/pickBy'
 
 export const ROLE_IDENTIFIER = 'identifier'
 

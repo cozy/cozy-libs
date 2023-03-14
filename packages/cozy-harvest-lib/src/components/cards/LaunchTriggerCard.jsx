@@ -1,21 +1,21 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import flag from 'cozy-flags'
 import Button from 'cozy-ui/transpiled/react/Button'
-import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Card from 'cozy-ui/transpiled/react/Card'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import Info from 'cozy-ui/transpiled/react/Icons/Info'
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
+import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import LaunchTriggerAlert from './LaunchTriggerAlert'
 import * as triggers from '../../helpers/triggers'
 import { findKonnectorPolicy } from '../../konnector-policies'
-import FlowProvider from '../FlowProvider'
 import { useFlowState } from '../../models/withConnectionFlow'
+import FlowProvider from '../FlowProvider'
 
 const inlineStyle = { display: 'inline-block' }
 

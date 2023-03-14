@@ -1,11 +1,13 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-import AppLike from '../../../test/AppLike'
+import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
+import React from 'react'
+
+import CozyClient from 'cozy-client/dist/CozyClient'
+
 import KonnectorAccountTabs, {
   KonnectorAccountTabsTabs
 } from './KonnectorAccountTabs'
-import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
-import CozyClient from 'cozy-client/dist/CozyClient'
+import AppLike from '../../../test/AppLike'
 
 jest.mock('components/hooks/useMaintenanceStatus')
 jest.mock(

@@ -1,4 +1,6 @@
 import CozyClient from 'cozy-client'
+import flag from 'cozy-flags'
+
 import {
   handleOAuthAccount,
   checkBIConnection,
@@ -8,7 +10,6 @@ import {
   isCacheExpired
 } from './biWebView'
 import ConnectionFlow from '../models/ConnectionFlow'
-import flag from 'cozy-flags'
 
 jest.mock('../services/bi-http', () => ({
   createBIConnection: jest

@@ -1,12 +1,14 @@
 // @ts-check
-import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 
 import { withClient } from 'cozy-client'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import CozyRealtime from 'cozy-realtime'
 import { isFlagshipApp } from 'cozy-device-helper'
+import CozyRealtime from 'cozy-realtime'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
 
+import InAppBrowser from './InAppBrowser'
+import Popup from './Popup'
 import {
   prepareOAuth,
   checkOAuthData,
@@ -14,8 +16,6 @@ import {
   OAUTH_REALTIME_CHANNEL
 } from '../helpers/oauth'
 // TODO use PopUp from cozy-ui
-import Popup from './Popup'
-import InAppBrowser from './InAppBrowser'
 import { intentsApiProptype } from '../helpers/proptypes'
 import logger from '../logger'
 

@@ -1,18 +1,17 @@
+import startCase from 'lodash/startCase'
 import React, { useState } from 'react'
 
-import startCase from 'lodash/startCase'
-
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import WalletIcon from 'cozy-ui/transpiled/react/Icons/Wallet'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 
-import { getPrimaryText, isDisabled } from './helpers'
-import EditContract from './EditContract'
 import ContractItemSecondaryText from './ContractItemSecondaryText'
+import EditContract from './EditContract'
+import { getPrimaryText, isDisabled } from './helpers'
 
 const ContractItem = ({ contract, konnector, accountId, divider }) => {
   const [showingEditModal, setShowingEditModal] = useState(false)

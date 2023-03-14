@@ -1,5 +1,7 @@
 // @ts-check
 import { isFlagshipApp } from 'cozy-device-helper'
+
+import { openWindow } from './PopupService'
 import {
   prepareOAuth,
   checkOAuthData,
@@ -7,7 +9,6 @@ import {
   OAUTH_REALTIME_CHANNEL
 } from '../helpers/oauth'
 import logger from '../logger'
-import { openWindow } from './PopupService'
 
 const OAUTH_POPUP_HEIGHT = 800
 const OAUTH_POPUP_WIDTH = 800

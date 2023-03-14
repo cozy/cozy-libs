@@ -1,8 +1,8 @@
-import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 
-import KonnectorModal from '../KonnectorModal'
 import { getDisplayName } from './utils'
+import KonnectorModal from '../KonnectorModal'
 
 export const withKonnectorModal = WrappedComponent => {
   class WrappedComponentWithPropTypes extends WrappedComponent {

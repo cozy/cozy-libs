@@ -1,11 +1,11 @@
-import React from 'react'
-import CozyClient, { useQuery } from 'cozy-client'
 import { render, fireEvent, act } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../../test/AppLike'
+import CozyClient, { useQuery } from 'cozy-client'
 
-import bankAccount from './bank-account-fixture.json'
 import EditContract from './EditContract'
+import bankAccount from './bank-account-fixture.json'
+import AppLike from '../../../../test/AppLike'
 
 jest.mock('cozy-client/dist/hooks/useQuery', () => jest.fn())
 

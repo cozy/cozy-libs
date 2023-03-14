@@ -1,12 +1,12 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { useClient } from 'cozy-client'
 
-import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
-import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 import TriggerErrorAction from './TriggerErrorAction'
 import { intentsApiProptype } from '../../helpers/proptypes'
+import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 
 const TriggerError = ({ flow, konnector, account, trigger, intentsApi }) => {
   const client = useClient()

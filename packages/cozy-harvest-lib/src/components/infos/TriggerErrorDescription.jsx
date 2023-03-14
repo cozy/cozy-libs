@@ -1,14 +1,14 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { useClient } from 'cozy-client'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import useSupportMail from '../hooks/useSupportMail'
 import { getErrorLocale } from '../../helpers/konnectors'
-import withKonnectorLocales from '../hoc/withKonnectorLocales'
 import Markdown from '../Markdown'
+import withKonnectorLocales from '../hoc/withKonnectorLocales'
+import useSupportMail from '../hooks/useSupportMail'
 
 const TriggerErrorDescription = ({ error, konnector, linkProps }) => {
   const { t } = useI18n()

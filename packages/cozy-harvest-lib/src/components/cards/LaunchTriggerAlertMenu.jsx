@@ -1,17 +1,17 @@
-import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useRef, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import ActionMenu, { ActionMenuItem } from 'cozy-ui/transpiled/react/ActionMenu'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import DotsIcon from 'cozy-ui/transpiled/react/Icons/Dots'
-import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 import GearIcon from 'cozy-ui/transpiled/react/Icons/Gear'
+import SyncIcon from 'cozy-ui/transpiled/react/Icons/Sync'
 
-import { useFlowState } from '../../models/withConnectionFlow'
-import { getAccountId } from '../../helpers/triggers'
 import { isDisconnected } from '../../helpers/konnectors'
+import { getAccountId } from '../../helpers/triggers'
+import { useFlowState } from '../../models/withConnectionFlow'
 import withAdaptiveRouter from '../hoc/withRouter'
 import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
 

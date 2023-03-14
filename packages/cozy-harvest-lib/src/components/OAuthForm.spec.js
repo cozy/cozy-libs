@@ -1,13 +1,14 @@
 /* eslint-env jest */
-import React from 'react'
 import { act, render } from '@testing-library/react'
+import { OAuthForm } from 'components/OAuthForm'
+import React from 'react'
+
 import CozyClient from 'cozy-client'
 
-import { OAuthForm } from 'components/OAuthForm'
-import { findKonnectorPolicy } from '../konnector-policies'
-import { KonnectorJobError } from '../helpers/konnectors'
-import ConnectionFlow from '../models/ConnectionFlow'
 import AppLike from '../../test/AppLike'
+import { KonnectorJobError } from '../helpers/konnectors'
+import { findKonnectorPolicy } from '../konnector-policies'
+import ConnectionFlow from '../models/ConnectionFlow'
 
 const fetchExtraOAuthUrlParams = jest.fn().mockResolvedValue({})
 jest.mock('../konnector-policies', () => ({

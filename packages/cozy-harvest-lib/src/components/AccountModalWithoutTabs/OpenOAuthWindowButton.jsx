@@ -1,15 +1,15 @@
-import React, { useCallback } from 'react'
 import PropTypes from 'prop-types'
+import React, { useCallback } from 'react'
 
-import flag from 'cozy-flags'
 import { useClient } from 'cozy-client'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import { Button } from 'cozy-ui/transpiled/react/Button'
+import flag from 'cozy-flags'
 import { useWebviewIntent } from 'cozy-intent'
+import { Button } from 'cozy-ui/transpiled/react/Button'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
-import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
-import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
 import { intentsApiProptype } from '../../helpers/proptypes'
+import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
+import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
 
 const OpenOAuthWindowButton = ({ flow, account, konnector, intentsApi }) => {
   const { t } = useI18n()

@@ -1,8 +1,10 @@
-import React, { useEffect } from 'react'
 import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
+
 import { useWebviewIntent } from 'cozy-intent'
-import logger from '../logger'
+
 import { intentsApiProptype } from '../helpers/proptypes'
+import logger from '../logger'
 
 const InAppBrowser = ({ url, onClose, intentsApi }) => {
   if (intentsApi) {

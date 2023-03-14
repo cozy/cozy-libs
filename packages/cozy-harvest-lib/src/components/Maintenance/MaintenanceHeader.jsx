@@ -1,11 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import MaintenanceIcon from './MaintenanceIcon'
-import Stack from 'cozy-ui/transpiled/react/Stack'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+
+import MaintenanceIcon from './MaintenanceIcon'
 
 const MaintenanceHeader = ({ message, t, breakpoints: { isMobile } }) => (
   <div

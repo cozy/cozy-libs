@@ -1,15 +1,14 @@
 /* eslint-env jest */
-import React from 'react'
-import PropTypes from 'prop-types'
-import { shallow, mount } from 'enzyme'
-import I18n from 'cozy-ui/transpiled/react/I18n'
-
-import { isMobile } from 'cozy-device-helper'
-
+import { fireEvent, render } from '@testing-library/react'
 import { AccountForm } from 'components/AccountForm'
+import { shallow, mount } from 'enzyme'
 import enLocale from 'locales/en.json'
 import Polyglot from 'node-polyglot'
-import { fireEvent, render } from '@testing-library/react'
+import PropTypes from 'prop-types'
+import React from 'react'
+
+import { isMobile } from 'cozy-device-helper'
+import I18n from 'cozy-ui/transpiled/react/I18n'
 
 const polyglot = new Polyglot()
 polyglot.extend(enLocale)

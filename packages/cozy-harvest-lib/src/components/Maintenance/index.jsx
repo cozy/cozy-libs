@@ -1,9 +1,11 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import get from 'lodash/get'
-import Stack from 'cozy-ui/transpiled/react/Stack'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+
 import MaintenanceHeader from './MaintenanceHeader'
 import TriggerMaintenanceDescription from '../infos/TriggerMaintenanceDescription'
 

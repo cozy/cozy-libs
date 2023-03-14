@@ -6,8 +6,9 @@ import {
   fetchLoginFailedTriggersForAccountsIds,
   launchTriggers
 } from 'services/utils'
-import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
+
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
+import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 
 jest.mock('cozy-keys-lib/transpiled/SymmetricCryptoKey', () => {
   class MockSymmetricCryptoKey {

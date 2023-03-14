@@ -1,7 +1,6 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import AccountsListItem from 'components/AccountsList/AccountsListItem'
+import { shallow } from 'enzyme'
+import React from 'react'
 
 describe('AccountsListItem', () => {
   it('should not render the caption since accountLogin is undefined', () => {

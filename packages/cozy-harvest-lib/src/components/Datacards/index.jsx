@@ -1,4 +1,5 @@
 import React, { useMemo } from 'react'
+
 import { useDatacardOptions } from './DatacardOptionsContext'
 
 const findSuitableDataCards = (datacardOptions, datacardContext) => {

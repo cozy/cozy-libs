@@ -1,5 +1,5 @@
-import React from 'react'
 import flow from 'lodash/flow'
+import React from 'react'
 
 import { getDisplayName } from './utils'
 

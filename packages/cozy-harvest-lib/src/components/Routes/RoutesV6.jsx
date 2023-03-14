@@ -11,14 +11,14 @@ import flag from 'cozy-flags'
 
 import { ViewerModal } from '../../datacards/ViewerModal'
 import AccountModal from '../AccountModal'
-import AccountModalWithoutTabs from '../AccountModalWithoutTabs/AccountModalWithoutTabs'
 import AccountModalContentWrapper from '../AccountModalWithoutTabs/AccountModalContentWrapper'
-import NewAccountModal from '../NewAccountModal'
+import AccountModalWithoutTabs from '../AccountModalWithoutTabs/AccountModalWithoutTabs'
 import EditAccountModal from '../EditAccountModal'
-import KonnectorSuccess from '../KonnectorSuccess'
 import HarvestModalRoot from '../HarvestModalRoot'
-import DataTab from '../KonnectorConfiguration/DataTab'
 import ConfigurationTab from '../KonnectorConfiguration/ConfigurationTab'
+import DataTab from '../KonnectorConfiguration/DataTab'
+import KonnectorSuccess from '../KonnectorSuccess'
+import NewAccountModal from '../NewAccountModal'
 
 const HarvestParamsWrapper = props => {
   const params = useParams()

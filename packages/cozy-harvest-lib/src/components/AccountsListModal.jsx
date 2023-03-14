@@ -1,9 +1,9 @@
-import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 
-import Stack from 'cozy-ui/transpiled/react/Stack'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Stack from 'cozy-ui/transpiled/react/Stack'
 
 import AccountsList from './AccountsList/AccountsList'
 import KonnectorIcon from './KonnectorIcon'

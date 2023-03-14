@@ -1,14 +1,14 @@
-import React, { PureComponent } from 'react'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 
+import { withClient } from 'cozy-client'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import Infos from 'cozy-ui/transpiled/react/Infos'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import { withClient } from 'cozy-client'
 
+import TriggerErrorDescription from './TriggerErrorDescription'
 import { getErrorLocale } from '../../helpers/konnectors'
 import withKonnectorLocales from '../hoc/withKonnectorLocales'
-import TriggerErrorDescription from './TriggerErrorDescription'
 
 /**
  * Component used to show an error related to an account or to a konnector job

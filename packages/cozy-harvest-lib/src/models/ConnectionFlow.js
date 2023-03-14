@@ -3,31 +3,9 @@
 import MicroEE from 'microee'
 
 // @ts-ignore
-import flag from 'cozy-flags'
 import { Q } from 'cozy-client'
-import '../types'
+import flag from 'cozy-flags'
 
-import {
-  fetchReusableAccount,
-  saveAccount,
-  ACCOUNTS_DOCTYPE
-} from '../connections/accounts'
-import clone from 'lodash/clone'
-import {
-  launchTrigger,
-  prepareTriggerAccount,
-  fetchTrigger,
-  ensureTrigger
-} from '../connections/triggers'
-import { KonnectorJobError } from '../helpers/konnectors'
-import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
-import logger from '../logger'
-import { findKonnectorPolicy } from '../konnector-policies'
-import { createOrUpdateCipher } from '../models/cipherUtils'
-import assert from '../assert'
-import * as accounts from '../helpers/accounts'
-import * as triggersModel from '../helpers/triggers'
-import sentryHub from '../sentry'
 import {
   ERRORED,
   ERROR_EVENT,
@@ -48,6 +26,30 @@ import {
   JOB_EVENTS,
   EXPECTING_TRIGGER_LAUNCH
 } from './flowEvents'
+import assert from '../assert'
+import {
+  fetchReusableAccount,
+  saveAccount,
+  ACCOUNTS_DOCTYPE
+} from '../connections/accounts'
+import {
+  launchTrigger,
+  prepareTriggerAccount,
+  fetchTrigger,
+  ensureTrigger
+} from '../connections/triggers'
+import * as accounts from '../helpers/accounts'
+import { KonnectorJobError } from '../helpers/konnectors'
+import * as triggersModel from '../helpers/triggers'
+import { findKonnectorPolicy } from '../konnector-policies'
+import '../types'
+
+import clone from 'lodash/clone'
+
+import { watchKonnectorJob } from '../models/konnector/KonnectorJobWatcher'
+import logger from '../logger'
+import { createOrUpdateCipher } from '../models/cipherUtils'
+import sentryHub from '../sentry'
 import { sendRealtimeNotification } from '../services/jobUtils'
 
 const JOBS_DOCTYPE = 'io.cozy.jobs'

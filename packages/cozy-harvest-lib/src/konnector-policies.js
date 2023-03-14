@@ -1,6 +1,6 @@
 import logger from './logger'
-import { konnectorPolicy as biKonnectorPolicy } from './policies/budget-insight'
 import { konnectorPolicy as biWebViewPolicy } from './policies/biWebView'
+import { konnectorPolicy as biKonnectorPolicy } from './policies/budget-insight'
 import { konnectorPolicy as cliskPolicy } from './policies/clisk'
 
 const defaultKonnectorPolicy = {

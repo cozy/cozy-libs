@@ -1,13 +1,13 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
+import { withClient } from 'cozy-client'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import { withClient } from 'cozy-client'
-import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
+import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
 
 import withLocales from '../../hoc/withLocales'
-
-import OpenwithIcon from 'cozy-ui/transpiled/react/Icons/Openwith'
+import useAppLinkWithStoreFallback from '../../hooks/useAppLinkWithStoreFallback'
 
 const BanksLinkRedirectStore = ({ client, t }) => {
   const slug = 'banks'

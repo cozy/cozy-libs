@@ -1,15 +1,16 @@
-import { Field } from './Field'
-import React, { PureComponent } from 'react'
-import PropTypes from 'prop-types'
 import pick from 'lodash/pick'
+import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 
+import { isIOS } from 'cozy-device-helper'
+
+import { Field } from './Field'
 import { getFieldPlaceholder, sanitizeSelectProps } from '../../helpers/fields'
 import {
   legacyLabels,
   predefinedLabels,
   ROLE_IDENTIFIER
 } from '../../helpers/manifest'
-import { isIOS } from 'cozy-device-helper'
 
 // On iOS, focusing an input not in the same tick as the user action is buggy.
 // The field is focused but the keyboard does not show up,

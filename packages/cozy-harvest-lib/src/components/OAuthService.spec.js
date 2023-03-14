@@ -1,11 +1,12 @@
-import MicroEE from 'microee'
 import util from 'util'
+
 import { openOAuthWindow, OAUTH_SERVICE_OK } from 'components/OAuthService'
+import MicroEE from 'microee'
+
 import { isMobileApp, isFlagshipApp } from 'cozy-device-helper'
 
-import PopupMock from '../helpers/windowWrapperMocks'
-
 import { OAUTH_REALTIME_CHANNEL, terminateOAuth } from '../helpers/oauth'
+import PopupMock from '../helpers/windowWrapperMocks'
 
 jest.mock('../helpers/oauth', () => {
   return {

@@ -1,18 +1,20 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Card from 'cozy-ui/transpiled/react/Card'
-import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
-import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
-import Circle from 'cozy-ui/transpiled/react/Circle'
-import Stack from 'cozy-ui/transpiled/react/Stack'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import React from 'react'
+
 import { useClient } from 'cozy-client'
-import palette from 'cozy-ui/transpiled/react/palette'
-import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
+import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
+import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
+import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
+import Card from 'cozy-ui/transpiled/react/Card'
+import Circle from 'cozy-ui/transpiled/react/Circle'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import Stack from 'cozy-ui/transpiled/react/Stack'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import palette from 'cozy-ui/transpiled/react/palette'
+
+import useAppLinkWithStoreFallback from '../hooks/useAppLinkWithStoreFallback'
 
 export const AppLinkButton = ({ slug, path }) => {
   const { t } = useI18n()

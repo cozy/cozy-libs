@@ -1,9 +1,9 @@
 import React from 'react'
 
 import { useClient } from 'cozy-client'
-import Infos from 'cozy-ui/transpiled/react/Infos'
 import Button from 'cozy-ui/transpiled/react/Buttons'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Infos from 'cozy-ui/transpiled/react/Infos'
 
 import { loadSelectedAccountId } from '../../helpers/accounts'
 import withLocales from '../hoc/withLocales'

@@ -1,13 +1,14 @@
-import React from 'react'
-import { mount } from 'enzyme'
-
-import I18n from 'cozy-ui/transpiled/react/I18n'
 import LaunchTriggerCard, {
   DumbLaunchTriggerCard
 } from 'components/cards/LaunchTriggerCard'
+import { mount } from 'enzyme'
+import React from 'react'
+
 import CozyClient, { CozyProvider } from 'cozy-client'
-import ConnectionFlow from '../../models/ConnectionFlow'
+import I18n from 'cozy-ui/transpiled/react/I18n'
+
 import enLocale from '../../locales/en.json'
+import ConnectionFlow from '../../models/ConnectionFlow'
 
 jest.mock('../../models/ConnectionFlow', () => {
   // Require the original module to not be mocked...

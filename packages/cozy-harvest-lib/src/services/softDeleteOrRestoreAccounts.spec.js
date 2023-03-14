@@ -1,5 +1,3 @@
-import softDeleteOrRestoreAccounts from './softDeleteOrRestoreAccounts'
-
 import {
   decryptString,
   getOrganizationKey,
@@ -10,6 +8,7 @@ import {
   getT
 } from 'services/utils'
 
+import softDeleteOrRestoreAccounts from './softDeleteOrRestoreAccounts'
 import { ensureTrigger } from '../connections/triggers'
 
 jest.mock('services/utils')

@@ -1,46 +1,43 @@
 // @ts-check
-import React, { useContext, useState } from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React, { useContext, useState } from 'react'
 
 import { useClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
-
+import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import palette from 'cozy-ui/transpiled/react/palette'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import NavigationList, {
-  NavigationListSection,
-  NavigationListHeader
-} from 'cozy-ui/transpiled/react/NavigationList'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
 import KeyIcon from 'cozy-ui/transpiled/react/Icons/Key'
 import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import UnlinkIcon from 'cozy-ui/transpiled/react/Icons/Unlink'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
 import ListItemSecondaryAction from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemSecondaryAction'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import NavigationList, {
+  NavigationListSection,
+  NavigationListHeader
+} from 'cozy-ui/transpiled/react/NavigationList'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import palette from 'cozy-ui/transpiled/react/palette'
 // @ts-ignore peerDep
-import { useVaultClient, useVaultUnlockContext } from 'cozy-keys-lib'
-
-import { deleteAccount } from '../../../connections/accounts'
-import { unshareCipher } from '../../../models/cipherUtils'
-import { findKonnectorPolicy } from '../../../konnector-policies'
-
-import useSafeState from '../../useSafeState'
-import { MountPointContext } from '../../MountPointContext'
-import { useTrackPage, useTracker } from '../../hoc/tracking'
 
 import { ContractsForAccount } from './Contracts'
+import { deleteAccount } from '../../../connections/accounts'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../../helpers/proptypes'
+import { findKonnectorPolicy } from '../../../konnector-policies'
+import { unshareCipher } from '../../../models/cipherUtils'
+import { MountPointContext } from '../../MountPointContext'
+import { useTrackPage, useTracker } from '../../hoc/tracking'
+import useSafeState from '../../useSafeState'
 
 const tabMobileNavListStyle = { borderTop: 'none' }
 

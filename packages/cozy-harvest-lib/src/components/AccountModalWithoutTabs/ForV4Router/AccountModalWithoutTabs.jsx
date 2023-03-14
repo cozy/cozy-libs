@@ -1,19 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import DialogContent from '@material-ui/core/DialogContent'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import { useQuery, isQueryLoading } from 'cozy-client'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import { buildAccountQueryById } from '../../../connections/accounts'
-import { withMountPointProps } from '../../MountPointContext'
-import { getMatchingTrigger } from '../helpers'
-import AccountModalHeader from '../AccountModalHeader'
-import Error from '../Error'
 import {
   innerAccountModalOverridesProptype,
   intentsApiProptype
 } from '../../../helpers/proptypes'
+import { withMountPointProps } from '../../MountPointContext'
+import AccountModalHeader from '../AccountModalHeader'
+import Error from '../Error'
+import { getMatchingTrigger } from '../helpers'
 
 const AccountModalWithoutTabs = ({
   accountsAndTriggers,

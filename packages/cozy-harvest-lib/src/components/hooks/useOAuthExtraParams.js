@@ -1,8 +1,7 @@
 import { useState } from 'react'
+import useDeepCompareEffect from 'use-deep-compare-effect'
 
 import { findKonnectorPolicy } from '../../konnector-policies'
-
-import useDeepCompareEffect from 'use-deep-compare-effect'
 
 const useOAuthExtraParams = ({ account, client, konnector, reconnect }) => {
   const konnectorPolicy = findKonnectorPolicy(konnector)

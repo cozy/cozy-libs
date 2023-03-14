@@ -1,11 +1,11 @@
 import get from 'lodash/get'
 import has from 'lodash/has'
 import trim from 'lodash/trim'
-import { getBoundT } from '../locales'
 
 import { Q, fetchPolicies } from 'cozy-client'
 
 import * as accounts from './accounts'
+import { getBoundT } from '../locales'
 
 const DEFAULT_SUPPORT_MAIL = 'claude@cozycloud.cc'
 

@@ -4,17 +4,17 @@ import {
   launchTrigger,
   ensureTrigger
 } from 'connections/triggers'
+import Polyglot from 'node-polyglot'
+
 import CozyClient from 'cozy-client'
+import { CozyFolder } from 'cozy-doctypes'
 
 import {
   statDirectoryByPath,
   createDirectoryByPath
 } from '../../src/connections/files'
-
-import fixtures from '../../test/fixtures'
 import en from '../../src/locales/en.json'
-import Polyglot from 'node-polyglot'
-import { CozyFolder } from 'cozy-doctypes'
+import fixtures from '../../test/fixtures'
 
 jest.mock('../../src/connections/files', () => ({
   statDirectoryByPath: jest.fn(),

@@ -1,7 +1,9 @@
-import React from 'react'
 import { render, waitFor } from '@testing-library/react'
-import InAppBrowser from './InAppBrowser'
+import React from 'react'
+
 import { WebviewIntentProvider } from 'cozy-intent'
+
+import InAppBrowser from './InAppBrowser'
 
 describe('InAppBrowser', () => {
   it('should call fetchSessionCode and showInAppBrowser', async () => {

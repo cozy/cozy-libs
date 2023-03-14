@@ -1,7 +1,6 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import { Popup } from 'components/Popup'
+import { shallow } from 'enzyme'
+import React from 'react'
 
 const props = {
   height: 500,

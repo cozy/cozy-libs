@@ -1,8 +1,9 @@
-import React from 'react'
-import { mount } from 'enzyme'
 import KonnectorMaintenance from 'components/Maintenance'
-import I18n from 'cozy-ui/transpiled/react/I18n'
+import { mount } from 'enzyme'
 import enLocale from 'locales/en.json'
+import React from 'react'
+
+import I18n from 'cozy-ui/transpiled/react/I18n'
 
 describe('KonnectorMaintenance', () => {
   it('should match the snapshot', () => {

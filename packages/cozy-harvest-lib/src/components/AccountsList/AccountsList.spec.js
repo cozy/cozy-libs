@@ -1,7 +1,6 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import { AccountsList } from 'components/AccountsList/AccountsList'
+import { shallow } from 'enzyme'
+import React from 'react'
 
 describe('AccountsList', () => {
   it('should render', () => {

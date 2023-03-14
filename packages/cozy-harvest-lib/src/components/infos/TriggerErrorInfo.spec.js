@@ -1,9 +1,9 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-
-import AppLike from '../../../test/AppLike'
 import TriggerErrorInfo from 'components/infos/TriggerErrorInfo'
 import { KonnectorJobError } from 'helpers/konnectors'
+import React from 'react'
+
+import AppLike from '../../../test/AppLike'
 
 const fixtures = {
   konnector: {

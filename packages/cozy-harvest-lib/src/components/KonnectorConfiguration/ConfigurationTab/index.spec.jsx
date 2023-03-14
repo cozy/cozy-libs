@@ -1,21 +1,23 @@
 /* eslint no-console: off */
 
 import { render, fireEvent, act } from '@testing-library/react'
-import ConfigurationTab from './index'
 import React from 'react'
-import { MountPointProvider } from '../../../components/MountPointContext'
+
 import { createMockClient } from 'cozy-client/dist/mock'
-import { deleteAccount } from '../../../connections/accounts'
-import AppLike from '../../../../test/AppLike'
 import {
   VaultProvider,
   VaultUnlockPlaceholder,
   useVaultClient,
   CozyUtils
 } from 'cozy-keys-lib'
+
+import ConfigurationTab from './index'
+import AppLike from '../../../../test/AppLike'
+import { MountPointProvider } from '../../../components/MountPointContext'
+import { deleteAccount } from '../../../connections/accounts'
+import { findKonnectorPolicy } from '../../../konnector-policies'
 import VaultUnlockProvider from '../../VaultUnlockProvider'
 
-import { findKonnectorPolicy } from '../../../konnector-policies'
 jest.mock('../../../konnector-policies', () => ({
   findKonnectorPolicy: jest.fn()
 }))

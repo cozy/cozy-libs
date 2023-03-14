@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { components } from 'cozy-ui/transpiled/react/SelectBox'
 
 import CreateAccountButton from './CreateAccountButton'

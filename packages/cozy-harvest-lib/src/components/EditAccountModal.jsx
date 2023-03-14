@@ -1,30 +1,29 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
-
-import get from 'lodash/get'
 import flow from 'lodash/flow'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import flag from 'cozy-flags'
 import { withClient } from 'cozy-client'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import flag from 'cozy-flags'
 import CipherIcon from 'cozy-ui/transpiled/react/CipherIcon'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import {
   DialogCloseButton,
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { fetchAccount } from '../connections/accounts'
-import * as triggersModel from '../helpers/triggers'
-import TriggerManager from './TriggerManager'
 import { withMountPointProps } from './MountPointContext'
-import logger from '../logger'
+import TriggerManager from './TriggerManager'
 import { withTracker } from './hoc/tracking'
 import useTimeout from './hooks/useTimeout'
+import { fetchAccount } from '../connections/accounts'
 import { intentsApiProptype } from '../helpers/proptypes'
+import * as triggersModel from '../helpers/triggers'
+import logger from '../logger'
 
 const showStyle = { opacity: 1, transition: 'opacity 0.3s ease' }
 const hideStyle = { opacity: 0, transition: 'opacity 0.3s ease' }

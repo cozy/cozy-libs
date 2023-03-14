@@ -1,7 +1,7 @@
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
 import React, { PureComponent } from 'react'
 import { Field as FinalFormField } from 'react-final-form'
-import get from 'lodash/get'
 
 import AccountField from './AccountField'
 import { getEncryptedFieldName } from '../../helpers/fields'

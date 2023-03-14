@@ -1,9 +1,9 @@
+import clone from 'lodash/clone'
 import get from 'lodash/get'
 import merge from 'lodash/merge'
-import clone from 'lodash/clone'
 
-import assert from '../assert'
 import manifest from './manifest'
+import assert from '../assert'
 import { fetchAccount } from '../connections/accounts'
 import * as triggersModel from '../helpers/triggers'
 

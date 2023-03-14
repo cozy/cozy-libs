@@ -1,25 +1,23 @@
-import React, { useRef, useState } from 'react'
 import PropTypes from 'prop-types'
+import React, { useRef, useState } from 'react'
 
 import { getCreatedByApp } from 'cozy-client/dist/models/utils'
-
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Card from 'cozy-ui/transpiled/react/Card'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
-
-import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
-import KonnectorModalHeader from './KonnectorModalHeader'
-import withLocales from './hoc/withLocales'
-import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
-
-import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import {
   useCozyDialog,
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { Tab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+
+import { Contracts } from './KonnectorConfiguration/ConfigurationTab/Contracts'
+import { getAccountInstitutionLabel } from './KonnectorConfiguration/ConfigurationTab/bankAccountHelpers'
+import KonnectorModalHeader from './KonnectorModalHeader'
+import withLocales from './hoc/withLocales'
 import { intentsApiProptype } from '../helpers/proptypes'
 
 const createDummyKonnectorFromAccount = account => {

@@ -1,5 +1,3 @@
-import updateAccountsFromCipher from './updateAccountsFromCipher'
-
 import {
   decryptString,
   getOrganizationKey,
@@ -8,6 +6,8 @@ import {
   fetchLoginFailedTriggersForAccountsIds,
   launchTriggers
 } from 'services/utils'
+
+import updateAccountsFromCipher from './updateAccountsFromCipher'
 
 jest.mock('services/utils')
 jest.mock('services/logger')

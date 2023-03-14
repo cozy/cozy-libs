@@ -1,5 +1,6 @@
 import get from 'lodash/get'
 
+import logger from './logger'
 import {
   decryptString,
   getOrganizationKey,
@@ -8,8 +9,6 @@ import {
   fetchLoginFailedTriggersForAccountsIds,
   launchTriggers
 } from './utils'
-
-import logger from './logger'
 
 const makeDecrypt = (vaultClient, orgKey) => encryptedVal =>
   decryptString(encryptedVal, vaultClient, orgKey)

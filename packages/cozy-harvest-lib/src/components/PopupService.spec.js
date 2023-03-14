@@ -1,5 +1,7 @@
 import util from 'util'
+
 import { openWindow } from 'components/PopupService'
+
 import { isMobileApp } from 'cozy-device-helper'
 
 import PopupMock from '../helpers/windowWrapperMocks'

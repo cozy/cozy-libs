@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import AccountSelectBox from '../AccountSelectBox/AccountSelectBox'
 import KonnectorModalHeader from '../KonnectorModalHeader'

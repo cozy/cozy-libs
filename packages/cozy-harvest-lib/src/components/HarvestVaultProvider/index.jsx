@@ -1,4 +1,5 @@
 import React from 'react'
+
 import { useClient } from 'cozy-client'
 import { VaultProvider } from 'cozy-keys-lib'
 

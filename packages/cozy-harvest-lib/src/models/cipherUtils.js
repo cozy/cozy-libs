@@ -1,12 +1,12 @@
 import get from 'lodash/get'
 import isEqual from 'lodash/isEqual'
 
-import manifest from '../helpers/manifest'
-import accounts from '../helpers/accounts'
-import assert from '../assert'
-import logger from '../logger'
-
 import { CipherType, UriMatchType, FieldType } from 'cozy-keys-lib'
+
+import assert from '../assert'
+import accounts from '../helpers/accounts'
+import manifest from '../helpers/manifest'
+import logger from '../logger'
 
 /**
  * Create a new cipher and return its ID

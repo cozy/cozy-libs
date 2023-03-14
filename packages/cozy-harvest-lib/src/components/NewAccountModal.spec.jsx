@@ -1,10 +1,10 @@
 /* eslint-env jest */
+import { render } from '@testing-library/react'
 import React from 'react'
 
-import { render } from '@testing-library/react'
-import AppLike from '../../test/AppLike'
-import NewAccountModal from './NewAccountModal'
 import { MountPointContext } from './MountPointContext'
+import NewAccountModal from './NewAccountModal'
+import AppLike from '../../test/AppLike'
 
 let onLoginSuccessFn
 let onSuccessFn

@@ -1,8 +1,8 @@
+import bankAccountFixture from './bank-account-fixture.json'
 import {
   getAccountInstitutionLabel,
   getAccountLabel
 } from './bankAccountHelpers'
-import bankAccountFixture from './bank-account-fixture.json'
 
 test('helpers', () => {
   expect(getAccountInstitutionLabel(bankAccountFixture)).toEqual(

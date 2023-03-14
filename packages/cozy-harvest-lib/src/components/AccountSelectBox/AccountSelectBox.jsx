@@ -1,12 +1,13 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
 import { Account } from 'cozy-doctypes'
 import SelectBox, {
   reactSelectControl
 } from 'cozy-ui/transpiled/react/SelectBox'
 
-import MenuWithFixedComponent from './MenuWithFixedComponent'
 import AccountSelectControl from './AccountSelectControl'
+import MenuWithFixedComponent from './MenuWithFixedComponent'
 
 const AccountSelectBox = ({
   accountsAndTriggers,
