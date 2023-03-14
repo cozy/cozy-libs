@@ -1,13 +1,13 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
+import { getAccountName } from 'cozy-client/dist/models/account'
 import flag from 'cozy-flags'
-
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
-import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
+import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
+import ListSubheader from 'cozy-ui/transpiled/react/MuiCozyTheme/ListSubheader'
 
 import HarvestBanner from '../HarvestBanner'
 
@@ -18,7 +18,7 @@ const EmptyWithHeader = ({ connector, account }) => {
     <List
       subheader={
         <ListSubheader>
-          <div className="u-ellipsis">{account.auth.login}</div>
+          <div className="u-ellipsis">{getAccountName(account)}</div>
         </ListSubheader>
       }
     >
