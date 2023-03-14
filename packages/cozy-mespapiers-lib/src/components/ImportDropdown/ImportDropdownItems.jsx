@@ -39,7 +39,7 @@ const ImportDropdownItems = ({ placeholder, onClick }) => {
   const styles = useStyles()
   const {
     acquisitionSteps: { length: acquisitionStepsLength },
-    connectorCriteria: {
+    konnectorCriteria: {
       category: konnectorCategory,
       name: konnectorName
     } = {},
@@ -127,7 +127,7 @@ ImportDropdownItems.propTypes = {
     label: PropTypes.string,
     icon: iconPropType,
     acquisitionSteps: PropTypes.array.isRequired,
-    connectorCriteria: PropTypes.shape({
+    konnectorCriteria: PropTypes.shape({
       name: PropTypes.string,
       category: PropTypes.string
     })

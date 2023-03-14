@@ -14,7 +14,7 @@ import PapersList from '../Papers/PapersList'
 const PapersListByContact = ({
   selectedThemeLabel,
   files,
-  connector,
+  konnector,
   accounts,
   contacts
 }) => {
@@ -54,7 +54,7 @@ const PapersListByContact = ({
     >
       <PapersList
         papers={papers}
-        connector={connector}
+        konnector={konnector}
         accounts={accounts}
         isLast={files.length === 1}
       />
@@ -65,7 +65,7 @@ const PapersListByContact = ({
 PapersListByContact.propTypes = {
   selectedThemeLabel: PropTypes.string,
   files: PropTypes.arrayOf(PropTypes.object),
-  connector: PropTypes.object,
+  konnector: PropTypes.object,
   accounts: PropTypes.array,
   contacts: PropTypes.arrayOf(PropTypes.object)
 }

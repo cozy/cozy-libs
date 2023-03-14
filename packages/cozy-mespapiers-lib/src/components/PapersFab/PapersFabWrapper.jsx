@@ -46,7 +46,7 @@ const PapersFabWrapper = ({ children }) => {
   }
 
   const showImportDropdown = paperDefinition => {
-    if (paperDefinition.connectorCriteria) {
+    if (paperDefinition.konnectorCriteria) {
       setShowConnectorMenu(true)
     } else {
       redirectPaperCreation(paperDefinition)
@@ -79,7 +79,7 @@ const PapersFabWrapper = ({ children }) => {
       actions,
       onClose: hideGeneralMenu
     },
-    connectorMenuProps: {
+    konnectorMenuProps: {
       show: showConnectorMenu,
       placeholder: paperDefinition,
       onClose: () => setShowConnectorMenu(false),

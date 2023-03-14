@@ -368,9 +368,9 @@
     }
   },
   "Empty": {
-    "connector": {
+    "konnector": {
       "title": "Aucun papier",
-      "text": "%{connectorSlug} n’a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{connectorSlug}.",
+      "text": "%{konnectorSlug} n’a pas encore publié le papier sur son site. Il sera récupéré ici automatiquement une fois publié par %{konnectorSlug}.",
       "button": "Ajouter manuellement"
     }
   }

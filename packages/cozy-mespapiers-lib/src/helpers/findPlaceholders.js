@@ -45,7 +45,7 @@ export const hasNoFileWithSameQualificationLabel = (files, paperDefinition) => {
  */
 export const isPaperEnabled = paperDefinition =>
   paperDefinition.acquisitionSteps.length > 0 ||
-  paperDefinition.connectorCriteria
+  paperDefinition.konnectorCriteria
 
 /**
  * Filters and sorts the list of featured Placeholders.

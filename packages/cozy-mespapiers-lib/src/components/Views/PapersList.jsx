@@ -45,31 +45,31 @@ const PapersList = () => {
   const isLoadingContacts =
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
-  const queryConnector =
+  const queryKonnector =
     buildConnectorsQueryByQualificationLabel(currentFileTheme)
-  const { data: connectors, ...connectorsQueryLeft } = useQuery(
-    queryConnector.definition,
-    queryConnector.options
+  const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
+    queryKonnector.definition,
+    queryKonnector.options
   )
-  const isConnectorsLoading = isQueryLoading(connectorsQueryLeft)
-  const connector = connectors?.[0]
-  const connectorSlug = connector?.slug
+  const isKonnectorsLoading = isQueryLoading(konnectorsQueryLeft)
+  const konnector = konnectors?.[0]
+  const konnectorSlug = konnector?.slug
 
   const queryAccounts = buildAccountsQueryBySlug(
-    connectorSlug,
-    Boolean(connectorSlug)
+    konnectorSlug,
+    Boolean(konnectorSlug)
   )
   const { data: accounts, ...accountsQueryLeft } = useQuery(
     queryAccounts.definition,
     queryAccounts.options
   )
   const isAccountsLoading =
-    Boolean(connectorSlug) && isQueryLoading(accountsQueryLeft)
+    Boolean(konnectorSlug) && isQueryLoading(accountsQueryLeft)
 
   const isLoading =
     isLoadingFiles ||
     isLoadingContacts ||
-    isConnectorsLoading ||
+    isKonnectorsLoading ||
     isAccountsLoading
 
   return (
@@ -88,11 +88,11 @@ const PapersList = () => {
               selectedThemeLabel={selectedThemeLabel}
               files={files}
               contacts={contacts}
-              connector={connector}
+              konnector={konnector}
               accounts={accounts}
             />
           )}
-          {!hasFiles && <Empty connector={connector} accounts={accounts} />}
+          {!hasFiles && <Empty konnector={konnector} accounts={accounts} />}
         </>
       )}
     </>

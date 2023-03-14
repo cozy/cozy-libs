@@ -1,9 +1,9 @@
 'use strict'
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../test/components/AppLike'
 import Placeholder from './Placeholder'
+import AppLike from '../../../test/components/AppLike'
 
 const fakePlaceholders = [
   {
@@ -13,7 +13,7 @@ const fakePlaceholders = [
     featureDate: 'referencedDate',
     maxDisplay: 3,
     acquisitionSteps: [],
-    connectorCriteria: {
+    konnectorCriteria: {
       name: 'impots'
     }
   },

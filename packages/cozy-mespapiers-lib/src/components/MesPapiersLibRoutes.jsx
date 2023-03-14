@@ -33,12 +33,12 @@ const OutletWrapper = ({ Component }) => (
 const MesPapiersLibRoutes = ({ lang, components }) => {
   const location = useLocation()
   const [searchParams] = useSearchParams()
-  const connectorSlug = searchParams.get('connectorSlug')
+  const konnectorSlug = searchParams.get('connectorSlug')
 
   // usefull when getting connectorSlug from Store after rerouting process
   // because of redirectAfterInstall
-  if (connectorSlug) {
-    return <Navigate replace to={`${location.pathname}${connectorSlug}`} />
+  if (konnectorSlug) {
+    return <Navigate replace to={`${location.pathname}${konnectorSlug}`} />
   }
 
   return (

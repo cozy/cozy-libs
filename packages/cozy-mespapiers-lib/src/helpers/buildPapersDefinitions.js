@@ -1,7 +1,7 @@
 /**
  * Sort paperDefinitions list alphabetical order then:
- * - Papers with acquisitionSteps or with connectorCriteria (papersUsedList)
- * - Papers without acquisitionSteps and without connectorCriteria (papersUnUsedList)
+ * - Papers with acquisitionSteps or with konnectorCriteria (papersUsedList)
+ * - Papers without acquisitionSteps and without konnectorCriteria (papersUnUsedList)
  * - Papers of type "other_identity_document" etc (otherPaperList)
  *
  * @param {Object[]} papersDefList - Array of Papers
@@ -25,7 +25,7 @@ export const buildPapersDefinitions = (papersDefList, scannerT) => {
         }
 
         return currentPaperDef.acquisitionSteps.length > 0 ||
-          currentPaperDef.connectorCriteria
+          currentPaperDef.konnectorCriteria
           ? [[...used, currentPaperDef], unUsed, other]
           : [used, [...unUsed, currentPaperDef], other]
       },

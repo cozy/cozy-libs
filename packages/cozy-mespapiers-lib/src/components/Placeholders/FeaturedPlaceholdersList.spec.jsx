@@ -1,8 +1,8 @@
-import React from 'react'
 import { fireEvent, render } from '@testing-library/react'
+import React from 'react'
 
-import AppLike from '../../../test/components/AppLike'
 import FeaturedPlaceholdersList from './FeaturedPlaceholdersList'
+import AppLike from '../../../test/components/AppLike'
 
 const fakePlaceholders = [
   {
@@ -12,7 +12,7 @@ const fakePlaceholders = [
     featureDate: 'referencedDate',
     maxDisplay: 3,
     acquisitionSteps: [],
-    connectorCriteria: {
+    konnectorCriteria: {
       name: 'impots'
     }
   },
@@ -46,7 +46,7 @@ jest.mock('./Placeholder', () => ({ onClick }) => {
     featureDate: 'referencedDate',
     maxDisplay: 3,
     acquisitionSteps: [],
-    connectorCriteria: {
+    konnectorCriteria: {
       name: 'impots'
     }
   }

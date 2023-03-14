@@ -17,7 +17,7 @@ describe('buildPapersDefinitions', () => {
     {
       label: 'two',
       acquisitionSteps: [],
-      connectorCriteria: {
+      konnectorCriteria: {
         name: 'myConnector'
       }
     },
@@ -28,7 +28,7 @@ describe('buildPapersDefinitions', () => {
           stepIndex: 1
         }
       ],
-      connectorCriteria: {
+      konnectorCriteria: {
         name: 'myConnector'
       }
     },
@@ -44,7 +44,7 @@ describe('buildPapersDefinitions', () => {
           stepIndex: 1
         }
       ],
-      connectorCriteria: {
+      konnectorCriteria: {
         name: 'myConnector'
       }
     }
@@ -58,14 +58,14 @@ describe('buildPapersDefinitions', () => {
           stepIndex: 1
         }
       ],
-      connectorCriteria: {
+      konnectorCriteria: {
         name: 'myConnector'
       }
     },
     {
       label: 'two',
       acquisitionSteps: [],
-      connectorCriteria: {
+      konnectorCriteria: {
         name: 'myConnector'
       }
     },
@@ -76,7 +76,7 @@ describe('buildPapersDefinitions', () => {
           stepIndex: 1
         }
       ],
-      connectorCriteria: {
+      konnectorCriteria: {
         name: 'myConnector'
       }
     },

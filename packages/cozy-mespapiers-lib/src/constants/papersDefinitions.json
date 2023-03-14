@@ -169,7 +169,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "caf"
       }
     },
@@ -348,7 +348,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "category": "energy"
       }
     },
@@ -498,7 +498,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "category": "isp"
       }
     },
@@ -1227,7 +1227,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "caf"
       }
     },
@@ -1265,7 +1265,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "category": "isp"
       }
     },
@@ -1500,7 +1500,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "impots"
       }
     },
@@ -1538,7 +1538,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "impots"
       }
     },
@@ -1575,7 +1575,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "poleemploi"
       }
     },
@@ -1910,7 +1910,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "impots"
       }
     },
@@ -2045,7 +2045,7 @@
           "text": "PaperJSON.generic.owner.text"
         }
       ],
-      "connectorCriteria": {
+      "konnectorCriteria": {
         "name": "poleemploi"
       }
     },

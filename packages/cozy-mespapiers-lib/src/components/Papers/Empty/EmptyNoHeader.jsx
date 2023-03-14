@@ -16,7 +16,7 @@ import { getCurrentFileTheme } from '../helpers'
 import HarvestBanner from '../HarvestBanner'
 import styles from './styles.styl'
 
-const EmptyNoHeader = ({ connector, accounts }) => {
+const EmptyNoHeader = ({ konnector, accounts }) => {
   const { t } = useI18n()
   const params = useParams()
   const { search, pathname } = useLocation()
@@ -41,25 +41,25 @@ const EmptyNoHeader = ({ connector, accounts }) => {
   return (
     <>
       {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner connector={connector} account={accounts?.[0]} />
+        <HarvestBanner konnector={konnector} account={accounts?.[0]} />
       )}
       <Empty
         className={`${styles['emptyWithConnector']} u-ph-1`}
         icon={PapersIcon}
         iconSize="normal"
-        title={t('Empty.connector.title')}
-        text={t('Empty.connector.text', {
-          connectorSlug: connector?.slug?.toUpperCase()
+        title={t('Empty.konnector.title')}
+        text={t('Empty.konnector.text', {
+          konnectorSlug: konnector?.slug?.toUpperCase()
         })}
       >
-        <Button label={t('Empty.connector.button')} onClick={handleClick} />
+        <Button label={t('Empty.konnector.button')} onClick={handleClick} />
       </Empty>
     </>
   )
 }
 
 EmptyNoHeader.propTypes = {
-  connector: PropTypes.object,
+  konnector: PropTypes.object,
   accounts: PropTypes.array
 }
 

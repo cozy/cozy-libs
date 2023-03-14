@@ -4,10 +4,10 @@ import log from 'cozy-logger'
 /**
  * @param {object} param
  * @param {CozyClient} param.client - Instance of CozyClient
- * @param {string} [param.konnectorName] - Name of Connector
- * @param {string} [param.konnectorCategory] - Category of Connector
- * @param {string} [param.redirectionPath] - Path to redirect from Store after connector installation
- * @returns {string} - Link of Store where the Connector is
+ * @param {string} [param.konnectorName] - Name of konnector
+ * @param {string} [param.konnectorCategory] - Category of konnector
+ * @param {string} [param.redirectionPath] - Path to redirect from Store after konnector installation
+ * @returns {string} - Link of Store where the konnector is
  */
 export const getStoreWebLinkByKonnector = ({
   client,

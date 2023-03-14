@@ -7,12 +7,12 @@ import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
 import { buildTriggersQueryByConnectorSlug } from '../../helpers/queries'
 
-const HarvestBanner = ({ connector, account }) => {
-  const connectorSlug = connector?.slug
+const HarvestBanner = ({ konnector, account }) => {
+  const konnectorSlug = konnector?.slug
 
   const queryTriggers = buildTriggersQueryByConnectorSlug(
-    connectorSlug,
-    Boolean(connectorSlug) && Boolean(account)
+    konnectorSlug,
+    Boolean(konnectorSlug) && Boolean(account)
   )
   const { data: triggers, ...triggersQueryLeft } = useQuery(
     queryTriggers.definition,
@@ -24,15 +24,15 @@ const HarvestBanner = ({ connector, account }) => {
     trigger => trigger.message.account === account?._id
   )
 
-  if (!connector || !account || isTriggersLoading) {
+  if (!konnector || !account || isTriggersLoading) {
     return null
   }
 
   return (
     <>
       <LaunchTriggerCard
-        flowProps={{ initialTrigger: trigger, konnector: connector }}
-        konnectorRoot={`harvest/${connectorSlug}`}
+        flowProps={{ initialTrigger: trigger, konnector }}
+        konnectorRoot={`harvest/${konnectorSlug}`}
       />
       <Divider />
     </>
@@ -40,7 +40,7 @@ const HarvestBanner = ({ connector, account }) => {
 }
 
 HarvestBanner.propTypes = {
-  connector: PropTypes.object,
+  konnector: PropTypes.object,
   account: PropTypes.object
 }
 

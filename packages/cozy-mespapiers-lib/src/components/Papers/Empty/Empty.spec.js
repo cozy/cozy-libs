@@ -1,17 +1,18 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
+
 import flag from 'cozy-flags'
 
-import AppLike from '../../../../test/components/AppLike'
 import Empty from './Empty'
+import AppLike from '../../../../test/components/AppLike'
 
 jest.mock('cozy-flags')
 jest.mock('../HarvestBanner', () => () => <div data-testid="HarvestBanner" />)
 
-const setup = ({ connector, accounts } = {}) => {
+const setup = ({ konnector, accounts } = {}) => {
   return render(
     <AppLike>
-      <Empty connector={connector} accounts={accounts} />
+      <Empty konnector={konnector} accounts={accounts} />
     </AppLike>
   )
 }
@@ -23,7 +24,7 @@ describe('MesPapiersLibProviders', () => {
 
   it('should display basic text without harvest banner', () => {
     const { queryByTestId, getByText } = setup({
-      connector: undefined,
+      konnector: undefined,
       accounts: undefined
     })
 
@@ -33,7 +34,7 @@ describe('MesPapiersLibProviders', () => {
 
   it('should display specific text', () => {
     const { queryByTestId, getByText } = setup({
-      connector: {},
+      konnector: {},
       accounts: [{}]
     })
 
@@ -45,7 +46,7 @@ describe('MesPapiersLibProviders', () => {
     flag.mockReturnValue(true)
 
     const { queryByTestId, getByText } = setup({
-      connector: {},
+      konnector: {},
       accounts: [{}]
     })
 
@@ -55,7 +56,7 @@ describe('MesPapiersLibProviders', () => {
 
   it('should display logins', () => {
     const { queryByTestId, getByText } = setup({
-      connector: {},
+      konnector: {},
       accounts: [
         { auth: { login: 'myLogin' } },
         { auth: { login: 'myOtherLogin' } }
@@ -71,7 +72,7 @@ describe('MesPapiersLibProviders', () => {
     flag.mockReturnValue(true)
 
     const { queryAllByTestId, getByText } = setup({
-      connector: {},
+      konnector: {},
       accounts: [
         { auth: { login: 'myLogin' } },
         { auth: { login: 'myOtherLogin' } }

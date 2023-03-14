@@ -19,7 +19,7 @@ import { useMultiSelection } from '../Hooks/useMultiSelection'
 import HarvestBanner from './HarvestBanner'
 import { makeAccountFromPapers } from './helpers'
 
-const PapersList = ({ papers, connector, accounts, isLast }) => {
+const PapersList = ({ papers, konnector, accounts, isLast }) => {
   const client = useClient()
   const { t } = useI18n()
   const { pushModal, popModal } = useModal()
@@ -62,7 +62,7 @@ const PapersList = ({ papers, connector, accounts, isLast }) => {
   return (
     <>
       {flag('harvest.inappconnectors.enabled') && (
-        <HarvestBanner connector={connector} account={account} />
+        <HarvestBanner konnector={konnector} account={account} />
       )}
       {papers.list.map(
         (paper, idx) =>
@@ -100,7 +100,7 @@ PapersList.propTypes = {
     maxDisplay: PropTypes.number,
     list: PropTypes.arrayOf(PropTypes.object)
   }),
-  connector: PropTypes.object,
+  konnector: PropTypes.object,
   accounts: PropTypes.array,
   isLast: PropTypes.bool
 }
