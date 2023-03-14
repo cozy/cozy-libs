@@ -5,12 +5,12 @@ import { useQuery, isQueryLoading } from 'cozy-client'
 import { LaunchTriggerCard } from 'cozy-harvest-lib'
 import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
 
-import { buildTriggersQueryByConnectorSlug } from '../../helpers/queries'
+import { buildTriggersQueryByKonnectorSlug } from '../../helpers/queries'
 
 const HarvestBanner = ({ konnector, account }) => {
   const konnectorSlug = konnector?.slug
 
-  const queryTriggers = buildTriggersQueryByConnectorSlug(
+  const queryTriggers = buildTriggersQueryByKonnectorSlug(
     konnectorSlug,
     Boolean(konnectorSlug) && Boolean(account)
   )

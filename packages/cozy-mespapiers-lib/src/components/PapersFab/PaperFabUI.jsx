@@ -8,7 +8,7 @@ import ActionMenuImportDropdown from '../Placeholders/ActionMenuImportDropdown'
 const PaperFabUI = React.forwardRef(
   ({ PapersFabOverrided, generalMenuProps, konnectorMenuProps }, ref) => {
     const { show: showGeneralMenu, onClose, actions } = generalMenuProps
-    const { show: showConnectorMenu } = konnectorMenuProps
+    const { show: showKonnectorMenu } = konnectorMenuProps
 
     return (
       <>
@@ -19,7 +19,7 @@ const PaperFabUI = React.forwardRef(
             <ActionsItems actions={actions} />
           </ActionMenuWrapper>
         )}
-        {showConnectorMenu && (
+        {showKonnectorMenu && (
           <ActionMenuImportDropdown
             isOpened
             anchorElRef={ref}

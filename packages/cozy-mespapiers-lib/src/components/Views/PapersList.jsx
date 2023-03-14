@@ -7,7 +7,7 @@ import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 import {
   buildContactsQueryByIds,
   buildFilesQueryByLabel,
-  buildConnectorsQueryByQualificationLabel,
+  buildKonnectorsQueryByQualificationLabel,
   buildAccountsQueryBySlugs
 } from '../../helpers/queries'
 import { useMultiSelection } from '../Hooks/useMultiSelection'
@@ -46,7 +46,7 @@ const PapersList = () => {
     isQueryLoading(contactQueryResult) || contactQueryResult.hasMore
 
   const queryKonnector =
-    buildConnectorsQueryByQualificationLabel(currentFileTheme)
+    buildKonnectorsQueryByQualificationLabel(currentFileTheme)
   const { data: konnectors, ...konnectorsQueryLeft } = useQuery(
     queryKonnector.definition,
     queryKonnector.options

@@ -14,7 +14,7 @@ import PaperFabUI from './PaperFabUI'
 
 const PapersFabWrapper = ({ children }) => {
   const [showGeneralMenu, setShowGeneralMenu] = useState(false)
-  const [showConnectorMenu, setShowConnectorMenu] = useState(false)
+  const [showKonnectorMenu, setShowKonnectorMenu] = useState(false)
   const actionBtnRef = useRef()
   const client = useClient()
   const { fileTheme } = useParams()
@@ -35,7 +35,7 @@ const PapersFabWrapper = ({ children }) => {
   )[0]
 
   const redirectPaperCreation = placeholder => {
-    setShowConnectorMenu(false)
+    setShowKonnectorMenu(false)
     const countrySearchParam = `${
       placeholder.country ? `country=${placeholder.country}` : ''
     }`
@@ -47,7 +47,7 @@ const PapersFabWrapper = ({ children }) => {
 
   const showImportDropdown = paperDefinition => {
     if (paperDefinition.konnectorCriteria) {
-      setShowConnectorMenu(true)
+      setShowKonnectorMenu(true)
     } else {
       redirectPaperCreation(paperDefinition)
     }
@@ -80,9 +80,9 @@ const PapersFabWrapper = ({ children }) => {
       onClose: hideGeneralMenu
     },
     konnectorMenuProps: {
-      show: showConnectorMenu,
+      show: showKonnectorMenu,
       placeholder: paperDefinition,
-      onClose: () => setShowConnectorMenu(false),
+      onClose: () => setShowKonnectorMenu(false),
       onClick: () => redirectPaperCreation(paperDefinition)
     }
   }

@@ -105,7 +105,7 @@ export const buildFilesQueryById = id => ({
   }
 })
 
-export const buildTriggersQueryByConnectorSlug = (slug, enabled) => ({
+export const buildTriggersQueryByKonnectorSlug = (slug, enabled) => ({
   definition: () =>
     Q(TRIGGERS_DOCTYPE)
       .where({
@@ -119,7 +119,7 @@ export const buildTriggersQueryByConnectorSlug = (slug, enabled) => ({
   }
 })
 
-export const buildConnectorsQueryById = (id, enabled = true) => ({
+export const buildKonnectorsQueryById = (id, enabled = true) => ({
   definition: () => Q(KONNECTORS_DOCTYPE).getById(id),
   options: {
     as: `${KONNECTORS_DOCTYPE}/id/${id}`,
@@ -143,7 +143,7 @@ export const buildKonnectorsQueryByQualificationLabels = (
   }
 })
 
-export const buildConnectorsQueryByQualificationLabel = label => ({
+export const buildKonnectorsQueryByQualificationLabel = label => ({
   definition: () =>
     Q(KONNECTORS_DOCTYPE)
       .where({ qualification_labels: { $in: [label] } })

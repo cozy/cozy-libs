@@ -9,7 +9,7 @@ import { filterWithRemaining } from '../../helpers/filterWithRemaining'
 const { getDisplayName } = models.contact
 
 const hasContactsInFile = file => file.contacts.length > 0
-const isFromConnector = file => Boolean(file.cozyMetadata?.sourceAccount)
+const isFromKonnector = file => Boolean(file.cozyMetadata?.sourceAccount)
 
 /**
  * Get all contact ids referenced on files
@@ -98,7 +98,7 @@ export const groupFilesByContacts = (filesArg, contactsArg) => {
 /**
  * Group files together if they come from the same contact
  * or the same list of contacts,
- * or the same sourceAccountIdentifier of the same Connector.
+ * or the same sourceAccountIdentifier of the same Konnector.
  * The rest is grouped together at the end in the same list.
  * @property {object[]} files - Array of IOCozyFile
  * @property {object[]} contacts - Array of IOCozyContact
@@ -116,18 +116,18 @@ export const buildFilesByContacts = ({
   const result = []
 
   const {
-    itemsFound: filesCreatedByConnectors,
-    remainingItems: filesNotCreatedByConnectors
-  } = filterWithRemaining(files, isFromConnector)
+    itemsFound: filesCreatedByKonnectors,
+    remainingItems: filesNotCreatedByKonnectors
+  } = filterWithRemaining(files, isFromKonnector)
 
-  if (filesCreatedByConnectors.length > 0) {
-    const filesByConnectors = groupBy(
-      filesCreatedByConnectors,
+  if (filesCreatedByKonnectors.length > 0) {
+    const filesByKonnectors = groupBy(
+      filesCreatedByKonnectors,
       file =>
         `${file.cozyMetadata.uploadedBy.slug}-${file.cozyMetadata.sourceAccountIdentifier}`
     )
 
-    const unsortedlistByConnector = Object.values(filesByConnectors).map(
+    const unsortedlistByKonnector = Object.values(filesByKonnectors).map(
       value => ({
         withHeader: true,
         konnector: konnectors?.find(
@@ -144,15 +144,15 @@ export const buildFilesByContacts = ({
       })
     )
 
-    const listByConnector = unsortedlistByConnector.sort((a, b) =>
+    const listByKonnector = unsortedlistByKonnector.sort((a, b) =>
       a.contact.localeCompare(b.contact)
     )
 
-    result.push(...listByConnector)
+    result.push(...listByKonnector)
   }
 
   const filesByContacts = groupFilesByContacts(
-    filesNotCreatedByConnectors,
+    filesNotCreatedByKonnectors,
     contacts
   )
 
