@@ -1,12 +1,12 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
-import Typography from 'cozy-ui/transpiled/react/Typography'
 import { ConfirmDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { useComponentsProps } from '../Providers/ComponentsPropsProvider'
 import Markdown from '../Markdown'
+import { useComponentsProps } from '../Providers/ComponentsPropsProvider'
 
 const CannotConnectModal = ({ vendorName, vendorLink, onClose }) => {
   const { t } = useI18n()

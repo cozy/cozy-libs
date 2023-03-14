@@ -8,8 +8,9 @@
  */
 
 import get from 'lodash/get'
-import GeoDataCard from './GeoDataCard'
+
 import FileDataCard from './FileDataCard'
+import GeoDataCard from './GeoDataCard'
 
 const timeseriesGeoJSONDatacard = {
   component: GeoDataCard,

@@ -1,16 +1,15 @@
-import withLocales from './components/hoc/withLocales'
-
 import DeleteAccountButtonWithoutLocales from './components/DeleteAccountButton'
+import FlowProviderWithLocales from './components/FlowProvider'
 import KonnectorModalWithoutLocales from './components/KonnectorModal'
+import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
+import RoutesWithoutLocales from './components/Routes'
 import TriggerManagerWithoutLocales, {
   IntentTriggerManager as IntentTriggerManagerWithoutLocales
 } from './components/TriggerManager'
-import FlowProviderWithLocales from './components/FlowProvider'
-import RoutesWithoutLocales from './components/Routes'
-import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
-import KonnectorSuggestionModalWithoutLocales from './components/KonnectorSuggestionModal'
-import deprecated from './deprecated'
 import LaunchTriggerCardWithoutLocales from './components/cards/LaunchTriggerCard'
+import withKonnectorModalWithoutLocales from './components/hoc/withKonnectorModal'
+import withLocales from './components/hoc/withLocales'
+import deprecated from './deprecated'
 
 // All entry point files need to be exported wrapped with the translation context of harvest
 export const DeleteAccountButton = withLocales(

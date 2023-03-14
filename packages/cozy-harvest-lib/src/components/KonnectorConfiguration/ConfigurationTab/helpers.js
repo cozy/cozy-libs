@@ -1,4 +1,5 @@
 import set from 'lodash/set'
+
 import {
   setFields as setBankAccountFields,
   getAccountLabel

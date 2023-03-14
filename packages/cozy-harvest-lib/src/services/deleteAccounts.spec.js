@@ -1,6 +1,6 @@
+import { deleteAccount } from 'connections/accounts'
 import deleteAccounts from 'services/deleteAccounts'
 import { fetchAccountsForCipherId } from 'services/utils'
-import { deleteAccount } from 'connections/accounts'
 
 jest.mock('services/utils')
 jest.mock('connections/accounts')

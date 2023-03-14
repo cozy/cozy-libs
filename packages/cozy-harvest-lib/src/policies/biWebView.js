@@ -5,15 +5,9 @@
  * - Deals with the konnector to get temporary tokens
  */
 
-import {
-  getBIConnectionAccountsList,
-  getBIConnection
-} from '../services/bi-http'
-import assert from '../assert'
-import logger from '../logger'
 import { Q } from 'cozy-client'
-import { receiveMutationResult } from 'cozy-client/dist/store'
 import PromiseCache from 'cozy-client/dist/promise-cache'
+import { receiveMutationResult } from 'cozy-client/dist/store'
 // @ts-ignore (its a peerDep and I don't know how to configure ts for that)
 import flag from 'cozy-flags'
 
@@ -23,10 +17,16 @@ import {
   convertBIErrortoKonnectorJobError,
   isBudgetInsightConnector
 } from './budget-insight'
+import assert from '../assert'
 import { KonnectorJobError } from '../helpers/konnectors'
+import logger from '../logger'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
+import {
+  getBIConnectionAccountsList,
+  getBIConnection
+} from '../services/bi-http'
 import { waitForRealtimeEvent } from '../services/jobUtils'
 import '../types'
-import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 
 const promiseCache = new PromiseCache()
 

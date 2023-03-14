@@ -1,8 +1,8 @@
 import DateFns from 'date-fns'
 import get from 'lodash/get'
 
-import { KonnectorJobError } from './konnectors'
 import { toFrequency } from './cron'
+import { KonnectorJobError } from './konnectors'
 
 const DEFAULT_CRON = '0 0 0 * * 0' // Once a week, sunday at midnight
 

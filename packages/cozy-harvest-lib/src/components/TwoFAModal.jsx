@@ -1,22 +1,21 @@
-import React, { PureComponent } from 'react'
 import compose from 'lodash/flowRight'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Button from 'cozy-ui/transpiled/react/Button'
-import Field from 'cozy-ui/transpiled/react/Field'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
+
+import Button from 'cozy-ui/transpiled/react/Button'
+import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Field from 'cozy-ui/transpiled/react/Field'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+
 import KonnectorIcon from './KonnectorIcon'
 import withLocales from './hoc/withLocales'
-
 import accounts, {
   TWOFA_PROVIDERS,
   TWOFA_USER_INPUT
 } from '../helpers/accounts'
-
 import { TWO_FA_REQUEST_EVENT, UPDATE_EVENT } from '../models/flowEvents'
-
-import { IllustrationDialog } from 'cozy-ui/transpiled/react/CozyDialogs'
 
 /**
  * Displayed during connection creation when the konnector detects

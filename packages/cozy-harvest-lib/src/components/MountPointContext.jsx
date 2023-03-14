@@ -1,5 +1,5 @@
-import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import React, { useContext } from 'react'
 
 import withAdaptiveRouter from './hoc/withRouter'
 

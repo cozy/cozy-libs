@@ -1,4 +1,7 @@
+import merge from 'lodash/merge'
+
 import CozyClient from 'cozy-client'
+
 import {
   createOrUpdateBIConnection,
   onBIAccountCreation,
@@ -11,16 +14,15 @@ import {
   updateBIConnectionFromFlow,
   sendTwoFACode
 } from './budget-insight'
-import { waitForRealtimeEvent } from '../services/jobUtils'
+import ConnectionFlow from '../models/ConnectionFlow'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import {
   getBIConnection,
   createBIConnection,
   updateBIConnection
 } from '../services/bi-http'
-import merge from 'lodash/merge'
-import ConnectionFlow from '../models/ConnectionFlow'
 import biPublicKeyProd from '../services/bi-public-key-prod.json'
-import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
+import { waitForRealtimeEvent } from '../services/jobUtils'
 
 jest.mock('cozy-logger', () => ({
   namespace: () => () => {}

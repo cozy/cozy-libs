@@ -1,13 +1,12 @@
-import React from 'react'
 import { render, waitFor } from '@testing-library/react'
+import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import AppLike from '../../test/AppLike'
 import KonnectorBlock from './KonnectorBlock'
-import en from '../locales/en.json'
-
+import AppLike from '../../test/AppLike'
 import { fetchKonnectorData } from '../helpers/konnectorBlock'
+import en from '../locales/en.json'
 
 jest.mock('../helpers/konnectorBlock', () => ({
   fetchKonnectorData: jest.fn()

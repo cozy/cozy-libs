@@ -1,6 +1,7 @@
 // @ts-check
-import { popupCenter } from './Popup'
 import { isMobileApp } from 'cozy-device-helper'
+
+import { popupCenter } from './Popup'
 import { windowOpen } from '../helpers/windowWrapper'
 
 /**

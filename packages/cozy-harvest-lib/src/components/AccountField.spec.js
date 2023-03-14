@@ -1,8 +1,7 @@
-import React from 'react'
+import { AccountField } from 'components/AccountForm/AccountField'
 import { shallow } from 'enzyme'
 import PropTypes from 'prop-types'
-
-import { AccountField } from 'components/AccountForm/AccountField'
+import React from 'react'
 
 const fixtures = {
   username: {

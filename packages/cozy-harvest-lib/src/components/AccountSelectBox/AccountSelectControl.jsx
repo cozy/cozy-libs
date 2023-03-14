@@ -1,9 +1,9 @@
 import React from 'react'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import palette from 'cozy-ui/transpiled/react/palette'
-import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import BottomIcon from 'cozy-ui/transpiled/react/Icons/Bottom'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import palette from 'cozy-ui/transpiled/react/palette'
 
 const AccountSelectControl = ({ name }) => {
   return (

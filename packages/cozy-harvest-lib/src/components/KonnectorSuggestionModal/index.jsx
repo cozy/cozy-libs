@@ -1,23 +1,23 @@
-import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { withClient } from 'cozy-client'
+import React, { useState } from 'react'
 
-import { translate } from 'cozy-ui/transpiled/react/I18n'
+import { withClient } from 'cozy-client'
 import AppLinker, { generateWebLink } from 'cozy-ui/transpiled/react/AppLinker'
 import { Button, ButtonLink } from 'cozy-ui/transpiled/react/Button'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
 import Dialog, {
   DialogActions,
   DialogContent
 } from 'cozy-ui/transpiled/react/Dialog'
-import { DialogCloseButton } from 'cozy-ui/transpiled/react/CozyDialogs'
+import { translate } from 'cozy-ui/transpiled/react/I18n'
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
-import Illustration from './Illustration'
 import DataTypes from './DataTypes'
-import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
+import Illustration from './Illustration'
 import { getSuggestionReason } from '../../helpers/appSuggestions'
+import { getDataTypes, getKonnectorName } from '../../helpers/manifest'
 
 const KonnectorSuggestionModal = ({
   t,

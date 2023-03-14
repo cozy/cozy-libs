@@ -1,7 +1,9 @@
-import React from 'react'
-import { shallow } from 'enzyme'
 import { KonnectorAccounts } from 'components/KonnectorAccounts'
+import { shallow } from 'enzyme'
+import React from 'react'
+
 import CozyClient from 'cozy-client'
+
 import { fetchAccountsFromTriggers } from '../../src/connections/accounts'
 import { fetchTrigger } from '../../src/connections/triggers'
 

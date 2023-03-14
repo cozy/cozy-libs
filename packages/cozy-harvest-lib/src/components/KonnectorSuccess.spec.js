@@ -1,7 +1,3 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
-import CozyClient, { CozyProvider } from 'cozy-client'
 import {
   KonnectorSuccess,
   DescriptionContent,
@@ -9,6 +5,10 @@ import {
   DriveLink,
   SuccessImage
 } from 'components/KonnectorSuccess'
+import { shallow } from 'enzyme'
+import React from 'react'
+
+import CozyClient, { CozyProvider } from 'cozy-client'
 
 describe('KonnectorSuccess', () => {
   let root

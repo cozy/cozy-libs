@@ -1,25 +1,26 @@
-import React, { useCallback, useEffect, useState } from 'react'
-import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
-
-import { useFlowState } from '../models/withConnectionFlow'
-import useOAuthExtraParams from './hooks/useOAuthExtraParams'
-import withLocales from './hoc/withLocales'
-import { intentsApiProptype } from '../helpers/proptypes'
-import TriggerErrorInfo from './infos/TriggerErrorInfo'
-import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
-import { KonnectorJobError } from '../helpers/konnectors'
-import { findKonnectorPolicy } from '../konnector-policies'
-import flag from 'cozy-flags'
 import isEqual from 'lodash/isEqual'
+import PropTypes from 'prop-types'
+import React, { useCallback, useEffect, useState } from 'react'
+
 import { useClient } from 'cozy-client'
+import flag from 'cozy-flags'
+import { useWebviewIntent } from 'cozy-intent'
+
 import {
   OAUTH_SERVICE_ERROR,
   OAUTH_SERVICE_OK,
   openOAuthWindow
 } from './OAuthService'
-import { useWebviewIntent } from 'cozy-intent'
 import { ConnectCard } from './cards/ConnectCard'
+import withLocales from './hoc/withLocales'
+import useOAuthExtraParams from './hooks/useOAuthExtraParams'
+import TriggerErrorInfo from './infos/TriggerErrorInfo'
+import { KonnectorJobError } from '../helpers/konnectors'
+import { intentsApiProptype } from '../helpers/proptypes'
+import { findKonnectorPolicy } from '../konnector-policies'
+import { ERROR_EVENT, LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
+import { useFlowState } from '../models/withConnectionFlow'
 
 /**
  * The OAuth Form is responsible for displaying a form for OAuth konnectors. It

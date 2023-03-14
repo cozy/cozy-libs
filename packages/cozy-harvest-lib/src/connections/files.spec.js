@@ -1,8 +1,8 @@
 /* eslint-env jest */
 
-import client from 'cozy-client'
-
 import { createDirectoryByPath, statDirectoryByPath } from 'connections/files'
+
+import client from 'cozy-client'
 
 jest.mock('cozy-client', () => ({
   collection: jest.fn().mockReturnValue({

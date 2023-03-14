@@ -1,9 +1,9 @@
 /* eslint-env jest */
-import React from 'react'
 import { render } from '@testing-library/react'
+import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
+import React from 'react'
 
 import AppLike from '../../../test/AppLike'
-import KonnectorUpdateInfos from 'components/infos/KonnectorUpdateInfos'
 
 jest.mock(
   '../KonnectorUpdateLinker',

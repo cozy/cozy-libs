@@ -1,11 +1,11 @@
 import React from 'react'
 
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Backdrop from 'cozy-ui/transpiled/react/Backdrop'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import LinearProgress from 'cozy-ui/transpiled/react/LinearProgress'
 import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import Typography from 'cozy-ui/transpiled/react/Typography'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
 const useStyles = makeStyles({
   container: {

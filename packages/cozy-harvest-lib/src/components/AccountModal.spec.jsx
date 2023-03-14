@@ -1,6 +1,7 @@
 import { AccountModal } from 'components/AccountModal'
-import React from 'react'
 import { shallow } from 'enzyme'
+import React from 'react'
+
 import { fetchAccount } from '../../src/connections/accounts'
 
 jest.mock('../../src/connections/accounts', () => ({

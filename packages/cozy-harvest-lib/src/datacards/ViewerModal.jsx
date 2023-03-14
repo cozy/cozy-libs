@@ -3,8 +3,8 @@ import React, { useContext } from 'react'
 import Overlay from 'cozy-ui/transpiled/react/Overlay'
 import Viewer from 'cozy-ui/transpiled/react/Viewer'
 
-import { MountPointContext } from '../components/MountPointContext'
 import { useDataCardFiles } from './useDataCardFiles'
+import { MountPointContext } from '../components/MountPointContext'
 
 export const ViewerModal = ({
   match: {

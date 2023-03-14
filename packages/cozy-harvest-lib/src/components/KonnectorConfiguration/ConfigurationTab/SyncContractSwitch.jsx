@@ -1,11 +1,11 @@
-import React from 'react'
 import compose from 'lodash/flowRight'
+import React from 'react'
 
 import { withClient, queryConnect, models } from 'cozy-client'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import { translate } from 'cozy-ui/transpiled/react/I18n'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 import Switch from 'cozy-ui/transpiled/react/MuiCozyTheme/Switch'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import { createAccountQuerySpec } from '../../../connections/accounts'

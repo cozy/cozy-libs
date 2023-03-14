@@ -1,8 +1,9 @@
 import MicroEE from 'microee'
+
 import { Q } from 'cozy-client'
 
-import { KonnectorJobError } from '../../helpers/konnectors'
 import assert from '../../assert'
+import { KonnectorJobError } from '../../helpers/konnectors'
 import logger from '../../logger'
 import { ERROR_EVENT, LOGIN_SUCCESS_EVENT, SUCCESS_EVENT } from '../flowEvents'
 

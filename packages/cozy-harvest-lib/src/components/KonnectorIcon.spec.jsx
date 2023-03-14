@@ -1,7 +1,9 @@
-import React from 'react'
-import KonnectorIcon from './KonnectorIcon'
-import CozyClient, { CozyProvider } from 'cozy-client'
 import { mount } from 'enzyme'
+import React from 'react'
+
+import CozyClient, { CozyProvider } from 'cozy-client'
+
+import KonnectorIcon from './KonnectorIcon'
 
 describe('KonnectorIcon', () => {
   let originalConsoleError

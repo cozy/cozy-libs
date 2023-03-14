@@ -1,7 +1,6 @@
-import React from 'react'
-import { shallow } from 'enzyme'
-
 import { AccountFields } from 'components/AccountForm/AccountFields'
+import { shallow } from 'enzyme'
+import React from 'react'
 
 const fixtures = {
   fields: {

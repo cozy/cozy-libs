@@ -1,26 +1,26 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
-import get from 'lodash/get'
 import flow from 'lodash/flow'
-import { withClient } from 'cozy-client'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Infos from 'cozy-ui/transpiled/react/Infos'
-import Button from 'cozy-ui/transpiled/react/Button'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
-import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
-import { fetchAccount } from '../connections/accounts'
-import * as triggersModel from '../helpers/triggers'
-import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
+import { withClient } from 'cozy-client'
+import Button from 'cozy-ui/transpiled/react/Button'
+import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import Infos from 'cozy-ui/transpiled/react/Infos'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+
 import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
+import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
 import KonnectorModalHeader from './KonnectorModalHeader'
 import { withMountPointProps } from './MountPointContext'
 import withLocales from './hoc/withLocales'
+import { fetchAccount } from '../connections/accounts'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../helpers/proptypes'
+import * as triggersModel from '../helpers/triggers'
 
 /**
  * Takes an accountId and a list of accounts containing their respecting triggers

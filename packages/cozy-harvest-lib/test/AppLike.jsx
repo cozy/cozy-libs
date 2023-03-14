@@ -1,8 +1,9 @@
 import React from 'react'
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import I18n from 'cozy-ui/transpiled/react/I18n'
-import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
 import { Provider as ReduxProvider } from 'react-redux'
+
+import CozyClient, { CozyProvider as CozyClientProvider } from 'cozy-client'
+import I18n from 'cozy-ui/transpiled/react/I18n'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import enLocale from '../src/locales/en.json'
 

@@ -1,4 +1,5 @@
 import CozyClient from 'cozy-client'
+
 import KonnectorJobWatcher, { watchKonnectorJob } from './KonnectorJobWatcher'
 
 describe('watchKonnectorJob', () => {

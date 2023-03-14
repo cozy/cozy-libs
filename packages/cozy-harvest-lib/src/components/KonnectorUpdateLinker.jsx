@@ -1,12 +1,12 @@
-import React, { memo } from 'react'
 import PropTypes from 'prop-types'
+import React, { memo } from 'react'
 
 import { useQuery } from 'cozy-client'
+import { Application } from 'cozy-doctypes'
 import AppLinker from 'cozy-ui/transpiled/react/AppLinker'
 import { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import EyeIcon from 'cozy-ui/transpiled/react/Icons/Eye'
 
-import { Application } from 'cozy-doctypes'
 import { appsConn } from '../connections/apps'
 
 const KonnectorUpdateButton = ({

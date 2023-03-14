@@ -1,14 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import Card from 'cozy-ui/transpiled/react/Card'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
 import { Media, Img, Bd } from 'cozy-ui/transpiled/react/Media'
 
 import KonnectorIcon from '../KonnectorIcon'
-
-import BottomSelectIcon from 'cozy-ui/transpiled/react/Icons/BottomSelect'
 
 const ReadOnlyIdentifier = props => {
   const { className, onClick, konnector, identifier, ...rest } = props

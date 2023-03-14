@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+
 import { Q, models } from 'cozy-client'
 
 const { applications } = models

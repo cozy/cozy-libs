@@ -1,10 +1,10 @@
-import React from 'react'
-import { shallow } from 'enzyme'
 import { DataTab } from 'components/KonnectorConfiguration/DataTab'
-import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
-import AppLinkCard from 'components/cards/AppLinkCard'
 import KonnectorMaintenance from 'components/Maintenance'
+import AppLinkCard from 'components/cards/AppLinkCard'
+import LaunchTriggerCard from 'components/cards/LaunchTriggerCard'
 import useMaintenanceStatus from 'components/hooks/useMaintenanceStatus'
+import { shallow } from 'enzyme'
+import React from 'react'
 
 jest.mock('components/hooks/useMaintenanceStatus')
 jest.mock('cozy-ui/transpiled/react/hooks/useBreakpoints', () => () => ({

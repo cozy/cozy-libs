@@ -1,13 +1,13 @@
-import React from 'react'
-import { shallow } from 'enzyme'
 import { FlowProvider } from 'components/FlowProvider'
+import TwoFAModal from 'components/TwoFAModal'
+import { shallow } from 'enzyme'
 import {
   ERROR_EVENT,
   SUCCESS_EVENT,
   LOGIN_SUCCESS_EVENT,
   TWO_FA_REQUEST_EVENT
 } from 'models/flowEvents'
-import TwoFAModal from 'components/TwoFAModal'
+import React from 'react'
 
 const client = {
   on: jest.fn(),

@@ -1,12 +1,11 @@
 import { CozyFolder as CozyFolderClass } from 'cozy-doctypes'
 
-import * as triggers from '../helpers/triggers'
-import * as accounts from '../helpers/accounts'
-import * as konnectors from '../helpers/konnectors'
-import cron from '../helpers/cron'
-
 import { fetchAccount, updateAccount } from './accounts'
 import { statDirectoryByPath, createDirectoryByPath } from './files'
+import * as accounts from '../helpers/accounts'
+import cron from '../helpers/cron'
+import * as konnectors from '../helpers/konnectors'
+import * as triggers from '../helpers/triggers'
 
 const FILES_DOCTYPE = 'io.cozy.files'
 const PERMISSIONS_DOCTYPE = 'io.cozy.permissions'

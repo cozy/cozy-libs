@@ -1,8 +1,8 @@
 import get from 'lodash/get'
 import MockDate from 'mockdate'
 
-import enLocales from '../../locales/en.json'
 import { makeLabel } from './helpers'
+import enLocales from '../../locales/en.json'
 
 const t = x => get(enLocales, x)
 

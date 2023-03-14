@@ -1,8 +1,10 @@
 import React, { useContext, useCallback } from 'react'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
 import Button from 'cozy-ui/transpiled/react/Button'
-import { getAccountId } from '../helpers/triggers'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
 import { MountPointContext } from './MountPointContext'
+import { getAccountId } from '../helpers/triggers'
 
 const RedirectToAccountFormButton = ({ trigger }) => {
   const { t } = useI18n()

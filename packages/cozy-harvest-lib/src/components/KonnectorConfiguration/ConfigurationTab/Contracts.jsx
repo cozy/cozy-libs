@@ -1,24 +1,24 @@
 // @ts-check
-import React from 'react'
-import PropTypes from 'prop-types'
 import compose from 'lodash/flowRight'
+import PropTypes from 'prop-types'
+import React from 'react'
 
 import CozyClient, { Q, queryConnect, RealTimeQueries } from 'cozy-client'
-import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
+import flag from 'cozy-flags'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import MuiCozyTheme from 'cozy-ui/transpiled/react/MuiCozyTheme'
 import NavigationList, {
   NavigationListSection,
   NavigationListHeader
 } from 'cozy-ui/transpiled/react/NavigationList'
-import flag from 'cozy-flags'
 
-import withLocales from '../../hoc/withLocales'
 import BIContractActivationWindow from './BiContractActivationWindow'
+import ContractItem from './ContractItem'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../../helpers/proptypes'
-import ContractItem from './ContractItem'
+import withLocales from '../../hoc/withLocales'
 
 const makeContractsConn = ({ account }) => {
   const doctype = 'io.cozy.bank.accounts'

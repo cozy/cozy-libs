@@ -2,27 +2,27 @@ import React, { useEffect } from 'react'
 
 import flag from 'cozy-flags'
 import { useVaultUnlockContext, VaultUnlockPlaceholder } from 'cozy-keys-lib'
-import { withStyles } from 'cozy-ui/transpiled/react/styles'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
-import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import {
   DialogCloseButton,
   useCozyDialog
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog from 'cozy-ui/transpiled/react/Dialog'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
-import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import { DatacardOptions } from './Datacards/DatacardOptionsContext'
+import DialogContext from './DialogContext'
+import HarvestVaultProvider from './HarvestVaultProvider'
+import KonnectorAccounts from './KonnectorAccounts'
+import { MountPointProvider } from './MountPointContext'
+import ComponentsPropsProvider from './Providers/ComponentsPropsProvider'
 import RoutesV4 from './Routes/RoutesV4'
 import RoutesV6 from './Routes/RoutesV6'
-import KonnectorAccounts from './KonnectorAccounts'
-import HarvestVaultProvider from './HarvestVaultProvider'
 import VaultUnlockProvider from './VaultUnlockProvider'
-import { MountPointProvider } from './MountPointContext'
-import DialogContext from './DialogContext'
 import { isRouterV6 } from './hoc/withRouter'
+import { useKonnectorWithTriggers } from '../helpers/useKonnectorWithTriggers'
 
 const withHarvestDialogStyles = () => {
   /**

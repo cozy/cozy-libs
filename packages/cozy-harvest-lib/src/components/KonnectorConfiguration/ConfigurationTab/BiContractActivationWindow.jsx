@@ -1,20 +1,22 @@
 // @ts-check
-import React, { useState, useEffect } from 'react'
+import isEqual from 'lodash/isEqual'
 import PropTypes from 'prop-types'
+import React, { useState, useEffect } from 'react'
+
 import { useClient } from 'cozy-client'
+import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/MuiCozyTheme/Buttons'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
-import { findKonnectorPolicy } from '../../../konnector-policies'
-import withLocales from '../../hoc/withLocales'
+
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../../helpers/proptypes'
-import isEqual from 'lodash/isEqual'
-import { openOAuthWindow } from '../../OAuthService'
-import { useWebviewIntent } from 'cozy-intent'
-import { useCozyConfirmDialog } from '../../CozyConfirmDialogProvider'
+import { findKonnectorPolicy } from '../../../konnector-policies'
 import logger from '../../../logger'
+import { useCozyConfirmDialog } from '../../CozyConfirmDialogProvider'
+import { openOAuthWindow } from '../../OAuthService'
+import withLocales from '../../hoc/withLocales'
 
 const BIContractActivationWindow = ({
   konnector,

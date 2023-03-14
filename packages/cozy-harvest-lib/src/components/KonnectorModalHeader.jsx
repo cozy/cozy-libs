@@ -1,13 +1,13 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
+import PropTypes from 'prop-types'
+import React from 'react'
 
-import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 import { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
+import { Media, Img } from 'cozy-ui/transpiled/react/Media'
 import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import KonnectorIcon from './KonnectorIcon'
 import { useDialogContext } from './DialogContext'
+import KonnectorIcon from './KonnectorIcon'
 
 const resetFontStyles = { fontSize: '1rem', fontWeight: 'normal' }
 const KonnectorModalHeader = ({ konnector, children, className }) => {

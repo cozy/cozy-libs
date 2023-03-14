@@ -1,34 +1,32 @@
-import React, { PureComponent } from 'react'
+import get from 'lodash/get'
 import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react'
 
 import { withClient } from 'cozy-client'
 import AppIcon from 'cozy-ui/transpiled/react/AppIcon'
 import Button from 'cozy-ui/transpiled/react/Button'
-import Infos from 'cozy-ui/transpiled/react/Infos'
-import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Icon from 'cozy-ui/transpiled/react/Icon'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import get from 'lodash/get'
-
-import { fetchTrigger } from '../connections/triggers'
-import { fetchAccount } from '../connections/accounts'
-import * as konnectorsModel from '../helpers/konnectors'
-import * as triggersModel from '../helpers/triggers'
-
-import TriggerManager from './TriggerManager'
-import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
-import AccountsList from './AccountsList/AccountsList'
-import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
-import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
-
-import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import {
   useCozyDialog,
   DialogCloseButton
 } from 'cozy-ui/transpiled/react/CozyDialogs'
+import Dialog, { DialogTitle } from 'cozy-ui/transpiled/react/Dialog'
 import DialogContent from 'cozy-ui/transpiled/react/DialogContent'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import CrossIcon from 'cozy-ui/transpiled/react/Icons/Cross'
+import Infos from 'cozy-ui/transpiled/react/Infos'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
+
+import AccountSelectBox from './AccountSelectBox/AccountSelectBox'
+import AccountsList from './AccountsList/AccountsList'
+import KonnectorAccountTabs from './KonnectorConfiguration/KonnectorAccountTabs'
+import TriggerManager from './TriggerManager'
+import KonnectorUpdateInfos from './infos/KonnectorUpdateInfos'
+import { fetchAccount } from '../connections/accounts'
+import { fetchTrigger } from '../connections/triggers'
+import * as konnectorsModel from '../helpers/konnectors'
+import * as triggersModel from '../helpers/triggers'
 
 const DumbKonnectorDialog = ({
   onClose,

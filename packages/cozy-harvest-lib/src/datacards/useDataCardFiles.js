@@ -1,7 +1,7 @@
-import { useMemo } from 'react'
 import get from 'lodash/get'
 import sortBy from 'lodash/sortBy'
 import uniq from 'lodash/uniq'
+import { useMemo } from 'react'
 
 import CozyClient, { Q, useQuery, hasQueryBeenLoaded } from 'cozy-client'
 

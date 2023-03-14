@@ -1,5 +1,5 @@
-import React, { useState, forwardRef } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState, forwardRef } from 'react'
 
 import {
   useClient,
@@ -9,14 +9,7 @@ import {
 } from 'cozy-client'
 import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Button from 'cozy-ui/transpiled/react/Button'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
-import Field from 'cozy-ui/transpiled/react/Field'
-import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
-import Stack from 'cozy-ui/transpiled/react/Stack'
 import BaseContactPicker from 'cozy-ui/transpiled/react/ContactPicker'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { withStyles } from 'cozy-ui/transpiled/react/styles'
 import {
   DialogCloseButton,
   DialogBackButton,
@@ -27,21 +20,28 @@ import Dialog, {
   DialogContent,
   DialogTitle
 } from 'cozy-ui/transpiled/react/Dialog'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import Field from 'cozy-ui/transpiled/react/Field'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
+import CollectionField from 'cozy-ui/transpiled/react/Labs/CollectionField'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Stack from 'cozy-ui/transpiled/react/Stack'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { withStyles } from 'cozy-ui/transpiled/react/styles'
 
-import { findKonnectorPolicy } from '../../../konnector-policies'
-import { buildAppsByIdQuery } from '../../../helpers/queries'
-import withLocales from '../../hoc/withLocales'
-import { useTracker, useTrackPage } from '../../hoc/tracking'
 import SyncContractSwitch from './SyncContractSwitch'
-import { updateContract } from './helpers'
 import {
   getAccountLabel,
   getAccountInstitutionLabel,
   getAccountOwners
 } from './bankAccountHelpers'
+import { updateContract } from './helpers'
+import { buildAppsByIdQuery } from '../../../helpers/queries'
+import { findKonnectorPolicy } from '../../../konnector-policies'
+import { useTracker, useTrackPage } from '../../hoc/tracking'
+import withLocales from '../../hoc/withLocales'
 
 const EditContractContactPicker = function (props, ref) {
   const { t } = useI18n()

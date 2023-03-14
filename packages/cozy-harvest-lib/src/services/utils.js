@@ -3,8 +3,9 @@ import unset from 'lodash/unset'
 import Polyglot from 'node-polyglot'
 
 import { Q } from 'cozy-client'
-import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
 import EncryptionType from 'cozy-keys-lib/transpiled/EncryptionType'
+import SymmetricCryptoKey from 'cozy-keys-lib/transpiled/SymmetricCryptoKey'
+
 import logger from './logger'
 
 /**

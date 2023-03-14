@@ -1,11 +1,11 @@
 /* eslint-env jest */
 
+import { KonnectorJobError } from 'helpers/konnectors'
 import {
   buildAttributes,
   getKonnectorJobError,
   isKonnectorRunning
 } from 'helpers/triggers'
-import { KonnectorJobError } from 'helpers/konnectors'
 
 describe('Triggers Helper', () => {
   describe('buildAttributes', () => {

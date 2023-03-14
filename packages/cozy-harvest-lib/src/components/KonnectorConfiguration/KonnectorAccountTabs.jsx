@@ -1,31 +1,31 @@
-import React, { useState, useRef, useCallback } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState, useRef, useCallback } from 'react'
+import SwipeableViews from 'react-swipeable-views'
+
 import { useClient } from 'cozy-client'
 import flag from 'cozy-flags'
-
-import { makeStyles } from 'cozy-ui/transpiled/react/styles'
-import { Tab as UITab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
-import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import SwipeableViews from 'react-swipeable-views'
+import { useWebviewIntent } from 'cozy-intent'
 import Button from 'cozy-ui/transpiled/react/Buttons'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import Divider from 'cozy-ui/transpiled/react/MuiCozyTheme/Divider'
+import { Tab as UITab, Tabs } from 'cozy-ui/transpiled/react/MuiTabs'
+import useBreakpoints from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
+import { makeStyles } from 'cozy-ui/transpiled/react/styles'
 
-import useDOMMutations from '../hooks/useDOMMutations'
-import FlowProvider from '../FlowProvider'
-import DataTab from './DataTab'
 import ConfigurationTab from './ConfigurationTab'
-import TriggerErrorInfo from '../infos/TriggerErrorInfo'
-import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
-import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
-import { findKonnectorPolicy } from '../../konnector-policies'
-import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+import DataTab from './DataTab'
 import {
   intentsApiProptype,
   innerAccountModalOverridesProptype
 } from '../../helpers/proptypes'
+import { findKonnectorPolicy } from '../../konnector-policies'
+import FlowProvider from '../FlowProvider'
 import { OAUTH_SERVICE_OK, openOAuthWindow } from '../OAuthService'
-import { useWebviewIntent } from 'cozy-intent'
+import RedirectToAccountFormButton from '../RedirectToAccountFormButton'
+import useDOMMutations from '../hooks/useDOMMutations'
+import useMaintenanceStatus from '../hooks/useMaintenanceStatus'
+import useOAuthExtraParams from '../hooks/useOAuthExtraParams'
+import TriggerErrorInfo from '../infos/TriggerErrorInfo'
 
 const tabIndexes = {
   data: 0,

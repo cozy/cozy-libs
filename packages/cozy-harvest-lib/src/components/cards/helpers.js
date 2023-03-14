@@ -1,7 +1,7 @@
 import { formatLocallyDistanceToNow } from 'cozy-ui/transpiled/react/I18n/format'
 
-import { getLastSuccessDate } from '../../helpers/triggers'
 import { isDisconnected } from '../../helpers/konnectors'
+import { getLastSuccessDate } from '../../helpers/triggers'
 
 const DEFAULT_TIME = 300_000 // To milliseconds (5 minutes)
 

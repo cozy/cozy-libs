@@ -1,17 +1,17 @@
-import { triggers } from 'cozy-client/dist/models/trigger'
-import { generateUniversalLink } from 'cozy-ui/transpiled/react/AppLinker'
 import get from 'lodash/get'
 
-import logger from '../logger'
-import sentryHub from '../sentry'
+import { triggers } from 'cozy-client/dist/models/trigger'
+import { generateUniversalLink } from 'cozy-ui/transpiled/react/AppLinker'
 
+import { hasNewVersionAvailable } from './konnectors'
 import {
   buildKonnectorQuery,
   buildAccountQuery,
   buildTriggersQuery,
   buildTriggersByIdQuery
 } from './queries'
-import { hasNewVersionAvailable } from './konnectors'
+import logger from '../logger'
+import sentryHub from '../sentry'
 
 const formatKonnector = ({
   client,

@@ -1,11 +1,8 @@
-import React, { useEffect, useRef, useMemo, memo } from 'react'
-import PropTypes from 'prop-types'
-
 import L from 'leaflet'
+import PropTypes from 'prop-types'
+import React, { useEffect, useRef, useMemo, memo } from 'react'
 import 'leaflet/dist/leaflet.css'
-
 import SwipeableViews from 'react-swipeable-views'
-
 import sortBy from 'lodash/sortBy'
 import isSameDay from 'date-fns/is_same_day'
 import isSameYear from 'date-fns/is_same_year'
@@ -17,26 +14,21 @@ import CozyClient, {
   hasQueryBeenLoaded
 } from 'cozy-client'
 import flag from 'cozy-flags'
-
 import Box from 'cozy-ui/transpiled/react/Box'
-import IconButton from 'cozy-ui/transpiled/react/IconButton'
-import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Card from 'cozy-ui/transpiled/react/Card'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
+import IconButton from 'cozy-ui/transpiled/react/IconButton'
 import ClockIcon from 'cozy-ui/transpiled/react/Icons/Clock'
 import CompassIcon from 'cozy-ui/transpiled/react/Icons/Compass'
-import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
-import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
-import Typography from 'cozy-ui/transpiled/react/Typography'
-import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
 import FlagIcon from 'cozy-ui/transpiled/react/Icons/Flag'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import LeftIcon from 'cozy-ui/transpiled/react/Icons/Left'
+import RightIcon from 'cozy-ui/transpiled/react/Icons/Right'
+import { Media, Bd, Img } from 'cozy-ui/transpiled/react/Media'
+import Skeleton from 'cozy-ui/transpiled/react/Skeleton'
 import Stack from 'cozy-ui/transpiled/react/Stack'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import AppLinkCard from '../components/cards/AppLinkCard'
-import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
-
-import useCycle from './useCycle'
 import {
   transformTimeSeriesToTrips,
   getStartPlaceDisplayName,
@@ -44,6 +36,9 @@ import {
   getFormattedDuration,
   getModes
 } from './trips'
+import useCycle from './useCycle'
+import appLinksProps from '../components/KonnectorConfiguration/DataTab/appLinksProps'
+import AppLinkCard from '../components/cards/AppLinkCard'
 
 const setupMap = node => {
   var map = L.map(node).setView([51.505, -0.09], 13)

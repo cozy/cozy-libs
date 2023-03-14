@@ -1,9 +1,9 @@
-import get from 'lodash/get'
-import merge from 'lodash/merge'
-import keyBy from 'lodash/keyBy'
-import flatten from 'lodash/flatten'
-import uniq from 'lodash/uniq'
 import distanceInWords from 'date-fns/distance_in_words'
+import flatten from 'lodash/flatten'
+import get from 'lodash/get'
+import keyBy from 'lodash/keyBy'
+import merge from 'lodash/merge'
+import uniq from 'lodash/uniq'
 
 export const collectFeaturesByOid = geojson => {
   const res = {}

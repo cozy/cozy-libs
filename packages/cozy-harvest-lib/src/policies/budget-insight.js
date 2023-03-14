@@ -5,15 +5,20 @@
  * - Converts low-level BI errors to KonnectorJobErrors
  */
 
-import get from 'lodash/get'
-import omit from 'lodash/omit'
 import clone from 'lodash/clone'
-import set from 'lodash/set'
-import keyBy from 'lodash/keyBy'
 import defaults from 'lodash/defaults'
+import get from 'lodash/get'
+import keyBy from 'lodash/keyBy'
+import omit from 'lodash/omit'
+import set from 'lodash/set'
+
+import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
 import { Q } from 'cozy-client'
 
-import { waitForRealtimeEvent } from '../services/jobUtils'
+import assert from '../assert'
+import { KonnectorJobError } from '../helpers/konnectors'
+import logger from '../logger'
+import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
 import {
   getBIConnection,
   createBIConnection,
@@ -22,11 +27,7 @@ import {
   updateBIUserConfig,
   setBIConnectionSyncStatus
 } from '../services/bi-http'
-import assert from '../assert'
-import { mkConnAuth, biErrorMap } from 'cozy-bi-auth'
-import { KonnectorJobError } from '../helpers/konnectors'
-import { LOGIN_SUCCESS_EVENT } from '../models/flowEvents'
-import logger from '../logger'
+import { waitForRealtimeEvent } from '../services/jobUtils'
 import '../types'
 
 const DECOUPLED_ERROR = 'decoupled'

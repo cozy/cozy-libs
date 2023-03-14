@@ -1,6 +1,8 @@
-import React from 'react'
-import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
 import cx from 'classnames'
+import React from 'react'
+
+import withBreakpoints from 'cozy-ui/transpiled/react/helpers/withBreakpoints'
+
 import IconMaintenance from '../../assets/maintenance.svg'
 
 const MaintenanceIcon = ({ breakpoints: { isMobile } }) => (

@@ -1,14 +1,14 @@
 /* eslint-env jest */
-import React from 'react'
-import omit from 'lodash/omit'
-
 import { render, fireEvent, cleanup } from '@testing-library/react'
+import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
+import omit from 'lodash/omit'
+import React from 'react'
+
 import CozyClient from 'cozy-client'
 
-import { DumbTriggerManager as TriggerManager } from 'components/TriggerManager'
-import fixtures from '../../test/fixtures'
-import AppLike from '../../test/AppLike'
 import ConnectionFlow from '../../src/models/ConnectionFlow'
+import AppLike from '../../test/AppLike'
+import fixtures from '../../test/fixtures'
 import { findKonnectorPolicy } from '../konnector-policies'
 
 const { findKonnectorPolicy: originalFindKonnectorPolicy } = jest.requireActual(

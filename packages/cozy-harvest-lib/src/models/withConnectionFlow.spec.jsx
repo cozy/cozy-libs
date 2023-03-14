@@ -1,8 +1,10 @@
 import { mount } from 'enzyme'
 import React from 'react'
 import { act } from 'react-dom/test-utils'
-import ConnectionFlow from './ConnectionFlow'
+
 import CozyClient from 'cozy-client'
+
+import ConnectionFlow from './ConnectionFlow'
 import withConnectionFlow from './withConnectionFlow'
 
 const konnectorFixture = {

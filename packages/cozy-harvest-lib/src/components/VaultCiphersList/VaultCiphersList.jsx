@@ -1,13 +1,13 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import Paper from 'cozy-ui/transpiled/react/Paper'
-import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
-import Typography from 'cozy-ui/transpiled/react/Typography'
+import React from 'react'
 
-import withLocales from '../hoc/withLocales'
+import List from 'cozy-ui/transpiled/react/MuiCozyTheme/List'
+import Paper from 'cozy-ui/transpiled/react/Paper'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
 import CiphersListItem from './CiphersListItem'
 import OtherAccountListItem from './OtherAccountListItem'
+import withLocales from '../hoc/withLocales'
 
 export const DumbVaultCiphersList = ({ konnector, onSelect, ciphers, t }) => {
   const activeCiphers = ciphers.filter(cipherView => !cipherView.deletedDate)

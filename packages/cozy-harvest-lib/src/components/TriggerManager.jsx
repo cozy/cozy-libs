@@ -1,7 +1,7 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import get from 'lodash/get'
 import compose from 'lodash/flowRight'
+import get from 'lodash/get'
+import PropTypes from 'prop-types'
+import React, { Component } from 'react'
 
 import { withClient } from 'cozy-client'
 import { Account } from 'cozy-doctypes'
@@ -11,23 +11,22 @@ import {
   withVaultUnlockContext,
   VaultUnlockPlaceholder
 } from 'cozy-keys-lib'
-
 import { translate } from 'cozy-ui/transpiled/react/I18n'
-import Spinner from 'cozy-ui/transpiled/react/Spinner'
 import { ModalBackButton } from 'cozy-ui/transpiled/react/Modal'
+import Spinner from 'cozy-ui/transpiled/react/Spinner'
 
 import AccountForm from './AccountForm'
-import OAuthForm from './OAuthForm'
-import { fetchAccount } from '../connections/accounts'
 import FlowProvider from './FlowProvider'
-import VaultCiphersList from './VaultCiphersList'
-import manifest from '../helpers/manifest'
-import logger from '../logger'
-import { findKonnectorPolicy } from '../konnector-policies'
-import withConnectionFlow from '../models/withConnectionFlow'
 import HarvestVaultProvider from './HarvestVaultProvider'
+import OAuthForm from './OAuthForm'
+import VaultCiphersList from './VaultCiphersList'
 import VaultUnlockProvider from './VaultUnlockProvider'
+import { fetchAccount } from '../connections/accounts'
+import manifest from '../helpers/manifest'
 import { intentsApiProptype } from '../helpers/proptypes'
+import { findKonnectorPolicy } from '../konnector-policies'
+import logger from '../logger'
+import withConnectionFlow from '../models/withConnectionFlow'
 
 const IDLE = 'IDLE'
 const RUNNING = 'RUNNING'
