@@ -1,6 +1,6 @@
 // @ts-check
 /**
- * CCC specific policy
+ * Clisk specific policy
  */
 
 import logger from '../logger'
@@ -10,7 +10,7 @@ import logger from '../logger'
  * @param {import('cozy-client/types/types').KonnectorsDoctype} konnector - konnector object
  * @returns {Boolean}
  */
-const isCCC = konnector => Boolean(konnector.clientSide)
+const isClisk = konnector => Boolean(konnector.clientSide)
 
 /**
  * Get's the launcher in the current environment if any
@@ -114,8 +114,8 @@ function addMessageListener(callback) {
 }
 
 export const konnectorPolicy = {
-  match: isCCC,
-  name: 'ccc',
+  match: isClisk,
+  name: 'clisk',
   needsAccountAndTriggerCreation: false,
   needsTriggerLaunch: false,
   onLaunch,
