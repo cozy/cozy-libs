@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [24.2.0](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.1.3...cozy-mespapiers-lib@24.2.0) (2023-03-15)
+
+
+### Bug Fixes
+
+* Change date type from expirationDate to referencedDate ([42cbf4e](https://github.com/cozy/cozy-libs/commit/42cbf4ec8b381232867143d3ae884368f41dbd99))
+* Illustration on scan step for the transport invoice paper ([60534cd](https://github.com/cozy/cozy-libs/commit/60534cd8774ea89340611f75916963a606421015))
+
+
+### Features
+
+* Add information step for the transport card paper ([44454f2](https://github.com/cozy/cozy-libs/commit/44454f2ba8f213e91867d411a8036b7791ab3059))
+* Add link to the impots konnector for real estate tax paper ([78c6e39](https://github.com/cozy/cozy-libs/commit/78c6e3981d567b8898ee3547bee18d0968db8a32))
+
+
+
+
+
 ## [24.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.1.2...cozy-mespapiers-lib@24.1.3) (2023-03-15)
 
 
