@@ -1989,7 +1989,7 @@
         {
           "stepIndex": 1,
           "model": "scan",
-          "illustration": "IlluGenericNewPage.svg",
+          "illustration": "IlluInvoice.png",
           "text": "PaperJSON.generic.singlePage.text"
         },
         {
