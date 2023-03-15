@@ -2269,12 +2269,12 @@
           "stepIndex": 3,
           "model": "information",
           "illustration": "IlluGenericInputDate.svg",
-          "text": "PaperJSON.card.expirationDate.text",
+          "text": "PaperJSON.generic.referencedDate.text",
           "attributes": [
             {
-              "name": "expirationDate",
+              "name": "referencedDate",
               "type": "date",
-              "inputLabel": "PaperJSON.card.expirationDate.inputLabel"
+              "inputLabel": "PaperJSON.generic.referencedDate.inputLabel"
             }
           ]
         },
