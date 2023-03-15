@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [24.1.3](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.1.2...cozy-mespapiers-lib@24.1.3) (2023-03-15)
+
+
+### Bug Fixes
+
+* Display harvest banner when have multiple konnectors ([6e7aaa6](https://github.com/cozy/cozy-libs/commit/6e7aaa6187e382a14e15f67cb4bc9efcdfe7ba05))
+
+
+
+
+
 ## [24.1.2](https://github.com/cozy/cozy-libs/compare/cozy-mespapiers-lib@24.1.1...cozy-mespapiers-lib@24.1.2) (2023-03-14)
 
 **Note:** Version bump only for package cozy-mespapiers-lib
