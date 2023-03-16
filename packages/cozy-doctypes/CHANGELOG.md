@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## 1.88.1 (2023-03-16)
+
+
+### Bug Fixes
+
+* Remove deprecated usage of CC ([88ae9f5](https://github.com/cozy/cozy-libs/commit/88ae9f50bf97ea9b74e243f59ed48e644ac9f366))
+
+
+
+
+
 # 1.88.0 (2023-02-08)
 
 
