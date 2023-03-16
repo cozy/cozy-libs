@@ -1,20 +1,19 @@
 import React, { useState, useRef } from 'react'
 
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
-import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
 import ActionMenu, {
   ActionMenuItem,
   ActionMenuRadio
 } from 'cozy-ui/transpiled/react/ActionMenu'
-import Typography from 'cozy-ui/transpiled/react/Typography'
+import Alerter from 'cozy-ui/transpiled/react/Alerter'
+import DropdownButton from 'cozy-ui/transpiled/react/DropdownButton'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 import Icon from 'cozy-ui/transpiled/react/Icon'
 import TrashIcon from 'cozy-ui/transpiled/react/Icons/Trash'
-import Alerter from 'cozy-ui/transpiled/react/Alerter'
 import Spinner from 'cozy-ui/transpiled/react/Spinner'
+import Typography from 'cozy-ui/transpiled/react/Typography'
 
-import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import { isOnlyReadOnlyLinkAllowed } from '../../helpers/link'
-
+import { checkIsReadOnlyPermissions } from '../../helpers/permissions'
 import logger from '../../logger'
 
 const LinkRecipientPermissions = ({

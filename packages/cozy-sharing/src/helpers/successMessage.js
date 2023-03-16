@@ -1,5 +1,6 @@
-import { Contact } from '../models'
 import { models } from 'cozy-client'
+
+import { Contact } from '../models'
 export const countNewRecipients = (currentRecipients, newRecipients) => {
   return newRecipients.filter(contact => {
     const email = models.contact.getPrimaryEmail(contact)

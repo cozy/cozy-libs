@@ -1,5 +1,5 @@
-import React from 'react'
 import { renderHook, act } from '@testing-library/react-hooks'
+import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 

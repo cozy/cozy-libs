@@ -1,11 +1,12 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
+
 import { useClient, useQueryAll } from 'cozy-client'
 
-import { Contact } from '../models'
-import SharingContext from '../context'
 import { default as DumbShareModal } from './ShareModal'
 import { useFetchDocumentPath } from './useFetchDocumentPath'
+import SharingContext from '../context'
+import { Contact } from '../models'
 import { buildContactsQuery, buildGroupsQuery } from '../queries/queries'
 
 export const EditableSharingModal = ({ document, ...rest }) => {

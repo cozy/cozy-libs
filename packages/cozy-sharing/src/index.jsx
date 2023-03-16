@@ -1,6 +1,6 @@
+import SharingProvider from './SharingProvider'
 import SharingContext from './context'
 import withLocales from './withLocales'
-import SharingProvider from './SharingProvider'
 
 export default SharingProvider
 

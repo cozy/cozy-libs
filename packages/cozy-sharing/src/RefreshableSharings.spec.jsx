@@ -1,11 +1,11 @@
-import React from 'react'
 import { mount } from 'enzyme'
+import React from 'react'
 
 import { createMockClient } from 'cozy-client'
 
-import AppLike from '../test/AppLike'
 import { RefreshableSharings } from './RefreshableSharings'
 import { SharingProvider } from './SharingProvider'
+import AppLike from '../test/AppLike'
 
 const DumbComponent = () => {
   return <div>test </div>

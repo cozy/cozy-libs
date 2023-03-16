@@ -1,14 +1,15 @@
-import React, { useState, useRef } from 'react'
 import PropTypes from 'prop-types'
+import React, { useState, useRef } from 'react'
 import Autosuggest from 'react-autosuggest'
 
+import Avatar from 'cozy-ui/transpiled/react/Avatar'
+import Chip from 'cozy-ui/transpiled/react/Chips'
 import { Spinner } from 'cozy-ui/transpiled/react/Spinner'
 import palette from 'cozy-ui/transpiled/react/palette'
-import Chip from 'cozy-ui/transpiled/react/Chips'
-import Avatar from 'cozy-ui/transpiled/react/Avatar'
 
+import ContactSuggestion from './ContactSuggestion'
 import styles from './autosuggest.styl'
-
+import { extractEmails, validateEmail } from '../helpers/email'
 import { getDisplayName, getInitials, Contact } from '../models'
 import {
   cozyUrlMatch,
@@ -16,8 +17,6 @@ import {
   groupNameMatch,
   fullnameMatch
 } from '../suggestionMatchers'
-import ContactSuggestion from './ContactSuggestion'
-import { extractEmails, validateEmail } from '../helpers/email'
 
 const ShareAutocomplete = ({
   loading,

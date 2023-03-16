@@ -1,8 +1,9 @@
-import React from 'react'
 import { render, fireEvent, waitFor } from '@testing-library/react'
+import React from 'react'
+import { act } from 'react-dom/test-utils'
+
 import { ShareByEmail } from './ShareByEmail'
 import AppLike from '../../test/AppLike'
-import { act } from 'react-dom/test-utils'
 
 jest.mock('../helpers/contacts', () => ({
   getOrCreateFromArray: (client, recipients) => recipients

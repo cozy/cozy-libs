@@ -1,6 +1,7 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import ReactTooltip from 'react-tooltip'
+
 import styles from './tooltip.styl'
 
 export const SharingTooltip = props => (

@@ -1,12 +1,11 @@
 import { Q } from 'cozy-client'
 
+import { fetchFilesPaths } from './files'
 import {
   updateInternalObjectFromRealtime,
   normalizeDocFromRealtime
 } from './realtime'
-
 import { addSharing, updateSharing } from '../state'
-import { fetchFilesPaths } from './files'
 
 export const getSharingObject = (internalSharing, sharing) => {
   if (internalSharing) {

@@ -1,8 +1,10 @@
-import React from 'react'
 import { render } from '@testing-library/react'
-import { SharingBannerCozyToCozy } from './PublicBanner'
-import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import React from 'react'
+
 import { useClient } from 'cozy-client'
+import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+
+import { SharingBannerCozyToCozy } from './PublicBanner'
 
 jest.mock('cozy-ui/transpiled/react/I18n')
 jest.mock('cozy-client')

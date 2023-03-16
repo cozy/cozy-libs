@@ -1,11 +1,11 @@
-import React from 'react'
 import PropTypes from 'prop-types'
-import flag from 'cozy-flags'
+import React from 'react'
 
-import { contactsResponseType, groupsResponseType } from '../propTypes'
+import flag from 'cozy-flags'
 
 import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
 import ShareDialogOnlyByLink from './ShareDialogOnlyByLink'
+import { contactsResponseType, groupsResponseType } from '../propTypes'
 export const ShareModal = ({
   contacts,
   createContact,

@@ -1,10 +1,10 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import AvatarPlusX from './AvatarPlusX'
+import Identity from './Identity'
 import styles from './recipient.styl'
 import { getDisplayName } from '../../models'
-import Identity from './Identity'
 
 const RecipientPlusX = ({ extraRecipients }, { t }) => (
   <div className={styles['recipient']}>

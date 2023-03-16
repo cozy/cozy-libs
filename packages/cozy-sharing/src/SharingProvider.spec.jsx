@@ -1,13 +1,13 @@
-import React from 'react'
-import { mount } from 'enzyme'
 import { act } from '@testing-library/react'
+import { mount } from 'enzyme'
+import React from 'react'
+
 import { createMockClient } from 'cozy-client'
 
-import SharingContext from './context'
 import { SharingProvider } from './SharingProvider'
-import AppLike from '../test/AppLike'
-
+import SharingContext from './context'
 import { receiveSharings } from './state'
+import AppLike from '../test/AppLike'
 
 const AppWrapper = ({ children, client }) => {
   return (

@@ -1,5 +1,5 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 import snarkdown from 'snarkdown'
 
 import { useClient } from 'cozy-client'
@@ -8,7 +8,6 @@ import Button, { ButtonLink } from 'cozy-ui/transpiled/react/Button'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
 
 import CozyHomeLinkIcon from './CozyHomeLinkIcon'
-
 import styles from './publicBanner.styl'
 
 const HOME_LINK_HREF = 'https://manager.cozycloud.cc/cozy/create'

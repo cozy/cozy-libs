@@ -1,8 +1,8 @@
 import React from 'react'
 
-import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
-import { I18n } from 'cozy-ui/transpiled/react/I18n'
 import { CozyProvider, createMockClient } from 'cozy-client'
+import { I18n } from 'cozy-ui/transpiled/react/I18n'
+import { BreakpointsProvider } from 'cozy-ui/transpiled/react/hooks/useBreakpoints'
 
 import langEn from '../locales/en.json'
 

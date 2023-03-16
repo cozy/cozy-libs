@@ -1,9 +1,10 @@
-import React from 'react'
 import { render, fireEvent } from '@testing-library/react'
+import React from 'react'
 
 import { createMockClient } from 'cozy-client'
-import AppLike from '../../test/AppLike'
+
 import EditLinkPermissionDialog from './EditLinkPermissionDialog'
+import AppLike from '../../test/AppLike'
 
 describe('EditLinkPermissionDialog', () => {
   const client = createMockClient({})

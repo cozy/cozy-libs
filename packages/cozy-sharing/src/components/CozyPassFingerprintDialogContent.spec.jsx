@@ -1,10 +1,10 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
 
 import { createMockClient } from 'cozy-client'
-import AppLike from '../../test/AppLike'
 
 import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
+import AppLike from '../../test/AppLike'
 
 describe('CozyPassFingerprintDialogContent', () => {
   const client = createMockClient({})

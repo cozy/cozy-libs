@@ -1,9 +1,11 @@
-import React from 'react'
-import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
-import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
-import AppLike from '../../test/AppLike'
-import { createMockClient } from 'cozy-client'
 import { act, render, fireEvent } from '@testing-library/react'
+import React from 'react'
+
+import { createMockClient } from 'cozy-client'
+
+import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
+import ShareDialogTwoStepsConfirmationContainer from './ShareDialogTwoStepsConfirmationContainer'
+import AppLike from '../../test/AppLike'
 
 const FakeSharingContent = ({ recipientsToBeConfirmed, verifyRecipient }) => {
   const verify = recipientConfirmationData => () => {

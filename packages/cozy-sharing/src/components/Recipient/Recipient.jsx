@@ -1,20 +1,20 @@
-import React from 'react'
 import PropTypes from 'prop-types'
+import React from 'react'
 
 import { useClient } from 'cozy-client'
+import Fade from 'cozy-ui/transpiled/react/Fade'
 import { useI18n } from 'cozy-ui/transpiled/react/I18n'
+import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import ListItem from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItem'
 import ListItemIcon from 'cozy-ui/transpiled/react/MuiCozyTheme/ListItemIcon'
-import ListItemText from 'cozy-ui/transpiled/react/ListItemText'
 import Typography from 'cozy-ui/transpiled/react/Typography'
-import Fade from 'cozy-ui/transpiled/react/Fade'
 
-import { FADE_IN_DURATION } from '../../helpers/recipients'
-import { getDisplayName } from '../../models'
+import RecipientAvatar from './RecipientAvatar'
 import RecipientConfirm from './RecipientConfirm'
 import RecipientPermissions from './RecipientPermissions'
-import RecipientAvatar from './RecipientAvatar'
 import RecipientStatus from './RecipientStatus'
+import { FADE_IN_DURATION } from '../../helpers/recipients'
+import { getDisplayName } from '../../models'
 
 const DEFAULT_DISPLAY_NAME = 'Share.contacts.defaultDisplayName'
 

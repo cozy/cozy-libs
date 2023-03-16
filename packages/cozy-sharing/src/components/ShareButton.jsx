@@ -1,11 +1,11 @@
-import React from 'react'
 import classNames from 'classnames'
+import React from 'react'
+
 import { Button } from 'cozy-ui/transpiled/react/Button'
+import Icon from 'cozy-ui/transpiled/react/Icon'
+import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
 
 import styles from './button.styl'
-
-import ShareIcon from 'cozy-ui/transpiled/react/Icons/Share'
-import Icon from 'cozy-ui/transpiled/react/Icon'
 
 export const ShareButton = ({ label, onClick, className, ...props }) => (
   <Button

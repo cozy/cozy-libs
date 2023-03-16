@@ -1,9 +1,11 @@
-import React from 'react'
-import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
-import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
-import AppLike from '../../test/AppLike'
-import { createMockClient } from 'cozy-client'
 import { act, render, fireEvent } from '@testing-library/react'
+import React from 'react'
+
+import { createMockClient } from 'cozy-client'
+
+import { CozyPassFingerprintDialogContent } from './CozyPassFingerprintDialogContent'
+import ShareDialogCozyToCozy from './ShareDialogCozyToCozy'
+import AppLike from '../../test/AppLike'
 
 jest.mock('cozy-client', () => ({
   ...jest.requireActual('cozy-client'),

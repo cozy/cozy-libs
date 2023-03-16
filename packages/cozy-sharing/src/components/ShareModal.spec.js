@@ -1,8 +1,10 @@
-import React from 'react'
 import { render } from '@testing-library/react'
+import React from 'react'
+
+import flag from 'cozy-flags'
+
 import { ShareModal } from './ShareModal'
 import AppLike from '../../test/AppLike'
-import flag from 'cozy-flags'
 
 jest.mock('./ShareDialogCozyToCozy', () => () => <>ShareDialogCozyToCozy</>)
 jest.mock('./ShareDialogOnlyByLink', () => () => <>ShareDialogOnlyByLink</>)

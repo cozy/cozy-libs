@@ -1,6 +1,7 @@
-import React from 'react'
-import PropTypes from 'prop-types'
 import uniq from 'lodash/uniq'
+import PropTypes from 'prop-types'
+import React from 'react'
+
 import SharingContext from '../context'
 
 export const SharedDocuments = ({ children }) => (

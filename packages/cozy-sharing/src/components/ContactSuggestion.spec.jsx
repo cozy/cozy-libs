@@ -1,9 +1,9 @@
-import React from 'react'
 import { mount } from 'enzyme'
-
-import AppLike from '../../test/AppLike'
+import React from 'react'
 
 import { ContactSuggestion } from './ContactSuggestion'
+import AppLike from '../../test/AppLike'
+
 const WrappingComponent = ({ children }) => <AppLike>{children}</AppLike>
 
 describe('ContactSuggestion component', () => {

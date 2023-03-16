@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+
 import { fetchFilesPaths } from '../helpers/files'
 
 export const useFetchDocumentPath = (client, document) => {
