@@ -349,18 +349,14 @@ const getApps = state => state.apps
 
 export const hasSharedParent = (state, documentPath) => {
   if (!state.sharedPaths) {
-    // eslint-disable-next-line
-    console.log('hasSharedParent should not occur', state, documentPath)
-    return false
+    return false // hasSharedParent should not occur
   }
   return state.sharedPaths.some(path => documentPath.indexOf(`${path}/`) === 0)
 }
 
 export const hasSharedChild = (state, documentPath) => {
   if (!state.sharedPaths) {
-    // eslint-disable-next-line
-    console.log('hasSharedChild should not occur', state, documentPath)
-    return false
+    return false // hasSharedChild should not occur
   }
   const ret = state.sharedPaths.some(
     path => path.indexOf(`${documentPath}/`) === 0
