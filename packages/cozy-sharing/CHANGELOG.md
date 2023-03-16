@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [7.0.0](https://github.com/cozy/cozy-libs/compare/cozy-sharing@6.0.6...cozy-sharing@7.0.0) (2023-03-16)
+
+
+### Features
+
+* Return also readOnly status from getSharedDocument ([c68ba61](https://github.com/cozy/cozy-libs/commit/c68ba61b69dfd2b152e47252005f294fee818110))
+
+
+### BREAKING CHANGES
+
+* The function now returns the id encapsulated in an object. You can extract the id like this `const { id } = getSharedDocument(client)`
+
+
+
+
+
 ## 6.0.6 (2023-03-16)
 
 **Note:** Version bump only for package cozy-sharing
