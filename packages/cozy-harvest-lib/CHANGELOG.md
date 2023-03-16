@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [13.7.0](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.6.1...cozy-harvest-lib@13.7.0) (2023-03-16)
+
+
+### Features
+
+* Remove flag condition to display datacard ([89bffc4](https://github.com/cozy/cozy-libs/commit/89bffc45d0e51a25fa61372ec4191c29f5fcec81))
+
+
+
+
+
 ## [13.6.1](https://github.com/cozy/cozy-libs/compare/cozy-harvest-lib@13.6.0...cozy-harvest-lib@13.6.1) (2023-03-14)
 
 
